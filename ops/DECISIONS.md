@@ -26,3 +26,4 @@ One line per decision: date · decision · who decided.
 - 2026-10-24 · D16: start with a free beta on Cloudflare Pages (pages.dev address, noindex, "Beta" mark); domains bought later · Daniel
 - 2026-10-24 · D17: partner agency is Habinedita Gondomar, AMI 13250, habineditagondomar.pt (only real-estate agency, shown as sponsored partner); agency name only, no personal names; profile claims confirmed by Daniel · Daniel
 - 2026-10-24 · Beta hosting on Cloudflare Workers (static assets) instead of Pages, because the dashboard now defaults to Workers; config in site/wrangler.jsonc; free plan, still noindex · CEO
+- 2026-10-24 · D18: the whole site is in three languages, Portuguese (Portugal), English and French, with a language switch on every page; replaces per-edition languages (PT-BR, CH bilingual) · Daniel
