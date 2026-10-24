@@ -119,9 +119,9 @@ export function cta(lang: Lang, ed: EdCode, key: CtaKey): { href: string; label:
 export const fmtDate = (lang: Lang, iso: string) =>
   new Intl.DateTimeFormat(HTML_LANG[lang], { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(`${iso}T00:00:00Z`));
 
-// ---------- free e-book (content/ebooks, built by `npm run ebooks`) ----------
+// ---------- free e-book, one per edition (site/ebooks, built by `npm run ebooks`) ----------
 export const EBOOK = {
-  file: (lang: Lang) => `/ebooks/imoveis-portugal-guia-custos-${lang}.pdf`,
+  file: (lang: Lang, ed: EdCode) => `/ebooks/imoveis-portugal-guia-custos-${ed}-${lang}.pdf`,
   title: { pt: "Quanto custa mesmo comprar casa em Portugal", en: "What it really costs to buy in Portugal", fr: "Ce que coûte vraiment un achat au Portugal" } as Record<Lang, string>,
 };
 export const ebookLive = config.ebooksLive;

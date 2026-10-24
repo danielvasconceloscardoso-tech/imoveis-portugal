@@ -1,11 +1,13 @@
-// Free e-book "What it really costs to buy in Portugal" in pt, en and fr (prompt 04, D18).
+// Free e-book "What it really costs to buy in Portugal", one per edition, each in pt, en and fr (prompt 04, D18).
+// The edition adds a country chapter (countries.ts) after the summary.
 // Every number is quoted from content/facts/facts.csv or computed from it (IMT brackets below).
-// Run from site/:  npm run ebooks   → public/ebooks/imoveis-portugal-guia-custos-{lang}.pdf
+// Run from site/:  npm run ebooks   → public/ebooks/imoveis-portugal-guia-custos-{ed}-{lang}.pdf
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
 import { createRequire } from "node:module";
 import { FACTS, DISCLAIMER } from "../src/lib/content";
 import type { Lang } from "../src/i18n";
+import { COUNTRIES, EDS, type Ed } from "./countries";
 
 const require = createRequire(import.meta.url);
 const { chromium } = require("playwright"); // pre-installed in the build environment
@@ -46,7 +48,7 @@ const examples = [250000, 400000].map((v) => ({ v, hpp: imt(v, HPP), sec: imt(v,
 // ---------- text ----------
 const T = {
   pt: {
-    title: "Quanto custa mesmo comprar casa em Portugal", sub: "Impostos, crédito e passos, com a fonte oficial de cada número", ed: "Edição 2026 · factos verificados a 24 de outubro de 2026",
+    title: "Quanto custa mesmo comprar casa em Portugal", sub: "Impostos, crédito e passos, com a fonte oficial de cada número", ed: "Edição {c} · 2026 · factos verificados a 24 de outubro de 2026", s1c: "o que muda para si.",
     s1h: "O que vai saber no fim", s1: ["Que impostos se pagam na compra em 2026 e como se calcula o IMT.", "Porque é que quem não é residente fiscal em Portugal paga agora 7,5% de IMT, e as exceções.", "Quanto custa, em impostos, uma casa de 250 000 € e uma de 400 000 €.", "O que o Banco de Portugal permite aos bancos emprestar.", "Os passos da compra à distância e os impostos de todos os anos."],
     s1note: "Este guia descreve as regras; não é aconselhamento. Para o seu caso, fale com um profissional.",
     imtH: "1. O IMT: o imposto da compra", imtP: "O Imposto Municipal sobre as Transmissões Onerosas de Imóveis (IMT) paga-se antes da escritura e deve ser pago no próprio dia da liquidação ou nos 30 dias seguintes. As taxas de 2026 dependem do uso da casa. O valor divide-se em duas partes: até ao limite do escalão anterior aplica-se a taxa média desse escalão; ao excedente, a taxa marginal.",
@@ -63,7 +65,7 @@ const T = {
     srcH: "Fontes", srcChecked: "verificado a",
   },
   en: {
-    title: "What it really costs to buy in Portugal", sub: "Taxes, mortgages and steps, with the official source for every number", ed: "2026 edition · facts checked on 24 October 2026",
+    title: "What it really costs to buy in Portugal", sub: "Taxes, mortgages and steps, with the official source for every number", ed: "{c} edition · 2026 · facts checked on 24 October 2026", s1c: "what changes for you.",
     s1h: "What you will know by the end", s1: ["Which taxes you pay on purchase in 2026 and how the transfer tax (IMT) is calculated.", "Why buyers who are not Portuguese tax residents now pay 7.5% IMT, and the exceptions.", "What a 250,000 € and a 400,000 € home cost in taxes.", "How much Banco de Portugal lets banks lend.", "The steps for buying from abroad and the yearly taxes."],
     s1note: "This guide describes the rules; it is not advice. For your own case, talk to a professional.",
     imtH: "1. IMT: the purchase tax", imtP: "The property transfer tax (IMT) is paid before the deed, on the day it is assessed or within the following 30 days. The 2026 rates depend on how the home is used. The value is split in two: up to the previous bracket limit at that bracket's average rate; the rest at the marginal rate.",
@@ -80,7 +82,7 @@ const T = {
     srcH: "Sources", srcChecked: "checked on",
   },
   fr: {
-    title: "Ce que coûte vraiment un achat au Portugal", sub: "Impôts, crédit et étapes, avec la source officielle de chaque chiffre", ed: "Édition 2026 · faits vérifiés le 24 octobre 2026",
+    title: "Ce que coûte vraiment un achat au Portugal", sub: "Impôts, crédit et étapes, avec la source officielle de chaque chiffre", ed: "Édition {c} · 2026 · faits vérifiés le 24 octobre 2026", s1c: "ce qui change pour vous.",
     s1h: "Ce que vous saurez à la fin", s1: ["Quels impôts se paient à l'achat en 2026 et comment se calcule l'IMT.", "Pourquoi un non-résident fiscal au Portugal paie désormais 7,5 % d'IMT, et les exceptions.", "Ce que coûtent, en impôts, un bien de 250 000 € et un bien de 400 000 €.", "Ce que la Banque du Portugal autorise les banques à prêter.", "Les étapes d'un achat à distance et les impôts de chaque année."],
     s1note: "Ce guide décrit les règles ; ce n'est pas un conseil. Pour votre cas, adressez-vous à un professionnel.",
     imtH: "1. L'IMT : l'impôt de l'achat", imtP: "L'impôt sur les transmissions onéreuses (IMT) se paie avant l'acte, le jour de sa liquidation ou dans les 30 jours. Les taux 2026 dépendent de l'usage du bien. La valeur se divise en deux : jusqu'à la limite de la tranche précédente, le taux moyen de cette tranche ; au-delà, le taux marginal.",
@@ -99,7 +101,7 @@ const T = {
 } as const;
 
 const USED = ["pt-imt-hpp-2026", "pt-imt-second-home-2026", "pt-imt-payment", "pt-imt-nonresident-flat", "pt-imt-nonresident-exceptions", "pt-is-purchase", "pt-is-loan-5y", "pt-is-interest", "pt-ltv-limits", "pt-dsti-45", "pt-maturity-limits", "pt-nif-nonresident", "pt-tax-rep", "pt-poa-apostille", "pt-sinal-442", "pt-aml-funds", "pt-imi-rates", "pt-aimi-deduction", "pt-rent-tax-nonresident", "pt-al-registration"];
-for (const id of USED) if (!FACTS[id]) throw new Error(`unknown fact ${id}`);
+for (const id of [...USED, ...EDS.flatMap((e) => COUNTRIES[e].items.flatMap((i) => i.facts))]) if (!FACTS[id]) throw new Error(`unknown fact ${id}`);
 
 const font = readFileSync(join(site, "node_modules/@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2")).toString("base64");
 const css = `
@@ -130,46 +132,48 @@ dl{display:grid;grid-template-columns:28mm 1fr;gap:2mm 4mm;margin:0}dt{font-weig
 .foot{position:absolute;left:20mm;right:20mm;bottom:8mm;font-size:8pt;color:#4b4b48;display:flex;justify-content:space-between}
 `;
 
-function html(l: Lang): string {
-  const t = T[l];
+function html(ed: Ed, l: Lang): string {
+  const t = T[l], c = COUNTRIES[ed];
   const rows = (tab: Bracket[]) => tab.slice(0, 4).map(([u, m, a]) => `<tr><td>${eur(u, l)}</td><td class="n">${pct(m, l, 0)}</td><td class="n">${pct4(a as number, l)}</td></tr>`).join("");
-  const foot = (n: number) => `<div class="foot"><span>Imóveis Portugal · ${esc(t.title)}</span><span>${n}</span></div>`;
+  // Page numbers are filled in once the pages are assembled.
+  const foot = () => `<div class="foot"><span>Imóveis Portugal · ${esc(t.title)}</span><span>{{n}}</span></div>`;
   const disc = `<div class="disc">${esc(DISCLAIMER[l])}</div>`;
   const ex = examples.map((e) => `<h3>${t.exHouse} ${eur(e.v, l)}</h3><table><tr>${t.exCols.map((c, i) => `<th class="${i ? "n" : ""}">${esc(c)}</th>`).join("")}</tr>
     <tr><td>${t.exRows[0]}</td><td class="n">${eur(e.hpp, l)}</td><td class="n">${eur(e.sec, l)}</td><td class="n">${eur(e.non, l)}</td></tr>
     <tr><td>${t.exRows[1]}</td><td class="n">${eur(e.is, l)}</td><td class="n">${eur(e.is, l)}</td><td class="n">${eur(e.is, l)}</td></tr>
     <tr class="tot"><td>${t.exRows[2]}</td><td class="n">${eur(e.hpp + e.is, l)}</td><td class="n">${eur(e.sec + e.is, l)}</td><td class="n">${eur(e.non + e.is, l)}</td></tr></table>`).join("");
-  const src = USED.map((id) => FACTS[id]).filter((f, i, a) => a.findIndex((x) => x.source_url === f.source_url) === i)
+  const src = [...new Set([...USED, ...c.items.flatMap((i) => i.facts)])].map((id) => FACTS[id]).filter((f, i, a) => a.findIndex((x) => x.source_url === f.source_url) === i)
     .map((f) => `<li>${esc(f.source_title)} (${t.srcChecked} ${f.checked_on}): ${esc(f.source_url)}</li>`).join("");
   const loanTax = 200000 * IS_LOAN;
   if (Math.round(loanTax) !== 1200) throw new Error("loan example");
   const pages = [
-    `<section class="pg cover"><div class="mark"><i></i><b>Imóveis<br>Portugal</b></div><div><h1>${esc(t.title)}</h1><p class="sub">${esc(t.sub)}</p></div><p class="ed">${esc(t.ed)}</p></section>`,
-    `<section class="pg"><h2>${esc(t.s1h)}</h2><ul>${t.s1.map((x) => `<li>${esc(x)}</li>`).join("")}</ul><p class="note">${esc(t.s1note)}</p><div class="box"><h3 style="margin-top:0">${esc(t.paH)}</h3><p class="note">${esc(t.paP)}</p></div>${disc}${foot(2)}</section>`,
-    `<section class="pg"><h2>${esc(t.imtH)}</h2><p>${esc(t.imtP)}</p><h3>${esc(t.tHpp)}</h3><table><tr>${t.cols.map((c, i) => `<th class="${i ? "n" : ""}">${esc(c)}</th>`).join("")}</tr>${rows(HPP)}<tr><td>${t.above[0]}</td><td class="n">${pct(0.08, l, 0)}</td><td class="n">–</td></tr></table><h3>${esc(t.tSec)}</h3><table><tr>${t.cols.map((c, i) => `<th class="${i ? "n" : ""}">${esc(c)}</th>`).join("")}</tr>${rows(SEC)}<tr><td>${t.above[1]}</td><td class="n">${pct(0.08, l, 0)}</td><td class="n">–</td></tr></table><p class="note">${esc(t.flat)}</p>${foot(3)}</section>`,
-    `<section class="pg"><h2>${esc(t.nrH)}</h2><p>${esc(t.nrP)}</p><ol type="a">${t.nrL.map((x) => `<li>${esc(x)}</li>`).join("")}</ol><p>${esc(t.nrNote)}</p><h2 style="margin-top:10mm">${esc(t.isH)}</h2><ul>${t.isL.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>${disc}${foot(4)}</section>`,
-    `<section class="pg"><h2>${esc(t.exH)}</h2><p class="note">${esc(t.exP)}</p>${ex}${foot(5)}</section>`,
-    `<section class="pg"><h2>${esc(t.crH)}</h2><ul>${t.crL.map((x) => `<li>${esc(x)}</li>`).join("")}</ul><p>${esc(t.crEx)}</p><p class="note">${esc(t.crNote)}</p><h2 style="margin-top:10mm">${esc(t.yrH)}</h2><ul>${t.yrL.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>${disc}${foot(6)}</section>`,
-    `<section class="pg"><h2>${esc(t.stH)}</h2><ol>${t.stL.map((x) => `<li>${esc(x)}</li>`).join("")}</ol>${foot(7)}</section>`,
-    `<section class="pg"><h2>${esc(t.ckH)}</h2><ul class="ck">${t.ckL.map((x) => `<li>${esc(x)}</li>`).join("")}</ul><h2 style="margin-top:10mm">${esc(t.glH)}</h2><dl>${t.gl.map(([a, b]) => `<dt>${a}</dt><dd>${esc(b)}</dd>`).join("")}</dl>${foot(8)}</section>`,
-    `<section class="pg"><h2>${esc(t.adH)}</h2><p>${esc(t.adP)}</p><h2 style="margin-top:10mm">${esc(t.srcH)}</h2><ul class="src">${src}</ul>${disc}${foot(9)}</section>`,
+    `<section class="pg cover"><div class="mark"><i></i><b>Imóveis<br>Portugal</b></div><div><h1>${esc(t.title)}</h1><p class="sub">${esc(t.sub)}</p></div><p class="ed">${esc(t.ed.replace("{c}", c.name[l]))}</p></section>`,
+    `<section class="pg"><h2>${esc(t.s1h)}</h2><ul>${[...t.s1, `${c.h[l]}: ${t.s1c}`].map((x) => `<li>${esc(x)}</li>`).join("")}</ul><p class="note">${esc(t.s1note)}</p><div class="box"><h3 style="margin-top:0">${esc(t.paH)}</h3><p class="note">${esc(t.paP)}</p></div>${disc}${foot()}</section>`,
+    `<section class="pg"><h2>${esc(c.h[l])}</h2><ul>${c.items.map((i) => `<li>${esc(i.text[l])}</li>`).join("")}</ul><p class="note">${esc(c.note[l])}</p>${disc}${foot()}</section>`,
+    `<section class="pg"><h2>${esc(t.imtH)}</h2><p>${esc(t.imtP)}</p><h3>${esc(t.tHpp)}</h3><table><tr>${t.cols.map((c, i) => `<th class="${i ? "n" : ""}">${esc(c)}</th>`).join("")}</tr>${rows(HPP)}<tr><td>${t.above[0]}</td><td class="n">${pct(0.08, l, 0)}</td><td class="n">–</td></tr></table><h3>${esc(t.tSec)}</h3><table><tr>${t.cols.map((c, i) => `<th class="${i ? "n" : ""}">${esc(c)}</th>`).join("")}</tr>${rows(SEC)}<tr><td>${t.above[1]}</td><td class="n">${pct(0.08, l, 0)}</td><td class="n">–</td></tr></table><p class="note">${esc(t.flat)}</p>${foot()}</section>`,
+    `<section class="pg"><h2>${esc(t.nrH)}</h2><p>${esc(t.nrP)}</p><ol type="a">${t.nrL.map((x) => `<li>${esc(x)}</li>`).join("")}</ol><p>${esc(t.nrNote)}</p><h2 style="margin-top:10mm">${esc(t.isH)}</h2><ul>${t.isL.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>${disc}${foot()}</section>`,
+    `<section class="pg"><h2>${esc(t.exH)}</h2><p class="note">${esc(t.exP)}</p>${ex}${foot()}</section>`,
+    `<section class="pg"><h2>${esc(t.crH)}</h2><ul>${t.crL.map((x) => `<li>${esc(x)}</li>`).join("")}</ul><p>${esc(t.crEx)}</p><p class="note">${esc(t.crNote)}</p><h2 style="margin-top:10mm">${esc(t.yrH)}</h2><ul>${t.yrL.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>${disc}${foot()}</section>`,
+    `<section class="pg"><h2>${esc(t.stH)}</h2><ol>${t.stL.map((x) => `<li>${esc(x)}</li>`).join("")}</ol>${foot()}</section>`,
+    `<section class="pg"><h2>${esc(t.ckH)}</h2><ul class="ck">${t.ckL.map((x) => `<li>${esc(x)}</li>`).join("")}</ul><h2 style="margin-top:10mm">${esc(t.glH)}</h2><dl>${t.gl.map(([a, b]) => `<dt>${a}</dt><dd>${esc(b)}</dd>`).join("")}</dl>${foot()}</section>`,
+    `<section class="pg"><h2>${esc(t.adH)}</h2><p>${esc(t.adP)}</p><h2 style="margin-top:10mm">${esc(t.srcH)}</h2><ul class="src">${src}</ul>${disc}${foot()}</section>`,
   ];
-  return `<!doctype html><html lang="${l === "pt" ? "pt-PT" : l}"><head><meta charset="utf-8"><title>${esc(t.title)}</title><style>${css}</style></head><body>${pages.join("")}</body></html>`;
+  return `<!doctype html><html lang="${l === "pt" ? "pt-PT" : l}"><head><meta charset="utf-8"><title>${esc(t.title)} · ${esc(c.name[l])}</title><style>${css}</style></head><body>${pages.map((p, i) => p.replace("{{n}}", String(i + 1))).join("")}</body></html>`;
 }
 
 const browser = await chromium.launch();
-for (const l of ["pt", "en", "fr"] as Lang[]) {
-  const file = join(outHtml, `${l}.html`);
-  writeFileSync(file, html(l));
+for (const ed of EDS) for (const l of ["pt", "en", "fr"] as Lang[]) {
+  const file = join(outHtml, `${ed}-${l}.html`);
+  writeFileSync(file, html(ed, l));
   const page = await browser.newPage();
   await page.goto(`file://${file}`);
   await page.evaluate(() => document.fonts.ready);
-  await page.pdf({ path: join(outPdf, `imoveis-portugal-guia-custos-${l}.pdf`), format: "A4", printBackground: true });
+  await page.pdf({ path: join(outPdf, `imoveis-portugal-guia-custos-${ed}-${l}.pdf`), format: "A4", printBackground: true });
   // Screens of every page for review: render each section as an image.
   await page.setViewportSize({ width: 794, height: 1123 });
   const n = await page.locator("section.pg").count();
-  for (let i = 0; i < n; i++) await page.locator("section.pg").nth(i).screenshot({ path: join(outHtml, `${l}-${i + 1}.png`) });
+  for (let i = 0; i < n; i++) await page.locator("section.pg").nth(i).screenshot({ path: join(outHtml, `${ed}-${l}-${i + 1}.png`) });
   await page.close();
-  console.log(`${l}: ${n} pages`);
+  console.log(`${ed}-${l}: ${n} pages`);
 }
 await browser.close();
