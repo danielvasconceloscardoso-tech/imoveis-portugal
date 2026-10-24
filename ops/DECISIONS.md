@@ -16,3 +16,4 @@ One line per decision: date · decision · who decided.
 - 2026-10-24 · D11: Russian-capital companies and Russian bodies are excluded from research, sponsorship and outreach (EU sanctions, Reg. 269/2014 and 833/2014) · Daniel
 - 2026-10-24 · D10: next country editions are USA and Israel (one edition per country, not a single international edition); added after the 1 Dec launch of the four editions; timing and green-light rule open · Daniel
 - 2026-10-24 · D12: editorial policy (content/EDITORIAL_POLICY.md): compile verifiable facts from primary sources, describe and never advise, disclaimer on every post and e-book, readers who need advice are connected with sponsors, sponsors may advise in labelled posts · Daniel
+- 2026-10-24 · D10 revised: USA and Israel editions launch on Tue 1 Dec 2026 with the other four (six editions), in English; Hebrew later when a sponsor pays for translation · Daniel

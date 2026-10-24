@@ -2,7 +2,7 @@
 
 Written 24 Oct 2026 by the CEO. Covers 26 Oct 2026 to 24 Jan 2027. Replaces the January-launch plan.
 
-**Goal:** first euro in by 8 Nov, 10 founding partners and about 20,000 € signed by Christmas, and 5,000 subscribers across the four editions by day 90. We sell before the site is finished, launch all four editions on the same day, and time the launch to the Christmas peak, when emigrants are home and visit properties.
+**Goal:** first euro in by 8 Nov, 10 founding partners and about 20,000 € signed by Christmas, and 5,000 subscribers across the editions by day 90. We sell before the site is finished, launch all six editions (LU, FR, CH, BR, USA, Israel) on the same day, and time the launch to the Christmas peak, when emigrants are home and visit properties.
 
 ## 1. Offer ladder (fastest money first)
 
@@ -25,7 +25,7 @@ Prices in row 4 are list prices minus the 40% founding discount (D3). Every paid
 | 3 | 9 – 15 Nov | Decisão / Paperjam event in Luxembourg (10 Nov); first founding partners | 2,000 € | 2 partners |
 | 4 | 16 – 22 Nov | Free guide live; waiting list open in all four countries | 5,000 € | 3 partners · 300 sign-ups |
 | 5 | 23 – 29 Nov | Content stock for launch; Meta Ad Library pass for LU and CH | 8,000 € | 5 partners · 600 sign-ups |
-| 6 | 30 Nov – 6 Dec | **Launch, all four editions, Tue 1 Dec (D5)** | 10,000 € | 1,000 subscribers |
+| 6 | 30 Nov – 6 Dec | **Launch, all six editions, Tue 1 Dec (D5, D10)** | 10,000 € | 1,000 subscribers |
 | 7 | 7 – 13 Dec | First buyer leads to the agency; first sponsor report | 13,000 € | 7 partners · 1,500 subs |
 | 8 | 14 – 20 Dec | Christmas campaign: "visiting houses while you're home" | 16,000 € | 2,000 subs · 10 leads |
 | 9 | 21 – 27 Dec | Viewings with the agency during the holidays | 20,000 € | 10 founding partners |
@@ -44,6 +44,8 @@ Cash received will lag signed value: ask for 50% at signature, 50% at launch.
 | FR | Community Facebook groups; LusoJornal; Rádio Alfa; associations | FR first for 2nd and 3rd generation, PT for 1st | CCIFP, Cap Magellan, Academia do Bacalhau de Paris |
 | CH | Community Facebook groups; Swiss pension content (2nd pillar) | PT, some FR and DE | Swiss–Portuguese chamber (CCISSP) |
 | BR | Instagram, YouTube Shorts, Google search | PT-BR | Brazilian sites on moving to Portugal |
+| USA | Google search, YouTube, Facebook groups of Americans in Portugal, Reddit communities on moving to Portugal | EN | American chamber of commerce in Portugal |
+| Israel | Facebook and WhatsApp groups of Israelis abroad, LinkedIn, Israeli-backed developers' buyer networks | EN (Hebrew later) | Portugal–Israel chamber of commerce |
 
 Social: one brand account per platform while D2 is open. Short video every day; the same clip captioned per edition.
 

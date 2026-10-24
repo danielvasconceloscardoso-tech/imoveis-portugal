@@ -39,5 +39,5 @@ The money logic: in 2025 buyers with a tax domicile outside the EU paid on avera
 1. **Russia:** do not research, list or contact Russian-capital companies or Russian state bodies. EU sanctions (Council Regulations (EU) 269/2014 and 833/2014) make this a compliance risk; Daniel decides if this ever changes.
 2. **Sponsored guest posts** are labelled as sponsored content, always.
 3. **Embassies** are approached for introductions only. No request for endorsement, no use of their names or logos on our site or media kit.
-4. **Do not build the USA or Israel editions yet** (D10: after the 1 Dec launch). Prepare the evidence and a build plan in INTERNATIONAL.md.
+4. The USA and Israel editions launch on 1 Dec with the others (D10, revised): see ops/prompts/05_usa_israel_editions.md.
 5. Nothing is sent, published or merged without Daniel's explicit approval.

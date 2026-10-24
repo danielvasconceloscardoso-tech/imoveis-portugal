@@ -14,7 +14,8 @@ Status: To do · Doing · Blocked · Done
 | D5 | Launch date | All four editions on Tue 1 Dec 2026 | — | Decided |
 | D6 | Legal frame | Every paid relationship (sponsors and agency) is a flat sponsorship, as for conferences; no per-lead fees | — | Decided |
 | D7 | Decisão / Paperjam event, 10 Nov 2026 | Brand does not attend; Daniel attends in his own professional capacity and reports back | — | Decided |
-| D10 | International editions | Decided: USA and Israel are the next editions, one per country, after the 1 Dec launch. Open: timing, and whether each opens only once one of its sponsors signs | CEO proposal: open each once its first founding sponsor signs; English first for both, Hebrew when a sponsor pays for translation | Partly decided |
+| D10 | International editions | USA and Israel launch on 1 Dec with the other four (six editions), in English; Hebrew later when a sponsor pays for translation | — | Decided |
+| D13 | Name and domains for the English editions | (a) keep "Imóveis Portugal" with a .com and /us/, /il/ sections · (b) an English brand name and domain for both (for example "Portugal Homes Guide", to check availability) | (b): English speakers search in English and cannot pronounce "Imóveis"; (a) is simpler and keeps one brand to sell | To do |
 | D11 | Russia | Exclude Russian-capital companies and Russian bodies (EU sanctions: Reg. 269/2014, Reg. 833/2014) | Exclude | Decided |
 
 ## Board
@@ -47,6 +48,8 @@ Status: To do · Doing · Blocked · Done
 
 | 8h | Run ops/prompts/04_free_ebooks.md (facts base + free e-books per edition; drafts for review) | CTO | To do | 2026-11-06 |
 | 8i | Review legal and tax facts flagged in the e-book PR | Operator | To do | 2026-11-10 |
+
+| 8j | Apply ops/prompts/05_usa_israel_editions.md to prompts 02–04 (USA and Israel editions for 1 Dec) | CTO | To do | 2026-10-26 |
 
 ## Last session
 
