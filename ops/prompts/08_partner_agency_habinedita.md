@@ -42,3 +42,7 @@ Decided: **agency name only**, no personal names (anonymity).
 2. Never describe the platform as "independent" or "neutral".
 3. Every claim in the profile is the agency's own statement and must be confirmed by the agency before going live (Código da Publicidade: advertising must be truthful).
 4. No other personal data in the repo: the agency's public business contacts only.
+
+## When the agency sends its business email
+
+Add the agency's domain to the allowlist in .githooks/pre-commit (alongside the brand addresses) before committing it, and switch the buyer form to deliver to it directly, with a copy to the brand mailbox.
