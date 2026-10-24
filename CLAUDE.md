@@ -90,3 +90,4 @@ Done when a sponsor can open a link, read the offer and submit an enquiry, on al
 6. If something needs the operator (accounts, domains, DNS, API keys), give exact step-by-step instructions, batched into one message.
 7. Keep a one-paragraph end-of-session summary in ops/TASKS.md under "Last session".
 8. Task prompts from the CEO live in ops/prompts/, numbered. When the operator says "run prompt 01", read and execute that file. The CEO's own operating script is ops/CEO_SCRIPT.md (read it for context; it is not addressed to you).
+9. Once per clone, run `git config core.hooksPath .githooks` so the commit check (secrets and non-brand emails) is active.
