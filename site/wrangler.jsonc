@@ -1,0 +1,11 @@
+// Cloudflare Workers (static assets) config for the free beta (D16).
+// Dashboard: root directory "site", build command "npm run build", deploy command "npx wrangler deploy".
+// Country-domain routing (functions/_middleware.js) only matters once domains exist; port it then.
+{
+  "name": "imoveis-portugal",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  }
+}
