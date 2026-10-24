@@ -14,3 +14,4 @@ One line per decision: date · decision · who decided.
 - 2026-10-24 · Brand mailbox geralportugalimoveis@gmail.com created; used for all accounts and sponsor outreach until the domain mailbox exists · Daniel
 - 2026-10-24 · D9: no outreach to other real-estate agencies or agency networks (RE/MAX, ERA, etc.); they compete with the partner agency. Featured-listings package dropped. Developers stay in scope · Daniel
 - 2026-10-24 · D11: Russian-capital companies and Russian bodies are excluded from research, sponsorship and outreach (EU sanctions, Reg. 269/2014 and 833/2014) · Daniel
+- 2026-10-24 · D10: next country editions are USA and Israel (one edition per country, not a single international edition); added after the 1 Dec launch of the four editions; timing and green-light rule open · Daniel

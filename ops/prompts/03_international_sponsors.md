@@ -25,7 +25,7 @@ The money logic: in 2025 buyers with a tax domicile outside the EU paid on avera
 
 1. Add the developers and investors to sponsors/build/sponsors_v2_data.py with tier A/B/C and evidence URL, a new column `capital_origin`, and rebuild sponsors/Sponsors_v2.xlsx. No agencies (D9).
 2. A new tab "Chambers & embassies": organisation, country, what they offer (member newsletter, sponsored content, events), public contact route, evidence URL.
-3. sponsors/INTERNATIONAL.md: what you found per country, size of the opportunity, and which countries are worth an English edition.
+3. sponsors/INTERNATIONAL.md: what you found per country and the size of the opportunity. Decision D10: the next editions are USA and Israel, so go deepest on those two: sponsors, chambers, audience size, and what a US and an Israeli buyer need to know (tax at home, financing, residency).
 
 ## Part 3 — Draft outreach (drafts only)
 
@@ -39,5 +39,5 @@ The money logic: in 2025 buyers with a tax domicile outside the EU paid on avera
 1. **Russia:** do not research, list or contact Russian-capital companies or Russian state bodies. EU sanctions (Council Regulations (EU) 269/2014 and 833/2014) make this a compliance risk; Daniel decides if this ever changes.
 2. **Sponsored guest posts** are labelled as sponsored content, always.
 3. **Embassies** are approached for introductions only. No request for endorsement, no use of their names or logos on our site or media kit.
-4. **Do not change the editions** (LU, FR, CH, BR). Whether to add an English international edition is decision D10 for Daniel; give the evidence in INTERNATIONAL.md.
+4. **Do not build the USA or Israel editions yet** (D10: after the 1 Dec launch). Prepare the evidence and a build plan in INTERNATIONAL.md.
 5. Nothing is sent, published or merged without Daniel's explicit approval.
