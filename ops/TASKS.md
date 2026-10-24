@@ -60,7 +60,7 @@ Status: To do · Doing · Blocked · Done
 | 8o | Create the free Cloudflare account and connect the repo, following Claude Code's steps (no domain needed) | Operator | To do | 2026-10-27 |
 
 | 8p | Apply ops/prompts/08_partner_agency_habinedita.md (partner agency on buyer, partner and FAQ pages) | CTO | To do | 2026-10-31 |
-| 8q | Send AMI number, public business email and phone, logo; confirm the profile text and whether the consultant's name is shown | Father / Operator | To do | 2026-10-28 |
+| 8q | Send the agency's logo and, when available, a business email for buyer requests | Operator | To do | 2026-10-31 |
 
 ## Last session
 

@@ -8,15 +8,23 @@ To run: in Claude Code, type "Read ops/prompts/08_partner_agency_habinedita.md a
 
 The partner agency (D14) is **Habinedita Gondomar**, Av. General Humberto Delgado 415, Gondomar (São Cosme), Valbom e Jovim. It is the only real-estate agency on the platform and appears as a **sponsor** (labelled as such), as every paid relationship (D6).
 
-Details to complete before anything goes live (placeholders until the operator sends them): AMI licence number, public business email, public business phone, website or listings page, logo, the consultant's name and photo (only if Daniel confirms; otherwise the agency name alone).
+Public details (checked 24 Oct 2026):
+- Website: https://habineditagondomar.pt/ (link here from every mention)
+- AMI licence: 13250 (shown in the site footer)
+- Address: Av. General Humberto Delgado 415, Gondomar (São Cosme), Valbom e Jovim (Imovirtual agency page)
+- Phone: +351 221 458 069 (Imovirtual agency page)
+- Email: not published; until the agency sends one, buyer requests go to the brand mailbox and are forwarded the same day
+- Logo: ask the operator for the file; until then, the agency name in text
+
+Decided: **agency name only**, no personal names (anonymity).
 
 ## Where it appears
 
-1. **Buyer request page** (every edition): "Your request goes to our partner agency, Habinedita Gondomar (AMI [n.º]), licensed real-estate mediator." Requests are emailed to the agency and copied to the brand mailbox.
+1. **Buyer request page** (every edition): "Your request goes to our partner agency, Habinedita Gondomar (AMI 13250), licensed real-estate mediator." Requests go to the brand mailbox and are forwarded to the agency the same day; switch to direct delivery once the agency gives a business email.
 2. **"Talk to a partner" page** (every edition): Habinedita is the partner for buying and selling a home. Other categories (lawyer, bank, tax adviser, money transfer, developer) stay "announced at launch".
 3. **FAQ**: [agency] links point to the buyer request page.
 4. **Partners page and media kit**: shown under "Partner agency" with the sponsored label. The real-estate category is closed to other agencies (D9).
-5. **config.ts**: `agency.name = "Habinedita Gondomar"`, `agency.ami = ""` until received.
+5. **config.ts**: `agency.name = "Habinedita Gondomar"`, `agency.ami = "13250"`, `agency.website = "https://habineditagondomar.pt/"`, `agency.phone = "+351 221 458 069"`.
 
 ## Partner profile (the agency's own statement, labelled as sponsored)
 

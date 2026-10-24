@@ -24,4 +24,4 @@ One line per decision: date · decision · who decided.
 - 2026-10-24 · Switzerland edition is bilingual: Portuguese and French on site, newsletter, FAQ, e-books and media kit · Daniel
 - 2026-10-24 · D15: site and media kit design is direction C (Betão) with colour photography instead of black and white · Daniel
 - 2026-10-24 · D16: start with a free beta on Cloudflare Pages (pages.dev address, noindex, "Beta" mark); domains bought later · Daniel
-- 2026-10-24 · D17: partner agency is Habinedita Gondomar (only real-estate agency, shown as sponsored partner); consultant's name shown only if Daniel confirms · Daniel
+- 2026-10-24 · D17: partner agency is Habinedita Gondomar, AMI 13250, habineditagondomar.pt (only real-estate agency, shown as sponsored partner); agency name only, no personal names; profile claims confirmed by Daniel · Daniel
