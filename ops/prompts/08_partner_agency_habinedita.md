@@ -14,7 +14,7 @@ Public details (checked 24 Oct 2026):
 - Address: Av. General Humberto Delgado 415, Gondomar (São Cosme), Valbom e Jovim (Imovirtual agency page)
 - Phone: +351 221 458 069 (Imovirtual agency page)
 - Email: not published; until the agency sends one, buyer requests go to the brand mailbox and are forwarded the same day
-- Logo: ask the operator for the file; until then, the agency name in text
+- Logo: take it from https://habineditagondomar.pt/ (the agency agreed; habineditagondomar.pt is on your network allowlist). Save the best-resolution version to site/public/partners/habinedita-gondomar.(svg|png), note the source URL in site/public/partners/CREDITS.md, and show it in the screenshots for review
 
 Decided: **agency name only**, no personal names (anonymity).
 
