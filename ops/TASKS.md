@@ -14,6 +14,8 @@ Status: To do · Doing · Blocked · Done
 | D5 | Launch date | All four editions on Tue 1 Dec 2026 | — | Decided |
 | D6 | Legal frame | Every paid relationship (sponsors and agency) is a flat sponsorship, as for conferences; no per-lead fees | — | Decided |
 | D7 | Decisão / Paperjam event, 10 Nov 2026 | Brand does not attend; Daniel attends in his own professional capacity and reports back | — | Decided |
+| D10 | International sponsors and audience | (a) foreign-capital developers sponsor the existing four editions (no product change) · (b) also add one English "International" edition (US, UK, Israel and others) after launch · (c) one edition per nationality | (a) now, decide (b) in January with the prompt 03 evidence; skip (c) | To do |
+| D11 | Russia | Exclude Russian-capital companies and Russian bodies (EU sanctions: Reg. 269/2014, Reg. 833/2014) | Exclude | To do (Daniel) |
 
 ## Board
 
@@ -40,6 +42,8 @@ Status: To do · Doing · Blocked · Done
 
 | 8e | Redo week-1 drafts for the new "This week's 40" (agencies removed, D9): rebase branch claude/brave-gauss-cwafi6 on main, delete drafts for companies no longer in the list, write the missing ones | CTO | To do | 2026-10-25 |
 | 8f | Branch claude/keen-pasteur-epzzfr is from the stuck first session and deletes current files: never merge, delete it | Operator | To do | 2026-10-25 |
+
+| 8g | Run ops/prompts/03_international_sponsors.md (foreign-capital developers, bilateral chambers, embassy economic sections; drafts only) | CTO | To do | 2026-10-30 |
 
 ## Last session
 
