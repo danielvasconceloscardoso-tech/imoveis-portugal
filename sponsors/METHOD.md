@@ -11,6 +11,7 @@ A good sponsor already pays to reach our readers. Evidence beats assumptions.
 | A | Proven spend on our audience | Ad in LusoJornal or Lusopress, stand at a Portuguese property fair abroad, office abroad for the community, affiliate or partner deal with a diaspora site, sponsored articles, influencer launch aimed at Brazilians |
 | B | Serves our audience, no proof of spend | Dedicated page for emigrants, non-residents, French or Brazilian buyers |
 | C | Large or generic, long cycle | No evidence; parked in "Later" until we have 1,000 subscribers or a warm intro |
+| Excluded | Other real-estate agencies and networks (decision D9) | They compete with the partner agency; never contacted |
 
 Every A and B row has an evidence URL. "Fetched" means the page was opened and read; "Search result" means the page title and URL match but the page was not read in full. A rows with evidence before 2022 get a lower close probability and must be re-checked before outreach.
 
@@ -38,7 +39,7 @@ Change the yellow cells in Settings and everything recalculates. If decision D3 
 
 ## Known gaps
 
-1. Luxembourg (20 A/B companies) and Switzerland (19) are thinner than France (57) and Brazil (39). The first Meta Ad Library pass and the Contacto / Rádio Latina ad check should focus there.
+1. Luxembourg (19 A/B companies) and Switzerland (17) are thinner than France (46) and Brazil (29). The first Meta Ad Library pass and the Contacto / Rádio Latina ad check should focus there.
 2. Decision-maker names are not in the file on purpose. Find the named role on LinkedIn at the moment of outreach; do not store personal emails in the repo.
 
 ## Outreach rules

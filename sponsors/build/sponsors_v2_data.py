@@ -157,3 +157,16 @@ EXIT_BUYERS = [
 ("RE/MAX Portugal / ERA / Zome", "Agency networks", "Lead source for emigrant sellers and buyers", ""),
 ("LusoJornal / Lusopress", "Diaspora media", "Consolidation of diaspora media", LUSOJ),
 ]
+
+
+# Decision D9 (24 Oct 2026): no outreach to other real-estate agencies or agency networks.
+# They compete with the partner agency. Kept here for the record, excluded from the pipeline.
+EXCLUDED_AGENCIES = {
+    "Libertas / Maison au Portugal", "Fábio Neves Imobiliária", "Porta da Frente | Christie's",
+    "Judice & Araújo | Christie's", "RE/MAX Alcateia", "Maia International Properties", "Oliveira Imóveis",
+    "Conexão Europa Imóveis", "Engel & Völkers Portugal", "Homelovers", "Infante & Riu",
+    "Quintela & Penalva", "ERA Avenidas Novas", "Stay Properties", "7 Adresses",
+    "Portugal Homes", "Flávia Motta", "Dils", "Faccin Investments", "immoabroad",
+    "RE/MAX Portugal (central)", "Century 21 Portugal", "KW Portugal", "Zome",
+    "Portugal Sotheby's International Realty",
+}

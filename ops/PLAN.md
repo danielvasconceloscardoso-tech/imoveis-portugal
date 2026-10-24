@@ -9,7 +9,6 @@ Written 24 Oct 2026 by the CEO. Covers 26 Oct 2026 to 24 Jan 2027. Replaces the 
 | # | Offer | Price | Buyer | Time to cash |
 | --- | --- | --- | --- | --- |
 | 1 | Paid call with a property expert | 150 € / 45 min | Readers about to buy or sell | Days |
-| 2 | Featured listings | 49–99 € per listing per month | Agencies | 1–2 weeks |
 | 3 | Developer campaign | from 1,500 € | Developers with projects for foreign buyers | 2–4 weeks |
 | 4 | Founding partner (first 10) | Gold 4,800 €, Silver 1,800 €, Bronze 540 € in year 1 | Banks, lawyers, credit brokers, FX, services | 2–6 weeks |
 | 5 | Partner agency sponsorship, sized on sales from our readers | to agree with the agency (reference: about 3,000–4,000 € per sale) | Partner agency | 2–6 months (at deed) |
@@ -76,5 +75,5 @@ Peaks: Christmas (15 Dec – 5 Jan), Easter, and August, when emigrants are in P
 1. Sell before launch: sponsor outreach starts 26 Oct, not after the site is built.
 2. Launch moves from January to 1 Dec (proposed), to catch the Christmas peak.
 3. The sponsor list is rebuilt around proof of spend: 44 tier A, 46 tier B, 60 parked (sponsors/Sponsors_v2.xlsx).
-4. Paid calls and featured listings come first because they need no audience.
+4. Paid calls come first because they need no audience. No outreach to other real-estate agencies (D9): they compete with the partner agency.
 5. Exit is planned from day 1: possible buyers are tracked in the "Exit buyers" tab, and the idealista–Kyero deal shows why there must be more than one.

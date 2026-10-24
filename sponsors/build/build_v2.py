@@ -2,7 +2,7 @@ import csv, sys, datetime as dt
 import os
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-from sponsors_v2_data import ROWS, C_ROWS, PARTNERS, EXIT_BUYERS
+from sponsors_v2_data import ROWS, C_ROWS, PARTNERS, EXIT_BUYERS, EXCLUDED_AGENCIES
 from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.worksheet.datavalidation import DataValidation
@@ -45,6 +45,9 @@ for company, sector in C_ROWS:
                      tier="C", size="L", evidence_url="", evidence_note="Large or generic; no proof of spend on our audience",
                      evidence_year="", evidence_status="", offer_type="Gold" if "Bank" in sector or "Airline" in sector else "Silver"))
 
+excluded = [r for r in recs if r["company"] in EXCLUDED_AGENCIES]
+assert len(excluded) == len(EXCLUDED_AGENCIES), "excluded name mismatch"
+recs = [r for r in recs if r["company"] not in EXCLUDED_AGENCIES]
 names = [r["company"] for r in recs]
 assert len(names) == len(set(names)), "duplicate company"
 
@@ -236,6 +239,16 @@ for k, p in enumerate(EXIT_BUYERS, 2):
     for c, v in enumerate(p, 1):
         cell = eb.cell(row=k, column=c, value=v or None); cell.font = BB if c == 1 else B; cell.alignment = WR; cell.border = BD
     if p[3]: eb.cell(row=k, column=4).hyperlink = p[3]
+
+# Excluded agencies (D9)
+xs = wb.create_sheet("Excluded (agencies)")
+for i, (h, w) in enumerate(zip(["Company", "Sector", "Tier", "Evidence URL", "Why excluded"], [36, 30, 6, 50, 60]), 1):
+    c = xs.cell(row=1, column=i, value=h); c.font = H; c.fill = HF
+    xs.column_dimensions[get_column_letter(i)].width = w
+for k, r in enumerate(sorted(excluded, key=lambda r: r["company"]), 2):
+    for c, v in enumerate([r["company"], r["sector"], r["tier"], r["evidence_url"] or None,
+                           "Real-estate agency: competes with the partner agency (decision D9)"], 1):
+        cell = xs.cell(row=k, column=c, value=v); cell.font = B; cell.alignment = WR; cell.border = BD
 
 # Summary
 sm = wb.create_sheet("Summary", 0)

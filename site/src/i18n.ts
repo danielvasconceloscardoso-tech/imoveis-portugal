@@ -98,7 +98,6 @@ export function t(ed: EdCode) {
         ["Silver", "Une édition au choix. Présence dans la newsletter tous les quinze jours, un article sponsorisé par trimestre, fiche dans l'annuaire des partenaires, rapport mensuel.", eur(p.silver.founding, L), eur(p.silver.list, L) + " / an"],
         ["Bronze", "Une édition. Fiche avec logo dans l'annuaire des partenaires et une mention par mois dans la newsletter.", eur(p.bronze.founding, L), eur(p.bronze.list, L) + " / an"],
         ["Campagne promoteur", "Mise en avant d'un programme dans les éditions choisies : newsletter, article et réseaux sociaux.", "à partir de " + eur(p.campaignFrom, L), "—"],
-        ["Biens en vedette", "Pour les agences : vos biens dans la sélection hebdomadaire.", `${p.listingMin} à ${p.listingMax} € par bien et par mois`, "—"],
       ],
       vat: "Prix hors TVA.",
       rulesH: "Nos règles",
@@ -192,8 +191,6 @@ export function t(ed: EdCode) {
           ? "Para incorporadoras: destaque de um empreendimento nas edições escolhidas, com newsletter, artigo e redes sociais."
           : "Para promotores: destaque de um empreendimento nas edições escolhidas, com newsletter, artigo e redes sociais.",
           (br ? "a partir de " : "a partir de ") + eur(p.campaignFrom, L), "—"],
-        [br ? "Imóveis em destaque" : "Imóveis em destaque", br ? "Para imobiliárias: seus imóveis na seleção semanal." : "Para agências: os seus imóveis na seleção semanal.",
-          `${p.listingMin} a ${p.listingMax} € por imóvel por mês`, "—"],
       ],
       vat: br ? "Valores sem IVA (imposto português)." : "Valores sem IVA.",
       rulesH: br ? "Nossas regras" : "As nossas regras",
