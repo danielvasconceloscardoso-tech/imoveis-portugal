@@ -14,8 +14,8 @@ Status: To do · Doing · Blocked · Done
 | D5 | Launch date | All four editions on Tue 1 Dec 2026 | — | Decided |
 | D6 | Legal frame | Every paid relationship (sponsors and agency) is a flat sponsorship, as for conferences; no per-lead fees | — | Decided |
 | D7 | Decisão / Paperjam event, 10 Nov 2026 | Brand does not attend; Daniel attends in his own professional capacity and reports back | — | Decided |
-| D10 | International sponsors and audience | (a) foreign-capital developers sponsor the existing four editions (no product change) · (b) also add one English "International" edition (US, UK, Israel and others) after launch · (c) one edition per nationality | (a) now, decide (b) in January with the prompt 03 evidence; skip (c) | To do |
-| D11 | Russia | Exclude Russian-capital companies and Russian bodies (EU sanctions: Reg. 269/2014, Reg. 833/2014) | Exclude | To do (Daniel) |
+| D10 | International editions | Daniel prefers one edition per country over a single "International" one. Open: which countries, when, and the rule to green-light each | CEO proposal: keep 1 Dec launch to the four editions; add a country edition when one founding sponsor for that country signs; US and UK first (English, reviewable), Israel next, China only if a sponsor pays for translation | To do |
+| D11 | Russia | Exclude Russian-capital companies and Russian bodies (EU sanctions: Reg. 269/2014, Reg. 833/2014) | Exclude | Decided |
 
 ## Board
 
