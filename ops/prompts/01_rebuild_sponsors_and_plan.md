@@ -2,6 +2,8 @@
 
 To run: in Claude Code, plan mode, type "Read ops/prompts/01_rebuild_sponsors_and_plan.md and execute it."
 
+**Status (24 Oct 2026): Parts 1 and 2 were done by the CEO (sponsors/Sponsors_v2.xlsx, sponsors/pipeline.csv, sponsors/METHOD.md, ops/PLAN.md). CTO: run Part 3 only.**
+
 ---
 
 You are the CTO. Read CLAUDE.md, ops/TASKS.md, ops/DECISIONS.md and sponsors/ first.
