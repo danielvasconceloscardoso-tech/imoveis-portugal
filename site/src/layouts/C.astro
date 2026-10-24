@@ -1,0 +1,77 @@
+---
+// Direction C layout (D15). Same head rules as Base.astro: noindex until launch, canonical, hreflang.
+import "../styles/c.css";
+import archivoLatin from "@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2?url";
+import { config } from "../config";
+import { EDITIONS, ED_ORDER } from "../i18n";
+import { variant, strings, links, pathC, tFor, VARIANTS, type Variant, type PageC } from "../lib/content";
+
+interface Props { v: Variant; page: PageC; title: string; description: string; }
+const { v, page, title, description } = Astro.props;
+const V = variant(v);
+const T = tFor(v);
+const S = strings(v);
+const L = links(v);
+const host = (vv: Variant) => (config.domainMode === "primary" ? config.primaryDomain : EDITIONS[variant(vv).ed].domain);
+const canonical = `https://${host(v)}${pathC(v, page)}`;
+const alternates = VARIANTS.map((vv) => ({ hreflang: variant(vv).hreflang, href: `https://${host(vv)}${pathC(vv, page)}` }));
+const isCh = V.ed === "ch";
+---
+<!doctype html>
+<html lang={V.lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {!config.launchReady && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="canonical" href={canonical} />
+    {alternates.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
+    <link rel="preload" href={archivoLatin} as="font" type="font/woff2" crossorigin />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="Imóveis Portugal" />
+    <slot name="head" />
+  </head>
+  <body data-ed={V.ed}>
+    <a class="skip" href="#main">{V.dict === "fr" ? "Aller au contenu" : "Saltar para o conteúdo"}</a>
+    <header class="c-head">
+      <div class="w">
+        <a class="mark" href={L.home}><i aria-hidden="true"></i><b>Imóveis<br />Portugal</b><span class="beta">{S.beta}</span></a>
+        <nav aria-label="Menu">
+          <a href={L.faq} aria-current={page === "faq" ? "page" : undefined}>{S.nav.faq}</a>
+          <a href={L.talk} aria-current={page === "talk" ? "page" : undefined}>{S.nav.talk}</a>
+          <a href={L.buy}>{T.nav.buy}</a>
+          <a href={L.partners}>{T.nav.partners}</a>
+          <span class="sw" role="group" aria-label={T.editionsLabel}>
+            {ED_ORDER.map((c) => (
+              <a href={pathC(c as Variant, page)} aria-current={c === V.ed ? "true" : undefined} lang={EDITIONS[c].lang} title={EDITIONS[c].name}>{c.toUpperCase()}</a>
+            ))}
+          </span>
+          {isCh && (
+            <span class="sw" role="group" aria-label={S.langSwitch}>
+              <a href={pathC("ch", page)} lang="pt-PT" aria-current={v === "ch" ? "true" : undefined}>PT</a>
+              <a href={pathC("ch-fr", page)} lang="fr-CH" aria-current={v === "ch-fr" ? "true" : undefined}>FR</a>
+            </span>
+          )}
+        </nav>
+      </div>
+    </header>
+    <main id="main">
+      <slot />
+    </main>
+    <footer class="c-foot">
+      <div class="w">
+        <b>Imóveis Portugal</b>
+        <span>{T.footer.sponsored}</span>
+        <nav aria-label={V.dict === "fr" ? "Pied de page" : "Rodapé"}>
+          <a href={L.faq}>{S.footer.faq}</a>
+          <a href={L.talk}>{S.footer.talk}</a>
+          <a href={L.privacy}>{T.footer.privacy}</a>
+          <a href={L.legal}>{T.footer.legal}</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

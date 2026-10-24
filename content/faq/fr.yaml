@@ -1,0 +1,11 @@
+# France edition: questions added to common-fr.yaml.
+# Left out until verified (see content/faq/UNVERIFIED.md): "Succession d'un bien au Portugal : quelle loi s'applique ?"
+
+- id: frx-01
+  q: Dois-je déclarer en France mon bien au Portugal ?
+  a: >-
+    Les comptes bancaires ouverts au Portugal se déclarent chaque année avec votre déclaration de revenus
+    (formulaire 3916), même s'ils ne servent pas. Les loyers d'un bien au Portugal y sont imposables ; la
+    convention fiscale franco-portugaise fixe la façon dont la France en tient compte.
+  cta: talk-tax
+  facts: [fr-3916, pt-rent-tax-nonresident]

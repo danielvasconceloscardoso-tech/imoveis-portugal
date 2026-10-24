@@ -38,6 +38,12 @@ const facts = sideFacts(ed).slice(1);
           </ul>
         </section>
 
+        <section class="block" aria-labelledby="faq">
+          <h2 id="faq">{E.dict === "fr" ? "Questions fréquentes" : "Perguntas frequentes"}</h2>
+          <p>{E.dict === "fr" ? "Frais, crédit, impôts et procuration : des réponses courtes, avec la source officielle de chaque chiffre." : E.dict === "br" ? "Custos, financiamento, impostos e procuração: respostas curtas, com a fonte oficial de cada número." : "Custos, crédito, impostos e procuração: respostas curtas, com a fonte oficial de cada número."}</p>
+          <a href={`/${ed}/${E.slugs.faq}/`}>{E.dict === "fr" ? "Lire les questions fréquentes" : "Ler as perguntas frequentes"}</a>
+        </section>
+
         <div class="block cta-pair">
           <section>
             <h2>{T.buyCta.h}</h2>

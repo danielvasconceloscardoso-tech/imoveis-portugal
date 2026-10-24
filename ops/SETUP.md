@@ -37,6 +37,10 @@ Create forms in Portuguese, French and Brazilian Portuguese (LU and CH share the
 
 The form ID is the end of the share link: `tally.so/r/w4Xyz1` → `w4Xyz1`.
 
+**Partner request ("Falar com um parceiro" / "Parler à un partenaire"):** one form per language: Portuguese (LU and CH), French (FR, plus a separate copy for Switzerland in French so requests can be counted per edition), Brazilian Portuguese. Fields: category (Advogado / Banco / Consultor fiscal / Transferências de dinheiro / Promotor imobiliário; no real-estate agency, D9 and D14) · country where you live · your question · first name · email · **unticked** checkbox: "I agree that my request is used to reply to me and, if I ask, passed to a partner in the chosen category." Hidden field `edition` (lu, fr, ch, ch-fr, br). Notifications → the brand mailbox only. Put the IDs in `config.forms.partnerRequest` in `site/src/config.ts`.
+
+Monthly count for the media kit: Tally → the form → Submissions → filter by month → count per category. Write the totals (counts only, no names or emails) in ops/METRICS.md.
+
 ## 5. Newsletter in beehiiv (5 min)
 
 1. Create the publication "Imóveis Portugal" (free plan, up to 2,500 subscribers).

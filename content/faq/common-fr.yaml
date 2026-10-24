@@ -1,0 +1,108 @@
+# Common FAQ, French. Used by the FR and CH (FR) editions.
+# Same rules and fact ids as common-pt.yaml.
+
+- id: fr-01
+  q: Puis-je acheter au Portugal sans y habiter ?
+  a: >-
+    Oui. Des non-résidents achètent au Portugal et le code de l'IMT prévoit même un taux propre pour eux.
+    Avant de signer, il faut un numéro fiscal portugais (NIF). Hors de l'UE, il faut désigner un représentant
+    fiscal, sauf adhésion aux notifications électroniques des Finances ; dans l'UE, c'est facultatif.
+  cta: talk-lawyer
+  facts: [pt-nonresidents-buy, pt-nif-nonresident, pt-tax-rep]
+
+- id: fr-02
+  q: Combien coûte un achat en plus du prix ?
+  a: >-
+    L'IMT, un droit de timbre de 0,8 % du prix, l'acte et l'enregistrement. Depuis mai 2026, un acheteur
+    non-résident fiscal au Portugal paie l'IMT au taux unique de 7,5 %, sauf exceptions, par exemple devenir
+    résident dans les deux ans. Avec un crédit s'ajoutent un droit de timbre de 0,6 % sur le prêt et de 4 % sur les intérêts.
+  cta: guide
+  facts: [pt-is-purchase, pt-imt-nonresident-flat, pt-imt-nonresident-exceptions, pt-is-loan-5y, pt-is-interest]
+
+- id: fr-03
+  q: Puis-je obtenir un crédit sans habiter au Portugal ?
+  a: >-
+    Chaque banque décide et étudie les revenus du demandeur. Les limites de la Banque du Portugal valent pour
+    tous : jusqu'à 90 % de la valeur pour une résidence principale et jusqu'à 80 % pour d'autres usages,
+    comme une maison de vacances. La valeur retenue est la plus basse entre le prix et l'expertise.
+  cta: talk-bank
+  facts: [pt-ltv-limits]
+
+- id: fr-04
+  q: Dois-je être au Portugal pour signer ?
+  a: >-
+    Non. Vous pouvez donner une procuration, par exemple à un avocat, signée dans un consulat du Portugal ou
+    devant un notaire du pays où vous vivez. Dans ce second cas, la procuration doit porter l'apostille de
+    La Haye pour produire ses effets au Portugal.
+  cta: talk-lawyer
+  facts: [pt-poa-apostille]
+
+- id: fr-05
+  q: Qu'est-ce que le CPCV ?
+  a: >-
+    C'est le compromis de vente signé avant l'acte. Il fixe le prix, la date et les arrhes (sinal). Si
+    l'acheteur se désiste par sa faute, il perd les arrhes ; si c'est le vendeur, l'acheteur peut exiger le
+    double de ce qu'il a versé (Code civil portugais, article 442). Un avocat partenaire peut le relire avant signature.
+  cta: talk-lawyer
+  facts: [pt-sinal-442]
+
+- id: fr-06
+  q: Quels impôts dois-je payer chaque année ?
+  a: >-
+    L'IMI, un impôt municipal compris entre 0,3 % et 0,45 % de la valeur fiscale du bien, au taux fixé par
+    chaque commune. L'AIMI ne s'applique qu'à la somme des valeurs fiscales au-delà de 600 000 € par personne.
+  cta: talk-tax
+  facts: [pt-imi-rates, pt-aimi-deduction]
+
+- id: fr-07
+  q: Puis-je louer mon bien ?
+  a: >-
+    Oui, en location longue ou en location touristique (alojamento local). Celle-ci exige un enregistrement
+    préalable, et la commune peut s'y opposer sous 60 jours, ou 90 dans les zones de limitation qu'elle définit.
+    Les loyers d'habitation des non-résidents sont imposés au Portugal à 25 %, avec des réductions pour les
+    baux longs. Votre pays de résidence peut avoir ses propres règles.
+  cta: talk-tax
+  facts: [pt-al-registration, pt-rent-tax-nonresident]
+
+- id: fr-08
+  q: Comment transférer l'argent ?
+  a: >-
+    Par votre banque ou par un service de transfert, et les conditions de change varient de l'un à l'autre.
+    Banques, notaires et avocats doivent s'informer sur l'origine des fonds quand l'opération le justifie
+    (loi portugaise 83/2017) : ils peuvent donc demander des justificatifs.
+  cta: talk-fx
+  facts: [pt-aml-funds]
+
+- id: fr-09
+  q: J'ai hérité d'une maison au Portugal. Que faire ?
+  a: >-
+    Les héritiers décident ensemble de garder, vendre ou louer la maison. Le conjoint ou partenaire, les
+    enfants et les parents sont exonérés du droit de timbre de 10 % sur la succession au Portugal ; les autres
+    héritiers le paient. Les formalités d'enregistrement restent nécessaires pour tous.
+  cta: talk-lawyer
+  facts: [pt-is-inheritance-exempt]
+
+- id: fr-10
+  q: Est-ce le bon moment pour acheter ?
+  a: >-
+    Nous ne donnons pas de conseil en investissement. Les faits : selon l'INE, les prix des logements au
+    Portugal ont augmenté de 17,6 % en 2025, la plus forte hausse de la série. Ce qui compte, c'est votre
+    budget, la région et vos projets. Dites-nous ce que vous cherchez et l'agence partenaire vous montre ce qui existe.
+  cta: agency
+  facts: [pt-ine-prices-2025]
+
+- id: fr-11
+  q: Pouvez-vous me trouver une maison ?
+  a: >-
+    Oui. Indiquez-nous la région, le budget et le calendrier. L'agence immobilière agréée partenaire vous
+    contacte, sans frais pour vous, et peut organiser des visites pendant votre séjour au Portugal.
+  cta: agency
+  facts: []
+
+- id: fr-12
+  q: S'agit-il de conseil financier, juridique ou fiscal ?
+  a: >-
+    Non. Nous rassemblons des informations de sources officielles pour que vous compreniez les règles. Pour
+    votre cas, adressez-vous à un professionnel : nous pouvons vous mettre en relation avec nos partenaires.
+  cta: talk-lawyer
+  facts: []

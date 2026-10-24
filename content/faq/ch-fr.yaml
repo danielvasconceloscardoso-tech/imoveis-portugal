@@ -1,0 +1,19 @@
+# Switzerland edition, French: questions added to common-fr.yaml. Portuguese version in ch-pt.yaml.
+
+- id: chfr-01
+  q: Puis-je utiliser mon 2e pilier pour acheter au Portugal ?
+  a: >-
+    Seulement pour votre résidence principale. Les règles fédérales permettent un versement anticipé du
+    2e pilier pour le logement où vous habitez, en Suisse ou à l'étranger, mais pas pour une résidence
+    secondaire. Le montant minimal est de 20 000 francs.
+  cta: talk-tax
+  facts: [ch-2nd-pillar-abroad]
+
+- id: chfr-02
+  q: Et le 3e pilier (3a) ?
+  a: >-
+    Le pilier 3a peut aussi être retiré par anticipation pour acquérir un logement pour vos propres besoins ou
+    rembourser un prêt hypothécaire. Les conditions précises, comme les délais et l'âge, dépendent du contrat
+    et des règles fédérales.
+  cta: talk-tax
+  facts: [ch-3a-home]

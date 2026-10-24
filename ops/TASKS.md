@@ -33,34 +33,27 @@ Status: To do · Doing · Blocked · Done
 | 6 | Create free accounts with the brand email: Cloudflare, beehiiv, Tally, Cal.com | Operator | To do | 2026-10-28 |
 | 7 | Confirm the agency receives buyer leads and the commission split, in writing | Father | To do | 2026-10-31 |
 | 8 | Media kit per edition (sponsors/mediakit/*.pdf, generated from the partner pages) | CEO | Done (v1, rejected on design) | 2026-10-24 |
-| 8b | Run ops/prompts/02_redesign_and_outreach.md: three design directions, redesign site and media kits, draft week-1 outreach emails | CTO | Doing: plan approved, Part C done, three directions waiting for the operator's choice | 2026-10-26 |
+| 8b | Run ops/prompts/02_redesign_and_outreach.md: three design directions, redesign site and media kits, draft week-1 outreach emails | CTO | Directions and outreach done; site and media kit build continues in prompt 07 (8n) | 2026-10-26 |
 | 8c | Create the brand Gmail mailbox | Operator | Done (geralportugalimoveis@gmail.com) | 2026-10-24 |
 | 8d | Decide the outreach email signature (Partner's first name, a pen name, or "Equipa Imóveis Portugal") | Operator | To do | 2026-10-25 |
 | 8e | Redo week-1 drafts for the new "This week's 40" (agencies removed, D9): rebase branch claude/brave-gauss-cwafi6 on main, delete drafts for companies no longer in the list, write the missing ones | CTO | Done (branch claude/brave-gauss-cwafi6) | 2026-10-25 |
 | 8f | Branch claude/keen-pasteur-epzzfr is from the stuck first session and deletes current files: never merge, delete it | Operator | To do | 2026-10-25 |
-| 8g | Approve the week-1 drafts in sponsors/outreach/week-1/ (README there lists what to check); nothing is sent before 8h | Operator | To do | 2026-10-26 |
-| 8h | Confirm the legal bases for B2B outreach per country (sponsors/METHOD.md, Outreach rules point 2); until then the drafts stay drafts | Operator (Daniel) | To do | 2026-10-26 |
-| 8i | Remessa Online, Bordr and e-residence are listed as affiliate offers: decide whether an affiliate commission fits D6 (flat sponsorships only); drafts pitch sponsorship only | CEO | To do | 2026-10-28 |
-| 8j | Choose one of the three design directions A, B or C (boards in design/directions/screens/board-*.jpg, notes in design/directions/README.md) | Operator | To do | 2026-10-26 |
-| 8k | Create a free Unsplash developer app (unsplash.com/developers, brand mailbox) and add its Access Key to this cloud environment as the environment variable UNSPLASH_ACCESS_KEY (environment menu > Edit > Environment variables), never in the repo. Needed to search coast and house photos and to fill in the photographer credits | Operator | To do | 2026-10-27 |
+| 8p | Approve the week-1 drafts in sponsors/outreach/week-1/ (README there lists what to check); nothing is sent before 8q | Operator | To do | 2026-10-26 |
+| 8q | Confirm the legal bases for B2B outreach per country (sponsors/METHOD.md, Outreach rules point 2); until then the drafts stay drafts | Operator (Daniel) | To do | 2026-10-26 |
+| 8r | Remessa Online, Bordr and e-residence are listed as affiliate offers: decide whether an affiliate commission fits D6 (flat sponsorships only); drafts pitch sponsorship only | CEO | To do | 2026-10-28 |
+| 8s | Choose one of the three design directions | Operator | Done: direction C with colour photos (D15) | 2026-10-24 |
+| 8t | Create a free Unsplash developer app (unsplash.com/developers, brand mailbox) and add its Access Key to this cloud environment as the environment variable UNSPLASH_ACCESS_KEY (environment menu > Edit > Environment variables), never in the repo. Needed to search more photos and to fill in the photographer credits | Operator | To do | 2026-10-27 |
 | 9 | Send "This week's 40" (sponsors/Sponsors_v2.xlsx), 8 per day, templates in sponsors/METHOD.md; log status | Partner | To do | 2026-10-30 |
 | 10 | Meta Ad Library pass for Luxembourg and Switzerland (links in sponsors/METHOD.md); add advertisers as tier A | Partner | To do | 2026-11-06 |
 | 11 | Get the latest exhibitor list of the Paris Portuguese property fair | Partner | To do | 2026-11-06 |
 | 12 | Optional: move repo to a brand GitHub organisation (current account name contains the founder's name) | Operator | To do | 2026-11-07 |
-
-
 | 8g | Run ops/prompts/03_international_sponsors.md (foreign-capital developers, bilateral chambers, embassy economic sections; drafts only) | CTO | To do | 2026-10-30 |
-
 | 8h | Run ops/prompts/04_free_ebooks.md (facts base + free e-books per edition; drafts for review) | CTO | To do | 2026-11-06 |
 | 8i | Review legal and tax facts flagged in the e-book PR | Operator | To do | 2026-11-10 |
-
 | 8j | Apply ops/prompts/05_usa_israel_editions.md to prompts 02–04 (USA and Israel editions for 1 Dec) | CTO | To do | 2026-10-26 |
-
-| 8k | Run ops/prompts/06_faq_and_topics.md (FAQ pages per edition, 10-week content plan, week 1–2 drafts) | CTO | To do | 2026-11-06 |
+| 8k | Run ops/prompts/06_faq_and_topics.md (FAQ pages per edition, 10-week content plan, week 1–2 drafts) | CTO | Doing | 2026-11-06 |
 | 8l | Buy the USA and Israel domains (Claude Code checks availability and eligibility first) | Operator | To do | 2026-11-06 |
-
 | 8m | Switzerland edition in Portuguese and French (site language switch, FAQ, e-books, media kit, newsletter): apply in prompts 02, 04, 06 | CTO | To do | 2026-11-06 |
-
 | 8n | Run ops/prompts/07_build_direction_c_beta.md (build design C with colour photos, six editions, media kits, free beta preview) | CTO | To do | 2026-10-31 |
 | 8o | Create the free Cloudflare account and connect the repo, following Claude Code's steps (no domain needed) | Operator | To do | 2026-10-27 |
 

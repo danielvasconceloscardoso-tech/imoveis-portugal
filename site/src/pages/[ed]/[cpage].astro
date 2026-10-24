@@ -1,0 +1,14 @@
+---
+// Pages already in direction C (D15): FAQ and "talk to a partner". Kept in their own route file so the
+// old stylesheet (Base.astro) is not bundled with them. Prompt 07 moves the other pages here.
+import FaqPage from "../../components/FaqPage.astro";
+import TalkPage from "../../components/TalkPage.astro";
+import { ED_ORDER, EDITIONS, type EdCode } from "../../i18n";
+
+export function getStaticPaths() {
+  return ED_ORDER.flatMap((ed) => (["faq", "talk"] as const).map((key) => ({ params: { ed, cpage: EDITIONS[ed].slugs[key] }, props: { key } })));
+}
+const ed = Astro.params.ed as EdCode;
+const { key } = Astro.props as { key: "faq" | "talk" };
+---
+{key === "faq" ? <FaqPage v={ed} /> : <TalkPage v={ed} />}

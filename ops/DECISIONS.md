@@ -24,3 +24,9 @@ One line per decision: date · decision · who decided.
 - 2026-10-24 · Switzerland edition is bilingual: Portuguese and French on site, newsletter, FAQ, e-books and media kit · Daniel
 - 2026-10-24 · D15: site and media kit design is direction C (Betão) with colour photography instead of black and white · Daniel
 - 2026-10-24 · D16: start with a free beta on Cloudflare Pages (pages.dev address, noindex, "Beta" mark); domains bought later · Daniel
+- 2026-10-24 · Prompt 02 plan approved (three directions first, then site, then media kits; outreach drafts in parallel) · Operator
+- 2026-10-24 · Outreach language: PT-PT for LU/CH and for companies based in Portugal, FR for companies based in France, PT-BR for the BR edition · Operator
+- 2026-10-24 · Nothing is published or sent (emails, merge to main, deploy, posts, newsletter, form or account changes) without the operator's explicit approval; work is prepared on the branch · Operator
+- 2026-10-24 · FAQ "talk to a partner" links go to a reader page per edition ("Falar com um parceiro" / "Parler à un partenaire" / "Talk to a partner"): partner categories (lawyer, bank, tax adviser, money transfer, developer), first partners announced at launch, and a short request form (category, country, question, consent) to the brand mailbox, counted monthly per category for the media kit. Home buying or selling requests go only to the partner agency (D14) · Daniel
+- 2026-10-24 · USA and Israel FAQ content, plans and drafts are written now and rendered when the us/il editions are added (prompt 07) · Daniel
+- 2026-10-24 · Content week 1 is the pre-launch week of Mon 9 Nov 2026: social content and the free e-book / sign-up push run from 9 Nov; the first newsletter goes out on Tue 1 Dec · Daniel

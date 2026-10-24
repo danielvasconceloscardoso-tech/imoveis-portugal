@@ -1,0 +1,48 @@
+---
+// "Falar com um parceiro" (decided 24 Oct 2026): reader requests by category to the brand mailbox until
+// partners exist. Home buying or selling requests go only to the partner agency (D14).
+import C from "../layouts/C.astro";
+import Embed from "./Embed.astro";
+import { config } from "../config";
+import { strings, categories, links, tFor, type Variant } from "../lib/content";
+
+interface Props { v: Variant; }
+const { v } = Astro.props;
+const S = strings(v);
+const L = links(v);
+const T = tFor(v);
+---
+<C v={v} page="talk" title={`${S.talk.title} | Imóveis Portugal`} description={S.talk.lede}>
+  <div class="w ph g">
+    <h1>{S.talk.title}</h1>
+    <p class="lede">{S.talk.lede}</p>
+  </div>
+  <div class="block">
+    <div class="w g"><p>{S.talk.launch}</p></div>
+  </div>
+  <div class="w">
+    <section class="row g" aria-labelledby="cats">
+      <h2 id="cats">{S.talk.catsH}</h2>
+      <ul class="body cats">
+        {categories(v).map((c) => (
+          <li id={c.id}><h3>{c.name}</h3><p>{c.desc}</p></li>
+        ))}
+      </ul>
+    </section>
+    <section class="row g" aria-labelledby="form">
+      <h2 id="form">{S.talk.formH}</h2>
+      <div class="body">
+        <p>{S.talk.formIntro}</p>
+        <Embed id={config.forms.partnerRequest[v]} title={S.talk.formH} pending={T.formPending(config.contactEmail)} hidden={{ edition: v }} height={520} />
+        <p class="small"><a href={L.privacy}>{T.footer.privacy}</a></p>
+      </div>
+    </section>
+    <section class="row g" aria-labelledby="buy">
+      <h2 id="buy">{S.talk.buyH}</h2>
+      <div class="body">
+        <p>{S.talk.buyP}</p>
+        <a class="btn" href={L.buy}>{S.talk.buyA}</a>
+      </div>
+    </section>
+  </div>
+</C>

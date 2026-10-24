@@ -23,7 +23,14 @@ export const config = {
     newsletter: { lu: "", fr: "", ch: "", br: "" } as Record<string, string>,
     sponsor: { lu: "", fr: "", ch: "", br: "" } as Record<string, string>,
     buyer: { lu: "", fr: "", ch: "", br: "" } as Record<string, string>,
+    // "Falar com um parceiro" request form (category, country, question, consent) to the brand
+    // mailbox. Switzerland has one per language ("ch" Portuguese, "ch-fr" French). See ops/SETUP.md.
+    partnerRequest: { lu: "", fr: "", ch: "", "ch-fr": "", br: "" } as Record<string, string>,
   },
+
+  // true once the free e-books are approved and their download pages exist (prompt 04).
+  // Until then, FAQ "guide" links point to the newsletter signup.
+  ebooksLive: false,
 
   // Billing / publishing entity (D4). Required for the legal notice and privacy policy.
   entity: {

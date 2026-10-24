@@ -1,0 +1,13 @@
+---
+// Switzerland in French (/ch/fr/…). For now the FAQ and "Parler à un partenaire"; prompt 07 adds the other pages.
+import FaqPage from "../../../components/FaqPage.astro";
+import TalkPage from "../../../components/TalkPage.astro";
+import { variant } from "../../../lib/content";
+
+export function getStaticPaths() {
+  const s = variant("ch-fr").slugs;
+  return [{ params: { page: s.faq }, props: { key: "faq" } }, { params: { page: s.talk }, props: { key: "talk" } }];
+}
+const { key } = Astro.props as { key: "faq" | "talk" };
+---
+{key === "faq" ? <FaqPage v="ch-fr" /> : <TalkPage v="ch-fr" />}

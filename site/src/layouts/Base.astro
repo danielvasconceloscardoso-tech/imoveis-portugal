@@ -60,6 +60,10 @@ const alternates = ed && (page === "home" || page === "partners" || page === "bu
         {T && <span>{T.footer.sponsored}</span>}
         {E && T && (
           <span>
+            <a href={pathFor(E.code, "faq")}>{E.dict === "fr" ? "Questions fréquentes" : "Perguntas frequentes"}</a>
+            {" "}&nbsp;{" "}
+            <a href={pathFor(E.code, "talk")}>{E.dict === "fr" ? "Parler à un partenaire" : "Falar com um parceiro"}</a>
+            {" "}&nbsp;{" "}
             <a href={pathFor(E.code, "privacy")}>{T.footer.privacy}</a>
             {" "}&nbsp;{" "}
             <a href={pathFor(E.code, "legal")}>{T.footer.legal}</a>

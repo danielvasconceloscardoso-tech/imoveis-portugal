@@ -1,0 +1,11 @@
+# Israel edition (English): questions added to common-en.yaml. Rendered when the il edition is added (prompt 07).
+# Left out until verified (see content/faq/UNVERIFIED.md): "Can I finance a Portuguese home from Israel?"
+
+- id: il-01
+  q: Does Israel tax my rental income from Portugal?
+  a: >-
+    Under the Portugal–Israel tax treaty, Portugal may tax rental income from property in Portugal, and
+    Israel, as your country of residence, allows a credit for the tax paid in Portugal. How Israel calculates
+    its own tax on that income follows Israeli rules.
+  cta: talk-tax
+  facts: [il-pt-treaty-property]

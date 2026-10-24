@@ -1,0 +1,107 @@
+# Common FAQ, English (US spelling). Used by the US and IL editions (rendered when they are added, prompt 07).
+# Same rules and fact ids as common-pt.yaml.
+
+- id: en-01
+  q: Can I buy property in Portugal if I don't live there?
+  a: >-
+    Yes. Non-residents buy homes in Portugal, and the property transfer tax code even has a specific rate for
+    them. You need a Portuguese tax number (NIF) before signing. Residents outside the EU must appoint a tax
+    representative in Portugal, unless they sign up for the tax authority's electronic notifications.
+  cta: talk-lawyer
+  facts: [pt-nonresidents-buy, pt-nif-nonresident, pt-tax-rep]
+
+- id: en-02
+  q: How much does it cost on top of the price?
+  a: >-
+    Property transfer tax (IMT), stamp duty of 0.8% of the price, the deed and registration. Since May 2026,
+    buyers who are not tax residents in Portugal pay IMT at a flat 7.5%, with exceptions such as becoming a tax
+    resident within two years. With a mortgage, add stamp duty of 0.6% on the loan and 4% on the interest.
+  cta: guide
+  facts: [pt-is-purchase, pt-imt-nonresident-flat, pt-imt-nonresident-exceptions, pt-is-loan-5y, pt-is-interest]
+
+- id: en-03
+  q: Can I get a mortgage in Portugal as a non-resident?
+  a: >-
+    Each bank decides and assesses the borrower's income. Banco de Portugal's limits apply to all: a loan can
+    reach 90% of the value for an owner-occupied main home and 80% for other purposes, such as a vacation home.
+    The reference value is the lower of the price and the appraisal.
+  cta: talk-bank
+  facts: [pt-ltv-limits]
+
+- id: en-04
+  q: Do I have to be in Portugal to sign?
+  a: >-
+    No. You can give a power of attorney, for example to a lawyer, signed at a Portuguese consulate or before
+    a notary where you live. A power of attorney signed before a foreign notary needs a Hague Apostille to take
+    effect in Portugal.
+  cta: talk-lawyer
+  facts: [pt-poa-apostille]
+
+- id: en-05
+  q: What is a CPCV?
+  a: >-
+    The promissory purchase contract signed before the deed. It fixes the price, the date and the deposit.
+    If the buyer pulls out through their own fault, they lose the deposit; if the seller does, the buyer can
+    claim double what they paid (Portuguese Civil Code, article 442). A partner lawyer can review it before you sign.
+  cta: talk-lawyer
+  facts: [pt-sinal-442]
+
+- id: en-06
+  q: What taxes do I pay every year?
+  a: >-
+    IMI, a municipal property tax between 0.3% and 0.45% of the property's tax value, with the rate set by each
+    municipality. The additional tax AIMI only applies to the total tax value above 600,000 € per person.
+  cta: talk-tax
+  facts: [pt-imi-rates, pt-aimi-deduction]
+
+- id: en-07
+  q: Can I rent it out?
+  a: >-
+    Yes, long term or as short-term rental (alojamento local), which needs prior registration; the municipality
+    can object within 60 days, or 90 in containment areas it defines. Residential rent earned by non-residents
+    is taxed in Portugal at 25%, with reductions for long leases. Your home country may tax it too.
+  cta: talk-tax
+  facts: [pt-al-registration, pt-rent-tax-nonresident]
+
+- id: en-08
+  q: How do I send the money?
+  a: >-
+    Through your bank or a money transfer provider, and exchange terms vary between them. Banks, notaries and
+    lawyers in Portugal must obtain information on the origin of funds when the transaction calls for it
+    (Law 83/2017), so they may ask for proof of where the money comes from.
+  cta: talk-fx
+  facts: [pt-aml-funds]
+
+- id: en-09
+  q: I inherited a house in Portugal. What now?
+  a: >-
+    The heirs decide together whether to keep, sell or rent it. Spouses or partners, children and parents are
+    exempt from Portugal's 10% stamp duty on inheritance; other heirs pay it. Registration and the other
+    formalities still apply to everyone.
+  cta: talk-lawyer
+  facts: [pt-is-inheritance-exempt]
+
+- id: en-10
+  q: Is now a good time to buy?
+  a: >-
+    We don't give investment advice. The facts: according to Portugal's statistics office (INE), house prices
+    rose 17.6% in 2025, the highest increase in the series. What matters is your budget, region and plans.
+    Tell us what you are looking for and our partner agency will show you what exists.
+  cta: agency
+  facts: [pt-ine-prices-2025]
+
+- id: en-11
+  q: Can you find me a house?
+  a: >-
+    Yes. Tell us the region, budget and timing. Our licensed partner agency contacts you, free of charge, and
+    can organize viewings for when you are in Portugal.
+  cta: agency
+  facts: []
+
+- id: en-12
+  q: Is this financial, legal or tax advice?
+  a: >-
+    No. We compile information from official sources so you understand the rules. For your own case, talk to a
+    professional: we can put you in touch with our partners.
+  cta: talk-lawyer
+  facts: []

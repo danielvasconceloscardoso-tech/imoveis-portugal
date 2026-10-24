@@ -1,0 +1,19 @@
+# USA edition (en-US): questions added to common-en.yaml. Rendered when the us edition is added (prompt 07).
+
+- id: us-01
+  q: Do I have to report my Portuguese bank account to the US?
+  a: >-
+    If the combined value of your foreign accounts goes over $10,000 at any time in the year, US persons file
+    an FBAR with FinCEN. Living abroad, you may also need Form 8938 if your foreign assets exceed $200,000 at
+    year end or $300,000 at any time (single filers; $400,000 and $600,000 for joint filers).
+  cta: talk-tax
+  facts: [us-fbar, us-8938-abroad]
+
+- id: us-02
+  q: Is the gain on selling my Portuguese home taxed in the US?
+  a: >-
+    Under the Portugal–US tax treaty, Portugal may tax gains on property located in Portugal, and the US keeps
+    the right to tax its citizens. The foreign tax credit (Form 1116) lets you offset Portuguese tax against
+    US tax on the same income.
+  cta: talk-tax
+  facts: [us-pt-treaty-gains]

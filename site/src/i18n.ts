@@ -1,7 +1,7 @@
 import { config } from "./config";
 
 export type EdCode = "lu" | "fr" | "ch" | "br";
-export type PageKey = "partners" | "buy" | "privacy" | "legal";
+export type PageKey = "partners" | "buy" | "privacy" | "legal" | "faq" | "talk";
 
 type Fact = { big: string; text: string; source: string; url: string };
 
@@ -19,7 +19,7 @@ export const EDITIONS: Record<EdCode, {
 }> = {
   lu: {
     code: "lu", lang: "pt-PT", hreflang: "pt-LU", dict: "pt", name: "Luxemburgo", domain: "imoveisportugal.lu",
-    slugs: { partners: "parceiros", buy: "comprar", privacy: "privacidade", legal: "aviso-legal" },
+    slugs: { partners: "parceiros", buy: "comprar", privacy: "privacidade", legal: "aviso-legal", faq: "perguntas-frequentes", talk: "falar-com-um-parceiro" },
     hero: "Comprar casa em Portugal a partir do Luxemburgo, com os custos reais.",
     from: "a partir do Luxemburgo",
     topics: ["Crédito no Luxemburgo ou em Portugal, impostos dos dois lados e o que muda no regresso."],
@@ -27,7 +27,7 @@ export const EDITIONS: Record<EdCode, {
   },
   fr: {
     code: "fr", lang: "fr-FR", hreflang: "fr-FR", dict: "fr", name: "France", domain: "imoveisportugal.fr",
-    slugs: { partners: "partenaires", buy: "acheter", privacy: "confidentialite", legal: "mentions-legales" },
+    slugs: { partners: "partenaires", buy: "acheter", privacy: "confidentialite", legal: "mentions-legales", faq: "questions-frequentes", talk: "parler-a-un-partenaire" },
     hero: "Acheter au Portugal depuis la France, avec les vrais chiffres.",
     from: "depuis la France",
     topics: ["Crédit en France ou au Portugal, fiscalité des deux côtés, successions et maisons de famille."],
@@ -35,7 +35,7 @@ export const EDITIONS: Record<EdCode, {
   },
   ch: {
     code: "ch", lang: "pt-PT", hreflang: "pt-CH", dict: "pt", name: "Suíça", domain: "imoveisportugal.ch",
-    slugs: { partners: "parceiros", buy: "comprar", privacy: "privacidade", legal: "aviso-legal" },
+    slugs: { partners: "parceiros", buy: "comprar", privacy: "privacidade", legal: "aviso-legal", faq: "perguntas-frequentes", talk: "falar-com-um-parceiro" },
     hero: "Comprar casa em Portugal a partir da Suíça, com os custos reais.",
     from: "a partir da Suíça",
     topics: ["Usar o 2.º pilar para comprar casa, câmbio do franco, impostos e o que muda na reforma em Portugal."],
@@ -43,7 +43,7 @@ export const EDITIONS: Record<EdCode, {
   },
   br: {
     code: "br", lang: "pt-BR", hreflang: "pt-BR", dict: "br", name: "Brasil", domain: "imoveisportugal.com.br",
-    slugs: { partners: "parceiros", buy: "comprar", privacy: "privacidade", legal: "aviso-legal" },
+    slugs: { partners: "parceiros", buy: "comprar", privacy: "privacidade", legal: "aviso-legal", faq: "perguntas-frequentes", talk: "falar-com-um-parceiro" },
     hero: "Comprar imóvel em Portugal morando no Brasil, com os custos reais.",
     from: "morando no Brasil",
     topics: ["Vistos e residência, câmbio do real, financiamento em Portugal e impostos para quem vem do Brasil."],
@@ -255,9 +255,9 @@ function privacyPT(ed: EdCode, br: boolean) {
     draft: "Rascunho. Os campos entre parênteses retos são preenchidos quando a entidade estiver definida.",
     sections: [
       ["Responsável", `${ph(e.name, "Entidade")}, ${ph(e.address, br ? "Endereço" : "Morada")}. ${br ? "Contato" : "Contacto"}: ${ph(config.contactEmail, "email")}.`],
-      ["Que dados tratamos e porquê", `Newsletter: nome próprio e email, com o seu consentimento (RGPD, art. 6.º, n.º 1, al. a)). Pedidos de compra: nome, contactos e o que procura, com o seu consentimento, para os enviarmos à agência imobiliária parceira ${ph(a.name, "agência")} (AMI ${ph(a.ami, "n.º")}). Pedidos de parceria: dados profissionais, para responder ao seu pedido (art. 6.º, n.º 1, al. b)).`],
-      ["Quem recebe os dados", "A agência parceira, só para pedidos de compra. Prestadores que tratam dados por nossa conta: beehiiv (envio da newsletter, EUA, com garantias adequadas para a transferência), Tally (formulários, UE), Cloudflare (alojamento e estatísticas sem cookies) e Cal.com (marcação de chamadas)."],
-      ["Durante quanto tempo", "Newsletter: até cancelar a subscrição. Pedidos de compra: 12 meses. Pedidos de parceria: durante a relação comercial e o prazo legal aplicável."],
+      ["Que dados tratamos e porquê", `Newsletter: nome próprio e email, com o seu consentimento (RGPD, art. 6.º, n.º 1, al. a)). Pedidos de compra: nome, contactos e o que procura, com o seu consentimento, para os enviarmos à agência imobiliária parceira ${ph(a.name, "agência")} (AMI ${ph(a.ami, "n.º")}). Pedidos de parceria: dados profissionais, para responder ao seu pedido (art. 6.º, n.º 1, al. b)). Pedidos a parceiros ("Falar com um parceiro"): categoria, país, pergunta e ${br ? "contato" : "contacto"}, com o seu consentimento, para responder e, se o autorizar, para os passar a um parceiro da categoria escolhida (art. 6.º, n.º 1, al. a)).`],
+      ["Quem recebe os dados", "A agência parceira, só para pedidos de compra. O parceiro da categoria escolhida, só para pedidos a parceiros e com o seu consentimento. Prestadores que tratam dados por nossa conta: beehiiv (envio da newsletter, EUA, com garantias adequadas para a transferência), Tally (formulários, UE), Cloudflare (alojamento e estatísticas sem cookies) e Cal.com (marcação de chamadas)."],
+      ["Durante quanto tempo", "Newsletter: até cancelar a subscrição. Pedidos de compra e pedidos a parceiros: 12 meses. Pedidos de parceria: durante a relação comercial e o prazo legal aplicável."],
       [br ? "Seus direitos" : "Os seus direitos", `Acesso, retificação, apagamento, oposição, limitação, portabilidade e retirada do consentimento a qualquer momento, escrevendo para o ${br ? "contato" : "contacto"} acima. ${br ? "Você também pode" : "Pode também"} apresentar queixa à autoridade de proteção de dados do seu país (por exemplo, CNPD em Portugal ou no Luxemburgo).`],
       ["Cookies", "Não usamos cookies de publicidade nem de estatística. Os formulários incorporados podem usar cookies técnicos do respetivo serviço."],
     ],
@@ -286,9 +286,9 @@ function privacyFR(ed: EdCode) {
     draft: "Brouillon. Les champs entre crochets seront complétés une fois l'entité définie.",
     sections: [
       ["Responsable du traitement", `${ph(e.name, "Entité")}, ${ph(e.address, "Adresse")}. Contact : ${ph(config.contactEmail, "email")}.`],
-      ["Données traitées et finalités", `Newsletter : prénom et email, sur la base de votre consentement (RGPD, art. 6, par. 1, a)). Demandes d'achat : nom, coordonnées et critères de recherche, avec votre consentement, transmis à l'agence immobilière partenaire ${ph(a.name, "agence")} (AMI ${ph(a.ami, "n°")}). Demandes de partenariat : données professionnelles, pour répondre à votre demande (art. 6, par. 1, b)).`],
-      ["Destinataires", "L'agence partenaire, uniquement pour les demandes d'achat. Sous-traitants : beehiiv (envoi de la newsletter, États-Unis, avec garanties appropriées pour le transfert), Tally (formulaires, UE), Cloudflare (hébergement et statistiques sans cookies) et Cal.com (prise de rendez-vous)."],
-      ["Durée de conservation", "Newsletter : jusqu'à votre désinscription. Demandes d'achat : 12 mois. Demandes de partenariat : pendant la relation commerciale et la durée légale applicable."],
+      ["Données traitées et finalités", `Newsletter : prénom et email, sur la base de votre consentement (RGPD, art. 6, par. 1, a)). Demandes d'achat : nom, coordonnées et critères de recherche, avec votre consentement, transmis à l'agence immobilière partenaire ${ph(a.name, "agence")} (AMI ${ph(a.ami, "n°")}). Demandes de partenariat : données professionnelles, pour répondre à votre demande (art. 6, par. 1, b)). Demandes à un partenaire (« Parler à un partenaire ») : catégorie, pays, question et coordonnées, avec votre consentement, pour répondre et, si vous l'acceptez, pour les transmettre à un partenaire de la catégorie choisie (art. 6, par. 1, a)).`],
+      ["Destinataires", "L'agence partenaire, uniquement pour les demandes d'achat. Le partenaire de la catégorie choisie, uniquement pour les demandes à un partenaire et avec votre consentement. Sous-traitants : beehiiv (envoi de la newsletter, États-Unis, avec garanties appropriées pour le transfert), Tally (formulaires, UE), Cloudflare (hébergement et statistiques sans cookies) et Cal.com (prise de rendez-vous)."],
+      ["Durée de conservation", "Newsletter : jusqu'à votre désinscription. Demandes d'achat et demandes à un partenaire : 12 mois. Demandes de partenariat : pendant la relation commerciale et la durée légale applicable."],
       ["Vos droits", "Accès, rectification, effacement, opposition, limitation, portabilité et retrait du consentement à tout moment, en écrivant au contact ci-dessus. Vous pouvez aussi saisir la CNIL."],
       ["Cookies", "Aucun cookie publicitaire ni de mesure d'audience. Les formulaires intégrés peuvent utiliser des cookies techniques de leur service."],
     ],
