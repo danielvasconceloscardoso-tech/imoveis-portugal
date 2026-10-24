@@ -12,10 +12,10 @@ Written 24 Oct 2026 by the CEO. Covers 26 Oct 2026 to 24 Jan 2027. Replaces the 
 | 2 | Featured listings | 49–99 € per listing per month | Agencies | 1–2 weeks |
 | 3 | Developer campaign | from 1,500 € | Developers with projects for foreign buyers | 2–4 weeks |
 | 4 | Founding partner (first 10) | Gold 4,800 €, Silver 1,800 €, Bronze 540 € in year 1 | Banks, lawyers, credit brokers, FX, services | 2–6 weeks |
-| 5 | Shared commission on buyer leads | about 3,000–4,000 € per sale | Partner agency | 2–6 months (at deed) |
+| 5 | Partner agency sponsorship, sized on sales from our readers | to agree with the agency (reference: about 3,000–4,000 € per sale) | Partner agency | 2–6 months (at deed) |
 | 6 | Annual Gold at list price | 8,000–12,000 € | Banks, large firms | After launch, with real numbers |
 
-Prices in row 4 are list prices minus the 40% founding discount. Whether to also sell pay-per-lead pilots is open (D3, D6).
+Prices in row 4 are list prices minus the 40% founding discount (D3). Every paid relationship, including the agency's, is a flat sponsorship; no per-lead fees (D6).
 
 ## 2. Week by week
 
@@ -26,7 +26,7 @@ Prices in row 4 are list prices minus the 40% founding discount. Whether to also
 | 3 | 9 – 15 Nov | Decisão / Paperjam event in Luxembourg (10 Nov); first founding partners | 2,000 € | 2 partners |
 | 4 | 16 – 22 Nov | Free guide live; waiting list open in all four countries | 5,000 € | 3 partners · 300 sign-ups |
 | 5 | 23 – 29 Nov | Content stock for launch; Meta Ad Library pass for LU and CH | 8,000 € | 5 partners · 600 sign-ups |
-| 6 | 30 Nov – 6 Dec | **Launch, all four editions, same day (proposed 1 Dec, D5)** | 10,000 € | 1,000 subscribers |
+| 6 | 30 Nov – 6 Dec | **Launch, all four editions, Tue 1 Dec (D5)** | 10,000 € | 1,000 subscribers |
 | 7 | 7 – 13 Dec | First buyer leads to the agency; first sponsor report | 13,000 € | 7 partners · 1,500 subs |
 | 8 | 14 – 20 Dec | Christmas campaign: "visiting houses while you're home" | 16,000 € | 2,000 subs · 10 leads |
 | 9 | 21 – 27 Dec | Viewings with the agency during the holidays | 20,000 € | 10 founding partners |
@@ -54,7 +54,7 @@ Peaks: Christmas (15 Dec – 5 Jan), Easter, and August, when emigrants are in P
 
 | # | Assumption | Test | Kill or change if |
 | --- | --- | --- | --- |
-| 1 | Sponsors pay before there is an audience | 40 emails, 10 calls by 8 Nov | Fewer than 2 yes by 22 Nov: switch to pay-per-lead or barter |
+| 1 | Sponsors pay before there is an audience | 40 emails, 10 calls by 8 Nov | Fewer than 2 yes by 22 Nov: lower founding prices or offer content swaps |
 | 2 | Founding prices are acceptable | Price objection count on calls | More than half object: cut Silver to 990 € |
 | 3 | Emigrants will subscribe | Waiting list with free guide, shared in 10 Facebook groups | Fewer than 300 sign-ups by 22 Nov |
 | 4 | One brand account works for four countries | Engagement per edition caption | One edition's engagement is under half of the others |
@@ -65,15 +65,11 @@ Peaks: Christmas (15 Dec – 5 Jan), Easter, and August, when emigrants are in P
 | 9 | AI content does not read as AI | Weekly human review, reply rate | Unsubscribe rate above 1% per send |
 | 10 | Anonymity holds | Check WHOIS, commits, legal pages | Any page or record shows a founder name |
 
-## 5. Legal checks before money changes hands (owner: Daniel)
+## 5. Legal frame (checked by Daniel, D6)
 
-1. **Pay-per-lead to lawyers.** The Portuguese Bar Statute (Lei 145/2015) restricts client solicitation through third parties. Default: lawyers buy flat sponsorship only.
-2. **Pay-per-lead to banks and credit brokers.** Fees for presenting credit customers may count as credit intermediation (Decreto-Lei 81-C/2017, Banco de Portugal registration). Default: flat sponsorship only.
-3. **Commission share with the agency.** Real estate mediation is a licensed activity (Lei 15/2013). The agreement should be a marketing or referral contract reviewed against that law.
-4. **Sponsored content.** Always labelled as advertising (Código da Publicidade, DL 330/90) and the equivalent rules in each edition's country.
-5. **Outreach and newsletter.** See sponsors/METHOD.md for the GDPR and ePrivacy bases per country.
-
-Article numbers to be confirmed by Daniel; the defaults above apply until then.
+1. **Every paid relationship is a sponsorship**, as for conferences: lawyers, banks, credit brokers, developers and the partner agency all pay a flat sponsorship. No per-lead fees.
+2. **Sponsored content** is always labelled as advertising (Código da Publicidade, DL 330/90) and the equivalent rules in each edition's country.
+3. **Outreach and newsletter:** see sponsors/METHOD.md for the GDPR and ePrivacy bases per country.
 
 ## 6. What changed from v1
 
