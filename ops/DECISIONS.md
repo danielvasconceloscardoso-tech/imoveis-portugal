@@ -20,3 +20,5 @@ One line per decision: date · decision · who decided.
 - 2026-10-24 · Developers (including foreign-capital developers) confirmed as sponsors · Daniel
 - 2026-10-24 · D13: the USA and Israel editions are branded "Portugal Home Guides" (English); domains to be chosen · Daniel
 - 2026-10-24 · D14: the partner agency is the only real-estate agency on the platform; all buyer requests and calls are centralised there · Daniel
+- 2026-10-24 · D13 revised: USA and Israel sites stay under the Imóveis Portugal brand on country domains (e.g. .us and an Israeli domain); their social accounts are named "Portugal Home Guides" (this adds one English account per platform to D2) · Daniel
+- 2026-10-24 · Switzerland edition is bilingual: Portuguese and French on site, newsletter, FAQ, e-books and media kit · Daniel

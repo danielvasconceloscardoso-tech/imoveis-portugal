@@ -6,7 +6,9 @@ To run: in Claude Code, type "Read ops/prompts/05_usa_israel_editions.md and app
 
 ## Decision (D10, revised 24 Oct 2026)
 
-Six editions launch together on Tue 1 Dec 2026: Luxembourg, France, Switzerland, Brazil, **USA** and **Israel**. Both new editions are in English (US spelling). Hebrew for Israel comes later, only when a sponsor pays for a professional translator. Brand name and domains for the two English editions are decision D13 (open): build with the edition codes `us` and `il` under the current site and keep names and domains in config so they can change without code changes.
+Six editions launch together on Tue 1 Dec 2026: Luxembourg, France, Switzerland, Brazil, **USA** and **Israel**. Both new editions are in English (US spelling). Hebrew for Israel comes later, only when a sponsor pays for a professional translator. D13: the sites stay under the Imóveis Portugal brand on country domains (for example imoveisportugal.us and an Israeli domain); social accounts are named "Portugal Home Guides". Build with the edition codes `us` and `il` and keep domains in config.
+
+Also apply to all prompts: the Switzerland edition is bilingual, Portuguese and French.
 
 ## Who reads them and what they need
 

@@ -56,9 +56,9 @@ No. We compile information from official sources so you understand the rules. Fo
 1. Dois-je déclarer mon bien au Portugal en France ? **[check: Portugal–France tax treaty; declaration of foreign income and accounts]** **[talk-tax]**
 2. Succession d'un bien au Portugal : quelle loi s'applique ? **[check: EU Succession Regulation 650/2012, last habitual residence]** **[talk-lawyer]**
 
-### Switzerland
-1. Posso usar o 2.º pilar para comprar casa em Portugal? **[check: Swiss rules on early withdrawal for own main residence abroad]** **[talk-tax]**
-2. E o 3.º pilar (3a)? **[check]** **[talk-tax]**
+### Switzerland (in Portuguese and French)
+1. PT: Posso usar o 2.º pilar para comprar casa em Portugal? / FR : Puis-je utiliser mon 2e pilier pour acheter au Portugal ? **[check: Swiss rules on early withdrawal for own main residence abroad]** **[talk-tax]**
+2. PT: E o 3.º pilar (3a)? / FR : Et le 3e pilier (3a) ? **[check]** **[talk-tax]**
 
 ### Brazil
 1. Preciso de visto para comprar imóvel em Portugal? Não para comprar; morar é outra questão **[check: residence routes used by Brazilians]** **[talk-lawyer]**

@@ -61,6 +61,18 @@ Written by the CEO, 24 Oct 2026. Feeds the weekly batch for all six editions. Fo
 9. Comprar sem estar em Portugal: a procuração explicada
 10. O que 300 000 € compram no Norte e no Algarve
 
+### Switzerland (FR)
+1. Votre 2e pilier peut financer votre maison au Portugal : les règles
+2. Francs en euros : transférer sans perdre d'argent
+3. La retraite au Portugal après la Suisse : ce qui change
+4. Combien coûte vraiment un achat au Portugal depuis la Suisse
+5. Le 3e pilier et la maison au Portugal : ce qui est possible
+6. La maison du retour : acheter maintenant ou attendre ?
+7. Les 5 erreurs qui coûtent cher quand on achète à distance
+8. Louer au Portugal en vivant en Suisse : les impôts des deux côtés
+9. Signer sans être sur place : la procuration expliquée
+10. Ce que 300 000 € permettent d'acheter dans le Nord et en Algarve
+
 ### Brazil (PT-BR)
 1. Brasileiro pode comprar imóvel em Portugal sem morar lá? Pode, e é assim
 2. Quanto custa de verdade um apartamento de 300 mil euros em Portugal
