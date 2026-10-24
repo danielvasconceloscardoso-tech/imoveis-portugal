@@ -1,39 +1,20 @@
 // Reader-facing content that lives outside the site code: FAQ (content/faq/*.yaml), the facts base
 // (content/facts/facts.csv) and the disclaimers (content/EDITORIAL_POLICY.md). Read at build time.
-// Also the "variants": an edition in one language. Switzerland has two (ch = PT, ch-fr = FR).
-import { readFileSync } from "node:fs";
-import { fileURLToPath } from "node:url";
-import { dirname, join } from "node:path";
+// D18: every page exists in pt, en and fr; editions only change country-specific content.
+import { readFileSync, existsSync } from "node:fs";
+import { join } from "node:path";
 import yaml from "js-yaml";
 import { config } from "../config";
-import { EDITIONS, t, type EdCode } from "../i18n";
+import { pathFor, HTML_LANG, type EdCode, type Lang } from "../i18n";
 
-const contentDir = join(dirname(fileURLToPath(import.meta.url)), "../../../content");
+// Builds run from site/ (npm run build, Cloudflare root directory "site"); content/ sits next to it.
+const contentDir = join(process.cwd(), "..", "content");
 
-export type Variant = "lu" | "fr" | "ch" | "ch-fr" | "br";
-export const VARIANTS: Variant[] = ["lu", "fr", "ch", "ch-fr", "br"];
-type Dict = "pt" | "fr" | "br";
 type Cat = "lawyer" | "bank" | "tax" | "fx" | "developer";
 export type CtaKey = "talk-lawyer" | "talk-bank" | "talk-tax" | "talk-fx" | "talk-developer" | "agency" | "guide";
 
-const V: Record<Variant, { ed: EdCode; lang: string; hreflang: string; dict: Dict; prefix: string; faq: [string, string]; slugs: { faq: string; talk: string } }> = {
-  lu: { ed: "lu", lang: "pt-PT", hreflang: "pt-LU", dict: "pt", prefix: "/lu", faq: ["common-pt", "lu"], slugs: { faq: "perguntas-frequentes", talk: "falar-com-um-parceiro" } },
-  fr: { ed: "fr", lang: "fr-FR", hreflang: "fr-FR", dict: "fr", prefix: "/fr", faq: ["common-fr", "fr"], slugs: { faq: "questions-frequentes", talk: "parler-a-un-partenaire" } },
-  ch: { ed: "ch", lang: "pt-PT", hreflang: "pt-CH", dict: "pt", prefix: "/ch", faq: ["common-pt", "ch-pt"], slugs: { faq: "perguntas-frequentes", talk: "falar-com-um-parceiro" } },
-  "ch-fr": { ed: "ch", lang: "fr-CH", hreflang: "fr-CH", dict: "fr", prefix: "/ch/fr", faq: ["common-fr", "ch-fr"], slugs: { faq: "questions-frequentes", talk: "parler-a-un-partenaire" } },
-  br: { ed: "br", lang: "pt-BR", hreflang: "pt-BR", dict: "br", prefix: "/br", faq: ["common-br", "br"], slugs: { faq: "perguntas-frequentes", talk: "falar-com-um-parceiro" } },
-};
-export const variant = (v: Variant) => V[v];
-// Shared UI strings from i18n.ts in the variant's language (Swiss French uses the French ones).
-export const tFor = (v: Variant) => t(v === "ch-fr" ? "fr" : V[v].ed);
-
-export type PageC = "faq" | "talk";
-export const pathC = (v: Variant, page: PageC) => `${V[v].prefix}/${V[v].slugs[page]}/`;
-const edHome = (v: Variant) => `/${V[v].ed}/`;
-const edPath = (v: Variant, key: "partners" | "buy" | "privacy" | "legal") => `/${V[v].ed}/${EDITIONS[V[v].ed].slugs[key]}/`;
-
 // ---------- facts ----------
-export type Fact = { id: string; claim: string; source_title: string; source_url: string; checked_on: string };
+export type Fact = { id: string; claim: string; value: string; source_title: string; source_url: string; checked_on: string };
 function parseCsv(text: string): string[][] {
   const rows: string[][] = []; let row: string[] = []; let cell = ""; let q = false;
   for (let i = 0; i < text.length; i++) {
@@ -53,12 +34,15 @@ export const FACTS: Record<string, Fact> = Object.fromEntries(
   factRows.slice(1).filter((r) => r[0]).map((r) => [r[0], Object.fromEntries(head.map((h, i) => [h, r[i]])) as Fact]),
 );
 
-// ---------- FAQ ----------
+// ---------- FAQ: common-{lang}.yaml plus the edition's own {ed}-{lang}.yaml ----------
 export type FaqItem = { id: string; q: string; a: string; cta: CtaKey; facts: string[] };
-const loadYaml = (name: string) => (yaml.load(readFileSync(join(contentDir, "faq", `${name}.yaml`), "utf8")) || []) as FaqItem[];
+const loadYaml = (name: string) => {
+  const f = join(contentDir, "faq", `${name}.yaml`);
+  return existsSync(f) ? ((yaml.load(readFileSync(f, "utf8")) || []) as FaqItem[]) : [];
+};
 // Order: common 1–9, then the edition's own questions, then common 10–12 (market, agency, advice).
-export function faqFor(v: Variant): FaqItem[] {
-  const [common, own] = V[v].faq.map(loadYaml);
+export function faqFor(ed: EdCode, lang: Lang): FaqItem[] {
+  const common = loadYaml(`common-${lang}`), own = loadYaml(`${ed}-${lang}`);
   for (const it of [...common, ...own]) for (const f of it.facts || []) if (!FACTS[f]) throw new Error(`FAQ ${it.id}: unknown fact ${f}`);
   return [...common.slice(0, 9), ...own, ...common.slice(9)];
 }
@@ -70,19 +54,15 @@ const disclaimerFor = (label: string) => {
   if (!m) throw new Error(`disclaimer ${label} not found in EDITORIAL_POLICY.md`);
   return m[1].trim();
 };
-const DISCLAIMER: Record<Dict, string> = { pt: disclaimerFor("PT (LU, CH)"), fr: disclaimerFor("FR"), br: disclaimerFor("PT-BR") };
+export const DISCLAIMER: Record<Lang, string> = { pt: disclaimerFor("PT (LU, CH)"), fr: disclaimerFor("FR"), en: disclaimerFor("EN (future US and Israel editions)") };
 
 // ---------- UI strings ----------
 const CATS: Cat[] = ["lawyer", "bank", "tax", "fx", "developer"];
 const S = {
   pt: {
-    beta: "Beta", nav: { faq: "Perguntas", talk: "Falar com um parceiro" }, langSwitch: "Língua",
-    faq: {
-      title: "Perguntas frequentes",
-      lede: "Respostas curtas sobre comprar casa em Portugal a partir do estrangeiro, com a fonte oficial de cada número.",
-      sources: "Fontes", checked: "Verificado a",
-    },
-    cta: { lawyer: "Falar com um advogado parceiro", bank: "Falar com um banco parceiro", tax: "Falar com um consultor fiscal parceiro", fx: "Falar com um parceiro de transferências", developer: "Falar com um promotor parceiro", agency: "Pedir contacto da agência parceira", guide: "Receber o guia gratuito", newsletter: "Receber a newsletter" },
+    beta: "Beta", skip: "Saltar para o conteúdo", langSwitch: "Língua", nav: { faq: "Perguntas", talk: "Falar com um parceiro", guide: "Guia gratuito" },
+    faq: { title: "Perguntas frequentes", lede: "Respostas curtas sobre comprar casa em Portugal a partir do estrangeiro, com a fonte oficial de cada número.", sources: "Fontes", checked: "Verificado a" },
+    cta: { lawyer: "Falar com um advogado parceiro", bank: "Falar com um banco parceiro", tax: "Falar com um consultor fiscal parceiro", fx: "Falar com um parceiro de transferências", developer: "Falar com um promotor parceiro", agency: "Pedir contacto da agência parceira", guide: "Descarregar o guia gratuito" },
     talk: {
       title: "Falar com um parceiro",
       lede: "Para a sua situação concreta, deixe-nos a pergunta e a categoria. Encaminhamos o pedido para um parceiro dessa categoria.",
@@ -92,35 +72,27 @@ const S = {
       formH: "O seu pedido", formIntro: "Categoria, país onde vive, a sua pergunta e o seu consentimento. Usamos estes dados apenas para responder e, se o autorizar, para os passar a um parceiro da categoria.",
       buyH: "Comprar ou vender casa?", buyP: "Esses pedidos seguem apenas para a agência imobiliária licenciada parceira.", buyA: "Pedir contacto da agência parceira",
     },
-    footer: { faq: "Perguntas frequentes", talk: "Falar com um parceiro" },
+    footer: { faq: "Perguntas frequentes", talk: "Falar com um parceiro", guide: "Guia gratuito" },
   },
-  br: {
-    beta: "Beta", nav: { faq: "Perguntas", talk: "Falar com um parceiro" }, langSwitch: "Idioma",
-    faq: {
-      title: "Perguntas frequentes",
-      lede: "Respostas curtas sobre comprar imóvel em Portugal morando fora, com a fonte oficial de cada número.",
-      sources: "Fontes", checked: "Verificado em",
-    },
-    cta: { lawyer: "Falar com um advogado parceiro", bank: "Falar com um banco parceiro", tax: "Falar com um consultor tributário parceiro", fx: "Falar com um parceiro de câmbio", developer: "Falar com uma incorporadora parceira", agency: "Pedir contato da imobiliária parceira", guide: "Receber o guia gratuito", newsletter: "Receber a newsletter" },
+  en: {
+    beta: "Beta", skip: "Skip to content", langSwitch: "Language", nav: { faq: "FAQ", talk: "Talk to a partner", guide: "Free guide" },
+    faq: { title: "Frequently asked questions", lede: "Short answers on buying a home in Portugal from abroad, with the official source for every number.", sources: "Sources", checked: "Checked on" },
+    cta: { lawyer: "Talk to a partner lawyer", bank: "Talk to a partner bank", tax: "Talk to a partner tax adviser", fx: "Talk to a money transfer partner", developer: "Talk to a partner developer", agency: "Request a contact from the partner agency", guide: "Download the free guide" },
     talk: {
-      title: "Falar com um parceiro",
-      lede: "Para o seu caso concreto, deixe a pergunta e a categoria. Encaminhamos o pedido para um parceiro dessa categoria.",
-      launch: "Os primeiros parceiros serão anunciados no lançamento, em 1º de dezembro de 2026. Até lá, recebemos seu pedido por email e respondemos quando houver um parceiro na categoria.",
-      catsH: "Categorias",
-      cats: { lawyer: ["Advogado", "Compra à distância, procuração, contrato-promessa, herança."], bank: ["Banco", "Financiamento para quem mora fora."], tax: ["Consultor tributário", "Impostos em Portugal e no Brasil."], fx: ["Câmbio e remessas", "Envio de valores altos do Brasil para Portugal."], developer: ["Incorporadora", "Empreendimentos novos e na planta."] },
-      formH: "Seu pedido", formIntro: "Categoria, país onde você mora, sua pergunta e seu consentimento. Usamos esses dados só para responder e, se você autorizar, para passá-los a um parceiro da categoria.",
-      buyH: "Comprar ou vender imóvel?", buyP: "Esses pedidos vão apenas para a imobiliária licenciada parceira.", buyA: "Pedir contato da imobiliária parceira",
+      title: "Talk to a partner",
+      lede: "For your own situation, leave us your question and the category. We pass the request to a partner in that category.",
+      launch: "The first partners are announced at launch, on 1 December 2026. Until then, we receive your request by email and reply once there is a partner in the category.",
+      catsH: "Categories",
+      cats: { lawyer: ["Lawyer", "Buying from abroad, power of attorney, promissory contract, inheritance."], bank: ["Bank", "Mortgages for people living abroad."], tax: ["Tax adviser", "Tax in Portugal and in your country."], fx: ["Money transfer", "Currency exchange and large transfers."], developer: ["Developer", "New and off-plan developments."] },
+      formH: "Your request", formIntro: "Category, country where you live, your question and your consent. We use these details only to reply and, if you agree, to pass them to a partner in the category.",
+      buyH: "Buying or selling a home?", buyP: "Those requests go only to the licensed partner real-estate agency.", buyA: "Request a contact from the partner agency",
     },
-    footer: { faq: "Perguntas frequentes", talk: "Falar com um parceiro" },
+    footer: { faq: "FAQ", talk: "Talk to a partner", guide: "Free guide" },
   },
   fr: {
-    beta: "Bêta", nav: { faq: "Questions", talk: "Parler à un partenaire" }, langSwitch: "Langue",
-    faq: {
-      title: "Questions fréquentes",
-      lede: "Des réponses courtes sur l'achat d'un bien au Portugal depuis l'étranger, avec la source officielle de chaque chiffre.",
-      sources: "Sources", checked: "Vérifié le",
-    },
-    cta: { lawyer: "Parler à un avocat partenaire", bank: "Parler à une banque partenaire", tax: "Parler à un conseiller fiscal partenaire", fx: "Parler à un partenaire de transfert", developer: "Parler à un promoteur partenaire", agency: "Demander un contact de l'agence partenaire", guide: "Recevoir le guide gratuit", newsletter: "Recevoir la newsletter" },
+    beta: "Bêta", skip: "Aller au contenu", langSwitch: "Langue", nav: { faq: "Questions", talk: "Parler à un partenaire", guide: "Guide gratuit" },
+    faq: { title: "Questions fréquentes", lede: "Des réponses courtes sur l'achat d'un bien au Portugal depuis l'étranger, avec la source officielle de chaque chiffre.", sources: "Sources", checked: "Vérifié le" },
+    cta: { lawyer: "Parler à un avocat partenaire", bank: "Parler à une banque partenaire", tax: "Parler à un conseiller fiscal partenaire", fx: "Parler à un partenaire de transfert", developer: "Parler à un promoteur partenaire", agency: "Demander un contact de l'agence partenaire", guide: "Télécharger le guide gratuit" },
     talk: {
       title: "Parler à un partenaire",
       lede: "Pour votre situation, laissez-nous votre question et la catégorie. Nous transmettons la demande à un partenaire de cette catégorie.",
@@ -130,24 +102,26 @@ const S = {
       formH: "Votre demande", formIntro: "Catégorie, pays de résidence, votre question et votre consentement. Nous utilisons ces données uniquement pour répondre et, si vous l'acceptez, pour les transmettre à un partenaire de la catégorie.",
       buyH: "Acheter ou vendre un bien ?", buyP: "Ces demandes vont uniquement à l'agence immobilière agréée partenaire.", buyA: "Demander un contact de l'agence partenaire",
     },
-    footer: { faq: "Questions fréquentes", talk: "Parler à un partenaire" },
+    footer: { faq: "Questions fréquentes", talk: "Parler à un partenaire", guide: "Guide gratuit" },
   },
 };
-export const strings = (v: Variant) => ({ ...S[V[v].dict], disclaimer: DISCLAIMER[V[v].dict] });
-export const categories = (v: Variant) => CATS.map((c) => ({ id: c, name: S[V[v].dict].talk.cats[c][0], desc: S[V[v].dict].talk.cats[c][1] }));
+export const strings = (lang: Lang) => ({ ...S[lang], disclaimer: DISCLAIMER[lang] });
+export const categories = (lang: Lang) => CATS.map((c) => ({ id: c, name: S[lang].talk.cats[c][0], desc: S[lang].talk.cats[c][1] }));
 
 // ---------- links for the FAQ next steps ----------
-export function cta(v: Variant, key: CtaKey): { href: string; label: string } {
-  const s = S[V[v].dict].cta;
-  if (key.startsWith("talk-")) { const c = key.slice(5) as Cat; return { href: `${pathC(v, "talk")}#${c}`, label: s[c] }; }
-  if (key === "agency") return { href: edPath(v, "buy"), label: s.agency };
-  // The e-book pages come with prompt 04; until then the guide link goes to the newsletter signup.
-  return config.ebooksLive ? { href: `${edHome(v)}#guide`, label: s.guide } : { href: `${edHome(v)}#signup`, label: s.newsletter };
+export function cta(lang: Lang, ed: EdCode, key: CtaKey): { href: string; label: string } {
+  const s = S[lang].cta;
+  if (key.startsWith("talk-")) { const c = key.slice(5) as Cat; return { href: `${pathFor(lang, ed, "talk")}#${c}`, label: s[c] }; }
+  if (key === "agency") return { href: pathFor(lang, ed, "buy"), label: s.agency };
+  return { href: pathFor(lang, ed, "guide"), label: s.guide };
 }
-export const links = (v: Variant) => ({
-  home: edHome(v), partners: edPath(v, "partners"), buy: edPath(v, "buy"), privacy: edPath(v, "privacy"), legal: edPath(v, "legal"),
-  faq: pathC(v, "faq"), talk: pathC(v, "talk"),
-});
 
-export const fmtDate = (v: Variant, iso: string) =>
-  new Intl.DateTimeFormat(V[v].lang, { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(`${iso}T00:00:00Z`));
+export const fmtDate = (lang: Lang, iso: string) =>
+  new Intl.DateTimeFormat(HTML_LANG[lang], { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(`${iso}T00:00:00Z`));
+
+// ---------- free e-book (content/ebooks, built by `npm run ebooks`) ----------
+export const EBOOK = {
+  file: (lang: Lang) => `/ebooks/imoveis-portugal-guia-custos-${lang}.pdf`,
+  title: { pt: "Quanto custa mesmo comprar casa em Portugal", en: "What it really costs to buy in Portugal", fr: "Ce que coûte vraiment un achat au Portugal" } as Record<Lang, string>,
+};
+export const ebookLive = config.ebooksLive;

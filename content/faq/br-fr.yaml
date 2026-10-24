@@ -1,0 +1,19 @@
+# Brazil edition, French: questions added to common-fr.yaml.
+
+- id: br-fr-01
+  q: Faut-il un visa pour acheter au Portugal ?
+  a: >-
+    Pour acheter, non : des non-résidents achètent au Portugal et le code de l'IMT prévoit même un taux pour eux.
+    Pour y vivre, oui : il faut un visa de résidence, comme celui des personnes vivant de leurs revenus (D7) ou le
+    visa CPLP, qui donne ensuite accès à un titre de séjour délivré par l'AIMA.
+  cta: talk-lawyer
+  facts: [pt-nonresidents-buy, pt-visa-own-income, pt-cplp-residence]
+
+- id: br-fr-02
+  q: Dois-je déclarer le bien dans ma déclaration d'impôt brésilienne ?
+  a: >-
+    Si vous êtes résident fiscal au Brésil et déposez une déclaration IRPF, le bien figure dans « Bens e
+    Direitos », à sa valeur d'achat convertie en dollars puis en reais au cours vendeur de la Banque centrale à la
+    date d'achat. Avec des biens à l'étranger de 1 million de dollars ou plus au 31 décembre, la déclaration CBE s'ajoute.
+  cta: talk-tax
+  facts: [br-bens-exterior, br-cbe]

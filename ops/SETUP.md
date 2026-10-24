@@ -29,7 +29,7 @@ About 45 minutes. Everything else is done in the repo. Use the brand mailbox for
 
 ## 4. Forms in Tally (10 min)
 
-Create forms in Portuguese, French and Brazilian Portuguese (LU and CH share the Portuguese ones). In each form add a hidden field named `edition`. Settings → Notifications → send to the brand mailbox (buyer form: also to the partner agency).
+Create each form in Portuguese (Portugal), English and French (D18). In each form add hidden fields named `edition` and `lang`. Settings → Notifications → send to the brand mailbox (buyer form: also to the partner agency).
 
 **Sponsor enquiry:** company · name · role · business email · phone (optional) · category (bank/credit, law, FX, developer, agency, insurance, other) · editions of interest (LU, FR, CH, BR) · message. Note under the button: "We use these details only to reply to your request."
 
@@ -37,7 +37,7 @@ Create forms in Portuguese, French and Brazilian Portuguese (LU and CH share the
 
 The form ID is the end of the share link: `tally.so/r/w4Xyz1` → `w4Xyz1`.
 
-**Partner request ("Falar com um parceiro" / "Parler à un partenaire"):** one form per language: Portuguese (LU and CH), French (FR, plus a separate copy for Switzerland in French so requests can be counted per edition), Brazilian Portuguese. Fields: category (Advogado / Banco / Consultor fiscal / Transferências de dinheiro / Promotor imobiliário; no real-estate agency, D9 and D14) · country where you live · your question · first name · email · **unticked** checkbox: "I agree that my request is used to reply to me and, if I ask, passed to a partner in the chosen category." Hidden field `edition` (lu, fr, ch, ch-fr, br). Notifications → the brand mailbox only. Put the IDs in `config.forms.partnerRequest` in `site/src/config.ts`.
+**Partner request ("Falar com um parceiro" / "Talk to a partner" / "Parler à un partenaire"):** one form per language (PT, EN, FR). Fields: category (Advogado / Banco / Consultor fiscal / Transferências de dinheiro / Promotor imobiliário; no real-estate agency, D9 and D14) · country where you live · your question · first name · email · **unticked** checkbox: "I agree that my request is used to reply to me and, if I ask, passed to a partner in the chosen category." Hidden fields `edition` (lu, fr, ch, br) and `lang` (pt, en, fr). Notifications → the brand mailbox only. Put the IDs in `config.forms.partnerRequest` in `site/src/config.ts`.
 
 Monthly count for the media kit: Tally → the form → Submissions → filter by month → count per category. Write the totals (counts only, no names or emails) in ops/METRICS.md.
 

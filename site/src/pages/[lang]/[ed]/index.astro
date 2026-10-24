@@ -1,0 +1,76 @@
+---
+import Base from "../../../layouts/Base.astro";
+import Embed from "../../../components/Embed.astro";
+import { config } from "../../../config";
+import { EDITIONS, ED_ORDER, LANGS, t, sideFacts, pathFor, type EdCode, type Lang } from "../../../i18n";
+
+export function getStaticPaths() {
+  return LANGS.flatMap((lang) => ED_ORDER.map((ed) => ({ params: { lang, ed } })));
+}
+const lang = Astro.params.lang as Lang;
+const ed = Astro.params.ed as EdCode;
+const ED = EDITIONS[ed];
+const E = { name: ED.name[lang], hero: ED.hero[lang], fact: ED.fact[lang] };
+const T = t(ed, lang);
+const facts = sideFacts(ed, lang).slice(1);
+---
+<Base ed={ed} lang={lang} page="home" title={`Imóveis Portugal ${E.name}`} description={T.lede}>
+  <div class="wrap">
+    <section class="hero">
+      <div class="hero-fact">
+        <span class="n">{E.fact.big}</span>
+        <span class="t">{E.fact.text}</span>
+        <span class="s"><a href={E.fact.url} rel="noopener">{E.fact.source}</a></span>
+      </div>
+      <h1>{E.hero}</h1>
+      <p class="lede">{T.lede}</p>
+    </section>
+
+    <div class="cols">
+      <div>
+        <section class="block" aria-labelledby="signup">
+          <h2 id="signup">{T.signupTitle}</h2>
+          <Embed id={config.forms.newsletter[lang]} title={T.signupTitle} pending={T.formPending(config.contactEmail)} hidden={{ edition: ed, lang }} height={260} />
+        </section>
+
+        <section class="block" aria-labelledby="weekly">
+          <h2 id="weekly">{T.weeklyTitle}</h2>
+          <ul class="plain-list">
+            {T.weekly.map((w) => <li>{w}</li>)}
+          </ul>
+        </section>
+
+        <section class="block" aria-labelledby="faq">
+          <h2 id="faq">{{ pt: "Perguntas frequentes", en: "Frequently asked questions", fr: "Questions fréquentes" }[lang]}</h2>
+          <p>{{ pt: "Custos, crédito, impostos e procuração: respostas curtas, com a fonte oficial de cada número.", en: "Costs, mortgages, tax and power of attorney: short answers, with the official source for every number.", fr: "Frais, crédit, impôts et procuration : des réponses courtes, avec la source officielle de chaque chiffre." }[lang]}</p>
+          <a href={pathFor(lang, ed, "faq")}>{{ pt: "Ler as perguntas frequentes", en: "Read the FAQ", fr: "Lire les questions fréquentes" }[lang]}</a>
+          <p style="margin-top:1rem"><a href={pathFor(lang, ed, "guide")}>{{ pt: "Guia gratuito: quanto custa mesmo comprar casa em Portugal", en: "Free guide: what it really costs to buy in Portugal", fr: "Guide gratuit : ce que coûte vraiment un achat au Portugal" }[lang]}</a></p>
+        </section>
+
+        <div class="block cta-pair">
+          <section>
+            <h2>{T.buyCta.h}</h2>
+            <p>{T.buyCta.p}</p>
+            <a class="btn" href={pathFor(lang, ed, "buy")}>{T.buyCta.a}</a>
+          </section>
+          <section>
+            <h2>{T.partnersCta.h}</h2>
+            <p>{T.partnersCta.p}</p>
+            <a href={pathFor(lang, ed, "partners")}>{T.partnersCta.a}</a>
+          </section>
+        </div>
+      </div>
+
+      <aside class="rail" aria-labelledby="facts">
+        <h2 id="facts">{T.factsTitle}</h2>
+        {facts.map((f) => (
+          <div class="fact">
+            <span class="n">{f.big}</span>
+            <p>{f.text}</p>
+            <a href={f.url} rel="noopener">{f.source}</a>
+          </div>
+        ))}
+      </aside>
+    </div>
+  </div>
+</Base>

@@ -1,0 +1,17 @@
+# Switzerland edition, English: questions added to common-en.yaml.
+
+- id: ch-en-01
+  q: Can I use my 2nd pillar to buy a home in Portugal?
+  a: >-
+    Only for your main residence. Federal rules allow an early withdrawal from the 2nd pillar for the home you
+    live in, in Switzerland or abroad, but not for a holiday home. The minimum withdrawal is 20,000 francs.
+  cta: talk-tax
+  facts: [ch-2nd-pillar-abroad]
+
+- id: ch-en-02
+  q: What about the 3rd pillar (3a)?
+  a: >-
+    Pillar 3a money can also be withdrawn early to buy a home for your own use or to repay a mortgage. The exact
+    conditions, such as timing and age, depend on your contract and the federal rules.
+  cta: talk-tax
+  facts: [ch-3a-home]

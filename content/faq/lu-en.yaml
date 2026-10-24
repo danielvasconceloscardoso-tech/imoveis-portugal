@@ -1,0 +1,10 @@
+# Luxembourg edition, English: questions added to common-en.yaml.
+
+- id: lu-en-01
+  q: Do I declare rent from my Portuguese home in Luxembourg?
+  a: >-
+    The Portugal–Luxembourg tax treaty gives Portugal the right to tax rent from property located in
+    Portugal. Luxembourg exempts that income but may take it into account to set the tax rate on the rest of
+    your income. What you must declare in Luxembourg depends on your situation.
+  cta: talk-tax
+  facts: [lu-pt-treaty-property]

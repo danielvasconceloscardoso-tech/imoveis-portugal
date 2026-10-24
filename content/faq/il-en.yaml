@@ -1,5 +1,5 @@
 # Israel edition (English): questions added to common-en.yaml. Rendered when the il edition is added (prompt 07).
-# Left out until verified (see content/faq/UNVERIFIED.md): "Can I finance a Portuguese home from Israel?"
+# Left out until verified (content/faq/UNVERIFIED.md): "Can I finance a Portuguese home from Israel?"
 
 - id: il-01
   q: Does Israel tax my rental income from Portugal?

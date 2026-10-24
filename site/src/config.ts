@@ -17,15 +17,14 @@ export const config = {
   // Cal.com booking link for 15-minute sponsor calls.
   bookingUrl: "",
 
-  // Form embeds per edition. Tally form IDs (e.g. "w4Xyz1") or a full embed URL
-  // (beehiiv newsletter embeds are full URLs). LU and CH can share the Portuguese forms.
+  // Form embeds per language (D18): Tally form IDs (e.g. "w4Xyz1") or a full embed URL (beehiiv
+  // newsletter embeds are full URLs). Every form gets a hidden "edition" field from the page.
   forms: {
-    newsletter: { lu: "", fr: "", ch: "", br: "" } as Record<string, string>,
-    sponsor: { lu: "", fr: "", ch: "", br: "" } as Record<string, string>,
-    buyer: { lu: "", fr: "", ch: "", br: "" } as Record<string, string>,
-    // "Falar com um parceiro" request form (category, country, question, consent) to the brand
-    // mailbox. Switzerland has one per language ("ch" Portuguese, "ch-fr" French). See ops/SETUP.md.
-    partnerRequest: { lu: "", fr: "", ch: "", "ch-fr": "", br: "" } as Record<string, string>,
+    newsletter: { pt: "", en: "", fr: "" } as Record<string, string>,
+    sponsor: { pt: "", en: "", fr: "" } as Record<string, string>,
+    buyer: { pt: "", en: "", fr: "" } as Record<string, string>,
+    // "Talk to a partner" requests (category, country, question, consent) to the brand mailbox. See ops/SETUP.md.
+    partnerRequest: { pt: "", en: "", fr: "" } as Record<string, string>,
   },
 
   // true once the free e-books are approved and their download pages exist (prompt 04).

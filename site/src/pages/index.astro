@@ -1,20 +1,46 @@
 ---
-import Base from "../layouts/Base.astro";
-import { EDITIONS, ED_ORDER } from "../i18n";
-const sub: Record<string, string> = {
-  lu: "Para quem vive no Luxemburgo",
-  fr: "Pour ceux qui vivent en France",
-  ch: "Para quem vive na Suíça",
-  br: "Para quem mora no Brasil",
-};
+// Root: choose an edition and a language. Returning visitors go straight to their saved choice (D18).
+import "../styles/c.css";
+import { EDITIONS, ED_ORDER, LANGS, LANG_NAME, HTML_LANG, pathFor } from "../i18n";
+import { config } from "../config";
+const H = { pt: "Comprar casa em Portugal a partir de onde vive.", en: "Buying a home in Portugal from where you live.", fr: "Acheter au Portugal depuis là où vous vivez." };
 ---
-<Base title="Imóveis Portugal" description="Comprar casa em Portugal a partir do estrangeiro: Luxemburgo, França, Suíça e Brasil.">
-  <div class="wrap page-head">
-    <h1>Comprar casa em Portugal a partir de onde vive.</h1>
-    <ul class="chooser">
-      {ED_ORDER.map((c) => (
-        <li><a href={`/${c}/`} lang={EDITIONS[c].lang}><span class="c">{EDITIONS[c].name}</span><span class="d">{sub[c]}</span></a></li>
+<!doctype html>
+<html lang="pt-PT">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Imóveis Portugal</title>
+    <meta name="description" content="Comprar casa em Portugal a partir do estrangeiro. Buying a home in Portugal from abroad. Acheter au Portugal depuis l'étranger." />
+    {!config.launchReady && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <script is:inline>
+      try {
+        var l = localStorage.getItem("ip-lang"), e = localStorage.getItem("ip-ed");
+        if (["pt", "en", "fr"].indexOf(l) > -1 && ["lu", "fr", "ch", "br"].indexOf(e) > -1) location.replace("/" + l + "/" + e + "/");
+      } catch (_) {}
+    </script>
+  </head>
+  <body>
+    <header class="c-head"><div class="w"><span class="mark"><i aria-hidden="true"></i><b>Imóveis<br />Portugal</b></span></div></header>
+    <main id="main">
+      {LANGS.map((l) => (
+        <section class="w row g" lang={HTML_LANG[l]} aria-labelledby={`h-${l}`}>
+          <h2 id={`h-${l}`}>{LANG_NAME[l]}</h2>
+          <div class="body">
+            <p>{H[l]}</p>
+            <ul class="cats">
+              {ED_ORDER.map((ed) => (<li><a href={pathFor(l, ed, "home")} data-lang={l}>{EDITIONS[ed].name[l]}</a></li>))}
+            </ul>
+          </div>
+        </section>
       ))}
-    </ul>
-  </div>
-</Base>
+    </main>
+    <script is:inline>
+      document.addEventListener("click", function (e) {
+        var a = e.target.closest && e.target.closest("a[data-lang]");
+        if (a) try { localStorage.setItem("ip-lang", a.dataset.lang); } catch (_) {}
+      });
+    </script>
+  </body>
+</html>
