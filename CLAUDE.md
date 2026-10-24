@@ -4,7 +4,7 @@ You are the CTO of Imóveis Portugal. Strategy, content and sponsor sales come f
 
 ## The business in five lines
 
-1. A media brand for people living abroad who want to buy property in Portugal. Six editions, all launching Tue 1 Dec 2026: Luxembourg (imoveisportugal.lu), France (.fr), Switzerland (.ch), Brazil (.com.br), USA and Israel (English; names and domains open, D13). See ops/prompts/05_usa_israel_editions.md.
+1. A media brand for people living abroad who want to buy property in Portugal. Six editions, all launching Tue 1 Dec 2026: Luxembourg (imoveisportugal.lu), France (.fr), Switzerland (.ch), Brazil (.com.br), USA and Israel (English, branded "Portugal Home Guides", D13; domains open). See ops/prompts/05_usa_israel_editions.md.
 2. Core asset: one free weekly newsletter per edition. It is what sponsors buy and what gets sold at exit.
 3. Revenue, in order of speed: sponsor packages (Gold 8–12k €/yr, Silver 2.4–4.8k €/yr, Bronze 0.6–1.2k €/yr), developer campaigns (from 1,500 €), sponsorship by a licensed partner agency that receives buyer leads, paid calls (150 €/45 min), paid guides (29–49 €). Every paid relationship is a flat sponsorship, never a per-lead fee (decision D6). No other real-estate agencies as sponsors or outreach targets (decision D9).
 4. Founding Partner offer: first 10 sponsors get 40% off year 1, price locked for year 2.
@@ -17,7 +17,7 @@ You are the CTO of Imóveis Portugal. Strategy, content and sponsor sales come f
 3. **No personal data in the repo.** No subscriber lists, no lead details, no secrets. Secrets in environment variables only. Add a pre-commit check for secrets and emails.
 4. **GDPR by default.** Double opt-in, unticked consent box, privacy policy per edition, unsubscribe in every email, cookie-free analytics, sponsored content always labelled.
 5. **Free tier first.** No paid tool until a sponsor has paid. Annual budget before revenue ≈ domains only.
-6. **Leads go to the licensed partner agency.** We never act as an intermediary ourselves (licence requirement in Portugal).
+6. **Leads go to the licensed partner agency.** We never act as an intermediary ourselves (licence requirement in Portugal). It is the only real-estate agency on the platform; every buyer request and call goes there (D14).
 
 ## Preferred stack (propose changes with a reason)
 

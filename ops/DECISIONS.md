@@ -17,3 +17,6 @@ One line per decision: date · decision · who decided.
 - 2026-10-24 · D10: next country editions are USA and Israel (one edition per country, not a single international edition); added after the 1 Dec launch of the four editions; timing and green-light rule open · Daniel
 - 2026-10-24 · D12: editorial policy (content/EDITORIAL_POLICY.md): compile verifiable facts from primary sources, describe and never advise, disclaimer on every post and e-book, readers who need advice are connected with sponsors, sponsors may advise in labelled posts · Daniel
 - 2026-10-24 · D10 revised: USA and Israel editions launch on Tue 1 Dec 2026 with the other four (six editions), in English; Hebrew later when a sponsor pays for translation · Daniel
+- 2026-10-24 · Developers (including foreign-capital developers) confirmed as sponsors · Daniel
+- 2026-10-24 · D13: the USA and Israel editions are branded "Portugal Home Guides" (English); domains to be chosen · Daniel
+- 2026-10-24 · D14: the partner agency is the only real-estate agency on the platform; all buyer requests and calls are centralised there · Daniel
