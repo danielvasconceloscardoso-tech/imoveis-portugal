@@ -11,9 +11,9 @@ Read CLAUDE.md, content/EDITORIAL_POLICY.md, content/FAQ.md and content/TOPICS.m
 ## Decisions to apply (24 Oct 2026)
 
 1. **D13 (revised):** the USA and Israel sites stay under the Imóveis Portugal brand on country domains (for example imoveisportugal.us and an Israeli domain); their social accounts are named **Portugal Home Guides**. Keep domains in config.ts. Do not buy or claim domains: check availability and eligibility (Israeli domains may require local presence) and list options for the operator.
-4. **Switzerland is bilingual:** every Swiss page, FAQ, e-book, newsletter and the media kit exist in Portuguese and French, with a language switch on the site (the French-speaking cantons hold most of the Portuguese community). Use the CH hooks in both languages from content/TOPICS.md.
-2. **D14:** the only real-estate agency on the platform is the partner agency. Every buyer request and every "find me a house" call goes to it. No other agency appears anywhere (D9).
-3. **Developers stay in scope** as sponsors (Daniel confirmed).
+2. **Switzerland is bilingual:** every Swiss page, FAQ, e-book, newsletter and the media kit exist in Portuguese and French, with a language switch on the site (the French-speaking cantons hold most of the Portuguese community). Use the CH hooks in both languages from content/TOPICS.md.
+3. **D14:** the only real-estate agency on the platform is the partner agency. Every buyer request and every "find me a house" call goes to it. No other agency appears anywhere (D9).
+4. **Developers stay in scope** as sponsors (Daniel confirmed).
 
 ## Part A — FAQ pages
 
