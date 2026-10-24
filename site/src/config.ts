@@ -12,7 +12,7 @@ export const config = {
   primaryDomain: "imoveisportugal.lu",
 
   // Public contact address of the brand (no personal names).
-  contactEmail: "",
+  contactEmail: "geralportugalimoveis@gmail.com", // brand Gmail until the domain mailbox exists
 
   // Cal.com booking link for 15-minute sponsor calls.
   bookingUrl: "",

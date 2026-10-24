@@ -4,9 +4,9 @@ About 45 minutes. Everything else is done in the repo. Use the brand mailbox for
 
 ## 1. Brand mailbox (5 min)
 
-1. Create a free mailbox in the brand name (Gmail or Proton).
+1. Done: geralportugalimoveis@gmail.com (brand mailbox, recovery by phone only).
 2. Later, once a domain is on Cloudflare: Cloudflare → your domain → Email → Email Routing → create `parcerias@imoveisportugal.lu` forwarding to the mailbox. For sending from the domain address, use a free custom-domain mailbox (for example Zoho Mail's free plan; check its current terms).
-3. Do not put the Gmail/Proton address in the repo: the commit check blocks any address that is not on an imoveisportugal domain.
+3. The commit check allows only imoveisportugal domain addresses and this brand Gmail; any other address is blocked.
 
 ## 2. Domains (10 min)
 

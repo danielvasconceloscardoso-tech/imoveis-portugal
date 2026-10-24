@@ -11,3 +11,4 @@ One line per decision: date · decision · who decided.
 - 2026-10-24 · D5: launch all four editions on Tue 1 Dec 2026 · Daniel
 - 2026-10-24 · D6: legal check done; every paid relationship (sponsors, agency) is structured and named as sponsorship, as for conferences; no per-lead fees · Daniel
 - 2026-10-24 · D7: the brand does not attend the Decisão/Paperjam event (10 Nov); Daniel attends in his own professional capacity and reports back · Daniel
+- 2026-10-24 · Brand mailbox geralportugalimoveis@gmail.com created; used for all accounts and sponsor outreach until the domain mailbox exists · Daniel
