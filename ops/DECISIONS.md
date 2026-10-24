@@ -22,3 +22,5 @@ One line per decision: date · decision · who decided.
 - 2026-10-24 · D14: the partner agency is the only real-estate agency on the platform; all buyer requests and calls are centralised there · Daniel
 - 2026-10-24 · D13 revised: USA and Israel sites stay under the Imóveis Portugal brand on country domains (e.g. .us and an Israeli domain); their social accounts are named "Portugal Home Guides" (this adds one English account per platform to D2) · Daniel
 - 2026-10-24 · Switzerland edition is bilingual: Portuguese and French on site, newsletter, FAQ, e-books and media kit · Daniel
+- 2026-10-24 · D15: site and media kit design is direction C (Betão) with colour photography instead of black and white · Daniel
+- 2026-10-24 · D16: start with a free beta on Cloudflare Pages (pages.dev address, noindex, "Beta" mark); domains bought later · Daniel
