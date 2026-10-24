@@ -45,6 +45,9 @@ Status: To do · Doing · Blocked · Done
 
 | 8g | Run ops/prompts/03_international_sponsors.md (foreign-capital developers, bilateral chambers, embassy economic sections; drafts only) | CTO | To do | 2026-10-30 |
 
+| 8h | Run ops/prompts/04_free_ebooks.md (facts base + free e-books per edition; drafts for review) | CTO | To do | 2026-11-06 |
+| 8i | Review legal and tax facts flagged in the e-book PR | Operator | To do | 2026-11-10 |
+
 ## Last session
 
 2026-10-24 (CEO): ran prompt 01 Parts 1–2 in place of the CTO. Sponsor list rebuilt around proof of spend: 150 companies, 44 tier A, 46 tier B, 60 parked tier C; 62 of 90 A/B evidence pages opened and read, 6 spot-checks all confirmed. Top 10 by priority: ABANCA, Banque BCP, Cabinet d'Architecture Marcelo Moledo, Campara, Conexão Europa Imóveis, MC Avocats, Madeira Estate, Maia International Properties, Oliveira Imóveis, Pedro Emanuel de Oliveira. Gaps: Luxembourg and Switzerland are thin (20 and 19 A/B), fixed by tasks 10–11. 90-day cash plan in ops/PLAN.md. Later the same day Daniel decided D1–D3 and D5–D7 (see ops/DECISIONS.md); D4 postponed, so Sprint 0 ships without payment links. CEO then built Sprint 0: Astro site in site/ (21 pages, LU/FR/CH/BR), media kit PDFs in sponsors/mediakit/, commit check in .githooks/, operator guide in ops/SETUP.md. The site stays "noindex" until D4 and the legal pages are done; the French legal notice needs the publisher's identity, so anonymity relies on the billing entity.
