@@ -1,0 +1,11 @@
+week,week_start,pillar,hook,facts,sources_to_check,faq_entries,cta,notes
+1,2026-11-09,Money,Acheter au Portugal : les frais que personne ne vous annonce,pt-imt-second-home-2026;pt-imt-nonresident-flat;pt-imt-nonresident-exceptions;pt-is-purchase,,fr-02,guide,Pre-launch: social + free guide / sign-up push
+2,2026-11-16,Money,Crédit en France ou au Portugal pour acheter là-bas ?,pt-ltv-limits;pt-is-loan-5y;pt-is-interest,check: French bank practice (sponsor answer only),fr-03,talk-bank,Pre-launch (swapped with week 3: the succession week waits for the EU rule check)
+3,2026-11-23,Coming home,"La maison de famille au Portugal : succession, partage et impôts",pt-is-inheritance-exempt;pt-sinal-442,check: EU Regulation 650/2012 arts. 21-22 (EUR-Lex blocked: Daniel),fr-09,talk-lawyer,Pre-launch
+4,2026-11-30,Places,"Ce que 200 000 € permettent d'acheter à Porto, Braga et sur la côte",pt-ine-prices-2025,check: INE local prices by municipality,fr-10,agency,Launch week: first newsletter Tue 1 Dec
+5,2026-12-07,Money,Louer votre bien au Portugal depuis la France : ce que vous déclarez des deux côtés,pt-rent-tax-nonresident;pt-al-registration;fr-3916,"check: France-Portugal treaty as amended 2016, method for rental income (impots.gouv.fr)",frx-01,talk-tax,
+6,2026-12-14,Myths and mistakes,Rénover une maison au Portugal à distance sans se faire piéger,pt-sinal-442,check: building permit rules (RJUE) before writing,fr-05,talk-lawyer,Christmas peak starts 15 Dec: viewings while home
+7,2026-12-21,Coming home,Prendre sa retraite au Portugal : ce qui change vraiment,pt-imt-second-home-2026;pt-imt-nonresident-flat;pt-imt-nonresident-exceptions;pt-is-purchase,check: IMT exception (a) for former residents with Daniel; residence registration for EU citizens,fr-02,talk-tax,Christmas peak
+8,2026-12-28,Process,Signer sans être sur place : la procuration expliquée,pt-poa-apostille;pt-nif-nonresident;pt-tax-rep,,fr-04,talk-lawyer,Christmas peak; light week
+9,2027-01-04,Myths and mistakes,Les 5 erreurs qui coûtent cher aux acheteurs de la diaspora,pt-imt-second-home-2026;pt-imt-nonresident-flat;pt-imt-nonresident-exceptions;pt-is-purchase;pt-sinal-442,,fr-05,agency,Christmas peak ends 5 Jan
+10,2027-01-11,Money,Taxe foncière portugaise : IMI et AIMI en clair,pt-imi-rates;pt-aimi-deduction,check: AIMI rates (CIMI art. 135.º-F),fr-06,talk-tax,

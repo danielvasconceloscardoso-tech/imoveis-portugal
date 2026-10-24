@@ -1,0 +1,11 @@
+week,week_start,pillar,hook,facts,sources_to_check,faq_entries,cta,notes
+1,2026-11-09,Money,Quanto custa mesmo uma casa de 250 000 € em Portugal: tudo o que paga por cima,pt-imt-second-home-2026;pt-imt-nonresident-flat;pt-imt-nonresident-exceptions;pt-is-purchase,,pt-02,guide,Pre-launch: social + free guide / sign-up push
+2,2026-11-16,Money,Crédito no Luxemburgo ou em Portugal: o que muda na prática,pt-ltv-limits;pt-is-loan-5y;pt-is-interest,check: Luxembourg bank practice (sponsor answer only),pt-03,talk-bank,Pre-launch
+3,2026-11-23,Coming home,"A casa da aldeia que herdou: vender, recuperar ou arrendar?",pt-is-inheritance-exempt;pt-sinal-442;pt-rent-tax-nonresident;pt-al-registration,,pt-09,talk-lawyer,Pre-launch
+4,2026-11-30,Places,"O que 200 000 € compram em Braga, Viana e Guimarães",pt-ine-prices-2025,check: INE local prices by municipality (Estatísticas de preços da habitação ao nível local),pt-10,agency,Launch week: first newsletter Tue 1 Dec
+5,2026-12-07,Coming home,Regressar a Portugal: o que tratar antes de fazer as malas,pt-imt-second-home-2026;pt-imt-nonresident-flat;pt-imt-nonresident-exceptions;pt-is-purchase,check: IMT exception (a) for former residents with Daniel; AT Guia fiscal Comunidades Portuguesas,pt-02,talk-tax,
+6,2026-12-14,Money,Arrendar a casa em Portugal enquanto vive no Luxemburgo: impostos dos dois lados,pt-rent-tax-nonresident;pt-al-registration;lu-pt-treaty-property,,lu-01,talk-tax,Christmas peak starts 15 Dec: viewings while home
+7,2026-12-21,Myths and mistakes,Os 5 erros mais caros de quem compra à distância,pt-imt-second-home-2026;pt-imt-nonresident-flat;pt-imt-nonresident-exceptions;pt-is-purchase;pt-sinal-442;pt-poa-apostille,,pt-05,agency,Christmas peak
+8,2026-12-28,Process,Comprar sem estar em Portugal: como funciona a procuração,pt-poa-apostille;pt-nif-nonresident;pt-tax-rep,,pt-04,talk-lawyer,Christmas peak; light week
+9,2027-01-04,Money,IMI e AIMI: quanto paga por ano pela casa em Portugal,pt-imi-rates;pt-aimi-deduction,check: AIMI rates (CIMI art. 135.º-F),pt-06,talk-tax,Christmas peak ends 5 Jan
+10,2027-01-11,Money,Transferir as poupanças para Portugal sem perder no caminho,pt-aml-funds,,pt-08,talk-fx,

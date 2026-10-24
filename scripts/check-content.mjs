@@ -19,8 +19,11 @@ const CTA_KEYS = ["talk-lawyer", "talk-bank", "talk-tax", "talk-fx", "talk-devel
 const TYPES = ["article", "newsletter", "video", "carousel", "post", "faq"];
 const LANGS = { "pt-PT": "PT", fr: "FR", "pt-BR": "PT-BR", en: "EN" };
 const EDITIONS = ["lu", "fr", "ch", "br", "us", "il"];
+// Banned: "paradise", "unique opportunity" and any promise of guaranteed returns or gains
+// ("garantia" as collateral is fine).
 const BANNED = [/paraíso/i, /paradis\b/i, /oportunidade única/i, /opportunité unique/i, /once[- ]in[- ]a[- ]lifetime/i,
-  /garantid[oa]s?\b/i, /\bgaranti(e|s)?\b/i, /guaranteed/i, /retorno garantido/i, /rendement garanti/i];
+  /(retorno|rendimento|rentabilidade|valorização|lucro)s? garantid[oa]s?/i, /garantid[oa]s? (retorno|rendimento|rentabilidade|valorização|lucro)/i,
+  /(rendement|rentabilité|plus-value|bénéfice)s? garanti(e|s|es)?\b/i, /guaranteed (return|yield|income|profit|gain|appreciation)s?/i];
 const ADVICE = [/\bvocê deveria\b/i, /\bdeve(?:rá)? comprar\b/i, /\brecomendamos\b/i, /\baconselhamos\b/i,
   /\bvous devriez\b/i, /\bnous (?:vous )?(?:recommandons|conseillons)\b/i, /\byou should\b/i, /\bwe recommend\b/i,
   /\bwe advise\b/i];
