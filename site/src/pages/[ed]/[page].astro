@@ -1,0 +1,128 @@
+---
+import Base from "../../layouts/Base.astro";
+import Embed from "../../components/Embed.astro";
+import { config } from "../../config";
+import { EDITIONS, ED_ORDER, t, sideFacts, type EdCode, type PageKey } from "../../i18n";
+
+export function getStaticPaths() {
+  const keys: PageKey[] = ["partners", "buy", "privacy", "legal"];
+  return ED_ORDER.flatMap((ed) => keys.map((key) => ({ params: { ed, page: EDITIONS[ed].slugs[key] }, props: { key } })));
+}
+const ed = Astro.params.ed as EdCode;
+const { key } = Astro.props as { key: PageKey };
+const E = EDITIONS[ed];
+const T = t(ed);
+const facts = sideFacts(ed);
+const P = T.partners, B = T.buy;
+const legal = key === "privacy" ? T.privacy : key === "legal" ? T.legal : null;
+const pageTitle = key === "partners" ? P.title : key === "buy" ? B.title : legal!.title;
+const used = config.foundingSlotsTotal - config.foundingSlotsLeft;
+---
+<Base ed={ed} page={key} title={`${pageTitle} | Imóveis Portugal ${E.name}`} description={key === "partners" ? P.lede : key === "buy" ? B.lede : pageTitle}>
+  <div class="wrap">
+    {key === "partners" && (
+      <>
+        <header class="page-head">
+          <h1>{P.h1}</h1>
+          <p class="lede">{P.lede}</p>
+          <p class="print-only small">{[`${E.domain}/${ed}/${E.slugs.partners}/`, config.contactEmail, config.bookingUrl].filter(Boolean).join("   ")}</p>
+        </header>
+        <div class="cols">
+          <div>
+            <section class="block">
+              <div class="founding">
+                <h2>{P.foundingH}</h2>
+                <p>{P.foundingP}</p>
+                <div class="slots" aria-hidden="true">
+                  {Array.from({ length: config.foundingSlotsTotal }, (_, i) => <span class={i < used ? "taken" : ""}></span>)}
+                </div>
+                <p class="slots-label">{P.slots}</p>
+              </div>
+            </section>
+            <section class="block">
+              <h2>{P.readersH}</h2>
+              <p>{P.readersP}</p>
+            </section>
+            <section class="block">
+              <h2>{P.whyNowH}</h2>
+              <p>{P.whyNowP}</p>
+            </section>
+          </div>
+          <aside class="rail" aria-labelledby="facts">
+            <h2 id="facts">{T.factsTitle}</h2>
+            {facts.map((f) => (
+              <div class="fact">
+                <span class="n">{f.big}</span>
+                <p>{f.text}</p>
+                <a href={f.url} rel="noopener">{f.source}</a>
+              </div>
+            ))}
+          </aside>
+        </div>
+        <div class="full">
+            <section class="block">
+              <h2>{P.tableH}</h2>
+              <div class="table-scroll">
+                <table class="pk">
+                  <thead><tr>{P.cols.map((c) => <th scope="col">{c}</th>)}</tr></thead>
+                  <tbody>
+                    {P.rows.map((r) => (
+                      <tr><td>{r[0]}</td><td>{r[1]}</td><td class="num"><strong>{r[2]}</strong></td><td class="num">{r[3]}</td></tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <p class="small">{P.vat}</p>
+            </section>
+            <section class="block">
+              <h2>{P.rulesH}</h2>
+              <ul class="plain-list">{P.rules.map((r) => <li>{r}</li>)}</ul>
+            </section>
+            <section class="block">
+              <h2>{P.reportH}</h2>
+              <p>{P.reportP}</p>
+            </section>
+            <section class="block no-print" id="contacto">
+              <h2>{P.ctaH}</h2>
+              <p>
+                {config.bookingUrl
+                  ? <a class="btn" href={config.bookingUrl} rel="noopener">{P.book}</a>
+                  : <span class="btn" aria-disabled="true">{P.book}</span>}
+              </p>
+              <p>{P.formIntro}</p>
+              <Embed id={config.forms.sponsor[ed]} title={P.ctaH} pending={T.formPending(config.contactEmail)} hidden={{ edition: ed }} />
+            </section>
+        </div>
+      </>
+    )}
+
+    {key === "buy" && (
+      <>
+        <header class="page-head">
+          <h1>{B.h1}</h1>
+          <p class="lede">{B.lede}</p>
+        </header>
+        <div class="cols">
+          <div>
+            <section class="block">
+              <Embed id={config.forms.buyer[ed]} title={B.h1} pending={T.formPending(config.contactEmail)} hidden={{ edition: ed }} height={560} />
+              <p class="small" style="margin-top:1rem">{B.small} <a href={`/${ed}/${E.slugs.privacy}/`}>{T.footer.privacy}</a></p>
+            </section>
+          </div>
+          <aside class="rail">
+            <h2>{B.stepsH}</h2>
+            <ol class="steps">{B.steps.map((s) => <li>{s}</li>)}</ol>
+          </aside>
+        </div>
+      </>
+    )}
+
+    {legal && (
+      <div class="legal" style="padding-bottom:4rem">
+        <header class="page-head"><h1>{legal.h1}</h1></header>
+        {!config.launchReady && <p class="draft">{legal.draft}</p>}
+        {legal.sections.map(([h, p]) => (<><h2>{h}</h2><p>{p}</p></>))}
+      </div>
+    )}
+  </div>
+</Base>

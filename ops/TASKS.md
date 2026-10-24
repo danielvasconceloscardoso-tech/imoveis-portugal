@@ -20,14 +20,16 @@ Status: To do · Doing · Blocked · Done
 | # | Task | Owner | Status | Due |
 | --- | --- | --- | --- | --- |
 | 1 | Prompt 01, Parts 1–2: rebuild sponsor list and 90-day plan | CEO | Done | 2026-10-24 |
-| 2 | Prompt 01, Part 3 only: Sprint 0 (one site with four edition sections, offer page per edition, Cal.com booking, buyer lead form; payment links wait for D4) | CTO | To do | 2026-10-30 |
+| 2 | Prompt 01, Part 3: Sprint 0 site (site/: four editions, partner page with prices and founding counter, buyer form, newsletter signup, legal drafts, domain middleware) | CEO (in place of CTO) | Done | 2026-10-24 |
+| 2b | Operator setup: follow ops/SETUP.md (mailbox, domains, Cloudflare Pages, Tally, beehiiv, Cal.com) and send the IDs to the CEO chat | Operator | To do | 2026-10-28 |
+| 2c | Put form IDs, embeds, booking link and contact email into site/src/config.ts | CEO or CTO | Blocked: waits for 2b | 2026-10-28 |
 | 3 | Answer D1–D7 (D4 postponed) | Operator | Done | 2026-10-24 |
 | 3b | Report back from the Decisão/Paperjam event (contacts, companies worth adding) | Operator | To do | 2026-11-11 |
 | 4 | Create brand email (forwarding via Cloudflare Email Routing once a domain is on Cloudflare) | Operator | To do | 2026-10-27 |
 | 5 | Buy domains .lu, .fr, .ch, .com.br; check WHOIS privacy for .com.br before using a personal CPF | Operator | To do | 2026-10-27 |
 | 6 | Create free accounts with the brand email: Cloudflare, beehiiv, Tally, Cal.com | Operator | To do | 2026-10-28 |
 | 7 | Confirm the agency receives buyer leads and the commission split, in writing | Father | To do | 2026-10-31 |
-| 8 | Media kit text (1 page per edition) | CEO | To do | 2026-10-27 |
+| 8 | Media kit per edition (sponsors/mediakit/*.pdf, generated from the partner pages) | CEO | Done | 2026-10-24 |
 | 9 | Send "This week's 40" (sponsors/Sponsors_v2.xlsx), 8 per day, templates in sponsors/METHOD.md; log status | Partner | To do | 2026-10-30 |
 | 10 | Meta Ad Library pass for Luxembourg and Switzerland (links in sponsors/METHOD.md); add advertisers as tier A | Partner | To do | 2026-11-06 |
 | 11 | Get the latest exhibitor list of the Paris Portuguese property fair | Partner | To do | 2026-11-06 |
@@ -35,4 +37,4 @@ Status: To do · Doing · Blocked · Done
 
 ## Last session
 
-2026-10-24 (CEO): ran prompt 01 Parts 1–2 in place of the CTO. Sponsor list rebuilt around proof of spend: 150 companies, 44 tier A, 46 tier B, 60 parked tier C; 62 of 90 A/B evidence pages opened and read, 6 spot-checks all confirmed. Top 10 by priority: ABANCA, Banque BCP, Cabinet d'Architecture Marcelo Moledo, Campara, Conexão Europa Imóveis, MC Avocats, Madeira Estate, Maia International Properties, Oliveira Imóveis, Pedro Emanuel de Oliveira. Gaps: Luxembourg and Switzerland are thin (20 and 19 A/B), fixed by tasks 10–11. 90-day cash plan in ops/PLAN.md. Later the same day Daniel decided D1–D3 and D5–D7 (see ops/DECISIONS.md); D4 postponed, so Sprint 0 ships without payment links.
+2026-10-24 (CEO): ran prompt 01 Parts 1–2 in place of the CTO. Sponsor list rebuilt around proof of spend: 150 companies, 44 tier A, 46 tier B, 60 parked tier C; 62 of 90 A/B evidence pages opened and read, 6 spot-checks all confirmed. Top 10 by priority: ABANCA, Banque BCP, Cabinet d'Architecture Marcelo Moledo, Campara, Conexão Europa Imóveis, MC Avocats, Madeira Estate, Maia International Properties, Oliveira Imóveis, Pedro Emanuel de Oliveira. Gaps: Luxembourg and Switzerland are thin (20 and 19 A/B), fixed by tasks 10–11. 90-day cash plan in ops/PLAN.md. Later the same day Daniel decided D1–D3 and D5–D7 (see ops/DECISIONS.md); D4 postponed, so Sprint 0 ships without payment links. CEO then built Sprint 0: Astro site in site/ (21 pages, LU/FR/CH/BR), media kit PDFs in sponsors/mediakit/, commit check in .githooks/, operator guide in ops/SETUP.md. The site stays "noindex" until D4 and the legal pages are done; the French legal notice needs the publisher's identity, so anonymity relies on the billing entity.

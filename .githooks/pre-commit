@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# Blocks commits that add secrets or personal email addresses (CLAUDE.md, hard rule 3).
+# Enable once per clone:  git config core.hooksPath .githooks
+set -euo pipefail
+
+added=$(git diff --cached -U0 --diff-filter=ACM -- . ':(exclude)*.pdf' ':(exclude)*.xlsx' ':(exclude)*.png' ':(exclude)package-lock.json' ':(exclude).githooks/*' | grep '^+' | grep -v '^+++' || true)
+
+fail=0
+secrets=$(echo "$added" | grep -nE '(sk_live_|sk_test_|AKIA[0-9A-Z]{16}|-----BEGIN [A-Z ]*PRIVATE KEY-----|xox[abp]-|ghp_[A-Za-z0-9]{20,}|api[_-]?key *[:=] *["'"'"'][A-Za-z0-9_\-]{16,})' || true)
+if [ -n "$secrets" ]; then echo "Blocked: possible secret in staged changes:"; echo "$secrets"; fail=1; fi
+
+emails=$(echo "$added" | grep -oE '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}' | grep -viE '@(imoveisportugal\.(lu|fr|ch|com\.br)|example\.(com|org)|anthropic\.com)$' || true)
+if [ -n "$emails" ]; then echo "Blocked: email address(es) not allowed in the repo:"; echo "$emails" | sort -u; fail=1; fi
+
+if [ "$fail" -ne 0 ]; then echo "Remove them (secrets go in environment variables) and commit again."; exit 1; fi

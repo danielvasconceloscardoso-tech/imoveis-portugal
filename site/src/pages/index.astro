@@ -1,0 +1,20 @@
+---
+import Base from "../layouts/Base.astro";
+import { EDITIONS, ED_ORDER } from "../i18n";
+const sub: Record<string, string> = {
+  lu: "Para quem vive no Luxemburgo",
+  fr: "Pour ceux qui vivent en France",
+  ch: "Para quem vive na Suíça",
+  br: "Para quem mora no Brasil",
+};
+---
+<Base title="Imóveis Portugal" description="Comprar casa em Portugal a partir do estrangeiro: Luxemburgo, França, Suíça e Brasil.">
+  <div class="wrap page-head">
+    <h1>Comprar casa em Portugal a partir de onde vive.</h1>
+    <ul class="chooser">
+      {ED_ORDER.map((c) => (
+        <li><a href={`/${c}/`} lang={EDITIONS[c].lang}><span class="c">{EDITIONS[c].name}</span><span class="d">{sub[c]}</span></a></li>
+      ))}
+    </ul>
+  </div>
+</Base>

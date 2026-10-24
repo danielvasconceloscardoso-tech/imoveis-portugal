@@ -1,0 +1,71 @@
+---
+import "../styles/global.css";
+import { config } from "../config";
+import { EDITIONS, ED_ORDER, t, type EdCode, type PageKey } from "../i18n";
+
+interface Props { ed?: EdCode; page?: PageKey | "home"; title: string; description: string; }
+const { ed, page = "home", title, description } = Astro.props;
+const E = ed ? EDITIONS[ed] : null;
+const T = ed ? t(ed) : null;
+
+const pathFor = (code: EdCode, p: PageKey | "home") =>
+  p === "home" ? `/${code}/` : `/${code}/${EDITIONS[code].slugs[p]}/`;
+const hostFor = (code: EdCode) =>
+  config.domainMode === "primary" ? config.primaryDomain : EDITIONS[code].domain;
+const canonical = ed ? `https://${hostFor(ed)}${pathFor(ed, page)}` : `https://${config.primaryDomain}/`;
+const alternates = ed && (page === "home" || page === "partners" || page === "buy")
+  ? ED_ORDER.map((c) => ({ hreflang: EDITIONS[c].hreflang, href: `https://${hostFor(c)}${pathFor(c, page)}` }))
+  : [];
+---
+<!doctype html>
+<html lang={E ? E.lang : "pt-PT"}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {!config.launchReady && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="canonical" href={canonical} />
+    {alternates.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="Imóveis Portugal" />
+  </head>
+  <body>
+    <header class="site-head">
+      <div class="wrap">
+        <a class="brand" href={ed ? `/${ed}/` : "/"}>Imóveis Portugal</a>
+        <nav class="head-nav" aria-label={T ? T.editionsLabel : "Edições"}>
+          {E && T && (
+            <>
+              <a href={pathFor(E.code, "partners")} aria-current={page === "partners" ? "page" : undefined}>{T.nav.partners}</a>
+              <a href={pathFor(E.code, "buy")} aria-current={page === "buy" ? "page" : undefined}>{T.nav.buy}</a>
+            </>
+          )}
+          <span class="eds">
+            {ED_ORDER.map((c) => (
+              <a href={pathFor(c, page === "privacy" || page === "legal" ? "home" : page)} aria-current={c === ed ? "true" : undefined} lang={EDITIONS[c].lang} title={EDITIONS[c].name}>{c.toUpperCase()}</a>
+            ))}
+          </span>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="site-foot">
+      <div class="wrap">
+        <span>Imóveis Portugal</span>
+        {T && <span>{T.footer.sponsored}</span>}
+        {E && T && (
+          <span>
+            <a href={pathFor(E.code, "privacy")}>{T.footer.privacy}</a>
+            {" "}&nbsp;{" "}
+            <a href={pathFor(E.code, "legal")}>{T.footer.legal}</a>
+          </span>
+        )}
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,67 @@
+---
+import Base from "../../layouts/Base.astro";
+import Embed from "../../components/Embed.astro";
+import { config } from "../../config";
+import { EDITIONS, ED_ORDER, t, sideFacts, type EdCode } from "../../i18n";
+
+export function getStaticPaths() {
+  return ED_ORDER.map((ed) => ({ params: { ed } }));
+}
+const ed = Astro.params.ed as EdCode;
+const E = EDITIONS[ed];
+const T = t(ed);
+const facts = sideFacts(ed).slice(1);
+---
+<Base ed={ed} page="home" title={`Imóveis Portugal ${E.name}`} description={T.lede}>
+  <div class="wrap">
+    <section class="hero">
+      <div class="hero-fact">
+        <span class="n">{E.fact.big}</span>
+        <span class="t">{E.fact.text}</span>
+        <span class="s"><a href={E.fact.url} rel="noopener">{E.fact.source}</a></span>
+      </div>
+      <h1>{E.hero}</h1>
+      <p class="lede">{T.lede}</p>
+    </section>
+
+    <div class="cols">
+      <div>
+        <section class="block" aria-labelledby="signup">
+          <h2 id="signup">{T.signupTitle}</h2>
+          <Embed id={config.forms.newsletter[ed]} title={T.signupTitle} pending={T.formPending(config.contactEmail)} hidden={{ edition: ed }} height={260} />
+        </section>
+
+        <section class="block" aria-labelledby="weekly">
+          <h2 id="weekly">{T.weeklyTitle}</h2>
+          <ul class="plain-list">
+            {T.weekly.map((w) => <li>{w}</li>)}
+          </ul>
+        </section>
+
+        <div class="block cta-pair">
+          <section>
+            <h2>{T.buyCta.h}</h2>
+            <p>{T.buyCta.p}</p>
+            <a class="btn" href={`/${ed}/${E.slugs.buy}/`}>{T.buyCta.a}</a>
+          </section>
+          <section>
+            <h2>{T.partnersCta.h}</h2>
+            <p>{T.partnersCta.p}</p>
+            <a href={`/${ed}/${E.slugs.partners}/`}>{T.partnersCta.a}</a>
+          </section>
+        </div>
+      </div>
+
+      <aside class="rail" aria-labelledby="facts">
+        <h2 id="facts">{T.factsTitle}</h2>
+        {facts.map((f) => (
+          <div class="fact">
+            <span class="n">{f.big}</span>
+            <p>{f.text}</p>
+            <a href={f.url} rel="noopener">{f.source}</a>
+          </div>
+        ))}
+      </aside>
+    </div>
+  </div>
+</Base>
