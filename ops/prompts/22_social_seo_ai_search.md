@@ -2,7 +2,7 @@
 
 To run: "Read ops/prompts/22_social_seo_ai_search.md and execute it." Work on a branch and open a PR. Nothing is posted, published, sent or merged without the operator's "go" (hard rule 2). Claridge's standard (prompt 19), voice v3 (D35), editorial policy (D12): every figure sourced, describe never advise, sponsored content labelled.
 
-Decision D42 (Daniel, 26 Oct): **one account per platform, multilingual (PT, EN, FR)** on **Instagram, Facebook and LinkedIn**; the brand must also **appear in AI assistants and Q&A sites** (ChatGPT, Claude, Gemini, Copilot, Perplexity, Reddit, Quora) when people ask how to buy a home in Portugal. **Team time: about 1 hour a week** (approve and schedule). D42 replaces D26's "English first, Instagram and Facebook only".
+Decision D42 (Daniel, 26 Oct): **one account per platform, multilingual (PT, EN, FR)** on **Instagram, Facebook and LinkedIn**; the brand must also **appear in AI assistants and Q&A sites** (ChatGPT, Claude, Gemini, Copilot, Perplexity, Reddit, Quora) when people ask how to buy a home in Portugal. **Team time: about 1 hour a week to approve and schedule, plus about 10 minutes a day for replies outside the approved reply bank.** D42 replaces D26's "English first, Instagram and Facebook only".
 
 ## 1. Brand kit for social (design/social/)
 
@@ -14,13 +14,19 @@ Decision D42 (Daniel, 26 Oct): **one account per platform, multilingual (PT, EN,
 ## 2. Content system (content/social/)
 
 1. **Pillars**, all tied to the site: the map ("what 300 k€, 1 M€, 5 M€, 10 M€ buy"), price trends by area, one question from a country journey (obstacle → answer → partner), places (Comporta to Porto), Private (structuring questions for 1 M€+), partners (labelled sponsored spotlights).
-2. **Weekly batch:**
-   - Instagram: 3 carousels + 2 reels; captions PT first, then EN and FR, each with its sources and one call to action (map, journey, Consulta privada).
-   - Facebook: the same 5 posts, plus 1 community question post for diaspora audiences.
-   - LinkedIn: 3 posts aimed at partners and decision-makers in EN or FR (market data, a journey insight, a partner or area spotlight); one document post a month (the area report).
+2. **Daily posting (D43):** volume is the strategy. One pillar piece a week is cut into many native posts.
+   - Instagram: **2 posts a day** (1 reel every day + 1 carousel or data card) and **3–5 stories a day** (poll, question box, map screenshot, link to the site).
+   - Facebook: **1–2 posts a day** (the Instagram content plus community questions for diaspora audiences).
+   - LinkedIn: **1 post every weekday** in EN or FR for partners and decision-makers (market data, journey insight, area or partner spotlight), plus one document post a month.
+   - Captions PT first, then EN and FR; each with its sources and one call to action (map, journey, Consulta privada).
+   - About 30 feed posts and 25 stories a week: build a library of reusable formats (data card, "what X buys", journey question, place, myth vs fact) so volume never lowers quality.
 3. **Calendar:** teasers from Tue 10 Nov, launch Tue 1 Dec with the four-scenario data story, then the weekly rhythm. Write weeks 1–4 in full.
 4. **The 1-hour week:** `/publish-week` produces one contact-sheet PDF of the week's posts (image + caption per post) and the export files: a Meta Business Suite bulk-upload CSV (verify the current import format before building it) and a LinkedIn schedule sheet (LinkedIn has no bulk import: the operator schedules natively from the sheet). Status `draft` until approved.
-5. Replies: a reply bank (common questions → short answer + link) so replies take minutes.
+5. **Replies (D43):**
+   - A reply bank in PT, EN and FR (the 60 most likely questions and comments → short answer + link), approved once by Daniel.
+   - Set up Meta Business Suite automated responses from the approved bank: instant replies and FAQ buttons in Instagram and Messenger DMs, keyword replies to comments where Meta allows it. Give the operator the exact steps.
+   - Everything outside the approved bank is answered by a person (10 minutes a day with the bank open); questions asking for advice go to the matching partner, never answered as advice.
+   - Optional later: a free-plan comment/DM automation tool (for example ManyChat's free tier) using the same approved bank; no paid tool before the first sponsor pays (D30).
 
 ## 3. SEO (site + content/SEO_PLAN.md)
 
