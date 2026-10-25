@@ -40,3 +40,9 @@ One line per decision: date · decision · who decided.
 - 2026-10-25 · D22: paid personalised "Plano de compra" report at 5,99 € after the free simulation; buy button stays off until the billing entity (D4) exists · Daniel
 - 2026-10-25 · D23: positioning: the Doutor Finanças of people abroad buying in Portugal (free content and simulators, funnel to licensed partners), in PT, EN and FR · Daniel
 - 2026-10-25 · D24: blog (task 15): articles are Markdown in content/blog/{id}.{lang}.md, shown on every edition under /{lang}/{ed}/blog/, with one canonical URL per language (pt on the .lu edition, fr on the .fr edition, en on the .us edition) and hreflang between the three, so the six editions do not compete in search; every fact is a [[fact-id]] from facts.csv; each edition domain serves its own sitemap-{ed}.xml, listed in robots.txt once launchReady is on · CTO (technical choice, reversible)
+- 2026-10-25 · D25: newsletter at launch is one issue per language per week (PT, EN, FR), not one per edition or language per edition · Daniel
+- 2026-10-25 · D26: social at launch is one account set, Instagram and Facebook only, English first; name to confirm against D13 ("Portugal Home Guides" for English accounts) · Daniel
+- 2026-10-25 · D27: social volume is defined in posts on Instagram and Facebook (CTO proposal: 5 a week on each, plus 3 reels from December) · Daniel
+- 2026-10-25 · D28: videos are faceless, AI generation allowed, designed to be shared; no AI people, testimonials or invented homes · Daniel
+- 2026-10-25 · D29: platform accounts sit in a Meta Business portfolio under the brand mailbox, admin profile kept private · Daniel
+- 2026-10-25 · D30: approvals by Daniel (legal and tax), the partner agency (market facts) and the operator (merge and send), in one PR; no paid tool or model credits before the first sponsor has paid · CEO recommendation, accepted unless Daniel objects

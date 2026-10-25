@@ -12,7 +12,7 @@ Written 25 Oct 2026 by the CEO (task 17). For Daniel's approval. Nothing here is
 6. **One blocker is not technical: the data controller.** We cannot collect email addresses, or run the privacy policy, without the billing entity (D4). It has to be decided before the first sign-up push on 9 Nov.
 7. Cost until the first sponsor pays: **0 €** beyond the domains.
 8. Order of work: accounts this week, plumbing in week 2, first public posts on Mon 9 Nov, first newsletters on Tue 1 Dec (launch), automation of posting from December.
-9. Six decisions for Daniel are in section 9, each with a recommendation.
+9. Daniel answered the six decisions on 25 Oct; they are in section 9 and override the recommendations where they differ.
 10. The setup checklist in section 5 is the list of everything we need to start publishing.
 
 ## 2. What already exists
@@ -74,9 +74,9 @@ Order matters. "Needed by" is the date after which the Monday 9 Nov push slips.
 | A3 | beehiiv account (brand mailbox). Turn on double opt-in. Create the publication or six segments. Make an API key and send it to the CTO through an environment variable, never in the repo | Wed 28 Oct | Section 4 test |
 | A4 | Tally account and the forms listed in `ops/SETUP.md` (sponsor, buyer, partner request, credit) | Wed 28 Oct | IDs go to `site/src/config.ts` |
 | A5 | Cal.com account and two event links (15 minutes free, 45 minutes paid at 150 €, D19) | Wed 28 Oct | |
-| A6 | Meta Business portfolio under the brand mailbox. Two Facebook Pages and two Instagram Business accounts: "Imóveis Portugal" and "Portugal Home Guides" (D2, D13) | Fri 30 Oct | See risk R1 on anonymity |
-| A7 | LinkedIn company page for each of the two names | Fri 30 Oct | Needs a personal LinkedIn admin: risk R1 |
-| A8 | YouTube channel for each name (empty, for later) | Mon 2 Nov | Video starts in December |
+| A6 | Meta Business portfolio under the brand mailbox. One Facebook Page and one Instagram Business account (D26; name to confirm, see section 9) | Fri 30 Oct | See risk R1 on anonymity |
+| A7 | (dropped by D26: no LinkedIn at launch) | | |
+| A8 | (dropped by D26: no YouTube at launch; videos go to Instagram and Facebook as reels) | | |
 | A9 | Unsplash developer app and key as an environment variable (task 8t) | Tue 27 Oct | Photos for cards |
 | A10 | Domains: .lu, .fr, .ch, .com.br; US and Israel options in `ops/DOMAINS_US_IL.md` (task 5, 8l) | Tue 27 Oct | Needed for the country links in posts |
 | A11 | Approve the merge of the preview branch into main (task 14) | Fri 30 Oct | So the live link shows the current design and the blog |
@@ -119,15 +119,15 @@ Order matters. "Needed by" is the date after which the Monday 9 Nov push slips.
 
 ## 7. Content system
 
-**Two account sets.** "Imóveis Portugal" for PT and FR (LU, FR, CH, BR). "Portugal Home Guides" for EN (USA, Israel). One account per platform per set while D2 holds.
+**One account set, two platforms (D26).** Facebook and Instagram only, English first. Cross-posted: the same post on both, with the Instagram caption trimmed. LinkedIn, YouTube and TikTok are not planned before January.
 
-**Platforms in order.** Facebook (the community groups are where readers are), Instagram (Brazil and younger readers), LinkedIn (sponsors, USA and Israel), YouTube (later). TikTok is not planned before January.
+**Post volume (D27, set by Daniel to define in posts; proposal).** Five feed posts a week, each on both platforms: Monday article or FAQ teaser; Tuesday carousel; Wednesday "what a budget buys" card from the compare page; Thursday newsletter teaser with the sign-up link; Friday one calculator example. That is 10 scheduled posts a week. From December, three reels a week on top (13). Stories and replies are not counted. Peaks: Christmas, Easter, August (PLAN.md).
 
-**Weekly cadence per set.** Five posts: Monday article or FAQ teaser; Tuesday carousel; Wednesday "what a budget buys" card from the compare page; Thursday newsletter teaser with the sign-up link; Friday one calculator example. From December, three short captioned videos a week on top. Peaks: Christmas, Easter, August (PLAN.md).
+**Video (D28).** Faceless, and AI generation is allowed. It should be built to travel: a clear first-second hook with a number, captions burned in, under 30 seconds, one fact per video. We cannot promise virality; we can make each video easy to share. Limits: no AI-generated people, testimonials or invented homes (VOICE.md rule 5); no AI picture of a real listing; every figure in the caption has its fact id; label AI-generated realistic content as Meta requires; free tools only until a sponsor has paid.
 
 **Pillars.** Money (taxes, mortgage, costs), Coming home (inheritance, the village house, visits), Places (what a budget buys in a named place), Rules (residency, banks, documents). The plan CSVs already tag each week with a pillar.
 
-**Newsletter.** Seven fixed blocks (`NEWSLETTER_FORMAT.md`). Launch with **one issue per edition in its main language** (LU PT, FR FR, CH PT, BR PT, US EN, IL EN): six issues a week, not eighteen. Other languages arrive as segments when readers ask for them.
+**Newsletter.** Seven fixed blocks (`NEWSLETTER_FORMAT.md`). Per D25: **one issue per language per week** (PT, EN, FR), three in all, sent every Thursday. The edition shows in the issue through the country block ("Aqui vs lá", the country chapter) rather than a separate issue. To check on the free plan: whether beehiiv can show a block by segment; if not, the three issues carry the country items as short labelled lines ("Luxembourg:", "Brasil:") and the edition split comes later.
 
 **Blog.** One article every two weeks, from the highest-ranked FAQ questions. Each is linked from the home page, the FAQ and the newsletter.
 
@@ -147,6 +147,19 @@ Order matters. "Needed by" is the date after which the Monday 9 Nov push slips.
 **Decision rule:** if sign-ups are below 300 on 22 Nov, the CEO changes the offer in the posts (a different guide, a calculator as the hook) before spending any money. If a post type has half the reach of the others for three weeks, it stops.
 
 ## 9. Risks and decisions for Daniel
+
+**Decisions taken by Daniel, 25 Oct 2026**
+
+| # | Decision | Notes |
+| --- | --- | --- |
+| D25 | Newsletter: one issue per language per week (PT, EN, FR), not per edition | Edition content as in section 7 |
+| D26 | Social: one account set, Instagram and Facebook only, English first | **To confirm:** D13 says English accounts are named "Portugal Home Guides"; Daniel's answer says "Imóveis Portugal, in English first". Which name, and does the Portuguese and French content follow on the same account or a second one? Until answered, A6 waits on the name |
+| D27 | Volume is defined in posts on Instagram and Facebook | Proposal above: 5 a week on each, 13 with reels |
+| D28 | Faceless videos, AI-generated allowed, built to be shared | Limits in section 7 |
+| D29 | Accounts under a Meta Business portfolio on the brand mailbox | R1 stays: admin profile private |
+| D30 | Approval roles and no paid tools until the first sponsor has paid (recommendations 5 and 6 below) | Taken as accepted unless Daniel objects |
+
+**Read with care:** English first means the first posts reach the USA and Israel before the emigrant editions (LU, FR, CH, BR), who read Portuguese and French and are the larger audience (PLAN.md section 3). That is a choice about order, not a mistake; the Portuguese and French posts need a date.
 
 **Risks**
 
