@@ -115,9 +115,15 @@ ROWS = [
 ("Golding & Golding", "US international tax law", "US", "B", "https://www.goldinglawyers.com/tax-tips-for-portugal-based-americans-u-s-citizen-expats/", "Tax tips for Portugal-based Americans (FBAR, FATCA) (prompt 10 benchmark)", 2026, S_, "S", "Silver"),
 ("Solutis", "Wealth management (France)", "FR", "B", "https://www.solutis.fr/investir-au-portugal.html", "Guide 'Investir au Portugal' for French investors (prompt 10 benchmark)", 2026, S_, "S", "Silver"),
 ("Just Arrived", "Expat services (Luxembourg)", "LU", "B", "https://www.justarrived.lu/pt/", "Multilingual expat guide in PT/FR/EN for Luxembourg; partner-services model (prompt 10 benchmark)", 2026, S_, "S", "Silver"),
+
+# Added by prompt 13 (Doutor Finanças lenders and insurers).
+("Banco BIC Português", "Bank", "LU, FR, CH, BR, US, IL", "B", "https://www.doutorfinancas.pt/wp-content/uploads/2025/12/IC-000042_.pdf", "Lender tied to Doutor Finanças' credit-intermediary contract (Banco de Portugal reg. 0000420, list of lenders, Dec 2025): works through intermediaries; own non-resident mortgage page not reachable from here, to confirm (prompt 13); check whether it now belongs to ABANCA (S001)", 2025, F, "M", "Silver"),
+("BNI Europa (Banco de Negócios Internacional)", "Bank", "LU, FR, CH, BR, US, IL", "B", "https://www.doutorfinancas.pt/wp-content/uploads/2025/12/IC-000042_.pdf", "Lender tied to Doutor Finanças' credit-intermediary contract (Banco de Portugal reg. 0000420, list of lenders, Dec 2025): works through intermediaries; own non-resident mortgage page not reachable from here, to confirm (prompt 13)", 2025, F, "M", "Silver"),
 ]
 
 C_ROWS = [
+# Added by prompt 13 (insurers listed by Doutor Finanças Protege).
+("Mapfre", "Insurance"), ("MetLife", "Insurance"), ("Prévoir", "Insurance"), ("Real Vida Seguros", "Insurance"), ("Una Seguros", "Insurance"), ("Victoria Seguros", "Insurance"), ("Zurich Portugal", "Insurance"), ("Caravela Seguros", "Insurance"), ("Habit Seguros", "Insurance"), ("Innovarisk", "Insurance"), ("April Portugal", "Insurance"), ("Europ Assistance", "Insurance"), ("Asisa", "Insurance"), ("Bupa (Portugal)", "Insurance"), ("Saúde Prime", "Insurance"), ("MGEN", "Insurance"), ("ARAG", "Insurance"), 
 ("TAP Air Portugal", "Airline"), ("IKEA Portugal", "Home furnishing"), ("Leroy Merlin Portugal", "DIY / renovation"),
 ("NOS", "Telecom"), ("MEO", "Telecom"), ("EDP Comercial", "Energy / solar"), ("Galp Solar", "Solar"),
 ("Allianz Portugal", "Insurance"), ("Generali Tranquilidade", "Insurance"), ("Foyer", "Insurance (Luxembourg)"),
