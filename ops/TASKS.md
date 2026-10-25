@@ -108,9 +108,14 @@ Status: To do · Doing · Blocked · Done
 | 18 | Run ops/prompts/14_publishing_plumbing.md in a new Claude Code session: /publish-week, social export, card generator, post checks, metrics script, /status | CTO | To do: start Mon 26 Oct | 2026-11-06 |
 | 18b | Check the Cloudflare build of main succeeded and that the live link shows the blog (/pt/lu/blog/) | Operator | To do | 2026-10-26 |
 
-| 8s | Confirm price list v3 (Verified 1,800/4,800 €, Featured 4,800/12,000 €, Bank 9–15k €, developer campaign from 2,500 €; founding 40% off) in ops/prompts/15_growth_engine.md | Operator | To do | 2026-10-27 |
+| 8s | Confirm price list v3 (Verified 1,800/4,800 €, Featured 4,800/12,000 €, Bank 9–15k €, developer campaign from 2,500 €; founding 40% off) in ops/prompts/15_growth_engine.md | Operator | Superseded by D40 | 2026-10-27 |
 
-| 8t | Confirm Private tier price (Private Partner 25–50k € a year) in ops/prompts/15_growth_engine.md | Operator | To do | 2026-10-27 |
+| 8t | Confirm Private tier price (Private Partner 25–50k € a year) in ops/prompts/15_growth_engine.md | Operator | Superseded by D40 | 2026-10-27 |
+
+| 8u | Wire beehiiv form and Tally forms (ops/ACCOUNTS.md) into site/src/config.ts and pages; create EN and FR versions of the forms' text for the operator | CTO | To do | 2026-10-28 |
+| 8v | Set beehiiv footer postal address (billing entity or business address, never personal) before the first send | Operator | Blocked: waits for D4 | 2026-11-25 |
+
+| 8w | Decide the monetisation model (area slots for developers, journey-checkpoint slots for advisers, the partner group, paid call dropped or not, price ranges); CEO proposal in chat 25 Oct | Operator | Done (D38–D40) | 2026-10-28 |
 
 | 19a | Outreach v3: approve sponsors/outreach/v3 (3 sequences, 10 personalised drafts), then set up the drafts-only Apps Script in sponsors/outreach/HOWTO.md (30 drafts a day, nothing sent without approval) | Operator | To do | 2026-11-02 |
 | 19b | Media push: approve content/press (releases PT/EN/FR, brand facts) and ops/LAUNCH_MEDIA.md; nothing sent before launch week | Daniel, Operator | To do | 2026-11-16 |
@@ -119,7 +124,7 @@ Status: To do · Doing · Blocked · Done
 | 19e | Map photos (prompt 16): 3 to 5 licensed photos per region (North, Centre, Alentejo, Algarve, Madeira, Azores; Lisbon and Porto done). Unsplash pages are blocked from here: either a free Unsplash API key in an environment variable, or the partner sends its own photos with written permission | Operator, Partner | To do | 2026-11-13 |
 | 19f | Community size abroad (FR, CH, BR, US, IL) and Google Trends per country for the media kit: sources blocked from here | Partner | To do | 2026-11-13 |
 
-| 19g | Decide: price list v3 and Private tier (8s, 8t) are still "proposal" on the partner pages and media kits | Daniel | To do | 2026-10-27 |
+| 19g | Decide: price list v3 and Private tier (8s, 8t) are still "proposal" on the partner pages and media kits | Daniel | Superseded by D38–D40 (prices only in the brochure) | 2026-10-27 |
 | 19h | Decide: the 5 M€ and 10 M€ examples cite Knight Frank listings (another agency) as data, no contact route; keep (D14 reading) or replace with partner agency or developer listings | Daniel | To do | 2026-10-30 |
 | 19i | Credit partner wording: "sem custos para si" removed until the partner confirms its fees in writing (13d) | Father via Operator | To do | 2026-11-06 |
 
