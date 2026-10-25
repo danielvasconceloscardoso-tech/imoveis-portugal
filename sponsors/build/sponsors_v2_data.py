@@ -183,3 +183,64 @@ EXCLUDED_AGENCIES = {
     "RE/MAX Portugal (central)", "Century 21 Portugal", "KW Portugal", "Zome",
     "Portugal Sotheby's International Realty",
 }
+
+
+# ---------------------------------------------------------------------------------------------------------------
+# Prompt 03 (25 Oct 2026): foreign-capital developers. Same fields as ROWS plus capital_origin (country of the
+# capital behind the company). Developers sell to buyers from their own country, so they apply to the US and IL
+# editions first. Searched and not found (see sponsors/INTERNATIONAL.md): US-capital, UK-capital and Chinese-capital
+# residential developers, and "Gaya Capital" and "Grupo Tamar". Nothing on Russian capital (D11).
+INTL_ROWS = [
+("Shalu Investments", "Developer", "IL, US", "B", "https://www.essential-business.pt/2025/10/03/shalu-invests-e100-million-in-luxury-porto-project/",
+ "Israeli developer; 100 M€ O'rizon Living on the Douro (about 200 apartments, five buildings, Valbom in Gondomar), launched with Dils and Réplica (Oct 2025). Target buyers not stated: no proof yet of spend on foreign buyers", 2025, "Fetched", "M", "Campaign", "Israel"),
+("Taga Urbanic", "Developer", "IL, US", "B", "https://www.essential-business.pt/?p=21799",
+ "Israeli group, in Portugal since 2018, 19 developments and about 2,000 homes in Porto, Gaia, Maia and Setúbal; Sal D'Ouro in Gaia (60 M€, 200 homes) aimed at the middle and upper-middle classes and foreign buyers (Apr 2023). Also builds in Israel, the UK, Germany and the US", 2023, "Fetched", "M", "Campaign", "Israel"),
+("Youropa", "Developer", "IL, US", "B", "https://econews.pt/?p=47234",
+ "Israeli group; opened a Porto office on 15 May 2026; five own developments (80 M€ in sales), seven more being marketed, six projects delivered in 2026. It also resells and rents units: check it does not operate as an agency (D9) before contact", 2026, "Fetched", "M", "Campaign", "Israel"),
+("Fortera", "Developer", "IL, US", "C", "https://www.essential-business.pt/?p=16891",
+ "Israeli developer; 500 M€ plan for about 1,000 homes in Greater Porto (Mar 2022), Skyline tower in Gaia. No evidence of marketing to foreign buyers, and it advertises an average 24% yield to investors, which our editorial policy does not let us repeat", 2022, "Fetched", "L", "Campaign", "Israel"),
+("Mondego Capital Partners", "Developer / investor", "IL, US", "C", "https://www.essential-business.pt/?p=11819",
+ "Porto-based; 45 M€ in luxury residential buildings in Lisbon (Chiado, Baixa, Marquês de Pombal), Jan 2021. Israeli link rests on a GRI Institute profile only; target buyers not stated", 2021, "Fetched", "S", "Campaign", "Israel (to confirm)"),
+]
+
+# Chambers of commerce and embassies. Fields: organisation, type, country, what they offer, public contact route,
+# evidence URL, evidence check, relevance, next action. Introductions only (prompt 03 guardrail 3).
+CHAMBERS = [
+("AmCham Portugal (Câmara de Comércio Americana em Portugal)", "Chamber", "USA",
+ "Private non-profit bilateral chamber, about 300 member companies; monthly newsletter; more than 40 events a year; 49 sponsors in Platinum, Gold and Silver tiers (own site)",
+ "Contact form on the site (Contactos page)", "https://amchamportugal.pt", "Fetched",
+ "High for the US edition: the one organisation that reaches US companies in Portugal", "Ask for sponsor and newsletter options; offer a labelled guest post"),
+("British-Portuguese Chamber of Commerce (BPCC)", "Chamber", "United Kingdom",
+ "Founded 1911, about 350 members, offices in Lisbon, the North and the Algarve; an advertising service and a mailing list (no prices published)",
+ "Contacts page on the site", "https://bpcc.pt", "Fetched",
+ "Low: there is no UK edition. Savills Portugal is a member (an agency, D9)", "Park until a UK edition exists"),
+("Portuguese Chamber of Commerce in the UK (PCCUK)", "Chamber", "United Kingdom",
+ "Runs the Moving to Portugal show and seminars with AICEP, four a year (London 26 Mar 2026; London 15 Oct 2026; Edinburgh 12 Nov 2026); free for visitors; exhibitors include resorts, banks, tax advisers",
+ "Via the show's website or AICEP (public line on the Portugal Global page)", "https://portugalglobal.pt/en/news/2026/fevereiro/moving-to-portugal-show-and-seminars-returns-to-central-london", "Fetched",
+ "Low: UK audience, no UK edition; useful as a model for a US show", "Park"),
+("Portugal-China Chamber of Commerce and Industry (CCILC)", "Chamber", "China",
+ "Lisbon chamber founded in 1978, about 200 member companies (undated EU SME Centre profile); a Sept 2026 item reports a new corporate member",
+ "Via its website (not opened)", "https://www.eusmecentre.org.cn/partners/portugal-china-chamber-of-commerce-and-industry-ccilc", "Search result",
+ "Low: no Chinese edition and no current Chinese residential developer found", "Park; re-check if a Chinese-language edition is ever planned"),
+("Portuguese-Israeli Chamber of Commerce (CCLI)", "Chamber", "Israel",
+ "Reported by Portugal Resident as a newly formed chamber that held a lunch in Porto for about 50 people; the article is undated and no current website was found",
+ "Unknown", "https://www.portugalresident.com/chamber/", "Search result",
+ "High if it exists: the natural door to Israeli developers in Porto", "Daniel or the partner to confirm the chamber exists and who runs it"),
+("U.S. Commercial Service, Embassy of the United States in Lisbon", "Embassy", "USA",
+ "Helps US companies export to Portugal; office inside the embassy compound; the site lists a public office line and staff names that differ between pages",
+ "Office contact on the trade.gov Portugal page", "https://www.trade.gov/portugal-contact-us", "Search result",
+ "Low: it serves US exporters, not buyers. Ask only whether it can share a note with US firms active in Portuguese real estate", "Formal introduction request, no logo or endorsement"),
+("Embassy of the United Kingdom in Lisbon, Department for Business and Trade", "Embassy", "United Kingdom",
+ "Directs UK companies that want to export or invest in Portugal to a public enquiries mailbox",
+ "Public enquiries route on the gov.uk page", "https://www.gov.uk/world/organisations/british-embassy-lisbon/office/department-for-business-and-trade", "Fetched",
+ "Low: no UK edition", "Park"),
+("Embassy of Israel in Lisbon", "Embassy", "Israel",
+ "Public site with the embassy's departments and social accounts. No economic or trade section page was found; Israel's missions often have one inside the Foreign Trade Administration, but this is not confirmed for Lisbon",
+ "Enquiry route on the embassy site", "https://embassies.gov.il/portugal/en", "Search result",
+ "Medium for the IL edition, once the economic section is identified", "Find the economic section (task for Daniel); then a formal introduction request"),
+("Embassy of China in Lisbon, Economic and Commercial Counsellor's Office", "Embassy", "China",
+ "Mandate (2015 Ministry of Commerce page): promote bilateral trade and investment, advise firms, organise fairs and seminars; no public contact route found",
+ "Via the embassy's official site (not opened)", "https://pt.mofcom.gov.cn/AboutUs/art/2015/art_1d0f6ff0306d46a1b7192aa708363bfb.html", "Search result",
+ "Low", "Park"),
+]
+

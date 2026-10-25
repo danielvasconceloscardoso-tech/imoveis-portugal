@@ -47,7 +47,7 @@ Status: To do · Doing · Blocked · Done
 | 10 | Meta Ad Library pass for Luxembourg and Switzerland (links in sponsors/METHOD.md); add advertisers as tier A | Partner | To do | 2026-11-06 |
 | 11 | Get the latest exhibitor list of the Paris Portuguese property fair | Partner | To do | 2026-11-06 |
 | 12 | Optional: move repo to a brand GitHub organisation (current account name contains the founder's name) | Operator | To do | 2026-11-07 |
-| 8g | Run ops/prompts/03_international_sponsors.md (foreign-capital developers, bilateral chambers, embassy economic sections; drafts only). Checked 2026-10-25: not run. Pipeline has no chambers or embassies, 7 developers and only 4 US-only rows, none for Israel. Same as task 16 | CTO | To do | 2026-10-30 |
+| 8g | Run ops/prompts/03_international_sponsors.md. Done on branch (25 Oct): 5 Israeli-capital developers (S151 to S155), tab "Chambers & embassies", sponsors/INTERNATIONAL.md, 7 English drafts in sponsors/outreach/international/. No US, UK or Chinese-capital residential developer found. Same as task 16 | CTO | Done on branch, drafts not sent | 2026-10-30 |
 | 8h | Run ops/prompts/04_free_ebooks.md (facts base + free e-books per edition) | CTO | Done on branch: content/facts/facts.csv (54 facts), 18 e-book PDFs; review in 8i and 9d | 2026-11-06 |
 | 8i | Review legal and tax facts flagged in the e-book PR | Operator | To do | 2026-11-10 |
 | 8j | Apply ops/prompts/05_usa_israel_editions.md to prompts 02–04 | CTO | Done on branch for FAQ, plans, drafts, e-books, domain options; sponsor targets for US and IL still missing (see 8g) | 2026-10-26 |
@@ -89,11 +89,15 @@ Status: To do · Doing · Blocked · Done
 
 | 15 | Blog on the site (all editions, PT, EN, FR): article template and collection, index page, SEO (title and description, hreflang, canonical, sitemap, Article and FAQ structured data, short answer-first intro for featured snippets and AI answers), sources and disclaimer per the editorial policy. Two launch articles chosen by the CTO from the most searched and most important topics (proposed: the 7.5% non-resident IMT and what changes for emigrants; the buying process step by step from abroad), drafted in all three languages from content/facts/facts.csv. Requested by Daniel 25 Oct | CTO | Done on branch (25 Oct): blog index and article pages in PT, EN, FR, SEO data, per-edition sitemaps; two articles (non-resident IMT at 7.5%; buying from abroad step by step); checks in scripts/check-content.mjs and check-parity.mjs. Not merged | 2026-11-06 |
 | 15b | Review the two blog articles (legal and tax: Daniel; market: partner agency) before anything is published | Daniel, Partner | To do | 2026-11-13 |
-| 16 | Run ops/prompts/03_international_sponsors.md (same as 8g; requested again by Daniel 25 Oct) | CTO | To do | 2026-10-30 |
+| 16 | Run prompt 03 (requested again by Daniel 25 Oct): see 8g | CTO | Done on branch | 2026-10-30 |
 | 17 | Social media plan: from content creation to posting and monitoring, as automated as the rules allow. Plan only, for approval: content from the weekly batch, formats per platform, a scheduler export, monitoring of reach and clicks feeding METRICS.md, and the approval gate (hard rule 2: nothing is posted without the operator's approval). Verify the free tiers and import formats of Meta Business Suite, Metricool and Buffer before proposing. Requested by Daniel 25 Oct | CTO | To do: plan first | 2026-11-06 |
 | 17b | Approve the social plan, then create the brand accounts (D2, English ones named "Portugal Home Guides") | Operator | To do | 2026-11-13 |
 
 | 15c | Blog next steps once the first two are approved: two articles a month from content/plan topics; link the blog from the weekly newsletter; add internal links from FAQ answers to articles; submit each domain's sitemap-{ed}.xml in Google Search Console after launch | CTO | To do | 2026-12-01 |
+
+| 16b | Approve the 7 international drafts (sponsors/outreach/international/); nothing is sent before task 8q. Holds listed in international.csv: Youropa (check D9), the Israeli chamber (confirm it exists), AmCham (check member claim) | Operator | To do | 2026-10-30 |
+| 16c | Confirm the Portuguese-Israeli chamber exists; find the economic section of the Israeli embassy in Lisbon; open the idealista pages that blocked automated access (S151 to S155, INE figure for non-EU buyers) | Daniel, Partner | To do | 2026-11-06 |
+| 16d | Brazilian-capital developers pass for the BR edition (same method as prompt 03) | CTO | To do | 2026-11-13 |
 
 ## Last session
 

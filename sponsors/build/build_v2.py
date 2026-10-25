@@ -2,8 +2,8 @@ import csv, sys, datetime as dt
 import os
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-from sponsors_v2_data import ROWS, C_ROWS, PARTNERS, EXIT_BUYERS, EXCLUDED_AGENCIES
-from openpyxl import Workbook
+from sponsors_v2_data import ROWS, C_ROWS, PARTNERS, EXIT_BUYERS, EXCLUDED_AGENCIES, INTL_ROWS, CHAMBERS
+from openpyxl import Workbook, load_workbook
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.worksheet.datavalidation import DataValidation
 from openpyxl.utils import get_column_letter
@@ -38,18 +38,23 @@ for r in ROWS:
     company, sector, edition, tier, url, note, year, status, size, offer = r
     recs.append(dict(company=company, sector=sector, edition=edition, tier=tier, size=size,
                      evidence_url=url, evidence_note=note, evidence_year=year, evidence_status=status,
-                     offer_type=offer))
+                     offer_type=offer, capital_origin="not assessed"))
+for company, sector, edition, tier, url, note, year, status, size, offer, origin in INTL_ROWS:  # prompt 03
+    recs.append(dict(company=company, sector=sector, edition=edition, tier=tier, size=size,
+                     evidence_url=url, evidence_note=note, evidence_year=year, evidence_status=status,
+                     offer_type=offer, capital_origin=origin))
 for company, sector in C_ROWS:
     recs.append(dict(company=company, sector=sector, edition="LU, FR, CH, BR" if "(" not in sector else
                      ("LU" if "Luxembourg" in sector else "CH" if "Switzerland" in sector else "BR" if "Brazil" in sector else "FR"),
                      tier="C", size="L", evidence_url="", evidence_note="Large or generic; no proof of spend on our audience",
-                     evidence_year="", evidence_status="", offer_type="Gold" if "Bank" in sector or "Airline" in sector else "Silver"))
+                     evidence_year="", evidence_status="", offer_type="Gold" if "Bank" in sector or "Airline" in sector else "Silver",
+                     capital_origin="not assessed"))
 
 excluded = [r for r in recs if r["company"] in EXCLUDED_AGENCIES]
 assert len(excluded) == len(EXCLUDED_AGENCIES), "excluded name mismatch"
 recs = [r for r in recs if r["company"] not in EXCLUDED_AGENCIES]
-names = [r["company"] for r in recs]
-assert len(names) == len(set(names)), "duplicate company"
+names = [(r["company"], r["sector"]) for r in recs]
+assert len(names) == len(set(names)), "duplicate company and sector"  # one company may appear twice with two roles
 
 def calc(r):
     v = PRICES[r["offer_type"]]
@@ -60,11 +65,25 @@ def calc(r):
     ev = v * p
     return v, round(p, 2), round(ev, 2), round(ev * SPEED[r["size"]], 2)
 
+# pipeline.csv is the source of truth for companies it already holds (METHOD.md, and hand edits since prompt 10 and 13 are
+# not in this data file): those rows are carried over as they are, and only companies new to the CSV are added from here.
+old = {}
+if os.path.exists(f"{REPO}/pipeline.csv"):
+    for o in csv.DictReader(open(f"{REPO}/pipeline.csv", encoding="utf-8")): old[(o["company"], o["sector"])] = o
 for r in recs:
     r["est_deal_value_eur"], r["close_probability"], r["expected_value_eur"], r["priority_score"] = calc(r)
     r["decision_maker_role"] = role(r["sector"])
     r["contact_channel"] = channel(r["size"], r["tier"])
 
+kept = []
+for o in old.values():
+    rec = dict(o)
+    rec["evidence_year"] = int(o["evidence_year"]) if o["evidence_year"] else ""
+    for k in ("est_deal_value_eur", "close_probability", "expected_value_eur", "priority_score"): rec[k] = float(o[k])
+    rec["est_deal_value_eur"] = int(float(o["est_deal_value_eur"]))
+    rec["capital_origin"] = o.get("capital_origin") or "not assessed"
+    kept.append(rec)
+recs = kept + [r for r in recs if (r["company"], r["sector"]) not in old]
 ab = [r for r in recs if r["tier"] in "AB"]
 cc = [r for r in recs if r["tier"] == "C"]
 ab.sort(key=lambda r: (-r["priority_score"], r["company"]))
@@ -79,7 +98,7 @@ for i, r in enumerate(ab):
         r["next_action_date"] = days1[i // 8].isoformat()
         r["next_action"] = "Email 1 (template in sponsors/METHOD.md) + LinkedIn request on day 2"
     else:
-        r["next_action_date"] = days2[(i - 40) // 10].isoformat()
+        r["next_action_date"] = days2[min((i - 40) // 10, len(days2) - 1)].isoformat()
         r["next_action"] = "Email 1 + LinkedIn request on day 2"
 for r in cc:
     r["status"] = "Parked"; r["owner"] = "CEO"
@@ -87,12 +106,20 @@ for r in cc:
     r["next_action_date"] = "2026-12-01"
 
 ordered = ab + sorted(cc, key=lambda r: r["company"])
-for i, r in enumerate(ordered, 1):
-    r["id"] = f"S{i:03d}"
+# IDs and work already logged stay as they are (prompt 03): a company keeps its ID and its status, next action and
+# owner from the existing pipeline.csv; only new companies get the next free ID.
+next_id = max([int(o["id"][1:]) for o in old.values()] + [0]) + 1
+for r in ordered:
+    o = old.get((r["company"], r["sector"]))
+    if o:
+        r["id"] = o["id"]
+        for k in ("status", "next_action", "next_action_date", "owner"): r[k] = o[k]
+    else:
+        r["id"] = f"S{next_id:03d}"; next_id += 1
 
 COLS = ["id", "company", "sector", "edition", "tier", "size", "evidence_url", "evidence_note", "evidence_year",
         "evidence_status", "decision_maker_role", "contact_channel", "offer_type", "est_deal_value_eur",
-        "close_probability", "expected_value_eur", "priority_score", "status", "next_action", "next_action_date", "owner"]
+        "close_probability", "expected_value_eur", "priority_score", "status", "next_action", "next_action_date", "owner", "capital_origin"]
 
 with open(f"{REPO}/pipeline.csv", "w", newline="", encoding="utf-8") as fh:
     w = csv.DictWriter(fh, fieldnames=COLS, extrasaction="ignore")
@@ -159,8 +186,8 @@ st.column_dimensions["A"].width = 34; st.column_dimensions["B"].width = 18; st.c
 # Pipeline sheet (A/B), Later sheet (C)
 HEAD = ["ID", "Company", "Sector", "Editions", "Tier", "Size", "Evidence URL", "Evidence", "Evidence year", "Evidence check",
         "Who to reach", "Channel", "Offer", "Deal value year 1 (€)", "Close probability", "Expected value (€)", "Priority score",
-        "Status", "Next action", "Next action date", "Owner"]
-WID = [7, 30, 24, 14, 6, 6, 34, 50, 9, 13, 30, 30, 16, 13, 11, 13, 11, 14, 36, 13, 10]
+        "Status", "Next action", "Next action date", "Owner", "Capital origin"]
+WID = [7, 30, 24, 14, 6, 6, 34, 50, 9, 13, 30, 30, 16, 13, 11, 13, 11, 14, 36, 13, 10, 16]
 STATUSES = '"To contact,Contacted,Replied,Call booked,Proposal sent,Won,Lost,Parked"'
 
 def sheet(name, rows):
@@ -187,12 +214,12 @@ def sheet(name, rows):
         ws.cell(row=n, column=17, value=f"=P{n}*INDEX(Settings!$B${sp_start}:$B${sp_end},MATCH(F{n},Settings!$A${sp_start}:$A${sp_end},0))").number_format = '#,##0'
         for c in (14, 15, 16, 17):
             ws.cell(row=n, column=c).font = B; ws.cell(row=n, column=c).border = BD; ws.cell(row=n, column=c).alignment = Alignment(vertical="top")
-        for c, v in ((18, r["status"]), (19, r["next_action"]), (20, r["next_action_date"]), (21, r["owner"])):
+        for c, v in ((18, r["status"]), (19, r["next_action"]), (20, r["next_action_date"]), (21, r["owner"]), (22, r["capital_origin"])):
             cell = ws.cell(row=n, column=c, value=v); cell.font = B; cell.alignment = WR; cell.border = BD
     last = len(rows) + 1
     dv = DataValidation(type="list", formula1=STATUSES, allow_blank=False)
     ws.add_data_validation(dv); dv.add(f"R2:R{last}")
-    ws.auto_filter.ref = f"A1:U{last}"
+    ws.auto_filter.ref = f"A1:V{last}"
     return ws, last
 
 pl, pl_last = sheet("Pipeline A-B", ab)
@@ -208,7 +235,14 @@ for i, (h, w) in enumerate(zip(th, tws), 1):
 tw.freeze_panes = "D2"
 rng = f"'Pipeline A-B'!$A$2:$A${pl_last}"
 def look(col, n): return f"=INDEX('Pipeline A-B'!${col}$2:${col}${pl_last},MATCH($B{n},{rng},0))"
-for k, r in enumerate(ab[:40], 2):
+# The list of the week stays as first built (prompt 03): the week-1 drafts in sponsors/outreach/week-1 match it row by
+# row, so a recomputed ranking must not reshuffle it. Delete the tab's IDs (or the workbook) to start a new week.
+prev = []
+if os.path.exists(f"{REPO}/Sponsors_v2.xlsx"):
+    prev = [row[1] for row in load_workbook(f"{REPO}/Sponsors_v2.xlsx")["This week's 40"].iter_rows(min_row=2, max_row=41, values_only=True) if row[1]]
+by_id = {r["id"]: r for r in ab}
+week = [by_id[i] for i in prev if i in by_id] if prev else ab[:40]
+for k, r in enumerate(week, 2):
     tw.cell(row=k, column=1, value=k - 1).font = B
     tw.cell(row=k, column=2, value=r["id"]).font = B
     for col, src in ((3, "B"), (4, "D"), (5, "E"), (6, "M"), (7, "P"), (8, "Q"), (9, "K"), (10, "L"), (11, "T"), (12, "R")):
@@ -239,6 +273,18 @@ for k, p in enumerate(EXIT_BUYERS, 2):
     for c, v in enumerate(p, 1):
         cell = eb.cell(row=k, column=c, value=v or None); cell.font = BB if c == 1 else B; cell.alignment = WR; cell.border = BD
     if p[3]: eb.cell(row=k, column=4).hyperlink = p[3]
+
+# Chambers & embassies (prompt 03)
+ce = wb.create_sheet("Chambers & embassies")
+ch = ["Organisation", "Type", "Country", "What they offer", "Public contact route", "Evidence URL", "Evidence check", "Relevance", "Next action"]
+for i, (h, w) in enumerate(zip(ch, [44, 10, 14, 70, 34, 40, 13, 46, 40]), 1):
+    c = ce.cell(row=1, column=i, value=h); c.font = H; c.fill = HF
+    ce.column_dimensions[get_column_letter(i)].width = w
+for k, row in enumerate(CHAMBERS, 2):
+    for c, v in enumerate(row, 1):
+        cell = ce.cell(row=k, column=c, value=v or None); cell.font = BB if c == 1 else B; cell.alignment = WR; cell.border = BD
+    ce.cell(row=k, column=6).hyperlink = row[5]
+ce.cell(row=len(CHAMBERS) + 3, column=1, value="Introductions only: no endorsement requested, no embassy or chamber name or logo on our site or media kit. No personal emails are stored.").font = Font(name=AR, size=9, italic=True, color="5D6672")
 
 # Excluded agencies (D9)
 xs = wb.create_sheet("Excluded (agencies)")
@@ -284,7 +330,7 @@ c = sm.cell(row=r, column=2, value=f"=(B5+B6)/B{tot}"); c.font = B; c.number_for
 r += 2
 for i, h in enumerate(["Edition", "A + B companies", "Expected value (€)"], 1):
     c = sm.cell(row=r, column=i, value=h); c.font = H; c.fill = HF
-for ed in ["LU", "FR", "CH", "BR"]:
+for ed in ["LU", "FR", "CH", "BR", "US", "IL"]:
     r += 1
     sm.cell(row=r, column=1, value=ed).font = B
     sm.cell(row=r, column=2, value=f'=SUMPRODUCT(--ISNUMBER(SEARCH("{ed}",{PLR}!$D$2:$D${pl_last})))').font = B

@@ -35,7 +35,7 @@ def slugify(name: str) -> str:
 
 
 def load_week_rows() -> dict:
-    """Rows of the "This week's 40" tab, keyed by their # column."""
+    """Rows of the "This week's 40" tab, keyed by their # column (only # and ID are read: the other cells are formulas with no stored values until the workbook is opened in a spreadsheet)."""
     ws = openpyxl.load_workbook(ROOT / "sponsors" / "Sponsors_v2.xlsx", data_only=True)["This week's 40"]
     return {r[0]: r for r in ws.iter_rows(min_row=2, values_only=True) if r[1]}
 
@@ -102,7 +102,7 @@ def main(week: str) -> int:
             "subject": subject,
             "body": body,
             "words": words,
-            "send_on": rows[nn][10],
+            "send_on": p["next_action_date"],
             "evidence_url": p["evidence_url"],
             "check_before_sending": " ".join(checks),
         })
