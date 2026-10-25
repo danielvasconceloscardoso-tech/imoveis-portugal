@@ -10,6 +10,51 @@ How to edit:
 
 ## common
 
+### nav.ours
+- PT: Os nossos parceiros
+- EN: Our partners
+- FR: Nos partenaires
+
+### nav.private
+- PT: Private
+- EN: Private
+- FR: Private
+
+### close
+- PT: Fechar
+- EN: Close
+- FR: Fermer
+
+### newsletter
+- PT: Newsletter
+- EN: Newsletter
+- FR: Newsletter
+
+### navx.partners
+- PT: Parceiros
+- EN: Partners
+- FR: Partenaires
+
+### navx.private
+- PT: Private
+- EN: Private
+- FR: Private
+
+### navx.sims
+- PT: Simuladores
+- EN: Calculators
+- FR: Simulateurs
+
+### navx.map
+- PT: Mapa
+- EN: Map
+- FR: Carte
+
+### navx.buy
+- PT: Comprar
+- EN: Buying
+- FR: Acheter
+
 ### nav.map
 - PT: Mapa
 - EN: Map
@@ -2274,6 +2319,11 @@ How to edit:
 - FR: Paiement par carte via Stripe. Nous ne conservons pas les données de carte.
 
 ## casa
+
+### more.h
+- PT: Para ler e preparar
+- EN: To read and prepare
+- FR: À lire pour préparer
 
 ### title
 - PT: Comprar a partir de fora, passo a passo
