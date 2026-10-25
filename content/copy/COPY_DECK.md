@@ -10,6 +10,16 @@ How to edit:
 
 ## common
 
+### nav.data
+- PT: Preços das casas
+- EN: House prices
+- FR: Prix des logements
+
+### nav.casa
+- PT: Casa tratada de fora
+- EN: Home from abroad
+- FR: Maison depuis l'étranger
+
 ### nav.compare
 - PT: O que compra
 - EN: What it buys
@@ -1446,6 +1456,211 @@ How to edit:
 
 ## sims
 
+### gains.note
+- PT: Desde 2023, metade da mais-valia conta para o IRS e aplicam-se as taxas gerais, também a não residentes. A taxa pode ser mais alta conforme o resto do seu rendimento, e o país onde vive pode também tributar a venda. Não inclui os coeficientes de correção monetária.
+- EN: Since 2023, half of the gain counts for income tax and the general rates apply, also to non-residents. The rate can be higher depending on the rest of your income, and the country where you live may also tax the sale. Inflation correction coefficients are not included.
+- FR: Depuis 2023, la moitié de la plus-value est retenue pour l'impôt et les taux généraux s'appliquent, aussi aux non-résidents. Le taux peut être plus élevé selon le reste de vos revenus, et votre pays de résidence peut aussi imposer la vente. Coefficients de correction monétaire non inclus.
+
+### r.taxIfOnly
+- PT: IRS se fosse o seu único rendimento em Portugal
+- EN: Tax if it were your only income in Portugal
+- FR: Impôt si c'était votre seul revenu au Portugal
+
+### r.taxable
+- PT: Parte que conta (50%)
+- EN: Part that counts (50%)
+- FR: Part retenue (50 %)
+
+### r.gain
+- PT: Mais-valia
+- EN: Gain
+- FR: Plus-value
+
+### f.salecosts
+- PT: Custos da venda (€)
+- EN: Sale costs (€)
+- FR: Frais de vente (€)
+
+### f.works
+- PT: Obras de valorização com fatura (€)
+- EN: Improvement works with invoices (€)
+- FR: Travaux de valorisation facturés (€)
+
+### f.buycosts
+- PT: Custos da compra: IMT, selo, escritura (€)
+- EN: Purchase costs: IMT, stamp duty, deed (€)
+- FR: Frais d'achat : IMT, timbre, acte (€)
+
+### f.buy
+- PT: Preço de compra (€)
+- EN: Purchase price (€)
+- FR: Prix d'achat (€)
+
+### f.sale
+- PT: Preço de venda (€)
+- EN: Sale price (€)
+- FR: Prix de vente (€)
+
+### gains.p
+- PT: A mais-valia na venda de uma casa em Portugal e a parte que conta para o IRS.
+- EN: The gain on selling a home in Portugal and the part that counts for Portuguese income tax.
+- FR: La plus-value à la vente d'un bien au Portugal et la part retenue pour l'impôt portugais.
+
+### gains.name
+- PT: Mais-valias para não residentes
+- EN: Capital gains for non-residents
+- FR: Plus-values pour non-résidents
+
+### afford.note
+- PT: O rendimento em francos, dólares, reais ou shekels é convertido à taxa de referência do BCE de 23 de outubro de 2026. Os bancos aplicam a sua própria taxa e podem descontar o risco cambial. Não inclui os impostos da compra: veja o custo total.
+- EN: Income in francs, dollars, reais or shekels is converted at the ECB reference rate of 23 October 2026. Banks apply their own rate and may discount for currency risk. Purchase taxes are not included: see the total cost.
+- FR: Le revenu en francs, dollars, reais ou shekels est converti au taux de référence de la BCE du 23 octobre 2026. Les banques appliquent leur propre taux et peuvent tenir compte du risque de change. Impôts de l'achat non inclus : voir le coût total.
+
+### afford.byincome
+- PT: O que limita é o rendimento: a prestação não pode passar 45% do rendimento líquido.
+- EN: Your income is the limit: the monthly payment cannot exceed 45% of net income.
+- FR: C'est le revenu qui limite : la mensualité ne peut dépasser 45 % du revenu net.
+
+### afford.bydeposit
+- PT: O que limita é a entrada: os bancos financiam até 80% (90% na habitação própria e permanente), por isso a entrada tem de cobrir o resto.
+- EN: Your deposit is the limit: banks lend up to 80% (90% for an own permanent home), so the deposit must cover the rest.
+- FR: C'est l'apport qui limite : les banques financent jusqu'à 80 % (90 % pour une résidence principale), l'apport doit couvrir le reste.
+
+### r.price
+- PT: Preço máximo da casa
+- EN: Highest home price
+- FR: Prix maximum du bien
+
+### r.maxLoan
+- PT: Crédito máximo
+- EN: Highest loan
+- FR: Crédit maximum
+
+### r.maxInst
+- PT: Prestação máxima
+- EN: Highest monthly payment
+- FR: Mensualité maximale
+
+### f.debts
+- PT: Outras prestações mensais
+- EN: Other monthly loan payments
+- FR: Autres mensualités
+
+### afford.p
+- PT: O preço máximo a partir do rendimento que recebe onde vive, da entrada e da taxa, com os limites do Banco de Portugal.
+- EN: The highest price from the income you earn where you live, your deposit and the rate, within Banco de Portugal's limits.
+- FR: Le prix maximum à partir du revenu perçu là où vous vivez, de l'apport et du taux, dans les limites du Banco de Portugal.
+
+### afford.name
+- PT: Que casa consigo comprar
+- EN: What can I afford
+- FR: Quel bien puis-je acheter
+
+### dsti.note
+- PT: Desde 1 de agosto de 2026, o Banco de Portugal limita a 45% do rendimento líquido o total das prestações de todos os créditos de quem pede um novo crédito. Cada banco pode exceder o limite em até 10% do crédito que concede por ano.
+- EN: Since 1 August 2026, Banco de Portugal caps all loan payments of a new borrower at 45% of net income. Each bank may exceed the cap for up to 10% of the credit it grants each year.
+- FR: Depuis le 1er août 2026, le Banco de Portugal limite l'ensemble des mensualités d'un nouvel emprunteur à 45 % du revenu net. Chaque banque peut dépasser la limite pour 10 % au plus du crédit accordé chaque année.
+
+### dsti.over
+- PT: Acima do limite: os bancos só podem passar os 45% numa pequena parte dos créditos que concedem.
+- EN: Above the limit: banks may exceed 45% only for a small share of the loans they grant.
+- FR: Au-dessus de la limite : les banques ne peuvent dépasser 45 % que pour une petite part des crédits accordés.
+
+### r.room
+- PT: Margem até ao limite, por mês
+- EN: Room up to the limit, per month
+- FR: Marge jusqu'à la limite, par mois
+
+### r.limit
+- PT: Limite do Banco de Portugal
+- EN: Banco de Portugal limit
+- FR: Limite du Banco de Portugal
+
+### r.ratio
+- PT: Taxa de esforço
+- EN: Debt-to-income ratio
+- FR: Taux d'endettement
+
+### f.instalments
+- PT: Todas as prestações mensais, incluindo a nova
+- EN: All monthly loan payments, including the new one
+- FR: Toutes les mensualités, y compris la nouvelle
+
+### f.income
+- PT: Rendimento líquido mensal
+- EN: Net monthly income
+- FR: Revenu net mensuel
+
+### dsti.p
+- PT: Que parte do seu rendimento líquido vai para prestações, comparada com o limite do Banco de Portugal.
+- EN: How much of your net income goes on loan payments, compared with Banco de Portugal's limit.
+- FR: La part de votre revenu net consacrée aux mensualités, comparée à la limite du Banco de Portugal.
+
+### dsti.name
+- PT: Taxa de esforço
+- EN: Debt-to-income ratio
+- FR: Taux d'endettement
+
+### imi.note
+- PT: Cada município fixa a taxa todos os anos dentro do intervalo legal. Acima de 600 000 € de valor patrimonial por pessoa há ainda o adicional ao IMI (AIMI).
+- EN: Each municipality sets its rate every year within the legal range. Above €600,000 of tax value per person there is also the additional IMI (AIMI).
+- FR: Chaque commune fixe son taux chaque année dans la fourchette légale. Au-delà de 600 000 € de valeur fiscale par personne s'ajoute l'IMI additionnel (AIMI).
+
+### imi.range
+- PT: A taxa tem de estar entre 0,3% e 0,45%.
+- EN: The rate must be between 0.3% and 0.45%.
+- FR: Le taux doit être compris entre 0,3 % et 0,45 %.
+
+### r.imi
+- PT: IMI por ano
+- EN: IMI per year
+- FR: IMI par an
+
+### f.imirate
+- PT: Taxa do município (%)
+- EN: Municipal rate (%)
+- FR: Taux de la commune (%)
+
+### vpt.hint
+- PT: Está na caderneta predial da casa. Costuma ser mais baixo do que o preço.
+- EN: It is on the home's property tax record (caderneta predial). It is usually lower than the price.
+- FR: Elle figure sur la caderneta predial du bien. Elle est en général inférieure au prix.
+
+### f.vpt
+- PT: Valor patrimonial tributário (€)
+- EN: Tax value (VPT, €)
+- FR: Valeur fiscale (VPT, €)
+
+### imi.p
+- PT: O imposto municipal que paga todos os anos pela casa, a partir do valor patrimonial.
+- EN: The municipal tax you pay on the home every year, based on its tax value.
+- FR: L'impôt municipal payé chaque année sur le bien, à partir de sa valeur fiscale.
+
+### imi.name
+- PT: IMI
+- EN: Property tax (IMI)
+- FR: Taxe foncière (IMI)
+
+### imt.note
+- PT: Residentes pagam IMT por escalões (habitação própria e permanente ou outra). Não residentes pagam 7,5% sobre o valor total, salvo exceções: ter sido residente fiscal, passar a sê-lo nos dois anos seguintes, ou arrendar a casa com renda dentro dos limites legais.
+- EN: Residents pay IMT by bracket (own permanent home or other). Non-residents pay 7.5% on the full value, with exceptions: having been a tax resident, becoming one within two years, or letting the home at a rent within the legal caps.
+- FR: Les résidents paient l'IMT par tranches (résidence principale ou autre). Les non-résidents paient 7,5 % sur la valeur totale, sauf exceptions : avoir été résident fiscal, le devenir dans les deux ans, ou louer le bien à un loyer dans les plafonds légaux.
+
+### r.taxes
+- PT: Impostos da compra
+- EN: Purchase taxes
+- FR: Impôts de l'achat
+
+### imt.p
+- PT: Os dois impostos da compra, para residentes e não residentes, com as tabelas de 2026.
+- EN: The two purchase taxes, for residents and non-residents, with the 2026 tables.
+- FR: Les deux impôts de l'achat, pour résidents et non-résidents, avec les barèmes 2026.
+
+### imt.name
+- PT: IMT e imposto do selo
+- EN: Transfer tax and stamp duty
+- FR: IMT et droit de timbre
+
 ### title
 - PT: Simuladores
 - EN: Calculators
@@ -2064,3 +2279,212 @@ How to edit:
 - PT: Pagamento por cartão através da Stripe. Não guardamos dados do cartão.
 - EN: Card payment through Stripe. We do not store card details.
 - FR: Paiement par carte via Stripe. Nous ne conservons pas les données de carte.
+
+## casa
+
+### title
+- PT: A sua casa em Portugal, tratada de fora
+- EN: Your home in Portugal, handled from abroad
+- FR: Votre maison au Portugal, gérée depuis l'étranger
+
+### lede
+- PT: Casa, crédito, seguro, advogado, impostos e transferência do dinheiro: escolha o que precisa num só pedido. Cada parte segue apenas para o parceiro que autorizar.
+- EN: Home, mortgage, insurance, lawyer, tax and moving the money: choose what you need in one request. Each part goes only to the partner you authorise.
+- FR: Bien, crédit, assurance, avocat, impôts et transfert d'argent : choisissez ce dont vous avez besoin en une seule demande. Chaque partie va uniquement au partenaire que vous autorisez.
+
+### s.agency.h
+- PT: Encontrar a casa
+- EN: Finding the home
+- FR: Trouver le bien
+
+### s.agency.p
+- PT: A agência parceira, a {agency} (AMI {ami}), procura casas no seu orçamento e mostra-as por videochamada, através de um familiar ou ao vivo.
+- EN: Our partner agency, {agency} (AMI {ami}), looks for homes in your budget and shows them by video call, through a relative or in person.
+- FR: Notre agence partenaire, {agency} (AMI {ami}), cherche des biens dans votre budget et vous les montre en appel vidéo, par un proche ou sur place.
+
+### s.credit.h
+- PT: O crédito
+- EN: The mortgage
+- FR: Le crédit
+
+### s.credit.p
+- PT: Um intermediário de crédito registado no Banco de Portugal compara bancos que emprestam a não residentes.
+- EN: A credit intermediary registered with Banco de Portugal compares banks that lend to non-residents.
+- FR: Un intermédiaire de crédit enregistré auprès du Banco de Portugal compare les banques qui prêtent aux non-résidents.
+
+### s.insurance.h
+- PT: Os seguros
+- EN: Insurance
+- FR: Les assurances
+
+### s.insurance.p
+- PT: Seguro de vida para o crédito e multirriscos para a casa, com uma seguradora registada na ASF.
+- EN: Life cover for the mortgage and home insurance, with an insurer registered with the ASF.
+- FR: Assurance-vie pour le crédit et multirisque habitation, avec un assureur enregistré auprès de l'ASF.
+
+### s.lawyer.h
+- PT: Advogado e impostos
+- EN: Lawyer and tax
+- FR: Avocat et impôts
+
+### s.lawyer.p
+- PT: Um advogado para o contrato-promessa, a procuração e a escritura, e um consultor fiscal para o NIF, o representante fiscal e os impostos onde vive.
+- EN: A lawyer for the promissory contract, the power of attorney and the deed, and a tax adviser for the NIF, the tax representative and tax where you live.
+- FR: Un avocat pour le compromis, la procuration et l'acte, et un conseiller fiscal pour le NIF, le représentant fiscal et l'impôt dans votre pays.
+
+### s.fx.h
+- PT: Transferir o dinheiro
+- EN: Moving the money
+- FR: Transférer l'argent
+
+### s.fx.p
+- PT: Uma empresa de pagamentos autorizada para enviar a entrada e o preço em francos, dólares, reais ou shekels.
+- EN: An authorised payment company to send the deposit and the price in francs, dollars, reais or shekels.
+- FR: Une société de paiement agréée pour envoyer l'apport et le prix en francs, dollars, reais ou shekels.
+
+### partner.none
+- PT: Parceiro a anunciar. Até lá, o pedido chega à nossa equipa e indicamos-lhe onde procurar.
+- EN: Partner to be announced. Until then, your request reaches our team and we tell you where to look.
+- FR: Partenaire à annoncer. D'ici là, votre demande arrive à notre équipe et nous vous indiquons où chercher.
+
+### form.h
+- PT: O seu pedido
+- EN: Your request
+- FR: Votre demande
+
+### form.need
+- PT: De que precisa?
+- EN: What do you need?
+- FR: De quoi avez-vous besoin ?
+
+### form.region
+- PT: Região em Portugal
+- EN: Region in Portugal
+- FR: Région au Portugal
+
+### form.budget
+- PT: Orçamento (€)
+- EN: Budget (€)
+- FR: Budget (€)
+
+### form.when
+- PT: Quando quer comprar
+- EN: When you plan to buy
+- FR: Quand vous pensez acheter
+
+### form.message
+- PT: Mais alguma coisa que devamos saber
+- EN: Anything else we should know
+- FR: Autre chose à nous dire
+
+### form.consent.h
+- PT: Para quem segue cada parte
+- EN: Who receives each part
+- FR: Qui reçoit chaque partie
+
+### form.consent
+- PT: Autorizo o Imóveis Portugal a enviar esta parte do pedido apenas a {name}, para me contactar sobre ela.
+- EN: I authorise Imóveis Portugal to send this part of my request only to {name}, to contact me about it.
+- FR: J'autorise Imóveis Portugal à transmettre cette partie de ma demande uniquement à {name}, pour me contacter à ce sujet.
+
+### form.team
+- PT: a equipa do Imóveis Portugal
+- EN: the Imóveis Portugal team
+- FR: l'équipe d'Imóveis Portugal
+
+### form.tying
+- PT: Nenhum serviço depende de outro: o crédito nunca obriga a contratar o seguro ou outro produto do nosso parceiro (Decreto-Lei 74-A/2017).
+- EN: No service depends on another: a mortgage never requires our partner's insurance or any other product (Decreto-Lei 74-A/2017).
+- FR: Aucun service ne dépend d'un autre : un crédit n'oblige jamais à souscrire l'assurance ou un autre produit de notre partenaire (Decreto-Lei 74-A/2017).
+
+### form.never
+- PT: Não vendemos nem cedemos dados a ninguém. O Imóveis Portugal recebe só o patrocínio fixo dos parceiros, nunca uma comissão por pedido.
+- EN: We never sell or pass on your data. Imóveis Portugal receives only the partners' flat sponsorship, never a fee per request.
+- FR: Nous ne vendons ni ne cédons vos données. Imóveis Portugal reçoit seulement le sponsoring forfaitaire des partenaires, jamais une commission par demande.
+
+### form.send
+- PT: Enviar o pedido
+- EN: Send the request
+- FR: Envoyer la demande
+
+### form.how
+- PT: O botão abre o seu email com o pedido já escrito, para o enviar ao nosso endereço. Recebe resposta em dois dias úteis.
+- EN: The button opens your email with the request already written, to send to our address. You get an answer within two working days.
+- FR: Le bouton ouvre votre messagerie avec la demande déjà rédigée, à envoyer à notre adresse. Réponse sous deux jours ouvrés.
+
+### form.subject
+- PT: Pedido: casa tratada de fora
+- EN: Request: home from abroad
+- FR: Demande : maison depuis l'étranger
+
+### licences.h
+- PT: Licenças
+- EN: Licences
+- FR: Licences
+
+### licences.p
+- PT: Mostramos a licença de cada parceiro: AMI para a agência imobiliária, registo no Banco de Portugal para o intermediário de crédito, registo na ASF para seguros, inscrição na Ordem para advogados.
+- EN: We show each partner's licence: AMI for the estate agency, Banco de Portugal registration for the credit intermediary, ASF registration for insurance, Bar membership for lawyers.
+- FR: Nous affichons la licence de chaque partenaire : AMI pour l'agence immobilière, enregistrement au Banco de Portugal pour l'intermédiaire de crédit, à l'ASF pour l'assurance, inscription à l'Ordre pour les avocats.
+
+## data
+
+### title
+- PT: Preços das casas no Norte e no resto do país
+- EN: House prices in the North and across Portugal
+- FR: Prix des logements dans le Nord et dans le reste du pays
+
+### lede
+- PT: Preço mediano por m² das casas vendidas, por concelho, nos últimos 12 meses, trimestre a trimestre. Dados do INE, atualizados a cada trimestre.
+- EN: Median price per m² of homes sold, by municipality, over the last 12 months, quarter by quarter. INE data, updated every quarter.
+- FR: Prix médian au m² des logements vendus, par commune, sur les 12 derniers mois, trimestre par trimestre. Données de l'INE, mises à jour chaque trimestre.
+
+### region.porto
+- PT: Área Metropolitana do Porto
+- EN: Porto metropolitan area
+- FR: Aire métropolitaine de Porto
+
+### region.minho
+- PT: Minho e Cávado
+- EN: Minho and Cávado
+- FR: Minho et Cávado
+
+### region.tamega
+- PT: Tâmega e Sousa, Douro e Trás-os-Montes
+- EN: Tâmega e Sousa, Douro and Trás-os-Montes
+- FR: Tâmega e Sousa, Douro et Trás-os-Montes
+
+### region.centro
+- PT: Centro
+- EN: Centre
+- FR: Centre
+
+### region.lisboa
+- PT: Lisboa e Algarve
+- EN: Lisbon and the Algarve
+- FR: Lisbonne et l'Algarve
+
+### col.place
+- PT: Concelho
+- EN: Municipality
+- FR: Commune
+
+### col.change
+- PT: Num ano
+- EN: In a year
+- FR: Sur un an
+
+### national
+- PT: Portugal: {v} por m², {chg} num ano.
+- EN: Portugal: {v} per m², {chg} in a year.
+- FR: Portugal : {v} le m², {chg} sur un an.
+
+### note
+- PT: Mediana do valor por m² das vendas de alojamentos familiares registadas nos 12 meses até ao fim de cada trimestre, casas novas e usadas. Não são preços pedidos em anúncios. Nos concelhos com poucas vendas, a variação de um ano para o outro pode ser grande.
+- EN: Median value per m² of family dwellings sold in the 12 months to the end of each quarter, new and existing. Not asking prices from listings. In municipalities with few sales, the change from one year to the next can be large.
+- FR: Valeur médiane au m² des logements familiaux vendus sur les 12 mois jusqu'à la fin de chaque trimestre, neufs et anciens. Pas des prix demandés dans les annonces. Dans les communes où il y a peu de ventes, la variation d'une année sur l'autre peut être forte.
+
+### compare.h
+- PT: Comparado com onde vive
+- EN: Compared with where you live
+- FR: Comparé à votre pays

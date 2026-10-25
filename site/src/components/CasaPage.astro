@@ -1,0 +1,87 @@
+---
+// "A sua casa em Portugal, tratada de fora" (prompt 13, D23): our version of an Ecossistema Casa for people
+// abroad. One page, one request, one consent box per partner, each naming who receives that part
+// (GDPR arts. 6(1)(a) and 7). No tying (DL 74-A/2017). Flat sponsorship only (D6), never a fee per request.
+// Until a request form exists, the button opens the reader's own email with the request written out.
+// Wording: COPY_DECK.md "casa.*".
+import V2 from "../layouts/V2.astro";
+import Calls from "./Calls.astro";
+import { config } from "../config";
+import { pathFor, type Lang, type EdCode } from "../i18n";
+import { c, edName } from "../lib/copy";
+
+interface Props { lang: Lang; ed: EdCode; }
+const { lang, ed } = Astro.props;
+const team = c("casa.form.team", lang);
+const cp = config.creditPartner, ip = config.insurancePartner, p = config.partners;
+// Each part of the request, who receives it and the licence shown next to it.
+const parts = [
+  { k: "agency", name: config.agency.name, licence: `AMI ${config.agency.ami}`, tag: c("common.gold", lang) },
+  { k: "credit", name: cp.name, licence: cp.bdp ? `Banco de Portugal ${cp.bdp}` : "", tag: cp.name ? c("common.sponsored", lang) : "" },
+  { k: "insurance", name: ip.name, licence: ip.asf ? `ASF ${ip.asf}` : "", tag: ip.name ? c("common.sponsored", lang) : "" },
+  { k: "lawyer", name: p.lawyer, licence: "", tag: p.lawyer ? c("common.sponsored", lang) : "" },
+  { k: "fx", name: p.fx, licence: "", tag: p.fx ? c("common.sponsored", lang) : "" },
+];
+const label = (k: string) => c(`casa.s.${k}.h`, lang);
+const subject = `${c("casa.form.subject", lang)} (${ed} · ${lang})`;
+---
+<V2 lang={lang} ed={ed} page="casa" title={`${c("casa.title", lang)} | Imóveis Portugal · ${edName(ed, lang)}`} description={c("casa.lede", lang)} sticky={{ href: "#pedido", label: c("casa.form.send", lang) }}>
+  <div class="frame read ph">
+    <h1>{c("casa.title", lang)}</h1>
+    <p class="lede">{c("casa.lede", lang)}</p>
+  </div>
+  <div class="frame read casa">
+    {parts.map((x) => (
+      <section class="qa-item" aria-labelledby={`s-${x.k}`}>
+        <h2 id={`s-${x.k}`} class="h3">{label(x.k)}</h2>
+        <p>{c(`casa.s.${x.k}.p`, lang)}</p>
+        <p class="small">{x.name ? <><strong>{x.name}</strong>{x.licence && ` · ${x.licence}`} {x.tag && <span class="tag">{x.tag}</span>}</> : c("casa.partner.none", lang)}</p>
+        {x.k === "agency" && <Calls lang={lang} ed={ed} compact />}
+      </section>
+    ))}
+
+    <form class="sim casa-form" id="pedido" data-mail={config.contactEmail} data-subject={subject} novalidate>
+      <h2 class="h3">{c("casa.form.h", lang)}</h2>
+      <fieldset class="field">
+        <legend>{c("casa.form.need", lang)}</legend>
+        {parts.map((x) => <label class="check"><input type="checkbox" name="need" value={x.k} data-label={label(x.k)} data-to={x.name || team} /> {label(x.k)}</label>)}
+      </fieldset>
+      <label class="field"><span>{c("casa.form.region", lang)}</span><input type="text" name="region" autocomplete="off" /></label>
+      <label class="field"><span>{c("casa.form.budget", lang)}</span><input type="number" name="budget" inputmode="decimal" step="1000" min="0" /></label>
+      <label class="field"><span>{c("casa.form.when", lang)}</span><input type="text" name="when" autocomplete="off" /></label>
+      <label class="field"><span>{c("casa.form.message", lang)}</span><textarea name="message" rows="3"></textarea></label>
+      <fieldset class="field consents" hidden>
+        <legend>{c("casa.form.consent.h", lang)}</legend>
+        {parts.map((x) => <label class="consent" data-for={x.k} hidden><input type="checkbox" name="consent" value={x.k} /> <span>{c("casa.form.consent", lang, { name: x.name || team })}</span></label>)}
+      </fieldset>
+      <p class="small">{c("casa.form.tying", lang)} {c("casa.form.never", lang)}</p>
+      <a class="btn" id="casa-send" aria-disabled="true" href="#">{c("casa.form.send", lang)}</a>
+      <p class="small">{c("casa.form.how", lang)} <a href={pathFor(lang, ed, "privacy")}>{c("common.privacy", lang)}</a></p>
+    </form>
+
+    <h2 class="h3" style="margin-top:40px">{c("casa.licences.h", lang)}</h2>
+    <p class="small" style="margin-bottom:64px">{c("casa.licences.p", lang)}</p>
+  </div>
+</V2>
+<script>
+  const f = document.getElementById("pedido") as HTMLFormElement;
+  const send = document.getElementById("casa-send") as HTMLAnchorElement;
+  const box = f.querySelector(".consents") as HTMLFieldSetElement;
+  function sync() {
+    const needs = [...f.querySelectorAll<HTMLInputElement>('input[name="need"]')];
+    const chosen = needs.filter((n) => n.checked);
+    box.hidden = chosen.length === 0;
+    for (const n of needs) { const l = f.querySelector<HTMLElement>(`.consent[data-for="${n.value}"]`)!; l.hidden = !n.checked; if (!n.checked) (l.querySelector("input") as HTMLInputElement).checked = false; }
+    const ok = chosen.length > 0 && chosen.every((n) => f.querySelector<HTMLInputElement>(`.consent[data-for="${n.value}"] input`)!.checked);
+    send.setAttribute("aria-disabled", ok ? "false" : "true");
+    if (!ok) { send.href = "#"; return; }
+    const el = (n: string) => f.elements.namedItem(n) as HTMLInputElement;
+    const row = (n: string) => `${el(n).closest("label")?.querySelector("span")?.textContent}: ${el(n).value.trim()}`;
+    const lines = [...chosen.map((n) => `- ${n.dataset.label} → ${n.dataset.to} (✓)`), "", row("region"), row("budget"), row("when"), "", el("message").value.trim()];
+    send.href = `mailto:${f.dataset.mail}?subject=${encodeURIComponent(f.dataset.subject || "")}&body=${encodeURIComponent(lines.join("\n"))}`;
+  }
+  f.addEventListener("input", sync);
+  f.addEventListener("change", sync);
+  send.addEventListener("click", (e) => { if (send.getAttribute("aria-disabled") === "true") e.preventDefault(); });
+  sync();
+</script>

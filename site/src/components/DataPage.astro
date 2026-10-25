@@ -1,0 +1,71 @@
+---
+// Property data page (prompt 13, section 2.3): INE median price per m² of homes sold, by municipality, for the
+// last five quarters, North first. Data: src/data/ine-m2.json (fact ine-m2-2026q2). Wording: "data.*".
+import V2 from "../layouts/V2.astro";
+import { pathFor, eur, type Lang, type EdCode } from "../i18n";
+import { Sources, fmtDate } from "../lib/content";
+import { INE, INE_QUARTER, m2For, ABROAD, PT_PLACES, GONDOMAR } from "../lib/compare";
+import ine from "../data/ine-m2.json";
+import { c, edName } from "../lib/copy";
+
+interface Props { lang: Lang; ed: EdCode; }
+const { lang, ed } = Astro.props;
+const src = new Sources();
+const nIne = src.n("ine-m2-2026q2");
+const Q = (ine as { quarters: string[] }).quarters;
+const first = Q[0];
+const pct = new Intl.NumberFormat(lang === "en" ? "en" : lang === "fr" ? "fr" : "pt-PT", { maximumFractionDigits: 0, signDisplay: "always" });
+const chg = (q: Record<string, number | null>) => (q[first] && q[INE_QUARTER] ? (q[INE_QUARTER]! / q[first]! - 1) * 100 : null);
+const fmtChg = (v: number | null) => (v === null ? "" : `${pct.format(v)}${lang === "fr" ? " %" : "%"}`);
+// North first (NUTS 2024 codes): Porto metro, Minho and Cávado (with Ave), the inland North; then Centre, Lisbon and the Algarve.
+const REGIONS: { k: string; prefixes: string[]; open: boolean }[] = [
+  { k: "porto", prefixes: ["11A"], open: true },
+  { k: "minho", prefixes: ["111", "112", "119"], open: true },
+  { k: "tamega", prefixes: ["11B", "11C", "11D", "11E"], open: false },
+  { k: "centro", prefixes: ["191", "192", "193", "194", "195", "196"], open: false },
+  { k: "lisboa", prefixes: ["1A0", "150"], open: false },
+];
+const rows = (prefixes: string[]) => Object.entries(INE)
+  .filter(([code, m]) => prefixes.some((p) => code.startsWith(p)) && m.q[INE_QUARTER])
+  .map(([code, m]) => ({ code, name: m.name, v: m.q[INE_QUARTER]!, chg: chg(m.q), series: Q.map((q) => m.q[q]) }))
+  .sort((a, b) => b.v - a.v);
+const spark = (s: (number | null)[]) => {
+  const v = s.filter((x): x is number => x !== null); if (v.length < 2) return "";
+  const lo = Math.min(...v), hi = Math.max(...v), w = 56, h = 16;
+  return s.map((x, i) => x === null ? "" : `${(i / (s.length - 1)) * w},${hi === lo ? h / 2 : h - ((x - lo) / (hi - lo)) * h}`).filter(Boolean).join(" ");
+};
+const pt = INE["PT"].q;
+const quarterLabel = { pt: "2.º trimestre de 2026", en: "Q2 2026", fr: "2e trimestre 2026" }[lang];
+const lead = ABROAD[ed]?.[0] ?? PT_PLACES[0];
+const line = c("compare.line", lang, { budget: eur(500000, lang), a: m2For(500000, lead), placeA: c(`compare.in.${lead.key}`, lang), b: m2For(500000, GONDOMAR), placeB: c(`compare.in.${GONDOMAR.key}`, lang) });
+---
+<V2 lang={lang} ed={ed} page="data" title={`${c("data.title", lang)} | Imóveis Portugal · ${edName(ed, lang)}`} description={c("data.lede", lang)} sticky={null}>
+  <div class="frame read ph">
+    <h1>{c("data.title", lang)}</h1>
+    <p class="lede">{c("data.lede", lang)}</p>
+    <p class="big-line">{c("data.national", lang, { v: eur(pt[INE_QUARTER]!, lang), chg: fmtChg(chg(pt)) })}<a class="sup" href={`#fonte-${nIne}`}>{nIne}</a></p>
+    <p class="small">{quarterLabel}</p>
+  </div>
+  <div class="frame read data-page">
+    {REGIONS.map((r) => (
+      <details class="region" open={r.open}>
+        <summary><h2 class="h3">{c(`data.region.${r.k}`, lang)}</h2></summary>
+        <table class="cmp">
+          <thead><tr><th scope="col">{c("data.col.place", lang)}</th><th scope="col">{c("compare.col.m2", lang)}</th><th scope="col">{c("data.col.change", lang)}</th><th scope="col"><span class="sr">{Q.join(" → ")}</span></th></tr></thead>
+          <tbody>{rows(r.prefixes).map((m) => (
+            <tr class={m.name === "Gondomar" ? "hl" : undefined}><th scope="row">{m.name}</th><td>{eur(m.v, lang)}</td><td>{fmtChg(m.chg)}</td><td><svg class="spark" viewBox="-2 -2 60 20" width="60" height="20" aria-hidden="true"><polyline points={spark(m.series)} /></svg></td></tr>
+          ))}</tbody>
+        </table>
+      </details>
+    ))}
+    <p class="small">{c("data.note", lang)}</p>
+    <h2 class="h3" style="margin-top:36px">{c("data.compare.h", lang)}</h2>
+    <p>{line} <a href={pathFor(lang, ed, "compare")}>{c("compare.home.link", lang)}</a></p>
+  </div>
+  <section class="sources-list" aria-labelledby="fontes">
+    <div class="frame read">
+      <h2 id="fontes" class="h-small">{c("common.sources", lang)}</h2>
+      <ol>{src.list.map((s, i) => <li id={`fonte-${i + 1}`}><a href={s.url} rel="noopener">{s.title}</a>{s.checked && `, ${c("common.checked", lang, { date: fmtDate(lang, s.checked) })}`}.</li>)}</ol>
+    </div>
+  </section>
+</V2>

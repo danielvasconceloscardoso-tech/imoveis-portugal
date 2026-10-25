@@ -353,3 +353,19 @@ a.sup + a.sup::before { content: ","; color: var(--muted); margin-right: 1px; }
 .checkout .price { font: 450 2.4rem/1 var(--serif); margin: 0 0 24px; }
 .checkout .consent { margin: 24px 0 16px; }
 @media print { .report { max-width: none; } .report h2 { break-after: avoid; } .sources-list { break-before: page; } a.sup { color: var(--ink); } }
+/* Prompt 13: home from abroad, data page */
+.casa .qa-item h2 { margin-bottom: 6px; }
+.casa-form { margin-top: 36px; }
+.casa-form h2 { margin: 0 0 4px; }
+.check { display: flex; align-items: center; gap: 10px; min-height: 40px; font-size: 16px; }
+.check input { width: 20px; height: 20px; accent-color: var(--accent); }
+.field input[type="text"], .field textarea { font: 400 17px/1.4 var(--sans); padding: 12px 14px; border: 1px solid var(--rule); border-radius: 8px; background: var(--paper); color: var(--ink); width: 100%; }
+.consents { display: grid; gap: 10px; }
+.region { border-top: 1px solid var(--rule); padding: 8px 0; }
+.region > summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; min-height: 48px; }
+.region > summary::-webkit-details-marker { display: none; }
+.region > summary::after { content: "+"; font: 300 26px/1 var(--sans); color: var(--accent); }
+.region[open] > summary::after { content: "−"; }
+.region .cmp { margin-bottom: 16px; }
+.spark polyline { fill: none; stroke: var(--accent); stroke-width: 1.5; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }

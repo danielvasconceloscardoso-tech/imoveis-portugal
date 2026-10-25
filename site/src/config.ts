@@ -29,6 +29,8 @@ export const config = {
   // Name and Banco de Portugal registration number exactly as registered; both are shown wherever it appears.
   // Empty = no sponsored label and no consent box: the financing button opens "Talk to a partner" (bank).
   creditPartner: { name: "", bdp: "" },
+  // Insurance partner (life and home cover) once signed, with its ASF registration (prompt 13). Empty = none yet.
+  insurancePartner: { name: "", asf: "" },
 
   // Paid "Plano de compra" report, 5,99 € (D22). Stays off until the billing entity (D4), OSS VAT and the
   // Stripe Payment Link exist: while false, no page links to the checkout and its button is disabled.

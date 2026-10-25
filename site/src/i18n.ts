@@ -5,13 +5,13 @@ export const HTML_LANG: Record<Lang, string> = { pt: "pt-PT", en: "en", fr: "fr"
 export const LANG_NAME: Record<Lang, string> = { pt: "Português", en: "English", fr: "Français" };
 
 export type EdCode = "lu" | "fr" | "ch" | "br" | "us" | "il";
-export type PageKey = "partners" | "buy" | "privacy" | "legal" | "faq" | "talk" | "guide" | "how" | "compare" | "sims";
+export type PageKey = "partners" | "buy" | "privacy" | "legal" | "faq" | "talk" | "guide" | "how" | "compare" | "sims" | "casa" | "data";
 
 // URL slugs follow the language, not the edition: /{lang}/{edition}/{slug}/
 export const SLUGS: Record<Lang, Record<PageKey, string>> = {
-  pt: { partners: "parceiros", buy: "comprar", privacy: "privacidade", legal: "aviso-legal", faq: "perguntas-frequentes", talk: "falar-com-um-parceiro", guide: "guia-gratuito", how: "como-trabalhamos", compare: "o-que-compra", sims: "simuladores" },
-  en: { partners: "partners", buy: "buy", privacy: "privacy", legal: "legal-notice", faq: "faq", talk: "talk-to-a-partner", guide: "free-guide", how: "how-we-work", compare: "what-it-buys", sims: "calculators" },
-  fr: { partners: "partenaires", buy: "acheter", privacy: "confidentialite", legal: "mentions-legales", faq: "questions-frequentes", talk: "parler-a-un-partenaire", guide: "guide-gratuit", how: "notre-methode", compare: "ce-que-vous-achetez", sims: "simulateurs" },
+  pt: { partners: "parceiros", buy: "comprar", privacy: "privacidade", legal: "aviso-legal", faq: "perguntas-frequentes", talk: "falar-com-um-parceiro", guide: "guia-gratuito", how: "como-trabalhamos", compare: "o-que-compra", sims: "simuladores", casa: "casa-tratada-de-fora", data: "precos-das-casas" },
+  en: { partners: "partners", buy: "buy", privacy: "privacy", legal: "legal-notice", faq: "faq", talk: "talk-to-a-partner", guide: "free-guide", how: "how-we-work", compare: "what-it-buys", sims: "calculators", casa: "your-home-from-abroad", data: "house-prices" },
+  fr: { partners: "partenaires", buy: "acheter", privacy: "confidentialite", legal: "mentions-legales", faq: "questions-frequentes", talk: "parler-a-un-partenaire", guide: "guide-gratuit", how: "notre-methode", compare: "ce-que-vous-achetez", sims: "simulateurs", casa: "votre-maison-depuis-l-etranger", data: "prix-des-logements" },
 };
 export const pathFor = (lang: Lang, ed: EdCode, page: PageKey | "home") =>
   page === "home" ? `/${lang}/${ed}/` : `/${lang}/${ed}/${SLUGS[lang][page]}/`;

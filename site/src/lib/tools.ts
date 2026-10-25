@@ -6,8 +6,8 @@ import * as S from "./sims";
 
 export type ToolKey = "cost" | "payment" | "rent" | "imt" | "imi" | "dsti" | "afford" | "gains";
 export const TOOLS: ToolKey[] = ["cost", "payment", "afford", "rent", "imt", "imi", "dsti", "gains"];
-// Calculators with a page (prompt 12: the first three; prompt 13 adds the rest).
-export const ENABLED: ToolKey[] = ["cost", "payment", "rent"];
+// Calculators with a page (prompt 12: cost, payment, rent; prompt 13: the other five).
+export const ENABLED: ToolKey[] = TOOLS;
 export const SUB: Record<ToolKey | "plan" | "checkout", Record<Lang, string>> = {
   cost: { pt: "custo-total", en: "total-cost", fr: "cout-total" },
   payment: { pt: "prestacao", en: "monthly-payment", fr: "mensualite" },

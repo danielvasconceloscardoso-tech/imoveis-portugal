@@ -16,7 +16,7 @@ const { lang, ed, page, title, description, paths, noindex = false } = Astro.pro
 const urlFor = (l: Lang) => paths ? paths[l] : pathFor(l, ed, page);
 const host = config.domainMode === "primary" ? config.primaryDomain : EDITIONS[ed].domain;
 const canonical = `https://${host}${urlFor(lang)}`;
-const nav: PageKey[] = ["sims", "faq", "guide", "buy", "partners"];
+const nav: PageKey[] = ["casa", "sims", "faq", "guide", "partners"];
 const subscribe = `${pathFor(lang, ed, "home")}#subscrever`;
 // Default sticky action: the free guide from the home page, a partner from the help pages.
 const sticky: Sticky = Astro.props.sticky !== undefined ? Astro.props.sticky
@@ -70,6 +70,9 @@ const sticky: Sticky = Astro.props.sticky !== undefined ? Astro.props.sticky
             <summary>{c("common.menu", lang)}</summary>
             <div class="menu">
               {nav.map((k) => <a href={pathFor(lang, ed, k)} aria-current={page === k ? "page" : undefined}>{c(`common.nav.${k}`, lang)}</a>)}
+              <a href={pathFor(lang, ed, "buy")}>{c("common.nav.buy", lang)}</a>
+              <a href={pathFor(lang, ed, "compare")}>{c("common.nav.compare", lang)}</a>
+              <a href={pathFor(lang, ed, "data")}>{c("common.nav.data", lang)}</a>
               <a href={pathFor(lang, ed, "talk")}>{c("common.nav.talk", lang)}</a>
               <a href={pathFor(lang, ed, "how")}>{c("common.nav.how", lang)}</a>
               <a href={subscribe}>{c("common.subscribe", lang)}</a>
@@ -95,6 +98,9 @@ const sticky: Sticky = Astro.props.sticky !== undefined ? Astro.props.sticky
             <p class="label">{c("common.foot.about", lang)}</p>
             <ul>
               <li><a href={pathFor(lang, ed, "how")}>{c("common.nav.how", lang)}</a></li>
+              <li><a href={pathFor(lang, ed, "buy")}>{c("common.nav.buy", lang)}</a></li>
+              <li><a href={pathFor(lang, ed, "compare")}>{c("common.nav.compare", lang)}</a></li>
+              <li><a href={pathFor(lang, ed, "data")}>{c("common.nav.data", lang)}</a></li>
               <li><a href={pathFor(lang, ed, "partners")}>{c("common.nav.partners", lang)}</a></li>
               <li><a href={pathFor(lang, ed, "talk")}>{c("common.nav.talk", lang)}</a></li>
               <li><a href={pathFor(lang, ed, "privacy")}>{c("common.privacy", lang)}</a></li>
