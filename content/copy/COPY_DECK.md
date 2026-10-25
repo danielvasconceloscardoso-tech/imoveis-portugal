@@ -4043,9 +4043,9 @@ How to edit:
 - FR: Frais d'achat
 
 ### finance.h
-- PT: Financiamento: cenários ilustrativos
-- EN: Financing: illustrative scenarios
-- FR: Financement : scénarios illustratifs
+- PT: Cenários de financiamento ilustrativos
+- EN: Illustrative financing scenarios
+- FR: Scénarios de financement illustratifs
 
 ### finance.p
 - PT: Crédito de {ltv} do preço a {years} anos, nos limites do Banco de Portugal. Não é uma oferta de crédito: a análise personalizada é feita pelo intermediário de crédito registado.
@@ -4073,9 +4073,9 @@ How to edit:
 - FR: Timbre sur le crédit
 
 ### area.h
-- PT: A zona: dez anos de preços
-- EN: The area: ten years of prices
-- FR: Le secteur : dix ans de prix
+- PT: Dez anos de preços na zona
+- EN: Ten years of prices in the area
+- FR: Dix ans de prix dans le secteur
 
 ### neigh.h
 - PT: Comparado com os concelhos vizinhos
