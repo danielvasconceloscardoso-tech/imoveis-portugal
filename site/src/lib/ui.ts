@@ -4,7 +4,7 @@ import type { EdCode } from "../i18n";
 export type Cat = "lawyer" | "bank" | "tax" | "fx" | "developer";
 export type Stage = "before" | "buying" | "after";
 
-// Hero photo per edition (site/public/img; sources in site/public/photos/CREDITS.md). Place names are in the deck.
+// Hero photo per edition (site/public/img; sources in site/public/photos/CREDITS.md, not linked from the site). Place names are in the deck.
 export const PHOTO: Record<EdCode, string> = {
   lu: "lisboa-alfama-telhados",
   fr: "porto-ribeira-rabelo",
