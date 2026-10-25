@@ -25,7 +25,7 @@ For each one, record what works (structure, simulator flow, form, trust signals,
 
 ## 2. Build our version
 
-1. **"A sua casa em Portugal, tratada de fora"**: our Ecossistema Casa. One page and one form: find a home (agency), mortgage (credit partner, D21), insurance (insurance partner), lawyer and tax adviser, money transfer. Each choice goes only to the partner named in the consent (GDPR arts. 6(1)(a) and 7). Tying is never allowed: a mortgage never requires our partner's insurance (DL 74-A/2017).
+1. **One-stop "home from abroad" page** (name it under prompt 17's voice rules): our Ecossistema Casa. One page and one form: find a home (agency), mortgage (credit partner, D21), insurance (insurance partner), lawyer and tax adviser, money transfer. Each choice goes only to the partner named in the consent (GDPR arts. 6(1)(a) and 7). Tying is never allowed: a mortgage never requires our partner's insurance (DL 74-A/2017).
 2. **Simulators** (add to prompt 12's three): IMT and stamp duty, IMI, debt-to-income ratio, "que casa consigo comprar" (from income abroad, in CHF, $, R$ or ₪ with the ECB rate), and capital gains for non-residents. Facts only from facts.csv.
 3. **Property data page:** quarterly INE figures for the municipalities our readers buy in (North first), plus the "O que compra" comparison.
 4. **Content plan:** one article per real question, every week, per edition and language (Doutor Finanças: 800+ a year). Each article ends with its simulator and the matching partner.

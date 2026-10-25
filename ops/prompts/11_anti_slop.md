@@ -24,7 +24,7 @@ Daniel's verdict: the site still looks like AI made it, and anyone can tell. The
 ## 2. Copy rules (add to content/VOICE.md)
 
 1. Banned AI words and shapes, in all three languages: "descubra", "explore", "jornada", "sem complicações", "tudo o que precisa", "parceiro de confiança", "simplificamos", "seamless", "unlock", "votre partenaire de confiance"; rhetorical questions as headings; taglines built on a colon; lists of three adjectives; em-dashes.
-2. Write like someone from the community: details people recognise (August holidays, the house back home, the flight to Porto, the parents' house, the franc and the real).
+2. Write like someone from the community, without clichés (superseded by prompt 17: optimistic, realistic, obstacle → solution).
 3. Every claim is specific: a place, a price, a date, a number, with its source.
 
 ## 3. Home page (PT master, write EN and FR natively from it)
