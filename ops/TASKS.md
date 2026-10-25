@@ -99,7 +99,7 @@ Status: To do · Doing · Blocked · Done
 | 16c | Confirm the Portuguese-Israeli chamber exists; find the economic section of the Israeli embassy in Lisbon; open the idealista pages that blocked automated access (S151 to S155, INE figure for non-EU buyers) | Daniel, Partner | To do | 2026-11-06 |
 | 16d | Brazilian-capital developers pass for the BR edition (same method as prompt 03) | CTO | To do | 2026-11-13 |
 
-| 17c | Answered 25 Oct (D25 to D30). Open: which name and language order for the one social account set (D26 against D13), and a date for Portuguese and French posts | Daniel | Mostly done | 2026-10-28 |
+| 17c | Answered 25 Oct (D25 to D30). Open: a date for Portuguese and French posts on the Imóveis Portugal account | Daniel | Mostly done | 2026-10-28 |
 | 17d | Operator setup batch for publishing: steps A1 to A6 and A9 to A12 of ops/PLAN_CONTENT.md section 5 (D4 entity, beehiiv, Tally, Cal.com, Meta Business portfolio with one Facebook Page and one Instagram account, Unsplash key, domains, merge approval). LinkedIn and YouTube dropped by D26 | Operator | To do | 2026-10-30 |
 | 17e | Build the publishing plumbing: steps B1 to B10 of ops/PLAN_CONTENT.md section 5 (/publish-week, social export, card generator, post checks, Meta app review request, metrics) | CTO | To do: starts after 17c | 2026-11-13 |
 | 17f | Partner agency: one real listing a week with written permission, profile text, credit partner name (items C1, C2 of the plan) | Partner, Father | To do | 2026-11-06 |

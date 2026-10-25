@@ -74,7 +74,7 @@ Order matters. "Needed by" is the date after which the Monday 9 Nov push slips.
 | A3 | beehiiv account (brand mailbox). Turn on double opt-in. Create the publication or six segments. Make an API key and send it to the CTO through an environment variable, never in the repo | Wed 28 Oct | Section 4 test |
 | A4 | Tally account and the forms listed in `ops/SETUP.md` (sponsor, buyer, partner request, credit) | Wed 28 Oct | IDs go to `site/src/config.ts` |
 | A5 | Cal.com account and two event links (15 minutes free, 45 minutes paid at 150 €, D19) | Wed 28 Oct | |
-| A6 | Meta Business portfolio under the brand mailbox. One Facebook Page and one Instagram Business account (D26; name to confirm, see section 9) | Fri 30 Oct | See risk R1 on anonymity |
+| A6 | Meta Business portfolio under the brand mailbox. One Facebook Page and one Instagram Business account, both named "Imóveis Portugal" (D26) | Fri 30 Oct | See risk R1 on anonymity |
 | A7 | (dropped by D26: no LinkedIn at launch) | | |
 | A8 | (dropped by D26: no YouTube at launch; videos go to Instagram and Facebook as reels) | | |
 | A9 | Unsplash developer app and key as an environment variable (task 8t) | Tue 27 Oct | Photos for cards |
@@ -153,7 +153,7 @@ Order matters. "Needed by" is the date after which the Monday 9 Nov push slips.
 | # | Decision | Notes |
 | --- | --- | --- |
 | D25 | Newsletter: one issue per language per week (PT, EN, FR), not per edition | Edition content as in section 7 |
-| D26 | Social: one account set, Instagram and Facebook only, English first | **To confirm:** D13 says English accounts are named "Portugal Home Guides"; Daniel's answer says "Imóveis Portugal, in English first". Which name, and does the Portuguese and French content follow on the same account or a second one? Until answered, A6 waits on the name |
+| D26 | Social: one account set named "Imóveis Portugal", Instagram and Facebook only, posting in English first. Overrides D13 (English accounts named "Portugal Home Guides") for now | Decided 25 Oct. Open: a date for Portuguese and French posts |
 | D27 | Volume is defined in posts on Instagram and Facebook | Proposal above: 5 a week on each, 13 with reels |
 | D28 | Faceless videos, AI-generated allowed, built to be shared | Limits in section 7 |
 | D29 | Accounts under a Meta Business portfolio on the brand mailbox | R1 stays: admin profile private |
