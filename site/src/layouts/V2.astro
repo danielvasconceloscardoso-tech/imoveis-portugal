@@ -127,7 +127,7 @@ const sticky: Sticky = Astro.props.sticky !== undefined ? Astro.props.sticky
         <p class="legal">{c("common.foot.agency", lang)}: <a href={config.agency.website} rel="noopener">{config.agency.name}</a>, AMI {config.agency.ami}. © 2026 Imóveis Portugal.</p>
       </div>
     </footer>
-    {sticky && <div class="sticky"><a class="btn" href={sticky.href}>{sticky.label}</a></div>}
+    {sticky && <div class="sticky" id="sticky"><a class="btn" href={sticky.href}>{sticky.label}</a></div>}
     <script is:inline define:vars={{ ed, lang }}>
       try {
         localStorage.setItem("ip-ed", ed);
@@ -139,6 +139,12 @@ const sticky: Sticky = Astro.props.sticky !== undefined ? Astro.props.sticky
           document.querySelectorAll("details.pick[open]").forEach((d) => { if (!d.contains(e.target)) d.removeAttribute("open"); });
         });
       } catch (_) {}
+      // The sticky action shows only once the page's own main action ([data-primary]) is off screen.
+      (function () {
+        var st = document.getElementById("sticky"), pr = document.querySelector("[data-primary]");
+        if (!st || !pr || !("IntersectionObserver" in window)) return;
+        new IntersectionObserver(function (e) { st.classList.toggle("off", e[0].isIntersecting); }).observe(pr);
+      })();
     </script>
   </body>
 </html>

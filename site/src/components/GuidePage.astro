@@ -23,7 +23,7 @@ const file = EBOOK.file(lang, ed);
         <p class="label">{c("guide.label", lang)}</p>
         <h1>{title}</h1>
         <p class="lede">{c("guide.lede", lang, { n: PAGES })}</p>
-        <a class="btn" href={file} download>{c("guide.download", lang)}</a>
+        <a class="btn" href={file} download data-primary>{c("guide.download", lang)}</a>
       </div>
       <img class="cover" src={`/ebooks/covers/${ed}-${lang}.webp`} width="600" height="849" alt={title} loading="lazy" />
     </div>

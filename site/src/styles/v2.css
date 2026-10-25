@@ -176,7 +176,8 @@ a.card:hover { border-color: var(--accent); }
 
 /* ---------- prose pages ---------- */
 .prose { padding-bottom: 64px; }
-.prose h2 { margin: 40px 0 12px; font-size: 1.6rem; }
+.prose h2 { margin: 36px 0 12px; font-size: 1.6rem; }
+.prose .ph { padding-bottom: 8px; }
 .prose ul, .prose ol { padding-left: 22px; }
 .prose li { margin-bottom: 8px; }
 .draft { background: #fff8e6; border: 1px solid #ecd9a8; border-radius: var(--r); padding: 12px 16px; font-size: 15px; }
@@ -212,9 +213,55 @@ td.num { white-space: nowrap; font-variant-numeric: tabular-nums; }
 .ft .cols ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
 .ft .label { color: #9aa0a6; }
 .ft .legal { border-top: 1px solid #2c3036; padding-top: 20px; font-size: 13px; color: #9aa0a6; }
+.ft .legal a, .ft .disc-ft a { text-decoration: underline; }
+h2.h3 { font-size: 1.3rem; line-height: 1.25; }
 @media (min-width: 760px) { .ft .cols { grid-template-columns: 2fr 1fr 1fr 1fr; } }
 
 @media print {
   .hd, .ft, .trust, .no-print { display: none !important; }
   body { background: #fff; }
+}
+
+/* ---------- mobile first (prompt 10): 375 px, thumb-reachable actions ---------- */
+@media (max-width: 759px) {
+  body { font-size: 18px; line-height: 1.6; }
+  .lede { font-size: 1.1rem; }
+  .hero { padding-top: 28px; padding-bottom: 40px; }
+  .hero .grid { gap: 28px; }
+  .band { padding-top: 44px; padding-bottom: 44px; }
+  h1 { font-size: 2.15rem; line-height: 1.08; }
+  .btn { min-height: 52px; width: 100%; justify-content: center; }
+  .btn.sm { width: auto; min-height: 40px; }
+  .qa > summary { padding: 18px 16px; min-height: 56px; }
+  .qa .a { padding: 0 16px 18px; }
+  .qa .next .btn { width: auto; }
+  .card { padding: 20px; }
+}
+.proof { margin: 18px 0 0; font-size: 14px; color: var(--muted); display: flex; align-items: flex-start; }
+.proof::before { content: ""; width: 18px; height: 10px; border-left: 2px solid var(--accent); border-bottom: 2px solid var(--accent); transform: rotate(-45deg); margin: 2px 10px 0 2px; flex: none; }
+.photo-fig { margin: 0; }
+.notes .notes-h { font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+.tagline { color: #c9ccd1; margin: 10px 0 0; max-width: 28em; }
+.disc-ft { color: #9aa0a6 !important; max-width: 28em; }
+img.cover { max-width: 320px; width: 100%; justify-self: center; box-shadow: 0 24px 48px rgba(21, 24, 29, 0.18); border-radius: 4px; }
+
+/* Packages as cards (no wide tables on phones). */
+.pkgs { display: grid; gap: 14px; margin: 24px 0 12px; }
+.pkg { background: var(--card); border: 1px solid var(--rule); border-radius: var(--r); padding: 22px; }
+.pkg h3 { margin-bottom: 8px; }
+.pkg p { color: var(--muted); font-size: 16px; }
+.pkg dl { display: grid; grid-template-columns: 1fr auto; gap: 6px 12px; margin: 14px 0 0; padding-top: 12px; border-top: 1px solid var(--rule); font-size: 15px; }
+.pkg dt { color: var(--muted); }
+.pkg dd { margin: 0; text-align: right; font-variant-numeric: tabular-nums; }
+@media (min-width: 760px) { .pkgs { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1100px) { .pkgs { grid-template-columns: repeat(4, 1fr); } }
+
+/* One sticky action at the bottom of the screen on phones. */
+.sticky { display: none; }
+@media (max-width: 959px) {
+  .sticky { display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); background: rgba(246, 243, 238, 0.96); backdrop-filter: blur(8px); border-top: 1px solid var(--rule); }
+  .sticky .btn { width: 100%; justify-content: center; min-height: 52px; }
+  .sticky { transition: transform .2s ease; }
+  .sticky.off { transform: translateY(110%); }
+  body.has-sticky { padding-bottom: 76px; }
 }

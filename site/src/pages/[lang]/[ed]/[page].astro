@@ -22,7 +22,8 @@ const p = config.prices, e = (n: number) => eur(n, lang);
 const used = config.foundingSlotsTotal - config.foundingSlotsLeft;
 const ent = config.entity;
 const ph = (v: string, label: string) => v || `[${label}]`;
-const legalVars = { entity: ph(ent.name, "Entidade / Entity"), address: ph(ent.address, "Morada / Address"), register: ph(ent.register, "n.º"), vat: ph(ent.vat, "n.º"), email: config.contactEmail };
+const PH = { pt: ["Entidade", "Morada", "n.º de registo", "n.º de IVA"], en: ["Entity", "Address", "registration no.", "VAT no."], fr: ["Entité", "Adresse", "n° d'immatriculation", "n° de TVA"] }[lang];
+const legalVars = { entity: ph(ent.name, PH[0]), address: ph(ent.address, PH[1]), register: ph(ent.register, PH[2]), vat: ph(ent.vat, PH[3]), email: config.contactEmail };
 const legal = key === "privacy" || key === "legal" ? key : null;
 const packages = [
   { name: "Gold", desc: c("partners.gold.p", lang), founding: e(p.gold.founding), list: `${e(p.gold.list)} ${c("partners.per.year", lang)}` },
@@ -45,7 +46,7 @@ const site = config.agency.website.replace(/^https:\/\/|\/$/g, "");
             <p class="label">{c("partners.title", lang)}</p>
             <h1>{c("partners.h1", lang)}</h1>
             <p class="lede">{c("partners.lede", lang)}</p>
-            <a class="btn" href="#contacto">{c("partners.cta", lang)}</a>
+            <a class="btn" href="#contacto" data-primary>{c("partners.cta", lang)}</a>
           </div>
           <div class="offer">
             <h2>{c("partners.founding.h", lang)}</h2>
@@ -124,7 +125,7 @@ const site = config.agency.website.replace(/^https:\/\/|\/$/g, "");
           <p class="small" style="margin-top:12px">{c("buy.small", lang)}{" "}<a href={pathFor(lang, ed, "privacy")}>{c("common.privacy", lang)}</a></p>
         </div>
         <div>
-          <h3 style="margin-bottom:16px">{c("buy.steps.h", lang)}</h3>
+          <h2 class="h3" style="margin-bottom:16px">{c("buy.steps.h", lang)}</h2>
           <ol class="steps">{cl("buy.steps", lang).map((s) => <li>{s}</li>)}</ol>
           <div class="partner" style="margin-top:28px">
             <span class="tag">{c("common.sponsored", lang)}</span>

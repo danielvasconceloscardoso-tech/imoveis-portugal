@@ -28,7 +28,7 @@ const cards: [string, string][] = [["faq", "faq"], ["guide", "guide"], ["buy", "
         <p class="label"><span class="dot" aria-hidden="true"></span> {edName(ed, lang)}</p>
         <h1>{c(`home.hero.${ed}`, lang)}</h1>
         <p class="lede">{c("home.lede", lang)}</p>
-        <div class="signup" id="subscrever">
+        <div class="signup" id="subscrever" data-primary>
           <Embed id={config.forms.newsletter[lang]} title={c("home.signup.h", lang)} pending={c("common.form.pending", lang)} hidden={{ edition: ed, lang }} height={200} />
           <p class="small">{c("home.signup.note", lang)}{" "}<a href={pathFor(lang, ed, "privacy")}>{c("common.privacy", lang)}</a></p>
         </div>
