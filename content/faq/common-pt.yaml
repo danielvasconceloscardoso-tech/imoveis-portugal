@@ -63,6 +63,18 @@
     últimos casos, pede depois a devolução da diferença.
   facts: [pt-imt-nonresident-flat, pt-imt-nonresident-exceptions]
 
+- id: pt-hpp
+  rank: 6
+  stage: buying
+  cta: tax
+  q: "Habitação Própria Permanente: o que é e serei elegível?"
+  a: >-
+    É a casa que compra para ser, exclusivamente, a sua residência própria e permanente; no IRS, prova-se
+    com o domicílio fiscal. Dá direito à tabela de IMT mais baixa (0% até 106 346 €) e a crédito até 90% do
+    valor, contra 80% nas outras casas. Quem vive fora e não é residente fiscal paga 7,5% de IMT; se passar
+    a residente em dois anos, pede a diferença.
+  facts: [pt-imt-hpp-2026, pt-hpp-tax-domicile, pt-imt-nonresident-flat, pt-imt-nonresident-exceptions, pt-ltv-limits]
+
 - id: pt-deed
   rank: 5.5
   stage: buying

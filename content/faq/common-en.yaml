@@ -64,6 +64,18 @@
     In those last two cases, you claim the difference back.
   facts: [pt-imt-nonresident-flat, pt-imt-nonresident-exceptions]
 
+- id: en-hpp
+  rank: 6
+  stage: buying
+  cta: tax
+  q: "Permanent own home (HPP): what is it and will I be eligible?"
+  a: >-
+    It's the home you buy to be, exclusively, your own permanent residence; for income tax, tax domicile is
+    the proof. It gets the lowest IMT table (0% up to 106,346 €) and a mortgage up to 90% of the value,
+    against 80% for other homes. A non-resident pays the flat 7.5%; become a tax resident within two years
+    and you claim the difference back.
+  facts: [pt-imt-hpp-2026, pt-hpp-tax-domicile, pt-imt-nonresident-flat, pt-imt-nonresident-exceptions, pt-ltv-limits]
+
 - id: en-deed
   rank: 5.5
   stage: buying

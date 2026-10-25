@@ -62,7 +62,7 @@ Status: To do · Doing · Blocked · Done
 | 8x | Create the "Falar com um parceiro" request forms in Tally (fields in ops/SETUP.md) and send the IDs | Operator | To do | 2026-11-06 |
 | 8y | Developers are a "talk to a partner" category: decide whether a reader asking a developer about a specific new home counts as a buying request that must go to the partner agency (D14) | CEO | To do | 2026-11-04 |
 | 9c | D18 done on the branch: site in PT, EN and FR (URLs /{lang}/{edition}/, language switch saved in the browser, no cookies); PT-BR and the Swiss PT/FR split removed from the site. Decide whether Brazil social posts and the week 1–2 BR drafts (content/inbox, PT-BR) move to PT-PT | CEO | To do | 2026-11-04 |
-| 9d | Review the free e-book "Quanto custa mesmo comprar casa em Portugal", one per edition (LU, FR, CH, BR, US, IL) in PT, EN and FR; the country chapter is site/ebooks/countries.ts; PDFs in site/public/ebooks/, built by npm run ebooks from facts.csv | Daniel | To do | 2026-11-06 |
+| 9d | Review the free e-book "Quanto custa mesmo comprar casa em Portugal", one per edition (LU, FR, CH, BR, US, IL) in PT, EN and FR; the country chapter is site/ebooks/countries.ts; PDFs in site/public/ebooks/, built by npm run ebooks from facts.csv | Daniel | To do Now 15 pages: new chapters 05 (main home or other home) and 06 (mortgage, from offer to deed), added 25 Oct from the Doutor Finanças topics; items left out are in content/faq/UNVERIFIED.md | 2026-11-06 |
 | 9e | Decide whether the e-book PDF stays a direct download or is sent only by the welcome email after sign-up (lead capture) | CEO | To do | 2026-11-06 |
 
 | 9a | Apply ops/prompts/08_partner_agency_habinedita.md (partner agency on buyer, partner and FAQ pages) | CTO | Done on branch (2026-10-25); logo pending, see 9g | 2026-10-31 |
@@ -84,6 +84,8 @@ Status: To do · Doing · Blocked · Done
 | 14 | Approve merging claude/brave-gauss-cwafi6 into main so the live link shows the current design (main is still the old Sprint 0 site; the branch is 32 commits ahead and 2 behind, so sync with main first) | Operator | To do | 2026-10-27 |
 | 14b | D4: set the billing entity, then fill config.entity, switch launchReady and complete the legal pages (site stays noindex until then) | Operator | Blocked: D4 | 2026-11-13 |
 | 14c | Create ops/METRICS.md and the /status command (Sprint 3 items; neither exists yet) | CTO | To do | 2026-11-13 |
+
+| 14d | Review the new FAQ answer "Habitação Própria Permanente" (all languages) and UNVERIFIED items 1, 2 and 6 from the Doutor Finanças guide | Daniel | To do | 2026-11-06 |
 
 ## Last session
 

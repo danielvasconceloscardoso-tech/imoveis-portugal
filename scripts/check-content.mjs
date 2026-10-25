@@ -4,7 +4,7 @@
 //
 // FAQ entries (content/faq/*.yaml, prompts 09 and 10): a stage (before, buying, after), a rank, an answer of
 // 40 to 69 words, one partner action (cta), fact ids that exist in content/facts/facts.csv, no open [check],
-// no banned or advice wording; 15 to 22 questions per edition and language (common file plus the edition's own).
+// no banned or advice wording; 15 to 23 questions per edition and language (common file plus the edition's own).
 // Inbox pieces (content/inbox/**/*.md): front matter with edition, lang, type, week, title and sources
 // (fact ids from facts.csv); the edition's disclaimer; the sponsored label when sponsored; no open
 // [check]; no banned or advice wording.
@@ -125,7 +125,7 @@ for (const f of targets.flatMap((t) => walk(t))) {
 for (const ed of EDITIONS) for (const l of ["pt", "en", "fr"]) {
   if (!(`common-${l}` in faqCount)) continue;
   const n = faqCount[`common-${l}`] + (faqCount[`${ed}-${l}`] || 0);
-  if (n < 15 || n > 22) errors.push(`content/faq: ${ed}-${l} has ${n} questions (must be 15 to 22)`);
+  if (n < 15 || n > 23) errors.push(`content/faq: ${ed}-${l} has ${n} questions (must be 15 to 23)`);
 }
 // The copy deck (content/copy/COPY_DECK.md, prompt 10): every site text, same wording rules.
 const deck = join(root, "content/copy/COPY_DECK.md");

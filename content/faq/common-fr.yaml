@@ -64,6 +64,18 @@
     derniers cas, la différence est remboursée sur demande.
   facts: [pt-imt-nonresident-flat, pt-imt-nonresident-exceptions]
 
+- id: fr-hpp
+  rank: 6
+  stage: buying
+  cta: tax
+  q: "Habitação própria e permanente (HPP) : de quoi s'agit-il et y aurai-je droit ?"
+  a: >-
+    C'est le logement acheté exclusivement pour être votre résidence principale ; en matière d'impôt sur le
+    revenu, la preuve est le domicile fiscal. Il donne droit au barème d'IMT le plus bas (0 % jusqu'à 106
+    346 €) et à un crédit jusqu'à 90 % de la valeur, contre 80 % ailleurs. Non-résident fiscal, vous payez
+    7,5 % ; résident dans les deux ans, la différence est remboursée.
+  facts: [pt-imt-hpp-2026, pt-hpp-tax-domicile, pt-imt-nonresident-flat, pt-imt-nonresident-exceptions, pt-ltv-limits]
+
 - id: fr-deed
   rank: 5.5
   stage: buying
