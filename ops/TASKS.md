@@ -71,6 +71,10 @@ Status: To do · Doing · Blocked · Done
 | 9f | Check the FAQ ranking (content/FAQ_SOURCES.md) in Google Trends and "People also ask" for each edition; change `rank` in content/faq/*.yaml where needed | Operator | To do | 2026-11-06 |
 | 9g | Confirm with Habinedita Gondomar its profile text (report page 3, "Talk to a partner") and send its logo file (the site blocks downloads from here) | Daniel | To do | 2026-11-06 |
 | 9h | Open the reference sites that did not load here (design/v2/REFERENCES.md) and note anything to add to the brief | Daniel | To do | 2026-11-06 |
+| 12a | Find official price-per-m² figures for the cities left out of "O que compra": Lausanne (Statistique Vaud), New York, Boston, Newark (Census/FHFA blocked here), São Paulo (FipeZap blocked here), Tel Aviv (CBS publishes prices per dwelling, not per m²). Send the table or PDF and the CTO adds them to facts.csv | Daniel | To do | 2026-11-13 |
+| 12b | Create the Tally form "Pedido de análise de crédito" per language (hidden fields: tool and inputs; unticked consent naming the credit partner; confirmation email = double opt-in) and send the IDs for config.forms.credit | Operator | To do | 2026-11-13 |
+| 12c | Paid Plano de compra (D22): once the billing entity exists (D4), register for EU VAT OSS, create the Stripe Payment Link (5,99 €, receipt on) and send it; the CTO then switches config.plan.live on | Operator | To do | after D4 |
+| 12d | Approve the newsletter format (content/NEWSLETTER_FORMAT.md) and the week 1 drafts (content/inbox/week-01-newsletter/, 6 editions × PT/EN/FR); ask Habinedita for the first listing with written permission | Daniel | To do | 2026-11-20 |
 
 | 8r | Send the credit-intermediary business name and its Banco de Portugal registration number (for the simulators, D21), confirm video visits, one real listing with photos, and sign the Gold sponsorship agreement (D20) | Father via Operator | To do | 2026-11-01 |
 
