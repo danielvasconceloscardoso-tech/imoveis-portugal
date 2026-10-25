@@ -31,6 +31,38 @@ A free media brand for people living abroad who want to buy a home in Portugal: 
 7. **No other real-estate agencies** as sponsors or outreach targets (D9). **No Russian-capital companies** (D11). Developers, banks, lawyers, tax advisers, money-transfer firms and insurers are in scope.
 8. **Free tools first:** no paid tool until a sponsor has paid.
 
+## Inspirations
+
+The brand DNA is **success and trust**: clean, calm, easy on a phone, and a feeling of "I want to belong to this". Take the lesson from each reference, never copy its text or visuals.
+
+**Business model**
+- **Doutor Finanças** (doutorfinancas.pt): the model (D23). Free content and 22 simulators lead into credit, insurance and home services; 24 M€ revenue in 2025. See their "Ecossistema Casa" one-stop page and their simulators.
+- **Morning Brew, The Hustle:** newsletters built into sponsor businesses and then sold. That's our exit model.
+
+**Voice and content**
+- **Ryan Serhant** (serhant.com): sell the life, then prove it with numbers; a call to action on every screen.
+- **Gary Vaynerchuk** (garyvee.com, vaynermedia.com): document, don't invent; native to each platform; reply to everyone.
+- **Lucas Valente da Silva** (Forbes PT, idealista): a Portuguese real-estate personal brand built on consistency and video. Style only: agencies are never sponsors (D9).
+- **Fanatics / Michael Rubin:** founder-led, high-energy brand building.
+
+**Design and aesthetic**
+- **Y Combinator, Stripe, Linear:** confidence, plain words, numbers, lots of white space.
+- **Amorim family in Comporta:** quiet luxury. Few words, place and lifestyle, nature, premium photography.
+- **Vanguard Properties / José Cardoso Botelho:** design-led projects for international buyers, an assured voice about Portugal.
+- **Sotheby's Realty, Mansion Global:** premium real-estate media.
+- **Monocle:** European editorial trust.
+- **Wise:** the model for the language switch, transparent numbers and the FAQ/help pages.
+- **Knight Frank Wealth Report, Stripe Press:** the model for our e-books as short premium reports.
+
+**Country benchmarks (what people already read)**
+- USA: Wise, BrightTax and Remitly guides on buying in Portugal.
+- France: idealista's French guide and expat.com forums.
+- Switzerland: Le Temps on Swiss retirees in Portugal; 2nd/3rd pillar guides.
+- Luxembourg: justarrived.lu, Contacto.
+- Brazil: Euro Dicas, Cidadania e Visto, Ebury.
+
+**What to avoid:** the generic AI landing page: small labels above every heading, "three numbers / three steps" blocks, check-mark bullets, stock postcards, filler words ("descubra", "jornada", "sem complicações", "seamless"). See ops/prompts/11_anti_slop.md.
+
 ## Team and how we work
 
 - **CEO/COO:** Claude in claude.ai: strategy, sponsors, copy, content plan, writes the prompts.
