@@ -44,7 +44,7 @@ As regras acima aplicam-se aos bancos que concedem crédito em Portugal. Um banc
 
 ## A origem do dinheiro
 
-Bancos, notários e advogados em Portugal têm de obter informação sobre a origem dos fundos quando a operação o justifica (Lei 83/2017). Para quem compra a partir do Luxemburgo, isto quer dizer comprovativos do salário e das poupanças usados na compra.
+Bancos, notários e advogados em Portugal têm de obter informação sobre a origem dos fundos quando a operação o justifica (Lei 83/2017). Se compra a partir do Luxemburgo, isto quer dizer comprovativos do salário e das poupanças usados na compra.
 
 ## Perguntas para levar ao banco
 

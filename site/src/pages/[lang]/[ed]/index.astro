@@ -1,6 +1,7 @@
 ---
-// Edition home (prompt 11, CEO draft content/copy/HOME_CEO_DRAFT.md): five sections, no labels above headings,
-// a real example with real tax figures, sources as superscripts with one list at the bottom.
+// Edition home (prompt 17, CEO draft v2 content/copy/HOME_CEO_DRAFT.md): hero, the map, the reader's questions each
+// answered with the rule and the partner who solves it, the home of the week with its total cost, the partner agency.
+// Sources as superscripts with one list at the bottom.
 // Wording: content/copy/COPY_DECK.md, blocks "home.*".
 import V2 from "../../../layouts/V2.astro";
 import Embed from "../../../components/Embed.astro";
@@ -11,6 +12,7 @@ import { PHOTO } from "../../../lib/ui";
 import { Sources, homeExample, RATE, EDITION_CUR, fmtDate, FACTS } from "../../../lib/content";
 import { c, edName } from "../../../lib/copy";
 import { postsFor } from "../../../lib/blog";
+import { SUB } from "../../../lib/tools";
 import MapExplorer from "../../../components/MapExplorer.astro";
 
 export function getStaticPaths() {
@@ -27,53 +29,37 @@ const fx = cur ? RATE(cur) : null;
 const local = fx && cur ? new Intl.NumberFormat(HTML_LANG[lang], { style: "currency", currency: cur, maximumFractionDigits: 0 }).format(ex.total * fx.rate) : "";
 const n = { imt: src.n("pt-imt-nonresident-flat"), is: src.n("pt-is-purchase"), deed: src.n("pt-casa-pronta-fees") };
 const nfx = fx ? src.n(fx.id) : 0;
-// Four questions: three shared, the fourth depends on the edition (inheritance for emigrant editions, residence otherwise).
+// Five questions in the reader's words, each with its partner (obstacle → information → partner, VOICE.md v3).
+// The fourth depends on the edition: inheritance for emigrant editions, residence otherwise.
 const emigrant = ed === "lu" || ed === "fr" || ed === "ch";
+const talk = (cat: string) => `${pathFor(lang, ed, "talk")}?cat=${cat}#form`;
+const simCost = `${pathFor(lang, ed, "sims")}${SUB.cost[lang]}/`;
 const qa = [
-  { q: c("home.qa.sign.q", lang), a: c("home.qa.sign.a", lang), s: [src.n("pt-poa-apostille")] },
-  { q: c("home.qa.costs.q", lang), a: c("home.qa.costs.a", lang, { extra: e(ex.extra) }), s: [n.imt, n.is, n.deed] },
-  { q: c("home.qa.bank.q", lang), a: c("home.qa.bank.a", lang), s: [src.n("pt-ltv-limits")] },
+  { q: c("home.qa.away.q", lang), a: c("home.qa.away.a", lang, { where: c(`home.where.${ed}`, lang) }), s: [src.n("pt-poa-apostille")], btn: c("home.btn.lawyer", lang), href: talk("lawyer") },
+  { q: c("home.qa.total.q", lang), a: c("home.qa.total.a", lang, { price: e(ex.price), total: e(ex.total) }), s: [n.imt, n.is, n.deed], btn: c("home.btn.sim", lang), href: simCost },
+  { q: c("home.qa.bank.q", lang), a: c("home.qa.bank.a", lang), s: [src.n("pt-ltv-limits")], btn: c("home.btn.bank", lang), href: talk("bank") },
   emigrant
-    ? { q: c("home.qa.inherit.q", lang), a: c("home.qa.inherit.a", lang), s: [src.n("pt-is-inheritance-exempt")] }
-    : { q: c("home.qa.live.q", lang), a: c("home.qa.live.a", lang), s: [src.n("pt-ari-realestate-ended"), src.n("pt-visa-own-income")] },
+    ? { q: c("home.qa.inherit.q", lang), a: c("home.qa.inherit.a", lang), s: [src.n("pt-is-inheritance-exempt")], btn: c("home.btn.lawyer", lang), href: talk("lawyer") }
+    : { q: c("home.qa.live.q", lang), a: c("home.qa.live.a", lang), s: [src.n("pt-ari-realestate-ended"), src.n("pt-visa-own-income")], btn: c("home.btn.lawyer", lang), href: talk("lawyer") },
+  { q: c("home.qa.tax.q", lang), a: c("home.qa.tax.a", lang), s: [], btn: c("home.btn.tax", lang), href: talk("tax") },
 ];
 const nMap = src.n("ine-m2-2026q2");
 const posts = postsFor(lang).slice(0, 2);
 const sup = (ns: number[]) => ns.map((i) => `<a class="sup" href="#fonte-${i}">${i}</a>`).join("");
 ---
-<V2 lang={lang} ed={ed} page="home" title={`Imóveis Portugal · ${edName(ed, lang)}`} description={c(`home.line.${ed}`, lang)}>
+<V2 lang={lang} ed={ed} page="home" title={`Imóveis Portugal · ${edName(ed, lang)}`} description={c("home.lede", lang)}>
   <figure class="bleed">
     <img src={`/img/${photo}-wide-1600.webp`} srcset={`/img/${photo}-wide-800.webp 800w, /img/${photo}-wide-1600.webp 1600w`} sizes="100vw" width="1600" height="900" alt={c(`editions.place.${ed}`, lang)} fetchpriority="high" />
   </figure>
 
   <section class="hero2">
     <div class="frame read">
-      <h1>{c("home.h1", lang)}</h1>
-      <p class="lede">{c(`home.line.${ed}`, lang)} {c("home.promise", lang)}</p>
+      <h1>{c(`home.h1.${ed}`, lang)}</h1>
+      <p class="lede">{c("home.lede", lang)}</p>
       <div class="actions" id="subscrever" data-primary>
         <Embed id={config.forms.newsletter[lang]} title={c("home.subscribe", lang)} cta={c("home.subscribe", lang)} subject={c("home.subscribe.subject", lang)} hidden={{ edition: ed, lang }} height={200} />
-        <a class="quiet" href={config.calls.intro || "#do-lado-de-la"}>{c("home.call.link", lang)}</a>
+        <a class="quiet" href={config.calls.intro || "#agencia"}>{c("home.call.link", lang)}</a>
       </div>
-    </div>
-  </section>
-
-  <section class="example" aria-labelledby="exemplo">
-    <div class="frame read">
-      {config.listing ? (
-        <h2 id="exemplo">{config.listing.title[lang]}</h2>
-      ) : (
-        <h2 id="exemplo">{c("home.example.h", lang, { price: e(ex.price), extra: e(ex.extra) })}</h2>
-      )}
-      <p>{c("home.example.p", lang)}</p>
-      <dl class="bill">
-        <dt>{c("home.example.imt", lang)}<Fragment set:html={sup([n.imt])} /></dt><dd>{e(ex.imt)}</dd>
-        <dt>{c("home.example.is", lang)}<Fragment set:html={sup([n.is])} /></dt><dd>{e(ex.is)}</dd>
-        <dt>{c("home.example.deed", lang)}<Fragment set:html={sup([n.deed])} /></dt><dd>{e(ex.deed)}</dd>
-        <dt class="tot">{c("home.example.total", lang)}</dt><dd class="tot">{e(ex.total)}</dd>
-      </dl>
-      {fx && <p class="small">{c("home.example.fx", lang, { local, date: fmtDate(lang, "2026-10-23") })}<Fragment set:html={sup([nfx])} /></p>}
-      <p class="small">{c("home.example.note", lang)}</p>
-      <a class="more" href={pathFor(lang, ed, "guide")}>{c("home.example.link", lang)}</a>
     </div>
   </section>
 
@@ -88,14 +74,45 @@ const sup = (ns: number[]) => ns.map((i) => `<a class="sup" href="#fonte-${i}">$
 
   <section class="qa-home" aria-labelledby="perguntas">
     <div class="frame read">
-      <h2 id="perguntas">{c(emigrant ? "home.qa.h.august" : "home.qa.h", lang)}</h2>
+      <h2 id="perguntas">{c("home.qa.h", lang)}</h2>
       {qa.map((x) => (
         <div class="qa-item">
           <h3>{x.q}</h3>
           <p>{x.a}<Fragment set:html={sup(x.s)} /></p>
+          <a class="act" href={x.href}>{x.btn}</a>
         </div>
       ))}
       <a class="more" href={pathFor(lang, ed, "faq")}>{c("home.qa.all", lang)}</a>
+    </div>
+  </section>
+
+  <section class="example" aria-labelledby="exemplo">
+    <div class="frame read">
+      <p class="h-small">{c("home.week.h", lang)}</p>
+      {config.listing ? (
+        <h2 id="exemplo">{config.listing.title[lang]}</h2>
+      ) : (
+        <h2 id="exemplo">{c("home.example.h", lang, { price: e(ex.price) })}</h2>
+      )}
+      {!config.listing && <p class="small">{c("home.example.wait", lang)}</p>}
+      <p>{c("home.example.p", lang, { total: e(ex.total) })}</p>
+      <dl class="bill">
+        <dt>{c("home.example.imt", lang)}<Fragment set:html={sup([n.imt])} /></dt><dd>{e(ex.imt)}</dd>
+        <dt>{c("home.example.is", lang)}<Fragment set:html={sup([n.is])} /></dt><dd>{e(ex.is)}</dd>
+        <dt>{c("home.example.deed", lang)}<Fragment set:html={sup([n.deed])} /></dt><dd>{e(ex.deed)}</dd>
+        <dt class="tot">{c("home.example.total", lang)}</dt><dd class="tot">{e(ex.total)}</dd>
+      </dl>
+      {fx && <p class="small">{c("home.example.fx", lang, { local, date: fmtDate(lang, "2026-10-23") })}<Fragment set:html={sup([nfx])} /></p>}
+      <p class="small">{c("home.example.note", lang)}</p>
+      <a class="more" href={pathFor(lang, ed, "guide")}>{c("home.example.link", lang)}</a>
+    </div>
+  </section>
+
+  <section class="side" id="agencia" aria-labelledby="lado">
+    <div class="frame read">
+      <h2 id="lado">{c("home.side.h", lang)}</h2>
+      <p>{c("home.side.p", lang, { ami: config.agency.ami })}</p>
+      <Calls lang={lang} ed={ed} />
     </div>
   </section>
 
@@ -113,14 +130,6 @@ const sup = (ns: number[]) => ns.map((i) => `<a class="sup" href="#fonte-${i}">$
       </div>
     </section>
   )}
-
-  <section class="side" id="do-lado-de-la" aria-labelledby="lado">
-    <div class="frame read">
-      <h2 id="lado">{c("home.side.h", lang)}</h2>
-      <p>{c("home.side.p", lang)} <span class="tag">{c("common.gold", lang)}</span></p>
-      <Calls lang={lang} ed={ed} />
-    </div>
-  </section>
 
   <section class="sources-list" aria-labelledby="fontes">
     <div class="frame read">

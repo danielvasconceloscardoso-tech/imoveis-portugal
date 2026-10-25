@@ -23,7 +23,7 @@ IMT is the tax paid when you buy. Since May 2026, the IMT code applies a flat 7.
 
 For comparison, a Portuguese tax resident buying the same home as their main residence pays about 18,237 €, using the 2026 brackets.
 
-The law has exceptions. The flat rate does not apply to a buyer who becomes a Portuguese tax resident within two years of the purchase, or who rents the home out as a residence, at a capped rent, for at least 36 months in the first five years. In those cases you pay 7.5% first and ask for the difference back within six months. If you plan to move to Portugal, the two-year rule matters.
+The law has exceptions. The flat rate does not apply if you become a Portuguese tax resident within two years of the purchase, or if you rent the home out as a residence, at a capped rent, for at least 36 months in the first five years. In those cases you pay 7.5% first and ask for the difference back within six months. If you plan to move to Portugal, the two-year rule matters.
 
 ## Stamp duty: 3,200 €
 

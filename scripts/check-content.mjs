@@ -33,7 +33,11 @@ const ADVICE = [/\bvocê deveria\b/i, /\bdeve(?:rá)? comprar\b/i, /\brecomendam
 // Prompt 11 (content/VOICE.md, "Words and shapes that read as AI"): banned words in all three languages, and no em-dash.
 const SLOP = [/\bdescubr[ae]\b/i, /\bexplor[ae]\b/i, /\bjornada\b/i, /sem complica[çc][õo]es/i, /tudo o que precisa/i,
   /parceiro de confian[çc]a/i, /\bsimplificamos\b/i, /\bseamless(ly)?\b/i, /\bunlock\b/i, /partenaire de confiance/i,
-  /\bdécouvrez\b/i, /\bexplorez\b/i, /\bdiscover\b/i, /\bjourney\b/i, /hassle[- ]free/i, /sans tracas/i, /—/];
+  /\bdécouvrez\b/i, /\bexplorez\b/i, /\bdiscover\b/i, /\bjourney\b/i, /hassle[- ]free/i, /sans tracas/i, /—/,
+  // Voice v3 (prompt 17, D35): phrases that talk down to the reader or dramatise costs.
+  /todos os agostos/i, /every august/i, /(tous les|chaque) mois d'ao[uû]t/i, /tratad[ao] de fora/i, /handled from abroad/i, /home from abroad/i,
+  /g[ée]r[ée]e depuis l'[ée]tranger/i, /maison depuis l'[ée]tranger/i, /o pre[çc]o [ée] o in[ií]cio/i, /the price is (just )?the start/i, /le prix n'est qu'un d[ée]but/i,
+  /\bpor cima\b/i, /\bon top of the price\b/i, /\bon top, /i, /\ben plus du prix\b/i, /\bpar-dessus\b/i, /\bquem compra\b/i, /\bceux qui ach[eè]tent\b/i, /\bwhoever buys\b/i, /\ba buyer who\b/i];
 
 // Facts base
 const factIds = new Set(

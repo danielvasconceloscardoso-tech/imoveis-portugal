@@ -20,7 +20,7 @@
   rank: 2
   stage: before
   cta: tax
-  q: "How much does buying cost on top of the price?"
+  q: "What does buying cost besides the price?"
   a: >-
     Plan for transfer tax (IMT), 0.8% stamp duty and the deed with registration. If you aren't a Portuguese
     tax resident, IMT is 7.5% of the price, with some exceptions. With a mortgage, add 0.6% stamp duty on

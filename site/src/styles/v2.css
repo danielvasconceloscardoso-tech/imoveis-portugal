@@ -428,3 +428,5 @@ a.sup + a.sup::before { content: ","; color: var(--muted); margin-right: 1px; }
 .map-home h2 { max-width: 22ch; }
 .map-home .read { margin: 0 0 20px; }
 .map-home .more { display: inline-block; margin-top: 16px; }
+/* Home v2: each answer ends with its partner (prompt 17) */
+.qa-item .act { display: inline-block; margin-top: 2px; font: 500 15px/1.4 var(--sans); color: var(--ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }

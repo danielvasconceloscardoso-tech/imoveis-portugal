@@ -19,7 +19,7 @@ Subject: The 26,250 € line on your bill
 
 thanks for joining Imóveis Portugal. From December 1, you'll get what you need to know about buying a home in Portugal from Israel every week, with the official source for every number.
 
-To start, one number: on a 350,000 € apartment, a buyer who is not a Portuguese tax resident pays 26,250 € in property transfer tax, the flat 7.5% rate in force since May 2026. There are exceptions, for example becoming a Portuguese tax resident within two years.
+To start, one number: on a 350,000 € apartment, if you're not a Portuguese tax resident, you pay 26,250 € in property transfer tax, the flat 7.5% rate in force since May 2026. There are exceptions, for example becoming a Portuguese tax resident within two years.
 
 The full math is in this week's article: [read the article].
 

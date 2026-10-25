@@ -21,9 +21,9 @@ How to edit:
 - FR: Prix des logements
 
 ### nav.casa
-- PT: Casa tratada de fora
-- EN: Home from abroad
-- FR: Maison depuis l'étranger
+- PT: Passo a passo
+- EN: Step by step
+- FR: Pas à pas
 
 ### nav.sims
 - PT: Simuladores
@@ -111,9 +111,9 @@ How to edit:
 - FR: Sponsor Gold
 
 ### partners.line
-- PT: Tem um negócio para quem vive fora? Veja as condições para parceiros.
-- EN: Do you run a business for people abroad? See our partner terms.
-- FR: Vous avez une entreprise pour ceux qui vivent à l'étranger ? Voyez nos conditions partenaires.
+- PT: Tem um negócio que serve quem vive fora? Veja as condições para parceiros.
+- EN: Does your business serve people who live abroad? See the partner terms.
+- FR: Votre entreprise sert une clientèle installée à l'étranger ? Voyez les conditions partenaires.
 
 ### sponsored
 - PT: Patrocinado
@@ -171,9 +171,9 @@ How to edit:
 - FR: Un contenu payé l'indique toujours.
 
 ### foot.tagline
-- PT: Uma newsletter para quem vive lá fora e quer casa em Portugal.
-- EN: A newsletter for people abroad who want a home in Portugal.
-- FR: Une newsletter pour ceux qui vivent à l'étranger et veulent une maison au Portugal.
+- PT: A sua casa em Portugal, a partir de onde vive. Newsletter às quintas-feiras.
+- EN: Your home in Portugal, from wherever you live. A newsletter every Thursday.
+- FR: Votre maison au Portugal, depuis chez vous. Une newsletter chaque jeudi.
 
 ### foot.about
 - PT: Sobre
@@ -258,9 +258,9 @@ How to edit:
 - FR: sur des comptes à l'étranger, à un moment de l'année : au-delà, les US persons déposent un FBAR.
 
 ### fact.il
-- PT: de IMT desde maio de 2026 para quem compra sem ser residente fiscal em Portugal, salvo exceções.
-- EN: transfer tax (IMT) since May 2026 for buyers who aren't Portuguese tax residents, with some exceptions.
-- FR: d'IMT depuis mai 2026 pour les acheteurs non-résidents fiscaux au Portugal, sauf exceptions.
+- PT: de IMT desde maio de 2026 se não for residente fiscal em Portugal, salvo exceções.
+- EN: transfer tax (IMT) since May 2026 if you're not a Portuguese tax resident, with some exceptions.
+- FR: d'IMT depuis mai 2026 si vous n'êtes pas résident fiscal au Portugal, sauf exceptions.
 
 ### topic.lu
 - PT: Crédito no Luxemburgo ou em Portugal, impostos dos dois lados e o que muda no regresso.
@@ -324,50 +324,75 @@ How to edit:
 
 ## home
 
-### h1
-- PT: Comprar casa em Portugal sem lá estar.
-- EN: Buy a home in Portugal without being there.
-- FR: Acheter au Portugal sans y être.
+### h1.lu
+- PT: Comprar casa em Portugal a partir do Luxemburgo é mais simples do que parece.
+- EN: Buying a home in Portugal from Luxembourg is simpler than it looks.
+- FR: Acheter au Portugal depuis le Luxembourg, c'est plus simple qu'il n'y paraît.
 
-### line.lu
-- PT: Para quem vive no Luxemburgo e volta a pensar na casa todos os agostos.
-- EN: For people in Luxembourg who think about the house back home every August.
-- FR: Pour ceux qui vivent au Luxembourg et repensent à la maison chaque mois d'août.
+### h1.fr
+- PT: Comprar casa em Portugal a partir de França é mais simples do que parece.
+- EN: Buying a home in Portugal from France is simpler than it looks.
+- FR: Acheter au Portugal depuis la France, c'est plus simple qu'il n'y paraît.
 
-### line.fr
-- PT: Para quem vive em França e conta os dias até às férias de agosto.
-- EN: For people in France who count the days to the August holidays.
-- FR: Pour ceux qui vivent en France et comptent les jours jusqu'aux vacances d'août.
+### h1.ch
+- PT: Comprar casa em Portugal a partir da Suíça é mais simples do que parece.
+- EN: Buying a home in Portugal from Switzerland is simpler than it looks.
+- FR: Acheter au Portugal depuis la Suisse, c'est plus simple qu'il n'y paraît.
 
-### line.ch
-- PT: Para quem vive na Suíça e já faz as contas em francos e em euros.
-- EN: For people in Switzerland who already do the sums in francs and in euros.
-- FR: Pour ceux qui vivent en Suisse et font déjà leurs calculs en francs et en euros.
+### h1.br
+- PT: Comprar casa em Portugal a partir do Brasil é mais simples do que parece.
+- EN: Buying a home in Portugal from Brazil is simpler than it looks.
+- FR: Acheter au Portugal depuis le Brésil, c'est plus simple qu'il n'y paraît.
 
-### line.br
-- PT: Para quem vive no Brasil e está a preparar a mudança, ou a segunda casa, em Portugal.
-- EN: For people in Brazil getting ready for a move, or a second home, in Portugal.
-- FR: Pour ceux qui vivent au Brésil et préparent un départ, ou une résidence secondaire, au Portugal.
+### h1.us
+- PT: Comprar casa em Portugal a partir dos Estados Unidos é mais simples do que parece.
+- EN: Buying a home in Portugal from the US is simpler than it looks.
+- FR: Acheter au Portugal depuis les États-Unis, c'est plus simple qu'il n'y paraît.
 
-### line.us
-- PT: Para quem vive nos Estados Unidos e pensa numa casa no Norte de Portugal.
-- EN: For people in the US thinking about a home in the North of Portugal.
-- FR: Pour ceux qui vivent aux États-Unis et pensent à une maison dans le Nord du Portugal.
+### h1.il
+- PT: Comprar casa em Portugal a partir de Israel é mais simples do que parece.
+- EN: Buying a home in Portugal from Israel is simpler than it looks.
+- FR: Acheter au Portugal depuis Israël, c'est plus simple qu'il n'y paraît.
 
-### line.il
-- PT: Para quem vive em Israel e pensa numa casa em Portugal.
-- EN: For people in Israel thinking about a home in Portugal.
-- FR: Pour ceux qui vivent en Israël et pensent à une maison au Portugal.
+### where.lu
+- PT: no Luxemburgo
+- EN: in Luxembourg
+- FR: au Luxembourg
 
-### promise
-- PT: Às quintas-feiras, por email: uma casa real, o custo completo e as regras explicadas, com fonte. Grátis.
-- EN: Every Thursday, by email: a real home, the full cost and the rules explained, with sources. Free.
-- FR: Chaque jeudi, par e-mail : un vrai bien, le coût complet et les règles expliquées, avec leurs sources. Gratuit.
+### where.fr
+- PT: em França
+- EN: in France
+- FR: en France
+
+### where.ch
+- PT: na Suíça
+- EN: in Switzerland
+- FR: en Suisse
+
+### where.br
+- PT: no Brasil
+- EN: in Brazil
+- FR: au Brésil
+
+### where.us
+- PT: nos Estados Unidos
+- EN: in the US
+- FR: aux États-Unis
+
+### where.il
+- PT: em Israel
+- EN: in Israel
+- FR: en Israël
+
+### lede
+- PT: Mostramos cada passo com as regras oficiais e os números certos, e pomo-lo em contacto com quem resolve: agência, banco, advogado. Newsletter às quintas-feiras, grátis.
+- EN: We show you every step, with the official rules and the right numbers, and put you in touch with the people who get it done: the agency, the bank, the lawyer. A newsletter every Thursday, free.
+- FR: Nous montrons chaque étape, avec les règles officielles et les bons chiffres, et vous mettons en relation avec ceux qui s'en chargent : l'agence, la banque, l'avocat. Une newsletter chaque jeudi, gratuite.
 
 ### subscribe
-- PT: Quero receber
-- EN: Sign me up
-- FR: Je m'abonne
+- PT: Receber a newsletter
+- EN: Get the newsletter
+- FR: Recevoir la newsletter
 
 ### subscribe.subject
 - PT: Quero receber a newsletter
@@ -379,15 +404,110 @@ How to edit:
 - EN: Talk to the agency for 15 minutes, free
 - FR: Parler 15 minutes avec l'agence, gratuitement
 
+### qa.h
+- PT: As suas dúvidas, com resposta
+- EN: Your questions, answered
+- FR: Vos questions, nos réponses
+
+### qa.away.q
+- PT: Não posso ir a Portugal.
+- EN: I can't travel to Portugal.
+- FR: Je ne peux pas aller au Portugal.
+
+### qa.away.a
+- PT: Assina uma procuração {where} e um advogado parceiro trata da compra. As visitas podem ser por videochamada.
+- EN: You sign a power of attorney {where} and a partner lawyer handles the purchase. Viewings can be done by video call.
+- FR: Vous signez une procuration {where} et un avocat partenaire s'occupe de l'achat. Les visites peuvent se faire en appel vidéo.
+
+### qa.total.q
+- PT: Quanto vou pagar no total?
+- EN: How much will I pay in total?
+- FR: Combien vais-je payer au total ?
+
+### qa.total.a
+- PT: O simulador junta ao preço os impostos, a escritura e o registo, para qualquer valor. Numa casa de {price}, sem residência fiscal em Portugal, o custo total é {total}.
+- EN: The calculator adds the taxes, the deed and the registration to the price, for any amount. For a {price} home, if you're not a Portuguese tax resident, the total cost is {total}.
+- FR: Le simulateur ajoute au prix les impôts, l'acte et l'enregistrement, pour tout montant. Pour un bien à {price}, sans résidence fiscale au Portugal, le coût total est de {total}.
+
+### qa.bank.q
+- PT: O banco empresta a quem vive fora?
+- EN: Will a bank lend to me if I live abroad?
+- FR: La banque prête-t-elle si je vis à l'étranger ?
+
+### qa.bank.a
+- PT: Sim. Os bancos portugueses financiam não residentes, até 90% do valor para habitação própria e 80% para outros fins, nos limites do Banco de Portugal. O nosso parceiro de crédito compara bancos por si.
+- EN: Yes. Portuguese banks lend to non-residents, up to 90% of the value for your own home and 80% for other uses, within Banco de Portugal's limits. Our credit partner compares banks for you.
+- FR: Oui. Les banques portugaises financent les non-résidents, jusqu'à 90 % de la valeur pour votre résidence et 80 % pour les autres usages, dans les limites de la Banque du Portugal. Notre partenaire crédit compare les banques pour vous.
+
+### qa.inherit.q
+- PT: Herdei a casa dos meus pais.
+- EN: I've inherited my parents' house.
+- FR: J'ai hérité de la maison de mes parents.
+
+### qa.inherit.a
+- PT: A habilitação de herdeiros e o registo tratam-se à distância, com um advogado parceiro. Os filhos não pagam o imposto do selo de 10% sobre a herança.
+- EN: The heirs' declaration and the registration can be done from abroad, with a partner lawyer. Children don't pay the 10% stamp duty on inheritance.
+- FR: L'acte de notoriété et l'enregistrement se font à distance, avec un avocat partenaire. Les enfants ne paient pas le droit de timbre de 10 % sur la succession.
+
+### qa.live.q
+- PT: Quero viver em Portugal.
+- EN: I'd like to live in Portugal.
+- FR: Je voudrais vivre au Portugal.
+
+### qa.live.a
+- PT: O caminho é um visto de residência, como o D7 para rendimentos próprios. Desde 7 de outubro de 2023, comprar casa já não abre novos vistos gold. Um advogado parceiro trata do pedido.
+- EN: The route is a residence visa, such as the D7 for people with their own income. Since October 7, 2023, buying a home no longer opens new Golden Visa applications. A partner lawyer handles the application.
+- FR: La voie, c'est un visa de résidence, comme le D7 pour les revenus propres. Depuis le 7 octobre 2023, l'achat d'un bien n'ouvre plus de nouveaux golden visas. Un avocat partenaire s'occupe de la demande.
+
+### qa.tax.q
+- PT: E os impostos aqui e em Portugal?
+- EN: What about taxes here and in Portugal?
+- FR: Et les impôts, ici et au Portugal ?
+
+### qa.tax.a
+- PT: Explicamos as regras dos dois países, com a fonte oficial. Para o seu caso, um consultor fiscal parceiro.
+- EN: We explain the rules in both countries, with the official source. For your own case, a partner tax adviser.
+- FR: Nous expliquons les règles des deux pays, avec la source officielle. Pour votre cas, un conseiller fiscal partenaire.
+
+### btn.lawyer
+- PT: Falar com um advogado
+- EN: Talk to a lawyer
+- FR: Parler à un avocat
+
+### btn.sim
+- PT: Simular o custo
+- EN: Work out the cost
+- FR: Calculer le coût
+
+### btn.bank
+- PT: Analisar o meu caso
+- EN: Look at my case
+- FR: Étudier mon dossier
+
+### btn.tax
+- PT: Falar com um consultor
+- EN: Talk to a tax adviser
+- FR: Parler à un conseiller fiscal
+
+### qa.all
+- PT: Todas as perguntas
+- EN: All questions
+- FR: Toutes les questions
+
+### week.h
+- PT: A casa da semana
+- EN: This week's home
+- FR: Le bien de la semaine
+
 ### example.h
-- PT: {price} de casa, {extra} por cima
-- EN: A {price} home, {extra} on top
-- FR: Un bien à {price}, {extra} en plus
+- PT: Custos de compra de uma casa de {price}
+- EN: Buying costs for a {price} home
+- FR: Frais d'achat d'un bien à {price}
 
 ### example.p
-- PT: O preço é o início. Por cima, quem compra sem ser residente fiscal em Portugal paga:
-- EN: The price is just the start. On top, a buyer who isn't a Portuguese tax resident pays:
-- FR: Le prix n'est qu'un début. En plus, un acheteur non-résident fiscal au Portugal paie :
+- PT: Custo total com impostos, escritura e registo, sem residência fiscal em Portugal: {total}.
+- EN: Total cost with taxes, deed and registration, if you're not a Portuguese tax resident: {total}.
+- FR: Coût total avec impôts, acte et enregistrement, sans résidence fiscale au Portugal : {total}.
 
 ### example.imt
 - PT: IMT (7,5%)
@@ -405,9 +525,9 @@ How to edit:
 - FR: Acte et enregistrement (Casa Pronta)
 
 ### example.total
-- PT: Total
-- EN: Total
-- FR: Total
+- PT: Custo total
+- EN: Total cost
+- FR: Coût total
 
 ### example.fx
 - PT: Cerca de {local} ao câmbio do BCE de {date}.
@@ -415,94 +535,34 @@ How to edit:
 - FR: Environ {local} au cours de la BCE du {date}.
 
 ### example.note
-- PT: Sem crédito, advogado nem câmbio. Se for residente fiscal e esta for a sua morada principal, o IMT é bem menor.
-- EN: No mortgage, lawyer or exchange costs included. If you're a tax resident and it's your main home, the transfer tax is much lower.
-- FR: Hors crédit, avocat et change. Si vous êtes résident fiscal et que c'est votre résidence principale, l'IMT est bien plus bas.
+- PT: Se vier a ser residente fiscal e esta for a sua morada principal, o IMT é bem menor. Crédito, advogado e câmbio não estão incluídos.
+- EN: If you become a tax resident and this is your main home, the transfer tax is much lower. Mortgage, lawyer and exchange costs are not included.
+- FR: Si vous devenez résident fiscal et que c'est votre résidence principale, l'IMT est bien plus bas. Crédit, avocat et change non compris.
+
+### example.wait
+- PT: Enquanto a agência parceira prepara a primeira casa real, fazemos as contas a uma casa de exemplo.
+- EN: Until the partner agency sends its first real listing, we run the numbers on an example home.
+- FR: En attendant le premier vrai bien de l'agence partenaire, nous faisons les comptes d'un bien d'exemple.
 
 ### example.link
 - PT: Ver a conta completa
 - EN: See the full breakdown
 - FR: Voir le calcul complet
 
-### qa.h.august
-- PT: As perguntas que nos fazem em agosto
-- EN: What people ask us every August
-- FR: Les questions qu'on nous pose en août
+### side.h
+- PT: A agência parceira
+- EN: Our partner agency
+- FR: L'agence partenaire
 
-### qa.h
-- PT: As perguntas que mais nos fazem
-- EN: What people ask us most
-- FR: Les questions qu'on nous pose le plus
-
-### qa.sign.q
-- PT: Posso comprar sem ir a Portugal?
-- EN: Can I buy without going to Portugal?
-- FR: Puis-je acheter sans aller au Portugal ?
-
-### qa.sign.a
-- PT: Sim, com uma procuração assinada aí, num consulado português ou num notário com Apostila. Pode vir só para receber as chaves.
-- EN: Yes, with a power of attorney signed where you live, at a Portuguese consulate or before a notary with an Apostille. You can come over just to collect the keys.
-- FR: Oui, avec une procuration signée chez vous, dans un consulat du Portugal ou chez un notaire avec apostille. Vous pouvez venir juste pour récupérer les clés.
-
-### qa.costs.q
-- PT: Quanto pago por cima do preço?
-- EN: How much do I pay on top of the price?
-- FR: Combien paie-t-on en plus du prix ?
-
-### qa.costs.a
-- PT: IMT, imposto do selo, escritura e registo. No exemplo acima, {extra}.
-- EN: Transfer tax, stamp duty, deed and registration. In the example above, {extra}.
-- FR: L'IMT, le droit de timbre, l'acte et l'enregistrement. Dans l'exemple ci-dessus, {extra}.
-
-### qa.bank.q
-- PT: O banco empresta a quem vive fora?
-- EN: Will a bank lend to someone who lives abroad?
-- FR: La banque prête-t-elle à quelqu'un qui vit à l'étranger ?
-
-### qa.bank.a
-- PT: Empresta, até 90% para habitação própria e 80% para outros fins, nos limites do Banco de Portugal.
-- EN: Yes, up to 90% for your main home and 80% for other uses, within Banco de Portugal's limits.
-- FR: Oui, jusqu'à 90 % pour la résidence principale et 80 % pour les autres usages, dans les limites de la Banque du Portugal.
-
-### qa.inherit.q
-- PT: A casa dos meus pais ficou para mim. E agora?
-- EN: My parents' house is now mine. What now?
-- FR: La maison de mes parents me revient. Et maintenant ?
-
-### qa.inherit.a
-- PT: Primeiro, a habilitação de herdeiros e o registo. Depois, decidir com os irmãos. Os filhos não pagam o imposto do selo de 10% sobre a herança.
-- EN: First, the heirs' declaration and the registration. Then you decide with your siblings. Children don't pay the 10% stamp duty on inheritance.
-- FR: D'abord, l'acte de notoriété des héritiers et l'enregistrement. Ensuite, décider avec les frères et sœurs. Les enfants ne paient pas le droit de timbre de 10 % sur la succession.
-
-### qa.live.q
-- PT: Comprar casa dá direito a viver em Portugal?
-- EN: Does buying a home let me live in Portugal?
-- FR: Acheter un bien permet-il de vivre au Portugal ?
-
-### qa.live.a
-- PT: Não. Desde 7 de outubro de 2023, comprar deixou de abrir novos vistos gold. Para viver cá, precisa de um visto de residência, como o D7.
-- EN: No. Since October 7, 2023, buying no longer opens new Golden Visa applications. To live here, you need a residence visa, such as the D7.
-- FR: Non. Depuis le 7 octobre 2023, l'achat n'ouvre plus de nouveaux golden visas. Pour y vivre, il faut un visa de résidence, comme le D7.
+### side.p
+- PT: Habinedita Gondomar, agência licenciada (AMI {ami}), Patrocinador Gold.
+- EN: Habinedita Gondomar, licensed agency (AMI {ami}), Gold sponsor.
+- FR: Habinedita Gondomar, agence agréée (AMI {ami}), sponsor Gold.
 
 ### blog.h
 - PT: Para ler antes de assinar
 - EN: To read before you sign
 - FR: À lire avant de signer
-
-### qa.all
-- PT: Todas as perguntas
-- EN: All questions
-- FR: Toutes les questions
-
-### side.h
-- PT: Do lado de lá
-- EN: On the ground in Portugal
-- FR: Sur place, au Portugal
-
-### side.p
-- PT: Quem trata da casa em Portugal é a Habinedita Gondomar, agência licenciada (AMI {ami}).
-- EN: Your home in Portugal is handled by Habinedita Gondomar, a licensed agency (AMI {ami}).
-- FR: Sur place, c'est Habinedita Gondomar, agence agréée (AMI {ami}), qui s'occupe de votre bien.
 
 ## calls
 
@@ -681,9 +741,9 @@ How to edit:
 - FR: Pour votre situation, laissez-nous votre question et la catégorie. Nous la transmettons à un partenaire du domaine.
 
 ### agency.p
-- PT: A nossa agência parceira para comprar ou vender casa. Acompanha quem vive fora de Portugal: procura, visitas e negociação.
-- EN: Our partner agency for buying or selling a home. It works with buyers who live outside Portugal: search, viewings and negotiation.
-- FR: Notre agence partenaire pour acheter ou vendre un bien. Elle accompagne ceux qui vivent hors du Portugal : recherche, visites et négociation.
+- PT: A nossa agência parceira para comprar ou vender casa a partir de fora: procura, visitas por videochamada ou ao vivo, e negociação.
+- EN: Our partner agency, for buying or selling from abroad: search, viewings by video call or in person, and negotiation.
+- FR: Notre agence partenaire pour acheter ou vendre un bien depuis l'étranger : recherche, visites en appel vidéo ou sur place, et négociation.
 
 ### cats.h
 - PT: Escolha a categoria
@@ -711,9 +771,9 @@ How to edit:
 - FR: Banque
 
 ### cat.bank.p
-- PT: Crédito à habitação para quem vive fora.
-- EN: Mortgages for people who live abroad.
-- FR: Crédit immobilier pour non-résidents.
+- PT: Crédito à habitação, mesmo a viver fora.
+- EN: A mortgage, even while you live abroad.
+- FR: Un crédit immobilier, même en vivant à l'étranger.
 
 ### cat.tax.h
 - PT: Consultor fiscal
@@ -758,9 +818,9 @@ How to edit:
 ## guide
 
 ### title
-- PT: Quanto custa mesmo comprar casa em Portugal
-- EN: What it really costs to buy in Portugal
-- FR: Ce que coûte vraiment un achat au Portugal
+- PT: O custo total de comprar casa em Portugal
+- EN: The total cost of buying in Portugal
+- FR: Le coût total d'un achat au Portugal
 
 ### label
 - PT: Guia gratuito · PDF
@@ -1740,9 +1800,9 @@ How to edit:
 - FR: Acte et enregistrement (Casa Pronta)
 
 ### r.extra
-- PT: Acima do preço
-- EN: On top of the price
-- FR: En plus du prix
+- PT: Impostos, escritura e registo
+- EN: Taxes, deed and registration
+- FR: Impôts, acte et enregistrement
 
 ### r.total
 - PT: Total a pagar
@@ -1750,9 +1810,9 @@ How to edit:
 - FR: Total à payer
 
 ### cost.note
-- PT: Quem não é residente fiscal paga IMT à taxa única de 7,5%, salvo exceções, como passar a residente nos dois anos seguintes. Advogado e avaliação bancária não estão incluídos.
-- EN: Buyers who are not tax residents pay IMT at a flat 7.5%, with exceptions such as becoming resident within two years. Lawyer and bank valuation are not included.
-- FR: Les non-résidents fiscaux paient l'IMT au taux unique de 7,5 %, sauf exceptions, comme devenir résident dans les deux ans. Avocat et expertise bancaire non inclus.
+- PT: Se não for residente fiscal, o IMT tem a taxa única de 7,5%, salvo exceções, como passar a residente nos dois anos seguintes. Advogado e avaliação bancária não estão incluídos.
+- EN: If you're not a tax resident, IMT is a flat 7.5%, with exceptions such as becoming resident within two years. Lawyer and bank valuation are not included.
+- FR: Si vous n'êtes pas résident fiscal, l'IMT est au taux unique de 7,5 %, sauf exceptions, comme devenir résident dans les deux ans. Avocat et expertise bancaire non inclus.
 
 ### payment.name
 - PT: Prestação do crédito
@@ -2107,9 +2167,9 @@ How to edit:
 - FR: Visiter par appel vidéo, par un proche ou sur place lors d'un séjour.
 
 ### step.4
-- PT: Assinar o contrato-promessa (CPCV) e pagar o sinal: se o comprador desistir, perde-o; se o vendedor desistir, devolve-o em dobro.
-- EN: Sign the promissory contract (CPCV) and pay the deposit: if the buyer walks away, it is lost; if the seller does, it is returned twice over.
-- FR: Signer le compromis (CPCV) et verser l'acompte : si l'acheteur se retire, il le perd ; si le vendeur se retire, il le rend au double.
+- PT: Assinar o contrato-promessa (CPCV) e pagar o sinal. Se desistir, perde o sinal; se o vendedor desistir, devolve-o em dobro.
+- EN: Sign the promissory contract (CPCV) and pay the deposit. If you withdraw, you lose the deposit; if the seller withdraws, they pay it back twice over.
+- FR: Signer le compromis (CPCV) et verser l'acompte. Si vous vous retirez, vous le perdez ; si le vendeur se retire, il vous le rend au double.
 
 ### step.5
 - PT: Avaliação do banco e aprovação final do crédito.
@@ -2211,19 +2271,19 @@ How to edit:
 ## casa
 
 ### title
-- PT: A sua casa em Portugal, tratada de fora
-- EN: Your home in Portugal, handled from abroad
-- FR: Votre maison au Portugal, gérée depuis l'étranger
+- PT: Comprar a partir de fora, passo a passo
+- EN: Buying from abroad, step by step
+- FR: Acheter depuis l'étranger, pas à pas
 
 ### lede
-- PT: Casa, crédito, seguro, advogado, impostos e transferência do dinheiro: escolha o que precisa num só pedido. Cada parte segue apenas para o parceiro que autorizar.
-- EN: Home, mortgage, insurance, lawyer, tax and moving the money: choose what you need in one request. Each part goes only to the partner you authorise.
-- FR: Bien, crédit, assurance, avocat, impôts et transfert d'argent : choisissez ce dont vous avez besoin en une seule demande. Chaque partie va uniquement au partenaire que vous autorisez.
+- PT: Casa, crédito, seguros, advogado, impostos e envio do dinheiro: para cada passo, a regra e o parceiro que o resolve. Escolha o que precisa num só pedido; cada parte segue apenas para o parceiro que autorizar.
+- EN: Home, mortgage, insurance, lawyer, tax and sending the money: for each step, the rule and the partner who handles it. Choose what you need in one request; each part goes only to the partner you authorise.
+- FR: Bien, crédit, assurances, avocat, impôts et envoi de l'argent : pour chaque étape, la règle et le partenaire qui s'en charge. Choisissez ce dont vous avez besoin en une seule demande ; chaque partie va uniquement au partenaire que vous autorisez.
 
 ### s.agency.h
-- PT: Encontrar a casa
-- EN: Finding the home
-- FR: Trouver le bien
+- PT: Ver casas sem viajar
+- EN: Seeing homes without travelling
+- FR: Voir des biens sans voyager
 
 ### s.agency.p
 - PT: A agência parceira, a {agency} (AMI {ami}), procura casas no seu orçamento e mostra-as por videochamada, através de um familiar ou ao vivo.
@@ -2231,9 +2291,9 @@ How to edit:
 - FR: Notre agence partenaire, {agency} (AMI {ami}), cherche des biens dans votre budget et vous les montre en appel vidéo, par un proche ou sur place.
 
 ### s.credit.h
-- PT: O crédito
-- EN: The mortgage
-- FR: Le crédit
+- PT: Um crédito a partir de fora
+- EN: A mortgage from abroad
+- FR: Un crédit depuis l'étranger
 
 ### s.credit.p
 - PT: Um intermediário de crédito registado no Banco de Portugal compara bancos que emprestam a não residentes.
@@ -2251,9 +2311,9 @@ How to edit:
 - FR: Assurance-vie pour le crédit et multirisque habitation, avec un assureur enregistré auprès de l'ASF.
 
 ### s.lawyer.h
-- PT: Advogado e impostos
-- EN: Lawyer and tax
-- FR: Avocat et impôts
+- PT: O contrato, a procuração e os impostos
+- EN: The contract, the power of attorney and tax
+- FR: Le contrat, la procuration et les impôts
 
 ### s.lawyer.p
 - PT: Um advogado para o contrato-promessa, a procuração e a escritura, e um consultor fiscal para o NIF, o representante fiscal e os impostos onde vive.
@@ -2261,9 +2321,9 @@ How to edit:
 - FR: Un avocat pour le compromis, la procuration et l'acte, et un conseiller fiscal pour le NIF, le représentant fiscal et l'impôt dans votre pays.
 
 ### s.fx.h
-- PT: Transferir o dinheiro
-- EN: Moving the money
-- FR: Transférer l'argent
+- PT: Enviar o dinheiro
+- EN: Sending the money
+- FR: Envoyer l'argent
 
 ### s.fx.p
 - PT: Uma empresa de pagamentos autorizada para enviar a entrada e o preço em francos, dólares, reais ou shekels.
@@ -2341,9 +2401,9 @@ How to edit:
 - FR: Le bouton ouvre votre messagerie avec la demande déjà rédigée, à envoyer à notre adresse. Réponse sous deux jours ouvrés.
 
 ### form.subject
-- PT: Pedido: casa tratada de fora
-- EN: Request: home from abroad
-- FR: Demande : maison depuis l'étranger
+- PT: Pedido: comprar a partir de fora
+- EN: Request: buying from abroad
+- FR: Demande : acheter depuis l'étranger
 
 ### licences.h
 - PT: Licenças
@@ -2425,9 +2485,9 @@ How to edit:
 ## blog
 
 ### title
-- PT: Artigos para quem compra de fora
-- EN: Articles for buyers abroad
-- FR: Articles pour acheter depuis l'étranger
+- PT: Artigos para comprar com calma a partir de fora
+- EN: Articles for buying calmly from abroad
+- FR: Articles pour acheter sereinement depuis l'étranger
 
 ### lede
 - PT: Impostos, crédito e passos da compra, explicados com a fonte oficial de cada número.

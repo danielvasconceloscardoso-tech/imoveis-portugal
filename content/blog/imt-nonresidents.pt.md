@@ -3,8 +3,8 @@ id: imt-nonresidents
 lang: pt
 slug: imt-7-5-nao-residentes
 title: "O IMT de 7,5% para não residentes, explicado"
-description: "Desde maio de 2026, quem compra casa em Portugal sem ser residente fiscal paga IMT a 7,5%. As três exceções, as contas e a fonte oficial de cada número."
-tldr: "Desde maio de 2026, quem compra casa em Portugal sem ser residente fiscal paga IMT a uma taxa única de 7,5%, sem isenções nem reduções. Há três exceções. Numa casa de 250 000 €, o IMT é de 18 750 €, contra 7 042 € para um residente que compra a sua casa própria e permanente."
+description: "Desde maio de 2026, se comprar casa em Portugal sem ser residente fiscal, o IMT é de 7,5%. As três exceções, as contas e a fonte oficial de cada número."
+tldr: "Desde maio de 2026, se comprar casa em Portugal sem ser residente fiscal, paga IMT a uma taxa única de 7,5%, sem isenções nem reduções. Há três exceções. Numa casa de 250 000 €, o IMT é de 18 750 €, contra 7 042 € para um residente que compra a sua casa própria e permanente."
 published: 2026-10-25
 updated: 2026-10-25
 cta: tax
@@ -14,7 +14,7 @@ sources: [pt-imt-nonresident-flat, pt-imt-nonresident-exceptions, pt-imt-hpp-202
 
 ## O que mudou em maio de 2026
 
-O IMT é o imposto que se paga quando se compra um imóvel. Até 2026, a taxa dependia do preço e do uso da casa, e era igual para residentes e não residentes. O Decreto-Lei 97/2026 acrescentou uma regra ao Código do IMT: quem compra um prédio urbano ou uma fração para habitação sem ser residente fiscal em Portugal paga uma taxa única de 7,5%, sem isenções nem reduções.[[pt-imt-nonresident-flat]]
+O IMT é o imposto que se paga quando se compra um imóvel. Até 2026, a taxa dependia do preço e do uso da casa, e era igual para residentes e não residentes. O Decreto-Lei 97/2026 acrescentou uma regra ao Código do IMT: a compra de um prédio urbano ou de uma fração para habitação por um não residente fiscal em Portugal tem uma taxa única de 7,5%, sem isenções nem reduções.[[pt-imt-nonresident-flat]]
 
 Para o emigrante no Luxemburgo, em França ou na Suíça, para o brasileiro que compra a partir do Brasil e para o americano ou israelita com raízes cá, o ponto de partida passa a ser este: 7,5% do preço, salvo exceção.
 

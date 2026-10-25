@@ -16,7 +16,7 @@ Written by the CEO, 24 Oct 2026. Feeds the weekly batch for all six editions. Fo
 
 | Pillar | What it answers | Example format |
 | --- | --- | --- |
-| Money | What it really costs, taxes, financing, exchange rates | Cost breakdown videos, calculator posts |
+| Money | Total costs, taxes, financing, exchange rates | Cost breakdown videos, calculator posts |
 | Process | Steps, documents, who does what, from abroad | Checklists, step-by-step carousels |
 | Places | What your budget buys where | "200k € in Braga vs Porto vs Algarve" |
 | Coming home | Returning, retiring, inheriting the family house | Stories, practical guides |
@@ -26,13 +26,13 @@ Written by the CEO, 24 Oct 2026. Feeds the weekly batch for all six editions. Fo
 ## Hooks per edition (first 10 weeks)
 
 ### Luxembourg (PT)
-1. Quanto custa mesmo uma casa de 250 000 € em Portugal: tudo o que paga por cima
+1. O custo total de uma casa de 250 000 € em Portugal, linha a linha
 2. Crédito no Luxemburgo ou em Portugal: o que muda na prática
 3. A casa da aldeia que herdou: vender, recuperar ou arrendar?
 4. O que 200 000 € compram em Braga, Viana e Guimarães
 5. Regressar a Portugal: o que tratar antes de fazer as malas
 6. Arrendar a casa em Portugal enquanto vive no Luxemburgo: impostos dos dois lados
-7. Os 5 erros mais caros de quem compra à distância
+7. Os 5 erros mais caros ao comprar à distância
 8. Comprar sem estar em Portugal: como funciona a procuração
 9. IMI e AIMI: quanto paga por ano pela casa em Portugal
 10. Transferir as poupanças para Portugal sem perder no caminho
@@ -53,10 +53,10 @@ Written by the CEO, 24 Oct 2026. Feeds the weekly batch for all six editions. Fo
 1. O seu 2.º pilar pode comprar a sua casa em Portugal: as regras
 2. Francos para euros: como transferir sem perder dinheiro
 3. Reformar-se em Portugal depois da Suíça: o que muda
-4. Quanto custa mesmo comprar casa em Portugal a partir da Suíça
+4. O custo total de comprar casa em Portugal a partir da Suíça
 5. O 3.º pilar e a casa em Portugal: o que é possível
 6. A casa para o regresso: comprar já ou esperar?
-7. Os 5 erros mais caros de quem compra à distância
+7. Os 5 erros mais caros ao comprar à distância
 8. Arrendar em Portugal vivendo na Suíça: impostos dos dois lados
 9. Comprar sem estar em Portugal: a procuração explicada
 10. O que 300 000 € compram no Norte e no Algarve
@@ -65,7 +65,7 @@ Written by the CEO, 24 Oct 2026. Feeds the weekly batch for all six editions. Fo
 1. Votre 2e pilier peut financer votre maison au Portugal : les règles
 2. Francs en euros : transférer sans perdre d'argent
 3. La retraite au Portugal après la Suisse : ce qui change
-4. Combien coûte vraiment un achat au Portugal depuis la Suisse
+4. Le coût total d'un achat au Portugal depuis la Suisse
 5. Le 3e pilier et la maison au Portugal : ce qui est possible
 6. La maison du retour : acheter maintenant ou attendre ?
 7. Les 5 erreurs qui coûtent cher quand on achète à distance

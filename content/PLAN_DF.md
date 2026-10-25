@@ -8,7 +8,7 @@ What Doutor Finanças does (design/v2/DOUTOR_FINANCAS.md): about three dated art
 
 **Where questions come from, in order.**
 1. Replies to the newsletter ("Responda a este email com a sua pergunta").
-2. Questions sent through "Talk to a partner" and "A sua casa, tratada de fora" (the question only, never the person).
+2. Questions sent through "Talk to a partner" and "Comprar a partir de fora, passo a passo" (the question only, never the person).
 3. The FAQ ranking by search interest (content/FAQ_SOURCES.md), then Google "People also ask" per country.
 
 **Shape of every article** (800 to 1 200 words):

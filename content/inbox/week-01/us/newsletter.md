@@ -19,7 +19,7 @@ Subject: 30,000 € you may not have budgeted
 
 thanks for joining Imóveis Portugal. From December 1, you'll get what you need to know about buying a home in Portugal from the US every week, with the official source for every number.
 
-To start, one number: on a 400,000 € home, a buyer who is not a Portuguese tax resident pays 30,000 € in property transfer tax. That's the flat 7.5% rate for non-residents, in force since May 2026. There are exceptions, for example if you become a Portuguese tax resident within two years.
+To start, one number: on a 400,000 € home, if you're not a Portuguese tax resident, you pay 30,000 € in property transfer tax. That's the flat 7.5% rate for non-residents, in force since May 2026. There are exceptions, for example if you become a Portuguese tax resident within two years.
 
 The full math is in this week's article: [read the article].
 

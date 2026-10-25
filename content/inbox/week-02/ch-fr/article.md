@@ -5,7 +5,7 @@ type: article
 week: 2
 date: 2026-11-18
 pillar: Money
-title: "Combien coûte vraiment un achat au Portugal depuis la Suisse"
+title: "Le coût total d'un achat au Portugal depuis la Suisse"
 sources: [pt-imt-hpp-2026, pt-imt-second-home-2026, pt-imt-nonresident-flat, pt-imt-nonresident-exceptions, pt-is-purchase, pt-is-loan-5y, pt-is-interest, pt-ltv-limits, ch-2nd-pillar-abroad, pt-imi-rates]
 faq: [fr-02, chfr-01]
 cta: guide
@@ -13,7 +13,7 @@ sponsored: false
 status: draft
 ---
 
-# Combien coûte vraiment un achat au Portugal depuis la Suisse
+# Le coût total d'un achat au Portugal depuis la Suisse
 
 Pour un logement de 300 000 €, les impôts de l'achat vont d'environ 13 000 € à près de 25 000 €. Tout dépend d'une question : êtes-vous résident fiscal au Portugal au moment de l'achat, ou le devenez-vous dans les deux ans ?
 

@@ -2,3 +2,7 @@
 /pt/:ed/o-que-compra/ /pt/:ed/mapa/ 301
 /en/:ed/what-it-buys/ /en/:ed/map/ 301
 /fr/:ed/ce-que-vous-achetez/ /fr/:ed/carte/ 301
+# Prompt 17 (D35): the one-stop page was renamed.
+/pt/:ed/casa-tratada-de-fora/ /pt/:ed/comprar-a-partir-de-fora/ 301
+/en/:ed/your-home-from-abroad/ /en/:ed/buying-from-abroad/ 301
+/fr/:ed/votre-maison-depuis-l-etranger/ /fr/:ed/acheter-depuis-l-etranger/ 301

@@ -5,7 +5,7 @@ type: article
 week: 1
 date: 2026-11-11
 pillar: Money
-title: "Quanto custa mesmo uma casa de 250 000 € em Portugal: tudo o que paga por cima"
+title: "O custo total de uma casa de 250 000 € em Portugal, linha a linha"
 sources: [pt-imt-hpp-2026, pt-imt-second-home-2026, pt-imt-nonresident-flat, pt-imt-nonresident-exceptions, pt-is-purchase, pt-is-loan-5y, pt-is-interest, pt-ltv-limits, pt-imi-rates]
 faq: [pt-02]
 cta: guide
@@ -13,9 +13,9 @@ sponsored: false
 status: draft
 ---
 
-# Quanto custa mesmo uma casa de 250 000 € em Portugal: tudo o que paga por cima
+# O custo total de uma casa de 250 000 € em Portugal, linha a linha
 
-Uma casa anunciada por 250 000 € nunca custa 250 000 €. Por cima do preço há impostos, a escritura, o registo e, se pedir crédito, os encargos do empréstimo. Em 2026 há ainda uma novidade que pesa muito para quem vive no Luxemburgo: a taxa de IMT para não residentes.
+Ao preço de uma casa de 250 000 € juntam-se os impostos, a escritura, o registo e, se pedir crédito, os encargos do empréstimo. Com as contas feitas, sabe o valor exato antes de assinar. Em 2026 há uma novidade importante se vive no Luxemburgo: a taxa de IMT para não residentes.
 
 ## O IMT depende de onde vive e do uso da casa
 

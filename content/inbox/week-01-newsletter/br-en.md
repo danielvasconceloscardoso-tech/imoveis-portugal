@@ -18,7 +18,7 @@ Subject: What €500,000 buys across Portugal
 
 {{first name | Hi}},
 
-this is the first Imóveis Portugal newsletter for people buying in Portugal from Brazil. Five minutes every Thursday, with the source of every figure.
+this is your first Imóveis Portugal newsletter. Every Thursday, in five minutes, one step of buying in Portugal from Brazil, with the source of every figure.
 
 ## This week's home
 

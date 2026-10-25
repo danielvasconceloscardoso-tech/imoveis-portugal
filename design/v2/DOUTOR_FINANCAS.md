@@ -39,7 +39,7 @@ Opened 25 Oct 2026 from the build environment. Screenshots (desktop first screen
 
 ## What we copy now (built in this prompt)
 
-1. The Ecossistema idea as **"A sua casa em Portugal, tratada de fora"**: one page, one form, a box per partner.
+1. The Ecossistema idea as **"Comprar a partir de fora, passo a passo"** (first named "A sua casa em Portugal, tratada de fora", renamed in prompt 17): one page, one form, a box per partner.
 2. More simulators: IMT and stamp duty, IMI, debt-to-income ratio, "Que casa consigo comprar" (income in the reader's currency), capital gains for non-residents.
 3. A property data page from INE quarterly figures (North first), next to "O que compra".
 4. A content and social rhythm adapted to our size (`content/PLAN_DF.md`).

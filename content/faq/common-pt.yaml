@@ -11,7 +11,7 @@
   q: "Posso comprar casa em Portugal se viver no estrangeiro?"
   a: >-
     Sim, pode. Não precisa de viver em Portugal nem de ser residente: a lei do IMT tem até uma taxa própria
-    para quem compra a partir de fora. Antes de assinar, precisa de um número de contribuinte português
+    para não residentes. Antes de assinar, precisa de um número de contribuinte português
     (NIF). Se vive fora da UE, nomeia também um representante fiscal, a menos que adira às notificações
     eletrónicas das Finanças. Um advogado parceiro pode tratar disto por si.
   facts: [pt-nonresidents-buy, pt-nif-nonresident, pt-tax-rep]
@@ -57,7 +57,7 @@
   cta: tax
   q: "Os não residentes pagam mais IMT?"
   a: >-
-    Sim: desde maio de 2026, quem compra casa sem ser residente fiscal em Portugal paga IMT à taxa única de
+    Sim: desde maio de 2026, se não for residente fiscal em Portugal, o IMT tem uma taxa única de
     7,5%, sem isenções. Há exceções: quem já foi considerado residente fiscal, quem passa a residente nos
     dois anos seguintes e quem arrenda a casa para habitação dentro dos limites de renda da lei. Nos dois
     últimos casos, pede depois a devolução da diferença.
@@ -93,7 +93,7 @@
   cta: lawyer
   q: "Preciso de advogado para comprar casa?"
   a: >-
-    A escolha é sua, mas a quem compra à distância um advogado poupa viagens e riscos. Pode verificar o
+    A escolha é sua, mas, à distância, um advogado poupa-lhe viagens e riscos. Pode verificar o
     registo do imóvel e documentos como a licença de utilização, rever o contrato-promessa antes de o
     assinar e representá-lo na escritura com uma procuração, se não puder estar em Portugal. Um advogado
     parceiro pode acompanhar a compra do início ao fim.

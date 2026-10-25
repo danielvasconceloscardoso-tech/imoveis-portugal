@@ -13,7 +13,7 @@ CTA keys (Claude Code links them to the edition's pages): **[talk-lawyer]**, **[
 **1. Can I buy property in Portugal if I don't live there?**
 Yes. Portugal does not restrict property purchases by foreigners or non-residents. You need a Portuguese tax number (NIF) before signing; depending on where you live, you may also need a tax representative **[check: rules for EU vs non-EU residents]**. A partner lawyer can get the NIF and run the purchase for you. **[talk-lawyer]**
 
-**2. How much does it cost on top of the price?**
+**2. What does it cost besides the price?**
 Expect property transfer tax (IMT, which depends on price and use), stamp duty of 0.8% of the price **[check]**, notary and land registry fees, and your lawyer. With a mortgage, add stamp duty on the loan **[check: 0.6%]** and bank fees. Our free guide works it out on real examples. **[guide]**
 
 **3. Can I get a mortgage as a non-resident?**

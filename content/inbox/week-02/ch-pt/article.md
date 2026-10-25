@@ -5,7 +5,7 @@ type: article
 week: 2
 date: 2026-11-18
 pillar: Money
-title: "Quanto custa mesmo comprar casa em Portugal a partir da Suíça"
+title: "O custo total de comprar casa em Portugal a partir da Suíça"
 sources: [pt-imt-hpp-2026, pt-imt-second-home-2026, pt-imt-nonresident-flat, pt-imt-nonresident-exceptions, pt-is-purchase, pt-is-loan-5y, pt-is-interest, pt-ltv-limits, ch-2nd-pillar-abroad, pt-imi-rates]
 faq: [pt-02, chpt-01]
 cta: guide
@@ -13,7 +13,7 @@ sponsored: false
 status: draft
 ---
 
-# Quanto custa mesmo comprar casa em Portugal a partir da Suíça
+# O custo total de comprar casa em Portugal a partir da Suíça
 
 Numa casa de 300 000 €, os impostos da compra vão de cerca de 13 000 € a quase 25 000 €. A diferença está numa pergunta: é residente fiscal em Portugal no momento da compra, ou passa a ser nos dois anos seguintes?
 
@@ -29,7 +29,7 @@ O IMT é o imposto da compra. Para uma casa de 300 000 €, com as tabelas de 20
 
 A lei prevê exceções. A taxa única não se aplica a quem tenha sido considerado residente fiscal em Portugal, a quem passe a ser residente nos dois anos seguintes à compra, ou a quem arrende a casa para habitação com renda limitada durante pelo menos 36 meses nos primeiros cinco anos. Nos dois últimos casos, paga os 7,5% e pede a devolução da diferença nos seis meses seguintes.
 
-Para quem compra a casa do regresso, a segunda exceção conta: se mudar a residência fiscal para Portugal no prazo de dois anos, pode pedir de volta a diferença para a tabela normal. Como a primeira exceção se aplica a quem já foi residente e emigrou é uma pergunta para o seu advogado ou consultor fiscal.
+Se esta é a casa do regresso, a segunda exceção conta: se mudar a residência fiscal para Portugal no prazo de dois anos, pode pedir de volta a diferença para a tabela normal. Como a primeira exceção se aplica a quem já foi residente e emigrou é uma pergunta para o seu advogado ou consultor fiscal.
 
 ## O 2.º pilar entra aqui
 

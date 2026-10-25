@@ -96,7 +96,7 @@ The brand DNA is **success and trust**: clean, calm, easy on a phone, and a feel
 ## Status (25 Oct 2026, end of session 2)
 
 Done and on `main` (live link, still noindex):
-- Site v2 in PT, EN and FR: home, FAQ (including "Habitação Própria Permanente"), partner pages, 10 calculators, "what a budget buys", house prices, "home from abroad", paid report (switched off, D22).
+- Site v2 in PT, EN and FR: home, FAQ (including "Habitação Própria Permanente"), partner pages, 10 calculators, "what a budget buys", house prices, "buying from abroad, step by step", paid report (switched off, D22).
 - 18 free e-books, now 15 pages with chapters on main home versus other home and on the mortgage from offer to deed.
 - **Blog** (task 15): index, article pages, SEO data, per-edition sitemaps, two articles in PT, EN, FR (non-resident IMT at 7.5%; buying from abroad step by step), linked from the menu, footer and home page.
 - Prompt 03: five Israeli-capital developers in the pipeline, a "Chambers & embassies" tab, `sponsors/INTERNATIONAL.md`, seven English outreach drafts (not sent).

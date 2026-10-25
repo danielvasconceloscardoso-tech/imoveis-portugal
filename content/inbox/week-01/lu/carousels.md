@@ -12,9 +12,9 @@ status: draft
 
 Formato: 1080 x 1350, 5 a 7 slides, direção C (fundo branco, cor da edição LU no último slide). Fonte em letra pequena em cada slide com números.
 
-## Carrossel 1: "Casa de 250 000 €: o que paga por cima"
+## Carrossel 1: "Casa de 250 000 €, o custo total"
 
-1. Casa de 250 000 € em Portugal. O que paga por cima?
+1. Casa de 250 000 € em Portugal. O custo total, linha a linha.
 2. IMT, residente, habitação própria: 7 042 €
 3. IMT, residente, segunda habitação: 8 105 €
 4. IMT, não residente: 18 750 € (taxa única de 7,5% desde maio de 2026)

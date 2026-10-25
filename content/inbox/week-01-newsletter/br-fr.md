@@ -18,7 +18,7 @@ Objet : Ce que 500 000 € achètent au Portugal, commune par commune
 
 {{first name | Bonjour}},
 
-voici la première newsletter d'Imóveis Portugal pour celles et ceux qui achètent au Portugal depuis le Brésil. Cinq minutes chaque jeudi, avec la source de chaque chiffre.
+voici votre première newsletter d'Imóveis Portugal. Chaque jeudi, en cinq minutes, une étape de votre achat au Portugal depuis le Brésil, avec la source de chaque chiffre.
 
 ## Le bien de la semaine
 

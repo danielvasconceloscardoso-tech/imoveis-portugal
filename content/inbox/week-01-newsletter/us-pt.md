@@ -18,7 +18,7 @@ Assunto: O que 500 000 € compram em Portugal, concelho a concelho
 
 {{first name | Olá}},
 
-esta é a primeira newsletter do Imóveis Portugal para quem vive nos Estados Unidos. Cinco minutos, todas as quintas-feiras, com a fonte de cada número.
+esta é a sua primeira newsletter do Imóveis Portugal. Todas as quintas-feiras, em cinco minutos, um passo da compra em Portugal a partir dos Estados Unidos, com a fonte de cada número.
 
 ## A casa da semana
 

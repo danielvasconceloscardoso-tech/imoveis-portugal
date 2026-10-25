@@ -35,7 +35,7 @@ So `rank` orders questions by **how many independent sources raised them** in th
 | Rank | Question (key) | Stage | Raised by (examples) |
 | --- | --- | --- | --- |
 | 1 | Can I buy if I live abroad? (buy-abroad) | Before | taxesforexpats.com, brighttax.com, mcs.pt, immoabroad.com, terms.law, doutorfinancas.pt, deco.proteste.pt |
-| 2 | How much does buying cost on top of the price? (costs) | Before | idealista.pt/en "real cost", portugalist.com, expat.com/fr "frais d'achat", propertyguides.com, tagusproperty.com |
+| 2 | What does buying cost besides the price? (costs) | Before | idealista.pt/en "real cost", portugalist.com, expat.com/fr "frais d'achat", propertyguides.com, tagusproperty.com |
 | 3 | Can I get a mortgage as a non-resident? (mortgage) | Before | idealista.pt "crédito para emigrantes", cofidis.pt, deco.proteste.pt, theportugalnews.com, comparamais.pt |
 | 3.5–3.6 | CH: 2nd pillar for a home in Portugal, conditions (ch-2p, ch-2p-rules) | Before | ibani.com (two guides), hellosafe.ch |
 | 4 | How do I get a NIF? (nif) | Before | brighttax.com, cgd.pt buyers guide, expat.com/fr |

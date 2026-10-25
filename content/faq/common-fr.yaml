@@ -20,7 +20,7 @@
   rank: 2
   stage: before
   cta: tax
-  q: "Combien coûte un achat en plus du prix ?"
+  q: "Quels sont les frais d'achat, au-delà du prix ?"
   a: >-
     Prévoyez l'IMT, un droit de timbre de 0,8 % et l'acte avec l'enregistrement. Si vous n'êtes pas résident
     fiscal au Portugal, l'IMT est de 7,5 % du prix, sauf exceptions. Avec un crédit s'ajoutent 0,6 % de

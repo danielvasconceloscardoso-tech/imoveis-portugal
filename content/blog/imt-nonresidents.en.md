@@ -45,7 +45,7 @@ At 250,000 €, the gap between a non-resident and a resident buying a main home
 
 ## When it is due
 
-IMT is due on the day it's assessed or within the following 30 days.[[pt-imt-payment]] A buyer who will ask for a refund under the second or third exception should plan to pay the full 7.5% at purchase.
+IMT is due on the day it's assessed or within the following 30 days.[[pt-imt-payment]] If you'll ask for a refund under the second or third exception, plan to pay the full 7.5% at purchase.
 
 ## What IMT doesn't cover
 

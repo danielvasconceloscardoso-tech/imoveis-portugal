@@ -1,6 +1,6 @@
 # Newsletter format (prompt 12, section 3)
 
-One email per edition and language, every Thursday. A 5-minute read (about 600 to 800 words). At least 80% evergreen: interesting and useful in a year's time, not facts that expire next week. Voice: content/VOICE.md. Every figure has a fact id in content/facts/facts.csv and appears in `sources:`.
+One email per edition and language, every Thursday. A 5-minute read (about 600 to 800 words). At least 80% evergreen: interesting and useful in a year's time, not facts that expire next week. Voice: content/VOICE.md v3 (D35): talk to the reader directly, and every item goes from the reader's obstacle to the rule or number that answers it, then to the partner who solves it. Every figure has a fact id in content/facts/facts.csv and appears in `sources:`.
 
 ## The seven blocks, always in this order
 
