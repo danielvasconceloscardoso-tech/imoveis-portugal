@@ -1,0 +1,59 @@
+---
+// "O seu percurso" (prompt 20 §2): the reader's country journey, nine checkpoints, each question answered from a
+// primary source with its superscript, ending with the partner button and an empty partner slot for that step.
+// Wording: COPY_DECK.md "journey.*"; data: src/lib/journeys.ts.
+import V2 from "../layouts/V2.astro";
+import { pathFor, type Lang, type EdCode } from "../i18n";
+import { Sources, fmtDate } from "../lib/content";
+import { journeyFor } from "../lib/journeys";
+import { SUB } from "../lib/tools";
+import { c, edName } from "../lib/copy";
+
+interface Props { lang: Lang; ed: EdCode; }
+const { lang, ed } = Astro.props;
+const src = new Sources();
+const where = c(`home.where.${ed}`, lang);
+const vars = { where, from: c(`journey.from.${ed}`, lang) };
+const steps = journeyFor(ed).map((cp) => ({ ...cp, qs: cp.qs.map((q) => ({ ...q, n: [...new Set(q.facts.map((f) => src.n(f)))] })) }));
+const sup = (ns: number[]) => ns.map((i) => `<a class="sup" href="#fonte-${i}">${i}</a>`).join("");
+const href = (cat: string) => cat === "agency" ? pathFor(lang, ed, "buy") : `${pathFor(lang, ed, "talk")}?cat=${cat}#form`;
+const btn: Record<string, string> = { lawyer: "home.btn.lawyer", bank: "home.btn.bank", tax: "home.btn.tax", fx: "journey.role.fx", agency: "home.call.link", developer: "journey.role.developer" };
+const links = { map: pathFor(lang, ed, "map"), sims: pathFor(lang, ed, "sims"), private: pathFor(lang, ed, "private"), prices: pathFor(lang, ed, "data") };
+const linkLabel = { map: "map.open", sims: "common.nav.sims", private: "common.nav.private", prices: "common.nav.data" } as const;
+---
+<V2 lang={lang} ed={ed} page="journey" title={`${c("journey.title", lang)} · ${edName(ed, lang)} | Imóveis Portugal`} description={c("journey.lede", lang, vars)} sticky={null}>
+  <div class="frame read ph">
+    <p class="h-small">{c("journey.title", lang)} · {edName(ed, lang)}</p>
+    <h1>{c("journey.h1", lang, vars)}</h1>
+    <p class="lede">{c("journey.lede", lang, vars)}</p>
+    <ol class="jtoc">{steps.map((s, i) => <li><a href={`#p-${s.k}`}><span>{i + 1}</span>{c(`journey.cp.${s.k}.h`, lang)}</a></li>)}</ol>
+  </div>
+  <div class="frame read journey">
+    {steps.map((s, i) => (
+      <section class="jstep" id={`p-${s.k}`} aria-labelledby={`h-${s.k}`}>
+        <p class="h-small">{c("journey.step", lang, { n: String(i + 1) })}</p>
+        <h2 id={`h-${s.k}`}>{c(`journey.cp.${s.k}.h`, lang)}</h2>
+        {s.qs.map((q) => (
+          <div class="qa-item">
+            <h3>{c(`journey.q.${q.id}.q`, lang, vars)}</h3>
+            <p>{c(`journey.q.${q.a ?? q.id}.a`, lang, vars)}<Fragment set:html={sup(q.n)} /></p>
+            {q.ask && <p class="small jask">{c("journey.unverified", lang)}</p>}
+            <p class="jacts"><a class="act" href={href(q.cat)}>{q.ask ? c("journey.ask", lang) : c(btn[q.cat], lang)}</a>{q.link && <a class="act quiet" href={links[q.link]}>{c(linkLabel[q.link], lang)}</a>}</p>
+          </div>
+        ))}
+        <aside class="jslot" aria-label={c("journey.slot.h", lang)}>
+          <p class="h-small">{c("journey.slot.h", lang)}</p>
+          <p class="jroles">{s.roles.map((r) => c(`journey.role.${r}`, lang)).join(" · ")}</p>
+          <p class="small">{c("journey.slot.p", lang, { where })}</p>
+          <a class="small" href={pathFor(lang, ed, "partners")}>{c("journey.slot.join", lang)}</a>
+        </aside>
+      </section>
+    ))}
+  </div>
+  <section class="sources-list" aria-labelledby="fontes">
+    <div class="frame read">
+      <h2 id="fontes" class="h-small">{c("common.sources", lang)}</h2>
+      <ol>{src.list.map((s, i) => <li id={`fonte-${i + 1}`}><a href={s.url} rel="noopener">{s.title}</a>{s.checked && `, ${c("common.checked", lang, { date: fmtDate(lang, s.checked) })}`}.</li>)}</ol>
+    </div>
+  </section>
+</V2>

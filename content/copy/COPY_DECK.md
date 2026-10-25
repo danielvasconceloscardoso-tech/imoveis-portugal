@@ -10,6 +10,11 @@ How to edit:
 
 ## common
 
+### nav.journey
+- PT: O seu percurso
+- EN: Your path
+- FR: Votre parcours
+
 ### country.il
 - PT: Israel
 - EN: Israel
@@ -42,7 +47,7 @@ How to edit:
 
 ### country.hint
 - PT: Os exemplos, a moeda, os impostos e o percurso seguem o país onde vive.
-- EN: Examples, currency, tax answers and your journey follow the country you live in.
+- EN: Examples, currency, tax answers and your path follow the country you live in.
 - FR: Les exemples, la devise, la fiscalité et votre parcours suivent votre pays de résidence.
 
 ### country.live
@@ -3390,3 +3395,525 @@ How to edit:
 - PT: Ver as condições para parceiros
 - EN: See the partner terms
 - FR: Voir les conditions partenaires
+
+## journey
+
+### from.il
+- PT: de Israel
+- EN: Israel
+- FR: Israël
+
+### from.us
+- PT: dos Estados Unidos
+- EN: the US
+- FR: les États-Unis
+
+### from.br
+- PT: do Brasil
+- EN: Brazil
+- FR: le Brésil
+
+### from.ch
+- PT: da Suíça
+- EN: Switzerland
+- FR: la Suisse
+
+### from.fr
+- PT: de França
+- EN: France
+- FR: la France
+
+### from.lu
+- PT: do Luxemburgo
+- EN: Luxembourg
+- FR: le Luxembourg
+
+### title
+- PT: O seu percurso
+- EN: Your path
+- FR: Votre parcours
+
+### h1
+- PT: Da ideia às chaves, a partir {from}
+- EN: From the idea to the keys, from {from}
+- FR: De l'idée aux clés, depuis {from}
+
+### lede
+- PT: Nove passos, da escolha da zona à venda ou à herança. Em cada um, as perguntas que se fazem {where}, a resposta oficial e o parceiro que trata desse passo.
+- EN: Nine steps, from choosing the area to selling or passing it on. At each one, the questions people ask {where}, the official answer and the partner who handles that step.
+- FR: Neuf étapes, du choix du secteur à la vente ou à la transmission. À chaque étape, les questions qu'on se pose {where}, la réponse officielle et le partenaire qui s'en charge.
+
+### step
+- PT: Passo {n}
+- EN: Step {n}
+- FR: Étape {n}
+
+### ask
+- PT: Pergunte a um parceiro
+- EN: Ask a partner
+- FR: Demandez à un partenaire
+
+### slot.h
+- PT: Parceiro para este passo
+- EN: Partner for this step
+- FR: Partenaire pour cette étape
+
+### slot.p
+- PT: Lugares reservados a parceiros verificados para quem vive {where}, sempre identificados como patrocinados.
+- EN: Places kept for verified partners for readers {where}, always labelled as sponsored.
+- FR: Places réservées à des partenaires vérifiés pour les lecteurs {where}, toujours signalés comme sponsorisés.
+
+### slot.join
+- PT: Condições para parceiros
+- EN: Partner terms
+- FR: Conditions partenaires
+
+### unverified
+- PT: Sem fonte oficial que possamos citar: um parceiro responde ao seu caso.
+- EN: No official source we can cite: a partner answers for your case.
+- FR: Pas de source officielle à citer : un partenaire répond pour votre cas.
+
+### past
+- PT: Os preços passados não garantem preços futuros.
+- EN: Past prices do not guarantee future prices.
+- FR: Les prix passés ne garantissent pas les prix futurs.
+
+### open
+- PT: Ver o seu percurso
+- EN: See your path
+- FR: Voir votre parcours
+
+### role.agency
+- PT: Agência imobiliária
+- EN: Estate agency
+- FR: Agence immobilière
+
+### role.developer
+- PT: Promotor
+- EN: Developer
+- FR: Promoteur
+
+### role.bank
+- PT: Banco
+- EN: Bank
+- FR: Banque
+
+### role.fx
+- PT: Transferências
+- EN: Money transfer
+- FR: Transferts
+
+### role.lawyer
+- PT: Advogado
+- EN: Lawyer
+- FR: Avocat
+
+### role.tax
+- PT: Consultor fiscal
+- EN: Tax adviser
+- FR: Conseiller fiscal
+
+### role.insurance
+- PT: Seguros
+- EN: Insurance
+- FR: Assurances
+
+### role.wealth
+- PT: Gestão de património
+- EN: Wealth adviser
+- FR: Gestion de patrimoine
+
+### cp.budget.h
+- PT: O orçamento e o lugar
+- EN: Budget and place
+- FR: Le budget et le lieu
+
+### cp.finance.h
+- PT: O financiamento
+- EN: Financing
+- FR: Le financement
+
+### cp.docs.h
+- PT: Os documentos
+- EN: Documents
+- FR: Les documents
+
+### cp.buy.h
+- PT: A compra
+- EN: The purchase
+- FR: L'achat
+
+### cp.taxbuy.h
+- PT: Os impostos da compra
+- EN: Taxes when you buy
+- FR: Les impôts à l'achat
+
+### cp.own.h
+- PT: Ser proprietário
+- EN: Owning
+- FR: Être propriétaire
+
+### cp.rent.h
+- PT: Arrendar
+- EN: Renting it out
+- FR: Mettre en location
+
+### cp.sell.h
+- PT: Vender
+- EN: Selling
+- FR: Vendre
+
+### cp.struct.h
+- PT: Residência e estrutura
+- EN: Residence and structuring
+- FR: Résidence et structuration
+
+### q.space.q
+- PT: Quanto espaço compra o meu orçamento?
+- EN: How much space does my budget buy?
+- FR: Combien d'espace mon budget permet-il ?
+
+### q.space.a
+- PT: No mapa, escreva o seu orçamento e veja os metros quadrados em cada concelho, ao preço mediano das casas vendidas.
+- EN: On the map, enter your budget and see the square metres in each municipality, at the median price of homes sold.
+- FR: Sur la carte, indiquez votre budget et voyez les mètres carrés dans chaque commune, au prix médian des logements vendus.
+
+### q.trend.q
+- PT: Os preços estão a subir?
+- EN: Are prices going up?
+- FR: Les prix augmentent-ils ?
+
+### q.trend.a
+- PT: No país, a mediana do metro quadrado vendido passou de 1 923 € para 2 264 € num ano (INE, 2.º trimestre de 2026). A secção de preços mostra dez anos por zona.
+- EN: Nationally, the median square metre sold went from €1,923 to €2,264 in a year (INE, Q2 2026). The prices section shows ten years by area.
+- FR: Dans tout le pays, le mètre carré médian vendu est passé de 1 923 € à 2 264 € en un an (INE, 2e trimestre 2026). La section des prix montre dix ans par secteur.
+
+### q.lend.q
+- PT: O banco empresta a quem vive fora?
+- EN: Will a bank lend to me if I live abroad?
+- FR: La banque prête-t-elle si je vis à l'étranger ?
+
+### q.lend.a
+- PT: Sim. Os limites do Banco de Portugal valem para todos: até 90% do valor para habitação própria e permanente e 80% para outros fins.
+- EN: Yes. Banco de Portugal's limits apply to everyone: up to 90% of the value for your own permanent home and 80% for other uses.
+- FR: Oui. Les limites de la Banque du Portugal valent pour tous : jusqu'à 90 % de la valeur pour la résidence principale et 80 % pour les autres usages.
+
+### q.howmuch.q
+- PT: Quanto posso pedir?
+- EN: How much can I borrow?
+- FR: Combien puis-je emprunter ?
+
+### q.howmuch.a
+- PT: As prestações de todos os créditos não podem passar 45% do rendimento líquido. O prazo vai até 40 anos até aos 35 anos de idade, e 35 anos a partir daí.
+- EN: All your loan payments together cannot exceed 45% of net income. The term goes up to 40 years if you are under 35, and 35 years from then on.
+- FR: L'ensemble des mensualités ne peut dépasser 45 % du revenu net. La durée va jusqu'à 40 ans avant 35 ans, puis 35 ans.
+
+### q.move.q
+- PT: Como transfiro o dinheiro?
+- EN: How do I move the money?
+- FR: Comment transférer l'argent ?
+
+### q.move.a
+- PT: Bancos, notários e advogados têm de conhecer a origem dos fundos quando a operação o justifica. Guarde os comprovativos do salário e das poupanças usados na compra.
+- EN: Banks, notaries and lawyers must know where the funds come from when the operation calls for it. Keep proof of the salary and savings used for the purchase.
+- FR: Banques, notaires et avocats doivent connaître l'origine des fonds lorsque l'opération le justifie. Gardez les justificatifs du salaire et de l'épargne utilisés.
+
+### q.ch.pillar.q
+- PT: Posso usar o 2.º pilar ou o 3.º pilar?
+- EN: Can I use my 2nd or 3rd pillar?
+- FR: Puis-je utiliser mon 2e ou 3e pilier ?
+
+### q.ch.pillar.a
+- PT: O levantamento antecipado do 2.º pilar é permitido para a sua residência principal, na Suíça ou no estrangeiro, não para uma casa de férias, a partir de 20 000 CHF. O 3.º pilar A também serve para a casa própria.
+- EN: Early withdrawal of 2nd-pillar money is allowed for your main residence, in Switzerland or abroad, not for a holiday home, from CHF 20,000. Pillar 3a can also go towards your own home.
+- FR: Le retrait anticipé du 2e pilier est possible pour votre résidence principale, en Suisse ou à l'étranger, pas pour une résidence secondaire, à partir de 20 000 CHF. Le pilier 3a peut aussi financer votre logement.
+
+### q.fr.3916.q
+- PT: Tenho de declarar a conta portuguesa em França?
+- EN: Do I declare the Portuguese account in France?
+- FR: Dois-je déclarer le compte portugais en France ?
+
+### q.fr.3916.a
+- PT: Sim. Quem é residente fiscal em França declara todos os anos cada conta aberta no estrangeiro, mesmo sem movimentos (formulário 3916).
+- EN: Yes. French tax residents declare every account opened abroad each year, even if unused (form 3916).
+- FR: Oui. Les résidents fiscaux français déclarent chaque année tout compte ouvert à l'étranger, même inutilisé (formulaire 3916).
+
+### q.us.fbar.q
+- PT: Tenho de declarar a conta portuguesa nos EUA?
+- EN: Do I report the Portuguese account in the US?
+- FR: Dois-je déclarer le compte portugais aux États-Unis ?
+
+### q.us.fbar.a
+- PT: Se a soma das contas no estrangeiro passar 10 000 dólares em algum momento do ano, entrega o FBAR. O formulário 8938 tem limites próprios para quem vive fora.
+- EN: If your foreign accounts together exceed $10,000 at any time in the year, you file an FBAR. Form 8938 has its own thresholds for people living abroad.
+- FR: Si vos comptes à l'étranger dépassent ensemble 10 000 $ à un moment de l'année, vous déposez un FBAR. Le formulaire 8938 a ses propres seuils.
+
+### q.br.cbe.q
+- PT: Tenho de declarar o imóvel no Brasil?
+- EN: Do I declare the property in Brazil?
+- FR: Dois-je déclarer le bien au Brésil ?
+
+### q.br.cbe.a
+- PT: Sim, em Bens e Direitos no IRPF, com o valor de compra em moeda estrangeira. Se os bens no exterior somarem 1 milhão de dólares ou mais a 31 de dezembro, há ainda a declaração CBE ao Banco Central.
+- EN: Yes, under Bens e Direitos in the IRPF return, with the purchase value in foreign currency. If assets abroad total US$1 million or more on 31 December, there is also the CBE declaration to the Central Bank.
+- FR: Oui, dans Bens e Direitos de l'IRPF, avec la valeur d'achat en devise. Si les avoirs à l'étranger atteignent 1 million de dollars au 31 décembre, il y a aussi la déclaration CBE à la Banque centrale.
+
+### q.homeloan.q
+- PT: Posso pedir o crédito a um banco {where}?
+- EN: Can a bank {where} finance it?
+- FR: Une banque {where} peut-elle financer ?
+
+### q.homeloan.a
+- PT: Depende de cada banco: não há regra oficial que o diga. Um banco parceiro responde ao seu caso.
+- EN: It depends on each bank: no official rule says so. A partner bank answers for your case.
+- FR: Cela dépend de chaque banque : aucune règle officielle ne le dit. Une banque partenaire répond pour votre cas.
+
+### q.nif.q
+- PT: Preciso de NIF?
+- EN: Do I need a NIF?
+- FR: Ai-je besoin d'un NIF ?
+
+### q.nif.a
+- PT: Sim, antes de assinar. Pede-se online através de um representante legal, ou presencialmente. Não precisa de representante fiscal para o pedir.
+- EN: Yes, before you sign. You can request it online through a legal representative, or in person. You don't need a tax representative to get it.
+- FR: Oui, avant de signer. Il se demande en ligne par un représentant légal, ou sur place. Pas besoin de représentant fiscal pour l'obtenir.
+
+### q.rep.eu.q
+- PT: Preciso de representante fiscal?
+- EN: Do I need a tax representative?
+- FR: Ai-je besoin d'un représentant fiscal ?
+
+### q.rep.eu.a
+- PT: Não é obrigatório para quem vive na União Europeia. Basta aderir às notificações eletrónicas das Finanças.
+- EN: It's optional if you live in the European Union. You can simply join the tax authority's electronic notifications.
+- FR: Ce n'est pas obligatoire si vous vivez dans l'Union européenne. Il suffit d'adhérer aux notifications électroniques du fisc.
+
+### q.rep.non.q
+- PT: Preciso de representante fiscal?
+- EN: Do I need a tax representative?
+- FR: Ai-je besoin d'un représentant fiscal ?
+
+### q.rep.non.a
+- PT: Vivendo fora da União Europeia, sim, nos 15 dias após ter o imóvel, a menos que adira às notificações eletrónicas das Finanças.
+- EN: Living outside the European Union, yes, within 15 days of owning the property, unless you join the tax authority's electronic notifications.
+- FR: En dehors de l'Union européenne, oui, dans les 15 jours après l'achat, sauf adhésion aux notifications électroniques du fisc.
+
+### q.account.q
+- PT: Preciso de conta num banco português?
+- EN: Do I need a Portuguese bank account?
+- FR: Ai-je besoin d'un compte dans une banque portugaise ?
+
+### q.account.a
+- PT: Se pedir crédito em Portugal, o banco pode exigir uma conta à ordem. Para comprar sem crédito, não encontrámos regra oficial: um parceiro responde ao seu caso.
+- EN: If you take a mortgage in Portugal, the bank may require a current account. For a cash purchase we found no official rule: a partner answers for your case.
+- FR: Avec un crédit au Portugal, la banque peut exiger un compte courant. Pour un achat comptant, nous n'avons pas trouvé de règle officielle : un partenaire répond pour votre cas.
+
+### q.poa.q
+- PT: Posso assinar sem ir a Portugal?
+- EN: Can I sign without going to Portugal?
+- FR: Puis-je signer sans aller au Portugal ?
+
+### q.poa.a
+- PT: Sim, com uma procuração assinada {where}, num consulado de Portugal ou num notário com a Apostila de Haia.
+- EN: Yes, with a power of attorney signed {where}, at a Portuguese consulate or before a notary with the Hague Apostille.
+- FR: Oui, avec une procuration signée {where}, dans un consulat du Portugal ou chez un notaire avec l'apostille de La Haye.
+
+### q.cpcv.q
+- PT: Como funciona o contrato-promessa?
+- EN: How does the promissory contract work?
+- FR: Comment fonctionne le compromis ?
+
+### q.cpcv.a
+- PT: Fixa o preço, a data e o sinal. Se desistir, perde o sinal; se o vendedor desistir, devolve-o em dobro.
+- EN: It sets the price, the date and the deposit. If you withdraw, you lose the deposit; if the seller withdraws, they pay it back twice over.
+- FR: Il fixe le prix, la date et les arrhes. Si vous vous retirez, vous les perdez ; si le vendeur se retire, il les rend au double.
+
+### q.deed.q
+- PT: Onde se faz a escritura?
+- EN: Where is the deed signed?
+- FR: Où se signe l'acte ?
+
+### q.deed.a
+- PT: No balcão Casa Pronta, a escritura e o registo fazem-se no mesmo sítio: 375 € com um ato de registo, 700 € com crédito e hipoteca.
+- EN: At a Casa Pronta office, the deed and the registration happen in one place: €375 with one registration act, €700 with a mortgage.
+- FR: Au guichet Casa Pronta, l'acte et l'enregistrement se font au même endroit : 375 € pour un acte, 700 € avec un crédit hypothécaire.
+
+### q.docs.q
+- PT: Que documentos leva a casa?
+- EN: Which documents come with the home?
+- FR: Quels documents accompagnent le bien ?
+
+### q.docs.a
+- PT: A identificação de vendedores e compradores, a ficha técnica se existir, a licença de utilização ou a sua dispensa, e o certificado energético.
+- EN: The IDs of sellers and buyers, the technical file if there is one, the usage licence or its waiver, and the energy certificate.
+- FR: Les pièces d'identité des vendeurs et acheteurs, la fiche technique s'il y en a une, le permis d'utilisation ou sa dispense, et le certificat énergétique.
+
+### q.imt.q
+- PT: Quanto pago de IMT?
+- EN: How much IMT do I pay?
+- FR: Combien d'IMT vais-je payer ?
+
+### q.imt.a
+- PT: Se não for residente fiscal em Portugal, 7,5% do preço desde maio de 2026, salvo exceções: já ter sido residente, passar a residente em dois anos, ou arrendar para habitação dentro dos limites da lei.
+- EN: If you're not a Portuguese tax resident, 7.5% of the price since May 2026, with exceptions: having been a resident, becoming one within two years, or renting it out as a home within the legal caps.
+- FR: Si vous n'êtes pas résident fiscal au Portugal, 7,5 % du prix depuis mai 2026, sauf exceptions : avoir été résident, le devenir dans les deux ans, ou louer comme résidence dans les plafonds légaux.
+
+### q.is.q
+- PT: E o imposto do selo?
+- EN: And stamp duty?
+- FR: Et le droit de timbre ?
+
+### q.is.a
+- PT: 0,8% do preço na compra e, com crédito de cinco anos ou mais, 0,6% do montante emprestado.
+- EN: 0.8% of the price on the purchase and, with a loan of five years or more, 0.6% of the amount borrowed.
+- FR: 0,8 % du prix à l'achat et, avec un crédit de cinq ans ou plus, 0,6 % du montant emprunté.
+
+### q.imi.q
+- PT: Quanto pago por ano?
+- EN: What do I pay each year?
+- FR: Que paie-t-on chaque année ?
+
+### q.imi.a
+- PT: O IMI, entre 0,3% e 0,45% do valor patrimonial, conforme o município. Acima de 600 000 € de valor patrimonial por pessoa, há ainda o AIMI.
+- EN: IMI, between 0.3% and 0.45% of the tax value, depending on the municipality. Above €600,000 of tax value per person, there is also AIMI.
+- FR: L'IMI, entre 0,3 % et 0,45 % de la valeur fiscale selon la commune. Au-delà de 600 000 € de valeur fiscale par personne, s'ajoute l'AIMI.
+
+### q.ins.q
+- PT: Tenho de fazer o seguro com o banco?
+- EN: Must I take the bank's insurance?
+- FR: Dois-je prendre l'assurance de la banque ?
+
+### q.ins.a
+- PT: Não. O banco pode exigir um seguro ligado ao crédito, mas tem de aceitar o de outra seguradora com cobertura equivalente.
+- EN: No. The bank may require insurance linked to the loan, but must accept another insurer's policy with equivalent cover.
+- FR: Non. La banque peut exiger une assurance liée au crédit, mais doit accepter celle d'un autre assureur à garanties équivalentes.
+
+### q.renttax.q
+- PT: E se arrendar?
+- EN: What if I rent it out?
+- FR: Et si je loue ?
+
+### q.renttax.a
+- PT: As rendas de habitação de não residentes pagam 25% em Portugal, com reduções para contratos longos. O alojamento local exige registo prévio.
+- EN: Non-residents' rent from housing is taxed at 25% in Portugal, with reductions for long contracts. Short-term rental needs prior registration.
+- FR: Les loyers d'habitation des non-résidents sont imposés à 25 % au Portugal, avec des réductions pour les baux longs. La location de courte durée exige un enregistrement préalable.
+
+### q.home.rent.q
+- PT: Também pago impostos {where}?
+- EN: Do I also pay tax {where}?
+- FR: Est-ce que je paie aussi des impôts {where} ?
+
+### q.home.rent.lu.a
+- PT: O Luxemburgo isenta essas rendas, mas pode tê-las em conta para fixar a taxa sobre o resto do seu rendimento.
+- EN: Luxembourg exempts that rent but may take it into account to set the rate on the rest of your income.
+- FR: Le Luxembourg exonère ces loyers mais peut en tenir compte pour fixer le taux sur le reste de vos revenus.
+
+### q.home.rent.ch.a
+- PT: A Suíça isenta essas rendas, mas pode aplicar ao resto do rendimento a taxa que aplicaria sem a isenção.
+- EN: Switzerland exempts that rent but may apply to the rest of your income the rate it would apply without the exemption.
+- FR: La Suisse exonère ces loyers mais peut appliquer au reste de vos revenus le taux qu'elle appliquerait sans exonération.
+
+### q.home.rent.br.a
+- PT: O Brasil pode tributá-las e desconta o imposto pago em Portugal, até ao imposto brasileiro sobre esse rendimento.
+- EN: Brazil may tax it and deducts the tax paid in Portugal, up to the Brazilian tax on that income.
+- FR: Le Brésil peut les imposer et déduit l'impôt payé au Portugal, dans la limite de l'impôt brésilien sur ce revenu.
+
+### q.home.rent.il.a
+- PT: Israel pode tributá-las e dá um crédito pelo imposto pago em Portugal.
+- EN: Israel may tax it and gives a credit for the tax paid in Portugal.
+- FR: Israël peut les imposer et accorde un crédit pour l'impôt payé au Portugal.
+
+### q.home.rent.us.a
+- PT: Os EUA tributam os seus cidadãos sobre o rendimento mundial; o crédito por imposto estrangeiro (formulário 1116) evita pagar duas vezes.
+- EN: The US taxes its citizens on worldwide income; the foreign tax credit (Form 1116) avoids paying twice.
+- FR: Les États-Unis imposent leurs citoyens sur le revenu mondial ; le crédit d'impôt étranger (formulaire 1116) évite de payer deux fois.
+
+### q.home.rent.fr.a
+- PT: Portugal pode tributá-las. A forma como a França evita a dupla tributação mudou em 2016 e não a pudemos confirmar na fonte: um consultor fiscal parceiro responde ao seu caso.
+- EN: Portugal may tax it. How France avoids double taxation changed in 2016 and we couldn't confirm it at the source: a partner tax adviser answers for your case.
+- FR: Le Portugal peut les imposer. La façon dont la France évite la double imposition a changé en 2016 et nous n'avons pas pu la vérifier à la source : un conseiller fiscal partenaire répond pour votre cas.
+
+### q.cg.q
+- PT: Quanto pago de impostos quando vender?
+- EN: How much tax do I pay when I sell?
+- FR: Combien d'impôt quand je vends ?
+
+### q.cg.a
+- PT: Em Portugal, conta 50% da mais-valia, às taxas gerais do IRS. A taxa autónoma de 28% para não residentes deixou de existir em 2023.
+- EN: In Portugal, 50% of the gain counts, at the general IRS rates. The flat 28% rate for non-residents ended in 2023.
+- FR: Au Portugal, 50 % de la plus-value compte, aux taux généraux de l'IRS. Le taux forfaitaire de 28 % pour les non-résidents a disparu en 2023.
+
+### q.home.sell.q
+- PT: E {where}?
+- EN: And {where}?
+- FR: Et {where} ?
+
+### q.home.sell.lu.a
+- PT: O Luxemburgo isenta a mais-valia, mas pode tê-la em conta para a taxa sobre o resto do rendimento.
+- EN: Luxembourg exempts the gain but may take it into account for the rate on the rest of your income.
+- FR: Le Luxembourg exonère la plus-value mais peut en tenir compte pour le taux sur le reste de vos revenus.
+
+### q.home.sell.ch.a
+- PT: A Suíça isenta a mais-valia, com a mesma regra de taxa sobre o resto do rendimento.
+- EN: Switzerland exempts the gain, with the same rate rule on the rest of your income.
+- FR: La Suisse exonère la plus-value, avec la même règle de taux sur le reste des revenus.
+
+### q.home.sell.br.a
+- PT: O Brasil pode tributá-la e desconta o imposto pago em Portugal, até ao imposto brasileiro sobre esse ganho.
+- EN: Brazil may tax it and deducts the tax paid in Portugal, up to the Brazilian tax on that gain.
+- FR: Le Brésil peut l'imposer et déduit l'impôt payé au Portugal, dans la limite de l'impôt brésilien sur ce gain.
+
+### q.home.sell.us.a
+- PT: Os EUA podem tributar os seus cidadãos sobre o ganho; o crédito por imposto estrangeiro (formulário 1116) evita a dupla tributação.
+- EN: The US may tax its citizens on the gain; the foreign tax credit (Form 1116) avoids double taxation.
+- FR: Les États-Unis peuvent imposer leurs citoyens sur le gain ; le crédit d'impôt étranger (formulaire 1116) évite la double imposition.
+
+### q.home.sell.il.a
+- PT: Não confirmámos na fonte como Israel trata este ganho: um consultor fiscal parceiro responde ao seu caso.
+- EN: We couldn't confirm at the source how Israel treats this gain: a partner tax adviser answers for your case.
+- FR: Nous n'avons pas pu vérifier à la source comment Israël traite ce gain : un conseiller fiscal partenaire répond pour votre cas.
+
+### q.home.sell.fr.a
+- PT: Portugal pode tributá-la. O tratamento em França mudou em 2016 e não o pudemos confirmar na fonte: um consultor fiscal parceiro responde ao seu caso.
+- EN: Portugal may tax it. France's treatment changed in 2016 and we couldn't confirm it at the source: a partner tax adviser answers for your case.
+- FR: Le Portugal peut l'imposer. Le traitement en France a changé en 2016 et nous n'avons pas pu le vérifier à la source : un conseiller fiscal partenaire répond pour votre cas.
+
+### q.live.q
+- PT: Posso viver em Portugal?
+- EN: Can I live in Portugal?
+- FR: Puis-je vivre au Portugal ?
+
+### q.live.a
+- PT: Com um visto de residência, como o D7 para rendimentos próprios. Desde 7 de outubro de 2023, comprar casa já não abre novas autorizações de residência para investimento.
+- EN: With a residence visa, such as the D7 for your own income. Since October 7, 2023, buying a home no longer opens new residence permits for investment.
+- FR: Avec un visa de résidence, comme le D7 pour les revenus propres. Depuis le 7 octobre 2023, l'achat d'un bien n'ouvre plus de nouveaux titres de séjour pour investissement.
+
+### q.br.cplp.q
+- PT: Sendo brasileiro, há um caminho próprio?
+- EN: As a Brazilian, is there a specific route?
+- FR: En tant que Brésilien, existe-t-il une voie propre ?
+
+### q.br.cplp.a
+- PT: Sim: a autorização de residência CPLP, depois de obter um visto de residência num consulado de Portugal.
+- EN: Yes: the CPLP residence permit, after first getting a residence visa at a Portuguese consulate.
+- FR: Oui : le titre de séjour CPLP, après un visa de résidence obtenu dans un consulat du Portugal.
+
+### q.ifici.q
+- PT: E os impostos se me mudar?
+- EN: And tax if I move?
+- FR: Et la fiscalité si je m'installe ?
+
+### q.ifici.a
+- PT: Sem residência fiscal nos cinco anos anteriores e numa atividade elegível, o rendimento desse trabalho pode ter a taxa de 20% durante 10 anos (IFICI).
+- EN: Without tax residence in the previous five years and in an eligible activity, that work income can be taxed at 20% for 10 years (IFICI).
+- FR: Sans résidence fiscale les cinq années précédentes et dans une activité éligible, ce revenu peut être imposé à 20 % pendant 10 ans (IFICI).
+
+### q.inherit.q
+- PT: E quando passar a casa aos filhos?
+- EN: And when I pass the house to my children?
+- FR: Et quand je transmets la maison à mes enfants ?
+
+### q.inherit.a
+- PT: Em Portugal, filhos, cônjuge e pais estão isentos do imposto do selo de 10% sobre heranças e doações. Para orçamentos a partir de 1 milhão, a secção Private trata das estruturas de detenção.
+- EN: In Portugal, children, a spouse and parents are exempt from the 10% stamp duty on inheritances and gifts. For budgets from €1 million, the Private section covers holding structures.
+- FR: Au Portugal, enfants, conjoint et parents sont exonérés du droit de timbre de 10 % sur successions et donations. Pour les budgets à partir d'un million, la section Private traite des structures de détention.

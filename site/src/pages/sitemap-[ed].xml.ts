@@ -8,7 +8,7 @@ import { PTYPES } from "../lib/packages";
 
 export function getStaticPaths() { return ED_ORDER.map((ed) => ({ params: { ed } })); }
 
-const PAGES: PageKey[] = ["partners", "buy", "how", "privacy", "legal", "faq", "talk", "guide", "sims", "casa", "data", "map", "blog", "private", "ours"];
+const PAGES: PageKey[] = ["partners", "buy", "how", "privacy", "legal", "faq", "talk", "guide", "sims", "casa", "data", "map", "blog", "private", "ours", "journey"];
 
 export function GET({ params }: { params: { ed: EdCode } }) {
   const ed = params.ed, host = `https://${EDITIONS[ed].domain}`;

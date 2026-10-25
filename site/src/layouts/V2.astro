@@ -20,13 +20,13 @@ const canonical = Astro.props.canonicalUrl ?? `https://${host}${urlFor(lang)}`;
 // Prompt 19 (D37): five items, one or two words each, never wrapping. Everything else sits under "Comprar"
 // (the step-by-step page links to it) or in the footer; the full list is in the mobile concierge menu.
 const nav: { k: string; target: PageKey; current: string[] }[] = [
-  { k: "buy", target: "casa", current: ["casa", "buy", "faq", "guide", "blog", "data", "how", "talk"] },
+  { k: "buy", target: "casa", current: ["casa", "journey", "buy", "faq", "guide", "blog", "data", "how", "talk"] },
   { k: "map", target: "map", current: ["map"] },
   { k: "sims", target: "sims", current: ["sims"] },
   { k: "private", target: "private", current: ["private"] },
   { k: "partners", target: "partners", current: ["partners", "ours"] },
 ];
-const more: PageKey[] = ["faq", "guide", "blog", "data", "buy", "talk", "how"];
+const more: PageKey[] = ["journey", "faq", "guide", "blog", "data", "buy", "talk", "how"];
 const subscribe = `${pathFor(lang, ed, "home")}#subscrever`;
 // Default sticky action: the free guide from the home page, a partner from the help pages.
 const sticky: Sticky = Astro.props.sticky !== undefined ? Astro.props.sticky

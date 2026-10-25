@@ -606,3 +606,16 @@ html:not(.js) .step-nav { display: none; }
 .cpick-menu a { display: block; padding: 9px 16px; color: var(--ink); text-decoration: none; font-size: 14px; }
 .cpick-menu a[aria-current] { color: var(--accent); }
 @media (min-width: 1280px) { .cpick { display: block; } }
+/* Country journey (prompt 20 §2) */
+.jtoc { list-style: none; padding: 0; margin: 28px 0 0; border-top: 1px solid var(--rule); }
+.jtoc li { border-bottom: 1px solid var(--rule); }
+.jtoc a { display: flex; gap: 16px; align-items: baseline; padding: 11px 0; color: var(--ink); text-decoration: none; font: 400 1.1rem/1.35 var(--serif); }
+.jtoc span { font: 500 12px/1 var(--sans); color: var(--muted); min-width: 1.4em; letter-spacing: .08em; }
+.jstep { padding: 48px 0 8px; border-top: 1px solid var(--ink); margin-top: 40px; scroll-margin-top: 80px; }
+.jstep h2 { margin: 6px 0 12px; }
+.jacts { display: flex; flex-wrap: wrap; gap: 6px 20px; margin: 8px 0 0; }
+.act.quiet { color: var(--muted); }
+.jask { color: var(--brass); margin: 6px 0 0; }
+.jslot { margin: 20px 0 0; padding: 16px 0; border-top: 1px dashed var(--rule); border-bottom: 1px dashed var(--rule); }
+.jslot .small { margin: 4px 0; }
+.jroles { margin: 6px 0 2px; font: 400 1.05rem/1.4 var(--serif); }

@@ -64,7 +64,7 @@ const subject = `${c("casa.form.subject", lang)} (${ed} · ${lang})`;
 
     <h2 class="h3" style="margin-top:40px">{c("casa.more.h", lang)}</h2>
     <ul class="ptypes" style="margin-bottom:64px">
-      {(["faq", "guide", "blog", "data", "buy", "talk", "how"] as const).map((k) => <li><a href={pathFor(lang, ed, k)}>{c(`common.nav.${k}`, lang)}</a></li>)}
+      {(["journey", "faq", "guide", "blog", "data", "buy", "talk", "how"] as const).map((k) => <li><a href={pathFor(lang, ed, k)}>{c(`common.nav.${k}`, lang)}</a></li>)}
     </ul>
   </div>
 </V2>
