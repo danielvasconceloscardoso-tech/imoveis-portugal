@@ -31,3 +31,4 @@ One line per decision: date · decision · who decided.
 - 2026-10-25 · D20: Habinedita Gondomar is shown as the Gold sponsor; a short written sponsorship agreement (in kind is fine) is signed before launch so the label is true · Daniel
 - 2026-10-25 · D21: the partner agency's credit-intermediary business is the default financing partner on the simulators and financing answers; the brand earns only the flat sponsorship (D6), the bank commission is the partner's own business; reader data goes only to the partner named at consent, never sold · Daniel
 - 2026-10-25 · D22: paid personalised "Plano de compra" report at 5,99 € after the free simulation; buy button stays off until the billing entity (D4) exists · Daniel
+- 2026-10-25 · D23: positioning: the Doutor Finanças of people abroad buying in Portugal (free content and simulators, funnel to licensed partners), in PT, EN and FR · Daniel
