@@ -7,7 +7,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "ebooks": "tsx ebooks/build.ts",
-    "share": "tsx scripts/share-images.ts"
+    "share": "tsx scripts/share-images.ts",
+    "mediakit": "tsx scripts/mediakit.ts"
   },
   "dependencies": {
     "@fontsource-variable/newsreader": "^5.3.0",

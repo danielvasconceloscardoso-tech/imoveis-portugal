@@ -809,20 +809,155 @@ How to edit:
 
 ## partners
 
+### proof.4
+- PT: Os números de audiência aparecem aqui assim que existirem.
+- EN: Audience figures appear here as soon as they exist.
+- FR: Les chiffres d'audience figureront ici dès qu'ils existeront.
+
+### proof.3
+- PT: Seis edições em três línguas e uma newsletter todas as quintas-feiras desde 1 de dezembro de 2026.
+- EN: Six editions in three languages and a newsletter every Thursday from 1 December 2026.
+- FR: Six éditions en trois langues et une newsletter chaque jeudi à partir du 1er décembre 2026.
+
+### proof.2
+- PT: Grupo parceiro licenciado: agência imobiliária (AMI {ami}), intermediário de crédito e seguros.
+- EN: Licensed partner group: estate agency (AMI {ami}), credit intermediary and insurance.
+- FR: Groupe partenaire agréé : agence immobilière (AMI {ami}), intermédiaire de crédit et assurance.
+
+### proof.1
+- PT: {n} cidadãos portugueses vivem no Luxemburgo, 14,5% da população (STATEC, censos de 2021).
+- EN: {n} Portuguese nationals live in Luxembourg, 14.5% of the population (STATEC, 2021 census).
+- FR: {n} ressortissants portugais vivent au Luxembourg, 14,5 % de la population (STATEC, recensement 2021).
+
+### proof.h
+- PT: Antes do lançamento, com números reais
+- EN: Before launch, with real numbers
+- FR: Avant le lancement, avec des chiffres réels
+
+### why.p
+- PT: Um processo de compra para um advogado, uma transferência para uma empresa de câmbio, um crédito para um banco, uma venda para um promotor, uma relação de cliente para um banco privado.
+- EN: One purchase file for a lawyer, one transfer for a money-transfer firm, one mortgage for a bank, one sale for a developer, one client relationship for a private bank.
+- FR: Un dossier d'achat pour un avocat, un transfert pour une société de change, un crédit pour une banque, une vente pour un promoteur, une relation client pour une banque privée.
+
+### why.h
+- PT: Um cliente paga o ano
+- EN: One client covers the year
+- FR: Un client couvre l'année
+
+### network.p
+- PT: A rede é aberta: vários parceiros por categoria e por edição, ordenados pelo tempo de resposta e pela avaliação dos leitores. Imobiliário, crédito e seguros ficam com o grupo parceiro.
+- EN: The network is open: several partners per category and edition, ranked by response time and reader ratings. Real estate, credit and insurance stay with the partner group.
+- FR: Le réseau est ouvert : plusieurs partenaires par catégorie et par édition, classés selon le délai de réponse et l'avis des lecteurs. Immobilier, crédit et assurance restent au groupe partenaire.
+
+### inventory.5
+- PT: No mapa e nas listas «falar com um parceiro» da sua categoria e das suas edições.
+- EN: On the map and in the "talk to a partner" lists for your category and editions.
+- FR: Sur la carte et dans les listes « parler à un partenaire » de votre catégorie et de vos éditions.
+
+### inventory.4
+- PT: Num capítulo do guia gratuito.
+- EN: In a chapter of the free guide.
+- FR: Dans un chapitre du guide gratuit.
+
+### inventory.3
+- PT: Na newsletter de quinta-feira.
+- EN: In the Thursday newsletter.
+- FR: Dans la newsletter du jeudi.
+
+### inventory.2
+- PT: Nas perguntas da sua categoria, com uma resposta identificada.
+- EN: On the questions in your category, with a labelled answer.
+- FR: Sur les questions de votre catégorie, avec une réponse signalée.
+
+### inventory.1
+- PT: Nos simuladores, com a indicação «oferecido por».
+- EN: On the calculators, marked "offered by".
+- FR: Sur les simulateurs, avec la mention « offert par ».
+
+### inventory.h
+- PT: Onde aparece
+- EN: Where you appear
+- FR: Où vous apparaissez
+
+### proposal
+- PT: Preços em validação até ao lançamento.
+- EN: Prices subject to confirmation before launch.
+- FR: Tarifs en cours de validation avant le lancement.
+
+### private.p
+- PT: Para quem serve orçamentos a partir de 1 milhão de euros: perfil e respostas na secção Private, posição no mapa para esses orçamentos e presença na newsletter. Máximo de cinco por edição.
+- EN: For firms serving budgets from €1 million: profile and answers in the Private section, a map position for those budgets and newsletter slots. Five per edition at most.
+- FR: Pour les maisons qui servent des budgets à partir d'un million d'euros : profil et réponses dans la section Private, position sur la carte pour ces budgets et présences dans la newsletter. Cinq au plus par édition.
+
+### private.h
+- PT: Parceiro Private
+- EN: Private Partner
+- FR: Partenaire Private
+
+### developer.p
+- PT: Um empreendimento em destaque: newsletter, posição no mapa do seu concelho e uma página identificada como patrocinada.
+- EN: One development in focus: newsletter feature, a position on the map in its municipality and a page labelled as sponsored.
+- FR: Un programme mis en avant : newsletter, position sur la carte de sa commune et une page signalée comme sponsorisée.
+
+### developer.h
+- PT: Campanha de empreendimento
+- EN: Developer campaign
+- FR: Campagne de programme
+
+### bank.p
+- PT: O seu nome nos simuladores das suas edições, presença na newsletter e destaque no mapa para os orçamentos que financia.
+- EN: Your name on the calculators in your editions, newsletter slots and a feature on the map for the budgets you finance.
+- FR: Votre nom sur les simulateurs de vos éditions, des présences dans la newsletter et une mise en avant sur la carte pour les budgets que vous financez.
+
+### bank.h
+- PT: Parceiro bancário
+- EN: Bank Partner
+- FR: Partenaire bancaire
+
+### featured.p
+- PT: Tudo o que inclui o parceiro verificado, mais seis presenças por ano na newsletter, um capítulo no guia e o primeiro lugar na sua categoria.
+- EN: Everything in Verified, plus six newsletter slots a year, one guide chapter and first place in your category.
+- FR: Tout ce que comprend la formule vérifiée, plus six présences par an dans la newsletter, un chapitre du guide et la première place dans votre catégorie.
+
+### featured.h
+- PT: Parceiro em destaque
+- EN: Featured Partner
+- FR: Partenaire à la une
+
+### verified.p
+- PT: Perfil com licença, respostas identificadas nas perguntas da sua categoria e lugar na rotação dos simuladores.
+- EN: Profile with licence, labelled answers on the questions in your category and a place in the calculator rotation.
+- FR: Profil avec licence, réponses signalées sur les questions de votre catégorie et place dans la rotation des simulateurs.
+
+### verified.h
+- PT: Parceiro verificado
+- EN: Verified Partner
+- FR: Partenaire vérifié
+
+### all.editions
+- PT: todas as edições
+- EN: all editions
+- FR: toutes les éditions
+
+### per.edition
+- PT: por edição
+- EN: per edition
+- FR: par édition
+
 ### title
 - PT: Para parceiros
 - EN: For partners
 - FR: Partenaires
 
 ### h1
-- PT: Patrocine a newsletter de quem compra casa em Portugal a partir de fora
-- EN: Sponsor the newsletter for people buying a home in Portugal from abroad
-- FR: Sponsorisez la newsletter de ceux qui achètent au Portugal depuis l'étranger
+- PT: Os seus próximos clientes estão a preparar uma casa em Portugal
+- EN: Your next clients are preparing a home in Portugal
+- FR: Vos prochains clients préparent un achat au Portugal
 
 ### lede
-- PT: Um guia semanal em seis edições (Luxemburgo, França, Suíça, Brasil, Estados Unidos e Israel), em português, inglês e francês. Lançamento a 1 de dezembro de 2026.
-- EN: A weekly guide in six editions (Luxembourg, France, Switzerland, Brazil, the United States and Israel), in Portuguese, English and French. Launching December 1, 2026.
-- FR: Un guide hebdomadaire en six éditions (Luxembourg, France, Suisse, Brésil, États-Unis, Israël), en portugais, anglais et français. Lancement le 1er décembre 2026.
+- PT: O Imóveis Portugal acompanha quem vive no Luxemburgo, em França, na Suíça, no Brasil, nos Estados Unidos e em Israel e prepara uma compra em Portugal, de 300 mil a 10 milhões de euros. Seis edições, três línguas, lançamento a 1 de dezembro de 2026.
+- EN: Imóveis Portugal is for people in Luxembourg, France, Switzerland, Brazil, the United States and Israel who are preparing a purchase in Portugal, from €300,000 to €10 million. Six editions, three languages, launching on 1 December 2026.
+- FR: Imóveis Portugal s'adresse aux personnes établies au Luxembourg, en France, en Suisse, au Brésil, aux États-Unis et en Israël qui préparent un achat au Portugal, de 300 000 € à 10 millions d'euros. Six éditions, trois langues, lancement le 1er décembre 2026.
 
 ### cta
 - PT: Falemos 15 minutos
@@ -835,14 +970,14 @@ How to edit:
 - FR: Partenaire fondateur
 
 ### founding.p
-- PT: 40% de desconto no primeiro ano e o mesmo preço garantido no segundo. Dez lugares, um parceiro por categoria.
-- EN: 40% off the first year, with the same price locked in for the second. Ten places, one partner per category.
-- FR: 40 % de remise la première année, et le même prix garanti la deuxième. Dix places, un partenaire par catégorie.
+- PT: 40% de desconto no primeiro ano e o mesmo preço garantido no segundo, para os dez primeiros parceiros, até 1 de dezembro de 2026.
+- EN: 40% off the first year and the same price guaranteed for the second, for the first ten partners, until 1 December 2026.
+- FR: 40 % de remise la première année et le même prix garanti la deuxième, pour les dix premiers partenaires, jusqu'au 1er décembre 2026.
 
 ### slots
-- PT: Lugares disponíveis: {left} de {total}
-- EN: Places available: {left} of {total}
-- FR: Places disponibles : {left} sur {total}
+- PT: {left} de {total} lugares disponíveis até {deadline}
+- EN: {left} of {total} places left until {deadline}
+- FR: {left} places sur {total} jusqu'au {deadline}
 
 ### readers.h
 - PT: Quem nos lê
@@ -850,14 +985,14 @@ How to edit:
 - FR: Nos lecteurs
 
 ### readers.p
-- PT: Famílias portuguesas no Luxemburgo, em França e na Suíça que preparam a casa de férias, o regresso ou a reforma, e brasileiros, americanos e israelitas que preparam uma compra para viver, reformar-se ou investir. Leem porque têm um plano.
-- EN: Portuguese families in Luxembourg, France and Switzerland planning a vacation home, a move back or retirement, and Brazilians, Americans and Israelis getting ready to buy to live, retire or invest. They read because they have a plan.
-- FR: Des familles portugaises au Luxembourg, en France et en Suisse qui préparent une résidence secondaire, un retour ou leur retraite, et des Brésiliens, Américains et Israéliens qui préparent un achat pour s'installer ou investir. Ils lisent parce qu'ils ont un projet.
+- PT: Pessoas com um plano: comprar a casa onde vão viver, a casa para as férias ou um investimento, a partir do país onde vivem. Procuram regras claras, números certos e profissionais de confiança em cada passo.
+- EN: People with a plan: buying the home they will live in, a holiday home or an investment, from the country where they live. They want clear rules, correct figures and reliable professionals at every step.
+- FR: Des personnes qui ont un projet : acheter leur future résidence, une maison de vacances ou un investissement, depuis le pays où elles vivent. Elles cherchent des règles claires, des chiffres exacts et des professionnels fiables à chaque étape.
 
 ### whynow.p
-- PT: Os parceiros fundadores aparecem desde o primeiro número, a 1 de dezembro, antes do Natal, quando muitas famílias emigradas estão em Portugal a ver casas.
-- EN: Founding partners appear from the first issue on December 1, just before the holidays, when many families from abroad are in Portugal looking at homes.
-- FR: Les partenaires fondateurs figurent dès le premier numéro, le 1er décembre, juste avant les fêtes, quand beaucoup de familles de l'étranger sont au Portugal et visitent des biens.
+- PT: Os parceiros fundadores aparecem desde o primeiro número, a 1 de dezembro de 2026, e mantêm o preço fundador no segundo ano.
+- EN: Founding partners appear from the first issue on 1 December 2026 and keep the founding price for the second year.
+- FR: Les partenaires fondateurs figurent dès le premier numéro, le 1er décembre 2026, et gardent le prix fondateur la deuxième année.
 
 ### packages.h
 - PT: Pacotes
@@ -883,31 +1018,6 @@ How to edit:
 - PT: a partir de
 - EN: from
 - FR: à partir de
-
-### gold.p
-- PT: Exclusivo na sua categoria em todas as edições. Em todas as newsletters, um artigo patrocinado por mês em cada edição, uma coluna de perguntas e respostas e relatório mensal.
-- EN: Category exclusivity across all editions. In every newsletter, one sponsored article a month per edition, a Q&A column and a monthly report.
-- FR: Exclusivité de catégorie sur toutes les éditions. Dans chaque newsletter, un article sponsorisé par mois et par édition, une rubrique questions-réponses et un rapport mensuel.
-
-### silver.p
-- PT: Uma edição à escolha. Na newsletter de 15 em 15 dias, um artigo patrocinado por trimestre, entrada no diretório de parceiros e relatório mensal.
-- EN: One edition of your choice. In the newsletter every two weeks, one sponsored article a quarter, a directory listing and a monthly report.
-- FR: Une édition au choix. Dans la newsletter tous les quinze jours, un article sponsorisé par trimestre, une fiche dans l'annuaire et un rapport mensuel.
-
-### bronze.p
-- PT: Uma edição. Entrada com logótipo no diretório de parceiros e uma menção por mês na newsletter.
-- EN: One edition. A directory listing with your logo and one mention a month in the newsletter.
-- FR: Une édition. Une fiche avec logo dans l'annuaire et une mention par mois dans la newsletter.
-
-### campaign.h
-- PT: Campanha de empreendimento
-- EN: Development campaign
-- FR: Campagne promoteur
-
-### campaign.p
-- PT: Para promotores: um empreendimento em destaque nas edições escolhidas, com newsletter, artigo e redes sociais.
-- EN: For developers: one project featured in the editions you choose, with newsletter, article and social media.
-- FR: Pour les promoteurs : un programme mis en avant dans les éditions choisies, avec newsletter, article et réseaux sociaux.
 
 ### vat
 - PT: Valores sem IVA.
@@ -935,9 +1045,9 @@ How to edit:
 - FR: Nous ne publions aucune promesse de rendement.
 
 ### rules.3
-- PT: Cada parceiro paga um valor fixo, nunca uma comissão por contacto.
-- EN: Every partner pays a flat fee, never a fee per lead.
-- FR: Chaque partenaire paie un forfait, jamais une commission par contact.
+- PT: Cada parceiro paga um valor anual fixo, nunca uma comissão por contacto.
+- EN: Every partner pays a flat annual fee, never a fee per contact.
+- FR: Chaque partenaire paie un forfait annuel, jamais une commission par contact.
 
 ### rules.4
 - PT: Os pedidos de compra seguem só para a nossa agência parceira licenciada.

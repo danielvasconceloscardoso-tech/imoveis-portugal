@@ -30,12 +30,18 @@ const ph = (v: string, label: string) => v || `[${label}]`;
 const PH = { pt: ["Entidade", "Morada", "n.º de registo", "n.º de IVA"], en: ["Entity", "Address", "registration no.", "VAT no."], fr: ["Entité", "Adresse", "n° d'immatriculation", "n° de TVA"] }[lang];
 const legalVars = { entity: ph(ent.name, PH[0]), address: ph(ent.address, PH[1]), register: ph(ent.register, PH[2]), vat: ph(ent.vat, PH[3]), email: config.contactEmail };
 const legal = key === "privacy" || key === "legal" ? key : null;
+// Price list v3 (prompt 15, proposal): list price per year and the founding price (40% off year 1, first 10 partners).
+const f = (n: number) => Math.round(n * (1 - config.foundingDiscount));
+const pe = c("partners.per.edition", lang), ae = c("partners.all.editions", lang), fr = c("partners.from", lang);
 const packages = [
-  { name: "Gold", desc: c("partners.gold.p", lang), founding: e(p.gold.founding), list: `${e(p.gold.list)} ${c("partners.per.year", lang)}` },
-  { name: "Silver", desc: c("partners.silver.p", lang), founding: e(p.silver.founding), list: `${e(p.silver.list)} ${c("partners.per.year", lang)}` },
-  { name: "Bronze", desc: c("partners.bronze.p", lang), founding: e(p.bronze.founding), list: `${e(p.bronze.list)} ${c("partners.per.year", lang)}` },
-  { name: c("partners.campaign.h", lang), desc: c("partners.campaign.p", lang), founding: `${c("partners.from", lang)} ${e(p.campaignFrom)}`, list: "" },
+  { name: c("partners.verified.h", lang), desc: c("partners.verified.p", lang), list: `${e(p.verified.edition)} ${pe} · ${e(p.verified.all)} ${ae}`, founding: `${e(f(p.verified.edition))} · ${e(f(p.verified.all))}` },
+  { name: c("partners.featured.h", lang), desc: c("partners.featured.p", lang), list: `${e(p.featured.edition)} ${pe} · ${e(p.featured.all)} ${ae}`, founding: `${e(f(p.featured.edition))} · ${e(f(p.featured.all))}` },
+  { name: c("partners.bank.h", lang), desc: c("partners.bank.p", lang), list: `${e(p.bank.from)} – ${e(p.bank.to)}`, founding: `${fr} ${e(f(p.bank.from))}` },
+  { name: c("partners.private.h", lang), desc: c("partners.private.p", lang), list: `${e(p.private.from)} – ${e(p.private.to)}`, founding: `${fr} ${e(f(p.private.from))}` },
+  { name: c("partners.developer.h", lang), desc: c("partners.developer.p", lang), list: `${fr} ${e(p.developerFrom)}`, founding: "" },
 ];
+const luN = new Intl.NumberFormat(lang === "en" ? "en" : lang === "fr" ? "fr" : "pt-PT").format(93659);
+
 const titles: Partial<Record<PageKey, string>> = { partners: c("partners.title", lang), buy: c("buy.title", lang), how: c("how.title", lang), privacy: c("legal.privacy.title", lang), legal: c("legal.legal.title", lang) };
 const descs: Partial<Record<PageKey, string>> = { partners: c("partners.lede", lang), buy: c("buy.lede", lang), how: c("how.lede", lang), privacy: c("legal.privacy.intro", lang), legal: c("legal.legal.intro", lang) };
 const site = config.agency.website.replace(/^https:\/\/|\/$/g, "");
@@ -56,7 +62,7 @@ const site = config.agency.website.replace(/^https:\/\/|\/$/g, "");
             <h2>{c("partners.founding.h", lang)}</h2>
             <p>{c("partners.founding.p", lang)}</p>
             <div class="slots" aria-hidden="true">{Array.from({ length: config.foundingSlotsTotal }, (_, i) => <span class={i < used ? "taken" : ""}></span>)}</div>
-            <p class="small" style="margin:0">{c("partners.slots", lang, { left: config.foundingSlotsLeft, total: config.foundingSlotsTotal })}</p>
+            <p class="small" style="margin:0">{c("partners.slots", lang, { left: config.foundingSlotsLeft, total: config.foundingSlotsTotal, deadline: fmtDate(lang, config.foundingDeadline) })}</p>
           </div>
         </div>
       </section>
@@ -75,13 +81,30 @@ const site = config.agency.website.replace(/^https:\/\/|\/$/g, "");
                 <h3>{k.name}</h3>
                 <p>{k.desc}</p>
                 <dl>
-                  <dt>{c("partners.founding.price", lang)}</dt><dd><strong>{k.founding}</strong></dd>
-                  {k.list && <><dt>{c("partners.list.price", lang)}</dt><dd>{k.list}</dd></>}
+                  <dt>{c("partners.list.price", lang)}</dt><dd>{k.list} {c("partners.per.year", lang)}</dd>
+                  {k.founding && <><dt>{c("partners.founding.price", lang)}</dt><dd><strong>{k.founding}</strong></dd></>}
                 </dl>
               </div>
             ))}
           </div>
-          <p class="small">{c("partners.vat", lang)}</p>
+          <p class="small">{c("partners.vat", lang)} {c("partners.proposal", lang)}</p>
+          <p style="margin-top:24px;max-width:40em">{c("partners.network.p", lang)}</p>
+        </div>
+      </section>
+      <section class="band white" aria-labelledby="inventory">
+        <div class="frame split">
+          <div><h2 id="inventory">{c("partners.inventory.h", lang)}</h2></div>
+          <div>
+            <ul class="list" style="margin-top:0">{cl("partners.inventory", lang).map((r) => <li>{r}</li>)}</ul>
+            <h3 style="margin-top:32px">{c("partners.why.h", lang)}</h3>
+            <p>{c("partners.why.p", lang)}</p>
+          </div>
+        </div>
+      </section>
+      <section class="band" aria-labelledby="proof">
+        <div class="frame split">
+          <div><h2 id="proof">{c("partners.proof.h", lang)}</h2></div>
+          <div><ul class="list" style="margin-top:0">{cl("partners.proof", lang, { n: luN }).map((r) => <li>{r}</li>)}</ul></div>
         </div>
       </section>
       <section class="band white" aria-labelledby="agency">

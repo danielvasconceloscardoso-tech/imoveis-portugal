@@ -79,12 +79,15 @@ export const config = {
   foundingSlotsTotal: 10,
   foundingSlotsLeft: 10,
 
+  // Price list v3 (prompt 15, D32, D33): proposal until Daniel confirms (tasks 8s, 8t). Flat annual fees (D6), excl. VAT.
+  // Founding Partner: 40% off year 1 for the first 10, locked for year 2, until foundingDeadline.
+  foundingDeadline: "2026-12-01",
+  foundingDiscount: 0.4,
   prices: {
-    gold: { founding: 4800, list: 8000 },
-    silver: { founding: 1800, list: 3000 },
-    bronze: { founding: 540, list: 900 },
-    campaignFrom: 1500,
-    listingMin: 49,
-    listingMax: 99,
+    verified: { edition: 1800, all: 4800 },
+    featured: { edition: 4800, all: 12000 },
+    bank: { from: 9000, to: 15000 },
+    developerFrom: 2500,
+    private: { from: 25000, to: 50000, maxPerEdition: 5 },
   },
 };
