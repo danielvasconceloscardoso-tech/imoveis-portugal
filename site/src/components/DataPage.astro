@@ -63,7 +63,7 @@ const options = Object.entries(PRICES.munis).filter(([, m]) => m.m2[LAST]).map((
         <table class="cmp pc-table">
           <thead><tr><th scope="col">{c("prices.col.place", lang)}</th><th scope="col">{c("prices.col.m2", lang)}</th><th scope="col">{c("prices.col.10y", lang)}</th><th scope="col">{c("prices.col.1y", lang)}</th><th scope="col">{c("prices.col.rent", lang)}<a class="sup" href={`#fonte-${nR}`}>{nR}</a></th><th scope="col">{c("prices.col.yield", lang)}</th></tr></thead>
           <tbody data-rows>{defaults.map((s) => { const m = PRICES.munis[s], r = row(m); return (
-            <tr><th scope="row">{m.n}</th><td>{r.m2 ? eur(r.m2, lang) : "—"}</td><td>{pc(r.ten)}</td><td>{pc(r.one)}</td><td>{r.rent ? `${nf2.format(r.rent)} €` : "—"}</td><td>{r.y ? `${nf1.format(r.y)}${lang === "fr" ? " %" : "%"}` : "—"}</td></tr>
+            <tr><th scope="row">{m.n}</th><td>{r.m2 ? eur(r.m2, lang) : "—"}</td><td>{pc(r.ten)}</td><td>{pc(r.one)}</td><td>{r.rent ? (lang === "en" ? `€${nf2.format(r.rent)}` : `${nf2.format(r.rent)} €`) : "—"}</td><td>{r.y ? `${nf1.format(r.y)}${lang === "fr" ? " %" : "%"}` : "—"}</td></tr>
           ); })}</tbody>
         </table>
       </div>
@@ -107,7 +107,7 @@ const options = Object.entries(PRICES.munis).filter(([, m]) => m.m2[LAST]).map((
       root!.querySelector("[data-chart]")!.innerHTML = lineChart(data.quarters, ms.map((m) => ({ label: m.n, values: m.m2 })), { breakAt: data.break, breakLabel: L.break, scale: local ? fx : 1, fmt: (v) => nf.format(v) });
       root!.querySelector("[data-chips]")!.innerHTML = ms.map((m) => `<button type="button" data-s="${m.s}">${m.n} ×</button>`).join("");
       const last = data.quarters.length - 1;
-      root!.querySelector("[data-rows]")!.innerHTML = ms.map((m) => `<tr><th scope="row">${m.n}</th><td>${m.m2[last] ? money(m.m2[last]) : "—"}</td><td>${pc(change(m.m2))}</td><td>${pc(change(m.m2, 4))}</td><td>${m.rent["2026"] ? (local ? money(m.rent["2026"]).replace(/[.,]00$/, "") : `${nf2.format(m.rent["2026"])} €`) : "—"}</td><td>${m.yield ? nf1.format(m.yield) + pctSign : "—"}</td></tr>`).join("");
+      root!.querySelector("[data-rows]")!.innerHTML = ms.map((m) => `<tr><th scope="row">${m.n}</th><td>${m.m2[last] ? money(m.m2[last]) : "—"}</td><td>${pc(change(m.m2))}</td><td>${pc(change(m.m2, 4))}</td><td>${m.rent["2026"] ? (local ? money(m.rent["2026"]).replace(/[.,]00$/, "") : (loc.startsWith("en") ? `€${nf2.format(m.rent["2026"])}` : `${nf2.format(m.rent["2026"])} €`)) : "—"}</td><td>${m.yield ? nf1.format(m.yield) + pctSign : "—"}</td></tr>`).join("");
       root!.querySelector("[data-links]")!.innerHTML = ms.map((m) => `<p class="small"><strong>${m.n}</strong> · <a href="${links.buy}?place=${encodeURIComponent(m.n)}">${L.homes}</a> · <a href="${links.map}${m.s}/">${L.page}</a> · <a href="${links.sim}">${L.sim}</a> · <a class="brass" href="${links.devs}">${L.devs}</a> · <a href="${links.journey}">${L.journey}</a></p>`).join("");
     }
     root.addEventListener("click", (e) => {

@@ -54,7 +54,7 @@ const nf1 = new Intl.NumberFormat(HTML_LANG[lang], { minimumFractionDigits: 1, m
     <h2 class="h3" style="margin-top:36px">{c("prices.home.h", lang)}<a class="sup" href={`#fonte-${nHist}`}>{nHist}</a></h2>
     {pchart && <figure class="pc-chart" set:html={pchart} />}
     <p class="small">{c("journey.past", lang)}</p>
-    {hist && hist.rent["2026"] && <dl class="bill"><dt>{c("prices.col.rent", lang)}<a class="sup" href={`#fonte-${nRent}`}>{nRent}</a></dt><dd>{nf2.format(hist.rent["2026"])} €</dd>{hist.yield && <><dt>{c("prices.col.yield", lang)}</dt><dd>{nf1.format(hist.yield)}{lang === "fr" ? " %" : "%"}</dd></>}</dl>}
+    {hist && hist.rent["2026"] && <dl class="bill"><dt>{c("prices.col.rent", lang)}<a class="sup" href={`#fonte-${nRent}`}>{nRent}</a></dt><dd>{lang === "en" ? `€${nf2.format(hist.rent["2026"])}` : `${nf2.format(hist.rent["2026"])} €`}</dd>{hist.yield && <><dt>{c("prices.col.yield", lang)}</dt><dd>{nf1.format(hist.yield)}{lang === "fr" ? " %" : "%"}</dd></>}</dl>}
     {hist && hist.yield && <p class="small">{c("prices.yield.note", lang)}</p>}
     <p class="small">{c("data.note", lang)} {c("place.imi", lang)}</p>
     <h2 class="h3" style="margin-top:36px">{c("place.next.h", lang)}</h2>

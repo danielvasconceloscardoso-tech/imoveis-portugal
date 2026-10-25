@@ -8,7 +8,9 @@
     "preview": "astro preview",
     "ebooks": "tsx ebooks/build.ts",
     "share": "node scripts/map-poster.mjs",
-    "mediakit": "tsx scripts/mediakit.ts"
+    "mediakit": "tsx scripts/mediakit.ts",
+    "brochure": "tsx scripts/brochure.ts",
+    "dossiers": "tsx dossiers/build.ts"
   },
   "dependencies": {
     "@fontsource-variable/newsreader": "^5.3.0",

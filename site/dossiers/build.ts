@@ -38,6 +38,7 @@ function html(p: In) {
   const pctS = lang === "fr" ? " %" : "%";
   const pc = (v: number | null) => (v === null ? "—" : `${v >= 0 ? "+" : "−"}${nf.format(Math.abs(v))}${pctS}`);
   const e = (n: number) => eur(Math.round(n), lang);
+  const eu2 = (n: number) => (lang === "en" ? `€${nf2.format(n)}` : `${nf2.format(n)} €`);
   const cur = EDITION_CUR[ed]; const fx = cur ? RATE(cur) : null;
   const local = (n: number) => (fx && cur ? new Intl.NumberFormat(HTML_LANG[lang], { style: "currency", currency: cur, maximumFractionDigits: 0 }).format(n * fx.rate) : "");
   const where = c(`home.where.${ed}`, lang);
@@ -69,7 +70,7 @@ function html(p: In) {
       ${kv(c("dossier.s.m2", lang), `${nf.format(p.budget / m2)} m²`)}
       ${kv(c("dossier.s.median", lang), `${e(m2)}/m²${sup("ine-m2-history")}`)}
       ${kv(c("dossier.s.ten", lang), pc(change(area.m2)))}
-      ${area.rent["2026"] ? kv(c("dossier.s.rent", lang), `${nf2.format(area.rent["2026"])} €/m²${sup("ine-rent-2026q2")}`) : ""}
+      ${area.rent["2026"] ? kv(c("dossier.s.rent", lang), `${eu2(area.rent["2026"])}/m²${sup("ine-rent-2026q2")}`) : ""}
       ${area.yield ? kv(c("dossier.s.yield", lang), `${nf1.format(area.yield)}${pctS}`) : ""}
       ${kv(c("dossier.s.monthly", lang), `${e(rows[0].m)}${sup("bdp-mortgage-rate-2026-08", "pt-ltv-limits")}`)}</table>
       <h2>${c("dossier.costs.h", lang)}</h2><table class="kv">${kv(c("sims.r.imt", lang), e(buy.imt) + sup("pt-imt-nonresident-flat", "pt-imt-nonresident-exceptions"))}${kv(c("sims.r.is", lang), e(buy.is) + sup("pt-is-purchase"))}${kv(c("sims.r.deed", lang), e(buy.deed) + sup("pt-casa-pronta-fees"))}${kv(`<b>${c("sims.r.total", lang)}</b>`, `<b>${e(buy.total)}</b>`)}</table>
@@ -86,10 +87,10 @@ function html(p: In) {
     const me = geo.features.find((f: any) => f.properties.s === p.area).properties;
     const neigh = geo.features.map((f: any) => f.properties).filter((x: any) => x.s !== p.area && PRICES.munis[x.s]?.m2[LAST])
       .sort((a: any, b: any) => Math.hypot(a.x - me.x, a.y - me.y) - Math.hypot(b.x - me.x, b.y - me.y)).slice(0, 6);
-    const line = (s: string) => { const m = PRICES.munis[s]; return `<tr><td>${m.n}</td><td>${e(m.m2[LAST]!)}</td><td>${pc(change(m.m2))}</td><td>${pc(change(m.m2, 4))}</td><td>${m.rent["2026"] ? nf2.format(m.rent["2026"]) + " €" : "—"}</td><td>${m.yield ? nf1.format(m.yield) + pctS : "—"}</td></tr>`; };
+    const line = (s: string) => { const m = PRICES.munis[s]; return `<tr><td>${m.n}</td><td>${e(m.m2[LAST]!)}</td><td>${pc(change(m.m2))}</td><td>${pc(change(m.m2, 4))}</td><td>${m.rent["2026"] ? eu2(m.rent["2026"]) : "—"}</td><td>${m.yield ? nf1.format(m.yield) + pctS : "—"}</td></tr>`; };
     pages.push(page(`<h2>${c("dossier.summary.h", lang)}</h2><table class="kv">
       ${kv(c("dossier.s.median", lang), `<b>${e(m2)}/m²</b>${sup("ine-m2-history")}`)}${kv(c("dossier.s.ten", lang), pc(change(area.m2)))}${kv(c("prices.col.1y", lang), pc(change(area.m2, 4)))}
-      ${area.rent["2026"] ? kv(c("dossier.s.rent", lang), `${nf2.format(area.rent["2026"])} €/m²${sup("ine-rent-2026q2")}`) : ""}${area.yield ? kv(c("dossier.s.yield", lang), `${nf1.format(area.yield)}${pctS}`) : ""}
+      ${area.rent["2026"] ? kv(c("dossier.s.rent", lang), `${eu2(area.rent["2026"])}/m²${sup("ine-rent-2026q2")}`) : ""}${area.yield ? kv(c("dossier.s.yield", lang), `${nf1.format(area.yield)}${pctS}`) : ""}
       ${[300000, 1000000].map((b) => kv(e(b), `${nf.format(b / m2)} m²`)).join("")}</table>
       <h2>${c("dossier.area.h", lang)}</h2><div class="chart">${chart}</div><p class="small">${c("journey.past", lang)} ${c("prices.method", lang)}</p>`, 2));
     pages.push(page(`<h2>${c("dossier.rents.h", lang)}</h2><table class="grid"><thead><tr>${PRICES.rentYears.map((y) => `<th>${y}</th>`).join("")}</tr></thead><tbody><tr>${PRICES.rentYears.map((y) => `<td>${area.rent[String(y)] ? nf2.format(area.rent[String(y)]) : "—"}</td>`).join("")}</tr></tbody></table>
