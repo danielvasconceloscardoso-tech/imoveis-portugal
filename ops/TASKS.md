@@ -110,6 +110,8 @@ Status: To do · Doing · Blocked · Done
 
 | 8s | Confirm price list v3 (Verified 1,800/4,800 €, Featured 4,800/12,000 €, Bank 9–15k €, developer campaign from 2,500 €; founding 40% off) in ops/prompts/15_growth_engine.md | Operator | To do | 2026-10-27 |
 
+| 8t | Confirm Private tier prices (Private Partner 25–50k €, Report sponsor 15k €, Roundtable host 10k € per event) in ops/prompts/15_growth_engine.md | Operator | To do | 2026-10-27 |
+
 ## Last session
 
 2026-10-25 (CTO, session 2): ran as CTO and, on request, as CEO. Done and merged to main: task board reconciled against the code (prompts 02 and 04 to 13 were built; 03 was not); e-book extended to 15 pages with a main-home chapter and a mortgage chapter, HPP FAQ answer in PT, EN, FR; blog with two articles in three languages, SEO data, sitemaps, home page section; prompt 03 (five Israeli-capital developers S151 to S155, chambers and embassies tab, INTERNATIONAL.md, seven drafts not sent; builder made safe: pipeline.csv is the source of truth, IDs and the week-1 list are stable); content and publishing plan (ops/PLAN_CONTENT.md) with decisions D24 to D30; briefing and METRICS stub updated; D31 records the merge. Fixed a mistake: one early commit carried a personal author and was rewritten to the brand identity (always set git user to Imoveis Portugal first). Not done: nothing is sent or posted; no account exists yet; every form ID is empty. Next: Daniel answers D4 and the Meta admin question; the operator does the setup batch (17d); a new session runs prompt 14.
