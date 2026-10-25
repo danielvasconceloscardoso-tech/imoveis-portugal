@@ -76,7 +76,7 @@ parts.append(f'''<section class="page">
   <h2>How to read this book</h2>
   <div class="cols3">
     <div><div class="big">{n_area}</div><h4>Developers</h4><p>Area placements on the map, the price trends and the area pages. Up to three per area.</p>
-      <table class="rates"><tr><td>Prime</td><td>24,000 €</td></tr><tr><td>Strong</td><td>12,000 €</td></tr><tr><td>Standard</td><td>6,000 €</td></tr><tr><td>Launch</td><td>7,500 € · prime 15,000 €</td></tr></table></div>
+      <table class="rates"><tr><td>Prime</td><td>24,000 €</td></tr><tr><td>Strong</td><td>12,000 €</td></tr><tr><td>Standard</td><td>6,000 €</td></tr><tr><td>Launch · prime</td><td>7,500 / 15,000 €</td></tr></table></div>
     <div><div class="big">{n_ck}</div><h4>Advisers</h4><p>One step on one country's journey: financing, documents, tax at home, the deed, inheritance, structuring. Up to three per step.</p>
       <table class="rates"><tr><td>CH · LU · US</td><td>12,000 €</td></tr><tr><td>FR · IL</td><td>8,000 €</td></tr><tr><td>BR</td><td>5,000 €</td></tr><tr><td>Structuring step</td><td>×1.5</td></tr></table></div>
     <div><div class="big">{n_pr}</div><h4>Private</h4><p>The Private section and the structuring step in every country, for budgets of 1 M€ and above.</p>
