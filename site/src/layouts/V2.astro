@@ -8,6 +8,7 @@ import { config } from "../config";
 import { EDITIONS, ED_ORDER, LANGS, LANG_NAME, HTML_LANG, pathFor, type Lang, type EdCode, type PageKey } from "../i18n";
 import { c, edName } from "../lib/copy";
 import { DISCLAIMER } from "../lib/content";
+import CountryBar from "../components/CountryBar.astro";
 
 type Sticky = { href: string; label: string } | null;
 // `paths` overrides the URL per language for pages below a page key (e.g. one calculator under "sims").
@@ -67,6 +68,10 @@ const sticky: Sticky = Astro.props.sticky !== undefined ? Astro.props.sticky
           {nav.map((n) => <a href={pathFor(lang, ed, n.target)} aria-current={n.current.includes(page) ? "page" : undefined}>{c(`common.navx.${n.k}`, lang)}</a>)}
         </nav>
         <div class="tools">
+          <details class="cpick">
+            <summary aria-label={`${c("common.country.live", lang)}: ${c(`common.country.${ed}`, lang)}`}><span class="cpick-l">{c("common.country.live", lang)}</span> {c(`common.country.${ed}`, lang)}</summary>
+            <div class="cpick-menu">{ED_ORDER.map((x) => <a href={pathFor(lang, x, page)} aria-current={x === ed ? "true" : undefined}>{c(`common.country.${x}`, lang)}</a>)}</div>
+          </details>
           <p class="langs" aria-label={c("common.language", lang)}>
             {LANGS.map((l, i) => <>{i > 0 && <span aria-hidden="true">·</span>}<a href={urlFor(l)} hreflang={HTML_LANG[l]} lang={HTML_LANG[l]} aria-current={l === lang ? "true" : undefined}>{l.toUpperCase()}</a></>)}
           </p>
@@ -80,9 +85,7 @@ const sticky: Sticky = Astro.props.sticky !== undefined ? Astro.props.sticky
               <ul class="csub">
                 {more.map((k) => <li><a href={pathFor(lang, ed, k)} aria-current={page === k ? "page" : undefined}>{c(`common.nav.${k}`, lang)}</a></li>)}
               </ul>
-              <p class="ceds"><span class="h-small">{c("common.edition", lang)}</span>
-                {ED_ORDER.map((x) => <a href={pathFor(lang, x, page)} aria-current={x === ed ? "true" : undefined}>{edName(x, lang)}</a>)}
-              </p>
+              <CountryBar lang={lang} ed={ed} href={(x) => pathFor(lang, x, page)} variant="menu" />
               <div class="cact">
                 <a class="btn" href={subscribe}>{c("common.newsletter", lang)}</a>
                 <a class="btn ghost" href={config.calls.intro || `${pathFor(lang, ed, "home")}#agencia`}>{c("home.call.link", lang)}</a>

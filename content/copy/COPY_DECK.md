@@ -10,6 +10,46 @@ How to edit:
 
 ## common
 
+### country.il
+- PT: Israel
+- EN: Israel
+- FR: Israël
+
+### country.us
+- PT: EUA
+- EN: USA
+- FR: États-Unis
+
+### country.br
+- PT: Brasil
+- EN: Brazil
+- FR: Brésil
+
+### country.ch
+- PT: Suíça
+- EN: Switzerland
+- FR: Suisse
+
+### country.fr
+- PT: França
+- EN: France
+- FR: France
+
+### country.lu
+- PT: Luxemburgo
+- EN: Luxembourg
+- FR: Luxembourg
+
+### country.hint
+- PT: Os exemplos, a moeda, os impostos e o percurso seguem o país onde vive.
+- EN: Examples, currency, tax answers and your journey follow the country you live in.
+- FR: Les exemples, la devise, la fiscalité et votre parcours suivent votre pays de résidence.
+
+### country.live
+- PT: Vive em
+- EN: I live in
+- FR: J'habite
+
 ### nav.ours
 - PT: Os nossos parceiros
 - EN: Our partners

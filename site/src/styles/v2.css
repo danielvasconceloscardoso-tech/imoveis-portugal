@@ -590,3 +590,19 @@ html:not(.js) .step-nav { display: none; }
 .scen-ex-list { margin: 6px 0 0; }
 .scen-ex-list dt { font: 600 14px/1.4 var(--sans); margin-top: 10px; font-variant-numeric: tabular-nums; }
 .scen-ex-list dd { margin: 2px 0 0; color: var(--muted); }
+/* Country selector (prompt 20 §1) */
+.cbar { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; padding: 14px 0; font-size: 14px; }
+.cbar-l { font: 500 11px/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.cbar-list { display: flex; flex-wrap: wrap; gap: 4px 14px; }
+.cbar a { color: var(--muted); text-decoration: none; padding: 4px 0; }
+.cbar a:hover { color: var(--ink); }
+.cbar a[aria-current] { color: var(--ink); text-decoration: underline; text-underline-offset: 6px; }
+.cbar-menu { padding: 0; }
+.cpick { position: relative; display: none; }
+.cpick > summary { list-style: none; cursor: pointer; font: 500 13px/1 var(--sans); color: var(--ink); padding: 8px 0; }
+.cpick > summary::-webkit-details-marker { display: none; }
+.cpick-l { color: var(--muted); }
+.cpick-menu { position: absolute; right: 0; top: calc(100% + 10px); background: var(--paper); border: 1px solid var(--rule); padding: 6px 0; min-width: 180px; z-index: 30; }
+.cpick-menu a { display: block; padding: 9px 16px; color: var(--ink); text-decoration: none; font-size: 14px; }
+.cpick-menu a[aria-current] { color: var(--accent); }
+@media (min-width: 1280px) { .cpick { display: block; } }

@@ -1,0 +1,16 @@
+---
+// Country selector (prompt 20 §1): "Vive em: Luxemburgo · França · Suíça · Brasil · EUA · Israel". Each country is an
+// edition, so choosing one opens the same page in that edition: examples, currency, tax answers, journey and partners
+// follow. Country domains preselect their edition; the layout remembers the last one on this device (ip-ed).
+import { ED_ORDER, type Lang, type EdCode } from "../i18n";
+import { c } from "../lib/copy";
+
+interface Props { lang: Lang; ed: EdCode; href: (ed: EdCode) => string; variant?: "bar" | "menu"; }
+const { lang, ed, href, variant = "bar" } = Astro.props;
+---
+<nav class={`cbar cbar-${variant}`} aria-label={c("common.country.live", lang)}>
+  <span class="cbar-l">{c("common.country.live", lang)}</span>
+  <span class="cbar-list">
+    {ED_ORDER.map((x) => <a href={href(x)} data-ed={x} aria-current={x === ed ? "true" : undefined}>{c(`common.country.${x}`, lang)}</a>)}
+  </span>
+</nav>
