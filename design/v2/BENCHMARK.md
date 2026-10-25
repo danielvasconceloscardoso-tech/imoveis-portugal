@@ -74,4 +74,4 @@ Gap: no one explains buying in Portugal to the Portuguese community in Luxembour
 
 Added to sponsors/pipeline.csv as tier B (S126–S131): Remitly, BrightTax, Taxes for Expats, Golding & Golding, Solutis, Just Arrived. Already in the pipeline: Wise (S067), Ebury (S009), Remessa Online (S023), ibani (S022), Cidadania e Visto (S017), Global Citizen Solutions (S095). No agencies, no Russian-capital firms.
 
-Flag for the CEO: S-row "Portugal Homes" (sector "Agency / relocation") is a real-estate agency and should be removed under D9.
+Flag for the CEO: sponsors/build/sponsors_v2_data.py still lists "Portugal Homes" (sector "Agency / relocation"), a real-estate agency. It is not in pipeline.csv; keep it out (D9) and remove it from the data file.
