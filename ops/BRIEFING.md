@@ -1,6 +1,6 @@
 # Imóveis Portugal — project briefing
 
-For anyone joining the project in their own Claude session. Read this first, then the repo files it points to. Updated 25 Oct 2026.
+For anyone joining the project in their own Claude session. Read this first, then the repo files it points to. Updated 25 Oct 2026 (end of session 2).
 
 ## The idea
 
@@ -8,7 +8,7 @@ A free media brand for people living abroad who want to buy a home in Portugal: 
 
 - **Six editions**, all launching **Tue 1 Dec 2026**: Luxembourg, France, Switzerland, Brazil, USA, Israel.
 - **Three languages on every page** (D18): Portuguese (Portugal), English, French, with a language switch.
-- **Core asset:** one free weekly newsletter per edition (Thursdays), plus the website and social media. English social accounts are named "Portugal Home Guides".
+- **Core asset:** one free weekly newsletter per edition (Thursdays), plus the website and social media. Social starts as one account, "Imóveis Portugal", on Instagram and Facebook, posting in English first (D26, which overrides D13).
 - **Goal:** profitable in year 1, then sell the brand within 12 months to a portal, an agency network, a bank or a media group.
 
 ## How it makes money
@@ -93,24 +93,24 @@ The brand DNA is **success and trust**: clean, calm, easy on a phone, and a feel
 | sponsors/pipeline.csv, sponsors/Sponsors_v2.xlsx | Sponsor CRM (~130 companies, tiers A/B/C) |
 | site/ | The Astro site (all editions and languages) |
 
-## Status (25 Oct 2026)
+## Status (25 Oct 2026, end of session 2)
 
-Done:
-- Site v2 in PT, EN and FR, with the FAQ, partner pages and "talk to a partner" pages.
-- 18 free e-books (six countries × three languages).
-- Prompt 10: copy deck, voice rules, country benchmarks, mobile-first redesign (Lighthouse mobile 96–100), visible photo credits removed.
+Done and on `main` (live link, still noindex):
+- Site v2 in PT, EN and FR: home, FAQ (including "Habitação Própria Permanente"), partner pages, 10 calculators, "what a budget buys", house prices, "home from abroad", paid report (switched off, D22).
+- 18 free e-books, now 15 pages with chapters on main home versus other home and on the mortgage from offer to deed.
+- **Blog** (task 15): index, article pages, SEO data, per-edition sitemaps, two articles in PT, EN, FR (non-resident IMT at 7.5%; buying from abroad step by step), linked from the menu, footer and home page.
+- Prompt 03: five Israeli-capital developers in the pipeline, a "Chambers & embassies" tab, `sponsors/INTERNATIONAL.md`, seven English outreach drafts (not sent).
+- Content and publishing plan: `ops/PLAN_CONTENT.md`. Decisions D24 to D30 (blog canonicals, one newsletter per language, one social account, faceless AI video, Meta Business portfolio).
+- Quality gates: `scripts/check-content.mjs` and `scripts/check-parity.mjs`.
 
-In progress or queued:
-- **Prompt 11:** remove the "AI look". Real listing and photos, home page from content/copy/HOME_CEO_DRAFT.md.
-- **Prompt 12:** "what your budget buys" comparisons, mortgage, cost and rental simulators, the paid report, newsletter format.
-- **Prompt 13:** Doutor Finanças model, a one-stop "home from abroad" form, more simulators, bank sponsor targets.
-
-Open:
-- Billing entity (D4) before launch.
-- Domains (.lu, .fr, .ch, .com.br; USA and Israel to choose).
-- beehiiv, Tally and Cal.com accounts.
-- From the agency: confirm the profile text and video visits, one real listing with photos, the credit-intermediary name and Banco de Portugal number, and a signed Gold sponsorship agreement.
-- 42 lines of unverified facts in content/faq/UNVERIFIED.md, to be verified or left out.
+Open, in order of what blocks money:
+1. **D4, the billing entity**: blocks sign-ups (data controller), legal pages and payments.
+2. **Operator setup**: beehiiv, Tally, Cal.com, Meta Business portfolio with one Facebook Page and one Instagram account, domains, Unsplash key (tasks 17d, 2b, 5, 8t). Every form ID in `site/src/config.ts` is still empty.
+3. **Who is the Meta admin profile** (a real personal profile is required; do not create a fake one).
+4. From the agency: profile text, one real listing with permission, the credit intermediary's name and registration number, a signed Gold agreement.
+5. Build `/publish-week`, the social export and the card generator (prompt 14).
+6. Outreach: approve the week-1 drafts and the seven international drafts once the legal bases are confirmed (tasks 8p, 8q, 16b).
+7. 42 lines of unverified facts in `content/faq/UNVERIFIED.md`, plus the items added from the Doutor Finanças guide.
 
 ## Where help is most useful now
 

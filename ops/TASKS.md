@@ -81,9 +81,9 @@ Status: To do · Doing · Blocked · Done
 
 | 13d | Send the credit-intermediary business name and its Banco de Portugal registration number (for the simulators, D21), confirm video visits, one real listing with photos, and sign the Gold sponsorship agreement (D20) | Father via Operator | To do | 2026-11-01 |
 
-| 14 | Merge claude/brave-gauss-cwafi6 into main so the live link shows the current design. Requested by Daniel 25 Oct; still needs his explicit "go" on the day (hard rule 2), and a check that the site stays noindex (launchReady false) | CTO prepares, Operator approves | To do: waits for "go" | 2026-10-27 |
+| 14 | Merge claude/brave-gauss-cwafi6 into main so the live link shows the current design. Done 25 Oct (D31); site stays noindex | CTO | Done | 2026-10-25 |
 | 14b | D4: set the billing entity, then fill config.entity, switch launchReady and complete the legal pages (site stays noindex until then) | Operator | Blocked: D4 | 2026-11-13 |
-| 14c | Create ops/METRICS.md (weekly: subscribers per edition, traffic, leads, sponsors, revenue) with a script that fills what it can from Cloudflare Web Analytics, beehiiv and pipeline.csv, plus the /status command that reads it. Requested by Daniel 25 Oct | CTO | To do | 2026-11-06 |
+| 14c | ops/METRICS.md created as a stub (25 Oct); the weekly numbers script and the /status command are still to build (prompt 14, step 6) | CTO | Stub done; script to do | 2026-11-13 |
 
 | 14d | Review the new FAQ answer "Habitação Própria Permanente" (all languages) and UNVERIFIED items 1, 2 and 6 from the Doutor Finanças guide | Daniel | To do | 2026-11-06 |
 
@@ -104,7 +104,14 @@ Status: To do · Doing · Blocked · Done
 | 17e | Build the publishing plumbing: steps B1 to B10 of ops/PLAN_CONTENT.md section 5 (/publish-week, social export, card generator, post checks, Meta app review request, metrics) | CTO | To do: starts after 17c | 2026-11-13 |
 | 17f | Partner agency: one real listing a week with written permission, profile text, credit partner name (items C1, C2 of the plan) | Partner, Father | To do | 2026-11-06 |
 
+| 17g | Choose the Meta admin profile (see the open item in DECISIONS.md): an existing real profile kept private plus a second trusted admin, Instagram first, or wait for D4 | Daniel, Operator | To do | 2026-10-28 |
+| 18 | Run ops/prompts/14_publishing_plumbing.md in a new Claude Code session: /publish-week, social export, card generator, post checks, metrics script, /status | CTO | To do: start Mon 26 Oct | 2026-11-06 |
+| 18b | Check the Cloudflare build of main succeeded and that the live link shows the blog (/pt/lu/blog/) | Operator | To do | 2026-10-26 |
+
 ## Last session
+
+2026-10-25 (CTO, session 2): ran as CTO and, on request, as CEO. Done and merged to main: task board reconciled against the code (prompts 02 and 04 to 13 were built; 03 was not); e-book extended to 15 pages with a main-home chapter and a mortgage chapter, HPP FAQ answer in PT, EN, FR; blog with two articles in three languages, SEO data, sitemaps, home page section; prompt 03 (five Israeli-capital developers S151 to S155, chambers and embassies tab, INTERNATIONAL.md, seven drafts not sent; builder made safe: pipeline.csv is the source of truth, IDs and the week-1 list are stable); content and publishing plan (ops/PLAN_CONTENT.md) with decisions D24 to D30; briefing and METRICS stub updated; D31 records the merge. Fixed a mistake: one early commit carried a personal author and was rewritten to the brand identity (always set git user to Imoveis Portugal first). Not done: nothing is sent or posted; no account exists yet; every form ID is empty. Next: Daniel answers D4 and the Meta admin question; the operator does the setup batch (17d); a new session runs prompt 14.
+
 
 2026-10-25 (CTO): reconciled this board against the code on claude/brave-gauss-cwafi6. Prompts 02 and 04–13 are built (site in PT/EN/FR, FAQ, 18 e-books, simulators, week 1 newsletter drafts, partner pages); prompt 03 is not (no chambers or embassies in the pipeline, thin US and IL targets). Every form ID in config.ts is empty and ebooksLive, launchReady, creditPartner and entity are unset, so the site cannot take an enquiry yet. Main still carries the old design; merging needs the operator (task 14). Duplicate id fixed: the credit-intermediary row is now 13d.
 

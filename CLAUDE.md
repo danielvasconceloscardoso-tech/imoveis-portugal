@@ -92,3 +92,7 @@ Done when a sponsor can open a link, read the offer and submit an enquiry, on al
 8. Task prompts from the CEO live in ops/prompts/, numbered. When the operator says "run prompt 01", read and execute that file. The CEO's own operating script is ops/CEO_SCRIPT.md (read it for context; it is not addressed to you).
 9. Once per clone, run `git config core.hooksPath .githooks` so the commit check (secrets and non-brand emails) is active.
 10. All content follows content/EDITORIAL_POLICY.md (D12): primary sources, every fact traceable, describe never advise, disclaimer on every piece. `/publish-week` must reject content without sources or disclaimer.
+11. Before the first commit in any clone or worktree, run `git config user.name "Imoveis Portugal"` and `git config user.email ops@imoveisportugal.lu`. Never commit as a person (hard rule 1).
+12. The content and publishing plan is ops/PLAN_CONTENT.md (decisions D24 to D31 in ops/DECISIONS.md). The blog lives in content/blog; run `node scripts/check-content.mjs` and `node scripts/check-parity.mjs` before every PR.
+13. The sponsor builder is `python3 sponsors/build/build_v2.py`: pipeline.csv is the source of truth for companies it already holds; do not edit the workbook by hand.
+
