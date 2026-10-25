@@ -384,3 +384,4 @@ a.sup + a.sup::before { content: ","; color: var(--muted); margin-right: 1px; }
 @media (max-width: 640px) { .post table { font-size: 14px; } }
 .blog-home .qa-item h3 a { color: var(--ink); text-decoration: none; }
 .blog-home .qa-item h3 a:hover { color: var(--accent); text-decoration: underline; }
+.ft-trust a { text-decoration: underline; }

@@ -18,6 +18,7 @@
     "marked": "^14.1.4"
   },
   "devDependencies": {
+    "axe-core": "^4.10.2",
     "tsx": "^4.23.15"
   }
 }
