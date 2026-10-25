@@ -8,7 +8,7 @@ const lowPower = () => (navigator as any).hardwareConcurrency && (navigator as a
 // m² → extrusion height in metres: cube root keeps 300 k€ and 10 M€ on the same, readable scale.
 const heightExpr = (budget: number): any => ["case", ["==", ["get", "v"], null], 0, ["*", 2700, ["^", ["/", budget, ["get", "v"]], 1 / 3]]];
 // Colour by price per m² (cheaper = deeper green = more space): the same pattern at every budget, the height carries the budget.
-const colorExpr = (_budget: number): any => ["case", ["==", ["get", "v"], null], "#d9d4c7", ["boolean", ["feature-state", "sel"], false], "#a8843c",
+const colorExpr = (_budget: number): any => ["case", ["==", ["get", "v"], null], "#d9d4c7", ["boolean", ["feature-state", "sel"], false], "#8c6d33",
   ["interpolate", ["linear"], ["ln", ["get", "v"]], Math.log(700), "#1f4a3d", Math.log(1100), "#3d6e5a", Math.log(1700), "#7d9f83", Math.log(2600), "#b8c6a4", Math.log(4200), "#e2dcc4"]];
 
 export function initMapExplorer(root: HTMLElement) {
@@ -58,9 +58,10 @@ export function initMapExplorer(root: HTMLElement) {
     card.innerHTML = `${img}<div class="mapx-card-b"><p class="h-small">${L.regions[p.r] || ""}</p><h3>${p.n}</h3>`
       + (m2 ? `<p class="mapx-big">${nf.format(m2)}<span> ${L.m2}</span></p><p class="small">${L.median.replace("{v}", eur.format(p.v!))}</p>` : `<p class="small">${L.nodata}</p>`)
       + `<p class="mapx-actions"><a class="btn sm" href="${cfg.links.buy}?place=${encodeURIComponent(p.n)}&budget=${budget}">${L.homes}</a>`
-      + `<a href="${cfg.links.talk}?cat=developer&place=${encodeURIComponent(p.n)}#form">${L.dev}</a><a href="${sim}">${L.sim}</a>`
-      + (cfg.links.pages.includes(p.s) ? `<a href="${cfg.links.map}${p.s}/">${L.page}</a>` : "")
-      + (budget >= 1e6 && cfg.privateHref ? `<a class="quiet" href="${cfg.privateHref}">${cfg.privateLabel}</a>` : "") + `</p></div>`
+      + `<a href="${cfg.links.talk}?cat=developer&place=${encodeURIComponent(p.n)}#form">${L.dev}</a><a href="${sim}">${L.sim}</a></p>`
+      // Prompt 19: three actions; the municipality page and the Private section as quiet links below them.
+      + `<p class="mapx-more small">` + (cfg.links.pages.includes(p.s) ? `<a href="${cfg.links.map}${p.s}/">${L.page}</a>` : "")
+      + (budget >= 1e6 && cfg.privateHref ? `<a href="${cfg.privateHref}">${cfg.privateLabel}</a>` : "") + `</p></div>`
       + `<button type="button" class="mapx-close" aria-label="×">×</button>`;
     card.hidden = false;
     card.querySelector(".mapx-close")!.addEventListener("click", () => { card.hidden = true; select(null); });

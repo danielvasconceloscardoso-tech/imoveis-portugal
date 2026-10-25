@@ -402,7 +402,7 @@ a.sup + a.sup::before { content: ","; color: var(--muted); margin-right: 1px; }
 .mapx.is-live .mapx-poster { opacity: 0; pointer-events: none; }
 .mapx-inset { position: absolute; left: 0; top: 0; font: 600 10px/1 var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); pointer-events: none; }
 .mapx:not(.is-live) .mapx-inset { display: none; }
-.mapx-card { position: absolute; right: 12px; bottom: 12px; width: min(340px, calc(100% - 24px)); background: var(--paper); border: 1px solid var(--rule); box-shadow: 0 12px 40px rgba(20, 20, 20, .08); animation: mapxIn .5s ease; }
+.mapx-card { position: absolute; right: 12px; bottom: 12px; width: min(340px, calc(100% - 24px)); background: var(--paper); border: 1px solid var(--rule); animation: mapxIn .7s ease; }
 .mapx-card img { display: block; width: 100%; height: 150px; object-fit: cover; }
 .mapx-card-b { padding: 16px 18px 18px; }
 .mapx-card h3 { font: 400 1.7rem/1.1 var(--serif); margin: 4px 0 10px; }
@@ -542,3 +542,12 @@ a, .nav a, .langs a { transition: color .35s ease, text-decoration-color .35s ea
   .concierge { display: none; }
   .nav + .tools { margin-left: 28px; }
 }
+.mapx-more { display: flex; flex-wrap: wrap; gap: 4px 14px; margin: 12px 0 0; padding-top: 10px; border-top: 1px solid var(--rule); }
+.mapx-more:empty { display: none; }
+.mapx-more a { color: var(--muted); }
+@media (prefers-reduced-motion: reduce) { .mapx-card { animation: none; } }
+/* Prompt 19: quiet presets, hairline, the chosen one in the accent */
+.mapx-presets button { border-radius: 2px; background: transparent; border: 1px solid var(--rule); color: var(--ink); transition: border-color .35s ease, color .35s ease, background-color .35s ease; }
+.mapx-presets button:hover { border-color: var(--ink); }
+.mapx-presets button[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.mapx-filters button { border-radius: 2px; }
