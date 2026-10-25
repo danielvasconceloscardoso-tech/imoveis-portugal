@@ -41,8 +41,8 @@ Status: To do · Doing · Blocked · Done
 | 8p | Approve the week-1 drafts in sponsors/outreach/week-1/ (README there lists what to check); nothing is sent before 8q | Operator | To do | 2026-10-26 |
 | 8q | Confirm the legal bases for B2B outreach per country (sponsors/METHOD.md, Outreach rules point 2); until then the drafts stay drafts | Operator (Daniel) | To do | 2026-10-26 |
 | 8r | Remessa Online, Bordr and e-residence are listed as affiliate offers: decide whether an affiliate commission fits D6 (flat sponsorships only); drafts pitch sponsorship only | CEO | To do | 2026-10-28 |
-| 8s | Choose one of the three design directions | Operator | Done: direction C with colour photos (D15) | 2026-10-24 |
-| 8t | Create a free Unsplash developer app (unsplash.com/developers, brand mailbox) and add its Access Key to this cloud environment as the environment variable UNSPLASH_ACCESS_KEY (environment menu > Edit > Environment variables), never in the repo. Needed to search more photos and to fill in the photographer credits | Operator | To do | 2026-10-27 |
+| 8s | Choose one of the three design directions | Operator | Superseded by D40 | 2026-10-24 |
+| 8t | Create a free Unsplash developer app (unsplash.com/developers, brand mailbox) and add its Access Key to this cloud environment as the environment variable UNSPLASH_ACCESS_KEY (environment menu > Edit > Environment variables), never in the repo. Needed to search more photos and to fill in the photographer credits | Operator | Superseded by D40 | 2026-10-27 |
 | 9 | Send "This week's 40" (sponsors/Sponsors_v2.xlsx), 8 per day, templates in sponsors/METHOD.md; log status | Partner | To do | 2026-10-30 |
 | 10 | Meta Ad Library pass for Luxembourg and Switzerland (links in sponsors/METHOD.md); add advertisers as tier A | Partner | To do | 2026-11-06 |
 | 11 | Get the latest exhibitor list of the Paris Portuguese property fair | Partner | To do | 2026-11-06 |
@@ -115,7 +115,7 @@ Status: To do · Doing · Blocked · Done
 | 8u | Wire beehiiv form and Tally forms (ops/ACCOUNTS.md) into site/src/config.ts and pages; create EN and FR versions of the forms' text for the operator | CTO | To do | 2026-10-28 |
 | 8v | Set beehiiv footer postal address (billing entity or business address, never personal) before the first send | Operator | Blocked: waits for D4 | 2026-11-25 |
 
-| 8w | Decide the monetisation model (area slots for developers, journey-checkpoint slots for advisers, the partner group, paid call dropped or not, price ranges); CEO proposal in chat 25 Oct | Operator | To do | 2026-10-28 |
+| 8w | Decide the monetisation model (area slots for developers, journey-checkpoint slots for advisers, the partner group, paid call dropped or not, price ranges); CEO proposal in chat 25 Oct | Operator | Done (D38–D40) | 2026-10-28 |
 
 ## Last session
 
