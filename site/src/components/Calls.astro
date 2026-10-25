@@ -1,6 +1,6 @@
 ---
-// The two calls with the partner agency (D19): a free 15-minute first call and the paid 45-minute
-// "Plano de compra". Cal.com links from config; until they exist, each opens an email (prompt 11).
+// The free first conversation with the partner agency (D19). The paid 45-minute call was dropped (D39, prompt 21).
+// Cal.com link from config; until it exists, it opens an email (prompt 11).
 import { config } from "../config";
 import type { Lang } from "../i18n";
 import { c } from "../lib/copy";
@@ -8,15 +8,13 @@ interface Props { lang: Lang; ed: string; compact?: boolean; }
 const { lang, ed, compact = false } = Astro.props;
 const href = (url: string, subject: string) => url || `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${subject} (${ed} · ${lang})`)}`;
 const intro = href(config.calls.intro, c("calls.intro.subject", lang));
-const plan = href(config.calls.plan, c("calls.plan.subject", lang));
 ---
 {compact ? (
   <p class="calls-inline">
-    <a href={intro}>{c("calls.intro.short", lang)}</a> · <a href={plan}>{c("calls.plan.short", lang)}</a>
+    <a href={intro}>{c("calls.intro.short", lang)}</a>
   </p>
 ) : (
   <div class="calls">
     <a class="call" href={intro}><b>{c("calls.intro.h", lang)}</b><span>{c("calls.intro.p", lang)}</span></a>
-    <a class="call" href={plan}><b>{c("calls.plan.h", lang)}</b><span>{c("calls.plan.p", lang)}</span></a>
   </div>
 )}

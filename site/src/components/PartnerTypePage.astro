@@ -5,13 +5,12 @@
 import V2 from "../layouts/V2.astro";
 import { config } from "../config";
 import { LANG_NAME, pathFor, type Lang, type EdCode } from "../i18n";
-import { packages, kitFile, type PType } from "../lib/packages";
+import { kitFile, type PType } from "../lib/packages";
 import { c, cl, edName } from "../lib/copy";
 
 interface Props { lang: Lang; ed: EdCode; type: PType; }
 const { lang, ed, type } = Astro.props;
 const k = type.key;
-const pk = packages(lang).filter((x) => type.pkgs.includes(x.key));
 const kitLangs = type.kit.includes(lang) ? [lang, ...type.kit.filter((l) => l !== lang)] : type.kit;
 ---
 <V2 lang={lang} ed={ed} page="partners" title={`${c(`kit.${k}.h`, lang)} | Imóveis Portugal · ${edName(ed, lang)}`} description={c(`kit.${k}.p`, lang)} sticky={{ href: `${pathFor(lang, ed, "partners")}#contacto`, label: c("partners.cta", lang) }}>
@@ -24,13 +23,7 @@ const kitLangs = type.kit.includes(lang) ? [lang, ...type.kit.filter((l) => l !=
     <section class="qa-item"><h2 class="h3">{c("partners.readers.h", lang)}</h2><p>{c("partners.readers.p", lang)}</p><p>{c("partners.whynow.p", lang)}</p></section>
     <section class="qa-item"><h2 class="h3">{c("kit.get.h", lang)}</h2><ul class="list">{cl(`kit.${k}.get`, lang).map((x) => <li>{x}</li>)}</ul>
       {k === "developers" && <p class="small">{c("kit.developers.rule", lang)}</p>}</section>
-    <section class="qa-item"><h2 class="h3">{c("kit.pkg.h", lang)}</h2>
-      {pk.map((x) => (
-        <div class="pkg-line"><h3>{x.name}</h3><p>{x.desc}</p>
-          <p class="small">{c("partners.list.price", lang)}: {x.list} {c("partners.per.year", lang)}{x.founding && <> · <strong>{c("partners.founding.price", lang)}: {x.founding}</strong></>}</p></div>
-      ))}
-      <p class="small">{c("partners.vat", lang)} {c("partners.proposal", lang)} {c("partners.founding.p", lang)}</p>
-    </section>
+    <section class="qa-item"><h2 class="h3">{c("partners.terms.h", lang)}</h2><p>{c("partners.terms", lang)}</p></section>
     <section class="qa-item"><h2 class="h3">{c("partners.rules.h", lang)}</h2><ul class="list">{cl("partners.rules", lang).map((x) => <li>{x}</li>)}</ul></section>
     <p class="kit-dl">{kitLangs.map((l) => <a class="more" href={kitFile(k, l)} hreflang={l}>{c("kit.download", lang)} · {LANG_NAME[l]}</a>)}</p>
     <p style="margin:24px 0 72px"><a class="btn" href={`${pathFor(lang, ed, "partners")}#contacto`}>{c("partners.cta", lang)}</a> <span class="small">· {config.contactEmail}</span></p>

@@ -676,26 +676,6 @@ How to edit:
 - EN: 15-minute first call with the agency
 - FR: Premier appel de 15 minutes avec l'agence
 
-### plan.h
-- PT: Plano de compra · 45 min · 150 €
-- EN: Buying plan · 45 min · €150
-- FR: Plan d'achat · 45 min · 150 €
-
-### plan.p
-- PT: Orçamento, zonas, crédito e calendário, para o seu caso. Os 150 € são descontados se comprar com a agência, que os fatura.
-- EN: Budget, areas, mortgage and timeline, for your case. The €150 is credited if you buy through the agency, which invoices it.
-- FR: Budget, quartiers, crédit et calendrier, pour votre cas. Les 150 € sont déduits si vous achetez avec l'agence, qui les facture.
-
-### plan.short
-- PT: Plano de compra, 45 min, 150 €
-- EN: Buying plan, 45 min, €150
-- FR: Plan d'achat, 45 min, 150 €
-
-### plan.subject
-- PT: Plano de compra de 45 minutos com a agência
-- EN: 45-minute buying plan with the agency
-- FR: Plan d'achat de 45 minutes avec l'agence
-
 ## faq
 
 ### title
@@ -959,6 +939,61 @@ How to edit:
 
 ## partners
 
+### terms
+- PT: Condições sob consulta. Lugares limitados por zona e por passo.
+- EN: Terms on request. Places are limited per area and per step.
+- FR: Conditions sur demande. Places limitées par secteur et par étape.
+
+### terms.h
+- PT: Condições sob consulta
+- EN: Terms on request
+- FR: Conditions sur demande
+
+### place.launch.p
+- PT: Um novo empreendimento em destaque no mapa, na página da zona e numa newsletter.
+- EN: A new project featured on the map, on the area page and in one newsletter.
+- FR: Un nouveau programme mis en avant sur la carte, sur la page du secteur et dans une newsletter.
+
+### place.launch.h
+- PT: Lançamentos
+- EN: Launches
+- FR: Lancements
+
+### place.private.p
+- PT: Residência, IFICI, herança e estruturas de detenção, para orçamentos a partir de 1 milhão de euros, em todos os países.
+- EN: Residence, IFICI, inheritance and holding structures, for budgets from €1 million, in every country.
+- FR: Résidence, IFICI, succession et structures de détention, pour les budgets à partir d'un million d'euros, dans tous les pays.
+
+### place.private.h
+- PT: A secção Private
+- EN: The Private section
+- FR: La section Private
+
+### place.checkpoint.p
+- PT: Em cada país, cada passo do percurso termina com o parceiro que o resolve: banco, advogado, consultor fiscal, transferências. Até três por passo e por país.
+- EN: In each country, every step of the path ends with the partner who handles it: bank, lawyer, tax adviser, money transfer. Up to three per step and country.
+- FR: Dans chaque pays, chaque étape du parcours se termine par le partenaire qui s'en charge : banque, avocat, conseiller fiscal, transferts. Trois au plus par étape et par pays.
+
+### place.checkpoint.h
+- PT: Passos do percurso, para consultores
+- EN: Path steps, for advisers
+- FR: Étapes du parcours, pour les conseillers
+
+### place.area.p
+- PT: No mapa, na página de preços da zona e no cartão de cada concelho: logótipo, um empreendimento e a indicação de patrocinado. Até três por zona.
+- EN: On the map, on the area's price page and on each municipality card: your logo, one project and the sponsored label. Up to three per area.
+- FR: Sur la carte, sur la page des prix du secteur et sur la fiche de chaque commune : votre logo, un programme et la mention sponsorisé. Trois au plus par secteur.
+
+### place.area.h
+- PT: Lugares por zona, para promotores
+- EN: Area placements, for developers
+- FR: Places par secteur, pour les promoteurs
+
+### place.h
+- PT: O que os parceiros recebem
+- EN: What partners get
+- FR: Ce que reçoivent les partenaires
+
 ### proof.4
 - PT: Os números de audiência aparecem aqui assim que existirem.
 - EN: Audience figures appear here as soon as they exist.
@@ -1034,71 +1069,6 @@ How to edit:
 - EN: Where you appear
 - FR: Où vous apparaissez
 
-### proposal
-- PT: Preços em validação até ao lançamento.
-- EN: Prices subject to confirmation before launch.
-- FR: Tarifs en cours de validation avant le lancement.
-
-### private.p
-- PT: Para quem serve orçamentos a partir de 1 milhão de euros. Perfil e respostas na secção Private, posição no mapa para esses orçamentos e a newsletter. No máximo cinco por edição.
-- EN: For firms serving budgets from €1 million. A profile and answers in the Private section, a map position for those budgets and the newsletter. Five per edition at most.
-- FR: Pour les maisons qui servent des budgets à partir d'un million d'euros. Profil et réponses dans la section Private, position sur la carte pour ces budgets et la newsletter. Cinq au plus par édition.
-
-### private.h
-- PT: Parceiro Private
-- EN: Private Partner
-- FR: Partenaire Private
-
-### developer.p
-- PT: Um empreendimento em destaque. Na newsletter, no mapa do seu concelho e numa página identificada como patrocinada.
-- EN: One development in focus. In the newsletter, on the map in its municipality and on a page labelled as sponsored.
-- FR: Un programme mis en avant. Dans la newsletter, sur la carte de sa commune et sur une page signalée comme sponsorisée.
-
-### developer.h
-- PT: Campanha de empreendimento
-- EN: Developer campaign
-- FR: Campagne de programme
-
-### bank.p
-- PT: O seu nome nos simuladores das suas edições e na newsletter. Destaque no mapa para os orçamentos que financia.
-- EN: Your name on the calculators in your editions and in the newsletter. A feature on the map for the budgets you finance.
-- FR: Votre nom sur les simulateurs de vos éditions et dans la newsletter. Une mise en avant sur la carte pour les budgets que vous financez.
-
-### bank.h
-- PT: Parceiro bancário
-- EN: Bank Partner
-- FR: Partenaire bancaire
-
-### featured.p
-- PT: Tudo o que tem o parceiro verificado. Mais seis presenças por ano na newsletter, um capítulo no guia e o primeiro lugar na sua categoria.
-- EN: Everything in Verified. Plus six newsletter slots a year, a chapter in the guide and first place in your category.
-- FR: Tout ce que comprend le partenaire vérifié. Plus six présences par an dans la newsletter, un chapitre du guide et la première place de votre catégorie.
-
-### featured.h
-- PT: Parceiro em destaque
-- EN: Featured Partner
-- FR: Partenaire à la une
-
-### verified.p
-- PT: Perfil com licença, respostas identificadas nas perguntas da sua categoria e lugar na rotação dos simuladores.
-- EN: Profile with licence, labelled answers on the questions in your category and a place in the calculator rotation.
-- FR: Profil avec licence, réponses signalées sur les questions de votre catégorie et place dans la rotation des simulateurs.
-
-### verified.h
-- PT: Parceiro verificado
-- EN: Verified Partner
-- FR: Partenaire vérifié
-
-### all.editions
-- PT: todas as edições
-- EN: all editions
-- FR: toutes les éditions
-
-### per.edition
-- PT: por edição
-- EN: per edition
-- FR: par édition
-
 ### title
 - PT: Para parceiros
 - EN: For partners
@@ -1125,9 +1095,9 @@ How to edit:
 - FR: Partenaire fondateur
 
 ### founding.p
-- PT: Para os dez primeiros parceiros, até 1 de dezembro de 2026: 40% de desconto no primeiro ano. No segundo ano, o mesmo preço.
-- EN: For the first ten partners, until 1 December 2026: 40% off the first year. The same price again in the second year.
-- FR: Pour les dix premiers partenaires, jusqu'au 1er décembre 2026 : 40 % de remise la première année. Le même prix la deuxième année.
+- PT: Os dez primeiros parceiros têm condições de parceiro fundador, até 1 de dezembro de 2026. Condições sob consulta.
+- EN: The first ten partners get founding-partner terms, until 1 December 2026. Terms on request.
+- FR: Les dix premiers partenaires bénéficient de conditions de partenaire fondateur, jusqu'au 1er décembre 2026. Conditions sur demande.
 
 ### slots
 - PT: {left} de {total} lugares disponíveis até {deadline}
@@ -1148,36 +1118,6 @@ How to edit:
 - PT: Os parceiros fundadores aparecem desde o primeiro número, a 1 de dezembro de 2026. Mantêm o preço fundador no segundo ano.
 - EN: Founding partners appear from the first issue, on 1 December 2026. They keep the founding price in the second year.
 - FR: Les partenaires fondateurs figurent dès le premier numéro, le 1er décembre 2026. Ils gardent le prix fondateur la deuxième année.
-
-### packages.h
-- PT: Pacotes
-- EN: Packages
-- FR: Formules
-
-### founding.price
-- PT: Preço fundador (ano 1)
-- EN: Founding price (year 1)
-- FR: Prix fondateur (année 1)
-
-### list.price
-- PT: Preço normal
-- EN: Standard price
-- FR: Prix normal
-
-### per.year
-- PT: / ano
-- EN: / year
-- FR: / an
-
-### from
-- PT: a partir de
-- EN: from
-- FR: à partir de
-
-### vat
-- PT: Valores sem IVA.
-- EN: Prices exclude VAT.
-- FR: Prix hors TVA.
 
 ### agency.p
 - PT: A nossa agência parceira e a única agência imobiliária da plataforma. Todos os pedidos de compra ou venda seguem para ela. Paga um patrocínio anual fixo, nunca uma comissão por contacto.
@@ -3194,11 +3134,6 @@ How to edit:
 - EN: What you get
 - FR: Ce que vous obtenez
 
-### pkg.h
-- PT: Pacotes indicados
-- EN: Suggested packages
-- FR: Formules adaptées
-
 ### wealth.h
 - PT: Para bancos privados e gestores de património
 - EN: For private banks and wealth managers
@@ -3917,3 +3852,45 @@ How to edit:
 - PT: Em Portugal, filhos, cônjuge e pais estão isentos do imposto do selo de 10% sobre heranças e doações. Para orçamentos a partir de 1 milhão, a secção Private trata das estruturas de detenção.
 - EN: In Portugal, children, a spouse and parents are exempt from the 10% stamp duty on inheritances and gifts. For budgets from €1 million, the Private section covers holding structures.
 - FR: Au Portugal, enfants, conjoint et parents sont exonérés du droit de timbre de 10 % sur successions et donations. Pour les budgets à partir d'un million, la section Private traite des structures de détention.
+
+## dev
+
+### h
+- PT: Promotores parceiros nesta zona
+- EN: Partner developers in this area
+- FR: Promoteurs partenaires dans ce secteur
+
+### empty
+- PT: Lugar disponível para um promotor parceiro, identificado como patrocinado.
+- EN: A place for a partner developer, labelled as sponsored.
+- FR: Une place pour un promoteur partenaire, signalée comme sponsorisée.
+
+### from
+- PT: desde {price}
+- EN: from {price}
+- FR: à partir de {price}
+
+### sponsored
+- PT: Patrocinado
+- EN: Sponsored
+- FR: Sponsorisé
+
+### launch.h
+- PT: Lançamento
+- EN: Launch
+- FR: Lancement
+
+### launch.empty
+- PT: Lugar para o lançamento de um novo empreendimento nesta zona: no mapa, nesta página e numa newsletter.
+- EN: A place to launch a new project in this area: on the map, on this page and in one newsletter.
+- FR: Une place pour lancer un nouveau programme dans ce secteur : sur la carte, sur cette page et dans une newsletter.
+
+### join
+- PT: Para promotores: condições sob consulta
+- EN: For developers: terms on request
+- FR: Pour les promoteurs : conditions sur demande
+
+### card
+- PT: Promotores parceiros nesta zona: lugares disponíveis
+- EN: Partner developers here: places available
+- FR: Promoteurs partenaires ici : places disponibles

@@ -14,7 +14,7 @@ import MapPage from "../../../components/MapPage.astro";
 import PrivatePage from "../../../components/PrivatePage.astro";
 import OursPage from "../../../components/OursPage.astro";
 import JourneyPage from "../../../components/JourneyPage.astro";
-import { packages as pkgList, PTYPES } from "../../../lib/packages";
+import { PTYPES } from "../../../lib/packages";
 import { config } from "../../../config";
 import { ED_ORDER, LANGS, SLUGS, eur, pathFor, type EdCode, type Lang, type PageKey } from "../../../i18n";
 import { homeFacts, fmtDate } from "../../../lib/content";
@@ -27,14 +27,13 @@ export function getStaticPaths() {
 const lang = Astro.params.lang as Lang;
 const ed = Astro.params.ed as EdCode;
 const { key } = Astro.props as { key: PageKey };
-const p = config.prices, e = (n: number) => eur(n, lang);
+const e = (n: number) => eur(n, lang);
 const used = config.foundingSlotsTotal - config.foundingSlotsLeft;
 const ent = config.entity;
 const ph = (v: string, label: string) => v || `[${label}]`;
 const PH = { pt: ["Entidade", "Morada", "n.º de registo", "n.º de IVA"], en: ["Entity", "Address", "registration no.", "VAT no."], fr: ["Entité", "Adresse", "n° d'immatriculation", "n° de TVA"] }[lang];
 const legalVars = { entity: ph(ent.name, PH[0]), address: ph(ent.address, PH[1]), register: ph(ent.register, PH[2]), vat: ph(ent.vat, PH[3]), email: config.contactEmail };
 const legal = key === "privacy" || key === "legal" ? key : null;
-const packages = pkgList(lang);
 const luN = new Intl.NumberFormat(lang === "en" ? "en" : lang === "fr" ? "fr" : "pt-PT").format(93659);
 
 const titles: Partial<Record<PageKey, string>> = { partners: c("partners.title", lang), buy: c("buy.title", lang), how: c("how.title", lang), privacy: c("legal.privacy.title", lang), legal: c("legal.legal.title", lang) };
@@ -69,20 +68,9 @@ const site = config.agency.website.replace(/^https:\/\/|\/$/g, "");
       </section>
       <section class="band" aria-labelledby="packages">
         <div class="frame">
-          <h2 id="packages">{c("partners.packages.h", lang)}</h2>
-          <div class="pkgs">
-            {packages.map((k) => (
-              <div class="pkg">
-                <h3>{k.name}</h3>
-                <p>{k.desc}</p>
-                <dl>
-                  <dt>{c("partners.list.price", lang)}</dt><dd>{k.list} {c("partners.per.year", lang)}</dd>
-                  {k.founding && <><dt>{c("partners.founding.price", lang)}</dt><dd><strong>{k.founding}</strong></dd></>}
-                </dl>
-              </div>
-            ))}
-          </div>
-          <p class="small">{c("partners.vat", lang)} {c("partners.proposal", lang)}</p>
+          <h2 id="packages">{c("partners.place.h", lang)}</h2>
+          <ul class="ptypes">{["area", "checkpoint", "private", "launch"].map((k) => <li><span class="pl-h">{c(`partners.place.${k}.h`, lang)}</span><span class="pl-p">{c(`partners.place.${k}.p`, lang)}</span></li>)}</ul>
+          <p class="lede" style="margin-top:20px">{c("partners.terms", lang)} <a href="#contacto">{c("partners.cta", lang)}</a></p>
           <p style="margin-top:24px;max-width:40em">{c("partners.network.p", lang)}</p>
           <h3 style="margin-top:40px">{c("kit.types.h", lang)}</h3>
           <ul class="ptypes">{PTYPES.map((t) => <li><a href={`${pathFor(lang, ed, "partners")}${t.slug[lang]}/`}>{c(`kit.${t.key}.label`, lang)}</a></li>)}</ul>

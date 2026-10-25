@@ -1,0 +1,32 @@
+---
+// Developer placements for one area (prompt 20 §4, D38): up to three "Promotores parceiros nesta zona", each with
+// logo and one project card labelled "Patrocinado", and one "Lançamento" slot. Empty slots say a place is
+// available; no sponsor prices anywhere on the site (prices live only in the private brochure).
+import { config } from "../config";
+import { eur, pathFor, type Lang, type EdCode } from "../i18n";
+import { PTYPES } from "../lib/packages";
+import { c } from "../lib/copy";
+
+interface Props { lang: Lang; ed: EdCode; slug: string; }
+const { lang, ed, slug } = Astro.props;
+const devs = (config.developers[slug] ?? []).slice(0, 3);
+const launch = config.launches[slug];
+const devPage = `${pathFor(lang, ed, "partners")}${PTYPES.find((t) => t.key === "developers")!.slug[lang]}/`;
+---
+<section class="devs" aria-labelledby={`dev-${slug}`}>
+  <h2 id={`dev-${slug}`} class="h3">{c("dev.h", lang)}</h2>
+  <ul class="dev-list">
+    {Array.from({ length: 3 }, (_, i) => devs[i]).map((d) => d ? (
+      <li class="dev-card">
+        <img src={d.logo} alt={d.name} width="96" height="32" loading="lazy" />
+        <a href={d.project.url} rel="sponsored noopener"><strong>{d.project.name}</strong></a>
+        <span class="small">{d.project.typology} · {c("dev.from", lang, { price: eur(d.project.from, lang) })}</span>
+        <span class="tag">{c("dev.sponsored", lang)}</span>
+      </li>
+    ) : <li class="dev-empty small">{c("dev.empty", lang)}</li>)}
+  </ul>
+  <p class="h-small" style="margin-top:20px">{c("dev.launch.h", lang)}</p>
+  {launch ? <p><a href={launch.url} rel="sponsored noopener">{launch.name}</a> · {launch.developer} · <span class="tag">{c("dev.sponsored", lang)}</span></p>
+    : <p class="small dev-empty">{c("dev.launch.empty", lang)}</p>}
+  <p class="small"><a href={devPage}>{c("dev.join", lang)}</a></p>
+</section>

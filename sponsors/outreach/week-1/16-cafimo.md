@@ -1,6 +1,6 @@
 Objet: Financer un achat au Portugal depuis la France
 
-Bonjour [Prénom], nous lançons Imóveis Portugal, une newsletter hebdomadaire avec un guide en ligne pour les Portugais et lusodescendants de France, du Luxembourg et de Suisse qui veulent acheter au Portugal. Lancement le 1er décembre. J'ai vu que Cafimo accompagne le financement d'achats au Portugal et figure parmi les partenaires d'AnchorLess. Le réseau de partenaires est ouvert, avec plusieurs partenaires par catégorie. Les dix premiers partenaires ont 40 % de remise la première année et un prix bloqué la deuxième. Auriez-vous 15 minutes la semaine prochaine pour voir le format ?
+Bonjour [Prénom], nous lançons Imóveis Portugal, une newsletter hebdomadaire avec un guide en ligne pour les Portugais et lusodescendants de France, du Luxembourg et de Suisse qui veulent acheter au Portugal. Lancement le 1er décembre. J'ai vu que Cafimo accompagne le financement d'achats au Portugal et figure parmi les partenaires d'AnchorLess. Le réseau de partenaires est ouvert, avec plusieurs partenaires par catégorie. Les dix premiers partenaires bénéficient de conditions de partenaire fondateur, présentées lors d'un court échange. Auriez-vous 15 minutes la semaine prochaine pour voir le format ?
 
 Si vous préférez ne plus recevoir nos messages, il suffit de répondre.
 

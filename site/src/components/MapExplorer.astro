@@ -9,6 +9,7 @@ import { HTML_LANG, pathFor, eur, type Lang, type EdCode } from "../i18n";
 import { EDITION_CUR, RATE, fmtDate } from "../lib/content";
 import { MAP_MUNIS, MAP_QUARTER, REGIONS } from "../lib/mapdata";
 import { PLACES } from "../lib/places";
+import { PTYPES } from "../lib/packages";
 import { SUB } from "../lib/tools";
 import { c } from "../lib/copy";
 
@@ -23,6 +24,7 @@ const short = (n: number) => (n >= 1e6 ? `${nf.format(n / 1e6)} M€` : `${nf.fo
 const pages = new Set(PLACES.map((p) => p.slug));
 const labels = {
   m2: c("map.card.m2", lang), median: c("map.card.median", lang, { v: "{v}", quarter: qLabel }), nodata: c("map.card.nodata", lang),
+  devs: c("dev.card", lang), devHref: `${pathFor(lang, ed, "partners")}${PTYPES.find((t) => t.key === "developers")!.slug[lang]}/`,
   homes: c("map.a.homes", lang), dev: c("map.a.dev", lang), sim: c("map.a.sim", lang), page: c("map.a.page", lang), copied: c("map.copied", lang),
   regions: Object.fromEntries(REGIONS.map((r) => [r, c(`map.r.${r}`, lang)])),
 };

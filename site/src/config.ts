@@ -47,8 +47,9 @@ export const config = {
   // newsletter embeds are full URLs). Every form gets a hidden "edition" field from the page.
   forms: {
     newsletter: { pt: "", en: "", fr: "" } as Record<string, string>,
-    sponsor: { pt: "", en: "", fr: "" } as Record<string, string>,
-    buyer: { pt: "", en: "", fr: "" } as Record<string, string>,
+    // Public form IDs from ops/ACCOUNTS.md (task 8u). Tally forms are PT only for now; EN and FR copies to create.
+    sponsor: { pt: "KppYG8", en: "KppYG8", fr: "KppYG8" } as Record<string, string>,
+    buyer: { pt: "BEEzgN", en: "BEEzgN", fr: "BEEzgN" } as Record<string, string>,
     // "Talk to a partner" requests (category, country, question, consent) to the brand mailbox. See ops/SETUP.md.
     partnerRequest: { pt: "", en: "", fr: "" } as Record<string, string>,
     // Calculator "analyse my case" requests to the credit partner, with the simulation in hidden fields.
@@ -86,15 +87,11 @@ export const config = {
   foundingSlotsTotal: 10,
   foundingSlotsLeft: 10,
 
-  // Price list v3 (prompt 15, D32, D33): proposal until Daniel confirms (tasks 8s, 8t). Flat annual fees (D6), excl. VAT.
-  // Founding Partner: 40% off year 1 for the first 10, locked for year 2, until foundingDeadline.
+  // Developer area placements (prompt 20 §4, D38): up to three per municipality slug, plus one launch. Shown as empty
+  // slots until a partner signs. Public data only: name, logo path under /public, one project with its published price.
+  developers: {} as Record<string, { name: string; logo: string; project: { name: string; from: number; typology: string; url: string } }[]>,
+  launches: {} as Record<string, { name: string; developer: string; url: string }>,
+
+  // Founding Partner deadline (the offer's terms live only in the private brochure, D38 and D40).
   foundingDeadline: "2026-12-01",
-  foundingDiscount: 0.4,
-  prices: {
-    verified: { edition: 1800, all: 4800 },
-    featured: { edition: 4800, all: 12000 },
-    bank: { from: 9000, to: 15000 },
-    developerFrom: 2500,
-    private: { from: 25000, to: 50000, maxPerEdition: 5 },
-  },
 };

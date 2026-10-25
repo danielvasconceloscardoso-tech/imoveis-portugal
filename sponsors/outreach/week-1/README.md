@@ -20,5 +20,5 @@
 
 1. Language: PT-PT for LU and CH and for companies based in Portugal (including the Portuguese banks and insurers listed under FR); FR for companies based in France; PT-BR for the BR edition.
 2. Plain prose, under 120 words, one ask (a 15-minute call), opt-out line last, no promise of returns, and no claim of readers we do not have yet.
-3. Offer per row: sponsors get the one-partner-per-category line and the founding offer; developers get campaigns from 1,500 € (price from site/src/config.ts). No real-estate agencies are contacted (D9).
+3. Offer per row: sponsors get the one-partner-per-category line and the founding offer; developers get campaigns. No real-estate agencies are contacted (D9).
 4. Evidence from before 2022 is described without its year.

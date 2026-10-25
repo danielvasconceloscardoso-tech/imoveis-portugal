@@ -1,6 +1,6 @@
 Assunto: Portugueses em França a comprar casa em Portugal
 
-Olá [Nome], estamos a lançar o Imóveis Portugal, uma newsletter semanal com guia online para portugueses no Luxemburgo, em França e na Suíça e para brasileiros que querem comprar casa em Portugal. Arrancamos a 1 de dezembro. Li na Lusopress que a Império apoiou a gala de um evento da comunidade portuguesa em Paris, por isso já fala com este público. A rede de parceiros é aberta, com vários parceiros por categoria. Os primeiros dez parceiros têm 40% de desconto no primeiro ano e o preço fica fixo no segundo. Tem 15 minutos na próxima semana para lhe mostrar o formato?
+Olá [Nome], estamos a lançar o Imóveis Portugal, uma newsletter semanal com guia online para portugueses no Luxemburgo, em França e na Suíça e para brasileiros que querem comprar casa em Portugal. Arrancamos a 1 de dezembro. Li na Lusopress que a Império apoiou a gala de um evento da comunidade portuguesa em Paris, por isso já fala com este público. A rede de parceiros é aberta, com vários parceiros por categoria. Os dez primeiros parceiros têm condições de parceiro fundador, que apresentamos numa conversa curta. Tem 15 minutos na próxima semana para lhe mostrar o formato?
 
 Se preferir não receber mais emails nossos, basta responder a dizer.
 

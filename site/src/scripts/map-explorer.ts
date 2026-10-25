@@ -61,6 +61,8 @@ export function initMapExplorer(root: HTMLElement) {
       + `<p class="mapx-actions"><a class="btn sm" href="${cfg.links.buy}?place=${encodeURIComponent(p.n)}&budget=${budget}">${L.homes}</a>`
       + `<a href="${cfg.links.talk}?cat=developer&place=${encodeURIComponent(p.n)}#form">${L.dev}</a><a href="${sim}">${L.sim}</a></p>`
       // Prompt 19: three actions; the municipality page and the Private section as quiet links below them.
+      // Prompt 20 §4: the developer placements for this area (empty until partners sign; no prices).
+      + `<p class="mapx-devs small"><a href="${L.devHref}">${L.devs}</a></p>`
       + `<p class="mapx-more small">` + (cfg.links.pages.includes(p.s) ? `<a href="${cfg.links.map}${p.s}/">${L.page}</a>` : "")
       + (budget >= 1e6 && cfg.privateHref ? `<a href="${cfg.privateHref}">${cfg.privateLabel}</a>` : "") + `</p></div>`
       + `<button type="button" class="mapx-close" aria-label="×">×</button>`;

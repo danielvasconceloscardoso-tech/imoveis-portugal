@@ -1,5 +1,5 @@
 // Media kits (prompt 15 §1.5, prompt 18 §3.3): one PDF per edition (in its main language) and one per partner type,
-// with price list v3 and the inventory, from COPY_DECK.md ("partners.*", "kit.*") and site/src/config.ts.
+// without prices (D38: prices only in the private brochure, sponsors/brochure/), with the placements, from COPY_DECK.md ("partners.*", "kit.*") and site/src/config.ts.
 // Run from site/: npm run mediakit · Output: ../sponsors/mediakit/ImoveisPortugal_MediaKit_{ED|TYPE}_{LANG}.pdf
 import { createRequire } from "node:module";
 import { copyFileSync, mkdirSync, readFileSync, readdirSync, unlinkSync } from "node:fs";
@@ -26,21 +26,9 @@ export const KIT_TYPES: { key: string; langs: Lang[]; photo: string }[] = [
   { key: "developers", langs: ["pt", "en"], photo: "porto-douro-entardecer.jpg" },
 ];
 
-function prices(lang: Lang) {
-  const p = config.prices, e = (n: number) => eur(n, lang), f = (n: number) => e(Math.round(n * (1 - config.foundingDiscount)));
-  const pe = c("partners.per.edition", lang), ae = c("partners.all.editions", lang), fr = c("partners.from", lang);
-  return [
-    ["verified", `${e(p.verified.edition)} ${pe} · ${e(p.verified.all)} ${ae}`, `${f(p.verified.edition)} · ${f(p.verified.all)}`],
-    ["featured", `${e(p.featured.edition)} ${pe} · ${e(p.featured.all)} ${ae}`, `${f(p.featured.edition)} · ${f(p.featured.all)}`],
-    ["bank", `${e(p.bank.from)} – ${e(p.bank.to)}`, `${fr} ${f(p.bank.from)}`],
-    ["private", `${e(p.private.from)} – ${e(p.private.to)}`, `${fr} ${f(p.private.from)}`],
-    ["developer", `${fr} ${e(p.developerFrom)}`, "—"],
-  ].map(([k, list, founding]) => ({ h: c(`partners.${k}.h`, lang), p: c(`partners.${k}.p`, lang), list, founding }));
-}
-
 function html(lang: Lang, title: string, sub: string, photo: string, intro?: string, type?: string) {
   const nf = new Intl.NumberFormat(lang === "en" ? "en" : lang === "fr" ? "fr" : "pt-PT");
-  const rows = prices(lang).map((r) => `<tr><th>${r.h}<span>${r.p}</span></th><td>${r.list}</td><td><b>${r.founding}</b></td></tr>`).join("");
+  const places = ["area", "checkpoint", "private", "launch"].map((k) => `<tr><th>${c(`partners.place.${k}.h`, lang)}<span>${c(`partners.place.${k}.p`, lang)}</span></th></tr>`).join("");
   const li = (k: string, v = {}) => cl(k, lang, v).map((x) => `<li>${x}</li>`).join("");
   const img = b64(join(process.cwd(), "ebooks", "img", photo));
   return `<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><style>
@@ -64,9 +52,9 @@ ul{padding-left:4.5mm;margin:0}li{margin:0 0 2mm}.small{font-size:8.5pt;color:#6
 <div><h2>${c("partners.inventory.h", lang)}</h2><ul>${li("partners.inventory")}</ul></div></div><hr>
 ${intro && type ? `<h2>${c("kit.get.h", lang)}</h2><ul>${li(`kit.${type}.get`)}</ul><hr>` : ""}<h2>${c("partners.why.h", lang)}</h2><p>${c("partners.why.p", lang)}</p><p>${c("partners.network.p", lang)}</p>
 <div class="foot"><span>imoveisportugal.lu</span><span>2</span></div></section>
-<section class="pg"><h2>${c("partners.packages.h", lang)}</h2>
-<table><thead><tr><th></th><td>${c("partners.list.price", lang)} ${c("partners.per.year", lang)}</td><td>${c("partners.founding.price", lang)}</td></tr></thead><tbody>${rows}</tbody></table>
-<p class="small" style="margin-top:6mm">${c("partners.vat", lang)} ${c("partners.proposal", lang)} ${c("partners.founding.p", lang)}</p><hr>
+<section class="pg"><h2>${c("partners.place.h", lang)}</h2>
+<table><tbody>${places}</tbody></table>
+<p style="margin-top:6mm"><b>${c("partners.terms.h", lang)}.</b> ${c("partners.terms", lang)} ${c("partners.founding.p", lang)}</p><hr>
 <h2>${c("partners.rules.h", lang)}</h2><ul>${li("partners.rules")}</ul><hr>
 <p><b>${c("partners.cta", lang)}</b> · ${config.contactEmail}</p>
 <div class="foot"><span>imoveisportugal.lu</span><span>3</span></div></section>

@@ -619,3 +619,11 @@ html:not(.js) .step-nav { display: none; }
 .jslot { margin: 20px 0 0; padding: 16px 0; border-top: 1px dashed var(--rule); border-bottom: 1px dashed var(--rule); }
 .jslot .small { margin: 4px 0; }
 .jroles { margin: 6px 0 2px; font: 400 1.05rem/1.4 var(--serif); }
+/* Developer placements (prompt 20 §4) */
+.devs { margin: 40px 0 8px; padding-top: 24px; border-top: 1px solid var(--rule); }
+.dev-list { list-style: none; padding: 0; margin: 12px 0 0; display: grid; gap: 10px; }
+.dev-card { display: grid; gap: 4px; padding: 14px 0; border-bottom: 1px solid var(--rule); }
+.dev-empty { padding: 12px 0; border-top: 1px dashed var(--rule); color: var(--muted); }
+.dev-list li.dev-empty:last-child { border-bottom: 1px dashed var(--rule); }
+.mapx-devs { margin: 12px 0 0; }
+.mapx-devs a { color: var(--brass); }

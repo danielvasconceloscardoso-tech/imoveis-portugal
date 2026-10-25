@@ -7,6 +7,7 @@ import { Sources, fmtDate } from "../lib/content";
 import { PLACES, QUARTERS, NATIONAL, inPlace, placeName, type Place } from "../lib/places";
 import { SUB } from "../lib/tools";
 import { c, edName } from "../lib/copy";
+import DevSlots from "./DevSlots.astro";
 
 interface Props { lang: Lang; ed: EdCode; place: Place; }
 const { lang, ed, place } = Astro.props;
@@ -48,6 +49,7 @@ const others = PLACES.filter((p) => p.slug !== place.slug);
     <h2 class="h3" style="margin-top:36px">{c("place.next.h", lang)}</h2>
     <p><a class="btn" href={simHref}>{c("place.sim", lang)}</a></p>
     <p><a href={`${pathFor(lang, ed, "buy")}?place=${encodeURIComponent(place.name)}`}>{c("place.homes", lang)}</a> · <a href={`${mapBase}?place=${place.slug}`}>{c("place.map", lang)}</a></p>
+    <DevSlots lang={lang} ed={ed} slug={place.slug} />
     <nav class="others" aria-labelledby="others">
       <h2 id="others" class="h-small">{c("place.others.h", lang)}</h2>
       <p class="small" style="line-height:2">{others.map((p, i) => <>{i > 0 && " · "}<a href={`${mapBase}${p.slug}/`}>{placeName(p.name, lang)}</a></>)}</p>

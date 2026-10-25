@@ -19,7 +19,7 @@ Olá [Nome], escrevi-lhe sobre o Imóveis Portugal, o guia para quem vive fora e
 
 Assunto: Re: VdA Vieira de Almeida e quem prepara uma compra em Portugal a partir do Luxemburgo, de França, da Suíça e do Brasil
 
-Olá [Nome], uma nota breve: os dez primeiros parceiros têm 40% de desconto no primeiro ano e o mesmo preço no segundo, até 1 de dezembro. Envio-lhe o kit de imprensa e falamos 15 minutos quando lhe der jeito?
+Olá [Nome], uma nota breve: os dez primeiros parceiros têm condições de parceiro fundador, que apresentamos numa conversa curta. Envio-lhe o kit de imprensa e falamos 15 minutos quando lhe der jeito?
 
 Se preferir não receber mais emails nossos, basta responder a dizer.
 [Assinatura]

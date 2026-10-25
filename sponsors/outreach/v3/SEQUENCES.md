@@ -58,7 +58,7 @@ Olá [Nome], escrevi-lhe sobre o Imóveis Portugal, o guia para quem vive fora e
 **PT · touch 3 (email, day 7)**
 Assunto: Re: [Empresa] e quem prepara uma compra em Portugal a partir de [país]
 
-Olá [Nome], uma nota breve: os dez primeiros parceiros têm 40% de desconto no primeiro ano e o mesmo preço no segundo, até 1 de dezembro. Envio-lhe o kit de imprensa e falamos 15 minutos quando lhe der jeito?
+Olá [Nome], uma nota breve: os dez primeiros parceiros têm condições de parceiro fundador, que apresentamos numa conversa curta. Envio-lhe o kit de imprensa e falamos 15 minutos quando lhe der jeito?
 
 Se preferir não receber mais emails nossos, basta responder a dizer.
 [Assinatura]
@@ -77,7 +77,7 @@ Hello [Name], I wrote to you about Imóveis Portugal, the guide for people abroa
 **EN · touch 3 (email, day 7)**
 Subject: Re: [Company] and people abroad preparing a purchase in Portugal
 
-Hello [Name], a short note: the first ten partners get 40% off the first year and keep that price for the second, until 1 December. Shall I send the media kit and find 15 minutes that suit you?
+Hello [Name], a short note: the first ten partners get founding-partner terms, which we share on a short call. Shall I send the media kit and find 15 minutes that suit you?
 
 If you would rather not hear from us again, just reply and say so.
 [Signature]
@@ -96,7 +96,7 @@ Bonjour [Nom], je vous ai écrit au sujet d'Imóveis Portugal, le guide pour les
 **FR · touch 3 (email, jour 7)**
 Objet : Re : [Entreprise] et les personnes qui préparent un achat au Portugal depuis [pays]
 
-Bonjour [Nom], un mot rapide : les dix premiers partenaires bénéficient de 40 % de remise la première année et gardent ce prix la deuxième, jusqu'au 1er décembre. Je vous envoie le kit média et nous trouvons 15 minutes ?
+Bonjour [Nom], un mot rapide : les dix premiers partenaires bénéficient de conditions de partenaire fondateur, présentées lors d'un court échange. Je vous envoie le kit média et nous trouvons 15 minutes ?
 
 Si vous préférez ne plus recevoir nos messages, il suffit de répondre.
 [Signature]

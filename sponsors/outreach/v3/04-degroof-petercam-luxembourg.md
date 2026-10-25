@@ -19,7 +19,7 @@ Bonjour [Nom], je vous ai écrit au sujet d'Imóveis Portugal, le guide pour les
 
 Objet : Re : Degroof Petercam Luxembourg et les personnes qui préparent un achat au Portugal
 
-Bonjour [Nom], un mot rapide : les dix premiers partenaires bénéficient de 40 % de remise la première année et gardent ce prix la deuxième, jusqu'au 1er décembre. Je vous envoie le kit média et nous trouvons 15 minutes ?
+Bonjour [Nom], un mot rapide : les dix premiers partenaires bénéficient de conditions de partenaire fondateur, présentées lors d'un court échange. Je vous envoie le kit média et nous trouvons 15 minutes ?
 
 Si vous préférez ne plus recevoir nos messages, il suffit de répondre.
 [Signature]

@@ -19,7 +19,7 @@ Hello [Name], I wrote to you about Imóveis Portugal, the guide for people abroa
 
 Subject: Re: Julius Baer and people abroad preparing a purchase in Portugal
 
-Hello [Name], a short note: the first ten partners get 40% off the first year and keep that price for the second, until 1 December. Shall I send the media kit and find 15 minutes that suit you?
+Hello [Name], a short note: the first ten partners get founding-partner terms, which we share on a short call. Shall I send the media kit and find 15 minutes that suit you?
 
 If you would rather not hear from us again, just reply and say so.
 [Signature]
