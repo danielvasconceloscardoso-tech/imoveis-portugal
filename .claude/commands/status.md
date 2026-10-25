@@ -1,0 +1,1 @@
+Run `node scripts/status.mjs` from the repo root and show its output. Then add, in two or three lines, what is blocked and what the operator should do first this week. Read ops/TASKS.md for owners and due dates.
