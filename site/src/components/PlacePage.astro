@@ -1,0 +1,62 @@
+---
+// "Comprar casa em [concelho]" (prompt 15 §3.2): INE median price per m² with its trend, what a budget buys there,
+// the IMI range, the cost calculator prefilled and the partner agency. Data: src/lib/places.ts. Wording: "place.*".
+import V2 from "../layouts/V2.astro";
+import { EDITIONS, HTML_LANG, LANGS, pathFor, eur, type Lang, type EdCode } from "../i18n";
+import { Sources, fmtDate } from "../lib/content";
+import { PLACES, QUARTERS, NATIONAL, inPlace, placeName, type Place } from "../lib/places";
+import { SUB } from "../lib/tools";
+import { c, edName } from "../lib/copy";
+
+interface Props { lang: Lang; ed: EdCode; place: Place; }
+const { lang, ed, place } = Astro.props;
+const src = new Sources();
+const n = src.n("ine-m2-2026q2");
+const nf = new Intl.NumberFormat(HTML_LANG[lang]);
+const pct = (v: number | null) => (v === null ? "" : `${v >= 0 ? "+" : "−"}${nf.format(Math.abs(Math.round(v)))}${lang === "fr" ? " %" : "%"}`);
+const mapBase = pathFor(lang, ed, "map");
+const paths = Object.fromEntries(LANGS.map((l) => [l, `${pathFor(l, ed, "map")}${place.slug}/`])) as Record<Lang, string>;
+const where = inPlace(place.name, lang);
+const title = c("place.h1", lang, { in: where });
+const lede = c("place.lede", lang, { in: where, v: eur(place.m2, lang), chg: pct(place.change) });
+const budgets = [300000, 500000, 1000000, 5000000, 10000000];
+const price100 = Math.round((place.m2 * 100) / 1000) * 1000;
+const simHref = `${pathFor(lang, ed, "sims")}${SUB.cost[lang]}/?price=${price100}&own=0&resident=0&mortgage=0`;
+const qLabel = (q: string) => { const [y, k] = q.split("-Q"); return lang === "en" ? `Q${k} ${y}` : lang === "fr" ? `T${k} ${y}` : `${k}.º T ${y}`; };
+const host = `https://${EDITIONS[ed].domain}`;
+const ld = { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
+  { "@type": "ListItem", position: 1, name: "Imóveis Portugal", item: `${host}${pathFor(lang, ed, "home")}` },
+  { "@type": "ListItem", position: 2, name: c("place.crumb", lang), item: `${host}${mapBase}` },
+  { "@type": "ListItem", position: 3, name: placeName(place.name, lang), item: `${host}${paths[lang]}` },
+] };
+const others = PLACES.filter((p) => p.slug !== place.slug);
+---
+<V2 lang={lang} ed={ed} page="map" paths={paths} title={`${title} | Imóveis Portugal · ${edName(ed, lang)}`} description={lede} sticky={null}>
+  <Fragment slot="head"><script type="application/ld+json" set:html={JSON.stringify(ld)} /></Fragment>
+  <div class="frame read ph">
+    <p class="small" style="margin:0 0 10px"><a href={mapBase}>{c("place.crumb", lang)}</a> · {place.region}</p>
+    <h1>{title}</h1>
+    <p class="lede">{lede}<a class="sup" href={`#fonte-${n}`}>{n}</a></p>
+    <p class="small">{c("place.region", lang, { region: place.region, pt: eur(NATIONAL, lang) })}</p>
+  </div>
+  <div class="frame read place">
+    <h2 class="h3">{c("place.budgets.h", lang)}</h2>
+    <dl class="bill">{budgets.map((b) => <><dt>{eur(b, lang)}</dt><dd>{c("place.budget", lang, { m2: nf.format(Math.round(b / place.m2)) })}</dd></>)}</dl>
+    <h2 class="h3" style="margin-top:36px">{c("place.trend.h", lang)}</h2>
+    <dl class="bill">{QUARTERS.map((q, i) => <><dt>{qLabel(q)}</dt><dd>{place.series[i] ? `${eur(place.series[i]!, lang)}/m²` : "—"}</dd></>)}</dl>
+    <p class="small">{c("data.note", lang)} {c("place.imi", lang)}</p>
+    <h2 class="h3" style="margin-top:36px">{c("place.next.h", lang)}</h2>
+    <p><a class="btn" href={simHref}>{c("place.sim", lang)}</a></p>
+    <p><a href={`${pathFor(lang, ed, "buy")}?place=${encodeURIComponent(place.name)}`}>{c("place.homes", lang)}</a> · <a href={`${mapBase}?place=${place.slug}`}>{c("place.map", lang)}</a></p>
+    <nav class="others" aria-labelledby="others">
+      <h2 id="others" class="h-small">{c("place.others.h", lang)}</h2>
+      <p class="small" style="line-height:2">{others.map((p, i) => <>{i > 0 && " · "}<a href={`${mapBase}${p.slug}/`}>{placeName(p.name, lang)}</a></>)}</p>
+    </nav>
+  </div>
+  <section class="sources-list" aria-labelledby="fontes">
+    <div class="frame read">
+      <h2 id="fontes" class="h-small">{c("common.sources", lang)}</h2>
+      <ol>{src.list.map((s, i) => <li id={`fonte-${i + 1}`}><a href={s.url} rel="noopener">{s.title}</a>{s.checked && `, ${c("common.checked", lang, { date: fmtDate(lang, s.checked) })}`}.</li>)}</ol>
+    </div>
+  </section>
+</V2>

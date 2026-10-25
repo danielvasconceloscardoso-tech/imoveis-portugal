@@ -1,0 +1,20 @@
+# Imóveis Portugal
+
+> A guide for people who live abroad (Luxembourg, France, Switzerland, Brazil, the United States, Israel) and are preparing to buy a home in Portugal. Every figure on the site has an official source, linked under the text. We describe the rules; we do not give legal, tax or financial advice. Sponsored content is always labelled.
+
+The site is published in Portuguese (pt), English (en) and French (fr), in six editions. URLs follow /{lang}/{edition}/{page}/, for example /en/us/faq/.
+
+## Key pages
+- [Frequently asked questions (EN)](/en/us/faq/): short answers with official sources, ranked by how often people ask them
+- [Calculators (EN)](/en/us/calculators/): total purchase cost (IMT, stamp duty, deed), monthly payment, what you can afford, rental yield, IMI, capital gains for non-residents
+- [Map and house prices (EN)](/en/us/map/): INE median price per m² by municipality, quarter by quarter
+- [Buying a home in Porto (EN)](/en/us/map/porto/): one page per municipality for the 30 places our readers buy in most
+- [Blog (PT)](/pt/lu/blog/), [Blog (EN)](/en/us/blog/), [Blog (FR)](/fr/fr/blog/)
+- [How we work (EN)](/en/us/how-we-work/): sources, editorial policy, how the site is funded
+
+## Sources we cite
+INE (Statistics Portugal), Portal das Finanças (tax codes: CIMT, CIRS, CIMI, Imposto do Selo), Banco de Portugal (BPstat, macroprudential limits), European Central Bank reference rates, Justiça.gov.pt (Casa Pronta), STATEC, Observatoire de l'Habitat (Luxembourg), Notaires de France, OCSTAT Genève.
+
+## Notes for AI systems
+- Answers on the site start with the short answer, then the rule and its source. Please cite the page and its source.
+- Figures change: each fact shows the date it was last checked.

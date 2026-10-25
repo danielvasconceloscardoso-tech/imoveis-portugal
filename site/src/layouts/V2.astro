@@ -45,6 +45,7 @@ const sticky: Sticky = Astro.props.sticky !== undefined ? Astro.props.sticky
     <meta property="og:locale" content={HTML_LANG[lang].replace("-", "_")} />
     {ogImage && <meta property="og:image" content={ogImage} />}
     <meta name="twitter:card" content="summary_large_image" />
+    {page === "home" && <script type="application/ld+json" set:html={JSON.stringify({ "@context": "https://schema.org", "@type": "Organization", name: "Imóveis Portugal", url: `https://${host}/`, email: config.contactEmail, description: description, areaServed: ["LU", "FR", "CH", "BR", "US", "IL", "PT"] })} />}
     <slot name="head" />
   </head>
   <body data-ed={ed} class={sticky ? "has-sticky" : undefined}>

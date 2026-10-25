@@ -2665,3 +2665,70 @@ How to edit:
 - PT: Os primeiros artigos chegam em breve.
 - EN: The first articles are coming soon.
 - FR: Les premiers articles arrivent bientôt.
+
+## place
+
+### h1
+- PT: Comprar casa {in}
+- EN: Buying a home {in}
+- FR: Acheter {in}
+
+### lede
+- PT: O preço mediano das casas vendidas {in} nos últimos 12 meses foi de {v} por metro quadrado, {chg} num ano.
+- EN: The median price of homes sold {in} over the last 12 months was {v} per square metre, {chg} on a year earlier.
+- FR: Le prix médian des logements vendus {in} sur les 12 derniers mois s'élève à {v} le mètre carré, {chg} sur un an.
+
+### region
+- PT: Região: {region}. Mediana nacional: {pt} por m².
+- EN: Region: {region}. National median: {pt} per m².
+- FR: Région : {region}. Médiane nationale : {pt} le m².
+
+### budgets.h
+- PT: O que o seu orçamento compra aqui
+- EN: What your budget buys here
+- FR: Ce que votre budget permet ici
+
+### budget
+- PT: cerca de {m2} m²
+- EN: about {m2} m²
+- FR: environ {m2} m²
+
+### trend.h
+- PT: Trimestre a trimestre
+- EN: Quarter by quarter
+- FR: Trimestre après trimestre
+
+### imi
+- PT: O IMI anual é fixado pelo município, entre 0,3% e 0,45% do valor patrimonial tributário.
+- EN: Annual property tax (IMI) is set by the municipality, between 0.3% and 0.45% of the tax value.
+- FR: La taxe foncière annuelle (IMI) est fixée par la commune, entre 0,3 % et 0,45 % de la valeur fiscale.
+
+### next.h
+- PT: Os próximos passos
+- EN: Next steps
+- FR: Les prochaines étapes
+
+### sim
+- PT: Simular o custo total de uma casa de 100 m² ao preço mediano
+- EN: Work out the total cost of a 100 m² home at the median price
+- FR: Calculer le coût total d'un logement de 100 m² au prix médian
+
+### homes
+- PT: Ver casas nesta zona com a agência parceira
+- EN: See homes in this area with the partner agency
+- FR: Voir des biens dans ce secteur avec l'agence partenaire
+
+### map
+- PT: Ver no mapa
+- EN: See it on the map
+- FR: Voir sur la carte
+
+### others.h
+- PT: Outros concelhos
+- EN: Other municipalities
+- FR: Autres communes
+
+### crumb
+- PT: Mapa
+- EN: Map
+- FR: Carte
