@@ -1,20 +1,35 @@
-# USA edition, Portuguese (pt-PT, D18): questions added to common-pt.yaml. Same facts as us-en.yaml.
+# US edition, European Portuguese: questions added to common-pt.yaml (same rules).
 
-- id: us-pt-01
-  q: Tenho de declarar a minha conta bancária portuguesa nos Estados Unidos?
+- id: pt-us-visa
+  rank: 6
+  stage: before
+  cta: lawyer
+  q: "Comprar casa dá direito a viver em Portugal?"
   a: >-
-    Se o valor somado das suas contas no estrangeiro passar de 10 000 USD em algum momento do ano, os US
-    persons entregam o FBAR à FinCEN. Quem vive fora dos Estados Unidos pode ainda ter de entregar o formulário
-    8938: ativos no estrangeiro acima de 200 000 USD no fim do ano ou 300 000 USD a qualquer momento
-    (individual; 400 000 e 600 000 USD em conjunto).
-  cta: talk-tax
+    Comprar e viver em Portugal são processos separados. Para viver cá precisa de um visto de residência,
+    por exemplo o de quem vive de rendimentos próprios (D7). Sobre a autorização de residência para
+    investimento (golden visa), fale com um advogado: não resumimos aqui regras que não verificámos na
+    fonte.
+  facts: [pt-nonresidents-buy, pt-visa-own-income]
+
+- id: pt-us-report
+  rank: 8.5
+  stage: after
+  cta: tax
+  q: "Tenho de declarar a conta portuguesa nos Estados Unidos?"
+  a: >-
+    Se o total das suas contas no estrangeiro passar de 10 000 USD em algum momento do ano, os US persons
+    entregam o FBAR à FinCEN. Quem vive fora dos Estados Unidos pode ainda ter de entregar o formulário
+    8938, acima de 200 000 USD no fim do ano ou 300 000 USD a qualquer momento (individual).
   facts: [us-fbar, us-8938-abroad]
 
-- id: us-pt-02
-  q: A mais-valia da venda da casa em Portugal é tributada nos Estados Unidos?
+- id: pt-us-sale
+  rank: 10.5
+  stage: after
+  cta: tax
+  q: "A venda da casa em Portugal é tributada nos Estados Unidos?"
   a: >-
     Pela convenção entre Portugal e os Estados Unidos, Portugal pode tributar as mais-valias de imóveis
     situados em Portugal, e os Estados Unidos mantêm o direito de tributar os seus cidadãos. O crédito por
-    imposto estrangeiro (formulário 1116) permite abater o imposto português ao imposto americano sobre o mesmo rendimento.
-  cta: talk-tax
+    imposto estrangeiro (formulário 1116) permite abater o imposto português ao americano.
   facts: [us-pt-treaty-gains]

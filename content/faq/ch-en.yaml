@@ -1,17 +1,32 @@
-# Switzerland edition, English: questions added to common-en.yaml.
+# CH edition, American English: questions added to common-en.yaml (same rules).
 
-- id: ch-en-01
-  q: Can I use my 2nd pillar to buy a home in Portugal?
+- id: en-ch-2p
+  rank: 3.5
+  stage: before
+  cta: tax
+  q: "Can I use my 2nd pillar to buy a home in Portugal?"
   a: >-
-    Only for your main residence. Federal rules allow an early withdrawal from the 2nd pillar for the home you
-    live in, in Switzerland or abroad, but not for a holiday home. The minimum withdrawal is 20,000 francs.
-  cta: talk-tax
+    Only for your main residence. Federal rules allow an early 2nd-pillar withdrawal for the home you live
+    in, in Switzerland or abroad, but not for a vacation home. The minimum withdrawal is 20,000 francs.
   facts: [ch-2nd-pillar-abroad]
 
-- id: ch-en-02
-  q: What about the 3rd pillar (3a)?
+- id: en-ch-2p-rules
+  rank: 3.6
+  stage: before
+  cta: tax
+  q: "What are the conditions and effects of a 2nd-pillar withdrawal?"
   a: >-
-    Pillar 3a money can also be withdrawn early to buy a home for your own use or to repay a mortgage. The exact
-    conditions, such as timing and age, depend on your contract and the federal rules.
-  cta: talk-tax
+    One property at a time, one withdrawal every 5 years, a request at least 3 years before retirement and
+    your spouse's written consent. After 50 the amount is capped. The withdrawal reduces your future pension
+    and must be repaid if you sell, unless you buy another home to live in within 2 years.
+  facts: [ch-2p-conditions, ch-2p-effects]
+
+- id: en-ch-3a
+  rank: 11.5
+  stage: before
+  cta: tax
+  q: "What about pillar 3a?"
+  a: >-
+    Pillar 3a can also be withdrawn early to buy a home for your own use or to pay down a mortgage. The
+    specific conditions, such as timing and age, depend on your contract and federal rules.
   facts: [ch-3a-home]

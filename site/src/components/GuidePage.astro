@@ -1,45 +1,51 @@
 ---
-// Free e-book download page: "What it really costs to buy in Portugal", one per edition in PT, EN and FR,
-// built from content/facts/facts.csv by `npm run ebooks`. The newsletter signup sits next to the download.
-import C from "../layouts/C.astro";
+// Free e-book page (v2): one report per edition in pt, en and fr, built from content/facts/facts.csv by
+// `npm run ebooks` (cover image in public/ebooks/covers/). One action: download; the newsletter comes second.
+import V2 from "../layouts/V2.astro";
 import Embed from "./Embed.astro";
 import { config } from "../config";
 import { t, pathFor, type Lang, type EdCode } from "../i18n";
-import { strings, EBOOK } from "../lib/content";
+import { EBOOK, DISCLAIMER } from "../lib/content";
+import { ui } from "../lib/ui";
 import { COUNTRIES } from "../../ebooks/countries";
+import { PAGES } from "../../ebooks/pages";
 
 interface Props { lang: Lang; ed: EdCode; }
 const { lang, ed } = Astro.props;
-const S = strings(lang);
-const T = t(ed, lang);
+const U = ui(lang), T = t(ed, lang);
+const n = PAGES;
 const G = {
-  pt: { lede: "Um guia gratuito de 10 páginas, com a fonte oficial de cada número.", inside: "O que está lá dentro", items: ["Todos os impostos da compra em 2026, incluindo a nova taxa de IMT para não residentes e as suas exceções.", "Contas feitas para casas de 250 000 € e 400 000 €, como residente e como não residente.", "As regras do crédito do Banco de Portugal, os impostos anuais e uma lista de verificação para comprar à distância.", "{c}: o representante fiscal e as regras do país onde vive que estão verificadas."], dl: "Descarregar o guia (PDF)", signup: "Receba também a newsletter semanal" },
-  en: { lede: "A free 10-page guide, with the official source for every number.", inside: "What's inside", items: ["Every purchase tax in 2026, including the new transfer tax rate for non-residents and its exceptions.", "Worked examples for homes at 250,000 € and 400,000 €, as a resident and as a non-resident.", "Banco de Portugal's mortgage rules, the yearly taxes and a checklist for buying from abroad.", "{c}: the tax representative and the verified rules of the country where you live."], dl: "Download the guide (PDF)", signup: "Get the weekly newsletter too" },
-  fr: { lede: "Un guide gratuit de 10 pages, avec la source officielle de chaque chiffre.", inside: "Ce qu'il contient", items: ["Tous les impôts de l'achat en 2026, dont le nouveau taux d'IMT pour les non-résidents et ses exceptions.", "Des calculs pour des biens de 250 000 € et 400 000 €, en résident et en non-résident.", "Les règles de crédit de la Banque du Portugal, les impôts annuels et une liste de contrôle pour acheter à distance.", "{c} : le représentant fiscal et les règles vérifiées de votre pays de résidence."], dl: "Télécharger le guide (PDF)", signup: "Recevez aussi la newsletter hebdomadaire" },
+  pt: { label: "Relatório gratuito · PDF", lede: `${n} páginas, com a fonte oficial de cada número e contas feitas para casas de 250 000 € e 400 000 €.`, inside: "O que vai encontrar", items: ["Todos os impostos da compra em 2026, incluindo a taxa de IMT para não residentes e as exceções.", "Contas feitas como residente e como não residente, em quadro e em gráfico.", "As regras do crédito do Banco de Portugal, os impostos anuais e uma lista de verificação para comprar à distância.", "{c}: o representante fiscal e as regras verificadas do país onde vive."], dl: "Descarregar o relatório (PDF)", signup: "Receba também a newsletter semanal" },
+  en: { label: "Free report · PDF", lede: `${n} pages, with the official source for every number and worked examples for homes at 250,000 € and 400,000 €.`, inside: "What's inside", items: ["Every purchase tax in 2026, including the transfer tax rate for non-residents and its exceptions.", "Worked examples as a resident and as a non-resident, in tables and charts.", "Banco de Portugal's mortgage rules, the yearly taxes and a checklist for buying from abroad.", "{c}: the tax representative and the verified rules where you live."], dl: "Download the report (PDF)", signup: "Get the weekly newsletter too" },
+  fr: { label: "Rapport gratuit · PDF", lede: `${n} pages, avec la source officielle de chaque chiffre et des exemples chiffrés pour des biens de 250 000 € et 400 000 €.`, inside: "Au sommaire", items: ["Tous les impôts de l'achat en 2026, dont le taux d'IMT des non-résidents et ses exceptions.", "Des exemples chiffrés en résident et en non-résident, en tableaux et en graphiques.", "Les règles de crédit de la Banque du Portugal, les impôts annuels et une liste de contrôle pour acheter à distance.", "{c} : le représentant fiscal et les règles vérifiées de votre pays."], dl: "Télécharger le rapport (PDF)", signup: "Recevez aussi la newsletter hebdomadaire" },
 }[lang];
 ---
-<C lang={lang} ed={ed} page="guide" title={`${EBOOK.title[lang]} | Imóveis Portugal`} description={G.lede}>
-  <div class="w ph g">
-    <h1>{EBOOK.title[lang]}</h1>
-    <p class="lede">{G.lede}</p>
-  </div>
-  <div class="w">
-    <section class="row g" aria-labelledby="inside">
-      <h2 id="inside">{G.inside}</h2>
-      <div class="body">
-        <ul class="cats">{G.items.map((i) => i.replace("{c}", COUNTRIES[ed].h[lang])).map((i) => <li><p style="color:var(--ink)">{i}</p></li>)}</ul>
+<V2 lang={lang} ed={ed} page="guide" title={`${EBOOK.title[lang]} | Imóveis Portugal`} description={G.lede}>
+  <section class="hero">
+    <div class="frame grid">
+      <div>
+        <p class="label">{G.label}</p>
+        <h1>{EBOOK.title[lang]}</h1>
+        <p class="lede">{G.lede}</p>
         <a class="btn" href={EBOOK.file(lang, ed)} download>{G.dl}</a>
       </div>
-    </section>
-    <section class="row g" aria-labelledby="signup">
+      <img src={`/ebooks/covers/${ed}-${lang}.webp`} width="600" height="849" alt={EBOOK.title[lang]} style="max-width:360px;width:100%;justify-self:center;box-shadow:0 24px 48px rgba(21,24,29,.18);border-radius:4px" />
+    </div>
+  </section>
+  <section class="band white" aria-labelledby="inside">
+    <div class="frame split">
+      <div><h2 id="inside">{G.inside}</h2></div>
+      <ul class="ticks">{G.items.map((i) => <li>{i.replace("{c}", COUNTRIES[ed].h[lang])}</li>)}</ul>
+    </div>
+  </section>
+  <section class="band" aria-labelledby="signup">
+    <div class="frame read">
       <h2 id="signup">{G.signup}</h2>
-      <div class="body">
-        <Embed id={config.forms.newsletter[lang]} title={G.signup} pending={T.formPending(config.contactEmail)} hidden={{ edition: ed, lang }} height={260} />
-        <p class="small"><a href={pathFor(lang, ed, "privacy")}>{T.footer.privacy}</a></p>
+      <div style="margin-top:16px">
+        <Embed id={config.forms.newsletter[lang]} title={G.signup} pending={T.formPending(config.contactEmail)} hidden={{ edition: ed, lang }} height={200} />
       </div>
-    </section>
-  </div>
-  <div class="disc">
-    <div class="w g"><p>{S.disclaimer}</p></div>
-  </div>
-</C>
+      <p class="small" style="margin-top:12px"><a href={pathFor(lang, ed, "privacy")}>{U.foot.privacy}</a></p>
+      <p class="disc">{DISCLAIMER[lang]}</p>
+    </div>
+  </section>
+</V2>

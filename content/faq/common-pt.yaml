@@ -1,110 +1,189 @@
-# Common FAQ, Portuguese (pt-PT). Used by the LU and CH (PT) editions.
-# Source: content/FAQ.md (CEO master). Every number comes from content/facts/facts.csv (ids in `facts`).
-# Rules: answer under 70 words, describes and never advises, one next step (`cta`).
-# cta keys: talk-lawyer, talk-bank, talk-tax, talk-fx, agency, guide.
+# FAQ shared by every edition, European Portuguese (prompt 09). Written natively, not translated.
+# Questions ranked by search interest (rank), grouped by stage (before, buying, after); see content/FAQ_SOURCES.md.
+# Rules: answer under 70 words, facts only from content/facts/facts.csv (ids in `facts`), describe never advise,
+# one partner action (`cta`: lawyer, bank, tax, fx, developer, agency). Terms follow content/GLOSSARY.md.
 
-- id: pt-01
-  q: Posso comprar casa em Portugal se não viver lá?
+- id: pt-buy-abroad
+  rank: 1
+  stage: before
+  cta: lawyer
+  q: "Posso comprar casa em Portugal se viver no estrangeiro?"
   a: >-
-    Sim. Quem vive fora compra casa em Portugal e a lei do IMT até tem uma taxa própria para não residentes.
-    Antes de assinar precisa de um número de contribuinte (NIF). Quem vive fora da UE tem de nomear um
-    representante fiscal, salvo se aderir às notificações eletrónicas das Finanças; dentro da UE é opcional.
-  cta: talk-lawyer
+    Sim. Não precisa de ser residente: a lei do IMT tem até uma taxa própria para quem não é residente
+    fiscal. Antes de assinar precisa de um número de contribuinte (NIF). Quem vive fora da UE tem de nomear
+    um representante fiscal, salvo se aderir às notificações eletrónicas das Finanças.
   facts: [pt-nonresidents-buy, pt-nif-nonresident, pt-tax-rep]
 
-- id: pt-02
-  q: Quanto custa além do preço da casa?
+- id: pt-costs
+  rank: 2
+  stage: before
+  cta: tax
+  q: "Quanto custa comprar casa, além do preço?"
   a: >-
-    IMT, imposto do selo de 0,8% sobre o preço, escritura e registo. Desde maio de 2026, quem não é residente
-    fiscal em Portugal paga IMT à taxa única de 7,5%, salvo exceções, como tornar-se residente nos dois anos
-    seguintes. Com crédito, soma-se imposto do selo de 0,6% sobre o empréstimo e de 4% sobre os juros.
-  cta: guide
+    Na compra paga IMT e imposto do selo de 0,8% sobre o valor. Quem não é residente fiscal em Portugal paga
+    IMT à taxa única de 7,5%, salvo exceções. Com crédito, soma-se imposto do selo de 0,6% sobre o
+    empréstimo e de 4% sobre os juros. Escritura, registo e honorários dependem do serviço escolhido.
   facts: [pt-is-purchase, pt-imt-nonresident-flat, pt-imt-nonresident-exceptions, pt-is-loan-5y, pt-is-interest]
 
-- id: pt-03
-  q: Consigo crédito à habitação sem viver em Portugal?
+- id: pt-mortgage
+  rank: 3
+  stage: before
+  cta: bank
+  q: "Consigo crédito à habitação sem viver em Portugal?"
   a: >-
-    Cada banco decide e avalia o rendimento de quem pede. Para todos valem os limites do Banco de Portugal:
-    o empréstimo pode ir até 90% do valor para habitação própria e permanente e até 80% para outras finalidades,
-    como uma casa de férias. O valor de referência é o mais baixo entre o preço e a avaliação.
-  cta: talk-bank
+    Pode pedir, e cada banco decide. Os limites do Banco de Portugal valem para todos: até 90% do valor para
+    habitação própria e permanente e até 80% para outros fins, como uma casa de férias. Conta o valor mais
+    baixo entre o preço e a avaliação do banco.
   facts: [pt-ltv-limits]
 
-- id: pt-04
-  q: Tenho de estar em Portugal para assinar?
+- id: pt-nif
+  rank: 4
+  stage: before
+  cta: lawyer
+  q: "Como peço o NIF?"
   a: >-
-    Não é obrigatório. Pode dar uma procuração, por exemplo a um advogado, assinada num consulado português
-    ou perante um notário do país onde vive. Neste segundo caso, a procuração precisa da Apostila de Haia para
-    produzir efeitos em Portugal.
-  cta: talk-lawyer
-  facts: [pt-poa-apostille]
+    O número de contribuinte pede-se online, através de um representante legal, ou presencialmente nas
+    Finanças. Não precisa de representante fiscal para o obter. Depois da compra, quem vive fora da UE tem
+    15 dias para nomear um representante fiscal ou aderir às notificações eletrónicas.
+  facts: [pt-nif-nonresident, pt-tax-rep]
 
-- id: pt-05
-  q: O que é o CPCV?
+- id: pt-imt-nonres
+  rank: 5
+  stage: buying
+  cta: tax
+  q: "Os não residentes pagam mais IMT?"
   a: >-
-    É o contrato-promessa de compra e venda, assinado antes da escritura. Fixa o preço, a data e o sinal.
-    Se o comprador não cumprir por causa que lhe seja imputável, perde o sinal; se for o vendedor, o comprador
-    pode exigir o dobro do que pagou (Código Civil, artigo 442.º). Um advogado parceiro pode revê-lo antes da assinatura.
-  cta: talk-lawyer
-  facts: [pt-sinal-442]
+    Desde maio de 2026, quem compra casa sem ser residente fiscal em Portugal paga IMT à taxa única de 7,5%,
+    sem isenções. Há exceções: quem já foi considerado residente fiscal, quem se torna residente nos dois
+    anos seguintes e quem arrenda a casa para habitação, com renda dentro dos limites da lei. Nestes dois
+    casos pede depois a devolução da diferença.
+  facts: [pt-imt-nonresident-flat, pt-imt-nonresident-exceptions]
 
-- id: pt-06
-  q: Que impostos pago todos os anos?
+- id: pt-lawyer
+  rank: 7
+  stage: buying
+  cta: lawyer
+  q: "Preciso de advogado para comprar casa?"
   a: >-
-    O IMI, um imposto municipal entre 0,3% e 0,45% do valor patrimonial tributário do imóvel, com a taxa
-    fixada por cada câmara. O AIMI só se aplica à soma dos valores patrimoniais acima de 600 000 € por pessoa.
-  cta: talk-tax
+    A escolha é sua. Um advogado pode verificar o registo do imóvel, rever o contrato-promessa antes de o
+    assinar e representá-lo na escritura com uma procuração, se não puder estar em Portugal.
+  facts: [pt-poa-apostille, pt-sinal-442]
+
+- id: pt-yearly
+  rank: 8
+  stage: after
+  cta: tax
+  q: "Que impostos pago todos os anos?"
+  a: >-
+    O IMI, um imposto municipal entre 0,3% e 0,45% do valor patrimonial tributário, com a taxa fixada por
+    cada câmara. O AIMI só se aplica à soma dos valores patrimoniais acima de 600 000 € por pessoa.
   facts: [pt-imi-rates, pt-aimi-deduction]
 
-- id: pt-07
-  q: Posso arrendar a casa?
+- id: pt-rent
+  rank: 9
+  stage: after
+  cta: tax
+  q: "Posso arrendar a casa?"
   a: >-
     Sim, a longo prazo ou em alojamento local. O alojamento local exige registo prévio, e a câmara pode
-    opor-se em 60 dias, ou em 90 nas áreas de contenção que o município define. As rendas de habitação de
-    não residentes são tributadas em Portugal a 25%, com reduções para contratos longos. O país onde vive
-    pode ter regras próprias.
-  cta: talk-tax
+    opor-se em 60 dias, ou em 90 nas áreas de contenção. As rendas de habitação de não residentes pagam 25%
+    em Portugal, com reduções para contratos longos.
   facts: [pt-al-registration, pt-rent-tax-nonresident]
 
-- id: pt-08
-  q: Como transfiro o dinheiro?
+- id: pt-sell
+  rank: 10
+  stage: after
+  cta: tax
+  q: "Quanto pago de imposto quando vender a casa?"
+  a: >-
+    Para o IRS, a mais-valia na venda de um imóvel conta apenas em 50% do seu valor. A taxa final depende
+    dos seus rendimentos, e o país onde vive pode ter regras próprias para essa venda.
+  facts: [pt-cg-50pct]
+
+- id: pt-borrow
+  rank: 11
+  stage: before
+  cta: bank
+  q: "Quanto me empresta o banco?"
+  a: >-
+    Depende do seu rendimento. Pelas regras do Banco de Portugal, a soma das prestações de todos os créditos
+    não deve passar de 45% do rendimento líquido. O prazo vai até 40 anos para quem tem até 35 anos de
+    idade, e até 35 anos a partir dessa idade.
+  facts: [pt-dsti-45, pt-maturity-limits]
+
+- id: pt-sign
+  rank: 12
+  stage: buying
+  cta: lawyer
+  q: "Tenho de estar em Portugal para assinar?"
+  a: >-
+    Não. Pode passar uma procuração, por exemplo a um advogado, assinada num consulado português ou perante
+    um notário do país onde vive. Neste segundo caso, a procuração precisa da Apostila de Haia para valer em
+    Portugal.
+  facts: [pt-poa-apostille]
+
+- id: pt-cpcv
+  rank: 13
+  stage: buying
+  cta: lawyer
+  q: "O que é o contrato-promessa (CPCV)?"
+  a: >-
+    É o contrato assinado antes da escritura, que fixa o preço, a data e o sinal. Se o comprador falhar por
+    culpa sua, perde o sinal; se for o vendedor, o comprador pode exigir o dobro do que pagou (Código Civil,
+    artigo 442.º).
+  facts: [pt-sinal-442]
+
+- id: pt-money
+  rank: 14
+  stage: buying
+  cta: fx
+  q: "Como transfiro o dinheiro para Portugal?"
   a: >-
     Pelo seu banco ou por um serviço de transferências, e as condições de câmbio variam de um para outro.
-    Bancos, notários e advogados têm de obter informação sobre a origem dos fundos quando a operação o
-    justifica (Lei 83/2017), por isso podem pedir comprovativos de onde vem o dinheiro.
-  cta: talk-fx
+    Bancos, notários e advogados têm de conhecer a origem dos fundos quando a operação o justifica (Lei
+    83/2017), por isso podem pedir comprovativos.
   facts: [pt-aml-funds]
 
-- id: pt-09
-  q: Herdei uma casa em Portugal. E agora?
+- id: pt-imt-calc
+  rank: 15
+  stage: buying
+  cta: tax
+  q: "Como se calcula o IMT e quando se paga?"
   a: >-
-    Os herdeiros decidem em conjunto se ficam com a casa, a vendem ou a arrendam. Cônjuge ou unido de facto,
-    filhos e pais estão isentos do imposto do selo de 10% sobre a herança; os outros herdeiros pagam-no.
-    Os registos e as restantes formalidades mantêm-se para todos.
-  cta: talk-lawyer
-  facts: [pt-is-inheritance-exempt]
+    Para residentes, as taxas de 2026 dependem do uso da casa: na habitação própria e permanente não se paga
+    IMT até 106 346 €; numa casa de férias paga-se 1% nesse escalão. Acima, a taxa sobe por escalões. O IMT
+    paga-se no dia da liquidação ou nos 30 dias seguintes.
+  facts: [pt-imt-hpp-2026, pt-imt-second-home-2026, pt-imt-payment]
 
-- id: pt-10
-  q: É boa altura para comprar?
+- id: pt-timing
+  rank: 16
+  stage: before
+  cta: agency
+  q: "É boa altura para comprar?"
   a: >-
     Não damos conselhos de investimento. Os factos: segundo o INE, os preços da habitação subiram 17,6% em
     2025, a maior subida da série. O que conta é o seu orçamento, a região e os seus planos. Diga-nos o que
     procura e a agência parceira mostra-lhe o que existe.
-  cta: agency
   facts: [pt-ine-prices-2025]
 
-- id: pt-11
-  q: Podem encontrar-me uma casa?
-  a: >-
-    Sim. Diga-nos a região, o orçamento e o prazo. A agência imobiliária licenciada parceira contacta-o, sem
-    custos para si, e pode organizar visitas para quando estiver em Portugal.
+- id: pt-find
+  rank: 17
+  stage: before
   cta: agency
+  q: "Podem encontrar-me uma casa?"
+  a: >-
+    Sim. Diga-nos a região, o orçamento e o prazo. O pedido segue para a nossa agência parceira licenciada,
+    a Habinedita Gondomar, que o contacta sem custos para si e pode marcar visitas para quando estiver em
+    Portugal.
   facts: []
 
-- id: pt-12
-  q: Isto é aconselhamento financeiro, jurídico ou fiscal?
+- id: pt-inherit
+  rank: 18
+  stage: after
+  cta: lawyer
+  q: "Herdei uma casa em Portugal. E agora?"
   a: >-
-    Não. Reunimos informação de fontes oficiais para que perceba as regras. Para o seu caso, fale com um
-    profissional: podemos pô-lo em contacto com os nossos parceiros.
-  cta: talk-lawyer
-  facts: []
+    Os herdeiros decidem em conjunto se ficam com a casa, a vendem ou a arrendam. Cônjuge ou unido de facto,
+    filhos e pais estão isentos do imposto do selo de 10% sobre a herança; os outros herdeiros pagam-no. Os
+    registos mantêm-se obrigatórios para todos.
+  facts: [pt-is-inheritance-exempt]

@@ -5,13 +5,12 @@ import { readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import yaml from "js-yaml";
 import { config } from "../config";
-import { pathFor, HTML_LANG, type EdCode, type Lang } from "../i18n";
+import { pathFor, HTML_LANG, EDITIONS, type EdCode, type Lang } from "../i18n";
 
 // Builds run from site/ (npm run build, Cloudflare root directory "site"); content/ sits next to it.
 const contentDir = join(process.cwd(), "..", "content");
 
-type Cat = "lawyer" | "bank" | "tax" | "fx" | "developer";
-export type CtaKey = "talk-lawyer" | "talk-bank" | "talk-tax" | "talk-fx" | "talk-developer" | "agency" | "guide";
+export type Cat = "lawyer" | "bank" | "tax" | "fx" | "developer";
 
 // ---------- facts ----------
 export type Fact = { id: string; claim: string; value: string; source_title: string; source_url: string; checked_on: string };
@@ -34,17 +33,18 @@ export const FACTS: Record<string, Fact> = Object.fromEntries(
   factRows.slice(1).filter((r) => r[0]).map((r) => [r[0], Object.fromEntries(head.map((h, i) => [h, r[i]])) as Fact]),
 );
 
-// ---------- FAQ: common-{lang}.yaml plus the edition's own {ed}-{lang}.yaml ----------
-export type FaqItem = { id: string; q: string; a: string; cta: CtaKey; facts: string[] };
+// ---------- FAQ: common-{lang}.yaml plus the edition's own {ed}-{lang}.yaml (prompt 09) ----------
+export type Stage = "before" | "buying" | "after";
+export type FaqItem = { id: string; rank: number; stage: Stage; q: string; a: string; cta: Cat | "agency"; facts: string[] };
 const loadYaml = (name: string) => {
   const f = join(contentDir, "faq", `${name}.yaml`);
   return existsSync(f) ? ((yaml.load(readFileSync(f, "utf8")) || []) as FaqItem[]) : [];
 };
-// Order: common 1–9, then the edition's own questions, then common 10–12 (market, agency, advice).
+// Common and edition questions merged and ordered by search interest (rank).
 export function faqFor(ed: EdCode, lang: Lang): FaqItem[] {
-  const common = loadYaml(`common-${lang}`), own = loadYaml(`${ed}-${lang}`);
-  for (const it of [...common, ...own]) for (const f of it.facts || []) if (!FACTS[f]) throw new Error(`FAQ ${it.id}: unknown fact ${f}`);
-  return [...common.slice(0, 9), ...own, ...common.slice(9)];
+  const items = [...loadYaml(`common-${lang}`), ...loadYaml(`${ed}-${lang}`)];
+  for (const it of items) for (const f of it.facts || []) if (!FACTS[f]) throw new Error(`FAQ ${it.id}: unknown fact ${f}`);
+  return items.sort((x, y) => x.rank - y.rank);
 }
 
 // ---------- disclaimers (single source: the editorial policy) ----------
@@ -66,7 +66,8 @@ const S = {
     talk: {
       title: "Falar com um parceiro",
       lede: "Para a sua situação concreta, deixe-nos a pergunta e a categoria. Encaminhamos o pedido para um parceiro dessa categoria.",
-      launch: "Os primeiros parceiros são anunciados no lançamento, a 1 de dezembro de 2026. Até lá, recebemos o seu pedido por email e respondemos quando houver um parceiro na categoria.",
+      launch: "Os parceiros destas categorias são anunciados no lançamento, a 1 de dezembro de 2026. Até lá, o seu pedido chega-nos por email e respondemos assim que houver um parceiro na categoria.",
+      agencyP: "A nossa agência parceira para comprar ou vender casa. Acompanha compradores que vivem fora de Portugal: procura, visitas e negociação.",
       catsH: "Categorias",
       cats: { lawyer: ["Advogado", "Compra à distância, procuração, contrato-promessa, heranças."], bank: ["Banco", "Crédito à habitação para quem vive fora."], tax: ["Consultor fiscal", "Impostos em Portugal e no país onde vive."], fx: ["Transferências de dinheiro", "Câmbio e envio de valores elevados."], developer: ["Promotor imobiliário", "Empreendimentos novos e em construção."] },
       formH: "O seu pedido", formIntro: "Categoria, país onde vive, a sua pergunta e o seu consentimento. Usamos estes dados apenas para responder e, se o autorizar, para os passar a um parceiro da categoria.",
@@ -81,7 +82,8 @@ const S = {
     talk: {
       title: "Talk to a partner",
       lede: "For your own situation, leave us your question and the category. We pass the request to a partner in that category.",
-      launch: "The first partners are announced at launch, on 1 December 2026. Until then, we receive your request by email and reply once there is a partner in the category.",
+      launch: "Partners in these categories will be announced at launch, on December 1, 2026. Until then, your request reaches us by email and we reply as soon as there's a partner in the category.",
+      agencyP: "Our partner agency for buying or selling a home. It works with buyers who live outside Portugal: search, viewings and negotiation.",
       catsH: "Categories",
       cats: { lawyer: ["Lawyer", "Buying from abroad, power of attorney, promissory contract, inheritance."], bank: ["Bank", "Mortgages for people living abroad."], tax: ["Tax adviser", "Tax in Portugal and in your country."], fx: ["Money transfer", "Currency exchange and large transfers."], developer: ["Developer", "New and off-plan developments."] },
       formH: "Your request", formIntro: "Category, country where you live, your question and your consent. We use these details only to reply and, if you agree, to pass them to a partner in the category.",
@@ -96,7 +98,8 @@ const S = {
     talk: {
       title: "Parler à un partenaire",
       lede: "Pour votre situation, laissez-nous votre question et la catégorie. Nous transmettons la demande à un partenaire de cette catégorie.",
-      launch: "Les premiers partenaires seront annoncés au lancement, le 1er décembre 2026. D'ici là, nous recevons votre demande par email et répondons dès qu'un partenaire est présent dans la catégorie.",
+      launch: "Les partenaires de ces catégories seront annoncés au lancement, le 1er décembre 2026. D'ici là, votre demande nous parvient par e-mail et nous répondons dès qu'un partenaire est présent dans la catégorie.",
+      agencyP: "Notre agence partenaire pour acheter ou vendre un bien. Elle accompagne les acheteurs qui vivent hors du Portugal : recherche, visites et négociation.",
       catsH: "Catégories",
       cats: { lawyer: ["Avocat", "Achat à distance, procuration, compromis, succession."], bank: ["Banque", "Crédit immobilier pour non-résidents."], tax: ["Conseiller fiscal", "Impôts au Portugal et dans votre pays."], fx: ["Transfert d'argent", "Change et transfert de montants élevés."], developer: ["Promoteur", "Programmes neufs et en construction."] },
       formH: "Votre demande", formIntro: "Catégorie, pays de résidence, votre question et votre consentement. Nous utilisons ces données uniquement pour répondre et, si vous l'acceptez, pour les transmettre à un partenaire de la catégorie.",
@@ -108,14 +111,6 @@ const S = {
 export const strings = (lang: Lang) => ({ ...S[lang], disclaimer: DISCLAIMER[lang] });
 export const categories = (lang: Lang) => CATS.map((c) => ({ id: c, name: S[lang].talk.cats[c][0], desc: S[lang].talk.cats[c][1] }));
 
-// ---------- links for the FAQ next steps ----------
-export function cta(lang: Lang, ed: EdCode, key: CtaKey): { href: string; label: string } {
-  const s = S[lang].cta;
-  if (key.startsWith("talk-")) { const c = key.slice(5) as Cat; return { href: `${pathFor(lang, ed, "talk")}#${c}`, label: s[c] }; }
-  if (key === "agency") return { href: pathFor(lang, ed, "buy"), label: s.agency };
-  return { href: pathFor(lang, ed, "guide"), label: s.guide };
-}
-
 export const fmtDate = (lang: Lang, iso: string) =>
   new Intl.DateTimeFormat(HTML_LANG[lang], { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(`${iso}T00:00:00Z`));
 
@@ -125,3 +120,43 @@ export const EBOOK = {
   title: { pt: "Quanto custa mesmo comprar casa em Portugal", en: "What it really costs to buy in Portugal", fr: "Ce que coûte vraiment un achat au Portugal" } as Record<Lang, string>,
 };
 export const ebookLive = config.ebooksLive;
+
+// ---------- home figures (v2): the edition's own figure, then two from facts.csv ----------
+export type Figure = { big: string; text: string; source: string; url: string; checked?: string };
+const FIG: Record<string, { id: string; big: Record<Lang, string>; text: Record<Lang, string> }> = {
+  nonres: {
+    id: "pt-imt-nonresident-flat",
+    big: { pt: "7,5%", en: "7.5%", fr: "7,5 %" },
+    text: {
+      pt: "de IMT para quem compra casa sem ser residente fiscal em Portugal, desde maio de 2026, salvo exceções.",
+      en: "transfer tax (IMT) since May 2026 for buyers who aren't Portuguese tax residents, with some exceptions.",
+      fr: "d'IMT depuis mai 2026 pour les acheteurs non-résidents fiscaux au Portugal, sauf exceptions.",
+    },
+  },
+  stamp: {
+    id: "pt-is-purchase",
+    big: { pt: "0,8%", en: "0.8%", fr: "0,8 %" },
+    text: {
+      pt: "de imposto do selo sobre o valor da compra, a somar ao IMT.",
+      en: "stamp duty on the purchase price, on top of the transfer tax.",
+      fr: "de droit de timbre sur le prix d'achat, en plus de l'IMT.",
+    },
+  },
+  ltv: {
+    id: "pt-ltv-limits",
+    big: { pt: "80%", en: "80%", fr: "80 %" },
+    text: {
+      pt: "do valor é o máximo que um banco pode emprestar para uma casa que não seja habitação própria e permanente.",
+      en: "of the value is the most a bank can lend for a home that isn't your main residence, such as a vacation home.",
+      fr: "de la valeur, c'est le maximum qu'une banque peut prêter pour un bien qui n'est pas la résidence principale.",
+    },
+  },
+};
+export function homeFigures(ed: EdCode, lang: Lang): Figure[] {
+  const own = EDITIONS[ed].fact[lang];
+  const picks = ed === "il" ? [FIG.stamp, FIG.ltv] : [FIG.nonres, FIG.ltv];
+  return [
+    { ...own },
+    ...picks.map((p) => ({ big: p.big[lang], text: p.text[lang], source: FACTS[p.id].source_title, url: FACTS[p.id].source_url, checked: FACTS[p.id].checked_on })),
+  ];
+}

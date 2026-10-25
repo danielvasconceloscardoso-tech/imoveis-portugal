@@ -7,13 +7,13 @@ export const HTML_LANG: Record<Lang, string> = { pt: "pt-PT", en: "en", fr: "fr"
 export const LANG_NAME: Record<Lang, string> = { pt: "Português", en: "English", fr: "Français" };
 
 export type EdCode = "lu" | "fr" | "ch" | "br" | "us" | "il";
-export type PageKey = "partners" | "buy" | "privacy" | "legal" | "faq" | "talk" | "guide";
+export type PageKey = "partners" | "buy" | "privacy" | "legal" | "faq" | "talk" | "guide" | "how";
 
 // URL slugs follow the language, not the edition: /{lang}/{edition}/{slug}/
 export const SLUGS: Record<Lang, Record<PageKey, string>> = {
-  pt: { partners: "parceiros", buy: "comprar", privacy: "privacidade", legal: "aviso-legal", faq: "perguntas-frequentes", talk: "falar-com-um-parceiro", guide: "guia-gratuito" },
-  en: { partners: "partners", buy: "buy", privacy: "privacy", legal: "legal-notice", faq: "faq", talk: "talk-to-a-partner", guide: "free-guide" },
-  fr: { partners: "partenaires", buy: "acheter", privacy: "confidentialite", legal: "mentions-legales", faq: "questions-frequentes", talk: "parler-a-un-partenaire", guide: "guide-gratuit" },
+  pt: { partners: "parceiros", buy: "comprar", privacy: "privacidade", legal: "aviso-legal", faq: "perguntas-frequentes", talk: "falar-com-um-parceiro", guide: "guia-gratuito", how: "como-trabalhamos" },
+  en: { partners: "partners", buy: "buy", privacy: "privacy", legal: "legal-notice", faq: "faq", talk: "talk-to-a-partner", guide: "free-guide", how: "how-we-work" },
+  fr: { partners: "partenaires", buy: "acheter", privacy: "confidentialite", legal: "mentions-legales", faq: "questions-frequentes", talk: "parler-a-un-partenaire", guide: "guide-gratuit", how: "notre-methode" },
 };
 export const pathFor = (lang: Lang, ed: EdCode, page: PageKey | "home") =>
   page === "home" ? `/${lang}/${ed}/` : `/${lang}/${ed}/${SLUGS[lang][page]}/`;

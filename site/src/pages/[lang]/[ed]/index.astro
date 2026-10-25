@@ -1,8 +1,11 @@
 ---
-import Base from "../../../layouts/Base.astro";
+// Edition home, redesign v2 (prompt 09): one action per screen, the newsletter signup first.
+import V2 from "../../../layouts/V2.astro";
 import Embed from "../../../components/Embed.astro";
 import { config } from "../../../config";
-import { EDITIONS, ED_ORDER, LANGS, t, sideFacts, pathFor, type EdCode, type Lang } from "../../../i18n";
+import { EDITIONS, ED_ORDER, LANGS, t, pathFor, type EdCode, type Lang } from "../../../i18n";
+import { ui, PHOTO } from "../../../lib/ui";
+import { homeFigures, fmtDate } from "../../../lib/content";
 
 export function getStaticPaths() {
   return LANGS.flatMap((lang) => ED_ORDER.map((ed) => ({ params: { lang, ed } })));
@@ -10,67 +13,84 @@ export function getStaticPaths() {
 const lang = Astro.params.lang as Lang;
 const ed = Astro.params.ed as EdCode;
 const ED = EDITIONS[ed];
-const E = { name: ED.name[lang], hero: ED.hero[lang], fact: ED.fact[lang] };
 const T = t(ed, lang);
-const facts = sideFacts(ed, lang).slice(1);
+const U = ui(lang), H = U.home;
+const figs = homeFigures(ed, lang);
+const photo = PHOTO[ed];
 ---
-<Base ed={ed} lang={lang} page="home" title={`Imóveis Portugal ${E.name}`} description={T.lede}>
-  <div class="wrap">
-    <section class="hero">
-      <div class="hero-fact">
-        <span class="n">{E.fact.big}</span>
-        <span class="t">{E.fact.text}</span>
-        <span class="s"><a href={E.fact.url} rel="noopener">{E.fact.source}</a></span>
-      </div>
-      <h1>{E.hero}</h1>
-      <p class="lede">{T.lede}</p>
-    </section>
-
-    <div class="cols">
+<V2 lang={lang} ed={ed} page="home" title={`Imóveis Portugal · ${ED.name[lang]}`} description={T.lede}>
+  <section class="hero">
+    <div class="frame grid">
       <div>
-        <section class="block" aria-labelledby="signup">
-          <h2 id="signup">{T.signupTitle}</h2>
-          <Embed id={config.forms.newsletter[lang]} title={T.signupTitle} pending={T.formPending(config.contactEmail)} hidden={{ edition: ed, lang }} height={260} />
-        </section>
-
-        <section class="block" aria-labelledby="weekly">
-          <h2 id="weekly">{T.weeklyTitle}</h2>
-          <ul class="plain-list">
-            {T.weekly.map((w) => <li>{w}</li>)}
-          </ul>
-        </section>
-
-        <section class="block" aria-labelledby="faq">
-          <h2 id="faq">{{ pt: "Perguntas frequentes", en: "Frequently asked questions", fr: "Questions fréquentes" }[lang]}</h2>
-          <p>{{ pt: "Custos, crédito, impostos e procuração: respostas curtas, com a fonte oficial de cada número.", en: "Costs, mortgages, tax and power of attorney: short answers, with the official source for every number.", fr: "Frais, crédit, impôts et procuration : des réponses courtes, avec la source officielle de chaque chiffre." }[lang]}</p>
-          <a href={pathFor(lang, ed, "faq")}>{{ pt: "Ler as perguntas frequentes", en: "Read the FAQ", fr: "Lire les questions fréquentes" }[lang]}</a>
-          <p style="margin-top:1rem"><a href={pathFor(lang, ed, "guide")}>{{ pt: "Guia gratuito: quanto custa mesmo comprar casa em Portugal", en: "Free guide: what it really costs to buy in Portugal", fr: "Guide gratuit : ce que coûte vraiment un achat au Portugal" }[lang]}</a></p>
-        </section>
-
-        <div class="block cta-pair">
-          <section>
-            <h2>{T.buyCta.h}</h2>
-            <p>{T.buyCta.p}</p>
-            <a class="btn" href={pathFor(lang, ed, "buy")}>{T.buyCta.a}</a>
-          </section>
-          <section>
-            <h2>{T.partnersCta.h}</h2>
-            <p>{T.partnersCta.p}</p>
-            <a href={pathFor(lang, ed, "partners")}>{T.partnersCta.a}</a>
-          </section>
+        <p class="label"><span class="dot" aria-hidden="true"></span> {ED.name[lang]}</p>
+        <h1>{ED.hero[lang]}</h1>
+        <p class="lede">{T.lede}</p>
+        <div class="signup" id="subscrever">
+          <Embed id={config.forms.newsletter[lang]} title={H.signupH} pending={T.formPending(config.contactEmail)} hidden={{ edition: ed, lang }} height={200} />
+          <p class="small">{H.signupNote} <a href={pathFor(lang, ed, "privacy")}>{U.foot.privacy}</a></p>
         </div>
       </div>
+      <figure style="margin:0">
+        <div class="photo">
+          <img src={`/img/${photo.file}-1200.webp`} srcset={`/img/${photo.file}-640.webp 640w, /img/${photo.file}-1200.webp 1200w`} sizes="(min-width: 960px) 420px, 100vw" width="1200" height="900" alt={photo.place[lang]} fetchpriority="high" />
+        </div>
+        <figcaption class="credit">{photo.place[lang]}. {U.photo}</figcaption>
+      </figure>
+    </div>
+  </section>
 
-      <aside class="rail" aria-labelledby="facts">
-        <h2 id="facts">{T.factsTitle}</h2>
-        {facts.map((f) => (
-          <div class="fact">
-            <span class="n">{f.big}</span>
+  <section class="band white" aria-labelledby="figs">
+    <div class="frame">
+      <p class="label">{H.figsLabel}</p>
+      <h2 id="figs">{H.figsH}</h2>
+      <div class="figs">
+        {figs.map((f, i) => (
+          <div class="fig">
+            <span class="n">{f.big}<sup><a href={`#nota-${i + 1}`} aria-label={`${U.faq.sources} ${i + 1}`}>{i + 1}</a></sup></span>
             <p>{f.text}</p>
-            <a href={f.url} rel="noopener">{f.source}</a>
           </div>
         ))}
-      </aside>
+      </div>
+      <ol class="notes">
+        {figs.map((f, i) => (
+          <li id={`nota-${i + 1}`}>{i + 1}. <a href={f.url} rel="noopener">{f.source}</a>{f.checked && `, ${U.faq.checked} ${fmtDate(lang, f.checked)}`}.</li>
+        ))}
+      </ol>
     </div>
-  </div>
-</Base>
+  </section>
+
+  <section class="band" aria-labelledby="start">
+    <div class="frame">
+      <p class="label">{H.startLabel}</p>
+      <h2 id="start">{H.startH}</h2>
+      <div class="cards">
+        <a class="card" href={pathFor(lang, ed, "faq")}><h3>{H.faqCard[0]}</h3><p>{H.faqCard[1]}</p><span class="go arrow">{H.go} </span></a>
+        <a class="card" href={pathFor(lang, ed, "guide")}><h3>{H.guideCard[0]}</h3><p>{H.guideCard[1]}</p><span class="go arrow">{H.go} </span></a>
+        <a class="card" href={pathFor(lang, ed, "buy")}><h3>{H.agencyCard[0]}</h3><p>{H.agencyCard[1]}</p><span class="go arrow">{H.go} </span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="band white" aria-labelledby="weekly">
+    <div class="frame split">
+      <div>
+        <p class="label">{H.weeklyLabel}</p>
+        <h2 id="weekly">{T.weeklyTitle}</h2>
+      </div>
+      <ul class="ticks">{T.weekly.map((w) => <li>{w}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="band" aria-labelledby="partners">
+    <div class="frame split">
+      <div>
+        <p class="label">{H.partnersLabel}</p>
+        <h2 id="partners">{H.partnersH}</h2>
+      </div>
+      <div>
+        <p class="lede">{H.partnersP}</p>
+        <a class="btn ghost" href={pathFor(lang, ed, "partners")}>{H.partnersA}</a>
+      </div>
+    </div>
+  </section>
+</V2>

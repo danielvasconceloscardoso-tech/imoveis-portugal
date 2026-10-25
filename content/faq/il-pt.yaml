@@ -1,11 +1,24 @@
-# Israel edition, Portuguese (pt-PT, D18): questions added to common-pt.yaml. Same facts as il-en.yaml.
-# Left out until verified (content/faq/UNVERIFIED.md): "Posso financiar uma casa em Portugal a partir de Israel?"
+# IL edition, European Portuguese: questions added to common-pt.yaml (same rules).
 
-- id: il-pt-01
-  q: Israel tributa as rendas da minha casa em Portugal?
+- id: pt-il-visa
+  rank: 6
+  stage: before
+  cta: lawyer
+  q: "Comprar casa dá direito a viver em Portugal?"
   a: >-
-    Pela convenção entre Portugal e Israel, Portugal pode tributar as rendas de imóveis situados em Portugal,
-    e Israel, como país de residência, dá um crédito pelo imposto pago em Portugal. A forma como Israel calcula
-    o seu próprio imposto sobre esse rendimento segue as regras israelitas.
-  cta: talk-tax
-  facts: [il-pt-treaty-property]
+    Comprar e viver em Portugal são processos separados. Para viver cá precisa de um visto de residência,
+    por exemplo o de quem vive de rendimentos próprios (D7). Sobre a autorização de residência para
+    investimento (golden visa), fale com um advogado: não resumimos aqui regras que não verificámos na
+    fonte.
+  facts: [pt-nonresidents-buy, pt-visa-own-income]
+
+- id: pt-il-rent
+  rank: 9.5
+  stage: after
+  cta: tax
+  q: "Israel tributa as rendas da minha casa em Portugal?"
+  a: >-
+    Pela convenção entre Portugal e Israel, Portugal pode tributar as rendas de imóveis situados em
+    Portugal, onde pagam 25%, e Israel, como país de residência, dá um crédito pelo imposto pago em
+    Portugal. A forma como Israel calcula o seu próprio imposto segue as regras israelitas.
+  facts: [il-pt-treaty-property, pt-rent-tax-nonresident]

@@ -1,19 +1,24 @@
-# Brazil edition, English: questions added to common-en.yaml.
+# BR edition, American English: questions added to common-en.yaml (same rules).
 
-- id: br-en-01
-  q: Do I need a visa to buy a home in Portugal?
+- id: en-br-visa
+  rank: 6
+  stage: before
+  cta: lawyer
+  q: "Does buying a home let me live in Portugal?"
   a: >-
-    Not to buy: non-residents buy homes in Portugal, and the transfer tax code even has a rate for them. To live
-    there, yes: you need a residence visa, such as the one for people living on their own income (D7) or the
-    CPLP visa, which then gives access to a residence permit issued by AIMA.
-  cta: talk-lawyer
+    Buying and living in Portugal are separate processes. To live here you need a residence visa, for
+    example the one for people living on their own income (D7) or the CPLP visa, which then leads to a
+    residence permit from AIMA. For the residence permit for investment (Golden Visa), talk to a lawyer: we
+    don't summarize rules we haven't checked at the source.
   facts: [pt-nonresidents-buy, pt-visa-own-income, pt-cplp-residence]
 
-- id: br-en-02
-  q: Do I have to declare the home in my Brazilian tax return?
+- id: en-br-irpf
+  rank: 8.5
+  stage: after
+  cta: tax
+  q: "Do I report the home on my Brazilian income tax return?"
   a: >-
-    If you are a Brazilian tax resident who files an IRPF return, the home goes under Bens e Direitos, at its
-    purchase value converted into dollars and then reais at the Banco Central selling rate on the purchase date.
-    With assets abroad of US$1 million or more on 31 December, the CBE declaration also applies.
-  cta: talk-tax
+    If you're a Brazilian tax resident, the home goes under Bens e Direitos on the IRPF return, at the
+    purchase price converted to dollars and then to reais at the Banco Central selling rate on the purchase
+    date. With assets abroad of US$1 million or more on December 31, you also file the CBE declaration.
   facts: [br-bens-exterior, br-cbe]

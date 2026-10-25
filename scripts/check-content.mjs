@@ -2,8 +2,9 @@
 // Run from the repo root:  node scripts/check-content.mjs [path ...]
 // With no path it checks content/faq/ and content/inbox/. /publish-week must run it and stop on errors.
 //
-// FAQ entries (content/faq/*.yaml): answer under 70 words, a known next-step key, fact ids that exist
-// in content/facts/facts.csv, no open [check], no banned or advice wording.
+// FAQ entries (content/faq/*.yaml, prompt 09): a stage (before, buying, after), a rank, answer under 70 words,
+// one partner action (cta), fact ids that exist in content/facts/facts.csv, no open [check], no banned or
+// advice wording; 15 to 20 questions per edition and language (common file plus the edition's own).
 // Inbox pieces (content/inbox/**/*.md): front matter with edition, lang, type, week, title and sources
 // (fact ids from facts.csv); the edition's disclaimer; the sponsored label when sponsored; no open
 // [check]; no banned or advice wording.
@@ -15,7 +16,8 @@ import { fileURLToPath } from "node:url";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const yaml = createRequire(join(root, "site", "package.json"))("js-yaml");
 
-const CTA_KEYS = ["talk-lawyer", "talk-bank", "talk-tax", "talk-fx", "talk-developer", "agency", "guide"];
+const CTA_KEYS = ["lawyer", "bank", "tax", "fx", "developer", "agency"];
+const STAGES = ["before", "buying", "after"];
 const TYPES = ["article", "newsletter", "video", "carousel", "post", "faq"];
 const LANGS = { "pt-PT": "PT", fr: "FR", "pt-BR": "PT-BR", en: "EN" };
 const EDITIONS = ["lu", "fr", "ch", "br", "us", "il"];
@@ -59,8 +61,10 @@ function checkText(file, label, text) {
   for (const re of ADVICE) if (re.test(text)) err(file, `${label}: advice wording ${re} (describe, do not advise)`);
 }
 
+const faqCount = {};
 function checkFaq(file) {
   const items = yaml.load(readFileSync(file, "utf8")) || [];
+  faqCount[file.split("/").pop().replace(".yaml", "")] = items.length;
   const seen = new Set();
   for (const it of items) {
     const id = it.id || "(no id)";
@@ -68,6 +72,8 @@ function checkFaq(file) {
     if (seen.has(id)) err(file, `${id}: duplicate id`);
     seen.add(id);
     if (!CTA_KEYS.includes(it.cta)) err(file, `${id}: unknown cta "${it.cta}"`);
+    if (!STAGES.includes(it.stage)) err(file, `${id}: stage must be one of ${STAGES.join(", ")}`);
+    if (typeof it.rank !== "number") err(file, `${id}: rank must be a number`);
     const n = words(it.a || "");
     if (n >= 70) err(file, `${id}: answer has ${n} words (must be under 70)`);
     for (const f of it.facts || []) if (!factIds.has(f)) err(file, `${id}: fact "${f}" not in facts.csv`);
@@ -109,6 +115,11 @@ let faqs = 0, pieces = 0;
 for (const f of targets.flatMap((t) => walk(t))) {
   if (f.endsWith(".yaml") && f.includes(`${"content"}/faq`)) { checkFaq(f); faqs++; }
   else if (f.endsWith(".md") && f.includes("content/inbox") && !f.endsWith("README.md")) { checkPiece(f); pieces++; }
+}
+for (const ed of EDITIONS) for (const l of ["pt", "en", "fr"]) {
+  if (!(`common-${l}` in faqCount)) continue;
+  const n = faqCount[`common-${l}`] + (faqCount[`${ed}-${l}`] || 0);
+  if (n < 15 || n > 20) errors.push(`content/faq: ${ed}-${l} has ${n} questions (must be 15 to 20)`);
 }
 console.log(`checked ${faqs} FAQ files and ${pieces} inbox pieces against ${factIds.size} facts`);
 if (errors.length) {

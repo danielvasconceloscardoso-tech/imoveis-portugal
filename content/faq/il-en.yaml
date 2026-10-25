@@ -1,11 +1,23 @@
-# Israel edition, English: questions added to common-en.yaml. PT and FR versions in il-pt.yaml and il-fr.yaml.
-# Left out until verified (content/faq/UNVERIFIED.md): "Can I finance a Portuguese home from Israel?"
+# IL edition, American English: questions added to common-en.yaml (same rules).
 
-- id: il-01
-  q: Does Israel tax my rental income from Portugal?
+- id: en-il-visa
+  rank: 6
+  stage: before
+  cta: lawyer
+  q: "Does buying a home let me live in Portugal?"
   a: >-
-    Under the Portugal–Israel tax treaty, Portugal may tax rental income from property in Portugal, and
-    Israel, as your country of residence, allows a credit for the tax paid in Portugal. How Israel calculates
-    its own tax on that income follows Israeli rules.
-  cta: talk-tax
-  facts: [il-pt-treaty-property]
+    Buying and living in Portugal are separate processes. To live here you need a residence visa, for
+    example the one for people living on their own income (D7). For the residence permit for investment
+    (Golden Visa), talk to a lawyer: we don't summarize rules we haven't checked at the source.
+  facts: [pt-nonresidents-buy, pt-visa-own-income]
+
+- id: en-il-rent
+  rank: 9.5
+  stage: after
+  cta: tax
+  q: "Does Israel tax rent from my home in Portugal?"
+  a: >-
+    Under the Portugal–Israel tax treaty, Portugal may tax rent from property located there, at 25%, and
+    Israel, as your country of residence, gives a credit for the tax paid in Portugal. How Israel calculates
+    its own tax follows Israeli rules.
+  facts: [il-pt-treaty-property, pt-rent-tax-nonresident]

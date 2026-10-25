@@ -1,11 +1,12 @@
-# Luxembourg edition, Portuguese: questions added to common-pt.yaml.
-# Left out until verified (content/faq/UNVERIFIED.md): "Um banco luxemburguês pode financiar uma casa em Portugal?"
+# LU edition, European Portuguese: questions added to common-pt.yaml (same rules).
 
-- id: lu-pt-01
-  q: Tenho de declarar no Luxemburgo as rendas da casa em Portugal?
+- id: pt-lu-rent
+  rank: 9.5
+  stage: after
+  cta: tax
+  q: "Tenho de declarar no Luxemburgo as rendas da casa em Portugal?"
   a: >-
     A convenção entre Portugal e o Luxemburgo dá a Portugal o direito de tributar as rendas de imóveis
-    situados em Portugal. O Luxemburgo isenta esse rendimento, mas pode tê-lo em conta para calcular a taxa
-    de imposto sobre o resto do seu rendimento. As obrigações de declaração no Luxemburgo dependem do seu caso.
-  cta: talk-tax
-  facts: [lu-pt-treaty-property]
+    situados em Portugal, onde pagam 25%. O Luxemburgo isenta esse rendimento, mas pode tê-lo em conta para
+    calcular a taxa sobre o resto do seu rendimento. O que tem de declarar lá depende do seu caso.
+  facts: [lu-pt-treaty-property, pt-rent-tax-nonresident]

@@ -1,10 +1,13 @@
-# Luxembourg edition, French: questions added to common-fr.yaml.
+# LU edition, French (Luxembourg and Paris readers): questions added to common-fr.yaml (same rules).
 
-- id: lu-fr-01
-  q: Dois-je déclarer au Luxembourg les loyers de mon bien au Portugal ?
+- id: fr-lu-rent
+  rank: 9.5
+  stage: after
+  cta: tax
+  q: "Dois-je déclarer au Luxembourg les loyers de mon bien au Portugal ?"
   a: >-
-    La convention entre le Portugal et le Luxembourg donne au Portugal le droit d'imposer les loyers d'un bien
-    situé au Portugal. Le Luxembourg exonère ce revenu mais peut en tenir compte pour fixer le taux d'impôt sur
-    le reste de vos revenus. Vos obligations de déclaration au Luxembourg dépendent de votre situation.
-  cta: talk-tax
-  facts: [lu-pt-treaty-property]
+    La convention entre le Portugal et le Luxembourg donne au Portugal le droit d'imposer les loyers des
+    biens situés sur son territoire, à 25 %. Le Luxembourg exonère ces revenus, mais peut en tenir compte
+    pour fixer le taux sur vos autres revenus. Vos obligations déclaratives au Luxembourg dépendent de votre
+    situation.
+  facts: [lu-pt-treaty-property, pt-rent-tax-nonresident]

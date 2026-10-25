@@ -1,20 +1,36 @@
-# USA edition, French: questions added to common-fr.yaml. Same facts as us-en.yaml.
+# US edition, French (Luxembourg and Paris readers): questions added to common-fr.yaml (same rules).
 
-- id: us-fr-01
-  q: Dois-je déclarer mon compte bancaire portugais aux États-Unis ?
+- id: fr-us-visa
+  rank: 6
+  stage: before
+  cta: lawyer
+  q: "Acheter un bien permet-il de vivre au Portugal ?"
   a: >-
-    Si la valeur totale de vos comptes à l'étranger dépasse 10 000 USD à un moment de l'année, les US persons
-    déposent un FBAR auprès du FinCEN. En vivant hors des États-Unis, il peut aussi falloir le formulaire 8938,
-    au-delà de 200 000 USD d'avoirs étrangers en fin d'année ou 300 000 USD à tout moment (déclaration
-    individuelle ; 400 000 et 600 000 USD en commun).
-  cta: talk-tax
+    Acheter et s'installer au Portugal sont deux démarches distinctes. Pour y vivre, il faut un visa de
+    résidence, par exemple celui des personnes vivant de leurs propres revenus (D7). Pour le titre de séjour
+    par investissement (golden visa), adressez-vous à un avocat : nous ne résumons pas des règles non
+    vérifiées à la source.
+  facts: [pt-nonresidents-buy, pt-visa-own-income]
+
+- id: fr-us-report
+  rank: 8.5
+  stage: after
+  cta: tax
+  q: "Dois-je déclarer mon compte portugais aux États-Unis ?"
+  a: >-
+    Si le total de vos comptes à l'étranger dépasse 10 000 USD à un moment de l'année, les US persons
+    déposent un FBAR auprès du FinCEN. En vivant hors des États-Unis, le formulaire 8938 peut aussi
+    s'imposer au-delà de 200 000 USD en fin d'année ou de 300 000 USD à tout moment (déclaration
+    individuelle).
   facts: [us-fbar, us-8938-abroad]
 
-- id: us-fr-02
-  q: La plus-value sur la vente de mon bien au Portugal est-elle imposée aux États-Unis ?
+- id: fr-us-sale
+  rank: 10.5
+  stage: after
+  cta: tax
+  q: "La plus-value sur mon bien au Portugal est-elle imposée aux États-Unis ?"
   a: >-
-    Selon la convention entre le Portugal et les États-Unis, le Portugal peut imposer les plus-values sur les
-    biens situés au Portugal, et les États-Unis gardent le droit d'imposer leurs citoyens. Le crédit d'impôt
-    étranger (formulaire 1116) permet d'imputer l'impôt portugais sur l'impôt américain dû sur le même revenu.
-  cta: talk-tax
+    Selon la convention entre le Portugal et les États-Unis, le Portugal peut imposer les plus-values sur
+    les biens situés au Portugal, et les États-Unis gardent le droit d'imposer leurs citoyens. Le crédit
+    d'impôt étranger (formulaire 1116) permet d'imputer l'impôt portugais sur l'impôt américain.
   facts: [us-pt-treaty-gains]

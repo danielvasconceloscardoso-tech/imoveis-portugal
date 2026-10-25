@@ -1,19 +1,34 @@
-# Switzerland edition, Portuguese (pt-PT): questions added to common-pt.yaml. French version in ch-fr.yaml.
+# CH edition, European Portuguese: questions added to common-pt.yaml (same rules).
 
-- id: chpt-01
-  q: Posso usar o 2.º pilar para comprar casa em Portugal?
+- id: pt-ch-2p
+  rank: 3.5
+  stage: before
+  cta: tax
+  q: "Posso usar o 2.º pilar para comprar casa em Portugal?"
   a: >-
     Só para a residência principal. As regras federais permitem levantar antecipadamente o 2.º pilar para a
     casa onde vive, na Suíça ou no estrangeiro, mas não para uma casa de férias. O levantamento mínimo é de
     20 000 francos.
-  cta: talk-tax
   facts: [ch-2nd-pillar-abroad]
 
-- id: chpt-02
-  q: E o 3.º pilar (3a)?
+- id: pt-ch-2p-rules
+  rank: 3.6
+  stage: before
+  cta: tax
+  q: "Que condições e efeitos tem o levantamento do 2.º pilar?"
   a: >-
-    O pilar 3a também pode ser levantado antecipadamente para adquirir habitação para uso próprio ou para
-    amortizar um crédito à habitação. As condições concretas, como prazos e idade, dependem do contrato e das
-    regras federais.
-  cta: talk-tax
+    Um imóvel de cada vez, um levantamento a cada 5 anos, pedido até 3 anos antes da reforma e consentimento
+    escrito do cônjuge. Depois dos 50 anos o montante é limitado. O levantamento reduz a pensão futura e tem
+    de ser reembolsado se vender a casa, salvo se comprar outra habitação própria em 2 anos.
+  facts: [ch-2p-conditions, ch-2p-effects]
+
+- id: pt-ch-3a
+  rank: 11.5
+  stage: before
+  cta: tax
+  q: "E o 3.º pilar (3a)?"
+  a: >-
+    O pilar 3a também pode ser levantado antecipadamente para comprar habitação para uso próprio ou para
+    amortizar um crédito à habitação. As condições concretas, como prazos e idade, dependem do contrato e
+    das regras federais.
   facts: [ch-3a-home]

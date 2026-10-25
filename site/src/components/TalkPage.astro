@@ -1,46 +1,55 @@
 ---
-// "Talk to a partner": reader requests by category to the brand mailbox until partners exist.
-// Home buying or selling requests go only to the partner agency (D14).
-import C from "../layouts/C.astro";
+// "Talk to a partner" (v2): the enquiry form for every partner category. FAQ buttons link here with
+// ?cat=<category>#form; the chosen category is highlighted and passed to the form.
+// Buying or selling a home goes only to the partner agency (D14, D17).
+import V2 from "../layouts/V2.astro";
 import Embed from "./Embed.astro";
 import { config } from "../config";
 import { t, pathFor, type Lang, type EdCode } from "../i18n";
 import { strings, categories } from "../lib/content";
+import { ui } from "../lib/ui";
 
 interface Props { lang: Lang; ed: EdCode; }
 const { lang, ed } = Astro.props;
-const S = strings(lang);
+const S = strings(lang), U = ui(lang);
 const T = t(ed, lang);
 ---
-<C lang={lang} ed={ed} page="talk" title={`${S.talk.title} | Imóveis Portugal`} description={S.talk.lede}>
-  <div class="w ph g">
+<V2 lang={lang} ed={ed} page="talk" title={`${S.talk.title} | Imóveis Portugal`} description={S.talk.lede}>
+  <div class="frame read ph">
     <h1>{S.talk.title}</h1>
     <p class="lede">{S.talk.lede}</p>
   </div>
-  <div class="block">
-    <div class="w g"><p>{S.talk.launch}</p></div>
+  <div class="frame read prose">
+    <div class="partner">
+      <span class="tag">{U.faq.sponsored}</span>
+      <span class="logo">{config.agency.name}</span>
+      <p style="margin:0">{S.talk.agencyP}</p>
+      <p class="small" style="margin:0">AMI {config.agency.ami} · <a href={config.agency.website} rel="noopener">{config.agency.website.replace(/^https:\/\/|\/$/g, "")}</a></p>
+      <a class="btn" style="justify-self:start" href={pathFor(lang, ed, "buy")}>{U.faq.cta.agency}</a>
+    </div>
+    <h2>{S.talk.catsH}</h2>
+    <p>{S.talk.launch}</p>
+    <div class="cards two" id="cats">
+      {categories(lang).map((c) => (
+        <a class="card" id={c.id} data-cat={c.id} href={`?cat=${c.id}#form`}>
+          <h3>{c.name}</h3><p>{c.desc}</p>
+          <span class="go">{config.partners[c.id] ? `${config.partners[c.id]} · ${U.faq.sponsored}` : U.faq.talk}</span>
+        </a>
+      ))}
+    </div>
+    <h2 id="form">{S.talk.formH}</h2>
+    <p>{S.talk.formIntro}</p>
+    <Embed id={config.forms.partnerRequest[lang]} title={S.talk.formH} pending={T.formPending(config.contactEmail)} hidden={{ edition: ed, lang }} height={520} />
+    <p class="small" style="margin-top:12px"><a href={pathFor(lang, ed, "privacy")}>{U.foot.privacy}</a></p>
   </div>
-  <div class="w">
-    <section class="row g" aria-labelledby="cats">
-      <h2 id="cats">{S.talk.catsH}</h2>
-      <ul class="body cats">
-        {categories(lang).map((c) => (<li id={c.id}><h3>{c.name}</h3><p>{c.desc}</p></li>))}
-      </ul>
-    </section>
-    <section class="row g" aria-labelledby="form">
-      <h2 id="form">{S.talk.formH}</h2>
-      <div class="body">
-        <p>{S.talk.formIntro}</p>
-        <Embed id={config.forms.partnerRequest[lang]} title={S.talk.formH} pending={T.formPending(config.contactEmail)} hidden={{ edition: ed, lang }} height={520} />
-        <p class="small"><a href={pathFor(lang, ed, "privacy")}>{T.footer.privacy}</a></p>
-      </div>
-    </section>
-    <section class="row g" aria-labelledby="buy">
-      <h2 id="buy">{S.talk.buyH}</h2>
-      <div class="body">
-        <p>{S.talk.buyP}</p>
-        <a class="btn" href={pathFor(lang, ed, "buy")}>{S.talk.buyA}</a>
-      </div>
-    </section>
-  </div>
-</C>
+  <script is:inline>
+    (function () {
+      var cat = new URLSearchParams(location.search).get("cat");
+      if (!cat) return;
+      var card = document.querySelector('[data-cat="' + cat + '"]');
+      if (card) { card.style.borderColor = "var(--accent)"; card.style.boxShadow = "0 0 0 3px var(--accent-soft)"; }
+      var f = document.querySelector(".form-box iframe");
+      if (f && f.src.indexOf("tally.so") > -1) f.src += "&category=" + encodeURIComponent(cat);
+    })();
+  </script>
+</V2>

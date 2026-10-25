@@ -1,11 +1,24 @@
-# Israel edition, French: questions added to common-fr.yaml. Same facts as il-en.yaml.
-# Left out until verified (content/faq/UNVERIFIED.md): "Puis-je financer un bien au Portugal depuis Israël ?"
+# IL edition, French (Luxembourg and Paris readers): questions added to common-fr.yaml (same rules).
 
-- id: il-fr-01
-  q: Israël impose-t-il les loyers de mon bien au Portugal ?
+- id: fr-il-visa
+  rank: 6
+  stage: before
+  cta: lawyer
+  q: "Acheter un bien permet-il de vivre au Portugal ?"
   a: >-
-    Selon la convention entre le Portugal et Israël, le Portugal peut imposer les loyers des biens situés au
-    Portugal, et Israël, pays de résidence, accorde un crédit pour l'impôt payé au Portugal. Le calcul de
-    l'impôt israélien sur ce revenu suit les règles israéliennes.
-  cta: talk-tax
-  facts: [il-pt-treaty-property]
+    Acheter et s'installer au Portugal sont deux démarches distinctes. Pour y vivre, il faut un visa de
+    résidence, par exemple celui des personnes vivant de leurs propres revenus (D7). Pour le titre de séjour
+    par investissement (golden visa), adressez-vous à un avocat : nous ne résumons pas des règles non
+    vérifiées à la source.
+  facts: [pt-nonresidents-buy, pt-visa-own-income]
+
+- id: fr-il-rent
+  rank: 9.5
+  stage: after
+  cta: tax
+  q: "Israël impose-t-il les loyers de mon bien au Portugal ?"
+  a: >-
+    Selon la convention entre le Portugal et Israël, le Portugal peut imposer les loyers des biens situés
+    sur son territoire, à 25 %, et Israël, pays de résidence, accorde un crédit pour l'impôt payé au
+    Portugal. Le calcul de l'impôt israélien suit les règles israéliennes.
+  facts: [il-pt-treaty-property, pt-rent-tax-nonresident]

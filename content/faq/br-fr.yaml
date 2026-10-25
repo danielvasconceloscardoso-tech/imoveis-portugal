@@ -1,19 +1,25 @@
-# Brazil edition, French: questions added to common-fr.yaml.
+# BR edition, French (Luxembourg and Paris readers): questions added to common-fr.yaml (same rules).
 
-- id: br-fr-01
-  q: Faut-il un visa pour acheter au Portugal ?
+- id: fr-br-visa
+  rank: 6
+  stage: before
+  cta: lawyer
+  q: "Acheter un bien permet-il de vivre au Portugal ?"
   a: >-
-    Pour acheter, non : des non-résidents achètent au Portugal et le code de l'IMT prévoit même un taux pour eux.
-    Pour y vivre, oui : il faut un visa de résidence, comme celui des personnes vivant de leurs revenus (D7) ou le
-    visa CPLP, qui donne ensuite accès à un titre de séjour délivré par l'AIMA.
-  cta: talk-lawyer
+    Acheter et s'installer au Portugal sont deux démarches distinctes. Pour y vivre, il faut un visa de
+    résidence, par exemple celui des personnes vivant de leurs propres revenus (D7) ou le visa CPLP, qui
+    donne ensuite accès au titre de séjour de l'AIMA. Pour le titre de séjour par investissement (golden
+    visa), adressez-vous à un avocat : nous ne résumons pas des règles non vérifiées à la source.
   facts: [pt-nonresidents-buy, pt-visa-own-income, pt-cplp-residence]
 
-- id: br-fr-02
-  q: Dois-je déclarer le bien dans ma déclaration d'impôt brésilienne ?
+- id: fr-br-irpf
+  rank: 8.5
+  stage: after
+  cta: tax
+  q: "Dois-je déclarer le bien dans l'impôt sur le revenu brésilien ?"
   a: >-
-    Si vous êtes résident fiscal au Brésil et déposez une déclaration IRPF, le bien figure dans « Bens e
-    Direitos », à sa valeur d'achat convertie en dollars puis en reais au cours vendeur de la Banque centrale à la
-    date d'achat. Avec des biens à l'étranger de 1 million de dollars ou plus au 31 décembre, la déclaration CBE s'ajoute.
-  cta: talk-tax
+    Si vous êtes résident fiscal au Brésil, le bien se déclare dans la rubrique Bens e Direitos de l'IRPF,
+    au prix d'achat converti en dollars puis en reais au cours vendeur de la Banco Central à la date
+    d'achat. Avec 1 million de dollars ou plus d'avoirs à l'étranger au 31 décembre, il faut aussi la
+    déclaration CBE.
   facts: [br-bens-exterior, br-cbe]

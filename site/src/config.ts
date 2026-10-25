@@ -40,10 +40,18 @@ export const config = {
   },
 
   // Partner agency that receives buyer requests (licensed real-estate mediator).
+  // D17: Habinedita Gondomar, the only real-estate agency on the platform, shown as a sponsored partner.
+  // Public business details only (ops/prompts/08_partner_agency_habinedita.md).
   agency: {
-    name: "",
-    ami: "",
+    name: "Habinedita Gondomar",
+    ami: "13250",
+    website: "https://habineditagondomar.pt/",
+    phone: "+351 221 458 069",
   },
+
+  // Sponsor per partner category, once signed (prompt 09). Empty = no sponsor yet: the FAQ button then
+  // says "Talk to a partner" and opens the enquiry form for that category.
+  partners: { lawyer: "", bank: "", tax: "", fx: "", developer: "" } as Record<"lawyer" | "bank" | "tax" | "fx" | "developer", string>,
 
   launchDate: "2026-12-01",
   foundingSlotsTotal: 10,

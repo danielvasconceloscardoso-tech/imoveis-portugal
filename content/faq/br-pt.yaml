@@ -1,19 +1,24 @@
-# Brazil edition, Portuguese (pt-PT, D18): questions added to common-pt.yaml.
+# BR edition, European Portuguese: questions added to common-pt.yaml (same rules).
 
-- id: br-pt-01
-  q: Preciso de visto para comprar casa em Portugal?
+- id: pt-br-visa
+  rank: 6
+  stage: before
+  cta: lawyer
+  q: "Comprar casa dá direito a viver em Portugal?"
   a: >-
-    Para comprar, não: não residentes compram casa em Portugal e a lei do IMT tem até uma taxa própria para eles.
-    Para viver cá, sim: é preciso um visto de residência, como o de quem vive de rendimentos próprios (D7) ou o
-    visto CPLP, que depois dá acesso à autorização de residência emitida pela AIMA.
-  cta: talk-lawyer
+    Comprar e viver em Portugal são processos separados. Para viver cá precisa de um visto de residência,
+    por exemplo o de quem vive de rendimentos próprios (D7) ou o visto CPLP, que depois dá acesso à
+    autorização de residência da AIMA. Sobre a autorização de residência para investimento (golden visa),
+    fale com um advogado: não resumimos aqui regras que não verificámos na fonte.
   facts: [pt-nonresidents-buy, pt-visa-own-income, pt-cplp-residence]
 
-- id: br-pt-02
-  q: Tenho de declarar a casa no imposto de renda brasileiro?
+- id: pt-br-irpf
+  rank: 8.5
+  stage: after
+  cta: tax
+  q: "Tenho de declarar a casa no imposto de renda brasileiro?"
   a: >-
-    Se é residente fiscal no Brasil e entrega a declaração do IRPF, a casa entra em Bens e Direitos, pelo valor
-    de compra convertido em dólares e depois em reais à cotação de venda do Banco Central na data da compra. Com
-    bens no estrangeiro de 1 milhão de dólares ou mais a 31 de dezembro, há ainda a declaração CBE.
-  cta: talk-tax
+    Se é residente fiscal no Brasil, a casa entra em Bens e Direitos da declaração do IRPF, pelo valor de
+    compra convertido em dólares e depois em reais à cotação de venda do Banco Central na data da compra.
+    Com bens no estrangeiro de 1 milhão de dólares ou mais a 31 de dezembro, há ainda a declaração CBE.
   facts: [br-bens-exterior, br-cbe]

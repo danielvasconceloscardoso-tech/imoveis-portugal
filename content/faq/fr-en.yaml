@@ -1,10 +1,12 @@
-# France edition, English: questions added to common-en.yaml.
+# FR edition, American English: questions added to common-en.yaml (same rules).
 
-- id: fr-en-01
-  q: Do I have to declare my Portuguese home in France?
+- id: en-fr-declare
+  rank: 8.5
+  stage: after
+  cta: tax
+  q: "Do I report my Portuguese home and account in France?"
   a: >-
-    Bank accounts opened in Portugal must be declared every year with your French tax return (form 3916), even
-    if unused. Rent from a home in Portugal is taxable in Portugal; the France–Portugal tax treaty sets how
+    Bank accounts opened in Portugal are reported every year with your French tax return (form 3916), even
+    if unused. Rent from the home is taxed at 25% in Portugal; the Portugal–France tax treaty sets how
     France takes it into account.
-  cta: talk-tax
   facts: [fr-3916, pt-rent-tax-nonresident]

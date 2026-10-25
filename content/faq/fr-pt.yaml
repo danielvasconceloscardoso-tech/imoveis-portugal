@@ -1,10 +1,12 @@
-# France edition, Portuguese: questions added to common-pt.yaml.
+# FR edition, European Portuguese: questions added to common-pt.yaml (same rules).
 
-- id: fr-pt-01
-  q: Tenho de declarar em França a casa que tenho em Portugal?
+- id: pt-fr-declare
+  rank: 8.5
+  stage: after
+  cta: tax
+  q: "Tenho de declarar em França a casa e a conta em Portugal?"
   a: >-
-    As contas bancárias abertas em Portugal declaram-se todos os anos com a declaração de rendimentos francesa
-    (formulário 3916), mesmo sem movimentos. As rendas de uma casa em Portugal são tributáveis em Portugal; a
-    convenção entre França e Portugal define como a França as tem em conta.
-  cta: talk-tax
+    As contas bancárias abertas em Portugal declaram-se todos os anos com a declaração de rendimentos
+    francesa (formulário 3916), mesmo que não sejam usadas. As rendas da casa pagam 25% em Portugal; a
+    convenção fiscal entre Portugal e França define como França as tem em conta.
   facts: [fr-3916, pt-rent-tax-nonresident]

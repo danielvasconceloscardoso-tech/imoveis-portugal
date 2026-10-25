@@ -1,12 +1,18 @@
 ---
-// FAQ page (prompt 06, Part A): content/faq + facts.csv, FAQPage structured data, disclaimer once at the bottom.
-import C from "../layouts/C.astro";
-import { faqFor, FACTS, strings, cta, fmtDate } from "../lib/content";
-import type { Lang, EdCode } from "../i18n";
+// FAQ as a help centre (prompt 09; Wise and Stripe help pages as the model): search first, questions
+// grouped by stage and ordered by search interest, short answers with sources, one partner action each.
+// No sponsor yet in a category: the button says "Talk to a partner" and opens the enquiry form.
+import V2 from "../layouts/V2.astro";
+import { config } from "../config";
+import { pathFor, type Lang, type EdCode } from "../i18n";
+import { faqFor, FACTS, fmtDate, DISCLAIMER, type Stage } from "../lib/content";
+import { ui } from "../lib/ui";
 
 interface Props { lang: Lang; ed: EdCode; }
 const { lang, ed } = Astro.props;
-const S = strings(lang);
+const U = ui(lang), F = U.faq;
+const talk = pathFor(lang, ed, "talk");
+
 const items = faqFor(ed, lang).map((it) => {
   const facts = (it.facts || []).map((id) => FACTS[id]);
   const checked = facts.map((f) => f.checked_on).sort().pop();
@@ -17,8 +23,13 @@ const items = faqFor(ed, lang).map((it) => {
     if (seen) seen.title = f.source_title.split(",")[0];
     else byUrl.set(f.source_url, { url: f.source_url, title: f.source_title });
   }
-  return { ...it, next: cta(lang, ed, it.cta), sources: [...byUrl.values()], checked };
+  let next: { href: string; label: string; who: string };
+  if (it.cta === "agency") next = { href: pathFor(lang, ed, "buy"), label: F.cta.agency, who: `${config.agency.name} · ${F.sponsored}` };
+  else if (config.partners[it.cta]) next = { href: `${talk}?cat=${it.cta}#form`, label: F.cta[it.cta], who: `${config.partners[it.cta]} · ${F.sponsored}` };
+  else next = { href: `${talk}?cat=${it.cta}#form`, label: F.talk, who: F.who[it.cta] };
+  return { ...it, next, sources: [...byUrl.values()], checked };
 });
+const stages: Stage[] = ["before", "buying", "after"];
 const lastChecked = items.map((i) => i.checked).filter(Boolean).sort().pop();
 const jsonLd = {
   "@context": "https://schema.org",
@@ -26,28 +37,65 @@ const jsonLd = {
   mainEntity: items.map((it) => ({ "@type": "Question", name: it.q, acceptedAnswer: { "@type": "Answer", text: it.a } })),
 };
 ---
-<C lang={lang} ed={ed} page="faq" title={`${S.faq.title} | Imóveis Portugal`} description={S.faq.lede}>
+<V2 lang={lang} ed={ed} page="faq" title={`${F.title} | Imóveis Portugal`} description={F.lede}>
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
-  <div class="w ph g">
-    <h1>{S.faq.title}</h1>
-    <p class="lede">{S.faq.lede}</p>
-    {lastChecked && <p class="meta">{S.faq.checked} {fmtDate(lang, lastChecked)}</p>}
+  <div class="frame read help">
+    <h1>{F.title}</h1>
+    <p class="lede">{F.lede}</p>
+    <div class="search" role="search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder={F.search} aria-label={F.search} autocomplete="off" />
+    </div>
+    <ul class="stages">
+      {stages.map((s) => <li><a href={`#${s}`}>{F.stages[s][0]} <span class="c">{items.filter((i) => i.stage === s).length}</span></a></li>)}
+    </ul>
+    {lastChecked && <p class="small" style="margin-top:16px">{F.updated} {fmtDate(lang, lastChecked)}</p>}
   </div>
-  <div class="w">
-    {items.map((it) => (
-      <section class="row g" id={it.id} aria-labelledby={`${it.id}-q`}>
-        <h2 id={`${it.id}-q`}>{it.q}</h2>
-        <div class="body">
-          <p>{it.a}</p>
-          <a class="next" href={it.next.href}>{it.next.label}</a>
-          {it.sources.length > 0 && (
-            <p class="src">{S.faq.sources}: {it.sources.map((f, i) => (<>{i > 0 && "; "}<a href={f.url} rel="noopener">{f.title}</a></>))}{it.checked && `. ${S.faq.checked} ${fmtDate(lang, it.checked)}.`}</p>
-          )}
-        </div>
+  <div class="frame read">
+    <div class="none" id="none" role="status">
+      <p>{F.none}</p>
+      <a class="btn" href={`${talk}#form`}>{F.talk}</a>
+    </div>
+    {stages.map((s) => (
+      <section class="stage" id={s} aria-labelledby={`${s}-h`}>
+        <h2 id={`${s}-h`}>{F.stages[s][0]}</h2>
+        <p>{F.stages[s][1]}</p>
+        {items.filter((i) => i.stage === s).map((it) => (
+          <details class="qa" id={it.id}>
+            <summary>{it.q}</summary>
+            <div class="a">
+              <p>{it.a}</p>
+              {it.sources.length > 0 && (
+                <p class="src">{F.sources}: {it.sources.map((f, i) => (<>{i > 0 && "; "}<a href={f.url} rel="noopener">{f.title}</a></>))}{it.checked && `. ${F.checked} ${fmtDate(lang, it.checked)}.`}</p>
+              )}
+              <div class="next">
+                <a class="btn sm" href={it.next.href}>{it.next.label}</a>
+                <span class="who">{it.next.who}</span>
+              </div>
+            </div>
+          </details>
+        ))}
       </section>
     ))}
+    <p class="disc">{DISCLAIMER[lang]}</p>
   </div>
-  <div class="disc">
-    <div class="w g"><p>{S.disclaimer}</p></div>
-  </div>
-</C>
+  <script is:inline>
+    (function () {
+      var q = document.getElementById("q"), none = document.getElementById("none");
+      var norm = function (s) { return s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase(); };
+      var items = [].slice.call(document.querySelectorAll(".qa")).map(function (d) { return { d: d, t: norm(d.textContent) }; });
+      // Open the question named in the address bar (links from other pages).
+      if (location.hash) { var t = document.getElementById(location.hash.slice(1)); if (t && t.tagName === "DETAILS") t.open = true; }
+      q.addEventListener("input", function () {
+        var words = norm(q.value).split(/\s+/).filter(Boolean), shown = 0;
+        items.forEach(function (it) {
+          var ok = words.every(function (w) { return it.t.indexOf(w) > -1; });
+          it.d.hidden = !ok; if (ok) shown++;
+          it.d.open = words.length > 0 && ok && shown <= 3;
+        });
+        document.querySelectorAll(".stage").forEach(function (s) { s.hidden = !s.querySelector(".qa:not([hidden])"); });
+        none.classList.toggle("on", shown === 0);
+      });
+    })();
+  </script>
+</V2>
