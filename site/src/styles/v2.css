@@ -632,3 +632,24 @@ html:not(.js) .step-nav { display: none; }
 .steps-plain li { padding: 6px 0; }
 .ptypes .pl-h { display: block; font: 450 1.1rem/1.35 var(--serif); padding-top: 12px; }
 .ptypes .pl-p { display: block; color: var(--muted); font-size: 15px; padding-bottom: 12px; }
+/* Prices and rents (prompt 20 §3) */
+.prices { padding-bottom: 32px; }
+.pc-controls { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; margin: 12px 0 16px; }
+.pc-add input { min-height: 44px; padding: 0 14px; border: 1px solid var(--rule); border-radius: 2px; background: var(--card); font: 400 15px var(--sans); color: var(--ink); width: min(280px, 100%); }
+.pc-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; }
+.pc-chips button, .pc-cur button { font: 500 14px/1 var(--sans); padding: 9px 12px; border: 1px solid var(--rule); border-radius: 2px; background: transparent; color: var(--ink); cursor: pointer; }
+.pc-chips button:nth-child(1) { border-color: #16181c; } .pc-chips button:nth-child(2) { border-color: #1f4a3d; color: #1f4a3d; } .pc-chips button:nth-child(3) { border-color: #7a5e28; color: #7a5e28; }
+.pc-cur { display: flex; gap: 6px; margin: 0; flex-wrap: wrap; }
+.pc-cur button[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.pc-chart { margin: 0; padding: 8px 0 0; border-top: 1px solid var(--rule); }
+.lchart { width: 100%; height: auto; display: block; font-family: var(--sans); }
+.pc-past { max-width: 46em; }
+.pc-table-wrap { overflow-x: auto; margin: 16px 0 8px; }
+.pc-table td, .pc-table th { white-space: nowrap; }
+.pc-links p { margin: 6px 0; }
+a.brass { color: var(--brass); }
+.prices-home { padding: 56px 0 24px; border-top: 1px solid var(--rule); }
+.prices-home h2 { max-width: 22ch; }
+.prices-home .read { margin: 0 0 12px; }
+.pc-legend .k0 { color: #16181c; } .pc-legend .k1 { color: #1f4a3d; } .pc-legend .k2 { color: #7a5e28; }
+.pc-chart { max-width: 760px; }

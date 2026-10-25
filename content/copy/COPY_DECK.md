@@ -10,6 +10,16 @@ How to edit:
 
 ## common
 
+### nav.consult
+- PT: Consulta privada
+- EN: Private consultation
+- FR: Consultation privée
+
+### navx.prices
+- PT: Preços
+- EN: Prices
+- FR: Prix
+
 ### nav.journey
 - PT: O seu percurso
 - EN: Your path
@@ -106,9 +116,9 @@ How to edit:
 - FR: Carte
 
 ### nav.data
-- PT: Preços das casas
-- EN: House prices
-- FR: Prix des logements
+- PT: Preços e rendas
+- EN: Prices and rents
+- FR: Prix et loyers
 
 ### nav.casa
 - PT: Passo a passo
@@ -4031,3 +4041,125 @@ How to edit:
 - PT: Quando a compra estiver mais próxima, peça aqui a sua consulta privada.
 - EN: When your purchase is closer, request your private consultation here.
 - FR: Quand votre achat sera plus proche, demandez ici votre consultation privée.
+
+## prices
+
+### title
+- PT: Preços e rendas
+- EN: Prices and rents
+- FR: Prix et loyers
+
+### h1
+- PT: Dez anos de preços, concelho a concelho
+- EN: Ten years of prices, municipality by municipality
+- FR: Dix ans de prix, commune par commune
+
+### lede
+- PT: O preço mediano do metro quadrado vendido em cada concelho desde 2016, as rendas dos novos contratos e o rendimento bruto, com a fonte oficial.
+- EN: The median price per square metre sold in each municipality since 2016, rents on new leases and gross yield, with the official source.
+- FR: Le prix médian du mètre carré vendu dans chaque commune depuis 2016, les loyers des nouveaux baux et le rendement brut, avec la source officielle.
+
+### national
+- PT: Portugal: de {from} por m² em 2016 para {to} em 2026.
+- EN: Portugal: from {from} per m² in 2016 to {to} in 2026.
+- FR: Portugal : de {from} le m² en 2016 à {to} en 2026.
+
+### break
+- PT: Nova metodologia INE
+- EN: New INE method
+- FR: Nouvelle méthode INE
+
+### compare.h
+- PT: Compare até três lugares
+- EN: Compare up to three places
+- FR: Comparez jusqu'à trois lieux
+
+### compare.add
+- PT: Juntar um concelho
+- EN: Add a municipality
+- FR: Ajouter une commune
+
+### compare.remove
+- PT: Retirar
+- EN: Remove
+- FR: Retirer
+
+### cur.eur
+- PT: Em euros
+- EN: In euros
+- FR: En euros
+
+### cur.local
+- PT: Em {cur}, à taxa do BCE de {date}
+- EN: In {cur}, at the ECB rate of {date}
+- FR: En {cur}, au taux de la BCE du {date}
+
+### col.place
+- PT: Lugar
+- EN: Place
+- FR: Lieu
+
+### col.m2
+- PT: Preço por m²
+- EN: Price per m²
+- FR: Prix au m²
+
+### col.10y
+- PT: Desde 2016
+- EN: Since 2016
+- FR: Depuis 2016
+
+### col.1y
+- PT: Num ano
+- EN: In a year
+- FR: Sur un an
+
+### col.rent
+- PT: Renda por m², mês
+- EN: Rent per m², month
+- FR: Loyer au m², mois
+
+### col.yield
+- PT: Rendimento bruto
+- EN: Gross yield
+- FR: Rendement brut
+
+### yield.note
+- PT: Rendimento bruto: renda mediana por m² × 12 ÷ preço mediano por m², nos 12 meses até ao 2.º trimestre de 2026. Antes de custos e impostos.
+- EN: Gross yield: median rent per m² × 12 ÷ median price per m², over the 12 months to Q2 2026. Before costs and tax.
+- FR: Rendement brut : loyer médian au m² × 12 ÷ prix médian au m², sur les 12 mois jusqu'au 2e trimestre 2026. Avant frais et impôts.
+
+### method
+- PT: As vendas seguem a metodologia do INE de 2018 até ao 3.º trimestre de 2019 e a de 2022 a partir daí. As regiões começam em 2019. Medianas de vendas reais, não casas concretas.
+- EN: Sales follow INE's 2018 method up to Q3 2019 and its 2022 method from then on. Regions start in 2019. Medians of actual sales, not specific homes.
+- FR: Les ventes suivent la méthode INE de 2018 jusqu'au 3e trimestre 2019, puis celle de 2022. Les régions commencent en 2019. Médianes de ventes réelles, pas des biens précis.
+
+### regions.h
+- PT: Por região
+- EN: By region
+- FR: Par région
+
+### place.h
+- PT: Neste lugar
+- EN: In this place
+- FR: Dans ce lieu
+
+### home.h
+- PT: Dez anos de preços
+- EN: Ten years of prices
+- FR: Dix ans de prix
+
+### home.p
+- PT: Desde 2016, o metro quadrado vendido em Portugal passou de {from} para {to}. Veja cada concelho, as rendas e o rendimento bruto.
+- EN: Since 2016, the square metre sold in Portugal has gone from {from} to {to}. See each municipality, rents and gross yield.
+- FR: Depuis 2016, le mètre carré vendu au Portugal est passé de {from} à {to}. Voyez chaque commune, les loyers et le rendement brut.
+
+### home.open
+- PT: Ver preços e rendas
+- EN: See prices and rents
+- FR: Voir prix et loyers
+
+### none
+- PT: Sem número oficial
+- EN: No official figure
+- FR: Pas de chiffre officiel

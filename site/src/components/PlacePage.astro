@@ -8,6 +8,8 @@ import { PLACES, QUARTERS, NATIONAL, inPlace, placeName, type Place } from "../l
 import { SUB } from "../lib/tools";
 import { c, edName } from "../lib/copy";
 import DevSlots from "./DevSlots.astro";
+import { PRICES, LAST } from "../lib/prices";
+import { lineChart } from "../lib/chart";
 
 interface Props { lang: Lang; ed: EdCode; place: Place; }
 const { lang, ed, place } = Astro.props;
@@ -31,6 +33,12 @@ const ld = { "@context": "https://schema.org", "@type": "BreadcrumbList", itemLi
   { "@type": "ListItem", position: 3, name: placeName(place.name, lang), item: `${host}${paths[lang]}` },
 ] };
 const others = PLACES.filter((p) => p.slug !== place.slug);
+// Prompt 20 §3: ten years for this municipality next to Portugal, with rent and gross yield where INE has them.
+const hist = PRICES.munis[place.slug];
+const nHist = src.n("ine-m2-history"), nRent = src.n("ine-rent-2026q2");
+const pchart = hist ? lineChart(PRICES.quarters, [{ label: hist.n, values: hist.m2 }, { label: "Portugal", values: PRICES.regions.PT.m2 }], { breakAt: PRICES.break, breakLabel: c("prices.break", lang), fmt: (v) => nf.format(v), h: 240 }) : "";
+const nf2 = new Intl.NumberFormat(HTML_LANG[lang], { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const nf1 = new Intl.NumberFormat(HTML_LANG[lang], { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 ---
 <V2 lang={lang} ed={ed} page="map" paths={paths} title={`${title} | Imóveis Portugal · ${edName(ed, lang)}`} description={lede} sticky={null}>
   <Fragment slot="head"><script type="application/ld+json" set:html={JSON.stringify(ld)} /></Fragment>
@@ -43,12 +51,15 @@ const others = PLACES.filter((p) => p.slug !== place.slug);
   <div class="frame read place">
     <h2 class="h3">{c("place.budgets.h", lang)}</h2>
     <dl class="bill">{budgets.map((b) => <><dt>{eur(b, lang)}</dt><dd>{c("place.budget", lang, { m2: nf.format(Math.round(b / place.m2)) })}</dd></>)}</dl>
-    <h2 class="h3" style="margin-top:36px">{c("place.trend.h", lang)}</h2>
-    <dl class="bill">{QUARTERS.map((q, i) => <><dt>{qLabel(q)}</dt><dd>{place.series[i] ? `${eur(place.series[i]!, lang)}/m²` : "—"}</dd></>)}</dl>
+    <h2 class="h3" style="margin-top:36px">{c("prices.home.h", lang)}<a class="sup" href={`#fonte-${nHist}`}>{nHist}</a></h2>
+    {pchart && <figure class="pc-chart" set:html={pchart} />}
+    <p class="small">{c("journey.past", lang)}</p>
+    {hist && hist.rent["2026"] && <dl class="bill"><dt>{c("prices.col.rent", lang)}<a class="sup" href={`#fonte-${nRent}`}>{nRent}</a></dt><dd>{nf2.format(hist.rent["2026"])} €</dd>{hist.yield && <><dt>{c("prices.col.yield", lang)}</dt><dd>{nf1.format(hist.yield)}{lang === "fr" ? " %" : "%"}</dd></>}</dl>}
+    {hist && hist.yield && <p class="small">{c("prices.yield.note", lang)}</p>}
     <p class="small">{c("data.note", lang)} {c("place.imi", lang)}</p>
     <h2 class="h3" style="margin-top:36px">{c("place.next.h", lang)}</h2>
     <p><a class="btn" href={simHref}>{c("place.sim", lang)}</a></p>
-    <p><a href={`${pathFor(lang, ed, "buy")}?place=${encodeURIComponent(place.name)}`}>{c("place.homes", lang)}</a> · <a href={`${mapBase}?place=${place.slug}`}>{c("place.map", lang)}</a></p>
+    <p><a href={`${pathFor(lang, ed, "consult")}?place=${encodeURIComponent(place.name)}`}>{c("place.homes", lang)}</a> · <a href={`${mapBase}?place=${place.slug}`}>{c("place.map", lang)}</a> · <a href={pathFor(lang, ed, "journey")}>{c("journey.open", lang)}</a> · <a href={pathFor(lang, ed, "data")}>{c("prices.home.open", lang)}</a></p>
     <DevSlots lang={lang} ed={ed} slug={place.slug} />
     <nav class="others" aria-labelledby="others">
       <h2 id="others" class="h-small">{c("place.others.h", lang)}</h2>
