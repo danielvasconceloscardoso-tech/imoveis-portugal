@@ -47,7 +47,7 @@ Status: To do · Doing · Blocked · Done
 | 10 | Meta Ad Library pass for Luxembourg and Switzerland (links in sponsors/METHOD.md); add advertisers as tier A | Partner | To do | 2026-11-06 |
 | 11 | Get the latest exhibitor list of the Paris Portuguese property fair | Partner | To do | 2026-11-06 |
 | 12 | Optional: move repo to a brand GitHub organisation (current account name contains the founder's name) | Operator | To do | 2026-11-07 |
-| 8g | Run ops/prompts/03_international_sponsors.md (foreign-capital developers, bilateral chambers, embassy economic sections; drafts only). Checked 2026-10-25: not run. Pipeline has no chambers or embassies, 7 developers and only 4 US-only rows, none for Israel | CTO | To do | 2026-10-30 |
+| 8g | Run ops/prompts/03_international_sponsors.md (foreign-capital developers, bilateral chambers, embassy economic sections; drafts only). Checked 2026-10-25: not run. Pipeline has no chambers or embassies, 7 developers and only 4 US-only rows, none for Israel. Same as task 16 | CTO | To do | 2026-10-30 |
 | 8h | Run ops/prompts/04_free_ebooks.md (facts base + free e-books per edition) | CTO | Done on branch: content/facts/facts.csv (54 facts), 18 e-book PDFs; review in 8i and 9d | 2026-11-06 |
 | 8i | Review legal and tax facts flagged in the e-book PR | Operator | To do | 2026-11-10 |
 | 8j | Apply ops/prompts/05_usa_israel_editions.md to prompts 02–04 | CTO | Done on branch for FAQ, plans, drafts, e-books, domain options; sponsor targets for US and IL still missing (see 8g) | 2026-10-26 |
@@ -81,11 +81,17 @@ Status: To do · Doing · Blocked · Done
 
 | 13d | Send the credit-intermediary business name and its Banco de Portugal registration number (for the simulators, D21), confirm video visits, one real listing with photos, and sign the Gold sponsorship agreement (D20) | Father via Operator | To do | 2026-11-01 |
 
-| 14 | Approve merging claude/brave-gauss-cwafi6 into main so the live link shows the current design (main is still the old Sprint 0 site; the branch is 32 commits ahead and 2 behind, so sync with main first) | Operator | To do | 2026-10-27 |
+| 14 | Merge claude/brave-gauss-cwafi6 into main so the live link shows the current design. Requested by Daniel 25 Oct; still needs his explicit "go" on the day (hard rule 2), and a check that the site stays noindex (launchReady false) | CTO prepares, Operator approves | To do: waits for "go" | 2026-10-27 |
 | 14b | D4: set the billing entity, then fill config.entity, switch launchReady and complete the legal pages (site stays noindex until then) | Operator | Blocked: D4 | 2026-11-13 |
-| 14c | Create ops/METRICS.md and the /status command (Sprint 3 items; neither exists yet) | CTO | To do | 2026-11-13 |
+| 14c | Create ops/METRICS.md (weekly: subscribers per edition, traffic, leads, sponsors, revenue) with a script that fills what it can from Cloudflare Web Analytics, beehiiv and pipeline.csv, plus the /status command that reads it. Requested by Daniel 25 Oct | CTO | To do | 2026-11-06 |
 
 | 14d | Review the new FAQ answer "Habitação Própria Permanente" (all languages) and UNVERIFIED items 1, 2 and 6 from the Doutor Finanças guide | Daniel | To do | 2026-11-06 |
+
+| 15 | Blog on the site (all editions, PT, EN, FR): article template and collection, index page, SEO (title and description, hreflang, canonical, sitemap, Article and FAQ structured data, short answer-first intro for featured snippets and AI answers), sources and disclaimer per the editorial policy. Two launch articles chosen by the CTO from the most searched and most important topics (proposed: the 7.5% non-resident IMT and what changes for emigrants; the buying process step by step from abroad), drafted in all three languages from content/facts/facts.csv. Requested by Daniel 25 Oct | CTO | To do | 2026-11-06 |
+| 15b | Review the two blog articles (legal and tax: Daniel; market: partner agency) before anything is published | Daniel, Partner | To do | 2026-11-13 |
+| 16 | Run ops/prompts/03_international_sponsors.md (same as 8g; requested again by Daniel 25 Oct) | CTO | To do | 2026-10-30 |
+| 17 | Social media plan: from content creation to posting and monitoring, as automated as the rules allow. Plan only, for approval: content from the weekly batch, formats per platform, a scheduler export, monitoring of reach and clicks feeding METRICS.md, and the approval gate (hard rule 2: nothing is posted without the operator's approval). Verify the free tiers and import formats of Meta Business Suite, Metricool and Buffer before proposing. Requested by Daniel 25 Oct | CTO | To do: plan first | 2026-11-06 |
+| 17b | Approve the social plan, then create the brand accounts (D2, English ones named "Portugal Home Guides") | Operator | To do | 2026-11-13 |
 
 ## Last session
 
