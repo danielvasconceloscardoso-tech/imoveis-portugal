@@ -34,7 +34,7 @@ Stop and send Daniel the preview link and screenshots. Wait for his go-ahead.
 ## Phase 3 — Build (after the go-ahead)
 
 1. **Site:** all editions and pages on the new design. One clear action per screen. Fast on mobile. The language switch (PT, EN, FR, D18) stays visible but discreet.
-2. **Trust, all of it real:** partner logos, the partner agency with its AMI licence (13250), sources under every figure, a "How we work" page (independent facts, sponsored content labelled). No invented numbers, testimonials or "as seen in" badges (Código da Publicidade, DL 330/90). Audience figures appear only once they exist.
+2. **Trust, all of it real:** partner logos, the partner agency with its AMI licence (13250), sources under every figure, a "How we work" page (facts from official sources, sponsored content labelled; never call the platform independent). No invented numbers, testimonials or "as seen in" badges (Código da Publicidade, DL 330/90). Audience figures appear only once they exist.
 3. **FAQ:** grouped by stage (Before buying, Buying, After buying), with search, short answers and one next step each. Wise and Stripe help pages are the model.
 4. **Translations:** rewrite natively in each language; don't translate word for word. PT means European Portuguese (no Brazilian forms), the FR a Luxembourg or Paris reader would expect, and EN for an American reader. Keep a glossary in content/GLOSSARY.md (NIF, IMT, IMI, CPCV, escritura and others) and use the same terms everywhere.
 5. **E-books:** redesign the 18 as short premium reports: cover, contents, a worked example with real numbers, charts, a sources page, the disclaimer, and partner pages labelled as sponsored. Knight Frank is the model. Ten to sixteen pages.
