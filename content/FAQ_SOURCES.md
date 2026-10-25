@@ -40,6 +40,7 @@ So `rank` orders questions by **how many independent sources raised them** in th
 | 3.5–3.6 | CH: 2nd pillar for a home in Portugal, conditions (ch-2p, ch-2p-rules) | Before | ibani.com (two guides), hellosafe.ch |
 | 4 | How do I get a NIF? (nif) | Before | brighttax.com, cgd.pt buyers guide, expat.com/fr |
 | 5 | Do non-residents pay more IMT? (imt-nonres) | Buying | idealista.pt/en, portugalist.com, forumdacasa.com |
+| 5.5 | How much do the deed and registration cost? (deed), added in prompt 10 | Buying | cidadaniaevisto.com.br, wise.com, remitly.com, expat.com/fr (design/v2/BENCHMARK.md) |
 | 6 | BR, US, IL: Does buying let me live in Portugal? Golden Visa (visa) | Before | brighttax.com, mcs.pt, eurodicas.com.br, haaretz.com, idealista.pt (vistos gold) |
 | 7 | Do I need a lawyer? (lawyer) | Buying | brighttax.com, rightmove.co.uk, cgd.pt, immoabroad.com |
 | 8 | What taxes every year? (yearly) | After | propertyguides.com, expat.com/fr "coût foncier annuel", blevinsfranks.com |
@@ -48,6 +49,7 @@ So `rank` orders questions by **how many independent sources raised them** in th
 | 9.5 | LU: rent declared in Luxembourg (lu-rent); IL: rent taxed in Israel (il-rent) | After | doutorfinancas.pt (LU emigrants); sovereigngroup.com, blevinsfranks.com |
 | 10 | How much tax when I sell? (sell) | After | sovereigngroup.com, mcs.pt, idealista.pt/en (two articles), youroverseashome.com |
 | 10.5 | US: sale taxed in the US (us-sale) | After | wise.com/us blog, goldinglawyers.com |
+| 10.8 | BR, US, IL: special tax regime for people moving to Portugal (ifici), added in prompt 10 | After | letemps.ch, expat.com/fr ("fin de mon RNH"), remitly.com |
 | 11 | How much will a bank lend me? (borrow) | Before | deco.proteste.pt, idealista.pt, galivel.com |
 | 11.5 | CH: pillar 3a (ch-3a) | Before | ibani.com |
 | 12 | Do I have to be in Portugal to sign? (sign) | Buying | comparamais.pt (procuração), brighttax.com |
@@ -60,9 +62,9 @@ So `rank` orders questions by **how many independent sources raised them** in th
 
 ## Asked often but not answered yet
 
-These came up in the searches but need a fact we could not verify at an official source (see content/faq/UNVERIFIED.md):
+Updated in prompt 10: the Golden Visa (Lei 56/2023, art. 42.º) and the deed and registration costs (Casa Pronta, justica.gov.pt) are now verified and answered. Still open (content/faq/UNVERIFIED.md):
 
-1. Golden Visa through real estate (Lei 56/2023): the law's text did not load (diariodarepublica.pt is a script-only page).
-2. Notary, registration and Casa Pronta fees: justica.gov.pt returned an error.
-3. Lawyer fees and usual down payments for non-residents: market practice, not law.
-4. The emigrant account ("conta emigrante") and an IMT exemption linked to it: only commercial sources.
+1. Whether a Portuguese bank account is required.
+2. How long a purchase takes.
+3. Average prices by city, agency fees, usual deposit on the CPCV, usual down payment for non-residents.
+4. Citizenship (including the Sephardic route) and the emigrant account ("conta emigrante").

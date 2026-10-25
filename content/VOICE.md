@@ -6,7 +6,7 @@ Target feeling: reliable, trustworthy, and "I want to belong to this".
 
 ## The five rules
 
-1. **Belonging first.** We write to people who live abroad with Portugal at heart: "a sua casa em Portugal, mesmo a viver lá fora". Use "we" and "you" ("nós" and "você"/"o senhor" avoided: in PT write impersonal or "o seu"; FR "vous"). Never "users", "clients", "leads".
+1. **Belonging first.** We write to people who live abroad with Portugal at heart: "a sua casa em Portugal, mesmo a viver lá fora". We say "we" and "you" (PT: "o seu", "a sua", never "você"; FR: "vous"). Never "users", "clients" or "leads".
 2. **Trust through proof.** Every figure has its source and the date we checked it. The partner agency is named with its licence: Habinedita Gondomar, AMI 13250. Sponsored content says so. We never call the platform independent or neutral.
 3. **Short and specific.** Headlines under 8 words, with a number or a place where possible. One idea per paragraph. One action per screen.
 4. **Describe, never advise.** We explain the rules; a professional advises on a person's case. No promises of returns. Banned: "paraíso", "oportunidade única", "investimento garantido", "paradis", "opportunité unique", "investissement garanti", "paradise", "once-in-a-lifetime", "guaranteed investment" or "guaranteed return".

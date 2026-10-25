@@ -6,9 +6,10 @@
   cta: tax
   q: "Posso usar o 2.º pilar para comprar casa em Portugal?"
   a: >-
-    Só para a residência principal. As regras federais permitem levantar antecipadamente o 2.º pilar para a
-    casa onde vive, na Suíça ou no estrangeiro, mas não para uma casa de férias. O levantamento mínimo é de
-    20 000 francos.
+    Sim, mas só para a casa onde vai viver. As regras federais permitem levantar antecipadamente o 2.º pilar
+    para a residência principal, na Suíça ou no estrangeiro, mas não para uma casa de férias ou para
+    arrendar. O levantamento mínimo é de 20 000 francos. A sua caixa de pensões aplica as regras ao seu
+    caso. Um consultor fiscal parceiro ajuda a preparar o pedido.
   facts: [ch-2nd-pillar-abroad]
 
 - id: pt-ch-2p-rules
@@ -17,9 +18,10 @@
   cta: tax
   q: "Que condições e efeitos tem o levantamento do 2.º pilar?"
   a: >-
-    Um imóvel de cada vez, um levantamento a cada 5 anos, pedido até 3 anos antes da reforma e consentimento
-    escrito do cônjuge. Depois dos 50 anos o montante é limitado. O levantamento reduz a pensão futura e tem
-    de ser reembolsado se vender a casa, salvo se comprar outra habitação própria em 2 anos.
+    Reduz a sua pensão futura e tem de ser devolvido se vender a casa, salvo se comprar outra para viver em
+    2 anos. Só vale para um imóvel de cada vez, uma vez a cada 5 anos, pedido até 3 anos antes da reforma e
+    com o acordo escrito do cônjuge. Depois dos 50 anos, o montante é limitado. Um consultor fiscal parceiro
+    faz as contas.
   facts: [ch-2p-conditions, ch-2p-effects]
 
 - id: pt-ch-3a
@@ -28,7 +30,8 @@
   cta: tax
   q: "E o 3.º pilar (3a)?"
   a: >-
-    O pilar 3a também pode ser levantado antecipadamente para comprar habitação para uso próprio ou para
-    amortizar um crédito à habitação. As condições concretas, como prazos e idade, dependem do contrato e
-    das regras federais.
+    Sim, o pilar 3a também pode ser levantado antes do tempo para a casa própria. Serve para comprar uma
+    habitação para uso próprio ou para amortizar um crédito à habitação. As condições concretas, como prazos
+    e idade, dependem do seu contrato e das regras federais, por isso convém confirmá-las com a instituição.
+    Um consultor fiscal parceiro pode ajudar.
   facts: [ch-3a-home]

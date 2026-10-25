@@ -6,11 +6,11 @@
   cta: lawyer
   q: "Comprar casa dá direito a viver em Portugal?"
   a: >-
-    Comprar e viver em Portugal são processos separados. Para viver cá precisa de um visto de residência,
-    por exemplo o de quem vive de rendimentos próprios (D7) ou o visto CPLP, que depois dá acesso à
-    autorização de residência da AIMA. Sobre a autorização de residência para investimento (golden visa),
-    fale com um advogado: não resumimos aqui regras que não verificámos na fonte.
-  facts: [pt-nonresidents-buy, pt-visa-own-income, pt-cplp-residence]
+    Não. Desde 7 de outubro de 2023, comprar casa deixou de dar acesso a novos vistos gold (Lei 56/2023).
+    Comprar e viver em Portugal são processos separados: para viver cá precisa de um visto de residência,
+    por exemplo o de quem vive de rendimentos próprios (D7) ou o visto CPLP, que dá acesso à autorização de
+    residência da AIMA. Um advogado parceiro pode ver qual se aplica a si.
+  facts: [pt-ari-realestate-ended, pt-visa-own-income, pt-cplp-residence]
 
 - id: pt-br-irpf
   rank: 8.5
@@ -18,7 +18,20 @@
   cta: tax
   q: "Tenho de declarar a casa no imposto de renda brasileiro?"
   a: >-
-    Se é residente fiscal no Brasil, a casa entra em Bens e Direitos da declaração do IRPF, pelo valor de
-    compra convertido em dólares e depois em reais à cotação de venda do Banco Central na data da compra.
-    Com bens no estrangeiro de 1 milhão de dólares ou mais a 31 de dezembro, há ainda a declaração CBE.
+    Sim, se for residente fiscal no Brasil. A casa entra em Bens e Direitos na declaração do IRPF, pelo
+    valor de compra convertido em dólares e depois em reais, à cotação de venda do Banco Central na data da
+    compra. Se os seus bens no estrangeiro somarem 1 milhão de dólares ou mais a 31 de dezembro, entrega
+    também a declaração CBE.
   facts: [br-bens-exterior, br-cbe]
+
+- id: pt-br-ifici
+  rank: 10.8
+  stage: after
+  cta: tax
+  q: "Há um regime fiscal especial para quem se muda para Portugal?"
+  a: >-
+    Sim, para algumas profissões. O IFICI aplica uma taxa especial de 20% durante 10 anos ao rendimento do
+    trabalho em atividades elegíveis, como investigação, ensino superior ou empregos altamente qualificados.
+    É para quem passa a residente fiscal e não foi residente em nenhum dos cinco anos anteriores. Comprar
+    casa, por si, não dá acesso. Um consultor fiscal parceiro vê se se aplica.
+  facts: [pt-ifici-20pct]

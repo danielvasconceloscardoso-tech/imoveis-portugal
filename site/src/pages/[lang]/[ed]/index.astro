@@ -1,59 +1,64 @@
 ---
-// Edition home, redesign v2 (prompt 09): one action per screen, the newsletter signup first.
+// Edition home (prompt 10): belonging first, proof on the first screen, one action (the newsletter).
+// Wording: content/copy/COPY_DECK.md, blocks "home.*".
 import V2 from "../../../layouts/V2.astro";
 import Embed from "../../../components/Embed.astro";
 import { config } from "../../../config";
-import { EDITIONS, ED_ORDER, LANGS, t, pathFor, type EdCode, type Lang } from "../../../i18n";
-import { ui, PHOTO } from "../../../lib/ui";
+import { ED_ORDER, LANGS, pathFor, type EdCode, type Lang } from "../../../i18n";
+import { PHOTO } from "../../../lib/ui";
 import { homeFigures, fmtDate } from "../../../lib/content";
+import { c, cl, edName } from "../../../lib/copy";
 
 export function getStaticPaths() {
   return LANGS.flatMap((lang) => ED_ORDER.map((ed) => ({ params: { lang, ed } })));
 }
 const lang = Astro.params.lang as Lang;
 const ed = Astro.params.ed as EdCode;
-const ED = EDITIONS[ed];
-const T = t(ed, lang);
-const U = ui(lang), H = U.home;
 const figs = homeFigures(ed, lang);
 const photo = PHOTO[ed];
+const place = c(`editions.place.${ed}`, lang);
+const weekly = cl("home.weekly", lang);
+weekly.splice(2, 0, c(`editions.topic.${ed}`, lang));
+const cards: [string, string][] = [["faq", "faq"], ["guide", "guide"], ["buy", "buy"]];
 ---
-<V2 lang={lang} ed={ed} page="home" title={`Imóveis Portugal · ${ED.name[lang]}`} description={T.lede}>
+<V2 lang={lang} ed={ed} page="home" title={`Imóveis Portugal · ${edName(ed, lang)}`} description={c("home.lede", lang)}>
   <section class="hero">
     <div class="frame grid">
       <div>
-        <p class="label"><span class="dot" aria-hidden="true"></span> {ED.name[lang]}</p>
-        <h1>{ED.hero[lang]}</h1>
-        <p class="lede">{T.lede}</p>
+        <p class="label"><span class="dot" aria-hidden="true"></span> {edName(ed, lang)}</p>
+        <h1>{c(`home.hero.${ed}`, lang)}</h1>
+        <p class="lede">{c("home.lede", lang)}</p>
         <div class="signup" id="subscrever">
-          <Embed id={config.forms.newsletter[lang]} title={H.signupH} pending={T.formPending(config.contactEmail)} hidden={{ edition: ed, lang }} height={200} />
-          <p class="small">{H.signupNote}{" "}<a href={pathFor(lang, ed, "privacy")}>{U.foot.privacy}</a></p>
+          <Embed id={config.forms.newsletter[lang]} title={c("home.signup.h", lang)} pending={c("common.form.pending", lang)} hidden={{ edition: ed, lang }} height={200} />
+          <p class="small">{c("home.signup.note", lang)}{" "}<a href={pathFor(lang, ed, "privacy")}>{c("common.privacy", lang)}</a></p>
         </div>
+        <p class="proof">{c("home.proof", lang)}</p>
       </div>
-      <figure style="margin:0">
+      <figure class="photo-fig">
         <div class="photo">
-          <img src={`/img/${photo.file}-1200.webp`} srcset={`/img/${photo.file}-640.webp 640w, /img/${photo.file}-1200.webp 1200w`} sizes="(min-width: 960px) 420px, 100vw" width="1200" height="900" alt={photo.place[lang]} fetchpriority="high" />
+          <img src={`/img/${photo}-1200.webp`} srcset={`/img/${photo}-640.webp 640w, /img/${photo}-1200.webp 1200w`} sizes="(min-width: 960px) 420px, calc(100vw - 40px)" width="1200" height="900" alt={place} fetchpriority="high" />
         </div>
-        <figcaption class="credit">{photo.place[lang]}. {U.photo}</figcaption>
+        <figcaption class="credit">{place}</figcaption>
       </figure>
     </div>
   </section>
 
   <section class="band white" aria-labelledby="figs">
     <div class="frame">
-      <p class="label">{H.figsLabel}</p>
-      <h2 id="figs">{H.figsH}</h2>
+      <p class="label">{c("home.figs.label", lang)}</p>
+      <h2 id="figs">{c("home.figs.h", lang)}</h2>
       <div class="figs">
         {figs.map((f, i) => (
           <div class="fig">
-            <span class="n">{f.big}<sup><a href={`#nota-${i + 1}`} aria-label={`${U.faq.sources} ${i + 1}`}>{i + 1}</a></sup></span>
+            <span class="n">{f.big}<sup><a href={`#nota-${i + 1}`} aria-label={`${c("common.sources", lang)} ${i + 1}`}>{i + 1}</a></sup></span>
             <p>{f.text}</p>
           </div>
         ))}
       </div>
       <ol class="notes">
+        <li class="notes-h">{c("common.sources", lang)}</li>
         {figs.map((f, i) => (
-          <li id={`nota-${i + 1}`}>{i + 1}. <a href={f.url} rel="noopener">{f.source}</a>{f.checked && `, ${U.faq.checked} ${fmtDate(lang, f.checked)}`}.</li>
+          <li id={`nota-${i + 1}`}>{i + 1}. <a href={f.url} rel="noopener">{f.source}</a>{f.checked && `, ${c("common.checked", lang, { date: fmtDate(lang, f.checked) })}`}.</li>
         ))}
       </ol>
     </div>
@@ -61,12 +66,12 @@ const photo = PHOTO[ed];
 
   <section class="band" aria-labelledby="start">
     <div class="frame">
-      <p class="label">{H.startLabel}</p>
-      <h2 id="start">{H.startH}</h2>
+      <p class="label">{c("home.start.label", lang)}</p>
+      <h2 id="start">{c("home.start.h", lang)}</h2>
       <div class="cards">
-        <a class="card" href={pathFor(lang, ed, "faq")}><h3>{H.faqCard[0]}</h3><p>{H.faqCard[1]}</p><span class="go arrow">{H.go} </span></a>
-        <a class="card" href={pathFor(lang, ed, "guide")}><h3>{H.guideCard[0]}</h3><p>{H.guideCard[1]}</p><span class="go arrow">{H.go} </span></a>
-        <a class="card" href={pathFor(lang, ed, "buy")}><h3>{H.agencyCard[0]}</h3><p>{H.agencyCard[1]}</p><span class="go arrow">{H.go} </span></a>
+        {cards.map(([k, page]) => (
+          <a class="card" href={pathFor(lang, ed, page as "faq")}><h3>{c(`home.card.${k}.h`, lang)}</h3><p>{c(`home.card.${k}.p`, lang)}</p><span class="go arrow">{c("home.go", lang)} </span></a>
+        ))}
       </div>
     </div>
   </section>
@@ -74,22 +79,22 @@ const photo = PHOTO[ed];
   <section class="band white" aria-labelledby="weekly">
     <div class="frame split">
       <div>
-        <p class="label">{H.weeklyLabel}</p>
-        <h2 id="weekly">{T.weeklyTitle}</h2>
+        <p class="label">{c("home.weekly.label", lang)}</p>
+        <h2 id="weekly">{c("home.weekly.h", lang)}</h2>
       </div>
-      <ul class="ticks">{T.weekly.map((w) => <li>{w}</li>)}</ul>
+      <ul class="ticks">{weekly.map((w) => <li>{w}</li>)}</ul>
     </div>
   </section>
 
   <section class="band" aria-labelledby="partners">
     <div class="frame split">
       <div>
-        <p class="label">{H.partnersLabel}</p>
-        <h2 id="partners">{H.partnersH}</h2>
+        <p class="label">{c("home.partners.label", lang)}</p>
+        <h2 id="partners">{c("home.partners.h", lang)}</h2>
       </div>
       <div>
-        <p class="lede">{H.partnersP}</p>
-        <a class="btn ghost" href={pathFor(lang, ed, "partners")}>{H.partnersA}</a>
+        <p class="lede">{c("home.partners.p", lang)}</p>
+        <a class="btn ghost" href={pathFor(lang, ed, "partners")}>{c("home.partners.a", lang)}</a>
       </div>
     </div>
   </section>

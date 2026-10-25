@@ -1,7 +1,8 @@
-# FAQ shared by every edition, French (Luxembourg and Paris readers) (prompt 09). Written natively, not translated.
-# Questions ranked by search interest (rank), grouped by stage (before, buying, after); see content/FAQ_SOURCES.md.
-# Rules: answer under 70 words, facts only from content/facts/facts.csv (ids in `facts`), describe never advise,
-# one partner action (`cta`: lawyer, bank, tax, fx, developer, agency). Terms follow content/GLOSSARY.md.
+# FAQ shared by every edition, French (Luxembourg and Paris readers) (prompts 09 and 10). Written natively, not translated.
+# Questions ranked by search interest (rank), grouped by stage (before, buying, after); see content/FAQ_SOURCES.md
+# and design/v2/BENCHMARK.md. Answers: 40-70 words, the answer in the first sentence, then the detail, then the
+# partner action (`cta`: lawyer, bank, tax, fx, developer, agency). Facts only from content/facts/facts.csv.
+# Voice: content/VOICE.md. Terms: content/GLOSSARY.md.
 
 - id: fr-buy-abroad
   rank: 1
@@ -9,9 +10,10 @@
   cta: lawyer
   q: "Puis-je acheter au Portugal si je vis à l'étranger ?"
   a: >-
-    Oui. Il n'est pas nécessaire d'être résident : le code de l'IMT prévoit même un taux propre aux non-
-    résidents fiscaux. Il vous faut un numéro fiscal portugais (NIF) avant de signer. Hors de l'UE, il faut
-    désigner un représentant fiscal, sauf adhésion aux notifications électroniques des Finances.
+    Oui, tout à fait. Il n'est pas nécessaire de vivre au Portugal ni d'y être résident : la loi sur l'IMT
+    prévoit même un taux propre aux acheteurs de l'étranger. Avant de signer, il vous faut un numéro fiscal
+    portugais (NIF). Hors de l'UE, vous désignez aussi un représentant fiscal, sauf adhésion aux
+    notifications électroniques des Finances. Un avocat partenaire peut s'en charger.
   facts: [pt-nonresidents-buy, pt-nif-nonresident, pt-tax-rep]
 
 - id: fr-costs
@@ -20,11 +22,11 @@
   cta: tax
   q: "Combien coûte un achat en plus du prix ?"
   a: >-
-    À l'achat, vous payez l'IMT et un droit de timbre de 0,8 % sur le prix. Un non-résident fiscal au
-    Portugal paie l'IMT au taux unique de 7,5 %, sauf exceptions. Avec un crédit s'ajoutent 0,6 % de droit
-    de timbre sur le prêt et 4 % sur les intérêts. Acte, enregistrement et honoraires dépendent du service
-    choisi.
-  facts: [pt-is-purchase, pt-imt-nonresident-flat, pt-imt-nonresident-exceptions, pt-is-loan-5y, pt-is-interest]
+    Prévoyez l'IMT, un droit de timbre de 0,8 % et l'acte avec l'enregistrement. Si vous n'êtes pas résident
+    fiscal au Portugal, l'IMT est de 7,5 % du prix, sauf exceptions. Avec un crédit s'ajoutent 0,6 % de
+    droit de timbre sur le prêt et 4 % sur les intérêts. Au guichet Casa Pronta, l'acte avec enregistrement
+    coûte 375 € ou 700 €.
+  facts: [pt-is-purchase, pt-imt-nonresident-flat, pt-imt-nonresident-exceptions, pt-is-loan-5y, pt-is-interest, pt-casa-pronta-fees]
 
 - id: fr-mortgage
   rank: 3
@@ -32,9 +34,10 @@
   cta: bank
   q: "Puis-je obtenir un crédit au Portugal sans y habiter ?"
   a: >-
-    Vous pouvez le demander, chaque banque décide. Les plafonds de la Banque du Portugal valent pour tous :
-    jusqu'à 90 % de la valeur pour une résidence principale et jusqu'à 80 % pour les autres usages, comme
-    une résidence secondaire. La banque retient le plus bas du prix et de son expertise.
+    Oui, vous pouvez le demander à une banque portugaise, qui décide au cas par cas. Les règles de la Banque
+    du Portugal valent pour tous : jusqu'à 90 % de la valeur pour la résidence principale et jusqu'à 80 %
+    pour un autre logement, comme une résidence secondaire. La banque retient le plus bas du prix et de son
+    expertise. Une banque partenaire peut simuler votre cas.
   facts: [pt-ltv-limits]
 
 - id: fr-nif
@@ -43,9 +46,10 @@
   cta: lawyer
   q: "Comment obtenir un NIF ?"
   a: >-
-    Le numéro fiscal portugais se demande en ligne par l'intermédiaire d'un représentant légal, ou sur place
-    aux Finances. Aucun représentant fiscal n'est nécessaire pour l'obtenir. Après l'achat, hors de l'UE,
-    vous avez 15 jours pour désigner un représentant fiscal ou adhérer aux notifications électroniques.
+    Vous le demandez en ligne par un représentant légal, ou sur place aux Finances. Le NIF est votre numéro
+    fiscal portugais et la première étape de tout achat. Aucun représentant fiscal n'est nécessaire pour
+    l'obtenir. Après l'achat, hors de l'UE, vous avez 15 jours pour désigner un représentant fiscal ou
+    adhérer aux notifications électroniques. Un avocat partenaire peut le demander pour vous.
   facts: [pt-nif-nonresident, pt-tax-rep]
 
 - id: fr-imt-nonres
@@ -54,11 +58,23 @@
   cta: tax
   q: "Les non-résidents paient-ils plus d'IMT ?"
   a: >-
-    Depuis mai 2026, un acheteur non-résident fiscal au Portugal paie l'IMT au taux unique de 7,5 %, sans
-    exonération. Exceptions : avoir déjà été considéré comme résident fiscal, le devenir dans les deux ans,
-    ou louer le logement à usage d'habitation avec un loyer plafonné par la loi. Dans ces deux derniers cas,
-    la différence est remboursée sur demande.
+    Oui : depuis mai 2026, un acheteur non-résident fiscal au Portugal paie l'IMT au taux unique de 7,5 %,
+    sans exonération. Exceptions : avoir déjà été considéré comme résident fiscal, le devenir dans les deux
+    ans, ou louer le logement comme résidence principale avec un loyer plafonné par la loi. Dans ces deux
+    derniers cas, la différence est remboursée sur demande.
   facts: [pt-imt-nonresident-flat, pt-imt-nonresident-exceptions]
+
+- id: fr-deed
+  rank: 5.5
+  stage: buying
+  cta: lawyer
+  q: "Combien coûtent l'acte et l'enregistrement ?"
+  a: >-
+    Au guichet Casa Pronta, un achat avec enregistrement coûte 375 €, ou 700 € avec un crédit hypothécaire,
+    plus 50 € par bien supplémentaire. L'acte et l'enregistrement s'y font en une seule fois. Apportez la
+    licence d'utilisation (ou sa dispense, selon la date de construction) et le certificat énergétique. Les
+    honoraires d'avocat s'ajoutent à part.
+  facts: [pt-casa-pronta-fees, pt-casa-pronta-docs]
 
 - id: fr-lawyer
   rank: 7
@@ -66,9 +82,11 @@
   cta: lawyer
   q: "Ai-je besoin d'un avocat pour acheter ?"
   a: >-
-    C'est votre choix. Un avocat peut vérifier l'inscription du bien au registre, relire le compromis avant
-    signature et vous représenter à l'acte avec une procuration si vous ne pouvez pas être au Portugal.
-  facts: [pt-poa-apostille, pt-sinal-442]
+    C'est votre choix, mais pour acheter à distance, un avocat évite des voyages et des risques. Il peut
+    vérifier l'inscription du bien au registre et des documents comme la licence d'utilisation, relire le
+    compromis avant signature et vous représenter à l'acte avec une procuration si vous ne pouvez pas être
+    au Portugal. Un avocat partenaire peut suivre l'achat du début à la fin.
+  facts: [pt-poa-apostille, pt-sinal-442, pt-casa-pronta-docs]
 
 - id: fr-yearly
   rank: 8
@@ -76,8 +94,10 @@
   cta: tax
   q: "Quels impôts dois-je payer chaque année ?"
   a: >-
-    L'IMI, un impôt municipal de 0,3 % à 0,45 % de la valeur fiscale du bien, au taux fixé par chaque
-    commune. L'AIMI ne porte que sur la somme des valeurs fiscales au-delà de 600 000 € par personne.
+    Vous payez l'IMI, un impôt municipal de 0,3 % à 0,45 % de la valeur fiscale du bien. Chaque commune fixe
+    son taux, qui varie donc d'une commune à l'autre. L'AIMI, un impôt additionnel, ne s'applique que si la
+    somme de vos valeurs fiscales dépasse 600 000 € par personne. Un conseiller fiscal partenaire peut faire
+    le calcul pour votre bien.
   facts: [pt-imi-rates, pt-aimi-deduction]
 
 - id: fr-rent
@@ -86,10 +106,10 @@
   cta: tax
   q: "Puis-je louer mon bien ?"
   a: >-
-    Oui, en location longue durée ou en location touristique (alojamento local). Celle-ci exige un
+    Oui, en location longue durée ou touristique (alojamento local). La location touristique exige un
     enregistrement préalable, et la commune peut s'y opposer sous 60 jours, ou 90 en zone de limitation. Les
     loyers d'habitation des non-résidents sont imposés à 25 % au Portugal, avec des réductions pour les baux
-    longs.
+    longs. Votre pays peut avoir ses propres règles.
   facts: [pt-al-registration, pt-rent-tax-nonresident]
 
 - id: fr-sell
@@ -98,9 +118,10 @@
   cta: tax
   q: "Combien d'impôt paie-t-on à la revente ?"
   a: >-
-    Pour l'impôt sur le revenu portugais, la plus-value sur la vente d'un bien ne compte que pour 50 % de
-    son montant. Le taux final dépend de vos revenus, et votre pays de résidence peut avoir ses propres
-    règles pour cette vente.
+    Au Portugal, seule la moitié de la plus-value compte pour l'impôt sur le revenu : le gain sur la vente
+    d'un bien est retenu à 50 %. Le taux final dépend de vos revenus, et votre pays de résidence peut aussi
+    avoir des règles pour cette vente. Avant de vendre, mieux vaut avoir les calculs des deux côtés. Un
+    conseiller fiscal partenaire peut les faire avec vous.
   facts: [pt-cg-50pct]
 
 - id: fr-borrow
@@ -109,9 +130,10 @@
   cta: bank
   q: "Combien la banque peut-elle me prêter ?"
   a: >-
-    Cela dépend de vos revenus. Selon les règles de la Banque du Portugal, l'ensemble de vos mensualités ne
-    doit pas dépasser 45 % de vos revenus nets. La durée peut aller jusqu'à 40 ans jusqu'à 35 ans d'âge, et
-    jusqu'à 35 ans au-delà.
+    Cela dépend surtout de vos revenus. Selon les règles de la Banque du Portugal, l'ensemble de vos
+    mensualités ne doit pas dépasser 45 % de vos revenus nets. La durée peut aller jusqu'à 40 ans si vous
+    avez 35 ans ou moins, et jusqu'à 35 ans au-delà. Une banque partenaire peut simuler le montant et la
+    mensualité pour votre cas.
   facts: [pt-dsti-45, pt-maturity-limits]
 
 - id: fr-sign
@@ -120,9 +142,10 @@
   cta: lawyer
   q: "Dois-je être au Portugal pour signer ?"
   a: >-
-    Non. Vous pouvez donner une procuration, par exemple à un avocat, signée dans un consulat du Portugal ou
-    devant un notaire de votre pays. Dans ce cas, elle doit porter l'apostille de La Haye pour valoir au
-    Portugal.
+    Non. Vous pouvez donner une procuration, par exemple à un avocat, qui signe pour vous. Elle peut être
+    établie dans un consulat du Portugal ou devant un notaire de votre pays. Si elle est signée devant un
+    notaire étranger, elle doit porter l'apostille de La Haye pour valoir au Portugal. L'achat avance ainsi
+    même si vous ne venez que pour visiter.
   facts: [pt-poa-apostille]
 
 - id: fr-cpcv
@@ -131,9 +154,10 @@
   cta: lawyer
   q: "Qu'est-ce que le compromis (CPCV) ?"
   a: >-
-    C'est le contrat signé avant l'acte, qui fixe le prix, la date et les arrhes. Si l'acheteur se désiste
-    par sa faute, il perd les arrhes ; si c'est le vendeur, l'acheteur peut exiger le double de ce qu'il a
-    versé (Code civil portugais, article 442).
+    C'est le contrat signé avant l'acte, qui fixe le prix, la date et les arrhes. Il protège les deux
+    parties : si l'acheteur se désiste par sa faute, il perd les arrhes ; si c'est le vendeur, l'acheteur
+    peut exiger le double de ce qu'il a versé (Code civil portugais, article 442). Mieux vaut donc le lire
+    attentivement. Un avocat partenaire peut le relire.
   facts: [pt-sinal-442]
 
 - id: fr-money
@@ -142,9 +166,10 @@
   cta: fx
   q: "Comment transférer l'argent au Portugal ?"
   a: >-
-    Par votre banque ou par un service de transfert, et les conditions de change varient de l'un à l'autre.
-    Banques, notaires et avocats doivent s'informer de l'origine des fonds quand l'opération le justifie
-    (loi 83/2017) : ils peuvent donc demander des justificatifs.
+    Par votre banque ou par un service de transfert, et le change et les frais varient beaucoup de l'un à
+    l'autre. Préparez les justificatifs de l'origine des fonds : banques, notaires et avocats doivent les
+    demander quand l'opération le justifie (loi 83/2017). Sur de gros montants, un petit écart de change
+    compte. Un partenaire de transfert peut comparer avec vous.
   facts: [pt-aml-funds]
 
 - id: fr-imt-calc
@@ -153,9 +178,10 @@
   cta: tax
   q: "Comment se calcule l'IMT et quand le payer ?"
   a: >-
-    Pour les résidents, les taux 2026 dépendent de l'usage : pas d'IMT jusqu'à 106 346 € pour une résidence
-    principale, 1 % dans cette tranche pour une résidence secondaire. Au-delà, le taux augmente par
-    tranches. L'IMT se paie le jour de sa liquidation ou dans les 30 jours.
+    Pour les résidents, il dépend de l'usage du bien et du prix, par tranches. Pas d'IMT jusqu'à 106 346 €
+    pour une résidence principale, 1 % dans cette tranche pour une résidence secondaire ; au-delà, le taux
+    augmente par tranches. Les non-résidents fiscaux paient un taux unique de 7,5 %. L'IMT se paie le jour
+    de sa liquidation ou dans les 30 jours.
   facts: [pt-imt-hpp-2026, pt-imt-second-home-2026, pt-imt-payment]
 
 - id: fr-timing
@@ -164,9 +190,10 @@
   cta: agency
   q: "Est-ce le bon moment pour acheter ?"
   a: >-
-    Nous ne donnons pas de conseil en investissement. Les faits : selon l'INE, les prix des logements ont
-    augmenté de 17,6 % en 2025, la plus forte hausse de la série. Ce qui compte, c'est votre budget, la
-    région et vos projets. Dites-nous ce que vous cherchez et l'agence partenaire vous montre l'offre.
+    Nous ne donnons pas de conseil en investissement, mais nous donnons les faits. Selon l'INE, les prix des
+    logements au Portugal ont augmenté de 17,6 % en 2025, la plus forte hausse de la série. Ce qui compte
+    vraiment, c'est votre budget, la région et ce que vous attendez du bien. Dites-nous ce que vous cherchez
+    : l'agence partenaire vous montre l'offre, sans engagement.
   facts: [pt-ine-prices-2025]
 
 - id: fr-find
@@ -175,9 +202,10 @@
   cta: agency
   q: "Pouvez-vous me trouver un bien ?"
   a: >-
-    Oui. Indiquez-nous la région, le budget et le calendrier. Votre demande part chez notre agence
-    partenaire agréée, Habinedita Gondomar, qui vous contacte sans frais et peut organiser des visites
-    pendant votre séjour au Portugal.
+    Oui. Indiquez la région, le budget et votre calendrier dans un formulaire de deux minutes. Votre demande
+    part chez notre agence partenaire agréée, Habinedita Gondomar, qui vous contacte sans frais. Elle peut
+    aussi organiser des visites pendant votre séjour au Portugal, pour voir plusieurs biens en un seul
+    voyage. Ce contact ne vous coûte rien.
   facts: []
 
 - id: fr-inherit
@@ -186,7 +214,8 @@
   cta: lawyer
   q: "J'ai hérité d'une maison au Portugal. Que faire ?"
   a: >-
-    Les héritiers décident ensemble de garder, vendre ou louer la maison. Le conjoint ou partenaire, les
-    enfants et les parents sont exonérés du droit de timbre de 10 % sur la succession au Portugal ; les
-    autres héritiers le paient. Les formalités d'enregistrement restent obligatoires pour tous.
+    D'abord, les héritiers décident ensemble de garder, vendre ou louer la maison. Le conjoint ou
+    partenaire, les enfants et les parents ne paient pas le droit de timbre de 10 % sur la succession au
+    Portugal ; les autres héritiers le paient. Les enregistrements et autres formalités s'imposent à tous.
+    Un avocat partenaire peut s'en occuper à distance.
   facts: [pt-is-inheritance-exempt]

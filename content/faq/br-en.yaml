@@ -6,11 +6,11 @@
   cta: lawyer
   q: "Does buying a home let me live in Portugal?"
   a: >-
-    Buying and living in Portugal are separate processes. To live here you need a residence visa, for
-    example the one for people living on their own income (D7) or the CPLP visa, which then leads to a
-    residence permit from AIMA. For the residence permit for investment (Golden Visa), talk to a lawyer: we
-    don't summarize rules we haven't checked at the source.
-  facts: [pt-nonresidents-buy, pt-visa-own-income, pt-cplp-residence]
+    No. Since October 7, 2023, buying a home no longer opens new Golden Visa applications (Law 56/2023).
+    Buying and living in Portugal are separate processes: to live here you need a residence visa, for
+    example the one for people living on their own income (D7) or the CPLP visa, which leads to a residence
+    permit from AIMA. A partner lawyer can tell you which one fits you.
+  facts: [pt-ari-realestate-ended, pt-visa-own-income, pt-cplp-residence]
 
 - id: en-br-irpf
   rank: 8.5
@@ -18,7 +18,20 @@
   cta: tax
   q: "Do I report the home on my Brazilian income tax return?"
   a: >-
-    If you're a Brazilian tax resident, the home goes under Bens e Direitos on the IRPF return, at the
-    purchase price converted to dollars and then to reais at the Banco Central selling rate on the purchase
-    date. With assets abroad of US$1 million or more on December 31, you also file the CBE declaration.
+    Yes, if you're a Brazilian tax resident. The home goes under Bens e Direitos on the IRPF return, at the
+    purchase price converted to dollars and then to reais, at the Banco Central selling rate on the purchase
+    date. If your assets abroad add up to US$1 million or more on December 31, you also file the CBE
+    declaration.
   facts: [br-bens-exterior, br-cbe]
+
+- id: en-br-ifici
+  rank: 10.8
+  stage: after
+  cta: tax
+  q: "Is there a special tax regime for people moving to Portugal?"
+  a: >-
+    Yes, for some professions. IFICI applies a special 20% rate for 10 years to work income from eligible
+    activities, such as research, higher education or highly qualified jobs. It's for people who become tax
+    residents and weren't resident in any of the previous five years. Buying a home doesn't qualify you on
+    its own. A partner tax advisor can check whether it fits.
+  facts: [pt-ifici-20pct]

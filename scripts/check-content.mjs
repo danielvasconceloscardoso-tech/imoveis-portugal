@@ -2,9 +2,9 @@
 // Run from the repo root:  node scripts/check-content.mjs [path ...]
 // With no path it checks content/faq/ and content/inbox/. /publish-week must run it and stop on errors.
 //
-// FAQ entries (content/faq/*.yaml, prompt 09): a stage (before, buying, after), a rank, answer under 70 words,
-// one partner action (cta), fact ids that exist in content/facts/facts.csv, no open [check], no banned or
-// advice wording; 15 to 20 questions per edition and language (common file plus the edition's own).
+// FAQ entries (content/faq/*.yaml, prompts 09 and 10): a stage (before, buying, after), a rank, an answer of
+// 40 to 69 words, one partner action (cta), fact ids that exist in content/facts/facts.csv, no open [check],
+// no banned or advice wording; 15 to 22 questions per edition and language (common file plus the edition's own).
 // Inbox pieces (content/inbox/**/*.md): front matter with edition, lang, type, week, title and sources
 // (fact ids from facts.csv); the edition's disclaimer; the sponsored label when sponsored; no open
 // [check]; no banned or advice wording.
@@ -25,7 +25,8 @@ const EDITIONS = ["lu", "fr", "ch", "br", "us", "il"];
 // ("garantia" as collateral is fine).
 const BANNED = [/paraíso/i, /paradis\b/i, /oportunidade única/i, /opportunité unique/i, /once[- ]in[- ]a[- ]lifetime/i,
   /(retorno|rendimento|rentabilidade|valorização|lucro)s? garantid[oa]s?/i, /garantid[oa]s? (retorno|rendimento|rentabilidade|valorização|lucro)/i,
-  /(rendement|rentabilité|plus-value|bénéfice)s? garanti(e|s|es)?\b/i, /guaranteed (return|yield|income|profit|gain|appreciation)s?/i];
+  /(rendement|rentabilité|plus-value|bénéfice)s? garanti(e|s|es)?\b/i, /guaranteed (return|yield|income|profit|gain|appreciation|investment)s?/i,
+  /investimentos? garantidos?/i, /investissements? garantis?/i];
 const ADVICE = [/\bvocê deveria\b/i, /\bdeve(?:rá)? comprar\b/i, /\brecomendamos\b/i, /\baconselhamos\b/i,
   /\bvous devriez\b/i, /\bnous (?:vous )?(?:recommandons|conseillons)\b/i, /\byou should\b/i, /\bwe recommend\b/i,
   /\bwe advise\b/i];
@@ -75,7 +76,7 @@ function checkFaq(file) {
     if (!STAGES.includes(it.stage)) err(file, `${id}: stage must be one of ${STAGES.join(", ")}`);
     if (typeof it.rank !== "number") err(file, `${id}: rank must be a number`);
     const n = words(it.a || "");
-    if (n >= 70) err(file, `${id}: answer has ${n} words (must be under 70)`);
+    if (n >= 70 || n < 40) err(file, `${id}: answer has ${n} words (must be 40 to 69)`);
     for (const f of it.facts || []) if (!factIds.has(f)) err(file, `${id}: fact "${f}" not in facts.csv`);
     if (/\d/.test(it.a || "") && !(it.facts || []).length) err(file, `${id}: answer has a number but no fact id`);
     checkText(file, id, `${it.q} ${it.a}`);
@@ -119,8 +120,14 @@ for (const f of targets.flatMap((t) => walk(t))) {
 for (const ed of EDITIONS) for (const l of ["pt", "en", "fr"]) {
   if (!(`common-${l}` in faqCount)) continue;
   const n = faqCount[`common-${l}`] + (faqCount[`${ed}-${l}`] || 0);
-  if (n < 15 || n > 20) errors.push(`content/faq: ${ed}-${l} has ${n} questions (must be 15 to 20)`);
+  if (n < 15 || n > 22) errors.push(`content/faq: ${ed}-${l} has ${n} questions (must be 15 to 22)`);
 }
+// The copy deck (content/copy/COPY_DECK.md, prompt 10): every site text, same wording rules.
+const deck = join(root, "content/copy/COPY_DECK.md");
+if (existsSync(deck)) readFileSync(deck, "utf8").split("\n").forEach((line, i) => {
+  const m = line.match(/^- (PT|EN|FR): (.*)$/);
+  if (m) checkText(deck, `line ${i + 1}`, m[2]);
+});
 console.log(`checked ${faqs} FAQ files and ${pieces} inbox pieces against ${factIds.size} facts`);
 if (errors.length) {
   console.log(errors.map((e) => `ERROR ${e}`).join("\n"));

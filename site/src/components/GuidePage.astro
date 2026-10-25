@@ -1,50 +1,46 @@
 ---
-// Free e-book page (v2): one report per edition in pt, en and fr, built from content/facts/facts.csv by
-// `npm run ebooks` (cover image in public/ebooks/covers/). One action: download; the newsletter comes second.
+// Free guide page: one report per edition in pt, en and fr, built from content/facts/facts.csv by
+// `npm run ebooks` (cover image in public/ebooks/covers/). One action: download. Wording: COPY_DECK.md "guide.*".
 import V2 from "../layouts/V2.astro";
 import Embed from "./Embed.astro";
 import { config } from "../config";
-import { t, pathFor, type Lang, type EdCode } from "../i18n";
+import { pathFor, type Lang, type EdCode } from "../i18n";
 import { EBOOK, DISCLAIMER } from "../lib/content";
-import { ui } from "../lib/ui";
+import { c, cl } from "../lib/copy";
 import { COUNTRIES } from "../../ebooks/countries";
 import { PAGES } from "../../ebooks/pages";
 
 interface Props { lang: Lang; ed: EdCode; }
 const { lang, ed } = Astro.props;
-const U = ui(lang), T = t(ed, lang);
-const n = PAGES;
-const G = {
-  pt: { label: "Relatório gratuito · PDF", lede: `${n} páginas, com a fonte oficial de cada número e contas feitas para casas de 250 000 € e 400 000 €.`, inside: "O que vai encontrar", items: ["Todos os impostos da compra em 2026, incluindo a taxa de IMT para não residentes e as exceções.", "Contas feitas como residente e como não residente, em quadro e em gráfico.", "As regras do crédito do Banco de Portugal, os impostos anuais e uma lista de verificação para comprar à distância.", "{c}: o representante fiscal e as regras verificadas do país onde vive."], dl: "Descarregar o relatório (PDF)", signup: "Receba também a newsletter semanal" },
-  en: { label: "Free report · PDF", lede: `${n} pages, with the official source for every number and worked examples for homes at 250,000 € and 400,000 €.`, inside: "What's inside", items: ["Every purchase tax in 2026, including the transfer tax rate for non-residents and its exceptions.", "Worked examples as a resident and as a non-resident, in tables and charts.", "Banco de Portugal's mortgage rules, the yearly taxes and a checklist for buying from abroad.", "{c}: the tax representative and the verified rules where you live."], dl: "Download the report (PDF)", signup: "Get the weekly newsletter too" },
-  fr: { label: "Rapport gratuit · PDF", lede: `${n} pages, avec la source officielle de chaque chiffre et des exemples chiffrés pour des biens de 250 000 € et 400 000 €.`, inside: "Au sommaire", items: ["Tous les impôts de l'achat en 2026, dont le taux d'IMT des non-résidents et ses exceptions.", "Des exemples chiffrés en résident et en non-résident, en tableaux et en graphiques.", "Les règles de crédit de la Banque du Portugal, les impôts annuels et une liste de contrôle pour acheter à distance.", "{c} : le représentant fiscal et les règles vérifiées de votre pays."], dl: "Télécharger le rapport (PDF)", signup: "Recevez aussi la newsletter hebdomadaire" },
-}[lang];
+const title = c("guide.title", lang);
+const file = EBOOK.file(lang, ed);
 ---
-<V2 lang={lang} ed={ed} page="guide" title={`${EBOOK.title[lang]} | Imóveis Portugal`} description={G.lede}>
+<V2 lang={lang} ed={ed} page="guide" title={`${title} | Imóveis Portugal`} description={c("guide.lede", lang, { n: PAGES })}
+  sticky={{ href: file, label: c("common.sticky.guide", lang) }}>
   <section class="hero">
     <div class="frame grid">
       <div>
-        <p class="label">{G.label}</p>
-        <h1>{EBOOK.title[lang]}</h1>
-        <p class="lede">{G.lede}</p>
-        <a class="btn" href={EBOOK.file(lang, ed)} download>{G.dl}</a>
+        <p class="label">{c("guide.label", lang)}</p>
+        <h1>{title}</h1>
+        <p class="lede">{c("guide.lede", lang, { n: PAGES })}</p>
+        <a class="btn" href={file} download>{c("guide.download", lang)}</a>
       </div>
-      <img src={`/ebooks/covers/${ed}-${lang}.webp`} width="600" height="849" alt={EBOOK.title[lang]} style="max-width:360px;width:100%;justify-self:center;box-shadow:0 24px 48px rgba(21,24,29,.18);border-radius:4px" />
+      <img class="cover" src={`/ebooks/covers/${ed}-${lang}.webp`} width="600" height="849" alt={title} loading="lazy" />
     </div>
   </section>
   <section class="band white" aria-labelledby="inside">
     <div class="frame split">
-      <div><h2 id="inside">{G.inside}</h2></div>
-      <ul class="ticks">{G.items.map((i) => <li>{i.replace("{c}", COUNTRIES[ed].h[lang])}</li>)}</ul>
+      <div><h2 id="inside">{c("guide.inside.h", lang)}</h2></div>
+      <ul class="ticks">{cl("guide.inside", lang, { country: COUNTRIES[ed].h[lang] }).map((i) => <li>{i}</li>)}</ul>
     </div>
   </section>
   <section class="band" aria-labelledby="signup">
     <div class="frame read">
-      <h2 id="signup">{G.signup}</h2>
+      <h2 id="signup">{c("guide.signup.h", lang)}</h2>
       <div style="margin-top:16px">
-        <Embed id={config.forms.newsletter[lang]} title={G.signup} pending={T.formPending(config.contactEmail)} hidden={{ edition: ed, lang }} height={200} />
+        <Embed id={config.forms.newsletter[lang]} title={c("guide.signup.h", lang)} pending={c("common.form.pending", lang)} hidden={{ edition: ed, lang }} height={200} />
       </div>
-      <p class="small" style="margin-top:12px"><a href={pathFor(lang, ed, "privacy")}>{U.foot.privacy}</a></p>
+      <p class="small" style="margin-top:12px"><a href={pathFor(lang, ed, "privacy")}>{c("common.privacy", lang)}</a></p>
       <p class="disc">{DISCLAIMER[lang]}</p>
     </div>
   </section>

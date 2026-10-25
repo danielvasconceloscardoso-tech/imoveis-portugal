@@ -224,7 +224,7 @@ const legend = (l: Lang) => `<div class="legend">${T[l].profiles.map((p, j) => `
 // ---------- pages ----------
 function html(ed: Ed, l: Lang): string {
   const t = T[l], c = COUNTRIES[ed];
-  const photo = `data:image/jpeg;base64,${b64(`ebooks/img/${PHOTO[ed].file}.jpg`)}`; // JPEG stays compressed in the PDF
+  const photo = `data:image/jpeg;base64,${b64(`ebooks/img/${PHOTO[ed]}.jpg`)}`; // JPEG stays compressed in the PDF
   const disc = `<div class="disc">${esc(DISCLAIMER[l])}</div>`;
   const foot = () => `<div class="foot"><span>Imóveis Portugal · ${esc(t.title)} · ${esc(c.name[l])}</span><span>{{n}}</span></div>`;
   const chap = (i: number) => `<div class="chap"><span class="no">${String(i + 1).padStart(2, "0")}</span><span class="kicker" style="margin:0">${esc(t.ch[i])}</span></div>`;

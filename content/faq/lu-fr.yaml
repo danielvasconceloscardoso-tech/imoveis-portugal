@@ -6,8 +6,8 @@
   cta: tax
   q: "Dois-je déclarer au Luxembourg les loyers de mon bien au Portugal ?"
   a: >-
-    La convention entre le Portugal et le Luxembourg donne au Portugal le droit d'imposer les loyers des
-    biens situés sur son territoire, à 25 %. Le Luxembourg exonère ces revenus, mais peut en tenir compte
-    pour fixer le taux sur vos autres revenus. Vos obligations déclaratives au Luxembourg dépendent de votre
-    situation.
+    Les loyers sont imposés au Portugal, et le Luxembourg ne les impose pas une seconde fois. Selon la
+    convention entre les deux pays, le Portugal impose les loyers des biens situés chez lui, à 25 % pour les
+    non-résidents. Le Luxembourg exonère ce revenu mais peut en tenir compte pour le taux appliqué au reste.
+    Vos déclarations là-bas dépendent de votre situation.
   facts: [lu-pt-treaty-property, pt-rent-tax-nonresident]

@@ -1,26 +1,33 @@
 ---
-// Redesign v2 layout (prompt 09): one layout for every page, in pt, en and fr (D18).
-// noindex until launch, canonical and hreflang, discreet edition and language pickers, trust strip, footer.
+// Layout for every page, in pt, en and fr (D18). Wording: content/copy/COPY_DECK.md.
+// Mobile first (prompt 10): compact header with the language switch, one sticky action at the bottom of
+// the screen on phones, trust strip before the footer. noindex until launch, canonical and hreflang.
 import "../styles/v2.css";
 import serif from "@fontsource-variable/newsreader/files/newsreader-latin-opsz-normal.woff2?url";
 import { config } from "../config";
 import { EDITIONS, ED_ORDER, LANGS, LANG_NAME, HTML_LANG, pathFor, type Lang, type EdCode, type PageKey } from "../i18n";
-import { ui } from "../lib/ui";
+import { c, edName } from "../lib/copy";
 import { DISCLAIMER } from "../lib/content";
 
-interface Props { lang: Lang; ed: EdCode; page: PageKey | "home"; title: string; description: string; }
+type Sticky = { href: string; label: string } | null;
+interface Props { lang: Lang; ed: EdCode; page: PageKey | "home"; title: string; description: string; sticky?: Sticky; }
 const { lang, ed, page, title, description } = Astro.props;
-const U = ui(lang);
 const host = config.domainMode === "primary" ? config.primaryDomain : EDITIONS[ed].domain;
 const canonical = `https://${host}${pathFor(lang, ed, page)}`;
-const nav: [PageKey, string][] = [["faq", U.nav.faq], ["guide", U.nav.guide], ["buy", U.nav.buy], ["partners", U.nav.partners]];
+const nav: PageKey[] = ["faq", "guide", "buy", "partners"];
 const subscribe = `${pathFor(lang, ed, "home")}#subscrever`;
+// Default sticky action: the free guide from the home page, a partner from the help pages.
+const sticky: Sticky = Astro.props.sticky !== undefined ? Astro.props.sticky
+  : page === "home" || page === "how" ? { href: pathFor(lang, ed, "guide"), label: c("common.sticky.guide", lang) }
+  : page === "faq" ? { href: `${pathFor(lang, ed, "talk")}#form`, label: c("common.sticky.talk", lang) }
+  : null;
 ---
 <!doctype html>
 <html lang={HTML_LANG[lang]}>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f6f3ee" />
     <title>{title}</title>
     <meta name="description" content={description} />
     {!config.launchReady && <meta name="robots" content="noindex, nofollow" />}
@@ -33,38 +40,39 @@ const subscribe = `${pathFor(lang, ed, "home")}#subscrever`;
     <meta property="og:site_name" content="Imóveis Portugal" />
     <slot name="head" />
   </head>
-  <body data-ed={ed}>
-    <a class="skip" href="#main">{U.skip}</a>
+  <body data-ed={ed} class={sticky ? "has-sticky" : undefined}>
+    <a class="skip" href="#main">{c("common.skip", lang)}</a>
     <header class="hd">
       <div class="frame">
-        <a class="word" href={pathFor(lang, ed, "home")}>Imóveis Portugal<span class="beta">{U.beta}</span></a>
+        <a class="word" href={pathFor(lang, ed, "home")}>Imóveis Portugal<span class="beta">{c("common.beta", lang)}</span></a>
         <nav class="nav" aria-label="Menu">
-          {nav.map(([k, label]) => <a href={pathFor(lang, ed, k)} aria-current={page === k ? "page" : undefined}>{label}</a>)}
+          {nav.map((k) => <a href={pathFor(lang, ed, k)} aria-current={page === k ? "page" : undefined}>{c(`common.nav.${k}`, lang)}</a>)}
         </nav>
         <div class="tools">
           <details class="pick ed">
-            <summary aria-label={`${U.edition}: ${EDITIONS[ed].name[lang]}`}><span class="dot" aria-hidden="true"></span>{ed.toUpperCase()}</summary>
+            <summary aria-label={`${c("common.edition", lang)}: ${edName(ed, lang)}`}><span class="dot" aria-hidden="true"></span>{ed.toUpperCase()}</summary>
             <div class="menu">
-              {ED_ORDER.map((c) => <a href={pathFor(lang, c, page)} aria-current={c === ed ? "true" : undefined}>{EDITIONS[c].name[lang]}</a>)}
+              {ED_ORDER.map((x) => <a href={pathFor(lang, x, page)} aria-current={x === ed ? "true" : undefined}>{edName(x, lang)}</a>)}
             </div>
           </details>
           <details class="pick">
-            <summary aria-label={`${U.language}: ${LANG_NAME[lang]}`}>
+            <summary aria-label={`${c("common.language", lang)}: ${LANG_NAME[lang]}`}>
               <svg class="globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg>{lang.toUpperCase()}
             </summary>
             <div class="menu">
               {LANGS.map((l) => <a href={pathFor(l, ed, page)} hreflang={HTML_LANG[l]} lang={HTML_LANG[l]} data-lang={l} aria-current={l === lang ? "true" : undefined}>{LANG_NAME[l]}</a>)}
             </div>
           </details>
-          <a class="btn sm" href={subscribe}>{U.subscribe}</a>
+          <a class="btn sm" href={subscribe}>{c("common.subscribe", lang)}</a>
           <details class="pick burger">
-            <summary>{U.menu}</summary>
+            <summary>{c("common.menu", lang)}</summary>
             <div class="menu">
-              {nav.map(([k, label]) => <a href={pathFor(lang, ed, k)} aria-current={page === k ? "page" : undefined}>{label}</a>)}
-              <a href={pathFor(lang, ed, "how")}>{U.nav.how}</a>
-              <a href={subscribe}>{U.subscribe}</a>
+              {nav.map((k) => <a href={pathFor(lang, ed, k)} aria-current={page === k ? "page" : undefined}>{c(`common.nav.${k}`, lang)}</a>)}
+              <a href={pathFor(lang, ed, "talk")}>{c("common.nav.talk", lang)}</a>
+              <a href={pathFor(lang, ed, "how")}>{c("common.nav.how", lang)}</a>
+              <a href={subscribe}>{c("common.subscribe", lang)}</a>
               <div class="eds">
-                {ED_ORDER.map((c) => <a href={pathFor(lang, c, page)} aria-current={c === ed ? "true" : undefined}>{EDITIONS[c].name[lang]}</a>)}
+                {ED_ORDER.map((x) => <a href={pathFor(lang, x, page)} aria-current={x === ed ? "true" : undefined}>{edName(x, lang)}</a>)}
               </div>
             </div>
           </details>
@@ -74,17 +82,17 @@ const subscribe = `${pathFor(lang, ed, "home")}#subscrever`;
     <main id="main">
       <slot />
     </main>
-    <aside class="trust" aria-label={U.nav.how}>
+    <aside class="trust" aria-label={c("common.nav.how", lang)}>
       <div class="frame">
         <ul>
-          {U.trust.map(([h, p], i) => (
+          {[1, 2, 3].map((i) => (
             <li>
-              {i === 0 && <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 10.5 12 4l9 6.5V20H3z"/><path d="M9.5 20v-5h5v5"/></svg>}
-              {i === 1 && <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 3h9l3 3v15H6z"/><path d="M9 11h6M9 15h6"/></svg>}
-              {i === 2 && <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.4 8.2 8 9 4.6-.8 8-4.5 8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg>}
+              {i === 1 && <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 10.5 12 4l9 6.5V20H3z"/><path d="M9.5 20v-5h5v5"/></svg>}
+              {i === 2 && <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 3h9l3 3v15H6z"/><path d="M9 11h6M9 15h6"/></svg>}
+              {i === 3 && <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.4 8.2 8 9 4.6-.8 8-4.5 8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg>}
               <span>
-                <b>{i === 0 ? <a href={config.agency.website} rel="noopener" style="color:inherit">{h}</a> : h}</b>
-                {p}
+                <b>{i === 1 ? <a href={config.agency.website} rel="noopener" style="color:inherit">{c(`common.trust.${i}.h`, lang)}</a> : c(`common.trust.${i}.h`, lang)}</b>
+                {c(`common.trust.${i}.p`, lang)}
               </span>
             </li>
           ))}
@@ -94,30 +102,32 @@ const subscribe = `${pathFor(lang, ed, "home")}#subscrever`;
     <footer class="ft">
       <div class="frame">
         <a class="word" href={pathFor(lang, ed, "home")}>Imóveis Portugal</a>
+        <p class="tagline">{c("common.foot.tagline", lang)}</p>
         <div class="cols">
-          <p class="small" style="color:#9aa0a6;max-width:28em">{DISCLAIMER[lang]}</p>
+          <p class="small disc-ft">{DISCLAIMER[lang]}</p>
           <div>
-            <p class="label">{U.foot.about}</p>
+            <p class="label">{c("common.foot.about", lang)}</p>
             <ul>
-              <li><a href={pathFor(lang, ed, "how")}>{U.nav.how}</a></li>
-              <li><a href={pathFor(lang, ed, "partners")}>{U.nav.partners}</a></li>
-              <li><a href={pathFor(lang, ed, "talk")}>{U.foot.talk}</a></li>
-              <li><a href={pathFor(lang, ed, "privacy")}>{U.foot.privacy}</a></li>
-              <li><a href={pathFor(lang, ed, "legal")}>{U.foot.legal}</a></li>
+              <li><a href={pathFor(lang, ed, "how")}>{c("common.nav.how", lang)}</a></li>
+              <li><a href={pathFor(lang, ed, "partners")}>{c("common.nav.partners", lang)}</a></li>
+              <li><a href={pathFor(lang, ed, "talk")}>{c("common.nav.talk", lang)}</a></li>
+              <li><a href={pathFor(lang, ed, "privacy")}>{c("common.privacy", lang)}</a></li>
+              <li><a href={pathFor(lang, ed, "legal")}>{c("common.foot.legal", lang)}</a></li>
             </ul>
           </div>
           <div>
-            <p class="label">{U.foot.editions}</p>
-            <ul>{ED_ORDER.map((c) => <li><a href={pathFor(lang, c, page)}>{EDITIONS[c].name[lang]}</a></li>)}</ul>
+            <p class="label">{c("common.foot.editions", lang)}</p>
+            <ul>{ED_ORDER.map((x) => <li><a href={pathFor(lang, x, page)}>{edName(x, lang)}</a></li>)}</ul>
           </div>
           <div>
-            <p class="label">{U.foot.languages}</p>
+            <p class="label">{c("common.foot.languages", lang)}</p>
             <ul>{LANGS.map((l) => <li><a href={pathFor(l, ed, page)} data-lang={l} lang={HTML_LANG[l]}>{LANG_NAME[l]}</a></li>)}</ul>
           </div>
         </div>
-        <p class="legal">{U.foot.agency}: <a href={config.agency.website} rel="noopener">{config.agency.name}</a>, AMI {config.agency.ami}. © 2026 Imóveis Portugal.</p>
+        <p class="legal">{c("common.foot.agency", lang)}: <a href={config.agency.website} rel="noopener">{config.agency.name}</a>, AMI {config.agency.ami}. © 2026 Imóveis Portugal.</p>
       </div>
     </footer>
+    {sticky && <div class="sticky"><a class="btn" href={sticky.href}>{sticky.label}</a></div>}
     <script is:inline define:vars={{ ed, lang }}>
       try {
         localStorage.setItem("ip-ed", ed);
@@ -125,7 +135,7 @@ const subscribe = `${pathFor(lang, ed, "home")}#subscrever`;
         document.addEventListener("click", (e) => {
           const a = e.target.closest && e.target.closest("a[data-lang]");
           if (a) localStorage.setItem("ip-lang", a.dataset.lang);
-          // Close an open picker when clicking elsewhere.
+          // Close an open picker when tapping elsewhere.
           document.querySelectorAll("details.pick[open]").forEach((d) => { if (!d.contains(e.target)) d.removeAttribute("open"); });
         });
       } catch (_) {}

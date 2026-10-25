@@ -6,11 +6,11 @@
   cta: lawyer
   q: "Acheter un bien permet-il de vivre au Portugal ?"
   a: >-
-    Acheter et s'installer au Portugal sont deux démarches distinctes. Pour y vivre, il faut un visa de
-    résidence, par exemple celui des personnes vivant de leurs propres revenus (D7). Pour le titre de séjour
-    par investissement (golden visa), adressez-vous à un avocat : nous ne résumons pas des règles non
-    vérifiées à la source.
-  facts: [pt-nonresidents-buy, pt-visa-own-income]
+    Non. Depuis le 7 octobre 2023, l'achat d'un bien n'ouvre plus de nouvelles demandes de golden visa (loi
+    56/2023). Acheter et s'installer au Portugal sont deux démarches distinctes : pour y vivre, il faut un
+    visa de résidence, par exemple celui des personnes vivant de leurs propres revenus (D7). Un avocat
+    partenaire peut vous orienter.
+  facts: [pt-ari-realestate-ended, pt-visa-own-income]
 
 - id: fr-il-rent
   rank: 9.5
@@ -18,7 +18,20 @@
   cta: tax
   q: "Israël impose-t-il les loyers de mon bien au Portugal ?"
   a: >-
-    Selon la convention entre le Portugal et Israël, le Portugal peut imposer les loyers des biens situés
-    sur son territoire, à 25 %, et Israël, pays de résidence, accorde un crédit pour l'impôt payé au
-    Portugal. Le calcul de l'impôt israélien suit les règles israéliennes.
+    Il le peut, mais il tient compte de l'impôt déjà payé au Portugal. Selon la convention entre les deux
+    pays, le Portugal impose les loyers des biens situés chez lui, à 25 % pour les non-résidents, et Israël,
+    pays de résidence, accorde un crédit pour cet impôt. Le calcul de l'impôt israélien suit les règles
+    israéliennes.
   facts: [il-pt-treaty-property, pt-rent-tax-nonresident]
+
+- id: fr-il-ifici
+  rank: 10.8
+  stage: after
+  cta: tax
+  q: "Existe-t-il un régime fiscal spécial pour ceux qui s'installent au Portugal ?"
+  a: >-
+    Oui, pour certaines professions. L'IFICI applique un taux spécial de 20 % pendant 10 ans aux revenus du
+    travail dans des activités éligibles, comme la recherche, l'enseignement supérieur ou les emplois
+    hautement qualifiés. Il vise ceux qui deviennent résidents fiscaux sans l'avoir été pendant les cinq
+    années précédentes. L'achat d'un bien n'y donne pas accès à lui seul.
+  facts: [pt-ifici-20pct]

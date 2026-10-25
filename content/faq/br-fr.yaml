@@ -6,11 +6,11 @@
   cta: lawyer
   q: "Acheter un bien permet-il de vivre au Portugal ?"
   a: >-
-    Acheter et s'installer au Portugal sont deux démarches distinctes. Pour y vivre, il faut un visa de
-    résidence, par exemple celui des personnes vivant de leurs propres revenus (D7) ou le visa CPLP, qui
-    donne ensuite accès au titre de séjour de l'AIMA. Pour le titre de séjour par investissement (golden
-    visa), adressez-vous à un avocat : nous ne résumons pas des règles non vérifiées à la source.
-  facts: [pt-nonresidents-buy, pt-visa-own-income, pt-cplp-residence]
+    Non. Depuis le 7 octobre 2023, l'achat d'un bien n'ouvre plus de nouvelles demandes de golden visa (loi
+    56/2023). Acheter et s'installer au Portugal sont deux démarches distinctes : pour y vivre, il faut un
+    visa de résidence, par exemple celui des personnes vivant de leurs propres revenus (D7) ou le visa CPLP,
+    qui ouvre l'accès au titre de séjour de l'AIMA. Un avocat partenaire peut vous orienter.
+  facts: [pt-ari-realestate-ended, pt-visa-own-income, pt-cplp-residence]
 
 - id: fr-br-irpf
   rank: 8.5
@@ -18,8 +18,20 @@
   cta: tax
   q: "Dois-je déclarer le bien dans l'impôt sur le revenu brésilien ?"
   a: >-
-    Si vous êtes résident fiscal au Brésil, le bien se déclare dans la rubrique Bens e Direitos de l'IRPF,
-    au prix d'achat converti en dollars puis en reais au cours vendeur de la Banco Central à la date
-    d'achat. Avec 1 million de dollars ou plus d'avoirs à l'étranger au 31 décembre, il faut aussi la
-    déclaration CBE.
+    Oui, si vous êtes résident fiscal au Brésil. Le bien se déclare dans la rubrique Bens e Direitos de
+    l'IRPF, au prix d'achat converti en dollars puis en reais, au cours vendeur de la Banco Central à la
+    date d'achat. Si vos avoirs à l'étranger atteignent 1 million de dollars au 31 décembre, il faut aussi
+    la déclaration CBE.
   facts: [br-bens-exterior, br-cbe]
+
+- id: fr-br-ifici
+  rank: 10.8
+  stage: after
+  cta: tax
+  q: "Existe-t-il un régime fiscal spécial pour ceux qui s'installent au Portugal ?"
+  a: >-
+    Oui, pour certaines professions. L'IFICI applique un taux spécial de 20 % pendant 10 ans aux revenus du
+    travail dans des activités éligibles, comme la recherche, l'enseignement supérieur ou les emplois
+    hautement qualifiés. Il vise ceux qui deviennent résidents fiscaux sans l'avoir été pendant les cinq
+    années précédentes. L'achat d'un bien n'y donne pas accès à lui seul.
+  facts: [pt-ifici-20pct]

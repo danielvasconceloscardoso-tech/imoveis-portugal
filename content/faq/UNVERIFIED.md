@@ -33,3 +33,10 @@ bportugal.pt (used the Banco de Portugal notification published by the ESRB inst
 3. **Notary, registration and Casa Pronta fees.** justica.gov.pt returned an error; costs are described as "depend on the service chosen".
 4. **Capital gains rate for non-residents.** Only the 50% rule (CIRS art. 43.º) is quoted. The rate itself (progressive rates, worldwide income) is not, until art. 68.º and the tax authority's circular are opened.
 5. **Partner agency profile.** The text in the report and on the "Talk to a partner" page is Habinedita Gondomar's own statement (prompt 08). The agency must confirm it before launch. Its logo could not be downloaded (habineditagondomar.pt returned 403 and 502), so its name is shown as text.
+
+## Prompt 10 (25 Oct 2026)
+
+1. **Resolved:** Golden Visa and property (Lei 56/2023, art. 42.º, opened on Portal das Finanças) and Casa Pronta fees and documents (justica.gov.pt). Both are now in facts.csv and the FAQ.
+2. **New fact:** IFICI (EBF art. 58.º-A), answered for BR, US and IL readers. The list of eligible professions (Portaria 352/2024/1) is not quoted.
+3. **Benchmark questions still without an official source:** bank account requirement, purchase timeline, average prices by city, agency fees, usual CPCV deposit, citizenship, emigrant account. See design/v2/BENCHMARK.md.
+4. **Questions per edition:** the new benchmark questions take some editions to 21–22 questions; the content check now allows 15 to 22.

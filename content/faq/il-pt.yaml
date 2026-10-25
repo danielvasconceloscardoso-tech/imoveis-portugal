@@ -6,11 +6,11 @@
   cta: lawyer
   q: "Comprar casa dá direito a viver em Portugal?"
   a: >-
-    Comprar e viver em Portugal são processos separados. Para viver cá precisa de um visto de residência,
-    por exemplo o de quem vive de rendimentos próprios (D7). Sobre a autorização de residência para
-    investimento (golden visa), fale com um advogado: não resumimos aqui regras que não verificámos na
-    fonte.
-  facts: [pt-nonresidents-buy, pt-visa-own-income]
+    Não. Desde 7 de outubro de 2023, comprar casa deixou de dar acesso a novos vistos gold (Lei 56/2023).
+    Comprar e viver em Portugal são processos separados: para viver cá precisa de um visto de residência,
+    por exemplo o de quem vive de rendimentos próprios (D7). Um advogado parceiro pode ver qual se aplica a
+    si.
+  facts: [pt-ari-realestate-ended, pt-visa-own-income]
 
 - id: pt-il-rent
   rank: 9.5
@@ -18,7 +18,20 @@
   cta: tax
   q: "Israel tributa as rendas da minha casa em Portugal?"
   a: >-
-    Pela convenção entre Portugal e Israel, Portugal pode tributar as rendas de imóveis situados em
-    Portugal, onde pagam 25%, e Israel, como país de residência, dá um crédito pelo imposto pago em
-    Portugal. A forma como Israel calcula o seu próprio imposto segue as regras israelitas.
+    Pode tributar, mas desconta o imposto já pago em Portugal. Pela convenção entre os dois países, Portugal
+    tributa as rendas de casas em Portugal, a 25% para não residentes, e Israel, como país de residência, dá
+    um crédito por esse imposto. A forma como Israel calcula o seu próprio imposto segue as regras
+    israelitas. Um consultor fiscal parceiro ajuda.
   facts: [il-pt-treaty-property, pt-rent-tax-nonresident]
+
+- id: pt-il-ifici
+  rank: 10.8
+  stage: after
+  cta: tax
+  q: "Há um regime fiscal especial para quem se muda para Portugal?"
+  a: >-
+    Sim, para algumas profissões. O IFICI aplica uma taxa especial de 20% durante 10 anos ao rendimento do
+    trabalho em atividades elegíveis, como investigação, ensino superior ou empregos altamente qualificados.
+    É para quem passa a residente fiscal e não foi residente em nenhum dos cinco anos anteriores. Comprar
+    casa, por si, não dá acesso. Um consultor fiscal parceiro vê se se aplica.
+  facts: [pt-ifici-20pct]

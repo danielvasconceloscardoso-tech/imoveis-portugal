@@ -1,7 +1,8 @@
-# FAQ shared by every edition, American English (prompt 09). Written natively, not translated.
-# Questions ranked by search interest (rank), grouped by stage (before, buying, after); see content/FAQ_SOURCES.md.
-# Rules: answer under 70 words, facts only from content/facts/facts.csv (ids in `facts`), describe never advise,
-# one partner action (`cta`: lawyer, bank, tax, fx, developer, agency). Terms follow content/GLOSSARY.md.
+# FAQ shared by every edition, American English (prompts 09 and 10). Written natively, not translated.
+# Questions ranked by search interest (rank), grouped by stage (before, buying, after); see content/FAQ_SOURCES.md
+# and design/v2/BENCHMARK.md. Answers: 40-70 words, the answer in the first sentence, then the detail, then the
+# partner action (`cta`: lawyer, bank, tax, fx, developer, agency). Facts only from content/facts/facts.csv.
+# Voice: content/VOICE.md. Terms: content/GLOSSARY.md.
 
 - id: en-buy-abroad
   rank: 1
@@ -9,10 +10,10 @@
   cta: lawyer
   q: "Can I buy a home in Portugal if I live abroad?"
   a: >-
-    Yes. You don't need to be a resident: the transfer tax code even has its own rate for buyers who aren't
-    Portuguese tax residents. You need a Portuguese tax number (NIF) before you sign. If you live outside
-    the EU, you must appoint a tax representative unless you sign up for the tax authority's electronic
-    notices.
+    Yes, you can. You don't need to live in Portugal or be a resident: the transfer tax law even has its own
+    rate for buyers from abroad. Before you sign, you need a Portuguese tax number (NIF). If you live
+    outside the EU, you also appoint a tax representative, unless you sign up for the tax authority's
+    electronic notices. A partner lawyer can handle this for you.
   facts: [pt-nonresidents-buy, pt-nif-nonresident, pt-tax-rep]
 
 - id: en-costs
@@ -21,10 +22,11 @@
   cta: tax
   q: "How much does buying cost on top of the price?"
   a: >-
-    At purchase you pay transfer tax (IMT) and 0.8% stamp duty on the price. Buyers who aren't Portuguese
-    tax residents pay IMT at a flat 7.5%, with some exceptions. With a mortgage, add 0.6% stamp duty on the
-    loan and 4% on the interest. Deed, registration and legal fees depend on the service you choose.
-  facts: [pt-is-purchase, pt-imt-nonresident-flat, pt-imt-nonresident-exceptions, pt-is-loan-5y, pt-is-interest]
+    Plan for transfer tax (IMT), 0.8% stamp duty and the deed with registration. If you aren't a Portuguese
+    tax resident, IMT is 7.5% of the price, with some exceptions. With a mortgage, add 0.6% stamp duty on
+    the loan and 4% on the interest. At a Casa Pronta office, the deed with registration costs 375 € or 700
+    €.
+  facts: [pt-is-purchase, pt-imt-nonresident-flat, pt-imt-nonresident-exceptions, pt-is-loan-5y, pt-is-interest, pt-casa-pronta-fees]
 
 - id: en-mortgage
   rank: 3
@@ -32,9 +34,10 @@
   cta: bank
   q: "Can I get a mortgage in Portugal as a non-resident?"
   a: >-
-    You can apply, and each bank decides. Banco de Portugal's limits apply to everyone: up to 90% of the
-    value for your main home and up to 80% for other uses, such as a vacation home. The bank uses the lower
-    of the price and its appraisal.
+    Yes, you can apply to a Portuguese bank, and each bank decides case by case. Banco de Portugal's rules
+    apply to everyone: up to 90% of the value for your main home and up to 80% for any other home, such as a
+    vacation home. The bank uses the lower of the price and its appraisal. A partner bank can run the
+    numbers for you.
   facts: [pt-ltv-limits]
 
 - id: en-nif
@@ -43,9 +46,10 @@
   cta: lawyer
   q: "How do I get a NIF?"
   a: >-
-    You can request the Portuguese tax number online through a legal representative, or in person at a tax
-    office. You don't need a tax representative to get it. Once you own the home, if you live outside the EU
-    you have 15 days to appoint a tax representative or sign up for electronic notices.
+    You can request it online through a legal representative, or in person at a tax office. The NIF is your
+    Portuguese tax number and the first step of any purchase. You don't need a tax representative to get it.
+    Once you own the home, if you live outside the EU, you have 15 days to appoint a tax representative or
+    sign up for electronic notices.
   facts: [pt-nif-nonresident, pt-tax-rep]
 
 - id: en-imt-nonres
@@ -54,11 +58,23 @@
   cta: tax
   q: "Do non-residents pay more transfer tax?"
   a: >-
-    Since May 2026, buyers who aren't Portuguese tax residents pay IMT at a flat 7.5%, with no exemptions.
-    There are exceptions: buyers who were considered tax residents before, those who become residents within
-    two years, and those who rent the home out as a residence at a rent within the legal caps. In those last
-    two cases you claim the difference back.
+    Yes: since May 2026, buyers who aren't Portuguese tax residents pay IMT at a flat 7.5%, with no
+    exemptions. There are exceptions: buyers who were considered tax residents before, those who become
+    residents within two years, and those who rent the home out as a residence within the legal rent caps.
+    In those last two cases, you claim the difference back.
   facts: [pt-imt-nonresident-flat, pt-imt-nonresident-exceptions]
+
+- id: en-deed
+  rank: 5.5
+  stage: buying
+  cta: lawyer
+  q: "How much do the deed and registration cost?"
+  a: >-
+    At a Casa Pronta office, a purchase with registration costs 375 €, or 700 € with a mortgage, plus 50 €
+    for each extra property. The deed and the registration are done there in one sitting. Bring the usage
+    license (or its waiver, depending on when the home was built) and the energy certificate. Lawyer's fees
+    are separate.
+  facts: [pt-casa-pronta-fees, pt-casa-pronta-docs]
 
 - id: en-lawyer
   rank: 7
@@ -66,9 +82,11 @@
   cta: lawyer
   q: "Do I need a lawyer to buy a home?"
   a: >-
-    That's your choice. A lawyer can check the property's registration, review the promissory contract
-    before you sign and represent you at closing with a power of attorney if you can't be in Portugal.
-  facts: [pt-poa-apostille, pt-sinal-442]
+    It's your choice, but if you buy from abroad, a lawyer saves trips and risk. A lawyer can check the
+    property's registration and documents such as the usage license, review the promissory contract before
+    you sign, and represent you at closing with a power of attorney if you can't be in Portugal. A partner
+    lawyer can follow the purchase from start to finish.
+  facts: [pt-poa-apostille, pt-sinal-442, pt-casa-pronta-docs]
 
 - id: en-yearly
   rank: 8
@@ -76,8 +94,9 @@
   cta: tax
   q: "What property taxes do I pay every year?"
   a: >-
-    IMI, a municipal tax of 0.3% to 0.45% of the property's tax value, at the rate set by each municipality.
-    The additional tax AIMI only applies to the total tax value above 600,000 € per person.
+    You pay IMI, a municipal tax of 0.3% to 0.45% of the home's tax value. Each municipality sets its own
+    rate, so it varies from town to town. AIMI, an additional tax, only applies when your total tax values
+    are above 600,000 € per person. A partner tax advisor can work out the numbers for your home.
   facts: [pt-imi-rates, pt-aimi-deduction]
 
 - id: en-rent
@@ -88,7 +107,8 @@
   a: >-
     Yes, long term or as a short-term rental (alojamento local). Short-term rentals need prior registration,
     and the municipality can object within 60 days, or 90 in containment areas. Residential rent earned by
-    non-residents is taxed at 25% in Portugal, with reductions for long leases.
+    non-residents is taxed at 25% in Portugal, with reductions for long leases. Your home country may have
+    its own rules. A partner tax advisor can look at both sides.
   facts: [pt-al-registration, pt-rent-tax-nonresident]
 
 - id: en-sell
@@ -97,8 +117,10 @@
   cta: tax
   q: "How much tax do I pay when I sell?"
   a: >-
-    For Portuguese income tax, only 50% of the gain on selling a property counts. The final rate depends on
-    your income, and the country where you live may have its own rules for the sale.
+    In Portugal, only half of the gain counts for income tax: the profit on selling a property counts at 50%
+    of its value. The final rate depends on your income, and the country where you live may also have rules
+    for the sale. Before you sell, it helps to have the numbers worked out on both sides. A partner tax
+    advisor can do that with you.
   facts: [pt-cg-50pct]
 
 - id: en-borrow
@@ -107,9 +129,10 @@
   cta: bank
   q: "How much will a bank lend me?"
   a: >-
-    It depends on your income. Under Banco de Portugal's rules, the payments on all your loans together
-    shouldn't exceed 45% of your net income. The term can run up to 40 years if you're 35 or younger, and up
-    to 35 years from that age.
+    It depends mostly on your income. Under Banco de Portugal's rules, the payments on all your loans
+    together shouldn't exceed 45% of your net income. The term can run up to 40 years if you're 35 or
+    younger, and up to 35 years after that. A partner bank can estimate the amount and the monthly payment
+    for your case.
   facts: [pt-dsti-45, pt-maturity-limits]
 
 - id: en-sign
@@ -118,9 +141,10 @@
   cta: lawyer
   q: "Do I have to be in Portugal to sign?"
   a: >-
-    No. You can give a power of attorney, for example to a lawyer, signed at a Portuguese consulate or
-    before a notary where you live. A power of attorney signed before a foreign notary needs a Hague
-    Apostille to be valid in Portugal.
+    No. You can give a power of attorney, for example to a lawyer, who signs for you. It can be done at a
+    Portuguese consulate or before a notary where you live. If a foreign notary signs it, it needs a Hague
+    Apostille to be valid in Portugal. That way the purchase moves ahead even if you only come over to see
+    the home.
   facts: [pt-poa-apostille]
 
 - id: en-cpcv
@@ -129,9 +153,10 @@
   cta: lawyer
   q: "What is the promissory contract (CPCV)?"
   a: >-
-    It's the contract signed before closing that sets the price, the date and the deposit. If the buyer
-    backs out through their own fault, they lose the deposit; if the seller does, the buyer can claim double
-    what they paid (Portuguese Civil Code, article 442).
+    It's the contract you sign before closing, setting the price, the date and the deposit. It protects both
+    sides: if the buyer backs out through their own fault, they lose the deposit; if the seller does, the
+    buyer can claim double what they paid (Portuguese Civil Code, article 442). That's why it pays to read
+    it closely. A partner lawyer can review it.
   facts: [pt-sinal-442]
 
 - id: en-money
@@ -140,9 +165,10 @@
   cta: fx
   q: "How do I send the money to Portugal?"
   a: >-
-    Through your bank or a money transfer service, and exchange terms vary between them. Banks, notaries and
-    lawyers must ask where the funds come from when the transaction calls for it (Law 83/2017), so expect to
-    show proof.
+    Through your bank or a money transfer service, and exchange rates and fees vary a lot between them. Have
+    proof of where the money comes from: banks, notaries and lawyers must ask for it when the transaction
+    calls for it (Law 83/2017). On large amounts, a small difference in the rate adds up. A money transfer
+    partner can compare options with you.
   facts: [pt-aml-funds]
 
 - id: en-imt-calc
@@ -151,9 +177,10 @@
   cta: tax
   q: "How is the transfer tax (IMT) calculated, and when is it due?"
   a: >-
-    For residents, the 2026 rates depend on how the home is used: no IMT up to 106,346 € on a main home, and
-    1% in that bracket on a vacation home. Above that, the rate rises by bracket. IMT is due on the day it's
-    assessed or within the following 30 days.
+    For residents, it depends on how the home is used and on the price, by brackets. There's no IMT up to
+    106,346 € on a main home, and 1% in that bracket on a vacation home; above that, the rate rises by
+    bracket. Buyers who aren't tax residents pay a flat 7.5%. IMT is due on the day it's assessed or within
+    the following 30 days.
   facts: [pt-imt-hpp-2026, pt-imt-second-home-2026, pt-imt-payment]
 
 - id: en-timing
@@ -162,9 +189,10 @@
   cta: agency
   q: "Is now a good time to buy?"
   a: >-
-    We don't give investment advice. The facts: according to Portugal's statistics office (INE), home prices
-    rose 17.6% in 2025, the biggest increase on record. What matters is your budget, the region and your
-    plans. Tell us what you're looking for and our partner agency will show you what's available.
+    We don't give investment advice, but we do give the facts. According to Portugal's statistics office
+    (INE), home prices rose 17.6% in 2025, the biggest increase on record. What really matters is your
+    budget, the region and what you want from the home. Tell us what you're looking for and our partner
+    agency will show you what's available, with no commitment.
   facts: [pt-ine-prices-2025]
 
 - id: en-find
@@ -173,9 +201,10 @@
   cta: agency
   q: "Can you find me a home?"
   a: >-
-    Yes. Tell us the region, your budget and your timeline. Your request goes to our licensed partner
-    agency, Habinedita Gondomar, which contacts you free of charge and can set up viewings for when you're
-    in Portugal.
+    Yes. Tell us the region, your budget and your timeline in a two-minute form. Your request goes to our
+    licensed partner agency, Habinedita Gondomar, which reaches out free of charge. It can also set up
+    viewings for when you're in Portugal, so you can see several homes in one trip. You pay nothing for this
+    contact.
   facts: []
 
 - id: en-inherit
@@ -184,7 +213,8 @@
   cta: lawyer
   q: "I inherited a house in Portugal. What now?"
   a: >-
-    The heirs decide together whether to keep, sell or rent it. Spouses or partners, children and parents
-    are exempt from Portugal's 10% stamp duty on inheritance; other heirs pay it. Registration and the other
-    formalities still apply to everyone.
+    First, the heirs decide together whether to keep, sell or rent the house. Spouses or partners, children
+    and parents don't pay Portugal's 10% stamp duty on inheritance; other heirs do. Registration and the
+    other formalities apply to everyone. A partner lawyer can handle the paperwork and the registrations
+    from a distance.
   facts: [pt-is-inheritance-exempt]

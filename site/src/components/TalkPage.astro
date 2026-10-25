@@ -1,46 +1,45 @@
 ---
-// "Talk to a partner" (v2): the enquiry form for every partner category. FAQ buttons link here with
+// "Talk to a partner": the enquiry form for every partner category. FAQ buttons link here with
 // ?cat=<category>#form; the chosen category is highlighted and passed to the form.
-// Buying or selling a home goes only to the partner agency (D14, D17).
+// Buying or selling a home goes only to the partner agency (D14, D17). Wording: COPY_DECK.md "talk.*".
 import V2 from "../layouts/V2.astro";
 import Embed from "./Embed.astro";
 import { config } from "../config";
-import { t, pathFor, type Lang, type EdCode } from "../i18n";
-import { strings, categories } from "../lib/content";
-import { ui } from "../lib/ui";
+import { pathFor, type Lang, type EdCode } from "../i18n";
+import { CATS } from "../lib/content";
+import { c } from "../lib/copy";
 
 interface Props { lang: Lang; ed: EdCode; }
 const { lang, ed } = Astro.props;
-const S = strings(lang), U = ui(lang);
-const T = t(ed, lang);
+const site = config.agency.website.replace(/^https:\/\/|\/$/g, "");
 ---
-<V2 lang={lang} ed={ed} page="talk" title={`${S.talk.title} | Imóveis Portugal`} description={S.talk.lede}>
+<V2 lang={lang} ed={ed} page="talk" title={`${c("talk.title", lang)} | Imóveis Portugal`} description={c("talk.lede", lang)} sticky={null}>
   <div class="frame read ph">
-    <h1>{S.talk.title}</h1>
-    <p class="lede">{S.talk.lede}</p>
+    <h1>{c("talk.title", lang)}</h1>
+    <p class="lede">{c("talk.lede", lang)}</p>
   </div>
   <div class="frame read prose">
     <div class="partner">
-      <span class="tag">{U.faq.sponsored}</span>
+      <span class="tag">{c("common.sponsored", lang)}</span>
       <span class="logo">{config.agency.name}</span>
-      <p style="margin:0">{S.talk.agencyP}</p>
-      <p class="small" style="margin:0">AMI {config.agency.ami} · <a href={config.agency.website} rel="noopener">{config.agency.website.replace(/^https:\/\/|\/$/g, "")}</a></p>
-      <a class="btn" style="justify-self:start" href={pathFor(lang, ed, "buy")}>{U.faq.cta.agency}</a>
+      <p style="margin:0">{c("talk.agency.p", lang)}</p>
+      <p class="small" style="margin:0">AMI {config.agency.ami} · <a href={config.agency.website} rel="noopener">{site}</a></p>
+      <a class="btn" style="justify-self:start" href={pathFor(lang, ed, "buy")}>{c("faq.cta.agency", lang)}</a>
     </div>
-    <h2>{S.talk.catsH}</h2>
-    <p>{S.talk.launch}</p>
+    <h2>{c("talk.cats.h", lang)}</h2>
+    <p>{c("talk.launch", lang)}</p>
     <div class="cards two" id="cats">
-      {categories(lang).map((c) => (
-        <a class="card" id={c.id} data-cat={c.id} href={`?cat=${c.id}#form`}>
-          <h3>{c.name}</h3><p>{c.desc}</p>
-          <span class="go">{config.partners[c.id] ? `${config.partners[c.id]} · ${U.faq.sponsored}` : U.faq.talk}</span>
+      {CATS.map((k) => (
+        <a class="card" id={k} data-cat={k} href={`?cat=${k}#form`}>
+          <h3>{c(`talk.cat.${k}.h`, lang)}</h3><p>{c(`talk.cat.${k}.p`, lang)}</p>
+          <span class="go">{config.partners[k] ? `${config.partners[k]} · ${c("common.sponsored", lang)}` : c("common.nav.talk", lang)}</span>
         </a>
       ))}
     </div>
-    <h2 id="form">{S.talk.formH}</h2>
-    <p>{S.talk.formIntro}</p>
-    <Embed id={config.forms.partnerRequest[lang]} title={S.talk.formH} pending={T.formPending(config.contactEmail)} hidden={{ edition: ed, lang }} height={520} />
-    <p class="small" style="margin-top:12px"><a href={pathFor(lang, ed, "privacy")}>{U.foot.privacy}</a></p>
+    <h2 id="form">{c("talk.form.h", lang)}</h2>
+    <p>{c("talk.form.intro", lang)}</p>
+    <Embed id={config.forms.partnerRequest[lang]} title={c("talk.form.h", lang)} pending={c("common.form.pending", lang)} hidden={{ edition: ed, lang }} height={520} />
+    <p class="small" style="margin-top:12px"><a href={pathFor(lang, ed, "privacy")}>{c("common.privacy", lang)}</a></p>
   </div>
   <script is:inline>
     (function () {

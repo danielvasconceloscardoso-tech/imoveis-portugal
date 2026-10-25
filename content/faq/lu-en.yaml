@@ -6,7 +6,8 @@
   cta: tax
   q: "Do I report rent from my Portuguese home in Luxembourg?"
   a: >-
-    The Portugal–Luxembourg tax treaty gives Portugal the right to tax rent from property located there, at
-    25%. Luxembourg exempts that income but may use it to set the rate on the rest of your income. What you
-    must report in Luxembourg depends on your situation.
+    The rent is taxed in Portugal, and Luxembourg doesn't tax it again. Under the treaty between the two
+    countries, Portugal taxes rent from homes in Portugal, at 25% for non-residents. Luxembourg exempts that
+    income but may use it to set the rate on the rest of your income. What you report there depends on your
+    situation.
   facts: [lu-pt-treaty-property, pt-rent-tax-nonresident]

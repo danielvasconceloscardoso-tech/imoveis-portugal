@@ -6,10 +6,11 @@
   cta: lawyer
   q: "Does buying a home let me live in Portugal?"
   a: >-
-    Buying and living in Portugal are separate processes. To live here you need a residence visa, for
-    example the one for people living on their own income (D7). For the residence permit for investment
-    (Golden Visa), talk to a lawyer: we don't summarize rules we haven't checked at the source.
-  facts: [pt-nonresidents-buy, pt-visa-own-income]
+    No. Since October 7, 2023, buying a home no longer opens new Golden Visa applications (Law 56/2023).
+    Buying and living in Portugal are separate processes: to live here you need a residence visa, for
+    example the one for people living on their own income (D7). A partner lawyer can tell you which one fits
+    you.
+  facts: [pt-ari-realestate-ended, pt-visa-own-income]
 
 - id: en-us-report
   rank: 8.5
@@ -17,8 +18,8 @@
   cta: tax
   q: "Do I have to report my Portuguese bank account to the US?"
   a: >-
-    If your foreign accounts add up to more than $10,000 at any time during the year, US persons file an
-    FBAR with FinCEN. If you live abroad, you may also need Form 8938 once foreign assets exceed $200,000 at
+    Yes, if your foreign accounts add up to more than $10,000 at any point in the year: US persons then file
+    an FBAR with FinCEN. If you live abroad, you may also need Form 8938 once foreign assets top $200,000 at
     year end or $300,000 at any time (single filers; $400,000 and $600,000 for joint filers).
   facts: [us-fbar, us-8938-abroad]
 
@@ -28,7 +29,20 @@
   cta: tax
   q: "Is the gain on selling my Portuguese home taxed in the US?"
   a: >-
-    Under the Portugal–US tax treaty, Portugal may tax gains on property located in Portugal, and the US
-    keeps the right to tax its citizens. The foreign tax credit (Form 1116) lets you offset Portuguese tax
-    against US tax on the same income.
+    It can be taxed in both countries, but you don't pay twice on the same gain. Under the Portugal–US tax
+    treaty, Portugal may tax gains on homes in Portugal, and the US keeps the right to tax its citizens. The
+    foreign tax credit (Form 1116) lets you offset the Portuguese tax against US tax. A partner tax advisor
+    can work it out.
   facts: [us-pt-treaty-gains]
+
+- id: en-us-ifici
+  rank: 10.8
+  stage: after
+  cta: tax
+  q: "Is there a special tax regime for people moving to Portugal?"
+  a: >-
+    Yes, for some professions. IFICI applies a special 20% rate for 10 years to work income from eligible
+    activities, such as research, higher education or highly qualified jobs. It's for people who become tax
+    residents and weren't resident in any of the previous five years. Buying a home doesn't qualify you on
+    its own. A partner tax advisor can check whether it fits.
+  facts: [pt-ifici-20pct]

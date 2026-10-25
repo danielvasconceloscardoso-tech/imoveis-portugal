@@ -1,6 +1,7 @@
 ---
 // Not-found page (wrangler.jsonc: not_found_handling "404-page"), in the three languages.
 import "../styles/v2.css";
+import { c } from "../lib/copy";
 ---
 <!doctype html>
 <html lang="pt-PT">
@@ -14,8 +15,8 @@ import "../styles/v2.css";
   <body>
     <header class="hd"><div class="frame"><a class="word" href="/">Imóveis Portugal</a></div></header>
     <main class="frame read" style="padding-top:64px;padding-bottom:96px">
-      <h1>Página não encontrada</h1>
-      <p class="lede" lang="en">Page not found · <span lang="fr">Page introuvable</span></p>
+      <h1>{c("root.notfound", "pt")}</h1>
+      <p class="lede"><span lang="en">{c("root.notfound", "en")}</span> · <span lang="fr">{c("root.notfound", "fr")}</span></p>
       <a class="btn" href="/">Imóveis Portugal</a>
     </main>
   </body>

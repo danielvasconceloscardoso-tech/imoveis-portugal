@@ -1,16 +1,15 @@
 ---
-// FAQ as a help centre (prompt 09; Wise and Stripe help pages as the model): search first, questions
+// FAQ as a help centre (prompts 09 and 10; Wise and Stripe help pages as the model): search first, questions
 // grouped by stage and ordered by search interest, short answers with sources, one partner action each.
 // No sponsor yet in a category: the button says "Talk to a partner" and opens the enquiry form.
 import V2 from "../layouts/V2.astro";
 import { config } from "../config";
 import { pathFor, type Lang, type EdCode } from "../i18n";
 import { faqFor, FACTS, fmtDate, DISCLAIMER, type Stage } from "../lib/content";
-import { ui } from "../lib/ui";
+import { c } from "../lib/copy";
 
 interface Props { lang: Lang; ed: EdCode; }
 const { lang, ed } = Astro.props;
-const U = ui(lang), F = U.faq;
 const talk = pathFor(lang, ed, "talk");
 
 const items = faqFor(ed, lang).map((it) => {
@@ -24,9 +23,9 @@ const items = faqFor(ed, lang).map((it) => {
     else byUrl.set(f.source_url, { url: f.source_url, title: f.source_title });
   }
   let next: { href: string; label: string; who: string };
-  if (it.cta === "agency") next = { href: pathFor(lang, ed, "buy"), label: F.cta.agency, who: `${config.agency.name} · ${F.sponsored}` };
-  else if (config.partners[it.cta]) next = { href: `${talk}?cat=${it.cta}#form`, label: F.cta[it.cta], who: `${config.partners[it.cta]} · ${F.sponsored}` };
-  else next = { href: `${talk}?cat=${it.cta}#form`, label: F.talk, who: F.who[it.cta] };
+  if (it.cta === "agency") next = { href: pathFor(lang, ed, "buy"), label: c("faq.cta.agency", lang), who: `${config.agency.name} · ${c("common.sponsored", lang)}` };
+  else if (config.partners[it.cta]) next = { href: `${talk}?cat=${it.cta}#form`, label: c(`faq.cta.${it.cta}`, lang), who: `${config.partners[it.cta]} · ${c("common.sponsored", lang)}` };
+  else next = { href: `${talk}?cat=${it.cta}#form`, label: c("common.nav.talk", lang), who: c(`faq.who.${it.cta}`, lang) };
   return { ...it, next, sources: [...byUrl.values()], checked };
 });
 const stages: Stage[] = ["before", "buying", "after"];
@@ -37,36 +36,36 @@ const jsonLd = {
   mainEntity: items.map((it) => ({ "@type": "Question", name: it.q, acceptedAnswer: { "@type": "Answer", text: it.a } })),
 };
 ---
-<V2 lang={lang} ed={ed} page="faq" title={`${F.title} | Imóveis Portugal`} description={F.lede}>
+<V2 lang={lang} ed={ed} page="faq" title={`${c("faq.title", lang)} | Imóveis Portugal`} description={c("faq.lede", lang)}>
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <div class="frame read help">
-    <h1>{F.title}</h1>
-    <p class="lede">{F.lede}</p>
+    <h1>{c("faq.title", lang)}</h1>
+    <p class="lede">{c("faq.lede", lang)}</p>
     <div class="search" role="search">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-      <input id="q" type="search" placeholder={F.search} aria-label={F.search} autocomplete="off" />
+      <input id="q" type="search" placeholder={c("faq.search", lang)} aria-label={c("faq.search", lang)} autocomplete="off" />
     </div>
     <ul class="stages">
-      {stages.map((s) => <li><a href={`#${s}`}>{F.stages[s][0]} <span class="c">{items.filter((i) => i.stage === s).length}</span></a></li>)}
+      {stages.map((s) => <li><a href={`#${s}`}>{c(`faq.stage.${s}.h`, lang)} <span class="c">{items.filter((i) => i.stage === s).length}</span></a></li>)}
     </ul>
-    {lastChecked && <p class="small" style="margin-top:16px">{F.updated} {fmtDate(lang, lastChecked)}</p>}
+    {lastChecked && <p class="small" style="margin-top:16px">{c("faq.updated", lang, { date: fmtDate(lang, lastChecked) })}</p>}
   </div>
   <div class="frame read">
     <div class="none" id="none" role="status">
-      <p>{F.none}</p>
-      <a class="btn" href={`${talk}#form`}>{F.talk}</a>
+      <p>{c("faq.none", lang)}</p>
+      <a class="btn" href={`${talk}#form`}>{c("common.nav.talk", lang)}</a>
     </div>
     {stages.map((s) => (
       <section class="stage" id={s} aria-labelledby={`${s}-h`}>
-        <h2 id={`${s}-h`}>{F.stages[s][0]}</h2>
-        <p>{F.stages[s][1]}</p>
+        <h2 id={`${s}-h`}>{c(`faq.stage.${s}.h`, lang)}</h2>
+        <p>{c(`faq.stage.${s}.p`, lang)}</p>
         {items.filter((i) => i.stage === s).map((it) => (
           <details class="qa" id={it.id}>
             <summary>{it.q}</summary>
             <div class="a">
               <p>{it.a}</p>
               {it.sources.length > 0 && (
-                <p class="src">{F.sources}: {it.sources.map((f, i) => (<>{i > 0 && "; "}<a href={f.url} rel="noopener">{f.title}</a></>))}{it.checked && `. ${F.checked} ${fmtDate(lang, it.checked)}.`}</p>
+                <p class="src">{c("common.sources", lang)}: {it.sources.map((f, i) => (<>{i > 0 && "; "}<a href={f.url} rel="noopener">{f.title}</a></>))}{it.checked && `. ${c("common.checked", lang, { date: fmtDate(lang, it.checked) })}.`}</p>
               )}
               <div class="next">
                 <a class="btn sm" href={it.next.href}>{it.next.label}</a>

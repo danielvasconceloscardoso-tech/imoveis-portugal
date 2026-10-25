@@ -1,15 +1,15 @@
 ---
-// Every page other than the home, on the v2 layout (prompt 09): media kit, buyer request, how we work,
-// privacy, legal notice, FAQ, talk to a partner and the free report.
+// Every page other than the home: media kit, buyer request, how we work, privacy, legal notice, FAQ,
+// talk to a partner and the free guide. Wording: content/copy/COPY_DECK.md.
 import V2 from "../../../layouts/V2.astro";
 import Embed from "../../../components/Embed.astro";
 import FaqPage from "../../../components/FaqPage.astro";
 import TalkPage from "../../../components/TalkPage.astro";
 import GuidePage from "../../../components/GuidePage.astro";
 import { config } from "../../../config";
-import { EDITIONS, ED_ORDER, LANGS, SLUGS, t, pathFor, type EdCode, type Lang, type PageKey } from "../../../i18n";
-import { ui, HOW } from "../../../lib/ui";
+import { ED_ORDER, LANGS, SLUGS, eur, pathFor, type EdCode, type Lang, type PageKey } from "../../../i18n";
 import { homeFigures, fmtDate } from "../../../lib/content";
+import { c, cl, edName } from "../../../lib/copy";
 
 export function getStaticPaths() {
   const keys: PageKey[] = ["partners", "buy", "how", "privacy", "legal", "faq", "talk", "guide"];
@@ -18,80 +18,94 @@ export function getStaticPaths() {
 const lang = Astro.params.lang as Lang;
 const ed = Astro.params.ed as EdCode;
 const { key } = Astro.props as { key: PageKey };
-const ED = EDITIONS[ed];
-const T = t(ed, lang), U = ui(lang), H = HOW[lang];
-const P = T.partners, B = T.buy;
-const legal = key === "privacy" ? T.privacy : key === "legal" ? T.legal : null;
+const p = config.prices, e = (n: number) => eur(n, lang);
 const used = config.foundingSlotsTotal - config.foundingSlotsLeft;
-const figs = homeFigures(ed, lang);
-const title = key === "partners" ? P.title : key === "buy" ? B.title : key === "how" ? H.title : legal?.title ?? "";
-const desc = key === "partners" ? P.lede : key === "buy" ? B.lede : key === "how" ? H.lede : title;
+const ent = config.entity;
+const ph = (v: string, label: string) => v || `[${label}]`;
+const legalVars = { entity: ph(ent.name, "Entidade / Entity"), address: ph(ent.address, "Morada / Address"), register: ph(ent.register, "n.º"), vat: ph(ent.vat, "n.º"), email: config.contactEmail };
+const legal = key === "privacy" || key === "legal" ? key : null;
+const packages = [
+  { name: "Gold", desc: c("partners.gold.p", lang), founding: e(p.gold.founding), list: `${e(p.gold.list)} ${c("partners.per.year", lang)}` },
+  { name: "Silver", desc: c("partners.silver.p", lang), founding: e(p.silver.founding), list: `${e(p.silver.list)} ${c("partners.per.year", lang)}` },
+  { name: "Bronze", desc: c("partners.bronze.p", lang), founding: e(p.bronze.founding), list: `${e(p.bronze.list)} ${c("partners.per.year", lang)}` },
+  { name: c("partners.campaign.h", lang), desc: c("partners.campaign.p", lang), founding: `${c("partners.from", lang)} ${e(p.campaignFrom)}`, list: "" },
+];
+const titles: Partial<Record<PageKey, string>> = { partners: c("partners.title", lang), buy: c("buy.title", lang), how: c("how.title", lang), privacy: c("legal.privacy.title", lang), legal: c("legal.legal.title", lang) };
+const descs: Partial<Record<PageKey, string>> = { partners: c("partners.lede", lang), buy: c("buy.lede", lang), how: c("how.lede", lang), privacy: c("legal.privacy.intro", lang), legal: c("legal.legal.intro", lang) };
+const site = config.agency.website.replace(/^https:\/\/|\/$/g, "");
 ---
 {key === "faq" ? <FaqPage lang={lang} ed={ed} /> : key === "talk" ? <TalkPage lang={lang} ed={ed} /> : key === "guide" ? <GuidePage lang={lang} ed={ed} /> : (
-<V2 lang={lang} ed={ed} page={key} title={`${title} | Imóveis Portugal · ${ED.name[lang]}`} description={desc}>
+<V2 lang={lang} ed={ed} page={key} title={`${titles[key]} | Imóveis Portugal · ${edName(ed, lang)}`} description={descs[key] ?? ""}
+  sticky={key === "partners" ? { href: "#contacto", label: c("partners.cta", lang) } : undefined}>
   {key === "partners" && (
     <>
       <section class="hero">
         <div class="frame grid">
           <div>
-            <p class="label">{P.title}</p>
-            <h1>{P.h1}</h1>
-            <p class="lede">{P.lede}</p>
-            <a class="btn" href="#contacto">{P.ctaH}</a>
+            <p class="label">{c("partners.title", lang)}</p>
+            <h1>{c("partners.h1", lang)}</h1>
+            <p class="lede">{c("partners.lede", lang)}</p>
+            <a class="btn" href="#contacto">{c("partners.cta", lang)}</a>
           </div>
           <div class="offer">
-            <h2>{P.foundingH}</h2>
-            <p>{P.foundingP}</p>
+            <h2>{c("partners.founding.h", lang)}</h2>
+            <p>{c("partners.founding.p", lang)}</p>
             <div class="slots" aria-hidden="true">{Array.from({ length: config.foundingSlotsTotal }, (_, i) => <span class={i < used ? "taken" : ""}></span>)}</div>
-            <p class="small" style="margin:0">{P.slots}</p>
+            <p class="small" style="margin:0">{c("partners.slots", lang, { left: config.foundingSlotsLeft, total: config.foundingSlotsTotal })}</p>
           </div>
         </div>
       </section>
       <section class="band white" aria-labelledby="readers">
         <div class="frame split">
-          <div><h2 id="readers">{P.readersH}</h2></div>
-          <div><p class="lede">{P.readersP}</p><p>{P.whyNowP}</p></div>
+          <div><h2 id="readers">{c("partners.readers.h", lang)}</h2></div>
+          <div><p class="lede">{c("partners.readers.p", lang)}</p><p>{c("partners.whynow.p", lang)}</p></div>
         </div>
       </section>
       <section class="band" aria-labelledby="packages">
         <div class="frame">
-          <h2 id="packages">{P.tableH}</h2>
-          <div class="table-scroll" style="margin-top:24px">
-            <table>
-              <thead><tr>{P.cols.map((c) => <th scope="col">{c}</th>)}</tr></thead>
-              <tbody>{P.rows.map((r) => <tr><td><strong>{r[0]}</strong></td><td>{r[1]}</td><td class="num"><strong>{r[2]}</strong></td><td class="num">{r[3]}</td></tr>)}</tbody>
-            </table>
+          <h2 id="packages">{c("partners.packages.h", lang)}</h2>
+          <div class="pkgs">
+            {packages.map((k) => (
+              <div class="pkg">
+                <h3>{k.name}</h3>
+                <p>{k.desc}</p>
+                <dl>
+                  <dt>{c("partners.founding.price", lang)}</dt><dd><strong>{k.founding}</strong></dd>
+                  {k.list && <><dt>{c("partners.list.price", lang)}</dt><dd>{k.list}</dd></>}
+                </dl>
+              </div>
+            ))}
           </div>
-          <p class="small">{P.vat}</p>
+          <p class="small">{c("partners.vat", lang)}</p>
         </div>
       </section>
       <section class="band white" aria-labelledby="agency">
         <div class="frame split">
-          <div><p class="label">{U.foot.agency}</p><h2 id="agency">{config.agency.name}</h2></div>
+          <div><p class="label">{c("common.foot.agency", lang)}</p><h2 id="agency">{config.agency.name}</h2></div>
           <div class="partner">
-            <span class="tag">{U.faq.sponsored}</span>
-            <p style="margin:0">{T.agencyNote}</p>
-            <p class="small" style="margin:0">AMI {config.agency.ami} · <a href={config.agency.website} rel="noopener">{config.agency.website.replace(/^https:\/\/|\/$/g, "")}</a></p>
+            <span class="tag">{c("common.sponsored", lang)}</span>
+            <p style="margin:0">{c("partners.agency.p", lang)}</p>
+            <p class="small" style="margin:0">AMI {config.agency.ami} · <a href={config.agency.website} rel="noopener">{site}</a></p>
           </div>
         </div>
       </section>
       <section class="band" aria-labelledby="rules">
         <div class="frame split">
-          <div><h2 id="rules">{P.rulesH}</h2></div>
+          <div><h2 id="rules">{c("partners.rules.h", lang)}</h2></div>
           <div>
-            <ul class="ticks" style="margin-top:0">{P.rules.map((r) => <li>{r}</li>)}</ul>
-            <h3 style="margin-top:32px">{P.reportH}</h3>
-            <p>{P.reportP}</p>
-            <p><a href={pathFor(lang, ed, "how")}>{U.nav.how}</a></p>
+            <ul class="ticks" style="margin-top:0">{cl("partners.rules", lang).map((r) => <li>{r}</li>)}</ul>
+            <h3 style="margin-top:32px">{c("partners.report.h", lang)}</h3>
+            <p>{c("partners.report.p", lang)}</p>
+            <p><a href={pathFor(lang, ed, "how")}>{c("common.nav.how", lang)}</a></p>
           </div>
         </div>
       </section>
       <section class="band white" id="contacto" aria-labelledby="cta">
         <div class="frame read">
-          <h2 id="cta">{P.ctaH}</h2>
-          <p class="lede">{P.formIntro}</p>
-          {config.bookingUrl && <p><a class="btn" href={config.bookingUrl} rel="noopener">{P.book}</a></p>}
-          <Embed id={config.forms.sponsor[lang]} title={P.ctaH} pending={T.formPending(config.contactEmail)} hidden={{ edition: ed, lang }} />
+          <h2 id="cta">{c("partners.cta", lang)}</h2>
+          <p class="lede">{c("partners.form.intro", lang)}</p>
+          {config.bookingUrl && <p><a class="btn" href={config.bookingUrl} rel="noopener">{c("partners.book", lang)}</a></p>}
+          <Embed id={config.forms.sponsor[lang]} title={c("partners.cta", lang)} pending={c("common.form.pending", lang)} hidden={{ edition: ed, lang }} />
         </div>
       </section>
     </>
@@ -100,23 +114,23 @@ const desc = key === "partners" ? P.lede : key === "buy" ? B.lede : key === "how
   {key === "buy" && (
     <div class="frame">
       <div class="ph read">
-        <p class="label">{U.nav.buy}</p>
-        <h1>{B.h1}</h1>
-        <p class="lede">{B.lede}</p>
+        <p class="label">{c("buy.title", lang)}</p>
+        <h1>{c("buy.h1", lang)}</h1>
+        <p class="lede">{c("buy.lede", lang)}</p>
       </div>
       <div class="split" style="padding-bottom:64px">
-        <div>
-          <h3 style="margin-bottom:16px">{B.stepsH}</h3>
-          <ol class="steps">{B.steps.map((s) => <li>{s}</li>)}</ol>
-          <div class="partner" style="margin-top:28px">
-            <span class="tag">{U.faq.sponsored}</span>
-            <span class="logo">{config.agency.name}</span>
-            <p class="small" style="margin:0">AMI {config.agency.ami} · <a href={config.agency.website} rel="noopener">{config.agency.website.replace(/^https:\/\/|\/$/g, "")}</a></p>
-          </div>
+        <div class="buy-form">
+          <Embed id={config.forms.buyer[lang]} title={c("buy.h1", lang)} pending={c("common.form.pending", lang)} hidden={{ edition: ed, lang }} height={560} />
+          <p class="small" style="margin-top:12px">{c("buy.small", lang)}{" "}<a href={pathFor(lang, ed, "privacy")}>{c("common.privacy", lang)}</a></p>
         </div>
         <div>
-          <Embed id={config.forms.buyer[lang]} title={B.h1} pending={T.formPending(config.contactEmail)} hidden={{ edition: ed, lang }} height={560} />
-          <p class="small" style="margin-top:12px">{B.small}{" "}<a href={pathFor(lang, ed, "privacy")}>{U.foot.privacy}</a></p>
+          <h3 style="margin-bottom:16px">{c("buy.steps.h", lang)}</h3>
+          <ol class="steps">{cl("buy.steps", lang).map((s) => <li>{s}</li>)}</ol>
+          <div class="partner" style="margin-top:28px">
+            <span class="tag">{c("common.sponsored", lang)}</span>
+            <span class="logo">{config.agency.name}</span>
+            <p class="small" style="margin:0">AMI {config.agency.ami} · <a href={config.agency.website} rel="noopener">{site}</a></p>
+          </div>
         </div>
       </div>
     </div>
@@ -124,27 +138,30 @@ const desc = key === "partners" ? P.lede : key === "buy" ? B.lede : key === "how
 
   {key === "how" && (
     <div class="frame read prose">
-      <div class="ph" style="padding-left:0;padding-right:0">
-        <p class="label">{H.title}</p>
-        <h1>{H.h1}</h1>
-        <p class="lede">{H.lede}</p>
+      <div class="ph">
+        <p class="label">{c("how.title", lang)}</p>
+        <h1>{c("how.h1", lang)}</h1>
+        <p class="lede">{c("how.lede", lang)}</p>
       </div>
-      {H.sections.map(([h, p]) => (<><h2>{h}</h2><p>{p}</p></>))}
-      <h2>{H.exampleH}</h2>
-      <p>{H.exampleP}</p>
+      {[1, 2, 3, 4, 5, 6].map((i) => (<><h2>{c(`how.s${i}.h`, lang)}</h2><p>{c(`how.s${i}.p`, lang)}</p></>))}
+      <h2>{c("how.example.h", lang)}</h2>
+      <p>{c("how.example.p", lang)}</p>
       <ol class="notes" style="font-size:15px">
-        {figs.slice(1).map((f) => <li><strong>{f.big}</strong> · <a href={f.url} rel="noopener">{f.source}</a>{f.checked && `, ${U.faq.checked} ${fmtDate(lang, f.checked)}`}.</li>)}
+        {homeFigures(ed, lang).slice(1).map((f) => <li><strong>{f.big}</strong> · <a href={f.url} rel="noopener">{f.source}</a>{f.checked && `, ${c("common.checked", lang, { date: fmtDate(lang, f.checked) })}`}.</li>)}
       </ol>
-      <h2>{H.contactH}</h2>
-      <p>{H.contactP}{" "}<a href={`mailto:${config.contactEmail}`}>{config.contactEmail}</a></p>
+      <h2>{c("how.contact.h", lang)}</h2>
+      <p>{c("how.contact.p", lang)}{" "}<a href={`mailto:${config.contactEmail}`}>{config.contactEmail}</a></p>
     </div>
   )}
 
   {legal && (
     <div class="frame read prose">
-      <div class="ph" style="padding-left:0;padding-right:0"><h1>{legal.h1}</h1></div>
-      {!config.launchReady && <p class="draft">{legal.draft}</p>}
-      {legal.sections.map(([h, p]) => (<><h2>{h}</h2><p>{p}</p></>))}
+      <div class="ph">
+        <h1>{c(`legal.${legal}.h1`, lang)}</h1>
+        <p class="lede">{c(`legal.${legal}.intro`, lang)}</p>
+      </div>
+      {!config.launchReady && <p class="draft">{c("legal.draft", lang)}</p>}
+      {Array.from({ length: legal === "privacy" ? 6 : 4 }, (_, j) => j + 1).map((i) => (<><h2>{c(`legal.${legal}.${i}.h`, lang)}</h2><p>{c(`legal.${legal}.${i}.p`, lang, legalVars)}</p></>))}
     </div>
   )}
 </V2>

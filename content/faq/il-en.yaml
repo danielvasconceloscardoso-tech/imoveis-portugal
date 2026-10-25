@@ -6,10 +6,11 @@
   cta: lawyer
   q: "Does buying a home let me live in Portugal?"
   a: >-
-    Buying and living in Portugal are separate processes. To live here you need a residence visa, for
-    example the one for people living on their own income (D7). For the residence permit for investment
-    (Golden Visa), talk to a lawyer: we don't summarize rules we haven't checked at the source.
-  facts: [pt-nonresidents-buy, pt-visa-own-income]
+    No. Since October 7, 2023, buying a home no longer opens new Golden Visa applications (Law 56/2023).
+    Buying and living in Portugal are separate processes: to live here you need a residence visa, for
+    example the one for people living on their own income (D7). A partner lawyer can tell you which one fits
+    you.
+  facts: [pt-ari-realestate-ended, pt-visa-own-income]
 
 - id: en-il-rent
   rank: 9.5
@@ -17,7 +18,20 @@
   cta: tax
   q: "Does Israel tax rent from my home in Portugal?"
   a: >-
-    Under the Portugal–Israel tax treaty, Portugal may tax rent from property located there, at 25%, and
-    Israel, as your country of residence, gives a credit for the tax paid in Portugal. How Israel calculates
-    its own tax follows Israeli rules.
+    It can, but it gives you credit for the tax already paid in Portugal. Under the treaty between the two
+    countries, Portugal taxes rent from homes in Portugal, at 25% for non-residents, and Israel, as your
+    country of residence, allows a credit for that tax. How Israel calculates its own tax follows Israeli
+    rules. A partner tax advisor can help.
   facts: [il-pt-treaty-property, pt-rent-tax-nonresident]
+
+- id: en-il-ifici
+  rank: 10.8
+  stage: after
+  cta: tax
+  q: "Is there a special tax regime for people moving to Portugal?"
+  a: >-
+    Yes, for some professions. IFICI applies a special 20% rate for 10 years to work income from eligible
+    activities, such as research, higher education or highly qualified jobs. It's for people who become tax
+    residents and weren't resident in any of the previous five years. Buying a home doesn't qualify you on
+    its own. A partner tax advisor can check whether it fits.
+  facts: [pt-ifici-20pct]
