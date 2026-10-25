@@ -8,7 +8,13 @@ CEO view: the site is good enough to sell. Revenue is now blocked by four things
 
 Items marked *proposal* are prices or positioning for Daniel to confirm: build them, and list them in the PR as decisions for Daniel.
 
-1. **Sell categories, not just tiers.** One partner per category per edition, so exclusivity is the product: bank, lawyer, tax adviser, money transfer, insurer, developer (one per region). The partner group holds real estate, credit and insurance as defaults (D14, D20, D21). *Proposal:* category exclusivity = Gold.
+1. **Non-exclusive verified partner network (D32).** Real estate, credit and insurance stay with the partner group (D14, D20, D21). Every other category (lawyers, tax advisers, banks, money transfer, developers, insurers outside the group's role) is open to several partners per edition, ranked by response time and reader ratings. No category exclusivity is sold before launch; a 12-month exclusivity can be quoted later, once audience numbers exist.
+   Price list v3 (*proposal*, flat annual fees, D6; Founding Partner 40% off year 1 for the first 10, locked for year 2):
+   - **Verified Partner** (profile, FAQ answers in its category, simulator call-to-action rotation): 1,800 € per edition / 4,800 € all editions
+   - **Featured Partner** (adds 6 newsletter slots a year, 2 webinar co-hosts, one e-book chapter): 4,800 € per edition / 12,000 € all editions
+   - **Bank Partner** (simulator "oferecido por" in its editions, webinars, newsletter): 9,000–15,000 €
+   - **Developer campaign:** from 2,500 € per campaign
+   Rationale to show sponsors: one client covers the fee (a purchase file for a lawyer, one large transfer for a money-transfer firm, one mortgage for a bank, one sale for a developer).
 2. **Inventory a sponsor can see**, listed on the partner page with what each tier gets:
    - simulator "oferecido por";
    - the labelled sponsor answer on the FAQ questions in its category;
