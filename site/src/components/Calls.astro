@@ -1,20 +1,15 @@
 ---
-// The free first conversation with the partner agency (D19). The paid 45-minute call was dropped (D39, prompt 21).
-// Cal.com link from config; until it exists, it opens an email (prompt 11).
-import { config } from "../config";
-import type { Lang } from "../i18n";
+// The partner agency's free "Consulta privada" (prompt 21 §2, D39), replacing the two calls of prompt 11.
+import { pathFor, type Lang, type EdCode } from "../i18n";
 import { c } from "../lib/copy";
 interface Props { lang: Lang; ed: string; compact?: boolean; }
 const { lang, ed, compact = false } = Astro.props;
-const href = (url: string, subject: string) => url || `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${subject} (${ed} · ${lang})`)}`;
-const intro = href(config.calls.intro, c("calls.intro.subject", lang));
+const href = pathFor(lang, ed as EdCode, "consult");
 ---
 {compact ? (
-  <p class="calls-inline">
-    <a href={intro}>{c("calls.intro.short", lang)}</a>
-  </p>
+  <p class="calls-inline"><a href={href}>{c("consult.cta", lang)}</a></p>
 ) : (
   <div class="calls">
-    <a class="call" href={intro}><b>{c("calls.intro.h", lang)}</b><span>{c("calls.intro.p", lang)}</span></a>
+    <a class="call" href={href}><b>{c("consult.card.h", lang)}</b><span>{c("consult.card.p", lang)}</span></a>
   </div>
 )}

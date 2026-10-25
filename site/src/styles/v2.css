@@ -627,3 +627,8 @@ html:not(.js) .step-nav { display: none; }
 .dev-list li.dev-empty:last-child { border-bottom: 1px dashed var(--rule); }
 .mapx-devs { margin: 12px 0 0; }
 .mapx-devs a { color: var(--brass); }
+/* Consulta privada (prompt 21 §2) */
+.steps-plain { padding-left: 1.2em; margin: 10px 0 0; }
+.steps-plain li { padding: 6px 0; }
+.ptypes .pl-h { display: block; font: 450 1.1rem/1.35 var(--serif); padding-top: 12px; }
+.ptypes .pl-p { display: block; color: var(--muted); font-size: 15px; padding-bottom: 12px; }

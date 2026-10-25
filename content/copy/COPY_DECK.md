@@ -3894,3 +3894,140 @@ How to edit:
 - PT: Promotores parceiros nesta zona: lugares disponíveis
 - EN: Partner developers here: places available
 - FR: Promoteurs partenaires ici : places disponibles
+
+## consult
+
+### title
+- PT: Consulta privada
+- EN: Private consultation
+- FR: Consultation privée
+
+### h1
+- PT: Uma consulta privada com a nossa agência parceira
+- EN: A private consultation with our partner agency
+- FR: Une consultation privée avec notre agence partenaire
+
+### lede
+- PT: Trinta minutos por videochamada com a {agency} (AMI {ami}), sem custos. Responda a algumas perguntas para que a conversa comece já no seu caso.
+- EN: Thirty minutes by video call with {agency} (AMI {ami}), at no cost. Answer a few questions so the conversation starts with your case.
+- FR: Trente minutes en appel vidéo avec {agency} (AMI {ami}), sans frais. Répondez à quelques questions pour que l'échange parte de votre situation.
+
+### form.h
+- PT: O seu pedido
+- EN: Your request
+- FR: Votre demande
+
+### next.h
+- PT: O que acontece a seguir
+- EN: What happens next
+- FR: La suite
+
+### next.1
+- PT: A agência lê o seu pedido e responde por email.
+- EN: The agency reads your request and replies by email.
+- FR: L'agence lit votre demande et vous répond par e-mail.
+
+### next.2
+- PT: Na consulta: as zonas, o orçamento, o calendário e os próximos passos.
+- EN: In the consultation: areas, budget, timing and the next steps.
+- FR: Pendant la consultation : les secteurs, le budget, le calendrier et les prochaines étapes.
+
+### next.3
+- PT: Depois, os parceiros certos para o seu caso: crédito, advogado, consultor fiscal do seu país.
+- EN: Then the right partners for your case: mortgage, lawyer, a tax adviser for your country.
+- FR: Ensuite, les bons partenaires pour votre cas : crédit, avocat, conseiller fiscal de votre pays.
+
+### privacy
+- PT: Os seus dados seguem só para a agência parceira, com o seu consentimento.
+- EN: Your details go only to the partner agency, with your consent.
+- FR: Vos données ne vont qu'à l'agence partenaire, avec votre accord.
+
+### cta
+- PT: Pedir uma consulta privada
+- EN: Request a private consultation
+- FR: Demander une consultation privée
+
+### card.h
+- PT: Consulta privada · 30 min · vídeo
+- EN: Private consultation · 30 min · video
+- FR: Consultation privée · 30 min · vidéo
+
+### card.p
+- PT: Com a agência parceira, sem custos. Diga-nos onde está no seu plano.
+- EN: With the partner agency, at no cost. Tell us where you are in your plan.
+- FR: Avec l'agence partenaire, sans frais. Dites-nous où vous en êtes.
+
+### ok.title
+- PT: Pedido recebido
+- EN: Request received
+- FR: Demande reçue
+
+### ok.h1
+- PT: O seu pedido chegou à agência
+- EN: Your request has reached the agency
+- FR: Votre demande est arrivée à l'agence
+
+### ok.p
+- PT: Obrigado. A {agency} vai propor-lhe, por email, uma videochamada de 30 minutos dentro da janela que indicou.
+- EN: Thank you. {agency} will email you to propose a 30-minute video call within the window you gave.
+- FR: Merci. {agency} vous proposera par e-mail un appel vidéo de 30 minutes dans la période indiquée.
+
+### ok.prep
+- PT: Para preparar a conversa, tenha à mão o orçamento, as zonas que lhe interessam e, se já tiver, o seu NIF.
+- EN: To prepare, have your budget, the areas you like and, if you have one, your NIF to hand.
+- FR: Pour préparer l'échange, ayez sous la main votre budget, les secteurs qui vous intéressent et, si vous l'avez, votre NIF.
+
+### private.title
+- PT: Private desk
+- EN: Private desk
+- FR: Private desk
+
+### private.h1
+- PT: O seu pedido chegou ao Private desk
+- EN: Your request has reached the Private desk
+- FR: Votre demande est arrivée au Private desk
+
+### private.p
+- PT: Obrigado. A {agency} acompanha pessoalmente as compras a partir de 1 milhão de euros e vai propor-lhe, por email, uma videochamada de 30 minutos dentro da janela que indicou.
+- EN: Thank you. {agency} personally handles purchases from €1 million and will email you to propose a 30-minute video call within the window you gave.
+- FR: Merci. {agency} accompagne personnellement les achats à partir d'un million d'euros et vous proposera par e-mail un appel vidéo de 30 minutes dans la période indiquée.
+
+### private.aml
+- PT: Antes das visitas, a agência pede a identificação habitual e informação sobre a origem dos fundos. É um dever de todas as agências imobiliárias em Portugal.
+- EN: Before viewings, the agency asks for the usual identification and information on the origin of funds. Every estate agency in Portugal must do so.
+- FR: Avant les visites, l'agence demande les pièces d'identité habituelles et des informations sur l'origine des fonds. C'est une obligation pour toute agence immobilière au Portugal.
+
+### later.title
+- PT: Obrigado
+- EN: Thank you
+- FR: Merci
+
+### later.h1
+- PT: Obrigado pelo seu pedido
+- EN: Thank you for your request
+- FR: Merci pour votre demande
+
+### later.p
+- PT: Pelo que nos diz, ainda tem tempo para preparar a compra com calma. Reunimos o essencial para esta fase.
+- EN: From what you tell us, you have time to prepare calmly. Here is what matters at this stage.
+- FR: D'après vos réponses, vous avez le temps de préparer votre achat sereinement. Voici l'essentiel pour cette étape.
+
+### later.path
+- PT: O percurso do seu país, passo a passo
+- EN: Your country's path, step by step
+- FR: Le parcours de votre pays, pas à pas
+
+### later.nl
+- PT: A newsletter de quinta-feira
+- EN: The Thursday newsletter
+- FR: La newsletter du jeudi
+
+### later.dossier
+- PT: Os dossiês, com os números do seu caso
+- EN: The dossiers, with the figures for your case
+- FR: Les dossiers, avec les chiffres de votre cas
+
+### later.book
+- PT: Quando a compra estiver mais próxima, peça aqui a sua consulta privada.
+- EN: When your purchase is closer, request your private consultation here.
+- FR: Quand votre achat sera plus proche, demandez ici votre consultation privée.

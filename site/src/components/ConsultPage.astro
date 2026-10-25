@@ -1,0 +1,69 @@
+---
+// "Consulta privada" (prompt 21 §2, D39): a free 30-minute video consultation with the partner agency, requested
+// through the qualification form (Tally BEEzgN, extended; fields in ops/TALLY_CONSULTA.md). The form redirects to
+// one of three confirmation pages: "ok" (timing within 12 months), "private" (budget from 1 M€) or "later" (otherwise).
+// The rule is applied in Tally's redirect and shown to nobody. Wording: COPY_DECK.md "consult.*".
+import V2 from "../layouts/V2.astro";
+import Embed from "./Embed.astro";
+import { config } from "../config";
+import { LANGS, pathFor, type Lang, type EdCode } from "../i18n";
+import { Sources, fmtDate } from "../lib/content";
+import { CONSULT_SUB } from "../lib/consult";
+import { c, cl, edName } from "../lib/copy";
+
+interface Props { lang: Lang; ed: EdCode; view?: "form" | "ok" | "private" | "later"; }
+const { lang, ed, view = "form" } = Astro.props;
+const base = pathFor(lang, ed, "consult");
+const paths = view === "form" ? undefined : (Object.fromEntries(LANGS.map((l) => [l, `${pathFor(l, ed, "consult")}${CONSULT_SUB[view][l]}/`])) as Record<Lang, string>);
+const src = new Sources();
+const nAml = view === "private" ? src.n("pt-aml-realestate") : 0;
+const h1 = view === "form" ? c("consult.h1", lang) : c(`consult.${view}.h1`, lang);
+const title = view === "form" ? c("consult.title", lang) : c(`consult.${view}.title`, lang);
+---
+<V2 lang={lang} ed={ed} page="consult" paths={paths} noindex={view !== "form"} title={`${title} | Imóveis Portugal · ${edName(ed, lang)}`} description={c("consult.lede", lang)} sticky={null}>
+  <div class="frame read ph">
+    <p class="h-small">{c("consult.title", lang)}</p>
+    <h1>{h1}</h1>
+    {view === "form" && <p class="lede">{c("consult.lede", lang)}</p>}
+    {view === "ok" && <><p class="lede">{c("consult.ok.p", lang)}</p><p>{c("consult.ok.prep", lang)}</p></>}
+    {view === "private" && <><p class="lede">{c("consult.private.p", lang)}</p><p>{c("consult.private.aml", lang)}<a class="sup" href={`#fonte-${nAml}`}>{nAml}</a></p><p>{c("consult.ok.prep", lang)}</p></>}
+    {view === "later" && <p class="lede">{c("consult.later.p", lang)}</p>}
+  </div>
+  <div class="frame read consult">
+    {view === "form" && (
+      <>
+        <h2 class="h3">{c("consult.form.h", lang)}</h2>
+        <Embed id={config.forms.buyer[lang]} title={c("consult.cta", lang)} cta={c("consult.cta", lang)} subject={c("consult.cta", lang)} hidden={{ edition: ed, language: lang }} height={760} />
+        <p class="small">{c("consult.privacy", lang)} <a href={pathFor(lang, ed, "privacy")}>{c("common.privacy", lang)}</a></p>
+        <h2 class="h3" style="margin-top:40px">{c("consult.next.h", lang)}</h2>
+        <ol class="steps-plain">{cl("consult.next", lang).map((x) => <li>{x}</li>)}</ol>
+      </>
+    )}
+    {(view === "ok" || view === "private") && (
+      <ul class="ptypes">
+        <li><a href={pathFor(lang, ed, "journey")}>{c("consult.later.path", lang)}</a></li>
+        <li><a href={pathFor(lang, ed, "map")}>{c("map.open", lang)}</a></li>
+        {view === "private" && <li><a href={pathFor(lang, ed, "private")}>{c("common.nav.private", lang)}</a></li>}
+      </ul>
+    )}
+    {view === "later" && (
+      <>
+        <ul class="ptypes">
+          <li><a href={pathFor(lang, ed, "journey")}>{c("consult.later.path", lang)}</a></li>
+          <li><a href={`${pathFor(lang, ed, "home")}#subscrever`}>{c("consult.later.nl", lang)}</a></li>
+          <li><a href={pathFor(lang, ed, "dossiers")}>{c("consult.later.dossier", lang)}</a></li>
+        </ul>
+        <p style="margin-top:28px"><a class="more" href={base}>{c("consult.later.book", lang)}</a></p>
+      </>
+    )}
+    <div style="height:56px"></div>
+  </div>
+  {src.list.length > 0 && (
+    <section class="sources-list" aria-labelledby="fontes">
+      <div class="frame read">
+        <h2 id="fontes" class="h-small">{c("common.sources", lang)}</h2>
+        <ol>{src.list.map((s, i) => <li id={`fonte-${i + 1}`}><a href={s.url} rel="noopener">{s.title}</a>{s.checked && `, ${c("common.checked", lang, { date: fmtDate(lang, s.checked) })}`}.</li>)}</ol>
+      </div>
+    </section>
+  )}
+</V2>

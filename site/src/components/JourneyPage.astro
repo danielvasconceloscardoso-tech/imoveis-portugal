@@ -16,8 +16,8 @@ const where = c(`home.where.${ed}`, lang);
 const vars = { where, from: c(`journey.from.${ed}`, lang) };
 const steps = journeyFor(ed).map((cp) => ({ ...cp, qs: cp.qs.map((q) => ({ ...q, n: [...new Set(q.facts.map((f) => src.n(f)))] })) }));
 const sup = (ns: number[]) => ns.map((i) => `<a class="sup" href="#fonte-${i}">${i}</a>`).join("");
-const href = (cat: string) => cat === "agency" ? pathFor(lang, ed, "buy") : `${pathFor(lang, ed, "talk")}?cat=${cat}#form`;
-const btn: Record<string, string> = { lawyer: "home.btn.lawyer", bank: "home.btn.bank", tax: "home.btn.tax", fx: "journey.role.fx", agency: "home.call.link", developer: "journey.role.developer" };
+const href = (cat: string) => cat === "agency" ? pathFor(lang, ed, "consult") : `${pathFor(lang, ed, "talk")}?cat=${cat}#form`;
+const btn: Record<string, string> = { lawyer: "home.btn.lawyer", bank: "home.btn.bank", tax: "home.btn.tax", fx: "journey.role.fx", agency: "consult.cta", developer: "journey.role.developer" };
 const links = { map: pathFor(lang, ed, "map"), sims: pathFor(lang, ed, "sims"), private: pathFor(lang, ed, "private"), prices: pathFor(lang, ed, "data") };
 const linkLabel = { map: "map.open", sims: "common.nav.sims", private: "common.nav.private", prices: "common.nav.data" } as const;
 ---

@@ -20,7 +20,7 @@ const canonical = Astro.props.canonicalUrl ?? `https://${host}${urlFor(lang)}`;
 // Prompt 19 (D37): five items, one or two words each, never wrapping. Everything else sits under "Comprar"
 // (the step-by-step page links to it) or in the footer; the full list is in the mobile concierge menu.
 const nav: { k: string; target: PageKey; current: string[] }[] = [
-  { k: "buy", target: "casa", current: ["casa", "journey", "buy", "faq", "guide", "blog", "data", "how", "talk"] },
+  { k: "buy", target: "casa", current: ["casa", "journey", "consult", "buy", "faq", "guide", "blog", "data", "how", "talk"] },
   { k: "map", target: "map", current: ["map"] },
   { k: "sims", target: "sims", current: ["sims"] },
   { k: "private", target: "private", current: ["private"] },
@@ -88,7 +88,7 @@ const sticky: Sticky = Astro.props.sticky !== undefined ? Astro.props.sticky
               <CountryBar lang={lang} ed={ed} href={(x) => pathFor(lang, x, page)} variant="menu" />
               <div class="cact">
                 <a class="btn" href={subscribe}>{c("common.newsletter", lang)}</a>
-                <a class="btn ghost" href={config.calls.intro || `${pathFor(lang, ed, "home")}#agencia`}>{c("home.call.link", lang)}</a>
+                <a class="btn ghost" href={pathFor(lang, ed, "consult")}>{c("consult.cta", lang)}</a>
               </div>
             </div>
           </details>

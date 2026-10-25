@@ -61,7 +61,7 @@ const sup = (ns: number[]) => ns.map((i) => `<a class="sup" href="#fonte-${i}">$
       <p class="lede">{c("home.lede", lang)}</p>
       <div class="actions" id="subscrever" data-primary>
         <Embed id={config.forms.newsletter[lang]} title={c("home.subscribe", lang)} cta={c("home.subscribe", lang)} subject={c("home.subscribe.subject", lang)} hidden={{ edition: ed, lang }} height={200} />
-        <a class="quiet" href={config.calls.intro || "#agencia"}>{c("home.call.link", lang)}</a>
+        <a class="quiet" href={pathFor(lang, ed, "consult")}>{c("consult.cta", lang)}</a>
       </div>
     </div>
   </section>

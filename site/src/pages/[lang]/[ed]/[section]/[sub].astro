@@ -8,6 +8,8 @@ import PlanPage from "../../../../components/PlanPage.astro";
 import CheckoutPage from "../../../../components/CheckoutPage.astro";
 import PlacePage from "../../../../components/PlacePage.astro";
 import PartnerTypePage from "../../../../components/PartnerTypePage.astro";
+import ConsultPage from "../../../../components/ConsultPage.astro";
+import { CONSULT_SUB } from "../../../../lib/consult";
 import { PTYPES, type PType } from "../../../../lib/packages";
 import { ED_ORDER, LANGS, SLUGS, type EdCode, type Lang } from "../../../../i18n";
 import { SUB, ENABLED, type ToolKey } from "../../../../lib/tools";
@@ -20,13 +22,15 @@ export function getStaticPaths() {
     ...keys.map((tool) => ({ params: { lang, ed, section: SLUGS[lang].sims, sub: SUB[tool][lang] }, props: { tool } })),
     ...PLACES.map((place) => ({ params: { lang, ed, section: SLUGS[lang].map, sub: place.slug }, props: { place } })),
     ...PTYPES.map((ptype) => ({ params: { lang, ed, section: SLUGS[lang].partners, sub: ptype.slug[lang] }, props: { ptype } })),
+    ...(["ok", "private", "later"] as const).map((view) => ({ params: { lang, ed, section: SLUGS[lang].consult, sub: CONSULT_SUB[view][lang] }, props: { view } })),
   ]));
 }
 const lang = Astro.params.lang as Lang;
 const ed = Astro.params.ed as EdCode;
-const { tool, place, ptype } = Astro.props as { tool?: Key; place?: Place; ptype?: PType };
+const { tool, place, ptype, view } = Astro.props as { tool?: Key; place?: Place; ptype?: PType; view?: "ok" | "private" | "later" };
 ---
-{ptype ? <PartnerTypePage lang={lang} ed={ed} type={ptype} />
+{view ? <ConsultPage lang={lang} ed={ed} view={view} />
+  : ptype ? <PartnerTypePage lang={lang} ed={ed} type={ptype} />
   : place ? <PlacePage lang={lang} ed={ed} place={place} />
   : tool === "plan" ? <PlanPage lang={lang} ed={ed} />
   : tool === "checkout" ? <CheckoutPage lang={lang} ed={ed} />

@@ -5,13 +5,13 @@ export const HTML_LANG: Record<Lang, string> = { pt: "pt-PT", en: "en", fr: "fr"
 export const LANG_NAME: Record<Lang, string> = { pt: "Português", en: "English", fr: "Français" };
 
 export type EdCode = "lu" | "fr" | "ch" | "br" | "us" | "il";
-export type PageKey = "partners" | "buy" | "privacy" | "legal" | "faq" | "talk" | "guide" | "how" | "sims" | "casa" | "data" | "map" | "blog" | "private" | "ours" | "journey";
+export type PageKey = "partners" | "buy" | "privacy" | "legal" | "faq" | "talk" | "guide" | "how" | "sims" | "casa" | "data" | "map" | "blog" | "private" | "ours" | "journey" | "consult" | "dossiers";
 
 // URL slugs follow the language, not the edition: /{lang}/{edition}/{slug}/
 export const SLUGS: Record<Lang, Record<PageKey, string>> = {
-  pt: { partners: "parceiros", buy: "comprar", privacy: "privacidade", legal: "aviso-legal", faq: "perguntas-frequentes", talk: "falar-com-um-parceiro", guide: "guia-gratuito", how: "como-trabalhamos", sims: "simuladores", casa: "comprar-a-partir-de-fora", data: "precos-das-casas", blog: "blog", map: "mapa", private: "private", ours: "os-nossos-parceiros", journey: "o-seu-percurso" },
-  en: { partners: "partners", buy: "buy", privacy: "privacy", legal: "legal-notice", faq: "faq", talk: "talk-to-a-partner", guide: "free-guide", how: "how-we-work", sims: "calculators", casa: "buying-from-abroad", data: "house-prices", blog: "blog", map: "map", private: "private", ours: "our-partners", journey: "your-path" },
-  fr: { partners: "partenaires", buy: "acheter", privacy: "confidentialite", legal: "mentions-legales", faq: "questions-frequentes", talk: "parler-a-un-partenaire", guide: "guide-gratuit", how: "notre-methode", sims: "simulateurs", casa: "acheter-depuis-l-etranger", data: "prix-des-logements", blog: "blog", map: "carte", private: "private", ours: "nos-partenaires", journey: "votre-parcours" },
+  pt: { partners: "parceiros", buy: "comprar", privacy: "privacidade", legal: "aviso-legal", faq: "perguntas-frequentes", talk: "falar-com-um-parceiro", guide: "guia-gratuito", how: "como-trabalhamos", sims: "simuladores", casa: "comprar-a-partir-de-fora", data: "precos-das-casas", blog: "blog", map: "mapa", private: "private", ours: "os-nossos-parceiros", journey: "o-seu-percurso", consult: "consulta-privada", dossiers: "dossies" },
+  en: { partners: "partners", buy: "buy", privacy: "privacy", legal: "legal-notice", faq: "faq", talk: "talk-to-a-partner", guide: "free-guide", how: "how-we-work", sims: "calculators", casa: "buying-from-abroad", data: "house-prices", blog: "blog", map: "map", private: "private", ours: "our-partners", journey: "your-path", consult: "private-consultation", dossiers: "dossiers" },
+  fr: { partners: "partenaires", buy: "acheter", privacy: "confidentialite", legal: "mentions-legales", faq: "questions-frequentes", talk: "parler-a-un-partenaire", guide: "guide-gratuit", how: "notre-methode", sims: "simulateurs", casa: "acheter-depuis-l-etranger", data: "prix-des-logements", blog: "blog", map: "carte", private: "private", ours: "nos-partenaires", journey: "votre-parcours", consult: "consultation-privee", dossiers: "dossiers" },
 };
 export const pathFor = (lang: Lang, ed: EdCode, page: PageKey | "home") =>
   page === "home" ? `/${lang}/${ed}/` : `/${lang}/${ed}/${SLUGS[lang][page]}/`;
