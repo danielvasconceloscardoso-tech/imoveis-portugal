@@ -62,6 +62,8 @@ Status: To do · Doing · Blocked · Done
 | 8p | Apply ops/prompts/08_partner_agency_habinedita.md (partner agency on buyer, partner and FAQ pages) | CTO | To do | 2026-10-31 |
 | 8q | Get a business email for buyer requests from the agency (logo is taken from its website by the CTO) | Operator | To do | 2026-10-31 |
 
+| 8r | Send the credit-intermediary business name and its Banco de Portugal registration number (for the simulators, D21), confirm video visits, one real listing with photos, and sign the Gold sponsorship agreement (D20) | Father via Operator | To do | 2026-11-01 |
+
 ## Last session
 
 2026-10-24 (CEO): ran prompt 01 Parts 1–2 in place of the CTO. Sponsor list rebuilt around proof of spend: 150 companies, 44 tier A, 46 tier B, 60 parked tier C; 62 of 90 A/B evidence pages opened and read, 6 spot-checks all confirmed. Top 10 by priority: ABANCA, Banque BCP, Cabinet d'Architecture Marcelo Moledo, Campara, Conexão Europa Imóveis, MC Avocats, Madeira Estate, Maia International Properties, Oliveira Imóveis, Pedro Emanuel de Oliveira. Gaps: Luxembourg and Switzerland are thin (20 and 19 A/B), fixed by tasks 10–11. 90-day cash plan in ops/PLAN.md. Later the same day Daniel decided D1–D3 and D5–D7 (see ops/DECISIONS.md); D4 postponed, so Sprint 0 ships without payment links. CEO then built Sprint 0: Astro site in site/ (21 pages, LU/FR/CH/BR), media kit PDFs in sponsors/mediakit/, commit check in .githooks/, operator guide in ops/SETUP.md. The site stays "noindex" until D4 and the legal pages are done; the French legal notice needs the publisher's identity, so anonymity relies on the billing entity.

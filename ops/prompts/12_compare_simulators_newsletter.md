@@ -24,12 +24,19 @@ To run: "Read ops/prompts/12_compare_simulators_newsletter.md and execute it." W
 2. **Prestação do crédito:** price, deposit, term, rate → monthly payment. Default rate = Banco de Portugal's latest average rate for new mortgages, with source and date; the reader can change it. Show the Banco de Portugal LTV cap and the DSTI limit (verify both). Label it an estimate, not a credit offer.
 3. **Rendimento do arrendamento:** price, monthly rent, costs (IMI, condominium, insurance, management) → gross and net yield, with the 25% rate for non-residents (CIRS art. 72.º) and the note that tax may also be due where the reader lives.
 4. Each result ends with the matching call to action: sponsor bank or credit intermediary (financing), tax adviser (rental tax), Habinedita Gondomar (find a home, D19 calls).
-5. **Partners and data (legal frame):**
-   - Each simulator can carry one sponsor: "Simulador oferecido por [Banco X]" (flat sponsorship, D6). An embeddable version for the sponsor's own site is a sponsor perk.
-   - After the result, an optional form: "Quer que [named sponsor] o contacte com esta simulação?" with an unticked consent box naming that one recipient, double opt-in, and a privacy notice (GDPR arts. 6(1)(a), 7 and 13; Lei 58/2019). Data goes straight to the named sponsor and the brand mailbox, never into the repo.
-   - We never sell or rent reader data and never pass it to anyone not named at the moment of consent. No per-lead fees (D6).
-   - Credit intermediaries shown must be registered with Banco de Portugal (check the public register). We present partners; we never propose or negotiate credit (DL 81-C/2017). Simulator wording must not read as a credit advertisement (DL 74-A/2017): no promised rate, and no TAEG unless the sponsor bank provides its representative example.
+5. **Financing partner and data (legal frame):**
+   - The default financing partner is the partner agency's credit-intermediary business (D21): name and Banco de Portugal registration number in config.ts (`creditPartner.name`, `creditPartner.bdp`), placeholders until the operator sends them. Show both wherever it appears, as the law requires for intermediaries.
+   - Discreet but present label under each simulator: "Simulador oferecido por {creditPartner.name} · intermediário de crédito registado no Banco de Portugal n.º {bdp} · patrocinado". Sponsored content is always labelled (hard rule 4).
+   - After the result: "Quer que {creditPartner.name} analise o seu caso e compare bancos, sem custos para si?" with an unticked consent box naming that one recipient, double opt-in, and a privacy notice (GDPR arts. 6(1)(a), 7 and 13; Lei 58/2019). Data goes straight to that partner and the brand mailbox, never into the repo.
+   - We never sell or rent reader data and never pass it to anyone not named at the moment of consent. The brand earns only the flat sponsorship (D6); the intermediary's bank commission is the partner's own business, and the partner discloses it to the client.
+   - The brand never proposes, compares or negotiates credit itself (DL 81-C/2017). Simulator wording must not read as a credit advertisement (DL 74-A/2017): no promised rate, and no TAEG unless a bank provides its representative example.
 6. A shareable link keeps the inputs (no personal data), so readers and partners can send a simulation.
+
+## 2b. Paid "Plano de compra" report (D22)
+
+1. After any simulation: a free short estimate on screen, and a paid **personalised report (PDF, 5,99 €)**: full cost, three mortgage scenarios, rental yield, tax points to check in the reader's country, a document checklist, and the steps and timeline from abroad. It ends with the partner calls to action (15-minute call with the agency, credit partner, lawyer).
+2. Build the report generator and the checkout page, but **keep the buy button off** until the billing entity exists (D4): it needs an invoicing entity, EU VAT on digital services (OSS), and the consumer's express consent to immediate delivery, which waives the 14-day withdrawal right (DL 24/2014, art. 17.º).
+3. Payments: Stripe Payment Links (no monthly fee) once D4 is set.
 
 ## 3. Newsletter format (content/NEWSLETTER_FORMAT.md + week 1 draft per edition)
 
