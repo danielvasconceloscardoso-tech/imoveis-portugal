@@ -72,6 +72,8 @@ Status: To do · Doing · Blocked · Done
 | 9g | Confirm with Habinedita Gondomar its profile text (report page 3, "Talk to a partner") and send its logo file (the site blocks downloads from here) | Daniel | To do | 2026-11-06 |
 | 9h | Open the reference sites that did not load here (design/v2/REFERENCES.md) and note anything to add to the brief | Daniel | To do | 2026-11-06 |
 
+| 8r | Send the credit-intermediary business name and its Banco de Portugal registration number (for the simulators, D21), confirm video visits, one real listing with photos, and sign the Gold sponsorship agreement (D20) | Father via Operator | To do | 2026-11-01 |
+
 ## Last session
 
 2026-10-25 (CTO): prompt 10 done on branch claude/brave-gauss-cwafi6, nothing merged. References (design/v2/REFERENCES_10.md) and country benchmarks (design/v2/BENCHMARK.md; six guide publishers added to sponsors/pipeline.csv as tier B). Voice rules in content/VOICE.md. Every site text now lives in content/copy/COPY_DECK.md, which the site reads at build time; Daniel and the CEO edit the deck directly. FAQ answers rewritten (40–69 words, answer first), plus three benchmark questions on four newly verified facts (Golden Visa, Casa Pronta fees and documents, IFICI). Mobile first: sticky action, proof on the first screen, Lighthouse mobile 96–99 performance and 100 accessibility (design/v2/LIGHTHOUSE.md). No visible photo credits; sources in site/public/photos/CREDITS.md. Open: content/faq/UNVERIFIED.md, tasks 9f–9h.

@@ -79,3 +79,13 @@ Peaks: Christmas (15 Dec – 5 Jan), Easter, and August, when emigrants are in P
 3. The sponsor list is rebuilt around proof of spend: 44 tier A, 46 tier B, 60 parked (sponsors/Sponsors_v2.xlsx).
 4. Paid calls come first because they need no audience. No outreach to other real-estate agencies (D9): they compete with the partner agency.
 5. Exit is planned from day 1: possible buyers are tracked in the "Exit buyers" tab, and the idealista–Kyero deal shows why there must be more than one.
+
+## Model: the Doutor Finanças of foreign buyers (added 25 Oct 2026)
+
+Benchmark (Doutor Finanças, own figures): revenue 10 M€ (2022) → 15 M€ (2023) → 24 M€ (2025, incl. Protege); 6.3 bn€ of mortgage processes handled in 2025; 323 staff, 100 shops, Spain and Italy; 18 M site visits and 7 M simulator uses in 2023. Engine: free content + simulators → credit intermediation commissions from banks, then insurance and consumer credit.
+
+Our version, for people abroad buying in Portugal (higher budgets, more steps, three languages):
+1. Free content, FAQ, comparisons and simulators in PT, EN, FR → traffic and trust.
+2. Funnel to partners: credit intermediary (financing, D21), partner agency (D19 calls), lawyers and tax advisers, insurance.
+3. Brand revenue: flat sponsorships (D6), paid report (D22), paid guides; partners earn their own commissions.
+4. Exit asset: audience, consented subscriber base, content and simulators, partner network, metrics.
