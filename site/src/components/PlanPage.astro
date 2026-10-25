@@ -1,0 +1,100 @@
+---
+// Paid "Plano de compra" report (D22, prompt 12 section 2b). The page is the generator: it reads the
+// calculator inputs from the URL and lays out a 7-chapter plan the reader saves as a PDF (print).
+// Not linked anywhere while config.plan.live is false; noindex always. Wording: COPY_DECK.md "plan.*".
+import V2 from "../layouts/V2.astro";
+import { LANGS, HTML_LANG, pathFor, type Lang, type EdCode } from "../i18n";
+import { Sources, fmtDate, DISCLAIMER } from "../lib/content";
+import { SUB } from "../lib/tools";
+import { RATE_DEFAULT } from "../lib/sims";
+import { c, cl, has, edName } from "../lib/copy";
+
+interface Props { lang: Lang; ed: EdCode; }
+const { lang, ed } = Astro.props;
+const paths = Object.fromEntries(LANGS.map((l) => [l, `${pathFor(l, ed, "sims")}${SUB.plan[l]}/`])) as Record<Lang, string>;
+const src = new Sources();
+const n = (ids: string[]) => ids.map((id) => src.n(id));
+const s1 = n(["pt-imt-nonresident-flat", "pt-imt-hpp-2026", "pt-is-purchase", "pt-casa-pronta-fees"]);
+const s2 = n(["bdp-mortgage-rate-2026-08", "pt-ltv-limits", "pt-dsti-45"]);
+const s3 = n(["pt-rent-tax-nonresident"]);
+const taxPt = [{ t: c("plan.tax.pt.1", lang), s: n(["pt-nif-nonresident", "pt-tax-rep"]) }, { t: c("plan.tax.pt.2", lang), s: n(["pt-imi-rates", "pt-aimi-deduction"]) }];
+const TAXFACTS: Record<EdCode, string[][]> = { lu: [["lu-pt-treaty-property"]], fr: [["fr-3916"]], ch: [["ch-2nd-pillar-abroad"], ["ch-3a-home"]], br: [["br-bens-exterior"], ["br-cbe"]], us: [["us-fbar", "us-8938-abroad"], ["us-pt-treaty-gains"]], il: [["il-pt-treaty-property"]] };
+const taxEd = TAXFACTS[ed].map((ids, i) => ({ t: c(`plan.tax.${ed}.${i + 1}`, lang), s: n(ids) }));
+const docs = cl("plan.doc", lang); const docN = n(["pt-poa-apostille", "pt-aml-funds", "pt-casa-pronta-docs"]);
+const steps = cl("plan.step", lang); const stepN = n(["pt-sinal-442", "pt-imt-payment"]);
+const L = Object.fromEntries(["r.imt", "r.is", "r.deed", "r.extra", "r.total", "r.gross", "r.costs", "r.net", "r.tax", "r.after", "r.grossYield", "r.netYield", "r.afterYield", "f.price", "f.deposit", "f.years", "f.rate", "f.rent", "f.own", "f.resident", "yes", "no"].filter((k) => has(`sims.${k}`)).map((k) => [k, c(`sims.${k}`, lang)]));
+const sup = (ns: number[]) => ns.map((i) => `<a class="sup" href="#fonte-${i}">${i}</a>`).join("");
+---
+<V2 lang={lang} ed={ed} page="sims" paths={paths} noindex title={`${c("plan.title", lang)} | Imóveis Portugal`} description={c("plan.sub", lang, { country: edName(ed, lang) })} sticky={null}>
+  <article class="frame read report" id="plan" data-locale={HTML_LANG[lang]} data-rate={RATE_DEFAULT}>
+    <header class="ph">
+      <h1>{c("plan.title", lang)}</h1>
+      <p class="lede">{c("plan.sub", lang, { country: edName(ed, lang) })}</p>
+      <p class="small">{c("plan.made", lang, { date: fmtDate(lang, new Date().toISOString().slice(0, 10)) })} · <span id="sample" hidden>{c("plan.sample", lang)}</span></p>
+      <button type="button" class="btn ghost sm no-print" onclick="window.print()">{c("plan.print", lang)}</button>
+    </header>
+    <h2 class="h3">{c("plan.inputs.h", lang)}</h2>
+    <dl class="bill" id="inputs"></dl>
+    <h2 class="h3">{c("plan.s1.h", lang)}<Fragment set:html={sup(s1)} /></h2>
+    <dl class="bill" id="cost"></dl>
+    <h2 class="h3">{c("plan.s2.h", lang)}<Fragment set:html={sup(s2)} /></h2>
+    <p>{c("plan.s2.p", lang)}</p>
+    <table class="cmp" id="scen"><thead><tr><th>{c("plan.s2.col.rate", lang)}</th><th>{c("plan.s2.col.monthly", lang)}</th><th>{c("plan.s2.col.interest", lang)}</th><th>{c("plan.s2.col.income", lang)}</th></tr></thead><tbody></tbody></table>
+    <p class="small">{c("plan.s2.note", lang)}</p>
+    <h2 class="h3">{c("plan.s3.h", lang)}<Fragment set:html={sup(s3)} /></h2>
+    <dl class="bill" id="rent"></dl>
+    <p class="small" id="norent" hidden>{c("plan.s3.none", lang)}</p>
+    <h2 class="h3">{c("plan.s4.h", lang)}</h2>
+    <ul class="list">{[...taxEd, ...taxPt].map((x) => <li>{x.t}<Fragment set:html={sup(x.s)} /></li>)}</ul>
+    <h2 class="h3">{c("plan.s5.h", lang)}<Fragment set:html={sup(docN)} /></h2>
+    <ul class="list">{docs.map((d) => <li>{d}</li>)}</ul>
+    <h2 class="h3">{c("plan.s6.h", lang)}<Fragment set:html={sup(stepN)} /></h2>
+    <ol class="steps">{steps.map((s) => <li>{s}</li>)}</ol>
+    <h2 class="h3">{c("plan.s7.h", lang)}</h2>
+    <p>{c("plan.s7.p", lang)}</p>
+    <p><a href={pathFor(lang, ed, "buy")}>{c("faq.cta.agency", lang)}</a> · <a href={`${pathFor(lang, ed, "talk")}?cat=bank#form`}>{c("faq.cta.bank", lang)}</a> · <a href={`${pathFor(lang, ed, "talk")}?cat=lawyer#form`}>{c("faq.cta.lawyer", lang)}</a></p>
+    <p class="disc">{DISCLAIMER[lang]}</p>
+  </article>
+  <section class="sources-list" aria-labelledby="fontes">
+    <div class="frame read">
+      <h2 id="fontes" class="h-small">{c("common.sources", lang)}</h2>
+      <ol>{src.list.map((s, i) => <li id={`fonte-${i + 1}`}><a href={s.url} rel="noopener">{s.title}</a>{s.checked && `, ${c("common.checked", lang, { date: fmtDate(lang, s.checked) })}`}.</li>)}</ol>
+    </div>
+  </section>
+  <script type="application/json" id="plan-labels" set:html={JSON.stringify(L)} />
+</V2>
+
+<script>
+  import { purchase, mortgage, rental, DSTI } from "../lib/sims";
+  const root = document.getElementById("plan")!;
+  const loc = root.dataset.locale || "pt-PT";
+  const L: Record<string, string> = JSON.parse(document.getElementById("plan-labels")!.textContent || "{}");
+  const q = new URLSearchParams(location.search);
+  const sample = !q.has("price");
+  if (sample) document.getElementById("sample")!.hidden = false;
+  const num = (k: string, d: number) => (q.has(k) && !isNaN(Number(q.get(k))) ? Number(q.get(k)) : d);
+  const bool = (k: string) => q.get(k) === "1";
+  const price = num("price", 250000), deposit = num("deposit", Math.round(price * 0.2)), years = num("years", 30), rate = num("rate", Number(root.dataset.rate));
+  const own = bool("own"), resident = bool("resident"), rent = num("rent", 0);
+  const eur = new Intl.NumberFormat(loc, { style: "currency", currency: "EUR", maximumFractionDigits: 0, useGrouping: "always" } as Intl.NumberFormatOptions);
+  const pc = new Intl.NumberFormat(loc, { maximumFractionDigits: 2 });
+  const P = (v: number) => `${pc.format(v)}${loc.startsWith("fr") ? " %" : "%"}`;
+  const fill = (id: string, rows: [string, string, boolean?][]) => {
+    const dl = document.getElementById(id)!;
+    for (const [k, v, strong] of rows) { const dt = document.createElement("dt"), dd = document.createElement("dd"); dt.textContent = L[k] || k; dd.textContent = v; if (strong) { dt.className = dd.className = "tot"; } dl.append(dt, dd); }
+  };
+  fill("inputs", [["f.price", eur.format(price)], ["f.deposit", eur.format(deposit)], ["f.years", String(years)], ["f.rate", P(rate)], ["f.own", L[own ? "yes" : "no"]], ["f.resident", L[resident ? "yes" : "no"]], ...(rent ? [["f.rent", eur.format(rent)] as [string, string]] : [])]);
+  const p = purchase(price, own, resident, price - deposit > 0);
+  fill("cost", [["r.imt", eur.format(p.imt)], ["r.is", eur.format(p.is)], ["r.deed", eur.format(p.deed)], ["r.extra", eur.format(p.extra)], ["r.total", eur.format(p.total), true]]);
+  const tb = document.querySelector("#scen tbody")!;
+  for (const r of [rate, rate + 1, rate + 2]) {
+    const m = mortgage(price, deposit, years, r, own);
+    const tr = document.createElement("tr");
+    for (const t of [P(r), eur.format(m.monthly), eur.format(m.interest), eur.format(m.monthly / (DSTI / 100))]) { const td = document.createElement("td"); td.textContent = t; tr.append(td); }
+    tb.append(tr);
+  }
+  if (rent > 0) {
+    const r = rental(price, rent, num("imi", 0), num("condo", 0), num("insurance", 0), num("mgmt", 0));
+    fill("rent", [["r.gross", eur.format(r.gross)], ["r.net", eur.format(r.net)], ["r.tax", eur.format(r.tax)], ["r.after", eur.format(r.after)], ["r.grossYield", P(r.grossYield)], ["r.afterYield", P(r.afterYield), true]]);
+  } else document.getElementById("norent")!.hidden = false;
+</script>

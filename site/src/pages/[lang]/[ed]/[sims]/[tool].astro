@@ -1,14 +1,19 @@
 ---
-// One page per calculator, under the calculators page: /pt/lu/simuladores/custo-total/ (prompts 12 and 13).
+// One page per calculator under the calculators page (/pt/lu/simuladores/custo-total/, prompts 12 and 13),
+// plus the paid plan generator and its checkout (D22, noindex, unlinked while config.plan.live is false).
 import Sim from "../../../../components/Sim.astro";
+import PlanPage from "../../../../components/PlanPage.astro";
+import CheckoutPage from "../../../../components/CheckoutPage.astro";
 import { ED_ORDER, LANGS, SLUGS, type EdCode, type Lang } from "../../../../i18n";
 import { SUB, ENABLED, type ToolKey } from "../../../../lib/tools";
 
+type Key = ToolKey | "plan" | "checkout";
 export function getStaticPaths() {
-  return LANGS.flatMap((lang) => ED_ORDER.flatMap((ed) => ENABLED.map((tool) => ({ params: { lang, ed, sims: SLUGS[lang].sims, tool: SUB[tool][lang] }, props: { tool } }))));
+  const keys: Key[] = [...ENABLED, "plan", "checkout"];
+  return LANGS.flatMap((lang) => ED_ORDER.flatMap((ed) => keys.map((tool) => ({ params: { lang, ed, sims: SLUGS[lang].sims, tool: SUB[tool][lang] }, props: { tool } }))));
 }
 const lang = Astro.params.lang as Lang;
 const ed = Astro.params.ed as EdCode;
-const { tool } = Astro.props as { tool: ToolKey };
+const { tool } = Astro.props as { tool: Key };
 ---
-<Sim lang={lang} ed={ed} tool={tool} enabled={ENABLED} />
+{tool === "plan" ? <PlanPage lang={lang} ed={ed} /> : tool === "checkout" ? <CheckoutPage lang={lang} ed={ed} /> : <Sim lang={lang} ed={ed} tool={tool} enabled={ENABLED} />}
