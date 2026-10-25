@@ -35,6 +35,11 @@ How to edit:
 - EN: FAQ
 - FR: Questions
 
+### nav.blog
+- PT: Artigos
+- EN: Articles
+- FR: Articles
+
 ### nav.guide
 - PT: Guia gratuito
 - EN: Free guide
@@ -2488,3 +2493,60 @@ How to edit:
 - PT: Comparado com onde vive
 - EN: Compared with where you live
 - FR: Comparé à votre pays
+
+## blog
+
+### title
+- PT: Artigos para quem compra de fora
+- EN: Articles for buyers abroad
+- FR: Articles pour acheter depuis l'étranger
+
+### lede
+- PT: Impostos, crédito e passos da compra, explicados com a fonte oficial de cada número.
+- EN: Taxes, mortgages and the steps of a purchase, explained with the official source for every number.
+- FR: Impôts, crédit et étapes de l'achat, expliqués avec la source officielle de chaque chiffre.
+
+### read
+- PT: Ler o artigo
+- EN: Read the article
+- FR: Lire l'article
+
+### minutes
+- PT: {n} min de leitura
+- EN: {n} min read
+- FR: {n} min de lecture
+
+### published
+- PT: Publicado a {date}
+- EN: Published {date}
+- FR: Publié le {date}
+
+### updated
+- PT: Atualizado a {date}
+- EN: Updated {date}
+- FR: Mis à jour le {date}
+
+### tldr
+- PT: A resposta curta
+- EN: The short answer
+- FR: La réponse courte
+
+### related
+- PT: Ler a seguir
+- EN: Read next
+- FR: À lire ensuite
+
+### back
+- PT: Todos os artigos
+- EN: All articles
+- FR: Tous les articles
+
+### author
+- PT: Equipa Imóveis Portugal
+- EN: The Imóveis Portugal team
+- FR: L'équipe Imóveis Portugal
+
+### empty
+- PT: Os primeiros artigos chegam em breve.
+- EN: The first articles are coming soon.
+- FR: Les premiers articles arrivent bientôt.

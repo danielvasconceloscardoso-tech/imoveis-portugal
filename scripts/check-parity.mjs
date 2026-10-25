@@ -43,5 +43,27 @@ for (const line of deck) {
 }
 flush();
 
+
+// Blog: every article exists in pt, en and fr with the same partner action, sources and related articles.
+const blogDir = join(root, "content/blog");
+const posts = new Map();
+for (const f of readdirSync(blogDir).filter((x) => /\.(pt|en|fr)\.md$/.test(x))) {
+  const m = readFileSync(join(blogDir, f), "utf8").match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+  const fm = yaml.load(m[1]), body = m[2];
+  (posts.get(fm.id) ?? posts.set(fm.id, {}).get(fm.id))[fm.lang] = { fm, h2: (body.match(/^## /gm) || []).length, cites: new Set([...body.matchAll(/\[\[([a-z0-9-]+)\]\]/g)].map((x) => x[1])), tables: (body.match(/^\| ---/gm) || []).length };
+}
+for (const [id, by] of posts) {
+  if (Object.keys(by).length !== 3) { errors.push(`blog ${id}: missing language (has ${Object.keys(by).join(", ")})`); continue; }
+  for (const l of ["en", "fr"]) {
+    const a = by.pt, b = by[l];
+    if (a.fm.cta !== b.fm.cta) errors.push(`blog ${id}: cta differs (pt ${a.fm.cta}, ${l} ${b.fm.cta})`);
+    if (JSON.stringify(a.fm.sources) !== JSON.stringify(b.fm.sources)) errors.push(`blog ${id}: sources differ between pt and ${l}`);
+    if (JSON.stringify(a.fm.related) !== JSON.stringify(b.fm.related)) errors.push(`blog ${id}: related differs between pt and ${l}`);
+    if (String(a.fm.published) !== String(b.fm.published)) errors.push(`blog ${id}: published date differs between pt and ${l}`);
+    if (a.h2 !== b.h2) errors.push(`blog ${id}: ${l} has ${b.h2} sections, pt has ${a.h2}`);
+    if (a.tables !== b.tables) errors.push(`blog ${id}: tables differ between pt and ${l}`);
+    if ([...a.cites].sort().join() !== [...b.cites].sort().join()) errors.push(`blog ${id}: cited facts differ between pt and ${l}`);
+  }
+}
 if (errors.length) { console.log(errors.join("\n")); process.exit(1); }
-console.log(`parity ok: ${groups.size} FAQ groups, copy deck blocks in PT, EN and FR`);
+console.log(`parity ok: ${groups.size} FAQ groups, ${posts.size} blog articles, copy deck blocks in PT, EN and FR`);

@@ -1,0 +1,9 @@
+---
+import BlogIndex from "../../../../components/BlogIndex.astro";
+import { ED_ORDER, LANGS, type EdCode, type Lang } from "../../../../i18n";
+export function getStaticPaths() {
+  return LANGS.flatMap((lang) => ED_ORDER.map((ed) => ({ params: { lang, ed } })));
+}
+const { lang, ed } = Astro.params as { lang: Lang; ed: EdCode };
+---
+<BlogIndex lang={lang} ed={ed} />

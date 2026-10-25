@@ -369,3 +369,16 @@ a.sup + a.sup::before { content: ","; color: var(--muted); margin-right: 1px; }
 .region .cmp { margin-bottom: 16px; }
 .spark polyline { fill: none; stroke: var(--accent); stroke-width: 1.5; }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+/* Task 15: blog */
+.post .next { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.post .next .who { font-size: 13px; color: var(--muted); }
+.tldr { border-left: 3px solid var(--accent); padding: 2px 0 2px 18px; margin: 8px 0 32px; }
+.tldr .lede { margin: 4px 0 0; max-width: none; }
+.post h2 { margin: 40px 0 12px; }
+.post table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; font-size: 15px; }
+.post th { text-align: left; font-weight: 600; border-bottom: 2px solid var(--ink); padding: 8px 10px 8px 0; }
+.post td { border-bottom: 1px solid var(--rule); padding: 8px 10px 8px 0; vertical-align: top; }
+.post td:not(:first-child), .post th:not(:first-child) { text-align: right; font-variant-numeric: tabular-nums; }
+.blog-list .qa-item h2 a { color: var(--ink); text-decoration: none; }
+.blog-list .qa-item h2 a:hover { color: var(--accent); text-decoration: underline; }
+@media (max-width: 640px) { .post table { font-size: 14px; } }

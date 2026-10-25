@@ -141,7 +141,29 @@ if (existsSync(deck)) readFileSync(deck, "utf8").split("\n").forEach((line, i) =
     if (/\S:\s/.test(m[2])) err(deck, `line ${i + 1} (${deckBlock}): tagline built on a colon (VOICE.md)`);
   }
 });
-console.log(`checked ${faqs} FAQ files and ${pieces} inbox pieces against ${factIds.size} facts`);
+// Blog articles (content/blog/{id}.{lang}.md, task 15): front matter, a short answer first, sources, no banned wording.
+const blogDir = join(root, "content/blog");
+let posts = 0;
+if (existsSync(blogDir)) for (const f of readdirSync(blogDir).filter((x) => /\.(pt|en|fr)\.md$/.test(x))) {
+  const file = join(blogDir, f), m = readFileSync(file, "utf8").match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+  posts++;
+  if (!m) { err(file, "front matter missing"); continue; }
+  const fm = yaml.load(m[1]) || {}, lang = f.match(/\.(pt|en|fr)\.md$/)[1];
+  for (const k of ["id", "lang", "slug", "title", "description", "tldr", "published", "updated", "cta"]) if (!fm[k]) err(file, `front matter "${k}" missing`);
+  if (fm.lang !== lang) err(file, `lang is "${fm.lang}" but the file name says ${lang}`);
+  if (fm.cta && ![...CTA_KEYS, "agency"].includes(fm.cta)) err(file, `unknown cta "${fm.cta}"`);
+  if (fm.title && fm.title.length > 70) err(file, `title has ${fm.title.length} characters (max 70, for search results)`);
+  if (fm.description && (fm.description.length < 80 || fm.description.length > 160)) err(file, `description has ${fm.description.length} characters (80 to 160)`);
+  if (fm.tldr && (words(fm.tldr) < 25 || words(fm.tldr) > 60)) err(file, `short answer has ${words(fm.tldr)} words (25 to 60)`);
+  if (words(m[2]) < 500) err(file, `body has ${words(m[2])} words (at least 500)`);
+  if (!/^## /m.test(m[2]) || /^# /m.test(m[2])) err(file, "use ## headings in the body; the page supplies the H1");
+  const cited = [...m[2].matchAll(/\[\[([a-z0-9-]+)\]\]/g)].map((x) => x[1]);
+  if (cited.length < 5) err(file, `only ${cited.length} cited facts (at least 5)`);
+  for (const id of [...cited, ...(fm.sources || [])]) if (!factIds.has(id)) err(file, `unknown fact id ${id}`);
+  for (const [label, text] of [["title", fm.title || ""], ["description", fm.description || ""], ["short answer", fm.tldr || ""], ["body", m[2]]]) checkText(file, label, text);
+  for (const h of m[2].matchAll(/^## (.+)$/gm)) if (/\?\s*$/.test(h[1])) err(file, `heading "${h[1]}" is a question (VOICE.md)`);
+}
+console.log(`checked ${faqs} FAQ files, ${pieces} inbox pieces and ${posts} blog articles against ${factIds.size} facts`);
 if (errors.length) {
   console.log(errors.map((e) => `ERROR ${e}`).join("\n"));
   process.exit(1);

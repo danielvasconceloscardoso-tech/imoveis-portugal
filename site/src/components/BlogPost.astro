@@ -1,0 +1,73 @@
+---
+// One article (task 15). Answer first (the short answer), then the body with numbered sources, then the partner
+// action and the disclaimer (editorial policy). Search: one canonical URL per language (D24), hreflang between the
+// three languages, Article and BreadcrumbList data, a single H1.
+import V2 from "../layouts/V2.astro";
+import { config } from "../config";
+import { EDITIONS, HTML_LANG, LANGS, pathFor, type Lang, type EdCode } from "../i18n";
+import { fmtDate, DISCLAIMER } from "../lib/content";
+import { render, postById, postSlugs, CANONICAL_ED, type Post } from "../lib/blog";
+import { c, edName } from "../lib/copy";
+
+interface Props { lang: Lang; ed: EdCode; post: Post; }
+const { lang, ed, post } = Astro.props;
+const { html, sources } = render(post, ed);
+const base = (l: Lang, e: EdCode) => `${pathFor(l, e, "blog")}`;
+const slugs = postSlugs(post.id);
+const paths = Object.fromEntries(LANGS.map((l) => [l, `${base(l, ed)}${slugs[l]}/`])) as Record<Lang, string>;
+const abs = (l: Lang) => `https://${EDITIONS[CANONICAL_ED[l]].domain}${base(l, CANONICAL_ED[l])}${slugs[l]}/`;
+const alternates = Object.fromEntries(LANGS.map((l) => [l, abs(l)])) as Record<Lang, string>;
+const related = post.related.map((id) => postById(id, lang)).filter(Boolean) as Post[];
+const talk = pathFor(lang, ed, "talk");
+const next = post.cta === "agency"
+  ? { href: pathFor(lang, ed, "buy"), label: c("faq.cta.agency", lang), who: `${config.agency.name} · ${c("common.gold", lang)}` }
+  : config.partners[post.cta]
+    ? { href: `${talk}?cat=${post.cta}#form`, label: c(`faq.cta.${post.cta}`, lang), who: `${config.partners[post.cta]} · ${c("common.sponsored", lang)}` }
+    : { href: `${talk}?cat=${post.cta}#form`, label: c("common.nav.talk", lang), who: c(`faq.who.${post.cta}`, lang) };
+const ld = [
+  {
+    "@context": "https://schema.org", "@type": "Article", headline: post.title, description: post.description,
+    datePublished: post.published, dateModified: post.updated, inLanguage: HTML_LANG[lang],
+    mainEntityOfPage: abs(lang),
+    author: { "@type": "Organization", name: "Imóveis Portugal" },
+    publisher: { "@type": "Organization", name: "Imóveis Portugal" },
+  },
+  {
+    "@context": "https://schema.org", "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: c("blog.title", lang), item: `https://${EDITIONS[CANONICAL_ED[lang]].domain}${base(lang, CANONICAL_ED[lang])}` },
+      { "@type": "ListItem", position: 2, name: post.title, item: abs(lang) },
+    ],
+  },
+];
+---
+<V2 lang={lang} ed={ed} page="blog" paths={paths} alternates={alternates} canonicalUrl={abs(lang)} ogType="article"
+  title={`${post.title} | Imóveis Portugal`} description={post.description}>
+  <Fragment slot="head"><script type="application/ld+json" set:html={JSON.stringify(ld)} /></Fragment>
+  <article class="frame read prose post">
+    <div class="ph">
+      <p class="small" style="margin:0 0 10px"><a href={base(lang, ed)}>{c("blog.back", lang)}</a></p>
+      <h1>{post.title}</h1>
+      <p class="small">{c("blog.author", lang)} · {c("blog.published", lang, { date: fmtDate(lang, post.published) })}{post.updated !== post.published && ` · ${c("blog.updated", lang, { date: fmtDate(lang, post.updated) })}`} · {c("blog.minutes", lang, { n: post.minutes })}</p>
+    </div>
+    <div class="tldr"><p class="h-small">{c("blog.tldr", lang)}</p><p class="lede" style="color:var(--ink)">{post.tldr}</p></div>
+    <Fragment set:html={html} />
+    <div class="next" style="margin-top:32px">
+      <a class="btn sm" href={next.href}>{next.label}</a>
+      <span class="who">{next.who}</span>
+    </div>
+    {related.length > 0 && (
+      <section class="others" aria-labelledby="next-h">
+        <h2 id="next-h" class="h-small">{c("blog.related", lang)}</h2>
+        <ul>{related.map((r) => <li><a href={`${base(lang, ed)}${r.slug}/`}>{r.title}</a></li>)}</ul>
+      </section>
+    )}
+    <section class="sources-list" aria-labelledby="fontes">
+      <h2 id="fontes" class="h-small">{c("common.sources", lang)}</h2>
+      <ol>
+        {sources.list.map((f, i) => <li id={`fonte-${i + 1}`}><a href={f.url} rel="noopener">{f.title}</a>{f.checked && `, ${c("common.checked", lang, { date: fmtDate(lang, f.checked) })}`}.</li>)}
+      </ol>
+    </section>
+    <p class="disc">{DISCLAIMER[lang]}</p>
+  </article>
+</V2>

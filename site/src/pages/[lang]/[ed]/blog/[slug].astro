@@ -1,0 +1,11 @@
+---
+import BlogPost from "../../../../components/BlogPost.astro";
+import { ED_ORDER, LANGS, type EdCode, type Lang } from "../../../../i18n";
+import { postsFor } from "../../../../lib/blog";
+export function getStaticPaths() {
+  return LANGS.flatMap((lang) => ED_ORDER.flatMap((ed) => postsFor(lang).map((post) => ({ params: { lang, ed, slug: post.slug }, props: { post } }))));
+}
+const { lang, ed } = Astro.params as { lang: Lang; ed: EdCode };
+const { post } = Astro.props;
+---
+<BlogPost lang={lang} ed={ed} post={post} />

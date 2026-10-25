@@ -1,0 +1,30 @@
+---
+// Blog index (task 15): the articles of this language, newest first, on every edition.
+import V2 from "../layouts/V2.astro";
+import { pathFor, type Lang, type EdCode } from "../i18n";
+import { fmtDate } from "../lib/content";
+import { postsFor } from "../lib/blog";
+import { c, edName } from "../lib/copy";
+
+interface Props { lang: Lang; ed: EdCode; }
+const { lang, ed } = Astro.props;
+const posts = postsFor(lang);
+const base = pathFor(lang, ed, "blog");
+---
+<V2 lang={lang} ed={ed} page="blog" title={`${c("blog.title", lang)} | Imóveis Portugal · ${edName(ed, lang)}`} description={c("blog.lede", lang)}>
+  <div class="frame read ph">
+    <h1>{c("blog.title", lang)}</h1>
+    <p class="lede">{c("blog.lede", lang)}</p>
+  </div>
+  <div class="frame read blog-list">
+    {posts.length === 0 && <p>{c("blog.empty", lang)}</p>}
+    {posts.map((p) => (
+      <article class="qa-item">
+        <p class="small" style="margin:0 0 6px">{fmtDate(lang, p.published)} · {c("blog.minutes", lang, { n: p.minutes })}</p>
+        <h2 class="h3"><a href={`${base}${p.slug}/`}>{p.title}</a></h2>
+        <p>{p.description}</p>
+        <p><a class="btn sm" href={`${base}${p.slug}/`}>{c("blog.read", lang)}</a></p>
+      </article>
+    ))}
+  </div>
+</V2>
