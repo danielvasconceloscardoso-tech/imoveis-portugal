@@ -108,6 +108,13 @@ ROWS = [
 ("OnBoard Advisory", "Advisory (Luxembourg)", "LU", "B", DECISAO, "Speaker at the Decisão/Paperjam Portuguese business event", 2026, F, "S", "Bronze"),
 
 # ---------------- Tier C: large or generic, long cycle (later) ----------------
+# Added by prompt 10 (guide publishers from the country benchmarks, design/v2/BENCHMARK.md).
+("Remitly", "FX / transfers", "US", "B", "https://www.remitly.com/blog/immigration/buying-property-in-portugal/", "Guide 'Buying property in Portugal as a foreigner or American' (prompt 10 benchmark); earns on transfers", 2026, S_, "L", "Silver"),
+("BrightTax", "US expat tax", "US", "B", "https://brighttax.com/blog/can-americans-buy-property-in-portugal", "Guide for Americans buying in Portugal; sells US expat tax filing (prompt 10 benchmark)", 2026, S_, "M", "Silver"),
+("Taxes for Expats", "US expat tax", "US", "B", "https://www.taxesforexpats.com/country-guides/portugal/buying-property-in-portugal-as-an-american.html", "Guide on taxes, rules and process for Americans buying in Portugal (prompt 10 benchmark)", 2026, S_, "M", "Silver"),
+("Golding & Golding", "US international tax law", "US", "B", "https://www.goldinglawyers.com/tax-tips-for-portugal-based-americans-u-s-citizen-expats/", "Tax tips for Portugal-based Americans (FBAR, FATCA) (prompt 10 benchmark)", 2026, S_, "S", "Silver"),
+("Solutis", "Wealth management (France)", "FR", "B", "https://www.solutis.fr/investir-au-portugal.html", "Guide 'Investir au Portugal' for French investors (prompt 10 benchmark)", 2026, S_, "S", "Silver"),
+("Just Arrived", "Expat services (Luxembourg)", "LU", "B", "https://www.justarrived.lu/pt/", "Multilingual expat guide in PT/FR/EN for Luxembourg; partner-services model (prompt 10 benchmark)", 2026, S_, "S", "Silver"),
 ]
 
 C_ROWS = [
