@@ -1,0 +1,31 @@
+---
+// Calculators index (prompts 12 and 13): one line per calculator, no cards.
+import V2 from "../layouts/V2.astro";
+import { pathFor, type Lang, type EdCode } from "../i18n";
+import { TOOLS, ENABLED, SUB } from "../lib/tools";
+import { DISCLAIMER } from "../lib/content";
+import { c, edName } from "../lib/copy";
+
+interface Props { lang: Lang; ed: EdCode; }
+const { lang, ed } = Astro.props;
+const base = pathFor(lang, ed, "sims");
+---
+<V2 lang={lang} ed={ed} page="sims" title={`${c("sims.title", lang)} | Imóveis Portugal · ${edName(ed, lang)}`} description={c("sims.lede", lang)} sticky={null}>
+  <div class="frame read ph">
+    <h1>{c("sims.title", lang)}</h1>
+    <p class="lede">{c("sims.lede", lang)}</p>
+  </div>
+  <div class="frame read tool-list">
+    {TOOLS.filter((t) => ENABLED.includes(t)).map((t) => (
+      <div class="qa-item">
+        <h2 class="h3"><a href={`${base}${SUB[t][lang]}/`}>{c(`sims.${t}.name`, lang)}</a></h2>
+        <p>{c(`sims.${t}.p`, lang)}</p>
+      </div>
+    ))}
+    <div class="qa-item">
+      <h2 class="h3"><a href={pathFor(lang, ed, "compare")}>{c("compare.title", lang)}</a></h2>
+      <p>{c("compare.lede", lang)}</p>
+    </div>
+    <p class="small" style="margin:32px 0 64px">{c("sims.estimate", lang)} {DISCLAIMER[lang]}</p>
+  </div>
+</V2>

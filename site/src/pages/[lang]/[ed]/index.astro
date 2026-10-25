@@ -10,6 +10,7 @@ import { ED_ORDER, LANGS, HTML_LANG, eur, pathFor, type EdCode, type Lang } from
 import { PHOTO } from "../../../lib/ui";
 import { Sources, homeExample, RATE, EDITION_CUR, fmtDate, FACTS } from "../../../lib/content";
 import { c, edName } from "../../../lib/copy";
+import { ABROAD, PT_PLACES, GONDOMAR, m2For } from "../../../lib/compare";
 
 export function getStaticPaths() {
   return LANGS.flatMap((lang) => ED_ORDER.map((ed) => ({ params: { lang, ed } })));
@@ -35,6 +36,10 @@ const qa = [
     ? { q: c("home.qa.inherit.q", lang), a: c("home.qa.inherit.a", lang), s: [src.n("pt-is-inheritance-exempt")] }
     : { q: c("home.qa.live.q", lang), a: c("home.qa.live.a", lang), s: [src.n("pt-ari-realestate-ended"), src.n("pt-visa-own-income")] },
 ];
+// "O que compra" in one line (prompt 12): the reader's city, or Lisbon where no official figure exists, vs Gondomar.
+const lead = ABROAD[ed]?.[0] ?? PT_PLACES[0];
+const cmpLine = c("compare.line", lang, { budget: e(500000), a: m2For(500000, lead), placeA: c(`compare.in.${lead.key}`, lang), b: m2For(500000, GONDOMAR), placeB: c(`compare.in.${GONDOMAR.key}`, lang) });
+const cmpN = [...new Set([src.n(lead.fact), src.n(GONDOMAR.fact)])];
 const sup = (ns: number[]) => ns.map((i) => `<a class="sup" href="#fonte-${i}">${i}</a>`).join("");
 ---
 <V2 lang={lang} ed={ed} page="home" title={`Imóveis Portugal · ${edName(ed, lang)}`} description={c(`home.line.${ed}`, lang)}>
@@ -70,6 +75,7 @@ const sup = (ns: number[]) => ns.map((i) => `<a class="sup" href="#fonte-${i}">$
       {fx && <p class="small">{c("home.example.fx", lang, { local, date: fmtDate(lang, "2026-10-23") })}<Fragment set:html={sup([nfx])} /></p>}
       <p class="small">{c("home.example.note", lang)}</p>
       <a class="more" href={pathFor(lang, ed, "guide")}>{c("home.example.link", lang)}</a>
+      <p class="cmp-home">{cmpLine}<Fragment set:html={sup(cmpN)} /> <a href={pathFor(lang, ed, "compare")}>{c("compare.home.link", lang)}</a></p>
     </div>
   </section>
 

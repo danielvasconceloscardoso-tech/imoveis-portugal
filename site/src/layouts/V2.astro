@@ -10,11 +10,13 @@ import { c, edName } from "../lib/copy";
 import { DISCLAIMER } from "../lib/content";
 
 type Sticky = { href: string; label: string } | null;
-interface Props { lang: Lang; ed: EdCode; page: PageKey | "home"; title: string; description: string; sticky?: Sticky; }
-const { lang, ed, page, title, description } = Astro.props;
+// `paths` overrides the URL per language for pages below a page key (e.g. one calculator under "sims").
+interface Props { lang: Lang; ed: EdCode; page: PageKey | "home"; title: string; description: string; sticky?: Sticky; paths?: Record<Lang, string>; noindex?: boolean; }
+const { lang, ed, page, title, description, paths, noindex = false } = Astro.props;
+const urlFor = (l: Lang) => paths ? paths[l] : pathFor(l, ed, page);
 const host = config.domainMode === "primary" ? config.primaryDomain : EDITIONS[ed].domain;
-const canonical = `https://${host}${pathFor(lang, ed, page)}`;
-const nav: PageKey[] = ["faq", "guide", "buy", "partners"];
+const canonical = `https://${host}${urlFor(lang)}`;
+const nav: PageKey[] = ["sims", "faq", "guide", "buy", "partners"];
 const subscribe = `${pathFor(lang, ed, "home")}#subscrever`;
 // Default sticky action: the free guide from the home page, a partner from the help pages.
 const sticky: Sticky = Astro.props.sticky !== undefined ? Astro.props.sticky
@@ -30,9 +32,9 @@ const sticky: Sticky = Astro.props.sticky !== undefined ? Astro.props.sticky
     <meta name="theme-color" content="#f6f3ee" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    {!config.launchReady && <meta name="robots" content="noindex, nofollow" />}
+    {(!config.launchReady || noindex) && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonical} />
-    {LANGS.map((l) => <link rel="alternate" hreflang={HTML_LANG[l]} href={`https://${host}${pathFor(l, ed, page)}`} />)}
+    {LANGS.map((l) => <link rel="alternate" hreflang={HTML_LANG[l]} href={`https://${host}${urlFor(l)}`} />)}
     <link rel="preload" href={serif} as="font" type="font/woff2" crossorigin />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta property="og:title" content={title} />
@@ -60,7 +62,7 @@ const sticky: Sticky = Astro.props.sticky !== undefined ? Astro.props.sticky
               <svg class="globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg>{lang.toUpperCase()}
             </summary>
             <div class="menu">
-              {LANGS.map((l) => <a href={pathFor(l, ed, page)} hreflang={HTML_LANG[l]} lang={HTML_LANG[l]} data-lang={l} aria-current={l === lang ? "true" : undefined}>{LANG_NAME[l]}</a>)}
+              {LANGS.map((l) => <a href={urlFor(l)} hreflang={HTML_LANG[l]} lang={HTML_LANG[l]} data-lang={l} aria-current={l === lang ? "true" : undefined}>{LANG_NAME[l]}</a>)}
             </div>
           </details>
           <a class="btn sm" href={subscribe}>{c("common.subscribe", lang)}</a>
@@ -105,7 +107,7 @@ const sticky: Sticky = Astro.props.sticky !== undefined ? Astro.props.sticky
           </div>
           <div>
             <p class="label">{c("common.foot.languages", lang)}</p>
-            <ul>{LANGS.map((l) => <li><a href={pathFor(l, ed, page)} data-lang={l} lang={HTML_LANG[l]}>{LANG_NAME[l]}</a></li>)}</ul>
+            <ul>{LANGS.map((l) => <li><a href={urlFor(l)} data-lang={l} lang={HTML_LANG[l]}>{LANG_NAME[l]}</a></li>)}</ul>
           </div>
         </div>
         <p class="legal">{c("common.foot.agency", lang)}: <a href={config.agency.website} rel="noopener">{config.agency.name}</a>, AMI {config.agency.ami}, {c("common.gold", lang)}. © 2026 Imóveis Portugal.</p>

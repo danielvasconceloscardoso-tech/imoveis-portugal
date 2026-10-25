@@ -10,6 +10,16 @@ How to edit:
 
 ## common
 
+### nav.compare
+- PT: O que compra
+- EN: What it buys
+- FR: Ce que vous achetez
+
+### nav.sims
+- PT: Simuladores
+- EN: Calculators
+- FR: Simulateurs
+
 ### nav.faq
 - PT: Perguntas
 - EN: FAQ
@@ -1236,3 +1246,517 @@ How to edit:
 - PT: Página não encontrada
 - EN: Page not found
 - FR: Page introuvable
+
+## compare
+
+### title
+- PT: O que compra com o mesmo dinheiro
+- EN: What the same money buys
+- FR: Ce que le même budget permet d'acheter
+
+### lede
+- PT: Metros quadrados de casa para 250 000 €, 500 000 € e 1 000 000 €, em Portugal e onde vive. Preço por m² de vendas reais, de fontes oficiais.
+- EN: Square metres of home for €250,000, €500,000 and €1,000,000, in Portugal and where you live. Price per m² from actual sales, from official sources.
+- FR: Des mètres carrés de logement pour 250 000 €, 500 000 € et 1 000 000 €, au Portugal et là où vous vivez. Prix au m² des ventes réelles, de sources officielles.
+
+### line
+- PT: Com {budget} compra cerca de {a} m² {placeA} e {b} m² {placeB}.
+- EN: With {budget} you buy about {a} m² {placeA} and {b} m² {placeB}.
+- FR: Avec {budget}, vous achetez environ {a} m² {placeA} et {b} m² {placeB}.
+
+### budget.h
+- PT: Com {budget}
+- EN: With {budget}
+- FR: Avec {budget}
+
+### col.place
+- PT: Local
+- EN: Place
+- FR: Lieu
+
+### col.m2
+- PT: Preço por m²
+- EN: Price per m²
+- FR: Prix au m²
+
+### col.buys
+- PT: Compra cerca de
+- EN: Buys about
+- FR: Permet environ
+
+### pt.h
+- PT: Em Portugal
+- EN: In Portugal
+- FR: Au Portugal
+
+### abroad.none
+- PT: Ainda não encontrámos um preço oficial por m² para {country}. Mostramos só Portugal até haver uma fonte primária.
+- EN: We have not yet found an official price per m² for {country}. We show Portugal only until there is a primary source.
+- FR: Nous n'avons pas encore trouvé de prix officiel au m² pour {country}. Nous montrons seulement le Portugal en attendant une source primaire.
+
+### note
+- PT: São medianas de vendas reais, não casas concretas. Uma casa em particular pode custar bastante mais ou menos.
+- EN: These are medians of actual sales, not specific homes. Any given home can cost a lot more or less.
+- FR: Ce sont des médianes de ventes réelles, pas des biens précis. Un bien donné peut coûter nettement plus ou moins.
+
+### note.mean
+- PT: No Luxemburgo, o Observatoire de l'Habitat publica a média dos apartamentos usados, não a mediana.
+- EN: In Luxembourg, the Observatoire de l'Habitat publishes the average for existing apartments, not the median.
+- FR: Au Luxembourg, l'Observatoire de l'Habitat publie la moyenne des appartements existants, pas la médiane.
+
+### note.canton
+- PT: Na Suíça só encontrámos um valor oficial para o cantão de Genebra ({chf} CHF por m² em 2024), convertido à taxa de referência do BCE de {date}.
+- EN: In Switzerland we only found an official figure for the canton of Geneva ({chf} CHF per m² in 2024), converted at the ECB reference rate of {date}.
+- FR: En Suisse, nous n'avons trouvé de chiffre officiel que pour le canton de Genève ({chf} CHF le m² en 2024), converti au taux de référence de la BCE du {date}.
+
+### note.pt
+- PT: Em Portugal: últimos 12 meses até ao {quarter}, todas as casas vendidas, novas e usadas.
+- EN: In Portugal: the 12 months to {quarter}, all homes sold, new and existing.
+- FR: Au Portugal : les 12 mois jusqu'au {quarter}, tous les logements vendus, neufs et anciens.
+
+### share.h
+- PT: Para partilhar
+- EN: To share
+- FR: À partager
+
+### share.p
+- PT: A mesma comparação numa imagem, com a fonte, para enviar à família ou publicar.
+- EN: The same comparison as an image, with its source, to send to family or post.
+- FR: La même comparaison en image, avec sa source, à envoyer à la famille ou à publier.
+
+### share.link
+- PT: Descarregar a imagem
+- EN: Download the image
+- FR: Télécharger l'image
+
+### home.link
+- PT: Ver a comparação completa
+- EN: See the full comparison
+- FR: Voir la comparaison complète
+
+### place.lisboa
+- PT: Lisboa
+- EN: Lisbon
+- FR: Lisbonne
+
+### place.porto
+- PT: Porto
+- EN: Porto
+- FR: Porto
+
+### place.gondomar
+- PT: Gondomar
+- EN: Gondomar
+- FR: Gondomar
+
+### place.braga
+- PT: Braga
+- EN: Braga
+- FR: Braga
+
+### place.faro
+- PT: Faro
+- EN: Faro
+- FR: Faro
+
+### place.viseu
+- PT: Viseu
+- EN: Viseu
+- FR: Viseu
+
+### place.lux
+- PT: Cidade do Luxemburgo
+- EN: Luxembourg City
+- FR: Luxembourg-Ville
+
+### place.esch
+- PT: Esch-sur-Alzette
+- EN: Esch-sur-Alzette
+- FR: Esch-sur-Alzette
+
+### place.paris
+- PT: Paris
+- EN: Paris
+- FR: Paris
+
+### place.lyon
+- PT: Lyon
+- EN: Lyon
+- FR: Lyon
+
+### place.geneve
+- PT: Genebra (cantão)
+- EN: Geneva (canton)
+- FR: Genève (canton)
+
+### in.lisboa
+- PT: em Lisboa
+- EN: in Lisbon
+- FR: à Lisbonne
+
+### in.porto
+- PT: no Porto
+- EN: in Porto
+- FR: à Porto
+
+### in.gondomar
+- PT: em Gondomar
+- EN: in Gondomar
+- FR: à Gondomar
+
+### in.braga
+- PT: em Braga
+- EN: in Braga
+- FR: à Braga
+
+### in.faro
+- PT: em Faro
+- EN: in Faro
+- FR: à Faro
+
+### in.viseu
+- PT: em Viseu
+- EN: in Viseu
+- FR: à Viseu
+
+### in.lux
+- PT: na cidade do Luxemburgo
+- EN: in Luxembourg City
+- FR: à Luxembourg-Ville
+
+### in.esch
+- PT: em Esch-sur-Alzette
+- EN: in Esch-sur-Alzette
+- FR: à Esch-sur-Alzette
+
+### in.paris
+- PT: em Paris
+- EN: in Paris
+- FR: à Paris
+
+### in.lyon
+- PT: em Lyon
+- EN: in Lyon
+- FR: à Lyon
+
+### in.geneve
+- PT: em Genebra
+- EN: in Geneva
+- FR: à Genève
+
+## sims
+
+### title
+- PT: Simuladores
+- EN: Calculators
+- FR: Simulateurs
+
+### lede
+- PT: Contas feitas no seu navegador, com as regras de 2026 e a fonte de cada taxa. Não guardamos nada do que escreve.
+- EN: Worked out in your browser, with the 2026 rules and the source of every rate. Nothing you type is stored.
+- FR: Calculs faits dans votre navigateur, avec les règles de 2026 et la source de chaque taux. Rien de ce que vous saisissez n'est enregistré.
+
+### estimate
+- PT: Estimativa com as regras em vigor. Não é uma proposta de crédito nem aconselhamento fiscal.
+- EN: An estimate under current rules. Not a credit offer and not tax advice.
+- FR: Estimation selon les règles en vigueur. Ce n'est ni une offre de crédit ni un conseil fiscal.
+
+### result.h
+- PT: Resultado
+- EN: Result
+- FR: Résultat
+
+### share
+- PT: Copiar a ligação com estes valores
+- EN: Copy the link with these figures
+- FR: Copier le lien avec ces chiffres
+
+### copied
+- PT: Ligação copiada
+- EN: Link copied
+- FR: Lien copié
+
+### yes
+- PT: Sim
+- EN: Yes
+- FR: Oui
+
+### no
+- PT: Não
+- EN: No
+- FR: Non
+
+### others.h
+- PT: Outros simuladores
+- EN: Other calculators
+- FR: Autres simulateurs
+
+### next.h
+- PT: O passo seguinte
+- EN: The next step
+- FR: L'étape suivante
+
+### sponsor
+- PT: Simulador oferecido por {name} · intermediário de crédito registado no Banco de Portugal n.º {bdp} · patrocinado
+- EN: Calculator offered by {name} · credit intermediary registered with Banco de Portugal no. {bdp} · sponsored
+- FR: Simulateur offert par {name} · intermédiaire de crédit enregistré auprès du Banco de Portugal sous le n° {bdp} · sponsorisé
+
+### credit.q
+- PT: Quer que {name} analise o seu caso e compare bancos, sem custos para si?
+- EN: Would you like {name} to look at your case and compare banks, at no cost to you?
+- FR: Voulez-vous que {name} étudie votre dossier et compare les banques, sans frais pour vous ?
+
+### credit.consent
+- PT: Aceito que os dados deste pedido sejam enviados apenas a {name} (intermediário de crédito, Banco de Portugal n.º {bdp}) para me contactar sobre ele. Posso retirar o consentimento a qualquer momento.
+- EN: I agree that the details of this request are sent only to {name} (credit intermediary, Banco de Portugal no. {bdp}) to contact me about it. I can withdraw my consent at any time.
+- FR: J'accepte que les données de cette demande soient envoyées uniquement à {name} (intermédiaire de crédit, Banco de Portugal n° {bdp}) pour me contacter à ce sujet. Je peux retirer mon consentement à tout moment.
+
+### credit.send
+- PT: Enviar o pedido
+- EN: Send the request
+- FR: Envoyer la demande
+
+### credit.subject
+- PT: Pedido de análise de crédito
+- EN: Mortgage review request
+- FR: Demande d'étude de crédit
+
+### credit.privacy
+- PT: Recebe um email para confirmar o pedido. Como tratamos os seus dados:
+- EN: You will get an email to confirm the request. How we handle your data:
+- FR: Vous recevrez un email pour confirmer la demande. Comment nous traitons vos données :
+
+### credit.none
+- PT: Para comparar propostas de vários bancos, fale com um parceiro de crédito.
+- EN: To compare offers from several banks, talk to a credit partner.
+- FR: Pour comparer les offres de plusieurs banques, parlez à un partenaire crédit.
+
+### tax.p
+- PT: O imposto no país onde vive depende do seu caso. Um consultor fiscal confirma as contas.
+- EN: Tax where you live depends on your case. A tax adviser can check the numbers.
+- FR: L'impôt dans votre pays de résidence dépend de votre situation. Un conseiller fiscal vérifie les chiffres.
+
+### agency.p
+- PT: Se já tem um preço em mente, a agência parceira mostra-lhe casas nesse valor.
+- EN: If you already have a price in mind, the partner agency can show you homes at that price.
+- FR: Si vous avez déjà un prix en tête, l'agence partenaire vous montre des biens à ce prix.
+
+### plan.cta
+- PT: Plano de compra em PDF, com três cenários de crédito e a lista de documentos · 5,99 €
+- EN: Purchase plan as a PDF, with three mortgage scenarios and the document checklist · €5.99
+- FR: Plan d'achat en PDF, avec trois scénarios de crédit et la liste des documents · 5,99 €
+
+### source
+- PT: Fonte
+- EN: Source
+- FR: Source
+
+### cost.name
+- PT: Custo total da compra
+- EN: Total purchase cost
+- FR: Coût total de l'achat
+
+### cost.p
+- PT: IMT, imposto do selo e escritura para o preço que indicar.
+- EN: Property transfer tax, stamp duty and deed costs for the price you enter.
+- FR: IMT, droit de timbre et acte pour le prix que vous indiquez.
+
+### f.price
+- PT: Preço da casa (€)
+- EN: Home price (€)
+- FR: Prix du bien (€)
+
+### f.own
+- PT: Vai ser a sua habitação própria e permanente?
+- EN: Will it be your own permanent home?
+- FR: Sera-ce votre résidence principale ?
+
+### f.resident
+- PT: É residente fiscal em Portugal?
+- EN: Are you a tax resident of Portugal?
+- FR: Êtes-vous résident fiscal au Portugal ?
+
+### f.mortgage
+- PT: Vai pedir crédito?
+- EN: Will you take a mortgage?
+- FR: Allez-vous emprunter ?
+
+### r.imt
+- PT: IMT
+- EN: Property transfer tax (IMT)
+- FR: IMT (droits de mutation)
+
+### r.is
+- PT: Imposto do selo (0,8%)
+- EN: Stamp duty (0.8%)
+- FR: Droit de timbre (0,8 %)
+
+### r.deed
+- PT: Escritura e registo (Casa Pronta)
+- EN: Deed and registration (Casa Pronta)
+- FR: Acte et enregistrement (Casa Pronta)
+
+### r.extra
+- PT: Acima do preço
+- EN: On top of the price
+- FR: En plus du prix
+
+### r.total
+- PT: Total a pagar
+- EN: Total to pay
+- FR: Total à payer
+
+### cost.note
+- PT: Quem não é residente fiscal paga IMT à taxa única de 7,5%, salvo exceções, como passar a residente nos dois anos seguintes. Advogado e avaliação bancária não estão incluídos.
+- EN: Buyers who are not tax residents pay IMT at a flat 7.5%, with exceptions such as becoming resident within two years. Lawyer and bank valuation are not included.
+- FR: Les non-résidents fiscaux paient l'IMT au taux unique de 7,5 %, sauf exceptions, comme devenir résident dans les deux ans. Avocat et expertise bancaire non inclus.
+
+### payment.name
+- PT: Prestação do crédito
+- EN: Monthly mortgage payment
+- FR: Mensualité du crédit
+
+### payment.p
+- PT: A prestação mensal para o preço, a entrada, o prazo e a taxa que indicar.
+- EN: The monthly payment for the price, deposit, term and rate you enter.
+- FR: La mensualité pour le prix, l'apport, la durée et le taux que vous indiquez.
+
+### f.deposit
+- PT: Entrada (€)
+- EN: Deposit (€)
+- FR: Apport (€)
+
+### f.years
+- PT: Prazo (anos)
+- EN: Term (years)
+- FR: Durée (ans)
+
+### f.rate
+- PT: Taxa de juro anual (%)
+- EN: Annual interest rate (%)
+- FR: Taux d'intérêt annuel (%)
+
+### rate.hint
+- PT: Média dos novos créditos à habitação em Portugal em {month}: {rate}% (Banco de Portugal). Pode alterar.
+- EN: Average rate on new mortgages in Portugal in {month}: {rate}% (Banco de Portugal). You can change it.
+- FR: Taux moyen des nouveaux crédits immobiliers au Portugal en {month} : {rate} % (Banco de Portugal). Vous pouvez le modifier.
+
+### r.loan
+- PT: Montante do crédito
+- EN: Loan amount
+- FR: Montant emprunté
+
+### r.ltv
+- PT: Financiamento sobre o preço
+- EN: Loan to price
+- FR: Financement sur le prix
+
+### r.monthly
+- PT: Prestação mensal
+- EN: Monthly payment
+- FR: Mensualité
+
+### r.interest
+- PT: Juros ao longo do prazo
+- EN: Interest over the term
+- FR: Intérêts sur la durée
+
+### r.stamp
+- PT: Imposto do selo sobre o crédito (0,6%)
+- EN: Stamp duty on the loan (0.6%)
+- FR: Droit de timbre sur le prêt (0,6 %)
+
+### ltv.over
+- PT: Acima do limite do Banco de Portugal para esta casa: {cap}% do valor.
+- EN: Above Banco de Portugal's limit for this home: {cap}% of its value.
+- FR: Au-dessus de la limite du Banco de Portugal pour ce bien : {cap} % de sa valeur.
+
+### payment.note
+- PT: Os bancos financiam até 90% do valor da habitação própria e permanente e até 80% das outras casas, e o total das prestações não pode passar 45% do rendimento líquido (Banco de Portugal, desde 1 de agosto de 2026). Taxa nominal, sem seguros nem comissões: não é uma TAEG.
+- EN: Banks lend up to 90% of the value of an own permanent home and up to 80% for other homes, and all loan payments together cannot exceed 45% of net income (Banco de Portugal, since 1 August 2026). Nominal rate, without insurance or fees: not an APR.
+- FR: Les banques financent jusqu'à 90 % de la valeur d'une résidence principale et jusqu'à 80 % des autres biens, et l'ensemble des mensualités ne peut dépasser 45 % du revenu net (Banco de Portugal, depuis le 1er août 2026). Taux nominal, hors assurances et frais : ce n'est pas un TAEG.
+
+### rent.name
+- PT: Rendimento do arrendamento
+- EN: Rental yield
+- FR: Rendement locatif
+
+### rent.p
+- PT: Rentabilidade bruta e líquida de uma casa arrendada, com o imposto para não residentes.
+- EN: Gross and net yield on a rented home, with the tax for non-residents.
+- FR: Rendement brut et net d'un bien loué, avec l'impôt des non-résidents.
+
+### f.rent
+- PT: Renda mensal (€)
+- EN: Monthly rent (€)
+- FR: Loyer mensuel (€)
+
+### f.imi
+- PT: IMI por ano (€)
+- EN: Property tax (IMI) per year (€)
+- FR: Taxe foncière (IMI) par an (€)
+
+### f.condo
+- PT: Condomínio por mês (€)
+- EN: Building charges per month (€)
+- FR: Charges de copropriété par mois (€)
+
+### f.insurance
+- PT: Seguro por ano (€)
+- EN: Insurance per year (€)
+- FR: Assurance par an (€)
+
+### f.mgmt
+- PT: Gestão (% da renda)
+- EN: Management (% of rent)
+- FR: Gestion (% du loyer)
+
+### imi.hint
+- PT: O IMI vai de 0,3% a 0,45% do valor patrimonial tributário, conforme o município.
+- EN: IMI ranges from 0.3% to 0.45% of the tax value, depending on the municipality.
+- FR: L'IMI va de 0,3 % à 0,45 % de la valeur fiscale, selon la commune.
+
+### r.gross
+- PT: Rendas por ano
+- EN: Rent per year
+- FR: Loyers par an
+
+### r.costs
+- PT: Despesas por ano
+- EN: Costs per year
+- FR: Charges par an
+
+### r.net
+- PT: Líquido antes de imposto
+- EN: Net before tax
+- FR: Net avant impôt
+
+### r.tax
+- PT: Imposto em Portugal (25%)
+- EN: Tax in Portugal (25%)
+- FR: Impôt au Portugal (25 %)
+
+### r.after
+- PT: Líquido depois de imposto
+- EN: Net after tax
+- FR: Net après impôt
+
+### r.grossYield
+- PT: Rentabilidade bruta
+- EN: Gross yield
+- FR: Rendement brut
+
+### r.netYield
+- PT: Rentabilidade líquida
+- EN: Net yield
+- FR: Rendement net
+
+### r.afterYield
+- PT: Rentabilidade depois de imposto
+- EN: Yield after tax
+- FR: Rendement après impôt
+
+### rent.note
+- PT: Não residentes pagam 25% sobre o rendimento líquido do arrendamento habitacional, com reduções para contratos de cinco anos ou mais. O país onde vive pode também tributar este rendimento.
+- EN: Non-residents pay 25% on net income from residential lettings, with reductions for leases of five years or more. The country where you live may also tax this income.
+- FR: Les non-résidents paient 25 % sur le revenu net de la location d'habitation, avec des réductions pour les baux de cinq ans ou plus. Votre pays de résidence peut aussi imposer ce revenu.

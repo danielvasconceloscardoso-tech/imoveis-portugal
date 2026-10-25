@@ -25,6 +25,15 @@ export const config = {
   // null = the home shows a worked example with real tax figures instead.
   listing: null as null | { title: Record<string, string>; place: string; price: number; url: string; photo: string },
 
+  // Default financing partner on the calculators (D21): the partner agency's credit-intermediary business.
+  // Name and Banco de Portugal registration number exactly as registered; both are shown wherever it appears.
+  // Empty = no sponsored label and no consent box: the financing button opens "Talk to a partner" (bank).
+  creditPartner: { name: "", bdp: "" },
+
+  // Paid "Plano de compra" report, 5,99 € (D22). Stays off until the billing entity (D4), OSS VAT and the
+  // Stripe Payment Link exist: while false, no page links to the checkout and its button is disabled.
+  plan: { live: false, price: 5.99, stripeLink: "" },
+
   // Form embeds per language (D18): Tally form IDs (e.g. "w4Xyz1") or a full embed URL (beehiiv
   // newsletter embeds are full URLs). Every form gets a hidden "edition" field from the page.
   forms: {
@@ -33,6 +42,9 @@ export const config = {
     buyer: { pt: "", en: "", fr: "" } as Record<string, string>,
     // "Talk to a partner" requests (category, country, question, consent) to the brand mailbox. See ops/SETUP.md.
     partnerRequest: { pt: "", en: "", fr: "" } as Record<string, string>,
+    // Calculator "analyse my case" requests to the credit partner, with the simulation in hidden fields.
+    // Tally settings: unticked consent naming the partner, confirmation email (double opt-in). ops/SETUP.md.
+    credit: { pt: "", en: "", fr: "" } as Record<string, string>,
   },
 
   // true once the free e-books are approved and their download pages exist (prompt 04).

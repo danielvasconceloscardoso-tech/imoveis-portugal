@@ -1,0 +1,177 @@
+---
+// One calculator page (prompts 12 and 13). Runs in the browser: nothing is stored or sent unless the reader
+// ticks the consent box and sends a request. The inputs live in the URL so a simulation can be shared.
+// Wording: COPY_DECK.md "sims.*"; maths: src/lib/sims.ts; fields and results: src/lib/tools.ts.
+import V2 from "../layouts/V2.astro";
+import Calls from "./Calls.astro";
+import { config } from "../config";
+import { LANGS, HTML_LANG, pathFor, type Lang, type EdCode } from "../i18n";
+import { Sources, fmtDate, EDITION_CUR, RATE } from "../lib/content";
+import { FIELDS, NEXT, FACTS_USED, SUB, TOOLS, keysFor, type ToolKey } from "../lib/tools";
+import { RATE_DEFAULT } from "../lib/sims";
+import { c, has } from "../lib/copy";
+
+interface Props { lang: Lang; ed: EdCode; tool: ToolKey; enabled: ToolKey[]; }
+const { lang, ed, tool, enabled } = Astro.props;
+const base = pathFor(lang, ed, "sims");
+const paths = Object.fromEntries(LANGS.map((l) => [l, `${pathFor(l, ed, "sims")}${SUB[tool][l]}/`])) as Record<Lang, string>;
+const src = new Sources();
+const nums = FACTS_USED[tool].map((id) => src.n(id));
+const cur = EDITION_CUR[ed];
+const fx = cur ? RATE(cur) : null;
+const curCode = cur ?? "EUR";
+const month = new Intl.DateTimeFormat(HTML_LANG[lang], { month: "long", year: "numeric", timeZone: "UTC" }).format(new Date("2026-08-15T00:00:00Z"));
+const hintVars = { month, rate: RATE_DEFAULT.toFixed(2).replace(".", lang === "en" ? "." : ",") };
+const labels = Object.fromEntries(keysFor(tool).filter((k) => has(`sims.${k}`)).map((k) => [k, c(`sims.${k}`, lang)]));
+const cp = config.creditPartner;
+const next = NEXT[tool];
+const talk = pathFor(lang, ed, "talk");
+const creditForm = config.forms.credit[lang];
+const name = c(`sims.${tool}.name`, lang);
+const fieldLabel = (id: string, kind: string) => {
+  const t = c(`sims.f.${id}`, lang);
+  return kind === "local" && cur ? `${t} (${cur})` : kind === "local" ? `${t} (€)` : t;
+};
+---
+<V2 lang={lang} ed={ed} page="sims" paths={paths} title={`${name} | Imóveis Portugal`} description={c(`sims.${tool}.p`, lang)} sticky={null}>
+  <div class="frame read ph">
+    <h1>{name}</h1>
+    <p class="lede">{c(`sims.${tool}.p`, lang)}</p>
+  </div>
+  <div class="frame read sim-wrap">
+    <form class="sim" id="sim" data-tool={tool} data-fx={fx ? fx.rate : 1} data-cur={curCode} data-locale={HTML_LANG[lang]} novalidate>
+      {FIELDS[tool].map((f) => f.kind === "bool" ? (
+        <fieldset class="field bool">
+          <legend>{fieldLabel(f.id, f.kind)}</legend>
+          <label><input type="radio" name={f.id} value="1" checked={f.def === true} /> {c("sims.yes", lang)}</label>
+          <label><input type="radio" name={f.id} value="0" checked={f.def !== true} /> {c("sims.no", lang)}</label>
+        </fieldset>
+      ) : (
+        <label class="field">
+          <span>{fieldLabel(f.id, f.kind)}</span>
+          <input type="number" name={f.id} value={String(f.def)} min="0" step={f.step ?? (f.kind === "money" || f.kind === "local" ? 1000 : 1)} inputmode="decimal" />
+          {f.hint && <small>{c(`sims.${f.hint}`, lang, hintVars)}</small>}
+        </label>
+      ))}
+    </form>
+
+    <section class="sim-out" aria-live="polite" aria-labelledby="res">
+      <h2 id="res" class="h3">{c("sims.result.h", lang)}</h2>
+      <dl class="bill" id="rows"></dl>
+      <p class="warn" id="warn" hidden></p>
+      <p class="small">{c("sims.estimate", lang)}{nums.map((i) => <a class="sup" href={`#fonte-${i}`}>{i}</a>)}</p>
+      {next === "credit" && cp.name && <p class="sponsor-line">{c("sims.sponsor", lang, { name: cp.name, bdp: cp.bdp })}</p>}
+      <button type="button" class="btn ghost sm" id="share" data-done={c("sims.copied", lang)}>{c("sims.share", lang)}</button>
+    </section>
+
+    <section class="sim-next" aria-labelledby="next">
+      <h2 id="next" class="h3">{c("sims.next.h", lang)}</h2>
+      {next === "credit" && (cp.name ? (
+        <div class="consent-box">
+          <p><strong>{c("sims.credit.q", lang, { name: cp.name })}</strong></p>
+          <label class="consent"><input type="checkbox" id="consent" /> <span>{c("sims.credit.consent", lang, { name: cp.name, bdp: cp.bdp })}</span></label>
+          <a class="btn" id="credit-send" aria-disabled="true" data-form={creditForm} data-mail={`mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("sims.credit.subject", lang)} (${ed} · ${lang})`)}`} href="#">{c("sims.credit.send", lang)}</a>
+          <p class="small">{c("sims.credit.privacy", lang)} <a href={pathFor(lang, ed, "privacy")}>{c("common.privacy", lang)}</a></p>
+        </div>
+      ) : (
+        <><p>{c("sims.credit.none", lang)}</p><a class="btn" href={`${talk}?cat=bank#form`}>{c("faq.cta.bank", lang)}</a></>
+      ))}
+      {next === "tax" && (<><p>{c("sims.tax.p", lang)}</p><a class="btn" href={`${talk}?cat=tax#form`}>{c("faq.cta.tax", lang)}</a></>)}
+      {next === "agency" && (<><p>{c("sims.agency.p", lang)}</p><a class="btn" href={pathFor(lang, ed, "buy")}>{c("faq.cta.agency", lang)}</a><Calls lang={lang} ed={ed} compact /></>)}
+      {config.plan.live && <p style="margin-top:20px"><a class="more" id="plan-link" href={`${base}${SUB.checkout[lang]}/`}>{c("sims.plan.cta", lang)}</a></p>}
+    </section>
+
+    {has(`sims.${tool}.note`) && <p class="small sim-note">{c(`sims.${tool}.note`, lang)}</p>}
+
+    <nav class="others" aria-labelledby="others">
+      <h2 id="others" class="h-small">{c("sims.others.h", lang)}</h2>
+      <ul>{TOOLS.filter((t) => t !== tool && enabled.includes(t)).map((t) => <li><a href={`${base}${SUB[t][lang]}/`}>{c(`sims.${t}.name`, lang)}</a></li>)}</ul>
+    </nav>
+  </div>
+
+  <section class="sources-list" aria-labelledby="fontes">
+    <div class="frame read">
+      <h2 id="fontes" class="h-small">{c("common.sources", lang)}</h2>
+      <ol>{src.list.map((s, i) => <li id={`fonte-${i + 1}`}><a href={s.url} rel="noopener">{s.title}</a>{s.checked && `, ${c("common.checked", lang, { date: fmtDate(lang, s.checked) })}`}.</li>)}</ol>
+    </div>
+  </section>
+  <script type="application/json" id="sim-labels" set:html={JSON.stringify(labels)} />
+</V2>
+
+<script>
+  import { run, FIELDS, type ToolKey } from "../lib/tools";
+  const form = document.getElementById("sim") as HTMLFormElement;
+  const tool = form.dataset.tool as ToolKey;
+  const fx = Number(form.dataset.fx) || 1;
+  const cur = form.dataset.cur || "EUR";
+  const loc = form.dataset.locale || "pt-PT";
+  const L: Record<string, string> = JSON.parse(document.getElementById("sim-labels")!.textContent || "{}");
+  const eur = new Intl.NumberFormat(loc, { style: "currency", currency: "EUR", maximumFractionDigits: 0, useGrouping: "always" } as Intl.NumberFormatOptions);
+  const local = new Intl.NumberFormat(loc, { style: "currency", currency: cur, maximumFractionDigits: 0, useGrouping: "always" } as Intl.NumberFormatOptions);
+  const pct = new Intl.NumberFormat(loc, { maximumFractionDigits: 2 });
+  const fmt = (v: number, f: string) => (f === "eur" ? eur.format(v) : f === "local" ? local.format(v) : `${pct.format(v)}${loc.startsWith("fr") ? "\u202f%" : "%"}`);
+
+  // Prefill from the shared link.
+  const qs = new URLSearchParams(location.search);
+  for (const f of FIELDS[tool]) {
+    const q = qs.get(f.id);
+    if (q === null) continue;
+    if (f.kind === "bool") { const el = form.querySelector<HTMLInputElement>(`input[name="${f.id}"][value="${q === "1" ? "1" : "0"}"]`); if (el) el.checked = true; }
+    else { const el = form.querySelector<HTMLInputElement>(`input[name="${f.id}"]`); if (el && !isNaN(Number(q))) el.value = q; }
+  }
+
+  function values() {
+    const v: Record<string, number | boolean> = {};
+    for (const f of FIELDS[tool]) {
+      if (f.kind === "bool") v[f.id] = form.querySelector<HTMLInputElement>(`input[name="${f.id}"]:checked`)?.value === "1";
+      else v[f.id] = Number(form.querySelector<HTMLInputElement>(`input[name="${f.id}"]`)?.value) || 0;
+    }
+    return v;
+  }
+  function render() {
+    const v = values();
+    const out = run(tool, v, fx);
+    const dl = document.getElementById("rows")!;
+    dl.innerHTML = "";
+    for (const r of out.rows) {
+      const dt = document.createElement("dt"), dd = document.createElement("dd");
+      dt.textContent = L[r.k] || r.k; dd.textContent = fmt(r.v, r.fmt);
+      if (r.strong) { dt.className = "tot"; dd.className = "tot"; }
+      dl.append(dt, dd);
+    }
+    const w = document.getElementById("warn")!;
+    if (out.warn && L[out.warn.k]) { w.hidden = false; w.textContent = L[out.warn.k].replace(/\{(\w+)\}/g, (m, k) => String(out.warn!.vars?.[k] ?? m)); }
+    else w.hidden = true;
+    // Keep the inputs in the URL (no personal data), for sharing and for the plan.
+    const p = new URLSearchParams();
+    for (const [k, x] of Object.entries(v)) p.set(k, typeof x === "boolean" ? (x ? "1" : "0") : String(x));
+    history.replaceState(null, "", `${location.pathname}?${p}`);
+    const plan = document.getElementById("plan-link") as HTMLAnchorElement | null;
+    if (plan) plan.href = `${plan.href.split("?")[0]}?tool=${tool}&${p}`;
+    const send = document.getElementById("credit-send") as HTMLAnchorElement | null;
+    if (send) {
+      const summary = out.rows.map((r) => `${L[r.k] || r.k}: ${fmt(r.v, r.fmt)}`).join("\n");
+      send.dataset.href = send.dataset.form
+        ? `https://tally.so/r/${send.dataset.form}?tool=${tool}&${p}`
+        : `${send.dataset.mail}&body=${encodeURIComponent(`${location.href}\n\n${summary}`)}`;
+    }
+  }
+  form.addEventListener("input", render);
+  form.addEventListener("submit", (e) => e.preventDefault());
+  render();
+
+  document.getElementById("share")?.addEventListener("click", async (e) => {
+    const b = e.currentTarget as HTMLButtonElement;
+    try { await navigator.clipboard.writeText(location.href); b.textContent = b.dataset.done || ""; } catch { prompt("", location.href); }
+  });
+  // Consent first: the request button works only once the box is ticked (GDPR art. 7).
+  const consent = document.getElementById("consent") as HTMLInputElement | null;
+  const send = document.getElementById("credit-send") as HTMLAnchorElement | null;
+  if (consent && send) {
+    const sync = () => { send.setAttribute("aria-disabled", consent.checked ? "false" : "true"); send.href = consent.checked ? send.dataset.href || "#" : "#"; };
+    consent.addEventListener("change", sync);
+    form.addEventListener("input", sync);
+    send.addEventListener("click", (e) => { if (!consent.checked) e.preventDefault(); });
+    sync();
+  }
+</script>

@@ -29,6 +29,8 @@ export function c(key: string, lang: Lang, vars: Vars = {}): string {
   const all: Vars = { ...BASE, ...vars };
   return v[lang].replace(/\{(\w+)\}/g, (m, k) => (k in all ? String(all[k]) : m));
 }
+/** True if the deck has this block (for optional wording). */
+export const has = (key: string) => DECK.has(key);
 /** Numbered blocks as a list: cl("home.weekly", "pt") → home.weekly.1, .2, … */
 export function cl(prefix: string, lang: Lang, vars: Vars = {}): string[] {
   const out: string[] = [];
