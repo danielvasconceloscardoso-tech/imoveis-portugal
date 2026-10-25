@@ -4,6 +4,7 @@
 // Buying or selling a home goes only to the partner agency (D14, D17). Wording: COPY_DECK.md "talk.*".
 import V2 from "../layouts/V2.astro";
 import Embed from "./Embed.astro";
+import Calls from "./Calls.astro";
 import { config } from "../config";
 import { pathFor, type Lang, type EdCode } from "../i18n";
 import { CATS } from "../lib/content";
@@ -20,12 +21,14 @@ const site = config.agency.website.replace(/^https:\/\/|\/$/g, "");
   </div>
   <div class="frame read prose">
     <div class="partner">
-      <span class="tag">{c("common.sponsored", lang)}</span>
+      <span class="tag">{c("common.gold", lang)}</span>
       <span class="logo">{config.agency.name}</span>
       <p style="margin:0">{c("talk.agency.p", lang)}</p>
       <p class="small" style="margin:0">AMI {config.agency.ami} · <a href={config.agency.website} rel="noopener">{site}</a></p>
       <a class="btn" style="justify-self:start" href={pathFor(lang, ed, "buy")}>{c("faq.cta.agency", lang)}</a>
     </div>
+    <h2>{c("talk.calls.h", lang)}</h2>
+    <Calls lang={lang} ed={ed} />
     <h2>{c("talk.cats.h", lang)}</h2>
     <p>{c("talk.launch", lang)}</p>
     <div class="cards two" id="cats">
@@ -38,7 +41,7 @@ const site = config.agency.website.replace(/^https:\/\/|\/$/g, "");
     </div>
     <h2 id="form">{c("talk.form.h", lang)}</h2>
     <p>{c("talk.form.intro", lang)}</p>
-    <Embed id={config.forms.partnerRequest[lang]} title={c("talk.form.h", lang)} pending={c("common.form.pending", lang)} hidden={{ edition: ed, lang }} height={520} />
+    <Embed id={config.forms.partnerRequest[lang]} title={c("talk.form.h", lang)} cta={c("talk.form.cta", lang)} subject={c("talk.form.h", lang)} hidden={{ edition: ed, lang }} height={520} />
     <p class="small" style="margin-top:12px"><a href={pathFor(lang, ed, "privacy")}>{c("common.privacy", lang)}</a></p>
   </div>
   <script is:inline>

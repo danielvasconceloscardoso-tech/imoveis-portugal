@@ -3,12 +3,13 @@
 // talk to a partner and the free guide. Wording: content/copy/COPY_DECK.md.
 import V2 from "../../../layouts/V2.astro";
 import Embed from "../../../components/Embed.astro";
+import Calls from "../../../components/Calls.astro";
 import FaqPage from "../../../components/FaqPage.astro";
 import TalkPage from "../../../components/TalkPage.astro";
 import GuidePage from "../../../components/GuidePage.astro";
 import { config } from "../../../config";
 import { ED_ORDER, LANGS, SLUGS, eur, pathFor, type EdCode, type Lang, type PageKey } from "../../../i18n";
-import { homeFigures, fmtDate } from "../../../lib/content";
+import { homeFacts, fmtDate } from "../../../lib/content";
 import { c, cl, edName } from "../../../lib/copy";
 
 export function getStaticPaths() {
@@ -43,7 +44,6 @@ const site = config.agency.website.replace(/^https:\/\/|\/$/g, "");
       <section class="hero">
         <div class="frame grid">
           <div>
-            <p class="label">{c("partners.title", lang)}</p>
             <h1>{c("partners.h1", lang)}</h1>
             <p class="lede">{c("partners.lede", lang)}</p>
             <a class="btn" href="#contacto" data-primary>{c("partners.cta", lang)}</a>
@@ -82,9 +82,9 @@ const site = config.agency.website.replace(/^https:\/\/|\/$/g, "");
       </section>
       <section class="band white" aria-labelledby="agency">
         <div class="frame split">
-          <div><p class="label">{c("common.foot.agency", lang)}</p><h2 id="agency">{config.agency.name}</h2></div>
+          <div><h2 id="agency">{config.agency.name}</h2></div>
           <div class="partner">
-            <span class="tag">{c("common.sponsored", lang)}</span>
+            <span class="tag">{c("common.gold", lang)}</span>
             <p style="margin:0">{c("partners.agency.p", lang)}</p>
             <p class="small" style="margin:0">AMI {config.agency.ami} · <a href={config.agency.website} rel="noopener">{site}</a></p>
           </div>
@@ -94,7 +94,7 @@ const site = config.agency.website.replace(/^https:\/\/|\/$/g, "");
         <div class="frame split">
           <div><h2 id="rules">{c("partners.rules.h", lang)}</h2></div>
           <div>
-            <ul class="ticks" style="margin-top:0">{cl("partners.rules", lang).map((r) => <li>{r}</li>)}</ul>
+            <ul class="list" style="margin-top:0">{cl("partners.rules", lang).map((r) => <li>{r}</li>)}</ul>
             <h3 style="margin-top:32px">{c("partners.report.h", lang)}</h3>
             <p>{c("partners.report.p", lang)}</p>
             <p><a href={pathFor(lang, ed, "how")}>{c("common.nav.how", lang)}</a></p>
@@ -106,7 +106,7 @@ const site = config.agency.website.replace(/^https:\/\/|\/$/g, "");
           <h2 id="cta">{c("partners.cta", lang)}</h2>
           <p class="lede">{c("partners.form.intro", lang)}</p>
           {config.bookingUrl && <p><a class="btn" href={config.bookingUrl} rel="noopener">{c("partners.book", lang)}</a></p>}
-          <Embed id={config.forms.sponsor[lang]} title={c("partners.cta", lang)} pending={c("common.form.pending", lang)} hidden={{ edition: ed, lang }} />
+          <Embed id={config.forms.sponsor[lang]} title={c("partners.cta", lang)} cta={c("partners.cta", lang)} subject={c("partners.cta", lang)} hidden={{ edition: ed, lang }} />
         </div>
       </section>
     </>
@@ -115,23 +115,23 @@ const site = config.agency.website.replace(/^https:\/\/|\/$/g, "");
   {key === "buy" && (
     <div class="frame">
       <div class="ph read">
-        <p class="label">{c("buy.title", lang)}</p>
         <h1>{c("buy.h1", lang)}</h1>
         <p class="lede">{c("buy.lede", lang)}</p>
       </div>
       <div class="split" style="padding-bottom:64px">
         <div class="buy-form">
-          <Embed id={config.forms.buyer[lang]} title={c("buy.h1", lang)} pending={c("common.form.pending", lang)} hidden={{ edition: ed, lang }} height={560} />
+          <Embed id={config.forms.buyer[lang]} title={c("buy.h1", lang)} cta={c("buy.cta", lang)} subject={c("buy.h1", lang)} hidden={{ edition: ed, lang }} height={560} />
           <p class="small" style="margin-top:12px">{c("buy.small", lang)}{" "}<a href={pathFor(lang, ed, "privacy")}>{c("common.privacy", lang)}</a></p>
         </div>
         <div>
           <h2 class="h3" style="margin-bottom:16px">{c("buy.steps.h", lang)}</h2>
           <ol class="steps">{cl("buy.steps", lang).map((s) => <li>{s}</li>)}</ol>
           <div class="partner" style="margin-top:28px">
-            <span class="tag">{c("common.sponsored", lang)}</span>
+            <span class="tag">{c("common.gold", lang)}</span>
             <span class="logo">{config.agency.name}</span>
             <p class="small" style="margin:0">AMI {config.agency.ami} · <a href={config.agency.website} rel="noopener">{site}</a></p>
           </div>
+          <Calls lang={lang} ed={ed} />
         </div>
       </div>
     </div>
@@ -140,7 +140,6 @@ const site = config.agency.website.replace(/^https:\/\/|\/$/g, "");
   {key === "how" && (
     <div class="frame read prose">
       <div class="ph">
-        <p class="label">{c("how.title", lang)}</p>
         <h1>{c("how.h1", lang)}</h1>
         <p class="lede">{c("how.lede", lang)}</p>
       </div>
@@ -148,7 +147,7 @@ const site = config.agency.website.replace(/^https:\/\/|\/$/g, "");
       <h2>{c("how.example.h", lang)}</h2>
       <p>{c("how.example.p", lang)}</p>
       <ol class="notes" style="font-size:15px">
-        {homeFigures(ed, lang).slice(1).map((f) => <li><strong>{f.big}</strong> · <a href={f.url} rel="noopener">{f.source}</a>{f.checked && `, ${c("common.checked", lang, { date: fmtDate(lang, f.checked) })}`}.</li>)}
+        {homeFacts(ed).map((f) => <li><a href={f.source_url} rel="noopener">{f.source_title}</a>{f.checked_on && `, ${c("common.checked", lang, { date: fmtDate(lang, f.checked_on) })}`}.</li>)}
       </ol>
       <h2>{c("how.contact.h", lang)}</h2>
       <p>{c("how.contact.p", lang)}{" "}<a href={`mailto:${config.contactEmail}`}>{config.contactEmail}</a></p>

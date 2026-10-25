@@ -6,10 +6,11 @@ export type Stage = "before" | "buying" | "after";
 
 // Hero photo per edition (site/public/img; sources in site/public/photos/CREDITS.md, not linked from the site). Place names are in the deck.
 export const PHOTO: Record<EdCode, string> = {
-  lu: "lisboa-alfama-telhados",
-  fr: "porto-ribeira-rabelo",
-  ch: "lisboa-anoitecer-castelo",
-  br: "lisboa-praca-do-comercio",
+  // North of Portugal only (prompt 11); neighbouring editions get different photos. Agency photos replace these when provided.
+  lu: "porto-ribeira-rabelo",
+  fr: "porto-douro-entardecer",
+  ch: "porto-ponte-luis-i-noite",
+  br: "porto-ribeira-rabelo",
   us: "porto-douro-entardecer",
-  il: "lisboa-alfama-sao-vicente",
+  il: "porto-ponte-luis-i-noite",
 };

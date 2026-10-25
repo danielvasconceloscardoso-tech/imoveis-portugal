@@ -1,101 +1,105 @@
 ---
-// Edition home (prompt 10): belonging first, proof on the first screen, one action (the newsletter).
+// Edition home (prompt 11, CEO draft content/copy/HOME_CEO_DRAFT.md): five sections, no labels above headings,
+// a real example with real tax figures, sources as superscripts with one list at the bottom.
 // Wording: content/copy/COPY_DECK.md, blocks "home.*".
 import V2 from "../../../layouts/V2.astro";
 import Embed from "../../../components/Embed.astro";
+import Calls from "../../../components/Calls.astro";
 import { config } from "../../../config";
-import { ED_ORDER, LANGS, pathFor, type EdCode, type Lang } from "../../../i18n";
+import { ED_ORDER, LANGS, HTML_LANG, eur, pathFor, type EdCode, type Lang } from "../../../i18n";
 import { PHOTO } from "../../../lib/ui";
-import { homeFigures, fmtDate } from "../../../lib/content";
-import { c, cl, edName } from "../../../lib/copy";
+import { Sources, homeExample, RATE, EDITION_CUR, fmtDate, FACTS } from "../../../lib/content";
+import { c, edName } from "../../../lib/copy";
 
 export function getStaticPaths() {
   return LANGS.flatMap((lang) => ED_ORDER.map((ed) => ({ params: { lang, ed } })));
 }
 const lang = Astro.params.lang as Lang;
 const ed = Astro.params.ed as EdCode;
-const figs = homeFigures(ed, lang);
+const src = new Sources();
 const photo = PHOTO[ed];
-const place = c(`editions.place.${ed}`, lang);
-const weekly = cl("home.weekly", lang);
-weekly.splice(2, 0, c(`editions.topic.${ed}`, lang));
-const cards: [string, string][] = [["faq", "faq"], ["guide", "guide"], ["buy", "buy"]];
+const ex = homeExample();
+const e = (n: number) => eur(n, lang);
+const cur = EDITION_CUR[ed];
+const fx = cur ? RATE(cur) : null;
+const local = fx && cur ? new Intl.NumberFormat(HTML_LANG[lang], { style: "currency", currency: cur, maximumFractionDigits: 0 }).format(ex.total * fx.rate) : "";
+const n = { imt: src.n("pt-imt-nonresident-flat"), is: src.n("pt-is-purchase"), deed: src.n("pt-casa-pronta-fees") };
+const nfx = fx ? src.n(fx.id) : 0;
+// Four questions: three shared, the fourth depends on the edition (inheritance for emigrant editions, residence otherwise).
+const emigrant = ed === "lu" || ed === "fr" || ed === "ch";
+const qa = [
+  { q: c("home.qa.sign.q", lang), a: c("home.qa.sign.a", lang), s: [src.n("pt-poa-apostille")] },
+  { q: c("home.qa.costs.q", lang), a: c("home.qa.costs.a", lang, { extra: e(ex.extra) }), s: [n.imt, n.is, n.deed] },
+  { q: c("home.qa.bank.q", lang), a: c("home.qa.bank.a", lang), s: [src.n("pt-ltv-limits")] },
+  emigrant
+    ? { q: c("home.qa.inherit.q", lang), a: c("home.qa.inherit.a", lang), s: [src.n("pt-is-inheritance-exempt")] }
+    : { q: c("home.qa.live.q", lang), a: c("home.qa.live.a", lang), s: [src.n("pt-ari-realestate-ended"), src.n("pt-visa-own-income")] },
+];
+const sup = (ns: number[]) => ns.map((i) => `<a class="sup" href="#fonte-${i}">${i}</a>`).join("");
 ---
-<V2 lang={lang} ed={ed} page="home" title={`Imóveis Portugal · ${edName(ed, lang)}`} description={c("home.lede", lang)}>
-  <section class="hero">
-    <div class="frame grid">
-      <div>
-        <p class="label"><span class="dot" aria-hidden="true"></span> {edName(ed, lang)}</p>
-        <h1>{c(`home.hero.${ed}`, lang)}</h1>
-        <p class="lede">{c("home.lede", lang)}</p>
-        <div class="signup" id="subscrever" data-primary>
-          <Embed id={config.forms.newsletter[lang]} title={c("home.signup.h", lang)} pending={c("common.form.pending", lang)} hidden={{ edition: ed, lang }} height={200} />
-          <p class="small">{c("home.signup.note", lang)}{" "}<a href={pathFor(lang, ed, "privacy")}>{c("common.privacy", lang)}</a></p>
-        </div>
-        <p class="proof">{c("home.proof", lang)}</p>
+<V2 lang={lang} ed={ed} page="home" title={`Imóveis Portugal · ${edName(ed, lang)}`} description={c(`home.line.${ed}`, lang)}>
+  <figure class="bleed">
+    <img src={`/img/${photo}-wide-1600.webp`} srcset={`/img/${photo}-wide-800.webp 800w, /img/${photo}-wide-1600.webp 1600w`} sizes="100vw" width="1600" height="900" alt={c(`editions.place.${ed}`, lang)} fetchpriority="high" />
+  </figure>
+
+  <section class="hero2">
+    <div class="frame read">
+      <h1>{c("home.h1", lang)}</h1>
+      <p class="lede">{c(`home.line.${ed}`, lang)} {c("home.promise", lang)}</p>
+      <div class="actions" id="subscrever" data-primary>
+        <Embed id={config.forms.newsletter[lang]} title={c("home.subscribe", lang)} cta={c("home.subscribe", lang)} subject={c("home.subscribe.subject", lang)} hidden={{ edition: ed, lang }} height={200} />
+        <a class="quiet" href={config.calls.intro || "#do-lado-de-la"}>{c("home.call.link", lang)}</a>
       </div>
-      <figure class="photo-fig">
-        <div class="photo">
-          <img src={`/img/${photo}-1200.webp`} srcset={`/img/${photo}-640.webp 640w, /img/${photo}-1200.webp 1200w`} sizes="(min-width: 960px) 420px, calc(100vw - 40px)" width="1200" height="900" alt={place} fetchpriority="high" />
-        </div>
-        <figcaption class="credit">{place}</figcaption>
-      </figure>
     </div>
   </section>
 
-  <section class="band white" aria-labelledby="figs">
-    <div class="frame">
-      <p class="label">{c("home.figs.label", lang)}</p>
-      <h2 id="figs">{c("home.figs.h", lang)}</h2>
-      <div class="figs">
-        {figs.map((f, i) => (
-          <div class="fig">
-            <span class="n">{f.big}<sup><a href={`#nota-${i + 1}`} aria-label={`${c("common.sources", lang)} ${i + 1}`}>{i + 1}</a></sup></span>
-            <p>{f.text}</p>
-          </div>
-        ))}
-      </div>
-      <ol class="notes">
-        <li class="notes-h">{c("common.sources", lang)}</li>
-        {figs.map((f, i) => (
-          <li id={`nota-${i + 1}`}>{i + 1}. <a href={f.url} rel="noopener">{f.source}</a>{f.checked && `, ${c("common.checked", lang, { date: fmtDate(lang, f.checked) })}`}.</li>
-        ))}
+  <section class="example" aria-labelledby="exemplo">
+    <div class="frame read">
+      {config.listing ? (
+        <h2 id="exemplo">{config.listing.title[lang]}</h2>
+      ) : (
+        <h2 id="exemplo">{c("home.example.h", lang, { price: e(ex.price), extra: e(ex.extra) })}</h2>
+      )}
+      <p>{c("home.example.p", lang)}</p>
+      <dl class="bill">
+        <dt>{c("home.example.imt", lang)}<Fragment set:html={sup([n.imt])} /></dt><dd>{e(ex.imt)}</dd>
+        <dt>{c("home.example.is", lang)}<Fragment set:html={sup([n.is])} /></dt><dd>{e(ex.is)}</dd>
+        <dt>{c("home.example.deed", lang)}<Fragment set:html={sup([n.deed])} /></dt><dd>{e(ex.deed)}</dd>
+        <dt class="tot">{c("home.example.total", lang)}</dt><dd class="tot">{e(ex.total)}</dd>
+      </dl>
+      {fx && <p class="small">{c("home.example.fx", lang, { local, date: fmtDate(lang, "2026-10-23") })}<Fragment set:html={sup([nfx])} /></p>}
+      <p class="small">{c("home.example.note", lang)}</p>
+      <a class="more" href={pathFor(lang, ed, "guide")}>{c("home.example.link", lang)}</a>
+    </div>
+  </section>
+
+  <section class="qa-home" aria-labelledby="perguntas">
+    <div class="frame read">
+      <h2 id="perguntas">{c(emigrant ? "home.qa.h.august" : "home.qa.h", lang)}</h2>
+      {qa.map((x) => (
+        <div class="qa-item">
+          <h3>{x.q}</h3>
+          <p>{x.a}<Fragment set:html={sup(x.s)} /></p>
+        </div>
+      ))}
+      <a class="more" href={pathFor(lang, ed, "faq")}>{c("home.qa.all", lang)}</a>
+    </div>
+  </section>
+
+  <section class="side" id="do-lado-de-la" aria-labelledby="lado">
+    <div class="frame read">
+      <h2 id="lado">{c("home.side.h", lang)}</h2>
+      <p>{c("home.side.p", lang)} <span class="tag">{c("common.gold", lang)}</span></p>
+      <Calls lang={lang} ed={ed} />
+    </div>
+  </section>
+
+  <section class="sources-list" aria-labelledby="fontes">
+    <div class="frame read">
+      <h2 id="fontes" class="h-small">{c("common.sources", lang)}</h2>
+      <ol>
+        {src.list.map((s, i) => <li id={`fonte-${i + 1}`}><a href={s.url} rel="noopener">{s.title}</a>{s.checked && `, ${c("common.checked", lang, { date: fmtDate(lang, s.checked) })}`}.</li>)}
       </ol>
-    </div>
-  </section>
-
-  <section class="band" aria-labelledby="start">
-    <div class="frame">
-      <p class="label">{c("home.start.label", lang)}</p>
-      <h2 id="start">{c("home.start.h", lang)}</h2>
-      <div class="cards">
-        {cards.map(([k, page]) => (
-          <a class="card" href={pathFor(lang, ed, page as "faq")}><h3>{c(`home.card.${k}.h`, lang)}</h3><p>{c(`home.card.${k}.p`, lang)}</p><span class="go arrow">{c("home.go", lang)} </span></a>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section class="band white" aria-labelledby="weekly">
-    <div class="frame split">
-      <div>
-        <p class="label">{c("home.weekly.label", lang)}</p>
-        <h2 id="weekly">{c("home.weekly.h", lang)}</h2>
-      </div>
-      <ul class="ticks">{weekly.map((w) => <li>{w}</li>)}</ul>
-    </div>
-  </section>
-
-  <section class="band" aria-labelledby="partners">
-    <div class="frame split">
-      <div>
-        <p class="label">{c("home.partners.label", lang)}</p>
-        <h2 id="partners">{c("home.partners.h", lang)}</h2>
-      </div>
-      <div>
-        <p class="lede">{c("home.partners.p", lang)}</p>
-        <a class="btn ghost" href={pathFor(lang, ed, "partners")}>{c("home.partners.a", lang)}</a>
-      </div>
     </div>
   </section>
 </V2>

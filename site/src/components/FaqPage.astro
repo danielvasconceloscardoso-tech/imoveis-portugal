@@ -5,28 +5,28 @@
 import V2 from "../layouts/V2.astro";
 import { config } from "../config";
 import { pathFor, type Lang, type EdCode } from "../i18n";
-import { faqFor, FACTS, fmtDate, DISCLAIMER, type Stage } from "../lib/content";
+import { faqFor, FACTS, fmtDate, DISCLAIMER, Sources, type Stage } from "../lib/content";
+import Calls from "./Calls.astro";
 import { c } from "../lib/copy";
 
 interface Props { lang: Lang; ed: EdCode; }
 const { lang, ed } = Astro.props;
 const talk = pathFor(lang, ed, "talk");
 
+// Sources as superscripts (prompt 11): one numbered list for the whole page, at the bottom.
+const src = new Sources();
+// Practice questions also offer the two calls with the partner agency (prompt 11, D19).
+const PRACTICE = ["find", "timing", "cpcv", "buy-abroad"];
 const items = faqFor(ed, lang).map((it) => {
   const facts = (it.facts || []).map((id) => FACTS[id]);
   const checked = facts.map((f) => f.checked_on).sort().pop();
-  // One link per source page; when several facts cite the same page, name the document, not one article.
-  const byUrl = new Map<string, { url: string; title: string }>();
-  for (const f of facts) {
-    const seen = byUrl.get(f.source_url);
-    if (seen) seen.title = f.source_title.split(",")[0];
-    else byUrl.set(f.source_url, { url: f.source_url, title: f.source_title });
-  }
+  const nums = [...new Set((it.facts || []).map((id) => src.n(id)))];
   let next: { href: string; label: string; who: string };
-  if (it.cta === "agency") next = { href: pathFor(lang, ed, "buy"), label: c("faq.cta.agency", lang), who: `${config.agency.name} · ${c("common.sponsored", lang)}` };
+  if (it.cta === "agency") next = { href: pathFor(lang, ed, "buy"), label: c("faq.cta.agency", lang), who: `${config.agency.name} · ${c("common.gold", lang)}` };
   else if (config.partners[it.cta]) next = { href: `${talk}?cat=${it.cta}#form`, label: c(`faq.cta.${it.cta}`, lang), who: `${config.partners[it.cta]} · ${c("common.sponsored", lang)}` };
   else next = { href: `${talk}?cat=${it.cta}#form`, label: c("common.nav.talk", lang), who: c(`faq.who.${it.cta}`, lang) };
-  return { ...it, next, sources: [...byUrl.values()], checked };
+  const practice = PRACTICE.some((k) => it.id.endsWith(`-${k}`));
+  return { ...it, next, nums, checked, practice };
 });
 const stages: Stage[] = ["before", "buying", "after"];
 const lastChecked = items.map((i) => i.checked).filter(Boolean).sort().pop();
@@ -63,19 +63,23 @@ const jsonLd = {
           <details class="qa" id={it.id}>
             <summary>{it.q}</summary>
             <div class="a">
-              <p>{it.a}</p>
-              {it.sources.length > 0 && (
-                <p class="src">{c("common.sources", lang)}: {it.sources.map((f, i) => (<>{i > 0 && "; "}<a href={f.url} rel="noopener">{f.title}</a></>))}{it.checked && `. ${c("common.checked", lang, { date: fmtDate(lang, it.checked) })}.`}</p>
-              )}
+              <p>{it.a}{it.nums.map((n) => <a class="sup" href={`#fonte-${n}`}>{n}</a>)}</p>
               <div class="next">
                 <a class="btn sm" href={it.next.href}>{it.next.label}</a>
                 <span class="who">{it.next.who}</span>
               </div>
+              {it.practice && <Calls lang={lang} ed={ed} compact />}
             </div>
           </details>
         ))}
       </section>
     ))}
+    <section class="sources-list" aria-labelledby="fontes">
+      <h2 id="fontes" class="h-small">{c("common.sources", lang)}</h2>
+      <ol>
+        {src.list.map((f, i) => <li id={`fonte-${i + 1}`}><a href={f.url} rel="noopener">{f.title}</a>{f.checked && `, ${c("common.checked", lang, { date: fmtDate(lang, f.checked) })}`}.</li>)}
+      </ol>
+    </section>
     <p class="disc">{DISCLAIMER[lang]}</p>
   </div>
   <script is:inline>

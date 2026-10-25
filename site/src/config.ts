@@ -17,6 +17,14 @@ export const config = {
   // Cal.com booking link for 15-minute sponsor calls.
   bookingUrl: "",
 
+  // Calls with the partner agency (D19), Cal.com event links once the operator creates them (task 8r).
+  // Empty = the button opens an email to the brand mailbox instead; never a broken link (prompt 11).
+  calls: { intro: "", plan: "" },
+
+  // A real listing from the partner agency, with its permission (prompt 11, home "Esta semana").
+  // null = the home shows a worked example with real tax figures instead.
+  listing: null as null | { title: Record<string, string>; place: string; price: number; url: string; photo: string },
+
   // Form embeds per language (D18): Tally form IDs (e.g. "w4Xyz1") or a full embed URL (beehiiv
   // newsletter embeds are full URLs). Every form gets a hidden "edition" field from the page.
   forms: {

@@ -201,10 +201,10 @@
   cta: agency
   q: "Podem encontrar-me uma casa?"
   a: >-
-    Sim. Diga-nos a região, o orçamento e quando quer comprar, num formulário de dois minutos. O pedido
-    segue para a nossa agência parceira licenciada, a Habinedita Gondomar, que o contacta sem custos para
-    si. Pode também marcar visitas para quando estiver em Portugal, para ver várias casas na mesma viagem.
-    Não paga nada por este contacto.
+    Sim. Diga-nos a região, o orçamento e o prazo, num formulário de dois minutos. O pedido segue para a
+    nossa agência parceira licenciada, a Habinedita Gondomar, que o contacta sem custos para si. Pode
+    ver as casas como lhe for mais prático: por videochamada, através de um familiar ou de alguém da sua
+    confiança, ou ao vivo quando vier a Portugal. E pode comprar sem estar cá, por procuração.
   facts: []
 
 - id: pt-inherit

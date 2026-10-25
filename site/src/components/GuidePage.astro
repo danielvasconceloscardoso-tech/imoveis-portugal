@@ -20,7 +20,6 @@ const file = EBOOK.file(lang, ed);
   <section class="hero">
     <div class="frame grid">
       <div>
-        <p class="label">{c("guide.label", lang)}</p>
         <h1>{title}</h1>
         <p class="lede">{c("guide.lede", lang, { n: PAGES })}</p>
         <a class="btn" href={file} download data-primary>{c("guide.download", lang)}</a>
@@ -31,14 +30,14 @@ const file = EBOOK.file(lang, ed);
   <section class="band white" aria-labelledby="inside">
     <div class="frame split">
       <div><h2 id="inside">{c("guide.inside.h", lang)}</h2></div>
-      <ul class="ticks">{cl("guide.inside", lang, { country: COUNTRIES[ed].h[lang] }).map((i) => <li>{i}</li>)}</ul>
+      <ul class="list">{cl("guide.inside", lang, { country: COUNTRIES[ed].h[lang] }).map((i) => <li>{i}</li>)}</ul>
     </div>
   </section>
   <section class="band" aria-labelledby="signup">
     <div class="frame read">
       <h2 id="signup">{c("guide.signup.h", lang)}</h2>
       <div style="margin-top:16px">
-        <Embed id={config.forms.newsletter[lang]} title={c("guide.signup.h", lang)} pending={c("common.form.pending", lang)} hidden={{ edition: ed, lang }} height={200} />
+        <Embed id={config.forms.newsletter[lang]} title={c("guide.signup.h", lang)} cta={c("home.subscribe", lang)} subject={c("home.subscribe.subject", lang)} hidden={{ edition: ed, lang }} height={200} />
       </div>
       <p class="small" style="margin-top:12px"><a href={pathFor(lang, ed, "privacy")}>{c("common.privacy", lang)}</a></p>
       <p class="disc">{DISCLAIMER[lang]}</p>

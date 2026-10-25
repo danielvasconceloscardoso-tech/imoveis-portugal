@@ -30,6 +30,10 @@ const BANNED = [/paraíso/i, /paradis\b/i, /oportunidade única/i, /opportunité
 const ADVICE = [/\bvocê deveria\b/i, /\bdeve(?:rá)? comprar\b/i, /\brecomendamos\b/i, /\baconselhamos\b/i,
   /\bvous devriez\b/i, /\bnous (?:vous )?(?:recommandons|conseillons)\b/i, /\byou should\b/i, /\bwe recommend\b/i,
   /\bwe advise\b/i];
+// Prompt 11 (content/VOICE.md, "Words and shapes that read as AI"): banned words in all three languages, and no em-dash.
+const SLOP = [/\bdescubr[ae]\b/i, /\bexplor[ae]\b/i, /\bjornada\b/i, /sem complica[çc][õo]es/i, /tudo o que precisa/i,
+  /parceiro de confian[çc]a/i, /\bsimplificamos\b/i, /\bseamless(ly)?\b/i, /\bunlock\b/i, /partenaire de confiance/i,
+  /\bdécouvrez\b/i, /\bexplorez\b/i, /\bdiscover\b/i, /\bjourney\b/i, /hassle[- ]free/i, /sans tracas/i, /—/];
 
 // Facts base
 const factIds = new Set(
@@ -60,6 +64,7 @@ function checkText(file, label, text) {
   if (/\[check/i.test(text)) err(file, `${label}: open [check]`);
   for (const re of BANNED) if (re.test(text)) err(file, `${label}: banned wording ${re}`);
   for (const re of ADVICE) if (re.test(text)) err(file, `${label}: advice wording ${re} (describe, do not advise)`);
+  for (const re of SLOP) if (re.test(text)) err(file, `${label}: AI wording ${re} (VOICE.md)`);
 }
 
 const faqCount = {};
@@ -124,9 +129,17 @@ for (const ed of EDITIONS) for (const l of ["pt", "en", "fr"]) {
 }
 // The copy deck (content/copy/COPY_DECK.md, prompt 10): every site text, same wording rules.
 const deck = join(root, "content/copy/COPY_DECK.md");
+// Headings (blocks named h, h1, title or ending in .h): no rhetorical question, no tagline built on a colon.
+let deckBlock = "";
 if (existsSync(deck)) readFileSync(deck, "utf8").split("\n").forEach((line, i) => {
+  if (line.startsWith("### ")) deckBlock = line.slice(4).trim();
   const m = line.match(/^- (PT|EN|FR): (.*)$/);
-  if (m) checkText(deck, `line ${i + 1}`, m[2]);
+  if (!m) return;
+  checkText(deck, `line ${i + 1}`, m[2]);
+  if (/(^|\.)(h|h1|title)$/.test(deckBlock)) {
+    if (/\?\s*$/.test(m[2])) err(deck, `line ${i + 1} (${deckBlock}): heading is a question (VOICE.md)`);
+    if (/\S:\s/.test(m[2])) err(deck, `line ${i + 1} (${deckBlock}): tagline built on a colon (VOICE.md)`);
+  }
 });
 console.log(`checked ${faqs} FAQ files and ${pieces} inbox pieces against ${factIds.size} facts`);
 if (errors.length) {

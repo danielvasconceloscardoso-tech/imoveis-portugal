@@ -202,10 +202,10 @@
   cta: agency
   q: "Pouvez-vous me trouver un bien ?"
   a: >-
-    Oui. Indiquez la région, le budget et votre calendrier dans un formulaire de deux minutes. Votre demande
-    part chez notre agence partenaire agréée, Habinedita Gondomar, qui vous contacte sans frais. Elle peut
-    aussi organiser des visites pendant votre séjour au Portugal, pour voir plusieurs biens en un seul
-    voyage. Ce contact ne vous coûte rien.
+    Oui. Indiquez la région, le budget et votre calendrier dans un formulaire de deux minutes. Votre
+    demande part chez notre agence partenaire agréée, Habinedita Gondomar, qui vous contacte sans frais.
+    Vous visitez comme cela vous arrange : en appel vidéo, par un membre de la famille ou une personne
+    de confiance, ou sur place lors d'un séjour au Portugal. Vous pouvez aussi acheter à distance, par procuration.
   facts: []
 
 - id: fr-inherit

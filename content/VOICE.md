@@ -31,3 +31,19 @@ Target feeling: reliable, trustworthy, and "I want to belong to this".
 PT: a sua casa, lá fora, de volta, com calma, contas feitas, a fonte, verificado.
 EN: your home in Portugal, from abroad, step by step, the numbers, the source, checked.
 FR : votre maison au Portugal, depuis l'étranger, pas à pas, les chiffres, la source, vérifié.
+
+## Words and shapes that read as AI (prompt 11)
+
+`scripts/check-content.mjs` rejects these in the copy deck, the FAQ and the weekly batch.
+
+1. Banned words, in all three languages: "descubra", "explore", "jornada", "sem complicações", "tudo o que precisa", "parceiro de confiança", "simplificamos", "seamless", "unlock", "votre partenaire de confiance", and their siblings "découvrez", "explorez", "discover", "journey", "hassle-free", "sans tracas".
+2. No em-dash. Use a full stop or a comma.
+3. Headings are statements, never rhetorical questions ("Como podemos ajudar?" is out). FAQ questions are the exception: they are the reader's own words.
+4. No tagline built on a colon ("Exemplo: as fontes…"). No list of three adjectives.
+5. No label above a heading, no "three numbers" or "three steps" block, no cards with "Abrir →".
+
+## Write like someone from the community
+
+1. Use details people recognise: the August holidays, the house back home, the flight to Porto, the parents' house, the franc and the real, the procuração signed at the consulate.
+2. Every claim is specific: a place, a price, a date, a number, and its source.
+3. Prices in the reader's currency next to euros where it helps (CHF, R$, $, ₪), with the ECB reference rate and its date.

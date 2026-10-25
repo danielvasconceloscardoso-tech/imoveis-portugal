@@ -1,7 +1,7 @@
 ---
 // Layout for every page, in pt, en and fr (D18). Wording: content/copy/COPY_DECK.md.
 // Mobile first (prompt 10): compact header with the language switch, one sticky action at the bottom of
-// the screen on phones, trust strip before the footer. noindex until launch, canonical and hreflang.
+// the screen on phones. Prompt 11: one trust line, in the footer (no repeated trust bar). noindex until launch, canonical and hreflang.
 import "../styles/v2.css";
 import serif from "@fontsource-variable/newsreader/files/newsreader-latin-opsz-normal.woff2?url";
 import { config } from "../config";
@@ -82,27 +82,11 @@ const sticky: Sticky = Astro.props.sticky !== undefined ? Astro.props.sticky
     <main id="main">
       <slot />
     </main>
-    <aside class="trust" aria-label={c("common.nav.how", lang)}>
-      <div class="frame">
-        <ul>
-          {[1, 2, 3].map((i) => (
-            <li>
-              {i === 1 && <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 10.5 12 4l9 6.5V20H3z"/><path d="M9.5 20v-5h5v5"/></svg>}
-              {i === 2 && <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 3h9l3 3v15H6z"/><path d="M9 11h6M9 15h6"/></svg>}
-              {i === 3 && <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.4 8.2 8 9 4.6-.8 8-4.5 8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg>}
-              <span>
-                <b>{i === 1 ? <a href={config.agency.website} rel="noopener" style="color:inherit">{c(`common.trust.${i}.h`, lang)}</a> : c(`common.trust.${i}.h`, lang)}</b>
-                {c(`common.trust.${i}.p`, lang)}
-              </span>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </aside>
     <footer class="ft">
       <div class="frame">
         <a class="word" href={pathFor(lang, ed, "home")}>Imóveis Portugal</a>
         <p class="tagline">{c("common.foot.tagline", lang)}</p>
+        <p class="ft-trust">{c("common.trust.2.p", lang)} {c("common.trust.3.p", lang)} <a href={pathFor(lang, ed, "partners")}>{c("common.partners.line", lang)}</a></p>
         <div class="cols">
           <p class="small disc-ft">{DISCLAIMER[lang]}</p>
           <div>
@@ -124,7 +108,7 @@ const sticky: Sticky = Astro.props.sticky !== undefined ? Astro.props.sticky
             <ul>{LANGS.map((l) => <li><a href={pathFor(l, ed, page)} data-lang={l} lang={HTML_LANG[l]}>{LANG_NAME[l]}</a></li>)}</ul>
           </div>
         </div>
-        <p class="legal">{c("common.foot.agency", lang)}: <a href={config.agency.website} rel="noopener">{config.agency.name}</a>, AMI {config.agency.ami}. © 2026 Imóveis Portugal.</p>
+        <p class="legal">{c("common.foot.agency", lang)}: <a href={config.agency.website} rel="noopener">{config.agency.name}</a>, AMI {config.agency.ami}, {c("common.gold", lang)}. © 2026 Imóveis Portugal.</p>
       </div>
     </footer>
     {sticky && <div class="sticky" id="sticky"><a class="btn" href={sticky.href}>{sticky.label}</a></div>}

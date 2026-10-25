@@ -64,18 +64,38 @@ export const fmtDate = (lang: Lang, iso: string) =>
 // ---------- free e-book, one per edition (site/ebooks, built by `npm run ebooks`) ----------
 export const EBOOK = { file: (lang: Lang, ed: EdCode) => `/ebooks/imoveis-portugal-guia-custos-${ed}-${lang}.pdf` };
 
-// ---------- home figures: the edition's own figure, then two from facts.csv (wording in the copy deck) ----------
-export type Figure = { big: string; text: string; source: string; url: string; checked?: string };
-const FIG: Record<string, { id: string; big: Record<Lang, string> }> = {
-  nonres: { id: "pt-imt-nonresident-flat", big: { pt: "7,5%", en: "7.5%", fr: "7,5 %" } },
-  stamp: { id: "pt-is-purchase", big: { pt: "0,8%", en: "0.8%", fr: "0,8 %" } },
-  ltv: { id: "pt-ltv-limits", big: { pt: "80%", en: "80%", fr: "80 %" } },
-};
-export function homeFigures(ed: EdCode, lang: Lang): Figure[] {
-  const own = EDITIONS[ed].fact;
-  const picks = ed === "il" ? ["stamp", "ltv"] : ["nonres", "ltv"];
-  return [
-    { big: own.big[lang], text: c(`editions.fact.${ed}`, lang), source: own.source[lang], url: own.url },
-    ...picks.map((k) => ({ big: FIG[k].big[lang], text: c(`home.fig.${k}`, lang), source: FACTS[FIG[k].id].source_title, url: FACTS[FIG[k].id].source_url, checked: FACTS[FIG[k].id].checked_on })),
-  ];
+// ---------- facts used on the edition home (prompt 11), listed with their sources on "How we work" ----------
+export function homeFacts(ed: EdCode): Fact[] {
+  const emigrant = ed === "lu" || ed === "fr" || ed === "ch";
+  const ids = ["pt-imt-nonresident-flat", "pt-is-purchase", "pt-casa-pronta-fees", "pt-poa-apostille", "pt-ltv-limits",
+    ...(emigrant ? ["pt-is-inheritance-exempt"] : ["pt-ari-realestate-ended", "pt-visa-own-income"])];
+  const cur = EDITION_CUR[ed];
+  if (cur) ids.push(`ecb-eur-${cur.toLowerCase()}`);
+  return ids.map((id) => FACTS[id]);
+}
+
+// ---------- sources as superscripts (prompt 11): one numbered list at the bottom of the page ----------
+export class Sources {
+  list: { url: string; title: string; checked?: string }[] = [];
+  /** Number for a fact id (or a raw source), adding it to the page list once. */
+  n(id: string): number {
+    const f = FACTS[id];
+    if (!f) throw new Error(`unknown fact ${id}`);
+    return this.raw(f.source_url, f.source_title, f.checked_on);
+  }
+  raw(url: string, title: string, checked?: string): number {
+    const i = this.list.findIndex((s) => s.url === url);
+    if (i >= 0) return i + 1;
+    this.list.push({ url, title, checked });
+    return this.list.length;
+  }
+}
+
+// ---------- the home example: a 245 000 € home bought by a non-resident (prompt 11) ----------
+export const RATE = (cur: "CHF" | "USD" | "BRL" | "ILS") => ({ rate: Number(FACTS[`ecb-eur-${cur.toLowerCase()}`].value), id: `ecb-eur-${cur.toLowerCase()}` });
+export const EDITION_CUR: Partial<Record<EdCode, "CHF" | "USD" | "BRL" | "ILS">> = { ch: "CHF", us: "USD", br: "BRL", il: "ILS" };
+export function homeExample(price = 245000) {
+  const imt = price * 0.075, is = price * 0.008, deed = 375; // pt-imt-nonresident-flat, pt-is-purchase, pt-casa-pronta-fees
+  for (const [id, s] of [["pt-imt-nonresident-flat", "7.5%"], ["pt-is-purchase", "0.8%"], ["pt-casa-pronta-fees", "375"]]) if (!FACTS[id].value.includes(s)) throw new Error(`${id} changed`);
+  return { price, imt, is, deed, extra: imt + is + deed, total: price + imt + is + deed };
 }
