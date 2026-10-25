@@ -8,7 +8,7 @@ export type ToolKey = "cost" | "payment" | "rent" | "imt" | "imi" | "dsti" | "af
 export const TOOLS: ToolKey[] = ["cost", "payment", "afford", "rent", "imt", "imi", "dsti", "gains"];
 // Calculators with a page (prompt 12: cost, payment, rent; prompt 13: the other five).
 export const ENABLED: ToolKey[] = TOOLS;
-export const SUB: Record<ToolKey | "plan" | "checkout", Record<Lang, string>> = {
+export const SUB: Record<ToolKey, Record<Lang, string>> = {
   cost: { pt: "custo-total", en: "total-cost", fr: "cout-total" },
   payment: { pt: "prestacao", en: "monthly-payment", fr: "mensualite" },
   rent: { pt: "arrendamento", en: "rental-yield", fr: "rendement-locatif" },
@@ -17,8 +17,6 @@ export const SUB: Record<ToolKey | "plan" | "checkout", Record<Lang, string>> = 
   dsti: { pt: "taxa-de-esforco", en: "debt-to-income", fr: "taux-d-endettement" },
   afford: { pt: "que-casa-consigo-comprar", en: "what-can-i-afford", fr: "quel-bien-puis-je-acheter" },
   gains: { pt: "mais-valias", en: "capital-gains", fr: "plus-values" },
-  plan: { pt: "plano-de-compra", en: "purchase-plan", fr: "plan-d-achat" },
-  checkout: { pt: "comprar-plano", en: "buy-plan", fr: "acheter-plan" },
 };
 
 export type Field = { id: string; kind: "money" | "local" | "num" | "pct" | "bool"; def: number | boolean; step?: number; hint?: string };

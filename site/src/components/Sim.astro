@@ -103,7 +103,7 @@ const fieldLabel = (id: string, kind: string) => {
       ))}
       {next === "tax" && (<><p>{c("sims.tax.p", lang)}</p><a class="btn" href={`${talk}?cat=tax#form`}>{c("faq.cta.tax", lang)}</a></>)}
       {next === "agency" && (<><p>{c("sims.agency.p", lang)}</p><a class="btn" href={pathFor(lang, ed, "buy")}>{c("faq.cta.agency", lang)}</a><Calls lang={lang} ed={ed} compact /></>)}
-      {config.plan.live && <p style="margin-top:20px"><a class="more" id="plan-link" href={`${base}${SUB.checkout[lang]}/`}>{c("sims.plan.cta", lang)}</a></p>}
+      <p style="margin-top:20px"><a class="more" href={pathFor(lang, ed, "dossiers")}>{c("consult.later.dossier", lang)}</a></p>
     </section>
 
     {has(`sims.${tool}.note`) && <p class="small sim-note">{c(`sims.${tool}.note`, lang)}</p>}

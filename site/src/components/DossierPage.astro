@@ -1,0 +1,61 @@
+---
+// The dossiers (prompt 21 §3, D39): information products built from facts.csv and INE data by dossiers/build.ts.
+// Without `type`: the three dossiers. With `type`: the order page (inputs, price with VAT, the express consent that
+// waives the 14-day withdrawal right for immediate delivery, DL 24/2014 art. 17.º) with the buy button off until
+// the billing entity exists (D4, config.dossiers.live). No mortgage report: credit analysis stays with the
+// registered credit intermediary (DL 81-C/2017). Wording: COPY_DECK.md "dossier.*".
+import V2 from "../layouts/V2.astro";
+import { config } from "../config";
+import { LANGS, pathFor, eur, type Lang, type EdCode } from "../i18n";
+import { DTYPES, DOSSIER_SUB, SAMPLE, type DType } from "../lib/dossiers";
+import { PRICES, LAST } from "../lib/prices";
+import { c, edName } from "../lib/copy";
+
+interface Props { lang: Lang; ed: EdCode; type?: DType; }
+const { lang, ed, type } = Astro.props;
+const base = pathFor(lang, ed, "dossiers");
+const paths = type ? (Object.fromEntries(LANGS.map((l) => [l, `${pathFor(l, ed, "dossiers")}${DOSSIER_SUB[type][l]}/`])) as Record<Lang, string>) : undefined;
+const price = (t: DType) => c("dossier.price", lang, { price: eur(config.dossiers.prices[t], lang) });
+const areas = Object.entries(PRICES.munis).filter(([, m]) => m.m2[LAST]).map(([s, m]) => ({ s, n: m.n })).sort((a, b) => a.n.localeCompare(b.n, "pt"));
+const live = config.dossiers.live;
+---
+<V2 lang={lang} ed={ed} page="dossiers" paths={paths} noindex={!!type} title={`${type ? c(`dossier.${type}.h`, lang) : c("dossier.title", lang)} | Imóveis Portugal · ${edName(ed, lang)}`} description={c("dossier.lede", lang)} sticky={null}>
+  <div class="frame read ph">
+    <p class="h-small">{c("dossier.title", lang)}</p>
+    <h1>{type ? c(`dossier.${type}.h`, lang) : c("dossier.h1", lang)}</h1>
+    <p class="lede">{type ? c(`dossier.${type}.p`, lang) : c("dossier.lede", lang)}</p>
+  </div>
+  <div class="frame read dossiers">
+    {!type && (
+      <ul class="dlist">{DTYPES.map((t) => (
+        <li>
+          <h2 class="h3">{c(`dossier.${t}.h`, lang)}</h2>
+          <p>{c(`dossier.${t}.p`, lang)}</p>
+          <p class="dprice">{price(t)}</p>
+          <p class="dacts"><a class="btn ghost sm" href={`${base}${DOSSIER_SUB[t][lang]}/`}>{c("dossier.order", lang)}</a> <a class="more" href={SAMPLE(t)}>{c("dossier.sample", lang)}</a></p>
+        </li>
+      ))}</ul>
+    )}
+    {type && (
+      <form class="dorder" onsubmit="return false">
+        <h2 class="h3">{c("dossier.form.h", lang)}</h2>
+        <p class="small">{c("common.country.live", lang)}: <strong>{c(`common.country.${ed}`, lang)}</strong></p>
+        <label class="field"><span>{c("dossier.form.budget", lang)}</span><input type="text" inputmode="numeric" name="budget" value={type === "private" ? "3 000 000" : "450 000"} /></label>
+        <label class="field"><span>{c("dossier.form.area", lang)}</span><select name="area">{areas.map((a) => <option value={a.s} selected={a.s === (type === "private" ? "cascais" : "porto")}>{a.n}</option>)}</select></label>
+        {type !== "zona" && (
+          <fieldset class="field"><legend>{c("dossier.form.purpose", lang)}</legend>
+            {(["own", "holiday", "rental"] as const).map((k, i) => <label class="choice"><input type="radio" name="purpose" value={k} checked={i === 1} /> <span>{c(`dossier.form.${k}`, lang)}</span></label>)}
+          </fieldset>
+        )}
+        <p class="dprice">{price(type)}</p>
+        <p class="small">{c("dossier.vat", lang)}</p>
+        <label class="consent"><input type="checkbox" name="consent" /> <span>{c("dossier.consent", lang)}</span></label>
+        {live && config.dossiers.stripe[type]
+          ? <a class="btn" href={config.dossiers.stripe[type]} rel="noopener">{c("dossier.order", lang)}</a>
+          : <><button type="button" class="btn" disabled aria-disabled="true">{c("dossier.soon", lang)}</button><p class="small">{c("dossier.soon.p", lang)} <a href={SAMPLE(type)}>{c("dossier.sample", lang)}</a></p></>}
+        <p class="small">{c("dossier.info", lang)}</p>
+      </form>
+    )}
+    <div style="height:56px"></div>
+  </div>
+</V2>

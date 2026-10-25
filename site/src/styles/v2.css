@@ -653,3 +653,12 @@ a.brass { color: var(--brass); }
 .prices-home .read { margin: 0 0 12px; }
 .pc-legend .k0 { color: #16181c; } .pc-legend .k1 { color: #1f4a3d; } .pc-legend .k2 { color: #7a5e28; }
 .pc-chart { max-width: 760px; }
+/* Dossiers (prompt 21 §3) */
+.dlist { list-style: none; padding: 0; margin: 0; }
+.dlist li { padding: 28px 0; border-top: 1px solid var(--rule); }
+.dlist li:last-child { border-bottom: 1px solid var(--rule); }
+.dprice { font: 400 1.6rem/1.2 var(--serif); margin: 12px 0 6px; }
+.dacts { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; }
+.dorder { display: grid; gap: 14px; }
+.dorder select, .dorder input[type=text] { min-height: 46px; padding: 0 12px; border: 1px solid var(--rule); border-radius: 2px; background: var(--card); font: 400 16px var(--sans); color: var(--ink); width: 100%; }
+.dorder .btn[disabled] { opacity: .55; cursor: not-allowed; }

@@ -14,7 +14,7 @@ export function lineChart(quarters: string[], series: Series[], o: { w?: number;
   const years = quarters.map((q, i) => [q, i] as const).filter(([q]) => q.endsWith("Q1") && Number(q.slice(0, 4)) % 2 === 0);
   let s = `<svg viewBox="0 0 ${w} ${h}" class="lchart" role="img" aria-label="${series.map((x) => x.label).join(", ")}">`;
   s += `<line x1="${pl}" x2="${w - pr}" y1="${h - pb}" y2="${h - pb}" stroke="#dcd4c4" stroke-width="1"/>`;
-  for (const [q, i] of years) s += `<text x="${x(i)}" y="${h - 8}" font-size="13" fill="#5d6066" text-anchor="middle">${q.slice(0, 4)}</text>`;
+  for (const [q, i] of years) s += `<text x="${x(i)}" y="${h - 8}" font-size="13" fill="#5d6066" text-anchor="${i === 0 ? "start" : "middle"}">${q.slice(0, 4)}</text>`;
   if (o.breakAt) { const bi = quarters.indexOf(o.breakAt); if (bi > 0) s += `<line x1="${x(bi)}" x2="${x(bi)}" y1="${pt}" y2="${h - pb}" stroke="#dcd4c4" stroke-dasharray="3 4"/><text x="${x(bi) + 6}" y="${pt + 10}" font-size="12.5" fill="#5d6066">${o.breakLabel ?? ""}</text>`; }
   series.forEach((sr, si) => {
     let d = "", pen = false, last: [number, number] | null = null;

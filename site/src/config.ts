@@ -41,7 +41,9 @@ export const config = {
 
   // Paid "Plano de compra" report, 5,99 € (D22). Stays off until the billing entity (D4), OSS VAT and the
   // Stripe Payment Link exist: while false, no page links to the checkout and its button is disabled.
-  plan: { live: false, price: 5.99, stripeLink: "" },
+  // Paid dossiers (prompt 21 §3, D39). Buy buttons stay off until the billing entity (D4), OSS VAT and invoicing
+  // exist; then live: true and one Stripe Payment Link per dossier. Prices in euros, VAT included.
+  dossiers: { live: false, prices: { compra: 190, zona: 90, private: 950 }, stripe: { compra: "", zona: "", private: "" } },
 
   // Form embeds per language (D18): Tally form IDs (e.g. "w4Xyz1") or a full embed URL (beehiiv
   // newsletter embeds are full URLs). Every form gets a hidden "edition" field from the page.

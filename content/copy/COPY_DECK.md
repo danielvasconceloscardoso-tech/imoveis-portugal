@@ -10,6 +10,11 @@ How to edit:
 
 ## common
 
+### nav.dossiers
+- PT: Dossiês
+- EN: Dossiers
+- FR: Dossiers
+
 ### nav.consult
 - PT: Consulta privada
 - EN: Private consultation
@@ -2134,310 +2139,6 @@ How to edit:
 - EN: Non-residents pay 25% on net income from residential lettings, with reductions for leases of five years or more. The country where you live may also tax this income.
 - FR: Les non-résidents paient 25 % sur le revenu net de la location d'habitation, avec des réductions pour les baux de cinq ans ou plus. Votre pays de résidence peut aussi imposer ce revenu.
 
-## plan
-
-### title
-- PT: Plano de compra
-- EN: Purchase plan
-- FR: Plan d'achat
-
-### sub
-- PT: O seu plano para comprar casa em Portugal a partir de {country}, com as regras de 2026 e a fonte de cada número.
-- EN: Your plan to buy a home in Portugal from {country}, under the 2026 rules, with the source of every figure.
-- FR: Votre plan pour acheter au Portugal depuis {country}, selon les règles de 2026, avec la source de chaque chiffre.
-
-### made
-- PT: Preparado a {date}
-- EN: Prepared on {date}
-- FR: Préparé le {date}
-
-### sample
-- PT: Exemplo com valores de demonstração. O plano comprado usa os valores do seu simulador.
-- EN: Example with sample figures. The plan you buy uses the figures from your calculator.
-- FR: Exemple avec des valeurs de démonstration. Le plan acheté reprend les valeurs de votre simulateur.
-
-### print
-- PT: Guardar em PDF
-- EN: Save as PDF
-- FR: Enregistrer en PDF
-
-### inputs.h
-- PT: Os seus dados
-- EN: Your figures
-- FR: Vos chiffres
-
-### s1.h
-- PT: 1. Quanto custa no total
-- EN: 1. What it costs in total
-- FR: 1. Combien cela coûte au total
-
-### s2.h
-- PT: 2. Três cenários de crédito
-- EN: 2. Three mortgage scenarios
-- FR: 2. Trois scénarios de crédit
-
-### s2.p
-- PT: A mesma entrada e o mesmo prazo, com a taxa média atual e com mais um e mais dois pontos, para ver a margem que tem se as taxas subirem.
-- EN: Same deposit and term, at today's average rate and at one and two points higher, to see how much room you have if rates rise.
-- FR: Même apport et même durée, au taux moyen actuel puis à un et deux points de plus, pour mesurer votre marge si les taux montent.
-
-### s2.col.rate
-- PT: Taxa
-- EN: Rate
-- FR: Taux
-
-### s2.col.monthly
-- PT: Prestação
-- EN: Monthly
-- FR: Mensualité
-
-### s2.col.interest
-- PT: Juros totais
-- EN: Total interest
-- FR: Intérêts totaux
-
-### s2.col.income
-- PT: Rendimento líquido mínimo
-- EN: Minimum net income
-- FR: Revenu net minimum
-
-### s2.note
-- PT: Rendimento líquido mínimo = prestação ÷ 45%, o limite do Banco de Portugal para todas as prestações. Sem outros créditos.
-- EN: Minimum net income = payment ÷ 45%, Banco de Portugal's limit for all loan payments. Assumes no other loans.
-- FR: Revenu net minimum = mensualité ÷ 45 %, la limite du Banco de Portugal pour l'ensemble des mensualités. Sans autre crédit.
-
-### s3.h
-- PT: 3. Se arrendar a casa
-- EN: 3. If you let the home
-- FR: 3. Si vous louez le bien
-
-### s3.none
-- PT: Não indicou renda. Com o simulador de arrendamento pode juntar este capítulo.
-- EN: You did not enter a rent. The rental calculator adds this chapter.
-- FR: Vous n'avez pas indiqué de loyer. Le simulateur de location ajoute ce chapitre.
-
-### s4.h
-- PT: 4. Impostos a confirmar onde vive
-- EN: 4. Tax points to check where you live
-- FR: 4. Points fiscaux à vérifier dans votre pays
-
-### s5.h
-- PT: 5. Documentos
-- EN: 5. Documents
-- FR: 5. Documents
-
-### s6.h
-- PT: 6. Os passos, a partir de fora
-- EN: 6. The steps, from abroad
-- FR: 6. Les étapes, depuis l'étranger
-
-### s7.h
-- PT: 7. Quem o pode ajudar
-- EN: 7. Who can help
-- FR: 7. Qui peut vous aider
-
-### s7.p
-- PT: Uma primeira conversa de 15 minutos com a {agency}, grátis. Para o crédito, um intermediário de crédito registado no Banco de Portugal. Para a escritura e a procuração, um advogado.
-- EN: A free 15-minute first call with {agency}. For the mortgage, a credit intermediary registered with Banco de Portugal. For the deed and the power of attorney, a lawyer.
-- FR: Un premier échange gratuit de 15 minutes avec {agency}. Pour le crédit, un intermédiaire de crédit enregistré auprès du Banco de Portugal. Pour l'acte et la procuration, un avocat.
-
-### tax.pt.1
-- PT: Em Portugal: o NIF obtém-se à distância através de um representante; ao comprar, passa a ter de nomear um representante fiscal ou aderir às notificações eletrónicas (obrigatório fora da UE e do EEE).
-- EN: In Portugal: you can get a NIF remotely through a representative; once you own property, you must appoint a tax representative or sign up for electronic notifications (mandatory outside the EU and EEA).
-- FR: Au Portugal : le NIF s'obtient à distance par un représentant ; une fois propriétaire, vous devez nommer un représentant fiscal ou adhérer aux notifications électroniques (obligatoire hors UE et EEE).
-
-### tax.pt.2
-- PT: Em Portugal: IMI todos os anos, de 0,3% a 0,45% do valor patrimonial, e AIMI acima de 600 000 € de valor patrimonial por pessoa.
-- EN: In Portugal: IMI every year, 0.3% to 0.45% of the tax value, and AIMI above €600,000 of tax value per person.
-- FR: Au Portugal : l'IMI chaque année, de 0,3 % à 0,45 % de la valeur fiscale, et l'AIMI au-delà de 600 000 € de valeur fiscale par personne.
-
-### tax.lu.1
-- PT: Luxemburgo: o rendimento de uma casa em Portugal pode ser tributado em Portugal; o Luxemburgo isenta-o mas pode usá-lo para calcular a taxa sobre o resto do rendimento.
-- EN: Luxembourg: income from a home in Portugal may be taxed in Portugal; Luxembourg exempts it but may use it to set the rate on the rest of your income.
-- FR: Luxembourg : les revenus d'un bien au Portugal peuvent être imposés au Portugal ; le Luxembourg les exonère mais peut en tenir compte pour le taux appliqué au reste de vos revenus.
-
-### tax.fr.1
-- PT: França: as contas bancárias abertas fora de França, incluindo em Portugal, declaram-se todos os anos (formulário 3916).
-- EN: France: bank accounts opened outside France, including in Portugal, are declared every year (form 3916).
-- FR: France : les comptes bancaires ouverts hors de France, y compris au Portugal, se déclarent chaque année (formulaire 3916).
-
-### tax.ch.1
-- PT: Suíça: o 2.º pilar pode ser levantado antecipadamente para a habitação principal, também no estrangeiro, mas não para uma segunda casa (mínimo 20 000 CHF).
-- EN: Switzerland: 2nd-pillar money can be withdrawn early for your main home, also abroad, but not for a second home (minimum CHF 20,000).
-- FR: Suisse : le 2e pilier peut être retiré de manière anticipée pour la résidence principale, aussi à l'étranger, mais pas pour une résidence secondaire (minimum 20 000 CHF).
-
-### tax.ch.2
-- PT: Suíça: o pilar 3a também pode ser usado para a casa própria.
-- EN: Switzerland: pillar 3a money can also be used for your own home.
-- FR: Suisse : le pilier 3a peut aussi servir pour votre propre logement.
-
-### tax.br.1
-- PT: Brasil: a casa em Portugal declara-se em Bens e Direitos do IRPF, com o valor de compra em moeda estrangeira.
-- EN: Brazil: the home in Portugal is declared under Bens e Direitos in the IRPF, with the purchase value in foreign currency.
-- FR: Brésil : le bien au Portugal se déclare dans les Bens e Direitos de l'IRPF, avec le prix d'achat en devise.
-
-### tax.br.2
-- PT: Brasil: acima de 1 milhão de dólares em bens no estrangeiro a 31 de dezembro, há a declaração CBE ao Banco Central.
-- EN: Brazil: with US$1 million or more in assets abroad on 31 December, the CBE declaration to the Central Bank is due.
-- FR: Brésil : au-delà d'un million de dollars d'actifs à l'étranger au 31 décembre, la déclaration CBE à la Banque centrale est due.
-
-### tax.us.1
-- PT: Estados Unidos: contas no estrangeiro acima de 10 000 dólares no total, em qualquer momento do ano, declaram-se no FBAR; o formulário 8938 tem limites próprios.
-- EN: United States: foreign accounts above $10,000 in total at any time of the year go on the FBAR; Form 8938 has its own thresholds.
-- FR: États-Unis : les comptes à l'étranger au-delà de 10 000 dollars au total, à tout moment de l'année, se déclarent dans le FBAR ; le formulaire 8938 a ses propres seuils.
-
-### tax.us.2
-- PT: Estados Unidos: uma mais-valia na venda pode ser tributada em Portugal e nos Estados Unidos; o crédito por imposto estrangeiro evita a dupla tributação.
-- EN: United States: a gain on sale may be taxed in both Portugal and the US; the foreign tax credit avoids double taxation.
-- FR: États-Unis : une plus-value à la vente peut être imposée au Portugal et aux États-Unis ; le crédit d'impôt étranger évite la double imposition.
-
-### tax.il.1
-- PT: Israel: o rendimento de uma casa em Portugal pode ser tributado em Portugal; Israel dá um crédito pelo imposto português.
-- EN: Israel: income from a home in Portugal may be taxed in Portugal; Israel gives a credit for the Portuguese tax.
-- FR: Israël : les revenus d'un bien au Portugal peuvent être imposés au Portugal ; Israël accorde un crédit pour l'impôt portugais.
-
-### doc.1
-- PT: NIF português e documento de identificação.
-- EN: Portuguese tax number (NIF) and ID.
-- FR: Numéro fiscal portugais (NIF) et pièce d'identité.
-
-### doc.2
-- PT: Procuração com apostila, se não estiver presente na escritura, ou assinada num consulado português.
-- EN: Power of attorney with an apostille if you will not attend the deed, or signed at a Portuguese consulate.
-- FR: Procuration apostillée si vous n'êtes pas présent à l'acte, ou signée dans un consulat portugais.
-
-### doc.3
-- PT: Comprovativo da origem do dinheiro, que o banco, o notário ou o advogado podem pedir.
-- EN: Proof of where the money comes from, which the bank, notary or lawyer may ask for.
-- FR: Justificatif de l'origine des fonds, que la banque, le notaire ou l'avocat peuvent demander.
-
-### doc.4
-- PT: Do vendedor: caderneta predial, certidão do registo predial, licença de utilização ou a sua dispensa, certificado energético e ficha técnica da habitação, quando aplicável.
-- EN: From the seller: property tax record (caderneta), land registry certificate, usage licence or its waiver, energy certificate and the home's technical sheet, where applicable.
-- FR: Du vendeur : fiche fiscale (caderneta), certificat du registre foncier, licence d'utilisation ou sa dispense, certificat énergétique et fiche technique du logement, le cas échéant.
-
-### doc.5
-- PT: Para o crédito: declarações de rendimentos e recibos de salário do país onde vive, e extratos bancários.
-- EN: For the mortgage: tax returns, payslips from the country where you live and bank statements.
-- FR: Pour le crédit : avis d'imposition, fiches de paie de votre pays de résidence et relevés bancaires.
-
-### step.1
-- PT: Pedir o NIF e decidir sobre o representante fiscal.
-- EN: Get a NIF and decide on the tax representative.
-- FR: Obtenir le NIF et décider du représentant fiscal.
-
-### step.2
-- PT: Abrir conta num banco português e pedir uma aprovação prévia do crédito.
-- EN: Open a Portuguese bank account and ask for mortgage pre-approval.
-- FR: Ouvrir un compte dans une banque portugaise et demander un accord de principe pour le crédit.
-
-### step.3
-- PT: Ver casas por videochamada, por um familiar ou ao vivo numa viagem.
-- EN: View homes by video call, through a relative or in person on a trip.
-- FR: Visiter par appel vidéo, par un proche ou sur place lors d'un séjour.
-
-### step.4
-- PT: Assinar o contrato-promessa (CPCV) e pagar o sinal. Se desistir, perde o sinal; se o vendedor desistir, devolve-o em dobro.
-- EN: Sign the promissory contract (CPCV) and pay the deposit. If you withdraw, you lose the deposit; if the seller withdraws, they pay it back twice over.
-- FR: Signer le compromis (CPCV) et verser l'acompte. Si vous vous retirez, vous le perdez ; si le vendeur se retire, il vous le rend au double.
-
-### step.5
-- PT: Avaliação do banco e aprovação final do crédito.
-- EN: Bank valuation and final mortgage approval.
-- FR: Expertise de la banque et accord définitif du crédit.
-
-### step.6
-- PT: Pagar o IMT e o imposto do selo antes da escritura (o IMT, no prazo de 30 dias após a liquidação).
-- EN: Pay IMT and stamp duty before the deed (IMT within 30 days of assessment).
-- FR: Payer l'IMT et le droit de timbre avant l'acte (l'IMT dans les 30 jours suivant la liquidation).
-
-### step.7
-- PT: Escritura e registo, num Balcão Casa Pronta ou num notário, em pessoa ou por procuração.
-- EN: Deed and registration at a Casa Pronta desk or a notary, in person or by power of attorney.
-- FR: Acte et enregistrement dans un guichet Casa Pronta ou chez un notaire, en personne ou par procuration.
-
-### step.8
-- PT: Depois: IMI todos os anos e, se arrendar, a declaração das rendas em Portugal.
-- EN: Afterwards: IMI every year and, if you let it, declaring the rent in Portugal.
-- FR: Ensuite : l'IMI chaque année et, si vous louez, la déclaration des loyers au Portugal.
-
-### r.rate
-- PT: Taxa
-- EN: Rate
-- FR: Taux
-
-## checkout
-
-### title
-- PT: Plano de compra em PDF
-- EN: Purchase plan as a PDF
-- FR: Plan d'achat en PDF
-
-### lede
-- PT: O seu simulador transformado num plano de 7 capítulos, para ler com calma e mostrar à família, ao banco ou ao advogado.
-- EN: Your calculator turned into a 7-chapter plan, to read at your own pace and show to family, the bank or a lawyer.
-- FR: Votre simulation transformée en un plan en 7 chapitres, à lire tranquillement et à montrer à la famille, à la banque ou à l'avocat.
-
-### price
-- PT: 5,99 €
-- EN: €5.99
-- FR: 5,99 €
-
-### inside.h
-- PT: O que inclui
-- EN: What it includes
-- FR: Ce qu'il contient
-
-### inside.1
-- PT: O custo total da compra, imposto a imposto.
-- EN: The total purchase cost, tax by tax.
-- FR: Le coût total de l'achat, impôt par impôt.
-
-### inside.2
-- PT: Três cenários de crédito, com o rendimento mínimo para cada um.
-- EN: Three mortgage scenarios, with the minimum income for each.
-- FR: Trois scénarios de crédit, avec le revenu minimum pour chacun.
-
-### inside.3
-- PT: O rendimento se arrendar a casa.
-- EN: The return if you let the home.
-- FR: Le rendement si vous louez le bien.
-
-### inside.4
-- PT: Os pontos fiscais a confirmar no país onde vive.
-- EN: The tax points to check in the country where you live.
-- FR: Les points fiscaux à vérifier dans votre pays de résidence.
-
-### inside.5
-- PT: A lista de documentos e os passos a partir de fora.
-- EN: The document checklist and the steps from abroad.
-- FR: La liste des documents et les étapes depuis l'étranger.
-
-### example
-- PT: Ver um exemplo
-- EN: See an example
-- FR: Voir un exemple
-
-### consent
-- PT: Peço a entrega imediata do PDF e reconheço que, com ela, perco o direito de livre resolução de 14 dias (Decreto-Lei 24/2014, art. 17.º).
-- EN: I ask for the PDF to be delivered immediately and acknowledge that I then lose the 14-day right of withdrawal (Decreto-Lei 24/2014, art. 17).
-- FR: Je demande la livraison immédiate du PDF et reconnais perdre ainsi mon droit de rétractation de 14 jours (Decreto-Lei 24/2014, art. 17).
-
-### buy
-- PT: Comprar o plano · 5,99 €
-- EN: Buy the plan · €5.99
-- FR: Acheter le plan · 5,99 €
-
-### vat
-- PT: Preço com IVA. Fatura emitida por {entity}.
-- EN: Price includes VAT. Invoice issued by {entity}.
-- FR: Prix TTC. Facture émise par {entity}.
-
-### pay
-- PT: Pagamento por cartão através da Stripe. Não guardamos dados do cartão.
-- EN: Card payment through Stripe. We do not store card details.
-- FR: Paiement par carte via Stripe. Nous ne conservons pas les données de carte.
-
 ## casa
 
 ### more.h
@@ -4163,3 +3864,310 @@ How to edit:
 - PT: Sem número oficial
 - EN: No official figure
 - FR: Pas de chiffre officiel
+
+## dossier
+
+### title
+- PT: Dossiês
+- EN: Dossiers
+- FR: Dossiers
+
+### h1
+- PT: Os números do seu caso, num só documento
+- EN: The figures for your case, in one document
+- FR: Les chiffres de votre cas, en un seul document
+
+### lede
+- PT: Relatórios em PDF preparados com as regras oficiais e os dados do INE para o seu país, o seu orçamento e a sua zona. Informação, não aconselhamento: para decidir, os parceiros certos em cada passo.
+- EN: PDF reports built from the official rules and INE data for your country, budget and area. Information, not advice: for decisions, the right partners at each step.
+- FR: Des rapports PDF établis à partir des règles officielles et des données de l'INE pour votre pays, votre budget et votre secteur. De l'information, pas du conseil : pour décider, les bons partenaires à chaque étape.
+
+### compra.h
+- PT: Dossiê de compra
+- EN: Purchase dossier
+- FR: Dossier d'achat
+
+### compra.p
+- PT: Para o seu país, orçamento e zona: o custo total da compra, os impostos ao comprar, ter, arrendar e vender, em Portugal e no seu país, cenários de crédito ilustrativos, documentos e ordem dos passos, dez anos de preços da zona e os parceiros para cada passo.
+- EN: For your country, budget and area: the full purchase cost, taxes when buying, owning, renting and selling, in Portugal and at home, illustrative mortgage scenarios, documents and the order of steps, ten years of area prices and the partners for each step.
+- FR: Pour votre pays, budget et secteur : le coût total de l'achat, la fiscalité à l'achat, à la détention, en location et à la vente, au Portugal et chez vous, des scénarios de crédit illustratifs, les documents et l'ordre des étapes, dix ans de prix du secteur et les partenaires de chaque étape.
+
+### zona.h
+- PT: Relatório de zona
+- EN: Area report
+- FR: Rapport de secteur
+
+### zona.p
+- PT: Uma zona em profundidade: dez anos de preços, rendas dos novos contratos e rendimento bruto, comparação com os concelhos vizinhos, empreendimentos de parceiros identificados e como comprar lá a partir de fora.
+- EN: One area in depth: ten years of prices, rents on new leases and gross yield, a comparison with neighbouring municipalities, labelled partner projects and how to buy there from abroad.
+- FR: Un secteur en profondeur : dix ans de prix, loyers des nouveaux baux et rendement brut, comparaison avec les communes voisines, programmes partenaires signalés et comment y acheter depuis l'étranger.
+
+### private.h
+- PT: Dossiê Private
+- EN: Private dossier
+- FR: Dossier Private
+
+### private.p
+- PT: A partir de 1 milhão de euros: opções de residência, IFICI, herança nos dois países, questões de estrutura para discutir com os seus consultores, zonas de prestígio e apresentação a parceiros Private verificados.
+- EN: From €1 million: residence options, IFICI, inheritance across both countries, structuring questions to discuss with your advisers, prime areas and introductions to vetted Private partners.
+- FR: À partir d'un million d'euros : options de résidence, IFICI, succession dans les deux pays, questions de structuration à discuter avec vos conseillers, secteurs de prestige et mise en relation avec des partenaires Private vérifiés.
+
+### price
+- PT: {price}, IVA incluído
+- EN: {price}, VAT included
+- FR: {price}, TVA comprise
+
+### soon
+- PT: Disponível em breve
+- EN: Available soon
+- FR: Bientôt disponible
+
+### soon.p
+- PT: A compra abre quando a faturação estiver pronta. Até lá, veja um exemplo.
+- EN: Purchase opens once invoicing is ready. Until then, see a sample.
+- FR: L'achat ouvre dès que la facturation est prête. D'ici là, voyez un exemple.
+
+### sample
+- PT: Ver um exemplo (PDF)
+- EN: See a sample (PDF)
+- FR: Voir un exemple (PDF)
+
+### order
+- PT: Preparar o meu dossiê
+- EN: Prepare my dossier
+- FR: Préparer mon dossier
+
+### form.h
+- PT: Para quem é o dossiê
+- EN: Who the dossier is for
+- FR: Pour qui est le dossier
+
+### form.budget
+- PT: Orçamento (€)
+- EN: Budget (€)
+- FR: Budget (€)
+
+### form.area
+- PT: Concelho
+- EN: Municipality
+- FR: Commune
+
+### form.purpose
+- PT: Para quê
+- EN: Purpose
+- FR: Objectif
+
+### form.own
+- PT: Casa para viver
+- EN: Own home
+- FR: Résidence principale
+
+### form.holiday
+- PT: Casa de férias
+- EN: Holiday home
+- FR: Résidence secondaire
+
+### form.rental
+- PT: Rendimento de arrendamento
+- EN: Rental income
+- FR: Revenus locatifs
+
+### consent
+- PT: Peço a entrega imediata do PDF e aceito que, com a entrega, perco o direito de livre resolução de 14 dias (DL 24/2014, art. 17.º).
+- EN: I ask for the PDF to be delivered immediately and accept that, once delivered, I lose the 14-day right of withdrawal (DL 24/2014, art. 17).
+- FR: Je demande la livraison immédiate du PDF et accepte qu'une fois livré, je perds le droit de rétractation de 14 jours (DL 24/2014, art. 17).
+
+### vat
+- PT: IVA incluído, à taxa do país de residência (regime OSS).
+- EN: VAT included, at the rate of your country of residence (OSS scheme).
+- FR: TVA comprise, au taux de votre pays de résidence (régime OSS).
+
+### info
+- PT: Informação, não aconselhamento. Para conselho jurídico, um advogado ou solicitador (Lei 49/2004); para impostos, um consultor fiscal; para crédito, o intermediário de crédito registado no Banco de Portugal, que faz a análise personalizada sem custos.
+- EN: Information, not advice. For legal advice, a lawyer or solicitor (Lei 49/2004); for tax, a tax adviser; for credit, the intermediary registered with Banco de Portugal, who prepares a personalised analysis at no cost.
+- FR: De l'information, pas du conseil. Pour un conseil juridique, un avocat ou un solicitador (Lei 49/2004) ; pour la fiscalité, un conseiller fiscal ; pour le crédit, l'intermédiaire enregistré auprès de la Banque du Portugal, qui réalise une analyse personnalisée sans frais.
+
+### prepared
+- PT: Preparado a {date}
+- EN: Prepared on {date}
+- FR: Préparé le {date}
+
+### for
+- PT: Para quem vive {where}
+- EN: For readers {where}
+- FR: Pour les lecteurs {where}
+
+### summary.h
+- PT: Em resumo
+- EN: At a glance
+- FR: En bref
+
+### s.total
+- PT: Custo total da compra
+- EN: Total purchase cost
+- FR: Coût total de l'achat
+
+### s.m2
+- PT: O orçamento compra, ao preço mediano
+- EN: The budget buys, at the median price
+- FR: Le budget permet, au prix médian
+
+### s.median
+- PT: Preço mediano na zona
+- EN: Median price in the area
+- FR: Prix médian du secteur
+
+### s.ten
+- PT: Variação desde 2016
+- EN: Change since 2016
+- FR: Variation depuis 2016
+
+### s.rent
+- PT: Renda mediana de novos contratos
+- EN: Median rent on new leases
+- FR: Loyer médian des nouveaux baux
+
+### s.yield
+- PT: Rendimento bruto da zona
+- EN: Area gross yield
+- FR: Rendement brut du secteur
+
+### s.monthly
+- PT: Prestação ilustrativa
+- EN: Illustrative monthly payment
+- FR: Mensualité illustrative
+
+### costs.h
+- PT: Custos da compra
+- EN: Purchase costs
+- FR: Frais d'achat
+
+### finance.h
+- PT: Financiamento: cenários ilustrativos
+- EN: Financing: illustrative scenarios
+- FR: Financement : scénarios illustratifs
+
+### finance.p
+- PT: Crédito de {ltv} do preço a {years} anos, nos limites do Banco de Portugal. Não é uma oferta de crédito: a análise personalizada é feita pelo intermediário de crédito registado.
+- EN: A loan of {ltv} of the price over {years} years, within Banco de Portugal's limits. Not a credit offer: the personalised analysis comes from the registered credit intermediary.
+- FR: Un crédit de {ltv} du prix sur {years} ans, dans les limites de la Banque du Portugal. Ce n'est pas une offre de crédit : l'analyse personnalisée relève de l'intermédiaire de crédit enregistré.
+
+### col.rate
+- PT: Taxa anual
+- EN: Annual rate
+- FR: Taux annuel
+
+### col.monthly
+- PT: Prestação
+- EN: Monthly payment
+- FR: Mensualité
+
+### col.interest
+- PT: Juros no prazo
+- EN: Interest over the term
+- FR: Intérêts sur la durée
+
+### col.stamp
+- PT: Selo do crédito
+- EN: Stamp duty on the loan
+- FR: Timbre sur le crédit
+
+### area.h
+- PT: A zona: dez anos de preços
+- EN: The area: ten years of prices
+- FR: Le secteur : dix ans de prix
+
+### neigh.h
+- PT: Comparado com os concelhos vizinhos
+- EN: Compared with neighbouring municipalities
+- FR: Comparé aux communes voisines
+
+### rents.h
+- PT: Rendas dos novos contratos, por ano
+- EN: Rents on new leases, by year
+- FR: Loyers des nouveaux baux, par an
+
+### devs.none
+- PT: Ainda sem empreendimentos de parceiros nesta zona.
+- EN: No partner projects in this area yet.
+- FR: Pas encore de programmes partenaires dans ce secteur.
+
+### steps.h
+- PT: Do primeiro passo à escritura, e depois
+- EN: From the first step to the deed, and after
+- FR: Du premier pas à l'acte, et après
+
+### partners.h
+- PT: Os parceiros para cada passo
+- EN: The partners for each step
+- FR: Les partenaires de chaque étape
+
+### tba
+- PT: A anunciar
+- EN: To be announced
+- FR: À annoncer
+
+### buyhow.h
+- PT: Comprar aqui a partir de fora
+- EN: Buying here from abroad
+- FR: Acheter ici depuis l'étranger
+
+### struct.h
+- PT: Residência, impostos e estrutura
+- EN: Residence, tax and structuring
+- FR: Résidence, fiscalité et structuration
+
+### prime.h
+- PT: Zonas de prestígio
+- EN: Prime areas
+- FR: Secteurs de prestige
+
+### examples.h
+- PT: Exemplos de anúncios publicados
+- EN: Examples of published listings
+- FR: Exemples d'annonces publiées
+
+### ask.h
+- PT: Questões para discutir com os seus consultores
+- EN: Questions to discuss with your advisers
+- FR: Questions à discuter avec vos conseillers
+
+### ask.1
+- PT: Comprar em nome próprio ou através de uma sociedade: AIMI, IMT e custos de manter a estrutura.
+- EN: Buying in your own name or through a company: AIMI, IMT and the cost of running the structure.
+- FR: Acheter en nom propre ou via une société : AIMI, IMT et coût de la structure.
+
+### ask.2
+- PT: A lei aplicável à sucessão e o imposto sobre a herança no seu país.
+- EN: The law that governs the succession and inheritance tax in your country.
+- FR: La loi applicable à la succession et l'impôt successoral dans votre pays.
+
+### ask.3
+- PT: Mudar a residência fiscal: o momento, o IFICI e as regras de saída do seu país.
+- EN: Moving your tax residence: the timing, IFICI and your country's exit rules.
+- FR: Changer de résidence fiscale : le moment, l'IFICI et les règles de sortie de votre pays.
+
+### ask.4
+- PT: A origem dos fundos e os comprovativos que o banco, o notário e a agência vão pedir.
+- EN: The origin of funds and the evidence the bank, the notary and the agency will ask for.
+- FR: L'origine des fonds et les justificatifs que la banque, le notaire et l'agence demanderont.
+
+### ask.5
+- PT: Seguro, gestão da casa e custos anuais com várias propriedades.
+- EN: Insurance, property management and annual costs across several properties.
+- FR: Assurance, gestion du bien et coûts annuels avec plusieurs biens.
+
+### intro.h
+- PT: Apresentação a parceiros Private
+- EN: Introductions to Private partners
+- FR: Mise en relation avec des partenaires Private
+
+### intro.p
+- PT: Depois da leitura, apresentamos-lhe parceiros Private verificados para o seu país: banco privado, consultor fiscal e advogado. Cada um aparece com a sua licença e a indicação de patrocinado.
+- EN: After you read it, we introduce vetted Private partners for your country: private bank, tax adviser and lawyer. Each is shown with its licence and the sponsored label.
+- FR: Après lecture, nous vous mettons en relation avec des partenaires Private vérifiés pour votre pays : banque privée, conseiller fiscal et avocat. Chacun figure avec sa licence et la mention sponsorisé.
+
+### sources.h
+- PT: Fontes
+- EN: Sources
+- FR: Sources
