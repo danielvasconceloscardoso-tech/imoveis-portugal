@@ -24,7 +24,7 @@ Banco de Portugal caps the loan as a share of the property's value (loan-to-valu
 - **up to 90%** for an owner-occupied main home;
 - **up to 80%** for any other purpose, such as a vacation home or a home you'll use before you move.
 
-The value used is the lower of the price and the bank's appraisal. On a 400,000 € vacation home, that means at least 80,000 € of your own money.
+The value used is the lower of the price and the bank's appraisal. On a €400,000 vacation home, that means at least €80,000 of your own money.
 
 ## How much a month: 45% of income
 
@@ -36,7 +36,7 @@ The maximum term is 40 years for borrowers aged up to 35, and 35 years for borro
 
 ## The taxes on a Portuguese mortgage
 
-Stamp duty applies: 0.6% of the loan amount up front, and 4% of the interest over the life of the loan. On a 300,000 € loan, that's 1,800 € at signing.
+Stamp duty applies: 0.6% of the loan amount up front, and 4% of the interest over the life of the loan. On a €300,000 loan, that's €1,800 at signing.
 
 ## Where the money comes from
 

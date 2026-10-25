@@ -26,7 +26,7 @@ const mapHref = pathFor(lang, ed, "map");
     {SCENARIOS.map((s) => (
       <li class="scen-col">
         <img src={`/img/${s.photo}-640.webp`} alt="" width="640" height="427" loading="lazy" />
-        <p class="scen-budget"><a href={`${mapHref}?budget=${s.budget}`}>{eur(s.budget, lang)}</a></p>
+        <h3 class="scen-budget"><a href={`${mapHref}?budget=${s.budget}`}>{eur(s.budget, lang)}</a></h3>
         {fx && <p class="small scen-local">{c("scen.local", lang, { local: local(s.budget) })}<Fragment set:html={sup(nFx)} /></p>}
         <p class="scen-where">{c(`scen.${s.key}.h`, lang)}</p>
         <ul class="scen-places">
@@ -35,9 +35,9 @@ const mapHref = pathFor(lang, ed, "map");
         {s.listings.length > 0 && (
           <div class="scen-ex">
             <p class="h-small">{c("scen.example", lang)}</p>
-            {s.listings.map((l) => (
-              <p class="small"><strong>{price(l.price)}</strong>{l.m2 ? ` · ${nf.format(l.m2)} m²` : ""}<br />{l.text[lang]}<Fragment set:html={sup(src.n(l.fact))} /></p>
-            ))}
+            <dl class="scen-ex-list">{s.listings.map((l) => (
+              <><dt>{price(l.price)}{l.m2 ? ` · ${nf.format(l.m2)} m²` : ""}</dt><dd class="small">{l.text[lang]}<Fragment set:html={sup(src.n(l.fact))} /></dd></>
+            ))}</dl>
           </div>
         )}
       </li>

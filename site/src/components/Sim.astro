@@ -5,9 +5,9 @@
 import V2 from "../layouts/V2.astro";
 import Calls from "./Calls.astro";
 import { config } from "../config";
-import { LANGS, HTML_LANG, pathFor, type Lang, type EdCode } from "../i18n";
+import { LANGS, HTML_LANG, pathFor, eur, type Lang, type EdCode } from "../i18n";
 import { Sources, fmtDate, EDITION_CUR, RATE, FACTS } from "../lib/content";
-import { FIELDS, NEXT, FACTS_USED, SUB, TOOLS, keysFor, type ToolKey } from "../lib/tools";
+import { FIELDS, NEXT, FACTS_USED, SUB, TOOLS, keysFor, run, type ToolKey } from "../lib/tools";
 import { RATE_DEFAULT } from "../lib/sims";
 import { c, has } from "../lib/copy";
 
@@ -38,6 +38,11 @@ const ROW_FACT: Record<string, string> = {
 const short = (t: string) => t.split(/[;(]/)[0].trim();
 const rowSrc = Object.fromEntries(Object.entries(ROW_FACT).filter(([, id]) => FACTS[id]).map(([k, id]) => [k, { n: src.n(id), t: short(FACTS[id].source_title) }]));
 const MONEY_SLIDER = new Set(["price", "sale", "buy"]);
+// The default result is rendered at build time, so nothing moves when the script takes over (no layout shift).
+const first = run(tool, Object.fromEntries(FIELDS[tool].map((f) => [f.id, f.def])), fx ? fx.rate : 1);
+const firstTotal = first.rows.find((r) => r.strong);
+const nfp = new Intl.NumberFormat(HTML_LANG[lang], { maximumFractionDigits: 2 });
+const show = (v: number, f: string) => f === "eur" ? eur(v, lang) : f === "local" ? new Intl.NumberFormat(HTML_LANG[lang], { style: "currency", currency: curCode, maximumFractionDigits: 0 }).format(v) : `${nfp.format(v)}${lang === "fr" ? "\u202f%" : "%"}`;
 const q = (id: string, kind: string) => has(`sims.q.${id}`) ? c(`sims.q.${id}`, lang) : fieldLabel(id, kind);
 const fieldLabel = (id: string, kind: string) => {
   const t = c(`sims.f.${id}`, lang);
@@ -67,7 +72,7 @@ const fieldLabel = (id: string, kind: string) => {
           {f.hint && <small>{c(`sims.${f.hint}`, lang, hintVars)}</small>}
         </div>
       ))}
-      <div class="step-nav" hidden>
+      <div class="step-nav">
         <button type="button" class="back">{c("sims.step.back", lang)}</button>
         <span class="count" data-tpl={c("sims.step.of", lang, { i: "{i}", n: "{n}" })}></span>
         <button type="button" class="btn next" data-next={c("sims.step.next", lang)} data-done={c("sims.step.done", lang)}>{c("sims.step.next", lang)}</button>
@@ -76,8 +81,8 @@ const fieldLabel = (id: string, kind: string) => {
 
     <section class="sim-out statement" id="result" aria-live="polite" aria-labelledby="res">
       <h2 id="res" class="h-small">{c("sims.result.h", lang)}</h2>
-      <p class="st-total"><span class="st-label" id="st-label"></span><strong id="st-total"></strong><span class="small" id="st-local" data-tpl={c("sims.local", lang, { local: "{local}" })}></span></p>
-      <dl class="st-lines" id="rows"></dl>
+      <p class="st-total"><span class="st-label" id="st-label">{firstTotal && c(`sims.${firstTotal.k}`, lang)}</span><strong id="st-total">{firstTotal && show(firstTotal.v, firstTotal.fmt)}</strong><span class="small" id="st-local" data-tpl={c("sims.local", lang, { local: "{local}" })}>&nbsp;</span></p>
+      <dl class="st-lines" id="rows">{first.rows.filter((r) => !r.strong).map((r) => <><dt>{c(`sims.${r.k}`, lang)}{rowSrc[r.k === "r.imt" ? "r.imt.nr" : r.k] && <a class="st-src" href={`#fonte-${rowSrc[r.k === "r.imt" ? "r.imt.nr" : r.k].n}`}>{rowSrc[r.k === "r.imt" ? "r.imt.nr" : r.k].t}</a>}</dt><dd>{show(r.v, r.fmt)}</dd></>)}</dl>
       <p class="warn" id="warn" hidden></p>
       <p class="small">{c("sims.estimate", lang)}{nums.map((i) => <a class="sup" href={`#fonte-${i}`}>{i}</a>)}</p>
       {next === "credit" && cp.name && <p class="sponsor-line">{c("sims.sponsor", lang, { name: cp.name, bdp: cp.bdp })}</p>}
@@ -173,7 +178,7 @@ const fieldLabel = (id: string, kind: string) => {
       document.getElementById("st-label")!.textContent = L[total.k] || total.k;
       document.getElementById("st-total")!.textContent = fmt(total.v, total.fmt);
       const lt = document.getElementById("st-local")!;
-      lt.textContent = total.fmt === "eur" && cur !== "EUR" ? (lt.dataset.tpl || "").replace("{local}", local.format(total.v * fx)) : "";
+      lt.textContent = total.fmt === "eur" && cur !== "EUR" ? (lt.dataset.tpl || "").replace("{local}", local.format(total.v * fx)) : "\u00a0";
     }
     const w = document.getElementById("warn")!;
     if (out.warn && L[out.warn.k]) { w.hidden = false; w.textContent = L[out.warn.k].replace(/\{(\w+)\}/g, (m, k) => String(out.warn!.vars?.[k] ?? m)); }
@@ -219,7 +224,7 @@ const fieldLabel = (id: string, kind: string) => {
     if (focus) steps[at].querySelector<HTMLInputElement>("input")?.focus({ preventScroll: true });
   }
   if (steps.length > 1) {
-    form.classList.add("stepped"); navEl.hidden = false;
+    form.classList.add("stepped");
     back.addEventListener("click", () => show(at - 1));
     nextB.addEventListener("click", () => { if (at < steps.length - 1) show(at + 1); else document.getElementById("result")!.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }); });
     form.addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); nextB.click(); } });

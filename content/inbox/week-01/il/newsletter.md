@@ -6,20 +6,20 @@ week: 1
 date: 2026-11-11
 use: "Welcome email for pre-launch sign-ups (no newsletter sends before 1 Dec)"
 pillar: Money
-title: "The 26,250 € line on your bill"
+title: "The €26,250 line on your bill"
 sources: [pt-imt-nonresident-flat, pt-imt-nonresident-exceptions, pt-is-purchase]
 cta: guide
 sponsored: false
 status: draft
 ---
 
-Subject: The 26,250 € line on your bill
+Subject: The €26,250 line on your bill
 
 {{first name | Hi}},
 
 thanks for joining Imóveis Portugal. From December 1, you'll get what you need to know about buying a home in Portugal from Israel every week, with the official source for every number.
 
-To start, one number: on a 350,000 € apartment, if you're not a Portuguese tax resident, you pay 26,250 € in property transfer tax, the flat 7.5% rate in force since May 2026. There are exceptions, for example becoming a Portuguese tax resident within two years.
+To start, one number: on a €350,000 apartment, if you're not a Portuguese tax resident, you pay €26,250 in property transfer tax, the flat 7.5% rate in force since May 2026. There are exceptions, for example becoming a Portuguese tax resident within two years.
 
 The full math is in this week's article: [read the article].
 

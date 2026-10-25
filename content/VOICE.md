@@ -36,7 +36,7 @@ Target feeling: reliable, optimistic, calm. "This is doable, and they know who c
 | Tone | Warm, close, like family who knows the rules | Friendly, plain, direct, numbers first | Calm, precise, courteous |
 | Home | casa | home | logement, bien, maison |
 | Dates | 1 de dezembro de 2026 | December 1, 2026 | 1er décembre 2026 |
-| Numbers | 250 000 €, 7,5% | 250,000 €, 7.5% | 250 000 €, 7,5 % |
+| Numbers | 250 000 €, 7,5% | €250,000, 7.5% | 250 000 €, 7,5 % |
 
 ## FAQ answers
 

@@ -3,7 +3,7 @@
 // Mobile first (prompt 10); header and concierge menu from prompt 19. One sticky action at the bottom of
 // the screen on phones. Prompt 11: one trust line, in the footer (no repeated trust bar). noindex until launch, canonical and hreflang.
 import "../styles/v2.css";
-import serif from "@fontsource-variable/newsreader/files/newsreader-latin-opsz-normal.woff2?url";
+import serif from "@fontsource-variable/newsreader/files/newsreader-latin-wght-normal.woff2?url";
 import { config } from "../config";
 import { EDITIONS, ED_ORDER, LANGS, LANG_NAME, HTML_LANG, pathFor, type Lang, type EdCode, type PageKey } from "../i18n";
 import { c, edName } from "../lib/copy";
@@ -45,6 +45,7 @@ const sticky: Sticky = Astro.props.sticky !== undefined ? Astro.props.sticky
     <link rel="canonical" href={canonical} />
     {LANGS.map((l) => <link rel="alternate" hreflang={HTML_LANG[l]} href={Astro.props.alternates ? Astro.props.alternates[l] : `https://${host}${urlFor(l)}`} />)}
     <link rel="preload" href={serif} as="font" type="font/woff2" crossorigin />
+    <script is:inline>document.documentElement.classList.add("js")</script>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />

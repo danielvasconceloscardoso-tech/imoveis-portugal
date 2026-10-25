@@ -24,7 +24,7 @@ Longest mortgage term in Portugal: 40 years up to age 35, 35 years after that. S
 
 ## Post 4
 
-Borrowing 300,000 € in Portugal costs 1,800 € in stamp duty at signing (0.6%). Source: Portugal's stamp duty table.
+Borrowing €300,000 in Portugal costs €1,800 in stamp duty at signing (0.6%). Source: Portugal's stamp duty table.
 
 ## Post 5
 

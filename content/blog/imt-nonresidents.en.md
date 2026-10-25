@@ -4,7 +4,7 @@ lang: en
 slug: 7-5-percent-transfer-tax-non-residents
 title: "The 7.5% transfer tax for non-residents, explained"
 description: "Since May 2026, non-resident buyers pay a flat 7.5% transfer tax (IMT). The three exceptions, worked examples and the official source for every number."
-tldr: "Since May 2026, buyers who aren't Portuguese tax residents pay a flat 7.5% transfer tax (IMT) on a home, with no exemption or reduction. There are three exceptions. On a 250,000 € home, the IMT is 18,750 €, against 7,042 € for a resident buying their own permanent home."
+tldr: "Since May 2026, buyers who aren't Portuguese tax residents pay a flat 7.5% transfer tax (IMT) on a home, with no exemption or reduction. There are three exceptions. On a €250,000 home, the IMT is €18,750, against €7,042 for a resident buying their own permanent home."
 published: 2026-10-25
 updated: 2026-10-25
 cta: tax
@@ -36,12 +36,12 @@ The table shows IMT only, using the 2026 tables. For residents, the rate depends
 
 | Home price | Resident, main home | Resident, other home | Non-resident |
 | --- | --- | --- | --- |
-| 250,000 € | 7,042 € | 8,105 € | 18,750 € |
-| 400,000 € | 18,237 € | 19,300 € | 30,000 € |
+| €250,000 | €7,042 | €8,105 | €18,750 |
+| €400,000 | €18,237 | €19,300 | €30,000 |
 
-Stamp duty is the same for everyone: 0.8% of the price, or 2,000 € on a 250,000 € home.[[pt-is-purchase]] It isn't in the table.
+Stamp duty is the same for everyone: 0.8% of the price, or €2,000 on a €250,000 home.[[pt-is-purchase]] It isn't in the table.
 
-At 250,000 €, the gap between a non-resident and a resident buying a main home is 11,708 €. That is why the second exception weighs so much for anyone planning to move back to Portugal.
+At €250,000, the gap between a non-resident and a resident buying a main home is €11,708. That is why the second exception weighs so much for anyone planning to move back to Portugal.
 
 ## When it is due
 

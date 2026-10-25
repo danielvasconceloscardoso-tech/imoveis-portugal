@@ -31,9 +31,10 @@ const partners = config.privatePartners;
     <p class="lede">{c("private.lede", lang)}</p>
   </div>
   <div class="frame read">
+    <h2 class="h3" style="margin-bottom:8px">{c("private.qa.h", lang)}</h2>
     {items.map((x) => (
       <section class="qa-item" aria-labelledby={`p-${x.k}`}>
-        <h2 id={`p-${x.k}`} class="h3">{c(`private.${x.k}.q`, lang)}</h2>
+        <h3 id={`p-${x.k}`}>{c(`private.${x.k}.q`, lang)}</h3>
         <p>{c(`private.${x.k}.a`, lang)}<Fragment set:html={sup(x.n)} /></p>
         <a class="act" href={talk(x.cat)}>{c(x.btn, lang)}</a>
       </section>

@@ -24,7 +24,7 @@
   a: >-
     Plan for transfer tax (IMT), 0.8% stamp duty and the deed with registration. If you aren't a Portuguese
     tax resident, IMT is 7.5% of the price, with some exceptions. With a mortgage, add 0.6% stamp duty on
-    the loan and 4% on the interest. At a Casa Pronta office, the deed with registration costs 375 € or 700
+    the loan and 4% on the interest. At a Casa Pronta office, the deed with registration costs €375 or 700
     €.
   facts: [pt-is-purchase, pt-imt-nonresident-flat, pt-imt-nonresident-exceptions, pt-is-loan-5y, pt-is-interest, pt-casa-pronta-fees]
 
@@ -71,7 +71,7 @@
   q: "Permanent own home (HPP): what is it and will I be eligible?"
   a: >-
     It's the home you buy to be, exclusively, your own permanent residence; for income tax, tax domicile is
-    the proof. It gets the lowest IMT table (0% up to 106,346 €) and a mortgage up to 90% of the value,
+    the proof. It gets the lowest IMT table (0% up to €106,346) and a mortgage up to 90% of the value,
     against 80% for other homes. A non-resident pays the flat 7.5%; become a tax resident within two years
     and you claim the difference back.
   facts: [pt-imt-hpp-2026, pt-hpp-tax-domicile, pt-imt-nonresident-flat, pt-imt-nonresident-exceptions, pt-ltv-limits]
@@ -82,7 +82,7 @@
   cta: lawyer
   q: "How much do the deed and registration cost?"
   a: >-
-    At a Casa Pronta office, a purchase with registration costs 375 €, or 700 € with a mortgage, plus 50 €
+    At a Casa Pronta office, a purchase with registration costs €375, or €700 with a mortgage, plus €50
     for each extra property. The deed and the registration are done there in one sitting. Bring the usage
     license (or its waiver, depending on when the home was built) and the energy certificate. Lawyer's fees
     are separate.
@@ -108,7 +108,7 @@
   a: >-
     You pay IMI, a municipal tax of 0.3% to 0.45% of the home's tax value. Each municipality sets its own
     rate, so it varies from town to town. AIMI, an additional tax, only applies when your total tax values
-    are above 600,000 € per person. A partner tax advisor can work out the numbers for your home.
+    are above €600,000 per person. A partner tax advisor can work out the numbers for your home.
   facts: [pt-imi-rates, pt-aimi-deduction]
 
 - id: en-rent
@@ -190,7 +190,7 @@
   q: "How is the transfer tax (IMT) calculated, and when is it due?"
   a: >-
     For residents, it depends on how the home is used and on the price, by brackets. There's no IMT up to
-    106,346 € on a main home, and 1% in that bracket on a vacation home; above that, the rate rises by
+    €106,346 on a main home, and 1% in that bracket on a vacation home; above that, the rate rises by
     bracket. Buyers who aren't tax residents pay a flat 7.5%. IMT is due on the day it's assessed or within
     the following 30 days.
   facts: [pt-imt-hpp-2026, pt-imt-second-home-2026, pt-imt-payment]

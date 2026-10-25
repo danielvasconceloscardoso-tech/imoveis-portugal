@@ -633,17 +633,17 @@ How to edit:
 
 ### plan.h
 - PT: Plano de compra · 45 min · 150 €
-- EN: Buying plan · 45 min · 150 €
+- EN: Buying plan · 45 min · €150
 - FR: Plan d'achat · 45 min · 150 €
 
 ### plan.p
 - PT: Orçamento, zonas, crédito e calendário, para o seu caso. Os 150 € são descontados se comprar com a agência, que os fatura.
-- EN: Budget, areas, mortgage and timeline, for your case. The 150 € is credited if you buy through the agency, which invoices it.
+- EN: Budget, areas, mortgage and timeline, for your case. The €150 is credited if you buy through the agency, which invoices it.
 - FR: Budget, quartiers, crédit et calendrier, pour votre cas. Les 150 € sont déduits si vous achetez avec l'agence, qui les facture.
 
 ### plan.short
 - PT: Plano de compra, 45 min, 150 €
-- EN: Buying plan, 45 min, 150 €
+- EN: Buying plan, 45 min, €150
 - FR: Plan d'achat, 45 min, 150 €
 
 ### plan.subject
@@ -689,7 +689,7 @@ How to edit:
 - FR: Les étapes, les contrats et les impôts à l'acte.
 
 ### stage.after.h
-- PT: Depois de comprar
+- PT: Após a compra
 - EN: After you buy
 - FR: Après l'achat
 
@@ -874,7 +874,7 @@ How to edit:
 
 ### lede
 - PT: {n} páginas com as contas feitas para casas de 250 000 € e 400 000 €, e a fonte oficial de cada número.
-- EN: {n} pages of worked numbers for homes at 250,000 € and 400,000 €, with the official source for every figure.
+- EN: {n} pages of worked numbers for homes at €250,000 and €400,000, with the official source for every figure.
 - FR: {n} pages d'exemples chiffrés pour des biens de 250 000 € et 400 000 €, avec la source officielle de chaque chiffre.
 
 ### download
@@ -940,9 +940,9 @@ How to edit:
 - FR: Avant le lancement, avec des chiffres réels
 
 ### why.p
-- PT: Um processo de compra para um advogado, uma transferência para uma empresa de câmbio, um crédito para um banco, uma venda para um promotor, uma relação de cliente para um banco privado.
-- EN: One purchase file for a lawyer, one transfer for a money-transfer firm, one mortgage for a bank, one sale for a developer, one client relationship for a private bank.
-- FR: Un dossier d'achat pour un avocat, un transfert pour une société de change, un crédit pour une banque, une vente pour un promoteur, une relation client pour une banque privée.
+- PT: Para um advogado, um processo de compra. Para um banco, um crédito. Para um promotor, uma venda. Para um banco privado, um cliente para muitos anos.
+- EN: For a lawyer, one purchase file. For a bank, one mortgage. For a developer, one sale. For a private bank, a client for many years.
+- FR: Pour un avocat, un dossier d'achat. Pour une banque, un crédit. Pour un promoteur, une vente. Pour une banque privée, un client pour des années.
 
 ### why.h
 - PT: Um cliente paga o ano
@@ -950,9 +950,9 @@ How to edit:
 - FR: Un client couvre l'année
 
 ### network.p
-- PT: A rede é aberta: vários parceiros por categoria e por edição, ordenados pelo tempo de resposta e pela avaliação dos leitores. Imobiliário, crédito e seguros ficam com o grupo parceiro.
-- EN: The network is open: several partners per category and edition, ranked by response time and reader ratings. Real estate, credit and insurance stay with the partner group.
-- FR: Le réseau est ouvert : plusieurs partenaires par catégorie et par édition, classés selon le délai de réponse et l'avis des lecteurs. Immobilier, crédit et assurance restent au groupe partenaire.
+- PT: A rede é aberta: vários parceiros por categoria e por edição. A ordem segue o tempo de resposta e a avaliação dos leitores. Imobiliário, crédito e seguros ficam com o grupo parceiro.
+- EN: The network is open: several partners per category and edition. The order follows response time and readers' ratings. Real estate, mortgages and insurance stay with the partner group.
+- FR: Le réseau est ouvert : plusieurs partenaires par catégorie et par édition. L'ordre suit le temps de réponse et l'avis des lecteurs. Immobilier, crédit et assurance restent au groupe partenaire.
 
 ### inventory.5
 - PT: No mapa e nas listas «falar com um parceiro» da sua categoria e das suas edições.
@@ -995,9 +995,9 @@ How to edit:
 - FR: Tarifs en cours de validation avant le lancement.
 
 ### private.p
-- PT: Para quem serve orçamentos a partir de 1 milhão de euros: perfil e respostas na secção Private, posição no mapa para esses orçamentos e presença na newsletter. Máximo de cinco por edição.
-- EN: For firms serving budgets from €1 million: profile and answers in the Private section, a map position for those budgets and newsletter slots. Five per edition at most.
-- FR: Pour les maisons qui servent des budgets à partir d'un million d'euros : profil et réponses dans la section Private, position sur la carte pour ces budgets et présences dans la newsletter. Cinq au plus par édition.
+- PT: Para quem serve orçamentos a partir de 1 milhão de euros. Perfil e respostas na secção Private, posição no mapa para esses orçamentos e a newsletter. No máximo cinco por edição.
+- EN: For firms serving budgets from €1 million. A profile and answers in the Private section, a map position for those budgets and the newsletter. Five per edition at most.
+- FR: Pour les maisons qui servent des budgets à partir d'un million d'euros. Profil et réponses dans la section Private, position sur la carte pour ces budgets et la newsletter. Cinq au plus par édition.
 
 ### private.h
 - PT: Parceiro Private
@@ -1005,9 +1005,9 @@ How to edit:
 - FR: Partenaire Private
 
 ### developer.p
-- PT: Um empreendimento em destaque: newsletter, posição no mapa do seu concelho e uma página identificada como patrocinada.
-- EN: One development in focus: newsletter feature, a position on the map in its municipality and a page labelled as sponsored.
-- FR: Un programme mis en avant : newsletter, position sur la carte de sa commune et une page signalée comme sponsorisée.
+- PT: Um empreendimento em destaque. Na newsletter, no mapa do seu concelho e numa página identificada como patrocinada.
+- EN: One development in focus. In the newsletter, on the map in its municipality and on a page labelled as sponsored.
+- FR: Un programme mis en avant. Dans la newsletter, sur la carte de sa commune et sur une page signalée comme sponsorisée.
 
 ### developer.h
 - PT: Campanha de empreendimento
@@ -1015,9 +1015,9 @@ How to edit:
 - FR: Campagne de programme
 
 ### bank.p
-- PT: O seu nome nos simuladores das suas edições, presença na newsletter e destaque no mapa para os orçamentos que financia.
-- EN: Your name on the calculators in your editions, newsletter slots and a feature on the map for the budgets you finance.
-- FR: Votre nom sur les simulateurs de vos éditions, des présences dans la newsletter et une mise en avant sur la carte pour les budgets que vous financez.
+- PT: O seu nome nos simuladores das suas edições e na newsletter. Destaque no mapa para os orçamentos que financia.
+- EN: Your name on the calculators in your editions and in the newsletter. A feature on the map for the budgets you finance.
+- FR: Votre nom sur les simulateurs de vos éditions et dans la newsletter. Une mise en avant sur la carte pour les budgets que vous financez.
 
 ### bank.h
 - PT: Parceiro bancário
@@ -1025,9 +1025,9 @@ How to edit:
 - FR: Partenaire bancaire
 
 ### featured.p
-- PT: Tudo o que inclui o parceiro verificado, mais seis presenças por ano na newsletter, um capítulo no guia e o primeiro lugar na sua categoria.
-- EN: Everything in Verified, plus six newsletter slots a year, one guide chapter and first place in your category.
-- FR: Tout ce que comprend la formule vérifiée, plus six présences par an dans la newsletter, un chapitre du guide et la première place dans votre catégorie.
+- PT: Tudo o que tem o parceiro verificado. Mais seis presenças por ano na newsletter, um capítulo no guia e o primeiro lugar na sua categoria.
+- EN: Everything in Verified. Plus six newsletter slots a year, a chapter in the guide and first place in your category.
+- FR: Tout ce que comprend le partenaire vérifié. Plus six présences par an dans la newsletter, un chapitre du guide et la première place de votre catégorie.
 
 ### featured.h
 - PT: Parceiro em destaque
@@ -1065,9 +1065,9 @@ How to edit:
 - FR: Vos prochains clients préparent un achat au Portugal
 
 ### lede
-- PT: O Imóveis Portugal acompanha quem vive no Luxemburgo, em França, na Suíça, no Brasil, nos Estados Unidos e em Israel e prepara uma compra em Portugal, de 300 mil a 10 milhões de euros. Seis edições, três línguas, lançamento a 1 de dezembro de 2026.
-- EN: Imóveis Portugal is for people in Luxembourg, France, Switzerland, Brazil, the United States and Israel who are preparing a purchase in Portugal, from €300,000 to €10 million. Six editions, three languages, launching on 1 December 2026.
-- FR: Imóveis Portugal s'adresse aux personnes établies au Luxembourg, en France, en Suisse, au Brésil, aux États-Unis et en Israël qui préparent un achat au Portugal, de 300 000 € à 10 millions d'euros. Six éditions, trois langues, lancement le 1er décembre 2026.
+- PT: Os nossos leitores vivem no Luxemburgo, em França, na Suíça, no Brasil, nos Estados Unidos e em Israel. Preparam uma compra em Portugal, de 300 mil a 10 milhões de euros. Seis edições, três línguas, lançamento a 1 de dezembro de 2026.
+- EN: Our readers live in Luxembourg, France, Switzerland, Brazil, the United States and Israel. They are preparing a purchase in Portugal, from €300,000 to €10 million. Six editions, three languages, launching on 1 December 2026.
+- FR: Nos lecteurs vivent au Luxembourg, en France, en Suisse, au Brésil, aux États-Unis et en Israël. Ils préparent un achat au Portugal, de 300 000 € à 10 millions d'euros. Six éditions, trois langues, lancement le 1er décembre 2026.
 
 ### cta
 - PT: Falemos 15 minutos
@@ -1080,9 +1080,9 @@ How to edit:
 - FR: Partenaire fondateur
 
 ### founding.p
-- PT: 40% de desconto no primeiro ano e o mesmo preço garantido no segundo, para os dez primeiros parceiros, até 1 de dezembro de 2026.
-- EN: 40% off the first year and the same price guaranteed for the second, for the first ten partners, until 1 December 2026.
-- FR: 40 % de remise la première année et le même prix garanti la deuxième, pour les dix premiers partenaires, jusqu'au 1er décembre 2026.
+- PT: Para os dez primeiros parceiros, até 1 de dezembro de 2026: 40% de desconto no primeiro ano. No segundo ano, o mesmo preço.
+- EN: For the first ten partners, until 1 December 2026: 40% off the first year. The same price again in the second year.
+- FR: Pour les dix premiers partenaires, jusqu'au 1er décembre 2026 : 40 % de remise la première année. Le même prix la deuxième année.
 
 ### slots
 - PT: {left} de {total} lugares disponíveis até {deadline}
@@ -1095,14 +1095,14 @@ How to edit:
 - FR: Nos lecteurs
 
 ### readers.p
-- PT: Pessoas com um plano: comprar a casa onde vão viver, a casa para as férias ou um investimento, a partir do país onde vivem. Procuram regras claras, números certos e profissionais de confiança em cada passo.
-- EN: People with a plan: buying the home they will live in, a holiday home or an investment, from the country where they live. They want clear rules, correct figures and reliable professionals at every step.
-- FR: Des personnes qui ont un projet : acheter leur future résidence, une maison de vacances ou un investissement, depuis le pays où elles vivent. Elles cherchent des règles claires, des chiffres exacts et des professionnels fiables à chaque étape.
+- PT: Pessoas com um plano: a casa onde vão viver, uma casa de férias ou um investimento. Compram a partir do país onde vivem. Procuram regras claras, números certos e bons profissionais.
+- EN: People with a plan: the home they will live in, a holiday home or an investment. They buy from the country where they live. They want clear rules, correct figures and good professionals.
+- FR: Des personnes qui ont un projet : leur future résidence, une maison de vacances ou un investissement. Elles achètent depuis leur pays. Elles cherchent des règles claires, des chiffres exacts et de bons professionnels.
 
 ### whynow.p
-- PT: Os parceiros fundadores aparecem desde o primeiro número, a 1 de dezembro de 2026, e mantêm o preço fundador no segundo ano.
-- EN: Founding partners appear from the first issue on 1 December 2026 and keep the founding price for the second year.
-- FR: Les partenaires fondateurs figurent dès le premier numéro, le 1er décembre 2026, et gardent le prix fondateur la deuxième année.
+- PT: Os parceiros fundadores aparecem desde o primeiro número, a 1 de dezembro de 2026. Mantêm o preço fundador no segundo ano.
+- EN: Founding partners appear from the first issue, on 1 December 2026. They keep the founding price in the second year.
+- FR: Les partenaires fondateurs figurent dès le premier numéro, le 1er décembre 2026. Ils gardent le prix fondateur la deuxième année.
 
 ### packages.h
 - PT: Pacotes
@@ -1202,9 +1202,9 @@ How to edit:
 - FR: Dites-nous quel bien vous cherchez
 
 ### lede
-- PT: O seu pedido segue para a nossa agência parceira, a {agency} (AMI {ami}), mediadora imobiliária licenciada, que o contacta com opções. Não paga nada por isso.
-- EN: Your request goes to our partner agency, {agency} (AMI license {ami}), a licensed real-estate broker, which will reach out with options. It's free for you.
-- FR: Votre demande part chez notre agence partenaire, {agency} (licence AMI {ami}), intermédiaire immobilier agréé, qui vous contacte avec des propositions. C'est gratuit pour vous.
+- PT: O seu pedido segue para a nossa agência parceira, a {agency} (AMI {ami}). A agência contacta-o com opções. Não paga nada por isso.
+- EN: Your request goes to our partner agency, {agency} (AMI license {ami}). The agency will reach out with options. It's free for you.
+- FR: Votre demande part chez notre agence partenaire, {agency} (licence AMI {ami}). L'agence vous contacte avec des propositions. C'est gratuit pour vous.
 
 ### steps.h
 - PT: A seguir
@@ -1227,9 +1227,9 @@ How to edit:
 - FR: Si vous le souhaitez, elle organise des visites pendant votre séjour au Portugal.
 
 ### small
-- PT: Os seus dados servem só para este pedido e só seguem para a agência parceira, com o seu consentimento.
-- EN: Your details are used only for this request and shared only with the partner agency, with your consent.
-- FR: Vos données servent uniquement à cette demande et ne sont transmises qu'à l'agence partenaire, avec votre accord.
+- PT: Os seus dados servem só para este pedido. Só seguem para a agência parceira, com o seu consentimento.
+- EN: Your details are used only for this request. They go only to the partner agency, with your consent.
+- FR: Vos données servent uniquement à cette demande. Elles ne vont qu'à l'agence partenaire, avec votre accord.
 
 ## how
 
@@ -1254,9 +1254,9 @@ How to edit:
 - FR: D'où viennent les chiffres
 
 ### s1.p
-- PT: Cada número vem de uma fonte oficial: Portal das Finanças, Diário da República, Banco de Portugal, INE ou as autoridades do país de cada edição. Abrimos a fonte, citamo-la e dizemos quando a verificámos. Se não a conseguimos confirmar, não publicamos.
-- EN: Every number comes from an official source: Portugal's tax authority, the official gazette, Banco de Portugal, the statistics office (INE) or the authorities of each edition's country. We open the source, cite it and say when we checked it. If we can't confirm it, we don't publish it.
-- FR: Chaque chiffre vient d'une source officielle : administration fiscale portugaise, Diário da República, Banque du Portugal, INE ou autorités du pays de chaque édition. Nous ouvrons la source, la citons et indiquons la date de vérification. Si nous ne pouvons pas la confirmer, nous ne publions pas.
+- PT: Cada número vem de uma fonte oficial: as Finanças, o Diário da República, o Banco de Portugal, o INE ou as autoridades do seu país. Abrimos a fonte e citamo-la. Dizemos quando a verificámos. Sem confirmação, não publicamos.
+- EN: Every number comes from an official source. That means Portugal's tax authority, the official gazette, Banco de Portugal, the INE or the authorities where you live. We open the source and cite it. We say when we checked it. If we can't confirm it, we don't publish it.
+- FR: Chaque chiffre vient d'une source officielle : le fisc portugais, le Diário da República, la Banque du Portugal, l'INE ou les autorités de votre pays. Nous ouvrons la source et la citons. Nous indiquons la date de vérification. Sans confirmation, nous ne publions pas.
 
 ### s2.h
 - PT: Explicamos as regras, não damos conselhos
@@ -1274,9 +1274,9 @@ How to edit:
 - FR: Comment nous nous finançons
 
 ### s3.p
-- PT: Os parceiros (advogados, bancos, consultores fiscais, transferências de dinheiro, promotores e a nossa agência parceira) pagam um patrocínio anual fixo, nunca uma comissão por contacto ou por venda. Todo o conteúdo pago diz que é patrocinado e por quem.
-- EN: Partners (lawyers, banks, tax advisors, money transfer services, developers and our partner agency) pay a flat yearly sponsorship, never a fee per lead or a commission on a sale. All paid content says it's sponsored, and by whom.
-- FR: Les partenaires (avocats, banques, conseillers fiscaux, services de transfert, promoteurs et notre agence partenaire) versent un parrainage annuel forfaitaire, jamais une commission par contact ou sur une vente. Tout contenu payé indique qu'il est sponsorisé, et par qui.
+- PT: Os parceiros pagam um patrocínio anual fixo. Nunca pagam por contacto nem por venda. Todo o conteúdo pago diz que é patrocinado e por quem.
+- EN: Partners pay a flat yearly sponsorship. They never pay per lead or per sale. All paid content says it's sponsored, and by whom.
+- FR: Les partenaires versent un parrainage annuel forfaitaire. Jamais une commission par contact ou par vente. Tout contenu payé indique qu'il est sponsorisé, et par qui.
 
 ### s4.h
 - PT: Uma só agência imobiliária
@@ -1284,9 +1284,9 @@ How to edit:
 - FR: Une seule agence immobilière
 
 ### s4.p
-- PT: O Imóveis Portugal não faz mediação imobiliária. Os pedidos para comprar ou vender casa seguem só para a nossa agência parceira, a {agency} (AMI {ami}), mediadora licenciada e patrocinadora.
-- EN: Imóveis Portugal isn't a real-estate broker. Requests to buy or sell a home go only to our partner agency, {agency} (AMI license {ami}), a licensed broker and a sponsor.
-- FR: Imóveis Portugal n'exerce pas d'activité d'intermédiation immobilière. Les demandes d'achat ou de vente vont uniquement à notre agence partenaire, {agency} (licence AMI {ami}), intermédiaire agréé et sponsor.
+- PT: O Imóveis Portugal não faz mediação imobiliária. Os pedidos para comprar ou vender casa seguem só para a {agency}. É a nossa agência parceira, licenciada (AMI {ami}) e patrocinadora.
+- EN: Imóveis Portugal isn't a real-estate broker. Requests to buy or sell a home go only to {agency}. It is our partner agency, licensed (AMI {ami}) and a sponsor.
+- FR: Imóveis Portugal n'est pas un intermédiaire immobilier. Les demandes d'achat ou de vente vont uniquement à {agency}. C'est notre agence partenaire, agréée (AMI {ami}) et sponsor.
 
 ### s5.h
 - PT: Os seus dados
@@ -1715,9 +1715,9 @@ How to edit:
 - FR: Le prix maximum à partir du revenu perçu là où vous vivez, de l'apport et du taux, dans les limites du Banco de Portugal.
 
 ### afford.name
-- PT: Que casa consigo comprar
-- EN: What can I afford
-- FR: Quel bien puis-je acheter
+- PT: A casa ao seu alcance
+- EN: What you can afford
+- FR: Le bien à votre portée
 
 ### dsti.note
 - PT: Desde 1 de agosto de 2026, o Banco de Portugal limita a 45% do rendimento líquido o total das prestações de todos os créditos de quem pede um novo crédito. Cada banco pode exceder o limite em até 10% do crédito que concede por ano.
@@ -2456,9 +2456,9 @@ How to edit:
 - FR: Acheter depuis l'étranger, pas à pas
 
 ### lede
-- PT: Casa, crédito, seguros, advogado, impostos e envio do dinheiro: para cada passo, a regra e o parceiro que o resolve. Escolha o que precisa num só pedido; cada parte segue apenas para o parceiro que autorizar.
-- EN: Home, mortgage, insurance, lawyer, tax and sending the money: for each step, the rule and the partner who handles it. Choose what you need in one request; each part goes only to the partner you authorise.
-- FR: Bien, crédit, assurances, avocat, impôts et envoi de l'argent : pour chaque étape, la règle et le partenaire qui s'en charge. Choisissez ce dont vous avez besoin en une seule demande ; chaque partie va uniquement au partenaire que vous autorisez.
+- PT: Casa, crédito, seguros, advogado, impostos e envio do dinheiro. Para cada passo, a regra e o parceiro que o resolve. Escolha o que precisa num só pedido. Cada parte segue só para o parceiro que autorizar.
+- EN: Home, mortgage, insurance, lawyer, tax and sending the money. For each step, the rule and the partner who handles it. Choose what you need in one request. Each part goes only to the partner you authorise.
+- FR: Bien, crédit, assurances, avocat, impôts et envoi de l'argent. Pour chaque étape, la règle et le partenaire qui s'en charge. Choisissez ce dont vous avez besoin en une seule demande. Chaque partie va uniquement au partenaire que vous autorisez.
 
 ### s.agency.h
 - PT: Ver casas sem viajar
@@ -2466,9 +2466,9 @@ How to edit:
 - FR: Voir des biens sans voyager
 
 ### s.agency.p
-- PT: A agência parceira, a {agency} (AMI {ami}), procura casas no seu orçamento e mostra-as por videochamada, através de um familiar ou ao vivo.
-- EN: Our partner agency, {agency} (AMI {ami}), looks for homes in your budget and shows them by video call, through a relative or in person.
-- FR: Notre agence partenaire, {agency} (AMI {ami}), cherche des biens dans votre budget et vous les montre en appel vidéo, par un proche ou sur place.
+- PT: A nossa agência parceira, a {agency} (AMI {ami}), procura casas no seu orçamento. Mostra-as por videochamada, através de um familiar ou ao vivo.
+- EN: Our partner agency, {agency} (AMI {ami}), looks for homes in your budget. It shows them by video call, through a relative or in person.
+- FR: Notre agence partenaire, {agency} (AMI {ami}), cherche des biens dans votre budget. Elle vous les montre en appel vidéo, par un proche ou sur place.
 
 ### s.credit.h
 - PT: Um crédito a partir de fora
@@ -2496,9 +2496,9 @@ How to edit:
 - FR: Le contrat, la procuration et les impôts
 
 ### s.lawyer.p
-- PT: Um advogado para o contrato-promessa, a procuração e a escritura, e um consultor fiscal para o NIF, o representante fiscal e os impostos onde vive.
-- EN: A lawyer for the promissory contract, the power of attorney and the deed, and a tax adviser for the NIF, the tax representative and tax where you live.
-- FR: Un avocat pour le compromis, la procuration et l'acte, et un conseiller fiscal pour le NIF, le représentant fiscal et l'impôt dans votre pays.
+- PT: Um advogado trata do contrato-promessa, da procuração e da escritura. Um consultor fiscal trata do NIF, do representante fiscal e dos impostos onde vive.
+- EN: A lawyer handles the promissory contract, the power of attorney and the deed. A tax adviser handles the NIF, the tax representative and tax where you live.
+- FR: Un avocat s'occupe du compromis, de la procuration et de l'acte. Un conseiller fiscal s'occupe du NIF, du représentant fiscal et de l'impôt dans votre pays.
 
 ### s.fx.h
 - PT: Enviar o dinheiro
@@ -2591,9 +2591,9 @@ How to edit:
 - FR: Licences
 
 ### licences.p
-- PT: Mostramos a licença de cada parceiro: AMI para a agência imobiliária, registo no Banco de Portugal para o intermediário de crédito, registo na ASF para seguros, inscrição na Ordem para advogados.
-- EN: We show each partner's licence: AMI for the estate agency, Banco de Portugal registration for the credit intermediary, ASF registration for insurance, Bar membership for lawyers.
-- FR: Nous affichons la licence de chaque partenaire : AMI pour l'agence immobilière, enregistrement au Banco de Portugal pour l'intermédiaire de crédit, à l'ASF pour l'assurance, inscription à l'Ordre pour les avocats.
+- PT: Mostramos a licença de cada parceiro. AMI para a agência, Banco de Portugal para o crédito, ASF para os seguros, a Ordem para os advogados.
+- EN: We show each partner's licence. AMI for the agency, Banco de Portugal for the mortgage, ASF for insurance, the Bar for lawyers.
+- FR: Nous affichons la licence de chaque partenaire. AMI pour l'agence, Banco de Portugal pour le crédit, ASF pour l'assurance, l'Ordre pour les avocats.
 
 ## data
 
@@ -2799,9 +2799,9 @@ How to edit:
 - FR: L'espace que votre budget permet
 
 ### lede
-- PT: Escreva um valor e veja, concelho a concelho, quantos metros quadrados pode ter em Portugal.
-- EN: Enter an amount and see, municipality by municipality, how many square metres it buys in Portugal.
-- FR: Indiquez un montant et voyez, commune par commune, combien de mètres carrés il permet au Portugal.
+- PT: Escreva um valor. Veja quantos metros quadrados compra em cada concelho de Portugal.
+- EN: Enter an amount. See how many square metres it buys in each municipality of Portugal.
+- FR: Indiquez un montant. Voyez combien de mètres carrés il permet dans chaque commune du Portugal.
 
 ### budget.label
 - PT: O seu orçamento
@@ -2814,9 +2814,9 @@ How to edit:
 - FR: environ {local} au taux de référence de la BCE du {date}
 
 ### legend
-- PT: A altura e a cor mostram os metros quadrados que o orçamento compra ao preço mediano das casas vendidas (INE, {quarter}).
-- EN: Height and colour show the square metres your budget buys at the median price of homes sold (INE, {quarter}).
-- FR: La hauteur et la couleur indiquent les mètres carrés que permet votre budget au prix médian des logements vendus (INE, {quarter}).
+- PT: A altura e a cor mostram os metros quadrados do seu orçamento. Base: o preço mediano das casas vendidas (INE, {quarter}).
+- EN: Height and colour show the square metres your budget buys. Based on the median price of homes sold (INE, {quarter}).
+- FR: La hauteur et la couleur montrent les mètres carrés de votre budget. Base : le prix médian des logements vendus (INE, {quarter}).
 
 ### hint
 - PT: Toque num concelho para ver o detalhe.
@@ -2959,9 +2959,9 @@ How to edit:
 - FR: Votre budget permet
 
 ### note
-- PT: Medianas de vendas reais nos últimos 12 meses, não casas concretas. Onde há poucas vendas, os valores variam mais. A Madeira e os Açores aparecem ao lado do continente, numa escala menor.
-- EN: Medians of actual sales over the last 12 months, not specific homes. Where there are few sales, figures vary more. Madeira and the Azores are shown beside the mainland at a smaller scale.
-- FR: Médianes de ventes réelles sur les 12 derniers mois, pas des biens précis. Là où les ventes sont rares, les chiffres varient davantage. Madère et les Açores figurent à côté du continent, à plus petite échelle.
+- PT: São medianas de vendas reais nos últimos 12 meses, não casas concretas. Onde há poucas vendas, os valores variam mais. A Madeira e os Açores aparecem ao lado do continente, numa escala menor.
+- EN: These are medians of actual sales over 12 months, not specific homes. Where sales are few, figures vary more. Madeira and the Azores sit beside the mainland, at a smaller scale.
+- FR: Ce sont des médianes de ventes réelles sur 12 mois, pas des biens précis. Là où les ventes sont rares, les chiffres varient davantage. Madère et les Açores figurent à côté du continent, à plus petite échelle.
 
 ### open
 - PT: Abrir o mapa
@@ -2974,9 +2974,9 @@ How to edit:
 - FR: L'espace que votre budget permet
 
 ### home.p
-- PT: Escreva um valor e veja, concelho a concelho, quantos metros quadrados pode ter.
-- EN: Enter an amount and see, municipality by municipality, how many square metres it buys.
-- FR: Indiquez un montant et voyez, commune par commune, combien de mètres carrés il permet.
+- PT: Escreva um valor. Veja quantos metros quadrados compra em cada concelho.
+- EN: Enter an amount. See how many square metres it buys in each municipality.
+- FR: Indiquez un montant. Voyez combien de mètres carrés il permet dans chaque commune.
 
 ## scen
 
@@ -2986,9 +2986,9 @@ How to edit:
 - FR: Quatre budgets, côte à côte
 
 ### lede
-- PT: Onde cada orçamento faz sentido, com os metros quadrados ao preço mediano das casas vendidas (INE). A partir de 5 milhões, anúncios publicados como exemplo.
-- EN: Where each budget makes sense, with the square metres it buys at the median price of homes sold (INE). From 5 million, published listings as examples.
-- FR: Où chaque budget prend son sens, avec les mètres carrés qu'il permet au prix médian des logements vendus (INE). À partir de 5 millions, des annonces publiées en exemple.
+- PT: Onde cada orçamento faz sentido, ao preço mediano das casas vendidas (INE). A partir de 5 milhões, anúncios publicados como exemplo.
+- EN: Where each budget makes sense, at the median price of homes sold (INE). From 5 million, published listings as examples.
+- FR: Où chaque budget prend son sens, au prix médian des logements vendus (INE). À partir de 5 millions, des annonces publiées en exemple.
 
 ### local
 - PT: cerca de {local}
@@ -3026,11 +3026,16 @@ How to edit:
 - FR: Exemple, annonce publiée
 
 ### note
-- PT: As medianas do INE descrevem concelhos inteiros, não as zonas mais procuradas dentro deles, como a Quinta do Lago em Loulé. Os exemplos são preços pedidos em anúncios publicados, não preços de venda, e não são casas da nossa agência parceira.
-- EN: INE medians describe whole municipalities, not the most sought-after enclaves inside them, such as Quinta do Lago in Loulé. The examples are asking prices from published listings, not sale prices, and are not homes from our partner agency.
-- FR: Les médianes de l'INE décrivent des communes entières, pas les secteurs les plus recherchés qu'elles contiennent, comme Quinta do Lago à Loulé. Les exemples sont des prix demandés dans des annonces publiées, pas des prix de vente, et ne sont pas des biens de notre agence partenaire.
+- PT: As medianas do INE descrevem concelhos inteiros. Não descrevem as zonas mais procuradas dentro deles, como a Quinta do Lago em Loulé. Os exemplos são preços pedidos em anúncios, não preços de venda. Não são casas da nossa agência parceira.
+- EN: INE medians describe whole municipalities. They don't describe the most sought-after enclaves inside them, such as Quinta do Lago in Loulé. The examples are asking prices from listings, not sale prices. They are not homes from our partner agency.
+- FR: Les médianes de l'INE décrivent des communes entières. Elles ne décrivent pas les secteurs les plus recherchés, comme Quinta do Lago à Loulé. Les exemples sont des prix demandés, pas des prix de vente. Ce ne sont pas des biens de notre agence partenaire.
 
 ## private
+
+### qa.h
+- PT: As questões que mais pesam a partir de 1 milhão
+- EN: The questions that matter most from €1 million
+- FR: Les questions qui comptent à partir d'un million
 
 ### title
 - PT: Private
@@ -3049,7 +3054,7 @@ How to edit:
 
 ### live.q
 - PT: Quero viver em Portugal parte do ano.
-- EN: I'd like to live in Portugal for part of the year.
+- EN: Living in Portugal for part of the year.
 - FR: Je voudrais vivre au Portugal une partie de l'année.
 
 ### live.a
@@ -3079,7 +3084,7 @@ How to edit:
 
 ### aimi.q
 - PT: Vou ter mais do que uma casa.
-- EN: I'll own more than one home.
+- EN: More than one home in Portugal.
 - FR: Je vais posséder plus d'un bien.
 
 ### aimi.a
@@ -3088,9 +3093,9 @@ How to edit:
 - FR: En plus de l'IMI de chaque bien, l'IMI additionnel (AIMI) porte sur la somme des valeurs fiscales au-delà de 600 000 € par personne : 0,7 %, avec des taux marginaux de 1 % au-delà d'un million et de 1,5 % au-delà de 2 millions. Un conseiller fiscal partenaire fait le calcul sur votre patrimoine.
 
 ### holding.q
-- PT: Posso comprar através de uma sociedade?
-- EN: Can I buy through a company?
-- FR: Puis-je acheter par une société ?
+- PT: Posso comprar em nome de uma sociedade?
+- EN: Can I buy in a company's name?
+- FR: Puis-je acheter au nom d'une société ?
 
 ### holding.a
 - PT: Pode. Uma sociedade paga AIMI de 0,4%, ou 0,7% se a casa for de uso pessoal dos sócios ou gerentes. Se a sociedade tiver sede, ou for controlada a partir de um território com regime fiscal mais favorável da lista das Finanças, o IMT é de 10% sem isenções e o IMI de 7,5% ao ano. Um consultor fiscal e um advogado parceiros comparam a compra em nome próprio e por sociedade.
@@ -3099,7 +3104,7 @@ How to edit:
 
 ### bank.q
 - PT: Prefiro tratar o crédito com um banco privado.
-- EN: I'd rather arrange the loan with a private bank.
+- EN: A private bank for the loan.
 - FR: Je préfère passer par une banque privée pour le crédit.
 
 ### bank.a

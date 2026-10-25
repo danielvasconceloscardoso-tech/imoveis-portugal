@@ -10,10 +10,10 @@ sponsored: false
 status: draft
 ---
 
-## Video 1: 26,250 €
+## Video 1: €26,250
 
-- **Hook:** "A 350,000 € apartment in Portugal. How much transfer tax if you live in Israel?"
-- **Body:** "Non-residents pay a flat 7.5% since May 2026. That's 26,250 €."
+- **Hook:** "A €350,000 apartment in Portugal. How much transfer tax if you live in Israel?"
+- **Body:** "Non-residents pay a flat 7.5% since May 2026. That's €26,250."
 - **Close:** "Source: Portugal's IMT code, article 17."
 
 ## Video 2: the exceptions
@@ -25,7 +25,7 @@ status: draft
 ## Video 3: stamp duty
 
 - **Hook:** "The other tax every buyer pays."
-- **Body:** "Stamp duty: 0.8% of the price. 2,800 € on 350,000 €."
+- **Body:** "Stamp duty: 0.8% of the price. €2,800 on €350,000."
 - **Close:** "Source: Portugal's stamp duty table."
 
 ## Video 4: 15 days

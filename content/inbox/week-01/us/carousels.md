@@ -10,12 +10,12 @@ sponsored: false
 status: draft
 ---
 
-## Carousel 1: "400,000 €: purchase taxes"
+## Carousel 1: "€400,000: purchase taxes"
 
-1. A 400,000 € home in Portugal. Purchase taxes?
-2. Transfer tax (IMT), non-resident: 30,000 €
-3. Stamp duty: 3,200 €
-4. Total: 33,200 €
+1. A €400,000 home in Portugal. Purchase taxes?
+2. Transfer tax (IMT), non-resident: €30,000
+3. Stamp duty: €3,200
+4. Total: €33,200
 5. Not included: deed, registration, legal fees, exchange
 
 ## Carousel 2: "The exceptions to 7.5%"

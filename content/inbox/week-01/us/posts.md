@@ -12,7 +12,7 @@ status: draft
 
 ## Post 1
 
-Buying a home in Portugal while living in the US? Since May 2026, non-residents pay a flat 7.5% property transfer tax. On 400,000 €, that's 30,000 €. Source: Portugal's IMT code, article 17.
+Buying a home in Portugal while living in the US? Since May 2026, non-residents pay a flat 7.5% property transfer tax. On €400,000, that's €30,000. Source: Portugal's IMT code, article 17.
 
 ## Post 2
 

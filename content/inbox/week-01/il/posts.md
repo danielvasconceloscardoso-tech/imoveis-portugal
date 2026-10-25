@@ -12,7 +12,7 @@ status: draft
 
 ## Post 1
 
-Buying in Portugal from Israel? Since May 2026, non-residents pay a flat 7.5% property transfer tax. On 350,000 €, that's 26,250 €. Source: Portugal's IMT code, article 17.
+Buying in Portugal from Israel? Since May 2026, non-residents pay a flat 7.5% property transfer tax. On €350,000, that's €26,250. Source: Portugal's IMT code, article 17.
 
 ## Post 2
 

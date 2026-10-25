@@ -84,7 +84,7 @@ const site = config.agency.website.replace(/^https:\/\/|\/$/g, "");
           <p class="small">{c("partners.vat", lang)} {c("partners.proposal", lang)}</p>
           <p style="margin-top:24px;max-width:40em">{c("partners.network.p", lang)}</p>
           <h3 style="margin-top:40px">{c("kit.types.h", lang)}</h3>
-          <ul class="ptypes">{PTYPES.map((t) => <li><a href={`${pathFor(lang, ed, "partners")}${t.slug[lang]}/`}>{c(`kit.${t.key}.h`, lang)}</a></li>)}</ul>
+          <ul class="ptypes">{PTYPES.map((t) => <li><a href={`${pathFor(lang, ed, "partners")}${t.slug[lang]}/`}>{c(`kit.${t.key}.label`, lang)}</a></li>)}</ul>
           <p><a class="more" href={pathFor(lang, ed, "ours")}>{c("ours.title", lang)}</a></p>
         </div>
       </section>

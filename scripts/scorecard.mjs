@@ -26,11 +26,11 @@ const dist = join(root, "site", "dist");
 // Pages scored, per language (Luxembourg edition for PT, US for EN, France for FR: the canonical editions, D24).
 const ED = { pt: "lu", en: "us", fr: "fr" };
 const SLUG = {
-  pt: { faq: "perguntas-frequentes", sims: "simuladores", cost: "simuladores/custo-total", map: "mapa", place: "mapa/porto", partners: "parceiros", buy: "comprar", blog: "blog", how: "como-trabalhamos" },
-  en: { faq: "faq", sims: "calculators", cost: "calculators/total-cost", map: "map", place: "map/porto", partners: "partners", buy: "buy", blog: "blog", how: "how-we-work" },
-  fr: { faq: "questions-frequentes", sims: "simulateurs", cost: "simulateurs/cout-total", map: "carte", place: "carte/porto", partners: "partenaires", buy: "acheter", blog: "blog", how: "notre-methode" },
+  pt: { faq: "perguntas-frequentes", sims: "simuladores", cost: "simuladores/custo-total", map: "mapa", place: "mapa/porto", partners: "parceiros", buy: "comprar", blog: "blog", how: "como-trabalhamos", private: "private", step: "comprar-a-partir-de-fora" },
+  en: { faq: "faq", sims: "calculators", cost: "calculators/total-cost", map: "map", place: "map/porto", partners: "partners", buy: "buy", blog: "blog", how: "how-we-work", private: "private", step: "buying-from-abroad" },
+  fr: { faq: "questions-frequentes", sims: "simulateurs", cost: "simulateurs/cout-total", map: "carte", place: "carte/porto", partners: "partenaires", buy: "acheter", blog: "blog", how: "notre-methode", private: "private", step: "acheter-depuis-l-etranger" },
 };
-const PAGES = ["home", "faq", "sims", "cost", "map", "place", "partners", "buy", "blog", "how"];
+const PAGES = ["home", "faq", "sims", "cost", "map", "place", "partners", "buy", "blog", "how", "private", "step"];
 const LH_PAGES = ["home", "faq", "cost", "map"];
 const url = (lang, p) => `/${lang}/${ED[lang]}/${p === "home" ? "" : SLUG[lang][p] + "/"}`;
 
@@ -92,6 +92,7 @@ const fails = [];
 for (const lang of ["pt", "en", "fr"]) for (const key of PAGES) {
   const u = url(lang, key);
   await page.goto(base + u, { waitUntil: "load" });
+  await page.waitForTimeout(900); // let the half-second fades finish (prompt 19) before measuring contrast
   const data = await page.evaluate(() => {
     const main = document.querySelector("main") || document.body;
     const heads = [...main.querySelectorAll("h1,h2,h3")].map((h) => h.textContent.trim()).filter(Boolean);
@@ -99,7 +100,7 @@ for (const lang of ["pt", "en", "fr"]) for (const key of PAGES) {
     const buttons = [...document.querySelectorAll("a.btn,button,.nav a,a.more")].map((b) => b.textContent.trim()).filter(Boolean);
     // Prose only for readability: paragraphs and list items outside navigation, source lists and data rows.
     const prose = [...main.querySelectorAll("p,li,summary")].filter((p) => !p.closest("nav,.sources-list,.bill,table,.others,.ft")).map((p) => p.textContent.replace(/\s+/g, " ").trim()).filter((t) => t.length > 2);
-    const paras = [...main.querySelectorAll("p,li,dd,dt,summary")].map((p) => p.textContent.replace(/\s+/g, " ").trim()).filter((t) => t.length > 2);
+    const paras = [...main.querySelectorAll("p,li,dd,dt,summary")].filter((p) => !p.closest(".sources-list")).map((p) => p.textContent.replace(/\s+/g, " ").trim()).filter((t) => t.length > 2);
     return { heads, top, buttons, paras, prose };
   });
   await page.addScriptTag({ content: axeSrc });
@@ -119,6 +120,9 @@ for (const lang of ["pt", "en", "fr"]) for (const key of PAGES) {
     ltHeads = await languageTool([...new Set([...data.heads, ...data.buttons])].join("\n\n"), lang); await new Promise((s) => setTimeout(s, 3200));
     ltBody = await languageTool(body, lang); await new Promise((s) => setTimeout(s, 3200));
   }
+  // Brand choices, not errors (prompt 19): the "Newsletter" button by name, and M€ for millions on the map presets.
+  const IGNORE = new Set(["PT_BARBARISMS_REPLACE_NEWSLETTER", "CURRENCY_PLACEMENT_PT_FOREIGN"]);
+  ltHeads = ltHeads.filter((m) => !IGNORE.has(m.rule.id)); ltBody = ltBody.filter((m) => !IGNORE.has(m.rule.id));
   const row = { key, u, read, voice, qHeads, repeats, englishLeft, axe, ltHeads: ltHeads.map((m) => `${m.rule.id}: "${m.context.text.slice(m.context.offset, m.context.offset + m.context.length)}"`), ltBody: ltBody.length, ltBodyEx: ltBody.slice(0, 3).map((m) => `${m.rule.id}: "${m.context.text.slice(m.context.offset, m.context.offset + m.context.length)}"`) };
   results[lang].push(row);
   const f = [];

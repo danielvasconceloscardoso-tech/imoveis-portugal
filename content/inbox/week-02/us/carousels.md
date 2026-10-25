@@ -18,11 +18,11 @@ status: draft
 4. Term: up to 40 years (age 35 or younger) or 35 years
 5. Source: Banco de Portugal, rules applying since August 1, 2026
 
-## Carousel 2: "A 400,000 € vacation home"
+## Carousel 2: "A €400,000 vacation home"
 
-1. A 400,000 € vacation home. How much will the bank lend?
-2. Maximum 80% = 320,000 €
-3. Your money: at least 80,000 €
+1. A €400,000 vacation home. How much will the bank lend?
+2. Maximum 80% = €320,000
+3. Your money: at least €80,000
 4. Plus transfer tax, stamp duty and the deed
 5. Stamp duty on the loan: 0.6%
 

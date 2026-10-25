@@ -1,5 +1,6 @@
 // Browser side of MapExplorer.astro (prompts 16 and 19). MapLibre is imported only when the map is needed:
 // the first interaction on the map page, or when the map scrolls into view on the home page.
+import mapCss from "maplibre-gl/dist/maplibre-gl.css?url";
 type Props = { n: string; s: string; c: string; v: number | null; r: string; coast: boolean; city: boolean; air: boolean; x: number; y: number };
 type Cfg = { labels: Record<string, any>; links: { buy: string; talk: string; sim: string; map: string; pages: string[] }; quarter: string; privateHref: string; privateLabel: string };
 
@@ -89,7 +90,9 @@ export function initMapExplorer(root: HTMLElement) {
 
   async function load() {
     if (map || loading) return; loading = true;
-    const [{ default: maplibre }] = await Promise.all([import("maplibre-gl"), import("maplibre-gl/dist/maplibre-gl.css")]);
+    // The MapLibre stylesheet is added only now, so it never blocks the first paint of the page.
+    if (!document.querySelector("link[data-maplibre]")) { const l = document.createElement("link"); l.rel = "stylesheet"; l.href = mapCss; l.dataset.maplibre = ""; document.head.append(l); }
+    const { default: maplibre } = await import("maplibre-gl");
     const geo = await fetch("/data/pt-map.geojson").then((r) => r.json());
     features = geo.features;
     const flat = reduce() || lowPower();
@@ -146,7 +149,20 @@ export function initMapExplorer(root: HTMLElement) {
 
   // When to load the live map: first interaction with it (map page), or in view (home page).
   const go = () => load();
-  if (root.dataset.mode === "home") new IntersectionObserver((es, o) => { if (es.some((e) => e.isIntersecting)) { o.disconnect(); go(); } }, { rootMargin: "200px" }).observe(root);
+  // Home: only once the reader has scrolled and the map is well in view, so the first screen stays light;
+  // the idle rotation pauses whenever the map leaves the screen.
+  if (root.dataset.mode === "home") {
+    let scrolled = false, visible = false;
+    const tryGo = () => { if (scrolled && visible) go(); };
+    addEventListener("scroll", () => { scrolled = true; tryGo(); }, { once: true, passive: true });
+    root.addEventListener("pointerdown", go, { once: true, passive: true });
+    new IntersectionObserver((es) => {
+      visible = es.some((e) => e.isIntersecting);
+      if (map && !visible) rotating = false;
+      else if (map && visible && !rotating && !(reduce() || lowPower()) && !selected) { rotating = true; spin(); }
+      tryGo();
+    }, { threshold: 0.35 }).observe(root);
+  }
   else {
     ["pointerdown", "touchstart", "focusin", "wheel"].forEach((ev) => root.addEventListener(ev, go, { once: true, passive: true }));
     addEventListener("scroll", go, { once: true, passive: true });

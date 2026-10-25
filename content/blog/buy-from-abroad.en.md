@@ -4,7 +4,7 @@ lang: en
 slug: buy-a-home-in-portugal-from-abroad
 title: "Buying a home in Portugal from abroad, step by step"
 description: "The steps of a purchase made from abroad: NIF, mortgage, promissory contract, power of attorney, taxes and deed, with deadlines, costs and official sources."
-tldr: "You can buy a home in Portugal without living here. The usual order: NIF, budget and mortgage, promissory contract, power of attorney if you can't come, taxes and deed. At a Casa Pronta office, the deed with registration costs 375 €, or 700 € with a mortgage."
+tldr: "You can buy a home in Portugal without living here. The usual order: NIF, budget and mortgage, promissory contract, power of attorney if you can't come, taxes and deed. At a Casa Pronta office, the deed with registration costs €375, or €700 with a mortgage."
 published: 2026-10-25
 updated: 2026-10-25
 cta: lawyer
@@ -32,7 +32,7 @@ A Portuguese bank can lend to someone who lives abroad, and each bank decides ca
 
 When the bank approves, it hands over the European Standardised Information Sheet (FINE) with the terms and the draft contract. The offer binds the bank for at least 30 days, and you can only accept it after the first seven, the reflection period.[[pt-mortgage-fine-30-7]] The bank may require insurance linked to the loan, but must accept another provider's policy if the cover is equivalent.[[pt-mortgage-insurance]]
 
-On a 300,000 € purchase by a non-resident with an 80% loan, the own funds needed come to 86,340 €: the down payment, the 7.5% IMT[[pt-imt-nonresident-flat]] and the stamp duty on the purchase and on the loan. The full calculation is in the [free guide]({{guide}}).
+On a €300,000 purchase by a non-resident with an 80% loan, the own funds needed come to €86,340: the down payment, the 7.5% IMT[[pt-imt-nonresident-flat]] and the stamp duty on the purchase and on the loan. The full calculation is in the [free guide]({{guide}}).
 
 ## 4. The promissory contract sets price, date and deposit
 
@@ -52,7 +52,7 @@ IMT is due on the day it's assessed or within the following 30 days.[[pt-imt-pay
 
 ## 8. The deed and the registration happen in one place
 
-At a Casa Pronta office, the deed and the registration are done in the same place. It costs 375 € with one registration act and 700 € with a mortgage, plus 50 € per extra property. Lawyer fees are separate.[[pt-casa-pronta-fees]]
+At a Casa Pronta office, the deed and the registration are done in the same place. It costs €375 with one registration act and €700 with a mortgage, plus €50 per extra property. Lawyer fees are separate.[[pt-casa-pronta-fees]]
 
 Bring the civil and tax identification of sellers and buyers, the building's technical file if one exists, the deed's reference to the usage licence (or its waiver, depending on the construction date) and the energy certificate.[[pt-casa-pronta-docs-all]]
 

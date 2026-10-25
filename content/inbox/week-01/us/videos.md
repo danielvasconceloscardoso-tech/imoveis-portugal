@@ -3,7 +3,7 @@ edition: us
 lang: en
 type: video
 week: 1
-title: "Five short videos: the real cost of a 400,000 € home"
+title: "Five short videos: the real cost of a €400,000 home"
 sources: [pt-imt-nonresident-flat, pt-imt-nonresident-exceptions, pt-imt-hpp-2026, pt-is-purchase, pt-tax-rep, us-fbar]
 cta: guide
 sponsored: false
@@ -12,10 +12,10 @@ status: draft
 
 Format: vertical, 30 to 45 seconds, captioned.
 
-## Video 1: 30,000 €
+## Video 1: €30,000
 
-- **Hook:** "A 400,000 € home in Portugal. How much transfer tax if you live in the US?"
-- **Body:** "Since May 2026, non-residents pay a flat 7.5%. That's 30,000 €."
+- **Hook:** "A €400,000 home in Portugal. How much transfer tax if you live in the US?"
+- **Body:** "Since May 2026, non-residents pay a flat 7.5%. That's €30,000."
 - **Close:** "Source: Portugal's IMT code, article 17."
 
 ## Video 2: the two-year rule
@@ -27,7 +27,7 @@ Format: vertical, 30 to 45 seconds, captioned.
 ## Video 3: stamp duty
 
 - **Hook:** "One more tax every buyer pays in Portugal."
-- **Body:** "Stamp duty: 0.8% of the price. 3,200 € on 400,000 €."
+- **Body:** "Stamp duty: 0.8% of the price. €3,200 on €400,000."
 - **Close:** "With a mortgage, add 0.6% of the loan."
 
 ## Video 4: 15 days

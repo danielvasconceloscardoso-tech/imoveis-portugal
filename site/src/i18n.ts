@@ -43,4 +43,7 @@ export const EDITIONS: Record<EdCode, { code: EdCode; domain: string; defaultLan
 export const ED_ORDER: EdCode[] = ["lu", "fr", "ch", "br", "us", "il"];
 
 // Thousands: space in PT and FR, comma in EN.
-export const eur = (n: number, lang: Lang) => String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, lang === "en" ? "," : " ") + " €";
+export const eur = (n: number, lang: Lang) => {
+  const s = String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, lang === "en" ? "," : " ");
+  return lang === "en" ? `€${s}` : `${s} €`; // English puts the sign first (€245,000), PT and FR after (245 000 €)
+};

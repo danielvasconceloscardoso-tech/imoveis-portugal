@@ -15,19 +15,19 @@ status: draft
 
 # Buying a home in Portugal as an American: the real total cost
 
-A home listed at 400,000 € in Portugal costs an American buyer who lives in the US 33,200 € in purchase taxes alone. Since May 2026, Portugal charges buyers who are not Portuguese tax residents a flat property transfer tax, and it changes the math.
+A home listed at €400,000 in Portugal costs an American buyer who lives in the US €33,200 in purchase taxes alone. Since May 2026, Portugal charges buyers who are not Portuguese tax residents a flat property transfer tax, and it changes the math.
 
-## Property transfer tax (IMT): 30,000 €
+## Property transfer tax (IMT): €30,000
 
-IMT is the tax paid when you buy. Since May 2026, the IMT code applies a flat 7.5% to non-residents buying a home, with no exemption or reduction. On 400,000 €, that is 30,000 €.
+IMT is the tax paid when you buy. Since May 2026, the IMT code applies a flat 7.5% to non-residents buying a home, with no exemption or reduction. On €400,000, that is €30,000.
 
-For comparison, a Portuguese tax resident buying the same home as their main residence pays about 18,237 €, using the 2026 brackets.
+For comparison, a Portuguese tax resident buying the same home as their main residence pays about €18,237, using the 2026 brackets.
 
 The law has exceptions. The flat rate does not apply if you become a Portuguese tax resident within two years of the purchase, or if you rent the home out as a residence, at a capped rent, for at least 36 months in the first five years. In those cases you pay 7.5% first and ask for the difference back within six months. If you plan to move to Portugal, the two-year rule matters.
 
-## Stamp duty: 3,200 €
+## Stamp duty: €3,200
 
-Every buyer pays stamp duty of 0.8% of the price: 3,200 € on 400,000 €. With a Portuguese mortgage, add 0.6% of the loan amount and 4% of the interest.
+Every buyer pays stamp duty of 0.8% of the price: €3,200 on €400,000. With a Portuguese mortgage, add 0.6% of the loan amount and 4% of the interest.
 
 ## Before you sign: a NIF
 
@@ -43,11 +43,11 @@ A Portuguese bank account counts toward your FBAR: if your foreign accounts toge
 
 ## Summary
 
-| Home at 400,000 € | Non-resident | Portuguese resident, main home |
+| Home at €400,000 | Non-resident | Portuguese resident, main home |
 | --- | --- | --- |
-| IMT | 30,000 € | 18,237 € |
-| Stamp duty (0.8%) | 3,200 € | 3,200 € |
-| Purchase taxes | 33,200 € | 21,437 € |
+| IMT | €30,000 | €18,237 |
+| Stamp duty (0.8%) | €3,200 | €3,200 |
+| Purchase taxes | €33,200 | €21,437 |
 
 Rounded to the euro, 2026 tables. Excludes the deed, registration, legal fees, currency exchange and mortgage costs.
 

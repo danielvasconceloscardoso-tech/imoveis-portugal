@@ -10,19 +10,19 @@ sponsored: false
 status: draft
 ---
 
-## Carousel 1: "350,000 €: purchase taxes"
+## Carousel 1: "€350,000: purchase taxes"
 
-1. A 350,000 € apartment in Portugal. Purchase taxes?
-2. Transfer tax (IMT), non-resident: 26,250 €
-3. Stamp duty: 2,800 €
-4. Total: 29,050 €
+1. A €350,000 apartment in Portugal. Purchase taxes?
+2. Transfer tax (IMT), non-resident: €26,250
+3. Stamp duty: €2,800
+4. Total: €29,050
 5. Not included: deed, registration, legal fees, exchange
 
 ## Carousel 2: "Resident or not?"
 
 1. Same apartment, two tax bills
-2. Non-resident: 29,050 €
-3. Portuguese resident, main home: 17,037 €
+2. Non-resident: €29,050
+3. Portuguese resident, main home: €17,037
 4. Moving within two years? You can claim back the difference
 5. Source: IMT code, Decree-Law 97/2026
 

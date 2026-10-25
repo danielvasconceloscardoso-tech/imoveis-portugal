@@ -1,6 +1,6 @@
 /* Redesign v2 (prompt 09): success and trust. Brief: design/v2/BRIEF.md.
    Newsreader for statements and numbers, Public Sans for everything you click or scan. */
-@import "@fontsource-variable/newsreader/opsz.css";
+@import "@fontsource-variable/newsreader/wght.css"; /* weight axis only: 58 KB instead of 132 KB (prompt 19, Lighthouse) */
 @import "@fontsource/public-sans/latin-400.css";
 @import "@fontsource/public-sans/latin-500.css";
 @import "@fontsource/public-sans/latin-600.css";
@@ -483,8 +483,8 @@ a.sup + a.sup::before { content: ","; color: var(--muted); margin-right: 1px; }
   --accent: #1f4a3d;
   --accent-ink: #fbf9f4;
   --accent-soft: #e8ede8;
-  --brass: #8c6d33;
-  --gold: #8c6d33;
+  --brass: #7a5e28;
+  --gold: #7a5e28;
   --r: 2px;
 }
 body { font-feature-settings: "kern", "liga"; }
@@ -498,7 +498,7 @@ img.cover { box-shadow: none; outline: 1px solid var(--rule); }
 .card { box-shadow: none !important; }
 a, .nav a, .langs a { transition: color .35s ease, text-decoration-color .35s ease; }
 @media (prefers-reduced-motion: no-preference) {
-  main { animation: ip-fade 1.1s ease both; }
+  main img:not([fetchpriority]) { animation: ip-fade 1.1s ease both; }
   @keyframes ip-fade { from { opacity: 0; } to { opacity: 1; } }
 }
 
@@ -582,3 +582,11 @@ a, .nav a, .langs a { transition: color .35s ease, text-decoration-color .35s ea
 .st-actions { display: flex; flex-wrap: wrap; gap: 10px; }
 @media print { .sim, .sim-next, .others, .st-actions, .sticky { display: none !important; } .statement { border: 0; } }
 .sim { background: none; border: 0; border-radius: 0; padding: 8px 0 0; }
+/* Steps collapse before the first paint when JavaScript runs (no layout shift); without it, every question shows. */
+html:not(.js) .step-nav { display: none; }
+.js .sim .step:not([data-step="0"]) { display: none; }
+.js .sim.stepped .step.is-on { display: block; }
+.js .sim.stepped .step:not(.is-on) { display: none; }
+.scen-ex-list { margin: 6px 0 0; }
+.scen-ex-list dt { font: 600 14px/1.4 var(--sans); margin-top: 10px; font-variant-numeric: tabular-nums; }
+.scen-ex-list dd { margin: 2px 0 0; color: var(--muted); }
