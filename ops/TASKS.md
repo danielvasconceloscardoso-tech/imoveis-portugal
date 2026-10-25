@@ -24,8 +24,8 @@ Status: To do · Doing · Blocked · Done
 | --- | --- | --- | --- | --- |
 | 1 | Prompt 01, Parts 1–2: rebuild sponsor list and 90-day plan | CEO | Done | 2026-10-24 |
 | 2 | Prompt 01, Part 3: Sprint 0 site (site/: four editions, partner page with prices and founding counter, buyer form, newsletter signup, legal drafts, domain middleware) | CEO (in place of CTO) | Done | 2026-10-24 |
-| 2b | Operator setup: follow ops/SETUP.md (mailbox, domains, Cloudflare Pages, Tally, beehiiv, Cal.com) and send the IDs to the CEO chat | Operator | To do | 2026-10-28 |
-| 2c | Put form IDs, embeds, booking link and contact email into site/src/config.ts | CEO or CTO | Blocked: waits for 2b | 2026-10-28 |
+| 2b | Operator setup: follow ops/SETUP.md (mailbox, domains, Tally, beehiiv, Cal.com) and send the IDs to the CEO chat. Cloudflare is done (both workers.dev links answer 200); the rest is open and every form ID in site/src/config.ts is still empty | Operator | Partly done: Cloudflare only | 2026-10-28 |
+| 2c | Put form IDs, embeds, booking link and contact email into site/src/config.ts (forms.*, bookingUrl, calls, ebooksLive all still empty or false on the branch) | CEO or CTO | Blocked: waits for 2b, 8x, 12b | 2026-10-28 |
 | 3 | Answer D1–D7 (D4 postponed) | Operator | Done | 2026-10-24 |
 | 3b | Report back from the Decisão/Paperjam event (contacts, companies worth adding) | Operator | To do | 2026-11-11 |
 | 4 | Create brand email (forwarding via Cloudflare Email Routing once a domain is on Cloudflare) | Operator | To do | 2026-10-27 |
@@ -33,7 +33,7 @@ Status: To do · Doing · Blocked · Done
 | 6 | Create free accounts with the brand email: Cloudflare, beehiiv, Tally, Cal.com | Operator | To do | 2026-10-28 |
 | 7 | Confirm the agency receives buyer leads and the commission split, in writing | Father | To do | 2026-10-31 |
 | 8 | Media kit per edition (sponsors/mediakit/*.pdf, generated from the partner pages) | CEO | Done (v1, rejected on design) | 2026-10-24 |
-| 8b | Run ops/prompts/02_redesign_and_outreach.md: three design directions, redesign site and media kits, draft week-1 outreach emails | CTO | Directions and outreach done; site and media kit build continues in prompt 07 (8n) | 2026-10-26 |
+| 8b | Run ops/prompts/02_redesign_and_outreach.md | CTO | Done: directions, week-1 drafts and site build (via prompts 07 and 09) | 2026-10-26 |
 | 8c | Create the brand Gmail mailbox | Operator | Done (geralportugalimoveis@gmail.com) | 2026-10-24 |
 | 8d | Decide the outreach email signature (Partner's first name, a pen name, or "Equipa Imóveis Portugal") | Operator | To do | 2026-10-25 |
 | 8e | Redo week-1 drafts for the new "This week's 40" (agencies removed, D9): rebase branch claude/brave-gauss-cwafi6 on main, delete drafts for companies no longer in the list, write the missing ones | CTO | Done (branch claude/brave-gauss-cwafi6) | 2026-10-25 |
@@ -47,15 +47,15 @@ Status: To do · Doing · Blocked · Done
 | 10 | Meta Ad Library pass for Luxembourg and Switzerland (links in sponsors/METHOD.md); add advertisers as tier A | Partner | To do | 2026-11-06 |
 | 11 | Get the latest exhibitor list of the Paris Portuguese property fair | Partner | To do | 2026-11-06 |
 | 12 | Optional: move repo to a brand GitHub organisation (current account name contains the founder's name) | Operator | To do | 2026-11-07 |
-| 8g | Run ops/prompts/03_international_sponsors.md (foreign-capital developers, bilateral chambers, embassy economic sections; drafts only) | CTO | To do | 2026-10-30 |
-| 8h | Run ops/prompts/04_free_ebooks.md (facts base + free e-books per edition; drafts for review) | CTO | To do | 2026-11-06 |
+| 8g | Run ops/prompts/03_international_sponsors.md (foreign-capital developers, bilateral chambers, embassy economic sections; drafts only). Checked 2026-10-25: not run. Pipeline has no chambers or embassies, 7 developers and only 4 US-only rows, none for Israel | CTO | To do | 2026-10-30 |
+| 8h | Run ops/prompts/04_free_ebooks.md (facts base + free e-books per edition) | CTO | Done on branch: content/facts/facts.csv (54 facts), 18 e-book PDFs; review in 8i and 9d | 2026-11-06 |
 | 8i | Review legal and tax facts flagged in the e-book PR | Operator | To do | 2026-11-10 |
-| 8j | Apply ops/prompts/05_usa_israel_editions.md to prompts 02–04 (USA and Israel editions for 1 Dec) | CTO | To do | 2026-10-26 |
-| 8k | Run ops/prompts/06_faq_and_topics.md (FAQ pages per edition, 10-week content plan, week 1–2 drafts) | CTO | Done: PR open for review | 2026-11-06 |
+| 8j | Apply ops/prompts/05_usa_israel_editions.md to prompts 02–04 | CTO | Done on branch for FAQ, plans, drafts, e-books, domain options; sponsor targets for US and IL still missing (see 8g) | 2026-10-26 |
+| 8k | Run ops/prompts/06_faq_and_topics.md (FAQ pages per edition, content plan, week 1–2 drafts) | CTO | Done on branch, not merged | 2026-11-06 |
 | 8l | Buy the USA and Israel domains: options in ops/DOMAINS_US_IL.md (.us has no WHOIS privacy and needs a US presence; .co.il rules unclear); availability still to check | Operator (decision CEO and Daniel) | To do | 2026-11-06 |
-| 8m | Switzerland edition in Portuguese and French (site language switch, FAQ, e-books, media kit, newsletter): apply in prompts 02, 04, 06 | CTO | To do | 2026-11-06 |
-| 8n | Run ops/prompts/07_build_direction_c_beta.md (build design C with colour photos, six editions, media kits, free beta preview) | CTO | To do | 2026-10-31 |
-| 8o | Create the free Cloudflare account and connect the repo, following Claude Code's steps (no domain needed) | Operator | To do | 2026-10-27 |
+| 8m | Switzerland edition in Portuguese and French | CTO | Done: superseded by D18 (whole site in PT, EN, FR) | 2026-11-06 |
+| 8n | Run ops/prompts/07_build_direction_c_beta.md (design C, six editions, free beta) | CTO | Done: beta live on workers.dev; design replaced by v2 (prompts 09–13) | 2026-10-31 |
+| 8o | Create the free Cloudflare account and connect the repo | Operator | Done: main and branch previews both deployed | 2026-10-27 |
 | 8u | Confirm two points on the new flat 7.5% IMT for non-residents (DL 97/2026): its start date (no specific rule; general rule gives 25 May 2026) and whether exception (a) "tenha sido considerado residente" covers emigrants who were once Portuguese tax residents. All FAQ and week 1–2 drafts depend on it | Daniel | To do | 2026-10-30 |
 | 8v | Review the items left out or kept narrow in content/faq/UNVERIFIED.md (EU succession rule, France treaty method for rental income, AIMI rates, DL 97/2026 rent regimes) | Daniel | To do | 2026-11-04 |
 | 8w | Review the FAQ pages and the week 1–2 drafts in content/inbox (legal and tax: Daniel; market: partner agency) before anything is published | Daniel, Father | To do | 2026-11-06 |
@@ -79,9 +79,15 @@ Status: To do · Doing · Blocked · Done
 | 13b | Open the Doutor Finanças social channels (YouTube, Instagram, TikTok, Facebook, LinkedIn, podcast), blocked from here, and note posting rhythm and best formats in design/v2/DOUTOR_FINANCAS.md | Partner | To do | 2026-11-13 |
 | 13c | Confirm whether Banco BIC Português (S132) now belongs to ABANCA (S001) and find the non-resident mortgage pages of S132 and S133 (their sites are blocked from here) | Partner | To do | 2026-11-13 |
 
-| 8r | Send the credit-intermediary business name and its Banco de Portugal registration number (for the simulators, D21), confirm video visits, one real listing with photos, and sign the Gold sponsorship agreement (D20) | Father via Operator | To do | 2026-11-01 |
+| 13d | Send the credit-intermediary business name and its Banco de Portugal registration number (for the simulators, D21), confirm video visits, one real listing with photos, and sign the Gold sponsorship agreement (D20) | Father via Operator | To do | 2026-11-01 |
+
+| 14 | Approve merging claude/brave-gauss-cwafi6 into main so the live link shows the current design (main is still the old Sprint 0 site; the branch is 32 commits ahead and 2 behind, so sync with main first) | Operator | To do | 2026-10-27 |
+| 14b | D4: set the billing entity, then fill config.entity, switch launchReady and complete the legal pages (site stays noindex until then) | Operator | Blocked: D4 | 2026-11-13 |
+| 14c | Create ops/METRICS.md and the /status command (Sprint 3 items; neither exists yet) | CTO | To do | 2026-11-13 |
 
 ## Last session
+
+2026-10-25 (CTO): reconciled this board against the code on claude/brave-gauss-cwafi6. Prompts 02 and 04–13 are built (site in PT/EN/FR, FAQ, 18 e-books, simulators, week 1 newsletter drafts, partner pages); prompt 03 is not (no chambers or embassies in the pipeline, thin US and IL targets). Every form ID in config.ts is empty and ebooksLive, launchReady, creditPartner and entity are unset, so the site cannot take an enquiry yet. Main still carries the old design; merging needs the operator (task 14). Duplicate id fixed: the credit-intermediary row is now 13d.
 
 2026-10-25 (CTO): prompts 11, 12 and 13 done on branch claude/brave-gauss-cwafi6, nothing merged or sent. 11: home in five sections with a real cost example and superscript sources, no labels or placeholders (forms fall back to email), agency calls (D19) on Talk, buyer page and practice FAQ answers, Gold label, AI-wording checks in VOICE.md and check-content, CEO edit 1 applied. 12: "O que compra" (INE, Observatoire de l'Habitat, Notaires de France, OCSTAT Genève; US, BR, IL and Lausanne left out, task 12a) with a share image per edition and language; calculators for total cost, monthly payment (Banco de Portugal rate 3.00%, Aug 2026) and rental yield; paid plan generator and checkout kept off (D22); content/NEWSLETTER_FORMAT.md and week 1 drafts for 6 editions × 3 languages. 13: design/v2/DOUTOR_FINANCAS.md with screenshots; "A sua casa em Portugal, tratada de fora" with one consent per partner; five more calculators (IMT, IMI, debt-to-income, what can I afford in CHF/$/R$/₪, capital gains); INE property data page, North first; content/PLAN_DF.md; pipeline S132 to S150. Waiting on: credit partner name and BdP number (8r), insurance partner (13a), forms (12b), billing entity (D4).
 
