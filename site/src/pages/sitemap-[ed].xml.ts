@@ -4,10 +4,11 @@ import { ED_ORDER, EDITIONS, LANGS, pathFor, type EdCode, type PageKey } from ".
 import { postsFor, CANONICAL_ED } from "../lib/blog";
 import { PLACES } from "../lib/places";
 import { SUB, ENABLED } from "../lib/tools";
+import { PTYPES } from "../lib/packages";
 
 export function getStaticPaths() { return ED_ORDER.map((ed) => ({ params: { ed } })); }
 
-const PAGES: PageKey[] = ["partners", "buy", "how", "privacy", "legal", "faq", "talk", "guide", "sims", "casa", "data", "map", "blog"];
+const PAGES: PageKey[] = ["partners", "buy", "how", "privacy", "legal", "faq", "talk", "guide", "sims", "casa", "data", "map", "blog", "private", "ours"];
 
 export function GET({ params }: { params: { ed: EdCode } }) {
   const ed = params.ed, host = `https://${EDITIONS[ed].domain}`;
@@ -17,6 +18,7 @@ export function GET({ params }: { params: { ed: EdCode } }) {
     for (const k of PAGES) urls.push(`${host}${pathFor(lang, ed, k)}`);
     for (const t of ENABLED) urls.push(`${host}${pathFor(lang, ed, "sims")}${SUB[t][lang]}/`);
     for (const p of PLACES) urls.push(`${host}${pathFor(lang, ed, "map")}${p.slug}/`);
+    for (const t of PTYPES) urls.push(`${host}${pathFor(lang, ed, "partners")}${t.slug[lang]}/`);
     if (CANONICAL_ED[lang] === ed) for (const p of postsFor(lang)) urls.push(`${host}${pathFor(lang, ed, "blog")}${p.slug}/`);
   }
   const body = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `  <url><loc>${u}</loc></url>`).join("\n")}\n</urlset>\n`;

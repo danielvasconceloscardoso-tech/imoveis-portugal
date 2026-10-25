@@ -1,0 +1,47 @@
+---
+// Four budgets side by side (prompt 18, D36): 300 k€, 1 M€, 5 M€ and 10 M€, each in the reader's currency too,
+// where it makes sense (INE medians) and, from 5 M€, real published listings labelled "exemplo" with their source.
+// Pass a Sources list so the superscripts join the page's own source list.
+import { HTML_LANG, eur, pathFor, type Lang, type EdCode } from "../i18n";
+import { EDITION_CUR, RATE, Sources } from "../lib/content";
+import { SCENARIOS, m2At } from "../lib/scenarios";
+import { c } from "../lib/copy";
+
+interface Props { lang: Lang; ed: EdCode; src: Sources; }
+const { lang, ed, src } = Astro.props;
+const nf = new Intl.NumberFormat(HTML_LANG[lang]);
+const cur = EDITION_CUR[ed];
+const fx = cur ? RATE(cur) : null;
+const local = (n: number) => (fx && cur ? new Intl.NumberFormat(HTML_LANG[lang], { style: "currency", currency: cur, maximumFractionDigits: 0 }).format(n * fx.rate) : "");
+const nIne = src.n("ine-m2-2026q2");
+const nFx = fx ? src.n(fx.id) : 0;
+const price = (p: string) => p.split("-").map((x) => eur(Number(x), lang)).join(" – ");
+const sup = (i: number) => `<a class="sup" href="#fonte-${i}">${i}</a>`;
+const mapHref = pathFor(lang, ed, "map");
+---
+<section class="scen" aria-labelledby="cenarios">
+  <h2 id="cenarios" class="h3">{c("scen.h", lang)}</h2>
+  <p class="small scen-lede">{c("scen.lede", lang)}</p>
+  <ol class="scen-grid">
+    {SCENARIOS.map((s) => (
+      <li class="scen-col">
+        <img src={`/img/${s.photo}-640.webp`} alt="" width="640" height="427" loading="lazy" />
+        <p class="scen-budget"><a href={`${mapHref}?budget=${s.budget}`}>{eur(s.budget, lang)}</a></p>
+        {fx && <p class="small scen-local">{c("scen.local", lang, { local: local(s.budget) })}<Fragment set:html={sup(nFx)} /></p>}
+        <p class="scen-where">{c(`scen.${s.key}.h`, lang)}</p>
+        <ul class="scen-places">
+          {s.places.map((p) => { const r = m2At(s.budget, p); return r && <li><span>{p}</span><span>{c("scen.m2", lang, { m2: nf.format(r.m2) })}<Fragment set:html={sup(nIne)} /></span></li>; })}
+        </ul>
+        {s.listings.length > 0 && (
+          <div class="scen-ex">
+            <p class="h-small">{c("scen.example", lang)}</p>
+            {s.listings.map((l) => (
+              <p class="small"><strong>{price(l.price)}</strong>{l.m2 ? ` · ${nf.format(l.m2)} m²` : ""}<br />{l.text[lang]}<Fragment set:html={sup(src.n(l.fact))} /></p>
+            ))}
+          </div>
+        )}
+      </li>
+    ))}
+  </ol>
+  <p class="small scen-note">{c("scen.note", lang)}</p>
+</section>

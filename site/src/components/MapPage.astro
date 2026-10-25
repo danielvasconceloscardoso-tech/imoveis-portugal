@@ -2,6 +2,7 @@
 // The map page (prompts 16 and 19, D34): the 3D map as the hero, filters, the searchable list, sources.
 import V2 from "../layouts/V2.astro";
 import MapExplorer from "./MapExplorer.astro";
+import Scenarios from "./Scenarios.astro";
 import { type Lang, type EdCode } from "../i18n";
 import { Sources, fmtDate } from "../lib/content";
 import { c, edName } from "../lib/copy";
@@ -20,6 +21,7 @@ src.n("caop-2025");
   <div class="frame mapx-frame">
     <MapExplorer lang={lang} ed={ed} mode="page" />
     <p class="small" style="max-width:44em;margin-top:24px">{c("map.note", lang)}</p>
+    <Scenarios lang={lang} ed={ed} src={src} />
   </div>
   <section class="sources-list" aria-labelledby="fontes">
     <div class="frame read">

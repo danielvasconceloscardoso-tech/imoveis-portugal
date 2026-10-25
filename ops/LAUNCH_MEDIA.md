@@ -4,7 +4,7 @@ Nothing is sent or posted without the operator's "go" (hard rule 2). Press quote
 
 ## The hook: what 300 k€, 1 M€, 5 M€ and 10 M€ buy across Portugal (D34, D36)
 
-The interactive map (prompt 16) is the data story: square metres per municipality for four budgets, INE medians with date and source, and for 5 M€ and 10 M€ real published listings labelled "exemplo" (prompt 18). Press kit: `content/press/`. Images: the map at each budget, one per language (prompt 19 screenshots).
+The interactive map (prompt 16) and content/press/DATA_STORY.md (PT, EN, FR) are the data story: square metres per municipality for four budgets, INE medians with date and source, and for 5 M€ and 10 M€ real published listings labelled "exemplo" (prompt 18). Press kit: `content/press/`. Images: the map at each budget, one per language (prompt 19 screenshots).
 
 ## Media list (public contact pages only; no personal emails)
 

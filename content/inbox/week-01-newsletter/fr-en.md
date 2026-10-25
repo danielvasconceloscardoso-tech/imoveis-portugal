@@ -5,8 +5,8 @@ type: newsletter
 week: 1
 date: 2026-12-03
 format: content/NEWSLETTER_FORMAT.md
-title: "What €500,000 buys across Portugal"
-sources: [pt-imt-nonresident-flat, pt-is-purchase, pt-casa-pronta-fees, ine-m2-2026q2, pt-poa-apostille, bdp-mortgage-rate-2026-08, caop-2025]
+title: "What €300k, €1M, €5M and €10M buy in Portugal"
+sources: [pt-imt-nonresident-flat, pt-is-purchase, pt-casa-pronta-fees, ine-m2-2026q2, pt-poa-apostille, bdp-mortgage-rate-2026-08, caop-2025, kf-cascais-5250k, kf-beloura-8500k]
 sponsored: true
 sponsor: Habinedita Gondomar
 status: draft
@@ -14,7 +14,7 @@ status: draft
 
 <!-- Operator: replace "This week's home" with a real Habinedita Gondomar listing, with written permission, once available. -->
 
-Subject: What €500,000 buys across Portugal
+Subject: What €300k, €1M, €5M and €10M buy in Portugal
 
 {{first name | Hi}},
 
@@ -26,11 +26,11 @@ For the first issue we run the numbers on a €245,000 home bought by someone wh
 
 ## The story
 
-With €500,000, at the median price of homes sold, you get more than 100 m² in 303 of the 304 municipalities with an official INE figure, and more than 300 m² in 209. The one exception is Lisbon, at about 96 m². Nationally, the median square metre sold costs €2,264, about 18% more than a year ago. These are medians, not specific homes.
+With €300,000, at the median price of homes sold, you get more than 100 m² in 281 of the 304 municipalities with an official INE figure: about 83 m² in Porto and 136 m² in Braga. With €1 million, about 193 m² in Lisbon and 205 m² in Cascais. From €5 million, medians stop describing the market and published listings show a different scale: a newly built 381 m² villa in Cascais at €5,250,000, or an 891.5 m² villa in Beloura, Sintra, at €8,500,000. These are medians and asking prices, not homes from our partner agency.
 
 ## The map
 
-Enter your budget on the map and see how many square metres it buys in each municipality, from the Minho to the Azores: https://claude-brave-gauss-cwafi6-imoveis-portugal.geralportugalimoveis.workers.dev/en/fr/map/?budget=500000. The image to send to family: https://claude-brave-gauss-cwafi6-imoveis-portugal.geralportugalimoveis.workers.dev/share/map-500000.png
+On the map, pick €300k, €1M, €5M or €10M, or enter your own amount, and see the square metres municipality by municipality: https://claude-brave-gauss-cwafi6-imoveis-portugal.geralportugalimoveis.workers.dev/en/fr/map/. The images to share: https://claude-brave-gauss-cwafi6-imoveis-portugal.geralportugalimoveis.workers.dev/share/map-300000.png, map-1000000.png, map-5000000.png, map-10000000.png
 
 ## The most-searched question
 

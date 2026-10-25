@@ -5,8 +5,8 @@ type: newsletter
 week: 1
 date: 2026-12-03
 format: content/NEWSLETTER_FORMAT.md
-title: "Ce que 500 000 € achètent au Portugal, commune par commune"
-sources: [pt-imt-nonresident-flat, pt-is-purchase, pt-casa-pronta-fees, ine-m2-2026q2, pt-poa-apostille, bdp-mortgage-rate-2026-08, ecb-eur-ils, caop-2025]
+title: "Ce que 300 k€, 1, 5 et 10 M€ achètent au Portugal"
+sources: [pt-imt-nonresident-flat, pt-is-purchase, pt-casa-pronta-fees, ine-m2-2026q2, pt-poa-apostille, bdp-mortgage-rate-2026-08, ecb-eur-ils, caop-2025, kf-cascais-5250k, kf-beloura-8500k]
 sponsored: true
 sponsor: Habinedita Gondomar
 status: draft
@@ -14,7 +14,7 @@ status: draft
 
 <!-- Opérateur : remplacer « Le bien de la semaine » par une vraie annonce d'Habinedita Gondomar, avec accord écrit, dès qu'elle existe. -->
 
-Objet : Ce que 500 000 € achètent au Portugal, commune par commune
+Objet : Ce que 300 k€, 1, 5 et 10 M€ achètent au Portugal
 
 {{first name | Bonjour}},
 
@@ -26,11 +26,11 @@ Pour ce premier numéro, nous faisons les comptes d'un bien à 245 000 €, ache
 
 ## L'histoire
 
-Avec 500 000 €, au prix médian des logements vendus, vous avez plus de 100 m² dans 303 des 304 communes disposant d'un chiffre officiel de l'INE, et plus de 300 m² dans 209. La seule exception est Lisbonne, avec environ 96 m². Dans tout le pays, le mètre carré vendu coûte en médiane 2 264 €, environ 18 % de plus qu'il y a un an. Ce sont des médianes, pas des biens précis.
+Avec 300 000 €, au prix médian des logements vendus, vous avez plus de 100 m² dans 281 des 304 communes disposant d'un chiffre officiel de l'INE : environ 83 m² à Porto et 136 m² à Braga. Avec 1 million, environ 193 m² à Lisbonne et 205 m² à Cascais. À partir de 5 millions, les médianes ne décrivent plus le marché et les annonces publiées montrent une autre échelle : une villa neuve de 381 m² à Cascais à 5 250 000 €, ou une villa de 891,5 m² à Beloura, à Sintra, à 8 500 000 €. Ce sont des médianes et des prix demandés, pas des biens de notre agence partenaire.
 
 ## La carte
 
-Indiquez votre budget sur la carte et voyez combien de mètres carrés il permet dans chaque commune, du Minho aux Açores : https://claude-brave-gauss-cwafi6-imoveis-portugal.geralportugalimoveis.workers.dev/fr/il/carte/?budget=500000. L'image à envoyer à la famille : https://claude-brave-gauss-cwafi6-imoveis-portugal.geralportugalimoveis.workers.dev/share/map-500000.png
+Sur la carte, choisissez 300 k€, 1, 5 ou 10 M€, ou indiquez votre montant, et voyez les mètres carrés commune par commune : https://claude-brave-gauss-cwafi6-imoveis-portugal.geralportugalimoveis.workers.dev/fr/il/carte/. Les images à partager : https://claude-brave-gauss-cwafi6-imoveis-portugal.geralportugalimoveis.workers.dev/share/map-300000.png, map-1000000.png, map-5000000.png, map-10000000.png
 
 ## La question la plus recherchée
 

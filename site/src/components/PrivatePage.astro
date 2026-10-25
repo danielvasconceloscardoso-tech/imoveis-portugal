@@ -1,0 +1,57 @@
+---
+// The Private section (prompt 18, D33, D36): budgets from 1 M€. Residence, tax on moving here, inheritance and
+// holding structures, each in the reader's words, answered with the official rule and ending with the partner
+// who handles it. Information only (EDITORIAL_POLICY.md). Partners: config.privatePartners once they sign.
+// Wording: COPY_DECK.md "private.*".
+import V2 from "../layouts/V2.astro";
+import { config } from "../config";
+import { pathFor, type Lang, type EdCode } from "../i18n";
+import { Sources, fmtDate } from "../lib/content";
+import { c, edName } from "../lib/copy";
+
+interface Props { lang: Lang; ed: EdCode; }
+const { lang, ed } = Astro.props;
+const src = new Sources();
+const talk = (cat: string) => `${pathFor(lang, ed, "talk")}?cat=${cat}#form`;
+const items = [
+  { k: "live", s: ["pt-visa-own-income", "pt-ari-realestate-ended"], cat: "lawyer", btn: "home.btn.lawyer" },
+  { k: "ifici", s: ["pt-ifici-20pct"], cat: "tax", btn: "home.btn.tax" },
+  { k: "inherit", s: ["pt-is-inheritance-exempt"], cat: "lawyer", btn: "home.btn.lawyer" },
+  { k: "aimi", s: ["pt-aimi-deduction", "pt-aimi-rates"], cat: "tax", btn: "home.btn.tax" },
+  { k: "holding", s: ["pt-aimi-rates", "pt-imt-offshore-10", "pt-imi-offshore-75"], cat: "tax", btn: "home.btn.tax" },
+  { k: "bank", s: ["pt-ltv-limits"], cat: "bank", btn: "home.btn.bank" },
+].map((x) => ({ ...x, n: x.s.map((id) => src.n(id)) }));
+const sup = (ns: number[]) => ns.map((i) => `<a class="sup" href="#fonte-${i}">${i}</a>`).join("");
+const partners = config.privatePartners;
+---
+<V2 lang={lang} ed={ed} page="private" title={`${c("private.h1", lang)} | Imóveis Portugal Private · ${edName(ed, lang)}`} description={c("private.lede", lang)} sticky={null}>
+  <div class="frame read ph private-head">
+    <p class="h-small">{c("private.title", lang)}</p>
+    <h1>{c("private.h1", lang)}</h1>
+    <p class="lede">{c("private.lede", lang)}</p>
+  </div>
+  <div class="frame read">
+    {items.map((x) => (
+      <section class="qa-item" aria-labelledby={`p-${x.k}`}>
+        <h2 id={`p-${x.k}`} class="h3">{c(`private.${x.k}.q`, lang)}</h2>
+        <p>{c(`private.${x.k}.a`, lang)}<Fragment set:html={sup(x.n)} /></p>
+        <a class="act" href={talk(x.cat)}>{c(x.btn, lang)}</a>
+      </section>
+    ))}
+    <p><a class="more" href={`${pathFor(lang, ed, "map")}?budget=5000000`}>{c("private.map", lang)}</a></p>
+    <section class="private-partners" aria-labelledby="p-partners">
+      <h2 id="p-partners" class="h3">{c("private.partners.h", lang)}</h2>
+      <p>{c("private.partners.p", lang)}</p>
+      {partners.length ? (
+        <ul class="plist">{partners.map((p) => <li><strong>{p.name}</strong>{p.licence && ` · ${p.licence}`} · {c("common.sponsored", lang)}</li>)}</ul>
+      ) : <p class="small">{c("private.partners.none", lang)}</p>}
+      <p class="small">{c("casa.licences.p", lang)}</p>
+    </section>
+  </div>
+  <section class="sources-list" aria-labelledby="fontes">
+    <div class="frame read">
+      <h2 id="fontes" class="h-small">{c("common.sources", lang)}</h2>
+      <ol>{src.list.map((s, i) => <li id={`fonte-${i + 1}`}><a href={s.url} rel="noopener">{s.title}</a>{s.checked && `, ${c("common.checked", lang, { date: fmtDate(lang, s.checked) })}`}.</li>)}</ol>
+    </div>
+  </section>
+</V2>

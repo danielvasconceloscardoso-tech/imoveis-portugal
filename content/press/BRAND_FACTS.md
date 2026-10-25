@@ -15,4 +15,4 @@
 | Wordmark | content/press/wordmark.svg |
 | Images | Map and calculator screenshots in design/v2/screens/p19/ |
 
-The data story (four budgets across Portugal) is in content/press/DATA_STORY.md once the map and the published-listing examples are final (prompts 16 and 18).
+The data story (four budgets across Portugal, PT, EN and FR) is in content/press/DATA_STORY.md, with images in site/public/share/map-{budget}.png.

@@ -7,7 +7,7 @@ One email per edition and language, every Thursday. A 5-minute read (about 600 t
 | # | PT | EN | FR | What goes in | Rules |
 | --- | --- | --- | --- | --- | --- |
 | 1 | A casa da semana | This week's home | Le bien de la semaine | One real listing from the partner agency, used with its written permission: place, price, the full cost of buying it (IMT, stamp duty, deed) and the total in the reader's currency (CHF, $, R$, ₪, ECB rate and date). | No listing from any other agency (D9, D14). Until the agency sends one, the block runs the cost example with the same layout and says so. |
-| 2 | A história | The story | L'histoire | A real buyer's journey (anonymised, with written permission) or a story built on data ("What 500,000 € buys across Portugal"). | No invented people, quotes or anecdotes. Place stories use INE, Banco de Portugal or municipal data. |
+| 2 | A história | The story | L'histoire | A real buyer's journey (anonymised, with written permission) or a story built on data (launch: "What 300,000 €, 1 M€, 5 M€ and 10 M€ buy in Portugal", content/press/DATA_STORY.md). | No invented people, quotes or anecdotes. Place stories use INE, Banco de Portugal or municipal data. |
 | 3 | O mapa | The map | La carte | One budget on the interactive map (D34), linked with `?budget=`, and its shareable image (site/public/share/map-{budget}.png). No town-against-town comparisons. | Medians, not homes: say it in one line. |
 | 4 | A pergunta do leitor | Reader's question | La question du lecteur | A real question a reader sent (reply to the email), a short answer with its source, then the matching partner button. | Before launch there are no reader questions: use the most-searched question from the FAQ and call it that. |
 | 5 | Um número | One number | Un chiffre | One sourced figure of the week: the only "data" item. | One number, one line of context, the source. |
@@ -16,7 +16,7 @@ One email per edition and language, every Thursday. A 5-minute read (about 600 t
 
 ## Subject lines
 
-Specific and curious, with a place, a price or a number: "O que 500 000 € compram em Portugal, concelho a concelho". Under 60 characters where possible. No clickbait, no banned words (VOICE.md), no question-bait ("Sabia que…?"), no emojis.
+Specific and curious, with a place, a price or a number: "O que 300 mil, 1, 5 e 10 milhões compram em Portugal". Under 60 characters where possible. No clickbait, no banned words (VOICE.md), no question-bait ("Sabia que…?"), no emojis.
 
 ## beehiiv
 

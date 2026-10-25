@@ -430,3 +430,43 @@ a.sup + a.sup::before { content: ","; color: var(--muted); margin-right: 1px; }
 .map-home .more { display: inline-block; margin-top: 16px; }
 /* Home v2: each answer ends with its partner (prompt 17) */
 .qa-item .act { display: inline-block; margin-top: 2px; font: 500 15px/1.4 var(--sans); color: var(--ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+/* Four budget scenarios (prompt 18) */
+.scen { margin: 56px 0 8px; padding-top: 28px; border-top: 1px solid var(--rule); }
+.scen-lede { max-width: 44em; margin: 6px 0 24px; }
+.scen-grid { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr; gap: 36px; }
+@media (min-width: 720px) { .scen-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1080px) { .scen-grid { grid-template-columns: repeat(4, 1fr); gap: 28px; } }
+.scen-col img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; display: block; margin-bottom: 14px; }
+.scen-budget { margin: 0; font: 400 clamp(1.9rem, 1.6rem + 1vw, 2.4rem)/1.1 var(--serif); font-variant-numeric: lining-nums; }
+.scen-budget a { color: var(--ink); text-decoration: none; }
+.scen-local { margin: 2px 0 0; }
+.scen-where { margin: 12px 0 8px; font: 450 1.05rem/1.4 var(--serif); }
+.scen-places { list-style: none; padding: 0; margin: 0; }
+.scen-places li { display: flex; justify-content: space-between; gap: 12px; padding: 7px 0; border-top: 1px solid var(--rule); font-variant-numeric: tabular-nums; }
+.scen-places li:last-child { border-bottom: 1px solid var(--rule); }
+.scen-ex { margin-top: 16px; }
+.scen-ex .small { margin: 6px 0 10px; }
+.scen-note { max-width: 44em; margin-top: 28px; }
+/* Private section (prompt 18) */
+.private-head .h-small { letter-spacing: .14em; text-transform: uppercase; color: var(--brass, var(--muted)); }
+.private-partners { margin: 48px 0 64px; padding-top: 24px; border-top: 1px solid var(--rule); }
+.plist { list-style: none; padding: 0; margin: 12px 0; }
+.plist li { padding: 8px 0; border-bottom: 1px solid var(--rule); }
+/* Partner types and "Our partners" (prompt 18) */
+.ptypes { list-style: none; padding: 0; margin: 12px 0 20px; max-width: 40em; }
+.ptypes li { border-top: 1px solid var(--rule); }
+.ptypes li:last-child { border-bottom: 1px solid var(--rule); }
+.ptypes a { display: block; padding: 14px 0; font: 450 1.15rem/1.35 var(--serif); color: var(--ink); text-decoration: none; }
+.pkg-line { padding: 12px 0; border-top: 1px solid var(--rule); }
+.pkg-line h3 { font: 450 1.1rem/1.3 var(--serif); margin: 0 0 4px; }
+.pkg-line p { margin: 0 0 4px; }
+.kit-dl { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: 28px; }
+.ours-list { list-style: none; padding: 0; margin: 16px 0 0; }
+.ours-list li { display: grid; grid-template-columns: 1fr; gap: 2px; padding: 22px 0; border-top: 1px solid var(--rule); }
+.ours-list li:last-child { border-bottom: 1px solid var(--rule); }
+@media (min-width: 720px) { .ours-list li { grid-template-columns: 14em 1fr; } .ours-list .lic { grid-column: 2; } }
+.ours-list .role { font: 600 12px/1.6 var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.ours-list .name { font: 400 clamp(1.4rem, 1.2rem + .8vw, 1.9rem)/1.2 var(--serif); }
+.ours-list .lic { font-size: 14px; color: var(--muted); }
+.ours-empty { font: 400 1.15rem/1.5 var(--serif); color: var(--muted); max-width: 32em; }
+.ours-list .tba { font: 400 1.05rem/1.5 var(--sans); color: var(--muted); }

@@ -11,13 +11,16 @@ import SimsPage from "../../../components/SimsPage.astro";
 import CasaPage from "../../../components/CasaPage.astro";
 import DataPage from "../../../components/DataPage.astro";
 import MapPage from "../../../components/MapPage.astro";
+import PrivatePage from "../../../components/PrivatePage.astro";
+import OursPage from "../../../components/OursPage.astro";
+import { packages as pkgList, PTYPES } from "../../../lib/packages";
 import { config } from "../../../config";
 import { ED_ORDER, LANGS, SLUGS, eur, pathFor, type EdCode, type Lang, type PageKey } from "../../../i18n";
 import { homeFacts, fmtDate } from "../../../lib/content";
 import { c, cl, edName } from "../../../lib/copy";
 
 export function getStaticPaths() {
-  const keys: PageKey[] = ["partners", "buy", "how", "privacy", "legal", "faq", "talk", "guide", "sims", "casa", "data", "map"];
+  const keys: PageKey[] = ["partners", "buy", "how", "privacy", "legal", "faq", "talk", "guide", "sims", "casa", "data", "map", "private", "ours"];
   return LANGS.flatMap((lang) => ED_ORDER.flatMap((ed) => keys.map((key) => ({ params: { lang, ed, page: SLUGS[lang][key] }, props: { key } }))));
 }
 const lang = Astro.params.lang as Lang;
@@ -30,23 +33,14 @@ const ph = (v: string, label: string) => v || `[${label}]`;
 const PH = { pt: ["Entidade", "Morada", "n.º de registo", "n.º de IVA"], en: ["Entity", "Address", "registration no.", "VAT no."], fr: ["Entité", "Adresse", "n° d'immatriculation", "n° de TVA"] }[lang];
 const legalVars = { entity: ph(ent.name, PH[0]), address: ph(ent.address, PH[1]), register: ph(ent.register, PH[2]), vat: ph(ent.vat, PH[3]), email: config.contactEmail };
 const legal = key === "privacy" || key === "legal" ? key : null;
-// Price list v3 (prompt 15, proposal): list price per year and the founding price (40% off year 1, first 10 partners).
-const f = (n: number) => Math.round(n * (1 - config.foundingDiscount));
-const pe = c("partners.per.edition", lang), ae = c("partners.all.editions", lang), fr = c("partners.from", lang);
-const packages = [
-  { name: c("partners.verified.h", lang), desc: c("partners.verified.p", lang), list: `${e(p.verified.edition)} ${pe} · ${e(p.verified.all)} ${ae}`, founding: `${e(f(p.verified.edition))} · ${e(f(p.verified.all))}` },
-  { name: c("partners.featured.h", lang), desc: c("partners.featured.p", lang), list: `${e(p.featured.edition)} ${pe} · ${e(p.featured.all)} ${ae}`, founding: `${e(f(p.featured.edition))} · ${e(f(p.featured.all))}` },
-  { name: c("partners.bank.h", lang), desc: c("partners.bank.p", lang), list: `${e(p.bank.from)} – ${e(p.bank.to)}`, founding: `${fr} ${e(f(p.bank.from))}` },
-  { name: c("partners.private.h", lang), desc: c("partners.private.p", lang), list: `${e(p.private.from)} – ${e(p.private.to)}`, founding: `${fr} ${e(f(p.private.from))}` },
-  { name: c("partners.developer.h", lang), desc: c("partners.developer.p", lang), list: `${fr} ${e(p.developerFrom)}`, founding: "" },
-];
+const packages = pkgList(lang);
 const luN = new Intl.NumberFormat(lang === "en" ? "en" : lang === "fr" ? "fr" : "pt-PT").format(93659);
 
 const titles: Partial<Record<PageKey, string>> = { partners: c("partners.title", lang), buy: c("buy.title", lang), how: c("how.title", lang), privacy: c("legal.privacy.title", lang), legal: c("legal.legal.title", lang) };
 const descs: Partial<Record<PageKey, string>> = { partners: c("partners.lede", lang), buy: c("buy.lede", lang), how: c("how.lede", lang), privacy: c("legal.privacy.intro", lang), legal: c("legal.legal.intro", lang) };
 const site = config.agency.website.replace(/^https:\/\/|\/$/g, "");
 ---
-{key === "faq" ? <FaqPage lang={lang} ed={ed} /> : key === "sims" ? <SimsPage lang={lang} ed={ed} /> : key === "casa" ? <CasaPage lang={lang} ed={ed} /> : key === "data" ? <DataPage lang={lang} ed={ed} /> : key === "map" ? <MapPage lang={lang} ed={ed} /> : key === "talk" ? <TalkPage lang={lang} ed={ed} /> : key === "guide" ? <GuidePage lang={lang} ed={ed} /> : (
+{key === "faq" ? <FaqPage lang={lang} ed={ed} /> : key === "sims" ? <SimsPage lang={lang} ed={ed} /> : key === "casa" ? <CasaPage lang={lang} ed={ed} /> : key === "data" ? <DataPage lang={lang} ed={ed} /> : key === "map" ? <MapPage lang={lang} ed={ed} /> : key === "private" ? <PrivatePage lang={lang} ed={ed} /> : key === "ours" ? <OursPage lang={lang} ed={ed} /> : key === "talk" ? <TalkPage lang={lang} ed={ed} /> : key === "guide" ? <GuidePage lang={lang} ed={ed} /> : (
 <V2 lang={lang} ed={ed} page={key} title={`${titles[key]} | Imóveis Portugal · ${edName(ed, lang)}`} description={descs[key] ?? ""}
   sticky={key === "partners" ? { href: "#contacto", label: c("partners.cta", lang) } : undefined}>
   {key === "partners" && (
@@ -89,6 +83,9 @@ const site = config.agency.website.replace(/^https:\/\/|\/$/g, "");
           </div>
           <p class="small">{c("partners.vat", lang)} {c("partners.proposal", lang)}</p>
           <p style="margin-top:24px;max-width:40em">{c("partners.network.p", lang)}</p>
+          <h3 style="margin-top:40px">{c("kit.types.h", lang)}</h3>
+          <ul class="ptypes">{PTYPES.map((t) => <li><a href={`${pathFor(lang, ed, "partners")}${t.slug[lang]}/`}>{c(`kit.${t.key}.h`, lang)}</a></li>)}</ul>
+          <p><a class="more" href={pathFor(lang, ed, "ours")}>{c("ours.title", lang)}</a></p>
         </div>
       </section>
       <section class="band white" aria-labelledby="inventory">

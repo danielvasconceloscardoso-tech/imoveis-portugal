@@ -751,9 +751,9 @@ How to edit:
 - FR: Choisissez la catégorie
 
 ### launch
-- PT: Os parceiros destas categorias chegam com o lançamento, a 1 de dezembro de 2026. Até lá, o seu pedido chega-nos por email e respondemos assim que houver parceiro.
-- EN: Partners in these categories arrive at launch, on December 1, 2026. Until then, your request comes to us by email and we'll reply as soon as there's a partner.
-- FR: Les partenaires de ces catégories arrivent au lancement, le 1er décembre 2026. D'ici là, votre demande nous parvient par e-mail et nous répondons dès qu'un partenaire est présent.
+- PT: Os parceiros destas categorias chegam com o lançamento, a 1 de dezembro de 2026. Até lá, cada pergunta frequente tem a regra e a fonte oficial.
+- EN: Partners in these categories arrive at launch, on December 1, 2026. Until then, every frequent question has the rule and its official source.
+- FR: Les partenaires de ces catégories arrivent au lancement, le 1er décembre 2026. D'ici là, chaque question fréquente donne la règle et sa source officielle.
 
 ### cat.lawyer.h
 - PT: Advogado
@@ -913,6 +913,11 @@ How to edit:
 - PT: No mapa e nas listas «falar com um parceiro» da sua categoria e das suas edições.
 - EN: On the map and in the "talk to a partner" lists for your category and editions.
 - FR: Sur la carte et dans les listes « parler à un partenaire » de votre catégorie et de vos éditions.
+
+### inventory.6
+- PT: Na secção Private, para orçamentos a partir de 1 milhão de euros.
+- EN: In the Private section, for budgets from €1 million.
+- FR: Dans la section Private, pour les budgets à partir d'un million d'euros.
 
 ### inventory.4
 - PT: Num capítulo do guia gratuito.
@@ -1115,14 +1120,14 @@ How to edit:
 - FR: Les demandes d'achat vont uniquement à notre agence partenaire agréée.
 
 ### report.h
-- PT: O que recebe todos os meses
-- EN: What you get every month
-- FR: Ce que vous recevez chaque mois
+- PT: Os números da sua presença
+- EN: The numbers behind your presence
+- FR: Les chiffres de votre présence
 
 ### report.p
-- PT: Um relatório por edição: subscritores, aberturas, cliques e pedidos de contacto ligados à sua presença.
-- EN: One report per edition: subscribers, opens, clicks and contact requests linked to your presence.
-- FR: Un rapport par édition : abonnés, ouvertures, clics et demandes de contact liés à votre présence.
+- PT: Todos os meses, automaticamente: subscritores, aberturas, cliques e pedidos de contacto ligados à sua presença, por edição.
+- EN: Every month, automatically: subscribers, opens, clicks and contact requests linked to your presence, per edition.
+- FR: Chaque mois, automatiquement : abonnés, ouvertures, clics et demandes de contact liés à votre présence, par édition.
 
 ### book
 - PT: Marcar chamada
@@ -1705,9 +1710,9 @@ How to edit:
 - FR: Simulateur offert par {name} · intermédiaire de crédit enregistré auprès du Banco de Portugal sous le n° {bdp} · sponsorisé
 
 ### credit.q
-- PT: Quer que {name} analise o seu caso e compare bancos, sem custos para si?
-- EN: Would you like {name} to look at your case and compare banks, at no cost to you?
-- FR: Voulez-vous que {name} étudie votre dossier et compare les banques, sans frais pour vous ?
+- PT: Quer que {name} analise o seu caso e compare bancos?
+- EN: Would you like {name} to look at your case and compare banks?
+- FR: Voulez-vous que {name} étudie votre dossier et compare les banques ?
 
 ### credit.consent
 - PT: Aceito que os dados deste pedido sejam enviados apenas a {name} (intermediário de crédito, Banco de Portugal n.º {bdp}) para me contactar sobre ele. Posso retirar o consentimento a qualquer momento.
@@ -2331,9 +2336,9 @@ How to edit:
 - FR: Une société de paiement agréée pour envoyer l'apport et le prix en francs, dollars, reais ou shekels.
 
 ### partner.none
-- PT: Parceiro a anunciar. Até lá, o pedido chega à nossa equipa e indicamos-lhe onde procurar.
-- EN: Partner to be announced. Until then, your request reaches our team and we tell you where to look.
-- FR: Partenaire à annoncer. D'ici là, votre demande arrive à notre équipe et nous vous indiquons où chercher.
+- PT: Parceiro a anunciar antes de 1 de dezembro de 2026.
+- EN: Partner to be announced before December 1, 2026.
+- FR: Partenaire annoncé avant le 1er décembre 2026.
 
 ### form.h
 - PT: O seu pedido
@@ -2797,3 +2802,371 @@ How to edit:
 - PT: Escreva um valor e veja, concelho a concelho, quantos metros quadrados pode ter.
 - EN: Enter an amount and see, municipality by municipality, how many square metres it buys.
 - FR: Indiquez un montant et voyez, commune par commune, combien de mètres carrés il permet.
+
+## scen
+
+### h
+- PT: Quatro orçamentos, lado a lado
+- EN: Four budgets, side by side
+- FR: Quatre budgets, côte à côte
+
+### lede
+- PT: Onde cada orçamento faz sentido, com os metros quadrados ao preço mediano das casas vendidas (INE). A partir de 5 milhões, anúncios publicados como exemplo.
+- EN: Where each budget makes sense, with the square metres it buys at the median price of homes sold (INE). From 5 million, published listings as examples.
+- FR: Où chaque budget prend son sens, avec les mètres carrés qu'il permet au prix médian des logements vendus (INE). À partir de 5 millions, des annonces publiées en exemple.
+
+### local
+- PT: cerca de {local}
+- EN: about {local}
+- FR: environ {local}
+
+### m2
+- PT: {m2} m²
+- EN: {m2} m²
+- FR: {m2} m²
+
+### 300k.h
+- PT: Um apartamento no Porto, em Braga ou em Viseu
+- EN: An apartment in Porto, Braga or Viseu
+- FR: Un appartement à Porto, Braga ou Viseu
+
+### 1m.h
+- PT: Lisboa e Cascais, ou uma casa grande no Norte
+- EN: Lisbon and Cascais, or a large house in the North
+- FR: Lisbonne et Cascais, ou une grande maison dans le Nord
+
+### 5m.h
+- PT: Uma moradia na Linha de Cascais ou no Algarve, ou uma quinta
+- EN: A villa on the Cascais coast or in the Algarve, or a country estate
+- FR: Une villa sur la côte de Cascais ou en Algarve, ou un domaine
+
+### 10m.h
+- PT: A Quinta do Lago, no Algarve, e Sintra
+- EN: Quinta do Lago in the Algarve, and Sintra
+- FR: Quinta do Lago en Algarve, et Sintra
+
+### example
+- PT: Exemplo, anúncio publicado
+- EN: Example, published listing
+- FR: Exemple, annonce publiée
+
+### note
+- PT: As medianas do INE descrevem concelhos inteiros, não as zonas mais procuradas dentro deles, como a Quinta do Lago em Loulé. Os exemplos são preços pedidos em anúncios publicados, não preços de venda, e não são casas da nossa agência parceira.
+- EN: INE medians describe whole municipalities, not the most sought-after enclaves inside them, such as Quinta do Lago in Loulé. The examples are asking prices from published listings, not sale prices, and are not homes from our partner agency.
+- FR: Les médianes de l'INE décrivent des communes entières, pas les secteurs les plus recherchés qu'elles contiennent, comme Quinta do Lago à Loulé. Les exemples sont des prix demandés dans des annonces publiées, pas des prix de vente, et ne sont pas des biens de notre agence partenaire.
+
+## private
+
+### title
+- PT: Private
+- EN: Private
+- FR: Private
+
+### h1
+- PT: Para orçamentos a partir de 1 milhão de euros
+- EN: For budgets from €1 million
+- FR: Pour les budgets à partir d'un million d'euros
+
+### lede
+- PT: Residência, impostos de quem passa a viver cá, herança e estruturas de detenção: a regra oficial de cada questão e o parceiro que a trata consigo. Informação, não aconselhamento.
+- EN: Residence, tax when you move here, inheritance and holding structures: the official rule for each question and the partner who handles it with you. Information, not advice.
+- FR: Résidence, fiscalité à l'installation, succession et structures de détention : la règle officielle de chaque question et le partenaire qui la traite avec vous. De l'information, pas du conseil.
+
+### live.q
+- PT: Quero viver em Portugal parte do ano.
+- EN: I'd like to live in Portugal for part of the year.
+- FR: Je voudrais vivre au Portugal une partie de l'année.
+
+### live.a
+- PT: O caminho é um visto de residência, como o D7 para quem vive de rendimentos próprios. Desde 7 de outubro de 2023, a compra de casa já não abre novas autorizações de residência para investimento; as que já existem continuam a ser renovadas. Um advogado parceiro indica a via que se aplica a si.
+- EN: The route is a residence visa, such as the D7 for people living on their own income. Since October 7, 2023, buying a home no longer opens new residence permits for investment; existing permits are still renewed. A partner lawyer tells you which route applies to you.
+- FR: La voie, c'est un visa de résidence, comme le D7 pour qui vit de revenus propres. Depuis le 7 octobre 2023, l'achat d'un bien n'ouvre plus de nouveaux titres de séjour pour investissement ; ceux qui existent sont toujours renouvelés. Un avocat partenaire vous indique la voie qui s'applique à vous.
+
+### ifici.q
+- PT: Vou mudar-me e continuar a trabalhar.
+- EN: I'll move and keep working.
+- FR: Je vais m'installer et continuer à travailler.
+
+### ifici.a
+- PT: Se passar a residente fiscal sem o ter sido nos cinco anos anteriores e trabalhar numa atividade elegível (investigação, ensino superior, profissões altamente qualificadas), o rendimento desse trabalho pode ter uma taxa especial de 20% durante 10 anos (IFICI). Um consultor fiscal parceiro confirma se a sua atividade conta.
+- EN: If you become a tax resident without having been one in the previous five years and work in an eligible activity (research, higher education, highly qualified jobs), that work income can be taxed at a special 20% rate for 10 years (IFICI). A partner tax adviser confirms whether your activity qualifies.
+- FR: Si vous devenez résident fiscal sans l'avoir été au cours des cinq années précédentes et exercez une activité éligible (recherche, enseignement supérieur, emplois hautement qualifiés), ce revenu peut être imposé au taux spécial de 20 % pendant 10 ans (IFICI). Un conseiller fiscal partenaire confirme si votre activité est concernée.
+
+### inherit.q
+- PT: Quero deixar a casa aos meus filhos.
+- EN: I want to leave the house to my children.
+- FR: Je veux transmettre la maison à mes enfants.
+
+### inherit.a
+- PT: Em Portugal, filhos, cônjuge ou unido de facto e pais estão isentos do imposto do selo de 10% sobre heranças e doações; os outros herdeiros pagam 10%. As regras do país onde vive também contam. Um advogado parceiro prepara a sucessão nos dois países.
+- EN: In Portugal, children, a spouse or partner and parents are exempt from the 10% stamp duty on inheritances and gifts; other heirs pay 10%. The rules of the country where you live count too. A partner lawyer plans the succession in both countries.
+- FR: Au Portugal, les enfants, le conjoint ou partenaire et les parents sont exonérés du droit de timbre de 10 % sur les successions et donations ; les autres héritiers paient 10 %. Les règles de votre pays de résidence comptent aussi. Un avocat partenaire prépare la succession dans les deux pays.
+
+### aimi.q
+- PT: Vou ter mais do que uma casa.
+- EN: I'll own more than one home.
+- FR: Je vais posséder plus d'un bien.
+
+### aimi.a
+- PT: Além do IMI de cada casa, o adicional ao IMI (AIMI) incide sobre a soma dos valores patrimoniais acima de 600 000 € por pessoa: 0,7%, com taxas marginais de 1% acima de 1 milhão e 1,5% acima de 2 milhões. Um consultor fiscal parceiro faz as contas ao seu património.
+- EN: Besides each home's IMI, the additional IMI (AIMI) applies to the sum of tax values above €600,000 per person: 0.7%, with marginal rates of 1% above €1 million and 1.5% above €2 million. A partner tax adviser runs the numbers on your holdings.
+- FR: En plus de l'IMI de chaque bien, l'IMI additionnel (AIMI) porte sur la somme des valeurs fiscales au-delà de 600 000 € par personne : 0,7 %, avec des taux marginaux de 1 % au-delà d'un million et de 1,5 % au-delà de 2 millions. Un conseiller fiscal partenaire fait le calcul sur votre patrimoine.
+
+### holding.q
+- PT: Posso comprar através de uma sociedade?
+- EN: Can I buy through a company?
+- FR: Puis-je acheter par une société ?
+
+### holding.a
+- PT: Pode. Uma sociedade paga AIMI de 0,4%, ou 0,7% se a casa for de uso pessoal dos sócios ou gerentes. Se a sociedade tiver sede, ou for controlada a partir de um território com regime fiscal mais favorável da lista das Finanças, o IMT é de 10% sem isenções e o IMI de 7,5% ao ano. Um consultor fiscal e um advogado parceiros comparam a compra em nome próprio e por sociedade.
+- EN: Yes. A company pays AIMI at 0.4%, or 0.7% if the home is for the personal use of its owners or managers. If the company is based in, or controlled from, a territory with a more favourable tax regime on the Finance Ministry list, IMT is 10% with no exemption and IMI is 7.5% a year. A partner tax adviser and lawyer compare buying in your own name and through a company.
+- FR: Oui. Une société paie l'AIMI à 0,4 %, ou 0,7 % si le bien est à l'usage personnel de ses associés ou dirigeants. Si la société est établie, ou contrôlée depuis, un territoire à régime fiscal privilégié figurant sur la liste des Finances, l'IMT est de 10 % sans exonération et l'IMI de 7,5 % par an. Un conseiller fiscal et un avocat partenaires comparent l'achat en nom propre et par société.
+
+### bank.q
+- PT: Prefiro tratar o crédito com um banco privado.
+- EN: I'd rather arrange the loan with a private bank.
+- FR: Je préfère passer par une banque privée pour le crédit.
+
+### bank.a
+- PT: Os limites são os mesmos para todos: até 90% do valor para habitação própria e 80% para outros fins (Banco de Portugal). Um banco parceiro trata do crédito e da relação com o seu património.
+- EN: The limits are the same for everyone: up to 90% of the value for your own home and 80% for other uses (Banco de Portugal). A partner bank arranges the loan and the relationship around your wealth.
+- FR: Les limites sont les mêmes pour tous : jusqu'à 90 % de la valeur pour votre résidence et 80 % pour les autres usages (Banque du Portugal). Une banque partenaire organise le crédit et la relation autour de votre patrimoine.
+
+### partners.h
+- PT: Os parceiros desta secção
+- EN: The partners in this section
+- FR: Les partenaires de cette section
+
+### partners.p
+- PT: Bancos privados, gestores de património, consultores fiscais e advogados com clientes que compram a partir de 1 milhão de euros. Cada um aparece com a sua licença e a indicação de patrocinado. No máximo cinco por edição.
+- EN: Private banks, wealth managers, tax advisers and lawyers whose clients buy from €1 million. Each is shown with its licence and the sponsored label. Five per edition at most.
+- FR: Banques privées, gestionnaires de patrimoine, conseillers fiscaux et avocats dont les clients achètent à partir d'un million d'euros. Chacun apparaît avec sa licence et la mention sponsorisé. Cinq au plus par édition.
+
+### partners.none
+- PT: Os primeiros parceiros Private são anunciados antes do lançamento. Até lá, o seu pedido segue para a categoria certa na página Falar com um parceiro.
+- EN: The first Private partners are announced before launch. Until then, your request goes to the right category on the Talk to a partner page.
+- FR: Les premiers partenaires Private sont annoncés avant le lancement. D'ici là, votre demande va à la bonne catégorie sur la page Parler à un partenaire.
+
+### map
+- PT: Ver no mapa o que 5 e 10 milhões de euros compram
+- EN: See on the map what €5 million and €10 million buy
+- FR: Voir sur la carte ce que permettent 5 et 10 millions d'euros
+
+## kit
+
+### types.h
+- PT: Uma página para cada tipo de parceiro
+- EN: A page for each kind of partner
+- FR: Une page pour chaque type de partenaire
+
+### download
+- PT: Descarregar o media kit (PDF)
+- EN: Download the media kit (PDF)
+- FR: Télécharger le media kit (PDF)
+
+### get.h
+- PT: O que recebe
+- EN: What you get
+- FR: Ce que vous obtenez
+
+### pkg.h
+- PT: Pacotes indicados
+- EN: Suggested packages
+- FR: Formules adaptées
+
+### wealth.h
+- PT: Para bancos privados e gestores de património
+- EN: For private banks and wealth managers
+- FR: Pour les banques privées et les gestionnaires de patrimoine
+
+### wealth.label
+- PT: Banca privada e património
+- EN: Private banking and wealth
+- FR: Banque privée et patrimoine
+
+### wealth.p
+- PT: Os seus clientes no Luxemburgo, na Suíça e em França que compram em Portugal entre 1 e 10 milhões de euros leem-nos enquanto preparam a compra: residência, IFICI, herança e estruturas de detenção. O seu nome aparece ao lado da resposta oficial a cada uma destas questões.
+- EN: Your clients in Luxembourg, Switzerland and France who buy in Portugal for €1 million to €10 million read us while they prepare the purchase: residence, IFICI, inheritance and holding structures. Your name appears next to the official answer to each of these questions.
+- FR: Vos clients au Luxembourg, en Suisse et en France qui achètent au Portugal entre 1 et 10 millions d'euros nous lisent pendant qu'ils préparent leur achat : résidence, IFICI, succession et structures de détention. Votre nom figure à côté de la réponse officielle à chacune de ces questions.
+
+### wealth.get.1
+- PT: Perfil com a sua licença na secção Private, junto às respostas sobre residência, herança e estruturas de detenção.
+- EN: A profile with your licence in the Private section, next to the answers on residence, inheritance and holding structures.
+- FR: Un profil avec votre licence dans la section Private, à côté des réponses sur la résidence, la succession et les structures de détention.
+
+### wealth.get.2
+- PT: Uma posição no mapa para orçamentos a partir de 1 milhão de euros.
+- EN: A map position for budgets from €1 million.
+- FR: Une position sur la carte pour les budgets à partir d'un million d'euros.
+
+### wealth.get.3
+- PT: O seu nome no simulador de crédito, com a indicação «oferecido por».
+- EN: Your name on the mortgage calculator, marked "offered by".
+- FR: Votre nom sur le simulateur de crédit, avec la mention « proposé par ».
+
+### wealth.get.4
+- PT: Presença na newsletter de quinta-feira das edições que escolher.
+- EN: Slots in the Thursday newsletter of the editions you choose.
+- FR: Des présences dans la newsletter du jeudi des éditions choisies.
+
+### taxlegal.h
+- PT: Para consultores fiscais e advogados
+- EN: For tax advisers and law firms
+- FR: Pour les conseillers fiscaux et les avocats
+
+### taxlegal.label
+- PT: Fiscal e jurídico
+- EN: Tax and legal
+- FR: Fiscal et juridique
+
+### taxlegal.p
+- PT: Cada pergunta sobre procuração, IMT, herança ou impostos nos dois países termina com o parceiro que a resolve. Esse parceiro pode ser o seu escritório, nas edições e nas línguas dos seus clientes.
+- EN: Every question on power of attorney, IMT, inheritance or tax in both countries ends with the partner who solves it. That partner can be your firm, in the editions and languages your clients read.
+- FR: Chaque question sur la procuration, l'IMT, la succession ou la fiscalité dans les deux pays se termine par le partenaire qui la résout. Ce partenaire peut être votre cabinet, dans les éditions et les langues de vos clients.
+
+### taxlegal.get.1
+- PT: Perfil com a inscrição na Ordem ou o registo profissional, e respostas identificadas nas perguntas da sua categoria.
+- EN: A profile with your Bar or professional registration, and labelled answers to the questions in your category.
+- FR: Un profil avec votre inscription à l'Ordre ou votre enregistrement professionnel, et des réponses signées aux questions de votre catégorie.
+
+### taxlegal.get.2
+- PT: Na secção Private, junto às regras sobre IFICI, herança e sociedades.
+- EN: In the Private section, next to the rules on IFICI, inheritance and companies.
+- FR: Dans la section Private, à côté des règles sur l'IFICI, la succession et les sociétés.
+
+### taxlegal.get.3
+- PT: Na página «Comprar a partir de fora, passo a passo» e na sua categoria da página Falar com um parceiro.
+- EN: On the "Buying from abroad, step by step" page and in your category on the Talk to a partner page.
+- FR: Sur la page « Acheter depuis l'étranger, pas à pas » et dans votre catégorie de la page Parler à un partenaire.
+
+### taxlegal.get.4
+- PT: Um capítulo identificado no guia gratuito.
+- EN: A labelled chapter in the free guide.
+- FR: Un chapitre signé dans le guide gratuit.
+
+### transfer.h
+- PT: Para empresas de transferência de dinheiro
+- EN: For money-transfer firms
+- FR: Pour les sociétés de transfert d'argent
+
+### transfer.label
+- PT: Transferências
+- EN: Money transfer
+- FR: Transferts
+
+### transfer.p
+- PT: Os leitores pagam a entrada e o preço em francos, dólares, reais ou shekels. O site mostra cada valor na moeda deles, à taxa do BCE; essa linha de câmbio pode ser sua.
+- EN: Readers pay the deposit and the price in francs, dollars, reais or shekels. The site shows every amount in their currency at the ECB rate; that exchange line can be yours.
+- FR: Les lecteurs paient l'apport et le prix en francs, dollars, reais ou shekels. Le site affiche chaque montant dans leur devise, au taux de la BCE ; cette ligne de change peut être la vôtre.
+
+### transfer.get.1
+- PT: O seu nome na linha de câmbio dos simuladores e do mapa, com a indicação «oferecido por».
+- EN: Your name on the exchange line of the calculators and the map, marked "offered by".
+- FR: Votre nom sur la ligne de change des simulateurs et de la carte, avec la mention « proposé par ».
+
+### transfer.get.2
+- PT: Perfil com a autorização do Banco de Portugal ou do regulador do seu país.
+- EN: A profile with your Banco de Portugal or home-regulator authorisation.
+- FR: Un profil avec votre agrément de la Banque du Portugal ou de votre régulateur.
+
+### transfer.get.3
+- PT: A categoria «transferências» na página Falar com um parceiro e na página passo a passo.
+- EN: The money-transfer category on the Talk to a partner page and on the step-by-step page.
+- FR: La catégorie transferts sur la page Parler à un partenaire et sur la page pas à pas.
+
+### transfer.get.4
+- PT: Presença na newsletter de quinta-feira das edições que escolher.
+- EN: Slots in the Thursday newsletter of the editions you choose.
+- FR: Des présences dans la newsletter du jeudi des éditions choisies.
+
+### developers.h
+- PT: Para promotores imobiliários
+- EN: For property developers
+- FR: Pour les promoteurs immobiliers
+
+### developers.label
+- PT: Promotores
+- EN: Developers
+- FR: Promoteurs
+
+### developers.p
+- PT: Quem procura no mapa um concelho e um orçamento vê o seu empreendimento nesse concelho, com os preços publicados e a indicação de patrocinado. Do apartamento de 300 mil euros à moradia de 10 milhões.
+- EN: Readers who look up a municipality and a budget on the map see your development there, with its published prices and the sponsored label. From a €300,000 apartment to a €10 million villa.
+- FR: Les lecteurs qui cherchent une commune et un budget sur la carte y voient votre programme, avec ses prix publiés et la mention sponsorisé. De l'appartement à 300 000 € à la villa à 10 millions.
+
+### developers.get.1
+- PT: Uma posição no mapa no seu concelho, para os orçamentos do empreendimento.
+- EN: A map position in your municipality, for your development's budgets.
+- FR: Une position sur la carte dans votre commune, pour les budgets de votre programme.
+
+### developers.get.2
+- PT: Uma página do empreendimento, identificada como patrocinada, com os custos de compra calculados.
+- EN: A development page, labelled as sponsored, with the buying costs worked out.
+- FR: Une page du programme, signalée comme sponsorisée, avec les frais d'achat calculés.
+
+### developers.get.3
+- PT: Destaque na newsletter das edições que escolher.
+- EN: A feature in the newsletter of the editions you choose.
+- FR: Une mise en avant dans la newsletter des éditions choisies.
+
+### developers.get.4
+- PT: A partir de 1 milhão de euros, presença na secção Private.
+- EN: From €1 million, a place in the Private section.
+- FR: À partir d'un million d'euros, une place dans la section Private.
+
+### developers.rule
+- PT: Os pedidos de visita dos leitores seguem para a nossa agência parceira licenciada, que trabalha com o promotor.
+- EN: Readers' viewing requests go to our licensed partner agency, which works with the developer.
+- FR: Les demandes de visite des lecteurs vont à notre agence partenaire agréée, qui travaille avec le promoteur.
+
+## ours
+
+### title
+- PT: Os nossos parceiros
+- EN: Our partners
+- FR: Nos partenaires
+
+### lede
+- PT: Cada parceiro aparece com a sua licença e a indicação de patrocinado. Primeiro o grupo parceiro, que trata da casa, do crédito e dos seguros; depois os parceiros fundadores, à medida que assinam.
+- EN: Each partner is shown with its licence and the sponsored label. First the partner group, which handles the home, the mortgage and insurance; then the founding partners, as they sign.
+- FR: Chaque partenaire figure avec sa licence et la mention sponsorisé. D'abord le groupe partenaire, qui s'occupe du bien, du crédit et des assurances ; puis les partenaires fondateurs, à mesure qu'ils signent.
+
+### group.h
+- PT: O grupo parceiro
+- EN: The partner group
+- FR: Le groupe partenaire
+
+### agency
+- PT: Agência imobiliária
+- EN: Estate agency
+- FR: Agence immobilière
+
+### credit
+- PT: Intermediário de crédito
+- EN: Credit intermediary
+- FR: Intermédiaire de crédit
+
+### insurance
+- PT: Seguros
+- EN: Insurance
+- FR: Assurances
+
+### tba
+- PT: A anunciar, com o registo no regulador
+- EN: To be announced, with its regulator registration
+- FR: À annoncer, avec son enregistrement auprès du régulateur
+
+### founding.h
+- PT: Parceiros fundadores
+- EN: Founding partners
+- FR: Partenaires fondateurs
+
+### founding.none
+- PT: Os parceiros fundadores aparecem aqui à medida que assinam, até 1 de dezembro de 2026.
+- EN: Founding partners appear here as they sign, until December 1, 2026.
+- FR: Les partenaires fondateurs apparaissent ici à mesure qu'ils signent, jusqu'au 1er décembre 2026.
+
+### join
+- PT: Ver as condições para parceiros
+- EN: See the partner terms
+- FR: Voir les conditions partenaires

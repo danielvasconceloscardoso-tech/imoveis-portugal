@@ -33,7 +33,11 @@ export const config = {
   insurancePartner: { name: "", asf: "" },
 
   // The Private section for budgets of 1 M€ and more (D33, prompt 18). The map links to it once it exists.
-  privateLive: false,
+  privateLive: true,
+  // Private partners as they sign (name and licence, e.g. Banco de Portugal or CMVM registration). Public data only.
+  privatePartners: [] as { name: string; licence: string }[],
+  // Founding partners as they sign (prompt 18, "Our partners" page): category, name, licence. Public data only.
+  foundingPartners: [] as { category: string; name: string; licence: string }[],
 
   // Paid "Plano de compra" report, 5,99 € (D22). Stays off until the billing entity (D4), OSS VAT and the
   // Stripe Payment Link exist: while false, no page links to the checkout and its button is disabled.

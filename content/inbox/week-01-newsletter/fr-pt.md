@@ -5,8 +5,8 @@ type: newsletter
 week: 1
 date: 2026-12-03
 format: content/NEWSLETTER_FORMAT.md
-title: "O que 500 000 € compram em Portugal, concelho a concelho"
-sources: [pt-imt-nonresident-flat, pt-is-purchase, pt-casa-pronta-fees, ine-m2-2026q2, pt-poa-apostille, bdp-mortgage-rate-2026-08, caop-2025]
+title: "O que 300 mil, 1, 5 e 10 milhões compram em Portugal"
+sources: [pt-imt-nonresident-flat, pt-is-purchase, pt-casa-pronta-fees, ine-m2-2026q2, pt-poa-apostille, bdp-mortgage-rate-2026-08, caop-2025, kf-cascais-5250k, kf-beloura-8500k]
 sponsored: true
 sponsor: Habinedita Gondomar
 status: draft
@@ -14,7 +14,7 @@ status: draft
 
 <!-- Operador: substituir "A casa da semana" por um anúncio real da Habinedita Gondomar, com autorização escrita, quando existir. -->
 
-Assunto: O que 500 000 € compram em Portugal, concelho a concelho
+Assunto: O que 300 mil, 1, 5 e 10 milhões compram em Portugal
 
 {{first name | Olá}},
 
@@ -26,11 +26,11 @@ Para a primeira edição fazemos as contas a uma casa de 245 000 €, comprada p
 
 ## A história
 
-Com 500 000 €, ao preço mediano das casas vendidas, tem mais de 100 m² em 303 dos 304 concelhos com número oficial do INE, e mais de 300 m² em 209. A única exceção é Lisboa, com cerca de 96 m². No país, o metro quadrado vendido custa em mediana 2 264 €, cerca de 18% mais do que há um ano. São medianas, não casas concretas.
+Com 300 000 €, ao preço mediano das casas vendidas, tem mais de 100 m² em 281 dos 304 concelhos com número oficial do INE: cerca de 83 m² no Porto e 136 m² em Braga. Com 1 milhão, cerca de 193 m² em Lisboa e 205 m² em Cascais. A partir de 5 milhões, as medianas deixam de descrever o mercado e os anúncios publicados mostram outra escala: uma moradia nova de 381 m² em Cascais por 5 250 000 €, ou uma moradia de 891,5 m² na Beloura, em Sintra, por 8 500 000 €. São medianas e preços pedidos, não casas da nossa agência parceira.
 
 ## O mapa
 
-Escreva o seu orçamento no mapa e veja quantos metros quadrados compra em cada concelho, do Minho aos Açores: https://claude-brave-gauss-cwafi6-imoveis-portugal.geralportugalimoveis.workers.dev/pt/fr/mapa/?budget=500000. A imagem para enviar à família: https://claude-brave-gauss-cwafi6-imoveis-portugal.geralportugalimoveis.workers.dev/share/map-500000.png
+No mapa, escolha 300 mil, 1, 5 ou 10 milhões, ou escreva o seu valor, e veja os metros quadrados concelho a concelho: https://claude-brave-gauss-cwafi6-imoveis-portugal.geralportugalimoveis.workers.dev/pt/fr/mapa/. As imagens para partilhar: https://claude-brave-gauss-cwafi6-imoveis-portugal.geralportugalimoveis.workers.dev/share/map-300000.png, map-1000000.png, map-5000000.png, map-10000000.png
 
 ## A pergunta mais pesquisada
 

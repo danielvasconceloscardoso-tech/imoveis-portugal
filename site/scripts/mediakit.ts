@@ -2,7 +2,7 @@
 // with price list v3 and the inventory, from COPY_DECK.md ("partners.*", "kit.*") and site/src/config.ts.
 // Run from site/: npm run mediakit · Output: ../sponsors/mediakit/ImoveisPortugal_MediaKit_{ED|TYPE}_{LANG}.pdf
 import { createRequire } from "node:module";
-import { mkdirSync, readFileSync, readdirSync, unlinkSync } from "node:fs";
+import { copyFileSync, mkdirSync, readFileSync, readdirSync, unlinkSync } from "node:fs";
 import { join } from "node:path";
 import { ED_ORDER, EDITIONS, eur, type EdCode, type Lang } from "../src/i18n";
 import { config } from "../src/config";
@@ -38,7 +38,7 @@ function prices(lang: Lang) {
   ].map(([k, list, founding]) => ({ h: c(`partners.${k}.h`, lang), p: c(`partners.${k}.p`, lang), list, founding }));
 }
 
-function html(lang: Lang, title: string, sub: string, photo: string, intro?: string) {
+function html(lang: Lang, title: string, sub: string, photo: string, intro?: string, type?: string) {
   const nf = new Intl.NumberFormat(lang === "en" ? "en" : lang === "fr" ? "fr" : "pt-PT");
   const rows = prices(lang).map((r) => `<tr><th>${r.h}<span>${r.p}</span></th><td>${r.list}</td><td><b>${r.founding}</b></td></tr>`).join("");
   const li = (k: string, v = {}) => cl(k, lang, v).map((x) => `<li>${x}</li>`).join("");
@@ -62,7 +62,7 @@ ul{padding-left:4.5mm;margin:0}li{margin:0 0 2mm}.small{font-size:8.5pt;color:#6
 <section class="pg"><h2>${c("partners.readers.h", lang)}</h2><p class="lede">${c("partners.readers.p", lang)}</p><hr>
 <div class="two"><div><h2>${c("partners.proof.h", lang)}</h2><ul>${li("partners.proof", { n: nf.format(93659) })}</ul></div>
 <div><h2>${c("partners.inventory.h", lang)}</h2><ul>${li("partners.inventory")}</ul></div></div><hr>
-<h2>${c("partners.why.h", lang)}</h2><p>${c("partners.why.p", lang)}</p><p>${c("partners.network.p", lang)}</p>
+${intro && type ? `<h2>${c("kit.get.h", lang)}</h2><ul>${li(`kit.${type}.get`)}</ul><hr>` : ""}<h2>${c("partners.why.h", lang)}</h2><p>${c("partners.why.p", lang)}</p><p>${c("partners.network.p", lang)}</p>
 <div class="foot"><span>imoveisportugal.lu</span><span>2</span></div></section>
 <section class="pg"><h2>${c("partners.packages.h", lang)}</h2>
 <table><thead><tr><th></th><td>${c("partners.list.price", lang)} ${c("partners.per.year", lang)}</td><td>${c("partners.founding.price", lang)}</td></tr></thead><tbody>${rows}</tbody></table>
@@ -87,7 +87,11 @@ for (const ed of ED_ORDER) {
 }
 for (const t of KIT_TYPES) for (const lang of t.langs) {
   if (!has(`kit.${t.key}.h`)) continue; // partner-type kits arrive with prompt 18
-  await write(`ImoveisPortugal_MediaKit_${t.key}_${lang.toUpperCase()}.pdf`, html(lang, c(`kit.${t.key}.h`, lang), c(`kit.${t.key}.label`, lang), t.photo, c(`kit.${t.key}.p`, lang)));
+  await write(`ImoveisPortugal_MediaKit_${t.key}_${lang.toUpperCase()}.pdf`, html(lang, c(`kit.${t.key}.h`, lang), c(`kit.${t.key}.label`, lang), t.photo, c(`kit.${t.key}.p`, lang), t.key));
 }
+// Partner-type kits are linked from their pages (prompt 18), so they are also served by the site.
+const pub = join(process.cwd(), "public", "mediakit");
+mkdirSync(pub, { recursive: true });
+for (const f of readdirSync(out)) if (f.includes("_MediaKit_") && KIT_TYPES.some((t) => f.includes(`_${t.key}_`))) copyFileSync(join(out, f), join(pub, f));
 await browser.close();
 console.log(`media kits written to ${out}`);

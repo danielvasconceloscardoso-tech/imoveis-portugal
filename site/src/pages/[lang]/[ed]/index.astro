@@ -14,6 +14,7 @@ import { c, edName } from "../../../lib/copy";
 import { postsFor } from "../../../lib/blog";
 import { SUB } from "../../../lib/tools";
 import MapExplorer from "../../../components/MapExplorer.astro";
+import Scenarios from "../../../components/Scenarios.astro";
 
 export function getStaticPaths() {
   return LANGS.flatMap((lang) => ED_ORDER.map((ed) => ({ params: { lang, ed } })));
@@ -69,6 +70,7 @@ const sup = (ns: number[]) => ns.map((i) => `<a class="sup" href="#fonte-${i}">$
       <p class="read">{c("map.home.p", lang)}<Fragment set:html={sup([nMap])} /></p>
       <MapExplorer lang={lang} ed={ed} mode="home" />
       <a class="more" href={pathFor(lang, ed, "map")}>{c("map.open", lang)}</a>
+      <Scenarios lang={lang} ed={ed} src={src} />
     </div>
   </section>
 

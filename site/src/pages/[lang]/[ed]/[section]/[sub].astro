@@ -1,11 +1,14 @@
 ---
 // Pages one level below a page key (prompts 12, 13 and 15): each calculator under the calculators page
 // (/pt/lu/simuladores/custo-total/), the paid plan and its checkout (D22, noindex, unlinked while config.plan.live
-// is false), and one page per municipality under the map (/pt/lu/mapa/porto/).
+// is false), one page per municipality under the map (/pt/lu/mapa/porto/) and one page per partner type under
+// the partners page (/pt/lu/parceiros/banca-privada/, prompt 18).
 import Sim from "../../../../components/Sim.astro";
 import PlanPage from "../../../../components/PlanPage.astro";
 import CheckoutPage from "../../../../components/CheckoutPage.astro";
 import PlacePage from "../../../../components/PlacePage.astro";
+import PartnerTypePage from "../../../../components/PartnerTypePage.astro";
+import { PTYPES, type PType } from "../../../../lib/packages";
 import { ED_ORDER, LANGS, SLUGS, type EdCode, type Lang } from "../../../../i18n";
 import { SUB, ENABLED, type ToolKey } from "../../../../lib/tools";
 import { PLACES, type Place } from "../../../../lib/places";
@@ -16,13 +19,15 @@ export function getStaticPaths() {
   return LANGS.flatMap((lang) => ED_ORDER.flatMap((ed) => [
     ...keys.map((tool) => ({ params: { lang, ed, section: SLUGS[lang].sims, sub: SUB[tool][lang] }, props: { tool } })),
     ...PLACES.map((place) => ({ params: { lang, ed, section: SLUGS[lang].map, sub: place.slug }, props: { place } })),
+    ...PTYPES.map((ptype) => ({ params: { lang, ed, section: SLUGS[lang].partners, sub: ptype.slug[lang] }, props: { ptype } })),
   ]));
 }
 const lang = Astro.params.lang as Lang;
 const ed = Astro.params.ed as EdCode;
-const { tool, place } = Astro.props as { tool?: Key; place?: Place };
+const { tool, place, ptype } = Astro.props as { tool?: Key; place?: Place; ptype?: PType };
 ---
-{place ? <PlacePage lang={lang} ed={ed} place={place} />
+{ptype ? <PartnerTypePage lang={lang} ed={ed} type={ptype} />
+  : place ? <PlacePage lang={lang} ed={ed} place={place} />
   : tool === "plan" ? <PlanPage lang={lang} ed={ed} />
   : tool === "checkout" ? <CheckoutPage lang={lang} ed={ed} />
   : <Sim lang={lang} ed={ed} tool={tool!} enabled={ENABLED} />}
