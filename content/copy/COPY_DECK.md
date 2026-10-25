@@ -484,6 +484,11 @@ How to edit:
 - EN: No. Since October 7, 2023, buying no longer opens new Golden Visa applications. To live here, you need a residence visa, such as the D7.
 - FR: Non. Depuis le 7 octobre 2023, l'achat n'ouvre plus de nouveaux golden visas. Pour y vivre, il faut un visa de résidence, comme le D7.
 
+### blog.h
+- PT: Para ler antes de assinar
+- EN: To read before you sign
+- FR: À lire avant de signer
+
 ### qa.all
 - PT: Todas as perguntas
 - EN: All questions
