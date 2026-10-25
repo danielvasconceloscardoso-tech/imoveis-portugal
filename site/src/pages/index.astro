@@ -17,7 +17,7 @@ const H = { pt: "Comprar casa em Portugal a partir de onde vive.", en: "Buying a
     <script is:inline>
       try {
         var l = localStorage.getItem("ip-lang"), e = localStorage.getItem("ip-ed");
-        if (["pt", "en", "fr"].indexOf(l) > -1 && ["lu", "fr", "ch", "br"].indexOf(e) > -1) location.replace("/" + l + "/" + e + "/");
+        if (["pt", "en", "fr"].indexOf(l) > -1 && ["lu", "fr", "ch", "br", "us", "il"].indexOf(e) > -1) location.replace("/" + l + "/" + e + "/");
       } catch (_) {}
     </script>
   </head>

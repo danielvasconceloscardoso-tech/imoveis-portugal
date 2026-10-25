@@ -1,4 +1,4 @@
-# USA edition (en-US): questions added to common-en.yaml. Rendered when the us edition is added (prompt 07).
+# USA edition, English: questions added to common-en.yaml. PT and FR versions in us-pt.yaml and us-fr.yaml.
 
 - id: us-01
   q: Do I have to report my Portuguese bank account to the US?

@@ -1,0 +1,11 @@
+# Israel edition, Portuguese (pt-PT, D18): questions added to common-pt.yaml. Same facts as il-en.yaml.
+# Left out until verified (content/faq/UNVERIFIED.md): "Posso financiar uma casa em Portugal a partir de Israel?"
+
+- id: il-pt-01
+  q: Israel tributa as rendas da minha casa em Portugal?
+  a: >-
+    Pela convenção entre Portugal e Israel, Portugal pode tributar as rendas de imóveis situados em Portugal,
+    e Israel, como país de residência, dá um crédito pelo imposto pago em Portugal. A forma como Israel calcula
+    o seu próprio imposto sobre esse rendimento segue as regras israelitas.
+  cta: talk-tax
+  facts: [il-pt-treaty-property]

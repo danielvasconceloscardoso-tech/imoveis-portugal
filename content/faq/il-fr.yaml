@@ -1,0 +1,11 @@
+# Israel edition, French: questions added to common-fr.yaml. Same facts as il-en.yaml.
+# Left out until verified (content/faq/UNVERIFIED.md): "Puis-je financer un bien au Portugal depuis Israël ?"
+
+- id: il-fr-01
+  q: Israël impose-t-il les loyers de mon bien au Portugal ?
+  a: >-
+    Selon la convention entre le Portugal et Israël, le Portugal peut imposer les loyers des biens situés au
+    Portugal, et Israël, pays de résidence, accorde un crédit pour l'impôt payé au Portugal. Le calcul de
+    l'impôt israélien sur ce revenu suit les règles israéliennes.
+  cta: talk-tax
+  facts: [il-pt-treaty-property]

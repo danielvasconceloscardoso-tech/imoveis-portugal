@@ -17,6 +17,8 @@
 [data-ed="fr"] { --ed: #24408e; }  /* 9.6:1 */
 [data-ed="ch"] { --ed: #ad2a2f; }  /* 6.7:1 */
 [data-ed="br"] { --ed: #1d6b45; }  /* 6.5:1 */
+[data-ed="us"] { --ed: #5b3a8e; }
+[data-ed="il"] { --ed: #0f6470; }
 
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }

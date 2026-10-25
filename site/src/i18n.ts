@@ -6,7 +6,7 @@ export const LANGS: Lang[] = ["pt", "en", "fr"];
 export const HTML_LANG: Record<Lang, string> = { pt: "pt-PT", en: "en", fr: "fr" };
 export const LANG_NAME: Record<Lang, string> = { pt: "Português", en: "English", fr: "Français" };
 
-export type EdCode = "lu" | "fr" | "ch" | "br";
+export type EdCode = "lu" | "fr" | "ch" | "br" | "us" | "il";
 export type PageKey = "partners" | "buy" | "privacy" | "legal" | "faq" | "talk" | "guide";
 
 // URL slugs follow the language, not the edition: /{lang}/{edition}/{slug}/
@@ -27,6 +27,9 @@ const SRC = {
   ine_nat: "https://www.idealista.pt/news/node/74594",
   ine_dom: "https://www.idealista.pt/news/node/74603",
   ine_price: "https://www.noticiasaominuto.com/economia/2960456/precos-da-habitacao-com-aumento-recorde-de-17-6-em-2025",
+  // From content/facts/facts.csv (us-fbar, pt-imt-nonresident-flat).
+  irs_fbar: "https://www.irs.gov/businesses/comparison-of-form-8938-and-fbar-requirements",
+  cimt17: "https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/cimt/Pages/cimt17.aspx",
 };
 
 export const EDITIONS: Record<EdCode, {
@@ -97,9 +100,43 @@ export const EDITIONS: Record<EdCode, {
       fr: { big: "9 808", text: "logements ont été achetés au Portugal en 2025 par des personnes nées au Brésil, plus que toute autre nationalité étrangère.", source: "INE, via idealista/news, 2026", url: SRC.ine_nat },
     },
   },
+  // USA and Israel (prompt 05, D13): Imóveis Portugal brand on country domains; domains not chosen yet
+  // (ops/DOMAINS_US_IL.md), so the two below are placeholders.
+  us: {
+    code: "us", domain: "imoveisportugal.us", defaultLang: "en",
+    name: { pt: "Estados Unidos", en: "United States", fr: "États-Unis" },
+    hero: { pt: "Comprar casa em Portugal a partir dos Estados Unidos, com os custos reais.", en: "Buying a home in Portugal from the United States, with the real costs.", fr: "Acheter au Portugal depuis les États-Unis, avec les vrais chiffres." },
+    from: { pt: "a partir dos Estados Unidos", en: "from the United States", fr: "depuis les États-Unis" },
+    topics: {
+      pt: ["Crédito em Portugal para não residentes, dólares para euros, vistos de residência e o que os Estados Unidos pedem a quem tem bens fora (FBAR, formulário 8938)."],
+      en: ["Portuguese mortgages for non-residents, dollars to euros, residence visas and US reporting on assets abroad (FBAR, Form 8938)."],
+      fr: ["Crédit au Portugal pour non-résidents, change du dollar, visas de résidence et déclarations américaines sur les avoirs à l'étranger (FBAR, formulaire 8938)."],
+    },
+    fact: {
+      pt: { big: "10 000 USD", text: "em contas no estrangeiro, em algum momento do ano: acima deste valor, os US persons entregam o FBAR.", source: "IRS, Comparison of Form 8938 and FBAR requirements", url: SRC.irs_fbar },
+      en: { big: "$10,000", text: "in foreign accounts at any time in the year: above this, US persons file an FBAR.", source: "IRS, Comparison of Form 8938 and FBAR requirements", url: SRC.irs_fbar },
+      fr: { big: "10 000 USD", text: "sur des comptes à l'étranger, à un moment de l'année : au-delà, les US persons déposent un FBAR.", source: "IRS, Comparison of Form 8938 and FBAR requirements", url: SRC.irs_fbar },
+    },
+  },
+  il: {
+    code: "il", domain: "imoveisportugal.co.il", defaultLang: "en",
+    name: { pt: "Israel", en: "Israel", fr: "Israël" },
+    hero: { pt: "Comprar casa em Portugal a partir de Israel, com os custos reais.", en: "Buying a home in Portugal from Israel, with the real costs.", fr: "Acheter au Portugal depuis Israël, avec les vrais chiffres." },
+    from: { pt: "a partir de Israel", en: "from Israel", fr: "depuis Israël" },
+    topics: {
+      pt: ["Crédito em Portugal para não residentes, shekels para euros, a convenção fiscal entre Portugal e Israel e empreendimentos novos."],
+      en: ["Portuguese mortgages for non-residents, shekels to euros, the Portugal–Israel tax treaty and new developments."],
+      fr: ["Crédit au Portugal pour non-résidents, change du shekel, la convention fiscale entre le Portugal et Israël et les programmes neufs."],
+    },
+    fact: {
+      pt: { big: "7,5%", text: "taxa única de IMT, desde maio de 2026, para quem compra casa sem ser residente fiscal em Portugal, salvo exceções.", source: "Código do IMT, art. 17.º, n.º 10 (Decreto-Lei 97/2026)", url: SRC.cimt17 },
+      en: { big: "7.5%", text: "flat transfer tax (IMT) since May 2026 for buyers who are not Portuguese tax residents, with exceptions.", source: "IMT Code, art. 17(10) (Decree-Law 97/2026)", url: SRC.cimt17 },
+      fr: { big: "7,5 %", text: "taux unique d'IMT depuis mai 2026 pour les acheteurs non-résidents fiscaux au Portugal, sauf exceptions.", source: "Code de l'IMT, art. 17, n° 10 (décret-loi 97/2026)", url: SRC.cimt17 },
+    },
+  },
 };
 
-export const ED_ORDER: EdCode[] = ["lu", "fr", "ch", "br"];
+export const ED_ORDER: EdCode[] = ["lu", "fr", "ch", "br", "us", "il"];
 
 // Thousands: space in PT and FR, comma in EN.
 const eur = (n: number, lang: Lang) => String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, lang === "en" ? "," : " ") + " €";
@@ -110,12 +147,14 @@ export function t(ed: EdCode, lang: Lang) {
   const L = lang;
   const p = config.prices;
   const left = config.foundingSlotsLeft, total = config.foundingSlotsTotal;
+  // USA and Israel readers move to Portugal rather than back.
+  const away = ed === "us" || ed === "il";
 
   if (lang === "en") return tEn(ed, E);
   if (lang === "fr") return {
     nav: { home: "Accueil", partners: "Partenaires", buy: "Acheter" },
     editionsLabel: "Éditions",
-    lede: "Une newsletter gratuite chaque semaine : des biens choisis, le coût réel d'un achat, le crédit, la fiscalité et le retour. Premier numéro le 1er décembre 2026.",
+    lede: `Une newsletter gratuite chaque semaine : des biens choisis, le coût réel d'un achat, le crédit, la fiscalité et ${away ? "l'installation" : "le retour"}. Premier numéro le 1er décembre 2026.`,
     weeklyTitle: "Chaque semaine",
     weekly: [
       "Des biens à vendre choisis par région et par budget.",
@@ -126,15 +165,15 @@ export function t(ed: EdCode, lang: Lang) {
     signupTitle: "Recevoir la newsletter",
     factsTitle: "En chiffres",
     buyCta: { h: "Vous achetez dans les prochains mois ?", p: "Dites-nous ce que vous cherchez. Une agence immobilière agréée partenaire vous contacte, sans frais pour vous.", a: "Demander un contact" },
-    partnersCta: { h: "Vous travaillez avec ceux qui achètent au Portugal ?", p: "Avocats, banques, promoteurs et autres services peuvent toucher nos lecteurs dans les quatre éditions.", a: "Voir les conditions partenaires" },
+    partnersCta: { h: "Vous travaillez avec ceux qui achètent au Portugal ?", p: "Avocats, banques, promoteurs et autres services peuvent toucher nos lecteurs dans toutes les éditions.", a: "Voir les conditions partenaires" },
     footer: { sponsored: "Le contenu sponsorisé est toujours signalé.", privacy: "Confidentialité", legal: "Mentions légales" },
     formPending: (email: string) => email ? `Formulaire en cours d'installation. Écrivez-nous à ${email}.` : "Formulaire disponible très bientôt.",
     partners: {
       title: "Partenaires",
       h1: "Touchez ceux qui vivent à l'étranger et pensent acheter au Portugal.",
-      lede: `Imóveis Portugal est un guide hebdomadaire en quatre éditions (Luxembourg, France, Suisse, Brésil) pour ceux qui vivent hors du Portugal et veulent y acheter. Lancement le 1er décembre 2026.`,
+      lede: `Imóveis Portugal est un guide hebdomadaire en six éditions (Luxembourg, France, Suisse, Brésil, États-Unis, Israël), en portugais, anglais et français, pour ceux qui vivent hors du Portugal et veulent y acheter. Lancement le 1er décembre 2026.`,
       readersH: "Les lecteurs",
-      readersP: "Des Portugais et lusodescendants installés en France, au Luxembourg et en Suisse, et des Brésiliens qui préparent un achat au Portugal : maison de vacances, retour, retraite ou investissement. Ils lisent parce qu'ils ont un projet.",
+      readersP: "Des Portugais et lusodescendants installés en France, au Luxembourg et en Suisse, des Brésiliens, des Américains et des Israéliens qui préparent un achat au Portugal : maison de vacances, retour, retraite, installation ou investissement. Ils lisent parce qu'ils ont un projet.",
       foundingH: "Partenaire fondateur",
       foundingP: `40 % de remise la première année et le même prix la deuxième. Dix places, un seul partenaire par catégorie.`,
       slots: `Places disponibles : ${left} sur ${total}`,
@@ -143,7 +182,7 @@ export function t(ed: EdCode, lang: Lang) {
       tableH: "Formules",
       cols: ["Formule", "Ce qui est inclus", "Prix fondateur (année 1)", "Prix normal"],
       rows: [
-        ["Gold", "Exclusivité dans votre catégorie sur les quatre éditions. Présence dans chaque newsletter, un article sponsorisé par mois et par édition, une rubrique questions-réponses, rapport mensuel.", eur(p.gold.founding, L), eur(p.gold.list, L) + " / an"],
+        ["Gold", "Exclusivité dans votre catégorie sur toutes les éditions. Présence dans chaque newsletter, un article sponsorisé par mois et par édition, une rubrique questions-réponses, rapport mensuel.", eur(p.gold.founding, L), eur(p.gold.list, L) + " / an"],
         ["Silver", "Une édition au choix. Présence dans la newsletter tous les quinze jours, un article sponsorisé par trimestre, fiche dans l'annuaire des partenaires, rapport mensuel.", eur(p.silver.founding, L), eur(p.silver.list, L) + " / an"],
         ["Bronze", "Une édition. Fiche avec logo dans l'annuaire des partenaires et une mention par mois dans la newsletter.", eur(p.bronze.founding, L), eur(p.bronze.list, L) + " / an"],
         ["Campagne promoteur", "Mise en avant d'un programme dans les éditions choisies : newsletter, article et réseaux sociaux.", "à partir de " + eur(p.campaignFrom, L), "—"],
@@ -180,7 +219,7 @@ export function t(ed: EdCode, lang: Lang) {
     editionsLabel: "Edições",
     lede: br
       ? "Uma newsletter grátis por semana: imóveis selecionados, quanto custa de verdade comprar, financiamento, câmbio, vistos e impostos. Primeira edição em 1º de dezembro de 2026."
-      : "Uma newsletter grátis por semana: imóveis escolhidos, quanto custa mesmo comprar, crédito, impostos e o que muda no regresso. Primeira edição a 1 de dezembro de 2026.",
+      : `Uma newsletter grátis por semana: imóveis escolhidos, quanto custa mesmo comprar, crédito, impostos e o que muda ${away ? "quando se muda para Portugal" : "no regresso"}. Primeira edição a 1 de dezembro de 2026.`,
     weeklyTitle: "Todas as semanas",
     weekly: [
       br ? "Imóveis à venda selecionados por região e orçamento." : "Imóveis à venda escolhidos por região e orçamento.",
@@ -197,7 +236,7 @@ export function t(ed: EdCode, lang: Lang) {
     },
     partnersCta: {
       h: br ? "Sua empresa trabalha com quem compra imóvel em Portugal?" : "Trabalha com quem compra casa em Portugal?",
-      p: br ? "Advogados, bancos, incorporadoras e outros serviços podem chegar aos nossos leitores nas quatro edições." : "Advogados, bancos, promotores e outros serviços podem chegar aos nossos leitores nas quatro edições.",
+      p: br ? "Advogados, bancos, incorporadoras e outros serviços podem chegar aos nossos leitores em todas as edições." : "Advogados, bancos, promotores e outros serviços podem chegar aos nossos leitores em todas as edições.",
       a: "Ver condições para parceiros",
     },
     footer: { sponsored: "O conteúdo patrocinado é sempre identificado.", privacy: "Privacidade", legal: "Aviso legal" },
@@ -207,11 +246,11 @@ export function t(ed: EdCode, lang: Lang) {
       h1: br ? "Chegue a quem mora fora e está pensando em comprar imóvel em Portugal." : "Chegue a quem vive fora e está a pensar comprar casa em Portugal.",
       lede: br
         ? "O Imóveis Portugal é um guia semanal com quatro edições (Luxemburgo, França, Suíça e Brasil) para quem mora fora de Portugal e quer comprar lá. Lançamento em 1º de dezembro de 2026."
-        : "O Imóveis Portugal é um guia semanal com quatro edições (Luxemburgo, França, Suíça e Brasil) para quem vive fora de Portugal e quer comprar casa lá. Lançamos a 1 de dezembro de 2026.",
+        : "O Imóveis Portugal é um guia semanal com seis edições (Luxemburgo, França, Suíça, Brasil, Estados Unidos e Israel), em português, inglês e francês, para quem vive fora de Portugal e quer comprar casa lá. Lançamos a 1 de dezembro de 2026.",
       readersH: "Quem nos lê",
       readersP: br
         ? "Brasileiros que preparam uma compra em Portugal para morar ou investir, e portugueses no Luxemburgo, na França e na Suíça que querem casa de férias, voltar ou se aposentar em Portugal. Leem porque têm um projeto."
-        : "Portugueses no Luxemburgo, em França e na Suíça que querem casa de férias, regressar ou reformar-se em Portugal, e brasileiros que preparam uma compra para viver ou investir. Leem porque têm um projeto.",
+        : "Portugueses no Luxemburgo, em França e na Suíça que querem casa de férias, regressar ou reformar-se em Portugal, e brasileiros, americanos e israelitas que preparam uma compra para viver, reformar-se ou investir. Leem porque têm um projeto.",
       foundingH: "Parceiro fundador",
       foundingP: br
         ? "40% de desconto no primeiro ano e o mesmo preço no segundo. São dez vagas e um único parceiro por categoria."
@@ -226,7 +265,7 @@ export function t(ed: EdCode, lang: Lang) {
       rows: [
         ["Gold", br
           ? "Exclusividade na sua categoria nas quatro edições. Presença em todas as newsletters, um artigo patrocinado por mês em cada edição, coluna de perguntas e respostas, relatório mensal."
-          : "Exclusivo na sua categoria nas quatro edições. Presença em todas as newsletters, um artigo patrocinado por mês em cada edição, coluna de perguntas e respostas, relatório mensal.",
+          : "Exclusivo na sua categoria em todas as edições. Presença em todas as newsletters, um artigo patrocinado por mês em cada edição, coluna de perguntas e respostas, relatório mensal.",
           eur(p.gold.founding, L), eur(p.gold.list, L) + " / ano"],
         ["Silver", br
           ? "Uma edição à sua escolha. Presença na newsletter a cada 15 dias, um artigo patrocinado por trimestre, página no diretório de parceiros, relatório mensal."
@@ -380,7 +419,7 @@ function tEn(ed: EdCode, E: { name: string; hero: string; from: string; topics: 
   return {
     nav: { home: "Home", partners: "Partners", buy: "Buy" },
     editionsLabel: "Editions",
-    lede: "One free newsletter a week: selected homes, what buying really costs, mortgages, tax and moving back. First issue on 1 December 2026.",
+    lede: `One free newsletter a week: selected homes, what buying really costs, mortgages, tax and ${ed === "us" || ed === "il" ? "moving to Portugal" : "moving back"}. First issue on 1 December 2026.`,
     weeklyTitle: "Every week",
     weekly: [
       "Homes for sale selected by region and budget.",
@@ -397,9 +436,9 @@ function tEn(ed: EdCode, E: { name: string; hero: string; from: string; topics: 
     partners: {
       title: "Partners",
       h1: "Reach people who live abroad and are thinking of buying in Portugal.",
-      lede: "Imóveis Portugal is a weekly guide with editions for Luxembourg, France, Switzerland and Brazil, in Portuguese, English and French, for people who live outside Portugal and want to buy there. Launch on 1 December 2026.",
+      lede: "Imóveis Portugal is a weekly guide with editions for Luxembourg, France, Switzerland, Brazil, the United States and Israel, in Portuguese, English and French, for people who live outside Portugal and want to buy there. Launch on 1 December 2026.",
       readersH: "Who reads us",
-      readersP: "Portuguese people in Luxembourg, France and Switzerland who want a holiday home, to move back or to retire in Portugal, and Brazilians preparing a purchase to live or invest. They read because they have a plan.",
+      readersP: "Portuguese people in Luxembourg, France and Switzerland who want a holiday home, to move back or to retire in Portugal, and Brazilians, Americans and Israelis preparing a purchase to live, retire or invest. They read because they have a plan.",
       foundingH: "Founding partner",
       foundingP: "40% off the first year and the same price in the second. Ten places, one partner per category.",
       slots: `Places available: ${left} of ${total}`,
