@@ -11,13 +11,13 @@ Items marked *proposal* are prices or positioning for Daniel to confirm: build t
 1. **Non-exclusive verified partner network (D32).** Real estate, credit and insurance stay with the partner group (D14, D20, D21). Every other category (lawyers, tax advisers, banks, money transfer, developers, insurers outside the group's role) is open to several partners per edition, ranked by response time and reader ratings. No category exclusivity is sold before launch; a 12-month exclusivity can be quoted later, once audience numbers exist.
    Price list v3 (*proposal*, flat annual fees, D6; Founding Partner 40% off year 1 for the first 10, locked for year 2):
    - **Verified Partner** (profile, FAQ answers in its category, simulator call-to-action rotation): 1,800 € per edition / 4,800 € all editions
-   - **Featured Partner** (adds 6 newsletter slots a year, 2 webinar co-hosts, one e-book chapter): 4,800 € per edition / 12,000 € all editions
-   - **Bank Partner** (simulator "oferecido por" in its editions, webinars, newsletter): 9,000–15,000 €
+   - **Featured Partner** (adds 6 newsletter slots a year, one e-book chapter, top position in its category): 4,800 € per edition / 12,000 € all editions
+   - **Bank Partner** (simulator "oferecido por" in its editions, newsletter, featured on the map for budgets it finances): 9,000–15,000 €
    - **Developer campaign:** from 2,500 € per campaign
    Rationale to show sponsors: one client covers the fee (a purchase file for a lawyer, one large transfer for a money-transfer firm, one mortgage for a bank, one sale for a developer).
 1b. **Private tier (D33): the elite, high-price layer.** For buyers with budgets of 1 M€ and more, and the firms that serve them: international private banks and wealth managers, cross-border tax planners, private-client law firms, family offices, prime developers (Lisbon, Porto, Comporta, Douro, Algarve), and managers of funds eligible for the Portuguese investment residence route (Lei 56/2023; fund marketing follows CMVM and AIFMD rules and is always labelled as advertising).
-   - Product: a "Private" section with an editorial look (Comporta and Monocle rules: few words, premium photography), an annual **Portugal Private Report** (Knight Frank model), and invitation-only roundtables in Luxembourg, Geneva and Paris co-hosted by partners. Sign-ups only with consent to the named hosts.
-   - Prices (*proposal*): **Private Partner** 25,000–50,000 € a year (maximum 5 per edition, non-exclusive); **Report sponsor** 15,000 €; **Roundtable host** 10,000 € per event.
+   - Product: a "Private" section with an editorial look (Comporta and Monocle rules: few words, premium photography) and placements only. No events, webinars, roundtables or reports unless Daniel approves them (D36).
+   - Prices (*proposal*): **Private Partner** 25,000–50,000 € a year (maximum 5 per edition, non-exclusive).
    - Target list: add 30 firms to pipeline.csv as tier A "private", with evidence of spend on international or Portugal-related clients (sponsorships, Portugal desks, events, ads). No Russian capital (D11), no agencies (D9).
    - No price caps anywhere on the site: budgets, simulators and examples go up to 10 M€ and beyond.
 2. **Inventory a sponsor can see**, listed on the partner page with what each tier gets:
@@ -25,7 +25,7 @@ Items marked *proposal* are prices or positioning for Daniel to confirm: build t
    - the labelled sponsor answer on the FAQ questions in its category;
    - a newsletter slot;
    - an e-book chapter;
-   - a monthly live webinar ("Comprar casa em Portugal a partir de [país]", co-hosted with the partner agency and one bank and one lawyer, with consented sign-ups going to the named co-hosts).
+   - top position on the map and in the "talk to a partner" lists for its category and editions.
 3. **Founding Partner scarcity:** 10 slots, a counter on the partner page, deadline 1 Dec.
 4. **Pre-launch proof without invented numbers:** community size per country (official statistics), Google search interest (Trends), the partner group's reach, launch plan. Audience figures are added only once real (METRICS.md).
 5. Update the per-edition media kit (PDF, design C rules from prompt 11) and the partner page.
@@ -50,7 +50,7 @@ Items marked *proposal* are prices or positioning for Daniel to confirm: build t
 1. **Data story as the launch hook:** "O que 500 000 € compram no Luxemburgo, em Paris, em Genebra, em São Paulo e em Nova Iorque vs em Portugal" from prompt 12's comparisons, with official sources and a shareable image per country.
 2. **Press kit** in PT, EN and FR: release, the data story, logo, screenshots, brand facts, contact = brand mailbox. Quotes are signed "a redação" (anonymity).
 3. **Diaspora and property media list** (name, country, language, section, public contact page, no personal emails): Contacto (LU), LusoJornal (FR), Gazeta Lusófona (CH), Mundo Lusíada and Portugal-focused Brazilian outlets (BR), Portugal Resident and The Portugal News (EN), idealista news, ECO, Expresso, Público and Jornal de Negócios property sections, Lusa. Add any community associations and consulate newsletters that publish community news.
-4. **Launch calendar, 10 Nov to 15 Dec:** teasers on social (D26, D27), founding partners announced, press release on launch day, data story the following week, the first webinar mid-December. Community groups: contribute answers with permission, never spam links.
+4. **Launch calendar, 10 Nov to 15 Dec:** teasers on social (D26, D27), founding partners announced, press release on launch day, data story the following week. Community groups: contribute answers with permission, never spam links.
 
 ## 5. Quality scorecard per page and language (scripts/scorecard + design/SCORECARD.md)
 

@@ -110,7 +110,7 @@ Status: To do · Doing · Blocked · Done
 
 | 8s | Confirm price list v3 (Verified 1,800/4,800 €, Featured 4,800/12,000 €, Bank 9–15k €, developer campaign from 2,500 €; founding 40% off) in ops/prompts/15_growth_engine.md | Operator | To do | 2026-10-27 |
 
-| 8t | Confirm Private tier prices (Private Partner 25–50k €, Report sponsor 15k €, Roundtable host 10k € per event) in ops/prompts/15_growth_engine.md | Operator | To do | 2026-10-27 |
+| 8t | Confirm Private tier price (Private Partner 25–50k € a year) in ops/prompts/15_growth_engine.md | Operator | To do | 2026-10-27 |
 
 ## Last session
 
