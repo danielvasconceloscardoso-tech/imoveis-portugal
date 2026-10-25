@@ -551,3 +551,34 @@ a, .nav a, .langs a { transition: color .35s ease, text-decoration-color .35s ea
 .mapx-presets button:hover { border-color: var(--ink); }
 .mapx-presets button[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
 .mapx-filters button { border-radius: 2px; }
+/* Concierge calculators (prompt 19): one question at a time, the result as a set statement. */
+.sim .q { display: block; font: 400 clamp(1.45rem, 1.2rem + 1.2vw, 1.9rem)/1.25 var(--serif); color: var(--ink); margin: 0 0 14px; padding: 0; }
+.sim .big-in { display: inline-flex; align-items: baseline; gap: 10px; border-bottom: 1px solid var(--ink); padding-bottom: 4px; max-width: 100%; }
+.sim .big-in input { font: 400 clamp(2.2rem, 1.8rem + 2vw, 3rem)/1.1 var(--serif); border: 0; background: transparent; color: var(--ink); width: 9.5ch; padding: 0; min-height: 0; font-variant-numeric: lining-nums tabular-nums; -moz-appearance: textfield; }
+.sim .big-in input::-webkit-outer-spin-button, .sim .big-in input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.sim .big-in input:focus { outline: none; box-shadow: none; }
+.sim .big-in:focus-within { border-bottom-color: var(--accent); }
+.sim .unit { font: 400 1.3rem/1 var(--serif); color: var(--muted); }
+.sim .slider { width: 100%; margin: 22px 0 6px; accent-color: var(--accent); }
+.sim .choice { display: flex; align-items: center; gap: 12px; padding: 14px 0; border-top: 1px solid var(--rule); font: 400 1.2rem/1.3 var(--serif); cursor: pointer; }
+.sim .choice:last-of-type { border-bottom: 1px solid var(--rule); }
+.sim .choice input { accent-color: var(--accent); width: 18px; height: 18px; }
+.sim.stepped .step { display: none; }
+.sim.stepped .step.is-on { display: block; }
+@media (prefers-reduced-motion: no-preference) { .sim.stepped .step.is-on { animation: ip-fade .6s ease both; } }
+.step-nav { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 28px; }
+.step-nav .back { background: none; border: 0; padding: 10px 0; font: 500 15px/1 var(--sans); color: var(--muted); cursor: pointer; }
+.step-nav .back:disabled { visibility: hidden; }
+.step-nav .count { font: 500 12px/1 var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.step-nav .btn { width: auto; }
+.statement { margin-top: 40px; padding: 28px 0 8px; border-top: 1px solid var(--ink); background: none; }
+.st-total { display: flex; flex-direction: column; gap: 4px; margin: 10px 0 18px; }
+.st-label { font: 500 15px/1.4 var(--sans); color: var(--muted); }
+.st-total strong { font: 400 clamp(2.8rem, 2.2rem + 3vw, 4.2rem)/1 var(--serif); font-weight: 400; letter-spacing: -.01em; font-variant-numeric: lining-nums; }
+.st-lines { display: grid; grid-template-columns: 1fr auto; margin: 0 0 18px; }
+.st-lines dt, .st-lines dd { padding: 12px 0; border-top: 1px solid var(--rule); margin: 0; }
+.st-lines dd { text-align: right; font: 400 1.15rem/1.4 var(--serif); font-variant-numeric: tabular-nums; }
+.st-src { display: block; font-size: 12px; color: var(--muted); text-decoration: none; margin-top: 2px; }
+.st-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+@media print { .sim, .sim-next, .others, .st-actions, .sticky { display: none !important; } .statement { border: 0; } }
+.sim { background: none; border: 0; border-radius: 0; padding: 8px 0 0; }

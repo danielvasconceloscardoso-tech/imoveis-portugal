@@ -6,7 +6,7 @@ import V2 from "../layouts/V2.astro";
 import Calls from "./Calls.astro";
 import { config } from "../config";
 import { LANGS, HTML_LANG, pathFor, type Lang, type EdCode } from "../i18n";
-import { Sources, fmtDate, EDITION_CUR, RATE } from "../lib/content";
+import { Sources, fmtDate, EDITION_CUR, RATE, FACTS } from "../lib/content";
 import { FIELDS, NEXT, FACTS_USED, SUB, TOOLS, keysFor, type ToolKey } from "../lib/tools";
 import { RATE_DEFAULT } from "../lib/sims";
 import { c, has } from "../lib/copy";
@@ -16,7 +16,7 @@ const { lang, ed, tool, enabled } = Astro.props;
 const base = pathFor(lang, ed, "sims");
 const paths = Object.fromEntries(LANGS.map((l) => [l, `${pathFor(l, ed, "sims")}${SUB[tool][l]}/`])) as Record<Lang, string>;
 const src = new Sources();
-const nums = FACTS_USED[tool].map((id) => src.n(id));
+const nums = [...new Set(FACTS_USED[tool].map((id) => src.n(id)))];
 const cur = EDITION_CUR[ed];
 const fx = cur ? RATE(cur) : null;
 const curCode = cur ?? "EUR";
@@ -28,6 +28,17 @@ const next = NEXT[tool];
 const talk = pathFor(lang, ed, "talk");
 const creditForm = config.forms.credit[lang];
 const name = c(`sims.${tool}.name`, lang);
+// Prompt 19: each result line carries its own source in small type (row key → fact; IMT depends on the profile).
+const ROW_FACT: Record<string, string> = {
+  "r.imt.nr": "pt-imt-nonresident-flat", "r.imt.own": "pt-imt-hpp-2026", "r.imt.other": "pt-imt-second-home-2026",
+  "r.is": "pt-is-purchase", "r.deed": "pt-casa-pronta-fees", "r.stamp": "pt-is-loan-5y", "r.ltv": "pt-ltv-limits",
+  "r.monthly": "bdp-mortgage-rate-2026-08", "r.limit": "pt-dsti-45", "r.ratio": "pt-dsti-45", "r.maxInst": "pt-dsti-45", "r.maxLoan": "pt-ltv-limits",
+  "r.tax": "pt-rent-tax-nonresident", "r.imi": "pt-imi-rates", "r.taxable": "pt-cg-50pct", "r.taxIfOnly": "pt-irs-68-2026",
+};
+const short = (t: string) => t.split(/[;(]/)[0].trim();
+const rowSrc = Object.fromEntries(Object.entries(ROW_FACT).filter(([, id]) => FACTS[id]).map(([k, id]) => [k, { n: src.n(id), t: short(FACTS[id].source_title) }]));
+const MONEY_SLIDER = new Set(["price", "sale", "buy"]);
+const q = (id: string, kind: string) => has(`sims.q.${id}`) ? c(`sims.q.${id}`, lang) : fieldLabel(id, kind);
 const fieldLabel = (id: string, kind: string) => {
   const t = c(`sims.f.${id}`, lang);
   return kind === "local" && cur ? `${t} (${cur})` : kind === "local" ? `${t} (€)` : t;
@@ -40,28 +51,37 @@ const fieldLabel = (id: string, kind: string) => {
   </div>
   <div class="frame read sim-wrap">
     <form class="sim" id="sim" data-tool={tool} data-fx={fx ? fx.rate : 1} data-cur={curCode} data-locale={HTML_LANG[lang]} novalidate>
-      {FIELDS[tool].map((f) => f.kind === "bool" ? (
-        <fieldset class="field bool">
-          <legend>{fieldLabel(f.id, f.kind)}</legend>
-          <label><input type="radio" name={f.id} value="1" checked={f.def === true} /> {c("sims.yes", lang)}</label>
-          <label><input type="radio" name={f.id} value="0" checked={f.def !== true} /> {c("sims.no", lang)}</label>
+      {FIELDS[tool].map((f, i) => f.kind === "bool" ? (
+        <fieldset class="field bool step" data-step={i}>
+          <legend class="q">{q(f.id, f.kind)}</legend>
+          <label class="choice"><input type="radio" name={f.id} value="1" checked={f.def === true} /> <span>{c("sims.yes", lang)}</span></label>
+          <label class="choice"><input type="radio" name={f.id} value="0" checked={f.def !== true} /> <span>{c("sims.no", lang)}</span></label>
         </fieldset>
       ) : (
-        <label class="field">
-          <span>{fieldLabel(f.id, f.kind)}</span>
-          <input type="number" name={f.id} value={String(f.def)} min="0" step={f.step ?? (f.kind === "money" || f.kind === "local" ? 1000 : 1)} inputmode="decimal" />
+        <div class="field step" data-step={i}>
+          <label class="q" for={`f-${f.id}`}>{q(f.id, f.kind)}</label>
+          <span class="big-in">{f.kind === "money" || f.kind === "local"
+            ? <input id={`f-${f.id}`} type="text" name={f.id} value={new Intl.NumberFormat(HTML_LANG[lang]).format(Number(f.def))} inputmode="numeric" autocomplete="off" data-money />
+            : <input id={`f-${f.id}`} type="number" name={f.id} value={String(f.def)} min="0" step={f.step ?? 1} inputmode="decimal" />}<span class="unit" aria-hidden="true">{f.kind === "pct" ? "%" : f.kind === "local" ? curCode : f.kind === "money" ? "€" : ""}</span></span>
+          {MONEY_SLIDER.has(f.id) && <input class="slider" type="range" min="0" max="1000" step="1" data-for={f.id} aria-label={q(f.id, f.kind)} />}
           {f.hint && <small>{c(`sims.${f.hint}`, lang, hintVars)}</small>}
-        </label>
+        </div>
       ))}
+      <div class="step-nav" hidden>
+        <button type="button" class="back">{c("sims.step.back", lang)}</button>
+        <span class="count" data-tpl={c("sims.step.of", lang, { i: "{i}", n: "{n}" })}></span>
+        <button type="button" class="btn next" data-next={c("sims.step.next", lang)} data-done={c("sims.step.done", lang)}>{c("sims.step.next", lang)}</button>
+      </div>
     </form>
 
-    <section class="sim-out" aria-live="polite" aria-labelledby="res">
-      <h2 id="res" class="h3">{c("sims.result.h", lang)}</h2>
-      <dl class="bill" id="rows"></dl>
+    <section class="sim-out statement" id="result" aria-live="polite" aria-labelledby="res">
+      <h2 id="res" class="h-small">{c("sims.result.h", lang)}</h2>
+      <p class="st-total"><span class="st-label" id="st-label"></span><strong id="st-total"></strong><span class="small" id="st-local" data-tpl={c("sims.local", lang, { local: "{local}" })}></span></p>
+      <dl class="st-lines" id="rows"></dl>
       <p class="warn" id="warn" hidden></p>
       <p class="small">{c("sims.estimate", lang)}{nums.map((i) => <a class="sup" href={`#fonte-${i}`}>{i}</a>)}</p>
       {next === "credit" && cp.name && <p class="sponsor-line">{c("sims.sponsor", lang, { name: cp.name, bdp: cp.bdp })}</p>}
-      <button type="button" class="btn ghost sm" id="share" data-done={c("sims.copied", lang)}>{c("sims.share", lang)}</button>
+      <p class="st-actions no-print"><button type="button" class="btn ghost sm" id="share" data-done={c("sims.copied", lang)}>{c("sims.share", lang)}</button> <button type="button" class="btn ghost sm" id="pdf">{c("sims.pdf", lang)}</button></p>
     </section>
 
     <section class="sim-next" aria-labelledby="next">
@@ -96,6 +116,7 @@ const fieldLabel = (id: string, kind: string) => {
     </div>
   </section>
   <script type="application/json" id="sim-labels" set:html={JSON.stringify(labels)} />
+  <script type="application/json" id="sim-src" set:html={JSON.stringify(rowSrc)} />
 </V2>
 
 <script>
@@ -111,33 +132,48 @@ const fieldLabel = (id: string, kind: string) => {
   const pct = new Intl.NumberFormat(loc, { maximumFractionDigits: 2 });
   const fmt = (v: number, f: string) => (f === "eur" ? eur.format(v) : f === "local" ? local.format(v) : `${pct.format(v)}${loc.startsWith("fr") ? "\u202f%" : "%"}`);
 
+  // Money fields are text inputs so the large numerals keep their thousands separators.
+  const grp = new Intl.NumberFormat(loc, { maximumFractionDigits: 0 });
+  const num = (t: string) => Number(String(t).replace(/[^\d.,-]/g, "").replace(/[.,](?=\d{3}(\D|$))/g, "").replace(",", ".")) || 0;
+  form.querySelectorAll<HTMLInputElement>("[data-money]").forEach((el) => el.addEventListener("blur", () => { el.value = grp.format(num(el.value)); }));
   // Prefill from the shared link.
   const qs = new URLSearchParams(location.search);
   for (const f of FIELDS[tool]) {
     const q = qs.get(f.id);
     if (q === null) continue;
     if (f.kind === "bool") { const el = form.querySelector<HTMLInputElement>(`input[name="${f.id}"][value="${q === "1" ? "1" : "0"}"]`); if (el) el.checked = true; }
-    else { const el = form.querySelector<HTMLInputElement>(`input[name="${f.id}"]`); if (el && !isNaN(Number(q))) el.value = q; }
+    else { const el = form.querySelector<HTMLInputElement>(`input[name="${f.id}"]`); if (el && !isNaN(Number(q))) el.value = el.dataset.money !== undefined ? grp.format(Number(q)) : q; }
   }
 
   function values() {
     const v: Record<string, number | boolean> = {};
     for (const f of FIELDS[tool]) {
       if (f.kind === "bool") v[f.id] = form.querySelector<HTMLInputElement>(`input[name="${f.id}"]:checked`)?.value === "1";
-      else v[f.id] = Number(form.querySelector<HTMLInputElement>(`input[name="${f.id}"]`)?.value) || 0;
+      else v[f.id] = num(form.querySelector<HTMLInputElement>(`input[name="${f.id}"]`)?.value || "");
     }
     return v;
   }
+  const SRC: Record<string, { n: number; t: string }> = JSON.parse(document.getElementById("sim-src")!.textContent || "{}");
   function render() {
     const v = values();
     const out = run(tool, v, fx);
     const dl = document.getElementById("rows")!;
     dl.innerHTML = "";
+    const imtKey = v.resident !== true ? "r.imt.nr" : v.own === true ? "r.imt.own" : "r.imt.other";
+    const total = out.rows.find((r) => r.strong);
     for (const r of out.rows) {
+      if (r === total) continue;
       const dt = document.createElement("dt"), dd = document.createElement("dd");
       dt.textContent = L[r.k] || r.k; dd.textContent = fmt(r.v, r.fmt);
-      if (r.strong) { dt.className = "tot"; dd.className = "tot"; }
+      const s = SRC[r.k === "r.imt" ? imtKey : r.k];
+      if (s) { const a = document.createElement("a"); a.className = "st-src"; a.href = `#fonte-${s.n}`; a.textContent = s.t; dt.append(a); }
       dl.append(dt, dd);
+    }
+    if (total) {
+      document.getElementById("st-label")!.textContent = L[total.k] || total.k;
+      document.getElementById("st-total")!.textContent = fmt(total.v, total.fmt);
+      const lt = document.getElementById("st-local")!;
+      lt.textContent = total.fmt === "eur" && cur !== "EUR" ? (lt.dataset.tpl || "").replace("{local}", local.format(total.v * fx)) : "";
     }
     const w = document.getElementById("warn")!;
     if (out.warn && L[out.warn.k]) { w.hidden = false; w.textContent = L[out.warn.k].replace(/\{(\w+)\}/g, (m, k) => String(out.warn!.vars?.[k] ?? m)); }
@@ -158,6 +194,39 @@ const fieldLabel = (id: string, kind: string) => {
   }
   form.addEventListener("input", render);
   form.addEventListener("submit", (e) => e.preventDefault());
+
+  // Sliders for prices: log scale from 100 k€ to 10 M€; the number field above takes any amount.
+  const toVal = (p: number) => { const x = 1e5 * Math.pow(100, p / 1000); const st = x < 1e6 ? 5000 : x < 5e6 ? 25000 : 50000; return Math.round(x / st) * st; };
+  const toPos = (x: number) => Math.round((1000 * Math.log(Math.min(Math.max(x, 1e5), 1e7) / 1e5)) / Math.log(100));
+  form.querySelectorAll<HTMLInputElement>(".slider").forEach((sl) => {
+    const inp = form.querySelector<HTMLInputElement>(`input[name="${sl.dataset.for}"]`)!;
+    sl.value = String(toPos(num(inp.value)));
+    sl.addEventListener("input", () => { inp.value = grp.format(toVal(Number(sl.value))); render(); });
+    inp.addEventListener("input", () => { sl.value = String(toPos(num(inp.value))); });
+  });
+
+  // One question at a time (prompt 19), only with JavaScript; without it every field shows at once.
+  const steps = [...form.querySelectorAll<HTMLElement>(".step")];
+  const navEl = form.querySelector<HTMLElement>(".step-nav")!;
+  const back = navEl.querySelector<HTMLButtonElement>(".back")!, nextB = navEl.querySelector<HTMLButtonElement>(".next")!, count = navEl.querySelector<HTMLElement>(".count")!;
+  let at = 0;
+  function show(i: number, focus = true) {
+    at = Math.max(0, Math.min(i, steps.length - 1));
+    steps.forEach((s, k) => s.classList.toggle("is-on", k === at));
+    back.disabled = at === 0;
+    nextB.textContent = at === steps.length - 1 ? nextB.dataset.done! : nextB.dataset.next!;
+    count.textContent = (count.dataset.tpl || "").replace("{i}", String(at + 1)).replace("{n}", String(steps.length));
+    if (focus) steps[at].querySelector<HTMLInputElement>("input")?.focus({ preventScroll: true });
+  }
+  if (steps.length > 1) {
+    form.classList.add("stepped"); navEl.hidden = false;
+    back.addEventListener("click", () => show(at - 1));
+    nextB.addEventListener("click", () => { if (at < steps.length - 1) show(at + 1); else document.getElementById("result")!.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }); });
+    form.addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); nextB.click(); } });
+    form.querySelectorAll<HTMLInputElement>('.bool input').forEach((r) => r.addEventListener("change", () => setTimeout(() => at < steps.length - 1 && show(at + 1), 350)));
+    show(0, false);
+  }
+  document.getElementById("pdf")?.addEventListener("click", () => print());
   render();
 
   document.getElementById("share")?.addEventListener("click", async (e) => {

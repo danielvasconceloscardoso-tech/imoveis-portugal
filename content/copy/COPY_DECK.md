@@ -1489,6 +1489,131 @@ How to edit:
 
 ## sims
 
+### local
+- PT: cerca de {local}, à taxa de referência do BCE
+- EN: about {local} at the ECB reference rate
+- FR: environ {local} au taux de référence de la BCE
+
+### pdf
+- PT: Guardar em PDF
+- EN: Save as PDF
+- FR: Enregistrer en PDF
+
+### step.of
+- PT: {i} de {n}
+- EN: {i} of {n}
+- FR: {i} sur {n}
+
+### step.done
+- PT: Ver o resultado
+- EN: See the result
+- FR: Voir le résultat
+
+### step.back
+- PT: Voltar
+- EN: Back
+- FR: Retour
+
+### step.next
+- PT: Seguinte
+- EN: Next
+- FR: Suivant
+
+### q.imirate
+- PT: Que taxa aplica o município?
+- EN: What rate does the municipality apply?
+- FR: Quel taux applique la commune ?
+
+### q.vpt
+- PT: Qual é o valor patrimonial tributário?
+- EN: What is the tax value (VPT)?
+- FR: Quelle est la valeur fiscale (VPT) ?
+
+### q.mgmt
+- PT: Que parte da renda vai para a gestão?
+- EN: What share of the rent goes to management?
+- FR: Quelle part du loyer va à la gestion ?
+
+### q.insurance
+- PT: Quanto custa o seguro por ano?
+- EN: What does insurance cost a year?
+- FR: Combien coûte l'assurance par an ?
+
+### q.condo
+- PT: Quanto é o condomínio por mês?
+- EN: What is the monthly service charge?
+- FR: Quelles sont les charges de copropriété par mois ?
+
+### q.imi
+- PT: Quanto paga de IMI por ano?
+- EN: How much IMI do you pay a year?
+- FR: Combien d'IMI payez-vous par an ?
+
+### q.rent
+- PT: Que renda mensal espera?
+- EN: What monthly rent do you expect?
+- FR: Quel loyer mensuel attendez-vous ?
+
+### q.salecosts
+- PT: Quanto custa a venda?
+- EN: What does the sale cost?
+- FR: Combien coûte la vente ?
+
+### q.works
+- PT: Que obras com fatura fez na casa?
+- EN: What invoiced improvements did you make?
+- FR: Quels travaux facturés avez-vous réalisés ?
+
+### q.buycosts
+- PT: Quanto pagou de IMT, selo e escritura?
+- EN: What did you pay in IMT, stamp duty and deed?
+- FR: Combien avez-vous payé d'IMT, de timbre et d'acte ?
+
+### q.buy
+- PT: Por quanto comprou?
+- EN: What did you buy it for?
+- FR: À quel prix l'avez-vous acheté ?
+
+### q.sale
+- PT: Por quanto vai vender?
+- EN: What will you sell for?
+- FR: À quel prix allez-vous vendre ?
+
+### q.instalments
+- PT: Quanto somam todas as prestações, com a nova?
+- EN: What do all your loan payments add up to, with the new one?
+- FR: Combien font toutes vos mensualités, avec la nouvelle ?
+
+### q.debts
+- PT: Que outras prestações paga por mês?
+- EN: What other loan payments do you make each month?
+- FR: Quelles autres mensualités payez-vous ?
+
+### q.income
+- PT: Qual é o rendimento líquido mensal do seu agregado?
+- EN: What is your household's net monthly income?
+- FR: Quel est le revenu net mensuel de votre foyer ?
+
+### q.rate
+- PT: Que taxa de juro anual quer usar?
+- EN: Which annual interest rate should we use?
+- FR: Quel taux d'intérêt annuel retenir ?
+
+### q.years
+- PT: Em quantos anos quer pagar?
+- EN: Over how many years?
+- FR: Sur combien d'années ?
+
+### q.deposit
+- PT: Quanto vai dar de entrada?
+- EN: How much will you put down?
+- FR: Quel apport prévoyez-vous ?
+
+### q.price
+- PT: Qual é o preço da casa?
+- EN: What is the price of the home?
+- FR: Quel est le prix du bien ?
+
 ### map.name
 - PT: O mapa: quanto espaço compra o seu orçamento
 - EN: The map: how much space your budget buys
