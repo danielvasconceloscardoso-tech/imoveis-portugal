@@ -32,6 +32,9 @@ export const config = {
   // Insurance partner (life and home cover) once signed, with its ASF registration (prompt 13). Empty = none yet.
   insurancePartner: { name: "", asf: "" },
 
+  // The Private section for budgets of 1 M€ and more (D33, prompt 18). The map links to it once it exists.
+  privateLive: false,
+
   // Paid "Plano de compra" report, 5,99 € (D22). Stays off until the billing entity (D4), OSS VAT and the
   // Stripe Payment Link exist: while false, no page links to the checkout and its button is disabled.
   plan: { live: false, price: 5.99, stripeLink: "" },

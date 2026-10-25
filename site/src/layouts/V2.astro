@@ -78,7 +78,7 @@ const sticky: Sticky = Astro.props.sticky !== undefined ? Astro.props.sticky
               {nav.map((k) => <a href={pathFor(lang, ed, k)} aria-current={page === k ? "page" : undefined}>{c(`common.nav.${k}`, lang)}</a>)}
               <a href={pathFor(lang, ed, "blog")} aria-current={page === "blog" ? "page" : undefined}>{c("common.nav.blog", lang)}</a>
               <a href={pathFor(lang, ed, "buy")}>{c("common.nav.buy", lang)}</a>
-              <a href={pathFor(lang, ed, "compare")}>{c("common.nav.compare", lang)}</a>
+              <a href={pathFor(lang, ed, "map")}>{c("common.nav.map", lang)}</a>
               <a href={pathFor(lang, ed, "data")}>{c("common.nav.data", lang)}</a>
               <a href={pathFor(lang, ed, "talk")}>{c("common.nav.talk", lang)}</a>
               <a href={pathFor(lang, ed, "how")}>{c("common.nav.how", lang)}</a>
@@ -107,7 +107,7 @@ const sticky: Sticky = Astro.props.sticky !== undefined ? Astro.props.sticky
               <li><a href={pathFor(lang, ed, "how")}>{c("common.nav.how", lang)}</a></li>
               <li><a href={pathFor(lang, ed, "blog")}>{c("common.nav.blog", lang)}</a></li>
               <li><a href={pathFor(lang, ed, "buy")}>{c("common.nav.buy", lang)}</a></li>
-              <li><a href={pathFor(lang, ed, "compare")}>{c("common.nav.compare", lang)}</a></li>
+              <li><a href={pathFor(lang, ed, "map")}>{c("common.nav.map", lang)}</a></li>
               <li><a href={pathFor(lang, ed, "data")}>{c("common.nav.data", lang)}</a></li>
               <li><a href={pathFor(lang, ed, "partners")}>{c("common.nav.partners", lang)}</a></li>
               <li><a href={pathFor(lang, ed, "talk")}>{c("common.nav.talk", lang)}</a></li>

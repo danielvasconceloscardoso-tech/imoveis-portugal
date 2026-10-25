@@ -1,0 +1,92 @@
+---
+// Interactive map of Portugal (prompts 16 and 19, D34): any budget → the m² it buys in each municipality, as 3D
+// extrusions (MapLibre GL, our own CAOP GeoJSON, no tiles, no key). The live map loads on the first interaction
+// (or when it scrolls into view on the home page) over a still image of itself, so pages stay fast on phones;
+// with "reduced motion" it is flat. A searchable list under it works without JavaScript.
+// Data: public/data/pt-map.geojson (scripts/map_data.py). Wording: COPY_DECK.md "map.*".
+import { config } from "../config";
+import { HTML_LANG, pathFor, eur, type Lang, type EdCode } from "../i18n";
+import { EDITION_CUR, RATE, fmtDate } from "../lib/content";
+import { MAP_MUNIS, MAP_QUARTER, REGIONS } from "../lib/mapdata";
+import { PLACES } from "../lib/places";
+import { SUB } from "../lib/tools";
+import { c } from "../lib/copy";
+
+interface Props { lang: Lang; ed: EdCode; mode?: "page" | "home"; }
+const { lang, ed, mode = "page" } = Astro.props;
+const cur = EDITION_CUR[ed];
+const fx = cur ? RATE(cur) : null;
+const nf = new Intl.NumberFormat(HTML_LANG[lang]);
+const qLabel = { pt: "2.º trimestre de 2026", en: "Q2 2026", fr: "2e trimestre 2026" }[lang];
+const PRESETS = [300000, 1000000, 5000000, 10000000];
+const short = (n: number) => (n >= 1e6 ? `${nf.format(n / 1e6)} M€` : `${nf.format(n / 1e3)} k€`);
+const pages = new Set(PLACES.map((p) => p.slug));
+const labels = {
+  m2: c("map.card.m2", lang), median: c("map.card.median", lang, { v: "{v}", quarter: qLabel }), nodata: c("map.card.nodata", lang),
+  homes: c("map.a.homes", lang), dev: c("map.a.dev", lang), sim: c("map.a.sim", lang), page: c("map.a.page", lang), copied: c("map.copied", lang),
+  regions: Object.fromEntries(REGIONS.map((r) => [r, c(`map.r.${r}`, lang)])),
+};
+const links = {
+  buy: pathFor(lang, ed, "buy"), talk: pathFor(lang, ed, "talk"), sim: `${pathFor(lang, ed, "sims")}${SUB.cost[lang]}/`,
+  map: pathFor(lang, ed, "map"), pages: [...pages],
+};
+const top = MAP_MUNIS.filter((m) => m.v);
+---
+<div class={`mapx mapx-${mode}`} data-mapx data-lang={lang} data-locale={HTML_LANG[lang]} data-fx={fx ? fx.rate : ""} data-cur={cur ?? ""} data-mode={mode}>
+  <div class="mapx-controls">
+    <label class="mapx-budget">
+      <span class="h-small">{c("map.budget.label", lang)}</span>
+      <span class="mapx-input"><input type="text" inputmode="numeric" value={nf.format(300000)} aria-label={c("map.budget.label", lang)} data-budget /><span aria-hidden="true">€</span></span>
+    </label>
+    <div class="mapx-presets" role="group" aria-label={c("map.budget.label", lang)}>
+      {PRESETS.map((p, i) => <button type="button" data-preset={p} aria-pressed={i === 0 ? "true" : "false"}>{short(p)}</button>)}
+    </div>
+    {fx && <p class="small mapx-local" data-local-tpl={c("map.local", lang, { local: "{local}", date: fmtDate(lang, "2026-10-23") })}></p>}
+  </div>
+
+  <div class="mapx-stage">
+    <img class="mapx-poster" src="/img/map-poster-1200.webp" srcset="/img/map-poster-640.webp 640w, /img/map-poster-1200.webp 1200w" sizes="(min-width: 900px) 900px, 100vw" width="1200" height="900" alt={c("map.legend", lang, { quarter: qLabel })} loading={mode === "home" ? "lazy" : "eager"} />
+    <div class="mapx-canvas" data-canvas></div>
+    <span class="mapx-inset" data-inset="madeira">{c("map.r.madeira", lang)}</span>
+    <span class="mapx-inset" data-inset="azores">{c("map.r.azores", lang)}</span>
+    <aside class="mapx-card" data-card hidden aria-live="polite"></aside>
+  </div>
+  <p class="small mapx-legend">{c("map.legend", lang, { quarter: qLabel })} {c("map.hint", lang)}</p>
+
+  {mode === "page" && (
+    <div class="mapx-filters" role="group" aria-label={c("map.filters", lang)}>
+      <button type="button" data-filter="all" aria-pressed="true">{c("map.f.all", lang)}</button>
+      <button type="button" data-filter="coast" aria-pressed="false">{c("map.f.coast", lang)}</button>
+      <button type="button" data-filter="inland" aria-pressed="false">{c("map.f.inland", lang)}</button>
+      <button type="button" data-filter="city" aria-pressed="false">{c("map.f.city", lang)}</button>
+      <button type="button" data-filter="country" aria-pressed="false">{c("map.f.country", lang)}</button>
+      <button type="button" data-filter="air" aria-pressed="false">{c("map.f.air", lang)}</button>
+      <select data-region aria-label={c("map.filters", lang)}>
+        <option value="">{c("map.f.all", lang)}</option>
+        {REGIONS.map((r) => <option value={r}>{c(`map.r.${r}`, lang)}</option>)}
+      </select>
+    </div>
+  )}
+
+  {mode === "page" && (
+    <details class="region mapx-list">
+      <summary><h2 class="h3">{c("map.list", lang)}</h2></summary>
+      <label class="field" style="margin:8px 0 12px"><span class="h-small">{c("map.search", lang)}</span><input type="search" data-search /></label>
+      <table class="cmp">
+        <thead><tr><th scope="col">{c("data.col.place", lang)}</th><th scope="col">{c("map.col.m2", lang)}</th><th scope="col">{c("map.col.buys", lang)}</th></tr></thead>
+        <tbody>{top.map((m) => (
+          <tr data-row={m.n.toLowerCase()} data-v={m.v}>
+            <th scope="row">{pages.has(m.s) ? <a href={`${links.map}${m.s}/`}>{m.n}</a> : m.n}<span class="small"> · {c(`map.r.${m.r}`, lang)}</span></th>
+            <td>{eur(m.v!, lang)}</td><td data-m2>{nf.format(Math.round(300000 / m.v!))} m²</td>
+          </tr>
+        ))}</tbody>
+      </table>
+    </details>
+  )}
+  <script type="application/json" data-mapx-labels set:html={JSON.stringify({ labels, links, quarter: qLabel, privateHref: config.privateLive ? pathFor(lang, ed, "private") : "", privateLabel: c("map.a.private", lang) })} />
+</div>
+
+<script>
+  import { initMapExplorer } from "../scripts/map-explorer";
+  document.querySelectorAll<HTMLElement>("[data-mapx]").forEach((el) => initMapExplorer(el));
+</script>

@@ -5,8 +5,8 @@ type: newsletter
 week: 1
 date: 2026-12-03
 format: content/NEWSLETTER_FORMAT.md
-title: "Ce que 500 000 € achètent à Gondomar et à Paris"
-sources: [pt-imt-nonresident-flat, pt-is-purchase, pt-casa-pronta-fees, ine-m2-2026q2, pt-poa-apostille, bdp-mortgage-rate-2026-08, fr-m2-2026q3]
+title: "Ce que 500 000 € achètent au Portugal, commune par commune"
+sources: [pt-imt-nonresident-flat, pt-is-purchase, pt-casa-pronta-fees, ine-m2-2026q2, pt-poa-apostille, bdp-mortgage-rate-2026-08, caop-2025]
 sponsored: true
 sponsor: Habinedita Gondomar
 status: draft
@@ -14,7 +14,7 @@ status: draft
 
 <!-- Opérateur : remplacer « Le bien de la semaine » par une vraie annonce d'Habinedita Gondomar, avec accord écrit, dès qu'elle existe. -->
 
-Objet : Ce que 500 000 € achètent à Gondomar et à Paris
+Objet : Ce que 500 000 € achètent au Portugal, commune par commune
 
 {{first name | Bonjour}},
 
@@ -26,11 +26,11 @@ Pour ce premier numéro, nous faisons les comptes d'un bien à 245 000 €, ache
 
 ## L'histoire
 
-Gondomar est de l'autre côté du Douro, juste à côté de Porto. En un an, le prix médian du mètre carré vendu est passé de 1 902 € à 2 348 €, soit 23 % de plus. À Porto, il a augmenté de 19 %, à 3 631 €. L'écart reste grand : avec le même budget, on achète à Gondomar environ 55 % de surface en plus qu'à Porto. Ce sont des médianes de l'INE, pas des biens précis.
+Avec 500 000 €, au prix médian des logements vendus, vous avez plus de 100 m² dans 303 des 304 communes disposant d'un chiffre officiel de l'INE, et plus de 300 m² dans 209. La seule exception est Lisbonne, avec environ 96 m². Dans tout le pays, le mètre carré vendu coûte en médiane 2 264 €, environ 18 % de plus qu'il y a un an. Ce sont des médianes, pas des biens précis.
 
-## Ici et là-bas
+## La carte
 
-Avec 500 000 €, vous achetez environ 52 m² à Paris et 213 m² à Gondomar. L'image à envoyer à la famille : https://claude-brave-gauss-cwafi6-imoveis-portugal.geralportugalimoveis.workers.dev/share/compare-fr-fr.png. La comparaison complète, avec Lisbonne, Braga, Faro et Viseu : https://claude-brave-gauss-cwafi6-imoveis-portugal.geralportugalimoveis.workers.dev/fr/fr/ce-que-vous-achetez/
+Indiquez votre budget sur la carte et voyez combien de mètres carrés il permet dans chaque commune, du Minho aux Açores : https://claude-brave-gauss-cwafi6-imoveis-portugal.geralportugalimoveis.workers.dev/fr/fr/carte/?budget=500000. L'image à envoyer à la famille : https://claude-brave-gauss-cwafi6-imoveis-portugal.geralportugalimoveis.workers.dev/share/map-500000.png
 
 ## La question la plus recherchée
 

@@ -4,7 +4,7 @@
 import V2 from "../layouts/V2.astro";
 import { pathFor, eur, type Lang, type EdCode } from "../i18n";
 import { Sources, fmtDate } from "../lib/content";
-import { INE, INE_QUARTER, m2For, ABROAD, PT_PLACES, GONDOMAR } from "../lib/compare";
+import { INE, INE_QUARTER } from "../lib/compare";
 import ine from "../data/ine-m2.json";
 import { c, edName } from "../lib/copy";
 
@@ -36,8 +36,6 @@ const spark = (s: (number | null)[]) => {
 };
 const pt = INE["PT"].q;
 const quarterLabel = { pt: "2.º trimestre de 2026", en: "Q2 2026", fr: "2e trimestre 2026" }[lang];
-const lead = ABROAD[ed]?.[0] ?? PT_PLACES[0];
-const line = c("compare.line", lang, { budget: eur(500000, lang), a: m2For(500000, lead), placeA: c(`compare.in.${lead.key}`, lang), b: m2For(500000, GONDOMAR), placeB: c(`compare.in.${GONDOMAR.key}`, lang) });
 ---
 <V2 lang={lang} ed={ed} page="data" title={`${c("data.title", lang)} | Imóveis Portugal · ${edName(ed, lang)}`} description={c("data.lede", lang)} sticky={null}>
   <div class="frame read ph">
@@ -51,16 +49,16 @@ const line = c("compare.line", lang, { budget: eur(500000, lang), a: m2For(50000
       <details class="region" open={r.open}>
         <summary><h2 class="h3">{c(`data.region.${r.k}`, lang)}</h2></summary>
         <table class="cmp">
-          <thead><tr><th scope="col">{c("data.col.place", lang)}</th><th scope="col">{c("compare.col.m2", lang)}</th><th scope="col">{c("data.col.change", lang)}</th><th scope="col"><span class="sr">{Q.join(" → ")}</span></th></tr></thead>
+          <thead><tr><th scope="col">{c("data.col.place", lang)}</th><th scope="col">{c("map.col.m2", lang)}</th><th scope="col">{c("data.col.change", lang)}</th><th scope="col"><span class="sr">{Q.join(" → ")}</span></th></tr></thead>
           <tbody>{rows(r.prefixes).map((m) => (
-            <tr class={m.name === "Gondomar" ? "hl" : undefined}><th scope="row">{m.name}</th><td>{eur(m.v, lang)}</td><td>{fmtChg(m.chg)}</td><td><svg class="spark" viewBox="-2 -2 60 20" width="60" height="20" aria-hidden="true"><polyline points={spark(m.series)} /></svg></td></tr>
+            <tr><th scope="row">{m.name}</th><td>{eur(m.v, lang)}</td><td>{fmtChg(m.chg)}</td><td><svg class="spark" viewBox="-2 -2 60 20" width="60" height="20" aria-hidden="true"><polyline points={spark(m.series)} /></svg></td></tr>
           ))}</tbody>
         </table>
       </details>
     ))}
     <p class="small">{c("data.note", lang)}</p>
-    <h2 class="h3" style="margin-top:36px">{c("data.compare.h", lang)}</h2>
-    <p>{line} <a href={pathFor(lang, ed, "compare")}>{c("compare.home.link", lang)}</a></p>
+    <h2 class="h3" style="margin-top:36px">{c("data.map.h", lang)}</h2>
+    <p>{c("data.map.p", lang)} <a href={pathFor(lang, ed, "map")}>{c("map.open", lang)}</a></p>
   </div>
   <section class="sources-list" aria-labelledby="fontes">
     <div class="frame read">

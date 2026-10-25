@@ -7,7 +7,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "ebooks": "tsx ebooks/build.ts",
-    "share": "tsx scripts/share-images.ts",
+    "share": "node scripts/map-poster.mjs",
     "mediakit": "tsx scripts/mediakit.ts"
   },
   "dependencies": {
@@ -15,6 +15,7 @@
     "@fontsource/public-sans": "^5.3.0",
     "astro": "^5.18.2",
     "js-yaml": "^4.3.2",
+    "maplibre-gl": "^4.7.1",
     "marked": "^14.1.4"
   },
   "devDependencies": {

@@ -10,6 +10,11 @@ How to edit:
 
 ## common
 
+### nav.map
+- PT: Mapa
+- EN: Map
+- FR: Carte
+
 ### nav.data
 - PT: Preços das casas
 - EN: House prices
@@ -19,11 +24,6 @@ How to edit:
 - PT: Casa tratada de fora
 - EN: Home from abroad
 - FR: Maison depuis l'étranger
-
-### nav.compare
-- PT: O que compra
-- EN: What it buys
-- FR: Ce que vous achetez
 
 ### nav.sims
 - PT: Simuladores
@@ -1377,204 +1377,12 @@ How to edit:
 - EN: Page not found
 - FR: Page introuvable
 
-## compare
-
-### title
-- PT: O que compra com o mesmo dinheiro
-- EN: What the same money buys
-- FR: Ce que le même budget permet d'acheter
-
-### lede
-- PT: Metros quadrados de casa para 250 000 €, 500 000 € e 1 000 000 €, em Portugal e onde vive. Preço por m² de vendas reais, de fontes oficiais.
-- EN: Square metres of home for €250,000, €500,000 and €1,000,000, in Portugal and where you live. Price per m² from actual sales, from official sources.
-- FR: Des mètres carrés de logement pour 250 000 €, 500 000 € et 1 000 000 €, au Portugal et là où vous vivez. Prix au m² des ventes réelles, de sources officielles.
-
-### line
-- PT: Com {budget} compra cerca de {a} m² {placeA} e {b} m² {placeB}.
-- EN: With {budget} you buy about {a} m² {placeA} and {b} m² {placeB}.
-- FR: Avec {budget}, vous achetez environ {a} m² {placeA} et {b} m² {placeB}.
-
-### budget.h
-- PT: Com {budget}
-- EN: With {budget}
-- FR: Avec {budget}
-
-### col.place
-- PT: Local
-- EN: Place
-- FR: Lieu
-
-### col.m2
-- PT: Preço por m²
-- EN: Price per m²
-- FR: Prix au m²
-
-### col.buys
-- PT: Compra cerca de
-- EN: Buys about
-- FR: Permet environ
-
-### pt.h
-- PT: Em Portugal
-- EN: In Portugal
-- FR: Au Portugal
-
-### abroad.none
-- PT: Ainda não encontrámos um preço oficial por m² para {country}. Mostramos só Portugal até haver uma fonte primária.
-- EN: We have not yet found an official price per m² for {country}. We show Portugal only until there is a primary source.
-- FR: Nous n'avons pas encore trouvé de prix officiel au m² pour {country}. Nous montrons seulement le Portugal en attendant une source primaire.
-
-### note
-- PT: São medianas de vendas reais, não casas concretas. Uma casa em particular pode custar bastante mais ou menos.
-- EN: These are medians of actual sales, not specific homes. Any given home can cost a lot more or less.
-- FR: Ce sont des médianes de ventes réelles, pas des biens précis. Un bien donné peut coûter nettement plus ou moins.
-
-### note.mean
-- PT: No Luxemburgo, o Observatoire de l'Habitat publica a média dos apartamentos usados, não a mediana.
-- EN: In Luxembourg, the Observatoire de l'Habitat publishes the average for existing apartments, not the median.
-- FR: Au Luxembourg, l'Observatoire de l'Habitat publie la moyenne des appartements existants, pas la médiane.
-
-### note.canton
-- PT: Na Suíça só encontrámos um valor oficial para o cantão de Genebra ({chf} CHF por m² em 2024), convertido à taxa de referência do BCE de {date}.
-- EN: In Switzerland we only found an official figure for the canton of Geneva ({chf} CHF per m² in 2024), converted at the ECB reference rate of {date}.
-- FR: En Suisse, nous n'avons trouvé de chiffre officiel que pour le canton de Genève ({chf} CHF le m² en 2024), converti au taux de référence de la BCE du {date}.
-
-### note.pt
-- PT: Em Portugal: últimos 12 meses até ao {quarter}, todas as casas vendidas, novas e usadas.
-- EN: In Portugal: the 12 months to {quarter}, all homes sold, new and existing.
-- FR: Au Portugal : les 12 mois jusqu'au {quarter}, tous les logements vendus, neufs et anciens.
-
-### share.h
-- PT: Para partilhar
-- EN: To share
-- FR: À partager
-
-### share.p
-- PT: A mesma comparação numa imagem, com a fonte, para enviar à família ou publicar.
-- EN: The same comparison as an image, with its source, to send to family or post.
-- FR: La même comparaison en image, avec sa source, à envoyer à la famille ou à publier.
-
-### share.link
-- PT: Descarregar a imagem
-- EN: Download the image
-- FR: Télécharger l'image
-
-### home.link
-- PT: Ver a comparação completa
-- EN: See the full comparison
-- FR: Voir la comparaison complète
-
-### place.lisboa
-- PT: Lisboa
-- EN: Lisbon
-- FR: Lisbonne
-
-### place.porto
-- PT: Porto
-- EN: Porto
-- FR: Porto
-
-### place.gondomar
-- PT: Gondomar
-- EN: Gondomar
-- FR: Gondomar
-
-### place.braga
-- PT: Braga
-- EN: Braga
-- FR: Braga
-
-### place.faro
-- PT: Faro
-- EN: Faro
-- FR: Faro
-
-### place.viseu
-- PT: Viseu
-- EN: Viseu
-- FR: Viseu
-
-### place.lux
-- PT: Cidade do Luxemburgo
-- EN: Luxembourg City
-- FR: Luxembourg-Ville
-
-### place.esch
-- PT: Esch-sur-Alzette
-- EN: Esch-sur-Alzette
-- FR: Esch-sur-Alzette
-
-### place.paris
-- PT: Paris
-- EN: Paris
-- FR: Paris
-
-### place.lyon
-- PT: Lyon
-- EN: Lyon
-- FR: Lyon
-
-### place.geneve
-- PT: Genebra (cantão)
-- EN: Geneva (canton)
-- FR: Genève (canton)
-
-### in.lisboa
-- PT: em Lisboa
-- EN: in Lisbon
-- FR: à Lisbonne
-
-### in.porto
-- PT: no Porto
-- EN: in Porto
-- FR: à Porto
-
-### in.gondomar
-- PT: em Gondomar
-- EN: in Gondomar
-- FR: à Gondomar
-
-### in.braga
-- PT: em Braga
-- EN: in Braga
-- FR: à Braga
-
-### in.faro
-- PT: em Faro
-- EN: in Faro
-- FR: à Faro
-
-### in.viseu
-- PT: em Viseu
-- EN: in Viseu
-- FR: à Viseu
-
-### in.lux
-- PT: na cidade do Luxemburgo
-- EN: in Luxembourg City
-- FR: à Luxembourg-Ville
-
-### in.esch
-- PT: em Esch-sur-Alzette
-- EN: in Esch-sur-Alzette
-- FR: à Esch-sur-Alzette
-
-### in.paris
-- PT: em Paris
-- EN: in Paris
-- FR: à Paris
-
-### in.lyon
-- PT: em Lyon
-- EN: in Lyon
-- FR: à Lyon
-
-### in.geneve
-- PT: em Genebra
-- EN: in Geneva
-- FR: à Genève
-
 ## sims
+
+### map.name
+- PT: O mapa: quanto espaço compra o seu orçamento
+- EN: The map: how much space your budget buys
+- FR: La carte : l'espace que votre budget permet
 
 ### gains.note
 - PT: Desde 2023, metade da mais-valia conta para o IRS e aplicam-se as taxas gerais, também a não residentes. A taxa pode ser mais alta conforme o resto do seu rendimento, e o país onde vive pode também tributar a venda. Não inclui os coeficientes de correção monetária.
@@ -2549,6 +2357,16 @@ How to edit:
 
 ## data
 
+### map.p
+- PT: Escreva um valor no mapa e veja os metros quadrados que ele compra em cada concelho, do Minho aos Açores.
+- EN: Enter an amount on the map and see the square metres it buys in each municipality, from the Minho to the Azores.
+- FR: Indiquez un montant sur la carte et voyez les mètres carrés qu'il permet dans chaque commune, du Minho aux Açores.
+
+### map.h
+- PT: Quanto espaço compra o seu orçamento
+- EN: How much space your budget buys
+- FR: L'espace que votre budget permet
+
 ### title
 - PT: Preços das casas no Norte e no resto do país
 - EN: House prices in the North and across Portugal
@@ -2603,11 +2421,6 @@ How to edit:
 - PT: Mediana do valor por m² das vendas de alojamentos familiares registadas nos 12 meses até ao fim de cada trimestre, casas novas e usadas. Não são preços pedidos em anúncios. Nos concelhos com poucas vendas, a variação de um ano para o outro pode ser grande.
 - EN: Median value per m² of family dwellings sold in the 12 months to the end of each quarter, new and existing. Not asking prices from listings. In municipalities with few sales, the change from one year to the next can be large.
 - FR: Valeur médiane au m² des logements familiaux vendus sur les 12 mois jusqu'à la fin de chaque trimestre, neufs et anciens. Pas des prix demandés dans les annonces. Dans les communes où il y a peu de ventes, la variation d'une année sur l'autre peut être forte.
-
-### compare.h
-- PT: Comparado com onde vive
-- EN: Compared with where you live
-- FR: Comparé à votre pays
 
 ## blog
 
@@ -2732,3 +2545,195 @@ How to edit:
 - PT: Mapa
 - EN: Map
 - FR: Carte
+
+## map
+
+### col.m2
+- PT: Preço mediano por m²
+- EN: Median price per m²
+- FR: Prix médian au m²
+
+### title
+- PT: Quanto espaço compra o seu orçamento
+- EN: How much space your budget buys
+- FR: L'espace que votre budget permet
+
+### lede
+- PT: Escreva um valor e veja, concelho a concelho, quantos metros quadrados pode ter em Portugal.
+- EN: Enter an amount and see, municipality by municipality, how many square metres it buys in Portugal.
+- FR: Indiquez un montant et voyez, commune par commune, combien de mètres carrés il permet au Portugal.
+
+### budget.label
+- PT: O seu orçamento
+- EN: Your budget
+- FR: Votre budget
+
+### local
+- PT: cerca de {local} à taxa de referência do BCE de {date}
+- EN: about {local} at the ECB reference rate of {date}
+- FR: environ {local} au taux de référence de la BCE du {date}
+
+### legend
+- PT: A altura e a cor mostram os metros quadrados que o orçamento compra ao preço mediano das casas vendidas (INE, {quarter}).
+- EN: Height and colour show the square metres your budget buys at the median price of homes sold (INE, {quarter}).
+- FR: La hauteur et la couleur indiquent les mètres carrés que permet votre budget au prix médian des logements vendus (INE, {quarter}).
+
+### hint
+- PT: Toque num concelho para ver o detalhe.
+- EN: Tap a municipality for the details.
+- FR: Touchez une commune pour le détail.
+
+### filters
+- PT: Filtrar
+- EN: Filter
+- FR: Filtrer
+
+### f.all
+- PT: Todo o país
+- EN: All of Portugal
+- FR: Tout le pays
+
+### f.coast
+- PT: Litoral
+- EN: Coast
+- FR: Littoral
+
+### f.inland
+- PT: Interior
+- EN: Inland
+- FR: Intérieur
+
+### f.city
+- PT: Cidade
+- EN: City
+- FR: Ville
+
+### f.country
+- PT: Campo
+- EN: Countryside
+- FR: Campagne
+
+### f.air
+- PT: Perto de um aeroporto
+- EN: Near an airport
+- FR: Près d'un aéroport
+
+### r.north
+- PT: Norte
+- EN: North
+- FR: Nord
+
+### r.centre
+- PT: Centro
+- EN: Centre
+- FR: Centre
+
+### r.lisbon
+- PT: Lisboa
+- EN: Lisbon
+- FR: Lisbonne
+
+### r.alentejo
+- PT: Alentejo
+- EN: Alentejo
+- FR: Alentejo
+
+### r.algarve
+- PT: Algarve
+- EN: Algarve
+- FR: Algarve
+
+### r.madeira
+- PT: Madeira
+- EN: Madeira
+- FR: Madère
+
+### r.azores
+- PT: Açores
+- EN: Azores
+- FR: Açores
+
+### card.m2
+- PT: metros quadrados
+- EN: square metres
+- FR: mètres carrés
+
+### card.median
+- PT: Preço mediano: {v} por m², INE, {quarter}
+- EN: Median price: {v} per m², INE, {quarter}
+- FR: Prix médian : {v} le m², INE, {quarter}
+
+### card.nodata
+- PT: Sem número oficial para este concelho.
+- EN: No official figure for this municipality.
+- FR: Pas de chiffre officiel pour cette commune.
+
+### a.homes
+- PT: Ver casas nesta zona
+- EN: See homes in this area
+- FR: Voir des biens dans ce secteur
+
+### a.dev
+- PT: Falar com promotores nesta zona
+- EN: Talk to developers here
+- FR: Parler aux promoteurs du secteur
+
+### a.sim
+- PT: Simular o custo total
+- EN: Work out the total cost
+- FR: Calculer le coût total
+
+### a.page
+- PT: Ver a página do concelho
+- EN: See the municipality page
+- FR: Voir la page de la commune
+
+### a.private
+- PT: Para orçamentos a partir de 1 milhão de euros, a secção Private
+- EN: For budgets from €1 million, the Private section
+- FR: Pour les budgets à partir d'un million d'euros, la section Private
+
+### share
+- PT: Copiar a ligação
+- EN: Copy the link
+- FR: Copier le lien
+
+### copied
+- PT: Ligação copiada
+- EN: Link copied
+- FR: Lien copié
+
+### list
+- PT: Todos os concelhos, em lista
+- EN: Every municipality, as a list
+- FR: Toutes les communes, en liste
+
+### search
+- PT: Procurar um concelho
+- EN: Search for a municipality
+- FR: Chercher une commune
+
+### col.buys
+- PT: O seu orçamento compra
+- EN: Your budget buys
+- FR: Votre budget permet
+
+### note
+- PT: Medianas de vendas reais nos últimos 12 meses, não casas concretas. Onde há poucas vendas, os valores variam mais. A Madeira e os Açores aparecem ao lado do continente, numa escala menor.
+- EN: Medians of actual sales over the last 12 months, not specific homes. Where there are few sales, figures vary more. Madeira and the Azores are shown beside the mainland at a smaller scale.
+- FR: Médianes de ventes réelles sur les 12 derniers mois, pas des biens précis. Là où les ventes sont rares, les chiffres varient davantage. Madère et les Açores figurent à côté du continent, à plus petite échelle.
+
+### open
+- PT: Abrir o mapa
+- EN: Open the map
+- FR: Ouvrir la carte
+
+### home.h
+- PT: Quanto espaço compra o seu orçamento
+- EN: How much space your budget buys
+- FR: L'espace que votre budget permet
+
+### home.p
+- PT: Escreva um valor e veja, concelho a concelho, quantos metros quadrados pode ter.
+- EN: Enter an amount and see, municipality by municipality, how many square metres it buys.
+- FR: Indiquez un montant et voyez, commune par commune, combien de mètres carrés il permet.

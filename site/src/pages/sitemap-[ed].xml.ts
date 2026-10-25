@@ -7,7 +7,7 @@ import { SUB, ENABLED } from "../lib/tools";
 
 export function getStaticPaths() { return ED_ORDER.map((ed) => ({ params: { ed } })); }
 
-const PAGES: PageKey[] = ["partners", "buy", "how", "privacy", "legal", "faq", "talk", "guide", "compare", "sims", "casa", "data", "map", "blog"];
+const PAGES: PageKey[] = ["partners", "buy", "how", "privacy", "legal", "faq", "talk", "guide", "sims", "casa", "data", "map", "blog"];
 
 export function GET({ params }: { params: { ed: EdCode } }) {
   const ed = params.ed, host = `https://${EDITIONS[ed].domain}`;

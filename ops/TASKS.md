@@ -112,6 +112,13 @@ Status: To do · Doing · Blocked · Done
 
 | 8t | Confirm Private tier price (Private Partner 25–50k € a year) in ops/prompts/15_growth_engine.md | Operator | To do | 2026-10-27 |
 
+| 19a | Outreach v3: approve sponsors/outreach/v3 (3 sequences, 10 personalised drafts), then set up the drafts-only Apps Script in sponsors/outreach/HOWTO.md (30 drafts a day, nothing sent without approval) | Operator | To do | 2026-11-02 |
+| 19b | Media push: approve content/press (releases PT/EN/FR, brand facts) and ops/LAUNCH_MEDIA.md; nothing sent before launch week | Daniel, Operator | To do | 2026-11-16 |
+| 19c | User test: run ops/USER_TEST.md with five readers (two emigrants, one Brazilian, one US/IL buyer, one 1 M€+ buyer) and file the notes | Operator, Partner | To do | 2026-11-20 |
+| 19d | IMI rates per municipality: the AT service was down from here; open https://www.portaldasfinancas.gov.pt (Taxas IMI) and export the 2026 table, or approve using a third-party copy with the AT link | Partner | To do | 2026-11-06 |
+| 19e | Map photos (prompt 16): 3 to 5 licensed photos per region (North, Centre, Alentejo, Algarve, Madeira, Azores; Lisbon and Porto done). Unsplash pages are blocked from here: either a free Unsplash API key in an environment variable, or the partner sends its own photos with written permission | Operator, Partner | To do | 2026-11-13 |
+| 19f | Community size abroad (FR, CH, BR, US, IL) and Google Trends per country for the media kit: sources blocked from here | Partner | To do | 2026-11-13 |
+
 ## Last session
 
 2026-10-25 (CTO, session 2): ran as CTO and, on request, as CEO. Done and merged to main: task board reconciled against the code (prompts 02 and 04 to 13 were built; 03 was not); e-book extended to 15 pages with a main-home chapter and a mortgage chapter, HPP FAQ answer in PT, EN, FR; blog with two articles in three languages, SEO data, sitemaps, home page section; prompt 03 (five Israeli-capital developers S151 to S155, chambers and embassies tab, INTERNATIONAL.md, seven drafts not sent; builder made safe: pipeline.csv is the source of truth, IDs and the week-1 list are stable); content and publishing plan (ops/PLAN_CONTENT.md) with decisions D24 to D30; briefing and METRICS stub updated; D31 records the merge. Fixed a mistake: one early commit carried a personal author and was rewritten to the brand identity (always set git user to Imoveis Portugal first). Not done: nothing is sent or posted; no account exists yet; every form ID is empty. Next: Daniel answers D4 and the Meta admin question; the operator does the setup batch (17d); a new session runs prompt 14.

@@ -5,8 +5,8 @@ type: newsletter
 week: 1
 date: 2026-12-03
 format: content/NEWSLETTER_FORMAT.md
-title: "O que 500 000 € compram em Gondomar e em Lisboa"
-sources: [pt-imt-nonresident-flat, pt-is-purchase, pt-casa-pronta-fees, ine-m2-2026q2, pt-poa-apostille, bdp-mortgage-rate-2026-08, ecb-eur-brl]
+title: "O que 500 000 € compram em Portugal, concelho a concelho"
+sources: [pt-imt-nonresident-flat, pt-is-purchase, pt-casa-pronta-fees, ine-m2-2026q2, pt-poa-apostille, bdp-mortgage-rate-2026-08, ecb-eur-brl, caop-2025]
 sponsored: true
 sponsor: Habinedita Gondomar
 status: draft
@@ -14,7 +14,7 @@ status: draft
 
 <!-- Operador: substituir "A casa da semana" por um anúncio real da Habinedita Gondomar, com autorização escrita, quando existir. -->
 
-Assunto: O que 500 000 € compram em Gondomar e em Lisboa
+Assunto: O que 500 000 € compram em Portugal, concelho a concelho
 
 {{first name | Olá}},
 
@@ -26,11 +26,11 @@ Para a primeira edição fazemos as contas a uma casa de 245 000 €, comprada p
 
 ## A história
 
-Gondomar fica do outro lado do Douro, encostado ao Porto. Num ano, o preço mediano do metro quadrado vendido passou de 1 902 € para 2 348 €, mais 23%. No Porto subiu 19%, para 3 631 €. A diferença entre os dois concelhos continua grande: com o mesmo dinheiro, compra-se em Gondomar cerca de 55% mais casa do que no Porto. São medianas do INE, não casas concretas.
+Com 500 000 €, ao preço mediano das casas vendidas, tem mais de 100 m² em 303 dos 304 concelhos com número oficial do INE, e mais de 300 m² em 209. A única exceção é Lisboa, com cerca de 96 m². No país, o metro quadrado vendido custa em mediana 2 264 €, cerca de 18% mais do que há um ano. São medianas, não casas concretas.
 
-## Aqui vs lá
+## O mapa
 
-Com 500 000 € compra cerca de 96 m² em Lisboa e 213 m² em Gondomar. A imagem para enviar à família: https://claude-brave-gauss-cwafi6-imoveis-portugal.geralportugalimoveis.workers.dev/share/compare-br-pt.png. A comparação completa, com Lisboa, Braga, Faro e Viseu: https://claude-brave-gauss-cwafi6-imoveis-portugal.geralportugalimoveis.workers.dev/pt/br/o-que-compra/
+Escreva o seu orçamento no mapa e veja quantos metros quadrados compra em cada concelho, do Minho aos Açores: https://claude-brave-gauss-cwafi6-imoveis-portugal.geralportugalimoveis.workers.dev/pt/br/mapa/?budget=500000. A imagem para enviar à família: https://claude-brave-gauss-cwafi6-imoveis-portugal.geralportugalimoveis.workers.dev/share/map-500000.png
 
 ## A pergunta mais pesquisada
 
