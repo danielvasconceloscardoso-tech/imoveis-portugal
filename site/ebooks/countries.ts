@@ -110,7 +110,7 @@ export const COUNTRIES: Record<Ed, Country> = {
         facts: ["ch-2nd-pillar-abroad"],
         text: {
           pt: "2.º pilar (LPP): pode ser levantado antecipadamente para a sua residência principal, na Suíça ou no estrangeiro; não para uma casa de férias. O levantamento mínimo é de 20 000 CHF.",
-          en: "2nd pillar (LPP/BVG): it can be withdrawn early for your main residence, in Switzerland or abroad; not for a holiday home. The minimum withdrawal is 20,000 CHF.",
+          en: "2nd pillar (LPP/BVG): it can be withdrawn early for your main residence, in Switzerland or abroad; not for a vacation home. The minimum withdrawal is 20,000 CHF.",
           fr: "2e pilier (LPP) : il peut être retiré de manière anticipée pour votre résidence principale, en Suisse ou à l'étranger ; pas pour une résidence secondaire. Le retrait minimum est de 20 000 CHF.",
         },
       },

@@ -144,3 +144,49 @@ export const PHOTO: Record<string, { file: string; place: Record<Lang, string> }
   us: { file: "porto-douro-entardecer", place: { pt: "Douro ao entardecer, Porto", en: "The Douro at sunset, Porto", fr: "Le Douro au coucher du soleil, Porto" } },
   il: { file: "lisboa-alfama-sao-vicente", place: { pt: "Alfama e São Vicente de Fora, Lisboa", en: "Alfama and São Vicente de Fora, Lisbon", fr: "Alfama et São Vicente de Fora, Lisbonne" } },
 };
+
+// "How we work" page (prompt 09): how facts, money and data are handled. Never "independent" or "neutral".
+export const HOW: Record<Lang, { title: string; h1: string; lede: string; sections: [string, string][]; exampleH: string; exampleP: string; contactH: string; contactP: string }> = {
+  pt: {
+    title: "Como trabalhamos", h1: "Factos com fonte. Patrocínios identificados.",
+    lede: "O que publicamos, de onde vêm os números e como o Imóveis Portugal ganha dinheiro.",
+    sections: [
+      ["De onde vêm os números", "Cada número vem de uma fonte oficial, como o Portal das Finanças, o Diário da República, o Banco de Portugal, o INE ou as autoridades do país de cada edição. Abrimos a fonte, citamo-la e indicamos a data em que a verificámos. Quando não conseguimos confirmar uma regra na fonte, não a publicamos."],
+      ["Descrevemos, não aconselhamos", "Explicamos as regras para que perceba o processo. Não é aconselhamento jurídico, fiscal ou financeiro: para o seu caso, fale com um profissional. Podemos pô-lo em contacto com os nossos parceiros."],
+      ["Como ganhamos dinheiro", "Os parceiros (advogados, bancos, consultores fiscais, serviços de transferências, promotores e a nossa agência parceira) pagam um patrocínio anual de valor fixo, nunca uma comissão por contacto ou por venda. Todo o conteúdo pago diz que é patrocinado e por quem."],
+      ["Uma só agência imobiliária", "O Imóveis Portugal não faz mediação imobiliária. Os pedidos para comprar ou vender casa seguem apenas para a nossa agência parceira, a Habinedita Gondomar (AMI 13250), mediadora licenciada e patrocinadora."],
+      ["Os seus dados", "A newsletter pede dupla confirmação e todos os emails têm um link para cancelar. Não usamos cookies de publicidade nem de estatística. Os pedidos de compra só seguem para a agência parceira com o seu consentimento."],
+      ["Números de audiência", "Publicamos o número de leitores quando ele existir. Até lá, não apresentamos números de audiência."],
+    ],
+    exampleH: "Exemplo: as fontes da página inicial", exampleP: "Os números da página inicial desta edição e as fontes oficiais de onde vêm:",
+    contactH: "Correções", contactP: "Viu um erro? Escreva-nos e corrigimos, com a data da correção:",
+  },
+  en: {
+    title: "How we work", h1: "Facts with sources. Sponsors labeled.",
+    lede: "What we publish, where the numbers come from and how Imóveis Portugal makes money.",
+    sections: [
+      ["Where the numbers come from", "Every number comes from an official source, such as Portugal's tax authority, the official gazette (Diário da República), Banco de Portugal, the national statistics office (INE) or the authorities of each edition's country. We open the source, cite it and show the date we checked it. If we can't confirm a rule at the source, we don't publish it."],
+      ["We describe, we don't advise", "We explain the rules so you understand the process. This isn't legal, tax or financial advice: for your own case, talk to a professional. We can put you in touch with our partners."],
+      ["How we make money", "Partners (lawyers, banks, tax advisors, money transfer services, developers and our partner agency) pay a flat annual sponsorship, never a fee per lead or a commission on a sale. All paid content says it's sponsored, and by whom."],
+      ["One real-estate agency", "Imóveis Portugal is not a real-estate broker. Requests to buy or sell a home go only to our partner agency, Habinedita Gondomar (AMI license 13250), a licensed broker and a sponsor."],
+      ["Your data", "The newsletter uses double opt-in, and every email has an unsubscribe link. We use no advertising or analytics cookies. Buying requests go to the partner agency only with your consent."],
+      ["Audience numbers", "We'll publish reader numbers once they exist. Until then, we show no audience figures."],
+    ],
+    exampleH: "Example: the sources on the home page", exampleP: "The numbers on this edition's home page and the official sources they come from:",
+    contactH: "Corrections", contactP: "Spotted a mistake? Write to us and we'll correct it, with the date of the correction:",
+  },
+  fr: {
+    title: "Notre méthode", h1: "Des faits sourcés. Des sponsors signalés.",
+    lede: "Ce que nous publions, d'où viennent les chiffres et comment Imóveis Portugal se finance.",
+    sections: [
+      ["D'où viennent les chiffres", "Chaque chiffre provient d'une source officielle : administration fiscale portugaise, Diário da República, Banque du Portugal, INE ou autorités du pays de chaque édition. Nous ouvrons la source, la citons et indiquons la date de vérification. Si une règle ne peut pas être confirmée à la source, nous ne la publions pas."],
+      ["Nous décrivons, nous ne conseillons pas", "Nous expliquons les règles pour que vous compreniez la démarche. Ce n'est pas un conseil juridique, fiscal ou financier : pour votre cas, adressez-vous à un professionnel. Nous pouvons vous mettre en relation avec nos partenaires."],
+      ["Comment nous nous finançons", "Les partenaires (avocats, banques, conseillers fiscaux, services de transfert, promoteurs et notre agence partenaire) versent un parrainage annuel forfaitaire, jamais une commission par contact ou sur une vente. Tout contenu payé indique qu'il est sponsorisé, et par qui."],
+      ["Une seule agence immobilière", "Imóveis Portugal n'exerce pas d'activité d'intermédiation immobilière. Les demandes d'achat ou de vente vont uniquement à notre agence partenaire, Habinedita Gondomar (licence AMI 13250), intermédiaire agréé et sponsor."],
+      ["Vos données", "La newsletter fonctionne en double confirmation et chaque e-mail contient un lien de désinscription. Aucun cookie publicitaire ni de mesure d'audience. Les demandes d'achat ne sont transmises à l'agence partenaire qu'avec votre accord."],
+      ["Chiffres d'audience", "Nous publierons le nombre de lecteurs lorsqu'il existera. D'ici là, nous n'affichons aucun chiffre d'audience."],
+    ],
+    exampleH: "Exemple : les sources de la page d'accueil", exampleP: "Les chiffres de la page d'accueil de cette édition et les sources officielles dont ils proviennent :",
+    contactH: "Corrections", contactP: "Vous avez repéré une erreur ? Écrivez-nous, nous la corrigeons en indiquant la date de correction :",
+  },
+};

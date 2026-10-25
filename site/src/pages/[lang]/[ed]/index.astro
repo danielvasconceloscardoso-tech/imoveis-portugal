@@ -27,7 +27,7 @@ const photo = PHOTO[ed];
         <p class="lede">{T.lede}</p>
         <div class="signup" id="subscrever">
           <Embed id={config.forms.newsletter[lang]} title={H.signupH} pending={T.formPending(config.contactEmail)} hidden={{ edition: ed, lang }} height={200} />
-          <p class="small">{H.signupNote} <a href={pathFor(lang, ed, "privacy")}>{U.foot.privacy}</a></p>
+          <p class="small">{H.signupNote}{" "}<a href={pathFor(lang, ed, "privacy")}>{U.foot.privacy}</a></p>
         </div>
       </div>
       <figure style="margin:0">

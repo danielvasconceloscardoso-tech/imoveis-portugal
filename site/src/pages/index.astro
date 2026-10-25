@@ -1,9 +1,9 @@
 ---
-// Root: choose an edition and a language. Returning visitors go straight to their saved choice (D18).
-import "../styles/c.css";
+// Root: choose a language and an edition. Returning visitors go straight to their saved choice (D18).
+import "../styles/v2.css";
 import { EDITIONS, ED_ORDER, LANGS, LANG_NAME, HTML_LANG, pathFor } from "../i18n";
 import { config } from "../config";
-const H = { pt: "Comprar casa em Portugal a partir de onde vive.", en: "Buying a home in Portugal from where you live.", fr: "Acheter au Portugal depuis là où vous vivez." };
+const H = { pt: "Comprar casa em Portugal a partir de onde vive.", en: "Buying a home in Portugal from wherever you live.", fr: "Acheter au Portugal depuis là où vous vivez." };
 ---
 <!doctype html>
 <html lang="pt-PT">
@@ -22,19 +22,19 @@ const H = { pt: "Comprar casa em Portugal a partir de onde vive.", en: "Buying a
     </script>
   </head>
   <body>
-    <header class="c-head"><div class="w"><span class="mark"><i aria-hidden="true"></i><b>Imóveis<br />Portugal</b></span></div></header>
-    <main id="main">
-      {LANGS.map((l) => (
-        <section class="w row g" lang={HTML_LANG[l]} aria-labelledby={`h-${l}`}>
-          <h2 id={`h-${l}`}>{LANG_NAME[l]}</h2>
-          <div class="body">
-            <p>{H[l]}</p>
-            <ul class="cats">
+    <header class="hd"><div class="frame"><span class="word">Imóveis Portugal</span></div></header>
+    <main id="main" class="frame" style="padding-top:48px;padding-bottom:64px">
+      <div class="cards">
+        {LANGS.map((l) => (
+          <section class="card" lang={HTML_LANG[l]} aria-labelledby={`h-${l}`}>
+            <p class="label" style="margin:0">{LANG_NAME[l]}</p>
+            <h2 id={`h-${l}`} style="font-size:1.5rem">{H[l]}</h2>
+            <ul style="list-style:none;padding:0;margin:8px 0 0;display:grid;gap:6px">
               {ED_ORDER.map((ed) => (<li><a href={pathFor(l, ed, "home")} data-lang={l}>{EDITIONS[ed].name[l]}</a></li>))}
             </ul>
-          </div>
-        </section>
-      ))}
+          </section>
+        ))}
+      </div>
     </main>
     <script is:inline>
       document.addEventListener("click", function (e) {

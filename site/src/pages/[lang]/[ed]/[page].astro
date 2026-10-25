@@ -1,131 +1,151 @@
 ---
-import Base from "../../../layouts/Base.astro";
+// Every page other than the home, on the v2 layout (prompt 09): media kit, buyer request, how we work,
+// privacy, legal notice, FAQ, talk to a partner and the free report.
+import V2 from "../../../layouts/V2.astro";
 import Embed from "../../../components/Embed.astro";
+import FaqPage from "../../../components/FaqPage.astro";
+import TalkPage from "../../../components/TalkPage.astro";
+import GuidePage from "../../../components/GuidePage.astro";
 import { config } from "../../../config";
-import { EDITIONS, ED_ORDER, LANGS, SLUGS, t, sideFacts, pathFor, type EdCode, type Lang, type PageKey } from "../../../i18n";
+import { EDITIONS, ED_ORDER, LANGS, SLUGS, t, pathFor, type EdCode, type Lang, type PageKey } from "../../../i18n";
+import { ui, HOW } from "../../../lib/ui";
+import { homeFigures, fmtDate } from "../../../lib/content";
 
 export function getStaticPaths() {
-  const keys: PageKey[] = ["partners", "buy", "privacy", "legal"]; // faq and talk: [cpage].astro (direction C)
+  const keys: PageKey[] = ["partners", "buy", "how", "privacy", "legal", "faq", "talk", "guide"];
   return LANGS.flatMap((lang) => ED_ORDER.flatMap((ed) => keys.map((key) => ({ params: { lang, ed, page: SLUGS[lang][key] }, props: { key } }))));
 }
 const lang = Astro.params.lang as Lang;
 const ed = Astro.params.ed as EdCode;
 const { key } = Astro.props as { key: PageKey };
 const ED = EDITIONS[ed];
-const E = { name: ED.name[lang], domain: ED.domain };
-const T = t(ed, lang);
-const facts = sideFacts(ed, lang);
+const T = t(ed, lang), U = ui(lang), H = HOW[lang];
 const P = T.partners, B = T.buy;
 const legal = key === "privacy" ? T.privacy : key === "legal" ? T.legal : null;
-const pageTitle = key === "partners" ? P.title : key === "buy" ? B.title : legal!.title;
 const used = config.foundingSlotsTotal - config.foundingSlotsLeft;
+const figs = homeFigures(ed, lang);
+const title = key === "partners" ? P.title : key === "buy" ? B.title : key === "how" ? H.title : legal?.title ?? "";
+const desc = key === "partners" ? P.lede : key === "buy" ? B.lede : key === "how" ? H.lede : title;
 ---
-
-<Base ed={ed} lang={lang} page={key} title={`${pageTitle} | Imóveis Portugal ${E.name}`} description={key === "partners" ? P.lede : key === "buy" ? B.lede : pageTitle}>
-  <div class="wrap">
-    {key === "partners" && (
-      <>
-        <header class="page-head">
-          <h1>{P.h1}</h1>
-          <p class="lede">{P.lede}</p>
-          <p class="print-only small">{[`${E.domain}${pathFor(lang, ed, "partners")}`, config.contactEmail, config.bookingUrl].filter(Boolean).join("   ")}</p>
-        </header>
-        <div class="cols">
+{key === "faq" ? <FaqPage lang={lang} ed={ed} /> : key === "talk" ? <TalkPage lang={lang} ed={ed} /> : key === "guide" ? <GuidePage lang={lang} ed={ed} /> : (
+<V2 lang={lang} ed={ed} page={key} title={`${title} | Imóveis Portugal · ${ED.name[lang]}`} description={desc}>
+  {key === "partners" && (
+    <>
+      <section class="hero">
+        <div class="frame grid">
           <div>
-            <section class="block">
-              <div class="founding">
-                <h2>{P.foundingH}</h2>
-                <p>{P.foundingP}</p>
-                <div class="slots" aria-hidden="true">
-                  {Array.from({ length: config.foundingSlotsTotal }, (_, i) => <span class={i < used ? "taken" : ""}></span>)}
-                </div>
-                <p class="slots-label">{P.slots}</p>
-              </div>
-            </section>
-            <section class="block">
-              <h2>{P.readersH}</h2>
-              <p>{P.readersP}</p>
-            </section>
-            <section class="block">
-              <h2>{P.whyNowH}</h2>
-              <p>{P.whyNowP}</p>
-            </section>
+            <p class="label">{P.title}</p>
+            <h1>{P.h1}</h1>
+            <p class="lede">{P.lede}</p>
+            <a class="btn" href="#contacto">{P.ctaH}</a>
           </div>
-          <aside class="rail" aria-labelledby="facts">
-            <h2 id="facts">{T.factsTitle}</h2>
-            {facts.map((f) => (
-              <div class="fact">
-                <span class="n">{f.big}</span>
-                <p>{f.text}</p>
-                <a href={f.url} rel="noopener">{f.source}</a>
-              </div>
-            ))}
-          </aside>
+          <div class="offer">
+            <h2>{P.foundingH}</h2>
+            <p>{P.foundingP}</p>
+            <div class="slots" aria-hidden="true">{Array.from({ length: config.foundingSlotsTotal }, (_, i) => <span class={i < used ? "taken" : ""}></span>)}</div>
+            <p class="small" style="margin:0">{P.slots}</p>
+          </div>
         </div>
-        <div class="full">
-            <section class="block">
-              <h2>{P.tableH}</h2>
-              <div class="table-scroll">
-                <table class="pk">
-                  <thead><tr>{P.cols.map((c) => <th scope="col">{c}</th>)}</tr></thead>
-                  <tbody>
-                    {P.rows.map((r) => (
-                      <tr><td>{r[0]}</td><td>{r[1]}</td><td class="num"><strong>{r[2]}</strong></td><td class="num">{r[3]}</td></tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-              <p class="small">{P.vat}</p>
-            </section>
-            <section class="block">
-              <h2>{P.rulesH}</h2>
-              <ul class="plain-list">{P.rules.map((r) => <li>{r}</li>)}</ul>
-            </section>
-            <section class="block">
-              <h2>{P.reportH}</h2>
-              <p>{P.reportP}</p>
-            </section>
-            <section class="block no-print" id="contacto">
-              <h2>{P.ctaH}</h2>
-              <p>
-                {config.bookingUrl
-                  ? <a class="btn" href={config.bookingUrl} rel="noopener">{P.book}</a>
-                  : <span class="btn" aria-disabled="true">{P.book}</span>}
-              </p>
-              <p>{P.formIntro}</p>
-              <Embed id={config.forms.sponsor[lang]} title={P.ctaH} pending={T.formPending(config.contactEmail)} hidden={{ edition: ed, lang }} />
-            </section>
+      </section>
+      <section class="band white" aria-labelledby="readers">
+        <div class="frame split">
+          <div><h2 id="readers">{P.readersH}</h2></div>
+          <div><p class="lede">{P.readersP}</p><p>{P.whyNowP}</p></div>
         </div>
-      </>
-    )}
-
-    {key === "buy" && (
-      <>
-        <header class="page-head">
-          <h1>{B.h1}</h1>
-          <p class="lede">{B.lede}</p>
-        </header>
-        <div class="cols">
+      </section>
+      <section class="band" aria-labelledby="packages">
+        <div class="frame">
+          <h2 id="packages">{P.tableH}</h2>
+          <div class="table-scroll" style="margin-top:24px">
+            <table>
+              <thead><tr>{P.cols.map((c) => <th scope="col">{c}</th>)}</tr></thead>
+              <tbody>{P.rows.map((r) => <tr><td><strong>{r[0]}</strong></td><td>{r[1]}</td><td class="num"><strong>{r[2]}</strong></td><td class="num">{r[3]}</td></tr>)}</tbody>
+            </table>
+          </div>
+          <p class="small">{P.vat}</p>
+        </div>
+      </section>
+      <section class="band white" aria-labelledby="agency">
+        <div class="frame split">
+          <div><p class="label">{U.foot.agency}</p><h2 id="agency">{config.agency.name}</h2></div>
+          <div class="partner">
+            <span class="tag">{U.faq.sponsored}</span>
+            <p style="margin:0">{T.agencyNote}</p>
+            <p class="small" style="margin:0">AMI {config.agency.ami} · <a href={config.agency.website} rel="noopener">{config.agency.website.replace(/^https:\/\/|\/$/g, "")}</a></p>
+          </div>
+        </div>
+      </section>
+      <section class="band" aria-labelledby="rules">
+        <div class="frame split">
+          <div><h2 id="rules">{P.rulesH}</h2></div>
           <div>
-            <section class="block">
-              <Embed id={config.forms.buyer[lang]} title={B.h1} pending={T.formPending(config.contactEmail)} hidden={{ edition: ed, lang }} height={560} />
-              <p class="small" style="margin-top:1rem">{B.small} <a href={pathFor(lang, ed, "privacy")}>{T.footer.privacy}</a></p>
-            </section>
+            <ul class="ticks" style="margin-top:0">{P.rules.map((r) => <li>{r}</li>)}</ul>
+            <h3 style="margin-top:32px">{P.reportH}</h3>
+            <p>{P.reportP}</p>
+            <p><a href={pathFor(lang, ed, "how")}>{U.nav.how}</a></p>
           </div>
-          <aside class="rail">
-            <h2>{B.stepsH}</h2>
-            <ol class="steps">{B.steps.map((s) => <li>{s}</li>)}</ol>
-          </aside>
         </div>
-      </>
-    )}
+      </section>
+      <section class="band white" id="contacto" aria-labelledby="cta">
+        <div class="frame read">
+          <h2 id="cta">{P.ctaH}</h2>
+          <p class="lede">{P.formIntro}</p>
+          {config.bookingUrl && <p><a class="btn" href={config.bookingUrl} rel="noopener">{P.book}</a></p>}
+          <Embed id={config.forms.sponsor[lang]} title={P.ctaH} pending={T.formPending(config.contactEmail)} hidden={{ edition: ed, lang }} />
+        </div>
+      </section>
+    </>
+  )}
 
-    {legal && (
-      <div class="legal" style="padding-bottom:4rem">
-        <header class="page-head"><h1>{legal.h1}</h1></header>
-        {!config.launchReady && <p class="draft">{legal.draft}</p>}
-        {legal.sections.map(([h, p]) => (<><h2>{h}</h2><p>{p}</p></>))}
+  {key === "buy" && (
+    <div class="frame">
+      <div class="ph read">
+        <p class="label">{U.nav.buy}</p>
+        <h1>{B.h1}</h1>
+        <p class="lede">{B.lede}</p>
       </div>
-    )}
-  </div>
-</Base>
+      <div class="split" style="padding-bottom:64px">
+        <div>
+          <h3 style="margin-bottom:16px">{B.stepsH}</h3>
+          <ol class="steps">{B.steps.map((s) => <li>{s}</li>)}</ol>
+          <div class="partner" style="margin-top:28px">
+            <span class="tag">{U.faq.sponsored}</span>
+            <span class="logo">{config.agency.name}</span>
+            <p class="small" style="margin:0">AMI {config.agency.ami} · <a href={config.agency.website} rel="noopener">{config.agency.website.replace(/^https:\/\/|\/$/g, "")}</a></p>
+          </div>
+        </div>
+        <div>
+          <Embed id={config.forms.buyer[lang]} title={B.h1} pending={T.formPending(config.contactEmail)} hidden={{ edition: ed, lang }} height={560} />
+          <p class="small" style="margin-top:12px">{B.small}{" "}<a href={pathFor(lang, ed, "privacy")}>{U.foot.privacy}</a></p>
+        </div>
+      </div>
+    </div>
+  )}
+
+  {key === "how" && (
+    <div class="frame read prose">
+      <div class="ph" style="padding-left:0;padding-right:0">
+        <p class="label">{H.title}</p>
+        <h1>{H.h1}</h1>
+        <p class="lede">{H.lede}</p>
+      </div>
+      {H.sections.map(([h, p]) => (<><h2>{h}</h2><p>{p}</p></>))}
+      <h2>{H.exampleH}</h2>
+      <p>{H.exampleP}</p>
+      <ol class="notes" style="font-size:15px">
+        {figs.slice(1).map((f) => <li><strong>{f.big}</strong> · <a href={f.url} rel="noopener">{f.source}</a>{f.checked && `, ${U.faq.checked} ${fmtDate(lang, f.checked)}`}.</li>)}
+      </ol>
+      <h2>{H.contactH}</h2>
+      <p>{H.contactP}{" "}<a href={`mailto:${config.contactEmail}`}>{config.contactEmail}</a></p>
+    </div>
+  )}
+
+  {legal && (
+    <div class="frame read prose">
+      <div class="ph" style="padding-left:0;padding-right:0"><h1>{legal.h1}</h1></div>
+      {!config.launchReady && <p class="draft">{legal.draft}</p>}
+      {legal.sections.map(([h, p]) => (<><h2>{h}</h2><p>{p}</p></>))}
+    </div>
+  )}
+</V2>
+)}

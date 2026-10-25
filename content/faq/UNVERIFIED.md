@@ -25,3 +25,11 @@ Checked on 24 Oct 2026. Everything published on the FAQ pages comes from `conten
 ## Sources that refuse automated access
 
 bportugal.pt (used the Banco de Portugal notification published by the ESRB instead), eur-lex.europa.eu, e-justice.europa.eu, notaires.fr, gov.il, legifrance.gouv.fr. impots.gouv.fr was in maintenance on 24 Oct 2026; try again later.
+
+## Redesign v2 (prompt 09, 25 Oct 2026)
+
+1. **FAQ ranking.** Google search, autocomplete, Trends and Reddit are blocked here, so `rank` follows how often a question came up in web search results (content/FAQ_SOURCES.md), not measured search volume. Check it in Google Trends and "People also ask".
+2. **Golden Visa and property (Lei 56/2023).** Asked very often (BR, US, IL). The law's text on diariodarepublica.pt did not load, so the answer describes only the verified visas (D7, CPLP) and sends the reader to a lawyer.
+3. **Notary, registration and Casa Pronta fees.** justica.gov.pt returned an error; costs are described as "depend on the service chosen".
+4. **Capital gains rate for non-residents.** Only the 50% rule (CIRS art. 43.º) is quoted. The rate itself (progressive rates, worldwide income) is not, until art. 68.º and the tax authority's circular are opened.
+5. **Partner agency profile.** The text in the report and on the "Talk to a partner" page is Habinedita Gondomar's own statement (prompt 08). The agency must confirm it before launch. Its logo could not be downloaded (habineditagondomar.pt returned 403 and 502), so its name is shown as text.

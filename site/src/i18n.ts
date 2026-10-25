@@ -141,370 +141,241 @@ export const ED_ORDER: EdCode[] = ["lu", "fr", "ch", "br", "us", "il"];
 // Thousands: space in PT and FR, comma in EN.
 const eur = (n: number, lang: Lang) => String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, lang === "en" ? "," : " ") + " €";
 
+// Page text per edition and language (prompt 09): written natively in European Portuguese, French for a
+// Luxembourg or Paris reader, and American English. Terms follow content/GLOSSARY.md.
 export function t(ed: EdCode, lang: Lang) {
   const ED = EDITIONS[ed];
-  const E = { name: ED.name[lang], hero: ED.hero[lang], from: ED.from[lang], topics: ED.topics[lang] };
-  const L = lang;
-  const p = config.prices;
+  const p = config.prices, a = config.agency;
   const left = config.foundingSlotsLeft, total = config.foundingSlotsTotal;
   // USA and Israel readers move to Portugal rather than back.
   const away = ed === "us" || ed === "il";
+  const e = (n: number) => eur(n, lang);
 
-  if (lang === "en") return tEn(ed, E);
-  if (lang === "fr") return {
-    nav: { home: "Accueil", partners: "Partenaires", buy: "Acheter" },
-    editionsLabel: "Éditions",
-    lede: `Une newsletter gratuite chaque semaine : des biens choisis, le coût réel d'un achat, le crédit, la fiscalité et ${away ? "l'installation" : "le retour"}. Premier numéro le 1er décembre 2026.`,
-    weeklyTitle: "Chaque semaine",
-    weekly: [
-      "Des biens à vendre choisis par région et par budget.",
-      "Le coût total de chaque achat : IMT, droit de timbre, acte notarié et enregistrement.",
-      ...E.topics,
-      "Les réponses d'avocats, de banques et d'agences partenaires, toujours signalées comme telles.",
-    ],
-    signupTitle: "Recevoir la newsletter",
-    factsTitle: "En chiffres",
-    buyCta: { h: "Vous achetez dans les prochains mois ?", p: "Dites-nous ce que vous cherchez. Une agence immobilière agréée partenaire vous contacte, sans frais pour vous.", a: "Demander un contact" },
-    partnersCta: { h: "Vous travaillez avec ceux qui achètent au Portugal ?", p: "Avocats, banques, promoteurs et autres services peuvent toucher nos lecteurs dans toutes les éditions.", a: "Voir les conditions partenaires" },
-    footer: { sponsored: "Le contenu sponsorisé est toujours signalé.", privacy: "Confidentialité", legal: "Mentions légales" },
-    formPending: (email: string) => email ? `Formulaire en cours d'installation. Écrivez-nous à ${email}.` : "Formulaire disponible très bientôt.",
-    partners: {
-      title: "Partenaires",
-      h1: "Touchez ceux qui vivent à l'étranger et pensent acheter au Portugal.",
-      lede: `Imóveis Portugal est un guide hebdomadaire en six éditions (Luxembourg, France, Suisse, Brésil, États-Unis, Israël), en portugais, anglais et français, pour ceux qui vivent hors du Portugal et veulent y acheter. Lancement le 1er décembre 2026.`,
-      readersH: "Les lecteurs",
-      readersP: "Des Portugais et lusodescendants installés en France, au Luxembourg et en Suisse, des Brésiliens, des Américains et des Israéliens qui préparent un achat au Portugal : maison de vacances, retour, retraite, installation ou investissement. Ils lisent parce qu'ils ont un projet.",
-      foundingH: "Partenaire fondateur",
-      foundingP: `40 % de remise la première année et le même prix la deuxième. Dix places, un seul partenaire par catégorie.`,
-      slots: `Places disponibles : ${left} sur ${total}`,
-      whyNowH: "Pourquoi maintenant",
-      whyNowP: "Les partenaires fondateurs apparaissent dès le premier numéro, le 1er décembre, juste avant Noël, quand beaucoup d'émigrés sont au Portugal et visitent des maisons.",
-      tableH: "Formules",
-      cols: ["Formule", "Ce qui est inclus", "Prix fondateur (année 1)", "Prix normal"],
-      rows: [
-        ["Gold", "Exclusivité dans votre catégorie sur toutes les éditions. Présence dans chaque newsletter, un article sponsorisé par mois et par édition, une rubrique questions-réponses, rapport mensuel.", eur(p.gold.founding, L), eur(p.gold.list, L) + " / an"],
-        ["Silver", "Une édition au choix. Présence dans la newsletter tous les quinze jours, un article sponsorisé par trimestre, fiche dans l'annuaire des partenaires, rapport mensuel.", eur(p.silver.founding, L), eur(p.silver.list, L) + " / an"],
-        ["Bronze", "Une édition. Fiche avec logo dans l'annuaire des partenaires et une mention par mois dans la newsletter.", eur(p.bronze.founding, L), eur(p.bronze.list, L) + " / an"],
-        ["Campagne promoteur", "Mise en avant d'un programme dans les éditions choisies : newsletter, article et réseaux sociaux.", "à partir de " + eur(p.campaignFrom, L), "—"],
-      ],
-      vat: "Prix hors TVA.",
-      rulesH: "Nos règles",
-      rules: [
-        "Tout contenu sponsorisé est signalé comme tel.",
-        "Nous ne publions aucune promesse de rendement.",
-        "Les demandes d'achat des lecteurs ne vont qu'à l'agence immobilière agréée partenaire.",
-      ],
-      reportH: "Ce que vous recevez chaque mois",
-      reportP: "Un rapport par édition : abonnés, ouvertures, clics et demandes de contact liés à votre présence.",
-      ctaH: "Parlons 15 minutes",
-      book: "Réserver un appel",
-      formIntro: "Ou laissez vos coordonnées : nous répondons sous un jour ouvré.",
-    },
-    buy: {
-      title: "Acheter",
-      h1: "Dites-nous quelle maison vous cherchez au Portugal.",
-      lede: "Nous transmettons votre demande à une agence immobilière agréée partenaire (licence AMI), qui vous contacte pour vous proposer des biens. Ce contact est gratuit pour vous.",
-      stepsH: "Ensuite",
-      steps: ["Vous remplissez le formulaire, en deux minutes.", "L'agence partenaire vous contacte sous deux jours ouvrés.", "Si vous le souhaitez, elle organise des visites pendant votre séjour au Portugal."],
-      small: "Vos données servent uniquement à cette demande et ne sont transmises qu'à l'agence partenaire, avec votre accord.",
-    },
-    privacy: privacyFR(ed),
-    legal: legalFR(),
-  };
-
-  // Portuguese (pt-PT). PT-BR was dropped in D18; the br branches below are kept off.
-  const br = false;
-  return {
-    nav: { home: "Início", partners: "Parceiros", buy: "Comprar" },
-    editionsLabel: "Edições",
-    lede: br
-      ? "Uma newsletter grátis por semana: imóveis selecionados, quanto custa de verdade comprar, financiamento, câmbio, vistos e impostos. Primeira edição em 1º de dezembro de 2026."
-      : `Uma newsletter grátis por semana: imóveis escolhidos, quanto custa mesmo comprar, crédito, impostos e o que muda ${away ? "quando se muda para Portugal" : "no regresso"}. Primeira edição a 1 de dezembro de 2026.`,
-    weeklyTitle: "Todas as semanas",
-    weekly: [
-      br ? "Imóveis à venda selecionados por região e orçamento." : "Imóveis à venda escolhidos por região e orçamento.",
-      "O custo total de cada compra: IMT, imposto do selo, escritura e registo.".replace("registo", br ? "registro" : "registo"),
-      ...E.topics,
-      br ? "Respostas de advogados, bancos e imobiliárias parceiros, sempre identificados." : "Respostas de advogados, bancos e agências parceiros, sempre identificados.",
-    ],
-    signupTitle: "Receber a newsletter",
-    factsTitle: "Em números",
-    buyCta: {
-      h: br ? "Vai comprar nos próximos meses?" : "Vai comprar nos próximos meses?",
-      p: br ? "Conte o que você procura. Uma imobiliária licenciada parceira entra em contato, sem custo para você." : "Diga-nos o que procura. Uma agência imobiliária licenciada parceira contacta-o, sem custos para si.",
-      a: br ? "Pedir contato" : "Pedir contacto",
-    },
-    partnersCta: {
-      h: br ? "Sua empresa trabalha com quem compra imóvel em Portugal?" : "Trabalha com quem compra casa em Portugal?",
-      p: br ? "Advogados, bancos, incorporadoras e outros serviços podem chegar aos nossos leitores em todas as edições." : "Advogados, bancos, promotores e outros serviços podem chegar aos nossos leitores em todas as edições.",
-      a: "Ver condições para parceiros",
-    },
-    footer: { sponsored: "O conteúdo patrocinado é sempre identificado.", privacy: "Privacidade", legal: "Aviso legal" },
-    formPending: (email: string) => email ? `Formulário em configuração. Escreva-nos para ${email}.` : (br ? "Formulário disponível em breve." : "Formulário disponível muito em breve."),
-    partners: {
-      title: "Parceiros",
-      h1: br ? "Chegue a quem mora fora e está pensando em comprar imóvel em Portugal." : "Chegue a quem vive fora e está a pensar comprar casa em Portugal.",
-      lede: br
-        ? "O Imóveis Portugal é um guia semanal com quatro edições (Luxemburgo, França, Suíça e Brasil) para quem mora fora de Portugal e quer comprar lá. Lançamento em 1º de dezembro de 2026."
-        : "O Imóveis Portugal é um guia semanal com seis edições (Luxemburgo, França, Suíça, Brasil, Estados Unidos e Israel), em português, inglês e francês, para quem vive fora de Portugal e quer comprar casa lá. Lançamos a 1 de dezembro de 2026.",
-      readersH: "Quem nos lê",
-      readersP: br
-        ? "Brasileiros que preparam uma compra em Portugal para morar ou investir, e portugueses no Luxemburgo, na França e na Suíça que querem casa de férias, voltar ou se aposentar em Portugal. Leem porque têm um projeto."
-        : "Portugueses no Luxemburgo, em França e na Suíça que querem casa de férias, regressar ou reformar-se em Portugal, e brasileiros, americanos e israelitas que preparam uma compra para viver, reformar-se ou investir. Leem porque têm um projeto.",
-      foundingH: "Parceiro fundador",
-      foundingP: br
-        ? "40% de desconto no primeiro ano e o mesmo preço no segundo. São dez vagas e um único parceiro por categoria."
-        : "40% de desconto no primeiro ano e o mesmo preço no segundo. Há dez lugares e um só parceiro por categoria.",
-      slots: br ? `Vagas disponíveis: ${left} de ${total}` : `Lugares disponíveis: ${left} de ${total}`,
-      whyNowH: "Porquê agora".replace("Porquê", br ? "Por que" : "Porquê"),
-      whyNowP: br
-        ? "Os parceiros fundadores aparecem desde a primeira edição, em 1º de dezembro, antes do Natal, quando muitos emigrantes estão em Portugal visitando imóveis."
-        : "Os parceiros fundadores aparecem desde o primeiro número, a 1 de dezembro, antes do Natal, quando muitos emigrantes estão em Portugal e visitam casas.",
-      tableH: "Pacotes",
-      cols: ["Pacote", br ? "O que inclui" : "O que inclui", br ? "Preço fundador (ano 1)" : "Preço fundador (ano 1)", br ? "Preço normal" : "Preço normal"],
-      rows: [
-        ["Gold", br
-          ? "Exclusividade na sua categoria nas quatro edições. Presença em todas as newsletters, um artigo patrocinado por mês em cada edição, coluna de perguntas e respostas, relatório mensal."
-          : "Exclusivo na sua categoria em todas as edições. Presença em todas as newsletters, um artigo patrocinado por mês em cada edição, coluna de perguntas e respostas, relatório mensal.",
-          eur(p.gold.founding, L), eur(p.gold.list, L) + " / ano"],
-        ["Silver", br
-          ? "Uma edição à sua escolha. Presença na newsletter a cada 15 dias, um artigo patrocinado por trimestre, página no diretório de parceiros, relatório mensal."
-          : "Uma edição à escolha. Presença na newsletter de 15 em 15 dias, um artigo patrocinado por trimestre, entrada no diretório de parceiros, relatório mensal.",
-          eur(p.silver.founding, L), eur(p.silver.list, L) + " / ano"],
-        ["Bronze", br
-          ? "Uma edição. Página com logotipo no diretório de parceiros e uma menção por mês na newsletter."
-          : "Uma edição. Entrada com logótipo no diretório de parceiros e uma menção por mês na newsletter.",
-          eur(p.bronze.founding, L), eur(p.bronze.list, L) + " / ano"],
-        [br ? "Campanha de lançamento" : "Campanha de empreendimento", br
-          ? "Para incorporadoras: destaque de um empreendimento nas edições escolhidas, com newsletter, artigo e redes sociais."
-          : "Para promotores: destaque de um empreendimento nas edições escolhidas, com newsletter, artigo e redes sociais.",
-          (br ? "a partir de " : "a partir de ") + eur(p.campaignFrom, L), "—"],
-      ],
-      vat: br ? "Valores sem IVA (imposto português)." : "Valores sem IVA.",
-      rulesH: br ? "Nossas regras" : "As nossas regras",
-      rules: [
-        "Todo o conteúdo patrocinado é identificado como tal.".replace("Todo o", br ? "Todo" : "Todo o"),
-        br ? "Não publicamos promessas de rentabilidade." : "Não publicamos promessas de rendimento.",
-        br ? "Os pedidos de compra dos leitores vão apenas para a imobiliária licenciada parceira." : "Os pedidos de compra dos leitores seguem apenas para a agência imobiliária licenciada parceira.",
-      ],
-      reportH: br ? "O que você recebe todo mês" : "O que recebe todos os meses",
-      reportP: br
-        ? "Um relatório por edição: assinantes, aberturas, cliques e pedidos de contato ligados à sua presença."
-        : "Um relatório por edição: subscritores, aberturas, cliques e pedidos de contacto ligados à sua presença.",
-      ctaH: br ? "Vamos conversar 15 minutos" : "Falemos 15 minutos",
-      book: br ? "Agendar conversa" : "Marcar chamada",
-      formIntro: br ? "Ou deixe seus dados: respondemos em até um dia útil." : "Ou deixe os seus dados: respondemos num dia útil.",
-    },
-    buy: {
-      title: "Comprar",
-      h1: br ? "Conte que imóvel você procura em Portugal." : "Diga-nos que casa procura em Portugal.",
-      lede: br
-        ? "Passamos o seu pedido a uma imobiliária licenciada parceira (licença AMI), que entra em contato para mostrar opções. Você não paga nada por esse contato."
-        : "Passamos o seu pedido a uma agência imobiliária licenciada parceira (licença AMI), que o contacta para lhe mostrar opções. Não paga nada por este contacto.",
-      stepsH: br ? "Depois" : "A seguir",
-      steps: br
-        ? ["Você preenche o formulário em dois minutos.", "A imobiliária parceira entra em contato em até dois dias úteis.", "Se quiser, ela organiza visitas para quando você estiver em Portugal."]
-        : ["Preenche o formulário, em dois minutos.", "A agência parceira contacta-o em até dois dias úteis.", "Se quiser, organiza visitas para quando estiver em Portugal."],
-      small: br
-        ? "Seus dados são usados apenas para este pedido e compartilhados só com a imobiliária parceira, com o seu consentimento."
-        : "Os seus dados são usados apenas para este pedido e partilhados só com a agência parceira, com o seu consentimento.",
-    },
-    privacy: privacyPT(ed, br),
-    legal: legalPT(br),
-  };
-}
-
-export function sideFacts(ed: EdCode, lang: Lang): Fact[] {
-  const own = EDITIONS[ed].fact[lang];
-  const F = {
-    dom: {
-      pt: { big: "335 640 €", text: "preço médio pago em 2025 por compradores com domicílio fiscal noutro país da UE, contra 234 120 € dos residentes." },
-      en: { big: "335,640 €", text: "average price paid in 2025 by buyers with a tax address in another EU country, against 234,120 € for residents." },
-      fr: { big: "335 640 €", text: "prix moyen payé en 2025 par les acheteurs domiciliés fiscalement dans un autre pays de l'UE, contre 234 120 € pour les résidents." },
-    },
-    price: {
-      pt: { big: "+17,6%", text: "subida dos preços da habitação em Portugal em 2025, a maior da série." },
-      en: { big: "+17.6%", text: "rise in house prices in Portugal in 2025, the highest in the series." },
-      fr: { big: "+17,6 %", text: "hausse des prix des logements au Portugal en 2025, la plus forte de la série." },
-    },
-    br: {
-      pt: { big: "9 808", text: "casas compradas em Portugal em 2025 por pessoas nascidas no Brasil, o primeiro país estrangeiro." },
-      en: { big: "9,808", text: "homes bought in Portugal in 2025 by people born in Brazil, the top foreign country." },
-      fr: { big: "9 808", text: "logements achetés au Portugal en 2025 par des personnes nées au Brésil, premier pays étranger." },
-    },
-    fr: {
-      pt: { big: "3 765", text: "casas compradas em Portugal em 2025 por pessoas nascidas em França." },
-      en: { big: "3,765", text: "homes bought in Portugal in 2025 by people born in France." },
-      fr: { big: "3 765", text: "logements achetés au Portugal en 2025 par des personnes nées en France." },
-    },
-  };
-  const all: Fact[] = [
-    { ...F.dom[lang], source: "INE, via idealista/news", url: SRC.ine_dom },
-    { ...F.price[lang], source: "INE, via Notícias ao Minuto", url: SRC.ine_price },
-  ];
-  if (ed !== "br") all.push({ ...F.br[lang], source: "INE, via idealista/news", url: SRC.ine_nat });
-  if (ed === "fr") all.unshift({ ...F.fr[lang], source: "INE, via idealista/news", url: SRC.ine_nat });
-  return [own, ...all];
-}
-
-// ---------- Legal drafts (to be reviewed; placeholders filled from config) ----------
-const ph = (v: string, label: string) => v || `[${label}]`;
-
-function privacyPT(ed: EdCode, br: boolean) {
-  const e = config.entity, a = config.agency;
-  return {
-    title: br ? "Privacidade" : "Privacidade",
-    h1: "Política de privacidade",
-    draft: "Rascunho. Os campos entre parênteses retos são preenchidos quando a entidade estiver definida.",
-    sections: [
-      ["Responsável", `${ph(e.name, "Entidade")}, ${ph(e.address, br ? "Endereço" : "Morada")}. ${br ? "Contato" : "Contacto"}: ${ph(config.contactEmail, "email")}.`],
-      ["Que dados tratamos e porquê", `Newsletter: nome próprio e email, com o seu consentimento (RGPD, art. 6.º, n.º 1, al. a)). Pedidos de compra: nome, contactos e o que procura, com o seu consentimento, para os enviarmos à agência imobiliária parceira ${ph(a.name, "agência")} (AMI ${ph(a.ami, "n.º")}). Pedidos de parceria: dados profissionais, para responder ao seu pedido (art. 6.º, n.º 1, al. b)). Pedidos a parceiros ("Falar com um parceiro"): categoria, país, pergunta e ${br ? "contato" : "contacto"}, com o seu consentimento, para responder e, se o autorizar, para os passar a um parceiro da categoria escolhida (art. 6.º, n.º 1, al. a)).`],
-      ["Quem recebe os dados", "A agência parceira, só para pedidos de compra. O parceiro da categoria escolhida, só para pedidos a parceiros e com o seu consentimento. Prestadores que tratam dados por nossa conta: beehiiv (envio da newsletter, EUA, com garantias adequadas para a transferência), Tally (formulários, UE), Cloudflare (alojamento e estatísticas sem cookies) e Cal.com (marcação de chamadas)."],
-      ["Durante quanto tempo", "Newsletter: até cancelar a subscrição. Pedidos de compra e pedidos a parceiros: 12 meses. Pedidos de parceria: durante a relação comercial e o prazo legal aplicável."],
-      [br ? "Seus direitos" : "Os seus direitos", `Acesso, retificação, apagamento, oposição, limitação, portabilidade e retirada do consentimento a qualquer momento, escrevendo para o ${br ? "contato" : "contacto"} acima. ${br ? "Você também pode" : "Pode também"} apresentar queixa à autoridade de proteção de dados do seu país (por exemplo, CNPD em Portugal ou no Luxemburgo).`],
-      ["Cookies", "Não usamos cookies de publicidade nem de estatística. A língua que escolhe fica guardada apenas no seu navegador (armazenamento local), sem cookies. Os formulários incorporados podem usar cookies técnicos do respetivo serviço."],
-    ],
-  };
-}
-
-function legalPT(br: boolean) {
-  const e = config.entity;
-  return {
-    title: "Aviso legal",
-    h1: "Aviso legal",
-    draft: "Rascunho. Os campos entre parênteses retos são preenchidos quando a entidade estiver definida.",
-    sections: [
-      ["Editor", `${ph(e.name, "Entidade")}, ${ph(e.address, br ? "Endereço" : "Morada")}. ${br ? "Registro" : "Registo"}: ${ph(e.register, "n.º de registo")}. IVA: ${ph(e.vat, "n.º de IVA")}. ${br ? "Contato" : "Contacto"}: ${ph(config.contactEmail, "email")}.`],
-      ["Alojamento", "Cloudflare, Inc., 101 Townsend St., San Francisco, CA 94107, EUA."],
-      ["Conteúdo", "Os artigos são informativos e não substituem aconselhamento jurídico, fiscal ou financeiro. O conteúdo patrocinado é sempre identificado."],
-    ],
-  };
-}
-
-function privacyFR(ed: EdCode) {
-  const e = config.entity, a = config.agency;
-  return {
-    title: "Confidentialité",
-    h1: "Politique de confidentialité",
-    draft: "Brouillon. Les champs entre crochets seront complétés une fois l'entité définie.",
-    sections: [
-      ["Responsable du traitement", `${ph(e.name, "Entité")}, ${ph(e.address, "Adresse")}. Contact : ${ph(config.contactEmail, "email")}.`],
-      ["Données traitées et finalités", `Newsletter : prénom et email, sur la base de votre consentement (RGPD, art. 6, par. 1, a)). Demandes d'achat : nom, coordonnées et critères de recherche, avec votre consentement, transmis à l'agence immobilière partenaire ${ph(a.name, "agence")} (AMI ${ph(a.ami, "n°")}). Demandes de partenariat : données professionnelles, pour répondre à votre demande (art. 6, par. 1, b)). Demandes à un partenaire (« Parler à un partenaire ») : catégorie, pays, question et coordonnées, avec votre consentement, pour répondre et, si vous l'acceptez, pour les transmettre à un partenaire de la catégorie choisie (art. 6, par. 1, a)).`],
-      ["Destinataires", "L'agence partenaire, uniquement pour les demandes d'achat. Le partenaire de la catégorie choisie, uniquement pour les demandes à un partenaire et avec votre consentement. Sous-traitants : beehiiv (envoi de la newsletter, États-Unis, avec garanties appropriées pour le transfert), Tally (formulaires, UE), Cloudflare (hébergement et statistiques sans cookies) et Cal.com (prise de rendez-vous)."],
-      ["Durée de conservation", "Newsletter : jusqu'à votre désinscription. Demandes d'achat et demandes à un partenaire : 12 mois. Demandes de partenariat : pendant la relation commerciale et la durée légale applicable."],
-      ["Vos droits", "Accès, rectification, effacement, opposition, limitation, portabilité et retrait du consentement à tout moment, en écrivant au contact ci-dessus. Vous pouvez aussi saisir la CNIL."],
-      ["Cookies", "Aucun cookie publicitaire ni de mesure d'audience. La langue choisie est enregistrée uniquement dans votre navigateur (stockage local), sans cookie. Les formulaires intégrés peuvent utiliser des cookies techniques de leur service."],
-    ],
-  };
-}
-
-function legalFR() {
-  const e = config.entity;
-  return {
-    title: "Mentions légales",
-    h1: "Mentions légales",
-    draft: "Brouillon. Les champs entre crochets seront complétés une fois l'entité définie.",
-    sections: [
-      ["Éditeur", `${ph(e.name, "Entité")}, ${ph(e.address, "Adresse")}. Immatriculation : ${ph(e.register, "n° d'immatriculation")}. TVA : ${ph(e.vat, "n° de TVA")}. Contact : ${ph(config.contactEmail, "email")}.`],
-      ["Hébergeur", "Cloudflare, Inc., 101 Townsend St., San Francisco, CA 94107, États-Unis."],
-      ["Contenu", "Les articles sont informatifs et ne remplacent pas un conseil juridique, fiscal ou financier. Le contenu sponsorisé est toujours signalé."],
-    ],
-  };
-}
-
-// ---------- English (D18) ----------
-function tEn(ed: EdCode, E: { name: string; hero: string; from: string; topics: string[] }) {
-  const p = config.prices;
-  const left = config.foundingSlotsLeft, total = config.foundingSlotsTotal;
-  return {
-    nav: { home: "Home", partners: "Partners", buy: "Buy" },
-    editionsLabel: "Editions",
-    lede: `One free newsletter a week: selected homes, what buying really costs, mortgages, tax and ${ed === "us" || ed === "il" ? "moving to Portugal" : "moving back"}. First issue on 1 December 2026.`,
+  if (lang === "en") return {
+    lede: `One free newsletter a week: selected homes, what buying really costs, mortgages, taxes and ${away ? "moving to Portugal" : "moving back"}. First issue on December 1, 2026.`,
     weeklyTitle: "Every week",
-    weekly: [
-      "Homes for sale selected by region and budget.",
-      "The total cost of each purchase: transfer tax (IMT), stamp duty, deed and registration.",
-      ...E.topics,
-      "Answers from partner lawyers, banks and our partner agency, always labelled as such.",
-    ],
-    signupTitle: "Get the newsletter",
-    factsTitle: "In numbers",
-    buyCta: { h: "Buying in the coming months?", p: "Tell us what you are looking for. Our licensed partner real-estate agency will contact you, free of charge.", a: "Request a contact" },
-    partnersCta: { h: "Do you work with people buying in Portugal?", p: "Lawyers, banks, developers and other services can reach our readers in every edition.", a: "See partner terms" },
-    footer: { sponsored: "Sponsored content is always labelled.", privacy: "Privacy", legal: "Legal notice" },
-    formPending: (email: string) => email ? `Form being set up. Write to us at ${email}.` : "Form available very soon.",
+    weekly: ["Homes for sale, selected by region and budget.", "The full cost of each purchase: transfer tax (IMT), stamp duty, deed and registration.", ...ED.topics.en, "Answers from partner lawyers, banks and our partner agency, always labeled as such."],
+    formPending: (email: string) => (email ? `This form is being set up. Write to us at ${email}.` : "This form will be available soon."),
+    agencyNote: "Our partner agency, and the only real-estate agency on the platform. Every request to buy or sell a home goes to it. It pays a flat annual sponsorship, never a fee per lead.",
     partners: {
-      title: "Partners",
-      h1: "Reach people who live abroad and are thinking of buying in Portugal.",
-      lede: "Imóveis Portugal is a weekly guide with editions for Luxembourg, France, Switzerland, Brazil, the United States and Israel, in Portuguese, English and French, for people who live outside Portugal and want to buy there. Launch on 1 December 2026.",
+      title: "For partners",
+      h1: "Reach people who live abroad and are getting ready to buy in Portugal.",
+      lede: "Imóveis Portugal is a weekly guide with editions for Luxembourg, France, Switzerland, Brazil, the United States and Israel, in Portuguese, English and French. It launches on December 1, 2026.",
       readersH: "Who reads us",
-      readersP: "Portuguese people in Luxembourg, France and Switzerland who want a holiday home, to move back or to retire in Portugal, and Brazilians, Americans and Israelis preparing a purchase to live, retire or invest. They read because they have a plan.",
+      readersP: "Portuguese families in Luxembourg, France and Switzerland planning a vacation home, a move back or retirement, and Brazilians, Americans and Israelis preparing a purchase to live, retire or invest. They read because they have a plan.",
       foundingH: "Founding partner",
-      foundingP: "40% off the first year and the same price in the second. Ten places, one partner per category.",
+      foundingP: "40% off the first year, and the same price locked in for the second. Ten places, one partner per category.",
       slots: `Places available: ${left} of ${total}`,
-      whyNowH: "Why now",
-      whyNowP: "Founding partners appear from the first issue on 1 December, just before Christmas, when many emigrants are in Portugal visiting homes.",
+      whyNowP: "Founding partners appear from the first issue on December 1, just before the holidays, when many families abroad are in Portugal and visiting homes.",
       tableH: "Packages",
-      cols: ["Package", "What is included", "Founding price (year 1)", "Standard price"],
+      cols: ["Package", "What's included", "Founding price (year 1)", "Standard price"],
       rows: [
-        ["Gold", "Category exclusivity across all editions. Presence in every newsletter, one sponsored article per month per edition, a Q&A column, monthly report.", eur(p.gold.founding, "en"), eur(p.gold.list, "en") + " / year"],
-        ["Silver", "One edition of your choice. Presence in the newsletter every two weeks, one sponsored article per quarter, partner directory entry, monthly report.", eur(p.silver.founding, "en"), eur(p.silver.list, "en") + " / year"],
-        ["Bronze", "One edition. Directory entry with logo and one mention per month in the newsletter.", eur(p.bronze.founding, "en"), eur(p.bronze.list, "en") + " / year"],
-        ["Development campaign", "For developers: one project featured in the editions you choose, with newsletter, article and social media.", "from " + eur(p.campaignFrom, "en"), "—"],
+        ["Gold", "Category exclusivity across all editions. In every newsletter, one sponsored article per month per edition, a Q&A column and a monthly report.", e(p.gold.founding), `${e(p.gold.list)} / year`],
+        ["Silver", "One edition of your choice. In the newsletter every two weeks, one sponsored article per quarter, a partner directory listing and a monthly report.", e(p.silver.founding), `${e(p.silver.list)} / year`],
+        ["Bronze", "One edition. A directory listing with your logo and one mention a month in the newsletter.", e(p.bronze.founding), `${e(p.bronze.list)} / year`],
+        ["Development campaign", "For developers: one project featured in the editions you choose, with newsletter, article and social media.", `from ${e(p.campaignFrom)}`, "—"],
       ],
       vat: "Prices exclude VAT.",
       rulesH: "Our rules",
-      rules: [
-        "All sponsored content is labelled as such.",
-        "We publish no promises of returns.",
-        "Readers' buying requests go only to the licensed partner real-estate agency.",
-      ],
+      rules: ["All sponsored content is labeled as such.", "We publish no promises of returns.", "Every partner pays a flat fee, never a fee per lead.", "Buying requests go only to our licensed partner agency."],
       reportH: "What you get every month",
       reportP: "One report per edition: subscribers, opens, clicks and contact requests linked to your presence.",
       ctaH: "Let's talk for 15 minutes",
       book: "Book a call",
-      formIntro: "Or leave your details: we reply within one working day.",
+      formIntro: "Leave your details and we'll reply within one business day.",
     },
     buy: {
-      title: "Buy",
-      h1: "Tell us what home you are looking for in Portugal.",
-      lede: "We pass your request to our licensed partner real-estate agency (AMI licence), which contacts you to show you options. This contact is free for you.",
-      stepsH: "Next",
-      steps: ["You fill in the form, in two minutes.", "The partner agency contacts you within two working days.", "If you wish, it arranges viewings for when you are in Portugal."],
+      title: "Find a home",
+      h1: "Tell us what home you're looking for in Portugal.",
+      lede: `Your request goes to our partner agency, ${a.name} (AMI license ${a.ami}), a licensed real-estate broker, which contacts you with options. It's free for you.`,
+      stepsH: "What happens next",
+      steps: ["You fill in the form, in two minutes.", "The partner agency contacts you within two business days.", "If you'd like, it sets up viewings for when you're in Portugal."],
       small: "Your details are used only for this request and shared only with the partner agency, with your consent.",
     },
     privacy: privacyEN(),
     legal: legalEN(),
   };
-}
 
-function privacyEN() {
-  const e = config.entity, a = config.agency;
+  if (lang === "fr") return {
+    lede: `Une newsletter gratuite chaque semaine : des biens choisis, le vrai coût d'un achat, le crédit, la fiscalité et ${away ? "l'installation au Portugal" : "le retour"}. Premier numéro le 1er décembre 2026.`,
+    weeklyTitle: "Chaque semaine",
+    weekly: ["Des biens à vendre, choisis par région et par budget.", "Le coût complet de chaque achat : IMT, droit de timbre, acte et enregistrement.", ...ED.topics.fr, "Les réponses d'avocats et de banques partenaires et de notre agence partenaire, toujours signalées comme telles."],
+    formPending: (email: string) => (email ? `Formulaire en cours d'installation. Écrivez-nous à ${email}.` : "Formulaire disponible très bientôt."),
+    agencyNote: "Notre agence partenaire, la seule agence immobilière de la plateforme. Toute demande d'achat ou de vente lui est transmise. Elle verse un parrainage annuel forfaitaire, jamais une commission par contact.",
+    partners: {
+      title: "Partenaires",
+      h1: "Touchez ceux qui vivent à l'étranger et préparent un achat au Portugal.",
+      lede: "Imóveis Portugal est un guide hebdomadaire en six éditions (Luxembourg, France, Suisse, Brésil, États-Unis, Israël), en portugais, anglais et français. Lancement le 1er décembre 2026.",
+      readersH: "Nos lecteurs",
+      readersP: "Des familles portugaises installées au Luxembourg, en France et en Suisse qui préparent une résidence secondaire, un retour ou leur retraite, et des Brésiliens, Américains et Israéliens qui préparent un achat pour s'installer ou investir. Ils lisent parce qu'ils ont un projet.",
+      foundingH: "Partenaire fondateur",
+      foundingP: "40 % de remise la première année, et le même prix garanti la deuxième. Dix places, un seul partenaire par catégorie.",
+      slots: `Places disponibles : ${left} sur ${total}`,
+      whyNowP: "Les partenaires fondateurs figurent dès le premier numéro, le 1er décembre, juste avant les fêtes, quand beaucoup de familles de l'étranger sont au Portugal et visitent des biens.",
+      tableH: "Formules",
+      cols: ["Formule", "Ce qui est inclus", "Prix fondateur (année 1)", "Prix normal"],
+      rows: [
+        ["Gold", "Exclusivité de catégorie sur toutes les éditions. Présence dans chaque newsletter, un article sponsorisé par mois et par édition, une rubrique questions-réponses et un rapport mensuel.", e(p.gold.founding), `${e(p.gold.list)} / an`],
+        ["Silver", "Une édition au choix. Présence dans la newsletter tous les quinze jours, un article sponsorisé par trimestre, une fiche dans l'annuaire des partenaires et un rapport mensuel.", e(p.silver.founding), `${e(p.silver.list)} / an`],
+        ["Bronze", "Une édition. Une fiche avec logo dans l'annuaire et une mention par mois dans la newsletter.", e(p.bronze.founding), `${e(p.bronze.list)} / an`],
+        ["Campagne promoteur", "Pour les promoteurs : un programme mis en avant dans les éditions choisies, avec newsletter, article et réseaux sociaux.", `à partir de ${e(p.campaignFrom)}`, "—"],
+      ],
+      vat: "Prix hors TVA.",
+      rulesH: "Nos règles",
+      rules: ["Tout contenu sponsorisé est signalé comme tel.", "Nous ne publions aucune promesse de rendement.", "Chaque partenaire paie un forfait, jamais une commission par contact.", "Les demandes d'achat vont uniquement à notre agence partenaire agréée."],
+      reportH: "Ce que vous recevez chaque mois",
+      reportP: "Un rapport par édition : abonnés, ouvertures, clics et demandes de contact liés à votre présence.",
+      ctaH: "Parlons 15 minutes",
+      book: "Réserver un appel",
+      formIntro: "Laissez vos coordonnées : nous répondons sous un jour ouvré.",
+    },
+    buy: {
+      title: "Trouver un bien",
+      h1: "Dites-nous quel bien vous cherchez au Portugal.",
+      lede: `Votre demande part chez notre agence partenaire, ${a.name} (licence AMI ${a.ami}), intermédiaire immobilier agréé, qui vous contacte avec des propositions. C'est gratuit pour vous.`,
+      stepsH: "Ensuite",
+      steps: ["Vous remplissez le formulaire, en deux minutes.", "L'agence partenaire vous contacte sous deux jours ouvrés.", "Si vous le souhaitez, elle organise des visites pendant votre séjour au Portugal."],
+      small: "Vos données servent uniquement à cette demande et ne sont transmises qu'à l'agence partenaire, avec votre accord.",
+    },
+    privacy: privacyFR(),
+    legal: legalFR(),
+  };
+
   return {
-    title: "Privacy",
-    h1: "Privacy policy",
-    draft: "Draft. Fields in square brackets will be filled in once the entity is set.",
-    sections: [
-      ["Controller", `${ph(e.name, "Entity")}, ${ph(e.address, "Address")}. Contact: ${ph(config.contactEmail, "email")}.`],
-      ["What data we process and why", `Newsletter: first name and email, with your consent (GDPR, art. 6(1)(a)). Buying requests: name, contact details and what you are looking for, with your consent, to send them to the partner real-estate agency ${ph(a.name, "agency")} (AMI ${ph(a.ami, "no.")}). Partner enquiries: business details, to reply to your request (art. 6(1)(b)). Requests to a partner ("Talk to a partner"): category, country, question and contact details, with your consent, to reply and, if you agree, to pass them to a partner in the chosen category (art. 6(1)(a)).`],
-      ["Who receives the data", "The partner agency, only for buying requests. The partner in the chosen category, only for requests to a partner and with your consent. Processors acting for us: beehiiv (newsletter, USA, with appropriate safeguards for the transfer), Tally (forms, EU), Cloudflare (hosting and cookie-free statistics) and Cal.com (call booking)."],
-      ["How long", "Newsletter: until you unsubscribe. Buying requests and requests to a partner: 12 months. Partner enquiries: for the business relationship and the applicable legal period."],
-      ["Your rights", "Access, rectification, erasure, objection, restriction, portability and withdrawal of consent at any time, by writing to the contact above. You can also complain to the data protection authority of your country (for example the CNPD in Portugal or in Luxembourg)."],
-      ["Cookies", "We use no advertising or statistics cookies. The language you choose is stored only in your browser (local storage), without cookies. Embedded forms may use technical cookies of their service."],
-    ],
+    lede: `Uma newsletter gratuita por semana: casas escolhidas, quanto custa mesmo comprar, crédito, impostos e o que muda ${away ? "quando se muda para Portugal" : "no regresso"}. Primeiro número a 1 de dezembro de 2026.`,
+    weeklyTitle: "Todas as semanas",
+    weekly: ["Casas à venda, escolhidas por região e orçamento.", "O custo completo de cada compra: IMT, imposto do selo, escritura e registo.", ...ED.topics.pt, "Respostas de advogados e bancos parceiros e da nossa agência parceira, sempre identificadas."],
+    formPending: (email: string) => (email ? `Formulário em configuração. Escreva-nos para ${email}.` : "Formulário disponível muito em breve."),
+    agencyNote: "A nossa agência parceira e a única agência imobiliária da plataforma. Todos os pedidos de compra ou venda de casa seguem para ela. Paga um patrocínio anual fixo, nunca uma comissão por contacto.",
+    partners: {
+      title: "Para parceiros",
+      h1: "Chegue a quem vive fora e está a preparar a compra de casa em Portugal.",
+      lede: "O Imóveis Portugal é um guia semanal com seis edições (Luxemburgo, França, Suíça, Brasil, Estados Unidos e Israel), em português, inglês e francês. Lançamos a 1 de dezembro de 2026.",
+      readersH: "Quem nos lê",
+      readersP: "Famílias portuguesas no Luxemburgo, em França e na Suíça que preparam uma casa de férias, o regresso ou a reforma, e brasileiros, americanos e israelitas que preparam uma compra para viver, reformar-se ou investir. Leem porque têm um projeto.",
+      foundingH: "Parceiro fundador",
+      foundingP: "40% de desconto no primeiro ano e o mesmo preço garantido no segundo. Dez lugares, um só parceiro por categoria.",
+      slots: `Lugares disponíveis: ${left} de ${total}`,
+      whyNowP: "Os parceiros fundadores aparecem desde o primeiro número, a 1 de dezembro, antes do Natal, quando muitas famílias emigradas estão em Portugal e visitam casas.",
+      tableH: "Pacotes",
+      cols: ["Pacote", "O que inclui", "Preço fundador (ano 1)", "Preço normal"],
+      rows: [
+        ["Gold", "Exclusivo na sua categoria em todas as edições. Presença em todas as newsletters, um artigo patrocinado por mês em cada edição, uma coluna de perguntas e respostas e um relatório mensal.", e(p.gold.founding), `${e(p.gold.list)} / ano`],
+        ["Silver", "Uma edição à escolha. Presença na newsletter de 15 em 15 dias, um artigo patrocinado por trimestre, entrada no diretório de parceiros e relatório mensal.", e(p.silver.founding), `${e(p.silver.list)} / ano`],
+        ["Bronze", "Uma edição. Entrada com logótipo no diretório de parceiros e uma menção por mês na newsletter.", e(p.bronze.founding), `${e(p.bronze.list)} / ano`],
+        ["Campanha de empreendimento", "Para promotores: um empreendimento em destaque nas edições escolhidas, com newsletter, artigo e redes sociais.", `a partir de ${e(p.campaignFrom)}`, "—"],
+      ],
+      vat: "Valores sem IVA.",
+      rulesH: "As nossas regras",
+      rules: ["Todo o conteúdo patrocinado é identificado como tal.", "Não publicamos promessas de rendimento.", "Cada parceiro paga um valor fixo, nunca uma comissão por contacto.", "Os pedidos de compra seguem apenas para a nossa agência parceira licenciada."],
+      reportH: "O que recebe todos os meses",
+      reportP: "Um relatório por edição: subscritores, aberturas, cliques e pedidos de contacto ligados à sua presença.",
+      ctaH: "Falemos 15 minutos",
+      book: "Marcar chamada",
+      formIntro: "Deixe os seus dados: respondemos num dia útil.",
+    },
+    buy: {
+      title: "Encontrar casa",
+      h1: "Diga-nos que casa procura em Portugal.",
+      lede: `O seu pedido segue para a nossa agência parceira, a ${a.name} (AMI ${a.ami}), mediadora imobiliária licenciada, que o contacta com opções. Não paga nada por isso.`,
+      stepsH: "A seguir",
+      steps: ["Preenche o formulário, em dois minutos.", "A agência parceira contacta-o em até dois dias úteis.", "Se quiser, marca visitas para quando estiver em Portugal."],
+      small: "Os seus dados são usados apenas para este pedido e partilhados só com a agência parceira, com o seu consentimento.",
+    },
+    privacy: privacyPT(),
+    legal: legalPT(),
   };
 }
 
+// ---------- Legal drafts (to be reviewed; placeholders filled from config) ----------
+const ph = (v: string, label: string) => v || `[${label}]`;
+const processors = {
+  pt: "beehiiv (envio da newsletter, EUA, com garantias adequadas para a transferência), Tally (formulários, UE), Cloudflare (alojamento e estatísticas sem cookies) e Cal.com (marcação de chamadas)",
+  en: "beehiiv (newsletter, USA, with appropriate safeguards for the transfer), Tally (forms, EU), Cloudflare (hosting and cookie-free statistics) and Cal.com (call booking)",
+  fr: "beehiiv (envoi de la newsletter, États-Unis, avec garanties appropriées pour le transfert), Tally (formulaires, UE), Cloudflare (hébergement et statistiques sans cookies) et Cal.com (prise de rendez-vous)",
+};
+
+function privacyPT() {
+  const e = config.entity, a = config.agency;
+  return {
+    title: "Privacidade", h1: "Política de privacidade",
+    draft: "Rascunho. Os campos entre parênteses retos são preenchidos quando a entidade estiver definida.",
+    sections: [
+      ["Responsável", `${ph(e.name, "Entidade")}, ${ph(e.address, "Morada")}. Contacto: ${ph(config.contactEmail, "email")}.`],
+      ["Que dados tratamos e porquê", `Newsletter: nome próprio e email, com o seu consentimento (RGPD, art. 6.º, n.º 1, al. a)), com dupla confirmação. Pedidos de compra: nome, contactos e o que procura, com o seu consentimento, para os enviarmos à agência parceira ${a.name} (AMI ${a.ami}). Pedidos de parceria: dados profissionais, para responder ao seu pedido (art. 6.º, n.º 1, al. b)). Pedidos a parceiros: categoria, país, pergunta e contacto, com o seu consentimento, para responder e, se o autorizar, para os passar a um parceiro da categoria escolhida.`],
+      ["Quem recebe os dados", `A agência parceira, só para pedidos de compra. O parceiro da categoria escolhida, só para pedidos a parceiros e com o seu consentimento. Prestadores que tratam dados por nossa conta: ${processors.pt}.`],
+      ["Durante quanto tempo", "Newsletter: até cancelar a subscrição. Pedidos de compra e pedidos a parceiros: 12 meses. Pedidos de parceria: durante a relação comercial e o prazo legal aplicável."],
+      ["Os seus direitos", "Acesso, retificação, apagamento, oposição, limitação, portabilidade e retirada do consentimento a qualquer momento, escrevendo para o contacto acima. Pode também apresentar queixa à autoridade de proteção de dados do seu país (por exemplo, a CNPD em Portugal ou no Luxemburgo)."],
+      ["Cookies", "Não usamos cookies de publicidade nem de estatística. A língua e a edição que escolhe ficam guardadas apenas no seu navegador (armazenamento local), sem cookies. Os formulários incorporados podem usar cookies técnicos do respetivo serviço."],
+    ],
+  };
+}
+function legalPT() {
+  const e = config.entity;
+  return {
+    title: "Aviso legal", h1: "Aviso legal",
+    draft: "Rascunho. Os campos entre parênteses retos são preenchidos quando a entidade estiver definida.",
+    sections: [
+      ["Editor", `${ph(e.name, "Entidade")}, ${ph(e.address, "Morada")}. Registo: ${ph(e.register, "n.º de registo")}. IVA: ${ph(e.vat, "n.º de IVA")}. Contacto: ${ph(config.contactEmail, "email")}.`],
+      ["Alojamento", "Cloudflare, Inc., 101 Townsend St., San Francisco, CA 94107, EUA."],
+      ["Conteúdo", "Os artigos são informativos e não substituem aconselhamento jurídico, fiscal ou financeiro. O conteúdo patrocinado é sempre identificado."],
+      ["Agência parceira", `${config.agency.name}, AMI ${config.agency.ami}, mediadora imobiliária licenciada. O Imóveis Portugal não faz mediação imobiliária.`],
+    ],
+  };
+}
+function privacyFR() {
+  const e = config.entity, a = config.agency;
+  return {
+    title: "Confidentialité", h1: "Politique de confidentialité",
+    draft: "Brouillon. Les champs entre crochets seront complétés une fois l'entité définie.",
+    sections: [
+      ["Responsable du traitement", `${ph(e.name, "Entité")}, ${ph(e.address, "Adresse")}. Contact : ${ph(config.contactEmail, "e-mail")}.`],
+      ["Données traitées et finalités", `Newsletter : prénom et e-mail, avec votre consentement (RGPD, art. 6, par. 1, a)) et double confirmation. Demandes d'achat : nom, coordonnées et critères de recherche, avec votre consentement, transmis à l'agence partenaire ${a.name} (AMI ${a.ami}). Demandes de partenariat : données professionnelles, pour répondre à votre demande (art. 6, par. 1, b)). Demandes à un partenaire : catégorie, pays, question et coordonnées, avec votre consentement, pour répondre et, si vous l'acceptez, pour les transmettre à un partenaire de la catégorie choisie.`],
+      ["Destinataires", `L'agence partenaire, uniquement pour les demandes d'achat. Le partenaire de la catégorie choisie, uniquement pour les demandes à un partenaire et avec votre accord. Sous-traitants : ${processors.fr}.`],
+      ["Durée de conservation", "Newsletter : jusqu'à votre désinscription. Demandes d'achat et demandes à un partenaire : 12 mois. Demandes de partenariat : pendant la relation commerciale et la durée légale applicable."],
+      ["Vos droits", "Accès, rectification, effacement, opposition, limitation, portabilité et retrait du consentement à tout moment, en écrivant au contact ci-dessus. Vous pouvez aussi saisir l'autorité de protection des données de votre pays (CNIL en France, CNPD au Luxembourg, PFPDT en Suisse)."],
+      ["Cookies", "Aucun cookie publicitaire ni de mesure d'audience. La langue et l'édition choisies sont enregistrées uniquement dans votre navigateur (stockage local), sans cookie. Les formulaires intégrés peuvent utiliser des cookies techniques de leur service."],
+    ],
+  };
+}
+function legalFR() {
+  const e = config.entity;
+  return {
+    title: "Mentions légales", h1: "Mentions légales",
+    draft: "Brouillon. Les champs entre crochets seront complétés une fois l'entité définie.",
+    sections: [
+      ["Éditeur", `${ph(e.name, "Entité")}, ${ph(e.address, "Adresse")}. Immatriculation : ${ph(e.register, "n° d'immatriculation")}. TVA : ${ph(e.vat, "n° de TVA")}. Contact : ${ph(config.contactEmail, "e-mail")}.`],
+      ["Hébergeur", "Cloudflare, Inc., 101 Townsend St., San Francisco, CA 94107, États-Unis."],
+      ["Contenu", "Les articles sont informatifs et ne remplacent pas un conseil juridique, fiscal ou financier. Le contenu sponsorisé est toujours signalé."],
+      ["Agence partenaire", `${config.agency.name}, licence AMI ${config.agency.ami}, intermédiaire immobilier agréé. Imóveis Portugal n'exerce pas d'activité d'intermédiation immobilière.`],
+    ],
+  };
+}
+function privacyEN() {
+  const e = config.entity, a = config.agency;
+  return {
+    title: "Privacy", h1: "Privacy policy",
+    draft: "Draft. Fields in square brackets will be filled in once the entity is set up.",
+    sections: [
+      ["Controller", `${ph(e.name, "Entity")}, ${ph(e.address, "Address")}. Contact: ${ph(config.contactEmail, "email")}.`],
+      ["What data we process and why", `Newsletter: first name and email, with your consent (GDPR, art. 6(1)(a)) and double opt-in. Buying requests: name, contact details and what you're looking for, with your consent, to pass them to our partner agency ${a.name} (AMI ${a.ami}). Partner inquiries: business details, to reply to your request (art. 6(1)(b)). Requests to a partner: category, country, question and contact details, with your consent, to reply and, if you agree, to pass them to a partner in the chosen category.`],
+      ["Who receives the data", `The partner agency, only for buying requests. The partner in the chosen category, only for requests to a partner and with your consent. Processors acting for us: ${processors.en}.`],
+      ["How long we keep it", "Newsletter: until you unsubscribe. Buying requests and requests to a partner: 12 months. Partner inquiries: for the business relationship and the applicable legal period."],
+      ["Your rights", "Access, correction, deletion, objection, restriction, portability and withdrawal of consent at any time, by writing to the contact above. You can also file a complaint with the data protection authority of your country, or with Portugal's CNPD."],
+      ["Cookies", "We use no advertising or analytics cookies. The language and edition you choose are stored only in your browser (local storage), without cookies. Embedded forms may use technical cookies from their service."],
+    ],
+  };
+}
 function legalEN() {
   const e = config.entity;
   return {
-    title: "Legal notice",
-    h1: "Legal notice",
-    draft: "Draft. Fields in square brackets will be filled in once the entity is set.",
+    title: "Legal notice", h1: "Legal notice",
+    draft: "Draft. Fields in square brackets will be filled in once the entity is set up.",
     sections: [
       ["Publisher", `${ph(e.name, "Entity")}, ${ph(e.address, "Address")}. Registration: ${ph(e.register, "registration no.")}. VAT: ${ph(e.vat, "VAT no.")}. Contact: ${ph(config.contactEmail, "email")}.`],
       ["Hosting", "Cloudflare, Inc., 101 Townsend St., San Francisco, CA 94107, USA."],
-      ["Content", "Articles are for information only and do not replace legal, tax or financial advice. Sponsored content is always labelled."],
+      ["Content", "Articles are for information only and don't replace legal, tax or financial advice. Sponsored content is always labeled."],
+      ["Partner agency", `${config.agency.name}, AMI license ${config.agency.ami}, a licensed real-estate broker. Imóveis Portugal does not act as a real-estate intermediary.`],
     ],
   };
 }
