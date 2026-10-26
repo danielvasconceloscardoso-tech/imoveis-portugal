@@ -65,3 +65,4 @@ One line per decision: date · decision · who decided.
 - 2026-10-26 · D46: every country journey adds the sell-side ("Quanto vale a casa da família?" valuation request routed to the partner agency) and the renovate-and-rent stage (architects, builders, furnishing, rental management as partner placements) · Daniel
 - 2026-10-26 · D47: Daniel's Portuguese real-estate investors database becomes the "Imóveis Portugal Data" line and the developer prospect source; personal contact details stay outside the repo (hard rule 3) · Daniel
 - 2026-10-26 · D48: no paid buyer membership or Founders' Circle; no Diaspora Buyer Index product · Daniel
+- 2026-10-26 · D49: build the 3D map now with 10 years of INE prices and rents, yield, momentum, comparable places and human-reviewed area briefs; no chat on the map; embeds show only "Powered by Imóveis Portugal" plus the required data credits; boundaries from OpenStreetMap (ODbL) until DGT confirms commercial use of CAOP · Daniel
