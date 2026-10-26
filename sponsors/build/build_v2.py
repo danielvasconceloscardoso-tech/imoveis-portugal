@@ -14,7 +14,7 @@ REPO = os.path.dirname(HERE)
 PRICES = {"Gold": 4800, "Silver": 1800, "Bronze": 540, "Campaign": 1500,
           "Featured listings": 1200, "Affiliate": 600, "Affiliate + sponsor": 1800,
           # price list v3 (prompt 15, proposal): founding prices, list minus 40% for the first 10
-          "Verified Partner": 1080, "Featured Partner": 2880, "Bank Partner": 5400, "Developer campaign": 2500, "Private Partner": 15000}
+          "Verified Partner": 1080, "Featured Partner": 2880, "Bank Partner": 5400, "Developer campaign": 2500, "Wealth Partner": 15000}
 PROB = {"A_recent": 0.25, "A_old": 0.15, "B": 0.12, "C": 0.04, "small_bonus": 0.05}
 SPEED = {"S": 1.5, "M": 1.0, "L": 0.6}
 
@@ -157,7 +157,7 @@ basis = {"Gold": "8,000 €/yr list price, 40% founding discount", "Silver": "3,
          "Featured Partner": "v3 proposal: 4,800 € per edition per year, 40% founding discount",
          "Bank Partner": "v3 proposal: 9,000 to 15,000 € per year, founding price on the low end",
          "Developer campaign": "v3 proposal: from 2,500 € per campaign",
-         "Private Partner": "v3 proposal (D33): 25,000 to 50,000 € per year, founding price on the low end"}
+         "Wealth Partner": "v3 proposal (D33, renamed D52): 25,000 to 50,000 € per year, founding price on the low end"}
 for i, (k, v) in enumerate(PRICES.items(), 4):
     st.cell(row=i, column=1, value=k).font = B
     c = st.cell(row=i, column=2, value=v); c.font = BLUE; c.fill = YEL; c.number_format = EUR

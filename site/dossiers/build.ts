@@ -131,7 +131,7 @@ const get = (k: string, d = "") => { const i = args.indexOf(`--${k}`); return i 
 const out = join(process.cwd(), "public", "dossiers");
 mkdirSync(out, { recursive: true });
 const jobs: In[] = args.includes("--samples")
-  ? (["compra", "zona", "private"] as Type[]).map((type) => ({ type, ed: "lu" as EdCode, lang: "pt" as Lang, budget: type === "private" ? 3000000 : 450000, area: type === "private" ? "cascais" : "porto", purpose: "holiday" as const, out: `exemplo-${type}-lu-pt` }))
+  ? (["compra", "zona", "private"] as Type[]).map((type) => ({ type, ed: "lu" as EdCode, lang: "pt" as Lang, budget: type === "private" ? 3000000 : 450000, area: type === "private" ? "cascais" : "porto", purpose: "holiday" as const, out: `exemplo-${type === "private" ? "patrimonio" : type}-lu-pt` }))
   : [{ type: get("type", "compra") as Type, ed: get("ed", "lu") as EdCode, lang: get("lang", "pt") as Lang, budget: Number(get("budget", "450000")), area: get("area", "porto"), purpose: get("purpose", "holiday") as In["purpose"], out: get("out", "dossie") }];
 const browser = await chromium.launch();
 const pg = await browser.newPage();

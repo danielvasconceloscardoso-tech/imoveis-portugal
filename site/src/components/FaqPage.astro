@@ -17,6 +17,9 @@ const talk = pathFor(lang, ed, "talk");
 const src = new Sources();
 // Practice questions also offer the two calls with the partner agency (prompt 11, D19).
 const PRACTICE = ["find", "timing", "cpcv", "buy-abroad"];
+// D52: for a high budget (from the map, the path or a link) these questions move to the top of their stage; the rest
+// stays as it is. Nothing is labelled and the threshold is never shown.
+const HIGH_FIRST = ["ifici", "inherit", "visa", "yearly", "lawyer"];
 const items = faqFor(ed, lang).map((it) => {
   const facts = (it.facts || []).map((id) => FACTS[id]);
   const checked = facts.map((f) => f.checked_on).sort().pop();
@@ -26,7 +29,8 @@ const items = faqFor(ed, lang).map((it) => {
   else if (config.partners[it.cta]) next = { href: `${talk}?cat=${it.cta}#form`, label: c(`faq.cta.${it.cta}`, lang), who: `${config.partners[it.cta]} · ${c("common.sponsored", lang)}` };
   else next = { href: `${talk}?cat=${it.cta}#form`, label: c("common.nav.talk", lang), who: c(`faq.who.${it.cta}`, lang) };
   const practice = PRACTICE.some((k) => it.id.endsWith(`-${k}`));
-  return { ...it, next, nums, checked, practice };
+  const high = HIGH_FIRST.some((k) => it.id.endsWith(`-${k}`));
+  return { ...it, next, nums, checked, practice, high };
 });
 const stages: Stage[] = ["before", "buying", "after"];
 const lastChecked = items.map((i) => i.checked).filter(Boolean).sort().pop();
@@ -60,7 +64,7 @@ const jsonLd = {
         <h2 id={`${s}-h`}>{c(`faq.stage.${s}.h`, lang)}</h2>
         <p>{c(`faq.stage.${s}.p`, lang)}</p>
         {items.filter((i) => i.stage === s).map((it) => (
-          <details class="qa" id={it.id}>
+          <details class="qa" id={it.id} data-high-first={it.high ? "" : undefined}>
             <summary>{it.q}</summary>
             <div class="a">
               <p>{it.a}{it.nums.map((n) => <a class="sup" href={`#fonte-${n}`}>{n}</a>)}</p>
@@ -74,6 +78,7 @@ const jsonLd = {
         ))}
       </section>
     ))}
+    <script is:inline>(function(){try{var b=Number(new URLSearchParams(location.search).get("budget"))||Number(localStorage.getItem("ip.budget"))||0;if(b<1e6)return;document.querySelectorAll("section.stage").forEach(function(sec){var first=sec.querySelector("details.qa");[].slice.call(sec.querySelectorAll("details[data-high-first]")).reverse().forEach(function(d){sec.insertBefore(d,sec.querySelector("details.qa"))})})}catch(e){}})();</script>
     <section class="sources-list" aria-labelledby="fontes">
       <h2 id="fontes" class="h-small">{c("common.sources", lang)}</h2>
       <ol>

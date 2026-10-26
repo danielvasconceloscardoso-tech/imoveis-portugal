@@ -20,7 +20,7 @@
   a: >-
     Sim, se for residente fiscal no Brasil. A casa entra em Bens e Direitos na declaração do IRPF, pelo
     valor de compra convertido em dólares e depois em reais, à cotação de venda do Banco Central na data da
-    compra. Se os seus bens no estrangeiro somarem 1 milhão de dólares ou mais a 31 de dezembro, entrega
+    compra. Se os seus bens no estrangeiro somarem 1 000 000 de dólares ou mais a 31 de dezembro, entrega
     também a declaração CBE.
   facts: [br-bens-exterior, br-cbe]
 

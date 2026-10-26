@@ -1,7 +1,8 @@
 ---
-// The Private section (prompt 18, D33, D36): budgets from 1 M€. Residence, tax on moving here, inheritance and
-// holding structures, each in the reader's words, answered with the official rule and ending with the partner
-// who handles it. Information only (EDITORIAL_POLICY.md). Partners: config.privatePartners once they sign.
+// Residence, tax and inheritance (prompt 18, D33, D36; renamed by D52): a station of the path, reached through the
+// path, the map, search and Google, never the menu, and never labelled by budget. Residence, tax on moving here,
+// inheritance and holding structures, each in the reader's words, answered with the official rule and ending with
+// the partner who handles it. Information only (EDITORIAL_POLICY.md). Partners: config.privatePartners once they sign.
 // Wording: COPY_DECK.md "private.*".
 import V2 from "../layouts/V2.astro";
 import { config } from "../config";
@@ -24,9 +25,9 @@ const items = [
 const sup = (ns: number[]) => ns.map((i) => `<a class="sup" href="#fonte-${i}">${i}</a>`).join("");
 const partners = config.privatePartners;
 ---
-<V2 lang={lang} ed={ed} page="private" title={`${c("private.h1", lang)} | Imóveis Portugal Private · ${edName(ed, lang)}`} description={c("private.lede", lang)} sticky={null}>
+<V2 lang={lang} ed={ed} page="private" title={`${c("private.h1", lang)} | Imóveis Portugal · ${edName(ed, lang)}`} description={c("private.lede", lang)} sticky={null}>
   <div class="frame read ph private-head">
-    <p class="h-small">{c("private.title", lang)}</p>
+    <p class="h-small"><a href={pathFor(lang, ed, "journey")}>{c("private.title", lang)}</a></p>
     <h1>{c("private.h1", lang)}</h1>
     <p class="lede">{c("private.lede", lang)}</p>
   </div>
@@ -39,7 +40,7 @@ const partners = config.privatePartners;
         <a class="act" href={talk(x.cat)}>{c(x.btn, lang)}</a>
       </section>
     ))}
-    <p><a class="more" href={`${pathFor(lang, ed, "map")}?budget=5000000`}>{c("private.map", lang)}</a></p>
+    <p><a class="more" href={pathFor(lang, ed, "map")}>{c("private.map", lang)}</a></p>
     <section class="private-partners" aria-labelledby="p-partners">
       <h2 id="p-partners" class="h3">{c("private.partners.h", lang)}</h2>
       <p>{c("private.partners.p", lang)}</p>

@@ -4,7 +4,7 @@ import type { Lang } from "../i18n";
 
 export type PType = { key: "wealth" | "taxlegal" | "transfer" | "developers"; slug: Record<Lang, string>; kit: Lang[] };
 export const PTYPES: PType[] = [
-  { key: "wealth", slug: { pt: "banca-privada", en: "private-banks", fr: "banques-privees" }, kit: ["fr", "en"] },
+  { key: "wealth", slug: { pt: "gestao-de-patrimonio", en: "wealth-management", fr: "gestion-de-patrimoine" }, kit: ["fr", "en"] },  // D52: no "private" wording
   { key: "taxlegal", slug: { pt: "fiscal-e-juridico", en: "tax-and-legal", fr: "fiscal-et-juridique" }, kit: ["pt", "fr", "en"] },
   { key: "transfer", slug: { pt: "transferencias", en: "money-transfer", fr: "transferts" }, kit: ["en", "fr", "pt"] },
   { key: "developers", slug: { pt: "promotores", en: "developers", fr: "promoteurs" }, kit: ["pt", "en"] },

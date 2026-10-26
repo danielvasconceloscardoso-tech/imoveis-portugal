@@ -20,7 +20,7 @@
   a: >-
     Yes, if you're a Brazilian tax resident. The home goes under Bens e Direitos on the IRPF return, at the
     purchase price converted to dollars and then to reais, at the Banco Central selling rate on the purchase
-    date. If your assets abroad add up to US$1 million or more on December 31, you also file the CBE
+    date. If your assets abroad add up to US$1,000,000 or more on December 31, you also file the CBE
     declaration.
   facts: [br-bens-exterior, br-cbe]
 

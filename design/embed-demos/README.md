@@ -1,6 +1,6 @@
 # Map embed demos (prompt 25 §3), not published
 
-Three placeholder pages that show the embed snippet in use. The brands are invented ("Jornal Exemplo", "Promotor Exemplo", "Banco Exemplo"). They load the map from the branch preview; open them locally in a browser.
+Three placeholder pages that show the embed snippet in use. The brands are invented ("Jornal Exemplo", "Example Developer", "Banco Exemplo"). The developer and bank demos are in English (D51); being private, the developer demo keeps a 5 M€ example (D52). They load the map from the branch preview; open them locally in a browser.
 
 Snippet (any site):
 

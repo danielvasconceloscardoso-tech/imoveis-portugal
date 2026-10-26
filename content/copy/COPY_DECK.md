@@ -10,6 +10,16 @@ How to edit:
 
 ## common
 
+### navx.faq
+- PT: Perguntas
+- EN: FAQ
+- FR: Questions
+
+### navx.journey
+- PT: O seu percurso
+- EN: Your path
+- FR: Votre parcours
+
 ### nav.dossiers
 - PT: Dossiês
 - EN: Dossiers
@@ -76,9 +86,9 @@ How to edit:
 - FR: Nos partenaires
 
 ### nav.private
-- PT: Private
-- EN: Private
-- FR: Private
+- PT: Residência, impostos e herança
+- EN: Residence, tax and inheritance
+- FR: Résidence, fiscalité et succession
 
 ### close
 - PT: Fechar
@@ -96,9 +106,9 @@ How to edit:
 - FR: Partenaires
 
 ### navx.private
-- PT: Private
-- EN: Private
-- FR: Private
+- PT: Residência, impostos e herança
+- EN: Residence, tax and inheritance
+- FR: Résidence, fiscalité et succession
 
 ### navx.sims
 - PT: Simuladores
@@ -975,14 +985,14 @@ How to edit:
 - FR: Lancements
 
 ### place.private.p
-- PT: Residência, IFICI, herança e estruturas de detenção, para orçamentos a partir de 1 milhão de euros, em todos os países.
-- EN: Residence, IFICI, inheritance and holding structures, for budgets from €1 million, in every country.
-- FR: Résidence, IFICI, succession et structures de détention, pour les budgets à partir d'un million d'euros, dans tous les pays.
+- PT: As etapas sobre residência, IFICI, herança nos dois países e estruturas de detenção, em todos os países.
+- EN: The steps on residence, IFICI, inheritance across two countries and holding structures, in every country.
+- FR: Les étapes sur la résidence, l'IFICI, la succession entre deux pays et les structures de détention, dans tous les pays.
 
 ### place.private.h
-- PT: A secção Private
-- EN: The Private section
-- FR: La section Private
+- PT: Residência, impostos e herança
+- EN: Residence, tax and inheritance
+- FR: Résidence, fiscalité et succession
 
 ### place.checkpoint.p
 - PT: Em cada país, cada passo do percurso termina com o parceiro que o resolve: banco, advogado, consultor fiscal, transferências. Até três por passo e por país.
@@ -1035,9 +1045,9 @@ How to edit:
 - FR: Avant le lancement, avec des chiffres réels
 
 ### why.p
-- PT: Para um advogado, um processo de compra. Para um banco, um crédito. Para um promotor, uma venda. Para um banco privado, um cliente para muitos anos.
-- EN: For a lawyer, one purchase file. For a bank, one mortgage. For a developer, one sale. For a private bank, a client for many years.
-- FR: Pour un avocat, un dossier d'achat. Pour une banque, un crédit. Pour un promoteur, une vente. Pour une banque privée, un client pour des années.
+- PT: Para um advogado, um processo de compra. Para um banco, um crédito. Para um promotor, uma venda. Para um gestor de património, um cliente para muitos anos.
+- EN: For a lawyer, one purchase file. For a bank, one mortgage. For a developer, one sale. For a wealth manager, a client for many years.
+- FR: Pour un avocat, un dossier d'achat. Pour une banque, un crédit. Pour un promoteur, une vente. Pour un gestionnaire de patrimoine, un client pour des années.
 
 ### why.h
 - PT: Um cliente paga o ano
@@ -1055,9 +1065,9 @@ How to edit:
 - FR: Sur la carte et dans les listes « parler à un partenaire » de votre catégorie et de vos éditions.
 
 ### inventory.6
-- PT: Na secção Private, para orçamentos a partir de 1 milhão de euros.
-- EN: In the Private section, for budgets from €1 million.
-- FR: Dans la section Private, pour les budgets à partir d'un million d'euros.
+- PT: Nas etapas sobre residência, IFICI, herança e estruturas de detenção.
+- EN: In the steps on residence, IFICI, inheritance and holding structures.
+- FR: Dans les étapes sur la résidence, l'IFICI, la succession et les structures de détention.
 
 ### inventory.4
 - PT: Num capítulo do guia gratuito.
@@ -2484,6 +2494,11 @@ How to edit:
 
 ## map
 
+### currency
+- PT: Moeda
+- EN: Currency
+- FR: Devise
+
 ### img.src
 - PT: Fonte: INE, {quarter}. Estatísticas oficiais, não é uma avaliação.
 - EN: Source: INE, {quarter}. Official statistics, not a valuation.
@@ -2795,9 +2810,9 @@ How to edit:
 - FR: Voir la page de la commune
 
 ### a.private
-- PT: Para orçamentos a partir de 1 milhão de euros, a secção Private
-- EN: For budgets from €1 million, the Private section
-- FR: Pour les budgets à partir d'un million d'euros, la section Private
+- PT: Residência, impostos e herança
+- EN: Residence, tax and inheritance
+- FR: Résidence, fiscalité et succession
 
 ### share
 - PT: Copiar a ligação
@@ -2899,19 +2914,19 @@ How to edit:
 ## private
 
 ### qa.h
-- PT: As questões que mais pesam a partir de 1 milhão
-- EN: The questions that matter most from €1 million
-- FR: Les questions qui comptent à partir d'un million
+- PT: As questões a preparar com os seus consultores
+- EN: The questions to prepare with your advisers
+- FR: Les questions à préparer avec vos conseillers
 
 ### title
-- PT: Private
-- EN: Private
-- FR: Private
+- PT: O seu percurso
+- EN: Your path
+- FR: Votre parcours
 
 ### h1
-- PT: Para orçamentos a partir de 1 milhão de euros
-- EN: For budgets from €1 million
-- FR: Pour les budgets à partir d'un million d'euros
+- PT: Residência, impostos e herança
+- EN: Residence, tax and inheritance
+- FR: Résidence, fiscalité et succession
 
 ### lede
 - PT: Residência, impostos de quem passa a viver cá, herança e estruturas de detenção: a regra oficial de cada questão e o parceiro que a trata consigo. Informação, não aconselhamento.
@@ -2954,9 +2969,9 @@ How to edit:
 - FR: Je vais posséder plus d'un bien.
 
 ### aimi.a
-- PT: Além do IMI de cada casa, o adicional ao IMI (AIMI) incide sobre a soma dos valores patrimoniais acima de 600 000 € por pessoa: 0,7%, com taxas marginais de 1% acima de 1 milhão e 1,5% acima de 2 milhões. Um consultor fiscal parceiro faz as contas ao seu património.
-- EN: Besides each home's IMI, the additional IMI (AIMI) applies to the sum of tax values above €600,000 per person: 0.7%, with marginal rates of 1% above €1 million and 1.5% above €2 million. A partner tax adviser runs the numbers on your holdings.
-- FR: En plus de l'IMI de chaque bien, l'IMI additionnel (AIMI) porte sur la somme des valeurs fiscales au-delà de 600 000 € par personne : 0,7 %, avec des taux marginaux de 1 % au-delà d'un million et de 1,5 % au-delà de 2 millions. Un conseiller fiscal partenaire fait le calcul sur votre patrimoine.
+- PT: Além do IMI de cada casa, o adicional ao IMI (AIMI) incide sobre a soma dos valores patrimoniais acima de 600 000 € por pessoa: 0,7%, com taxas marginais de 1% acima de 1 000 000 € e 1,5% acima de 2 000 000 €. Um consultor fiscal parceiro faz as contas ao seu património.
+- EN: Besides each home's IMI, the additional IMI (AIMI) applies to the sum of tax values above €600,000 per person: 0.7%, with marginal rates of 1% above €1,000,000 and 1.5% above €2,000,000. A partner tax adviser runs the numbers on your holdings.
+- FR: En plus de l'IMI de chaque bien, l'IMI additionnel (AIMI) porte sur la somme des valeurs fiscales au-delà de 600 000 € par personne : 0,7 %, avec des taux marginaux de 1 % au-delà de 1 000 000 € et de 1,5 % au-delà de 2 000 000 €. Un conseiller fiscal partenaire fait le calcul sur votre patrimoine.
 
 ### holding.q
 - PT: Posso comprar em nome de uma sociedade?
@@ -2969,9 +2984,9 @@ How to edit:
 - FR: Oui. Une société paie l'AIMI à 0,4 %, ou 0,7 % si le bien est à l'usage personnel de ses associés ou dirigeants. Si la société est établie, ou contrôlée depuis, un territoire à régime fiscal privilégié figurant sur la liste des Finances, l'IMT est de 10 % sans exonération et l'IMI de 7,5 % par an. Un conseiller fiscal et un avocat partenaires comparent l'achat en nom propre et par société.
 
 ### bank.q
-- PT: Prefiro tratar o crédito com um banco privado.
-- EN: A private bank for the loan.
-- FR: Je préfère passer par une banque privée pour le crédit.
+- PT: Prefiro tratar o crédito com o meu banco de sempre.
+- EN: I would rather arrange the loan with my own bank.
+- FR: Je préfère passer par ma banque pour le crédit.
 
 ### bank.a
 - PT: Os limites são os mesmos para todos: até 90% do valor para habitação própria e 80% para outros fins (Banco de Portugal). Um banco parceiro trata do crédito e da relação com o seu património.
@@ -2984,19 +2999,19 @@ How to edit:
 - FR: Les partenaires de cette section
 
 ### partners.p
-- PT: Bancos privados, gestores de património, consultores fiscais e advogados com clientes que compram a partir de 1 milhão de euros. Cada um aparece com a sua licença e a indicação de patrocinado. No máximo cinco por edição.
-- EN: Private banks, wealth managers, tax advisers and lawyers whose clients buy from €1 million. Each is shown with its licence and the sponsored label. Five per edition at most.
-- FR: Banques privées, gestionnaires de patrimoine, conseillers fiscaux et avocats dont les clients achètent à partir d'un million d'euros. Chacun apparaît avec sa licence et la mention sponsorisé. Cinq au plus par édition.
+- PT: Gestores de património, bancos, consultores fiscais e advogados que acompanham compras feitas a partir do estrangeiro. Cada um aparece com a sua licença e a indicação de patrocinado. No máximo cinco por edição.
+- EN: Wealth managers, banks, tax advisers and lawyers who work on purchases made from abroad. Each is shown with its licence and the sponsored label. Five per edition at most.
+- FR: Gestionnaires de patrimoine, banques, conseillers fiscaux et avocats qui accompagnent les achats faits depuis l'étranger. Chacun apparaît avec sa licence et la mention sponsorisé. Cinq au plus par édition.
 
 ### partners.none
-- PT: Os primeiros parceiros Private são anunciados antes do lançamento. Até lá, o seu pedido segue para a categoria certa na página Falar com um parceiro.
-- EN: The first Private partners are announced before launch. Until then, your request goes to the right category on the Talk to a partner page.
-- FR: Les premiers partenaires Private sont annoncés avant le lancement. D'ici là, votre demande va à la bonne catégorie sur la page Parler à un partenaire.
+- PT: Os primeiros parceiros destas etapas são anunciados antes do lançamento. Até lá, o seu pedido segue para a categoria certa na página Falar com um parceiro.
+- EN: The first partners for these steps are announced before launch. Until then, your request goes to the right category on the Talk to a partner page.
+- FR: Les premiers partenaires de ces étapes sont annoncés avant le lancement. D'ici là, votre demande va à la bonne catégorie sur la page Parler à un partenaire.
 
 ### map
-- PT: Ver no mapa o que 5 e 10 milhões de euros compram
-- EN: See on the map what €5 million and €10 million buy
-- FR: Voir sur la carte ce que permettent 5 et 10 millions d'euros
+- PT: Ver no mapa o que o seu orçamento compra
+- EN: See on the map what your budget buys
+- FR: Voir sur la carte ce que permet votre budget
 
 ## kit
 
@@ -3016,29 +3031,29 @@ How to edit:
 - FR: Ce que vous obtenez
 
 ### wealth.h
-- PT: Para bancos privados e gestores de património
-- EN: For private banks and wealth managers
-- FR: Pour les banques privées et les gestionnaires de patrimoine
+- PT: Para gestores de património e bancos
+- EN: For wealth managers and banks
+- FR: Pour les gestionnaires de patrimoine et les banques
 
 ### wealth.label
-- PT: Banca privada e património
-- EN: Private banking and wealth
-- FR: Banque privée et patrimoine
+- PT: Gestão de património e banca
+- EN: Wealth management and banking
+- FR: Gestion de patrimoine et banque
 
 ### wealth.p
-- PT: Os seus clientes no Luxemburgo, na Suíça e em França que compram em Portugal entre 1 e 10 milhões de euros leem-nos enquanto preparam a compra: residência, IFICI, herança e estruturas de detenção. O seu nome aparece ao lado da resposta oficial a cada uma destas questões.
-- EN: Your clients in Luxembourg, Switzerland and France who buy in Portugal for €1 million to €10 million read us while they prepare the purchase: residence, IFICI, inheritance and holding structures. Your name appears next to the official answer to each of these questions.
-- FR: Vos clients au Luxembourg, en Suisse et en France qui achètent au Portugal entre 1 et 10 millions d'euros nous lisent pendant qu'ils préparent leur achat : résidence, IFICI, succession et structures de détention. Votre nom figure à côté de la réponse officielle à chacune de ces questions.
+- PT: Os seus clientes no Luxemburgo, na Suíça e em França que compram casa em Portugal leem-nos enquanto preparam a compra: residência, IFICI, herança e estruturas de detenção. O seu nome aparece ao lado da resposta oficial a cada uma destas questões.
+- EN: Your clients in Luxembourg, Switzerland and France who buy a home in Portugal read us while they prepare the purchase: residence, IFICI, inheritance and holding structures. Your name appears next to the official answer to each of these questions.
+- FR: Vos clients au Luxembourg, en Suisse et en France qui achètent au Portugal nous lisent pendant qu'ils préparent leur achat : résidence, IFICI, succession et structures de détention. Votre nom figure à côté de la réponse officielle à chacune de ces questions.
 
 ### wealth.get.1
-- PT: Perfil com a sua licença na secção Private, junto às respostas sobre residência, herança e estruturas de detenção.
-- EN: A profile with your licence in the Private section, next to the answers on residence, inheritance and holding structures.
-- FR: Un profil avec votre licence dans la section Private, à côté des réponses sur la résidence, la succession et les structures de détention.
+- PT: Perfil com a sua licença nas etapas sobre residência, herança e estruturas de detenção.
+- EN: A profile with your licence in the steps on residence, inheritance and holding structures.
+- FR: Un profil avec votre licence dans les étapes sur la résidence, la succession et les structures de détention.
 
 ### wealth.get.2
-- PT: Uma posição no mapa para orçamentos a partir de 1 milhão de euros.
-- EN: A map position for budgets from €1 million.
-- FR: Une position sur la carte pour les budgets à partir d'un million d'euros.
+- PT: Presença no mapa e no percurso dos leitores com os orçamentos que acompanha.
+- EN: A place on the map and on the path of readers with the budgets you serve.
+- FR: Une place sur la carte et dans le parcours des lecteurs aux budgets que vous accompagnez.
 
 ### wealth.get.3
 - PT: O seu nome no simulador de crédito, com a indicação «oferecido por».
@@ -3071,9 +3086,9 @@ How to edit:
 - FR: Un profil avec votre inscription à l'Ordre ou votre enregistrement professionnel, et des réponses signées aux questions de votre catégorie.
 
 ### taxlegal.get.2
-- PT: Na secção Private, junto às regras sobre IFICI, herança e sociedades.
-- EN: In the Private section, next to the rules on IFICI, inheritance and companies.
-- FR: Dans la section Private, à côté des règles sur l'IFICI, la succession et les sociétés.
+- PT: Nas etapas sobre IFICI, herança e sociedades.
+- EN: In the steps on IFICI, inheritance and companies.
+- FR: Dans les étapes sur l'IFICI, la succession et les sociétés.
 
 ### taxlegal.get.3
 - PT: Na página «Comprar a partir de fora, passo a passo» e na sua categoria da página Falar com um parceiro.
@@ -3151,9 +3166,9 @@ How to edit:
 - FR: Une mise en avant dans la newsletter des éditions choisies.
 
 ### developers.get.4
-- PT: A partir de 1 milhão de euros, presença na secção Private.
-- EN: From €1 million, a place in the Private section.
-- FR: À partir d'un million d'euros, une place dans la section Private.
+- PT: O seu empreendimento aparece primeiro aos leitores cujo orçamento lhe corresponde.
+- EN: Your development comes first for readers whose budget fits it.
+- FR: Votre programme apparaît en premier aux lecteurs dont le budget lui correspond.
 
 ### developers.rule
 - PT: Os pedidos de visita dos leitores seguem para a nossa agência parceira licenciada, que trabalha com o promotor.
@@ -3214,6 +3229,11 @@ How to edit:
 
 ## journey
 
+### cp.estate.h
+- PT: Património e forma de deter a casa
+- EN: Your holdings and how to hold the home
+- FR: Patrimoine et façon de détenir le bien
+
 ### from.il
 - PT: de Israel
 - EN: Israel
@@ -3255,9 +3275,9 @@ How to edit:
 - FR: De l'idée aux clés, depuis {from}
 
 ### lede
-- PT: Nove passos, da escolha da zona à venda ou à herança. Em cada um, as perguntas que se fazem {where}, a resposta oficial e o parceiro que trata desse passo.
-- EN: Nine steps, from choosing the area to selling or passing it on. At each one, the questions people ask {where}, the official answer and the partner who handles that step.
-- FR: Neuf étapes, du choix du secteur à la vente ou à la transmission. À chaque étape, les questions qu'on se pose {where}, la réponse officielle et le partenaire qui s'en charge.
+- PT: Passo a passo, da escolha da zona à venda ou à herança. Em cada um, as perguntas que se fazem {where}, a resposta oficial e o parceiro que trata desse passo.
+- EN: Step by step, from choosing the area to selling or passing it on. At each one, the questions people ask {where}, the official answer and the partner who handles that step.
+- FR: Étape par étape, du choix du secteur à la vente ou à la transmission. À chaque étape, les questions qu'on se pose {where}, la réponse officielle et le partenaire qui s'en charge.
 
 ### step
 - PT: Passo {n}
@@ -3470,9 +3490,9 @@ How to edit:
 - FR: Dois-je déclarer le bien au Brésil ?
 
 ### q.br.cbe.a
-- PT: Sim, em Bens e Direitos no IRPF, com o valor de compra em moeda estrangeira. Se os bens no exterior somarem 1 milhão de dólares ou mais a 31 de dezembro, há ainda a declaração CBE ao Banco Central.
-- EN: Yes, under Bens e Direitos in the IRPF return, with the purchase value in foreign currency. If assets abroad total US$1 million or more on 31 December, there is also the CBE declaration to the Central Bank.
-- FR: Oui, dans Bens e Direitos de l'IRPF, avec la valeur d'achat en devise. Si les avoirs à l'étranger atteignent 1 million de dollars au 31 décembre, il y a aussi la déclaration CBE à la Banque centrale.
+- PT: Sim, em Bens e Direitos no IRPF, com o valor de compra em moeda estrangeira. Se os bens no exterior somarem 1 000 000 de dólares ou mais a 31 de dezembro, há ainda a declaração CBE ao Banco Central.
+- EN: Yes, under Bens e Direitos in the IRPF return, with the purchase value in foreign currency. If assets abroad total US$1,000,000 or more on 31 December, there is also the CBE declaration to the Central Bank.
+- FR: Oui, dans Bens e Direitos de l'IRPF, avec la valeur d'achat en devise. Si les avoirs à l'étranger atteignent 1 000 000 de dollars au 31 décembre, il y a aussi la déclaration CBE à la Banque centrale.
 
 ### q.homeloan.q
 - PT: Posso pedir o crédito a um banco {where}?
@@ -3730,9 +3750,9 @@ How to edit:
 - FR: Et quand je transmets la maison à mes enfants ?
 
 ### q.inherit.a
-- PT: Em Portugal, filhos, cônjuge e pais estão isentos do imposto do selo de 10% sobre heranças e doações. Para orçamentos a partir de 1 milhão, a secção Private trata das estruturas de detenção.
-- EN: In Portugal, children, a spouse and parents are exempt from the 10% stamp duty on inheritances and gifts. For budgets from €1 million, the Private section covers holding structures.
-- FR: Au Portugal, enfants, conjoint et parents sont exonérés du droit de timbre de 10 % sur successions et donations. Pour les budgets à partir d'un million, la section Private traite des structures de détention.
+- PT: Em Portugal, filhos, cônjuge e pais estão isentos do imposto do selo de 10% sobre heranças e doações. As estruturas de detenção estão na etapa Residência, impostos e herança.
+- EN: In Portugal, children, a spouse and parents are exempt from the 10% stamp duty on inheritances and gifts. Holding structures are covered in the Residence, tax and inheritance step.
+- FR: Au Portugal, enfants, conjoint et parents sont exonérés du droit de timbre de 10 % sur successions et donations. Les structures de détention sont traitées dans l'étape Résidence, fiscalité et succession.
 
 ## dev
 
@@ -3777,6 +3797,11 @@ How to edit:
 - FR: Promoteurs partenaires ici : places disponibles
 
 ## consult
+
+### dedicated
+- PT: Um consultor dedicado acompanha o seu pedido.
+- EN: A dedicated adviser takes care of your request.
+- FR: Un conseiller dédié suit votre demande.
 
 ### title
 - PT: Consulta privada
@@ -3859,19 +3884,19 @@ How to edit:
 - FR: Pour préparer l'échange, ayez sous la main votre budget, les secteurs qui vous intéressent et, si vous l'avez, votre NIF.
 
 ### private.title
-- PT: Private desk
-- EN: Private desk
-- FR: Private desk
+- PT: Um consultor dedicado
+- EN: A dedicated adviser
+- FR: Un conseiller dédié
 
 ### private.h1
-- PT: O seu pedido chegou ao Private desk
-- EN: Your request has reached the Private desk
-- FR: Votre demande est arrivée au Private desk
+- PT: Um consultor dedicado acompanha o seu pedido
+- EN: A dedicated adviser is taking care of your request
+- FR: Un conseiller dédié suit votre demande
 
 ### private.p
-- PT: Obrigado. A {agency} acompanha pessoalmente as compras a partir de 1 milhão de euros e vai propor-lhe, por email, uma videochamada de 30 minutos dentro da janela que indicou.
-- EN: Thank you. {agency} personally handles purchases from €1 million and will email you to propose a 30-minute video call within the window you gave.
-- FR: Merci. {agency} accompagne personnellement les achats à partir d'un million d'euros et vous proposera par e-mail un appel vidéo de 30 minutes dans la période indiquée.
+- PT: Obrigado. A {agency} vai propor-lhe, por email, uma videochamada de 30 minutos dentro da janela que indicou.
+- EN: Thank you. {agency} will email you to propose a 30-minute video call within the window you gave.
+- FR: Merci. {agency} vous proposera par e-mail un appel vidéo de 30 minutes dans la période indiquée.
 
 ### private.aml
 - PT: Antes das visitas, a agência pede a identificação habitual e informação sobre a origem dos fundos. É um dever de todas as agências imobiliárias em Portugal.
@@ -4073,14 +4098,14 @@ How to edit:
 - FR: Un secteur en profondeur : dix ans de prix, loyers des nouveaux baux et rendement brut, comparaison avec les communes voisines, programmes partenaires signalés et comment y acheter depuis l'étranger.
 
 ### private.h
-- PT: Dossiê Private
-- EN: Private dossier
-- FR: Dossier Private
+- PT: Dossiê de residência e património
+- EN: Residence and estate dossier
+- FR: Dossier résidence et patrimoine
 
 ### private.p
-- PT: A partir de 1 milhão de euros: opções de residência, IFICI, herança nos dois países, questões de estrutura para discutir com os seus consultores, zonas de prestígio e apresentação a parceiros Private verificados.
-- EN: From €1 million: residence options, IFICI, inheritance across both countries, structuring questions to discuss with your advisers, prime areas and introductions to vetted Private partners.
-- FR: À partir d'un million d'euros : options de résidence, IFICI, succession dans les deux pays, questions de structuration à discuter avec vos conseillers, secteurs de prestige et mise en relation avec des partenaires Private vérifiés.
+- PT: Opções de residência, IFICI, herança nos dois países, questões de estrutura para discutir com os seus consultores, as zonas mais procuradas e apresentação a parceiros verificados.
+- EN: Residence options, IFICI, inheritance across both countries, structuring questions to discuss with your advisers, the most sought-after areas and introductions to vetted partners.
+- FR: Options de résidence, IFICI, succession dans les deux pays, questions de structuration à discuter avec vos conseillers, les secteurs les plus recherchés et mise en relation avec des partenaires vérifiés.
 
 ### price
 - PT: {price}, IVA incluído
@@ -4288,9 +4313,9 @@ How to edit:
 - FR: Résidence, fiscalité et structuration
 
 ### prime.h
-- PT: Zonas de prestígio
-- EN: Prime areas
-- FR: Secteurs de prestige
+- PT: As zonas mais procuradas
+- EN: The most sought-after areas
+- FR: Les secteurs les plus recherchés
 
 ### examples.h
 - PT: Exemplos de anúncios publicados
@@ -4328,14 +4353,14 @@ How to edit:
 - FR: Assurance, gestion du bien et coûts annuels avec plusieurs biens.
 
 ### intro.h
-- PT: Apresentação a parceiros Private
-- EN: Introductions to Private partners
-- FR: Mise en relation avec des partenaires Private
+- PT: Apresentação a parceiros
+- EN: Introductions to partners
+- FR: Mise en relation avec des partenaires
 
 ### intro.p
-- PT: Depois da leitura, apresentamos-lhe parceiros Private verificados para o seu país: banco privado, consultor fiscal e advogado. Cada um aparece com a sua licença e a indicação de patrocinado.
-- EN: After you read it, we introduce vetted Private partners for your country: private bank, tax adviser and lawyer. Each is shown with its licence and the sponsored label.
-- FR: Après lecture, nous vous mettons en relation avec des partenaires Private vérifiés pour votre pays : banque privée, conseiller fiscal et avocat. Chacun figure avec sa licence et la mention sponsorisé.
+- PT: Depois da leitura, apresentamos-lhe parceiros verificados para o seu país: gestor de património ou banco, consultor fiscal e advogado. Cada um aparece com a sua licença e a indicação de patrocinado.
+- EN: After you read it, we introduce vetted partners for your country: wealth manager or bank, tax adviser and lawyer. Each is shown with its licence and the sponsored label.
+- FR: Après lecture, nous vous mettons en relation avec des partenaires vérifiés pour votre pays : gestionnaire de patrimoine ou banque, conseiller fiscal et avocat. Chacun figure avec sa licence et la mention sponsorisé.
 
 ### sources.h
 - PT: Fontes

@@ -5,6 +5,7 @@ export const DTYPES: DType[] = ["compra", "zona", "private"];
 export const DOSSIER_SUB: Record<DType, Record<Lang, string>> = {
   compra: { pt: "dossie-de-compra", en: "purchase-dossier", fr: "dossier-d-achat" },
   zona: { pt: "relatorio-de-zona", en: "area-report", fr: "rapport-de-secteur" },
-  private: { pt: "dossie-private", en: "private-dossier", fr: "dossier-private" },
+  private: { pt: "dossie-de-residencia-e-patrimonio", en: "residence-and-estate-dossier", fr: "dossier-residence-et-patrimoine" },  // D52
 };
-export const SAMPLE = (t: DType) => `/dossiers/exemplo-${t}-lu-pt.pdf`;
+// Sample files: the third is named "patrimonio" (D52: no "Private" in any URL).
+export const SAMPLE = (t: DType) => `/dossiers/exemplo-${t === "private" ? "patrimonio" : t}-lu-pt.pdf`;

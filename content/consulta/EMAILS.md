@@ -13,16 +13,16 @@ Hello [name], thank you for your request. I'd suggest a 30-minute video call on 
 **FR** · Objet : Votre consultation privée · Imóveis Portugal
 Bonjour [nom], merci pour votre demande. Je vous propose un appel vidéo de 30 minutes le [date et heure, heure de Lisbonne], dans la période indiquée. Si un autre horaire vous convient mieux, répondez simplement à cet e-mail. Pour partir de votre situation, ayez sous la main votre budget, les secteurs qui vous intéressent et, si vous l'avez, votre NIF. À bientôt, [nom], Habinedita Gondomar (AMI 13250), agence partenaire d'Imóveis Portugal.
 
-## 2. Private desk (budget from 1 M€)
+## 2. Dedicated adviser (high budget; D52: the threshold and the word "Private" are never shown)
 
-**PT** · Assunto: Private desk · a sua consulta
-Olá [nome], obrigado pelo seu pedido. Acompanho pessoalmente as compras a partir de 1 milhão de euros e proponho uma videochamada de 30 minutos em [data e hora]. Antes das visitas, peço a identificação habitual e informação sobre a origem dos fundos, como a lei exige a todas as agências imobiliárias em Portugal (Lei 83/2017). Para as questões de residência, fiscalidade e estrutura, apresento-lhe depois os parceiros Private certos para o seu país. Com os melhores cumprimentos, [nome], Habinedita Gondomar (AMI 13250).
+**PT** · Assunto: A sua consulta · um consultor dedicado
+Olá [nome], obrigado pelo seu pedido. Vou acompanhá-lo pessoalmente e proponho uma videochamada de 30 minutos em [data e hora]. Antes das visitas, peço a identificação habitual e informação sobre a origem dos fundos, como a lei exige a todas as agências imobiliárias em Portugal (Lei 83/2017). Para as questões de residência, fiscalidade e estrutura, apresento-lhe depois os parceiros Private certos para o seu país. Com os melhores cumprimentos, [nome], Habinedita Gondomar (AMI 13250).
 
-**EN** · Subject: Private desk · your consultation
-Hello [name], thank you for your request. I personally handle purchases from €1 million and would suggest a 30-minute video call on [date and time]. Before viewings, I'll ask for the usual identification and information on the origin of funds, as the law requires of every estate agency in Portugal (Lei 83/2017). For residence, tax and structuring questions, I'll then introduce the right Private partners for your country. Kind regards, [name], Habinedita Gondomar (AMI 13250).
+**EN** · Subject: Your consultation · a dedicated adviser
+Hello [name], thank you for your request. I will personally take care of it and would suggest a 30-minute video call on [date and time]. Before viewings, I'll ask for the usual identification and information on the origin of funds, as the law requires of every estate agency in Portugal (Lei 83/2017). For residence, tax and structuring questions, I'll then introduce the right Private partners for your country. Kind regards, [name], Habinedita Gondomar (AMI 13250).
 
-**FR** · Objet : Private desk · votre consultation
-Bonjour [nom], merci pour votre demande. J'accompagne personnellement les achats à partir d'un million d'euros et vous propose un appel vidéo de 30 minutes le [date et heure]. Avant les visites, je vous demanderai les pièces d'identité habituelles et des informations sur l'origine des fonds, comme la loi l'exige de toute agence immobilière au Portugal (Lei 83/2017). Pour la résidence, la fiscalité et la structuration, je vous présenterai ensuite les partenaires Private adaptés à votre pays. Bien cordialement, [nom], Habinedita Gondomar (AMI 13250).
+**FR** · Objet : Votre consultation · un conseiller dédié
+Bonjour [nom], merci pour votre demande. Je la suivrai personnellement et vous propose un appel vidéo de 30 minutes le [date et heure]. Avant les visites, je vous demanderai les pièces d'identité habituelles et des informations sur l'origine des fonds, comme la loi l'exige de toute agence immobilière au Portugal (Lei 83/2017). Pour la résidence, la fiscalité et la structuration, je vous présenterai ensuite les partenaires Private adaptés à votre pays. Bien cordialement, [nom], Habinedita Gondomar (AMI 13250).
 
 ## 3. Not yet (timing over 12 months or not sure)
 

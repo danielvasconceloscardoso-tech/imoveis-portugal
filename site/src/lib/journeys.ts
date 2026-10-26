@@ -5,8 +5,9 @@
 import type { EdCode } from "../i18n";
 
 export type Role = "agency" | "developer" | "bank" | "fx" | "lawyer" | "tax" | "insurance" | "wealth";
-export type JQ = { id: string; a?: string; facts: string[]; cat: string; only?: EdCode[]; ask?: boolean; link?: "map" | "sims" | "private" | "prices" };
-export type Checkpoint = { k: string; roles: Role[]; qs: JQ[] };
+export type JQ = { id: string; a?: string; ck?: string; facts: string[]; cat: string; only?: EdCode[]; ask?: boolean; link?: "map" | "sims" | "private" | "prices" };
+// high: a station the path adds by itself when the reader's budget is high (D52); never labelled as such.
+export type Checkpoint = { k: string; roles: Role[]; qs: JQ[]; high?: boolean };
 const EU: EdCode[] = ["lu", "fr"];
 const NON_EU: EdCode[] = ["ch", "br", "us", "il"];
 const per = (id: string, cat: string, facts: Partial<Record<EdCode, string[]>>, ask: EdCode[] = []): JQ[] =>
@@ -60,6 +61,13 @@ export const JOURNEY: Checkpoint[] = [
     { id: "br.cplp", facts: ["pt-cplp-residence"], cat: "lawyer", only: ["br"] },
     { id: "ifici", facts: ["pt-ifici-20pct"], cat: "tax" },
     { id: "inherit", facts: ["pt-is-inheritance-exempt"], cat: "lawyer", link: "private" },
+  ] },
+  // D52: for high budgets, holdings, the wealth tax on property and how to hold the home, with wealth managers,
+  // banks and cross-border tax and legal firms in the partner slot. Copy shared with the residence page (private.*).
+  { k: "estate", high: true, roles: ["wealth", "tax", "lawyer"], qs: [
+    { id: "aimi", ck: "private.aimi", facts: ["pt-aimi-deduction", "pt-aimi-rates"], cat: "tax" },
+    { id: "holding", ck: "private.holding", facts: ["pt-aimi-rates", "pt-imt-offshore-10", "pt-imi-offshore-75"], cat: "tax", link: "private" },
+    { id: "bank", ck: "private.bank", facts: ["pt-ltv-limits"], cat: "bank" },
   ] },
 ];
 

@@ -24,9 +24,7 @@ const nf = new Intl.NumberFormat(HTML_LANG[lang]);
 const lastQ = PRICES.quarters[PRICES.quarters.length - 1];
 const qfmt = c("map.qfmt", lang);
 const qLabel = qfmt.replace("{q}", lastQ.slice(-1)).replace("{y}", lastQ.slice(0, 4));
-const PRESETS = [300000, 1000000, 5000000, 10000000];
 const METRICS = ["m2", "price", "growth", "yield"] as const;
-const short = (n: number) => (n >= 1e6 ? `${nf.format(n / 1e6)} M€` : `${nf.format(n / 1e3)} k€`);
 const pages = new Set(PLACES.map((p) => p.slug));
 const month = new Intl.DateTimeFormat(HTML_LANG[lang], { month: "long", year: "numeric" }).format(new Date(`${PRICES.mortgage.month}-15`));
 const labels = {
@@ -54,13 +52,16 @@ const id = `mapx-${mode}`;
 ---
 <div class={`mapx mapx-${mode}`} data-mapx data-lang={lang} data-locale={HTML_LANG[lang]} data-fx={fx ? fx.rate : ""} data-cur={cur ?? ""} data-mode={mode}>
   <div class="mapx-controls">
+    {/* D52: one budget field, no presets and no tiers; any amount, in euros or the reader's currency. */}
     <label class="mapx-budget">
       <span class="h-small">{c("map.budget.label", lang)}</span>
-      <span class="mapx-input"><input type="text" inputmode="numeric" value={nf.format(300000)} aria-label={c("map.budget.label", lang)} data-budget /><span aria-hidden="true">€</span></span>
+      <span class="mapx-input"><input type="text" inputmode="numeric" value={nf.format(Math.round(300000 * (cur && fx ? fx.rate : 1)))} aria-label={c("map.budget.label", lang)} data-budget /><span aria-hidden="true" data-cur-sign>{cur && fx ? cur : "€"}</span></span>
     </label>
-    <div class="mapx-presets" role="group" aria-label={c("map.budget.label", lang)}>
-      {PRESETS.map((p, i) => <button type="button" data-preset={p} aria-pressed={i === 0 ? "true" : "false"}>{short(p)}</button>)}
-    </div>
+    {cur && fx && (
+      <div class="mapx-cur" role="group" aria-label={c("map.currency", lang)}>
+        <button type="button" data-cur-pick={cur} aria-pressed="true">{cur}</button><button type="button" data-cur-pick="EUR" aria-pressed="false">EUR</button>
+      </div>
+    )}
     {fx && <p class="small mapx-local" data-local-tpl={c("map.local", lang, { local: "{local}", date: fmtDate(lang, "2026-10-23") })}></p>}
   </div>
   <div class="mapx-bar">

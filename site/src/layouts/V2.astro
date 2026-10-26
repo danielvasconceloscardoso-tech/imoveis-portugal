@@ -17,17 +17,15 @@ const { lang, ed, page, title, description, paths, noindex = false, ogType = "we
 const urlFor = (l: Lang) => paths ? paths[l] : pathFor(l, ed, page);
 const host = config.domainMode === "primary" ? config.primaryDomain : EDITIONS[ed].domain;
 const canonical = Astro.props.canonicalUrl ?? `https://${host}${urlFor(lang)}`;
-// Prompt 19 (D37): five items, one or two words each, never wrapping. Everything else sits under "Comprar"
-// (the step-by-step page links to it) or in the footer; the full list is in the mobile concierge menu.
+// Prompt 27 and D52: four items, never wrapping: the path, the map, the questions, the partners. Price trends and
+// calculators live inside the map and the path; the rest sits in the mobile concierge menu and the footer. No "Private".
 const nav: { k: string; target: PageKey; current: string[] }[] = [
-  { k: "buy", target: "casa", current: ["casa", "journey", "consult", "dossiers", "buy", "faq", "guide", "blog", "how", "talk"] },
-  { k: "map", target: "map", current: ["map"] },
-  { k: "sims", target: "sims", current: ["sims"] },
-  { k: "private", target: "private", current: ["private"] },
-  // Prompt 20 §3: the price section replaces "Parceiros" in the five; partners move to the menu and the footer.
-  { k: "prices", target: "data", current: ["data"] },
+  { k: "journey", target: "journey", current: ["journey", "casa", "buy", "consult", "dossiers", "guide", "private"] },
+  { k: "map", target: "map", current: ["map", "data", "sims"] },
+  { k: "faq", target: "faq", current: ["faq"] },
+  { k: "partners", target: "partners", current: ["partners", "ours", "talk"] },
 ];
-const more: PageKey[] = ["journey", "consult", "dossiers", "faq", "guide", "blog", "partners", "talk", "how"];
+const more: PageKey[] = ["casa", "data", "sims", "consult", "dossiers", "guide", "blog", "ours", "talk", "how"];
 const subscribe = `${pathFor(lang, ed, "home")}#subscrever`;
 // Default sticky action: the free guide from the home page, a partner from the help pages.
 const sticky: Sticky = Astro.props.sticky !== undefined ? Astro.props.sticky
@@ -116,7 +114,6 @@ const sticky: Sticky = Astro.props.sticky !== undefined ? Astro.props.sticky
               <li><a href={pathFor(lang, ed, "data")}>{c("common.nav.data", lang)}</a></li>
               <li><a href={pathFor(lang, ed, "faq")}>{c("common.nav.faq", lang)}</a></li>
               <li><a href={pathFor(lang, ed, "guide")}>{c("common.nav.guide", lang)}</a></li>
-              <li><a href={pathFor(lang, ed, "private")}>{c("common.nav.private", lang)}</a></li>
               <li><a href={pathFor(lang, ed, "partners")}>{c("common.nav.partners", lang)}</a></li>
               <li><a href={pathFor(lang, ed, "ours")}>{c("common.nav.ours", lang)}</a></li>
               <li><a href={pathFor(lang, ed, "talk")}>{c("common.nav.talk", lang)}</a></li>

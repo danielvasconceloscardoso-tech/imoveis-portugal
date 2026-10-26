@@ -32,9 +32,9 @@ export const config = {
   // Insurance partner (life and home cover) once signed, with its ASF registration (prompt 13). Empty = none yet.
   insurancePartner: { name: "", asf: "" },
 
-  // The Private section for budgets of 1 M€ and more (D33, prompt 18). The map links to it once it exists.
+  // The residence, tax and inheritance page (prompt 18, D33; D52: no "Private" label, reached through the path and map).
   privateLive: true,
-  // Private partners as they sign (name and licence, e.g. Banco de Portugal or CMVM registration). Public data only.
+  // Wealth Partners as they sign (name and licence, e.g. Banco de Portugal or CMVM registration). Public data only.
   privatePartners: [] as { name: string; licence: string }[],
   // Founding partners as they sign (prompt 18, "Our partners" page): category, name, licence. Public data only.
   foundingPartners: [] as { category: string; name: string; licence: string }[],

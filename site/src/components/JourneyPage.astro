@@ -1,5 +1,5 @@
 ---
-// "O seu percurso" (prompt 20 §2): the reader's country journey, nine checkpoints, each question answered from a
+// "O seu percurso" (prompt 20 §2, D52): the reader's country journey, nine checkpoints (a tenth for high budgets), each question answered from a
 // primary source with its superscript, ending with the partner button and an empty partner slot for that step.
 // Wording: COPY_DECK.md "journey.*"; data: src/lib/journeys.ts.
 import V2 from "../layouts/V2.astro";
@@ -26,17 +26,17 @@ const linkLabel = { map: "map.open", sims: "common.nav.sims", private: "common.n
     <p class="h-small">{c("journey.title", lang)} · {edName(ed, lang)}</p>
     <h1>{c("journey.h1", lang, vars)}</h1>
     <p class="lede">{c("journey.lede", lang, vars)}</p>
-    <ol class="jtoc">{steps.map((s, i) => <li><a href={`#p-${s.k}`}><span>{i + 1}</span>{c(`journey.cp.${s.k}.h`, lang)}</a></li>)}</ol>
+    <ol class="jtoc">{steps.map((s, i) => <li {...(s.high ? { hidden: true, "data-high": "" } : {})}><a href={`#p-${s.k}`}><span>{i + 1}</span>{c(`journey.cp.${s.k}.h`, lang)}</a></li>)}</ol>
   </div>
   <div class="frame read journey">
     {steps.map((s, i) => (
-      <section class="jstep" id={`p-${s.k}`} aria-labelledby={`h-${s.k}`}>
+      <section class="jstep" id={`p-${s.k}`} aria-labelledby={`h-${s.k}`} {...(s.high ? { hidden: true, "data-high": "" } : {})}>
         <p class="h-small">{c("journey.step", lang, { n: String(i + 1) })}</p>
         <h2 id={`h-${s.k}`}>{c(`journey.cp.${s.k}.h`, lang)}</h2>
         {s.qs.map((q) => (
           <div class="qa-item">
-            <h3>{c(`journey.q.${q.id}.q`, lang, vars)}</h3>
-            <p>{c(`journey.q.${q.a ?? q.id}.a`, lang, vars)}<Fragment set:html={sup(q.n)} /></p>
+            <h3>{c(q.ck ? `${q.ck}.q` : `journey.q.${q.id}.q`, lang, vars)}</h3>
+            <p>{c(q.ck ? `${q.ck}.a` : `journey.q.${q.a ?? q.id}.a`, lang, vars)}<Fragment set:html={sup(q.n)} /></p>
             {q.ask && <p class="small jask">{c("journey.unverified", lang)}</p>}
             <p class="jacts"><a class="act" href={href(q.cat)}>{q.ask ? c("journey.ask", lang) : c(btn[q.cat], lang)}</a>{q.link && <a class="act quiet" href={links[q.link]}>{c(linkLabel[q.link], lang)}</a>}</p>
           </div>
@@ -50,6 +50,8 @@ const linkLabel = { map: "map.open", sims: "common.nav.sims", private: "common.n
       </section>
     ))}
   </div>
+  {/* D52: the stations for high budgets appear by themselves when the budget (link or map) is high; nothing says why. */}
+  <script is:inline>(function(){try{var b=Number(new URLSearchParams(location.search).get("budget"))||Number(localStorage.getItem("ip.budget"))||0;if(b>=1e6)document.querySelectorAll("[data-high]").forEach(function(e){e.hidden=false})}catch(e){}})();</script>
   <section class="sources-list" aria-labelledby="fontes">
     <div class="frame read">
       <h2 id="fontes" class="h-small">{c("common.sources", lang)}</h2>

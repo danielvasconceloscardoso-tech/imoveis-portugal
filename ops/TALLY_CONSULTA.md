@@ -28,11 +28,11 @@ Remove the old "Orçamento" free-text field once field 2 exists (the hidden `bud
 
 The rule is never shown to readers. Use the edition and language from the hidden fields to build the URL: `https://{edition domain}/{language}/{edition}/{consult slug}/{page}/`.
 
-1. If **Orçamento** is "1 a 5 M€" or "Mais de 5 M€" → `private-desk/`
+1. If **Orçamento** is "1 a 5 M€" or "Mais de 5 M€" → PT `consultor-dedicado/`, EN `dedicated-adviser/`, FR `conseiller-dedie/` (D52: no "Private" in URLs or wording)
 2. Else if **Quando** is "Nos próximos 3 meses" or "3 a 12 meses" → `recebido/` (EN `received/`, FR `recu/`)
 3. Else → `obrigado/` (EN `thank-you/`, FR `merci/`)
 
-Consult slug: PT `consulta-privada`, EN `private-consultation`, FR `consultation-privee`. Example: `https://imoveisportugal.lu/pt/lu/consulta-privada/private-desk/`.
+Consult slug: PT `consulta-privada`, EN `private-consultation`, FR `consultation-privee`. Example: `https://imoveisportugal.lu/pt/lu/consulta-privada/consultor-dedicado/`.
 
 ## 3. Notifications
 

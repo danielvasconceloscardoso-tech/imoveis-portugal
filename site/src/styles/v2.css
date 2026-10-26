@@ -720,3 +720,7 @@ a.brass { color: var(--brass); }
 .mapx-list th button { background: none; border: 0; padding: 0; font: inherit; color: var(--ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; cursor: pointer; text-align: left; }
 .mapx-list th small { color: var(--muted); font-size: 14px; }
 .mapx-list th a { font-size: 14px; color: var(--muted); }
+/* D52: one budget field and a currency switch instead of presets. */
+.mapx-cur { display: inline-flex; border: 1px solid var(--rule); border-radius: 2px; align-self: flex-end; }
+.mapx-cur button { font: 500 13px/1 var(--sans); letter-spacing: .04em; padding: 10px 12px; min-height: 40px; border: 0; background: transparent; color: var(--muted); cursor: pointer; }
+.mapx-cur button[aria-pressed="true"] { background: var(--ink); color: #fff; }

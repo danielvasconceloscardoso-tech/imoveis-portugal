@@ -48,7 +48,10 @@ export function initMapExplorer(root: HTMLElement) {
   const canvas = root.querySelector<HTMLElement>("[data-canvas]")!;
   const tip = root.querySelector<HTMLElement>("[data-tip]");
   const q = new URLSearchParams(location.search);
-  let budget = Math.max(100000, Number(q.get("budget")) || Number(root.dataset.budget) || 300000);
+  // The reader's budget carries across pages (path, FAQ, consultation) so the site can adapt quietly (D52).
+  const stored = (() => { try { return Number(localStorage.getItem("ip.budget")) || 0; } catch { return 0; } })();
+  let budget = Math.max(1000, Number(q.get("budget")) || stored || Number(root.dataset.budget) || 300000);
+  let inLocal = false;  // the field shows the reader's currency instead of euros
   let metric: Metric = (["m2", "price", "growth", "yield"].includes(q.get("metric") || "") ? q.get("metric") : "m2") as Metric;
   let selected: string | null = q.get("place"), selPar: string | null = q.get("parish");
   let filter = "all", region = "", flat = reduce() || lowPower() || q.get("flat") === "1";
@@ -113,15 +116,30 @@ export function initMapExplorer(root: HTMLElement) {
     selected ? p.set("place", selected) : p.delete("place"); selPar ? p.set("parish", selPar) : p.delete("parish");
     history.replaceState(null, "", `${location.pathname}?${p}${location.hash}`);
   }
-  function setBudget(b: number, fromInput = false) {
-    budget = Math.min(Math.max(b, 100000), 1e9);
-    if (!fromInput) input.value = nf.format(budget);
-    root.querySelectorAll<HTMLButtonElement>("[data-preset]").forEach((p) => p.setAttribute("aria-pressed", String(Number(p.dataset.preset) === budget)));
+  const HIGH = 1e6;  // internal only (D52): from here the list brings the dearer places forward; never shown to the reader
+  let lastHigh: boolean | null = null;
+  function setBudget(b: number, fromInput = false, remember = false) {
+    budget = Math.min(Math.max(b, 1000), 1e10);
+    if (!fromInput) input.value = nf.format(Math.round(inLocal && fx ? budget * fx : budget));
     const lt = root.querySelector<HTMLElement>("[data-local-tpl]");
-    if (lt && local && fx) lt.textContent = lt.dataset.localTpl!.replace("{local}", local.format(budget * fx));
+    if (lt && local && fx) lt.textContent = lt.dataset.localTpl!.replace("{local}", inLocal ? eur.format(budget) : local.format(budget * fx));
     root.querySelectorAll<HTMLElement>("tr[data-v]").forEach((tr) => { const td = tr.lastElementChild; if (td && tr.dataset.v) td.textContent = `${nf.format(Math.round(budget / Number(tr.dataset.v)))} m²`; });
+    const high = budget >= HIGH;
+    if (high !== lastHigh) {  // order only, nothing hidden: dearer places first for high budgets, A to Z otherwise
+      lastHigh = high; const tb = root.querySelector("tbody");
+      if (tb) [...tb.querySelectorAll<HTMLElement>("tr")].map((tr, i) => { tr.dataset.i ??= String(i); return tr; })
+        .sort((a, b) => high ? Number(b.dataset.v || 0) - Number(a.dataset.v || 0) : Number(a.dataset.i) - Number(b.dataset.i)).forEach((tr) => tb.append(tr));
+    }
+    if (remember) try { localStorage.setItem("ip.budget", String(Math.round(budget))); } catch { /* private mode */ }
     paint(); refreshCard(); syncUrl();
   }
+  function setCurrency(toLocal: boolean) {
+    inLocal = toLocal && !!fx;
+    root.querySelectorAll<HTMLButtonElement>("[data-cur-pick]").forEach((b) => b.setAttribute("aria-pressed", String((b.dataset.curPick !== "EUR") === inLocal)));
+    const sign = root.querySelector<HTMLElement>("[data-cur-sign]"); if (sign) sign.textContent = inLocal ? cur : "€";
+    setBudget(budget);
+  }
+  const readInput = () => { const v = parse(input.value); return inLocal && fx ? v / fx : v; };
   function setMetric(m: Metric) {
     metric = m;
     root.querySelectorAll<HTMLButtonElement>("[data-metric]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.metric === m)));
@@ -165,6 +183,8 @@ export function initMapExplorer(root: HTMLElement) {
     const qq = qLabel(P.quarters[i]);
     let h = `${photo}<div class="mapx-card-b"><p class="h-small">${L.regions[p.r] || ""}</p><h3 tabindex="-1">${p.n}</h3>`;
     h += m2 ? `<p class="mapx-big">${nf.format(m2)}<span> ${L.m2}</span></p><p class="small">${L.median.replace("{v}", eur.format(v!)).replace("{quarter}", qq)}</p>` : `<p class="small">${L.nodata}</p>`;
+    // D52: for a high budget, the developer projects of this area come straight after the figures (nothing is hidden for others).
+    if (budget >= HIGH && !cfg.embed) h += `<p class="mapx-devs small"><a href="${cfg.links.devHref}">${L.devs}</a></p>`;
     if (s && (s.m2.some((x) => x != null) || s.rq.some((x) => x != null))) {
       h += `<figure class="mapx-chart">${chart(s)}<figcaption class="small"><span class="k-ink">${L.price}</span> · <span class="k-green">${L.rent}</span></figcaption></figure><ul class="mapx-facts small">`;
       if (s.cagrP != null) h += `<li>${L.cagrP.replace("{v}", pc(s.cagrP))}</li>`;
@@ -176,7 +196,7 @@ export function initMapExplorer(root: HTMLElement) {
     if (cfg.briefs[slug]) h += `<p class="mapx-brief">${cfg.briefs[slug]}</p>`;
     if (s?.cmp?.length) h += `<p class="h-small">${L.cmp}</p><ul class="mapx-cmp">` + s.cmp.map((c) => { const o = P!.munis[c]; const ov = o?.m2[i]; return `<li><button type="button" data-goto="${c}">${o?.n ?? c}</button><span class="small">${ov ? `${nf.format(Math.round(budget / ov))} m²` : ""}</span></li>`; }).join("") + `</ul>`;
     h += actions(p.n, sim) + `<p class="mapx-more small">` + (cfg.links.pages.includes(slug) ? `<a href="${cfg.links.map}${slug}/">${L.page}</a>` : "")
-      + (budget >= 1e6 && cfg.privateHref ? `<a href="${cfg.privateHref}">${L.private}</a>` : "") + `<button type="button" class="linkish" data-share>${L.share}</button><button type="button" class="linkish" data-shareimg>${L.shareImg}</button></p>`
+      + (budget >= HIGH && cfg.privateHref ? `<a href="${cfg.privateHref}">${L.private}</a>` : "") + `<button type="button" class="linkish" data-share>${L.share}</button><button type="button" class="linkish" data-shareimg>${L.shareImg}</button></p>`
       + `<p class="small mapx-src">${L.source.replace("{quarter}", qq)} ${L.disclaimer}</p></div><button type="button" class="mapx-close" aria-label="${L.close}">×</button>`;
     openCard(h);
   }
@@ -184,7 +204,7 @@ export function initMapExplorer(root: HTMLElement) {
     if (cfg.embed?.cta) return `<p class="mapx-actions"><a class="btn sm" href="${esc(cfg.embed.cta)}" target="_top">${cfg.embed.ctaLabel || L.homes}</a></p>`;
     if (root.dataset.mode === "embed") return `<p class="mapx-actions"><a class="btn sm" href="https://imoveisportugal.lu${cfg.links.buy}?place=${encodeURIComponent(place)}&budget=${budget}" target="_blank" rel="noopener">${L.homes}</a></p>`;
     return `<p class="mapx-actions"><a class="btn sm" href="${cfg.links.buy}?place=${encodeURIComponent(place)}&budget=${budget}">${L.homes}</a>`
-      + `<a href="${cfg.links.devHref}">${L.devs}</a><a href="${sim}">${L.sim}</a><a href="${cfg.links.journey}">${L.journey}</a></p>`;
+      + (budget >= HIGH ? "" : `<a href="${cfg.links.devHref}">${L.devs}</a>`) + `<a href="${sim}">${L.sim}</a><a href="${cfg.links.journey}?budget=${Math.round(budget)}">${L.journey}</a></p>`;
   }
   function showParish(code: string) {
     const f = parishes?.feats.find((x) => x.properties.id === code); const s = parishes?.data[code]; if (!f || !s || !P) return;
@@ -429,9 +449,9 @@ export function initMapExplorer(root: HTMLElement) {
   root.addEventListener("keydown", (e) => { if (e.key === "Escape" && !card.hidden) { card.hidden = true; select(null); } });
 
   // ---------------------------------------------------------------- controls
-  input.addEventListener("change", () => setBudget(parse(input.value)));
-  input.addEventListener("keydown", (e) => { if (e.key === "Enter") setBudget(parse(input.value)); });
-  root.querySelectorAll<HTMLButtonElement>("[data-preset]").forEach((b) => b.addEventListener("click", () => { setBudget(Number(b.dataset.preset)); load(); }));
+  input.addEventListener("change", () => { setBudget(readInput(), false, true); load(); });
+  input.addEventListener("keydown", (e) => { if (e.key === "Enter") { setBudget(readInput(), false, true); load(); } });
+  root.querySelectorAll<HTMLButtonElement>("[data-cur-pick]").forEach((b) => b.addEventListener("click", () => setCurrency(b.dataset.curPick !== "EUR")));
   root.querySelectorAll<HTMLButtonElement>("[data-metric]").forEach((b) => b.addEventListener("click", () => { setMetric(b.dataset.metric as Metric); load(); }));
   root.querySelector<HTMLButtonElement>("[data-flat]")?.addEventListener("click", () => { setFlat(!flat); load(); });
   root.querySelectorAll<HTMLButtonElement>("[data-filter]").forEach((b) => b.addEventListener("click", () => {
@@ -466,7 +486,8 @@ export function initMapExplorer(root: HTMLElement) {
   }
   root.querySelectorAll<HTMLButtonElement>("[data-metric]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.metric === metric)));
   root.querySelector("[data-flat]")?.setAttribute("aria-pressed", String(flat));
-  setBudget(budget);
+  // D52: the field starts in the reader's own currency where the edition has one (CHF, USD, BRL, ILS).
+  if (cur && fx) setCurrency(true); else setBudget(budget);
   // For the automated click check (scripts/map-data/clicktest.mjs): project a concelho's label point to the screen.
   (root as any).__mapx = { load, pick: (x: number, y: number) => pick({ x, y }), project: (s: string) => { const p = byS.get(s); return p && map ? map.project([p.x, p.y]) : null; }, map: () => map, selected: () => selected, slugs: () => features.map((f) => f.properties.s) };
 }

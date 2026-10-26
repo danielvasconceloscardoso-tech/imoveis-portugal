@@ -16,7 +16,7 @@ Status: **proposal**. Prices and the Private tier are for Daniel to confirm (tas
 | **Featured Partner** | Verified, plus 6 newsletter slots a year, one e-book chapter, first position in its category | 4,800 € per edition · 12,000 € all editions | 2,880 € · 7,200 € |
 | **Bank Partner** | "Oferecido por" on the calculators in its editions, newsletter slots, featured on the map for the budgets it finances | 9,000 to 15,000 € | from 5,400 € |
 | **Developer campaign** | One development: newsletter feature, map position in its municipality, a labelled page | from 2,500 € per campaign | not discounted |
-| **Private Partner** (D33) | Private section placements for budgets of 1 M€ and more: profile, labelled answers on structuring questions, map position for 1 M€+ budgets, newsletter slots. Maximum 5 per edition, non-exclusive | 25,000 to 50,000 € | from 15,000 € |
+| **Wealth Partner** (D33) | Private section placements for budgets of 1 M€ and more: profile, labelled answers on structuring questions, map position for 1 M€+ budgets, newsletter slots. Maximum 5 per edition, non-exclusive | 25,000 to 50,000 € | from 15,000 € |
 
 **Founding Partner:** the first 10 signed partners pay the founding price in year 1 and keep it locked for year 2. Deadline: Tuesday 1 December 2026. The counter on the partner page shows the slots left (config.ts `foundingSlotsLeft`).
 

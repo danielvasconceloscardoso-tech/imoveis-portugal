@@ -27,9 +27,9 @@ const dist = join(root, "site", "dist");
 // Pages scored, per language (Luxembourg edition for PT, US for EN, France for FR: the canonical editions, D24).
 const ED = { pt: "lu", en: "us", fr: "fr" };
 const SLUG = {
-  pt: { faq: "perguntas-frequentes", sims: "simuladores", cost: "simuladores/custo-total", map: "mapa", place: "mapa/porto", partners: "parceiros", buy: "comprar", blog: "blog", how: "como-trabalhamos", private: "private", step: "comprar-a-partir-de-fora" },
-  en: { faq: "faq", sims: "calculators", cost: "calculators/total-cost", map: "map", place: "map/porto", partners: "partners", buy: "buy", blog: "blog", how: "how-we-work", private: "private", step: "buying-from-abroad" },
-  fr: { faq: "questions-frequentes", sims: "simulateurs", cost: "simulateurs/cout-total", map: "carte", place: "carte/porto", partners: "partenaires", buy: "acheter", blog: "blog", how: "notre-methode", private: "private", step: "acheter-depuis-l-etranger" },
+  pt: { faq: "perguntas-frequentes", sims: "simuladores", cost: "simuladores/custo-total", map: "mapa", place: "mapa/porto", partners: "parceiros", buy: "comprar", blog: "blog", how: "como-trabalhamos", private: "residencia-impostos-heranca", step: "comprar-a-partir-de-fora" },
+  en: { faq: "faq", sims: "calculators", cost: "calculators/total-cost", map: "map", place: "map/porto", partners: "partners", buy: "buy", blog: "blog", how: "how-we-work", private: "residence-tax-inheritance", step: "buying-from-abroad" },
+  fr: { faq: "questions-frequentes", sims: "simulateurs", cost: "simulateurs/cout-total", map: "carte", place: "carte/porto", partners: "partenaires", buy: "acheter", blog: "blog", how: "notre-methode", private: "residence-fiscalite-succession", step: "acheter-depuis-l-etranger" },
 };
 const PAGES = ["home", "faq", "sims", "cost", "map", "place", "partners", "buy", "blog", "how", "private", "step"];
 const LH_PAGES = ["home", "faq", "cost", "map"];
@@ -43,6 +43,8 @@ const BANNED = [
   /o pre[çc]o [ée] o in[ií]cio/i, /the price is (just )?the start/i, /le prix n'est qu'un d[ée]but/i,
   /\bpor cima\b/i, /\bon top of the price\b/i, /\bon top, /i, /\ben plus du prix\b/i, /\bquem compra\b/i, /\bde quem compra\b/i, /\bceux qui ach[eè]tent\b/i, /\ba buyer who\b/i,
   /maison depuis l'[ée]tranger/i, /ce que vous achetez/i, /home from abroad/i,
+  // D52: no tier or section words for high budgets ("Private consultation", D39's product name, is pending a CEO call).
+  /\bPrivate\b(?! consultation)/, /\bluxo\b/i, /\bluxury\b/i, /\bluxe\b/i, /\bpremium\b/i, /\b1 milh[ãa]o\b/i, /\b(€|one )?1 million\b/i, /\bun million\b/i,
 ];
 const AI = [/—/];
 const EN_WORDS = /\b(the|and|with|your|you|for|this|that|from|what|which|home|buy|price)\b/gi;

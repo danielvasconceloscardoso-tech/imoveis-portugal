@@ -3,6 +3,6 @@
 import type { Lang } from "../i18n";
 export const CONSULT_SUB: Record<"ok" | "private" | "later", Record<Lang, string>> = {
   ok: { pt: "recebido", en: "received", fr: "recu" },
-  private: { pt: "private-desk", en: "private-desk", fr: "private-desk" },
+  private: { pt: "consultor-dedicado", en: "dedicated-adviser", fr: "conseiller-dedie" },  // D52: no "Private" in any URL
   later: { pt: "obrigado", en: "thank-you", fr: "merci" },
 };

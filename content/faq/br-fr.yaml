@@ -20,7 +20,7 @@
   a: >-
     Oui, si vous êtes résident fiscal au Brésil. Le bien se déclare dans la rubrique Bens e Direitos de
     l'IRPF, au prix d'achat converti en dollars puis en reais, au cours vendeur de la Banco Central à la
-    date d'achat. Si vos avoirs à l'étranger atteignent 1 million de dollars au 31 décembre, il faut aussi
+    date d'achat. Si vos avoirs à l'étranger atteignent 1 000 000 de dollars au 31 décembre, il faut aussi
     la déclaration CBE.
   facts: [br-bens-exterior, br-cbe]
 

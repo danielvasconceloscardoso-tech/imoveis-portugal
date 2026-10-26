@@ -15,7 +15,7 @@ Each cluster has one pillar page, supporting articles (content/blog/), its calcu
 | **Places** | comprar casa no Porto, preço m2 Gondomar, comprar casa Braga · buying a home in Porto, house prices Portugal by region · acheter à Porto, prix m2 Portugal | Map page | Map + cost calculator prefilled | Agency, developers |
 | **Inheritance** | herdar casa em portugal emigrante, habilitação de herdeiros · inheriting a house in Portugal · hériter d'une maison au Portugal | FAQ (after buying) | none | Lawyer |
 | **Returning home** | regressar a portugal impostos, programa regressar IRS · moving back to Portugal tax · retour au Portugal impôts | Blog article (to write) | Que casa consigo comprar | Tax adviser |
-| **Private (1 M€+)** | IFICI, residência para investimento fundos · Portugal investment residence funds, IFICI tax regime · résidence Portugal investissement, IFICI | Private section (prompt 18) | Mais-valias, Custo total | Private partners |
+| **Residence, tax and inheritance (high budgets, D52: never labelled by budget)** | IFICI, residência para investimento fundos · Portugal investment residence funds, IFICI tax regime · résidence Portugal investissement, IFICI | Private section (prompt 18) | Mais-valias, Custo total | Wealth Partners |
 
 ## Programmatic pages (built)
 
