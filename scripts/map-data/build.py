@@ -159,7 +159,7 @@ def topo(fc, name, pct, out):
         src = os.path.join(tmp, f"{name}.json"); json.dump({"type": "FeatureCollection", "features": fc}, open(src, "w"))
         subprocess.run(["npx", "-y", "mapshaper@0.6.102", "-i", src, "name=" + name, "-simplify", pct, "weighted", "keep-shapes",
                         "-clean", "-o", "format=topojson", "quantization=100000", out], check=True, capture_output=True)
-topo(feats, "m", "6%", os.path.join(PUB, "map", "munis.topo.json"))
+topo(feats, "m", "5.5%", os.path.join(PUB, "map", "munis.topo.json"))  # current OSM outlines are finer: 5.5 % keeps the file under 270 KB
 topo(pfeats, "p", "8%", os.path.join(PUB, "map", "parishes.topo.json"))
 
 # ---------------------------------------------------------------- prices and rents
