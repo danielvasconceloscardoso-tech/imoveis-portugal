@@ -1,0 +1,31 @@
+---
+// Shell of the private developer demos (prompt 28, D50 register, D51 English): unlisted, noindex, no site menu.
+import "@fontsource-variable/playfair-display";
+import "@fontsource-variable/jost";
+interface Props { title: string; developer: string; accent?: string; }
+const { title, developer, accent = "#1f4a3d" } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <title>{title}</title>
+  <style is:global set:html={`:root { --ink: #111214; --muted: #5f6368; --rule: #e6e6e3; --green: #1f4a3d; --accent: ${accent}; --card: #fff; --serif: "Playfair Display Variable", Georgia, serif; --sans: "Jost Variable", system-ui, sans-serif; }`} />
+  <style is:global>
+    * { box-sizing: border-box; } body { margin: 0; background: #fff; color: var(--ink); font: 400 17px/1.6 var(--sans); }
+    a { color: inherit; text-underline-offset: 3px; }
+    .dm-top { border-bottom: 1px solid var(--rule); } .dm-top div { max-width: 1120px; margin: 0 auto; padding: 18px 24px; display: flex; justify-content: space-between; align-items: center; }
+    .dm-brand { font: 500 20px/1 var(--serif); text-decoration: none; } .dm-brand i { display: inline-block; width: 8px; height: 8px; background: var(--green); margin-right: 10px; vertical-align: middle; }
+    .dm-flag { font: 500 12px/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+    .dm-foot { border-top: 1px solid var(--ink); } .dm-foot div { max-width: 1120px; margin: 0 auto; padding: 28px 24px 48px; font-size: 14px; color: var(--muted); }
+  </style>
+  <slot name="head" />
+</head>
+<body>
+  <header class="dm-top"><div><span class="dm-brand"><i></i>Imóveis Portugal</span><span class="dm-flag">Private preview · {developer}</span></div></header>
+  <slot />
+  <footer class="dm-foot"><div>Private preview prepared for {developer} · not published. Homes, prices and images: {developer}, as published. Data: INE (CC BY 4.0), ECB, © OpenStreetMap contributors. Imóveis Portugal.</div></footer>
+</body>
+</html>

@@ -1,0 +1,24 @@
+---
+// One home in a private demo (prompt 28 §2 and §2b): gallery, price as published, INE context, the cost calculator
+// prefilled, and "Arrange a private viewing" followed by the buyer's team and the developer's view of the enquiry.
+import Demo from "../../../../layouts/Demo.astro";
+import ShowcaseHome from "../../../../components/ShowcaseHome.astro";
+import DemoConcierge from "../../../../components/DemoConcierge.astro";
+import { DEMOS, rateOf } from "../../../../lib/demos";
+import { demoProjects } from "../../../../lib/projects";
+import { pathFor } from "../../../../i18n";
+import { SUB } from "../../../../lib/tools";
+
+export function getStaticPaths() {
+  return DEMOS.flatMap((d) => demoProjects(d.token).flatMap((p) => (p.units ?? []).map((u) => ({ params: { token: d.token, unit: u.id }, props: { p, u } }))));
+}
+const { p, u } = Astro.props;
+const d = DEMOS.find((x) => x.token === Astro.params.token)!;
+const back = `/d/${d.token}/homes/${p.muni === d.muni ? "" : `${p.muni}/`}`;
+---
+<Demo title={`${p.name} · private preview`} developer={d.developer} accent={d.accent}>
+  <ShowcaseHome lang="en" locale="en-US" project={p} unit={u} back={back} sim={`${pathFor("en", d.buyer.ed, "sims")}${SUB.cost.en}/`} label="Sponsored"
+    cur={d.buyer.cur === "EUR" ? undefined : { code: d.buyer.cur, rate: rateOf(d.buyer.cur) }}>
+    <DemoConcierge slot="viewing" d={d} project={p} unit={u} />
+  </ShowcaseHome>
+</Demo>

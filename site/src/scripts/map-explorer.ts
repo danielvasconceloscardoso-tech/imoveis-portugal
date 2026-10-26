@@ -13,7 +13,7 @@ type Series = { n: string; m2: (number | null)[]; rq: (number | null)[]; yield: 
 // Prompt 25 §4: four INE layers join the four price metrics (sea, vac, new, fr: layers.json).
 // Prompt 26 §1: partner projects (content/developers/projects.json); demos add theirs from an unlisted file (?demoproj=).
 type Project = { id: string; name: string; developer: string; muni: string; lon: number; lat: number; render?: string; credit?: string;
-  from: number | null; typologies: string[]; delivery?: string; url?: string };
+  from: number | null; typologies: string[]; delivery?: string | null; url?: string; showcase?: string };
 type Metric = "m2" | "price" | "growth" | "yield" | "sea" | "vac" | "new" | "fr";
 const KEY: Record<Metric, string> = { m2: "pv", price: "pv", growth: "pg", yield: "py", sea: "l_sea", vac: "l_vac", new: "l_new", fr: "l_fr" };
 type Cfg = {
@@ -202,8 +202,15 @@ export function initMapExplorer(root: HTMLElement) {
     let h = `${photo}<div class="mapx-card-b"><p class="h-small">${L.regions[p.r] || ""}</p><h3 tabindex="-1">${p.n}</h3>`;
     h += m2 ? `<p class="mapx-big">${nf.format(m2)}<span> ${L.m2}</span></p><p class="small">${L.median.replace("{v}", eur.format(v!)).replace("{quarter}", qq)}</p>` : `<p class="small">${L.nodata}</p>`;
     // D52: for a high budget, the developer projects of this area come straight after the figures (nothing is hidden for others).
+    if (!projLoaded) loadProjects().then(() => { if (selected === slug && projects.length) refreshCard(); });  // the card lists partners even with the layer off
     const here = projects.filter((x) => x.muni === slug);  // prompt 26 §1.4: the partner developers active in this area
-    if (here.length) h += `<p class="mapx-devs small">${here.map((x) => `<button type="button" class="linkish" data-proj="${x.id}">${x.name} · ${x.developer}</button> <span class="tag">${L.sponsored}</span>`).join("<br>")}</p>`;
+    // Prompt 28 §2: "Partner developers here", each with its showcase page (the developer's homes, prices as published).
+    if (here.length) {
+      const devs = [...new Map(here.filter((x) => x.showcase).map((x) => [x.developer, x.showcase!])).entries()];
+      const tgt = cfg.embed ? ` target="_top"` : "";
+      h += `<div class="mapx-devs small"><p class="h-small">${L.partnersHere}</p>${devs.map(([d, u]) => `<p><a class="mapx-dev" href="${esc(u)}"${tgt}>${esc(d)} · ${L.openHomes}</a> <span class="tag">${L.sponsored}</span></p>`).join("")}`
+        + `<p>${here.map((x) => `<button type="button" class="linkish" data-proj="${x.id}">${x.name}</button>`).join(" · ")}</p></div>`;
+    }
     else if (budget >= HIGH && !cfg.embed) h += `<p class="mapx-devs small"><a href="${cfg.links.devHref}">${L.devs}</a></p>`;
     if (s && (s.m2.some((x) => x != null) || s.rq.some((x) => x != null))) {
       h += `<figure class="mapx-chart">${chart(s)}<figcaption class="small"><span class="k-ink">${L.price}</span> · <span class="k-green">${L.rent}</span></figcaption></figure><ul class="mapx-facts small">`;

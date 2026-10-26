@@ -1,0 +1,101 @@
+---
+// Partner showcase (prompt 28 §2, D53): one developer's homes in one municipality, laid out like an editorial property
+// book: a large image, the developer's name in the display serif, one line about the project, then the homes as a
+// grid (image, typology, area, price as published, delivery), each opening its own page. Used by the site (partners
+// only, labelled "Sponsored") and by each private demo (English). Wording: COPY_DECK.md "show.*".
+import type { Lang } from "../i18n";
+import { type Project, type Unit, img } from "../lib/projects";
+import { PRICES, LAST } from "../lib/prices";
+import { c } from "../lib/copy";
+
+interface Props { lang: Lang; projects: Project[]; href: (p: Project, u: Unit) => string; label: string; cur?: { code: string; rate: number }; locale: string; }
+const { lang, projects, href, label, cur, locale } = Astro.props;
+const p0 = projects[0];
+const s = PRICES.munis[p0.muni] as any;
+const money = (v: number, k = "EUR") => new Intl.NumberFormat(locale, { style: "currency", currency: k, maximumFractionDigits: 0 }).format(v);
+const nf1 = new Intl.NumberFormat(locale, { minimumFractionDigits: 1, maximumFractionDigits: 1 }), nf = new Intl.NumberFormat(locale, { maximumFractionDigits: 1 });
+// The project line is the developer's own description (English in the research); a partner's page also needs it in PT and FR.
+const lineOf = (p: Project) => p.lines?.[lang] ?? p.line;
+const typ = (t: string) => (t === "Plot" ? c("show.plot", lang) : t);
+const q = PRICES.quarters[LAST], ql = `${q.slice(0, 4)} T${q.slice(-1)}`.replace("T", lang === "en" ? "Q" : "T");
+const from = Math.min(...projects.map((p) => p.from ?? Infinity));
+const checked = projects.map((p) => p.checked).filter(Boolean).sort().pop();
+const credits = [...new Set(projects.flatMap((p) => p.credits ?? []))].join("; ");
+---
+<article class="sc">
+  <figure class="sc-hero"><img src={img(p0.render)} srcset={`${img(p0.render, 800)} 800w, ${img(p0.render)} 1600w`} sizes="100vw" alt={p0.name} width="1600" height="900" fetchpriority="high" /></figure>
+  <header class="sc-head">
+    <p class="sc-kicker">{s.n} · <span class="sc-tag">{label}</span></p>
+    <h1>{p0.developer}</h1>
+    <p class="sc-line">{lineOf(p0)}</p>
+    <dl class="sc-facts">
+      {isFinite(from) && <div><dt>{c("show.homes", lang)}</dt><dd>{c("show.from", lang, { v: money(from) })}{cur && <span> · {money(Math.round(from * cur.rate / 1000) * 1000, cur.code)}</span>}</dd></div>}
+      <div><dt>{c("map.proj.typ", lang, { v: "" }).replace(/[:\s]+$/, "")}</dt><dd>{[...new Set(projects.flatMap((p) => p.typologies))].map(typ).join(", ")}</dd></div>
+      {p0.delivery && <div><dt>{c("show.delivery", lang, { v: "" }).trim()}</dt><dd>{p0.delivery}</dd></div>}
+    </dl>
+  </header>
+
+  {projects.map((p) => (
+    <section class="sc-proj" aria-labelledby={`sc-${p.id}`}>
+      <h2 id={`sc-${p.id}`}>{p.name}</h2>
+      {projects.length > 1 && <p class="sc-pline">{lineOf(p)}</p>}
+      <ul class="sc-grid">
+        {p.units!.map((u, ui) => (
+          <li><a class="sc-card" href={href(p, u)}>
+            <img src={img(u.img ?? (p.gallery?.length ? p.gallery[ui % p.gallery.length] : p.render), 800)} alt="" width="800" height="560" loading="lazy" />
+            <span class="sc-typ">{typ(u.typology)}{u.name && <span> · {u.name}</span>}</span>
+            <span class="sc-meta">{!p.hideRefs && `${u.ref} · `}{u.area != null && (u.typology === "Plot" ? c("show.plotarea", lang, { v: nf.format(u.area) }) : `${nf.format(u.area)} m²`)}{p.delivery && ` · ${c("show.delivery", lang, { v: p.delivery })}`}</span>
+            <span class="sc-price">{u.price ? (u.priceNote === "from" ? c("show.from", lang, { v: money(u.price) }) : money(u.price)) : c("show.onrequest", lang)}</span>
+            {cur && u.price && <span class="sc-local">{money(Math.round(u.price * cur.rate / 1000) * 1000, cur.code)}</span>}
+            <span class="sc-go">{c("show.view", lang)} →</span>
+          </a></li>
+        ))}
+      </ul>
+    </section>
+  ))}
+
+  <aside class="sc-ctx" aria-label={c("show.ctx", lang, { muni: s.n })}>
+    <h2>{c("show.ctx", lang, { muni: s.n })}</h2>
+    <dl>
+      {s.m2[LAST] && <div><dt>{c("show.ctx.m2", lang)}</dt><dd>{money(s.m2[LAST])}</dd></div>}
+      {s.g10 != null && <div><dt>{c("show.ctx.g10", lang)}</dt><dd>{s.g10 > 0 ? "+" : ""}{nf1.format(s.g10)}%</dd></div>}
+      {s.rq?.[LAST] && <div><dt>{c("show.ctx.rent", lang)}</dt><dd>{new Intl.NumberFormat(locale, { style: "currency", currency: "EUR", minimumFractionDigits: 2 }).format(s.rq[LAST])}</dd></div>}
+      {s.yield != null && <div><dt>{c("show.ctx.yield", lang)}</dt><dd>{nf1.format(s.yield)}%</dd></div>}
+    </dl>
+    <p class="sc-small">{c("show.ctx.src", lang, { q: ql })}</p>
+  </aside>
+
+  <footer class="sc-foot">
+    <p>{c("show.credit", lang, { credit: credits })} {checked && c("show.published", lang, { date: checked })}</p>
+    <details><summary>{c("show.sources", lang)}</summary><ul>{[...new Set(projects.flatMap((p) => p.sources ?? []))].map((u) => <li><a href={u} rel="noopener">{u}</a></li>)}</ul></details>
+  </footer>
+</article>
+
+<style>
+  .sc { --gap: clamp(20px, 3vw, 40px); }
+  .sc-hero { margin: 0; } .sc-hero img { width: 100%; height: clamp(320px, 62vh, 680px); object-fit: cover; display: block; }
+  .sc-head { max-width: 1120px; margin: 0 auto; padding: 48px 24px 24px; display: grid; grid-template-columns: 1.2fr 1fr; gap: var(--gap); align-items: end; }
+  .sc-kicker { grid-column: 1 / -1; margin: 0; font: 500 12px/1 var(--sans); letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+  .sc-tag { border: 1px solid currentColor; padding: 3px 6px; border-radius: 3px; }
+  .sc h1 { font: 400 clamp(2.8rem, 2rem + 4vw, 5.2rem)/1 var(--serif); margin: 0; letter-spacing: -.015em; }
+  .sc-line { margin: 0; font-size: 1.1rem; color: var(--muted); max-width: 34em; }
+  .sc-facts { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 12px 48px; margin: 12px 0 0; padding: 18px 0 0; border-top: 1px solid var(--ink); }
+  .sc-facts dt { font: 500 11px/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .sc-facts dd { margin: 0; font: 400 1.35rem/1.2 var(--serif); } .sc-facts dd span { font: 400 14px var(--sans); color: var(--muted); }
+  .sc-proj { max-width: 1120px; margin: 0 auto; padding: 40px 24px 8px; }
+  .sc-proj h2, .sc-ctx h2 { font: 400 2rem/1.15 var(--serif); margin: 0 0 8px; } .sc-pline { color: var(--muted); margin: 0 0 8px; max-width: 46em; }
+  .sc-grid { list-style: none; margin: 24px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 40px var(--gap); }
+  .sc-card { display: grid; gap: 6px; text-decoration: none; color: var(--ink); }
+  .sc-card img { width: 100%; height: auto; aspect-ratio: 10 / 7; object-fit: cover; display: block; margin-bottom: 10px; transition: opacity .3s; }
+  .sc-card:hover img { opacity: .9; }
+  .sc-typ { font: 400 1.35rem/1.2 var(--serif); } .sc-typ span { color: var(--muted); font-size: 1.05rem; }
+  .sc-meta, .sc-local { font-size: 14px; color: var(--muted); }
+  .sc-price { font: 500 1.1rem/1.2 var(--sans); }
+  .sc-go { font: 500 13px/1 var(--sans); letter-spacing: .08em; text-transform: uppercase; margin-top: 6px; }
+  .sc-ctx { max-width: 1120px; margin: 56px auto 0; padding: 32px 24px 0; border-top: 1px solid var(--ink); }
+  .sc-ctx dl { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin: 16px 0; }
+  .sc-ctx dt { font-size: 14px; color: var(--muted); } .sc-ctx dd { margin: 4px 0 0; font: 400 2rem/1.1 var(--serif); }
+  .sc-small, .sc-foot { font-size: 13px; color: var(--muted); }
+  .sc-foot { max-width: 1120px; margin: 24px auto 0; padding: 0 24px 56px; } .sc-foot a { color: inherit; word-break: break-all; }
+  @media (max-width: 760px) { .sc-head { grid-template-columns: 1fr; } }
+</style>

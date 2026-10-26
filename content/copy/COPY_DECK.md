@@ -5443,3 +5443,167 @@ Prompt 28 §2b (D54): "Your team for this purchase", the partners a case needs, 
 - FR: Ce qui accompagne votre demande
 
 Prompt 28 §2b (D54): the qualified summary that goes with a partner enquiry (indicative, never a decision).
+
+## show
+
+### list
+- PT: Promotores parceiros
+- EN: Partner developers
+- FR: Promoteurs partenaires
+
+### open
+- PT: Ver as casas
+- EN: View the homes
+- FR: Voir les logements
+
+### title
+- PT: {developer} em {muni}
+- EN: {developer} in {muni}
+- FR: {developer} à {muni}
+
+### gallery
+- PT: Galeria
+- EN: Gallery
+- FR: Galerie
+
+### partners
+- PT: Promotores parceiros aqui
+- EN: Partner developers here
+- FR: Promoteurs partenaires ici
+
+### back
+- PT: Todas as casas
+- EN: All the homes
+- FR: Tous les logements
+
+### published
+- PT: Preços como publicados a {date}; podem mudar sem aviso.
+- EN: Prices as published on {date}; they may change without notice.
+- FR: Prix tels que publiés le {date} ; ils peuvent changer sans préavis.
+
+### sources
+- PT: Fontes das casas e dos preços
+- EN: Sources for the homes and prices
+- FR: Sources des logements et des prix
+
+### credit
+- PT: Imagens: {credit}.
+- EN: Images: {credit}.
+- FR: Images : {credit}.
+
+### viewing.p
+- PT: O pedido segue para {to}, com o resumo do seu caso se o quiser incluir. Visita no local ou por vídeo.
+- EN: The request goes to {to}, with the summary of your case if you choose to include it. In person or by video.
+- FR: La demande part vers {to}, avec le résumé de votre cas si vous choisissez de le joindre. Sur place ou en vidéo.
+
+### viewing
+- PT: Marcar uma visita privada
+- EN: Arrange a private viewing
+- FR: Organiser une visite privée
+
+### cost.open
+- PT: Abrir o simulador com este preço
+- EN: Open the calculator with this price
+- FR: Ouvrir le simulateur avec ce prix
+
+### cost.total
+- PT: Total indicativo
+- EN: Indicative total
+- FR: Total indicatif
+
+### cost.deed
+- PT: Escritura e registo
+- EN: Deed and registration
+- FR: Acte et enregistrement
+
+### cost.is
+- PT: Imposto do selo
+- EN: Stamp duty
+- FR: Droit de timbre
+
+### cost.imt
+- PT: IMT
+- EN: Transfer tax (IMT)
+- FR: IMT
+
+### cost.price
+- PT: Preço publicado
+- EN: Published price
+- FR: Prix publié
+
+### cost.p
+- PT: Para quem compra a partir do estrangeiro, sem crédito: valores indicativos do simulador, com as taxas oficiais.
+- EN: For a buyer living abroad, without a mortgage: indicative figures from the calculator, at the official rates.
+- FR: Pour un acheteur vivant à l'étranger, sans crédit : montants indicatifs du simulateur, aux taux officiels.
+
+### cost.h
+- PT: O custo de comprar esta casa
+- EN: What buying this home costs
+- FR: Ce que coûte l'achat de ce logement
+
+### ctx.src
+- PT: INE, {q}. Valores passados não garantem valores futuros; estatística oficial, não uma avaliação.
+- EN: INE, {q}. Past values do not guarantee future values; official statistics, not a valuation.
+- FR: INE, {q}. Les valeurs passées ne garantissent pas les valeurs futures ; statistique officielle, pas une estimation.
+
+### ctx.yield
+- PT: Rendimento bruto
+- EN: Gross yield
+- FR: Rendement brut
+
+### ctx.rent
+- PT: Renda mediana por m² por mês
+- EN: Median rent per m² a month
+- FR: Loyer médian au m² par mois
+
+### ctx.g10
+- PT: Variação desde 2016
+- EN: Change since 2016
+- FR: Évolution depuis 2016
+
+### ctx.m2
+- PT: Preço mediano por m² das casas vendidas
+- EN: Median price per m² of homes sold
+- FR: Prix médian au m² des logements vendus
+
+### ctx
+- PT: {muni} em números oficiais
+- EN: {muni} in official figures
+- FR: {muni} en chiffres officiels
+
+### plotarea
+- PT: lote de {v} m²
+- EN: plot of {v} m²
+- FR: terrain de {v} m²
+
+### plot
+- PT: Lote
+- EN: Plot
+- FR: Terrain
+
+### view
+- PT: Ver a casa
+- EN: View the home
+- FR: Voir le logement
+
+### delivery
+- PT: Entrega {v}
+- EN: Delivery {v}
+- FR: Livraison {v}
+
+### onrequest
+- PT: Preço sob consulta
+- EN: Price on request
+- FR: Prix sur demande
+
+### from
+- PT: Desde {v}
+- EN: From {v}
+- FR: À partir de {v}
+
+### homes
+- PT: As casas
+- EN: The homes
+- FR: Les logements
+
+Prompt 28 §2 (D53): the partner showcase page and its home detail (partners only on the site; each private demo shows its own developer).

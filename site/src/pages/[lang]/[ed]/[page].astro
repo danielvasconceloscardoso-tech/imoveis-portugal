@@ -3,6 +3,8 @@
 // talk to a partner and the free guide. Wording: content/copy/COPY_DECK.md.
 import V2 from "../../../layouts/V2.astro";
 import BriefBox from "../../../components/BriefBox.astro";
+import { PRICES } from "../../../lib/prices";
+import { PROJECTS, showcases } from "../../../lib/projects";
 import Embed from "../../../components/Embed.astro";
 import Calls from "../../../components/Calls.astro";
 import FaqPage from "../../../components/FaqPage.astro";
@@ -78,6 +80,8 @@ const site = config.agency.website.replace(/^https:\/\/|\/$/g, "");
           <h3 style="margin-top:40px">{c("kit.types.h", lang)}</h3>
           <ul class="ptypes">{PTYPES.map((t) => <li><a href={`${pathFor(lang, ed, "partners")}${t.slug[lang]}/`}>{c(`kit.${t.key}.label`, lang)}</a></li>)}</ul>
           <p><a class="more" href={pathFor(lang, ed, "ours")}>{c("ours.title", lang)}</a></p>
+          {showcases(PROJECTS).length > 0 && <><h3 style="margin-top:40px">{c("show.list", lang)}</h3>
+            <ul class="ptypes">{showcases(PROJECTS).map((ps) => <li><a href={`${pathFor(lang, ed, "partners")}${ps[0].devSlug}/${ps[0].muni}/`}>{c("show.title", lang, { developer: ps[0].developer, muni: (PRICES.munis[ps[0].muni] as any).n })}</a> <span class="small">{c("common.sponsored", lang)}</span></li>)}</ul></>}
         </div>
       </section>
       <section class="band white" aria-labelledby="inventory">

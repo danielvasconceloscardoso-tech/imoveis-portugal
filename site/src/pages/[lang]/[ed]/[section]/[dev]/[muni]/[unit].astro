@@ -1,0 +1,32 @@
+---
+// One home of a partner showcase on the site (prompt 28 §2). "Arrange a private viewing" goes where config.enquiryRouting
+// says (task 8z); the enquiry page shows the reader's qualified summary before they send (prompt 28 §2b).
+import V2 from "../../../../../../layouts/V2.astro";
+import ShowcaseHome from "../../../../../../components/ShowcaseHome.astro";
+import { LANGS, ED_ORDER, SLUGS, HTML_LANG, pathFor, type Lang, type EdCode } from "../../../../../../i18n";
+import { PROJECTS, type Project, type Unit } from "../../../../../../lib/projects";
+import { RATE, EDITION_CUR } from "../../../../../../lib/content";
+import { SUB } from "../../../../../../lib/tools";
+import { config } from "../../../../../../config";
+import { c } from "../../../../../../lib/copy";
+
+export function getStaticPaths() {
+  return LANGS.flatMap((lang) => ED_ORDER.flatMap((ed) => PROJECTS.flatMap((p) => (p.units ?? []).map((u) => ({
+    params: { lang, ed, section: SLUGS[lang].partners, dev: p.devSlug!, muni: p.muni, unit: u.id }, props: { p, u } })))));
+}
+const lang = Astro.params.lang as Lang, ed = Astro.params.ed as EdCode;
+const { p, u } = Astro.props as { p: Project; u: Unit };
+const back = `/${lang}/${ed}/${SLUGS[lang].partners}/${p.devSlug}/${p.muni}/`;
+const k = EDITION_CUR[ed];
+const r = config.enquiryRouting;
+const to = r === "developer" ? p.developer : r === "choice" ? `${config.agency.name} · ${p.developer}` : config.agency.name;
+const ask = `${pathFor(lang, ed, "consult")}?project=${encodeURIComponent(p.name)}&unit=${encodeURIComponent(u.ref)}${u.price ? `&budget=${u.price}` : ""}`;
+---
+<V2 lang={lang} ed={ed} page="partners" title={`${p.name} · ${u.typology} | Imóveis Portugal`} description={p.line ?? p.name} paths={Object.fromEntries(LANGS.map((l) => [l, `/${l}/${ed}/${SLUGS[l].partners}/${p.devSlug}/${p.muni}/${u.id}/`])) as Record<Lang, string>}>
+  <ShowcaseHome lang={lang} locale={HTML_LANG[lang]} project={p} unit={u} back={back} sim={`${pathFor(lang, ed, "sims")}${SUB.cost[lang]}/`} label={c("common.sponsored", lang)} cur={k ? { code: k, rate: RATE(k).rate } : undefined}>
+    <div slot="viewing">
+      <p>{c("show.viewing.p", lang, { to })}</p>
+      <p>{r !== "developer" && <a class="btn" href={ask}>{c("show.viewing", lang)}</a>} {r !== "agency" && p.url && <a class="btn ghost" href={p.url} rel="sponsored noopener">{c("map.proj.askdev", lang)}</a>}</p>
+    </div>
+  </ShowcaseHome>
+</V2>

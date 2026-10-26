@@ -44,7 +44,7 @@ const labels = {
   fh: c("map.f.h", lang), fdom: c("map.f.dom", lang, { a: "{a}", p: "{p}", q: "{q}" }), fsea: c("map.f.sea", lang, { v: "{v}" }), fvac: c("map.f.vac", lang, { v: "{v}" }),
   sponsored: c("dev.sponsored", lang), pfrom: c("map.proj.from", lang, { v: "{v}" }), ponreq: c("map.proj.onreq", lang), ptyp: c("map.proj.typ", lang, { v: "{v}" }),
   pdel: c("map.proj.del", lang, { v: "{v}" }), pask: c("map.proj.ask", lang), paskdev: c("map.proj.askdev", lang), paskag: c("map.proj.askag", lang), psim: c("map.proj.sim", lang),
-  pcredit: c("map.proj.credit", lang, { c: "{c}" }),
+  pcredit: c("map.proj.credit", lang, { c: "{c}" }), partnersHere: c("show.partners", lang), openHomes: c("show.open", lang),
   farea: c("map.f.area", lang, { v: "{v}" }), fnew: c("map.f.new", lang, { v: "{v}", l: "{l}" }), ffr: c("map.f.fr", lang, { v: "{v}", b: "{b}" }),
   regions: Object.fromEntries(REGIONS.map((r) => [r, c(`map.r.${r}`, lang)])),
 };
@@ -55,7 +55,7 @@ const links = {
 const briefs = Object.fromEntries(Object.entries(BRIEFS[lang] ?? {}));
 const cfg = { labels, links, quarter: qLabel, mortgage: { rate: PRICES.mortgage.rate, month }, photos: REGION_PHOTO, briefs,
   privateHref: config.privateLive && mode !== "embed" ? pathFor(lang, ed, "private") : "",
-  projects: PROJECTS, routing: config.enquiryRouting, consult: mode === "embed" ? `https://imoveisportugal.lu${pathFor(lang, ed, "consult")}` : pathFor(lang, ed, "consult") };
+  projects: PROJECTS.map((p) => ({ ...p, units: undefined, gallery: undefined, sources: undefined, showcase: `${pathFor(lang, ed, "partners")}${p.devSlug}/${p.muni}/` })), routing: config.enquiryRouting, consult: mode === "embed" ? `https://imoveisportugal.lu${pathFor(lang, ed, "consult")}` : pathFor(lang, ed, "consult") };
 const id = `mapx-${mode}`;
 ---
 <div class={`mapx mapx-${mode}`} data-rates={mode === "embed" ? JSON.stringify(Object.fromEntries((["CHF", "USD", "BRL", "ILS"] as const).map((k) => [k, RATE(k).rate]))) : undefined} data-mapx data-lang={lang} data-locale={HTML_LANG[lang]} data-fx={fx ? fx.rate : ""} data-cur={cur ?? ""} data-mode={mode}>

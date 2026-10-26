@@ -1,4 +1,734 @@
 {
-  "_how": "Partner projects shown on the public map's 'Novos empreendimentos' layer (prompt 26 §1). Add a project only once the developer has signed and paid (D6, D38); each is labelled 'Patrocinado'. Facts come only from what the developer publishes: name, location, typologies, 'price from' (null = on request), delivery, one render with its credit. 'enquiry' follows config.enquiryRouting until task 8z is decided.",
-  "projects": []
+ "_how": "Developer projects (prompts 26 §1 and 28 §2). partner=true: shown on the public map, the place card ('Partner developers here') and a showcase page, labelled 'Sponsored' (only once the developer has signed and paid, D6, D38). partner=false: shown only in that developer's private demo (/d/{demo}/). Facts only as published by the developer or its public listings, with the URL of every item in 'sources' and the date in 'checked'; prices exactly as published (null = on request). On the site, a partner's line must also be written natively in PT and FR ('lines': {pt, fr}); the English 'line' is used for demos. Built by scripts/developers/import.py.",
+ "projects": [
+  {
+   "id": "tomas-ribeiro-79",
+   "name": "Tomás Ribeiro 79",
+   "developer": "Vanguard Properties",
+   "devSlug": "vanguard-properties",
+   "muni": "lisboa",
+   "lon": -9.149,
+   "lat": 38.7316,
+   "line": "Apartment building on Rua Tomás Ribeiro in Avenidas Novas, between Saldanha and Marquês de Pombal: 21 apartments with two to four bedrooms over 8 floors, with indoor pool, sauna, concierge and private parking.",
+   "delivery": null,
+   "url": "https://www.vangproperties.com/en/lisbon-portugal-real-estate/tomas-ribeiro-79/",
+   "partner": false,
+   "demo": "34c86306cf",
+   "checked": "2026-10-26",
+   "render": "/d/34c86306cf/img/hero",
+   "credit": "Vanguard Properties (render, facade)",
+   "gallery": [
+    "/d/34c86306cf/img/tr79-living",
+    "/d/34c86306cf/img/tr79-dining",
+    "/d/34c86306cf/img/tr79-bedroom",
+    "/d/34c86306cf/img/tr79-kitchen",
+    "/d/34c86306cf/img/tr79-terrace"
+   ],
+   "credits": [
+    "Vanguard Properties"
+   ],
+   "from": 1650000,
+   "typologies": [
+    "T2",
+    "T3"
+   ],
+   "units": [
+    {
+     "id": "tom-1c",
+     "ref": "TOM_1C",
+     "name": null,
+     "typology": "T2",
+     "area": 109.77,
+     "areaNote": "gross private area; floor 1; balcony 12.52 m2; terrace 80.42 m2; 1 parking space(s)",
+     "price": 1650000,
+     "priceNote": "asking",
+     "img": "/d/34c86306cf/img/tr79-terrace",
+     "url": "https://www.vangproperties.com/en/lisbon-portugal-real-estate/tomas-ribeiro-79/"
+    },
+    {
+     "id": "tom-2b",
+     "ref": "TOM_2B",
+     "name": null,
+     "typology": "T3",
+     "area": 189.34,
+     "areaNote": "gross private area; floor 2; balcony 21.26 m2; terrace 0 m2; 2 parking space(s)",
+     "price": 2490000,
+     "priceNote": "asking",
+     "img": "/d/34c86306cf/img/tr79-living",
+     "url": "https://www.vangproperties.com/en/lisbon-portugal-real-estate/tomas-ribeiro-79/"
+    },
+    {
+     "id": "tom-2c",
+     "ref": "TOM_2C",
+     "name": null,
+     "typology": "T3",
+     "area": 179.9,
+     "areaNote": "gross private area; floor 2; balcony 19.67 m2; terrace 0 m2; 2 parking space(s)",
+     "price": 2400000,
+     "priceNote": "asking",
+     "img": "/d/34c86306cf/img/tr79-dining",
+     "url": "https://www.vangproperties.com/en/lisbon-portugal-real-estate/tomas-ribeiro-79/"
+    },
+    {
+     "id": "tom-3b",
+     "ref": "TOM_3B",
+     "name": null,
+     "typology": "T3",
+     "area": 191.54,
+     "areaNote": "gross private area; floor 3; balcony 18.91 m2; terrace 0 m2; 2 parking space(s)",
+     "price": 2540000,
+     "priceNote": "asking",
+     "img": "/d/34c86306cf/img/tr79-bedroom",
+     "url": "https://www.vangproperties.com/en/lisbon-portugal-real-estate/tomas-ribeiro-79/"
+    },
+    {
+     "id": "tom-3c",
+     "ref": "TOM_3C",
+     "name": null,
+     "typology": "T3",
+     "area": 179.9,
+     "areaNote": "gross private area; floor 3; balcony 19.67 m2; terrace 0 m2; 2 parking space(s)",
+     "price": 2450000,
+     "priceNote": "asking",
+     "img": "/d/34c86306cf/img/tr79-kitchen",
+     "url": "https://www.vangproperties.com/en/lisbon-portugal-real-estate/tomas-ribeiro-79/"
+    },
+    {
+     "id": "tom-4b",
+     "ref": "TOM_4B",
+     "name": null,
+     "typology": "T3",
+     "area": 189.34,
+     "areaNote": "gross private area; floor 4; balcony 21.26 m2; terrace 0 m2; 2 parking space(s)",
+     "price": 2570000,
+     "priceNote": "asking",
+     "img": "/d/34c86306cf/img/tr79-living",
+     "url": "https://www.vangproperties.com/en/lisbon-portugal-real-estate/tomas-ribeiro-79/"
+    },
+    {
+     "id": "tom-5b",
+     "ref": "TOM_5B",
+     "name": null,
+     "typology": "T3",
+     "area": 191.54,
+     "areaNote": "gross private area; floor 5; balcony 18.91 m2; terrace 0 m2; 2 parking space(s)",
+     "price": 2625000,
+     "priceNote": "asking",
+     "img": "/d/34c86306cf/img/tr79-dining",
+     "url": "https://www.vangproperties.com/en/lisbon-portugal-real-estate/tomas-ribeiro-79/"
+    },
+    {
+     "id": "tom-6c",
+     "ref": "TOM_6C",
+     "name": null,
+     "typology": "T3",
+     "area": 179.9,
+     "areaNote": "gross private area; floor 6; balcony 19.67 m2; terrace 0 m2; 2 parking space(s)",
+     "price": 2570000,
+     "priceNote": "asking",
+     "img": "/d/34c86306cf/img/tr79-bedroom",
+     "url": "https://www.vangproperties.com/en/lisbon-portugal-real-estate/tomas-ribeiro-79/"
+    }
+   ],
+   "sources": [
+    "https://www.vangproperties.com/en/comporta-portugal-real-estate/muda/",
+    "https://www.vangproperties.com/en/lisbon-portugal-real-estate/tomas-ribeiro-79/"
+   ],
+   "hideRefs": false
+  },
+  {
+   "id": "muda",
+   "name": "Muda",
+   "developer": "Vanguard Properties",
+   "devSlug": "vanguard-properties",
+   "muni": "grandola",
+   "lon": -8.688,
+   "lat": 38.27,
+   "line": "Residential village in the Comporta region, between Melides, Carvalhal and Grândola, of single-storey homes with private gardens and pools for year-round or part-year living; the priced offer is 15 urban plots for owners to build their own villa under the development rules.",
+   "delivery": "2029-H1",
+   "url": "https://www.vangproperties.com/en/comporta-portugal-real-estate/muda/",
+   "partner": false,
+   "demo": "34c86306cf",
+   "checked": "2026-10-26",
+   "render": "/d/34c86306cf/img/muda-hero",
+   "credit": "Vanguard Properties (render by 1825, aerial view)",
+   "gallery": [
+    "/d/34c86306cf/img/muda-villa-exterior",
+    "/d/34c86306cf/img/muda-villa-living"
+   ],
+   "credits": [
+    "Vanguard Properties"
+   ],
+   "from": 700000,
+   "typologies": [
+    "Plot"
+   ],
+   "units": [
+    {
+     "id": "muda-4-08",
+     "ref": "MUDA 4.08",
+     "name": null,
+     "typology": "Plot",
+     "area": 834.3,
+     "areaNote": "plot (lot) area; permitted construction / gross private area 243 m2 (urban plot for a bespoke villa, not a built home)",
+     "price": 700000,
+     "priceNote": "asking",
+     "img": "/d/34c86306cf/img/muda-hero",
+     "url": "https://www.vangproperties.com/en/comporta-portugal-real-estate/muda/"
+    },
+    {
+     "id": "muda-4-04",
+     "ref": "MUDA 4.04",
+     "name": null,
+     "typology": "Plot",
+     "area": 1019.3,
+     "areaNote": "plot (lot) area; permitted construction / gross private area 297 m2 (urban plot for a bespoke villa, not a built home)",
+     "price": 710000,
+     "priceNote": "asking",
+     "img": "/d/34c86306cf/img/muda-hero",
+     "url": "https://www.vangproperties.com/en/comporta-portugal-real-estate/muda/"
+    },
+    {
+     "id": "muda-4-05",
+     "ref": "MUDA 4.05",
+     "name": null,
+     "typology": "Plot",
+     "area": 1275.9,
+     "areaNote": "plot (lot) area; permitted construction / gross private area 372 m2 (urban plot for a bespoke villa, not a built home)",
+     "price": 1000000,
+     "priceNote": "asking",
+     "img": "/d/34c86306cf/img/muda-hero",
+     "url": "https://www.vangproperties.com/en/comporta-portugal-real-estate/muda/"
+    },
+    {
+     "id": "muda-4-01",
+     "ref": "MUDA 4.01",
+     "name": null,
+     "typology": "Plot",
+     "area": 2388,
+     "areaNote": "plot (lot) area; permitted construction / gross private area 696 m2 (urban plot for a bespoke villa, not a built home)",
+     "price": 1750000,
+     "priceNote": "asking",
+     "img": "/d/34c86306cf/img/muda-hero",
+     "url": "https://www.vangproperties.com/en/comporta-portugal-real-estate/muda/"
+    }
+   ],
+   "sources": [
+    "https://www.vangproperties.com/en/comporta-portugal-real-estate/muda/",
+    "https://www.vangproperties.com/en/lisbon-portugal-real-estate/tomas-ribeiro-79/"
+   ],
+   "hideRefs": false
+  },
+  {
+   "id": "the-residences-vale-do-lobo",
+   "name": "The Residences Vale do Lobo",
+   "developer": "Vale do Lobo",
+   "devSlug": "vale-do-lobo",
+   "muni": "loule",
+   "lon": -8.058,
+   "lat": 37.058,
+   "line": "First new residential development built by the resort in about 20 years: 44 homes (25 apartments in two buildings, 10 linked villas, 9 townhouses) beside the 10th hole of the Royal Golf Course, designed by Broadway Malyan and sold off plan with 30% on reservation/contract and 70% on completion.",
+   "delivery": null,
+   "url": "https://www.valedolobo.com/en/the-residences-vale-do-lobo/",
+   "partner": false,
+   "demo": "65bf930b11",
+   "checked": "2026-10-26",
+   "render": "/d/65bf930b11/img/hero-residences-pool-gardens",
+   "credit": "Render: The Residences Vale do Lobo / valedolobo.com (© Vale do Lobo). Page og:image, 1920x1082; computer-generated image.",
+   "gallery": [
+    "/d/65bf930b11/img/residences-apartment-terrace-render",
+    "/d/65bf930b11/img/residences-apartments-pool-render",
+    "/d/65bf930b11/img/residences-apartment-buildings-pool-render",
+    "/d/65bf930b11/img/residences-linked-villa-garden-pool-render"
+   ],
+   "credits": [
+    "Photo: Vale do Lobo Real Estate / valedolobo.com",
+    "Render: The Residences Vale do Lobo / valedolobo.com"
+   ],
+   "from": 1480000,
+   "typologies": [
+    "T2",
+    "T3",
+    "T4"
+   ],
+   "units": [
+    {
+     "id": "sp45",
+     "ref": "SP45",
+     "name": "Two Bedroom Apartments",
+     "typology": "T2",
+     "area": 125,
+     "areaNote": "Built size, 'From 125 m²' (smallest unit of the type)",
+     "price": 1480000,
+     "priceNote": "from",
+     "img": "/d/65bf930b11/img/residences-apartment-terrace-render",
+     "url": "https://www.valedolobo.com/en/real-estate/buy-a-property/the-residences-two-bedroom-apartments/"
+    },
+    {
+     "id": "sp46",
+     "ref": "SP46",
+     "name": "Three Bedroom Apartments",
+     "typology": "T3",
+     "area": 172,
+     "areaNote": "Built size, 'From 172 m²' (smallest unit of the type)",
+     "price": 1960000,
+     "priceNote": "from",
+     "img": "/d/65bf930b11/img/residences-apartments-pool-render",
+     "url": "https://www.valedolobo.com/en/real-estate/buy-a-property/the-residences-three-bedroom-apartments/"
+    },
+    {
+     "id": "sp47",
+     "ref": "SP47",
+     "name": "Four Bedroom Apartments",
+     "typology": "T4",
+     "area": 237,
+     "areaNote": "Built size, 'From 237 m²' (smallest unit of the type)",
+     "price": 2840000,
+     "priceNote": "from",
+     "img": "/d/65bf930b11/img/residences-apartment-buildings-pool-render",
+     "url": "https://www.valedolobo.com/en/real-estate/buy-a-property/the-residences-four-bedroom-apartments/"
+    },
+    {
+     "id": "sp48",
+     "ref": "SP48",
+     "name": "Linked Villas",
+     "typology": "T4",
+     "area": 244,
+     "areaNote": "Built size, 'From 244 m²'; plot 'From 616 m²'; 4 bathrooms, private pool, three floors",
+     "price": 3200000,
+     "priceNote": "from",
+     "img": "/d/65bf930b11/img/residences-linked-villa-garden-pool-render",
+     "url": "https://www.valedolobo.com/en/real-estate/buy-a-property/the-residences-linked-villas/"
+    }
+   ],
+   "sources": [
+    "https://www.valedolobo.com/en/real-estate/buy-a-property/exclusive-listing-unique-design-villa/",
+    "https://www.valedolobo.com/en/real-estate/buy-a-property/linked-villa-with-golf-views/",
+    "https://www.valedolobo.com/en/real-estate/buy-a-property/margarida-apartment-with-jacuzzi-2/",
+    "https://www.valedolobo.com/en/real-estate/buy-a-property/the-residences-four-bedroom-apartments/",
+    "https://www.valedolobo.com/en/real-estate/buy-a-property/the-residences-linked-villas/",
+    "https://www.valedolobo.com/en/real-estate/buy-a-property/the-residences-three-bedroom-apartments/",
+    "https://www.valedolobo.com/en/real-estate/buy-a-property/the-residences-two-bedroom-apartments/",
+    "https://www.valedolobo.com/en/real-estate/buy-a-property/traditional-villa-with-golf-sea-view-2/",
+    "https://www.valedolobo.com/en/the-residences-vale-do-lobo/"
+   ],
+   "hideRefs": false
+  },
+  {
+   "id": "orizon",
+   "name": "O'rizon Living",
+   "developer": "Shalu Investments",
+   "devSlug": "shalu-investments",
+   "muni": "gondomar",
+   "lon": -8.56481,
+   "lat": 41.1408,
+   "line": "Gated condominium of about 200 apartments in five buildings on a 35,000 m² site on the Douro bank next to the Marina do Freixo, designed by Paulo Merlini (PMA), with outdoor pool, heated indoor pool with spa, gym, coworking lounge and playground; T1 to T4.",
+   "delivery": null,
+   "url": "https://www.essential-business.pt/2025/10/03/shalu-invests-e100-million-in-luxury-porto-project/",
+   "partner": false,
+   "demo": "f658bd1eef",
+   "checked": "2026-10-26",
+   "render": "/d/f658bd1eef/img/hero-aerial-render-douro",
+   "credit": "O'rizon Living / Shalu Investments, via Essential Business (article featured image; no credit line shown)",
+   "gallery": [],
+   "credits": [
+    "O'rizon Living / Shalu Investments, via Essential Business"
+   ],
+   "from": 360000,
+   "typologies": [
+    "T1",
+    "T2",
+    "T3",
+    "T4"
+   ],
+   "units": [
+    {
+     "id": "re2027-2bf110",
+     "ref": "RE2027-2BF110",
+     "name": null,
+     "typology": "T1",
+     "area": 57.2,
+     "areaNote": "Area as published on the Imovirtual listing (single area field; Imovirtual's generated text labels it both área útil and área bruta, so the basis is not stated by the agency); outdoor: varanda 21,6 m² per description; Same unit ref also listed at 57 m² (ID1iYqC, ESSIA Real Estate Empreendimentos, 385 000 €).",
+     "price": 385000,
+     "priceNote": "asking price as published on Imovirtual, EUR",
+     "img": null,
+     "url": "https://www.imovirtual.com/pt/anuncio/apartamento-t1-com-varanda-em-condominio-privado-com-vista-rio-ID1iBWD"
+    },
+    {
+     "id": "re2027-2bf210",
+     "ref": "RE2027-2BF210",
+     "name": null,
+     "typology": "T1",
+     "area": 59,
+     "areaNote": "Area as published on the Imovirtual listing (single area field; Imovirtual's generated text labels it both área útil and área bruta, so the basis is not stated by the agency); outdoor: varanda 29,7 m² per description; Same ref also listed at 58,9 m² (ID1irIL) and 59 m² (ID1iYs8), same price.",
+     "price": 390000,
+     "priceNote": "asking price as published on Imovirtual, EUR",
+     "img": null,
+     "url": "https://www.imovirtual.com/pt/anuncio/apartamento-t1-com-varanda-no-orizon-living-ID1iRU5"
+    },
+    {
+     "id": "re2027-2bgf10",
+     "ref": "RE2027-2BGF10",
+     "name": null,
+     "typology": "T1",
+     "area": 70,
+     "areaNote": "Area as published on the Imovirtual listing (single area field; Imovirtual's generated text labels it both área útil and área bruta, so the basis is not stated by the agency); outdoor: terrace and private garden (size not stated); Same ref also listed at 69 m² (ID1ii5y) and 70 m² (ID1iZwN), same price.",
+     "price": 360000,
+     "priceNote": "asking price as published on Imovirtual, EUR",
+     "img": null,
+     "url": "https://www.imovirtual.com/pt/anuncio/apartamento-t1-com-terraco-e-jardim-no-orizon-living-ID1iRrR"
+    },
+    {
+     "id": "re2027-2bn110",
+     "ref": "RE2027-2BN110",
+     "name": null,
+     "typology": "T1",
+     "area": 71,
+     "areaNote": "Area as published on the Imovirtual listing (single area field; Imovirtual's generated text labels it both área útil and área bruta, so the basis is not stated by the agency); outdoor: private garden (size not stated); CONFLICT: same ref listed at 105 m² by Essia Boavista (ID1ik3m), same price 365 000 €; 71 m² also on ID1j46S.",
+     "price": 365000,
+     "priceNote": "asking price as published on Imovirtual, EUR",
+     "img": null,
+     "url": "https://www.imovirtual.com/pt/anuncio/apartamento-t1-com-jardim-no-orizon-living-ID1iRwE"
+    },
+    {
+     "id": "re2027-2bn201",
+     "ref": "RE2027-2BN201",
+     "name": null,
+     "typology": "T2",
+     "area": 110,
+     "areaNote": "Area as published on the Imovirtual listing (single area field; Imovirtual's generated text labels it both área útil and área bruta, so the basis is not stated by the agency); outdoor: varanda and terraço 35,5 m² per description",
+     "price": 615000,
+     "priceNote": "asking price as published on Imovirtual, EUR",
+     "img": null,
+     "url": "https://www.imovirtual.com/pt/anuncio/apartamento-t2-no-orizon-living-com-varanda-e-terraco-e-vistas-rio-ID1iRXF"
+    },
+    {
+     "id": "re2027-2bn111",
+     "ref": "RE2027-2BN111",
+     "name": null,
+     "typology": "T2",
+     "area": 118,
+     "areaNote": "Area as published on the Imovirtual listing (single area field; Imovirtual's generated text labels it both área útil and área bruta, so the basis is not stated by the agency); outdoor: varanda and private garden 44,1 m² per description; Same ref listed at 119 m² on ID1if6A (Private Essia), same price.",
+     "price": 670000,
+     "priceNote": "asking price as published on Imovirtual, EUR",
+     "img": null,
+     "url": "https://www.imovirtual.com/pt/anuncio/t2-no-orizon-living-com-varanda-e-jardim-privativo-vistas-rio-ID1iMK3"
+    },
+    {
+     "id": "re2027-2an106",
+     "ref": "RE2027-2AN106",
+     "name": null,
+     "typology": "T2",
+     "area": 170,
+     "areaNote": "Area as published on the Imovirtual listing (single area field; Imovirtual's generated text labels it both área útil and área bruta, so the basis is not stated by the agency); outdoor: varanda and garden, total 46,6 m² per description",
+     "price": 699000,
+     "priceNote": "asking price as published on Imovirtual, EUR",
+     "img": null,
+     "url": "https://www.imovirtual.com/pt/anuncio/apartamento-t2-no-orizon-living-com-varanda-e-jardim-privativo-ID1iCJG"
+    },
+    {
+     "id": "re2027-2agf02",
+     "ref": "RE2027-2AGF02",
+     "name": null,
+     "typology": "T3",
+     "area": 170,
+     "areaNote": "Area as published on the Imovirtual listing (single area field; Imovirtual's generated text labels it both área útil and área bruta, so the basis is not stated by the agency); outdoor: varanda 20,2 m² per description, plus a second balcony",
+     "price": 775000,
+     "priceNote": "asking price as published on Imovirtual, EUR",
+     "img": null,
+     "url": "https://www.imovirtual.com/pt/anuncio/apartamento-t3-com-varanda-no-orizon-living-ID1iCKC"
+    },
+    {
+     "id": "re2027-2bf205",
+     "ref": "RE2027-2BF205",
+     "name": null,
+     "typology": "T3",
+     "area": 146,
+     "areaNote": "Area as published on the Imovirtual listing (single area field; Imovirtual's generated text labels it both área útil and área bruta, so the basis is not stated by the agency); outdoor: duplex; varanda 10,3 m² per description; Same ref listed at 135 m² on ID1iYtc (ESSIA Real Estate Empreendimentos), same price.",
+     "price": 695000,
+     "priceNote": "asking price as published on Imovirtual, EUR",
+     "img": null,
+     "url": "https://www.imovirtual.com/pt/anuncio/apartamento-t3-duplex-com-varanda-vistas-rio-e-cidade-do-porto-ID1iRVg"
+    },
+    {
+     "id": "re2027-2bf401",
+     "ref": "RE2027-2BF401",
+     "name": null,
+     "typology": "T3",
+     "area": 128,
+     "areaNote": "Area as published on the Imovirtual listing (single area field; Imovirtual's generated text labels it both área útil and área bruta, so the basis is not stated by the agency); outdoor: varanda and terraço 115,5 m² per description",
+     "price": 975000,
+     "priceNote": "asking price as published on Imovirtual, EUR",
+     "img": null,
+     "url": "https://www.imovirtual.com/pt/anuncio/t3-em-condominio-privado-com-vistas-desafogadas-para-o-rio-douro-ID1if1I"
+    },
+    {
+     "id": "re2027-2an102",
+     "ref": "RE2027-2AN102",
+     "name": null,
+     "typology": "T4",
+     "area": 199,
+     "areaNote": "Area as published on the Imovirtual listing (single area field; Imovirtual's generated text labels it both área útil and área bruta, so the basis is not stated by the agency); outdoor: varanda 53,3 m² per description",
+     "price": 1090000,
+     "priceNote": "asking price as published on Imovirtual, EUR",
+     "img": null,
+     "url": "https://www.imovirtual.com/pt/anuncio/apartamento-t4-no-orizon-living-com-varanda-vistas-rio-douro-ID1iSmG"
+    },
+    {
+     "id": "re2027-2agf01",
+     "ref": "RE2027-2AGF01",
+     "name": null,
+     "typology": "T4",
+     "area": 337,
+     "areaNote": "Area as published on the Imovirtual listing (single area field; Imovirtual's generated text labels it both área útil and área bruta, so the basis is not stated by the agency); outdoor: varandas and terraço (size not stated)",
+     "price": 1350000,
+     "priceNote": "asking price as published on Imovirtual, EUR",
+     "img": null,
+     "url": "https://www.imovirtual.com/pt/anuncio/t4-no-orizon-living-com-varandas-e-terraco-com-vistas-rio-douro-ID1iQ1o"
+    }
+   ],
+   "sources": [
+    "https://www.essential-business.pt/2025/10/03/shalu-invests-e100-million-in-luxury-porto-project/",
+    "https://www.imovirtual.com/pt/anuncio/apartamento-t1-com-jardim-no-orizon-living-ID1iRwE",
+    "https://www.imovirtual.com/pt/anuncio/apartamento-t1-com-terraco-e-jardim-no-orizon-living-ID1iRrR",
+    "https://www.imovirtual.com/pt/anuncio/apartamento-t1-com-varanda-em-condominio-privado-com-vista-rio-ID1iBWD",
+    "https://www.imovirtual.com/pt/anuncio/apartamento-t1-com-varanda-no-orizon-living-ID1iRU5",
+    "https://www.imovirtual.com/pt/anuncio/apartamento-t2-no-orizon-living-com-varanda-e-jardim-privativo-ID1iCJG",
+    "https://www.imovirtual.com/pt/anuncio/apartamento-t2-no-orizon-living-com-varanda-e-terraco-e-vistas-rio-ID1iRXF",
+    "https://www.imovirtual.com/pt/anuncio/apartamento-t3-com-varanda-no-orizon-living-ID1iCKC",
+    "https://www.imovirtual.com/pt/anuncio/apartamento-t3-duplex-com-varanda-vistas-rio-e-cidade-do-porto-ID1iRVg",
+    "https://www.imovirtual.com/pt/anuncio/apartamento-t4-no-orizon-living-com-varanda-vistas-rio-douro-ID1iSmG",
+    "https://www.imovirtual.com/pt/anuncio/t2-no-orizon-living-com-varanda-e-jardim-privativo-vistas-rio-ID1iMK3",
+    "https://www.imovirtual.com/pt/anuncio/t3-em-condominio-privado-com-vistas-desafogadas-para-o-rio-douro-ID1if1I",
+    "https://www.imovirtual.com/pt/anuncio/t4-no-orizon-living-com-varandas-e-terraco-com-vistas-rio-douro-ID1iQ1o"
+   ],
+   "hideRefs": true
+  },
+  {
+   "id": "prata-factory",
+   "name": "Prata Riverside Village – Factory building",
+   "developer": "VIC Properties",
+   "devSlug": "vic-properties",
+   "muni": "lisboa",
+   "lon": -9.099291,
+   "lat": 38.744205,
+   "line": "53 apartments, T0 to T4, designed by Renzo Piano. The building sits by the central square of Prata Riverside Village, a riverside neighbourhood in Marvila built on a former industrial site.",
+   "delivery": null,
+   "url": "https://www.imovirtual.com/pt/empreendimento/edificio-factory-ID1gRrG",
+   "partner": false,
+   "demo": "7c1e5a90d4",
+   "checked": "2026-10-26",
+   "render": "/d/7c1e5a90d4/img/hero-prata-riverfront-aerial-sunset",
+   "credit": "© VIC Properties (vic-properties.com)",
+   "gallery": [
+    "/d/7c1e5a90d4/img/prata-riverfront-buildings-aerial",
+    "/d/7c1e5a90d4/img/prata-neighbourhood-drone",
+    "/d/7c1e5a90d4/img/prata-rooftops-river-aerial",
+    "/d/7c1e5a90d4/img/prata-inner-courtyard-garden",
+    "/d/7c1e5a90d4/img/prata-show-apartment-living-room",
+    "/d/7c1e5a90d4/img/prata-interior-kitchen-dining",
+    "/d/7c1e5a90d4/img/prata-interior-bedroom",
+    "/d/7c1e5a90d4/img/south-building-interior-render"
+   ],
+   "credits": [
+    "© VIC Properties",
+    "© VIC Properties; photo Ricardo Oliveira Alves"
+   ],
+   "from": 500000,
+   "typologies": [
+    "T0",
+    "T2",
+    "T3"
+   ],
+   "units": [
+    {
+     "id": "factory-a4c",
+     "ref": "Factory A4C",
+     "name": null,
+     "typology": "T0",
+     "area": 48.4,
+     "areaNote": "Area as listed on Imovirtual (no interior/terrace split given). Typology from the portal's room field (1 room = T0); the listing text does not state it. 4th floor.",
+     "price": 500000,
+     "priceNote": "asking",
+     "img": null,
+     "url": "https://www.imovirtual.com/pt/anuncio/edificio-factory-bloco-a-4c-ID1hytA"
+    },
+    {
+     "id": "factory-b4a",
+     "ref": "Factory B4A",
+     "name": null,
+     "typology": "T2",
+     "area": 136.1,
+     "areaNote": "Total as published: interior 114.7 m² + terraces/balcony 21.4 m². 4th floor, 1 parking space, storage.",
+     "price": 970000,
+     "priceNote": "asking",
+     "img": null,
+     "url": "https://www.imovirtual.com/pt/anuncio/edificio-factory-bloco-b-4a-ID1gRs7"
+    },
+    {
+     "id": "factory-b4d",
+     "ref": "Factory B4D",
+     "name": null,
+     "typology": "T2",
+     "area": 184.2,
+     "areaNote": "Total as published: interior 129.3 m² + terraces/balcony 54 m² (the parts add up to 183.3; listed total is 184.2). 4th floor, 1 parking space, storage.",
+     "price": 1125000,
+     "priceNote": "asking",
+     "img": null,
+     "url": "https://www.imovirtual.com/pt/anuncio/edificio-factory-bloco-b-4d-ID1gRsa"
+    },
+    {
+     "id": "factory-a1a",
+     "ref": "Factory A1A",
+     "name": null,
+     "typology": "T3",
+     "area": 202.6,
+     "areaNote": "Total as published: interior 150.8 m² + terraces/balcony 51.8 m². 1st floor, 2 parking spaces, storage.",
+     "price": 1300000,
+     "priceNote": "asking",
+     "img": null,
+     "url": "https://www.imovirtual.com/pt/anuncio/edificio-factory-bloco-a-1a-ID1gRsu"
+    },
+    {
+     "id": "factory-c6a",
+     "ref": "Factory C6A",
+     "name": null,
+     "typology": "T2",
+     "area": 260.4,
+     "areaNote": "Total as published: interior 115.8 m² + terraces/balcony 144.6 m² (the text has a typo, '2260,4'). 6th floor, 1 parking space, storage.",
+     "price": 1480000,
+     "priceNote": "asking",
+     "img": null,
+     "url": "https://www.imovirtual.com/pt/anuncio/edificio-factory-bloco-c-6a-ID1gRsh"
+    }
+   ],
+   "sources": [
+    "https://vic-properties.com/en/latest/more-than-600-families-have-already-chosen-prata-as-their-home/",
+    "https://vic-properties.com/en/portfolio/prata-riverside-village/",
+    "https://vic-properties.com/ultimas/casa-do-passadico-interiores-cria-projeto-de-decoracao-para-o-prata-riverside-village/",
+    "https://vic-properties.com/ultimas/vic-properties-conclui-riverside-e-prepara-arranque-de-obras-de-mais-dois-edificios/",
+    "https://vic-properties.com/ultimas/visao-de-renzo-piano-para-marvila-ja-e-uma-realidade-e-acelera-com-o-lancamento-do-edificio-south/",
+    "https://www.imovirtual.com/pt/anuncio/edificio-factory-bloco-a-1a-ID1gRsu",
+    "https://www.imovirtual.com/pt/anuncio/edificio-factory-bloco-a-4c-ID1hytA",
+    "https://www.imovirtual.com/pt/anuncio/edificio-factory-bloco-b-4a-ID1gRs7",
+    "https://www.imovirtual.com/pt/anuncio/edificio-factory-bloco-b-4d-ID1gRsa",
+    "https://www.imovirtual.com/pt/anuncio/edificio-factory-bloco-c-6a-ID1gRsh",
+    "https://www.imovirtual.com/pt/empreendimento/edificio-factory-ID1gRrG"
+   ],
+   "hideRefs": false
+  },
+  {
+   "id": "prata-south",
+   "name": "Prata Riverside Village – South building",
+   "developer": "VIC Properties",
+   "devSlug": "vic-properties",
+   "muni": "lisboa",
+   "lon": -9.098155,
+   "lat": 38.745808,
+   "line": "72 apartments, T0 to T4, designed by Renzo Piano. The building is at the south-west end of Prata Riverside Village, on the river next to Parque Ribeirinho Oriente, with river views to the south and east.",
+   "delivery": "completed",
+   "url": "https://www.imovirtual.com/pt/empreendimento/edificio-south-ID1fYNU",
+   "partner": false,
+   "demo": "7c1e5a90d4",
+   "checked": "2026-10-26",
+   "render": "/d/7c1e5a90d4/img/prata-riverfront-buildings-aerial",
+   "credit": "© VIC Properties; photo Ricardo Oliveira Alves (photographer named in the file name on vic-properties.com)",
+   "gallery": [
+    "/d/7c1e5a90d4/img/hero-prata-riverfront-aerial-sunset",
+    "/d/7c1e5a90d4/img/prata-neighbourhood-drone",
+    "/d/7c1e5a90d4/img/prata-rooftops-river-aerial",
+    "/d/7c1e5a90d4/img/prata-inner-courtyard-garden",
+    "/d/7c1e5a90d4/img/prata-show-apartment-living-room",
+    "/d/7c1e5a90d4/img/prata-interior-kitchen-dining",
+    "/d/7c1e5a90d4/img/prata-interior-bedroom",
+    "/d/7c1e5a90d4/img/south-building-interior-render"
+   ],
+   "credits": [
+    "© VIC Properties",
+    "© VIC Properties; photo Ricardo Oliveira Alves"
+   ],
+   "from": 1040000,
+   "typologies": [
+    "T2",
+    "T3",
+    "T4"
+   ],
+   "units": [
+    {
+     "id": "south-b-5oa",
+     "ref": "South B-5ºA",
+     "name": null,
+     "typology": "T2",
+     "area": 151.5,
+     "areaNote": "Headline area on Imovirtual is 151.5 m²; the description gives interior 91.8 m² + terraces/balcony 60 m² = 151.8 m². 5th floor, 1 parking space, storage.",
+     "price": 1040000,
+     "priceNote": "asking",
+     "img": null,
+     "url": "https://www.imovirtual.com/pt/anuncio/edificio-south-bloco-b-5a-ID1hyaD"
+    },
+    {
+     "id": "south-b-5ob",
+     "ref": "South B-5ºB",
+     "name": null,
+     "typology": "T2",
+     "area": 175.1,
+     "areaNote": "Area as listed on Imovirtual (no interior/terrace split given). 5th floor, garage.",
+     "price": 1190000,
+     "priceNote": "asking",
+     "img": null,
+     "url": "https://www.imovirtual.com/pt/anuncio/apartamento-t2-edificio-south-ID1fYOW"
+    },
+    {
+     "id": "south-c-4oa",
+     "ref": "South C-4ºA",
+     "name": null,
+     "typology": "T3",
+     "area": 193.4,
+     "areaNote": "Total as published: interior 157.2 m² + terraces/balcony 36.3 m². 4th floor, 2 parking spaces, storage.",
+     "price": 1510000,
+     "priceNote": "asking",
+     "img": null,
+     "url": "https://www.imovirtual.com/pt/anuncio/edificio-south-bloco-c-4a-ID1hyb9"
+    },
+    {
+     "id": "south-c-2oa",
+     "ref": "South C-2ºA",
+     "name": null,
+     "typology": "T3",
+     "area": 252.8,
+     "areaNote": "Total as published: interior 163.6 m² + terraces/balcony 89.2 m². 2nd floor, 2 parking spaces, storage.",
+     "price": 1610000,
+     "priceNote": "asking",
+     "img": null,
+     "url": "https://www.imovirtual.com/pt/anuncio/edificio-south-bloco-c-2a-ID1hyaM"
+    },
+    {
+     "id": "south-c-1oa",
+     "ref": "South C-1ºA",
+     "name": null,
+     "typology": "T4",
+     "area": 266.1,
+     "areaNote": "Area as listed on Imovirtual (no interior/terrace split given). 1st floor, garage.",
+     "price": 1810000,
+     "priceNote": "asking",
+     "img": null,
+     "url": "https://www.imovirtual.com/pt/anuncio/apartamento-t4-edificio-south-ID1fYOe"
+    }
+   ],
+   "sources": [
+    "https://vic-properties.com/en/latest/more-than-600-families-have-already-chosen-prata-as-their-home/",
+    "https://vic-properties.com/en/portfolio/prata-riverside-village/",
+    "https://vic-properties.com/ultimas/casa-do-passadico-interiores-cria-projeto-de-decoracao-para-o-prata-riverside-village/",
+    "https://vic-properties.com/ultimas/vic-properties-conclui-riverside-e-prepara-arranque-de-obras-de-mais-dois-edificios/",
+    "https://vic-properties.com/ultimas/visao-de-renzo-piano-para-marvila-ja-e-uma-realidade-e-acelera-com-o-lancamento-do-edificio-south/",
+    "https://www.imovirtual.com/pt/anuncio/apartamento-t2-edificio-south-ID1fYOW",
+    "https://www.imovirtual.com/pt/anuncio/apartamento-t4-edificio-south-ID1fYOe",
+    "https://www.imovirtual.com/pt/anuncio/edificio-south-bloco-b-5a-ID1hyaD",
+    "https://www.imovirtual.com/pt/anuncio/edificio-south-bloco-c-2a-ID1hyaM",
+    "https://www.imovirtual.com/pt/anuncio/edificio-south-bloco-c-4a-ID1hyb9",
+    "https://www.imovirtual.com/pt/empreendimento/edificio-south-ID1fYNU"
+   ],
+   "hideRefs": false
+  }
+ ]
 }
