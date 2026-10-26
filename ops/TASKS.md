@@ -123,7 +123,7 @@ Status: To do · Doing · Blocked · Done
 
 | 8z | Decide where enquiries about a specific developer project go: (a) straight to the developer's sales team, (b) via Habinedita as the broking agency, or (c) the buyer chooses; D14 covers general buyer requests only | Operator | To do | 2026-10-30 |
 
-| 29a | Listen to the four voice samples and pick the narrator (George, Fable, Lewis or Daniel) for the demo films | Operator | To do | 2026-10-27 |
+| 29a | Listen to the voice draft of the buyer (af_heart) and approve it or ask for another voice | Operator | To do | 2026-10-27 |
 
 | 29b | Compare map v1 (frozen preview) with map v2 and say go or keep v1 | Operator | To do | after §3 |
 
