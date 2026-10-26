@@ -1,0 +1,188 @@
+<!doctype html>
+<!-- Prompt 31 (D58), demo films v4 "December": the built shots, rendered frame by frame in Three.js. No people,
+     no AI imagery: a room at night (window, table, candle, glass, laptop) and a terrace in Lisbon in the morning.
+     window.shot(name, t) renders shot `name` at t seconds; the renderer captures the canvas. Textures come from
+     ?ny= (the city behind the window), ?pt= (the Portugal backdrop) and ?screen= (the site on the laptop). -->
+<html><head><meta charset="utf-8"><style>html,body{margin:0;background:#000;overflow:hidden}canvas{display:block}</style></head>
+<body>
+<script type="importmap">{ "imports": { "three": "./three.module.js" } }</script>
+<script type="module">
+import * as THREE from "three";
+const Q = new URLSearchParams(location.search), W = +(Q.get("w") ?? 1920), H = +(Q.get("h") ?? 1080);
+const R = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+R.setSize(W, H); R.setPixelRatio(1); R.outputColorSpace = THREE.SRGBColorSpace;
+R.toneMapping = THREE.ACESFilmicToneMapping; R.shadowMap.enabled = true; R.shadowMap.type = THREE.PCFSoftShadowMap;
+document.body.appendChild(R.domElement);
+const load = (u) => new Promise((ok) => new THREE.TextureLoader().load(u, (t) => { t.colorSpace = THREE.SRGBColorSpace; ok(t); }, undefined, () => ok(null)));
+const rnd = (() => { let s = 31; return () => ((s = (s * 16807) % 2147483647) / 2147483647); })();
+const ease = (x) => (x <= 0 ? 0 : x >= 1 ? 1 : x * x * (3 - 2 * x));
+
+// ---------------------------------------------------------------- procedural textures
+function canvasTex(w, h, draw, repeat) {
+  const c = document.createElement("canvas"); c.width = w; c.height = h; draw(c.getContext("2d"), w, h);
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8;
+  if (repeat) { t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(...repeat); } return t;
+}
+const walnut = canvasTex(2048, 1024, (g, w, h) => {
+  g.fillStyle = "#3b2416"; g.fillRect(0, 0, w, h);
+  for (let i = 0; i < 900; i++) { const y = rnd() * h, a = 0.04 + rnd() * 0.08; g.strokeStyle = `rgba(${rnd() < .5 ? "70,44,26" : "18,10,6"},${a})`; g.lineWidth = 1 + rnd() * 5;
+    g.beginPath(); g.moveTo(0, y); for (let x = 0; x <= w; x += 64) g.lineTo(x, y + Math.sin(x / 300 + i) * 6 + (rnd() - .5) * 2); g.stroke(); }
+});
+const stone = canvasTex(1024, 1024, (g, w, h) => {
+  g.fillStyle = "#cbb89a"; g.fillRect(0, 0, w, h);
+  for (let i = 0; i < 9000; i++) { const v = 180 + rnd() * 60 | 0; g.fillStyle = `rgba(${v},${v - 12},${v - 30},0.12)`; g.fillRect(rnd() * w, rnd() * h, 1 + rnd() * 3, 1 + rnd() * 3); }
+  for (let i = 0; i < 60; i++) { g.strokeStyle = "rgba(150,130,100,0.10)"; g.lineWidth = 1 + rnd() * 2; g.beginPath(); const y = rnd() * h; g.moveTo(0, y); g.bezierCurveTo(w * .3, y + 20, w * .6, y - 30, w, y + 10); g.stroke(); }
+});
+const flameTex = canvasTex(128, 256, (g, w, h) => {
+  const r = g.createRadialGradient(w / 2, h * .66, 2, w / 2, h * .62, h * .42);
+  r.addColorStop(0, "rgba(255,250,235,1)"); r.addColorStop(.25, "rgba(255,200,110,.95)"); r.addColorStop(.6, "rgba(255,120,30,.35)"); r.addColorStop(1, "rgba(255,80,0,0)");
+  g.fillStyle = r; g.beginPath(); g.ellipse(w / 2, h * .62, w * .32, h * .38, 0, 0, Math.PI * 2); g.fill();
+});
+const glowTex = canvasTex(256, 256, (g, w, h) => { const r = g.createRadialGradient(w / 2, h / 2, 0, w / 2, h / 2, w / 2); r.addColorStop(0, "rgba(255,190,120,.55)"); r.addColorStop(1, "rgba(255,150,60,0)"); g.fillStyle = r; g.fillRect(0, 0, w, h); });
+// Rain on glass: drops and streaks drawn once, scrolled slowly.
+const rainTex = canvasTex(1024, 2048, (g, w, h) => {
+  for (let i = 0; i < 1400; i++) { const x = rnd() * w, y = rnd() * h, r = .6 + rnd() * 2.6; g.fillStyle = `rgba(220,235,255,${.10 + rnd() * .22})`; g.beginPath(); g.ellipse(x, y, r, r * 1.2, 0, 0, 7); g.fill(); }
+  for (let i = 0; i < 70; i++) { const x = rnd() * w, y = rnd() * h, l = 60 + rnd() * 260; g.strokeStyle = `rgba(220,235,255,${.08 + rnd() * .14})`; g.lineWidth = 1 + rnd() * 2; g.beginPath(); g.moveTo(x, y); g.bezierCurveTo(x + 4, y + l / 3, x - 3, y + l * .7, x + 2, y + l); g.stroke(); }
+}, [1, 1]);
+
+// ---------------------------------------------------------------- shared objects
+function wineGlass(scale = 1) {
+  const pts = []; const prof = [[0, 0], [.34, 0], [.36, .012], [.05, .03], [.028, .06], [.022, .5], [.05, .56], [.2, .64], [.29, .78], [.31, .92], [.3, 1.08], [.27, 1.2]];
+  prof.forEach(([x, y]) => pts.push(new THREE.Vector2(x * .12 * scale, y * .12 * scale)));
+  const glass = new THREE.Mesh(new THREE.LatheGeometry(pts, 64), new THREE.MeshPhysicalMaterial({ color: 0xffffff, metalness: 0, roughness: .03, transmission: 1, thickness: .004, ior: 1.5, transparent: true, opacity: 1, side: THREE.DoubleSide, specularIntensity: 1, envMapIntensity: 1.4 }));
+  glass.castShadow = true; return glass;
+}
+function wineIn(level, scale = 1, color = 0x4a0710) {
+  // The wine follows the bowl from its base (y .56) up to `level` (0..1 of the bowl).
+  const top = .56 + (1.0 - .56) * level, bowl = [[0, .56], [.05, .565], [.2, .645], [.28, .78], [.295, .9], [.29, 1.0]];
+  const pts = bowl.filter(([, y]) => y <= top).map(([x, y]) => new THREE.Vector2(x * .118 * scale, y * .12 * scale));
+  const last = bowl.find(([, y]) => y > top); if (last) { const prev = bowl[bowl.indexOf(last) - 1], f = (top - prev[1]) / (last[1] - prev[1]); pts.push(new THREE.Vector2((prev[0] + (last[0] - prev[0]) * f) * .118 * scale, top * .12 * scale)); }
+  pts.push(new THREE.Vector2(0, top * .12 * scale));
+  return new THREE.Mesh(new THREE.LatheGeometry(pts, 48), new THREE.MeshPhysicalMaterial({ side: THREE.DoubleSide, color, roughness: .08, transmission: .55, thickness: .05, ior: 1.34, attenuationColor: new THREE.Color(0x3a0008), attenuationDistance: .03 }));
+}
+function candle() {
+  const g = new THREE.Group();
+  const body = new THREE.Mesh(new THREE.CylinderGeometry(.028, .028, .16, 48), new THREE.MeshStandardMaterial({ color: 0xf3ebdd, roughness: .5, emissive: 0xffb877, emissiveIntensity: .12 }));
+  body.position.y = .08; body.castShadow = true; g.add(body);
+  const wick = new THREE.Mesh(new THREE.CylinderGeometry(.0015, .0015, .012), new THREE.MeshBasicMaterial({ color: 0x111111 })); wick.position.y = .166; g.add(wick);
+  const flame = new THREE.Sprite(new THREE.SpriteMaterial({ map: flameTex, blending: THREE.AdditiveBlending, depthWrite: false, transparent: true })); flame.scale.set(.022, .05, 1); flame.position.y = .19; g.add(flame);
+  const glow = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTex, blending: THREE.AdditiveBlending, depthWrite: false, transparent: true, opacity: .55 })); glow.scale.set(.32, .32, 1); glow.position.y = .19; g.add(glow);
+  const light = new THREE.PointLight(0xff9a48, 1.2, 3.2, 1.6); light.position.y = .2; light.castShadow = true; light.shadow.mapSize.set(1024, 1024); light.shadow.bias = -.002; g.add(light);
+  g.userData = { flame, glow, light }; return g;
+}
+function laptop(screenTex) {
+  const g = new THREE.Group(), alu = new THREE.MeshStandardMaterial({ color: 0x8a8d92, metalness: .85, roughness: .32 });
+  const base = new THREE.Mesh(new THREE.BoxGeometry(.31, .012, .215), alu); base.position.y = .006; base.castShadow = base.receiveShadow = true; g.add(base);
+  const deck = new THREE.Mesh(new THREE.PlaneGeometry(.27, .1), new THREE.MeshStandardMaterial({ color: 0x1b1c1e, roughness: .6 })); deck.rotation.x = -Math.PI / 2; deck.position.set(0, .0122, -.03); g.add(deck);
+  const lid = new THREE.Group(); lid.position.set(0, .012, -.107); g.add(lid);
+  const back = new THREE.Mesh(new THREE.BoxGeometry(.31, .2, .006), alu); back.position.set(0, .1, -.003); back.castShadow = true; lid.add(back);
+  const bezel = new THREE.Mesh(new THREE.PlaneGeometry(.304, .196), new THREE.MeshStandardMaterial({ color: 0x050506, roughness: .2, metalness: .1 })); bezel.position.set(0, .1, .0005); lid.add(bezel);
+  const scr = new THREE.Mesh(new THREE.PlaneGeometry(.288, .18), new THREE.MeshBasicMaterial({ color: 0x000000, map: screenTex ?? null, toneMapped: false })); scr.position.set(0, .101, .001); lid.add(scr);
+  const sl = new THREE.PointLight(0xbcd2ff, 0, 1.4, 1.4); sl.position.set(0, .1, .08); lid.add(sl);
+  g.userData = { lid, scr, sl }; return g;
+}
+function setLaptop(L, open, on) {
+  L.userData.lid.rotation.x = -(1 - open) * (Math.PI / 2 + .02) + open * -0.32; // 0 = closed, 1 = open at about 108°
+  L.userData.scr.material.color.setScalar(on); L.userData.sl.intensity = on * .9;
+}
+
+// ---------------------------------------------------------------- the room at night (shots 2, 3, 11, 12)
+// Backdrops are out of focus, as through a lens focused on the table.
+function blurred(t, px, w = 1600) {
+  if (!t) return null; const im = t.image, c = document.createElement("canvas"); c.width = w; c.height = Math.round(w * im.height / im.width);
+  const g = c.getContext("2d"); g.filter = `blur(${px}px)`; g.drawImage(im, -px * 2, -px * 2, c.width + px * 4, c.height + px * 4);
+  const o = new THREE.CanvasTexture(c); o.colorSpace = THREE.SRGBColorSpace; return o;
+}
+const T = { ny: blurred(await load(Q.get("ny") ?? "ny.jpg"), 9), pt: blurred(await load(Q.get("pt") ?? "pt.jpg"), 3.5), screen: await load(Q.get("screen") ?? "screen.png") };
+function room() {
+  const S = new THREE.Scene(); S.background = new THREE.Color(0x020304); S.fog = new THREE.Fog(0x020304, 4, 9);
+  const table = new THREE.Mesh(new THREE.BoxGeometry(2.6, .05, 1.3), new THREE.MeshStandardMaterial({ map: walnut, roughness: .62, metalness: 0, color: 0xc8a888 }));
+  table.position.y = -.025; table.receiveShadow = true; S.add(table);
+  // Window behind the table: the city, out of focus, then snow outside, then rain on the glass, then the frame.
+  const city = new THREE.Mesh(new THREE.PlaneGeometry(4.2, 2.8), new THREE.MeshBasicMaterial({ map: T.ny, color: 0x8a92a0, toneMapped: true }));
+  city.position.set(0, .9, -2.6); S.add(city);
+  const flakes = new THREE.BufferGeometry(), N = 900, pos = new Float32Array(N * 3);
+  for (let i = 0; i < N; i++) { pos[i * 3] = (rnd() - .5) * 3.4; pos[i * 3 + 1] = rnd() * 2.4 - .2; pos[i * 3 + 2] = -2.4 + rnd() * .9; }
+  flakes.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+  const snow = new THREE.Points(flakes, new THREE.PointsMaterial({ color: 0xdfe8f2, size: .012, transparent: true, opacity: .75, depthWrite: false })); S.add(snow);
+  const glassPane = new THREE.Mesh(new THREE.PlaneGeometry(2.8, 1.9), new THREE.MeshBasicMaterial({ map: rainTex, transparent: true, opacity: .55, depthWrite: false }));
+  glassPane.position.set(0, .85, -1.45); S.add(glassPane);
+  const frameM = new THREE.MeshStandardMaterial({ color: 0x0b0a09, roughness: .7 });
+  [[0, 1.8, 2.9, .07], [0, -.08, 2.9, .07], [0, .86, 2.9, .03]].forEach(([x, y, w, h]) => { const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, .06), frameM); m.position.set(x, y, -1.44); S.add(m); });
+  [-1.42, 1.42, 0].forEach((x) => { const m = new THREE.Mesh(new THREE.BoxGeometry(x ? .07 : .035, 1.95, .06), frameM); m.position.set(x, .86, -1.44); S.add(m); });
+  // The wall around the window opening (2.84 × 1.92, centred at y .86).
+  const wallM = new THREE.MeshStandardMaterial({ color: 0x0d0c0b, roughness: .95 });
+  [[0, 2.86, 9, 2.08], [0, -1.12, 9, 2.08], [-3.21, .86, 2.58, 1.92], [3.21, .86, 2.58, 1.92]].forEach(([x, y, w, h]) => { const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), wallM); m.position.set(x, y, -1.47); S.add(m); });
+  // Light: the candle, a warm lamp off to the left, the cold city from the window.
+  const c = candle(); c.position.set(.34, 0, -.18); S.add(c);
+  const lamp = new THREE.SpotLight(0xffb070, 1.6, 6, .6, .9, 1.5); lamp.position.set(-1.6, 1.6, .9); lamp.target.position.set(.1, 0, -.2); lamp.castShadow = true; lamp.shadow.mapSize.set(2048, 2048); S.add(lamp, lamp.target);
+  const cold = new THREE.DirectionalLight(0x7f9cc0, .3); cold.position.set(.4, 1.5, -2.2); S.add(cold);
+  S.add(new THREE.HemisphereLight(0x1a2430, 0x080604, .08));
+  const env = new THREE.PMREMGenerator(R); const es = new THREE.Scene(); es.background = new THREE.Color(0x0e1116);
+  const panel = new THREE.Mesh(new THREE.PlaneGeometry(4, 2), new THREE.MeshBasicMaterial({ color: 0x9fb4d0 })); panel.position.set(0, 1, -3); es.add(panel);
+  const warm = new THREE.Mesh(new THREE.PlaneGeometry(1.5, 1.5), new THREE.MeshBasicMaterial({ color: 0xffa060 })); warm.position.set(-3, 1, 1); warm.lookAt(0, 0, 0); es.add(warm);
+  S.environment = env.fromScene(es, .04).texture;
+  const glass = wineGlass(1.05); glass.position.set(.02, 0, .05); S.add(glass);
+  const L = laptop(T.screen); L.position.set(-.36, 0, .02); L.rotation.y = .38; S.add(L);
+  return { S, c, snow, pos, glassPane, glass, L, wineAt: null };
+}
+const ROOM = room();
+function flicker(c, t) { const f = 1 + .06 * Math.sin(t * 13.1) + .04 * Math.sin(t * 29.7 + 1) + .03 * Math.sin(t * 7.3); c.userData.light.intensity = 1.2 * f; c.userData.flame.scale.set(.022 * (1 + (f - 1) * .6), .05 * f, 1); c.userData.glow.material.opacity = .5 * f; }
+function snowAt(t) { const p = ROOM.pos; for (let i = 0; i < p.length / 3; i++) { const y0 = p[i * 3 + 1]; const y = ((y0 - t * (.12 + (i % 7) * .015)) % 2.6 + 2.6) % 2.6 - .2; ROOM.snow.geometry.attributes.position.array[i * 3 + 1] = y; ROOM.snow.geometry.attributes.position.array[i * 3] = p[i * 3] + Math.sin(t * .6 + i) * .02; } ROOM.snow.geometry.attributes.position.needsUpdate = true; ROOM.pos = p; }
+const snowBase = Float32Array.from(ROOM.pos); ROOM.pos = snowBase;
+function setWine(level) { if (ROOM.wineAt) ROOM.S.remove(ROOM.wineAt); if (level > .01) { ROOM.wineAt = wineIn(level, 1.05); ROOM.wineAt.position.copy(ROOM.glass.position); ROOM.S.add(ROOM.wineAt); } else ROOM.wineAt = null; }
+// The bottle, held from out of frame: its mouth at the group's origin, the body rising up and to the right.
+const bottle = new THREE.Group(); {
+  const prof = [[0, 0], [.0105, 0], [.012, .004], [.0115, .012], [.0125, .07], [.016, .1], [.03, .13], [.037, .16], [.038, .33], [.0, .335]];
+  const m = new THREE.Mesh(new THREE.LatheGeometry(prof.map(([x, y]) => new THREE.Vector2(x, y)), 48), new THREE.MeshPhysicalMaterial({ color: 0x0b2416, roughness: .12, metalness: 0, transmission: .25, thickness: .01, ior: 1.5, side: THREE.DoubleSide }));
+  m.castShadow = true; bottle.add(m); bottle.rotation.z = 2.05; ROOM.S.add(bottle); bottle.visible = false;
+}
+let stream = null;
+function setStream(on, level) {
+  if (stream) { ROOM.S.remove(stream); stream = null; } if (!on) return;
+  const top = bottle.position.y - .004, bot = (.56 + (1 - .56) * level) * .126;
+  stream = new THREE.Mesh(new THREE.CylinderGeometry(.0028, .0035, top - bot, 16), new THREE.MeshPhysicalMaterial({ color: 0x5a0812, roughness: .05, transmission: .4, thickness: .01 }));
+  stream.position.set(bottle.position.x, bot + (top - bot) / 2, bottle.position.z); ROOM.S.add(stream);
+}
+const cam = new THREE.PerspectiveCamera(32, W / H, .01, 50);
+
+// ---------------------------------------------------------------- the terrace in Lisbon (shots 0 and 13)
+function terrace() {
+  const S = new THREE.Scene(); S.background = new THREE.Color(0xcfdbe6);
+  const back = new THREE.Mesh(new THREE.PlaneGeometry(14, 8.4), new THREE.MeshBasicMaterial({ map: T.pt, color: 0xffffff })); back.position.set(0, 1.0, -4); S.add(back);
+  const top = new THREE.Mesh(new THREE.BoxGeometry(1.6, .05, .9), new THREE.MeshStandardMaterial({ map: stone, roughness: .85, color: 0xd8cbb4 })); top.position.y = -.025; top.receiveShadow = true; S.add(top);
+  const parapet = new THREE.Mesh(new THREE.BoxGeometry(6, .9, .2), new THREE.MeshStandardMaterial({ color: 0xe8e0d0, roughness: .9 })); parapet.position.set(0, -.55, -1.4); parapet.receiveShadow = true; S.add(parapet);
+  const sun = new THREE.DirectionalLight(0xffd59a, 2.2); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048); sun.shadow.camera.left = -1; sun.shadow.camera.right = 1; sun.shadow.camera.top = 1; sun.shadow.camera.bottom = -1; sun.shadow.radius = 3; S.add(sun, sun.target);
+  S.add(new THREE.HemisphereLight(0xcfe0f0, 0x8a6a48, .45));
+  const env = new THREE.PMREMGenerator(R); const es = new THREE.Scene(); es.background = new THREE.Color(0xdde6ee);
+  const sk = new THREE.Mesh(new THREE.PlaneGeometry(6, 3), new THREE.MeshBasicMaterial({ color: 0xfff1d8 })); sk.position.set(2, 2, -3); sk.lookAt(0, 0, 0); es.add(sk);
+  S.environment = env.fromScene(es, .04).texture;
+  const glass = wineGlass(1.05); glass.position.set(.05, 0, .02); S.add(glass);
+  const w = wineIn(.42, 1.05, 0xd9c27a); w.material.attenuationColor = new THREE.Color(0xc9a640); w.material.attenuationDistance = .2; w.material.transmission = .85; w.position.copy(glass.position); S.add(w);
+  return { S, sun };
+}
+const TER = terrace();
+
+// ---------------------------------------------------------------- shots
+const SHOTS = {
+  // 0 and 13: the glass on the stone table; the morning light moves across it.
+  terrace(t, d = 4) { const k = t / d; TER.sun.position.set(-1.2 + k * .7, 1.4, .9 - k * .4); TER.sun.target.position.set(0, 0, 0);
+    cam.fov = 20; cam.position.set(.62 - k * .06, .3, 1.0); cam.lookAt(.02, .09, -.15); cam.updateProjectionMatrix(); return TER.S; },
+  // 2: slow pull back from the glass as it fills; candle, the city behind the rain.
+  pour(t, d = 8) { const k = ease(t / d), fill = Math.min(1, Math.max(0, (t - .6) / 3.2));
+    const lift = ease((t - 3.9) / 1.2) * .5, tilt = Math.min(1, t / .5);
+    bottle.visible = t < 5.2; bottle.position.set(ROOM.glass.position.x + .008, .215 + lift, ROOM.glass.position.z); bottle.rotation.z = -(.95 + .32 * tilt) + .3 * ease((t - 3.9) / 1.2);
+    setWine(.05 + fill * .5); setStream(t > .5 && t < 3.9, .05 + fill * .5); setLaptop(ROOM.L, 0, 0);
+    cam.fov = 26; cam.position.set(.06 + k * .22, .15 + k * .1, .42 + k * .8); cam.lookAt(.03 + k * .06, .085 + k * .03, -.1 - k * .25); cam.updateProjectionMatrix(); return ROOM.S; },
+  // 3: the laptop opens; its light falls on the glass and shows in the window.
+  open(t, d = 6) { bottle.visible = false; setStream(false); setWine(.55); const o = ease((t - .6) / 2.4), on = ease((t - 2.6) / 1.4); setLaptop(ROOM.L, o, on * .9);
+    cam.fov = 30; cam.position.set(-.05, .3, .9); cam.lookAt(-.22, .08, -.08); cam.updateProjectionMatrix(); return ROOM.S; },
+  // 11: the lid halfway down, the glow stays on the glass.
+  close(t, d = 7) { bottle.visible = false; setStream(false); setWine(.38); setLaptop(ROOM.L, 1 - .55 * ease(t / 2.5), .75);
+    cam.fov = 34; cam.position.set(.32, .2, .7); cam.lookAt(-.12, .08, -.1); cam.updateProjectionMatrix(); return ROOM.S; },
+  // 12: the window; the snow keeps falling.
+  window(t, d = 7) { bottle.visible = false; setStream(false); setLaptop(ROOM.L, .45, .7); cam.fov = 40; cam.position.set(0, .9, .4 - t * .015); cam.lookAt(0, .9, -2.6); cam.updateProjectionMatrix(); return ROOM.S; },
+};
+window.shot = (name, t) => { flicker(ROOM.c, t); snowAt(t + 3); ROOM.glassPane.material.map.offset.y = -t * .012; const S = SHOTS[name](t); R.render(S, cam); return true; };
+window.ready = true;
+</script></body></html>

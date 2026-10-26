@@ -1,0 +1,71 @@
+{
+  "_": "Prompt 31 (D58), demo films v4 'December'. Lines by shot; the budget is never spoken. Her voice close and quiet (Kokoro, speed 0.85); the partner off-screen, through a wall. 'say' respells for the engine only.",
+  "engine": {
+    "model": "kokoro-v1.0.onnx",
+    "voices": "voices-v1.0.bin",
+    "lang": "en-us",
+    "speed": 0.85
+  },
+  "base": {
+    "2": "Every Christmas we say: next year.",
+    "3": "This time I opened the laptop.",
+    "5": "We'd already agreed on a number. That was the easy part.",
+    "6": "It was everything else we didn't know.",
+    "7": "And whether we could do it from here.",
+    "8": "That one.",
+    "9": "Okay.",
+    "11a": "You coming?",
+    "11b": "In a minute."
+  },
+  "demos": {
+    "34c86306cf": {
+      "name": "Vanguard_Tomas-Ribeiro-79",
+      "her": "af_heart",
+      "partner": "am_michael",
+      "city": "New York",
+      "date": "December 23",
+      "morning": "Lisbon",
+      "lines": {
+        "4": "Somewhere with light."
+      }
+    },
+    "7c1e5a90d4": {
+      "name": "VIC_Prata-Riverside-Village",
+      "her": "bf_emma",
+      "partner": "bm_george",
+      "city": "Geneva",
+      "date": "December 23",
+      "morning": "Lisbon",
+      "lines": {
+        "4": "Somewhere with light."
+      }
+    },
+    "65bf930b11": {
+      "name": "ValeDoLobo_The-Residences",
+      "her": "af_heart",
+      "partner": "am_michael",
+      "city": "Los Angeles",
+      "date": "December 23",
+      "morning": "The Algarve",
+      "lines": {
+        "4": "Somewhere slower."
+      }
+    },
+    "f658bd1eef": {
+      "name": "Shalu_ORizon-Living",
+      "her": "bf_emma",
+      "partner": "bm_george",
+      "city": "Tel Aviv",
+      "date": "December",
+      "morning": "Porto",
+      "lines": {
+        "2": "Every winter we say: next year.",
+        "4": "Somewhere green."
+      }
+    }
+  },
+  "say": {
+    "This time I opened the laptop.": "This time I opened, the laptop.",
+    "That one.": "That... one."
+  }
+}
