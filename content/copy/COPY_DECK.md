@@ -2354,9 +2354,9 @@ How to edit:
 - FR: Portugal : {v} le m², {chg} sur un an.
 
 ### note
-- PT: Mediana do valor por m² das vendas de alojamentos familiares registadas nos 12 meses até ao fim de cada trimestre, casas novas e usadas. Não são preços pedidos em anúncios. Nos concelhos com poucas vendas, a variação de um ano para o outro pode ser grande.
-- EN: Median value per m² of family dwellings sold in the 12 months to the end of each quarter, new and existing. Not asking prices from listings. In municipalities with few sales, the change from one year to the next can be large.
-- FR: Valeur médiane au m² des logements familiaux vendus sur les 12 mois jusqu'à la fin de chaque trimestre, neufs et anciens. Pas des prix demandés dans les annonces. Dans les communes où il y a peu de ventes, la variation d'une année sur l'autre peut être forte.
+- PT: Mediana do valor por m² das casas vendidas nos 12 meses até ao fim de cada trimestre. Inclui casas novas e usadas. Não são preços pedidos em anúncios. Onde há poucas vendas, a variação anual pode ser grande.
+- EN: Median value per m² of homes sold in the 12 months to the end of each quarter. New and existing homes. Not asking prices from listings. Where sales are few, the yearly change can be large.
+- FR: Valeur médiane au m² des logements vendus sur les 12 mois jusqu'à la fin de chaque trimestre. Neufs et anciens. Pas des prix demandés dans les annonces. Là où les ventes sont rares, la variation annuelle peut être forte.
 
 ## blog
 
@@ -3592,9 +3592,9 @@ How to edit:
 - FR: Lancement
 
 ### launch.empty
-- PT: Lugar para o lançamento de um novo empreendimento nesta zona: no mapa, nesta página e numa newsletter.
-- EN: A place to launch a new project in this area: on the map, on this page and in one newsletter.
-- FR: Une place pour lancer un nouveau programme dans ce secteur : sur la carte, sur cette page et dans une newsletter.
+- PT: Lugar para lançar um novo empreendimento nesta zona. Aparece no mapa, nesta página e numa newsletter.
+- EN: A place to launch a new project in this area. It appears on the map, on this page and in one newsletter.
+- FR: Une place pour lancer un nouveau programme dans ce secteur. Il figure sur la carte, sur cette page et dans une newsletter.
 
 ### join
 - PT: Para promotores: condições sob consulta
@@ -3826,9 +3826,9 @@ How to edit:
 - FR: Rendement brut
 
 ### yield.note
-- PT: Rendimento bruto: renda mediana por m² × 12 ÷ preço mediano por m², nos 12 meses até ao 2.º trimestre de 2026. Antes de custos e impostos.
-- EN: Gross yield: median rent per m² × 12 ÷ median price per m², over the 12 months to Q2 2026. Before costs and tax.
-- FR: Rendement brut : loyer médian au m² × 12 ÷ prix médian au m², sur les 12 mois jusqu'au 2e trimestre 2026. Avant frais et impôts.
+- PT: Rendimento bruto: a renda mediana por m² vezes 12, a dividir pelo preço mediano por m². Período de 12 meses até ao 2.º trimestre de 2026. Antes de custos e impostos.
+- EN: Gross yield: the median rent per m² times 12, divided by the median price per m². Twelve months to Q2 2026. Before costs and tax.
+- FR: Rendement brut : le loyer médian au m² fois 12, divisé par le prix médian au m². Douze mois jusqu'au 2e trimestre 2026. Avant frais et impôts.
 
 ### method
 - PT: As vendas seguem a metodologia do INE de 2018 até ao 3.º trimestre de 2019 e a de 2022 a partir daí. As regiões começam em 2019. Medianas de vendas reais, não casas concretas.
