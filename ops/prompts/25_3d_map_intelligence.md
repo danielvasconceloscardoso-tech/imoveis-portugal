@@ -33,6 +33,23 @@ To run: "Read ops/prompts/25_3d_map_intelligence.md and execute it." **Priority:
 2. Footer on every embed: **"Powered by Imóveis Portugal"** linked to the site, plus the required data credits in small type ("Fonte: INE · © OpenStreetMap contributors"). Nothing else.
 3. A demo page per use case (media, developer project, bank white-label) using placeholder branding, not published.
 
+## 4. Phase 2 layers (after the core map works)
+
+Add as switchable layers and as facts on the place card, each with source, period and licence recorded in content/facts/map/SOURCES.md. Check every licence before use; skip any dataset that does not allow commercial reuse.
+1. **What foreign buyers pay:** INE's house prices split by the buyer's tax domicile (Portugal vs abroad) and number of transactions, by municipality where INE publishes them (confirm coverage).
+2. **Market liquidity:** number of sales per municipality per quarter (INE).
+3. **New supply:** building permits and dwellings completed per municipality (INE construction statistics).
+4. **Housing stock (Census 2021):** share of second homes and vacant dwellings, age of buildings.
+5. **Short-term rental:** local accommodation registrations (RNAL, Turismo de Portugal, CC BY 4.0; use the current national download) and each municipality's local accommodation rules (containment areas).
+6. **Annual ownership cost:** IMI rate set by each municipality for the current year (Portal das Finanças) feeding the cost simulator.
+7. **Foreign residents** by municipality and nationality (AIMA / INE): where Americans, Brazilians, French, Swiss and others already live.
+8. **Access:** travel time by car to Porto, Lisbon and Faro airports (computed from OpenStreetMap), rail and metro stations.
+9. **Daily life:** international schools, hospitals (SNS open data), Blue Flag beaches, golf courses (OpenStreetMap).
+10. **Climate:** sunshine hours and average temperatures (IPMA climate normals).
+11. **Risk, shown factually:** flood zones (APA), coastal erosion, wildfire hazard (ICNF).
+12. **Finance:** Banco de Portugal average rate on new housing loans and Euribor (BPstat), ECB reference exchange rates.
+Not public and not used: listing prices scraped from portals. Short-term rental performance (occupancy, nightly rates) only from a source whose licence allows commercial use.
+
 ## Review
 
 Push after each section. Reply with the preview link, mobile and desktop screenshots (300 k€ and 5 M€; one place card with the 10-year chart), the first period of the INE rent series, any boundary-code mismatches, and the embed snippet. Keep it short. Don't merge.
