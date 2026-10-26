@@ -710,3 +710,8 @@ a.brass { color: var(--brass); }
 /* Embed (prompt 25 §3): the map alone, the partner's accent on buttons. */
 .mapx-embed .btn { background: var(--mapx-accent, var(--accent)); border-color: var(--mapx-accent, var(--accent)); }
 .mapx-embed .mapx-stage { aspect-ratio: auto; height: min(68vh, 560px); }
+.mapx-facts + .h-small, .mapx-brief + .h-small, .mapx-chart + .h-small { margin-top: 18px; }
+@media (max-width: 600px) {
+  /* On phones the card is a bottom sheet over the page, so the map stays visible above it. */
+  .mapx-card { position: fixed; left: 0; right: 0; bottom: 0; width: auto; max-height: 72vh; border-width: 1px 0 0; z-index: 60; box-shadow: 0 -10px 28px rgba(22, 24, 28, .12); }
+}

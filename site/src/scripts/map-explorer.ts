@@ -69,8 +69,17 @@ export function initMapExplorer(root: HTMLElement) {
   function heightExpr(): any {
     const k = metric === "m2" ? "pv" : metric === "price" ? "pv" : metric === "growth" ? "pg" : "py";
     const h: any = metric === "m2" ? ["*", 2700, ["^", ["/", budget, ["get", "pv"]], 1 / 3]]  // cube root keeps 300 k€ and 10 M€ readable
-      : metric === "price" ? ["*", 7, ["get", "pv"]] : metric === "growth" ? ["*", 190, ["max", ["get", "pg"], 0]] : ["*", 7000, ["max", ["-", ["get", "py"], 1.5], 0.2]];
+      : metric === "price" ? ["*", 7, ["get", "pv"]] : metric === "growth" ? ["*", 190, ["max", ["get", "pg"], 0]] : ["*", 4200, ["max", ["-", ["get", "py"], 1.5], 0.2]];
     return ["case", ["==", ["get", k], null], 0, h];
+  }
+  // Concelhos with parish data hand their height over to their parishes between zoom 8.2 and 8.7. (A layer maxzoom does not
+  // work here: in a tilted view the near tiles load at a higher zoom and the concelhos would vanish early.)
+  const HAND = [8.2, 8.7];
+  function hfor(id: string): any {
+    if (flat) return 0;
+    if (id === "muni-3d-p") return ["interpolate", ["linear"], ["zoom"], HAND[0], heightExpr(), HAND[1], 0];
+    if (id === "par-3d") return ["interpolate", ["linear"], ["zoom"], HAND[0], 0, HAND[1], heightExpr()];
+    return heightExpr();
   }
   function colorExpr(): any {
     const k = metric === "m2" || metric === "price" ? "pv" : metric === "growth" ? "pg" : "py";
@@ -83,7 +92,7 @@ export function initMapExplorer(root: HTMLElement) {
     if (!map || !map.getLayer("muni-3d")) return;
     for (const id of ["muni-3d", "muni-3d-p", "par-3d"]) {
       if (!map.getLayer(id)) continue;
-      map.setPaintProperty(id, "fill-extrusion-height", flat ? 0 : heightExpr());
+      map.setPaintProperty(id, "fill-extrusion-height", hfor(id));
       map.setPaintProperty(id, "fill-extrusion-color", colorExpr());
     }
     root.querySelector<HTMLElement>("[data-legend]")!.textContent = L.legend[metric];
@@ -237,7 +246,7 @@ export function initMapExplorer(root: HTMLElement) {
     const p = slug ? byS.get(slug) : null;
     if (p && map) {
       setState("munis", p.id, "sel", true);
-      if (opts.fly !== false) { rotating = false; const wide = root.clientWidth >= 760; map.flyTo({ center: [p.x, p.y], zoom: Math.max(map.getZoom(), p.a < 40 ? 8.2 : 7.2), pitch: flat ? 0 : 55, duration: reduce() ? 0 : 1500, essential: true, padding: wide ? { right: 400, left: 0, top: 0, bottom: 0 } : { bottom: canvas.clientHeight * 0.45, top: 0, left: 0, right: 0 } }); }
+      if (opts.fly !== false) { rotating = false; const wide = root.clientWidth >= 760; map.flyTo({ center: [p.x, p.y], zoom: Math.max(map.getZoom(), p.a < 40 ? 8.2 : 7.2), pitch: flat ? 0 : 32, duration: reduce() ? 0 : 1500, essential: true, padding: wide ? { right: 400, left: 0, top: 0, bottom: 0 } : { bottom: canvas.clientHeight * 0.45, top: 0, left: 0, right: 0 } }); }
     }
     syncUrl();
     if (slug) showCard(slug); else card.hidden = true;
@@ -253,7 +262,7 @@ export function initMapExplorer(root: HTMLElement) {
   // otherwise the polygon under the pointer (parish first); otherwise the nearest label point within 28 px.
   function pick(pt: { x: number; y: number }): { kind: "muni" | "par"; key: string } | null {
     const z = map.getZoom(), ppd = (512 * 2 ** z) / 360;
-    const layers = ["par-3d", "par-base", "muni-3d", "muni-3d-p", "muni-base"].filter((l) => map.getLayer(l));
+    const layers = [...(z >= 8.45 ? ["par-3d"] : []), "muni-3d", "muni-3d-p", "muni-base"].filter((l) => map.getLayer(l));
     const hit = map.queryRenderedFeatures([pt.x, pt.y], { layers })[0];
     const hp: Props | undefined = hit && !hit.layer.id.startsWith("par") ? byS.get(hit.properties.s) : undefined;
     const dh = hp ? (() => { const c = map.project([hp.x, hp.y]); return Math.hypot(c.x - pt.x, c.y - pt.y); })() : 1e9;
@@ -320,18 +329,19 @@ export function initMapExplorer(root: HTMLElement) {
       await new Promise<void>((res) => map.on("load", () => res()));
       map.addSource("munis", { type: "geojson", data: geo });
       map.addLayer({ id: "muni-base", type: "fill", source: "munis", paint: { "fill-color": "#f1f4f1", "fill-outline-color": "#c9d3cb" } });
-      const ext = (id: string, max?: number) => map.addLayer({ id, type: "fill-extrusion", source: "munis", ...(max ? { maxzoom: max } : {}), paint: {
-        "fill-extrusion-color": colorExpr(), "fill-extrusion-height": flat ? 0 : heightExpr(), "fill-extrusion-opacity": 0.93,
+      const ext = (id: string) => map.addLayer({ id, type: "fill-extrusion", source: "munis", paint: {
+        "fill-extrusion-color": colorExpr(), "fill-extrusion-height": hfor(id), "fill-extrusion-opacity": 0.93,
         "fill-extrusion-height-transition": { duration: reduce() ? 0 : 900, delay: 0 }, "fill-extrusion-color-transition": { duration: reduce() ? 0 : 600, delay: 0 },
       } as any });
-      ext("muni-3d"); ext("muni-3d-p", 8.5);  // concelhos with parish data hand over to their parishes from zoom 8.5
+      ext("muni-3d"); ext("muni-3d-p");
       map.addLayer({ id: "muni-line", type: "line", source: "munis", paint: { "line-color": ["case", ["boolean", ["feature-state", "sel"], false], BRASS, ["boolean", ["feature-state", "hover"], false], BRASS, "rgba(22,24,28,0.18)"],
         "line-width": ["case", ["boolean", ["feature-state", "sel"], false], 2.2, ["boolean", ["feature-state", "hover"], false], 1.6, 0.4] } });
       if (cfg.embed?.pin) {
         const [lon, lat, label] = cfg.embed.pin; const el = document.createElement("div"); el.className = "mapx-pin"; el.title = label; el.innerHTML = `<span>${label}</span>`;
         new ml.Marker({ element: el, anchor: "bottom" }).setLngLat([lon, lat]).addTo(map);
       }
-      if (center.length !== 3) map.fitBounds([[-12.45, 36.85], [-6.15, 42.2]], { padding: narrow ? 8 : 24, duration: 0, pitch: flat ? 0 : 50, bearing: flat ? 0 : -14 } as any);
+      // The whole country, islands included: fit flat, then tilt; the tilt shortens the north, so a little zoom back in fills the frame.
+      if (center.length !== 3) { const cam = map.cameraForBounds([[-12.45, 36.85], [-6.15, 42.2]], { padding: narrow ? 6 : 16, bearing: 0 }); if (cam) map.jumpTo({ center: flat ? cam.center : [cam.center.lng + (narrow ? 0.4 : 0.35), cam.center.lat - (narrow ? 0.3 : 0.45)], zoom: cam.zoom + (flat ? 0 : narrow ? -0.18 : 0.1), pitch: flat ? 0 : 50, bearing: flat ? 0 : -14 }); }
       root.classList.add("is-live");
       placeInsets(); applyFilter(); paint();
       const sel = selected, par = selPar;
@@ -366,15 +376,15 @@ export function initMapExplorer(root: HTMLElement) {
     geo.features.forEach((f: any) => { const s: Series = data.parishes[f.properties.id]; f.properties.pv = val(s, "price"); f.properties.pg = null; f.properties.py = val(s, "yield"); });
     parishes = { feats: geo.features, data: data.parishes };
     map.addSource("pars", { type: "geojson", data: geo, promoteId: "id" });
-    map.addLayer({ id: "par-3d", type: "fill-extrusion", source: "pars", minzoom: 8.5, paint: { "fill-extrusion-color": colorExpr(), "fill-extrusion-height": flat ? 0 : heightExpr(), "fill-extrusion-opacity": 0.93,
+    map.addLayer({ id: "par-3d", type: "fill-extrusion", source: "pars", paint: { "fill-extrusion-color": colorExpr(), "fill-extrusion-height": hfor("par-3d"), "fill-extrusion-opacity": ["interpolate", ["linear"], ["zoom"], HAND[0], 0, HAND[1], 0.93],
       "fill-extrusion-height-transition": { duration: reduce() ? 0 : 900, delay: 0 } } as any }, "muni-line");
-    map.addLayer({ id: "par-line", type: "line", source: "pars", minzoom: 8.5, paint: { "line-color": ["case", ["boolean", ["feature-state", "sel"], false], BRASS, ["boolean", ["feature-state", "hover"], false], BRASS, "rgba(22,24,28,0.22)"], "line-width": ["case", ["boolean", ["feature-state", "sel"], false], 2, 0.5] } });
+    map.addLayer({ id: "par-line", type: "line", source: "pars", paint: { "line-opacity": ["interpolate", ["linear"], ["zoom"], HAND[0], 0, HAND[1], 1], "line-color": ["case", ["boolean", ["feature-state", "sel"], false], BRASS, ["boolean", ["feature-state", "hover"], false], BRASS, "rgba(22,24,28,0.22)"], "line-width": ["case", ["boolean", ["feature-state", "sel"], false], 2, 0.5] } });
     paint();
   }
   function spin() { if (!rotating || !map) return; map.easeTo({ bearing: map.getBearing() + 6, duration: 4000, easing: (t: number) => t }); map.once("moveend", spin); }
   function placeInsets() {
     if (!map) return;
-    for (const f of [["madeira", -11.2, 37.1], ["azores", -12.6, 40.45]] as [string, number, number][]) {
+    for (const f of [["madeira", -11.0, 37.05], ["azores", -12.6, 40.75]] as [string, number, number][]) {
       const el = root.querySelector<HTMLElement>(`[data-inset="${f[0]}"]`); if (!el) continue;
       const p = map.project([f[1], f[2]]); el.style.transform = `translate(${p.x}px, ${p.y}px)`; el.hidden = false;
     }
