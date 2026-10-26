@@ -2494,6 +2494,86 @@ How to edit:
 
 ## map
 
+### f.fr
+- PT: Residentes estrangeiros em 2023: {v}, dos quais {b} do Brasil.
+- EN: Foreign residents in 2023: {v}, of whom {b} from Brazil.
+- FR: Résidents étrangers en 2023 : {v}, dont {b} du Brésil.
+
+### f.new
+- PT: Edifícios novos para habitação concluídos em 2025: {v}. Edifícios licenciados, todas as obras: {l}.
+- EN: New residential buildings completed in 2025: {v}. Buildings licensed, all works: {l}.
+- FR: Bâtiments résidentiels neufs achevés en 2025 : {v}. Bâtiments autorisés, tous travaux : {l}.
+
+### f.area
+- PT: Área média de uma casa de residência habitual: {v} m² (Censos 2021).
+- EN: Average floor area of a main home: {v} m² (Census 2021).
+- FR: Surface moyenne d'une résidence principale : {v} m² (recensement 2021).
+
+### f.vac
+- PT: Casas vazias: {v}% (Censos 2021).
+- EN: Empty homes: {v}% (Census 2021).
+- FR: Logements vacants : {v} % (recensement 2021).
+
+### f.sea
+- PT: Casas de uso sazonal: {v}% (Censos 2021).
+- EN: Seasonal homes: {v}% (Census 2021).
+- FR: Logements saisonniers : {v} % (recensement 2021).
+
+### f.dom
+- PT: Compradores com domicílio fiscal no estrangeiro: {a} por m². Em Portugal: {p} (INE, {q}).
+- EN: Buyers with a tax address abroad: {a} per m². In Portugal: {p} (INE, {q}).
+- FR: Acheteurs domiciliés fiscalement à l'étranger : {a} le m². Au Portugal : {p} (INE, {q}).
+
+### f.h
+- PT: Habitação e moradores
+- EN: Homes and residents
+- FR: Logements et habitants
+
+### legend.fr
+- PT: A altura e a cor mostram os residentes estrangeiros com autorização de residência em 2023 (INE).
+- EN: Height and colour show the foreign residents with a residence permit in 2023 (INE).
+- FR: La hauteur et la couleur montrent les résidents étrangers titulaires d'un titre de séjour en 2023 (INE).
+
+### legend.new
+- PT: A altura e a cor mostram os edifícios novos para habitação concluídos em 2025 (INE).
+- EN: Height and colour show the new residential buildings completed in 2025 (INE).
+- FR: La hauteur et la couleur montrent les bâtiments résidentiels neufs achevés en 2025 (INE).
+
+### legend.vac
+- PT: A altura e a cor mostram a parte das casas vazias (INE, Censos 2021).
+- EN: Height and colour show the share of empty homes (INE, Census 2021).
+- FR: La hauteur et la couleur montrent la part des logements vacants (INE, recensement 2021).
+
+### legend.sea
+- PT: A altura e a cor mostram a parte das casas de uso sazonal, como casas de férias (INE, Censos 2021).
+- EN: Height and colour show the share of homes used seasonally, such as holiday homes (INE, Census 2021).
+- FR: La hauteur et la couleur montrent la part des logements à usage saisonnier, comme les maisons de vacances (INE, recensement 2021).
+
+### metric.fr
+- PT: Residentes estrangeiros
+- EN: Foreign residents
+- FR: Résidents étrangers
+
+### metric.new
+- PT: Casas novas concluídas
+- EN: New homes completed
+- FR: Logements neufs achevés
+
+### metric.vac
+- PT: Casas vazias
+- EN: Empty homes
+- FR: Logements vacants
+
+### metric.sea
+- PT: Casas de uso sazonal
+- EN: Seasonal homes
+- FR: Logements saisonniers
+
+### layer.label
+- PT: Outros dados
+- EN: More data
+- FR: Autres données
+
 ### currency
 - PT: Moeda
 - EN: Currency

@@ -9,7 +9,9 @@ import { feature } from "topojson-client";
 type Props = { id: number; n: string; s: string; c: string; r: string; coast: boolean; city: boolean; air: boolean; x: number; y: number; a: number };
 type Series = { n: string; m2: (number | null)[]; rq: (number | null)[]; yield: number | null; g10?: number | null; cagrP?: number | null; cagrP20: number | null; cagrR: number | null;
   mo: { c4: number; c8: number | null; w: "up" | "steady" | "down" } | null; cmp?: string[]; m?: string };
-type Metric = "m2" | "price" | "growth" | "yield";
+// Prompt 25 §4: four INE layers join the four price metrics (sea, vac, new, fr: layers.json).
+type Metric = "m2" | "price" | "growth" | "yield" | "sea" | "vac" | "new" | "fr";
+const KEY: Record<Metric, string> = { m2: "pv", price: "pv", growth: "pg", yield: "py", sea: "l_sea", vac: "l_vac", new: "l_new", fr: "l_fr" };
 type Cfg = {
   labels: Record<string, any>; quarter: string; mortgage: { rate: number; month: string };
   links: { buy: string; talk: string; sim: string; map: string; journey: string; devHref: string; pages: string[] };
@@ -52,7 +54,8 @@ export function initMapExplorer(root: HTMLElement) {
   const stored = (() => { try { return Number(localStorage.getItem("ip.budget")) || 0; } catch { return 0; } })();
   let budget = Math.max(1000, Number(q.get("budget")) || stored || Number(root.dataset.budget) || 300000);
   let inLocal = false;  // the field shows the reader's currency instead of euros
-  let metric: Metric = (["m2", "price", "growth", "yield"].includes(q.get("metric") || "") ? q.get("metric") : "m2") as Metric;
+  let metric: Metric = ((q.get("metric") || "") in KEY ? q.get("metric") : "m2") as Metric;
+  let LY: { periods: Record<string, string>; munis: Record<string, any> } | null = null;
   let selected: string | null = q.get("place"), selPar: string | null = q.get("parish");
   let filter = "all", region = "", flat = reduce() || lowPower() || q.get("flat") === "1";
   let map: any = null, ml: any = null, features: any[] = [], loading: Promise<void> | null = null, rotating = false;
@@ -75,12 +78,13 @@ export function initMapExplorer(root: HTMLElement) {
     if (m === "growth") return s.g10 ?? null;
     return s.yield ?? null;
   };
-  let breaks: Record<Metric, number[]> = { m2: [], price: [], growth: [], yield: [] };
+  let breaks = {} as Record<Metric, number[]>;
   function quantiles(list: number[]) { const a = [...list].sort((x, y) => x - y); return [0.05, 0.25, 0.5, 0.75, 0.95].map((p) => a[Math.floor(p * (a.length - 1))]); }
   function heightExpr(): any {
-    const k = metric === "m2" ? "pv" : metric === "price" ? "pv" : metric === "growth" ? "pg" : "py";
+    const k = KEY[metric], b = breaks[metric] || [];
     const h: any = metric === "m2" ? ["*", 2700, ["^", ["/", budget, ["get", "pv"]], 1 / 3]]  // cube root keeps 300 k€ and 10 M€ readable
-      : metric === "price" ? ["*", 7, ["get", "pv"]] : metric === "growth" ? ["*", 190, ["max", ["get", "pg"], 0]] : ["*", 4200, ["max", ["-", ["get", "py"], 1.5], 0.2]];
+      : metric === "price" ? ["*", 7, ["get", "pv"]] : metric === "growth" ? ["*", 190, ["max", ["get", "pg"], 0]] : metric === "yield" ? ["*", 4200, ["max", ["-", ["get", "py"], 1.5], 0.2]]
+      : b.length && b[4] > b[0] ? ["interpolate", ["linear"], ["get", k], b[0], 1500, b[4], 38000] : 8000;
     return ["case", ["==", ["get", k], null], 0, h];
   }
   // Concelhos with parish data hand their height over to their parishes between zoom 8.2 and 8.7. (A layer maxzoom does not
@@ -93,8 +97,8 @@ export function initMapExplorer(root: HTMLElement) {
     return heightExpr();
   }
   function colorExpr(): any {
-    const k = metric === "m2" || metric === "price" ? "pv" : metric === "growth" ? "pg" : "py";
-    const b = breaks[metric]; const cols = metric === "m2" ? [...GREENS].reverse() : GREENS;  // more space = deeper green
+    const k = KEY[metric];
+    const b = breaks[metric] || []; const cols = metric === "m2" ? [...GREENS].reverse() : GREENS;  // more space = deeper green
     const stops: any[] = []; b.forEach((v, i) => { if (i === 0 || v > b[i - 1]) stops.push(v, cols[i]); });
     const scale = stops.length >= 4 ? ["interpolate", ["linear"], ["get", k], ...stops] : cols[2];
     return ["case", ["boolean", ["feature-state", "sel"], false], BRASS, ["boolean", ["feature-state", "hover"], false], "#b59a5e", ["==", ["get", k], null], NODATA, scale];
@@ -143,6 +147,7 @@ export function initMapExplorer(root: HTMLElement) {
   function setMetric(m: Metric) {
     metric = m;
     root.querySelectorAll<HTMLButtonElement>("[data-metric]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.metric === m)));
+    const ls = root.querySelector<HTMLSelectElement>("[data-layer]"); if (ls) ls.value = ["sea", "vac", "new", "fr"].includes(m) ? m : "";
     paint(); syncUrl();
   }
   function setFlat(on: boolean) {
@@ -194,6 +199,17 @@ export function initMapExplorer(root: HTMLElement) {
       h += `</ul>`;
     }
     if (cfg.briefs[slug]) h += `<p class="mapx-brief">${cfg.briefs[slug]}</p>`;
+    const ly = LY?.munis[slug];  // prompt 25 §4: INE facts on homes and residents, each with its period
+    if (ly && Object.keys(ly).length) {
+      h += `<p class="h-small mapx-fh">${L.fh}</p><ul class="mapx-facts small">`;
+      if (ly.dom?.abroad && ly.dom?.pt) h += `<li>${L.fdom.replace("{a}", eur.format(ly.dom.abroad)).replace("{p}", eur.format(ly.dom.pt)).replace("{q}", qLabel(LY!.periods.dom))}</li>`;
+      if (ly.sea != null) h += `<li>${L.fsea.replace("{v}", nf1.format(ly.sea))}</li>`;
+      if (ly.vac != null) h += `<li>${L.fvac.replace("{v}", nf1.format(ly.vac))}</li>`;
+      if (ly.area != null) h += `<li>${L.farea.replace("{v}", nf.format(Math.round(ly.area)))}</li>`;
+      if (ly.new != null) h += `<li>${L.fnew.replace("{v}", nf.format(ly.new)).replace("{l}", nf.format(ly.lic ?? 0))}</li>`;
+      if (ly.fr != null) h += `<li>${L.ffr.replace("{v}", nf.format(ly.fr)).replace("{b}", nf.format(ly.br ?? 0))}</li>`;
+      h += `</ul>`;
+    }
     if (s?.cmp?.length) h += `<p class="h-small">${L.cmp}</p><ul class="mapx-cmp">` + s.cmp.map((c) => { const o = P!.munis[c]; const ov = o?.m2[i]; return `<li><button type="button" data-goto="${c}">${o?.n ?? c}</button><span class="small">${ov ? `${nf.format(Math.round(budget / ov))} m²` : ""}</span></li>`; }).join("") + `</ul>`;
     h += actions(p.n, sim) + `<p class="mapx-more small">` + (cfg.links.pages.includes(slug) ? `<a href="${cfg.links.map}${slug}/">${L.page}</a>` : "")
       + (budget >= HIGH && cfg.privateHref ? `<a href="${cfg.privateHref}">${L.private}</a>` : "") + `<button type="button" class="linkish" data-share>${L.share}</button><button type="button" class="linkish" data-shareimg>${L.shareImg}</button></p>`
@@ -333,19 +349,20 @@ export function initMapExplorer(root: HTMLElement) {
     if (loading) return loading;
     loading = (async () => {
       if (!document.querySelector("link[data-maplibre]")) { const l = document.createElement("link"); l.rel = "stylesheet"; l.href = mapCss; l.dataset.maplibre = ""; document.head.append(l); }
-      const [mod, topo, prices] = await Promise.all([import("maplibre-gl"), fetch("/data/map/munis.topo.json").then((r) => r.json()), fetch("/data/prices.json").then((r) => r.json())]);
-      ml = mod.default; P = prices;
+      const [mod, topo, prices, layers] = await Promise.all([import("maplibre-gl"), fetch("/data/map/munis.topo.json").then((r) => r.json()), fetch("/data/prices.json").then((r) => r.json()), fetch("/data/map/layers.json").then((r) => r.json()).catch(() => null)]);
+      ml = mod.default; P = prices; LY = layers;
       const geo: any = feature(topo, topo.objects.m);
       const hasPar = new Set<string>(prices.parishMunis ?? []);
       geo.features.forEach((f: any) => {
         const s: Series | undefined = prices.munis[f.properties.s];
         f.id = f.properties.id; f.properties.pv = val(s, "price"); f.properties.pg = val(s, "growth"); f.properties.py = val(s, "yield"); f.properties.hp = hasPar.has(f.properties.s);
+        const l = LY?.munis[f.properties.s] || {}; for (const k of ["sea", "vac", "new", "fr"]) f.properties[`l_${k}`] = l[k] ?? null;
         byS.set(f.properties.s, f.properties);
       });
       features = geo.features;
       names = features.map((f) => ({ n: f.properties.n, s: f.properties.s, r: f.properties.r })).sort((a, b) => a.n.localeCompare(b.n, "pt"));
       const vals = (k: string) => features.map((f) => f.properties[k]).filter((v: any) => v != null) as number[];
-      breaks = { m2: quantiles(vals("pv")), price: quantiles(vals("pv")), growth: quantiles(vals("pg")), yield: quantiles(vals("py")) };
+      breaks = Object.fromEntries((Object.keys(KEY) as Metric[]).map((m) => [m, quantiles(vals(KEY[m]))])) as Record<Metric, number[]>;
       const narrow = root.clientWidth < 600;
       const center = (root.dataset.center || "").split(",").map(Number);
       map = new ml.Map({
@@ -453,6 +470,8 @@ export function initMapExplorer(root: HTMLElement) {
   input.addEventListener("keydown", (e) => { if (e.key === "Enter") { setBudget(readInput(), false, true); load(); } });
   root.querySelectorAll<HTMLButtonElement>("[data-cur-pick]").forEach((b) => b.addEventListener("click", () => setCurrency(b.dataset.curPick !== "EUR")));
   root.querySelectorAll<HTMLButtonElement>("[data-metric]").forEach((b) => b.addEventListener("click", () => { setMetric(b.dataset.metric as Metric); load(); }));
+  const layerSel = root.querySelector<HTMLSelectElement>("[data-layer]");
+  layerSel?.addEventListener("change", () => { setMetric((layerSel.value || "m2") as Metric); load(); });
   root.querySelector<HTMLButtonElement>("[data-flat]")?.addEventListener("click", () => { setFlat(!flat); load(); });
   root.querySelectorAll<HTMLButtonElement>("[data-filter]").forEach((b) => b.addEventListener("click", () => {
     filter = b.dataset.filter!; root.querySelectorAll("[data-filter]").forEach((x) => x.setAttribute("aria-pressed", String(x === b))); load().then(applyFilter);

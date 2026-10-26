@@ -724,3 +724,5 @@ a.brass { color: var(--brass); }
 .mapx-cur { display: inline-flex; border: 1px solid var(--rule); border-radius: 2px; align-self: flex-end; }
 .mapx-cur button { font: 500 13px/1 var(--sans); letter-spacing: .04em; padding: 10px 12px; min-height: 40px; border: 0; background: transparent; color: var(--muted); cursor: pointer; }
 .mapx-cur button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+.mapx-layer { font: 500 14px/1.15 var(--sans); padding: 9px 12px; min-height: 40px; border-radius: 2px; border: 1px solid var(--rule); background: transparent; color: var(--ink); }
+.mapx-fh { margin-top: 16px; }

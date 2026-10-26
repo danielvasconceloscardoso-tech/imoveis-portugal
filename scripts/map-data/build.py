@@ -65,7 +65,7 @@ osm = load("osm-concelhos.geojson.gz")["features"]
 geom = {}
 by_name = {plain(n): d for d, (_, n) in MUNI.items() if int(d[:2]) <= 18}
 for f in osm:
-    t = f["properties"]["tags"]; code = t.get("ine:code")
+    t = f["properties"]["tags"]; code = t.get("ref:ine") or t.get("ine:code")
     nm = plain(t.get("name"))
     if code in MUNI and plain(MUNI[code][1]) != nm:  # the tag must name the same concelho as INE (Almada carries Almeirim's 1403)
         fixed = by_name.get(nm)
@@ -138,7 +138,7 @@ opar = load("osm-freguesias.geojson.gz")["features"]
 pgeom, pmatch = {}, {}
 byname = defaultdict(list)
 for f in opar:
-    t = f["properties"]["tags"]; code = t.get("ine:code") or t.get("dicofre")
+    t = f["properties"]["tags"]; code = t.get("ref:ine") or t.get("ine:code") or t.get("dicofre")
     g = clean(shape(f["geometry"]))
     if code in PAR and code not in pgeom: pgeom[code] = g; pmatch[code] = "code"
     else: byname[plain(t.get("name"))].append(g)

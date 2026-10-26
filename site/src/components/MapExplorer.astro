@@ -25,6 +25,7 @@ const lastQ = PRICES.quarters[PRICES.quarters.length - 1];
 const qfmt = c("map.qfmt", lang);
 const qLabel = qfmt.replace("{q}", lastQ.slice(-1)).replace("{y}", lastQ.slice(0, 4));
 const METRICS = ["m2", "price", "growth", "yield"] as const;
+const LAYERS = ["sea", "vac", "new", "fr"] as const;  // prompt 25 §4, INE
 const pages = new Set(PLACES.map((p) => p.slug));
 const month = new Intl.DateTimeFormat(HTML_LANG[lang], { month: "long", year: "numeric" }).format(new Date(`${PRICES.mortgage.month}-15`));
 const labels = {
@@ -38,7 +39,9 @@ const labels = {
   source: c("map.card.source", lang, { quarter: "{quarter}" }), disclaimer: c("map.card.disclaimer", lang),
   parishOf: c("map.par.of", lang, { m: "{m}" }), openMuni: c("map.par.open", lang), nomatch: c("map.find.none", lang),
   credits: "Fonte: INE · © OpenStreetMap contributors", imgFor: c("map.img.for", lang, { b: "{b}" }), imgSrc: c("map.img.src", lang, { quarter: qLabel }),
-  legend: Object.fromEntries(METRICS.map((m) => [m, `${c(`map.legend.${m}`, lang, { quarter: qLabel })} ${c("map.hint", lang)}`])),
+  legend: Object.fromEntries([...METRICS, ...LAYERS].map((m) => [m, `${c(`map.legend.${m}`, lang, { quarter: qLabel })} ${c("map.hint", lang)}`])),
+  fh: c("map.f.h", lang), fdom: c("map.f.dom", lang, { a: "{a}", p: "{p}", q: "{q}" }), fsea: c("map.f.sea", lang, { v: "{v}" }), fvac: c("map.f.vac", lang, { v: "{v}" }),
+  farea: c("map.f.area", lang, { v: "{v}" }), fnew: c("map.f.new", lang, { v: "{v}", l: "{l}" }), ffr: c("map.f.fr", lang, { v: "{v}", b: "{b}" }),
   regions: Object.fromEntries(REGIONS.map((r) => [r, c(`map.r.${r}`, lang)])),
 };
 const links = {
@@ -68,6 +71,10 @@ const id = `mapx-${mode}`;
     <div class="mapx-metrics" role="group" aria-label={c("map.metric.label", lang)}>
       <span class="h-small">{c("map.metric.label", lang)}</span>
       {METRICS.map((m, i) => <button type="button" data-metric={m} aria-pressed={i === 0 ? "true" : "false"}>{c(`map.metric.${m}`, lang)}</button>)}
+      <select class="mapx-layer" data-layer aria-label={c("map.layer.label", lang)}>
+        <option value="">{c("map.layer.label", lang)}</option>
+        {LAYERS.map((m) => <option value={m}>{c(`map.metric.${m}`, lang)}</option>)}
+      </select>
     </div>
     <div class="mapx-find">
       <label class="h-small" for={`${id}-find`}>{c("map.find", lang)}</label>
