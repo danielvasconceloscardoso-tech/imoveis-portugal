@@ -2494,6 +2494,76 @@ How to edit:
 
 ## map
 
+### proj.credit
+- PT: Imagem: {c}
+- EN: Image: {c}
+- FR: Image : {c}
+
+### proj.sim
+- PT: Simular o custo total
+- EN: Work out the total cost
+- FR: Calculer le coût total
+
+### proj.askag
+- PT: Pedir através da agência parceira
+- EN: Ask through the partner agency
+- FR: Demander via l'agence partenaire
+
+### proj.askdev
+- PT: Contactar o promotor
+- EN: Contact the developer
+- FR: Contacter le promoteur
+
+### proj.ask
+- PT: Pedir informação
+- EN: Request information
+- FR: Demander des informations
+
+### proj.del
+- PT: Entrega prevista: {v}
+- EN: Expected completion: {v}
+- FR: Livraison prévue : {v}
+
+### proj.typ
+- PT: Tipologias: {v}
+- EN: Types: {v}
+- FR: Typologies : {v}
+
+### proj.onreq
+- PT: Preço sob consulta
+- EN: Price on request
+- FR: Prix sur demande
+
+### proj.from
+- PT: A partir de {v}
+- EN: From {v}
+- FR: À partir de {v}
+
+### devs.none
+- PT: Ainda sem empreendimentos parceiros nesta seleção.
+- EN: No partner developments in this selection yet.
+- FR: Pas encore de programme partenaire dans cette sélection.
+
+### devs.del
+- PT: Entrega até
+- EN: Ready by
+- FR: Livraison avant
+
+### devs.max
+- PT: Preço até (€)
+- EN: Price up to (€)
+- FR: Prix jusqu'à (€)
+
+### devs.typ
+- PT: Tipologia
+- EN: Type
+- FR: Typologie
+
+### devs.toggle
+- PT: Novos empreendimentos
+- EN: New developments
+- FR: Programmes neufs
+
 ### f.fr
 - PT: Residentes estrangeiros em 2023: {v}, dos quais {b} do Brasil.
 - EN: Foreign residents in 2023: {v}, of whom {b} from Brazil.

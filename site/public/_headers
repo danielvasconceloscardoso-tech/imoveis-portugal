@@ -8,3 +8,7 @@
 /embed/*
   ! X-Frame-Options
   Content-Security-Policy: frame-ancestors *
+
+# Prompt 26: private developer demos are unlisted and never indexed.
+/d/*
+  X-Robots-Tag: noindex, nofollow, noarchive

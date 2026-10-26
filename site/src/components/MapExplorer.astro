@@ -15,6 +15,7 @@ import { PLACES } from "../lib/places";
 import { PTYPES } from "../lib/packages";
 import { SUB } from "../lib/tools";
 import { c } from "../lib/copy";
+import { PROJECTS } from "../lib/projects";
 
 interface Props { lang: Lang; ed: EdCode; mode?: "page" | "home" | "embed"; }
 const { lang, ed, mode = "page" } = Astro.props;
@@ -41,6 +42,9 @@ const labels = {
   credits: "Fonte: INE · © OpenStreetMap contributors", imgFor: c("map.img.for", lang, { b: "{b}" }), imgSrc: c("map.img.src", lang, { quarter: qLabel }),
   legend: Object.fromEntries([...METRICS, ...LAYERS].map((m) => [m, `${c(`map.legend.${m}`, lang, { quarter: qLabel })} ${c("map.hint", lang)}`])),
   fh: c("map.f.h", lang), fdom: c("map.f.dom", lang, { a: "{a}", p: "{p}", q: "{q}" }), fsea: c("map.f.sea", lang, { v: "{v}" }), fvac: c("map.f.vac", lang, { v: "{v}" }),
+  sponsored: c("dev.sponsored", lang), pfrom: c("map.proj.from", lang, { v: "{v}" }), ponreq: c("map.proj.onreq", lang), ptyp: c("map.proj.typ", lang, { v: "{v}" }),
+  pdel: c("map.proj.del", lang, { v: "{v}" }), pask: c("map.proj.ask", lang), paskdev: c("map.proj.askdev", lang), paskag: c("map.proj.askag", lang), psim: c("map.proj.sim", lang),
+  pcredit: c("map.proj.credit", lang, { c: "{c}" }),
   farea: c("map.f.area", lang, { v: "{v}" }), fnew: c("map.f.new", lang, { v: "{v}", l: "{l}" }), ffr: c("map.f.fr", lang, { v: "{v}", b: "{b}" }),
   regions: Object.fromEntries(REGIONS.map((r) => [r, c(`map.r.${r}`, lang)])),
 };
@@ -50,10 +54,11 @@ const links = {
 };
 const briefs = Object.fromEntries(Object.entries(BRIEFS[lang] ?? {}));
 const cfg = { labels, links, quarter: qLabel, mortgage: { rate: PRICES.mortgage.rate, month }, photos: REGION_PHOTO, briefs,
-  privateHref: config.privateLive && mode !== "embed" ? pathFor(lang, ed, "private") : "" };
+  privateHref: config.privateLive && mode !== "embed" ? pathFor(lang, ed, "private") : "",
+  projects: PROJECTS, routing: config.enquiryRouting, consult: mode === "embed" ? `https://imoveisportugal.lu${pathFor(lang, ed, "consult")}` : pathFor(lang, ed, "consult") };
 const id = `mapx-${mode}`;
 ---
-<div class={`mapx mapx-${mode}`} data-mapx data-lang={lang} data-locale={HTML_LANG[lang]} data-fx={fx ? fx.rate : ""} data-cur={cur ?? ""} data-mode={mode}>
+<div class={`mapx mapx-${mode}`} data-rates={mode === "embed" ? JSON.stringify(Object.fromEntries((["CHF", "USD", "BRL", "ILS"] as const).map((k) => [k, RATE(k).rate]))) : undefined} data-mapx data-lang={lang} data-locale={HTML_LANG[lang]} data-fx={fx ? fx.rate : ""} data-cur={cur ?? ""} data-mode={mode}>
   <div class="mapx-controls">
     {/* D52: one budget field, no presets and no tiers; any amount, in euros or the reader's currency. */}
     <label class="mapx-budget">
@@ -82,6 +87,14 @@ const id = `mapx-${mode}`;
       <ul id={`${id}-list`} role="listbox" class="mapx-find-list" hidden data-find-list></ul>
     </div>
     <button type="button" class="mapx-flat" data-flat aria-pressed="false">{c("map.flat", lang)}</button>
+    <button type="button" class="mapx-flat" data-devs aria-pressed="false">{c("map.devs.toggle", lang)}</button>
+  </div>
+  {/* Prompt 26 §1: filters of the "Novos empreendimentos" layer (partner projects only). */}
+  <div class="mapx-devbar" data-devbar hidden>
+    <select data-ptyp aria-label={c("map.devs.typ", lang)}><option value="">{c("map.devs.typ", lang)}</option>{["T0", "T1", "T2", "T3", "T4", "T5"].map((t) => <option value={t}>{t}</option>)}</select>
+    <label class="mapx-pmax"><span class="small">{c("map.devs.max", lang)}</span><input type="text" inputmode="numeric" data-pmax /></label>
+    <select data-pdel aria-label={c("map.devs.del", lang)}><option value="">{c("map.devs.del", lang)}</option>{["2026", "2027", "2028", "2029", "2030"].map((y) => <option value={`${y}-12`}>{y}</option>)}</select>
+    <p class="small" data-pnone hidden>{c("map.devs.none", lang)} <a href={links.devHref}>{c("dev.join", lang)}</a></p>
   </div>
 
   <div class="mapx-stage">

@@ -10,6 +10,9 @@ type Props = { id: number; n: string; s: string; c: string; r: string; coast: bo
 type Series = { n: string; m2: (number | null)[]; rq: (number | null)[]; yield: number | null; g10?: number | null; cagrP?: number | null; cagrP20: number | null; cagrR: number | null;
   mo: { c4: number; c8: number | null; w: "up" | "steady" | "down" } | null; cmp?: string[]; m?: string };
 // Prompt 25 §4: four INE layers join the four price metrics (sea, vac, new, fr: layers.json).
+// Prompt 26 §1: partner projects (content/developers/projects.json); demos add theirs from an unlisted file (?demoproj=).
+type Project = { id: string; name: string; developer: string; muni: string; lon: number; lat: number; render?: string; credit?: string;
+  from: number | null; typologies: string[]; delivery?: string; url?: string };
 type Metric = "m2" | "price" | "growth" | "yield" | "sea" | "vac" | "new" | "fr";
 const KEY: Record<Metric, string> = { m2: "pv", price: "pv", growth: "pg", yield: "py", sea: "l_sea", vac: "l_vac", new: "l_new", fr: "l_fr" };
 type Cfg = {
@@ -17,6 +20,7 @@ type Cfg = {
   links: { buy: string; talk: string; sim: string; map: string; journey: string; devHref: string; pages: string[] };
   photos: Record<string, string>; briefs: Record<string, string>; privateHref: string;
   embed?: { cta?: string; ctaLabel?: string; pin?: [number, number, string] | null; accent?: string };
+  projects?: Project[]; routing?: "agency" | "developer" | "choice"; consult?: string;
 };
 
 const reduce = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -43,7 +47,15 @@ export function initMapExplorer(root: HTMLElement) {
   const pc = (v: number) => `${v > 0 ? "+" : v < 0 ? "−" : ""}${nf1.format(Math.abs(v))}%`;
   const eur = new Intl.NumberFormat(loc, { style: "currency", currency: "EUR", maximumFractionDigits: 0 });
   const eur2 = new Intl.NumberFormat(loc, { style: "currency", currency: "EUR", minimumFractionDigits: 2, maximumFractionDigits: 2 });
-  const fx = Number(root.dataset.fx) || 0, cur = root.dataset.cur || "";
+  let fx = Number(root.dataset.fx) || 0, cur = root.dataset.cur || "";
+  // Embed (prompt 26 demos): the host may set the reader's currency (?cur=USD|CHF|ILS|BRL) from the ECB rates in the page.
+  if (root.dataset.mode === "embed") {
+    const want = (new URLSearchParams(location.search).get("cur") || "").toUpperCase(), rates = JSON.parse(root.dataset.rates || "{}");
+    if (rates[want]) {
+      cur = want; fx = rates[want];
+      root.querySelector(".mapx-controls")?.insertAdjacentHTML("beforeend", `<div class="mapx-cur" role="group"><button type="button" data-cur-pick="${cur}" aria-pressed="true">${cur}</button><button type="button" data-cur-pick="EUR" aria-pressed="false">EUR</button></div>`);
+    }
+  }
   const local = cur ? new Intl.NumberFormat(loc, { style: "currency", currency: cur, maximumFractionDigits: 0 }) : null;
   const input = root.querySelector<HTMLInputElement>("[data-budget]")!;
   const card = root.querySelector<HTMLElement>("[data-card]")!;
@@ -189,7 +201,9 @@ export function initMapExplorer(root: HTMLElement) {
     let h = `${photo}<div class="mapx-card-b"><p class="h-small">${L.regions[p.r] || ""}</p><h3 tabindex="-1">${p.n}</h3>`;
     h += m2 ? `<p class="mapx-big">${nf.format(m2)}<span> ${L.m2}</span></p><p class="small">${L.median.replace("{v}", eur.format(v!)).replace("{quarter}", qq)}</p>` : `<p class="small">${L.nodata}</p>`;
     // D52: for a high budget, the developer projects of this area come straight after the figures (nothing is hidden for others).
-    if (budget >= HIGH && !cfg.embed) h += `<p class="mapx-devs small"><a href="${cfg.links.devHref}">${L.devs}</a></p>`;
+    const here = projects.filter((x) => x.muni === slug);  // prompt 26 §1.4: the partner developers active in this area
+    if (here.length) h += `<p class="mapx-devs small">${here.map((x) => `<button type="button" class="linkish" data-proj="${x.id}">${x.name} · ${x.developer}</button> <span class="tag">${L.sponsored}</span>`).join("<br>")}</p>`;
+    else if (budget >= HIGH && !cfg.embed) h += `<p class="mapx-devs small"><a href="${cfg.links.devHref}">${L.devs}</a></p>`;
     if (s && (s.m2.some((x) => x != null) || s.rq.some((x) => x != null))) {
       h += `<figure class="mapx-chart">${chart(s)}<figcaption class="small"><span class="k-ink">${L.price}</span> · <span class="k-green">${L.rent}</span></figcaption></figure><ul class="mapx-facts small">`;
       if (s.cagrP != null) h += `<li>${L.cagrP.replace("{v}", pc(s.cagrP))}</li>`;
@@ -242,6 +256,7 @@ export function initMapExplorer(root: HTMLElement) {
     card.querySelector(".mapx-close")!.addEventListener("click", () => { card.hidden = true; select(null); });
     card.querySelectorAll<HTMLButtonElement>("[data-goto]").forEach((b) => b.addEventListener("click", () => select(b.dataset.goto!)));
     card.querySelector("[data-share]")?.addEventListener("click", share);
+    card.querySelectorAll<HTMLButtonElement>("[data-proj]").forEach((b) => b.addEventListener("click", () => { const p = projects.find((x) => x.id === b.dataset.proj); if (p) showProject(p); }));
     card.querySelector("[data-shareimg]")?.addEventListener("click", shareImage);
     if (wasHidden && root.contains(document.activeElement) && document.activeElement !== input) card.querySelector<HTMLElement>("h3")?.focus({ preventScroll: true });
   }
@@ -342,6 +357,7 @@ export function initMapExplorer(root: HTMLElement) {
     const hp = ["==", ["get", "hp"], true], nohp = ["==", ["get", "hp"], false];
     map.setFilter("muni-3d", f ? ["all", nohp, f] : nohp);
     map.setFilter("muni-3d-p", f ? ["all", hp, f] : hp);
+    if (projOn) drawProjects();
   }
 
   // ---------------------------------------------------------------- loading
@@ -391,6 +407,7 @@ export function initMapExplorer(root: HTMLElement) {
       if (center.length !== 3) { const cam = map.cameraForBounds([[-12.45, 36.85], [-6.15, 42.2]], { padding: narrow ? 6 : 16, bearing: 0 }); if (cam) map.jumpTo({ center: flat ? cam.center : [cam.center.lng + (narrow ? 0.4 : 0.35), cam.center.lat - (narrow ? 0.3 : 0.45)], zoom: cam.zoom + (flat ? 0 : narrow ? -0.18 : 0.1), pitch: flat ? 0 : 50, bearing: flat ? 0 : -14 }); }
       root.classList.add("is-live");
       placeInsets(); applyFilter(); paint();
+      if (projOn) drawProjects();
       const sel = selected, par = selPar;
       if (par) { await loadParishes(); selectParish(par); } else if (sel) select(sel);
       if (root.dataset.mode === "home" && !flat && !sel) { rotating = true; spin(); }
@@ -437,6 +454,62 @@ export function initMapExplorer(root: HTMLElement) {
     }
   }
 
+
+  // ---------------------------------------------------------------- developer layer (prompt 26 §1): partner projects only, labelled
+  let projects: Project[] = [], projOn = false, markers: any[] = [], projLoaded = false;
+  const devBtn = root.querySelector<HTMLButtonElement>("[data-devs]"), devBar = root.querySelector<HTMLElement>("[data-devbar]");
+  async function loadProjects() {
+    if (projLoaded) return; projLoaded = true;
+    projects = [...(cfg.projects || [])];
+    const demo = (q.get("demoproj") || "").replace(/[^a-z0-9-]/gi, "");
+    if (demo) try { projects.push(...(await fetch(`/d/${demo}/project.json`).then((r) => r.json()))); } catch { /* no demo project */ }
+  }
+  const projOk = (p: Project) => {
+    const t = devBar?.querySelector<HTMLSelectElement>("[data-ptyp]")?.value || "", mx = parse(devBar?.querySelector<HTMLInputElement>("[data-pmax]")?.value || "");
+    const by = devBar?.querySelector<HTMLSelectElement>("[data-pdel]")?.value || "";
+    return (!t || p.typologies.some((x) => x.startsWith(t))) && (!mx || (p.from ?? 0) <= mx) && (!by || (p.delivery || "9999") <= by) && (!region || byS.get(p.muni)?.r === region);
+  };
+  function drawProjects() {
+    markers.forEach((m) => m.remove()); markers = [];
+    const list = root.querySelector<HTMLElement>("[data-pnone]");
+    if (!projOn || !map) { if (list) list.hidden = true; return; }
+    const shown = projects.filter(projOk);
+    if (list) list.hidden = shown.length > 0;
+    for (const p of shown) {
+      const el = document.createElement("button"); el.type = "button"; el.className = "mapx-proj";
+      el.innerHTML = `<span>${p.name}<em>${L.sponsored}</em></span>`; el.setAttribute("aria-label", `${p.name} · ${p.developer} · ${L.sponsored}`);
+      el.addEventListener("click", (e) => { e.stopPropagation(); showProject(p); });
+      markers.push(new ml.Marker({ element: el, anchor: "bottom" }).setLngLat([p.lon, p.lat]).addTo(map));
+    }
+  }
+  async function setProj(on: boolean) {
+    projOn = on; devBtn?.setAttribute("aria-pressed", String(on)); if (devBar) devBar.hidden = !on;
+    await load(); await loadProjects(); drawProjects();
+  }
+  function showProject(p: Project) {
+    const s = P?.munis[p.muni], m = byS.get(p.muni), i = last();
+    const price = p.from ? L.pfrom.replace("{v}", eur.format(p.from)) : L.ponreq;
+    const sim = `${cfg.links.sim}?price=${p.from ?? budget}&own=0&resident=0&mortgage=0`;
+    const ask = (to: "agency" | "developer") => to === "developer" && p.url ? `<a class="btn sm" href="${esc(p.url)}" target="_blank" rel="sponsored noopener">${L.paskdev}</a>`
+      : `<a class="btn sm" href="${cfg.consult}?project=${encodeURIComponent(p.name)}&place=${encodeURIComponent(m?.n || "")}">${cfg.routing === "choice" ? L.paskag : L.pask}</a>`;
+    const routing = cfg.routing || "agency";
+    let h = p.render ? `<img src="${esc(p.render)}" alt="" width="640" height="400" loading="lazy">` : "";
+    h += `<div class="mapx-card-b"><p class="h-small">${m?.n || ""} · <span class="tag">${L.sponsored}</span></p><h3 tabindex="-1">${p.name}</h3><p class="small">${p.developer}</p>`;
+    h += `<p class="mapx-big mapx-big-s">${price}</p><ul class="mapx-facts small">`;
+    if (p.typologies.length) h += `<li>${L.ptyp.replace("{v}", p.typologies.join(", "))}</li>`;
+    if (p.delivery) h += `<li>${L.pdel.replace("{v}", p.delivery)}</li>`;
+    h += `</ul>`;
+    if (s) h += `<p class="h-small mapx-fh">${m?.n || ""}</p><figure class="mapx-chart">${chart(s)}<figcaption class="small"><span class="k-ink">${L.price}</span> · <span class="k-green">${L.rent}</span></figcaption></figure>`
+      + (s.m2[i] ? `<p class="small">${L.median.replace("{v}", eur.format(s.m2[i]!)).replace("{quarter}", qLabel(P!.quarters[i]))}${s.yield != null ? ` · ${L.yield.split(".")[0].replace("{y}", nf1.format(s.yield) + "%")}.` : ""}</p>` : "");
+    h += `<p class="mapx-actions">${routing === "choice" ? ask("agency") + ask("developer") : ask(routing)}<a href="${sim}">${L.psim}</a></p>`;
+    if (p.credit) h += `<p class="small mapx-src">${L.pcredit.replace("{c}", esc(p.credit))}</p>`;
+    h += `</div><button type="button" class="mapx-close" aria-label="${L.close}">×</button>`;
+    openCard(h);
+    if (map) map.flyTo({ center: [p.lon, p.lat], zoom: Math.max(map.getZoom(), 9.6), pitch: flat ? 0 : 45, duration: reduce() ? 0 : 1400, essential: true });
+  }
+  devBtn?.addEventListener("click", () => setProj(!projOn));
+  devBar?.querySelectorAll("select,input").forEach((el) => el.addEventListener("change", drawProjects));
+  if (q.get("devs") === "1" || q.get("demoproj")) setProj(true);
   // ---------------------------------------------------------------- search ("Procurar concelho"): a combobox over the 308 names
   const sIn = root.querySelector<HTMLInputElement>("[data-find]"), sList = root.querySelector<HTMLUListElement>("[data-find-list]");
   if (sIn && sList) {
@@ -447,10 +520,13 @@ export function initMapExplorer(root: HTMLElement) {
       sList.hidden = !sIn.value.trim(); sIn.setAttribute("aria-expanded", String(!sList.hidden));
       active >= 0 ? sIn.setAttribute("aria-activedescendant", `${sList.id}-${active}`) : sIn.removeAttribute("aria-activedescendant");
     };
-    const go = (s: string) => { const m = names.find((x) => x.s === s) ?? (byS.get(s) as any); if (!m) return; sIn.value = m.n; sList.hidden = true; sIn.setAttribute("aria-expanded", "false"); load().then(() => select(s)); };
+    const go = (s: string) => {
+      if (s.startsWith("p:")) { const p = projects.find((x) => x.id === s.slice(2)); if (p) { sIn.value = p.name; sList.hidden = true; showProject(p); } return; }
+      const m = names.find((x) => x.s === s) ?? (byS.get(s) as any); if (!m) return; sIn.value = m.n; sList.hidden = true; sIn.setAttribute("aria-expanded", "false"); load().then(() => select(s)); };
     const find = () => {
       const t = plain(sIn.value.trim()); active = -1;
-      hits = t ? names.filter((m) => plain(m.n).includes(t)).sort((a, b) => Number(!plain(a.n).startsWith(t)) - Number(!plain(b.n).startsWith(t))).slice(0, 8) : [];
+      const pool = projOn ? [...projects.map((p) => ({ n: `${p.name} · ${p.developer}`, s: `p:${p.id}`, r: "" })), ...names] : names;
+      hits = t ? pool.filter((m) => plain(m.n).includes(t)).sort((a, b) => Number(!plain(a.n).startsWith(t)) - Number(!plain(b.n).startsWith(t))).slice(0, 8) : [];
       if (hits.length) active = 0; render();
     };
     sIn.addEventListener("input", () => { find(); if (!features.length) load().then(find); });

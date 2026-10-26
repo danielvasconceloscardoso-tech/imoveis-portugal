@@ -91,6 +91,9 @@ export const config = {
 
   // Developer area placements (prompt 20 §4, D38): up to three per municipality slug, plus one launch. Shown as empty
   // slots until a partner signs. Public data only: name, logo path under /public, one project with its published price.
+  // Prompt 26 §1: where "Pedir informação" on a developer project goes, until task 8z is decided:
+  // "agency" (the partner agency, D14), "developer" (the developer's sales team) or "choice" (the reader picks).
+  enquiryRouting: "agency" as "agency" | "developer" | "choice",
   developers: {} as Record<string, { name: string; logo: string; project: { name: string; from: number; typology: string; url: string } }[]>,
   launches: {} as Record<string, { name: string; developer: string; url: string }>,
 

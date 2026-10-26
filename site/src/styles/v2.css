@@ -726,3 +726,14 @@ a.brass { color: var(--brass); }
 .mapx-cur button[aria-pressed="true"] { background: var(--ink); color: #fff; }
 .mapx-layer { font: 500 14px/1.15 var(--sans); padding: 9px 12px; min-height: 40px; border-radius: 2px; border: 1px solid var(--rule); background: transparent; color: var(--ink); }
 .mapx-fh { margin-top: 16px; }
+/* Prompt 26 §1: partner project pins stand above the 3D concelhos, always labelled. */
+.mapx-devbar { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: flex-end; margin: -4px 0 14px; }
+.mapx-devbar select, .mapx-devbar input { font: 500 14px/1.15 var(--sans); padding: 9px 12px; min-height: 40px; border-radius: 2px; border: 1px solid var(--rule); background: transparent; color: var(--ink); }
+.mapx-devbar input { width: 9em; }
+.mapx-pmax { display: grid; gap: 4px; }
+.mapx-proj { display: grid; justify-items: center; background: none; border: 0; padding: 0; cursor: pointer; }
+.mapx-proj span { font: 600 12px/1.2 var(--sans); background: var(--ink); color: #fff; padding: 6px 8px; border-radius: 2px; white-space: nowrap; display: grid; }
+.mapx-proj em { font: 500 10px/1 var(--sans); font-style: normal; letter-spacing: .06em; text-transform: uppercase; color: #c9dccf; margin-top: 3px; }
+.mapx-proj::after { content: ""; width: 2px; height: 34px; background: var(--ink); }
+.mapx-proj:focus-visible span { outline: 2px solid #7a5e28; outline-offset: 2px; }
+.mapx-big-s { font-size: 1.8rem; }
