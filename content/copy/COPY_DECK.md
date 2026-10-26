@@ -1390,6 +1390,16 @@ How to edit:
 
 ## legal
 
+### privacy.7.p
+- PT: Se marcar "Incluir este resumo", o seu pedido leva um resumo do que indicou no percurso e nos simuladores: país, orçamento, custo total, capitais próprios e financiamento, uma taxa de esforço indicativa, prazo, se já tem NIF e as zonas cujos preços consultou. Esses valores ficam no seu dispositivo até enviar o pedido e só seguem para os parceiros que escolheu, com o seu consentimento (RGPD, art. 6.º, n.º 1, alínea a), e art. 7.º). O resumo é indicativo, não é uma avaliação de crédito e não serve para nenhuma decisão automatizada sobre si. Para orçamentos elevados, a agência parceira continua a pedir identificação e prova de fundos, como exige a Lei 83/2017.
+- EN: If you tick "Include this summary", your request carries a summary of what you entered on the path and in the calculators: country, budget, total cost, own funds and financing, an indicative debt-to-income ratio, timing, whether you have a NIF and the areas whose prices you looked at. These figures stay on your device until you send the request and go only to the partners you chose, with your consent (GDPR art. 6(1)(a) and art. 7). The summary is indicative, is not a credit assessment and is not used for any automated decision about you. For high budgets, the partner agency still asks for identification and proof of funds, as Lei 83/2017 requires.
+- FR: Si vous cochez « Joindre ce résumé », votre demande contient un résumé de ce que vous avez saisi dans le parcours et les simulateurs : pays, budget, coût total, apport et financement, un taux d'endettement indicatif, échéance, si vous avez un NIF et les secteurs dont vous avez consulté les prix. Ces données restent sur votre appareil jusqu'à l'envoi et ne vont qu'aux partenaires que vous avez choisis, avec votre consentement (RGPD, art. 6, par. 1, point a, et art. 7). Le résumé est indicatif, n'est pas une évaluation de crédit et ne sert à aucune décision automatisée vous concernant. Pour les budgets élevés, l'agence partenaire demande toujours une pièce d'identité et la preuve des fonds, comme l'exige la Lei 83/2017.
+
+### privacy.7.h
+- PT: Resumo enviado com os pedidos
+- EN: Summary sent with requests
+- FR: Résumé joint aux demandes
+
 ### draft
 - PT: Rascunho. Os campos entre parênteses retos são preenchidos quando a entidade estiver definida.
 - EN: Draft. Fields in square brackets will be filled in once the entity is set up.
@@ -3429,6 +3439,16 @@ How to edit:
 
 ## journey
 
+### role.rental
+- PT: Gestão de arrendamento
+- EN: Rental management
+- FR: Gestion locative
+
+### role.architect
+- PT: Arquiteto
+- EN: Architect
+- FR: Architecte
+
 ### q.sell.cert.a
 - PT: É um dos documentos pedidos numa venda. Um advogado parceiro confirma as exceções e quem o emite.
 - EN: It is one of the documents asked for in a sale. A partner lawyer confirms the exceptions and who issues it.
@@ -5220,3 +5240,206 @@ How to edit:
 - FR: Votre parcours
 
 Prompt 27: the path (two doors, stations, checklist). Blocks path.st.{k}.h / .what / .need.n per station.
+
+## team
+
+### do.rental
+- PT: Gere o arrendamento, se arrendar a casa.
+- EN: Manages the letting, if you rent the home out.
+- FR: Gère la location, si vous louez le bien.
+
+### do.architect
+- PT: Arquiteto ou designer de interiores, para obras e decoração.
+- EN: An architect or interior designer, for works and furnishing.
+- FR: Un architecte ou un architecte d'intérieur, pour les travaux et l'aménagement.
+
+### do.wealth
+- PT: Organiza o património e a forma de deter a casa.
+- EN: Organises your holdings and how you hold the home.
+- FR: Organise votre patrimoine et la façon de détenir le bien.
+
+### do.insurance
+- PT: Seguro da casa e, com crédito, seguro de vida.
+- EN: Home insurance and, with a mortgage, life cover.
+- FR: Assurance habitation et, avec un crédit, assurance décès.
+
+### do.tax
+- PT: Vê os impostos em Portugal e no país onde vive.
+- EN: Looks at the taxes in Portugal and in the country where you live.
+- FR: Examine les impôts au Portugal et dans votre pays de résidence.
+
+### do.fx
+- PT: Transfere o dinheiro da sua moeda para euros.
+- EN: Moves your money from your currency into euros.
+- FR: Transfère votre argent de votre devise vers l'euro.
+
+### do.bank
+- PT: Intermediário de crédito registado no Banco de Portugal (DL 81-C/2017): compara e prepara o financiamento.
+- EN: A credit intermediary registered with Banco de Portugal (DL 81-C/2017): compares and prepares the financing.
+- FR: Intermédiaire de crédit enregistré auprès de la Banco de Portugal (DL 81-C/2017) : compare et prépare le financement.
+
+### do.lawyer
+- PT: Trata do NIF, da procuração e da escritura.
+- EN: Handles your NIF, the power of attorney and the deed.
+- FR: S'occupe du NIF, de la procuration et de l'acte.
+
+### do.developer
+- PT: Apresenta as casas novas do empreendimento e as condições de venda.
+- EN: Presents the development's new homes and its terms of sale.
+- FR: Présente les logements neufs du programme et ses conditions de vente.
+
+### do.agency
+- PT: Encontra e mostra as casas e acompanha a compra até à escritura.
+- EN: Finds and shows you homes and stays with the purchase until the deed.
+- FR: Trouve et fait visiter les biens, et suit l'achat jusqu'à l'acte.
+
+### wait
+- PT: Os outros passos ganham um nome quando o parceiro for escolhido e verificado.
+- EN: The other steps get a name once their partner is chosen and verified.
+- FR: Les autres étapes auront un nom une fois leur partenaire choisi et vérifié.
+
+### send
+- PT: Pedir contacto aos que escolhi
+- EN: Ask the ones I chose to contact me
+- FR: Demander un contact à ceux que j'ai choisis
+
+### consent
+- PT: Aceito que {name} me contacte sobre este pedido
+- EN: I agree that {name} may contact me about this request
+- FR: J'accepte que {name} me contacte au sujet de cette demande
+
+### now
+- PT: Neste passo
+- EN: At this step
+- FR: À cette étape
+
+### p
+- PT: Os parceiros de que o seu caso precisa até aqui, um por passo. Escolha quem o pode contactar: só os que escolher recebem o seu pedido.
+- EN: The partners your case needs so far, one per step. Choose who may contact you: only the ones you choose receive your request.
+- FR: Les partenaires dont votre cas a besoin jusqu'ici, un par étape. Choisissez qui peut vous contacter : seuls ceux que vous cochez reçoivent votre demande.
+
+### h.sell
+- PT: A sua equipa para esta venda
+- EN: Your team for this sale
+- FR: Votre équipe pour cette vente
+
+### h
+- PT: A sua equipa para esta compra
+- EN: Your team for this purchase
+- FR: Votre équipe pour cet achat
+
+Prompt 28 §2b (D54): "Your team for this purchase", the partners a case needs, step by step.
+
+## brief
+
+### note
+- PT: Indicativo, não é uma avaliação de crédito
+- EN: Indicative, not a credit assessment
+- FR: Indicatif, pas une évaluation de crédit
+
+### data
+- PT: Viu os preços de 10 anos de {places}
+- EN: Looked at 10-year prices for {places}
+- FR: A consulté les prix sur 10 ans de {places}
+
+### nonif
+- PT: Ainda sem NIF
+- EN: No NIF yet
+- FR: Pas encore de NIF
+
+### nif
+- PT: NIF já obtido
+- EN: NIF in place
+- FR: NIF déjà obtenu
+
+### later
+- PT: Sem data marcada
+- EN: No set date
+- FR: Sans date fixée
+
+### year
+- PT: Pronto dentro de um ano
+- EN: Ready within a year
+- FR: Prêt d'ici un an
+
+### soon
+- PT: Pronto nos próximos 3 meses
+- EN: Ready within 3 months
+- FR: Prêt dans les 3 mois
+
+### dsti
+- PT: Taxa de esforço indicativa {v}
+- EN: Indicative debt-to-income {v}
+- FR: Taux d'endettement indicatif {v}
+
+### inherit
+- PT: Casa herdada
+- EN: Inherited home
+- FR: Bien hérité
+
+### sell
+- PT: Quer vender
+- EN: Selling
+- FR: Souhaite vendre
+
+### value
+- PT: Valor indicado {v}
+- EN: Stated value {v}
+- FR: Valeur indiquée {v}
+
+### budget
+- PT: Orçamento {v}
+- EN: Budget {v}
+- FR: Budget {v}
+
+### total
+- PT: Orçamento total {v} com impostos
+- EN: Total budget {v} incl. taxes
+- FR: Budget total {v} frais inclus
+
+### own
+- PT: Capitais próprios {v}
+- EN: Own funds {v}
+- FR: Apport {v}
+
+### loan
+- PT: Financiamento de cerca de {v}
+- EN: Financing of about {v}
+- FR: Financement d'environ {v}
+
+### cash
+- PT: Compra sem crédito
+- EN: Cash buyer
+- FR: Achat sans crédit
+
+### from
+- PT: A partir {from}
+- EN: From {from}
+- FR: Depuis {from}
+
+### privacy
+- PT: Como tratamos este resumo
+- EN: How we handle this summary
+- FR: Comment nous traitons ce résumé
+
+### none
+- PT: Ainda não indicou valores no percurso nem nos simuladores: o pedido segue só com as suas respostas.
+- EN: You have not entered any figures on the path or in the calculators yet: the request goes with your answers only.
+- FR: Vous n'avez encore saisi aucun montant dans le parcours ni dans les simulateurs : la demande part avec vos seules réponses.
+
+### include
+- PT: Incluir este resumo no meu pedido
+- EN: Include this summary in my request
+- FR: Joindre ce résumé à ma demande
+
+### p
+- PT: Um resumo do que já indicou no percurso e nos simuladores, para que o parceiro comece pelo seu caso. Valores indicativos, não uma avaliação de crédito: ninguém decide nada sobre si a partir deste resumo.
+- EN: A summary of what you already entered on the path and in the calculators, so the partner starts with your case. Indicative figures, not a credit assessment: nobody decides anything about you from this summary.
+- FR: Un résumé de ce que vous avez déjà indiqué dans le parcours et les simulateurs, pour que le partenaire parte de votre cas. Des montants indicatifs, pas une évaluation de crédit : personne ne décide quoi que ce soit à votre sujet à partir de ce résumé.
+
+### h
+- PT: O que segue com o seu pedido
+- EN: What goes with your request
+- FR: Ce qui accompagne votre demande
+
+Prompt 28 §2b (D54): the qualified summary that goes with a partner enquiry (indicative, never a decision).

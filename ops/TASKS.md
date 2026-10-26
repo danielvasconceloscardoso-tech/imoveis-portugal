@@ -150,6 +150,7 @@ Status: To do · Doing · Blocked · Done
 | 27a | "Receber o percurso por email" opens the normal newsletter signup (double opt-in). To send the reader's own path in the first email, beehiiv needs a welcome email with a link field; check whether the free plan allows it (beehiiv → Automations) and tell the CTO | Operator | To do | 2026-11-06 |
 | 27b | "Herdei uma casa" is a tick box under "Vender" for now (prompt 27 says a third door comes later): decide when it becomes its own door | CEO | To do | 2026-11-13 |
 
+| 28a | Tally (buyer form BEEzgN and the partner-request form): add two hidden fields, "brief" (the reader's qualified summary, only when they tick "Include this summary") and "team" (the partners they agreed may contact them), and show both in the notification email to the agency/partner; ops/TALLY_CONSULTA.md | Operator | To do | 2026-11-06 |
 | 8z | Decide where enquiries about a specific developer project go: (a) straight to the developer's sales team, (b) via Habinedita as the broking agency, or (c) the buyer chooses; D14 covers general buyer requests only | Operator | To do | 2026-10-30 |
 
 ## Last session

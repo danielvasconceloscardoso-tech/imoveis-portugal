@@ -38,3 +38,9 @@ Consult slug: PT `consulta-privada`, EN `private-consultation`, FR `consultation
 
 - Email to the brand mailbox for every submission (as today), and **forward to the agency the same day** (hard rule 6, D14).
 - Respondent confirmation email: off in Tally (the confirmation emails are sent by the agency, copy in content/consulta/EMAILS.md).
+
+## Hidden fields added by prompt 28 §2b (D54)
+
+- `brief`: the reader's qualified summary (path and calculators, indicative), filled only when they tick "Include this summary" above the form. Example: "Financing of about €313,900 · Ready within 3 months · NIF in place · Total budget €433,900 incl. taxes · Own funds €120,000 · Indicative debt-to-income 17% · From Luxembourg · Looked at 10-year prices for Lisboa, Cascais (Indicative, not a credit assessment)".
+- `team`: the partners the reader agreed, by name, may contact them (one unticked box per named partner on the path).
+Add both as hidden fields in the buyer form and the partner-request form and include them in the notification email. Never use them to accept or refuse a reader: the agency's identification and proof of funds (Lei 83/2017) stay as they are.

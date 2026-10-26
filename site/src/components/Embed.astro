@@ -1,14 +1,16 @@
 ---
 // A Tally form (by ID) or a full embed URL (e.g. beehiiv). Until the form is configured, it renders a
 // button that opens an email to the brand mailbox (prompt 11: never show a placeholder or a broken form).
+// `brief`: partner enquiries, where BriefBox.astro may add the reader's qualified summary (prompt 28 §2b).
 import { config } from "../config";
-interface Props { id: string; title: string; cta: string; subject: string; hidden?: Record<string, string>; height?: number; }
-const { id, title, cta, subject, hidden = {}, height = 420 } = Astro.props;
+interface Props { id: string; title: string; cta: string; subject: string; hidden?: Record<string, string>; height?: number; brief?: boolean; }
+const { id, title, cta, subject, hidden = {}, height = 420, brief = false } = Astro.props;
 const qs = new URLSearchParams({ hideTitle: "1", transparentBackground: "1", dynamicHeight: "1", ...hidden }).toString();
 const src = !id ? "" : id.startsWith("http") ? id : `https://tally.so/embed/${id}?${qs}`;
 const tag = Object.values(hidden).join(" · ");
 const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${subject}${tag ? ` (${tag})` : ""}`)}`;
+const mark = brief ? { "data-brief-target": "" } : {};
 ---
 {src
-  ? <div class="form-box"><iframe src={src} title={title} loading="lazy" style={`min-height:${height}px`}></iframe></div>
-  : <a class="btn" href={mail}>{cta}</a>}
+  ? <div class="form-box"><iframe src={src} title={title} loading="lazy" style={`min-height:${height}px`} {...mark}></iframe></div>
+  : <a class="btn" href={mail} {...mark}>{cta}</a>}

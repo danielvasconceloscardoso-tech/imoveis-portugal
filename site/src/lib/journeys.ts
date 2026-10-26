@@ -4,7 +4,7 @@
 // Wording: COPY_DECK.md "journey.*". Every checkpoint ends with an empty partner slot for that step and country.
 import type { EdCode } from "../i18n";
 
-export type Role = "agency" | "developer" | "bank" | "fx" | "lawyer" | "tax" | "insurance" | "wealth";
+export type Role = "agency" | "developer" | "bank" | "fx" | "lawyer" | "tax" | "insurance" | "wealth" | "architect" | "rental";
 export type JQ = { id: string; a?: string; ck?: string; facts: string[]; cat: string; only?: EdCode[]; ask?: boolean; link?: "map" | "sims" | "private" | "prices" };
 // high: a station the path adds by itself when the reader's budget is high (D52); never labelled as such.
 export type Checkpoint = { k: string; roles: Role[]; qs: JQ[]; high?: boolean };

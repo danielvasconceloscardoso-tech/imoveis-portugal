@@ -22,8 +22,8 @@ export const STATIONS: Station[] = [
   { k: "cpcv", door: "buy", roles: ["lawyer"], qs: qs("buy", ["cpcv"]), cta: "talk", cat: "lawyer", need: 3 },
   { k: "deed", door: "buy", roles: ["lawyer", "tax"], qs: [...qs("taxbuy"), ...qs("buy", ["deed", "docs"])], tool: "cost", cta: "talk", cat: "lawyer", need: 3 },
   { k: "estate", door: "buy", roles: ["wealth", "tax", "lawyer"], qs: qs("estate"), cta: "talk", cat: "tax", high: true, need: 2 },
-  { k: "keys", door: "buy", roles: ["insurance"], qs: [], cta: "talk", cat: "insurance", need: 3 },
-  { k: "own", door: "buy", roles: ["tax", "insurance"], qs: [...qs("own"), ...qs("rent")], tool: "rent", cta: "talk", cat: "tax", need: 3 },
+  { k: "keys", door: "buy", roles: ["insurance", "architect"], qs: [], cta: "talk", cat: "insurance", need: 3 },
+  { k: "own", door: "buy", roles: ["tax", "insurance", "rental"], qs: [...qs("own"), ...qs("rent")], tool: "rent", cta: "talk", cat: "tax", need: 3 },
   { k: "later", door: "buy", roles: ["tax", "agency"], qs: qs("sell"), tool: "gains", cta: "talk", cat: "tax", need: 2 },
 
   { k: "worth", door: "sell", roles: ["agency"], qs: qs("budget", ["trend"]), map: true, cta: "sell", need: 3 },

@@ -9,6 +9,7 @@ import CountryBar from "./CountryBar.astro";
 import { pathFor, HTML_LANG, type Lang, type EdCode } from "../i18n";
 import { Sources, fmtDate, faqFor, RATE, EDITION_CUR } from "../lib/content";
 import { stationsFor, faqPlace, type Door } from "../lib/path";
+import { teamSoFar } from "../lib/team";
 import { SUB } from "../lib/tools";
 import { c, cl, edName } from "../lib/copy";
 
@@ -39,6 +40,8 @@ const routes = DOORS.map((door) => ({
     tool: s.tool ? { href: `${sims}${SUB[s.tool][lang]}/`, field: FIELD[s.tool] ?? "" } : null,
   })),
 }));
+// Prompt 28 §2b: at every station, the team so far (each role once), this step's roles marked.
+const teams = Object.fromEntries(routes.map((r) => [r.door, teamSoFar(r.st)])) as Record<Door, ReturnType<typeof teamSoFar>>;
 const cur = EDITION_CUR[ed];
 const rate = cur ? RATE(cur).rate : 0;
 ---
@@ -90,7 +93,7 @@ const rate = cur ? RATE(cur).rate : 0;
         <div class="pwrap">
           <svg class="pline-svg" aria-hidden="true"><path class="pl-base" /><path class="pl-fill" /></svg>
           <ol class="pline">
-            {r.st.map((s) => (
+            {r.st.map((s, si) => (
               <li class="pst" id={`s-${s.k}`} data-k={s.k} {...(s.high ? { "data-high": "" } : {})} {...(s.inherit ? { "data-inherit": "" } : {})}>
                 <span class="pdot" aria-hidden="true"></span>
                 <h3><button type="button" class="pst-head" aria-expanded="true" aria-controls={`b-${s.k}`}>
@@ -114,11 +117,20 @@ const rate = cur ? RATE(cur).rate : 0;
                     {s.map && <a class="act quiet" data-num="map" href={pathFor(lang, ed, "map")}>{c(r.door === "sell" ? "path.numbers.mapsell" : "path.numbers.map", lang)}</a>}
                     {s.tool && <a class="act quiet" data-num={s.tool.field} href={s.tool.href}>{c("path.numbers.tool", lang)}</a>}
                   </p>}
-                  <aside class="pslot" aria-label={c("path.partner", lang)}>
-                    <p class="h-small">{c("path.partner", lang)}</p>
-                    <p class="jroles">{s.roles.map((x) => c(`journey.role.${x}`, lang)).join(" · ")}</p>
-                    <p class="small">{c("journey.slot.p", lang, { where })}</p>
-                    <a class="act" data-cta={s.cta} href={s.cta.href}>{s.cta.label}</a>
+                  <aside class="pteam" aria-label={c(r.door === "sell" ? "team.h.sell" : "team.h", lang)}>
+                    <p class="h-small">{c(r.door === "sell" ? "team.h.sell" : "team.h", lang)}</p>
+                    <p class="small">{c("team.p", lang)}</p>
+                    <ol class="tm">
+                      {teams[r.door][si].map((t, ti) => (
+                        <li class="tm-row" data-sts={t.sts.join(" ")} {...(t.now ? { "data-now": "" } : {})} style={`--d:${ti}`}>
+                          <p class="tm-h"><span class="tm-role">{c(`journey.role.${t.role}`, lang)}</span>{t.partner && <span class="tm-name">{t.partner.name}<span class="tag">{c("common.sponsored", lang)}</span></span>}{t.now && <span class="tm-now">{c("team.now", lang)}</span>}</p>
+                          <p class="tm-do">{c(`team.do.${t.role}`, lang)}{t.partner?.reg && <span class="small"> · {t.partner.reg}</span>}</p>
+                          {t.partner && <label class="tm-ok"><input type="checkbox" data-team={t.role} data-name={t.partner.name} /> {c("team.consent", lang, { name: t.partner.name })}</label>}
+                        </li>
+                      ))}
+                    </ol>
+                    {teams[r.door][si].some((t) => !t.partner) && <p class="small">{c("team.wait", lang)}</p>}
+                    <p class="tm-acts"><a class="btn sm" data-team-send href={`${talk}#form`} aria-disabled="true">{c("team.send", lang)}</a> <a class="act" data-cta={s.cta} href={s.cta.href}>{s.cta.label}</a></p>
                   </aside>
                   <p class="pnext"><button type="button" class="btn" data-next hidden>{c("path.next", lang)}</button></p>
                 </div></div>
@@ -226,10 +238,31 @@ const rate = cur ? RATE(cur).rate : 0;
     $("[data-prog-t]")!.textContent = root.dataset.progress!.replace("{n}", String(n)).replace("{t}", String(list.length));
     const door = $(`button[data-door="${st.door}"] .pd-h`)!.textContent;
     $("[data-sum]")!.textContent = [door, st.budget ? `${nf.format(st.budget)} €` : ""].filter(Boolean).join(" · ");
-    links();
+    links(); teamRender();
     drawAll();
     if (scroll) $(`#s-${here}`)?.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
   }
+  // Team panel: a role shows while one of the stations that brings it in is on the route; consent boxes for the same
+  // partner stay in step across stations; the send link names only the partners the reader ticked.
+  const team = new Set<string>();
+  function teamRender() {
+    const on = new Set(visible().map((li) => li.dataset.k!));
+    $$(".tm-row").forEach((row) => { row.hidden = !row.dataset.sts!.split(" ").some((k) => on.has(k)); });
+    $$<HTMLInputElement>("[data-team]").forEach((x) => (x.checked = team.has(x.dataset.name!)));
+    const names = [...team], roles = [...new Set($$<HTMLInputElement>("[data-team]:checked").map((x) => x.dataset.team!))];
+    $$<HTMLAnchorElement>("[data-team-send]").forEach((a) => {
+      a.setAttribute("aria-disabled", String(!names.length));
+      const onlyAgency = roles.length === 1 && roles[0] === "agency";
+      const u = new URL(onlyAgency ? root.dataset.consult! : a.href, location.href);
+      u.search = ""; u.hash = onlyAgency ? "" : "form";
+      if (names.length) u.searchParams.set("team", names.join(", "));
+      const cat = roles.find((r) => r !== "agency"); if (cat && !onlyAgency) u.searchParams.set("cat", cat);
+      if (st.budget) u.searchParams.set("budget", String(st.budget));
+      a.href = u.pathname + u.search + u.hash;
+    });
+  }
+  $$<HTMLInputElement>("[data-team]").forEach((x) => x.addEventListener("change", () => { x.checked ? team.add(x.dataset.name!) : team.delete(x.dataset.name!); teamRender(); }));
+
   // The reader's figure goes into the map and the calculators; a high budget gets the personal consultation tone.
   function links() {
     const b = st.budget;
@@ -372,12 +405,28 @@ const rate = cur ? RATE(cur).rate : 0;
   .pqa p { margin: 0 0 12px; }
   .pmore { margin-top: 12px; }
   .pnums { display: flex; flex-wrap: wrap; gap: 8px 16px; margin: 0; }
-  .pslot { margin-top: 22px; padding: 18px; border: 1px solid var(--rule); border-radius: var(--r); background: var(--card); }
-  .pslot p { margin: 0 0 8px; }
+  .pteam { margin-top: 22px; padding: 20px; border: 1px solid var(--rule); border-radius: var(--r); background: var(--card); }
+  .pteam > p { margin: 0 0 8px; }
+  .tm { list-style: none; margin: 14px 0 10px; padding: 0; }
+  .tm-row { padding: 12px 0; border-top: 1px solid var(--rule); }
+  .tm-row p { margin: 0; }
+  .tm-h { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; }
+  .tm-role { font: 450 1.1rem/1.3 var(--serif); }
+  .tm-name { font-weight: 600; display: inline-flex; gap: 8px; align-items: baseline; }
+  .tm-name .tag { font: 600 10px/1 var(--sans); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--rule); border-radius: 4px; padding: 3px 5px; }
+  .tm-now { margin-left: auto; font: 600 11px/1 var(--sans); letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
+  .tm-do { color: var(--muted); font-size: 15px; margin-top: 2px !important; }
+  .tm-ok { display: flex; gap: 10px; align-items: flex-start; margin-top: 8px; font-size: 15px; cursor: pointer; }
+  .tm-ok input { width: 20px; height: 20px; margin: 1px 0 0; flex: none; accent-color: var(--accent); }
+  .tm-acts { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; margin-top: 12px !important; }
+  .tm-acts .btn[aria-disabled="true"] { opacity: .45; pointer-events: none; }
+  /* The team assembles itself: this step's partners arrive one by one when the station opens. */
+  .is-js .pst.open .tm-row[data-now] { animation: tm-in .5s cubic-bezier(.2,.7,.2,1) both; animation-delay: calc(var(--d) * 90ms + 150ms); }
+  @keyframes tm-in { from { opacity: 0; transform: translateY(6px); } }
   .pnext { margin: 22px 0 0; }
   .pend { padding-top: 8px; padding-bottom: 48px; }
   .pend h2 { margin-bottom: 16px; }
   @media (min-width: 900px) { .pst { padding-left: 76px; } }
   @media (max-width: 520px) { .pdoors { grid-template-columns: 1fr; } .pd-h { font-size: 1.4rem; } }
-  @media (prefers-reduced-motion: reduce) { .is-js .pst-body, .pdot, .pprog span { transition: none; } }
+  @media (prefers-reduced-motion: reduce) { .is-js .pst-body, .pdot, .pprog span { transition: none; } .is-js .pst.open .tm-row[data-now] { animation: none; } }
 </style>

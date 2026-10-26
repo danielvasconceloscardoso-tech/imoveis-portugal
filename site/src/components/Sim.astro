@@ -126,6 +126,7 @@ const fieldLabel = (id: string, kind: string) => {
 
 <script>
   import { run, FIELDS, type ToolKey } from "../lib/tools";
+  import { saveSim } from "../lib/brief";
   const form = document.getElementById("sim") as HTMLFormElement;
   const tool = form.dataset.tool as ToolKey;
   const fx = Number(form.dataset.fx) || 1;
@@ -183,6 +184,8 @@ const fieldLabel = (id: string, kind: string) => {
     const w = document.getElementById("warn")!;
     if (out.warn && L[out.warn.k]) { w.hidden = false; w.textContent = L[out.warn.k].replace(/\{(\w+)\}/g, (m, k) => String(out.warn!.vars?.[k] ?? m)); }
     else w.hidden = true;
+    // Kept on the device for the summary a later enquiry can carry, only if the reader ticks it (prompt 28 §2b).
+    saveSim(tool, v, Object.fromEntries(out.rows.map((r) => [r.k, r.v])), fx);
     // Keep the inputs in the URL (no personal data), for sharing and for the plan.
     const p = new URLSearchParams();
     for (const [k, x] of Object.entries(v)) p.set(k, typeof x === "boolean" ? (x ? "1" : "0") : String(x));

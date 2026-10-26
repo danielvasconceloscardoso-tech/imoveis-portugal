@@ -2,6 +2,7 @@
 // Every page other than the home: media kit, buyer request, how we work, privacy, legal notice, FAQ,
 // talk to a partner and the free guide. Wording: content/copy/COPY_DECK.md.
 import V2 from "../../../layouts/V2.astro";
+import BriefBox from "../../../components/BriefBox.astro";
 import Embed from "../../../components/Embed.astro";
 import Calls from "../../../components/Calls.astro";
 import FaqPage from "../../../components/FaqPage.astro";
@@ -135,7 +136,8 @@ const site = config.agency.website.replace(/^https:\/\/|\/$/g, "");
       </div>
       <div class="split" style="padding-bottom:64px">
         <div class="buy-form">
-          <Embed id={config.forms.buyer[lang]} title={c("buy.h1", lang)} cta={c("buy.cta", lang)} subject={c("buy.h1", lang)} hidden={{ edition: ed, lang }} height={560} />
+          <BriefBox lang={lang} ed={ed} />
+          <Embed id={config.forms.buyer[lang]} title={c("buy.h1", lang)} cta={c("buy.cta", lang)} subject={c("buy.h1", lang)} hidden={{ edition: ed, lang }} height={560} brief />
           <p class="small" style="margin-top:12px">{c("buy.small", lang)}{" "}<a href={pathFor(lang, ed, "privacy")}>{c("common.privacy", lang)}</a></p>
         </div>
         <div>
@@ -176,7 +178,7 @@ const site = config.agency.website.replace(/^https:\/\/|\/$/g, "");
         <p class="lede">{c(`legal.${legal}.intro`, lang)}</p>
       </div>
       {!config.launchReady && <p class="draft">{c("legal.draft", lang)}</p>}
-      {Array.from({ length: legal === "privacy" ? 6 : 4 }, (_, j) => j + 1).map((i) => (<><h2>{c(`legal.${legal}.${i}.h`, lang)}</h2><p>{c(`legal.${legal}.${i}.p`, lang, legalVars)}</p></>))}
+      {Array.from({ length: legal === "privacy" ? 7 : 4 }, (_, j) => j + 1).map((i) => (<><h2 id={legal === "privacy" && i === 7 ? "brief" : undefined}>{c(`legal.${legal}.${i}.h`, lang)}</h2><p>{c(`legal.${legal}.${i}.p`, lang, legalVars)}</p></>))}
     </div>
   )}
 </V2>

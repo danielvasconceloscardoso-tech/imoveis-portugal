@@ -1,0 +1,65 @@
+---
+// "What goes with your request" (prompt 28 §2b, D54): the qualified summary built on the device from the path and the
+// calculators, shown to the reader before any partner enquiry. Unticked by default; when ticked it rides in the form's
+// hidden "brief" field (or the email body until the form exists). Names chosen on the path's team panel ride in "team".
+import { pathFor, HTML_LANG, type Lang, type EdCode } from "../i18n";
+import { BRIEF_KEYS } from "../lib/brief";
+import { c } from "../lib/copy";
+
+interface Props { lang: Lang; ed: EdCode; }
+const { lang, ed } = Astro.props;
+const labels = Object.fromEntries(BRIEF_KEYS.map((k) => [k, c(`brief.${k}`, lang)]));
+---
+<aside class="brief" data-brief data-locale={HTML_LANG[lang]} data-from={c(`journey.from.${ed}`, lang)} aria-labelledby="brief-h">
+  <p class="h-small" id="brief-h">{c("brief.h", lang)}</p>
+  <p class="small">{c("brief.p", lang)}</p>
+  <p class="brief-line" data-brief-out>{c("brief.none", lang)}</p>
+  <p class="brief-note small" data-brief-note hidden>{c("brief.note", lang)}</p>
+  <label class="brief-ok" data-brief-ok hidden><input type="checkbox" data-brief-include /> {c("brief.include", lang)}</label>
+  <p class="small"><a href={`${pathFor(lang, ed, "privacy")}#brief`}>{c("brief.privacy", lang)}</a></p>
+  <script type="application/json" data-brief-labels set:html={JSON.stringify(labels)} />
+</aside>
+
+<script>
+  import { gather, summary, type BriefLabels } from "../lib/brief";
+  document.querySelectorAll<HTMLElement>("[data-brief]").forEach((box) => {
+    const L = JSON.parse(box.querySelector("[data-brief-labels]")!.textContent || "{}") as BriefLabels;
+    const loc = box.dataset.locale!;
+    const money = (v: number) => new Intl.NumberFormat(loc, { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(v);
+    const pct = (v: number) => `${new Intl.NumberFormat(loc, { maximumFractionDigits: 0 }).format(v)}${loc.startsWith("fr") ? " %" : "%"}`;
+    const facts = gather();
+    const line = facts ? summary(facts, L, money, pct, box.dataset.from!) : "";
+    const team = new URLSearchParams(location.search).get("team") || "";
+    const inc = box.querySelector<HTMLInputElement>("[data-brief-include]")!;
+    if (line) {
+      box.querySelector("[data-brief-out]")!.textContent = line;
+      (box.querySelector("[data-brief-note]") as HTMLElement).hidden = false;
+      (box.querySelector("[data-brief-ok]") as HTMLElement).hidden = false;
+    }
+    // Every partner form on the page gets the summary only while the box is ticked; chosen names always go.
+    const apply = () => document.querySelectorAll<HTMLElement>("[data-brief-target]").forEach((el) => {
+      const brief = inc.checked && line ? `${line} (${L.note})` : "";
+      if (el instanceof HTMLIFrameElement) {
+        const u = new URL(el.dataset.base || el.src); el.dataset.base = u.href;
+        if (brief) u.searchParams.set("brief", brief);
+        if (team) u.searchParams.set("team", team);
+        if (u.href !== el.src) el.src = u.href;
+      } else if (el instanceof HTMLAnchorElement) {
+        const base = el.dataset.base || el.href; el.dataset.base = base;
+        const body = [brief, team].filter(Boolean).join("\n");
+        el.href = body ? `${base}&body=${encodeURIComponent(body)}` : base;
+      }
+    });
+    inc.addEventListener("change", apply);
+    apply();
+  });
+</script>
+
+<style>
+  .brief { background: var(--card); border: 1px solid var(--rule); border-radius: var(--r); padding: 18px 20px; margin: 0 0 20px; }
+  .brief p { margin: 0 0 8px; }
+  .brief-line { font: 450 1.05rem/1.5 var(--serif); color: var(--ink); }
+  .brief-ok { display: flex; gap: 10px; align-items: center; min-height: 40px; font-weight: 500; }
+  .brief-ok input { width: 20px; height: 20px; accent-color: var(--accent); }
+  .brief [hidden] { display: none; }
+</style>

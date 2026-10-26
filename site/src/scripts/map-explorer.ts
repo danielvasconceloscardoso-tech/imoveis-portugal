@@ -5,6 +5,7 @@
 // and the parishes INE publishes appear from zoom 8.5. Data: /data/map/*.topo.json and /data/prices.json (scripts/map-data/).
 import mapCss from "maplibre-gl/dist/maplibre-gl.css?url";
 import { feature } from "topojson-client";
+import { savePlace } from "../lib/brief";
 
 type Props = { id: number; n: string; s: string; c: string; r: string; coast: boolean; city: boolean; air: boolean; x: number; y: number; a: number };
 type Series = { n: string; m2: (number | null)[]; rq: (number | null)[]; yield: number | null; g10?: number | null; cagrP?: number | null; cagrP20: number | null; cagrR: number | null;
@@ -309,7 +310,7 @@ export function initMapExplorer(root: HTMLElement) {
       if (opts.fly !== false) { rotating = false; const wide = root.clientWidth >= 760; map.flyTo({ center: [p.x, p.y], zoom: Math.max(map.getZoom(), p.a < 40 ? 8.2 : 7.2), pitch: flat ? 0 : 32, duration: reduce() ? 0 : 1500, essential: true, padding: wide ? { right: 400, left: 0, top: 0, bottom: 0 } : { bottom: canvas.clientHeight * 0.45, top: 0, left: 0, right: 0 } }); }
     }
     syncUrl();
-    if (slug) showCard(slug); else card.hidden = true;
+    if (slug) { showCard(slug); if (p) savePlace(p.n); } else card.hidden = true;
   }
   function selectParish(code: string) {
     if (selected) { const p = byS.get(selected); if (p) setState("munis", p.id, "sel", false); }

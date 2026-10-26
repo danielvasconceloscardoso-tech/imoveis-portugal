@@ -4,6 +4,7 @@
 // one of three confirmation pages: "ok" (timing within 12 months), "private" (high budget: "a dedicated adviser",
 // D52) or "later" (otherwise). The rule is applied in Tally's redirect and shown to nobody. Wording: COPY_DECK.md "consult.*".
 import V2 from "../layouts/V2.astro";
+import BriefBox from "./BriefBox.astro";
 import Embed from "./Embed.astro";
 import { config } from "../config";
 import { LANGS, pathFor, type Lang, type EdCode } from "../i18n";
@@ -36,7 +37,8 @@ const title = view === "form" ? c("consult.title", lang) : c(`consult.${view}.ti
         {/* D52: a more personal line when the reader's budget (map, path or link) is high; the threshold is never shown. */}
         <p class="consult-dedicated" data-dedicated hidden>{c("consult.dedicated", lang)}</p>
         <script is:inline>(function(){try{var b=Number(new URLSearchParams(location.search).get("budget"))||Number(localStorage.getItem("ip.budget"))||0;if(b>=1e6)document.querySelector("[data-dedicated]").hidden=false}catch(e){}})();</script>
-        <Embed id={config.forms.buyer[lang]} title={c("consult.cta", lang)} cta={c("consult.cta", lang)} subject={c("consult.cta", lang)} hidden={{ edition: ed, language: lang }} height={760} />
+        <BriefBox lang={lang} ed={ed} />
+        <Embed id={config.forms.buyer[lang]} title={c("consult.cta", lang)} cta={c("consult.cta", lang)} subject={c("consult.cta", lang)} hidden={{ edition: ed, language: lang }} height={760} brief />
         <p class="small">{c("consult.privacy", lang)} <a href={pathFor(lang, ed, "privacy")}>{c("common.privacy", lang)}</a></p>
         <h2 class="h3" style="margin-top:40px">{c("consult.next.h", lang)}</h2>
         <ol class="steps-plain">{cl("consult.next", lang).map((x) => <li>{x}</li>)}</ol>
