@@ -27,6 +27,15 @@ const plain = (s: string) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerC
 export function initMapExplorer(root: HTMLElement) {
   const cfg: Cfg = JSON.parse(root.querySelector("[data-mapx-labels]")!.textContent || "{}");
   const L = cfg.labels;
+  const esc = (t: string) => t.replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[ch]!);
+  // Embed (prompt 25 §3): the host page passes its options in the query string; only http(s) links and #rrggbb colours.
+  if (root.dataset.mode === "embed") {
+    const e = new URLSearchParams(location.search), cta = e.get("cta") || "", pin = (e.get("pin") || "").split(","), accent = e.get("accent") || "";
+    cfg.embed = { cta: /^https?:\/\//i.test(cta) ? cta : undefined, ctaLabel: e.get("ctalabel") ? esc(e.get("ctalabel")!) : undefined,
+      pin: pin.length >= 3 && !isNaN(+pin[0]) && !isNaN(+pin[1]) ? [+pin[0], +pin[1], esc(pin.slice(2).join(",").slice(0, 60))] : null };
+    if (/^#[0-9a-f]{6}$/i.test(accent)) root.style.setProperty("--mapx-accent", accent);
+    if (e.get("center")) root.dataset.center = e.get("center")!;
+  }
   const loc = root.dataset.locale || "pt-PT";
   const nf = new Intl.NumberFormat(loc), nf1 = new Intl.NumberFormat(loc, { minimumFractionDigits: 1, maximumFractionDigits: 1 });
   const pc = (v: number) => `${v > 0 ? "+" : v < 0 ? "−" : ""}${nf1.format(Math.abs(v))}%`;
@@ -173,7 +182,8 @@ export function initMapExplorer(root: HTMLElement) {
     openCard(h);
   }
   function actions(place: string, sim: string) {
-    if (cfg.embed?.cta) return `<p class="mapx-actions"><a class="btn sm" href="${cfg.embed.cta}" target="_top">${cfg.embed.ctaLabel || L.homes}</a></p>`;
+    if (cfg.embed?.cta) return `<p class="mapx-actions"><a class="btn sm" href="${esc(cfg.embed.cta)}" target="_top">${cfg.embed.ctaLabel || L.homes}</a></p>`;
+    if (root.dataset.mode === "embed") return `<p class="mapx-actions"><a class="btn sm" href="https://imoveisportugal.lu${cfg.links.buy}?place=${encodeURIComponent(place)}&budget=${budget}" target="_blank" rel="noopener">${L.homes}</a></p>`;
     return `<p class="mapx-actions"><a class="btn sm" href="${cfg.links.buy}?place=${encodeURIComponent(place)}&budget=${budget}">${L.homes}</a>`
       + `<a href="${cfg.links.devHref}">${L.devs}</a><a href="${sim}">${L.sim}</a><a href="${cfg.links.journey}">${L.journey}</a></p>`;
   }
@@ -324,7 +334,7 @@ export function initMapExplorer(root: HTMLElement) {
         pitch: flat ? 0 : 50, bearing: flat ? 0 : -14,
         style: { version: 8, sources: {}, layers: [{ id: "bg", type: "background", paint: { "background-color": "#ffffff" } }] },
       });
-      map.addControl(new ml.AttributionControl({ compact: true, customAttribution: L.credits }));
+      if (root.dataset.mode !== "embed") map.addControl(new ml.AttributionControl({ compact: true, customAttribution: L.credits }));  // the embed footer carries the credits
       map.addControl(new ml.NavigationControl({ showCompass: !flat, visualizePitch: true }), "bottom-right");
       await new Promise<void>((res) => map.on("load", () => res()));
       map.addSource("munis", { type: "geojson", data: geo });

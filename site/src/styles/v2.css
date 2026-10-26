@@ -715,3 +715,4 @@ a.brass { color: var(--brass); }
   /* On phones the card is a bottom sheet over the page, so the map stays visible above it. */
   .mapx-card { position: fixed; left: 0; right: 0; bottom: 0; width: auto; max-height: 72vh; border-width: 1px 0 0; z-index: 60; box-shadow: 0 -10px 28px rgba(22, 24, 28, .12); }
 }
+.mapx-embed .mapx-metrics button[aria-pressed="true"], .mapx-embed .mapx-flat[aria-pressed="true"] { background: var(--mapx-accent, var(--accent)); border-color: var(--mapx-accent, var(--accent)); }

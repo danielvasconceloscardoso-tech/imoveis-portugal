@@ -1,0 +1,28 @@
+---
+// Embeddable map (prompt 25 §3): the 3D map alone, for licensing later. Loaded in an iframe by public/embed/map.js or
+// directly. Config in the query string: budget, metric, center=lon,lat,zoom, pin=lon,lat,label, cta=https://…,
+// ctalabel=…, accent=#rrggbb. Footer: "Powered by Imóveis Portugal" and the data credits, nothing else. Never indexed.
+import "../../../styles/v2.css";
+import serif from "@fontsource-variable/newsreader/files/newsreader-latin-wght-normal.woff2?url";
+import MapExplorer from "../../../components/MapExplorer.astro";
+import { HTML_LANG, LANGS, type Lang } from "../../../i18n";
+import { c } from "../../../lib/copy";
+
+export function getStaticPaths() { return LANGS.map((lang) => ({ params: { lang } })); }
+const lang = Astro.params.lang as Lang;
+---
+<!doctype html>
+<html lang={HTML_LANG[lang]}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>{c("map.title", lang)} · Imóveis Portugal</title>
+    <link rel="preload" href={serif} as="font" type="font/woff2" crossorigin />
+    <script is:inline>document.documentElement.classList.add("js")</script>
+    <style>body { margin: 0; background: #fff; } .embed-wrap { padding: 12px 12px 8px; }</style>
+  </head>
+  <body>
+    <main class="embed-wrap"><MapExplorer lang={lang} ed="lu" mode="embed" /></main>
+  </body>
+</html>
