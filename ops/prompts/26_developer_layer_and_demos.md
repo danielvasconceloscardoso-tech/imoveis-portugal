@@ -16,6 +16,11 @@ Build one personalised demo for each, using only information the developer has p
 2. **Vanguard Properties, Comporta** (and Lisbon): readers from **New York or Miami**, Geneva and Luxembourg; budgets 1 M€, 5 M€ and 10 M€ shown in **$**, CHF and €; Private section; USA, Switzerland and Luxembourg journeys (for Americans: FBAR/FATCA and US tax on a Portuguese sale as journey steps).
 3. **Vale do Lobo, The Residences** (Loulé, next to Quinta do Lago): readers from **New York or California**, Paris and Zurich; 5 M€ and 10 M€ scenarios in **$**, € and CHF; USA, France and Switzerland journeys. North American demand in the Algarve is documented in the press (e.g. idealista, 'North Americans drive up property prices in the Algarve'); quote it with its source in the demo.
 
+Public sources to use for the demos (the developer's own pages first; read only, nothing copied beyond name, location, typologies, "price from" and one render with credit):
+- Vanguard Properties: https://vangproperties.com (Comporta: Muda Reserve; press: https://www.idealista.pt/en/news/node/62665, https://www.essential-business.pt/?p=5778)
+- Vale do Lobo, The Residences: https://www.valedolobo.com/the-residences-vale-do-lobo/ and https://www.valedolobo.com/en/real-estate/developments/
+- Shalu, O'rizon Living: no official project site found; use https://www.essential-business.pt/2025/10/03/shalu-invests-e100-million-in-luxury-porto-project/, https://www.idealista.pt/news/node/72117 and the public listings on imovirtual.com and jamesedition.com for "price from" and typologies. Ask the operator for the official link if one exists.
+
 Each demo is one page plus a 60–90 second screen recording (MP4, subtitles in the developer's language; for Vanguard and Vale do Lobo also an English version led by the American buyer):
 1. The map opens on Portugal, the reader enters a budget in their currency, and the camera flies to the developer's municipality.
 2. The place card: m² for the budget, 10 years of INE prices and rents, yield, momentum, comparable places (all real data, with sources).
