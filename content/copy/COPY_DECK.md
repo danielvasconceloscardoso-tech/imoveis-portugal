@@ -2554,6 +2554,76 @@ How to edit:
 
 ## map
 
+### coast.skip
+- PT: Saltar
+- EN: Skip
+- FR: Passer
+
+### cmp.close
+- PT: Fechar a comparação
+- EN: Close the comparison
+- FR: Fermer la comparaison
+
+### cmp.yield
+- PT: Rendimento bruto
+- EN: Gross yield
+- FR: Rendement brut
+
+### cmp.rent
+- PT: Renda mediana por m² por mês
+- EN: Median rent per m² a month
+- FR: Loyer médian au m² par mois
+
+### cmp.g10
+- PT: Variação desde 2016
+- EN: Change since 2016
+- FR: Évolution depuis 2016
+
+### cmp.price
+- PT: Preço mediano por m²
+- EN: Median price per m²
+- FR: Prix médian au m²
+
+### cmp.h
+- PT: Lado a lado
+- EN: Side by side
+- FR: Côte à côte
+
+### cmp.pick
+- PT: Escolha outro concelho para comparar
+- EN: Choose another municipality to compare
+- FR: Choisissez une autre commune à comparer
+
+### cmp.add
+- PT: Comparar
+- EN: Compare
+- FR: Comparer
+
+### time.note
+- PT: Alturas e cores do trimestre escolhido; a variação conta desde 2016 e o rendimento existe a partir de 2020.
+- EN: Heights and colours for the chosen quarter; change counts from 2016 and yield exists from 2020.
+- FR: Hauteurs et couleurs du trimestre choisi ; l'évolution compte depuis 2016 et le rendement existe depuis 2020.
+
+### time.pause
+- PT: Pausa
+- EN: Pause
+- FR: Pause
+
+### time.play
+- PT: Ver os anos
+- EN: Play the years
+- FR: Voir les années
+
+### time.h
+- PT: Ano
+- EN: Year
+- FR: Année
+
+### f.islands
+- PT: Ilhas
+- EN: Islands
+- FR: Îles
+
 ### proj.credit
 - PT: Imagem: {c}
 - EN: Image: {c}

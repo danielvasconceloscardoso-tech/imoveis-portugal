@@ -1,0 +1,4 @@
+{
+  "_how": "Map v2 (prompt 29 §3.1): one photograph per coastal place, shown in its place card and as a hover thumbnail. Each photo must show the place it is named for (check the source's title, description and location; if in doubt, leave it out). Licence: Unsplash or Pexels (commercial use, no attribution required); list every photo in content/media/SOURCES.md. 'img' is the base path of three WebP sizes (-320, -640, -1200) under site/public/img/coast/.",
+  "places": {}
+}

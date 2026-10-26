@@ -19,7 +19,7 @@ const KEY: Record<Metric, string> = { m2: "pv", price: "pv", growth: "pg", yield
 type Cfg = {
   labels: Record<string, any>; quarter: string; mortgage: { rate: number; month: string };
   links: { buy: string; talk: string; sim: string; map: string; journey: string; devHref: string; pages: string[] };
-  photos: Record<string, string>; briefs: Record<string, string>; privateHref: string;
+  photos: Record<string, string>; briefs: Record<string, string>; privateHref: string; coast?: Record<string, { img: string; title: string }>;
   embed?: { cta?: string; ctaLabel?: string; pin?: [number, number, string] | null; accent?: string };
   projects?: Project[]; routing?: "agency" | "developer" | "choice"; consult?: string;
 };
@@ -75,6 +75,7 @@ export function initMapExplorer(root: HTMLElement) {
   let P: { quarters: string[]; munis: Record<string, Series>; regions: Record<string, Series> } | null = null;
   let parishes: { feats: any[]; data: Record<string, Series> } | null = null, parLoading = false;
   let hoverId: number | string | null = null, hoverSrc = "";
+  let geoM: any = null, cmpA: string | null = null, intro = false;
   const byS = new Map<string, Props>();
   // Searchable names: from the list under the map when the page has it, otherwise from the map data once it loads.
   let names: { n: string; s: string; r: string }[] = [...root.querySelectorAll<HTMLButtonElement>("[data-pick]")].map((b) => ({ n: b.textContent!, s: b.dataset.pick!, r: "" }));
@@ -82,14 +83,18 @@ export function initMapExplorer(root: HTMLElement) {
   const parse = (s: string) => Number(s.replace(/[^\d]/g, "")) || 0;
   const qLabel = (k: string) => { const [y, qq] = k.split("-Q"); return L.qfmt.replace("{q}", qq).replace("{y}", y); };
   const last = () => (P ? P.quarters.length - 1 : 0);
+  // Map v2 (prompt 29 §3): the time slider picks the quarter the heights and colours show (-1 = the latest).
+  let qi = -1;
+  const QI = () => (qi < 0 ? last() : Math.min(qi, last()));
 
   // ---------------------------------------------------------------- expressions
   // Each metric gets its own value property on the features (set at load), its own height and a quantile colour scale.
   const val = (s: Series | undefined, m: Metric): number | null => {
-    if (!s) return null; const v = s.m2[last()];
+    if (!s) return null; const i = QI(), v = s.m2[i];
     if (m === "m2" || m === "price") return v ?? null;
-    if (m === "growth") return s.g10 ?? null;
-    return s.yield ?? null;
+    if (i === last()) return m === "growth" ? s.g10 ?? null : s.yield ?? null;
+    if (m === "growth") { const f = s.m2.find((x) => x != null); return v != null && f ? (v / f - 1) * 100 : null; }
+    const r = s.rq[i]; return r != null && v ? (r * 12 / v) * 100 : null;
   };
   let breaks = {} as Record<Metric, number[]>;
   function quantiles(list: number[]) { const a = [...list].sort((x, y) => x - y); return [0.05, 0.25, 0.5, 0.75, 0.95].map((p) => a[Math.floor(p * (a.length - 1))]); }
@@ -186,6 +191,7 @@ export function initMapExplorer(root: HTMLElement) {
     let svg = `<svg viewBox="0 0 ${w} ${h}" class="lchart" role="img" aria-label="${L.chart}">`;
     svg += `<line x1="${pl}" x2="${w - pr}" y1="${h - pb}" y2="${h - pb}" stroke="#d4dbd5"/>`;
     qs.forEach((qq, i) => { if (qq.endsWith("Q1") && Number(qq.slice(0, 4)) % 2 === 0) svg += `<text x="${x(i)}" y="${h - 7}" font-size="12.5" fill="#5d6066" text-anchor="${i === 0 ? "start" : "middle"}">${qq.slice(0, 4)}</text>`; });
+    if (qi >= 0 && qi < qs.length - 1) svg += `<line x1="${x(qi)}" x2="${x(qi)}" y1="${pt}" y2="${h - pb}" stroke="#b08d3e" stroke-width="1.5"/>`;  // map v2: the slider's quarter
     const bi = qs.indexOf("2019-Q4");
     if (bi > 0 && s.m2[0] != null) svg += `<line x1="${x(bi)}" x2="${x(bi)}" y1="${pt}" y2="${h - pb}" stroke="#d4dbd5" stroke-dasharray="3 4"/>`;
     if (pv.length) svg += line(s.m2, Math.max(...pv) * 1.1, INK, (v) => eur.format(v), 2);
@@ -194,9 +200,11 @@ export function initMapExplorer(root: HTMLElement) {
   }
   function showCard(slug: string) {
     const p = byS.get(slug); if (!p || !P) return;
-    const s = P.munis[slug]; const i = last();
+    const s = P.munis[slug]; const i = QI();
     const v = s?.m2[i] ?? null, m2 = v ? Math.round(budget / v) : null;
-    const photo = cfg.photos[p.r] ? `<img src="/img/${cfg.photos[p.r]}-640.webp" alt="" width="640" height="427" loading="lazy">` : "";
+    const cp = cfg.coast?.[slug];  // map v2: a photograph of the place itself where we have one, else the region's
+    const photo = cp ? `<img src="${cp.img}-640.webp" srcset="${cp.img}-640.webp 640w, ${cp.img}-1200.webp 1200w" sizes="400px" alt="${esc(cp.title)}" width="640" height="427" loading="lazy">`
+      : cfg.photos[p.r] ? `<img src="/img/${cfg.photos[p.r]}-640.webp" alt="" width="640" height="427" loading="lazy">` : "";
     const sim = `${cfg.links.sim}?price=${budget}&own=0&resident=0&mortgage=0`;
     const qq = qLabel(P.quarters[i]);
     let h = `${photo}<div class="mapx-card-b"><p class="h-small">${L.regions[p.r] || ""}</p><h3 tabindex="-1">${p.n}</h3>`;
@@ -234,9 +242,10 @@ export function initMapExplorer(root: HTMLElement) {
     }
     if (s?.cmp?.length) h += `<p class="h-small">${L.cmp}</p><ul class="mapx-cmp">` + s.cmp.map((c) => { const o = P!.munis[c]; const ov = o?.m2[i]; return `<li><button type="button" data-goto="${c}">${o?.n ?? c}</button><span class="small">${ov ? `${nf.format(Math.round(budget / ov))} m²` : ""}</span></li>`; }).join("") + `</ul>`;
     h += actions(p.n, sim) + `<p class="mapx-more small">` + (cfg.links.pages.includes(slug) ? `<a href="${cfg.links.map}${slug}/">${L.page}</a>` : "")
-      + (budget >= HIGH && cfg.privateHref ? `<a href="${cfg.privateHref}">${L.private}</a>` : "") + `<button type="button" class="linkish" data-share>${L.share}</button><button type="button" class="linkish" data-shareimg>${L.shareImg}</button></p>`
+      + (budget >= HIGH && cfg.privateHref ? `<a href="${cfg.privateHref}">${L.private}</a>` : "") + `<button type="button" class="linkish" data-share>${L.share}</button><button type="button" class="linkish" data-shareimg>${L.shareImg}</button>${L.cmpAdd ? `<button type="button" class="linkish" data-cmp="${slug}">${L.cmpAdd}</button>` : ""}</p>`
       + `<p class="small mapx-src">${L.source.replace("{quarter}", qq)} ${L.disclaimer}</p></div><button type="button" class="mapx-close" aria-label="${L.close}">×</button>`;
     openCard(h);
+    if (cmpA && cmpA !== slug) compare(cmpA, slug);
   }
   function actions(place: string, sim: string) {
     if (cfg.embed?.cta) return `<p class="mapx-actions"><a class="btn sm" href="${esc(cfg.embed.cta)}" target="_top">${cfg.embed.ctaLabel || L.homes}</a></p>`;
@@ -258,6 +267,18 @@ export function initMapExplorer(root: HTMLElement) {
       + `<p class="small mapx-src">${L.source.replace("{quarter}", qq)} ${L.disclaimer}</p></div><button type="button" class="mapx-close" aria-label="${L.close}">×</button>`;
     openCard(h);
   }
+  // Map v2 (prompt 29 §3.5): two places side by side: price, change since 2016, rent, gross yield.
+  function compare(a: string, b: string) {
+    const box = root.querySelector<HTMLElement>("[data-cmpbox]"); if (!box || !P) return;
+    const i = QI(), col = (slug: string) => { const s = P!.munis[slug], v = s?.m2[i], r = s?.rq[i];
+      const g = i === last() ? s?.g10 : (() => { const f = s?.m2.find((x) => x != null); return v && f ? (v / f - 1) * 100 : null; })();
+      const y = i === last() ? s?.yield : r && v ? (r * 12 / v) * 100 : null;
+      return [byS.get(slug)?.n ?? slug, v ? eur.format(v) : "—", g != null ? pc(g) : "—", r ? eur2.format(r) : "—", y != null ? `${nf1.format(y)}%` : "—"]; };
+    const A = col(a), B = col(b), rows = [L.cmpPrice, L.cmpG10, L.cmpRent, L.cmpYield];
+    box.innerHTML = `<p class="h-small">${L.cmpH} · ${qLabel(P.quarters[i])}</p><table><thead><tr><th></th><th>${A[0]}</th><th>${B[0]}</th></tr></thead><tbody>${rows.map((r, k) => `<tr><th>${r}</th><td>${A[k + 1]}</td><td>${B[k + 1]}</td></tr>`).join("")}</tbody></table><button type="button" class="linkish" data-cmpclose>${L.cmpClose}</button>`;
+    box.hidden = false;
+    box.querySelector("[data-cmpclose]")!.addEventListener("click", () => { box.hidden = true; cmpA = null; });
+  }
   function openCard(h: string) {
     const wasHidden = card.hidden;
     card.innerHTML = h; card.hidden = false;
@@ -266,6 +287,7 @@ export function initMapExplorer(root: HTMLElement) {
     card.querySelector("[data-share]")?.addEventListener("click", share);
     card.querySelectorAll<HTMLButtonElement>("[data-proj]").forEach((b) => b.addEventListener("click", () => { const p = projects.find((x) => x.id === b.dataset.proj); if (p) showProject(p); }));
     card.querySelector("[data-shareimg]")?.addEventListener("click", shareImage);
+    card.querySelector<HTMLButtonElement>("[data-cmp]")?.addEventListener("click", (e) => { cmpA = (e.currentTarget as HTMLElement).dataset.cmp!; flash(L.cmpPick); });
     if (wasHidden && root.contains(document.activeElement) && document.activeElement !== input) card.querySelector<HTMLElement>("h3")?.focus({ preventScroll: true });
   }
   const refreshCard = () => { if (selPar) showParish(selPar); else if (selected) showCard(selected); };
@@ -350,7 +372,7 @@ export function initMapExplorer(root: HTMLElement) {
   }
   function visible(p: Props) {
     if (region && p.r !== region) return false;
-    return filter === "all" || (filter === "coast" && p.coast) || (filter === "inland" && !p.coast) || (filter === "city" && p.city) || (filter === "country" && !p.city) || (filter === "air" && p.air);
+    return filter === "all" || (filter === "islands" && (p.r === "madeira" || p.r === "azores")) || (filter === "coast" && p.coast) || (filter === "inland" && !p.coast) || (filter === "city" && p.city) || (filter === "country" && !p.city) || (filter === "air" && p.air);
   }
   function applyFilter() {
     if (!map || !map.getLayer("muni-3d")) return;
@@ -360,6 +382,7 @@ export function initMapExplorer(root: HTMLElement) {
     if (filter === "city") conds.push(["==", ["get", "city"], true]);
     if (filter === "country") conds.push(["==", ["get", "city"], false]);
     if (filter === "air") conds.push(["==", ["get", "air"], true]);
+    if (filter === "islands") conds.push(["in", ["get", "r"], ["literal", ["madeira", "azores"]]]);
     if (region) conds.push(["==", ["get", "r"], region]);
     const f = conds.length > 1 ? conds : null;
     const hp = ["==", ["get", "hp"], true], nohp = ["==", ["get", "hp"], false];
@@ -383,7 +406,7 @@ export function initMapExplorer(root: HTMLElement) {
         const l = LY?.munis[f.properties.s] || {}; for (const k of ["sea", "vac", "new", "fr"]) f.properties[`l_${k}`] = l[k] ?? null;
         byS.set(f.properties.s, f.properties);
       });
-      features = geo.features;
+      features = geo.features; geoM = geo;
       names = features.map((f) => ({ n: f.properties.n, s: f.properties.s, r: f.properties.r })).sort((a, b) => a.n.localeCompare(b.n, "pt"));
       const vals = (k: string) => features.map((f) => f.properties[k]).filter((v: any) => v != null) as number[];
       breaks = Object.fromEntries((Object.keys(KEY) as Metric[]).map((m) => [m, quantiles(vals(KEY[m]))])) as Record<Metric, number[]>;
@@ -418,7 +441,9 @@ export function initMapExplorer(root: HTMLElement) {
       if (projOn) drawProjects();
       const sel = selected, par = selPar;
       if (par) { await loadParishes(); selectParish(par); } else if (sel) select(sel);
-      if (root.dataset.mode === "home" && !flat && !sel) { rotating = true; spin(); }
+      if (!flat && !sel && !cfg.embed && coastIntro()) { /* map v2: the coastal glide plays once */ }
+      else if (root.dataset.mode === "home" && !flat && !sel) { rotating = true; spin(); }
+      setupTime();
       map.on("move", placeInsets);
       map.on("zoomend", () => { if (map.getZoom() > 7.6) loadParishes(); });
       map.on("click", (e: any) => { const h = pick(e.point); if (!h) return; if (h.kind === "par") selectParish(h.key); else select(h.key, { fly: map.getZoom() < 7 }); });
@@ -438,6 +463,8 @@ export function initMapExplorer(root: HTMLElement) {
     if (tip) {
       if (!h || !pt) { tip.hidden = true; return; }
       tip.textContent = h.kind === "par" ? parishes?.feats.find((f) => f.properties.id === h.key)?.properties.n ?? "" : byS.get(h.key)?.n ?? "";
+      const cp = h.kind === "muni" ? cfg.coast?.[h.key] : null;  // map v2: a thumbnail of the coast on hover (desktop)
+      if (cp && matchMedia("(hover: hover)").matches) tip.insertAdjacentHTML("afterbegin", `<img src="${cp.img}-320.webp" alt="" width="160" height="107">`);
       tip.style.transform = `translate(${pt.x + 12}px, ${pt.y - 28}px)`; tip.hidden = false;
     }
   }
@@ -462,6 +489,54 @@ export function initMapExplorer(root: HTMLElement) {
     }
   }
 
+
+  // ---------------------------------------------------------------- map v2 (prompt 29 §3)
+  // Time slider, 2016 to the latest quarter: the features take that quarter's values, so heights and colours move
+  // (the colour scale stays the latest quarter's, so years compare); play steps a year at a time.
+  function setQ(i: number) {
+    if (!P || !geoM || !map) return;
+    qi = i >= last() ? -1 : i;
+    geoM.features.forEach((f: any) => { const s: Series | undefined = P!.munis[f.properties.s]; f.properties.pv = val(s, "price"); f.properties.pg = val(s, "growth"); f.properties.py = val(s, "yield"); });
+    map.getSource("munis")?.setData(geoM);
+    const out = root.querySelector<HTMLElement>("[data-q-out]"); if (out) out.textContent = qLabel(P.quarters[QI()]);
+    const r = root.querySelector<HTMLInputElement>("[data-q]"); if (r) r.value = String(QI());
+    refreshCard(); if (cmpA && selected && cmpA !== selected) compare(cmpA, selected);
+  }
+  let playing: number | null = null;
+  function setupTime() {
+    const box = root.querySelector<HTMLElement>("[data-time]"); if (!box || !P) return;
+    const r = box.querySelector<HTMLInputElement>("[data-q]")!, b = box.querySelector<HTMLButtonElement>("[data-play]")!;
+    r.max = String(last()); r.value = String(last()); box.querySelector<HTMLElement>("[data-q-out]")!.textContent = qLabel(P.quarters[last()]); box.hidden = false;
+    const stop = () => { if (playing != null) clearInterval(playing); playing = null; b.textContent = L.play; b.setAttribute("aria-pressed", "false"); };
+    r.addEventListener("input", () => { stop(); setQ(Number(r.value)); });
+    b.addEventListener("click", () => {
+      if (playing != null) return stop();
+      let i = QI() >= last() ? 0 : QI(); setQ(i); b.textContent = L.pause; b.setAttribute("aria-pressed", "true");
+      playing = window.setInterval(() => { i = Math.min(last(), i + 4); setQ(i); if (i >= last()) stop(); }, reduce() ? 1600 : 1100);
+    });
+  }
+  // Coastal opening: on a first visit, a slow glide down the coast from Viana do Castelo to the Algarve (about 9 s), once,
+  // stopped by the first touch, wheel, key or scroll, and never when the device asks for reduced motion.
+  function coastIntro(): boolean {
+    let seen = true; try { seen = localStorage.getItem("ip.coast") === "1"; localStorage.setItem("ip.coast", "1"); } catch { /* storage off: skip */ }
+    if (seen || reduce() || lowPower()) return false;
+    const W: [number, number, number][] = [[-8.83, 41.69, -18], [-8.68, 41.16, -16], [-8.75, 40.64, -14], [-8.87, 40.15, -12], [-9.07, 39.6, -10], [-9.38, 39.36, -8],
+      [-9.42, 38.7, -6], [-9.1, 38.44, -4], [-8.79, 38.38, -2], [-8.79, 37.72, 0], [-8.9, 37.32, 2], [-8.67, 37.1, 4], [-8.06, 37.05, 6], [-7.65, 37.13, 8]];
+    const home = { center: map.getCenter(), zoom: map.getZoom(), pitch: map.getPitch(), bearing: map.getBearing() };
+    const T = 9000, t0 = performance.now(); let raf = 0; intro = true;
+    const end = (back: boolean) => { if (!intro) return; intro = false; cancelAnimationFrame(raf); off(); if (back) map.easeTo({ ...home, duration: 1400 }); };
+    const stopper = () => { if (performance.now() - t0 > 400) end(false); };
+    const evs = ["pointerdown", "wheel", "touchstart", "keydown"]; const off = () => { evs.forEach((e) => removeEventListener(e, stopper, true)); removeEventListener("scroll", stopper, true); };
+    evs.forEach((e) => addEventListener(e, stopper, { capture: true, passive: true })); addEventListener("scroll", stopper, { capture: true, passive: true });
+    const step = (now: number) => {
+      const k = Math.min(1, (now - t0) / T), e = k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2, f = e * (W.length - 1), i = Math.min(W.length - 2, Math.floor(f)), u = f - i;
+      const a = W[i], b = W[i + 1];
+      map.jumpTo({ center: [a[0] + (b[0] - a[0]) * u, a[1] + (b[1] - a[1]) * u], zoom: 8.3, pitch: 58, bearing: a[2] + (b[2] - a[2]) * u });
+      if (k < 1) raf = requestAnimationFrame(step); else end(true);
+    };
+    raf = requestAnimationFrame(step);
+    return true;
+  }
 
   // ---------------------------------------------------------------- developer layer (prompt 26 §1): partner projects only, labelled
   let projects: Project[] = [], projOn = false, markers: any[] = [], projLoaded = false;

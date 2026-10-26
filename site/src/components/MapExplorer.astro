@@ -9,7 +9,7 @@
 import { config } from "../config";
 import { HTML_LANG, pathFor, eur, type Lang, type EdCode } from "../i18n";
 import { EDITION_CUR, RATE, fmtDate } from "../lib/content";
-import { MAP_MUNIS, REGIONS, REGION_PHOTO, BRIEFS } from "../lib/mapdata";
+import { MAP_MUNIS, REGIONS, REGION_PHOTO, BRIEFS, COAST } from "../lib/mapdata";
 import { PRICES } from "../lib/prices";
 import { PLACES } from "../lib/places";
 import { PTYPES } from "../lib/packages";
@@ -47,13 +47,16 @@ const labels = {
   pcredit: c("map.proj.credit", lang, { c: "{c}" }), partnersHere: c("show.partners", lang), openHomes: c("show.open", lang),
   farea: c("map.f.area", lang, { v: "{v}" }), fnew: c("map.f.new", lang, { v: "{v}", l: "{l}" }), ffr: c("map.f.fr", lang, { v: "{v}", b: "{b}" }),
   regions: Object.fromEntries(REGIONS.map((r) => [r, c(`map.r.${r}`, lang)])),
+  // Map v2 (prompt 29 §3): time slider and compare.
+  play: c("map.time.play", lang), pause: c("map.time.pause", lang), cmpAdd: mode === "embed" ? "" : c("map.cmp.add", lang), cmpPick: c("map.cmp.pick", lang), cmpH: c("map.cmp.h", lang),
+  cmpPrice: c("map.cmp.price", lang), cmpG10: c("map.cmp.g10", lang), cmpRent: c("map.cmp.rent", lang), cmpYield: c("map.cmp.yield", lang), cmpClose: c("map.cmp.close", lang),
 };
 const links = {
   buy: pathFor(lang, ed, "buy"), talk: pathFor(lang, ed, "talk"), sim: `${pathFor(lang, ed, "sims")}${SUB.cost[lang]}/`, map: pathFor(lang, ed, "map"),
   journey: pathFor(lang, ed, "journey"), devHref: `${pathFor(lang, ed, "partners")}${PTYPES.find((t) => t.key === "developers")!.slug[lang]}/`, pages: [...pages],
 };
 const briefs = Object.fromEntries(Object.entries(BRIEFS[lang] ?? {}));
-const cfg = { labels, links, quarter: qLabel, mortgage: { rate: PRICES.mortgage.rate, month }, photos: REGION_PHOTO, briefs,
+const cfg = { labels, links, quarter: qLabel, mortgage: { rate: PRICES.mortgage.rate, month }, photos: REGION_PHOTO, briefs, coast: COAST,
   privateHref: config.privateLive && mode !== "embed" ? pathFor(lang, ed, "private") : "",
   projects: PROJECTS.map((p) => ({ ...p, units: undefined, gallery: undefined, sources: undefined, showcase: `${pathFor(lang, ed, "partners")}${p.devSlug}/${p.muni}/` })), routing: config.enquiryRouting, consult: mode === "embed" ? `https://imoveisportugal.lu${pathFor(lang, ed, "consult")}` : pathFor(lang, ed, "consult") };
 const id = `mapx-${mode}`;
@@ -105,9 +108,18 @@ const id = `mapx-${mode}`;
     <span class="mapx-tip" data-tip hidden></span>
     <span class="mapx-flash" data-flash role="status" hidden></span>
     <aside class="mapx-card" data-card hidden aria-live="polite"></aside>
+    <aside class="mapx-cmpbox" data-cmpbox hidden aria-live="polite"></aside>
   </div>
   <p class="small mapx-legend" data-legend>{c("map.legend.m2", lang, { quarter: qLabel })} {c("map.hint", lang)}</p>
   {mode !== "embed" && <p class="small mapx-legend">{c("map.par.hint", lang)}</p>}
+  {mode !== "embed" && (
+    <div class="mapx-time" data-time hidden>
+      <button type="button" data-play aria-pressed="false">{c("map.time.play", lang)}</button>
+      <label><span class="h-small">{c("map.time.h", lang)}</span><input type="range" min="0" step="1" data-q aria-label={c("map.time.h", lang)} /></label>
+      <output data-q-out></output>
+      <p class="small">{c("map.time.note", lang)}</p>
+    </div>
+  )}
 
   {mode === "page" && (
     <div class="mapx-filters" role="group" aria-label={c("map.filters", lang)}>
@@ -117,6 +129,7 @@ const id = `mapx-${mode}`;
       <button type="button" data-filter="city" aria-pressed="false">{c("map.f.city", lang)}</button>
       <button type="button" data-filter="country" aria-pressed="false">{c("map.f.country", lang)}</button>
       <button type="button" data-filter="air" aria-pressed="false">{c("map.f.air", lang)}</button>
+      <button type="button" data-filter="islands" aria-pressed="false">{c("map.f.islands", lang)}</button>
       <select data-region aria-label={c("map.filters", lang)}>
         <option value="">{c("map.f.all", lang)}</option>
         {REGIONS.map((r) => <option value={r}>{c(`map.r.${r}`, lang)}</option>)}

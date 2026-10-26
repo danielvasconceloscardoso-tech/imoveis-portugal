@@ -22,3 +22,5 @@ type Brief = { reviewed: boolean; pt: string; en: string; fr: string };
 const raw: Record<string, Brief> = existsSync(briefFile) ? JSON.parse(readFileSync(briefFile, "utf8")).briefs : {};
 export const BRIEFS: Record<string, Record<string, string>> = Object.fromEntries((["pt", "en", "fr"] as const).map((l) =>
   [l, Object.fromEntries(Object.entries(raw).filter(([, b]) => b.reviewed).map(([s, b]) => [s, b[l]]))]));
+// Map v2 (prompt 29 §3.1): photographs of coastal places, by municipality slug (content/media/coast.json, SOURCES.md).
+export const COAST: Record<string, { img: string; title: string }> = JSON.parse(readFileSync(join(process.cwd(), "..", "content", "media", "coast.json"), "utf8")).places;
