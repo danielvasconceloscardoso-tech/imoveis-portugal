@@ -5,7 +5,8 @@
 import V2 from "../layouts/V2.astro";
 import { config } from "../config";
 import { pathFor, type Lang, type EdCode } from "../i18n";
-import { faqFor, FACTS, fmtDate, DISCLAIMER, Sources, type Stage } from "../lib/content";
+import { faqFor, FACTS, fmtDate, DISCLAIMER, Sources, type FaqItem } from "../lib/content";
+import { faqPlace, stationDoor, FAQ_STAGES, type FaqStage } from "../lib/path";
 import Calls from "./Calls.astro";
 import { c } from "../lib/copy";
 
@@ -20,7 +21,16 @@ const PRACTICE = ["find", "timing", "cpcv", "buy-abroad"];
 // D52: for a high budget (from the map, the path or a link) these questions move to the top of their stage; the rest
 // stays as it is. Nothing is labelled and the threshold is never shown.
 const HIGH_FIRST = ["ifici", "inherit", "visa", "yearly", "lawyer"];
-const items = faqFor(ed, lang).map((it) => {
+// Prompt 27 §2: the questions the path adds for selling and inheritance join the hub (answers from the path's sources).
+const EXTRA: (FaqItem & { ask?: boolean })[] = [
+  { id: "sell-filing", facts: ["pt-is-inheritance-filing"], cta: "tax", ask: false },
+  { id: "sell-heirs", facts: [], cta: "lawyer", ask: true },
+  { id: "sell-cert", facts: [], cta: "lawyer", ask: true },
+].map((x, i) => ({ ...x, id: `${lang}-${x.id}`, rank: 100 + i, stage: "after", cta: x.cta as FaqItem["cta"],
+  q: c(`journey.q.${x.id.replace("-", ".")}.q`, lang), a: c(`journey.q.${x.id.replace("-", ".")}.a`, lang) }));
+const PLACE: Record<string, [FaqStage, string]> = { "sell-filing": ["inheritance", "inherit"], "sell-heirs": ["inheritance", "inherit"], "sell-cert": ["selling", "prepare"] };
+const journey = pathFor(lang, ed, "journey");
+const items = [...faqFor(ed, lang), ...EXTRA].map((it: FaqItem & { ask?: boolean }) => {
   const facts = (it.facts || []).map((id) => FACTS[id]);
   const checked = facts.map((f) => f.checked_on).sort().pop();
   const nums = [...new Set((it.facts || []).map((id) => src.n(id)))];
@@ -30,9 +40,13 @@ const items = faqFor(ed, lang).map((it) => {
   else next = { href: `${talk}?cat=${it.cta}#form`, label: c("common.nav.talk", lang), who: c(`faq.who.${it.cta}`, lang) };
   const practice = PRACTICE.some((k) => it.id.endsWith(`-${k}`));
   const high = HIGH_FIRST.some((k) => it.id.endsWith(`-${k}`));
-  return { ...it, next, nums, checked, practice, high };
+  // Each answer links to its station on the path (prompt 27 §2); the station lists these questions back.
+  const pl = PLACE[it.id.slice(lang.length + 1)] ?? (() => { const f = faqPlace(it.id); return f ? [f.stage, f.station] as [FaqStage, string] : null; })();
+  const stage: FaqStage = pl?.[0] ?? (it.stage === "after" ? "owning" : it.stage);
+  const onpath = pl ? { href: `${journey}?door=${stationDoor(pl[1])}&step=${pl[1]}`, label: c("faq.onpath", lang, { step: c(`path.st.${pl[1]}.h`, lang) }) } : null;
+  return { ...it, stage, onpath, next, nums, checked, practice, high };
 });
-const stages: Stage[] = ["before", "buying", "after"];
+const stages = FAQ_STAGES.filter((s) => items.some((i) => i.stage === s));
 const lastChecked = items.map((i) => i.checked).filter(Boolean).sort().pop();
 const jsonLd = {
   "@context": "https://schema.org",
@@ -68,6 +82,8 @@ const jsonLd = {
             <summary>{it.q}</summary>
             <div class="a">
               <p>{it.a}{it.nums.map((n) => <a class="sup" href={`#fonte-${n}`}>{n}</a>)}</p>
+              {it.ask && <p class="small">{c("journey.unverified", lang)}</p>}
+              {it.onpath && <p class="small"><a href={it.onpath.href}>{it.onpath.label}</a></p>}
               <div class="next">
                 <a class="btn sm" href={it.next.href}>{it.next.label}</a>
                 <span class="who">{it.next.who}</span>

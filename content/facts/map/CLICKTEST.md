@@ -2,13 +2,13 @@
 
 Run 2026-10-26 with scripts/map-data/clicktest.mjs at 1280×900, default view, label point of each concelho.
 
-## Flat (2D): 307 of 308 open their own card
+## Flat (2D): 308 of 308 open their own card
 
-- machico → santana
+None failed.
 
 ## 3D: 304 of 308 open their own card
 
-- arraiolos → evora
+- fundao → covilha
 - guarda → celorico-da-beira
 - pombal → soure
-- chamusca → golega
+- vila-franca-do-campo → ribeira-grande

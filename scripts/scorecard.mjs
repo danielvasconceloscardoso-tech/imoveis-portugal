@@ -27,12 +27,12 @@ const dist = join(root, "site", "dist");
 // Pages scored, per language (Luxembourg edition for PT, US for EN, France for FR: the canonical editions, D24).
 const ED = { pt: "lu", en: "us", fr: "fr" };
 const SLUG = {
-  pt: { faq: "perguntas-frequentes", sims: "simuladores", cost: "simuladores/custo-total", map: "mapa", place: "mapa/porto", partners: "parceiros", buy: "comprar", blog: "blog", how: "como-trabalhamos", private: "residencia-impostos-heranca", step: "comprar-a-partir-de-fora" },
-  en: { faq: "faq", sims: "calculators", cost: "calculators/total-cost", map: "map", place: "map/porto", partners: "partners", buy: "buy", blog: "blog", how: "how-we-work", private: "residence-tax-inheritance", step: "buying-from-abroad" },
-  fr: { faq: "questions-frequentes", sims: "simulateurs", cost: "simulateurs/cout-total", map: "carte", place: "carte/porto", partners: "partenaires", buy: "acheter", blog: "blog", how: "notre-methode", private: "residence-fiscalite-succession", step: "acheter-depuis-l-etranger" },
+  pt: { faq: "perguntas-frequentes", sims: "simuladores", cost: "simuladores/custo-total", map: "mapa", place: "mapa/porto", partners: "parceiros", buy: "comprar", blog: "blog", how: "como-trabalhamos", private: "residencia-impostos-heranca", step: "comprar-a-partir-de-fora", path: "o-seu-percurso" },
+  en: { faq: "faq", sims: "calculators", cost: "calculators/total-cost", map: "map", place: "map/porto", partners: "partners", buy: "buy", blog: "blog", how: "how-we-work", private: "residence-tax-inheritance", step: "buying-from-abroad", path: "your-path" },
+  fr: { faq: "questions-frequentes", sims: "simulateurs", cost: "simulateurs/cout-total", map: "carte", place: "carte/porto", partners: "partenaires", buy: "acheter", blog: "blog", how: "notre-methode", private: "residence-fiscalite-succession", step: "acheter-depuis-l-etranger", path: "votre-parcours" },
 };
-const PAGES = ["home", "faq", "sims", "cost", "map", "place", "partners", "buy", "blog", "how", "private", "step"];
-const LH_PAGES = ["home", "faq", "cost", "map"];
+const PAGES = ["home", "faq", "sims", "cost", "map", "place", "partners", "buy", "blog", "how", "private", "step", "path"];
+const LH_PAGES = ["home", "faq", "cost", "map", "path"];
 const url = (lang, p) => `/${lang}/${ED[lang]}/${p === "home" ? "" : SLUG[lang][p] + "/"}`;
 
 // Voice rules (content/VOICE.md): banned phrases in the three languages.

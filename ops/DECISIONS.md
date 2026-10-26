@@ -80,3 +80,8 @@ One line per decision: date · decision · who decided.
 - 2026-10-26 · CTO, D52: the high-budget threshold is 1,000,000 € in code only (map, path, FAQ, consultation); the reader's budget is carried by the link (?budget=) and remembered on the device, never sent anywhere · CTO
 - 2026-10-26 · CTO, D52: legal thresholds that happen to be one million (AIMI rates, Brazil's CBE declaration) are written as figures (1 000 000 €), not as "1 milhão", so no budget wording reaches the reader · CTO
 - 2026-10-26 · CTO, D52: the four-budget scenarios (300 k€ to 10 M€) are removed from the map and home pages; developer demos, private and in English, keep their 5 and 10 M€ examples · CTO
+- 2026-10-26 · CTO, prompt 27: the path keeps the reader's door, budget, timing, ticks and step on the device only (localStorage ip.path); the share link carries door, budget, timing and step, nothing personal · CTO
+- 2026-10-26 · CTO, prompt 27: no durations on the stations, as no primary source gives typical times for each step · CTO
+- 2026-10-26 · CTO, prompt 27 and D52: the high-budget stations sit inside the route (residence and structuring after the documents; holdings after the deed), not at the end · CTO
+- 2026-10-26 · CTO, prompt 27: the FAQ hub has six stages (before, buying, owning, renting, selling, inheritance), each question placed by its station on the path; three path questions on inheritance and selling join the hub · CTO
+- 2026-10-26 · CTO, prompt 25: concelho and parish boundaries are current OpenStreetMap relations fetched one by one through Nominatim (1 request per 2 s); Corvo stays on geoBoundaries (no OSM relation found) · CTO

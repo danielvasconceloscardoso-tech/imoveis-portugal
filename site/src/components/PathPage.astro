@@ -1,0 +1,383 @@
+---
+// "O seu percurso" as a path (prompt 27 §3, D51, D52). A start screen with two doors (buy, sell) and three quick
+// answers (country, budget or value, timing; "inherited" for selling), then a route of stations on one line. Each
+// station opens as a card: what happens, what you need (a checklist), what people ask (answered from facts.csv), the
+// numbers for the reader's case, the partner for the step and "Próximo passo". Progress stays on the device.
+// Without JavaScript the page is two plain ordered lists with everything open. Wording: COPY_DECK.md "path.*".
+import V2 from "../layouts/V2.astro";
+import CountryBar from "./CountryBar.astro";
+import { pathFor, HTML_LANG, type Lang, type EdCode } from "../i18n";
+import { Sources, fmtDate, faqFor, RATE, EDITION_CUR } from "../lib/content";
+import { stationsFor, faqPlace, type Door } from "../lib/path";
+import { SUB } from "../lib/tools";
+import { c, cl, edName } from "../lib/copy";
+
+interface Props { lang: Lang; ed: EdCode; }
+const { lang, ed } = Astro.props;
+const src = new Sources();
+const where = c(`home.where.${ed}`, lang);
+const vars = { where, from: c(`journey.from.${ed}`, lang) };
+const faq = pathFor(lang, ed, "faq"), sims = pathFor(lang, ed, "sims"), talk = pathFor(lang, ed, "talk");
+const faqItems = faqFor(ed, lang);
+const btn: Record<string, string> = { lawyer: "home.btn.lawyer", bank: "home.btn.bank", tax: "home.btn.tax", fx: "journey.role.fx" };
+const sup = (ns: number[]) => ns.map((i) => `<a class="sup" href="#fonte-${i}">${i}</a>`).join("");
+// Which calculator field takes the reader's figure.
+const FIELD: Record<string, string> = { cost: "price", payment: "price", rent: "price", gains: "sale" };
+const DOORS: Door[] = ["buy", "sell"];
+const routes = DOORS.map((door) => ({
+  door,
+  st: stationsFor(door, ed).map((s) => ({
+    ...s,
+    h: c(`path.st.${s.k}.h`, lang),
+    what: c(`path.st.${s.k}.what`, lang),
+    need: cl(`path.st.${s.k}.need`, lang),
+    qs: s.qs.map((q) => ({ ...q, n: [...new Set(q.facts.map((f) => src.n(f)))] })),
+    more: faqItems.filter((it) => faqPlace(it.id)?.station === s.k),
+    cta: s.cta === "agency" ? { href: pathFor(lang, ed, "consult"), label: c("consult.cta", lang) }
+      : s.cta === "sell" ? { href: pathFor(lang, ed, "consult"), label: c("path.sell.cta", lang) }
+      : { href: `${talk}?cat=${s.cat}#form`, label: c(btn[s.cat!] ?? "common.nav.talk", lang) },
+    tool: s.tool ? { href: `${sims}${SUB[s.tool][lang]}/`, field: FIELD[s.tool] ?? "" } : null,
+  })),
+}));
+const cur = EDITION_CUR[ed];
+const rate = cur ? RATE(cur).rate : 0;
+---
+<V2 lang={lang} ed={ed} page="journey" title={`${c("path.h1", lang)} · ${edName(ed, lang)} | Imóveis Portugal`} description={c("path.lede", lang, vars)} sticky={null}>
+  <div class="path" data-path data-map={pathFor(lang, ed, "map")} data-consult={pathFor(lang, ed, "consult")} data-locale={HTML_LANG[lang]} data-cur={cur ?? ""} data-rate={rate}
+    data-progress={c("path.progress", lang)} data-local={c("path.local", lang)} data-copied={c("path.copied", lang)} data-here={c("path.here", lang)} data-done={c("path.done", lang)} data-door="buy">
+    {/* Before first paint: the answers already given (link or device) set the layout, so nothing moves when the script loads. */}
+    <script is:inline>(function(){var r=document.currentScript.parentElement;r.classList.add("is-js");try{var s=JSON.parse(localStorage.getItem("ip.path")||"{}"),q=new URLSearchParams(location.search),d=q.get("door");if(d==="buy"||d==="sell"){s.door=d;s.started=true}var b=Number(q.get("budget"))||s.budget||Number(localStorage.getItem("ip.budget"))||0;if(q.get("inh"))s.inh=q.get("inh")==="1";r.dataset.door=s.door==="sell"?"sell":"buy";r.classList.toggle("started",!!s.started);r.classList.toggle("high",b>=1e6);r.classList.toggle("inh",!!s.inh)}catch(e){}})();</script>
+    <div class="frame read ph">
+      <p class="h-small">{c("path.h1", lang)} · {edName(ed, lang)}</p>
+      <h1>{c("journey.h1", lang, vars)}</h1>
+      <p class="lede">{c("path.lede", lang, vars)}</p>
+    </div>
+
+    <form class="frame read pstart" data-start>
+      <div class="pdoors">
+        {DOORS.map((d) => (
+          <button type="button" class="pdoor" data-door={d} aria-pressed={d === "buy" ? "true" : "false"}>
+            <span class="pd-h">{c(`path.door.${d}`, lang)}</span>
+            <span class="pd-p">{c(`path.door.${d}.p`, lang)}</span>
+          </button>
+        ))}
+      </div>
+      <div class="pchoices">
+        <CountryBar lang={lang} ed={ed} href={(x) => pathFor(lang, x, "journey")} />
+        <label class="pfield">
+          <span data-for="buy">{c("path.q.budget", lang)}</span><span data-for="sell">{c("path.q.value", lang)}</span>
+          <input type="text" inputmode="numeric" autocomplete="off" data-budget placeholder="300 000" />
+          <span class="small" data-local-out aria-live="polite"></span>
+        </label>
+        <label class="pcheck" data-for="sell"><input type="checkbox" data-inherited /> {c("path.q.inherited", lang)}</label>
+        <fieldset class="pwhen">
+          <legend>{c("path.q.timing", lang)}</legend>
+          {["soon", "year", "later"].map((t) => <label><input type="radio" name="when" value={t} checked={t === "year"} /> {c(`path.t.${t}`, lang)}</label>)}
+        </fieldset>
+        <button class="btn" type="submit">{c("path.start", lang)}</button>
+      </div>
+    </form>
+
+    <div class="frame read pbar" data-bar>
+      <p><b data-sum></b> · <button type="button" class="linkish" data-change>{c("path.change", lang)}</button></p>
+      <div class="pprog" role="progressbar" aria-valuemin="0" data-prog><span></span></div>
+      <p class="small" data-prog-t></p>
+    </div>
+
+    {routes.map((r) => (
+      <section class="frame read proute" data-route={r.door} aria-labelledby={`r-${r.door}`}>
+        <h2 id={`r-${r.door}`} class="h-small">{c(`path.door.${r.door}`, lang)}</h2>
+        <div class="pwrap">
+          <svg class="pline-svg" aria-hidden="true"><path class="pl-base" /><path class="pl-fill" /></svg>
+          <ol class="pline">
+            {r.st.map((s) => (
+              <li class="pst" id={`s-${s.k}`} data-k={s.k} {...(s.high ? { "data-high": "" } : {})} {...(s.inherit ? { "data-inherit": "" } : {})}>
+                <span class="pdot" aria-hidden="true"></span>
+                <h3><button type="button" class="pst-head" aria-expanded="true" aria-controls={`b-${s.k}`}>
+                  <span class="pnum" aria-hidden="true"></span><span class="ph3">{s.h}</span><span class="pstate" data-state></span>
+                </button></h3>
+                <div class="pst-body" id={`b-${s.k}`}><div class="pin">
+                  <p class="pwhat">{s.what}</p>
+                  <h4 class="h-small">{c("path.need", lang)}</h4>
+                  <ul class="pneed">{s.need.map((t, i) => <li><label><input type="checkbox" data-tick={`${s.k}.${i + 1}`} /> <span>{t}</span></label></li>)}</ul>
+                  {s.qs.length > 0 && <h4 class="h-small">{c("path.asks", lang)}</h4>}
+                  {s.qs.map((q) => (
+                    <details class="pqa">
+                      <summary>{c(q.ck ? `${q.ck}.q` : `journey.q.${q.id}.q`, lang, vars)}</summary>
+                      <p>{c(q.ck ? `${q.ck}.a` : `journey.q.${q.a ?? q.id}.a`, lang, vars)}<Fragment set:html={sup(q.n)} /></p>
+                      {q.ask && <p class="small">{c("journey.unverified", lang)}</p>}
+                    </details>
+                  ))}
+                  {s.more.length > 0 && <p class="small pmore">{c("path.more", lang)}: {s.more.map((it, i) => <>{i > 0 && " · "}<a href={`${faq}#${it.id}`}>{it.q}</a></>)}</p>}
+                  {(s.map || s.tool) && <h4 class="h-small">{c("path.numbers", lang)}</h4>}
+                  {(s.map || s.tool) && <p class="pnums">
+                    {s.map && <a class="act quiet" data-num="map" href={pathFor(lang, ed, "map")}>{c(r.door === "sell" ? "path.numbers.mapsell" : "path.numbers.map", lang)}</a>}
+                    {s.tool && <a class="act quiet" data-num={s.tool.field} href={s.tool.href}>{c("path.numbers.tool", lang)}</a>}
+                  </p>}
+                  <aside class="pslot" aria-label={c("path.partner", lang)}>
+                    <p class="h-small">{c("path.partner", lang)}</p>
+                    <p class="jroles">{s.roles.map((x) => c(`journey.role.${x}`, lang)).join(" · ")}</p>
+                    <p class="small">{c("journey.slot.p", lang, { where })}</p>
+                    <a class="act" data-cta={s.cta} href={s.cta.href}>{s.cta.label}</a>
+                  </aside>
+                  <p class="pnext"><button type="button" class="btn" data-next hidden>{c("path.next", lang)}</button></p>
+                </div></div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+    ))}
+
+    <section class="frame read pend" data-end aria-labelledby="pend-h">
+      <h2 id="pend-h">{c("path.end.h", lang)}</h2>
+      <p><button type="button" class="btn ghost" data-share>{c("path.share", lang)}</button> <span class="small" data-share-out role="status"></span></p>
+      <p><a class="act" href={`${pathFor(lang, ed, "home")}#subscrever`}>{c("path.email", lang)}</a></p>
+      <p class="small">{c("path.email.p", lang)} {c("path.saved", lang)}</p>
+      <p><a class="more" href={faq}>{c("path.faq", lang)}</a></p>
+    </section>
+  </div>
+
+  <section class="sources-list" aria-labelledby="fontes">
+    <div class="frame read">
+      <h2 id="fontes" class="h-small">{c("common.sources", lang)}</h2>
+      <ol>{src.list.map((s, i) => <li id={`fonte-${i + 1}`}><a href={s.url} rel="noopener">{s.title}</a>{s.checked && `, ${c("common.checked", lang, { date: fmtDate(lang, s.checked) })}`}.</li>)}</ol>
+    </div>
+  </section>
+</V2>
+
+<script>
+  // D52: from this budget the route adds its quiet stations; the figure is internal and never shown.
+  const HIGH = 1e6;
+  const root = document.querySelector<HTMLElement>("[data-path]")!;
+  const $ = <T extends Element = HTMLElement>(s: string, el: ParentNode = root) => el.querySelector<T>(s);
+  const $$ = <T extends Element = HTMLElement>(s: string, el: ParentNode = root) => [...el.querySelectorAll<T>(s)];
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const nf = new Intl.NumberFormat(root.dataset.locale);
+  const num = (v: string) => Number(v.replace(/[^\d]/g, "")) || 0;
+  type St = { door: "buy" | "sell"; budget: number; inh: boolean; when: string; step: Record<string, string>; done: string[]; ticks: string[]; started: boolean };
+  let st: St = { door: "buy", budget: 0, inh: false, when: "year", step: {}, done: [], ticks: [], started: false };
+  try { st = { ...st, ...JSON.parse(localStorage.getItem("ip.path") || "{}") }; } catch { /* storage off */ }
+  try { if (!st.budget) st.budget = Number(localStorage.getItem("ip.budget")) || 0; } catch { /* storage off */ }
+  const q = new URLSearchParams(location.search);
+  if (q.get("door") === "buy" || q.get("door") === "sell") { st.door = q.get("door") as St["door"]; st.started = true; }
+  if (Number(q.get("budget"))) st.budget = Number(q.get("budget"));
+  if (q.get("inh")) st.inh = q.get("inh") === "1";
+  if (q.get("when")) st.when = q.get("when")!;
+  if (q.get("step")) st.step[st.door] = q.get("step")!;
+  const save = () => {
+    try { localStorage.setItem("ip.path", JSON.stringify(st)); if (st.budget) localStorage.setItem("ip.budget", String(st.budget)); } catch { /* storage off */ }
+  };
+
+  const start = $<HTMLFormElement>("[data-start]")!;
+  const input = $<HTMLInputElement>("[data-budget]")!, inh = $<HTMLInputElement>("[data-inherited]")!;
+  root.style.setProperty("--hd", `${document.querySelector<HTMLElement>(".hd")?.offsetHeight ?? 0}px`);
+
+  // Start screen
+  const showDoor = () => {
+    root.dataset.door = st.door;
+    $$("button[data-door]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.door === st.door)));
+  };
+  const localOut = $("[data-local-out]")!;
+  const showLocal = () => {
+    const r = Number(root.dataset.rate), cur = root.dataset.cur, b = num(input.value);
+    localOut.textContent = r && cur && b ? root.dataset.local!.replace("{v}", new Intl.NumberFormat(root.dataset.locale, { style: "currency", currency: cur, maximumFractionDigits: 0 }).format(Math.round(b * r / 1000) * 1000)) : "";
+  };
+  $$("button[data-door]").forEach((b) => b.addEventListener("click", () => { st.door = b.dataset.door as St["door"]; render(); }));
+  input.value = st.budget ? nf.format(st.budget) : "";
+  input.addEventListener("input", () => { read(); render(); });
+  input.addEventListener("blur", () => { const b = num(input.value); input.value = b ? nf.format(b) : ""; });
+  inh.checked = st.inh;
+  inh.addEventListener("change", () => { read(); render(); });
+  const wr = $<HTMLInputElement>(`input[name="when"][value="${st.when}"]`); if (wr) wr.checked = true;
+  // The country bar keeps the answers when the reader changes edition.
+  $$<HTMLAnchorElement>(".cbar a", start).forEach((a) => a.addEventListener("click", () => { read(); save(); }));
+  const read = () => {
+    st.budget = num(input.value); st.inh = inh.checked;
+    st.when = $<HTMLInputElement>('input[name="when"]:checked')?.value || "year";
+  };
+  start.addEventListener("submit", (e) => { e.preventDefault(); read(); st.started = true; save(); render(true); });
+  $("[data-change]")!.addEventListener("click", () => { st.started = false; save(); render(); start.scrollIntoView({ behavior: reduce ? "auto" : "smooth" }); });
+
+  // The route
+  const shown = (li: HTMLElement) => (li.dataset.high === undefined || st.budget >= HIGH) && (li.dataset.inherit === undefined || st.inh);
+  const visible = () => $$(`[data-route="${st.door}"] .pst`).filter(shown);
+  const setOpen = (li: HTMLElement, open: boolean) => { li.classList.toggle("open", open); $("button.pst-head", li)!.setAttribute("aria-expanded", String(open)); };
+  function render(scroll = false) {
+    showDoor(); showLocal();
+    root.classList.toggle("started", st.started); root.classList.toggle("high", st.budget >= HIGH); root.classList.toggle("inh", st.inh);
+    if (!st.started) { $$(".pst").forEach((li) => { setOpen(li, false); li.classList.remove("here", "done"); li.removeAttribute("aria-current"); $("[data-state]", li)!.textContent = ""; }); drawAll(); return; }
+    const list = visible();
+    if (!list.some((li) => li.dataset.k === st.step[st.door])) st.step[st.door] = list.find((li) => !st.done.includes(li.dataset.k!))?.dataset.k ?? list[0].dataset.k!;
+    const here = st.step[st.door];
+    list.forEach((li, i) => {
+      const k = li.dataset.k!, isHere = k === here, done = st.done.includes(k);
+      li.classList.toggle("here", isHere); li.classList.toggle("done", done);
+      if (isHere) li.setAttribute("aria-current", "step"); else li.removeAttribute("aria-current");
+      $("[data-state]", li)!.textContent = isHere ? root.dataset.here! : done ? root.dataset.done! : "";
+      $("[data-next]", li)!.hidden = i === list.length - 1;
+      $$<HTMLInputElement>("[data-tick]", li).forEach((t) => (t.checked = st.ticks.includes(t.dataset.tick!)));
+    });
+    list.forEach((li) => setOpen(li, li.dataset.k === here));
+    const n = list.filter((li) => st.done.includes(li.dataset.k!)).length;
+    const prog = $("[data-prog]")!;
+    prog.setAttribute("aria-valuemax", String(list.length)); prog.setAttribute("aria-valuenow", String(n));
+    (prog.firstElementChild as HTMLElement).style.width = `${(100 * n) / list.length}%`;
+    $("[data-prog-t]")!.textContent = root.dataset.progress!.replace("{n}", String(n)).replace("{t}", String(list.length));
+    const door = $(`button[data-door="${st.door}"] .pd-h`)!.textContent;
+    $("[data-sum]")!.textContent = [door, st.budget ? `${nf.format(st.budget)} €` : ""].filter(Boolean).join(" · ");
+    links();
+    drawAll();
+    if (scroll) $(`#s-${here}`)?.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+  }
+  // The reader's figure goes into the map and the calculators; a high budget gets the personal consultation tone.
+  function links() {
+    const b = st.budget;
+    $$<HTMLAnchorElement>("[data-num]").forEach((a) => {
+      const u = new URL(a.href, location.href), k = a.dataset.num!;
+      if (k === "map") { b ? u.searchParams.set("budget", String(b)) : u.searchParams.delete("budget"); }
+      else if (k) { b ? u.searchParams.set(k, String(b)) : u.searchParams.delete(k); }
+      a.href = u.pathname + u.search;
+    });
+    $$<HTMLAnchorElement>('[data-cta="agency"], [data-cta="sell"]').forEach((a) => {
+      const u = new URL(a.href, location.href); b ? u.searchParams.set("budget", String(b)) : u.searchParams.delete("budget"); a.href = u.pathname + u.search;
+    });
+  }
+  $$(".pst").forEach((li) => {
+    const k = li.dataset.k!;
+    $("button.pst-head", li)!.addEventListener("click", () => {
+      if (!st.started) { setOpen(li, !li.classList.contains("open")); drawAll(); return; }
+      if (st.step[st.door] === k) { setOpen(li, !li.classList.contains("open")); drawAll(); return; }
+      st.step[st.door] = k; save(); render();
+    });
+    $("[data-next]", li)!.addEventListener("click", () => {
+      if (!st.done.includes(k)) st.done.push(k);
+      const list = visible(), i = list.indexOf(li);
+      st.step[st.door] = list[i + 1]?.dataset.k ?? k; save(); render(true);
+      $<HTMLButtonElement>(`#s-${st.step[st.door]} button.pst-head`)?.focus({ preventScroll: true });
+    });
+    $$<HTMLInputElement>("[data-tick]", li).forEach((t) => t.addEventListener("change", () => {
+      st.ticks = st.ticks.filter((x) => x !== t.dataset.tick);
+      if (t.checked) st.ticks.push(t.dataset.tick!);
+      const all = $$<HTMLInputElement>("[data-tick]", li).every((x) => x.checked);
+      if (all && !st.done.includes(k)) st.done.push(k);
+      save(); render();
+    }));
+  });
+
+  // The line: straight on a phone, a gentle curve on a wide screen; it fills up to where the reader is.
+  function draw(route: HTMLElement) {
+    const wrap = $(".pwrap", route)!, svg = $<SVGSVGElement>("svg", route)!;
+    const list = $$(".pst", route).filter(shown);
+    if (route.dataset.route !== st.door || !list.length) return;
+    const wide = matchMedia("(min-width: 900px)").matches, base = wrap.getBoundingClientRect();
+    const pts = list.map((li, i) => {
+      const dot = $(".pdot", li)!, x = wide ? 22 + Math.round(18 * Math.sin(i * 0.9)) : 14;
+      dot.style.setProperty("--x", `${x}px`);
+      const r = dot.getBoundingClientRect();
+      return [x, r.top - base.top + r.height / 2] as [number, number];
+    });
+    svg.setAttribute("width", "64"); svg.setAttribute("height", String(Math.ceil(base.height)));
+    const d = (p: [number, number][]) => p.map(([x, y], i) => i === 0 ? `M${x} ${y}` : (() => { const [px, py] = p[i - 1], my = (py + y) / 2; return `C${px} ${my} ${x} ${my} ${x} ${y}`; })()).join(" ");
+    $<SVGPathElement>(".pl-base", svg)!.setAttribute("d", d(pts));
+    const here = list.findIndex((li) => li.classList.contains("here"));
+    const fill = $<SVGPathElement>(".pl-fill", svg)!;
+    fill.setAttribute("d", here > 0 ? d(pts.slice(0, here + 1)) : "");
+    const len = here > 0 ? fill.getTotalLength() : 0, prev = Number(fill.dataset.len || 0);
+    fill.style.transition = "none"; fill.style.strokeDasharray = `${len}`; fill.style.strokeDashoffset = `${Math.max(0, len - prev)}`;
+    fill.dataset.len = String(len);
+    if (!reduce) { fill.getBoundingClientRect(); fill.style.transition = "stroke-dashoffset .7s cubic-bezier(.2,.7,.2,1)"; }
+    fill.style.strokeDashoffset = "0";
+  }
+  function drawAll() { requestAnimationFrame(() => $$("[data-route]").forEach(draw)); }
+  new ResizeObserver(drawAll).observe(root);
+
+  // Share: door, budget, timing and step only; no personal data.
+  $("[data-share]")!.addEventListener("click", async () => {
+    const p = new URLSearchParams({ door: st.door, step: st.step[st.door] || "", when: st.when });
+    if (st.budget) p.set("budget", String(st.budget));
+    if (st.door === "sell" && st.inh) p.set("inh", "1");
+    const url = `${location.origin}${location.pathname}?${p}`;
+    try {
+      if (navigator.share) await navigator.share({ url, title: document.title });
+      else { await navigator.clipboard.writeText(url); $("[data-share-out]")!.textContent = root.dataset.copied!; }
+    } catch { /* cancelled */ }
+  });
+
+  render(st.started && !!q.get("step"));
+</script>
+
+<style>
+  .pstart { display: none; gap: 24px; margin-bottom: 40px; }
+  .is-js .pstart { display: grid; }
+  .pbar, .pend, .is-js.started .pstart { display: none; }
+  .is-js.started .pbar, .is-js.started .pend { display: block; }
+  .is-js[data-door="buy"] [data-route="sell"], .is-js[data-door="sell"] [data-route="buy"],
+  .is-js[data-door="buy"] [data-for="sell"], .is-js[data-door="sell"] [data-for="buy"],
+  .is-js:not(.high) .pst[data-high], .is-js:not(.inh) .pst[data-inherit] { display: none; }
+  .pdoors { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .pdoor { text-align: left; display: grid; gap: 6px; padding: 22px 20px; border-radius: var(--r); border: 1px solid var(--rule); background: var(--card); color: var(--ink); cursor: pointer; font: inherit; transition: border-color .2s, box-shadow .2s; }
+  .pdoor:hover { border-color: var(--accent); }
+  .pdoor[aria-pressed="true"] { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+  .pd-h { font: 450 1.6rem/1.1 var(--serif); }
+  .pd-p { font-size: 15px; color: var(--muted); }
+  .pchoices { display: grid; gap: 20px; }
+  .pfield { display: grid; gap: 6px; font-weight: 500; }
+  .pfield input { min-height: 52px; padding: 0 16px; border-radius: 10px; border: 1.5px solid var(--rule); background: var(--card); font: 400 1.25rem var(--sans); color: var(--ink); max-width: 16em; }
+  .pfield input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+  .pcheck { display: flex; gap: 10px; align-items: center; }
+  .pwhen { border: 0; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px 18px; }
+  .pwhen legend { font-weight: 500; margin-bottom: 8px; padding: 0; }
+  .pwhen label { display: inline-flex; gap: 8px; align-items: center; min-height: 40px; }
+  .pchoices .btn { justify-self: start; }
+  .path [hidden] { display: none !important; }
+  .pbar { position: sticky; top: var(--hd, 0px); z-index: 3; background: var(--paper); padding-top: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--rule); margin-bottom: 24px; }
+  .pbar p { margin: 0; }
+  .linkish { background: none; border: 0; padding: 0; color: var(--accent); font: inherit; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+  .pprog { height: 3px; background: var(--rule); border-radius: 2px; margin: 10px 0 6px; overflow: hidden; }
+  .pprog span { display: block; height: 100%; width: 0; background: var(--accent); transition: width .5s ease; }
+  .proute { margin-bottom: 48px; }
+  .pwrap { position: relative; }
+  .pline { list-style: none; margin: 0; padding: 0; counter-reset: st; }
+  .pline-svg { position: absolute; left: 0; top: 0; overflow: visible; pointer-events: none; display: none; }
+  .pl-base { fill: none; stroke: var(--rule); stroke-width: 2; }
+  .pl-fill { fill: none; stroke: var(--accent); stroke-width: 2.5; }
+  .pst { position: relative; padding: 0 0 8px 52px; counter-increment: st; }
+  /* Without JavaScript: a plain line on the left. */
+  .pst::before { content: ""; position: absolute; left: 13px; top: 0; bottom: 0; width: 2px; background: var(--rule); }
+  .is-js .pst::before { display: none; }
+  .is-js .pline-svg { display: block; }
+  .pdot { position: absolute; left: calc(var(--x, 14px) - 7px); top: 22px; width: 14px; height: 14px; border-radius: 50%; background: var(--paper); border: 2px solid var(--muted); z-index: 1; transition: background .3s, border-color .3s, transform .3s; }
+  .pst.done .pdot { background: var(--accent); border-color: var(--accent); }
+  .pst.here .pdot { border-color: var(--accent); transform: scale(1.25); box-shadow: 0 0 0 5px var(--accent-soft); }
+  .pst h3 { margin: 0; }
+  .pst-head { display: flex; align-items: baseline; gap: 12px; width: 100%; padding: 14px 0; background: none; border: 0; text-align: left; color: var(--ink); font: 450 1.35rem/1.25 var(--serif); cursor: pointer; }
+  .pnum::before { content: counter(st, decimal-leading-zero); font: 600 13px/1 var(--sans); letter-spacing: .08em; color: var(--muted); }
+  .ph3 { flex: 1; }
+  .pstate { font: 600 12px/1 var(--sans); letter-spacing: .1em; text-transform: uppercase; color: var(--accent); white-space: nowrap; }
+  .pst-body { display: grid; grid-template-rows: 1fr; }
+  .pin { min-height: 0; overflow: hidden; }
+  .is-js .pst-body { grid-template-rows: 0fr; transition: grid-template-rows .35s ease; }
+  .is-js .pst.open .pst-body { grid-template-rows: 1fr; }
+  .is-js .pst:not(.open) .pin { visibility: hidden; transition: visibility 0s .35s; }
+  .pin > :last-child { margin-bottom: 20px; }
+  .pwhat { margin: 0 0 18px; font-size: 1.05rem; }
+  .pin h4 { margin: 22px 0 10px; }
+  .pneed { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+  .pneed label { display: flex; gap: 12px; align-items: flex-start; min-height: 40px; padding: 6px 0; cursor: pointer; }
+  .pneed input { width: 20px; height: 20px; margin: 3px 0 0; accent-color: var(--accent); flex: none; }
+  .pneed input:checked + span { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--rule); }
+  .pqa { border-top: 1px solid var(--rule); }
+  .pqa summary { cursor: pointer; padding: 12px 0; font-weight: 500; }
+  .pqa p { margin: 0 0 12px; }
+  .pmore { margin-top: 12px; }
+  .pnums { display: flex; flex-wrap: wrap; gap: 8px 16px; margin: 0; }
+  .pslot { margin-top: 22px; padding: 18px; border: 1px solid var(--rule); border-radius: var(--r); background: var(--card); }
+  .pslot p { margin: 0 0 8px; }
+  .pnext { margin: 22px 0 0; }
+  .pend { padding-top: 8px; padding-bottom: 48px; }
+  .pend h2 { margin-bottom: 16px; }
+  @media (min-width: 900px) { .pst { padding-left: 76px; } }
+  @media (max-width: 520px) { .pdoors { grid-template-columns: 1fr; } .pd-h { font-size: 1.4rem; } }
+  @media (prefers-reduced-motion: reduce) { .is-js .pst-body, .pdot, .pprog span { transition: none; } }
+</style>

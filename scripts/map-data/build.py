@@ -62,12 +62,13 @@ def clean(g):
     return g
 
 osm = load("osm-concelhos.geojson.gz")["features"]
+ALIAS = {"vila da praia da vitoria": "praia da vitoria"}  # INE's name and the name on the map
 geom = {}
 by_name = {plain(n): d for d, (_, n) in MUNI.items() if int(d[:2]) <= 18}
 for f in osm:
     t = f["properties"]["tags"]; code = t.get("ref:ine") or t.get("ine:code")
     nm = plain(t.get("name"))
-    if code in MUNI and plain(MUNI[code][1]) != nm:  # the tag must name the same concelho as INE (Almada carries Almeirim's 1403)
+    if code in MUNI and ALIAS.get(plain(MUNI[code][1]), plain(MUNI[code][1])) != nm:  # the tag must name the same concelho as INE (Almada carries Almeirim's 1403)
         fixed = by_name.get(nm)
         report["nocode"].append(f"{t.get('name')} (relation {f['properties']['id']}) has ine:code {code}, which INE gives to {MUNI[code][1]}; matched by name → {fixed}")
         code = fixed
@@ -77,7 +78,6 @@ for f in osm:
     elif code and code not in MUNI: report["dropped"].append(f"{t.get('name')} ine:code {code}")
 
 gb = load("geoBoundaries-PRT-ADM2.geojson.gz")["features"]
-ALIAS = {"vila da praia da vitoria": "praia da vitoria"}
 mainland = unary_union([g for d, g in geom.items() if int(d[:2]) <= 18])
 for d, (code, n) in sorted(MUNI.items()):
     if d in geom: continue
@@ -234,15 +234,15 @@ lines = ["# Map boundaries ↔ INE codes (prompt 25 §1)", "",
          f"## Concelhos: {len(geom)} of 308 matched", "",
          f"- {len(report['osm'])} from OpenStreetMap relations (admin_level 7) matched on the tag ine:code = INE DICO.",
          f"- {len(report['gb'])} from geoBoundaries PRT ADM2 (CC0), absent from the OSM export: " + ", ".join(name(d) for d in report["gb"]) + ".",
-         f"- {len(report['gap'])} mainland concelhos absent from the OSM export, drawn as the gap their OSM neighbours leave (guided by geoBoundaries): " + ", ".join(name(d) for d in report["gap"]) + ".",
+         *([f"- {len(report['gap'])} mainland concelhos absent from the OSM export, drawn as the gap their OSM neighbours leave (guided by geoBoundaries): " + ", ".join(name(d) for d in report["gap"]) + "."] if report["gap"] else []),
          *(f"- {x}." for x in report["nocode"]),
          *(f"- OSM relation with an ine:code INE does not use (left out): {x}." for x in report["dropped"]), "",
-         "Replace with a fresh OpenStreetMap extract (Overpass, admin_level 7 and 8) once the build environment can reach it; "
+         "Boundaries are current OpenStreetMap relations fetched through Nominatim by fetch_osm.py (date in raw/manifest.json); "
          "until DGT confirms commercial use (task 8x), CAOP is not used.", "",
          f"## Parishes: {len(pgeom)} of the {len(PAR)} INE publishes prices or rents for", "",
          f"- {sum(1 for v in pmatch.values() if v == 'code')} matched on ine:code (DICOFRE), {sum(1 for v in pmatch.values() if v == 'name')} by name inside the right concelho.",
-         f"- {len(nopar)} without a boundary: INE now uses the 2025 parish map (Lei 25-A/2025 restored many parishes merged in 2013), "
-         "and the 2016 OSM export predates it or lacks the code. They stay out of the parish layer; their concelho still shows them in the list.", "",
+         f"- {len(nopar)} without a boundary: INE still publishes these as the unions of the 2013 map, while OpenStreetMap now draws the parishes "
+         "Lei 25-A/2025 restored, so no single boundary carries the union's code. They stay out of the parish layer; their concelho still shows them in the list.", "",
          "| DICOFRE | Parish (INE) | Concelho |", "|---|---|---|",
          *(f"| {c} | {PAR[c][1]} | {name(c[:4])} |" for c in nopar)]
 open(os.path.join(ROOT, "content", "facts", "map", "MISMATCHES.md"), "w").write("\n".join(lines) + "\n")

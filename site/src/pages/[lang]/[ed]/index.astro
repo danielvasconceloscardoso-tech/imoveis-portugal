@@ -80,17 +80,6 @@ const sup = (ns: number[]) => ns.map((i) => `<a class="sup" href="#fonte-${i}">$
       </div>
   </section>
 
-  <section class="prices-home" aria-labelledby="precos">
-    <div class="frame">
-      <h2 id="precos">{c("prices.home.h", lang)}</h2>
-      <p class="read">{c("prices.home.p", lang, { from: e(ptP.m2[0]!), to: e(ptP.m2[LAST]!) })}<Fragment set:html={sup([nHist])} /></p>
-      <p class="small pc-legend"><span class="k0">Portugal</span> · <span class="k1">{PRICES.munis.lisboa.n}</span> · <span class="k2">{PRICES.munis.porto.n}</span></p>
-      <figure class="pc-chart" set:html={homeChart} />
-      <p class="small">{c("journey.past", lang)}</p>
-      <a class="more" href={pathFor(lang, ed, "data")}>{c("prices.home.open", lang)}</a>
-    </div>
-  </section>
-
   <section class="qa-home" aria-labelledby="perguntas">
     <div class="frame read">
       <h2 id="perguntas">{c("home.qa.h", lang)}</h2>
@@ -101,7 +90,20 @@ const sup = (ns: number[]) => ns.map((i) => `<a class="sup" href="#fonte-${i}">$
           <a class="act" href={x.href}>{x.btn}</a>
         </div>
       ))}
-      <p class="jacts"><a class="more" href={pathFor(lang, ed, "journey")}>{c("journey.open", lang)}</a> <a class="more" href={pathFor(lang, ed, "faq")}>{c("home.qa.all", lang)}</a></p>
+      <p class="jacts"><a class="more" href={pathFor(lang, ed, "faq")}>{c("home.qa.all", lang)}</a></p>
+      <p class="h-small" style="margin-top:28px">{c("home.qa.path", lang)}</p>
+      <p class="jacts"><a class="act" href={`${pathFor(lang, ed, "journey")}?door=buy`}>{c("path.door.buy", lang)}</a> <a class="act" href={`${pathFor(lang, ed, "journey")}?door=sell`}>{c("path.door.sell", lang)}</a></p>
+    </div>
+  </section>
+
+  <section class="prices-home" aria-labelledby="precos">
+    <div class="frame">
+      <h2 id="precos">{c("prices.home.h", lang)}</h2>
+      <p class="read">{c("prices.home.p", lang, { from: e(ptP.m2[0]!), to: e(ptP.m2[LAST]!) })}<Fragment set:html={sup([nHist])} /></p>
+      <p class="small pc-legend"><span class="k0">Portugal</span> · <span class="k1">{PRICES.munis.lisboa.n}</span> · <span class="k2">{PRICES.munis.porto.n}</span></p>
+      <figure class="pc-chart" set:html={homeChart} />
+      <p class="small">{c("journey.past", lang)}</p>
+      <a class="more" href={pathFor(lang, ed, "data")}>{c("prices.home.open", lang)}</a>
     </div>
   </section>
 

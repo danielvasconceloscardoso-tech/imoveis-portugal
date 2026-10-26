@@ -439,6 +439,11 @@ How to edit:
 
 ## home
 
+### qa.path
+- PT: Comprar ou vender, passo a passo
+- EN: Buying or selling, step by step
+- FR: Acheter ou vendre, étape par étape
+
 ### h1.lu
 - PT: Comprar casa em Portugal a partir do Luxemburgo é mais simples do que parece.
 - EN: Buying a home in Portugal from Luxembourg is simpler than it looks.
@@ -702,6 +707,51 @@ How to edit:
 - FR: Premier appel de 15 minutes avec l'agence
 
 ## faq
+
+### onpath
+- PT: No percurso: {step}
+- EN: On the path: {step}
+- FR: Dans le parcours : {step}
+
+### stage.inheritance.p
+- PT: Quem paga imposto, o que comunicar e como registar a casa.
+- EN: Who pays tax, what to report and how to register the home.
+- FR: Qui paie l'impôt, quoi déclarer et comment enregistrer le bien.
+
+### stage.inheritance.h
+- PT: Herança
+- EN: Inheritance
+- FR: Succession
+
+### stage.selling.p
+- PT: Mais-valias, documentos e o dinheiro de volta.
+- EN: Gains, documents and bringing the money home.
+- FR: Plus-values, documents et rapatriement des fonds.
+
+### stage.selling.h
+- PT: Vender
+- EN: Selling
+- FR: Vendre
+
+### stage.renting.p
+- PT: Rendas, impostos sobre elas e o acordo com o seu país.
+- EN: Rent, the tax on it and the treaty with your country.
+- FR: Les loyers, leur imposition et la convention avec votre pays.
+
+### stage.renting.h
+- PT: Arrendar
+- EN: Renting out
+- FR: Louer
+
+### stage.owning.p
+- PT: Impostos de cada ano, residência e o que declarar.
+- EN: Yearly taxes, residence and what to report.
+- FR: Impôts annuels, résidence et déclarations.
+
+### stage.owning.h
+- PT: Ser proprietário
+- EN: Owning
+- FR: Être propriétaire
 
 ### title
 - PT: Perguntas sobre comprar casa em Portugal a partir de fora
@@ -3379,6 +3429,36 @@ How to edit:
 
 ## journey
 
+### q.sell.cert.a
+- PT: É um dos documentos pedidos numa venda. Um advogado parceiro confirma as exceções e quem o emite.
+- EN: It is one of the documents asked for in a sale. A partner lawyer confirms the exceptions and who issues it.
+- FR: C'est l'un des documents demandés lors d'une vente. Un avocat partenaire confirme les exceptions et qui le délivre.
+
+### q.sell.cert.q
+- PT: Preciso de certificado energético para vender?
+- EN: Do I need an energy certificate to sell?
+- FR: Faut-il un certificat énergétique pour vendre ?
+
+### q.sell.heirs.a
+- PT: Com a habilitação de herdeiros e o registo predial. Um advogado parceiro confirma os passos e os custos no seu caso.
+- EN: Through a declaration of heirs and land registration. A partner lawyer confirms the steps and costs for your case.
+- FR: Par l'acte de notoriété des héritiers et l'inscription au registre foncier. Un avocat partenaire confirme les étapes et les coûts dans votre cas.
+
+### q.sell.heirs.q
+- PT: Como fica a casa em nome dos herdeiros?
+- EN: How does the home pass into the heirs' names?
+- FR: Comment le bien passe-t-il au nom des héritiers ?
+
+### q.sell.filing.a
+- PT: Sim. O cabeça-de-casal e os herdeiros comunicam o óbito e os bens no modelo oficial até ao fim do 3.º mês seguinte, mesmo quando estão isentos do imposto. Com motivo justificado, as Finanças podem dar até 60 dias a mais.
+- EN: Yes. The head of the estate and the heirs report the death and the assets on the official form by the end of the third following month, even when they are exempt from the tax. For a justified reason, the tax office can grant up to 60 more days.
+- FR: Oui. L'administrateur de la succession et les héritiers déclarent le décès et les biens sur le formulaire officiel avant la fin du troisième mois suivant, même s'ils sont exonérés. Pour un motif justifié, les Finances peuvent accorder jusqu'à 60 jours de plus.
+
+### q.sell.filing.q
+- PT: Tenho de comunicar a herança às Finanças?
+- EN: Do I have to report the inheritance to the tax office?
+- FR: Dois-je déclarer la succession aux Finances ?
+
 ### cp.estate.h
 - PT: Património e forma de deter a casa
 - EN: Your holdings and how to hold the home
@@ -4516,3 +4596,627 @@ How to edit:
 - PT: Fontes
 - EN: Sources
 - FR: Sources
+
+## path
+
+### numbers.mapsell
+- PT: Ver no mapa os preços oficiais da zona
+- EN: See the area's official prices on the map
+- FR: Voir sur la carte les prix officiels du secteur
+
+### end.h
+- PT: Leve o percurso consigo
+- EN: Take the path with you
+- FR: Emportez votre parcours
+
+### saved
+- PT: O seu progresso fica guardado neste dispositivo.
+- EN: Your progress stays on this device.
+- FR: Votre progression reste sur cet appareil.
+
+### more
+- PT: Mais perguntas desta etapa
+- EN: More questions on this step
+- FR: Autres questions sur cette étape
+
+### local
+- PT: Cerca de {v}
+- EN: About {v}
+- FR: Environ {v}
+
+### progress
+- PT: {n} de {t} etapas feitas
+- EN: {n} of {t} steps done
+- FR: {n} étapes sur {t} faites
+
+### st.smoney.need.2
+- PT: O comprovativo da venda para o seu banco
+- EN: Proof of the sale for your bank
+- FR: La preuve de la vente pour votre banque
+
+### st.smoney.need.1
+- PT: Uma conta para receber o valor
+- EN: An account to receive the money
+- FR: Un compte pour recevoir la somme
+
+### st.smoney.what
+- PT: Recebe o valor numa conta e transfere-o para o seu país, com as declarações que esse país pede.
+- EN: You receive the money in an account and move it home, with the declarations your country asks for.
+- FR: Vous recevez la somme sur un compte et la transférez chez vous, avec les déclarations demandées par votre pays.
+
+### st.smoney.h
+- PT: Trazer o dinheiro
+- EN: Moving the money
+- FR: Rapatrier l'argent
+
+### st.sdeed.need.2
+- PT: A procuração, se não estiver presente
+- EN: A power of attorney, if you cannot attend
+- FR: Une procuration, si vous êtes absent
+
+### st.sdeed.need.1
+- PT: Os documentos da casa
+- EN: The home's documents
+- FR: Les documents du bien
+
+### st.sdeed.what
+- PT: Assina a venda num notário ou num balcão Casa Pronta, pessoalmente ou por procuração.
+- EN: You sign the sale at a notary or a Casa Pronta desk, in person or through a power of attorney.
+- FR: Vous signez la vente chez un notaire ou dans un guichet Casa Pronta, en personne ou par procuration.
+
+### st.sdeed.h
+- PT: A escritura
+- EN: The deed
+- FR: L'acte
+
+### st.list.need.3
+- PT: Quem mostra a casa quando não está
+- EN: Who shows the home when you are away
+- FR: Qui fait visiter en votre absence
+
+### st.list.need.2
+- PT: O preço pedido e o mínimo que aceita
+- EN: The asking price and your floor
+- FR: Le prix demandé et votre minimum
+
+### st.list.need.1
+- PT: O contrato de mediação assinado
+- EN: The signed agency agreement
+- FR: Le mandat signé
+
+### st.list.what
+- PT: A agência parceira anuncia a casa, organiza as visitas e traz-lhe as propostas.
+- EN: The partner agency lists the home, runs the viewings and brings you the offers.
+- FR: L'agence partenaire publie l'annonce, organise les visites et vous présente les offres.
+
+### st.list.h
+- PT: Pôr à venda com a agência
+- EN: Listing with the agency
+- FR: Mettre en vente avec l'agence
+
+### st.prepare.need.3
+- PT: A certidão permanente do registo predial
+- EN: The land register extract
+- FR: L'extrait du registre foncier
+
+### st.prepare.need.2
+- PT: A licença de utilização
+- EN: The usage licence
+- FR: Le permis d'habiter
+
+### st.prepare.need.1
+- PT: O certificado energético
+- EN: The energy certificate
+- FR: Le certificat énergétique
+
+### st.prepare.what
+- PT: Reúne os documentos que a venda pede e põe a casa pronta para as visitas.
+- EN: You gather the documents the sale needs and get the home ready for viewings.
+- FR: Vous réunissez les documents nécessaires à la vente et préparez le bien pour les visites.
+
+### st.prepare.h
+- PT: Preparar a casa
+- EN: Preparing the home
+- FR: Préparer le bien
+
+### st.taxes.need.3
+- PT: Um consultor fiscal nos dois países
+- EN: A tax adviser in both countries
+- FR: Un conseiller fiscal dans les deux pays
+
+### st.taxes.need.2
+- PT: As faturas das obras
+- EN: Invoices for works
+- FR: Les factures des travaux
+
+### st.taxes.need.1
+- PT: O valor de compra ou o valor na herança
+- EN: The purchase value or the value at inheritance
+- FR: La valeur d'achat ou la valeur à la succession
+
+### st.taxes.what
+- PT: Calcula a mais-valia, que se paga em Portugal, e vê como o seu país a trata segundo o acordo fiscal.
+- EN: You work out the gain, taxed in Portugal, and how your country treats it under the tax treaty.
+- FR: Vous calculez la plus-value, imposée au Portugal, et voyez comment votre pays la traite selon la convention fiscale.
+
+### st.taxes.h
+- PT: Os impostos em Portugal e no seu país
+- EN: Taxes in Portugal and at home
+- FR: Les impôts au Portugal et chez vous
+
+### st.inherit.need.3
+- PT: A lista dos bens e das contas
+- EN: A list of the assets and accounts
+- FR: La liste des biens et des comptes
+
+### st.inherit.need.2
+- PT: Os documentos e o NIF de cada herdeiro
+- EN: Each heir's ID and NIF
+- FR: Les pièces d'identité et le NIF de chaque héritier
+
+### st.inherit.need.1
+- PT: A certidão de óbito
+- EN: The death certificate
+- FR: L'acte de décès
+
+### st.inherit.what
+- PT: Comunica o óbito e os bens às Finanças, faz a habilitação de herdeiros e regista a casa em nome de quem a herda.
+- EN: You report the death and the assets to the tax office, establish who the heirs are and register the home in their names.
+- FR: Vous déclarez le décès et les biens aux Finances, établissez qui sont les héritiers et enregistrez le bien à leur nom.
+
+### st.inherit.h
+- PT: A herança e o registo
+- EN: The inheritance and registration
+- FR: La succession et l'enregistrement
+
+### st.worth.need.3
+- PT: A caderneta predial, se a tiver
+- EN: The tax record, if you have it
+- FR: Le relevé fiscal, si vous l'avez
+
+### st.worth.need.2
+- PT: Fotografias recentes
+- EN: Recent photos
+- FR: Des photos récentes
+
+### st.worth.need.1
+- PT: A morada e a área da casa
+- EN: The address and floor area
+- FR: L'adresse et la surface du bien
+
+### st.worth.what
+- PT: Compara com os preços oficiais da zona e pede uma avaliação à agência parceira, sem compromisso.
+- EN: You compare with the area's official prices and ask the partner agency for a valuation, with no commitment.
+- FR: Vous comparez avec les prix officiels du secteur et demandez une estimation à l'agence partenaire, sans engagement.
+
+### st.worth.h
+- PT: Quanto vale a casa
+- EN: What the home is worth
+- FR: Ce que vaut le bien
+
+### st.estate.need.2
+- PT: A opinião do seu consultor fiscal
+- EN: Your tax adviser's view
+- FR: L'avis de votre conseiller fiscal
+
+### st.estate.need.1
+- PT: A lista dos imóveis que já tem em Portugal
+- EN: A list of the property you already own in Portugal
+- FR: La liste des biens que vous possédez déjà au Portugal
+
+### st.estate.what
+- PT: Vê o imposto adicional sobre o património imobiliário e compara a compra em nome próprio com a compra por sociedade.
+- EN: You look at the additional property tax and compare buying in your own name with buying through a company.
+- FR: Vous examinez l'impôt additionnel sur le patrimoine immobilier et comparez l'achat en nom propre et par une société.
+
+### st.estate.h
+- PT: Património e forma de deter a casa
+- EN: Your holdings and how to hold the home
+- FR: Patrimoine et façon de détenir le bien
+
+### st.struct.need.3
+- PT: Uma reunião com advogado e consultor fiscal
+- EN: A meeting with a lawyer and a tax adviser
+- FR: Un rendez-vous avec un avocat et un conseiller fiscal
+
+### st.struct.need.2
+- PT: A situação familiar e quem herda
+- EN: Your family situation and who inherits
+- FR: Votre situation familiale et vos héritiers
+
+### st.struct.need.1
+- PT: Os seus rendimentos dos últimos anos
+- EN: Your income over recent years
+- FR: Vos revenus des dernières années
+
+### st.struct.what
+- PT: Se pensa viver cá parte do ano, decide a residência, o regime fiscal e a forma de deter a casa com os seus consultores.
+- EN: If you plan to live here part of the year, you decide residence, the tax regime and how to hold the home with your advisers.
+- FR: Si vous comptez vivre ici une partie de l'année, vous décidez de la résidence, du régime fiscal et de la façon de détenir le bien avec vos conseillers.
+
+### st.struct.h
+- PT: Residência e estrutura
+- EN: Residence and structuring
+- FR: Résidence et structuration
+
+### st.later.need.2
+- PT: A escritura de compra e os impostos pagos
+- EN: The purchase deed and the taxes paid
+- FR: L'acte d'achat et les impôts payés
+
+### st.later.need.1
+- PT: As faturas das obras que fizer
+- EN: Invoices for any works you do
+- FR: Les factures des travaux réalisés
+
+### st.later.what
+- PT: Se vender, paga imposto sobre a mais-valia em Portugal, e o seu país pode também tributá-la conforme o acordo fiscal.
+- EN: If you sell, you pay tax on the gain in Portugal, and your country may also tax it under the tax treaty.
+- FR: Si vous vendez, vous payez l'impôt sur la plus-value au Portugal, et votre pays peut aussi l'imposer selon la convention fiscale.
+
+### st.later.h
+- PT: Vender mais tarde
+- EN: Selling later
+- FR: Vendre plus tard
+
+### st.own.need.3
+- PT: Um contabilista para as declarações
+- EN: An accountant for the returns
+- FR: Un comptable pour les déclarations
+
+### st.own.need.2
+- PT: O registo de alojamento local, se arrendar a turistas
+- EN: A local accommodation registration, if you rent to tourists
+- FR: Un enregistrement d'hébergement local, si vous louez à des touristes
+
+### st.own.need.1
+- PT: A data de pagamento do IMI
+- EN: When IMI is due
+- FR: L'échéance de l'IMI
+
+### st.own.what
+- PT: Paga o IMI todos os anos e, se arrendar, declara as rendas em Portugal e no seu país.
+- EN: You pay IMI each year and, if you rent the home out, declare the rent in Portugal and at home.
+- FR: Vous payez l'IMI chaque année et, si vous louez, déclarez les loyers au Portugal et dans votre pays.
+
+### st.own.h
+- PT: Ser proprietário, arrendar e segurar
+- EN: Owning, renting and insurance
+- FR: Être propriétaire, louer et assurer
+
+### st.keys.need.3
+- PT: Uma morada para receber as cartas das Finanças
+- EN: An address for tax office letters
+- FR: Une adresse pour le courrier des Finances
+
+### st.keys.need.2
+- PT: Um seguro multirriscos
+- EN: Home insurance
+- FR: Une assurance habitation
+
+### st.keys.need.1
+- PT: Os números de contrato da água, da luz e do gás
+- EN: The water, power and gas contract numbers
+- FR: Les numéros de contrat de l'eau, de l'électricité et du gaz
+
+### st.keys.what
+- PT: Recebe as chaves, muda os contratos de água, luz e gás para o seu nome e decide como segura a casa.
+- EN: You get the keys, move the water, power and gas contracts into your name and choose how to insure the home.
+- FR: Vous recevez les clés, mettez l'eau, l'électricité et le gaz à votre nom et choisissez comment assurer le bien.
+
+### st.keys.h
+- PT: As chaves
+- EN: The keys
+- FR: Les clés
+
+### st.deed.need.3
+- PT: O seu documento de identificação e o NIF
+- EN: Your ID and NIF
+- FR: Votre pièce d'identité et votre NIF
+
+### st.deed.need.2
+- PT: A caderneta e a certidão do imóvel
+- EN: The property's tax record and land register extract
+- FR: Le relevé fiscal et l'extrait du registre du bien
+
+### st.deed.need.1
+- PT: O comprovativo do IMT e do imposto do selo
+- EN: Proof of IMT and stamp duty paid
+- FR: La preuve du paiement de l'IMT et du droit de timbre
+
+### st.deed.what
+- PT: Paga o IMT e o imposto do selo antes da escritura e assina a compra num notário ou num balcão Casa Pronta.
+- EN: You pay IMT and stamp duty before the deed, then sign the purchase at a notary or a Casa Pronta desk.
+- FR: Vous payez l'IMT et le droit de timbre avant l'acte, puis signez l'achat chez un notaire ou dans un guichet Casa Pronta.
+
+### st.deed.h
+- PT: Os impostos e a escritura
+- EN: Taxes and the deed
+- FR: Les impôts et l'acte
+
+### st.cpcv.need.3
+- PT: A confirmação do crédito, se o houver
+- EN: Mortgage approval, if you have one
+- FR: L'accord de crédit, le cas échéant
+
+### st.cpcv.need.2
+- PT: O sinal e a data da escritura
+- EN: The deposit and the deed date
+- FR: L'acompte et la date de l'acte
+
+### st.cpcv.need.1
+- PT: O texto do contrato revisto pelo seu advogado
+- EN: The contract reviewed by your lawyer
+- FR: Le contrat relu par votre avocat
+
+### st.cpcv.what
+- PT: Assina o contrato-promessa de compra e venda (CPCV) e paga o sinal. A partir daqui, as duas partes ficam comprometidas.
+- EN: You sign the promissory contract (CPCV) and pay the deposit. From here, both sides are bound.
+- FR: Vous signez le compromis (CPCV) et versez l'acompte. Dès lors, les deux parties sont engagées.
+
+### st.cpcv.h
+- PT: O contrato-promessa
+- EN: The promissory contract
+- FR: Le compromis
+
+### st.choose.need.3
+- PT: Um advogado para rever o imóvel antes de assinar
+- EN: A lawyer to check the property before you sign
+- FR: Un avocat pour vérifier le bien avant de signer
+
+### st.choose.need.2
+- PT: As datas em que pode visitar, ou visitas por vídeo
+- EN: Dates you can visit, or video viewings
+- FR: Vos dates de visite, ou des visites en vidéo
+
+### st.choose.need.1
+- PT: A lista do que é essencial e do que é desejável
+- EN: Your must-haves and nice-to-haves
+- FR: Vos indispensables et vos souhaits
+
+### st.choose.what
+- PT: Visita casas com a agência parceira, que é a única da plataforma, ou conhece os empreendimentos novos dos promotores parceiros.
+- EN: You view homes with the partner agency, the only one on the platform, or look at new developments from partner developers.
+- FR: Vous visitez des biens avec l'agence partenaire, la seule de la plateforme, ou consultez les programmes neufs des promoteurs partenaires.
+
+### st.choose.h
+- PT: Escolher a casa
+- EN: Choosing the home
+- FR: Choisir le bien
+
+### st.docs.need.3
+- PT: Procuração, se alguém assinar por si
+- EN: A power of attorney, if someone signs for you
+- FR: Une procuration, si quelqu'un signe pour vous
+
+### st.docs.need.2
+- PT: Passaporte ou cartão de cidadão válido
+- EN: A valid passport or ID card
+- FR: Un passeport ou une carte d'identité valide
+
+### st.docs.need.1
+- PT: NIF (número de identificação fiscal)
+- EN: NIF (tax number)
+- FR: NIF (numéro fiscal)
+
+### st.docs.what
+- PT: Tem um número fiscal português, uma conta e, se não puder estar presente, uma procuração.
+- EN: You get a Portuguese tax number, an account and, if you cannot be there, a power of attorney.
+- FR: Vous obtenez un numéro fiscal portugais, un compte et, si vous ne pouvez pas être présent, une procuration.
+
+### st.docs.h
+- PT: Os documentos
+- EN: The documents
+- FR: Les documents
+
+### st.money.need.3
+- PT: Uma conta para receber e pagar
+- EN: An account to receive and pay from
+- FR: Un compte pour recevoir et payer
+
+### st.money.need.2
+- PT: Prova da origem dos fundos
+- EN: Proof of where the funds come from
+- FR: La preuve de l'origine des fonds
+
+### st.money.need.1
+- PT: Os últimos rendimentos e a declaração de impostos
+- EN: Your latest income and tax return
+- FR: Vos derniers revenus et votre déclaration d'impôts
+
+### st.money.what
+- PT: Decide como paga: com crédito em Portugal, com o banco do seu país ou com capitais próprios, e como transfere o dinheiro.
+- EN: You decide how to pay: a Portuguese mortgage, your home bank or your own funds, and how the money moves.
+- FR: Vous décidez comment payer : un crédit au Portugal, votre banque ou vos fonds propres, et comment l'argent est transféré.
+
+### st.money.h
+- PT: O financiamento e o dinheiro
+- EN: Financing and moving the money
+- FR: Le financement et l'argent
+
+### st.place.need.3
+- PT: O uso da casa: viver, férias ou arrendar
+- EN: What the home is for: living, holidays or renting
+- FR: L'usage du bien : y vivre, les vacances ou la location
+
+### st.place.need.2
+- PT: Duas ou três zonas para comparar
+- EN: Two or three areas to compare
+- FR: Deux ou trois secteurs à comparer
+
+### st.place.need.1
+- PT: Um valor máximo, com os custos da compra incluídos
+- EN: A ceiling, with the purchase costs included
+- FR: Un plafond, frais d'achat compris
+
+### st.place.what
+- PT: Escolhe a zona com números oficiais: quanto espaço compra o seu orçamento, como os preços evoluíram e quanto rende arrendar.
+- EN: You choose the area with official figures: how much space your budget buys, how prices have moved and what renting yields.
+- FR: Vous choisissez le secteur avec des chiffres officiels : l'espace que permet votre budget, l'évolution des prix et ce que rapporte la location.
+
+### st.place.h
+- PT: O orçamento e o lugar
+- EN: The budget and the place
+- FR: Le budget et le lieu
+
+### toc
+- PT: As etapas
+- EN: The steps
+- FR: Les étapes
+
+### faq
+- PT: Todas as perguntas
+- EN: All the questions
+- FR: Toutes les questions
+
+### copied
+- PT: Ligação copiada
+- EN: Link copied
+- FR: Lien copié
+
+### change
+- PT: Mudar as respostas
+- EN: Change the answers
+- FR: Modifier les réponses
+
+### email.p
+- PT: Inscreva-se na newsletter: o primeiro email traz o seu percurso, e pode sair quando quiser.
+- EN: Sign up to the newsletter: the first email carries your path, and you can leave whenever you want.
+- FR: Inscrivez-vous à la newsletter : le premier e-mail contient votre parcours, et vous pouvez partir quand vous voulez.
+
+### email
+- PT: Receber o percurso por email
+- EN: Get the path by email
+- FR: Recevoir le parcours par e-mail
+
+### share
+- PT: Partilhar o meu percurso
+- EN: Share my path
+- FR: Partager mon parcours
+
+### sell.cta
+- PT: Pedir uma avaliação à agência parceira
+- EN: Ask the partner agency for a valuation
+- FR: Demander une estimation à l'agence partenaire
+
+### partner
+- PT: Quem trata deste passo
+- EN: Who handles this step
+- FR: Qui s'occupe de cette étape
+
+### numbers.tool
+- PT: Abrir o simulador com o seu valor
+- EN: Open the calculator with your figure
+- FR: Ouvrir le simulateur avec votre montant
+
+### numbers.map
+- PT: Ver no mapa o que o seu orçamento compra
+- EN: See on the map what your budget buys
+- FR: Voir sur la carte ce que permet votre budget
+
+### numbers
+- PT: Os números do seu caso
+- EN: The numbers for your case
+- FR: Les chiffres de votre cas
+
+### asks
+- PT: O que as pessoas perguntam
+- EN: What people ask
+- FR: Ce qu'on demande
+
+### need
+- PT: O que precisa
+- EN: What you need
+- FR: Ce qu'il vous faut
+
+### done
+- PT: Feito
+- EN: Done
+- FR: Fait
+
+### next
+- PT: Próximo passo
+- EN: Next step
+- FR: Étape suivante
+
+### here
+- PT: Está aqui
+- EN: You are here
+- FR: Vous êtes ici
+
+### start
+- PT: Começar o percurso
+- EN: Start the path
+- FR: Commencer le parcours
+
+### t.later
+- PT: Mais tarde
+- EN: Later
+- FR: Plus tard
+
+### t.year
+- PT: Dentro de um ano
+- EN: Within a year
+- FR: D'ici un an
+
+### t.soon
+- PT: Nos próximos 3 meses
+- EN: In the next 3 months
+- FR: Dans les 3 prochains mois
+
+### q.timing
+- PT: Quando
+- EN: When
+- FR: Quand
+
+### q.inherited
+- PT: A casa foi herdada
+- EN: The home was inherited
+- FR: Le bien a été hérité
+
+### q.value
+- PT: Quanto pode valer a casa (€)
+- EN: What the home may be worth (€)
+- FR: Ce que le bien peut valoir (€)
+
+### q.budget
+- PT: O seu orçamento (€)
+- EN: Your budget (€)
+- FR: Votre budget (€)
+
+### q.country
+- PT: Onde vive
+- EN: Where you live
+- FR: Où vous vivez
+
+### door.sell.p
+- PT: Do valor da casa ao dinheiro na sua conta, incluindo uma casa herdada.
+- EN: From what the home is worth to the money in your account, including an inherited home.
+- FR: De la valeur du bien à l'argent sur votre compte, y compris un bien hérité.
+
+### door.buy.p
+- PT: Da escolha da zona às chaves, e o que vem depois.
+- EN: From choosing the area to the keys, and what comes after.
+- FR: Du choix du secteur aux clés, et ce qui vient ensuite.
+
+### door.sell
+- PT: Vender
+- EN: Sell
+- FR: Vendre
+
+### door.buy
+- PT: Comprar
+- EN: Buy
+- FR: Acheter
+
+### lede
+- PT: Comprar ou vender uma casa em Portugal a partir {from}, uma etapa de cada vez. Em cada uma, o que acontece, o que precisa, as perguntas que se fazem e quem trata disso consigo.
+- EN: Buying or selling a home in Portugal from {from}, one step at a time. At each one: what happens, what you need, the questions people ask and who handles it with you.
+- FR: Acheter ou vendre un bien au Portugal depuis {from}, une étape à la fois. À chaque étape : ce qui se passe, ce qu'il vous faut, les questions qu'on se pose et qui s'en charge avec vous.
+
+### h1
+- PT: O seu percurso
+- EN: Your path
+- FR: Votre parcours
+
+Prompt 27: the path (two doors, stations, checklist). Blocks path.st.{k}.h / .what / .need.n per station.

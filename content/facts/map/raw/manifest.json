@@ -448,14 +448,14 @@
   "osm-concelhos.geojson.gz": {
    "downloaded": "2026-10-26",
    "licence": "ODbL (© OpenStreetMap contributors)",
-   "note": "admin_level 7 relations named like an INE unit, inside Portugal; OSM planet of December 2016 (osm-boundaries export)",
-   "url": "https://raw.githubusercontent.com/missinglink/osm-boundaries/master/data/"
+   "note": "admin_level 7, ref:ine = DICO; current OSM, found via Nominatim search; OSM source tag: DGT - CAOP 2022",
+   "url": "https://nominatim.openstreetmap.org/lookup (OpenStreetMap relations)"
   },
   "osm-freguesias.geojson.gz": {
    "downloaded": "2026-10-26",
    "licence": "ODbL (© OpenStreetMap contributors)",
-   "note": "admin_level 8 relations named like an INE unit, inside Portugal; OSM planet of December 2016 (osm-boundaries export)",
-   "url": "https://raw.githubusercontent.com/missinglink/osm-boundaries/master/data/"
+   "note": "admin_level 8, ref:ine = DICOFRE; current OSM, found via Nominatim search; OSM source tag: DGT - CAOP 2022",
+   "url": "https://nominatim.openstreetmap.org/lookup (OpenStreetMap relations)"
   }
  }
 }
