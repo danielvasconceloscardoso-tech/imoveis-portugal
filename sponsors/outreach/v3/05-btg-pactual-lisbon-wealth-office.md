@@ -1,6 +1,6 @@
-# S162 · BTG Pactual (Lisbon wealth office) · PT
+# S166 · BTG Pactual (Lisbon wealth office) · PT
 
-Draft only, not sent (prompt 15 §2). Evidence: see S162 in sponsors/pipeline.csv. Log touches in its touch1_date, touch2_date, touch3_date columns.
+Draft only, not sent (prompt 15 §2). Evidence: see S166 in sponsors/pipeline.csv. Log touches in its touch1_date, touch2_date, touch3_date columns.
 
 ## Touch 1 · email · day 0
 

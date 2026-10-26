@@ -134,6 +134,9 @@ Status: To do · Doing · Blocked · Done
 | 21d | Dossiers: switch on sales once D4 exists (invoicing, OSS VAT, Stripe Payment Links in config.dossiers); confirm the express-consent wording for immediate delivery (DL 24/2014, art. 17.º) and the Lei 49/2004 reference (DRE did not render here) | Daniel, Operator | Blocked: D4 | 2026-11-25 |
 | 21e | Journey answers left to a partner (content/journeys/UNVERIFIED.md): France's side of the treaty since 2016, Israel on gains, bank account for cash purchases, home-bank financing (LU, IL) | Daniel | To do | 2026-11-13 |
 | 21f | Brochure screenshots are in English; FR and PT screenshots before the first French or Portuguese send (ops/BROCHURE.md) | CTO | To do | 2026-11-06 |
+| 8x | Ask DGT in writing whether CAOP boundaries may be used commercially (licensed map embeds); until then the map uses OpenStreetMap boundaries | Operator | To do | 2026-11-06 |
+
+| 8y | Decide whether the map and data tools may be licensed to real-estate agencies (conflicts with D9; options in CEO chat 26 Oct) | Operator | To do | 2026-10-30 |
 
 ## Last session
 
