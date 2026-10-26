@@ -52,7 +52,7 @@ It uses the path's existing logic; nothing new behind it.
 | --- | --- | --- |
 | 1 | Hero film and path bar | |
 | 2 | What we are | One large photograph beside it |
-| 3 | The map | Framed like a feature: the frozen v1 component, restyled around it, not inside it |
+| 3 | The map | Full-bleed, never in a box: see "The map on the home page" below |
 | 4 | Three places: Lisbon, Porto, the coast | Equal cards: a photograph, one line, a link to the map area |
 | 5 | Buy and Sell | Two large cards |
 | 6 | The questions people ask most | Five at most, each opening its answer |
@@ -60,6 +60,18 @@ It uses the path's existing logic; nothing new behind it.
 | 8 | Ten years of official prices | One line and one chart |
 | 9 | The newsletter | The email field and one button |
 | 10 | Footer | Columns (Buy, Sell, Map, Questions, Partners), the six editions, the three languages, social links, legal pages |
+
+**The map on the home page** (operator, 27 Oct: "the map in a box does not give me the Claridge's coziness or prestige"):
+1. **A showpiece, like a photograph.** It runs edge to edge, about 85% of the screen height on desktop and 70% on mobile. No frame, border, card, toolbar panel or grey box: Portugal floats on the page's own background, with a soft shadow under the 3D relief.
+2. **Warm and calm.** A warm paper tone instead of cold white. Our green in soft steps. Place names in the serif, only the main ones until the reader zooms.
+3. **Almost no controls.** One quiet line over the map: the budget field in the reader's currency and nothing else. Every other filter, the search and the metric switch live on the full map page (/mapa), reached by "See the full map".
+4. **Slow arrival.** When the section scrolls into view, the camera glides once from the Atlantic onto the coast and settles on Portugal; reduced motion gets the still view.
+5. **On hover or tap,** the place card opens as a quiet overlay with a photograph of the place (once licensed photos are in), its price and its ten-year line, then "See it on the map".
+6. **Scope:**
+   - Change only the home page's presentation: container, camera start, which controls show, colours.
+   - The full map page keeps every tool and the 308/308 click test.
+   - The frozen v1 is untouched.
+   - Send desktop and mobile screenshots and a 15-second recording of the section.
 
 **No team or partner panel on the home page.** "Your team for this purchase" stays inside the path stations only (D54).
 
