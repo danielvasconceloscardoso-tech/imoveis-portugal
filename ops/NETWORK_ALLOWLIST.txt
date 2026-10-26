@@ -337,3 +337,7 @@ huggingface.co
 *.hf.co
 musopen.org
 *.musopen.org
+maybourne.com
+*.maybourne.com
+claridges.co.uk
+*.claridges.co.uk
