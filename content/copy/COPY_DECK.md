@@ -5607,3 +5607,303 @@ Prompt 28 §2b (D54): the qualified summary that goes with a partner enquiry (in
 - FR: Les logements
 
 Prompt 28 §2 (D53): the partner showcase page and its home detail (partners only on the site; each private demo shows its own developer).
+
+## home2
+
+Design v2 home (prompt 32, D59). Every block: one to three sentences, at most 45 words, one action. Proposal, see design/COPY_V2.md.
+
+### h1.lu
+- PT: Uma casa em Portugal, sem sair do Luxemburgo.
+- EN: A home in Portugal, without leaving Luxembourg.
+- FR: Une maison au Portugal, sans quitter le Luxembourg.
+
+### h1.fr
+- PT: Uma casa em Portugal, sem sair de França.
+- EN: A home in Portugal, without leaving France.
+- FR: Une maison au Portugal, sans quitter la France.
+
+### h1.ch
+- PT: Uma casa em Portugal, sem sair da Suíça.
+- EN: A home in Portugal, without leaving Switzerland.
+- FR: Une maison au Portugal, sans quitter la Suisse.
+
+### h1.br
+- PT: Uma casa em Portugal, sem sair do Brasil.
+- EN: A home in Portugal, without leaving Brazil.
+- FR: Une maison au Portugal, sans quitter le Brésil.
+
+### h1.us
+- PT: Uma casa em Portugal, sem sair dos EUA.
+- EN: A home in Portugal, without leaving the US.
+- FR: Une maison au Portugal, sans quitter les États-Unis.
+
+### h1.il
+- PT: Uma casa em Portugal, sem sair de Israel.
+- EN: A home in Portugal, without leaving Israel.
+- FR: Une maison au Portugal, sans quitter Israël.
+
+### lede
+- PT: Preços oficiais de 308 concelhos, o custo real de cada compra e quem trata de cada passo.
+- EN: Official prices for 308 municipalities, the real cost of each purchase and who handles each step.
+- FR: Les prix officiels de 308 communes, le coût réel de chaque achat et qui s'occupe de chaque étape.
+
+### bar.live
+- PT: Vivo
+- EN: I live in
+- FR: J'habite
+
+### bar.in.lu
+- PT: no Luxemburgo
+- EN: Luxembourg
+- FR: au Luxembourg
+
+### bar.in.fr
+- PT: em França
+- EN: France
+- FR: en France
+
+### bar.in.ch
+- PT: na Suíça
+- EN: Switzerland
+- FR: en Suisse
+
+### bar.in.br
+- PT: no Brasil
+- EN: Brazil
+- FR: au Brésil
+
+### bar.in.us
+- PT: nos Estados Unidos
+- EN: the United States
+- FR: aux États-Unis
+
+### bar.in.il
+- PT: em Israel
+- EN: Israel
+- FR: en Israël
+
+### bar.want
+- PT: Quero
+- EN: I want to
+- FR: Je veux
+
+### bar.buy
+- PT: comprar
+- EN: buy
+- FR: acheter
+
+### bar.sell
+- PT: vender
+- EN: sell
+- FR: vendre
+
+### bar.budget
+- PT: Orçamento
+- EN: Budget
+- FR: Budget
+
+### bar.value
+- PT: Valor da casa
+- EN: Home value
+- FR: Valeur du bien
+
+### bar.go
+- PT: Começar
+- EN: Start
+- FR: Commencer
+
+### about.h
+- PT: Primeiro a informação, depois os parceiros.
+- EN: Information first, partners second.
+- FR: D'abord l'information, ensuite les partenaires.
+
+### about.p
+- PT: Somos uma publicação para quem vive fora e quer comprar ou vender em Portugal. Cada número tem a sua fonte oficial. Quando precisar de alguém, apresentamos um parceiro licenciado.
+- EN: We are a publication for people who live abroad and want to buy or sell in Portugal. Every figure carries its official source. When you need someone, we introduce a licensed partner.
+- FR: Nous sommes une publication pour ceux qui vivent à l'étranger et veulent acheter ou vendre au Portugal. Chaque chiffre porte sa source officielle. Quand il vous faut quelqu'un, nous présentons un partenaire agréé.
+
+### about.a
+- PT: Como trabalhamos
+- EN: How we work
+- FR: Notre méthode
+
+### map.h
+- PT: Quanto compra o seu orçamento, concelho a concelho.
+- EN: What your budget buys, municipality by municipality.
+- FR: Ce que votre budget achète, commune par commune.
+
+### map.p
+- PT: Escreva um valor e veja os metros quadrados em cada um dos 308 concelhos. Medianas do INE, 2.º trimestre de 2026.
+- EN: Enter an amount and see the square metres in each of the 308 municipalities. INE medians, second quarter of 2026.
+- FR: Indiquez un montant et voyez les mètres carrés dans chacune des 308 communes. Médianes de l'INE, deuxième trimestre 2026.
+
+### map.a
+- PT: Ver o mapa
+- EN: See the map
+- FR: Voir la carte
+
+### places.h
+- PT: Lisboa, Porto e a costa.
+- EN: Lisbon, Porto and the coast.
+- FR: Lisbonne, Porto et la côte.
+
+### places.lisboa.n
+- PT: Lisboa
+- EN: Lisbon
+- FR: Lisbonne
+
+### places.porto.n
+- PT: Porto
+- EN: Porto
+- FR: Porto
+
+### places.coast.n
+- PT: A costa
+- EN: The coast
+- FR: La côte
+
+### places.one
+- PT: Mediana de {v} por metro quadrado.
+- EN: A median of {v} per square metre.
+- FR: Médiane de {v} le mètre carré.
+
+### places.coast
+- PT: Medianas entre {a} e {b} por metro quadrado, em Cascais, Grândola e Loulé.
+- EN: Medians between {a} and {b} per square metre in Cascais, Grândola and Loulé.
+- FR: Médianes entre {a} et {b} le mètre carré à Cascais, Grândola et Loulé.
+
+### places.a
+- PT: Ver no mapa
+- EN: See on the map
+- FR: Voir sur la carte
+
+### paths.h
+- PT: Comprar ou vender, um passo de cada vez.
+- EN: Buying or selling, one step at a time.
+- FR: Acheter ou vendre, une étape à la fois.
+
+### buy.h
+- PT: Comprar
+- EN: Buy
+- FR: Acheter
+
+### buy.p
+- PT: Nove passos, cada um com o custo real e os documentos de que precisa.
+- EN: Nine steps, each with its real cost and the documents you need.
+- FR: Neuf étapes, chacune avec son coût réel et les documents nécessaires.
+
+### buy.a
+- PT: Abrir o percurso de compra
+- EN: Open the buying path
+- FR: Ouvrir le parcours d'achat
+
+### sell.h
+- PT: Vender
+- EN: Sell
+- FR: Vendre
+
+### sell.p
+- PT: Sete passos, com os impostos e o que pode tratar à distância.
+- EN: Seven steps, with the taxes and what you can do from abroad.
+- FR: Sept étapes, avec les impôts et ce que vous pouvez faire à distance.
+
+### sell.a
+- PT: Abrir o percurso de venda
+- EN: Open the selling path
+- FR: Ouvrir le parcours de vente
+
+### qa.h
+- PT: As perguntas que mais nos fazem.
+- EN: The questions we are asked most.
+- FR: Les questions qu'on nous pose le plus.
+
+### qa.a
+- PT: Ver todas as perguntas
+- EN: See all questions
+- FR: Voir toutes les questions
+
+### photos.h
+- PT: Portugal em seis fotografias.
+- EN: Portugal in six photographs.
+- FR: Le Portugal en six photographies.
+
+### prices.h
+- PT: Dez anos de preços oficiais.
+- EN: Ten years of official prices.
+- FR: Dix ans de prix officiels.
+
+### prices.p
+- PT: O metro quadrado vendido em Portugal valia {from} em 2016 e {to} em 2026.
+- EN: A square metre sold in Portugal was {from} in 2016 and {to} in 2026.
+- FR: Le mètre carré vendu au Portugal valait {from} en 2016 et {to} en 2026.
+
+### prices.a
+- PT: Ver preços e rendas
+- EN: See prices and rents
+- FR: Voir les prix et les loyers
+
+### nl.h
+- PT: Uma carta por semana, à quinta-feira.
+- EN: One letter a week, on Thursdays.
+- FR: Une lettre par semaine, le jeudi.
+
+### nl.p
+- PT: As regras que mudaram, os preços novos do INE e o custo completo de uma casa. Grátis.
+- EN: The rules that changed, new INE prices and the full cost of one home. Free.
+- FR: Les règles qui ont changé, les nouveaux prix de l'INE et le coût complet d'un bien. Gratuit.
+
+### nl.email
+- PT: O seu email
+- EN: Your email
+- FR: Votre e-mail
+
+### nl.consent
+- PT: Aceito receber a newsletter. Posso cancelar em qualquer email.
+- EN: I agree to receive the newsletter. I can unsubscribe from any email.
+- FR: J'accepte de recevoir la newsletter. Je peux me désabonner depuis chaque e-mail.
+
+### nl.a
+- PT: Inscrever-me
+- EN: Sign up
+- FR: M'inscrire
+
+### ft.buy
+- PT: Comprar
+- EN: Buy
+- FR: Acheter
+
+### ft.sell
+- PT: Vender
+- EN: Sell
+- FR: Vendre
+
+### ft.map
+- PT: Mapa
+- EN: Map
+- FR: Carte
+
+### ft.qa
+- PT: Perguntas
+- EN: Questions
+- FR: Questions
+
+### ft.partners
+- PT: Parceiros
+- EN: Partners
+- FR: Partenaires
+
+### ft.editions
+- PT: Edições
+- EN: Editions
+- FR: Éditions
+
+### ft.langs
+- PT: Línguas
+- EN: Languages
+- FR: Langues
+
+### ft.legal
+- PT: Informação legal
+- EN: Legal
+- FR: Mentions
+

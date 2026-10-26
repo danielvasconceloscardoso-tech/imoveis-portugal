@@ -167,6 +167,52 @@ if (existsSync(blogDir)) for (const f of readdirSync(blogDir).filter((x) => /\.(
   for (const [label, text] of [["title", fm.title || ""], ["description", fm.description || ""], ["short answer", fm.tldr || ""], ["body", m[2]]]) checkText(file, label, text);
   for (const h of m[2].matchAll(/^## (.+)$/gm)) if (/\?\s*$/.test(h[1])) err(file, `heading "${h[1]}" is a question (VOICE.md)`);
 }
+// Design v2 copy (prompt 32, D59): the "home2" blocks of the copy deck, in PT, EN and FR. Banned words and shapes,
+// sentences of at most 25 words, blocks of at most 45, headlines of at most 8 words that are statements without a
+// colon. "Percurso" and "parcours" stay allowed: they are the navigation's names for the path (D52).
+const V2_WORDS = [/\bdiscover/i, /\bexplor/i, /\bunlock/i, /\bembark/i, /\bjourney/i, /\belevat/i, /\bcurated\b/i, /\btailored\b/i, /\bbespoke\b/i, /\bseamless/i,
+  /\beffortless/i, /\bunparalleled\b/i, /world-class/i, /\bnestled\b/i, /\bboasts?\b/i, /dream home/i, /hidden gem/i, /\bluxur/i, /\bpremium\b/i, /\bexclusiv/i,
+  /\bprivate\b/i, /\bparadise\b/i, /\bpassionate\b/i,
+  /\bdescobr/i, /\bdescubr/i, /\bexplor/i, /\bdesbloque/i, /\bembarc/i, /\bjornada/i, /\belev(ar|e|ado)\b/i, /\bà medida\b/i, /\bpersonalizad/i, /sem esforço/i, /sem complica/i,
+  /\bincompar[áa]vel/i, /\binigual[áa]vel/i, /classe mundial/i, /\baninhad/i, /casa d[eo]s? sonho/i, /joia escondida/i, /\bluxo\b/i, /\bluxuos/i, /\bexclusiv/i, /\bprivad[ao]/i, /\bpara[íi]so/i, /\bapaixonad/i,
+  /\bd[ée]couvr/i, /\bexplor/i, /\bd[ée]bloqu/i, /\bembarqu/i, /\b[ée]lev(er|ez|é)\b/i, /sur[- ]mesure/i, /sans effort/i, /\bin[ée]gal[ée]/i, /classe mondiale/i, /\bnich[ée]/i,
+  /maison de r[êe]ve/i, /joyau cach[ée]/i, /\bluxe\b/i, /\bluxueu/i, /\bexclusi[fv]/i, /\bpriv[ée]e?s?\b/i, /\bparadis\b/i, /\bpassionn[ée]/i];
+const V2_SHAPES = [/whether you'?re/i, /^from .+ to /i, /\bimagine\b/i, /\bimaginez\b/i, /not just .+ but/i, /more than an? /i, /in today'?s/i,
+  /\bquer seja\b/i, /^de .+ a /i, /n[ãa]o apenas/i, /mais do que um/i, /nos dias de hoje/i, /que vous soyez/i, /^de .+ à /i, /pas seulement/i, /plus qu'une? /i, /de nos jours/i,
+  /!/, /—/, /\p{Extended_Pictographic}/u];
+{
+  const deck = readFileSync(join(root, "content/copy/COPY_DECK.md"), "utf8"), file = join(root, "content/copy/COPY_DECK.md");
+  const sec = deck.split(/^## home2\s*$/m)[1]?.split(/^## /m)[0] ?? "";
+  let block = "";
+  for (const line of sec.split("\n")) {
+    const h = line.match(/^### (\S+)/), t = line.match(/^- (PT|EN|FR): (.*)$/);
+    if (h) { block = h[1]; continue; }
+    if (!t || !block) continue;
+    const [, L, text] = t, where = `home2.${block} ${L}`;
+    for (const re of V2_WORDS) if (re.test(text)) err(file, `${where}: banned word ${re} in "${text}"`);
+    for (const sent of text.split(/(?<=[.!?])\s+/)) {
+      for (const re of V2_SHAPES) if (re.test(sent.trim())) err(file, `${where}: banned shape ${re} in "${sent}"`);
+      if (words(sent) > 25) err(file, `${where}: sentence of ${words(sent)} words (max 25)`);
+    }
+    if (words(text) > 45) err(file, `${where}: block of ${words(text)} words (max 45)`);
+    if (/(^|\.)h(1\.\w+)?$/.test(block)) {
+      if (words(text) > 8) err(file, `${where}: headline of ${words(text)} words (max 8)`);
+      if (/\?/.test(text) || /:/.test(text)) err(file, `${where}: a headline is a statement without a colon`);
+    }
+    if (/\?/.test(text) && !/^qa\./.test(block)) err(file, `${where}: rhetorical question`);
+  }
+  // One action per block on the built home: each section of the design v2 home, its cards counted as their own blocks.
+  const built = join(root, "site/dist/pt/lu/index.html");
+  if (existsSync(built) && readFileSync(built, "utf8").includes('class="h2-hero"')) {
+    const html = readFileSync(built, "utf8");
+    for (const m of html.matchAll(/<section class="h2-sec[^"]*"[^>]*>([\s\S]*?)<\/section>/g)) {
+      const outside = m[1].replace(/<(article|a) class="h2-(card|door)"[\s\S]*?<\/\1>/g, "");
+      const acts = (outside.match(/class="h2-(btn|link)[^"]*"/g) || []).length;
+      if (acts > 1) err(built, `a home section has ${acts} actions (one per block): ${m[1].replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").slice(0, 60)}`);
+      for (const c of m[1].matchAll(/<(article|a) class="h2-(card|door)"[\s\S]*?<\/\1>/g)) if ((c[0].match(/class="h2-(btn|link)/g) || []).length > 1) err(built, "a card has more than one action");
+    }
+  }
+}
 console.log(`checked ${faqs} FAQ files, ${pieces} inbox pieces and ${posts} blog articles against ${factIds.size} facts`);
 if (errors.length) {
   console.log(errors.map((e) => `ERROR ${e}`).join("\n"));

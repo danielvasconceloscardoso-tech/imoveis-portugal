@@ -12,8 +12,8 @@ import CountryBar from "../components/CountryBar.astro";
 
 type Sticky = { href: string; label: string } | null;
 // `paths` overrides the URL per language for pages below a page key (e.g. one calculator under "sims").
-interface Props { lang: Lang; ed: EdCode; page: PageKey | "home"; title: string; description: string; sticky?: Sticky; paths?: Record<Lang, string>; noindex?: boolean; canonicalUrl?: string; ogType?: string; ogImage?: string; alternates?: Record<Lang, string>; }
-const { lang, ed, page, title, description, paths, noindex = false, ogType = "website", ogImage } = Astro.props;
+interface Props { lang: Lang; ed: EdCode; page: PageKey | "home"; title: string; description: string; sticky?: Sticky; d2?: boolean; paths?: Record<Lang, string>; noindex?: boolean; canonicalUrl?: string; ogType?: string; ogImage?: string; alternates?: Record<Lang, string>; }
+const { lang, ed, page, title, description, paths, noindex = false, ogType = "website", ogImage, d2 = false } = Astro.props;
 const urlFor = (l: Lang) => paths ? paths[l] : pathFor(l, ed, page);
 const host = config.domainMode === "primary" ? config.primaryDomain : EDITIONS[ed].domain;
 const canonical = Astro.props.canonicalUrl ?? `https://${host}${urlFor(lang)}`;
@@ -59,7 +59,7 @@ import DemoBar from "../components/DemoBar.astro";
     {page === "home" && <script type="application/ld+json" set:html={JSON.stringify({ "@context": "https://schema.org", "@type": "Organization", name: "Imóveis Portugal", url: `https://${host}/`, email: config.contactEmail, description: description, areaServed: ["LU", "FR", "CH", "BR", "US", "IL", "PT"] })} />}
     <slot name="head" />
   </head>
-  <body data-ed={ed} class={sticky ? "has-sticky" : undefined}>
+  <body data-ed={ed} class={[sticky && !d2 ? "has-sticky" : "", d2 ? "d2" : ""].filter(Boolean).join(" ") || undefined}>
     <a class="skip" href="#main">{c("common.skip", lang)}</a>
     <header class="hd">
       <div class="frame">
@@ -98,6 +98,26 @@ import DemoBar from "../components/DemoBar.astro";
     <main id="main">
       <slot />
     </main>
+    {d2 ? (
+    <footer class="ft2">
+      <div class="ft2-in">
+        <a class="ft2-word" href={pathFor(lang, ed, "home")}>Imóveis Portugal</a>
+        <div class="ft2-cols">
+          <div><p class="ft2-k">{c("home2.ft.buy", lang)}</p><ul><li><a href={`${pathFor(lang, ed, "journey")}?door=buy`}>{c("path.door.buy", lang)}</a></li><li><a href={pathFor(lang, ed, "casa")}>{c("common.nav.casa", lang)}</a></li><li><a href={pathFor(lang, ed, "sims")}>{c("common.nav.sims", lang)}</a></li><li><a href={pathFor(lang, ed, "guide")}>{c("common.nav.guide", lang)}</a></li></ul></div>
+          <div><p class="ft2-k">{c("home2.ft.sell", lang)}</p><ul><li><a href={`${pathFor(lang, ed, "journey")}?door=sell`}>{c("path.door.sell", lang)}</a></li><li><a href={pathFor(lang, ed, "data")}>{c("common.nav.data", lang)}</a></li></ul></div>
+          <div><p class="ft2-k">{c("home2.ft.map", lang)}</p><ul><li><a href={pathFor(lang, ed, "map")}>{c("common.nav.map", lang)}</a></li><li><a href={pathFor(lang, ed, "data")}>{c("common.nav.data", lang)}</a></li></ul></div>
+          <div><p class="ft2-k">{c("home2.ft.qa", lang)}</p><ul><li><a href={pathFor(lang, ed, "faq")}>{c("common.nav.faq", lang)}</a></li><li><a href={pathFor(lang, ed, "blog")}>{c("common.nav.blog", lang)}</a></li><li><a href={pathFor(lang, ed, "how")}>{c("common.nav.how", lang)}</a></li></ul></div>
+          <div><p class="ft2-k">{c("home2.ft.partners", lang)}</p><ul><li><a href={pathFor(lang, ed, "ours")}>{c("common.nav.ours", lang)}</a></li><li><a href={pathFor(lang, ed, "partners")}>{c("common.nav.partners", lang)}</a></li></ul></div>
+        </div>
+        <div class="ft2-row">
+          <p><span class="ft2-k">{c("home2.ft.editions", lang)}</span> {ED_ORDER.map((x, i) => <>{i > 0 && " · "}<a href={pathFor(lang, x, page)} aria-current={x === ed ? "true" : undefined}>{edName(x, lang)}</a></>)}</p>
+          <p><span class="ft2-k">{c("home2.ft.langs", lang)}</span> {LANGS.map((l, i) => <>{i > 0 && " · "}<a href={urlFor(l)} data-lang={l} lang={HTML_LANG[l]}>{LANG_NAME[l]}</a></>)}</p>
+        </div>
+        <p class="ft2-small">{DISCLAIMER[lang]}</p>
+        <p class="ft2-small">{c("common.foot.agency", lang)}: <a href={config.agency.website} rel="noopener">{config.agency.name}</a>, AMI {config.agency.ami}. <a href={pathFor(lang, ed, "privacy")}>{c("common.privacy", lang)}</a> · <a href={pathFor(lang, ed, "legal")}>{c("common.foot.legal", lang)}</a> · © 2026 Imóveis Portugal</p>
+      </div>
+    </footer>
+    ) : (
     <footer class="ft">
       <div class="frame">
         <a class="word" href={pathFor(lang, ed, "home")}>Imóveis Portugal</a>
@@ -134,7 +154,8 @@ import DemoBar from "../components/DemoBar.astro";
         <p class="legal">{c("common.foot.agency", lang)}: <a href={config.agency.website} rel="noopener">{config.agency.name}</a>, AMI {config.agency.ami}, {c("common.gold", lang)}. © 2026 Imóveis Portugal.</p>
       </div>
     </footer>
-    {sticky && <div class="sticky" id="sticky"><a class="btn" href={sticky.href}>{sticky.label}</a></div>}
+    )}
+    {sticky && !d2 && <div class="sticky" id="sticky"><a class="btn" href={sticky.href}>{sticky.label}</a></div>}
     <script is:inline define:vars={{ ed, lang }}>
       try {
         localStorage.setItem("ip-ed", ed);

@@ -1,0 +1,204 @@
+---
+// Design v2 home (prompt 32, D59, "the Claridge's pass"): the film or photograph with the path bar, then one idea per
+// section, one to three sentences and one action each, a lot of space. Every feature stays as in v1: the map is the
+// same component, the path bar opens the same path. Wording: content/copy/COPY_DECK.md, blocks "home2.*".
+import "@fontsource-variable/manrope/wght.css";
+import "@fontsource-variable/playfair-display/wght.css";
+import "../styles/d2.css";
+import MapExplorer from "./MapExplorer.astro";
+import { ED_ORDER, HTML_LANG, eur, pathFor, type EdCode, type Lang } from "../i18n";
+import { Sources, EDITION_CUR, RATE, fmtDate, homeExample } from "../lib/content";
+import { c } from "../lib/copy";
+import { config } from "../config";
+import { PRICES, LAST } from "../lib/prices";
+import { lineChart } from "../lib/chart";
+
+interface Props { lang: Lang; ed: EdCode; }
+const { lang, ed } = Astro.props;
+const src = new Sources();
+const e = (n: number) => eur(n, lang);
+const sup = (ns: number[]) => ns.map((i) => `<a class="sup" href="#fonte-${i}">${i}</a>`).join("");
+// The reader's currency for the budget in the path bar; the path itself works in euros.
+const cur = EDITION_CUR[ed] ?? "EUR", fx = cur === "EUR" ? null : RATE(cur);
+const nMap = src.n("ine-m2-2026q2"), nHist = src.n("ine-m2-history");
+const m2 = (k: string) => PRICES.munis[k].m2[LAST] as number;
+const coast = ["cascais", "grandola", "loule"].map(m2);
+const places = [
+  { k: "lisboa", img: "lisboa-eletrico-28", line: c("home2.places.one", lang, { v: e(m2("lisboa")) }), href: `${pathFor(lang, ed, "map")}?place=lisboa` },
+  { k: "porto", img: "porto-ribeira-rabelo", line: c("home2.places.one", lang, { v: e(m2("porto")) }), href: `${pathFor(lang, ed, "map")}?place=porto` },
+  { k: "coast", img: "", line: c("home2.places.coast", lang, { a: e(Math.min(...coast)), b: e(Math.max(...coast)) }), href: `${pathFor(lang, ed, "map")}?place=cascais` },
+];
+// Five questions, each opening its answer (the same answers and sources as the FAQ).
+const ex = homeExample();
+const emigrant = ed === "lu" || ed === "fr" || ed === "ch";
+const qa = [
+  { q: c("home.qa.away.q", lang), a: c("home.qa.away.a", lang, { where: c(`home.where.${ed}`, lang) }), s: [src.n("pt-poa-apostille")] },
+  { q: c("home.qa.total.q", lang), a: c("home.qa.total.a", lang, { price: e(ex.price), total: e(ex.total) }), s: [src.n("pt-imt-nonresident-flat"), src.n("pt-is-purchase"), src.n("pt-casa-pronta-fees")] },
+  { q: c("home.qa.bank.q", lang), a: c("home.qa.bank.a", lang), s: [src.n("pt-ltv-limits")] },
+  emigrant ? { q: c("home.qa.inherit.q", lang), a: c("home.qa.inherit.a", lang), s: [src.n("pt-is-inheritance-exempt")] }
+    : { q: c("home.qa.live.q", lang), a: c("home.qa.live.a", lang), s: [src.n("pt-ari-realestate-ended"), src.n("pt-visa-own-income")] },
+  { q: c("home.qa.tax.q", lang), a: c("home.qa.tax.a", lang), s: [] as number[] },
+];
+const ptP = PRICES.regions.PT;
+const chart = lineChart(PRICES.quarters, [{ label: "Portugal", values: ptP.m2 }, { label: PRICES.munis.lisboa.n, values: PRICES.munis.lisboa.m2 }, { label: PRICES.munis.porto.n, values: PRICES.munis.porto.m2 }],
+  { breakAt: PRICES.break, breakLabel: c("prices.break", lang), fmt: (v) => new Intl.NumberFormat(HTML_LANG[lang]).format(v), h: 300 });
+const mosaic = ["lisboa-alfama-sao-vicente", "porto-ponte-luis-i-noite", "lisboa-praca-do-comercio", "porto-douro-entardecer", "lisboa-baixa-telhados", "lisboa-anoitecer-castelo"];
+const alts: Record<string, string> = { "lisboa-alfama-sao-vicente": "Alfama, Lisboa", "porto-ponte-luis-i-noite": "Ponte Luís I, Porto", "lisboa-praca-do-comercio": "Praça do Comércio, Lisboa", "porto-douro-entardecer": "Douro, Porto", "lisboa-baixa-telhados": "Baixa, Lisboa", "lisboa-anoitecer-castelo": "Castelo de São Jorge, Lisboa", "lisboa-eletrico-28": "Elétrico 28, Lisboa", "porto-ribeira-rabelo": "Ribeira, Porto", "lisboa-alfama-telhados": "Alfama, Lisboa" };
+const nl = config.forms.newsletter[lang];
+const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("home.subscribe.subject", lang)} (${ed} · ${lang})`)}`;
+---
+<section class="h2-hero" aria-labelledby="h2-h1">
+  <picture class="h2-hero-media">
+    <source type="image/avif" srcset={`/img/v2/porto-douro-entardecer-640.avif 640w, /img/v2/porto-douro-entardecer-1024.avif 1024w, /img/v2/porto-douro-entardecer-1600.avif 1600w`} sizes="100vw" />
+    <img src="/img/v2/porto-douro-entardecer-1600.webp" srcset="/img/v2/porto-douro-entardecer-640.webp 640w, /img/v2/porto-douro-entardecer-1024.webp 1024w, /img/v2/porto-douro-entardecer-1600.webp 1600w" sizes="100vw" width="1600" height="900" alt="" fetchpriority="high" />
+  </picture>
+  <div class="h2-hero-text">
+    <h1 id="h2-h1">{c(`home2.h1.${ed}`, lang)}</h1>
+    <p>{c("home2.lede", lang)}</p>
+  </div>
+  <form class="h2-bar" action={pathFor(lang, ed, "journey")} method="get" data-bar data-rate={fx ? fx.rate : 1}>
+    <label class="h2-f"><span>{c("home2.bar.live", lang)}</span>
+      <select name="ed" data-ed>{ED_ORDER.map((x) => <option value={x} data-href={pathFor(lang, x, "journey")} selected={x === ed}>{c(`home2.bar.in.${x}`, lang)}</option>)}</select>
+    </label>
+    <label class="h2-f"><span>{c("home2.bar.want", lang)}</span>
+      <select name="door" data-door><option value="buy">{c("home2.bar.buy", lang)}</option><option value="sell">{c("home2.bar.sell", lang)}</option></select>
+    </label>
+    <label class="h2-f h2-f-amt"><span data-amt-label data-buy={c("home2.bar.budget", lang)} data-sell={c("home2.bar.value", lang)}>{c("home2.bar.budget", lang)}</span>
+      <span class="h2-amt"><input inputmode="numeric" autocomplete="off" data-amt aria-describedby="h2-cur" /><span id="h2-cur">{cur}</span></span>
+      <input type="hidden" name="budget" data-budget />
+    </label>
+    <button class="h2-go" type="submit">{c("home2.bar.go", lang)}</button>
+  </form>
+</section>
+
+<section class="h2-sec h2-about">
+  <div class="h2-split">
+    <div class="h2-text" data-reveal>
+      <h2>{c("home2.about.h", lang)}</h2>
+      <p>{c("home2.about.p", lang)}</p>
+      <a class="h2-btn" href={pathFor(lang, ed, "how")}>{c("home2.about.a", lang)}</a>
+    </div>
+    <picture class="h2-ph h2-ph-tall" data-reveal>
+      <source type="image/avif" srcset="/img/v2/lisboa-alfama-telhados-640.avif 640w, /img/v2/lisboa-alfama-telhados-1024.avif 1024w, /img/v2/lisboa-alfama-telhados-1600.avif 1600w" sizes="(min-width: 900px) 50vw, 100vw" />
+      <img src="/img/v2/lisboa-alfama-telhados-1024.webp" srcset="/img/v2/lisboa-alfama-telhados-640.webp 640w, /img/v2/lisboa-alfama-telhados-1024.webp 1024w, /img/v2/lisboa-alfama-telhados-1600.webp 1600w" sizes="(min-width: 900px) 50vw, 100vw" width="1024" height="1280" alt={alts["lisboa-alfama-telhados"]} loading="lazy" />
+    </picture>
+  </div>
+</section>
+
+<section class="h2-sec h2-band h2-map" aria-labelledby="h2-map">
+  <div class="h2-text h2-center" data-reveal>
+    <h2 id="h2-map">{c("home2.map.h", lang)}</h2>
+    <p>{c("home2.map.p", lang)}<Fragment set:html={sup([nMap])} /></p>
+  </div>
+  <div class="h2-mapframe" data-reveal><MapExplorer lang={lang} ed={ed} mode="home" /></div>
+  <p class="h2-center"><a class="h2-btn" href={pathFor(lang, ed, "map")}>{c("home2.map.a", lang)}</a></p>
+</section>
+
+<section class="h2-sec h2-places" aria-labelledby="h2-places">
+  <h2 id="h2-places" class="h2-center" data-reveal>{c("home2.places.h", lang)}</h2>
+  <div class="h2-cards3">
+    {places.map((p) => (
+      <article class="h2-card" data-reveal>
+        {p.img ? (
+          <picture class="h2-ph h2-ph-45">
+            <source type="image/avif" srcset={`/img/v2/${p.img}-640.avif 640w, /img/v2/${p.img}-1024.avif 1024w`} sizes="(min-width: 900px) 33vw, 100vw" />
+            <img src={`/img/v2/${p.img}-640.webp`} srcset={`/img/v2/${p.img}-640.webp 640w, /img/v2/${p.img}-1024.webp 1024w`} sizes="(min-width: 900px) 33vw, 100vw" width="640" height="800" alt={alts[p.img]} loading="lazy" />
+          </picture>
+        ) : (
+          <div class="h2-ph h2-ph-45 h2-ph-wait" role="img" aria-label={c(`home2.places.${p.k}.n`, lang)}><img src="/img/map-poster-1200.webp" alt="" loading="lazy" width="1200" height="1500" /></div>
+        )}
+        <h3>{c(`home2.places.${p.k}.n`, lang)}</h3>
+        <p>{p.line}<Fragment set:html={sup([nMap])} /></p>
+        <a class="h2-link" href={p.href}>{c("home2.places.a", lang)}</a>
+      </article>
+    ))}
+  </div>
+</section>
+
+<section class="h2-sec h2-band h2-paths" aria-labelledby="h2-paths">
+  <h2 id="h2-paths" class="h2-center" data-reveal>{c("home2.paths.h", lang)}</h2>
+  <div class="h2-cards2">
+    <a class="h2-door" href={`${pathFor(lang, ed, "journey")}?door=buy`} data-reveal>
+      <span class="h2-door-n">01</span><h3>{c("home2.buy.h", lang)}</h3><p>{c("home2.buy.p", lang)}</p><span class="h2-link">{c("home2.buy.a", lang)}</span>
+    </a>
+    <a class="h2-door" href={`${pathFor(lang, ed, "journey")}?door=sell`} data-reveal>
+      <span class="h2-door-n">02</span><h3>{c("home2.sell.h", lang)}</h3><p>{c("home2.sell.p", lang)}</p><span class="h2-link">{c("home2.sell.a", lang)}</span>
+    </a>
+  </div>
+</section>
+
+<section class="h2-sec h2-qa" aria-labelledby="h2-qa">
+  <div class="h2-narrow">
+    <h2 id="h2-qa" data-reveal>{c("home2.qa.h", lang)}</h2>
+    {qa.map((x) => (
+      <details class="h2-q"><summary>{x.q}</summary><p>{x.a}<Fragment set:html={sup(x.s)} /></p></details>
+    ))}
+    <p><a class="h2-btn" href={pathFor(lang, ed, "faq")}>{c("home2.qa.a", lang)}</a></p>
+  </div>
+</section>
+
+<section class="h2-mosaic" aria-label={c("home2.photos.h", lang)}>
+  {mosaic.map((m, i) => (
+    <picture class={`h2-m h2-m${i + 1}`} data-reveal>
+      <source type="image/avif" srcset={`/img/v2/${m}-640.avif 640w, /img/v2/${m}-1024.avif 1024w, /img/v2/${m}-1600.avif 1600w`} sizes={i === 0 || i === 3 ? "(min-width: 900px) 60vw, 100vw" : "(min-width: 900px) 40vw, 100vw"} />
+      <img src={`/img/v2/${m}-1024.webp`} srcset={`/img/v2/${m}-640.webp 640w, /img/v2/${m}-1024.webp 1024w, /img/v2/${m}-1600.webp 1600w`} sizes={i === 0 || i === 3 ? "(min-width: 900px) 60vw, 100vw" : "(min-width: 900px) 40vw, 100vw"} width="1024" height="683" alt={alts[m]} loading="lazy" />
+    </picture>
+  ))}
+</section>
+
+<section class="h2-sec h2-prices" aria-labelledby="h2-prices">
+  <div class="h2-narrow" data-reveal>
+    <h2 id="h2-prices">{c("home2.prices.h", lang)}</h2>
+    <p>{c("home2.prices.p", lang, { from: e(ptP.m2[0]!), to: e(ptP.m2[LAST]!) })}<Fragment set:html={sup([nHist])} /></p>
+  </div>
+  <p class="small pc-legend h2-center"><span class="k0">Portugal</span> · <span class="k1">{PRICES.munis.lisboa.n}</span> · <span class="k2">{PRICES.munis.porto.n}</span></p>
+  <figure class="h2-chart" data-reveal set:html={chart} />
+  <p class="h2-center"><a class="h2-btn" href={pathFor(lang, ed, "data")}>{c("home2.prices.a", lang)}</a></p>
+</section>
+
+<section class="h2-sec h2-dark h2-nl" id="subscrever" aria-labelledby="h2-nl">
+  <div class="h2-narrow" data-reveal>
+    <h2 id="h2-nl">{c("home2.nl.h", lang)}</h2>
+    <p>{c("home2.nl.p", lang)}</p>
+    {nl ? (
+      <div class="form-box"><iframe src={nl} title={c("home2.nl.h", lang)} loading="lazy" style="min-height:200px"></iframe></div>
+    ) : (
+      <form class="h2-nlform" action={mail} method="post" enctype="text/plain">
+        <label class="h2-email"><span class="vh">{c("home2.nl.email", lang)}</span><input type="email" name="email" required placeholder={c("home2.nl.email", lang)} autocomplete="email" /></label>
+        <button class="h2-btn h2-btn-light" type="submit">{c("home2.nl.a", lang)}</button>
+        <label class="h2-consent"><input type="checkbox" required /> <span>{c("home2.nl.consent", lang)} <a href={pathFor(lang, ed, "privacy")}>{c("common.privacy", lang)}</a></span></label>
+      </form>
+    )}
+  </div>
+</section>
+
+<section class="h2-sources" aria-labelledby="fontes">
+  <div class="h2-narrow">
+    <h2 id="fontes">{c("common.sources", lang)}</h2>
+    <ol>{src.list.map((s, i) => <li id={`fonte-${i + 1}`}><a href={s.url} rel="noopener">{s.title}</a>{s.checked && `, ${c("common.checked", lang, { date: fmtDate(lang, s.checked) })}`}.</li>)}</ol>
+  </div>
+</section>
+
+<script>
+  // The path bar: the country picks the edition's path, the amount goes in euros, Start opens the path at its station.
+  const f = document.querySelector<HTMLFormElement>("[data-bar]");
+  if (f) {
+    const ed = f.querySelector<HTMLSelectElement>("[data-ed]")!, door = f.querySelector<HTMLSelectElement>("[data-door]")!;
+    const amt = f.querySelector<HTMLInputElement>("[data-amt]")!, out = f.querySelector<HTMLInputElement>("[data-budget]")!, lab = f.querySelector<HTMLElement>("[data-amt-label]")!;
+    const rate = Number(f.dataset.rate) || 1;
+    door.addEventListener("change", () => { lab.textContent = door.value === "sell" ? lab.dataset.sell! : lab.dataset.buy!; });
+    amt.addEventListener("input", () => { const n = Number(amt.value.replace(/\D/g, "")); amt.value = n ? new Intl.NumberFormat(document.documentElement.lang).format(n) : ""; });
+    f.addEventListener("submit", () => {
+      f.action = ed.selectedOptions[0].dataset.href ?? f.action; ed.disabled = true;
+      const n = Number(amt.value.replace(/\D/g, "")); if (n) out.value = String(Math.round(n / rate)); else out.disabled = true;
+    });
+  }
+  // Quiet motion: sections fade up as they enter; nothing moves with reduced motion.
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches && "IntersectionObserver" in window) {
+    document.documentElement.classList.add("d2-motion");
+    const io = new IntersectionObserver((es) => es.forEach((x) => { if (x.isIntersecting) { x.target.classList.add("in"); io.unobserve(x.target); } }), { rootMargin: "0px 0px -10% 0px" });
+    document.querySelectorAll("[data-reveal]").forEach((el) => io.observe(el));
+  }
+  // The header sits on the photograph until the page scrolls.
+  const hd = document.querySelector(".hd"); const on = () => hd?.classList.toggle("solid", scrollY > 40); on(); addEventListener("scroll", on, { passive: true });
+</script>

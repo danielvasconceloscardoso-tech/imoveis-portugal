@@ -1,0 +1,136 @@
+/* Design v2, "the Claridge's pass" (prompt 32, D59), on the D50 identity: white, near-black, Playfair Display and
+   Manrope, deep green #2F5D50 as the only accent. Measurements from design/REFERENCE_CLARIDGES.md: tall sections with
+   the space inside them, a large light serif for the few words that matter, a small sans for the rest, text no wider
+   than about 60 characters, one action per block, slow quiet motion. Scoped to body.d2 so v1 pages are unchanged. */
+body.d2 {
+  --ink: #111214; --muted: #5d6066; --rule: #e4e4e1; --band: #f4f4f2; --accent: #2f5d50; --paper: #fff;
+  --serif: "Playfair Display Variable", Georgia, serif; --sans: "Manrope Variable", system-ui, sans-serif;
+  --sec: clamp(88px, 11vw, 160px); --gut: clamp(20px, 5vw, 72px); --ease: cubic-bezier(.16, 1, .3, 1);
+  background: var(--paper); color: var(--ink); font: 400 17px/1.65 var(--sans);
+}
+body.d2 h1, body.d2 h2, body.d2 h3 { font-family: var(--serif); font-weight: 400; letter-spacing: -.01em; color: inherit; }
+body.d2 a { color: inherit; }
+body.d2 .sup { font: 600 11px/1 var(--sans); vertical-align: super; margin-left: 2px; color: var(--muted); text-decoration: none; }
+body.d2 .vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+/* Header: on the photograph, white, until the page scrolls; then white paper with a hairline. */
+body.d2 .hd { position: fixed; inset: 0 0 auto 0; z-index: 30; background: transparent; border: 0; color: #fff; transition: background-color .5s var(--ease), color .5s var(--ease), box-shadow .5s var(--ease); }
+body.d2 .hd .frame { max-width: none; padding: 0 var(--gut); }
+body.d2 .hd .word, body.d2 .hd .nav a, body.d2 .hd .tools, body.d2 .hd .tools a, body.d2 .hd summary { color: inherit; }
+body.d2 .hd .word { font: 400 24px/1 var(--serif); }
+body.d2 .hd .beta { color: inherit; border-color: currentColor; opacity: .7; }
+body.d2 .hd .nav a { font: 500 14px/1 var(--sans); letter-spacing: .06em; text-transform: uppercase; }
+body.d2 .hd .nl { border: 1px solid currentColor; border-radius: 2px; padding: 10px 16px; font: 500 13px/1 var(--sans); letter-spacing: .1em; text-transform: uppercase; text-decoration: none; background: transparent; color: inherit; }
+body.d2 .hd.solid { background: #fff; color: var(--ink); box-shadow: 0 1px 0 var(--rule); }
+body.d2 main { padding-top: 0; }
+
+/* Hero: full height, the photograph (the film when licensed clips arrive), a short H1 and one line, the path bar. */
+.h2-hero { position: relative; min-height: 100svh; display: grid; align-content: end; color: #fff; overflow: hidden; }
+.h2-hero-media, .h2-hero-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.h2-hero-media img { animation: d2-zoom 24s linear both; }
+.h2-hero::after { content: ""; position: absolute; inset: 0; background: rgba(10, 11, 12, .34); } /* a flat scrim: no gradients (D50) */
+.h2-hero-text { position: relative; z-index: 1; padding: 0 var(--gut); max-width: 1100px; margin-bottom: 40px; }
+.h2-hero h1 { font-size: clamp(40px, 6.2vw, 84px); line-height: 1.04; margin: 0 0 22px; max-width: 11em; }
+.h2-hero-text p { font-size: clamp(16px, 1.5vw, 19px); max-width: 34em; margin: 0; color: rgba(255, 255, 255, .9); }
+
+/* The path bar (our booking bar): one line on desktop, stacked on phones. */
+.h2-bar { position: relative; z-index: 2; display: grid; grid-template-columns: 1.2fr 1fr 1.3fr auto; background: #fff; color: var(--ink); margin: 0 var(--gut) var(--gut); border-radius: 2px; }
+.h2-f { display: grid; gap: 6px; padding: 18px 24px; border-right: 1px solid var(--rule); }
+.h2-f > span:first-child { font: 600 11px/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.h2-f select, .h2-f input { font: 400 19px/1.3 var(--serif); color: var(--ink); background: none; border: 0; padding: 0; width: 100%; appearance: none; }
+.h2-f select { background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23111214' stroke-width='1.3'/%3E%3C/svg%3E") right center no-repeat; padding-right: 22px; cursor: pointer; }
+.h2-amt { display: flex; align-items: baseline; gap: 8px; } .h2-amt span { font: 500 13px/1 var(--sans); color: var(--muted); }
+.h2-f input:focus, .h2-f select:focus { outline: none; } .h2-f:focus-within { box-shadow: inset 0 -2px 0 var(--accent); }
+.h2-go { background: var(--ink); color: #fff; border: 0; padding: 0 44px; font: 600 14px/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; cursor: pointer; transition: background-color .3s var(--ease); }
+.h2-go:hover { background: var(--accent); }
+
+/* Sections: one idea each, the space inside them. */
+.h2-sec { padding: var(--sec) var(--gut); }
+.h2-band { background: var(--band); }
+.h2-dark { background: var(--ink); color: #fff; }
+.h2-sec h2 { font-size: clamp(32px, 3.9vw, 54px); line-height: 1.1; margin: 0 0 26px; max-width: 14em; }
+.h2-text p, .h2-narrow p, .h2-card p, .h2-door p { max-width: 34rem; margin: 0 0 32px; color: var(--muted); }
+.h2-dark p { color: rgba(255, 255, 255, .78); }
+.h2-center { text-align: center; } .h2-center h2, .h2-center p, h2.h2-center { margin-left: auto; margin-right: auto; }
+.h2-narrow { max-width: 40rem; margin: 0 auto; }
+
+/* One action: an outlined button or an underlined link. */
+.h2-btn { display: inline-flex; align-items: center; min-height: 48px; padding: 0 28px; border: 1px solid var(--ink); border-radius: 2px; font: 600 13px/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; text-decoration: none; transition: background-color .3s var(--ease), color .3s var(--ease); background: transparent; color: var(--ink); cursor: pointer; }
+.h2-btn:hover { background: var(--ink); color: #fff; }
+.h2-btn-light { border-color: #fff; color: #fff; } .h2-btn-light:hover { background: #fff; color: var(--ink); }
+.h2-link { font: 600 13px/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 1px; }
+
+/* 2: what we are, beside one large photograph. */
+.h2-split { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 8vw, 140px); align-items: center; max-width: 1280px; margin: 0 auto; }
+.h2-ph { display: block; overflow: hidden; background: var(--band); } .h2-ph img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 12s linear; }
+.h2-ph-tall { aspect-ratio: 4 / 5; } .h2-ph-45 { aspect-ratio: 4 / 5; }
+.d2-motion .h2-ph.in img { transform: scale(1.04); }
+.h2-ph-wait img { filter: grayscale(.2); }
+
+/* 3: the map, framed like a feature (the v1 component, untouched inside). */
+.h2-mapframe { max-width: 1280px; margin: 48px auto 56px; background: #fff; box-shadow: 0 0 0 1px var(--rule); }
+
+/* 4: three places, equal cards. */
+.h2-cards3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(24px, 3vw, 48px); max-width: 1280px; margin: 64px auto 0; }
+.h2-card h3 { font-size: 30px; margin: 28px 0 10px; } .h2-card p { margin-bottom: 20px; }
+
+/* 5: buy and sell, two large cards. */
+.h2-cards2 { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 3vw, 48px); max-width: 1280px; margin: 64px auto 0; }
+.h2-door { display: grid; align-content: end; min-height: 440px; padding: clamp(32px, 4vw, 64px); background: #fff; text-decoration: none; box-shadow: 0 0 0 1px var(--rule); transition: box-shadow .4s var(--ease); }
+.h2-door:hover { box-shadow: 0 0 0 1px var(--ink); }
+.h2-door-n { font: 400 64px/1 var(--serif); color: var(--accent); margin-bottom: auto; }
+.h2-door h3 { font-size: clamp(36px, 3.6vw, 52px); margin: 120px 0 14px; } .h2-door p { margin-bottom: 28px; }
+
+/* 6: five questions, each opening its answer. */
+.h2-q { border-top: 1px solid var(--rule); } .h2-q:last-of-type { border-bottom: 1px solid var(--rule); margin-bottom: 48px; }
+.h2-q summary { list-style: none; cursor: pointer; padding: 26px 40px 26px 0; font: 400 22px/1.35 var(--serif); position: relative; }
+.h2-q summary::-webkit-details-marker { display: none; }
+.h2-q summary::after { content: ""; position: absolute; right: 4px; top: 50%; width: 12px; height: 12px; border-right: 1px solid; border-bottom: 1px solid; transform: translateY(-70%) rotate(45deg); transition: transform .3s var(--ease); }
+.h2-q[open] summary::after { transform: translateY(-30%) rotate(-135deg); }
+.h2-q p { margin: 0 0 28px; }
+
+/* 7: Portugal in six photographs, mixed sizes, no text. */
+.h2-mosaic { display: grid; grid-template-columns: repeat(12, 1fr); grid-auto-rows: clamp(120px, 14vw, 220px); gap: 12px; padding: 0 12px; }
+.h2-m { overflow: hidden; } .h2-m img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 12s linear; }
+.d2-motion .h2-m.in img { transform: scale(1.04); }
+.h2-m1 { grid-column: 1 / 8; grid-row: span 3; } .h2-m2 { grid-column: 8 / 13; grid-row: span 2; } .h2-m3 { grid-column: 8 / 13; grid-row: span 1; }
+.h2-m4 { grid-column: 1 / 6; grid-row: span 2; } .h2-m5 { grid-column: 6 / 13; grid-row: span 3; } .h2-m6 { grid-column: 1 / 6; grid-row: span 1; }
+
+/* 8: ten years of official prices, one chart. */
+.h2-chart { max-width: 1080px; margin: 48px auto 48px; }
+.h2-chart svg { width: 100%; height: auto; }
+
+/* 9: the newsletter on the one dark band. */
+.h2-nl { text-align: center; } .h2-nl h2, .h2-nl p { margin-left: auto; margin-right: auto; }
+.h2-nlform { display: grid; grid-template-columns: 1fr auto; gap: 12px; max-width: 34rem; margin: 0 auto; }
+.h2-email input { width: 100%; min-height: 48px; box-sizing: border-box; padding: 0 16px; background: transparent; border: 1px solid rgba(255, 255, 255, .5); border-radius: 2px; color: #fff; font: 400 16px/1 var(--sans); }
+.h2-email input::placeholder { color: rgba(255, 255, 255, .55); }
+.h2-consent { grid-column: 1 / -1; display: flex; gap: 10px; align-items: flex-start; text-align: left; font-size: 13px; color: rgba(255, 255, 255, .7); }
+.h2-consent input { margin-top: 3px; accent-color: #fff; }
+
+.h2-sources { padding: 64px var(--gut); font-size: 13px; color: var(--muted); } .h2-sources h2 { font: 600 11px/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; margin: 0 0 16px; }
+.h2-sources ol { padding-left: 18px; margin: 0; }
+
+/* 10: the footer, columns, editions, languages, legal. */
+.ft2 { background: var(--band); padding: 96px var(--gut) 48px; font-size: 14px; }
+.ft2-in { max-width: 1280px; margin: 0 auto; }
+.ft2-word { font: 400 30px/1 var(--serif); text-decoration: none; }
+.ft2-cols { display: grid; grid-template-columns: repeat(5, 1fr); gap: 32px; margin: 56px 0; }
+.ft2-k { font: 600 11px/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 0 12px 14px 0; }
+.ft2 ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; } .ft2 a { text-decoration: none; } .ft2 a:hover { text-decoration: underline; }
+.ft2-row { display: grid; gap: 12px; border-top: 1px solid var(--rule); padding-top: 28px; margin-bottom: 28px; } .ft2-row p { margin: 0; } .ft2-row a[aria-current] { text-decoration: underline; }
+.ft2-small { font-size: 12px; color: var(--muted); max-width: 72rem; margin: 0 0 10px; }
+
+/* Quiet motion: fade-up as a section enters; nothing with reduced motion. */
+.d2-motion [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
+.d2-motion [data-reveal].in { opacity: 1; transform: none; }
+@keyframes d2-zoom { from { transform: scale(1); } to { transform: scale(1.06); } }
+@media (prefers-reduced-motion: reduce) { .h2-hero-media img, .h2-ph img, .h2-m img { animation: none !important; transition: none !important; transform: none !important; } }
+
+@media (max-width: 900px) {
+  .h2-bar { grid-template-columns: 1fr; } .h2-f { border-right: 0; border-bottom: 1px solid var(--rule); padding: 14px 20px; } .h2-go { grid-column: 1 / -1; min-height: 56px; }
+  .h2-split, .h2-cards3, .h2-cards2 { grid-template-columns: 1fr; } .h2-door { min-height: 320px; } .h2-door h3 { margin-top: 64px; }
+  .h2-mosaic { grid-template-columns: 1fr 1fr; grid-auto-rows: 140px; } .h2-m { grid-column: auto !important; grid-row: span 1 !important; } .h2-m1, .h2-m5 { grid-column: 1 / -1 !important; grid-row: span 2 !important; }
+  .ft2-cols { grid-template-columns: 1fr 1fr; } .h2-nlform { grid-template-columns: 1fr; }
+  body.d2 .hd .nav { display: none; }
+}
