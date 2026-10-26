@@ -19,7 +19,7 @@ The Claridge's logic: an appointment you are qualified for, not a sales call.
 Personalised PDFs compiled from facts.csv and the reader's inputs, in the brand's report design (Knight Frank model). Information, not advice: each one says so and points to the partner for advice (lawyer, tax adviser; acts reserved to lawyers, Lei 49/2004).
 1. **Dossiê de compra** · 190 €: for the reader's country, budget and area: full purchase costs, taxes when buying, owning, renting and selling in Portugal and at home under the treaty, financing scenarios (illustrative, not an offer), documents and timeline, area data (10-year prices, yields), and the partner shortlist for each step.
 2. **Relatório de zona** · 90 €: one area in depth: 10-year price and rent data, yields, typologies, active developer projects (labelled), and how to buy there from abroad.
-3. **Dossiê Private** · 950 €: for 1 M€+: residence options, IFICI, inheritance across both countries, holding-structure questions to discuss with advisers, prime areas, and introductions to vetted Private partners.
+3. **Dossiê Private** · 950 €: for 1 M€+: residence options, IFICI, inheritance across both countries, holding-structure questions to discuss with advisers, prime areas, and introductions to vetted Wealth partners.
 4. No personalised mortgage report from the brand: that is credit advice and stays with the registered credit partner (DL 81-C/2017).
 5. Build the generator and the checkout pages with the **buy buttons off** until the billing entity exists (D4): invoicing, EU VAT on digital services (OSS), and the express consent that waives the 14-day withdrawal right for immediate delivery (DL 24/2014, art. 17.º). Stripe Payment Links once D4 is set.
 
@@ -32,7 +32,7 @@ sponsors/brochure/ in FR, EN and PT, one per partner type (developers; tax, lega
    - Area placement, per slot per year: Prime 24,000 € (e.g. Comporta, Quinta do Lago/Loulé, Cascais, central Lisbon, Porto Foz) · Strong 12,000 € (e.g. Porto, Braga, the rest of the Algarve, Madeira) · Standard 6,000 €. Maximum 3 per area.
    - Project launch: 7,500 € (prime areas 15,000 €).
    - Journey checkpoint, per step per country per year: Switzerland, Luxembourg, USA 12,000 € · France, Israel 8,000 € · Brazil 5,000 €; the residence and structuring step ×1.5. Maximum 3 per step.
-   - Private Partner (Private section and structuring steps in every country): 48,000 €.
+   - Wealth Partner (Private section and structuring steps in every country): 48,000 €.
    - Founding Partner: the first 10 partners get 40% off year 1, price locked for year 2.
 4. The logic in one line: "one client at your step pays for the year".
 5. Labelled sponsorship, licences shown, flat annual fee (D6), no exclusivity sold before launch (D32).

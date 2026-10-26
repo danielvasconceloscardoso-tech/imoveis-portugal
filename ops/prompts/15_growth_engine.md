@@ -17,7 +17,7 @@ Items marked *proposal* are prices or positioning for Daniel to confirm: build t
    Rationale to show sponsors: one client covers the fee (a purchase file for a lawyer, one large transfer for a money-transfer firm, one mortgage for a bank, one sale for a developer).
 1b. **Private tier (D33): the elite, high-price layer.** For buyers with budgets of 1 M€ and more, and the firms that serve them: international private banks and wealth managers, cross-border tax planners, private-client law firms, family offices, prime developers (Lisbon, Porto, Comporta, Douro, Algarve), and managers of funds eligible for the Portuguese investment residence route (Lei 56/2023; fund marketing follows CMVM and AIFMD rules and is always labelled as advertising).
    - Product: a "Private" section with an editorial look (Comporta and Monocle rules: few words, premium photography) and placements only. No events, webinars, roundtables or reports unless Daniel approves them (D36).
-   - Prices (*proposal*): **Private Partner** 25,000–50,000 € a year (maximum 5 per edition, non-exclusive).
+   - Prices (*proposal*): **Wealth Partner** 25,000–50,000 € a year (maximum 5 per edition, non-exclusive).
    - Target list: add 30 firms to pipeline.csv as tier A "private", with evidence of spend on international or Portugal-related clients (sponsorships, Portugal desks, events, ads). No Russian capital (D11), no agencies (D9).
    - No price caps anywhere on the site: budgets, simulators and examples go up to 10 M€ and beyond.
 2. **Inventory a sponsor can see**, listed on the partner page with what each tier gets:

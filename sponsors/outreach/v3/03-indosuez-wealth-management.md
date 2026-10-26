@@ -1,6 +1,6 @@
-# S197 · Indosuez Wealth Management · FR
+# S198 · Indosuez Wealth Management · FR
 
-Draft only, not sent (prompt 15 §2). Evidence: see S197 in sponsors/pipeline.csv. Log touches in its touch1_date, touch2_date, touch3_date columns.
+Draft only, not sent (prompt 15 §2). Evidence: see S198 in sponsors/pipeline.csv. Log touches in its touch1_date, touch2_date, touch3_date columns.
 
 ## Touch 1 · email · day 0
 

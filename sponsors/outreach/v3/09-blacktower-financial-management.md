@@ -1,6 +1,6 @@
-# S186 · Blacktower Financial Management · EN
+# S187 · Blacktower Financial Management · EN
 
-Draft only, not sent (prompt 15 §2). Evidence: see S186 in sponsors/pipeline.csv. Log touches in its touch1_date, touch2_date, touch3_date columns.
+Draft only, not sent (prompt 15 §2). Evidence: see S187 in sponsors/pipeline.csv. Log touches in its touch1_date, touch2_date, touch3_date columns.
 
 ## Touch 1 · email · day 0
 

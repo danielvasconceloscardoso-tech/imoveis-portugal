@@ -13,7 +13,7 @@ To run: "Read ops/prompts/25_3d_map_intelligence.md and execute it." **Priority:
 ## 2. The map (site page + home block + embeddable build)
 
 1. MapLibre GL with our own data, no paid tiles, no API key. Municipalities as **3D extrusions**; the reader chooses what height means: **m² for my budget** (default), **median €/m²**, **10-year price growth**, **gross rental yield**. Colour follows the same metric on the green scale.
-2. Budget input with presets 300 k€ · 1 M€ · 5 M€ · 10 M€ and the reader's currency (ECB rate, dated). Changing budget or metric animates the heights; tilted camera, smooth fly-to on tap, slow idle rotation on the home page.
+2. **One elegant budget field, no preset buttons and no budget tiers shown** (D52), in the reader's currency (ECB rate, dated); any amount works. Changing budget or metric animates the heights; tilted camera, smooth fly-to on tap, slow idle rotation on the home page.
 3. **Place card:** large real photo, name in the display type, then:
    - m² for the budget and the median €/m² (latest), with period and source
    - **10-year chart**: price per m² and rent per m² on one elegant chart, compound annual growth for each, and the gap between them
@@ -32,6 +32,23 @@ To run: "Read ops/prompts/25_3d_map_intelligence.md and execute it." **Priority:
 1. One script or iframe snippet that renders the map on another site, with config for: language, default budget, centre area, highlighted project pin, call-to-action target, partner colours.
 2. Footer on every embed: **"Powered by Imóveis Portugal"** linked to the site, plus the required data credits in small type ("Fonte: INE · © OpenStreetMap contributors"). Nothing else.
 3. A demo page per use case (media, developer project, bank white-label) using placeholder branding, not published.
+
+## 4. Phase 2 layers (after the core map works)
+
+Add as switchable layers and as facts on the place card, each with source, period and licence recorded in content/facts/map/SOURCES.md. Check every licence before use; skip any dataset that does not allow commercial reuse.
+1. **What foreign buyers pay:** INE's house prices split by the buyer's tax domicile (Portugal vs abroad) and number of transactions, by municipality where INE publishes them (confirm coverage).
+2. **Market liquidity:** number of sales per municipality per quarter (INE).
+3. **New supply:** building permits and dwellings completed per municipality (INE construction statistics).
+4. **Housing stock (Census 2021):** share of second homes and vacant dwellings, age of buildings.
+5. **Short-term rental:** local accommodation registrations (RNAL, Turismo de Portugal, CC BY 4.0; use the current national download) and each municipality's local accommodation rules (containment areas).
+6. **Annual ownership cost:** IMI rate set by each municipality for the current year (Portal das Finanças) feeding the cost simulator.
+7. **Foreign residents** by municipality and nationality (AIMA / INE): where Americans, Brazilians, French, Swiss and others already live.
+8. **Access:** travel time by car to Porto, Lisbon and Faro airports (computed from OpenStreetMap), rail and metro stations.
+9. **Daily life:** international schools, hospitals (SNS open data), Blue Flag beaches, golf courses (OpenStreetMap).
+10. **Climate:** sunshine hours and average temperatures (IPMA climate normals).
+11. **Risk, shown factually:** flood zones (APA), coastal erosion, wildfire hazard (ICNF).
+12. **Finance:** Banco de Portugal average rate on new housing loans and Euribor (BPstat), ECB reference exchange rates.
+Not public and not used: listing prices scraped from portals. Short-term rental performance (occupancy, nightly rates) only from a source whose licence allows commercial use.
 
 ## Review
 
