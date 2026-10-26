@@ -1,5 +1,7 @@
 # Prompt 30: the content engine (newsletter and posts on every platform, built like an SEO engine)
 
+**Scope now: written posts, images, static stories, newsletters and pillar pages. No reels, films or video until a later prompt.** The way we write, the hashtags, the posting times, the design rules and the weekly mix are in `social/PLAYBOOK.md`; it overrides anything below that disagrees.
+
 CEO, 26 Oct 2026. Run it after the demo fixes and before prompt 23. It delivers prompt 22 §1.3 (templates), §2 (content system) and §4.5 (Reddit and Quora drafts). Account setup in prompt 22 §5 stays with the operator.
 
 Nothing is posted, scheduled, sent or merged without the operator's "go". All copy follows:
@@ -43,7 +45,7 @@ The existing drafts in content/inbox/week-01 and week-02 are too dry. Move them 
 | --- | --- | --- |
 | Pillar page on the site | 1 per language | Opens with a 2–3 sentence answer containing the number, its official source, "last checked" date and the brand name. Links to the map area, simulator, station and partner. Added to sitemaps and llms.txt; IndexNow ping. |
 | Newsletter | 1 per edition and language | The seven blocks of NEWSLETTER_FORMAT.md. Three subject-line options each, with a place, a price or a number. Weeks 1–3 are welcome emails (no sends before 1 Dec). |
-| Instagram | 14 feed posts (one reel and one carousel or data card per day), 3–5 stories a day | Captions PT, then EN, then FR. One call to action. 3–5 relevant hashtags. Alt text carrying the target phrase. |
+| Instagram | 12 feed posts (carousels and data cards, per PLAYBOOK §5), static stories daily | Captions PT, then EN, then FR. One call to action. 3–5 relevant hashtags. Alt text carrying the target phrase. |
 | Facebook | 7–10 | The Instagram set, plus community posts in Portuguese for the diaspora (questions people answer in the comments). |
 | LinkedIn | 5 weekday posts, plus one document carousel a month | EN or FR. Data-led, written for developers, banks, advisers and wealth managers: it also sells sponsorship. |
 | Reddit / Quora | 2 drafts | Full answers that stand on their own, affiliation in the profile, the community's self-promotion rules followed. A person posts them. |
@@ -77,7 +79,7 @@ The seed numbers below are examples; check each one against its source before us
 7. **One number.** A big figure, one line of context, the source.
 8. **Place postcard.** A real photograph of the place (Unsplash or Pexels, checked to show that place, no credit on the image) and three numbers from the map card.
 9. **Reader's question.** A real searched question and the 40–70-word answer from the FAQ.
-10. **Map reels.** Fly-overs and the 2016→2026 time-lapse. Built from map v1 until the operator approves v2.
+10. **Map reels.** Later, in the video prompt. Not now.
 
 **Tone.** Dry, warm, specific: details people recognise (the August holidays, the flight to Porto, the parents' house, the procuração signed at the consulate). Headline register, as examples:
 - "One square metre in Luxembourg City. Four in Gondomar."
@@ -97,7 +99,7 @@ The seed numbers below are examples; check each one against its source before us
   - Newsletter header: 1200×600.
 - **Templates:** one template per format in §3, rendered from data with Playwright, so a new number is a new image without hand work.
 - **Languages:** visuals stay language-neutral where possible; text versions in PT, EN and FR.
-- **Reels:** subtitles burned in. For voice, use the Kokoro engine from prompt 29 only if a reel needs one.
+- **Reels:** later, in the video prompt.
 
 ## 5. Output and checks
 
@@ -118,4 +120,9 @@ The seed numbers below are examples; check each one against its source before us
 4. **Order of work:**
    - **Samples first.** Before writing everything, send the CEO and the operator one US-EN newsletter (week 4, launch issue) and eight post images, one per format 1–8, with their captions in PT, EN and FR, plus the keyword map's top 10 per edition. Wait for the "go".
    - **After the go:** weeks 1–4 in full; weeks 5–12 as pillar outlines with their target phrases.
+6. **Publishing through Buffer** (free plan: Instagram, Facebook and LinkedIn, API and MCP included; check the current plan before building):
+   - Claude Code loads only posts with `status: approved`, at the PLAYBOOK §3 times. Buffer needs images at a public link: serve approved images from the site under an unlisted path (noindex, disallowed in robots.txt), removed after publishing.
+   - The free plan holds 10 scheduled posts per channel. Load twice a week, and tell the operator when volume makes the paid plan worth it (D30: no paid tool before the first sponsor pays, unless the operator says so).
+   - The API key lives only in an environment variable (`BUFFER_API_KEY`), never in the repo.
+   - If the operator has not set Buffer up yet, produce the Meta Business Suite bulk CSV and the LinkedIn sheet instead.
 5. **Report back:** preview link, the samples, anything you could not verify. Keep it short. Do not post, schedule, send or merge anything.
