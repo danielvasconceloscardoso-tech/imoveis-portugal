@@ -27,7 +27,6 @@ const hold = (shot, min, lead = 0.4) => Math.max(min, LD[shot] ? lead + LD[shot]
 
 const browser = await chromium.launch({ args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--ignore-gpu-blocklist", "--hide-scrollbars"] });
 const page = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: 1 });
-await page.emulateMedia({ reducedMotion: "reduce" });  // the site's own transitions off: every motion here is set per frame
 const CLEAN = `html{scrollbar-width:none}::-webkit-scrollbar{display:none}*{caret-color:transparent!important;cursor:none!important}.dm-top,.dm-foot,.dmb{display:none!important}`;
 async function go(url) {
   await page.goto(BASE + url, { waitUntil: "load" });
@@ -40,7 +39,6 @@ async function go(url) {
   });
 }
 const ev = (fn, arg) => page.evaluate(fn, arg);
-const night = () => page.addStyleTag({ content: `html{filter:brightness(.56) saturate(.6) contrast(1.06)}body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:99;background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(20,40,80,.05),rgba(2,4,12,.62))}` });
 
 const shots = [], tl = { lines: [], keys: [], clicks: [] };
 let clock = 0;  // start of the current shot on the final timeline
@@ -49,7 +47,8 @@ async function shot(n, dur, frame, { lead = 0.4, label = "" } = {}) {
   const ff = spawn("ffmpeg", ["-y", "-loglevel", "error", "-f", "image2pipe", "-framerate", String(FPS), "-c:v", "mjpeg", "-i", "-",
     "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "16", "-preset", "medium", "-r", String(FPS), out]);
   const done = new Promise((r, j) => ff.on("close", (c) => (c ? j(new Error(`ffmpeg shot ${n}`)) : r())));
-  const frames = Math.round(dur * FPS), t0 = Date.now();
+  // Test switch: ONLY=<shot> renders that shot alone (others get one frame) and stops after it.
+  const only = process.env.ONLY, frames = only && only !== String(n) ? 1 : Math.round(dur * FPS), t0 = Date.now();
   for (let i = 0; i < frames; i++) {
     await frame(i / FPS);
     const buf = await page.screenshot({ type: "jpeg", quality: 92 });
@@ -60,6 +59,7 @@ async function shot(n, dur, frame, { lead = 0.4, label = "" } = {}) {
   shots.push({ n, out, dur, start: clock, label });
   clock += dur - X;
   console.log(`shot ${n}`, `${dur.toFixed(2)}s`, `${((Date.now() - t0) / 1000).toFixed(0)}s render`);
+  if (only === String(n)) { await browser.close(); console.log("ONLY", out); process.exit(0); }
 }
 const at = (t) => +(clock + t).toFixed(3);  // a moment inside the shot being rendered, on the final timeline
 
@@ -100,8 +100,8 @@ async function mapPage(url, hideCard) {
   await ev(() => document.querySelector(".mapx").__mapx.load());
   await page.waitForSelector(".mapx.is-live", { timeout: 90000 });
   await page.addStyleTag({ content: `html,body{overflow:hidden;background:#f6f3ee}.hd,footer,.frame>h1,.lede,.mapx-controls,.mapx-bar,.mapx-devbar,.mapx-legend,.mapx-powered,.cbar,.maplibregl-ctrl,.maplibregl-control-container{display:none!important}
-    .mapx-stage{position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;z-index:5}.mapx-canvas{position:absolute!important;inset:0!important;width:100%!important;height:100%!important}
-    ${hideCard ? ".mapx-card{visibility:hidden}" : ""}` });
+    .mapx-stage{position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;max-height:none!important;min-height:100vh!important;aspect-ratio:auto!important;z-index:5}.mapx-canvas{position:absolute!important;inset:0!important;width:100%!important;height:100%!important}
+    .mapx-tip{display:none!important}${hideCard ? ".mapx-card{visibility:hidden}" : ""}` });
   await ev(() => { const m = document.querySelector(".mapx").__mapx.map(); m.resize(); for (const id of ["muni-3d", "muni-3d-p"]) if (m.getLayer(id)) m.setPaintProperty(id, "fill-extrusion-height-transition", { duration: 0, delay: 0 }); window.__orig = {}; for (const id of ["muni-3d", "muni-3d-p"]) if (m.getLayer(id)) window.__orig[id] = m.getPaintProperty(id, "fill-extrusion-height"); });
   await page.waitForTimeout(1500);
 }
@@ -129,7 +129,8 @@ const kAt = (i) => 3.0 + (i * 2.2) / q.length;
 await shot(2, d2, async (t) => {
   if (t < 2.6) return ev((t) => { document.querySelector(".tabs").style.transform = `scale(${1 + 0.02 * t / 2.6})`; }, t);
   if (!searchReady) {
-    searchReady = true; await go(`/d/${token}/search/`); await night();
+    searchReady = true; await go(`/d/${token}/search/`);
+    await page.addStyleTag({ content: `body{background:#0d1017!important;color:#e9e9ec}.sr-k,.sr-url{color:#8d929b!important}.sr-field{border-color:#d9dbe0!important;color:#f1f1f3}.sr-caret{background:#f1f1f3!important}.sr-t{color:#9fd0b6!important}.sr-p{color:#c3c6cc!important}body::after{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse 75% 70% at 50% 40%,transparent 55%,rgba(0,0,0,.55))}` });
     await ev(() => { const c = document.createElement("i"); c.className = "dot"; c.style.cssText = "position:fixed;z-index:120;width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,.92);box-shadow:0 0 0 6px rgba(255,255,255,.18);left:1250px;top:760px;opacity:0"; document.body.append(c); });
     for (let i = 0; i < q.length; i++) tl.keys.push(at(kAt(i))); tl.clicks.push(at(6.8));
   }
@@ -154,22 +155,18 @@ await shot(3, 3.2, (t) => ev((t) => { document.getElementById("fx").style.opacit
 
 // 4 · The 3D map rises, glides along the coast and settles on the place: the area card and its ten-year chart.
 await mapPage(`/en/${ed}/map/?budget=${Math.round(F.budgetEur)}&cur=${F.cur}`, false);
-const endCam = await ev(async (muni) => {
-  const M = document.querySelector(".mapx").__mapx, m = M.map(), p = M.project(muni);
-  M.pick(p.x, p.y); await new Promise((r) => setTimeout(r, 400));
-  const c = m.getCenter(), pad = m.getPadding();
-  const cam = { center: [c.lng, c.lat], zoom: m.getZoom(), pitch: m.getPitch(), bearing: m.getBearing(), padding: pad };
-  document.querySelector(".mapx-close")?.click(); await new Promise((r) => setTimeout(r, 200));
-  return cam;
-}, F.muni);
+// The glide ends on the place with room for its card; then a click opens the card (at this zoom the map does not fly).
+// (Through the map's own list of municipalities, so a taller neighbour in front cannot take the click.)
+const clickPlace = async () => { await ev((muni) => document.querySelector(`button[data-pick="${muni}"]`)?.click(), F.muni); await page.waitForTimeout(300); };
+const endCam = { center: [F.center[0], F.center[1]], zoom: 7.7, pitch: 40, bearing: 10, padding: { top: 0, bottom: 0, left: 0, right: 440 } };
 const START = { center: [-8.75, 41.45], zoom: Math.max(6.6, endCam.zoom - 1.3), pitch: 50, bearing: -18, padding: { top: 0, bottom: 0, left: 0, right: 0 } };
 let picked = false;
 await shot(4, Math.min(6, hold("4", 5.6)), async (t) => {
   const k = span(t, 0.3, 4.3), z = span(t, 0.3, 4.3);
-  const cam = picked ? null : { center: [lerp(START.center[0], endCam.center[0], k), lerp(START.center[1], endCam.center[1], k)], zoom: lerp(START.zoom, endCam.zoom, z), pitch: lerp(START.pitch, endCam.pitch, k), bearing: lerp(START.bearing, endCam.bearing, k),
+  const cam = picked ? endCam : { center: [lerp(START.center[0], endCam.center[0], k), lerp(START.center[1], endCam.center[1], k)], zoom: lerp(START.zoom, endCam.zoom, z), pitch: lerp(START.pitch, endCam.pitch, k), bearing: lerp(START.bearing, endCam.bearing, k),
     padding: { top: 0, bottom: lerp(0, endCam.padding.bottom || 0, k), left: 0, right: lerp(0, endCam.padding.right || 0, k) } };
   await mapFrame(cam, span(t, 0, 1.6));
-  if (t >= 4.4 && !picked) { picked = true; await ev((muni) => { const M = document.querySelector(".mapx").__mapx, p = M.project(muni); M.pick(p.x, p.y); }, F.muni); await page.waitForTimeout(500); }
+  if (t >= 4.4 && !picked) { picked = true; await clickPlace(); }
 });
 
 // 5 · Her budget in her currency: the cost calculator counts up the taxes, the fees, the exchange rate and the total.
@@ -196,7 +193,7 @@ await shot(6, hold("6", 6.2, 0.3), async (t) => {
 
 // 7 · Who's building there? "Partner developers here" lights up on the place card; their showcase opens.
 await mapPage(`/embed/map/en/?place=${F.muni}&demoproj=${token}&devs=1&budget=${Math.round(F.budgetEur)}&cur=${F.cur}`, false);
-await page.waitForSelector(".mapx-dev", { timeout: 30000 }).catch(() => {});
+await page.waitForSelector(".mapx-dev", { timeout: 30000 }).catch(() => {}); await page.waitForTimeout(2200);
 await ev(() => { const c = document.querySelector(".mapx-card"), d = document.querySelector(".mapx-devs"); if (c && d) c.scrollTop = d.offsetTop - 120; });
 let show = false; let gridY = 0;
 await shot(7, Math.max(9, hold("7", 9, 0.3)), async (t) => {
