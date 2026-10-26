@@ -1,0 +1,104 @@
+{
+ "pt": {
+  "format": "budget-buys",
+  "kicker": "O que o orçamento compra",
+  "h": "500 000 dólares, cinco lugares.",
+  "items": [
+   {
+    "place": "Lisboa",
+    "m2": 86.03770488846966,
+    "v": "86 m²"
+   },
+   {
+    "place": "Cascais",
+    "m2": 91.36996600141839,
+    "v": "91 m²"
+   },
+   {
+    "place": "Loulé",
+    "m2": 107.978671448135,
+    "v": "108 m²"
+   },
+   {
+    "place": "Porto",
+    "m2": 123.02609853509625,
+    "v": "123 m²"
+   },
+   {
+    "place": "Gondomar",
+    "m2": 190.25032529000617,
+    "v": "190 m²"
+   }
+  ],
+  "note": "500 000 USD = 446 708 € à taxa do BCE de 23 de outubro de 2026, dividido pela mediana do INE de cada concelho. Plantas à escala.",
+  "source": "Fonte: INE, mediana dos preços das casas vendidas, 2.º trimestre de 2026; BCE"
+ },
+ "en": {
+  "format": "budget-buys",
+  "kicker": "What a budget buys",
+  "h": "$500,000, five places.",
+  "items": [
+   {
+    "place": "Lisboa",
+    "m2": 86.03770488846966,
+    "v": "86 m²"
+   },
+   {
+    "place": "Cascais",
+    "m2": 91.36996600141839,
+    "v": "91 m²"
+   },
+   {
+    "place": "Loulé",
+    "m2": 107.978671448135,
+    "v": "108 m²"
+   },
+   {
+    "place": "Porto",
+    "m2": 123.02609853509625,
+    "v": "123 m²"
+   },
+   {
+    "place": "Gondomar",
+    "m2": 190.25032529000617,
+    "v": "190 m²"
+   }
+  ],
+  "note": "$500,000 = €446,708 at the ECB rate of 23 October 2026, divided by each municipality's INE median. Floor plans to scale.",
+  "source": "Source: INE, median price of homes sold, 2nd quarter 2026; ECB"
+ },
+ "fr": {
+  "format": "budget-buys",
+  "kicker": "Ce qu'un budget achète",
+  "h": "500 000 dollars, cinq lieux.",
+  "items": [
+   {
+    "place": "Lisboa",
+    "m2": 86.03770488846966,
+    "v": "86 m²"
+   },
+   {
+    "place": "Cascais",
+    "m2": 91.36996600141839,
+    "v": "91 m²"
+   },
+   {
+    "place": "Loulé",
+    "m2": 107.978671448135,
+    "v": "108 m²"
+   },
+   {
+    "place": "Porto",
+    "m2": 123.02609853509625,
+    "v": "123 m²"
+   },
+   {
+    "place": "Gondomar",
+    "m2": 190.25032529000617,
+    "v": "190 m²"
+   }
+  ],
+  "note": "500 000 $ = 446 708 € au taux BCE du 23 octobre 2026, divisé par le prix médian INE de chaque commune. Plans à l'échelle.",
+  "source": "Source : INE, prix médian des logements vendus, 2e trimestre 2026 ; BCE"
+ }
+}

@@ -1,0 +1,101 @@
+{
+ "pt": {
+  "format": "cost-sheet",
+  "kicker": "A conta completa",
+  "h": "Uma casa de 500 000 €, com tudo.",
+  "tag": "Cálculo ilustrativo · comprador não residente",
+  "rows": [
+   {
+    "k": "Preço",
+    "v": "500 000 €"
+   },
+   {
+    "k": "IMT",
+    "sub": "7,5%, taxa única para não residentes",
+    "v": "37 500 €"
+   },
+   {
+    "k": "Imposto do selo",
+    "sub": "0,8%",
+    "v": "4 000 €"
+   },
+   {
+    "k": "Escritura e registo",
+    "sub": "Casa Pronta",
+    "v": "375 €"
+   }
+  ],
+  "total": {
+   "k": "Total",
+   "v": "541 875 €",
+   "sub": "≈ 606 521 USD"
+  },
+  "source": "Fontes: Código do IMT, art. 17.º, n.º 10; Imposto do Selo, verba 1.1; Casa Pronta; BCE, 23/10/2026"
+ },
+ "en": {
+  "format": "cost-sheet",
+  "kicker": "The full bill",
+  "h": "A €500,000 home, all in.",
+  "tag": "Illustrative calculation · non-resident buyer",
+  "rows": [
+   {
+    "k": "Price",
+    "v": "€500,000"
+   },
+   {
+    "k": "IMT",
+    "sub": "7.5%, flat rate for non-residents",
+    "v": "€37,500"
+   },
+   {
+    "k": "Stamp duty",
+    "sub": "0.8%",
+    "v": "€4,000"
+   },
+   {
+    "k": "Deed and registration",
+    "sub": "Casa Pronta",
+    "v": "€375"
+   }
+  ],
+  "total": {
+   "k": "Total",
+   "v": "€541,875",
+   "sub": "≈ $606,521"
+  },
+  "source": "Sources: IMT Code, art. 17(10); Stamp Duty, item 1.1; Casa Pronta; ECB, 23 Oct 2026"
+ },
+ "fr": {
+  "format": "cost-sheet",
+  "kicker": "Le compte complet",
+  "h": "Un bien à 500 000 €, tout compris.",
+  "tag": "Calcul illustratif · acheteur non résident",
+  "rows": [
+   {
+    "k": "Prix",
+    "v": "500 000 €"
+   },
+   {
+    "k": "IMT",
+    "sub": "7,5 %, taux unique pour non-résidents",
+    "v": "37 500 €"
+   },
+   {
+    "k": "Droit de timbre",
+    "sub": "0,8%",
+    "v": "4 000 €"
+   },
+   {
+    "k": "Acte et enregistrement",
+    "sub": "Casa Pronta",
+    "v": "375 €"
+   }
+  ],
+  "total": {
+   "k": "Total",
+   "v": "541 875 €",
+   "sub": "≈ 606 521 $"
+  },
+  "source": "Sources : Code de l'IMT, art. 17, n.º 10 ; droit de timbre, poste 1.1 ; Casa Pronta ; BCE, 23/10/2026"
+ }
+}

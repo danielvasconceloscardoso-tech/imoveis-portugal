@@ -1,0 +1,26 @@
+{
+ "pt": {
+  "format": "myth-vs-law",
+  "kicker": "Mito e lei",
+  "h": "Não precisa de vir a Portugal para assinar.",
+  "myth": "Quem compra tem de assinar a escritura em Portugal.",
+  "law": "Uma procuração resolve: assinada num notário com a Apostila de Haia, ou num consulado português.",
+  "source": "Fonte: Consulado-Geral de Portugal em Newark, Procuração"
+ },
+ "en": {
+  "format": "myth-vs-law",
+  "kicker": "Myth and law",
+  "h": "You don't need to fly in to sign.",
+  "myth": "The buyer has to sign the deed in Portugal.",
+  "law": "A power of attorney does it: signed before a notary with the Hague Apostille, or at a Portuguese consulate.",
+  "source": "Source: Consulate General of Portugal in Newark, power of attorney"
+ },
+ "fr": {
+  "format": "myth-vs-law",
+  "kicker": "Mythe et loi",
+  "h": "Pas besoin de venir au Portugal pour signer.",
+  "myth": "L'acheteur doit signer l'acte au Portugal.",
+  "law": "Une procuration suffit : signée chez un notaire avec l'apostille de La Haye, ou dans un consulat portugais.",
+  "source": "Source : Consulat général du Portugal à Newark, procuration"
+ }
+}

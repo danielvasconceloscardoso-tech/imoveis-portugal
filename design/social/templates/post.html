@@ -1,0 +1,95 @@
+<!doctype html>
+<!-- Prompt 30 §3–4: one template for the post formats 1–8, rendered from data (window.render(spec)) at 1080×1350 by
+     scripts/social/render.mjs. D50 identity: white and near-black, Playfair Display and Manrope, deep green #2F5D50
+     as the only accent, real photographs, data drawn simply, wordmark small bottom left, source on every card.
+     Never: emojis, gradients, 3D icons, cream, other companies' logos. -->
+<html><head><meta charset="utf-8">
+<style>
+  @font-face { font-family: "Playfair"; src: url("../fonts/playfair-display-latin-wght-normal.woff2") format("woff2"); font-weight: 400 900; }
+  @font-face { font-family: "Manrope"; src: url("../fonts/manrope-latin-wght-normal.woff2") format("woff2"); font-weight: 200 800; }
+  :root { --ink: #111214; --muted: #6a6d72; --rule: #e2e2df; --green: #2f5d50; --band: #f4f4f2; }
+  * { box-sizing: border-box; } html, body { margin: 0; }
+  .card { width: 1080px; height: 1350px; position: relative; overflow: hidden; background: #fff; color: var(--ink); font: 400 28px/1.45 "Manrope", sans-serif; padding: 96px 88px 0; }
+  .card.dark { background: var(--ink); color: #fff; } .card.dark .src, .card.dark .note { color: rgba(255,255,255,.62); }
+  .k { font: 600 20px/1 "Manrope"; letter-spacing: .16em; text-transform: uppercase; color: var(--green); margin: 0 0 30px; }
+  .dark .k { color: #9cc4b6; }
+  h1 { font: 400 76px/1.06 "Playfair", serif; letter-spacing: -.012em; margin: 0 0 40px; max-width: 13em; }
+  h1.sm { font-size: 64px; }
+  .note { font-size: 22px; color: var(--muted); line-height: 1.4; max-width: 46em; }
+  .foot { position: absolute; left: 88px; right: 88px; bottom: 64px; display: flex; justify-content: space-between; align-items: end; gap: 40px; }
+  .word { font: 400 30px/1 "Playfair", serif; white-space: nowrap; } .word i { display: inline-block; width: 12px; height: 12px; background: var(--green); margin-right: 12px; vertical-align: 4px; }
+  .src { font-size: 19px; color: var(--muted); text-align: right; line-height: 1.35; max-width: 34em; }
+  .big { font: 400 300px/0.9 "Playfair", serif; letter-spacing: -.03em; margin: 40px 0 36px; color: var(--green); }
+  .row { display: flex; align-items: flex-end; gap: 44px; }
+  .sq { background: var(--ink); } .sq.g { background: var(--green); } .sq.o { background: none; border: 3px solid var(--ink); }
+  .lab { font: 600 22px/1.25 "Manrope"; margin-top: 16px; } .lab b { display: block; font: 400 40px/1.1 "Playfair"; margin-bottom: 4px; }
+  .plans { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 30px 34px; margin-top: 10px; }
+  .plan { position: relative; border: 3px solid var(--ink); }
+  .plan::after { content: ""; position: absolute; left: 22%; bottom: -3px; width: 18%; height: 3px; background: #fff; }
+  .plan::before { content: ""; position: absolute; left: 22%; bottom: 0; width: 18%; aspect-ratio: 1; border-top: 1.5px solid var(--ink); border-right: 1.5px solid var(--ink); border-top-right-radius: 100%; }
+  .bill { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 30px; }
+  .bill td { padding: 22px 0; border-bottom: 1px solid var(--rule); } .bill td:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+  .bill tr.t td { border-bottom: 0; border-top: 2px solid var(--ink); font: 400 46px/1.2 "Playfair"; padding-top: 28px; }
+  .bill .sub { display: block; font-size: 20px; color: var(--muted); }
+  .tag { display: inline-block; font: 600 18px/1 "Manrope"; letter-spacing: .14em; text-transform: uppercase; border: 1.5px solid currentColor; padding: 10px 14px; margin-bottom: 34px; }
+  .myth { font: 400 52px/1.2 "Playfair"; margin: 0 0 60px; text-decoration: line-through; text-decoration-thickness: 2px; color: var(--muted); }
+  .law { font: 400 46px/1.25 "Playfair"; margin: 0; }
+  .photo { position: absolute; inset: 0 0 auto 0; height: 820px; } .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .post .body { position: absolute; left: 88px; right: 88px; top: 880px; }
+  .post h1 { font-size: 64px; margin-bottom: 26px; }
+  .three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; } .three b { display: block; font: 400 52px/1 "Playfair"; margin-bottom: 8px; } .three span { font-size: 21px; color: var(--muted); line-height: 1.3; display: block; }
+  svg { display: block; }
+</style></head>
+<body><div id="root"></div>
+<script>
+const nf = (v, l, d = 0) => new Intl.NumberFormat(l, { maximumFractionDigits: d, minimumFractionDigits: d }).format(v);
+const foot = (s) => `<div class="foot"><div class="word"><i></i>Imóveis Portugal</div><div class="src">${s.source}</div></div>`;
+const F = {
+  // 1. Here vs there: one square metre at home against what it buys in Portugal, squares to scale.
+  "here-vs-there"(s) {
+    const px = 118; // 1 m² at home = 118 px wide, so the largest square still fits
+    const items = s.items.map((it, i) => { const w = Math.round(px * Math.sqrt(it.m2)); return `<div><div class="sq ${i ? "g" : ""}" style="width:${w}px;height:${w}px"></div><div class="lab"><b>${it.v}</b>${it.place}</div></div>`; }).join("");
+    return `<div class="card"><p class="k">${s.kicker}</p><h1 class="sm">${s.h}</h1><div class="row" style="gap:34px">${items}</div><p class="note" style="margin-top:44px">${s.note}</p>${foot(s)}</div>`;
+  },
+  // 2. What your budget buys: floor-plan outlines to scale, one per place.
+  "budget-buys"(s) {
+    const k = 21; // px per √m²
+    const plans = s.items.map((it) => { const a = Math.sqrt(it.m2) * k; return `<div><div class="plan" style="width:${Math.round(a * 1.25)}px;height:${Math.round(a / 1.25)}px"></div><div class="lab"><b>${it.v}</b>${it.place}</div></div>`; }).join("");
+    return `<div class="card"><p class="k">${s.kicker}</p><h1 class="sm">${s.h}</h1><div class="plans">${plans}</div><p class="note" style="margin-top:40px">${s.note}</p>${foot(s)}</div>`;
+  },
+  // 3. Then and now: the same money, two squares to scale.
+  "then-and-now"(s) {
+    const k = 50;
+    const two = s.items.map((it, i) => { const w = Math.round(Math.sqrt(it.m2) * k); return `<div><div class="sq ${i ? "g" : "o"}" style="width:${w}px;height:${w}px"></div><div class="lab"><b>${it.v}</b>${it.place}</div></div>`; }).join("");
+    return `<div class="card"><p class="k">${s.kicker}</p><h1>${s.h}</h1><div class="row">${two}</div><p class="note" style="margin-top:40px">${s.note}</p>${foot(s)}</div>`;
+  },
+  // 4. Ten years in one line.
+  "ten-years"(s) {
+    const W = 904, H = 420, v = s.series.filter((x) => x != null), lo = 0, hi = Math.max(...v) * 1.08;
+    const pts = s.series.map((y, i) => y == null ? null : [i / (s.series.length - 1) * W, H - (y - lo) / (hi - lo) * H]).filter(Boolean);
+    const d = pts.map((p, i) => `${i ? "L" : "M"}${p[0].toFixed(1)},${p[1].toFixed(1)}`).join(" ");
+    const [x0, y0] = pts[0], [x1, y1] = pts[pts.length - 1];
+    const svg = `<svg width="${W}" height="${H + 60}" viewBox="0 -10 ${W} ${H + 70}"><line x1="0" y1="${H}" x2="${W}" y2="${H}" stroke="#e2e2df" stroke-width="2"/><path d="${d}" fill="none" stroke="#2f5d50" stroke-width="5" stroke-linejoin="round"/><circle cx="${x0}" cy="${y0}" r="9" fill="#111214"/><circle cx="${x1}" cy="${y1}" r="11" fill="#2f5d50"/><text x="0" y="${H + 46}" font-family="Manrope" font-size="22" fill="#6a6d72">${s.from}</text><text x="${W}" y="${H + 46}" text-anchor="end" font-family="Manrope" font-size="22" fill="#6a6d72">${s.to}</text></svg>`;
+    return `<div class="card"><p class="k">${s.kicker}</p><h1 class="sm">${s.h}</h1><p style="font:400 120px/1 Playfair;color:#2f5d50;margin:0 0 30px">${s.big}</p>${svg}<p class="note" style="margin-top:30px">${s.note}</p>${foot(s)}</div>`;
+  },
+  // 5. The cost sheet: an illustrative calculation in our own design.
+  "cost-sheet"(s) {
+    const rows = s.rows.map((r) => `<tr><td>${r.k}${r.sub ? `<span class="sub">${r.sub}</span>` : ""}</td><td>${r.v}</td></tr>`).join("");
+    return `<div class="card"><p class="k">${s.kicker}</p><h1 class="sm">${s.h}</h1><span class="tag">${s.tag}</span><table class="bill">${rows}<tr class="t"><td>${s.total.k}</td><td>${s.total.v}<span class="sub">${s.total.sub}</span></td></tr></table>${foot(s)}</div>`;
+  },
+  // 6. Myth vs the law.
+  "myth-vs-law"(s) {
+    return `<div class="card dark"><p class="k">${s.kicker}</p><h1 class="sm">${s.h}</h1><p class="myth">${s.myth}</p><p class="law">${s.law}</p>${foot(s)}</div>`;
+  },
+  // 7. One number.
+  "one-number"(s) {
+    return `<div class="card"><p class="k">${s.kicker}</p><p class="big">${s.big}</p><h1 class="sm">${s.h}</h1><p class="note" style="font-size:26px">${s.note}</p>${foot(s)}</div>`;
+  },
+  // 8. Place postcard: a real photograph and three numbers from the map card.
+  "postcard"(s) {
+    const three = s.items.map((it) => `<div><b>${it.v}</b><span>${it.k}</span></div>`).join("");
+    return `<div class="card post" style="padding:0"><div class="photo"><img src="${s.photo}"></div><div class="body"><h1>${s.h}</h1><div class="three">${three}</div></div>${foot(s)}</div>`;
+  },
+};
+window.render = async (s) => { document.getElementById("root").innerHTML = F[s.format](s); await document.fonts.ready; await Promise.all([...document.images].map((i) => i.complete ? 0 : new Promise((r) => (i.onload = i.onerror = r)))); return true; };
+</script></body></html>
