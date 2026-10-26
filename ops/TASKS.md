@@ -151,6 +151,7 @@ Status: To do · Doing · Blocked · Done
 | 27b | "Herdei uma casa" is a tick box under "Vender" for now (prompt 27 says a third door comes later): decide when it becomes its own door | CEO | To do | 2026-11-13 |
 
 | 28a | Tally (buyer form BEEzgN and the partner-request form): add two hidden fields, "brief" (the reader's qualified summary, only when they tick "Include this summary") and "team" (the partners they agreed may contact them), and show both in the notification email to the agency/partner; ops/TALLY_CONSULTA.md | Operator | To do | 2026-11-06 |
+| 29a | GitHub: create the tag `map-path-v1` on commit 4469117 (Releases → Draft a new release → Choose a tag → map-path-v1 → Target: that commit; save as draft or publish the tag only). The build session cannot push tags (HTTP 403); branch `freeze-map-path-v1` already holds the same commit | Operator | To do | 2026-11-02 |
 | 8z | Decide where enquiries about a specific developer project go: (a) straight to the developer's sales team, (b) via Habinedita as the broking agency, or (c) the buyer chooses; D14 covers general buyer requests only | Operator | To do | 2026-10-30 |
 
 | 29a | Listen to the voice draft of the buyer (af_heart) and approve it or ask for another voice | Operator | To do | 2026-10-27 |
