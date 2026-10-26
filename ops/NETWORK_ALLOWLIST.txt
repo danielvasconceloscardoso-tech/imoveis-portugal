@@ -345,3 +345,5 @@ archive.org
 *.archive.org
 freesound.org
 *.freesound.org
+mixkit.co
+*.mixkit.co
