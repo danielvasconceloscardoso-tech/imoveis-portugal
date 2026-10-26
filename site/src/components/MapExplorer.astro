@@ -47,7 +47,6 @@ const links = {
   buy: pathFor(lang, ed, "buy"), talk: pathFor(lang, ed, "talk"), sim: `${pathFor(lang, ed, "sims")}${SUB.cost[lang]}/`, map: pathFor(lang, ed, "map"),
   journey: pathFor(lang, ed, "journey"), devHref: `${pathFor(lang, ed, "partners")}${PTYPES.find((t) => t.key === "developers")!.slug[lang]}/`, pages: [...pages],
 };
-const names = MAP_MUNIS.map((m) => ({ n: m.n, s: m.s, r: m.r }));
 const briefs = Object.fromEntries(Object.entries(BRIEFS[lang] ?? {}));
 const cfg = { labels, links, quarter: qLabel, mortgage: { rate: PRICES.mortgage.rate, month }, photos: REGION_PHOTO, briefs,
   privateHref: config.privateLive && mode !== "embed" ? pathFor(lang, ed, "private") : "" };
@@ -111,10 +110,7 @@ const id = `mapx-${mode}`;
       <table class="cmp">
         <thead><tr><th scope="col">{c("data.col.place", lang)}</th><th scope="col">{c("map.col.m2", lang)}</th><th scope="col">{c("map.col.buys", lang)}</th></tr></thead>
         <tbody>{MAP_MUNIS.map((m) => (
-          <tr data-row={m.plain} data-v={m.v ?? ""}>
-            <th scope="row"><button type="button" class="linkish" data-pick={m.s}>{m.n}</button><span class="small"> · {c(`map.r.${m.r}`, lang)}</span>{pages.has(m.s) && <a class="small" href={`${links.map}${m.s}/`}> · {c("map.a.page", lang)}</a>}</th>
-            <td>{m.v ? eur(m.v, lang) : "—"}</td><td data-m2>{m.v ? `${nf.format(Math.round(300000 / m.v))} m²` : "—"}</td>
-          </tr>
+          <tr data-v={m.v ?? ""}><th><button data-pick={m.s}>{m.n}</button> <small>{c(`map.r.${m.r}`, lang)}</small>{pages.has(m.s) && <> <a href={`${links.map}${m.s}/`}>{c("map.a.page", lang)}</a></>}</th><td>{m.v ? eur(m.v, lang) : "—"}</td><td>{m.v ? `${nf.format(Math.round(300000 / m.v))} m²` : "—"}</td></tr>
         ))}</tbody>
       </table>
     </details>
@@ -123,10 +119,10 @@ const id = `mapx-${mode}`;
     <p class="mapx-powered"><a href="https://imoveisportugal.lu/" target="_blank" rel="noopener">Powered by Imóveis Portugal</a><span>Fonte: INE · © OpenStreetMap contributors</span></p>
   )}
   <script type="application/json" data-mapx-labels set:html={JSON.stringify(cfg)} />
-  <script type="application/json" data-mapx-names set:html={JSON.stringify(names)} />
 </div>
 
 <script>
-  import { initMapExplorer } from "../scripts/map-explorer";
-  document.querySelectorAll<HTMLElement>("[data-mapx]").forEach((el) => initMapExplorer(el));
+  // The map's code is fetched once the page is idle, so it never competes with the first paint (Lighthouse mobile 95+).
+  const run = () => import("../scripts/map-explorer").then(({ initMapExplorer }) => document.querySelectorAll<HTMLElement>("[data-mapx]").forEach((el) => initMapExplorer(el)));
+  "requestIdleCallback" in window ? requestIdleCallback(run, { timeout: 1200 }) : setTimeout(run, 300);
 </script>

@@ -57,9 +57,8 @@ export function initMapExplorer(root: HTMLElement) {
   let parishes: { feats: any[]; data: Record<string, Series> } | null = null, parLoading = false;
   let hoverId: number | string | null = null, hoverSrc = "";
   const byS = new Map<string, Props>();
-  // The searchable names are in the page (MAP_MUNIS), so the search works before the map loads.
-  const names: { n: string; s: string; r: string }[] = JSON.parse(root.querySelector("[data-mapx-names]")?.textContent || "[]");
-  names.forEach((m) => byS.set(m.s, m as any));
+  // Searchable names: from the list under the map when the page has it, otherwise from the map data once it loads.
+  let names: { n: string; s: string; r: string }[] = [...root.querySelectorAll<HTMLButtonElement>("[data-pick]")].map((b) => ({ n: b.textContent!, s: b.dataset.pick!, r: "" }));
 
   const parse = (s: string) => Number(s.replace(/[^\d]/g, "")) || 0;
   const qLabel = (k: string) => { const [y, qq] = k.split("-Q"); return L.qfmt.replace("{q}", qq).replace("{y}", y); };
@@ -120,7 +119,7 @@ export function initMapExplorer(root: HTMLElement) {
     root.querySelectorAll<HTMLButtonElement>("[data-preset]").forEach((p) => p.setAttribute("aria-pressed", String(Number(p.dataset.preset) === budget)));
     const lt = root.querySelector<HTMLElement>("[data-local-tpl]");
     if (lt && local && fx) lt.textContent = lt.dataset.localTpl!.replace("{local}", local.format(budget * fx));
-    root.querySelectorAll<HTMLElement>("tr[data-v]").forEach((tr) => { const td = tr.querySelector("[data-m2]"); if (td && tr.dataset.v) td.textContent = `${nf.format(Math.round(budget / Number(tr.dataset.v)))} m²`; });
+    root.querySelectorAll<HTMLElement>("tr[data-v]").forEach((tr) => { const td = tr.lastElementChild; if (td && tr.dataset.v) td.textContent = `${nf.format(Math.round(budget / Number(tr.dataset.v)))} m²`; });
     paint(); refreshCard(); syncUrl();
   }
   function setMetric(m: Metric) {
@@ -324,6 +323,7 @@ export function initMapExplorer(root: HTMLElement) {
         byS.set(f.properties.s, f.properties);
       });
       features = geo.features;
+      names = features.map((f) => ({ n: f.properties.n, s: f.properties.s, r: f.properties.r })).sort((a, b) => a.n.localeCompare(b.n, "pt"));
       const vals = (k: string) => features.map((f) => f.properties[k]).filter((v: any) => v != null) as number[];
       breaks = { m2: quantiles(vals("pv")), price: quantiles(vals("pv")), growth: quantiles(vals("pg")), yield: quantiles(vals("py")) };
       const narrow = root.clientWidth < 600;
@@ -405,17 +405,18 @@ export function initMapExplorer(root: HTMLElement) {
   if (sIn && sList) {
     let hits: typeof names = [], active = -1;
     const render = () => {
-      sList.innerHTML = hits.map((m, k) => `<li role="option" id="${sList.id}-${k}" data-s="${m.s}" aria-selected="${k === active}">${m.n}<span class="small"> · ${L.regions[m.r] || ""}</span></li>`).join("")
+      sList.innerHTML = hits.map((m, k) => `<li role="option" id="${sList.id}-${k}" data-s="${m.s}" aria-selected="${k === active}">${m.n}${m.r ? `<span class="small"> · ${L.regions[m.r]}</span>` : ""}</li>`).join("")
         + (sIn.value.trim() && !hits.length ? `<li class="none" aria-disabled="true">${L.nomatch}</li>` : "");
       sList.hidden = !sIn.value.trim(); sIn.setAttribute("aria-expanded", String(!sList.hidden));
       active >= 0 ? sIn.setAttribute("aria-activedescendant", `${sList.id}-${active}`) : sIn.removeAttribute("aria-activedescendant");
     };
-    const go = (s: string) => { const m = names.find((x) => x.s === s); if (!m) return; sIn.value = m.n; sList.hidden = true; sIn.setAttribute("aria-expanded", "false"); load().then(() => select(s)); };
-    sIn.addEventListener("input", () => {
+    const go = (s: string) => { const m = names.find((x) => x.s === s) ?? (byS.get(s) as any); if (!m) return; sIn.value = m.n; sList.hidden = true; sIn.setAttribute("aria-expanded", "false"); load().then(() => select(s)); };
+    const find = () => {
       const t = plain(sIn.value.trim()); active = -1;
       hits = t ? names.filter((m) => plain(m.n).includes(t)).sort((a, b) => Number(!plain(a.n).startsWith(t)) - Number(!plain(b.n).startsWith(t))).slice(0, 8) : [];
-      if (hits.length) active = 0; render(); load();
-    });
+      if (hits.length) active = 0; render();
+    };
+    sIn.addEventListener("input", () => { find(); if (!features.length) load().then(find); });
     sIn.addEventListener("keydown", (e) => {
       if (e.key === "ArrowDown" && hits.length) { active = (active + 1) % hits.length; render(); e.preventDefault(); }
       else if (e.key === "ArrowUp" && hits.length) { active = (active - 1 + hits.length) % hits.length; render(); e.preventDefault(); }
@@ -439,7 +440,7 @@ export function initMapExplorer(root: HTMLElement) {
   root.querySelector<HTMLSelectElement>("[data-region]")?.addEventListener("change", (e) => { region = (e.target as HTMLSelectElement).value; load().then(applyFilter); });
   root.querySelector<HTMLInputElement>("[data-search]")?.addEventListener("input", (e) => {
     const t = plain((e.target as HTMLInputElement).value.trim());
-    root.querySelectorAll<HTMLElement>("tr[data-row]").forEach((tr) => (tr.hidden = !!t && !tr.dataset.row!.includes(t)));
+    root.querySelectorAll<HTMLElement>("tr[data-v]").forEach((tr) => (tr.hidden = !!t && !plain(tr.querySelector("[data-pick]")!.textContent!).includes(t)));
   });
   root.querySelectorAll<HTMLButtonElement>("[data-pick]").forEach((b) => b.addEventListener("click", () => { load().then(() => select(b.dataset.pick!)); root.scrollIntoView({ behavior: reduce() ? "auto" : "smooth" }); }));
 

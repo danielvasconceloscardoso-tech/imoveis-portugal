@@ -9,6 +9,7 @@
 // Writes design/SCORECARD.md. Exit 1 if any threshold fails.
 import { createRequire } from "node:module";
 import { createServer } from "node:http";
+import { gzipSync } from "node:zlib";
 import { readFileSync, existsSync, statSync, writeFileSync } from "node:fs";
 import { join, extname, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -81,7 +82,10 @@ const server = createServer((q, res) => {
   let p = join(dist, decodeURIComponent(q.url.split("?")[0]));
   if (existsSync(p) && statSync(p).isDirectory()) p = join(p, "index.html");
   if (!existsSync(p)) { res.writeHead(404); return res.end(); }
-  res.writeHead(200, { "Content-Type": types[extname(p)] || "application/octet-stream" }); res.end(readFileSync(p));
+  // Text is compressed as Cloudflare serves it in production (gzip here, brotli there); images and fonts as they are.
+  const type = types[extname(p)] || "application/octet-stream", body = readFileSync(p);
+  if (/text|javascript|json|svg/.test(type) && /gzip/.test(q.headers["accept-encoding"] || "")) { res.writeHead(200, { "Content-Type": type, "Content-Encoding": "gzip" }); return res.end(gzipSync(body)); }
+  res.writeHead(200, { "Content-Type": type }); res.end(body);
 }).listen(4325);
 const base = "http://127.0.0.1:4325";
 
@@ -97,7 +101,8 @@ for (const lang of ["pt", "en", "fr"]) for (const key of PAGES) {
     const main = document.querySelector("main") || document.body;
     const heads = [...main.querySelectorAll("h1,h2,h3")].map((h) => h.textContent.trim()).filter(Boolean);
     const top = [...main.querySelectorAll("h1,h2")].map((h) => h.textContent.trim()).filter(Boolean);
-    const buttons = [...document.querySelectorAll("a.btn,button,.nav a,a.more")].map((b) => b.textContent.trim()).filter(Boolean);
+    // Place-name buttons in the map list (prompt 25) are proper names, not copy: left out.
+    const buttons = [...document.querySelectorAll("a.btn,button:not([data-pick]),.nav a,a.more")].map((b) => b.textContent.trim()).filter(Boolean);
     // Prose only for readability: paragraphs and list items outside navigation, source lists and data rows.
     const prose = [...main.querySelectorAll("p,li,summary")].filter((p) => !p.closest("nav,.sources-list,.bill,table,.others,.ft")).map((p) => p.textContent.replace(/\s+/g, " ").trim()).filter((t) => t.length > 2);
     const paras = [...main.querySelectorAll("p,li,dd,dt,summary")].filter((p) => !p.closest(".sources-list")).map((p) => p.textContent.replace(/\s+/g, " ").trim()).filter((t) => t.length > 2);

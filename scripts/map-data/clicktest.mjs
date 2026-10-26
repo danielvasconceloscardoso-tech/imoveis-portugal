@@ -26,6 +26,7 @@ for (const mode of ["flat", "3d"]) {
   const page = await browser.newPage({ viewport: { width: w, height: h } });
   await page.goto(`${base}/pt/lu/mapa/?budget=300000${mode === "flat" ? "&flat=1" : ""}`, { waitUntil: "load" });
   await page.$eval(".mapx-stage", (el) => el.scrollIntoView({ block: "center" }));
+  await page.waitForFunction(() => document.querySelector("[data-mapx]").__mapx, null, { timeout: 30000 });  // the map code loads when the page is idle
   await page.evaluate(() => document.querySelector("[data-mapx]").__mapx.load());
   await page.waitForSelector(".mapx.is-live", { timeout: 60000 });
   await page.waitForTimeout(1500);
@@ -38,7 +39,7 @@ for (const mode of ["flat", "3d"]) {
       const mx = document.querySelector("[data-mapx]"); const m = mx.__mapx.map();
       mx.querySelector("[data-card]").hidden = true; m.stop(); m.jumpTo(c);
     }, cam);
-    await page.waitForTimeout(60);
+    await page.waitForTimeout(mode === "flat" ? 60 : 250);  // 3D: let the tiles at the new camera settle before aiming
     const pt = await page.evaluate((s) => { const p = document.querySelector("[data-mapx]").__mapx.project(s); return p && { x: p.x, y: p.y }; }, s);
     if (!pt || pt.x < 0 || pt.y < 0 || pt.x > box.w || pt.y > box.h) { fail.push(`${s} (off screen)`); continue; }
     // In 3D the block's top face is drawn above its ground label point and taller blocks in front can cover the point:
