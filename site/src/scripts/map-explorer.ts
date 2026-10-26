@@ -202,7 +202,7 @@ export function initMapExplorer(root: HTMLElement) {
     let h = `${photo}<div class="mapx-card-b"><p class="h-small">${L.regions[p.r] || ""}</p><h3 tabindex="-1">${p.n}</h3>`;
     h += m2 ? `<p class="mapx-big">${nf.format(m2)}<span> ${L.m2}</span></p><p class="small">${L.median.replace("{v}", eur.format(v!)).replace("{quarter}", qq)}</p>` : `<p class="small">${L.nodata}</p>`;
     // D52: for a high budget, the developer projects of this area come straight after the figures (nothing is hidden for others).
-    if (!projLoaded) loadProjects().then(() => { if (selected === slug && projects.length) refreshCard(); });  // the card lists partners even with the layer off
+    if (!projLoaded && !projLoading) loadProjects().then(() => { if (selected === slug && projects.length) refreshCard(); });  // the card lists partners even with the layer off
     const here = projects.filter((x) => x.muni === slug);  // prompt 26 §1.4: the partner developers active in this area
     // Prompt 28 §2: "Partner developers here", each with its showcase page (the developer's homes, prices as published).
     if (here.length) {
@@ -466,11 +466,15 @@ export function initMapExplorer(root: HTMLElement) {
   // ---------------------------------------------------------------- developer layer (prompt 26 §1): partner projects only, labelled
   let projects: Project[] = [], projOn = false, markers: any[] = [], projLoaded = false;
   const devBtn = root.querySelector<HTMLButtonElement>("[data-devs]"), devBar = root.querySelector<HTMLElement>("[data-devbar]");
-  async function loadProjects() {
-    if (projLoaded) return; projLoaded = true;
-    projects = [...(cfg.projects || [])];
-    const demo = (q.get("demoproj") || "").replace(/[^a-z0-9-]/gi, "");
-    if (demo) try { projects.push(...(await fetch(`/d/${demo}/project.json`).then((r) => r.json()))); } catch { /* no demo project */ }
+  // One load shared by the place card and the developer layer, so neither draws before the projects arrive.
+  let projLoading: Promise<void> | null = null;
+  function loadProjects() {
+    return projLoading ??= (async () => {
+      const list = [...(cfg.projects || [])];
+      const demo = (q.get("demoproj") || "").replace(/[^a-z0-9-]/gi, "");
+      if (demo) try { list.push(...(await fetch(`/d/${demo}/project.json`).then((r) => r.json()))); } catch { /* no demo project */ }
+      projects = list; projLoaded = true;
+    })();
   }
   const projOk = (p: Project) => {
     const t = devBar?.querySelector<HTMLSelectElement>("[data-ptyp]")?.value || "", mx = parse(devBar?.querySelector<HTMLInputElement>("[data-pmax]")?.value || "");

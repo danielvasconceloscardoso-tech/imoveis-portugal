@@ -64,7 +64,7 @@ export const DEMOS: Demo[] = DEFS.map((d) => {
   const main = ps.find((p) => p.muni === d.muni) ?? ps[0];
   return {
     ...d,
-    budgets: [Math.round(d.buyer.amount / RATES[d.buyer.cur] / 1000) * 1000],
+    budgets: [d.buyer.amount / RATES[d.buyer.cur]],  // exact, so the map shows the buyer's own figure in their currency
     render: img(main?.render), credit: main?.credit ?? undefined,
     pins: ps.map((p) => ({ id: p.id, name: p.name, developer: p.developer, muni: p.muni, lon: p.lon, lat: p.lat, from: p.from, typologies: p.typologies, delivery: p.delivery,
       url: p.url, render: img(p.render, 800), credit: p.credit, showcase: `/d/${d.token}/homes/${p.muni === d.muni ? "" : `${p.muni}/`}` })),

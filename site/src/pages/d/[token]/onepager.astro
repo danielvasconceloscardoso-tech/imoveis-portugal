@@ -1,79 +1,97 @@
 ---
-// One-page leave-behind per private demo (prompt 26 §2), A4 landscape, English, D50 register. Printed to PDF by
+// One-page leave-behind per private demo v2 (prompt 28 §4), A4 landscape, English, D50 register: the film on paper.
+// Their best image, the buyer and the place in three numbers, their homes with prices as published, the private
+// viewing flow with the qualified summary, their own website, and the illustrative monthly report. Printed to PDF by
 // scripts/demo-pdf.mjs into sponsors/demos/. Unlisted, noindex.
 import "@fontsource-variable/playfair-display";
 import "@fontsource-variable/jost";
-import { readFileSync } from "node:fs";
-import { join } from "node:path";
-import { DEMOS } from "../../../lib/demos";
+import { DEMOS, rateOf } from "../../../lib/demos";
+import { demoProjects, img } from "../../../lib/projects";
 import { PRICES, LAST } from "../../../lib/prices";
-import { RATE } from "../../../lib/content";
+import { purchase } from "../../../lib/sims";
+import { summary, BRIEF_KEYS, type BriefLabels } from "../../../lib/brief";
+import { c } from "../../../lib/copy";
 
 export function getStaticPaths() { return DEMOS.map((d) => ({ params: { token: d.token } })); }
 const d = DEMOS.find((x) => x.token === Astro.params.token)!;
-const layers = JSON.parse(readFileSync(join(process.cwd(), "public", "data", "map", "layers.json"), "utf8"));
-const s = PRICES.munis[d.muni] as any, ly = layers.munis[d.muni] ?? {};
-const nf1 = new Intl.NumberFormat("en-US", { minimumFractionDigits: 1, maximumFractionDigits: 1 }), nf = new Intl.NumberFormat("en-US");
+const s = PRICES.munis[d.muni] as any, m2 = s.m2[LAST] as number;
+const nf = new Intl.NumberFormat("en-US"), nf1 = new Intl.NumberFormat("en-US", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 const money = (v: number, cur = "EUR") => new Intl.NumberFormat("en-US", { style: "currency", currency: cur, maximumFractionDigits: 0 }).format(v);
-const curs = [...new Set(["EUR", ...d.readers.map((r) => r.cur)])];
-const rate = (k: string) => (k === "EUR" ? 1 : RATE(k as "USD").rate);
 const q = PRICES.quarters[LAST], ql = `Q${q.slice(-1)} ${q.slice(0, 4)}`;
-const m2 = s.m2[LAST] as number, rent = s.rq[LAST] as number | null;
-const img = d.render ?? "/img/lisboa-anoitecer-castelo-1200.webp";
-const figs: [string, string][] = [
-  ["Median price per m², homes sold", money(m2)],
-  ["Price change since 2016", s.g10 != null ? `+${nf.format(s.g10)}%` : "—"],
-  ["Median rent per m² a month", rent ? `€${nf1.format(rent)}` : "—"],
-  ["Gross rental yield", s.yield != null ? `${nf1.format(s.yield)}%` : "—"],
-  ...(ly.dom?.abroad ? [["Buyers with a tax address abroad, per m²", money(ly.dom.abroad)] as [string, string]] : []),
-  ...(ly.sea != null ? [["Seasonal homes (Census 2021)", `${nf1.format(ly.sea)}%`] as [string, string]] : []),
-];
+const ps = demoProjects(d.token).filter((p) => p.units?.length);
+const rows = ps.filter((p) => p.muni === d.muni).flatMap((p) => p.units!.map((u) => ({ p, u }))).slice(0, 7);
+const pick = ps.flatMap((p) => p.units!.map((u) => ({ p, u }))).find((x) => x.u.id === d.home)!;
+const total = pick.u.price ? purchase(pick.u.price, false, false, false).total : d.budgets[0];
+const own = Math.round(total * d.buyer.own / 1000) * 1000;
+const L = Object.fromEntries(BRIEF_KEYS.map((k) => [k, c(`brief.${k}`, "en")])) as BriefLabels;
+const line = summary({ door: "buy", total: Math.round(total), own: d.buyer.own < 1 ? own : undefined, loan: d.buyer.own >= 1 ? 0 : Math.round(total - own), when: d.buyer.when, nif: false, places: [s.n] },
+  L, (v) => money(Math.round(v / 1000) * 1000), (v) => `${Math.round(v)}%`, c(`journey.from.${d.buyer.ed}`, "en"));
+const loc = (v: number) => (d.buyer.cur === "EUR" ? "" : money(Math.round(v * rateOf(d.buyer.cur) / 1000) * 1000, d.buyer.cur));
+const checked = ps.map((p) => p.checked).filter(Boolean).sort().pop();
 ---
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8" /><meta name="robots" content="noindex, nofollow" /><title>{d.developer} · Imóveis Portugal</title>
 <style is:global>
   @page { size: A4 landscape; margin: 0; }
-  * { box-sizing: border-box; } body { margin: 0; font: 400 10.5pt/1.45 "Jost Variable", sans-serif; color: #111214; background: #fff; }
-  .page { width: 297mm; height: 210mm; padding: 14mm 15mm 11mm; display: grid; grid-template-rows: auto 1fr auto; gap: 8mm; }
-  .top { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid #111214; padding-bottom: 4mm; }
-  .brand { font: 500 14pt/1 "Playfair Display Variable", serif; } .brand i { display: inline-block; width: 6px; height: 6px; background: #1f4a3d; margin-right: 8px; vertical-align: middle; }
-  .flag { font: 500 7.5pt/1 "Jost Variable"; letter-spacing: .14em; text-transform: uppercase; color: #5f6368; }
-  .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 9mm; min-height: 0; }
-  h1 { font: 400 25pt/1.05 "Playfair Display Variable", serif; margin: 0 0 4mm; } h2 { font: 500 7.5pt/1 "Jost Variable"; letter-spacing: .14em; text-transform: uppercase; color: #5f6368; margin: 0 0 3mm; border-top: 1px solid #111214; padding-top: 2.5mm; }
-  img { width: 100%; height: 52mm; object-fit: cover; display: block; } .credit { font-size: 7pt; color: #5f6368; margin: 1.5mm 0 4mm; }
-  table { width: 100%; border-collapse: collapse; font-size: 9pt; } td, th { text-align: left; padding: 1.6mm 2.5mm 1.6mm 0; border-bottom: 1px solid #e6e6e3; } th { font-weight: 500; color: #5f6368; font-size: 7.5pt; }
-  .big { font: 400 15pt/1 "Playfair Display Variable", serif; } ul { margin: 0; padding: 0; list-style: none; } li { padding: 1.6mm 0; border-bottom: 1px solid #e6e6e3; }
-  li b { font-weight: 500; } .num { font: 400 13pt/1 "Playfair Display Variable", serif; color: #1f4a3d; margin-right: 3mm; }
-  .foot { font-size: 7pt; color: #5f6368; display: flex; justify-content: space-between; gap: 8mm; border-top: 1px solid #e6e6e3; padding-top: 3mm; }
+  * { box-sizing: border-box; } body { margin: 0; font: 400 9.5pt/1.42 "Jost Variable", sans-serif; color: #111214; background: #fff; }
+  .page { width: 297mm; height: 210mm; overflow: hidden; display: grid; grid-template-columns: 96mm 1fr; }
+  .cover { position: relative; } .cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .cover .t { position: absolute; left: 0; right: 0; bottom: 0; padding: 10mm 9mm 9mm; color: #fff; background: linear-gradient(transparent, rgba(0,0,0,.72)); }
+  .cover .k { font: 500 7pt/1 "Jost Variable"; letter-spacing: .16em; text-transform: uppercase; opacity: .9; }
+  .cover h1 { font: 400 22pt/1.05 "Playfair Display Variable", serif; margin: 3mm 0 2mm; } .cover .cr { font-size: 6.5pt; opacity: .8; }
+  .body { padding: 10mm 11mm 8mm; display: grid; grid-template-rows: auto 1fr auto; gap: 5mm; }
+  .top { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid #111214; padding-bottom: 3mm; }
+  .brand { font: 500 13pt/1 "Playfair Display Variable", serif; } .brand i { display: inline-block; width: 6px; height: 6px; background: #1f4a3d; margin-right: 8px; vertical-align: middle; }
+  .flag { font: 500 7pt/1 "Jost Variable"; letter-spacing: .14em; text-transform: uppercase; color: #5f6368; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 8mm; min-height: 0; }
+  h2 { font: 500 7pt/1 "Jost Variable"; letter-spacing: .14em; text-transform: uppercase; color: #5f6368; margin: 0 0 2.5mm; border-top: 1px solid #111214; padding-top: 2mm; }
+  .buyer { font: 400 15pt/1.15 "Playfair Display Variable", serif; margin: 0 0 3mm; }
+  .three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3mm; margin-bottom: 4mm; } .three b { display: block; font: 400 17pt/1 "Playfair Display Variable", serif; } .three span { font-size: 7pt; color: #5f6368; }
+  table { width: 100%; border-collapse: collapse; font-size: 8.5pt; } td, th { text-align: left; padding: 1.3mm 2mm 1.3mm 0; border-bottom: 1px solid #e6e6e3; } th { font-weight: 500; color: #5f6368; font-size: 7pt; } td.r, th.r { text-align: right; }
+  ol.flow { margin: 0; padding: 0; list-style: none; counter-reset: f; } ol.flow li { counter-increment: f; padding: 1.4mm 0 1.4mm 8mm; position: relative; border-bottom: 1px solid #e6e6e3; }
+  ol.flow li::before { content: counter(f, decimal-leading-zero); position: absolute; left: 0; font: 400 10pt/1.2 "Playfair Display Variable", serif; color: #1f4a3d; }
+  .mail { background: #f6f5f2; padding: 3mm 3.5mm; margin: 2.5mm 0 0; } .mail p { margin: 0; } .mail .l { font: 400 10pt/1.4 "Playfair Display Variable", serif; margin: 1mm 0; }
+  .illus { display: inline-block; font: 500 6pt/1 "Jost Variable"; letter-spacing: .12em; text-transform: uppercase; border: 1px solid #111214; padding: 1.2mm 1.6mm; margin: 0 0 2mm; }
+  .s { font-size: 6.8pt; color: #5f6368; } p { margin: 0 0 2mm; }
+  .foot { font-size: 6.3pt; color: #5f6368; border-top: 1px solid #e6e6e3; padding-top: 2mm; display: flex; justify-content: space-between; gap: 6mm; }
 </style></head>
 <body><div class="page">
-  <div class="top"><span class="brand"><i></i>Imóveis Portugal</span><span class="flag">Private demo prepared for {d.developer} · not published</span></div>
-  <div class="grid">
-    <div>
-      <img src={img} alt="" /><p class="credit">{d.credit ? `${d.credit}. Shown only in this private demo.` : "Lisbon. Your projects are not public yet: the pins wait for them."}</p>
-      <h1>{d.extra === "prelaunch" ? "Your launch audience, already abroad" : `${d.project}, seen by buyers abroad`}</h1>
-      <p>{d.where}. {d.facts[0]}.</p>
+  <div class="cover"><img src={d.render} alt="" /><div class="t"><span class="k">Prepared for {d.developer} · private preview</span><h1>{d.project}, seen by the buyers who live abroad</h1><span class="cr">{d.credit}. Shown only in this private preview.</span></div></div>
+  <div class="body">
+    <div class="top"><span class="brand"><i></i>Imóveis Portugal</span><span class="flag">Not published · English preview</span></div>
+    <div class="cols">
+      <div>
+        <h2>The buyer</h2>
+        <p class="buyer">{d.buyer.line} {d.buyer.words}</p>
+        <div class="three">
+          <div><b>{nf.format(Math.round(d.budgets[0] / m2))} m²</b><span>in {s.n}, at the median price</span></div>
+          <div><b>{s.g10 > 0 ? "+" : ""}{Math.round(s.g10)}%</b><span>price per m² since 2016</span></div>
+          <div><b>{nf1.format(s.yield)}%</b><span>gross rental yield</span></div>
+        </div>
+        <p class="s">INE, {ql}. Past values do not guarantee future values; official statistics, not a valuation.</p>
+        <h2 style="margin-top:3mm">Your homes, as you publish them</h2>
+        <table><tr><th>Home</th><th class="r">m²</th><th class="r">Price</th>{d.buyer.cur !== "EUR" && <th class="r">{d.buyer.cur}</th>}</tr>
+          {rows.map(({ p, u }) => <tr><td>{u.typology}{rows.some((x) => x.p !== rows[0].p) ? ` · ${p.name.replace(/^.*– /, "")}` : ""}</td><td class="r">{u.area != null ? nf.format(u.area) : "—"}</td><td class="r">{u.price ? `${u.priceNote === "from" ? "from " : ""}${money(u.price)}` : "on request"}</td>{d.buyer.cur !== "EUR" && <td class="r">{u.price ? loc(u.price) : ""}</td>}</tr>)}</table>
+        <p class="s" style="margin-top:1.5mm">Prices as published on {checked}. A showcase page reached from the map's place card (“Partner developers here”), each home with its cost of buying.</p>
+      </div>
+      <div>
+        <h2>A private viewing</h2>
+        <ol class="flow">
+          <li><b>{pick.u.typology}{pick.u.area != null && ` · ${nf.format(pick.u.area)} m²`}</b>, {money(pick.u.price ?? 0)}: with taxes and the deed, an indicative {money(Math.round(total))}{loc(total) && ` (${loc(total)})`}.</li>
+          <li>“Arrange a private viewing”, details filled in, consent to {d.developer} by name.</li>
+          <li>Their team assembles: lawyer, financing, currency, tax at home, each named once a partner.</li>
+          <li>You receive the enquiry already qualified:</li>
+        </ol>
+        <div class="mail"><span class="illus">Illustrative example</span><p class="l">{line}</p><p class="s">Indicative, not a credit assessment; nothing is decided about the buyer from it.</p></div>
+        <h2 style="margin-top:4mm">On your website · each month</h2>
+        <p>The same map on your pages, in your colour, centred on {s.n}: “Powered by Imóveis Portugal”.</p>
+        <span class="illus">Illustrative example · not real data</span>
+        <table><tr><th>Edition</th><th class="r">Views</th><th class="r">Clicks</th><th class="r">Viewings</th></tr>
+          {d.readers.map((r, i) => <tr><td>{r.country}</td><td class="r">{nf.format([1840, 1210, 760][i] ?? 600)}</td><td class="r">{[96, 61, 38][i] ?? 30}</td><td class="r">{[7, 4, 3][i] ?? 2}</td></tr>)}
+          <tr><td colspan="3">Ready within 3 months · cash buyers · NIF in place</td><td class="r">4 · 5 · 6</td></tr></table>
+        <p class="s" style="margin-top:2mm">The full preview, with the live map and a one-minute film, is at a private link sent on request. Sponsorship is always labelled, for a flat annual fee, never a fee per contact. <b>ops@imoveisportugal.lu</b></p>
+      </div>
     </div>
-    <div>
-      <h2>Their budgets, in their currency</h2>
-      <table><tr><th>Budget</th>{curs.slice(1).map((k) => <th>{k}</th>)}<th>m² in {s.n}</th></tr>
-        {d.budgets.map((b) => <tr><td class="big">{money(b)}</td>{curs.slice(1).map((k) => <td>{money(Math.round(b * rate(k)), k)}</td>)}<td>{nf.format(Math.round(b / m2))} m²</td></tr>)}</table>
-      <h2 style="margin-top:6mm">{s.n} in official figures</h2>
-      <table>{figs.map(([k, v]) => <tr><td>{k}</td><td>{v}</td></tr>)}</table>
-      <p class="credit">INE, {ql} unless stated. Past values do not guarantee future values; official statistics, not a valuation.</p>
-    </div>
-    <div>
-      <h2>How you would appear</h2>
-      <ul>
-        <li><span class="num">01</span><b>On the map</b>: your project as a pin above the 3D map, labelled “Sponsored”, with its card and “Request information”.</li>
-        <li><span class="num">02</span><b>On the path</b> of buyers from {d.readers.map((r) => r.country).filter((v, i, a) => a.indexOf(v) === i).join(", ")}: at the steps where questions become enquiries.</li>
-        <li><span class="num">03</span><b>On your site</b>: the same map, in your colour, centred on your project, “Powered by Imóveis Portugal”.</li>
-        <li><span class="num">04</span><b>Every month</b>: placements seen, clicks and enquiries by country and budget.</li>
-      </ul>
-      <h2 style="margin-top:6mm">The demo</h2>
-      <p>The full demo, with the live map and a 70-second walkthrough, is at a private link we send you on request. Sponsorship is always labelled, for a flat annual fee, never a fee per contact.</p>
-      <p><b>ops@imoveisportugal.lu</b></p>
-    </div>
+    <div class="foot"><span>Homes, prices and images: {d.developer}, as published; {d.sources.map((x) => x.t).join("; ")}.</span><span>Data: INE (CC BY 4.0) · ECB · © OpenStreetMap contributors</span></div>
   </div>
-  <div class="foot"><span>Project facts: {d.sources.map((x) => x.t).join("; ")}.</span><span>Data: INE (CC BY 4.0) · ECB · © OpenStreetMap contributors</span></div>
 </div></body></html>

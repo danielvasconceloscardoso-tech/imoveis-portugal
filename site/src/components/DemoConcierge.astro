@@ -18,7 +18,7 @@ const total = u.price ? purchase(u.price, false, false, false).total : d.budgets
 const own = Math.round((total * b.own) / 1000) * 1000;
 const L = Object.fromEntries(BRIEF_KEYS.map((k) => [k, c(`brief.${k}`, "en")])) as BriefLabels;
 const line = summary({ door: "buy", total: Math.round(total), own: b.own < 1 ? own : undefined, loan: b.own >= 1 ? 0 : Math.round(total - own), when: b.when, nif: false, places: [PRICES.munis[p.muni].n] },
-  L, (v) => money(v), (v) => `${Math.round(v)}%`, c(`journey.from.${b.ed}`, "en"));
+  L, (v) => money(Math.round(v / 1000) * 1000), (v) => `${Math.round(v)}%`, c(`journey.from.${b.ed}`, "en"));
 const fx = (v: number) => (b.cur === "EUR" ? "" : ` (${money(Math.round(v * rateOf(b.cur) / 1000) * 1000, b.cur)})`);
 const team = [
   { role: "Developer", name: p.developer, line: `${p.name}: the home, the viewing and the terms of sale.` },
@@ -28,7 +28,7 @@ const team = [
   { role: `Tax in ${reader.country === "USA" ? "the US" : reader.country}`, line: "The purchase seen from home: reporting, treaty, later the sale." },
 ];
 ---
-<div class={`dc${open ? " is-open" : ""}`} data-dc>
+<div class={`dc${open ? " is-open is-static" : ""}`} data-dc>
   <p class="dc-p">The request goes to {p.developer} with the buyer's consent, and with the summary of their case only if they tick it.</p>
   <form class="dc-form" onsubmit="return false">
     <span class="dc-illus">Illustrative example · not a real buyer</span>
@@ -92,6 +92,7 @@ const team = [
   .dc-subj { font: 500 13px/1.4 var(--sans); letter-spacing: .04em; color: var(--muted); margin: 0 0 10px; }
   .dc-line1 { font: 400 1.3rem/1.45 var(--serif); margin: 0 0 12px; }
   .dc-small { font-size: 13px; color: var(--muted); margin: 8px 0 0; }
+  .dc.is-static .dc-team li, .dc.is-static .dc-dev { animation: none; }
   @media (max-width: 820px) { .dc-after, .dc-grid { grid-template-columns: 1fr; } .dc-dev { border: 0; padding: 0; } }
   @media (prefers-reduced-motion: reduce) { .dc.is-open .dc-team li, .dc.is-open .dc-dev { animation: none; } }
 </style>
