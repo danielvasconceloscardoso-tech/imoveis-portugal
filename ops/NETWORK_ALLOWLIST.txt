@@ -335,3 +335,5 @@ geoboundaries.org
 huggingface.co
 *.huggingface.co
 *.hf.co
+musopen.org
+*.musopen.org
