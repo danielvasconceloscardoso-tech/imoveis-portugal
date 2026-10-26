@@ -3,7 +3,7 @@
 // them once the developer is a partner. Reached from the map's place card ("Partner developers here").
 import Demo from "../../../../layouts/Demo.astro";
 import Showcase from "../../../../components/Showcase.astro";
-import { DEMOS, rateOf } from "../../../../lib/demos";
+import { DEMOS } from "../../../../lib/demos";
 import { demoProjects } from "../../../../lib/projects";
 
 export function getStaticPaths() { return DEMOS.map((d) => ({ params: { token: d.token } })); }
@@ -11,5 +11,5 @@ const d = DEMOS.find((x) => x.token === Astro.params.token)!;
 const ps = demoProjects(d.token).filter((p) => p.muni === d.muni && p.units?.length);
 ---
 <Demo title={`${d.developer} · private preview`} developer={d.developer} accent={d.accent}>
-  <Showcase lang="en" locale="en-US" projects={ps} label="Sponsored" href={(p, u) => `/d/${d.token}/home/${u.id}/`} cur={d.buyer.cur === "EUR" ? undefined : { code: d.buyer.cur, rate: rateOf(d.buyer.cur) }} />
+  <Showcase lang="en" locale="en-US" projects={ps} label="Sponsored" href={(p, u) => `/d/${d.token}/home/${u.id}/`} />
 </Demo>

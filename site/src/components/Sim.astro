@@ -102,7 +102,7 @@ const fieldLabel = (id: string, kind: string) => {
         <><p>{c("sims.credit.none", lang)}</p><a class="btn" href={`${talk}?cat=bank#form`}>{c("faq.cta.bank", lang)}</a></>
       ))}
       {next === "tax" && (<><p>{c("sims.tax.p", lang)}</p><a class="btn" href={`${talk}?cat=tax#form`}>{c("faq.cta.tax", lang)}</a></>)}
-      {next === "agency" && (<><p>{c("sims.agency.p", lang)}</p><a class="btn" href={pathFor(lang, ed, "buy")}>{c("faq.cta.agency", lang)}</a><Calls lang={lang} ed={ed} compact /></>)}
+      {next === "agency" && (<div data-agency><p>{c("sims.agency.p", lang)}</p><a class="btn" href={pathFor(lang, ed, "buy")}>{c("faq.cta.agency", lang)}</a><Calls lang={lang} ed={ed} compact /></div>)}
       <p style="margin-top:20px"><a class="more" href={pathFor(lang, ed, "dossiers")}>{c("consult.later.dossier", lang)}</a></p>
     </section>
 

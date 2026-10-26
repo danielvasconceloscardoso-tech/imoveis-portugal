@@ -7,7 +7,7 @@ import { demoBuyer, money, TEAM } from "../lib/demobuyer";
 
 interface Props { d: Demo; inbox?: boolean; }
 const { d, inbox = false } = Astro.props;
-const { pick, total, lines, reader, local } = demoBuyer(d);
+const { pick, total, lines, reader } = demoBuyer(d);
 const u = pick.u, nf = new Intl.NumberFormat("en-US");
 const what = `${u.typology}${u.area != null ? `, ${nf.format(u.area)} m²` : ""}`;
 const subject = `Private viewing request · ${pick.p.name.replace(/ – .*$/, "")} · ${what}`;
@@ -27,7 +27,7 @@ const subject = `Private viewing request · ${pick.p.name.replace(/ – .*$/, ""
       <p class="em-k">The buyer, in short</p>
       <ul class="em-sum">{lines.map((l) => <li>{l}</li>)}</ul>
       <p class="em-k">The brief</p>
-      <p>{d.buyer.line.replace(/\.$/, "")} would like a private viewing of <b>{what}</b> at {pick.p.name.replace(/ – .*$/, "")}, published at {u.price ? `${u.priceNote === "from" ? "from " : ""}${money(u.price)}` : "price on request"}. With transfer tax, stamp duty and the deed, the indicative total is {money(Math.round(total))}{local(total) && ` (${local(total)})`}. They would like to start by video and visit in person on their next trip.</p>
+      <p>{d.buyer.line.replace(/\.$/, "")} would like a private viewing of <b>{what}</b> at {pick.p.name.replace(/ – .*$/, "")}, published at {u.price ? `${u.priceNote === "from" ? "from " : ""}${money(u.price)}` : "price on request"}. With transfer tax, stamp duty and the deed, the indicative total is {money(total)}. They would like to start by video and visit in person on their next trip.</p>
       <p class="em-k">Their team so far</p>
       <ul class="em-team">{TEAM.map((t) => <li><b>{t.role}</b> · to be chosen</li>)}</ul>
       <p class="em-foot">Sent by Imóveis Portugal with the buyer's consent to be contacted by {d.developer}. The summary is what the buyer entered in our calculators: indicative, not a credit assessment, and nothing is decided about the buyer from it. For high budgets the partner agency's identification and proof of funds still apply (Lei 83/2017). Reply directly to arrange the viewing.</p>

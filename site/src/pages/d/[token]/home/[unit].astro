@@ -4,7 +4,7 @@
 import Demo from "../../../../layouts/Demo.astro";
 import ShowcaseHome from "../../../../components/ShowcaseHome.astro";
 import DemoConcierge from "../../../../components/DemoConcierge.astro";
-import { DEMOS, rateOf } from "../../../../lib/demos";
+import { DEMOS } from "../../../../lib/demos";
 import { demoProjects } from "../../../../lib/projects";
 import { pathFor } from "../../../../i18n";
 import { SUB } from "../../../../lib/tools";
@@ -17,8 +17,7 @@ const d = DEMOS.find((x) => x.token === Astro.params.token)!;
 const back = `/d/${d.token}/homes/${p.muni === d.muni ? "" : `${p.muni}/`}`;
 ---
 <Demo title={`${p.name} · private preview`} developer={d.developer} accent={d.accent}>
-  <ShowcaseHome lang="en" locale="en-US" project={p} unit={u} back={back} sim={`${pathFor("en", d.buyer.ed, "sims")}${SUB.cost.en}/`} label="Sponsored"
-    cur={d.buyer.cur === "EUR" ? undefined : { code: d.buyer.cur, rate: rateOf(d.buyer.cur) }}>
+  <ShowcaseHome lang="en" locale="en-US" project={p} unit={u} back={back} sim={`${pathFor("en", d.buyer.ed, "sims")}${SUB.cost.en}/`} label="Sponsored">
     <DemoConcierge slot="viewing" d={d} project={p} unit={u} />
   </ShowcaseHome>
 </Demo>

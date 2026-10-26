@@ -14,7 +14,20 @@
   document.querySelectorAll(".form-box iframe, [data-brief-target], a[href^='mailto:']").forEach(function (el) {
     var n = document.createElement("p"); n.className = "dmb-note"; n.textContent = "Demo mode: no request is sent."; (el.closest(".form-box") || el).replaceWith(n);
   });
+  // The developer's demo never shows the partner agency (CEO review, 26 Oct): its buttons and the private consultation
+  // become the developer's own homes, and the other links to the agency are hidden.
+  var agency = /\/(comprar|buy|acheter|consulta-privada|private-consultation|consultation-privee)\/?$/;
+  document.querySelectorAll("a[href]").forEach(function (a) { if (agency.test(a.pathname) && !a.closest("[data-agency]")) (a.closest("li") || a).style.display = "none"; });
+  document.querySelectorAll("[data-cta='agency'], [data-agency]").forEach(function (a) { a.style.display = "none"; });
   fetch("/d/" + t + "/walk.json").then(function (r) { return r.json(); }).then(function (w) {
+    var dev = w.developer.replace(/[&<>"]/g, "");
+    document.querySelectorAll("[data-agency]").forEach(function (el) {
+      var prev = el.previousElementSibling;
+      if (prev && prev.classList.contains("dmb-dev")) { el.remove(); return; }
+      var p = document.createElement("p"); p.className = "dmb-dev";
+      p.innerHTML = '<a class="btn sm" href="/d/' + t + '/homes/?demo=' + t + '">See ' + dev + (/s$/.test(dev) ? "’" : "’s") + " homes</a>";
+      el.replaceWith(p);
+    });
     var here = location.pathname, i = w.steps.findIndex(function (s) { return here === s.url.split(/[?#]/)[0]; });
     var bar = document.querySelector("[data-dmb]"), s = w.steps[Math.max(0, i)], last = i === w.steps.length - 1;
     var esc = function (x) { return String(x).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };

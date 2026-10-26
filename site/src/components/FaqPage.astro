@@ -84,11 +84,11 @@ const jsonLd = {
               <p>{it.a}{it.nums.map((n) => <a class="sup" href={`#fonte-${n}`}>{n}</a>)}</p>
               {it.ask && <p class="small">{c("journey.unverified", lang)}</p>}
               {it.onpath && <p class="small"><a href={it.onpath.href}>{it.onpath.label}</a></p>}
-              <div class="next">
+              <div class="next" data-agency={it.cta === "agency" ? "" : undefined}>
                 <a class="btn sm" href={it.next.href}>{it.next.label}</a>
                 <span class="who">{it.next.who}</span>
               </div>
-              {it.practice && <Calls lang={lang} ed={ed} compact />}
+              {it.practice && <div data-agency><Calls lang={lang} ed={ed} compact /></div>}
             </div>
           </details>
         ))}

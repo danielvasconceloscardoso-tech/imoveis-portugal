@@ -5,12 +5,10 @@
 // scripts/demo-pdf.mjs into sponsors/demos/. Unlisted, noindex.
 import "@fontsource-variable/playfair-display";
 import "@fontsource-variable/jost";
-import { DEMOS, rateOf } from "../../../lib/demos";
+import { DEMOS } from "../../../lib/demos";
+import { demoBuyer } from "../../../lib/demobuyer";
 import { demoProjects, img } from "../../../lib/projects";
 import { PRICES, LAST } from "../../../lib/prices";
-import { purchase } from "../../../lib/sims";
-import { summary, BRIEF_KEYS, type BriefLabels } from "../../../lib/brief";
-import { c } from "../../../lib/copy";
 import { walkSteps } from "../../../lib/demowalk";
 
 export function getStaticPaths() { return DEMOS.map((d) => ({ params: { token: d.token } })); }
@@ -21,13 +19,7 @@ const money = (v: number, cur = "EUR") => new Intl.NumberFormat("en-US", { style
 const q = PRICES.quarters[LAST], ql = `Q${q.slice(-1)} ${q.slice(0, 4)}`;
 const ps = demoProjects(d.token).filter((p) => p.units?.length);
 const rows = ps.filter((p) => p.muni === d.muni).flatMap((p) => p.units!.map((u) => ({ p, u }))).slice(0, 5);
-const pick = ps.flatMap((p) => p.units!.map((u) => ({ p, u }))).find((x) => x.u.id === d.home)!;
-const total = pick.u.price ? purchase(pick.u.price, false, false, false).total : d.budgets[0];
-const own = Math.round(total * d.buyer.own / 1000) * 1000;
-const L = Object.fromEntries(BRIEF_KEYS.map((k) => [k, c(`brief.${k}`, "en")])) as BriefLabels;
-const line = summary({ door: "buy", total: Math.round(total), own: d.buyer.own < 1 ? own : undefined, loan: d.buyer.own >= 1 ? 0 : Math.round(total - own), when: d.buyer.when, nif: false, places: [s.n] },
-  L, (v) => money(Math.round(v / 1000) * 1000), (v) => `${Math.round(v)}%`, c(`journey.from.${d.buyer.ed}`, "en"));
-const loc = (v: number) => (d.buyer.cur === "EUR" ? "" : money(Math.round(v * rateOf(d.buyer.cur) / 1000) * 1000, d.buyer.cur));
+const { pick, total, line } = demoBuyer(d);
 const checked = ps.map((p) => p.checked).filter(Boolean).sort().pop();
 const steps = walkSteps(d);
 ---
@@ -76,13 +68,13 @@ const steps = walkSteps(d);
         </div>
         <p class="s">INE, {ql}. Past values do not guarantee future values; official statistics, not a valuation.</p>
         <h2 style="margin-top:3mm">Your homes, as you publish them</h2>
-        <table><tr><th>Home</th><th class="r">m²</th><th class="r">Price</th>{d.buyer.cur !== "EUR" && <th class="r">{d.buyer.cur}</th>}</tr>
-          {rows.map(({ p, u }) => <tr><td>{u.typology}{rows.some((x) => x.p !== rows[0].p) ? ` · ${p.name.replace(/^.*– /, "")}` : ""}</td><td class="r">{u.area != null ? nf.format(u.area) : "—"}</td><td class="r">{u.price ? `${u.priceNote === "from" ? "from " : ""}${money(u.price)}` : "on request"}</td>{d.buyer.cur !== "EUR" && <td class="r">{u.price ? loc(u.price) : ""}</td>}</tr>)}</table>
+        <table><tr><th>Home</th><th class="r">m²</th><th class="r">Price</th></tr>
+          {rows.map(({ p, u }) => <tr><td>{u.typology}{rows.some((x) => x.p !== rows[0].p) ? ` · ${p.name.replace(/^.*– /, "")}` : ""}</td><td class="r">{u.area != null ? nf.format(u.area) : "—"}</td><td class="r">{u.price ? `${u.priceNote === "from" ? "from " : ""}${money(u.price)}` : "on request"}</td></tr>)}</table>
         <p class="s" style="margin-top:1.5mm">Prices as published on {checked}. A showcase page reached from the map's place card (“Partner developers here”), each home with its cost of buying.</p>
       </div>
       <div>
         <h2>The enquiry you receive</h2>
-        <p><b>{pick.u.typology}{pick.u.area != null && ` · ${nf.format(pick.u.area)} m²`}</b>, {money(pick.u.price ?? 0)}: with taxes and the deed, an indicative {money(Math.round(total))}{loc(total) && ` (${loc(total)})`}. You receive the enquiry already qualified:</p>
+        <p><b>{pick.u.typology}{pick.u.area != null && ` · ${nf.format(pick.u.area)} m²`}</b>, {money(pick.u.price ?? 0)}: with taxes and the deed, an indicative {money(total)}. You receive the enquiry already qualified:</p>
         <div class="mail"><span class="illus">Illustrative example</span><p class="l">{line}</p><p class="s">Indicative, not a credit assessment; nothing is decided about the buyer from it.</p></div>
         <h2 style="margin-top:4mm">On your website · each month</h2>
         <p>The same map on your pages, in your colour, centred on {s.n}: “Powered by Imóveis Portugal”.</p>

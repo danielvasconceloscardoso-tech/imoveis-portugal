@@ -30,7 +30,6 @@ const cost = pick.u.price ? purchase(pick.u.price, false, false, false) : null;
 const others = ps.filter((p) => p.muni !== d.muni);
 const curs = [...new Set(["EUR", ...d.readers.map((r) => r.cur)])];
 const fxDate = FACTS["ecb-eur-usd"]?.checked_on ?? "";
-const local = (v: number) => (d.buyer.cur === "EUR" ? "" : money(Math.round(v * rateOf(d.buyer.cur) / 1000) * 1000, d.buyer.cur));
 const embed = `/embed/map/en/?budget=${d.budgets[0]}&place=${d.muni}&center=${d.center.join(",")}&demoproj=${d.token}&devs=1&cur=${d.buyer.cur}`;
 const sources = [...new Set(ps.flatMap((p) => p.sources ?? []))];
 const checked = ps.map((p) => p.checked).filter(Boolean).sort().pop();
@@ -84,7 +83,7 @@ const steps = walkSteps(d);
     <section class="how" id="how" aria-labelledby="how-h">
       <h2 id="how-h">How a buyer reaches you</h2>
       <p class="lede">Seven steps, on the real site, for {d.buyer.line.replace(/^A /, "a ").replace(/\.$/, "")} with {d.buyer.words.replace(/\.$/, "").toLowerCase()} <span class="small">(an illustrative buyer)</span>.</p>
-      <ol>{steps.map((st) => <li><span class="sn">{String(st.n).padStart(2, "0")}</span><img src={`/d/${d.token}/steps/step-${st.n}.webp`} alt="" width="1440" height="900" loading="lazy" /><span class="sh">{st.h}</span><span class="sl">“{st.line}”</span></li>)}</ol>
+      <ol>{steps.map((st) => <li><span class="sn">{String(st.n).padStart(2, "0")}</span><img src={`/d/${d.token}/steps/step-${st.n}.webp`} alt="" width="1280" height="800" loading="lazy" /><span class="sh">{st.h}</span><span class="sl">“{st.line}”</span></li>)}</ol>
       <a class="walk" href={steps[0].url}>Walk the path as this buyer</a>
       <div class="mail"><DemoEnquiry d={d} /></div>
     </section>

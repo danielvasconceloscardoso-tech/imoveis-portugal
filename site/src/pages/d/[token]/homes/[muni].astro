@@ -2,7 +2,7 @@
 // A private demo's further showcases: the developer's homes in its other municipalities (e.g. Muda, in Grândola).
 import Demo from "../../../../layouts/Demo.astro";
 import Showcase from "../../../../components/Showcase.astro";
-import { DEMOS, rateOf } from "../../../../lib/demos";
+import { DEMOS } from "../../../../lib/demos";
 import { demoProjects } from "../../../../lib/projects";
 
 export function getStaticPaths() {
@@ -12,5 +12,5 @@ const d = DEMOS.find((x) => x.token === Astro.params.token)!;
 const ps = demoProjects(d.token).filter((p) => p.muni === Astro.params.muni && p.units?.length);
 ---
 <Demo title={`${d.developer} · private preview`} developer={d.developer} accent={d.accent}>
-  <Showcase lang="en" locale="en-US" projects={ps} label="Sponsored" href={(p, u) => `/d/${d.token}/home/${u.id}/`} cur={d.buyer.cur === "EUR" ? undefined : { code: d.buyer.cur, rate: rateOf(d.buyer.cur) }} />
+  <Showcase lang="en" locale="en-US" projects={ps} label="Sponsored" href={(p, u) => `/d/${d.token}/home/${u.id}/`} />
 </Demo>
