@@ -1,0 +1,11 @@
+---
+// Step 6 of a private demo: the sample enquiry as the developer's sales team receives it (prompt 29 §2a).
+import Demo from "../../../layouts/Demo.astro";
+import DemoEnquiry from "../../../components/DemoEnquiry.astro";
+import { DEMOS } from "../../../lib/demos";
+export function getStaticPaths() { return DEMOS.map((d) => ({ params: { token: d.token } })); }
+const d = DEMOS.find((x) => x.token === Astro.params.token)!;
+---
+<Demo title={`Sample enquiry · ${d.developer}`} developer={d.developer} accent={d.accent}>
+  <main style="max-width:1180px;margin:0 auto;padding:40px 24px 64px"><DemoEnquiry d={d} inbox /></main>
+</Demo>

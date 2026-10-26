@@ -1,0 +1,53 @@
+---
+// Step 6 of a private demo (prompt 29 §2a): the enquiry exactly as the developer's sales team would receive it, in our
+// own email design: from Imóveis Portugal, the subject, the summary first, the brief, the team. Always labelled
+// "Sample enquiry · illustrative buyer". `inbox` adds the inbox column the film opens it from.
+import type { Demo } from "../lib/demos";
+import { demoBuyer, money, TEAM } from "../lib/demobuyer";
+
+interface Props { d: Demo; inbox?: boolean; }
+const { d, inbox = false } = Astro.props;
+const { pick, total, lines, reader, local } = demoBuyer(d);
+const u = pick.u, nf = new Intl.NumberFormat("en-US");
+const what = `${u.typology}${u.area != null ? `, ${nf.format(u.area)} m²` : ""}`;
+const subject = `Private viewing request · ${pick.p.name.replace(/ – .*$/, "")} · ${what}`;
+---
+<div class={`em${inbox ? " em-inbox" : ""}`} data-em>
+  <p class="em-label">Sample enquiry · illustrative buyer</p>
+  <div class="em-win">
+    {inbox && <aside class="em-list" aria-label="Inbox">
+      <p class="em-box">Sales · {d.developer}</p>
+      <div class="em-row is-new" data-em-row><b>Imóveis Portugal</b><span>{subject}</span><small>9:00</small></div>
+    </aside>}
+    <article class="em-msg" data-em-msg>
+      <header>
+        <p class="em-subj">{subject}</p>
+        <p class="em-meta"><b>Imóveis Portugal</b> &lt;ops@imoveisportugal.lu&gt; · to Sales, {d.developer} · 9:00</p>
+      </header>
+      <p class="em-k">The buyer, in short</p>
+      <ul class="em-sum">{lines.map((l) => <li>{l}</li>)}</ul>
+      <p class="em-k">The brief</p>
+      <p>{d.buyer.line.replace(/\.$/, "")} would like a private viewing of <b>{what}</b> at {pick.p.name.replace(/ – .*$/, "")}, published at {u.price ? `${u.priceNote === "from" ? "from " : ""}${money(u.price)}` : "price on request"}. With transfer tax, stamp duty and the deed, the indicative total is {money(Math.round(total))}{local(total) && ` (${local(total)})`}. They would like to start by video and visit in person on their next trip.</p>
+      <p class="em-k">Their team so far</p>
+      <ul class="em-team">{TEAM.map((t) => <li><b>{t.role}</b> · to be chosen</li>)}</ul>
+      <p class="em-foot">Sent by Imóveis Portugal with the buyer's consent to be contacted by {d.developer}. The summary is what the buyer entered in our calculators: indicative, not a credit assessment, and nothing is decided about the buyer from it. For high budgets the partner agency's identification and proof of funds still apply (Lei 83/2017). Reply directly to arrange the viewing.</p>
+    </article>
+  </div>
+</div>
+
+<style>
+  .em-label { display: inline-block; font: 500 11px/1 var(--sans); letter-spacing: .12em; text-transform: uppercase; border: 1px solid var(--ink); padding: 5px 7px; margin: 0 0 12px; }
+  .em-win { border: 1px solid #d9d9d6; border-radius: 8px; overflow: hidden; background: #fff; display: grid; }
+  .em-inbox .em-win { grid-template-columns: 300px 1fr; }
+  .em-list { background: #f6f5f2; border-right: 1px solid #e6e6e3; padding: 18px 0; }
+  .em-box { font: 500 12px/1 var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); padding: 0 18px 14px; margin: 0; }
+  .em-row { display: grid; gap: 2px; padding: 12px 18px; border-left: 3px solid var(--accent); background: #fff; font-size: 14px; position: relative; }
+  .em-row span { color: var(--ink); } .em-row small { position: absolute; right: 14px; top: 12px; color: var(--muted); }
+  .em-msg { padding: 28px 32px; font-size: 15px; line-height: 1.55; }
+  .em-msg header { border-bottom: 1px solid #e6e6e3; padding-bottom: 14px; margin-bottom: 18px; }
+  .em-subj { font: 400 1.6rem/1.2 var(--serif); margin: 0 0 6px; } .em-meta { color: var(--muted); font-size: 13px; margin: 0; }
+  .em-k { font: 500 11px/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 18px 0 8px; }
+  .em-sum { list-style: none; margin: 0; padding: 0; } .em-sum li { font: 400 1.15rem/1.35 var(--serif); padding: 4px 0; border-bottom: 1px solid #efede8; }
+  .em-team { margin: 0; padding-left: 18px; } .em-foot { font-size: 12.5px; color: var(--muted); border-top: 1px solid #e6e6e3; padding-top: 12px; margin-top: 20px; }
+  @media (max-width: 820px) { .em-inbox .em-win { grid-template-columns: 1fr; } .em-list { border-right: 0; border-bottom: 1px solid #e6e6e3; } .em-msg { padding: 20px; } }
+</style>

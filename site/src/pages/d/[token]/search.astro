@@ -1,0 +1,33 @@
+---
+// Step 1 of a private demo (prompt 29 §2a): a question typed into a plain search field, in our own design (never another
+// brand's interface), and our result. The film types the question; the walk starts here.
+import Demo from "../../../layouts/Demo.astro";
+import { DEMOS } from "../../../lib/demos";
+import { pathFor } from "../../../i18n";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
+export function getStaticPaths() { return DEMOS.map((d) => ({ params: { token: d.token } })); }
+const d = DEMOS.find((x) => x.token === Astro.params.token)!;
+const S = JSON.parse(readFileSync(join(process.cwd(), "..", "content", "demos", "screenplay.json"), "utf8")).demos[d.token];
+const country = { us: "the US", il: "Israel", ch: "Switzerland" }[S.ed as "us"] ?? "abroad";
+---
+<Demo title={`Search · ${d.developer}`} developer={d.developer} accent={d.accent}>
+  <main class="sr">
+    <p class="sr-k">Search</p>
+    <div class="sr-field" data-sr-field data-q={S.search}><span data-sr-q>{S.search}</span><i class="sr-caret"></i></div>
+    <div class="sr-res" data-sr-res>
+      <p class="sr-url">Imóveis Portugal › guide for buyers in {country}</p>
+      <a class="sr-t" data-sr-link href={`${pathFor("en", S.ed, "casa")}?demo=${d.token}`}>Buying a home in Portugal from {country}: the costs, the steps, the partners</a>
+      <p class="sr-p">The real cost in your currency, the documents, viewings by video and the deed by power of attorney, with official sources. A free weekly letter for buyers in {country}.</p>
+    </div>
+  </main>
+  <style>
+    .sr { max-width: 980px; margin: 0 auto; padding: 120px 24px 160px; }
+    .sr-k { font: 500 12px/1 var(--sans); letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin: 0 0 14px; }
+    .sr-field { font: 400 40px/1.2 var(--serif); border-bottom: 2px solid var(--ink); padding: 8px 2px 14px; min-height: 64px; display: flex; align-items: center; }
+    .sr-caret { display: inline-block; width: 2px; height: 40px; background: var(--ink); margin-left: 4px; }
+    .sr-res { margin-top: 56px; max-width: 760px; } .sr-url { font-size: 15px; color: var(--muted); margin: 0 0 6px; }
+    .sr-t { font: 400 30px/1.25 var(--serif); color: #1f4a3d; text-decoration: none; display: inline-block; } .sr-t:hover { text-decoration: underline; }
+    .sr-p { color: #3c3f44; font-size: 18px; margin: 10px 0 0; }
+  </style>
+</Demo>

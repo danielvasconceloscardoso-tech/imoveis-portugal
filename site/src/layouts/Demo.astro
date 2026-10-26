@@ -4,6 +4,7 @@ import "@fontsource-variable/playfair-display";
 import "@fontsource-variable/jost";
 interface Props { title: string; developer: string; accent?: string; }
 const { title, developer, accent = "#1f4a3d" } = Astro.props;
+import DemoBar from "../components/DemoBar.astro";
 ---
 <!doctype html>
 <html lang="en">
@@ -27,5 +28,6 @@ const { title, developer, accent = "#1f4a3d" } = Astro.props;
   <header class="dm-top"><div><span class="dm-brand"><i></i>Imóveis Portugal</span><span class="dm-flag">Private preview · {developer}</span></div></header>
   <slot />
   <footer class="dm-foot"><div>Private preview prepared for {developer} · not published. Homes, prices and images: {developer}, as published. Data: INE (CC BY 4.0), ECB, © OpenStreetMap contributors. Imóveis Portugal.</div></footer>
+  <DemoBar />
 </body>
 </html>

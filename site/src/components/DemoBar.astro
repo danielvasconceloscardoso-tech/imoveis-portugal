@@ -1,0 +1,38 @@
+---
+// Demo mode (prompt 29 §2b): with ?demo=<token> (kept for the visit in sessionStorage, never a cookie), a quiet caption
+// bar shows the buyer's step and line, with "Listen" and the way to the next step. In demo mode no form is ever sent:
+// form frames and email buttons are replaced by a note. Nothing renders without the parameter.
+---
+<div class="dmb" data-dmb hidden></div>
+<script is:inline>
+(function () {
+  var t = new URLSearchParams(location.search).get("demo");
+  try { if (t) sessionStorage.setItem("ip.demo", t); else t = sessionStorage.getItem("ip.demo"); } catch (e) {}
+  if (!t || !/^[0-9a-f]{10}$/.test(t)) return;
+  var m = document.createElement("meta"); m.name = "robots"; m.content = "noindex, nofollow"; document.head.appendChild(m);
+  // Never submit anything in demo mode.
+  document.querySelectorAll(".form-box iframe, [data-brief-target], a[href^='mailto:']").forEach(function (el) {
+    var n = document.createElement("p"); n.className = "dmb-note"; n.textContent = "Demo mode: no request is sent."; (el.closest(".form-box") || el).replaceWith(n);
+  });
+  fetch("/d/" + t + "/walk.json").then(function (r) { return r.json(); }).then(function (w) {
+    var here = location.pathname, i = w.steps.findIndex(function (s) { return here === s.url.split(/[?#]/)[0]; });
+    var bar = document.querySelector("[data-dmb]"), s = w.steps[Math.max(0, i)], last = i === w.steps.length - 1;
+    var esc = function (x) { return String(x).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
+    bar.innerHTML = '<div class="dmb-in"><span class="dmb-k">' + (i < 0 ? "Demo · " + esc(w.who) : "Step " + s.n + " of 7 · " + esc(s.h)) + '</span>' +
+      (i < 0 ? "" : '<span class="dmb-l">“' + esc(s.line) + '”</span>') +
+      (i >= 0 && s.audio ? '<button type="button" class="dmb-b" data-listen>Listen</button>' : "") +
+      '<span class="dmb-nav">' + (i > 0 ? '<a href="' + esc(w.steps[i - 1].url) + '">← Back</a>' : "") +
+      (i < 0 ? '<a href="' + esc(w.steps[0].url) + '">Start the walk →</a>' : !last ? '<a href="' + esc(w.steps[i + 1].url) + '">Next step →</a>' : w.end.map(function (e) { return '<a href="' + esc(e.url) + '?demo=' + t + '">' + esc(e.t) + "</a>"; }).join(" · ")) + "</span></div>";
+    bar.hidden = false;
+    var b = bar.querySelector("[data-listen]"); if (b) b.addEventListener("click", function () { new Audio(s.audio).play(); });
+  }).catch(function () {});
+})();
+</script>
+<style is:global>
+  .dmb { position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; background: rgba(17,18,20,.92); color: #f4f2ee; font: 400 15px/1.4 "Jost Variable", system-ui, sans-serif; }
+  .dmb-in { max-width: 1180px; margin: 0 auto; padding: 12px 20px; display: flex; flex-wrap: wrap; gap: 6px 18px; align-items: center; }
+  .dmb-k { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: #b9bcc0; } .dmb-l { font-family: "Playfair Display Variable", Georgia, serif; font-size: 17px; }
+  .dmb-b { background: none; border: 1px solid #6d7176; color: inherit; border-radius: 999px; padding: 4px 12px; font: inherit; font-size: 13px; cursor: pointer; }
+  .dmb-nav { margin-left: auto; display: flex; gap: 14px; } .dmb-nav a { color: #fff; }
+  .dmb-note { background: #f6f5f2; padding: 14px 16px; border: 1px solid #e6e6e3; }
+</style>

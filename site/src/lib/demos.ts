@@ -42,8 +42,8 @@ const DEFS: Def[] = [
   {
     token: "65bf930b11", developer: "Vale do Lobo", project: "The Residences", where: "Vale do Lobo resort, Loulé, next to Quinta do Lago",
     muni: "loule", center: [-8.058, 37.058, 10.6],
-    readers: [{ city: "California", country: "USA", cur: "USD", ed: "us" }, { city: "Zurich", country: "Switzerland", cur: "CHF", ed: "ch" }],
-    buyer: { line: "A family in California.", words: "Four million dollars.", amount: 4000000, cur: "USD", ed: "us", when: "year", own: 1 },
+    readers: [{ city: "Los Angeles", country: "USA", cur: "USD", ed: "us" }, { city: "Zurich", country: "Switzerland", cur: "CHF", ed: "ch" }],
+    buyer: { line: "A family in Los Angeles.", words: "Four million dollars.", amount: 4000000, cur: "USD", ed: "us", when: "year", own: 1 },
     home: "sp47", accent: "#1b3a4b", extra: "northam",
     facts: ["44 homes: 25 apartments in two buildings, 10 linked villas and 9 townhouses (townhouses sold out)", "By the 10th hole of the Royal Golf Course; architecture by Broadway Malyan", "Sold off plan: 30% on reservation or contract, 70% on completion", "A 450-hectare resort founded in 1962"],
     sources: [{ t: "Vale do Lobo, The Residences", u: "https://www.valedolobo.com/en/the-residences-vale-do-lobo/" }, { t: "idealista, 'North Americans drive up property prices in the Algarve', September 2024 (citing Savills)", u: "https://www.idealista.pt/en/news/node/65720" }],

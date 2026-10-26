@@ -1,0 +1,104 @@
+{
+ "_how": "Prompt 29 §2d (D56): the screenplay of the demo films. One voice, the buyer thinking out loud; lines are final (CEO). Voice: Kokoro-82M (Apache 2.0) via kokoro-onnx, lang en-gb, speed 0.9. Shots without a line are silent. 'say' respellings feed the engine where a name appears.",
+ "engine": {
+  "model": "kokoro-v1.0.onnx",
+  "voices": "voices-v1.0.bin",
+  "release": "https://github.com/thewh1teagle/kokoro-onnx/releases/tag/model-files-v1.0",
+  "lang": "en-gb",
+  "speed": 0.9
+ },
+ "say": {
+  "Imóveis Portugal": "Ee-MOH-vaysh Portugal",
+  "Tomás Ribeiro": "Toh-MASH Ree-BAY-roo",
+  "Vale do Lobo": "VAH-leh doo LOH-boo",
+  "Gondomar": "Gon-doo-MAR",
+  "O'rizon": "Oh-ree-ZON",
+  "Prata": "PRAH-tah"
+ },
+ "demos": {
+  "34c86306cf": {
+   "name": "Vanguard_Tomas-Ribeiro-79",
+   "voice": "af_heart",
+   "city": "New York",
+   "ed": "us",
+   "search": "buying a home in Portugal from the US",
+   "settle": "Lisbon",
+   "morning": "Lisbon. 9:00 am",
+   "lines": {
+    "1": "We've talked about Portugal for two years. Tonight I'm actually looking.",
+    "2": "Twenty tabs. And every one says something different.",
+    "4": "Where do we even start? Lisbon? Porto? The coast?",
+    "5": "And what does three and a half million actually get us, once the taxes hit?",
+    "6": "Can we even do this from here?",
+    "7": "Who's actually building there?",
+    "8": "That one.",
+    "9": "Can someone just show it to us properly?",
+    "10": "And we'll need a lawyer. And a bank.",
+    "11": "Okay. That's a start."
+   }
+  },
+  "65bf930b11": {
+   "name": "ValeDoLobo_The-Residences",
+   "voice": "af_heart",
+   "city": "Los Angeles",
+   "ed": "us",
+   "search": "buying a home in Portugal from the US",
+   "settle": "the Algarve, Loulé",
+   "morning": "The Algarve. 9:00 am",
+   "lines": {
+    "1": "We've talked about Portugal for two years. Tonight I'm actually looking.",
+    "2": "Twenty tabs. And every one says something different.",
+    "4": "Where do we even start? Lisbon? Porto? The coast?",
+    "5": "And what does four million actually get us, once the taxes hit?",
+    "6": "Can we even do this from here?",
+    "7": "Who's actually building there?",
+    "8": "That one.",
+    "9": "Can someone just show it to us properly?",
+    "10": "And we'll need a lawyer. And a bank.",
+    "11": "Okay. That's a start."
+   }
+  },
+  "f658bd1eef": {
+   "name": "Shalu_ORizon-Living",
+   "voice": "bf_emma",
+   "city": "Tel Aviv",
+   "ed": "il",
+   "search": "buying a home in Portugal from Israel",
+   "settle": "Porto, Gondomar",
+   "morning": "Porto. 9:00 am",
+   "lines": {
+    "1": "We've talked about Portugal for two years. Tonight I'm actually looking.",
+    "2": "Twenty tabs. And every one says something different.",
+    "4": "Where do we even start? Lisbon? Porto? The coast?",
+    "5": "And what do three million shekels actually get us, once the taxes hit?",
+    "6": "Can we even do this from here?",
+    "7": "Who's actually building there?",
+    "8": "That one.",
+    "9": "Can someone just show it to us properly?",
+    "10": "And we'll need a lawyer. And a bank.",
+    "11": "Okay. That's a start."
+   }
+  },
+  "7c1e5a90d4": {
+   "name": "VIC_Prata-Riverside-Village",
+   "voice": "bf_emma",
+   "city": "Geneva",
+   "ed": "ch",
+   "search": "buying a home in Portugal from Switzerland",
+   "settle": "Lisbon, the riverside",
+   "morning": "Lisbon. 9:00 am",
+   "lines": {
+    "1": "We've talked about Portugal for two years. Tonight I'm actually looking.",
+    "2": "Twenty tabs. And every one says something different.",
+    "4": "Where do we even start? Lisbon? Porto? The coast?",
+    "5": "And what do two million francs actually get us, once the taxes hit?",
+    "6": "Can we even do this from here?",
+    "7": "Who's actually building there?",
+    "8": "That one.",
+    "9": "Can someone just show it to us properly?",
+    "10": "And we'll need a lawyer. And a bank.",
+    "11": "Okay. That's a start."
+   }
+  }
+ }
+}

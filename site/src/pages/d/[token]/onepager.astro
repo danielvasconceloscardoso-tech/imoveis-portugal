@@ -11,6 +11,7 @@ import { PRICES, LAST } from "../../../lib/prices";
 import { purchase } from "../../../lib/sims";
 import { summary, BRIEF_KEYS, type BriefLabels } from "../../../lib/brief";
 import { c } from "../../../lib/copy";
+import { walkSteps } from "../../../lib/demowalk";
 
 export function getStaticPaths() { return DEMOS.map((d) => ({ params: { token: d.token } })); }
 const d = DEMOS.find((x) => x.token === Astro.params.token)!;
@@ -19,7 +20,7 @@ const nf = new Intl.NumberFormat("en-US"), nf1 = new Intl.NumberFormat("en-US", 
 const money = (v: number, cur = "EUR") => new Intl.NumberFormat("en-US", { style: "currency", currency: cur, maximumFractionDigits: 0 }).format(v);
 const q = PRICES.quarters[LAST], ql = `Q${q.slice(-1)} ${q.slice(0, 4)}`;
 const ps = demoProjects(d.token).filter((p) => p.units?.length);
-const rows = ps.filter((p) => p.muni === d.muni).flatMap((p) => p.units!.map((u) => ({ p, u }))).slice(0, 7);
+const rows = ps.filter((p) => p.muni === d.muni).flatMap((p) => p.units!.map((u) => ({ p, u }))).slice(0, 5);
 const pick = ps.flatMap((p) => p.units!.map((u) => ({ p, u }))).find((x) => x.u.id === d.home)!;
 const total = pick.u.price ? purchase(pick.u.price, false, false, false).total : d.budgets[0];
 const own = Math.round(total * d.buyer.own / 1000) * 1000;
@@ -28,6 +29,7 @@ const line = summary({ door: "buy", total: Math.round(total), own: d.buyer.own <
   L, (v) => money(Math.round(v / 1000) * 1000), (v) => `${Math.round(v)}%`, c(`journey.from.${d.buyer.ed}`, "en"));
 const loc = (v: number) => (d.buyer.cur === "EUR" ? "" : money(Math.round(v * rateOf(d.buyer.cur) / 1000) * 1000, d.buyer.cur));
 const checked = ps.map((p) => p.checked).filter(Boolean).sort().pop();
+const steps = walkSteps(d);
 ---
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8" /><meta name="robots" content="noindex, nofollow" /><title>{d.developer} · Imóveis Portugal</title>
@@ -39,7 +41,10 @@ const checked = ps.map((p) => p.checked).filter(Boolean).sort().pop();
   .cover .t { position: absolute; left: 0; right: 0; bottom: 0; padding: 10mm 9mm 9mm; color: #fff; background: linear-gradient(transparent, rgba(0,0,0,.72)); }
   .cover .k { font: 500 7pt/1 "Jost Variable"; letter-spacing: .16em; text-transform: uppercase; opacity: .9; }
   .cover h1 { font: 400 22pt/1.05 "Playfair Display Variable", serif; margin: 3mm 0 2mm; } .cover .cr { font-size: 6.5pt; opacity: .8; }
-  .body { padding: 10mm 11mm 8mm; display: grid; grid-template-rows: auto 1fr auto; gap: 5mm; }
+  .body { padding: 9mm 10mm 7mm; display: grid; grid-template-rows: auto auto 1fr auto; gap: 4mm; }
+  .strip { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2.2mm; } .strip div { font-size: 6.4pt; line-height: 1.25; }
+  .strip img { width: 100%; height: 15mm; object-fit: cover; object-position: top; border: 1px solid #e6e6e3; display: block; margin-bottom: 1mm; }
+  .strip b { display: block; font: 400 8pt/1.1 "Playfair Display Variable", serif; color: #1f4a3d; } .strip i { color: #5f6368; }
   .top { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid #111214; padding-bottom: 3mm; }
   .brand { font: 500 13pt/1 "Playfair Display Variable", serif; } .brand i { display: inline-block; width: 6px; height: 6px; background: #1f4a3d; margin-right: 8px; vertical-align: middle; }
   .flag { font: 500 7pt/1 "Jost Variable"; letter-spacing: .14em; text-transform: uppercase; color: #5f6368; }
@@ -58,7 +63,8 @@ const checked = ps.map((p) => p.checked).filter(Boolean).sort().pop();
 <body><div class="page">
   <div class="cover"><img src={d.render} alt="" /><div class="t"><span class="k">Prepared for {d.developer} · private preview</span><h1>{d.project}, seen by the buyers who live abroad</h1><span class="cr">{d.credit}. Shown only in this private preview.</span></div></div>
   <div class="body">
-    <div class="top"><span class="brand"><i></i>Imóveis Portugal</span><span class="flag">Not published · English preview</span></div>
+    <div class="top"><span class="brand"><i></i>Imóveis Portugal</span><span class="flag">Not published · English preview · launching 1 December 2026</span></div>
+    <div><h2 style="margin-bottom:2mm">How a buyer reaches you</h2><div class="strip">{steps.map((st) => <div><img src={`/d/${d.token}/steps/step-${st.n}.webp`} alt="" /><b>{String(st.n).padStart(2, "0")} · {st.h}</b><i>“{st.line}”</i></div>)}</div></div>
     <div class="cols">
       <div>
         <h2>The buyer</h2>
@@ -75,20 +81,12 @@ const checked = ps.map((p) => p.checked).filter(Boolean).sort().pop();
         <p class="s" style="margin-top:1.5mm">Prices as published on {checked}. A showcase page reached from the map's place card (“Partner developers here”), each home with its cost of buying.</p>
       </div>
       <div>
-        <h2>A private viewing</h2>
-        <ol class="flow">
-          <li><b>{pick.u.typology}{pick.u.area != null && ` · ${nf.format(pick.u.area)} m²`}</b>, {money(pick.u.price ?? 0)}: with taxes and the deed, an indicative {money(Math.round(total))}{loc(total) && ` (${loc(total)})`}.</li>
-          <li>“Arrange a private viewing”, details filled in, consent to {d.developer} by name.</li>
-          <li>Their team assembles: lawyer, financing, currency, tax at home, each named once a partner.</li>
-          <li>You receive the enquiry already qualified:</li>
-        </ol>
+        <h2>The enquiry you receive</h2>
+        <p><b>{pick.u.typology}{pick.u.area != null && ` · ${nf.format(pick.u.area)} m²`}</b>, {money(pick.u.price ?? 0)}: with taxes and the deed, an indicative {money(Math.round(total))}{loc(total) && ` (${loc(total)})`}. You receive the enquiry already qualified:</p>
         <div class="mail"><span class="illus">Illustrative example</span><p class="l">{line}</p><p class="s">Indicative, not a credit assessment; nothing is decided about the buyer from it.</p></div>
         <h2 style="margin-top:4mm">On your website · each month</h2>
         <p>The same map on your pages, in your colour, centred on {s.n}: “Powered by Imóveis Portugal”.</p>
-        <span class="illus">Illustrative example · not real data</span>
-        <table><tr><th>Edition</th><th class="r">Views</th><th class="r">Clicks</th><th class="r">Viewings</th></tr>
-          {d.readers.map((r, i) => <tr><td>{r.country}</td><td class="r">{nf.format([1840, 1210, 760][i] ?? 600)}</td><td class="r">{[96, 61, 38][i] ?? 30}</td><td class="r">{[7, 4, 3][i] ?? 2}</td></tr>)}
-          <tr><td colspan="3">Ready within 3 months · cash buyers · NIF in place</td><td class="r">4 · 5 · 6</td></tr></table>
+        <p>Each month, by edition: views of your showcase and homes, clicks to your site, viewing requests and their readiness. No figures before launch (1 December 2026).</p>
         <p class="s" style="margin-top:2mm">The full preview, with the live map and a one-minute film, is at a private link sent on request. Sponsorship is always labelled, for a flat annual fee, never a fee per contact. <b>ops@imoveisportugal.lu</b></p>
       </div>
     </div>

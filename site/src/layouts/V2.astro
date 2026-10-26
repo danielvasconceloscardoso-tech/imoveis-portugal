@@ -32,6 +32,7 @@ const sticky: Sticky = Astro.props.sticky !== undefined ? Astro.props.sticky
   : page === "home" || page === "how" ? { href: pathFor(lang, ed, "guide"), label: c("common.sticky.guide", lang) }
   : page === "faq" ? { href: `${pathFor(lang, ed, "talk")}#form`, label: c("common.sticky.talk", lang) }
   : null;
+import DemoBar from "../components/DemoBar.astro";
 ---
 <!doctype html>
 <html lang={HTML_LANG[lang]}>
@@ -152,5 +153,6 @@ const sticky: Sticky = Astro.props.sticky !== undefined ? Astro.props.sticky
         new IntersectionObserver(function (e) { st.classList.toggle("off", e[0].isIntersecting); }).observe(pr);
       })();
     </script>
-  </body>
+    <DemoBar />
+</body>
 </html>
