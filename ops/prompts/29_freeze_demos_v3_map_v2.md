@@ -63,7 +63,7 @@ Honesty rules:
 
 ### 2c. The voice: the concierge
 
-**Register.** A composed British butler at a great hotel: warm, dry, exact, one touch of wit, never selling. The voice is original. Never name, imitate or refer to any fictional character, actor or film, in files, metadata or copy.
+**Register.** A calm, warm British voice that talks the way a real concierge talks to a client across a table: short sentences, everyday words, no theatre, never selling. If a person would not say a line out loud, it is wrong. The voice is original. Never name, imitate or refer to any fictional character, actor or film, in files, metadata or copy.
 
 **Engine.** Kokoro-82M: free, Apache 2.0, commercial use allowed.
 - Install: `pip install kokoro-onnx soundfile`.
@@ -104,22 +104,22 @@ If an open-source speech-to-text model installs, transcribe every rendered line 
 
 **Vanguard** (the template):
 
-1. Good evening. Allow me to show you how a family in New York finds its way to your door.
-2. It begins on a Thursday, with our letter. Portugal, explained in plain English. Or with a question, typed late at night: what does it really cost to buy in Lisbon?
-3. We answer properly. Ten years of official prices, parish by parish.
-4. Three and a half million dollars becomes a real figure. Taxes. Fees. The exchange rate. I took the liberty of doing the arithmetic.
-5. And then, quietly, your homes. Tomás Ribeiro seventy-nine. Real plans. Real prices.
-6. When they ask for a private viewing, you receive more than a name. How they will pay. When they can move. Their Portuguese tax number. Their budget, taxes included.
-7. The right lawyer, bank and tax adviser, introduced at the right moment. From New York by video, or in person in Lisbon, you meet a buyer who is ready.
+1. A family in New York wants a home in Lisbon. This is how they find yours.
+2. It starts with our letter on a Thursday morning. Or a simple question: what does it really cost to buy in Lisbon?
+3. We answer with ten years of official prices, area by area.
+4. They put in three and a half million dollars. We show them what that really means, with taxes, fees and the exchange rate included.
+5. Then they see your homes. Tomás Ribeiro 79. Real photos, real prices.
+6. When they ask to visit, you don't just get a name. You know how they'll pay, when they want to move, what they can spend, and that their tax number is sorted.
+7. We bring in the lawyer, the bank and the tax adviser when they need them. So when you meet them, on video or in Lisbon, they already know the numbers.
 8. Imóveis Portugal. Your buyers, wherever they live.
 
 **Changes for the other three.** Everything not listed stays word for word.
 
-| Demo | Line 1 city | Line 2 question | Line 4 budget | Line 5 homes | Line 7 |
+| Demo | Line 1 | Line 2 question | Line 4 budget | Line 5 homes | Line 7 place |
 | --- | --- | --- | --- | --- | --- |
-| Vale do Lobo | California | …to buy on the Algarve coast? | Four million dollars | The Residences at Vale do Lobo. | From California by video, or in person in the Algarve… |
-| Shalu | Tel Aviv | …to buy near Porto? | Three million shekels | O'rizon Living, in Gondomar. | From Tel Aviv by video, or in person in Porto… |
-| VIC Properties | Geneva | …to buy by the river in Lisbon? | Two million Swiss francs | Prata Riverside Village. | From Geneva by video, or in person in Lisbon… |
+| Vale do Lobo | A family in California wants a home on the Algarve coast. | …to buy in the Algarve? | four million dollars | The Residences at Vale do Lobo. | on video or in the Algarve |
+| Shalu | A family in Tel Aviv wants a home near Porto. | …to buy near Porto? | three million shekels | O'rizon Living, in Gondomar. | on video or in Porto |
+| VIC Properties | A family in Geneva wants a home by the river in Lisbon. | …to buy in Lisbon? | two million Swiss francs | Prata Riverside Village. | on video or in Lisbon |
 
 The copy is final. If a line breaks a VOICE.md rule or a legal rule, flag it rather than rewriting it.
 
