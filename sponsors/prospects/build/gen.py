@@ -66,7 +66,7 @@ parts.append('''<section class="cover">
   <div class="cover-body">
     <p class="eyebrow-line">Private &amp; confidential · October 2026</p>
     <h1>Partner<br>Prospects</h1>
-    <p class="lede">The firms we approach before 1 December, grouped by what they buy: a place on the map for developers, a step on each country's journey for advisers, and the Private section for wealth.</p>
+    <p class="lede">The firms we approach before 1 December, grouped by what they buy: a place on the map for developers, a step on each country's journey for advisers, and the residence and wealth stations for high budgets.</p>
   </div>
   <div class="cover-foot">For internal use with the sponsor brochure. Prices: decision D40 · Founding Partners: 40% off year 1, price locked for year 2.</div>
 </section>''')
