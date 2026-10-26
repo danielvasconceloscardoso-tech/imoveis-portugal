@@ -153,6 +153,12 @@ Status: To do · Doing · Blocked · Done
 | 28a | Tally (buyer form BEEzgN and the partner-request form): add two hidden fields, "brief" (the reader's qualified summary, only when they tick "Include this summary") and "team" (the partners they agreed may contact them), and show both in the notification email to the agency/partner; ops/TALLY_CONSULTA.md | Operator | To do | 2026-11-06 |
 | 8z | Decide where enquiries about a specific developer project go: (a) straight to the developer's sales team, (b) via Habinedita as the broking agency, or (c) the buyer chooses; D14 covers general buyer requests only | Operator | To do | 2026-10-30 |
 
+| 29a | Listen to the voice draft of the buyer (af_heart) and approve it or ask for another voice | Operator | To do | 2026-10-27 |
+
+| 29b | Compare map v1 (frozen preview) with map v2 and say go or keep v1 | Operator | To do | after §3 |
+
+| 29c | Prompt 29: freeze v1, demos v3 with narration and the seven-step buyer path, map v2 on its own branch | CTO | To do | 2026-10-28 |
+
 ## Last session
 
 2026-10-26 (CTO, session 6b, prompt 28 with §2b): main merged (DECISIONS.md conflict, both sides kept), pushed after each section, nothing merged, sent or published. §2b on the site: every path station carries "Your team for this purchase" (the partners the case needs so far, named only once signed and labelled, each with its own unticked consent box) and every partner enquiry form shows the reader's qualified summary (built on the device from the path, calculators and map; sent only when ticked; privacy notice section 7; Tally hidden fields 'brief' and 'team', task 28a). §2: content/developers/projects.json holds each developer's homes as published with the URL and date of every item (scripts/developers/import.py); showcase page per developer and municipality, a page per home with gallery, INE context, cost and "Arrange a private viewing"; on the site for partners only (none yet), reached from the place card ("Partner developers here") and the Partners page. §3-4: VIC Properties replaces OneMark; four demo pages, showcases, one-page PDFs and films (1080p, 30 fps, about 54 s, rendered frame by frame, silent) plus 6-second loops, all in sponsors/demos/ with every price and image source in its README. Open: 26a (approve demos), 28a, 27a, 27b, 25a, 52a, 8z.

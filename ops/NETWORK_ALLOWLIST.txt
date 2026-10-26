@@ -246,3 +246,11 @@ engelvoelkers.com
 bpstat.bportugal.pt
 portugalist.com
 *.portugalist.com
+unsplash.com
+*.unsplash.com
+pexels.com
+*.pexels.com
+pixabay.com
+*.pixabay.com
+objects.githubusercontent.com
+release-assets.githubusercontent.com
