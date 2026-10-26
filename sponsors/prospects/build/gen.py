@@ -80,8 +80,8 @@ parts.append(f'''<section class="page">
       <table class="rates"><tr><td>Prime</td><td>24,000 €</td></tr><tr><td>Strong</td><td>12,000 €</td></tr><tr><td>Standard</td><td>6,000 €</td></tr><tr><td>Launch · prime</td><td>7,500 / 15,000 €</td></tr></table></div>
     <div><div class="big">{n_ck}</div><h4>Advisers</h4><p>One step on one country's journey: financing, documents, tax at home, the deed, inheritance, structuring. Up to three per step.</p>
       <table class="rates"><tr><td>CH · LU · US</td><td>12,000 €</td></tr><tr><td>FR · IL</td><td>8,000 €</td></tr><tr><td>BR</td><td>5,000 €</td></tr><tr><td>Structuring step</td><td>×1.5</td></tr></table></div>
-    <div><div class="big">{n_pr}</div><h4>Private</h4><p>The Private section and the structuring step in every country, for budgets of 1 M€ and above.</p>
-      <table class="rates"><tr><td>Private Partner</td><td>48,000 €</td></tr></table></div>
+    <div><div class="big">{n_pr}</div><h4>Wealth</h4><p>The residence, succession and structuring stations of every country path, for high-budget readers.</p>
+      <table class="rates"><tr><td>Wealth Partner</td><td>48,000 €</td></tr></table></div>
   </div>
   <div class="rule"></div>
   <h4 class="small-h">Rules for every approach</h4>
@@ -112,7 +112,7 @@ for country, items in CHECKPOINTS.items():
 parts.append('<section class="page"><p class="section-no">02</p><h2>Advisers · journey checkpoints</h2><p class="intro">Each country has its own journey, from budget to keys, renting, selling and inheritance. A partner appears at its step, next to the exact question its clients ask.</p>' + ''.join(cb) + '</section>')
 
 # Private
-parts.append('<section class="page"><p class="section-no">03</p><h2>Private partners</h2><p class="intro">For buyers from 1 M€ to 10 M€ and above: residence, IFICI, inheritance across two countries, holding structures. One Private Partner fee covers the Private section and the structuring step in every country: 48,000 € a year, at most five per edition.</p>'
+parts.append('<section class="page"><p class="section-no">03</p><h2>Wealth partners</h2><p class="intro">For buyers from 1 M€ to 10 M€ and above: residence, IFICI, inheritance across two countries, holding structures. One Wealth Partner fee covers the residence, succession and structuring stations in every country: 48,000 € a year, at most five per edition.</p>'
              + ''.join(entry(e, '<span class="price">48,000 €</span>') for e in PRIVATE)
              + '<div class="note"><h4 class="small-h">Next research</h4><p>Three slots are still open and are not in this book until a firm is confirmed from a public source: a Luxembourg cross-border tax adviser (after your outside-activity check), an Israeli tax adviser, and a shekel transfer provider. Swiss and Luxembourg private banks join only once their Portugal activity is confirmed.</p></div>'
              + f'<div class="note"><h4 class="small-h">Parked</h4><p>{esc(PARKED)}</p></div></section>')
