@@ -101,13 +101,12 @@ The seed numbers below are examples; check each one against its source before us
 
 ## 5. Output and checks
 
-1. **Files:**
-   - `content/inbox/week-NN/` with:
-     - `pillar.md`;
-     - `newsletter/{edition}-{lang}.md`;
-     - `social/instagram.md`, `facebook.md`, `linkedin.md`, `stories.md`, `qa.md` (Reddit and Quora);
-     - `images/`.
-   - Front matter as in content/inbox/README.md, plus `keyword:` and `utm:`.
+1. **Files:** social goes in the platform folders at the repo root (created by the CEO; see `social/README.md` for the naming and front matter):
+   - `social/instagram/posts/`, `social/instagram/reels/`, `social/instagram/stories/`;
+   - `social/facebook/`, `social/linkedin/`, `social/reddit/`, `social/quora/`;
+   - `social/exports/`.
+
+   Pillar pages and newsletters stay in `content/inbox/week-NN/` (`pillar.md`, `newsletter/{edition}-{lang}.md`). Front matter as in content/inbox/README.md, plus `keyword:` and `utm:`.
 2. **Exports per week:**
    - a contact-sheet PDF (each image with its caption, in posting order);
    - the Meta Business Suite bulk-upload CSV (verify the current format first and say how you verified it);
