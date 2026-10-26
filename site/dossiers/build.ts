@@ -24,7 +24,8 @@ const font = (p: string) => b64(require.resolve(p));
 const serif = font("@fontsource-variable/newsreader/files/newsreader-latin-opsz-normal.woff2");
 const sans4 = font("@fontsource/public-sans/files/public-sans-latin-400-normal.woff2");
 const sans6 = font("@fontsource/public-sans/files/public-sans-latin-600-normal.woff2");
-const geo = JSON.parse(readFileSync(join(process.cwd(), "public", "data", "pt-map.geojson"), "utf8"));
+const topo = JSON.parse(readFileSync(join(process.cwd(), "public", "data", "map", "munis.topo.json"), "utf8"));
+const geo = { features: topo.objects.m.geometries.map((g: any) => ({ properties: g.properties })) };
 
 type Type = "compra" | "zona" | "private";
 type In = { type: Type; ed: EdCode; lang: Lang; budget: number; area: string; purpose: "own" | "holiday" | "rental"; out: string };

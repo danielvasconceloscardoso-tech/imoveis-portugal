@@ -1,0 +1,426 @@
+{
+ "files": {
+  "geoBoundaries-PRT-ADM2.geojson.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC0 1.0 (geoBoundaries; source: Wikipedia)",
+   "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/main/releaseData/gbOpen/PRT/ADM2/geoBoundaries-PRT-ADM2.geojson"
+  },
+  "ine/0009490_S5A20161.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0009490&Dim1=S5A20161&lang=PT"
+  },
+  "ine/0009490_S5A20162.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0009490&Dim1=S5A20162&lang=PT"
+  },
+  "ine/0009490_S5A20163.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0009490&Dim1=S5A20163&lang=PT"
+  },
+  "ine/0009490_S5A20164.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0009490&Dim1=S5A20164&lang=PT"
+  },
+  "ine/0009490_S5A20171.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0009490&Dim1=S5A20171&lang=PT"
+  },
+  "ine/0009490_S5A20172.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0009490&Dim1=S5A20172&lang=PT"
+  },
+  "ine/0009490_S5A20173.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0009490&Dim1=S5A20173&lang=PT"
+  },
+  "ine/0009490_S5A20174.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0009490&Dim1=S5A20174&lang=PT"
+  },
+  "ine/0009490_S5A20181.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0009490&Dim1=S5A20181&lang=PT"
+  },
+  "ine/0009490_S5A20182.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0009490&Dim1=S5A20182&lang=PT"
+  },
+  "ine/0009490_S5A20183.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0009490&Dim1=S5A20183&lang=PT"
+  },
+  "ine/0009490_S5A20184.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0009490&Dim1=S5A20184&lang=PT"
+  },
+  "ine/0009490_S5A20191.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0009490&Dim1=S5A20191&lang=PT"
+  },
+  "ine/0009490_S5A20192.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0009490&Dim1=S5A20192&lang=PT"
+  },
+  "ine/0009490_S5A20193.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0009490&Dim1=S5A20193&lang=PT"
+  },
+  "ine/0009817_S6A20172.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0009817&Dim1=S6A20172&lang=PT"
+  },
+  "ine/0009817_S6A20181.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0009817&Dim1=S6A20181&lang=PT"
+  },
+  "ine/0009817_S6A20182.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0009817&Dim1=S6A20182&lang=PT"
+  },
+  "ine/0009817_S6A20191.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0009817&Dim1=S6A20191&lang=PT"
+  },
+  "ine/0009817_S6A20192.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0009817&Dim1=S6A20192&lang=PT"
+  },
+  "ine/0009817_S6A20201.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0009817&Dim1=S6A20201&lang=PT"
+  },
+  "ine/0009817_S6A20202.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0009817&Dim1=S6A20202&lang=PT"
+  },
+  "ine/0009817_S6A20211.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0009817&Dim1=S6A20211&lang=PT"
+  },
+  "ine/0009817_S6A20212.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0009817&Dim1=S6A20212&lang=PT"
+  },
+  "ine/0009817_S6A20221.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0009817&Dim1=S6A20221&lang=PT"
+  },
+  "ine/0009817_S6A20222.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0009817&Dim1=S6A20222&lang=PT"
+  },
+  "ine/0009817_S6A20231.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0009817&Dim1=S6A20231&lang=PT"
+  },
+  "ine/0009817_S6A20232.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0009817&Dim1=S6A20232&lang=PT"
+  },
+  "ine/0012234_S5A20194.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0012234&Dim1=S5A20194&lang=PT"
+  },
+  "ine/0012234_S5A20201.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0012234&Dim1=S5A20201&lang=PT"
+  },
+  "ine/0012234_S5A20202.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0012234&Dim1=S5A20202&lang=PT"
+  },
+  "ine/0012234_S5A20203.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0012234&Dim1=S5A20203&lang=PT"
+  },
+  "ine/0012234_S5A20204.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0012234&Dim1=S5A20204&lang=PT"
+  },
+  "ine/0012234_S5A20211.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0012234&Dim1=S5A20211&lang=PT"
+  },
+  "ine/0012234_S5A20212.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0012234&Dim1=S5A20212&lang=PT"
+  },
+  "ine/0012234_S5A20213.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0012234&Dim1=S5A20213&lang=PT"
+  },
+  "ine/0012234_S5A20214.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0012234&Dim1=S5A20214&lang=PT"
+  },
+  "ine/0012234_S5A20221.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0012234&Dim1=S5A20221&lang=PT"
+  },
+  "ine/0012234_S5A20222.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0012234&Dim1=S5A20222&lang=PT"
+  },
+  "ine/0012234_S5A20223.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0012234&Dim1=S5A20223&lang=PT"
+  },
+  "ine/0012234_S5A20224.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0012234&Dim1=S5A20224&lang=PT"
+  },
+  "ine/0012234_S5A20231.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0012234&Dim1=S5A20231&lang=PT"
+  },
+  "ine/0012234_S5A20232.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0012234&Dim1=S5A20232&lang=PT"
+  },
+  "ine/0012234_S5A20233.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0012234&Dim1=S5A20233&lang=PT"
+  },
+  "ine/0012234_S5A20234.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0012234&Dim1=S5A20234&lang=PT"
+  },
+  "ine/0012234_S5A20241.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0012234&Dim1=S5A20241&lang=PT"
+  },
+  "ine/0012234_S5A20242.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0012234&Dim1=S5A20242&lang=PT"
+  },
+  "ine/0012234_S5A20243.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0012234&Dim1=S5A20243&lang=PT"
+  },
+  "ine/0012234_S5A20244.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0012234&Dim1=S5A20244&lang=PT"
+  },
+  "ine/0012234_S5A20251.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0012234&Dim1=S5A20251&lang=PT"
+  },
+  "ine/0012234_S5A20252.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0012234&Dim1=S5A20252&lang=PT"
+  },
+  "ine/0012234_S5A20253.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0012234&Dim1=S5A20253&lang=PT"
+  },
+  "ine/0012234_S5A20254.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0012234&Dim1=S5A20254&lang=PT"
+  },
+  "ine/0012234_S5A20261.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0012234&Dim1=S5A20261&lang=PT"
+  },
+  "ine/0012234_S5A20262.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0012234&Dim1=S5A20262&lang=PT"
+  },
+  "ine/0014696_S5A20201.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0014696&Dim1=S5A20201&lang=PT"
+  },
+  "ine/0014696_S5A20202.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0014696&Dim1=S5A20202&lang=PT"
+  },
+  "ine/0014696_S5A20203.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0014696&Dim1=S5A20203&lang=PT"
+  },
+  "ine/0014696_S5A20204.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0014696&Dim1=S5A20204&lang=PT"
+  },
+  "ine/0014696_S5A20211.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0014696&Dim1=S5A20211&lang=PT"
+  },
+  "ine/0014696_S5A20212.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0014696&Dim1=S5A20212&lang=PT"
+  },
+  "ine/0014696_S5A20213.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0014696&Dim1=S5A20213&lang=PT"
+  },
+  "ine/0014696_S5A20214.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0014696&Dim1=S5A20214&lang=PT"
+  },
+  "ine/0014696_S5A20221.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0014696&Dim1=S5A20221&lang=PT"
+  },
+  "ine/0014696_S5A20222.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0014696&Dim1=S5A20222&lang=PT"
+  },
+  "ine/0014696_S5A20223.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0014696&Dim1=S5A20223&lang=PT"
+  },
+  "ine/0014696_S5A20224.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0014696&Dim1=S5A20224&lang=PT"
+  },
+  "ine/0014696_S5A20231.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0014696&Dim1=S5A20231&lang=PT"
+  },
+  "ine/0014696_S5A20232.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0014696&Dim1=S5A20232&lang=PT"
+  },
+  "ine/0014696_S5A20233.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0014696&Dim1=S5A20233&lang=PT"
+  },
+  "ine/0014696_S5A20234.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0014696&Dim1=S5A20234&lang=PT"
+  },
+  "ine/0014696_S5A20241.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0014696&Dim1=S5A20241&lang=PT"
+  },
+  "ine/0014696_S5A20242.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0014696&Dim1=S5A20242&lang=PT"
+  },
+  "ine/0014696_S5A20243.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0014696&Dim1=S5A20243&lang=PT"
+  },
+  "ine/0014696_S5A20244.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0014696&Dim1=S5A20244&lang=PT"
+  },
+  "ine/0014696_S5A20251.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0014696&Dim1=S5A20251&lang=PT"
+  },
+  "ine/0014696_S5A20252.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0014696&Dim1=S5A20252&lang=PT"
+  },
+  "ine/0014696_S5A20253.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0014696&Dim1=S5A20253&lang=PT"
+  },
+  "ine/0014696_S5A20254.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0014696&Dim1=S5A20254&lang=PT"
+  },
+  "ine/0014696_S5A20261.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0014696&Dim1=S5A20261&lang=PT"
+  },
+  "ine/0014696_S5A20262.json.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "CC BY 4.0 (INE)",
+   "url": "https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0014696&Dim1=S5A20262&lang=PT"
+  },
+  "osm-concelhos.geojson.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "ODbL (© OpenStreetMap contributors)",
+   "note": "admin_level 7 relations named like an INE unit, inside Portugal; OSM planet of December 2016 (osm-boundaries export)",
+   "url": "https://raw.githubusercontent.com/missinglink/osm-boundaries/master/data/"
+  },
+  "osm-freguesias.geojson.gz": {
+   "downloaded": "2026-10-26",
+   "licence": "ODbL (© OpenStreetMap contributors)",
+   "note": "admin_level 8 relations named like an INE unit, inside Portugal; OSM planet of December 2016 (osm-boundaries export)",
+   "url": "https://raw.githubusercontent.com/missinglink/osm-boundaries/master/data/"
+  }
+ }
+}

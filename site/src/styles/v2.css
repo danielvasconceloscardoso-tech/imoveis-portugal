@@ -662,3 +662,51 @@ a.brass { color: var(--brass); }
 .dorder { display: grid; gap: 14px; }
 .dorder select, .dorder input[type=text] { min-height: 46px; padding: 0 12px; border: 1px solid var(--rule); border-radius: 2px; background: var(--card); font: 400 16px var(--sans); color: var(--ink); width: 100%; }
 .dorder .btn[disabled] { opacity: .55; cursor: not-allowed; }
+
+/* Prompt 25: the 3D map with prices and rents. D44 colours on the map: white ground, eau-de-nil to bottle green, brass for the selection. */
+.mapx-stage { background: #ffffff; }
+.mapx-bar { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px 24px; margin: 0 0 14px; }
+.mapx-metrics { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.mapx-metrics .h-small { flex-basis: 100%; }
+.mapx-metrics button, .mapx-flat { font: 500 14px/1.15 var(--sans); padding: 9px 12px; min-height: 40px; border-radius: 2px; border: 1px solid var(--rule); background: transparent; color: var(--ink); cursor: pointer; transition: border-color .3s ease, background-color .3s ease, color .3s ease; }
+.mapx-metrics button:hover, .mapx-flat:hover { border-color: var(--ink); }
+.mapx-metrics button[aria-pressed="true"], .mapx-flat[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.mapx-find { position: relative; display: grid; gap: 6px; flex: 1 1 220px; max-width: 320px; }
+.mapx-find input { font: 400 16px/1.2 var(--sans); padding: 10px 12px; min-height: 42px; border: 1px solid var(--rule); border-radius: 2px; background: var(--card); color: var(--ink); }
+.mapx-find input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+.mapx-find-list { position: absolute; z-index: 5; top: 100%; left: 0; right: 0; margin: 4px 0 0; padding: 4px 0; list-style: none; background: var(--card); border: 1px solid var(--rule); box-shadow: 0 8px 24px rgba(22, 24, 28, .08); max-height: 320px; overflow: auto; }
+.mapx-find-list li { padding: 10px 12px; cursor: pointer; font-size: 15px; }
+.mapx-find-list li[aria-selected="true"], .mapx-find-list li:hover { background: var(--accent-soft); }
+.mapx-find-list li.none { color: var(--muted); cursor: default; }
+.mapx-tip { position: absolute; left: 0; top: 0; z-index: 3; pointer-events: none; font: 500 13px/1 var(--sans); background: var(--ink); color: #fff; padding: 6px 8px; border-radius: 2px; white-space: nowrap; }
+.mapx-flash { position: absolute; left: 50%; top: 12px; transform: translateX(-50%); z-index: 4; font: 500 13px/1 var(--sans); background: var(--ink); color: #fff; padding: 8px 12px; border-radius: 2px; }
+.mapx-card { width: min(380px, calc(100% - 24px)); max-height: calc(100% - 24px); overflow: auto; background: #ffffff; z-index: 2; }
+.mapx-card h3:focus { outline: none; }
+.mapx-chart { margin: 14px 0 6px; }
+.mapx-chart svg { width: 100%; height: auto; display: block; }
+.mapx-chart figcaption { margin-top: 2px; }
+.mapx-chart .k-ink { color: var(--ink); border-bottom: 2px solid var(--ink); }
+.mapx-chart .k-green { color: #1f4a3d; border-bottom: 2px solid #1f4a3d; }
+.mapx-facts { margin: 8px 0 0; padding: 0; list-style: none; display: grid; gap: 6px; }
+.mapx-facts strong { font-weight: 600; color: var(--accent); }
+.mapx-brief { margin: 12px 0 0; font-size: 15px; }
+.mapx-cmp { margin: 6px 0 0; padding: 0; list-style: none; display: grid; gap: 4px; }
+.mapx-cmp li { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+.mapx-cmp button, .linkish { background: none; border: 0; padding: 6px 0; min-height: 32px; font: inherit; color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; cursor: pointer; text-align: left; }
+.mapx-more .linkish { color: var(--muted); padding: 0; min-height: 0; }
+.mapx-src { margin: 12px 0 0; color: var(--muted); }
+.mapx-powered { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; margin: 8px 0 0; font: 400 12px/1.4 var(--sans); color: var(--muted); }
+.mapx-powered a { color: var(--ink); }
+.mapx-pin { display: grid; justify-items: center; pointer-events: none; }
+.mapx-pin span { font: 600 12px/1 var(--sans); background: var(--mapx-accent, #7a5e28); color: #fff; padding: 6px 8px; border-radius: 2px; white-space: nowrap; }
+.mapx-pin::after { content: ""; width: 2px; height: 26px; background: var(--mapx-accent, #7a5e28); }
+.mapx .maplibregl-ctrl-group { border-radius: 2px; box-shadow: none; border: 1px solid var(--rule); }
+.mapx-list .linkish { padding: 0; min-height: 0; color: var(--ink); }
+@media (max-width: 600px) {
+  .mapx-card { max-height: 72%; }
+  .mapx-metrics button { flex: 1 1 calc(50% - 8px); }
+  .mapx-find { max-width: none; flex-basis: 100%; }
+}
+/* Embed (prompt 25 §3): the map alone, the partner's accent on buttons. */
+.mapx-embed .btn { background: var(--mapx-accent, var(--accent)); border-color: var(--mapx-accent, var(--accent)); }
+.mapx-embed .mapx-stage { aspect-ratio: auto; height: min(68vh, 560px); }

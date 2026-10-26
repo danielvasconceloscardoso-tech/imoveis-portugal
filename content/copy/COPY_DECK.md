@@ -2484,6 +2484,176 @@ How to edit:
 
 ## map
 
+### img.src
+- PT: Fonte: INE, {quarter}. Estatísticas oficiais, não é uma avaliação.
+- EN: Source: INE, {quarter}. Official statistics, not a valuation.
+- FR: Source : INE, {quarter}. Statistiques officielles, pas une évaluation.
+
+### img.for
+- PT: com {b}
+- EN: with {b}
+- FR: avec {b}
+
+### par.hint
+- PT: Aproxime o mapa para ver as freguesias onde o INE publica valores.
+- EN: Zoom in to see the parishes where INE publishes figures.
+- FR: Zoomez pour voir les paroisses où l'INE publie des chiffres.
+
+### par.nodata
+- PT: Sem preço publicado pelo INE para esta freguesia.
+- EN: INE publishes no price for this parish.
+- FR: L'INE ne publie pas de prix pour cette paroisse.
+
+### par.open
+- PT: Ver o concelho
+- EN: See the municipality
+- FR: Voir la commune
+
+### par.of
+- PT: Freguesia · {m}
+- EN: Parish · {m}
+- FR: Paroisse (freguesia) · {m}
+
+### card.disclaimer
+- PT: Os valores passados não garantem valores futuros. Estatísticas oficiais, não é uma avaliação.
+- EN: Past values do not guarantee future values. Official statistics, not a valuation.
+- FR: Les valeurs passées ne garantissent pas les valeurs futures. Statistiques officielles, pas une évaluation.
+
+### card.source
+- PT: Fonte: INE, {quarter}.
+- EN: Source: INE, {quarter}.
+- FR: Source : INE, {quarter}.
+
+### card.cmp
+- PT: Concelhos comparáveis
+- EN: Comparable municipalities
+- FR: Communes comparables
+
+### mo.down
+- PT: A abrandar.
+- EN: Slowing.
+- FR: En ralentissement.
+
+### mo.steady
+- PT: Estável.
+- EN: Steady.
+- FR: Stable.
+
+### mo.up
+- PT: A acelerar.
+- EN: Accelerating.
+- FR: En accélération.
+
+### card.mo
+- PT: Preço nos últimos 4 trimestres: {c4}. Nos últimos 8: {c8}.
+- EN: Price over the last 4 quarters: {c4}. Over the last 8: {c8}.
+- FR: Prix sur les 4 derniers trimestres : {c4}. Sur les 8 derniers : {c8}.
+
+### card.yield
+- PT: Rentabilidade bruta: {y}. Taxa média dos novos créditos à habitação: {r} (Banco de Portugal, {month}).
+- EN: Gross yield: {y}. Average rate on new home loans: {r} (Banco de Portugal, {month}).
+- FR: Rendement brut : {y}. Taux moyen des nouveaux crédits immobiliers : {r} (Banco de Portugal, {month}).
+
+### card.gap
+- PT: Desde 2020, o preço variou {p} por ano e a renda {r} por ano, uma diferença de {d} pontos.
+- EN: Since 2020, prices changed {p} a year and rents {r} a year, a gap of {d} points.
+- FR: Depuis 2020, le prix a varié de {p} par an et le loyer de {r} par an, un écart de {d} points.
+
+### card.cagrp
+- PT: Preço: {v} por ano desde 2016.
+- EN: Price: {v} a year since 2016.
+- FR: Prix : {v} par an depuis 2016.
+
+### card.rent
+- PT: Renda por m² por mês
+- EN: Rent per m² a month
+- FR: Loyer au m² par mois
+
+### card.price
+- PT: Preço por m²
+- EN: Price per m²
+- FR: Prix au m²
+
+### card.chart
+- PT: Preço e renda por m², 2016 a 2026
+- EN: Price and rent per m², 2016 to 2026
+- FR: Prix et loyer au m², 2016 à 2026
+
+### shareimg
+- PT: Imagem para partilhar
+- EN: Image to share
+- FR: Image à partager
+
+### close
+- PT: Fechar
+- EN: Close
+- FR: Fermer
+
+### flat
+- PT: Mapa plano
+- EN: Flat map
+- FR: Carte à plat
+
+### find.none
+- PT: Nenhum concelho com esse nome.
+- EN: No municipality by that name.
+- FR: Aucune commune de ce nom.
+
+### find
+- PT: Procurar concelho
+- EN: Find a municipality
+- FR: Chercher une commune
+
+### legend.yield
+- PT: A altura e a cor mostram a rentabilidade bruta: renda mediana dos novos contratos × 12 ÷ preço mediano, por m² (INE, {quarter}).
+- EN: Height and colour show the gross yield: median rent on new leases × 12 ÷ median price, per m² (INE, {quarter}).
+- FR: La hauteur et la couleur montrent le rendement brut : loyer médian des nouveaux baux × 12 ÷ prix médian, au m² (INE, {quarter}).
+
+### legend.growth
+- PT: A altura e a cor mostram quanto subiu o preço mediano por m² desde o 1.º trimestre de 2016 (INE, {quarter}).
+- EN: Height and colour show how much the median price per m² has risen since Q1 2016 (INE, {quarter}).
+- FR: La hauteur et la couleur montrent la hausse du prix médian au m² depuis le 1er trimestre 2016 (INE, {quarter}).
+
+### legend.price
+- PT: A altura e a cor mostram o preço mediano por m² das casas vendidas nos últimos 12 meses (INE, {quarter}).
+- EN: Height and colour show the median price per m² of homes sold over the last 12 months (INE, {quarter}).
+- FR: La hauteur et la couleur montrent le prix médian au m² des logements vendus sur les 12 derniers mois (INE, {quarter}).
+
+### legend.m2
+- PT: A altura e a cor mostram os metros quadrados do seu orçamento, com base no preço mediano das casas vendidas (INE, {quarter}).
+- EN: Height and colour show the square metres your budget buys, based on the median price of homes sold (INE, {quarter}).
+- FR: La hauteur et la couleur montrent les mètres carrés de votre budget, sur la base du prix médian des logements vendus (INE, {quarter}).
+
+### metric.yield
+- PT: Rentabilidade bruta
+- EN: Gross rental yield
+- FR: Rendement locatif brut
+
+### metric.growth
+- PT: Subida em 10 anos
+- EN: 10-year growth
+- FR: Hausse sur 10 ans
+
+### metric.price
+- PT: Preço mediano por m²
+- EN: Median price per m²
+- FR: Prix médian au m²
+
+### metric.m2
+- PT: m² para o meu orçamento
+- EN: m² for my budget
+- FR: m² pour mon budget
+
+### metric.label
+- PT: A altura mostra
+- EN: Height shows
+- FR: La hauteur montre
+
+### qfmt
+- PT: {q}.º trimestre de {y}
+- EN: Q{q} {y}
+- FR: {q}e trimestre {y}
+
 ### col.m2
 - PT: Preço mediano por m²
 - EN: Median price per m²
