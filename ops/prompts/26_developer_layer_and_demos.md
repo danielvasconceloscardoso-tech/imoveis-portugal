@@ -12,11 +12,11 @@ To run: "Read ops/prompts/26_developer_layer_and_demos.md and execute it." Do it
 ## 2. Private demos (not published, noindex, unlisted URLs)
 
 Build one personalised demo for each, using only information the developer has published itself:
-1. **Shalu Investments, O'rizon Living** (Valbom, Gondomar; riverside): reader from Tel Aviv and from New York, budgets in ₪ and $, Israel and USA journeys in English.
-2. **Vanguard Properties, Comporta** (and Lisbon): reader from Geneva and from Luxembourg, budgets 1 M€ and 5 M€ in CHF and €, Private section, Switzerland and Luxembourg journeys.
-3. **Vale do Lobo, The Residences** (Loulé): reader from Paris and from Zurich, 5 M€ and 10 M€ scenarios, France and Switzerland journeys.
+1. **Shalu Investments, O'rizon Living** (Valbom, Gondomar; riverside): readers from Tel Aviv and New York, budgets in ₪ and $, Israel and USA journeys in English.
+2. **Vanguard Properties, Comporta** (and Lisbon): readers from **New York or Miami**, Geneva and Luxembourg; budgets 1 M€, 5 M€ and 10 M€ shown in **$**, CHF and €; Private section; USA, Switzerland and Luxembourg journeys (for Americans: FBAR/FATCA and US tax on a Portuguese sale as journey steps).
+3. **Vale do Lobo, The Residences** (Loulé, next to Quinta do Lago): readers from **New York or California**, Paris and Zurich; 5 M€ and 10 M€ scenarios in **$**, € and CHF; USA, France and Switzerland journeys. North American demand in the Algarve is documented in the press (e.g. idealista, 'North Americans drive up property prices in the Algarve'); quote it with its source in the demo.
 
-Each demo is one page plus a 60–90 second screen recording (MP4, subtitles in the developer's language):
+Each demo is one page plus a 60–90 second screen recording (MP4, subtitles in the developer's language; for Vanguard and Vale do Lobo also an English version led by the American buyer):
 1. The map opens on Portugal, the reader enters a budget in their currency, and the camera flies to the developer's municipality.
 2. The place card: m² for the budget, 10 years of INE prices and rents, yield, momentum, comparable places (all real data, with sources).
 3. Their project pin and card, exactly as it would appear to readers, with "Patrocinado".
