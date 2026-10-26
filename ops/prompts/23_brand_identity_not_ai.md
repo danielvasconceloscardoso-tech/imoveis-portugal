@@ -11,18 +11,15 @@ Daniel's rule: **absolutely no AI slop**, the concierge and Claridge's feeling, 
 3. **Shapes and decoration:** rounded cards with soft shadows, pill badges, sparkle or magic-wand icons, emoji rows, blob shapes, abstract 3D renders, stock "happy couple with keys" photos, AI-generated people or interiors.
 4. **Words** (PT, EN, FR): "descubra / discover / découvrez", "explore", "jornada / journey" as a buzzword, "elevar / elevate", "experiência única", "sem complicações / seamless", "desbloquear / unlock", "o seu parceiro de confiança", "no mundo de hoje", "não é só X, é Y", headings that are rhetorical questions, three-adjective lists, colon taglines, em-dashes, exclamation marks, hashtag walls.
 
-## 2. The identity (inspired by the hotel's codes, not copying its marks)
+## 2. The identity (D50: editorial luxury in the OneMark register, our own marks)
 
-1. **Palette:**
-   - Ink black `#111111` and pure white `#FFFFFF` as the base, with large white margins
-   - One signature green, pale and cool (eau-de-nil, around `#CFE0D6`) for backgrounds of key sections, and a deep bottle green (around `#1E3A2F`) for the cover, footer and buttons
-   - Polished brass (around `#A8874A`) only for hairlines, numerals and small details, never for large areas
-   - Data colours: a quiet sequential green scale for the map and charts; no rainbow
-2. **Type:** a high-contrast serif with an Art Deco character for headings and numerals (for example Bodoni Moda or a comparable free-licence display face, self-hosted), and a precise, slightly narrow sans for text (not Inter or DM Sans). Generous letter-spacing on small capitals, tabular numerals for prices.
-3. **Graphic language:** fine black and brass rules, a restrained geometric Art Deco motif used sparingly (corner rules, a monogram, a subtle checkerboard detail at most), square corners, no shadows.
-4. **Logo:** a wordmark "Imóveis Portugal" in the display serif plus a monogram for avatars; black, white and bottle-green versions. Do not use or imitate any hotel's logo, name or trademarks.
-5. **Photography:** real Portugal, warm natural light, architecture and places across the price range (Porto façades, Lisbon light, Comporta dunes, Douro terraces, Algarve coast), no people posing, no AI images. Consistent grade (slightly cool shadows, true whites).
-6. **Voice:** a five-star concierge: calm, precise, courteous, few words, never salesy (D35 rules apply).
+Daniel's reference is OneMark Properties (onemark.pt). Take its register, never its marks, copy, yellow accent or diamond motif.
+1. **Palette:** pure white pages, near-black text (#0A0A0A) and grey body text, hairline greys (#E3E3E3). One small accent of our own: deep green (#2F5D50) used only for tiny markers and focus states. Black bands only for rare emphasis. No cream, beige, terracotta or gradients.
+2. **Type:** a large, elegant display serif for headings and numbers (Playfair Display or a close free-licence alternative, set very large: 64–90 px on desktop), a calm geometric sans for text and navigation (for example Manrope), small uppercase labels with wide letter-spacing.
+3. **Layout:** huge headings with a lot of white space; numbered sections (01, 02, 03); editorial two-column directory layout for partners (label and name on the left, description and website on the right, as in OneMark's "Network of excellence"); large image cards with gently rounded corners; a floating, translucent navigation bar; an occasional slow ticker band of services.
+4. **Photography:** real Portugal and real interiors in warm natural light, across every budget; no AI people, no stock clichés.
+5. **Voice:** a five-star concierge, calm and precise (D35).
+6. A one-page reference: sponsors/prospects/Partner_Prospects_2026-10.pdf, already set in this style.
 
 ## 2b. Reference to study
 
