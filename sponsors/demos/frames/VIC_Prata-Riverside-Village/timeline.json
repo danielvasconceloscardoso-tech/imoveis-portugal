@@ -1,0 +1,184 @@
+{
+ "lines": [
+  {
+   "shot": "1",
+   "at": 1.2,
+   "text": "We've talked about Portugal for two years. Tonight I'm actually looking."
+  },
+  {
+   "shot": "2",
+   "at": 7,
+   "text": "Twenty tabs. And every one says something different."
+  },
+  {
+   "shot": "4",
+   "at": 17,
+   "text": "Where do we even start? Lisbon? Porto? The coast?"
+  },
+  {
+   "shot": "5",
+   "at": 22.2,
+   "text": "And what do two million francs actually get us, once the taxes hit?"
+  },
+  {
+   "shot": "6",
+   "at": 28.7,
+   "text": "Can we even do this from here?"
+  },
+  {
+   "shot": "7",
+   "at": 34.5,
+   "text": "Who's actually building there?"
+  },
+  {
+   "shot": "8",
+   "at": 43.4,
+   "text": "That one."
+  },
+  {
+   "shot": "9",
+   "at": 46.1,
+   "text": "Can someone just show it to us properly?"
+  },
+  {
+   "shot": "10",
+   "at": 52.4,
+   "text": "And we'll need a lawyer. And a bank."
+  },
+  {
+   "shot": "11",
+   "at": 57,
+   "text": "Okay. That's a start."
+  }
+ ],
+ "keys": [
+  9.6,
+  9.652,
+  9.705,
+  9.757,
+  9.81,
+  9.862,
+  9.914,
+  9.967,
+  10.019,
+  10.071,
+  10.124,
+  10.176,
+  10.229,
+  10.281,
+  10.333,
+  10.386,
+  10.438,
+  10.49,
+  10.543,
+  10.595,
+  10.648,
+  10.7,
+  10.752,
+  10.805,
+  10.857,
+  10.91,
+  10.962,
+  11.014,
+  11.067,
+  11.119,
+  11.171,
+  11.224,
+  11.276,
+  11.329,
+  11.381,
+  11.433,
+  11.486,
+  11.538,
+  11.59,
+  11.643,
+  11.695,
+  11.748,
+  22.6,
+  22.857,
+  23.114,
+  23.371,
+  23.629,
+  23.886,
+  24.143
+ ],
+ "clicks": [
+  13.4,
+  36.6,
+  43,
+  51.6,
+  63.3
+ ],
+ "act1": [
+  0,
+  14.2
+ ],
+ "duration": 72.4,
+ "shots": [
+  {
+   "n": 1,
+   "start": 0,
+   "dur": 7
+  },
+  {
+   "n": 2,
+   "start": 6.6,
+   "dur": 7.6
+  },
+  {
+   "n": 3,
+   "start": 13.8,
+   "dur": 3.2
+  },
+  {
+   "n": 4,
+   "start": 16.6,
+   "dur": 5.6
+  },
+  {
+   "n": 5,
+   "start": 21.8,
+   "dur": 7
+  },
+  {
+   "n": 6,
+   "start": 28.4,
+   "dur": 6.2
+  },
+  {
+   "n": 7,
+   "start": 34.2,
+   "dur": 9
+  },
+  {
+   "n": 8,
+   "start": 42.8,
+   "dur": 3.4
+  },
+  {
+   "n": 9,
+   "start": 45.8,
+   "dur": 6.6
+  },
+  {
+   "n": 10,
+   "start": 52,
+   "dur": 4.8
+  },
+  {
+   "n": 11,
+   "start": 56.4,
+   "dur": 3.4
+  },
+  {
+   "n": 12,
+   "start": 59.4,
+   "dur": 8.2
+  },
+  {
+   "n": 13,
+   "start": 67.2,
+   "dur": 5.2
+  }
+ ]
+}
