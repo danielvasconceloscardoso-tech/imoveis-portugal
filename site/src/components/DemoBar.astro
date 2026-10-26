@@ -18,6 +18,9 @@
   // become the developer's own homes, and the other links to the agency are hidden.
   var agency = /\/(comprar|buy|acheter|consulta-privada|private-consultation|consultation-privee)\/?$/;
   document.querySelectorAll("a[href]").forEach(function (a) { if (agency.test(a.pathname) && !a.closest("[data-agency]")) (a.closest("li") || a).style.display = "none"; });
+  // Nor the "Talk to a partner" buttons (CEO, storyboard v4 shot 7): in a demo the team appears only after the request.
+  var talk = /\/(falar-com-um-parceiro|talk-to-a-partner|parler-a-un-partenaire)\/?$/;
+  document.querySelectorAll("a[href]").forEach(function (a) { if (talk.test(a.pathname)) { var box = a.closest(".next"); (box || a.closest("li") || a).style.display = "none"; } });
   document.querySelectorAll("[data-cta='agency'], [data-agency]").forEach(function (a) { a.style.display = "none"; });
   fetch("/d/" + t + "/walk.json").then(function (r) { return r.json(); }).then(function (w) {
     var dev = w.developer.replace(/[&<>"]/g, "");

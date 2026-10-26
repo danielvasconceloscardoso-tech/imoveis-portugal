@@ -169,6 +169,8 @@ Status: To do · Doing · Blocked · Done
 
 | 31a | Approve the Vanguard storyboard and the 20-second grade and sound test (prompt 31), then the film | Operator | To do | after prompt 31 step 1 |
 
+| 31b | Add free stock-footage keys to this cloud environment so the v4 films can use real licensed clips (CEO, 26 Oct: terrace in shots 0 and 13, the pour, candle and hands in 2, 3 and 11): create a free Pexels API key (pexels.com/api, brand mailbox) and a free Pixabay API key (pixabay.com/api/docs), then add them in the environment settings (session title bar > environment > Edit) as PEXELS_API_KEY and PIXABAY_API_KEY, and allow musopen.org and archive.org under Network access; a new session picks them up | Operator | To do | 2026-10-27 |
+
 | 32a | Compare the home page v1 and design v2 (screenshots and scroll recordings) and say go | Operator | To do | after prompt 32 step 1 |
 
 ## Last session
