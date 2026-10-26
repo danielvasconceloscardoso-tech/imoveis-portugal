@@ -4,7 +4,7 @@ To run: "Read ops/prompts/27_paths_and_faq_nav.md and execute it." Run it right 
 
 ## 1. Navigation (five items, never wrapping)
 
-PT "O seu percurso · Mapa · Perguntas · Private · Parceiros" · EN "Your path · Map · FAQ · Private · Partners" · FR "Votre parcours · Carte · Questions · Private · Partenaires". Price trends and simulators live inside the map and the path; everything else in the footer. Country selector and language switch on the right; one discreet "Newsletter" button.
+PT "O seu percurso · Mapa · Perguntas · Parceiros" · EN "Your path · Map · FAQ · Partners" · FR "Votre parcours · Carte · Questions · Partenaires". **No "Private" section anywhere on the site (D52).** Price trends and simulators live inside the map and the path; everything else in the footer. Country selector and language switch on the right; one discreet "Newsletter" button.
 
 ## 2. FAQ as a top section
 
@@ -25,6 +25,16 @@ The feeling: walking a beautiful route with a concierge beside you, not filling 
 5. **Motion:** the line draws itself as the reader advances; each station opens with a short, subtle transition; respect "reduced motion".
 6. **Shareable:** "Partilhar o meu percurso" link with country, budget and step (no personal data).
 7. **Accessibility and speed:** keyboard and screen-reader friendly, Lighthouse mobile 95+, works without JavaScript as a plain ordered list.
+
+## 3b. The quiet concierge for high budgets (D52)
+
+No section, label or menu item announces high budgets. The site adapts by itself when the reader's budget or property value is high (from about 1 M€; the threshold is internal and never shown):
+1. The path adds the stations that matter at that level, in the same calm style: residence options and personal taxation (IFICI), inheritance and succession across two countries, ownership and holding questions to discuss with advisers.
+2. The partners shown at those stations include wealth managers, private banks and cross-border tax and legal firms.
+3. The map and place cards bring forward the areas and developer projects that fit the budget; nothing is hidden from anyone else, it is only ordered differently.
+4. The FAQ shows the questions that fit the budget first.
+5. The consultation request uses a more personal tone ("um consultor dedicado acompanha o seu pedido"); the agency's identification and proof of funds remain as in prompt 21.
+6. Wording never says "luxury", "premium", "1 milhão" or "Private" to the reader. The existing Private pages (prompt 18) become stations and articles reached through the path, the map, search and Google, not through the menu.
 
 ## Review
 

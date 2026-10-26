@@ -13,7 +13,7 @@ To run: "Read ops/prompts/25_3d_map_intelligence.md and execute it." **Priority:
 ## 2. The map (site page + home block + embeddable build)
 
 1. MapLibre GL with our own data, no paid tiles, no API key. Municipalities as **3D extrusions**; the reader chooses what height means: **m² for my budget** (default), **median €/m²**, **10-year price growth**, **gross rental yield**. Colour follows the same metric on the green scale.
-2. Budget input with presets 300 k€ · 1 M€ · 5 M€ · 10 M€ and the reader's currency (ECB rate, dated). Changing budget or metric animates the heights; tilted camera, smooth fly-to on tap, slow idle rotation on the home page.
+2. **One elegant budget field, no preset buttons and no budget tiers shown** (D52), in the reader's currency (ECB rate, dated); any amount works. Changing budget or metric animates the heights; tilted camera, smooth fly-to on tap, slow idle rotation on the home page.
 3. **Place card:** large real photo, name in the display type, then:
    - m² for the budget and the median €/m² (latest), with period and source
    - **10-year chart**: price per m² and rent per m² on one elegant chart, compound annual growth for each, and the gap between them
