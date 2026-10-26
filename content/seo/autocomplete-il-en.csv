@@ -1,41 +1,41 @@
-rank,phrase,signal,seed#position,source,date
-1,buy property in portugal,10,buy property in portugal#1,Google autocomplete gl=il hl=en,2026-10-26
-2,buying a house in portugal,10,buying a house in portugal#1,Google autocomplete gl=il hl=en,2026-10-26
-3,can americans buy property in portugal,10,can americans buy property in portugal#1,Google autocomplete gl=il hl=en,2026-10-26
-4,how to buy a house in portugal,10,how to buy a house in portugal#1,Google autocomplete gl=il hl=en,2026-10-26
-5,imt portugal,10,imt portugal#1,Google autocomplete gl=il hl=en,2026-10-26
-6,inheritance tax portugal,10,inheritance tax portugal#1,Google autocomplete gl=il hl=en,2026-10-26
-7,is it worth buying a property in portugal,10,is it worth buying property in portugal#1,Google autocomplete gl=il hl=en,2026-10-26
-8,mortgage in portugal for non residents,10,mortgage in portugal non resident#1,Google autocomplete gl=il hl=en,2026-10-26
-9,moving to portugal from usa,10,moving to portugal#1,Google autocomplete gl=il hl=en,2026-10-26
-10,nif portugal,10,nif portugal#1,Google autocomplete gl=il hl=en,2026-10-26
-11,portugal golden visa,10,portugal golden visa#1,Google autocomplete gl=il hl=en,2026-10-26
-12,portugal house prices,10,portugal house prices#1,Google autocomplete gl=il hl=en,2026-10-26
-13,portugal real estate,10,portugal real estate#1,Google autocomplete gl=il hl=en,2026-10-26
-14,power of attorney portugal,10,power of attorney portugal#1,Google autocomplete gl=il hl=en,2026-10-26
-15,property tax portugal,10,property tax portugal#1,Google autocomplete gl=il hl=en,2026-10-26
-16,renting out property in portugal,10,renting out property in portugal#1,Google autocomplete gl=il hl=en,2026-10-26
-17,selling property in portugal taxes,10,selling property in portugal#1,Google autocomplete gl=il hl=en,2026-10-26
-18,where to buy property in portugal,10,where to buy property in portugal#1,Google autocomplete gl=il hl=en,2026-10-26
-19,buy property in portugal algarve,9,buy property in portugal#2,Google autocomplete gl=il hl=en,2026-10-26
-20,buying a house in portugal as an american,9,buying a house in portugal#2,Google autocomplete gl=il hl=en,2026-10-26
-21,can foreigners buy property in portugal,9,can americans buy property in portugal#2,Google autocomplete gl=il hl=en,2026-10-26
-22,getting a mortgage in portugal as a non resident,9,mortgage in portugal non resident#2,Google autocomplete gl=il hl=en,2026-10-26
-23,how to buy a house in portugal as an american,9,how to buy a house in portugal#2,Google autocomplete gl=il hl=en,2026-10-26
-24,imt portugal driving licence exchange,9,imt portugal#2,Google autocomplete gl=il hl=en,2026-10-26
-25,inheritance tax portugal non residents,9,inheritance tax portugal#2,Google autocomplete gl=il hl=en,2026-10-26
-26,is it worth buying a house in portugal,9,is it worth buying property in portugal#2,Google autocomplete gl=il hl=en,2026-10-26
-27,moving to portugal,9,moving to portugal#2,Google autocomplete gl=il hl=en,2026-10-26
-28,nif portugal login,9,nif portugal#2,Google autocomplete gl=il hl=en,2026-10-26
-29,portugal golden visa requirements,9,portugal golden visa#2,Google autocomplete gl=il hl=en,2026-10-26
-30,portugal house prices 2026,9,portugal house prices#2,Google autocomplete gl=il hl=en,2026-10-26
-31,portugal real estate for sale,9,portugal real estate#2,Google autocomplete gl=il hl=en,2026-10-26
-32,power of attorney portugal template,9,power of attorney portugal#2,Google autocomplete gl=il hl=en,2026-10-26
-33,property tax portugal calculator,9,property tax portugal#2,Google autocomplete gl=il hl=en,2026-10-26
-34,renting a property in portugal,9,renting out property in portugal#2,Google autocomplete gl=il hl=en,2026-10-26
-35,selling property in portugal,9,selling property in portugal#2,Google autocomplete gl=il hl=en,2026-10-26
-36,where to buy property in portugal for golden visa,9,where to buy property in portugal#2,Google autocomplete gl=il hl=en,2026-10-26
-37,buy property in portugal for foreigners,8,buy property in portugal#3,Google autocomplete gl=il hl=en,2026-10-26
-38,buying a house in portugal as a foreigner,8,buying a house in portugal#3,Google autocomplete gl=il hl=en,2026-10-26
-39,can non residents buy property in portugal,8,mortgage in portugal non resident#3,Google autocomplete gl=il hl=en,2026-10-26
-40,can us citizens buy property in portugal,8,can americans buy property in portugal#3,Google autocomplete gl=il hl=en,2026-10-26
+rank,phrase,signal,prefix,seed#position,source,date
+1,buy property in portugal,10,5,buy property in portugal#1,Google autocomplete gl=il hl=en,2026-10-26
+2,imt portugal,10,5,imt portugal#1,Google autocomplete gl=il hl=en,2026-10-26
+3,nif portugal,10,5,nif portugal#1,Google autocomplete gl=il hl=en,2026-10-26
+4,nif portugal login,9,5,nif portugal#2,Google autocomplete gl=il hl=en,2026-10-26
+5,portugal golden visa,10,10,portugal golden visa#1,Google autocomplete gl=il hl=en,2026-10-26
+6,portugal real estate,10,10,portugal real estate#1,Google autocomplete gl=il hl=en,2026-10-26
+7,moving to portugal from usa,10,11,moving to portugal#1,Google autocomplete gl=il hl=en,2026-10-26
+8,moving to portugal,9,11,moving to portugal#2,Google autocomplete gl=il hl=en,2026-10-26
+9,imt portugal driving licence exchange,9,12,imt portugal#2,Google autocomplete gl=il hl=en,2026-10-26
+10,portugal house prices,10,14,portugal house prices#1,Google autocomplete gl=il hl=en,2026-10-26
+11,portugal golden visa requirements,9,15,portugal golden visa#2,Google autocomplete gl=il hl=en,2026-10-26
+12,portugal house prices 2026,9,16,portugal house prices#2,Google autocomplete gl=il hl=en,2026-10-26
+13,inheritance tax portugal,10,17,inheritance tax portugal#1,Google autocomplete gl=il hl=en,2026-10-26
+14,buying a house in portugal,10,19,buying a house in portugal#1,Google autocomplete gl=il hl=en,2026-10-26
+15,buying a house in portugal as an american,9,19,buying a house in portugal#2,Google autocomplete gl=il hl=en,2026-10-26
+16,mortgage in portugal for non residents,10,20,mortgage in portugal non resident#1,Google autocomplete gl=il hl=en,2026-10-26
+17,property tax portugal,10,21,property tax portugal#1,Google autocomplete gl=il hl=en,2026-10-26
+18,selling property in portugal taxes,10,21,selling property in portugal#1,Google autocomplete gl=il hl=en,2026-10-26
+19,how to buy a house in portugal,10,23,how to buy a house in portugal#1,Google autocomplete gl=il hl=en,2026-10-26
+20,how to buy a house in portugal as an american,9,23,how to buy a house in portugal#2,Google autocomplete gl=il hl=en,2026-10-26
+21,buy property in portugal algarve,9,24,buy property in portugal#2,Google autocomplete gl=il hl=en,2026-10-26
+22,inheritance tax portugal non residents,9,24,inheritance tax portugal#2,Google autocomplete gl=il hl=en,2026-10-26
+23,power of attorney portugal,10,26,power of attorney portugal#1,Google autocomplete gl=il hl=en,2026-10-26
+24,where to buy property in portugal,10,26,where to buy property in portugal#1,Google autocomplete gl=il hl=en,2026-10-26
+25,is it worth buying a property in portugal,10,29,is it worth buying property in portugal#1,Google autocomplete gl=il hl=en,2026-10-26
+26,getting a mortgage in portugal as a non resident,9,30,mortgage in portugal non resident#2,Google autocomplete gl=il hl=en,2026-10-26
+27,can americans buy property in portugal,10,31,can americans buy property in portugal#1,Google autocomplete gl=il hl=en,2026-10-26
+28,is it worth buying a house in portugal,9,31,is it worth buying property in portugal#2,Google autocomplete gl=il hl=en,2026-10-26
+29,renting out property in portugal,10,32,renting out property in portugal#1,Google autocomplete gl=il hl=en,2026-10-26
+30,can foreigners buy property in portugal,9,32,can americans buy property in portugal#2,Google autocomplete gl=il hl=en,2026-10-26
+31,portugal real estate for sale,9,,portugal real estate#2,Google autocomplete gl=il hl=en,2026-10-26
+32,power of attorney portugal template,9,,power of attorney portugal#2,Google autocomplete gl=il hl=en,2026-10-26
+33,property tax portugal calculator,9,,property tax portugal#2,Google autocomplete gl=il hl=en,2026-10-26
+34,renting a property in portugal,9,,renting out property in portugal#2,Google autocomplete gl=il hl=en,2026-10-26
+35,selling property in portugal,9,,selling property in portugal#2,Google autocomplete gl=il hl=en,2026-10-26
+36,where to buy property in portugal for golden visa,9,,where to buy property in portugal#2,Google autocomplete gl=il hl=en,2026-10-26
+37,buy property in portugal for foreigners,8,,buy property in portugal#3,Google autocomplete gl=il hl=en,2026-10-26
+38,buying a house in portugal as a foreigner,8,,buying a house in portugal#3,Google autocomplete gl=il hl=en,2026-10-26
+39,can non residents buy property in portugal,8,,mortgage in portugal non resident#3,Google autocomplete gl=il hl=en,2026-10-26
+40,can us citizens buy property in portugal,8,,can americans buy property in portugal#3,Google autocomplete gl=il hl=en,2026-10-26
