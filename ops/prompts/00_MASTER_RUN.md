@@ -15,6 +15,7 @@ This file sets the order and the rules for everything still open. Where prompts 
 ## Order of work
 1. Finish the section you are on.
 1b. **Prompt 29 — freeze map and path v1, demos v3 (buyer's path, narrated), map v2 on its own branch.** Do it now, before prompt 23; it replaces the remaining v2 films of prompt 28.
+1c. **Prompt 30 — the content engine** (keyword map, one pillar a week cut into the newsletter and posts for every platform, image templates, exports). After the demo fixes, before prompt 23. Samples first, then wait for the go.
 2. **Prompt 25 — the 3D map** (priority): INE prices since 2016 and rents, all 308 municipalities clickable with search and parishes on zoom, one budget field with no presets, place card with the 10-year chart, yield, momentum, comparable places, human-reviewed area briefs, embeddable version with "Powered by Imóveis Portugal" and the required data credits only. Then §4 phase 2 layers (check each licence first).
 3. **Prompt 26 — developer layer and private demos**, English only: "New developments" layer on the map (partner projects only); four demos (Shalu / O'rizon Living, Vanguard / Comporta, Vale do Lobo / The Residences, OneMark) with American buyers leading Comporta and Vale do Lobo; page + 60–90 s MP4 + one-page PDF each; private, noindex, unlisted. Enquiry routing waits for task 8z: build it switchable.
 4. **Prompt 27 — the path and the FAQ**: buying and selling as an interactive path with checkpoints, FAQ hub as a top section, the four-item navigation, the quiet concierge for high budgets (§3b).

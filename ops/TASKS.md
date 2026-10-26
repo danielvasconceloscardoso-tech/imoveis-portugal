@@ -129,6 +129,10 @@ Status: To do · Doing · Blocked · Done
 
 | 29c | Prompt 29: freeze v1, demos v3 with narration and the seven-step buyer path, map v2 on its own branch | CTO | To do | 2026-10-28 |
 
+| 30a | Approve the content samples (one launch newsletter, eight post images with captions, keyword top 10) | Operator | To do | after prompt 30 samples |
+
+| 30b | Create the social accounts and reserve the handles (prompt 22 §5, ops/SOCIAL_SETUP.md) so week 1 teasers can be scheduled from Tue 10 Nov | Operator | To do | 2026-11-09 |
+
 ## Last session
 
 2026-10-25 (CTO, session 2): ran as CTO and, on request, as CEO. Done and merged to main: task board reconciled against the code (prompts 02 and 04 to 13 were built; 03 was not); e-book extended to 15 pages with a main-home chapter and a mortgage chapter, HPP FAQ answer in PT, EN, FR; blog with two articles in three languages, SEO data, sitemaps, home page section; prompt 03 (five Israeli-capital developers S151 to S155, chambers and embassies tab, INTERNATIONAL.md, seven drafts not sent; builder made safe: pipeline.csv is the source of truth, IDs and the week-1 list are stable); content and publishing plan (ops/PLAN_CONTENT.md) with decisions D24 to D30; briefing and METRICS stub updated; D31 records the merge. Fixed a mistake: one early commit carried a personal author and was rewritten to the brand identity (always set git user to Imoveis Portugal first). Not done: nothing is sent or posted; no account exists yet; every form ID is empty. Next: Daniel answers D4 and the Meta admin question; the operator does the setup batch (17d); a new session runs prompt 14.
