@@ -17,7 +17,7 @@ status: draft
 Images: card-pt.png, card-en.png, card-fr.png (one per language; the feed posts one, the others go to Facebook or stories).
 
 PT · Os 7,5% que ninguém põe na folha de cálculo.
-É o IMT de quem compra casa sem ser residente. Há exceções, e uma delas é tornar-se residente em dois anos.
+É o IMT de uma casa comprada por um não residente. Há exceções, e uma delas é tornar-se residente em dois anos.
 Faça as suas contas: link na bio, Simuladores.
 
 EN · The 7.5% nobody puts in the spreadsheet.

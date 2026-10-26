@@ -167,6 +167,30 @@ if (existsSync(blogDir)) for (const f of readdirSync(blogDir).filter((x) => /\.(
   for (const [label, text] of [["title", fm.title || ""], ["description", fm.description || ""], ["short answer", fm.tldr || ""], ["body", m[2]]]) checkText(file, label, text);
   for (const h of m[2].matchAll(/^## (.+)$/gm)) if (/\?\s*$/.test(h[1])) err(file, `heading "${h[1]}" is a question (VOICE.md)`);
 }
+// Prompt 30 §5.3: social posts (social/**/post.md) and newsletters. Posts: front matter, known fact ids, a link with
+// UTM tags, alt text, 3 to 5 hashtags on Instagram, no banned or advice wording. Newsletters: UTM on every link.
+let social = 0;
+const socialDir = join(root, "social");
+const md = (dir, out = []) => { if (!existsSync(dir)) return out; for (const f of readdirSync(dir)) { const p = join(dir, f); if (statSync(p).isDirectory()) md(p, out); else if (f === "post.md") out.push(p); } return out; };
+for (const file of md(socialDir)) {
+  social++;
+  const m = readFileSync(file, "utf8").match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+  if (!m) { err(file, "front matter missing"); continue; }
+  const fm = yaml.load(m[1]) || {}, body = m[2];
+  for (const k of ["platform", "format", "week", "date", "keyword", "link", "sources", "status"]) if (fm[k] === undefined) err(file, `front matter "${k}" missing`);
+  if (fm.status && !["draft", "approved"].includes(fm.status)) err(file, `status "${fm.status}" (draft or approved)`);
+  for (const id of fm.sources || []) if (!factIds.has(id)) err(file, `unknown fact id ${id}`);
+  if (fm.link && !/utm_source=[^&]+&utm_medium=[^&]+&utm_campaign=/.test(fm.link)) err(file, "link without UTM tags");
+  if (!/^Alt text: .{40,}/m.test(body)) err(file, "alt text missing or too short");
+  const tags = (body.match(/(^|\s)#[A-Za-zÀ-ÿ0-9]+/g) || []).length;
+  if (fm.platform === "instagram" && (tags < 3 || tags > 5)) err(file, `${tags} hashtags (Instagram: 3 to 5)`);
+  if (!/^(Fonte|Source)/m.test(body)) err(file, "source line missing");
+  checkText(file, "caption", body);
+}
+for (const file of walk(join(root, "content/inbox")).filter((f) => /newsletter/.test(f))) {
+  for (const u of readFileSync(file, "utf8").matchAll(/https?:\/\/(imoveisportugal\.[a-z.]+)[^\s)]*/g)) if (!/utm_source=/.test(u[0])) err(file, `link without UTM tags: ${u[0]}`);
+}
+console.log(`checked ${social} social posts`);
 console.log(`checked ${faqs} FAQ files, ${pieces} inbox pieces and ${posts} blog articles against ${factIds.size} facts`);
 if (errors.length) {
   console.log(errors.map((e) => `ERROR ${e}`).join("\n"));
