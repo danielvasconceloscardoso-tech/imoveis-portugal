@@ -5532,7 +5532,7 @@ Prompt 28 §2b (D54): the qualified summary that goes with a partner enquiry (in
 - FR: Prix publié
 
 ### cost.p
-- PT: Para quem compra a partir do estrangeiro, sem crédito: valores indicativos do simulador, com as taxas oficiais.
+- PT: Comprador a viver no estrangeiro, sem crédito: valores indicativos do simulador, com as taxas oficiais.
 - EN: For a buyer living abroad, without a mortgage: indicative figures from the calculator, at the official rates.
 - FR: Pour un acheteur vivant à l'étranger, sans crédit : montants indicatifs du simulateur, aux taux officiels.
 
