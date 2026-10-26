@@ -9,6 +9,9 @@ Status, 26 Oct 2026:
 
 ## Waiting on the operator (task 31b)
 
+27 Oct: the Pixabay and Freesound keys are not visible to the session that started before they were added (environment variables load at session start), and the network policy refuses mixkit.co. Musopen's own site answers scripts with a Cloudflare challenge; archive.org works and carries Musopen's public-domain recordings.
+
+
 The licensed clips come from Pexels or Pixabay, whose APIs need a free key. Neither key is in this environment yet, and pexels.com refuses this machine's requests without one. Musopen and archive.org are on the repo allowlist but not yet allowed in the environment. The Vanguard film renders as soon as `PEXELS_API_KEY` or `PIXABAY_API_KEY` is set.
 
 ## Engine (scripts/demos/v4/)
@@ -34,8 +37,9 @@ Lines: content/demos/screenplay_v4.json. The budget is never spoken and no amoun
 | Screens | our site in demo mode | ours |
 | Voice | Kokoro-82M (kokoro-onnx) | Apache 2.0 |
 | Depth | Depth Anything V2 Small, ONNX weights by onnx-community | Apache 2.0 |
-| Music, planned | Musopen String Quartet, Mendelssohn Op. 80, III Adagio; Frank Levy, Chopin Nocturne in C-sharp minor B. 49 (Wikimedia Commons) | public domain (Musopen) |
-| Christmas song on the TV, planned | United States Navy Band, "Stille Nacht", 21 Dec 2014 (Wikimedia Commons) | public domain, work of the US federal government |
+| Piano | Chopin, Nocturne in C minor, B. 108, Musopen recording on archive.org (parso-0376f076666a403745bbb1c79277856a9f5ef9d4) | CC0 |
+| Strings, planned | Musopen String Quartet, Mendelssohn Op. 80, III Adagio (Wikimedia Commons) | public domain (Musopen) |
+| Christmas song on the TV | Westbrook Conservatory Entertainers, "Silent Night", Paramount 3197, October 1929, archive.org (WestbrookConservatoryEntertainers-SilentNight_323) | public domain |
 | Siren, planned | "American police siren i.ogg", pdsounds.org via Wikimedia Commons | public domain |
 
 The Wikimedia downloads are slowed by rate limits on this machine's shared address. They are retried in the background.
