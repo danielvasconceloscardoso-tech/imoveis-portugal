@@ -5294,7 +5294,7 @@ Prompt 27: the path (two doors, stations, checklist). Blocks path.st.{k}.h / .wh
 - FR: Trouve et fait visiter les biens, et suit l'achat jusqu'à l'acte.
 
 ### wait
-- PT: Os outros passos ganham um nome quando o parceiro for escolhido e verificado.
+- PT: Os outros passos ganham um nome depois de o parceiro ser escolhido e verificado.
 - EN: The other steps get a name once their partner is chosen and verified.
 - FR: Les autres étapes auront un nom une fois leur partenaire choisi et vérifié.
 
