@@ -64,7 +64,8 @@ If no reliable source exists, don't compare that city.
 The seed numbers below are examples; check each one against its source before use.
 
 1. **Here vs there.** One square metre at home against the m² it buys in Portugal, drawn as squares to scale.
-   - Seed: 1 m² in Luxembourg-Ville (10,269 €, mean, existing apartments, lu-m2-2026q2) ≈ 2.0 m² in Lisboa, 2.8 m² in Porto, 4.4 m² in Gondomar (5,192 / 3,631 / 2,348 €, INE median, ine-m2-2026q2).
+   - Seed: 1 m² in Luxembourg-Ville (10,269 €, mean, existing apartments, lu-m2-2026q2) ≈ 2.0 m² in Lisboa, 2.8 m² in Porto, 4.0 m² in Grândola, Comporta's municipality (5,192 / 3,631 / 2,543 €, INE median, ine-m2-2026q2 and prices.json).
+   - **D34: never make Gondomar, or any single town, the cheap punchline.** Comparisons spread across the places readers want: Lisboa, Porto, Cascais, Comporta, Algarve, Madeira. Gondomar appears only when the subject is Gondomar itself (for example the Shalu demo).
    - Paris 9,692 € (fr-m2-2026q3) ≈ 1.9 m² in Lisboa.
    - Geneva canton 10,853 CHF (ch-ge-m2-2024, ECB rate) ≈ 2.3 m² in Lisboa.
 2. **What your budget buys.** One budget in the reader's currency, then the m² it buys in five places, drawn as floor-plan outlines to scale. Use the budget field's own figures.
@@ -82,7 +83,7 @@ The seed numbers below are examples; check each one against its source before us
 10. **Map reels.** Later, in the video prompt. Not now.
 
 **Tone.** Dry, warm, specific: details people recognise (the August holidays, the flight to Porto, the parents' house, the procuração signed at the consulate). Headline register, as examples:
-- "One square metre in Luxembourg City. Four in Gondomar."
+- "One square metre in Luxembourg City. Two in Lisbon."
 - "The 7.5% nobody puts in the spreadsheet."
 - "Same budget. Different view." · "O mesmo dinheiro. Outra vista." · "Même budget. Autre vue."
 
