@@ -341,3 +341,7 @@ maybourne.com
 *.maybourne.com
 claridges.co.uk
 *.claridges.co.uk
+archive.org
+*.archive.org
+freesound.org
+*.freesound.org
