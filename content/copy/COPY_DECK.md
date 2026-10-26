@@ -985,9 +985,9 @@ How to edit:
 - FR: Lancements
 
 ### place.private.p
-- PT: As etapas sobre residência, IFICI, herança nos dois países e estruturas de detenção, em todos os países.
-- EN: The steps on residence, IFICI, inheritance across two countries and holding structures, in every country.
-- FR: Les étapes sur la résidence, l'IFICI, la succession entre deux pays et les structures de détention, dans tous les pays.
+- PT: Em todos os países, ao lado das regras oficiais.
+- EN: In every country, next to the official rules.
+- FR: Dans tous les pays, à côté des règles officielles.
 
 ### place.private.h
 - PT: Residência, impostos e herança
@@ -1045,7 +1045,7 @@ How to edit:
 - FR: Avant le lancement, avec des chiffres réels
 
 ### why.p
-- PT: Para um advogado, um processo de compra. Para um banco, um crédito. Para um promotor, uma venda. Para um gestor de património, um cliente para muitos anos.
+- PT: Para um advogado, um processo de compra. Para um banco, um crédito. Para um promotor, uma venda. Para quem gere o dinheiro de uma família, um cliente para muitos anos.
 - EN: For a lawyer, one purchase file. For a bank, one mortgage. For a developer, one sale. For a wealth manager, a client for many years.
 - FR: Pour un avocat, un dossier d'achat. Pour une banque, un crédit. Pour un promoteur, une vente. Pour un gestionnaire de patrimoine, un client pour des années.
 
@@ -1065,9 +1065,9 @@ How to edit:
 - FR: Sur la carte et dans les listes « parler à un partenaire » de votre catégorie et de vos éditions.
 
 ### inventory.6
-- PT: Nas etapas sobre residência, IFICI, herança e estruturas de detenção.
-- EN: In the steps on residence, IFICI, inheritance and holding structures.
-- FR: Dans les étapes sur la résidence, l'IFICI, la succession et les structures de détention.
+- PT: Nas etapas de residência, IFICI e herança.
+- EN: In the steps on residence, IFICI and inheritance.
+- FR: Dans les étapes résidence, IFICI et succession.
 
 ### inventory.4
 - PT: Num capítulo do guia gratuito.
