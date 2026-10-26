@@ -24,6 +24,10 @@ Daniel's rule: **absolutely no AI slop**, the concierge and Claridge's feeling, 
 5. **Photography:** real Portugal, warm natural light, architecture and places across the price range (Porto façades, Lisbon light, Comporta dunes, Douro terraces, Algarve coast), no people posing, no AI images. Consistent grade (slightly cool shadows, true whites).
 6. **Voice:** a five-star concierge: calm, precise, courteous, few words, never salesy (D35 rules apply).
 
+## 2b. Reference to study
+
+OneMark Properties (José Cardoso Botelho): the tone Daniel wants, landmark quality with architecture, interiors, amenities and services as one bespoke offer. Study their website once the operator sends the URL and adds it to the network allowlist; take the restraint and the service language, never their marks or copy.
+
 ## 3. Apply everywhere
 
 1. Update the site's design tokens and fonts, all pages, the map and simulators, the social templates (prompt 22), the brochure (prompt 21), the dossiers, e-books, media kits and sponsors/prospects/build/style.css.
