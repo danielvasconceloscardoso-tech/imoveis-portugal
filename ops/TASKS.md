@@ -161,6 +161,16 @@ Status: To do · Doing · Blocked · Done
 
 | 29c | Prompt 29: freeze v1, demos v3 with narration and the seven-step buyer path, map v2 on its own branch | CTO | To do | 2026-10-28 |
 
+| 30a | Approve the content samples (one launch newsletter, eight post images with captions, keyword top 10) | Operator | To do | after prompt 30 samples |
+
+| 30b | Create the social accounts and reserve the handles (prompt 22 §5, ops/SOCIAL_SETUP.md) so week 1 teasers can be scheduled from Tue 10 Nov | Operator | To do | 2026-11-09 |
+
+| 30c | Create a free Buffer account on the brand mailbox, connect the Instagram professional account, the Facebook Page and the LinkedIn page, create an API key and add it to Claude Code's environment as BUFFER_API_KEY | Operator | To do | after 30b |
+
+| 31a | Approve the Vanguard storyboard and the 20-second grade and sound test (prompt 31), then the film | Operator | To do | after prompt 31 step 1 |
+
+| 32a | Compare the home page v1 and design v2 (screenshots and scroll recordings) and say go | Operator | To do | after prompt 32 step 1 |
+
 ## Last session
 
 2026-10-26 (CTO, session 7, prompt 29): main merged, nothing merged, sent or published. §1: map and path v1 frozen on branch freeze-map-path-v1 (commit 4469117; the tag could not be pushed, task 29a), 52 screenshots in ops/snapshots/map-path-v1/. §2 (D56, D57): demo page led by "How a buyer reaches you" in seven steps with a real screen and her line each, the sample enquiry email in full, "Walk the path as this buyer" (demo mode with caption bar and Listen, no form ever sent), map lower as "Where your homes sit", no audience numbers; one-pagers with the seven-step strip; four narrated films (72 s, 1080p, 60 fps, Kokoro voice af_heart or bf_emma, every line read back by Whisper), each clean and captioned with .vtt, voice .mp3, loop and a frame per shot. Stock clips, music and the Algarve morning wait on pexels/pixabay/unsplash access (task 29b). §3: branch map-v2 adds the time slider, Islands chip, compare, coastal glide and the coastal photo slots (photos pending 29b); speed equal within noise (ops/snapshots/map-v2/README.md on that branch). Next: prompt 23 per the master run.
