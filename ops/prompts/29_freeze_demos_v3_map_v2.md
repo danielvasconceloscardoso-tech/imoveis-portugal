@@ -33,9 +33,9 @@ Vanguard is the template. Shalu, Vale do Lobo and VIC follow the same structure.
 
 | # | Step | What is on screen (real screens of our site, that buyer, that developer) |
 | --- | --- | --- |
-| 1 | Where they first meet us | Our weekly letter for their edition on a phone; one of our articles; a question typed into a plain search field. Never show Google, ChatGPT, LinkedIn or any other brand's interface or logo. Use our own design only. |
+| 1 | They search, and we appear | A question typed into a plain search field, our result, the click; our weekly letter for their edition. Never show Google, ChatGPT, LinkedIn or any other brand's interface or logo. Use our own design only. |
 | 2 | They choose where | The map, one fly-in to the area and the three numbers. At most 6 seconds. |
-| 3 | They learn the real cost | The cost simulator with their budget in their currency: taxes, fees, exchange rate (ECB rate, dated). |
+| 3 | They learn the real cost | The cost simulator with their budget in their currency: taxes, fees, exchange rate (ECB rate, dated); the guide and FAQ for buyers from their country. |
 | 4 | They meet the developer's homes | "Partner developers here" on the place card, then the showcase page with the real homes, photos and published prices. |
 | 5 | They ask for a private viewing | The form and the qualified summary. |
 | 6 | The developer receives the enquiry | The email exactly as the developer's sales team would receive it, in our own email design: From Imóveis Portugal; subject; summary lines; the brief; the team. Labelled "Sample enquiry · illustrative buyer". |
@@ -52,7 +52,7 @@ Honesty rules:
 
 1. Put "How a buyer reaches you" first, straight after the opening. It shows the seven steps:
    - horizontal on desktop, vertical on mobile;
-   - each step has a real screenshot for that buyer and one line of copy (the narration lines below);
+   - each step has a real screenshot for that buyer and one line of copy (from the screenplay in §2d);
    - the step 6 email is shown in full.
 2. Add one button, "Walk the path as this buyer". It opens the real site in demo mode (`?demo=<token>`), pre-filled with the buyer: city, currency, budget, cash or mortgage, timeline.
    - A quiet caption bar at each station gives that step's line and a small "Listen" control that plays it.
@@ -69,7 +69,7 @@ Honesty rules:
 - Install: `pip install kokoro-onnx soundfile`.
 - Model files: GitHub release `thewh1teagle/kokoro-onnx`, tag `model-files-v1.0` (`kokoro-v1.0.onnx`, `voices-v1.0.bin`).
 - Settings: `lang="en-gb"`, `speed=0.9`.
-- Voice: `{VOICE}`, chosen by the operator from the samples (default `bm_george`).
+- Voices: see §2d (concierge chosen by the operator from the samples).
 - Record engine, model and licence in `sponsors/demos/README.md`.
 
 **Pronunciation.** Feed the engine respellings, never the written name:
@@ -85,7 +85,7 @@ Honesty rules:
 
 If an open-source speech-to-text model installs, transcribe every rendered line back and re-render any line that does not read back correctly.
 
-**Timing.** Cut the picture to the voice. Each step holds until its line ends, plus 0.6 s. Target 60 to 75 s.
+**Timing.** Cut the picture to the voice. Each shot holds until its line ends, plus 0.6 s.
 
 **Mix.**
 - Voice at −16 LUFS integrated, light high-pass, gentle compression.
@@ -100,28 +100,49 @@ If an open-source speech-to-text model installs, transcribe every rendered line 
 - the 6-second silent loop;
 - frames at every step, sent for review.
 
-### 2d. Narration
+### 2d. The film: a screenplay, from the buyer's side
+
+The film is shot from the buyer's side, like a feature film, not like a product tour. Three acts: the dark (lost at night with twenty tabs), the light (our site opens and things become clear), the developer (they find the homes and reach out). It ends on the developer's side, the next morning.
+
+Two voices, talking like real people:
+- **The buyer**: `af_heart` for the US demos; `bf_emma` for Tel Aviv and Geneva.
+- **The concierge**: `{VOICE}`, default `bm_george`.
 
 **Vanguard** (the template):
 
-1. A family in New York wants a home in Lisbon. This is how they find yours.
-2. It starts with our letter on a Thursday morning. Or a simple question: what does it really cost to buy in Lisbon?
-3. We answer with ten years of official prices, area by area.
-4. They put in three and a half million dollars. We show them what that really means, with taxes, fees and the exchange rate included.
-5. Then they see your homes. Tomás Ribeiro 79. Real photos, real prices.
-6. When they ask to visit, you don't just get a name. You know how they'll pay, when they want to move, what they can spend, and that their tax number is sorted.
-7. We bring in the lawyer, the bank and the tax adviser when they need them. So when you meet them, on video or in Lisbon, they already know the numbers.
-8. Imóveis Portugal. Your buyers, wherever they live.
+| # | Picture | Sound |
+| --- | --- | --- |
+| 1 | Black. Small white type: "New York. 11:48 pm". Small grey type in a corner: "Illustrative buyer journey". | A clock ticking, city hum. |
+| 2 | Night skyline through a window (licensed stock clip of the real city). A laptop's glow on a hand; no logo visible. | BUYER: "We'd decided on Portugal. Then I opened twenty tabs and understood nothing." |
+| 3 | A plain search field, in our own design (no Google look-alike). Typed: "buying a home in Portugal from the US". Our result appears; the cursor clicks it. | Keystrokes, then one click. |
+| 4 | Half a second of black. Then the site fades up in warm light, like a sunrise: the coast, the wordmark. | The ticking stops. One piano note. |
+| 5 | The 3D map rises and glides to Lisbon. | CONCIERGE: "Let's start with where you'd like to live." BUYER: "Lisbon. Somewhere central. Somewhere we can walk to dinner." |
+| 6 | Budget entered: $3,500,000. The simulator counts up: taxes, fees, exchange rate, total. | CONCIERGE: "Three and a half million dollars. Here's what that really buys, with taxes, fees and the exchange rate." |
+| 7 | The guide for US buyers; the FAQ answer on buying from abroad. | BUYER: "Can we do all this from New York?" CONCIERGE: "Most of it. Viewings by video, and a power of attorney for the signing." |
+| 8 | On the place card, "Partner developers here" lights up. Vanguard. The showcase opens: Tomás Ribeiro 79, full-bleed photos, slow push-in, the homes with prices. | Strings join the piano. BUYER: "That one." |
+| 9 | "Arrange a private viewing". The qualified summary assembles line by line. Send. | CONCIERGE: "We'll pass this on. And when you need a lawyer or a bank, we'll introduce the right ones." |
+| 10 | Cross-cut. Licensed stock clip of Lisbon in the morning. Small type: "Lisbon. 9:00 am". Vanguard's sales inbox, in our own email design: the enquiry opens, summary first. | The music drops to one held note. |
+| 11 | Black. "Imóveis Portugal". Below: "Your buyers, wherever they live." Then, small: "Launching 1 December 2026". | Silence, then one last note. No voice. |
 
 **Changes for the other three.** Everything not listed stays word for word.
 
-| Demo | Line 1 | Line 2 question | Line 4 budget | Line 5 homes | Line 7 place |
-| --- | --- | --- | --- | --- | --- |
-| Vale do Lobo | A family in California wants a home on the Algarve coast. | …to buy in the Algarve? | four million dollars | The Residences at Vale do Lobo. | on video or in the Algarve |
-| Shalu | A family in Tel Aviv wants a home near Porto. | …to buy near Porto? | three million shekels | O'rizon Living, in Gondomar. | on video or in Porto |
-| VIC Properties | A family in Geneva wants a home by the river in Lisbon. | …to buy in Lisbon? | two million Swiss francs | Prata Riverside Village. | on video or in Lisbon |
+| Demo | Shot 1 city | Shot 3 search | Shot 5 buyer line | Shot 6 budget | Shot 7 city | Shot 8 homes | Shot 10 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Vale do Lobo | Los Angeles | …from the US | "The Algarve. By the sea, with room for the kids when they visit." | four million dollars ($4,000,000) | California | The Residences at Vale do Lobo | The Algarve. 9:00 am |
+| Shalu | Tel Aviv | …from Israel | "Porto. Close to the city, but quiet." | three million shekels (₪3,000,000) | Tel Aviv | O'rizon Living, Gondomar | Porto. 9:00 am |
+| VIC Properties | Geneva | …from Switzerland | "Lisbon. By the river." | two million Swiss francs (CHF 2,000,000) | Geneva | Prata Riverside Village | Lisbon. 9:00 am |
 
-The copy is final. If a line breaks a VOICE.md rule or a legal rule, flag it rather than rewriting it.
+**Rules:**
+- The voice lines are final. If one breaks a VOICE.md rule or a legal rule, flag it rather than rewriting it.
+- Picture:
+  - Act 1 is cold and dark, lit only by the screen.
+  - Acts 2 and 3 are warm, in the site's own light.
+  - Slow, eased camera moves over real screens recorded at 60 fps.
+  - No titles or labels beyond the ones above.
+- Stock clips: Pexels licence only, and each clip must show the city it is named for. No logos, no recognisable faces. If no clip fits, use a still photo of that city with a slow push-in.
+- Sound effects (ticking, keys, click): synthesise them cleanly, or use Pixabay (licence recorded in the README).
+- Music follows the rules in §2c.
+- Length 75 to 90 s.
 
 ---
 
