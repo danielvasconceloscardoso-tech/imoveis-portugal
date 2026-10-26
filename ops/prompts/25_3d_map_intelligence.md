@@ -23,8 +23,9 @@ To run: "Read ops/prompts/25_3d_map_intelligence.md and execute it." **Priority:
    - the actions: homes there (agency form prefilled with place and budget), developers there (partner slots, labelled), the cost simulator, the reader's country journey
    - "Os valores passados não garantem valores futuros. Estatísticas oficiais, não é uma avaliação." (EN and FR equivalents)
 4. **Area briefs:** a short quarterly text per municipality generated from the data and **reviewed by a person before publishing** (editorial responsibility, so no AI label is required under the AI Act, art. 50(4)). No chat or question box on the map.
-5. Filters: coast or inland, city or countryside, near an airport (Porto, Lisbon, Faro), region; a searchable list as fallback; a flat 2D mode for low-power devices and reduced motion; Lighthouse mobile 95+.
-6. Shareable link keeps budget, metric and place (no personal data); a shareable image per place for social media.
+5. **Every municipality is clickable** (all 308, including small ones such as Gondomar, São João da Madeira or Barrancos, and those in Madeira and the Azores): a generous invisible hit area around small polygons, hover and focus states, keyboard access, and a search box ("Procurar concelho") that flies to any municipality and opens its card. Where INE publishes parishes (Lisbon and Porto metropolitan areas, Algarve), zooming in makes parishes clickable too. Test by clicking every municipality in an automated check and list any that fail.
+6. Filters: coast or inland, city or countryside, near an airport (Porto, Lisbon, Faro), region; a searchable list as fallback; a flat 2D mode for low-power devices and reduced motion; Lighthouse mobile 95+.
+7. Shareable link keeps budget, metric and place (no personal data); a shareable image per place for social media.
 
 ## 3. Embeddable version (for licensing later)
 
