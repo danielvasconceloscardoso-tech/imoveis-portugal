@@ -9,7 +9,7 @@ Status: To do · Doing · Blocked · Done
 | --- | --- | --- | --- | --- |
 | D1 | Site structure | One site, four edition sections; country domains point to their section | — | Decided |
 | D2 | Social accounts | One brand account per platform to start | — | Decided |
-| D3 | Pre-launch pricing | Founding prices: Gold 4,800 €, Silver 1,800 €, Bronze 540 € in year 1; lower if more than half of the first 10 calls object | — | Decided |
+| D3 | Pre-launch pricing | Founding prices: Gold 4,800 €, Silver 1,800 €, Bronze 540 € in year 1; lower if more than half of the first 10 calls object | — | Superseded by D40 (27 Oct) |
 | D4 | Billing entity | Which entity invoices sponsors and receives payments | Brand-only entity, not in Daniel's name | Postponed: no payment links until set |
 | D5 | Launch date | All four editions on Tue 1 Dec 2026 | — | Decided |
 | D6 | Legal frame | Every paid relationship (sponsors and agency) is a flat sponsorship, as for conferences; no per-lead fees | — | Decided |
@@ -40,9 +40,9 @@ Status: To do · Doing · Blocked · Done
 | 8f | Branch claude/keen-pasteur-epzzfr is from the stuck first session and deletes current files: never merge, delete it | Operator | To do | 2026-10-25 |
 | 8p | Approve the week-1 drafts in sponsors/outreach/week-1/ (README there lists what to check); nothing is sent before 8q | Operator | To do | 2026-10-26 |
 | 8q | Confirm the legal bases for B2B outreach per country (sponsors/METHOD.md, Outreach rules point 2); until then the drafts stay drafts | Operator (Daniel) | To do | 2026-10-26 |
-| 8r | Remessa Online, Bordr and e-residence are listed as affiliate offers: decide whether an affiliate commission fits D6 (flat sponsorships only); drafts pitch sponsorship only | CEO | To do | 2026-10-28 |
+| 8r | Remessa Online, Bordr and e-residence are listed as affiliate offers: decide whether an affiliate commission fits D6 (flat sponsorships only); drafts pitch sponsorship only | CEO | Closed (27 Oct): answered by D45 | 2026-10-28 |
 | 8s | Choose one of the three design directions | Operator | Done: direction C with colour photos (D15) | 2026-10-24 |
-| 8t | Create a free Unsplash developer app (unsplash.com/developers, brand mailbox) and add its Access Key to this cloud environment as the environment variable UNSPLASH_ACCESS_KEY (environment menu > Edit > Environment variables), never in the repo. Needed to search more photos and to fill in the photographer credits | Operator | To do | 2026-10-27 |
+| 8t | Create a free Unsplash developer app (unsplash.com/developers, brand mailbox) and add its Access Key to this cloud environment as the environment variable UNSPLASH_ACCESS_KEY (environment menu > Edit > Environment variables), never in the repo. Needed to search more photos and to fill in the photographer credits | Operator | Closed (27 Oct): superseded by Pixabay and Mixkit | 2026-10-27 |
 | 9 | Send "This week's 40" (sponsors/Sponsors_v2.xlsx), 8 per day, templates in sponsors/METHOD.md; log status | Partner | To do | 2026-10-30 |
 | 10 | Meta Ad Library pass for Luxembourg and Switzerland (links in sponsors/METHOD.md); add advertisers as tier A | Partner | To do | 2026-11-06 |
 | 11 | Get the latest exhibitor list of the Paris Portuguese property fair | Partner | To do | 2026-11-06 |
@@ -56,7 +56,7 @@ Status: To do · Doing · Blocked · Done
 | 8m | Switzerland edition in Portuguese and French | CTO | Done: superseded by D18 (whole site in PT, EN, FR) | 2026-11-06 |
 | 8n | Run ops/prompts/07_build_direction_c_beta.md (design C, six editions, free beta) | CTO | Done: beta live on workers.dev; design replaced by v2 (prompts 09–13) | 2026-10-31 |
 | 8o | Create the free Cloudflare account and connect the repo | Operator | Done: main and branch previews both deployed | 2026-10-27 |
-| 8u | Confirm two points on the new flat 7.5% IMT for non-residents (DL 97/2026): its start date (no specific rule; general rule gives 25 May 2026) and whether exception (a) "tenha sido considerado residente" covers emigrants who were once Portuguese tax residents. All FAQ and week 1–2 drafts depend on it | Daniel | To do | 2026-10-30 |
+| 8u | Confirm two points on the new flat 7.5% IMT for non-residents (DL 97/2026): its start date (no specific rule; general rule gives 25 May 2026) and whether exception (a) "tenha sido considerado residente" covers emigrants who were once Portuguese tax residents. All FAQ and week 1–2 drafts depend on it | Daniel | Merged into 30d (27 Oct) | 2026-10-30 |
 | 8v | Review the items left out or kept narrow in content/faq/UNVERIFIED.md (EU succession rule, France treaty method for rental income, AIMI rates, DL 97/2026 rent regimes) | Daniel | To do | 2026-11-04 |
 | 8w | Review the FAQ pages and the week 1–2 drafts in content/inbox (legal and tax: Daniel; market: partner agency) before anything is published | Daniel, Father | To do | 2026-11-06 |
 | 8x | Create the "Falar com um parceiro" request forms in Tally (fields in ops/SETUP.md) and send the IDs | Operator | To do | 2026-11-06 |
@@ -73,7 +73,7 @@ Status: To do · Doing · Blocked · Done
 | 9h | Open the reference sites that did not load here (design/v2/REFERENCES.md) and note anything to add to the brief | Daniel | To do | 2026-11-06 |
 | 12a | Find official price-per-m² figures for the cities left out of "O que compra": Lausanne (Statistique Vaud), New York, Boston, Newark (Census/FHFA blocked here), São Paulo (FipeZap blocked here), Tel Aviv (CBS publishes prices per dwelling, not per m²). Send the table or PDF and the CTO adds them to facts.csv | Daniel | To do | 2026-11-13 |
 | 12b | Create the Tally form "Pedido de análise de crédito" per language (hidden fields: tool and inputs; unticked consent naming the credit partner; confirmation email = double opt-in) and send the IDs for config.forms.credit | Operator | To do | 2026-11-13 |
-| 12c | Paid Plano de compra (D22): once the billing entity exists (D4), register for EU VAT OSS, create the Stripe Payment Link (5,99 €, receipt on) and send it; the CTO then switches config.plan.live on | Operator | To do | after D4 |
+| 12c | Paid Plano de compra (D22): once the billing entity exists (D4), register for EU VAT OSS, create the Stripe Payment Link (5,99 €, receipt on) and send it; the CTO then switches config.plan.live on | Operator | Closed (27 Oct): superseded, the paid plan was dropped (D39) | after D4 |
 | 12d | Approve the newsletter format (content/NEWSLETTER_FORMAT.md) and the week 1 drafts (content/inbox/week-01-newsletter/, 6 editions × PT/EN/FR); ask Habinedita for the first listing with written permission | Daniel | To do | 2026-11-20 |
 | 13a | Insurance partner for "Comprar a partir de fora, passo a passo" (life cover for the mortgage, home insurance): choose one and send its name and ASF registration for config.insurancePartner; lawyer and money-transfer partners likewise | CEO | To do | 2026-11-20 |
 | 13b | Open the Doutor Finanças social channels (YouTube, Instagram, TikTok, Facebook, LinkedIn, podcast), blocked from here, and note posting rhythm and best formats in design/v2/DOUTOR_FINANCAS.md | Partner | To do | 2026-11-13 |
@@ -90,8 +90,8 @@ Status: To do · Doing · Blocked · Done
 | 15 | Blog on the site (all editions, PT, EN, FR): article template and collection, index page, SEO (title and description, hreflang, canonical, sitemap, Article and FAQ structured data, short answer-first intro for featured snippets and AI answers), sources and disclaimer per the editorial policy. Two launch articles chosen by the CTO from the most searched and most important topics (proposed: the 7.5% non-resident IMT and what changes for emigrants; the buying process step by step from abroad), drafted in all three languages from content/facts/facts.csv. Requested by Daniel 25 Oct | CTO | Done on branch (25 Oct): blog index and article pages in PT, EN, FR, SEO data, per-edition sitemaps; two articles (non-resident IMT at 7.5%; buying from abroad step by step); checks in scripts/check-content.mjs and check-parity.mjs. Not merged | 2026-11-06 |
 | 15b | Review the two blog articles (legal and tax: Daniel; market: partner agency) before anything is published | Daniel, Partner | To do | 2026-11-13 |
 | 16 | Run prompt 03 (requested again by Daniel 25 Oct): see 8g | CTO | Done on branch | 2026-10-30 |
-| 17 | Social media and content automation plan, from creation to posting and monitoring. Written 25 Oct: ops/PLAN_CONTENT.md. Needs Daniel's answers to its six decisions (section 9) | CEO | Plan written, awaiting decisions | 2026-10-30 |
-| 17b | Approve the social plan, then create the brand accounts (D2, English ones named "Portugal Home Guides") | Operator | To do | 2026-11-13 |
+| 17 | Social media and content automation plan, from creation to posting and monitoring. Written 25 Oct: ops/PLAN_CONTENT.md. Needs Daniel's answers to its six decisions (section 9) | CEO | Closed (27 Oct): superseded by social/PLAYBOOK.md and prompt 30 | 2026-10-30 |
+| 17b | Approve the social plan, then create the brand accounts (D2, English ones named "Portugal Home Guides") | Operator | Merged into 30b (27 Oct) | 2026-11-13 |
 
 | 15c | Blog next steps once the first two are approved: two articles a month from content/plan topics; link the blog from the weekly newsletter; add internal links from FAQ answers to articles; submit each domain's sitemap-{ed}.xml in Google Search Console after launch | CTO | To do | 2026-12-01 |
 
@@ -143,7 +143,7 @@ Status: To do · Doing · Blocked · Done
 | 25d | Embed licensing: terms, price and who may embed (depends on the agency question in 8y above and D9); demos in design/embed-demos/ use invented brands and are not published | CEO | To do | 2026-11-13 |
 | 25e | Mortgage rate on the map: update fact bdp-mortgage-rate-2026-08 (and prices.json "mortgage") when Banco de Portugal publishes September 2026 (BPstat 12533735) | CTO | To do | 2026-11-03 |
 | 25f | Map layers waiting on licences or access (content/facts/map/SOURCES.md): RNAL national register (Turismo de Portugal licence), IMI rates (19d), OSRM or Overpass for travel times and points of interest, SNS, IPMA normals, APA and ICNF risk layers; and a municipal sales-count indicator from INE | Operator, CTO | To do | 2026-11-13 |
-| 26a | Demos v2 (prompt 28; sponsors/demos/README.md lists every price and image with its source): approve the four private previews (Vanguard, Vale do Lobo, Shalu, VIC, which replaces OneMark) before any link, film or PDF is sent; check the open points there (O'rizon prices come from ESSIA's listings and only one image is available; Muda prices only plots) | Operator | To do | 2026-11-06 |
+| 26a | Demos v2 (prompt 28; sponsors/demos/README.md lists every price and image with its source): approve the four private previews (Vanguard, Vale do Lobo, Shalu, VIC, which replaces OneMark) before any link, film or PDF is sent; check the open points there (O'rizon prices come from ESSIA's listings and only one image is available; Muda prices only plots). Includes the Vanguard film v4 (was 31c): watch it and say go or changes; the terrace in shots 0 and 13 is being replaced with a Pixabay clip | Operator | To do | 2026-11-06 |
 | 52a | Decide: the consultation keeps D39's name "Consulta privada / Private consultation / Consultation privée" (also in its URL, EN "private-consultation"); D52 bans "Private" as a label. Keep, or rename (e.g. "Consulta com a agência" / "Consultation with the agency")? | CEO | To do | 2026-10-30 |
 | 52b | Tally (21a): the "Orçamento" redirect for high budgets now goes to consultor-dedicado/ (EN dedicated-adviser/, FR conseiller-dedie/), see ops/TALLY_CONSULTA.md; the agency's high-budget email in content/consulta/EMAILS.md no longer says "Private desk" or "1 milhão" | Operator | To do | 2026-10-30 |
 | 52c | Prompt 27: path with two doors, quick answers, stations, checklist, progress and sharing; FAQ hub in six stages linked both ways; featured questions under the home map | CTO | Done | 2026-10-26 |
@@ -151,34 +151,35 @@ Status: To do · Doing · Blocked · Done
 | 27b | "Herdei uma casa" is a tick box under "Vender" for now (prompt 27 says a third door comes later): decide when it becomes its own door | CEO | To do | 2026-11-13 |
 
 | 28a | Tally (buyer form BEEzgN and the partner-request form): add two hidden fields, "brief" (the reader's qualified summary, only when they tick "Include this summary") and "team" (the partners they agreed may contact them), and show both in the notification email to the agency/partner; ops/TALLY_CONSULTA.md | Operator | To do | 2026-11-06 |
-| 29a | GitHub: create the tag `map-path-v1` on commit 4469117 (Releases → Draft a new release → Choose a tag → map-path-v1 → Target: that commit; save as draft or publish the tag only). The build session cannot push tags (HTTP 403); branch `freeze-map-path-v1` already holds the same commit | Operator | To do | 2026-11-02 |
-| 29b | Network: allow pexels.com, *.pexels.com, pixabay.com, *.pixabay.com, unsplash.com, *.unsplash.com in the cloud environment (environment settings → Network access → Allowed domains); the repo allowlist lists them but the session's policy still refuses them. Then the films get the stock clips (night skylines, the laptop's glow, the Algarve morning) and map v2 its coastal photographs | Operator | To do | 2026-10-30 |
+| 29a | GitHub: create the tag `map-path-v1` on commit 4469117 (Releases → Draft a new release → Choose a tag → map-path-v1 → Target: that commit; save as draft or publish the tag only). The build session cannot push tags (HTTP 403); branch `freeze-map-path-v1` already holds the same commit | Operator | Closed (27 Oct): GitHub refuses tags from these sessions; branch freeze-map-path-v1 holds commit 4469117 | 2026-11-02 |
+| 29b | Network: allow pexels.com, *.pexels.com, pixabay.com, *.pixabay.com, unsplash.com, *.unsplash.com in the cloud environment (environment settings → Network access → Allowed domains); the repo allowlist lists them but the session's policy still refuses them. Then the films get the stock clips (night skylines, the laptop's glow, the Algarve morning) and map v2 its coastal photographs | Operator | Done (27 Oct) | 2026-10-30 |
 | 8z | Decide where enquiries about a specific developer project go: (a) straight to the developer's sales team, (b) via Habinedita as the broking agency, or (c) the buyer chooses; D14 covers general buyer requests only | Operator | To do | 2026-10-30 |
 
-| 29a | Listen to the voice draft of the buyer (af_heart) and approve it or ask for another voice | Operator | To do | 2026-10-27 |
+| 29a | Listen to the voice draft of the buyer (af_heart) and approve it or ask for another voice | Operator | Closed (27 Oct): superseded by the v4 film | 2026-10-27 |
 
 | 29b | Compare map v1 (frozen preview) with map v2 and say go or keep v1 | Operator | To do | after §3 |
 
-| 29c | Prompt 29: freeze v1, demos v3 with narration and the seven-step buyer path, map v2 on its own branch | CTO | To do | 2026-10-28 |
+| 29c | Prompt 29: freeze v1, demos v3 with narration and the seven-step buyer path, map v2 on its own branch | CTO | Done (27 Oct) | 2026-10-28 |
 
-| 30a | Approve the content samples (one launch newsletter, eight post images with captions, keyword top 10) | Operator | To do | after prompt 30 samples |
+| 30a | Approve the content samples (one launch newsletter, eight post images with captions, keyword top 10) | Operator | Done (27 Oct): weeks 1-4 written | after prompt 30 samples |
 
-| 30b | Create the social accounts and reserve the handles (prompt 22 §5, ops/SOCIAL_SETUP.md) so week 1 teasers can be scheduled from Tue 10 Nov | Operator | To do | 2026-11-09 |
+| 30b | Create the social accounts and reserve the handles (prompt 22 §5, ops/SOCIAL_SETUP.md) so week 1 teasers can be scheduled from Tue 10 Nov. Includes 17b: the English accounts are named "Portugal Home Guides" (D13) | Operator | To do | 2026-11-09 |
 
 | 30c | Create a free Buffer account on the brand mailbox, connect the Instagram professional account, the Facebook Page and the LinkedIn page, create an API key and add it to Claude Code's environment as BUFFER_API_KEY | Operator | To do | after 30b |
 
-| 31a | Approve the Vanguard storyboard and the 20-second grade and sound test (prompt 31), then the film | Operator | To do | after prompt 31 step 1 |
+| 31a | Approve the Vanguard storyboard and the 20-second grade and sound test (prompt 31), then the film | Operator | Done (27 Oct): approved with changes, applied | after prompt 31 step 1 |
 
-| 31b | Add free stock-footage keys to this cloud environment so the v4 films can use real licensed clips (CEO, 26 Oct: terrace in shots 0 and 13, the pour, candle and hands in 2, 3 and 11): create a free Pexels API key (pexels.com/api, brand mailbox) and a free Pixabay API key (pixabay.com/api/docs), then add them in the environment settings (session title bar > environment > Edit) as PEXELS_API_KEY and PIXABAY_API_KEY, and allow musopen.org and archive.org under Network access; a new session picks them up | Operator | To do | 2026-10-27 |
+| 31b | Add free stock-footage keys to this cloud environment so the v4 films can use real licensed clips (CEO, 26 Oct: terrace in shots 0 and 13, the pour, candle and hands in 2, 3 and 11): create a free Pexels API key (pexels.com/api, brand mailbox) and a free Pixabay API key (pixabay.com/api/docs), then add them in the environment settings (session title bar > environment > Edit) as PEXELS_API_KEY and PIXABAY_API_KEY, and allow musopen.org and archive.org under Network access; a new session picks them up | Operator | Done (27 Oct): keys added; Pixabay key fix in 31d | 2026-10-27 |
 
 | 32a | Compare the home page v1 and design v2 (screenshots and scroll recordings) and say go | Operator | To do | after prompt 32 step 1 |
-| 30d | Legal check of every 7.5% IMT mention (ops/legal/IMT_7_5_MENTIONS.md: 190 mentions in 83 files; the claims to check are at the top, including the start date of 25 May 2026 and exception (a) for emigrants who were once resident) | Daniel | To do | 2026-11-06 |
+| 30d | Legal check of every 7.5% IMT mention (ops/legal/IMT_7_5_MENTIONS.md: 190 mentions in 83 files; the claims to check are at the top, including the start date of 25 May 2026 and exception (a) for emigrants who were once resident). Includes 8u: whether exception (a) "tenha sido considerado residente" covers emigrants who were once Portuguese tax residents | Daniel | To do | 2026-11-06 |
 | 30e | Approve weeks 1-4 (contact sheets in social/exports/, newsletters in content/inbox/week-NN/newsletter/beehiiv/index.html, pillar pages in content/inbox/week-NN/pillar/) or mark changes on the PDFs | Operator | To do | 2026-11-06 |
 | 30f | In the Meta Business Suite account (Planner): check whether bulk upload of posts exists and download its template; facebook.com is unreachable from the build environment, so social/exports/week-NN-meta-planner.csv is a plain sheet for now. Same for the hashtags in social/hashtags.csv: open each in the Instagram app and fill in active and spam_flag | Operator | To do | before 9 Nov |
 | 30g | beehiiv: create the account, an API key in BEEHIIV_API_KEY, and test whether the free plan creates draft posts by API; until then the newsletters are pasted from the HTML files (steps in content/NEWSLETTER_FORMAT.md) | Operator | To do | 2026-11-06 |
 | 30h | Before the pillar pages move from content/inbox to content/blog: their links name one edition (/pt/lu, /en/us, /fr/fr); switch them to the blog placeholders so each edition links to its own pages, and keep the query strings | CTO | To do | before 9 Nov |
 | 30i | Reddit and Quora: reddit.com and quora.com are blocked from the build environment, so community rules and matching threads are not verified; the person posting reads the rules and picks the thread | Operator | To do | before each post |
-| 31c | Vanguard film v4: watch it and say go or changes. Open gaps: no licensed Lisbon terrace clip (shots 0 and 13 use a glass of amber drink), piano only (no strings), the Pixabay key returns "invalid" (looks truncated) and Freesound answers 403 here | Operator | To do | 2026-10-30 |
+| 31c | Vanguard film v4: watch it and say go or changes. Open gaps: no licensed Lisbon terrace clip (shots 0 and 13 use a glass of amber drink), piano only (no strings), the Pixabay key returns "invalid" (looks truncated) and Freesound answers 403 here | Operator | Merged into 26a (27 Oct) | 2026-10-30 |
+| 31d | Pixabay key: it works, but the environment variable PIXABAY_API_KEY also holds other text after the key (89 characters instead of 34). Edit it to hold the key only (environment settings > Edit > Environment variables); the build reads the first part until then | Operator | To do | 2026-10-30 |
 | 23a | Prompt 23: review identity v3 (design/brand/BRAND.pdf, logo set, screenshots in design/brand/screens/) and say go | Operator | To do | 2026-10-30 |
 
 ## Last session
