@@ -371,3 +371,5 @@ cm-funchal.pt
 *.cm-funchal.pt
 visitportugal.com
 *.visitportugal.com
+elevenlabs.io
+*.elevenlabs.io
