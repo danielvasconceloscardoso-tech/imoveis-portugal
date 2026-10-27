@@ -80,7 +80,7 @@ A lei prevê três exceções à taxa única.[[pt-imt-nonresident-exceptions]] U
 
 > PENDING AGREEMENT. Habinedita has not signed the partner agreement yet (tasks 9g, 12d). This block is not sent until it has; if it is still unsigned on send day, the block is left out.
 
-A mediana mostra onde procurar; as casas concretas vêm da agência parceira, a Habinedita Gondomar (AMI 13250), a única agência na plataforma. Diga-lhe a zona, o orçamento e o prazo: mostra-lhe casas primeiro por videochamada, e ao vivo quando vier a Portugal. A escolha do lugar é a [primeira etapa do percurso de compra](/pt/lu/o-seu-percurso/?door=buy&step=1), e o pedido segue pela página [falar com um parceiro](/pt/lu/falar-com-um-parceiro/?cat=agency#form).
+A mediana mostra onde procurar; as casas concretas vêm da agência parceira, a Habinedita Gondomar (AMI 13250), a única agência na plataforma. Diga-lhe a zona, o orçamento e o prazo: mostra-lhe casas primeiro por videochamada, e ao vivo quando vier a Portugal. A escolha do lugar é a [primeira etapa do percurso de compra](/pt/lu/passo-a-passo/?door=buy&step=1), e o pedido segue pela página [falar com um parceiro](/pt/lu/falar-com-um-parceiro/?cat=agency#form).
 
 ## Perguntas
 

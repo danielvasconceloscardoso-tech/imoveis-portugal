@@ -40,7 +40,7 @@ Mais tarde, se arrendar ou vender a casa, a convenção entre Portugal e a Suí�
 
 A resposta completa, com uma secção curta para cada país: https://imoveisportugal.ch/pt/ch/blog/nif-portugal-online-a-partir-do-estrangeiro/?utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-ch
 
-Onde o NIF entra na compra, passo 2 de 9: https://imoveisportugal.ch/pt/ch/o-seu-percurso/?door=buy&step=2&utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-ch
+Onde o NIF entra na compra, passo 2 de 9: https://imoveisportugal.ch/pt/ch/passo-a-passo/?door=buy&step=2&utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-ch
 
 Um advogado parceiro pode pedir o NIF online e, mais à frente, assinar a escritura por si com uma procuração. Se já tem NIF de quando vivia em Portugal, o advogado pode confirmar consigo se os seus dados nas Finanças estão em dia: https://imoveisportugal.ch/pt/ch/falar-com-um-parceiro/?cat=lawyer&utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-ch#form
 

@@ -38,7 +38,7 @@ Une procuration signée devant un notaire américain doit porter l'apostille ; l
 
 Le pas à pas, avec les documents que demande la Casa Pronta et ce qui change aux États-Unis : https://imoveisportugal.us/fr/us/blog/procuration-portugal-signer-l-acte-a-distance/?utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-us
 
-La procuration dans l'ensemble de l'achat, à l'étape 3 de votre parcours : https://imoveisportugal.us/fr/us/votre-parcours/?door=buy&step=3&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-us
+La procuration dans l'ensemble de l'achat, à l'étape 3 du Pas à pas : https://imoveisportugal.us/fr/us/pas-a-pas/?door=buy&step=3&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-us
 
 Un avocat partenaire peut rédiger la procuration et signer pour vous : https://imoveisportugal.us/fr/us/parler-a-un-partenaire/?cat=lawyer&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-us#form
 

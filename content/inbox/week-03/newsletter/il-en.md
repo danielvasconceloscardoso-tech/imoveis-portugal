@@ -38,7 +38,7 @@ A power of attorney from a notary in Israel needs the apostille; one signed at a
 
 The full walk-through, with the documents Casa Pronta asks for and what changes in Israel: https://imoveisportugal.co.il/en/il/blog/power-of-attorney-portugal/?utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-il
 
-Where the power of attorney fits in the purchase, station 3 of your path: https://imoveisportugal.co.il/en/il/your-path/?door=buy&step=3&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-il
+Where the power of attorney fits in the purchase, station 3 of Step by step: https://imoveisportugal.co.il/en/il/step-by-step/?door=buy&step=3&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-il
 
 A partner lawyer can draft the power of attorney and sign for you: https://imoveisportugal.co.il/en/il/talk-to-a-partner/?cat=lawyer&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-il#form
 

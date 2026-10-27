@@ -40,7 +40,7 @@ Do lado brasileiro, o imóvel entra na declaração do IRPF, em Bens e Direitos,
 
 A resposta completa, com um trecho para cada país: https://imoveisportugal.com.br/pt/br/blog/nif-portugal-online-a-partir-do-estrangeiro/?utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-br
 
-Onde o NIF entra na compra, etapa 2 de 9: https://imoveisportugal.com.br/pt/br/o-seu-percurso/?door=buy&step=2&utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-br
+Onde o NIF entra na compra, etapa 2 de 9: https://imoveisportugal.com.br/pt/br/passo-a-passo/?door=buy&step=2&utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-br
 
 Um advogado parceiro pode tirar o seu NIF on-line e, mais adiante, assinar a escritura por você, com uma procuração feita no consulado português ou em cartório com a Apostila de Haia: https://imoveisportugal.com.br/pt/br/falar-com-um-parceiro/?cat=lawyer&utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-br#form
 

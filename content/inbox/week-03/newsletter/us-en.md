@@ -38,7 +38,7 @@ A power of attorney from a US notary needs the apostille; the Consulate General 
 
 The full walk-through, with the documents Casa Pronta asks for and what changes in the US: https://imoveisportugal.us/en/us/blog/power-of-attorney-portugal/?utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-us
 
-Where the power of attorney fits in the purchase, station 3 of your path: https://imoveisportugal.us/en/us/your-path/?door=buy&step=3&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-us
+Where the power of attorney fits in the purchase, station 3 of Step by step: https://imoveisportugal.us/en/us/step-by-step/?door=buy&step=3&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-us
 
 A partner lawyer can draft the power of attorney and sign for you: https://imoveisportugal.us/en/us/talk-to-a-partner/?cat=lawyer&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-us#form
 

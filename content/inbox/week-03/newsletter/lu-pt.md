@@ -38,7 +38,7 @@ Uma procuração feita num notário no Luxemburgo leva a Apostila; feita num con
 
 O passo a passo, com os documentos que a Casa Pronta pede e o que muda para quem vive no Luxemburgo: https://imoveisportugal.lu/pt/lu/blog/escritura-da-casa-com-procuracao/?utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-lu
 
-A procuração no conjunto da compra, na etapa 3 do seu percurso: https://imoveisportugal.lu/pt/lu/o-seu-percurso/?door=buy&step=3&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-lu
+A procuração no conjunto da compra, na etapa 3 do Passo a passo: https://imoveisportugal.lu/pt/lu/passo-a-passo/?door=buy&step=3&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-lu
 
 Um advogado parceiro pode redigir a procuração e assinar por si: https://imoveisportugal.lu/pt/lu/falar-com-um-parceiro/?cat=lawyer&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-lu#form
 

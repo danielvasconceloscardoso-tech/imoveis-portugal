@@ -40,7 +40,7 @@ Côté brésilien, le bien se déclare dans l'IRPF, à la rubrique Bens e Direit
 
 La réponse complète, avec une courte section par pays : https://imoveisportugal.com.br/fr/br/blog/nif-portugal-en-ligne-depuis-l-etranger/?utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-br
 
-La place du NIF dans l'achat, étape 2 sur 9 : https://imoveisportugal.com.br/fr/br/votre-parcours/?door=buy&step=2&utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-br
+La place du NIF dans l'achat, étape 2 sur 9 : https://imoveisportugal.com.br/fr/br/pas-a-pas/?door=buy&step=2&utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-br
 
 Un avocat partenaire peut demander votre NIF en ligne et, plus tard, signer l'acte pour vous avec une procuration. Si vous avez déjà vécu au Portugal, vous avez peut-être déjà un NIF, et l'avocat peut vérifier vos données auprès des Finances : https://imoveisportugal.com.br/fr/br/parler-a-un-partenaire/?cat=lawyer&utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-br#form
 

@@ -40,7 +40,7 @@ If you open a bank account in Portugal for the purchase, as a French tax residen
 
 The full answer, with a short section for each country: https://imoveisportugal.fr/en/fr/blog/nif-portugal-from-abroad/?utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-fr
 
-Where the NIF sits in the purchase, step 2 of 9: https://imoveisportugal.fr/en/fr/your-path/?door=buy&step=2&utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-fr
+Where the NIF sits in the purchase, step 2 of 9: https://imoveisportugal.fr/en/fr/step-by-step/?door=buy&step=2&utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-fr
 
 A partner lawyer can request your NIF online and, later on, sign the deed for you with a power of attorney. If you lived in Portugal before, you may already have a NIF, and the lawyer can check your details with the tax office: https://imoveisportugal.fr/en/fr/talk-to-a-partner/?cat=lawyer&utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-fr#form
 

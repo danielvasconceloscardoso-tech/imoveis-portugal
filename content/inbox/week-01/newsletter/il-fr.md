@@ -40,7 +40,7 @@ Si vous louez le bien plus tard, la convention entre le Portugal et Israël perm
 
 La réponse complète, avec une courte section par pays : https://imoveisportugal.co.il/fr/il/blog/nif-portugal-en-ligne-depuis-l-etranger/?utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-il
 
-La place du NIF dans l'achat, étape 2 sur 9 : https://imoveisportugal.co.il/fr/il/votre-parcours/?door=buy&step=2&utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-il
+La place du NIF dans l'achat, étape 2 sur 9 : https://imoveisportugal.co.il/fr/il/pas-a-pas/?door=buy&step=2&utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-il
 
 Un avocat partenaire peut demander votre NIF en ligne et, plus tard, signer l'acte pour vous avec une procuration. Si vous avez déjà vécu au Portugal, vous avez peut-être déjà un NIF, et l'avocat peut vérifier vos données auprès des Finances : https://imoveisportugal.co.il/fr/il/parler-a-un-partenaire/?cat=lawyer&utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-il#form
 

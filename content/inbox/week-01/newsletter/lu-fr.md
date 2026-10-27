@@ -40,7 +40,7 @@ Si vous louez un jour le bien, la convention entre le Portugal et le Luxembourg 
 
 La réponse complète, avec une courte section par pays : https://imoveisportugal.lu/fr/lu/blog/nif-portugal-en-ligne-depuis-l-etranger/?utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-lu
 
-La place du NIF dans l'achat, étape 2 sur 9 : https://imoveisportugal.lu/fr/lu/votre-parcours/?door=buy&step=2&utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-lu
+La place du NIF dans l'achat, étape 2 sur 9 : https://imoveisportugal.lu/fr/lu/pas-a-pas/?door=buy&step=2&utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-lu
 
 Un avocat partenaire peut demander votre NIF en ligne et, plus tard, signer l'acte pour vous avec une procuration. Si vous avez déjà vécu au Portugal, vous avez peut-être déjà un NIF, et l'avocat peut vérifier vos données auprès des Finances : https://imoveisportugal.lu/fr/lu/parler-a-un-partenaire/?cat=lawyer&utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-lu#form
 

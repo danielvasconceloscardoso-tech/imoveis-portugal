@@ -38,7 +38,7 @@ A power of attorney from a Swiss notary carries the apostille; one signed at a P
 
 The full walk-through, with the documents Casa Pronta asks for and what changes in Switzerland: https://imoveisportugal.ch/en/ch/blog/power-of-attorney-portugal/?utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-ch
 
-Where the power of attorney fits in the purchase, station 3 of your path: https://imoveisportugal.ch/en/ch/your-path/?door=buy&step=3&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-ch
+Where the power of attorney fits in the purchase, station 3 of Step by step: https://imoveisportugal.ch/en/ch/step-by-step/?door=buy&step=3&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-ch
 
 A partner lawyer can draft the power of attorney and sign for you: https://imoveisportugal.ch/en/ch/talk-to-a-partner/?cat=lawyer&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-ch#form
 

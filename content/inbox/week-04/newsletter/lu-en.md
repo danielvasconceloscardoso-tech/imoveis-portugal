@@ -64,7 +64,7 @@ The full piece, with rents and gross yields: https://imoveisportugal.lu/en/lu/bl
 
 Type €300,000 into the map and every municipality shows the square meters it buys. With this budget, that's more than 100 m² in 281 of the 304 municipalities with an official INE figure, and more than 200 m² in 189. Tap one for its ten-year price line, the rent per m² and the gross yield: https://imoveisportugal.lu/en/lu/map/?budget=300000&utm_source=newsletter&utm_medium=email&utm_campaign=w04-launch-lu
 
-Choosing the place is step one of the buying path: https://imoveisportugal.lu/en/lu/your-path/?door=buy&step=1&utm_source=newsletter&utm_medium=email&utm_campaign=w04-launch-lu
+Choosing the place is step one of the buying path: https://imoveisportugal.lu/en/lu/step-by-step/?door=buy&step=1&utm_source=newsletter&utm_medium=email&utm_campaign=w04-launch-lu
 
 ## The most-searched question
 

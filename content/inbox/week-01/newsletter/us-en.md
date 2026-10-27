@@ -40,7 +40,7 @@ On the US side, a Portuguese bank account counts toward your FBAR, like any fore
 
 The full answer, with a short section for each country: https://imoveisportugal.us/en/us/blog/nif-portugal-from-abroad/?utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-us
 
-Where the NIF sits in the purchase, step 2 of 9: https://imoveisportugal.us/en/us/your-path/?door=buy&step=2&utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-us
+Where the NIF sits in the purchase, step 2 of 9: https://imoveisportugal.us/en/us/step-by-step/?door=buy&step=2&utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-us
 
 A partner lawyer can request your NIF online and, later on, sign the deed for you with a power of attorney. If you lived in Portugal before, you may already have a NIF, and the lawyer can check your details with the tax office: https://imoveisportugal.us/en/us/talk-to-a-partner/?cat=lawyer&utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-us#form
 

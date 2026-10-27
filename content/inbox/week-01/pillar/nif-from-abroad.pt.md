@@ -21,7 +21,7 @@ Pode pedir o NIF sem sair do país onde vive: um representante legal faz o pedid
 
 Portugal não impede estrangeiros nem emigrantes de comprar casa. O Código do IMT tem até uma taxa própria para quem não é residente fiscal, o que só faz sentido porque essas compras acontecem.[[pt-nonresidents-buy]] O que cada escritura exige é identificação. No balcão Casa Pronta, onde a escritura e o registo se fazem no mesmo sítio, a lista de documentos começa pela identificação civil e fiscal do vendedor e pela sua.[[pt-casa-pronta-docs-all]] O cartão de cidadão ou o passaporte tratam da primeira. O NIF trata da segunda.
 
-Por isso o NIF é o passo 2 do [seu percurso](/pt/lu/o-seu-percurso/?door=buy&step=2), logo a seguir a escolher onde procurar.
+Por isso o NIF é o passo 2 do [Passo a passo](/pt/lu/passo-a-passo/?door=buy&step=2), logo a seguir a escolher onde procurar.
 
 ## Pode pedi-lo online, através de um representante legal
 

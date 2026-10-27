@@ -62,7 +62,7 @@ For a home that isn't your own permanent residence, Banco de Portugal caps the l
 
 ## IMT is due within 30 days of assessment
 
-IMT is paid on the day it's assessed or within the following 30 days.[[pt-imt-payment]] If you expect a refund under exception (b) or (c), the full 7.5% is paid first and the difference is claimed afterwards.[[pt-imt-nonresident-exceptions]] For your own figure, the [total-cost calculator](/en/us/calculators/total-cost/?price=250000&resident=0) takes the price, residence, use and mortgage. Cost is step 5 of [your path](/en/us/your-path/?door=buy&step=5), and the [map](/en/us/map/?budget=250000) shows what a budget buys in square meters.
+IMT is paid on the day it's assessed or within the following 30 days.[[pt-imt-payment]] If you expect a refund under exception (b) or (c), the full 7.5% is paid first and the difference is claimed afterwards.[[pt-imt-nonresident-exceptions]] For your own figure, the [total-cost calculator](/en/us/calculators/total-cost/?price=250000&resident=0) takes the price, residence, use and mortgage. Cost is step 5 of [Step by step](/en/us/step-by-step/?door=buy&step=5), and the [map](/en/us/map/?budget=250000) shows what a budget buys in square meters.
 
 ## The tax is the same from every country, the paperwork at home is not
 

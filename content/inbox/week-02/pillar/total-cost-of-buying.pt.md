@@ -62,7 +62,7 @@ Para uma casa que não é a sua habitação própria e permanente, o Banco de Po
 
 ## O IMT paga-se até 30 dias depois da liquidação
 
-O IMT paga-se no dia da liquidação ou nos 30 dias seguintes.[[pt-imt-payment]] Se conta com uma devolução ao abrigo da alínea (b) ou (c), paga primeiro os 7,5% e pede a diferença depois.[[pt-imt-nonresident-exceptions]] Para fazer a conta com o seu preço, o [simulador de custo total](/pt/lu/simuladores/custo-total/?price=250000&resident=0) pede o preço, a residência, o uso e o crédito. O custo é o passo 5 do [seu percurso](/pt/lu/o-seu-percurso/?door=buy&step=5), e o [mapa](/pt/lu/mapa/?budget=250000) mostra quantos metros quadrados um orçamento compra em cada concelho.
+O IMT paga-se no dia da liquidação ou nos 30 dias seguintes.[[pt-imt-payment]] Se conta com uma devolução ao abrigo da alínea (b) ou (c), paga primeiro os 7,5% e pede a diferença depois.[[pt-imt-nonresident-exceptions]] Para fazer a conta com o seu preço, o [simulador de custo total](/pt/lu/simuladores/custo-total/?price=250000&resident=0) pede o preço, a residência, o uso e o crédito. O custo é o passo 5 do [Passo a passo](/pt/lu/passo-a-passo/?door=buy&step=5), e o [mapa](/pt/lu/mapa/?budget=250000) mostra quantos metros quadrados um orçamento compra em cada concelho.
 
 ## O imposto é igual em todos os países, os papéis em casa mudam
 

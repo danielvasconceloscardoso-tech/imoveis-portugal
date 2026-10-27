@@ -38,7 +38,7 @@ Une procuration signée devant un notaire en Israël doit porter l'apostille ; s
 
 Le pas à pas, avec les documents que demande la Casa Pronta et ce qui change en Israël : https://imoveisportugal.co.il/fr/il/blog/procuration-portugal-signer-l-acte-a-distance/?utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-il
 
-La procuration dans l'ensemble de l'achat, à l'étape 3 de votre parcours : https://imoveisportugal.co.il/fr/il/votre-parcours/?door=buy&step=3&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-il
+La procuration dans l'ensemble de l'achat, à l'étape 3 du Pas à pas : https://imoveisportugal.co.il/fr/il/pas-a-pas/?door=buy&step=3&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-il
 
 Un avocat partenaire peut rédiger la procuration et signer pour vous : https://imoveisportugal.co.il/fr/il/parler-a-un-partenaire/?cat=lawyer&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-il#form
 

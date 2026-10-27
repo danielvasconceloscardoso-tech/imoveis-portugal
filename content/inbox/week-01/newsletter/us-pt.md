@@ -40,7 +40,7 @@ Do lado americano, uma conta num banco português conta para o FBAR, como qualqu
 
 A resposta completa, com uma secção curta para cada país: https://imoveisportugal.us/pt/us/blog/nif-portugal-online-a-partir-do-estrangeiro/?utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-us
 
-Onde o NIF entra na compra, passo 2 de 9: https://imoveisportugal.us/pt/us/o-seu-percurso/?door=buy&step=2&utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-us
+Onde o NIF entra na compra, passo 2 de 9: https://imoveisportugal.us/pt/us/passo-a-passo/?door=buy&step=2&utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-us
 
 Um advogado parceiro pode pedir o NIF online e, mais à frente, assinar a escritura por si com uma procuração. Se já tem NIF de quando vivia em Portugal, o advogado pode confirmar consigo se os seus dados nas Finanças estão em dia: https://imoveisportugal.us/pt/us/falar-com-um-parceiro/?cat=lawyer&utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-us#form
 

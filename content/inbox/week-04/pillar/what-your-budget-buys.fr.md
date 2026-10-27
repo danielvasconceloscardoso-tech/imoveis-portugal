@@ -80,7 +80,7 @@ La loi prévoit trois exceptions au taux unique.[[pt-imt-nonresident-exceptions]
 
 > PENDING AGREEMENT. Habinedita has not signed the partner agreement yet (tasks 9g, 12d). This block is not sent until it has; if it is still unsigned on send day, the block is left out.
 
-La médiane montre où chercher ; les biens réels viennent de notre agence partenaire, Habinedita Gondomar (AMI 13250), la seule agence de la plateforme. Indiquez-lui le secteur, le budget et le calendrier : elle vous montre des biens d'abord en visioconférence, puis sur place lors de votre venue au Portugal. Le choix du lieu est la [première étape du parcours d'achat](/fr/fr/votre-parcours/?door=buy&step=1), et votre demande passe par la page [parler à un partenaire](/fr/fr/parler-a-un-partenaire/?cat=agency#form).
+La médiane montre où chercher ; les biens réels viennent de notre agence partenaire, Habinedita Gondomar (AMI 13250), la seule agence de la plateforme. Indiquez-lui le secteur, le budget et le calendrier : elle vous montre des biens d'abord en visioconférence, puis sur place lors de votre venue au Portugal. Le choix du lieu est la [première étape du parcours d'achat](/fr/fr/pas-a-pas/?door=buy&step=1), et votre demande passe par la page [parler à un partenaire](/fr/fr/parler-a-un-partenaire/?cat=agency#form).
 
 ## Questions
 

@@ -21,7 +21,7 @@ Vous pouvez obtenir votre numéro fiscal portugais (NIF) sans quitter votre pays
 
 Le Portugal n'empêche pas les étrangers d'acheter. Le code de l'IMT prévoit même un taux propre aux personnes qui ne sont pas résidentes fiscales, ce qui n'a de sens que parce qu'elles achètent.[[pt-nonresidents-buy]] Ce que chaque acte exige, c'est une identification. Au guichet Casa Pronta, qui réunit l'acte et l'enregistrement au même endroit, la liste des documents commence par l'identification civile et fiscale du vendeur et la vôtre.[[pt-casa-pronta-docs-all]] Votre passeport ou votre carte d'identité couvre la première. Le NIF couvre la seconde.
 
-C'est pourquoi le NIF est l'étape 2 de [votre parcours](/fr/fr/votre-parcours/?door=buy&step=2), juste après le choix de la région.
+C'est pourquoi le NIF est l'étape 2 de [Pas à pas](/fr/fr/pas-a-pas/?door=buy&step=2), juste après le choix de la région.
 
 ## Vous pouvez le demander en ligne, par un représentant légal
 

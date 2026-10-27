@@ -62,7 +62,7 @@ Pour un logement qui n'est pas votre résidence principale, la Banco de Portugal
 
 ## L'IMT se paie dans les 30 jours de sa liquidation
 
-L'IMT se paie le jour de sa liquidation ou dans les 30 jours qui suivent.[[pt-imt-payment]] Si vous comptez sur un remboursement au titre du cas (b) ou (c), vous payez d'abord les 7,5 % et demandez la différence ensuite.[[pt-imt-nonresident-exceptions]] Pour votre propre chiffre, le [simulateur de coût total](/fr/fr/simulateurs/cout-total/?price=250000&resident=0) prend le prix, la résidence, l'usage et le crédit. Le coût est l'étape 5 de [votre parcours](/fr/fr/votre-parcours/?door=buy&step=5), et la [carte](/fr/fr/carte/?budget=250000) montre combien de mètres carrés un budget achète dans chaque commune.
+L'IMT se paie le jour de sa liquidation ou dans les 30 jours qui suivent.[[pt-imt-payment]] Si vous comptez sur un remboursement au titre du cas (b) ou (c), vous payez d'abord les 7,5 % et demandez la différence ensuite.[[pt-imt-nonresident-exceptions]] Pour votre propre chiffre, le [simulateur de coût total](/fr/fr/simulateurs/cout-total/?price=250000&resident=0) prend le prix, la résidence, l'usage et le crédit. Le coût est l'étape 5 de [Pas à pas](/fr/fr/pas-a-pas/?door=buy&step=5), et la [carte](/fr/fr/carte/?budget=250000) montre combien de mètres carrés un budget achète dans chaque commune.
 
 ## L'impôt est le même partout, les formalités chez vous changent
 

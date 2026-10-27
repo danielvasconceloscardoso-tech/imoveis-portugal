@@ -38,7 +38,7 @@ The Consulate General of Portugal in Paris handles notary acts, powers of attorn
 
 The full walk-through, with the documents Casa Pronta asks for and what changes in France: https://imoveisportugal.fr/en/fr/blog/power-of-attorney-portugal/?utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-fr
 
-Where the power of attorney fits in the purchase, station 3 of your path: https://imoveisportugal.fr/en/fr/your-path/?door=buy&step=3&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-fr
+Where the power of attorney fits in the purchase, station 3 of Step by step: https://imoveisportugal.fr/en/fr/step-by-step/?door=buy&step=3&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-fr
 
 A partner lawyer can draft the power of attorney and sign for you: https://imoveisportugal.fr/en/fr/talk-to-a-partner/?cat=lawyer&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-fr#form
 

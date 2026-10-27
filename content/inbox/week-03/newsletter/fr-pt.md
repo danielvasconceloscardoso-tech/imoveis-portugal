@@ -38,7 +38,7 @@ O Consulado-Geral de Portugal em Paris trata de atos notariais, procurações in
 
 O passo a passo, com os documentos que a Casa Pronta pede e o que muda para quem vive em França: https://imoveisportugal.fr/pt/fr/blog/escritura-da-casa-com-procuracao/?utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-fr
 
-A procuração no conjunto da compra, na etapa 3 do seu percurso: https://imoveisportugal.fr/pt/fr/o-seu-percurso/?door=buy&step=3&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-fr
+A procuração no conjunto da compra, na etapa 3 do Passo a passo: https://imoveisportugal.fr/pt/fr/passo-a-passo/?door=buy&step=3&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-fr
 
 Um advogado parceiro pode redigir a procuração e assinar por si: https://imoveisportugal.fr/pt/fr/falar-com-um-parceiro/?cat=lawyer&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-fr#form
 

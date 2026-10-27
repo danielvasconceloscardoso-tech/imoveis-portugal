@@ -38,7 +38,7 @@ Uma procuração feita em cartório no Brasil precisa da Apostila; feita em um c
 
 O passo a passo, com os documentos que a Casa Pronta pede e o que muda para o Brasil: https://imoveisportugal.com.br/pt/br/blog/escritura-da-casa-com-procuracao/?utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-br
 
-A procuração dentro da compra inteira, na etapa 3 do seu percurso: https://imoveisportugal.com.br/pt/br/o-seu-percurso/?door=buy&step=3&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-br
+A procuração dentro da compra inteira, na etapa 3 do Passo a passo: https://imoveisportugal.com.br/pt/br/passo-a-passo/?door=buy&step=3&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-br
 
 Um advogado parceiro pode redigir a procuração e assinar por você: https://imoveisportugal.com.br/pt/br/falar-com-um-parceiro/?cat=lawyer&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-br#form
 

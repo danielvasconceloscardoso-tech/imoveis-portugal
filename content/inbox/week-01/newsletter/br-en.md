@@ -40,7 +40,7 @@ Back in Brazil, the home goes into your IRPF under Bens e Direitos, at the purch
 
 The full answer, with a short section for each country: https://imoveisportugal.com.br/en/br/blog/nif-portugal-from-abroad/?utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-br
 
-Where the NIF sits in the purchase, step 2 of 9: https://imoveisportugal.com.br/en/br/your-path/?door=buy&step=2&utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-br
+Where the NIF sits in the purchase, step 2 of 9: https://imoveisportugal.com.br/en/br/step-by-step/?door=buy&step=2&utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-br
 
 A partner lawyer can request your NIF online and, later on, sign the deed for you with a power of attorney. If you lived in Portugal before, you may already have a NIF, and the lawyer can check your details with the tax office: https://imoveisportugal.com.br/en/br/talk-to-a-partner/?cat=lawyer&utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-br#form
 

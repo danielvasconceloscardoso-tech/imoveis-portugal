@@ -80,7 +80,7 @@ The law has three exceptions to the flat rate.[[pt-imt-nonresident-exceptions]] 
 
 > PENDING AGREEMENT. Habinedita has not signed the partner agreement yet (tasks 9g, 12d). This block is not sent until it has; if it is still unsigned on send day, the block is left out.
 
-The median shows where to look; actual homes come from our partner agency, Habinedita Gondomar (AMI 13250), the only agency on the platform. Tell them the area, the budget and the timing; they show you homes by video call first, and in person when you're in Portugal. Choosing the place is [step one of the buying path](/en/us/your-path/?door=buy&step=1), and your request goes through [talk to a partner](/en/us/talk-to-a-partner/?cat=agency#form).
+The median shows where to look; actual homes come from our partner agency, Habinedita Gondomar (AMI 13250), the only agency on the platform. Tell them the area, the budget and the timing; they show you homes by video call first, and in person when you're in Portugal. Choosing the place is [step one of the buying path](/en/us/step-by-step/?door=buy&step=1), and your request goes through [talk to a partner](/en/us/talk-to-a-partner/?cat=agency#form).
 
 ## Questions
 

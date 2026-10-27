@@ -38,7 +38,7 @@ Une procuration signée dans un cartório au Brésil doit porter l'apostille ; s
 
 Le pas à pas, avec les documents que demande la Casa Pronta et ce qui change au Brésil : https://imoveisportugal.com.br/fr/br/blog/procuration-portugal-signer-l-acte-a-distance/?utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-br
 
-La procuration dans l'ensemble de l'achat, à l'étape 3 de votre parcours : https://imoveisportugal.com.br/fr/br/votre-parcours/?door=buy&step=3&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-br
+La procuration dans l'ensemble de l'achat, à l'étape 3 du Pas à pas : https://imoveisportugal.com.br/fr/br/pas-a-pas/?door=buy&step=3&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-br
 
 Un avocat partenaire peut rédiger la procuration et signer pour vous : https://imoveisportugal.com.br/fr/br/parler-a-un-partenaire/?cat=lawyer&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-br#form
 

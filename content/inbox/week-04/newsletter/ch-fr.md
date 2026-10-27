@@ -66,7 +66,7 @@ L'article complet, loyers compris : https://imoveisportugal.ch/fr/ch/blog/ce-que
 
 La carte s'ouvre sur 300 000 €, environ 276 800 CHF (un bouton passe en euros) : plus de 100 m² dans 281 des 304 communes disposant d'un chiffre officiel de l'INE, plus de 200 m² dans 189. Chaque commune affiche sa courbe sur dix ans, le loyer au m² et le rendement brut : https://imoveisportugal.ch/fr/ch/carte/?budget=300000&utm_source=newsletter&utm_medium=email&utm_campaign=w04-launch-ch
 
-Le lieu est la première étape du parcours d'achat : https://imoveisportugal.ch/fr/ch/votre-parcours/?door=buy&step=1&utm_source=newsletter&utm_medium=email&utm_campaign=w04-launch-ch
+Le lieu est la première étape du parcours d'achat : https://imoveisportugal.ch/fr/ch/pas-a-pas/?door=buy&step=1&utm_source=newsletter&utm_medium=email&utm_campaign=w04-launch-ch
 
 ## La question la plus recherchée
 

@@ -38,7 +38,7 @@ A power of attorney from a Brazilian cartório needs the apostille; one signed a
 
 The full walk-through, with the documents Casa Pronta asks for and what changes in Brazil: https://imoveisportugal.com.br/en/br/blog/power-of-attorney-portugal/?utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-br
 
-Where the power of attorney fits in the purchase, station 3 of your path: https://imoveisportugal.com.br/en/br/your-path/?door=buy&step=3&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-br
+Where the power of attorney fits in the purchase, station 3 of Step by step: https://imoveisportugal.com.br/en/br/step-by-step/?door=buy&step=3&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-br
 
 A partner lawyer can draft the power of attorney and sign for you: https://imoveisportugal.com.br/en/br/talk-to-a-partner/?cat=lawyer&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-br#form
 

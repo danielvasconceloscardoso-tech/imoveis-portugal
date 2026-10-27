@@ -20,7 +20,7 @@ Thresholds: zero LanguageTool errors on headings and buttons; readability 60+ (F
 | /pt/lu/como-trabalhamos/ | 62 | 9.8 | 0 | 0 | 0 | 0 | 1 |
 | /pt/lu/residencia-impostos-heranca/ | 65 | 15.7 | 0 | 0 | 0 | 0 | 2 |
 | /pt/lu/comprar-a-partir-de-fora/ | 65 | 10.1 | 0 | 0 | 0 | 0 | 0 |
-| /pt/lu/o-seu-percurso/ | 62 | 13.4 | 0 | 0 | 0 | 0 | 6 |
+| /pt/lu/passo-a-passo/ | 62 | 13.4 | 0 | 0 | 0 | 0 | 6 |
 
 ## EN
 
@@ -38,7 +38,7 @@ Thresholds: zero LanguageTool errors on headings and buttons; readability 60+ (F
 | /en/us/how-we-work/ | 60 | 9.4 | 0 | 0 | 0 | 0 | n/a |
 | /en/us/residence-tax-inheritance/ | 65 | 15.4 | 0 | 0 | 0 | 0 | n/a |
 | /en/us/buying-from-abroad/ | 61 | 9.3 | 0 | 0 | 0 | 0 | n/a |
-| /en/us/your-path/ | 69 | 13.9 | 0 | 0 | 0 | 0 | n/a |
+| /en/us/step-by-step/ | 69 | 13.9 | 0 | 0 | 0 | 0 | n/a |
 
 ## FR
 
@@ -56,7 +56,7 @@ Thresholds: zero LanguageTool errors on headings and buttons; readability 60+ (F
 | /fr/fr/notre-methode/ | 65 | 9.5 | 0 | 0 | 0 | 0 | 1 |
 | /fr/fr/residence-fiscalite-succession/ | 67 | 15.9 | 0 | 0 | 0 | 0 | 0 |
 | /fr/fr/acheter-depuis-l-etranger/ | 68 | 9.7 | 0 | 0 | 0 | 0 | 0 |
-| /fr/fr/votre-parcours/ | 70 | 13.6 | 0 | 0 | 0 | 0 | 0 |
+| /fr/fr/pas-a-pas/ | 70 | 13.6 | 0 | 0 | 0 | 0 | 0 |
 
 ## Identity (D50)
 

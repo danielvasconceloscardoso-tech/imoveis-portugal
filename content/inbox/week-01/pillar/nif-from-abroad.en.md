@@ -21,7 +21,7 @@ You can get a Portuguese tax number (NIF) without leaving home: a legal represen
 
 Portugal doesn't stop foreigners from buying. The transfer tax code even sets its own rate for people who aren't Portuguese tax residents, which only makes sense because they buy.[[pt-nonresidents-buy]] What every deed does need is identification. At Casa Pronta, the government desk that handles the deed and the registration in one place, the list of documents starts with the civil and tax identification of the seller and of you.[[pt-casa-pronta-docs-all]] Your passport covers the first. The NIF covers the second.
 
-That's why it sits at step 2 of [your path](/en/us/your-path/?door=buy&step=2), right after choosing where to look.
+That's why it sits at step 2 of [Step by step](/en/us/step-by-step/?door=buy&step=2), right after choosing where to look.
 
 ## You can request it online, through a legal representative
 

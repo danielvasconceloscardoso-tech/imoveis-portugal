@@ -40,7 +40,7 @@ Later on, if you rent the home out or sell it, the Portugal–Switzerland treaty
 
 The full answer, with a short section for each country: https://imoveisportugal.ch/en/ch/blog/nif-portugal-from-abroad/?utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-ch
 
-Where the NIF sits in the purchase, step 2 of 9: https://imoveisportugal.ch/en/ch/your-path/?door=buy&step=2&utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-ch
+Where the NIF sits in the purchase, step 2 of 9: https://imoveisportugal.ch/en/ch/step-by-step/?door=buy&step=2&utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-ch
 
 A partner lawyer can request your NIF online and, later on, sign the deed for you with a power of attorney. If you lived in Portugal before, you may already have a NIF, and the lawyer can check your details with the tax office: https://imoveisportugal.ch/en/ch/talk-to-a-partner/?cat=lawyer&utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-ch#form
 

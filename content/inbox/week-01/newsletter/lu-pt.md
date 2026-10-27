@@ -40,7 +40,7 @@ Se um dia arrendar a casa, a convenção entre Portugal e o Luxemburgo deixa Por
 
 A resposta completa, com uma secção curta para cada país: https://imoveisportugal.lu/pt/lu/blog/nif-portugal-online-a-partir-do-estrangeiro/?utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-lu
 
-Onde o NIF entra na compra, passo 2 de 9: https://imoveisportugal.lu/pt/lu/o-seu-percurso/?door=buy&step=2&utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-lu
+Onde o NIF entra na compra, passo 2 de 9: https://imoveisportugal.lu/pt/lu/passo-a-passo/?door=buy&step=2&utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-lu
 
 Um advogado parceiro pode pedir o NIF online e, mais à frente, assinar a escritura por si com uma procuração. Se já tem NIF de quando vivia em Portugal, o advogado pode confirmar consigo se os seus dados nas Finanças estão em dia: https://imoveisportugal.lu/pt/lu/falar-com-um-parceiro/?cat=lawyer&utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-lu#form
 

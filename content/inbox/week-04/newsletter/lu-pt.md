@@ -64,7 +64,7 @@ A análise completa, com as rendas e o rendimento bruto: https://imoveisportugal
 
 Escreva 300 000 € no mapa e cada concelho mostra os metros quadrados que esse valor compra. Com este orçamento, são mais de 100 m² em 281 dos 304 concelhos com número oficial do INE, e mais de 200 m² em 189. Toque num concelho para ver a linha de preços de dez anos, a renda por m² e o rendimento bruto: https://imoveisportugal.lu/pt/lu/mapa/?budget=300000&utm_source=newsletter&utm_medium=email&utm_campaign=w04-launch-lu
 
-Escolher o lugar é a primeira etapa do percurso de compra: https://imoveisportugal.lu/pt/lu/o-seu-percurso/?door=buy&step=1&utm_source=newsletter&utm_medium=email&utm_campaign=w04-launch-lu
+Escolher o lugar é a primeira etapa do percurso de compra: https://imoveisportugal.lu/pt/lu/passo-a-passo/?door=buy&step=1&utm_source=newsletter&utm_medium=email&utm_campaign=w04-launch-lu
 
 ## A pergunta mais pesquisada
 

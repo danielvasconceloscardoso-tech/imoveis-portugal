@@ -66,7 +66,7 @@ O artigo completo, com rendas: https://imoveisportugal.ch/pt/ch/blog/o-que-o-seu
 
 O mapa abre com 300 000 €, cerca de 276 800 CHF (um botão passa para euros): mais de 100 m² em 281 dos 304 concelhos com número oficial do INE, mais de 200 m² em 189. Cada concelho mostra a linha de dez anos, a renda por m² e o rendimento bruto: https://imoveisportugal.ch/pt/ch/mapa/?budget=300000&utm_source=newsletter&utm_medium=email&utm_campaign=w04-launch-ch
 
-O lugar é a primeira etapa do percurso de compra: https://imoveisportugal.ch/pt/ch/o-seu-percurso/?door=buy&step=1&utm_source=newsletter&utm_medium=email&utm_campaign=w04-launch-ch
+O lugar é a primeira etapa do percurso de compra: https://imoveisportugal.ch/pt/ch/passo-a-passo/?door=buy&step=1&utm_source=newsletter&utm_medium=email&utm_campaign=w04-launch-ch
 
 ## A pergunta mais pesquisada
 

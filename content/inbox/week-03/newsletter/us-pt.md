@@ -38,7 +38,7 @@ Uma procuração feita num notário americano precisa da Apostila; o Consulado-G
 
 O passo a passo, com os documentos que a Casa Pronta pede e o que muda para quem vive nos Estados Unidos: https://imoveisportugal.us/pt/us/blog/escritura-da-casa-com-procuracao/?utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-us
 
-A procuração no conjunto da compra, na etapa 3 do seu percurso: https://imoveisportugal.us/pt/us/o-seu-percurso/?door=buy&step=3&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-us
+A procuração no conjunto da compra, na etapa 3 do Passo a passo: https://imoveisportugal.us/pt/us/passo-a-passo/?door=buy&step=3&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-us
 
 Um advogado parceiro pode redigir a procuração e assinar por si: https://imoveisportugal.us/pt/us/falar-com-um-parceiro/?cat=lawyer&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-us#form
 

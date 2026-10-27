@@ -38,7 +38,7 @@ Le consulat général du Portugal à Paris traite les actes notariés, procurati
 
 Le pas à pas, avec les documents que demande la Casa Pronta et ce qui change en France : https://imoveisportugal.fr/fr/fr/blog/procuration-portugal-signer-l-acte-a-distance/?utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-fr
 
-La procuration dans l'ensemble de l'achat, à l'étape 3 de votre parcours : https://imoveisportugal.fr/fr/fr/votre-parcours/?door=buy&step=3&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-fr
+La procuration dans l'ensemble de l'achat, à l'étape 3 du Pas à pas : https://imoveisportugal.fr/fr/fr/pas-a-pas/?door=buy&step=3&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-fr
 
 Un avocat partenaire peut rédiger la procuration et signer pour vous : https://imoveisportugal.fr/fr/fr/parler-a-un-partenaire/?cat=lawyer&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-fr#form
 

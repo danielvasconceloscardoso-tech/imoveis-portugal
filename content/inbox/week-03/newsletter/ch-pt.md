@@ -38,7 +38,7 @@ Uma procuração feita num notário suíço leva a Apostila; feita num consulado
 
 O passo a passo, com os documentos que a Casa Pronta pede e o que muda para quem vive na Suíça: https://imoveisportugal.ch/pt/ch/blog/escritura-da-casa-com-procuracao/?utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-ch
 
-A procuração no conjunto da compra, na etapa 3 do seu percurso: https://imoveisportugal.ch/pt/ch/o-seu-percurso/?door=buy&step=3&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-ch
+A procuração no conjunto da compra, na etapa 3 do Passo a passo: https://imoveisportugal.ch/pt/ch/passo-a-passo/?door=buy&step=3&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-ch
 
 Um advogado parceiro pode redigir a procuração e assinar por si: https://imoveisportugal.ch/pt/ch/falar-com-um-parceiro/?cat=lawyer&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-ch#form
 

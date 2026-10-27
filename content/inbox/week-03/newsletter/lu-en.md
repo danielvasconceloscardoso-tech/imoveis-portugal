@@ -38,7 +38,7 @@ A power of attorney from a notary in Luxembourg carries the apostille; one signe
 
 The full walk-through, with the documents Casa Pronta asks for and what changes in Luxembourg: https://imoveisportugal.lu/en/lu/blog/power-of-attorney-portugal/?utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-lu
 
-Where the power of attorney fits in the purchase, station 3 of your path: https://imoveisportugal.lu/en/lu/your-path/?door=buy&step=3&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-lu
+Where the power of attorney fits in the purchase, station 3 of Step by step: https://imoveisportugal.lu/en/lu/step-by-step/?door=buy&step=3&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-lu
 
 A partner lawyer can draft the power of attorney and sign for you: https://imoveisportugal.lu/en/lu/talk-to-a-partner/?cat=lawyer&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-lu#form
 

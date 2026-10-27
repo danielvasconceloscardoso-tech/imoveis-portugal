@@ -40,7 +40,7 @@ If you rent the home out later, the Portugal–Israel treaty lets Portugal tax t
 
 The full answer, with a short section for each country: https://imoveisportugal.co.il/en/il/blog/nif-portugal-from-abroad/?utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-il
 
-Where the NIF sits in the purchase, step 2 of 9: https://imoveisportugal.co.il/en/il/your-path/?door=buy&step=2&utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-il
+Where the NIF sits in the purchase, step 2 of 9: https://imoveisportugal.co.il/en/il/step-by-step/?door=buy&step=2&utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-il
 
 A partner lawyer can request your NIF online and, later on, sign the deed for you with a power of attorney. If you lived in Portugal before, you may already have a NIF, and the lawyer can check your details with the tax office: https://imoveisportugal.co.il/en/il/talk-to-a-partner/?cat=lawyer&utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-il#form
 

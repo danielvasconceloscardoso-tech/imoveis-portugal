@@ -38,7 +38,7 @@ Uma procuração feita num notário em Israel precisa da Apostila; feita num con
 
 O passo a passo, com os documentos que a Casa Pronta pede e o que muda para quem vive em Israel: https://imoveisportugal.co.il/pt/il/blog/escritura-da-casa-com-procuracao/?utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-il
 
-A procuração no conjunto da compra, na etapa 3 do seu percurso: https://imoveisportugal.co.il/pt/il/o-seu-percurso/?door=buy&step=3&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-il
+A procuração no conjunto da compra, na etapa 3 do Passo a passo: https://imoveisportugal.co.il/pt/il/passo-a-passo/?door=buy&step=3&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-il
 
 Um advogado parceiro pode redigir a procuração e assinar por si: https://imoveisportugal.co.il/pt/il/falar-com-um-parceiro/?cat=lawyer&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-il#form
 

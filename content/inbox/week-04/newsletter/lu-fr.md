@@ -64,7 +64,7 @@ L'article complet, avec les loyers et le rendement brut : https://imoveisportuga
 
 Avec 300 000 € sur la carte, chaque commune affiche la surface correspondante : plus de 100 m² dans 281 des 304 communes disposant d'un chiffre officiel de l'INE, et plus de 200 m² dans 189. Touchez une commune : courbe de prix sur dix ans, loyer au m² et rendement brut : https://imoveisportugal.lu/fr/lu/carte/?budget=300000&utm_source=newsletter&utm_medium=email&utm_campaign=w04-launch-lu
 
-Le choix du lieu est la première étape du parcours d'achat : https://imoveisportugal.lu/fr/lu/votre-parcours/?door=buy&step=1&utm_source=newsletter&utm_medium=email&utm_campaign=w04-launch-lu
+Le choix du lieu est la première étape du parcours d'achat : https://imoveisportugal.lu/fr/lu/pas-a-pas/?door=buy&step=1&utm_source=newsletter&utm_medium=email&utm_campaign=w04-launch-lu
 
 ## La question la plus recherchée
 

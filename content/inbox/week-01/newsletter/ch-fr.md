@@ -40,7 +40,7 @@ Plus tard, si vous louez ou vendez le bien, la convention entre le Portugal et l
 
 La réponse complète, avec une courte section par pays : https://imoveisportugal.ch/fr/ch/blog/nif-portugal-en-ligne-depuis-l-etranger/?utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-ch
 
-La place du NIF dans l'achat, étape 2 sur 9 : https://imoveisportugal.ch/fr/ch/votre-parcours/?door=buy&step=2&utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-ch
+La place du NIF dans l'achat, étape 2 sur 9 : https://imoveisportugal.ch/fr/ch/pas-a-pas/?door=buy&step=2&utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-ch
 
 Un avocat partenaire peut demander votre NIF en ligne et, plus tard, signer l'acte pour vous avec une procuration. Si vous avez déjà vécu au Portugal, vous avez peut-être déjà un NIF, et l'avocat peut vérifier vos données auprès des Finances : https://imoveisportugal.ch/fr/ch/parler-a-un-partenaire/?cat=lawyer&utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-ch#form
 

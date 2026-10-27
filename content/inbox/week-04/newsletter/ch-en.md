@@ -66,7 +66,7 @@ The full piece, with rents: https://imoveisportugal.ch/en/ch/blog/what-your-budg
 
 The map opens at €300,000, about CHF 276,800 (one button switches to euros): more than 100 m² in 281 of the 304 municipalities with an official INE figure, more than 200 m² in 189. Each one shows its ten-year line, the rent per m² and the gross yield: https://imoveisportugal.ch/en/ch/map/?budget=300000&utm_source=newsletter&utm_medium=email&utm_campaign=w04-launch-ch
 
-The place is step one of the buying path: https://imoveisportugal.ch/en/ch/your-path/?door=buy&step=1&utm_source=newsletter&utm_medium=email&utm_campaign=w04-launch-ch
+The place is step one of the buying path: https://imoveisportugal.ch/en/ch/step-by-step/?door=buy&step=1&utm_source=newsletter&utm_medium=email&utm_campaign=w04-launch-ch
 
 ## The most-searched question
 
