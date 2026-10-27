@@ -44,7 +44,7 @@ const credits = [...new Set(projects.flatMap((p) => p.credits ?? []))].join("; "
           <li><a class="sc-card" href={href(p, u)}>
             <img src={img(u.img ?? (p.gallery?.length ? p.gallery[ui % p.gallery.length] : p.render), 800)} alt="" width="800" height="560" loading="lazy" />
             <span class="sc-typ">{typ(u.typology)}{u.name && <span> · {u.name}</span>}</span>
-            <span class="sc-meta">{!p.hideRefs && `${u.ref} · `}{u.area != null && (u.typology === "Plot" ? c("show.plotarea", lang, { v: nf.format(u.area) }) : `${nf.format(u.area)} m²`)}{p.delivery && ` · ${c("show.delivery", lang, { v: p.delivery })}`}</span>
+            <span class="sc-meta">{[!p.hideRefs && u.ref, u.area != null && (u.typology === "Plot" ? c("show.plotarea", lang, { v: nf.format(u.area) }) : `${nf.format(u.area)} m²`), p.delivery && c("show.delivery", lang, { v: p.delivery })].filter(Boolean).join(" · ")}</span>
             <span class="sc-price">{u.price ? (u.priceNote === "from" ? c("show.from", lang, { v: money(u.price) }) : money(u.price)) : c("show.onrequest", lang)}</span>
             {cur && u.price && <span class="sc-local">{money(Math.round(u.price * cur.rate / 1000) * 1000, cur.code)}</span>}
             <span class="sc-go">{c("show.view", lang)} →</span>

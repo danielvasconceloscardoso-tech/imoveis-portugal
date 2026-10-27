@@ -42,16 +42,21 @@ for key, (token, keep) in PLAN.items():
                           "typology": u["typology"], "area": u["area"], "areaNote": u.get("areaNote"), "price": u["price"], "priceNote": u.get("priceNote"),
                           "img": pic(u.get("img")), "url": u["url"]})
         prices = [u["price"] for u in units if u["price"]]
-        mine = {"vanguard": lambda i: (p["id"] == "muda") == i.startswith("img/muda"), "valedolobo": lambda i: i.startswith("img/residences")}.get(key, lambda i: True)
+        mine = {"vanguard": lambda i: (p["id"] == "muda") == i.startswith("img/muda"), "valedolobo": lambda i: i.startswith("img/residences"),
+                "vic": lambda i: (p["id"] == "six-senses-comporta") == i.startswith("img/six-senses")}.get(key, lambda i: True)
         gallery = [pic(i) for i in imgs if i != p["hero"] and mine(i)]
-        sources = sorted({u["url"] for u in units} | {p["url"]} | {i["page"] for i in imgs.values() if i.get("page")} - {None})
+        # Prompt 33 §7.1: VIC's two estates keep their own images, credits and image pages apart (other developers unchanged).
+        own = (lambda i: mine(i)) if key == "vic" else (lambda i: True)
+        sources = sorted({u["url"] for u in units} | {p["url"]} | set(p.get("sources", [])) | {i["page"] for i in imgs.values() if i.get("page") and own(i["file"])} - {None})
         projects.append({
             "id": p["id"], "name": p["name"], "developer": d["developer"], "devSlug": slug(d["developer"]), "muni": MUNI[p["muni"]],
             "lon": p["lon"], "lat": p["lat"], "line": p["line"], "delivery": p.get("delivery"), "url": p["url"],
-            "partner": False, "demo": token, "checked": d.get("checked"),
+            "partner": False, "demo": token, "checked": p.get("checked") or d.get("checked"),
             "render": pic(p["hero"]), "credit": imgs.get(p["hero"], {}).get("credit") or p.get("credit"),
-            "gallery": [g for g in gallery if g][:8], "credits": sorted({(i.get("credit") or "").split(" (")[0] for i in imgs.values()} - {""}),
-            "from": min(prices) if prices else None, "typologies": sorted({u["typology"] for u in units}),
+            "gallery": [g for g in gallery if g][:8], "credits": sorted({(i.get("credit") or "").split(" (")[0] for i in imgs.values() if own(i["file"])} - {""}),
+            # A project-level "from" price and typologies only where the developer publishes them for the whole collection
+            # but not per home (Six Senses Comporta: "start at € 2.76 million", two to five bedrooms); homes stay on request.
+            "from": min(prices) if prices else p.get("from"), "typologies": p.get("typologies") or sorted({u["typology"] for u in units}),
             "units": units, "sources": sources,
             # References that are an estate agency's listing codes stay in the data but are not shown (D9).
             "hideRefs": key == "orizon",

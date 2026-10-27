@@ -729,6 +729,88 @@
     "https://www.imovirtual.com/pt/empreendimento/edificio-south-ID1fYNU"
    ],
    "hideRefs": false
+  },
+  {
+   "id": "six-senses-comporta",
+   "name": "Six Senses Comporta",
+   "developer": "VIC Properties",
+   "devSlug": "vic-properties",
+   "muni": "grandola",
+   "lon": -8.757925,
+   "lat": 38.232432,
+   "line": "58 branded residences with two to five bedrooms, 210 to 1,400 m², designed by Michaelis Boyd, beside a 70-key Six Senses hotel on the Pinheirinho estate in Comporta, with an 18-hole golf course. Opening scheduled for the fourth quarter of 2028.",
+   "delivery": "2028-Q4",
+   "url": "https://vic-properties.com/en/portfolio/pinheirinho-comporta/",
+   "partner": false,
+   "demo": "7c1e5a90d4",
+   "checked": "2026-10-27",
+   "render": "/d/7c1e5a90d4/img/six-senses-villa-pool-deck",
+   "credit": "© VIC Properties (vic-properties.com)",
+   "gallery": [
+    "/d/7c1e5a90d4/img/six-senses-villa-garden-pool",
+    "/d/7c1e5a90d4/img/six-senses-residence-bedroom-terrace",
+    "/d/7c1e5a90d4/img/six-senses-outdoor-dining-terrace",
+    "/d/7c1e5a90d4/img/six-senses-estate-aerial-coast",
+    "/d/7c1e5a90d4/img/six-senses-resort-pool-sunset",
+    "/d/7c1e5a90d4/img/six-senses-spa-pool-arches",
+    "/d/7c1e5a90d4/img/six-senses-lakeside-deck",
+    "/d/7c1e5a90d4/img/six-senses-kitchen-garden-pavilion"
+   ],
+   "credits": [
+    "© VIC Properties"
+   ],
+   "from": 2760000,
+   "typologies": [
+    "T2",
+    "T3",
+    "T4",
+    "T5"
+   ],
+   "units": [
+    {
+     "id": "sand",
+     "ref": "Sand",
+     "name": null,
+     "typology": "Sand Dune Villas",
+     "area": null,
+     "areaNote": "Villas with dune-inspired curves, oriented west and south. 44 Sand Dune and Forest residences in all (VIC teaser brochure); Size per residence not published. VIC gives 210 to 1,400 m² for the 58 residences in its Portuguese press release and 200 to 2,152 m² of living space in the English one (both 26 May 2026).",
+     "price": null,
+     "priceNote": null,
+     "img": null,
+     "url": "https://vic-properties.com/en/latest/vic-properties-reveals-six-senses-residences-comporta/"
+    },
+    {
+     "id": "forest",
+     "ref": "Forest",
+     "name": null,
+     "typology": "Forest Apartments and Villas",
+     "area": null,
+     "areaNote": "Apartments and villas among the pines. 44 Sand Dune and Forest residences in all (VIC teaser brochure); Size per residence not published. VIC gives 210 to 1,400 m² for the 58 residences in its Portuguese press release and 200 to 2,152 m² of living space in the English one (both 26 May 2026).",
+     "price": null,
+     "priceNote": null,
+     "img": null,
+     "url": "https://vic-properties.com/en/latest/vic-properties-reveals-six-senses-residences-comporta/"
+    },
+    {
+     "id": "lake",
+     "ref": "Lake",
+     "name": null,
+     "typology": "Lake Villas",
+     "area": null,
+     "areaNote": "14 larger villas with private gardens, by the lake (VIC teaser brochure); Size per residence not published. VIC gives 210 to 1,400 m² for the 58 residences in its Portuguese press release and 200 to 2,152 m² of living space in the English one (both 26 May 2026).",
+     "price": null,
+     "priceNote": null,
+     "img": null,
+     "url": "https://vic-properties.com/en/latest/vic-properties-reveals-six-senses-residences-comporta/"
+    }
+   ],
+   "sources": [
+    "https://vic-properties.com/en/latest/vic-properties-reveals-six-senses-residences-comporta/",
+    "https://vic-properties.com/en/portfolio/pinheirinho-comporta/",
+    "https://vic-properties.com/ultimas/vic-properties-inicia-a-comercializacao-e-construcao-do-six-senses-comporta/",
+    "https://vic-properties.com/wp-content/uploads/2026/05/Six-Senses-Comporta-Teaser-Brochure_EN.pdf"
+   ],
+   "hideRefs": false
   }
  ]
 }

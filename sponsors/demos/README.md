@@ -117,11 +117,31 @@ Pages and images: https://vic-properties.com/en/latest/more-than-600-families-ha
 
 Pages and images: https://vic-properties.com/en/latest/more-than-600-families-have-already-chosen-prata-as-their-home/ · https://vic-properties.com/en/portfolio/prata-riverside-village/ · https://vic-properties.com/ultimas/casa-do-passadico-interiores-cria-projeto-de-decoracao-para-o-prata-riverside-village/ · https://vic-properties.com/ultimas/vic-properties-conclui-riverside-e-prepara-arranque-de-obras-de-mais-dois-edificios/ · https://vic-properties.com/ultimas/visao-de-renzo-piano-para-marvila-ja-e-uma-realidade-e-acelera-com-o-lancamento-do-edificio-south/ · https://www.imovirtual.com/pt/anuncio/apartamento-t2-edificio-south-ID1fYOW · https://www.imovirtual.com/pt/anuncio/apartamento-t4-edificio-south-ID1fYOe · https://www.imovirtual.com/pt/anuncio/edificio-south-bloco-b-5a-ID1hyaD · https://www.imovirtual.com/pt/anuncio/edificio-south-bloco-c-2a-ID1hyaM · https://www.imovirtual.com/pt/anuncio/edificio-south-bloco-c-4a-ID1hyb9 · https://www.imovirtual.com/pt/empreendimento/edificio-south-ID1fYNU
 
+**Six Senses Comporta** (grandola; Pinheirinho estate, Carvalhal), added by prompt 33 §7.1, checked 2026-10-27. Images: © VIC Properties (renders from the Six Senses Comporta gallery on vic-properties.com, PNG converted to JPG, stored as /d/7c1e5a90d4/img/six-senses-*-{800,1600}.webp). Pin: the Six Senses "How to get there" point on VIC's portfolio page (38.232432, -8.757925), inside Grândola on our municipal map.
+
+| Home | Typology | Area m² | Price as published | Source |
+|---|---|---|---|---|
+| Sand | Sand Dune Villas | not published per residence | on request (collection from € 2.76 million) | https://vic-properties.com/en/latest/vic-properties-reveals-six-senses-residences-comporta/ |
+| Forest | Forest Apartments and Villas | not published per residence | on request (collection from € 2.76 million) | https://vic-properties.com/en/latest/vic-properties-reveals-six-senses-residences-comporta/ |
+| Lake | Lake Villas (14) | not published per residence | on request (collection from € 2.76 million) | https://vic-properties.com/en/latest/vic-properties-reveals-six-senses-residences-comporta/ |
+
+Facts and where each is published (all checked 2026-10-27):
+- 58 branded residences; 70-key hotel: https://vic-properties.com/en/portfolio/pinheirinho-comporta/ (counters "70 Key Hotel", "58 Branded Residences", "34 Hectares") and both press releases;
+- two to five bedrooms; architect Michaelis Boyd: VIC press release EN, 26 May 2026, https://vic-properties.com/en/latest/vic-properties-reveals-six-senses-residences-comporta/ ; PT, https://vic-properties.com/ultimas/vic-properties-inicia-a-comercializacao-e-construcao-do-six-senses-comporta/ ; teaser brochure, https://vic-properties.com/wp-content/uploads/2026/05/Six-Senses-Comporta-Teaser-Brochure_EN.pdf (pp. 5 and 32: "two- to five-bedroom villas and apartments", "Architect & Interior Designer: Michaelis Boyd");
+- 210 to 1,400 m²: PT press release ("Com áreas entre os 210 m² e os 1.400 m²"); the EN press release instead says "200 m² to 2,152 m² (2,153 to 23,164 square feet) of living space" (see open points);
+- 18-hole golf course (designed by Jorge Santana da Silva): portfolio page ("18 Hole Golf Course") and both press releases;
+- opening Q4 2028: EN press release ("The 70-key hotel, resort and 58 residences are scheduled to open in Q4 of 2028"); construction underway;
+- from € 2.76 million: EN press release ("residences are now on sale and start at € 2.76 million"); no price per residence is published, so each residence shows "Price on request" and no cost total;
+- collections Sand, Forest, Lake: EN press release; 14 Lake Villas and 44 Sand Dune and Forest residences: teaser brochure (pp. 17 and 34).
+
+Pages and images: https://vic-properties.com/en/portfolio/pinheirinho-comporta/ · https://vic-properties.com/en/latest/vic-properties-reveals-six-senses-residences-comporta/ · https://vic-properties.com/ultimas/vic-properties-inicia-a-comercializacao-e-construcao-do-six-senses-comporta/ · https://vic-properties.com/wp-content/uploads/2026/05/Six-Senses-Comporta-Teaser-Brochure_EN.pdf · images https://vic-properties.com/wp-content/uploads/2026/03/Portfolio-SixSenses_G1_1.png (hero) and _G1_2, _G1_3, _G1_4, _G2_1, _G2_2, _G2_3, _G2_4, _G2_5 (.png, same folder)
+
 ## Open points (task 26a)
 
 - O'rizon Living: no listing names Shalu; the developer link rests on the Essential Business article (3 Oct 2025). All current listings are ESSIA's, so the unit prices are agency asking prices and the area basis is not stated; only one image (the article's render, 1422 px) could be fetched, as the listing photo server is blocked here.
 - Vanguard: Muda now publishes prices only for 15 building plots (the 8 Founders Collection villas are reserved, no price), so the film and page lead with Tomás Ribeiro 79 in Lisbon; Muda is placed in Grândola (OpenStreetMap hamlet "Muda"), which replaces the earlier Alcácer do Sal guess.
 - Vale do Lobo: The Residences publishes "from" prices and areas per unit type only; delivery not published.
 - VIC: prices come from VIC's own sales arm (VIC Mediação) on Imovirtual; vic-properties.com publishes none; no unit photos (listing image server blocked), so the project images are VIC's own.
+- VIC, Six Senses Comporta: VIC's two press releases of 26 May 2026 disagree on sizes (PT 210 to 1,400 m², EN 200 to 2,152 m² of living space); the page follows the PT figure given in prompt 33. Ask VIC which is current before sending. sixsenses.com and pinheirinhocomporta.com (VIC's sales site) are refused by this environment's network policy, so nothing was checked there. The published "from € 2.76 million" is above the Geneva buyer's CHF 2 million (about € 2.17 million), which matters for film v4 (§7.2).
 - OneMark stays in the pipeline until its first project is public.
 - Approve the four demos before any link, film or PDF is sent.

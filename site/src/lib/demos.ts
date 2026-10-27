@@ -54,8 +54,10 @@ const DEFS: Def[] = [
     readers: [{ city: "Geneva", country: "Switzerland", cur: "CHF", ed: "ch" }, { city: "Luxembourg", country: "Luxembourg", cur: "EUR", ed: "lu" }],
     buyer: { line: "A family in Geneva.", words: "Two million francs.", amount: 2000000, cur: "CHF", ed: "ch", when: "year", own: 0.7 },
     home: "south-c-4oa", accent: "#22343c",
-    facts: ["A riverside neighbourhood in Marvila; the Factory building is designed by Renzo Piano", "Factory: 53 apartments, studios to four bedrooms, by the central square", "South: 72 apartments, studios to four bedrooms, by Parque Ribeirinho Oriente", "Prices as published by VIC's own sales team"],
-    sources: [{ t: "VIC Properties, Prata Riverside Village", u: "https://www.vic-properties.com/" }, { t: "Imovirtual, VIC Mediação listings (prices as published, 26 Oct 2026)", u: "https://www.imovirtual.com/" }],
+    facts: ["A riverside neighbourhood in Marvila; the Factory building is designed by Renzo Piano", "Factory: 53 apartments, studios to four bedrooms, by the central square", "South: 72 apartments, studios to four bedrooms, by Parque Ribeirinho Oriente", "Prices as published by VIC's own sales team",
+      "Six Senses Comporta (Pinheirinho, Grândola): 58 branded residences, two to five bedrooms, by Michaelis Boyd, beside a 70-key hotel and an 18-hole course; opening scheduled for Q4 2028; from €2.76 million, each home on request"],
+    sources: [{ t: "VIC Properties, Prata Riverside Village", u: "https://www.vic-properties.com/" }, { t: "Imovirtual, VIC Mediação listings (prices as published, 26 Oct 2026)", u: "https://www.imovirtual.com/" },
+      { t: "VIC Properties, Pinheirinho Comporta and its Six Senses Residences Comporta press releases of 26 May 2026 (checked 27 Oct 2026)", u: "https://vic-properties.com/en/portfolio/pinheirinho-comporta/" }],
   },
 ];
 
