@@ -1,6 +1,6 @@
 # Imóveis Portugal: handover briefing
 
-For anyone joining the project in their own Claude session. Read this first, then `ops/CONVERSATION_LOG.md` (how we got here, in the operator's own words), `ops/DECISIONS.md` and `ops/TASKS.md`. Updated Mon 26 Oct 2026, evening.
+For anyone joining the project in their own Claude session. Read this first, then **`ops/STATUS.md`** (where everything stands), **`ops/REVIEW_QUEUE.md`** (what waits for a human go), `ops/CONVERSATION_LOG.md` (how we got here, in the operator's own words), `ops/DECISIONS.md` and `ops/TASKS.md`. Updated Tue 27 Oct 2026, morning.
 
 ## 1. What it is
 
@@ -57,43 +57,30 @@ Prices live only in the sponsor brochure used on calls, never on the website.
 8. **Later:** licensing the map and data (embeds "Powered by Imóveis Portugal") and the Data line (D47).
 9. **The first sale is the developer demo:** a private page and film showing a developer how a buyer abroad finds their homes through us. Four are ready: Vanguard Properties, Vale do Lobo, Shalu Investments and VIC Properties.
 
-## 5. What exists today (26 Oct 2026, end of day)
+## 5. What exists today
 
-**Links** (private previews, noindex):
-- Work in progress (Claude Code's branch): https://claude-brave-gauss-cwafi6-imoveis-portugal.geralportugalimoveis.workers.dev
-- Saved version of the map and path the operator likes (never changes): https://freeze-map-path-v1-imoveis-portugal.geralportugalimoveis.workers.dev
-- Map v2 to compare against it (time slider, compare two places, Islands filter, coastal glide; coastal photos pending): https://map-v2-imoveis-portugal.geralportugalimoveis.workers.dev
-- Developer demos:
-  - [Vanguard](https://claude-brave-gauss-cwafi6-imoveis-portugal.geralportugalimoveis.workers.dev/d/34c86306cf/)
-  - [Vale do Lobo](https://claude-brave-gauss-cwafi6-imoveis-portugal.geralportugalimoveis.workers.dev/d/65bf930b11/)
-  - [Shalu](https://claude-brave-gauss-cwafi6-imoveis-portugal.geralportugalimoveis.workers.dev/d/f658bd1eef/)
-  - [VIC Properties](https://claude-brave-gauss-cwafi6-imoveis-portugal.geralportugalimoveis.workers.dev/d/7c1e5a90d4/)
-- Older live beta (main): https://imoveis-portugal.geralportugalimoveis.workers.dev
+The full, current picture is in **`ops/STATUS.md`** (updated 27 Oct, morning). In short:
 
-**Built:**
-1. **Site** in three languages:
-   - the path ("O seu percurso": buy or sell as a route of stations, like a game);
-   - the 3D map (all 308 municipalities clickable, search, parishes, one budget field, a place card with the 10-year chart, yield, momentum and comparables);
-   - the FAQ as a top section;
-   - the simulators;
-   - partner pages;
-   - the "Your team for this purchase" panel and the qualified summary on every enquiry (D54);
-   - partner showcase pages with developers' published homes (D53).
-2. **Demos v3** (D56, D57):
-   - each page opens with "How a buyer reaches you" in seven steps and a "Walk the path as this buyer" button;
-   - each has a 72-second film from the buyer's side: one woman's voice thinking out loud about her problems while the screen shows the site solving each one, ending with the developer opening her request the next morning;
-   - files are in `sponsors/demos/` on the branch (films with and without subtitles, voice, loops, PDFs, frames).
-3. **Sponsor material:**
-   - `sponsors/pipeline.csv` and `Sponsors_v2.xlsx` (built with `python3 sponsors/build/build_v2.py`);
-   - the Partner Prospects PDF (`sponsors/prospects/`);
-   - the brochure (Wealth Partner naming).
-4. **Accounts:** beehiiv publication and Tally forms are set up (`ops/ACCOUNTS.md`).
+1. **Site** in PT, EN and FR, six editions, noindex until the billing entity exists (D4):
+   - the 3D map with ten years of official prices, frozen as v1 because the operator likes it;
+   - the buy and sell paths, the FAQ, the simulators;
+   - design v2 ("the Claridge's pass", D59) on branch `design-v2`;
+   - identity v3 (D50) everywhere.
+2. **Developer demos** for Vanguard, Vale do Lobo, Shalu and VIC: private pages, PDFs, and the Vanguard film v4 "December" (D58). The other three films follow once Vanguard is approved.
+3. **Content engine** (prompt 30, social/PLAYBOOK.md):
+   - keyword map and 12-week calendar;
+   - weeks 1–4 written in full: 140 social items, 72 newsletters, 12 SEO pages;
+   - weeks 5–12 outlined.
 
-**Being fixed now** (CEO review, 26 Oct evening):
-1. The numbers in the films must agree. Her budget is $3.5 M including taxes; the cost screen should work back to the price she can afford, and the request must show the same budget.
-2. In demo mode, hide every partner-agency button until task 8z is decided.
-3. Zoom into what she is asking about, so the text reads on a phone.
-4. Add licensed stock footage and music. This waits on the operator adding Unsplash, Pexels and Pixabay to Claude Code's network list.
+   Nothing is posted; the social accounts don't exist yet.
+4. **Sales:** pipeline of about 200 companies, prospects PDF, brochure with price list v4. **No sponsor contacted yet:** outreach waits on the legal bases (8q) and the demo approval.
+
+**Links:**
+- Working preview: https://claude-brave-gauss-cwafi6-imoveis-portugal.geralportugalimoveis.workers.dev
+- Frozen map and path v1: https://freeze-map-path-v1-imoveis-portugal.geralportugalimoveis.workers.dev
+- Map v2: https://map-v2-imoveis-portugal.geralportugalimoveis.workers.dev
+- Design v2: https://design-v2-imoveis-portugal.geralportugalimoveis.workers.dev
+- Demos (working preview): /d/34c86306cf/ (Vanguard), /d/65bf930b11/ (Vale do Lobo), /d/f658bd1eef/ (Shalu), /d/7c1e5a90d4/ (VIC)
 
 ## 6. The operator's taste (read this before writing or designing anything)
 
@@ -123,31 +110,26 @@ Prices live only in the sponsor brochure used on calls, never on the website.
 
 ## 7. Open items
 
-**Operator:**
-1. Add the network lines for Unsplash, Pexels, Pixabay and GitHub release downloads to Claude Code's environment.
-2. **D4:** the billing entity. It blocks invoicing, the beehiiv footer, grants and Google indexing.
-3. **8z:** where developer-project enquiries go: to the developer, through the partner agency, or the buyer chooses.
-4. **26a:** approve the demos before any developer sees them.
-5. **28a:** add the Tally hidden fields `brief` and `team`.
-6. **29a:** approve the buyer voice.
-7. **29b:** compare map v1 and v2.
-8. **8x:** ask DGT about the CAOP licence.
-9. **8y:** decide on agency licensing of the map.
-10. **From the partner group:** the credit business's name and Banco de Portugal number, one real listing with photos, the Gold agreement, Cal.com.
+The prioritised list, by owner, is section 7 of **`ops/STATUS.md`**. Everything that needs a human "go" is in **`ops/REVIEW_QUEUE.md`**.
 
-**CEO, once the demos are approved:** four short English approach emails (Vanguard, Vale do Lobo, Shalu, VIC) with the demo links.
-
-**CTO:** the demo fixes above, then prompt 23, 21, 24, 22.
+The three that matter most now:
+1. The legal bases for B2B emails (8q). Without them no sponsor can be contacted.
+2. The 7.5% IMT check (30d). Without it no post or newsletter can go out.
+3. The demo approval and enquiry routing (26a, 31c, 8z). Without them the four developer demos can't be sent.
 
 ## 8. Where things are
 
 | File | What it is |
 | --- | --- |
 | CLAUDE.md | The CTO brief: business, rules, stack, slash commands |
+| ops/STATUS.md | Where everything stands, priorities by owner, board clean-up |
+| ops/REVIEW_QUEUE.md | Everything waiting for a human go, with paths and deadlines |
 | ops/CONVERSATION_LOG.md | How we got here: the operator's requests in order, and what each one changed |
-| ops/DECISIONS.md | Every decision, dated (D1–D57) |
+| ops/DECISIONS.md | Every decision, dated (D1–D59) |
 | ops/TASKS.md | Task board with owners and due dates; "Last session" summaries from Claude Code |
-| ops/prompts/ | Task prompts 01–29 and 00_MASTER_RUN.md |
+| ops/prompts/ | Task prompts 01–32 and 00_MASTER_RUN.md |
+| social/ | One folder per platform, the playbook, weekly exports |
+| ops/legal/IMT_7_5_MENTIONS.md | Every 7.5% IMT mention, for the legal check (working branch) |
 | ops/NETWORK_ALLOWLIST.txt | Every domain Claude Code may reach |
 | ops/ACCOUNTS.md | beehiiv and Tally IDs (no passwords) |
 | ops/PLAN.md, ops/PLAN_CONTENT.md | Cash plan, Doutor Finanças benchmark, content plan |
