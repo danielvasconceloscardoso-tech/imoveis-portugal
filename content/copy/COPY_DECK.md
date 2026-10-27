@@ -310,6 +310,11 @@ How to edit:
 - EN: Legal notice
 - FR: Mentions légales
 
+### foot.credits
+- PT: Créditos
+- EN: Credits
+- FR: Crédits
+
 ### foot.agency
 - PT: Agência parceira
 - EN: Partner agency
@@ -2623,6 +2628,21 @@ How to edit:
 - PT: Novos empreendimentos
 - EN: New developments
 - FR: Programmes neufs
+
+### golf.toggle
+- PT: Golfe
+- EN: Golf
+- FR: Golf
+
+### golf.legend
+- PT: A verde, os campos de golfe. Passe ou toque num campo para ver o nome. Campos de golfe: © OpenStreetMap contributors (ODbL).
+- EN: Golf courses in green. Hover over or tap a course to see its name. Golf courses: © OpenStreetMap contributors (ODbL).
+- FR: Les parcours de golf en vert. Survolez ou touchez un parcours pour voir son nom. Parcours de golf : © OpenStreetMap contributors (ODbL).
+
+### golf.unnamed
+- PT: Campo de golfe
+- EN: Golf course
+- FR: Parcours de golf
 
 ### f.fr
 - PT: Residentes estrangeiros em 2023: {v}, dos quais {b} do Brasil.

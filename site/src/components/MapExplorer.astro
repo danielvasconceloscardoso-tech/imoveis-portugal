@@ -6,6 +6,7 @@
 // Every concelho is reachable: the map (with a hit radius for small ones), the search box and the list under it.
 // mode "embed" is the licensable build (prompt 25 §3): no filters or list, "Powered by Imóveis Portugal" and the data credits.
 // Data: public/data/map/ and public/data/prices.json (scripts/map-data/). Wording: COPY_DECK.md "map.*".
+// Golf layer (prompt 33 §4.1): public/data/map/golf.geojson (scripts/map-data/golf.py), loaded only when "Golf" is tapped or ?golf=1.
 import { config } from "../config";
 import { HTML_LANG, pathFor, eur, type Lang, type EdCode } from "../i18n";
 import { EDITION_CUR, RATE, fmtDate } from "../lib/content";
@@ -45,7 +46,7 @@ const labels = {
   sponsored: c("dev.sponsored", lang), pfrom: c("map.proj.from", lang, { v: "{v}" }), ponreq: c("map.proj.onreq", lang), ptyp: c("map.proj.typ", lang, { v: "{v}" }),
   pdel: c("map.proj.del", lang, { v: "{v}" }), pask: c("map.proj.ask", lang), paskdev: c("map.proj.askdev", lang), paskag: c("map.proj.askag", lang), psim: c("map.proj.sim", lang),
   pcredit: c("map.proj.credit", lang, { c: "{c}" }), partnersHere: c("show.partners", lang), openHomes: c("show.open", lang),
-  farea: c("map.f.area", lang, { v: "{v}" }), fnew: c("map.f.new", lang, { v: "{v}", l: "{l}" }), ffr: c("map.f.fr", lang, { v: "{v}", b: "{b}" }),
+  golfUnnamed: c("map.golf.unnamed", lang), farea: c("map.f.area", lang, { v: "{v}" }), fnew: c("map.f.new", lang, { v: "{v}", l: "{l}" }), ffr: c("map.f.fr", lang, { v: "{v}", b: "{b}" }),
   regions: Object.fromEntries(REGIONS.map((r) => [r, c(`map.r.${r}`, lang)])),
 };
 const links = {
@@ -89,6 +90,8 @@ const id = `mapx-${mode}`;
     <button type="button" class="mapx-flat" data-flat aria-pressed="false">{c("map.flat", lang)}</button>
     {mode === "home" && <button type="button" class="mapx-more" data-more aria-expanded="false">{c("home2.map.more", lang)}</button>}
     <button type="button" class="mapx-flat" data-devs aria-pressed="false">{c("map.devs.toggle", lang)}</button>
+    {/* Prompt 33 §4.1: golf courses (OpenStreetMap), off until tapped; its own class so the home map shows it on phones too. */}
+    {mode !== "embed" && <button type="button" class="mapx-golf" data-golf aria-pressed="false">{c("map.golf.toggle", lang)}</button>}
   </div>
   {/* Prompt 26 §1: filters of the "Novos empreendimentos" layer (partner projects only). */}
   <div class="mapx-devbar" data-devbar hidden>
@@ -109,6 +112,7 @@ const id = `mapx-${mode}`;
   </div>
   <p class="small mapx-legend" data-legend>{c("map.legend.m2", lang, { quarter: qLabel })} {c("map.hint", lang)}</p>
   {mode !== "embed" && <p class="small mapx-legend">{c("map.par.hint", lang)}</p>}
+  {mode !== "embed" && <p class="small mapx-legend" data-golf-legend hidden>{c("map.golf.legend", lang)}</p>}
 
   {mode === "page" && (
     <div class="mapx-filters" role="group" aria-label={c("map.filters", lang)}>

@@ -668,9 +668,9 @@ a.brass { color: var(--brass); }
 .mapx-bar { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px 24px; margin: 0 0 14px; }
 .mapx-metrics { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 .mapx-metrics .h-small { flex-basis: 100%; }
-.mapx-metrics button, .mapx-flat { font: 500 14px/1.15 var(--sans); padding: 9px 12px; min-height: 40px; border-radius: 2px; border: 1px solid var(--rule); background: transparent; color: var(--ink); cursor: pointer; transition: border-color .3s ease, background-color .3s ease, color .3s ease; }
-.mapx-metrics button:hover, .mapx-flat:hover { border-color: var(--ink); }
-.mapx-metrics button[aria-pressed="true"], .mapx-flat[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.mapx-metrics button, .mapx-flat, .mapx-golf { font: 500 14px/1.15 var(--sans); padding: 9px 12px; min-height: 40px; border-radius: 2px; border: 1px solid var(--rule); background: transparent; color: var(--ink); cursor: pointer; transition: border-color .3s ease, background-color .3s ease, color .3s ease; }
+.mapx-metrics button:hover, .mapx-flat:hover, .mapx-golf:hover { border-color: var(--ink); }
+.mapx-metrics button[aria-pressed="true"], .mapx-flat[aria-pressed="true"], .mapx-golf[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
 .mapx-find { position: relative; display: grid; gap: 6px; flex: 1 1 220px; max-width: 320px; }
 .mapx-find input { font: 400 16px/1.2 var(--sans); padding: 10px 12px; min-height: 42px; border: 1px solid var(--rule); border-radius: 2px; background: var(--card); color: var(--ink); }
 .mapx-find input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
@@ -679,6 +679,12 @@ a.brass { color: var(--brass); }
 .mapx-find-list li[aria-selected="true"], .mapx-find-list li:hover { background: var(--accent-soft); }
 .mapx-find-list li.none { color: var(--muted); cursor: default; }
 .mapx-tip { position: absolute; left: 0; top: 0; z-index: 3; pointer-events: none; font: 500 13px/1 var(--sans); background: var(--ink); color: #fff; padding: 6px 8px; border-radius: 2px; white-space: nowrap; }
+/* Prompt 33 §4.1: the golf toggle looks like the other map toggles; on the home map (d2) it matches their compact size and stays visible on phones. */
+.h2-mapbleed .mapx-golf { min-height: 38px; font-size: 13px; white-space: nowrap; }
+.h2-mapbleed .mapx-golf[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
+@media (min-width: 901px) and (max-width: 1180px) { .h2-mapbleed .mapx-bar .mapx-find { max-width: 150px; } }  /* room for the golf toggle in the one-line bar */
+@media (min-width: 901px) and (max-width: 1000px) { .h2-mapbleed .mapx-home .mapx-bar { gap: 10px; padding-left: 14px; } .h2-mapbleed .mapx-bar .mapx-find { max-width: 104px; } }
+@media (min-width: 901px) and (max-width: 940px) { .h2-mapbleed .mapx-bar .mapx-metrics button { padding-left: 8px; padding-right: 8px; } .h2-mapbleed .mapx-home .mapx-bar { gap: 8px; } }
 .mapx-flash { position: absolute; left: 50%; top: 12px; transform: translateX(-50%); z-index: 4; font: 500 13px/1 var(--sans); background: var(--ink); color: #fff; padding: 8px 12px; border-radius: 2px; }
 .mapx-card { width: min(380px, calc(100% - 24px)); max-height: calc(100% - 24px); overflow: auto; background: #ffffff; z-index: 2; }
 .mapx-card h3:focus { outline: none; }

@@ -1,0 +1,1440 @@
+{
+ "title": "The golf premium: parish median vs municipality median",
+ "label": "parish median vs municipality median",
+ "measure": "INE median value per m² of family dwellings sold in the last 12 months (all dwellings, €/m²)",
+ "quarter": "2026-Q2",
+ "ten_years_from": "2016-Q2",
+ "parish_series_from": "2019-Q4",
+ "notes": [
+  "Comparison only, never causation: a parish with golf courses can differ from its municipality for many reasons (coast, housing type, size of homes, who buys).",
+  "INE publishes parish medians only from 2019-Q4 (Metodologia 2022) and only for parishes with enough sales; there is no 10-year parish figure, so parish_change_10y_pct is null and both changes are also given from 2019-Q4 on the same method.",
+  "The municipality's 10-year change joins Metodologia 2018 (indicator 0009490, to 2019-Q3) and Metodologia 2022 (0012234, from 2019-Q4), as on the map's charts.",
+  "full_course = false marks a parish whose only golf facility is a driving range, an academy or a pitch & putt (by its OSM name).",
+  "Golf parishes: OpenStreetMap leisure=golf_course outlines intersecting the parish boundary by at least 10 ha or a quarter of the course."
+ ],
+ "sources": {
+  "ine-m2-2026q2": "INE 0012234, latest quarter",
+  "ine-m2-history": "INE 0009490 and 0012234, 2016 to 2026",
+  "osm-boundaries": "parish boundaries, © OpenStreetMap contributors (ODbL)",
+  "osm-golf": "golf courses, OpenStreetMap leisure=golf_course, © OpenStreetMap contributors (ODbL), https://www.openstreetmap.org/copyright (fact id proposed, not yet in facts.csv)"
+ },
+ "parishes": [
+  {
+   "parish": "Guia",
+   "parish_code": "080102",
+   "municipality": "Albufeira",
+   "municipality_slug": "albufeira",
+   "region": "algarve",
+   "quarter": "2026-Q2",
+   "parish_median_eur_m2": 3660,
+   "municipality_median_eur_m2": 3490,
+   "ratio": 1.05,
+   "parish_change_since_2019q4_pct": 73.2,
+   "municipality_change_since_2019q4_pct": 78.4,
+   "parish_change_10y_pct": null,
+   "municipality_change_10y_pct": 153.8,
+   "courses": [
+    {
+     "course": "Salgados Golf Course",
+     "osm": "r1523440",
+     "ha_in_parish": 36.2,
+     "share": 0.91
+    }
+   ],
+   "full_course": true,
+   "source_ids": [
+    "ine-m2-2026q2",
+    "ine-m2-history",
+    "osm-boundaries"
+   ]
+  },
+  {
+   "parish": "Albufeira e Olhos de Água",
+   "parish_code": "080106",
+   "municipality": "Albufeira",
+   "municipality_slug": "albufeira",
+   "region": "algarve",
+   "quarter": "2026-Q2",
+   "parish_median_eur_m2": 3539,
+   "municipality_median_eur_m2": 3490,
+   "ratio": 1.01,
+   "parish_change_since_2019q4_pct": 79.1,
+   "municipality_change_since_2019q4_pct": 78.4,
+   "parish_change_10y_pct": null,
+   "municipality_change_10y_pct": 153.8,
+   "courses": [
+    {
+     "course": "Pine Cliffs Golf Course",
+     "osm": "r3240373",
+     "ha_in_parish": 18.0,
+     "share": 1.0
+    },
+    {
+     "course": "Balaia Golf Village Par 3 Course",
+     "osm": "r3238152",
+     "ha_in_parish": 8.6,
+     "share": 1.0
+    },
+    {
+     "course": "Algarve Golf Acadamy (Driving Range)",
+     "osm": "w106911686",
+     "ha_in_parish": 2.4,
+     "share": 1.0
+    },
+    {
+     "course": "Club Med Da Balaia Academy Pitch & Putt",
+     "osm": "w106911695",
+     "ha_in_parish": 1.4,
+     "share": 1.0
+    }
+   ],
+   "full_course": true,
+   "source_ids": [
+    "ine-m2-2026q2",
+    "ine-m2-history",
+    "osm-boundaries"
+   ]
+  },
+  {
+   "parish": "Castro Marim",
+   "parish_code": "080402",
+   "municipality": "Castro Marim",
+   "municipality_slug": "castro-marim",
+   "region": "algarve",
+   "quarter": "2026-Q2",
+   "parish_median_eur_m2": 2552,
+   "municipality_median_eur_m2": 2710,
+   "ratio": 0.94,
+   "parish_change_since_2019q4_pct": 85.7,
+   "municipality_change_since_2019q4_pct": 94.3,
+   "parish_change_10y_pct": null,
+   "municipality_change_10y_pct": 145.5,
+   "courses": [
+    {
+     "course": "Quinta do Vale Golf Resort",
+     "osm": "r12612276",
+     "ha_in_parish": 151.5,
+     "share": 1.0
+    },
+    {
+     "course": "Castro Marim Golf & Country Club",
+     "osm": "w107214899",
+     "ha_in_parish": 94.8,
+     "share": 1.0
+    }
+   ],
+   "full_course": true,
+   "source_ids": [
+    "ine-m2-2026q2",
+    "ine-m2-history",
+    "osm-boundaries"
+   ]
+  },
+  {
+   "parish": "Porches",
+   "parish_code": "080604",
+   "municipality": "Lagoa",
+   "municipality_slug": "lagoa",
+   "region": "algarve",
+   "quarter": "2026-Q2",
+   "parish_median_eur_m2": 3715,
+   "municipality_median_eur_m2": 3371,
+   "ratio": 1.1,
+   "parish_change_since_2019q4_pct": 110.8,
+   "municipality_change_since_2019q4_pct": 94.2,
+   "parish_change_10y_pct": null,
+   "municipality_change_10y_pct": 148.4,
+   "courses": [
+    {
+     "course": null,
+     "osm": "w1497628381",
+     "ha_in_parish": 1.1,
+     "share": 1.0
+    }
+   ],
+   "full_course": true,
+   "source_ids": [
+    "ine-m2-2026q2",
+    "ine-m2-history",
+    "osm-boundaries"
+   ]
+  },
+  {
+   "parish": "União das freguesias de Estômbar e Parchal",
+   "parish_code": "080607",
+   "municipality": "Lagoa",
+   "municipality_slug": "lagoa",
+   "region": "algarve",
+   "quarter": "2026-Q2",
+   "parish_median_eur_m2": 3281,
+   "municipality_median_eur_m2": 3371,
+   "ratio": 0.97,
+   "parish_change_since_2019q4_pct": 137.4,
+   "municipality_change_since_2019q4_pct": 94.2,
+   "parish_change_10y_pct": null,
+   "municipality_change_10y_pct": 148.4,
+   "courses": [
+    {
+     "course": null,
+     "osm": "w1473880570",
+     "ha_in_parish": 56.3,
+     "share": 1.0
+    },
+    {
+     "course": "Pestana Vale da Pinta Golf Course",
+     "osm": "r3238096",
+     "ha_in_parish": 47.6,
+     "share": 1.0
+    },
+    {
+     "course": "Pestana Gramacho Golf Course",
+     "osm": "r1522538",
+     "ha_in_parish": 36.5,
+     "share": 1.0
+    },
+    {
+     "course": null,
+     "osm": "w1431825567",
+     "ha_in_parish": 34.4,
+     "share": 1.0
+    }
+   ],
+   "full_course": true,
+   "source_ids": [
+    "ine-m2-2026q2",
+    "ine-m2-history",
+    "osm-boundaries"
+   ]
+  },
+  {
+   "parish": "União das freguesias de Lagoa e Carvoeiro",
+   "parish_code": "080608",
+   "municipality": "Lagoa",
+   "municipality_slug": "lagoa",
+   "region": "algarve",
+   "quarter": "2026-Q2",
+   "parish_median_eur_m2": 3257,
+   "municipality_median_eur_m2": 3371,
+   "ratio": 0.97,
+   "parish_change_since_2019q4_pct": 81.9,
+   "municipality_change_since_2019q4_pct": 94.2,
+   "parish_change_10y_pct": null,
+   "municipality_change_10y_pct": 148.4,
+   "courses": [
+    {
+     "course": "Vale de Milho Golf",
+     "osm": "w491957967",
+     "ha_in_parish": 7.2,
+     "share": 1.0
+    }
+   ],
+   "full_course": true,
+   "source_ids": [
+    "ine-m2-2026q2",
+    "ine-m2-history",
+    "osm-boundaries"
+   ]
+  },
+  {
+   "parish": "São Gonçalo de Lagos",
+   "parish_code": "080708",
+   "municipality": "Lagos",
+   "municipality_slug": "lagos",
+   "region": "algarve",
+   "quarter": "2026-Q2",
+   "parish_median_eur_m2": 3876,
+   "municipality_median_eur_m2": 3949,
+   "ratio": 0.98,
+   "parish_change_since_2019q4_pct": 93.0,
+   "municipality_change_since_2019q4_pct": 96.6,
+   "parish_change_10y_pct": null,
+   "municipality_change_10y_pct": 164.1,
+   "courses": [
+    {
+     "course": "Boavista Golf Resort",
+     "osm": "r2168122",
+     "ha_in_parish": 56.6,
+     "share": 1.0
+    },
+    {
+     "course": null,
+     "osm": "w886719358",
+     "ha_in_parish": 6.5,
+     "share": 1.0
+    }
+   ],
+   "full_course": true,
+   "source_ids": [
+    "ine-m2-2026q2",
+    "ine-m2-history",
+    "osm-boundaries"
+   ]
+  },
+  {
+   "parish": "Odiáxere",
+   "parish_code": "080704",
+   "municipality": "Lagos",
+   "municipality_slug": "lagos",
+   "region": "algarve",
+   "quarter": "2026-Q2",
+   "parish_median_eur_m2": null,
+   "municipality_median_eur_m2": 3949,
+   "ratio": null,
+   "note": "INE publishes no parish figure for 2026-Q2 (too few sales); not compared",
+   "parish_change_since_2019q4_pct": null,
+   "municipality_change_since_2019q4_pct": 96.6,
+   "parish_change_10y_pct": null,
+   "municipality_change_10y_pct": 164.1,
+   "courses": [
+    {
+     "course": "Onyria Palmares Golf",
+     "osm": "r3134353",
+     "ha_in_parish": 136.3,
+     "share": 1.0
+    }
+   ],
+   "full_course": true,
+   "source_ids": [
+    "ine-m2-2026q2",
+    "ine-m2-history",
+    "osm-boundaries"
+   ]
+  },
+  {
+   "parish": "Almancil",
+   "parish_code": "080801",
+   "municipality": "Loulé",
+   "municipality_slug": "loule",
+   "region": "algarve",
+   "quarter": "2026-Q2",
+   "parish_median_eur_m2": 5617,
+   "municipality_median_eur_m2": 4137,
+   "ratio": 1.36,
+   "parish_change_since_2019q4_pct": 90.8,
+   "municipality_change_since_2019q4_pct": 90.6,
+   "parish_change_10y_pct": null,
+   "municipality_change_10y_pct": 160.7,
+   "courses": [
+    {
+     "course": "Vale do Lobo",
+     "osm": "r3511048",
+     "ha_in_parish": 84.6,
+     "share": 0.91
+    },
+    {
+     "course": "Pinheiros Altos Golf Course",
+     "osm": "w107208466",
+     "ha_in_parish": 80.3,
+     "share": 1.0
+    },
+    {
+     "course": "Quinta do Lago North Golf Course",
+     "osm": "r3238797",
+     "ha_in_parish": 68.1,
+     "share": 1.0
+    },
+    {
+     "course": "Quinta do Lago South Golf Course",
+     "osm": "w240113589",
+     "ha_in_parish": 65.7,
+     "share": 1.0
+    },
+    {
+     "course": "San Lorenzo Golf Course",
+     "osm": "r3517517",
+     "ha_in_parish": 62.8,
+     "share": 1.0
+    },
+    {
+     "course": "Quinta do Lago Laranjal Golf Course",
+     "osm": "r3238167",
+     "ha_in_parish": 52.4,
+     "share": 1.0
+    },
+    {
+     "course": "Royal Course",
+     "osm": "r19952110",
+     "ha_in_parish": 44.9,
+     "share": 1.0
+    },
+    {
+     "course": "Ocean Course",
+     "osm": "r19952109",
+     "ha_in_parish": 39.7,
+     "share": 0.83
+    }
+   ],
+   "full_course": true,
+   "source_ids": [
+    "ine-m2-2026q2",
+    "ine-m2-history",
+    "osm-boundaries"
+   ]
+  },
+  {
+   "parish": "Quarteira",
+   "parish_code": "080805",
+   "municipality": "Loulé",
+   "municipality_slug": "loule",
+   "region": "algarve",
+   "quarter": "2026-Q2",
+   "parish_median_eur_m2": 4482,
+   "municipality_median_eur_m2": 4137,
+   "ratio": 1.08,
+   "parish_change_since_2019q4_pct": 92.9,
+   "municipality_change_since_2019q4_pct": 90.6,
+   "parish_change_10y_pct": null,
+   "municipality_change_10y_pct": 160.7,
+   "courses": [
+    {
+     "course": "Dom Pedro Laguna Golf Course",
+     "osm": "r3209452",
+     "ha_in_parish": 92.6,
+     "share": 1.0
+    },
+    {
+     "course": "Dom Pedro Victoria Golf Course",
+     "osm": "r1506063",
+     "ha_in_parish": 90.6,
+     "share": 1.0
+    },
+    {
+     "course": "Pestana Vila Sol Golf Course",
+     "osm": "w107196466",
+     "ha_in_parish": 69.1,
+     "share": 1.0
+    },
+    {
+     "course": "Dom Pedro Millennium Golf Course",
+     "osm": "r3238919",
+     "ha_in_parish": 55.7,
+     "share": 1.0
+    },
+    {
+     "course": "Dom Pedro Pinhal Golf Course",
+     "osm": "r3209386",
+     "ha_in_parish": 54.8,
+     "share": 1.0
+    },
+    {
+     "course": "Dom Pedro Old Course",
+     "osm": "w107196460",
+     "ha_in_parish": 54.3,
+     "share": 1.0
+    },
+    {
+     "course": "Villamoura Driving Range & Golf Academy",
+     "osm": "w107218749",
+     "ha_in_parish": 8.3,
+     "share": 1.0
+    }
+   ],
+   "full_course": true,
+   "source_ids": [
+    "ine-m2-2026q2",
+    "ine-m2-history",
+    "osm-boundaries"
+   ]
+  },
+  {
+   "parish": "Alvor",
+   "parish_code": "081101",
+   "municipality": "Portimão",
+   "municipality_slug": "portimao",
+   "region": "algarve",
+   "quarter": "2026-Q2",
+   "parish_median_eur_m2": 3425,
+   "municipality_median_eur_m2": 3259,
+   "ratio": 1.05,
+   "parish_change_since_2019q4_pct": 94.8,
+   "municipality_change_since_2019q4_pct": 121.1,
+   "parish_change_10y_pct": null,
+   "municipality_change_10y_pct": 187.6,
+   "courses": [
+    {
+     "course": "Penina Golf & Resort",
+     "osm": "r3238135",
+     "ha_in_parish": 104.4,
+     "share": 1.0
+    },
+    {
+     "course": "Pestana Alto Golf",
+     "osm": "r3237974",
+     "ha_in_parish": 15.8,
+     "share": 0.5
+    }
+   ],
+   "full_course": true,
+   "source_ids": [
+    "ine-m2-2026q2",
+    "ine-m2-history",
+    "osm-boundaries"
+   ]
+  },
+  {
+   "parish": "Portimão",
+   "parish_code": "081103",
+   "municipality": "Portimão",
+   "municipality_slug": "portimao",
+   "region": "algarve",
+   "quarter": "2026-Q2",
+   "parish_median_eur_m2": 3248,
+   "municipality_median_eur_m2": 3259,
+   "ratio": 1.0,
+   "parish_change_since_2019q4_pct": 123.5,
+   "municipality_change_since_2019q4_pct": 121.1,
+   "parish_change_10y_pct": null,
+   "municipality_change_10y_pct": 187.6,
+   "courses": [
+    {
+     "course": "Morgado Golf",
+     "osm": "r4540080",
+     "ha_in_parish": 74.6,
+     "share": 1.0
+    },
+    {
+     "course": "Alamos Golf Course",
+     "osm": "r4524931",
+     "ha_in_parish": 26.6,
+     "share": 1.0
+    },
+    {
+     "course": "Pestana Alto Golf",
+     "osm": "r3237974",
+     "ha_in_parish": 15.9,
+     "share": 0.5
+    }
+   ],
+   "full_course": true,
+   "source_ids": [
+    "ine-m2-2026q2",
+    "ine-m2-history",
+    "osm-boundaries"
+   ]
+  },
+  {
+   "parish": "Silves",
+   "parish_code": "081307",
+   "municipality": "Silves",
+   "municipality_slug": "silves",
+   "region": "algarve",
+   "quarter": "2026-Q2",
+   "parish_median_eur_m2": 2604,
+   "municipality_median_eur_m2": 2860,
+   "ratio": 0.91,
+   "parish_change_since_2019q4_pct": 144.5,
+   "municipality_change_since_2019q4_pct": 92.6,
+   "parish_change_10y_pct": null,
+   "municipality_change_10y_pct": 169.3,
+   "courses": [
+    {
+     "course": "Pestana Silves Golf Course",
+     "osm": "r3238138",
+     "ha_in_parish": 36.5,
+     "share": 1.0
+    }
+   ],
+   "full_course": true,
+   "source_ids": [
+    "ine-m2-2026q2",
+    "ine-m2-history",
+    "osm-boundaries"
+   ]
+  },
+  {
+   "parish": "Vila Nova de Cacela",
+   "parish_code": "081601",
+   "municipality": "Vila Real de Santo António",
+   "municipality_slug": "vila-real-de-santo-antonio",
+   "region": "algarve",
+   "quarter": "2026-Q2",
+   "parish_median_eur_m2": 3390,
+   "municipality_median_eur_m2": 3116,
+   "ratio": 1.09,
+   "parish_change_since_2019q4_pct": 74.3,
+   "municipality_change_since_2019q4_pct": 99.4,
+   "parish_change_10y_pct": null,
+   "municipality_change_10y_pct": 153.3,
+   "courses": [
+    {
+     "course": "Monte Rei Golf Course",
+     "osm": "w664019473",
+     "ha_in_parish": 143.7,
+     "share": 1.0
+    },
+    {
+     "course": "Robinson Club Quinta da Ria",
+     "osm": "w663038258",
+     "ha_in_parish": 50.8,
+     "share": 1.0
+    },
+    {
+     "course": "Quinta de Cima",
+     "osm": "w1222792478",
+     "ha_in_parish": 27.8,
+     "share": 0.44
+    }
+   ],
+   "full_course": true,
+   "source_ids": [
+    "ine-m2-2026q2",
+    "ine-m2-history",
+    "osm-boundaries"
+   ]
+  },
+  {
+   "parish": "Budens",
+   "parish_code": "081502",
+   "municipality": "Vila do Bispo",
+   "municipality_slug": "vila-do-bispo",
+   "region": "algarve",
+   "quarter": "2026-Q2",
+   "parish_median_eur_m2": 3169,
+   "municipality_median_eur_m2": 3189,
+   "ratio": 0.99,
+   "parish_change_since_2019q4_pct": 88.6,
+   "municipality_change_since_2019q4_pct": 102.5,
+   "parish_change_10y_pct": null,
+   "municipality_change_10y_pct": 134.7,
+   "courses": [
+    {
+     "course": "Golf Santo António / Parque da Floresta",
+     "osm": "r18068766",
+     "ha_in_parish": 48.3,
+     "share": 1.0
+    }
+   ],
+   "full_course": true,
+   "source_ids": [
+    "ine-m2-2026q2",
+    "ine-m2-history",
+    "osm-boundaries"
+   ]
+  },
+  {
+   "parish": "União das freguesias de Charneca de Caparica e Sobreda",
+   "parish_code": "150314",
+   "municipality": "Almada",
+   "municipality_slug": "almada",
+   "region": "lisbon",
+   "quarter": "2026-Q2",
+   "parish_median_eur_m2": 3435,
+   "municipality_median_eur_m2": 3387,
+   "ratio": 1.01,
+   "parish_change_since_2019q4_pct": 113.9,
+   "municipality_change_since_2019q4_pct": 120.9,
+   "parish_change_10y_pct": null,
+   "municipality_change_10y_pct": 244.2,
+   "courses": [
+    {
+     "course": "PGA Aroeira 2 Golf Course",
+     "osm": "r3209532",
+     "ha_in_parish": 59.3,
+     "share": 1.0
+    },
+    {
+     "course": "PGA Aroeira 1 Golf Course",
+     "osm": "w238142509",
+     "ha_in_parish": 52.2,
+     "share": 1.0
+    }
+   ],
+   "full_course": true,
+   "source_ids": [
+    "ine-m2-2026q2",
+    "ine-m2-history",
+    "osm-boundaries"
+   ]
+  },
+  {
+   "parish": "União das freguesias de Caparica e Trafaria",
+   "parish_code": "150313",
+   "municipality": "Almada",
+   "municipality_slug": "almada",
+   "region": "lisbon",
+   "quarter": "2026-Q2",
+   "parish_median_eur_m2": 3253,
+   "municipality_median_eur_m2": 3387,
+   "ratio": 0.96,
+   "parish_change_since_2019q4_pct": 125.6,
+   "municipality_change_since_2019q4_pct": 120.9,
+   "parish_change_10y_pct": null,
+   "municipality_change_10y_pct": 244.2,
+   "courses": [
+    {
+     "course": "Golfe Aldeia dos Capuchos",
+     "osm": "w376386524",
+     "ha_in_parish": 9.6,
+     "share": 1.0
+    }
+   ],
+   "full_course": true,
+   "source_ids": [
+    "ine-m2-2026q2",
+    "ine-m2-history",
+    "osm-boundaries"
+   ]
+  },
+  {
+   "parish": "Palmeira",
+   "parish_code": "030331",
+   "municipality": "Braga",
+   "municipality_slug": "braga",
+   "region": "north",
+   "quarter": "2026-Q2",
+   "parish_median_eur_m2": 1813,
+   "municipality_median_eur_m2": 2199,
+   "ratio": 0.82,
+   "parish_change_since_2019q4_pct": 93.9,
+   "municipality_change_since_2019q4_pct": 131.7,
+   "parish_change_10y_pct": null,
+   "municipality_change_10y_pct": 240.4,
+   "courses": [
+    {
+     "course": "Golf Club de Braga - Driving Range",
+     "osm": "w119559909",
+     "ha_in_parish": 1.8,
+     "share": 1.0
+    }
+   ],
+   "full_course": false,
+   "source_ids": [
+    "ine-m2-2026q2",
+    "ine-m2-history",
+    "osm-boundaries"
+   ]
+  },
+  {
+   "parish": "União das freguesias de Cascais e Estoril",
+   "parish_code": "110508",
+   "municipality": "Cascais",
+   "municipality_slug": "cascais",
+   "region": "lisbon",
+   "quarter": "2026-Q2",
+   "parish_median_eur_m2": 5623,
+   "municipality_median_eur_m2": 4889,
+   "ratio": 1.15,
+   "parish_change_since_2019q4_pct": 80.7,
+   "municipality_change_since_2019q4_pct": 88.9,
+   "parish_change_10y_pct": null,
+   "municipality_change_10y_pct": 200.3,
+   "courses": [
+    {
+     "course": "Oitavos Dunes",
+     "osm": "w240149366",
+     "ha_in_parish": 49.4,
+     "share": 1.0
+    },
+    {
+     "course": "Estoril Palácio Golf Course",
+     "osm": "r3239244",
+     "ha_in_parish": 48.5,
+     "share": 0.99
+    },
+    {
+     "course": "Golfe Quinta da Marinha",
+     "osm": "r3243757",
+     "ha_in_parish": 35.0,
+     "share": 1.0
+    }
+   ],
+   "full_course": true,
+   "source_ids": [
+    "ine-m2-2026q2",
+    "ine-m2-history",
+    "osm-boundaries"
+   ]
+  },
+  {
+   "parish": "Alcabideche",
+   "parish_code": "110501",
+   "municipality": "Cascais",
+   "municipality_slug": "cascais",
+   "region": "lisbon",
+   "quarter": "2026-Q2",
+   "parish_median_eur_m2": 4412,
+   "municipality_median_eur_m2": 4889,
+   "ratio": 0.9,
+   "parish_change_since_2019q4_pct": 96.0,
+   "municipality_change_since_2019q4_pct": 88.9,
+   "parish_change_10y_pct": null,
+   "municipality_change_10y_pct": 200.3,
+   "courses": [
+    {
+     "course": "Penha Longa",
+     "osm": "r3239554",
+     "ha_in_parish": 33.9,
+     "share": 0.52
+    }
+   ],
+   "full_course": true,
+   "source_ids": [
+    "ine-m2-2026q2",
+    "ine-m2-history",
+    "osm-boundaries"
+   ]
+  },
+  {
+   "parish": "União das freguesias de Santa Clara e Castelo Viegas",
+   "parish_code": "060336",
+   "municipality": "Coimbra",
+   "municipality_slug": "coimbra",
+   "region": "centre",
+   "quarter": "2026-Q2",
+   "parish_median_eur_m2": 2341,
+   "municipality_median_eur_m2": 2295,
+   "ratio": 1.02,
+   "parish_change_since_2019q4_pct": 87.6,
+   "municipality_change_since_2019q4_pct": 83.0,
+   "parish_change_10y_pct": null,
+   "municipality_change_10y_pct": 113.3,
+   "courses": [
+    {
+     "course": "Quinta das Lágrimas (Pitch & Putt)",
+     "osm": "r3728482",
+     "ha_in_parish": 3.3,
+     "share": 1.0
+    }
+   ],
+   "full_course": false,
+   "source_ids": [
+    "ine-m2-2026q2",
+    "ine-m2-history",
+    "osm-boundaries"
+   ]
+  },
+  {
+   "parish": "Silvalde",
+   "parish_code": "010705",
+   "municipality": "Espinho",
+   "municipality_slug": "espinho",
+   "region": "north",
+   "quarter": "2026-Q2",
+   "parish_median_eur_m2": 1769,
+   "municipality_median_eur_m2": 2797,
+   "ratio": 0.63,
+   "parish_change_since_2019q4_pct": 102.9,
+   "municipality_change_since_2019q4_pct": 135.0,
+   "parish_change_10y_pct": null,
+   "municipality_change_10y_pct": 241.5,
+   "courses": [
+    {
+     "course": "Oporto Golf Club",
+     "osm": "w62048975",
+     "ha_in_parish": 19.5,
+     "share": 1.0
+    }
+   ],
+   "full_course": true,
+   "source_ids": [
+    "ine-m2-2026q2",
+    "ine-m2-history",
+    "osm-boundaries"
+   ]
+  },
+  {
+   "parish": "São Gonçalo",
+   "parish_code": "310306",
+   "municipality": "Funchal",
+   "municipality_slug": "funchal",
+   "region": "madeira",
+   "quarter": "2026-Q2",
+   "parish_median_eur_m2": 3042,
+   "municipality_median_eur_m2": 3538,
+   "ratio": 0.86,
+   "parish_change_since_2019q4_pct": 83.1,
+   "municipality_change_since_2019q4_pct": 129.3,
+   "parish_change_10y_pct": null,
+   "municipality_change_10y_pct": 184.9,
+   "courses": [
+    {
+     "course": "Palheiro Golf",
+     "osm": "w136516313",
+     "ha_in_parish": 60.8,
+     "share": 1.0
+    }
+   ],
+   "full_course": true,
+   "source_ids": [
+    "ine-m2-2026q2",
+    "ine-m2-history",
+    "osm-boundaries"
+   ]
+  },
+  {
+   "parish": "Azurém",
+   "parish_code": "030804",
+   "municipality": "Guimarães",
+   "municipality_slug": "guimaraes",
+   "region": "north",
+   "quarter": "2026-Q2",
+   "parish_median_eur_m2": 2651,
+   "municipality_median_eur_m2": 1859,
+   "ratio": 1.43,
+   "parish_change_since_2019q4_pct": 165.1,
+   "municipality_change_since_2019q4_pct": 116.9,
+   "parish_change_10y_pct": null,
+   "municipality_change_10y_pct": 185.6,
+   "courses": [
+    {
+     "course": "Campo de Práticas de Golfe (Driving Range)",
+     "osm": "w343929311",
+     "ha_in_parish": 1.5,
+     "share": 1.0
+    }
+   ],
+   "full_course": false,
+   "source_ids": [
+    "ine-m2-2026q2",
+    "ine-m2-history",
+    "osm-boundaries"
+   ]
+  },
+  {
+   "parish": "Alvalade",
+   "parish_code": "110654",
+   "municipality": "Lisboa",
+   "municipality_slug": "lisboa",
+   "region": "lisbon",
+   "quarter": "2026-Q2",
+   "parish_median_eur_m2": 5152,
+   "municipality_median_eur_m2": 5192,
+   "ratio": 0.99,
+   "parish_change_since_2019q4_pct": 44.3,
+   "municipality_change_since_2019q4_pct": 58.0,
+   "parish_change_10y_pct": null,
+   "municipality_change_10y_pct": 167.9,
+   "courses": [
+    {
+     "course": "Academia de Golf de Lisboa",
+     "osm": "w54753992",
+     "ha_in_parish": 5.6,
+     "share": 1.0
+    }
+   ],
+   "full_course": false,
+   "source_ids": [
+    "ine-m2-2026q2",
+    "ine-m2-history",
+    "osm-boundaries"
+   ]
+  },
+  {
+   "parish": "Lumiar",
+   "parish_code": "110618",
+   "municipality": "Lisboa",
+   "municipality_slug": "lisboa",
+   "region": "lisbon",
+   "quarter": "2026-Q2",
+   "parish_median_eur_m2": 4877,
+   "municipality_median_eur_m2": 5192,
+   "ratio": 0.94,
+   "parish_change_since_2019q4_pct": 77.7,
+   "municipality_change_since_2019q4_pct": 58.0,
+   "parish_change_10y_pct": null,
+   "municipality_change_10y_pct": 167.9,
+   "courses": [
+    {
+     "course": "Paço do Lumiar Clube de Golfe",
+     "osm": "r20419627",
+     "ha_in_parish": 22.5,
+     "share": 1.0
+    }
+   ],
+   "full_course": true,
+   "source_ids": [
+    "ine-m2-2026q2",
+    "ine-m2-history",
+    "osm-boundaries"
+   ]
+  },
+  {
+   "parish": "Barcarena",
+   "parish_code": "111002",
+   "municipality": "Oeiras",
+   "municipality_slug": "oeiras",
+   "region": "lisbon",
+   "quarter": "2026-Q2",
+   "parish_median_eur_m2": 3827,
+   "municipality_median_eur_m2": 4438,
+   "ratio": 0.86,
+   "parish_change_since_2019q4_pct": 119.1,
+   "municipality_change_since_2019q4_pct": 96.7,
+   "parish_change_10y_pct": null,
+   "municipality_change_10y_pct": 237.0,
+   "courses": [
+    {
+     "course": "Oeiras Golf & Residence",
+     "osm": "r3239956",
+     "ha_in_parish": 42.7,
+     "share": 1.0
+    }
+   ],
+   "full_course": true,
+   "source_ids": [
+    "ine-m2-2026q2",
+    "ine-m2-history",
+    "osm-boundaries"
+   ]
+  },
+  {
+   "parish": "Quinta do Anjo",
+   "parish_code": "150804",
+   "municipality": "Palmela",
+   "municipality_slug": "palmela",
+   "region": "lisbon",
+   "quarter": "2026-Q2",
+   "parish_median_eur_m2": 2609,
+   "municipality_median_eur_m2": 2522,
+   "ratio": 1.03,
+   "parish_change_since_2019q4_pct": 184.5,
+   "municipality_change_since_2019q4_pct": 160.8,
+   "parish_change_10y_pct": null,
+   "municipality_change_10y_pct": 236.3,
+   "courses": [
+    {
+     "course": "Palmela Village Golf Course",
+     "osm": "r3209525",
+     "ha_in_parish": 29.2,
+     "share": 1.0
+    }
+   ],
+   "full_course": true,
+   "source_ids": [
+    "ine-m2-2026q2",
+    "ine-m2-history",
+    "osm-boundaries"
+   ]
+  },
+  {
+   "parish": "Palmela",
+   "parish_code": "150802",
+   "municipality": "Palmela",
+   "municipality_slug": "palmela",
+   "region": "lisbon",
+   "quarter": "2026-Q2",
+   "parish_median_eur_m2": 2463,
+   "municipality_median_eur_m2": 2522,
+   "ratio": 0.98,
+   "parish_change_since_2019q4_pct": 148.8,
+   "municipality_change_since_2019q4_pct": 160.8,
+   "parish_change_10y_pct": null,
+   "municipality_change_10y_pct": 236.3,
+   "courses": [
+    {
+     "course": "Campo de Golfe do Montado",
+     "osm": "w116515588",
+     "ha_in_parish": 30.4,
+     "share": 0.54
+    }
+   ],
+   "full_course": true,
+   "source_ids": [
+    "ine-m2-2026q2",
+    "ine-m2-history",
+    "osm-boundaries"
+   ]
+  },
+  {
+   "parish": "União das freguesias de Poceirão e Marateca",
+   "parish_code": "150806",
+   "municipality": "Palmela",
+   "municipality_slug": "palmela",
+   "region": "lisbon",
+   "quarter": "2026-Q2",
+   "parish_median_eur_m2": 2426,
+   "municipality_median_eur_m2": 2522,
+   "ratio": 0.96,
+   "parish_change_since_2019q4_pct": 114.5,
+   "municipality_change_since_2019q4_pct": 160.8,
+   "parish_change_10y_pct": null,
+   "municipality_change_10y_pct": 236.3,
+   "courses": [
+    {
+     "course": "Campo de Golfe do Montado",
+     "osm": "w116515588",
+     "ha_in_parish": 25.6,
+     "share": 0.46
+    }
+   ],
+   "full_course": true,
+   "source_ids": [
+    "ine-m2-2026q2",
+    "ine-m2-history",
+    "osm-boundaries"
+   ]
+  },
+  {
+   "parish": "Estela",
+   "parish_code": "131307",
+   "municipality": "Póvoa de Varzim",
+   "municipality_slug": "povoa-de-varzim",
+   "region": "north",
+   "quarter": "2026-Q2",
+   "parish_median_eur_m2": null,
+   "municipality_median_eur_m2": 2472,
+   "ratio": null,
+   "note": "INE publishes no parish figure for 2026-Q2 (too few sales); not compared",
+   "parish_change_since_2019q4_pct": null,
+   "municipality_change_since_2019q4_pct": 109.7,
+   "parish_change_10y_pct": null,
+   "municipality_change_10y_pct": 172.8,
+   "courses": [
+    {
+     "course": "Estela Golf Club",
+     "osm": "w240180470",
+     "ha_in_parish": 43.9,
+     "share": 1.0
+    }
+   ],
+   "full_course": true,
+   "source_ids": [
+    "ine-m2-2026q2",
+    "ine-m2-history",
+    "osm-boundaries"
+   ]
+  },
+  {
+   "parish": "Água Longa",
+   "parish_code": "131402",
+   "municipality": "Santo Tirso",
+   "municipality_slug": "santo-tirso",
+   "region": "north",
+   "quarter": "2026-Q2",
+   "parish_median_eur_m2": null,
+   "municipality_median_eur_m2": 1729,
+   "ratio": null,
+   "note": "INE publishes no parish figure for 2026-Q2 (too few sales); not compared",
+   "parish_change_since_2019q4_pct": null,
+   "municipality_change_since_2019q4_pct": 107.6,
+   "parish_change_10y_pct": null,
+   "municipality_change_10y_pct": 163.2,
+   "courses": [
+    {
+     "course": "Vale Pisão Golfe",
+     "osm": "w446515183",
+     "ha_in_parish": 28.2,
+     "share": 1.0
+    }
+   ],
+   "full_course": true,
+   "source_ids": [
+    "ine-m2-2026q2",
+    "ine-m2-history",
+    "osm-boundaries"
+   ]
+  },
+  {
+   "parish": "Quinta do Conde",
+   "parish_code": "151103",
+   "municipality": "Sesimbra",
+   "municipality_slug": "sesimbra",
+   "region": "lisbon",
+   "quarter": "2026-Q2",
+   "parish_median_eur_m2": 3009,
+   "municipality_median_eur_m2": 3065,
+   "ratio": 0.98,
+   "parish_change_since_2019q4_pct": 150.7,
+   "municipality_change_since_2019q4_pct": 131.5,
+   "parish_change_10y_pct": null,
+   "municipality_change_10y_pct": 202.6,
+   "courses": [
+    {
+     "course": "Quinta do Peru Golf & Country Club",
+     "osm": "r3209531",
+     "ha_in_parish": 45.7,
+     "share": 0.84
+    }
+   ],
+   "full_course": true,
+   "source_ids": [
+    "ine-m2-2026q2",
+    "ine-m2-history",
+    "osm-boundaries"
+   ]
+  },
+  {
+   "parish": "Canidelo",
+   "parish_code": "131704",
+   "municipality": "Vila Nova de Gaia",
+   "municipality_slug": "vila-nova-de-gaia",
+   "region": "north",
+   "quarter": "2026-Q2",
+   "parish_median_eur_m2": 3543,
+   "municipality_median_eur_m2": 2652,
+   "ratio": 1.34,
+   "parish_change_since_2019q4_pct": 152.0,
+   "municipality_change_since_2019q4_pct": 142.0,
+   "parish_change_10y_pct": null,
+   "municipality_change_10y_pct": 256.0,
+   "courses": [
+    {
+     "course": "Golfe da Quinta do Fojo",
+     "osm": "w99116334",
+     "ha_in_parish": 10.6,
+     "share": 1.0
+    }
+   ],
+   "full_course": true,
+   "source_ids": [
+    "ine-m2-2026q2",
+    "ine-m2-history",
+    "osm-boundaries"
+   ]
+  },
+  {
+   "parish": "Arcozelo",
+   "parish_code": "131701",
+   "municipality": "Vila Nova de Gaia",
+   "municipality_slug": "vila-nova-de-gaia",
+   "region": "north",
+   "quarter": "2026-Q2",
+   "parish_median_eur_m2": 2439,
+   "municipality_median_eur_m2": 2652,
+   "ratio": 0.92,
+   "parish_change_since_2019q4_pct": 102.6,
+   "municipality_change_since_2019q4_pct": 142.0,
+   "parish_change_10y_pct": null,
+   "municipality_change_10y_pct": 256.0,
+   "courses": [
+    {
+     "course": "Campo de Golfe de Miramar",
+     "osm": "w108565624",
+     "ha_in_parish": 16.4,
+     "share": 1.0
+    }
+   ],
+   "full_course": true,
+   "source_ids": [
+    "ine-m2-2026q2",
+    "ine-m2-history",
+    "osm-boundaries"
+   ]
+  }
+ ],
+ "municipalities_without_parish_data": [
+  {
+   "municipality": "Amarante",
+   "municipality_slug": "amarante",
+   "courses": 1,
+   "municipality_median_eur_m2": 1211,
+   "municipality_change_10y_pct": 112.5
+  },
+  {
+   "municipality": "Anadia",
+   "municipality_slug": "anadia",
+   "courses": 1,
+   "municipality_median_eur_m2": 1048,
+   "municipality_change_10y_pct": 101.9
+  },
+  {
+   "municipality": "Batalha",
+   "municipality_slug": "batalha",
+   "courses": 1,
+   "municipality_median_eur_m2": 1442,
+   "municipality_change_10y_pct": 149.1
+  },
+  {
+   "municipality": "Benavente",
+   "municipality_slug": "benavente",
+   "courses": 2,
+   "municipality_median_eur_m2": 2171,
+   "municipality_change_10y_pct": 240.8
+  },
+  {
+   "municipality": "Cantanhede",
+   "municipality_slug": "cantanhede",
+   "courses": 1,
+   "municipality_median_eur_m2": 1100,
+   "municipality_change_10y_pct": 84.9
+  },
+  {
+   "municipality": "Chaves",
+   "municipality_slug": "chaves",
+   "courses": 2,
+   "municipality_median_eur_m2": 1205,
+   "municipality_change_10y_pct": 108.5
+  },
+  {
+   "municipality": "Esposende",
+   "municipality_slug": "esposende",
+   "courses": 1,
+   "municipality_median_eur_m2": 2229,
+   "municipality_change_10y_pct": 151.3
+  },
+  {
+   "municipality": "Grândola",
+   "municipality_slug": "grandola",
+   "courses": 3,
+   "municipality_median_eur_m2": 2543,
+   "municipality_change_10y_pct": 233.7
+  },
+  {
+   "municipality": "Horta",
+   "municipality_slug": "horta",
+   "courses": 1,
+   "municipality_median_eur_m2": 1370,
+   "municipality_change_10y_pct": 96.3
+  },
+  {
+   "municipality": "Machico",
+   "municipality_slug": "machico",
+   "courses": 1,
+   "municipality_median_eur_m2": 2070,
+   "municipality_change_10y_pct": 172.4
+  },
+  {
+   "municipality": "Marvão",
+   "municipality_slug": "marvao",
+   "courses": 1,
+   "municipality_median_eur_m2": 649,
+   "municipality_change_10y_pct": 102.2
+  },
+  {
+   "municipality": "Matosinhos",
+   "municipality_slug": "matosinhos",
+   "courses": 1,
+   "municipality_median_eur_m2": 3183,
+   "municipality_change_10y_pct": 223.5
+  },
+  {
+   "municipality": "Óbidos",
+   "municipality_slug": "obidos",
+   "courses": 4,
+   "municipality_median_eur_m2": 2249,
+   "municipality_change_10y_pct": 104.8
+  },
+  {
+   "municipality": "Paços de Ferreira",
+   "municipality_slug": "pacos-de-ferreira",
+   "courses": 1,
+   "municipality_median_eur_m2": 1525,
+   "municipality_change_10y_pct": 156.7
+  },
+  {
+   "municipality": "Peniche",
+   "municipality_slug": "peniche",
+   "courses": 1,
+   "municipality_median_eur_m2": 2332,
+   "municipality_change_10y_pct": 183.7
+  },
+  {
+   "municipality": "Ponte de Lima",
+   "municipality_slug": "ponte-de-lima",
+   "courses": 2,
+   "municipality_median_eur_m2": 1612,
+   "municipality_change_10y_pct": 143.5
+  },
+  {
+   "municipality": "Porto Santo",
+   "municipality_slug": "porto-santo",
+   "courses": 1,
+   "municipality_median_eur_m2": 2410,
+   "municipality_change_10y_pct": 141.0
+  },
+  {
+   "municipality": "Povoação",
+   "municipality_slug": "povoacao",
+   "courses": 1,
+   "municipality_median_eur_m2": 1529,
+   "municipality_change_10y_pct": 175.5
+  },
+  {
+   "municipality": "Ribeira Grande",
+   "municipality_slug": "ribeira-grande",
+   "courses": 1,
+   "municipality_median_eur_m2": 1676,
+   "municipality_change_10y_pct": 210.4
+  },
+  {
+   "municipality": "Rio Maior",
+   "municipality_slug": "rio-maior",
+   "courses": 1,
+   "municipality_median_eur_m2": 1357,
+   "municipality_change_10y_pct": 144.9
+  },
+  {
+   "municipality": "Torres Vedras",
+   "municipality_slug": "torres-vedras",
+   "courses": 2,
+   "municipality_median_eur_m2": 2411,
+   "municipality_change_10y_pct": 207.9
+  },
+  {
+   "municipality": "Vila da Praia da Vitória",
+   "municipality_slug": "vila-da-praia-da-vitoria",
+   "courses": 1,
+   "municipality_median_eur_m2": 1370,
+   "municipality_change_10y_pct": 96.8
+  },
+  {
+   "municipality": "Viseu",
+   "municipality_slug": "viseu",
+   "courses": 1,
+   "municipality_median_eur_m2": 1627,
+   "municipality_change_10y_pct": 118.7
+  }
+ ],
+ "courses_in_unpublished_parishes": [
+  {
+   "course": "Espiche Golf",
+   "osm": "w107214912",
+   "municipality": "Lagos"
+  },
+  {
+   "course": "Quinta de Santo António do Freixo Driving Range",
+   "osm": "w321534668",
+   "municipality": "Leiria"
+  },
+  {
+   "course": "Centro Nacional de Formação do Jamor",
+   "osm": "w49167468",
+   "municipality": "Oeiras"
+  },
+  {
+   "course": "Colina Verde Golf & Sports Resort Executive Course",
+   "osm": "r1345680",
+   "municipality": "Olhão"
+  },
+  {
+   "course": "Vila Monte Golf Course",
+   "osm": "w222567474",
+   "municipality": "Olhão"
+  },
+  {
+   "course": "Amendoeira Golf Resort - Faldo & O'Connor Jnr.",
+   "osm": "r17880819",
+   "municipality": "Silves"
+  },
+  {
+   "course": "Belas Clube Campo Golf Course",
+   "osm": "w240146249",
+   "municipality": "Sintra"
+  },
+  {
+   "course": "Beloura Pestana Golf",
+   "osm": "w1384458717",
+   "municipality": "Sintra"
+  },
+  {
+   "course": "Lisbon Sports Club",
+   "osm": "w210138245",
+   "municipality": "Sintra"
+  },
+  {
+   "course": "Pestana Beloura Golf",
+   "osm": "r3239319",
+   "municipality": "Sintra"
+  },
+  {
+   "course": "Benamor Golf",
+   "osm": "w435219010",
+   "municipality": "Tavira"
+  },
+  {
+   "course": "Private Golf Course",
+   "osm": "r7319957",
+   "municipality": "Tavira"
+  }
+ ]
+}

@@ -28,7 +28,9 @@ const reduce = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 const lowPower = () => (navigator as any).hardwareConcurrency && (navigator as any).hardwareConcurrency <= 2;
 // D44: a quiet sequential green from eau-de-nil to bottle green; the selection in brass.
 const GREENS = ["#eef4ef", "#c9dccf", "#8fb39e", "#4f7d66", "#1f4a3d"];
-const NODATA = "#e6e8e6", BRASS = "#7a5e28", INK = "#16181c";
+// D60: no brass in the interface; the selected place is near-black, the hovered one a soft grey.
+const NODATA = "#e6e8e6", SEL = "#111214", INK = "#16181c";
+const GOLF_LAYERS = ["golf-mark", "golf-area"];
 const plain = (s: string) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
 
 export function initMapExplorer(root: HTMLElement) {
@@ -75,6 +77,7 @@ export function initMapExplorer(root: HTMLElement) {
   let P: { quarters: string[]; munis: Record<string, Series>; regions: Record<string, Series> } | null = null;
   let parishes: { feats: any[]; data: Record<string, Series> } | null = null, parLoading = false;
   let hoverId: number | string | null = null, hoverSrc = "";
+  let golfOn = false, golf: any = null, golfLoading: Promise<void> | null = null, hoverGolf: string | null = null, pinned = 0;  // golf layer, below
   const byS = new Map<string, Props>();
   // Searchable names: from the list under the map when the page has it, otherwise from the map data once it loads.
   let names: { n: string; s: string; r: string }[] = [...root.querySelectorAll<HTMLButtonElement>("[data-pick]")].map((b) => ({ n: b.textContent!, s: b.dataset.pick!, r: "" }));
@@ -93,10 +96,11 @@ export function initMapExplorer(root: HTMLElement) {
   };
   let breaks = {} as Record<Metric, number[]>;
   function quantiles(list: number[]) { const a = [...list].sort((x, y) => x - y); return [0.05, 0.25, 0.5, 0.75, 0.95].map((p) => a[Math.floor(p * (a.length - 1))]); }
-  function heightExpr(): any {
-    const k = KEY[metric], b = breaks[metric] || [];
-    const h: any = metric === "m2" ? ["*", 2700, ["^", ["/", budget, ["get", "pv"]], 1 / 3]]  // cube root keeps 300 k€ and 10 M€ readable
-      : metric === "price" ? ["*", 7, ["get", "pv"]] : metric === "growth" ? ["*", 190, ["max", ["get", "pg"], 0]] : metric === "yield" ? ["*", 4200, ["max", ["-", ["get", "py"], 1.5], 0.2]]
+  // pre: the property prefix (golf courses carry their parish's values as q_pv, q_py…, prompt 33 §4.1).
+  function heightExpr(pre = ""): any {
+    const k = pre + KEY[metric], b = breaks[metric] || [], g = (x: string): any => ["get", pre + x];
+    const h: any = metric === "m2" ? ["*", 2700, ["^", ["/", budget, g("pv")], 1 / 3]]  // cube root keeps 300 k€ and 10 M€ readable
+      : metric === "price" ? ["*", 7, g("pv")] : metric === "growth" ? ["*", 190, ["max", g("pg"), 0]] : metric === "yield" ? ["*", 4200, ["max", ["-", g("py"), 1.5], 0.2]]
       : b.length && b[4] > b[0] ? ["interpolate", ["linear"], ["get", k], b[0], 1500, b[4], 38000] : 8000;
     return ["case", ["==", ["get", k], null], 0, h];
   }
@@ -104,6 +108,7 @@ export function initMapExplorer(root: HTMLElement) {
   // work here: in a tilted view the near tiles load at a higher zoom and the concelhos would vanish early.)
   const HAND = [8.2, 8.7];
   function hfor(id: string): any {
+    if (id.startsWith("golf")) return golfH(id.endsWith(":base") ? 25 : 70);
     if (flat) return 0;
     if (id === "muni-3d-p") return ["interpolate", ["linear"], ["zoom"], HAND[0], heightExpr(), HAND[1], 0];
     if (id === "par-3d") return ["interpolate", ["linear"], ["zoom"], HAND[0], 0, HAND[1], heightExpr()];
@@ -114,7 +119,7 @@ export function initMapExplorer(root: HTMLElement) {
     const b = breaks[metric] || []; const cols = metric === "m2" ? [...GREENS].reverse() : GREENS;  // more space = deeper green
     const stops: any[] = []; b.forEach((v, i) => { if (i === 0 || v > b[i - 1]) stops.push(v, cols[i]); });
     const scale = stops.length >= 4 ? ["interpolate", ["linear"], ["get", k], ...stops] : cols[2];
-    return ["case", ["boolean", ["feature-state", "sel"], false], BRASS, ["boolean", ["feature-state", "hover"], false], "#b59a5e", ["==", ["get", k], null], NODATA, scale];
+    return ["case", ["boolean", ["feature-state", "sel"], false], SEL, ["boolean", ["feature-state", "hover"], false], "#8a938e", ["==", ["get", k], null], NODATA, scale];
   }
   function paint() {
     if (!map || !map.getLayer("muni-3d")) return;
@@ -123,6 +128,7 @@ export function initMapExplorer(root: HTMLElement) {
       map.setPaintProperty(id, "fill-extrusion-height", hfor(id));
       map.setPaintProperty(id, "fill-extrusion-color", colorExpr());
     }
+    for (const id of GOLF_LAYERS) if (map.getLayer(id)) { map.setPaintProperty(id, "fill-extrusion-height", hfor(id)); map.setPaintProperty(id, "fill-extrusion-base", hfor(`${id}:base`)); }
     root.querySelector<HTMLElement>("[data-legend]")!.textContent = L.legend[metric];
   }
 
@@ -131,6 +137,7 @@ export function initMapExplorer(root: HTMLElement) {
     const p = new URLSearchParams(location.search);
     p.set("budget", String(budget)); metric === "m2" ? p.delete("metric") : p.set("metric", metric);
     selected ? p.set("place", selected) : p.delete("place"); selPar ? p.set("parish", selPar) : p.delete("parish");
+    golfOn ? p.set("golf", "1") : p.delete("golf");
     history.replaceState(null, "", `${location.pathname}?${p}${location.hash}`);
   }
   const HIGH = 1e6;  // internal only (D52): from here the list brings the dearer places forward; never shown to the reader
@@ -365,6 +372,7 @@ export function initMapExplorer(root: HTMLElement) {
     const hp = ["==", ["get", "hp"], true], nohp = ["==", ["get", "hp"], false];
     map.setFilter("muni-3d", f ? ["all", nohp, f] : nohp);
     map.setFilter("muni-3d-p", f ? ["all", hp, f] : hp);
+    for (const id of GOLF_LAYERS) if (map.getLayer(id)) map.setFilter(id, f);  // the courses of hidden concelhos hide with them
     if (projOn) drawProjects();
   }
 
@@ -405,7 +413,7 @@ export function initMapExplorer(root: HTMLElement) {
         "fill-extrusion-height-transition": { duration: reduce() ? 0 : 900, delay: 0 }, "fill-extrusion-color-transition": { duration: reduce() ? 0 : 600, delay: 0 },
       } as any });
       ext("muni-3d"); ext("muni-3d-p");
-      map.addLayer({ id: "muni-line", type: "line", source: "munis", paint: { "line-color": ["case", ["boolean", ["feature-state", "sel"], false], BRASS, ["boolean", ["feature-state", "hover"], false], BRASS, "rgba(22,24,28,0.18)"],
+      map.addLayer({ id: "muni-line", type: "line", source: "munis", paint: { "line-color": ["case", ["boolean", ["feature-state", "sel"], false], SEL, ["boolean", ["feature-state", "hover"], false], SEL, "rgba(22,24,28,0.18)"],
         "line-width": ["case", ["boolean", ["feature-state", "sel"], false], 2.2, ["boolean", ["feature-state", "hover"], false], 1.6, 0.4] } });
       if (cfg.embed?.pin) {
         const [lon, lat, label] = cfg.embed.pin; const el = document.createElement("div"); el.className = "mapx-pin"; el.title = label; el.innerHTML = `<span>${label}</span>`;
@@ -416,12 +424,13 @@ export function initMapExplorer(root: HTMLElement) {
       root.classList.add("is-live");
       placeInsets(); applyFilter(); paint();
       if (projOn) drawProjects();
+      if (golfOn) await drawGolf();
       const sel = selected, par = selPar;
       if (par) { await loadParishes(); selectParish(par); } else if (sel) select(sel);
       if (root.dataset.mode === "home" && !flat && !sel) { rotating = true; spin(); }
       map.on("move", placeInsets);
       map.on("zoomend", () => { if (map.getZoom() > 7.6) loadParishes(); });
-      map.on("click", (e: any) => { const h = pick(e.point); if (!h) return; if (h.kind === "par") selectParish(h.key); else select(h.key, { fly: map.getZoom() < 7 }); });
+      map.on("click", (e: any) => { pinGolf(e.point); const h = pick(e.point); if (!h) return; if (h.kind === "par") selectParish(h.key); else select(h.key, { fly: map.getZoom() < 7 }); });
       map.on("mousemove", (e: any) => hover(e.point));
       map.on("mouseout", () => hover(null));
       ["mousedown", "touchstart", "wheel"].forEach((ev) => canvas.addEventListener(ev, () => (rotating = false), { passive: true }));
@@ -429,15 +438,17 @@ export function initMapExplorer(root: HTMLElement) {
     return loading;
   }
   function hover(pt: { x: number; y: number } | null) {
-    const h = pt ? pick(pt) : null;
+    const h = pt ? pick(pt) : null, gn = pt ? golfAt(pt) : null;  // over a golf course, the tip names the course
     const id = h ? (h.kind === "par" ? h.key : byS.get(h.key)?.id ?? null) : null, src = h?.kind === "par" ? "pars" : "munis";
-    if (id === hoverId && src === hoverSrc) return;
+    if (id === hoverId && src === hoverSrc && gn === hoverGolf) return;
+    if (pinned && pinned > Date.now() && !gn) return;  // a tapped course keeps its name on screen a moment
+    hoverGolf = gn;
     if (hoverId != null) setState(hoverSrc, hoverId, "hover", false);
     hoverId = id; hoverSrc = src; if (id != null) setState(src, id, "hover", true);
-    map.getCanvas().style.cursor = h ? "pointer" : "";
+    map.getCanvas().style.cursor = h || gn ? "pointer" : "";
     if (tip) {
-      if (!h || !pt) { tip.hidden = true; return; }
-      tip.textContent = h.kind === "par" ? parishes?.feats.find((f) => f.properties.id === h.key)?.properties.n ?? "" : byS.get(h.key)?.n ?? "";
+      if ((!h && !gn) || !pt) { tip.hidden = true; return; }
+      tip.textContent = gn ?? (h!.kind === "par" ? parishes?.feats.find((f) => f.properties.id === h!.key)?.properties.n ?? "" : byS.get(h!.key)?.n ?? "");
       tip.style.transform = `translate(${pt.x + 12}px, ${pt.y - 28}px)`; tip.hidden = false;
     }
   }
@@ -449,9 +460,9 @@ export function initMapExplorer(root: HTMLElement) {
     parishes = { feats: geo.features, data: data.parishes };
     map.addSource("pars", { type: "geojson", data: geo, promoteId: "id" });
     map.addLayer({ id: "par-3d", type: "fill-extrusion", source: "pars", paint: { "fill-extrusion-color": colorExpr(), "fill-extrusion-height": hfor("par-3d"), "fill-extrusion-opacity": ["interpolate", ["linear"], ["zoom"], HAND[0], 0, HAND[1], 0.93],
-      "fill-extrusion-height-transition": { duration: reduce() ? 0 : 900, delay: 0 } } as any }, "muni-line");
-    map.addLayer({ id: "par-line", type: "line", source: "pars", paint: { "line-opacity": ["interpolate", ["linear"], ["zoom"], HAND[0], 0, HAND[1], 1], "line-color": ["case", ["boolean", ["feature-state", "sel"], false], BRASS, ["boolean", ["feature-state", "hover"], false], BRASS, "rgba(22,24,28,0.22)"], "line-width": ["case", ["boolean", ["feature-state", "sel"], false], 2, 0.5] } });
-    paint();
+      "fill-extrusion-height-transition": { duration: reduce() ? 0 : 900, delay: 0 } } as any }, map.getLayer("golf-area") ? "golf-area" : "muni-line");
+    map.addLayer({ id: "par-line", type: "line", source: "pars", paint: { "line-opacity": ["interpolate", ["linear"], ["zoom"], HAND[0], 0, HAND[1], 1], "line-color": ["case", ["boolean", ["feature-state", "sel"], false], SEL, ["boolean", ["feature-state", "hover"], false], SEL, "rgba(22,24,28,0.22)"], "line-width": ["case", ["boolean", ["feature-state", "sel"], false], 2, 0.5] } });
+    paint(); if (golfOn) golfSet();  // the courses now sit on their parish from zoom 8.2
   }
   function spin() { if (!rotating || !map) return; map.easeTo({ bearing: map.getBearing() + 6, duration: 4000, easing: (t: number) => t }); map.once("moveend", spin); }
   function placeInsets() {
@@ -522,6 +533,68 @@ export function initMapExplorer(root: HTMLElement) {
   devBtn?.addEventListener("click", () => setProj(!projOn));
   devBar?.querySelectorAll("select,input").forEach((el) => el.addEventListener("change", drawProjects));
   if (q.get("devs") === "1" || q.get("demoproj")) setProj(true);
+  // ---------------------------------------------------------------- golf layer (prompt 33 §4.1): OpenStreetMap leisure=golf_course
+  // Off until the reader taps "Golf" (or ?golf=1); the data (/data/map/golf.geojson, scripts/map-data/golf.py) loads then.
+  // Each course is a thin slab on top of its own concelho (or, from zoom 8.2, its parish), so it stays on the prism in 3D;
+  // below zoom 9 a small hexagon marks it, then the course's own outline takes over. Names on hover and on tap.
+  const golfBtn = root.querySelector<HTMLButtonElement>("[data-golf]"), golfNote = root.querySelector<HTMLElement>("[data-golf-legend]");
+  const GOLF = "#5f8a4c", GOLF_MARK = "#4a7a3c";  // fairway greens, warmer than the data scale's blue-greens (D50/D60)
+  const GZ = [8.6, 9.4];  // markers fade into outlines
+  function golfH(top: number): any {
+    if (flat) return top;
+    const m = heightExpr(), par = heightExpr("q_");
+    return ["interpolate", ["linear"], ["zoom"], HAND[0], ["+", m, top], HAND[1], ["+", ["case", ["==", ["get", "hp"], true], par, m], top]];
+  }
+  const golfName = (p: any) => p.n || `${L.golfUnnamed} · ${byS.get(p.m)?.n ?? ""}`;
+  function golfAt(pt: { x: number; y: number }): string | null {
+    if (!golfOn || !map || !map.getLayer("golf-mark")) return null;
+    const f = map.queryRenderedFeatures([[pt.x - 3, pt.y - 3], [pt.x + 3, pt.y + 3]], { layers: [map.getZoom() < (GZ[0] + GZ[1]) / 2 ? "golf-mark" : "golf-area"] })[0];
+    return f ? golfName(f.properties) : null;
+  }
+  function pinGolf(pt: { x: number; y: number }) {
+    const n = golfAt(pt); if (!n || !tip) return;
+    tip.textContent = n; tip.style.transform = `translate(${pt.x + 12}px, ${pt.y - 28}px)`; tip.hidden = false; hoverGolf = n; pinned = Date.now() + 3500;
+    setTimeout(() => { if (pinned <= Date.now() && hoverGolf === n) { tip.hidden = true; hoverGolf = null; } }, 3600);
+  }
+  const hexagon = (x: number, y: number, r: number) => {
+    const k = 1 / Math.cos((y * Math.PI) / 180), ring: number[][] = [];
+    for (let i = 0; i <= 6; i++) { const a = (Math.PI / 3) * (i % 6) + Math.PI / 6; ring.push([x + r * k * Math.cos(a), y + r * Math.sin(a)]); }
+    return { type: "Polygon", coordinates: [ring] };
+  };
+  // Each course carries its concelho's values (and its parish's as q_*), so the slab follows the prism under it.
+  function golfSet() {
+    if (!golf || !map?.getSource("golf-area")) return;
+    for (const f of golf.features) {
+      const p = f.properties, m: any = byS.get(p.m) || {}, s = p.p ? parishes?.data[p.p] : undefined;
+      for (const k of ["pv", "pg", "py", "l_sea", "l_vac", "l_new", "l_fr", "hp", "coast", "city", "air", "r"]) p[k] = m[k] ?? null;
+      p.q_pv = val(s, "price"); p.q_pg = null; p.q_py = val(s, "yield");
+    }
+    map.getSource("golf-area").setData(golf);
+    map.getSource("golf-mark").setData({ type: "FeatureCollection", features: golf.features.map((f: any) => ({ type: "Feature", properties: f.properties, geometry: hexagon(f.properties.x, f.properties.y, 0.022) })) });
+  }
+  async function drawGolf() {
+    await (golfLoading ??= fetch("/data/map/golf.geojson").then((r) => r.json()).then((d) => { golf = d; }));
+    if (!map || !golf) return;
+    if (!map.getSource("golf-area")) {
+      const empty = { type: "FeatureCollection", features: [] };
+      map.addSource("golf-area", { type: "geojson", data: empty }); map.addSource("golf-mark", { type: "geojson", data: empty });
+      const tr = { duration: reduce() ? 0 : 900, delay: 0 };
+      for (const [id, col, op] of [["golf-mark", GOLF_MARK, [GZ[0], 0.9, GZ[1], 0]], ["golf-area", GOLF, [GZ[0], 0, GZ[1], 0.92]]] as const)
+        map.addLayer({ id, type: "fill-extrusion", source: id, paint: { "fill-extrusion-color": col, "fill-extrusion-opacity": ["interpolate", ["linear"], ["zoom"], ...op],
+          "fill-extrusion-height": hfor(id), "fill-extrusion-base": hfor(`${id}:base`), "fill-extrusion-height-transition": tr, "fill-extrusion-base-transition": tr } as any }, map.getLayer("par-line") ? "par-line" : undefined);
+      golfSet(); applyFilter();
+    }
+    for (const id of GOLF_LAYERS) map.setLayoutProperty(id, "visibility", golfOn ? "visible" : "none");
+  }
+  async function setGolf(on: boolean) {
+    golfOn = on; golfBtn?.setAttribute("aria-pressed", String(on)); if (golfNote) golfNote.hidden = !on;
+    if (!on && hoverGolf && tip) { tip.hidden = true; hoverGolf = null; }
+    syncUrl();
+    if (!on && !map) return;
+    await load(); await drawGolf();
+  }
+  golfBtn?.addEventListener("click", () => setGolf(!golfOn));
+  if (q.get("golf") === "1" && golfBtn) setGolf(true);
   // ---------------------------------------------------------------- search ("Procurar concelho"): a combobox over the 308 names
   const sIn = root.querySelector<HTMLInputElement>("[data-find]"), sList = root.querySelector<HTMLUListElement>("[data-find-list]");
   if (sIn && sList) {

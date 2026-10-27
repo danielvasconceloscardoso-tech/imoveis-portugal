@@ -456,6 +456,12 @@
    "licence": "ODbL (© OpenStreetMap contributors)",
    "note": "admin_level 8, ref:ine = DICOFRE; current OSM, found via Nominatim search; OSM source tag: DGT - CAOP 2022",
    "url": "https://nominatim.openstreetmap.org/lookup (OpenStreetMap relations)"
+  },
+  "osm-golf.geojson.gz": {
+   "downloaded": "2026-10-27",
+   "licence": "ODbL (© OpenStreetMap contributors)",
+   "note": "found via Nominatim category search (Overpass unreachable); 119 outlines",
+   "url": "https://nominatim.openstreetmap.org/lookup (OpenStreetMap ways and relations, leisure=golf_course)"
   }
  }
 }
