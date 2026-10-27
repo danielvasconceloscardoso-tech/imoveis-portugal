@@ -12,9 +12,9 @@ Status, 26 Oct 2026:
 `ImoveisPortugal_Demo_Vanguard_Tomas-Ribeiro-79_v4.mp4` (clean) and `ImoveisPortugal_Demo_Vanguard_Tomas-Ribeiro-79_v4_captioned.mp4` (captions burned in), with `ImoveisPortugal_Demo_Vanguard_Tomas-Ribeiro-79_v4.vtt`, 1920×1080 at 2.39:1, 24 fps, H.264 and AAC, 101 s, mixed to −16 LUFS. One frame per shot: `vanguard-shots.jpg`. Built with `film.py` (picture), `sound4.py` (sound and captions), `encode.sh` (the two MP4s), `mapframes.mjs` and `screens.mjs` (the site in demo mode).
 
 Gaps, each to replace when a valid Pixabay key or a matching clip is found (task 31b):
-- **Shots 0 and 13:** no licensed clip of a Lisbon terrace exists on Mixkit. The film uses a glass in warm light (clip 9899) with no city named; the drink is amber, not wine.
+- **Shots 0 and 13 (27 Oct, second cut):** a glass of red wine on a sunlit terrace, from a Pixabay photograph brought to life in 2.5D (depth by Depth Anything V2), because neither Mixkit nor Pixabay has a video of one. Pixabay's only Lisbon wine-glass photograph is at dusk with a hand in shot, so the sunlit terrace is not a named place.
 - **Strings:** no public-domain strings recording could be downloaded (Musopen blocks scripts, Wikimedia is rate-limited here); the music is the piano alone.
-- **Pixabay:** the key given on 27 Oct returns "invalid or missing API key" (it looks truncated). **Freesound:** the API answers 403 from this environment. Sound effects come from Mixkit instead, ambiences from Radio Aporee.
+- **Pixabay:** the key works (the environment variable also holds other text after it; task 31d). **Freesound:** the API answers 403 from this environment. Sound effects come from Mixkit, ambiences from Radio Aporee.
 
 ## Engine (scripts/demos/v4/)
 
@@ -36,7 +36,7 @@ Mixkit licence (free for commercial use, no attribution required): https://mixki
 
 | Used in | Source | Licence |
 | --- | --- | --- |
-| Shots 0 and 13, the glass | Mixkit clip 9899, a glass of amber drink in warm light | Mixkit licence |
+| Shots 0 and 13, the terrace | Pixabay photograph 3863058, "wine, glass, view" by Engin_Akyurt (https://pixabay.com/photos/wine-glass-view-love-pine-drink-3863058/), in 2.5D | Pixabay Content License (free for commercial use, no attribution required) |
 | Shot 1, the city | Mixkit clip 4330, "New York buildings at night, pan shot" (seconds 0.5 to 7.5, before a shop sign appears) | Mixkit licence |
 | Shots 1 and 12, the snow | Mixkit clips 8459 (snow falling) and 27377 (snowstorm), blended over the picture | Mixkit licence |
 | Shots 2 and 12, the window | Mixkit clip 21144, rain on a window at night | Mixkit licence |
@@ -66,4 +66,4 @@ Mixkit licence (free for commercial use, no attribution required): https://mixki
 | Depth for shot 8 | Depth Anything V2 Small, ONNX weights by onnx-community | Apache 2.0 |
 | Type | Playfair Display, Manrope | SIL Open Font License |
 
-No Freesound or Pixabay material is in this film. No sound or clip under a non-commercial licence is used.
+No Freesound material is in this film; Pixabay supplies the terrace photograph. No sound or clip under a non-commercial licence is used.

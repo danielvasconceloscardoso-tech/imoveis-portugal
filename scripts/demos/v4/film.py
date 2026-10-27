@@ -82,7 +82,9 @@ snow1, snow2 = clip(V["snow"], 2, 7), clip(V["snowstorm"], 4, 7)
 # The terrace is a photograph brought to life in 2.5D (cut.json "terrace": photo, depth, focus) when no clip fits.
 T = C.get("terrace")
 TP = Plate(T["photo"], T["depth"], focus=tuple(T.get("focus", (.5, .5))), margin=1.05) if T else None
-def terrace(dur, push, drift=(0, 0)): return [TP.frame(i / (round(dur * FPS) - 1), push=push, drift=drift, parallax=.8) for i in range(round(dur * FPS))]
+# Shot 13 may frame the same photograph differently ("end_focus", "end_margin") so the titles clear the glass.
+TE = Plate(T["photo"], T["depth"], focus=tuple(T.get("end_focus", T.get("focus", (.5, .5)))), margin=T.get("end_margin", 1.05)) if T else None
+def terrace(dur, push, drift=(0, 0), P=None): P = P or TP; return [P.frame(i / (round(dur * FPS) - 1), push=push, drift=drift, parallax=.8) for i in range(round(dur * FPS))]
 emit(terrace(4, .05) if TP else still(V["glass_still"], 4, .04) if V.get("glass_still") else clip(V["glass"], 1.0, 4), "warm", "0")
 emit(black(1.5), None, "0b", [("Illustrative buyer journey", W - 72, TOP + ACT - 36, 19, .2, 0, {"fill": (150, 150, 150), "anchor": "rs"})])
 # 1 · the city at night, snow falling.
@@ -118,7 +120,7 @@ win = clip(V["window"], 6, 7); st = clip(V["snowstorm"], 12, 7)
 emit([screen_blend(Image.blend(st[i], f.filter(ImageFilter.GaussianBlur(1)), .18), snow1[i % len(snow1)], .4) for i, f in enumerate(win)], "night", "12")
 emit(black(2), None, "12b")
 # 13 · out of black: the glass again, in the light; the brand, the line, the launch.
-end = terrace(7, .035, (.4, 0)) if TP else still(V["glass_still"], 7, .03) if V.get("glass_still") else clip(V["glass"], 5, 7)
+end = terrace(7, .035, tuple(T.get("end_drift", (.4, 0))), TE) if TP else still(V["glass_still"], 7, .03) if V.get("glass_still") else clip(V["glass"], 5, 7)
 end = [f if i < 3 * FPS else Image.blend(f, Image.new("RGB", f.size), min(.45, (i - 3 * FPS) / FPS * .45)) for i, f in enumerate(end)]
 emit(end, "warm", "13", [("Imóveis Portugal", W // 2, H // 2 - 4, 64, 3.2, 0, {"name": "Playfair-400.ttf", "anchor": "ms", "track": 0}),
                          ("Your buyers, wherever they live.", W // 2, H // 2 + 52, 30, 3.8, 0, {"anchor": "ms", "track": .01}),
