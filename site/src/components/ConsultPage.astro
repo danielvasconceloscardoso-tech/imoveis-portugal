@@ -5,7 +5,7 @@
 // D52) or "later" (otherwise). The rule is applied in Tally's redirect and shown to nobody. Wording: COPY_DECK.md "consult.*".
 import V2 from "../layouts/V2.astro";
 import BriefBox from "./BriefBox.astro";
-import Embed from "./Embed.astro";
+import Flow from "./Flow.astro";
 import { config } from "../config";
 import { LANGS, pathFor, type Lang, type EdCode } from "../i18n";
 import { Sources, fmtDate } from "../lib/content";
@@ -24,8 +24,7 @@ const title = view === "form" ? c("consult.title", lang) : c(`consult.${view}.ti
 <V2 lang={lang} ed={ed} page="consult" paths={paths} noindex={view !== "form"} title={`${title} | Imóveis Portugal · ${edName(ed, lang)}`} description={c("consult.lede", lang)} sticky={null}>
   <div class="frame read ph">
     <p class="h-small">{c("consult.title", lang)}</p>
-    <h1>{h1}</h1>
-    {view === "form" && <p class="lede">{c("consult.lede", lang)}</p>}
+    <h1 class={view === "form" ? "vh" : undefined}>{h1}</h1>
     {view === "ok" && <><p class="lede">{c("consult.ok.p", lang)}</p><p>{c("consult.ok.prep", lang)}</p></>}
     {view === "private" && <><p class="lede">{c("consult.private.p", lang)}</p><p>{c("consult.private.aml", lang)}<a class="sup" href={`#fonte-${nAml}`}>{nAml}</a></p><p>{c("consult.ok.prep", lang)}</p></>}
     {view === "later" && <p class="lede">{c("consult.later.p", lang)}</p>}
@@ -33,13 +32,12 @@ const title = view === "form" ? c("consult.title", lang) : c(`consult.${view}.ti
   <div class="frame read consult">
     {view === "form" && (
       <>
-        <h2 class="h3">{c("consult.form.h", lang)}</h2>
         {/* D52: a more personal line when the reader's budget (map, path or link) is high; the threshold is never shown. */}
         <p class="consult-dedicated" data-dedicated hidden>{c("consult.dedicated", lang)}</p>
         <script is:inline>(function(){try{var b=Number(new URLSearchParams(location.search).get("budget"))||Number(localStorage.getItem("ip.budget"))||0;if(b>=1e6)document.querySelector("[data-dedicated]").hidden=false}catch(e){}})();</script>
-        <BriefBox lang={lang} ed={ed} />
-        <Embed id={config.forms.buyer[lang]} title={c("consult.cta", lang)} cta={c("consult.cta", lang)} subject={c("consult.cta", lang)} hidden={{ edition: ed, language: lang }} height={760} brief />
-        <p class="small">{c("consult.privacy", lang)} <a href={pathFor(lang, ed, "privacy")}>{c("common.privacy", lang)}</a></p>
+        {/* Prompt 35 §3.9: one question at a time, our own controls; same fields, consent and routing as the Tally form. */}
+        <Flow lang={lang} ed={ed} flow="concierge" />
+        <div style="margin-top:40px"><BriefBox lang={lang} ed={ed} /></div>
         <h2 class="h3" style="margin-top:40px">{c("consult.next.h", lang)}</h2>
         <ol class="steps-plain">{cl("consult.next", lang).map((x) => <li>{x}</li>)}</ol>
       </>

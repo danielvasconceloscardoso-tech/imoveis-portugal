@@ -4,9 +4,13 @@
 {
   "name": "imoveis-portugal",
   "compatibility_date": "2026-10-01",
+  // The worker answers /api/* only (the request flows, ops/ARCHITECTURE.md); every other path is a static asset.
+  "main": "./worker/index.js",
   "previews": {},
   "assets": {
     "directory": "./dist",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*"],
     "not_found_handling": "404-page"
   }
 }

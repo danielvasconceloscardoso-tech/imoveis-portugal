@@ -10,6 +10,7 @@ import { Sources, fmtDate, EDITION_CUR, RATE, FACTS } from "../lib/content";
 import { FIELDS, NEXT, FACTS_USED, SUB, TOOLS, keysFor, run, type ToolKey } from "../lib/tools";
 import { RATE_DEFAULT } from "../lib/sims";
 import { c, has } from "../lib/copy";
+import "../styles/sim2.css";
 
 interface Props { lang: Lang; ed: EdCode; tool: ToolKey; enabled: ToolKey[]; }
 const { lang, ed, tool, enabled } = Astro.props;
@@ -54,7 +55,7 @@ const fieldLabel = (id: string, kind: string) => {
     <h1>{name}</h1>
     <p class="lede">{c(`sims.${tool}.p`, lang)}</p>
   </div>
-  <div class="frame read sim-wrap">
+  <div class="frame sim-wrap sim2">
     <form class="sim" id="sim" data-tool={tool} data-fx={fx ? fx.rate : 1} data-cur={curCode} data-locale={HTML_LANG[lang]} novalidate>
       {FIELDS[tool].map((f, i) => f.kind === "bool" ? (
         <fieldset class="field bool step" data-step={i}>
@@ -82,7 +83,9 @@ const fieldLabel = (id: string, kind: string) => {
     <section class="sim-out statement" id="result" aria-live="polite" aria-labelledby="res">
       <h2 id="res" class="h-small">{c("sims.result.h", lang)}</h2>
       <p class="st-total"><span class="st-label" id="st-label">{firstTotal && c(`sims.${firstTotal.k}`, lang)}</span><strong id="st-total">{firstTotal && show(firstTotal.v, firstTotal.fmt)}</strong><span class="small" id="st-local" data-tpl={c("sims.local", lang, { local: "{local}" })}>&nbsp;</span></p>
+      <details class="st-more"><summary>{c("simx.detail", lang)}</summary>
       <dl class="st-lines" id="rows">{first.rows.filter((r) => !r.strong).map((r) => <><dt>{c(`sims.${r.k}`, lang)}{rowSrc[r.k === "r.imt" ? "r.imt.nr" : r.k] && <a class="st-src" href={`#fonte-${rowSrc[r.k === "r.imt" ? "r.imt.nr" : r.k].n}`}>{rowSrc[r.k === "r.imt" ? "r.imt.nr" : r.k].t}</a>}</dt><dd>{show(r.v, r.fmt)}</dd></>)}</dl>
+      </details>
       <p class="warn" id="warn" hidden></p>
       <p class="small">{c("sims.estimate", lang)}{nums.map((i) => <a class="sup" href={`#fonte-${i}`}>{i}</a>)}</p>
       {next === "credit" && cp.name && <p class="sponsor-line">{c("sims.sponsor", lang, { name: cp.name, bdp: cp.bdp })}</p>}
@@ -239,7 +242,7 @@ const fieldLabel = (id: string, kind: string) => {
 
   document.getElementById("share")?.addEventListener("click", async (e) => {
     const b = e.currentTarget as HTMLButtonElement;
-    try { await navigator.clipboard.writeText(location.href); b.textContent = b.dataset.done || ""; } catch { prompt("", location.href); }
+    try { if (navigator.share) { await navigator.share({ url: location.href }); return; } await navigator.clipboard.writeText(location.href); b.textContent = b.dataset.done || ""; } catch { /* closed or blocked */ }
   });
   // Consent first: the request button works only once the box is ticked (GDPR art. 7).
   const consent = document.getElementById("consent") as HTMLInputElement | null;

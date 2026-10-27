@@ -37,7 +37,10 @@ const labels = Object.fromEntries(BRIEF_KEYS.map((k) => [k, c(`brief.${k}`, lang
       (box.querySelector("[data-brief-ok]") as HTMLElement).hidden = false;
     }
     // Every partner form on the page gets the summary only while the box is ticked; chosen names always go.
-    const apply = () => document.querySelectorAll<HTMLElement>("[data-brief-target]").forEach((el) => {
+    const apply = () => {
+      // The one-question flows (scripts/flow.ts) read the summary from this tab only while the box is ticked.
+      try { const b = inc.checked && line ? `${line} (${L.note})` : ""; b ? sessionStorage.setItem("ip.brief", [b, team].filter(Boolean).join("\n")) : sessionStorage.removeItem("ip.brief"); } catch { /* storage off */ }
+      document.querySelectorAll<HTMLElement>("[data-brief-target]").forEach((el) => {
       const brief = inc.checked && line ? `${line} (${L.note})` : "";
       if (el instanceof HTMLIFrameElement) {
         const u = new URL(el.dataset.base || el.src); el.dataset.base = u.href;
@@ -49,7 +52,7 @@ const labels = Object.fromEntries(BRIEF_KEYS.map((k) => [k, c(`brief.${k}`, lang
         const body = [brief, team].filter(Boolean).join("\n");
         el.href = body ? `${base}&body=${encodeURIComponent(body)}` : base;
       }
-    });
+    }); };
     inc.addEventListener("change", apply);
     apply();
   });

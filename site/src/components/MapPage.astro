@@ -1,7 +1,7 @@
 ---
-// The map page (prompts 16 and 19, D34): the 3D map as the hero, filters, the searchable list, sources.
+// The map page (prompts 16, 19 and 36; D34, D62): map v3 full screen under a translucent bar, then the lede, the list, sources.
 import V2 from "../layouts/V2.astro";
-import MapExplorer from "./MapExplorer.astro";
+import MapV3 from "./MapV3.astro";
 import { type Lang, type EdCode } from "../i18n";
 import { Sources, fmtDate } from "../lib/content";
 import { c, edName } from "../lib/copy";
@@ -15,14 +15,12 @@ src.n("bdp-mortgage-rate-2026-08");
 src.n("osm-boundaries");
 src.raw("https://wiki.openstreetmap.org/wiki/Tag:leisure%3Dgolf_course", "Golf courses (the Golf layer): OpenStreetMap leisure=golf_course, © OpenStreetMap contributors (ODbL)", "2026-10-27");  // prompt 33 §4.1; fact id osm-golf-courses proposed
 ---
-<V2 lang={lang} ed={ed} page="map" title={`${c("map.title", lang)} | Imóveis Portugal · ${edName(ed, lang)}`} description={c("map.lede", lang)} sticky={null}>
-  <div class="frame ph mapx-head">
-    <h1>{c("map.title", lang)}</h1>
+<V2 lang={lang} ed={ed} page="map" title={`${c("map.title", lang)} | Imóveis Portugal · ${edName(ed, lang)}`} description={c("map.lede", lang)} sticky={null} d2 bodyClass="m3p">
+  <h1 class="vh">{c("map.title", lang)}</h1>
+  <MapV3 lang={lang} ed={ed} mode="page" />
+  <div class="m3-after">
     <p class="lede">{c("map.lede", lang)}<a class="sup" href={`#fonte-${n}`}>{n}</a></p>
-  </div>
-  <div class="frame mapx-frame">
-    <MapExplorer lang={lang} ed={ed} mode="page" />
-    <p class="small" style="max-width:44em;margin-top:24px">{c("map.note", lang)}</p>
+    <p class="small">{c("map.note", lang)}</p>
   </div>
   <section class="sources-list" aria-labelledby="fontes">
     <div class="frame read">

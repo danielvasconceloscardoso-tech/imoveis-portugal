@@ -47,3 +47,16 @@ Downloaded at the largest public size, cropped where noted, graded with `resort_
 Removed from the home page: the olive tree and pool, the table on a terrace, the pool above the sea (all generic resort photographs), the Comporta photograph with the cropped watermark, Boca do Inferno, Praia da Marinha, the Cais das Colunas and the Douro at dawn.
 
 Not found under a free or open licence (Unsplash, Pexels, Pixabay, Flickr commercial licences; Wikimedia rate-limited): an aerial of Comporta, and a clifftop or dune golf course in Portugal. The golf tile stays the Algarve course at sunrise until one is found.
+
+## Prompt 36 (D62), 27 Oct 2026: map v3 data layers
+
+All self-hosted (built by scripts/map-data/v3_assets.py and v3_extras.py); credited on /credits/ and in the map's small attribution line.
+
+| Layer | Source | Licence | Notes |
+| --- | --- | --- | --- |
+| Relief (3D terrain, hillshade) | Terrain Tiles, Mapzen on AWS Open Data (registry.opendata.aws/terrain-tiles), terrarium encoding | Open; attribution required (EU-DEM Copernicus, SRTM and GMTED2010 USGS, ETOPO1 NOAA) | z5-z10, mainland only, sea floor clamped to 0 m, outside Portugal lowered to 0 m |
+| Sea depth tint | Same tiles (bathymetry) | As above | z5-z8 near, z5-z6 far |
+| Night lights | NASA Black Marble 2016 (VIIRS_Black_Marble), NASA GIBS | Public domain (NASA imagery, no copyright) | z5-z8 near, z5-z6 far; inset images for Madeira and the Azores |
+| Rivers (Tejo, Douro, Minho, Guadiana) | Natural Earth 1:10m rivers and lake centrelines | Public domain | clipped to mainland Portugal |
+| Beaches | OpenStreetMap natural=beach, named, via Nominatim (1 request a second) | ODbL, © OpenStreetMap contributors | 985 points |
+| Golf, boundaries | OpenStreetMap (unchanged from map v2) | ODbL | |

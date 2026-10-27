@@ -1,0 +1,146 @@
+---
+// Map v3 (prompt 36, D62): Portugal as a sculpted landscape you touch. Our own basemap (sea depth, sand land, relief from
+// AWS Terrain Tiles with golden-hour light from the southwest, coastline, rivers, Playfair and Manrope labels), the price
+// as a colour field draped on the relief, Day and Night (NASA Black Marble), the budget as a gesture with a live sentence,
+// layer chips, search like Spotlight (⌘K), a time scrubber, compare, guided tours and the place as a sheet.
+// Everything self-hosted (site/public/tiles, site/public/data/map; scripts/map-data/v3_assets.py and v3_extras.py).
+// The embed keeps MapExplorer.astro. Wording: COPY_DECK.md "map3.*" and "map.*".
+import { HTML_LANG, pathFor, eur, type Lang, type EdCode } from "../i18n";
+import { EDITION_CUR, RATE } from "../lib/content";
+import { MAP_MUNIS, REGIONS, BRIEFS } from "../lib/mapdata";
+import { PRICES } from "../lib/prices";
+import { PLACES } from "../lib/places";
+import { c } from "../lib/copy";
+import { PROJECTS } from "../lib/projects";
+import "../styles/mapv3.css";
+
+interface Props { lang: Lang; ed: EdCode; mode?: "page" | "home"; }
+const { lang, ed, mode = "page" } = Astro.props;
+const cur = EDITION_CUR[ed];
+const fx = cur && cur !== "EUR" ? RATE(cur) : null;
+const nf = new Intl.NumberFormat(HTML_LANG[lang]);
+const lastQ = PRICES.quarters[PRICES.quarters.length - 1];
+const qfmt = c("map.qfmt", lang);
+const qLabel = qfmt.replace("{q}", lastQ.slice(-1)).replace("{y}", lastQ.slice(0, 4));
+const pages = new Set(PLACES.map((p) => p.slug));
+// Photographs only where they show the place named (prompt 34 §4.5).
+const photos: Record<string, string> = { lisboa: "lisboa-castelo-por-do-sol", porto: "porto-douro-entardecer", cascais: "cascais-baia", lagos: "algarve-porto-de-mos",
+  funchal: "madeira-funchal-fogo", machico: "madeira-sao-lourenco", "porto-moniz": "madeira-porto-moniz" };
+const k = (x: string, v: Record<string, string> = {}) => c(`map3.${x}`, lang, v);
+const labels = {
+  sentence: k("sentence", { b: "{b}", a: "{a}", pa: "{pa}", c: "{c}", pc: "{pc}" }), sentenceOne: k("sentence.one", { b: "{b}", a: "{a}", pa: "{pa}" }),
+  medians: k("medians", { q: qLabel }), reach: k("reach"), budgetTap: k("budget.tap"),
+  legend: { price: k("legend.price", { q: "{q}" }), g10: k("legend.g10"), rent: k("legend.rent", { q: "{q}" }), yield: k("legend.yield") },
+  g: { munis: k("g.munis"), pars: k("g.pars"), golf: k("g.golf"), beach: k("g.beach"), devs: k("g.devs") },
+  card: { price: k("card.price"), g10: k("card.g10"), rent: k("card.rent"), homes: k("card.homes"), concierge: k("card.concierge"), compare: k("card.compare"),
+    details: k("card.details"), m2b: k("card.m2b"), yield: k("chip.yield"), pickb: k("card.pickb", { a: "{a}" }), buys: k("card.buys", { v: "{v}" }) },
+  play: k("play"), pause: k("pause"), takeover: k("tour.takeover"), golfcap: k("tour.golfcap", { n: "{n}" }), timecap: k("tour.timecap", { q: "{q}" }), close: k("close"),
+  tours: { coast: k("tour.coast"), golf: k("tour.golf"), madeira: k("tour.madeira"), time: k("tour.time") },
+  qfmt, median: c("map.card.median", lang, { v: "{v}", quarter: "{quarter}" }), nodata: c("map.card.nodata", lang), parishOf: c("map.par.of", lang, { m: "{m}" }),
+  source: c("map.card.source", lang, { quarter: "{quarter}" }), disclaimer: c("map.card.disclaimer", lang), share: c("map.share", lang), copied: c("map.copied", lang),
+  cagrP: c("map.card.cagrp", lang, { v: "{v}" }), yieldLine: c("map.card.yield", lang, { y: "{y}", r: "{r}", month: "{month}" }), mo: c("map.card.mo", lang, { c4: "{c4}", c8: "{c8}" }),
+  mow: { up: c("map.mo.up", lang), steady: c("map.mo.steady", lang), down: c("map.mo.down", lang) }, page: c("map.a.page", lang), sponsored: c("dev.sponsored", lang),
+  pfrom: c("map.proj.from", lang, { v: "{v}" }), ponreq: c("map.proj.onreq", lang), golfUnnamed: c("map.golf.unnamed", lang), nomatch: c("map.find.none", lang),
+  regions: Object.fromEntries(REGIONS.map((r) => [r, c(`map.r.${r}`, lang)])), credits: k("credits"),
+};
+const month = new Intl.DateTimeFormat(HTML_LANG[lang], { month: "long", year: "numeric" }).format(new Date(`${PRICES.mortgage.month}-15`));
+const links = { buy: pathFor(lang, ed, "buy"), consult: pathFor(lang, ed, "consult"), map: pathFor(lang, ed, "map"), pages: [...pages] };
+const cfg = { labels, links, photos, briefs: BRIEFS[lang] ?? {}, mortgage: { rate: PRICES.mortgage.rate, month },
+  projects: PROJECTS.map((p) => ({ id: p.id, name: p.name, developer: p.developer, muni: p.muni, lon: p.lon, lat: p.lat, render: p.render, from: p.from, showcase: `${pathFor(lang, ed, "partners")}${p.devSlug}/${p.muni}/` })) };
+const chips = [["price", "chip.price"], ["g10", "chip.g10"], ["rent", "chip.rent"], ["yield", "chip.yield"]] as const;
+const overlays = [["golf", "chip.golf"], ["beach", "chip.beach"], ["devs", "chip.devs"]] as const;
+const amount = Math.round(300000 * (fx ? fx.rate : 1));
+---
+<div class={`m3 m3-${mode}`} data-m3 data-mode={mode} data-locale={HTML_LANG[lang]} data-fx={fx ? fx.rate : ""} data-cur={fx ? cur : ""} data-quarter={lastQ}>
+  <div class="m3-stage">
+    <picture>
+      <source media="(max-width: 819px)" srcset="/img/map3-poster-m.webp" width="640" height="1274" />
+      <img class="m3-poster" src="/img/map3-poster-1200.webp" srcset="/img/map3-poster-1200.webp 1200w, /img/map3-poster-1800.webp 1800w" sizes="100vw" width="1200" height="693" alt={c("map.legend.m2", lang, { quarter: qLabel })} loading={mode === "home" ? "lazy" : "eager"} fetchpriority={mode === "page" ? "high" : undefined} />
+    </picture>
+    <div class="m3-canvas" data-canvas></div>
+    <div class="m3-labels" data-labels aria-hidden="true"></div>
+    <span class="m3-tip" data-tip hidden></span>
+
+    <div class="m3-top">
+      <button type="button" class="m3-searchbtn" data-spot-open aria-haspopup="dialog">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg>
+        <span>{k("search.short")}</span><kbd>⌘K</kbd>
+      </button>
+      {mode === "page" && (
+        <div class="m3-chips" role="group" aria-label={k("layers")}>
+          {chips.map(([id, key], i) => <button type="button" class="m3-chip" data-layer={id} aria-pressed={i === 0 ? "true" : "false"}>{k(key)}</button>)}
+          <span class="m3-sep" aria-hidden="true"></span>
+          {overlays.map(([id, key]) => <button type="button" class="m3-chip m3-chip-o" data-overlay={id} aria-pressed="false">{k(key)}</button>)}
+        </div>
+      )}
+      <div class="m3-seg" role="group" aria-label={`${k("day")} / ${k("night")}`}>
+        <button type="button" data-night="0" aria-pressed="true" aria-label={k("day")}><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><span>{k("day")}</span></button>
+        <button type="button" data-night="1" aria-pressed="false" aria-label={k("night")}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"/></svg><span>{k("night")}</span></button>
+      </div>
+    </div>
+
+    <div class="m3-dock">
+      <div class="m3-budget">
+        <div class="m3-budget-head">
+          <span class="m3-k">{k("budget.label")}</span>
+          <button type="button" class="m3-amount" data-amount title={k("budget.tap")}>{nf.format(amount)} {fx ? cur : "€"}</button>
+          <input class="m3-amount-in" data-amount-in type="text" inputmode="numeric" hidden aria-label={k("budget.label")} />
+        </div>
+        <div class="m3-slider" data-slider role="slider" tabindex="0" aria-label={k("budget.label")} aria-valuemin="100000" aria-valuemax="20000000" aria-valuenow="300000">
+          <span class="m3-track"><span class="m3-fill" data-fill></span></span><span class="m3-thumb" data-thumb></span>
+        </div>
+        <p class="m3-sentence" data-sentence aria-live="polite"></p>
+      </div>
+      {mode === "page" && (
+        <div class="m3-tools">
+          <div class="m3-time" data-time>
+            <button type="button" class="m3-play" data-play aria-label={k("play")}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></button>
+            <div class="m3-scrub" data-scrub role="slider" tabindex="0" aria-label={k("time")}><span class="m3-track"><span class="m3-fill" data-sfill></span></span><span class="m3-thumb" data-sthumb></span></div>
+            <span class="m3-year" data-year>{lastQ.slice(0, 4)}</span>
+          </div>
+          <div class="m3-tours" role="group" aria-label={k("tours")}>
+            {(["coast", "golf", "madeira", "time"] as const).map((t) => <button type="button" class="m3-tour" data-tour={t}>{k(`tour.${t}`)}</button>)}
+          </div>
+        </div>
+      )}
+      <div class="m3-legend" data-legend><span data-lo></span><span class="m3-ramp"></span><span data-hi></span><span class="m3-legend-t" data-legend-t></span></div>
+      {mode === "home" && <a class="m3-open" href={links.map}>{c("home2.map.a", lang)}</a>}
+    </div>
+
+    <aside class="m3-sheet" data-sheet hidden aria-live="polite">
+      <button type="button" class="m3-grab" data-grab aria-hidden="true" tabindex="-1"><span></span></button>
+      <div class="m3-sheet-in" data-sheet-in></div>
+    </aside>
+    <p class="m3-caption" data-caption hidden aria-live="polite"></p>
+    <p class="m3-toast" data-toast role="status" hidden></p>
+    <p class="m3-attr small">{k("credits")}</p>
+  </div>
+
+  <div class="m3-spot" data-spot hidden role="dialog" aria-modal="true" aria-label={k("search")}>
+    <div class="m3-spot-box">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg>
+      <input type="search" data-spot-in role="combobox" aria-expanded="true" aria-controls={`m3-res-${mode}`} aria-autocomplete="list" autocomplete="off" placeholder={k("search")} />
+      <ul id={`m3-res-${mode}`} role="listbox" data-spot-res></ul>
+    </div>
+  </div>
+
+  <noscript><style is:inline>.m3-top, .m3-dock { display: none !important; }</style><p class="m3-noscript">{k("noscript")}</p></noscript>
+  {mode === "page" && (
+    <details class="region mapx-list m3-list">
+      <summary><h2 class="h3">{c("map.list", lang)}</h2></summary>
+      <table class="cmp">
+        <thead><tr><th scope="col">{c("data.col.place", lang)}</th><th scope="col">{c("map.col.m2", lang)}</th></tr></thead>
+        <tbody>{MAP_MUNIS.map((m) => (
+          <tr><th><a href={`${links.map}?place=${m.s}`}>{m.n}</a> <small>{c(`map.r.${m.r}`, lang)}</small>{pages.has(m.s) && <> <a href={`${links.map}${m.s}/`}>{c("map.a.page", lang)}</a></>}</th><td>{m.v ? eur(m.v, lang) : "—"}</td></tr>
+        ))}</tbody>
+      </table>
+    </details>
+  )}
+  <script type="application/json" data-m3-cfg set:html={JSON.stringify(cfg)} />
+</div>
+
+<script>
+  // Fetched once the page is idle, so the map never competes with the first paint.
+  const run = () => import("../scripts/map-v3").then(({ initMapV3 }) => document.querySelectorAll<HTMLElement>("[data-m3]").forEach((el) => initMapV3(el)));
+  "requestIdleCallback" in window ? requestIdleCallback(run, { timeout: 1200 }) : setTimeout(run, 300);
+</script>

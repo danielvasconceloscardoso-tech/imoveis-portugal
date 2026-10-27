@@ -3,6 +3,10 @@
 // Mobile first (prompt 10); header and concierge menu from prompt 19. One sticky action at the bottom of
 // the screen on phones. Prompt 11: one trust line, in the footer (no repeated trust bar). noindex until launch, canonical and hreflang.
 import "../styles/v2.css";
+import "@fontsource-variable/manrope/wght.css";
+import "@fontsource-variable/playfair-display/wght.css";
+import "../styles/d2.css";
+import Chrome from "../components/Chrome.astro";
 import serif from "@fontsource-variable/newsreader/files/newsreader-latin-wght-normal.woff2?url";
 import d2serif from "@fontsource-variable/playfair-display/files/playfair-display-latin-wght-normal.woff2?url";
 import d2sans from "@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2?url";
@@ -14,8 +18,8 @@ import CountryBar from "../components/CountryBar.astro";
 
 type Sticky = { href: string; label: string } | null;
 // `paths` overrides the URL per language for pages below a page key (e.g. one calculator under "sims").
-interface Props { lang: Lang; ed: EdCode; page: PageKey | "home"; title: string; description: string; sticky?: Sticky; d2?: boolean; paths?: Record<Lang, string>; noindex?: boolean; canonicalUrl?: string; ogType?: string; ogImage?: string; alternates?: Record<Lang, string>; }
-const { lang, ed, page, title, description, paths, noindex = false, ogType = "website", ogImage, d2 = false } = Astro.props;
+interface Props { lang: Lang; ed: EdCode; page: PageKey | "home"; title: string; description: string; sticky?: Sticky; d2?: boolean; bodyClass?: string; paths?: Record<Lang, string>; noindex?: boolean; canonicalUrl?: string; ogType?: string; ogImage?: string; alternates?: Record<Lang, string>; }
+const { lang, ed, page, title, description, paths, noindex = false, ogType = "website", ogImage, d2 = true, bodyClass } = Astro.props;
 const urlFor = (l: Lang) => paths ? paths[l] : pathFor(l, ed, page);
 const host = config.domainMode === "primary" ? config.primaryDomain : EDITIONS[ed].domain;
 const canonical = Astro.props.canonicalUrl ?? `https://${host}${urlFor(lang)}`;
@@ -64,9 +68,9 @@ import DemoBar from "../components/DemoBar.astro";
     {page === "home" && <script type="application/ld+json" set:html={JSON.stringify({ "@context": "https://schema.org", "@type": "Organization", name: "Imóveis Portugal", url: `https://${host}/`, email: config.contactEmail, description: description, areaServed: ["LU", "FR", "CH", "BR", "US", "IL", "PT"] })} />}
     <slot name="head" />
   </head>
-  <body data-ed={ed} class={[sticky && !d2 ? "has-sticky" : "", d2 ? "d2" : ""].filter(Boolean).join(" ") || undefined}>
+  <body data-ed={ed} class={[sticky && !d2 ? "has-sticky" : "", d2 ? "d2" : "", d2 && page !== "home" ? "d2p" : "", bodyClass ?? ""].filter(Boolean).join(" ") || undefined}>
     <a class="skip" href="#main">{c("common.skip", lang)}</a>
-    <header class="hd">
+    <header class={d2 && page !== "home" ? "hd solid" : "hd"}>
       <div class="frame">
         <a class="word" href={pathFor(lang, ed, "home")}>Imóveis Portugal<span class="beta">{c("common.beta", lang)}</span></a>
         <nav class="nav" aria-label="Menu">
@@ -81,6 +85,8 @@ import DemoBar from "../components/DemoBar.astro";
             {LANGS.map((l, i) => <>{i > 0 && <span aria-hidden="true">·</span>}<a href={urlFor(l)} hreflang={HTML_LANG[l]} lang={HTML_LANG[l]} aria-current={l === lang ? "true" : undefined}>{l.toUpperCase()}</a></>)}
           </p>
           <a class="nl" href={subscribe}>{c("common.newsletter", lang)}</a>
+          {d2 && <button type="button" class="hd-find" data-find-open aria-label={c("find.open", lang)}><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg><kbd>⌘K</kbd></button>}
+          {d2 && <a class="hd-cg" href={pathFor(lang, ed, "consult")} data-concierge>{c("find.concierge", lang)}</a>}
           <details class="concierge">
             <summary><span class="open">{c("common.menu", lang)}</span><span class="shut">{c("common.close", lang)}</span></summary>
             <div class="cmenu">
@@ -179,6 +185,7 @@ import DemoBar from "../components/DemoBar.astro";
         new IntersectionObserver(function (e) { st.classList.toggle("off", e[0].isIntersecting); }).observe(pr);
       })();
     </script>
+    {d2 && <Chrome lang={lang} ed={ed} page={page} />}
     <DemoBar />
 </body>
 </html>

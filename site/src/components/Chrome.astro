@@ -1,0 +1,54 @@
+---
+// One click from everything (prompt 35 §3.3-3.4, D61): the mobile tab bar with the five sections and the Concierge,
+// one search for the whole site (the magnifier, ⌘K), and the concierge as a sheet over the page the reader is on.
+// Without JavaScript the tab bar is plain links and the Concierge goes to its page.
+import Flow from "./Flow.astro";
+import { pathFor, type Lang, type EdCode, type PageKey } from "../i18n";
+import { c } from "../lib/copy";
+import "../styles/chrome.css";
+
+interface Props { lang: Lang; ed: EdCode; page: PageKey | "home"; }
+const { lang, ed, page } = Astro.props;
+const I: Record<string, string> = {
+  journey: '<path d="M5 19c3-1 4-4 7-7s5-5 7-7"/><circle cx="5" cy="19" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="5" r="1.6"/>',
+  map: '<path d="M3 6.5 9 4l6 2.5L21 4v13.5L15 20l-6-2.5L3 20z"/><path d="M9 4v13.5M15 6.5V20"/>',
+  sims: '<rect x="5" y="3" width="14" height="18" rx="3"/><path d="M8.5 7.5h7M8.5 12h.01M12 12h.01M15.5 12h.01M8.5 15.5h.01M12 15.5h.01M15.5 15.5h.01"/>',
+  faq: '<path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4h0A2.5 2.5 0 0 1 4 13.5z"/><path d="M10 8.2a2 2 0 1 1 2.7 1.9c-.5.2-.7.6-.7 1.1M12 13.4h.01"/>',
+  partners: '<circle cx="8.5" cy="8" r="3"/><circle cx="16.5" cy="9" r="2.5"/><path d="M3 19c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5M14.5 14.2c2.6-.4 5 1.2 5.6 4.8"/>',
+  concierge: '<path d="M4 17h16M6 17a6 6 0 0 1 12 0M12 8V6M10 6h4"/><path d="M3 20h18"/>',
+};
+const tabs = [
+  { k: "journey", href: pathFor(lang, ed, "journey"), on: ["journey", "casa", "buy", "dossiers", "guide", "private"] },
+  { k: "map", href: pathFor(lang, ed, "map"), on: ["map", "data"] },
+  { k: "sims", href: pathFor(lang, ed, "sims"), on: ["sims"] },
+  { k: "faq", href: pathFor(lang, ed, "faq"), on: ["faq"] },
+  { k: "partners", href: pathFor(lang, ed, "partners"), on: ["partners", "ours", "talk"] },
+];
+const L = { place: c("find.g.place", lang), faq: c("find.g.faq", lang), sim: c("find.g.sim", lang), step: c("find.g.step", lang), page: c("find.g.page", lang), none: c("find.none", lang) };
+---
+<nav class="tabbar" aria-label="Menu">
+  {tabs.map((t) => <a href={t.href} aria-current={t.on.includes(page) ? "page" : undefined}><svg viewBox="0 0 24 24" aria-hidden="true" set:html={I[t.k]} /><span>{c(`common.navx.${t.k}`, lang)}</span></a>)}
+  <a href={pathFor(lang, ed, "consult")} class="tab-cg" data-concierge aria-current={page === "consult" ? "page" : undefined}><svg viewBox="0 0 24 24" aria-hidden="true" set:html={I.concierge} /><span>{c("find.concierge", lang)}</span></a>
+</nav>
+
+<div class="fd" data-find hidden role="dialog" aria-modal="true" aria-label={c("find.open", lang)} data-index={`/search/${lang}-${ed}.json`} data-labels={JSON.stringify(L)}>
+  <div class="fd-box">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg>
+    <input type="search" data-find-in role="combobox" aria-expanded="true" aria-controls="fd-res" aria-autocomplete="list" autocomplete="off" placeholder={c("find.ph", lang)} />
+    <ul id="fd-res" role="listbox" data-find-res></ul>
+  </div>
+</div>
+
+{page !== "consult" && (
+  <div class="sh-back" data-sheet-back hidden></div>
+  <aside class="sh" data-sheet hidden role="dialog" aria-modal="true" aria-label={c("flow.c.title", lang)}>
+    <span class="sh-grab" aria-hidden="true"></span>
+    <div class="sh-top"><p class="sh-title">{c("flow.c.title", lang)}</p><button type="button" class="sh-x" data-sheet-x aria-label={c("flow.close", lang)}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+    <div class="sh-in"><Flow lang={lang} ed={ed} flow="concierge" param="concierge" sheet /></div>
+  </aside>
+)}
+
+<script>
+  import { initChrome } from "../scripts/chrome";
+  initChrome();
+</script>

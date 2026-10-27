@@ -5961,3 +5961,673 @@ Design v2 home (prompt 32, D59). Every block: one to three sentences, at most 45
 - PT: Mais
 - EN: More
 - FR: Plus
+
+## map3
+
+Prompt 36 (D62): map v3. Budget gesture, layer chips, Day/Night, search, time, compare, tours, the place sheet.
+
+### budget.label
+- PT: O seu orçamento
+- EN: Your budget
+- FR: Votre budget
+
+### budget.tap
+- PT: Toque no valor para o escrever
+- EN: Tap the amount to type it
+- FR: Touchez le montant pour le saisir
+
+### sentence
+- PT: Com cerca de {b}, compra perto de {a} m² em {pa} e {c} m² em {pc}.
+- EN: Around {b} buys about {a} m² in {pa}, {c} m² in {pc}.
+- FR: Avec environ {b}, on achète près de {a} m² à {pa} et {c} m² à {pc}.
+
+### sentence.one
+- PT: Com cerca de {b}, compra perto de {a} m² em {pa}.
+- EN: Around {b} buys about {a} m² in {pa}.
+- FR: Avec environ {b}, on achète près de {a} m² à {pa}.
+
+### medians
+- PT: Medianas do INE, {q}.
+- EN: INE medians, {q}.
+- FR: Médianes de l'INE, {q}.
+
+### reach
+- PT: Os lugares a brilhar compram 100 m² ou mais com este valor.
+- EN: The glowing places buy 100 m² or more at this amount.
+- FR: Les lieux qui brillent offrent 100 m² ou plus à ce montant.
+
+### chip.price
+- PT: Preço
+- EN: Price
+- FR: Prix
+
+### chip.g10
+- PT: 10 anos
+- EN: 10 years
+- FR: 10 ans
+
+### chip.rent
+- PT: Renda
+- EN: Rent
+- FR: Loyer
+
+### chip.yield
+- PT: Rentabilidade
+- EN: Yield
+- FR: Rendement
+
+### chip.golf
+- PT: Golfe
+- EN: Golf
+- FR: Golf
+
+### chip.beach
+- PT: Praias
+- EN: Beaches
+- FR: Plages
+
+### chip.devs
+- PT: Novos empreendimentos
+- EN: New developments
+- FR: Programmes neufs
+
+### layers
+- PT: Camadas do mapa
+- EN: Map layers
+- FR: Couches de la carte
+
+### legend.price
+- PT: Preço mediano por m², {q}
+- EN: Median price per m², {q}
+- FR: Prix médian au m², {q}
+
+### legend.g10
+- PT: Variação do preço em 10 anos
+- EN: Price change over 10 years
+- FR: Évolution du prix sur 10 ans
+
+### legend.rent
+- PT: Renda mediana por m² e mês, {q}
+- EN: Median rent per m² a month, {q}
+- FR: Loyer médian au m² par mois, {q}
+
+### legend.yield
+- PT: Rentabilidade bruta do arrendamento
+- EN: Gross rental yield
+- FR: Rendement locatif brut
+
+### day
+- PT: Dia
+- EN: Day
+- FR: Jour
+
+### night
+- PT: Noite
+- EN: Night
+- FR: Nuit
+
+### search
+- PT: Procurar um lugar, uma praia ou um campo de golfe
+- EN: Search a place, a beach or a golf course
+- FR: Chercher un lieu, une plage ou un golf
+
+### search.short
+- PT: Procurar
+- EN: Search
+- FR: Rechercher
+
+### g.munis
+- PT: Concelhos
+- EN: Municipalities
+- FR: Communes
+
+### g.pars
+- PT: Freguesias
+- EN: Parishes
+- FR: Paroisses
+
+### g.golf
+- PT: Campos de golfe
+- EN: Golf courses
+- FR: Golfs
+
+### g.beach
+- PT: Praias
+- EN: Beaches
+- FR: Plages
+
+### g.devs
+- PT: Empreendimentos parceiros
+- EN: Partner developments
+- FR: Programmes partenaires
+
+### card.price
+- PT: Preço por m²
+- EN: Price per m²
+- FR: Prix au m²
+
+### card.g10
+- PT: Em 10 anos
+- EN: Over 10 years
+- FR: Sur 10 ans
+
+### card.rent
+- PT: Renda por m², mês
+- EN: Rent per m², month
+- FR: Loyer au m², mois
+
+### card.homes
+- PT: Ver casas aqui
+- EN: See homes here
+- FR: Voir les biens ici
+
+### card.concierge
+- PT: Falar com o concierge
+- EN: Talk to the concierge
+- FR: Parler au concierge
+
+### card.compare
+- PT: Comparar
+- EN: Compare
+- FR: Comparer
+
+### card.details
+- PT: Detalhes
+- EN: Details
+- FR: Détails
+
+### card.pickb
+- PT: Toque noutro lugar para comparar com {a}.
+- EN: Tap another place to compare with {a}.
+- FR: Touchez un autre lieu pour comparer avec {a}.
+
+### card.buys
+- PT: Com o seu orçamento: {v} m²
+- EN: With your budget: {v} m²
+- FR: Avec votre budget : {v} m²
+
+### card.m2b
+- PT: m² com o orçamento
+- EN: m² for your budget
+- FR: m² avec votre budget
+
+### time
+- PT: Ano
+- EN: Year
+- FR: Année
+
+### play
+- PT: Ver dez anos a passar
+- EN: Play ten years
+- FR: Voir dix ans défiler
+
+### pause
+- PT: Pausa
+- EN: Pause
+- FR: Pause
+
+### tours
+- PT: Visitas guiadas
+- EN: Guided tours
+- FR: Visites guidées
+
+### tour.coast
+- PT: A costa, do Porto à Comporta
+- EN: The coast, from Porto to Comporta
+- FR: La côte, de Porto à Comporta
+
+### tour.golf
+- PT: Golfe no Algarve
+- EN: Golf on the Algarve
+- FR: Le golf en Algarve
+
+### tour.madeira
+- PT: Madeira
+- EN: Madeira
+- FR: Madère
+
+### tour.time
+- PT: Dez anos em vinte segundos
+- EN: Ten years in twenty seconds
+- FR: Dix ans en vingt secondes
+
+### tour.takeover
+- PT: Toque no mapa para tomar o controlo.
+- EN: Touch the map to take over.
+- FR: Touchez la carte pour reprendre la main.
+
+### tour.golfcap
+- PT: {n} campos de golfe no Algarve, à beira do Atlântico.
+- EN: {n} golf courses on the Algarve, along the Atlantic.
+- FR: {n} golfs en Algarve, le long de l'Atlantique.
+
+### tour.timecap
+- PT: Preço mediano por m², {q}.
+- EN: Median price per m², {q}.
+- FR: Prix médian au m², {q}.
+
+### open
+- PT: Abrir o mapa
+- EN: Open the map
+- FR: Ouvrir la carte
+
+### close
+- PT: Fechar
+- EN: Close
+- FR: Fermer
+
+### noscript
+- PT: O mapa precisa de JavaScript. A lista dos 308 concelhos, com o preço de cada um, está logo abaixo.
+- EN: The map needs JavaScript. The list of all 308 municipalities, with each one's price, is just below.
+- FR: La carte a besoin de JavaScript. La liste des 308 communes, avec le prix de chacune, est juste en dessous.
+
+### credits
+- PT: Fonte: INE · © OpenStreetMap contributors · Relevo: Terrain Tiles (AWS Open Data) · Noite: NASA Black Marble
+- EN: Source: INE · © OpenStreetMap contributors · Relief: Terrain Tiles (AWS Open Data) · Night: NASA Black Marble
+- FR: Source : INE · © OpenStreetMap contributors · Relief : Terrain Tiles (AWS Open Data) · Nuit : NASA Black Marble
+
+## flow
+
+Prompt 35 §3 (D61): the requests as one question at a time (concierge, partner request, private viewing). Same fields, data, consent and routing as the Tally forms (ops/TALLY_CONSULTA.md, ops/SETUP.md §4). Submission: ops/ARCHITECTURE.md.
+
+### back
+- PT: Voltar
+- EN: Back
+- FR: Retour
+
+### next
+- PT: Continuar
+- EN: Continue
+- FR: Continuer
+
+### skip
+- PT: Saltar
+- EN: Skip
+- FR: Passer
+
+### of
+- PT: {i} de {n}
+- EN: {i} of {n}
+- FR: {i} sur {n}
+
+### close
+- PT: Fechar
+- EN: Close
+- FR: Fermer
+
+### c.title
+- PT: Falar com o concierge
+- EN: Talk to the concierge
+- FR: Parler au concierge
+
+### c.lede
+- PT: Uma primeira conversa de 30 minutos por vídeo, gratuita, com a nossa agência parceira. Uma pergunta de cada vez, um minuto no total.
+- EN: A free first 30-minute video call with our partner agency. One question at a time, about a minute in all.
+- FR: Un premier échange vidéo de 30 minutes, gratuit, avec notre agence partenaire. Une question à la fois, une minute en tout.
+
+### c.country
+- PT: Onde vive?
+- EN: Where do you live?
+- FR: Où vivez-vous ?
+
+### other
+- PT: Outro país
+- EN: Another country
+- FR: Un autre pays
+
+### c.budget
+- PT: Qual é, mais ou menos, o seu orçamento?
+- EN: Roughly what is your budget?
+- FR: Quel est, à peu près, votre budget ?
+
+### c.budget.1
+- PT: Até 300 mil €
+- EN: Up to €300k
+- FR: Jusqu'à 300 k€
+
+### c.budget.2
+- PT: 300 mil € a 1 M€
+- EN: €300k to €1M
+- FR: 300 k€ à 1 M€
+
+### c.budget.3
+- PT: 1 a 5 M€
+- EN: €1M to €5M
+- FR: 1 à 5 M€
+
+### c.budget.4
+- PT: Mais de 5 M€
+- EN: Over €5M
+- FR: Plus de 5 M€
+
+### c.purpose
+- PT: Para quê?
+- EN: What is it for?
+- FR: Pour quoi faire ?
+
+### c.purpose.1
+- PT: Casa para viver
+- EN: A home to live in
+- FR: Résidence principale
+
+### c.purpose.2
+- PT: Casa de férias
+- EN: A holiday home
+- FR: Résidence secondaire
+
+### c.purpose.3
+- PT: Rendimento de arrendamento
+- EN: Rental income
+- FR: Revenus locatifs
+
+### c.purpose.4
+- PT: Regresso a Portugal
+- EN: Returning to Portugal
+- FR: Retour au Portugal
+
+### c.purpose.5
+- PT: Investimento
+- EN: Investment
+- FR: Investissement
+
+### c.when
+- PT: Quando pensa comprar?
+- EN: When do you plan to buy?
+- FR: Quand pensez-vous acheter ?
+
+### c.when.1
+- PT: Nos próximos 3 meses
+- EN: Within 3 months
+- FR: Dans les 3 mois
+
+### c.when.2
+- PT: Entre 3 e 12 meses
+- EN: In 3 to 12 months
+- FR: Entre 3 et 12 mois
+
+### c.when.3
+- PT: Daqui a mais de um ano
+- EN: In more than a year
+- FR: Dans plus d'un an
+
+### c.when.4
+- PT: Ainda não sei
+- EN: Not sure yet
+- FR: Je ne sais pas encore
+
+### c.fin
+- PT: Como pensa pagar?
+- EN: How do you plan to pay?
+- FR: Comment pensez-vous payer ?
+
+### c.fin.1
+- PT: Pronto pagamento
+- EN: Cash
+- FR: Comptant
+
+### c.fin.2
+- PT: Com crédito
+- EN: With a mortgage
+- FR: Avec un crédit
+
+### c.fin.3
+- PT: Ainda não decidi
+- EN: Not decided yet
+- FR: Pas encore décidé
+
+### c.nif
+- PT: Já tem NIF português?
+- EN: Do you already have a Portuguese tax number (NIF)?
+- FR: Avez-vous déjà un NIF portugais ?
+
+### yes
+- PT: Sim
+- EN: Yes
+- FR: Oui
+
+### no
+- PT: Ainda não
+- EN: Not yet
+- FR: Pas encore
+
+### c.place
+- PT: Onde, em Portugal?
+- EN: Where in Portugal?
+- FR: Où, au Portugal ?
+
+### c.place.ph
+- PT: Uma região, um concelho, ou "ainda não sei"
+- EN: A region, a town, or "not sure yet"
+- FR: Une région, une commune, ou « je ne sais pas encore »
+
+### c.lang
+- PT: Em que língua prefere falar?
+- EN: Which language would you like for the call?
+- FR: Dans quelle langue préférez-vous échanger ?
+
+### c.window
+- PT: Quando lhe dá mais jeito? (hora de Lisboa)
+- EN: When suits you best? (Lisbon time)
+- FR: Quel moment vous convient le mieux ? (heure de Lisbonne)
+
+### c.window.1
+- PT: Dias úteis, ao fim do dia
+- EN: Weekdays, early evening
+- FR: En semaine, en fin de journée
+
+### c.window.2
+- PT: Dias úteis, durante o dia
+- EN: Weekdays, during the day
+- FR: En semaine, en journée
+
+### c.window.3
+- PT: Ao sábado de manhã
+- EN: Saturday morning
+- FR: Le samedi matin
+
+### contact
+- PT: Como lhe respondemos?
+- EN: How should we reply?
+- FR: Comment vous répondre ?
+
+### name
+- PT: Nome
+- EN: Name
+- FR: Nom
+
+### email
+- PT: Email
+- EN: Email
+- FR: E-mail
+
+### phone
+- PT: Telefone (opcional)
+- EN: Phone (optional)
+- FR: Téléphone (facultatif)
+
+### consent.h
+- PT: Uma última coisa
+- EN: One last thing
+- FR: Une dernière chose
+
+### c.consent
+- PT: Autorizo o envio deste pedido à {agency} (AMI {ami}), agência imobiliária parceira, para me contactar sobre ele. Li a política de privacidade.
+- EN: I agree that this request is sent to {agency} (AMI {ami}), the partner estate agency, to contact me about it. I have read the privacy policy.
+- FR: J'accepte que cette demande soit transmise à {agency} (AMI {ami}), agence immobilière partenaire, pour me recontacter. J'ai lu la politique de confidentialité.
+
+### send
+- PT: Enviar pedido
+- EN: Send request
+- FR: Envoyer la demande
+
+### sending
+- PT: A enviar…
+- EN: Sending…
+- FR: Envoi…
+
+### review
+- PT: O seu pedido
+- EN: Your request
+- FR: Votre demande
+
+### fallback
+- PT: Não conseguimos enviar daqui. Envie-o por email, já está escrito:
+- EN: We couldn't send it from here. Send it by email, it's already written:
+- FR: L'envoi n'a pas abouti d'ici. Envoyez-la par e-mail, elle est déjà rédigée :
+
+### fallback.btn
+- PT: Abrir o email
+- EN: Open the email
+- FR: Ouvrir l'e-mail
+
+### invalid.email
+- PT: Este email não parece completo.
+- EN: This email address doesn't look complete.
+- FR: Cette adresse e-mail semble incomplète.
+
+### p.title
+- PT: Falar com um parceiro
+- EN: Talk to a partner
+- FR: Parler à un partenaire
+
+### p.cat
+- PT: Sobre o quê?
+- EN: What is it about?
+- FR: À quel sujet ?
+
+### p.question
+- PT: Qual é a sua pergunta?
+- EN: What is your question?
+- FR: Quelle est votre question ?
+
+### p.question.ph
+- PT: Em duas ou três frases. Sem dados pessoais sensíveis.
+- EN: In two or three sentences. No sensitive personal details.
+- FR: En deux ou trois phrases. Sans données personnelles sensibles.
+
+### p.consent
+- PT: Autorizo que o meu pedido seja usado para me responderem e, se eu pedir, enviado a um parceiro da categoria escolhida. Li a política de privacidade.
+- EN: I agree that my request is used to reply to me and, if I ask, passed to a partner in the chosen category. I have read the privacy policy.
+- FR: J'accepte que ma demande serve à me répondre et, si je le demande, soit transmise à un partenaire de la catégorie choisie. J'ai lu la politique de confidentialité.
+
+### p.done.h
+- PT: Recebido. Respondemos por email.
+- EN: Received. We'll reply by email.
+- FR: Bien reçu. Nous répondons par e-mail.
+
+### p.done.p
+- PT: Normalmente em dois dias úteis. Entretanto, o passo a passo e o mapa estão aqui.
+- EN: Usually within two working days. Meanwhile, the step-by-step guide and the map are here.
+- FR: En général sous deux jours ouvrés. En attendant, le pas à pas et la carte sont là.
+
+### v.title
+- PT: Pedir uma visita privada
+- EN: Ask for a private viewing
+- FR: Demander une visite privée
+
+### v.how
+- PT: Como prefere visitar?
+- EN: How would you like to view it?
+- FR: Comment souhaitez-vous visiter ?
+
+### v.how.1
+- PT: Por videochamada
+- EN: By video call
+- FR: En visioconférence
+
+### v.how.2
+- PT: Ao vivo, em Portugal
+- EN: In person, in Portugal
+- FR: Sur place, au Portugal
+
+### v.done.h
+- PT: Pedido enviado à nossa agência parceira.
+- EN: Request sent to our partner agency.
+- FR: Demande transmise à notre agence partenaire.
+
+### v.done.p
+- PT: A {agency} confirma a data por email, normalmente em dois dias úteis.
+- EN: {agency} will confirm the date by email, usually within two working days.
+- FR: {agency} confirme la date par e-mail, en général sous deux jours ouvrés.
+
+## find
+
+Prompt 35 §3.3 (D61): one search for the whole site (the magnifier, ⌘K on desktop).
+
+### open
+- PT: Procurar
+- EN: Search
+- FR: Rechercher
+
+### ph
+- PT: Um lugar, uma pergunta, um simulador…
+- EN: A place, a question, a calculator…
+- FR: Un lieu, une question, un simulateur…
+
+### g.place
+- PT: Lugares
+- EN: Places
+- FR: Lieux
+
+### g.faq
+- PT: Perguntas
+- EN: Questions
+- FR: Questions
+
+### g.sim
+- PT: Simuladores
+- EN: Calculators
+- FR: Simulateurs
+
+### g.step
+- PT: Passo a passo
+- EN: Step by step
+- FR: Pas à pas
+
+### g.page
+- PT: Páginas
+- EN: Pages
+- FR: Pages
+
+### none
+- PT: Nada encontrado. Experimente outra palavra.
+- EN: Nothing found. Try another word.
+- FR: Aucun résultat. Essayez un autre mot.
+
+### concierge
+- PT: Concierge
+- EN: Concierge
+- FR: Concierge
+
+## simx
+
+Prompt 35 §3.8 (D61): the simulators' result as one large number, the detail on demand.
+
+### detail
+- PT: Ver o detalhe
+- EN: See the breakdown
+- FR: Voir le détail
+
+## pathx
+
+Prompt 35 §3.1 (D61): the path's start as one question at a time.
+
+### door
+- PT: Por onde começamos?
+- EN: Where shall we start?
+- FR: Par où commençons-nous ?
+
+### country
+- PT: Onde vive?
+- EN: Where do you live?
+- FR: Où vivez-vous ?
+
+### budget
+- PT: Mais ou menos, quanto?
+- EN: Roughly how much?
+- FR: À peu près, combien ?
+
+### when
+- PT: Para quando?
+- EN: For when?
+- FR: Pour quand ?

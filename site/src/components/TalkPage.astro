@@ -4,7 +4,7 @@
 // Buying or selling a home goes only to the partner agency (D14, D17). Wording: COPY_DECK.md "talk.*".
 import V2 from "../layouts/V2.astro";
 import BriefBox from "./BriefBox.astro";
-import Embed from "./Embed.astro";
+import Flow from "./Flow.astro";
 import Calls from "./Calls.astro";
 import { config } from "../config";
 import { pathFor, type Lang, type EdCode } from "../i18n";
@@ -40,11 +40,10 @@ const site = config.agency.website.replace(/^https:\/\/|\/$/g, "");
         </a>
       ))}
     </div>
-    <h2 id="form">{c("talk.form.h", lang)}</h2>
+    <h2 id="form" class="vh">{c("talk.form.h", lang)}</h2>
     <p>{c("talk.form.intro", lang)}</p>
-    <BriefBox lang={lang} ed={ed} />
-    <Embed id={config.forms.partnerRequest[lang]} title={c("talk.form.h", lang)} cta={c("talk.form.cta", lang)} subject={c("talk.form.h", lang)} hidden={{ edition: ed, lang }} height={520} brief />
-    <p class="small" style="margin-top:12px"><a href={pathFor(lang, ed, "privacy")}>{c("common.privacy", lang)}</a></p>
+    <div class="not-prose"><Flow lang={lang} ed={ed} flow="partner" /></div>
+    <div style="margin-top:32px"><BriefBox lang={lang} ed={ed} /></div>
   </div>
   <script is:inline>
     (function () {
@@ -52,8 +51,6 @@ const site = config.agency.website.replace(/^https:\/\/|\/$/g, "");
       if (!cat) return;
       var card = document.querySelector('[data-cat="' + cat + '"]');
       if (card) { card.style.borderColor = "var(--accent)"; card.style.boxShadow = "0 0 0 3px var(--accent-soft)"; }
-      var f = document.querySelector(".form-box iframe");
-      if (f && f.src.indexOf("tally.so") > -1) f.src += "&category=" + encodeURIComponent(cat);
     })();
   </script>
 </V2>

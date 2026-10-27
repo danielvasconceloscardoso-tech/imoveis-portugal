@@ -1,0 +1,41 @@
+/* "Passo a passo" start (prompt 35 §3.1, D61): one question per screen, large choices that advance by themselves. */
+.pq-head { display: none; }
+.pstart.stepped .pq-head { display: flex; align-items: center; gap: 14px; height: 36px; }
+.pq-back { width: 36px; height: 36px; border-radius: 50%; border: 0; background: #f3f2ee; display: grid; place-items: center; cursor: pointer; color: #111214; flex: none; }
+.pq-back svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.pq-prog { flex: 1; height: 3px; border-radius: 3px; background: #e7e4dd; overflow: hidden; }
+.pq-prog span { display: block; height: 100%; width: 25%; background: #111214; border-radius: 3px; transition: width .3s cubic-bezier(.16, 1, .3, 1); }
+.pq-h { display: none; }
+.pstart.stepped .pq-h { display: block; margin: 26px 0 22px; font: 400 clamp(28px, 4vw, 38px)/1.12 var(--serif); letter-spacing: -.015em; outline: none; }
+.pstart.stepped .pq { display: none; }
+.pstart.stepped .pq.on { display: grid; gap: 14px; animation: pq-in .26s cubic-bezier(.16, 1, .3, 1) both; }
+@keyframes pq-in { from { opacity: 0; transform: translateX(20px); } }
+.pstart.stepped .pchoices { display: block; }
+body.d2 .pdoor { border: 0; border-radius: 20px; background: #f3f2ee; padding: 26px 24px; transition: background-color .22s cubic-bezier(.16, 1, .3, 1), color .22s; }
+body.d2 .pdoor:hover { background: #ebe9e3; }
+body.d2 .pdoor[aria-pressed="true"] { background: #111214; color: #fff; box-shadow: none; }
+body.d2 .pdoor[aria-pressed="true"] .pd-p { color: rgba(255, 255, 255, .75); }
+.pstart.stepped .cbar { display: block; }
+.pstart.stepped .cbar-l { display: none; }
+.pstart.stepped .cbar-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+.pstart.stepped .cbar-list a { display: flex; align-items: center; min-height: 60px; padding: 0 20px; border-radius: 18px; background: #f3f2ee; font: 600 17px/1.2 var(--sans); text-decoration: none; color: #111214; border: 0; transition: background-color .22s; }
+.pstart.stepped .cbar-list a:hover { background: #ebe9e3; }
+.pstart.stepped .cbar-list a[aria-current="true"] { background: #111214; color: #fff; }
+.pstart.stepped .pfield > span:first-child, .pstart.stepped .pfield > span[data-for] { font-size: 13px; color: #5d6066; }
+body.d2 .pfield input { border: 0; border-bottom: 1.5px solid #d9d5cc; border-radius: 0; background: none; padding: 6px 0; min-height: 0; font: 400 clamp(40px, 5vw, 56px)/1.1 var(--serif); max-width: 9ch; box-shadow: none; }
+body.d2 .pfield input:focus { border-bottom-color: var(--accent); box-shadow: none; }
+.pq-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.pq-chip { border: 0; border-radius: 999px; background: #f3f2ee; padding: 10px 16px; font: 600 14px/1 var(--sans); cursor: pointer; color: #111214; }
+.pq-chip:hover { background: #ebe9e3; }
+.pq-next { justify-self: start; margin-top: 12px; min-height: 52px; padding: 0 28px; border: 0; border-radius: 14px; background: #111214; color: #fff; font: 700 15px/1 var(--sans); cursor: pointer; }
+.pq-next:hover { background: var(--accent); }
+.pstart:not(.stepped) .pq-next, .pstart:not(.stepped) .pq-chips { display: none; }
+.pstart.stepped .pwhen legend { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.pstart.stepped .pwhen { display: grid; gap: 10px; }
+.pstart.stepped .pwhen label { position: relative; display: flex; align-items: center; min-height: 60px; padding: 0 20px; border-radius: 18px; background: #f3f2ee; font: 600 17px/1.2 var(--sans); cursor: pointer; transition: background-color .22s, color .22s; }
+.pstart.stepped .pwhen label:hover { background: #ebe9e3; }
+.pstart.stepped .pwhen input { position: absolute; opacity: 0; }
+.pstart.stepped .pwhen label:has(input:checked) { background: #111214; color: #fff; }
+.pstart.stepped .pwhen label:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 3px; }
+.pstart.stepped .pq[data-q="4"] .btn { display: none; }
+@media (prefers-reduced-motion: reduce) { .pstart.stepped .pq.on { animation: none; } }

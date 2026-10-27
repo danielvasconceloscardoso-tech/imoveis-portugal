@@ -1,0 +1,24 @@
+---
+// One request as one question at a time (prompt 35 §3.9, D61): scripts/flow.ts renders it from lib/flows.ts.
+// `param` is the URL key that holds the step (every state a link). Without JavaScript: a ready-written email.
+import { flowConfig, type FlowId } from "../lib/flows";
+import { config } from "../config";
+import { type Lang, type EdCode } from "../i18n";
+import { c } from "../lib/copy";
+import "../styles/flow.css";
+
+interface Props { lang: Lang; ed: EdCode; flow: FlowId; param?: string; hidden?: Record<string, string>; sheet?: boolean; }
+const { lang, ed, flow, param = "step", hidden = {}, sheet = false } = Astro.props;
+const cfg = flowConfig(flow, lang, ed, hidden);
+const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${cfg.title} (${ed} · ${lang})`)}`;
+---
+<div class="fl" data-flow={flow} data-param={param} {...(sheet ? { "data-sheet-flow": "" } : {})}>
+  <div class="fl-stage" data-flow-stage></div>
+  <noscript><p class="fl-lede">{cfg.lede}</p><p><a class="fl-btn" href={mail}>{c("flow.fallback.btn", lang)}</a></p></noscript>
+  <script type="application/json" data-flow-cfg set:html={JSON.stringify(cfg)} />
+</div>
+
+<script>
+  import { initFlow } from "../scripts/flow";
+  document.querySelectorAll<HTMLElement>("[data-flow]:not([data-sheet-flow])").forEach((el) => { if (!(el as any).__flow) (el as any).__flow = initFlow(el, { param: el.dataset.param! }); });
+</script>

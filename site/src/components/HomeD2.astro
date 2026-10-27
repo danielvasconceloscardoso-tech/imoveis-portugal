@@ -2,10 +2,7 @@
 // Design v2 home (prompt 32, D59, "the Claridge's pass"): the film or photograph with the path bar, then one idea per
 // section, one to three sentences and one action each, a lot of space. Every feature stays as in v1: the map is the
 // same component, the path bar opens the same path. Wording: content/copy/COPY_DECK.md, blocks "home2.*".
-import "@fontsource-variable/manrope/wght.css";
-import "@fontsource-variable/playfair-display/wght.css";
-import "../styles/d2.css";
-import MapExplorer from "./MapExplorer.astro";
+import MapV3 from "./MapV3.astro";
 import { ED_ORDER, HTML_LANG, eur, pathFor, type EdCode, type Lang } from "../i18n";
 import { Sources, EDITION_CUR, RATE, fmtDate, homeExample } from "../lib/content";
 import { c } from "../lib/copy";
@@ -115,9 +112,8 @@ const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("h
     <h2 id="h2-map">{c("home2.map.h", lang)}</h2>
     <p>{c("home2.map.p", lang)}<Fragment set:html={sup([nMap])} /></p>
   </div>
-  {/* Full-bleed, no frame (prompt 32): the same map component, only its presentation changes here. */}
-  <div class="h2-mapbleed"><MapExplorer lang={lang} ed={ed} mode="home" /></div>
-  <p class="h2-center h2-mapcta"><a class="h2-btn" href={pathFor(lang, ed, "map")}>{c("home2.map.a", lang)}</a></p>
+  {/* Full-bleed, no frame (prompt 32); map v3 (prompt 36): the slow rotation stops after 15 s or at the first touch. */}
+  <div class="h2-m3"><MapV3 lang={lang} ed={ed} mode="home" /></div>
 </section>
 
 <section class="h2-sec h2-places" aria-labelledby="h2-places">
@@ -234,19 +230,6 @@ const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("h
     const start = () => { film.preload = "auto"; film.play().then(() => film.classList.add("on")).catch(() => {}); };
     const idle = () => ("requestIdleCallback" in window ? (window as any).requestIdleCallback(start, { timeout: 2500 }) : setTimeout(start, 1200));
     if (document.readyState === "complete") idle(); else addEventListener("load", idle, { once: true });
-  }
-  // The map's slow arrival: once, from the Atlantic onto the coast, on the sand band (D60).
-  const mx = document.querySelector<HTMLElement>(".mapx-home");
-  if (mx) {
-    const more = mx.querySelector<HTMLButtonElement>("[data-more]"); more?.addEventListener("click", () => { const o = mx.classList.toggle("more-open"); more.setAttribute("aria-expanded", String(o)); });
-    new MutationObserver((_, ob) => {
-      if (!mx.classList.contains("is-live")) return; ob.disconnect();
-      const m = (mx as any).__mapx.map(); try { m.setPaintProperty("bg", "background-color", "#f8f4ed"); } catch {}
-      if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-      const narrow = mx.clientWidth < 700, end = narrow ? { center: [-8.05, 39.55], zoom: 5.75, pitch: 36, bearing: -6 } : { center: [-8.15, 39.6], zoom: 6.55, pitch: 42, bearing: -8 };
-      m.jumpTo({ center: [-13.2, 39.2], zoom: end.zoom - 1.1, pitch: 20, bearing: end.bearing - 25 });
-      m.flyTo({ ...end, duration: 6500, curve: 1.2, easing: (x: number) => 1 - Math.pow(1 - x, 3), essential: false });
-    }).observe(mx, { attributes: true, attributeFilter: ["class"] });
   }
   // The header sits on the photograph until the page scrolls.
   const hd = document.querySelector(".hd"); const on = () => hd?.classList.toggle("solid", scrollY > 40); on(); addEventListener("scroll", on, { passive: true });

@@ -6,6 +6,7 @@
 // Without JavaScript the page is two plain ordered lists with everything open. Wording: COPY_DECK.md "path.*".
 import V2 from "../layouts/V2.astro";
 import CountryBar from "./CountryBar.astro";
+import "../styles/path2.css";
 import { pathFor, HTML_LANG, type Lang, type EdCode } from "../i18n";
 import { Sources, fmtDate, faqFor, RATE, EDITION_CUR } from "../lib/content";
 import { stationsFor, faqPlace, type Door } from "../lib/path";
@@ -57,27 +58,44 @@ const rate = cur ? RATE(cur).rate : 0;
     </div>
 
     <form class="frame read pstart" data-start>
-      <div class="pdoors">
-        {DOORS.map((d) => (
-          <button type="button" class="pdoor" data-door={d} aria-pressed={d === "buy" ? "true" : "false"}>
-            <span class="pd-h">{c(`path.door.${d}`, lang)}</span>
-            <span class="pd-p">{c(`path.door.${d}.p`, lang)}</span>
-          </button>
-        ))}
+      {/* Prompt 35 §3.1: with JavaScript, one question per screen that advances by itself; without it, everything at once. */}
+      <div class="pq-head" aria-hidden="true"><button type="button" class="pq-back" data-pq-back tabindex="-1"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><span class="pq-prog"><span data-pq-prog></span></span></div>
+      <div class="pq" data-q="1">
+        <h2 class="pq-h">{c("pathx.door", lang)}</h2>
+        <div class="pdoors">
+          {DOORS.map((d) => (
+            <button type="button" class="pdoor" data-door={d} aria-pressed={d === "buy" ? "true" : "false"}>
+              <span class="pd-h">{c(`path.door.${d}`, lang)}</span>
+              <span class="pd-p">{c(`path.door.${d}.p`, lang)}</span>
+            </button>
+          ))}
+        </div>
       </div>
       <div class="pchoices">
-        <CountryBar lang={lang} ed={ed} href={(x) => pathFor(lang, x, "journey")} />
-        <label class="pfield">
-          <span data-for="buy">{c("path.q.budget", lang)}</span><span data-for="sell">{c("path.q.value", lang)}</span>
-          <input type="text" inputmode="numeric" autocomplete="off" data-budget placeholder="300 000" />
-          <span class="small" data-local-out aria-live="polite"></span>
-        </label>
-        <label class="pcheck" data-for="sell"><input type="checkbox" data-inherited /> {c("path.q.inherited", lang)}</label>
-        <fieldset class="pwhen">
-          <legend>{c("path.q.timing", lang)}</legend>
-          {["soon", "year", "later"].map((t) => <label><input type="radio" name="when" value={t} checked={t === "year"} /> {c(`path.t.${t}`, lang)}</label>)}
-        </fieldset>
-        <button class="btn" type="submit">{c("path.start", lang)}</button>
+        <div class="pq" data-q="2">
+          <h2 class="pq-h">{c("pathx.country", lang)}</h2>
+          <CountryBar lang={lang} ed={ed} href={(x) => pathFor(lang, x, "journey")} />
+          <button type="button" class="pq-next" data-pq-next>{c("flow.next", lang)}</button>
+        </div>
+        <div class="pq" data-q="3">
+          <h2 class="pq-h">{c("pathx.budget", lang)}</h2>
+          <label class="pfield">
+            <span data-for="buy">{c("path.q.budget", lang)}</span><span data-for="sell">{c("path.q.value", lang)}</span>
+            <input type="text" inputmode="numeric" autocomplete="off" data-budget placeholder="300 000" />
+            <span class="small" data-local-out aria-live="polite"></span>
+          </label>
+          <div class="pq-chips">{[300000, 500000, 1000000, 2000000].map((v) => <button type="button" class="pq-chip" data-chip={v}>{new Intl.NumberFormat(HTML_LANG[lang], { notation: "compact", maximumFractionDigits: 1 }).format(v)} €</button>)}</div>
+          <label class="pcheck" data-for="sell"><input type="checkbox" data-inherited /> {c("path.q.inherited", lang)}</label>
+          <button type="button" class="pq-next" data-pq-next>{c("flow.next", lang)}</button>
+        </div>
+        <div class="pq" data-q="4">
+          <h2 class="pq-h">{c("pathx.when", lang)}</h2>
+          <fieldset class="pwhen">
+            <legend>{c("path.q.timing", lang)}</legend>
+            {["soon", "year", "later"].map((t) => <label><input type="radio" name="when" value={t} checked={t === "year"} /> <span>{c(`path.t.${t}`, lang)}</span></label>)}
+          </fieldset>
+          <button class="btn" type="submit">{c("path.start", lang)}</button>
+        </div>
       </div>
     </form>
 
@@ -209,6 +227,30 @@ const rate = cur ? RATE(cur).rate : 0;
     st.when = $<HTMLInputElement>('input[name="when"]:checked')?.value || "year";
   };
   start.addEventListener("submit", (e) => { e.preventDefault(); read(); st.started = true; save(); render(true); });
+  // One question per screen (prompt 35 §3.1): doors and timing advance by themselves; country and amount by "Continue".
+  {
+    const qs = $$<HTMLElement>(".pq", start), prog = $("[data-pq-prog]", start)!, backB = $<HTMLButtonElement>("[data-pq-back]", start)!;
+    let qi = 0;
+    const showQ = (n: number, focus = true) => {
+      qi = Math.max(0, Math.min(n, qs.length - 1));
+      qs.forEach((q, k) => q.classList.toggle("on", k === qi));
+      prog.style.width = `${((qi + 1) / qs.length) * 100}%`; backB.style.visibility = qi ? "visible" : "hidden"; backB.tabIndex = qi ? 0 : -1;
+      if (focus) $(".pq-h", qs[qi])?.focus({ preventScroll: true });
+    };
+    start.classList.add("stepped");
+    qs.forEach((q) => $(".pq-h", q)?.setAttribute("tabindex", "-1"));
+    $$("button[data-door]", start).forEach((b) => b.addEventListener("click", () => setTimeout(() => showQ(1), reduce ? 0 : 220)));
+    $$("[data-pq-next]", start).forEach((b) => b.addEventListener("click", () => showQ(qi + 1)));
+    $$<HTMLButtonElement>("[data-chip]", start).forEach((b) => b.addEventListener("click", () => { input.value = nf.format(Number(b.dataset.chip)); read(); render(); setTimeout(() => showQ(3), reduce ? 0 : 220); }));
+    $$<HTMLInputElement>('input[name="when"]', start).forEach((r) => r.addEventListener("change", () => setTimeout(() => start.requestSubmit(), reduce ? 0 : 260)));
+    input.addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); showQ(3); } });
+    backB.addEventListener("click", () => showQ(qi - 1));
+    $("[data-change]")!.addEventListener("click", () => showQ(0, false));
+    // Choosing another country opens that edition's path: it continues at the amount.
+    $$<HTMLAnchorElement>(".cbar a", start).forEach((a) => a.addEventListener("click", () => { const u = new URL(a.href); u.searchParams.set("pq", "3"); a.href = u.href; }));
+    const pq = Number(new URLSearchParams(location.search).get("pq"));
+    showQ(pq >= 1 && pq <= qs.length ? pq - 1 : 0, false);
+  }
   $("[data-change]")!.addEventListener("click", () => { st.started = false; save(); render(); start.scrollIntoView({ behavior: reduce ? "auto" : "smooth" }); });
 
   // The route

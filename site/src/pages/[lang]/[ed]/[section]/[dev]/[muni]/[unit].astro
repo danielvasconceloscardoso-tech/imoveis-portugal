@@ -9,6 +9,7 @@ import { RATE, EDITION_CUR } from "../../../../../../lib/content";
 import { SUB } from "../../../../../../lib/tools";
 import { config } from "../../../../../../config";
 import { c } from "../../../../../../lib/copy";
+import Flow from "../../../../../../components/Flow.astro";
 
 export function getStaticPaths() {
   return LANGS.flatMap((lang) => ED_ORDER.flatMap((ed) => PROJECTS.flatMap((p) => (p.units ?? []).map((u) => ({
@@ -26,7 +27,9 @@ const ask = `${pathFor(lang, ed, "consult")}?project=${encodeURIComponent(p.name
   <ShowcaseHome lang={lang} locale={HTML_LANG[lang]} project={p} unit={u} back={back} sim={`${pathFor(lang, ed, "sims")}${SUB.cost[lang]}/`} label={c("common.sponsored", lang)} cur={k ? { code: k, rate: RATE(k).rate } : undefined}>
     <div slot="viewing">
       <p>{c("show.viewing.p", lang, { to })}</p>
-      <p>{r !== "developer" && <a class="btn" href={ask}>{c("show.viewing", lang)}</a>} {r !== "agency" && p.url && <a class="btn ghost" href={p.url} rel="sponsored noopener">{c("map.proj.askdev", lang)}</a>}</p>
+      {r !== "developer" && <Flow lang={lang} ed={ed} flow="viewing" hidden={{ project: p.name, unit: u.ref, price: u.price ? String(u.price) : "" }} />}
+      {r !== "agency" && p.url && <p><a class="btn ghost" href={p.url} rel="sponsored noopener">{c("map.proj.askdev", lang)}</a></p>}
+      <noscript><p><a class="btn" href={ask}>{c("show.viewing", lang)}</a></p></noscript>
     </div>
   </ShowcaseHome>
 </V2>
