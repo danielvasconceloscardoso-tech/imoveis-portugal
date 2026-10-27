@@ -164,13 +164,13 @@ for (const id of [...USED, ...EDS.flatMap((e) => COUNTRIES[e].items.flatMap((i) 
 
 // ---------- assets and style (brief: design/v2/BRIEF.md) ----------
 const b64 = (p: string) => readFileSync(join(site, p)).toString("base64");
-const serif = b64("node_modules/@fontsource-variable/newsreader/files/newsreader-latin-opsz-normal.woff2");
-const sans4 = b64("node_modules/@fontsource/public-sans/files/public-sans-latin-400-normal.woff2");
-const sans6 = b64("node_modules/@fontsource/public-sans/files/public-sans-latin-600-normal.woff2");
-const C = { ink: "#15181d", muted: "#5c6066", rule: "#e2ddd4", paper: "#f6f3ee", accent: "#1e3a5f", gold: "#8a6623", s1: "#9db4cf", s2: "#4f74a0", s3: "#1e3a5f" };
+const serif = b64("node_modules/@fontsource-variable/playfair-display/files/playfair-display-latin-wght-normal.woff2");
+const sans4 = b64("node_modules/@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2");
+const sans6 = b64("node_modules/@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2");
+const C = { ink: "#0a0a0a", muted: "#5f6368", rule: "#e3e3e3", paper: "#ffffff", accent: "#2f5d50", gold: "#5f6368", s1: "#c8d8d1", s2: "#55806f", s3: "#2f5d50" };
 const css = `
 @font-face{font-family:S;src:url(data:font/woff2;base64,${serif}) format("woff2");font-weight:200 800}
-@font-face{font-family:P;src:url(data:font/woff2;base64,${sans4}) format("woff2");font-weight:400}
+@font-face{font-family:P;src:url(data:font/woff2;base64,${sans4}) format("woff2");font-weight:200 800}
 @font-face{font-family:P;src:url(data:font/woff2;base64,${sans6}) format("woff2");font-weight:600}
 @page{size:A4;margin:0}
 *{box-sizing:border-box}body{margin:0;font:400 10pt/1.55 P,sans-serif;color:${C.ink}}

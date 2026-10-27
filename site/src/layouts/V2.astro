@@ -3,7 +3,7 @@
 // Mobile first (prompt 10); header and concierge menu from prompt 19. One sticky action at the bottom of
 // the screen on phones. Prompt 11: one trust line, in the footer (no repeated trust bar). noindex until launch, canonical and hreflang.
 import "../styles/v2.css";
-import serif from "@fontsource-variable/newsreader/files/newsreader-latin-wght-normal.woff2?url";
+import serif from "@fontsource-variable/playfair-display/files/playfair-display-latin-wght-normal.woff2?url";
 import { config } from "../config";
 import { EDITIONS, ED_ORDER, LANGS, LANG_NAME, HTML_LANG, pathFor, type Lang, type EdCode, type PageKey } from "../i18n";
 import { c, edName } from "../lib/copy";
@@ -39,7 +39,7 @@ import DemoBar from "../components/DemoBar.astro";
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="theme-color" content="#f6f3ee" />
+    <meta name="theme-color" content="#ffffff" />
     <title>{title}</title>
     <meta name="description" content={description} />
     {(!config.launchReady || noindex) && <meta name="robots" content="noindex, nofollow" />}

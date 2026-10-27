@@ -26,9 +26,9 @@ type Cfg = {
 
 const reduce = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 const lowPower = () => (navigator as any).hardwareConcurrency && (navigator as any).hardwareConcurrency <= 2;
-// D44: a quiet sequential green from eau-de-nil to bottle green; the selection in brass.
-const GREENS = ["#eef4ef", "#c9dccf", "#8fb39e", "#4f7d66", "#1f4a3d"];
-const NODATA = "#e6e8e6", BRASS = "#7a5e28", INK = "#16181c";
+// D50: a quiet sequential green from pale to our deep green; the selection in near-black.
+const GREENS = ["#eef3f1", "#c8d8d1", "#8faea2", "#55806f", "#2f5d50"];
+const NODATA = "#ececec", BRASS = "#0a0a0a", INK = "#0a0a0a";
 const plain = (s: string) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
 
 export function initMapExplorer(root: HTMLElement) {
@@ -114,7 +114,7 @@ export function initMapExplorer(root: HTMLElement) {
     const b = breaks[metric] || []; const cols = metric === "m2" ? [...GREENS].reverse() : GREENS;  // more space = deeper green
     const stops: any[] = []; b.forEach((v, i) => { if (i === 0 || v > b[i - 1]) stops.push(v, cols[i]); });
     const scale = stops.length >= 4 ? ["interpolate", ["linear"], ["get", k], ...stops] : cols[2];
-    return ["case", ["boolean", ["feature-state", "sel"], false], BRASS, ["boolean", ["feature-state", "hover"], false], "#b59a5e", ["==", ["get", k], null], NODATA, scale];
+    return ["case", ["boolean", ["feature-state", "sel"], false], BRASS, ["boolean", ["feature-state", "hover"], false], "#5f6368", ["==", ["get", k], null], NODATA, scale];
   }
   function paint() {
     if (!map || !map.getLayer("muni-3d")) return;
@@ -189,7 +189,7 @@ export function initMapExplorer(root: HTMLElement) {
     const bi = qs.indexOf("2019-Q4");
     if (bi > 0 && s.m2[0] != null) svg += `<line x1="${x(bi)}" x2="${x(bi)}" y1="${pt}" y2="${h - pb}" stroke="#d4dbd5" stroke-dasharray="3 4"/>`;
     if (pv.length) svg += line(s.m2, Math.max(...pv) * 1.1, INK, (v) => eur.format(v), 2);
-    if (rv.length) svg += line(s.rq, Math.max(...rv) * 1.9, "#1f4a3d", (v) => eur2.format(v), 1.6);
+    if (rv.length) svg += line(s.rq, Math.max(...rv) * 1.9, "#2f5d50", (v) => eur2.format(v), 1.6);
     return svg + "</svg>";
   }
   function showCard(slug: string) {
@@ -279,13 +279,13 @@ export function initMapExplorer(root: HTMLElement) {
   async function shareImage() {
     if (!selected || !P) return; const s = P.munis[selected], p = byS.get(selected)!; const i = last();
     const c = document.createElement("canvas"); c.width = 1080; c.height = 1350; const g = c.getContext("2d")!;
-    g.fillStyle = "#ffffff"; g.fillRect(0, 0, 1080, 1350); g.fillStyle = "#1f4a3d"; g.fillRect(0, 0, 1080, 14);
-    g.fillStyle = INK; g.font = "500 30px 'Public Sans', sans-serif"; g.fillText((L.regions[p.r] || "").toUpperCase(), 80, 130);
-    g.font = "400 104px 'Newsreader Variable', Georgia, serif"; g.fillText(p.n, 80, 250, 920);
+    g.fillStyle = "#ffffff"; g.fillRect(0, 0, 1080, 1350); g.fillStyle = "#2f5d50"; g.fillRect(0, 0, 1080, 14);
+    g.fillStyle = INK; g.font = "500 30px 'Manrope Variable', sans-serif"; g.fillText((L.regions[p.r] || "").toUpperCase(), 80, 130);
+    g.font = "400 104px 'Playfair Display Variable', Georgia, serif"; g.fillText(p.n, 80, 250, 920);
     const v = s?.m2[i];
     if (v) {
-      g.font = "400 150px 'Newsreader Variable', Georgia, serif"; g.fillStyle = "#1f4a3d"; g.fillText(nf.format(Math.round(budget / v)) + " m²", 80, 440, 920);
-      g.fillStyle = INK; g.font = "400 36px 'Public Sans', sans-serif"; g.fillText(L.imgFor.replace("{b}", eur.format(budget)), 80, 510, 920);
+      g.font = "400 150px 'Playfair Display Variable', Georgia, serif"; g.fillStyle = "#2f5d50"; g.fillText(nf.format(Math.round(budget / v)) + " m²", 80, 440, 920);
+      g.fillStyle = INK; g.font = "400 36px 'Manrope Variable', sans-serif"; g.fillText(L.imgFor.replace("{b}", eur.format(budget)), 80, 510, 920);
       g.fillText(L.median.replace("{v}", eur.format(v)).replace("{quarter}", qLabel(P.quarters[i])), 80, 565, 920);
     }
     const vals = (s?.m2 ?? []).map((x, k) => [k, x] as const).filter(([, x]) => x != null) as [number, number][];
@@ -293,10 +293,10 @@ export function initMapExplorer(root: HTMLElement) {
       const hi = Math.max(...vals.map(([, x]) => x)) * 1.1, X = (k: number) => 80 + (k / (P!.quarters.length - 1)) * 920, Y = (x: number) => 1120 - (x / hi) * 420;
       g.strokeStyle = "#d4dbd5"; g.lineWidth = 2; g.beginPath(); g.moveTo(80, 1120); g.lineTo(1000, 1120); g.stroke();
       g.strokeStyle = INK; g.lineWidth = 5; g.beginPath(); vals.forEach(([k, x], j) => (j ? g.lineTo(X(k), Y(x)) : g.moveTo(X(k), Y(x)))); g.stroke();
-      g.fillStyle = "#5d6066"; g.font = "400 28px 'Public Sans', sans-serif"; g.fillText(P.quarters[vals[0][0]].slice(0, 4), 80, 1165); g.textAlign = "right"; g.fillText(P.quarters[i].slice(0, 4), 1000, 1165); g.textAlign = "left";
+      g.fillStyle = "#5f6368"; g.font = "400 28px 'Manrope Variable', sans-serif"; g.fillText(P.quarters[vals[0][0]].slice(0, 4), 80, 1165); g.textAlign = "right"; g.fillText(P.quarters[i].slice(0, 4), 1000, 1165); g.textAlign = "left";
     }
-    g.fillStyle = "#5d6066"; g.font = "400 26px 'Public Sans', sans-serif"; g.fillText(L.imgSrc, 80, 1250, 920);
-    g.fillStyle = INK; g.font = "400 34px 'Newsreader Variable', Georgia, serif"; g.fillText("Imóveis Portugal", 80, 1300);
+    g.fillStyle = "#5f6368"; g.font = "400 26px 'Manrope Variable', sans-serif"; g.fillText(L.imgSrc, 80, 1250, 920);
+    g.fillStyle = INK; g.font = "400 34px 'Playfair Display Variable', Georgia, serif"; g.fillText("Imóveis Portugal", 80, 1300);
     const blob: Blob | null = await new Promise((r) => c.toBlob(r, "image/png"));
     if (!blob) return;
     const file = new File([blob], `imoveis-portugal-${selected}.png`, { type: "image/png" });

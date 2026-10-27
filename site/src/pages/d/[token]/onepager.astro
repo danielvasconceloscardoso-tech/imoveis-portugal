@@ -4,7 +4,7 @@
 // viewing flow with the qualified summary, their own website, and the illustrative monthly report. Printed to PDF by
 // scripts/demo-pdf.mjs into sponsors/demos/. Unlisted, noindex.
 import "@fontsource-variable/playfair-display";
-import "@fontsource-variable/jost";
+import "@fontsource-variable/manrope";
 import { DEMOS } from "../../../lib/demos";
 import { demoBuyer } from "../../../lib/demobuyer";
 import { demoProjects, img } from "../../../lib/projects";
@@ -27,28 +27,28 @@ const steps = walkSteps(d);
 <html lang="en"><head><meta charset="utf-8" /><meta name="robots" content="noindex, nofollow" /><title>{d.developer} · Imóveis Portugal</title>
 <style is:global>
   @page { size: A4 landscape; margin: 0; }
-  * { box-sizing: border-box; } body { margin: 0; font: 400 9.5pt/1.42 "Jost Variable", sans-serif; color: #111214; background: #fff; }
+  * { box-sizing: border-box; } body { margin: 0; font: 400 9.5pt/1.42 "Manrope Variable", sans-serif; color: #111214; background: #fff; }
   .page { width: 297mm; height: 210mm; overflow: hidden; display: grid; grid-template-columns: 96mm 1fr; }
   .cover { position: relative; } .cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .cover .t { position: absolute; left: 0; right: 0; bottom: 0; padding: 10mm 9mm 9mm; color: #fff; background: linear-gradient(transparent, rgba(0,0,0,.72)); }
-  .cover .k { font: 500 7pt/1 "Jost Variable"; letter-spacing: .16em; text-transform: uppercase; opacity: .9; }
+  .cover .k { font: 500 7pt/1 "Manrope Variable"; letter-spacing: .16em; text-transform: uppercase; opacity: .9; }
   .cover h1 { font: 400 22pt/1.05 "Playfair Display Variable", serif; margin: 3mm 0 2mm; } .cover .cr { font-size: 6.5pt; opacity: .8; }
   .body { padding: 9mm 10mm 7mm; display: grid; grid-template-rows: auto auto 1fr auto; gap: 4mm; }
   .strip { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2.2mm; } .strip div { font-size: 6.4pt; line-height: 1.25; }
   .strip img { width: 100%; height: 15mm; object-fit: cover; object-position: top; border: 1px solid #e6e6e3; display: block; margin-bottom: 1mm; }
-  .strip b { display: block; font: 400 8pt/1.1 "Playfair Display Variable", serif; color: #1f4a3d; } .strip i { color: #5f6368; }
+  .strip b { display: block; font: 400 8pt/1.1 "Playfair Display Variable", serif; color: #2f5d50; } .strip i { color: #5f6368; }
   .top { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid #111214; padding-bottom: 3mm; }
-  .brand { font: 500 13pt/1 "Playfair Display Variable", serif; } .brand i { display: inline-block; width: 6px; height: 6px; background: #1f4a3d; margin-right: 8px; vertical-align: middle; }
-  .flag { font: 500 7pt/1 "Jost Variable"; letter-spacing: .14em; text-transform: uppercase; color: #5f6368; }
+  .brand { font: 500 13pt/1 "Playfair Display Variable", serif; } .brand i { display: inline-block; width: 6px; height: 6px; background: #2f5d50; margin-right: 8px; vertical-align: middle; }
+  .flag { font: 500 7pt/1 "Manrope Variable"; letter-spacing: .14em; text-transform: uppercase; color: #5f6368; }
   .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 8mm; min-height: 0; }
-  h2 { font: 500 7pt/1 "Jost Variable"; letter-spacing: .14em; text-transform: uppercase; color: #5f6368; margin: 0 0 2.5mm; border-top: 1px solid #111214; padding-top: 2mm; }
+  h2 { font: 500 7pt/1 "Manrope Variable"; letter-spacing: .14em; text-transform: uppercase; color: #5f6368; margin: 0 0 2.5mm; border-top: 1px solid #111214; padding-top: 2mm; }
   .buyer { font: 400 15pt/1.15 "Playfair Display Variable", serif; margin: 0 0 3mm; }
   .three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3mm; margin-bottom: 4mm; } .three b { display: block; font: 400 17pt/1 "Playfair Display Variable", serif; } .three span { font-size: 7pt; color: #5f6368; }
   table { width: 100%; border-collapse: collapse; font-size: 8.5pt; } td, th { text-align: left; padding: 1.3mm 2mm 1.3mm 0; border-bottom: 1px solid #e6e6e3; } th { font-weight: 500; color: #5f6368; font-size: 7pt; } td.r, th.r { text-align: right; }
   ol.flow { margin: 0; padding: 0; list-style: none; counter-reset: f; } ol.flow li { counter-increment: f; padding: 1.4mm 0 1.4mm 8mm; position: relative; border-bottom: 1px solid #e6e6e3; }
-  ol.flow li::before { content: counter(f, decimal-leading-zero); position: absolute; left: 0; font: 400 10pt/1.2 "Playfair Display Variable", serif; color: #1f4a3d; }
+  ol.flow li::before { content: counter(f, decimal-leading-zero); position: absolute; left: 0; font: 400 10pt/1.2 "Playfair Display Variable", serif; color: #2f5d50; }
   .mail { background: #f6f5f2; padding: 3mm 3.5mm; margin: 2.5mm 0 0; } .mail p { margin: 0; } .mail .l { font: 400 10pt/1.4 "Playfair Display Variable", serif; margin: 1mm 0; }
-  .illus { display: inline-block; font: 500 6pt/1 "Jost Variable"; letter-spacing: .12em; text-transform: uppercase; border: 1px solid #111214; padding: 1.2mm 1.6mm; margin: 0 0 2mm; }
+  .illus { display: inline-block; font: 500 6pt/1 "Manrope Variable"; letter-spacing: .12em; text-transform: uppercase; border: 1px solid #111214; padding: 1.2mm 1.6mm; margin: 0 0 2mm; }
   .s { font-size: 6.8pt; color: #5f6368; } p { margin: 0 0 2mm; }
   .foot { font-size: 6.3pt; color: #5f6368; border-top: 1px solid #e6e6e3; padding-top: 2mm; display: flex; justify-content: space-between; gap: 6mm; }
 </style></head>

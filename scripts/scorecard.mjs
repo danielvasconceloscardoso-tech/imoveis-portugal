@@ -44,6 +44,9 @@ const BANNED = [
   /\bpor cima\b/i, /\bon top of the price\b/i, /\bon top, /i, /\ben plus du prix\b/i, /\bquem compra\b/i, /\bde quem compra\b/i, /\bceux qui ach[eè]tent\b/i, /\ba buyer who\b/i,
   /maison depuis l'[ée]tranger/i, /ce que vous achetez/i, /home from abroad/i,
   // D52: no tier or section words for high budgets ("Private consultation", D39's product name, is pending a CEO call).
+  // Prompt 23 §1.4: words that read as AI, in the three languages.
+  /\belev(ar|ate|ates|ating)\b/i, /\b[ée]lever\b/i, /experi[êe]ncia [úu]nica/i, /unique experience/i, /exp[ée]rience unique/i, /\bdesbloque(ar|ie)\b/i, /\bd[ée]bloque[rz]\b/i,
+  /no mundo de hoje/i, /in today's world/i, /dans le monde d'aujourd'hui/i, /n[ãa]o [ée] s[óo] .{1,40}, [ée] /i, /it's not just .{1,40}, it's/i, /ce n'est pas (seulement|juste) .{1,40}, c'est/i, /!/,
   /\bPrivate\b(?! consultation)/, /\bluxo\b/i, /\bluxury\b/i, /\bluxe\b/i, /\bpremium\b/i, /\b1 milh[ãa]o\b/i, /\b(€|one )?1 million\b/i, /\bun million\b/i,
 ];
 const AI = [/—/];
@@ -164,6 +167,9 @@ if (!args.has("--no-lh")) {
 }
 
 // Parity: every copy-deck block has PT, EN and FR (copy.ts throws otherwise); FAQ parity is scripts/check-parity.mjs.
+// Prompt 23 §3.2: the identity gate (warm colours, banned fonts, rounded-shadow cards), scripts/design/identity-check.mjs.
+let identity = "ok";
+try { execFileSync("node", [join(root, "scripts", "design", "identity-check.mjs")], { stdio: "pipe" }); } catch (e) { identity = String(e.stdout).trim(); fails.push(`identity: ${identity.split("\n").pop()}`); }
 let parity = "ok";
 try { execFileSync("node", [join(root, "scripts", "check-parity.mjs")], { stdio: "pipe" }); } catch (e) { parity = "failed"; fails.push(`parity: ${String(e.stdout).slice(0, 200)}`); }
 
@@ -180,7 +186,7 @@ if (Object.keys(lh).length) {
   for (const [k, s] of Object.entries(lh)) md += `| ${k} | ${s.performance ?? "-"} | ${s.accessibility ?? "-"} | ${s["best-practices"] ?? "-"} | ${s.seo ?? "-"} |\n`;
   md += "\n";
 }
-md += `## Parity\n\n${parity}\n\n## Result\n\n${fails.length ? fails.map((f) => `- ${f}`).join("\n") : "All thresholds met."}\n`;
+md += `## Identity (D50)\n\n${identity}\n\n## Parity\n\n${parity}\n\n## Result\n\n${fails.length ? fails.map((f) => `- ${f}`).join("\n") : "All thresholds met."}\n`;
 writeFileSync(join(root, "design", "SCORECARD.md"), md);
 console.log(fails.length ? `\n${fails.length} below threshold:\n${fails.join("\n")}` : "\nAll thresholds met.");
 process.exit(fails.length ? 1 : 0);

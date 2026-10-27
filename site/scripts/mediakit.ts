@@ -12,9 +12,9 @@ const require = createRequire(import.meta.url);
 const { chromium } = require("playwright"); // pre-installed in the build environment
 const b64 = (p: string) => readFileSync(p).toString("base64");
 const font = (p: string) => b64(require.resolve(p));
-const serif = font("@fontsource-variable/newsreader/files/newsreader-latin-opsz-normal.woff2");
-const sans4 = font("@fontsource/public-sans/files/public-sans-latin-400-normal.woff2");
-const sans6 = font("@fontsource/public-sans/files/public-sans-latin-600-normal.woff2");
+const serif = font("@fontsource-variable/playfair-display/files/playfair-display-latin-wght-normal.woff2");
+const sans4 = font("@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2");
+const sans6 = font("@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2");
 const out = join(process.cwd(), "..", "sponsors", "mediakit");
 mkdirSync(out, { recursive: true });
 
@@ -32,17 +32,17 @@ function html(lang: Lang, title: string, sub: string, photo: string, intro?: str
   const li = (k: string, v = {}) => cl(k, lang, v).map((x) => `<li>${x}</li>`).join("");
   const img = b64(join(process.cwd(), "ebooks", "img", photo));
   return `<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><style>
-@font-face{font-family:N;src:url(data:font/woff2;base64,${serif})}
-@font-face{font-family:P;font-weight:400;src:url(data:font/woff2;base64,${sans4})}
+@font-face{font-family:N;font-weight:400 900;src:url(data:font/woff2;base64,${serif})}
+@font-face{font-family:P;font-weight:200 800;src:url(data:font/woff2;base64,${sans4})}
 @font-face{font-family:P;font-weight:600;src:url(data:font/woff2;base64,${sans6})}
-@page{size:A4;margin:0}*{box-sizing:border-box}body{margin:0;font:400 10.5pt/1.55 P;color:#1b1d21;background:#fbf8f2}
+@page{size:A4;margin:0}*{box-sizing:border-box}body{margin:0;font:400 10.5pt/1.55 P;color:#0a0a0a;background:#ffffff}
 .pg{width:210mm;height:297mm;padding:22mm 20mm;position:relative;page-break-after:always;overflow:hidden}
 .cover{padding:0}.cover img{width:100%;height:58%;object-fit:cover;display:block}.cover .t{padding:16mm 20mm}
-.brand{font:500 15pt/1 N;letter-spacing:.01em}.ed{font:600 8pt/1 P;letter-spacing:.14em;text-transform:uppercase;color:#7a6a4f;margin-top:6px}
+.brand{font:500 15pt/1 N;letter-spacing:.01em}.ed{font:600 8pt/1 P;letter-spacing:.14em;text-transform:uppercase;color:#2f5d50;margin-top:6px}
 h1{font:400 27pt/1.12 N;margin:10mm 0 5mm;letter-spacing:-.01em}h2{font:400 17pt/1.2 N;margin:0 0 5mm}
-.lede{font-size:11.5pt;color:#43464b;max-width:150mm}hr{border:0;border-top:.4pt solid #cbbf9f;margin:6mm 0}
-table{width:100%;border-collapse:collapse;font-size:9.5pt}th,td{text-align:left;vertical-align:top;padding:3mm 3mm 3mm 0;border-bottom:.4pt solid #d9d0bb}
-th{width:52%;font-weight:600}th span{display:block;font-weight:400;color:#55585d;margin-top:1.5mm;font-size:9pt}thead th,thead td{font:600 7.5pt/1 P;letter-spacing:.1em;text-transform:uppercase;color:#7a6a4f}
+.lede{font-size:11.5pt;color:#43464b;max-width:150mm}hr{border:0;border-top:.4pt solid #e3e3e3;margin:6mm 0}
+table{width:100%;border-collapse:collapse;font-size:9.5pt}th,td{text-align:left;vertical-align:top;padding:3mm 3mm 3mm 0;border-bottom:.4pt solid #e3e3e3}
+th{width:52%;font-weight:600}th span{display:block;font-weight:400;color:#55585d;margin-top:1.5mm;font-size:9pt}thead th,thead td{font:600 7.5pt/1 P;letter-spacing:.1em;text-transform:uppercase;color:#2f5d50}
 ul{padding-left:4.5mm;margin:0}li{margin:0 0 2mm}.small{font-size:8.5pt;color:#6a6d72}.foot{position:absolute;left:20mm;right:20mm;bottom:14mm;font-size:8pt;color:#7a7d82;display:flex;justify-content:space-between}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:12mm}
 </style></head><body>

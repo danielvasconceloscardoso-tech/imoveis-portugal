@@ -1,6 +1,6 @@
 // Sponsor brochure, private to partners (prompt 21 §4, D38, D40; D52: the top product is "Wealth Partner"): the only place with prices. PDF, never linked from the site.
 // One per partner type (developers; tax, legal and wealth; banks and money transfer) in FR, EN and PT, in the report
-// design, with screenshots of the map, the prices section and the country path (sponsors/brochure/img, refreshed with
+// design, with screenshots of the map, the prices section and the country path (sponsors/brochure/img, refreshed by scripts/brochure-shots.mjs; see
 // the screenshot step in ops/BROCHURE.md). Prices: D40, flat annual fees excl. VAT (D6); no exclusivity before launch (D32).
 // Run from site/: npm run brochure · Output: ../sponsors/brochure/ImoveisPortugal_Brochure_{type}_{LANG}.pdf
 import { createRequire } from "node:module";
@@ -13,9 +13,9 @@ const require = createRequire(import.meta.url);
 const { chromium } = require("playwright");
 const b64 = (p: string) => readFileSync(p).toString("base64");
 const font = (p: string) => b64(require.resolve(p));
-const serif = font("@fontsource-variable/newsreader/files/newsreader-latin-opsz-normal.woff2");
-const sans4 = font("@fontsource/public-sans/files/public-sans-latin-400-normal.woff2");
-const sans6 = font("@fontsource/public-sans/files/public-sans-latin-600-normal.woff2");
+const serif = font("@fontsource-variable/playfair-display/files/playfair-display-latin-wght-normal.woff2");
+const sans4 = font("@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2");
+const sans6 = font("@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2");
 const dir = join(process.cwd(), "..", "sponsors", "brochure");
 const img = (n: string) => `data:image/jpeg;base64,${b64(join(dir, "img", `${n}.jpg`))}`;
 const cover = (n: string) => `data:image/jpeg;base64,${b64(join(process.cwd(), "ebooks", "img", n))}`;
@@ -106,17 +106,17 @@ function html(t: T, lang: Lang) {
   const photo = cover(t === "developers" ? "porto-douro-entardecer.jpg" : "porto-ponte-luis-i-noite.jpg");
   const foot = (n: number) => `<div class="foot"><span>Imóveis Portugal · ${x("label")}</span><span>${n}</span></div>`;
   return `<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><style>
-@font-face{font-family:N;src:url(data:font/woff2;base64,${serif})}@font-face{font-family:P;font-weight:400;src:url(data:font/woff2;base64,${sans4})}@font-face{font-family:P;font-weight:600;src:url(data:font/woff2;base64,${sans6})}
-@page{size:A4;margin:0}*{box-sizing:border-box}body{margin:0;font:400 10.5pt/1.55 P;color:#16181c;background:#f7f3eb}
+@font-face{font-family:N;font-weight:400 900;src:url(data:font/woff2;base64,${serif})}@font-face{font-family:P;font-weight:200 800;src:url(data:font/woff2;base64,${sans4})}@font-face{font-family:P;font-weight:600;src:url(data:font/woff2;base64,${sans6})}
+@page{size:A4;margin:0}*{box-sizing:border-box}body{margin:0;font:400 10.5pt/1.55 P;color:#0a0a0a;background:#ffffff}
 .pg{width:210mm;height:297mm;padding:20mm;position:relative;page-break-after:always;overflow:hidden}
 .cover{padding:0}.cover>img{width:100%;height:55%;object-fit:cover;display:block}.cover .t{padding:14mm 20mm}
-.brand{font:500 15pt/1 N}.lab{font:600 8pt/1 P;letter-spacing:.14em;text-transform:uppercase;color:#7a5e28;margin-top:6px}
-h1{font:400 28pt/1.12 N;margin:9mm 0 4mm}h2{font:400 16pt/1.2 N;margin:6mm 0 2.5mm;padding-top:3mm;border-top:.5pt solid #16181c}h2:first-child{margin-top:0}
-.lede{font:400 14pt/1.4 N}.small{font-size:8.5pt;color:#5d6066}
-.shots{display:grid;grid-template-columns:1fr 1fr;gap:6mm;margin-top:4mm}.shots figure{margin:0}.shots img{width:100%;display:block;border:.4pt solid #dcd4c4}.shots figcaption{font-size:8.5pt;color:#5d6066;margin-top:1.5mm}.shots b{display:block;font:400 11pt N;color:#16181c}
-table{width:100%;border-collapse:collapse}th,td{text-align:left;vertical-align:top;padding:3mm 0;border-bottom:.4pt solid #dcd4c4;font-weight:400}td{text-align:right;font:400 12.5pt N;white-space:nowrap;padding-left:6mm}
-.logic{font:400 18pt/1.3 N;margin:8mm 0 4mm;color:#1f4a3d}ul{padding-left:4.5mm}li{margin:0 0 1.8mm}
-.foot{position:absolute;left:20mm;right:20mm;bottom:11mm;font-size:7.5pt;color:#5d6066;display:flex;justify-content:space-between;border-top:.4pt solid #dcd4c4;padding-top:2mm}
+.brand{font:500 15pt/1 N}.lab{font:600 8pt/1 P;letter-spacing:.14em;text-transform:uppercase;color:#5f6368;margin-top:6px}
+h1{font:400 28pt/1.12 N;margin:9mm 0 4mm}h2{font:400 16pt/1.2 N;margin:6mm 0 2.5mm;padding-top:3mm;border-top:.5pt solid #0a0a0a}h2:first-child{margin-top:0}
+.lede{font:400 14pt/1.4 N}.small{font-size:8.5pt;color:#5f6368}
+.shots{display:grid;grid-template-columns:1fr 1fr;gap:6mm;margin-top:4mm}.shots figure{margin:0}.shots img{width:100%;display:block;border:.4pt solid #e3e3e3}.shots figcaption{font-size:8.5pt;color:#5f6368;margin-top:1.5mm}.shots b{display:block;font:400 11pt N;color:#0a0a0a}
+table{width:100%;border-collapse:collapse}th,td{text-align:left;vertical-align:top;padding:3mm 0;border-bottom:.4pt solid #e3e3e3;font-weight:400}td{text-align:right;font:400 12.5pt N;white-space:nowrap;padding-left:6mm}
+.logic{font:400 18pt/1.3 N;margin:8mm 0 4mm;color:#2f5d50}ul{padding-left:4.5mm}li{margin:0 0 1.8mm}
+.foot{position:absolute;left:20mm;right:20mm;bottom:11mm;font-size:7.5pt;color:#5f6368;display:flex;justify-content:space-between;border-top:.4pt solid #e3e3e3;padding-top:2mm}
 </style></head><body>
 <section class="pg cover"><img src="${photo}"><div class="t"><div class="brand">Imóveis Portugal</div><div class="lab">${x("label")}</div><h1>${x(`${t}.h`)}</h1><p class="lede">${x("cover")}</p></div></section>
 <section class="pg"><h2>${x("aud")}</h2><p>${x("aud.p")}</p><h2>${x("now")}</h2><p>${x("now.p")}</p><h2>${x("pos")}</h2><p>${x("pos.p")}</p>

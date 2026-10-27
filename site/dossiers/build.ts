@@ -21,9 +21,9 @@ const require = createRequire(import.meta.url);
 const { chromium } = require("playwright");
 const b64 = (p: string) => readFileSync(p).toString("base64");
 const font = (p: string) => b64(require.resolve(p));
-const serif = font("@fontsource-variable/newsreader/files/newsreader-latin-opsz-normal.woff2");
-const sans4 = font("@fontsource/public-sans/files/public-sans-latin-400-normal.woff2");
-const sans6 = font("@fontsource/public-sans/files/public-sans-latin-600-normal.woff2");
+const serif = font("@fontsource-variable/playfair-display/files/playfair-display-latin-wght-normal.woff2");
+const sans4 = font("@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2");
+const sans6 = font("@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2");
 const topo = JSON.parse(readFileSync(join(process.cwd(), "public", "data", "map", "munis.topo.json"), "utf8"));
 const geo = { features: topo.objects.m.geometries.map((g: any) => ({ properties: g.properties })) };
 
@@ -111,18 +111,18 @@ function html(p: In) {
   }
   const srcPage = page(`<h2>${c("dossier.sources.h", lang)}</h2><ol class="src">${src.map((id) => `<li>${FACTS[id].source_title}, ${FACTS[id].source_url} (${fmtDate(lang, FACTS[id].checked_on)})</li>`).join("")}</ol><hr><p class="small">${c("dossier.info", lang)}</p>`, pages.length + 2);
   return `<!doctype html><html lang="${HTML_LANG[lang]}"><head><meta charset="utf-8"><style>
-@font-face{font-family:N;src:url(data:font/woff2;base64,${serif})}@font-face{font-family:P;font-weight:400;src:url(data:font/woff2;base64,${sans4})}@font-face{font-family:P;font-weight:600;src:url(data:font/woff2;base64,${sans6})}
-@page{size:A4;margin:0}*{box-sizing:border-box}body{margin:0;font:400 10pt/1.55 P;color:#16181c;background:#f7f3eb}
+@font-face{font-family:N;font-weight:400 900;src:url(data:font/woff2;base64,${serif})}@font-face{font-family:P;font-weight:200 800;src:url(data:font/woff2;base64,${sans4})}@font-face{font-family:P;font-weight:600;src:url(data:font/woff2;base64,${sans6})}
+@page{size:A4;margin:0}*{box-sizing:border-box}body{margin:0;font:400 10pt/1.55 P;color:#0a0a0a;background:#ffffff}
 .pg{width:210mm;height:297mm;padding:20mm 20mm 24mm;position:relative;page-break-after:always;overflow:hidden}
 .cover{padding:0}.cover img{width:100%;height:56%;object-fit:cover;display:block}.cover .t{padding:14mm 20mm}
-.brand{font:500 15pt/1 N}.ed{font:600 8pt/1 P;letter-spacing:.14em;text-transform:uppercase;color:#7a5e28;margin-top:6px}
-h1{font:400 30pt/1.1 N;margin:9mm 0 4mm}h2{font:400 16pt/1.2 N;margin:7mm 0 3mm;padding-top:3mm;border-top:.5pt solid #16181c}h2:first-child{margin-top:0}h3{font:400 12.5pt/1.3 N;margin:6mm 0 2mm}
-.lede{font:400 14pt/1.35 N;color:#16181c}.small{font-size:8.3pt;color:#5d6066}sup{font-size:6.5pt;color:#1f4a3d;margin-left:1px}
-table{width:100%;border-collapse:collapse}.kv th,.kv td{padding:2.4mm 0;border-bottom:.4pt solid #dcd4c4;text-align:left;vertical-align:top}.kv td{text-align:right;font:400 11pt N}
-.grid th,.grid td{padding:2mm 2mm 2mm 0;border-bottom:.4pt solid #dcd4c4;text-align:left;font-size:9pt}.grid th{font:600 7.5pt/1.2 P;letter-spacing:.06em;text-transform:uppercase;color:#5d6066}
-.qa{padding:2.2mm 0;border-bottom:.4pt solid #dcd4c4}.qa b{font:400 11pt/1.3 N}.qa p{margin:1mm 0 0}.qa i{color:#7a5e28;font-style:normal}
-.chart svg{width:100%;height:auto}hr{border:0;border-top:.4pt solid #dcd4c4;margin:5mm 0}ol.src{columns:2;column-gap:8mm;padding-left:5mm}ol.src li{font-size:7pt;line-height:1.4;margin-bottom:1.2mm;word-break:break-all;break-inside:avoid}
-.foot{position:absolute;left:20mm;right:20mm;bottom:11mm;font-size:7.5pt;color:#5d6066;display:flex;justify-content:space-between;border-top:.4pt solid #dcd4c4;padding-top:2mm}
+.brand{font:500 15pt/1 N}.ed{font:600 8pt/1 P;letter-spacing:.14em;text-transform:uppercase;color:#5f6368;margin-top:6px}
+h1{font:400 30pt/1.1 N;margin:9mm 0 4mm}h2{font:400 16pt/1.2 N;margin:7mm 0 3mm;padding-top:3mm;border-top:.5pt solid #0a0a0a}h2:first-child{margin-top:0}h3{font:400 12.5pt/1.3 N;margin:6mm 0 2mm}
+.lede{font:400 14pt/1.35 N;color:#0a0a0a}.small{font-size:8.3pt;color:#5f6368}sup{font-size:6.5pt;color:#2f5d50;margin-left:1px}
+table{width:100%;border-collapse:collapse}.kv th,.kv td{padding:2.4mm 0;border-bottom:.4pt solid #e3e3e3;text-align:left;vertical-align:top}.kv td{text-align:right;font:400 11pt N}
+.grid th,.grid td{padding:2mm 2mm 2mm 0;border-bottom:.4pt solid #e3e3e3;text-align:left;font-size:9pt}.grid th{font:600 7.5pt/1.2 P;letter-spacing:.06em;text-transform:uppercase;color:#5f6368}
+.qa{padding:2.2mm 0;border-bottom:.4pt solid #e3e3e3}.qa b{font:400 11pt/1.3 N}.qa p{margin:1mm 0 0}.qa i{color:#5f6368;font-style:normal}
+.chart svg{width:100%;height:auto}hr{border:0;border-top:.4pt solid #e3e3e3;margin:5mm 0}ol.src{columns:2;column-gap:8mm;padding-left:5mm}ol.src li{font-size:7pt;line-height:1.4;margin-bottom:1.2mm;word-break:break-all;break-inside:avoid}
+.foot{position:absolute;left:20mm;right:20mm;bottom:11mm;font-size:7.5pt;color:#5f6368;display:flex;justify-content:space-between;border-top:.4pt solid #e3e3e3;padding-top:2mm}
 </style></head><body>${cover}${pages.join("")}${srcPage}</body></html>`;
 }
 

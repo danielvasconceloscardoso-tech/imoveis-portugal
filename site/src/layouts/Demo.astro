@@ -1,9 +1,9 @@
 ---
 // Shell of the private developer demos (prompt 28, D50 register, D51 English): unlisted, noindex, no site menu.
 import "@fontsource-variable/playfair-display";
-import "@fontsource-variable/jost";
+import "@fontsource-variable/manrope";
 interface Props { title: string; developer: string; accent?: string; }
-const { title, developer, accent = "#1f4a3d" } = Astro.props;
+const { title, developer, accent = "#2f5d50" } = Astro.props;
 import DemoBar from "../components/DemoBar.astro";
 ---
 <!doctype html>
@@ -13,7 +13,7 @@ import DemoBar from "../components/DemoBar.astro";
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex, nofollow, noarchive" />
   <title>{title}</title>
-  <style is:global set:html={`:root { --ink: #111214; --muted: #5f6368; --rule: #e6e6e3; --green: #1f4a3d; --accent: ${accent}; --card: #fff; --serif: "Playfair Display Variable", Georgia, serif; --sans: "Jost Variable", system-ui, sans-serif; }`} />
+  <style is:global set:html={`:root { --ink: #111214; --muted: #5f6368; --rule: #e6e6e3; --green: #2f5d50; --accent: ${accent}; --card: #fff; --serif: "Playfair Display Variable", Georgia, serif; --sans: "Manrope Variable", system-ui, sans-serif; }`} />
   <style is:global>
     * { box-sizing: border-box; } body { margin: 0; background: #fff; color: var(--ink); font: 400 17px/1.6 var(--sans); }
     a { color: inherit; text-underline-offset: 3px; }
