@@ -139,3 +139,24 @@ Each phrase is mapped to the page that answers it, the map or simulator, the pat
 | 9 | portugal house prices | 14 | 3 | Prices | house-prices | the map | buy · 01 where | – |
 | 10 | portugal golden visa requirements | 15 | 3 | Moving to Portugal | faq#live | – | buy · 01 where | lawyer |
 
+
+## Calendar: 12 weeks from Mon 9 Nov 2026 (prompt 30 §1.3)
+
+One pillar a week for every edition: the most-searched real question in the keyword map above, answered on one canonical page per language. Weeks 1–3 are teasers and the welcome sequence (no newsletter is sent before Tue 1 Dec); week 4 is the launch (Tue 1 Dec, first Thursday issue on 3 Dec); weeks 5–12 are the weekly rhythm. Links go to the edition's own domain and section (D1), e.g. `https://imoveisportugal.fr/fr/fr/…`.
+
+| Week | Starts | Pillar | Target phrase PT · EN · FR | Page it points to | Map, simulator or station | Partner |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | Mon 9 Nov | The NIF from abroad: the first document of any purchase | nif portugal online · nif portugal · nif portugal en ligne | pillar `nif-from-abroad` (blog), FAQ #nif | path, buy · 02 NIF | lawyer |
+| 2 | Mon 16 Nov | IMT in 2026 and the total cost of buying | imt não residentes 2026 · imt portugal · imt portugal | pillar `total-cost-of-buying` (blog), the existing `imt-nonresidents` article | total-cost simulator; path, buy · 05 cost | lawyer, tax |
+| 3 | Mon 23 Nov | Signing without flying in: the power of attorney and the deed | escritura casa · power of attorney portugal · procuration portugal | pillar `sign-from-abroad` (blog), FAQ #sign and #deed | path, buy · 07 deed | lawyer |
+| 4 | Mon 30 Nov (launch Tue 1 Dec) | What your budget buys in Portugal | preço das casas em portugal · portugal house prices · prix immobilier portugal | pillar `what-your-budget-buys` (blog), house-prices page | the map with `?budget=`; path, buy · 01 where | agency (pending agreement) |
+| 5 | Mon 7 Dec | A mortgage as a non-resident | crédito habitação não residentes · portugal mortgage non resident · crédit immobilier portugal | `mortgage-non-resident` | monthly-payment simulator; buy · 04 finance | bank |
+| 6 | Mon 14 Dec | Moving or retiring to Portugal: what changes | morar em portugal · moving to portugal from usa · retraite au portugal | `moving-to-portugal` | path, buy · 01 where | lawyer, tax |
+| 7 | Mon 21 Dec | The yearly costs of owning: IMI and AIMI | imi casa portugal · property tax portugal · impôt maison portugal | `yearly-costs-imi` | path, buy · 09 after | tax |
+| 8 | Mon 28 Dec | Renting out from abroad: rent, yield and tax | arrendar casa em portugal · renting out property in portugal · louer son bien au portugal | `renting-out-from-abroad` | gross yield on the map; buy · 09 after | tax |
+| 9 | Mon 4 Jan | The inherited house: partilhas | partilhas herança · inheriting property in portugal · héritage maison portugal | `inherited-house` | path, inherit · 01 | lawyer |
+| 10 | Mon 11 Jan | Selling from abroad: capital gains | mais valias venda casa · capital gains tax portugal property · plus-value vente portugal | `selling-from-abroad` | path, sell · 01 | tax |
+| 11 | Mon 18 Jan | Moving the money: transfers and currency | transferir dinheiro para portugal · send money to portugal · virement vers le portugal | `moving-the-money` | path, buy · 04 finance | fx |
+| 12 | Mon 25 Jan | Residence after the golden visa | autorização de residência portugal · portugal golden visa requirements · visa portugal | `residence-portugal` | path, buy · 01 where | lawyer |
+
+Weeks 1–4 are written in full in content/inbox/week-NN/ (pillar pages in `pillar/`, newsletters in `newsletter/`) and social/ (posts, stories, Facebook, LinkedIn, Reddit and Quora drafts, exports). Weeks 5–12 are outlines in content/inbox/OUTLINES_W05-12.md.

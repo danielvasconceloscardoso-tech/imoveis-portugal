@@ -38,6 +38,9 @@
   .post .body { position: absolute; left: 88px; right: 88px; top: 880px; }
   .post h1 { font-size: 64px; margin-bottom: 26px; }
   .three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; } .three b { display: block; font: 400 52px/1 "Playfair"; margin-bottom: 8px; } .three span { font-size: 21px; color: var(--muted); line-height: 1.3; display: block; }
+  .ans { font-size: 32px; line-height: 1.45; max-width: 26em; margin: 0; } .dark .ans { color: rgba(255,255,255,.86); }
+  .big.mid { font-size: 200px; margin: 10px 0 40px; } .dark .big { color: #9cc4b6; }
+  .num { position: absolute; right: 88px; top: 96px; font: 600 20px/1 "Manrope"; letter-spacing: .12em; color: var(--muted); margin: 0; }
   svg { display: block; }
 </style></head>
 <body><div id="root"></div>
@@ -90,6 +93,18 @@ const F = {
   "postcard"(s) {
     const three = s.items.map((it) => `<div><b>${it.v}</b><span>${it.k}</span></div>`).join("");
     return `<div class="card post" style="padding:0"><div class="photo"><img src="${s.photo}"></div><div class="body"><h1>${s.h}</h1><div class="three">${three}</div></div>${foot(s)}</div>`;
+  },
+  // 9. Reader's question: a real searched question and the 40–70-word answer from the FAQ.
+  "reader-question"(s) {
+    return `<div class="card"><p class="k">${s.kicker}</p><h1 class="sm">${s.q}</h1><p class="ans">${s.a}</p>${foot(s)}</div>`;
+  },
+  // Carousel slides: a statement with an optional number, at most 20 words.
+  "text"(s) {
+    return `<div class="card${s.dark ? " dark" : ""}"><p class="k">${s.kicker ?? ""}</p>${s.big ? `<p class="big mid">${s.big}</p>` : ""}<h1 class="sm">${s.h}</h1>${s.body ? `<p class="ans">${s.body}</p>` : ""}${s.n ? `<p class="num">${s.n}</p>` : ""}${foot(s)}</div>`;
+  },
+  // Last slide of a carousel: the one action, the page it opens, the sources.
+  "end"(s) {
+    return `<div class="card dark"><p class="k">${s.kicker ?? ""}</p><h1>${s.h}</h1><p class="ans">${s.body ?? ""}</p>${foot(s)}</div>`;
   },
 };
 window.render = async (s) => { document.getElementById("root").innerHTML = F[s.format](s); await document.fonts.ready; await Promise.all([...document.images].map((i) => i.complete ? 0 : new Promise((r) => (i.onload = i.onerror = r)))); return true; };

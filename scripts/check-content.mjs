@@ -124,7 +124,7 @@ const targets = process.argv.slice(2).length ? process.argv.slice(2).map((p) => 
 let faqs = 0, pieces = 0;
 for (const f of targets.flatMap((t) => walk(t))) {
   if (f.endsWith(".yaml") && f.includes(`${"content"}/faq`)) { checkFaq(f); faqs++; }
-  else if (f.endsWith(".md") && f.includes("content/inbox") && !f.endsWith("README.md")) { checkPiece(f); pieces++; }
+  else if (f.endsWith(".md") && f.includes("content/inbox") && !/\/[A-Z][A-Z_0-9-]*\.md$/.test(f) && !f.includes("/pillar/")) { checkPiece(f); pieces++; }
 }
 for (const ed of EDITIONS) for (const l of ["pt", "en", "fr"]) {
   if (!(`common-${l}` in faqCount)) continue;
@@ -148,8 +148,11 @@ if (existsSync(deck)) readFileSync(deck, "utf8").split("\n").forEach((line, i) =
 // Blog articles (content/blog/{id}.{lang}.md, task 15): front matter, a short answer first, sources, no banned wording.
 const blogDir = join(root, "content/blog");
 let posts = 0;
-if (existsSync(blogDir)) for (const f of readdirSync(blogDir).filter((x) => /\.(pt|en|fr)\.md$/.test(x))) {
-  const file = join(blogDir, f), m = readFileSync(file, "utf8").match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+// Prompt 30 §2: each week's pillar page waits in content/inbox/week-NN/pillar/ in the blog format, then moves to content/blog/.
+const pillars = walk(join(root, "content/inbox")).filter((f) => /\/pillar\/[^/]+\.(pt|en|fr)\.md$/.test(f));
+const blogFiles = [...(existsSync(blogDir) ? readdirSync(blogDir).filter((x) => /\.(pt|en|fr)\.md$/.test(x)).map((x) => join(blogDir, x)) : []), ...pillars];
+for (const file of blogFiles) {
+  const f = file.split("/").pop(), m = readFileSync(file, "utf8").match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
   posts++;
   if (!m) { err(file, "front matter missing"); continue; }
   const fm = yaml.load(m[1]) || {}, lang = f.match(/\.(pt|en|fr)\.md$/)[1];
@@ -171,27 +174,30 @@ if (existsSync(blogDir)) for (const f of readdirSync(blogDir).filter((x) => /\.(
 // UTM tags, alt text, 3 to 5 hashtags on Instagram, no banned or advice wording. Newsletters: UTM on every link.
 let social = 0;
 const socialDir = join(root, "social");
-const md = (dir, out = []) => { if (!existsSync(dir)) return out; for (const f of readdirSync(dir)) { const p = join(dir, f); if (statSync(p).isDirectory()) md(p, out); else if (f === "post.md") out.push(p); } return out; };
+const md = (dir, out = []) => { if (!existsSync(dir)) return out; for (const f of readdirSync(dir)) { const p = join(dir, f); if (statSync(p).isDirectory()) md(p, out); else if (f === "post.md" || f === "stories.md") out.push(p); } return out; };
 for (const file of md(socialDir)) {
   social++;
   const m = readFileSync(file, "utf8").match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
   if (!m) { err(file, "front matter missing"); continue; }
   const fm = yaml.load(m[1]) || {}, body = m[2];
-  for (const k of ["platform", "format", "week", "date", "keyword", "link", "sources", "status"]) if (fm[k] === undefined) err(file, `front matter "${k}" missing`);
+  // Reddit and Quora drafts are answers a person posts: no image, no hashtags, a link only where the community allows it.
+  const text = ["reddit", "quora"].includes(fm.platform), story = file.endsWith("stories.md");
+  for (const k of ["platform", "format", "week", "date", "keyword", "sources", "status", ...(text ? ["community"] : ["link"])]) if (fm[k] === undefined) err(file, `front matter "${k}" missing`);
   if (fm.status && !["draft", "approved"].includes(fm.status)) err(file, `status "${fm.status}" (draft or approved)`);
   for (const id of fm.sources || []) if (!factIds.has(id)) err(file, `unknown fact id ${id}`);
   if (fm.link && !/utm_source=[^&]+&utm_medium=[^&]+&utm_campaign=/.test(fm.link)) err(file, "link without UTM tags");
-  if (!/^Alt text: .{40,}/m.test(body)) err(file, "alt text missing or too short");
+  if (!text && !/^Alt text: .{40,}/m.test(body)) err(file, "alt text missing or too short");
   const tags = (body.match(/(^|\s)#[A-Za-zÀ-ÿ0-9]+/g) || []).length;
-  if (fm.platform === "instagram" && (tags < 3 || tags > 5)) err(file, `${tags} hashtags (Instagram: 3 to 5)`);
-  if (!/^(Fonte|Source)/m.test(body)) err(file, "source line missing");
+  if (fm.platform === "instagram" && !story && (tags < 3 || tags > 5)) err(file, `${tags} hashtags (Instagram: 3 to 5)`);
+  if (!story && !/^(Fonte|Source|Fontes|Sources)/m.test(body)) err(file, "source line missing");
+  for (const u of body.matchAll(/https?:\/\/(imoveisportugal\.[a-z.]+)[^\s)]*/g)) if (!/utm_source=/.test(u[0])) err(file, `link without UTM tags: ${u[0]}`);
   checkText(file, "caption", body);
 }
 for (const file of walk(join(root, "content/inbox")).filter((f) => /newsletter/.test(f))) {
   for (const u of readFileSync(file, "utf8").matchAll(/https?:\/\/(imoveisportugal\.[a-z.]+)[^\s)]*/g)) if (!/utm_source=/.test(u[0])) err(file, `link without UTM tags: ${u[0]}`);
 }
 console.log(`checked ${social} social posts`);
-console.log(`checked ${faqs} FAQ files, ${pieces} inbox pieces and ${posts} blog articles against ${factIds.size} facts`);
+console.log(`checked ${faqs} FAQ files, ${pieces} inbox pieces and ${posts} blog articles and pillar pages against ${factIds.size} facts`);
 if (errors.length) {
   console.log(errors.map((e) => `ERROR ${e}`).join("\n"));
   process.exit(1);

@@ -1,0 +1,31 @@
+<!doctype html>
+<!-- Prompt 30 §4: static Instagram and Facebook stories, 1080×1920, rendered from data by scripts/social/render.mjs.
+     "story-text": a statement with room left for the sticker (poll, question box, link) added in the app.
+     "story-card": a feed card shown whole on the story. Same identity as post.html (D50). -->
+<html><head><meta charset="utf-8">
+<style>
+  @font-face { font-family: "Playfair"; src: url("../fonts/playfair-display-latin-wght-normal.woff2") format("woff2"); font-weight: 400 900; }
+  @font-face { font-family: "Manrope"; src: url("../fonts/manrope-latin-wght-normal.woff2") format("woff2"); font-weight: 200 800; }
+  :root { --ink: #111214; --muted: #6a6d72; --green: #2f5d50; }
+  * { box-sizing: border-box; } html, body { margin: 0; }
+  .card { width: 1080px; height: 1920px; position: relative; overflow: hidden; background: #fff; color: var(--ink); font: 400 34px/1.45 "Manrope", sans-serif; padding: 260px 96px 0; }
+  .card.dark { background: var(--ink); color: #fff; } .dark .k { color: #9cc4b6; } .dark .src { color: rgba(255,255,255,.6); }
+  .k { font: 600 24px/1 "Manrope"; letter-spacing: .16em; text-transform: uppercase; color: var(--green); margin: 0 0 40px; }
+  h1 { font: 400 92px/1.06 "Playfair", serif; letter-spacing: -.012em; margin: 0 0 44px; }
+  .big { font: 400 300px/0.9 "Playfair", serif; color: var(--green); margin: 0 0 40px; } .dark .big { color: #9cc4b6; }
+  p.b { margin: 0; max-width: 24em; } .dark p.b { color: rgba(255,255,255,.86); }
+  .foot { position: absolute; left: 96px; right: 96px; bottom: 120px; display: flex; justify-content: space-between; align-items: end; gap: 40px; }
+  .word { font: 400 34px/1 "Playfair", serif; white-space: nowrap; } .word i { display: inline-block; width: 13px; height: 13px; background: var(--green); margin-right: 13px; vertical-align: 4px; }
+  .src { font-size: 22px; color: var(--muted); text-align: right; line-height: 1.35; max-width: 30em; }
+  .shot { position: absolute; left: 90px; right: 90px; top: 330px; } .shot img { width: 100%; display: block; box-shadow: 0 30px 80px rgba(17,18,20,.16); }
+  .card.shotc { padding-top: 200px; background: #f4f4f2; }
+</style></head>
+<body><div id="root"></div>
+<script>
+const foot = (s) => `<div class="foot"><div class="word"><i></i>Imóveis Portugal</div><div class="src">${s.source ?? ""}</div></div>`;
+const F = {
+  "story-text"(s) { return `<div class="card${s.dark ? " dark" : ""}"><p class="k">${s.kicker ?? ""}</p>${s.big ? `<p class="big">${s.big}</p>` : ""}<h1>${s.h}</h1>${s.body ? `<p class="b">${s.body}</p>` : ""}${foot(s)}</div>`; },
+  "story-card"(s) { return `<div class="card shotc"><p class="k">${s.kicker ?? ""}</p><div class="shot"><img src="${s.img}"></div>${foot({ source: "" })}</div>`; },
+};
+window.render = async (s) => { document.getElementById("root").innerHTML = F[s.format](s); await document.fonts.ready; await Promise.all([...document.images].map((i) => i.complete ? 0 : new Promise((r) => (i.onload = i.onerror = r)))); return true; };
+</script></body></html>

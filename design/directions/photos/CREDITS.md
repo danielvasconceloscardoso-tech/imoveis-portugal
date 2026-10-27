@@ -19,3 +19,7 @@ The photographer names are not filled in yet. This environment can reach the Uns
 Downloaded at 1800 px wide from `https://images.unsplash.com/<id>?w=1800`.
 
 Missing for the final site: coast (Algarve, Atlantic beaches) and houses (village houses, townhouses, quintas). The final build needs a search, which needs an Unsplash API access key.
+
+| File | Place | Source | Licence |
+| --- | --- | --- | --- |
+| madeira-rua.jpg | A street in Madeira (the clip names Madeira, not the town: label it "Madeira") | Mixkit, still from "Walking on the street on Madeira" (clip 3512) | Mixkit License: free for commercial use, no attribution required |
