@@ -251,3 +251,17 @@ Figures carry their source on the page as before (INE medians for the second qua
 - **The hero film.** It needs licensed Pexels or Pixabay clips; neither API key is in the build environment yet (task 31b). Until then the hero is a still photograph (Douro at sunset, Unsplash) with a very slow zoom, which is also the reduced-motion version.
 - **The coast card.** No licensed photograph of the coast is in the repo yet. Unsplash needs its access key (task 8t). The card shows our own 3D map of the coast until then.
 - **Social links in the footer.** They will be added once the accounts exist (task 30b); no placeholder links meanwhile.
+
+## Update, 27 Oct (prompt 32 on main)
+
+| Block | PT | EN | FR |
+| --- | --- | --- | --- |
+| Places, headline | Seis lugares, seis preços oficiais. | Six places, six official prices. | Six lieux, six prix officiels. |
+| Place in a municipality | Mediana do concelho de {m}: {v} por m². | {m} municipality median: {v} per m². | Médiane de la commune de {m} : {v} le m². |
+| Map, headline | Quanto compra o seu orçamento, concelho a concelho. | What your budget buys, municipality by municipality. | Ce que votre budget achète, commune par commune. |
+| Map, action | Ver o mapa completo | See the full map | Voir la carte complète |
+
+- **Hero:** the film of Portugal, 20 s, silent, looping, 1.5 MB, from four licensed Mixkit clips: a river town at sunrise, the Atlantic coast, the cable car over the Tagus in Lisbon, a street in Funchal. Its poster paints first and is the still for reduced motion.
+- **Six places:** Lisbon, Porto, Cascais, Comporta (Grândola municipality median), Algarve (Loulé municipality median), Madeira (Funchal municipality median), INE second quarter 2026. Real photographs for Lisbon, Porto and Madeira. Cascais, Comporta and the Algarve show "Photograph to come" until licensed photographs of those places can be fetched (the Pixabay key is refused; Mixkit has no clips of them).
+- **Mosaic:** five different places (Lisbon, the Atlantic coast, Porto, Funchal, a river town). The sixth tile waits for a licensed photograph of a named place.
+- **Map:** full-bleed on a warm paper ground, no frame, a soft shadow under the relief, one control bar over its top edge (budget, the four metrics as a segmented control, find a municipality, 3D or flat), "More" on phones. It arrives once from the Atlantic (6.5 s); reduced motion keeps the still view. The full map page is unchanged.

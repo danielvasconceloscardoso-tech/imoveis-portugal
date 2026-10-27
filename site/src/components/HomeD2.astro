@@ -22,11 +22,16 @@ const sup = (ns: number[]) => ns.map((i) => `<a class="sup" href="#fonte-${i}">$
 const cur = EDITION_CUR[ed] ?? "EUR", fx = cur === "EUR" ? null : RATE(cur);
 const nMap = src.n("ine-m2-2026q2"), nHist = src.n("ine-m2-history");
 const m2 = (k: string) => PRICES.munis[k].m2[LAST] as number;
-const coast = ["cascais", "grandola", "loule"].map(m2);
+// Six named places (prompt 32): one official figure each; "municipality median" where the place is part of one.
+const MAP = pathFor(lang, ed, "map");
+const one = (k: string) => c("home2.places.one", lang, { v: e(m2(k)) }), muni = (k: string) => c("home2.places.muni", lang, { m: PRICES.munis[k].n, v: e(m2(k)) });
 const places = [
-  { k: "lisboa", img: "lisboa-eletrico-28", line: c("home2.places.one", lang, { v: e(m2("lisboa")) }), href: `${pathFor(lang, ed, "map")}?place=lisboa` },
-  { k: "porto", img: "porto-ribeira-rabelo", line: c("home2.places.one", lang, { v: e(m2("porto")) }), href: `${pathFor(lang, ed, "map")}?place=porto` },
-  { k: "coast", img: "", line: c("home2.places.coast", lang, { a: e(Math.min(...coast)), b: e(Math.max(...coast)) }), href: `${pathFor(lang, ed, "map")}?place=cascais` },
+  { k: "lisboa", img: "lisboa-eletrico-28", line: one("lisboa"), href: `${MAP}?place=lisboa` },
+  { k: "porto", img: "porto-ribeira-rabelo", line: one("porto"), href: `${MAP}?place=porto` },
+  { k: "cascais", img: "", line: one("cascais"), href: `${MAP}?place=cascais` },
+  { k: "comporta", img: "", line: muni("grandola"), href: `${MAP}?place=grandola` },
+  { k: "algarve", img: "", line: muni("loule"), href: `${MAP}?place=loule` },
+  { k: "madeira", img: "madeira-funchal-avenida", line: muni("funchal"), href: `${MAP}?place=funchal` },
 ];
 // Five questions, each opening its answer (the same answers and sources as the FAQ).
 const ex = homeExample();
@@ -42,16 +47,19 @@ const qa = [
 const ptP = PRICES.regions.PT;
 const chart = lineChart(PRICES.quarters, [{ label: "Portugal", values: ptP.m2 }, { label: PRICES.munis.lisboa.n, values: PRICES.munis.lisboa.m2 }, { label: PRICES.munis.porto.n, values: PRICES.munis.porto.m2 }],
   { breakAt: PRICES.break, breakLabel: c("prices.break", lang), fmt: (v) => new Intl.NumberFormat(HTML_LANG[lang]).format(v), h: 300 });
-const mosaic = ["lisboa-alfama-sao-vicente", "porto-ponte-luis-i-noite", "lisboa-praca-do-comercio", "porto-douro-entardecer", "lisboa-baixa-telhados", "lisboa-anoitecer-castelo"];
-const alts: Record<string, string> = { "lisboa-alfama-sao-vicente": "Alfama, Lisboa", "porto-ponte-luis-i-noite": "Ponte Luís I, Porto", "lisboa-praca-do-comercio": "Praça do Comércio, Lisboa", "porto-douro-entardecer": "Douro, Porto", "lisboa-baixa-telhados": "Baixa, Lisboa", "lisboa-anoitecer-castelo": "Castelo de São Jorge, Lisboa", "lisboa-eletrico-28": "Elétrico 28, Lisboa", "porto-ribeira-rabelo": "Ribeira, Porto", "lisboa-alfama-telhados": "Alfama, Lisboa" };
+// Different places only, no duplicates (prompt 32). A sixth waits for a licensed photograph of a named place.
+const mosaic = ["lisboa-alfama-sao-vicente", "costa-atlantica-falesias", "porto-ponte-luis-i-noite", "madeira-funchal-avenida", "vila-ribeirinha-amanhecer"];
+const alts: Record<string, string> = { "lisboa-alfama-sao-vicente": "Alfama, Lisboa", "porto-ponte-luis-i-noite": "Ponte Luís I, Porto", "lisboa-praca-do-comercio": "Praça do Comércio, Lisboa", "porto-douro-entardecer": "Douro, Porto", "lisboa-baixa-telhados": "Baixa, Lisboa", "lisboa-anoitecer-castelo": "Castelo de São Jorge, Lisboa", "lisboa-eletrico-28": "Elétrico 28, Lisboa", "porto-ribeira-rabelo": "Ribeira, Porto", "lisboa-alfama-telhados": "Alfama, Lisboa", "madeira-funchal-avenida": "Funchal, Madeira", "costa-atlantica-falesias": "Costa atlântica, Portugal", "vila-ribeirinha-amanhecer": "Vila ribeirinha ao amanhecer, Portugal" };
 const nl = config.forms.newsletter[lang];
 const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("home.subscribe.subject", lang)} (${ed} · ${lang})`)}`;
 ---
 <section class="h2-hero" aria-labelledby="h2-h1">
-  <picture class="h2-hero-media">
-    <source type="image/avif" srcset={`/img/v2/porto-douro-entardecer-640.avif 640w, /img/v2/porto-douro-entardecer-1024.avif 1024w, /img/v2/porto-douro-entardecer-1600.avif 1600w`} sizes="100vw" />
-    <img src="/img/v2/porto-douro-entardecer-1600.webp" srcset="/img/v2/porto-douro-entardecer-640.webp 640w, /img/v2/porto-douro-entardecer-1024.webp 1024w, /img/v2/porto-douro-entardecer-1600.webp 1600w" sizes="100vw" width="1600" height="900" alt="" fetchpriority="high" />
+  {/* The film of Portugal: licensed clips (Mixkit), silent, looping, 1.5 MB; the poster paints first and is the still for reduced motion. */}
+  <picture class="h2-hero-media h2-hero-poster">
+    <source type="image/avif" srcset="/video/hero-portugal-poster.avif" />
+    <img src="/video/hero-portugal-poster.webp" width="1280" height="720" alt="" fetchpriority="high" />
   </picture>
+  <video class="h2-hero-media h2-hero-film" muted loop playsinline preload="none" poster="/video/hero-portugal-poster.webp" data-hero-film aria-hidden="true"><source src="/video/hero-portugal.mp4" type="video/mp4" /></video>
   <div class="h2-hero-text">
     <h1 id="h2-h1">{c(`home2.h1.${ed}`, lang)}</h1>
     <p>{c("home2.lede", lang)}</p>
@@ -85,27 +93,28 @@ const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("h
   </div>
 </section>
 
-<section class="h2-sec h2-band h2-map" aria-labelledby="h2-map">
-  <div class="h2-text h2-center" data-reveal>
+<section class="h2-mapsec" aria-labelledby="h2-map">
+  <div class="h2-text h2-center h2-maptext" data-reveal>
     <h2 id="h2-map">{c("home2.map.h", lang)}</h2>
     <p>{c("home2.map.p", lang)}<Fragment set:html={sup([nMap])} /></p>
   </div>
-  <div class="h2-mapframe" data-reveal><MapExplorer lang={lang} ed={ed} mode="home" /></div>
-  <p class="h2-center"><a class="h2-btn" href={pathFor(lang, ed, "map")}>{c("home2.map.a", lang)}</a></p>
+  {/* Full-bleed, no frame (prompt 32): the same map component, only its presentation changes here. */}
+  <div class="h2-mapbleed"><MapExplorer lang={lang} ed={ed} mode="home" /></div>
+  <p class="h2-center h2-mapcta"><a class="h2-btn" href={pathFor(lang, ed, "map")}>{c("home2.map.a", lang)}</a></p>
 </section>
 
 <section class="h2-sec h2-places" aria-labelledby="h2-places">
   <h2 id="h2-places" class="h2-center" data-reveal>{c("home2.places.h", lang)}</h2>
-  <div class="h2-cards3">
+  <div class="h2-cards6">
     {places.map((p) => (
       <article class="h2-card" data-reveal>
         {p.img ? (
           <picture class="h2-ph h2-ph-45">
             <source type="image/avif" srcset={`/img/v2/${p.img}-640.avif 640w, /img/v2/${p.img}-1024.avif 1024w`} sizes="(min-width: 900px) 33vw, 100vw" />
-            <img src={`/img/v2/${p.img}-640.webp`} srcset={`/img/v2/${p.img}-640.webp 640w, /img/v2/${p.img}-1024.webp 1024w`} sizes="(min-width: 900px) 33vw, 100vw" width="640" height="800" alt={alts[p.img]} loading="lazy" />
+            <img src={`/img/v2/${p.img}-640.webp`} srcset={`/img/v2/${p.img}-640.webp 640w, /img/v2/${p.img}-1024.webp 1024w`} sizes="(min-width: 900px) 33vw, 80vw" width="640" height="800" alt={alts[p.img]} loading="lazy" />
           </picture>
         ) : (
-          <div class="h2-ph h2-ph-45 h2-ph-wait" role="img" aria-label={c(`home2.places.${p.k}.n`, lang)}><img src="/img/map-poster-1200.webp" alt="" loading="lazy" width="1200" height="1500" /></div>
+          <div class="h2-ph h2-ph-45 h2-ph-wait"><span>{c(`home2.places.${p.k}.n`, lang)}</span><small>{c("home2.places.wait", lang)}</small></div>
         )}
         <h3>{c(`home2.places.${p.k}.n`, lang)}</h3>
         <p>{p.line}<Fragment set:html={sup([nMap])} /></p>
@@ -198,6 +207,22 @@ const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("h
     document.documentElement.classList.add("d2-motion");
     const io = new IntersectionObserver((es) => es.forEach((x) => { if (x.isIntersecting) { x.target.classList.add("in"); io.unobserve(x.target); } }), { rootMargin: "0px 0px -10% 0px" });
     document.querySelectorAll("[data-reveal]").forEach((el) => io.observe(el));
+  }
+  // The hero film plays only where motion is welcome; reduced motion keeps the poster.
+  const film = document.querySelector<HTMLVideoElement>("[data-hero-film]");
+  if (film && !matchMedia("(prefers-reduced-motion: reduce)").matches) { film.preload = "auto"; film.play().then(() => film.classList.add("on")).catch(() => {}); }
+  // The map's slow arrival: once, from the Atlantic onto the coast; a warm paper ground.
+  const mx = document.querySelector<HTMLElement>(".mapx-home");
+  if (mx) {
+    const more = mx.querySelector<HTMLButtonElement>("[data-more]"); more?.addEventListener("click", () => { const o = mx.classList.toggle("more-open"); more.setAttribute("aria-expanded", String(o)); });
+    new MutationObserver((_, ob) => {
+      if (!mx.classList.contains("is-live")) return; ob.disconnect();
+      const m = (mx as any).__mapx.map(); try { m.setPaintProperty("bg", "background-color", "#f6f3ed"); } catch {}
+      if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      const narrow = mx.clientWidth < 700, end = narrow ? { center: [-8.05, 39.55], zoom: 5.75, pitch: 36, bearing: -6 } : { center: [-8.15, 39.6], zoom: 6.55, pitch: 42, bearing: -8 };
+      m.jumpTo({ center: [-13.2, 39.2], zoom: end.zoom - 1.1, pitch: 20, bearing: end.bearing - 25 });
+      m.flyTo({ ...end, duration: 6500, curve: 1.2, easing: (x: number) => 1 - Math.pow(1 - x, 3), essential: false });
+    }).observe(mx, { attributes: true, attributeFilter: ["class"] });
   }
   // The header sits on the photograph until the page scrolls.
   const hd = document.querySelector(".hd"); const on = () => hd?.classList.toggle("solid", scrollY > 40); on(); addEventListener("scroll", on, { passive: true });

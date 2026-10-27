@@ -5738,14 +5738,14 @@ Design v2 home (prompt 32, D59). Every block: one to three sentences, at most 45
 - FR: Indiquez un montant et voyez les mètres carrés dans chacune des 308 communes. Médianes de l'INE, deuxième trimestre 2026.
 
 ### map.a
-- PT: Ver o mapa
-- EN: See the map
-- FR: Voir la carte
+- PT: Ver o mapa completo
+- EN: See the full map
+- FR: Voir la carte complète
 
 ### places.h
-- PT: Lisboa, Porto e a costa.
-- EN: Lisbon, Porto and the coast.
-- FR: Lisbonne, Porto et la côte.
+- PT: Seis lugares, seis preços oficiais.
+- EN: Six places, six official prices.
+- FR: Six lieux, six prix officiels.
 
 ### places.lisboa.n
 - PT: Lisboa
@@ -5907,3 +5907,37 @@ Design v2 home (prompt 32, D59). Every block: one to three sentences, at most 45
 - EN: Legal
 - FR: Mentions
 
+### places.cascais.n
+- PT: Cascais
+- EN: Cascais
+- FR: Cascais
+
+### places.comporta.n
+- PT: Comporta
+- EN: Comporta
+- FR: Comporta
+
+### places.algarve.n
+- PT: Algarve
+- EN: Algarve
+- FR: Algarve
+
+### places.madeira.n
+- PT: Madeira
+- EN: Madeira
+- FR: Madeira
+
+### places.muni
+- PT: Mediana do concelho de {m}: {v} por m².
+- EN: {m} municipality median: {v} per m².
+- FR: Médiane de la commune de {m} : {v} le m².
+
+### places.wait
+- PT: Fotografia a chegar.
+- EN: Photograph to come.
+- FR: Photographie à venir.
+
+### map.more
+- PT: Mais
+- EN: More
+- FR: Plus

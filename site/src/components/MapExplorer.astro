@@ -87,6 +87,7 @@ const id = `mapx-${mode}`;
       <ul id={`${id}-list`} role="listbox" class="mapx-find-list" hidden data-find-list></ul>
     </div>
     <button type="button" class="mapx-flat" data-flat aria-pressed="false">{c("map.flat", lang)}</button>
+    {mode === "home" && <button type="button" class="mapx-more" data-more aria-expanded="false">{c("home2.map.more", lang)}</button>}
     <button type="button" class="mapx-flat" data-devs aria-pressed="false">{c("map.devs.toggle", lang)}</button>
   </div>
   {/* Prompt 26 §1: filters of the "Novos empreendimentos" layer (partner projects only). */}

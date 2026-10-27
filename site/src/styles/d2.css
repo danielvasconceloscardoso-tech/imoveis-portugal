@@ -134,3 +134,54 @@ body.d2 main { padding-top: 0; }
   .ft2-cols { grid-template-columns: 1fr 1fr; } .h2-nlform { grid-template-columns: 1fr; }
   body.d2 .hd .nav { display: none; }
 }
+
+/* ---------------------------------------------------------------- 27 Oct (prompt 32 update) */
+/* The hero film fades in over its poster; reduced motion keeps the poster. */
+.h2-hero-film { object-fit: cover; opacity: 0; transition: opacity 1.4s var(--ease); } .h2-hero-film.on { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .h2-hero-film { display: none; } }
+
+/* Six places: 3×2 on desktop, a swipeable row on phones. */
+.h2-cards6 { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(40px, 4vw, 64px) clamp(24px, 3vw, 48px); max-width: 1280px; margin: 64px auto 0; }
+.h2-ph-wait { display: grid; place-content: center; text-align: center; background: var(--band); }
+.h2-ph-wait span { font: 400 44px/1 var(--serif); } .h2-ph-wait small { margin-top: 12px; font: 600 11px/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+
+/* The mosaic, five different places. */
+.h2-m1 { grid-column: 1 / 8; grid-row: span 3; } .h2-m2 { grid-column: 8 / 13; grid-row: span 2; } .h2-m3 { grid-column: 8 / 13; grid-row: span 2; }
+.h2-m4 { grid-column: 1 / 5; grid-row: span 2; } .h2-m5 { grid-column: 5 / 8; grid-row: span 1; }
+
+/* The map: full-bleed on a warm paper ground, no frame, one control bar over its top edge. */
+.h2-mapsec { background: #f6f3ed; padding: var(--sec) 0 calc(var(--sec) * .6); }
+.h2-maptext { padding: 0 var(--gut); margin-bottom: 40px; }
+.h2-mapbleed .mapx-home { display: flex; flex-wrap: wrap; justify-content: center; align-items: stretch; position: relative; }
+.h2-mapbleed .mapx-controls, .h2-mapbleed .mapx-bar { position: relative; z-index: 3; margin: 0; background: #fff; box-shadow: 0 10px 30px rgba(60, 50, 30, .08); align-items: center; }
+.h2-mapbleed .mapx-controls { padding: 14px 24px; border-radius: 2px 0 0 2px; border-right: 1px solid var(--rule); }
+.h2-mapbleed .mapx-bar { padding: 10px 14px 10px 20px; border-radius: 0 2px 2px 0; gap: 14px; flex-wrap: nowrap; }
+.h2-mapbleed .mapx-budget .h-small, .h2-mapbleed .mapx-find .h-small { font: 600 11px/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 0; }
+.h2-mapbleed .mapx-input input { font: 400 22px/1.2 var(--serif); border: 0; padding: 2px 0; width: 9.5ch; background: none; }
+.h2-mapbleed .mapx-find { gap: 4px; max-width: 220px; } .h2-mapbleed .mapx-find input { border: 0; border-bottom: 1px solid var(--rule); border-radius: 0; padding: 6px 0; min-height: 0; font-size: 15px; background: none; }
+.h2-mapbleed .mapx-metrics { gap: 0; flex-wrap: nowrap; border: 1px solid var(--rule); border-radius: 2px; }
+.h2-mapbleed .mapx-metrics button { border: 0; border-right: 1px solid var(--rule); border-radius: 0; min-height: 38px; padding: 8px 12px; font-size: 13px; white-space: nowrap; }
+.h2-mapbleed .mapx-metrics button:last-of-type { border-right: 0; }
+.h2-mapbleed .mapx-metrics button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+.h2-mapbleed .mapx-flat { min-height: 38px; font-size: 13px; white-space: nowrap; }
+.h2-mapbleed .mapx-flat[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
+.h2-mapbleed .mapx-more { display: none; }
+.h2-mapbleed .mapx-legend, .h2-mapbleed .mapx-local, .h2-mapbleed .mapx-cur, .h2-mapbleed [data-devs], .h2-mapbleed .mapx-layer, .h2-mapbleed .mapx-devbar, .h2-mapbleed .mapx-metrics > .h-small { display: none !important; }
+.h2-mapbleed .mapx-stage { flex: 0 0 100%; margin-top: -30px; height: 85vh; min-height: 520px; max-height: none; aspect-ratio: auto; border: 0; background: transparent; }
+.h2-mapbleed .mapx-canvas canvas { filter: drop-shadow(0 26px 34px rgba(70, 55, 30, .14)); }
+.h2-mapbleed .mapx-poster { object-fit: contain; mix-blend-mode: multiply; }
+.h2-mapbleed .maplibregl-ctrl-group { box-shadow: none; border: 1px solid var(--rule); border-radius: 2px; }
+.h2-mapcta { margin: 24px 0 0; }
+
+@media (max-width: 900px) {
+  .h2-cards6 { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 16px; margin: 48px calc(-1 * var(--gut)) 0; padding: 0 var(--gut) 8px; }
+  .h2-cards6 .h2-card { flex: 0 0 78%; scroll-snap-align: start; }
+  .h2-mosaic .h2-m { grid-column: auto !important; grid-row: span 1 !important; } .h2-mosaic .h2-m1 { grid-column: 1 / -1 !important; grid-row: span 2 !important; }
+  .h2-mapbleed .mapx-controls { flex: 1 1 100%; border-right: 0; border-bottom: 1px solid var(--rule); margin: 0 16px; border-radius: 2px 2px 0 0; }
+  .h2-mapbleed .mapx-bar { flex: 1 1 100%; margin: 0 16px; border-radius: 0 0 2px 2px; flex-wrap: wrap; }
+  .h2-mapbleed .mapx-find { flex: 1 1 60%; max-width: none; }
+  .h2-mapbleed .mapx-more { display: inline-flex; align-items: center; min-height: 38px; padding: 0 14px; border: 1px solid var(--rule); border-radius: 2px; background: none; font: 600 12px/1 var(--sans); letter-spacing: .12em; text-transform: uppercase; }
+  .h2-mapbleed .mapx-home:not(.more-open) .mapx-metrics, .h2-mapbleed .mapx-home:not(.more-open) .mapx-flat { display: none; }
+  .h2-mapbleed .mapx-metrics { flex-wrap: wrap; width: 100%; } .h2-mapbleed .mapx-metrics button { flex: 1 1 50%; border-bottom: 1px solid var(--rule); }
+  .h2-mapbleed .mapx-stage { height: 70vh; min-height: 420px; margin-top: 0; }
+}
