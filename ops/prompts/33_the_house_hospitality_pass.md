@@ -1,110 +1,157 @@
-# Prompt 33: "The House", the hospitality pass (JNcQUOI, Claridge's, the Ritz)
+# Prompt 33: "The Resort", the hospitality pass (JNcQUOI Comporta, Conrad Algarve, golf, Madeira)
 
-CEO, 27 Oct 2026. Decision D60. The operator still doesn't feel the JNcQUOI / Claridge's / Ritz / concierge atmosphere on design-v2.
+CEO, 27 Oct 2026, revised the same afternoon after the operator's corrections. Decision D60.
 
-**The diagnosis:** the layout is right, but the photographs are tourist postcards: a yellow tram, colourful Porto houses, a crowded beach with umbrellas, boats at Benagil, a hillside of houses in Funchal. Hotels like JNcQUOI House sell atmosphere, materials, light and being received, never sights.
+**The operator's direction, in his words:**
+- not the JNcQUOI House (city townhouse) vibe, but **the resort: JNcQUOI Comporta, the Conrad Algarve**;
+- golf: "super smart";
+- Madeira is "the Hawaii of Portugal", a lot of people are buying there, and the site doesn't use its most beautiful pictures;
+- Madeira's New Year's Eve went viral and is almost as big as golf, and we have nothing on it.
 
-Build everything below on branch `design-v2`. The frozen v1 stays untouched. Nothing is published or merged without the operator's "go".
+**Diagnosis of design-v2 today:** the layout is right, but the photographs are tourist postcards (a yellow tram, colourful Porto houses, a crowded beach with umbrellas, boats at Benagil, a hillside of houses in Funchal). A resort sells sunlight, water, texture and ease.
+
+Build on branch `design-v2`. The frozen v1 stays untouched. Nothing is published or merged without the operator's "go".
 
 ## References (principles only; never their text, logos, photographs or code)
 
-1. **JNcQUOI House**, Lisbon:
-   - interiors by Vincent Van Duysen: polished stone, deep green accents, classic Portuguese design;
-   - guests treated as members, preferences remembered, a 24-hour butler;
-   - its own line: "Your home in Lisbon".
-2. **JNcQUOI Club Comporta** (Amorim Luxury, opening 2028): villas and pavilions in the native pine forest, terracotta, cork, green roofs, a golf course by David McLay Kidd, the beach club.
-3. **Six Senses Comporta at Pinheirinho** (VIC Properties): 58 residences by Michaelis Boyd, a 70-key hotel, an 18-hole course. Cover of the FT Weekend HTSI property special; the course hosts the DP World Tour Portugal Legends Championship this week.
-4. **Claridge's** (prompt 32) and the Ritz: calm, few words, being received.
+1. **JNcQUOI Club Comporta and the JNcQUOI Beach Club** (Amorim Luxury, Van Duysen): villas and pavilions in the pine forest, terracotta, cork, pigmented concrete, green roofs, the dunes, the beach club, golf by David McLay Kidd.
+2. **Conrad Algarve,** Quinta do Lago: sunlit resort calm, pools, golf, the Ria Formosa.
+3. **Six Senses Comporta at Pinheirinho** (VIC Properties): residences in the pines, an 18-hole course, FT HTSI cover this month.
+4. **Laranjeiras,** the Algarve project of London lawyer Neel Sachdev (FT, 16 Sep 2026, "the California of Europe"): white minimalist villas of 5,000 to 6,000 sq ft, 25-metre pools, raffia lamps, oak, white bouclé, bright natural light.
+5. **Claridge's** (prompt 32): calm, few words, a lot of space.
 
-## 1. Photographs: atmosphere, not postcards (the biggest change)
+## 1. Photographs: the resort, in daylight (the biggest change)
 
 1. **Replace every photograph on the home page,** then the place cards and the mosaic.
-   - **Never:** trams, colourful façades, crowded beaches, umbrellas, tourist boats, skylines in hard midday light, saturated blue skies, people facing the camera.
-   - **Yes:** golden or low light, texture and detail, stillness:
-     - morning light on limestone;
-     - a linen curtain at an open window;
-     - the shadow of a pine on a white wall in Comporta;
-     - rice fields at dusk;
-     - dunes and a boardwalk;
-     - a golf fairway in early mist;
-     - the Atlantic at dusk;
-     - a table set on a terrace;
-     - azulejo or cork in close-up;
-     - a quiet interior with a view;
-     - the Douro terraces at first light.
-2. **Every place is still recognisable.** Its card shows that place in its best light: Comporta pines or rice fields, not a generic beach; the Algarve's cliffs at dawn or a fairway above the sea, not boats.
-3. **One grade for every photograph:** slightly desaturated, warm highlights, deep shadows, the same feeling as the film.
+   - **Never:** trams, colourful façades, crowded beaches, umbrellas, tour boats, sprawling hillsides of houses, hard midday glare, oversaturated skies, people facing the camera.
+   - **Yes:** soft sunlight, water, texture, ease:
+     - a pool edge with loungers and linen;
+     - a white villa wall with a pine's shadow;
+     - the dunes and a boardwalk in Comporta, rice fields at golden hour;
+     - a fairway above the sea at dawn;
+     - the Ria Formosa from a terrace;
+     - raffia and oak in a bright interior;
+     - a table set outside;
+     - the Atlantic in late-afternoon light.
+2. **Every place card shows the place at its most beautiful,** and still recognisable:
+   - Comporta: dunes, pines or rice fields;
+   - Algarve: golden cliffs at dawn or a fairway above the sea;
+   - Cascais: the coast road or the Boca do Inferno at golden hour;
+   - Lisbon: river light from a terrace;
+   - Porto: the Douro at first light;
+   - Madeira: see §4.
+3. **One grade for every photograph:** bright, warm, soft contrast, slightly muted blues and greens. Sunlit, never neon.
 4. **Licences:**
    - prefer Pixabay or Mixkit, where no credit is needed;
-   - a CC BY or CC BY-SA photo is used only if nothing else fits, credited on /credits, never in a caption next to the photo (the Comporta credit line now on the home page goes);
+   - a CC BY or CC BY-SA photo only if nothing else fits, credited on /credits, never in a caption by the photo (the Comporta credit line now on the home page goes);
    - every photo checked to show the place named, and listed in content/media/SOURCES.md.
 
 ## 2. Colour and type (D60, evolving D50)
 
-1. **Two grounds,** like day and evening in a hotel:
-   - **Day:** white, a touch warmer than now. Never cream or beige: the operator rejected those AI palettes.
-   - **Evening:** our deep green, dark, used as the full background of two or three sections (the newsletter, the concierge, the closing band), with warm photographs on it.
-2. **Accents:** green stays the only accent colour. No brass, no gold, no terracotta in the interface. Warmth comes from the photographs.
+1. **Ground:** the resort in daylight. White, a touch warmer, plus sand-toned bands (one tone, very light) between sections. Never cream or beige blocks; the operator rejected those AI palettes.
+2. **Accent:** green stays the only interface accent. The deep green is used for the footer only. No brass, gold or terracotta in the interface: warmth and colour come from the photographs.
 3. **Type:**
    - Playfair Display in lighter, larger headings;
    - Manrope for text;
-   - small wide-tracked capitals for navigation and labels inside controls only (never above headings);
-   - generous line height.
+   - small wide-tracked capitals only for navigation and labels inside controls;
+   - generous line height and a lot of space (prompt 32 copy rules).
 
 ## 3. Being received (the concierge layer)
 
-1. **"Concierge" in the header,** as the main button. It opens a calm panel from the side (not a chat bubble, no bot). The panel reads "How can we help?" with three choices:
+1. **"Concierge" in the header,** as the main button. It opens a calm side panel (not a chat bubble, no bot) reading "How can we help?" with three choices:
    - "I'm buying" opens the buying path at the right station;
    - "I'm selling" opens the selling path;
-   - "I have a question" opens a short form: name, email, the question, an unticked consent box naming who receives it.
+   - "I have a question" opens name, email, the question, and an unticked consent box naming who receives it.
 
-   Under the choices sits one line on who answers. **Its wording waits for the operator's approval:** "A person reads every request" can only go live if it is true.
-2. **The newsletter stays prominent,** inside the concierge panel ("The Thursday letter") and on the evening ground on the home page. It is our core asset.
-3. **Welcome back.** When a returning reader has a saved path (already stored on the device), the hero shows one quiet line: "Welcome back. Lisbon, where you left off." Never their budget. Never cookies; device storage only, as today.
-4. **The menu as a hotel menu.** On mobile, and behind a "Menu" link on desktop: a full-screen overlay on the evening ground, large serif links, one photograph.
-5. **Pace and detail:**
-   - slow image reveals;
-   - tactile hover states;
-   - the monogram as a quiet watermark in the closing band;
-   - nothing bouncy, nothing that moves while someone reads.
+   Under the choices sits one line on who answers. **Its wording waits for the operator's approval:** "A person reads every request" only goes live if it is true.
+2. **The newsletter stays prominent,** inside the panel ("The Thursday letter") and as its own home section.
+3. **Welcome back.** A returning reader with a saved path sees one quiet line in the hero: "Welcome back. Comporta, where you left off." Never their budget. Device storage only, no cookies.
+4. **Menu:** a full-screen overlay with large serif links and one sunlit photograph.
+5. **Motion:** slow reveals, tactile hovers, nothing bouncy, nothing that moves while someone reads.
 
-## 4. Golf (operator, 27 Oct: the Algarve and Comporta are known for their golf)
+## 4. Golf: make it the smartest thing on the site
 
-1. **Map layer "Golf courses".** Data from OpenStreetMap (`leisure=golf_course`, ODbL, credited). Each course's name appears on hover or tap. It is a layer on the full map page, off by default; on the home map it shows only when the reader taps "Golf".
-2. **Place cards** for Comporta and the Algarve name their best-known courses, with a source for each statement. No rankings unless a source states them.
-3. **A home-page section,** two cards on the evening ground: "Golf on the Algarve" and "Golf in Comporta". Each has a photograph of a fairway, one line and a link to the map with the golf layer on.
-4. **Content:** add a golf pillar to the content calendar (weeks 5–12): "Buying a home on a golf course in Portugal", with search phrases in PT, EN and FR. Add a LinkedIn data post on golf resorts with residences.
+1. **Golf layer on the map.**
+   - Data from OpenStreetMap (`leisure=golf_course`, ODbL, credited), every course named.
+   - Off by default on the full map page. On the home map it appears when the reader taps "Golf".
+2. **"The golf premium":** our own data story, built only from official data.
+   - For the municipalities and parishes with golf resorts (for example Loulé and the parish of Almancil, Lagoa, Lagos, Albufeira, Grândola, Alcácer do Sal), compare the INE median price per m² of the parish with its municipality, and their 10-year change.
+   - Publish it only where INE publishes parish data, label it "parish median vs municipality median", and never claim causation.
+   - It becomes a chart on the golf section, a LinkedIn data post and a pillar page.
+3. **A golf section on the home page:**
+   - two sunlit cards, "Golf on the Algarve" and "Golf in Comporta", each with a fairway photograph, one line, and a link to the map with the golf layer on;
+   - under them, "The golf premium" chart.
+4. **A golf calendar line** (sourced): the tournaments in Portugal this season, for example the DP World Tour Portugal Legends Championship at Pinheirinho. Used in posts and the newsletter.
+5. **Content:**
+   - a golf pillar in weeks 5–12: "Buying a home on a golf course in Portugal", with search phrases in PT, EN and FR;
+   - a golf carousel;
+   - the golf-premium LinkedIn post.
 
-## 5. Sponsors: golf and branded residences
+## 5. Madeira: "the Hawaii of Portugal"
 
-Add these to sponsors/pipeline.csv (then `python3 sponsors/build/build_v2.py` and recalc), tier A, category "Developer (golf / branded residences)". These are developers, not agencies (D9). For each one, find the official website and a dated source:
-- Amorim Luxury, for JNcQUOI Club Comporta (linked to S156 Herdade da Comporta if it is the same group: check);
-- VIC Properties: add Six Senses Comporta (Pinheirinho) to its existing entry;
-- Quinta do Lago;
-- Monte Rei Golf & Country Club and Vilamoura World (both Arrow Global group, per public competition-authority notices; check);
-- Onyria Palmares (Lagos);
-- Ombria Algarve;
-- Dunas / JNcQUOI Club (if separate from Amorim Luxury).
+1. **Use Madeira's most beautiful places:**
+   - Pico do Arieiro above the clouds;
+   - Ponta de São Lourenço;
+   - the levadas and the laurel forest (Laurissilva, UNESCO World Heritage);
+   - the natural pools of Porto Moniz;
+   - the black sand at Seixal;
+   - Funchal bay from the sea at dusk.
 
-## 6. VIC demo: add Comporta
+   They go on the place card, in the mosaic and on Madeira's map card. No hillside sprawl.
+2. **Madeira in the content calendar:**
+   - a pillar: "Buying a home in Madeira from abroad", with INE prices for Funchal, Calheta, Santa Cruz, Machico and Ponta do Sol, their 10-year change and rents;
+   - a carousel in the place-postcard format.
+3. **New Year's Eve in Madeira:**
+   - a seasonal pillar page and a run of posts, published in the weeks before 31 December (weeks 6 and 7, 7 to 20 Dec): what the Funchal fireworks are, how to get there, where people stay, and Madeira's homes and prices;
+   - facts only from official or primary sources: the regional government, Visit Madeira, Guinness World Records if a record is cited;
+   - the hook may say "the Hawaii of Portugal" in social posts only, never as a page heading.
+
+## 6. Sponsors: golf, branded residences, Madeira
+
+Add to sponsors/pipeline.csv (then `python3 sponsors/build/build_v2.py` and recalc), tier A, with official website and a dated source each. All are developers, not agencies (D9).
+
+1. **Golf and branded residences:**
+   - Amorim Luxury / JNcQUOI Club Comporta (check the link to S156 Herdade da Comporta);
+   - VIC Properties: add Six Senses Comporta (Pinheirinho) to its entry;
+   - Quinta do Lago;
+   - the Conrad Algarve's owner or residences, if any are for sale (check);
+   - Monte Rei Golf & Country Club and Vilamoura World (public competition-authority notices name Arrow Global group companies; check);
+   - Onyria Palmares (Lagos);
+   - Ombria Algarve.
+2. **Laranjeiras, Algarve** (Neel Sachdev's project, FT 16 Sep 2026): ten houses to rent or sell, finished by 2028. Find the developing company and its official site. Contact only through the company, never a personal address.
+3. **Madeira developers with current projects:** find three to five, each with an official site.
+
+## 7. VIC demo: add Comporta
 
 1. **VIC's demo page and showcase** get Six Senses Comporta beside Prata Riverside Village:
    - VIC's published facts (58 residences, 2 to 5 bedrooms, 210 to 1,400 m², Michaelis Boyd, 70-key hotel, 18-hole course, opening 2028);
    - VIC's own published images;
-   - "Price on request" where no price is published. Never estimate one.
-2. **The VIC film v4** (Geneva family) settles on Comporta instead of the Lisbon riverside:
+   - "Price on request" where no price is published.
+2. **The VIC film v4** (Geneva family) settles on Comporta:
    - shot 4 line: "Somewhere with light." stays;
-   - shot 8: the Six Senses Comporta residences;
+   - shot 8: Six Senses Comporta;
    - shot 10: "Comporta. 9:00 am."
 
-   Render it after the operator's go on the Vanguard film.
+   Render after the operator's go on the Vanguard film.
+
+## 8. "The California of Europe" for the US edition
+
+The FT's phrase for the Algarve is a natural hook for American readers. Add to the US content: a pillar comparing what a budget buys on the Algarve with California. California figures only from official or recognised sources (for example the California Association of Realtors median, labelled), our INE figures for the Algarve, never like-for-like claims. The phrase is quoted and credited to the FT, never used as our own heading.
 
 ## Order of work
 
 1. §1 and §2 on the home page first. Send desktop and mobile screenshots, before and after, and a 20-second scroll recording. Wait for the go.
-2. Then §3 (concierge panel, welcome back, menu overlay) and §4.3. Send screenshots.
-3. §5 (pipeline) and §6.1 (VIC demo page) in parallel; they don't need the go.
-4. §4.1, §4.2 and §4.4 after the go.
+2. Then:
+   - §3 (concierge panel, welcome back, menu);
+   - the golf section (§4.3);
+   - Madeira's photographs (§5.1).
+
+   Send screenshots.
+3. In parallel, without waiting:
+   - §6 (pipeline);
+   - §7.1 (VIC demo page);
+   - the golf data (§4.1, §4.2);
+   - the Madeira and golf pillars, and New Year's Eve (§4.5, §5.2, §5.3), as drafts in content/inbox.
 
 ## Checks
 
@@ -112,6 +159,6 @@ Add these to sponsors/pipeline.csv (then `python3 sponsors/build/build_v2.py` an
 - map click test 308/308;
 - the path works without JavaScript;
 - `check-content.mjs` and `check-parity.mjs` pass;
-- the copy rules from prompt 32 (one to three sentences, one action, a lot of space, no AI slop).
+- prompt 32 copy rules.
 
 Report v1, design-v2 and this pass in one table. Don't send, publish or merge anything.
