@@ -1,0 +1,107 @@
+{
+ "frames": [
+  {
+   "pt": {
+    "format": "story-text",
+    "kicker": "Imóveis Portugal",
+    "h": "Seis edições, a partir de 1 de dezembro.",
+    "body": "Luxemburgo, França, Suíça, Brasil, EUA e Israel. Comprar casa em Portugal a partir de fora, com os números e a fonte.",
+    "source": "Primeira newsletter: 3 de dezembro de 2026",
+    "dark": true
+   },
+   "en": {
+    "format": "story-text",
+    "kicker": "Imóveis Portugal",
+    "h": "Six editions, launching December 1.",
+    "body": "Luxembourg, France, Switzerland, Brazil, the USA and Israel. Buying a home in Portugal from abroad, with the numbers and the source.",
+    "source": "First newsletter: December 3, 2026",
+    "dark": true
+   },
+   "fr": {
+    "format": "story-text",
+    "kicker": "Imóveis Portugal",
+    "h": "Six éditions, dès le 1er décembre.",
+    "body": "Luxembourg, France, Suisse, Brésil, États-Unis et Israël. Acheter au Portugal depuis l'étranger, avec les chiffres et la source.",
+    "source": "Première newsletter : 3 décembre 2026",
+    "dark": true
+   }
+  },
+  {
+   "pt": {
+    "format": "story-text",
+    "kicker": "Sondagem",
+    "h": "O primeiro papel de qualquer compra em Portugal é o NIF.",
+    "body": "O seu número de contribuinte.",
+    "source": "Fonte: Autoridade Tributária, folheto NIF para cidadãos estrangeiros não residentes"
+   },
+   "en": {
+    "format": "story-text",
+    "kicker": "Poll",
+    "h": "The first document of any purchase in Portugal is the NIF.",
+    "body": "Your Portuguese tax number.",
+    "source": "Source: Tax and Customs Authority, NIF leaflet for non-resident foreigners"
+   },
+   "fr": {
+    "format": "story-text",
+    "kicker": "Sondage",
+    "h": "Le premier document de tout achat au Portugal, c'est le NIF.",
+    "body": "Votre numéro fiscal portugais.",
+    "source": "Source : Autorité fiscale, brochure NIF pour les étrangers non résidents"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-card",
+    "kicker": "Novo no feed",
+    "img": "/social/instagram/posts/week-01/2026-11-09_01_launch/card-pt.png"
+   },
+   "en": {
+    "format": "story-card",
+    "kicker": "New on the feed",
+    "img": "/social/instagram/posts/week-01/2026-11-09_01_launch/card-en.png"
+   },
+   "fr": {
+    "format": "story-card",
+    "kicker": "Nouveau sur le fil",
+    "img": "/social/instagram/posts/week-01/2026-11-09_01_launch/card-fr.png"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-text",
+    "kicker": "Pergunte",
+    "h": "A sua pergunta sobre comprar casa a partir de fora.",
+    "body": "Uma pessoa lê todas. Respondemos com a regra e a fonte oficial."
+   },
+   "en": {
+    "format": "story-text",
+    "kicker": "Ask us",
+    "h": "Your question about buying a home in Portugal from abroad.",
+    "body": "A person reads every one. We answer with the rule and the official source."
+   },
+   "fr": {
+    "format": "story-text",
+    "kicker": "Vos questions",
+    "h": "Votre question sur l'achat depuis l'étranger.",
+    "body": "Une personne les lit toutes. Nous répondons avec la règle et la source officielle."
+   }
+  },
+  {
+   "pt": {
+    "format": "story-card",
+    "kicker": "Novo no feed",
+    "img": "/social/instagram/posts/week-01/2026-11-09_02_nif-step-two/slide-01-pt.png"
+   },
+   "en": {
+    "format": "story-card",
+    "kicker": "New on the feed",
+    "img": "/social/instagram/posts/week-01/2026-11-09_02_nif-step-two/slide-01-en.png"
+   },
+   "fr": {
+    "format": "story-card",
+    "kicker": "Nouveau sur le fil",
+    "img": "/social/instagram/posts/week-01/2026-11-09_02_nif-step-two/slide-01-fr.png"
+   }
+  }
+ ]
+}

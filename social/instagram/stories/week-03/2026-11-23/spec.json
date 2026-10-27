@@ -1,0 +1,107 @@
+{
+ "frames": [
+  {
+   "pt": {
+    "format": "story-text",
+    "kicker": "Sondagem",
+    "h": "A procuração assina-se no consulado, ou no notário com a Apostila.",
+    "body": "Responda na sondagem.",
+    "source": "Fonte: consulados de Portugal"
+   },
+   "en": {
+    "format": "story-text",
+    "kicker": "Poll",
+    "h": "A power of attorney is signed at the consulate, or before a notary with the Apostille.",
+    "body": "Answer in the poll.",
+    "source": "Source: Portuguese consulates"
+   },
+   "fr": {
+    "format": "story-text",
+    "kicker": "Sondage",
+    "h": "La procuration se signe au consulat, ou chez un notaire avec l'apostille.",
+    "body": "Répondez au sondage.",
+    "source": "Source : consulats du Portugal"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-card",
+    "kicker": "Novo no feed",
+    "img": "/social/instagram/posts/week-03/2026-11-23_01_deed-steps/slide-01-pt.png"
+   },
+   "en": {
+    "format": "story-card",
+    "kicker": "New on the feed",
+    "img": "/social/instagram/posts/week-03/2026-11-23_01_deed-steps/slide-01-en.png"
+   },
+   "fr": {
+    "format": "story-card",
+    "kicker": "Nouveau sur le fil",
+    "img": "/social/instagram/posts/week-03/2026-11-23_01_deed-steps/slide-01-fr.png"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-text",
+    "kicker": "Um número",
+    "big": "375 €",
+    "h": "A escritura e o registo, na Casa Pronta.",
+    "source": "Fonte: Justiça.gov.pt, Casa Pronta"
+   },
+   "en": {
+    "format": "story-text",
+    "kicker": "One number",
+    "big": "€375",
+    "h": "The deed and registration, at Casa Pronta.",
+    "source": "Source: Justiça.gov.pt, Casa Pronta"
+   },
+   "fr": {
+    "format": "story-text",
+    "kicker": "Un chiffre",
+    "big": "375 €",
+    "h": "L'acte et l'enregistrement, à la Casa Pronta.",
+    "source": "Source : Justiça.gov.pt, Casa Pronta"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-card",
+    "kicker": "Novo no feed",
+    "img": "/social/instagram/posts/week-03/2026-11-23_02_here-vs-there-geneva/card-pt.png"
+   },
+   "en": {
+    "format": "story-card",
+    "kicker": "New on the feed",
+    "img": "/social/instagram/posts/week-03/2026-11-23_02_here-vs-there-geneva/card-en.png"
+   },
+   "fr": {
+    "format": "story-card",
+    "kicker": "Nouveau sur le fil",
+    "img": "/social/instagram/posts/week-03/2026-11-23_02_here-vs-there-geneva/card-fr.png"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-text",
+    "dark": true,
+    "kicker": "Perguntas",
+    "h": "A sua pergunta sobre a escritura.",
+    "body": "Respondemos esta semana, com a fonte oficial."
+   },
+   "en": {
+    "format": "story-text",
+    "dark": true,
+    "kicker": "Questions",
+    "h": "Your question about the deed.",
+    "body": "We answer this week, with the official source."
+   },
+   "fr": {
+    "format": "story-text",
+    "dark": true,
+    "kicker": "Questions",
+    "h": "Votre question sur l'acte.",
+    "body": "Nous répondons cette semaine, avec la source officielle."
+   }
+  }
+ ]
+}

@@ -1,0 +1,320 @@
+{
+ "pt": {
+  "source": "Fonte: INE, mediana do valor por m² das casas vendidas, 12 meses até ao 2.º trimestre de 2026",
+  "slides": [
+   {
+    "format": "text",
+    "kicker": "O que o seu orçamento compra",
+    "big": "300 000 €",
+    "h": "Três orçamentos, seis lugares, em metros quadrados."
+   },
+   {
+    "format": "budget-buys",
+    "kicker": "Primeiro orçamento",
+    "h": "Com 300 000 €.",
+    "items": [
+     {
+      "place": "Lisboa",
+      "m2": 57.78120184899846,
+      "v": "58 m²"
+     },
+     {
+      "place": "Cascais",
+      "m2": 61.36224176723256,
+      "v": "61 m²"
+     },
+     {
+      "place": "Loulé",
+      "m2": 72.51631617113851,
+      "v": "73 m²"
+     },
+     {
+      "place": "Porto",
+      "m2": 82.62186725419994,
+      "v": "83 m²"
+     },
+     {
+      "place": "Funchal",
+      "m2": 84.79366873940079,
+      "v": "85 m²"
+     },
+     {
+      "place": "Grândola (Comporta)",
+      "m2": 117.97090051120723,
+      "v": "118 m²"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "format": "budget-buys",
+    "kicker": "Segundo orçamento",
+    "h": "Com 500 000 €.",
+    "items": [
+     {
+      "place": "Lisboa",
+      "m2": 96.3020030816641,
+      "v": "96 m²"
+     },
+     {
+      "place": "Cascais",
+      "m2": 102.2704029453876,
+      "v": "102 m²"
+     },
+     {
+      "place": "Loulé",
+      "m2": 120.86052695189751,
+      "v": "121 m²"
+     },
+     {
+      "place": "Porto",
+      "m2": 137.70311209033324,
+      "v": "138 m²"
+     },
+     {
+      "place": "Funchal",
+      "m2": 141.32278123233465,
+      "v": "141 m²"
+     },
+     {
+      "place": "Grândola (Comporta)",
+      "m2": 196.61816751867872,
+      "v": "197 m²"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "format": "text",
+    "kicker": "Terceiro orçamento",
+    "big": "1 M€",
+    "h": "Com um milhão, mais de 200 m² em 303 dos 304 concelhos.",
+    "body": "Lisboa, cerca de 193 m²; Porto, 275; Grândola, 393."
+   },
+   {
+    "format": "text",
+    "kicker": "Como ler",
+    "h": "As medianas não são casas.",
+    "body": "São o meio de tudo o que se vendeu num ano, novo e usado."
+   },
+   {
+    "format": "end",
+    "kicker": "A resposta completa",
+    "h": "Leia a resposta completa.",
+    "body": "Página «O que o seu orçamento compra», link na bio."
+   }
+  ]
+ },
+ "en": {
+  "source": "Source: INE, median value per m² of homes sold, 12 months to Q2 2026",
+  "slides": [
+   {
+    "format": "text",
+    "kicker": "What your budget buys",
+    "big": "€300,000",
+    "h": "Three budgets, six places, in square metres."
+   },
+   {
+    "format": "budget-buys",
+    "kicker": "First budget",
+    "h": "With €300,000.",
+    "items": [
+     {
+      "place": "Lisboa",
+      "m2": 57.78120184899846,
+      "v": "58 m²"
+     },
+     {
+      "place": "Cascais",
+      "m2": 61.36224176723256,
+      "v": "61 m²"
+     },
+     {
+      "place": "Loulé",
+      "m2": 72.51631617113851,
+      "v": "73 m²"
+     },
+     {
+      "place": "Porto",
+      "m2": 82.62186725419994,
+      "v": "83 m²"
+     },
+     {
+      "place": "Funchal",
+      "m2": 84.79366873940079,
+      "v": "85 m²"
+     },
+     {
+      "place": "Grândola (Comporta)",
+      "m2": 117.97090051120723,
+      "v": "118 m²"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "format": "budget-buys",
+    "kicker": "Second budget",
+    "h": "With €500,000.",
+    "items": [
+     {
+      "place": "Lisboa",
+      "m2": 96.3020030816641,
+      "v": "96 m²"
+     },
+     {
+      "place": "Cascais",
+      "m2": 102.2704029453876,
+      "v": "102 m²"
+     },
+     {
+      "place": "Loulé",
+      "m2": 120.86052695189751,
+      "v": "121 m²"
+     },
+     {
+      "place": "Porto",
+      "m2": 137.70311209033324,
+      "v": "138 m²"
+     },
+     {
+      "place": "Funchal",
+      "m2": 141.32278123233465,
+      "v": "141 m²"
+     },
+     {
+      "place": "Grândola (Comporta)",
+      "m2": 196.61816751867872,
+      "v": "197 m²"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "format": "text",
+    "kicker": "Third budget",
+    "big": "€1M",
+    "h": "With €1 million, more than 200 m² in 303 of 304 municipalities.",
+    "body": "Lisbon, about 193 m²; Porto, 275; Grândola, 393."
+   },
+   {
+    "format": "text",
+    "kicker": "How to read it",
+    "h": "Medians aren't homes.",
+    "body": "They're the middle of everything sold in a year, new and existing."
+   },
+   {
+    "format": "end",
+    "kicker": "The full answer",
+    "h": "Read the full answer.",
+    "body": "What your budget buys page, link in bio."
+   }
+  ]
+ },
+ "fr": {
+  "source": "Source : INE, valeur médiane au m² des logements vendus, 12 mois au T2 2026",
+  "slides": [
+   {
+    "format": "text",
+    "kicker": "Ce que votre budget achète",
+    "big": "300 000 €",
+    "h": "Trois budgets, six lieux, en mètres carrés."
+   },
+   {
+    "format": "budget-buys",
+    "kicker": "Premier budget",
+    "h": "Avec 300 000 €.",
+    "items": [
+     {
+      "place": "Lisboa",
+      "m2": 57.78120184899846,
+      "v": "58 m²"
+     },
+     {
+      "place": "Cascais",
+      "m2": 61.36224176723256,
+      "v": "61 m²"
+     },
+     {
+      "place": "Loulé",
+      "m2": 72.51631617113851,
+      "v": "73 m²"
+     },
+     {
+      "place": "Porto",
+      "m2": 82.62186725419994,
+      "v": "83 m²"
+     },
+     {
+      "place": "Funchal",
+      "m2": 84.79366873940079,
+      "v": "85 m²"
+     },
+     {
+      "place": "Grândola (Comporta)",
+      "m2": 117.97090051120723,
+      "v": "118 m²"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "format": "budget-buys",
+    "kicker": "Deuxième budget",
+    "h": "Avec 500 000 €.",
+    "items": [
+     {
+      "place": "Lisboa",
+      "m2": 96.3020030816641,
+      "v": "96 m²"
+     },
+     {
+      "place": "Cascais",
+      "m2": 102.2704029453876,
+      "v": "102 m²"
+     },
+     {
+      "place": "Loulé",
+      "m2": 120.86052695189751,
+      "v": "121 m²"
+     },
+     {
+      "place": "Porto",
+      "m2": 137.70311209033324,
+      "v": "138 m²"
+     },
+     {
+      "place": "Funchal",
+      "m2": 141.32278123233465,
+      "v": "141 m²"
+     },
+     {
+      "place": "Grândola (Comporta)",
+      "m2": 196.61816751867872,
+      "v": "197 m²"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "format": "text",
+    "kicker": "Troisième budget",
+    "big": "1 M€",
+    "h": "Avec un million, plus de 200 m² dans 303 des 304 communes.",
+    "body": "Lisbonne, environ 193 m² ; Porto, 275 ; Grândola, 393."
+   },
+   {
+    "format": "text",
+    "kicker": "Comment lire",
+    "h": "Une médiane n'est pas un logement.",
+    "body": "C'est le milieu de tout ce qui s'est vendu en un an, neuf et ancien."
+   },
+   {
+    "format": "end",
+    "kicker": "La réponse complète",
+    "h": "Lisez la réponse complète.",
+    "body": "Page « Ce que votre budget achète », lien dans la bio."
+   }
+  ]
+ }
+}

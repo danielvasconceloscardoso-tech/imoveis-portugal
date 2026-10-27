@@ -1,0 +1,368 @@
+{
+ "pt": {
+  "source": "Fontes: Observatoire de l'Habitat (LU), 2026 T2; Notaires de France, 2026 T3; OCSTAT, 2024; BCE; INE, 2.º trimestre de 2026",
+  "slides": [
+   {
+    "format": "text",
+    "kicker": "Aqui e lá",
+    "big": "1 m²",
+    "h": "Luxemburgo, Paris, Genebra. O mesmo metro quadrado, medido em Portugal."
+   },
+   {
+    "format": "here-vs-there",
+    "kicker": "Luxemburgo",
+    "h": "Um metro quadrado na cidade do Luxemburgo. Dois em Lisboa.",
+    "items": [
+     {
+      "place": "Luxemburgo (cidade)",
+      "m2": 1,
+      "v": "1 m²"
+     },
+     {
+      "place": "Lisboa",
+      "m2": 1.9778505392912173,
+      "v": "2,0 m²"
+     },
+     {
+      "place": "Cascais",
+      "m2": 2.1004295356923706,
+      "v": "2,1 m²"
+     },
+     {
+      "place": "Porto",
+      "m2": 2.828146516111264,
+      "v": "2,8 m²"
+     },
+     {
+      "place": "Funchal",
+      "m2": 2.902487280949689,
+      "v": "2,9 m²"
+     }
+    ],
+    "note": "10 269 €, média, apartamentos existentes, julho de 2025 a junho de 2026 (Observatoire de l'Habitat). Mediana do INE em Portugal."
+   },
+   {
+    "format": "here-vs-there",
+    "kicker": "Paris",
+    "h": "Um metro quadrado em Paris. Quase dois em Lisboa.",
+    "items": [
+     {
+      "place": "Paris",
+      "m2": 1,
+      "v": "1 m²"
+     },
+     {
+      "place": "Lisboa",
+      "m2": 1.8667180277349769,
+      "v": "1,9 m²"
+     },
+     {
+      "place": "Cascais",
+      "m2": 1.9824094906933933,
+      "v": "2,0 m²"
+     },
+     {
+      "place": "Porto",
+      "m2": 2.6692371247590194,
+      "v": "2,7 m²"
+     },
+     {
+      "place": "Funchal",
+      "m2": 2.739400791407575,
+      "v": "2,7 m²"
+     }
+    ],
+    "note": "9 692 €, mediana, apartamentos existentes, outubro de 2025 a setembro de 2026 (Notaires de France). Mediana do INE em Portugal."
+   },
+   {
+    "format": "here-vs-there",
+    "kicker": "Genebra",
+    "h": "Um metro quadrado em Genebra. Mais de dois em Lisboa.",
+    "items": [
+     {
+      "place": "Genebra (cantão)",
+      "m2": 1,
+      "v": "1 m²"
+     },
+     {
+      "place": "Lisboa",
+      "m2": 2.2654506111310297,
+      "v": "2,3 m²"
+     },
+     {
+      "place": "Cascais",
+      "m2": 2.405853870524096,
+      "v": "2,4 m²"
+     },
+     {
+      "place": "Porto",
+      "m2": 3.2393884805817423,
+      "v": "3,2 m²"
+     },
+     {
+      "place": "Funchal",
+      "m2": 3.324539167041353,
+      "v": "3,3 m²"
+     }
+    ],
+    "note": "10 853 CHF, cerca de 11 762 € à taxa do BCE de 23/10/2026, mediana, apartamentos PPE existentes, cantão, 2024 (OCSTAT). Mediana do INE em Portugal."
+   },
+   {
+    "format": "text",
+    "kicker": "Como ler",
+    "h": "Três fontes oficiais, uma conta.",
+    "body": "O preço de 1 m² lá fora, a dividir pela mediana do INE em cada concelho."
+   },
+   {
+    "format": "end",
+    "kicker": "A sua zona",
+    "h": "Veja a sua zona no mapa.",
+    "body": "Página Mapa, link na bio."
+   }
+  ]
+ },
+ "en": {
+  "source": "Sources: Observatoire de l'Habitat (LU), Q2 2026; Notaires de France, Q3 2026; OCSTAT, 2024; ECB; INE, Q2 2026",
+  "slides": [
+   {
+    "format": "text",
+    "kicker": "Here and there",
+    "big": "1 m²",
+    "h": "Luxembourg, Paris, Geneva. The same square metre, measured in Portugal."
+   },
+   {
+    "format": "here-vs-there",
+    "kicker": "Luxembourg",
+    "h": "One square metre in Luxembourg City. Two in Lisbon.",
+    "items": [
+     {
+      "place": "Luxembourg City",
+      "m2": 1,
+      "v": "1 m²"
+     },
+     {
+      "place": "Lisboa",
+      "m2": 1.9778505392912173,
+      "v": "2.0 m²"
+     },
+     {
+      "place": "Cascais",
+      "m2": 2.1004295356923706,
+      "v": "2.1 m²"
+     },
+     {
+      "place": "Porto",
+      "m2": 2.828146516111264,
+      "v": "2.8 m²"
+     },
+     {
+      "place": "Funchal",
+      "m2": 2.902487280949689,
+      "v": "2.9 m²"
+     }
+    ],
+    "note": "€10,269, average, existing apartments, July 2025 to June 2026 (Observatoire de l'Habitat). INE medians in Portugal."
+   },
+   {
+    "format": "here-vs-there",
+    "kicker": "Paris",
+    "h": "One square metre in Paris. Almost two in Lisbon.",
+    "items": [
+     {
+      "place": "Paris",
+      "m2": 1,
+      "v": "1 m²"
+     },
+     {
+      "place": "Lisboa",
+      "m2": 1.8667180277349769,
+      "v": "1.9 m²"
+     },
+     {
+      "place": "Cascais",
+      "m2": 1.9824094906933933,
+      "v": "2.0 m²"
+     },
+     {
+      "place": "Porto",
+      "m2": 2.6692371247590194,
+      "v": "2.7 m²"
+     },
+     {
+      "place": "Funchal",
+      "m2": 2.739400791407575,
+      "v": "2.7 m²"
+     }
+    ],
+    "note": "€9,692, median, existing apartments, October 2025 to September 2026 (Notaires de France). INE medians in Portugal."
+   },
+   {
+    "format": "here-vs-there",
+    "kicker": "Geneva",
+    "h": "One square metre in Geneva. More than two in Lisbon.",
+    "items": [
+     {
+      "place": "Geneva (canton)",
+      "m2": 1,
+      "v": "1 m²"
+     },
+     {
+      "place": "Lisboa",
+      "m2": 2.2654506111310297,
+      "v": "2.3 m²"
+     },
+     {
+      "place": "Cascais",
+      "m2": 2.405853870524096,
+      "v": "2.4 m²"
+     },
+     {
+      "place": "Porto",
+      "m2": 3.2393884805817423,
+      "v": "3.2 m²"
+     },
+     {
+      "place": "Funchal",
+      "m2": 3.324539167041353,
+      "v": "3.3 m²"
+     }
+    ],
+    "note": "CHF 10,853, about €11,762 at the ECB rate of 23 Oct 2026, median, existing PPE apartments, canton, 2024 (OCSTAT). INE medians in Portugal."
+   },
+   {
+    "format": "text",
+    "kicker": "How to read it",
+    "h": "Three official sources, one sum.",
+    "body": "The price of 1 m² abroad, divided by the INE median of each Portuguese municipality."
+   },
+   {
+    "format": "end",
+    "kicker": "Your area",
+    "h": "See your area on the map.",
+    "body": "Map page, link in bio."
+   }
+  ]
+ },
+ "fr": {
+  "source": "Sources : Observatoire de l'Habitat (LU), T2 2026 ; Notaires de France, T3 2026 ; OCSTAT, 2024 ; BCE ; INE, T2 2026",
+  "slides": [
+   {
+    "format": "text",
+    "kicker": "Ici et là-bas",
+    "big": "1 m²",
+    "h": "Luxembourg, Paris, Genève. Le même mètre carré, mesuré au Portugal."
+   },
+   {
+    "format": "here-vs-there",
+    "kicker": "Luxembourg",
+    "h": "Un mètre carré à Luxembourg-Ville. Deux à Lisbonne.",
+    "items": [
+     {
+      "place": "Luxembourg-Ville",
+      "m2": 1,
+      "v": "1 m²"
+     },
+     {
+      "place": "Lisboa",
+      "m2": 1.9778505392912173,
+      "v": "2,0 m²"
+     },
+     {
+      "place": "Cascais",
+      "m2": 2.1004295356923706,
+      "v": "2,1 m²"
+     },
+     {
+      "place": "Porto",
+      "m2": 2.828146516111264,
+      "v": "2,8 m²"
+     },
+     {
+      "place": "Funchal",
+      "m2": 2.902487280949689,
+      "v": "2,9 m²"
+     }
+    ],
+    "note": "10 269 €, moyenne, appartements existants, juillet 2025 à juin 2026 (Observatoire de l'Habitat). Prix médian INE au Portugal."
+   },
+   {
+    "format": "here-vs-there",
+    "kicker": "Paris",
+    "h": "Un mètre carré à Paris. Presque deux à Lisbonne.",
+    "items": [
+     {
+      "place": "Paris",
+      "m2": 1,
+      "v": "1 m²"
+     },
+     {
+      "place": "Lisboa",
+      "m2": 1.8667180277349769,
+      "v": "1,9 m²"
+     },
+     {
+      "place": "Cascais",
+      "m2": 1.9824094906933933,
+      "v": "2,0 m²"
+     },
+     {
+      "place": "Porto",
+      "m2": 2.6692371247590194,
+      "v": "2,7 m²"
+     },
+     {
+      "place": "Funchal",
+      "m2": 2.739400791407575,
+      "v": "2,7 m²"
+     }
+    ],
+    "note": "9 692 €, médiane, appartements anciens, octobre 2025 à septembre 2026 (Notaires de France). Prix médian INE au Portugal."
+   },
+   {
+    "format": "here-vs-there",
+    "kicker": "Genève",
+    "h": "Un mètre carré à Genève. Plus de deux à Lisbonne.",
+    "items": [
+     {
+      "place": "Genève (canton)",
+      "m2": 1,
+      "v": "1 m²"
+     },
+     {
+      "place": "Lisboa",
+      "m2": 2.2654506111310297,
+      "v": "2,3 m²"
+     },
+     {
+      "place": "Cascais",
+      "m2": 2.405853870524096,
+      "v": "2,4 m²"
+     },
+     {
+      "place": "Porto",
+      "m2": 3.2393884805817423,
+      "v": "3,2 m²"
+     },
+     {
+      "place": "Funchal",
+      "m2": 3.324539167041353,
+      "v": "3,3 m²"
+     }
+    ],
+    "note": "10 853 CHF, environ 11 762 € au taux BCE du 23/10/2026, médiane, appartements PPE existants, canton, 2024 (OCSTAT). Prix médian INE au Portugal."
+   },
+   {
+    "format": "text",
+    "kicker": "Comment lire",
+    "h": "Trois sources officielles, un calcul.",
+    "body": "Le prix d'1 m² à l'étranger, divisé par le prix médian INE de chaque commune portugaise."
+   },
+   {
+    "format": "end",
+    "kicker": "Votre région",
+    "h": "Voyez votre région sur la carte.",
+    "body": "Page Carte, lien dans la bio."
+   }
+  ]
+ }
+}

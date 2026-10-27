@@ -1,0 +1,323 @@
+{
+ "pt": {
+  "source": "Fonte: INE, mediana por m² das casas vendidas, 1.º trim. 2016 e 2.º trim. 2026",
+  "slides": [
+   {
+    "format": "text",
+    "kicker": "Antes e agora",
+    "big": "100 000 €",
+    "h": "Dez anos, cinco lugares, o mesmo dinheiro."
+   },
+   {
+    "format": "then-and-now",
+    "kicker": "Lisboa",
+    "h": "De 53 m² para 19.",
+    "items": [
+     {
+      "place": "1.º trim. 2016",
+      "m2": 53.333333333333336,
+      "v": "53 m²"
+     },
+     {
+      "place": "2.º trim. 2026",
+      "m2": 19.26040061633282,
+      "v": "19 m²"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "format": "then-and-now",
+    "kicker": "Cascais",
+    "h": "De 63 m² para 20.",
+    "items": [
+     {
+      "place": "1.º trim. 2016",
+      "m2": 62.53908692933083,
+      "v": "63 m²"
+     },
+     {
+      "place": "2.º trim. 2026",
+      "m2": 20.45408058907752,
+      "v": "20 m²"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "format": "then-and-now",
+    "kicker": "Porto",
+    "h": "De 92 m² para 28.",
+    "items": [
+     {
+      "place": "1.º trim. 2016",
+      "m2": 91.91176470588235,
+      "v": "92 m²"
+     },
+     {
+      "place": "2.º trim. 2026",
+      "m2": 27.540622418066647,
+      "v": "28 m²"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "format": "then-and-now",
+    "kicker": "Loulé, Algarve",
+    "h": "De 64 m² para 24.",
+    "items": [
+     {
+      "place": "1.º trim. 2016",
+      "m2": 63.9386189258312,
+      "v": "64 m²"
+     },
+     {
+      "place": "2.º trim. 2026",
+      "m2": 24.172105390379503,
+      "v": "24 m²"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "format": "then-and-now",
+    "kicker": "Funchal, Madeira",
+    "h": "De 81 m² para 28.",
+    "items": [
+     {
+      "place": "1.º trim. 2016",
+      "m2": 81.49959250203749,
+      "v": "81 m²"
+     },
+     {
+      "place": "2.º trim. 2026",
+      "m2": 28.26455624646693,
+      "v": "28 m²"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "format": "end",
+    "kicker": "Preços das casas",
+    "h": "Dez anos da sua zona: link na bio.",
+    "body": "Medianas do INE por m², 2016 a 2026."
+   }
+  ]
+ },
+ "en": {
+  "source": "Source: INE, median per m² of homes sold, Q1 2016 and Q2 2026",
+  "slides": [
+   {
+    "format": "text",
+    "kicker": "Then and now",
+    "big": "€100,000",
+    "h": "Ten years, five places, the same money."
+   },
+   {
+    "format": "then-and-now",
+    "kicker": "Lisbon",
+    "h": "From 53 m² to 19.",
+    "items": [
+     {
+      "place": "Q1 2016",
+      "m2": 53.333333333333336,
+      "v": "53 m²"
+     },
+     {
+      "place": "Q2 2026",
+      "m2": 19.26040061633282,
+      "v": "19 m²"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "format": "then-and-now",
+    "kicker": "Cascais",
+    "h": "From 63 m² to 20.",
+    "items": [
+     {
+      "place": "Q1 2016",
+      "m2": 62.53908692933083,
+      "v": "63 m²"
+     },
+     {
+      "place": "Q2 2026",
+      "m2": 20.45408058907752,
+      "v": "20 m²"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "format": "then-and-now",
+    "kicker": "Porto",
+    "h": "From 92 m² to 28.",
+    "items": [
+     {
+      "place": "Q1 2016",
+      "m2": 91.91176470588235,
+      "v": "92 m²"
+     },
+     {
+      "place": "Q2 2026",
+      "m2": 27.540622418066647,
+      "v": "28 m²"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "format": "then-and-now",
+    "kicker": "Loulé, Algarve",
+    "h": "From 64 m² to 24.",
+    "items": [
+     {
+      "place": "Q1 2016",
+      "m2": 63.9386189258312,
+      "v": "64 m²"
+     },
+     {
+      "place": "Q2 2026",
+      "m2": 24.172105390379503,
+      "v": "24 m²"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "format": "then-and-now",
+    "kicker": "Funchal, Madeira",
+    "h": "From 81 m² to 28.",
+    "items": [
+     {
+      "place": "Q1 2016",
+      "m2": 81.49959250203749,
+      "v": "81 m²"
+     },
+     {
+      "place": "Q2 2026",
+      "m2": 28.26455624646693,
+      "v": "28 m²"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "format": "end",
+    "kicker": "House prices",
+    "h": "See ten years for your area: link in bio.",
+    "body": "INE medians per m², 2016 to 2026."
+   }
+  ]
+ },
+ "fr": {
+  "source": "Source : INE, médiane au m² des logements vendus, T1 2016 et T2 2026",
+  "slides": [
+   {
+    "format": "text",
+    "kicker": "Avant et maintenant",
+    "big": "100 000 €",
+    "h": "Dix ans, cinq lieux, la même somme."
+   },
+   {
+    "format": "then-and-now",
+    "kicker": "Lisbonne",
+    "h": "De 53 m² à 19.",
+    "items": [
+     {
+      "place": "T1 2016",
+      "m2": 53.333333333333336,
+      "v": "53 m²"
+     },
+     {
+      "place": "T2 2026",
+      "m2": 19.26040061633282,
+      "v": "19 m²"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "format": "then-and-now",
+    "kicker": "Cascais",
+    "h": "De 63 m² à 20.",
+    "items": [
+     {
+      "place": "T1 2016",
+      "m2": 62.53908692933083,
+      "v": "63 m²"
+     },
+     {
+      "place": "T2 2026",
+      "m2": 20.45408058907752,
+      "v": "20 m²"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "format": "then-and-now",
+    "kicker": "Porto",
+    "h": "De 92 m² à 28.",
+    "items": [
+     {
+      "place": "T1 2016",
+      "m2": 91.91176470588235,
+      "v": "92 m²"
+     },
+     {
+      "place": "T2 2026",
+      "m2": 27.540622418066647,
+      "v": "28 m²"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "format": "then-and-now",
+    "kicker": "Loulé, Algarve",
+    "h": "De 64 m² à 24.",
+    "items": [
+     {
+      "place": "T1 2016",
+      "m2": 63.9386189258312,
+      "v": "64 m²"
+     },
+     {
+      "place": "T2 2026",
+      "m2": 24.172105390379503,
+      "v": "24 m²"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "format": "then-and-now",
+    "kicker": "Funchal, Madère",
+    "h": "De 81 m² à 28.",
+    "items": [
+     {
+      "place": "T1 2016",
+      "m2": 81.49959250203749,
+      "v": "81 m²"
+     },
+     {
+      "place": "T2 2026",
+      "m2": 28.26455624646693,
+      "v": "28 m²"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "format": "end",
+    "kicker": "Prix des logements",
+    "h": "Votre commune sur dix ans : lien dans la bio.",
+    "body": "Médianes INE au m², 2016 à 2026."
+   }
+  ]
+ }
+}

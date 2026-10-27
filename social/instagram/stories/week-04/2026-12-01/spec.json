@@ -1,0 +1,101 @@
+{
+ "frames": [
+  {
+   "pt": {
+    "format": "story-text",
+    "kicker": "Hoje",
+    "h": "Imóveis Portugal abre hoje.",
+    "body": "Seis edições, três línguas e a fonte por baixo de cada número.",
+    "dark": true
+   },
+   "en": {
+    "format": "story-text",
+    "kicker": "Today",
+    "h": "Imóveis Portugal opens today.",
+    "body": "Six editions, three languages and the source under every number.",
+    "dark": true
+   },
+   "fr": {
+    "format": "story-text",
+    "kicker": "Aujourd'hui",
+    "h": "Imóveis Portugal ouvre aujourd'hui.",
+    "body": "Six éditions, trois langues et la source sous chaque chiffre.",
+    "dark": true
+   }
+  },
+  {
+   "pt": {
+    "format": "story-card",
+    "kicker": "Novo post",
+    "img": "/social/instagram/posts/week-04/2026-12-01_01_here-vs-there/card-pt.png"
+   },
+   "en": {
+    "format": "story-card",
+    "kicker": "New post",
+    "img": "/social/instagram/posts/week-04/2026-12-01_01_here-vs-there/card-en.png"
+   },
+   "fr": {
+    "format": "story-card",
+    "kicker": "Nouveau post",
+    "img": "/social/instagram/posts/week-04/2026-12-01_01_here-vs-there/card-fr.png"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-text",
+    "kicker": "Sondagem",
+    "h": "O seu projeto em Portugal, numa palavra.",
+    "body": "As respostas ajudam a escolher os temas das próximas newsletters."
+   },
+   "en": {
+    "format": "story-text",
+    "kicker": "Poll",
+    "h": "Your plan in Portugal, in one word.",
+    "body": "Your answers help choose the next newsletters' topics."
+   },
+   "fr": {
+    "format": "story-text",
+    "kicker": "Sondage",
+    "h": "Votre projet au Portugal, en un mot.",
+    "body": "Vos réponses orientent les sujets des prochaines newsletters."
+   }
+  },
+  {
+   "pt": {
+    "format": "story-card",
+    "kicker": "Novo post",
+    "img": "/social/instagram/posts/week-04/2026-12-01_02_one-number-imt/card-pt.png"
+   },
+   "en": {
+    "format": "story-card",
+    "kicker": "New post",
+    "img": "/social/instagram/posts/week-04/2026-12-01_02_one-number-imt/card-en.png"
+   },
+   "fr": {
+    "format": "story-card",
+    "kicker": "Nouveau post",
+    "img": "/social/instagram/posts/week-04/2026-12-01_02_one-number-imt/card-fr.png"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-text",
+    "kicker": "Pergunte-nos",
+    "h": "A sua pergunta sobre comprar casa em Portugal.",
+    "body": "As mais enviadas têm resposta na primeira newsletter, quinta-feira."
+   },
+   "en": {
+    "format": "story-text",
+    "kicker": "Ask us",
+    "h": "Your question about buying in Portugal.",
+    "body": "We answer the most-asked in Thursday's first issue."
+   },
+   "fr": {
+    "format": "story-text",
+    "kicker": "Posez-nous la question",
+    "h": "Votre question sur l'achat au Portugal.",
+    "body": "Nous répondons aux plus fréquentes dans la première newsletter, jeudi."
+   }
+  }
+ ]
+}

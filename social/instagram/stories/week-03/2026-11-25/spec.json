@@ -1,0 +1,84 @@
+{
+ "frames": [
+  {
+   "pt": {
+    "format": "story-text",
+    "kicker": "Sondagem",
+    "h": "Consulado, ou o seu notário com a Apostila de Haia.",
+    "body": "Os dois valem em Portugal.",
+    "source": "Fonte: consulados de Portugal"
+   },
+   "en": {
+    "format": "story-text",
+    "kicker": "Poll",
+    "h": "The consulate, or your notary with the Hague Apostille.",
+    "body": "Both work in Portugal.",
+    "source": "Source: Portuguese consulates"
+   },
+   "fr": {
+    "format": "story-text",
+    "kicker": "Sondage",
+    "h": "Le consulat, ou votre notaire avec l'apostille de La Haye.",
+    "body": "Les deux valent au Portugal.",
+    "source": "Source : consulats du Portugal"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-card",
+    "kicker": "Novo no feed",
+    "img": "/social/instagram/posts/week-03/2026-11-25_01_procuracao-two-ways/slide-01-pt.png"
+   },
+   "en": {
+    "format": "story-card",
+    "kicker": "New on the feed",
+    "img": "/social/instagram/posts/week-03/2026-11-25_01_procuracao-two-ways/slide-01-en.png"
+   },
+   "fr": {
+    "format": "story-card",
+    "kicker": "Nouveau sur le fil",
+    "img": "/social/instagram/posts/week-03/2026-11-25_01_procuracao-two-ways/slide-01-fr.png"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-card",
+    "kicker": "Novo no feed",
+    "img": "/social/instagram/posts/week-03/2026-11-25_02_budget-buys-reais/card-pt.png"
+   },
+   "en": {
+    "format": "story-card",
+    "kicker": "New on the feed",
+    "img": "/social/instagram/posts/week-03/2026-11-25_02_budget-buys-reais/card-en.png"
+   },
+   "fr": {
+    "format": "story-card",
+    "kicker": "Nouveau sur le fil",
+    "img": "/social/instagram/posts/week-03/2026-11-25_02_budget-buys-reais/card-fr.png"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-text",
+    "dark": true,
+    "kicker": "Perguntas",
+    "h": "A sua pergunta sobre a procuração.",
+    "body": "Respondemos com a fonte oficial."
+   },
+   "en": {
+    "format": "story-text",
+    "dark": true,
+    "kicker": "Questions",
+    "h": "Your question about the power of attorney.",
+    "body": "We answer with the official source."
+   },
+   "fr": {
+    "format": "story-text",
+    "dark": true,
+    "kicker": "Questions",
+    "h": "Votre question sur la procuration.",
+    "body": "Nous répondons avec la source officielle."
+   }
+  }
+ ]
+}

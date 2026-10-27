@@ -1,0 +1,44 @@
+{
+ "frames": [
+  {
+   "pt": {
+    "format": "story-text",
+    "kicker": "Primeira newsletter",
+    "h": "A primeira newsletter sai a 3 de dezembro.",
+    "body": "Diga-nos que pergunta quer ver respondida. Uma pessoa lê todas.",
+    "dark": true
+   },
+   "en": {
+    "format": "story-text",
+    "kicker": "First newsletter",
+    "h": "The first newsletter comes out on December 3.",
+    "body": "Tell us which question you want answered. A person reads every one.",
+    "dark": true
+   },
+   "fr": {
+    "format": "story-text",
+    "kicker": "Première newsletter",
+    "h": "La première newsletter sort le 3 décembre.",
+    "body": "Dites-nous quelle question vous voulez voir traitée. Une personne les lit toutes.",
+    "dark": true
+   }
+  },
+  {
+   "pt": {
+    "format": "story-card",
+    "kicker": "O que o orçamento compra",
+    "img": "/social/instagram/posts/week-01/2026-11-14_01_budget-buys-chf/card-pt.png"
+   },
+   "en": {
+    "format": "story-card",
+    "kicker": "What a budget buys",
+    "img": "/social/instagram/posts/week-01/2026-11-14_01_budget-buys-chf/card-en.png"
+   },
+   "fr": {
+    "format": "story-card",
+    "kicker": "Ce qu'un budget achète",
+    "img": "/social/instagram/posts/week-01/2026-11-14_01_budget-buys-chf/card-fr.png"
+   }
+  }
+ ]
+}

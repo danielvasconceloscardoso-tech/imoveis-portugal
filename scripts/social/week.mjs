@@ -11,10 +11,10 @@
 // with --approved, only posts marked status: approved (PLAYBOOK §6). Usage (repo root):
 //   node scripts/social/week.mjs 4 [--approved] [--media-base https://imoveisportugal.lu/social-media]
 import { createRequire } from "node:module";
-import { readFileSync, readdirSync, existsSync, statSync, writeFileSync, mkdirSync, unlinkSync } from "node:fs";
+import { readFileSync, readdirSync, existsSync, statSync, writeFileSync, mkdirSync, unlinkSync, rmSync } from "node:fs";
 import { join, resolve, dirname, relative } from "node:path";
 const req = createRequire(join(process.cwd(), "site", "package.json"));
-const { chromium } = req("playwright"), yaml = req("js-yaml"), { marked } = req("marked");
+const { chromium } = req("playwright"), yaml = req("js-yaml"), { marked } = req("marked"), sharp = req("sharp");
 const args = process.argv.slice(2), N = String(args[0]).padStart(2, "0"), W = `week-${N}`, APPROVED = args.includes("--approved");
 const BASE = (args[args.indexOf("--media-base") + 1] && args.includes("--media-base")) ? args[args.indexOf("--media-base") + 1] : "https://imoveisportugal.lu/social-media";
 const SUF = APPROVED ? "" : "-draft", OUT = "social/exports"; mkdirSync(OUT, { recursive: true });
@@ -30,7 +30,7 @@ const imgs = (d, lang) => {
 };
 const WEEKEND = (date) => [0, 6].includes(new Date(`${date}T12:00:00Z`).getUTCDay());
 const timeOf = (fm, plat) => String(fm.time ?? (plat === "linkedin" ? "09:00" : WEEKEND(String(fm.date)) ? "19:00" : Number(fm.order) === 1 ? "12:30" : "19:00"));
-const caption = (body) => body.replace(/^Images:.*\n*/m, "").replace(/^Alt text:.*$/m, "").replace(/<!--[\s\S]*?-->/g, "").trim();
+const caption = (body) => body.replace(/^Images?:.*\n*/gm, "").replace(/^Alt text:.*$/m, "").replace(/<!--[\s\S]*?-->/g, "").trim();
 const tagsOf = (body) => (body.match(/(^|\s)#[A-Za-zÀ-ÿ0-9]+/g) || []).map((t) => t.trim());
 const ok = (fm) => !APPROVED || fm.status === "approved";
 
@@ -77,11 +77,18 @@ const esc = (s) => String(s ?? "").replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<"
 const fonts = "file://" + resolve("design/social/fonts");
 const label = { instagram: "Instagram", facebook: "Facebook", linkedin: "LinkedIn" };
 const row = (p) => `<tr><td>${p.date}</td><td>${p.time}</td><td>${label[p.plat]}${p.kind === "stories" ? " stories" : p.kind === "community" ? " community" : ""}</td><td>${esc(p.fm.format)}</td><td>${esc(caption(p.body).split("\n").find((l) => l.trim() && !/^(PT|EN|FR) ·\s*$/.test(l))?.replace(/^(PT|EN|FR) · /, "").slice(0, 90))}</td></tr>`;
+// The sheet shows 640 px JPEG copies of the images so the PDF stays small; the PNGs are what gets posted.
+const TH = resolve(OUT, `.${W}-thumbs`); mkdirSync(TH, { recursive: true });
+const thumbs = new Map();
+for (const p of posts) for (const f of p.images) {
+  const t = join(TH, relative(".", f).replace(/[\/]/g, "_").replace(/\.png$/, ".jpg"));
+  await sharp(f).resize({ width: 640, withoutEnlargement: true }).flatten({ background: "#ffffff" }).jpeg({ quality: 78 }).toFile(t); thumbs.set(f, t);
+}
 const card = (p) => {
   const story = p.kind === "stories", n = p.images.length;
   const w = story ? 30 : n > 1 ? 34 : 74;
-  const pics = p.images.map((f) => `<img style="width:${w}mm" src="file://${resolve(f)}">`).join("");
-  return `<section class="p${story || n > 1 ? " wide" : ""}"><div class="pics">${pics}</div><div class="txt"><h2>${p.date} · ${p.time} · ${label[p.plat]}${story ? " stories" : ""} · ${esc(p.fm.format)}</h2><p class="m">${esc(p.fm.link ?? "")}${p.fm.first_comment ? `<br>First comment: ${esc(p.fm.first_comment)}` : ""}${p.fm.partner_status ? `<br><b>Partner: ${esc(p.fm.partner_status)}</b>` : ""}</p><pre>${esc(p.body.replace(/^Images:.*\n*/m, ""))}</pre></div></section>`;
+  const pics = p.images.map((f) => `<img style="width:${w}mm" src="file://${thumbs.get(f)}">`).join("");
+  return `<section class="p${story || n > 1 ? " wide" : ""}"><div class="pics">${pics}</div><div class="txt"><h2>${p.date} · ${p.time} · ${label[p.plat]}${story ? " stories" : ""} · ${esc(p.fm.format)}</h2><p class="m">${esc(p.fm.link ?? "")}${p.fm.first_comment ? `<br>First comment: ${esc(p.fm.first_comment)}` : ""}${p.fm.partner_status ? `<br><b>Partner: ${esc(p.fm.partner_status)}</b>` : ""}</p><pre>${esc(p.body.replace(/^Images?:.*\n*/gm, ""))}</pre></div></section>`;
 };
 const html = `<!doctype html><html><head><meta charset="utf-8"><style>
 @font-face{font-family:P;src:url("${fonts}/playfair-display-latin-wght-normal.woff2")} @font-face{font-family:M;src:url("${fonts}/manrope-latin-wght-normal.woff2")}
@@ -101,6 +108,7 @@ const b = await chromium.launch(), pg = await b.newPage();
 const tmp = resolve(OUT, `.${W}-sheet.html`); writeFileSync(tmp, html);
 await pg.goto("file://" + tmp, { waitUntil: "load" }); await pg.evaluate(() => document.fonts.ready); unlinkSync(tmp);
 await pg.pdf({ path: join(OUT, `${W}-contact-sheet${SUF}.pdf`), format: "A4", printBackground: true });
+rmSync(TH, { recursive: true, force: true });
 
 // Newsletters for beehiiv: one HTML body per edition and language, ready to paste into a new draft post.
 const nlDir = `content/inbox/${W}/newsletter`, bh = join(nlDir, "beehiiv");

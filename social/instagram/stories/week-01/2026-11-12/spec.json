@@ -1,0 +1,81 @@
+{
+ "frames": [
+  {
+   "pt": {
+    "format": "story-text",
+    "kicker": "Sondagem",
+    "h": "Em 2016, 100 000 € compravam 53 m² em Lisboa.",
+    "body": "E hoje? A resposta sai às 19:00 no feed.",
+    "source": "Fonte: INE, 1.º trimestre de 2016"
+   },
+   "en": {
+    "format": "story-text",
+    "kicker": "Poll",
+    "h": "In 2016, €100,000 bought 53 m² in Lisbon.",
+    "body": "And today? The answer is on the feed at 19:00.",
+    "source": "Source: INE, Q1 2016"
+   },
+   "fr": {
+    "format": "story-text",
+    "kicker": "Sondage",
+    "h": "En 2016, 100 000 € achetaient 53 m² à Lisbonne.",
+    "body": "Et aujourd'hui ? Réponse à 19h sur le fil.",
+    "source": "Source : INE, T1 2016"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-card",
+    "kicker": "A sua pergunta",
+    "img": "/social/instagram/posts/week-01/2026-11-12_01_reader-question-nif/card-pt.png"
+   },
+   "en": {
+    "format": "story-card",
+    "kicker": "Your question",
+    "img": "/social/instagram/posts/week-01/2026-11-12_01_reader-question-nif/card-en.png"
+   },
+   "fr": {
+    "format": "story-card",
+    "kicker": "Votre question",
+    "img": "/social/instagram/posts/week-01/2026-11-12_01_reader-question-nif/card-fr.png"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-text",
+    "kicker": "Pergunte",
+    "h": "A sua pergunta sobre o NIF, respondida com a fonte.",
+    "body": "Uma pessoa lê todas."
+   },
+   "en": {
+    "format": "story-text",
+    "kicker": "Ask us",
+    "h": "Your NIF question, answered with the source.",
+    "body": "A person reads every one."
+   },
+   "fr": {
+    "format": "story-text",
+    "kicker": "Vos questions",
+    "h": "Votre question sur le NIF, avec la source.",
+    "body": "Une personne les lit toutes."
+   }
+  },
+  {
+   "pt": {
+    "format": "story-card",
+    "kicker": "Antes e agora",
+    "img": "/social/instagram/posts/week-01/2026-11-12_02_then-and-now-five-places/slide-01-pt.png"
+   },
+   "en": {
+    "format": "story-card",
+    "kicker": "Then and now",
+    "img": "/social/instagram/posts/week-01/2026-11-12_02_then-and-now-five-places/slide-01-en.png"
+   },
+   "fr": {
+    "format": "story-card",
+    "kicker": "Avant et maintenant",
+    "img": "/social/instagram/posts/week-01/2026-11-12_02_then-and-now-five-places/slide-01-fr.png"
+   }
+  }
+ ]
+}

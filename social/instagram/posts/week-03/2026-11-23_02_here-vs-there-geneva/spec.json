@@ -1,0 +1,104 @@
+{
+ "pt": {
+  "format": "here-vs-there",
+  "kicker": "Aqui e lá",
+  "h": "Um metro quadrado em Genebra. Mais de dois em Lisboa.",
+  "items": [
+   {
+    "place": "Genebra (cantão)",
+    "m2": 1,
+    "v": "1 m²"
+   },
+   {
+    "place": "Lisboa",
+    "m2": 2.2654506111310297,
+    "v": "2,3 m²"
+   },
+   {
+    "place": "Cascais",
+    "m2": 2.405853870524096,
+    "v": "2,4 m²"
+   },
+   {
+    "place": "Loulé",
+    "m2": 2.843176111431546,
+    "v": "2,8 m²"
+   },
+   {
+    "place": "Porto",
+    "m2": 3.2393884805817423,
+    "v": "3,2 m²"
+   }
+  ],
+  "note": "O preço mediano de 1 m² no cantão de Genebra (10 853 CHF, apartamentos existentes em propriedade horizontal, 2024; 11 762 € à taxa do BCE de 23/10/2026) compra esta área em Portugal, à mediana do INE do 2.º trimestre de 2026.",
+  "source": "Fontes: OCSTAT (Genebra), 2024; INE, 2.º trimestre de 2026; BCE"
+ },
+ "en": {
+  "format": "here-vs-there",
+  "kicker": "Here and there",
+  "h": "One square metre in Geneva. Over two in Lisbon.",
+  "items": [
+   {
+    "place": "Geneva (canton)",
+    "m2": 1,
+    "v": "1 m²"
+   },
+   {
+    "place": "Lisbon",
+    "m2": 2.2654506111310297,
+    "v": "2.3 m²"
+   },
+   {
+    "place": "Cascais",
+    "m2": 2.405853870524096,
+    "v": "2.4 m²"
+   },
+   {
+    "place": "Loulé",
+    "m2": 2.843176111431546,
+    "v": "2.8 m²"
+   },
+   {
+    "place": "Porto",
+    "m2": 3.2393884805817423,
+    "v": "3.2 m²"
+   }
+  ],
+  "note": "The median price of 1 m² in the canton of Geneva (CHF 10,853, existing condominium apartments, 2024; €11,762 at the ECB rate of Oct 23, 2026) buys this much in Portugal at the INE median, Q2 2026.",
+  "source": "Sources: OCSTAT (Geneva), 2024; INE, Q2 2026; ECB"
+ },
+ "fr": {
+  "format": "here-vs-there",
+  "kicker": "Ici et là-bas",
+  "h": "Un mètre carré à Genève. Plus de deux à Lisbonne.",
+  "items": [
+   {
+    "place": "Genève (canton)",
+    "m2": 1,
+    "v": "1 m²"
+   },
+   {
+    "place": "Lisbonne",
+    "m2": 2.2654506111310297,
+    "v": "2,3 m²"
+   },
+   {
+    "place": "Cascais",
+    "m2": 2.405853870524096,
+    "v": "2,4 m²"
+   },
+   {
+    "place": "Loulé",
+    "m2": 2.843176111431546,
+    "v": "2,8 m²"
+   },
+   {
+    "place": "Porto",
+    "m2": 3.2393884805817423,
+    "v": "3,2 m²"
+   }
+  ],
+  "note": "Le prix médian d'1 m² dans le canton de Genève (10 853 CHF, appartements PPE existants, 2024 ; 11 762 € au taux BCE du 23/10/2026) achète cette surface au Portugal, au prix médian INE du 2e trimestre 2026.",
+  "source": "Sources : OCSTAT (Genève), 2024 ; INE, T2 2026 ; BCE"
+ }
+}

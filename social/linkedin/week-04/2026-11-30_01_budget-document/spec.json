@@ -1,0 +1,168 @@
+{
+ "document": true,
+ "en": {
+  "source": "Sources: INE, indicators 0012234, 0009490 and 0014696 (Q2 2026); IMT Code, art. 17(10); Stamp Duty, item 1.1; Casa Pronta; ECB, 23 Oct 2026",
+  "slides": [
+   {
+    "format": "text",
+    "kicker": "Portugal house prices · Q2 2026",
+    "big": "€2,264",
+    "h": "The median square metre sold in Portugal, up 17.7% in a year."
+   },
+   {
+    "format": "ten-years",
+    "kicker": "Ten years",
+    "h": "Portugal, ten years in one line.",
+    "big": "+173%",
+    "series": [
+     830,
+     842,
+     855,
+     866,
+     881,
+     896,
+     912,
+     932,
+     950,
+     969,
+     984,
+     996,
+     1011,
+     1031,
+     1054,
+     1094,
+     1127,
+     1146,
+     1167,
+     1190,
+     1197,
+     1218,
+     1251,
+     1297,
+     1346,
+     1402,
+     1446,
+     1484,
+     1509,
+     1541,
+     1579,
+     1611,
+     1633,
+     1661,
+     1709,
+     1777,
+     1845,
+     1923,
+     1991,
+     2076,
+     2168,
+     2264
+    ],
+    "from": "2016 · €830",
+    "to": "2026 · €2,264",
+    "note": "Median price per m² of family dwellings sold in the previous 12 months, Portugal, every quarter. INE changed method in Q4 2019."
+   },
+   {
+    "format": "text",
+    "kicker": "€300,000",
+    "big": "281",
+    "h": "municipalities out of 304 where €300,000 buys more than 100 m² at the median."
+   },
+   {
+    "format": "budget-buys",
+    "kicker": "What a budget buys",
+    "h": "With €500,000.",
+    "items": [
+     {
+      "place": "Lisboa",
+      "m2": 96.3020030816641,
+      "v": "96 m²"
+     },
+     {
+      "place": "Cascais",
+      "m2": 102.2704029453876,
+      "v": "102 m²"
+     },
+     {
+      "place": "Loulé",
+      "m2": 120.86052695189751,
+      "v": "121 m²"
+     },
+     {
+      "place": "Porto",
+      "m2": 137.70311209033324,
+      "v": "138 m²"
+     },
+     {
+      "place": "Funchal",
+      "m2": 141.32278123233465,
+      "v": "141 m²"
+     },
+     {
+      "place": "Grândola (Comporta)",
+      "m2": 196.61816751867872,
+      "v": "197 m²"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "format": "cost-sheet",
+    "kicker": "The full bill",
+    "h": "A €500,000 home, all in.",
+    "tag": "Illustrative calculation · non-resident buyer",
+    "rows": [
+     {
+      "k": "Price",
+      "v": "€500,000"
+     },
+     {
+      "k": "IMT",
+      "sub": "7.5%, flat rate for non-residents, unless an exception applies",
+      "v": "€37,500"
+     },
+     {
+      "k": "Stamp duty",
+      "sub": "0.8%",
+      "v": "€4,000"
+     },
+     {
+      "k": "Deed and registration",
+      "sub": "Casa Pronta",
+      "v": "€375"
+     }
+    ],
+    "total": {
+     "k": "Total",
+     "v": "€541,875",
+     "sub": "≈ $606,521"
+    }
+   },
+   {
+    "format": "text",
+    "kicker": "Rent",
+    "big": "5.2%",
+    "h": "Gross yield at the national median, before costs and tax.",
+    "body": "Lisbon 4.0%, Porto 4.8%, Grândola 5.3%."
+   },
+   {
+    "format": "text",
+    "kicker": "What people abroad search",
+    "h": "The tax and the tax number come first.",
+    "body": "IMT and NIF are in Google's top five suggestions in all six countries we cover, checked 26 October 2026."
+   },
+   {
+    "format": "text",
+    "kicker": "How to read it",
+    "h": "Medians aren't homes.",
+    "body": "The middle of everything sold in a year, new and existing. Prime areas sit above their municipality's median."
+   },
+   {
+    "format": "end",
+    "kicker": "The full answer",
+    "h": "Read what your budget buys.",
+    "body": "imoveisportugal.us, What your budget buys. Link in the first comment."
+   }
+  ]
+ }
+}

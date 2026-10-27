@@ -1,0 +1,36 @@
+{
+ "en": {
+  "format": "budget-buys",
+  "kicker": "What a budget buys",
+  "h": "$500,000, five places.",
+  "items": [
+   {
+    "place": "Lisboa",
+    "m2": 86.03770488846966,
+    "v": "86 m²"
+   },
+   {
+    "place": "Cascais",
+    "m2": 91.36996600141839,
+    "v": "91 m²"
+   },
+   {
+    "place": "Loulé",
+    "m2": 107.978671448135,
+    "v": "108 m²"
+   },
+   {
+    "place": "Porto",
+    "m2": 123.02609853509625,
+    "v": "123 m²"
+   },
+   {
+    "place": "Grândola (Comporta)",
+    "m2": 175.6617238619483,
+    "v": "176 m²"
+   }
+  ],
+  "note": "$500,000 = €446,708 at the ECB rate of 23 October 2026, divided by each municipality's INE median. Floor plans to scale.",
+  "source": "Source: INE, median price of homes sold, 2nd quarter 2026; ECB"
+ }
+}

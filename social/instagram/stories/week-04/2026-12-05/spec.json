@@ -1,0 +1,41 @@
+{
+ "frames": [
+  {
+   "pt": {
+    "format": "story-text",
+    "kicker": "Leitura de fim de semana",
+    "h": "O que o seu orçamento compra, em cada concelho.",
+    "body": "A resposta completa, com o método e as fontes."
+   },
+   "en": {
+    "format": "story-text",
+    "kicker": "Weekend reading",
+    "h": "What your budget buys, in every municipality.",
+    "body": "The full answer, with the method and the sources."
+   },
+   "fr": {
+    "format": "story-text",
+    "kicker": "À lire ce week-end",
+    "h": "Ce que votre budget achète, dans chaque commune.",
+    "body": "La réponse complète, avec la méthode et les sources."
+   }
+  },
+  {
+   "pt": {
+    "format": "story-card",
+    "kicker": "Novo post",
+    "img": "/social/instagram/posts/week-04/2026-12-05_01_postcards/slide-02-pt.png"
+   },
+   "en": {
+    "format": "story-card",
+    "kicker": "New post",
+    "img": "/social/instagram/posts/week-04/2026-12-05_01_postcards/slide-02-en.png"
+   },
+   "fr": {
+    "format": "story-card",
+    "kicker": "Nouveau post",
+    "img": "/social/instagram/posts/week-04/2026-12-05_01_postcards/slide-02-fr.png"
+   }
+  }
+ ]
+}

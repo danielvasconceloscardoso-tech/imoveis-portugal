@@ -172,6 +172,14 @@ Status: To do · Doing · Blocked · Done
 | 31b | Add free stock-footage keys to this cloud environment so the v4 films can use real licensed clips (CEO, 26 Oct: terrace in shots 0 and 13, the pour, candle and hands in 2, 3 and 11): create a free Pexels API key (pexels.com/api, brand mailbox) and a free Pixabay API key (pixabay.com/api/docs), then add them in the environment settings (session title bar > environment > Edit) as PEXELS_API_KEY and PIXABAY_API_KEY, and allow musopen.org and archive.org under Network access; a new session picks them up | Operator | To do | 2026-10-27 |
 
 | 32a | Compare the home page v1 and design v2 (screenshots and scroll recordings) and say go | Operator | To do | after prompt 32 step 1 |
+| 30d | Legal check of every 7.5% IMT mention (ops/legal/IMT_7_5_MENTIONS.md: 190 mentions in 83 files; the claims to check are at the top, including the start date of 25 May 2026 and exception (a) for emigrants who were once resident) | Daniel | To do | 2026-11-06 |
+| 30e | Approve weeks 1-4 (contact sheets in social/exports/, newsletters in content/inbox/week-NN/newsletter/beehiiv/index.html, pillar pages in content/inbox/week-NN/pillar/) or mark changes on the PDFs | Operator | To do | 2026-11-06 |
+| 30f | In the Meta Business Suite account (Planner): check whether bulk upload of posts exists and download its template; facebook.com is unreachable from the build environment, so social/exports/week-NN-meta-planner.csv is a plain sheet for now. Same for the hashtags in social/hashtags.csv: open each in the Instagram app and fill in active and spam_flag | Operator | To do | before 9 Nov |
+| 30g | beehiiv: create the account, an API key in BEEHIIV_API_KEY, and test whether the free plan creates draft posts by API; until then the newsletters are pasted from the HTML files (steps in content/NEWSLETTER_FORMAT.md) | Operator | To do | 2026-11-06 |
+| 30h | Before the pillar pages move from content/inbox to content/blog: their links name one edition (/pt/lu, /en/us, /fr/fr); switch them to the blog placeholders so each edition links to its own pages, and keep the query strings | CTO | To do | before 9 Nov |
+| 30i | Reddit and Quora: reddit.com and quora.com are blocked from the build environment, so community rules and matching threads are not verified; the person posting reads the rules and picks the thread | Operator | To do | before each post |
+| 31c | Vanguard film v4: watch it and say go or changes. Open gaps: no licensed Lisbon terrace clip (shots 0 and 13 use a glass of amber drink), piano only (no strings), the Pixabay key returns "invalid" (looks truncated) and Freesound answers 403 here | Operator | To do | 2026-10-30 |
+| 23a | Prompt 23: review identity v3 (design/brand/BRAND.pdf, logo set, screenshots in design/brand/screens/) and say go | Operator | To do | 2026-10-30 |
 
 ## Last session
 

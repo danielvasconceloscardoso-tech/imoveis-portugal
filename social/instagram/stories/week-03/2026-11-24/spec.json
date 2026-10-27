@@ -1,0 +1,84 @@
+{
+ "frames": [
+  {
+   "pt": {
+    "format": "story-text",
+    "kicker": "Código Civil, art. 442.º",
+    "big": "2×",
+    "h": "O sinal em dobro, se o vendedor desistir por culpa dele.",
+    "source": "Fonte: Código Civil, art. 442.º"
+   },
+   "en": {
+    "format": "story-text",
+    "kicker": "Civil Code, art. 442",
+    "big": "2×",
+    "h": "Double the deposit, if the seller pulls out through their fault.",
+    "source": "Source: Portuguese Civil Code, art. 442"
+   },
+   "fr": {
+    "format": "story-text",
+    "kicker": "Code civil, art. 442",
+    "big": "2×",
+    "h": "Le double des arrhes, si le vendeur se désiste par sa faute.",
+    "source": "Source : Code civil portugais, art. 442"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-card",
+    "kicker": "Novo no feed",
+    "img": "/social/instagram/posts/week-03/2026-11-24_01_myth-vs-law-sinal/card-pt.png"
+   },
+   "en": {
+    "format": "story-card",
+    "kicker": "New on the feed",
+    "img": "/social/instagram/posts/week-03/2026-11-24_01_myth-vs-law-sinal/card-en.png"
+   },
+   "fr": {
+    "format": "story-card",
+    "kicker": "Nouveau sur le fil",
+    "img": "/social/instagram/posts/week-03/2026-11-24_01_myth-vs-law-sinal/card-fr.png"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-card",
+    "kicker": "Novo no feed",
+    "img": "/social/instagram/posts/week-03/2026-11-24_02_postcard-lisboa/card-pt.png"
+   },
+   "en": {
+    "format": "story-card",
+    "kicker": "New on the feed",
+    "img": "/social/instagram/posts/week-03/2026-11-24_02_postcard-lisboa/card-en.png"
+   },
+   "fr": {
+    "format": "story-card",
+    "kicker": "Nouveau sur le fil",
+    "img": "/social/instagram/posts/week-03/2026-11-24_02_postcard-lisboa/card-fr.png"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-text",
+    "kicker": "Contrato-promessa",
+    "h": "Fixa o preço, a data e o sinal, antes da escritura.",
+    "body": "A resposta completa no link.",
+    "source": "Fonte: Código Civil, art. 442.º"
+   },
+   "en": {
+    "format": "story-text",
+    "kicker": "Promissory contract",
+    "h": "It sets the price, the date and the deposit, before the deed.",
+    "body": "The full answer in the link.",
+    "source": "Source: Portuguese Civil Code, art. 442"
+   },
+   "fr": {
+    "format": "story-text",
+    "kicker": "Compromis",
+    "h": "Il fixe le prix, la date et les arrhes, avant l'acte.",
+    "body": "La réponse complète dans le lien.",
+    "source": "Source : Code civil portugais, art. 442"
+   }
+  }
+ ]
+}

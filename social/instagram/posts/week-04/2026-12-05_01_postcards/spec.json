@@ -1,0 +1,224 @@
+{
+ "pt": {
+  "source": "Fonte: INE, preços e rendas, 2.º trimestre de 2026; mediana por concelho",
+  "slides": [
+   {
+    "format": "text",
+    "kicker": "Três postais",
+    "big": "300 000 €",
+    "h": "Lisboa, Porto e Madeira, com o mesmo orçamento."
+   },
+   {
+    "format": "postcard",
+    "h": "Lisboa.",
+    "photo": "/design/directions/photos/lisboa-alfama-telhados.jpg",
+    "items": [
+     {
+      "v": "58 m²",
+      "k": "com 300 000 €"
+     },
+     {
+      "v": "+177%",
+      "k": "desde 2016"
+     },
+     {
+      "v": "4,0%",
+      "k": "rendimento bruto"
+     }
+    ]
+   },
+   {
+    "format": "postcard",
+    "h": "Porto.",
+    "photo": "/design/directions/photos/porto-douro-entardecer.jpg",
+    "items": [
+     {
+      "v": "83 m²",
+      "k": "com 300 000 €"
+     },
+     {
+      "v": "+234%",
+      "k": "desde 2016"
+     },
+     {
+      "v": "4,8%",
+      "k": "rendimento bruto"
+     }
+    ]
+   },
+   {
+    "format": "postcard",
+    "h": "Madeira.",
+    "photo": "/design/directions/photos/madeira-rua.jpg",
+    "items": [
+     {
+      "v": "85 m²",
+      "k": "no Funchal, com 300 000 €"
+     },
+     {
+      "v": "+188%",
+      "k": "desde 2016, Funchal"
+     },
+     {
+      "v": "4,8%",
+      "k": "rendimento bruto, Funchal"
+     }
+    ]
+   },
+   {
+    "format": "end",
+    "kicker": "O seu orçamento",
+    "h": "Veja a sua zona no mapa.",
+    "body": "Página Mapa, link na bio. Abre com 300 000 €."
+   }
+  ]
+ },
+ "en": {
+  "source": "Source: INE, prices and rents, Q2 2026; municipality medians",
+  "slides": [
+   {
+    "format": "text",
+    "kicker": "Three postcards",
+    "big": "€300,000",
+    "h": "Lisbon, Porto and Madeira, on the same budget."
+   },
+   {
+    "format": "postcard",
+    "h": "Lisbon.",
+    "photo": "/design/directions/photos/lisboa-alfama-telhados.jpg",
+    "items": [
+     {
+      "v": "58 m²",
+      "k": "with €300,000"
+     },
+     {
+      "v": "+177%",
+      "k": "since 2016"
+     },
+     {
+      "v": "4.0%",
+      "k": "gross yield"
+     }
+    ]
+   },
+   {
+    "format": "postcard",
+    "h": "Porto.",
+    "photo": "/design/directions/photos/porto-douro-entardecer.jpg",
+    "items": [
+     {
+      "v": "83 m²",
+      "k": "with €300,000"
+     },
+     {
+      "v": "+234%",
+      "k": "since 2016"
+     },
+     {
+      "v": "4.8%",
+      "k": "gross yield"
+     }
+    ]
+   },
+   {
+    "format": "postcard",
+    "h": "Madeira.",
+    "photo": "/design/directions/photos/madeira-rua.jpg",
+    "items": [
+     {
+      "v": "85 m²",
+      "k": "in Funchal, with €300,000"
+     },
+     {
+      "v": "+188%",
+      "k": "since 2016, Funchal"
+     },
+     {
+      "v": "4.8%",
+      "k": "gross yield, Funchal"
+     }
+    ]
+   },
+   {
+    "format": "end",
+    "kicker": "Your budget",
+    "h": "See your area on the map.",
+    "body": "Map page, link in bio. It opens at €300,000."
+   }
+  ]
+ },
+ "fr": {
+  "source": "Source : INE, prix et loyers, T2 2026 ; médianes par commune",
+  "slides": [
+   {
+    "format": "text",
+    "kicker": "Trois cartes postales",
+    "big": "300 000 €",
+    "h": "Lisbonne, Porto et Madère, avec le même budget."
+   },
+   {
+    "format": "postcard",
+    "h": "Lisbonne.",
+    "photo": "/design/directions/photos/lisboa-alfama-telhados.jpg",
+    "items": [
+     {
+      "v": "58 m²",
+      "k": "avec 300 000 €"
+     },
+     {
+      "v": "+177 %",
+      "k": "depuis 2016"
+     },
+     {
+      "v": "4,0 %",
+      "k": "rendement brut"
+     }
+    ]
+   },
+   {
+    "format": "postcard",
+    "h": "Porto.",
+    "photo": "/design/directions/photos/porto-douro-entardecer.jpg",
+    "items": [
+     {
+      "v": "83 m²",
+      "k": "avec 300 000 €"
+     },
+     {
+      "v": "+234 %",
+      "k": "depuis 2016"
+     },
+     {
+      "v": "4,8 %",
+      "k": "rendement brut"
+     }
+    ]
+   },
+   {
+    "format": "postcard",
+    "h": "Madère.",
+    "photo": "/design/directions/photos/madeira-rua.jpg",
+    "items": [
+     {
+      "v": "85 m²",
+      "k": "à Funchal, avec 300 000 €"
+     },
+     {
+      "v": "+188 %",
+      "k": "depuis 2016, Funchal"
+     },
+     {
+      "v": "4,8 %",
+      "k": "rendement brut, Funchal"
+     }
+    ]
+   },
+   {
+    "format": "end",
+    "kicker": "Votre budget",
+    "h": "Voyez votre région sur la carte.",
+    "body": "Page Carte, lien dans la bio. Elle s'ouvre à 300 000 €."
+   }
+  ]
+ }
+}

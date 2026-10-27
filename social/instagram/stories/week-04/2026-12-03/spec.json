@@ -1,0 +1,101 @@
+{
+ "frames": [
+  {
+   "pt": {
+    "format": "story-text",
+    "kicker": "Quinta-feira",
+    "h": "A primeira newsletter saiu hoje.",
+    "body": "300 000 € em Portugal, de Lisboa à Comporta, com a fonte por baixo de cada número.",
+    "dark": true
+   },
+   "en": {
+    "format": "story-text",
+    "kicker": "Thursday",
+    "h": "The first newsletter is out.",
+    "body": "What your budget buys, from Lisbon to Comporta, with the source under every number.",
+    "dark": true
+   },
+   "fr": {
+    "format": "story-text",
+    "kicker": "Jeudi",
+    "h": "La première newsletter est partie.",
+    "body": "300 000 € au Portugal, de Lisbonne à Comporta, avec la source sous chaque chiffre.",
+    "dark": true
+   }
+  },
+  {
+   "pt": {
+    "format": "story-card",
+    "kicker": "Novo post",
+    "img": "/social/instagram/posts/week-04/2026-12-03_01_myth-vs-law-poa/card-pt.png"
+   },
+   "en": {
+    "format": "story-card",
+    "kicker": "New post",
+    "img": "/social/instagram/posts/week-04/2026-12-03_01_myth-vs-law-poa/card-en.png"
+   },
+   "fr": {
+    "format": "story-card",
+    "kicker": "Nouveau post",
+    "img": "/social/instagram/posts/week-04/2026-12-03_01_myth-vs-law-poa/card-fr.png"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-text",
+    "kicker": "Sondagem",
+    "h": "Lisboa, Porto, Algarve ou Madeira.",
+    "body": "Diga-nos onde o seu orçamento iria primeiro. O mapa mostra quantos m² compra."
+   },
+   "en": {
+    "format": "story-text",
+    "kicker": "Poll",
+    "h": "Lisbon, Porto, the Algarve or Madeira.",
+    "body": "Tell us where your budget would go first. The map shows how many m² it buys."
+   },
+   "fr": {
+    "format": "story-text",
+    "kicker": "Sondage",
+    "h": "Lisbonne, Porto, l'Algarve ou Madère.",
+    "body": "Dites-nous où irait votre budget en premier. La carte montre combien de m² il achète."
+   }
+  },
+  {
+   "pt": {
+    "format": "story-card",
+    "kicker": "Novo post",
+    "img": "/social/instagram/posts/week-04/2026-12-03_02_budget-buys/card-pt.png"
+   },
+   "en": {
+    "format": "story-card",
+    "kicker": "New post",
+    "img": "/social/instagram/posts/week-04/2026-12-03_02_budget-buys/card-en.png"
+   },
+   "fr": {
+    "format": "story-card",
+    "kicker": "Nouveau post",
+    "img": "/social/instagram/posts/week-04/2026-12-03_02_budget-buys/card-fr.png"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-text",
+    "kicker": "As suas perguntas",
+    "h": "A pergunta da próxima semana pode ser a sua.",
+    "body": "Envie-a aqui. Respondemos às mais frequentes na quinta-feira."
+   },
+   "en": {
+    "format": "story-text",
+    "kicker": "Your questions",
+    "h": "Next week's question could be yours.",
+    "body": "Send it here. We answer the most-asked next Thursday."
+   },
+   "fr": {
+    "format": "story-text",
+    "kicker": "Vos questions",
+    "h": "La question de la semaine prochaine peut être la vôtre.",
+    "body": "Envoyez-la ici. Nous répondons aux plus fréquentes jeudi prochain."
+   }
+  }
+ ]
+}

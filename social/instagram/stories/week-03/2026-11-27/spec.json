@@ -1,0 +1,84 @@
+{
+ "frames": [
+  {
+   "pt": {
+    "format": "story-text",
+    "kicker": "Licença de utilização",
+    "big": "1951",
+    "h": "A data de construção decide um documento da escritura.",
+    "source": "Fonte: Justiça.gov.pt, Casa Pronta"
+   },
+   "en": {
+    "format": "story-text",
+    "kicker": "Usage license",
+    "big": "1951",
+    "h": "The building's date decides one document at the deed.",
+    "source": "Source: Justiça.gov.pt, Casa Pronta"
+   },
+   "fr": {
+    "format": "story-text",
+    "kicker": "Licence d'utilisation",
+    "big": "1951",
+    "h": "La date du bâtiment décide d'un document de l'acte.",
+    "source": "Source : Justiça.gov.pt, Casa Pronta"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-card",
+    "kicker": "Novo no feed",
+    "img": "/social/instagram/posts/week-03/2026-11-27_01_deed-documents/slide-01-pt.png"
+   },
+   "en": {
+    "format": "story-card",
+    "kicker": "New on the feed",
+    "img": "/social/instagram/posts/week-03/2026-11-27_01_deed-documents/slide-01-en.png"
+   },
+   "fr": {
+    "format": "story-card",
+    "kicker": "Nouveau sur le fil",
+    "img": "/social/instagram/posts/week-03/2026-11-27_01_deed-documents/slide-01-fr.png"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-card",
+    "kicker": "Novo no feed",
+    "img": "/social/instagram/posts/week-03/2026-11-27_02_then-and-now-loule/card-pt.png"
+   },
+   "en": {
+    "format": "story-card",
+    "kicker": "New on the feed",
+    "img": "/social/instagram/posts/week-03/2026-11-27_02_then-and-now-loule/card-en.png"
+   },
+   "fr": {
+    "format": "story-card",
+    "kicker": "Nouveau sur le fil",
+    "img": "/social/instagram/posts/week-03/2026-11-27_02_then-and-now-loule/card-fr.png"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-text",
+    "dark": true,
+    "kicker": "Perguntas",
+    "h": "O que quer saber sobre os documentos da escritura.",
+    "body": "Respondemos com a fonte oficial."
+   },
+   "en": {
+    "format": "story-text",
+    "dark": true,
+    "kicker": "Questions",
+    "h": "Tell us what you want to know about the deed papers.",
+    "body": "We answer with the official source."
+   },
+   "fr": {
+    "format": "story-text",
+    "dark": true,
+    "kicker": "Questions",
+    "h": "Dites-nous ce que vous voulez savoir sur les papiers de l'acte.",
+    "body": "Nous répondons avec la source officielle."
+   }
+  }
+ ]
+}

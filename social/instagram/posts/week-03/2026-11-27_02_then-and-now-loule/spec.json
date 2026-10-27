@@ -1,0 +1,59 @@
+{
+ "pt": {
+  "format": "then-and-now",
+  "kicker": "Antes e agora",
+  "h": "O mesmo dinheiro. Outra vista.",
+  "items": [
+   {
+    "place": "Loulé, 1.º trimestre de 2016",
+    "m2": 95.9079283887468,
+    "v": "96 m²"
+   },
+   {
+    "place": "Loulé, 2.º trimestre de 2026",
+    "m2": 36.25815808556926,
+    "v": "36 m²"
+   }
+  ],
+  "note": "150 000 € a dividir pela mediana do INE em Loulé, no Algarve: 1 564 € por m² em 2016, 4 137 € em 2026.",
+  "source": "Fonte: INE, preços medianos por m², 2016 a 2026"
+ },
+ "en": {
+  "format": "then-and-now",
+  "kicker": "Then and now",
+  "h": "Same budget. Different view.",
+  "items": [
+   {
+    "place": "Loulé, Q1 2016",
+    "m2": 95.9079283887468,
+    "v": "96 m²"
+   },
+   {
+    "place": "Loulé, Q2 2026",
+    "m2": 36.25815808556926,
+    "v": "36 m²"
+   }
+  ],
+  "note": "€150,000 divided by the INE median in Loulé, in the Algarve: €1,564 per m² in 2016, €4,137 in 2026.",
+  "source": "Source: INE, median prices per m², 2016 to 2026"
+ },
+ "fr": {
+  "format": "then-and-now",
+  "kicker": "Avant et maintenant",
+  "h": "Même budget. Autre vue.",
+  "items": [
+   {
+    "place": "Loulé, T1 2016",
+    "m2": 95.9079283887468,
+    "v": "96 m²"
+   },
+   {
+    "place": "Loulé, T2 2026",
+    "m2": 36.25815808556926,
+    "v": "36 m²"
+   }
+  ],
+  "note": "150 000 € divisés par le prix médian INE à Loulé, en Algarve : 1 564 € le m² en 2016, 4 137 € en 2026.",
+  "source": "Source : INE, prix médians au m², 2016 à 2026"
+ }
+}

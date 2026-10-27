@@ -1,0 +1,84 @@
+{
+ "frames": [
+  {
+   "pt": {
+    "format": "story-text",
+    "kicker": "Esta semana",
+    "h": "O NIF a partir de fora, numa página.",
+    "body": "Online, através de um representante legal. Sem representante fiscal para o obter. 15 dias depois de ter casa.",
+    "source": "Fonte: Autoridade Tributária, folheto NIF para cidadãos estrangeiros não residentes"
+   },
+   "en": {
+    "format": "story-text",
+    "kicker": "This week",
+    "h": "The NIF from abroad, on one page.",
+    "body": "Online through a legal representative. No tax representative to get it. 15 days once you own the home.",
+    "source": "Source: Tax and Customs Authority, NIF leaflet for non-resident foreigners"
+   },
+   "fr": {
+    "format": "story-text",
+    "kicker": "Cette semaine",
+    "h": "Le NIF depuis l'étranger, en une page.",
+    "body": "En ligne, par un représentant légal. Aucun représentant fiscal pour l'obtenir. 15 jours une fois propriétaire.",
+    "source": "Source : Autorité fiscale, brochure NIF pour les étrangers non résidents"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-card",
+    "kicker": "Seis países",
+    "img": "/social/instagram/posts/week-01/2026-11-13_01_nif-six-countries/slide-01-pt.png"
+   },
+   "en": {
+    "format": "story-card",
+    "kicker": "Six countries",
+    "img": "/social/instagram/posts/week-01/2026-11-13_01_nif-six-countries/slide-01-en.png"
+   },
+   "fr": {
+    "format": "story-card",
+    "kicker": "Six pays",
+    "img": "/social/instagram/posts/week-01/2026-11-13_01_nif-six-countries/slide-01-fr.png"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-text",
+    "kicker": "Sondagem",
+    "h": "A partir da Suíça: representante fiscal ou notificações eletrónicas.",
+    "body": "Uma das duas é obrigatória, nos 15 dias depois de ter casa.",
+    "source": "Fontes: Lei Geral Tributária, art. 19.º"
+   },
+   "en": {
+    "format": "story-text",
+    "kicker": "Poll",
+    "h": "From Switzerland, a tax representative or electronic notices.",
+    "body": "One of the two is mandatory, within 15 days of owning the home.",
+    "source": "Sources: General Tax Law, art. 19"
+   },
+   "fr": {
+    "format": "story-text",
+    "kicker": "Sondage",
+    "h": "Depuis la Suisse, un représentant fiscal ou les notifications électroniques.",
+    "body": "L'un des deux est obligatoire, dans les 15 jours après l'achat.",
+    "source": "Sources : Loi générale fiscale, art. 19"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-card",
+    "kicker": "Cascais",
+    "img": "/social/instagram/posts/week-01/2026-11-13_02_ten-years-cascais/card-pt.png"
+   },
+   "en": {
+    "format": "story-card",
+    "kicker": "Cascais",
+    "img": "/social/instagram/posts/week-01/2026-11-13_02_ten-years-cascais/card-en.png"
+   },
+   "fr": {
+    "format": "story-card",
+    "kicker": "Cascais",
+    "img": "/social/instagram/posts/week-01/2026-11-13_02_ten-years-cascais/card-fr.png"
+   }
+  }
+ ]
+}

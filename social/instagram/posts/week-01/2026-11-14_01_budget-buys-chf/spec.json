@@ -1,0 +1,104 @@
+{
+ "pt": {
+  "format": "budget-buys",
+  "kicker": "O que o orçamento compra",
+  "h": "400 000 francos, cinco lugares.",
+  "items": [
+   {
+    "place": "Lisboa",
+    "m2": 83.49583013474725,
+    "v": "83 m²"
+   },
+   {
+    "place": "Cascais",
+    "m2": 88.67055636318423,
+    "v": "89 m²"
+   },
+   {
+    "place": "Loulé",
+    "m2": 104.78857869461149,
+    "v": "105 m²"
+   },
+   {
+    "place": "Porto",
+    "m2": 119.39144865315552,
+    "v": "119 m²"
+   },
+   {
+    "place": "Funchal",
+    "m2": 122.52977672685351,
+    "v": "123 m²"
+   }
+  ],
+  "note": "400 000 CHF = 433 510 € à taxa do BCE de 23 de outubro de 2026, dividido pela mediana do INE de cada concelho. Plantas à escala.",
+  "source": "Fonte: INE, mediana dos preços das casas vendidas, 2.º trimestre de 2026; BCE"
+ },
+ "en": {
+  "format": "budget-buys",
+  "kicker": "What a budget buys",
+  "h": "CHF 400,000, five places.",
+  "items": [
+   {
+    "place": "Lisboa",
+    "m2": 83.49583013474725,
+    "v": "83 m²"
+   },
+   {
+    "place": "Cascais",
+    "m2": 88.67055636318423,
+    "v": "89 m²"
+   },
+   {
+    "place": "Loulé",
+    "m2": 104.78857869461149,
+    "v": "105 m²"
+   },
+   {
+    "place": "Porto",
+    "m2": 119.39144865315552,
+    "v": "119 m²"
+   },
+   {
+    "place": "Funchal",
+    "m2": 122.52977672685351,
+    "v": "123 m²"
+   }
+  ],
+  "note": "CHF 400,000 = €433,510 at the ECB rate of 23 October 2026, divided by each municipality's INE median. Floor plans to scale.",
+  "source": "Source: INE, median price of homes sold, 2nd quarter 2026; ECB"
+ },
+ "fr": {
+  "format": "budget-buys",
+  "kicker": "Ce qu'un budget achète",
+  "h": "400 000 francs, cinq lieux.",
+  "items": [
+   {
+    "place": "Lisboa",
+    "m2": 83.49583013474725,
+    "v": "83 m²"
+   },
+   {
+    "place": "Cascais",
+    "m2": 88.67055636318423,
+    "v": "89 m²"
+   },
+   {
+    "place": "Loulé",
+    "m2": 104.78857869461149,
+    "v": "105 m²"
+   },
+   {
+    "place": "Porto",
+    "m2": 119.39144865315552,
+    "v": "119 m²"
+   },
+   {
+    "place": "Funchal",
+    "m2": 122.52977672685351,
+    "v": "123 m²"
+   }
+  ],
+  "note": "400 000 CHF = 433 510 € au taux BCE du 23 octobre 2026, divisé par le prix médian INE de chaque commune. Plans à l'échelle.",
+  "source": "Source : INE, prix médian des logements vendus, 2e trimestre 2026 ; BCE"
+ }
+}

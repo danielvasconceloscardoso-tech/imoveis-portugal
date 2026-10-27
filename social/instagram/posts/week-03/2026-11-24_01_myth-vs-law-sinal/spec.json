@@ -1,0 +1,26 @@
+{
+ "pt": {
+  "format": "myth-vs-law",
+  "kicker": "Mito e lei",
+  "h": "O sinal vale para os dois lados.",
+  "myth": "Se o vendedor desistir, devolve o sinal e fica tudo resolvido.",
+  "law": "Se o vendedor desistir por culpa dele, pode exigir o dobro do sinal. Se a culpa for sua, perde-o.",
+  "source": "Fonte: Código Civil, art. 442.º"
+ },
+ "en": {
+  "format": "myth-vs-law",
+  "kicker": "Myth and law",
+  "h": "The deposit works both ways.",
+  "myth": "If the seller pulls out, you just get your deposit back.",
+  "law": "If the seller pulls out through their own fault, you can claim double the deposit. If it's your fault, you lose it.",
+  "source": "Source: Portuguese Civil Code, art. 442"
+ },
+ "fr": {
+  "format": "myth-vs-law",
+  "kicker": "Mythe et loi",
+  "h": "Les arrhes jouent dans les deux sens.",
+  "myth": "Si le vendeur se désiste, il rend les arrhes, et c'est tout.",
+  "law": "Si le vendeur se désiste par sa faute, vous pouvez exiger le double des arrhes. Si la faute est la vôtre, vous les perdez.",
+  "source": "Source : Code civil portugais, art. 442"
+ }
+}
