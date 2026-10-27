@@ -28,10 +28,10 @@ const one = (k: string) => c("home2.places.one", lang, { v: e(m2(k)) }), muni = 
 const places = [
   { k: "lisboa", img: "lisboa-eletrico-28", line: one("lisboa"), href: `${MAP}?place=lisboa` },
   { k: "porto", img: "porto-ribeira-rabelo", line: one("porto"), href: `${MAP}?place=porto` },
-  { k: "cascais", img: "", line: one("cascais"), href: `${MAP}?place=cascais` },
-  { k: "comporta", img: "", line: muni("grandola"), href: `${MAP}?place=grandola` },
-  { k: "algarve", img: "", line: muni("loule"), href: `${MAP}?place=loule` },
-  { k: "madeira", img: "madeira-funchal-avenida", line: muni("funchal"), href: `${MAP}?place=funchal` },
+  { k: "cascais", img: "cascais-praia-da-rainha", line: one("cascais"), href: `${MAP}?place=cascais` },
+  { k: "comporta", img: "comporta-praia", line: muni("grandola"), href: `${MAP}?place=grandola` },
+  { k: "algarve", img: "algarve-ponta-da-piedade", line: muni("loule"), href: `${MAP}?place=loule` },
+  { k: "madeira", img: "madeira-funchal-anfiteatro", line: muni("funchal"), href: `${MAP}?place=funchal` },
 ];
 // Five questions, each opening its answer (the same answers and sources as the FAQ).
 const ex = homeExample();
@@ -47,9 +47,9 @@ const qa = [
 const ptP = PRICES.regions.PT;
 const chart = lineChart(PRICES.quarters, [{ label: "Portugal", values: ptP.m2 }, { label: PRICES.munis.lisboa.n, values: PRICES.munis.lisboa.m2 }, { label: PRICES.munis.porto.n, values: PRICES.munis.porto.m2 }],
   { breakAt: PRICES.break, breakLabel: c("prices.break", lang), fmt: (v) => new Intl.NumberFormat(HTML_LANG[lang]).format(v), h: 300 });
-// Different places only, no duplicates (prompt 32). A sixth waits for a licensed photograph of a named place.
-const mosaic = ["lisboa-alfama-sao-vicente", "costa-atlantica-falesias", "porto-ponte-luis-i-noite", "madeira-funchal-avenida", "vila-ribeirinha-amanhecer"];
-const alts: Record<string, string> = { "lisboa-alfama-sao-vicente": "Alfama, Lisboa", "porto-ponte-luis-i-noite": "Ponte Luís I, Porto", "lisboa-praca-do-comercio": "Praça do Comércio, Lisboa", "porto-douro-entardecer": "Douro, Porto", "lisboa-baixa-telhados": "Baixa, Lisboa", "lisboa-anoitecer-castelo": "Castelo de São Jorge, Lisboa", "lisboa-eletrico-28": "Elétrico 28, Lisboa", "porto-ribeira-rabelo": "Ribeira, Porto", "lisboa-alfama-telhados": "Alfama, Lisboa", "madeira-funchal-avenida": "Funchal, Madeira", "costa-atlantica-falesias": "Costa atlântica, Portugal", "vila-ribeirinha-amanhecer": "Vila ribeirinha ao amanhecer, Portugal" };
+// Six different places a reader recognises at a glance, none repeating a place card's photograph (prompt 32).
+const mosaic = ["lisboa-alfama-sao-vicente", "sintra-palacio-da-pena", "douro-socalcos", "algarve-benagil", "madeira-costa-norte", "porto-ponte-luis-i-noite"];
+const alts: Record<string, string> = { "lisboa-alfama-sao-vicente": "Alfama, Lisboa", "porto-ponte-luis-i-noite": "Ponte Luís I, Porto", "lisboa-praca-do-comercio": "Praça do Comércio, Lisboa", "porto-douro-entardecer": "Douro, Porto", "lisboa-baixa-telhados": "Baixa, Lisboa", "lisboa-anoitecer-castelo": "Castelo de São Jorge, Lisboa", "lisboa-eletrico-28": "Elétrico 28, Lisboa", "porto-ribeira-rabelo": "Ribeira, Porto", "lisboa-alfama-telhados": "Alfama, Lisboa", "madeira-funchal-avenida": "Funchal, Madeira", "costa-atlantica-falesias": "Costa atlântica, Portugal", "vila-ribeirinha-amanhecer": "Vila ribeirinha ao amanhecer, Portugal", "cascais-praia-da-rainha": "Praia da Rainha, Cascais", "comporta-praia": "Praia da Comporta, Grândola", "algarve-ponta-da-piedade": "Ponta da Piedade, Lagos, Algarve", "madeira-funchal-anfiteatro": "Funchal, Madeira", "sintra-palacio-da-pena": "Palácio da Pena, Sintra", "douro-socalcos": "Socalcos do Douro", "algarve-benagil": "Gruta de Benagil, Algarve", "madeira-costa-norte": "Costa norte da Madeira" };
 const nl = config.forms.newsletter[lang];
 const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("home.subscribe.subject", lang)} (${ed} · ${lang})`)}`;
 ---
@@ -122,6 +122,8 @@ const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("h
       </article>
     ))}
   </div>
+  {/* CC BY-SA 2.0 asks for the author and licence next to the photograph; the other photographs need no credit. */}
+  <p class="h2-credit">Comporta: <a href="https://commons.wikimedia.org/wiki/File:Praia_da_Comporta_-_Portugal_(49800392663).jpg" rel="noopener">Vitor Oliveira</a>, <a href="https://creativecommons.org/licenses/by-sa/2.0/" rel="license noopener">CC BY-SA 2.0</a></p>
 </section>
 
 <section class="h2-sec h2-band h2-paths" aria-labelledby="h2-paths">
