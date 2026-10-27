@@ -4,7 +4,7 @@ How Imóveis Portugal writes, tags, times and designs its posts. It applies to e
 
 ## 1. Writing
 
-1. **The first line is the post.** At most 8 words, with a number or a place: "One square metre in Luxembourg City. Four in Gondomar." On Instagram the hook must fit in the first 125 characters; on LinkedIn, in the first two lines.
+1. **The first line is the post.** At most 8 words, with a number or a place: "One square metre in Luxembourg City. Two in Lisbon." On Instagram the hook must fit in the first 125 characters; on LinkedIn, in the first two lines.
 2. **Write what a person would say out loud.** Short sentences, everyday words, contractions in English. If it sounds like a brochure, rewrite it.
 3. **One idea, one number, one action** per post.
    - Actions we use: "See your area on the map", "Run your numbers", "Read the answer", "Reply with your question".
