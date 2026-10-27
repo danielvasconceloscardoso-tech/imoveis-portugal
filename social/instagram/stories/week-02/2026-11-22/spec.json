@@ -1,0 +1,44 @@
+{
+ "frames": [
+  {
+   "pt": {
+    "format": "story-text",
+    "kicker": "Uma casa, cinco moedas",
+    "h": "433 575 € por uma casa de 400 000 €, com tudo.",
+    "body": "Sem residência fiscal em Portugal, à taxa do BCE de 23 de outubro de 2026.",
+    "source": "Fontes: Código do IMT, art. 17.º, n.º 10; Imposto do Selo, verba 1.1; Casa Pronta"
+   },
+   "en": {
+    "format": "story-text",
+    "kicker": "One home, five currencies",
+    "h": "€433,575 for a €400,000 home, all in.",
+    "body": "Without Portuguese tax residence, at the ECB rate of October 23, 2026.",
+    "source": "Sources: IMT Code, art. 17(10); Stamp Duty, item 1.1; Casa Pronta"
+   },
+   "fr": {
+    "format": "story-text",
+    "kicker": "Un bien, cinq monnaies",
+    "h": "433 575 € pour un bien à 400 000 €, tout compris.",
+    "body": "Sans résidence fiscale au Portugal, au taux BCE du 23 octobre 2026.",
+    "source": "Sources : Code de l'IMT, art. 17, n.º 10 ; droit de timbre, poste 1.1 ; Casa Pronta"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-card",
+    "kicker": "Novo no feed",
+    "img": "/social/instagram/posts/week-02/2026-11-22_01_cost-sheet-currencies/slide-01-pt.png"
+   },
+   "en": {
+    "format": "story-card",
+    "kicker": "New on the feed",
+    "img": "/social/instagram/posts/week-02/2026-11-22_01_cost-sheet-currencies/slide-01-en.png"
+   },
+   "fr": {
+    "format": "story-card",
+    "kicker": "Nouveau sur le fil",
+    "img": "/social/instagram/posts/week-02/2026-11-22_01_cost-sheet-currencies/slide-01-fr.png"
+   }
+  }
+ ]
+}

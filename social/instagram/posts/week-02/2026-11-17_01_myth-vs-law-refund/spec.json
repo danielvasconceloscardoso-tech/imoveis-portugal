@@ -1,0 +1,26 @@
+{
+ "pt": {
+  "format": "myth-vs-law",
+  "kicker": "Mito e lei",
+  "h": "Passar a residente em dois anos muda a conta do IMT.",
+  "myth": "Os 7,5% de IMT pagos por um não residente nunca voltam.",
+  "law": "Se passar a residente fiscal em Portugal nos dois anos seguintes à compra, a diferença é devolvida a pedido, no prazo de seis meses.",
+  "source": "Fonte: Código do IMT, art. 17.º, n.os 10 a 12 (DL 97/2026)"
+ },
+ "en": {
+  "format": "myth-vs-law",
+  "kicker": "Myth and law",
+  "h": "Moving to Portugal within two years changes the IMT bill.",
+  "myth": "The 7.5% IMT a non-resident pays never comes back.",
+  "law": "If you become a Portuguese tax resident within two years of the purchase, the difference is refunded on request, within six months.",
+  "source": "Source: IMT Code, art. 17(10) to (12), Decree-Law 97/2026"
+ },
+ "fr": {
+  "format": "myth-vs-law",
+  "kicker": "Mythe et loi",
+  "h": "Devenir résident dans les deux ans change la facture d'IMT.",
+  "myth": "Les 7,5 % d'IMT payés par un non-résident ne reviennent jamais.",
+  "law": "Si vous devenez résident fiscal au Portugal dans les deux ans suivant l'achat, la différence est remboursée sur demande, dans un délai de six mois.",
+  "source": "Source : Code de l'IMT, art. 17, n.os 10 à 12 (DL 97/2026)"
+ }
+}

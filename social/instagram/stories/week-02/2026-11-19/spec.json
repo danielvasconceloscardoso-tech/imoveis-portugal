@@ -1,0 +1,87 @@
+{
+ "frames": [
+  {
+   "pt": {
+    "format": "story-card",
+    "kicker": "Novo no feed",
+    "img": "/social/instagram/posts/week-02/2026-11-19_01_reader-question-deed/card-pt.png"
+   },
+   "en": {
+    "format": "story-card",
+    "kicker": "New on the feed",
+    "img": "/social/instagram/posts/week-02/2026-11-19_01_reader-question-deed/card-en.png"
+   },
+   "fr": {
+    "format": "story-card",
+    "kicker": "Nouveau sur le fil",
+    "img": "/social/instagram/posts/week-02/2026-11-19_01_reader-question-deed/card-fr.png"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-text",
+    "kicker": "Escritura e registo",
+    "h": "Num só balcão, num só momento.",
+    "big": "375 €",
+    "body": "Ou 700 € com hipoteca, mais 50 € por imóvel adicional.",
+    "source": "Fonte: Justiça.gov.pt, Balcão Casa Pronta"
+   },
+   "en": {
+    "format": "story-text",
+    "kicker": "Deed and registration",
+    "h": "One office, one sitting.",
+    "big": "375 €",
+    "body": "Or €700 with a mortgage, plus €50 per extra property.",
+    "source": "Source: Justiça.gov.pt, Casa Pronta office"
+   },
+   "fr": {
+    "format": "story-text",
+    "kicker": "Acte et enregistrement",
+    "h": "Un seul guichet, en une seule fois.",
+    "big": "375 €",
+    "body": "Ou 700 € avec une hypothèque, plus 50 € par bien supplémentaire.",
+    "source": "Source : Justiça.gov.pt, guichet Casa Pronta"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-text",
+    "kicker": "Pergunte",
+    "h": "A sua pergunta sobre a escritura.",
+    "body": "Documentos, prazos, custos. Respondemos com a fonte.",
+    "source": ""
+   },
+   "en": {
+    "format": "story-text",
+    "kicker": "Ask us",
+    "h": "Your question about the deed.",
+    "body": "Documents, timing, costs. We answer with the source.",
+    "source": ""
+   },
+   "fr": {
+    "format": "story-text",
+    "kicker": "Votre question",
+    "h": "Votre question sur l'acte.",
+    "body": "Documents, délais, coûts. Nous répondons avec la source.",
+    "source": ""
+   }
+  },
+  {
+   "pt": {
+    "format": "story-card",
+    "kicker": "Novo no feed",
+    "img": "/social/instagram/posts/week-02/2026-11-19_02_ten-years-cascais/card-pt.png"
+   },
+   "en": {
+    "format": "story-card",
+    "kicker": "New on the feed",
+    "img": "/social/instagram/posts/week-02/2026-11-19_02_ten-years-cascais/card-en.png"
+   },
+   "fr": {
+    "format": "story-card",
+    "kicker": "Nouveau sur le fil",
+    "img": "/social/instagram/posts/week-02/2026-11-19_02_ten-years-cascais/card-fr.png"
+   }
+  }
+ ]
+}

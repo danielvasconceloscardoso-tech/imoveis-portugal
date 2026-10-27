@@ -1,0 +1,62 @@
+{
+ "pt": {
+  "format": "postcard",
+  "h": "Madeira.",
+  "photo": "/design/directions/photos/madeira-rua.jpg",
+  "items": [
+   {
+    "v": "3 538 €",
+    "k": "por m² no Funchal, mediana"
+   },
+   {
+    "v": "+188%",
+    "k": "desde 2016"
+   },
+   {
+    "v": "4,8%",
+    "k": "rendimento bruto"
+   }
+  ],
+  "source": "Fonte: INE, preços e rendas, concelho do Funchal, 2.º trimestre de 2026"
+ },
+ "en": {
+  "format": "postcard",
+  "h": "Madeira.",
+  "photo": "/design/directions/photos/madeira-rua.jpg",
+  "items": [
+   {
+    "v": "€3,538",
+    "k": "per m² in Funchal, median"
+   },
+   {
+    "v": "+188%",
+    "k": "since 2016"
+   },
+   {
+    "v": "4.8%",
+    "k": "gross yield"
+   }
+  ],
+  "source": "Source: INE, prices and rents, municipality of Funchal, 2nd quarter 2026"
+ },
+ "fr": {
+  "format": "postcard",
+  "h": "Madeira.",
+  "photo": "/design/directions/photos/madeira-rua.jpg",
+  "items": [
+   {
+    "v": "3 538 €",
+    "k": "le m² à Funchal, médiane"
+   },
+   {
+    "v": "+188 %",
+    "k": "depuis 2016"
+   },
+   {
+    "v": "4,8 %",
+    "k": "rendement brut"
+   }
+  ],
+  "source": "Source : INE, prix et loyers, commune de Funchal, 2e trimestre 2026"
+ }
+}

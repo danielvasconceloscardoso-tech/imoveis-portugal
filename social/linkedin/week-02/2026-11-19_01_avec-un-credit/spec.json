@@ -1,0 +1,40 @@
+{
+ "fr": {
+  "format": "cost-sheet",
+  "kicker": "Avec un crédit",
+  "h": "Un bien à 250 000 €, prêt de 80 %.",
+  "tag": "Calcul illustratif · non-résident",
+  "rows": [
+   {
+    "k": "Prix",
+    "v": "250 000 €"
+   },
+   {
+    "k": "IMT",
+    "sub": "7,5 %, taux unique, sauf exception",
+    "v": "18 750 €"
+   },
+   {
+    "k": "Droit de timbre, achat",
+    "sub": "0,8 %",
+    "v": "2 000 €"
+   },
+   {
+    "k": "Droit de timbre, prêt",
+    "sub": "0,6 % de 200 000 €",
+    "v": "1 200 €"
+   },
+   {
+    "k": "Acte, enregistrement, hypothèque",
+    "sub": "Casa Pronta",
+    "v": "700 €"
+   }
+  ],
+  "total": {
+   "k": "Total",
+   "v": "272 650 €",
+   "sub": "puis 4 % sur les intérêts"
+  },
+  "source": "Sources : Code de l'IMT, art. 17, n.º 10 ; droit de timbre, postes 1.1 et 17.1.3 ; Casa Pronta ; Banco de Portugal"
+ }
+}

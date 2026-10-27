@@ -1,0 +1,84 @@
+{
+ "frames": [
+  {
+   "pt": {
+    "format": "story-text",
+    "kicker": "Esta semana",
+    "h": "A conta completa de uma casa em Portugal.",
+    "body": "IMT, imposto do selo, escritura e registo, linha a linha, com a fonte de cada número.",
+    "source": ""
+   },
+   "en": {
+    "format": "story-text",
+    "kicker": "This week",
+    "h": "The full bill for a home in Portugal.",
+    "body": "IMT, stamp duty, the deed and registration, line by line, with the source of every number.",
+    "source": ""
+   },
+   "fr": {
+    "format": "story-text",
+    "kicker": "Cette semaine",
+    "h": "Le compte complet d'un bien au Portugal.",
+    "body": "IMT, droit de timbre, acte et enregistrement, ligne par ligne, avec la source de chaque chiffre.",
+    "source": ""
+   }
+  },
+  {
+   "pt": {
+    "format": "story-card",
+    "kicker": "Novo no feed",
+    "img": "/social/instagram/posts/week-02/2026-11-16_01_cost-sheet-250k/slide-01-pt.png"
+   },
+   "en": {
+    "format": "story-card",
+    "kicker": "New on the feed",
+    "img": "/social/instagram/posts/week-02/2026-11-16_01_cost-sheet-250k/slide-01-en.png"
+   },
+   "fr": {
+    "format": "story-card",
+    "kicker": "Nouveau sur le fil",
+    "img": "/social/instagram/posts/week-02/2026-11-16_01_cost-sheet-250k/slide-01-fr.png"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-text",
+    "kicker": "Pergunte",
+    "h": "A sua pergunta sobre o IMT.",
+    "body": "Respondemos com a regra e a fonte. O seu caso concreto, um parceiro vê consigo.",
+    "source": ""
+   },
+   "en": {
+    "format": "story-text",
+    "kicker": "Ask us",
+    "h": "Your question about IMT.",
+    "body": "We answer with the rule and its source. Your own case goes to a partner.",
+    "source": ""
+   },
+   "fr": {
+    "format": "story-text",
+    "kicker": "Votre question",
+    "h": "Votre question sur l'IMT.",
+    "body": "Nous répondons avec la règle et sa source. Votre cas précis, un partenaire l'examine avec vous.",
+    "source": ""
+   }
+  },
+  {
+   "pt": {
+    "format": "story-card",
+    "kicker": "Novo no feed",
+    "img": "/social/instagram/posts/week-02/2026-11-16_02_here-vs-there-paris/card-pt.png"
+   },
+   "en": {
+    "format": "story-card",
+    "kicker": "New on the feed",
+    "img": "/social/instagram/posts/week-02/2026-11-16_02_here-vs-there-paris/card-en.png"
+   },
+   "fr": {
+    "format": "story-card",
+    "kicker": "Nouveau sur le fil",
+    "img": "/social/instagram/posts/week-02/2026-11-16_02_here-vs-there-paris/card-fr.png"
+   }
+  }
+ ]
+}
