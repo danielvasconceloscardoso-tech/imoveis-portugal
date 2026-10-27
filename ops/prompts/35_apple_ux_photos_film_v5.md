@@ -84,10 +84,7 @@ Rethink the clicks, the features and the aesthetics of the interactive parts:
 | 9 | Hold on the sea | "…next year finally came." |
 | 10 | Black. "Imóveis Portugal". "Your buyers, wherever they live." Small: "Launching 1 December 2026" | (silence, one note) |
 
-You may tell it in a more cinematic way, for example opening on the summer shot and cutting back to December, as long as every beat and line above is there and it runs 90–120 s. The developer's home in beat 6 is Vanguard's (Tomás Ribeiro 79) for the Vanguard version. For the other three, use their homes and end on their region:
-- Vale do Lobo: Algarve and golf;
-- VIC: Comporta and Pinheirinho golf;
-- Shalu: Porto and the Douro.
+You may tell it in a more cinematic way, for example opening on the summer shot and cutting back to December, as long as every beat and line above is there and it runs 90–120 s. **Make one film only: Vanguard.** The home in beat 6 is Tomás Ribeiro 79. Do not start the other three (Vale do Lobo, VIC, Shalu) until the operator approves this one; their variants are decided then.
 
 **The voice must not sound like AI:** warm, gentle, charismatic, natural breathing and pauses.
 1. Try current open-source voices with commercial licences, for example:
@@ -108,6 +105,6 @@ You may tell it in a more cinematic way, for example opening on the summer shot 
 1. §1 rename and §2 photographs. Send home page screenshots.
 2. Prompt 36, the map (the priority of this prompt's interactive work). Send its recordings.
 3. §3 journeys (the path, simulators, forms). Send the recordings.
-4. §4 film v5, Vanguard first (using the new map and UI), then the other three. Send each.
+4. §4 film v5: the Vanguard film only, using the new map and UI. Send it and stop there.
 
 Report briefly after each step. Don't send, publish or merge anything.
