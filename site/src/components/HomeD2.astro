@@ -31,7 +31,7 @@ const places = [
   { k: "cascais", img: "cascais-boca-do-inferno", line: one("cascais"), href: `${MAP}?place=cascais` },
   { k: "comporta", img: "comporta-dunas", line: muni("grandola"), href: `${MAP}?place=grandola` },
   { k: "algarve", img: "algarve-praia-da-marinha", line: muni("loule"), href: `${MAP}?place=loule` },
-  { k: "madeira", img: "madeira-sao-lourenco", line: muni("funchal"), href: `${MAP}?place=funchal` },
+  { k: "madeira", img: "madeira-funchal-fogo", line: muni("funchal"), href: `${MAP}?place=funchal` },
 ];
 // Five questions, each opening its answer (the same answers and sources as the FAQ).
 const ex = homeExample();
@@ -50,6 +50,10 @@ const chart = lineChart(PRICES.quarters, [{ label: "Portugal", values: ptP.m2 },
 // Prompt 33 §1, "the resort in daylight": soft sun, water, texture, ease; places and the life around them, none repeating
 // a place card. Every photograph carries the one grade (scripts/design/resort_grade.py); sources in content/media/SOURCES.md.
 const mosaic = ["algarve-golfe-amanhecer", "madeira-porto-moniz", "resort-mesa-terraco", "resort-piscina-mar", "madeira-levada", "lisboa-tejo-vela"];
+// Prompt 34 §4.5: alt text in the reader's language for the photographs placed in this pass; the rest fall back to "alts".
+const altL: Record<string, Record<Lang, string>> = {
+  "madeira-funchal-fogo": { pt: "Fogo de artifício de Ano Novo sobre a baía do Funchal, Madeira", en: "New Year's Eve fireworks over Funchal bay, Madeira", fr: "Feu d'artifice du Nouvel An sur la baie de Funchal, Madère" },
+};
 const alts: Record<string, string> = { "lisboa-alfama-sao-vicente": "Alfama, Lisboa", "porto-ponte-luis-i-noite": "Ponte Luís I, Porto", "lisboa-praca-do-comercio": "Praça do Comércio, Lisboa", "porto-douro-entardecer": "Douro, Porto", "lisboa-baixa-telhados": "Baixa, Lisboa", "lisboa-anoitecer-castelo": "Castelo de São Jorge, Lisboa", "lisboa-eletrico-28": "Elétrico 28, Lisboa", "porto-ribeira-rabelo": "Ribeira, Porto", "lisboa-alfama-telhados": "Alfama, Lisboa", "madeira-funchal-avenida": "Funchal, Madeira", "costa-atlantica-falesias": "Costa atlântica, Portugal", "vila-ribeirinha-amanhecer": "Vila ribeirinha ao amanhecer, Portugal", "cascais-praia-da-rainha": "Praia da Rainha, Cascais", "comporta-praia": "Praia da Comporta, Grândola", "algarve-ponta-da-piedade": "Ponta da Piedade, Lagos, Algarve", "madeira-funchal-anfiteatro": "Funchal, Madeira", "sintra-palacio-da-pena": "Palácio da Pena, Sintra", "douro-socalcos": "Socalcos do Douro", "algarve-benagil": "Gruta de Benagil, Algarve", "madeira-costa-norte": "Costa norte da Madeira", "resort-piscina-oliveira": "Piscina junto a uma oliveira e a um muro branco, Alentejo", "lisboa-tejo-cais": "O Tejo junto ao Cais das Colunas, Lisboa", "porto-douro-amanhecer": "O Douro ao amanhecer, Porto", "cascais-boca-do-inferno": "Boca do Inferno ao fim da tarde, Cascais", "algarve-praia-da-marinha": "Praia da Marinha, Lagoa, Algarve", "madeira-sao-lourenco": "Ponta de São Lourenço, Madeira", "algarve-golfe-amanhecer": "Campo de golfe no nevoeiro da manhã, Algarve", "madeira-porto-moniz": "Piscinas naturais do Porto Moniz, Madeira", "resort-mesa-terraco": "Mesa posta num terraço ao fim da tarde", "resort-piscina-mar": "Piscina sobre o mar", "madeira-levada": "Levada na Laurissilva, Madeira", "lisboa-tejo-vela": "Um veleiro no Tejo, Lisboa", "comporta-dunas": "Dunas da Comporta, Grândola" };
 const nl = config.forms.newsletter[lang];
 const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("home.subscribe.subject", lang)} (${ed} · ${lang})`)}`;
@@ -112,7 +116,7 @@ const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("h
         {p.img ? (
           <picture class="h2-ph h2-ph-45">
             <source type="image/avif" srcset={`/img/v2/${p.img}-640.avif 640w, /img/v2/${p.img}-1024.avif 1024w`} sizes="(min-width: 900px) 33vw, 100vw" />
-            <img src={`/img/v2/${p.img}-640.webp`} srcset={`/img/v2/${p.img}-640.webp 640w, /img/v2/${p.img}-1024.webp 1024w`} sizes="(min-width: 900px) 33vw, 80vw" width="640" height="800" alt={alts[p.img]} loading="lazy" />
+            <img src={`/img/v2/${p.img}-640.webp`} srcset={`/img/v2/${p.img}-640.webp 640w, /img/v2/${p.img}-1024.webp 1024w`} sizes="(min-width: 900px) 33vw, 80vw" width="640" height="800" alt={altL[p.img]?.[lang] ?? alts[p.img]} loading="lazy" />
           </picture>
         ) : (
           <div class="h2-ph h2-ph-45 h2-ph-wait"><span>{c(`home2.places.${p.k}.n`, lang)}</span><small>{c("home2.places.wait", lang)}</small></div>

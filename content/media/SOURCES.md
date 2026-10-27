@@ -15,7 +15,8 @@ never in a caption; our graded copies are shared under the same licence.
 | img/v2/cascais-boca-do-inferno-* | Place card, Cascais | Boca do Inferno at golden hour | Pixabay 3951680, BernardoUPloud | Pixabay Content License |
 | img/v2/comporta-dunas-* | Place card, Comporta | Dunes and the empty beach between Praia da Comporta and Praia da Torre (bottom 6% cropped to remove the photographer's watermark) | Vitor Oliveira, Wikimedia Commons, https://commons.wikimedia.org/wiki/File:Litotal_entre_a_Praia_da_Comporta_e_a_Praia_da_Torre_-_Portugal_(48800641008).jpg | CC BY-SA 2.0 |
 | img/v2/algarve-praia-da-marinha-* | Place card, Algarve | Golden cliffs at Praia da Marinha, Lagoa | Pixabay 1786783 | Pixabay Content License |
-| img/v2/madeira-sao-lourenco-* | Place card, Madeira | Ponta de São Lourenço in warm light | Pixabay 6763548, pixelRaw | Pixabay Content License |
+| img/v2/madeira-funchal-fogo-* | Place card, Madeira (prompt 34, 27 Oct 2026) | New Year's Eve fireworks over Funchal bay | Supplied by the operator in chat, 27 Oct 2026; source page and licence to follow (prompt 34 §4: to be confirmed before launch) | To confirm |
+| img/v2/madeira-sao-lourenco-* | Previously the Madeira place card (kept for other pages) | Ponta de São Lourenço in warm light | Pixabay 6763548, pixelRaw | Pixabay Content License |
 | img/v2/algarve-golfe-amanhecer-* | Mosaic, tile 1 (large) | A fairway in morning fog, Algarve (golfers small, backs or profiles) | Pixabay 1268298, ullakvist | Pixabay Content License |
 | img/v2/madeira-porto-moniz-* | Mosaic, tile 2 | The natural pools of Porto Moniz, Madeira | Pixabay 6819229, Olga_Fil | Pixabay Content License |
 | img/v2/resort-mesa-terraco-* | Mosaic, tile 3 | A table set on a terrace at sunset (place not stated by the source) | Pixabay 5356682, JoelFazhari | Pixabay Content License |
