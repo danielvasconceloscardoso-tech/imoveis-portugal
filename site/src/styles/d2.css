@@ -217,6 +217,6 @@ body.d2 .hd.solid { background: var(--paper); }
 .h2-chart [stroke="#7a5e28"] { stroke: #8aa398; } .h2-chart [fill="#7a5e28"] { fill: #4f6b61; }
 .h2-prices .pc-legend .k2 { color: #4f6b61; }
 /* Mosaic tile 6: keep the city across the river in frame. */
-.h2-m6 img { object-position: 50% 12%; }
+.h2-m6 img { object-position: 50% 80%; }
 /* Map pins and focus rings on design-v2 pages: green, not brass (D60). */
 body.d2 .mapx { --mapx-accent: var(--accent); } body.d2 .mapx-proj:focus-visible span { outline-color: var(--accent); }

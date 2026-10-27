@@ -52,7 +52,7 @@ L'évolution sur dix ans utilise la série de l'INE depuis le 1er trimestre 2016
 3. **Pas de second vol pour l'acte.** Une procuration signée dans un consulat portugais, ou devant un notaire de votre pays avec l'apostille de La Haye, permet à quelqu'un de signer l'acte pour vous.[[pt-poa-apostille]]
 4. **L'impôt de l'achat.** Si vous n'êtes pas résident fiscal au Portugal, l'IMT sur un logement est un taux unique de 7,5 %, plus 0,8 % de droit de timbre, sauf exception.[[pt-imt-nonresident-flat]][[pt-is-purchase]] L'une des exceptions vise toute personne qui « tenha sido considerado residente para efeitos fiscais » au Portugal ; si vous y avez déjà vécu, la façon dont elle s'applique à votre cas est une question pour un avocat ou un conseiller fiscal partenaire.[[pt-imt-nonresident-exceptions]]
 
-Le [simulateur de coût total](/fr/fr/simulateurs/cout-total/?price=400000&resident=0) fait le calcul avec votre prix, et [votre parcours](/fr/fr/votre-parcours/?door=buy&step=1) liste toutes les étapes.
+Le [simulateur de coût total](/fr/fr/simulateurs/cout-total/?price=400000&resident=0) fait le calcul avec votre prix, et [Pas à pas](/fr/fr/pas-a-pas/?door=buy&step=1) liste toutes les étapes.
 
 ## Votre pays de résidence change le voyage et les formalités
 

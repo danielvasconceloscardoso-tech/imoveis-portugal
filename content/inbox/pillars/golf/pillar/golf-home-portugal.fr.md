@@ -51,7 +51,7 @@ Au prix médian, 500 000 € représentent environ 121 m² à Loulé, 127 m² à
 6. **L'acte.** La Casa Pronta liste ce que l'acte demande : l'identité et le numéro fiscal des deux parties, la fiche technique du logement si elle existe, le permis d'habiter ou sa dispense, et le certificat énergétique.[[pt-casa-pronta-docs-all]]
 7. **Après l'achat.** L'IMI, la taxe foncière annuelle, va de 0,3 % à 0,45 % de la valeur fiscale du logement, au taux fixé par la commune.[[pt-imi-rates]] L'IMI additionnel (AIMI) ne s'applique qu'à la part des valeurs fiscales urbaines d'une personne au-delà de 600 000 €.[[pt-aimi-deduction]]
 
-Chaque étape a sa page dans [votre parcours](/fr/fr/votre-parcours/?door=buy&step=1).
+Chaque étape a sa page dans [Pas à pas](/fr/fr/pas-a-pas/?door=buy&step=1).
 
 ## Le coût d'achat d'une maison de golf à 500 000 €
 

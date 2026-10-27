@@ -8,7 +8,7 @@ never in a caption; our graded copies are shared under the same licence.
 
 | File (site/public/) | Where on the home page | What it shows | Source | Licence |
 | --- | --- | --- | --- | --- |
-| video/hero-portugal.mp4, video/hero-portugal-poster.* | Hero film (21 s, 1.9 MB) and its poster (first frame) | 0–6 s the Algarve cliffs with villas and a pool from the air; 5–11 s a white pool with cabanas; 10–16 s a morning beach near Lagos; 15–21 s the Atlantic in late light | Pixabay video 237279 (Radds); Mixkit 4045; Pixabay video 13771 (Wowa84); Mixkit 22254 | Mixkit License; Pixabay Content License |
+| video/hero-portugal.mp4, video/hero-portugal-poster.* | Hero film (19 s, 1.5 MB) and its poster (first frame) | 0–7 s the Algarve cliffs from the air; 6–13 s a morning beach near Lagos; 12–19 s the Atlantic in late light (prompt 35: the Mixkit pool clip removed) | Pixabay video 237279 (Radds); Pixabay video 13771 (Wowa84); Mixkit 22254 | Mixkit License; Pixabay Content License |
 | img/v2/resort-piscina-oliveira-* | About, tall photograph | A pool beside an olive tree and a white wall, Alentejo | Pixabay 643413, somepaulo | Pixabay Content License |
 | img/v2/lisboa-tejo-cais-* | Place card, Lisbon | The Tagus at the Cais das Colunas, a sailing boat | Pixabay 3844136, Louise36 | Pixabay Content License |
 | img/v2/porto-douro-amanhecer-* | Place card, Porto | The Douro at first light, a rabelo boat | Pixabay 4688930, vjgalaxy | Pixabay Content License |
@@ -27,3 +27,23 @@ never in a caption; our graded copies are shared under the same licence.
 Removed from the home page in this pass: the tram, Alfama roofs, the Ribeira, Praia da Rainha, Ponta da Piedade, Funchal,
 Sintra, Douro terraces, Benagil, Madeira north coast and Ponte Luís I photographs (files kept where other pages use
 them), the Praia da Comporta photograph with umbrellas (files deleted) and its caption credit.
+
+## Prompt 35 §2 (D61), 27 Oct 2026: the CTO's choice to the D60 standard
+
+Downloaded at the largest public size, cropped where noted, graded with `resort_grade.py` (1.0; 0.4 for the night photo). CC BY and CC BY-SA photographs are credited on /credits/ only; our graded copies of CC BY-SA photographs are shared under the same licence.
+
+| File (site/public/) | Where | What it shows | Source page | Licence | Date checked |
+| --- | --- | --- | --- | --- | --- |
+| img/v2/comporta-praia-dunas-* | About (tall photograph) | Comporta's white beach and dunes, turquoise sea (centre of a panorama) | https://www.flickr.com/photos/sarunas_b/52660132908/ (Šarūnas Burdulis) | CC BY-SA 2.0 | 2026-10-27 |
+| img/v2/comporta-mar-turquesa-* | Place card, Comporta | Turquoise water reaching the sand | https://www.flickr.com/photos/sarunas_b/52659924874/ (Šarūnas Burdulis) | CC BY-SA 2.0 | 2026-10-27 |
+| img/v2/comporta-mar-arrabida-* | Mosaic | The sea at Comporta, Arrábida beyond | https://www.flickr.com/photos/sarunas_b/52659924749/ (Šarūnas Burdulis) | CC BY-SA 2.0 | 2026-10-27 |
+| img/v2/cascais-baia-* | Place card, Cascais | The bay, small boats, the old town (cropped to leave out a parked van) | https://pixabay.com/photos/beach-cascais-portugal-sea-4585777/ | Pixabay Content License | 2026-10-27 |
+| img/v2/lisboa-castelo-por-do-sol-* | Place card, Lisboa | From São Jorge castle at sunset, rooftops, the Tagus, the 25 de Abril bridge | https://www.flickr.com/photos/stephendgardner/8634512892/ (Steve Gardner) | CC BY 2.0 | 2026-10-27 |
+| img/v2/porto-douro-entardecer-* | Place card, Porto | The Douro and the Luís I bridge at sunset | Unsplash photo-1513735492246-483525079686 (see design/directions/photos/CREDITS.md) | Unsplash License | 2026-10-27 |
+| img/v2/porto-ribeira-noite-* | Mosaic | The Ribeira at blue hour, lights on the Douro | https://pixabay.com/photos/porto-city-portugal-historic-city-1972486/ | Pixabay Content License | 2026-10-27 |
+| img/v2/algarve-porto-de-mos-* | Place card, Algarve | Golden cliffs above Porto de Mós beach | https://www.flickr.com/photos/sergeigussev/54459216417/ (Sergei Gussev) | CC BY 2.0 | 2026-10-27 |
+| img/v2/algarve-falesias-por-do-sol-* | Mosaic | Algarve cliffs at sunset near Porto de Mós (landscape crop) | https://www.flickr.com/photos/sergeigussev/54460328213/ (Sergei Gussev) | CC BY 2.0 | 2026-10-27 |
+
+Removed from the home page: the olive tree and pool, the table on a terrace, the pool above the sea (all generic resort photographs), the Comporta photograph with the cropped watermark, Boca do Inferno, Praia da Marinha, the Cais das Colunas and the Douro at dawn.
+
+Not found under a free or open licence (Unsplash, Pexels, Pixabay, Flickr commercial licences; Wikimedia rate-limited): an aerial of Comporta, and a clifftop or dune golf course in Portugal. The golf tile stays the Algarve course at sunrise until one is found.

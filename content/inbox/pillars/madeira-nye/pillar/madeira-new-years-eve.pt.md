@@ -52,7 +52,7 @@ A variação de dez anos usa a série do INE desde o 1.º trimestre de 2016, com
 3. **Sem segundo voo para a escritura.** Uma procuração feita num consulado português, ou num notário do país onde vive com a Apostila de Haia, permite que alguém assine a escritura por si.[[pt-poa-apostille]]
 4. **O imposto da compra.** Se não for residente fiscal em Portugal, o IMT sobre uma casa é uma taxa única de 7,5%, mais 0,8% de imposto do selo, salvo se se aplicar uma exceção.[[pt-imt-nonresident-flat]][[pt-is-purchase]] Uma das exceções abrange quem "tenha sido considerado residente para efeitos fiscais" em Portugal; se já viveu cá, a forma como se aplica ao seu caso é uma pergunta para um advogado ou consultor fiscal parceiro.[[pt-imt-nonresident-exceptions]]
 
-O [simulador de custo total](/pt/lu/simuladores/custo-total/?price=400000&resident=0) faz a conta com o seu preço, e o [percurso de compra](/pt/lu/o-seu-percurso/?door=buy&step=1) lista todas as etapas.
+O [simulador de custo total](/pt/lu/simuladores/custo-total/?price=400000&resident=0) faz a conta com o seu preço, e o [percurso de compra](/pt/lu/passo-a-passo/?door=buy&step=1) lista todas as etapas.
 
 ## O país onde vive muda a viagem e a papelada
 

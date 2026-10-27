@@ -51,7 +51,7 @@ Ao preço mediano, 500 000 € dão cerca de 121 m² em Loulé, 127 m² em Lagos
 6. **A escritura.** A Casa Pronta lista o que a escritura pede: identificação e número fiscal das duas partes, a ficha técnica da habitação se existir, a licença de utilização ou a sua dispensa e o certificado energético.[[pt-casa-pronta-docs-all]]
 7. **Depois da compra.** O IMI, o imposto municipal anual, é de 0,3% a 0,45% do valor patrimonial da casa, à taxa que cada câmara fixa.[[pt-imi-rates]] O adicional ao IMI (AIMI) só se aplica à parte da soma dos valores patrimoniais urbanos de cada pessoa acima de 600 000 €.[[pt-aimi-deduction]]
 
-Cada etapa tem a sua página no [percurso de compra](/pt/lu/o-seu-percurso/?door=buy&step=1).
+Cada etapa tem a sua página no [passo a passo da compra](/pt/lu/passo-a-passo/?door=buy&step=1).
 
 ## Quanto custa comprar uma casa de golfe de 500 000 €
 

@@ -1,4 +1,4 @@
-// "O seu percurso" as a path (prompt 27 §3, D51, D52): two routes, buying and selling (an inherited home adds its
+// "Passo a passo" (formerly "Passo a passo", D61) as a path (prompt 27 §3, D51, D52): two routes, buying and selling (an inherited home adds its
 // station), each a line of stations. Every station: what happens, what you need (a checklist the reader can tick),
 // the questions people ask (answered from facts.csv, prompt 20 journeys), the numbers for their case (a calculator
 // prefilled), the partner for the step, and "Próximo passo". Wording: COPY_DECK.md "path.*"; questions: "journey.q.*".

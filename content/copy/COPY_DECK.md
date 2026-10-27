@@ -16,9 +16,9 @@ How to edit:
 - FR: Questions
 
 ### navx.journey
-- PT: O seu percurso
-- EN: Your path
-- FR: Votre parcours
+- PT: Passo a passo
+- EN: Step by step
+- FR: Pas à pas
 
 ### nav.dossiers
 - PT: Dossiês
@@ -36,9 +36,9 @@ How to edit:
 - FR: Prix
 
 ### nav.journey
-- PT: O seu percurso
-- EN: Your path
-- FR: Votre parcours
+- PT: Passo a passo
+- EN: Step by step
+- FR: Pas à pas
 
 ### country.il
 - PT: Israel
@@ -72,8 +72,8 @@ How to edit:
 
 ### country.hint
 - PT: Os exemplos, a moeda, os impostos e o percurso seguem o país onde vive.
-- EN: Examples, currency, tax answers and your path follow the country you live in.
-- FR: Les exemples, la devise, la fiscalité et votre parcours suivent votre pays de résidence.
+- EN: Examples, currency, tax answers and Step by step follow the country you live in.
+- FR: Les exemples, la devise, la fiscalité et le Pas à pas suivent votre pays de résidence.
 
 ### country.live
 - PT: Vive em
@@ -3149,9 +3149,9 @@ How to edit:
 - FR: Les questions à préparer avec vos conseillers
 
 ### title
-- PT: O seu percurso
-- EN: Your path
-- FR: Votre parcours
+- PT: Passo a passo
+- EN: Step by step
+- FR: Pas à pas
 
 ### h1
 - PT: Residência, impostos e herança
@@ -3535,9 +3535,9 @@ How to edit:
 - FR: le Luxembourg
 
 ### title
-- PT: O seu percurso
-- EN: Your path
-- FR: Votre parcours
+- PT: Passo a passo
+- EN: Step by step
+- FR: Pas à pas
 
 ### h1
 - PT: Da ideia às chaves, a partir {from}
@@ -3585,9 +3585,9 @@ How to edit:
 - FR: Les prix passés ne garantissent pas les prix futurs.
 
 ### open
-- PT: Ver o seu percurso
-- EN: See your path
-- FR: Voir votre parcours
+- PT: Ver o passo a passo
+- EN: See it step by step
+- FR: Voir pas à pas
 
 ### role.agency
 - PT: Agência imobiliária
@@ -4647,7 +4647,7 @@ How to edit:
 ### end.h
 - PT: Leve o percurso consigo
 - EN: Take the path with you
-- FR: Emportez votre parcours
+- FR: Emportez le Pas à pas
 
 ### saved
 - PT: O seu progresso fica guardado neste dispositivo.
@@ -5120,9 +5120,9 @@ How to edit:
 - FR: Modifier les réponses
 
 ### email.p
-- PT: Inscreva-se na newsletter: o primeiro email traz o seu percurso, e pode sair quando quiser.
-- EN: Sign up to the newsletter: the first email carries your path, and you can leave whenever you want.
-- FR: Inscrivez-vous à la newsletter : le premier e-mail contient votre parcours, et vous pouvez partir quand vous voulez.
+- PT: Inscreva-se na newsletter: o primeiro email traz o Passo a passo, e pode sair quando quiser.
+- EN: Sign up to the newsletter: the first email carries Step by step, and you can leave whenever you want.
+- FR: Inscrivez-vous à la newsletter : le premier e-mail contient le Pas à pas, et vous pouvez partir quand vous voulez.
 
 ### email
 - PT: Receber o percurso por email
@@ -5185,9 +5185,9 @@ How to edit:
 - FR: Vous êtes ici
 
 ### start
-- PT: Começar o percurso
-- EN: Start the path
-- FR: Commencer le parcours
+- PT: Começar passo a passo
+- EN: Start step by step
+- FR: Commencer pas à pas
 
 ### t.later
 - PT: Mais tarde
@@ -5255,9 +5255,9 @@ How to edit:
 - FR: Acheter ou vendre un bien au Portugal depuis {from}, une étape à la fois. À chaque étape : ce qui se passe, ce qu'il vous faut, les questions qu'on se pose et qui s'en charge avec vous.
 
 ### h1
-- PT: O seu percurso
-- EN: Your path
-- FR: Votre parcours
+- PT: Passo a passo
+- EN: Step by step
+- FR: Pas à pas
 
 Prompt 27: the path (two doors, stations, checklist). Blocks path.st.{k}.h / .what / .need.n per station.
 
@@ -5813,9 +5813,9 @@ Design v2 home (prompt 32, D59). Every block: one to three sentences, at most 45
 - FR: Neuf étapes, chacune avec son coût réel et les documents nécessaires.
 
 ### buy.a
-- PT: Abrir o percurso de compra
-- EN: Open the buying path
-- FR: Ouvrir le parcours d'achat
+- PT: Comprar, passo a passo
+- EN: Buying, step by step
+- FR: Acheter, pas à pas
 
 ### sell.h
 - PT: Vender
@@ -5828,9 +5828,9 @@ Design v2 home (prompt 32, D59). Every block: one to three sentences, at most 45
 - FR: Sept étapes, avec les impôts et ce que vous pouvez faire à distance.
 
 ### sell.a
-- PT: Abrir o percurso de venda
-- EN: Open the selling path
-- FR: Ouvrir le parcours de vente
+- PT: Vender, passo a passo
+- EN: Selling, step by step
+- FR: Vendre, pas à pas
 
 ### qa.h
 - PT: As perguntas que mais nos fazem.

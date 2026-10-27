@@ -51,7 +51,7 @@ Au prix médian, 400 000 € représentent environ 113 m² à Funchal, 140 m² �
 6. **L'acte et les impôts.** L'IMT et le droit de timbre sont les principaux impôts de l'achat ; la section suivante fait le calcul.
 7. **Après l'achat.** Si vous vivez hors de l'UE et de l'EEE, vous avez 15 jours pour désigner un représentant fiscal ou adhérer aux notifications électroniques de l'administration fiscale.[[pt-tax-rep]][[pt-nif-nonresident]] Chaque année, l'IMI va de 0,3 % à 0,45 % de la valeur fiscale du logement, au taux fixé par la commune.[[pt-imi-rates]]
 
-Chaque étape a sa page dans [votre parcours](/fr/fr/votre-parcours/?door=buy&step=1).
+Chaque étape a sa page dans [Pas à pas](/fr/fr/pas-a-pas/?door=buy&step=1).
 
 ## Le coût d'achat d'un logement à 400 000 € à Madère
 

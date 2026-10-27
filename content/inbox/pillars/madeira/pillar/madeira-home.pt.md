@@ -51,7 +51,7 @@ Ao preço mediano, 400 000 € dão cerca de 113 m² no Funchal, 140 m² em Sant
 6. **A escritura e os impostos.** O IMT e o imposto do selo são os principais impostos da compra; a secção seguinte faz as contas.
 7. **Depois da compra.** Se vive fora da UE e do EEE, tem 15 dias para nomear um representante fiscal ou aderir às notificações eletrónicas das Finanças.[[pt-tax-rep]][[pt-nif-nonresident]] Todos os anos, o IMI vai de 0,3% a 0,45% do valor patrimonial da casa, à taxa que a câmara fixa.[[pt-imi-rates]]
 
-Cada etapa tem a sua página no [percurso de compra](/pt/lu/o-seu-percurso/?door=buy&step=1).
+Cada etapa tem a sua página no [passo a passo da compra](/pt/lu/passo-a-passo/?door=buy&step=1).
 
 ## Quanto custa comprar uma casa de 400 000 € na Madeira
 

@@ -52,7 +52,7 @@ The ten-year change uses INE's series from the first quarter of 2016, with a cha
 3. **No second flight for the deed.** A power of attorney signed at a Portuguese consulate, or before a notary where you live with the Hague Apostille, lets someone sign the deed for you.[[pt-poa-apostille]]
 4. **The tax on the purchase.** If you aren't a Portuguese tax resident, IMT on a home is a flat 7.5%, plus stamp duty of 0.8%, unless an exception applies.[[pt-imt-nonresident-flat]][[pt-is-purchase]] One exception covers anyone who "has been considered a tax resident" in Portugal; if you once lived here, how it applies to you is a question for a partner lawyer or tax adviser.[[pt-imt-nonresident-exceptions]]
 
-The [total-cost calculator](/en/us/calculators/total-cost/?price=400000&resident=0) runs your own price, and [your path](/en/us/your-path/?door=buy&step=1) lists every station.
+The [total-cost calculator](/en/us/calculators/total-cost/?price=400000&resident=0) runs your own price, and [Step by step](/en/us/step-by-step/?door=buy&step=1) lists every station.
 
 ## Where you live changes the trip and the paperwork
 

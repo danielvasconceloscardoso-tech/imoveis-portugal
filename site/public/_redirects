@@ -6,3 +6,10 @@
 /pt/:ed/casa-tratada-de-fora/ /pt/:ed/comprar-a-partir-de-fora/ 301
 /en/:ed/your-home-from-abroad/ /en/:ed/buying-from-abroad/ 301
 /fr/:ed/votre-maison-depuis-l-etranger/ /fr/:ed/acheter-depuis-l-etranger/ 301
+# Prompt 35 (D61): "O seu percurso" became "Passo a passo"; the old addresses keep working.
+/pt/:ed/o-seu-percurso/ /pt/:ed/passo-a-passo/ 301
+/en/:ed/your-path/ /en/:ed/step-by-step/ 301
+/fr/:ed/votre-parcours/ /fr/:ed/pas-a-pas/ 301
+/pt/:ed/o-seu-percurso /pt/:ed/passo-a-passo/ 301
+/en/:ed/your-path /en/:ed/step-by-step/ 301
+/fr/:ed/votre-parcours /fr/:ed/pas-a-pas/ 301

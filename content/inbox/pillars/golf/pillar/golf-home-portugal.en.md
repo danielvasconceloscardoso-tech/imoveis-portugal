@@ -51,7 +51,7 @@ At the median, €500,000 is about 121 m² in Loulé, 127 m² in Lagos, 143 m² 
 6. **The deed.** Casa Pronta lists what the deed needs: the identification and tax numbers of both sides, the technical file if one exists, the usage licence or its waiver, and the energy certificate.[[pt-casa-pronta-docs-all]]
 7. **After the purchase.** IMI, the yearly municipal tax, is 0.3% to 0.45% of the home's tax value, at the rate the municipality sets.[[pt-imi-rates]] The additional IMI (AIMI) only applies to the part of an individual's urban property tax values above €600,000.[[pt-aimi-deduction]]
 
-Each station has its page on [your path](/en/us/your-path/?door=buy&step=1).
+Each station has its page on [Step by step](/en/us/step-by-step/?door=buy&step=1).
 
 ## The cost of buying a €500,000 golf home
 

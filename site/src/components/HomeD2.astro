@@ -26,11 +26,11 @@ const m2 = (k: string) => PRICES.munis[k].m2[LAST] as number;
 const MAP = pathFor(lang, ed, "map");
 const one = (k: string) => c("home2.places.one", lang, { v: e(m2(k)) }), muni = (k: string) => c("home2.places.muni", lang, { m: PRICES.munis[k].n, v: e(m2(k)) });
 const places = [
-  { k: "lisboa", img: "lisboa-tejo-cais", line: one("lisboa"), href: `${MAP}?place=lisboa` },
-  { k: "porto", img: "porto-douro-amanhecer", line: one("porto"), href: `${MAP}?place=porto` },
-  { k: "cascais", img: "cascais-boca-do-inferno", line: one("cascais"), href: `${MAP}?place=cascais` },
-  { k: "comporta", img: "comporta-dunas", line: muni("grandola"), href: `${MAP}?place=grandola` },
-  { k: "algarve", img: "algarve-praia-da-marinha", line: muni("loule"), href: `${MAP}?place=loule` },
+  { k: "lisboa", img: "lisboa-castelo-por-do-sol", line: one("lisboa"), href: `${MAP}?place=lisboa` },
+  { k: "porto", img: "porto-douro-entardecer", line: one("porto"), href: `${MAP}?place=porto` },
+  { k: "cascais", img: "cascais-baia", line: one("cascais"), href: `${MAP}?place=cascais` },
+  { k: "comporta", img: "comporta-mar-turquesa", line: muni("grandola"), href: `${MAP}?place=grandola` },
+  { k: "algarve", img: "algarve-porto-de-mos", line: muni("loule"), href: `${MAP}?place=loule` },
   { k: "madeira", img: "madeira-funchal-fogo", line: muni("funchal"), href: `${MAP}?place=funchal` },
 ];
 // Five questions, each opening its answer (the same answers and sources as the FAQ).
@@ -49,9 +49,21 @@ const chart = lineChart(PRICES.quarters, [{ label: "Portugal", values: ptP.m2 },
   { breakAt: PRICES.break, breakLabel: c("prices.break", lang), fmt: (v) => new Intl.NumberFormat(HTML_LANG[lang]).format(v), h: 300 });
 // Prompt 33 §1, "the resort in daylight": soft sun, water, texture, ease; places and the life around them, none repeating
 // a place card. Every photograph carries the one grade (scripts/design/resort_grade.py); sources in content/media/SOURCES.md.
-const mosaic = ["algarve-golfe-amanhecer", "madeira-porto-moniz", "resort-mesa-terraco", "resort-piscina-mar", "madeira-levada", "lisboa-tejo-vela"];
+const mosaic = ["porto-ribeira-noite", "madeira-sao-lourenco", "algarve-golfe-amanhecer", "comporta-mar-arrabida", "madeira-porto-moniz", "algarve-falesias-por-do-sol"];
 // Prompt 34 §4.5: alt text in the reader's language for the photographs placed in this pass; the rest fall back to "alts".
 const altL: Record<string, Record<Lang, string>> = {
+  "comporta-praia-dunas": { pt: "Praia branca e dunas da Comporta, mar turquesa", en: "Comporta's white beach and dunes, turquoise sea", fr: "La plage blanche et les dunes de Comporta, mer turquoise" },
+  "comporta-mar-turquesa": { pt: "Mar turquesa a chegar à areia da Comporta", en: "Turquoise water reaching the sand at Comporta", fr: "L'eau turquoise sur le sable de Comporta" },
+  "comporta-mar-arrabida": { pt: "Mar da Comporta com a Arrábida ao fundo", en: "The sea at Comporta, the Arrábida hills beyond", fr: "La mer à Comporta, la serra da Arrábida au loin" },
+  "cascais-baia": { pt: "Baía de Cascais com pequenos barcos e a vila", en: "Cascais bay with small boats and the old town", fr: "La baie de Cascais, ses petits bateaux et la vieille ville" },
+  "lisboa-castelo-por-do-sol": { pt: "Lisboa do Castelo de São Jorge ao pôr do sol, com a ponte 25 de Abril", en: "Lisbon from São Jorge castle at sunset, the 25 de Abril bridge beyond", fr: "Lisbonne depuis le château Saint-Georges au coucher du soleil, le pont du 25-Avril au loin" },
+  "porto-douro-entardecer": { pt: "O Douro e a ponte Luís I ao pôr do sol, Porto", en: "The Douro and the Luís I bridge at sunset, Porto", fr: "Le Douro et le pont Luís I au coucher du soleil, Porto" },
+  "porto-ribeira-noite": { pt: "A Ribeira do Porto à hora azul, luzes no Douro", en: "Porto's Ribeira at blue hour, lights on the Douro", fr: "La Ribeira de Porto à l'heure bleue, les lumières sur le Douro" },
+  "algarve-porto-de-mos": { pt: "Falésias douradas sobre a praia de Porto de Mós, Lagos", en: "Golden cliffs above Porto de Mós beach, Lagos", fr: "Falaises dorées au-dessus de la plage de Porto de Mós, Lagos" },
+  "algarve-falesias-por-do-sol": { pt: "Falésias do Algarve ao pôr do sol, perto de Lagos", en: "Algarve cliffs at sunset, near Lagos", fr: "Falaises de l'Algarve au coucher du soleil, près de Lagos" },
+  "madeira-sao-lourenco": { pt: "Ponta de São Lourenço, Madeira", en: "Ponta de São Lourenço, Madeira", fr: "Ponta de São Lourenço, Madère" },
+  "algarve-golfe-amanhecer": { pt: "Campo de golfe do Algarve ao amanhecer, no nevoeiro", en: "An Algarve golf course at sunrise, in the mist", fr: "Un golf de l'Algarve au lever du soleil, dans la brume" },
+  "madeira-porto-moniz": { pt: "Piscinas naturais do Porto Moniz, Madeira", en: "The natural pools of Porto Moniz, Madeira", fr: "Les piscines naturelles de Porto Moniz, Madère" },
   "madeira-funchal-fogo": { pt: "Fogo de artifício de Ano Novo sobre a baía do Funchal, Madeira", en: "New Year's Eve fireworks over Funchal bay, Madeira", fr: "Feu d'artifice du Nouvel An sur la baie de Funchal, Madère" },
 };
 const alts: Record<string, string> = { "lisboa-alfama-sao-vicente": "Alfama, Lisboa", "porto-ponte-luis-i-noite": "Ponte Luís I, Porto", "lisboa-praca-do-comercio": "Praça do Comércio, Lisboa", "porto-douro-entardecer": "Douro, Porto", "lisboa-baixa-telhados": "Baixa, Lisboa", "lisboa-anoitecer-castelo": "Castelo de São Jorge, Lisboa", "lisboa-eletrico-28": "Elétrico 28, Lisboa", "porto-ribeira-rabelo": "Ribeira, Porto", "lisboa-alfama-telhados": "Alfama, Lisboa", "madeira-funchal-avenida": "Funchal, Madeira", "costa-atlantica-falesias": "Costa atlântica, Portugal", "vila-ribeirinha-amanhecer": "Vila ribeirinha ao amanhecer, Portugal", "cascais-praia-da-rainha": "Praia da Rainha, Cascais", "comporta-praia": "Praia da Comporta, Grândola", "algarve-ponta-da-piedade": "Ponta da Piedade, Lagos, Algarve", "madeira-funchal-anfiteatro": "Funchal, Madeira", "sintra-palacio-da-pena": "Palácio da Pena, Sintra", "douro-socalcos": "Socalcos do Douro", "algarve-benagil": "Gruta de Benagil, Algarve", "madeira-costa-norte": "Costa norte da Madeira", "resort-piscina-oliveira": "Piscina junto a uma oliveira e a um muro branco, Alentejo", "lisboa-tejo-cais": "O Tejo junto ao Cais das Colunas, Lisboa", "porto-douro-amanhecer": "O Douro ao amanhecer, Porto", "cascais-boca-do-inferno": "Boca do Inferno ao fim da tarde, Cascais", "algarve-praia-da-marinha": "Praia da Marinha, Lagoa, Algarve", "madeira-sao-lourenco": "Ponta de São Lourenço, Madeira", "algarve-golfe-amanhecer": "Campo de golfe no nevoeiro da manhã, Algarve", "madeira-porto-moniz": "Piscinas naturais do Porto Moniz, Madeira", "resort-mesa-terraco": "Mesa posta num terraço ao fim da tarde", "resort-piscina-mar": "Piscina sobre o mar", "madeira-levada": "Levada na Laurissilva, Madeira", "lisboa-tejo-vela": "Um veleiro no Tejo, Lisboa", "comporta-dunas": "Dunas da Comporta, Grândola" };
@@ -59,7 +71,7 @@ const nl = config.forms.newsletter[lang];
 const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("home.subscribe.subject", lang)} (${ed} · ${lang})`)}`;
 ---
 <section class="h2-hero" aria-labelledby="h2-h1">
-  {/* The film (prompt 33 §1): the Algarve cliffs from the air, a pool, a morning beach near Lagos, the Atlantic in late light; licensed clips (Mixkit, Pixabay), graded as one, silent, looping, 1.9 MB. The poster paints first and is the still for reduced motion. */}
+  {/* The film (prompt 33 §1): the Algarve cliffs from the air, a morning beach near Lagos, the Atlantic in late light; licensed clips (Pixabay, Mixkit), graded as one, silent, looping. The poster paints first and is the still for reduced motion. */}
   <picture class="h2-hero-media h2-hero-poster">
     <source type="image/avif" srcset="/video/hero-portugal-poster.avif" />
     <img src="/video/hero-portugal-poster.webp" width="1280" height="720" alt="" fetchpriority="high" />
@@ -92,8 +104,8 @@ const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("h
       <a class="h2-btn" href={pathFor(lang, ed, "how")}>{c("home2.about.a", lang)}</a>
     </div>
     <picture class="h2-ph h2-ph-tall" data-reveal>
-      <source type="image/avif" srcset="/img/v2/resort-piscina-oliveira-640.avif 640w, /img/v2/resort-piscina-oliveira-1024.avif 1024w, /img/v2/resort-piscina-oliveira-1600.avif 1600w" sizes="(min-width: 900px) 50vw, 100vw" />
-      <img src="/img/v2/resort-piscina-oliveira-1024.webp" srcset="/img/v2/resort-piscina-oliveira-640.webp 640w, /img/v2/resort-piscina-oliveira-1024.webp 1024w, /img/v2/resort-piscina-oliveira-1600.webp 1600w" sizes="(min-width: 900px) 50vw, 100vw" width="1024" height="1280" alt={alts["resort-piscina-oliveira"]} loading="lazy" style="object-position: 28% 50%" />
+      <source type="image/avif" srcset="/img/v2/comporta-praia-dunas-640.avif 640w, /img/v2/comporta-praia-dunas-1024.avif 1024w, /img/v2/comporta-praia-dunas-1600.avif 1600w" sizes="(min-width: 900px) 50vw, 100vw" />
+      <img src="/img/v2/comporta-praia-dunas-1024.webp" srcset="/img/v2/comporta-praia-dunas-640.webp 640w, /img/v2/comporta-praia-dunas-1024.webp 1024w, /img/v2/comporta-praia-dunas-1600.webp 1600w" sizes="(min-width: 900px) 50vw, 100vw" width="1024" height="1280" alt={altL["comporta-praia-dunas"][lang]} loading="lazy" />
     </picture>
   </div>
 </section>
@@ -155,7 +167,7 @@ const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("h
   {mosaic.map((m, i) => (
     <picture class={`h2-m h2-m${i + 1}`} data-reveal>
       <source type="image/avif" srcset={`/img/v2/${m}-640.avif 640w, /img/v2/${m}-1024.avif 1024w, /img/v2/${m}-1600.avif 1600w`} sizes={i === 0 || i === 3 ? "(min-width: 900px) 60vw, 100vw" : "(min-width: 900px) 40vw, 100vw"} />
-      <img src={`/img/v2/${m}-1024.webp`} srcset={`/img/v2/${m}-640.webp 640w, /img/v2/${m}-1024.webp 1024w, /img/v2/${m}-1600.webp 1600w`} sizes={i === 0 || i === 3 ? "(min-width: 900px) 60vw, 100vw" : "(min-width: 900px) 40vw, 100vw"} width="1024" height="683" alt={alts[m]} loading="lazy" />
+      <img src={`/img/v2/${m}-1024.webp`} srcset={`/img/v2/${m}-640.webp 640w, /img/v2/${m}-1024.webp 1024w, /img/v2/${m}-1600.webp 1600w`} sizes={i === 0 || i === 3 ? "(min-width: 900px) 60vw, 100vw" : "(min-width: 900px) 40vw, 100vw"} width="1024" height="683" alt={altL[m]?.[lang] ?? alts[m]} loading="lazy" />
     </picture>
   ))}
 </section>

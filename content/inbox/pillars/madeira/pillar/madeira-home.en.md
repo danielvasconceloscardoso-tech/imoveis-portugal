@@ -51,7 +51,7 @@ At the median, €400,000 is about 113 m² in Funchal, 140 m² in Santa Cruz, 19
 6. **The deed and the taxes.** IMT and stamp duty are the main purchase taxes; the next section runs the numbers.
 7. **After the purchase.** If you live outside the EU and the EEA, you have 15 days to appoint a tax representative or join the tax authority's electronic notices.[[pt-tax-rep]][[pt-nif-nonresident]] Each year, IMI is 0.3% to 0.45% of the home's tax value, at the rate the municipality sets.[[pt-imi-rates]]
 
-Each station has its page on [your path](/en/us/your-path/?door=buy&step=1).
+Each station has its page on [Step by step](/en/us/step-by-step/?door=buy&step=1).
 
 ## The cost of buying a €400,000 home in Madeira
 
