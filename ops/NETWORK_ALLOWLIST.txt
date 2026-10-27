@@ -371,3 +371,14 @@ cm-funchal.pt
 *.cm-funchal.pt
 visitportugal.com
 *.visitportugal.com
+elevenlabs.io
+*.elevenlabs.io
+earthdata.nasa.gov
+*.earthdata.nasa.gov
+nasa.gov
+*.nasa.gov
+copernicus.eu
+*.copernicus.eu
+s3.amazonaws.com
+elevation-tiles-prod.s3.amazonaws.com
+registry.opendata.aws
