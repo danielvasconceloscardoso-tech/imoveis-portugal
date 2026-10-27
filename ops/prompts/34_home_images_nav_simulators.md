@@ -31,15 +31,22 @@ Whichever comes first. It never restarts by itself. Reduced motion: no rotation 
 
 1. **Free, no credit needed:**
    - Unsplash (images.unsplash.com);
-   - Pexels (images.pexels.com, direct downloads, no API key needed);
-   - Pixabay (the key in the session, or cdn.pixabay.com).
-2. **Only if nothing else fits:** Wikimedia Commons (CC BY or CC BY-SA), credited on /credits only.
-3. **Never:**
-   - Google Images results;
+   - Pexels (images.pexels.com, direct downloads, no API key);
+   - Pixabay (the key in the session, or cdn.pixabay.com);
+   - StockSnap.io (CC0), Burst by Shopify, Kaboompics, ISO Republic (CC0), Picjumbo, Life of Pix. Read each site's licence page once and note it in SOURCES.md.
+2. **Search tools, not sources:**
+   - **Openverse** (openverse.org): searches Creative Commons and public-domain images across Flickr, Wikimedia and others, with a "commercial use" filter;
+   - **Google Images** with "Tools > Usage rights > Creative Commons licences".
+
+   Every result found this way is checked on its original page. CC0 and Public Domain need no credit. CC BY and CC BY-SA are credited on /credits only. Anything NC (non-commercial) or ND (no derivatives, which our grading would break) is excluded.
+3. **Official image banks, by permission:** Visit Madeira and the regional government's press photos, the Funchal municipality, Visit Portugal. Most press images are for editorial use with a credit. If the best Madeira fireworks image is there, prepare a two-line permission request for the operator to send (never send it yourself) and show the image as an option marked "needs permission".
+4. **Never:**
+   - a Google Images result without checking its source;
    - Shutterstock, iStock, Getty, Adobe Stock, Alamy, Dreamstime, 123RF (unless the operator buys a licence);
    - hotel, booking or travel-blog photographs;
-   - anything with a watermark.
-4. **Every photograph:**
+   - wallpaper sites;
+   - anything with a watermark or an unclear licence.
+5. **Every photograph:**
    - checked to show the place named;
    - logged in content/media/SOURCES.md (page URL, licence, date);
    - no credit on the image or in a caption;
