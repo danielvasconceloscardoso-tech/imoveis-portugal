@@ -5,9 +5,9 @@ type: newsletter
 week: 4
 date: 2026-12-03
 format: content/NEWSLETTER_FORMAT.md
-title: "$500,000 in Portugal: 86 m² in Lisbon, 190 in Gondomar"
+title: "$500,000 in Portugal, from Lisbon to Comporta"
 subjects:
-  - "$500,000 in Portugal: 86 m² in Lisbon, 190 in Gondomar"
+  - "$500,000 in Portugal, from Lisbon to Comporta"
   - "The 7.5% nobody puts in the spreadsheet"
   - "Porto, ten years in one line: up 234%"
 keyword: "buying a house in portugal as an american"
@@ -15,12 +15,13 @@ utm: "utm_source=newsletter&utm_medium=email&utm_campaign=w04-launch-us"
 sources: [pt-imt-nonresident-flat, pt-imt-nonresident-exceptions, pt-is-purchase, pt-casa-pronta-fees, ecb-eur-usd, ine-m2-2026q2, ine-m2-history, pt-nonresidents-buy, pt-nif-nonresident, pt-tax-rep, pt-poa-apostille, us-fbar]
 sponsored: true
 sponsor: Habinedita Gondomar
+partner_status: pending-agreement
 status: draft
 ---
 
 <!-- Prompt 30, sample: the launch issue for the US edition, in English. Three subject lines above; the operator picks one. -->
 
-Subject: $500,000 in Portugal: 86 m² in Lisbon, 190 in Gondomar
+Subject: $500,000 in Portugal, from Lisbon to Comporta
 
 {{first name | Hi}},
 
@@ -42,7 +43,7 @@ Run it with your own price: https://imoveisportugal.us/en/us/calculators/total-c
 
 ## The story
 
-Same budget, five places. $500,000 is about €446,700. At the median price of homes sold, that's 86 m² in Lisbon, 91 in Cascais, 108 in Loulé in the Algarve, 123 in Porto and 190 in Gondomar, next to Porto on the Douro.
+Same budget, five places. $500,000 is about €446,700. At the median price of homes sold, that's 86 m² in Lisbon, 91 in Cascais, 108 in Loulé in the Algarve, 123 in Porto and 176 in Grândola, the municipality Comporta belongs to. That last one is the municipality median: homes by the Comporta beaches sell for more.
 
 Ten years ago the same euros bought 238 m² in Lisbon, at the 2016 median of €1,875. Today's 86 m² is the other end of that line.
 
@@ -66,9 +67,11 @@ A partner lawyer can take care of the NIF and the power of attorney: https://imo
 
 ## From our partner
 
+> PENDING AGREEMENT. Habinedita has not signed the partner agreement yet (tasks 9g, 12d). This block is not sent until it has; if it is still unsigned on send day, the block is left out.
+
 *Sponsored by Habinedita Gondomar. Views and recommendations are the partner's own.*
 
-Habinedita Gondomar (AMI 13250) is the licensed agency our readers' buying requests go to. Tell them the area, the budget and the timing; they show homes by video first, and in person when you visit: https://imoveisportugal.us/en/us/private-consultation/?utm_source=newsletter&utm_medium=email&utm_campaign=w04-launch-us
+Habinedita Gondomar (AMI 13250) is the licensed agency our readers' buying requests go to. Tell them the area, the budget and the timing; they show homes by video first, and in person when you visit: https://imoveisportugal.us/en/us/talk-to-a-partner/?cat=agency&utm_source=newsletter&utm_medium=email&utm_campaign=w04-launch-us#form
 
 ## Before you go
 

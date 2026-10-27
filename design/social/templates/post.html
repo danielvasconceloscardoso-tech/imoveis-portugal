@@ -47,7 +47,8 @@ const foot = (s) => `<div class="foot"><div class="word"><i></i>Imóveis Portuga
 const F = {
   // 1. Here vs there: one square metre at home against what it buys in Portugal, squares to scale.
   "here-vs-there"(s) {
-    const px = 118; // 1 m² at home = 118 px wide, so the largest square still fits
+    // 1 m² at home = up to 118 px wide; smaller when more places must fit the 904 px between the margins
+    const px = Math.min(118, (904 - 34 * (s.items.length - 1)) / s.items.reduce((t, it) => t + Math.sqrt(it.m2), 0));
     const items = s.items.map((it, i) => { const w = Math.round(px * Math.sqrt(it.m2)); return `<div><div class="sq ${i ? "g" : ""}" style="width:${w}px;height:${w}px"></div><div class="lab"><b>${it.v}</b>${it.place}</div></div>`; }).join("");
     return `<div class="card"><p class="k">${s.kicker}</p><h1 class="sm">${s.h}</h1><div class="row" style="gap:34px">${items}</div><p class="note" style="margin-top:44px">${s.note}</p>${foot(s)}</div>`;
   },

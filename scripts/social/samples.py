@@ -27,25 +27,27 @@ TAGS = "#ImoveisPortugal"
 posts = []
 
 # 1. Here vs there (Luxembourg edition)
-items = [("Luxembourg-Ville", 1, LUX), ("Lisboa", LUX / m2("lisboa"), m2("lisboa")), ("Porto", LUX / m2("porto"), m2("porto")), ("Gondomar", LUX / m2("gondomar"), m2("gondomar"))]
+# D34: no single town as the punchline; the places readers want (Lisbon, Cascais, Porto, Madeira).
+items = [("Luxembourg-Ville", 1, LUX), ("Lisboa", LUX / m2("lisboa"), m2("lisboa")), ("Cascais", LUX / m2("cascais"), m2("cascais")), ("Porto", LUX / m2("porto"), m2("porto")), ("Funchal", LUX / m2("funchal"), m2("funchal"))]
 posts.append(dict(date="2026-12-01", order=1, slug="here-vs-there", format="here-vs-there", keyword={"pt": "comprar casa em portugal emigrante luxemburgo", "en": "buying a house in portugal from luxembourg", "fr": "acheter au portugal depuis le luxembourg"},
   link=f"{BASE}/pt/lu/mapa/?budget={LUX}&utm_source=instagram&utm_medium=social&utm_campaign=w04-here-vs-there", sources=["lu-m2-2026q2", "ine-m2-2026q2"],
   spec={l: dict(kicker={"pt": "Aqui e lá", "en": "Here and there", "fr": "Ici et là-bas"}[l],
-    h={"pt": "Um metro quadrado na cidade do Luxemburgo. Quatro em Gondomar.", "en": "One square metre in Luxembourg City. Four in Gondomar.", "fr": "Un mètre carré à Luxembourg-Ville. Quatre à Gondomar."}[l],
+    h={"pt": "Um metro quadrado na cidade do Luxemburgo. Dois em Lisboa.", "en": "One square metre in Luxembourg City. Two in Lisbon.", "fr": "Un mètre carré à Luxembourg-Ville. Deux à Lisbonne."}[l],
     items=[{"place": p if i else {"pt": "Luxemburgo (cidade)", "en": "Luxembourg City", "fr": "Luxembourg-Ville"}[l], "m2": a, "v": m2s(a, l) if i else "1 m²"} for i, (p, a, _) in enumerate(items)],
     note={"pt": f"O preço de 1 m² na cidade do Luxemburgo ({eur(LUX, 'pt')}, média, apartamentos existentes, julho de 2025 a junho de 2026) compra esta área em Portugal, à mediana do INE.",
           "en": f"The price of 1 m² in Luxembourg City ({eur(LUX, 'en')}, average, existing apartments, July 2025 to June 2026) buys this much in Portugal at the INE median.",
           "fr": f"Le prix d'1 m² à Luxembourg-Ville ({eur(LUX, 'fr')}, moyenne, appartements existants, juillet 2025 à juin 2026) achète cette surface au Portugal, au prix médian de l'INE."}[l],
     source={"pt": "Fontes: Observatoire de l'Habitat (LU), 2026 T2; INE, 2.º trimestre de 2026", "en": "Sources: Observatoire de l'Habitat (LU), Q2 2026; INE, 2nd quarter 2026", "fr": "Sources : Observatoire de l'Habitat (LU), T2 2026 ; INE, 2e trimestre 2026"}[l]) for l in LANGS},
-  caption={"pt": "Um metro quadrado na cidade do Luxemburgo. Quatro em Gondomar.\nCom o preço de 1 m² na capital compra 2 m² em Lisboa, quase 3 no Porto e mais de 4 em Gondomar, à mediana do INE.\nVeja a sua zona no mapa: link na bio, página Mapa.",
-           "en": "One square metre in Luxembourg City. Four in Gondomar.\nThe price of 1 m² in the capital buys 2 m² in Lisbon, almost 3 in Porto and over 4 in Gondomar, at the INE median.\nSee your area on the map: link in bio, Map page.",
-           "fr": "Un mètre carré à Luxembourg-Ville. Quatre à Gondomar.\nLe prix d'1 m² dans la capitale achète 2 m² à Lisbonne, presque 3 à Porto et plus de 4 à Gondomar, au prix médian de l'INE.\nVoyez votre région sur la carte : lien dans la bio, page Carte."},
-  alt="Squares to scale: one square metre in Luxembourg City against 2.0 m² in Lisbon, 2.8 m² in Porto and 4.4 m² in Gondomar, buying a house in Portugal from Luxembourg.",
-  tags=[TAGS, "#CasaEmPortugal", "#PortuguesesNoLuxemburgo", "#Porto", "#Lisboa"]))
+  caption={"pt": "Um metro quadrado na cidade do Luxemburgo. Dois em Lisboa.\nCom o preço de 1 m² na capital compra 2 m² em Lisboa ou em Cascais e quase 3 no Porto ou no Funchal, à mediana do INE.\nVeja a sua zona no mapa: link na bio, página Mapa.",
+           "en": "One square metre in Luxembourg City. Two in Lisbon.\nThe price of 1 m² in the capital buys 2 m² in Lisbon or Cascais, and almost 3 in Porto or Funchal, at the INE median.\nSee your area on the map: link in bio, Map page.",
+           "fr": "Un mètre carré à Luxembourg-Ville. Deux à Lisbonne.\nLe prix d'1 m² dans la capitale achète 2 m² à Lisbonne ou à Cascais, et presque 3 à Porto ou à Funchal, au prix médian de l'INE.\nVoyez votre région sur la carte : lien dans la bio, page Carte."},
+  alt="Squares to scale: one square metre in Luxembourg City against 2.0 m² in Lisbon, 2.1 m² in Cascais, 2.8 m² in Porto and 2.9 m² in Funchal, Madeira, buying a house in Portugal from Luxembourg.",
+  tags=[TAGS, "#CasaEmPortugal", "#PortuguesesNoLuxemburgo", "#Lisboa", "#Madeira"]))
 
 # 2. What your budget buys (US edition)
 B = 500000; Be = B / USD
-places = [("Lisboa", "lisboa"), ("Cascais", "cascais"), ("Loulé", "loule"), ("Porto", "porto"), ("Gondomar", "gondomar")]
+# D34: Comporta at its municipality median (Grândola), never a single town as the punchline.
+places = [("Lisboa", "lisboa"), ("Cascais", "cascais"), ("Loulé", "loule"), ("Porto", "porto"), ("Grândola (Comporta)", "grandola")]
 posts.append(dict(date="2026-12-03", order=2, slug="budget-buys", format="budget-buys", keyword={"pt": "quanto custa uma casa em portugal", "en": "how much is a house in portugal", "fr": "prix immobilier portugal"},
   link=f"{BASE}/en/us/map/?budget={round(Be)}&cur=USD&utm_source=instagram&utm_medium=social&utm_campaign=w04-budget-buys", sources=["ine-m2-2026q2", "ecb-eur-usd"],
   spec={l: dict(kicker={"pt": "O que o orçamento compra", "en": "What a budget buys", "fr": "Ce qu'un budget achète"}[l],
@@ -55,11 +57,11 @@ posts.append(dict(date="2026-12-03", order=2, slug="budget-buys", format="budget
           "en": f"{usd(B, 'en')} = {eur(Be, 'en')} at the ECB rate of 23 October 2026, divided by each municipality's INE median. Floor plans to scale.",
           "fr": f"{usd(B, 'fr')} = {eur(Be, 'fr')} au taux BCE du 23 octobre 2026, divisé par le prix médian INE de chaque commune. Plans à l'échelle."}[l],
     source=SRC_INE[l] + {"pt": "; BCE", "en": "; ECB", "fr": " ; BCE"}[l]) for l in LANGS},
-  caption={"pt": "500 000 dólares, cinco lugares.\n86 m² em Lisboa, 91 em Cascais, 108 em Loulé, 123 no Porto e 190 em Gondomar, à mediana do INE.\nFaça as suas contas no mapa: link na bio.",
-           "en": "$500,000, five places.\n86 m² in Lisbon, 91 in Cascais, 108 in Loulé, 123 in Porto and 190 in Gondomar, at the INE median.\nRun your numbers on the map: link in bio.",
-           "fr": "500 000 dollars, cinq lieux.\n86 m² à Lisbonne, 91 à Cascais, 108 à Loulé, 123 à Porto et 190 à Gondomar, au prix médian de l'INE.\nFaites vos calculs sur la carte : lien dans la bio."},
-  alt="Floor plans to scale of what 500,000 dollars buys in Lisbon, Cascais, Loulé, Porto and Gondomar at the median price, how much is a house in Portugal.",
-  tags=[TAGS, "#BuyingInPortugal", "#AmericansInPortugal", "#Cascais", "#Algarve"]))
+  caption={"pt": "500 000 dólares, cinco lugares.\n86 m² em Lisboa, 91 em Cascais, 108 em Loulé, 123 no Porto e 176 em Grândola, o concelho da Comporta, à mediana do INE.\nFaça as suas contas no mapa: link na bio.",
+           "en": "$500,000, five places.\n86 m² in Lisbon, 91 in Cascais, 108 in Loulé, 123 in Porto and 176 in Grândola, Comporta's municipality, at the INE median.\nRun your numbers on the map: link in bio.",
+           "fr": "500 000 dollars, cinq lieux.\n86 m² à Lisbonne, 91 à Cascais, 108 à Loulé, 123 à Porto et 176 à Grândola, la commune de Comporta, au prix médian de l'INE.\nFaites vos calculs sur la carte : lien dans la bio."},
+  alt="Floor plans to scale of what 500,000 dollars buys in Lisbon, Cascais, Loulé, Porto and Grândola (Comporta) at the municipality median price, how much is a house in Portugal.",
+  tags=[TAGS, "#BuyingInPortugal", "#AmericansInPortugal", "#Cascais", "#Comporta"]))
 
 # 3. Then and now (Lisbon)
 a16, a26 = 100000 / m2("lisboa", 0), 100000 / m2("lisboa")
