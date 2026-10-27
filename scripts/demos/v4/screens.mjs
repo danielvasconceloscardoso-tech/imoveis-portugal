@@ -32,6 +32,8 @@ const SHOTS = {
   faq: { url: `/en/${ed}/faq/?demo=${T}#en-sign`, sel: "#en-sign", at: "top", dy: -150, open: "#en-sign, #en-buy-abroad" },
   // 9: the private viewing request and the summary that goes with it.
   viewing: { url: st[5], sel: ".dc-sum", at: "center", step: "sum" },
+  // 9b: sent, and the team lighting up.
+  sent: { url: st[7], sel: ".dc-btn", at: "top", dy: -260, step: "sent" },
   // 10: the developer's inbox the next morning.
   inbox: { url: st[6], sel: "[data-em]", at: "top", dy: -30 },
 };

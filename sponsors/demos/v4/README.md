@@ -7,12 +7,14 @@ Status, 26 Oct 2026:
   - Shot 7: "Talk to a partner" hidden in demo mode. Done.
 - The other three films follow the Vanguard film.
 
-## Waiting on the operator (task 31b)
+## The Vanguard film (27 Oct 2026)
 
-27 Oct: the Pixabay and Freesound keys are not visible to the session that started before they were added (environment variables load at session start), and the network policy refuses mixkit.co. Musopen's own site answers scripts with a Cloudflare challenge; archive.org works and carries Musopen's public-domain recordings.
+`ImoveisPortugal_Demo_Vanguard_Tomas-Ribeiro-79_v4.mp4` (clean) and `ImoveisPortugal_Demo_Vanguard_Tomas-Ribeiro-79_v4_captioned.mp4` (captions burned in), with `ImoveisPortugal_Demo_Vanguard_Tomas-Ribeiro-79_v4.vtt`, 1920×1080 at 2.39:1, 24 fps, H.264 and AAC, 101 s, mixed to −16 LUFS. One frame per shot: `vanguard-shots.jpg`. Built with `film.py` (picture), `sound4.py` (sound and captions), `encode.sh` (the two MP4s), `mapframes.mjs` and `screens.mjs` (the site in demo mode).
 
-
-The licensed clips come from Pexels or Pixabay, whose APIs need a free key. Neither key is in this environment yet, and pexels.com refuses this machine's requests without one. Musopen and archive.org are on the repo allowlist but not yet allowed in the environment. The Vanguard film renders as soon as `PEXELS_API_KEY` or `PIXABAY_API_KEY` is set.
+Gaps, each to replace when a valid Pixabay key or a matching clip is found (task 31b):
+- **Shots 0 and 13:** no licensed clip of a Lisbon terrace exists on Mixkit. The film uses a glass in warm light (clip 9899) with no city named; the drink is amber, not wine.
+- **Strings:** no public-domain strings recording could be downloaded (Musopen blocks scripts, Wikimedia is rate-limited here); the music is the piano alone.
+- **Pixabay:** the key given on 27 Oct returns "invalid or missing API key" (it looks truncated). **Freesound:** the API answers 403 from this environment. Sound effects come from Mixkit instead, ambiences from Radio Aporee.
 
 ## Engine (scripts/demos/v4/)
 
@@ -28,18 +30,40 @@ The licensed clips come from Pexels or Pixabay, whose APIs need a free key. Neit
 
 Lines: content/demos/screenplay_v4.json. The budget is never spoken and no amount is readable on screen.
 
-## Sources and licences so far
+## Sources and licences
+
+Mixkit licence (free for commercial use, no attribution required): https://mixkit.co/license/. Files are fetched from `https://assets.mixkit.co/videos/<id>/<id>-1080.mp4` and `https://assets.mixkit.co/active_storage/sfx/<id>/<id>.wav`.
 
 | Used in | Source | Licence |
 | --- | --- | --- |
-| Shot 1 and the city behind the window | Billie Grace Ward, "Snowy Night", Wikimedia Commons (File:Snowy_Night_(42288909815).jpg) | CC BY 2.0, credit required (this line) |
-| Shots 8 and 10 | Vanguard Properties, renders of Tomás Ribeiro 79, as published | the developer's own, shown to the developer |
-| Screens | our site in demo mode | ours |
-| Voice | Kokoro-82M (kokoro-onnx) | Apache 2.0 |
-| Depth | Depth Anything V2 Small, ONNX weights by onnx-community | Apache 2.0 |
+| Shots 0 and 13, the glass | Mixkit clip 9899, a glass of amber drink in warm light | Mixkit licence |
+| Shot 1, the city | Mixkit clip 4330, "New York buildings at night, pan shot" (seconds 0.5 to 7.5, before a shop sign appears) | Mixkit licence |
+| Shots 1 and 12, the snow | Mixkit clips 8459 (snow falling) and 27377 (snowstorm), blended over the picture | Mixkit licence |
+| Shots 2 and 12, the window | Mixkit clip 21144, rain on a window at night | Mixkit licence |
+| Shot 2, the pour | Mixkit clip 22733, "Pouring red wine in a glass seen on a black background" | Mixkit licence |
+| Shot 3, the candle | Mixkit clip 48919, "Candle flame on black background, closeup" | Mixkit licence |
+| Shot 11, the candle | Mixkit clip 17305, "Red candle burning in a dark room" | Mixkit licence |
+| Shots 3 and 11, the hands | Mixkit clip 17450, "Working on a laptop at night" | Mixkit licence |
+| Shot 10, the Lisbon morning | Mixkit clip 21748, "Cable cars in Lisbon" | Mixkit licence |
+| Shots 4 and 5, the map | our site in demo mode (MapLibre; boundaries OpenStreetMap, ODbL; prices INE) | ours, with the map's data credits |
+| Shots 6, 7, 9, 10, the screens | our site in demo mode, figures out of focus | ours |
+| Shot 8, the living room | Vanguard Properties, render of Tomás Ribeiro 79, as published | the developer's own, shown to the developer |
+| Wind | Mixkit sound effect 1175, "Winter wind loop" | Mixkit licence |
+| Siren, far off | Mixkit sound effect 1650, "Ambulance siren passing by" | Mixkit licence |
+| Room tone | Mixkit sound effect 3080, "Cinematic room tone" | Mixkit licence |
+| Rain on the glass | Mixkit sound effect 1248, "Heavy rain on car glass interior" | Mixkit licence |
+| The pour | Mixkit sound effect 1324, "Pouring water to glass" (slowed) | Mixkit licence |
+| A key, Send | Mixkit sound effect 2541, "Single key press in a laptop" | Mixkit licence |
+| Typing | Mixkit sound effect 2532, "Slow typing on a keyboard" | Mixkit licence |
+| The tram | Mixkit sound effect 3019, "Slow tram passing" | Mixkit licence |
+| Birds, the morning | Mixkit sound effect 2472, "Morning birds" | Mixkit licence |
+| New York street, through the window | Radio Aporee, "724 8th Ave, New York, NY 10036, USA - cold winter", recorded by doejohn, 29 Aug 2021, archive.org aporee_58062_66563 | Public Domain Mark 1.0 |
+| Lisbon street, the morning | Radio Aporee, "Lisbon, Rua do Salvador - in front of cafe do electrico", recorded by maciej janasik, 26 Sep 2013, archive.org aporee_19882_23134 | Public Domain Mark 1.0 |
+| Sea and gulls, the terrace | Radio Aporee, "Costa da Caparica, Portugal - Waves and seagulls on the beach close to Lisbon", recorded by Felix BLUME, 2 May 2019, archive.org aporee_44160_50230 | Public Domain Mark 1.0 |
 | Piano | Chopin, Nocturne in C minor, B. 108, Musopen recording on archive.org (parso-0376f076666a403745bbb1c79277856a9f5ef9d4) | CC0 |
-| Strings, planned | Musopen String Quartet, Mendelssohn Op. 80, III Adagio (Wikimedia Commons) | public domain (Musopen) |
-| Christmas song on the TV | Westbrook Conservatory Entertainers, "Silent Night", Paramount 3197, October 1929, archive.org (WestbrookConservatoryEntertainers-SilentNight_323) | public domain |
-| Siren, planned | "American police siren i.ogg", pdsounds.org via Wikimedia Commons | public domain |
+| The carol on the TV | Westbrook Conservatory Entertainers, "Silent Night", Paramount 3197, October 1929, archive.org (WestbrookConservatoryEntertainers-SilentNight_323) | public domain |
+| Voices | Kokoro-82M (kokoro-onnx), voices af_heart and am_michael, read back by Whisper | Apache 2.0 |
+| Depth for shot 8 | Depth Anything V2 Small, ONNX weights by onnx-community | Apache 2.0 |
+| Type | Playfair Display, Manrope | SIL Open Font License |
 
-The Wikimedia downloads are slowed by rate limits on this machine's shared address. They are retried in the background.
+No Freesound or Pixabay material is in this film. No sound or clip under a non-commercial licence is used.

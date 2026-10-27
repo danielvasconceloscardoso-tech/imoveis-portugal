@@ -180,6 +180,12 @@ const SHOTS = {
   // 11: the lid halfway down, the glow stays on the glass.
   close(t, d = 7) { bottle.visible = false; setStream(false); setWine(.38); setLaptop(ROOM.L, 1 - .55 * ease(t / 2.5), .75);
     cam.fov = 34; cam.position.set(.32, .2, .7); cam.lookAt(-.12, .08, -.1); cam.updateProjectionMatrix(); return ROOM.S; },
+  // 4 (start): the screen lights up and the camera passes through it into the site.
+  through(t, d = 1.6) { bottle.visible = false; setStream(false); setWine(.55); setLaptop(ROOM.L, 1, .95); ROOM.S.updateMatrixWorld(true);
+    const scr = ROOM.L.userData.scr, tgt = scr.getWorldPosition(new THREE.Vector3()), nrm = new THREE.Vector3(0, 0, 1).transformDirection(scr.matrixWorld);
+    // Ends with the screen's width exactly filling the 2.39:1 frame (fov 22°: 0.288 m wide at 0.30 m), so the cut to the map is seamless.
+    const k = ease(t / d), from = new THREE.Vector3(-.05, .3, .9), to = tgt.clone().add(nrm.multiplyScalar(.30));
+    cam.fov = 30 - 8 * k; cam.position.copy(from.lerp(to, k)); cam.lookAt(tgt); cam.updateProjectionMatrix(); return ROOM.S; },
   // 12: the window; the snow keeps falling.
   window(t, d = 7) { bottle.visible = false; setStream(false); setLaptop(ROOM.L, .45, .7); cam.fov = 40; cam.position.set(0, .9, .4 - t * .015); cam.lookAt(0, .9, -2.6); cam.updateProjectionMatrix(); return ROOM.S; },
 };
