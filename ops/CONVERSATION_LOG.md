@@ -1,4 +1,4 @@
-# Conversation log: operator ↔ CEO (claude.ai), 23–26 Oct 2026
+# Conversation log: operator ↔ CEO (claude.ai), 23–27 Oct 2026
 
 How the project got to where it is, in the operator's own words (quotes lightly tidied for spelling) and what each request changed. Logistics ("send the link", "done, now what") and off-topic messages are left out. Decision numbers refer to `ops/DECISIONS.md`.
 
@@ -71,3 +71,24 @@ How the project got to where it is, in the operator's own words (quotes lightly 
    - the night scenes need stock footage.
    
    The fix script went to Claude Code.
+
+## 9. 26–27 Oct, night: content, design and the film
+
+1. "now we need to work on the newsletter and posts for each platform… witty and marketable… think like an SEO engine" → prompt 30, the content engine: one pillar a week cut into the newsletter, posts, stories and Q&A drafts.
+2. "I dont want u to draft I want u to write the scripts for claude code" → the CEO writes prompts and paste scripts. Claude Code writes the content.
+3. "we need to have a github folder for linkedin, facebook, reddit, instagram… insta folder with posts reels and stories" → the social/ folders.
+4. "run me the scripts just for posts and contents, movies, video and reels later. lets define our way of writing, the hashtags, the hours… designs that I like… find me an AI tool that will publish all the posts" → social/PLAYBOOK.md. Buffer (free plan, API) as the publishing tool, loading only approved posts.
+5. "I want the video to look much more animated, someone at home with a glass of wine, christmas in NY/Geneva, rain/snow… dont say 4m, just say they selected the budget, be discreet… think like shutter island and christopher nolan/scorcese/sopranos" → D58, prompt 31, the film "December".
+6. "the site should also look much more beautiful - check claridge's" (maybourne.com/en/hotels/claridges) → D59, prompt 32, design v2.
+7. "no need to show my team, watchout with the sentences, no AI SLOP at all. one to three sentences, one action, and a lot of space" → copy rules and a copy gate in prompt 32.
+8. "I don't like the map in a box - it does not give me the claridge's coziness or prestige"; then "for the map I like to have the key buttons - ui/ux oriented. budget, find concelho etc"; and Comporta, Algarve and Madeira photos → a full-bleed map with one refined control bar, and six named places.
+9. **Keys:** Pexels keys are paused for everyone. The Pixabay and Freesound keys didn't reach the session through the environment settings, so they were pasted into the Claude Code chat for that session only. The CEO may not log into accounts or handle keys.
+10. **CEO correction on 27 Oct:** the "Four in Gondomar" example in prompt 30 broke D34. Fixed: comparisons use Lisbon, Porto, Cascais, Comporta, the Algarve and Madeira.
+11. **Overnight, by about 02:00 on 27 Oct, Claude Code delivered:**
+    - the Vanguard film v4;
+    - design v2 home updates (its Cloudflare build then failed);
+    - weeks 1–4 of content in full;
+    - identity v3 everywhere.
+
+    "send me the status of every thing we've done, update the ops folder and prepare a handoff for my friend" → ops/STATUS.md, ops/REVIEW_QUEUE.md, this log, and the handover pack.
+
