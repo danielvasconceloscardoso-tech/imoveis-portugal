@@ -1,5 +1,5 @@
 # Prompt 31 (D58): assemble a v4 "December" film, picture only. Licensed stock clips (Mixkit) for the city, the
-# window, the pour, the candle, the hands and the morning; the real site in demo mode (screens.mjs, mapframes.mjs);
+# window, the pour, the candle, the hands and the morning; the terrace from a licensed photograph in 2.5D; the real site in demo mode (screens.mjs, mapframes.mjs);
 # the developer's photograph in 2.5D (plate.py); one grade for everything (grade.py). 24 fps, 1920×1080 at 2.39:1.
 # Writes frames/f00000.jpg… and timeline.json (shot starts, voice cues) for sound4.py.
 # Usage: python3 scripts/demos/v4/film.py <cut.json> <out dir>
@@ -79,7 +79,11 @@ V = C["clips"]; S = C["screens"]
 city = C["city"]; morning = C["morning"]
 snow1, snow2 = clip(V["snow"], 2, 7), clip(V["snowstorm"], 4, 7)
 # 0 · the cold open: the glass in warm light; hard cut to black, the small grey line.
-emit(still(V["glass_still"], 4, .04) if V.get("glass_still") else clip(V["glass"], 1.0, 4), "warm", "0")
+# The terrace is a photograph brought to life in 2.5D (cut.json "terrace": photo, depth, focus) when no clip fits.
+T = C.get("terrace")
+TP = Plate(T["photo"], T["depth"], focus=tuple(T.get("focus", (.5, .5))), margin=1.05) if T else None
+def terrace(dur, push, drift=(0, 0)): return [TP.frame(i / (round(dur * FPS) - 1), push=push, drift=drift, parallax=.8) for i in range(round(dur * FPS))]
+emit(terrace(4, .05) if TP else still(V["glass_still"], 4, .04) if V.get("glass_still") else clip(V["glass"], 1.0, 4), "warm", "0")
 emit(black(1.5), None, "0b", [("Illustrative buyer journey", W - 72, TOP + ACT - 36, 19, .2, 0, {"fill": (150, 150, 150), "anchor": "rs"})])
 # 1 · the city at night, snow falling.
 ny = clip(V["city"], .5, 7)
@@ -114,7 +118,7 @@ win = clip(V["window"], 6, 7); st = clip(V["snowstorm"], 12, 7)
 emit([screen_blend(Image.blend(st[i], f.filter(ImageFilter.GaussianBlur(1)), .18), snow1[i % len(snow1)], .4) for i, f in enumerate(win)], "night", "12")
 emit(black(2), None, "12b")
 # 13 · out of black: the glass again, in the light; the brand, the line, the launch.
-end = still(V["glass_still"], 7, .03) if V.get("glass_still") else clip(V["glass"], 5, 7)
+end = terrace(7, .035, (.4, 0)) if TP else still(V["glass_still"], 7, .03) if V.get("glass_still") else clip(V["glass"], 5, 7)
 end = [f if i < 3 * FPS else Image.blend(f, Image.new("RGB", f.size), min(.45, (i - 3 * FPS) / FPS * .45)) for i, f in enumerate(end)]
 emit(end, "warm", "13", [("Imóveis Portugal", W // 2, H // 2 - 4, 64, 3.2, 0, {"name": "Playfair-400.ttf", "anchor": "ms", "track": 0}),
                          ("Your buyers, wherever they live.", W // 2, H // 2 + 52, 30, 3.8, 0, {"anchor": "ms", "track": .01}),

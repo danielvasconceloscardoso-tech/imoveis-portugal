@@ -30,4 +30,4 @@ Fonte / Source / Source: INE, preços e rendas, 2.º trimestre de 2026
 
 #ImoveisPortugal #Madeira
 
-Alt text: A street in Madeira with three figures for Funchal: median price per square metre 3,538 euros, up 188 percent since 2016, 4.8 percent gross yield, buying property in Madeira.
+Alt text: Funchal on its hillside above the sea, Madeira, with three figures for Funchal: median price per square metre 3,538 euros, up 188 percent since 2016, 4.8 percent gross yield, buying property in Madeira.

@@ -23,3 +23,4 @@ Missing for the final site: coast (Algarve, Atlantic beaches) and houses (villag
 | File | Place | Source | Licence |
 | --- | --- | --- | --- |
 | madeira-rua.jpg | A street in Madeira (the clip names Madeira, not the town: label it "Madeira") | Mixkit, still from "Walking on the street on Madeira" (clip 3512) | Mixkit License: free for commercial use, no attribution required |
+| madeira-funchal.jpg | Funchal on its hillside, Madeira (27 Oct 2026, replaces madeira-rua.jpg in the postcards) | Pixabay 6924985, Erik_Karits (https://pixabay.com/photos/town-travel-exploration-village-6924985/) | Pixabay Content License: free for commercial use, no attribution required |

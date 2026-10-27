@@ -23,4 +23,4 @@ Alt text: Text frame asking which cost of buying a home in Portugal readers want
 Image: frame-02-en.png
 Kind: feed post shared
 Sticker: Share the 19:00 feed post (postcard, Madeira) to the story; add a link sticker "Subscribe" to the day's link.
-Alt text: The Madeira postcard: a street in Madeira with Funchal's median price per square meter, ten-year change and gross yield.
+Alt text: The Madeira postcard: Funchal on its hillside with Funchal's median price per square meter, ten-year change and gross yield.

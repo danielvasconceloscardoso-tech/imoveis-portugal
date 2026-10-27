@@ -26,4 +26,4 @@ Fonte / Source / Source: INE, preços e rendas da habitação, concelho do Funch
 
 #Madeira
 
-Alt text: A street in Madeira with three figures for Funchal: median price per square meter, ten-year change and gross yield.
+Alt text: Funchal on its hillside above the sea, Madeira, with three figures for Funchal: median price per square meter, ten-year change and gross yield.

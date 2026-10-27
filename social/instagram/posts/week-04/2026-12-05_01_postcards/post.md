@@ -34,4 +34,4 @@ Fonte / Source / Source: INE, preços e rendas, 2.º trimestre de 2026
 
 #ImoveisPortugal #CasaEmPortugal #Lisboa #Porto #Madeira
 
-Alt text: Three postcards, the Alfama rooftops in Lisbon, the Douro in Porto at sunset and a street in Madeira, each with what 300,000 euros buys at the INE median, the ten-year change and the gross yield, Portugal house prices.
+Alt text: Three postcards, the Alfama rooftops in Lisbon, the Douro in Porto at sunset and Funchal on its hillside in Madeira, each with what 300,000 euros buys at the INE median, the ten-year change and the gross yield, Portugal house prices.
