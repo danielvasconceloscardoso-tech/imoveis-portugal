@@ -19,15 +19,17 @@ const { lang, ed, page, title, description, paths, noindex = false, ogType = "we
 const urlFor = (l: Lang) => paths ? paths[l] : pathFor(l, ed, page);
 const host = config.domainMode === "primary" ? config.primaryDomain : EDITIONS[ed].domain;
 const canonical = Astro.props.canonicalUrl ?? `https://${host}${urlFor(lang)}`;
-// Prompt 27 and D52: four items, never wrapping: the path, the map, the questions, the partners. Price trends and
-// calculators live inside the map and the path; the rest sits in the mobile concierge menu and the footer. No "Private".
+// Prompt 34 (D37, D52): five items, never wrapping: the path, the map, the calculators, the questions, the partners.
+// Price trends live inside the map; the rest sits in the mobile concierge menu and the footer. No "Private". The path's
+// label is the one key common.navx.journey, so its rename is one line per language in COPY_DECK.md.
 const nav: { k: string; target: PageKey; current: string[] }[] = [
   { k: "journey", target: "journey", current: ["journey", "casa", "buy", "consult", "dossiers", "guide", "private"] },
-  { k: "map", target: "map", current: ["map", "data", "sims"] },
+  { k: "map", target: "map", current: ["map", "data"] },
+  { k: "sims", target: "sims", current: ["sims"] },
   { k: "faq", target: "faq", current: ["faq"] },
   { k: "partners", target: "partners", current: ["partners", "ours", "talk"] },
 ];
-const more: PageKey[] = ["casa", "data", "sims", "consult", "dossiers", "guide", "blog", "ours", "talk", "how"];
+const more: PageKey[] = ["casa", "data", "consult", "dossiers", "guide", "blog", "ours", "talk", "how"];
 const subscribe = `${pathFor(lang, ed, "home")}#subscrever`;
 // Default sticky action: the free guide from the home page, a partner from the help pages.
 const sticky: Sticky = Astro.props.sticky !== undefined ? Astro.props.sticky

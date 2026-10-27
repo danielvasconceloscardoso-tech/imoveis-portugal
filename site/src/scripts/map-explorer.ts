@@ -74,6 +74,10 @@ export function initMapExplorer(root: HTMLElement) {
   let selected: string | null = q.get("place"), selPar: string | null = q.get("parish");
   let filter = "all", region = "", flat = reduce() || lowPower() || q.get("flat") === "1";
   let map: any = null, ml: any = null, features: any[] = [], loading: Promise<void> | null = null, rotating = false;
+  // Prompt 34: on the home page the slow rotation stops for good after 15 seconds or at the first interaction.
+  let halted = false, haltTimer = 0;
+  const halt = () => { if (halted) return; halted = true; clearTimeout(haltTimer); if (rotating && map) map.stop(); rotating = false; };
+  const startSpin = () => { if (halted || rotating || !map) return; rotating = true; if (!haltTimer) haltTimer = window.setTimeout(halt, 15000); spin(); };
   let P: { quarters: string[]; munis: Record<string, Series>; regions: Record<string, Series> } | null = null;
   let parishes: { feats: any[]; data: Record<string, Series> } | null = null, parLoading = false;
   let hoverId: number | string | null = null, hoverSrc = "";
@@ -427,13 +431,15 @@ export function initMapExplorer(root: HTMLElement) {
       if (golfOn) await drawGolf();
       const sel = selected, par = selPar;
       if (par) { await loadParishes(); selectParish(par); } else if (sel) select(sel);
-      if (root.dataset.mode === "home" && !flat && !sel) { rotating = true; spin(); }
+      if (root.dataset.mode === "home" && !flat && !sel) startSpin();
       map.on("move", placeInsets);
       map.on("zoomend", () => { if (map.getZoom() > 7.6) loadParishes(); });
       map.on("click", (e: any) => { pinGolf(e.point); const h = pick(e.point); if (!h) return; if (h.kind === "par") selectParish(h.key); else select(h.key, { fly: map.getZoom() < 7 }); });
       map.on("mousemove", (e: any) => hover(e.point));
       map.on("mouseout", () => hover(null));
       ["mousedown", "touchstart", "wheel"].forEach((ev) => canvas.addEventListener(ev, () => (rotating = false), { passive: true }));
+      // Any interaction with the map or its control bar (click, tap, drag, wheel, keyboard focus, typing) ends the rotation.
+      if (root.dataset.mode === "home") ["pointerdown", "touchstart", "wheel", "keydown", "focusin", "input"].forEach((ev) => root.addEventListener(ev, halt, { passive: true }));
     })();
     return loading;
   }
@@ -656,7 +662,7 @@ export function initMapExplorer(root: HTMLElement) {
     new IntersectionObserver((es) => {
       inView = es.some((e) => e.isIntersecting);
       if (map && !inView) rotating = false;
-      else if (map && inView && !rotating && !flat && !selected) { rotating = true; spin(); }
+      else if (map && inView && !rotating && !flat && !selected) startSpin();
       tryGo();
     }, { threshold: 0.35 }).observe(root);
   } else {
