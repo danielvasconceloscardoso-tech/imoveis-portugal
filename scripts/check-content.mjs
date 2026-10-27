@@ -124,7 +124,7 @@ const targets = process.argv.slice(2).length ? process.argv.slice(2).map((p) => 
 let faqs = 0, pieces = 0;
 for (const f of targets.flatMap((t) => walk(t))) {
   if (f.endsWith(".yaml") && f.includes(`${"content"}/faq`)) { checkFaq(f); faqs++; }
-  else if (f.endsWith(".md") && f.includes("content/inbox") && !f.endsWith("README.md")) { checkPiece(f); pieces++; }
+  else if (f.endsWith(".md") && f.includes("content/inbox") && !/\/[A-Z][A-Z_0-9-]*\.md$/.test(f) && !f.includes("/pillar/")) { checkPiece(f); pieces++; }
 }
 for (const ed of EDITIONS) for (const l of ["pt", "en", "fr"]) {
   if (!(`common-${l}` in faqCount)) continue;
@@ -148,8 +148,11 @@ if (existsSync(deck)) readFileSync(deck, "utf8").split("\n").forEach((line, i) =
 // Blog articles (content/blog/{id}.{lang}.md, task 15): front matter, a short answer first, sources, no banned wording.
 const blogDir = join(root, "content/blog");
 let posts = 0;
-if (existsSync(blogDir)) for (const f of readdirSync(blogDir).filter((x) => /\.(pt|en|fr)\.md$/.test(x))) {
-  const file = join(blogDir, f), m = readFileSync(file, "utf8").match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+// Prompt 30 §2: each week's pillar page waits in content/inbox/week-NN/pillar/ in the blog format, then moves to content/blog/.
+const pillars = walk(join(root, "content/inbox")).filter((f) => /\/pillar\/[^/]+\.(pt|en|fr)\.md$/.test(f));
+const blogFiles = [...(existsSync(blogDir) ? readdirSync(blogDir).filter((x) => /\.(pt|en|fr)\.md$/.test(x)).map((x) => join(blogDir, x)) : []), ...pillars];
+for (const file of blogFiles) {
+  const f = file.split("/").pop(), m = readFileSync(file, "utf8").match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
   posts++;
   if (!m) { err(file, "front matter missing"); continue; }
   const fm = yaml.load(m[1]) || {}, lang = f.match(/\.(pt|en|fr)\.md$/)[1];
@@ -213,7 +216,7 @@ const V2_SHAPES = [/whether you'?re/i, /^from .+ to /i, /\bimagine\b/i, /\bimagi
     }
   }
 }
-console.log(`checked ${faqs} FAQ files, ${pieces} inbox pieces and ${posts} blog articles against ${factIds.size} facts`);
+console.log(`checked ${faqs} FAQ files, ${pieces} inbox pieces and ${posts} blog articles and pillar pages against ${factIds.size} facts`);
 if (errors.length) {
   console.log(errors.map((e) => `ERROR ${e}`).join("\n"));
   process.exit(1);
