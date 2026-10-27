@@ -52,7 +52,7 @@ Rethink the clicks, the features and the aesthetics of the interactive parts:
    - one thin icon set;
    - transitions of 200–300 ms with an ease-out curve;
    - nothing bounces.
-7. **Map place card:** a photograph, the place name, three numbers (price per m², 10-year change, rent), one line, and two actions: "See homes here" and "Talk to the concierge". Everything else is one tap further, never on the first view.
+7. **The map:** see prompt 36 ("the map, from 12/20 to 20/20"). It replaces this point.
 8. **Simulators:** one input to start; the result as one large number; the detail on demand; save or share in one tap.
 9. **Forms:**
    - the same fields, data, consent and routing as today, presented one step at a time in our style, with the consent box unticked and naming the recipient (GDPR);
@@ -106,7 +106,8 @@ You may tell it in a more cinematic way, for example opening on the summer shot 
 ## Order and report
 
 1. §1 rename and §2 photographs. Send home page screenshots.
-2. §3 journeys. Send the recordings.
-3. §4 film v5, Vanguard first, then the other three. Send each.
+2. Prompt 36, the map (the priority of this prompt's interactive work). Send its recordings.
+3. §3 journeys (the path, simulators, forms). Send the recordings.
+4. §4 film v5, Vanguard first (using the new map and UI), then the other three. Send each.
 
 Report briefly after each step. Don't send, publish or merge anything.
