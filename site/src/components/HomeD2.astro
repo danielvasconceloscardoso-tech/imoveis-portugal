@@ -26,12 +26,12 @@ const m2 = (k: string) => PRICES.munis[k].m2[LAST] as number;
 const MAP = pathFor(lang, ed, "map");
 const one = (k: string) => c("home2.places.one", lang, { v: e(m2(k)) }), muni = (k: string) => c("home2.places.muni", lang, { m: PRICES.munis[k].n, v: e(m2(k)) });
 const places = [
-  { k: "lisboa", img: "lisboa-eletrico-28", line: one("lisboa"), href: `${MAP}?place=lisboa` },
-  { k: "porto", img: "porto-ribeira-rabelo", line: one("porto"), href: `${MAP}?place=porto` },
-  { k: "cascais", img: "cascais-praia-da-rainha", line: one("cascais"), href: `${MAP}?place=cascais` },
-  { k: "comporta", img: "comporta-praia", line: muni("grandola"), href: `${MAP}?place=grandola` },
-  { k: "algarve", img: "algarve-ponta-da-piedade", line: muni("loule"), href: `${MAP}?place=loule` },
-  { k: "madeira", img: "madeira-funchal-anfiteatro", line: muni("funchal"), href: `${MAP}?place=funchal` },
+  { k: "lisboa", img: "lisboa-tejo-cais", line: one("lisboa"), href: `${MAP}?place=lisboa` },
+  { k: "porto", img: "porto-douro-amanhecer", line: one("porto"), href: `${MAP}?place=porto` },
+  { k: "cascais", img: "cascais-boca-do-inferno", line: one("cascais"), href: `${MAP}?place=cascais` },
+  { k: "comporta", img: "comporta-dunas", line: muni("grandola"), href: `${MAP}?place=grandola` },
+  { k: "algarve", img: "algarve-praia-da-marinha", line: muni("loule"), href: `${MAP}?place=loule` },
+  { k: "madeira", img: "madeira-sao-lourenco", line: muni("funchal"), href: `${MAP}?place=funchal` },
 ];
 // Five questions, each opening its answer (the same answers and sources as the FAQ).
 const ex = homeExample();
@@ -47,19 +47,20 @@ const qa = [
 const ptP = PRICES.regions.PT;
 const chart = lineChart(PRICES.quarters, [{ label: "Portugal", values: ptP.m2 }, { label: PRICES.munis.lisboa.n, values: PRICES.munis.lisboa.m2 }, { label: PRICES.munis.porto.n, values: PRICES.munis.porto.m2 }],
   { breakAt: PRICES.break, breakLabel: c("prices.break", lang), fmt: (v) => new Intl.NumberFormat(HTML_LANG[lang]).format(v), h: 300 });
-// Six different places a reader recognises at a glance, none repeating a place card's photograph (prompt 32).
-const mosaic = ["lisboa-alfama-sao-vicente", "sintra-palacio-da-pena", "douro-socalcos", "algarve-benagil", "madeira-costa-norte", "porto-ponte-luis-i-noite"];
-const alts: Record<string, string> = { "lisboa-alfama-sao-vicente": "Alfama, Lisboa", "porto-ponte-luis-i-noite": "Ponte Luís I, Porto", "lisboa-praca-do-comercio": "Praça do Comércio, Lisboa", "porto-douro-entardecer": "Douro, Porto", "lisboa-baixa-telhados": "Baixa, Lisboa", "lisboa-anoitecer-castelo": "Castelo de São Jorge, Lisboa", "lisboa-eletrico-28": "Elétrico 28, Lisboa", "porto-ribeira-rabelo": "Ribeira, Porto", "lisboa-alfama-telhados": "Alfama, Lisboa", "madeira-funchal-avenida": "Funchal, Madeira", "costa-atlantica-falesias": "Costa atlântica, Portugal", "vila-ribeirinha-amanhecer": "Vila ribeirinha ao amanhecer, Portugal", "cascais-praia-da-rainha": "Praia da Rainha, Cascais", "comporta-praia": "Praia da Comporta, Grândola", "algarve-ponta-da-piedade": "Ponta da Piedade, Lagos, Algarve", "madeira-funchal-anfiteatro": "Funchal, Madeira", "sintra-palacio-da-pena": "Palácio da Pena, Sintra", "douro-socalcos": "Socalcos do Douro", "algarve-benagil": "Gruta de Benagil, Algarve", "madeira-costa-norte": "Costa norte da Madeira" };
+// Prompt 33 §1, "the resort in daylight": soft sun, water, texture, ease; places and the life around them, none repeating
+// a place card. Every photograph carries the one grade (scripts/design/resort_grade.py); sources in content/media/SOURCES.md.
+const mosaic = ["algarve-golfe-amanhecer", "madeira-porto-moniz", "resort-mesa-terraco", "resort-piscina-mar", "madeira-levada", "lisboa-tejo-vela"];
+const alts: Record<string, string> = { "lisboa-alfama-sao-vicente": "Alfama, Lisboa", "porto-ponte-luis-i-noite": "Ponte Luís I, Porto", "lisboa-praca-do-comercio": "Praça do Comércio, Lisboa", "porto-douro-entardecer": "Douro, Porto", "lisboa-baixa-telhados": "Baixa, Lisboa", "lisboa-anoitecer-castelo": "Castelo de São Jorge, Lisboa", "lisboa-eletrico-28": "Elétrico 28, Lisboa", "porto-ribeira-rabelo": "Ribeira, Porto", "lisboa-alfama-telhados": "Alfama, Lisboa", "madeira-funchal-avenida": "Funchal, Madeira", "costa-atlantica-falesias": "Costa atlântica, Portugal", "vila-ribeirinha-amanhecer": "Vila ribeirinha ao amanhecer, Portugal", "cascais-praia-da-rainha": "Praia da Rainha, Cascais", "comporta-praia": "Praia da Comporta, Grândola", "algarve-ponta-da-piedade": "Ponta da Piedade, Lagos, Algarve", "madeira-funchal-anfiteatro": "Funchal, Madeira", "sintra-palacio-da-pena": "Palácio da Pena, Sintra", "douro-socalcos": "Socalcos do Douro", "algarve-benagil": "Gruta de Benagil, Algarve", "madeira-costa-norte": "Costa norte da Madeira", "resort-piscina-oliveira": "Piscina junto a uma oliveira e a um muro branco, Alentejo", "lisboa-tejo-cais": "O Tejo junto ao Cais das Colunas, Lisboa", "porto-douro-amanhecer": "O Douro ao amanhecer, Porto", "cascais-boca-do-inferno": "Boca do Inferno ao fim da tarde, Cascais", "algarve-praia-da-marinha": "Praia da Marinha, Lagoa, Algarve", "madeira-sao-lourenco": "Ponta de São Lourenço, Madeira", "algarve-golfe-amanhecer": "Campo de golfe no nevoeiro da manhã, Algarve", "madeira-porto-moniz": "Piscinas naturais do Porto Moniz, Madeira", "resort-mesa-terraco": "Mesa posta num terraço ao fim da tarde", "resort-piscina-mar": "Piscina sobre o mar", "madeira-levada": "Levada na Laurissilva, Madeira", "lisboa-tejo-vela": "Um veleiro no Tejo, Lisboa", "comporta-dunas": "Dunas da Comporta, Grândola" };
 const nl = config.forms.newsletter[lang];
 const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("home.subscribe.subject", lang)} (${ed} · ${lang})`)}`;
 ---
 <section class="h2-hero" aria-labelledby="h2-h1">
-  {/* The film of Portugal: licensed clips (Mixkit), silent, looping, 1.5 MB; the poster paints first and is the still for reduced motion. */}
+  {/* The film (prompt 33 §1): the Algarve cliffs from the air, a pool, a morning beach near Lagos, the Atlantic in late light; licensed clips (Mixkit, Pixabay), graded as one, silent, looping, 1.9 MB. The poster paints first and is the still for reduced motion. */}
   <picture class="h2-hero-media h2-hero-poster">
     <source type="image/avif" srcset="/video/hero-portugal-poster.avif" />
     <img src="/video/hero-portugal-poster.webp" width="1280" height="720" alt="" fetchpriority="high" />
   </picture>
-  <video class="h2-hero-media h2-hero-film" muted loop playsinline preload="none" poster="/video/hero-portugal-poster.webp" data-hero-film aria-hidden="true"><source src="/video/hero-portugal.mp4" type="video/mp4" /></video>
+  <video class="h2-hero-media h2-hero-film" muted loop playsinline preload="none" data-hero-film aria-hidden="true"><source src="/video/hero-portugal.mp4" type="video/mp4" /></video>
   <div class="h2-hero-text">
     <h1 id="h2-h1">{c(`home2.h1.${ed}`, lang)}</h1>
     <p>{c("home2.lede", lang)}</p>
@@ -87,8 +88,8 @@ const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("h
       <a class="h2-btn" href={pathFor(lang, ed, "how")}>{c("home2.about.a", lang)}</a>
     </div>
     <picture class="h2-ph h2-ph-tall" data-reveal>
-      <source type="image/avif" srcset="/img/v2/lisboa-alfama-telhados-640.avif 640w, /img/v2/lisboa-alfama-telhados-1024.avif 1024w, /img/v2/lisboa-alfama-telhados-1600.avif 1600w" sizes="(min-width: 900px) 50vw, 100vw" />
-      <img src="/img/v2/lisboa-alfama-telhados-1024.webp" srcset="/img/v2/lisboa-alfama-telhados-640.webp 640w, /img/v2/lisboa-alfama-telhados-1024.webp 1024w, /img/v2/lisboa-alfama-telhados-1600.webp 1600w" sizes="(min-width: 900px) 50vw, 100vw" width="1024" height="1280" alt={alts["lisboa-alfama-telhados"]} loading="lazy" />
+      <source type="image/avif" srcset="/img/v2/resort-piscina-oliveira-640.avif 640w, /img/v2/resort-piscina-oliveira-1024.avif 1024w, /img/v2/resort-piscina-oliveira-1600.avif 1600w" sizes="(min-width: 900px) 50vw, 100vw" />
+      <img src="/img/v2/resort-piscina-oliveira-1024.webp" srcset="/img/v2/resort-piscina-oliveira-640.webp 640w, /img/v2/resort-piscina-oliveira-1024.webp 1024w, /img/v2/resort-piscina-oliveira-1600.webp 1600w" sizes="(min-width: 900px) 50vw, 100vw" width="1024" height="1280" alt={alts["resort-piscina-oliveira"]} loading="lazy" style="object-position: 28% 50%" />
     </picture>
   </div>
 </section>
@@ -122,8 +123,6 @@ const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("h
       </article>
     ))}
   </div>
-  {/* CC BY-SA 2.0 asks for the author and licence next to the photograph; the other photographs need no credit. */}
-  <p class="h2-credit">Comporta: <a href="https://commons.wikimedia.org/wiki/File:Praia_da_Comporta_-_Portugal_(49800392663).jpg" rel="noopener">Vitor Oliveira</a>, <a href="https://creativecommons.org/licenses/by-sa/2.0/" rel="license noopener">CC BY-SA 2.0</a></p>
 </section>
 
 <section class="h2-sec h2-band h2-paths" aria-labelledby="h2-paths">
@@ -212,14 +211,21 @@ const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("h
   }
   // The hero film plays only where motion is welcome; reduced motion keeps the poster.
   const film = document.querySelector<HTMLVideoElement>("[data-hero-film]");
-  if (film && !matchMedia("(prefers-reduced-motion: reduce)").matches) { film.preload = "auto"; film.play().then(() => film.classList.add("on")).catch(() => {}); }
-  // The map's slow arrival: once, from the Atlantic onto the coast; a warm paper ground.
+  // The film starts once the page has loaded and the browser is idle, so the poster, the type and the fonts come first;
+  // never with reduced motion or Save-Data.
+  const saveData = (navigator as any).connection?.saveData === true;
+  if (film && !saveData && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const start = () => { film.preload = "auto"; film.play().then(() => film.classList.add("on")).catch(() => {}); };
+    const idle = () => ("requestIdleCallback" in window ? (window as any).requestIdleCallback(start, { timeout: 2500 }) : setTimeout(start, 1200));
+    if (document.readyState === "complete") idle(); else addEventListener("load", idle, { once: true });
+  }
+  // The map's slow arrival: once, from the Atlantic onto the coast, on the sand band (D60).
   const mx = document.querySelector<HTMLElement>(".mapx-home");
   if (mx) {
     const more = mx.querySelector<HTMLButtonElement>("[data-more]"); more?.addEventListener("click", () => { const o = mx.classList.toggle("more-open"); more.setAttribute("aria-expanded", String(o)); });
     new MutationObserver((_, ob) => {
       if (!mx.classList.contains("is-live")) return; ob.disconnect();
-      const m = (mx as any).__mapx.map(); try { m.setPaintProperty("bg", "background-color", "#f6f3ed"); } catch {}
+      const m = (mx as any).__mapx.map(); try { m.setPaintProperty("bg", "background-color", "#f8f4ed"); } catch {}
       if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
       const narrow = mx.clientWidth < 700, end = narrow ? { center: [-8.05, 39.55], zoom: 5.75, pitch: 36, bearing: -6 } : { center: [-8.15, 39.6], zoom: 6.55, pitch: 42, bearing: -8 };
       m.jumpTo({ center: [-13.2, 39.2], zoom: end.zoom - 1.1, pitch: 20, bearing: end.bearing - 25 });

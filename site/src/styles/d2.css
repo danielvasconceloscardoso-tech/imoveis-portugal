@@ -184,3 +184,39 @@ body.d2 main { padding-top: 0; }
   .h2-mapbleed .mapx-metrics { flex-wrap: wrap; width: 100%; } .h2-mapbleed .mapx-metrics button { flex: 1 1 50%; border-bottom: 1px solid var(--rule); }
   .h2-mapbleed .mapx-stage { height: 70vh; min-height: 420px; margin-top: 0; }
 }
+
+/* Prompt 33 §2 (D60), "The Resort": a white a touch warmer, one very light sand tone for the bands between sections
+   (never a cream block), green the only interface accent, deep green for the footer only, no brass, gold or
+   terracotta. Playfair Display lighter and larger; small wide-tracked capitals only for navigation and the labels
+   inside controls; buttons and links in sentence case; a generous line height. */
+body.d2 { --paper: #fffdf9; --band: #f8f4ed; --rule: #ebe5db; --deep: #1f3b33; line-height: 1.75; }
+body.d2 h1, body.d2 h2, body.d2 h3 { font-weight: 400; letter-spacing: -.015em; }
+.h2-sec h2 { font-size: clamp(36px, 4.6vw, 66px); line-height: 1.08; margin-bottom: 30px; }
+.h2-hero h1 { font-size: clamp(44px, 6.8vw, 96px); line-height: 1.02; }
+.h2-q summary { font-size: 24px; }
+.h2-btn, .h2-link { font: 500 15px/1 var(--sans); letter-spacing: .01em; text-transform: none; }
+.h2-btn { min-height: 50px; padding: 0 30px; }
+.h2-sources h2 { font: 600 14px/1 var(--sans); letter-spacing: 0; text-transform: none; }
+.h2-mapsec { background: var(--band); }
+.h2-door { background: var(--paper); }
+/* The newsletter: a sand band, not a black block. */
+.h2-nl.h2-dark { background: var(--band); color: var(--ink); }
+.h2-nl.h2-dark p { color: var(--muted); }
+.h2-nl .h2-btn-light { border-color: var(--ink); color: var(--ink); } .h2-nl .h2-btn-light:hover { background: var(--ink); color: #fff; }
+.h2-nl .h2-email input { border-color: var(--rule); color: var(--ink); background: #fff; } .h2-nl .h2-email input::placeholder { color: var(--muted); }
+.h2-nl .h2-consent { color: var(--muted); } .h2-nl .h2-consent input { accent-color: var(--accent); }
+/* The footer, the one deep green surface. */
+.ft2 { background: var(--deep); color: #f4f1ea; }
+.ft2 .ft2-k, .ft2 .ft2-small { color: rgba(244, 241, 234, .66); }
+.ft2-row { border-top-color: rgba(244, 241, 234, .18); }
+/* Legible on a bright sunlit film without a darker scrim: a soft shadow under the white type only. */
+body.d2 .hd:not(.solid) { text-shadow: 0 1px 14px rgba(0, 0, 0, .38); }
+.h2-hero-text { text-shadow: 0 1px 18px rgba(0, 0, 0, .3); }
+body.d2 .hd.solid { background: var(--paper); }
+/* The price chart: Porto's line in a grey-green, not brass (D60). */
+.h2-chart [stroke="#7a5e28"] { stroke: #8aa398; } .h2-chart [fill="#7a5e28"] { fill: #4f6b61; }
+.h2-prices .pc-legend .k2 { color: #4f6b61; }
+/* Mosaic tile 6: keep the city across the river in frame. */
+.h2-m6 img { object-position: 50% 12%; }
+/* Map pins and focus rings on design-v2 pages: green, not brass (D60). */
+body.d2 .mapx { --mapx-accent: var(--accent); } body.d2 .mapx-proj:focus-visible span { outline-color: var(--accent); }

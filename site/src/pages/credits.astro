@@ -1,0 +1,25 @@
+---
+// /credits/ (prompt 33 §1.4): the photographs that ask for a credit, in the three languages, linked from the footer.
+import "../styles/v2.css";
+import { CREDITS } from "../lib/credits";
+---
+<!doctype html>
+<html lang="pt-PT">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Créditos · Credits · Crédits · Imóveis Portugal</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <header class="hd"><div class="frame"><a class="word" href="/">Imóveis Portugal</a></div></header>
+    <main class="frame read" style="padding-top:64px;padding-bottom:96px">
+      <h1>Créditos das fotografias</h1>
+      <p class="lede"><span lang="en">Photo credits</span> · <span lang="fr">Crédits photo</span></p>
+      <ul>{CREDITS.map((x) => <li>{x.place}: <a href={x.url} rel="noopener">{x.title}</a>, {x.author}, <a href={x.licenceUrl} rel="license noopener">{x.licence}</a>.</li>)}</ul>
+      <p>As restantes fotografias e vídeos vêm do Pixabay e do Mixkit, com licenças que não pedem crédito.</p>
+      <p lang="en">The other photographs and videos come from Pixabay and Mixkit, under licences that ask for no credit.</p>
+      <p lang="fr">Les autres photos et vidéos viennent de Pixabay et de Mixkit, sous des licences qui ne demandent pas de crédit.</p>
+    </main>
+  </body>
+</html>

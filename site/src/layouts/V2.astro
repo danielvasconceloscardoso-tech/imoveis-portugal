@@ -4,6 +4,8 @@
 // the screen on phones. Prompt 11: one trust line, in the footer (no repeated trust bar). noindex until launch, canonical and hreflang.
 import "../styles/v2.css";
 import serif from "@fontsource-variable/newsreader/files/newsreader-latin-wght-normal.woff2?url";
+import d2serif from "@fontsource-variable/playfair-display/files/playfair-display-latin-wght-normal.woff2?url";
+import d2sans from "@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2?url";
 import { config } from "../config";
 import { EDITIONS, ED_ORDER, LANGS, LANG_NAME, HTML_LANG, pathFor, type Lang, type EdCode, type PageKey } from "../i18n";
 import { c, edName } from "../lib/copy";
@@ -45,7 +47,8 @@ import DemoBar from "../components/DemoBar.astro";
     {(!config.launchReady || noindex) && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonical} />
     {LANGS.map((l) => <link rel="alternate" hreflang={HTML_LANG[l]} href={Astro.props.alternates ? Astro.props.alternates[l] : `https://${host}${urlFor(l)}`} />)}
-    <link rel="preload" href={serif} as="font" type="font/woff2" crossorigin />
+    {/* Preload the faces the page sets its first words in: Playfair and Manrope on design-v2 pages, Newsreader elsewhere. */}
+    {d2 ? <><link rel="preload" href={d2serif} as="font" type="font/woff2" crossorigin /><link rel="preload" href={d2sans} as="font" type="font/woff2" crossorigin /></> : <link rel="preload" href={serif} as="font" type="font/woff2" crossorigin />}
     <script is:inline>document.documentElement.classList.add("js")</script>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta property="og:title" content={title} />
@@ -114,7 +117,7 @@ import DemoBar from "../components/DemoBar.astro";
           <p><span class="ft2-k">{c("home2.ft.langs", lang)}</span> {LANGS.map((l, i) => <>{i > 0 && " · "}<a href={urlFor(l)} data-lang={l} lang={HTML_LANG[l]}>{LANG_NAME[l]}</a></>)}</p>
         </div>
         <p class="ft2-small">{DISCLAIMER[lang]}</p>
-        <p class="ft2-small">{c("common.foot.agency", lang)}: <a href={config.agency.website} rel="noopener">{config.agency.name}</a>, AMI {config.agency.ami}. <a href={pathFor(lang, ed, "privacy")}>{c("common.privacy", lang)}</a> · <a href={pathFor(lang, ed, "legal")}>{c("common.foot.legal", lang)}</a> · © 2026 Imóveis Portugal</p>
+        <p class="ft2-small">{c("common.foot.agency", lang)}: <a href={config.agency.website} rel="noopener">{config.agency.name}</a>, AMI {config.agency.ami}. <a href={pathFor(lang, ed, "privacy")}>{c("common.privacy", lang)}</a> · <a href={pathFor(lang, ed, "legal")}>{c("common.foot.legal", lang)}</a> · <a href="/credits/">{c("common.foot.credits", lang)}</a> · © 2026 Imóveis Portugal</p>
       </div>
     </footer>
     ) : (
