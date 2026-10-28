@@ -95,4 +95,4 @@ Done when a sponsor can open a link, read the offer and submit an enquiry, on al
 11. Before the first commit in any clone or worktree, run `git config user.name "Imoveis Portugal"` and `git config user.email ops@imoveisportugal.lu`. Never commit as a person (hard rule 1).
 12. The content and publishing plan is ops/PLAN_CONTENT.md (decisions D24 to D31 in ops/DECISIONS.md). The blog lives in content/blog; run `node scripts/check-content.mjs` and `node scripts/check-parity.mjs` before every PR.
 13. The sponsor builder is `python3 sponsors/build/build_v2.py`: pipeline.csv is the source of truth for companies it already holds; do not edit the workbook by hand.
-
+14. **Every site change goes live (D67, operator's standing go of 28 Oct):** commit on `design-v2`, run the checks and the build, then merge into `main` and push both, every time. Reply with the live link after each push. Never push a broken build to `main`. Pending partners stay hidden on `main`.
