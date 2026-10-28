@@ -14,6 +14,8 @@ CEO, 28 Oct 2026, evening. Decision D65. Branch `design-v2` (site) and `sponsors
 - a live availability table (sold, reserved, for sale);
 - **no prices published:** show "Preço sob consulta", never an estimate;
 - Marble Terrace Vila do Conde announced as coming next.
+- **From the brochure (Aug 2026):** "com a assinatura da ID Investimentos Imobiliários e comercialização pela ID Imob". Block A: 20 units (T1 4, T2 10, T3 6). Block B: 17 (T1 4, T2 7, T3 6). Block C: 18 (T1 5, T2 5, T3 7, T4 1).
+- **Files:** the operator attaches the brochure and the finishes map in the chat. Extract only the images you use into `site/public/img/developers/marble-terrace/`. **Never commit the PDFs.**
 
 ## 1. On the site: a cool experience (preview only)
 
