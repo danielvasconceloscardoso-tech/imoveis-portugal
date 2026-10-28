@@ -100,7 +100,9 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
     wire(el);
     if (focus) el.querySelector<HTMLElement>(".fl-q")?.focus({ preventScroll: true });
   }
-  const go = (n: number) => { dir = n >= i ? 1 : -1; i = Math.max(0, Math.min(n, N - 1)); render(); };
+  // Each new screen starts at its top (the sheet keeps its scroll otherwise, and the back arrow and question were above the fold).
+  const top = () => { const sc = root.closest<HTMLElement>(".sh-in"); if (sc) sc.scrollTop = 0; };
+  const go = (n: number) => { dir = n >= i ? 1 : -1; i = Math.max(0, Math.min(n, N - 1)); render(); top(); };
 
   function wire(el: HTMLElement) {
     const s = steps[i];
@@ -152,7 +154,7 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
   const lwHead = () => `<div class="fl-head"><button type="button" class="fl-back" data-lw-back aria-label="${esc(L.back)}">${ARROW}</button><span class="fl-prog lw-prog"></span></div>`;
   const fill = (t: string) => { const x = LW!.lawyers[0]; return t.replace("{name}", x.name).replace("{firm}", x.firm); };
   function side(html: string, back: () => void) {
-    dir = 1; swap(html, true);
+    dir = 1; swap(html, true); top();
     const el = stage.lastElementChild as HTMLElement; el.querySelector("[data-lw-back]")?.addEventListener("click", () => { dir = -1; back(); });
     return el;
   }
@@ -191,7 +193,7 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
       const ok = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(val("email")); el.querySelector<HTMLElement>("[data-lw-err]")!.hidden = ok;
       if (!ok) { el.querySelector<HTMLInputElement>('[data-lw="email"]')!.focus(); return; }
       el.querySelector(".fl-fallback")?.remove();
-      const note = (html: string) => { const p = document.createElement("p"); p.className = "fl-fallback"; p.setAttribute("role", "status"); p.innerHTML = html; el.querySelector(".fl-go")!.after(p); };
+      const note = (html: string) => { const p = document.createElement("p"); p.className = "fl-fallback"; p.setAttribute("role", "status"); p.innerHTML = html; el.querySelector(".fl-go")!.after(p); p.scrollIntoView({ block: "nearest", behavior: reduce() ? "auto" : "smooth" }); };
       if (x.sample) { note(`<span class="lw-tag lw-tag-s">${esc(T.sample)}</span> ${esc(T.previewSent)}`); return; }  // the preview never sends
       const payload = { flow: "lawyer", lawyer: x.id, lawyerName: `${x.name} (${x.firm})`, ...F.hidden, name: val("name"), email: val("email"), question: val("question"), consent: true, consentText: fill(T.consent), page: location.pathname, hp: "" };
       send.disabled = true; send.textContent = L.sending; let sent = false;

@@ -170,6 +170,10 @@ Status: To do · Doing · Blocked · Done
 | 31a | Approve the Vanguard storyboard and the 20-second grade and sound test (prompt 31), then the film | Operator | To do | after prompt 31 step 1 |
 
 | 32a | Compare the home page v1 and design v2 (screenshots and scroll recordings) and say go | Operator | To do | after prompt 32 step 1 |
+| 38a | Marble Terrace availability: confirm our reading of marbleterrace.pt (units marked "Comercialização Out.'26" counted as for sale; "Mar.'27" shown as "Venda a partir de mar 2027"); confirm the pin position on Avenida Dr. Mário Soares | CEO | To do | 2026-10-29 |
+| 38b | Marble Terrace: reply-time promise in the request confirmation (left out until approved) | Operator | To do | before launch |
+| 37a | Wording check: the sample lawyer card (site/src/lib/lawyers.ts) and the four new articles; article title became "Como ler os preços no mapa" (the copy check rejects a colon in titles) | CEO | To do | 2026-10-30 |
+| 37b | Test the Concierge and the request sheet on a real iPhone (WebKit could not be installed in the build environment; tested in Chromium with the iPhone profile) | Operator | To do | 2026-10-29 |
 
 ## Last session
 
