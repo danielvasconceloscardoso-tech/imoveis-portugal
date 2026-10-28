@@ -2,7 +2,7 @@
 
 Status, 28 Oct 2026: **draft for the operator and the CEO, not sent to Vanguard.** The Vale do Lobo, VIC and Shalu films are not started; they wait for the operator's go on this one.
 
-`ImoveisPortugal_Demo_Vanguard_Tomas-Ribeiro-79_v5.mp4` (clean) and `…_v5_captioned.mp4` (captions burned in), with `…_v5.vtt`. 1920×1080 at 2.39:1, 24 fps, H.264 and AAC, about 105 s, mixed to −16 LUFS. Built with `scripts/demos/v5/` (`ui.mjs` and `stage.html` for the interface, `film5.py` for picture and sound, `../v4/encode.sh` for the files).
+`ImoveisPortugal_Demo_Vanguard_Tomas-Ribeiro-79_v5.mp4` (clean) and `…_v5_captioned.mp4` (captions burned in), with `…_v5.vtt`. 1920×1080 at 2.39:1, 24 fps, H.264 and AAC, about 105 s, mixed to about −17 LUFS (−18 measured on the encoded file). Built with `scripts/demos/v5/` (`ui.mjs` and `stage.html` for the interface, `film5.py` for picture and sound, `../v4/encode.sh` for the files).
 
 ## The story (10 beats, her lines)
 
