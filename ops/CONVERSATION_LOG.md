@@ -1,4 +1,4 @@
-# Conversation log: operator ↔ CEO (claude.ai), 23–27 Oct 2026
+# Conversation log: operator ↔ CEO (claude.ai), 23–28 Oct 2026
 
 How the project got to where it is, in the operator's own words (quotes lightly tidied for spelling) and what each request changed. Logistics ("send the link", "done, now what") and off-topic messages are left out. Decision numbers refer to `ops/DECISIONS.md`.
 
@@ -91,4 +91,17 @@ How the project got to where it is, in the operator's own words (quotes lightly 
     - identity v3 everywhere.
 
     "send me the status of every thing we've done, update the ops folder and prepare a handoff for my friend" → ops/STATUS.md, ops/REVIEW_QUEUE.md, this log, and the handover pack.
+
+## 10. 27–28 Oct: resort look, golf, the 20/20 map
+
+1. "check jncquoi house… I still don't get the jncquoi/claridges/ritz/premium hotel and concierge service vibe"; then "I don't want the jncq house vibe. I want the hotel/jncquoi comporta, conrad Algarve vibe. Loved the idea of the golf stuff!! Madeira is the Hawaii of Portugal… its new years eve… almost as big as golf" → D60, prompt 33 ("The Resort"): photographs, Concierge, golf layer and the golf premium, Madeira and its New Year.
+2. Sent the FT article on Neel Sachdev's Laranjeiras in the Algarve ("the California of Europe") → a developer prospect and a US content hook.
+3. "precisamos de uma seção para os simuladores… o mapa é fixe em movimento, pode parar de mexer passados 15 segundos…" → prompt 34: Simuladores in the menu, the map stops after 15 s or at the first touch.
+4. "lets call it passo a passo/step by step… pictures… I dont want to micromanage… comporta is known for crazy beaches not arrozais… when u click it just seems a google form… a bit like apple does, one click away from everything" → D61, prompt 35. The film becomes her problems and how we solve them, with a human-sounding voice.
+5. "I love the map… de bruyne on chelsea was not well used. I want de bruyne from city. right now the map is like a 12, I want a 20/20" → D62, prompt 36, map v3.
+6. "instead of the prompt asking for 4 movies lets just do one" → film v5 is the Vanguard film only.
+7. Golf courses missing from OpenStreetMap → our own course list from official sources.
+8. "Why did the main page stop moving? I liked the videos that we had… I want the version he had of that section that was moving" → the CEO restored the hero film and pushed it (cache-busted).
+9. Golf partnerships ("most prestigious approach"): the Golf Premium report, the Golf Collection by invitation, using the Top100GolfCourses Portugal ranking → parked in ops/IDEAS.md until asked.
+10. "send me the md and context so I can share with a friend… so he can work autonomously… also send the code" → ops/TEST_GUIDE.md, ops/DEVELOP.md, the updated briefing and a code snapshot.
 

@@ -1,6 +1,6 @@
 # Imóveis Portugal: handover briefing
 
-For anyone joining the project in their own Claude session. Read this first, then **`ops/STATUS.md`** (where everything stands), **`ops/REVIEW_QUEUE.md`** (what waits for a human go), `ops/CONVERSATION_LOG.md` (how we got here, in the operator's own words), `ops/DECISIONS.md` and `ops/TASKS.md`. Updated Tue 27 Oct 2026, morning.
+For anyone joining the project in their own Claude session. Read this first, then **`ops/STATUS.md`** (where everything stands), **`ops/REVIEW_QUEUE.md`** (what waits for a human go), `ops/CONVERSATION_LOG.md` (how we got here, in the operator's own words), `ops/DECISIONS.md`, `ops/TASKS.md` and `ops/TEST_GUIDE.md` (how to try the site). Updated Wed 28 Oct 2026, midday.
 
 ## 1. What it is
 
@@ -16,17 +16,37 @@ For anyone joining the project in their own Claude session. Read this first, the
 ## 2. How we work
 
 1. **Operator (Daniel):** decides and approves everything. Nothing is published, sent, posted or merged without his explicit "go".
-2. **CEO/COO:** Claude in a claude.ai chat. Covers strategy, monetisation, copy, sponsor lists and brochures. Writes numbered task prompts into `ops/prompts/` and gives the operator a short paste script for Claude Code.
-3. **CTO:** Claude Code, working on branch `claude/brave-gauss-cwafi6`.
-   - Builds the site, map, demos, PDFs and films.
-   - Pushes after each section, so the preview link updates on its own.
-   - Never merges without a "go".
-4. **Run order:** `ops/prompts/00_MASTER_RUN.md`. Prompt 29 (done today) came before 23; next come 23 (identity), 21, 24, 22, then whatever is left of 15–20.
-5. **For a new collaborator:**
-   - Ask the operator for access to the private GitHub repo.
-   - Run `git config user.name "Imoveis Portugal"`, `git config user.email ops@imoveisportugal.lu` and `git config core.hooksPath .githooks` before any commit.
-   - Never commit as a person.
-   - Put proposals in a file or a branch and let the operator relay them; don't push to the branch Claude Code is working on.
+2. **CEO/COO:** Claude in a claude.ai chat. Covers strategy, monetisation, copy, sponsor lists and brochures; reviews every CTO delivery before it reaches the operator. Writes numbered task prompts into `ops/prompts/` and gives the operator a short paste script for Claude Code.
+3. **CTO:** Claude Code. Two branches:
+   - `design-v2`: the site in its new design, preview https://design-v2-imoveis-portugal.geralportugalimoveis.workers.dev/pt/lu/;
+   - `claude/brave-gauss-cwafi6`: everything else (content, demos, films, sponsors), preview https://claude-brave-gauss-cwafi6-imoveis-portugal.geralportugalimoveis.workers.dev.
+
+   Each push updates its preview by itself (refresh the same link). Never merges without a "go".
+4. **Run order:** `ops/prompts/00_MASTER_RUN.md`. Current priority: prompts 35 and 36 (Passo a passo, photographs, Apple-grade journeys, the 20/20 map, film v5). The older prompts 21, 24 and 22 come after.
+
+## Working autonomously (for a collaborator with his own Claude)
+
+1. **Setup:**
+   - get access to the private GitHub repo from the operator;
+   - before any commit, run `git config user.name "Imoveis Portugal"`, `git config user.email ops@imoveisportugal.lu` and `git config core.hooksPath .githooks`;
+   - never commit as a person.
+2. **You may do without asking:**
+   - read anything;
+   - test the previews;
+   - write proposals, copy, research, prospect lists and prompts on your own branch (`collab/<topic>`) or in `ops/proposals/`;
+   - open a pull request for the operator to review.
+3. **Ask the operator first:**
+   - anything public (posting, sending emails, publishing, merging);
+   - prices, partners and positioning;
+   - spending money;
+   - creating accounts;
+   - anything touching the branches Claude Code is working on (`design-v2`, `claude/brave-gauss-cwafi6`) or `main`.
+4. **The best places to help now,** in order:
+   - test the site with `ops/TEST_GUIDE.md` and send findings;
+   - review the content in `social/exports/` and `content/inbox/` against `social/PLAYBOOK.md` and `content/VOICE.md`;
+   - research golf-resort and branded-residence developers for the pipeline (`sponsors/pipeline.csv`; developers only, never agencies, D9);
+   - sanity-check facts in `content/facts/facts.csv` against their official sources.
+5. **Style:** read section 6 before writing or designing anything. The operator judges fast and hates anything that looks or sounds AI-made.
 
 ## 3. Hard rules
 
@@ -59,28 +79,21 @@ Prices live only in the sponsor brochure used on calls, never on the website.
 
 ## 5. What exists today
 
-The full, current picture is in **`ops/STATUS.md`** (updated 27 Oct, morning). In short:
+The full picture is in **`ops/STATUS.md`** (updated 28 Oct). In short:
 
-1. **Site** in PT, EN and FR, six editions, noindex until the billing entity exists (D4):
-   - the 3D map with ten years of official prices, frozen as v1 because the operator likes it;
-   - the buy and sell paths, the FAQ, the simulators;
-   - design v2 ("the Claridge's pass", D59) on branch `design-v2`;
-   - identity v3 (D50) everywhere.
-2. **Developer demos** for Vanguard, Vale do Lobo, Shalu and VIC: private pages, PDFs, and the Vanguard film v4 "December" (D58). The other three films follow once Vanguard is approved.
-3. **Content engine** (prompt 30, social/PLAYBOOK.md):
-   - keyword map and 12-week calendar;
-   - weeks 1–4 written in full: 140 social items, 72 newsletters, 12 SEO pages;
-   - weeks 5–12 outlined.
-
-   Nothing is posted; the social accounts don't exist yet.
-4. **Sales:** pipeline of about 200 companies, prospects PDF, brochure with price list v4. **No sponsor contacted yet:** outreach waits on the legal bases (8q) and the demo approval.
-
-**Links:**
-- Working preview: https://claude-brave-gauss-cwafi6-imoveis-portugal.geralportugalimoveis.workers.dev
-- Frozen map and path v1: https://freeze-map-path-v1-imoveis-portugal.geralportugalimoveis.workers.dev
-- Map v2: https://map-v2-imoveis-portugal.geralportugalimoveis.workers.dev
-- Design v2: https://design-v2-imoveis-portugal.geralportugalimoveis.workers.dev
-- Demos (working preview): /d/34c86306cf/ (Vanguard), /d/65bf930b11/ (Vale do Lobo), /d/f658bd1eef/ (Shalu), /d/7c1e5a90d4/ (VIC)
+1. **The site, design-v2:**
+   - **home page:** a moving hero film, the path bar, six places in resort photographs (Lisbon, Porto, Cascais, Comporta, Algarve, Madeira with its New Year fireworks), the map, the questions, a mosaic, ten years of prices, the newsletter;
+   - **"Passo a passo"** (the buy and sell route), **Simuladores**, **Perguntas**, **Parceiros**, a **Concierge** button;
+   - **map v3**, our centrepiece: 3D relief, Day/Night with NASA night lights, a budget slider with a live sentence, a card for each place, Spotlight search (municipalities, parishes, 985 beaches, golf), layer chips, a 2016–2026 time slider, compare, four guided tours, our own list of 79 golf courses.
+2. **The frozen v1** of the map and path the operator liked: https://freeze-map-path-v1-imoveis-portugal.geralportugalimoveis.workers.dev
+3. **Developer demos:**
+   - four private pages (Vanguard, Vale do Lobo, Shalu, VIC with Six Senses Comporta);
+   - the Vanguard film v5, a draft with a placeholder voice: a human-sounding voice is still to be decided.
+4. **Content:** weeks 1–4 of social posts and 72 newsletters written, waiting for the operator's review and the legal check of the 7.5% IMT; golf, Madeira and New Year's Eve pillar drafts.
+5. **Sales:**
+   - a pipeline of about 210 companies, including golf and branded-residence developers;
+   - brochure and price list v4;
+   - **no sponsor contacted yet.**
 
 ## 6. The operator's taste (read this before writing or designing anything)
 
@@ -125,9 +138,11 @@ The three that matter most now:
 | ops/STATUS.md | Where everything stands, priorities by owner, board clean-up |
 | ops/REVIEW_QUEUE.md | Everything waiting for a human go, with paths and deadlines |
 | ops/CONVERSATION_LOG.md | How we got here: the operator's requests in order, and what each one changed |
-| ops/DECISIONS.md | Every decision, dated (D1–D59) |
+| ops/DECISIONS.md | Every decision, dated (D1–D62) |
 | ops/TASKS.md | Task board with owners and due dates; "Last session" summaries from Claude Code |
-| ops/prompts/ | Task prompts 01–32 and 00_MASTER_RUN.md |
+| ops/prompts/ | Task prompts 01–36 and 00_MASTER_RUN.md |
+| ops/TEST_GUIDE.md | How to try the site in ten minutes, and what feedback to send |
+| ops/IDEAS.md | Ideas parked until the operator asks (golf partnerships) |
 | social/ | One folder per platform, the playbook, weekly exports |
 | ops/legal/IMT_7_5_MENTIONS.md | Every 7.5% IMT mention, for the legal check (working branch) |
 | ops/NETWORK_ALLOWLIST.txt | Every domain Claude Code may reach |

@@ -1,4 +1,29 @@
-# Status: Tue 27 Oct 2026, morning (CEO)
+# Status: Wed 28 Oct 2026, midday (CEO)
+
+**Launch:** Tue 1 Dec 2026, 34 days away. **Revenue signed:** 0 €. **Sponsor emails sent:** none yet.
+
+**Since 27 Oct morning:**
+1. **Design v2:**
+   - "The Resort" photography (D60);
+   - "Passo a passo" and Simuladores in the menu (D61);
+   - Apple-grade journeys, first pass;
+   - **map v3, "20/20"** (D62): relief, Day/Night, budget slider, place card, Spotlight search, golf (79 courses), beaches, time slider, compare, tours.
+2. **The home hero film** is restored to the version the operator liked (28 Oct, 11:55).
+3. **Film v5, Vanguard:** a draft with a placeholder voice; no free voice passes as human (task 35c: a real person or a paid tool).
+4. **Golf partnership ideas** parked in ops/IDEAS.md.
+5. **For collaborators:** ops/TEST_GUIDE.md and ops/DEVELOP.md.
+
+**Still the critical path to the first euro:**
+1. legal bases for B2B emails (8q);
+2. the 7.5% IMT check (30d);
+3. the demo approval and enquiry routing (26a/31c, 8z);
+4. the social accounts (30b);
+5. the billing entity (D4).
+
+---
+
+Snapshot of 27 Oct, morning (kept for reference):
+
 
 **Launch:** Tue 1 Dec 2026, 35 days away. **Revenue signed:** 0 €. **Sponsor emails sent:** none yet.
 
