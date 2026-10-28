@@ -138,7 +138,7 @@ Status: To do · Doing · Blocked · Done
 | 31a | Approve the Vanguard storyboard and the 20-second grade and sound test (prompt 31), then the film | Operator | To do | after prompt 31 step 1 |
 
 | 32a | Compare the home page v1 and design v2 (screenshots and scroll recordings) and say go | Operator | To do | after prompt 32 step 1 |
-| 37a | Partner lawyers (D64): two Portuguese lawyers identified by the operator (links kept off the repo). Get each one's written consent and profile data (photo, name, firm, cédula, practice areas, languages, city/video, response time, fee wording, LinkedIn, request email), and check their firm allows a flat sponsorship. Until then the Concierge shows only the marked sample | Operator | To do | 2026-11-06 |
+| 37a | Partner lawyers (D64): Vítor Borba Shnaiderman and Francisco Almeida said yes in person on 28 Oct. Still needed from each: a one-line written consent by email to the brand mailbox, cédula number, fee wording, request email, city/video, and the firm's written OK (ECIJA; Stibbe for outside clients). Cards live on the preview only, marked pending, until all of this is in | Operator | In progress | 2026-11-06 |
 
 ## Last session
 
