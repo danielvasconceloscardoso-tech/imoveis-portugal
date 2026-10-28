@@ -1,4 +1,15 @@
-# Status: Wed 28 Oct 2026, midday (CEO)
+# Status: Wed 28 Oct 2026, 22:20 (CEO)
+
+**Launch:** Tue 1 Dec 2026, 34 days away. **Revenue signed:** 0 €. **First chance of a euro:** the Marble Terrace meeting, 29 Oct.
+
+1. **Marble Terrace pitch (prompt 38, D65, D66):** site work on design-v2 by Claude Code (pin, tour, showcase, request flow to the qualified advisor only). Flyer v3 ready: sponsors/flyers/Marble_Terrace_ImoveisPortugal_v3.pdf.
+2. **Prompt 37:** Concierge fixes, Artigos, map 2D/3D without night, lawyer cards (two lawyers agreed; task 37a).
+3. **Open for the meeting:** 5,000 € per block (3 × 5,000 €) or per project.
+4. **Still the critical path:** 8q, 30d, D4, social accounts by 9 Nov, the repo back to private.
+
+---
+
+Snapshot of 28 Oct, midday:
 
 **Launch:** Tue 1 Dec 2026, 34 days away. **Revenue signed:** 0 €. **Sponsor emails sent:** none yet.
 
