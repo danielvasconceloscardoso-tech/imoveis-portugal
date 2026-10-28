@@ -105,3 +105,12 @@ How the project got to where it is, in the operator's own words (quotes lightly 
 9. Golf partnerships ("most prestigious approach"): the Golf Premium report, the Golf Collection by invitation, using the Top100GolfCourses Portugal ranking → parked in ops/IDEAS.md until asked.
 10. "send me the md and context so I can share with a friend… so he can work autonomously… also send the code" → ops/TEST_GUIDE.md, ops/DEVELOP.md, the updated briefing and a code snapshot.
 
+## 11. 28 Oct evening: Marble Terrace, lawyers
+
+1. Developer meeting on 29 Oct (Marble Terrace, Gondomar, 55 apartments, blocks A/B/C), pitched at about 5,000 € per building until sold (D63) → prompt 38: map pin, tour, card, showcase page, the visit/buy request flow and a "what the advisor receives" view, preview only.
+2. "the request goes both to the consultor qualificado and the promotor?" → "my father is selling his apartments already" → "make it just go to the consultor qualificado and he does the rest" → D66: requests go only to the partner agency's qualified advisor, one consent box.
+3. Deadline moved to 22:30 for the pitch items and 23:00 for the rest of prompt 37 (Concierge fixes, Artigos, map 2D/3D without night, lawyer cards).
+4. Flyer v3 "like Ari Emanuel would": photos from the brochure originals (the marble facade, the spa, the kitchen), the developer's angle ("O próximo comprador do Marble Terrace vive em Genebra."), 5,000 € per building → sponsors/flyers/.
+5. Partner lawyers: two Portuguese-qualified lawyers agreed in person (one in Luxembourg for the LU edition, one for the BR edition). Languages PT/FR/EN/ES; areas: contracts, real estate, tax, international tax. Written consent, cédula, fee wording and the firms' OK still to come (task 37a). Names stay off the live site until then.
+6. Open: whether 5,000 € covers each block or the whole project.
+
