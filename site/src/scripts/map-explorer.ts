@@ -251,7 +251,7 @@ export function initMapExplorer(root: HTMLElement) {
   }
   function actions(place: string, sim: string) {
     if (cfg.embed?.cta) return `<p class="mapx-actions"><a class="btn sm" href="${esc(cfg.embed.cta)}" target="_top">${cfg.embed.ctaLabel || L.homes}</a></p>`;
-    if (root.dataset.mode === "embed") return `<p class="mapx-actions"><a class="btn sm" href="https://imoveisportugal.lu${cfg.links.buy}?place=${encodeURIComponent(place)}&budget=${budget}" target="_blank" rel="noopener">${L.homes}</a></p>`;
+    if (root.dataset.mode === "embed") return `<p class="mapx-actions"><a class="btn sm" href="https://imoveisportugal.pt${cfg.links.buy}?place=${encodeURIComponent(place)}&budget=${budget}" target="_blank" rel="noopener">${L.homes}</a></p>`;
     return `<p class="mapx-actions"><a class="btn sm" href="${cfg.links.buy}?place=${encodeURIComponent(place)}&budget=${budget}">${L.homes}</a>`
       + (budget >= HIGH ? "" : `<a href="${cfg.links.devHref}">${L.devs}</a>`) + `<a href="${sim}">${L.sim}</a><a href="${cfg.links.journey}?budget=${Math.round(budget)}">${L.journey}</a></p>`;
   }

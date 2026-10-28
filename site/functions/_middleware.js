@@ -1,6 +1,6 @@
 // Cloudflare Pages middleware: each country domain opens its own edition.
 // DOMAIN_MODE (env var) = "own-domain" (default) or "primary".
-// PRIMARY_DOMAIN (env var) = e.g. "imoveisportugal.lu" (used in "primary" mode).
+// PRIMARY_DOMAIN (env var) = e.g. "imoveisportugal.pt" (used in "primary" mode).
 // D18: URLs are /{lang}/{edition}/; a country domain opens its edition in its default language.
 const DEFAULT_LANG = { lu: "pt", fr: "fr", ch: "pt", br: "pt", us: "en", il: "en" };
 const EDITION_BY_HOST = {
@@ -20,7 +20,7 @@ export async function onRequest(ctx) {
   if (!ed) return ctx.next(); // pages.dev previews and unknown hosts pass through
 
   const mode = ctx.env.DOMAIN_MODE || "own-domain";
-  const primary = ctx.env.PRIMARY_DOMAIN || "imoveisportugal.lu";
+  const primary = ctx.env.PRIMARY_DOMAIN || "imoveisportugal.pt";
 
   if (mode === "primary" && host !== primary) {
     const path = url.pathname === "/" ? `/${DEFAULT_LANG[ed]}/${ed}/` : url.pathname;

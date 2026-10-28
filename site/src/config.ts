@@ -8,8 +8,8 @@ export const config = {
   // How country domains behave (decision D1 / D8):
   // "own-domain": imoveisportugal.fr serves the /fr/ section on its own domain.
   // "primary":    every country domain redirects to primaryDomain + its section.
-  domainMode: "own-domain" as "own-domain" | "primary",
-  primaryDomain: "imoveisportugal.lu",
+  domainMode: "primary" as "own-domain" | "primary", // 28 Oct 2026: imoveisportugal.pt serves every edition until the country domains are bought
+  primaryDomain: "imoveisportugal.pt",
 
   // Public contact address of the brand (no personal names).
   contactEmail: "geralportugalimoveis@gmail.com", // brand Gmail until the domain mailbox exists

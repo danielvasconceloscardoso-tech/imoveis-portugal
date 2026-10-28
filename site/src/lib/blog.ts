@@ -8,6 +8,7 @@ import yaml from "js-yaml";
 import { marked } from "marked";
 import { LANGS, EDITIONS, pathFor, type EdCode, type Lang, type PageKey } from "../i18n";
 import { FACTS, Sources, type Cat } from "./content";
+import { hostFor } from "./host";
 
 const dir = join(process.cwd(), "..", "content", "blog");
 
@@ -60,4 +61,4 @@ export function render(p: Post, ed: EdCode): { html: string; sources: Sources } 
 
 // Canonical edition per language (D24): the edition whose domain and default language match best.
 export const CANONICAL_ED: Record<Lang, EdCode> = { pt: "lu", fr: "fr", en: "us" };
-export const hostOf = (ed: EdCode) => EDITIONS[ed].domain;
+export const hostOf = (ed: EdCode) => hostFor(ed);
