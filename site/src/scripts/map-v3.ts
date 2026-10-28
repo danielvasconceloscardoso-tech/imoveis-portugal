@@ -17,7 +17,9 @@ const plain = (s: string) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerC
 // One tuned ramp, warm sand to deep green (lightness falls steadily, so it reads in every common colour-vision type).
 const RAMP = ["#ecdfc2", "#d9d3a9", "#b8c49b", "#91ae8c", "#6b957d", "#47796a", "#285c51"];
 const NODATA = "#e3ddd0";
-const BIG = ["lisboa", "porto", "braga", "coimbra", "aveiro", "faro", "evora", "cascais", "sintra", "setubal", "viseu", "guimaraes", "leiria", "lagos", "grandola", "loule", "funchal", "ponta-delgada", "tavira", "nazare", "viana-do-castelo", "braganca", "beja", "portimao", "albufeira"];
+// The places named at the national view, most important first: when two labels would overlap, the earlier one stays.
+const BIG = ["lisboa", "porto", "faro", "funchal", "ponta-delgada", "coimbra", "braga", "evora", "aveiro", "setubal", "cascais", "leiria", "viseu", "beja", "braganca",
+  "viana-do-castelo", "guimaraes", "sintra", "lagos", "albufeira", "portimao", "loule", "tavira", "grandola", "nazare"];
 // Places people search for that are not concelhos (prompt 36 §2.3: type "Comp" and the map flies to Comporta).
 const LOCALITIES: [string, number, number, string][] = [["Comporta", -8.786, 38.381, "alcacer-do-sal"], ["Carvalhal", -8.735, 38.302, "grandola"], ["Melides", -8.73, 38.152, "grandola"],
   ["Tróia", -8.885, 38.49, "grandola"], ["Vilamoura", -8.118, 37.077, "loule"], ["Quinta do Lago", -8.017, 37.05, "loule"], ["Vale do Lobo", -8.06, 37.051, "loule"],
@@ -307,11 +309,14 @@ export function initMapV3(root: HTMLElement) {
     if (!map) return; const z = map.getZoom(), W = canvas.clientWidth, H = canvas.clientHeight;
     const want = features.map((f) => f.properties as Props).filter((p) => (BIG.includes(p.s) && z > (W < 700 ? 5.2 : 5.9)) || (z > 8.2 && p.a > 2) || z > 9.2);
     const placed: { x: number; y: number; w: number }[] = []; let h = "";
-    for (const p of want.sort((a, b) => Number(BIG.includes(b.s)) - Number(BIG.includes(a.s)))) {
+    const rank = (p: Props) => { const i = BIG.indexOf(p.s); return i >= 0 ? i : 1000 - p.a; };
+    for (const p of want.sort((a, b) => rank(a) - rank(b))) {
       const c = map.project([p.x, p.y]); if (c.x < 0 || c.y < 0 || c.x > W || c.y > H) continue;
       const big = BIG.includes(p.s), w = p.n.length * (big ? 8.5 : 6.5) + 8;
-      if (placed.some((o) => Math.abs(o.x - c.x) < (o.w + w) / 2 && Math.abs(o.y - c.y) < 18)) continue;
-      placed.push({ x: c.x, y: c.y, w }); h += `<span class="${big ? "m3-l1" : "m3-l2"}" style="transform:translate(${Math.round(c.x)}px,${Math.round(c.y)}px)">${esc(p.n)}</span>`;
+      // Over the place if there is room, otherwise just above or just below it; dropped only when all three are taken.
+      const y = [c.y, c.y - 17, c.y + 17].find((yy) => !placed.some((o) => Math.abs(o.x - c.x) < (o.w + w) / 2 && Math.abs(o.y - yy) < 18));
+      if (y === undefined) continue;
+      placed.push({ x: c.x, y, w }); h += `<span class="${big ? "m3-l1" : "m3-l2"}" style="transform:translate(${Math.round(c.x)}px,${Math.round(y)}px)">${esc(p.n)}</span>`;
       if (placed.length > 70) break;
     }
     labelsEl.innerHTML = h;

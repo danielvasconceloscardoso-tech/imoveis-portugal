@@ -8,7 +8,7 @@ never in a caption; our graded copies are shared under the same licence.
 
 | File (site/public/) | Where on the home page | What it shows | Source | Licence |
 | --- | --- | --- | --- | --- |
-| video/hero-portugal.mp4, video/hero-portugal-poster.* | Hero film (19 s, 1.5 MB) and its poster (first frame) | 0–7 s the Algarve cliffs from the air; 6–13 s a morning beach near Lagos; 12–19 s the Atlantic in late light (prompt 35: the Mixkit pool clip removed) | Pixabay video 237279 (Radds); Pixabay video 13771 (Wowa84); Mixkit 22254 | Mixkit License; Pixabay Content License |
+| video/hero-portugal.mp4, video/hero-portugal-poster.* | Hero film (21 s, 1.9 MB) and its poster (first frame), restored on 28 Oct 2026 exactly as at commit 6e9a1bc (operator's request) | 0–6 s the Algarve cliffs with villas and a pool from the air; 5–11 s a white pool with cabanas; 10–16 s a morning beach near Lagos; 15–21 s the Atlantic in late light | Pixabay video 237279 (Radds); Mixkit 4045; Pixabay video 13771 (Wowa84); Mixkit 22254 | Mixkit License; Pixabay Content License |
 | img/v2/resort-piscina-oliveira-* | About, tall photograph | A pool beside an olive tree and a white wall, Alentejo | Pixabay 643413, somepaulo | Pixabay Content License |
 | img/v2/lisboa-tejo-cais-* | Place card, Lisbon | The Tagus at the Cais das Colunas, a sailing boat | Pixabay 3844136, Louise36 | Pixabay Content License |
 | img/v2/porto-douro-amanhecer-* | Place card, Porto | The Douro at first light, a rabelo boat | Pixabay 4688930, vjgalaxy | Pixabay Content License |

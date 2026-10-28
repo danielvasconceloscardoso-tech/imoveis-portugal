@@ -73,7 +73,7 @@ const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("h
     <source type="image/avif" srcset="/video/hero-portugal-poster.avif" />
     <img src="/video/hero-portugal-poster.webp" width="1280" height="720" alt="" fetchpriority="high" />
   </picture>
-  <video class="h2-hero-media h2-hero-film" muted loop playsinline preload="none" data-hero-film aria-hidden="true"><source src="/video/hero-portugal.mp4" type="video/mp4" /></video>
+  <video class="h2-hero-media h2-hero-film" autoplay muted loop playsinline preload="auto" data-hero-film aria-hidden="true"><source src="/video/hero-portugal.mp4" type="video/mp4" /></video>
   <div class="h2-hero-text">
     <h1 id="h2-h1">{c(`home2.h1.${ed}`, lang)}</h1>
     <p>{c("home2.lede", lang)}</p>
@@ -221,15 +221,20 @@ const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("h
     const io = new IntersectionObserver((es) => es.forEach((x) => { if (x.isIntersecting) { x.target.classList.add("in"); io.unobserve(x.target); } }), { rootMargin: "0px 0px -10% 0px" });
     document.querySelectorAll("[data-reveal]").forEach((el) => io.observe(el));
   }
-  // The hero film plays only where motion is welcome; reduced motion keeps the poster.
+  // The hero film starts at once (autoplay, muted, looping) and shows as soon as it plays; the poster stays only for
+  // reduced motion. If the browser blocks autoplay (iPhone Low Power Mode), the first touch or scroll starts it.
   const film = document.querySelector<HTMLVideoElement>("[data-hero-film]");
-  // The film starts once the page has loaded and the browser is idle, so the poster, the type and the fonts come first;
-  // never with reduced motion or Save-Data.
-  const saveData = (navigator as any).connection?.saveData === true;
-  if (film && !saveData && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    const start = () => { film.preload = "auto"; film.play().then(() => film.classList.add("on")).catch(() => {}); };
-    const idle = () => ("requestIdleCallback" in window ? (window as any).requestIdleCallback(start, { timeout: 2500 }) : setTimeout(start, 1200));
-    if (document.readyState === "complete") idle(); else addEventListener("load", idle, { once: true });
+  if (film) {
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) { film.pause(); film.removeAttribute("autoplay"); film.preload = "none"; }
+    else {
+      film.muted = true;
+      const shown = () => film.classList.add("on");
+      film.addEventListener("playing", shown);
+      const gestures = ["touchstart", "pointerdown", "scroll", "keydown", "wheel"];
+      const kick = () => { film.play().then(() => gestures.forEach((g) => removeEventListener(g, kick))).catch(() => {}); };
+      const start = () => film.play().then(shown).catch(() => gestures.forEach((g) => addEventListener(g, kick, { passive: true })));
+      if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start, { once: true }); else start();
+    }
   }
   // The header sits on the photograph until the page scrolls.
   const hd = document.querySelector(".hd"); const on = () => hd?.classList.toggle("solid", scrollY > 40); on(); addEventListener("scroll", on, { passive: true });
