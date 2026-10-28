@@ -45,7 +45,11 @@ This is the heart of the pitch: the developer must see exactly what a buyer goes
 3. **When:** three preferred slots in the coming two weeks, shown in Portugal time and in the reader's own time zone. For an online visit, the reader chooses video or phone.
 4. **About you:** name, email, phone with country code, country of residence.
 5. **Optional, in two taps:** budget range, how they'll pay (own funds or mortgage), when they'd like to buy. This becomes the qualified summary.
-6. **Consent:** one unticked box naming who receives the request: the developer's sales team or the partner agency, per task 8z (switchable); a link to the privacy notice.
+6. **Consent** (operator, 28 Oct: the partner agency already sells Marble Terrace): the request goes to **both**, with separate roles.
+   - The partner agency's qualified advisor (Habinedita Gondomar, AMI 13250) is the buyer's single contact, from the first call to the deed.
+   - The developer's sales team (ID Imob) receives a copy for the unit, availability and reservation.
+   - Two separate, unticked consent boxes, one naming each recipient, and a link to the privacy notice.
+   - Keep it switchable in config, in case the agreement changes.
 7. **Confirmation:**
    - a calm screen ("Pedido recebido");
    - the next steps on a short line: call with the dedicated advisor → online visit → reservation → promissory contract → deed, with the team (lawyer, bank, tax adviser) introduced along the way;
