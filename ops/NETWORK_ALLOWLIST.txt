@@ -387,3 +387,7 @@ fpg.pt
 visitalgarve.pt
 *.visitalgarve.pt
 nominatim.openstreetmap.org
+marbleterrace.pt
+*.marbleterrace.pt
+idinvestimentosimobiliarios.com
+*.idinvestimentosimobiliarios.com
