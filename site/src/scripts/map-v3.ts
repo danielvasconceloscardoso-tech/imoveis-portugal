@@ -29,6 +29,8 @@ const LOCALITIES: [string, number, number, string][] = [["Comporta", -8.786, 38.
 const ease = (t: number) => 1 - Math.pow(1 - t, 3);
 
 export function initMapV3(root: HTMLElement) {
+  // One map per element, however often the page script runs (prompt 39 §4: never two MapLibre instances).
+  if ((root as any).__m3init) return; (root as any).__m3init = true;
   const cfg = JSON.parse(root.querySelector("[data-m3-cfg]")!.textContent || "{}");
   const L = cfg.labels, mode = root.dataset.mode as "page" | "home";
   const $ = <T extends HTMLElement = HTMLElement>(s: string) => root.querySelector<T>(s)!;
@@ -187,6 +189,16 @@ export function initMapV3(root: HTMLElement) {
   }
 
   // ------------------------------------------------------------ the map
+  let lostT = 0;
+  // Remove the map and its markers and free the GPU (leaving the page, or a lost context); load() builds it again.
+  async function teardown() {
+    if (loading) await loading.catch(() => {});  // never pull the map from under a load in progress
+    clearTimeout(lostT); stopTour(); stopPlay(); rotating = false;
+    markers.forEach((m) => m.m.remove()); markers = [];
+    try { map?.remove(); } catch { /* already gone */ }
+    map = null; loading = null; parLoading = null; root.classList.remove("is-live");
+  }
+  async function rebuild(toFlat: boolean) { await teardown(); if (toFlat) { flat = true; dimButtons(); } load(); }
   function load(): Promise<void> {
     if (loading) return loading;
     loading = (async () => {
@@ -205,12 +217,16 @@ export function initMapV3(root: HTMLElement) {
       computeBreaks();
       const narrow = root.clientWidth < 700;
       map = new ml.Map({
-        container: canvas, attributionControl: false, pixelRatio: Math.min(devicePixelRatio || 1, 2), dragRotate: !flat, pitchWithRotate: !flat, maxPitch: 72, minZoom: 4.6, maxZoom: 12.5, fadeDuration: 150,
+        container: canvas, attributionControl: false, pixelRatio: Math.min(devicePixelRatio || 1, 2), maxTileCacheSize: narrow ? 48 : 96, dragRotate: !flat, pitchWithRotate: !flat, maxPitch: 72, minZoom: 4.6, maxZoom: 12.5, fadeDuration: 150,
         center: [-8.6, 39.5], zoom: narrow ? 5.6 : 6.2, pitch: flat ? 0 : 52, bearing: flat ? 0 : -12,
         style: { version: 8, sources: {}, layers: [{ id: "bg", type: "background", paint: { "background-color": "#e7e2d7" } }],
           ...(flat ? {} : { sky: SKY }) } as any,
       });
       await new Promise<void>((res) => map.on("load", () => res()));
+      // iPhone Safari can drop the WebGL context under memory pressure. MapLibre restores it when the browser gives it
+      // back; if that hasn't happened within 3 s, the map is rebuilt flat (2D), so the reader never sees a blank map.
+      map.on("webglcontextlost", () => { clearTimeout(lostT); lostT = window.setTimeout(() => rebuild(true), 3000); });
+      map.on("webglcontextrestored", () => { clearTimeout(lostT); map?.triggerRepaint(); });
       // Far sea first (z5-z6, wide), then the near sea (z5-z8). Spain and Morocco stay the quiet background colour.
       map.addSource("seafar", { type: "raster", tiles: ["/tiles/seafar/{z}/{x}/{y}.webp"], tileSize: 256, minzoom: 5, maxzoom: 6, bounds: [-32, 27.5, 4, 47.5] });
       map.addLayer({ id: "seafar", type: "raster", source: "seafar", paint: { "raster-fade-duration": 0 } });
@@ -663,6 +679,12 @@ export function initMapV3(root: HTMLElement) {
   });
 
   // ------------------------------------------------------------ start
+  // Nothing moves while the tab is hidden; leaving the page frees the map (and a page restored from the back-forward
+  // cache builds it again).
+  document.addEventListener("visibilitychange", () => { if (document.hidden) { stopTour(); stopPlay(); if (rotating) halt(); map?.stop(); } });
+  let wasLive = false;
+  addEventListener("pagehide", () => { wasLive = !!map; teardown(); });
+  addEventListener("pageshow", (e) => { if ((e as PageTransitionEvent).persisted && wasLive) load(); });
   dimButtons();
   if (layer !== "price") setLayer(layer);
   for (const k of ["golf", "beach", "devs"] as const) if (overlays[k]) root.querySelector(`[data-overlay="${k}"]`)?.setAttribute("aria-pressed", "true");
@@ -671,7 +693,7 @@ export function initMapV3(root: HTMLElement) {
     let scrolled = false, inView = false; const tryGo = () => { if (scrolled && inView) load(); };
     addEventListener("scroll", () => { scrolled = true; tryGo(); }, { once: true, passive: true });
     root.addEventListener("pointerdown", () => load(), { once: true, passive: true });
-    new IntersectionObserver((es) => { inView = es.some((e) => e.isIntersecting); if (map && !inView) { rotating = false; } else if (map && inView && !selected) startSpin(); tryGo(); }, { threshold: 0.35 }).observe(root);
+    new IntersectionObserver((es) => { inView = es.some((e) => e.isIntersecting); if (map && !inView) { rotating = false; map.stop(); } else if (map && inView && !selected) startSpin(); tryGo(); }, { threshold: 0.35 }).observe(root);
   } else {
     // The map wakes at the first sign of a reader (a pointer moving over it, a touch, a key, a scroll), as map v2 did; until
     // then the poster is its exact first frame. A shared link with a state opens straight away.
