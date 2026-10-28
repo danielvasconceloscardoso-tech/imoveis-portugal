@@ -382,3 +382,8 @@ copernicus.eu
 s3.amazonaws.com
 elevation-tiles-prod.s3.amazonaws.com
 registry.opendata.aws
+fpg.pt
+*.fpg.pt
+visitalgarve.pt
+*.visitalgarve.pt
+nominatim.openstreetmap.org
