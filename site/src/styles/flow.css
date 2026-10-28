@@ -79,3 +79,5 @@
   .fl-stage { min-height: 380px; }
 }
 .sh[hidden], .sh-back[hidden] { display: none !important; }
+.fl .fl-in:focus-visible { outline: none; } .fl .fl-area:focus-visible { outline: none; }
+.fl .fl-q:focus-visible { outline: none; }

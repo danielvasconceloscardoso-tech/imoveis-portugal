@@ -242,7 +242,7 @@ const rate = cur ? RATE(cur).rate : 0;
     $$("button[data-door]", start).forEach((b) => b.addEventListener("click", () => setTimeout(() => showQ(1), reduce ? 0 : 220)));
     $$("[data-pq-next]", start).forEach((b) => b.addEventListener("click", () => showQ(qi + 1)));
     $$<HTMLButtonElement>("[data-chip]", start).forEach((b) => b.addEventListener("click", () => { input.value = nf.format(Number(b.dataset.chip)); read(); render(); setTimeout(() => showQ(3), reduce ? 0 : 220); }));
-    $$<HTMLInputElement>('input[name="when"]', start).forEach((r) => r.addEventListener("change", () => setTimeout(() => start.requestSubmit(), reduce ? 0 : 260)));
+    $$<HTMLInputElement>('input[name="when"]', start).forEach((r) => r.addEventListener("click", () => setTimeout(() => start.requestSubmit(), reduce ? 0 : 260)));  // click: also when the answer was already selected
     input.addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); showQ(3); } });
     backB.addEventListener("click", () => showQ(qi - 1));
     $("[data-change]")!.addEventListener("click", () => showQ(0, false));

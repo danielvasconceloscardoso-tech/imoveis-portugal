@@ -22,8 +22,8 @@ body.d2 .pdoor[aria-pressed="true"] .pd-p { color: rgba(255, 255, 255, .75); }
 .pstart.stepped .cbar-list a:hover { background: #ebe9e3; }
 .pstart.stepped .cbar-list a[aria-current="true"] { background: #111214; color: #fff; }
 .pstart.stepped .pfield > span:first-child, .pstart.stepped .pfield > span[data-for] { font-size: 13px; color: #5d6066; }
-body.d2 .pfield input { border: 0; border-bottom: 1.5px solid #d9d5cc; border-radius: 0; background: none; padding: 6px 0; min-height: 0; font: 400 clamp(40px, 5vw, 56px)/1.1 var(--serif); max-width: 9ch; box-shadow: none; }
-body.d2 .pfield input:focus { border-bottom-color: var(--accent); box-shadow: none; }
+body.d2 .pstart .pfield input[data-budget] { border: 0; border-bottom: 1.5px solid #d9d5cc; border-radius: 0; background: none; padding: 6px 0; min-height: 0; font: 400 clamp(40px, 5vw, 56px)/1.1 var(--serif); max-width: 9ch; box-shadow: none; }
+body.d2 .pstart .pfield input[data-budget]:focus { border-bottom-color: var(--accent); box-shadow: none; }
 .pq-chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .pq-chip { border: 0; border-radius: 999px; background: #f3f2ee; padding: 10px 16px; font: 600 14px/1 var(--sans); cursor: pointer; color: #111214; }
 .pq-chip:hover { background: #ebe9e3; }
