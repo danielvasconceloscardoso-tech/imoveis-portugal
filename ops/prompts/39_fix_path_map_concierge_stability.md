@@ -1,6 +1,6 @@
 # Prompt 39: fix "Passo a passo", show the buildings, Concierge listings, a site that never crashes
 
-CEO, 28 Oct 2026, 22:25. Branch `design-v2`. The operator's father shows the site to the Marble Terrace developer tomorrow (29 Oct). **Everything below must be done, pushed to GitHub and built on the preview by 07:30.**
+CEO, 28 Oct 2026, 22:25. Branch `design-v2`. The operator's father shows the site to the Marble Terrace developer tomorrow (29 Oct). **Start now. Hard deadlines tonight, Luxembourg time, each pushed and built on the preview:** §0 immediately; §2 and §3 by 23:00; §1 by 23:30; §4 by 00:00.
 
 ## 0. First: push what you have
 
@@ -50,7 +50,7 @@ From now on, the preview is built only from GitHub, so it can never fall behind 
 3. **The tour and the time slider:** cancel running animations before starting new ones, so they never stack, and pause everything when the tab is hidden.
 4. **The home page:** the hero film and the map never run heavy work at the same time. The map wakes only when it is in view and sleeps when it leaves.
 
-**Then prove it before 07:30:**
+**Then prove it by 00:00:**
 1. **Soak test, 10 minutes each,** in Playwright Chromium at 1440×900 and in WebKit at 390×844. The script pans, zooms, runs the tours, switches 2D and 3D, opens cards, runs the Concierge and the request flow, and moves back and forth between pages.
    - **Pass:** zero page errors and zero console errors; memory flat (no steady growth); no blank map.
 2. **Crawl every built page** (about 1,300) for console errors and broken links; fix them all.
@@ -64,7 +64,7 @@ From now on, the preview is built only from GitHub, so it can never fall behind 
 
 **Push after each section** that works; every push must leave the preview working.
 
-At 07:30, reply with:
+At each deadline, reply with:
 1. the commit hash;
 2. the preview link to Gondomar on the map;
 3. the soak-test result in one line (errors, memory at the start and end);
