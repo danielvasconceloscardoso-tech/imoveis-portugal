@@ -6631,3 +6631,47 @@ Prompt 35 §3.1 (D61): the path's start as one question at a time.
 - PT: Para quando?
 - EN: For when?
 - FR: Pour quand ?
+
+## golf
+
+Prompt 36 §9 (D62): the golf card on the map, from our own list (content/facts/golf/courses.csv).
+
+### holes
+- PT: Buracos
+- EN: Holes
+- FR: Trous
+
+### design
+- PT: Desenho
+- EN: Designed by
+- FR: Conçu par
+
+### opened
+- PT: Abriu em
+- EN: Opened
+- FR: Ouvert en
+
+### status
+- PT: Estado
+- EN: Status
+- FR: Statut
+
+### opening
+- PT: Abre em {y}
+- EN: Opening {y}
+- FR: Ouverture en {y}
+
+### homes
+- PT: Ver casas perto
+- EN: See homes nearby
+- FR: Voir des biens à proximité
+
+### site
+- PT: Site oficial
+- EN: Official website
+- FR: Site officiel
+
+### src
+- PT: A nossa lista de campos: Federação Portuguesa de Golfe, sites oficiais dos campos e dos resorts. Contornos © OpenStreetMap contributors.
+- EN: Our list of courses: Portuguese Golf Federation, the courses' and resorts' official websites. Outlines © OpenStreetMap contributors.
+- FR: Notre liste des parcours : Fédération portugaise de golf, sites officiels des parcours et des resorts. Contours © OpenStreetMap contributors.

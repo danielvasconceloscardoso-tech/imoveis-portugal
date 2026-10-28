@@ -60,3 +60,7 @@ All self-hosted (built by scripts/map-data/v3_assets.py and v3_extras.py); credi
 | Rivers (Tejo, Douro, Minho, Guadiana) | Natural Earth 1:10m rivers and lake centrelines | Public domain | clipped to mainland Portugal |
 | Beaches | OpenStreetMap natural=beach, named, via Nominatim (1 request a second) | ODbL, © OpenStreetMap contributors | 985 points |
 | Golf, boundaries | OpenStreetMap (unchanged from map v2) | ODbL | |
+
+### Golf courses (prompt 36 §9), 28 Oct 2026
+
+`content/facts/golf/courses.csv` (79 courses; notes and weak rows in `content/facts/golf/NOTES.md`) is the map's golf layer (`scripts/map-data/golf_list.py` → `site/public/data/map/golf.json`). Details from Visit Portugal course pages and visitmadeira.com / valedolobo.com; fpg.pt, visitalgarve.pt and most resort sites were blocked from the build environment and are still to be checked against the list. Coordinates: OpenStreetMap Nominatim (never Google). Outlines: OpenStreetMap leisure=golf_course (ODbL) where one lies at the course.

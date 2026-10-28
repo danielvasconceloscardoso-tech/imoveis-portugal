@@ -210,3 +210,5 @@ body.d2.m3p .hd .beta { opacity: .55; }
 .m3-after .lede { font: 400 22px/1.45 var(--serif); margin: 0 0 12px; }
 body.d2.m3p .sources-list { padding-top: 32px; }
 .m3 [hidden], .m3-spot[hidden] { display: none !important; }
+.m3-golfband { --c: #5f8a4c; aspect-ratio: 16 / 5; }
+.m3-stats .m3-dd-s { font-size: 15px; line-height: 1.25; white-space: normal; }

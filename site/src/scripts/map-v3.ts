@@ -246,7 +246,7 @@ export function initMapV3(root: HTMLElement) {
       if (selPar) { await loadParishes(); selectParish(selPar); } else if (selected) select(selected);
       if (mode === "home" && !flat && !selected) startSpin();
       if (!flat) governor();
-      map.on("click", (e: any) => { stopTour(); const h = pick(e.point); if (!h) return; if (h.kind === "par") selectParish(h.key); else select(h.key); });
+      map.on("click", (e: any) => { stopTour(); const gc = overlays.golf ? golfAt(e.point) : null; if (gc) { showGolf(gc); return; } const h = pick(e.point); if (!h) return; if (h.kind === "par") selectParish(h.key); else select(h.key); });
       map.on("mousemove", (e: any) => hover(e.point)); map.on("mouseout", () => hover(null));
       map.on("move", labelsSoon); map.on("zoomend", () => { if (map.getZoom() > 7.8) loadParishes(); });
       ["pointerdown", "wheel", "touchstart"].forEach((ev) => canvas.addEventListener(ev, () => { stopTour(); halt(); }, { passive: true }));
@@ -326,7 +326,7 @@ export function initMapV3(root: HTMLElement) {
     map.getCanvas().style.cursor = h || g ? "pointer" : "";
     if (!pt || (!h && !g)) { tip.hidden = true; return; }
     const v = s ? value(P!.munis[s], layer) : null;
-    tip.innerHTML = g ? esc(g) : `${esc(h!.kind === "par" ? parishes?.feats.find((f) => f.properties.id === h!.key)?.properties.n ?? "" : byS.get(s!)?.n ?? "")}${v != null ? `<b>${fmtV(v)}</b>` : ""}`;
+    tip.innerHTML = g ? `${esc(g.n)}${g.holes ? `<b>${g.holes} ${L.golf.holes.toLowerCase()}</b>` : ""}` : `${esc(h!.kind === "par" ? parishes?.feats.find((f) => f.properties.id === h!.key)?.properties.n ?? "" : byS.get(s!)?.n ?? "")}${v != null ? `<b>${fmtV(v)}</b>` : ""}`;
     tip.style.transform = `translate(${pt.x + 14}px, ${pt.y - 34}px)`; tip.hidden = false;
   }
   const fmtV = (v: number) => layer === "price" ? `${eur.format(v)}/m²` : layer === "rent" ? `${eur2.format(v)}/m²` : layer === "g10" ? pc(v) : `${nf1.format(v)}%`;
@@ -455,18 +455,47 @@ export function initMapV3(root: HTMLElement) {
       applyValues();
     })();
   }
-  async function drawGolf() {
-    golf ??= await fetch("/data/map/golf.geojson").then((r) => r.json());
-    if (!map.getSource("golf")) {
-      map.addSource("golf", { type: "geojson", data: golf });
-      map.addSource("golfpt", { type: "geojson", data: { type: "FeatureCollection", features: golf.features.map((f: any) => ({ type: "Feature", properties: f.properties, geometry: { type: "Point", coordinates: [f.properties.x, f.properties.y] } })) } });
-      map.addLayer({ id: "golf", type: "fill", source: "golf", minzoom: 9, paint: { "fill-color": "#5f8a4c", "fill-opacity": 0.85 } });
-      map.addLayer({ id: "golfpt", type: "circle", source: "golfpt", maxzoom: 9.4, paint: { "circle-radius": ["interpolate", ["linear"], ["zoom"], 6, 2.6, 9, 5], "circle-color": "#3f6e33", "circle-stroke-color": "#fff", "circle-stroke-width": 1.2 } });
-    }
-    for (const id of ["golf", "golfpt"]) map.setLayoutProperty(id, "visibility", overlays.golf ? "visible" : "none");
+  // Golf from our own list (prompt 36 §9: content/facts/golf/courses.csv → golf.json, scripts/map-data/golf_list.py):
+  // OpenStreetMap outlines where they exist, an elegant pin everywhere else, courses being built marked as such.
+  type Course = { id: number; n: string; resort: string; m: string; holes: number | null; designer: string; year: string; status: string; url: string; x: number; y: number; outline: boolean };
+  async function loadGolf(): Promise<{ courses: Course[]; outlines: any }> {
+    return golf ??= await fetch("/data/map/golf.json").then((r) => (r.ok ? r.json() : Promise.reject())).catch(async () => {
+      const g = await fetch("/data/map/golf.geojson").then((r) => r.json()).catch(() => ({ features: [] }));
+      return { courses: g.features.filter((f: any) => f.properties.n).map((f: any, i: number) => ({ id: i, n: f.properties.n, resort: "", m: f.properties.m, holes: null, designer: "", year: "", status: "open", url: "", x: f.properties.x, y: f.properties.y, outline: true })),
+        outlines: { type: "FeatureCollection", features: g.features.filter((f: any) => f.properties.n).map((f: any, i: number) => ({ ...f, properties: { c: i } })) } };
+    });
   }
-  const golfName = (p: any) => p.n || `${L.golfUnnamed} · ${byS.get(p.m)?.n ?? ""}`;
-  function golfAt(pt: { x: number; y: number }) { if (!map.getLayer("golfpt")) return null; const f = map.queryRenderedFeatures([[pt.x - 5, pt.y - 5], [pt.x + 5, pt.y + 5]], { layers: ["golfpt", "golf"] })[0]; return f ? golfName(f.properties) : null; }
+  async function drawGolf() {
+    const G = await loadGolf();
+    if (!map.getSource("golf")) {
+      map.addSource("golf", { type: "geojson", data: G.outlines });
+      map.addSource("golfpt", { type: "geojson", data: { type: "FeatureCollection", features: G.courses.map((c) => ({ type: "Feature", properties: { c: c.id, o: c.outline, soon: c.status !== "open" }, geometry: { type: "Point", coordinates: [c.x, c.y] } })) } });
+      map.addLayer({ id: "golf", type: "fill", source: "golf", minzoom: 9, paint: { "fill-color": "#5f8a4c", "fill-opacity": 0.85 } });
+      const pin = (id: string, filter: any, extra: any = {}) => map.addLayer({ id, type: "circle", source: "golfpt", filter, ...extra, paint: {
+        "circle-radius": ["interpolate", ["linear"], ["zoom"], 6, 3, 9, 5.5, 12, 7], "circle-color": ["case", ["get", "soon"], "#ffffff", "#2f5d50"],
+        "circle-stroke-color": ["case", ["get", "soon"], "#2f5d50", "#ffffff"], "circle-stroke-width": ["case", ["get", "soon"], 1.8, 1.4] } });
+      pin("golfpt", ["!", ["get", "o"]]);                       // pins: courses OpenStreetMap has no outline for
+      pin("golfpt-o", ["get", "o"], { maxzoom: 10 });            // until their outline is large enough to see
+    }
+    for (const id of ["golf", "golfpt", "golfpt-o"]) map.setLayoutProperty(id, "visibility", overlays.golf ? "visible" : "none");
+  }
+  function golfAt(pt: { x: number; y: number }): Course | null {
+    if (!golf || !map.getLayer("golfpt")) return null;
+    const f = map.queryRenderedFeatures([[pt.x - 6, pt.y - 6], [pt.x + 6, pt.y + 6]], { layers: ["golfpt", "golfpt-o", "golf"] })[0];
+    return f ? golf.courses[f.properties.c] ?? null : null;
+  }
+  function showGolf(g: Course) {
+    selected = null; if (map) map.setFilter("sel", ["==", ["get", "s"], ""]);
+    const muni = byS.get(g.m)?.n ?? "";
+    const when = g.status !== "open" ? L.golf.opening.replace("{y}", g.year || "—") : g.year;
+    let h = `<div class="m3-photo m3-photo-none m3-golfband"></div><div class="m3-sb"><p class="m3-kick">${esc([g.resort !== g.n ? g.resort : "", muni].filter(Boolean).join(" · "))}</p><h3 tabindex="-1">${esc(g.n)}</h3>`;
+    h += `<dl class="m3-stats"><div><dt>${L.golf.holes}</dt><dd>${g.holes ?? "—"}</dd></div><div><dt>${L.golf.design}</dt><dd class="m3-dd-s">${esc(g.designer || "—")}</dd></div><div><dt>${g.status !== "open" ? L.golf.status : L.golf.opened}</dt><dd class="m3-dd-s">${esc(when || "—")}</dd></div></dl>`;
+    h += `<div class="m3-acts"><a class="m3-btn m3-btn-p" href="${cfg.links.buy}?place=${encodeURIComponent(muni)}&budget=${Math.round(budget)}">${L.golf.homes}</a><a class="m3-btn" href="${cfg.links.consult}?place=${encodeURIComponent(muni)}">${L.card.concierge}</a></div>`;
+    h += `<div class="m3-more">${g.m ? `<button type="button" class="m3-link" data-goto="${g.m}">${esc(muni)}</button>` : ""}${g.url ? `<a class="m3-link" href="${esc(g.url)}" rel="noopener" target="_blank">${L.golf.site}</a>` : ""}</div>`;
+    h += `<p class="m3-src">${L.golf.src}</p></div>`;
+    openSheet(h, true);
+    if (map) flyTo(g.x, g.y, Math.max(map.getZoom(), 12));
+  }
   async function drawBeaches() {
     beaches ??= await fetch("/data/map/beaches.json").then((r) => r.json()).catch(() => []);
     if (!map.getSource("beach")) {
@@ -528,7 +557,7 @@ export function initMapV3(root: HTMLElement) {
     if (kind === "coast") {
       for (const [s, b] of [["porto", -20], ["aveiro", -12], ["figueira-da-foz", -8], ["nazare", -4], ["peniche", 0], ["cascais", 8], ["lisboa", 14], ["setubal", 20], ["grandola", 26]] as [string, number][]) { if (stop) break; await fly(at2(s, 9.2, b), 2000, placeCap(s)); }
     } else if (kind === "golf") {
-      await setOverlay("golf", true); const n = golf?.features.filter((f: any) => ["lagos", "portimao", "lagoa", "silves", "albufeira", "loule", "faro", "olhao", "tavira", "castro-marim", "vila-real-de-santo-antonio", "vila-do-bispo", "aljezur", "monchique", "sao-bras-de-alportel", "alcoutim"].includes(f.properties.m)).length ?? 0;
+      await setOverlay("golf", true); const n = golf?.courses.filter((f: any) => f.status === "open" && ["lagos", "portimao", "lagoa", "silves", "albufeira", "loule", "faro", "olhao", "tavira", "castro-marim", "vila-real-de-santo-antonio", "vila-do-bispo", "aljezur", "monchique", "sao-bras-de-alportel", "alcoutim"].includes(f.m)).length ?? 0;
       await fly(at2("albufeira", 8.2, -20, 50), 2600, L.golfcap.replace("{n}", n));
       for (const [s, b] of [["lagos", -12], ["portimao", -6], ["albufeira", 2], ["loule", 10], ["tavira", 18], ["vila-real-de-santo-antonio", 24]] as [string, number][]) { if (stop) break; await fly(at2(s, 10.4, b, 62), 2400, placeCap(s)); }
     } else if (kind === "madeira") {
@@ -555,8 +584,7 @@ export function initMapV3(root: HTMLElement) {
     const pl: Hit[] = features.map((f) => { const p = f.properties as Props; return { g: "munis", n: p.n, sub: L.regions[p.r], go: () => select(p.s) }; });
     for (const [n, x, y, m] of LOCALITIES) pl.push({ g: "munis", n, sub: byS.get(m)?.n, go: () => { select(m, false); flyTo(x, y, 10.2); } });
     try { const pt = await fetch("/data/map/parishes.topo.json").then((r) => r.json()); for (const f of (feature(pt, pt.objects.p) as any).features) pl.push({ g: "pars", n: f.properties.n, sub: byS.get(f.properties.m)?.n, go: async () => { await loadParishes(); const m = byS.get(f.properties.m)!; flyTo(m.x, m.y, 9.4); setTimeout(() => selectParish(f.properties.id), 900); } }); } catch { /* parishes optional */ }
-    golf ??= await fetch("/data/map/golf.geojson").then((r) => r.json()).catch(() => ({ features: [] }));
-    for (const f of golf.features) if (f.properties.n) pl.push({ g: "golf", n: f.properties.n, sub: byS.get(f.properties.m)?.n, go: async () => { await setOverlay("golf", true); flyTo(f.properties.x, f.properties.y, 12); toast(f.properties.n); } });
+    for (const c of (await loadGolf()).courses) pl.push({ g: "golf", n: c.n, sub: byS.get(c.m)?.n, go: async () => { await setOverlay("golf", true); showGolf(c); } });
     beaches ??= await fetch("/data/map/beaches.json").then((r) => r.json()).catch(() => []);
     for (const [x, y, n] of beaches!) pl.push({ g: "beach", n, go: async () => { await setOverlay("beach", true); flyTo(x, y, 11.6); toast(n); } });
     for (const p of projects) pl.push({ g: "devs", n: p.name, sub: p.developer, go: () => { flyTo(p.lon, p.lat, 11); setOverlay("devs", true); } });

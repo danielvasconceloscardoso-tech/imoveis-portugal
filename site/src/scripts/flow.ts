@@ -36,7 +36,7 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
     history.replaceState(null, "", `${location.pathname}${p.size ? `?${p}` : ""}${location.hash}`);
   }
   const head = () => `<div class="fl-head"><button type="button" class="fl-back" data-back ${i === 0 ? "hidden" : ""} aria-label="${esc(L.back)}">${ARROW}</button>
-    <div class="fl-prog" role="progressbar" aria-valuemin="1" aria-valuemax="${N}" aria-valuenow="${Math.min(i + 1, N)}"><span style="width:${(Math.min(i + 1, N) / N) * 100}%"></span></div>
+    <div class="fl-prog" role="progressbar" aria-label="${esc(F.title)}" aria-valuemin="1" aria-valuemax="${N}" aria-valuenow="${Math.min(i + 1, N)}"><span style="width:${(Math.min(i + 1, N) / N) * 100}%"></span></div>
     <span class="fl-of">${esc(L.of.replace("{i}", String(Math.min(i + 1, N))).replace("{n}", String(N)))}</span></div>`;
 
   function body(s: Step): string {

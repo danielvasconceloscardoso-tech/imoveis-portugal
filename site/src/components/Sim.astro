@@ -234,7 +234,8 @@ const fieldLabel = (id: string, kind: string) => {
     back.addEventListener("click", () => show(at - 1));
     nextB.addEventListener("click", () => { if (at < steps.length - 1) show(at + 1); else document.getElementById("result")!.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }); });
     form.addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); nextB.click(); } });
-    form.querySelectorAll<HTMLInputElement>('.bool input').forEach((r) => r.addEventListener("change", () => setTimeout(() => at < steps.length - 1 && show(at + 1), 350)));
+    // A tap on a choice advances, even when it is the answer already selected (no "change" fires then).
+    form.querySelectorAll<HTMLInputElement>('.bool input').forEach((r) => r.addEventListener("click", () => setTimeout(() => at < steps.length - 1 && show(at + 1), 300)));
     show(0, false);
   }
   document.getElementById("pdf")?.addEventListener("click", () => print());

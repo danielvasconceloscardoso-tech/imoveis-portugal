@@ -47,7 +47,7 @@ export function initChrome() {
   }
 
   // ------------------------------------------------------------ the concierge sheet
-  const sh = document.querySelector<HTMLElement>("[data-sheet]"), back = document.querySelector<HTMLElement>("[data-sheet-back]");
+  const sh = document.querySelector<HTMLElement>("[data-cg-sheet]"), back = document.querySelector<HTMLElement>("[data-cg-back]");
   if (!sh || !back) return;
   const flowEl = sh.querySelector<HTMLElement>("[data-flow]")!;
   let flow: ReturnType<typeof initFlow> | null = null, lastFocus: HTMLElement | null = null;
@@ -76,7 +76,7 @@ export function initChrome() {
       open(e);
     }
   });
-  sh.querySelector("[data-sheet-x]")!.addEventListener("click", close);
+  sh.querySelector("[data-cg-x]")!.addEventListener("click", close);
   back.addEventListener("click", close);
   addEventListener("keydown", (e) => { if (e.key === "Escape" && !sh.hidden) close(); });
   { // mobile: drag the grabber down to close

@@ -41,6 +41,7 @@ const labels = {
   cagrP: c("map.card.cagrp", lang, { v: "{v}" }), yieldLine: c("map.card.yield", lang, { y: "{y}", r: "{r}", month: "{month}" }), mo: c("map.card.mo", lang, { c4: "{c4}", c8: "{c8}" }),
   mow: { up: c("map.mo.up", lang), steady: c("map.mo.steady", lang), down: c("map.mo.down", lang) }, page: c("map.a.page", lang), sponsored: c("dev.sponsored", lang),
   pfrom: c("map.proj.from", lang, { v: "{v}" }), ponreq: c("map.proj.onreq", lang), golfUnnamed: c("map.golf.unnamed", lang), nomatch: c("map.find.none", lang),
+  golf: Object.fromEntries(["holes", "design", "opened", "status", "opening", "homes", "site", "src"].map((x) => [x, c(`golf.${x}`, lang, x === "opening" ? { y: "{y}" } : {})])),
   regions: Object.fromEntries(REGIONS.map((r) => [r, c(`map.r.${r}`, lang)])), credits: k("credits"),
 };
 const month = new Intl.DateTimeFormat(HTML_LANG[lang], { month: "long", year: "numeric" }).format(new Date(`${PRICES.mortgage.month}-15`));
