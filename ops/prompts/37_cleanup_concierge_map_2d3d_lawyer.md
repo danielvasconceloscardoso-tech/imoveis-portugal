@@ -28,7 +28,7 @@ CEO, 28 Oct 2026, evening. Decisions D63–D64. Branch `design-v2`.
    - plus the golf, Madeira and New Year's Eve pillar drafts once approved.
 
    The relevant map card or section links to its article in one line.
-3. **Navigation** (operator to confirm; use this until he says otherwise): Passo a passo · Mapa · Simuladores · Artigos · Perguntas · Parceiros, plus Concierge. On mobile, everything sits in the menu.
+3. **Navigation** (operator, 28 Oct: Artigos sits next to the other sections): Passo a passo · Mapa · Simuladores · Artigos · Perguntas · Parceiros, plus Concierge. On mobile, everything sits in the menu.
 
 ## 3. The map: 2D and 3D, no night
 
