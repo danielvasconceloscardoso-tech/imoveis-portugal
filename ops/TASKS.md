@@ -138,6 +138,7 @@ Status: To do · Doing · Blocked · Done
 | 31a | Approve the Vanguard storyboard and the 20-second grade and sound test (prompt 31), then the film | Operator | To do | after prompt 31 step 1 |
 
 | 32a | Compare the home page v1 and design v2 (screenshots and scroll recordings) and say go | Operator | To do | after prompt 32 step 1 |
+| 37a | Partner lawyers (D64): two Portuguese lawyers identified by the operator (links kept off the repo). Get each one's written consent and profile data (photo, name, firm, cédula, practice areas, languages, city/video, response time, fee wording, LinkedIn, request email), and check their firm allows a flat sponsorship. Until then the Concierge shows only the marked sample | Operator | To do | 2026-11-06 |
 
 ## Last session
 
