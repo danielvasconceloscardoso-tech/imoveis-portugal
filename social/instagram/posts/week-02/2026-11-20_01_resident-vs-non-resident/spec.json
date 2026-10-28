@@ -1,0 +1,125 @@
+{
+ "pt": {
+  "source": "Fontes: Código do IMT, art. 17.º, n.os 1, 3 e 10 a 12 (tabelas de 2026; DL 97/2026)",
+  "slides": [
+   {
+    "format": "text",
+    "kicker": "Cálculo ilustrativo",
+    "h": "A mesma casa, três contas de IMT.",
+    "big": "300 000 €"
+   },
+   {
+    "format": "text",
+    "kicker": "Residente · casa própria e permanente",
+    "h": "Por escalões: 1,7274% até 198 347 €, 7% no resto.",
+    "big": "10 542 €"
+   },
+   {
+    "format": "text",
+    "kicker": "Residente · outra casa",
+    "h": "A mesma conta, com a tabela das outras casas: 2,2636% até 198 347 €.",
+    "big": "11 605 €"
+   },
+   {
+    "format": "text",
+    "kicker": "Não residente",
+    "h": "Taxa única de 7,5%, sem isenções nem reduções, salvo exceção.",
+    "big": "22 500 €"
+   },
+   {
+    "format": "text",
+    "kicker": "As exceções",
+    "h": "Ter sido considerado residente fiscal. Passar a residente em dois anos. Arrendar com renda dentro dos limites.",
+    "dark": true
+   },
+   {
+    "format": "end",
+    "kicker": "A sua conta",
+    "h": "Faça as suas contas.",
+    "body": "Link na bio: artigo IMT em 2026, com o simulador Custo total."
+   }
+  ]
+ },
+ "en": {
+  "source": "Sources: IMT Code, art. 17(1), (3) and (10) to (12) (2026 tables; Decree-Law 97/2026)",
+  "slides": [
+   {
+    "format": "text",
+    "kicker": "Illustrative calculation",
+    "h": "The same home, three IMT bills.",
+    "big": "€300,000"
+   },
+   {
+    "format": "text",
+    "kicker": "Resident · own permanent home",
+    "h": "By brackets: 1.7274% up to €198,347, 7% on the rest.",
+    "big": "€10,542"
+   },
+   {
+    "format": "text",
+    "kicker": "Resident · other home",
+    "h": "Same method, with the other-home table: 2.2636% up to €198,347.",
+    "big": "€11,605"
+   },
+   {
+    "format": "text",
+    "kicker": "Non-resident",
+    "h": "A flat 7.5%, with no exemption or reduction, unless an exception applies.",
+    "big": "€22,500"
+   },
+   {
+    "format": "text",
+    "kicker": "The exceptions",
+    "h": "Having been considered a tax resident. Becoming one within two years. Letting within the legal rent caps.",
+    "dark": true
+   },
+   {
+    "format": "end",
+    "kicker": "Your numbers",
+    "h": "Run your numbers.",
+    "body": "Link in bio: IMT in 2026 article, with the Total cost calculator."
+   }
+  ]
+ },
+ "fr": {
+  "source": "Sources : Code de l'IMT, art. 17, n.os 1, 3 et 10 à 12 (barèmes 2026 ; DL 97/2026)",
+  "slides": [
+   {
+    "format": "text",
+    "kicker": "Calcul illustratif",
+    "h": "Le même bien, trois factures d'IMT.",
+    "big": "300 000 €"
+   },
+   {
+    "format": "text",
+    "kicker": "Résident · résidence principale",
+    "h": "Par tranches : 1,7274 % jusqu'à 198 347 €, 7 % sur le reste.",
+    "big": "10 542 €"
+   },
+   {
+    "format": "text",
+    "kicker": "Résident · autre logement",
+    "h": "Même calcul, avec le barème des autres logements : 2,2636 % jusqu'à 198 347 €.",
+    "big": "11 605 €"
+   },
+   {
+    "format": "text",
+    "kicker": "Non-résident",
+    "h": "Taux unique de 7,5 %, sans exonération ni réduction, sauf exception.",
+    "big": "22 500 €"
+   },
+   {
+    "format": "text",
+    "kicker": "Les exceptions",
+    "h": "Avoir été considéré résident fiscal. Le devenir dans les deux ans. Louer dans les plafonds de loyer légaux.",
+    "dark": true
+   },
+   {
+    "format": "end",
+    "kicker": "Vos chiffres",
+    "h": "Faites vos calculs.",
+    "body": "Lien dans la bio : article IMT en 2026, avec le simulateur Coût total."
+   }
+  ]
+ }
+}

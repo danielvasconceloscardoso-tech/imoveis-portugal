@@ -1,0 +1,62 @@
+{
+ "pt": {
+  "format": "postcard",
+  "h": "Lisboa.",
+  "photo": "/design/directions/photos/lisboa-alfama-sao-vicente.jpg",
+  "items": [
+   {
+    "v": "5 192 €",
+    "k": "por m², mediana"
+   },
+   {
+    "v": "+177%",
+    "k": "desde 2016"
+   },
+   {
+    "v": "4,0%",
+    "k": "rendimento bruto"
+   }
+  ],
+  "source": "Fonte: INE, preços e rendas, 2.º trimestre de 2026"
+ },
+ "en": {
+  "format": "postcard",
+  "h": "Lisbon.",
+  "photo": "/design/directions/photos/lisboa-alfama-sao-vicente.jpg",
+  "items": [
+   {
+    "v": "€5,192",
+    "k": "per m², median"
+   },
+   {
+    "v": "+177%",
+    "k": "since 2016"
+   },
+   {
+    "v": "4.0%",
+    "k": "gross yield"
+   }
+  ],
+  "source": "Source: INE, prices and rents, 2nd quarter 2026"
+ },
+ "fr": {
+  "format": "postcard",
+  "h": "Lisbonne.",
+  "photo": "/design/directions/photos/lisboa-alfama-sao-vicente.jpg",
+  "items": [
+   {
+    "v": "5 192 €",
+    "k": "le m², médiane"
+   },
+   {
+    "v": "+177 %",
+    "k": "depuis 2016"
+   },
+   {
+    "v": "4,0 %",
+    "k": "rendement brut"
+   }
+  ],
+  "source": "Source : INE, prix et loyers, 2e trimestre 2026"
+ }
+}

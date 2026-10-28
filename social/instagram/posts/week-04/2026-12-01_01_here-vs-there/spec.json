@@ -1,0 +1,104 @@
+{
+ "pt": {
+  "format": "here-vs-there",
+  "kicker": "Aqui e lá",
+  "h": "Um metro quadrado na cidade do Luxemburgo. Dois em Lisboa.",
+  "items": [
+   {
+    "place": "Luxemburgo (cidade)",
+    "m2": 1,
+    "v": "1 m²"
+   },
+   {
+    "place": "Lisboa",
+    "m2": 1.9778505392912173,
+    "v": "2,0 m²"
+   },
+   {
+    "place": "Cascais",
+    "m2": 2.1004295356923706,
+    "v": "2,1 m²"
+   },
+   {
+    "place": "Porto",
+    "m2": 2.828146516111264,
+    "v": "2,8 m²"
+   },
+   {
+    "place": "Funchal",
+    "m2": 2.902487280949689,
+    "v": "2,9 m²"
+   }
+  ],
+  "note": "O preço de 1 m² na cidade do Luxemburgo (10 269 €, média, apartamentos existentes, julho de 2025 a junho de 2026) compra esta área em Portugal, à mediana do INE.",
+  "source": "Fontes: Observatoire de l'Habitat (LU), 2026 T2; INE, 2.º trimestre de 2026"
+ },
+ "en": {
+  "format": "here-vs-there",
+  "kicker": "Here and there",
+  "h": "One square metre in Luxembourg City. Two in Lisbon.",
+  "items": [
+   {
+    "place": "Luxembourg City",
+    "m2": 1,
+    "v": "1 m²"
+   },
+   {
+    "place": "Lisboa",
+    "m2": 1.9778505392912173,
+    "v": "2.0 m²"
+   },
+   {
+    "place": "Cascais",
+    "m2": 2.1004295356923706,
+    "v": "2.1 m²"
+   },
+   {
+    "place": "Porto",
+    "m2": 2.828146516111264,
+    "v": "2.8 m²"
+   },
+   {
+    "place": "Funchal",
+    "m2": 2.902487280949689,
+    "v": "2.9 m²"
+   }
+  ],
+  "note": "The price of 1 m² in Luxembourg City (€10,269, average, existing apartments, July 2025 to June 2026) buys this much in Portugal at the INE median.",
+  "source": "Sources: Observatoire de l'Habitat (LU), Q2 2026; INE, 2nd quarter 2026"
+ },
+ "fr": {
+  "format": "here-vs-there",
+  "kicker": "Ici et là-bas",
+  "h": "Un mètre carré à Luxembourg-Ville. Deux à Lisbonne.",
+  "items": [
+   {
+    "place": "Luxembourg-Ville",
+    "m2": 1,
+    "v": "1 m²"
+   },
+   {
+    "place": "Lisboa",
+    "m2": 1.9778505392912173,
+    "v": "2,0 m²"
+   },
+   {
+    "place": "Cascais",
+    "m2": 2.1004295356923706,
+    "v": "2,1 m²"
+   },
+   {
+    "place": "Porto",
+    "m2": 2.828146516111264,
+    "v": "2,8 m²"
+   },
+   {
+    "place": "Funchal",
+    "m2": 2.902487280949689,
+    "v": "2,9 m²"
+   }
+  ],
+  "note": "Le prix d'1 m² à Luxembourg-Ville (10 269 €, moyenne, appartements existants, juillet 2025 à juin 2026) achète cette surface au Portugal, au prix médian de l'INE.",
+  "source": "Sources : Observatoire de l'Habitat (LU), T2 2026 ; INE, 2e trimestre 2026"
+ }
+}

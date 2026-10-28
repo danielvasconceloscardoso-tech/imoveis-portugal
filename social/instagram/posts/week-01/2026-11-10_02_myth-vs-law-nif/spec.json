@@ -1,0 +1,26 @@
+{
+ "pt": {
+  "format": "myth-vs-law",
+  "kicker": "Mito e lei",
+  "h": "O NIF pede-se a partir de casa.",
+  "myth": "Para ter NIF, tem de ir a um Serviço de Finanças em Portugal.",
+  "law": "Um representante legal, como um advogado, pede-o online no e-balcão das Finanças. O balcão é a outra via.",
+  "source": "Fonte: Autoridade Tributária, folheto NIF para cidadãos estrangeiros não residentes"
+ },
+ "en": {
+  "format": "myth-vs-law",
+  "kicker": "Myth and law",
+  "h": "Your NIF can be requested from home.",
+  "myth": "To get a NIF, you have to go to a tax office in Portugal.",
+  "law": "A legal representative, such as a lawyer, requests it online on the Finanças e-balcão. The tax office is the other route.",
+  "source": "Source: Tax and Customs Authority, NIF leaflet for non-resident foreigners"
+ },
+ "fr": {
+  "format": "myth-vs-law",
+  "kicker": "Mythe et loi",
+  "h": "Le NIF se demande depuis chez vous.",
+  "myth": "Pour obtenir un NIF, il faut aller dans un bureau des Finances au Portugal.",
+  "law": "Un représentant légal, un avocat par exemple, le demande en ligne sur l'e-balcão des Finances. Le guichet est l'autre voie.",
+  "source": "Source : Autorité fiscale, brochure NIF pour les étrangers non résidents"
+ }
+}

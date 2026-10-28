@@ -1,0 +1,44 @@
+{
+ "frames": [
+  {
+   "pt": {
+    "format": "story-text",
+    "kicker": "Pergunte",
+    "h": "Que custo quer ver explicado.",
+    "body": "IMT, selo, escritura, advogado, crédito. Escreva aqui.",
+    "source": ""
+   },
+   "en": {
+    "format": "story-text",
+    "kicker": "Ask us",
+    "h": "The cost you want explained.",
+    "body": "IMT, stamp duty, the deed, the lawyer, the mortgage. Type it here.",
+    "source": ""
+   },
+   "fr": {
+    "format": "story-text",
+    "kicker": "Votre question",
+    "h": "Le coût que vous voulez comprendre.",
+    "body": "IMT, timbre, acte, avocat, crédit. Écrivez ici.",
+    "source": ""
+   }
+  },
+  {
+   "pt": {
+    "format": "story-card",
+    "kicker": "Novo no feed",
+    "img": "/social/instagram/posts/week-02/2026-11-21_01_postcard-madeira/card-pt.png"
+   },
+   "en": {
+    "format": "story-card",
+    "kicker": "New on the feed",
+    "img": "/social/instagram/posts/week-02/2026-11-21_01_postcard-madeira/card-en.png"
+   },
+   "fr": {
+    "format": "story-card",
+    "kicker": "Nouveau sur le fil",
+    "img": "/social/instagram/posts/week-02/2026-11-21_01_postcard-madeira/card-fr.png"
+   }
+  }
+ ]
+}

@@ -1,0 +1,104 @@
+{
+ "pt": {
+  "format": "budget-buys",
+  "kicker": "O que o orçamento compra",
+  "h": "1,5 milhão de reais, cinco lugares.",
+  "items": [
+   {
+    "place": "Lisboa",
+    "m2": 51.14738589802466,
+    "v": "51 m²"
+   },
+   {
+    "place": "Cascais",
+    "m2": 54.31728933985355,
+    "v": "54 m²"
+   },
+   {
+    "place": "Loulé",
+    "m2": 64.1907729230225,
+    "v": "64 m²"
+   },
+   {
+    "place": "Porto",
+    "m2": 73.13611335239439,
+    "v": "73 m²"
+   },
+   {
+    "place": "Funchal",
+    "m2": 75.05857195662635,
+    "v": "75 m²"
+   }
+  ],
+  "note": "R$ 1 500 000 = 265 557 € à taxa do BCE de 23 de outubro de 2026, a dividir pela mediana do INE de cada concelho, antes de impostos e escritura. Plantas à escala.",
+  "source": "Fontes: INE, 2.º trimestre de 2026; BCE"
+ },
+ "en": {
+  "format": "budget-buys",
+  "kicker": "What a budget buys",
+  "h": "R$1.5 million, five places.",
+  "items": [
+   {
+    "place": "Lisboa",
+    "m2": 51.14738589802466,
+    "v": "51 m²"
+   },
+   {
+    "place": "Cascais",
+    "m2": 54.31728933985355,
+    "v": "54 m²"
+   },
+   {
+    "place": "Loulé",
+    "m2": 64.1907729230225,
+    "v": "64 m²"
+   },
+   {
+    "place": "Porto",
+    "m2": 73.13611335239439,
+    "v": "73 m²"
+   },
+   {
+    "place": "Funchal",
+    "m2": 75.05857195662635,
+    "v": "75 m²"
+   }
+  ],
+  "note": "R$1,500,000 = €265,557 at the ECB rate of October 23, 2026, divided by each municipality's INE median, before taxes and the deed. Floor plans to scale.",
+  "source": "Sources: INE, 2nd quarter 2026; ECB"
+ },
+ "fr": {
+  "format": "budget-buys",
+  "kicker": "Ce qu'un budget achète",
+  "h": "1,5 million de reais, cinq lieux.",
+  "items": [
+   {
+    "place": "Lisboa",
+    "m2": 51.14738589802466,
+    "v": "51 m²"
+   },
+   {
+    "place": "Cascais",
+    "m2": 54.31728933985355,
+    "v": "54 m²"
+   },
+   {
+    "place": "Loulé",
+    "m2": 64.1907729230225,
+    "v": "64 m²"
+   },
+   {
+    "place": "Porto",
+    "m2": 73.13611335239439,
+    "v": "73 m²"
+   },
+   {
+    "place": "Funchal",
+    "m2": 75.05857195662635,
+    "v": "75 m²"
+   }
+  ],
+  "note": "1 500 000 R$ = 265 557 € au taux BCE du 23 octobre 2026, divisés par le prix médian INE de chaque commune, avant impôts et acte. Plans à l'échelle.",
+  "source": "Sources : INE, 2e trimestre 2026 ; BCE"
+ }
+}

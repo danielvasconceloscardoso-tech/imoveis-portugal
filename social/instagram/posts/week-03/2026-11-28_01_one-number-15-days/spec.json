@@ -1,0 +1,26 @@
+{
+ "pt": {
+  "format": "one-number",
+  "kicker": "Um número",
+  "big": "15",
+  "h": "Dias para tratar das notificações fiscais, depois da escritura.",
+  "note": "A viver fora da UE e do EEE, nomeia um representante fiscal em Portugal ou adere às notificações eletrónicas das Finanças, nos 15 dias seguintes a ser dono da casa. Dentro da UE, o representante é opcional.",
+  "source": "Fontes: Autoridade Tributária, NIF para não residentes; Lei Geral Tributária, art. 19.º"
+ },
+ "en": {
+  "format": "one-number",
+  "kicker": "One number",
+  "big": "15",
+  "h": "Days to sort out your tax notices after the deed.",
+  "note": "Living outside the EU and the EEA, you appoint a tax representative in Portugal or sign up for the tax office's electronic notifications within 15 days of owning the home. Inside the EU, the representative is optional.",
+  "source": "Sources: Portuguese Tax Authority, NIF for non-residents; General Tax Law, art. 19"
+ },
+ "fr": {
+  "format": "one-number",
+  "kicker": "Un chiffre",
+  "big": "15",
+  "h": "Jours pour régler vos notifications fiscales après l'acte.",
+  "note": "Si vous vivez hors de l'UE et de l'EEE, vous nommez un représentant fiscal au Portugal ou adhérez aux notifications électroniques du fisc dans les 15 jours qui suivent l'achat. Dans l'UE, le représentant est facultatif.",
+  "source": "Sources : Autorité fiscale portugaise, NIF des non-résidents ; Loi générale fiscale, art. 19"
+ }
+}

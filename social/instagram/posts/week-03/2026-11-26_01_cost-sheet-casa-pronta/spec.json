@@ -1,0 +1,89 @@
+{
+ "pt": {
+  "format": "cost-sheet",
+  "kicker": "A conta da escritura",
+  "h": "Escritura e registo, no mesmo balcão.",
+  "tag": "Taxas oficiais · Casa Pronta · sem honorários",
+  "rows": [
+   {
+    "k": "Compra com um registo",
+    "sub": "Só a compra",
+    "v": "375 €"
+   },
+   {
+    "k": "Compra com hipoteca",
+    "sub": "Mais de um ato de registo",
+    "v": "700 €"
+   },
+   {
+    "k": "Cada imóvel adicional",
+    "sub": "Em qualquer dos casos",
+    "v": "+ 50 €"
+   }
+  ],
+  "total": {
+   "k": "Exemplo: hipoteca e 2 imóveis",
+   "v": "750 €",
+   "sub": "≈ 692 CHF · 839 USD"
+  },
+  "source": "Fontes: Justiça.gov.pt, Balcão Casa Pronta (atualizado a 22/10/2025); BCE, 23/10/2026"
+ },
+ "en": {
+  "format": "cost-sheet",
+  "kicker": "The deed bill",
+  "h": "Deed and registration, at one counter.",
+  "tag": "Official fees · Casa Pronta · lawyer's fees not included",
+  "rows": [
+   {
+    "k": "Purchase, one registration",
+    "sub": "The purchase on its own",
+    "v": "€375"
+   },
+   {
+    "k": "Purchase with a mortgage",
+    "sub": "More than one registration act",
+    "v": "€700"
+   },
+   {
+    "k": "Each extra property",
+    "sub": "In either case",
+    "v": "+ €50"
+   }
+  ],
+  "total": {
+   "k": "Example: mortgage, 2 properties",
+   "v": "€750",
+   "sub": "≈ CHF 692 · $839"
+  },
+  "source": "Sources: Justiça.gov.pt, Balcão Casa Pronta (updated Oct 22, 2025); ECB, Oct 23, 2026"
+ },
+ "fr": {
+  "format": "cost-sheet",
+  "kicker": "La note de l'acte",
+  "h": "Acte et enregistrement, au même guichet.",
+  "tag": "Frais officiels · Casa Pronta · hors honoraires",
+  "rows": [
+   {
+    "k": "Achat, un enregistrement",
+    "sub": "L'achat seul",
+    "v": "375 €"
+   },
+   {
+    "k": "Achat avec hypothèque",
+    "sub": "Plus d'un acte d'enregistrement",
+    "v": "700 €"
+   },
+   {
+    "k": "Chaque bien supplémentaire",
+    "sub": "Dans les deux cas",
+    "v": "+ 50 €"
+   }
+  ],
+  "total": {
+   "k": "Exemple : hypothèque, 2 biens",
+   "v": "750 €",
+   "sub": "≈ 692 CHF · 839 $"
+  },
+  "source": "Sources : Justiça.gov.pt, Balcão Casa Pronta (mis à jour le 22/10/2025) ; BCE, 23/10/2026"
+ }
+}

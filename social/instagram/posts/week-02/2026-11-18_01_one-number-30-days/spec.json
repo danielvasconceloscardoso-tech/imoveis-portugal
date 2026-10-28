@@ -1,0 +1,26 @@
+{
+ "pt": {
+  "format": "one-number",
+  "kicker": "Um número",
+  "big": "30",
+  "h": "30 dias para pagar o IMT, a contar da liquidação.",
+  "note": "O IMT paga-se no dia da liquidação ou nos 30 dias seguintes. Se conta com uma devolução por uma das exceções, paga primeiro o valor completo e pede a diferença depois.",
+  "source": "Fontes: Decreto-Lei 97/2026 (Código do IMT, art. 36.º, n.º 1); art. 17.º, n.os 10 a 12"
+ },
+ "en": {
+  "format": "one-number",
+  "kicker": "One number",
+  "big": "30",
+  "h": "30 days to pay the IMT, counted from the assessment.",
+  "note": "IMT is paid on the day it's assessed or within the following 30 days. If you expect a refund under one of the exceptions, you pay the full amount first and claim the difference afterwards.",
+  "source": "Sources: Decree-Law 97/2026 (IMT Code, art. 36(1)); art. 17(10) to (12)"
+ },
+ "fr": {
+  "format": "one-number",
+  "kicker": "Un chiffre",
+  "big": "30",
+  "h": "30 jours pour payer l'IMT, à compter de la liquidation.",
+  "note": "L'IMT se paie le jour de la liquidation ou dans les 30 jours qui suivent. Si vous attendez un remboursement au titre d'une exception, vous payez d'abord le montant complet et demandez la différence ensuite.",
+  "source": "Sources : Décret-loi 97/2026 (Code de l'IMT, art. 36, n.º 1) ; art. 17, n.os 10 à 12"
+ }
+}

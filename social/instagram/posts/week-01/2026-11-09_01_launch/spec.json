@@ -1,0 +1,26 @@
+{
+ "pt": {
+  "format": "one-number",
+  "kicker": "Imóveis Portugal",
+  "big": "6",
+  "h": "Seis edições, a partir de 1 de dezembro.",
+  "note": "Luxemburgo, França, Suíça, Brasil, Estados Unidos e Israel. Como comprar casa em Portugal a partir de fora, com os números e a fonte oficial de cada um. A newsletter chega às quintas-feiras, a partir de 3 de dezembro.",
+  "source": "Primeira newsletter: quinta-feira, 3 de dezembro de 2026"
+ },
+ "en": {
+  "format": "one-number",
+  "kicker": "Imóveis Portugal",
+  "big": "6",
+  "h": "Six editions, launching December 1.",
+  "note": "Luxembourg, France, Switzerland, Brazil, the USA and Israel. How to buy a home in Portugal from abroad, with the numbers and the official source for each one. The newsletter arrives on Thursdays, from December 3.",
+  "source": "First newsletter: Thursday, December 3, 2026"
+ },
+ "fr": {
+  "format": "one-number",
+  "kicker": "Imóveis Portugal",
+  "big": "6",
+  "h": "Six éditions, dès le 1er décembre.",
+  "note": "Luxembourg, France, Suisse, Brésil, États-Unis et Israël. Acheter un logement au Portugal depuis l'étranger, avec les chiffres et la source officielle de chacun. La newsletter arrive le jeudi, à partir du 3 décembre.",
+  "source": "Première newsletter : jeudi 3 décembre 2026"
+ }
+}

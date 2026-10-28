@@ -1,0 +1,35 @@
+{
+ "fr": {
+  "format": "cost-sheet",
+  "kicker": "Le compte complet, en francs",
+  "h": "Un bien à 400 000 €, tout compris.",
+  "tag": "Calcul illustratif · non-résident",
+  "rows": [
+   {
+    "k": "Prix",
+    "v": "400 000 €"
+   },
+   {
+    "k": "IMT",
+    "sub": "7,5 %, taux unique, sauf exception",
+    "v": "30 000 €"
+   },
+   {
+    "k": "Droit de timbre",
+    "sub": "0,8 %",
+    "v": "3 200 €"
+   },
+   {
+    "k": "Acte et enregistrement",
+    "sub": "Casa Pronta",
+    "v": "375 €"
+   }
+  ],
+  "total": {
+   "k": "Total",
+   "v": "433 575 €",
+   "sub": "≈ 400 060 CHF"
+  },
+  "source": "Sources : Code de l'IMT, art. 17, n.º 10 ; droit de timbre, poste 1.1 ; Casa Pronta ; BCE, 23/10/2026"
+ }
+}

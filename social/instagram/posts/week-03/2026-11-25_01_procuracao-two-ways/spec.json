@@ -1,0 +1,113 @@
+{
+ "pt": {
+  "source": "Fonte: Consulados-Gerais de Portugal em Newark e Paris, Procuração",
+  "slides": [
+   {
+    "format": "reader-question",
+    "kicker": "Pergunta de leitor",
+    "q": "Tenho de estar em Portugal para assinar?",
+    "a": "Não. A procuração pode ser feita de 2 maneiras, a partir do país onde vive."
+   },
+   {
+    "format": "text",
+    "kicker": "Maneira 1 · O consulado",
+    "h": "Feita num consulado português, não precisa de mais nada para valer em Portugal."
+   },
+   {
+    "format": "text",
+    "kicker": "Maneira 2 · O seu notário",
+    "h": "Feita num notário do país onde vive, leva a Apostila de Haia."
+   },
+   {
+    "format": "text",
+    "kicker": "O que diz",
+    "h": "Quem o representa, para que imóvel, e o que pode assinar e pagar."
+   },
+   {
+    "format": "text",
+    "kicker": "Quem a recebe",
+    "h": "Muitas vezes um advogado, que assina o contrato-promessa e a escritura em seu nome."
+   },
+   {
+    "format": "end",
+    "kicker": "Próximo passo",
+    "h": "Leia a resposta.",
+    "body": "Link na bio, página Perguntas."
+   }
+  ]
+ },
+ "en": {
+  "source": "Source: Consulates General of Portugal in Newark and Paris, power of attorney",
+  "slides": [
+   {
+    "format": "reader-question",
+    "kicker": "Reader's question",
+    "q": "Do I have to be in Portugal to sign?",
+    "a": "No. A power of attorney can be signed in 2 ways, from where you live."
+   },
+   {
+    "format": "text",
+    "kicker": "Way 1 · The consulate",
+    "h": "Signed at a Portuguese consulate, it needs nothing more to take effect in Portugal."
+   },
+   {
+    "format": "text",
+    "kicker": "Way 2 · Your notary",
+    "h": "Signed before a notary where you live, it carries the Hague Apostille."
+   },
+   {
+    "format": "text",
+    "kicker": "What it says",
+    "h": "Who acts for you, for which property, and what they may sign and pay."
+   },
+   {
+    "format": "text",
+    "kicker": "Who holds it",
+    "h": "Often a lawyer, who signs the promissory contract and the deed in your name."
+   },
+   {
+    "format": "end",
+    "kicker": "Next step",
+    "h": "Read the answer.",
+    "body": "Link in bio, FAQ page."
+   }
+  ]
+ },
+ "fr": {
+  "source": "Source : Consulats généraux du Portugal à Newark et Paris, procuration",
+  "slides": [
+   {
+    "format": "reader-question",
+    "kicker": "Question de lecteur",
+    "q": "Dois-je être au Portugal pour signer ?",
+    "a": "Non. La procuration peut se faire de 2 façons, depuis votre pays."
+   },
+   {
+    "format": "text",
+    "kicker": "Façon 1 · Le consulat",
+    "h": "Signée dans un consulat du Portugal, elle n'a besoin de rien d'autre pour valoir au Portugal."
+   },
+   {
+    "format": "text",
+    "kicker": "Façon 2 · Votre notaire",
+    "h": "Signée devant un notaire de votre pays, elle porte l'apostille de La Haye."
+   },
+   {
+    "format": "text",
+    "kicker": "Ce qu'elle dit",
+    "h": "Qui vous représente, pour quel bien, et ce qu'il peut signer et payer."
+   },
+   {
+    "format": "text",
+    "kicker": "Qui la reçoit",
+    "h": "Souvent un avocat, qui signe le compromis et l'acte en votre nom."
+   },
+   {
+    "format": "end",
+    "kicker": "Étape suivante",
+    "h": "Lisez la réponse.",
+    "body": "Lien dans la bio, page Questions."
+   }
+  ]
+ }
+}

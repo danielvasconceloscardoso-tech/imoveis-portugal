@@ -1,0 +1,47 @@
+{
+ "frames": [
+  {
+   "pt": {
+    "format": "story-text",
+    "kicker": "Sondagem",
+    "h": "Em Paris, vale 1,9 m² em Lisboa.",
+    "big": "1 m²",
+    "body": "Diga-nos onde vive. Esta noite, o mesmo metro quadrado no Luxemburgo e em Genebra.",
+    "source": "Fontes: Notaires de France, 2026 T3; INE, 2.º trimestre de 2026"
+   },
+   "en": {
+    "format": "story-text",
+    "kicker": "Poll",
+    "h": "In Paris, it's worth 1.9 m² in Lisbon.",
+    "big": "1 m²",
+    "body": "Tell us where you live. Tonight, the same square metre in Luxembourg and Geneva.",
+    "source": "Sources: Notaires de France, Q3 2026; INE, Q2 2026"
+   },
+   "fr": {
+    "format": "story-text",
+    "kicker": "Sondage",
+    "h": "À Paris, il vaut 1,9 m² à Lisbonne.",
+    "big": "1 m²",
+    "body": "Dites-nous où vous vivez. Ce soir, le même mètre carré à Luxembourg et à Genève.",
+    "source": "Sources : Notaires de France, T3 2026 ; INE, T2 2026"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-card",
+    "kicker": "Novo post",
+    "img": "/social/instagram/posts/week-04/2026-12-06_01_here-vs-there-europe/slide-04-pt.png"
+   },
+   "en": {
+    "format": "story-card",
+    "kicker": "New post",
+    "img": "/social/instagram/posts/week-04/2026-12-06_01_here-vs-there-europe/slide-04-en.png"
+   },
+   "fr": {
+    "format": "story-card",
+    "kicker": "Nouveau post",
+    "img": "/social/instagram/posts/week-04/2026-12-06_01_here-vs-there-europe/slide-04-fr.png"
+   }
+  }
+ ]
+}

@@ -1,0 +1,78 @@
+{
+ "frames": [
+  {
+   "pt": {
+    "format": "story-text",
+    "kicker": "Verdade ou mito",
+    "h": "Para ter NIF, tem de ir a Portugal.",
+    "body": "Vote. A resposta sai hoje às 19:00 no feed."
+   },
+   "en": {
+    "format": "story-text",
+    "kicker": "True or myth",
+    "h": "To get a NIF, you have to go to Portugal.",
+    "body": "Vote. The answer is on the feed tonight at 19:00."
+   },
+   "fr": {
+    "format": "story-text",
+    "kicker": "Vrai ou mythe",
+    "h": "Pour avoir un NIF, il faut aller au Portugal.",
+    "body": "Votez. La réponse arrive ce soir à 19h sur le fil."
+   }
+  },
+  {
+   "pt": {
+    "format": "story-card",
+    "kicker": "Aqui e lá",
+    "img": "/social/instagram/posts/week-01/2026-11-10_01_here-vs-there-paris/card-pt.png"
+   },
+   "en": {
+    "format": "story-card",
+    "kicker": "Here and there",
+    "img": "/social/instagram/posts/week-01/2026-11-10_01_here-vs-there-paris/card-en.png"
+   },
+   "fr": {
+    "format": "story-card",
+    "kicker": "Ici et là-bas",
+    "img": "/social/instagram/posts/week-01/2026-11-10_01_here-vs-there-paris/card-fr.png"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-text",
+    "kicker": "Pergunte",
+    "h": "A sua pergunta sobre o NIF, a partir de França ou de outro país.",
+    "body": "Respondemos com a regra e a fonte oficial."
+   },
+   "en": {
+    "format": "story-text",
+    "kicker": "Ask us",
+    "h": "Your NIF question, from France or anywhere else.",
+    "body": "We answer with the rule and its official source."
+   },
+   "fr": {
+    "format": "story-text",
+    "kicker": "Vos questions",
+    "h": "Votre question sur le NIF, depuis la France ou ailleurs.",
+    "body": "Nous répondons avec la règle et sa source officielle."
+   }
+  },
+  {
+   "pt": {
+    "format": "story-card",
+    "kicker": "A resposta: mito",
+    "img": "/social/instagram/posts/week-01/2026-11-10_02_myth-vs-law-nif/card-pt.png"
+   },
+   "en": {
+    "format": "story-card",
+    "kicker": "The answer: myth",
+    "img": "/social/instagram/posts/week-01/2026-11-10_02_myth-vs-law-nif/card-en.png"
+   },
+   "fr": {
+    "format": "story-card",
+    "kicker": "La réponse : mythe",
+    "img": "/social/instagram/posts/week-01/2026-11-10_02_myth-vs-law-nif/card-fr.png"
+   }
+  }
+ ]
+}

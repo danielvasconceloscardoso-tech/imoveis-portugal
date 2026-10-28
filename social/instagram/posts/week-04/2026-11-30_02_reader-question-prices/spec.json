@@ -1,0 +1,23 @@
+{
+ "pt": {
+  "format": "reader-question",
+  "kicker": "A pergunta mais pesquisada",
+  "q": "Quanto custa uma casa em Portugal?",
+  "a": "A mediana do INE é 2 264 € por m², nas casas vendidas no ano até junho de 2026, mais 17,7% do que um ano antes. A esse valor, 100 m² custam cerca de 226 400 €. Em Lisboa, a mediana é 5 192 €; no Porto, 3 631 €; em Grândola, o concelho da Comporta, 2 543 €.",
+  "source": "Fonte: INE, indicador 0012234, 2.º trimestre de 2026"
+ },
+ "en": {
+  "format": "reader-question",
+  "kicker": "Searched on Google",
+  "q": "What are Portugal house prices in US dollars?",
+  "a": "The INE median is €2,264 per m², about $2,534, for homes sold in the year to June 2026, up 17.7% on a year earlier. At that price, 100 m² costs about €226,400, or $253,400. In Lisbon the median is €5,192; in Porto, €3,631; in Grândola, Comporta's municipality, €2,543.",
+  "source": "Sources: INE, indicator 0012234, Q2 2026; ECB, 23 Oct 2026"
+ },
+ "fr": {
+  "format": "reader-question",
+  "kicker": "Recherché sur Google",
+  "q": "Quel est le prix de l'immobilier au Portugal en 2026 ?",
+  "a": "Le prix médian INE est de 2 264 € le m² pour les logements vendus sur l'année close en juin 2026, en hausse de 17,7 % sur un an. À ce prix, 100 m² coûtent environ 226 400 €. À Lisbonne, la médiane est de 5 192 € ; à Porto, 3 631 € ; à Grândola, la commune de Comporta, 2 543 €.",
+  "source": "Source : INE, indicateur 0012234, T2 2026"
+ }
+}

@@ -1,0 +1,84 @@
+{
+ "frames": [
+  {
+   "pt": {
+    "format": "story-text",
+    "kicker": "Escritura com hipoteca",
+    "big": "700 €",
+    "h": "Na Casa Pronta. Sem hipoteca, 375 €.",
+    "source": "Fonte: Justiça.gov.pt, Casa Pronta"
+   },
+   "en": {
+    "format": "story-text",
+    "kicker": "Deed with a mortgage",
+    "big": "€700",
+    "h": "At Casa Pronta. Without one, €375.",
+    "source": "Source: Justiça.gov.pt, Casa Pronta"
+   },
+   "fr": {
+    "format": "story-text",
+    "kicker": "Acte avec hypothèque",
+    "big": "700 €",
+    "h": "À la Casa Pronta. Sans hypothèque, 375 €.",
+    "source": "Source : Justiça.gov.pt, Casa Pronta"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-card",
+    "kicker": "Novo no feed",
+    "img": "/social/instagram/posts/week-03/2026-11-26_01_cost-sheet-casa-pronta/card-pt.png"
+   },
+   "en": {
+    "format": "story-card",
+    "kicker": "New on the feed",
+    "img": "/social/instagram/posts/week-03/2026-11-26_01_cost-sheet-casa-pronta/card-en.png"
+   },
+   "fr": {
+    "format": "story-card",
+    "kicker": "Nouveau sur le fil",
+    "img": "/social/instagram/posts/week-03/2026-11-26_01_cost-sheet-casa-pronta/card-fr.png"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-card",
+    "kicker": "Novo no feed",
+    "img": "/social/instagram/posts/week-03/2026-11-26_02_ten-years-cascais/card-pt.png"
+   },
+   "en": {
+    "format": "story-card",
+    "kicker": "New on the feed",
+    "img": "/social/instagram/posts/week-03/2026-11-26_02_ten-years-cascais/card-en.png"
+   },
+   "fr": {
+    "format": "story-card",
+    "kicker": "Nouveau sur le fil",
+    "img": "/social/instagram/posts/week-03/2026-11-26_02_ten-years-cascais/card-fr.png"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-text",
+    "kicker": "Sondagem",
+    "h": "Assinar por procuração, ou vir cá para a escritura.",
+    "body": "Os dois caminhos levam à mesma casa.",
+    "source": "Fonte: consulados de Portugal"
+   },
+   "en": {
+    "format": "story-text",
+    "kicker": "Poll",
+    "h": "Sign by power of attorney, or fly in for the deed.",
+    "body": "Both roads lead to the same home.",
+    "source": "Source: Portuguese consulates"
+   },
+   "fr": {
+    "format": "story-text",
+    "kicker": "Sondage",
+    "h": "Signer par procuration, ou venir pour l'acte.",
+    "body": "Les deux chemins mènent au même logement.",
+    "source": "Source : consulats du Portugal"
+   }
+  }
+ ]
+}

@@ -1,0 +1,59 @@
+{
+ "pt": {
+  "format": "then-and-now",
+  "kicker": "Antes e agora",
+  "h": "Os mesmos 100 000 € no Porto, dez anos depois.",
+  "items": [
+   {
+    "place": "Porto, 1.º trimestre de 2016",
+    "m2": 91.91176470588235,
+    "v": "92 m²"
+   },
+   {
+    "place": "Porto, 2.º trimestre de 2026",
+    "m2": 27.540622418066647,
+    "v": "28 m²"
+   }
+  ],
+  "note": "100 000 € a dividir pela mediana do INE no Porto: 1 088 € por m² em 2016, 3 631 € em 2026.",
+  "source": "Fonte: INE, preços medianos por m², 2016 a 2026"
+ },
+ "en": {
+  "format": "then-and-now",
+  "kicker": "Then and now",
+  "h": "The same €100,000 in Porto, ten years on.",
+  "items": [
+   {
+    "place": "Porto, Q1 2016",
+    "m2": 91.91176470588235,
+    "v": "92 m²"
+   },
+   {
+    "place": "Porto, Q2 2026",
+    "m2": 27.540622418066647,
+    "v": "28 m²"
+   }
+  ],
+  "note": "€100,000 divided by the INE median in Porto: €1,088 per m² in 2016, €3,631 in 2026.",
+  "source": "Source: INE, median prices per m², 2016 to 2026"
+ },
+ "fr": {
+  "format": "then-and-now",
+  "kicker": "Avant et maintenant",
+  "h": "Les mêmes 100 000 € à Porto, dix ans plus tard.",
+  "items": [
+   {
+    "place": "Porto, T1 2016",
+    "m2": 91.91176470588235,
+    "v": "92 m²"
+   },
+   {
+    "place": "Porto, T2 2026",
+    "m2": 27.540622418066647,
+    "v": "28 m²"
+   }
+  ],
+  "note": "100 000 € divisés par le prix médian INE à Porto : 1 088 € le m² en 2016, 3 631 € en 2026.",
+  "source": "Source : INE, prix médians au m², 2016 à 2026"
+ }
+}
