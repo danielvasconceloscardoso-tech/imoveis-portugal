@@ -70,10 +70,10 @@ const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("h
 <section class="h2-hero" aria-labelledby="h2-h1">
   {/* The film (prompt 33 §1): the Algarve cliffs from the air, a morning beach near Lagos, the Atlantic in late light; licensed clips (Pixabay, Mixkit), graded as one, silent, looping. The poster paints first and is the still for reduced motion. */}
   <picture class="h2-hero-media h2-hero-poster">
-    <source type="image/avif" srcset="/video/hero-portugal-poster.avif" />
-    <img src="/video/hero-portugal-poster.webp" width="1280" height="720" alt="" fetchpriority="high" />
+    <source type="image/avif" srcset="/video/hero-portugal-poster.avif?v=6e9a1bc" />
+    <img src="/video/hero-portugal-poster.webp?v=6e9a1bc" width="1280" height="720" alt="" fetchpriority="high" />
   </picture>
-  <video class="h2-hero-media h2-hero-film" autoplay muted loop playsinline preload="auto" data-hero-film aria-hidden="true"><source src="/video/hero-portugal.mp4" type="video/mp4" /></video>
+  <video class="h2-hero-media h2-hero-film" autoplay muted loop playsinline preload="auto" data-hero-film aria-hidden="true"><source src="/video/hero-portugal.mp4?v=6e9a1bc" type="video/mp4" /></video>
   <div class="h2-hero-text">
     <h1 id="h2-h1">{c(`home2.h1.${ed}`, lang)}</h1>
     <p>{c("home2.lede", lang)}</p>
