@@ -196,7 +196,7 @@ export function initMapV3(root: HTMLElement) {
     clearTimeout(lostT); stopTour(); stopPlay(); rotating = false;
     markers.forEach((m) => m.m.remove()); markers = [];
     try { map?.remove(); } catch { /* already gone */ }
-    map = null; loading = null; parLoading = null; root.classList.remove("is-live");
+    map = null; loading = null; parLoading = null; clusterOn = false; root.classList.remove("is-live");
   }
   async function rebuild(toFlat: boolean) { await teardown(); if (toFlat) { flat = true; dimButtons(); } load(); }
   function load(): Promise<void> {
@@ -602,7 +602,7 @@ export function initMapV3(root: HTMLElement) {
     let stop = false; tourAbort = () => { stop = true; map.stop(); stopPlay(); caption(""); root.classList.remove("is-touring"); };
     root.classList.add("is-touring");
     const fly = (o: any, ms: number, text: string) => new Promise<void>((res) => { if (stop) return res(); caption(text); map.flyTo({ ...o, duration: reduce() ? 0 : ms, essential: true, curve: 1.2, easing: (t: number) => t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2 }); map.once("moveend", () => setTimeout(res, reduce() ? 0 : 450)); });
-    const at2 = (s: string, z: number, b: number, p = 58) => { const x = byS.get(s)!; return { center: [x.x, x.y], zoom: z, bearing: b, pitch: flat ? 0 : p }; };
+    const at2 = (s: string, z: number, b: number, p = 58) => { const x = byS.get(s) ?? byS.get("lisboa")!; return { center: [x.x, x.y], zoom: z, bearing: b, pitch: flat ? 0 : p }; };
     if (kind === "coast") {
       for (const [s, b] of [["porto", -20], ["aveiro", -12], ["figueira-da-foz", -8], ["nazare", -4], ["peniche", 0], ["cascais", 8], ["lisboa", 14], ["setubal", 20], ["grandola", 26]] as [string, number][]) { if (stop) break; await fly(at2(s, 9.2, b), 2000, placeCap(s)); }
     } else if (kind === "golf") {
@@ -610,7 +610,7 @@ export function initMapV3(root: HTMLElement) {
       await fly(at2("albufeira", 8.2, -20, 50), 2600, L.golfcap.replace("{n}", n));
       for (const [s, b] of [["lagos", -12], ["portimao", -6], ["albufeira", 2], ["loule", 10], ["tavira", 18], ["vila-real-de-santo-antonio", 24]] as [string, number][]) { if (stop) break; await fly(at2(s, 10.4, b, 62), 2400, placeCap(s)); }
     } else if (kind === "madeira") {
-      for (const [s, z, b] of [["funchal", 9.4, -10], ["camara-de-lobos", 10, -18], ["calheta", 9.8, -26], ["porto-moniz", 10, -36], ["santana", 9.8, -44], ["machico", 10, -52], ["porto-santo", 9.6, -60]] as [string, number, number][]) { if (stop) break; await fly(at2(s, z, b, 55), 2300, placeCap(s)); }
+      for (const [s, z, b] of [["funchal", 9.4, -10], ["camara-de-lobos", 10, -18], ["calheta-r-a-m", 9.8, -26], ["porto-moniz", 10, -36], ["santana", 9.8, -44], ["machico", 10, -52], ["porto-santo", 9.6, -60]] as [string, number, number][]) { if (stop) break; await fly(at2(s, z, b, 55), 2300, placeCap(s)); }
     } else if (kind.startsWith("project:")) {
       // Prompts 38 and 39 §2.5: from the Atlantic over the municipality seat to the listed project, whose card opens.
       const p = projects.find((x) => x.id === kind.slice(8)), m = p ? byS.get(p.muni) : undefined;
