@@ -5,8 +5,7 @@ One identity on every platform (28 Oct 2026).
 | File | Use |
 | --- | --- |
 | logo-800.png | Profile picture everywhere: LinkedIn, Instagram, Facebook, YouTube, Reddit, Quora. Square; safe for the circle crop. |
-| cover-linkedin-2256x382.png | LinkedIn page cover (1128×191, 2×), photo only: no text, so nothing is cut on mobile or under the logo |
-| cover-wide-1584x396.png | Alternative wide cover (4:1), photo only |
+| cover-linkedin-2256x382.png | LinkedIn page cover (1128×191, 2×). Use this one on LinkedIn, not the Facebook cover |
 | cover-facebook-1640x624.png | Facebook page cover |
 
 - **Colours:** green #1F3D35, ivory #F6F3EC, gold diamond #C9B48A.
