@@ -53,7 +53,7 @@ export function initMapV3(root: HTMLElement) {
   const dimAsked = q.get("dim") ?? (q.get("flat") === "1" ? "2d" : null) ?? dimSaved;
   let flat = reduce() || (dimAsked ? dimAsked === "2d" : weak() || matchMedia("(max-width: 760px), (pointer: coarse)").matches);
   let selected: string | null = q.get("place"), selPar: string | null = q.get("parish"), pinA: string | null = null;
-  let overlays = { golf: q.get("golf") === "1", beach: q.get("beach") === "1", devs: q.get("devs") === "1" };
+  let overlays = { golf: q.get("golf") === "1", beach: q.get("beach") === "1", devs: mode === "page" ? q.get("devs") !== "0" : q.get("devs") === "1" };
   let P: { quarters: string[]; munis: Record<string, Series> } | null = null;
   let qi = -1;  // quarter index; -1 = latest
   let map: any = null, ml: any = null, loading: Promise<void> | null = null;
@@ -63,6 +63,7 @@ export function initMapV3(root: HTMLElement) {
   let breaks: Record<Layer, number[]> = {} as any;
   let tourAbort: (() => void) | null = null;
   const projects: Proj[] = cfg.projects || [];
+  const projMunis = new Set(projects.map((p) => p.muni));
   const last = () => (P ? P.quarters.length - 1 : 0);
   const at = () => (qi < 0 ? last() : qi);
   const qLabel = (k: string) => { const [y, qq] = k.split("-Q"); return L.qfmt.replace("{q}", qq).replace("{y}", y); };
@@ -72,7 +73,8 @@ export function initMapV3(root: HTMLElement) {
     const set = (k: string, v: string | null) => (v ? p.set(k, v) : p.delete(k));
     set("budget", String(Math.round(budget))); set("layer", layer === "price" ? null : layer); set("place", selected); set("parish", selPar);
     set("q", qi >= 0 && P ? P.quarters[qi] : null);
-    for (const k of ["golf", "beach", "devs"] as const) set(k, overlays[k] ? "1" : null);
+    for (const k of ["golf", "beach"] as const) set(k, overlays[k] ? "1" : null);
+    set("devs", mode === "page" ? (overlays.devs ? null : "0") : overlays.devs ? "1" : null);  // prompt 39 §2.1: on by default on the map page
     history.replaceState(null, "", `${location.pathname}?${p}${location.hash}`);
   }
 
@@ -252,7 +254,11 @@ export function initMapV3(root: HTMLElement) {
       else map.jumpTo(home);
       if (q.get("q") && P && P.quarters.includes(q.get("q")!)) setQuarter(P.quarters.indexOf(q.get("q")!));
       if (overlays.golf) await drawGolf(); if (overlays.beach) await drawBeaches(); if (overlays.devs) drawProjects();
-      if (selPar) { await loadParishes(); selectParish(selPar); } else if (selected) select(selected);
+      if (selPar) { await loadParishes(); selectParish(selPar); } else if (selected) {
+        // Prompt 39 §2.6: a place with a listed project opens on the project card (the place card stays one tap back).
+        const pr = projects.find((x) => x.muni === selected);
+        if (pr) { select(selected, false); flyTo(pr.lon, pr.lat, 12.6); showProject(pr); } else select(selected);
+      }
       if (mode === "home" && !flat && !selected) startSpin();
       if (!flat) governor();
       map.on("click", (e: any) => { stopTour(); const gc = overlays.golf ? golfAt(e.point) : null; if (gc) { showGolf(gc); return; } const h = pick(e.point); if (!h) return; if (h.kind === "par") selectParish(h.key); else select(h.key); });
@@ -292,7 +298,7 @@ export function initMapV3(root: HTMLElement) {
     if (!map) return; const z = map.getZoom(), W = canvas.clientWidth, H = canvas.clientHeight;
     const want = features.map((f) => f.properties as Props).filter((p) => (BIG.includes(p.s) && z > (W < 700 ? 5.2 : 5.9)) || (z > 8.2 && p.a > 2) || z > 9.2);
     const placed: { x: number; y: number; w: number }[] = []; let h = "";
-    const rank = (p: Props) => { const i = BIG.indexOf(p.s); return i >= 0 ? i : 1000 - p.a; };
+    const rank = (p: Props) => { const i = BIG.indexOf(p.s); return i >= 0 ? i : projMunis.has(p.s) ? BIG.length : 1000 - p.a; };
     for (const p of want.sort((a, b) => rank(a) - rank(b))) {
       const c = map.project([p.x, p.y]); if (c.x < 0 || c.y < 0 || c.x > W || c.y > H) continue;
       const big = BIG.includes(p.s), w = p.n.length * (big ? 8.5 : 6.5) + 8;
@@ -493,13 +499,38 @@ export function initMapV3(root: HTMLElement) {
     }
     map.setLayoutProperty("beach", "visibility", overlays.beach ? "visible" : "none");
   }
-  let markers: any[] = [];
+  // Prompt 39 §2.2: one pin per listed project, visible from the opening view. Pins closer than 44 px on screen merge into
+  // one with a count; a tap on it zooms in until they part. DOM markers, so the same code works flat and on the 3D terrain.
+  let markers: { p: Proj; el: HTMLButtonElement; m: any; grp: Proj[] }[] = [], clusterOn = false, clT = 0;
   function drawProjects() {
-    markers.forEach((m) => m.remove()); markers = []; if (!overlays.devs || !map) return;
+    markers.forEach((x) => x.m.remove()); markers = []; if (!overlays.devs || !map) return;
     for (const p of projects) {
-      const el = document.createElement("button"); el.type = "button"; el.className = "m3-pin"; el.innerHTML = `<span>${esc(p.name)}<em>${L.sponsored}</em></span>`;
-      el.addEventListener("click", (e) => { e.stopPropagation(); showProject(p); });
-      markers.push(new ml.Marker({ element: el, anchor: "bottom" }).setLngLat([p.lon, p.lat]).addTo(map));
+      const el = document.createElement("button"); el.type = "button"; el.className = "m3-pin";
+      el.innerHTML = `<b class="m3-pin-n"></b><span>${esc(p.name)}<em>${L.sponsored}</em></span><i class="m3-pin-dot" aria-hidden="true"></i>`;
+      const x = { p, el, m: null as any, grp: [p] };
+      el.addEventListener("click", (e) => {
+        e.stopPropagation(); stopTour();
+        if (x.grp.length > 1) { const b = new ml.LngLatBounds(); x.grp.forEach((g) => b.extend([g.lon, g.lat])); map.fitBounds(b, { padding: 120, maxZoom: 14, duration: reduce() ? 0 : 900 }); return; }
+        if (map.getZoom() < 10) flyTo(p.lon, p.lat, 12.6);
+        showProject(p);
+      });
+      x.m = new ml.Marker({ element: el, anchor: "bottom" }).setLngLat([p.lon, p.lat]).addTo(map);
+      markers.push(x);
+    }
+    if (!clusterOn) { clusterOn = true; map.on("move", () => { if (!clT) clT = requestAnimationFrame(() => { clT = 0; clusterPins(); }); }); }
+    clusterPins();
+  }
+  function clusterPins() {
+    if (!map || !markers.length) return; const z = map.getZoom(), done = new Set<typeof markers[0]>();
+    const at = new Map(markers.map((x) => [x, map.project([x.p.lon, x.p.lat])]));
+    for (const a of markers) {
+      if (done.has(a)) continue; done.add(a); const ca = at.get(a)!; const grp = [a];
+      if (z < 14) for (const b of markers) if (!done.has(b)) { const cb = at.get(b)!; if (Math.hypot(ca.x - cb.x, ca.y - cb.y) < 44) { grp.push(b); done.add(b); } }
+      a.grp = grp.map((g) => g.p); a.el.style.display = "";
+      for (const b of grp.slice(1)) { b.grp = []; b.el.style.display = "none"; }
+      const n = grp.length; a.el.classList.toggle("is-cluster", n > 1); a.el.classList.toggle("is-named", n === 1 && z >= 10);  // §2.3: the name at city zoom
+      a.el.querySelector(".m3-pin-n")!.textContent = n > 1 ? String(n) : "";
+      a.el.setAttribute("aria-label", n > 1 ? `${n} · ${L.g.devs}` : a.p.name);
     }
   }
 
@@ -564,15 +595,14 @@ export function initMapV3(root: HTMLElement) {
       for (const [s, b] of [["lagos", -12], ["portimao", -6], ["albufeira", 2], ["loule", 10], ["tavira", 18], ["vila-real-de-santo-antonio", 24]] as [string, number][]) { if (stop) break; await fly(at2(s, 10.4, b, 62), 2400, placeCap(s)); }
     } else if (kind === "madeira") {
       for (const [s, z, b] of [["funchal", 9.4, -10], ["camara-de-lobos", 10, -18], ["calheta", 9.8, -26], ["porto-moniz", 10, -36], ["santana", 9.8, -44], ["machico", 10, -52], ["porto-santo", 9.6, -60]] as [string, number, number][]) { if (stop) break; await fly(at2(s, z, b, 55), 2300, placeCap(s)); }
-    } else if (kind === "marble") {
-      // Prompt 38: from the Atlantic over Porto and the Douro to Gondomar, settling on Marble Terrace; its card opens.
-      const p = projects.find((x) => x.id === "marble-terrace");
+    } else if (kind.startsWith("project:")) {
+      // Prompts 38 and 39 §2.5: from the Atlantic over the municipality seat to the listed project, whose card opens.
+      const p = projects.find((x) => x.id === kind.slice(8)), m = p ? byS.get(p.muni) : undefined;
       if (p) {
         await setOverlay("devs", true);
-        await fly({ center: [-9.05, 41.16], zoom: 9.4, bearing: 80, pitch: flat ? 0 : 50 }, 2400, "");
-        await fly({ center: [-8.64, 41.145], zoom: 12.2, bearing: 75, pitch: flat ? 0 : 60 }, 3600, placeCap("porto"));
-        await fly({ center: [-8.575, 41.135], zoom: 12.8, bearing: 60, pitch: flat ? 0 : 62 }, 2800, "Douro");
-        await fly({ center: [p.lon, p.lat], zoom: 15.6, bearing: 40, pitch: flat ? 0 : 64 }, 3800, `${p.name} · ${byS.get(p.muni)?.n ?? ""}`);
+        await fly({ center: [p.lon - 0.5, p.lat + 0.01], zoom: 9.4, bearing: 80, pitch: flat ? 0 : 50 }, 2400, "");
+        if (m) await fly({ center: [m.x, m.y], zoom: 12.2, bearing: 70, pitch: flat ? 0 : 60 }, 3600, placeCap(p.muni));
+        await fly({ center: [p.lon, p.lat], zoom: 15.6, bearing: 40, pitch: flat ? 0 : 64 }, 3800, `${p.name} · ${m?.n ?? ""}`);
         if (!stop) showProject(p, false);
       }
     } else if (kind === "time") {

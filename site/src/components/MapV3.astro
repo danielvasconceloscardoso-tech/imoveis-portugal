@@ -75,7 +75,7 @@ const amount = Math.round(300000 * (fx ? fx.rate : 1));
         <div class="m3-chips" role="group" aria-label={k("layers")}>
           {chips.map(([id, key], i) => <button type="button" class="m3-chip" data-layer={id} aria-pressed={i === 0 ? "true" : "false"}>{k(key)}</button>)}
           <span class="m3-sep" aria-hidden="true"></span>
-          {overlays.map(([id, key]) => <button type="button" class="m3-chip m3-chip-o" data-overlay={id} aria-pressed="false">{k(key)}</button>)}
+          {overlays.map(([id, key]) => <button type="button" class="m3-chip m3-chip-o" data-overlay={id} aria-pressed={id === "devs" && PROJECTS.length ? "true" : "false"}>{k(key)}</button>)}
         </div>
       )}
       <div class="m3-seg m3-dim" role="group" aria-label="2D / 3D">
@@ -105,7 +105,7 @@ const amount = Math.round(300000 * (fx ? fx.rate : 1));
           </div>
           <div class="m3-tours" role="group" aria-label={k("tours")}>
             {(["coast", "golf", "madeira", "time"] as const).map((t) => <button type="button" class="m3-tour" data-tour={t}>{k(`tour.${t}`)}</button>)}
-            {PROJECTS.some((p) => p.id === "marble-terrace") && <button type="button" class="m3-tour" data-tour="marble">{c("showb.tour", lang)}</button>}
+            {PROJECTS.slice(0, 1).map((p) => <button type="button" class="m3-tour" data-tour={`project:${p.id}`}>{p.name}, {MAP_MUNIS.find((m) => m.s === p.muni)?.n ?? ""}</button>)}
           </div>
         </div>
       )}
