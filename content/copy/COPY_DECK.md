@@ -3500,9 +3500,9 @@ How to edit:
 - FR: Comment le bien passe-t-il au nom des héritiers ?
 
 ### q.sell.filing.a
-- PT: Sim. O cabeça-de-casal e os herdeiros comunicam o óbito e os bens no modelo oficial até ao fim do 3.º mês seguinte, mesmo quando estão isentos do imposto. Com motivo justificado, as Finanças podem dar até 60 dias a mais.
-- EN: Yes. The head of the estate and the heirs report the death and the assets on the official form by the end of the third following month, even when they are exempt from the tax. For a justified reason, the tax office can grant up to 60 more days.
-- FR: Oui. L'administrateur de la succession et les héritiers déclarent le décès et les biens sur le formulaire officiel avant la fin du troisième mois suivant, même s'ils sont exonérés. Pour un motif justifié, les Finances peuvent accorder jusqu'à 60 jours de plus.
+- PT: Sim: o cabeça-de-casal e os herdeiros comunicam o óbito e os bens no modelo oficial até ao fim do 3.º mês seguinte, mesmo quando estão isentos do imposto. Com motivo justificado, as Finanças podem dar até 60 dias a mais.
+- EN: Yes: the head of the estate and the heirs report the death and the assets on the official form by the end of the third following month, even when they are exempt from the tax. For a justified reason, the tax office can grant up to 60 more days.
+- FR: Oui : l'administrateur de la succession et les héritiers déclarent le décès et les biens sur le formulaire officiel avant la fin du troisième mois suivant, même s'ils sont exonérés. Pour un motif justifié, les Finances peuvent accorder jusqu'à 60 jours de plus.
 
 ### q.sell.filing.q
 - PT: Tenho de comunicar a herança às Finanças?
@@ -3790,9 +3790,9 @@ How to edit:
 - FR: Ai-je besoin d'un NIF ?
 
 ### q.nif.a
-- PT: Sim, antes de assinar. Pede-se online através de um representante legal, ou presencialmente. Não precisa de representante fiscal para o pedir.
-- EN: Yes, before you sign. You can request it online through a legal representative, or in person. You don't need a tax representative to get it.
-- FR: Oui, avant de signer. Il se demande en ligne par un représentant légal, ou sur place. Pas besoin de représentant fiscal pour l'obtenir.
+- PT: Sim, antes de assinar, e pede-se online através de um representante legal, ou presencialmente. Não precisa de representante fiscal para o pedir.
+- EN: Yes, before you sign, and you can request it online through a legal representative, or in person. You don't need a tax representative to get it.
+- FR: Oui, avant de signer, et il se demande en ligne par un représentant légal, ou sur place. Pas besoin de représentant fiscal pour l'obtenir.
 
 ### q.rep.eu.q
 - PT: Preciso de representante fiscal?
@@ -4678,6 +4678,11 @@ How to edit:
 - PT: {n} de {t} etapas feitas
 - EN: {n} of {t} steps done
 - FR: {n} étapes sur {t} faites
+
+### stepof
+- PT: Passo {n} de {t}
+- EN: Step {n} of {t}
+- FR: Étape {n} sur {t}
 
 ### st.smoney.need.2
 - PT: O comprovativo da venda para o seu banco

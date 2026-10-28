@@ -26,6 +26,10 @@ const sup = (ns: number[]) => ns.map((i) => `<a class="sup" href="#fonte-${i}">$
 // Which calculator field takes the reader's figure.
 const FIELD: Record<string, string> = { cost: "price", payment: "price", rent: "price", gains: "sale" };
 const DOORS: Door[] = ["buy", "sell"];
+// Prompt 39 §1: no paragraph longer than two sentences on the path; the rest is one link away (the page, or the Articles hub).
+const sentences = (t: string) => t.split(/(?<=[.!?])\s+(?=[A-ZÀ-ÝÉ«"])/);
+const long = (t: string) => sentences(t).length > 2;
+const two = (t: string) => (long(t) ? sentences(t).slice(0, 2).join(" ") : t);
 const routes = DOORS.map((door) => ({
   door,
   st: stationsFor(door, ed).map((s) => ({
@@ -48,7 +52,7 @@ const rate = cur ? RATE(cur).rate : 0;
 ---
 <V2 lang={lang} ed={ed} page="journey" title={`${c("path.h1", lang)} · ${edName(ed, lang)} | Imóveis Portugal`} description={c("path.lede", lang, vars)} sticky={null}>
   <div class="path" data-path data-map={pathFor(lang, ed, "map")} data-consult={pathFor(lang, ed, "consult")} data-locale={HTML_LANG[lang]} data-cur={cur ?? ""} data-rate={rate}
-    data-progress={c("path.progress", lang)} data-local={c("path.local", lang)} data-copied={c("path.copied", lang)} data-here={c("path.here", lang)} data-done={c("path.done", lang)} data-door="buy">
+    data-progress={c("path.progress", lang)} data-stepof={c("path.stepof", lang)} data-local={c("path.local", lang)} data-copied={c("path.copied", lang)} data-here={c("path.here", lang)} data-done={c("path.done", lang)} data-door="buy">
     {/* Before first paint: the answers already given (link or device) set the layout, so nothing moves when the script loads. */}
     <script is:inline>(function(){var r=document.currentScript.parentElement;r.classList.add("is-js");try{var s=JSON.parse(localStorage.getItem("ip.path")||"{}"),q=new URLSearchParams(location.search),d=q.get("door");if(d==="buy"||d==="sell"){s.door=d;s.started=true}var b=Number(q.get("budget"))||s.budget||Number(localStorage.getItem("ip.budget"))||0;if(q.get("inh"))s.inh=q.get("inh")==="1";r.dataset.door=s.door==="sell"?"sell":"buy";r.classList.toggle("started",!!s.started);r.classList.toggle("high",b>=1e6);r.classList.toggle("inh",!!s.inh)}catch(e){}})();</script>
     <div class="frame read ph">
@@ -59,7 +63,7 @@ const rate = cur ? RATE(cur).rate : 0;
 
     <form class="frame read pstart" data-start>
       {/* Prompt 35 §3.1: with JavaScript, one question per screen that advances by itself; without it, everything at once. */}
-      <div class="pq-head" aria-hidden="true"><button type="button" class="pq-back" data-pq-back tabindex="-1"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><span class="pq-prog"><span data-pq-prog></span></span></div>
+      <div class="pq-head"><button type="button" class="pq-back" data-pq-back tabindex="-1" aria-label={c("flow.back", lang)}><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><span class="pq-prog"><span data-pq-prog></span></span></div>
       <div class="pq" data-q="1">
         <h2 class="pq-h">{c("pathx.door", lang)}</h2>
         <div class="pdoors">
@@ -99,10 +103,11 @@ const rate = cur ? RATE(cur).rate : 0;
       </div>
     </form>
 
+    {/* Prompt 39 §1: one station per screen. This bar is the fixed top of every step: "Back", "Step 3 of 7", the answers. */}
     <div class="frame read pbar" data-bar>
-      <p><b data-sum></b> · <button type="button" class="linkish" data-change>{c("path.change", lang)}</button></p>
+      <div class="pb-row"><button type="button" class="pq-back" data-st-back aria-label={c("flow.back", lang)}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><span class="pb-step" data-stepof-t></span><button type="button" class="linkish" data-change>{c("path.change", lang)}</button></div>
       <div class="pprog" role="progressbar" aria-valuemin="0" data-prog><span></span></div>
-      <p class="small" data-prog-t></p>
+      <p class="small"><b data-sum></b> · <span data-prog-t></span></p>
     </div>
 
     {routes.map((r) => (
@@ -125,7 +130,7 @@ const rate = cur ? RATE(cur).rate : 0;
                   {s.qs.map((q) => (
                     <details class="pqa">
                       <summary>{c(q.ck ? `${q.ck}.q` : `journey.q.${q.id}.q`, lang, vars)}</summary>
-                      <p>{c(q.ck ? `${q.ck}.a` : `journey.q.${q.a ?? q.id}.a`, lang, vars)}<Fragment set:html={sup(q.n)} /></p>
+                      <p>{two(c(q.ck ? `${q.ck}.a` : `journey.q.${q.a ?? q.id}.a`, lang, vars))}<Fragment set:html={sup(q.n)} />{long(c(q.ck ? `${q.ck}.a` : `journey.q.${q.a ?? q.id}.a`, lang, vars)) && <> <a href={pathFor(lang, ed, q.link === "private" ? "private" : "articles")}>{c("art.read", lang)}</a></>}</p>
                       {q.ask && <p class="small">{c("journey.unverified", lang)}</p>}
                     </details>
                   ))}
@@ -199,7 +204,14 @@ const rate = cur ? RATE(cur).rate : 0;
     try { localStorage.setItem("ip.path", JSON.stringify(st)); if (st.budget) localStorage.setItem("ip.budget", String(st.budget)); } catch { /* storage off */ }
   };
 
-  const start = $<HTMLFormElement>("[data-start]")!;
+  const start = $<HTMLFormElement>("[data-start]")!, bar = $("[data-bar]")!;
+  // Prompt 39 §1: after every answer the step's top goes to one place, just under the fixed header, in one instant move
+  // (a smooth scroll raced the closing of the previous station and left the reader below the new one).
+  const hdBottom = () => Math.max(0, document.querySelector<HTMLElement>(".hd")?.getBoundingClientRect().bottom ?? 0);
+  const toTop = (el: HTMLElement) => {
+    const y = el.getBoundingClientRect().top - hdBottom() - 12;
+    if (Math.abs(y) > 1) window.scrollTo({ top: Math.max(0, window.scrollY + y), behavior: "instant" as ScrollBehavior });
+  };
   const input = $<HTMLInputElement>("[data-budget]")!, inh = $<HTMLInputElement>("[data-inherited]")!;
   root.style.setProperty("--hd", `${document.querySelector<HTMLElement>(".hd")?.offsetHeight ?? 0}px`);
 
@@ -235,7 +247,7 @@ const rate = cur ? RATE(cur).rate : 0;
       qi = Math.max(0, Math.min(n, qs.length - 1));
       qs.forEach((q, k) => q.classList.toggle("on", k === qi));
       prog.style.width = `${((qi + 1) / qs.length) * 100}%`; backB.style.visibility = qi ? "visible" : "hidden"; backB.tabIndex = qi ? 0 : -1;
-      if (focus) $(".pq-h", qs[qi])?.focus({ preventScroll: true });
+      if (focus) { $(".pq-h", qs[qi])?.focus({ preventScroll: true }); toTop(start); }
     };
     start.classList.add("stepped");
     qs.forEach((q) => $(".pq-h", q)?.setAttribute("tabindex", "-1"));
@@ -246,12 +258,18 @@ const rate = cur ? RATE(cur).rate : 0;
     input.addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); showQ(3); } });
     backB.addEventListener("click", () => showQ(qi - 1));
     $("[data-change]")!.addEventListener("click", () => showQ(0, false));
+    // Back on the first station returns to the last question.
+    $("[data-st-back]")!.addEventListener("click", () => {
+      const list = visible(), i = list.findIndex((li) => li.dataset.k === st.step[st.door]);
+      if (i > 0) { st.step[st.door] = list[i - 1].dataset.k!; save(); render(true); return; }
+      st.started = false; save(); render(); showQ(qs.length - 1);
+    });
     // Choosing another country opens that edition's path: it continues at the amount.
     $$<HTMLAnchorElement>(".cbar a", start).forEach((a) => a.addEventListener("click", () => { const u = new URL(a.href); u.searchParams.set("pq", "3"); a.href = u.href; }));
     const pq = Number(new URLSearchParams(location.search).get("pq"));
     showQ(pq >= 1 && pq <= qs.length ? pq - 1 : 0, false);
   }
-  $("[data-change]")!.addEventListener("click", () => { st.started = false; save(); render(); start.scrollIntoView({ behavior: reduce ? "auto" : "smooth" }); });
+  $("[data-change]")!.addEventListener("click", () => { st.started = false; save(); render(); toTop(start); $<HTMLElement>(".pq.on .pq-h", start)?.focus({ preventScroll: true }); });
 
   // The route
   const shown = (li: HTMLElement) => (li.dataset.high === undefined || st.budget >= HIGH) && (li.dataset.inherit === undefined || st.inh);
@@ -278,11 +296,12 @@ const rate = cur ? RATE(cur).rate : 0;
     prog.setAttribute("aria-valuemax", String(list.length)); prog.setAttribute("aria-valuenow", String(n));
     (prog.firstElementChild as HTMLElement).style.width = `${(100 * n) / list.length}%`;
     $("[data-prog-t]")!.textContent = root.dataset.progress!.replace("{n}", String(n)).replace("{t}", String(list.length));
+    $("[data-stepof-t]")!.textContent = root.dataset.stepof!.replace("{n}", String(list.findIndex((li) => li.dataset.k === here) + 1)).replace("{t}", String(list.length));
     const door = $(`button[data-door="${st.door}"] .pd-h`)!.textContent;
     $("[data-sum]")!.textContent = [door, st.budget ? `${nf.format(st.budget)} €` : ""].filter(Boolean).join(" · ");
     links(); teamRender();
     drawAll();
-    if (scroll) $(`#s-${here}`)?.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+    if (scroll) { toTop(bar); $<HTMLButtonElement>(`#s-${here} button.pst-head`)?.focus({ preventScroll: true }); }
   }
   // Team panel: a role shows while one of the stations that brings it in is on the route; consent boxes for the same
   // partner stay in step across stations; the send link names only the partners the reader ticked.
@@ -322,14 +341,12 @@ const rate = cur ? RATE(cur).rate : 0;
     const k = li.dataset.k!;
     $("button.pst-head", li)!.addEventListener("click", () => {
       if (!st.started) { setOpen(li, !li.classList.contains("open")); drawAll(); return; }
-      if (st.step[st.door] === k) { setOpen(li, !li.classList.contains("open")); drawAll(); return; }
-      st.step[st.door] = k; save(); render();
+      // One station per screen: its title no longer folds it.
     });
     $("[data-next]", li)!.addEventListener("click", () => {
       if (!st.done.includes(k)) st.done.push(k);
       const list = visible(), i = list.indexOf(li);
       st.step[st.door] = list[i + 1]?.dataset.k ?? k; save(); render(true);
-      $<HTMLButtonElement>(`#s-${st.step[st.door]} button.pst-head`)?.focus({ preventScroll: true });
     });
     $$<HTMLInputElement>("[data-tick]", li).forEach((t) => t.addEventListener("change", () => {
       st.ticks = st.ticks.filter((x) => x !== t.dataset.tick);
@@ -467,8 +484,22 @@ const rate = cur ? RATE(cur).rate : 0;
   @keyframes tm-in { from { opacity: 0; transform: translateY(6px); } }
   .pnext { margin: 22px 0 0; }
   .pend { padding-top: 8px; padding-bottom: 48px; }
+  /* Prompt 39 §1: one station per screen under a fixed bar; each screen reserves a full viewport, so the scroll that puts
+     the step at the top always has room and nothing below can pull it. No folding, no line: nothing moves after an answer. */
+  .is-js .pstart { min-height: calc(100svh - var(--hd, 64px) - 24px); align-content: start; }
+  .is-js.started .proute { min-height: calc(100svh - var(--hd, 64px)); }
+  .is-js.started .pbar { position: static; border-bottom: 0; margin-bottom: 8px; }
+  .pb-row { display: flex; align-items: center; gap: 14px; }
+  .pb-step { flex: 1; font: 600 13px/1 var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .is-js.started .pst:not(.here), .is-js.started .proute > h2, .is-js.started .pline-svg, .is-js.started .pdot, .is-js.started .pnum, .is-js.started .pstate { display: none; }
+  .is-js.started .pst { padding-left: 0; }
+  .is-js.started .pst-head { cursor: default; font-size: clamp(28px, 4vw, 38px); line-height: 1.12; }
+  .is-js.started .pst-head:focus:not(:focus-visible) { outline: none; }
+  .is-js.started .pst-body { transition: none; }
+  .is-js.started .pst.here { animation: pst-in .3s ease both; }
+  @keyframes pst-in { from { opacity: 0; } }
   .pend h2 { margin-bottom: 16px; }
-  @media (min-width: 900px) { .pst { padding-left: 76px; } }
+  @media (min-width: 900px) { .pst { padding-left: 76px; } .is-js.started .pst { padding-left: 0; } }
   @media (max-width: 520px) { .pdoors { grid-template-columns: 1fr; } .pd-h { font-size: 1.4rem; } }
-  @media (prefers-reduced-motion: reduce) { .is-js .pst-body, .pdot, .pprog span { transition: none; } .is-js .pst.open .tm-row[data-now] { animation: none; } }
+  @media (prefers-reduced-motion: reduce) { .is-js .pst-body, .pdot, .pprog span { transition: none; } .is-js.started .pst.here { animation: none; } .is-js .pst.open .tm-row[data-now] { animation: none; } }
 </style>
