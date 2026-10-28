@@ -1,0 +1,116 @@
+<!doctype html>
+<!-- Prompt 35 §4 (D61), film v5: the film's own UI scenes, drawn in the site's design and rendered frame by frame
+     (ui.mjs calls window.scene(name) once, then window.render(t) for every frame; nothing here runs on a clock).
+     search: the plain search field she types into (our design, no search-engine look-alike)
+     call:   the first viewing by video, in our design; the middle is transparent: film.py lays the home underneath
+     team:   the four introductions, roles only, one at a time -->
+<html lang="en"><head><meta charset="utf-8">
+<style>
+  @font-face { font-family: "Playfair"; src: url("file:///root/.fonts/Playfair-400.ttf"); }
+  @font-face { font-family: "Manrope"; font-weight: 500; src: url("file:///root/.fonts/Manrope-500.ttf"); }
+  @font-face { font-family: "Manrope"; font-weight: 600; src: url("file:///root/.fonts/Manrope-600.ttf"); }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1920px; height: 803px; overflow: hidden; background: transparent; font-family: "Manrope", sans-serif; color: #111214; }
+  .sc { position: absolute; inset: 0; display: none; }
+  .sc.on { display: block; }
+  svg { fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* search */
+  #search { background: radial-gradient(120% 120% at 50% 40%, #fbf9f5 0%, #efe9df 70%, #e4dccd 100%); }
+  .sf { position: absolute; left: 50%; top: 50%; width: 1040px; height: 104px; margin: -52px 0 0 -520px; border-radius: 52px; background: #fff;
+    box-shadow: 0 30px 80px rgba(60, 50, 30, .12), 0 2px 6px rgba(60, 50, 30, .06); display: flex; align-items: center; gap: 26px; padding: 0 44px; }
+  .sf svg { width: 34px; height: 34px; color: #8b8780; flex: none; }
+  .sf .tx { font-size: 36px; font-weight: 500; letter-spacing: -.005em; white-space: pre; }
+  .sf .ph { color: #a8a39a; }
+  .sf .cur { display: inline-block; width: 2.5px; height: 40px; background: #2f5d50; vertical-align: -8px; margin-left: 2px; }
+  .sf .go { margin-left: auto; width: 60px; height: 60px; border-radius: 50%; background: #111214; color: #fff; display: grid; place-items: center; flex: none; }
+  .sf .go svg { width: 26px; height: 26px; color: #fff; stroke-width: 2; }
+  .bloom { position: absolute; inset: 0; background: radial-gradient(60% 60% at 50% 50%, #fff 0%, rgba(255,255,255,.9) 40%, rgba(255,255,255,0) 100%); opacity: 0; }
+
+  /* call */
+  #call { color: #f1eee8; }
+  .cbg { position: absolute; inset: 0; }
+  .ctop { position: absolute; left: 60px; right: 60px; top: 34px; display: flex; align-items: center; justify-content: space-between; font-size: 18px; font-weight: 600; letter-spacing: .02em; }
+  .ctop .w { font-family: "Playfair"; font-size: 26px; font-weight: 400; letter-spacing: 0; }
+  .ctop .w span { font-family: "Manrope"; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: #a9adb3; margin-left: 14px; }
+  .ctop .mid { color: #d9d5cc; font-weight: 500; }
+  .live { display: inline-flex; align-items: center; gap: 10px; color: #d9d5cc; font-weight: 500; font-variant-numeric: tabular-nums; }
+  .live i { width: 9px; height: 9px; border-radius: 50%; background: #6fcf97; box-shadow: 0 0 10px #6fcf97; }
+  .stage { position: absolute; left: 190px; right: 190px; top: 96px; bottom: 120px; border-radius: 26px; box-shadow: 0 0 0 1px rgba(255,255,255,.06); }
+  .room { position: absolute; left: 224px; bottom: 150px; padding: 10px 18px; border-radius: 999px; background: rgba(12,15,19,.55); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); font-size: 17px; font-weight: 600; }
+  .guide { position: absolute; right: 224px; bottom: 150px; width: 210px; height: 130px; border-radius: 18px; background: #1b222b; display: grid; place-items: center; box-shadow: 0 10px 30px rgba(0,0,0,.4); }
+  .guide b { width: 58px; height: 58px; border-radius: 50%; background: #2f5d50; display: grid; place-items: center; font-weight: 600; font-size: 20px; color: #fff; }
+  .guide span { position: absolute; left: 14px; bottom: 10px; font-size: 13px; font-weight: 600; color: #d9d5cc; }
+  .ctrl { position: absolute; left: 50%; bottom: 30px; transform: translateX(-50%); display: flex; gap: 14px; padding: 10px; border-radius: 999px; background: #161b22; }
+  .ctrl span { width: 58px; height: 58px; border-radius: 50%; background: #222a33; display: grid; place-items: center; }
+  .ctrl span svg { width: 24px; height: 24px; color: #e8e4dc; }
+  .ctrl .end { background: #b8432f; width: 84px; border-radius: 29px; }
+
+  /* team */
+  #team { background: linear-gradient(180deg, #fbfaf7 0%, #f3efe7 100%); }
+  .th { position: absolute; left: 0; right: 0; top: 96px; text-align: center; }
+  .th p { font-size: 15px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: #6b6e73; }
+  .th h2 { font-family: "Playfair"; font-weight: 400; font-size: 54px; letter-spacing: -.015em; margin-top: 16px; }
+  .cards { position: absolute; left: 50%; top: 300px; transform: translateX(-50%); display: grid; grid-template-columns: repeat(4, 360px); gap: 28px; }
+  .card { height: 300px; border-radius: 24px; background: #fff; padding: 34px 32px; box-shadow: 0 24px 60px rgba(60, 50, 30, .10), 0 1px 3px rgba(60, 50, 30, .06); opacity: 0; }
+  .card .ic { width: 60px; height: 60px; border-radius: 18px; background: #eef3f0; color: #2f5d50; display: grid; place-items: center; }
+  .card .ic svg { width: 30px; height: 30px; }
+  .card h3 { font-family: "Playfair"; font-weight: 400; font-size: 32px; line-height: 1.1; margin-top: 30px; }
+  .card p { font-size: 17px; line-height: 1.45; color: #5d6066; margin-top: 12px; }
+  .card .ok { position: absolute; left: 32px; bottom: 28px; display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600; color: #2f5d50; }
+  .card { position: relative; }
+  .card .ok svg { width: 18px; height: 18px; stroke-width: 2.2; }
+</style></head>
+<body>
+<section class="sc" id="search">
+  <div class="sf"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg><span class="tx" id="q"></span><span class="go"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+  <div class="bloom" id="bloom"></div>
+</section>
+
+<section class="sc" id="call">
+  <svg class="cbg" width="1920" height="803" style="stroke:none"><defs><mask id="hole"><rect width="1920" height="803" fill="#fff"/><rect x="190" y="96" width="1540" height="587" rx="26" fill="#000"/></mask></defs><rect width="1920" height="803" fill="#0c0f13" mask="url(#hole)"/></svg>
+  <div class="ctop"><span class="w">Imóveis Portugal<span>Private viewing</span></span><span class="mid">Tomás Ribeiro 79 · Avenidas Novas, Lisboa</span><span class="live"><i></i><span id="clock">00:00</span></span></div>
+  <div class="stage"></div>
+  <div class="room" id="room">Living room</div>
+  <div class="guide"><b>IP</b><span>Your agent, in Lisbon</span></div>
+  <div class="ctrl">
+    <span><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span>
+    <span><svg viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="3"/><path d="M16 10l5-3v10l-5-3"/></svg></span>
+    <span><svg viewBox="0 0 24 24"><path d="M4 12v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6M12 3v12M7 8l5-5 5 5"/></svg></span>
+    <span class="end"><svg viewBox="0 0 24 24"><path d="M3 14c5-5 13-5 18 0l-2.5 2.5-3-1.5v-2.5c-2.5-.8-4.5-.8-7 0V15l-3 1.5z"/></svg></span>
+  </div>
+</section>
+
+<section class="sc" id="team">
+  <div class="th"><p>Your team in Portugal</p><h2>Introduced one at a time</h2></div>
+  <div class="cards">
+    <div class="card"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3v18M5 7h14M7 7l-3 7a3 3 0 0 0 6 0zM17 7l-3 7a3 3 0 0 0 6 0z"/></svg></span><h3>Lawyer</h3><p>Checks the title, the contract and the deed.</p><span class="ok"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg>Introduced</span></div>
+    <div class="card"><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg></span><h3>International tax adviser</h3><p>Knows the rules in both countries.</p><span class="ok"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg>Introduced</span></div>
+    <div class="card"><span class="ic"><svg viewBox="0 0 24 24"><path d="M3 10l9-6 9 6M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20h18"/></svg></span><h3>Bank</h3><p>A Portuguese mortgage, from abroad.</p><span class="ok"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg>Introduced</span></div>
+    <div class="card"><span class="ic"><svg viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></span><h3>Notary</h3><p>Signs the deed with you, or for you.</p><span class="ok"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg>Introduced</span></div>
+  </div>
+</section>
+
+<script>
+  const ease = (x) => 1 - Math.pow(1 - Math.min(Math.max(x, 0), 1), 3);
+  const Q = "how can I buy a house in Portugal";
+  let cur = "";
+  window.scene = (n) => { cur = n; document.querySelectorAll(".sc").forEach((s) => s.classList.toggle("on", s.id === n)); };
+  window.render = (t) => {
+    if (cur === "search") {
+      const n = Math.max(0, Math.min(Q.length, Math.floor((t - 0.9) / 0.085)));
+      const blink = n === 0 || n === Q.length ? (Math.floor(t * 2) % 2 === 0) : true;
+      document.getElementById("q").innerHTML = (n ? Q.slice(0, n) : '<span class="ph">Ask anything</span>') + (t < 5.2 && blink ? '<span class="cur"></span>' : "");
+      const sf = document.querySelector(".sf"), k = ease((t - 5.2) / 0.5);
+      sf.style.transform = `scale(${1 - 0.02 * Math.sin(Math.min(k, 1) * Math.PI)})`;
+      document.getElementById("bloom").style.opacity = String(ease((t - 5.6) / 1.4));
+    } else if (cur === "call") {
+      const s = Math.floor(t) + 12 * 60 + 4; document.getElementById("clock").textContent = `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(s % 60).padStart(2, "0")}`;
+      document.getElementById("room").textContent = t < 5 ? "Living room" : t < 9.5 ? "Terrace" : "Kitchen";
+    } else if (cur === "team") {
+      const T0 = [0.2, 1.2, 3.8, 4.7];  // with her words: "A lawyer. A tax adviser… A bank. A notary."
+      document.querySelectorAll(".card").forEach((c, i) => { const k = ease((t - T0[i]) / 0.6); c.style.opacity = String(k); c.style.transform = `translateY(${(1 - k) * 26}px)`; });
+    }
+  };
+</script>
+</body></html>
