@@ -6,7 +6,7 @@ import { config } from "../config";
 import { eur, pathFor, type Lang, type EdCode } from "../i18n";
 import { PTYPES } from "../lib/packages";
 import { c } from "../lib/copy";
-import { PROJECTS } from "../lib/projects";
+import { PROJECTS, img } from "../lib/projects";
 
 interface Props { lang: Lang; ed: EdCode; slug: string; }
 const { lang, ed, slug } = Astro.props;
@@ -20,7 +20,7 @@ const devPage = `${pathFor(lang, ed, "partners")}${PTYPES.find((t) => t.key === 
   <ul class="dev-list">
     {Array.from({ length: 3 }, (_, i) => devs[i]).map((d) => d ? (
       <li class="dev-card">
-        {d.render && <img src={d.render} alt="" width="160" height="100" loading="lazy" />}
+        {d.render && <img src={img(d.render, 800)} alt="" width="160" height="100" loading="lazy" />}
         {d.url ? <a href={d.url} rel="sponsored noopener"><strong>{d.name}</strong></a> : <strong>{d.name}</strong>}
         <span class="small">{d.developer} · {d.typologies.join(", ")}{d.from ? ` · ${c("dev.from", lang, { price: eur(d.from, lang) })}` : ""}</span>
         <span class="tag">{c("dev.sponsored", lang)}</span>

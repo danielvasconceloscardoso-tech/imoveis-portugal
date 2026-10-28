@@ -17,6 +17,9 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
   const stage = root.querySelector<HTMLElement>("[data-flow-stage]")!;
   // The partner lawyer card (prompt 37 §4, D64), concierge only; absent when no lawyer may show on this build.
   const LW = (() => { try { return JSON.parse(root.querySelector("[data-flow-lawyer]")?.textContent || "null") as LawyerCard | null; } catch { return null; } })();
+  // Listed buildings (prompt 39 §3): from projects.json, passed by Flow.astro; absent outside the concierge.
+  type Bld = { id: string; name: string; muni: string; place: string; region: string; near: string[]; typologies: string[]; from: number | null; photo: string; map: string; visit: string };
+  const BL = (() => { try { return JSON.parse(root.querySelector("[data-flow-blds]")?.textContent || "null") as { labels: Record<string, string>; items: Bld[] } | null; } catch { return null; } })();
   let A: Record<string, string> = {};
   try { A = JSON.parse(sessionStorage.getItem(key) || "{}"); } catch { /* private mode */ }
   const save = () => { try { sessionStorage.setItem(key, JSON.stringify(A)); } catch { /* private mode */ } };
@@ -80,11 +83,42 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
       <input class="fl-hp" data-hp tabindex="-1" autocomplete="off" aria-hidden="true" />`;
   }
 
+  // Match on the place the reader typed (municipality, its NUTS II region, a nearby big city; accents and case ignored),
+  // and on the budget band where the developer publishes a starting price (none published = never excluded).
+  const plain = (t: string) => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+  const MAX: Record<string, number> = { "1": 300000, "2": 1e6, "3": 5e6, "4": Infinity };
+  function matches(): Bld[] {
+    if (!BL) return [];
+    const q = plain(A.place || ""), cap = MAX[A.budget || ""] ?? Infinity;
+    const inBudget = (b: Bld) => b.from == null || b.from <= cap;
+    if (!q) return BL.items.filter((b) => b.from != null && inBudget(b));
+    const words = ` ${q} `;
+    return BL.items.filter((b) => inBudget(b) && [b.place, b.muni, b.region, ...b.near].map(plain).filter(Boolean)
+      .some((f) => words.includes(` ${f} `) || (q.length >= 3 && f.includes(q))));
+  }
+  function cards(list: Bld[]) {
+    const T = BL!.labels;
+    return `<ul class="fl-blds">${list.map((b) => `<li class="fl-bld">
+      ${b.photo ? `<img src="${esc(b.photo)}" alt="" width="800" height="533" loading="lazy" />` : ""}
+      <div class="fl-bld-b"><p class="fl-bld-tag">${esc(T.sponsored)}</p><p class="fl-bld-n">${esc(b.name)}</p>
+        <p class="fl-bld-m">${esc(b.place)}${b.typologies.length ? ` · ${esc(b.typologies.join(" · "))}` : ""}</p>
+        <p class="fl-bld-p">${b.from != null ? `${esc(T.from)} ${esc(new Intl.NumberFormat(F.hidden.language || "pt", { maximumFractionDigits: 0 }).format(b.from))} €` : esc(T.price)}</p>
+        <div class="fl-bld-a"><a class="fl-link" href="${esc(b.map)}">${esc(T.map)}</a>${b.visit ? `<a class="fl-btn" href="${esc(b.visit)}">${esc(T.visit)}</a>` : ""}</div></div></li>`).join("")}</ul>`;
+  }
+  const matchBox = () => { const m = matches(); return m.length ? `<div class="fl-bldbox" data-blds-box><p class="fl-k">${esc(BL!.labels.match)}</p>${cards(m)}</div>` : `<div data-blds-box></div>`; };
+  function buildingsScreen() {
+    const T = BL!.labels;
+    side(`${lwHead()}<div class="fl-step"><h2 class="fl-q" tabindex="-1">${esc(T.h)}</h2><p class="fl-lede">${esc(T.lede)}</p>${BL!.items.length ? cards(BL!.items) : `<p class="fl-lede">${esc(T.none)}</p>`}</div>`, () => go(i));
+  }
+
   function render(focus = true) {
     const s = steps[i];
     // "I have a question" on the first screen, and a one-line way to the lawyer on the legal step (the tax number).
     const ask = LW && (i === 0 || s.id === "nif") ? `<p class="fl-ask"><button type="button" class="fl-link" data-lawyer>${esc(i === 0 ? LW.labels.ask : LW.labels.legal)}</button></p>` : "";
-    const html = `${head()}<div class="fl-step"><h2 id="fl-q" class="fl-q" tabindex="-1">${esc(s.q)}</h2>${i === 0 && F.lede ? `<p class="fl-lede">${esc(F.lede)}</p>` : ""}${body(s)}${ask}</div>`;
+    // "Ver novos empreendimentos" on the first screen (one tap to the list); matching buildings under the place question.
+    const nb = BL && BL.items.length && i === 0 ? `<button type="button" class="fl-xopt" data-blds><span>${esc(BL.labels.open)}</span><i>${ARROW}</i></button>` : "";
+    const mb = BL && s.id === "place" ? matchBox() : "";
+    const html = `${head()}<div class="fl-step"><h2 id="fl-q" class="fl-q" tabindex="-1">${esc(s.q)}</h2>${i === 0 && F.lede ? `<p class="fl-lede">${esc(F.lede)}</p>` : ""}${body(s)}${mb}${nb}${ask}</div>`;
     swap(html, focus);
     url(i);
   }
@@ -108,6 +142,7 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
     const s = steps[i];
     el.querySelector("[data-back]")?.addEventListener("click", () => go(i - 1));
     el.querySelector("[data-lawyer]")?.addEventListener("click", lawyerScreen);
+    el.querySelector("[data-blds]")?.addEventListener("click", buildingsScreen);
     el.querySelectorAll<HTMLButtonElement>(".fl-opt").forEach((b, k, all) => {
       b.tabIndex = (A[s.id] ? b.getAttribute("aria-checked") === "true" : k === 0) ? 0 : -1;
       b.addEventListener("click", () => {
@@ -121,7 +156,10 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
       });
     });
     const inp = el.querySelector<HTMLInputElement | HTMLTextAreaElement>("[data-in]");
-    inp?.addEventListener("input", () => { A[s.id] = inp.value; save(); });
+    inp?.addEventListener("input", () => {
+      A[s.id] = inp.value; save();
+      const box = el.querySelector("[data-blds-box]"); if (box) box.outerHTML = matchBox();
+    });
     inp?.addEventListener("keydown", (e) => { if (e.key === "Enter" && !(inp instanceof HTMLTextAreaElement)) { e.preventDefault(); next(); } });
     el.querySelectorAll<HTMLButtonElement>("[data-chip]").forEach((b) => b.addEventListener("click", () => { if (inp) { inp.value = b.dataset.chip!; A[s.id] = inp.value; save(); } next(); }));
     el.querySelectorAll<HTMLInputElement>("[data-c]").forEach((x) => x.addEventListener("input", () => { A[x.dataset.c!] = x.value.trim(); save(); }));
