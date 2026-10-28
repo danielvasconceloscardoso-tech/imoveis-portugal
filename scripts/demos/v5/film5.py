@@ -51,6 +51,17 @@ def dissolve(a, b, n):
     return a[:-n] + [Image.blend(a[len(a) - n + i], b[i], (i + 1) / (n + 1)) for i in range(n)] + b[n:]
 
 
+def turquoise(frames, amt=.55):
+    """Olive shallow water toward Atlantic turquoise: pixels where green leads red and blue gain blue; sand is untouched."""
+    out = []
+    for f in frames:
+        a = np.asarray(f, np.float32); r, g, b = a[..., 0], a[..., 1], a[..., 2]
+        m = np.clip((g - r) / 40, 0, 1) * np.clip((g - b + 20) / 60, 0, 1) * amt
+        a[..., 2] = b + (g * 1.08 - b) * m; a[..., 0] = r * (1 - .25 * m)
+        out.append(Image.fromarray(np.clip(a, 0, 255).astype(np.uint8)))
+    return out
+
+
 def black(dur): return [Image.new("RGB", (W, ACT)) for _ in range(round(dur * FPS))]
 
 
@@ -98,11 +109,11 @@ for i, c in enumerate(call):
 emit(frames6, "screen", "6")
 # 7 · the team, one at a time, roles only.  "A lawyer. A tax adviser who knew both countries…"
 emit(ui("team", 9.5), "screen", "7")
-# 8 · summer: the family on the beach from above, the course by the sea at golden hour, the father from behind, a cigar.
-emit(clip(V["beach"], 3.0, 6.0), "warm", "8")
+# 8 · summer: the family on the beach from above, the course by the sea, a cigar, the father from behind before the sea at sunset.
+emit(turquoise(clip(V["beach"], 3.0, 6.0)), "warm", "8")
 emit(clip(V["golfsea"], 0.0, 4.0), "warm", "8b")
-emit(clip(V["golfer"], 0.0, 4.5, speed=.6), "warm", "8c")
-emit(clip(V["cigar"], 1.5, 2.5), "warm", "8d")
+emit(clip(V["cigar"], 1.5, 2.5), "warm", "8c")
+emit(clip(V["father"], 12.0, 4.5), "warm", "8d")   # from behind, the sea and the low sun
 # 9 · hold on the sea.  "…next year finally came."
 emit(clip(V["sea"], 2.0, 7.5), "warm", "9")
 # 10 · black; the name, the line, the date; one note.

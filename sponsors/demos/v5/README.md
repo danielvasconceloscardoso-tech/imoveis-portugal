@@ -15,7 +15,7 @@ Status, 28 Oct 2026: **draft for the operator and the CEO, not sent to Vanguard.
 | 5 | The concierge sheet over the map: a time for the call, send, "A dedicated adviser is taking care of your request" | "I didn't want a sales pitch. I wanted someone to explain it." |
 | 6 | The first viewing by video in our own design: Tomás Ribeiro 79, living room, terrace, kitchen, in 2.5D | "Two weeks later, we were walking through our future home. From our sofa." |
 | 7 | The team, one card at a time, roles only: lawyer, international tax adviser, bank, notary | "A lawyer. A tax adviser who knew both countries. A bank. A notary. Introduced one at a time." |
-| 8 | Summer: a family on the beach from above (small figures); a course by the sea; a golfer from behind at golden hour; a cigar | "And then, one summer…" |
+| 8 | Summer: a family on the beach from above (small figures); a course on a headland by the sea; a cigar being lit; the father from behind, before the sea at sunset | "And then, one summer…" |
 | 9 | Hold on the sea | "…next year finally came." |
 | 10 | Black: "Imóveis Portugal", "Your buyers, wherever they live.", small "Launching 1 December 2026", one piano note | (silence, one note) |
 
@@ -40,7 +40,7 @@ Whatever is chosen, a synthetic voice must not be presented as a real buyer's te
 
 ## Gaps in the footage (for the CEO)
 
-- **The father on a golf course at golden hour with a cigar** does not exist on Mixkit or Pixabay (all 73 Pixabay golf videos checked). The moment is built from three licensed clips: a course on a headland by the sea (aerial), a golfer seen from behind (the first 3 seconds only, before his face turns; slowed, warm grade) and a cigar being lit (hand only). A commissioned shot would be better.
+- **The father on a golf course at golden hour with a cigar** does not exist on Mixkit or Pixabay (all 73 Pixabay golf videos checked). The moment is built from three licensed clips: a course on a headland by the sea (aerial), a cigar being lit (hand only) and a man seen from behind before the sea at sunset (not on a course). The only golfer seen from behind on Pixabay is at midday with a suburban house behind him, so it was left out. A commissioned shot would be better.
 - **The family on the beach** is the best drone shot found (Mixkit 27015, 720p only; small figures, no faces); the water is graded toward turquoise. No licensed Comporta footage was found.
 
 ## Sources and licences
@@ -58,7 +58,7 @@ Mixkit licence (free for commercial use, no attribution required): https://mixki
 | 6, the home | Vanguard Properties, photographs of Tomás Ribeiro 79 as published (https://www.vangproperties.com/en/lisbon-portugal-real-estate/tomas-ribeiro-79/), in 2.5D with Depth Anything V2 Small (Apache 2.0) | the developer's own, shown to the developer |
 | 8, the beach | Mixkit 27015, "Family enjoying the seashore, aerial shot" | Mixkit |
 | 8, the course by the sea | Pixabay video 130578 by bellergy | Pixabay |
-| 8, the golfer | Pixabay video 18528 by stevemontroy (seconds 0-3, from behind) | Pixabay |
+| 8, the father by the sea | Pixabay video 222039 by TonyDias7 (from behind, sunset) | Pixabay |
 | 8, the cigar | Pixabay video 38618 by Ernest_Roy (hand only) | Pixabay |
 | 9, the sea | Mixkit 50154, "Sunset at sea in a panoramic view" | Mixkit |
 | Music | Chopin, Nocturne in C minor, B. 108, Musopen recording on archive.org (parso-0376f076666a403745bbb1c79277856a9f5ef9d4), as in v4 | CC0 |
