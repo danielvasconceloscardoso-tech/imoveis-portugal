@@ -8,7 +8,7 @@ import { Sources, EDITION_CUR, RATE, fmtDate, homeExample } from "../lib/content
 import { c } from "../lib/copy";
 import { config } from "../config";
 import { PRICES, LAST } from "../lib/prices";
-import { lineChart } from "../lib/chart";
+import { ART_SUB } from "../lib/articles";
 
 interface Props { lang: Lang; ed: EdCode; }
 const { lang, ed } = Astro.props;
@@ -17,7 +17,7 @@ const e = (n: number) => eur(n, lang);
 const sup = (ns: number[]) => ns.map((i) => `<a class="sup" href="#fonte-${i}">${i}</a>`).join("");
 // The reader's currency for the budget in the path bar; the path itself works in euros.
 const cur = EDITION_CUR[ed] ?? "EUR", fx = cur === "EUR" ? null : RATE(cur);
-const nMap = src.n("ine-m2-2026q2"), nHist = src.n("ine-m2-history");
+const nMap = src.n("ine-m2-2026q2");
 const m2 = (k: string) => PRICES.munis[k].m2[LAST] as number;
 // Six named places (prompt 32): one official figure each; "municipality median" where the place is part of one.
 const MAP = pathFor(lang, ed, "map");
@@ -41,9 +41,6 @@ const qa = [
     : { q: c("home.qa.live.q", lang), a: c("home.qa.live.a", lang), s: [src.n("pt-ari-realestate-ended"), src.n("pt-visa-own-income")] },
   { q: c("home.qa.tax.q", lang), a: c("home.qa.tax.a", lang), s: [] as number[] },
 ];
-const ptP = PRICES.regions.PT;
-const chart = lineChart(PRICES.quarters, [{ label: "Portugal", values: ptP.m2 }, { label: PRICES.munis.lisboa.n, values: PRICES.munis.lisboa.m2 }, { label: PRICES.munis.porto.n, values: PRICES.munis.porto.m2 }],
-  { breakAt: PRICES.break, breakLabel: c("prices.break", lang), fmt: (v) => new Intl.NumberFormat(HTML_LANG[lang]).format(v), h: 300 });
 // Prompt 33 §1, "the resort in daylight": soft sun, water, texture, ease; places and the life around them, none repeating
 // a place card. Every photograph carries the one grade (scripts/design/resort_grade.py); sources in content/media/SOURCES.md.
 const mosaic = ["porto-ribeira-noite", "madeira-sao-lourenco", "algarve-golfe-amanhecer", "comporta-mar-arrabida", "madeira-porto-moniz", "algarve-falesias-por-do-sol"];
@@ -168,14 +165,9 @@ const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("h
   ))}
 </section>
 
-<section class="h2-sec h2-prices" aria-labelledby="h2-prices">
-  <div class="h2-narrow" data-reveal>
-    <h2 id="h2-prices">{c("home2.prices.h", lang)}</h2>
-    <p>{c("home2.prices.p", lang, { from: e(ptP.m2[0]!), to: e(ptP.m2[LAST]!) })}<Fragment set:html={sup([nHist])} /></p>
-  </div>
-  <p class="small pc-legend h2-center"><span class="k0">Portugal</span> · <span class="k1">{PRICES.munis.lisboa.n}</span> · <span class="k2">{PRICES.munis.porto.n}</span></p>
-  <figure class="h2-chart" data-reveal set:html={chart} />
-  <p class="h2-center"><a class="h2-btn" href={pathFor(lang, ed, "data")}>{c("home2.prices.a", lang)}</a></p>
+{/* Prompt 37 §2: ten years of prices (the paragraph and the chart) now live in an article; one line here. */}
+<section class="h2-sec h2-prices h2-artline">
+  <p class="h2-center"><a class="h2-link" href={`${pathFor(lang, ed, "articles")}${ART_SUB.prices[lang]}/`}>{c("art.prices.link", lang)}</a></p>
 </section>
 
 <section class="h2-sec h2-dark h2-nl" id="subscrever" aria-labelledby="h2-nl">

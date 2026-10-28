@@ -1,0 +1,224 @@
+---
+// The buyer's request, "visit or buy" (prompt 38 §1b, D66): a sheet over the showcase, one question per screen, opened by
+// any [data-req] (a unit pre-fills block and typology) or #pedir. On the preview nothing is sent: the confirmation says so,
+// and [data-req-advisor] shows the request as the partner agency's qualified advisor receives it. scripts/request.ts runs it.
+import { pathFor, type Lang, type EdCode } from "../i18n";
+import { config } from "../config";
+import "../styles/flow.css";
+
+type Units = { typology: string; total: number; forSale: number; reserved?: number; sold?: number };
+type Block = { id: string; units: Units[] };
+interface Props { lang: Lang; ed: EdCode; project: { id: string; name: string; developer?: string; blocks?: Block[] } }
+const { lang, ed, project } = Astro.props;
+
+// Until the project data lands (the contract with the showcase): the Marble Terrace blocks as agreed.
+const FALLBACK: Block[] = [
+  { id: "A", units: [{ typology: "T1", total: 4, forSale: 4 }, { typology: "T2", total: 10, forSale: 10 }, { typology: "T3", total: 6, forSale: 6 }] },
+  { id: "B", units: [{ typology: "T1", total: 4, forSale: 4 }, { typology: "T2", total: 7, forSale: 7 }, { typology: "T3", total: 6, forSale: 6 }] },
+  { id: "C", units: [{ typology: "T1", total: 5, forSale: 5 }, { typology: "T2", total: 5, forSale: 5 }, { typology: "T3", total: 7, forSale: 7 }, { typology: "T4", total: 1, forSale: 1 }] },
+];
+const blocks = (project.blocks ?? FALLBACK)
+  .map((b) => ({ id: b.id, units: b.units.filter((u) => u.forSale > 0).map((u) => ({ t: u.typology, n: u.forSale })) }))
+  .filter((b) => b.units.length);
+
+const ADVISOR = "Habinedita Gondomar (AMI 13250)";
+const COUNTRY: Record<EdCode, Record<Lang, string>> = {
+  lu: { pt: "Luxemburgo", en: "Luxembourg", fr: "Luxembourg" }, fr: { pt: "França", en: "France", fr: "France" },
+  ch: { pt: "Suíça", en: "Switzerland", fr: "Suisse" }, br: { pt: "Brasil", en: "Brazil", fr: "Brésil" },
+  us: { pt: "Estados Unidos", en: "United States", fr: "États-Unis" }, il: { pt: "Israel", en: "Israel", fr: "Israël" },
+};
+const DIAL: Record<EdCode, string> = { lu: "+352", fr: "+33", ch: "+41", br: "+55", us: "+1", il: "+972" };
+
+const T = {
+  pt: {
+    title: "Pedido", close: "Fechar", back: "Voltar", of: "{i} de {n}", next: "Continuar", skip: "Saltar", send: "Enviar pedido",
+    sample: "Preencher com comprador de exemplo", sampleShort: "Preencher", sampleChip: "Exemplo",
+    q1: "O que gostaria de fazer?", l1: "{name}, {dev}. Uma pergunta de cada vez.",
+    intent: { online: "Visita online", onlineS: "Por videochamada", inperson: "Visita presencial", inpersonS: "No local, em Gondomar", buy: "Quero comprar ou reservar esta casa", buyS: "Começar pela reserva" },
+    q2: "Que casa?", l2: "Só as casas à venda.", block: "Bloco", forSale: "{n} à venda", undecided: "Ainda a decidir",
+    q3: "Quando lhe dá jeito?", l3: "Escolha até três horários nas próximas duas semanas.", mode: { video: "Vídeo", phone: "Telefone" },
+    pt: "em Portugal", yours: "a sua hora", picked: "Os seus horários", pickDay: "Dia", pickTime: "Hora", none: "Toque num dia e numa hora.",
+    q4: "Sobre si", name: "Nome", email: "Email", phone: "Telefone", country: "País de residência", errName: "Indique o seu nome.", errEmail: "Verifique o email.", errPhone: "Verifique o telefone.",
+    q5: "Para chegar mais preparado", l5: "Opcional. Ajuda o consultor a preparar a conversa.",
+    budget: "Orçamento", budgets: ["até 300 k€", "300–400 k€", "400–500 k€", "500–750 k€", "mais de 750 k€"],
+    pay: "Como vai pagar", pays: { own: "Capitais próprios", mortgage: "Crédito habitação" },
+    horizon: "Quando gostaria de comprar", horizons: ["Nos próximos 3 meses", "Nos próximos 6 meses", "Dentro de um ano", "Ainda a ver"],
+    q6: "Confirmar e enviar", review: "O seu pedido",
+    consent: `Aceito que este pedido seja enviado apenas ao consultor qualificado da agência parceira, ${ADVISOR}, que trata de tudo a partir daqui, incluindo o contacto com o promotor.`,
+    privacy: "Aviso de privacidade",
+    doneH: "Pedido recebido", demo: "Demonstração: nenhum pedido foi enviado.",
+    steps: "Chamada com o seu consultor dedicado → visita online → reserva → contrato-promessa (CPCV) → escritura. Advogado, banco e consultor fiscal são apresentados pelo caminho.",
+    ics: "Adicionar ao calendário", advisor: "O que o consultor recebe", demoTag: "Demo", done: "Fechar",
+    adFrom: "De", adTo: "Para", adSubject: "Assunto", adTo2: "Consultor qualificado, Habinedita Gondomar",
+    adSubj: "Novo pedido: {intent} · {project} · {unit}", adSummary: "Resumo qualificado", adUnit: "A casa", adSlots: "Horários preferidos",
+    adContact: "Contacto", adConsent: "Registo de consentimento", adWhen: "Data e hora", adText: "Texto aceite", adPage: "Página",
+    adIntent: "Pedido", adResidence: "Residência", adEdition: "Edição", adNone: "não indicado", adSampleNote: "Comprador de exemplo (fictício).",
+    adLastNote: "Último pedido feito nesta sessão (não enviado).", adFooter: "Enviado pela Imóveis Portugal. O pedido segue apenas para o consultor qualificado da agência parceira.",
+    sampleName: "Comprador Exemplo", calTitle: "Visita · {project}", calDesc: "Horário preferido pedido através da Imóveis Portugal. A confirmar pelo consultor.",
+  },
+  en: {
+    title: "Request", close: "Close", back: "Back", of: "{i} of {n}", next: "Continue", skip: "Skip", send: "Send request",
+    sample: "Fill with a sample buyer", sampleShort: "Fill in", sampleChip: "Sample",
+    q1: "What would you like to do?", l1: "{name}, {dev}. One question at a time.",
+    intent: { online: "Online visit", onlineS: "By video call", inperson: "Visit in person", inpersonS: "On site, in Gondomar", buy: "I want to buy or reserve this home", buyS: "Start with the reservation" },
+    q2: "Which home?", l2: "Only homes for sale.", block: "Block", forSale: "{n} for sale", undecided: "Still deciding",
+    q3: "When suits you?", l3: "Pick up to three times in the next two weeks.", mode: { video: "Video", phone: "Phone" },
+    pt: "in Portugal", yours: "your time", picked: "Your times", pickDay: "Day", pickTime: "Time", none: "Tap a day and a time.",
+    q4: "About you", name: "Name", email: "Email", phone: "Phone", country: "Country of residence", errName: "Please add your name.", errEmail: "Please check the email.", errPhone: "Please check the phone.",
+    q5: "To arrive prepared", l5: "Optional. It helps the advisor prepare the call.",
+    budget: "Budget", budgets: ["up to €300k", "€300–400k", "€400–500k", "€500–750k", "over €750k"],
+    pay: "How you'll pay", pays: { own: "Own funds", mortgage: "Mortgage" },
+    horizon: "When you'd like to buy", horizons: ["Within 3 months", "Within 6 months", "Within a year", "Just looking"],
+    q6: "Confirm and send", review: "Your request",
+    consent: `I agree that this request goes only to the partner agency's qualified advisor, ${ADVISOR}, who handles everything from here, the developer included.`,
+    privacy: "Privacy notice",
+    doneH: "Request received", demo: "Demonstration: no request was sent.",
+    steps: "Call with your dedicated advisor → online visit → reservation → promissory contract (CPCV) → deed. Lawyer, bank and tax adviser are introduced along the way.",
+    ics: "Add to calendar", advisor: "What the advisor receives", demoTag: "Demo", done: "Close",
+    adFrom: "From", adTo: "To", adSubject: "Subject", adTo2: "Qualified advisor, Habinedita Gondomar",
+    adSubj: "New request: {intent} · {project} · {unit}", adSummary: "Qualified summary", adUnit: "The home", adSlots: "Preferred times",
+    adContact: "Contact", adConsent: "Consent record", adWhen: "Date and time", adText: "Text agreed", adPage: "Page",
+    adIntent: "Request", adResidence: "Residence", adEdition: "Edition", adNone: "not given", adSampleNote: "Sample buyer (fictional).",
+    adLastNote: "Last request made in this session (not sent).", adFooter: "Sent by Imóveis Portugal. The request goes only to the partner agency's qualified advisor.",
+    sampleName: "Sample Buyer", calTitle: "Visit · {project}", calDesc: "Preferred time requested through Imóveis Portugal. To be confirmed by the advisor.",
+  },
+  fr: {
+    title: "Demande", close: "Fermer", back: "Retour", of: "{i} sur {n}", next: "Continuer", skip: "Passer", send: "Envoyer la demande",
+    sample: "Remplir avec un acheteur fictif", sampleShort: "Remplir", sampleChip: "Exemple",
+    q1: "Que souhaitez-vous faire ?", l1: "{name}, {dev}. Une question à la fois.",
+    intent: { online: "Visite en ligne", onlineS: "Par appel vidéo", inperson: "Visite sur place", inpersonS: "Sur place, à Gondomar", buy: "Je veux acheter ou réserver ce logement", buyS: "Commencer par la réservation" },
+    q2: "Quel logement ?", l2: "Seulement les logements en vente.", block: "Bloc", forSale: "{n} en vente", undecided: "Encore à décider",
+    q3: "Quand vous convient-il ?", l3: "Choisissez jusqu'à trois créneaux dans les deux prochaines semaines.", mode: { video: "Vidéo", phone: "Téléphone" },
+    pt: "au Portugal", yours: "votre heure", picked: "Vos créneaux", pickDay: "Jour", pickTime: "Heure", none: "Touchez un jour et une heure.",
+    q4: "À propos de vous", name: "Nom", email: "E-mail", phone: "Téléphone", country: "Pays de résidence", errName: "Indiquez votre nom.", errEmail: "Vérifiez l'e-mail.", errPhone: "Vérifiez le téléphone.",
+    q5: "Pour arriver préparé", l5: "Facultatif. Cela aide le conseiller à préparer l'échange.",
+    budget: "Budget", budgets: ["jusqu'à 300 k€", "300–400 k€", "400–500 k€", "500–750 k€", "plus de 750 k€"],
+    pay: "Mode de financement", pays: { own: "Fonds propres", mortgage: "Crédit immobilier" },
+    horizon: "Quand souhaitez-vous acheter", horizons: ["Dans les 3 mois", "Dans les 6 mois", "Dans l'année", "Je me renseigne"],
+    q6: "Confirmer et envoyer", review: "Votre demande",
+    consent: `J'accepte que cette demande soit transmise uniquement au conseiller qualifié de l'agence partenaire, ${ADVISOR}, qui s'occupe de tout ensuite, promoteur compris.`,
+    privacy: "Avis de confidentialité",
+    doneH: "Demande reçue", demo: "Démonstration : aucune demande n'a été envoyée.",
+    steps: "Appel avec votre conseiller dédié → visite en ligne → réservation → compromis (CPCV) → acte. Avocat, banque et conseiller fiscal sont présentés en chemin.",
+    ics: "Ajouter au calendrier", advisor: "Ce que reçoit le conseiller", demoTag: "Démo", done: "Fermer",
+    adFrom: "De", adTo: "À", adSubject: "Objet", adTo2: "Conseiller qualifié, Habinedita Gondomar",
+    adSubj: "Nouvelle demande : {intent} · {project} · {unit}", adSummary: "Résumé qualifié", adUnit: "Le logement", adSlots: "Créneaux souhaités",
+    adContact: "Contact", adConsent: "Trace du consentement", adWhen: "Date et heure", adText: "Texte accepté", adPage: "Page",
+    adIntent: "Demande", adResidence: "Résidence", adEdition: "Édition", adNone: "non indiqué", adSampleNote: "Acheteur fictif.",
+    adLastNote: "Dernière demande faite dans cette session (non envoyée).", adFooter: "Envoyé par Imóveis Portugal. La demande va uniquement au conseiller qualifié de l'agence partenaire.",
+    sampleName: "Acheteur Exemple", calTitle: "Visite · {project}", calDesc: "Créneau souhaité demandé via Imóveis Portugal. À confirmer par le conseiller.",
+  },
+}[lang];
+
+const cfg = {
+  lang, ed, locale: { pt: "pt-PT", en: "en-GB", fr: "fr-FR" }[lang], project: { id: project.id, name: project.name, developer: project.developer ?? "" },
+  blocks, privacy: pathFor(lang, ed, "privacy"), country: COUNTRY[ed][lang], dial: DIAL[ed], sampleCountry: COUNTRY.lu[lang],
+  from: config.contactEmail, t: T,
+};
+const X = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>`;
+---
+<button type="button" class="rq-demo" data-req-advisor><b>{T.demoTag}</b>{T.advisor}</button>
+
+<div class="sh-back rq-back" data-rq-back hidden></div>
+<aside class="sh rq-sh" data-rq-sheet role="dialog" aria-modal="true" aria-label={T.title} hidden>
+  <div class="sh-grab" aria-hidden="true"></div>
+  <div class="sh-top">
+    <p class="sh-title">{project.name}</p>
+    <div class="rq-tools">
+      <button type="button" class="rq-sample" data-rq-sample aria-label={T.sample}><b>{T.sampleChip}</b><span class="rq-long">{T.sample}</span><span class="rq-short">{T.sampleShort}</span></button>
+      <button type="button" class="sh-x" data-rq-close aria-label={T.close} set:html={X} />
+    </div>
+  </div>
+  <div class="sh-in"><div class="fl rq" data-rq><div class="fl-stage" data-rq-stage></div></div></div>
+</aside>
+
+<div class="rq-ad" data-rq-ad role="dialog" aria-modal="true" aria-label={T.advisor} hidden>
+  <div class="rq-ad-frame">
+    <div class="rq-ad-bar"><span>{T.demoTag} · {T.advisor}</span><button type="button" class="sh-x" data-rq-ad-close aria-label={T.close} set:html={X} /></div>
+    <div class="rq-ad-body" data-rq-ad-body></div>
+  </div>
+</div>
+
+<script type="application/json" data-rq-cfg set:html={JSON.stringify(cfg)} />
+
+<style is:global>
+  .rq-demo { position: fixed; z-index: 60; left: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px 9px 9px; border: 0; border-radius: 999px;
+    background: rgba(255, 255, 255, .94); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); box-shadow: 0 6px 24px rgba(0, 0, 0, .14); font: 600 13px/1 "Manrope Variable", system-ui, sans-serif; color: #111214; cursor: pointer; }
+  .rq-demo b, .rq-sample b { padding: 4px 8px; border-radius: 999px; background: #f0e6c8; color: #6b5414; font-size: 10.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+  .rq-tools { display: flex; align-items: center; gap: 8px; min-width: 0; }
+  .rq-sample { display: inline-flex; align-items: center; gap: 8px; padding: 5px 12px 5px 5px; border: 0; border-radius: 999px; background: #f3f2ee; font: 600 12.5px/1.2 "Manrope Variable", system-ui, sans-serif; color: #111214; cursor: pointer; text-align: left; }
+  .rq-sample[hidden] { display: none; } .rq-short { display: none; }
+  .rq-sh .sh-in { padding-bottom: calc(28px + env(safe-area-inset-bottom)); }
+  .rq .fl-q { margin-top: 26px; }
+  .rq .fl-opt small { display: block; margin-top: 3px; font-size: 13px; font-weight: 500; opacity: .7; }
+  .rq .fl-opt[aria-checked="true"] small { opacity: .8; }
+  .rq-bk { margin: 22px 0 0; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--fm); }
+  .rq-bk + .fl-opts { margin-top: 10px; }
+  .rq .rq-units { grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); }
+  .rq .rq-units .fl-opt { min-height: 64px; padding: 12px 14px !important; }
+  .rq .rq-units .fl-opt i { display: none; }
+  .rq-und { margin-top: 18px !important; }
+  .rq-seg { display: inline-flex; gap: 4px; margin-top: 20px; padding: 4px; border-radius: 14px; background: var(--fs); }
+  .rq-seg button { padding: 10px 18px !important; border-radius: 11px; font-weight: 600 !important; font-size: 15px !important; }
+  .rq-seg button[aria-pressed="true"] { background: #fff !important; box-shadow: 0 1px 4px rgba(0, 0, 0, .1); }
+  .rq-days { display: flex; gap: 8px; margin: 10px -26px 0; padding: 4px 26px 8px; overflow-x: auto; scrollbar-width: none; scroll-snap-type: x proximity; }
+  .rq-days::-webkit-scrollbar { display: none; }
+  .rq-day { flex: none; min-width: 62px; padding: 10px 12px !important; border-radius: 16px; background: var(--fs) !important; text-align: center; scroll-snap-align: start; transition: background-color .2s var(--fe), color .2s var(--fe); }
+  .rq-day span { display: block; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--fm); }
+  .rq-day b { display: block; margin-top: 4px; font-size: 20px; font-weight: 600; }
+  .rq-day[aria-pressed="true"] { background: var(--fi) !important; color: #fff !important; } .rq-day[aria-pressed="true"] span { color: rgba(255, 255, 255, .7); }
+  .rq-times { display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 8px; margin-top: 10px; }
+  .rq-time { padding: 12px 10px !important; border-radius: 14px; background: var(--fs) !important; text-align: left; transition: background-color .2s var(--fe); }
+  .rq-time b { display: block; font-size: 17px; font-weight: 600; } .rq-time span { display: block; margin-top: 2px; font-size: 12px; color: var(--fm); }
+  .rq-time[aria-pressed="true"] { background: var(--fa) !important; color: #fff !important; } .rq-time[aria-pressed="true"] span { color: rgba(255, 255, 255, .8); }
+  .rq-time:disabled { opacity: .35; cursor: default; }
+  .rq-picked { list-style: none; margin: 8px 0 0; padding: 0; border-top: 1px solid #ebe8e1; }
+  .rq-picked li { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 11px 2px; border-bottom: 1px solid #ebe8e1; font-size: 14.5px; }
+  .rq-picked li b { font-weight: 600; } .rq-picked li small { display: block; color: var(--fm); font-size: 12.5px; margin-top: 2px; }
+  .rq-picked .rq-rm { width: 30px; height: 30px; border-radius: 50%; background: var(--fs) !important; display: grid; place-items: center; flex: none; }
+  .rq-picked .rq-rm svg { width: 14px; height: 14px; }
+  .rq-hint { margin: 10px 0 0; font-size: 14px; color: var(--fm); }
+  .rq-tel { display: flex; gap: 12px; align-items: flex-end; } .rq-tel .fl-in:first-child { width: 5.2em; flex: none; } .rq-tel .fl-in:last-child { flex: 1; min-width: 0; }
+  .rq .fl-in { font-size: 20px; }
+  .rq-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .rq-pill { padding: 11px 16px !important; border-radius: 999px; background: var(--fs) !important; font-size: 15px !important; font-weight: 600 !important; transition: background-color .2s var(--fe), color .2s var(--fe); }
+  .rq-pill[aria-pressed="true"] { background: var(--fi) !important; color: #fff !important; }
+  .rq-top-skip { float: right; margin-top: 30px; }
+  .rq-next { margin: 14px 0 0; font-size: 15px; line-height: 1.6; color: var(--fi); max-width: 32em; }
+  .rq-demo-note { display: inline-block; margin: 14px 0 0; padding: 8px 12px; border-radius: 10px; background: #f0e6c8; color: #6b5414; font-size: 14px; font-weight: 600; }
+  @media (max-width: 819px) { .rq-days { margin: 10px -20px 0; padding: 4px 20px 8px; } .rq-long { display: none; } .rq-short { display: inline; } }
+
+  /* What the advisor receives: our email, inside a quiet mail frame. */
+  .rq-ad { position: fixed; inset: 0; z-index: 80; display: grid; place-items: center; padding: 16px; background: rgba(12, 14, 18, .4); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+    opacity: 0; transition: opacity .26s cubic-bezier(.16, 1, .3, 1); font-family: "Manrope Variable", system-ui, sans-serif; color: #111214; }
+  .rq-ad.is-open { opacity: 1; } .rq-ad[hidden] { display: none; }
+  .rq-ad-frame { width: min(720px, 100%); max-height: calc(100svh - 32px); display: flex; flex-direction: column; border-radius: 20px; background: #f3f2ee; box-shadow: 0 30px 80px rgba(0, 0, 0, .25); overflow: hidden;
+    transform: translateY(16px); transition: transform .28s cubic-bezier(.16, 1, .3, 1); }
+  .rq-ad.is-open .rq-ad-frame { transform: none; }
+  .rq-ad-bar { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px 12px 22px; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #5d6066; }
+  .rq-ad-bar .sh-x { background: #fff; }
+  .rq-ad-body { overflow-y: auto; overscroll-behavior: contain; padding: 0 14px 14px; }
+  .rq-mh { background: #fff; border-radius: 14px 14px 0 0; padding: 16px 22px; border-bottom: 1px solid #ebe8e1; font-size: 14px; display: grid; gap: 6px; }
+  .rq-mh div { display: grid; grid-template-columns: 5.5em 1fr; gap: 10px; } .rq-mh span { color: #5d6066; } .rq-mh b { font-weight: 600; overflow-wrap: anywhere; }
+  .rq-mail { background: #fff; border-radius: 0 0 14px 14px; padding: 30px 28px 26px; }
+  .rq-brand { margin: 0; font: 400 22px/1 "Playfair Display Variable", Georgia, serif; } .rq-rule { height: 3px; width: 44px; background: #2f5d50; border-radius: 2px; margin: 14px 0 22px; }
+  .rq-mail h3 { margin: 0 0 6px; font: 400 26px/1.15 "Playfair Display Variable", Georgia, serif; letter-spacing: -.01em; }
+  .rq-mail .rq-note { margin: 0 0 18px; font-size: 13px; color: #6b5414; }
+  .rq-mail h4 { margin: 24px 0 8px; font-size: 11.5px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #2f5d50; }
+  .rq-sum { border-radius: 14px; background: #eef3f1; padding: 6px 16px; }
+  .rq-kv { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+  .rq-ad .rq-kv th, .rq-ad .rq-kv td { border: 0; background: none; }
+  .rq-kv th { width: 38%; padding: 9px 12px 9px 0; text-align: left; font-weight: 500; color: #5d6066; vertical-align: top; }
+  .rq-kv td { padding: 9px 0; font-weight: 600; overflow-wrap: anywhere; }
+  .rq-ad .rq-kv tr + tr th, .rq-ad .rq-kv tr + tr td { border-top: 1px solid #ebe8e1; } .rq-ad .rq-sum .rq-kv tr + tr th, .rq-ad .rq-sum .rq-kv tr + tr td { border-top-color: #dbe5e1; }
+  .rq-kv td small { display: block; font-weight: 500; color: #5d6066; margin-top: 2px; }
+  .rq-quote { margin: 0; padding: 0 0 0 12px; border-left: 2px solid #2f5d50; font-weight: 500; font-size: 13.5px; line-height: 1.5; }
+  .rq-foot { margin: 26px 0 0; padding-top: 16px; border-top: 1px solid #ebe8e1; font-size: 12.5px; color: #5d6066; line-height: 1.5; }
+  @media (max-width: 600px) { .rq-ad { padding: 0; place-items: end stretch; } .rq-ad-frame { max-height: 94svh; border-radius: 20px 20px 0 0; } .rq-ad-body { padding-bottom: calc(14px + env(safe-area-inset-bottom)); } .rq-mail { padding: 24px 18px 20px; } .rq-mh { padding: 14px 18px; } }
+  @media (prefers-reduced-motion: reduce) { .rq-ad, .rq-ad-frame { transition: none; } }
+</style>
+
+<script>
+  import { initRequest } from "../scripts/request";
+  initRequest();
+</script>

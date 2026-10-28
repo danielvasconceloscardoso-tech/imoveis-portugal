@@ -220,3 +220,20 @@ body.d2 .hd.solid { background: var(--paper); }
 .h2-m6 img { object-position: 50% 80%; }
 /* Map pins and focus rings on design-v2 pages: green, not brass (D60). */
 body.d2 .mapx { --mapx-accent: var(--accent); } body.d2 .mapx-proj:focus-visible span { outline-color: var(--accent); }
+
+/* ---------------------------------------------------------------- 28 Oct (prompt 37 §2) */
+/* Six sections plus the Concierge in one header line: tighter nav, the country picker without its "I live in" label and
+   the search without its ⌘K hint until 1600px; below 1280px the six sections sit in the menu, as on phones. */
+@media (min-width: 1080px) {
+  body.d2 .hd .nav { gap: 18px; }
+  body.d2 .hd .nav a { font-size: 13px; letter-spacing: .04em; }
+  body.d2 .hd .nav + .tools { margin-left: 20px; }
+}
+@media (min-width: 1080px) and (max-width: 1599px) { body.d2 .hd .cpick-l, body.d2 .hd .hd-find kbd { display: none; } }
+@media (min-width: 1080px) and (max-width: 1279px) { body.d2 .hd .nav { display: none; } body.d2 .hd .concierge { display: block; } }
+@media (min-width: 1080px) and (max-width: 1279px) { body.d2 .hd .nav + .tools { margin-left: auto; } }
+/* The menu sheet is position:fixed inside the header; the header's blur would make it the sheet's containing block
+   (a 37px strip), so the blur is off while the menu is open. On phones the sheet ends above the tab bar. */
+body.d2 .hd:has(details.concierge[open]) { -webkit-backdrop-filter: none; backdrop-filter: none; }
+@media (max-width: 819px) { body.d2 .cmenu { bottom: calc(64px + env(safe-area-inset-bottom)); } }
+body.d2 .h2-sec.h2-artline { padding-top: 32px; padding-bottom: 32px; }

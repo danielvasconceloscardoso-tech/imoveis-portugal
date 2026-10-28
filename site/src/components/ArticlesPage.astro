@@ -1,0 +1,34 @@
+---
+// The Artigos hub (prompt 37 §2), built like the Simuladores hub: one card per article, a short line, one action.
+// Our four reference articles first, then the blog posts of this language.
+import V2 from "../layouts/V2.astro";
+import { pathFor, type Lang, type EdCode } from "../i18n";
+import { ARTS, ART_SUB } from "../lib/articles";
+import { postsFor } from "../lib/blog";
+import { DISCLAIMER } from "../lib/content";
+import { c, edName } from "../lib/copy";
+
+interface Props { lang: Lang; ed: EdCode; }
+const { lang, ed } = Astro.props;
+const base = pathFor(lang, ed, "articles"), blog = pathFor(lang, ed, "blog");
+const cards = [
+  ...ARTS.map((a) => ({ h: c(`art.${a}.h`, lang), p: c(`art.${a}.p`, lang), href: `${base}${ART_SUB[a][lang]}/` })),
+  ...postsFor(lang).map((p) => ({ h: p.title, p: p.description, href: `${blog}${p.slug}/` })),
+];
+---
+<V2 lang={lang} ed={ed} page="articles" title={`${c("art.title", lang)} | Imóveis Portugal · ${edName(ed, lang)}`} description={c("art.lede", lang)} sticky={null}>
+  <div class="frame read ph">
+    <h1>{c("art.title", lang)}</h1>
+    <p class="lede">{c("art.lede", lang)}</p>
+  </div>
+  <div class="frame read tool-list art-list">
+    {cards.map((x) => (
+      <div class="qa-item">
+        <h2 class="h3"><a href={x.href}>{x.h}</a></h2>
+        <p>{x.p}</p>
+        <p><a class="more" href={x.href}>{c("art.read", lang)}</a></p>
+      </div>
+    ))}
+    <p class="small" style="margin:32px 0 64px">{DISCLAIMER[lang]}</p>
+  </div>
+</V2>

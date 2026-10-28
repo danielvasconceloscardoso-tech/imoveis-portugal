@@ -16,7 +16,7 @@ export const GET: APIRoute = ({ props }) => {
   const { lang, ed } = props as { lang: Lang; ed: EdCode };
   const map = pathFor(lang, ed, "map"), faq = pathFor(lang, ed, "faq"), sims = pathFor(lang, ed, "sims"), path = pathFor(lang, ed, "journey");
   const items: [string, string, string, string?][] = [];  // [group, name, url, sub]
-  for (const k of ["journey", "map", "sims", "faq", "partners", "consult", "data", "blog", "how"] as const)
+  for (const k of ["journey", "map", "sims", "articles", "faq", "partners", "consult", "data", "blog", "how"] as const)
     items.push(["page", c(`common.nav.${k === "journey" ? "journey" : k}`, lang), pathFor(lang, ed, k)]);
   for (const m of MAP_MUNIS) items.push(["place", m.n, `${map}?place=${m.s}`, c(`map.r.${m.r}`, lang)]);
   for (const t of TOOLS.filter((x) => ENABLED.includes(x))) items.push(["sim", c(`sims.${t}.name`, lang), `${sims}${SUB[t][lang]}/`]);

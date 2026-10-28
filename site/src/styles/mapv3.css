@@ -4,14 +4,12 @@
   --sh: 0 10px 34px rgba(24, 30, 36, .10), 0 1px 2px rgba(24, 30, 36, .06); --e: cubic-bezier(.16, 1, .3, 1);
   --m3serif: "Playfair Display Variable", Georgia, serif; --m3sans: "Manrope Variable", system-ui, -apple-system, sans-serif;
   position: relative; font-family: var(--m3sans); color: var(--gi); }
-.m3.is-night { --g: rgba(16, 20, 28, .62); --g2: rgba(16, 20, 28, .86); --gl: rgba(255, 255, 255, .08); --gi: #f4f1ea; --gm: #a9adb3; }
 :where(.m3) button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; -webkit-tap-highlight-color: transparent; }
 .m3 :focus-visible { outline: 2px solid #2f5d50; outline-offset: 2px; }
 :where(.m3) svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; flex: none; }
 .m3-glass { background: var(--g); -webkit-backdrop-filter: blur(20px) saturate(1.5); backdrop-filter: blur(20px) saturate(1.5); border: 1px solid var(--gl); box-shadow: var(--sh); }
 
 .m3-stage { position: relative; overflow: hidden; background: #e7e2d7; height: 82vh; min-height: 560px; isolation: isolate; transition: background-color .6s var(--e); }
-.m3.is-night .m3-stage { background: #06101c; }
 .m3-page .m3-stage { height: calc(100svh - 68px); min-height: 520px; }
 .m3-poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity .6s var(--e); }
 .m3.is-live .m3-poster { opacity: 0; pointer-events: none; }
@@ -24,14 +22,12 @@
 .m3-labels span { position: absolute; left: 0; top: 0; white-space: nowrap; translate: -50% -50%; color: #23272c; text-shadow: 0 0 3px #fbf8f1, 0 0 8px #fbf8f1, 0 0 14px rgba(251, 248, 241, .8); }
 .m3-l1 { font: 500 15px/1 var(--m3serif); letter-spacing: .01em; }
 .m3-l2 { font: 600 10px/1 var(--m3sans); letter-spacing: .12em; text-transform: uppercase; color: #3d4247 !important; }
-.m3.is-night .m3-labels span { color: #f5efe2; text-shadow: 0 0 4px #000, 0 0 12px rgba(0, 0, 0, .8); }
-.m3.is-night .m3-l2 { color: #c9c4b8 !important; }
 
 .m3-tip { position: absolute; left: 0; top: 0; z-index: 4; pointer-events: none; padding: 8px 12px; border-radius: 12px; font: 600 13px/1.2 var(--m3sans); white-space: nowrap;
   background: var(--g2); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); box-shadow: var(--sh); }
 .m3-tip b { display: block; font: 400 17px/1.25 var(--m3serif); margin-top: 2px; }
 
-/* The top: search, the chips, Day and Night. */
+/* The top: search, the chips, 2D and 3D. */
 .m3-top { position: absolute; z-index: 5; top: 16px; left: 16px; right: 16px; display: flex; align-items: center; gap: 10px; pointer-events: none; }
 .m3-top > * { pointer-events: auto; }
 .m3-searchbtn, .m3-chips, .m3-seg { background: var(--g); -webkit-backdrop-filter: blur(20px) saturate(1.5); backdrop-filter: blur(20px) saturate(1.5); border: 1px solid var(--gl); box-shadow: var(--sh); border-radius: 999px; }
@@ -44,14 +40,12 @@
 .m3-chip { height: 34px; padding: 0 14px; border-radius: 999px; font-size: 13px; font-weight: 600; white-space: nowrap; color: var(--gm) !important; transition: background-color .25s var(--e), color .25s var(--e); }
 .m3-chip:hover { color: var(--gi) !important; }
 .m3-chip[aria-pressed="true"] { background: var(--gi); color: #fff !important; }
-.m3.is-night .m3-chip[aria-pressed="true"] { color: #111214 !important; }
 .m3-chip-o[aria-pressed="true"] { background: #2f5d50; color: #fff !important; }
 .m3-sep { width: 1px; height: 18px; background: currentColor; opacity: .15; margin: 0 6px; flex: none; }
 .m3-seg { margin-left: auto; display: flex; gap: 2px; height: 44px; padding: 4px; }
 .m3-seg button { display: flex; align-items: center; gap: 6px; height: 34px; padding: 0 12px; border-radius: 999px; font-size: 13px; font-weight: 600; color: var(--gm); transition: background-color .25s var(--e), color .25s var(--e); }
 .m3-seg button svg { width: 16px; height: 16px; }
 .m3-seg button[aria-pressed="true"] { background: var(--g2); color: var(--gi); box-shadow: 0 1px 4px rgba(0, 0, 0, .12); }
-.m3.is-night .m3-seg button[aria-pressed="true"] { background: #f4f1ea; color: #111214; }
 
 /* The dock: the budget gesture, time, tours and a one-line legend. */
 .m3-dock { position: absolute; z-index: 5; left: 16px; bottom: 16px; width: 380px; padding: 18px 20px 14px; border-radius: 20px; display: grid; gap: 14px;
@@ -73,7 +67,6 @@
 .m3-time { display: flex; align-items: center; gap: 12px; transition: opacity .3s; }
 .m3-time.is-off { opacity: .35; pointer-events: none; }
 .m3-play { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; background: var(--gi) !important; color: var(--g2) !important; flex: none; }
-.m3.is-night .m3-play { color: #111214 !important; }
 .m3-play svg { width: 14px; height: 14px; fill: currentColor; stroke: none; }
 .m3-play.is-on svg path { d: path("M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"); }
 .m3-scrub { flex: 1; height: 24px; }
@@ -109,19 +102,16 @@
 .m3-stats dd { margin: 6px 0 0; font: 400 20px/1.1 var(--m3serif); font-variant-numeric: tabular-nums; white-space: nowrap; }
 .m3-buys { margin: 16px 0 0; font: 400 16px/1.4 var(--m3serif); }
 .m3-spark { display: block; width: 100%; height: 88px; margin-top: 14px; color: #2f5d50; overflow: visible; }
-.m3.is-night .m3-spark { color: #ffd68a; }
 .m3-spark text { font: 600 10px var(--m3sans); fill: var(--gm); }
 .m3-acts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 20px; }
 .m3-btn { display: flex; align-items: center; justify-content: center; text-align: center; min-height: 50px; padding: 0 14px; border-radius: 14px; font: 700 14px/1.2 var(--m3sans) !important; text-decoration: none;
   background: rgba(120, 120, 110, .12) !important; color: var(--gi) !important; transition: background-color .2s var(--e), transform .2s var(--e); }
 .m3-btn:hover { background: rgba(120, 120, 110, .2) !important; }
 .m3-btn-p { background: var(--gi) !important; color: var(--g2) !important; }
-.m3.is-night .m3-btn-p { color: #111214 !important; }
 .m3-btn-p:hover { background: #2f5d50 !important; color: #fff !important; }
 .m3-btn:active { transform: scale(.98); }
 .m3-more { display: flex; flex-wrap: wrap; gap: 4px 18px; margin-top: 14px; }
 .m3-link { font-size: 13.5px; font-weight: 600; color: #2f5d50 !important; padding: 6px 0 !important; }
-.m3.is-night .m3-link { color: #ffd68a !important; }
 .m3-det { list-style: none; margin: 10px 0 0; padding: 0; font-size: 14px; line-height: 1.5; }
 .m3-det li { padding: 10px 0; border-top: 1px solid rgba(120, 120, 110, .18); }
 .m3-tag { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #7a5e28; }
@@ -212,3 +202,5 @@ body.d2.m3p .sources-list { padding-top: 32px; }
 .m3 [hidden], .m3-spot[hidden] { display: none !important; }
 .m3-golfband { --c: #5f8a4c; aspect-ratio: 16 / 5; }
 .m3-stats .m3-dd-s { font-size: 15px; line-height: 1.25; white-space: normal; }
+
+.m3-dim button { min-width: 44px; justify-content: center; font-weight: 600; letter-spacing: .02em; }

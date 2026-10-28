@@ -7,9 +7,10 @@ import type { Lang } from "../i18n";
 import { type Project, type Unit, img } from "../lib/projects";
 import { PRICES, LAST } from "../lib/prices";
 import { c } from "../lib/copy";
+import ShowcaseBlocks from "./ShowcaseBlocks.astro";
 
-interface Props { lang: Lang; projects: Project[]; href: (p: Project, u: Unit) => string; label: string; cur?: { code: string; rate: number }; locale: string; }
-const { lang, projects, href, label, cur, locale } = Astro.props;
+interface Props { lang: Lang; projects: Project[]; href: (p: Project, u: Unit) => string; label: string; cur?: { code: string; rate: number }; locale: string; simHref?: string; mapHref?: string; }
+const { lang, projects, href, label, cur, locale, simHref, mapHref } = Astro.props;
 const p0 = projects[0];
 const s = PRICES.munis[p0.muni] as any;
 const money = (v: number, k = "EUR") => new Intl.NumberFormat(locale, { style: "currency", currency: k, maximumFractionDigits: 0 }).format(v);
@@ -22,6 +23,7 @@ const from = Math.min(...projects.map((p) => p.from ?? Infinity));
 const checked = projects.map((p) => p.checked).filter(Boolean).sort().pop();
 const credits = [...new Set(projects.flatMap((p) => p.credits ?? []))].join("; ");
 ---
+{projects[0].blocks ? <ShowcaseBlocks lang={lang} p={projects[0]} label={label} locale={locale} simHref={simHref} mapHref={mapHref} /> : (
 <article class="sc">
   <figure class="sc-hero"><img src={img(p0.render)} srcset={`${img(p0.render, 800)} 800w, ${img(p0.render)} 1600w`} sizes="100vw" alt={p0.name} width="1600" height="900" fetchpriority="high" /></figure>
   <header class="sc-head">
@@ -70,6 +72,7 @@ const credits = [...new Set(projects.flatMap((p) => p.credits ?? []))].join("; "
     <details><summary>{c("show.sources", lang)}</summary><ul>{[...new Set(projects.flatMap((p) => p.sources ?? []))].map((u) => <li><a href={u} rel="noopener">{u}</a></li>)}</ul></details>
   </footer>
 </article>
+)}
 
 <style>
   .sc { --gap: clamp(20px, 3vw, 40px); }

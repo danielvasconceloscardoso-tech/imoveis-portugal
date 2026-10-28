@@ -12,8 +12,18 @@ How to edit:
 
 ### navx.faq
 - PT: Perguntas
-- EN: FAQ
+- EN: Questions
 - FR: Questions
+
+### navx.articles
+- PT: Artigos
+- EN: Articles
+- FR: Articles
+
+### nav.articles
+- PT: Artigos
+- EN: Articles
+- FR: Articles
 
 ### navx.journey
 - PT: Passo a passo
@@ -112,7 +122,7 @@ How to edit:
 
 ### navx.sims
 - PT: Simuladores
-- EN: Calculators
+- EN: Simulators
 - FR: Simulateurs
 
 ### navx.map
@@ -6056,16 +6066,6 @@ Prompt 36 (D62): map v3. Budget gesture, layer chips, Day/Night, search, time, c
 - EN: Gross rental yield
 - FR: Rendement locatif brut
 
-### day
-- PT: Dia
-- EN: Day
-- FR: Jour
-
-### night
-- PT: Noite
-- EN: Night
-- FR: Nuit
-
 ### search
 - PT: Procurar um lugar, uma praia ou um campo de golfe
 - EN: Search a place, a beach or a golf course
@@ -6222,9 +6222,9 @@ Prompt 36 (D62): map v3. Budget gesture, layer chips, Day/Night, search, time, c
 - FR: La carte a besoin de JavaScript. La liste des 308 communes, avec le prix de chacune, est juste en dessous.
 
 ### credits
-- PT: Fonte: INE · © OpenStreetMap contributors · Relevo: Terrain Tiles (AWS Open Data) · Noite: NASA Black Marble
-- EN: Source: INE · © OpenStreetMap contributors · Relief: Terrain Tiles (AWS Open Data) · Night: NASA Black Marble
-- FR: Source : INE · © OpenStreetMap contributors · Relief : Terrain Tiles (AWS Open Data) · Nuit : NASA Black Marble
+- PT: Fonte: INE · © OpenStreetMap contributors · Relevo: Terrain Tiles (AWS Open Data)
+- EN: Source: INE · © OpenStreetMap contributors · Relief: Terrain Tiles (AWS Open Data)
+- FR: Source : INE · © OpenStreetMap contributors · Relief : Terrain Tiles (AWS Open Data)
 
 ## flow
 
@@ -6675,3 +6675,269 @@ Prompt 36 §9 (D62): the golf card on the map, from our own list (content/facts/
 - PT: A nossa lista de campos: Federação Portuguesa de Golfe, sites oficiais dos campos e dos resorts. Contornos © OpenStreetMap contributors.
 - EN: Our list of courses: Portuguese Golf Federation, the courses' and resorts' official websites. Outlines © OpenStreetMap contributors.
 - FR: Notre liste des parcours : Fédération portugaise de golf, sites officiels des parcours et des resorts. Contours © OpenStreetMap contributors.
+
+## showb
+
+### avail
+- PT: Disponibilidade
+- EN: Availability
+- FR: Disponibilités
+
+### block
+- PT: Bloco {b}
+- EN: Block {b}
+- FR: Bloc {b}
+
+### typ
+- PT: Tipologia
+- EN: Type
+- FR: Typologie
+
+### total
+- PT: Total
+- EN: Total
+- FR: Total
+
+### forsale
+- PT: Para venda
+- EN: For sale
+- FR: En vente
+
+### soon
+- PT: Venda a partir de mar 2027
+- EN: On sale from Mar 2027
+- FR: En vente dès mars 2027
+
+### reserved
+- PT: Reservado
+- EN: Reserved
+- FR: Réservé
+
+### sold
+- PT: Vendido
+- EN: Sold
+- FR: Vendu
+
+### checked
+- PT: Verificado a {date}.
+- EN: Checked on {date}.
+- FR: Vérifié le {date}.
+
+### source
+- PT: Fonte: tabela do promotor
+- EN: Source: the developer's table
+- FR: Source : tableau du promoteur
+
+### interest
+- PT: Tenho interesse nesta casa
+- EN: I'm interested in this home
+- FR: Ce logement m'intéresse
+
+### visit
+- PT: Pedir visita privada
+- EN: Request a private visit
+- FR: Demander une visite privée
+
+### price
+- PT: Preço sob consulta
+- EN: Price on request
+- FR: Prix sur demande
+
+### features
+- PT: O empreendimento
+- EN: The development
+- FR: La résidence
+
+### now
+- PT: {n} casas para venda agora
+- EN: {n} homes for sale now
+- FR: {n} logements en vente maintenant
+
+### view
+- PT: Ver o empreendimento
+- EN: View the development
+- FR: Voir la résidence
+
+### map
+- PT: No mapa
+- EN: On the map
+- FR: Sur la carte
+
+### maplink
+- PT: Ver {muni} no mapa, com os empreendimentos
+- EN: See {muni} on the map, with the developments
+- FR: Voir {muni} sur la carte, avec les résidences
+
+### sim
+- PT: Quanto custa a compra
+- EN: What the purchase costs
+- FR: Ce que coûte l'achat
+
+### simlede
+- PT: Introduza o preço que lhe for indicado pelo promotor. Habitação secundária, comprador sem crédito; o resto no simulador completo.
+- EN: Enter the price the developer gives you. Second home, buyer without a mortgage; everything else in the full simulator.
+- FR: Saisissez le prix indiqué par le promoteur. Résidence secondaire, acheteur sans crédit ; le reste dans le simulateur complet.
+
+### simprice
+- PT: Preço (€)
+- EN: Price (€)
+- FR: Prix (€)
+
+### simfull
+- PT: Abrir o simulador completo
+- EN: Open the full simulator
+- FR: Ouvrir le simulateur complet
+
+### by
+- PT: Promotor: {developer}
+- EN: Developer: {developer}
+- FR: Promoteur : {developer}
+
+### tour
+- PT: Marble Terrace, Gondomar
+- EN: Marble Terrace, Gondomar
+- FR: Marble Terrace, Gondomar
+
+## art
+
+Prompt 37 §2: the Artigos hub and its first four articles, made from the text moved off the map page and the home page. The articles also reuse "map.lede", "map.note", "home2.prices.p", "prices.method", "prices.yield.note" and "prices.break".
+
+### title
+- PT: Artigos
+- EN: Articles
+- FR: Articles
+
+### lede
+- PT: As explicações longas, as tabelas e o método, num só lugar. Cada número com a sua fonte oficial.
+- EN: The long explanations, the tables and the method, in one place. Every number with its official source.
+- FR: Les explications longues, les tableaux et la méthode, au même endroit. Chaque chiffre avec sa source officielle.
+
+### read
+- PT: Ler o artigo
+- EN: Read the article
+- FR: Lire l'article
+
+### all
+- PT: Todos os artigos
+- EN: All articles
+- FR: Tous les articles
+
+### open
+- PT: Abrir o mapa
+- EN: Open the map
+- FR: Ouvrir la carte
+
+### map.h
+- PT: Como ler os preços no mapa
+- EN: How to read the prices on the map
+- FR: Comment lire les prix sur la carte
+
+### map.p
+- PT: O que mostram as cores, o que é uma mediana e a lista dos 308 concelhos com o preço por m².
+- EN: What the colours show, what a median is, and the list of all 308 municipalities with the price per m².
+- FR: Ce que montrent les couleurs, ce qu'est une médiane, et la liste des 308 communes avec le prix au m².
+
+### map.link
+- PT: Como ler o mapa →
+- EN: How to read the map →
+- FR: Comment lire la carte →
+
+### prices.h
+- PT: Dez anos de preços em Portugal
+- EN: Ten years of prices in Portugal
+- FR: Dix ans de prix au Portugal
+
+### prices.p
+- PT: O metro quadrado vendido em Portugal, em Lisboa e no Porto, de 2016 a 2026, em números oficiais do INE.
+- EN: The square metre sold in Portugal, Lisbon and Porto from 2016 to 2026, in official INE figures.
+- FR: Le mètre carré vendu au Portugal, à Lisbonne et à Porto de 2016 à 2026, en chiffres officiels de l'INE.
+
+### prices.link
+- PT: Dez anos de preços →
+- EN: Ten years of prices →
+- FR: Dix ans de prix →
+
+### golf.h
+- PT: O prémio do golfe
+- EN: The golf premium
+- FR: La prime du golf
+
+### golf.p
+- PT: A mediana de cada freguesia com campo de golfe ao lado da mediana do seu concelho. Uma comparação, não uma causa.
+- EN: The median of each parish with a golf course next to its municipality's median. A comparison, not a cause.
+- FR: La médiane de chaque paroisse avec un golf à côté de celle de sa commune. Une comparaison, pas une cause.
+
+### golf.label
+- PT: Mediana da freguesia vs mediana do concelho, 2.º trimestre de 2026
+- EN: Parish median vs municipality median, second quarter of 2026
+- FR: Médiane de la paroisse vs médiane de la commune, 2e trimestre 2026
+
+### golf.1
+- PT: Para cada freguesia com um campo de golfe, pomos a mediana do preço por m² da freguesia ao lado da mediana do seu concelho, no mesmo trimestre. Um rácio de 1,36 quer dizer que a mediana da freguesia está 36% acima da do concelho.
+- EN: For each parish with a golf course, we set the parish's median price per m² next to its municipality's median, in the same quarter. A ratio of 1.36 means the parish median is 36% above the municipality's.
+- FR: Pour chaque paroisse (freguesia) qui compte un golf, nous plaçons le prix médian au m² de la paroisse à côté de celui de sa commune, au même trimestre. Un rapport de 1,36 signifie que la médiane de la paroisse est 36 % au-dessus de celle de la commune.
+
+### golf.2
+- PT: Isto mostra onde os preços diferem, não porquê. Uma freguesia com golfe pode estar acima ou abaixo do concelho por muitas razões: a costa, o tipo e o tamanho das casas, a construção nova, o perfil dos compradores. O golfe é uma característica destas freguesias entre muitas.
+- EN: This shows where prices differ, not why. A golf parish can sit above or below its municipality for many reasons: the coast, the type and size of homes, new building, who buys. Golf is one feature of these parishes among many.
+- FR: Cela montre où les prix diffèrent, pas pourquoi. Une paroisse avec golf peut se situer au-dessus ou en dessous de sa commune pour bien des raisons : la côte, le type et la taille des logements, la construction neuve, les acheteurs. Le golf est une caractéristique de ces paroisses parmi d'autres.
+
+### golf.3
+- PT: Almancil é o caso claro: a mediana está 36% acima da de Loulé. A maioria das outras freguesias de golfe do Algarve fica a menos de 10% do seu concelho, algumas abaixo. Desde o 4.º trimestre de 2019, Almancil e Loulé subiram quase o mesmo (cerca de +91%).
+- EN: Almancil is the clear case: its median is 36% above Loulé's. Most other Algarve golf parishes sit within 10% of their municipality, some below it. Since the fourth quarter of 2019, Almancil and Loulé have risen by almost the same share (about +91%).
+- FR: Almancil est le cas net : sa médiane est 36 % au-dessus de celle de Loulé. La plupart des autres paroisses de golf de l'Algarve restent à moins de 10 % de leur commune, certaines en dessous. Depuis le 4e trimestre 2019, Almancil et Loulé ont progressé presque autant (environ +91 %).
+
+### golf.4
+- PT: O INE publica medianas por freguesia só desde o 4.º trimestre de 2019 e só onde há vendas suficientes: não há valor de dez anos por freguesia e nada é estimado. Grândola e Alcácer do Sal (Troia, Comporta) não têm números por freguesia. Os campos vêm do OpenStreetMap: um campo que lá não esteja não aparece aqui.
+- EN: INE publishes parish medians only from the fourth quarter of 2019 and only where there are enough sales: there is no ten-year parish figure, and nothing is estimated. Grândola and Alcácer do Sal (Troia, Comporta) have no parish figures. Courses come from OpenStreetMap: a course missing there is missing here.
+- FR: L'INE ne publie les médianes par paroisse que depuis le 4e trimestre 2019, et seulement là où les ventes suffisent : il n'y a pas de chiffre sur dix ans par paroisse, et rien n'est estimé. Grândola et Alcácer do Sal (Troia, Comporta) n'ont pas de chiffres par paroisse. Les parcours viennent d'OpenStreetMap : un parcours absent là-bas l'est aussi ici.
+
+### golf.col.parish
+- PT: Freguesia
+- EN: Parish
+- FR: Paroisse
+
+### golf.col.muni
+- PT: Concelho
+- EN: Municipality
+- FR: Commune
+
+### golf.col.pm
+- PT: Freguesia, €/m²
+- EN: Parish, €/m²
+- FR: Paroisse, €/m²
+
+### golf.col.mm
+- PT: Concelho, €/m²
+- EN: Municipality, €/m²
+- FR: Commune, €/m²
+
+### golf.col.ratio
+- PT: Rácio
+- EN: Ratio
+- FR: Rapport
+
+### method.h
+- PT: Como calculamos
+- EN: How we calculate
+- FR: Notre méthode de calcul
+
+### method.p
+- PT: De onde vem cada número do mapa e dos gráficos, como o lemos e onde estão os limites.
+- EN: Where each number on the map and in the charts comes from, how we read it and where the limits are.
+- FR: D'où vient chaque chiffre de la carte et des graphiques, comment nous le lisons et où sont les limites.
+
+### method.link
+- PT: Como calculamos →
+- EN: How we calculate →
+- FR: Notre méthode de calcul →
+
+### method.1
+- PT: Os preços são do INE: a mediana do valor por m² das habitações familiares vendidas nos últimos 12 meses, por concelho e por freguesia. Não fazemos estimativas: onde o INE não publica, não mostramos número.
+- EN: Prices come from INE: the median value per m² of family dwellings sold in the last 12 months, by municipality and by parish. We make no estimates: where INE publishes nothing, we show no number.
+- FR: Les prix viennent de l'INE : la valeur médiane au m² des logements familiaux vendus sur les 12 derniers mois, par commune et par paroisse. Nous n'estimons rien : là où l'INE ne publie pas, nous n'affichons aucun chiffre.
+
+### method.2
+- PT: Os limites dos concelhos e freguesias são do OpenStreetMap, ligados aos códigos do INE. Os valores em francos, dólares, reais ou shekels usam a taxa de referência do BCE da data indicada.
+- EN: Municipality and parish boundaries come from OpenStreetMap, matched to INE codes. Amounts in francs, dollars, reais or shekels use the ECB reference rate of the date shown.
+- FR: Les limites des communes et des paroisses viennent d'OpenStreetMap, rattachées aux codes de l'INE. Les montants en francs, dollars, reais ou shekels utilisent le taux de référence de la BCE à la date indiquée.

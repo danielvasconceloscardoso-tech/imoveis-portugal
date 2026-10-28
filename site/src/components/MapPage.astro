@@ -2,13 +2,15 @@
 // The map page (prompts 16, 19 and 36; D34, D62): map v3 full screen under a translucent bar, then the lede, the list, sources.
 import V2 from "../layouts/V2.astro";
 import MapV3 from "./MapV3.astro";
-import { type Lang, type EdCode } from "../i18n";
+import { pathFor, type Lang, type EdCode } from "../i18n";
+import { ART_SUB } from "../lib/articles";
 import { Sources, fmtDate } from "../lib/content";
 import { c, edName } from "../lib/copy";
 
 interface Props { lang: Lang; ed: EdCode; }
 const { lang, ed } = Astro.props;
 const src = new Sources();
+const arts = pathFor(lang, ed, "articles"); // prompt 37 §2: the note and the municipality table now live in two articles
 const n = src.n("ine-m2-2026q2");
 src.n("ine-rent-history");
 src.n("bdp-mortgage-rate-2026-08");
@@ -20,7 +22,7 @@ src.raw("https://wiki.openstreetmap.org/wiki/Tag:leisure%3Dgolf_course", "Golf c
   <MapV3 lang={lang} ed={ed} mode="page" />
   <div class="m3-after">
     <p class="lede">{c("map.lede", lang)}<a class="sup" href={`#fonte-${n}`}>{n}</a></p>
-    <p class="small">{c("map.note", lang)}</p>
+    <p class="small m3-arts"><a href={`${arts}${ART_SUB.map[lang]}/`}>{c("art.map.link", lang)}</a> · <a href={`${arts}${ART_SUB.method[lang]}/`}>{c("art.method.link", lang)}</a></p>
   </div>
   <section class="sources-list" aria-labelledby="fontes">
     <div class="frame read">

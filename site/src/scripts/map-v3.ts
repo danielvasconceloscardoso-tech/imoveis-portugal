@@ -1,5 +1,5 @@
 // Map v3 (prompt 36, D62): the browser side of MapV3.astro. MapLibre loads when the map is needed (in view on the home
-// page; the first interaction, a link with a state, or idle time on the map page). Assets: /tiles/{dem,sea,night}/ and
+// page; the first interaction, a link with a state, or idle time on the map page). Assets: /tiles/{dem,sea}/ and
 // /data/map/ (scripts/map-data/v3_assets.py, v3_extras.py, build.py, golf.py); prices: /data/prices.json.
 import mapCss from "maplibre-gl/dist/maplibre-gl.css?url";
 import { feature, mesh } from "topojson-client";
@@ -9,9 +9,10 @@ type Series = { n: string; m2: (number | null)[]; rq: (number | null)[]; yield: 
   mo: { c4: number; c8: number | null; w: "up" | "steady" | "down" } | null };
 type Props = { id: number; n: string; s: string; r: string; x: number; y: number; a: number };
 type Layer = "price" | "g10" | "rent" | "yield";
-type Proj = { id: string; name: string; developer: string; muni: string; lon: number; lat: number; render?: string; from: number | null; showcase: string };
+type Proj = { id: string; name: string; developer: string; muni: string; lon: number; lat: number; render?: string; from: number | null; showcase: string; summary?: string; feats?: string[]; now?: number | null };
 
 const reduce = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
+const SKY = { "sky-color": "#f3efe6", "horizon-color": "#f6efe1", "fog-color": "#efe8da", "sky-horizon-blend": 0.6, "horizon-fog-blend": 0.7, "fog-ground-blend": 0.35, "atmosphere-blend": 0.5 };
 const weak = () => ((navigator as any).hardwareConcurrency || 8) <= 2 || (navigator as any).connection?.saveData === true;
 const plain = (s: string) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
 // One tuned ramp, warm sand to deep green (lightness falls steadily, so it reads in every common colour-vision type).
@@ -46,7 +47,11 @@ export function initMapV3(root: HTMLElement) {
   const stored = (() => { try { return Number(localStorage.getItem("ip.budget")) || 0; } catch { return 0; } })();
   let budget = Math.min(Math.max(Number(q.get("budget")) || stored || 300000, 100000), 20e6);
   let layer: Layer = (["price", "g10", "rent", "yield"].includes(q.get("layer") || "") ? q.get("layer") : "price") as Layer;
-  let night = q.get("night") === "1", flat = reduce() || weak() || q.get("flat") === "1";
+  // 2D or 3D (prompt 37 §3): the link, else the reader's last choice, else 2D on phones and weak devices and 3D on desktop.
+  // Reduced motion always gets the flat map.
+  const dimSaved = (() => { try { return localStorage.getItem("ip.map.dim"); } catch { return null; } })();
+  const dimAsked = q.get("dim") ?? (q.get("flat") === "1" ? "2d" : null) ?? dimSaved;
+  let flat = reduce() || (dimAsked ? dimAsked === "2d" : weak() || matchMedia("(max-width: 760px), (pointer: coarse)").matches);
   let selected: string | null = q.get("place"), selPar: string | null = q.get("parish"), pinA: string | null = null;
   let overlays = { golf: q.get("golf") === "1", beach: q.get("beach") === "1", devs: q.get("devs") === "1" };
   let P: { quarters: string[]; munis: Record<string, Series> } | null = null;
@@ -66,7 +71,7 @@ export function initMapV3(root: HTMLElement) {
     const p = new URLSearchParams(location.search);
     const set = (k: string, v: string | null) => (v ? p.set(k, v) : p.delete(k));
     set("budget", String(Math.round(budget))); set("layer", layer === "price" ? null : layer); set("place", selected); set("parish", selPar);
-    set("night", night ? "1" : null); set("q", qi >= 0 && P ? P.quarters[qi] : null);
+    set("q", qi >= 0 && P ? P.quarters[qi] : null);
     for (const k of ["golf", "beach", "devs"] as const) set(k, overlays[k] ? "1" : null);
     history.replaceState(null, "", `${location.pathname}?${p}${location.hash}`);
   }
@@ -151,18 +156,26 @@ export function initMapV3(root: HTMLElement) {
   amountIn.addEventListener("keydown", (e) => { if (e.key === "Enter") commit(); if (e.key === "Escape") { amountIn.hidden = true; amountBtn.hidden = false; } });
   amountIn.addEventListener("blur", commit);
 
-  // ------------------------------------------------------------ chips, day and night, overlays
+  // ------------------------------------------------------------ chips, 2D and 3D, overlays
   root.querySelectorAll<HTMLButtonElement>("[data-layer]").forEach((b) => b.addEventListener("click", () => setLayer(b.dataset.layer as Layer)));
   function setLayer(l: Layer) {
     layer = l; root.querySelectorAll("[data-layer]").forEach((b) => b.setAttribute("aria-pressed", String((b as HTMLElement).dataset.layer === l)));
     const tm = root.querySelector<HTMLElement>("[data-time]"); if (tm) tm.classList.toggle("is-off", l === "g10" || l === "yield");
     repaint(); if (selected && !sheet.hidden) showPlace(selected, false); syncUrl(); load();
   }
-  root.querySelectorAll<HTMLButtonElement>("[data-night]").forEach((b) => b.addEventListener("click", () => setNight(b.dataset.night === "1")));
-  function setNight(on: boolean) {
-    night = on; root.classList.toggle("is-night", on);
-    root.querySelectorAll("[data-night]").forEach((b) => b.setAttribute("aria-pressed", String(((b as HTMLElement).dataset.night === "1") === on)));
-    syncUrl(); styleNight(); load();
+  root.querySelectorAll<HTMLButtonElement>("[data-dim]").forEach((b) => b.addEventListener("click", () => setDim(b.dataset.dim === "2d")));
+  function dimButtons() { root.classList.toggle("is-2d", flat); root.querySelectorAll("[data-dim]").forEach((b) => b.setAttribute("aria-pressed", String(((b as HTMLElement).dataset.dim === "2d") === flat))); }
+  // 2D: no terrain, no hillshade, no sky, north up and no tilt; the same layers, card, search and tours. 3D: today's relief.
+  function setDim(two: boolean) {
+    flat = two || reduce(); dimButtons(); try { localStorage.setItem("ip.map.dim", flat ? "2d" : "3d"); } catch {}
+    if (!map) { load(); return; }
+    rotating = false; stopTour();
+    map.setTerrain(flat ? null : { source: "dem", exaggeration: 1.5 });
+    map.setLayoutProperty("hill", "visibility", flat ? "none" : "visible");
+    try { map.setSky(flat ? { "sky-color": "#e7e2d7", "horizon-color": "#e7e2d7", "fog-color": "#e7e2d7", "sky-horizon-blend": 0, "horizon-fog-blend": 0, "fog-ground-blend": 1, "atmosphere-blend": 0 } : SKY); } catch { /* older styles have no sky */ }
+    if (flat) { map.dragRotate.disable(); map.touchZoomRotate.disableRotation(); } else { map.dragRotate.enable(); map.touchZoomRotate.enableRotation(); }
+    map.easeTo({ pitch: flat ? 0 : 50, bearing: flat ? 0 : -12, duration: reduce() ? 0 : 700 });
+    if (!flat) governor();
   }
   root.querySelectorAll<HTMLButtonElement>("[data-overlay]").forEach((b) => b.addEventListener("click", () => setOverlay(b.dataset.overlay as "golf" | "beach" | "devs", !overlays[b.dataset.overlay as "golf"])));
   async function setOverlay(k: "golf" | "beach" | "devs", on: boolean) {
@@ -193,31 +206,25 @@ export function initMapV3(root: HTMLElement) {
         container: canvas, attributionControl: false, pixelRatio: Math.min(devicePixelRatio || 1, 2), dragRotate: !flat, pitchWithRotate: !flat, maxPitch: 72, minZoom: 4.6, maxZoom: 12.5, fadeDuration: 150,
         center: [-8.6, 39.5], zoom: narrow ? 5.6 : 6.2, pitch: flat ? 0 : 52, bearing: flat ? 0 : -12,
         style: { version: 8, sources: {}, layers: [{ id: "bg", type: "background", paint: { "background-color": "#e7e2d7" } }],
-          ...(flat ? {} : { sky: { "sky-color": "#f3efe6", "horizon-color": "#f6efe1", "fog-color": "#efe8da", "sky-horizon-blend": 0.6, "horizon-fog-blend": 0.7, "fog-ground-blend": 0.35, "atmosphere-blend": 0.5 } }) } as any,
+          ...(flat ? {} : { sky: SKY }) } as any,
       });
       await new Promise<void>((res) => map.on("load", () => res()));
       // Far sea first (z5-z6, wide), then the near sea (z5-z8). Spain and Morocco stay the quiet background colour.
       map.addSource("seafar", { type: "raster", tiles: ["/tiles/seafar/{z}/{x}/{y}.webp"], tileSize: 256, minzoom: 5, maxzoom: 6, bounds: [-32, 27.5, 4, 47.5] });
       map.addLayer({ id: "seafar", type: "raster", source: "seafar", paint: { "raster-fade-duration": 0 } });
-      map.addSource("nightfar", { type: "raster", tiles: ["/tiles/nightfar/{z}/{x}/{y}.webp"], tileSize: 256, minzoom: 5, maxzoom: 6, bounds: [-32, 27.5, 4, 47.5] });
-      map.addLayer({ id: "nightfar", type: "raster", source: "nightfar", layout: { visibility: "none" }, paint: { "raster-fade-duration": 0, "raster-opacity": 0.95, "raster-contrast": 0.25 } });
       map.addSource("sea", { type: "raster", tiles: ["/tiles/sea/{z}/{x}/{y}.webp"], tileSize: 256, minzoom: 5, maxzoom: 8, bounds: [-14.5, 35, -5, 43.8] });
       map.addLayer({ id: "sea", type: "raster", source: "sea", paint: { "raster-opacity": 1, "raster-fade-duration": 0 } });
-      map.addSource("night", { type: "raster", tiles: ["/tiles/night/{z}/{x}/{y}.webp"], tileSize: 256, minzoom: 5, maxzoom: 8, bounds: [-14.5, 35, -5, 43.8] });
       map.addSource("dem", { type: "raster-dem", tiles: ["/tiles/dem/{z}/{x}/{y}.webp"], tileSize: 256, minzoom: 5, maxzoom: 10, encoding: "terrarium", bounds: [-9.75, 36.75, -6.0, 42.25] });
       map.addSource("dem2", { type: "raster-dem", tiles: ["/tiles/dem/{z}/{x}/{y}.webp"], tileSize: 256, minzoom: 5, maxzoom: 10, encoding: "terrarium", bounds: [-9.75, 36.75, -6.0, 42.25] });
       map.addSource("munis", { type: "geojson", data: geo });
       map.addLayer({ id: "land", type: "fill", source: "munis", paint: { "fill-color": "#efe6d3" } });
       map.addLayer({ id: "muni-fill", type: "fill", source: "munis", paint: { "fill-color": colorExpr(), "fill-opacity": 0.78, "fill-color-transition": { duration: 300, delay: 0 } } as any });
-      map.addLayer({ id: "night", type: "raster", source: "night", layout: { visibility: "none" }, paint: { "raster-opacity": ["interpolate", ["linear"], ["zoom"], 8, 0.95, 10.5, 0.5], "raster-contrast": 0.25, "raster-brightness-min": 0, "raster-fade-duration": 0 } });
-      map.addLayer({ id: "hill", type: "hillshade", source: "dem2", paint: { "hillshade-illumination-direction": 225, "hillshade-illumination-anchor": "map", "hillshade-exaggeration": 0.7,
+      map.addLayer({ id: "hill", type: "hillshade", source: "dem2", layout: { visibility: flat ? "none" : "visible" }, paint: { "hillshade-illumination-direction": 225, "hillshade-illumination-anchor": "map", "hillshade-exaggeration": 0.7,
         "hillshade-highlight-color": "rgba(255,244,214,0.55)", "hillshade-shadow-color": "rgba(52,64,70,0.42)", "hillshade-accent-color": "rgba(60,60,50,0.15)" } });
-      // Madeira and the Azores are drawn moved next to the mainland: their relief and lights are images in the same place.
+      // Madeira and the Azores are drawn moved next to the mainland: their relief is an image in the same place.
       for (const [name, c] of Object.entries(insets) as [string, number[][]][]) {
         map.addSource(`inset-${name}`, { type: "image", url: `/data/map/inset-${name}-relief.webp`, coordinates: c });
         map.addLayer({ id: `inset-${name}`, type: "raster", source: `inset-${name}`, paint: { "raster-fade-duration": 0 } });
-        map.addSource(`insetn-${name}`, { type: "image", url: `/data/map/inset-${name}-night.webp`, coordinates: c });
-        map.addLayer({ id: `insetn-${name}`, type: "raster", source: `insetn-${name}`, layout: { visibility: "none" }, paint: { "raster-fade-duration": 0, "raster-opacity": 0.95, "raster-contrast": 0.25 } });
       }
       map.addLayer({ id: "muni-line", type: "line", source: "munis", paint: { "line-color": "rgba(40,50,48,0.16)", "line-width": ["interpolate", ["linear"], ["zoom"], 6, 0.3, 9, 0.8] } });
       // The budget's reach: the places it buys 100 m² or more in glow softly.
@@ -231,7 +238,7 @@ export function initMapV3(root: HTMLElement) {
       map.addLayer({ id: "lift-line", type: "line", source: "munis", filter: ["==", ["get", "s"], ""], paint: { "line-color": "#ffffff", "line-width": 1.6, "line-translate": [0, -4] } });
       map.addLayer({ id: "sel", type: "line", source: "munis", filter: ["==", ["get", "s"], ""], paint: { "line-color": "#111214", "line-width": 2.2 } });
       if (!flat) map.setTerrain({ source: "dem", exaggeration: 1.5 });
-      applyValues(); legend(); sentence(); styleNight();
+      applyValues(); legend(); sentence();
       root.classList.add("is-live");
       // Frame the country in the space the glass leaves free: below the top bar, beside (desktop) or above (mobile) the dock.
       const st = canvas.getBoundingClientRect(), tb = $(".m3-top").getBoundingClientRect(), dk = $(".m3-dock").getBoundingClientRect();
@@ -257,30 +264,6 @@ export function initMapV3(root: HTMLElement) {
     })();
     return loading;
   }
-  function styleNight() {
-    if (!map?.getLayer("muni-fill")) return;
-    const n = night;
-    map.setPaintProperty("bg", "background-color", n ? "#030409" : "#e7e2d7");
-    map.setPaintProperty("reach", "line-color", n ? "#ffd68a" : "#fff7df"); map.setPaintProperty("reach", "line-width", n ? 1 : 2.6);
-    map.setPaintProperty("reach", "line-opacity", ["case", ["boolean", ["feature-state", "reach"], false], n ? 0.3 : 0.9, 0]);
-    for (const id of ["sea", "seafar"]) map.setPaintProperty(id, "raster-opacity", n ? 0 : 1);
-    map.setLayoutProperty("nightfar", "visibility", n ? "visible" : "none");
-    map.setPaintProperty("land", "fill-color", n ? "#0d1621" : "#efe6d3");
-    map.setPaintProperty("muni-fill", "fill-opacity", n ? 0.16 : 0.78);
-    map.setLayoutProperty("night", "visibility", n ? "visible" : "none");
-    map.setPaintProperty("hill", "hillshade-highlight-color", n ? "rgba(120,140,170,0.18)" : "rgba(255,244,214,0.55)");
-    map.setPaintProperty("hill", "hillshade-shadow-color", n ? "rgba(0,0,0,0.5)" : "rgba(52,64,70,0.42)");
-    map.setPaintProperty("coast", "line-color", n ? "rgba(255,214,150,0.55)" : "#fffdf6");
-    map.setPaintProperty("coast-glow", "line-opacity", n ? 0.18 : 0.55);
-    map.setPaintProperty("muni-line", "line-color", n ? "rgba(255,255,255,0.06)" : "rgba(40,50,48,0.16)");
-    map.setPaintProperty("sel", "line-color", n ? "#ffe2a8" : "#111214");
-    map.setPaintProperty("lift", "fill-opacity", n ? 0.18 : 0.95);
-    if (map.getLayer("rivers")) map.setPaintProperty("rivers", "line-opacity", n ? 0.25 : 0.9);
-    for (const id of ["madeira", "azores"]) { if (map.getLayer(`inset-${id}`)) map.setPaintProperty(`inset-${id}`, "raster-opacity", n ? 0 : 1); if (map.getLayer(`insetn-${id}`)) map.setLayoutProperty(`insetn-${id}`, "visibility", n ? "visible" : "none"); }
-    try { map.setSky(n ? { "sky-color": "#04080f", "horizon-color": "#0b1626", "fog-color": "#08111d", "sky-horizon-blend": 0.5, "horizon-fog-blend": 0.6, "fog-ground-blend": 0.4, "atmosphere-blend": 0.3 }
-      : { "sky-color": "#f3efe6", "horizon-color": "#f6efe1", "fog-color": "#efe8da", "sky-horizon-blend": 0.6, "horizon-fog-blend": 0.7, "fog-ground-blend": 0.35, "atmosphere-blend": 0.5 }); } catch { /* flat mode has no sky */ }
-  }
-
   // ------------------------------------------------------------ 60 fps or a lighter map (prompt 36 §1.5)
   // While the camera moves in the first seconds, count frames. Below 40 fps the 3D terrain goes (the hillshade keeps the
   // relief), below 30 the resolution steps down to 1.5x. Reduced motion and weak devices never get here: they see the still.
@@ -382,6 +365,7 @@ export function initMapV3(root: HTMLElement) {
   function showPlace(slug: string, open = true) {
     const p = byS.get(slug); if (!p || !P) return; const s = P.munis[slug], i = last(), v = s?.m2[i] ?? null;
     const here = projects.filter((x) => x.muni === slug && x.showcase);
+    if (here.length && !overlays.devs) setOverlay("devs", true);  // prompt 38: a place card shows its partner projects
     const homes = here.length ? here[0].showcase : `${cfg.links.buy}?place=${encodeURIComponent(p.n)}&budget=${Math.round(budget)}`;
     const photo = cfg.photos[slug] ? `<img class="m3-photo" src="/img/v2/${cfg.photos[slug]}-640.webp" srcset="/img/v2/${cfg.photos[slug]}-640.webp 640w, /img/v2/${cfg.photos[slug]}-1024.webp 1024w" sizes="420px" alt="" width="640" height="400">` : `<div class="m3-photo m3-photo-none" style="--c:${colorOf(value(s, layer))}"></div>`;
     let h = `${photo}<div class="m3-sb"><p class="m3-kick">${esc(L.regions[p.r] || "")}</p><h3 tabindex="-1">${esc(p.n)}</h3>${stats(s)}`;
@@ -455,7 +439,7 @@ export function initMapV3(root: HTMLElement) {
       const [topo, data] = await Promise.all([fetch("/data/map/parishes.topo.json").then((r) => r.json()), fetch("/data/map/parishes.json").then((r) => r.json())]);
       const geo: any = feature(topo, topo.objects.p); parishes = { feats: geo.features, data: data.parishes };
       map.addSource("pars", { type: "geojson", data: geo, promoteId: "id" });
-      map.addLayer({ id: "par-fill", type: "fill", source: "pars", minzoom: 8.2, paint: { "fill-color": colorExpr(), "fill-opacity": ["interpolate", ["linear"], ["zoom"], 8.2, 0, 8.7, night ? 0.16 : 0.8] } as any }, "hill");
+      map.addLayer({ id: "par-fill", type: "fill", source: "pars", minzoom: 8.2, paint: { "fill-color": colorExpr(), "fill-opacity": ["interpolate", ["linear"], ["zoom"], 8.2, 0, 8.7, 0.8] } as any }, "hill");
       map.addLayer({ id: "par-line", type: "line", source: "pars", minzoom: 8.2, paint: { "line-color": "rgba(40,50,48,0.22)", "line-width": 0.5 } }, "hill");
       applyValues();
     })();
@@ -514,9 +498,22 @@ export function initMapV3(root: HTMLElement) {
     markers.forEach((m) => m.remove()); markers = []; if (!overlays.devs || !map) return;
     for (const p of projects) {
       const el = document.createElement("button"); el.type = "button"; el.className = "m3-pin"; el.innerHTML = `<span>${esc(p.name)}<em>${L.sponsored}</em></span>`;
-      el.addEventListener("click", (e) => { e.stopPropagation(); location.href = p.showcase; });
+      el.addEventListener("click", (e) => { e.stopPropagation(); showProject(p); });
       markers.push(new ml.Marker({ element: el, anchor: "bottom" }).setLngLat([p.lon, p.lat]).addTo(map));
     }
+  }
+
+  // Prompt 38: a partner project's card (photo, name, summary, three features, homes for sale now, price on request).
+  function showProject(p: Proj, open = true) {
+    const pl = cfg.pl ?? {};
+    const photo = p.render ? `<img class="m3-photo" src="${esc(p.render)}-800.webp" alt="" width="800" height="450">` : "";
+    let h = `${photo}<div class="m3-sb"><p class="m3-kick">${esc(byS.get(p.muni)?.n ?? "")} · <span class="m3-tag">${L.sponsored}</span></p><h3 tabindex="-1">${esc(p.name)}</h3>`;
+    h += `<p class="m3-buys">${esc(p.summary ?? p.developer)}</p>`;
+    if (p.feats?.length) h += `<ul class="m3-det">${p.feats.map((f) => `<li>${esc(f)}</li>`).join("")}</ul>`;
+    if (p.now != null && pl.now) h += `<p class="m3-buys"><b>${esc(pl.now.replace("{n}", String(p.now)))}</b></p>`;
+    h += `<p class="m3-buys">${p.from ? L.pfrom.replace("{v}", eur.format(p.from)) : esc(pl.price ?? L.ponreq)}</p>`;
+    h += `<div class="m3-acts"><a class="m3-btn m3-btn-p" href="${esc(p.showcase)}">${esc(pl.view ?? p.name)}</a><a class="m3-btn" href="${esc(p.showcase)}#pedir">${esc(pl.visit ?? "")}</a></div></div>`;
+    openSheet(h, open);
   }
 
   // ------------------------------------------------------------ time: 2016 to 2026, ten years in about twelve seconds
@@ -567,6 +564,17 @@ export function initMapV3(root: HTMLElement) {
       for (const [s, b] of [["lagos", -12], ["portimao", -6], ["albufeira", 2], ["loule", 10], ["tavira", 18], ["vila-real-de-santo-antonio", 24]] as [string, number][]) { if (stop) break; await fly(at2(s, 10.4, b, 62), 2400, placeCap(s)); }
     } else if (kind === "madeira") {
       for (const [s, z, b] of [["funchal", 9.4, -10], ["camara-de-lobos", 10, -18], ["calheta", 9.8, -26], ["porto-moniz", 10, -36], ["santana", 9.8, -44], ["machico", 10, -52], ["porto-santo", 9.6, -60]] as [string, number, number][]) { if (stop) break; await fly(at2(s, z, b, 55), 2300, placeCap(s)); }
+    } else if (kind === "marble") {
+      // Prompt 38: from the Atlantic over Porto and the Douro to Gondomar, settling on Marble Terrace; its card opens.
+      const p = projects.find((x) => x.id === "marble-terrace");
+      if (p) {
+        await setOverlay("devs", true);
+        await fly({ center: [-9.05, 41.16], zoom: 9.4, bearing: 80, pitch: flat ? 0 : 50 }, 2400, "");
+        await fly({ center: [-8.64, 41.145], zoom: 12.2, bearing: 75, pitch: flat ? 0 : 60 }, 3600, placeCap("porto"));
+        await fly({ center: [-8.575, 41.135], zoom: 12.8, bearing: 60, pitch: flat ? 0 : 62 }, 2800, "Douro");
+        await fly({ center: [p.lon, p.lat], zoom: 15.6, bearing: 40, pitch: flat ? 0 : 64 }, 3800, `${p.name} · ${byS.get(p.muni)?.n ?? ""}`);
+        if (!stop) showProject(p, false);
+      }
     } else if (kind === "time") {
       const h = (root as any).__home; await fly({ ...h, pitch: flat ? 0 : 30, bearing: 0 }, 1600, ""); if (!stop) { const tick = setInterval(() => { if (P && !stop) caption(L.timecap.replace("{q}", qLabel(P.quarters[at()]))); }, 200); await play(18000); clearInterval(tick); }
     }
@@ -592,7 +600,7 @@ export function initMapV3(root: HTMLElement) {
     for (const c of (await loadGolf()).courses) pl.push({ g: "golf", n: c.n, sub: byS.get(c.m)?.n, go: async () => { await setOverlay("golf", true); showGolf(c); } });
     beaches ??= await fetch("/data/map/beaches.json").then((r) => r.json()).catch(() => []);
     for (const [x, y, n] of beaches!) pl.push({ g: "beach", n, go: async () => { await setOverlay("beach", true); flyTo(x, y, 11.6); toast(n); } });
-    for (const p of projects) pl.push({ g: "devs", n: p.name, sub: p.developer, go: () => { flyTo(p.lon, p.lat, 11); setOverlay("devs", true); } });
+    for (const p of projects) pl.push({ g: "devs", n: p.name, sub: p.developer, go: () => { flyTo(p.lon, p.lat, 14); setOverlay("devs", true); showProject(p); } });
     pool = pl;
   }
   function find() {
@@ -625,7 +633,7 @@ export function initMapV3(root: HTMLElement) {
   });
 
   // ------------------------------------------------------------ start
-  if (night) setNight(true);
+  dimButtons();
   if (layer !== "price") setLayer(layer);
   for (const k of ["golf", "beach", "devs"] as const) if (overlays[k]) root.querySelector(`[data-overlay="${k}"]`)?.setAttribute("aria-pressed", "true");
   setBudget(budget);
@@ -639,8 +647,8 @@ export function initMapV3(root: HTMLElement) {
     // then the poster is its exact first frame. A shared link with a state opens straight away.
     ["pointermove", "pointerdown", "touchstart", "focusin", "wheel", "keydown"].forEach((ev) => root.addEventListener(ev, () => load(), { once: true, passive: true }));
     addEventListener("scroll", () => load(), { once: true, passive: true });
-    if (q.has("place") || q.has("parish") || q.has("q") || q.has("night") || q.has("layer")) ("requestIdleCallback" in window ? (window as any).requestIdleCallback : setTimeout)(() => load(), { timeout: 2500 });
+    if (q.has("place") || q.has("parish") || q.has("q") || q.has("layer")) ("requestIdleCallback" in window ? (window as any).requestIdleCallback : setTimeout)(() => load(), { timeout: 2500 });
   }
   // For the automated click check (scripts/map-data/clicktest.mjs).
-  (root as any).__mapx = { load, pick: (x: number, y: number) => pick({ x, y }), project: (s: string) => { const p = byS.get(s); return p && map ? map.project([p.x, p.y]) : null; }, map: () => map, selected: () => selected, slugs: () => features.map((f) => f.properties.s), tour, setNight, setBudget, setQuarter, quality: () => quality };
+  (root as any).__mapx = { load, pick: (x: number, y: number) => pick({ x, y }), project: (s: string) => { const p = byS.get(s); return p && map ? map.project([p.x, p.y]) : null; }, map: () => map, selected: () => selected, slugs: () => features.map((f) => f.properties.s), tour, setDim, setBudget, setQuarter, quality: () => quality };
 }

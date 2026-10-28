@@ -1,0 +1,161 @@
+---
+// Partner showcase for a development sold by block (prompt 38 §1.4, Marble Terrace): the developer's photographs,
+// the features, the availability table by block and typology as the developer publishes it (with the date checked),
+// "Price on request" wherever a price would be (never an estimate), its place on the map, the municipality in INE
+// figures and the purchase-cost simulator from the price the reader enters. The [data-req] buttons are wired to the
+// request sheet elsewhere; this component only renders them. Wording: COPY_DECK.md "showb.*" and "show.*".
+import type { Lang } from "../i18n";
+import { type Project, img } from "../lib/projects";
+import { PRICES, LAST } from "../lib/prices";
+import { c } from "../lib/copy";
+
+interface Props { lang: Lang; p: Project; label: string; locale: string; simHref?: string; mapHref?: string; }
+const { lang, p, label, locale, simHref, mapHref } = Astro.props;
+const s = PRICES.munis[p.muni] as any;
+const k = (x: string, v: Record<string, string | number> = {}) => c(`showb.${x}`, lang, v);
+const money = (v: number) => new Intl.NumberFormat(locale, { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(v);
+const nf1 = new Intl.NumberFormat(locale, { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+const q = PRICES.quarters[LAST], ql = `${q.slice(0, 4)} T${q.slice(-1)}`.replace("T", lang === "en" ? "Q" : "T");
+const date = (d?: string) => (d ? new Intl.DateTimeFormat(locale, { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" }).format(new Date(`${d}T12:00:00Z`)) : "");
+const blocks = p.blocks ?? [];
+const anySoon = blocks.some((b) => b.units.some((u) => u.soon));
+const forSale = blocks.reduce((a, b) => a + b.units.reduce((x, u) => x + u.forSale, 0), 0);
+const gallery = (p.gallery ?? []).filter((g) => g !== p.render);
+const credits = (p.credits ?? []).join("; ");
+---
+<article class="sb">
+  <figure class="sb-hero"><img src={img(p.render)} srcset={`${img(p.render, 800)} 800w, ${img(p.render)} 1600w`} sizes="100vw" alt={p.name} width="1600" height="900" fetchpriority="high" /></figure>
+  <header class="sb-head">
+    <p class="sb-kicker">{s.n} · <span class="sb-tag">{label}</span></p>
+    <h1>{p.name}</h1>
+    <p class="sb-by">{k("by", { developer: p.developer })}</p>
+    <p class="sb-sum">{p.summary?.[lang]}</p>
+    <p class="sb-line">{p.lines?.[lang] ?? p.line}</p>
+    <dl class="sb-facts">
+      <div><dt>{k("avail")}</dt><dd>{k("now", { n: forSale })}</dd></div>
+      <div><dt>{c("show.homes", lang)}</dt><dd>{k("price")}</dd></div>
+    </dl>
+    <p class="sb-cta" id="pedir"><button type="button" class="sb-btn sb-btn-p" data-req>{k("visit")}</button></p>
+  </header>
+
+  {gallery.length > 0 && <section class="sb-sec" aria-label={c("show.gallery", lang)}>
+    <ul class="sb-gal">{gallery.map((g) => <li><img src={img(g, 800)} srcset={`${img(g, 800)} 800w, ${img(g)} 1600w`} sizes="(max-width: 760px) 100vw, 50vw" alt="" width="800" height="560" loading="lazy" /></li>)}</ul>
+  </section>}
+
+  {p.features?.length && <section class="sb-sec">
+    <h2>{k("features")}</h2>
+    <ul class="sb-feat">{p.features.map((f) => <li>{f[lang]}</li>)}</ul>
+  </section>}
+
+  <section class="sb-sec" aria-labelledby="sb-avail">
+    <h2 id="sb-avail">{k("avail")}</h2>
+    <div class="sb-scroll"><table class="sb-tab">
+      <thead><tr><th scope="col">{k("typ")}</th><th scope="col">{k("total")}</th><th scope="col">{k("forsale")}</th>{anySoon && <th scope="col">{k("soon")}</th>}<th scope="col">{k("reserved")}</th><th scope="col">{k("sold")}</th><th scope="col">{c("show.homes", lang)}</th><th scope="col"><span class="sb-vh">{k("interest")}</span></th></tr></thead>
+      {blocks.map((b) => (
+        <tbody>
+          <tr class="sb-bh"><th scope="rowgroup" colspan={anySoon ? 8 : 7}>{k("block", { b: b.id })}</th></tr>
+          {b.units.map((u) => (
+            <tr>
+              <th scope="row">{u.typology}</th><td>{u.total}</td><td class="sb-n">{u.forSale}</td>{anySoon && <td>{u.soon ?? 0}</td>}<td>{u.reserved}</td><td>{u.sold}</td>
+              <td class="sb-pr">{k("price")}</td>
+              <td>{u.forSale > 0 && <button type="button" class="sb-btn" data-req data-block={b.id} data-typ={u.typology}>{k("interest")}</button>}</td>
+            </tr>
+          ))}
+        </tbody>
+      ))}
+    </table></div>
+    <p class="sb-small">{k("checked", { date: date(p.availabilityChecked) })} {p.availabilitySource && <a href={p.availabilitySource} rel="noopener">{k("source")}</a>} {p.availabilityNote?.[lang]}</p>
+  </section>
+
+  {mapHref && <section class="sb-sec">
+    <h2>{k("map")}</h2>
+    <a class="sb-map" href={mapHref}><img src="/img/map3-poster-1200.webp" alt="" width="1200" height="693" loading="lazy" /><span>{k("maplink", { muni: s.n })} →</span></a>
+  </section>}
+
+  <aside class="sb-sec sb-ctx" aria-label={c("show.ctx", lang, { muni: s.n })}>
+    <h2>{c("show.ctx", lang, { muni: s.n })}</h2>
+    <dl>
+      {s.m2[LAST] && <div><dt>{c("show.ctx.m2", lang)}</dt><dd>{money(s.m2[LAST])}</dd></div>}
+      {s.g10 != null && <div><dt>{c("show.ctx.g10", lang)}</dt><dd>{s.g10 > 0 ? "+" : ""}{nf1.format(s.g10)}%</dd></div>}
+      {s.rq?.[LAST] && <div><dt>{c("show.ctx.rent", lang)}</dt><dd>{new Intl.NumberFormat(locale, { style: "currency", currency: "EUR", minimumFractionDigits: 2 }).format(s.rq[LAST])}</dd></div>}
+    </dl>
+    <p class="sb-small">{c("show.ctx.src", lang, { q: ql })}</p>
+  </aside>
+
+  <section class="sb-sec sb-sim" data-sbsim data-locale={locale}>
+    <h2>{k("sim")}</h2>
+    <p class="sb-small">{k("simlede")}</p>
+    <label class="sb-in"><span>{k("simprice")}</span><input type="number" inputmode="numeric" min="0" step="1000" placeholder="350000" data-sbprice /></label>
+    <dl class="sb-res" data-sbres hidden>
+      <div><dt>{c("sims.r.imt", lang)}</dt><dd data-r="imt"></dd></div>
+      <div><dt>{c("sims.r.is", lang)}</dt><dd data-r="is"></dd></div>
+      <div><dt>{c("sims.r.deed", lang)}</dt><dd data-r="deed"></dd></div>
+      <div><dt>{c("sims.r.total", lang)}</dt><dd data-r="total"></dd></div>
+    </dl>
+    {simHref && <p><a href={simHref} data-sbfull>{k("simfull")} →</a></p>}
+  </section>
+
+  <footer class="sb-sec sb-foot">
+    <p class="sb-cta"><button type="button" class="sb-btn sb-btn-p" data-req>{k("visit")}</button></p>
+    <p>{c("show.credit", lang, { credit: credits })} {p.checked && c("show.published", lang, { date: p.checked })}</p>
+    <details><summary>{c("show.sources", lang)}</summary><ul>{(p.sources ?? []).map((u) => <li><a href={u} rel="noopener">{u}</a></li>)}</ul></details>
+  </footer>
+</article>
+
+<script>
+  import { purchase } from "../lib/sims";
+  document.querySelectorAll<HTMLElement>("[data-sbsim]").forEach((box) => {
+    const input = box.querySelector<HTMLInputElement>("[data-sbprice]")!, res = box.querySelector<HTMLElement>("[data-sbres]")!, full = box.querySelector<HTMLAnchorElement>("[data-sbfull]");
+    const eur = new Intl.NumberFormat(box.dataset.locale, { style: "currency", currency: "EUR", maximumFractionDigits: 0 });
+    const base = full?.getAttribute("href") ?? "";
+    input.addEventListener("input", () => {
+      const v = Number(input.value); if (!(v > 0)) { res.hidden = true; return; }
+      const r = purchase(v, false, false, false) as Record<string, number>;
+      for (const k of ["imt", "is", "deed", "total"]) res.querySelector(`[data-r="${k}"]`)!.textContent = eur.format(r[k]);
+      res.hidden = false; if (full) full.href = `${base}?price=${Math.round(v)}`;
+    });
+  });
+</script>
+
+<style>
+  .sb { --gap: clamp(20px, 3vw, 40px); }
+  .sb-hero { margin: 0; } .sb-hero img { width: 100%; height: clamp(320px, 62vh, 680px); object-fit: cover; display: block; }
+  .sb-head, .sb-sec { max-width: 1120px; margin: 0 auto; padding: 40px 24px 8px; }
+  .sb-head { padding-top: 48px; }
+  .sb-kicker { margin: 0 0 16px; font: 500 12px/1 var(--sans); letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+  .sb-tag { border: 1px solid currentColor; padding: 3px 6px; border-radius: 3px; }
+  .sb h1 { font: 400 clamp(2.8rem, 2rem + 4vw, 5.2rem)/1 var(--serif); margin: 0; letter-spacing: -.015em; }
+  .sb-by { margin: 10px 0 0; font: 500 14px/1.3 var(--sans); }
+  .sb-sum { margin: 6px 0 0; font: 400 1.35rem/1.3 var(--serif); }
+  .sb-line { margin: 14px 0 0; font-size: 1.05rem; color: var(--muted); max-width: 40em; }
+  .sb-facts { display: flex; flex-wrap: wrap; gap: 12px 48px; margin: 20px 0 0; padding: 18px 0 0; border-top: 1px solid var(--ink); }
+  .sb-facts dt { font: 500 11px/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .sb-facts dd { margin: 0; font: 400 1.35rem/1.2 var(--serif); }
+  .sb h2 { font: 400 2rem/1.15 var(--serif); margin: 0 0 16px; }
+  .sb-cta { margin: 24px 0 0; scroll-margin-top: 90px; }
+  .sb-btn { font: 500 13px/1 var(--sans); letter-spacing: .04em; padding: 10px 14px; border: 1px solid var(--ink); background: transparent; color: var(--ink); border-radius: 999px; cursor: pointer; white-space: nowrap; }
+  .sb-btn-p { background: var(--ink); color: var(--bg, #fff); padding: 14px 22px; font-size: 14px; }
+  .sb-gal { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; }
+  .sb-gal img { width: 100%; height: auto; aspect-ratio: 10 / 7; object-fit: cover; display: block; }
+  .sb-feat { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px 32px; }
+  .sb-feat li { padding: 10px 0; border-top: 1px solid color-mix(in srgb, var(--ink) 18%, transparent); }
+  .sb-scroll { position: relative; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .sb-tab { width: 100%; border-collapse: collapse; font-size: 15px; min-width: 640px; }
+  .sb-tab th, .sb-tab td { padding: 10px 8px; text-align: left; border-bottom: 1px solid color-mix(in srgb, var(--ink) 14%, transparent); }
+  .sb-tab thead th { font: 500 11px/1.2 var(--sans); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .sb-bh th { font: 400 1.25rem/1.2 var(--serif); padding-top: 22px; border-bottom: 1px solid var(--ink); }
+  .sb-n { font-weight: 600; } .sb-pr { color: var(--muted); }
+  .sb-vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .sb-map { display: block; position: relative; color: var(--ink); text-decoration: none; }
+  .sb-map img { width: 100%; height: 280px; object-fit: cover; display: block; }
+  .sb-map span { position: absolute; left: 16px; bottom: 16px; background: var(--bg, #fff); padding: 10px 14px; font: 500 14px/1.2 var(--sans); }
+  .sb-ctx { border-top: 1px solid var(--ink); margin-top: 40px; }
+  .sb-ctx dl { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin: 16px 0; }
+  .sb-ctx dt { font-size: 14px; color: var(--muted); } .sb-ctx dd { margin: 4px 0 0; font: 400 2rem/1.1 var(--serif); }
+  .sb-in { display: grid; gap: 6px; max-width: 320px; font-size: 14px; }
+  .sb-in input { font: 400 1.3rem var(--sans); padding: 10px 12px; border: 1px solid var(--ink); background: transparent; color: var(--ink); }
+  .sb-res { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin: 20px 0; }
+  .sb-res dt { font-size: 13px; color: var(--muted); } .sb-res dd { margin: 4px 0 0; font: 400 1.5rem/1.1 var(--serif); }
+  .sb-small, .sb-foot { font-size: 13px; color: var(--muted); }
+  .sb-small a, .sb-foot a { color: inherit; } .sb-foot { padding-bottom: 56px; } .sb-foot a { word-break: break-all; }
+</style>

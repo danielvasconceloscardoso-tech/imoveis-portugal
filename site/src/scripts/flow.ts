@@ -3,6 +3,7 @@
 // sheet), answers kept only in this tab (sessionStorage) and sent once, with the consent, to /api/request.
 // If the endpoint is not configured or fails, the request opens as a ready-written email to the brand mailbox.
 import type { FlowConfig, Step } from "../lib/flows";
+import type { LawyerCard } from "../lib/lawyers";
 
 const reduce = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 const esc = (t: string) => t.replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[ch]!);
@@ -14,21 +15,34 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
   const L = F.labels, steps = F.steps, N = steps.length;
   const key = `ip.flow.${F.id}`;
   const stage = root.querySelector<HTMLElement>("[data-flow-stage]")!;
+  // The partner lawyer card (prompt 37 §4, D64), concierge only; absent when no lawyer may show on this build.
+  const LW = (() => { try { return JSON.parse(root.querySelector("[data-flow-lawyer]")?.textContent || "null") as LawyerCard | null; } catch { return null; } })();
   let A: Record<string, string> = {};
   try { A = JSON.parse(sessionStorage.getItem(key) || "{}"); } catch { /* private mode */ }
   const save = () => { try { sessionStorage.setItem(key, JSON.stringify(A)); } catch { /* private mode */ } };
   let i = 0, dir = 1;
+
+  // The reader's edition (prompt 37 §1.1): the one in the URL (/{lang}/{ed}/...), else the page's own, else the saved one.
+  // sessionStorage is shared by every edition on one domain, so answers kept from another edition (or language) in this
+  // tab used to carry their country over: the concierge opened on Luxembourg everywhere after a first visit to /lu.
+  const edOpts = steps.flatMap((s) => (s.type === "choice" && s.prefill === "edition" ? s.opts.map((o) => o.v) : []));
+  const savedEd = (() => { try { return localStorage.getItem("ip-ed") || ""; } catch { return ""; } })();
+  const edNow = [location.pathname.split("/")[2] || "", F.hidden.edition, savedEd].find((x) => edOpts.includes(x)) || F.hidden.edition;
+  const reset = (kind: "edition" | "lang") => { for (const s of steps) if ("prefill" in s && s.prefill === kind) delete A[s.id]; };
+  if (A._ed !== edNow) { reset("edition"); A._ed = edNow; }
+  if (A._lang !== F.hidden.language) { reset("lang"); A._lang = F.hidden.language; }
 
   // Prefills: the edition, the reader's language, the budget and place from the map or the path, a partner category.
   const q = new URLSearchParams(location.search);
   const budgetEur = Number(q.get("budget")) || (() => { try { return Number(localStorage.getItem("ip.budget")) || 0; } catch { return 0; } })();
   const places = (() => { try { return JSON.parse(localStorage.getItem("ip.places") || "[]") as string[]; } catch { return []; } })();
   const pre: Record<string, string> = {
-    edition: F.hidden.edition, lang: F.hidden.language, cat: q.get("cat") || "",
+    edition: edNow, lang: F.hidden.language, cat: q.get("cat") || "",
     budget: budgetEur ? (budgetEur <= 300000 ? "1" : budgetEur <= 1e6 ? "2" : budgetEur <= 5e6 ? "3" : "4") : "",
     place: q.get("place") || places[0] || "",
   };
   for (const s of steps) if ("prefill" in s && s.prefill && !A[s.id] && pre[s.prefill]) A[s.id] = pre[s.prefill];
+  save();
 
   function url(n: number | null) {
     const p = new URLSearchParams(location.search);
@@ -68,7 +82,9 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
 
   function render(focus = true) {
     const s = steps[i];
-    const html = `${head()}<div class="fl-step"><h2 id="fl-q" class="fl-q" tabindex="-1">${esc(s.q)}</h2>${i === 0 && F.lede ? `<p class="fl-lede">${esc(F.lede)}</p>` : ""}${body(s)}</div>`;
+    // "I have a question" on the first screen, and a one-line way to the lawyer on the legal step (the tax number).
+    const ask = LW && (i === 0 || s.id === "nif") ? `<p class="fl-ask"><button type="button" class="fl-link" data-lawyer>${esc(i === 0 ? LW.labels.ask : LW.labels.legal)}</button></p>` : "";
+    const html = `${head()}<div class="fl-step"><h2 id="fl-q" class="fl-q" tabindex="-1">${esc(s.q)}</h2>${i === 0 && F.lede ? `<p class="fl-lede">${esc(F.lede)}</p>` : ""}${body(s)}${ask}</div>`;
     swap(html, focus);
     url(i);
   }
@@ -89,6 +105,7 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
   function wire(el: HTMLElement) {
     const s = steps[i];
     el.querySelector("[data-back]")?.addEventListener("click", () => go(i - 1));
+    el.querySelector("[data-lawyer]")?.addEventListener("click", lawyerScreen);
     el.querySelectorAll<HTMLButtonElement>(".fl-opt").forEach((b, k, all) => {
       b.tabIndex = (A[s.id] ? b.getAttribute("aria-checked") === "true" : k === 0) ? 0 : -1;
       b.addEventListener("click", () => {
@@ -127,6 +144,63 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
     }
     if (s.type === "text" && !s.optional && !(A[s.id] || "").trim()) { stage.querySelector<HTMLElement>("[data-in]")?.focus(); return; }
     go(i + 1);
+  }
+
+  // ------------------------------------------------------------ the partner lawyer (prompt 37 §4, D64)
+  // A side screen, outside the step count: the card, then the booking with one unticked consent naming the lawyer.
+  // A sample lawyer (preview builds only) sends nothing. Wording informative only (EOA art. 94).
+  const lwHead = () => `<div class="fl-head"><button type="button" class="fl-back" data-lw-back aria-label="${esc(L.back)}">${ARROW}</button><span class="fl-prog lw-prog"></span></div>`;
+  const fill = (t: string) => { const x = LW!.lawyers[0]; return t.replace("{name}", x.name).replace("{firm}", x.firm); };
+  function side(html: string, back: () => void) {
+    dir = 1; swap(html, true);
+    const el = stage.lastElementChild as HTMLElement; el.querySelector("[data-lw-back]")?.addEventListener("click", () => { dir = -1; back(); });
+    return el;
+  }
+  function lawyerScreen() {
+    const x = LW!.lawyers[0], T = LW!.labels;
+    const face = x.photo ? `<img src="${esc(x.photo)}" alt="" width="72" height="72" loading="lazy" />` : `<span aria-hidden="true">${esc(x.initials)}</span>`;
+    const row = (k: string, v: string, note = "") => v ? `<div><dt>${esc(T[k])}</dt><dd>${esc(v)}${note ? `<small>${esc(note)}</small>` : ""}</dd></div>` : "";
+    const el = side(`${lwHead()}<div class="fl-step"><h2 class="fl-q" tabindex="-1">${esc(T.h)}</h2><p class="fl-lede">${esc(T.lede)}</p>
+      <article class="lw${x.sample ? " is-sample" : ""}" aria-label="${esc(`${x.name}, ${x.firm}`)}">
+        <p class="lw-tags"><span class="lw-tag">${esc(T.partner)}</span>${x.sample ? `<span class="lw-tag lw-tag-s">${esc(T.sample)}</span>` : ""}</p>
+        <div class="lw-id"><div class="lw-face">${face}</div><div><p class="lw-name">${esc(x.name)}</p><p class="lw-firm">${esc(x.firm)}</p>
+          <p class="lw-ced">${esc(T.cedula)} <b>${esc(x.cedula)}</b><br /><a href="${esc(LW!.oa)}" target="_blank" rel="noopener">${esc(T.verify)}</a></p></div></div>
+        <dl class="lw-dl">${row("areas", x.areas.join(" · "))}${row("langs", x.langs.join(" · "))}${row("where", x.where)}${row("response", x.response)}${row("fees", x.fees, T.feesNote)}</dl>
+        ${x.linkedin ? `<p class="lw-li"><a href="${esc(x.linkedin)}" target="_blank" rel="noopener">LinkedIn</a></p>` : ""}
+        <div class="fl-go"><button type="button" class="fl-btn" data-lw-book>${esc(T.book)}</button></div>
+        <p class="lw-disc">${esc(T.disclosure)}</p>${x.sample ? `<p class="lw-note">${esc(T.sampleNote)}</p>` : ""}
+      </article></div>`, () => go(i));
+    el.querySelector("[data-lw-book]")!.addEventListener("click", bookScreen);
+  }
+  function bookScreen() {
+    const x = LW!.lawyers[0], T = LW!.labels;
+    const el = side(`${lwHead()}<div class="fl-step"><h2 class="fl-q" tabindex="-1">${esc(fill(T.bookH))}</h2>
+      <div class="fl-fields">
+        <label class="fl-f"><span>${esc(L.name)}</span><input class="fl-in" data-lw="name" autocomplete="name" value="${esc(A.name || "")}" /></label>
+        <label class="fl-f"><span>${esc(L.email)}</span><input class="fl-in" data-lw="email" type="email" inputmode="email" autocomplete="email" value="${esc(A.email || "")}" /></label>
+        <label class="fl-f"><span>${esc(T.question)}</span><textarea class="fl-in fl-area" data-lw="question" rows="3">${esc(A.lwq || "")}</textarea></label>
+        <p class="fl-err" data-lw-err hidden>${esc(L["invalid.email"])}</p></div>
+      <button type="button" class="fl-consent" role="checkbox" aria-checked="false" data-lw-consent><i>${CHECK}</i><span>${esc(fill(T.consent))} <a href="${F.links.privacy}" target="_blank" rel="noopener">${esc(F.extra.privacy)}</a></span></button>
+      <div class="fl-go"><button type="button" class="fl-btn" data-lw-send disabled>${esc(T.book)}</button></div></div>`, lawyerScreen);
+    const val = (k: string) => el.querySelector<HTMLInputElement>(`[data-lw="${k}"]`)!.value.trim();
+    el.querySelectorAll<HTMLInputElement>("[data-lw]").forEach((f) => f.addEventListener("input", () => { const k = f.dataset.lw!; A[k === "question" ? "lwq" : k] = f.value.trim(); save(); }));
+    const cb = el.querySelector<HTMLButtonElement>("[data-lw-consent]")!, send = el.querySelector<HTMLButtonElement>("[data-lw-send]")!;
+    cb.addEventListener("click", (e) => { if ((e.target as HTMLElement).closest("a")) return; const on = cb.getAttribute("aria-checked") !== "true"; cb.setAttribute("aria-checked", String(on)); send.disabled = !on; });
+    cb.addEventListener("keydown", (e) => { if (e.key === " ") { e.preventDefault(); cb.click(); } });
+    send.addEventListener("click", async () => {
+      const ok = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(val("email")); el.querySelector<HTMLElement>("[data-lw-err]")!.hidden = ok;
+      if (!ok) { el.querySelector<HTMLInputElement>('[data-lw="email"]')!.focus(); return; }
+      el.querySelector(".fl-fallback")?.remove();
+      const note = (html: string) => { const p = document.createElement("p"); p.className = "fl-fallback"; p.setAttribute("role", "status"); p.innerHTML = html; el.querySelector(".fl-go")!.after(p); };
+      if (x.sample) { note(`<span class="lw-tag lw-tag-s">${esc(T.sample)}</span> ${esc(T.previewSent)}`); return; }  // the preview never sends
+      const payload = { flow: "lawyer", lawyer: x.id, lawyerName: `${x.name} (${x.firm})`, ...F.hidden, name: val("name"), email: val("email"), question: val("question"), consent: true, consentText: fill(T.consent), page: location.pathname, hp: "" };
+      send.disabled = true; send.textContent = L.sending; let sent = false;
+      try { sent = (await fetch("/api/request", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(payload) })).ok; } catch { sent = false; }
+      if (sent) { side(`<div class="fl-done"><span class="fl-tick">${CHECK}</span><h2 class="fl-q" tabindex="-1">${esc(T.doneH)}</h2><p class="fl-lede">${esc(fill(T.doneP))}</p></div>`, () => go(i)); return; }
+      send.disabled = false; send.textContent = T.book;
+      const body = [`${x.name} (${x.firm})`, `${L.name}: ${payload.name}`, `${L.email}: ${payload.email}`, payload.question, "", `✓ ${payload.consentText}`].filter((v) => v !== undefined).join("\n");
+      note(`${esc(L.fallback)} <a class="fl-btn" href="mailto:${F.mailto}?subject=${encodeURIComponent(`${T.book}: ${x.name} (${F.hidden.edition} · ${F.hidden.language})`)}&body=${encodeURIComponent(body)}">${esc(L["fallback.btn"])}</a>`);
+    });
   }
 
   // ------------------------------------------------------------ sending

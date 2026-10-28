@@ -3,11 +3,14 @@
 // only (projects.json partner: true), labelled "Sponsored"; reached from the map's place card and the Partners page.
 import V2 from "../../../../../../layouts/V2.astro";
 import Showcase from "../../../../../../components/Showcase.astro";
+import RequestSheet from "../../../../../../components/RequestSheet.astro";
 import { LANGS, ED_ORDER, SLUGS, HTML_LANG, type Lang, type EdCode } from "../../../../../../i18n";
 import { PROJECTS, showcases, type Project } from "../../../../../../lib/projects";
 import { RATE, EDITION_CUR } from "../../../../../../lib/content";
 import { c } from "../../../../../../lib/copy";
 import { PRICES } from "../../../../../../lib/prices";
+import { pathFor } from "../../../../../../i18n";
+import { SUB } from "../../../../../../lib/tools";
 
 export function getStaticPaths() {
   return LANGS.flatMap((lang) => ED_ORDER.flatMap((ed) => showcases(PROJECTS).map((ps) => ({
@@ -20,5 +23,7 @@ const k = EDITION_CUR[ed];
 const title = c("show.title", lang, { developer: ps[0].developer, muni: (PRICES.munis[ps[0].muni] as any).n });
 ---
 <V2 lang={lang} ed={ed} page="partners" title={`${title} | Imóveis Portugal`} description={ps[0].line ?? title} paths={Object.fromEntries(LANGS.map((l) => [l, `/${l}/${ed}/${SLUGS[l].partners}/${ps[0].devSlug}/${ps[0].muni}/`])) as Record<Lang, string>}>
-  <Showcase lang={lang} locale={HTML_LANG[lang]} projects={ps} label={c("common.sponsored", lang)} href={(_, u) => `${base}${u.id}/`} cur={k ? { code: k, rate: RATE(k).rate } : undefined} />
+  <Showcase lang={lang} locale={HTML_LANG[lang]} projects={ps} label={c("common.sponsored", lang)} href={(_, u) => `${base}${u.id}/`} cur={k ? { code: k, rate: RATE(k).rate } : undefined}
+    simHref={`${pathFor(lang, ed, "sims")}${SUB.cost[lang]}/`} mapHref={`${pathFor(lang, ed, "map")}?place=${ps[0].muni}&devs=1`} />
+  {ps[0].blocks && <RequestSheet lang={lang} ed={ed} project={ps[0]} />}
 </V2>

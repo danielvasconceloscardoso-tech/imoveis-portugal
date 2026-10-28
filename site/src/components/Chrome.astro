@@ -6,6 +6,7 @@ import Flow from "./Flow.astro";
 import { pathFor, type Lang, type EdCode, type PageKey } from "../i18n";
 import { c } from "../lib/copy";
 import "../styles/chrome.css";
+import "../styles/sheet.css";
 
 interface Props { lang: Lang; ed: EdCode; page: PageKey | "home"; }
 const { lang, ed, page } = Astro.props;
@@ -40,6 +41,7 @@ const L = { place: c("find.g.place", lang), faq: c("find.g.faq", lang), sim: c("
 </div>
 
 {page !== "consult" && (
+  <script is:inline>(function(){var w=window;w.__ipCgShim=function(e){var a=e.target&&e.target.closest&&e.target.closest("a[data-concierge]");if(!a||e.metaKey||e.ctrlKey||e.shiftKey||w.__ipCgReady)return;e.preventDefault();w.__ipCgPending=a.href;setTimeout(function(){if(!w.__ipCgReady)location.href=a.href;},4000);};document.addEventListener("click",w.__ipCgShim,true);})();</script>
   <div class="sh-back" data-cg-back hidden></div>
   <aside class="sh" data-cg-sheet hidden role="dialog" aria-modal="true" aria-label={c("flow.c.title", lang)}>
     <span class="sh-grab" aria-hidden="true"></span>

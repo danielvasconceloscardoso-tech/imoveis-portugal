@@ -11,6 +11,7 @@ import FaqPage from "../../../components/FaqPage.astro";
 import TalkPage from "../../../components/TalkPage.astro";
 import GuidePage from "../../../components/GuidePage.astro";
 import SimsPage from "../../../components/SimsPage.astro";
+import ArticlesPage from "../../../components/ArticlesPage.astro";
 import CasaPage from "../../../components/CasaPage.astro";
 import DataPage from "../../../components/DataPage.astro";
 import MapPage from "../../../components/MapPage.astro";
@@ -26,7 +27,7 @@ import { homeFacts, fmtDate } from "../../../lib/content";
 import { c, cl, edName } from "../../../lib/copy";
 
 export function getStaticPaths() {
-  const keys: PageKey[] = ["partners", "buy", "how", "privacy", "legal", "faq", "talk", "guide", "sims", "casa", "data", "map", "private", "ours", "journey", "consult", "dossiers"];
+  const keys: PageKey[] = ["partners", "buy", "how", "privacy", "legal", "faq", "talk", "guide", "sims", "casa", "data", "map", "private", "ours", "journey", "consult", "dossiers", "articles"];
   return LANGS.flatMap((lang) => ED_ORDER.flatMap((ed) => keys.map((key) => ({ params: { lang, ed, page: SLUGS[lang][key] }, props: { key } }))));
 }
 const lang = Astro.params.lang as Lang;
@@ -45,7 +46,7 @@ const titles: Partial<Record<PageKey, string>> = { partners: c("partners.title",
 const descs: Partial<Record<PageKey, string>> = { partners: c("partners.lede", lang), buy: c("buy.lede", lang), how: c("how.lede", lang), privacy: c("legal.privacy.intro", lang), legal: c("legal.legal.intro", lang) };
 const site = config.agency.website.replace(/^https:\/\/|\/$/g, "");
 ---
-{key === "faq" ? <FaqPage lang={lang} ed={ed} /> : key === "sims" ? <SimsPage lang={lang} ed={ed} /> : key === "casa" ? <CasaPage lang={lang} ed={ed} /> : key === "data" ? <DataPage lang={lang} ed={ed} /> : key === "map" ? <MapPage lang={lang} ed={ed} /> : key === "private" ? <PrivatePage lang={lang} ed={ed} /> : key === "ours" ? <OursPage lang={lang} ed={ed} /> : key === "journey" ? <PathPage lang={lang} ed={ed} /> : key === "consult" ? <ConsultPage lang={lang} ed={ed} /> : key === "dossiers" ? <DossierPage lang={lang} ed={ed} /> : key === "talk" ? <TalkPage lang={lang} ed={ed} /> : key === "guide" ? <GuidePage lang={lang} ed={ed} /> : (
+{key === "faq" ? <FaqPage lang={lang} ed={ed} /> : key === "articles" ? <ArticlesPage lang={lang} ed={ed} /> : key === "sims" ? <SimsPage lang={lang} ed={ed} /> : key === "casa" ? <CasaPage lang={lang} ed={ed} /> : key === "data" ? <DataPage lang={lang} ed={ed} /> : key === "map" ? <MapPage lang={lang} ed={ed} /> : key === "private" ? <PrivatePage lang={lang} ed={ed} /> : key === "ours" ? <OursPage lang={lang} ed={ed} /> : key === "journey" ? <PathPage lang={lang} ed={ed} /> : key === "consult" ? <ConsultPage lang={lang} ed={ed} /> : key === "dossiers" ? <DossierPage lang={lang} ed={ed} /> : key === "talk" ? <TalkPage lang={lang} ed={ed} /> : key === "guide" ? <GuidePage lang={lang} ed={ed} /> : (
 <V2 lang={lang} ed={ed} page={key} title={`${titles[key]} | Imóveis Portugal · ${edName(ed, lang)}`} description={descs[key] ?? ""}
   sticky={key === "partners" ? { href: "#contacto", label: c("partners.cta", lang) } : undefined}>
   {key === "partners" && (

@@ -14,6 +14,8 @@ import { PTYPES, type PType } from "../../../../lib/packages";
 import { ED_ORDER, LANGS, SLUGS, type EdCode, type Lang } from "../../../../i18n";
 import { SUB, ENABLED, type ToolKey } from "../../../../lib/tools";
 import { PLACES, type Place } from "../../../../lib/places";
+import ArticlePage from "../../../../components/ArticlePage.astro";
+import { ARTS, ART_SUB, type ArtKey } from "../../../../lib/articles";
 
 type Key = ToolKey;
 export function getStaticPaths() {
@@ -23,14 +25,16 @@ export function getStaticPaths() {
     ...PLACES.map((place) => ({ params: { lang, ed, section: SLUGS[lang].map, sub: place.slug }, props: { place } })),
     ...PTYPES.map((ptype) => ({ params: { lang, ed, section: SLUGS[lang].partners, sub: ptype.slug[lang] }, props: { ptype } })),
     ...(["ok", "private", "later"] as const).map((view) => ({ params: { lang, ed, section: SLUGS[lang].consult, sub: CONSULT_SUB[view][lang] }, props: { view } })),
+    ...ARTS.map((art) => ({ params: { lang, ed, section: SLUGS[lang].articles, sub: ART_SUB[art][lang] }, props: { art } })),
     ...(["compra", "zona", "private"] as const).map((dossier) => ({ params: { lang, ed, section: SLUGS[lang].dossiers, sub: DOSSIER_SUB[dossier][lang] }, props: { dossier } })),
   ]));
 }
 const lang = Astro.params.lang as Lang;
 const ed = Astro.params.ed as EdCode;
-const { tool, place, ptype, view, dossier } = Astro.props as { tool?: Key; place?: Place; ptype?: PType; view?: "ok" | "private" | "later"; dossier?: DType };
+const { tool, place, ptype, view, dossier, art } = Astro.props as { art?: ArtKey; tool?: Key; place?: Place; ptype?: PType; view?: "ok" | "private" | "later"; dossier?: DType };
 ---
-{dossier ? <DossierPage lang={lang} ed={ed} type={dossier} />
+{art ? <ArticlePage lang={lang} ed={ed} art={art} />
+  : dossier ? <DossierPage lang={lang} ed={ed} type={dossier} />
   : view ? <ConsultPage lang={lang} ed={ed} view={view} />
   : ptype ? <PartnerTypePage lang={lang} ed={ed} type={ptype} />
   : place ? <PlacePage lang={lang} ed={ed} place={place} />

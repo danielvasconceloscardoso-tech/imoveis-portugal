@@ -1,0 +1,24 @@
+# Partner lawyers shown in the Concierge as a card (prompt 37 §4, D64). One entry per lawyer, more can follow.
+# A real entry is added only with the lawyer's written consent for the photo and every field below (send it to the operator).
+# The lawyer pays a flat sponsorship (D6): no commission, no share of fees per client (sharing fees with non-lawyers is
+# prohibited). Wording informative only (Estatuto da Ordem dos Advogados, art. 94): no superlatives, comparisons or promises.
+# `sample: true` marks a fictional placeholder: it renders only on preview builds, never when the build runs on main.
+- id: exemplo
+  sample: true
+  name: Advogada Exemplo
+  firm: Exemplo & Associados
+  cedula: "00000L"            # Ordem dos Advogados professional number (cédula profissional)
+  photo: ""                   # path under site/public/, e.g. /img/partners/<id>.jpg; empty shows a neutral placeholder
+  linkedin: https://www.linkedin.com/
+  city: Lisboa
+  video: true                 # also works by video call
+  langs: [pt, en, fr]
+  areas: [purchase, inheritance, tax-residence, power-of-attorney]
+  response:
+    pt: Resposta habitual em 2 dias úteis
+    en: Usually replies within 2 working days
+    fr: Réponse habituelle sous 2 jours ouvrés
+  fees:                       # as the lawyer chooses to state it
+    pt: "Primeira consulta: 100 € (valor de exemplo)"
+    en: "First consultation: €100 (sample figure)"
+    fr: "Première consultation : 100 € (montant d'exemple)"

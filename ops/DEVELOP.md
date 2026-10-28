@@ -42,7 +42,7 @@ node scripts/check-parity.mjs    # PT / EN / FR parity
 | --- | --- |
 | site/src/pages/ | Routes: /{lang}/{edition}/… (lang pt, en, fr; edition lu, fr, ch, br, us, il) |
 | site/src/components/HomeD2.astro | The home page (hero film, path bar, places, map, questions, mosaic, chart, newsletter) |
-| site/src/components/MapV3.astro, site/src/scripts/map-v3.ts, site/src/styles/mapv3.css | The 20/20 map (MapLibre GL): relief, night, budget, card, search, tours |
+| site/src/components/MapV3.astro, site/src/scripts/map-v3.ts, site/src/styles/mapv3.css | The 20/20 map (MapLibre GL): relief, 2D/3D switch, budget, card, search, tours |
 | site/src/components/PathPage.astro | "Passo a passo", the buy and sell route |
 | site/src/styles/d2.css | Design v2 styles (D50/D60 identity) |
 | site/src/i18n.ts, site/src/lib/copy.ts, content/copy/COPY_DECK.md | Languages, editions and every text on the site |

@@ -23,17 +23,19 @@ const { lang, ed, page, title, description, paths, noindex = false, ogType = "we
 const urlFor = (l: Lang) => paths ? paths[l] : pathFor(l, ed, page);
 const host = config.domainMode === "primary" ? config.primaryDomain : EDITIONS[ed].domain;
 const canonical = Astro.props.canonicalUrl ?? `https://${host}${urlFor(lang)}`;
-// Prompt 34 (D37, D52): five items, never wrapping: the path, the map, the calculators, the questions, the partners.
+// Prompt 34 (D37, D52), prompt 37 §2 (operator, 28 Oct): six items, never wrapping: the path, the map, the calculators,
+// the articles (the blog sits inside that hub), the questions, the partners; plus the Concierge button.
 // Price trends live inside the map; the rest sits in the mobile concierge menu and the footer. No "Private". The path's
 // label is the one key common.navx.journey, so its rename is one line per language in COPY_DECK.md.
 const nav: { k: string; target: PageKey; current: string[] }[] = [
   { k: "journey", target: "journey", current: ["journey", "casa", "buy", "consult", "dossiers", "guide", "private"] },
   { k: "map", target: "map", current: ["map", "data"] },
   { k: "sims", target: "sims", current: ["sims"] },
+  { k: "articles", target: "articles", current: ["articles", "blog"] },
   { k: "faq", target: "faq", current: ["faq"] },
   { k: "partners", target: "partners", current: ["partners", "ours", "talk"] },
 ];
-const more: PageKey[] = ["casa", "data", "consult", "dossiers", "guide", "blog", "ours", "talk", "how"];
+const more: PageKey[] = ["casa", "data", "consult", "dossiers", "guide", "ours", "talk", "how"];
 const subscribe = `${pathFor(lang, ed, "home")}#subscrever`;
 // Default sticky action: the free guide from the home page, a partner from the help pages.
 const sticky: Sticky = Astro.props.sticky !== undefined ? Astro.props.sticky
@@ -117,7 +119,7 @@ import DemoBar from "../components/DemoBar.astro";
           <div><p class="ft2-k">{c("home2.ft.buy", lang)}</p><ul><li><a href={`${pathFor(lang, ed, "journey")}?door=buy`}>{c("path.door.buy", lang)}</a></li><li><a href={pathFor(lang, ed, "casa")}>{c("common.nav.casa", lang)}</a></li><li><a href={pathFor(lang, ed, "sims")}>{c("common.nav.sims", lang)}</a></li><li><a href={pathFor(lang, ed, "guide")}>{c("common.nav.guide", lang)}</a></li></ul></div>
           <div><p class="ft2-k">{c("home2.ft.sell", lang)}</p><ul><li><a href={`${pathFor(lang, ed, "journey")}?door=sell`}>{c("path.door.sell", lang)}</a></li><li><a href={pathFor(lang, ed, "data")}>{c("common.nav.data", lang)}</a></li></ul></div>
           <div><p class="ft2-k">{c("home2.ft.map", lang)}</p><ul><li><a href={pathFor(lang, ed, "map")}>{c("common.nav.map", lang)}</a></li><li><a href={pathFor(lang, ed, "data")}>{c("common.nav.data", lang)}</a></li></ul></div>
-          <div><p class="ft2-k">{c("home2.ft.qa", lang)}</p><ul><li><a href={pathFor(lang, ed, "faq")}>{c("common.nav.faq", lang)}</a></li><li><a href={pathFor(lang, ed, "blog")}>{c("common.nav.blog", lang)}</a></li><li><a href={pathFor(lang, ed, "how")}>{c("common.nav.how", lang)}</a></li></ul></div>
+          <div><p class="ft2-k">{c("home2.ft.qa", lang)}</p><ul><li><a href={pathFor(lang, ed, "faq")}>{c("common.nav.faq", lang)}</a></li><li><a href={pathFor(lang, ed, "articles")}>{c("common.nav.articles", lang)}</a></li><li><a href={pathFor(lang, ed, "how")}>{c("common.nav.how", lang)}</a></li></ul></div>
           <div><p class="ft2-k">{c("home2.ft.partners", lang)}</p><ul><li><a href={pathFor(lang, ed, "ours")}>{c("common.nav.ours", lang)}</a></li><li><a href={pathFor(lang, ed, "partners")}>{c("common.nav.partners", lang)}</a></li></ul></div>
         </div>
         <div class="ft2-row">

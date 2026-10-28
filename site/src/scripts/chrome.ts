@@ -47,44 +47,75 @@ export function initChrome() {
   }
 
   // ------------------------------------------------------------ the concierge sheet
+  // Prompt 37 §1.2, one click or tap opens it, everywhere. What used to eat the first one: a pending close timer that
+  // hid a sheet reopened within 280 ms, the open class added in the same frame as un-hiding (Safari then skips the
+  // transition and the sheet looked as if nothing happened), the menu left open over it, a link handler in the bubble
+  // phase that any other handler could swallow, and taps made before this module ran (they now wait in a small inline
+  // shim, Chrome.astro, instead of leaving for the concierge page).
+  const w = window as unknown as { __ipCgShim?: EventListener; __ipCgPending?: string; __ipCgReady?: boolean };
   const sh = document.querySelector<HTMLElement>("[data-cg-sheet]"), back = document.querySelector<HTMLElement>("[data-cg-back]");
-  if (!sh || !back) return;
-  const flowEl = sh.querySelector<HTMLElement>("[data-flow]")!;
-  let flow: ReturnType<typeof initFlow> | null = null, lastFocus: HTMLElement | null = null;
+  if (w.__ipCgShim) document.removeEventListener("click", w.__ipCgShim, true);
+  if (!sh || !back) { if (w.__ipCgPending) location.href = w.__ipCgPending; return; }
+  w.__ipCgReady = true;
+  const flowEl = sh.querySelector<HTMLElement>("[data-flow]")!, box = sh.querySelector<HTMLElement>(".sh-in")!;
+  const slow = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let flow: ReturnType<typeof initFlow> | null = null, lastFocus: HTMLElement | null = null, hideT = 0;
   const open = (e?: Event) => {
-    e?.preventDefault(); lastFocus = document.activeElement as HTMLElement;
+    e?.preventDefault(); clearTimeout(hideT);
+    document.querySelectorAll("details.concierge[open]").forEach((d) => d.removeAttribute("open"));
+    if (sh.classList.contains("is-open") && !sh.hidden) return;
+    lastFocus = document.activeElement as HTMLElement;
     flow ??= initFlow(flowEl, { param: "concierge" });
     if (!new URLSearchParams(location.search).has("concierge")) flow.go(flow.at());
-    sh.hidden = false; back.hidden = false; document.documentElement.style.overflow = "hidden";
-    requestAnimationFrame(() => { sh.classList.add("is-open"); back.classList.add("is-open"); flow!.focus(); });
+    sh.style.transform = ""; sh.hidden = false; back.hidden = false; document.documentElement.classList.add("sh-lock"); fit();
+    // Two frames: the first lays the hidden-off sheet out, the second starts the slide (one frame is not enough in Safari).
+    requestAnimationFrame(() => requestAnimationFrame(() => { sh.classList.add("is-open"); back.classList.add("is-open"); flow!.focus(); }));
   };
   const close = () => {
-    sh.classList.remove("is-open"); back.classList.remove("is-open"); document.documentElement.style.overflow = "";
-    setTimeout(() => { sh.hidden = true; back.hidden = true; }, 280); flow?.clearUrl(); lastFocus?.focus({ preventScroll: true });
+    sh.classList.remove("is-open"); back.classList.remove("is-open"); document.documentElement.classList.remove("sh-lock");
+    clearTimeout(hideT); hideT = window.setTimeout(() => { sh.hidden = true; back.hidden = true; sh.style.transform = ""; }, slow() ? 0 : 380);
+    flow?.clearUrl(); lastFocus?.focus({ preventScroll: true });
   };
   // Every link to the concierge page opens the sheet instead, over what the reader was looking at (the page stays as a link).
+  const fromLink = (href: string, e?: Event) => {
+    // A place or budget carried by the link (the map card) becomes the flow's prefill.
+    const u = new URL(href, location.href); const p = new URLSearchParams(location.search); let changed = false;
+    for (const k of ["place", "budget"]) { const v = u.searchParams.get(k); if (v && p.get(k) !== v) { p.set(k, v); changed = true; } }
+    if (changed) history.replaceState(null, "", `${location.pathname}?${p}${location.hash}`);
+    if (changed && flow) { flowEl.querySelector("[data-flow-stage]")!.innerHTML = ""; (flowEl as any).__flow = null; flow = null; }
+    open(e);
+  };
+  const cgPath = document.querySelector<HTMLAnchorElement>("a[data-concierge]")?.pathname;
   document.addEventListener("click", (e) => {
-    const a = (e.target as HTMLElement).closest<HTMLAnchorElement>("a[data-concierge], a[href]");
-    if (!a || sh.contains(a) || e.metaKey || e.ctrlKey || e.shiftKey) return;
-    const cg = document.querySelector<HTMLAnchorElement>("a[data-concierge]");
-    if (a.hasAttribute("data-concierge") || (cg && a.pathname === cg.pathname && a.origin === location.origin)) {
-      // A place or budget carried by the link (the map card) becomes the flow's prefill.
-      const u = new URL(a.href); const p = new URLSearchParams(location.search); let changed = false;
-      for (const k of ["place", "budget"]) { const v = u.searchParams.get(k); if (v) { p.set(k, v); changed = true; } }
-      if (changed) history.replaceState(null, "", `${location.pathname}?${p}${location.hash}`);
-      if (changed && flow) { flowEl.querySelector("[data-flow-stage]")!.innerHTML = ""; (flowEl as any).__flow = null; flow = null; }
-      open(e);
-    }
-  });
+    const a = (e.target as HTMLElement).closest?.<HTMLAnchorElement>("a[data-concierge], a[href]");
+    if (!a || sh.contains(a) || e.metaKey || e.ctrlKey || e.shiftKey || (e as MouseEvent).button > 0) return;
+    if (a.hasAttribute("data-concierge") || (cgPath && a.pathname === cgPath && a.origin === location.origin)) fromLink(a.href, e);
+  }, true);
   sh.querySelector("[data-cg-x]")!.addEventListener("click", close);
   back.addEventListener("click", close);
   addEventListener("keydown", (e) => { if (e.key === "Escape" && !sh.hidden) close(); });
+
+  // iPhone (prompt 37 §1.3): the sheet sits on the visual viewport, so the keyboard never covers the field being typed in.
+  const vv = window.visualViewport;
+  function fit() {
+    if (!vv) return;
+    const kb = Math.max(0, Math.round(innerHeight - vv.height - vv.offsetTop));
+    sh!.style.setProperty("--kb", `${kb}px`); sh!.style.setProperty("--vvh", `${Math.round(vv.height)}px`); sh!.classList.toggle("kb", kb > 80);
+  }
+  vv?.addEventListener("resize", fit); vv?.addEventListener("scroll", fit);
+  const reveal = (t: HTMLElement) => {
+    const r = t.getBoundingClientRect(), b = box.getBoundingClientRect();
+    if (r.bottom > b.bottom - 24 || r.top < b.top) box.scrollTo({ top: box.scrollTop + r.top - b.top - Math.min(96, b.height / 4), behavior: slow() ? "auto" : "smooth" });
+  };
+  sh.addEventListener("focusin", (e) => { const t = e.target as HTMLElement; if (t.matches("input, textarea")) { fit(); setTimeout(() => { fit(); reveal(t); }, 320); } });
+  sh.addEventListener("focusout", () => setTimeout(fit, 120));
   { // mobile: drag the grabber down to close
-    const grab = sh.querySelector<HTMLElement>(".sh-grab")!; let y0 = 0, on = false;
+    let y0 = 0, on = false;
     sh.querySelector(".sh-top")!.addEventListener("pointerdown", (e) => { const pe = e as PointerEvent; if ((pe.target as HTMLElement).closest("button")) return; on = true; y0 = pe.clientY; sh.style.transition = "none"; });
     addEventListener("pointermove", (e) => { if (on) sh.style.transform = `translateY(${Math.max(0, e.clientY - y0)}px)`; });
-    addEventListener("pointerup", (e) => { if (!on) return; on = false; sh.style.transition = ""; sh.style.transform = ""; if (e.clientY - y0 > 120) close(); });
-    void grab;
+    const end = (e: PointerEvent) => { if (!on) return; on = false; sh.style.transition = ""; if (e.clientY - y0 > 120) { sh.style.transform = "translateY(105%)"; close(); } else sh.style.transform = ""; };
+    addEventListener("pointerup", end); addEventListener("pointercancel", end);
   }
-  if (new URLSearchParams(location.search).has("concierge")) open();
+  if (w.__ipCgPending) fromLink(w.__ipCgPending);
+  else if (new URLSearchParams(location.search).has("concierge")) open();
 }

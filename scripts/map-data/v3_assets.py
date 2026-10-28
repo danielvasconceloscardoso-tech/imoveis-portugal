@@ -5,10 +5,9 @@
    (SRTM, GMTED, ETOPO1, EU-DEM among others; attribution "Terrain Tiles: Mapzen / AWS Open Data").
 2. Sea: a depth-tinted base for the view (z5-z8), from the same tiles (bathymetry under the sea), land left transparent
    -> site/public/tiles/sea/{z}/{x}/{y}.webp
-3. Night: NASA Black Marble 2016 (VIIRS_Black_Marble, NASA GIBS, public domain), z5-z8
-   -> site/public/tiles/night/{z}/{x}/{y}.webp
-4. Insets: Madeira and the Azores are drawn moved and scaled next to the mainland (build.py INSET). Their relief and night
-   lights are rendered here as two images each, in the same place -> site/public/data/map/inset-{madeira,azores}-{relief,night}.webp
+3. Insets: Madeira and the Azores are drawn moved and scaled next to the mainland (build.py INSET). Their relief is
+   rendered here as one image each, in the same place -> site/public/data/map/inset-{madeira,azores}-relief.webp
+(Night mode and its NASA Black Marble tiles were removed on 28 Oct 2026, prompt 37 §3.)
    with their corner coordinates in site/public/data/map/insets.json.
 Only Portugal is sculpted: the terrain outside the mainland outline (from munis.topo.json) is lowered to 0 m with a short
 feathered slope, so the country reads as a relief model on a calm Atlantic. A far sea (z5-z6, wider) sits under the near one.
@@ -21,7 +20,6 @@ from PIL import Image, ImageDraw, ImageFilter
 OUT = "site/public"; CACHE = "/tmp/mapv3-cache"; os.makedirs(CACHE, exist_ok=True)
 UA = {"User-Agent": "ImoveisPortugalMap/1.0 (ops@imoveisportugal.lu)"}
 DEM = "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png"
-NIGHT = "https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/VIIRS_Black_Marble/default/2016-01-01/GoogleMapsCompatible_Level8/{z}/{y}/{x}.png"
 INSET = {"madeira": dict(c=(-16.95, 32.75), to=(-10.75, 37.55), s=0.5, bb=(-17.32, 32.36, -16.22, 33.16), z=10),
          "azores": dict(c=(-28.0, 38.6), to=(-11.35, 39.95), s=0.28, bb=(-31.35, 36.88, -24.95, 39.8), z=8)}
 
@@ -90,7 +88,7 @@ for z in range(5, 11):  # 1. terrain, mainland
         save(Image.fromarray(np.dstack([r, g, b]).astype(np.uint8), "RGB"), p, lossless=True); n += 1
 print("dem tiles", n)
 n = 0
-for name, bb, zs in (("sea", VIEW, range(5, 9)), ("seafar", FAR, range(5, 7))):  # 2. sea and 3. night lights
+for name, bb, zs in (("sea", VIEW, range(5, 9)), ("seafar", FAR, range(5, 7))):  # 2. sea
     for z in zs:
         for x, y in tiles(bb, z):
             e = elev(get(DEM.format(z=z, x=x, y=y)))
@@ -100,34 +98,29 @@ for name, bb, zs in (("sea", VIEW, range(5, 9)), ("seafar", FAR, range(5, 7))): 
             sm = blur(np.minimum(e, 0), 2.5)
             rgb = sea_rgb(sm); alpha = np.where(e < 2, 255, 0).astype(np.uint8)
             save(Image.fromarray(np.dstack([rgb.astype(np.uint8), alpha]), "RGBA"), f"{OUT}/tiles/{name}/{z}/{x}/{y}.webp", q=80)
-            nn = "night" if name == "sea" else "nightfar"
-            try: nb = get(NIGHT.format(z=z, x=x, y=y)); save(Image.open(io.BytesIO(nb)).convert("RGB"), f"{OUT}/tiles/{nn}/{z}/{x}/{y}.webp", q=80)
-            except SystemExit: pass
             n += 1
-print("sea/night tiles", n)
+print("sea tiles", n)
 
 meta = {}
-for name, t in INSET.items():  # 4. island panels, rendered in lon/lat then placed where build.py draws the islands
+for name, t in INSET.items():  # 3. island panels, rendered in lon/lat then placed where build.py draws the islands
     bb, z = t["bb"], t["z"]; W = 1400 if name == "madeira" else 1600; H = int(W * (bb[3] - bb[1]) / (bb[2] - bb[0]) / math.cos(math.radians((bb[1] + bb[3]) / 2)))
     lons = np.linspace(bb[0], bb[2], W); lats = np.linspace(bb[3], bb[1], H)
-    E = np.zeros((H, W), np.float32); N = np.zeros((H, W, 3), np.float32)
-    cacheT, cacheN = {}, {}
-    for zz, src, store, fn in ((z, DEM, cacheT, elev), (8, NIGHT, cacheN, lambda b: np.asarray(Image.open(io.BytesIO(b)).convert("RGB"), np.float32))):
+    E = np.zeros((H, W), np.float32)
+    cacheT = {}
+    for zz, src, store, fn in ((z, DEM, cacheT, elev),):
         fx = np.array([lon2x(v, zz) for v in lons]); fy = np.array([lat2y(v, zz) for v in lats])
         tx, ty = fx.astype(int), fy.astype(int); px = ((fx - tx) * 256).astype(int).clip(0, 255); py = ((fy - ty) * 256).astype(int).clip(0, 255)
         for j in range(H):
             for X in np.unique(tx):
                 cols = np.where(tx == X)[0]; key = (X, ty[j])
                 if key not in store: store[key] = fn(get(src.format(z=zz, x=X, y=ty[j])))
-                if src is DEM: E[j, cols] = store[key][py[j], px[cols]]
-                else: N[j, cols] = store[key][py[j], px[cols]]
+                E[j, cols] = store[key][py[j], px[cols]]
     cell = (bb[2] - bb[0]) / W * 111320 * math.cos(math.radians((bb[1] + bb[3]) / 2))
     # Relief as light and shadow only (like the mainland hillshade layer, which sits above the colour field).
     hs = hillshade(E, cell); land = E > 1; d = (hs - math.sin(math.radians(38)))[..., None]
     hi, lo = np.array([255, 244, 214], np.float32), np.array([52, 64, 70], np.float32)
     rgb = np.where(d > 0, hi, lo); alpha = np.where(land, np.clip(np.abs(d[..., 0]) * 1.4, 0, 0.6) * 255, 0)
     save(Image.fromarray(np.dstack([rgb.astype(np.uint8), alpha.astype(np.uint8)]), "RGBA"), f"{OUT}/data/map/inset-{name}-relief.webp", q=84)
-    save(Image.fromarray(N.clip(0, 255).astype(np.uint8)), f"{OUT}/data/map/inset-{name}-night.webp", q=84)
     cx, cy = t["c"]; tx_, ty_ = t["to"]; s = t["s"]; mv = lambda lo, la: [round((lo - cx) * s + tx_, 5), round((la - cy) * s + ty_, 5)]
     meta[name] = [mv(bb[0], bb[3]), mv(bb[2], bb[3]), mv(bb[2], bb[1]), mv(bb[0], bb[1])]
 json.dump(meta, open(f"{OUT}/data/map/insets.json", "w"))

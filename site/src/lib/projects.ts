@@ -6,14 +6,20 @@ import { join } from "node:path";
 
 export type Unit = { id: string; ref: string; name?: string | null; typology: string; area: number | null; areaNote?: string | null; price: number | null; priceNote?: string | null; img?: string | null; url: string };
 export type Project = { id: string; name: string; developer: string; devSlug?: string; muni: string; lon: number; lat: number; line?: string; render?: string | null; credit?: string;
-  lines?: Partial<Record<"pt" | "en" | "fr", string>>; from: number | null; typologies: string[]; delivery?: string | null; url?: string; partner?: boolean; demo?: string; checked?: string; gallery?: string[]; credits?: string[]; units?: Unit[]; sources?: string[]; hideRefs?: boolean };
+  lines?: Partial<Record<"pt" | "en" | "fr", string>>; from: number | null; typologies: string[]; delivery?: string | null; url?: string; partner?: boolean; demo?: string; checked?: string; gallery?: string[]; credits?: string[]; units?: Unit[]; sources?: string[]; hideRefs?: boolean;
+  // Prompt 38 (Marble Terrace): a partner still negotiating ("pending") shows on the preview only; availability by block and typology.
+  pending?: boolean; summary?: Partial<Record<"pt" | "en" | "fr", string>>; features?: (Record<"pt" | "en" | "fr", string> & { card?: boolean })[];
+  blocks?: Block[]; availabilityChecked?: string; availabilitySource?: string; availabilityNote?: Partial<Record<"pt" | "en" | "fr", string>> };
+export type Block = { id: string; units: { typology: string; total: number; forSale: number; soon?: number; reserved: number; sold: number }[] };
 const ALL: Project[] = JSON.parse(readFileSync(join(process.cwd(), "..", "content", "developers", "projects.json"), "utf8")).projects;
-export const PROJECTS: Project[] = ALL.filter((p) => p.partner === true);
+// A pending partner is never built on the live branch (Cloudflare Workers Builds sets WORKERS_CI_BRANCH).
+const LIVE = process.env.WORKERS_CI_BRANCH === "main";
+export const PROJECTS: Project[] = ALL.filter((p) => p.partner === true && !(LIVE && p.pending));
 export const demoProjects = (token: string) => ALL.filter((p) => p.demo === token);
 /** A developer's projects in one municipality: one showcase page each. */
 export const showcases = (list: Project[]) => {
   const m = new Map<string, Project[]>();
-  for (const p of list) if (p.units?.length) { const k = `${p.devSlug}/${p.muni}`; m.set(k, [...(m.get(k) ?? []), p]); }
+  for (const p of list) if (p.units?.length || p.blocks?.length) { const k = `${p.devSlug}/${p.muni}`; m.set(k, [...(m.get(k) ?? []), p]); }
   return [...m.values()];
 };
 /** The two web sizes the importer writes for every image. */

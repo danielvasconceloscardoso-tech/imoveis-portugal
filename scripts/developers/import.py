@@ -62,6 +62,8 @@ for key, (token, keep) in PLAN.items():
             "hideRefs": key == "orizon",
         })
 out = os.path.join(ROOT, "content", "developers", "projects.json")
+# Prompt 38: projects entered by hand (no demo, e.g. Marble Terrace) are kept as they are.
+projects += [p for p in json.load(open(out))["projects"] if not p.get("demo")]
 how = json.load(open(out))["_how"]
 how = ("Developer projects (prompts 26 §1 and 28 §2). partner=true: shown on the public map, the place card ('Partner developers here') and a showcase page, labelled 'Sponsored' "
        "(only once the developer has signed and paid, D6, D38). partner=false: shown only in that developer's private demo (/d/{demo}/). Facts only as published by the developer "

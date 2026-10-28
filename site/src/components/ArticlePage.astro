@@ -1,0 +1,107 @@
+---
+// One article of the Artigos hub (prompt 37 §2): the long text, tables and statistics moved off the map page
+// (how to read it, the list of municipalities, the method) and the home page (ten years of prices), plus the golf premium
+// (content/data/GOLF_PREMIUM.md). Sources and the disclaimer at the end of every article (EDITORIAL_POLICY.md).
+import V2 from "../layouts/V2.astro";
+import { HTML_LANG, LANGS, eur, pathFor, type Lang, type EdCode } from "../i18n";
+import { ART_SUB, GOLF, type ArtKey } from "../lib/articles";
+import { Sources, DISCLAIMER, fmtDate } from "../lib/content";
+import { MAP_MUNIS } from "../lib/mapdata";
+import { PLACES } from "../lib/places";
+import { PRICES, LAST } from "../lib/prices";
+import { lineChart } from "../lib/chart";
+import { c, edName } from "../lib/copy";
+
+interface Props { lang: Lang; ed: EdCode; art: ArtKey; }
+const { lang, ed, art } = Astro.props;
+const hub = pathFor(lang, ed, "articles"), map = pathFor(lang, ed, "map");
+const paths = Object.fromEntries(LANGS.map((l) => [l, `${pathFor(l, ed, "articles")}${ART_SUB[art][l]}/`])) as Record<Lang, string>;
+const e = (n: number) => eur(n, lang);
+const nf = new Intl.NumberFormat(HTML_LANG[lang], { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const sup = (ns: number[]) => [...new Set(ns)].map((i) => `<a class="sup" href="#fonte-${i}">${i}</a>`).join("");
+const src = new Sources();
+const OSM_GOLF = ["https://wiki.openstreetmap.org/wiki/Tag:leisure%3Dgolf_course", "Golf courses: OpenStreetMap leisure=golf_course, © OpenStreetMap contributors (ODbL)", "2026-10-27"] as const;
+
+// Preços: como ler o mapa (was map.note and the municipality table on the map page).
+const nNow = art === "map" || art === "golf" || art === "method" ? src.n("ine-m2-2026q2") : 0;
+const nHist = art === "prices" || art === "golf" || art === "method" ? src.n("ine-m2-history") : 0;
+const nOsm = art === "map" || art === "golf" || art === "method" ? src.n("osm-boundaries") : 0;
+const nGolf = art === "golf" || art === "method" ? src.raw(...OSM_GOLF) : 0;
+if (art === "method") { src.n("ine-rent-history"); src.n("bdp-mortgage-rate-2026-08"); for (const x of ["chf", "usd", "brl", "ils"]) src.n(`ecb-eur-${x}`); }
+const placePages = new Set(PLACES.map((p) => p.slug));
+
+// Dez anos de preços (was the prices section of the home page).
+const ptP = PRICES.regions.PT;
+const chart = art === "prices" ? lineChart(PRICES.quarters, [{ label: "Portugal", values: ptP.m2 }, { label: PRICES.munis.lisboa.n, values: PRICES.munis.lisboa.m2 }, { label: PRICES.munis.porto.n, values: PRICES.munis.porto.m2 }],
+  { breakAt: PRICES.break, breakLabel: c("prices.break", lang), fmt: (v) => new Intl.NumberFormat(HTML_LANG[lang]).format(v), h: 300 }) : "";
+
+// O prémio do golfe: full courses only, where INE publishes both medians, highest ratio first.
+const golf = GOLF.parishes.filter((p) => p.full_course && p.ratio !== null && p.parish_median_eur_m2 && p.municipality_median_eur_m2).sort((a, b) => b.ratio! - a.ratio!);
+---
+<V2 lang={lang} ed={ed} page="articles" title={`${c(`art.${art}.h`, lang)} | Imóveis Portugal · ${edName(ed, lang)}`} description={c(`art.${art}.p`, lang)} sticky={null} paths={paths} ogType="article">
+  <article class="frame read prose art">
+    <div class="ph">
+      <p class="small" style="margin:0 0 8px"><a href={hub}>{c("art.title", lang)}</a></p>
+      <h1>{c(`art.${art}.h`, lang)}</h1>
+      <p class="lede">{c(`art.${art}.p`, lang)}</p>
+    </div>
+
+    {art === "map" && (
+      <>
+        <p>{c("map.lede", lang)}<Fragment set:html={sup([nNow])} /></p>
+        <p>{c("map.note", lang)}<Fragment set:html={sup([nOsm])} /></p>
+        <p><a class="more" href={map}>{c("art.open", lang)}</a></p>
+        <h2>{c("map.list", lang)}</h2>
+        <table class="cmp">
+          <thead><tr><th scope="col">{c("data.col.place", lang)}</th><th scope="col">{c("map.col.m2", lang)}</th></tr></thead>
+          <tbody>{MAP_MUNIS.map((m) => (
+            <tr><th><a href={`${map}?place=${m.s}`}>{m.n}</a> <small>{c(`map.r.${m.r}`, lang)}</small>{placePages.has(m.s) && <> <a href={`${map}${m.s}/`}>{c("map.a.page", lang)}</a></>}</th><td>{m.v ? e(m.v) : "—"}</td></tr>
+          ))}</tbody>
+        </table>
+      </>
+    )}
+
+    {art === "prices" && (
+      <>
+        <p>{c("home2.prices.p", lang, { from: e(ptP.m2[0]!), to: e(ptP.m2[LAST]!) })}<Fragment set:html={sup([nHist])} /></p>
+        <p class="small pc-legend"><span class="k0">Portugal</span> · <span class="k1">{PRICES.munis.lisboa.n}</span> · <span class="k2">{PRICES.munis.porto.n}</span></p>
+        <figure class="h2-chart" set:html={chart} />
+        <p>{c("prices.method", lang)}</p>
+        <p><a class="more" href={pathFor(lang, ed, "data")}>{c("home2.prices.a", lang)}</a></p>
+      </>
+    )}
+
+    {art === "golf" && (
+      <>
+        <p>{c("art.golf.1", lang)}<Fragment set:html={sup([nNow, nGolf])} /></p>
+        <p>{c("art.golf.2", lang)}</p>
+        <p>{c("art.golf.3", lang)}<Fragment set:html={sup([nNow, nHist])} /></p>
+        <table class="cmp">
+          <caption class="small" style="text-align:left;caption-side:top;padding-bottom:8px">{c("art.golf.label", lang)}</caption>
+          <thead><tr><th scope="col">{c("art.golf.col.parish", lang)}</th><th scope="col">{c("art.golf.col.muni", lang)}</th><th scope="col">{c("art.golf.col.pm", lang)}</th><th scope="col">{c("art.golf.col.mm", lang)}</th><th scope="col">{c("art.golf.col.ratio", lang)}</th></tr></thead>
+          <tbody>{golf.map((p) => (
+            <tr><th><a href={`${map}?place=${p.municipality_slug}`}>{p.parish}</a></th><td>{p.municipality}</td><td>{e(p.parish_median_eur_m2!)}</td><td>{e(p.municipality_median_eur_m2!)}</td><td>{nf.format(p.ratio!)}</td></tr>
+          ))}</tbody>
+        </table>
+        <p>{c("art.golf.4", lang)}<Fragment set:html={sup([nOsm, nGolf])} /></p>
+      </>
+    )}
+
+    {art === "method" && (
+      <>
+        <p>{c("art.method.1", lang)}<Fragment set:html={sup([nNow, nHist])} /></p>
+        <p>{c("prices.method", lang)}</p>
+        <p>{c("map.note", lang)}</p>
+        <p>{c("prices.yield.note", lang)}</p>
+        <p>{c("art.method.2", lang)}<Fragment set:html={sup([nOsm])} /></p>
+      </>
+    )}
+
+    <section class="sources-list" aria-labelledby="fontes">
+      <h2 id="fontes" class="h-small">{c("common.sources", lang)}</h2>
+      <ol>{src.list.map((s, i) => <li id={`fonte-${i + 1}`}><a href={s.url} rel="noopener">{s.title}</a>{s.checked && `, ${c("common.checked", lang, { date: fmtDate(lang, s.checked) })}`}.</li>)}</ol>
+    </section>
+    <p class="small disclaimer">{DISCLAIMER[lang]}</p>
+    <p style="margin-bottom:64px"><a class="more" href={hub}>{c("art.all", lang)}</a></p>
+  </article>
+</V2>

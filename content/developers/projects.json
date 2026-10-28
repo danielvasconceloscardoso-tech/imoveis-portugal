@@ -811,6 +811,203 @@
     "https://vic-properties.com/wp-content/uploads/2026/05/Six-Senses-Comporta-Teaser-Brochure_EN.pdf"
    ],
    "hideRefs": false
+  },
+  {
+   "id": "marble-terrace",
+   "name": "Marble Terrace",
+   "developer": "ID Investimentos Imobiliários",
+   "devSlug": "id-investimentos-imobiliarios",
+   "muni": "gondomar",
+   "lon": -8.5367,
+   "lat": 41.1501,
+   "line": "55 apartments in three blocks on Avenida Dr. Mário Soares in Gondomar, T1 to T4, with gym, sauna and Turkish bath, library and coworking, a garden with a water mirror, and a private parking box, solar panels and EV charging for every unit.",
+   "lines": {
+    "pt": "55 apartamentos em três blocos na Avenida Dr. Mário Soares, em Gondomar, de T1 a T4, com ginásio, sauna e banho turco, biblioteca e cowork, jardim com espelho de água e, para cada fração, box de estacionamento, painéis solares e carregamento elétrico.",
+    "en": "55 apartments in three blocks on Avenida Dr. Mário Soares in Gondomar, T1 to T4, with gym, sauna and Turkish bath, library and coworking, a garden with a water mirror and, for every unit, a private parking box, solar panels and EV charging.",
+    "fr": "55 appartements en trois blocs sur l'Avenida Dr. Mário Soares, à Gondomar, du T1 au T4, avec salle de sport, sauna et hammam, bibliothèque et coworking, jardin avec miroir d'eau et, pour chaque logement, un box de stationnement, des panneaux solaires et une recharge pour véhicule électrique."
+   },
+   "summary": {
+    "pt": "55 apartamentos · T1 a T4 · 3 blocos",
+    "en": "55 apartments · T1 to T4 · 3 blocks",
+    "fr": "55 appartements · T1 à T4 · 3 blocs"
+   },
+   "delivery": null,
+   "url": "https://marbleterrace.pt/",
+   "partner": true,
+   "pending": true,
+   "checked": "2026-10-28",
+   "render": "/img/developers/marble-terrace/exterior",
+   "credit": "ID Investimentos Imobiliários (render)",
+   "gallery": [
+    "/img/developers/marble-terrace/exterior",
+    "/img/developers/marble-terrace/garden",
+    "/img/developers/marble-terrace/living",
+    "/img/developers/marble-terrace/kitchen",
+    "/img/developers/marble-terrace/bedroom",
+    "/img/developers/marble-terrace/gym",
+    "/img/developers/marble-terrace/spa",
+    "/img/developers/marble-terrace/library"
+   ],
+   "credits": [
+    "ID Investimentos Imobiliários",
+    "ID Imob (brochure, Aug 2026)"
+   ],
+   "from": null,
+   "typologies": [
+    "T1",
+    "T2",
+    "T3",
+    "T4"
+   ],
+   "features": [
+    {
+     "pt": "Painéis solares e carregamento elétrico em cada fração",
+     "en": "Solar panels and EV charging for every unit",
+     "fr": "Panneaux solaires et recharge électrique pour chaque logement",
+     "card": true
+    },
+    {
+     "pt": "Ginásio, sauna e banho turco",
+     "en": "Gym, sauna and Turkish bath",
+     "fr": "Salle de sport, sauna et hammam",
+     "card": true
+    },
+    {
+     "pt": "Box de estacionamento privativa por fração",
+     "en": "A private parking box per unit",
+     "fr": "Un box de stationnement privé par logement",
+     "card": true
+    },
+    {
+     "pt": "Biblioteca e cowork",
+     "en": "Library and coworking",
+     "fr": "Bibliothèque et coworking"
+    },
+    {
+     "pt": "Jardim com espelho de água",
+     "en": "Garden with a water mirror",
+     "fr": "Jardin avec miroir d'eau"
+    },
+    {
+     "pt": "Ar condicionado Haier, Miele e Geberit, domótica",
+     "en": "Haier air conditioning, Miele and Geberit, home automation",
+     "fr": "Climatisation Haier, Miele et Geberit, domotique"
+    },
+    {
+     "pt": "De cerca de 70 a 425 m² de área total",
+     "en": "About 70 to 425 m² total area",
+     "fr": "D'environ 70 à 425 m² de surface totale"
+    }
+   ],
+   "blocks": [
+    {
+     "id": "A",
+     "units": [
+      {
+       "typology": "T1",
+       "total": 4,
+       "forSale": 0,
+       "soon": 2,
+       "reserved": 0,
+       "sold": 2
+      },
+      {
+       "typology": "T2",
+       "total": 10,
+       "forSale": 0,
+       "soon": 7,
+       "reserved": 0,
+       "sold": 3
+      },
+      {
+       "typology": "T3",
+       "total": 6,
+       "forSale": 2,
+       "soon": 0,
+       "reserved": 1,
+       "sold": 3
+      }
+     ]
+    },
+    {
+     "id": "B",
+     "units": [
+      {
+       "typology": "T1",
+       "total": 4,
+       "forSale": 0,
+       "soon": 1,
+       "reserved": 0,
+       "sold": 3
+      },
+      {
+       "typology": "T2",
+       "total": 7,
+       "forSale": 2,
+       "soon": 2,
+       "reserved": 0,
+       "sold": 3
+      },
+      {
+       "typology": "T3",
+       "total": 6,
+       "forSale": 2,
+       "soon": 1,
+       "reserved": 0,
+       "sold": 3
+      }
+     ]
+    },
+    {
+     "id": "C",
+     "units": [
+      {
+       "typology": "T1",
+       "total": 5,
+       "forSale": 0,
+       "soon": 3,
+       "reserved": 0,
+       "sold": 2
+      },
+      {
+       "typology": "T2",
+       "total": 5,
+       "forSale": 0,
+       "soon": 3,
+       "reserved": 0,
+       "sold": 2
+      },
+      {
+       "typology": "T3",
+       "total": 7,
+       "forSale": 3,
+       "soon": 0,
+       "reserved": 0,
+       "sold": 4
+      },
+      {
+       "typology": "T4",
+       "total": 1,
+       "forSale": 0,
+       "soon": 0,
+       "reserved": 0,
+       "sold": 1
+      }
+     ]
+    }
+   ],
+   "availabilityChecked": "2026-10-28",
+   "availabilitySource": "https://marbleterrace.pt/",
+   "availabilityNote": {
+    "pt": "Tabela de disponibilidade publicada pelo promotor em marbleterrace.pt. As frações ainda não comercializadas entram em venda em março de 2027, segundo o promotor.",
+    "en": "Availability table published by the developer at marbleterrace.pt. Units not yet marketed go on sale in March 2027, according to the developer.",
+    "fr": "Tableau des disponibilités publié par le promoteur sur marbleterrace.pt. Les logements pas encore commercialisés seront mis en vente en mars 2027, selon le promoteur."
+   },
+   "sources": [
+    "https://marbleterrace.pt/",
+    "https://idinvestimentosimobiliarios.com/",
+    "https://nominatim.openstreetmap.org/search?q=Avenida+Dr.+M%C3%A1rio+Soares,+Gondomar&format=json"
+   ]
   }
  ]
 }

@@ -5,7 +5,7 @@ Preview: the design-v2 branch, `/pt/lu/mapa/` (and the home page, where the map 
 ## What the reader gets
 
 1. **The look.** Portugal as a relief model: real terrain (AWS Terrain Tiles, Portugal only; Spain and the sea floor flattened), hillshade lit from the south-west, our own basemap (sand land, a sea with a calm depth gradient, a fine bright coastline, the Tejo, Douro, Minho and Guadiana), place names in Playfair for the big places and Manrope as you zoom. The price is a colour field draped on the relief, one sand-to-green ramp whose lightness falls steadily (readable in the common colour-vision types). The legend is one thin line with two numbers.
-2. **Day / Night.** NASA Black Marble (public domain): Lisbon, Porto, the Algarve coast and Madeira glow; Madeira and the Azores, drawn beside the mainland, keep their own relief and lights.
+2. **2D · 3D** (prompt 37 §3, replaces Day / Night, removed 28 Oct): 2D is flat, north up, no relief, the default on phones and weak devices; 3D is the relief model, the default on desktop. The choice is remembered.
 3. **Budget as a gesture.** A slider in the reader's currency, tap the amount to type it; the places the budget reaches (100 m² or more) glow, and one sentence answers: "Com cerca de 1 500 000 €, compra perto de 590 m² em Grândola e 307 m² em Cascais. Medianas do INE, 2.º trimestre de 2026."
 4. **Hover and tap.** A place lifts with its name and one number; a tap flies in (1.2 s, eased) and opens the card: from the side on desktop, from the bottom on mobile with three heights (peek, half, full). Photo, name, price per m², 10-year change, rent, what the budget buys, the 10-year line, "Ver casas aqui" and "Falar com o concierge"; Compare, details and share one tap further.
 5. **Search like Spotlight.** The magnifier or ⌘K: 308 concelhos, Comporta, Melides, Vilamoura, Quinta do Lago and other well-known places, parishes, golf courses, 985 named beaches (OpenStreetMap) and partner developments. Typing "Comp" already glides to Comporta.
@@ -14,7 +14,7 @@ Preview: the design-v2 branch, `/pt/lu/mapa/` (and the home page, where the map 
 8. **Compare.** Pin two places; a mirrored split card shows their numbers.
 9. **Tours.** "A costa, do Porto à Comporta", "Golfe no Algarve", "Madeira", "Dez anos em vinte segundos"; a touch takes over at any moment.
 10. **Arrival.** One opening flight from the Atlantic onto the coast on the map page; the slow rotation on the home page.
-11. **Every state is a link:** `?place=`, `?parish=`, `?layer=`, `?q=` (quarter), `?budget=`, `?night=1`, `?golf=1`, `?beach=1`, `?devs=1`.
+11. **Every state is a link:** `?place=`, `?parish=`, `?layer=`, `?q=` (quarter), `?budget=`, `?dim=2d|3d`, `?golf=1`, `?beach=1`, `?devs=1`.
 
 Kept: 308/308 concelhos clickable (flat and 3D), parishes from zoom 8.2, golf, the embed with "Powered by" (still map v2), every source on /credits/ and in the map's attribution, the plain list of 308 places without JavaScript.
 
