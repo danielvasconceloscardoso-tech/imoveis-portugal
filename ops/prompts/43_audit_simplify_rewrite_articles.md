@@ -85,6 +85,33 @@ Work now, in the order below. Ship each stage live per D67 as soon as it is gree
 5. **Learn from the best.** Read the matching articles on Doutor Finanças, idealista/news, and any site you can reach that ranks for the phrase. Match what they answer, then do it shorter and clearer. Never copy text.
 6. **Keep PT, EN and FR in parity:** each language is written natively, not translated word for word.
 
+## 3b. Passo a passo, Perguntas and the other guidance pages
+
+Operator, 29 Oct: keep them simple and professional, in the tone of §3, with a clear call to action to clarify things with a partner.
+
+1. **Shape:**
+   - each station or answer: a plain question as the heading, then two or three short sentences that answer it, in a positive tone;
+   - then "Saiba mais" to the article that goes deeper, and nothing else on that screen;
+   - Perguntas: one line per question, and the answer opens in place.
+2. **One call to action per station or answer**, matched to the partner who solves that step:
+
+   | Topic | Call to action (PT · EN · FR) |
+   | --- | --- |
+   | NIF, the deed, power of attorney, inheritance | "Esclarecer com um advogado parceiro" · "Clarify with a partner lawyer" · "En parler avec un avocat partenaire" |
+   | Finding the home, visits, the offer, reservation | "Falar com o consultor" · "Talk to the advisor" · "Parler au conseiller" |
+   | Mortgage, the bank, moving the money | "Pedir uma simulação a um banco parceiro" · "Ask a partner bank for a simulation" · "Demander une simulation à une banque partenaire" |
+   | Taxes, IMT, IMI, tax residence, selling | "Esclarecer com um consultor fiscal parceiro" · "Clarify with a partner tax adviser" · "En parler avec un conseiller fiscal partenaire" |
+
+3. **Every call to action opens the Concierge** at the right step, with the topic pre-filled. No new forms.
+   - Requests follow the existing routing: the qualified advisor (D66) or the lawyer card (D64, after its consent box).
+   - Where a partner category has no signed partner yet (bank, tax adviser), the Concierge says "Apresentamos-lhe a pessoa certa" and the request goes to the qualified advisor.
+   - Never name a partner who hasn't given written consent (task 37a).
+4. **Style:**
+   - a quiet text link with an arrow, not a big button;
+   - at most one per screen;
+   - labelled "Parceiro" where a partner appears.
+5. Never promise an outcome, a price or a response time (the reply-time promise still waits for the operator).
+
 ## 4. Ship and report
 
 1. **Ship each stage live per D67:**
