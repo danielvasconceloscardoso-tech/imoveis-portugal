@@ -16,6 +16,8 @@ export type Post = {
   id: string; lang: Lang; slug: string; title: string; description: string; tldr: string;
   published: string; updated: string; cta: Cat | "agency"; related: string[]; sources: string[];
   body: string; minutes: number;
+  // Prompt 43 §3: the three most-asked follow-ups (FAQ structured data and a short list under the article).
+  faq?: { q: string; a: string }[]; keyword?: string; aliases?: string[];
 };
 
 // YAML reads 2026-10-25 as a Date; keep the ISO text.
@@ -52,7 +54,7 @@ export function render(p: Post, ed: EdCode): { html: string; sources: Sources } 
       if (!t) throw new Error(`blog ${p.id}.${p.lang}: unknown article ${id}`);
       return `${pathFor(p.lang, ed, "blog")}${t.slug}/`;
     })
-    .replace(/\{\{(faq|sims|guide|buy|talk|map)\}\}/g, (_, k) => pathFor(p.lang, ed, k as PageKey));
+    .replace(/\{\{(faq|sims|guide|buy|talk|map|journey|articles)\}\}/g, (_, k) => pathFor(p.lang, ed, k as PageKey));
   for (const id of p.sources) src.n(id); // listed even if not cited in the text
   // Two facts from the same source in a row would show "1,1": keep one.
   const dedup = text.replace(/(<a class="sup" href="#fonte-(\d+)">\2<\/a>)(?:<a class="sup" href="#fonte-\2">\2<\/a>)+/g, "$1");

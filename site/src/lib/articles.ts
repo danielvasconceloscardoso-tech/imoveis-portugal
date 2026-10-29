@@ -1,5 +1,6 @@
 // The Artigos hub (prompt 37 §2): long explanations, tables, method and statistics moved off the map and the home page,
-// one article each. URL: /{lang}/{ed}/{artigos|articles}/{slug}/. Wording: COPY_DECK.md "art.*" (and the blocks they reuse).
+// one article each. URL: /{lang}/{ed}/{artigos|articles}/{slug}/. Wording: COPY_DECK.md "art.*" (prompt 43 §3: search title,
+// answer first, question headings, three follow-ups as FAQPage data). The slugs below stay fixed: links and the sitemap use them.
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import type { Lang } from "../i18n";

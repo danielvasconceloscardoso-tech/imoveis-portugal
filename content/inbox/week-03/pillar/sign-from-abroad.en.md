@@ -2,92 +2,96 @@
 id: sign-from-abroad
 lang: en
 slug: power-of-attorney-portugal
-title: "A power of attorney in Portugal lets you sign without flying in"
-description: "A power of attorney signed at a Portuguese consulate, or before your notary with the Hague Apostille, lets someone sign the deed for you. Steps, costs, sources."
-tldr: "You don't have to fly to Portugal to buy. A power of attorney signed at a Portuguese consulate, or before a notary where you live with the Hague Apostille, lets someone sign the deed for you. Deed and registration at Casa Pronta cost €375 (Justiça.gov.pt, last checked October 25, 2026). Imóveis Portugal links every source."
+title: "Power of attorney in Portugal to sign the deed from abroad"
+description: "A power of attorney in Portugal lets someone sign the deed for you. It's signed at a consulate or before your notary. Steps, Casa Pronta costs, sources."
+tldr: "You don't need to be in Portugal on the day of the deed. A power of attorney signed at a Portuguese consulate, or before a notary where you live with the Hague Apostille, lets someone sign for you. At Casa Pronta, the deed with registration costs €375 (Justiça.gov.pt, last checked October 25, 2026)."
 published: 2026-11-23
-updated: 2026-11-23
+updated: 2026-10-30
 cta: lawyer
 keyword: "power of attorney portugal"
 related: [buy-from-abroad, imt-nonresidents]
 sources: [pt-poa-apostille, pt-sinal-442, pt-casa-pronta-fees, pt-casa-pronta-docs, pt-casa-pronta-docs-all, pt-nif-nonresident, pt-tax-rep, pt-aml-funds, pt-aml-realestate, pt-imt-payment, pt-imt-nonresident-flat, pt-imt-nonresident-exceptions, pt-is-purchase, fr-3916, ch-2nd-pillar-abroad, br-bens-exterior, us-fbar, ecb-eur-chf, ecb-eur-usd, ecb-eur-brl, ecb-eur-ils]
+faq:
+  - q: "Can I buy a house in Portugal without going there?"
+    a: "Yes. A power of attorney lets another person, such as a lawyer, sign the promissory contract and the deed in your name. It's signed at a Portuguese consulate or before a notary where you live."
+  - q: "Does my power of attorney need an apostille?"
+    a: "Only if a notary outside Portugal signs it. A power of attorney signed at a Portuguese consulate doesn't need the Hague Apostille to take effect in Portugal."
+  - q: "How much does the deed cost in Portugal?"
+    a: "At a Casa Pronta office, the deed with registration costs €375, or €700 with a mortgage. Each extra property adds €50. Lawyer's fees and taxes are separate."
 ---
 
-You can buy a home in Portugal without sitting at the signing table. A power of attorney signed at a Portuguese consulate, or before a notary where you live with the Hague Apostille, lets the person you choose sign the promissory contract and the deed in your name.[[pt-poa-apostille]] At a Casa Pronta office, the deed and the land registration cost €375 and happen in one sitting (Justiça.gov.pt, last checked October 25, 2026).[[pt-casa-pronta-fees]] Imóveis Portugal links the official source for every step below.
+A power of attorney in Portugal lets the person you choose sign the deed for you, so you can buy without flying in. You sign it at a Portuguese consulate, or before a notary where you live with the Hague Apostille.[[pt-poa-apostille]]
 
-## A power of attorney lets someone sign in your name
+At a Casa Pronta office, the deed and the registration cost €375 and happen in one sitting (Justiça.gov.pt, last checked October 25, 2026).[[pt-casa-pronta-fees]] Imóveis Portugal links the official source for every step below.
 
-"I can't take a week off to fly to Lisbon for one signature." Portuguese law doesn't ask you to. A power of attorney (procuração) is a document in which you name a person, often a lawyer, and say what they can sign for you. In a purchase, that is typically the promissory contract (CPCV) and the deed (escritura). The home is bought in your name, and you can still come over for the visit, the keys or both.
+## What the deed is
 
-The wording matters as much as the signature. A power of attorney says who acts for you, for which property, and what they may sign and pay. A lawyer in Portugal usually drafts it, so the office that does the deed accepts it the first time.
+The deed, the escritura, is the final sale contract. You sign it at the end, after the promissory contract. With it, the home becomes yours.
 
-## The power of attorney is signed in one of two ways
+The registration comes right after. It records the home in your name in the land registry, the official record of property.
 
-1. **At a Portuguese consulate.** The consulate signs it as a Portuguese document, so it needs nothing more to take effect in Portugal. The Consulates General in Newark and Paris, for example, list it among their notary services.[[pt-poa-apostille]]
-2. **Before a notary in the country where you live.** A power of attorney signed before a foreign notary must carry the Hague Apostille to take effect in Portugal.[[pt-poa-apostille]] The apostille is a certificate added in the country where the document was signed, which confirms the notary's signature to the other country.
+At Casa Pronta, a government desk, both happen in the same place on the same day.[[pt-casa-pronta-fees]]
 
-Both routes lead to the same place. The consulate saves the apostille step; your local notary may be closer to home.
+## How a power of attorney for the deed works
 
-## The purchase from abroad, step by step
+A power of attorney (procuração) is a document that names a person to sign for you. Often it's a lawyer.
 
-1. **The NIF.** Your Portuguese tax number comes first. You can request it online through a legal representative, or in person, and you don't need a tax representative to get it.[[pt-nif-nonresident]]
-2. **The power of attorney.** Signed early, it covers the steps that follow. On the site it's [station 3 of Step by step](/en/us/step-by-step/?door=buy&step=3).
-3. **The promissory contract (CPCV).** It sets the price, the date and the deposit. If you back out through your own fault, you lose the deposit. If the seller backs out, you can claim double what you paid (Civil Code, article 442).[[pt-sinal-442]] This is [station 6](/en/us/step-by-step/?door=buy&step=6).
-4. **The money.** Banks, notaries and lawyers must ask where the funds come from when the risk or the transaction calls for it.[[pt-aml-funds]] Real-estate companies must identify their clients, with photo ID, before the deal.[[pt-aml-realestate]] Having your proof of funds ready keeps the deed date.
-5. **The taxes.** Transfer tax (IMT) is due on the day it's assessed or within the following 30 days.[[pt-imt-payment]] If you aren't a Portuguese tax resident, it's a flat 7.5% of the price, with exceptions,[[pt-imt-nonresident-flat]] and stamp duty is 0.8%.[[pt-is-purchase]] One exception covers anyone who "has been considered" a Portuguese tax resident.[[pt-imt-nonresident-exceptions]] Whether that includes people who once lived in Portugal and then moved abroad is a question for a partner lawyer or tax adviser. The [IMT article](/en/us/blog/7-5-percent-transfer-tax-non-residents/) has the details.
-6. **The deed and the registration.** At Casa Pronta, both are done in one place. The office asks for the civil and tax identification of sellers and buyers, the building's technical file (ficha técnica) if there is one, a statement that the usage license exists or is waived, and the energy certificate.[[pt-casa-pronta-docs-all]] Whether the license is needed depends on when the building went up: the dividing date is August 7, 1951.[[pt-casa-pronta-docs]] This is [station 7](/en/us/step-by-step/?door=buy&step=7).
-7. **After the deed.** Once you own property in Portugal, you have 15 days to appoint a tax representative or sign up for the tax office's electronic notifications.[[pt-nif-nonresident]]
+In a purchase, that person usually signs the promissory contract (CPCV) and the deed. The home is always bought in your name. You can still come over to see it or pick up the keys.
 
-## The rule is the same everywhere, and three details change by country
+The wording matters as much as the signature. It says who acts for you, for which property, and what they may sign and pay. A lawyer in Portugal often drafts it, so the office accepts it the first time.
 
-In every edition, the power of attorney is signed at a Portuguese consulate or before a local notary with the Hague Apostille. What changes is the tax representative, the currency and the paperwork at home. Outside the EU and the EEA, a tax representative is mandatory unless you join the electronic notifications; inside, it's optional.[[pt-tax-rep]]
+## Where to sign a power of attorney for Portugal
 
-### Luxembourg
+There are two routes, and both are valid in Portugal.[[pt-poa-apostille]]
 
-You live in the EU, so after the deed the tax representative is optional.[[pt-tax-rep]] A power of attorney from a notary in Luxembourg carries the apostille; one signed at a Portuguese consulate doesn't need it. The Casa Pronta fee is €375 in your account too.
+1. **At a Portuguese consulate.** Signed there, it takes effect in Portugal with nothing more. The Consulates General in Newark and Paris, for example, do powers of attorney.
+2. **Before a notary where you live.** In that case, it carries the Hague Apostille. The apostille is a certificate your country adds to the document. It confirms the notary's signature to Portugal.
 
-### France
+The consulate saves you the apostille. Your local notary may be closer to home.
 
-Also in the EU: the tax representative is optional. The Consulate General in Paris handles notary acts, including powers of attorney.[[pt-poa-apostille]] If you open a Portuguese bank account to pay the deposit, as a French tax resident you declare every foreign account each year on form 3916, even an unused one.[[fr-3916]]
+## What the steps are when you buy with a power of attorney
 
-### Switzerland
+1. **The NIF.** Your Portuguese tax number comes first. You can request it online through a legal representative, with no tax representative.[[pt-nif-nonresident]]
+2. **The power of attorney.** Signed early, it covers the steps that follow.
+3. **The promissory contract (CPCV).** It sets the price, the date and the deposit you pay up front. If you back out through your own fault, you lose the deposit. If the seller backs out, you can claim double what you paid (Civil Code, article 442).[[pt-sinal-442]]
+4. **The money.** Banks, notaries and lawyers must ask where the funds come from when the risk or the transaction calls for it.[[pt-aml-funds]] Real-estate companies must identify their clients before the deal.[[pt-aml-realestate]] With your proof of funds ready, the deed date holds.
+5. **The taxes.** The assessment is the tax office's calculation of the tax. Transfer tax (IMT) is due on the day it's assessed or within the following 30 days.[[pt-imt-payment]] If you aren't a Portuguese tax resident, it's a flat 7.5% of the price, with exceptions,[[pt-imt-nonresident-flat]] and stamp duty is 0.8%.[[pt-is-purchase]] One exception covers anyone who "has been considered" a Portuguese tax resident.[[pt-imt-nonresident-exceptions]] Whether that includes people who once lived in Portugal and then moved abroad is a question for a partner lawyer or tax adviser. The [IMT article]({{post:imt-nonresidents}}) has the details.
+6. **The deed and the registration.** The office asks for the civil and tax identification of sellers and buyers. It also asks for the building's technical file (ficha técnica) if there is one, the usage license or its waiver, and the energy certificate.[[pt-casa-pronta-docs-all]] Whether the license is needed depends on the building date, with August 7, 1951, as the reference.[[pt-casa-pronta-docs]] This is [station 7 of Step by step]({{journey}}?door=buy&step=7).
+7. **After the deed.** You have 15 days to appoint a tax representative or sign up for the tax office's electronic notices.[[pt-nif-nonresident]]
 
-Switzerland is outside the EU and the EEA, so after the deed you appoint a tax representative or join the electronic notifications.[[pt-tax-rep]] The deed and registration come to about CHF 346 at the ECB rate of October 23, 2026.[[ecb-eur-chf]] If the money comes from your 2nd pillar, the early withdrawal is allowed for your main residence, in Switzerland or abroad, and not for a second home.[[ch-2nd-pillar-abroad]]
+## How much the deed costs in Portugal
 
-### Brazil
+At Casa Pronta, a purchase with one registration costs €375. A mortgage adds a second registration, and the price is €700. Each extra property adds €50.[[pt-casa-pronta-fees]]
 
-Outside the EU: the tax representative is required, or the electronic notifications. A power of attorney from a Brazilian cartório needs the apostille. The fee is about R$2,118 at the ECB rate of October 23, 2026.[[ecb-eur-brl]] The deed date also matters at home: the property goes in "Bens e Direitos" on your IRPF, converted to dollars and then to reais at the Banco Central selling rate on the purchase date.[[br-bens-exterior]]
+Lawyer's fees are separate. So is the notary's fee for the power of attorney. Both vary, and we don't quote them.
 
-### United States
+The deadlines that set the pace are the IMT payment, within 30 days of the assessment,[[pt-imt-payment]] and the tax representative, within 15 days of owning the home.[[pt-nif-nonresident]] The [calculators]({{sims}}) run the full bill with your own price.
 
-Outside the EU: tax representative or electronic notifications.[[pt-tax-rep]] A power of attorney from a US notary needs the apostille; the Consulate General in Newark also signs them. The fee is about $420 at the ECB rate of October 23, 2026.[[ecb-eur-usd]] A Portuguese bank account opened for the deposit counts toward the $10,000 aggregate that triggers the FBAR.[[us-fbar]]
+## What changes with the country you live in
 
-### Israel
+The power of attorney works the same way everywhere. Three details change: the tax representative, the currency and the paperwork back home.
 
-Outside the EU: tax representative or electronic notifications.[[pt-tax-rep]] A power of attorney from a notary in Israel needs the apostille, or it can be signed at a Portuguese consulate. The fee is about ₪1,310 at the ECB rate of October 23, 2026.[[ecb-eur-ils]]
+Outside the EU and the EEA, a tax representative is mandatory unless you join the electronic notices. Inside, it's optional.[[pt-tax-rep]]
 
-## What it costs and how long it takes
+| Where you live | Power of attorney from a local notary | €375 in your currency (ECB, Oct 23, 2026) | Tax representative |
+| --- | --- | --- | --- |
+| Luxembourg | With the apostille | €375 | Optional |
+| France | With the apostille, or at the Consulate General in Paris | €375 | Optional |
+| Switzerland | With the apostille | about CHF 346[[ecb-eur-chf]] | Or electronic notices |
+| Brazil | From a cartório, with the apostille | about R$2,118[[ecb-eur-brl]] | Or electronic notices |
+| United States | With the apostille, or at the Consulate General in Newark | about $420[[ecb-eur-usd]] | Or electronic notices |
+| Israel | With the apostille, or at a Portuguese consulate | about ₪1,310[[ecb-eur-ils]] | Or electronic notices |
 
-At Casa Pronta, a purchase with one registration costs €375. With a mortgage, which adds a second registration act, it costs €700. Each extra property adds €50.[[pt-casa-pronta-fees]] Lawyer's fees are separate, and so is the notary's fee for the power of attorney: both vary, and we don't quote them.
+In some countries, the purchase also counts back home.
 
-The deadlines that set the pace are the IMT payment, within 30 days of the assessment,[[pt-imt-payment]] and the tax representative, within 15 days of owning the home.[[pt-nif-nonresident]] To see the full bill with your own price, use the [total-cost calculator](/en/us/calculators/total-cost/?resident=0).
+In France, a Portuguese bank account goes on form 3916 every year, even an unused one.[[fr-3916]]
 
-## A partner lawyer signs in your place
+In Switzerland, 2nd-pillar money can go toward your main home, in Switzerland or abroad. It can't go toward a second home.[[ch-2nd-pillar-abroad]]
 
-The lawyer is the person most often named in the power of attorney: they request the NIF, review the promissory contract, sign the deed and set up the tax steps that follow. A partner lawyer can take the whole file from abroad: [talk to a partner](/en/us/talk-to-a-partner/?cat=lawyer#form). The short answers are in the FAQ, under [signing](/en/us/faq/#en-sign), [the deed](/en/us/faq/#en-deed) and [the promissory contract](/en/us/faq/#en-cpcv). If you haven't chosen the area yet, [the map](/en/us/map/) shows the price per m² in every municipality.
+In Brazil, the home goes in Bens e Direitos on your IRPF, at the Banco Central rate on the purchase date.[[br-bens-exterior]]
 
-## Questions
+In the United States, a Portuguese account counts toward the FBAR, due when your foreign accounts top $10,000 in total.[[us-fbar]]
 
-**Can I buy a house in Portugal without going there?**
-Yes. You can give a power of attorney, for example to a lawyer, who signs the promissory contract and the deed in your name. It's signed at a Portuguese consulate or before a notary where you live. With a foreign notary, it needs the Hague Apostille to take effect in Portugal. You can still come over to see the home or collect the keys.
-
-**Does my power of attorney need an apostille?**
-Only if a notary outside Portugal signs it. A power of attorney signed before a foreign notary must carry the Hague Apostille to take effect in Portugal. One signed at a Portuguese consulate doesn't need it. The wording matters too: it names who acts for you, for which property and what they may sign. A partner lawyer can draft it.
-
-**How much does the deed cost in Portugal?**
-At a Casa Pronta office, the deed with its registration costs €375, or €700 when there's a mortgage, plus €50 for each extra property. Both are done in one sitting. Bring the usage license or its waiver and the energy certificate. Lawyer's fees are separate, and so are the taxes.
-
-**What happens if I sign the promissory contract and then back out?**
-If you back out through your own fault, the seller keeps the deposit. If the seller backs out through their fault, you can claim double what you paid. That's article 442 of the Portuguese Civil Code. That's why the contract's dates and conditions are worth reading closely before you sign. A partner lawyer can review it.
+If you're still choosing the area, [the map]({{map}}) shows the price per m² in every municipality.
 
 This content is for information only and is not legal, tax or financial advice. Rules change and every situation is different: check with a qualified professional before you decide. We can put you in touch with our partners.

@@ -17,6 +17,10 @@ We compile reliable information that already exists online, is easy to verify, a
 7. **Sponsors may advise.** Sponsored posts and guest posts by sponsors can contain their professional advice, under their responsibility, always labelled as sponsored.
 8. **Freshness.** Every page shows "checked on [date]". Tax and legal facts are re-checked every quarter and whenever the State Budget or a relevant law changes.
 9. **Human review.** Daniel reviews legal and tax content; the partner agency reviews market content. Nothing is published without that review.
+10. **Positive, never deficit** (prompt 43, 30 Oct 2026). We say what the reader can do, never what they can't. Not "if you can't go to Portugal", but "You don't need to be in Portugal to buy a home. Here's how it works." Then we explain.
+11. **Written for a foreigner** (prompt 43). About B1 level: short sentences, one idea per paragraph, every Portuguese term explained once the first time it appears (the NIF, your Portuguese tax number; the escritura, the deed signed before a notary). Legal terms only when the reader will meet them at the notary, and then explained.
+12. **No AI tells** (prompt 43). No "in today's market", "navigate", "landscape", "seamless", "dive in", "it's worth noting", "whether you're… or…" (nor their Portuguese and French equivalents), no rhetorical questions in a row, no lists of three adjectives, no closing summary, no piles of hedges. Read each paragraph aloud: if a person wouldn't say it, rewrite it. `scripts/check-content.mjs` rejects the listed phrases.
+13. **Articles that answer first** (prompt 43). One target phrase from the keyword map in the title (60 characters at most), the H1, the slug, the meta description (155 at most) and the first sentence; the answer in the first two sentences; H2s as the questions people search; three FAQ follow-ups as structured data; 600 to 1,200 words; three or four internal links; external links only to official sources.
 
 ## Disclaimers
 

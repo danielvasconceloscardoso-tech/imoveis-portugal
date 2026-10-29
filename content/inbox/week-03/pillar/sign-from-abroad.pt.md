@@ -2,92 +2,96 @@
 id: sign-from-abroad
 lang: pt
 slug: escritura-da-casa-com-procuracao
-title: "A escritura da casa pode ser assinada sem vir a Portugal"
-description: "Com uma procuração feita num consulado português, ou num notário com a Apostila de Haia, alguém assina a escritura por si. Passos, custos e fontes oficiais."
-tldr: "Não precisa de vir a Portugal para comprar casa. Uma procuração feita num consulado português, ou num notário do país onde vive com a Apostila de Haia, permite que alguém assine a escritura por si. A escritura com registo na Casa Pronta custa 375 € (Justiça.gov.pt, verificado a 25 de outubro de 2026). O Imóveis Portugal indica cada fonte."
+title: "Escritura da casa assinada a partir do estrangeiro"
+description: "A escritura da casa pode ser assinada em seu nome, com uma procuração feita no consulado ou num notário. Os passos, o custo na Casa Pronta e as fontes."
+tldr: "Não precisa de estar em Portugal no dia da escritura da casa. Uma procuração feita num consulado português, ou num notário do país onde vive com a Apostila de Haia, permite que alguém assine por si. Na Casa Pronta, a escritura com registo custa 375 € (Justiça.gov.pt, verificado a 25 de outubro de 2026)."
 published: 2026-11-23
-updated: 2026-11-23
+updated: 2026-10-30
 cta: lawyer
 keyword: "escritura casa"
 related: [buy-from-abroad, imt-nonresidents]
 sources: [pt-poa-apostille, pt-sinal-442, pt-casa-pronta-fees, pt-casa-pronta-docs, pt-casa-pronta-docs-all, pt-nif-nonresident, pt-tax-rep, pt-aml-funds, pt-aml-realestate, pt-imt-payment, pt-imt-nonresident-flat, pt-imt-nonresident-exceptions, pt-is-purchase, fr-3916, ch-2nd-pillar-abroad, br-bens-exterior, us-fbar, ecb-eur-chf, ecb-eur-usd, ecb-eur-brl, ecb-eur-ils]
+faq:
+  - q: "Posso comprar casa em Portugal sem ir lá?"
+    a: "Pode. Uma procuração permite que outra pessoa, por exemplo um advogado, assine o contrato-promessa e a escritura em seu nome. Faz-se num consulado português ou num notário do país onde vive."
+  - q: "A procuração precisa de Apostila de Haia?"
+    a: "Só se for feita num notário fora de Portugal. A procuração feita num consulado português não precisa de Apostila para valer em Portugal."
+  - q: "Quanto custa a escritura da casa?"
+    a: "No balcão Casa Pronta, a escritura com registo custa 375 €, ou 700 € com crédito à habitação. Cada imóvel adicional soma 50 €. Os honorários do advogado e os impostos contam à parte."
 ---
 
-Pode comprar casa em Portugal sem estar sentado à mesa no dia da escritura. Uma procuração feita num consulado português, ou num notário do país onde vive com a Apostila de Haia, permite que a pessoa que escolher assine o contrato-promessa e a escritura em seu nome.[[pt-poa-apostille]] No balcão Casa Pronta, a escritura e o registo custam 375 € e fazem-se no mesmo momento (Justiça.gov.pt, verificado a 25 de outubro de 2026).[[pt-casa-pronta-fees]] O Imóveis Portugal indica a fonte oficial de cada passo.
+Pode assinar a escritura da casa sem estar em Portugal: uma procuração permite que a pessoa que escolher assine em seu nome. Faz-se num consulado português, ou num notário do país onde vive com a Apostila de Haia.[[pt-poa-apostille]]
 
-## A procuração permite que alguém assine por si
+No balcão Casa Pronta, a escritura e o registo custam 375 € e fazem-se no mesmo momento (Justiça.gov.pt, verificado a 25 de outubro de 2026).[[pt-casa-pronta-fees]] O Imóveis Portugal indica a fonte oficial de cada passo.
 
-"Não posso tirar uma semana de férias só para ir assinar a Lisboa." A lei portuguesa não lhe pede isso. A procuração é o documento em que nomeia uma pessoa, muitas vezes um advogado, e diz o que essa pessoa pode assinar em seu nome. Numa compra, são normalmente o contrato-promessa (CPCV) e a escritura. A casa fica em seu nome, e pode vir cá na mesma para a visita, para as chaves ou para as duas coisas.
+## O que é a escritura da casa
 
-O texto conta tanto como a assinatura. A procuração diz quem o representa, para que imóvel e o que pode assinar e pagar. É normalmente um advogado em Portugal que a redige, para que o balcão onde se faz a escritura a aceite à primeira.
+A escritura é o contrato de compra e venda definitivo. Assina-se no fim, depois do contrato-promessa. Com ela, a casa passa a ser sua.
 
-## A procuração faz-se de uma de duas maneiras
+O registo vem logo a seguir. É a inscrição da casa em seu nome no registo predial, o registo oficial dos imóveis.
 
-1. **Num consulado português.** Feita no consulado, não precisa de mais nada para valer em Portugal. Os consulados-gerais em Paris e em Newark, por exemplo, tratam de procurações nos seus serviços de notariado.[[pt-poa-apostille]]
-2. **Num notário do país onde vive.** Uma procuração assinada perante um notário estrangeiro tem de levar a Apostila de Haia para valer em Portugal.[[pt-poa-apostille]] A Apostila é um certificado acrescentado no país onde o documento foi assinado, que confirma a assinatura do notário perante o outro país.
+No balcão Casa Pronta, um serviço do Estado, os dois fazem-se no mesmo sítio e no mesmo dia.[[pt-casa-pronta-fees]]
 
-Os dois caminhos levam ao mesmo sítio. O consulado poupa-lhe a Apostila; o notário da sua cidade pode ficar mais perto de casa.
+## Como funciona a procuração para a escritura
 
-## A compra feita de fora, passo a passo
+A procuração é o documento em que nomeia uma pessoa para assinar por si. Muitas vezes é um advogado.
 
-1. **O NIF.** O número de contribuinte vem primeiro. Pode pedi-lo online, através de um representante legal, ou ao balcão, e não precisa de representante fiscal para o obter.[[pt-nif-nonresident]]
-2. **A procuração.** Feita cedo, cobre os passos seguintes. No site é a [etapa 3 do Passo a passo](/pt/lu/passo-a-passo/?door=buy&step=3).
-3. **O contrato-promessa (CPCV).** Fixa o preço, a data e o sinal. Se desistir por culpa sua, perde o sinal. Se for o vendedor a desistir, pode exigir o dobro do que pagou (Código Civil, artigo 442.º).[[pt-sinal-442]] É a [etapa 6](/pt/lu/passo-a-passo/?door=buy&step=6).
-4. **O dinheiro.** Bancos, notários e advogados têm de pedir informação sobre a origem dos fundos quando o risco ou a operação o justifica.[[pt-aml-funds]] As empresas do setor imobiliário têm de identificar os clientes, com documento com fotografia, antes do negócio.[[pt-aml-realestate]] Ter os comprovativos prontos mantém a data da escritura.
-5. **Os impostos.** O IMT paga-se no dia da liquidação ou nos 30 dias seguintes.[[pt-imt-payment]] Se não for residente fiscal em Portugal, é de 7,5% do preço, com exceções,[[pt-imt-nonresident-flat]] e o imposto do selo é de 0,8%.[[pt-is-purchase]] Uma das exceções abrange quem "tenha sido considerado residente para efeitos fiscais".[[pt-imt-nonresident-exceptions]] Se isso inclui quem viveu em Portugal e depois emigrou é uma pergunta para um advogado ou consultor fiscal parceiro. O [artigo sobre o IMT](/pt/lu/blog/imt-7-5-nao-residentes/) tem os pormenores.
-6. **A escritura e o registo.** Na Casa Pronta, os dois fazem-se no mesmo sítio. O balcão pede a identificação civil e fiscal de vendedores e compradores, a ficha técnica do prédio se existir, a menção de que a licença de utilização existe ou está dispensada, e o certificado energético.[[pt-casa-pronta-docs-all]] A licença depende da data de construção: a data de referência é 7 de agosto de 1951.[[pt-casa-pronta-docs]] É a [etapa 7](/pt/lu/passo-a-passo/?door=buy&step=7).
-7. **Depois da escritura.** Quando passa a ter imóvel em Portugal, tem 15 dias para nomear um representante fiscal ou aderir às notificações eletrónicas das Finanças.[[pt-nif-nonresident]]
+Numa compra, essa pessoa assina normalmente o contrato-promessa (CPCV) e a escritura. A casa fica sempre em seu nome. E pode vir na mesma ver a casa ou receber as chaves.
 
-## A regra é a mesma em todo o lado, e três pormenores mudam com o país
+O texto conta tanto como a assinatura. A procuração diz quem o representa, para que imóvel e o que pode assinar e pagar. Muitas vezes é um advogado em Portugal que a redige, para o balcão a aceitar à primeira.
 
-Em todas as edições, a procuração faz-se num consulado português ou num notário local com a Apostila de Haia. O que muda é o representante fiscal, a moeda e os papéis no país onde vive. Fora da UE e do EEE, o representante fiscal é obrigatório, a não ser que adira às notificações eletrónicas; dentro, é opcional.[[pt-tax-rep]]
+## Onde se faz a procuração
 
-### Luxemburgo
+Há dois caminhos, e os dois valem em Portugal.[[pt-poa-apostille]]
 
-Vive na UE, por isso depois da escritura o representante fiscal é opcional.[[pt-tax-rep]] Uma procuração feita num notário no Luxemburgo leva a Apostila; feita num consulado português, não precisa. A Casa Pronta custa 375 € também na sua conta.
+1. **Num consulado português.** Feita no consulado, vale em Portugal sem mais nada. Os consulados-gerais em Paris e em Newark, por exemplo, fazem procurações.
+2. **Num notário do país onde vive.** Nesse caso, leva a Apostila de Haia. A Apostila é um certificado que o seu país junta ao documento. Confirma a assinatura do notário perante Portugal.
 
-### França
+O consulado poupa-lhe a Apostila. O notário da sua cidade pode ficar mais perto de casa.
 
-Também na UE: o representante fiscal é opcional. O Consulado-Geral em Paris trata de atos notariais, procurações incluídas.[[pt-poa-apostille]] Se abrir uma conta num banco português para pagar o sinal, como residente fiscal em França declara todos os anos cada conta no estrangeiro no formulário 3916, mesmo sem movimentos.[[fr-3916]]
+## Quais são os passos da compra com procuração
 
-### Suíça
+1. **O NIF.** É o seu número de contribuinte em Portugal, e vem primeiro. Pede-se online, através de um representante legal, sem representante fiscal.[[pt-nif-nonresident]]
+2. **A procuração.** Feita cedo, cobre os passos seguintes.
+3. **O contrato-promessa (CPCV).** Fixa o preço, a data e o sinal, o valor que paga à cabeça. Se desistir por culpa sua, perde o sinal. Se o vendedor desistir, pode exigir o dobro do que pagou (Código Civil, artigo 442.º).[[pt-sinal-442]]
+4. **O dinheiro.** Bancos, notários e advogados têm de pedir a origem dos fundos quando o risco ou a operação o justificam.[[pt-aml-funds]] As empresas do setor imobiliário identificam os clientes antes do negócio.[[pt-aml-realestate]] Com os comprovativos prontos, a data da escritura mantém-se.
+5. **Os impostos.** O IMT é o imposto sobre a compra de casa. A liquidação é o cálculo do imposto pelas Finanças. O IMT paga-se no dia da liquidação ou nos 30 dias seguintes.[[pt-imt-payment]] Se não for residente fiscal em Portugal, é de 7,5% do preço, com exceções,[[pt-imt-nonresident-flat]] e o imposto do selo é de 0,8%.[[pt-is-purchase]] Uma das exceções abrange quem "tenha sido considerado residente para efeitos fiscais".[[pt-imt-nonresident-exceptions]] Se isso inclui quem viveu em Portugal e depois emigrou é uma pergunta para um advogado ou consultor fiscal parceiro. O [artigo sobre o IMT]({{post:imt-nonresidents}}) tem os pormenores.
+6. **A escritura e o registo.** O balcão pede a identificação civil e fiscal de vendedores e compradores. Pede também a ficha técnica do prédio, se existir, a licença de utilização ou a sua dispensa, e o certificado energético.[[pt-casa-pronta-docs-all]] A licença depende da data de construção, com referência a 7 de agosto de 1951.[[pt-casa-pronta-docs]] É a [etapa 7 do Passo a passo]({{journey}}?door=buy&step=7).
+7. **Depois da escritura.** Tem 15 dias para nomear um representante fiscal ou aderir às notificações eletrónicas das Finanças.[[pt-nif-nonresident]]
 
-A Suíça fica fora da UE e do EEE, por isso depois da escritura nomeia um representante fiscal ou adere às notificações eletrónicas.[[pt-tax-rep]] A escritura com registo fica em cerca de 346 CHF, à taxa de referência do BCE de 23 de outubro de 2026.[[ecb-eur-chf]] Se o dinheiro vier do 2.º pilar, o levantamento antecipado é permitido para a sua habitação principal, na Suíça ou fora, e não para uma casa de férias.[[ch-2nd-pillar-abroad]]
+## Quanto custa a escritura da casa
 
-### Brasil
+Na Casa Pronta, uma compra com um ato de registo custa 375 €. Com crédito à habitação, há um segundo ato de registo, e custa 700 €. Cada imóvel adicional soma 50 €.[[pt-casa-pronta-fees]]
 
-Fora da UE: representante fiscal ou notificações eletrónicas. Uma procuração feita num cartório no Brasil precisa da Apostila. A escritura com registo fica em cerca de R$ 2 118, à taxa do BCE de 23 de outubro de 2026.[[ecb-eur-brl]] A data da escritura conta também no Brasil: o imóvel entra em "Bens e Direitos" da declaração de IRPF, convertido em dólares e depois em reais à taxa de venda do Banco Central na data da compra.[[br-bens-exterior]]
+Os honorários do advogado contam à parte. O mesmo vale para o custo da procuração no notário. Variam, e não os indicamos.
 
-### Estados Unidos
+Os prazos que marcam o ritmo são o pagamento do IMT, até 30 dias depois da liquidação,[[pt-imt-payment]] e o representante fiscal, até 15 dias depois de passar a ter a casa.[[pt-nif-nonresident]] Os [simuladores]({{sims}}) fazem as contas completas com o seu preço.
 
-Fora da UE: representante fiscal ou notificações eletrónicas.[[pt-tax-rep]] Uma procuração feita num notário americano precisa da Apostila; o Consulado-Geral em Newark também as faz. A escritura com registo fica em cerca de 420 dólares, à taxa do BCE de 23 de outubro de 2026.[[ecb-eur-usd]] Uma conta num banco português aberta para o sinal conta para o limite de 10 000 dólares, somando todas as contas no estrangeiro, a partir do qual se entrega o FBAR.[[us-fbar]]
+## O que muda com o país onde vive
 
-### Israel
+A procuração faz-se da mesma forma em todo o lado. Mudam três pormenores: o representante fiscal, a moeda e os papéis no país onde vive.
 
-Fora da UE: representante fiscal ou notificações eletrónicas.[[pt-tax-rep]] Uma procuração feita num notário em Israel precisa da Apostila, ou pode ser feita num consulado português. A escritura com registo fica em cerca de 1 310 shekels (₪), à taxa do BCE de 23 de outubro de 2026.[[ecb-eur-ils]]
+Fora da UE e do EEE, o representante fiscal é obrigatório, a não ser que adira às notificações eletrónicas. Dentro, é opcional.[[pt-tax-rep]]
 
-## Quanto custa e quanto tempo demora
+| País onde vive | Procuração num notário local | 375 € na sua moeda (BCE, 23/10/2026) | Representante fiscal |
+| --- | --- | --- | --- |
+| Luxemburgo | Com Apostila | 375 € | Opcional |
+| França | Com Apostila, ou no Consulado-Geral em Paris | 375 € | Opcional |
+| Suíça | Com Apostila | cerca de 346 CHF[[ecb-eur-chf]] | Ou notificações eletrónicas |
+| Brasil | Num cartório, com Apostila | cerca de R$ 2 118[[ecb-eur-brl]] | Ou notificações eletrónicas |
+| Estados Unidos | Com Apostila, ou no Consulado-Geral em Newark | cerca de 420 dólares[[ecb-eur-usd]] | Ou notificações eletrónicas |
+| Israel | Com Apostila, ou num consulado português | cerca de 1 310 ₪[[ecb-eur-ils]] | Ou notificações eletrónicas |
 
-Na Casa Pronta, uma compra com um ato de registo custa 375 €. Com crédito à habitação, que acrescenta um segundo ato de registo, custa 700 €. Cada imóvel adicional soma 50 €.[[pt-casa-pronta-fees]] Os honorários do advogado contam à parte, tal como o custo da procuração no notário: variam, e não os indicamos.
+Em alguns países, a compra conta também do lado de lá.
 
-Os prazos que marcam o ritmo são o pagamento do IMT, até 30 dias depois da liquidação,[[pt-imt-payment]] e o representante fiscal, até 15 dias depois de passar a ter a casa.[[pt-nif-nonresident]] Para ver as contas completas com o seu preço, use o [simulador de custo total](/pt/lu/simuladores/custo-total/?resident=0).
+Em França, uma conta num banco português declara-se todos os anos no formulário 3916, mesmo sem movimentos.[[fr-3916]]
 
-## Um advogado parceiro assina em seu nome
+Na Suíça, o dinheiro do 2.º pilar pode servir para a sua habitação principal, também fora da Suíça. Não serve para uma casa de férias.[[ch-2nd-pillar-abroad]]
 
-O advogado é a pessoa que mais vezes aparece numa procuração: pede o NIF, revê o contrato-promessa, assina a escritura e trata dos passos fiscais que vêm depois. Um advogado parceiro pode acompanhar o processo todo à distância: [falar com um parceiro](/pt/lu/falar-com-um-parceiro/?cat=lawyer#form). As respostas curtas estão nas perguntas frequentes, sobre [assinar](/pt/lu/perguntas-frequentes/#pt-sign), [a escritura](/pt/lu/perguntas-frequentes/#pt-deed) e [o contrato-promessa](/pt/lu/perguntas-frequentes/#pt-cpcv). Se ainda não escolheu a zona, [o mapa](/pt/lu/mapa/) mostra o preço por m² em cada concelho.
+No Brasil, a casa entra em Bens e Direitos no IRPF, à taxa do Banco Central na data da compra.[[br-bens-exterior]]
 
-## Perguntas
+Nos Estados Unidos, uma conta portuguesa conta para o FBAR, que se entrega acima de 10 000 dólares no total.[[us-fbar]]
 
-**Posso comprar casa em Portugal sem ir lá?**
-Pode. Passa uma procuração, por exemplo a um advogado, que assina o contrato-promessa e a escritura em seu nome. A procuração faz-se num consulado português ou num notário do país onde vive. Se for num notário estrangeiro, precisa da Apostila de Haia para valer em Portugal. Pode vir na mesma para ver a casa ou receber as chaves.
-
-**A minha procuração precisa de Apostila?**
-Só se for feita num notário fora de Portugal. Nesse caso, tem de levar a Apostila de Haia para valer cá. A procuração feita num consulado português não precisa. O texto também conta: diz quem o representa, para que imóvel e o que pode assinar. Um advogado parceiro pode redigi-la consigo.
-
-**Quanto custa a escritura da casa?**
-No balcão Casa Pronta, a escritura com registo custa 375 €, ou 700 € se houver crédito com hipoteca, mais 50 € por cada imóvel adicional. Tudo se faz no mesmo momento. Leve a licença de utilização ou a sua dispensa e o certificado energético. Os honorários do advogado e os impostos contam à parte.
-
-**O que acontece se assinar o contrato-promessa e depois desistir?**
-Se desistir por culpa sua, o vendedor fica com o sinal. Se for o vendedor a desistir por culpa dele, pode exigir o dobro do que pagou. É o que diz o artigo 442.º do Código Civil. Por isso, as datas e as condições do contrato merecem uma leitura atenta antes de assinar. Um advogado parceiro pode revê-lo.
+Se ainda procura a zona, [o mapa]({{map}}) mostra o preço por m² em cada concelho.
 
 Este conteúdo é informativo e não constitui aconselhamento jurídico, fiscal ou financeiro. As regras mudam e cada situação é diferente: confirme junto de um profissional antes de decidir. Podemos pô-lo em contacto com os nossos parceiros.

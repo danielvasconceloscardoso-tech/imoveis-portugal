@@ -1,7 +1,9 @@
 ---
-// One article of the Artigos hub (prompt 37 §2): the long text, tables and statistics moved off the map page
-// (how to read it, the list of municipalities, the method) and the home page (ten years of prices), plus the golf premium
-// (content/data/GOLF_PREMIUM.md). Sources and the disclaimer at the end of every article (EDITORIAL_POLICY.md).
+// One article of the Artigos hub (prompt 37 §2, rewritten for prompt 43 §3): how to read the map's prices, ten years of
+// prices, the golf premium (content/data/GOLF_PREMIUM.md) and the method. Wording: COPY_DECK.md "art.*". Shape: the title
+// with the search phrase, the answer in two sentences ("a"), short paragraphs ("i.N"), question headings ("sN.q") with
+// their paragraphs ("sN.1"…), the table or chart, three follow-up questions ("fN") as a list and FAQPage data, links,
+// sources and the disclaimer (EDITORIAL_POLICY.md). Figures in the text come from the data files at build time.
 import V2 from "../layouts/V2.astro";
 import { HTML_LANG, LANGS, eur, pathFor, type Lang, type EdCode } from "../i18n";
 import { ART_SUB, GOLF, type ArtKey } from "../lib/articles";
@@ -9,8 +11,10 @@ import { Sources, DISCLAIMER, fmtDate } from "../lib/content";
 import { MAP_MUNIS } from "../lib/mapdata";
 import { PLACES } from "../lib/places";
 import { PRICES, LAST } from "../lib/prices";
+import { SUB as TOOL_SUB, type ToolKey } from "../lib/tools";
+import { postById } from "../lib/blog";
 import { lineChart } from "../lib/chart";
-import { c, edName } from "../lib/copy";
+import { c, has } from "../lib/copy";
 
 interface Props { lang: Lang; ed: EdCode; art: ArtKey; }
 const { lang, ed, art } = Astro.props;
@@ -18,84 +22,137 @@ const hub = pathFor(lang, ed, "articles"), map = pathFor(lang, ed, "map");
 const paths = Object.fromEntries(LANGS.map((l) => [l, `${pathFor(l, ed, "articles")}${ART_SUB[art][l]}/`])) as Record<Lang, string>;
 const e = (n: number) => eur(n, lang);
 const nf = new Intl.NumberFormat(HTML_LANG[lang], { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-const sup = (ns: number[]) => [...new Set(ns)].map((i) => `<a class="sup" href="#fonte-${i}">${i}</a>`).join("");
+const n1 = new Intl.NumberFormat(HTML_LANG[lang], { maximumFractionDigits: 1 });
+const pct = (a: number, b: number) => Math.round((a / b - 1) * 100);
+// "2026-Q2" in prose: "2.º trimestre de 2026", "Q2 2026", "2e trimestre 2026" ("1er" for the first quarter in French).
+const ql = (k: string) => { const y = k.slice(0, 4), n = k.slice(-1); return lang === "pt" ? `${n}.º trimestre de ${y}` : lang === "en" ? `Q${n} ${y}` : `${n === "1" ? "1er" : `${n}e`} trimestre ${y}`; };
+
+// Sources, numbered in the order the text cites them: {sNow} and the other tokens in the copy become a superscript.
 const src = new Sources();
 const OSM_GOLF = ["https://wiki.openstreetmap.org/wiki/Tag:leisure%3Dgolf_course", "Golf courses: OpenStreetMap leisure=golf_course, © OpenStreetMap contributors (ODbL)", "2026-10-27"] as const;
+const CITE: Record<string, () => number> = {
+  sNow: () => src.n("ine-m2-2026q2"), sHist: () => src.n("ine-m2-history"), sOsm: () => src.n("osm-boundaries"), sGolf: () => src.raw(...OSM_GOLF),
+  sRent: () => src.n("ine-rent-history"), sBdp: () => src.n("bdp-mortgage-rate-2026-08"), sEcb: () => src.n("ecb-eur-chf"),
+};
+const TOKENS = /(?:\{s[A-Z]\w*\})+/g;
+const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+const sup = (ns: number[]) => [...new Set(ns)].map((i) => `<a class="sup" href="#fonte-${i}">${i}</a>`).join("");
 
-// Preços: como ler o mapa (was map.note and the municipality table on the map page).
-const nNow = art === "map" || art === "golf" || art === "method" ? src.n("ine-m2-2026q2") : 0;
-const nHist = art === "prices" || art === "golf" || art === "method" ? src.n("ine-m2-history") : 0;
-const nOsm = art === "map" || art === "golf" || art === "method" ? src.n("osm-boundaries") : 0;
-const nGolf = art === "golf" || art === "method" ? src.raw(...OSM_GOLF) : 0;
-if (art === "method") { src.n("ine-rent-history"); src.n("bdp-mortgage-rate-2026-08"); for (const x of ["chf", "usd", "brl", "ils"]) src.n(`ecb-eur-${x}`); }
+// Figures for the text, from the INE price file and the golf table.
+const ptP = PRICES.regions.PT, Q = PRICES.quarters, lis = PRICES.munis.lisboa, por = PRICES.munis.porto;
+const priced = MAP_MUNIS.filter((m) => m.v).sort((a, b) => b.v! - a.v!);
+const golf = GOLF.parishes.filter((p) => p.full_course && p.ratio !== null && p.parish_median_eur_m2 && p.municipality_median_eur_m2).sort((a, b) => b.ratio! - a.ratio!);
+const parish = (name: string) => { const p = golf.find((x) => x.parish.endsWith(name)); if (!p) throw new Error(`ArticlePage: no golf parish ${name}`); return p; };
+const away = (name: string) => Math.round(Math.abs(parish(name).ratio! - 1) * 100);
+const V: Record<string, string | number> = { q: ql(Q[LAST]), pt: e(ptP.m2[LAST]!) };
+if (art === "map") Object.assign(V, {
+  total: MAP_MUNIS.length, n: priced.length, top: priced[0].n, topv: e(priced[0].v!), top2: priced[1].n, top3: priced[2].n,
+  low: priced[priced.length - 1].n, lowv: e(priced[priced.length - 1].v!), ex: e(100 * ptP.m2[LAST]!),
+});
+if (art === "prices") Object.assign(V, {
+  q0: ql(Q[0]), from: e(ptP.m2[0]!), to: e(ptP.m2[LAST]!), g: pct(ptP.m2[LAST]!, ptP.m2[0]!),
+  lisFrom: e(lis.m2[0]!), lisTo: e(lis.m2[LAST]!), lisG: pct(lis.m2[LAST]!, lis.m2[0]!),
+  porFrom: e(por.m2[0]!), porTo: e(por.m2[LAST]!), porG: pct(por.m2[LAST]!, por.m2[0]!),
+  qY: ql(Q[LAST - 4]), yago: e(ptP.m2[LAST - 4]!), yoy: n1.format((ptP.m2[LAST]! / ptP.m2[LAST - 4]! - 1) * 100),
+});
+if (art === "golf") Object.assign(V, {
+  count: golf.length, within: golf.filter((p) => Math.abs(p.ratio! - 1) <= 0.1 + 1e-9).length,
+  can: away("Canidelo"), cas: away("Cascais e Estoril"), sil: away("Silvalde"),
+  alm: e(parish("Almancil").parish_median_eur_m2!), lou: e(parish("Almancil").municipality_median_eur_m2!),
+});
+if (art === "method") Object.assign(V, { rent: lang === "en" ? `€${nf.format(ptP.rq[LAST]!)}` : `${nf.format(ptP.rq[LAST]!)} €`, yield: n1.format(ptP.yield!) });
+
+// The copy: "a" the answer, "i.N" the opening paragraphs, "sN.q" and "sN.1"… the sections, "fN.q" and "fN.a" the follow-ups.
+const K = (k: string) => `art.${art}.${k}`;
+const html = (k: string) => esc(c(K(k), lang, V)).replace(TOKENS, (m) => sup(m.slice(1, -1).split("}{").map((t) => {
+  if (!CITE[t]) throw new Error(`COPY_DECK.md ${K(k)}: unknown source {${t}}`);
+  return CITE[t]();
+})));
+const plain = (k: string) => c(K(k), lang, V).replace(TOKENS, "");
+const run = (p: string) => { const out: string[] = []; for (let i = 1; has(K(`${p}.${i}`)); i++) out.push(html(`${p}.${i}`)); return out; };
+const answer = html("a");
+const intro = run("i");
+const secs: { q: string; ps: string[] }[] = [];
+for (let i = 1; has(K(`s${i}.q`)); i++) secs.push({ q: c(K(`s${i}.q`), lang), ps: run(`s${i}`) });
+const faq = [1, 2, 3].map((i) => ({ q: plain(`f${i}.q`), a: plain(`f${i}.a`) }));
+// Where the table or chart sits: the map's list under the last question, the chart and the golf table under the first.
+const insertAt: Record<ArtKey, number> = { map: secs.length - 1, prices: 0, golf: 0, method: -1 };
+
 const placePages = new Set(PLACES.map((p) => p.slug));
-
-// Dez anos de preços (was the prices section of the home page).
-const ptP = PRICES.regions.PT;
-const chart = art === "prices" ? lineChart(PRICES.quarters, [{ label: "Portugal", values: ptP.m2 }, { label: PRICES.munis.lisboa.n, values: PRICES.munis.lisboa.m2 }, { label: PRICES.munis.porto.n, values: PRICES.munis.porto.m2 }],
+const chart = art === "prices" ? lineChart(Q, [{ label: "Portugal", values: ptP.m2 }, { label: lis.n, values: lis.m2 }, { label: por.n, values: por.m2 }],
   { breakAt: PRICES.break, breakLabel: c("prices.break", lang), fmt: (v) => new Intl.NumberFormat(HTML_LANG[lang]).format(v), h: 300 }) : "";
 
-// O prémio do golfe: full courses only, where INE publishes both medians, highest ratio first.
-const golf = GOLF.parishes.filter((p) => p.full_course && p.ratio !== null && p.parish_median_eur_m2 && p.municipality_median_eur_m2).sort((a, b) => b.ratio! - a.ratio!);
+// Four internal links (prompt 43 §3): the map, the matching calculator, the path's first station, a related article.
+const sim = (t: ToolKey) => `${pathFor(lang, ed, "sims")}${TOOL_SUB[t][lang]}/`;
+const artLink = (a: ArtKey) => ({ href: `${hub}${ART_SUB[a][lang]}/`, label: c(`art.${a}.h`, lang) });
+const journey = { href: `${pathFor(lang, ed, "journey")}#s-place`, label: c("art.go.journey", lang) };
+const buyPost = postById("buy-from-abroad", lang);
+const LINKS: Record<ArtKey, { href: string; label: string }[]> = {
+  map: [{ href: map, label: c("art.open", lang) }, { href: sim("afford"), label: c("art.go.afford", lang) }, journey, artLink("prices")],
+  prices: [{ href: map, label: c("art.open", lang) }, { href: sim("afford"), label: c("art.go.afford", lang) }, journey,
+    buyPost ? { href: `${pathFor(lang, ed, "blog")}${buyPost.slug}/`, label: buyPost.title } : artLink("method")],
+  golf: [{ href: `${map}?place=loule`, label: c("art.open", lang) }, { href: sim("cost"), label: c("art.go.cost", lang) }, journey, artLink("map")],
+  method: [{ href: map, label: c("art.open", lang) }, { href: sim("rent"), label: c("art.go.rent", lang) }, journey, artLink("prices")],
+};
+
+const title = c(K("h"), lang), description = c(K("p"), lang);
+const ld = [
+  { "@context": "https://schema.org", "@type": "Article", headline: title, description, inLanguage: HTML_LANG[lang],
+    author: { "@type": "Organization", name: "Imóveis Portugal" }, publisher: { "@type": "Organization", name: "Imóveis Portugal" } },
+  { "@context": "https://schema.org", "@type": "FAQPage",
+    mainEntity: faq.map((x) => ({ "@type": "Question", name: x.q, acceptedAnswer: { "@type": "Answer", text: x.a } })) },
+];
 ---
-<V2 lang={lang} ed={ed} page="articles" title={`${c(`art.${art}.h`, lang)} | Imóveis Portugal · ${edName(ed, lang)}`} description={c(`art.${art}.p`, lang)} sticky={null} paths={paths} ogType="article">
+<V2 lang={lang} ed={ed} page="articles" title={`${title} | Imóveis Portugal`} description={description} sticky={null} paths={paths} ogType="article">
+  <Fragment slot="head"><script type="application/ld+json" set:html={JSON.stringify(ld)} /></Fragment>
   <article class="frame read prose art">
     <div class="ph">
       <p class="small" style="margin:0 0 8px"><a href={hub}>{c("art.title", lang)}</a></p>
-      <h1>{c(`art.${art}.h`, lang)}</h1>
-      <p class="lede">{c(`art.${art}.p`, lang)}</p>
+      <h1>{title}</h1>
+      <p class="lede" set:html={answer} />
     </div>
+    {intro.map((p) => <p set:html={p} />)}
 
-    {art === "map" && (
+    {secs.map((s, i) => (
       <>
-        <p>{c("map.lede", lang)}<Fragment set:html={sup([nNow])} /></p>
-        <p>{c("map.note", lang)}<Fragment set:html={sup([nOsm])} /></p>
-        <p><a class="more" href={map}>{c("art.open", lang)}</a></p>
-        <h2>{c("map.list", lang)}</h2>
-        <table class="cmp">
-          <thead><tr><th scope="col">{c("data.col.place", lang)}</th><th scope="col">{c("map.col.m2", lang)}</th></tr></thead>
-          <tbody>{MAP_MUNIS.map((m) => (
-            <tr><th><a href={`${map}?place=${m.s}`}>{m.n}</a> <small>{c(`map.r.${m.r}`, lang)}</small>{placePages.has(m.s) && <> <a href={`${map}${m.s}/`}>{c("map.a.page", lang)}</a></>}</th><td>{m.v ? e(m.v) : "—"}</td></tr>
-          ))}</tbody>
-        </table>
+        <h2>{s.q}</h2>
+        {s.ps.map((p) => <p set:html={p} />)}
+        {i === insertAt[art] && art === "map" && (
+          <table class="cmp">
+            <thead><tr><th scope="col">{c("data.col.place", lang)}</th><th scope="col">{c("map.col.m2", lang)}</th></tr></thead>
+            <tbody>{MAP_MUNIS.map((m) => (
+              <tr><th><a href={`${map}?place=${m.s}`}>{m.n}</a> <small>{c(`map.r.${m.r}`, lang)}</small>{placePages.has(m.s) && <> <a href={`${map}${m.s}/`}>{c("map.a.page", lang)}</a></>}</th><td>{m.v ? e(m.v) : "—"}</td></tr>
+            ))}</tbody>
+          </table>
+        )}
+        {i === insertAt[art] && art === "prices" && (
+          <>
+            <p class="small pc-legend"><span class="k0">Portugal</span> · <span class="k1">{lis.n}</span> · <span class="k2">{por.n}</span></p>
+            <figure class="h2-chart" set:html={chart} />
+          </>
+        )}
+        {i === insertAt[art] && art === "golf" && (
+          <table class="cmp">
+            <caption class="small" style="text-align:left;caption-side:top;padding-bottom:8px">{c("art.golf.label", lang)}</caption>
+            <thead><tr><th scope="col">{c("art.golf.col.parish", lang)}</th><th scope="col">{c("art.golf.col.muni", lang)}</th><th scope="col">{c("art.golf.col.pm", lang)}</th><th scope="col">{c("art.golf.col.mm", lang)}</th><th scope="col">{c("art.golf.col.ratio", lang)}</th></tr></thead>
+            <tbody>{golf.map((p) => (
+              <tr><th><a href={`${map}?place=${p.municipality_slug}`}>{p.parish}</a></th><td>{p.municipality}</td><td>{e(p.parish_median_eur_m2!)}</td><td>{e(p.municipality_median_eur_m2!)}</td><td>{nf.format(p.ratio!)}</td></tr>
+            ))}</tbody>
+          </table>
+        )}
+        {art === "prices" && i === secs.length - 1 && <p><a class="more" href={pathFor(lang, ed, "data")}>{c("home2.prices.a", lang)}</a></p>}
       </>
-    )}
+    ))}
 
-    {art === "prices" && (
-      <>
-        <p>{c("home2.prices.p", lang, { from: e(ptP.m2[0]!), to: e(ptP.m2[LAST]!) })}<Fragment set:html={sup([nHist])} /></p>
-        <p class="small pc-legend"><span class="k0">Portugal</span> · <span class="k1">{PRICES.munis.lisboa.n}</span> · <span class="k2">{PRICES.munis.porto.n}</span></p>
-        <figure class="h2-chart" set:html={chart} />
-        <p>{c("prices.method", lang)}</p>
-        <p><a class="more" href={pathFor(lang, ed, "data")}>{c("home2.prices.a", lang)}</a></p>
-      </>
-    )}
+    <section class="post-faq" aria-labelledby="perguntas">
+      <h2 id="perguntas">{c("art.faq", lang)}</h2>
+      {faq.map((x) => <details class="h2-q"><summary>{x.q}</summary><p>{x.a}</p></details>)}
+    </section>
 
-    {art === "golf" && (
-      <>
-        <p>{c("art.golf.1", lang)}<Fragment set:html={sup([nNow, nGolf])} /></p>
-        <p>{c("art.golf.2", lang)}</p>
-        <p>{c("art.golf.3", lang)}<Fragment set:html={sup([nNow, nHist])} /></p>
-        <table class="cmp">
-          <caption class="small" style="text-align:left;caption-side:top;padding-bottom:8px">{c("art.golf.label", lang)}</caption>
-          <thead><tr><th scope="col">{c("art.golf.col.parish", lang)}</th><th scope="col">{c("art.golf.col.muni", lang)}</th><th scope="col">{c("art.golf.col.pm", lang)}</th><th scope="col">{c("art.golf.col.mm", lang)}</th><th scope="col">{c("art.golf.col.ratio", lang)}</th></tr></thead>
-          <tbody>{golf.map((p) => (
-            <tr><th><a href={`${map}?place=${p.municipality_slug}`}>{p.parish}</a></th><td>{p.municipality}</td><td>{e(p.parish_median_eur_m2!)}</td><td>{e(p.municipality_median_eur_m2!)}</td><td>{nf.format(p.ratio!)}</td></tr>
-          ))}</tbody>
-        </table>
-        <p>{c("art.golf.4", lang)}<Fragment set:html={sup([nOsm, nGolf])} /></p>
-      </>
-    )}
-
-    {art === "method" && (
-      <>
-        <p>{c("art.method.1", lang)}<Fragment set:html={sup([nNow, nHist])} /></p>
-        <p>{c("prices.method", lang)}</p>
-        <p>{c("map.note", lang)}</p>
-        <p>{c("prices.yield.note", lang)}</p>
-        <p>{c("art.method.2", lang)}<Fragment set:html={sup([nOsm])} /></p>
-      </>
-    )}
+    <section class="others" aria-labelledby="next-h">
+      <h2 id="next-h" class="h-small">{c("art.next", lang)}</h2>
+      <ul>{LINKS[art].map((l) => <li><a href={l.href}>{l.label}</a></li>)}</ul>
+    </section>
 
     <section class="sources-list" aria-labelledby="fontes">
       <h2 id="fontes" class="h-small">{c("common.sources", lang)}</h2>

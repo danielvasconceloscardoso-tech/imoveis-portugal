@@ -7,6 +7,7 @@ How to edit:
 2. Words in curly brackets are filled in by the site: `{agency}`, `{ami}`, `{email}`, `{n}`, `{left}`, `{total}`, `{country}`, `{date}` and the legal placeholders. Keep them.
 3. Blocks ending in `.lu`, `.fr`, `.ch`, `.br`, `.us`, `.il` belong to one edition.
 4. Not in this file: the FAQ questions and answers (content/faq/*.yaml), the disclaimers (content/EDITORIAL_POLICY.md), the report text (site/ebooks/), and figures and their sources (content/facts/facts.csv).
+5. Tone (prompt 43, content/EDITORIAL_POLICY.md rules 10 to 12): positive, never deficit (say what the reader can do: "You don't need to be in Portugal to buy a home. Here's how it works."); short sentences a foreigner reads easily, every Portuguese term explained once; no AI tells; at most three short sentences per block.
 
 ## common
 
@@ -6830,7 +6831,7 @@ Prompt 36 §9 (D62): the golf card on the map, from our own list (content/facts/
 
 ## art
 
-Prompt 37 §2: the Artigos hub and its first four articles, made from the text moved off the map page and the home page. The articles also reuse "map.lede", "map.note", "home2.prices.p", "prices.method", "prices.yield.note" and "prices.break".
+Prompt 37 §2 and prompt 43 §3: the Artigos hub and its four articles, built by site/src/components/ArticlePage.astro. Per article: "h" is the title and H1 (60 characters at most, with the search phrase), "p" the meta description and the hub card (80 to 155 characters), "a" the answer in two sentences, "i.N" the paragraphs before the first question, "sN.q" a question heading and "sN.1" to "sN.3" its paragraphs, "fN.q" and "fN.a" the three follow-up questions (shown under the article and as FAQPage data). Words in curly brackets come from the data files when the page is built (INE prices, the golf table); "{sNow}", "{sHist}", "{sOsm}", "{sGolf}", "{sRent}", "{sBdp}" and "{sEcb}" become the numbered source after a sentence. The tables and the chart reuse "map.col.m2", "data.col.place", "map.r.*", "map.a.page" and "prices.break".
 
 ### title
 - PT: Artigos
@@ -6857,70 +6858,440 @@ Prompt 37 §2: the Artigos hub and its first four articles, made from the text m
 - EN: Open the map
 - FR: Ouvrir la carte
 
+### faq
+- PT: Perguntas frequentes
+- EN: Frequently asked questions
+- FR: Questions fréquentes
+
+### next
+- PT: Para continuar
+- EN: Keep reading
+- FR: Pour continuer
+
+### go.afford
+- PT: Ver que casa consegue comprar
+- EN: See what you can afford
+- FR: Voir quel bien vous pouvez acheter
+
+### go.cost
+- PT: Calcular o custo total da compra
+- EN: Work out the total cost of buying
+- FR: Calculer le coût total de l'achat
+
+### go.rent
+- PT: Calcular a rentabilidade de um arrendamento
+- EN: Work out the yield of a rental
+- FR: Calculer le rendement d'une location
+
+### go.journey
+- PT: O passo a passo, a começar pela escolha do sítio
+- EN: The step-by-step path, starting with where to buy
+- FR: Le pas à pas, en commençant par le choix du lieu
+
 ### map.h
-- PT: Como ler os preços no mapa
-- EN: How to read the prices on the map
-- FR: Comment lire les prix sur la carte
+- PT: Preço por m² por concelho em Portugal, como ler o mapa
+- EN: Portugal price per m² by municipality, reading the map
+- FR: Prix au m² par commune au Portugal, lire la carte
 
 ### map.p
-- PT: O que mostram as cores, o que é uma mediana e a lista dos 308 concelhos com o preço por m².
-- EN: What the colours show, what a median is, and the list of all 308 municipalities with the price per m².
-- FR: Ce que montrent les couleurs, ce qu'est une médiane, et la liste des 308 communes avec le prix au m².
+- PT: O preço por m² por concelho em Portugal, explicado. O que mostram a altura e a cor do mapa, o que é uma mediana e a lista dos 308 concelhos.
+- EN: Portugal price per m² by municipality, explained. What the map's height and colour show, what a median is, and the list of all 308 municipalities.
+- FR: Le prix au m² par commune au Portugal, expliqué. Ce que montrent la hauteur et la couleur de la carte, ce qu'est une médiane, et les 308 communes.
 
 ### map.link
 - PT: Como ler o mapa →
 - EN: How to read the map →
 - FR: Comment lire la carte →
 
+### map.a
+- PT: O preço por m² por concelho, no mapa, é o preço mediano das casas vendidas nos últimos 12 meses. No {q}, Portugal estava em {pt} por m², entre {lowv} em {low} e {topv} em {top}.{sNow}
+- EN: The price per m² by municipality on the map is the median price of homes sold over the last 12 months. In {q}, Portugal stood at {pt} per m², from {lowv} in {low} to {topv} in {top}.{sNow}
+- FR: Le prix au m² par commune, sur la carte, est le prix médian des logements vendus sur les 12 derniers mois. Au {q}, le Portugal était à {pt} le m², de {lowv} à {low} jusqu'à {topv} à {top}.{sNow}
+
+### map.i.1
+- PT: Os números são do INE, o Instituto Nacional de Estatística. O mapa mostra os 308 concelhos, os municípios de Portugal.{sOsm}
+- EN: The numbers come from INE, Portugal's national statistics office. The map shows all 308 municipalities, called concelhos in Portuguese.{sOsm}
+- FR: Les chiffres viennent de l'INE, l'institut national de la statistique du Portugal. La carte montre les 308 communes, appelées concelhos en portugais.{sOsm}
+
+### map.i.2
+- PT: Pode escrever o seu orçamento no mapa. Vê logo quantos metros quadrados ele compra em cada concelho.
+- EN: You can type your budget into the map. It shows how many square metres that budget buys in each municipality.
+- FR: Vous pouvez saisir votre budget sur la carte. Elle montre combien de mètres carrés il permet dans chaque commune.
+
+### map.s1.q
+- PT: O que mostram a altura e a cor do mapa?
+- EN: What do the height and colour on the map show?
+- FR: Que montrent la hauteur et la couleur de la carte ?
+
+### map.s1.1
+- PT: Cada concelho tem uma altura e uma cor. As duas seguem o indicador escolhido, como o preço por m², a subida desde 2016 ou a rentabilidade bruta.
+- EN: Each municipality has a height and a colour. Both follow the measure you pick, such as the price per m², the rise since 2016 or the gross yield.
+- FR: Chaque commune a une hauteur et une couleur. Les deux suivent l'indicateur choisi, comme le prix au m², la hausse depuis 2016 ou le rendement brut.
+
+### map.s1.2
+- PT: Toque num concelho para ver o detalhe e a fonte. A Madeira e os Açores aparecem ao lado do continente, numa escala menor.
+- EN: Tap a municipality to see the details and the source. Madeira and the Azores sit beside the mainland, at a smaller scale.
+- FR: Touchez une commune pour voir le détail et la source. Madère et les Açores figurent à côté du continent, à plus petite échelle.
+
+### map.s2.q
+- PT: O que é o preço mediano por m²?
+- EN: What is the median price per m²?
+- FR: Qu'est-ce que le prix médian au m² ?
+
+### map.s2.1
+- PT: A mediana é o valor do meio. Metade das casas vendidas custou menos por m², a outra metade custou mais.
+- EN: The median is the middle value. Half the homes sold cost less per m², and the other half cost more.
+- FR: La médiane est la valeur du milieu. La moitié des logements vendus a coûté moins au m², l'autre moitié plus.
+
+### map.s2.2
+- PT: Uma venda muito cara quase não mexe na mediana. Numa média, essa mesma venda puxava o valor para cima.
+- EN: One very expensive sale barely moves the median. In an average, that same sale would pull the figure up.
+- FR: Une vente très chère fait à peine bouger la médiane. Dans une moyenne, cette même vente tirerait le chiffre vers le haut.
+
+### map.s2.3
+- PT: Um exemplo com a mediana nacional: 100 m² a {pt} dão {ex}. Uma casa concreta pode valer mais ou menos.{sNow}
+- EN: An example with the national median: 100 m² at {pt} comes to {ex}. A given home can be worth more or less.{sNow}
+- FR: Un exemple avec la médiane nationale : 100 m² à {pt} font {ex}. Un bien précis peut valoir plus ou moins.{sNow}
+
+### map.s3.q
+- PT: São preços de venda ou preços de anúncio?
+- EN: Are these sale prices or asking prices?
+- FR: S'agit-il de prix de vente ou de prix affichés ?
+
+### map.s3.1
+- PT: São vendas reais, não preços pedidos em anúncios. Contam as casas novas e as usadas.{sNow}
+- EN: They are real sales, not asking prices from listings. New and existing homes both count.{sNow}
+- FR: Ce sont des ventes réelles, pas des prix d'annonces. Les logements neufs et anciens comptent tous les deux.{sNow}
+
+### map.s3.2
+- PT: Cada valor junta as vendas de 12 meses. Por isso é mais estável do que um só trimestre.
+- EN: Each figure pools 12 months of sales. That makes it steadier than a single quarter.
+- FR: Chaque chiffre réunit 12 mois de ventes. Il est donc plus stable qu'un seul trimestre.
+
+### map.s4.q
+- PT: Porque é que alguns concelhos não têm preço?
+- EN: Why do some municipalities have no price?
+- FR: Pourquoi certaines communes n'ont-elles pas de prix ?
+
+### map.s4.1
+- PT: O INE só publica onde há vendas suficientes. No {q}, há preço para {n} dos {total} concelhos.{sNow}
+- EN: INE publishes only where there are enough sales. In {q}, {n} of the {total} municipalities have a price.{sNow}
+- FR: L'INE ne publie que là où les ventes suffisent. Au {q}, {n} des {total} communes ont un prix.{sNow}
+
+### map.s4.2
+- PT: Não fazemos estimativas. Onde o INE não publica, a lista mostra um traço.
+- EN: We make no estimates. Where INE publishes nothing, the list shows a dash.
+- FR: Nous n'estimons rien. Là où l'INE ne publie pas, la liste affiche un tiret.
+
+### map.s4.3
+- PT: Onde há poucas vendas, os valores variam mais de um trimestre para o outro.
+- EN: Where sales are few, figures move more from one quarter to the next.
+- FR: Là où les ventes sont rares, les chiffres varient davantage d'un trimestre à l'autre.
+
+### map.s5.q
+- PT: Quanto custa o m² em cada concelho?
+- EN: How much is a square metre in each municipality?
+- FR: Combien coûte le m² dans chaque commune ?
+
+### map.s5.1
+- PT: A lista segue a ordem alfabética, com a região ao lado. Toque no nome para ver o concelho no mapa.{sNow}
+- EN: The list is in alphabetical order, with the region beside each name. Tap a name to see that municipality on the map.{sNow}
+- FR: La liste suit l'ordre alphabétique, avec la région à côté. Touchez un nom pour voir la commune sur la carte.{sNow}
+
+### map.f1.q
+- PT: Qual é o concelho mais caro de Portugal?
+- EN: Which municipality in Portugal is the most expensive?
+- FR: Quelle est la commune la plus chère du Portugal ?
+
+### map.f1.a
+- PT: No {q}, era {top}, com {topv} por m². Seguiam-se {top2} e {top3}.
+- EN: In {q}, it was {top}, at {topv} per m². {top2} and {top3} came next.
+- FR: Au {q}, c'était {top}, avec {topv} le m². Suivaient {top2} et {top3}.
+
+### map.f2.q
+- PT: Qual é o preço médio do m² em Portugal?
+- EN: What is the average price per m² in Portugal?
+- FR: Quel est le prix moyen du m² au Portugal ?
+
+### map.f2.a
+- PT: O INE publica a mediana, não a média. No {q}, a mediana nacional era {pt} por m², para as casas vendidas nos últimos 12 meses.
+- EN: INE publishes the median, not the average. In {q}, the national median was {pt} per m² for homes sold over the last 12 months.
+- FR: L'INE publie la médiane, pas la moyenne. Au {q}, la médiane nationale était de {pt} le m² pour les logements vendus sur 12 mois.
+
+### map.f3.q
+- PT: De onde vêm os preços do mapa?
+- EN: Where do the prices on the map come from?
+- FR: D'où viennent les prix de la carte ?
+
+### map.f3.a
+- PT: Vêm do INE, o Instituto Nacional de Estatística. São medianas de vendas reais, que o INE publica a cada trimestre.
+- EN: They come from INE, Portugal's national statistics office. They are medians of real sales, published every quarter.
+- FR: Ils viennent de l'INE, l'institut national de la statistique. Ce sont des médianes de ventes réelles, publiées chaque trimestre.
+
 ### prices.h
-- PT: Dez anos de preços em Portugal
-- EN: Ten years of prices in Portugal
-- FR: Dix ans de prix au Portugal
+- PT: Evolução do preço das casas em Portugal em dez anos
+- EN: Portugal house prices over ten years
+- FR: Évolution des prix immobiliers au Portugal sur dix ans
 
 ### prices.p
-- PT: O metro quadrado vendido em Portugal, em Lisboa e no Porto, de 2016 a 2026, em números oficiais do INE.
-- EN: The square metre sold in Portugal, Lisbon and Porto from 2016 to 2026, in official INE figures.
-- FR: Le mètre carré vendu au Portugal, à Lisbonne et à Porto de 2016 à 2026, en chiffres officiels de l'INE.
+- PT: A evolução do preço das casas em Portugal de 2016 a 2026, no país, em Lisboa e no Porto. Medianas por m² de vendas reais, com números oficiais do INE.
+- EN: Portugal house prices over ten years, 2016 to 2026, for the country, Lisbon and Porto. Median price per m² of real sales, in official INE figures.
+- FR: L'évolution des prix immobiliers au Portugal de 2016 à 2026, pour le pays, Lisbonne et Porto. Prix médian au m² des ventes réelles, chiffres de l'INE.
 
 ### prices.link
 - PT: Dez anos de preços →
 - EN: Ten years of prices →
 - FR: Dix ans de prix →
 
+### prices.a
+- PT: O preço das casas em Portugal subiu {g}% entre o {q0} e o {q}. O m² vendido passou de {from} para {to}, segundo o INE.{sHist}
+- EN: Portugal house prices rose {g}% between {q0} and {q}. The median square metre sold went from {from} to {to}, according to INE.{sHist}
+- FR: Les prix immobiliers au Portugal ont augmenté de {g} % entre le {q0} et le {q}. Le m² vendu est passé de {from} à {to}, selon l'INE.{sHist}
+
+### prices.i.1
+- PT: O INE é o Instituto Nacional de Estatística. Cada ponto do gráfico é a mediana do preço por m² das vendas dos 12 meses anteriores.
+- EN: INE is Portugal's national statistics office. Each point on the chart is the median price per m² of the sales over the previous 12 months.
+- FR: L'INE est l'institut national de la statistique du Portugal. Chaque point du graphique est le prix médian au m² des ventes des 12 mois précédents.
+
+### prices.s1.q
+- PT: Quanto subiram as casas em Lisboa e no Porto?
+- EN: How much have prices risen in Lisbon and Porto?
+- FR: De combien les prix ont-ils augmenté à Lisbonne et à Porto ?
+
+### prices.s1.1
+- PT: Em Lisboa, o m² passou de {lisFrom} para {lisTo}, mais {lisG}%. No Porto, passou de {porFrom} para {porTo}, mais {porG}%.{sHist}
+- EN: In Lisbon, the square metre went from {lisFrom} to {lisTo}, up {lisG}%. In Porto, it went from {porFrom} to {porTo}, up {porG}%.{sHist}
+- FR: À Lisbonne, le m² est passé de {lisFrom} à {lisTo}, soit {lisG} % de plus. À Porto, il est passé de {porFrom} à {porTo}, soit {porG} % de plus.{sHist}
+
+### prices.s1.2
+- PT: O gráfico mostra as três linhas, trimestre a trimestre, desde o {q0}.
+- EN: The chart shows all three lines, quarter by quarter, since {q0}.
+- FR: Le graphique montre les trois courbes, trimestre par trimestre, depuis le {q0}.
+
+### prices.s2.q
+- PT: Quanto subiram as casas no último ano?
+- EN: How much did prices rise in the last year?
+- FR: De combien les prix ont-ils augmenté sur un an ?
+
+### prices.s2.1
+- PT: No {qY}, o m² vendido em Portugal valia {yago}. No {q}, valia {to}, mais {yoy}%.{sNow}
+- EN: In {qY}, the median square metre sold in Portugal was {yago}. In {q}, it was {to}, up {yoy}%.{sNow}
+- FR: Au {qY}, le m² vendu au Portugal valait {yago}. Au {q}, il valait {to}, soit {yoy} % de plus.{sNow}
+
+### prices.s2.2
+- PT: Estes números descrevem o passado. Não dizem como os preços vão evoluir.
+- EN: These figures describe the past. They don't say where prices will go next.
+- FR: Ces chiffres décrivent le passé. Ils ne disent pas comment les prix vont évoluer.
+
+### prices.s3.q
+- PT: Porque há uma marca no gráfico em 2019?
+- EN: Why is there a mark on the chart in 2019?
+- FR: Pourquoi y a-t-il un repère sur le graphique en 2019 ?
+
+### prices.s3.1
+- PT: Em 2019, o INE mudou a forma de calcular estes preços. As vendas seguem a metodologia do INE de 2018 até ao 3.º trimestre de 2019 e a de 2022 a partir daí.{sHist}
+- EN: In 2019, INE changed how it calculates these prices. Sales follow INE's 2018 method up to Q3 2019 and its 2022 method from then on.{sHist}
+- FR: En 2019, l'INE a changé sa façon de calculer ces prix. Les ventes suivent la méthode INE de 2018 jusqu'au 3e trimestre 2019, puis celle de 2022.{sHist}
+
+### prices.s3.2
+- PT: A linha junta os dois métodos e marca a mudança. Os dois medem a mediana do preço por m² de vendas reais.
+- EN: The line joins the two methods and marks the change. Both measure the median price per m² of real sales.
+- FR: La courbe relie les deux méthodes et marque le changement. Les deux mesurent le prix médian au m² de ventes réelles.
+
+### prices.s4.q
+- PT: Onde ver os preços do seu concelho?
+- EN: Where can I see prices for one municipality?
+- FR: Où voir les prix de votre commune ?
+
+### prices.s4.1
+- PT: O mapa mostra o preço de cada concelho e a subida desde 2016. Toque num concelho para ver o detalhe.
+- EN: The map shows each municipality's price and its rise since 2016. Tap a municipality for the details.
+- FR: La carte montre le prix de chaque commune et sa hausse depuis 2016. Touchez une commune pour le détail.
+
+### prices.s4.2
+- PT: A página de preços e rendas junta os preços, as rendas e a rentabilidade bruta.
+- EN: The prices and rents page brings together prices, rents and the gross yield.
+- FR: La page des prix et des loyers réunit les prix, les loyers et le rendement brut.
+
+### prices.f1.q
+- PT: Os preços das casas em Portugal continuam a subir?
+- EN: Are house prices in Portugal still rising?
+- FR: Les prix immobiliers continuent-ils de monter au Portugal ?
+
+### prices.f1.a
+- PT: Entre o {qY} e o {q}, o preço mediano por m² subiu {yoy}%. Os números descrevem o passado e não preveem o futuro.
+- EN: Between {qY} and {q}, the median price per m² rose {yoy}%. The figures describe the past and don't predict the future.
+- FR: Entre le {qY} et le {q}, le prix médian au m² a augmenté de {yoy} %. Les chiffres décrivent le passé et ne prédisent pas l'avenir.
+
+### prices.f2.q
+- PT: Quanto custava o m² em Portugal em 2016?
+- EN: How much was a square metre in Portugal in 2016?
+- FR: Combien coûtait le m² au Portugal en 2016 ?
+
+### prices.f2.a
+- PT: No {q0}, a mediana nacional era {from} por m². No {q}, era {to}.
+- EN: In {q0}, the national median was {from} per m². In {q}, it was {to}.
+- FR: Au {q0}, la médiane nationale était de {from} le m². Au {q}, elle était de {to}.
+
+### prices.f3.q
+- PT: Estes preços incluem casas novas?
+- EN: Do these prices include new homes?
+- FR: Ces prix incluent-ils les logements neufs ?
+
+### prices.f3.a
+- PT: Sim. O INE conta as vendas de casas novas e usadas, numa só mediana por m².
+- EN: Yes. INE counts sales of new and existing homes in one median per m².
+- FR: Oui. L'INE compte les ventes de logements neufs et anciens dans une seule médiane au m².
+
 ### golf.h
-- PT: O prémio do golfe
-- EN: The golf premium
-- FR: La prime du golf
+- PT: Preço das casas junto ao golfe em Portugal
+- EN: Golf property prices in Portugal
+- FR: Prix immobilier près des golfs au Portugal
 
 ### golf.p
-- PT: A mediana de cada freguesia com campo de golfe ao lado da mediana do seu concelho. Uma comparação, não uma causa.
-- EN: The median of each parish with a golf course next to its municipality's median. A comparison, not a cause.
-- FR: La médiane de chaque paroisse avec un golf à côté de celle de sa commune. Une comparaison, pas une cause.
+- PT: O preço das casas junto ao golfe em Portugal: a mediana de cada freguesia com campo, ao lado da do seu concelho. Uma comparação, não uma causa.
+- EN: Golf property prices in Portugal: each golf parish's median price per m² next to its municipality's. A comparison, not a cause.
+- FR: Prix immobilier près des golfs au Portugal : la médiane de chaque paroisse avec golf, à côté de celle de sa commune. Une comparaison, pas une cause.
 
 ### golf.label
 - PT: Mediana da freguesia vs mediana do concelho, 2.º trimestre de 2026
 - EN: Parish median vs municipality median, second quarter of 2026
 - FR: Médiane de la paroisse vs médiane de la commune, 2e trimestre 2026
 
-### golf.1
-- PT: Para cada freguesia com um campo de golfe, pomos a mediana do preço por m² da freguesia ao lado da mediana do seu concelho, no mesmo trimestre. Um rácio de 1,36 quer dizer que a mediana da freguesia está 36% acima da do concelho.
-- EN: For each parish with a golf course, we set the parish's median price per m² next to its municipality's median, in the same quarter. A ratio of 1.36 means the parish median is 36% above the municipality's.
-- FR: Pour chaque paroisse (freguesia) qui compte un golf, nous plaçons le prix médian au m² de la paroisse à côté de celui de sa commune, au même trimestre. Un rapport de 1,36 signifie que la médiane de la paroisse est 36 % au-dessus de celle de la commune.
+### golf.a
+- PT: Junto ao golfe, o preço das casas em Portugal fica, na maioria das freguesias, perto do preço do seu concelho. No Algarve, Almancil é o caso claro: a mediana está 36% acima da de Loulé.{sNow}{sGolf}
+- EN: Golf property prices in Portugal are, in most parishes, close to the price of their municipality. In the Algarve, Almancil is the clear case: its median is 36% above Loulé's.{sNow}{sGolf}
+- FR: Près des golfs, les prix immobiliers au Portugal restent, dans la plupart des paroisses, proches de ceux de leur commune. En Algarve, Almancil est le cas net : sa médiane est 36 % au-dessus de celle de Loulé.{sNow}{sGolf}
 
-### golf.2
-- PT: Isto mostra onde os preços diferem, não porquê. Uma freguesia com golfe pode estar acima ou abaixo do concelho por muitas razões: a costa, o tipo e o tamanho das casas, a construção nova, o perfil dos compradores. O golfe é uma característica destas freguesias entre muitas.
-- EN: This shows where prices differ, not why. A golf parish can sit above or below its municipality for many reasons: the coast, the type and size of homes, new building, who buys. Golf is one feature of these parishes among many.
-- FR: Cela montre où les prix diffèrent, pas pourquoi. Une paroisse avec golf peut se situer au-dessus ou en dessous de sa commune pour bien des raisons : la côte, le type et la taille des logements, la construction neuve, les acheteurs. Le golf est une caractéristique de ces paroisses parmi d'autres.
+### golf.i.1
+- PT: Comparamos duas medianas do INE, o Instituto Nacional de Estatística, no mesmo trimestre. Uma é a da freguesia com o campo, a outra a do concelho inteiro.
+- EN: We compare two medians from INE, Portugal's national statistics office, in the same quarter. One is for the parish (freguesia) with the course, the other for the whole municipality (concelho).
+- FR: Nous comparons deux médianes de l'INE, l'institut national de la statistique, au même trimestre. L'une est celle de la paroisse (freguesia) du golf, l'autre celle de toute la commune (concelho).
 
-### golf.3
-- PT: Almancil é o caso claro: a mediana está 36% acima da de Loulé. A maioria das outras freguesias de golfe do Algarve fica a menos de 10% do seu concelho, algumas abaixo. Desde o 4.º trimestre de 2019, Almancil e Loulé subiram quase o mesmo (cerca de +91%).
-- EN: Almancil is the clear case: its median is 36% above Loulé's. Most other Algarve golf parishes sit within 10% of their municipality, some below it. Since the fourth quarter of 2019, Almancil and Loulé have risen by almost the same share (about +91%).
-- FR: Almancil est le cas net : sa médiane est 36 % au-dessus de celle de Loulé. La plupart des autres paroisses de golf de l'Algarve restent à moins de 10 % de leur commune, certaines en dessous. Depuis le 4e trimestre 2019, Almancil et Loulé ont progressé presque autant (environ +91 %).
+### golf.i.2
+- PT: Das {count} freguesias com um campo completo e as duas medianas publicadas, {within} ficam a 10% ou menos do seu concelho.{sNow}{sGolf}
+- EN: Of the {count} parishes with a full course and both medians published, {within} sit within 10% of their municipality.{sNow}{sGolf}
+- FR: Sur les {count} paroisses avec un parcours complet et les deux médianes publiées, {within} restent à 10 % ou moins de leur commune.{sNow}{sGolf}
 
-### golf.4
-- PT: O INE publica medianas por freguesia só desde o 4.º trimestre de 2019 e só onde há vendas suficientes: não há valor de dez anos por freguesia e nada é estimado. Grândola e Alcácer do Sal (Troia, Comporta) não têm números por freguesia. Os campos vêm do OpenStreetMap: um campo que lá não esteja não aparece aqui.
-- EN: INE publishes parish medians only from the fourth quarter of 2019 and only where there are enough sales: there is no ten-year parish figure, and nothing is estimated. Grândola and Alcácer do Sal (Troia, Comporta) have no parish figures. Courses come from OpenStreetMap: a course missing there is missing here.
-- FR: L'INE ne publie les médianes par paroisse que depuis le 4e trimestre 2019, et seulement là où les ventes suffisent : il n'y a pas de chiffre sur dix ans par paroisse, et rien n'est estimé. Grândola et Alcácer do Sal (Troia, Comporta) n'ont pas de chiffres par paroisse. Les parcours viennent d'OpenStreetMap : un parcours absent là-bas l'est aussi ici.
+### golf.s1.q
+- PT: Como se lê o rácio entre freguesia e concelho?
+- EN: How do I read the parish to municipality ratio?
+- FR: Comment lire le rapport entre paroisse et commune ?
+
+### golf.s1.1
+- PT: O rácio divide a mediana da freguesia pela do concelho. Um rácio de 1,36 quer dizer que a mediana da freguesia está 36% acima da do concelho.
+- EN: The ratio divides the parish median by the municipality median. A ratio of 1.36 means the parish median is 36% above the municipality's.
+- FR: Le rapport divise la médiane de la paroisse par celle de la commune. Un rapport de 1,36 signifie que la médiane de la paroisse est 36 % au-dessus de celle de la commune.
+
+### golf.s1.2
+- PT: Um rácio de 1 quer dizer o mesmo preço. Abaixo de 1, a freguesia tem uma mediana mais baixa do que o concelho.
+- EN: A ratio of 1 means the same price. Below 1, the parish median is lower than the municipality's.
+- FR: Un rapport de 1 signifie le même prix. Sous 1, la médiane de la paroisse est plus basse que celle de la commune.
+
+### golf.s1.3
+- PT: A tabela mostra as freguesias com um campo completo, do rácio mais alto para o mais baixo.
+- EN: The table lists the parishes with a full course, from the highest ratio to the lowest.
+- FR: Le tableau liste les paroisses avec un parcours complet, du rapport le plus haut au plus bas.
+
+### golf.s2.q
+- PT: O golfe faz subir o preço das casas?
+- EN: Does golf push up home prices?
+- FR: Le golf fait-il monter les prix des logements ?
+
+### golf.s2.1
+- PT: Isto mostra onde os preços diferem, não porquê. O golfe é uma característica destas freguesias entre muitas.
+- EN: This shows where prices differ, not why. Golf is one feature of these parishes among many.
+- FR: Cela montre où les prix diffèrent, pas pourquoi. Le golf est une caractéristique de ces paroisses parmi d'autres.
+
+### golf.s2.2
+- PT: Uma freguesia com golfe pode estar acima ou abaixo do concelho por muitas razões. Contam a costa, o tipo e o tamanho das casas, a construção nova e a procura de cada zona.
+- EN: A golf parish can sit above or below its municipality for many reasons. The coast, the type and size of homes, new building and local demand all play a part.
+- FR: Une paroisse avec golf peut se situer au-dessus ou en dessous de sa commune pour bien des raisons. La côte, le type et la taille des logements, la construction neuve et la demande locale comptent.
+
+### golf.s3.q
+- PT: Quais são as freguesias de golfe mais caras do Algarve?
+- EN: Which Algarve golf parishes cost the most?
+- FR: Quelles sont les paroisses de golf les plus chères de l'Algarve ?
+
+### golf.s3.1
+- PT: Almancil é o caso claro: a mediana está 36% acima da de Loulé. É a freguesia da Quinta do Lago e de Vale do Lobo.{sGolf}
+- EN: Almancil is the clear case: its median is 36% above Loulé's. It is the parish of Quinta do Lago and Vale do Lobo.{sGolf}
+- FR: Almancil est le cas net : sa médiane est 36 % au-dessus de celle de Loulé. C'est la paroisse de Quinta do Lago et de Vale do Lobo.{sGolf}
+
+### golf.s3.2
+- PT: A maioria das outras freguesias de golfe do Algarve fica a menos de 10% do seu concelho, algumas abaixo.
+- EN: Most other Algarve golf parishes sit within 10% of their municipality, some below it.
+- FR: La plupart des autres paroisses de golf de l'Algarve restent à moins de 10 % de leur commune, certaines en dessous.
+
+### golf.s3.3
+- PT: Desde o 4.º trimestre de 2019, Almancil e Loulé subiram quase o mesmo (cerca de +91%).{sNow}{sHist}
+- EN: Since the fourth quarter of 2019, Almancil and Loulé have risen by almost the same share (about +91%).{sNow}{sHist}
+- FR: Depuis le 4e trimestre 2019, Almancil et Loulé ont progressé presque autant (environ +91 %).{sNow}{sHist}
+
+### golf.s4.q
+- PT: Há freguesias de golfe com preços diferentes fora do Algarve?
+- EN: Are there golf parishes with different prices outside the Algarve?
+- FR: Y a-t-il des paroisses de golf aux prix différents hors de l'Algarve ?
+
+### golf.s4.1
+- PT: Sim. Em Canidelo, Vila Nova de Gaia, a mediana está {can}% acima da do concelho. Em Cascais e Estoril, está {cas}% acima.{sNow}
+- EN: Yes. In Canidelo, Vila Nova de Gaia, the median is {can}% above the municipality's. In Cascais e Estoril, it is {cas}% above.{sNow}
+- FR: Oui. À Canidelo, Vila Nova de Gaia, la médiane est {can} % au-dessus de celle de la commune. À Cascais e Estoril, elle est {cas} % au-dessus.{sNow}
+
+### golf.s4.2
+- PT: Também há freguesias de golfe abaixo do concelho. Em Silvalde, Espinho, a mediana está {sil}% abaixo.{sNow}
+- EN: Some golf parishes sit below their municipality too. In Silvalde, Espinho, the median is {sil}% below.{sNow}
+- FR: Certaines paroisses de golf sont aussi sous leur commune. À Silvalde, Espinho, la médiane est {sil} % en dessous.{sNow}
+
+### golf.s5.q
+- PT: Porque faltam algumas freguesias e alguns campos?
+- EN: Why are some parishes and courses missing?
+- FR: Pourquoi manque-t-il des paroisses et des parcours ?
+
+### golf.s5.1
+- PT: O INE publica medianas por freguesia só desde o 4.º trimestre de 2019 e só onde há vendas suficientes. Não há valor de dez anos por freguesia e nada é estimado.{sHist}
+- EN: INE publishes parish medians only from the fourth quarter of 2019 and only where there are enough sales. There is no ten-year parish figure, and nothing is estimated.{sHist}
+- FR: L'INE ne publie les médianes par paroisse que depuis le 4e trimestre 2019, et seulement là où les ventes suffisent. Il n'y a pas de chiffre sur dix ans par paroisse, et rien n'est estimé.{sHist}
+
+### golf.s5.2
+- PT: Grândola e Alcácer do Sal (Troia, Comporta) não têm números por freguesia.
+- EN: Grândola and Alcácer do Sal (Troia, Comporta) have no parish figures.
+- FR: Grândola et Alcácer do Sal (Troia, Comporta) n'ont pas de chiffres par paroisse.
+
+### golf.s5.3
+- PT: Os campos vêm do OpenStreetMap, um mapa aberto feito por voluntários. Um campo que lá não esteja não aparece aqui.{sOsm}{sGolf}
+- EN: Courses come from OpenStreetMap, an open map built by volunteers. A course missing there is missing here.{sOsm}{sGolf}
+- FR: Les parcours viennent d'OpenStreetMap, une carte ouverte faite par des bénévoles. Un parcours absent là-bas l'est aussi ici.{sOsm}{sGolf}
+
+### golf.f1.q
+- PT: Quanto custa o m² em Almancil?
+- EN: How much is a square metre in Almancil?
+- FR: Combien coûte le m² à Almancil ?
+
+### golf.f1.a
+- PT: No {q}, a mediana em Almancil era {alm} por m². Em Loulé, o concelho, era {lou}.
+- EN: In {q}, the median in Almancil was {alm} per m². In Loulé, its municipality, it was {lou}.
+- FR: Au {q}, la médiane à Almancil était de {alm} le m². À Loulé, sa commune, elle était de {lou}.
+
+### golf.f2.q
+- PT: Uma casa junto ao golfe vale mais?
+- EN: Is a home near a golf course worth more?
+- FR: Un logement près d'un golf vaut-il plus ?
+
+### golf.f2.a
+- PT: Estes números não o mostram. Comparam preços, não medem causas. A costa, o tipo de casa e a construção nova também contam.
+- EN: These figures don't show that. They compare prices and don't measure causes. The coast, the type of home and new building count too.
+- FR: Ces chiffres ne le montrent pas. Ils comparent des prix et ne mesurent pas de causes. La côte, le type de logement et le neuf comptent aussi.
+
+### golf.f3.q
+- PT: Porque não aparecem Troia e Comporta?
+- EN: Why are Troia and Comporta missing?
+- FR: Pourquoi Troia et Comporta n'apparaissent-elles pas ?
+
+### golf.f3.a
+- PT: O INE não publica medianas por freguesia em Grândola nem em Alcácer do Sal. Sem número oficial, não mostramos nenhum.
+- EN: INE publishes no parish medians for Grândola or Alcácer do Sal. Without an official number, we show none.
+- FR: L'INE ne publie pas de médianes par paroisse pour Grândola ni pour Alcácer do Sal. Sans chiffre officiel, nous n'en montrons aucun.
 
 ### golf.col.parish
 - PT: Freguesia
@@ -6948,26 +7319,156 @@ Prompt 37 §2: the Artigos hub and its first four articles, made from the text m
 - FR: Rapport
 
 ### method.h
-- PT: Como calculamos
-- EN: How we calculate
-- FR: Notre méthode de calcul
+- PT: Preço mediano por m² do INE, como calculamos
+- EN: Portugal house price data, how we calculate
+- FR: Prix médian au m² de l'INE, notre méthode de calcul
 
 ### method.p
-- PT: De onde vem cada número do mapa e dos gráficos, como o lemos e onde estão os limites.
-- EN: Where each number on the map and in the charts comes from, how we read it and where the limits are.
-- FR: D'où vient chaque chiffre de la carte et des graphiques, comment nous le lisons et où sont les limites.
+- PT: O preço mediano por m² do INE, no mapa e nos gráficos. De onde vem cada número, como o lemos e onde estão os limites.
+- EN: Portugal house price data on our map and charts. Where each INE number comes from, how we read it and where its limits are.
+- FR: Le prix médian au m² de l'INE, sur la carte et les graphiques. D'où vient chaque chiffre, comment nous le lisons et où sont ses limites.
 
 ### method.link
 - PT: Como calculamos →
 - EN: How we calculate →
 - FR: Notre méthode de calcul →
 
-### method.1
-- PT: Os preços são do INE: a mediana do valor por m² das habitações familiares vendidas nos últimos 12 meses, por concelho e por freguesia. Não fazemos estimativas: onde o INE não publica, não mostramos número.
-- EN: Prices come from INE: the median value per m² of family dwellings sold in the last 12 months, by municipality and by parish. We make no estimates: where INE publishes nothing, we show no number.
-- FR: Les prix viennent de l'INE : la valeur médiane au m² des logements familiaux vendus sur les 12 derniers mois, par commune et par paroisse. Nous n'estimons rien : là où l'INE ne publie pas, nous n'affichons aucun chiffre.
+### method.a
+- PT: O preço mediano por m² que mostramos é o do INE, sem estimativas nossas. Onde o INE não publica um número, não mostramos nenhum.{sNow}
+- EN: The Portugal house price data on our map is INE's median price per m², with no estimates of our own. Where INE publishes no number, we show none.{sNow}
+- FR: Le prix médian au m² que nous affichons est celui de l'INE, sans estimation de notre part. Là où l'INE ne publie pas de chiffre, nous n'en montrons aucun.{sNow}
 
-### method.2
-- PT: Os limites dos concelhos e freguesias são do OpenStreetMap, ligados aos códigos do INE. Os valores em francos, dólares, reais ou shekels usam a taxa de referência do BCE da data indicada.
-- EN: Municipality and parish boundaries come from OpenStreetMap, matched to INE codes. Amounts in francs, dollars, reais or shekels use the ECB reference rate of the date shown.
-- FR: Les limites des communes et des paroisses viennent d'OpenStreetMap, rattachées aux codes de l'INE. Les montants en francs, dollars, reais ou shekels utilisent le taux de référence de la BCE à la date indiquée.
+### method.i.1
+- PT: O INE é o Instituto Nacional de Estatística, o organismo oficial de estatística de Portugal.
+- EN: INE is Portugal's national statistics office, the official source for these figures.
+- FR: L'INE est l'institut national de la statistique, l'organisme officiel des statistiques au Portugal.
+
+### method.s1.q
+- PT: De onde vêm os preços das casas?
+- EN: Where do the house prices come from?
+- FR: D'où viennent les prix des logements ?
+
+### method.s1.1
+- PT: Os preços são do INE: a mediana do valor por m² das habitações familiares vendidas nos últimos 12 meses. Há valores por concelho e por freguesia, a divisão mais pequena de um concelho.{sNow}{sHist}
+- EN: Prices come from INE: the median value per m² of family dwellings sold in the last 12 months. There are figures by municipality (concelho) and by parish (freguesia), the smaller unit inside it.{sNow}{sHist}
+- FR: Les prix viennent de l'INE : la valeur médiane au m² des logements familiaux vendus sur les 12 derniers mois. Il existe des chiffres par commune (concelho) et par paroisse (freguesia), l'unité plus petite à l'intérieur.{sNow}{sHist}
+
+### method.s1.2
+- PT: São medianas de vendas reais, não casas concretas. Contam as casas novas e as usadas.
+- EN: These are medians of actual sales, not specific homes. New and existing homes both count.
+- FR: Ce sont des médianes de ventes réelles, pas des biens précis. Les logements neufs et anciens comptent tous les deux.
+
+### method.s1.3
+- PT: Onde há poucas vendas, os valores variam mais.
+- EN: Where sales are few, figures vary more.
+- FR: Là où les ventes sont rares, les chiffres varient davantage.
+
+### method.s2.q
+- PT: Porque usamos a mediana e não a média?
+- EN: Why do we use the median and not the average?
+- FR: Pourquoi la médiane et pas la moyenne ?
+
+### method.s2.1
+- PT: A mediana é o valor do meio. Metade das casas vendidas custou menos por m², a outra metade custou mais.
+- EN: The median is the middle value. Half the homes sold cost less per m², and the other half cost more.
+- FR: La médiane est la valeur du milieu. La moitié des logements vendus a coûté moins au m², l'autre moitié plus.
+
+### method.s2.2
+- PT: Poucas vendas muito caras mudam muito uma média, mas quase não mexem na mediana. É também a medida que o INE publica.
+- EN: A few very expensive sales change an average a lot but barely move the median. It is also the measure INE publishes.
+- FR: Quelques ventes très chères changent beaucoup une moyenne mais font à peine bouger la médiane. C'est aussi la mesure que publie l'INE.
+
+### method.s3.q
+- PT: Como juntamos dez anos de preços?
+- EN: How do we join ten years of prices?
+- FR: Comment relions-nous dix ans de prix ?
+
+### method.s3.1
+- PT: As vendas seguem a metodologia do INE de 2018 até ao 3.º trimestre de 2019 e a de 2022 a partir daí. Os gráficos marcam a mudança.{sHist}
+- EN: Sales follow INE's 2018 method up to Q3 2019 and its 2022 method from then on. The charts mark the change.{sHist}
+- FR: Les ventes suivent la méthode INE de 2018 jusqu'au 3e trimestre 2019, puis celle de 2022. Les graphiques marquent le changement.{sHist}
+
+### method.s3.2
+- PT: As regiões começam em 2019. Por freguesia, o INE publica medianas só desde o 4.º trimestre de 2019.
+- EN: Regions start in 2019. By parish, INE publishes medians only from the fourth quarter of 2019.
+- FR: Les régions commencent en 2019. Par paroisse, l'INE ne publie des médianes que depuis le 4e trimestre 2019.
+
+### method.s4.q
+- PT: Como calculamos a rentabilidade bruta?
+- EN: How do we calculate the gross yield?
+- FR: Comment calculons-nous le rendement brut ?
+
+### method.s4.1
+- PT: Rendimento bruto: a renda mediana por m² vezes 12, a dividir pelo preço mediano por m². Usa 12 meses, até ao {q}.{sRent}
+- EN: Gross yield: the median rent per m² times 12, divided by the median price per m². It uses twelve months to {q}.{sRent}
+- FR: Rendement brut : le loyer médian au m² fois 12, divisé par le prix médian au m². Il porte sur douze mois jusqu'au {q}.{sRent}
+
+### method.s4.2
+- PT: As rendas são as dos novos contratos de arrendamento. Em Portugal, a renda mediana era {rent} por m² ao mês, o que dá {yield}% brutos.{sRent}
+- EN: Rents are those of new lease contracts. In Portugal, the median rent was {rent} per m² a month, a gross yield of {yield}%.{sRent}
+- FR: Les loyers sont ceux des nouveaux baux. Au Portugal, le loyer médian était de {rent} le m² par mois, soit un rendement brut de {yield} %.{sRent}
+
+### method.s4.3
+- PT: É um valor antes de custos e impostos.
+- EN: This is before costs and tax.
+- FR: C'est un chiffre avant frais et impôts.
+
+### method.s5.q
+- PT: De onde vêm os limites do mapa e os campos de golfe?
+- EN: Where do the map's boundaries and golf courses come from?
+- FR: D'où viennent les limites de la carte et les golfs ?
+
+### method.s5.1
+- PT: Os limites dos concelhos e freguesias são do OpenStreetMap, ligados aos códigos do INE. O OpenStreetMap é um mapa aberto, feito por voluntários.{sOsm}
+- EN: Municipality and parish boundaries come from OpenStreetMap, matched to INE codes. OpenStreetMap is an open map built by volunteers.{sOsm}
+- FR: Les limites des communes et des paroisses viennent d'OpenStreetMap, rattachées aux codes de l'INE. OpenStreetMap est une carte ouverte faite par des bénévoles.{sOsm}
+
+### method.s5.2
+- PT: Os campos de golfe vêm também do OpenStreetMap.{sGolf}
+- EN: Golf courses come from OpenStreetMap too.{sGolf}
+- FR: Les parcours de golf viennent aussi d'OpenStreetMap.{sGolf}
+
+### method.s6.q
+- PT: Como convertemos os euros noutras moedas?
+- EN: How do we convert euros into other currencies?
+- FR: Comment convertissons-nous les euros en d'autres monnaies ?
+
+### method.s6.1
+- PT: Os valores em francos, dólares, reais ou shekels usam a taxa de referência do BCE, o Banco Central Europeu, da data indicada.{sEcb}
+- EN: Amounts in francs, dollars, reais or shekels use the reference rate of the ECB, the European Central Bank, on the date shown.{sEcb}
+- FR: Les montants en francs, dollars, reais ou shekels utilisent le taux de référence de la BCE, la Banque centrale européenne, à la date indiquée.{sEcb}
+
+### method.s6.2
+- PT: A taxa de juro média do crédito à habitação vem do Banco de Portugal.{sBdp}
+- EN: The average mortgage interest rate comes from Banco de Portugal, the central bank.{sBdp}
+- FR: Le taux d'intérêt moyen du crédit immobilier vient du Banco de Portugal, la banque centrale.{sBdp}
+
+### method.f1.q
+- PT: Os preços do INE são preços de venda?
+- EN: Are INE prices sale prices?
+- FR: Les prix de l'INE sont-ils des prix de vente ?
+
+### method.f1.a
+- PT: Sim. São medianas de vendas reais nos últimos 12 meses, não preços de anúncios.
+- EN: Yes. They are medians of real sales over the last 12 months, not asking prices.
+- FR: Oui. Ce sont des médianes de ventes réelles sur 12 mois, pas des prix d'annonces.
+
+### method.f2.q
+- PT: De quando são os números mais recentes?
+- EN: How recent are the latest figures?
+- FR: De quand datent les chiffres les plus récents ?
+
+### method.f2.a
+- PT: O INE publica estes preços a cada trimestre. Os mais recentes no site são do {q}.
+- EN: INE publishes these prices every quarter. The latest on the site are for {q}.
+- FR: L'INE publie ces prix chaque trimestre. Les plus récents sur le site portent sur le {q}.
+
+### method.f3.q
+- PT: Porque é que o meu concelho não tem preço?
+- EN: Why does my municipality have no price?
+- FR: Pourquoi ma commune n'a-t-elle pas de prix ?
+
+### method.f3.a
+- PT: O INE só publica onde há vendas suficientes. Nesses casos, não estimamos nenhum valor.
+- EN: INE publishes only where there are enough sales. In those cases, we estimate nothing.
+- FR: L'INE ne publie que là où les ventes suffisent. Dans ces cas, nous n'estimons aucune valeur.

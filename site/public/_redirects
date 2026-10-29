@@ -13,3 +13,8 @@
 /pt/:ed/o-seu-percurso /pt/:ed/passo-a-passo/ 301
 /en/:ed/your-path /en/:ed/step-by-step/ 301
 /fr/:ed/votre-parcours /fr/:ed/pas-a-pas/ 301
+# Prompt 43 §3: articles renamed to their search phrase (the old address keeps working).
+/en/:ed/blog/buy-a-home-in-portugal-from-abroad/ /en/:ed/blog/buy-property-in-portugal-from-abroad/ 301
+/pt/:ed/blog/imt-7-5-nao-residentes/ /pt/:ed/blog/imt-nao-residentes/ 301
+/en/:ed/blog/7-5-percent-transfer-tax-non-residents/ /en/:ed/blog/imt-portugal-non-residents/ 301
+/fr/:ed/blog/imt-7-5-pour-les-non-residents/ /fr/:ed/blog/imt-portugal-non-residents/ 301
