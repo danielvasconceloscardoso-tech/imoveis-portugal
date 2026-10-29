@@ -25,7 +25,7 @@ Replace the three vague choices (weekdays early evening, weekdays during the day
 2. The reader picks up to three preferred slots.
 3. Every time shows in Portugal time and in the reader's own time zone, side by side (for example "10:00 Lisboa · 11:00 Luxembourg"). Detect the time zone from the browser, and let the reader change it in one tap.
 4. One shared component for the Concierge and the request flow, so both always look and behave the same.
-5. Until the operator confirms the advisor's real hours, use weekdays 09:00–19:00 and Saturday 10:00–13:00, Portugal time, kept in one config value.
+5. The advisor's hours (operator, 29 Oct): Monday to Saturday, 09:00 to 19:00 Portugal time, with the last slot at 18:30; no Sundays. Keep them in one config value.
 
 ## Rules
 
