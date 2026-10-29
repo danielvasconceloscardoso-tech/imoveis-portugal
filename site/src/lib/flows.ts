@@ -54,10 +54,12 @@ export function flowConfig(id: FlowId, lang: Lang, ed: EdCode, hidden: Record<st
     lede: id === "concierge" ? c("flow.c.lede", lang) : "",
     hidden: { edition: ed, language: lang, ...hidden },
     mailto: config.contactEmail,
-    links: { path: pathFor(lang, ed, "journey"), map: pathFor(lang, ed, "map"), privacy: pathFor(lang, ed, "privacy") },
+    links: { path: pathFor(lang, ed, "journey"), map: pathFor(lang, ed, "map"), privacy: pathFor(lang, ed, "privacy"), articles: pathFor(lang, ed, "articles") },
     labels: Object.fromEntries(["back", "next", "skip", "of", "close", "send", "sending", "review", "fallback", "fallback.btn", "invalid.email", "name", "email", "phone"]
       .map((k) => [k, c(`flow.${k}`, lang, k === "of" ? { i: "{i}", n: "{n}" } : {})])) as Record<string, string>,
-    extra: { path: c("consult.later.path", lang), map: c("map.open", lang), privacy: c("common.privacy", lang) },
+    extra: { path: c("consult.later.path", lang), map: c("map.open", lang), privacy: c("common.privacy", lang),
+      // Prompt 42: the closing line under the next steps, with two text links.
+      more: c("flow.more", lang), morePath: c("flow.more.path", lang), moreArticles: c("flow.more.articles", lang) },
   };
 }
 export type FlowConfig = ReturnType<typeof flowConfig>;

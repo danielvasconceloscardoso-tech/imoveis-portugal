@@ -75,9 +75,10 @@ const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("h
     <h1 id="h2-h1">{c(`home2.h1.${ed}`, lang)}</h1>
     <p>{c("home2.lede", lang)}</p>
   </div>
-  <form class="h2-bar" action={pathFor(lang, ed, "journey")} method="get" data-bar data-rate={fx ? fx.rate : 1}>
+  <form class="h2-bar" action={pathFor(lang, ed, "consult")} method="get" data-bar data-rate={fx ? fx.rate : 1}>
+    <input type="hidden" name="cg" value="home" />
     <label class="h2-f"><span>{c("home2.bar.live", lang)}</span>
-      <select name="ed" data-ed>{ED_ORDER.map((x) => <option value={x} data-href={pathFor(lang, x, "journey")} selected={x === ed}>{c(`home2.bar.in.${x}`, lang)}</option>)}</select>
+      <select name="ed" data-ed>{ED_ORDER.map((x) => <option value={x} data-href={pathFor(lang, x, "consult")} selected={x === ed}>{c(`home2.bar.in.${x}`, lang)}</option>)}</select>
     </label>
     <label class="h2-f"><span>{c("home2.bar.want", lang)}</span>
       <select name="door" data-door><option value="buy">{c("home2.bar.buy", lang)}</option><option value="sell">{c("home2.bar.sell", lang)}</option></select>
@@ -194,7 +195,8 @@ const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("h
 </section>
 
 <script>
-  // The path bar: the country picks the edition's path, the amount goes in euros, Start opens the path at its station.
+  // The home bar (prompt 42): "Começar" opens the Concierge sheet on this page, with the country, buy or sell and the
+  // budget (in euros) already answered; without the sheet (or without JavaScript) it is a link to the Concierge page.
   const f = document.querySelector<HTMLFormElement>("[data-bar]");
   if (f) {
     const ed = f.querySelector<HTMLSelectElement>("[data-ed]")!, door = f.querySelector<HTMLSelectElement>("[data-door]")!;
@@ -202,9 +204,12 @@ const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("h
     const rate = Number(f.dataset.rate) || 1;
     door.addEventListener("change", () => { lab.textContent = door.value === "sell" ? lab.dataset.sell! : lab.dataset.buy!; });
     amt.addEventListener("input", () => { const n = Number(amt.value.replace(/\D/g, "")); amt.value = n ? new Intl.NumberFormat(document.documentElement.lang).format(n) : ""; });
-    f.addEventListener("submit", () => {
-      f.action = ed.selectedOptions[0].dataset.href ?? f.action; ed.disabled = true;
-      const n = Number(amt.value.replace(/\D/g, "")); if (n) out.value = String(Math.round(n / rate)); else out.disabled = true;
+    f.addEventListener("submit", (e) => {
+      const n = Number(amt.value.replace(/\D/g, "")), eur = n ? Math.round(n / rate) : 0;
+      const start = (window as unknown as { __ipCgStart?: (o: { ed: string; door: string; budget: number }) => boolean }).__ipCgStart;
+      if (start && start({ ed: ed.value, door: door.value, budget: eur })) { e.preventDefault(); return; }
+      f.action = ed.selectedOptions[0].dataset.href ?? f.action;
+      if (eur) out.value = String(eur); else out.disabled = true;
     });
   }
   // Quiet motion: sections fade up as they enter; nothing moves with reduced motion.

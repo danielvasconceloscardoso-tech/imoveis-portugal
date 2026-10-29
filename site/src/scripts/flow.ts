@@ -31,7 +31,9 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
   // tab used to carry their country over: the concierge opened on Luxembourg everywhere after a first visit to /lu.
   const edOpts = steps.flatMap((s) => (s.type === "choice" && s.prefill === "edition" ? s.opts.map((o) => o.v) : []));
   const savedEd = (() => { try { return localStorage.getItem("ip-ed") || ""; } catch { return ""; } })();
-  const edNow = [location.pathname.split("/")[2] || "", F.hidden.edition, savedEd].find((x) => edOpts.includes(x)) || F.hidden.edition;
+  // From the home bar (prompt 42, ?cg=home): the country the reader chose there comes first.
+  const q0 = new URLSearchParams(location.search), fromHome = q0.get("cg") === "home";
+  const edNow = [fromHome ? q0.get("ed") || "" : "", location.pathname.split("/")[2] || "", F.hidden.edition, savedEd].find((x) => edOpts.includes(x)) || F.hidden.edition;
   const reset = (kind: "edition" | "lang") => { for (const s of steps) if ("prefill" in s && s.prefill === kind) delete A[s.id]; };
   if (A._ed !== edNow) { reset("edition"); A._ed = edNow; }
   if (A._lang !== F.hidden.language) { reset("lang"); A._lang = F.hidden.language; }
@@ -46,6 +48,17 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
     place: q.get("place") || places[0] || "",
   };
   for (const s of steps) if ("prefill" in s && s.prefill && !A[s.id] && pre[s.prefill]) A[s.id] = pre[s.prefill];
+  // The home bar's answers win over older ones, and those steps are skipped: the flow starts at the next question, the
+  // progress counts only what is left, and Back still reaches them, editable. ed, door and cg then leave the URL.
+  let offset = 0;
+  if (fromHome) {
+    const given = new Set<string>();
+    for (const s of steps) if ("prefill" in s && (s.prefill === "edition" || (s.prefill === "budget" && pre.budget))) { A[s.id] = pre[s.prefill]; given.add(s.id); }
+    const door = q0.get("door"); if (door === "buy" || door === "sell" || door === "inherit") A.door = door;
+    while (offset < N - 1 && given.has(steps[offset].id)) offset++;
+    for (const k of ["cg", "ed", "door"]) q0.delete(k);
+    history.replaceState(null, "", `${location.pathname}${q0.size ? `?${q0}` : ""}${location.hash}`);
+  }
   save();
 
   function url(n: number | null) {
@@ -53,9 +66,13 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
     n == null ? p.delete(opts.param) : p.set(opts.param, String(n + 1));
     history.replaceState(null, "", `${location.pathname}${p.size ? `?${p}` : ""}${location.hash}`);
   }
-  const head = () => `<div class="fl-head"><button type="button" class="fl-back" data-back ${i === 0 ? "hidden" : ""} aria-label="${esc(L.back)}">${ARROW}</button>
-    <div class="fl-prog" role="progressbar" aria-label="${esc(F.title)}" aria-valuemin="1" aria-valuemax="${N}" aria-valuenow="${Math.min(i + 1, N)}"><span style="width:${(Math.min(i + 1, N) / N) * 100}%"></span></div>
-    <span class="fl-of">${esc(L.of.replace("{i}", String(Math.min(i + 1, N))).replace("{n}", String(N)))}</span></div>`;
+  const head = () => {
+    if (i < offset) offset = 0;  // back among the answers given on the home page: count every step again
+    const k = Math.min(i + 1, N) - offset, n = N - offset;
+    return `<div class="fl-head"><button type="button" class="fl-back" data-back ${i === 0 ? "hidden" : ""} aria-label="${esc(L.back)}">${ARROW}</button>
+    <div class="fl-prog" role="progressbar" aria-label="${esc(F.title)}" aria-valuemin="1" aria-valuemax="${n}" aria-valuenow="${k}"><span style="width:${(k / n) * 100}%"></span></div>
+    <span class="fl-of">${esc(L.of.replace("{i}", String(k)).replace("{n}", String(n)))}</span></div>`;
+  };
 
   function body(s: Step): string {
     if (s.type === "choice") return `<div class="fl-opts${s.row || s.opts.length <= 3 ? " fl-row" : ""}" role="radiogroup" aria-labelledby="fl-q">${s.opts.map((o) =>
@@ -270,17 +287,20 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
     let brief = ""; try { brief = sessionStorage.getItem("ip.brief") || ""; } catch { /* none */ }
     const payload = { flow: F.id, project: q.get("project") || "", unit: q.get("unit") || "", ...F.hidden, answers: Object.fromEntries(steps.filter((s) => s.type === "choice" || s.type === "text" || s.type === "slots").map((s) => [s.id, A[s.id] ?? ""])),
       slots: (() => { try { return JSON.parse(A._slots || "[]"); } catch { return []; } })(),
-      labels: answerText(), name: A.name || "", email: A.email || "", phone: A.phone || "", consent: A.consent === "1", budget: budgetEur || "", brief, page: location.pathname, hp };
+      labels: answerText(), door: A.door || "", name: A.name || "", email: A.email || "", phone: A.phone || "", consent: A.consent === "1", budget: budgetEur || "", brief, page: location.pathname, hp };
     let ok = false;
     try { const r = await fetch("/api/request", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(payload) }); ok = r.ok; } catch { ok = false; }
-    if (ok) { try { sessionStorage.removeItem(key); } catch { /* none */ } done(); }
+    if (ok) { const r = route(); try { sessionStorage.removeItem(key); sessionStorage.setItem(`${key}.done`, r); } catch { /* none */ } done(r); }
     else fallback(payload);
   }
-  function done() {
-    const d = (F.done as Record<string, { h: string; p: string }>)[route()] ?? F.done.ok;
+  // The confirmation, then one quiet closing line with two text links (prompt 42). The confirmation stays in the URL
+  // (?concierge=done) and in this tab, so Back from those pages returns to it.
+  function done(r = route()) {
+    const d = (F.done as Record<string, { h: string; p: string }>)[r] ?? F.done.ok, X = F.extra as Record<string, string>, Lk = F.links as Record<string, string>;
     dir = 1; swap(`<div class="fl-done"><span class="fl-tick">${CHECK}</span><h2 class="fl-q" tabindex="-1">${esc(d.h)}</h2><p class="fl-lede">${esc(d.p)}</p>
-      <div class="fl-go"><a class="fl-btn" href="${F.links.path}">${esc(F.extra.path)}</a><a class="fl-link" href="${F.links.map}">${esc(F.extra.map)}</a></div></div>`, true);
-    url(null);
+      <div class="fl-go"><a class="fl-btn" href="${F.links.path}">${esc(F.extra.path)}</a><a class="fl-link" href="${F.links.map}">${esc(F.extra.map)}</a></div>
+      <p class="fl-more">${esc(X.more)} <a href="${Lk.path}">${esc(X.morePath)}</a> · <a href="${Lk.articles}">${esc(X.moreArticles)}</a></p></div>`, true);
+    const p = new URLSearchParams(location.search); p.set(opts.param, "done"); history.replaceState(null, "", `${location.pathname}?${p}${location.hash}`);
   }
   function fallback(p: Record<string, unknown>) {
     const subject = `${F.title} (${F.hidden.edition} · ${F.hidden.language})`;
@@ -293,7 +313,8 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
 
   // ------------------------------------------------------------ start
   const start = Number(q.get(opts.param));
-  i = start >= 1 && start <= N ? start - 1 : 0;
-  render(false);
+  i = start >= 1 && start <= N ? start - 1 : offset;
+  const wasDone = q.get(opts.param) === "done" ? (() => { try { return sessionStorage.getItem(`${key}.done`); } catch { return null; } })() : null;
+  if (wasDone) done(wasDone); else render(false);
   return { go, reset: () => { i = 0; render(false); }, focus: () => stage.querySelector<HTMLElement>(".fl-q")?.focus({ preventScroll: true }), clearUrl: () => url(null), at: () => i };
 }
