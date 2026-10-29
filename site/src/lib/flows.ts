@@ -13,6 +13,7 @@ export type Step =
   | { id: string; type: "choice"; q: string; opts: Opt[]; prefill?: "edition" | "budget" | "lang" | "cat"; row?: boolean; optional?: boolean }
   | { id: string; type: "text"; q: string; ph: string; multi?: boolean; prefill?: "place"; optional?: boolean }
   | { id: string; type: "contact"; q: string; phone: boolean }
+  | { id: string; type: "slots"; q: string; optional?: boolean }
   | { id: string; type: "consent"; q: string; text: string };
 
 const n = (prefix: string, count: number, lang: Lang): Opt[] => Array.from({ length: count }, (_, i) => ({ v: String(i + 1), l: c(`${prefix}.${i + 1}`, lang) }));
@@ -26,7 +27,7 @@ export function flowConfig(id: FlowId, lang: Lang, ed: EdCode, hidden: Record<st
     country,
     { id: "budget", type: "choice", q: c("flow.c.budget", lang), opts: n("flow.c.budget", 4, lang), prefill: "budget" },
     { id: "purpose", type: "choice", q: c("flow.c.purpose", lang), opts: n("flow.c.purpose", 5, lang) },
-    { id: "when", type: "choice", q: c("flow.c.when", lang), opts: n("flow.c.when", 4, lang) },
+    { id: "when", type: "slots", q: c("flow.c.when", lang), optional: true },  // prompt 41 §2: real slots (scripts/slots.ts)
     { id: "fin", type: "choice", q: c("flow.c.fin", lang), opts: n("flow.c.fin", 3, lang) },
     { id: "nif", type: "choice", q: c("flow.c.nif", lang), opts: [{ v: "yes", l: c("flow.yes", lang) }, { v: "no", l: c("flow.no", lang) }], row: true },
     { id: "place", type: "text", q: c("flow.c.place", lang), ph: c("flow.c.place.ph", lang), prefill: "place", optional: true },

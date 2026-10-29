@@ -1,21 +1,19 @@
 // The buyer's request, "visit or buy" (prompt 38 §1b, D66): one question per screen in a sheet over the showcase. Opened by any
 // [data-req] (data-block / data-typ pre-fill the home) or #pedir. On the preview nothing is sent: no fetch at all; the request
 // is kept in this tab (sessionStorage) so [data-req-advisor] can show it as the partner agency's qualified advisor receives it.
+import { LIS, lisbonInstant, readerTz, city, slotDays, slotPicker, type Slot } from "./slots";
 
 type Cfg = {
   lang: string; ed: string; locale: string; project: { id: string; name: string; developer: string };
   blocks: { id: string; units: { t: string; n: number }[] }[]; privacy: string; country: string; dial: string; sampleCountry: string; from: string;
   t: Record<string, any>;
 };
-type Slot = { d: string; t: string };
 type Ans = {
   intent?: "online" | "inperson" | "buy"; block?: string; typ?: string; mode?: "video" | "phone"; slots: Slot[];
   name?: string; email?: string; cc?: string; phone?: string; country?: string; budget?: number; pay?: "own" | "mortgage"; horizon?: number;
   consent?: boolean; ts?: string; tz?: string; page?: string; sample?: boolean;
 };
 
-const LIS = "Europe/Lisbon";
-const TIMES = ["10:00", "12:00", "15:00", "17:30"];
 const STEPS = ["intent", "home", "when", "you", "more", "consent"] as const;
 const reduce = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 const esc = (s: unknown) => String(s ?? "").replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[ch]!);
@@ -24,19 +22,6 @@ const ARROW = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7
 const X = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>`;
 const KEY = "ip.rq.draft", LAST = "ip.rq.last";
 const ss = { get: (k: string) => { try { return sessionStorage.getItem(k); } catch { return null; } }, set: (k: string, v: string) => { try { sessionStorage.setItem(k, v); } catch { /* private mode */ } } };
-
-// ------------------------------------------------------------ time: a Lisbon wall time as an instant, shown in both zones
-function lisbonInstant(d: string, t: string): Date {
-  const [y, m, day] = d.split("-").map(Number), [h, mi] = t.split(":").map(Number);
-  const guess = Date.UTC(y, m - 1, day, h, mi);
-  const p = Object.fromEntries(new Intl.DateTimeFormat("en-GB", { timeZone: LIS, hourCycle: "h23", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" })
-    .formatToParts(new Date(guess)).map((x) => [x.type, x.value]));
-  const asUtc = Date.UTC(+p.year, +p.month - 1, +p.day, +p.hour, +p.minute);
-  return new Date(guess - (asUtc - guess));
-}
-const readerTz = () => { try { return Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC"; } catch { return "UTC"; } };
-const city = (tz: string) => tz.split("/").pop()!.replace(/_/g, " ");
-const ymd = (dt: Date) => new Intl.DateTimeFormat("en-CA", { timeZone: LIS, year: "numeric", month: "2-digit", day: "2-digit" }).format(dt);
 
 export function initRequest() {
   const cfgEl = document.querySelector<HTMLElement>("[data-rq-cfg]"); if (!cfgEl) return;
@@ -54,15 +39,14 @@ export function initRequest() {
     return { main: `${day}, ${s.t} ${T.pt}`, own };
   };
 
-  // The next two weeks in Portugal, Sundays left out.
-  const days: string[] = [];
-  for (let k = 1; days.length < 12 && k <= 15; k++) { const dt = new Date(Date.now() + k * 864e5); const s = ymd(dt); if (lisbonInstant(s, "12:00").getUTCDay() !== 0) days.push(s); }
+  // The advisor's days in the next two weeks (config.advisorHours, scripts/slots.ts).
+  const days = slotDays();
 
   const fresh = (): Ans => ({ slots: [], cc: C.dial, country: C.country });
   let A: Ans = fresh();
   try { A = { ...fresh(), ...JSON.parse(ss.get(KEY) || "{}") }; } catch { /* none */ }
   const save = () => ss.set(KEY, JSON.stringify(A));
-  let i = 0, dir = 1, day = days[0], doneView = false, opener: HTMLElement | null = null;
+  let i = 0, dir = 1, doneView = false, opener: HTMLElement | null = null;
 
   const intentL = (v?: string) => (v ? T.intent[v] : "");
   const unitL = (a: Ans) => (a.block && a.typ ? `${T.block} ${a.block} · ${a.typ}` : T.undecided);
@@ -84,15 +68,9 @@ export function initRequest() {
       <div class="fl-opts rq-und">${opt("|", T.undecided, A.block === "" && !A.typ)}</div>
       ${A.block !== undefined ? `<div class="fl-go"><button type="button" class="fl-btn" data-next>${esc(T.next)}</button></div>` : ""}`;
     if (s === "when") {
-      const taken = (t: string) => A.slots.some((x) => x.d === day && x.t === t);
       return `<h2 id="rq-q" class="fl-q" tabindex="-1">${esc(T.q3)}</h2><p class="fl-lede">${esc(T.l3)}</p>
       ${A.intent === "online" ? `<div class="rq-seg" role="group">${(["video", "phone"] as const).map((m) => `<button type="button" data-mode="${m}" aria-pressed="${(A.mode || "video") === m}">${esc(T.mode[m])}</button>`).join("")}</div>` : ""}
-      <p class="rq-bk">${esc(T.pickDay)}</p><div class="rq-days">${days.map((d) => { const at = lisbonInstant(d, "12:00");
-        return `<button type="button" class="rq-day" data-day="${d}" aria-pressed="${d === day}"><span>${esc(fmtDay(at, LIS, { weekday: "short" }))}</span><b>${esc(fmtDay(at, LIS, { day: "numeric" }))}</b><span>${esc(fmtDay(at, LIS, { month: "short" }))}</span></button>`; }).join("")}</div>
-      <p class="rq-bk">${esc(T.pickTime)} · ${esc(T.pt)}</p><div class="rq-times">${TIMES.map((t) => { const at = lisbonInstant(day, t);
-        return `<button type="button" class="rq-time" data-time="${t}" aria-pressed="${taken(t)}" ${!taken(t) && A.slots.length >= 3 ? "disabled" : ""}><b>${t}</b>${tz !== LIS ? `<span>${esc(fmtHM(at, tz))} ${esc(city(tz))}</span>` : ""}</button>`; }).join("")}</div>
-      <p class="rq-bk">${esc(T.picked)} (${A.slots.length}/3)</p>
-      ${A.slots.length ? `<ul class="rq-picked">${A.slots.map((x, k) => { const l = slotLabel(x); return `<li><div><b>${esc(l.main)}</b>${l.own ? `<small>${esc(l.own)} · ${esc(T.yours)}</small>` : ""}</div><button type="button" class="rq-rm" data-rm="${k}" aria-label="${esc(T.close)}">${X}</button></li>`; }).join("")}</ul>` : `<p class="rq-hint">${esc(T.none)}</p>`}
+      <div data-slots></div>
       <div class="fl-go"><button type="button" class="fl-btn" data-next ${A.slots.length ? "" : "disabled"}>${esc(T.next)}</button></div>`;
     }
     if (s === "you") return `<h2 id="rq-q" class="fl-q" tabindex="-1">${esc(T.q4)}</h2><div class="fl-fields">
@@ -143,14 +121,8 @@ export function initRequest() {
       setTimeout(() => go(i + 1), reduce() ? 0 : 220);
     }));
     el.querySelectorAll<HTMLButtonElement>("[data-mode]").forEach((b) => b.addEventListener("click", () => { A.mode = b.dataset.mode as Ans["mode"]; save(); rerender(); }));
-    el.querySelectorAll<HTMLButtonElement>("[data-day]").forEach((b) => b.addEventListener("click", () => { day = b.dataset.day!; const x = el.querySelector(".rq-days")!.scrollLeft; rerender(); el.querySelector(".rq-days")!.scrollLeft = x; }));
-    el.querySelectorAll<HTMLButtonElement>("[data-time]").forEach((b) => b.addEventListener("click", () => {
-      const t = b.dataset.time!, k = A.slots.findIndex((x) => x.d === day && x.t === t);
-      if (k >= 0) A.slots.splice(k, 1); else if (A.slots.length < 3) A.slots.push({ d: day, t });
-      A.slots.sort((p, q) => (p.d + p.t).localeCompare(q.d + q.t)); save();
-      const x = el.querySelector(".rq-days")!.scrollLeft; rerender(); el.querySelector(".rq-days")!.scrollLeft = x;
-    }));
-    el.querySelectorAll<HTMLButtonElement>("[data-rm]").forEach((b) => b.addEventListener("click", () => { A.slots.splice(Number(b.dataset.rm), 1); save(); rerender(); }));
+    const sp = el.querySelector<HTMLElement>("[data-slots]");
+    if (sp) slotPicker(sp, { lang: C.lang, locale: C.locale, get: () => A.slots, set: (v) => { A.slots = v; save(); const nx = el.querySelector<HTMLButtonElement>("[data-next]"); if (nx) nx.disabled = !v.length; } });
     el.querySelectorAll<HTMLInputElement>("[data-c]").forEach((x) => {
       x.addEventListener("input", () => { (A as any)[x.dataset.c!] = x.value.trim(); save(); });
       x.addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); next(); } });
@@ -223,7 +195,7 @@ export function initRequest() {
     return { intent: "online", mode: "video", block: b, typ, slots: [{ d: pick[0], t: "17:30" }, { d: pick[1], t: "12:00" }, { d: pick[2], t: "10:00" }].filter((x) => x.d),
       name: T.sampleName, email: "exemplo@example.com", cc: "+352", phone: "600 000 000", country: C.sampleCountry, budget: 2, pay: "mortgage", horizon: 1, sample: true };
   }
-  sampleBtn.addEventListener("click", () => { A = { ...sample(), consent: false }; save(); day = A.slots[0]?.d || days[0]; dir = 1; i = STEPS.length - 1; render(); });
+  sampleBtn.addEventListener("click", () => { A = { ...sample(), consent: false }; save(); dir = 1; i = STEPS.length - 1; render(); });
 
   // ------------------------------------------------------------ open / close, Esc, focus trap
   const focusables = (root: HTMLElement) => [...root.querySelectorAll<HTMLElement>('a[href], button:not([disabled]), input, [tabindex]:not([tabindex="-1"])')].filter((x) => x.offsetParent !== null && !x.closest("[hidden]"));

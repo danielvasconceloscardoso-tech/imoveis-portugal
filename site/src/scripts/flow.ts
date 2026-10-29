@@ -4,6 +4,7 @@
 // If the endpoint is not configured or fails, the request opens as a ready-written email to the brand mailbox.
 import type { FlowConfig, Step } from "../lib/flows";
 import type { LawyerCard } from "../lib/lawyers";
+import { slotPicker, slotLabel, type Slot } from "./slots";
 
 const reduce = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 const esc = (t: string) => t.replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[ch]!);
@@ -18,7 +19,7 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
   // The partner lawyer card (prompt 37 §4, D64), concierge only; absent when no lawyer may show on this build.
   const LW = (() => { try { return JSON.parse(root.querySelector("[data-flow-lawyer]")?.textContent || "null") as LawyerCard | null; } catch { return null; } })();
   // Listed buildings (prompt 39 §3): from projects.json, passed by Flow.astro; absent outside the concierge.
-  type Bld = { id: string; name: string; muni: string; place: string; region: string; near: string[]; typologies: string[]; from: number | null; photo: string; map: string; visit: string };
+  type Bld = { id: string; name: string; muni: string; place: string; region: string; near: string[]; typologies: string[]; from: number | null; avail: number | null; photo: string; map: string; visit: string };
   const BL = (() => { try { return JSON.parse(root.querySelector("[data-flow-blds]")?.textContent || "null") as { labels: Record<string, string>; items: Bld[] } | null; } catch { return null; } })();
   let A: Record<string, string> = {};
   try { A = JSON.parse(sessionStorage.getItem(key) || "{}"); } catch { /* private mode */ }
@@ -64,8 +65,11 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
       return `${s.multi ? `<textarea class="fl-in fl-area" data-in rows="4" placeholder="${esc(s.ph)}" aria-labelledby="fl-q">${esc(A[s.id] || "")}</textarea>`
         : `<input class="fl-in" data-in type="text" autocomplete="off" placeholder="${esc(s.ph)}" value="${esc(A[s.id] || "")}" aria-labelledby="fl-q" />`}
         ${chips.length ? `<div class="fl-chips">${chips.map((c) => `<button type="button" class="fl-chip" data-chip="${esc(c)}">${esc(c)}</button>`).join("")}</div>` : ""}
+        ${BL && s.id === "place" ? matchBox() : ""}
         <div class="fl-go"><button type="button" class="fl-btn" data-next>${esc(L.next)}</button>${s.optional ? `<button type="button" class="fl-link" data-skip>${esc(L.skip)}</button>` : ""}</div>`;
     }
+    if (s.type === "slots") return `<div data-slots></div>
+        <div class="fl-go"><button type="button" class="fl-btn" data-next>${esc(L.next)}</button>${s.optional ? `<button type="button" class="fl-link" data-skip>${esc(L.skip)}</button>` : ""}</div>`;
     if (s.type === "contact") return `<div class="fl-fields">
         <label class="fl-f"><span>${esc(L.name)}</span><input class="fl-in" data-c="name" autocomplete="name" value="${esc(A.name || "")}" /></label>
         <label class="fl-f"><span>${esc(L.email)}</span><input class="fl-in" data-c="email" type="email" inputmode="email" autocomplete="email" value="${esc(A.email || "")}" /></label>
@@ -73,7 +77,7 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
         <p class="fl-err" data-err hidden>${esc(L["invalid.email"])}</p></div>
         <div class="fl-go"><button type="button" class="fl-btn" data-next>${esc(L.next)}</button></div>`;
     // consent: the answers in one calm list (each one a link back to its step), the consent naming the recipient, unticked.
-    const rows = steps.filter((x) => x.type === "choice" || x.type === "text").map((x) => {
+    const rows = steps.filter((x) => x.type === "choice" || x.type === "text" || x.type === "slots").map((x) => {
       const k = steps.indexOf(x), v = x.type === "choice" ? x.opts.find((o) => o.v === A[x.id])?.l : A[x.id];
       return v ? `<li><button type="button" class="fl-edit" data-goto="${k}"><span>${esc(x.q)}</span><b>${esc(v)}</b></button></li>` : "";
     }).join("");
@@ -87,14 +91,15 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
   // and on the budget band where the developer publishes a starting price (none published = never excluded).
   const plain = (t: string) => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
   const MAX: Record<string, number> = { "1": 300000, "2": 1e6, "3": 5e6, "4": Infinity };
-  function matches(): Bld[] {
+  // Prompt 41 §1: as the reader types; "here" when the place itself matches, "near" when a nearby name or the region does.
+  function matches(): { b: Bld; here: boolean }[] {
     if (!BL) return [];
     const q = plain(A.place || ""), cap = MAX[A.budget || ""] ?? Infinity;
     const inBudget = (b: Bld) => b.from == null || b.from <= cap;
-    if (!q) return BL.items.filter((b) => b.from != null && inBudget(b));
-    const words = ` ${q} `;
-    return BL.items.filter((b) => inBudget(b) && [b.place, b.muni, b.region, ...b.near].map(plain).filter(Boolean)
-      .some((f) => words.includes(` ${f} `) || (q.length >= 3 && f.includes(q))));
+    if (q.length < 3) return [];
+    const words = ` ${q} `, hit = (f: string) => !!f && (words.includes(` ${f} `) || f.includes(q));
+    return BL.items.filter(inBudget).map((b) => ({ b, here: [b.place, b.muni].map(plain).some(hit), near: [b.region, ...b.near].map(plain).some(hit) }))
+      .filter((x) => x.here || x.near).map(({ b, here }) => ({ b, here }));
   }
   function cards(list: Bld[]) {
     const T = BL!.labels;
@@ -102,10 +107,15 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
       ${b.photo ? `<img src="${esc(b.photo)}" alt="" width="800" height="533" loading="lazy" />` : ""}
       <div class="fl-bld-b"><p class="fl-bld-tag">${esc(T.sponsored)}</p><p class="fl-bld-n">${esc(b.name)}</p>
         <p class="fl-bld-m">${esc(b.place)}${b.typologies.length ? ` · ${esc(b.typologies.join(" · "))}` : ""}</p>
+        ${b.avail ? `<p class="fl-bld-m fl-bld-av">${esc(T.avail.replace("{n}", String(b.avail)))}</p>` : ""}
         <p class="fl-bld-p">${b.from != null ? `${esc(T.from)} ${esc(new Intl.NumberFormat(F.hidden.language || "pt", { maximumFractionDigits: 0 }).format(b.from))} €` : esc(T.price)}</p>
         <div class="fl-bld-a"><a class="fl-link" href="${esc(b.map)}">${esc(T.map)}</a>${b.visit ? `<a class="fl-btn" href="${esc(b.visit)}">${esc(T.visit)}</a>` : ""}</div></div></li>`).join("")}</ul>`;
   }
-  const matchBox = () => { const m = matches(); return m.length ? `<div class="fl-bldbox" data-blds-box><p class="fl-k">${esc(BL!.labels.match)}</p>${cards(m)}</div>` : `<div data-blds-box></div>`; };
+  const matchBox = () => {
+    const m = matches(); if (!m.length) return `<div data-blds-box></div>`;
+    const first = m.find((x) => x.here) ?? m[0], line = (first.here ? BL!.labels.here : BL!.labels.near).replace("{p}", first.b.place);
+    return `<div class="fl-bldbox" data-blds-box aria-live="polite"><p class="fl-k">${esc(line)}</p>${cards(m.map((x) => x.b))}</div>`;
+  };
   function buildingsScreen() {
     const T = BL!.labels;
     side(`${lwHead()}<div class="fl-step"><h2 class="fl-q" tabindex="-1">${esc(T.h)}</h2><p class="fl-lede">${esc(T.lede)}</p>${BL!.items.length ? cards(BL!.items) : `<p class="fl-lede">${esc(T.none)}</p>`}</div>`, () => go(i));
@@ -117,8 +127,7 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
     const ask = LW && (i === 0 || s.id === "nif") ? `<p class="fl-ask"><button type="button" class="fl-link" data-lawyer>${esc(i === 0 ? LW.labels.ask : LW.labels.legal)}</button></p>` : "";
     // "Ver novos empreendimentos" on the first screen (one tap to the list); matching buildings under the place question.
     const nb = BL && BL.items.length && i === 0 ? `<button type="button" class="fl-xopt" data-blds><span>${esc(BL.labels.open)}</span><i>${ARROW}</i></button>` : "";
-    const mb = BL && s.id === "place" ? matchBox() : "";
-    const html = `${head()}<div class="fl-step"><h2 id="fl-q" class="fl-q" tabindex="-1">${esc(s.q)}</h2>${i === 0 && F.lede ? `<p class="fl-lede">${esc(F.lede)}</p>` : ""}${body(s)}${mb}${nb}${ask}</div>`;
+    const html = `${head()}<div class="fl-step"><h2 id="fl-q" class="fl-q" tabindex="-1">${esc(s.q)}</h2>${i === 0 && F.lede ? `<p class="fl-lede">${esc(F.lede)}</p>` : ""}${body(s)}${nb}${ask}</div>`;
     swap(html, focus);
     url(i);
   }
@@ -164,8 +173,15 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
     el.querySelectorAll<HTMLButtonElement>("[data-chip]").forEach((b) => b.addEventListener("click", () => { if (inp) { inp.value = b.dataset.chip!; A[s.id] = inp.value; save(); } next(); }));
     el.querySelectorAll<HTMLInputElement>("[data-c]").forEach((x) => x.addEventListener("input", () => { A[x.dataset.c!] = x.value.trim(); save(); }));
     el.querySelectorAll<HTMLInputElement>("[data-c]").forEach((x) => x.addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); next(); } }));
+    // The advisor's slots (prompt 41 §2): the same picker as the request flow; the readable times are the answer.
+    const sp = el.querySelector<HTMLElement>("[data-slots]");
+    if (sp) {
+      const lang = F.hidden.language || "pt", locale = document.documentElement.lang || lang;
+      const get = (): Slot[] => { try { return JSON.parse(A._slots || "[]"); } catch { return []; } };
+      slotPicker(sp, { lang, locale, get, set: (v) => { A._slots = JSON.stringify(v); A[s.id] = v.map((x) => slotLabel(x, locale, lang as "pt").both).join(" · "); if (!v.length) delete A[s.id]; save(); } });
+    }
     el.querySelector("[data-next]")?.addEventListener("click", next);
-    el.querySelector("[data-skip]")?.addEventListener("click", () => { delete A[s.id]; save(); go(i + 1); });
+    el.querySelector("[data-skip]")?.addEventListener("click", () => { delete A[s.id]; if (s.type === "slots") delete A._slots; save(); go(i + 1); });
     el.querySelectorAll<HTMLButtonElement>("[data-goto]").forEach((b) => b.addEventListener("click", () => go(Number(b.dataset.goto))));
     const cb = el.querySelector<HTMLButtonElement>("[data-consent]"), send = el.querySelector<HTMLButtonElement>("[data-send]");
     cb?.addEventListener("click", (e) => {
@@ -244,15 +260,16 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
   }
 
   // ------------------------------------------------------------ sending
-  const route = () => F.id !== "concierge" ? "ok" : A.budget === "3" || A.budget === "4" ? "private" : A.when === "1" || A.when === "2" ? "ok" : "later";
-  const answerText = () => steps.filter((s) => s.type === "choice" || s.type === "text").map((s) => {
+  const route = () => F.id !== "concierge" ? "ok" : A.budget === "3" || A.budget === "4" ? "private" : A._slots && A._slots !== "[]" ? "ok" : "later";
+  const answerText = () => steps.filter((s) => s.type === "choice" || s.type === "text" || s.type === "slots").map((s) => {
     const v = s.type === "choice" ? s.opts.find((o) => o.v === A[s.id])?.l : A[s.id]; return v ? `${s.q} ${v}` : "";
   }).filter(Boolean);
   async function submit() {
     const btn = stage.querySelector<HTMLButtonElement>("[data-send]")!; const hp = stage.querySelector<HTMLInputElement>("[data-hp]")?.value || "";
     btn.disabled = true; btn.textContent = L.sending;
     let brief = ""; try { brief = sessionStorage.getItem("ip.brief") || ""; } catch { /* none */ }
-    const payload = { flow: F.id, project: q.get("project") || "", unit: q.get("unit") || "", ...F.hidden, answers: Object.fromEntries(steps.filter((s) => s.type === "choice" || s.type === "text").map((s) => [s.id, A[s.id] ?? ""])),
+    const payload = { flow: F.id, project: q.get("project") || "", unit: q.get("unit") || "", ...F.hidden, answers: Object.fromEntries(steps.filter((s) => s.type === "choice" || s.type === "text" || s.type === "slots").map((s) => [s.id, A[s.id] ?? ""])),
+      slots: (() => { try { return JSON.parse(A._slots || "[]"); } catch { return []; } })(),
       labels: answerText(), name: A.name || "", email: A.email || "", phone: A.phone || "", consent: A.consent === "1", budget: budgetEur || "", brief, page: location.pathname, hp };
     let ok = false;
     try { const r = await fetch("/api/request", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(payload) }); ok = r.ok; } catch { ok = false; }
