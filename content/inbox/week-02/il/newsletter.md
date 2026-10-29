@@ -23,7 +23,7 @@ thinking of a Portuguese mortgage? Three numbers apply at every bank in Portugal
 
 **45%.** Since August 1, 2026, monthly payments on all your loans should stay under 45% of net income.
 
-**40 or 35 years.** The longest term, depending on whether you're 35 or younger.
+**40 or 35 years.** The longest term: 40 years for buyers aged 35 or younger, 35 years after that.
 
 This week's article explains what to ask a bank: [read the article].
 

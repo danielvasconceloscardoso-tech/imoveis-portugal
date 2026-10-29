@@ -5055,9 +5055,9 @@ How to edit:
 - FR: NIF (numéro fiscal)
 
 ### st.docs.what
-- PT: Tem um número fiscal português, uma conta e, se não puder estar presente, uma procuração.
-- EN: You get a Portuguese tax number, an account and, if you cannot be there, a power of attorney.
-- FR: Vous obtenez un numéro fiscal portugais, un compte et, si vous ne pouvez pas être présent, une procuration.
+- PT: Tem um número fiscal português, uma conta e, se preferir assinar à distância, uma procuração.
+- EN: You get a Portuguese tax number, an account and, to sign from where you live, a power of attorney.
+- FR: Vous obtenez un numéro fiscal portugais, un compte et, pour signer depuis chez vous, une procuration.
 
 ### st.docs.h
 - PT: Os documentos
@@ -5816,6 +5816,16 @@ Design v2 home (prompt 32, D59). Every block: one to three sentences, at most 45
 - PT: Comprar ou vender, um passo de cada vez.
 - EN: Buying or selling, one step at a time.
 - FR: Acheter ou vendre, une étape à la fois.
+
+### paths.p
+- PT: Comprar, vender ou herdar a partir de onde vive. Uma pergunta de cada vez, cada etapa explicada.
+- EN: Buy, sell or inherit from where you live. One question at a time, each stage explained.
+- FR: Acheter, vendre ou hériter depuis chez vous. Une question à la fois, chaque étape expliquée.
+
+### paths.a
+- PT: Começar o Passo a passo
+- EN: Start Step by step
+- FR: Commencer le Pas à pas
 
 ### buy.h
 - PT: Comprar

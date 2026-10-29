@@ -2,8 +2,8 @@
    bottom and back, it sits on the visual viewport (--kb, --vvh from scripts/chrome.ts) so the keyboard never covers the
    field, inputs at 16 px or more so iOS never zooms, one question per screen (scripts/flow.ts). Loaded after flow.css. */
 html.sh-lock { overflow: hidden; }
-.tabbar a, .hd-cg, a[data-concierge] { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
-aside.sh input, aside.sh textarea, aside.sh select { font-size: max(16px, 1em); }
+.hd-cg, a[data-concierge] { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+aside.sh input, aside.sh textarea, aside.sh select { font-size: max(17px, 1em); }
 aside.sh .sh-in { -webkit-overflow-scrolling: touch; scroll-padding-bottom: 24px; }
 @media (max-width: 819px) {
   aside.sh { top: auto; left: 0; right: 0; bottom: var(--kb, 0px); width: auto; max-width: none;
@@ -17,8 +17,8 @@ aside.sh .sh-in { -webkit-overflow-scrolling: touch; scroll-padding-bottom: 24px
   aside.sh .sh-in { padding: 10px 20px calc(24px + env(safe-area-inset-bottom)); }
   aside.sh.kb .sh-in { padding-bottom: 24px; }
   aside.sh.kb .fl-stage { min-height: 0; }
-  aside.sh .fl-q { margin-top: 26px; font-size: 28px; }
-  aside.sh .fl-opts { margin-top: 20px; gap: 8px; }
+  aside.sh .fl-q { margin-top: 24px; font-size: 28px; }
+  aside.sh .fl-opts { margin-top: 24px; gap: 8px; }
   aside.sh .fl-opt { min-height: 56px; }
 }
 @media (max-width: 819px) and (prefers-reduced-motion: reduce) { aside.sh { transition: none; } }

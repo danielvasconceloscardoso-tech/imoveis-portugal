@@ -99,6 +99,9 @@ import DemoBar from "../components/DemoBar.astro";
                 {more.map((k) => <li><a href={pathFor(lang, ed, k)} aria-current={page === k ? "page" : undefined}>{c(`common.nav.${k}`, lang)}</a></li>)}
               </ul>
               <CountryBar lang={lang} ed={ed} href={(x) => pathFor(lang, x, page)} variant="menu" />
+              <p class="langs cmenu-langs" aria-label={c("common.language", lang)}>
+                {LANGS.map((l, i) => <>{i > 0 && <span aria-hidden="true">·</span>}<a href={urlFor(l)} hreflang={HTML_LANG[l]} lang={HTML_LANG[l]} aria-current={l === lang ? "true" : undefined}>{l.toUpperCase()}</a></>)}
+              </p>
               <div class="cact">
                 <a class="btn" href={subscribe}>{c("common.newsletter", lang)}</a>
                 <a class="btn ghost" href={pathFor(lang, ed, "consult")}>{c("consult.cta", lang)}</a>

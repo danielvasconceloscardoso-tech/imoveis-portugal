@@ -2,6 +2,7 @@
 // A Tally form (by ID) or a full embed URL (e.g. beehiiv). Until the form is configured, it renders a
 // button that opens an email to the brand mailbox (prompt 11: never show a placeholder or a broken form).
 // `brief`: partner enquiries, where BriefBox.astro may add the reader's qualified summary (prompt 28 §2b).
+// Prompt 43 (weight): the form's 1.7 MB of scripts load only when the reader opens it; until then, one button.
 import { config } from "../config";
 interface Props { id: string; title: string; cta: string; subject: string; hidden?: Record<string, string>; height?: number; brief?: boolean; }
 const { id, title, cta, subject, hidden = {}, height = 420, brief = false } = Astro.props;
@@ -12,5 +13,14 @@ const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${subj
 const mark = brief ? { "data-brief-target": "" } : {};
 ---
 {src
-  ? <div class="form-box"><iframe src={src} title={title} loading="lazy" style={`min-height:${height}px`} {...mark}></iframe></div>
+  ? <div class="form-box" data-embed><button type="button" class="btn" data-embed-open>{cta}</button><iframe data-base={src} title={title} hidden style={`min-height:${height}px`} {...mark}></iframe></div>
   : <a class="btn" href={mail} {...mark}>{cta}</a>}
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-embed]").forEach((box) => {
+    const f = box.querySelector("iframe")!, b = box.querySelector<HTMLButtonElement>("[data-embed-open]")!;
+    b.addEventListener("click", () => { if (!f.getAttribute("src")) f.src = f.dataset.base!; f.hidden = false; b.hidden = true; });
+    // A link to the form (#contacto) opens it too.
+    try { if (location.hash && box.closest(location.hash)) b.click(); } catch { /* not a selector */ }
+  });
+</script>

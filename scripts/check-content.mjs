@@ -37,6 +37,10 @@ const SLOP = [/\bdescubr[ae]\b/i, /\bexplor[ae]\b/i, /\bjornada\b/i, /sem compli
   // Voice v3 (prompt 17, D35): phrases that talk down to the reader or dramatise costs.
   /todos os agostos/i, /every august/i, /(tous les|chaque) mois d'ao[uû]t/i, /tratad[ao] de fora/i, /handled from abroad/i, /home from abroad/i,
   /g[ée]r[ée]e depuis l'[ée]tranger/i, /maison depuis l'[ée]tranger/i, /o pre[çc]o [ée] o in[ií]cio/i, /the price is (just )?the start/i, /le prix n'est qu'un d[ée]but/i,
+  // Prompt 43 §3 (D-tone, EDITORIAL_POLICY.md): deficit framing and AI tells, in all three languages.
+  /if you can'?t (go|be|travel)/i, /se não (puder|pode) (ir|estar|deslocar)/i, /si vous ne pouvez pas (vous rendre|être|aller)/i,
+  /in today'?s market/i, /\bnavigat(e|ing)\b/i, /\blandscape\b/i, /it'?s worth noting/i, /\bdive in\b/i, /\bwhether you'?re\b/i,
+  /vale a pena (notar|referir|sublinhar)/i, /\bquer seja\b.*\bquer\b/i, /il convient de noter/i, /\bque vous soyez\b/i, /\bplonge(z|ons) dans\b/i,
   /\bpor cima\b/i, /\bon top of the price\b/i, /\bon top, /i, /\ben plus du prix\b/i, /\bpar-dessus\b/i, /\bquem compra\b/i, /\bceux qui ach[eè]tent\b/i, /\bwhoever buys\b/i, /\ba buyer who\b/i];
 
 // Facts base
@@ -64,7 +68,8 @@ const errors = [];
 const err = (file, msg) => errors.push(`${relative(root, file)}: ${msg}`);
 const words = (s) => s.trim().split(/\s+/).filter(Boolean).length;
 
-function checkText(file, label, text) {
+function checkText(file, label, raw) {
+  const text = raw.replace(/\{\{[^}]+\}\}/g, "");  // link tokens ({{journey}}, {{post:id}}) are not wording
   if (/\[check/i.test(text)) err(file, `${label}: open [check]`);
   for (const re of BANNED) if (re.test(text)) err(file, `${label}: banned wording ${re}`);
   for (const re of ADVICE) if (re.test(text)) err(file, `${label}: advice wording ${re} (describe, do not advise)`);
@@ -168,7 +173,9 @@ for (const file of blogFiles) {
   if (cited.length < 5) err(file, `only ${cited.length} cited facts (at least 5)`);
   for (const id of [...cited, ...(fm.sources || [])]) if (!factIds.has(id)) err(file, `unknown fact id ${id}`);
   for (const [label, text] of [["title", fm.title || ""], ["description", fm.description || ""], ["short answer", fm.tldr || ""], ["body", m[2]]]) checkText(file, label, text);
-  for (const h of m[2].matchAll(/^## (.+)$/gm)) if (/\?\s*$/.test(h[1])) err(file, `heading "${h[1]}" is a question (VOICE.md)`);
+  // Prompt 43 §3: H2s may be the questions people search. FAQ structured data: exactly three short answers.
+  if (fm.faq && (!Array.isArray(fm.faq) || fm.faq.length !== 3 || fm.faq.some((x) => !x.q || !x.a))) err(file, "faq must list exactly three items with q and a");
+  for (const x of fm.faq || []) checkText(file, "faq", `${x.q} ${x.a}`);
 }
 // Design v2 copy (prompt 32, D59): the "home2" blocks of the copy deck, in PT, EN and FR. Banned words and shapes,
 // sentences of at most 25 words, blocks of at most 45, headlines of at most 8 words that are statements without a
