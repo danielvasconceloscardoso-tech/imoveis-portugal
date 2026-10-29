@@ -818,6 +818,8 @@
    "developer": "ID Investimentos Imobiliários",
    "devSlug": "id-investimentos-imobiliarios",
    "muni": "gondomar",
+   "region": "Norte",
+   "near": ["Porto", "Área Metropolitana do Porto", "Grande Porto"],
    "lon": -8.5367,
    "lat": 41.1501,
    "line": "55 apartments in three blocks on Avenida Dr. Mário Soares in Gondomar, T1 to T4, with gym, sauna and Turkish bath, library and coworking, a garden with a water mirror, and a private parking box, solar panels and EV charging for every unit.",

@@ -81,3 +81,24 @@
 .sh[hidden], .sh-back[hidden] { display: none !important; }
 .fl .fl-in:focus-visible { outline: none; } .fl .fl-area:focus-visible { outline: none; }
 .fl .fl-q:focus-visible { outline: none; }
+
+/* Listed buildings in the concierge (prompt 39 §3) */
+.fl-xopt { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; min-height: 60px; margin-top: 18px; padding: 16px 20px !important; border-radius: 18px; text-align: left;
+  background: none !important; box-shadow: inset 0 0 0 1.5px #d9d5cc; color: var(--fi) !important; font-size: 17px !important; font-weight: 600 !important; cursor: pointer; transition: box-shadow .2s var(--fe), transform .22s var(--fe); }
+.fl-xopt:hover { box-shadow: inset 0 0 0 1.5px var(--fa); }
+.fl-xopt:active { transform: scale(.985); }
+.fl-xopt i { width: 22px; height: 22px; flex: none; transform: rotate(180deg); }
+.fl-xopt svg, .fl-bld svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.fl-bldbox { margin-top: 28px; }
+.fl-blds { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 14px; }
+.fl-bld { display: grid; grid-template-columns: 1fr; border-radius: 18px; overflow: hidden; background: var(--fs); }
+.fl-bld img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; background: #e5e2db; }
+.fl-bld-b { padding: 16px 18px 18px; }
+.fl-bld-b p { margin: 0; }
+.fl-bld-tag { font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: #6b6a65; }
+.fl-bld-n { margin-top: 4px !important; font-size: 20px; font-weight: 700; color: var(--fi); }
+.fl-bld-m { margin-top: 2px !important; font-size: 15px; color: #4a4945; }
+.fl-bld-p { margin-top: 6px !important; font-size: 15px; font-weight: 600; color: var(--fi); }
+.fl-bld-a { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-top: 14px; }
+.fl-bld-a .fl-btn { min-height: 46px; padding: 0 20px !important; font-size: 15px !important; }
+@media (min-width: 700px) { .fl-bld { grid-template-columns: 220px 1fr; } .fl-bld img { height: 100%; aspect-ratio: auto; min-height: 160px; } }

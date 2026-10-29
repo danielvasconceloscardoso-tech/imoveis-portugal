@@ -21,6 +21,10 @@ export const config = {
   // Empty = the button opens an email to the brand mailbox instead; never a broken link (prompt 11).
   calls: { intro: "", plan: "" },
 
+  // The qualified advisor's hours for visits and calls (operator, 29 Oct 2026; prompt 41): Monday (1) to Saturday (6),
+  // 09:00 to 19:00 Portugal time in 30-minute slots, the last at 18:30; no Sundays. Used by the Concierge and the request flow.
+  advisorHours: { days: [1, 2, 3, 4, 5, 6], from: "09:00", to: "19:00", step: 30 },
+
   // A real listing from the partner agency, with its permission (prompt 11, home "Esta semana").
   // null = the home shows a worked example with real tax figures instead.
   listing: null as null | { title: Record<string, string>; place: string; price: number; url: string; photo: string },

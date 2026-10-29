@@ -5,6 +5,7 @@
 import { pathFor, type Lang, type EdCode } from "../i18n";
 import { config } from "../config";
 import "../styles/flow.css";
+import "../styles/slots.css";
 
 type Units = { typology: string; total: number; forSale: number; reserved?: number; sold?: number };
 type Block = { id: string; units: Units[] };
@@ -152,7 +153,6 @@ const X = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L
   .rq .fl-q { margin-top: 26px; }
   .rq .fl-opt small { display: block; margin-top: 3px; font-size: 13px; font-weight: 500; opacity: .7; }
   .rq .fl-opt[aria-checked="true"] small { opacity: .8; }
-  .rq-bk { margin: 22px 0 0; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--fm); }
   .rq-bk + .fl-opts { margin-top: 10px; }
   .rq .rq-units { grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); }
   .rq .rq-units .fl-opt { min-height: 64px; padding: 12px 14px !important; }
@@ -161,32 +161,13 @@ const X = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L
   .rq-seg { display: inline-flex; gap: 4px; margin-top: 20px; padding: 4px; border-radius: 14px; background: var(--fs); }
   .rq-seg button { padding: 10px 18px !important; border-radius: 11px; font-weight: 600 !important; font-size: 15px !important; }
   .rq-seg button[aria-pressed="true"] { background: #fff !important; box-shadow: 0 1px 4px rgba(0, 0, 0, .1); }
-  .rq-days { display: flex; gap: 8px; margin: 10px -26px 0; padding: 4px 26px 8px; overflow-x: auto; scrollbar-width: none; scroll-snap-type: x proximity; }
-  .rq-days::-webkit-scrollbar { display: none; }
-  .rq-day { flex: none; min-width: 62px; padding: 10px 12px !important; border-radius: 16px; background: var(--fs) !important; text-align: center; scroll-snap-align: start; transition: background-color .2s var(--fe), color .2s var(--fe); }
-  .rq-day span { display: block; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--fm); }
-  .rq-day b { display: block; margin-top: 4px; font-size: 20px; font-weight: 600; }
-  .rq-day[aria-pressed="true"] { background: var(--fi) !important; color: #fff !important; } .rq-day[aria-pressed="true"] span { color: rgba(255, 255, 255, .7); }
-  .rq-times { display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 8px; margin-top: 10px; }
-  .rq-time { padding: 12px 10px !important; border-radius: 14px; background: var(--fs) !important; text-align: left; transition: background-color .2s var(--fe); }
-  .rq-time b { display: block; font-size: 17px; font-weight: 600; } .rq-time span { display: block; margin-top: 2px; font-size: 12px; color: var(--fm); }
-  .rq-time[aria-pressed="true"] { background: var(--fa) !important; color: #fff !important; } .rq-time[aria-pressed="true"] span { color: rgba(255, 255, 255, .8); }
-  .rq-time:disabled { opacity: .35; cursor: default; }
-  .rq-picked { list-style: none; margin: 8px 0 0; padding: 0; border-top: 1px solid #ebe8e1; }
-  .rq-picked li { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 11px 2px; border-bottom: 1px solid #ebe8e1; font-size: 14.5px; }
-  .rq-picked li b { font-weight: 600; } .rq-picked li small { display: block; color: var(--fm); font-size: 12.5px; margin-top: 2px; }
-  .rq-picked .rq-rm { width: 30px; height: 30px; border-radius: 50%; background: var(--fs) !important; display: grid; place-items: center; flex: none; }
-  .rq-picked .rq-rm svg { width: 14px; height: 14px; }
-  .rq-hint { margin: 10px 0 0; font-size: 14px; color: var(--fm); }
   .rq-tel { display: flex; gap: 12px; align-items: flex-end; } .rq-tel .fl-in:first-child { width: 5.2em; flex: none; } .rq-tel .fl-in:last-child { flex: 1; min-width: 0; }
   .rq .fl-in { font-size: 20px; }
   .rq-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-  .rq-pill { padding: 11px 16px !important; border-radius: 999px; background: var(--fs) !important; font-size: 15px !important; font-weight: 600 !important; transition: background-color .2s var(--fe), color .2s var(--fe); }
-  .rq-pill[aria-pressed="true"] { background: var(--fi) !important; color: #fff !important; }
   .rq-top-skip { float: right; margin-top: 30px; }
   .rq-next { margin: 14px 0 0; font-size: 15px; line-height: 1.6; color: var(--fi); max-width: 32em; }
   .rq-demo-note { display: inline-block; margin: 14px 0 0; padding: 8px 12px; border-radius: 10px; background: #f0e6c8; color: #6b5414; font-size: 14px; font-weight: 600; }
-  @media (max-width: 819px) { .rq-days { margin: 10px -20px 0; padding: 4px 20px 8px; } .rq-long { display: none; } .rq-short { display: inline; } }
+  @media (max-width: 819px) { .rq-long { display: none; } .rq-short { display: inline; } }
 
   /* What the advisor receives: our email, inside a quiet mail frame. */
   .rq-ad { position: fixed; inset: 0; z-index: 80; display: grid; place-items: center; padding: 16px; background: rgba(12, 14, 18, .4); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);

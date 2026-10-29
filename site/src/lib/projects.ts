@@ -9,7 +9,7 @@ export type Project = { id: string; name: string; developer: string; devSlug?: s
   lines?: Partial<Record<"pt" | "en" | "fr", string>>; from: number | null; typologies: string[]; delivery?: string | null; url?: string; partner?: boolean; demo?: string; checked?: string; gallery?: string[]; credits?: string[]; units?: Unit[]; sources?: string[]; hideRefs?: boolean;
   // Prompt 38 (Marble Terrace): a partner still negotiating ("pending") shows on the preview only; availability by block and typology.
   pending?: boolean; summary?: Partial<Record<"pt" | "en" | "fr", string>>; features?: (Record<"pt" | "en" | "fr", string> & { card?: boolean })[];
-  blocks?: Block[]; availabilityChecked?: string; availabilitySource?: string; availabilityNote?: Partial<Record<"pt" | "en" | "fr", string>> };
+  blocks?: Block[]; region?: string; near?: string[]; availabilityChecked?: string; availabilitySource?: string; availabilityNote?: Partial<Record<"pt" | "en" | "fr", string>> };
 export type Block = { id: string; units: { typology: string; total: number; forSale: number; soon?: number; reserved: number; sold: number }[] };
 const ALL: Project[] = JSON.parse(readFileSync(join(process.cwd(), "..", "content", "developers", "projects.json"), "utf8")).projects;
 // A pending partner is never built on the live branch (Cloudflare Workers Builds sets WORKERS_CI_BRANCH).

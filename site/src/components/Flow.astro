@@ -6,20 +6,47 @@ import { config } from "../config";
 import { type Lang, type EdCode } from "../i18n";
 import { c } from "../lib/copy";
 import "../styles/flow.css";
+import "../styles/slots.css";
 import "../styles/lawyer.css";
 import { lawyerCard } from "../lib/lawyers";
+import { PROJECTS, showcases, img } from "../lib/projects";
+import { PRICES } from "../lib/prices";
+import { SLUGS, pathFor } from "../i18n";
 
 interface Props { lang: Lang; ed: EdCode; flow: FlowId; param?: string; hidden?: Record<string, string>; sheet?: boolean; }
 const { lang, ed, flow, param = "step", hidden = {}, sheet = false } = Astro.props;
 const cfg = flowConfig(flow, lang, ed, hidden);
 // The partner lawyer card (prompt 37 §4, D64): only in the concierge; sample entries only on preview builds.
 const lawyer = flow === "concierge" ? lawyerCard(lang) : null;
+// Listed buildings in the concierge (prompt 39 §3): projects.json via lib/projects (the same source as the map and the
+// showcase pages). "Pedir visita privada" opens the showcase's own request sheet (#pedir, D66): no second form here.
+const BL_T = {
+  pt: { open: "Ver novos empreendimentos", h: "Novos empreendimentos", lede: "Edifícios novos apresentados por promotores parceiros.", here: "Disponível agora em {p}", near: "Perto, em {p}", avail: "{n} para venda agora", match: "Empreendimentos nesta zona", price: "Preço sob consulta", from: "Desde", map: "Ver no mapa", visit: "Pedir visita privada", none: "Ainda não há empreendimentos listados nesta zona." },
+  en: { open: "See new developments", h: "New developments", lede: "New buildings presented by partner developers.", here: "Available now in {p}", near: "Nearby, in {p}", avail: "{n} for sale now", match: "Developments in this area", price: "Price on request", from: "From", map: "See on the map", visit: "Request a private visit", none: "No listed developments in this area yet." },
+  fr: { open: "Voir les programmes neufs", h: "Programmes neufs", lede: "Immeubles neufs présentés par des promoteurs partenaires.", here: "Disponible maintenant à {p}", near: "À proximité, à {p}", avail: "{n} en vente maintenant", match: "Programmes dans cette zone", price: "Prix sur demande", from: "À partir de", map: "Voir sur la carte", visit: "Demander une visite privée", none: "Pas encore de programme listé dans cette zone." },
+}[lang];
+const withPage = new Set(showcases(PROJECTS).map((ps) => ps[0].id));
+const blds = flow === "concierge" && PROJECTS.length ? {
+  labels: { ...BL_T, sponsored: c("common.sponsored", lang) },
+  items: PROJECTS.map((p) => {
+    const host = showcases(PROJECTS).find((ps) => ps.some((x) => x.id === p.id));
+    return {
+      id: p.id, name: p.name, muni: p.muni, place: (PRICES.munis[p.muni] as any)?.n ?? p.muni, region: p.region ?? "", near: p.near ?? [],
+      typologies: p.typologies, from: p.from,
+      // What is available now, from the availability table (units marked for sale); null where the developer publishes none.
+      avail: p.blocks ? p.blocks.reduce((n, b) => n + b.units.reduce((m, u) => m + u.forSale, 0), 0) : null, photo: img(p.render ?? p.gallery?.[0], 800),
+      map: `${pathFor(lang, ed, "map")}?place=${p.muni}`,
+      visit: host && withPage.has(host[0].id) ? `/${lang}/${ed}/${SLUGS[lang].partners}/${host[0].devSlug}/${host[0].muni}/#pedir` : "",
+    };
+  }),
+} : null;
 const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${cfg.title} (${ed} · ${lang})`)}`;
 ---
 <div class="fl" data-flow={flow} data-param={param} {...(sheet ? { "data-sheet-flow": "" } : {})}>
   <div class="fl-stage" data-flow-stage></div>
   <noscript><p class="fl-lede">{cfg.lede}</p><p><a class="fl-btn" href={mail}>{c("flow.fallback.btn", lang)}</a></p></noscript>
   <script type="application/json" data-flow-cfg set:html={JSON.stringify(cfg)} />
+  {blds && <script type="application/json" data-flow-blds set:html={JSON.stringify(blds).replace(/</g, "\\u003c")} />}
   {lawyer && <script type="application/json" data-flow-lawyer set:html={JSON.stringify(lawyer).replace(/</g, "\\u003c")} />}
 </div>
 
