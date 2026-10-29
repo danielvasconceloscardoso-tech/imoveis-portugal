@@ -1,46 +1,166 @@
 ---
-// Root: choose a language and an edition. Returning visitors go straight to their saved choice (D18).
-import "../styles/v2.css";
-import { ED_ORDER, LANGS, LANG_NAME, HTML_LANG, pathFor } from "../i18n";
-import { c, edName } from "../lib/copy";
+// The opening page (prompt 40): the home hero film full screen, the name, the slogan, one question ("Where do you live?")
+// and the six editions as one calm row. The question follows the browser language (PT, FR, else EN) with a quiet
+// PT · EN · FR switch; a returning visitor also sees "Continue to <edition>". Never an automatic redirect.
+import "@fontsource-variable/manrope/wght.css";
+import "@fontsource-variable/playfair-display/wght.css";
+import serif from "@fontsource-variable/playfair-display/files/playfair-display-latin-wght-normal.woff2?url";
+import sans from "@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2?url";
+import { ED_ORDER, LANGS, HTML_LANG, pathFor, type Lang, type EdCode } from "../i18n";
+import { edName } from "../lib/copy";
 import { config } from "../config";
+
+const host = `https://${config.primaryDomain}`;
+const title = "Imóveis Portugal: how to buy or sell a home in Portugal, from anywhere";
+const description = "How to buy or sell a home in Portugal, from anywhere: editions for Luxembourg, France, Switzerland, Brazil, the United States and Israel.";
+const Q: Record<Lang, string> = { pt: "Onde vive?", en: "Where do you live?", fr: "Où vivez-vous ?" };
+const GO: Record<Lang, string> = { pt: "Continuar: {e}", en: "Continue to {e}", fr: "Continuer : {e}" };
+const LEGAL: Record<Lang, [string, string]> = { pt: ["Privacidade", "Aviso legal"], en: ["Privacy", "Legal notice"], fr: ["Confidentialité", "Mentions légales"] };
+// The legal pages are per edition: the edition most readers of each language come from.
+const LEGAL_ED: Record<Lang, EdCode> = { pt: "lu", en: "us", fr: "fr" };
+const names = Object.fromEntries(LANGS.map((l) => [l, Object.fromEntries(ED_ORDER.map((e) => [e, edName(e, l)]))]));
+const paths = Object.fromEntries(LANGS.map((l) => [l, Object.fromEntries(ED_ORDER.map((e) => [e, pathFor(l, e, "home")]))]));
 ---
 <!doctype html>
-<html lang="pt-PT">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Imóveis Portugal</title>
-    <meta name="description" content="Comprar casa em Portugal a partir do estrangeiro. Buying a home in Portugal from abroad. Acheter au Portugal depuis l'étranger." />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
     {!config.launchReady && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="canonical" href={`${host}/`} />
+    {LANGS.flatMap((l) => ED_ORDER.map((e) => <link rel="alternate" hreflang={`${l}-${e.toUpperCase()}`} href={`${host}${pathFor(l, e, "home")}`} />))}
+    <link rel="alternate" hreflang="x-default" href={`${host}/`} />
+    <link rel="preload" href="/video/hero-portugal-poster.webp?v=6e9a1bc" as="image" fetchpriority="high" />
+    <link rel="preload" href={serif} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={sans} as="font" type="font/woff2" crossorigin />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="Imóveis Portugal" />
+    <meta property="og:url" content={`${host}/`} />
+    <meta property="og:image" content={`${host}/video/hero-portugal-poster.webp?v=6e9a1bc`} />
+    {/* The question's language before the first paint: the saved choice, else the browser's (PT, FR, else EN). */}
     <script is:inline>
-      try {
-        var l = localStorage.getItem("ip-lang"), e = localStorage.getItem("ip-ed");
-        if (["pt", "en", "fr"].indexOf(l) > -1 && ["lu", "fr", "ch", "br", "us", "il"].indexOf(e) > -1) location.replace("/" + l + "/" + e + "/");
-      } catch (_) {}
+      (function () {
+        var l; try { l = localStorage.getItem("ip-lang"); } catch (_) {}
+        if (["pt", "en", "fr"].indexOf(l) < 0) { var n = (navigator.language || "en").slice(0, 2).toLowerCase(); l = n === "pt" || n === "fr" ? n : "en"; }
+        document.documentElement.dataset.l = l; document.documentElement.classList.add("js");
+      })();
     </script>
   </head>
   <body>
-    <header class="hd"><div class="frame"><span class="word">Imóveis Portugal</span></div></header>
-    <main id="main" class="frame" style="padding-top:48px;padding-bottom:64px">
-      <div class="cards">
-        {LANGS.map((l) => (
-          <section class="card" lang={HTML_LANG[l]} aria-labelledby={`h-${l}`}>
-            <p class="label" style="margin:0">{LANG_NAME[l]}</p>
-            <h2 id={`h-${l}`} style="font-size:1.5rem">{c(`root.h.${l}`, l)}</h2>
-            <ul style="list-style:none;padding:0;margin:8px 0 0;display:grid;gap:6px">
-              {ED_ORDER.map((ed) => (<li><a href={pathFor(l, ed, "home")} data-lang={l}>{edName(ed, l)}</a></li>))}
-            </ul>
-          </section>
-        ))}
-      </div>
+    <div class="op-media" aria-hidden="true">
+      <picture>
+        <source type="image/avif" srcset="/video/hero-portugal-poster.avif?v=6e9a1bc" />
+        <img src="/video/hero-portugal-poster.webp?v=6e9a1bc" width="1280" height="720" alt="" fetchpriority="high" />
+      </picture>
+      <video muted loop playsinline preload="none" data-film></video>
+    </div>
+
+    <nav class="op-langs" aria-label="Language · Língua · Langue">
+      {LANGS.map((l, i) => <>{i > 0 && <span aria-hidden="true">·</span>}<button type="button" data-set={l} lang={HTML_LANG[l]}>{l.toUpperCase()}</button></>)}
+    </nav>
+
+    <main class="op">
+      <h1 class="op-name op-in" style="--d:0">Imóveis Portugal</h1>
+      <p class="op-slogan op-in" lang="en" style="--d:1">How to buy or sell a home in Portugal, from anywhere.</p>
+      {LANGS.map((l) => (
+        <section class="op-pick" data-for={l} lang={HTML_LANG[l]} aria-labelledby={`q-${l}`}>
+          <h2 id={`q-${l}`} class="op-q op-in" style="--d:2">{Q[l]}</h2>
+          <p class="op-go op-in" style="--d:2.5" data-go hidden><a href={paths[l].lu} data-lang={l}></a></p>
+          <ul class="op-row op-in" style="--d:3">
+            {ED_ORDER.map((e) => <li><a href={paths[l][e]} data-lang={l} data-ed={e}>{names[l][e]}</a></li>)}
+          </ul>
+        </section>
+      ))}
     </main>
-    <script is:inline>
+
+    <footer class="op-foot">
+      <p>Luxembourg · France · Suisse · Brasil · USA · Israel</p>
+      <p>
+        <a href={`mailto:${config.contactEmail}`}>{config.contactEmail}</a>
+        {LANGS.map((l) => (
+          <span data-for={l} lang={HTML_LANG[l]}> · <a href={pathFor(l, LEGAL_ED[l], "privacy")}>{LEGAL[l][0]}</a> · <a href={pathFor(l, LEGAL_ED[l], "legal")}>{LEGAL[l][1]}</a></span>
+        ))}
+      </p>
+    </footer>
+
+    <script is:inline define:vars={{ names, GO, paths }}>
+      var root = document.documentElement;
+      function setLang(l) {
+        root.dataset.l = l;
+        document.querySelectorAll("[data-set]").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.set === l)); });
+      }
+      setLang(root.dataset.l || "en");
+      document.querySelectorAll("[data-set]").forEach(function (b) { b.addEventListener("click", function () { setLang(b.dataset.set); try { localStorage.setItem("ip-lang", b.dataset.set); } catch (_) {} }); });
+      // A returning visitor: one more line, never a redirect.
+      var sl, se; try { sl = localStorage.getItem("ip-lang"); se = localStorage.getItem("ip-ed"); } catch (_) {}
+      if (["lu", "fr", "ch", "br", "us", "il"].indexOf(se) > -1) {
+        document.querySelectorAll("[data-go]").forEach(function (p) {
+          var a = p.querySelector("a"), l = a.dataset.lang, gl = ["pt", "en", "fr"].indexOf(sl) > -1 ? sl : l;
+          a.href = paths[gl][se]; a.textContent = GO[l].replace("{e}", names[l][se]); a.dataset.ed = se; a.dataset.lang = gl; p.hidden = false;
+        });
+      }
       document.addEventListener("click", function (e) {
-        var a = e.target.closest && e.target.closest("a[data-lang]");
-        if (a) try { localStorage.setItem("ip-lang", a.dataset.lang); } catch (_) {}
+        var a = e.target.closest && e.target.closest("a[data-ed]");
+        if (a) try { localStorage.setItem("ip-lang", a.dataset.lang); localStorage.setItem("ip-ed", a.dataset.ed); } catch (_) {}
+      });
+      // The film after the page has loaded, and only on a decent connection without reduced motion: the poster stays otherwise.
+      var v = document.querySelector("[data-film]"), c = navigator.connection || {};
+      var still = matchMedia("(prefers-reduced-motion: reduce)").matches || c.saveData || /(^|-)2g$/.test(c.effectiveType || "");
+      if (v && !still) addEventListener("load", function () {
+        v.src = "/video/hero-portugal.mp4?v=6e9a1bc";
+        v.addEventListener("playing", function () { v.classList.add("on"); }, { once: true });
+        var p = v.play(); if (p && p.catch) p.catch(function () {
+          var kick = function () { v.play().catch(function () {}); };
+          ["touchstart", "pointerdown", "scroll", "keydown"].forEach(function (g) { addEventListener(g, kick, { once: true, passive: true }); });
+        });
       });
     </script>
+
+    <style is:global>
+      :root { --serif: "Playfair Display Variable", Georgia, serif; --sans: "Manrope Variable", system-ui, sans-serif; color-scheme: dark; }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; min-height: 100%; background: #0d1112; color: #fff; }
+      body { font: 400 16px/1.5 var(--sans); min-height: 100svh; display: flex; flex-direction: column; -webkit-font-smoothing: antialiased; }
+      .op-media { position: fixed; inset: 0; z-index: 0; overflow: hidden; background: #0d1112; }
+      .op-media img, .op-media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+      .op-media video { opacity: 0; transition: opacity 1.2s ease; }
+      .op-media video.on { opacity: 1; }
+      /* Legibility over any frame of the film: a quiet veil, darker at the bottom. */
+      .op-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8,10,12,.4) 0%, rgba(8,10,12,.34) 45%, rgba(8,10,12,.74) 100%); }
+      .op-langs { position: fixed; z-index: 2; top: max(14px, env(safe-area-inset-top)); right: max(16px, env(safe-area-inset-right)); display: flex; align-items: center; gap: 4px; font: 500 13px/1 var(--sans); letter-spacing: .12em; color: rgba(255,255,255,.7); }
+      .op-langs button { font: inherit; letter-spacing: inherit; color: rgba(255,255,255,.8); background: none; border: 0; padding: 14px 6px; cursor: pointer; }
+      .op-langs button[aria-pressed="true"] { color: #fff; text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 1px; }
+      .op { position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 96px 20px 40px; }
+      .op-name { margin: 0; font: 400 clamp(2.9rem, 1.6rem + 5.4vw, 6.2rem)/1.02 var(--serif); letter-spacing: -.015em; text-shadow: 0 1px 24px rgba(0,0,0,.25); }
+      .op-slogan { margin: 18px 0 0; font: 300 clamp(.95rem, .9rem + .3vw, 1.15rem)/1.5 var(--sans); letter-spacing: .02em; color: rgba(255,255,255,.9); }
+      .op-pick { display: none; margin-top: clamp(56px, 9vh, 104px); width: 100%; }
+      html:not(.js) .op-pick[data-for="en"], html[data-l="pt"] .op-pick[data-for="pt"], html[data-l="en"] .op-pick[data-for="en"], html[data-l="fr"] .op-pick[data-for="fr"] { display: block; }
+      .op-foot [data-for] { display: none; }
+      html:not(.js) .op-foot [data-for="en"], html[data-l="pt"] .op-foot [data-for="pt"], html[data-l="en"] .op-foot [data-for="en"], html[data-l="fr"] .op-foot [data-for="fr"] { display: inline; }
+      .op-q { margin: 0 0 26px; font: 400 clamp(1.35rem, 1.1rem + .9vw, 1.9rem)/1.2 var(--serif); }
+      .op-go { margin: 0 0 22px; }
+      .op-go a { color: #fff; font: 500 15px/1.4 var(--sans); letter-spacing: .02em; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.7); padding-bottom: 3px; }
+      .op-row { list-style: none; margin: 0 auto; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px clamp(22px, 3vw, 44px); max-width: 980px; }
+      .op-row a { position: relative; display: inline-block; padding: 12px 2px; color: #fff; text-decoration: none; font: 400 clamp(1rem, .95rem + .3vw, 1.2rem)/1.2 var(--sans); letter-spacing: .01em; }
+      .op-row a::after { content: ""; position: absolute; left: 2px; right: 2px; bottom: 6px; height: 1px; background: #fff; transform: scaleX(0); transition: transform .35s ease; }
+      .op-row a:hover::after, .op-row a:focus-visible::after { transform: scaleX(1); }
+      a:focus-visible, button:focus-visible { outline: 2px solid #fff; outline-offset: 4px; border-radius: 2px; }
+      .op-foot { position: relative; z-index: 1; padding: 0 20px max(20px, env(safe-area-inset-bottom)); text-align: center; font: 400 12px/1.6 var(--sans); color: rgba(255,255,255,.75); }
+      .op-foot p { margin: 2px 0; } .op-foot a { color: inherit; }
+      @media (max-width: 640px) {
+        .op-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; max-width: 420px; }
+        .op-row li:nth-child(n + 4) { border-top: 1px solid rgba(255,255,255,.24); }
+        .op-row a { padding: 14px 2px; font-size: 15px; }
+      }
+      /* The name, slogan, question and row arrive one after another (about 1.2 s); nothing bounces. */
+      @media (prefers-reduced-motion: no-preference) {
+        .op-in { animation: op-in .7s cubic-bezier(.2, .7, .2, 1) both; animation-delay: calc(var(--d) * 170ms); }
+        @keyframes op-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+      }
+    </style>
   </body>
 </html>
