@@ -102,3 +102,6 @@
 .fl-bld-a { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-top: 14px; }
 .fl-bld-a .fl-btn { min-height: 46px; padding: 0 20px !important; font-size: 15px !important; }
 @media (min-width: 700px) { .fl-bld { grid-template-columns: 220px 1fr; } .fl-bld img { height: 100%; aspect-ratio: auto; min-height: 160px; } }
+/* The closing line under the next steps (prompt 42): one quiet paragraph, two text links, nothing else. */
+.fl-more { margin: 36px 0 0; max-width: 34em; font-size: 15px; line-height: 1.65; color: var(--fm); }
+.fl-more a { color: var(--fi); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }

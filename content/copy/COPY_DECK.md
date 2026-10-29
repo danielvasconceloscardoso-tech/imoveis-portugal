@@ -6305,6 +6305,21 @@ Prompt 35 §3 (D61): the requests as one question at a time (concierge, partner 
 - EN: Over €5M
 - FR: Plus de 5 M€
 
+### more
+- PT: Até lá, se lhe for útil, o Passo a passo e os nossos artigos explicam cada etapa. Na conversa, esclarecemos o resto, com calma.
+- EN: Until then, should it help, our Step by step and articles walk through each stage. Everything else, we'll go through together, at your pace.
+- FR: D'ici là, si cela vous est utile, notre Pas à pas et nos articles présentent chaque étape. Nous verrons le reste ensemble, à votre rythme.
+
+### more.path
+- PT: Passo a passo
+- EN: Step by step
+- FR: Pas à pas
+
+### more.articles
+- PT: Artigos
+- EN: Articles
+- FR: Articles
+
 ### c.purpose
 - PT: Para quê?
 - EN: What is it for?

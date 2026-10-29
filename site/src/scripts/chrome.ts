@@ -52,7 +52,7 @@ export function initChrome() {
   // transition and the sheet looked as if nothing happened), the menu left open over it, a link handler in the bubble
   // phase that any other handler could swallow, and taps made before this module ran (they now wait in a small inline
   // shim, Chrome.astro, instead of leaving for the concierge page).
-  const w = window as unknown as { __ipCgShim?: EventListener; __ipCgPending?: string; __ipCgReady?: boolean };
+  const w = window as unknown as { __ipCgShim?: EventListener; __ipCgPending?: string; __ipCgReady?: boolean; __ipCgStart?: (o: { ed: string; door: string; budget: number }) => boolean };
   const sh = document.querySelector<HTMLElement>("[data-cg-sheet]"), back = document.querySelector<HTMLElement>("[data-cg-back]");
   if (w.__ipCgShim) document.removeEventListener("click", w.__ipCgShim, true);
   if (!sh || !back) { if (w.__ipCgPending) location.href = w.__ipCgPending; return; }
@@ -84,6 +84,15 @@ export function initChrome() {
     if (changed) history.replaceState(null, "", `${location.pathname}?${p}${location.hash}`);
     if (changed && flow) { flowEl.querySelector("[data-flow-stage]")!.innerHTML = ""; (flowEl as any).__flow = null; flow = null; }
     open(e);
+  };
+  // The home bar's "Começar" (prompt 42): the sheet opens on this page with the edition, buy or sell and the budget
+  // already answered (scripts/flow.ts reads cg=home, ed, door and budget, skips those steps and drops ed, door, cg).
+  w.__ipCgStart = (o) => {
+    const p = new URLSearchParams(location.search);
+    p.set("cg", "home"); p.set("ed", o.ed); p.set("door", o.door); o.budget ? p.set("budget", String(o.budget)) : p.delete("budget"); p.delete("concierge");
+    history.replaceState(null, "", `${location.pathname}?${p}${location.hash}`);
+    if (flow) { flowEl.querySelector("[data-flow-stage]")!.innerHTML = ""; (flowEl as any).__flow = null; flow = null; }
+    sh.classList.remove("is-open"); open(); return true;
   };
   const cgPath = document.querySelector<HTMLAnchorElement>("a[data-concierge]")?.pathname;
   document.addEventListener("click", (e) => {
