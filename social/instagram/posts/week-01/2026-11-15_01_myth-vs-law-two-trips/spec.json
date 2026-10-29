@@ -1,0 +1,26 @@
+{
+ "pt": {
+  "format": "myth-vs-law",
+  "kicker": "Mito e lei",
+  "h": "Comprar a partir de fora não pede duas viagens.",
+  "myth": "Tem de vir duas vezes: uma para o NIF, outra para a escritura.",
+  "law": "O NIF pede-se online, através de um representante legal. A escritura assina-se com uma procuração apostilada ou feita no consulado.",
+  "source": "Fontes: folheto NIF da AT; Consulado-Geral de Portugal em Newark, Procuração"
+ },
+ "en": {
+  "format": "myth-vs-law",
+  "kicker": "Myth and law",
+  "h": "Buying from abroad doesn't take two trips.",
+  "myth": "You have to fly in twice: once for the NIF, once for the deed.",
+  "law": "The NIF is requested online through a legal representative. The deed can be signed with a power of attorney, apostilled or made at a consulate.",
+  "source": "Sources: AT NIF leaflet; Consulate General of Portugal in Newark, power of attorney"
+ },
+ "fr": {
+  "format": "myth-vs-law",
+  "kicker": "Mythe et loi",
+  "h": "Acheter depuis l'étranger ne demande pas deux voyages.",
+  "myth": "Il faut venir deux fois : une pour le NIF, une pour l'acte.",
+  "law": "Le NIF se demande en ligne, par un représentant légal. L'acte se signe avec une procuration apostillée ou faite au consulat.",
+  "source": "Sources : brochure NIF de l'AT ; Consulat général du Portugal à Newark, procuration"
+ }
+}

@@ -1,0 +1,146 @@
+{
+ "pt": {
+  "source": "Fontes: Lei Geral Tributária, art. 19.º; folheto NIF da AT; BOFiP (3916); IRS (FBAR); Receita Federal (IRPF)",
+  "slides": [
+   {
+    "format": "text",
+    "kicker": "Onde vive",
+    "big": "6",
+    "h": "Seis países, um NIF e uma regra que muda."
+   },
+   {
+    "format": "text",
+    "kicker": "Luxemburgo e França",
+    "h": "Na UE, o representante fiscal é facultativo.",
+    "body": "O NIF pede-se da mesma forma em todo o lado."
+   },
+   {
+    "format": "text",
+    "kicker": "Suíça, Brasil, EUA, Israel",
+    "h": "Fora da UE e do EEE, 15 dias para escolher.",
+    "body": "Representante fiscal ou notificações eletrónicas."
+   },
+   {
+    "format": "text",
+    "kicker": "França",
+    "h": "Uma conta em Portugal vai no formulário 3916.",
+    "body": "Todas as contas lá fora, todos os anos, mesmo sem uso."
+   },
+   {
+    "format": "text",
+    "kicker": "EUA",
+    "big": "10 000 USD",
+    "h": "Acima disto, somando contas estrangeiras, os US persons entregam o FBAR.",
+    "body": "Em qualquer momento do ano."
+   },
+   {
+    "format": "text",
+    "kicker": "Brasil",
+    "h": "A casa entra no IRPF, em Bens e Direitos.",
+    "body": "Preço em euros, convertido em dólares e depois em reais."
+   },
+   {
+    "format": "end",
+    "kicker": "Leia a resposta",
+    "h": "Cada país, uma página: link na bio.",
+    "body": "Página NIF Portugal online."
+   }
+  ]
+ },
+ "en": {
+  "source": "Sources: General Tax Law, art. 19; AT NIF leaflet; BOFiP (form 3916); IRS (FBAR); Receita Federal (IRPF)",
+  "slides": [
+   {
+    "format": "text",
+    "kicker": "Where you live",
+    "big": "6",
+    "h": "Six countries, one NIF, and one rule that changes."
+   },
+   {
+    "format": "text",
+    "kicker": "Luxembourg and France",
+    "h": "Inside the EU, a tax representative is optional.",
+    "body": "The NIF itself is requested the same way everywhere."
+   },
+   {
+    "format": "text",
+    "kicker": "Switzerland, Brazil, USA, Israel",
+    "h": "Outside the EU and EEA, 15 days to choose.",
+    "body": "A tax representative or electronic notices."
+   },
+   {
+    "format": "text",
+    "kicker": "France",
+    "h": "A Portuguese bank account goes on form 3916.",
+    "body": "Every account abroad, every year, even unused."
+   },
+   {
+    "format": "text",
+    "kicker": "USA",
+    "big": "$10,000",
+    "h": "Above this, in foreign accounts combined, US persons file an FBAR.",
+    "body": "At any time in the year."
+   },
+   {
+    "format": "text",
+    "kicker": "Brazil",
+    "h": "The home goes into the IRPF, under Bens e Direitos.",
+    "body": "Price in euros, converted to dollars, then to reais."
+   },
+   {
+    "format": "end",
+    "kicker": "Read the answer",
+    "h": "Every country, one page: link in bio.",
+    "body": "NIF Portugal page."
+   }
+  ]
+ },
+ "fr": {
+  "source": "Sources : Loi générale fiscale, art. 19 ; brochure NIF de l'AT ; BOFiP (3916) ; IRS (FBAR) ; Receita Federal (IRPF)",
+  "slides": [
+   {
+    "format": "text",
+    "kicker": "Où vous vivez",
+    "big": "6",
+    "h": "Six pays, un NIF et une règle qui change."
+   },
+   {
+    "format": "text",
+    "kicker": "Luxembourg et France",
+    "h": "Dans l'UE, le représentant fiscal est facultatif.",
+    "body": "Le NIF lui-même se demande de la même façon partout."
+   },
+   {
+    "format": "text",
+    "kicker": "Suisse, Brésil, États-Unis, Israël",
+    "h": "Hors UE et EEE, 15 jours pour choisir.",
+    "body": "Un représentant fiscal ou les notifications électroniques."
+   },
+   {
+    "format": "text",
+    "kicker": "France",
+    "h": "Un compte bancaire au Portugal va sur le formulaire 3916.",
+    "body": "Chaque compte à l'étranger, chaque année, même inutilisé."
+   },
+   {
+    "format": "text",
+    "kicker": "États-Unis",
+    "big": "10 000 $",
+    "h": "Au-delà, en comptes étrangers cumulés, les US persons déposent un FBAR.",
+    "body": "À tout moment de l'année."
+   },
+   {
+    "format": "text",
+    "kicker": "Brésil",
+    "h": "Le logement entre dans l'IRPF, sous Bens e Direitos.",
+    "body": "Prix en euros, converti en dollars, puis en reais."
+   },
+   {
+    "format": "end",
+    "kicker": "Lisez la réponse",
+    "h": "Chaque pays, une page : lien dans la bio.",
+    "body": "Page NIF Portugal en ligne."
+   }
+  ]
+ }
+}

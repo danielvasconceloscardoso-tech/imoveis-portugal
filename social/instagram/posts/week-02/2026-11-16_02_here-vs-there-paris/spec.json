@@ -1,0 +1,104 @@
+{
+ "pt": {
+  "format": "here-vs-there",
+  "kicker": "Aqui e lá",
+  "h": "Um metro quadrado em Paris. Quase dois em Lisboa.",
+  "items": [
+   {
+    "place": "Paris",
+    "m2": 1,
+    "v": "1 m²"
+   },
+   {
+    "place": "Lisboa",
+    "m2": 1.8667180277349769,
+    "v": "1,9 m²"
+   },
+   {
+    "place": "Loulé",
+    "m2": 2.3427604544355813,
+    "v": "2,3 m²"
+   },
+   {
+    "place": "Porto",
+    "m2": 2.6692371247590194,
+    "v": "2,7 m²"
+   },
+   {
+    "place": "Funchal",
+    "m2": 2.739400791407575,
+    "v": "2,7 m²"
+   }
+  ],
+  "note": "O preço de 1 m² em Paris (9 692 €, mediana, apartamentos existentes, outubro de 2025 a setembro de 2026) compra esta área em Portugal, à mediana do INE.",
+  "source": "Fontes: Notaires de France, 3.º trimestre de 2026; INE, 2.º trimestre de 2026"
+ },
+ "en": {
+  "format": "here-vs-there",
+  "kicker": "Here and there",
+  "h": "One square meter in Paris. Almost two in Lisbon.",
+  "items": [
+   {
+    "place": "Paris",
+    "m2": 1,
+    "v": "1 m²"
+   },
+   {
+    "place": "Lisboa",
+    "m2": 1.8667180277349769,
+    "v": "1.9 m²"
+   },
+   {
+    "place": "Loulé",
+    "m2": 2.3427604544355813,
+    "v": "2.3 m²"
+   },
+   {
+    "place": "Porto",
+    "m2": 2.6692371247590194,
+    "v": "2.7 m²"
+   },
+   {
+    "place": "Funchal",
+    "m2": 2.739400791407575,
+    "v": "2.7 m²"
+   }
+  ],
+  "note": "The price of 1 m² in Paris (€9,692, median, existing apartments, October 2025 to September 2026) buys this much in Portugal at the INE median.",
+  "source": "Sources: Notaires de France, Q3 2026; INE, 2nd quarter 2026"
+ },
+ "fr": {
+  "format": "here-vs-there",
+  "kicker": "Ici et là-bas",
+  "h": "Un mètre carré à Paris. Presque deux à Lisbonne.",
+  "items": [
+   {
+    "place": "Paris",
+    "m2": 1,
+    "v": "1 m²"
+   },
+   {
+    "place": "Lisboa",
+    "m2": 1.8667180277349769,
+    "v": "1,9 m²"
+   },
+   {
+    "place": "Loulé",
+    "m2": 2.3427604544355813,
+    "v": "2,3 m²"
+   },
+   {
+    "place": "Porto",
+    "m2": 2.6692371247590194,
+    "v": "2,7 m²"
+   },
+   {
+    "place": "Funchal",
+    "m2": 2.739400791407575,
+    "v": "2,7 m²"
+   }
+  ],
+  "note": "Le prix d'1 m² à Paris (9 692 €, médiane, appartements anciens, octobre 2025 à septembre 2026) achète cette surface au Portugal, au prix médian de l'INE.",
+  "source": "Sources : Notaires de France, T3 2026 ; INE, 2e trimestre 2026"
+ }
+}

@@ -1,0 +1,41 @@
+{
+ "fr": {
+  "format": "here-vs-there",
+  "kicker": "Ici et là-bas",
+  "h": "Un mètre carré à Genève. Plus de deux à Lisbonne.",
+  "items": [
+   {
+    "place": "Genève (canton)",
+    "m2": 1,
+    "v": "1 m²"
+   },
+   {
+    "place": "Lisboa",
+    "m2": 2.2654506111310297,
+    "v": "2,3 m²"
+   },
+   {
+    "place": "Cascais",
+    "m2": 2.405853870524096,
+    "v": "2,4 m²"
+   },
+   {
+    "place": "Loulé",
+    "m2": 2.843176111431546,
+    "v": "2,8 m²"
+   },
+   {
+    "place": "Porto",
+    "m2": 3.2393884805817423,
+    "v": "3,2 m²"
+   },
+   {
+    "place": "Funchal",
+    "m2": 3.324539167041353,
+    "v": "3,3 m²"
+   }
+  ],
+  "note": "Le prix d'1 m² dans le canton de Genève (10 853 CHF, soit 11 762 € au taux BCE du 23/10/2026 ; médiane, appartements PPE existants, 2024) achète cette surface au Portugal, au prix médian de l'INE.",
+  "source": "Sources : OCSTAT, 2024 ; BCE ; INE, 2e trimestre 2026"
+ }
+}

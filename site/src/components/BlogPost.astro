@@ -6,6 +6,7 @@ import V2 from "../layouts/V2.astro";
 import { config } from "../config";
 import { EDITIONS, HTML_LANG, LANGS, pathFor, type Lang, type EdCode } from "../i18n";
 import { fmtDate, DISCLAIMER } from "../lib/content";
+import { hostFor } from "../lib/host";
 import { render, postById, postSlugs, CANONICAL_ED, type Post } from "../lib/blog";
 import { c, edName } from "../lib/copy";
 
@@ -15,7 +16,7 @@ const { html, sources } = render(post, ed);
 const base = (l: Lang, e: EdCode) => `${pathFor(l, e, "blog")}`;
 const slugs = postSlugs(post.id);
 const paths = Object.fromEntries(LANGS.map((l) => [l, `${base(l, ed)}${slugs[l]}/`])) as Record<Lang, string>;
-const abs = (l: Lang) => `https://${EDITIONS[CANONICAL_ED[l]].domain}${base(l, CANONICAL_ED[l])}${slugs[l]}/`;
+const abs = (l: Lang) => `https://${hostFor(CANONICAL_ED[l])}${base(l, CANONICAL_ED[l])}${slugs[l]}/`;
 const alternates = Object.fromEntries(LANGS.map((l) => [l, abs(l)])) as Record<Lang, string>;
 const related = post.related.map((id) => postById(id, lang)).filter(Boolean) as Post[];
 const talk = pathFor(lang, ed, "talk");
@@ -35,7 +36,7 @@ const ld = [
   {
     "@context": "https://schema.org", "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: c("blog.title", lang), item: `https://${EDITIONS[CANONICAL_ED[lang]].domain}${base(lang, CANONICAL_ED[lang])}` },
+      { "@type": "ListItem", position: 1, name: c("blog.title", lang), item: `https://${hostFor(CANONICAL_ED[lang])}${base(lang, CANONICAL_ED[lang])}` },
       { "@type": "ListItem", position: 2, name: post.title, item: abs(lang) },
     ],
   },

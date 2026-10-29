@@ -1,0 +1,122 @@
+{
+ "pt": {
+  "source": "Fontes: Código do IMT, art. 17.º, n.º 10 (DL 97/2026); Imposto do Selo, verba 1.1; Casa Pronta (IRN)",
+  "slides": [
+   {
+    "format": "text",
+    "kicker": "A conta completa",
+    "h": "Uma casa de 250 000 €, com tudo, sem residência fiscal em Portugal.",
+    "big": "271 125 €"
+   },
+   {
+    "format": "text",
+    "kicker": "1 · IMT",
+    "h": "Taxa única de 7,5% para não residentes, sem isenções nem reduções, salvo exceção.",
+    "big": "18 750 €"
+   },
+   {
+    "format": "text",
+    "kicker": "2 · Imposto do selo",
+    "h": "0,8% do preço, igual para residentes e não residentes.",
+    "big": "2 000 €"
+   },
+   {
+    "format": "text",
+    "kicker": "3 · Escritura e registo",
+    "h": "No balcão Casa Pronta, num só momento. Com hipoteca, 700 €.",
+    "big": "375 €"
+   },
+   {
+    "format": "text",
+    "kicker": "4 · Advogado",
+    "h": "Os honorários combinam-se com o advogado, por isso ficam fora desta conta."
+   },
+   {
+    "format": "end",
+    "kicker": "A conta, linha a linha",
+    "h": "Leia a conta completa.",
+    "body": "Link na bio: artigo IMT em 2026."
+   }
+  ]
+ },
+ "en": {
+  "source": "Sources: IMT Code, art. 17(10), Decree-Law 97/2026; Stamp Duty, item 1.1; Casa Pronta (IRN)",
+  "slides": [
+   {
+    "format": "text",
+    "kicker": "The full bill",
+    "h": "A €250,000 home, all in, if you aren't a Portuguese tax resident.",
+    "big": "€271,125"
+   },
+   {
+    "format": "text",
+    "kicker": "1 · IMT",
+    "h": "A flat 7.5% for non-residents, with no exemption or reduction, unless an exception applies.",
+    "big": "€18,750"
+   },
+   {
+    "format": "text",
+    "kicker": "2 · Stamp duty",
+    "h": "0.8% of the price, the same for residents and non-residents.",
+    "big": "€2,000"
+   },
+   {
+    "format": "text",
+    "kicker": "3 · Deed and registration",
+    "h": "At a Casa Pronta office, in one sitting. With a mortgage, €700.",
+    "big": "€375"
+   },
+   {
+    "format": "text",
+    "kicker": "4 · Lawyer",
+    "h": "The fee is agreed with your lawyer, so it isn't in this bill."
+   },
+   {
+    "format": "end",
+    "kicker": "The bill, line by line",
+    "h": "Read the full bill.",
+    "body": "Link in bio: IMT in 2026 article."
+   }
+  ]
+ },
+ "fr": {
+  "source": "Sources : Code de l'IMT, art. 17, n.º 10 (DL 97/2026) ; droit de timbre, poste 1.1 ; Casa Pronta (IRN)",
+  "slides": [
+   {
+    "format": "text",
+    "kicker": "Le compte complet",
+    "h": "Un bien à 250 000 €, tout compris, sans résidence fiscale au Portugal.",
+    "big": "271 125 €"
+   },
+   {
+    "format": "text",
+    "kicker": "1 · IMT",
+    "h": "Taux unique de 7,5 % pour les non-résidents, sans exonération ni réduction, sauf exception.",
+    "big": "18 750 €"
+   },
+   {
+    "format": "text",
+    "kicker": "2 · Droit de timbre",
+    "h": "0,8 % du prix, le même pour résidents et non-résidents.",
+    "big": "2 000 €"
+   },
+   {
+    "format": "text",
+    "kicker": "3 · Acte et enregistrement",
+    "h": "Au guichet Casa Pronta, en une seule fois. Avec une hypothèque, 700 €.",
+    "big": "375 €"
+   },
+   {
+    "format": "text",
+    "kicker": "4 · Avocat",
+    "h": "Les honoraires se fixent avec l'avocat, ils ne sont donc pas dans ce compte."
+   },
+   {
+    "format": "end",
+    "kicker": "Le compte, ligne par ligne",
+    "h": "Lisez le compte complet.",
+    "body": "Lien dans la bio : article IMT en 2026."
+   }
+  ]
+ }
+}

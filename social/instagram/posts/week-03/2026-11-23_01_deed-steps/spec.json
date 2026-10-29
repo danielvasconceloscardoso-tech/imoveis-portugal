@@ -1,0 +1,137 @@
+{
+ "pt": {
+  "source": "Fontes: consulados de Portugal (procuração); Código Civil, art. 442.º; Código do IMT, art. 36.º; Justiça.gov.pt, Casa Pronta",
+  "slides": [
+   {
+    "format": "text",
+    "kicker": "De fora, passo a passo",
+    "big": "375 €",
+    "h": "A escritura em Portugal, sem apanhar o avião.",
+    "body": "O que custam a escritura e o registo na Casa Pronta."
+   },
+   {
+    "format": "text",
+    "kicker": "Passo 3 · Procuração",
+    "h": "Assina-se num consulado português, ou num notário do seu país com a Apostila de Haia."
+   },
+   {
+    "format": "text",
+    "kicker": "Passo 6 · Contrato-promessa (CPCV)",
+    "h": "Fixa o preço, a data e o sinal."
+   },
+   {
+    "format": "text",
+    "kicker": "O sinal",
+    "h": "Vale para os dois lados.",
+    "body": "Se desistir por culpa sua, perde-o. Se a culpa for do vendedor, pode exigir o dobro."
+   },
+   {
+    "format": "text",
+    "kicker": "O imposto",
+    "h": "O IMT paga-se no dia da liquidação ou nos 30 dias seguintes."
+   },
+   {
+    "format": "text",
+    "kicker": "Passo 7 · Escritura",
+    "h": "Escritura e registo na Casa Pronta, no mesmo momento.",
+    "body": "375 €, ou 700 € se houver hipoteca."
+   },
+   {
+    "format": "end",
+    "kicker": "O percurso completo",
+    "h": "Leia o guia completo.",
+    "body": "Link na bio, página Escritura à distância."
+   }
+  ]
+ },
+ "en": {
+  "source": "Sources: Portuguese consulates (power of attorney); Civil Code, art. 442; IMT Code, art. 36; Justiça.gov.pt, Casa Pronta",
+  "slides": [
+   {
+    "format": "text",
+    "kicker": "From abroad, step by step",
+    "big": "€375",
+    "h": "The deed in Portugal, no flight needed.",
+    "body": "What the deed and registration cost at Casa Pronta."
+   },
+   {
+    "format": "text",
+    "kicker": "Step 3 · Power of attorney",
+    "h": "Signed at a Portuguese consulate, or before your notary with the Hague Apostille."
+   },
+   {
+    "format": "text",
+    "kicker": "Step 6 · Promissory contract (CPCV)",
+    "h": "It sets the price, the date and the deposit."
+   },
+   {
+    "format": "text",
+    "kicker": "The deposit",
+    "h": "It works both ways.",
+    "body": "Back out through your own fault and you lose it. The seller's fault: you can claim double."
+   },
+   {
+    "format": "text",
+    "kicker": "The tax",
+    "h": "IMT is paid on the day it's assessed or within the next 30 days."
+   },
+   {
+    "format": "text",
+    "kicker": "Step 7 · The deed",
+    "h": "Deed and registration at Casa Pronta, in one sitting.",
+    "body": "€375, or €700 with a mortgage."
+   },
+   {
+    "format": "end",
+    "kicker": "The whole path",
+    "h": "Read the full guide.",
+    "body": "Link in bio, Sign from abroad."
+   }
+  ]
+ },
+ "fr": {
+  "source": "Sources : consulats du Portugal (procuration) ; Code civil, art. 442 ; Code de l'IMT, art. 36 ; Justiça.gov.pt, Casa Pronta",
+  "slides": [
+   {
+    "format": "text",
+    "kicker": "Depuis l'étranger, pas à pas",
+    "big": "375 €",
+    "h": "L'acte au Portugal, sans prendre l'avion.",
+    "body": "Ce que coûtent l'acte et l'enregistrement à la Casa Pronta."
+   },
+   {
+    "format": "text",
+    "kicker": "Étape 3 · Procuration",
+    "h": "Signée dans un consulat du Portugal, ou chez votre notaire avec l'apostille de La Haye."
+   },
+   {
+    "format": "text",
+    "kicker": "Étape 6 · Compromis (CPCV)",
+    "h": "Il fixe le prix, la date et les arrhes."
+   },
+   {
+    "format": "text",
+    "kicker": "Les arrhes",
+    "h": "Elles jouent dans les deux sens.",
+    "body": "Vous vous désistez par votre faute : vous les perdez. Faute du vendeur : vous pouvez exiger le double."
+   },
+   {
+    "format": "text",
+    "kicker": "L'impôt",
+    "h": "L'IMT se paie le jour de sa liquidation ou dans les 30 jours suivants."
+   },
+   {
+    "format": "text",
+    "kicker": "Étape 7 · L'acte",
+    "h": "Acte et enregistrement à la Casa Pronta, en une seule fois.",
+    "body": "375 €, ou 700 € avec une hypothèque."
+   },
+   {
+    "format": "end",
+    "kicker": "Le parcours complet",
+    "h": "Lisez le guide complet.",
+    "body": "Lien dans la bio, page Signer à distance."
+   }
+  ]
+ }
+}

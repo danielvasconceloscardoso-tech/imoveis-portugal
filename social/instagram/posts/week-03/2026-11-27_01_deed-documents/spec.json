@@ -1,0 +1,116 @@
+{
+ "pt": {
+  "source": "Fonte: Justiça.gov.pt, Balcão Casa Pronta (atualizado a 22/10/2025)",
+  "slides": [
+   {
+    "format": "text",
+    "kicker": "Escritura, o que levar",
+    "big": "1951",
+    "h": "O ano que decide um documento da sua escritura."
+   },
+   {
+    "format": "text",
+    "kicker": "1 · Identificação",
+    "h": "A sua identificação civil e fiscal, e a de quem vende."
+   },
+   {
+    "format": "text",
+    "kicker": "2 · Licença de utilização",
+    "h": "A licença de utilização, ou a sua dispensa.",
+    "body": "Depende da data de construção: a linha é 7 de agosto de 1951."
+   },
+   {
+    "format": "text",
+    "kicker": "3 · Certificado energético",
+    "h": "O certificado energético da casa."
+   },
+   {
+    "format": "text",
+    "kicker": "4 · Ficha técnica",
+    "h": "A ficha técnica da habitação, se existir."
+   },
+   {
+    "format": "end",
+    "kicker": "Com procuração",
+    "h": "Leia o guia completo.",
+    "body": "Link na bio, página Escritura à distância."
+   }
+  ]
+ },
+ "en": {
+  "source": "Source: Justiça.gov.pt, Balcão Casa Pronta (updated Oct 22, 2025)",
+  "slides": [
+   {
+    "format": "text",
+    "kicker": "The deed, what to bring",
+    "big": "1951",
+    "h": "The year that decides one document at your deed."
+   },
+   {
+    "format": "text",
+    "kicker": "1 · Identity",
+    "h": "Your civil and tax identification, and the seller's."
+   },
+   {
+    "format": "text",
+    "kicker": "2 · Usage license",
+    "h": "The usage license, or its waiver.",
+    "body": "It depends on when the building went up: the dividing date is August 7, 1951."
+   },
+   {
+    "format": "text",
+    "kicker": "3 · Energy certificate",
+    "h": "The home's energy certificate."
+   },
+   {
+    "format": "text",
+    "kicker": "4 · Technical file",
+    "h": "The building's technical file (ficha técnica), if there is one."
+   },
+   {
+    "format": "end",
+    "kicker": "With a power of attorney",
+    "h": "Read the full guide.",
+    "body": "Link in bio, Sign from abroad."
+   }
+  ]
+ },
+ "fr": {
+  "source": "Source : Justiça.gov.pt, Balcão Casa Pronta (mis à jour le 22/10/2025)",
+  "slides": [
+   {
+    "format": "text",
+    "kicker": "L'acte, quoi apporter",
+    "big": "1951",
+    "h": "L'année qui décide d'un document de votre acte."
+   },
+   {
+    "format": "text",
+    "kicker": "1 · Identité",
+    "h": "Votre identification civile et fiscale, et celle du vendeur."
+   },
+   {
+    "format": "text",
+    "kicker": "2 · Licence d'utilisation",
+    "h": "La licence d'utilisation, ou sa dispense.",
+    "body": "Selon la date de construction : la limite est le 7 août 1951."
+   },
+   {
+    "format": "text",
+    "kicker": "3 · Certificat énergétique",
+    "h": "Le certificat énergétique du logement."
+   },
+   {
+    "format": "text",
+    "kicker": "4 · Fiche technique",
+    "h": "La fiche technique du bâtiment (ficha técnica), s'il y en a une."
+   },
+   {
+    "format": "end",
+    "kicker": "Avec une procuration",
+    "h": "Lisez le guide complet.",
+    "body": "Lien dans la bio, page Signer à distance."
+   }
+  ]
+ }
+}

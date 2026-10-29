@@ -1,10 +1,10 @@
 /* Imóveis Portugal map embed (prompt 25 §3). Usage:
    <div data-imoveis-map data-lang="pt" data-budget="500000" data-center="-8.61,41.15,9" data-pin="-8.61,41.15,Residências do Rio"
         data-cta="https://example.com/contact" data-cta-label="Pedir informação" data-accent="#003b5c" data-height="720"></div>
-   <script src="https://imoveisportugal.lu/embed/map.js" async></script>
+   <script src="https://imoveisportugal.pt/embed/map.js" async></script>
    Every option is optional. The map shows "Powered by Imóveis Portugal" and the data credits (Fonte: INE · © OpenStreetMap contributors). */
 (function () {
-  var s = document.currentScript, origin = s ? new URL(s.src).origin : "https://imoveisportugal.lu";
+  var s = document.currentScript, origin = s ? new URL(s.src).origin : "https://imoveisportugal.pt";
   var keys = { budget: "budget", metric: "metric", center: "center", pin: "pin", cta: "cta", ctaLabel: "ctalabel", accent: "accent" };
   function mount(el) {
     if (el.getAttribute("data-ready")) return; el.setAttribute("data-ready", "1");

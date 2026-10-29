@@ -1,0 +1,26 @@
+{
+ "pt": {
+  "format": "one-number",
+  "kicker": "Um número",
+  "big": "7,5%",
+  "h": "Os 7,5% que ninguém põe na folha de cálculo.",
+  "note": "IMT de uma casa comprada por um não residente em Portugal, a taxa única, salvo exceções (por exemplo, tornar-se residente em dois anos).",
+  "source": "Fonte: Código do IMT, art. 17.º, n.º 10 (DL 97/2026)"
+ },
+ "en": {
+  "format": "one-number",
+  "kicker": "One number",
+  "big": "7.5%",
+  "h": "The 7.5% nobody puts in the spreadsheet.",
+  "note": "IMT on a home bought by a non-resident, at a flat rate, unless an exception applies (becoming resident within two years, for example).",
+  "source": "Source: IMT Code, art. 17(10), Decree-Law 97/2026"
+ },
+ "fr": {
+  "format": "one-number",
+  "kicker": "Un chiffre",
+  "big": "7,5 %",
+  "h": "Les 7,5 % que personne ne met dans le tableur.",
+  "note": "IMT sur un logement acheté par un non-résident, à taux unique, sauf exception (devenir résident dans les deux ans, par exemple).",
+  "source": "Source : Code de l'IMT, art. 17, n.º 10 (DL 97/2026)"
+ }
+}

@@ -1,0 +1,87 @@
+{
+ "frames": [
+  {
+   "pt": {
+    "format": "story-card",
+    "kicker": "Novo no feed",
+    "img": "/social/instagram/posts/week-02/2026-11-20_01_resident-vs-non-resident/slide-01-pt.png"
+   },
+   "en": {
+    "format": "story-card",
+    "kicker": "New on the feed",
+    "img": "/social/instagram/posts/week-02/2026-11-20_01_resident-vs-non-resident/slide-01-en.png"
+   },
+   "fr": {
+    "format": "story-card",
+    "kicker": "Nouveau sur le fil",
+    "img": "/social/instagram/posts/week-02/2026-11-20_01_resident-vs-non-resident/slide-01-fr.png"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-text",
+    "kicker": "A diferença",
+    "h": "11 958 € de diferença no IMT de uma casa de 300 000 €.",
+    "body": "Residente na sua casa própria e permanente, contra não residente.",
+    "source": "Fonte: Código do IMT, art. 17.º (tabelas de 2026)"
+   },
+   "en": {
+    "format": "story-text",
+    "kicker": "The gap",
+    "h": "An €11,958 IMT gap on one €300,000 home.",
+    "body": "A resident's own permanent home, against a non-resident.",
+    "source": "Source: IMT Code, art. 17 (2026 tables)"
+   },
+   "fr": {
+    "format": "story-text",
+    "kicker": "L'écart",
+    "h": "11 958 € d'écart d'IMT sur un bien à 300 000 €.",
+    "body": "Résidence principale d'un résident, contre non-résident.",
+    "source": "Source : Code de l'IMT, art. 17 (barèmes 2026)"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-card",
+    "kicker": "Novo no feed",
+    "img": "/social/instagram/posts/week-02/2026-11-20_02_then-and-now-porto/card-pt.png"
+   },
+   "en": {
+    "format": "story-card",
+    "kicker": "New on the feed",
+    "img": "/social/instagram/posts/week-02/2026-11-20_02_then-and-now-porto/card-en.png"
+   },
+   "fr": {
+    "format": "story-card",
+    "kicker": "Nouveau sur le fil",
+    "img": "/social/instagram/posts/week-02/2026-11-20_02_then-and-now-porto/card-fr.png"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-text",
+    "kicker": "A semana numa conta",
+    "h": "250 000 € no anúncio, 271 125 € no total.",
+    "body": "Sem residência fiscal em Portugal. A newsletter chega a 3 de dezembro.",
+    "source": "Fontes: Código do IMT, art. 17.º, n.º 10; Imposto do Selo, verba 1.1; Casa Pronta",
+    "dark": true
+   },
+   "en": {
+    "format": "story-text",
+    "kicker": "The week in one bill",
+    "h": "€250,000 on the listing, €271,125 in all.",
+    "body": "Without Portuguese tax residence. The newsletter starts December 3.",
+    "source": "Sources: IMT Code, art. 17(10); Stamp Duty, item 1.1; Casa Pronta",
+    "dark": true
+   },
+   "fr": {
+    "format": "story-text",
+    "kicker": "La semaine en un compte",
+    "h": "250 000 € annoncés, 271 125 € au total.",
+    "body": "Sans résidence fiscale au Portugal. La newsletter arrive le 3 décembre.",
+    "source": "Sources : Code de l'IMT, art. 17, n.º 10 ; droit de timbre, poste 1.1 ; Casa Pronta",
+    "dark": true
+   }
+  }
+ ]
+}

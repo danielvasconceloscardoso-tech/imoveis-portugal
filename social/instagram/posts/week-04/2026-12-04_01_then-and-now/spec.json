@@ -1,0 +1,59 @@
+{
+ "pt": {
+  "format": "then-and-now",
+  "kicker": "Antes e agora",
+  "h": "Os mesmos 100 mil euros, dez anos depois.",
+  "items": [
+   {
+    "place": "Lisboa, 1.º trimestre de 2016",
+    "m2": 53.333333333333336,
+    "v": "53 m²"
+   },
+   {
+    "place": "Lisboa, 2.º trimestre de 2026",
+    "m2": 19.26040061633282,
+    "v": "19 m²"
+   }
+  ],
+  "note": "100 000 € a dividir pela mediana do INE em Lisboa: 1 875 € por m² em 2016, 5 192 € em 2026.",
+  "source": "Fonte: INE, preços medianos por m², 2016 a 2026"
+ },
+ "en": {
+  "format": "then-and-now",
+  "kicker": "Then and now",
+  "h": "Your 2016 budget would like a word.",
+  "items": [
+   {
+    "place": "Lisbon, Q1 2016",
+    "m2": 53.333333333333336,
+    "v": "53 m²"
+   },
+   {
+    "place": "Lisbon, Q2 2026",
+    "m2": 19.26040061633282,
+    "v": "19 m²"
+   }
+  ],
+  "note": "€100,000 divided by the INE median in Lisbon: €1,875 per m² in 2016, €5,192 in 2026.",
+  "source": "Source: INE, median prices per m², 2016 to 2026"
+ },
+ "fr": {
+  "format": "then-and-now",
+  "kicker": "Avant et maintenant",
+  "h": "Les mêmes 100 000 €, dix ans plus tard.",
+  "items": [
+   {
+    "place": "Lisbonne, T1 2016",
+    "m2": 53.333333333333336,
+    "v": "53 m²"
+   },
+   {
+    "place": "Lisbonne, T2 2026",
+    "m2": 19.26040061633282,
+    "v": "19 m²"
+   }
+  ],
+  "note": "100 000 € divisés par le prix médian INE à Lisbonne : 1 875 € le m² en 2016, 5 192 € en 2026.",
+  "source": "Source : INE, prix médians au m², 2016 à 2026"
+ }
+}

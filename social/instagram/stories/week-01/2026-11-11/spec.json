@@ -1,0 +1,87 @@
+{
+ "frames": [
+  {
+   "pt": {
+    "format": "story-text",
+    "kicker": "Sondagem",
+    "h": "Dentro ou fora da UE, uma regra do NIF muda.",
+    "body": "O representante fiscal: facultativo na UE e no EEE, uma escolha em 15 dias fora.",
+    "source": "Fontes: Lei Geral Tributária, art. 19.º"
+   },
+   "en": {
+    "format": "story-text",
+    "kicker": "Poll",
+    "h": "Inside the EU or outside it, one NIF rule changes.",
+    "body": "The tax representative: optional inside the EU and EEA, a 15-day choice outside.",
+    "source": "Sources: General Tax Law, art. 19"
+   },
+   "fr": {
+    "format": "story-text",
+    "kicker": "Sondage",
+    "h": "Dans l'UE ou hors de l'UE, une règle du NIF change.",
+    "body": "Le représentant fiscal : facultatif dans l'UE et l'EEE, un choix en 15 jours ailleurs.",
+    "source": "Sources : Loi générale fiscale, art. 19"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-card",
+    "kicker": "Um número",
+    "img": "/social/instagram/posts/week-01/2026-11-11_01_one-number-15-days/card-pt.png"
+   },
+   "en": {
+    "format": "story-card",
+    "kicker": "One number",
+    "img": "/social/instagram/posts/week-01/2026-11-11_01_one-number-15-days/card-en.png"
+   },
+   "fr": {
+    "format": "story-card",
+    "kicker": "Un chiffre",
+    "img": "/social/instagram/posts/week-01/2026-11-11_01_one-number-15-days/card-fr.png"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-text",
+    "kicker": "Ler a resposta",
+    "h": "dias depois de ter casa.",
+    "big": "15",
+    "body": "Para nomear um representante fiscal ou aderir às notificações eletrónicas. Tudo na página NIF Portugal online.",
+    "source": "Fonte: Autoridade Tributária, folheto NIF para cidadãos estrangeiros não residentes"
+   },
+   "en": {
+    "format": "story-text",
+    "kicker": "Read the answer",
+    "h": "days once you own the home.",
+    "big": "15",
+    "body": "To appoint a tax representative or join electronic notices. It's all on the NIF Portugal page.",
+    "source": "Source: Tax and Customs Authority, NIF leaflet for non-resident foreigners"
+   },
+   "fr": {
+    "format": "story-text",
+    "kicker": "Lire la réponse",
+    "h": "jours une fois propriétaire.",
+    "big": "15",
+    "body": "Pour désigner un représentant fiscal ou adhérer aux notifications électroniques. Tout sur la page NIF Portugal en ligne.",
+    "source": "Source : Autorité fiscale, brochure NIF pour les étrangers non résidents"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-card",
+    "kicker": "Lisboa",
+    "img": "/social/instagram/posts/week-01/2026-11-11_02_postcard-lisboa/card-pt.png"
+   },
+   "en": {
+    "format": "story-card",
+    "kicker": "Lisbon",
+    "img": "/social/instagram/posts/week-01/2026-11-11_02_postcard-lisboa/card-en.png"
+   },
+   "fr": {
+    "format": "story-card",
+    "kicker": "Lisbonne",
+    "img": "/social/instagram/posts/week-01/2026-11-11_02_postcard-lisboa/card-fr.png"
+   }
+  }
+ ]
+}

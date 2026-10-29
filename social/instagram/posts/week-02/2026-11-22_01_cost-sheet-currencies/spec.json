@@ -1,0 +1,143 @@
+{
+ "pt": {
+  "source": "Fontes: Código do IMT, art. 17.º, n.º 10; Imposto do Selo; Casa Pronta; BCE, 23/10/2026; OFAS; IRS; Receita Federal; LGT, art. 19.º; BOFiP",
+  "slides": [
+   {
+    "format": "text",
+    "kicker": "Uma casa, cinco moedas",
+    "h": "Uma casa de 400 000 €, com tudo, sem residência fiscal em Portugal.",
+    "big": "433 575 €"
+   },
+   {
+    "format": "text",
+    "kicker": "Em francos suíços",
+    "h": "O 2.º pilar só se levanta para a residência principal, não para uma segunda casa.",
+    "big": "400 060 CHF"
+   },
+   {
+    "format": "text",
+    "kicker": "Em dólares",
+    "h": "Uma conta em Portugal entra no limite de 10 000 dólares do FBAR.",
+    "big": "485 300 USD"
+   },
+   {
+    "format": "text",
+    "kicker": "Em reais",
+    "h": "A casa declara-se em Bens e Direitos do IRPF, ao câmbio do Banco Central.",
+    "big": "R$ 2,45 milhões"
+   },
+   {
+    "format": "text",
+    "kicker": "Em shekels",
+    "h": "Fora da UE, ser proprietário pede um representante fiscal ou as notificações eletrónicas.",
+    "big": "₪ 1,51 milhões"
+   },
+   {
+    "format": "text",
+    "kicker": "A partir de França",
+    "h": "Cada conta aberta em Portugal declara-se todos os anos no formulário 3916.",
+    "big": "3916"
+   },
+   {
+    "format": "end",
+    "kicker": "A sua conta",
+    "h": "Faça as suas contas.",
+    "body": "Link na bio: artigo IMT em 2026, com o simulador Custo total."
+   }
+  ]
+ },
+ "en": {
+  "source": "Sources: IMT Code, art. 17(10); Stamp Duty; Casa Pronta; ECB, Oct 23, 2026; OFAS; IRS; Receita Federal; LGT, art. 19; BOFiP",
+  "slides": [
+   {
+    "format": "text",
+    "kicker": "One home, five currencies",
+    "h": "A €400,000 home, all in, if you aren't a Portuguese tax resident.",
+    "big": "€433,575"
+   },
+   {
+    "format": "text",
+    "kicker": "In Swiss francs",
+    "h": "Second-pillar money can be withdrawn for your main residence only, not a second home.",
+    "big": "CHF 400,060"
+   },
+   {
+    "format": "text",
+    "kicker": "In US dollars",
+    "h": "A Portuguese account counts toward the $10,000 FBAR threshold.",
+    "big": "$485,300"
+   },
+   {
+    "format": "text",
+    "kicker": "In Brazilian reais",
+    "h": "The home goes in Bens e Direitos of the IRPF, at the Central Bank rate.",
+    "big": "R$2.45 million"
+   },
+   {
+    "format": "text",
+    "kicker": "In shekels",
+    "h": "Outside the EU, owning means a tax representative or electronic notifications.",
+    "big": "₪1.51 million"
+   },
+   {
+    "format": "text",
+    "kicker": "From France",
+    "h": "Every account opened in Portugal is declared each year on form 3916.",
+    "big": "3916"
+   },
+   {
+    "format": "end",
+    "kicker": "Your numbers",
+    "h": "Run your numbers.",
+    "body": "Link in bio: IMT in 2026 article, with the Total cost calculator."
+   }
+  ]
+ },
+ "fr": {
+  "source": "Sources : Code de l'IMT, art. 17, n.º 10 ; droit de timbre ; Casa Pronta ; BCE, 23/10/2026 ; OFAS ; IRS ; Receita Federal ; LGT, art. 19 ; BOFiP",
+  "slides": [
+   {
+    "format": "text",
+    "kicker": "Un bien, cinq monnaies",
+    "h": "Un bien à 400 000 €, tout compris, sans résidence fiscale au Portugal.",
+    "big": "433 575 €"
+   },
+   {
+    "format": "text",
+    "kicker": "En francs suisses",
+    "h": "Le 2e pilier se retire pour la résidence principale seulement, pas pour une résidence secondaire.",
+    "big": "400 060 CHF"
+   },
+   {
+    "format": "text",
+    "kicker": "En dollars",
+    "h": "Un compte au Portugal compte dans le seuil de 10 000 dollars du FBAR.",
+    "big": "485 300 $"
+   },
+   {
+    "format": "text",
+    "kicker": "En reais",
+    "h": "Il se déclare en Bens e Direitos de l'IRPF, au taux de la Banque centrale.",
+    "big": "2,45 millions R$"
+   },
+   {
+    "format": "text",
+    "kicker": "En shekels",
+    "h": "Hors UE, être propriétaire impose un représentant fiscal ou les notifications électroniques.",
+    "big": "1,51 millions ₪"
+   },
+   {
+    "format": "text",
+    "kicker": "Depuis la France",
+    "h": "Chaque compte ouvert au Portugal se déclare tous les ans sur le formulaire 3916.",
+    "big": "3916"
+   },
+   {
+    "format": "end",
+    "kicker": "Vos chiffres",
+    "h": "Faites vos calculs.",
+    "body": "Lien dans la bio : article IMT en 2026, avec le simulateur Coût total."
+   }
+  ]
+ }
+}

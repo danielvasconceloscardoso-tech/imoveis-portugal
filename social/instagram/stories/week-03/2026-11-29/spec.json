@@ -1,0 +1,44 @@
+{
+ "frames": [
+  {
+   "pt": {
+    "format": "story-text",
+    "kicker": "Na terça-feira",
+    "big": "6",
+    "h": "Edições: Luxemburgo, França, Suíça, Brasil, EUA e Israel.",
+    "body": "Subscreva no link."
+   },
+   "en": {
+    "format": "story-text",
+    "kicker": "On Tuesday",
+    "big": "6",
+    "h": "Editions: Luxembourg, France, Switzerland, Brazil, USA and Israel.",
+    "body": "Subscribe in the link."
+   },
+   "fr": {
+    "format": "story-text",
+    "kicker": "Mardi",
+    "big": "6",
+    "h": "Éditions : Luxembourg, France, Suisse, Brésil, États-Unis et Israël.",
+    "body": "Abonnez-vous dans le lien."
+   }
+  },
+  {
+   "pt": {
+    "format": "story-card",
+    "kicker": "Novo no feed",
+    "img": "/social/instagram/posts/week-03/2026-11-29_01_postcard-madeira/card-pt.png"
+   },
+   "en": {
+    "format": "story-card",
+    "kicker": "New on the feed",
+    "img": "/social/instagram/posts/week-03/2026-11-29_01_postcard-madeira/card-en.png"
+   },
+   "fr": {
+    "format": "story-card",
+    "kicker": "Nouveau sur le fil",
+    "img": "/social/instagram/posts/week-03/2026-11-29_01_postcard-madeira/card-fr.png"
+   }
+  }
+ ]
+}

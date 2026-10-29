@@ -1,0 +1,23 @@
+{
+ "pt": {
+  "format": "reader-question",
+  "kicker": "Pergunta frequente",
+  "q": "Quanto custam a escritura e o registo?",
+  "a": "No balcão Casa Pronta, a compra com registo custa 375 €, ou 700 € se houver crédito com hipoteca, mais 50 € por cada imóvel adicional. Aí trata da escritura e do registo num só momento. Leve a licença de utilização (ou a sua dispensa, conforme a data de construção) e o certificado energético. Os honorários de advogado contam à parte.",
+  "source": "Fonte: Justiça.gov.pt, Balcão Casa Pronta (atualizado a 22/10/2025)"
+ },
+ "en": {
+  "format": "reader-question",
+  "kicker": "Frequently asked",
+  "q": "How much do the deed and registration cost?",
+  "a": "At a Casa Pronta office, a purchase with registration costs €375, or €700 with a mortgage, plus €50 for each extra property. The deed and the registration are done there in one sitting. Bring the usage license (or its waiver, depending on when the home was built) and the energy certificate. Lawyer's fees are separate.",
+  "source": "Source: Justiça.gov.pt, Casa Pronta office (updated Oct 22, 2025)"
+ },
+ "fr": {
+  "format": "reader-question",
+  "kicker": "Question fréquente",
+  "q": "Combien coûtent l'acte et l'enregistrement ?",
+  "a": "Au guichet Casa Pronta, un achat avec enregistrement coûte 375 €, ou 700 € avec un crédit hypothécaire, plus 50 € par bien supplémentaire. L'acte et l'enregistrement s'y font en une seule fois. Apportez la licence d'utilisation (ou sa dispense, selon la date de construction) et le certificat énergétique. Les honoraires d'avocat s'ajoutent à part.",
+  "source": "Source : Justiça.gov.pt, guichet Casa Pronta (mis à jour le 22/10/2025)"
+ }
+}

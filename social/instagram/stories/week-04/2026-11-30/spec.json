@@ -1,0 +1,78 @@
+{
+ "frames": [
+  {
+   "pt": {
+    "format": "story-text",
+    "kicker": "Amanhã, 1 de dezembro",
+    "h": "Seis edições abrem amanhã.",
+    "body": "Luxemburgo, França, Suíça, Brasil, Estados Unidos e Israel. A primeira newsletter chega quinta-feira, 3 de dezembro."
+   },
+   "en": {
+    "format": "story-text",
+    "kicker": "Tomorrow, December 1",
+    "h": "Six editions open tomorrow.",
+    "body": "Luxembourg, France, Switzerland, Brazil, the US and Israel. The first newsletter arrives Thursday, December 3."
+   },
+   "fr": {
+    "format": "story-text",
+    "kicker": "Demain, 1er décembre",
+    "h": "Six éditions ouvrent demain.",
+    "body": "Luxembourg, France, Suisse, Brésil, États-Unis et Israël. La première newsletter arrive le jeudi 3 décembre."
+   }
+  },
+  {
+   "pt": {
+    "format": "story-card",
+    "kicker": "Novo post",
+    "img": "/social/instagram/posts/week-04/2026-11-30_01_three-budgets/slide-01-pt.png"
+   },
+   "en": {
+    "format": "story-card",
+    "kicker": "New post",
+    "img": "/social/instagram/posts/week-04/2026-11-30_01_three-budgets/slide-01-en.png"
+   },
+   "fr": {
+    "format": "story-card",
+    "kicker": "Nouveau post",
+    "img": "/social/instagram/posts/week-04/2026-11-30_01_three-budgets/slide-01-fr.png"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-card",
+    "kicker": "Novo post",
+    "img": "/social/instagram/posts/week-04/2026-11-30_02_reader-question-prices/card-pt.png"
+   },
+   "en": {
+    "format": "story-card",
+    "kicker": "New post",
+    "img": "/social/instagram/posts/week-04/2026-11-30_02_reader-question-prices/card-en.png"
+   },
+   "fr": {
+    "format": "story-card",
+    "kicker": "Nouveau post",
+    "img": "/social/instagram/posts/week-04/2026-11-30_02_reader-question-prices/card-fr.png"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-text",
+    "kicker": "Pergunte-nos",
+    "h": "A sua pergunta sobre preços, numa linha.",
+    "body": "As mais enviadas viram resposta na newsletter de quinta-feira."
+   },
+   "en": {
+    "format": "story-text",
+    "kicker": "Ask us",
+    "h": "Your question about prices, in one line.",
+    "body": "The most-asked become answers in Thursday's newsletter."
+   },
+   "fr": {
+    "format": "story-text",
+    "kicker": "Posez-nous la question",
+    "h": "Votre question sur les prix, en une ligne.",
+    "body": "Les plus fréquentes reçoivent une réponse dans la newsletter du jeudi."
+   }
+  }
+ ]
+}

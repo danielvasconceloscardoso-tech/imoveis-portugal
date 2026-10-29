@@ -1,0 +1,44 @@
+{
+ "frames": [
+  {
+   "pt": {
+    "format": "story-text",
+    "kicker": "Sondagem",
+    "h": "Assinar a escritura a partir de fora pede uma procuração.",
+    "body": "Feita num consulado português, ou num notário com a Apostila de Haia.",
+    "source": "Fonte: Consulado-Geral de Portugal em Newark"
+   },
+   "en": {
+    "format": "story-text",
+    "kicker": "Poll",
+    "h": "Signing the deed from abroad takes a power of attorney.",
+    "body": "Signed at a Portuguese consulate, or before a notary with the Hague Apostille.",
+    "source": "Source: Consulate General of Portugal in Newark"
+   },
+   "fr": {
+    "format": "story-text",
+    "kicker": "Sondage",
+    "h": "Signer l'acte depuis l'étranger demande une procuration.",
+    "body": "Faite dans un consulat portugais, ou chez un notaire avec l'apostille de La Haye.",
+    "source": "Source : Consulat général du Portugal à Newark"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-card",
+    "kicker": "Mito e lei",
+    "img": "/social/instagram/posts/week-01/2026-11-15_01_myth-vs-law-two-trips/card-pt.png"
+   },
+   "en": {
+    "format": "story-card",
+    "kicker": "Myth and law",
+    "img": "/social/instagram/posts/week-01/2026-11-15_01_myth-vs-law-two-trips/card-en.png"
+   },
+   "fr": {
+    "format": "story-card",
+    "kicker": "Mythe et loi",
+    "img": "/social/instagram/posts/week-01/2026-11-15_01_myth-vs-law-two-trips/card-fr.png"
+   }
+  }
+ ]
+}

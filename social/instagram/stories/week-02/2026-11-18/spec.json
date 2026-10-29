@@ -1,0 +1,84 @@
+{
+ "frames": [
+  {
+   "pt": {
+    "format": "story-text",
+    "kicker": "Um número",
+    "h": "Dias para pagar o IMT, a contar da liquidação.",
+    "big": "30",
+    "source": "Fonte: Decreto-Lei 97/2026 (Código do IMT, art. 36.º)"
+   },
+   "en": {
+    "format": "story-text",
+    "kicker": "One number",
+    "h": "Days to pay the IMT, counted from the assessment.",
+    "big": "30",
+    "source": "Source: Decree-Law 97/2026 (IMT Code, art. 36)"
+   },
+   "fr": {
+    "format": "story-text",
+    "kicker": "Un chiffre",
+    "h": "Jours pour payer l'IMT, à compter de la liquidation.",
+    "big": "30",
+    "source": "Source : Décret-loi 97/2026 (Code de l'IMT, art. 36)"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-card",
+    "kicker": "Novo no feed",
+    "img": "/social/instagram/posts/week-02/2026-11-18_01_one-number-30-days/card-pt.png"
+   },
+   "en": {
+    "format": "story-card",
+    "kicker": "New on the feed",
+    "img": "/social/instagram/posts/week-02/2026-11-18_01_one-number-30-days/card-en.png"
+   },
+   "fr": {
+    "format": "story-card",
+    "kicker": "Nouveau sur le fil",
+    "img": "/social/instagram/posts/week-02/2026-11-18_01_one-number-30-days/card-fr.png"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-text",
+    "kicker": "Pergunte",
+    "h": "Uma dúvida sobre os custos da compra.",
+    "body": "Escreva aqui. Respondemos com a regra e a fonte oficial.",
+    "source": ""
+   },
+   "en": {
+    "format": "story-text",
+    "kicker": "Ask us",
+    "h": "A question about buying costs.",
+    "body": "Type it here. We answer with the rule and the official source.",
+    "source": ""
+   },
+   "fr": {
+    "format": "story-text",
+    "kicker": "Votre question",
+    "h": "Une question sur les frais d'achat.",
+    "body": "Écrivez-la ici. Nous répondons avec la règle et la source officielle.",
+    "source": ""
+   }
+  },
+  {
+   "pt": {
+    "format": "story-card",
+    "kicker": "Novo no feed",
+    "img": "/social/instagram/posts/week-02/2026-11-18_02_budget-buys-reais/card-pt.png"
+   },
+   "en": {
+    "format": "story-card",
+    "kicker": "New on the feed",
+    "img": "/social/instagram/posts/week-02/2026-11-18_02_budget-buys-reais/card-en.png"
+   },
+   "fr": {
+    "format": "story-card",
+    "kicker": "Nouveau sur le fil",
+    "img": "/social/instagram/posts/week-02/2026-11-18_02_budget-buys-reais/card-fr.png"
+   }
+  }
+ ]
+}

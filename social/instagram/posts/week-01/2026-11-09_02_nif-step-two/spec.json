@@ -1,0 +1,125 @@
+{
+ "pt": {
+  "source": "Fontes: Autoridade Tributária, folheto NIF para cidadãos estrangeiros não residentes; Lei Geral Tributária, art. 19.º; Casa Pronta",
+  "slides": [
+   {
+    "format": "text",
+    "kicker": "Passo a passo até à casa",
+    "big": "2/9",
+    "h": "O segundo passo é o NIF, o seu número de contribuinte."
+   },
+   {
+    "format": "text",
+    "kicker": "Porquê primeiro",
+    "h": "Sem NIF, não há escritura.",
+    "body": "A Casa Pronta pede o seu número de contribuinte para a escritura."
+   },
+   {
+    "format": "text",
+    "kicker": "Online",
+    "h": "Pode pedi-lo a partir de casa.",
+    "body": "Um representante legal, como um advogado, faz o pedido no e-balcão das Finanças."
+   },
+   {
+    "format": "text",
+    "kicker": "O que não precisa",
+    "h": "Sem representante fiscal para o obter.",
+    "body": "Di-lo o folheto das Finanças para cidadãos estrangeiros não residentes."
+   },
+   {
+    "format": "text",
+    "kicker": "Depois de ter casa",
+    "big": "15",
+    "h": "dias para nomear um representante fiscal ou aderir às notificações eletrónicas."
+   },
+   {
+    "format": "end",
+    "kicker": "Leia a resposta",
+    "h": "Leia tudo: link na bio.",
+    "body": "Página NIF Portugal online."
+   }
+  ]
+ },
+ "en": {
+  "source": "Sources: Tax and Customs Authority, NIF leaflet for non-resident foreigners; General Tax Law, art. 19; Casa Pronta",
+  "slides": [
+   {
+    "format": "text",
+    "kicker": "Step by step to a home in Portugal",
+    "big": "2/9",
+    "h": "Step two is the NIF, your tax number."
+   },
+   {
+    "format": "text",
+    "kicker": "Why first",
+    "h": "No NIF, no deed.",
+    "body": "Casa Pronta lists your tax number among the documents for the deed."
+   },
+   {
+    "format": "text",
+    "kicker": "Online",
+    "h": "You can ask for it from home.",
+    "body": "A legal representative, a lawyer for example, files it on the e-balcão."
+   },
+   {
+    "format": "text",
+    "kicker": "What you don't need",
+    "h": "No tax representative to get it.",
+    "body": "The tax authority's leaflet for non-resident foreigners says so."
+   },
+   {
+    "format": "text",
+    "kicker": "Once you own the home",
+    "big": "15",
+    "h": "days to appoint a tax representative or join electronic notices."
+   },
+   {
+    "format": "end",
+    "kicker": "Read the answer",
+    "h": "Read it all: link in bio.",
+    "body": "NIF Portugal page."
+   }
+  ]
+ },
+ "fr": {
+  "source": "Sources : Autorité fiscale, brochure NIF pour les étrangers non résidents ; Loi générale fiscale, art. 19 ; Casa Pronta",
+  "slides": [
+   {
+    "format": "text",
+    "kicker": "Pas à pas vers un logement",
+    "big": "2/9",
+    "h": "La deuxième étape, c'est le NIF, votre numéro fiscal."
+   },
+   {
+    "format": "text",
+    "kicker": "Pourquoi d'abord",
+    "h": "Sans NIF, pas d'acte.",
+    "body": "Casa Pronta demande votre numéro fiscal parmi les documents de l'acte."
+   },
+   {
+    "format": "text",
+    "kicker": "En ligne",
+    "h": "Vous pouvez le demander depuis chez vous.",
+    "body": "Un représentant légal, un avocat par exemple, le dépose sur l'e-balcão."
+   },
+   {
+    "format": "text",
+    "kicker": "Inutile",
+    "h": "Aucun représentant fiscal pour l'obtenir.",
+    "body": "La brochure de l'administration fiscale pour les étrangers non résidents le précise."
+   },
+   {
+    "format": "text",
+    "kicker": "Une fois propriétaire",
+    "big": "15",
+    "h": "jours pour désigner un représentant fiscal ou adhérer aux notifications électroniques."
+   },
+   {
+    "format": "end",
+    "kicker": "Lisez la réponse",
+    "h": "Tout lire : lien dans la bio.",
+    "body": "Page NIF Portugal en ligne."
+   }
+  ]
+ }
+}

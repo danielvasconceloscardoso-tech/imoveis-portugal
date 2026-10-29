@@ -1,0 +1,44 @@
+{
+ "frames": [
+  {
+   "pt": {
+    "format": "story-text",
+    "dark": true,
+    "kicker": "Terça-feira, 1 de dezembro",
+    "h": "Lançamos na terça-feira.",
+    "body": "A primeira newsletter chega na quinta, 3 de dezembro."
+   },
+   "en": {
+    "format": "story-text",
+    "dark": true,
+    "kicker": "Tuesday, December 1",
+    "h": "We launch on Tuesday.",
+    "body": "The first newsletter arrives on Thursday, December 3."
+   },
+   "fr": {
+    "format": "story-text",
+    "dark": true,
+    "kicker": "Mardi 1er décembre",
+    "h": "Lancement mardi.",
+    "body": "La première newsletter arrive le jeudi 3 décembre."
+   }
+  },
+  {
+   "pt": {
+    "format": "story-card",
+    "kicker": "Novo no feed",
+    "img": "/social/instagram/posts/week-03/2026-11-28_01_one-number-15-days/card-pt.png"
+   },
+   "en": {
+    "format": "story-card",
+    "kicker": "New on the feed",
+    "img": "/social/instagram/posts/week-03/2026-11-28_01_one-number-15-days/card-en.png"
+   },
+   "fr": {
+    "format": "story-card",
+    "kicker": "Nouveau sur le fil",
+    "img": "/social/instagram/posts/week-03/2026-11-28_01_one-number-15-days/card-fr.png"
+   }
+  }
+ ]
+}

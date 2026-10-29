@@ -1,0 +1,36 @@
+{
+ "fr": {
+  "format": "here-vs-there",
+  "kicker": "Ici et là-bas",
+  "h": "Un mètre carré à Paris. Presque deux à Lisbonne.",
+  "items": [
+   {
+    "place": "Paris",
+    "m2": 1,
+    "v": "1 m²"
+   },
+   {
+    "place": "Lisboa",
+    "m2": 1.8667180277349769,
+    "v": "1,9 m²"
+   },
+   {
+    "place": "Cascais",
+    "m2": 1.9824094906933933,
+    "v": "2,0 m²"
+   },
+   {
+    "place": "Porto",
+    "m2": 2.6692371247590194,
+    "v": "2,7 m²"
+   },
+   {
+    "place": "Grândola (Comporta)",
+    "m2": 3.8112465591820683,
+    "v": "3,8 m²"
+   }
+  ],
+  "note": "9 692 € le m² à Paris (médiane, appartements anciens, octobre 2025 à septembre 2026, Notaires de France), divisés par le prix médian INE de chaque commune.",
+  "source": "Sources : Notaires de France, T3 2026 ; INE, T2 2026"
+ }
+}

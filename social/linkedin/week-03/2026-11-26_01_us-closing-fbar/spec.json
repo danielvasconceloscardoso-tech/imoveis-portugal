@@ -1,0 +1,10 @@
+{
+ "en": {
+  "format": "text",
+  "kicker": "One number",
+  "big": "$10,000",
+  "h": "The FBAR threshold a Portuguese deposit account counts toward.",
+  "body": "US persons file an FBAR when their foreign financial accounts total more than $10,000 at any time in the year.",
+  "source": "Source: IRS, Comparison of Form 8938 and FBAR requirements"
+ }
+}

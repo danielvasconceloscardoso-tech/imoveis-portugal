@@ -1,0 +1,107 @@
+{
+ "frames": [
+  {
+   "pt": {
+    "format": "story-text",
+    "kicker": "Mito e lei",
+    "h": "Dois anos que mudam a conta do IMT.",
+    "big": "2 anos",
+    "source": "Fonte: Código do IMT, art. 17.º, n.os 10 a 12 (DL 97/2026)"
+   },
+   "en": {
+    "format": "story-text",
+    "kicker": "Myth and law",
+    "h": "Two years that change the IMT bill.",
+    "big": "2 years",
+    "source": "Source: IMT Code, art. 17(10) to (12), Decree-Law 97/2026"
+   },
+   "fr": {
+    "format": "story-text",
+    "kicker": "Mythe et loi",
+    "h": "Deux ans qui changent la facture d'IMT.",
+    "big": "2 ans",
+    "source": "Source : Code de l'IMT, art. 17, n.os 10 à 12 (DL 97/2026)"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-card",
+    "kicker": "Novo no feed",
+    "img": "/social/instagram/posts/week-02/2026-11-17_01_myth-vs-law-refund/card-pt.png"
+   },
+   "en": {
+    "format": "story-card",
+    "kicker": "New on the feed",
+    "img": "/social/instagram/posts/week-02/2026-11-17_01_myth-vs-law-refund/card-en.png"
+   },
+   "fr": {
+    "format": "story-card",
+    "kicker": "Nouveau sur le fil",
+    "img": "/social/instagram/posts/week-02/2026-11-17_01_myth-vs-law-refund/card-fr.png"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-text",
+    "kicker": "As três exceções",
+    "h": "Quando a taxa única não se aplica.",
+    "body": "Ter sido considerado residente fiscal em Portugal. Passar a residente nos dois anos seguintes. Arrendar para habitação dentro dos limites de renda da lei.",
+    "source": "Fonte: Código do IMT, art. 17.º, n.os 10 a 12 (DL 97/2026)"
+   },
+   "en": {
+    "format": "story-text",
+    "kicker": "The three exceptions",
+    "h": "When the flat rate doesn't apply.",
+    "body": "You have been considered a Portuguese tax resident. You become one within two years. You let the home within the legal rent caps.",
+    "source": "Source: IMT Code, art. 17(10) to (12), Decree-Law 97/2026"
+   },
+   "fr": {
+    "format": "story-text",
+    "kicker": "Les trois exceptions",
+    "h": "Quand le taux unique ne s'applique pas.",
+    "body": "Avoir été considéré résident fiscal au Portugal. Le devenir dans les deux ans. Louer le bien dans les plafonds de loyer prévus par la loi.",
+    "source": "Source : Code de l'IMT, art. 17, n.os 10 à 12 (DL 97/2026)"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-card",
+    "kicker": "Novo no feed",
+    "img": "/social/instagram/posts/week-02/2026-11-17_02_postcard-lisboa/card-pt.png"
+   },
+   "en": {
+    "format": "story-card",
+    "kicker": "New on the feed",
+    "img": "/social/instagram/posts/week-02/2026-11-17_02_postcard-lisboa/card-en.png"
+   },
+   "fr": {
+    "format": "story-card",
+    "kicker": "Nouveau sur le fil",
+    "img": "/social/instagram/posts/week-02/2026-11-17_02_postcard-lisboa/card-fr.png"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-text",
+    "kicker": "A seguir",
+    "h": "Que custo explicamos a seguir.",
+    "body": "Vote no inquérito. A resposta entra numa das próximas edições.",
+    "source": ""
+   },
+   "en": {
+    "format": "story-text",
+    "kicker": "Coming next",
+    "h": "Pick the next cost we explain.",
+    "body": "Vote in the poll. The answer goes into an upcoming issue.",
+    "source": ""
+   },
+   "fr": {
+    "format": "story-text",
+    "kicker": "À suivre",
+    "h": "Le prochain coût que nous expliquons.",
+    "body": "Votez dans le sondage. La réponse entrera dans un prochain numéro.",
+    "source": ""
+   }
+  }
+ ]
+}

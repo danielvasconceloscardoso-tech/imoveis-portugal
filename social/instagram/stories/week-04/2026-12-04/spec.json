@@ -1,0 +1,61 @@
+{
+ "frames": [
+  {
+   "pt": {
+    "format": "story-card",
+    "kicker": "Novo post",
+    "img": "/social/instagram/posts/week-04/2026-12-04_01_then-and-now/card-pt.png"
+   },
+   "en": {
+    "format": "story-card",
+    "kicker": "New post",
+    "img": "/social/instagram/posts/week-04/2026-12-04_01_then-and-now/card-en.png"
+   },
+   "fr": {
+    "format": "story-card",
+    "kicker": "Nouveau post",
+    "img": "/social/instagram/posts/week-04/2026-12-04_01_then-and-now/card-fr.png"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-text",
+    "kicker": "Quiz",
+    "h": "Em 2016, 100 000 € compravam 53 m² em Lisboa.",
+    "body": "Escolha quanto compram hoje. A resposta está no post desta manhã.",
+    "source": "Fonte: INE, 2016 a 2026"
+   },
+   "en": {
+    "format": "story-text",
+    "kicker": "Quiz",
+    "h": "In 2016, €100,000 bought 53 m² in Lisbon.",
+    "body": "Pick what it buys today. The answer is in this morning's post.",
+    "source": "Source: INE, 2016 to 2026"
+   },
+   "fr": {
+    "format": "story-text",
+    "kicker": "Quiz",
+    "h": "En 2016, 100 000 € achetaient 53 m² à Lisbonne.",
+    "body": "Choisissez ce qu'ils achètent aujourd'hui. La réponse est dans le post de ce matin.",
+    "source": "Source : INE, 2016 à 2026"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-card",
+    "kicker": "Novo post",
+    "img": "/social/instagram/posts/week-04/2026-12-04_02_ten-years-porto/card-pt.png"
+   },
+   "en": {
+    "format": "story-card",
+    "kicker": "New post",
+    "img": "/social/instagram/posts/week-04/2026-12-04_02_ten-years-porto/card-en.png"
+   },
+   "fr": {
+    "format": "story-card",
+    "kicker": "Nouveau post",
+    "img": "/social/instagram/posts/week-04/2026-12-04_02_ten-years-porto/card-fr.png"
+   }
+  }
+ ]
+}

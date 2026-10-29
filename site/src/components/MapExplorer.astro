@@ -56,7 +56,7 @@ const links = {
 const briefs = Object.fromEntries(Object.entries(BRIEFS[lang] ?? {}));
 const cfg = { labels, links, quarter: qLabel, mortgage: { rate: PRICES.mortgage.rate, month }, photos: REGION_PHOTO, briefs,
   privateHref: config.privateLive && mode !== "embed" ? pathFor(lang, ed, "private") : "",
-  projects: PROJECTS.map((p) => ({ ...p, units: undefined, gallery: undefined, sources: undefined, showcase: `${pathFor(lang, ed, "partners")}${p.devSlug}/${p.muni}/` })), routing: config.enquiryRouting, consult: mode === "embed" ? `https://imoveisportugal.lu${pathFor(lang, ed, "consult")}` : pathFor(lang, ed, "consult") };
+  projects: PROJECTS.map((p) => ({ ...p, units: undefined, gallery: undefined, sources: undefined, showcase: `${pathFor(lang, ed, "partners")}${p.devSlug}/${p.muni}/` })), routing: config.enquiryRouting, consult: mode === "embed" ? `https://imoveisportugal.pt${pathFor(lang, ed, "consult")}` : pathFor(lang, ed, "consult") };
 const id = `mapx-${mode}`;
 ---
 <div class={`mapx mapx-${mode}`} data-rates={mode === "embed" ? JSON.stringify(Object.fromEntries((["CHF", "USD", "BRL", "ILS"] as const).map((k) => [k, RATE(k).rate]))) : undefined} data-mapx data-lang={lang} data-locale={HTML_LANG[lang]} data-fx={fx ? fx.rate : ""} data-cur={cur ?? ""} data-mode={mode}>
@@ -142,7 +142,7 @@ const id = `mapx-${mode}`;
     </details>
   )}
   {mode === "embed" && (
-    <p class="mapx-powered"><a href="https://imoveisportugal.lu/" target="_blank" rel="noopener">Powered by Imóveis Portugal</a><span>Fonte: INE · © OpenStreetMap contributors</span></p>
+    <p class="mapx-powered"><a href="https://imoveisportugal.pt/" target="_blank" rel="noopener">Powered by Imóveis Portugal</a><span>Fonte: INE · © OpenStreetMap contributors</span></p>
   )}
   <script type="application/json" data-mapx-labels set:html={JSON.stringify(cfg)} />
 </div>

@@ -1,0 +1,44 @@
+{
+ "en": {
+  "source": "Sources: OCSTAT; Observatoire de l'Habitat; Notaires de France; INE; ECB, Oct 23, 2026",
+  "slides": [
+   {
+    "format": "text",
+    "kicker": "Measured in Lisbon",
+    "big": "2.3 m²",
+    "h": "One square meter in the canton of Geneva buys this much in Lisbon."
+   },
+   {
+    "format": "text",
+    "kicker": "Geneva canton",
+    "big": "CHF 10,853",
+    "h": "Median, existing condo apartments, 2024. €11,762 at the ECB rate."
+   },
+   {
+    "format": "text",
+    "kicker": "Luxembourg City",
+    "big": "2.0 m²",
+    "h": "€10,269 per m², mean, existing apartments, mid-2025 to mid-2026."
+   },
+   {
+    "format": "text",
+    "kicker": "Paris",
+    "big": "1.9 m²",
+    "h": "€9,692 per m², median, existing apartments, to September 2026."
+   },
+   {
+    "format": "text",
+    "kicker": "Lisbon",
+    "big": "€5,192",
+    "h": "INE median per m², all homes sold, 12 months to Q2 2026.",
+    "dark": true
+   },
+   {
+    "format": "end",
+    "kicker": "Ten years, every municipality",
+    "h": "See the prices.",
+    "body": "House prices page, link in the first comment."
+   }
+  ]
+ }
+}

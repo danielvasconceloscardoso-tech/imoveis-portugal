@@ -1,0 +1,10 @@
+{
+ "fr": {
+  "format": "myth-vs-law",
+  "kicker": "Mythe et loi",
+  "h": "Le représentant fiscal vient après le NIF.",
+  "myth": "Un non-résident doit avoir un représentant fiscal pour obtenir un NIF.",
+  "law": "Non. Il devient obligatoire après l'achat, hors UE et EEE, sauf adhésion aux notifications électroniques, dans les 15 jours.",
+  "source": "Sources : Loi générale fiscale, art. 19 ; brochure NIF de l'AT"
+ }
+}

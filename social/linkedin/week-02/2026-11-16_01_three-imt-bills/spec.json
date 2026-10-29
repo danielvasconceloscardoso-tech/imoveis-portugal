@@ -1,0 +1,31 @@
+{
+ "en": {
+  "format": "cost-sheet",
+  "kicker": "IMT at €250,000",
+  "h": "Same home, three IMT bills.",
+  "tag": "Illustrative calculation · 2026 tables",
+  "rows": [
+   {
+    "k": "Resident, own permanent home",
+    "sub": "Progressive table",
+    "v": "€7,042"
+   },
+   {
+    "k": "Resident, other home",
+    "sub": "Progressive table",
+    "v": "€8,105"
+   },
+   {
+    "k": "Non-resident",
+    "sub": "7.5% flat, unless an exception applies",
+    "v": "€18,750"
+   }
+  ],
+  "total": {
+   "k": "Gap",
+   "v": "€11,708",
+   "sub": "own home vs non-resident"
+  },
+  "source": "Source: IMT Code, art. 17(1), (3) and (10), 2026 tables; Decree-Law 97/2026"
+ }
+}

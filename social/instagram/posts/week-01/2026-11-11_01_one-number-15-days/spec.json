@@ -1,0 +1,26 @@
+{
+ "pt": {
+  "format": "one-number",
+  "kicker": "Um número",
+  "big": "15",
+  "h": "Dias para escolher, depois de a casa ser sua.",
+  "note": "Para nomear um representante fiscal em Portugal ou aderir às notificações eletrónicas das Finanças. Fora da UE e do EEE, uma das duas é obrigatória; dentro, o representante é facultativo.",
+  "source": "Fontes: Autoridade Tributária, folheto NIF para cidadãos estrangeiros não residentes; Lei Geral Tributária, art. 19.º"
+ },
+ "en": {
+  "format": "one-number",
+  "kicker": "One number",
+  "big": "15",
+  "h": "Days to choose, once the home is yours.",
+  "note": "To appoint a tax representative in Portugal or join the tax authority's electronic notices. Outside the EU and EEA, one of the two is mandatory; inside, the representative is optional.",
+  "source": "Sources: Tax and Customs Authority, NIF leaflet for non-resident foreigners; General Tax Law, art. 19"
+ },
+ "fr": {
+  "format": "one-number",
+  "kicker": "Un chiffre",
+  "big": "15",
+  "h": "Jours pour choisir, une fois propriétaire.",
+  "note": "Pour désigner un représentant fiscal au Portugal ou adhérer aux notifications électroniques des Finances. Hors UE et EEE, l'un des deux est obligatoire ; dans l'UE, le représentant est facultatif.",
+  "source": "Sources : Autorité fiscale, brochure NIF pour les étrangers non résidents ; Loi générale fiscale, art. 19"
+ }
+}

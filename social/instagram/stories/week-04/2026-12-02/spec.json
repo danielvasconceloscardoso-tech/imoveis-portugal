@@ -1,0 +1,81 @@
+{
+ "frames": [
+  {
+   "pt": {
+    "format": "story-card",
+    "kicker": "A conta completa",
+    "img": "/social/instagram/posts/week-04/2026-12-02_01_cost-sheet/card-pt.png"
+   },
+   "en": {
+    "format": "story-card",
+    "kicker": "The full bill",
+    "img": "/social/instagram/posts/week-04/2026-12-02_01_cost-sheet/card-en.png"
+   },
+   "fr": {
+    "format": "story-card",
+    "kicker": "Le compte complet",
+    "img": "/social/instagram/posts/week-04/2026-12-02_01_cost-sheet/card-fr.png"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-text",
+    "kicker": "Sondagem",
+    "h": "IMT de um não residente, salvo exceções.",
+    "big": "7,5%",
+    "source": "Fonte: Código do IMT, art. 17.º, n.º 10"
+   },
+   "en": {
+    "format": "story-text",
+    "kicker": "Poll",
+    "h": "IMT for a non-resident, unless an exception applies.",
+    "big": "7.5%",
+    "source": "Source: IMT Code, art. 17(10)"
+   },
+   "fr": {
+    "format": "story-text",
+    "kicker": "Sondage",
+    "h": "IMT d'un non-résident, sauf exception.",
+    "big": "7,5 %",
+    "source": "Source : Code de l'IMT, art. 17, n.º 10"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-card",
+    "kicker": "Novo post",
+    "img": "/social/instagram/posts/week-04/2026-12-02_02_postcard-porto/card-pt.png"
+   },
+   "en": {
+    "format": "story-card",
+    "kicker": "New post",
+    "img": "/social/instagram/posts/week-04/2026-12-02_02_postcard-porto/card-en.png"
+   },
+   "fr": {
+    "format": "story-card",
+    "kicker": "Nouveau post",
+    "img": "/social/instagram/posts/week-04/2026-12-02_02_postcard-porto/card-fr.png"
+   }
+  },
+  {
+   "pt": {
+    "format": "story-text",
+    "kicker": "Amanhã",
+    "h": "A primeira newsletter chega amanhã de manhã.",
+    "body": "300 000 € em Portugal, de Lisboa à Comporta. Subscreva hoje para a receber."
+   },
+   "en": {
+    "format": "story-text",
+    "kicker": "Tomorrow",
+    "h": "The first newsletter lands tomorrow morning.",
+    "body": "What your budget buys, from Lisbon to Comporta. Subscribe today to get it."
+   },
+   "fr": {
+    "format": "story-text",
+    "kicker": "Demain",
+    "h": "La première newsletter arrive demain matin.",
+    "body": "300 000 € au Portugal, de Lisbonne à Comporta. Abonnez-vous aujourd'hui pour la recevoir."
+   }
+  }
+ ]
+}

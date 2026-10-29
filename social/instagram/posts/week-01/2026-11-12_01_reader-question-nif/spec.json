@@ -1,0 +1,23 @@
+{
+ "pt": {
+  "format": "reader-question",
+  "kicker": "A sua pergunta",
+  "q": "Como tirar o NIF de Portugal sendo não residente?",
+  "a": "Online, através de um representante legal, como um advogado, que faz o pedido no e-balcão das Finanças; ou num Serviço de Finanças. Não precisa de representante fiscal para o obter. Depois de ter casa, tem 15 dias para nomear um ou aderir às notificações eletrónicas.",
+  "source": "Fontes: Autoridade Tributária, folheto NIF para cidadãos estrangeiros não residentes; Lei Geral Tributária, art. 19.º"
+ },
+ "en": {
+  "format": "reader-question",
+  "kicker": "Your question",
+  "q": "How do I get a NIF in Portugal as a non-resident?",
+  "a": "Online, through a legal representative such as a lawyer, who files the request on the Finanças e-balcão; or in person at a tax office. You don't need a tax representative to get it. Once you own a home, you have 15 days to appoint one or join electronic notices.",
+  "source": "Sources: Tax and Customs Authority, NIF leaflet for non-resident foreigners; General Tax Law, art. 19"
+ },
+ "fr": {
+  "format": "reader-question",
+  "kicker": "Votre question",
+  "q": "Comment obtenir un NIF au Portugal quand on est non-résident ?",
+  "a": "En ligne, par un représentant légal, un avocat par exemple, qui dépose la demande sur l'e-balcão des Finances ; ou dans un bureau des Finances. Aucun représentant fiscal n'est nécessaire pour l'obtenir. Une fois propriétaire, vous avez 15 jours pour en désigner un ou adhérer aux notifications électroniques.",
+  "source": "Sources : Autorité fiscale, brochure NIF pour les étrangers non résidents ; Loi générale fiscale, art. 19"
+ }
+}
