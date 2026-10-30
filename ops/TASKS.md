@@ -179,11 +179,8 @@ Status: To do · Doing · Blocked · Done
 | 40 | Connect imoveisportugal.pt to the Cloudflare project: Workers and Pages, project imoveis-portugal, Settings, Domains and Routes, Add custom domain. If the domain is not on Cloudflare, add it as a zone or point the registrar's nameservers to Cloudflare (steps given in chat on 28 Oct). Then check https://imoveisportugal.pt/pt/lu/ | Operator | To do | 2026-10-29 |
 | 40b | Reconcile claude/brave-gauss-cwafi6 (map v3 "20/20", Passo a passo, film v5) with main: 9 files conflict (copy deck, path page, layout, map script, i18n, checks, decisions, tasks). One CTO session on a branch, build and checks before merge | CTO | To do | 2026-11-03 |
 | 40c | Buy the brand mailbox domain mail on imoveisportugal.pt (Cloudflare Email Routing) and replace ops@imoveisportugal.lu in git config and .githooks once it exists | Operator | To do | 2026-11-06 |
+| 45b | Approve rate card v5 (sponsors/RATE_CARD_v5.md): per-unit developer pricing (400/700/1,200 € per unit, min 10,000 €), golf 24,000 €, lawyer card 3,600 €/edition, finance partner 12,000 €/edition, município 9,000 €, Portugal 100 sponsor 25,000 €, collections 12,000 €, pro data 2,400 €/seat, step-up at 10,000 subscribers; Marble Terrace keeps 5,000 € as the founding reference with the list price in the agreement | Operator | To do | 2026-11-03 |
 | 45a | Confirm the index name ("Índice Imóveis Portugal" is the working name) and review the top 20 / bottom 20 from the back-test before the index goes on the site | Operator | To do | after prompt 45 §1a |
-| 45b | Set the development assessment fee (CEO proposal: 490 € per assessment, 990 €/yr to keep the dated badge; placement per building stays 5,000 €, D63) | Operator | To do | 2026-11-06 |
-| 45c | Set the municipal partner package price (CEO proposal: 3,000–6,000 €/yr; direct award under CCP art. 20(1)(d) below 20,000 €; needs D4) | Operator | To do | 2026-11-13 |
-| 45d | Portugal 100 presenting sponsor (one, exclusive, labelled; CEO proposal 10,000–15,000 €) and badge licence (1,000–2,000 €/yr): approve the offer before any outreach (8q) | Operator | To do | 2026-11-13 |
-| 45e | Pro data membership (quarterly dataset, early access, custom weights; CEO proposal 1,200–2,400 €/yr per seat): decide together with 8y whether agencies may buy it | Operator | To do | 2026-11-20 |
 
 ## Last session
 
