@@ -1,5 +1,7 @@
 # Prompt 44: rank first for "how to buy or sell a home in Portugal from abroad", in five languages
 
+**PARKED by the operator on 30 Oct 2026, 11:40. Do not run until the operator says "run prompt 44".** The competitor briefs (`content/seo/SERP_2026-10-30_*.md`) were cancelled before they were written.
+
 CEO, 30 Oct 2026, 11:30. Operator's goal: when someone types "how can I buy a house in Portugal" or "how do I sell my house in Portugal while living abroad", in Brazilian Portuguese, French, German, Hebrew or American English, we are the first result on Google (Safari searches with Google by default, so Google is the target; Bing feeds DuckDuckGo and ChatGPT, so it comes second). This prompt builds everything that is in our hands. What is not (indexing, accounts, links from others) is listed for the operator at the end.
 
 **Two facts to work from:**
