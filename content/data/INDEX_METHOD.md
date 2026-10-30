@@ -1,6 +1,6 @@
 # The Index: method, v1 (CEO, 30 Oct 2026)
 
-One number out of 100 for each of the 308 municipalities, answering one question: **how well does this place serve someone buying a home from abroad?** Not "cheap or expensive" (the budget decides where), but how the money holds its value, whether the home can be let and sold again, how easy the place is to reach and live in, and what it costs to own. Official data only, method public, recomputed every quarter, frozen once a year as the **Portugal 100**.
+One number out of 100 for each of the 308 municipalities, answering one question: **how well does this place serve someone buying a home from abroad?** Not "cheap or expensive" (the budget decides where), but how the money holds its value, whether the home can be let and sold again, how easy the place is to reach and live in, and what it costs to own. Official data first; open data (OpenStreetMap) only for counting places and measuring distances, always named as such; method public, recomputed every quarter, frozen once a year as the **Portugal 100**.
 
 The working name is "Índice Imóveis Portugal" (operator to confirm the name).
 
@@ -19,17 +19,23 @@ The working name is "Índice Imóveis Portugal" (operator to confirm the name).
 | **Acesso** (getting there) | 20 | Road minutes to the nearest airport with scheduled international flights | 50% | lower | fixed: 30 min → 100, 180 min → 0 | OSRM on OpenStreetMap; airports LIS, OPO, FAO, FNC, PDL, TER, PXO |
 | | | Road minutes to the nearest SNS hospital with an emergency service | 30% | lower | fixed: 15 → 100, 90 → 0 | SNS transparency portal / dados.gov.pt |
 | | | Fibre (FTTH) coverage of households | 20% | higher | fixed: 100% → 100, 50% → 0 | ANACOM, per municipality |
-| **Vida** (living there) | 20 | Annual sunshine hours | 20% | higher | relative | IPMA 1991–2020 normals, nearest station |
-| | | Hot days (max ≥ 35 °C, or the nearest threshold IPMA publishes) | 15% | lower | relative | IPMA normals |
-| | | Distance from the municipality seat to the coast | 25% | lower | fixed: 10 km → 100, 60 km → 0 | OpenStreetMap coastline |
-| | | Blue Flag beaches within 20 km | 10% | higher | fixed: 0 → 0, 5+ → 100 | ABAE, current year |
-| | | Golf courses within 30 road minutes | 10% | higher | fixed: 0 → 0, 5+ → 100 | our list, content/facts/golf/courses.csv |
-| | | Crimes recorded per 1,000 inhabitants, 3-year average | 20% | lower | relative | INE / DGPJ |
+| **Vida** (living there) | 20 | *Clima:* annual sunshine hours | 12% | higher | relative | IPMA 1991–2020 normals, nearest station |
+| | | *Clima:* hot days (max ≥ 35 °C, or the nearest threshold IPMA publishes) | 8% | lower | relative | IPMA normals |
+| | | *Água:* distance from the municipality seat to the coast | 12% | lower | fixed: 10 km → 100, 60 km → 0 | OpenStreetMap coastline |
+| | | *Água:* distance to a major river, estuary or lake (named list: Minho, Lima, Cávado, Douro, Vouga and Ria de Aveiro, Mondego, Tejo, Sado, Mira, Guadiana, Alqueva, Castelo do Bode) | 8% | lower | fixed: 2 km → 100, 20 km → 0 | OpenStreetMap waterways |
+| | | *Água:* Blue Flag beaches within 20 km | 5% | higher | fixed: 0 → 0, 5+ → 100 | ABAE, current year |
+| | | *Mesa:* restaurants within 15 road minutes of the seat, log | 10% | higher | relative | OpenStreetMap (amenity=restaurant), checked against INE enterprise counts, CAE 56, per municipality |
+| | | *Mesa:* Michelin Guide restaurants (starred or Bib Gourmand) within 30 road minutes | 5% | higher | fixed: 0 → 0, 5+ → 100 | Michelin Guide Portugal, current edition, list kept in content/facts/michelin.csv with URL and date |
+| | | *Desporto:* golf courses within 30 road minutes | 5% | higher | fixed: 0 → 0, 5+ → 100 | our list, content/facts/golf/courses.csv |
+| | | *Desporto:* road minutes to the nearest Primeira Liga stadium (the 18 clubs of the current season) | 5% | lower | fixed: 20 min → 100, 120 min → 0 | Liga Portugal, stadium list of the season; OSRM |
+| | | *Desporto:* gyms and fitness centres within 15 road minutes, log | 5% | higher | relative | OpenStreetMap (leisure=fitness_centre), checked against INE CAE 93.13 where published |
+| | | *Cultura:* museums, cinemas and live-performance venues in the municipality, per 10,000 residents | 10% | higher | relative | INE culture statistics by municipality |
+| | | *Segurança:* crimes recorded per 1,000 inhabitants, 3-year average | 15% | lower | relative | INE / DGPJ |
 | **Custo de ter** (owning it) | 10 | Municipal IMI rate on urban property | 60% | lower | fixed: 0.30% → 100, 0.45% → 0 | Portal das Finanças, annual table |
 | | | Municipal IRS rebate returned to residents | 25% | higher | fixed: 0% → 0, 5% → 100 | annual Portaria / AT |
 | | | IMI familiar deduction offered | 15% | yes = 100 | fixed | Portal das Finanças |
 
-Weights sum to 100. They were set for a buyer who lives abroad: reaching the place and being able to sell it again weigh as much as the lifestyle; price growth matters more than yield because most readers buy to live or to keep, not to let.
+Weights sum to 100 (within Vida: Clima 20, Água 25, Mesa 15, Desporto 15, Cultura 10, Segurança 15). They were set for a buyer who lives abroad: reaching the place and being able to sell it again weigh as much as the lifestyle; price growth matters more than yield because most readers buy to live or to keep, not to let.
 
 ## 2. The computation
 
@@ -75,9 +81,11 @@ For each indicator *i* and municipality *m*, with raw value *x*:
 
 1. **Map:** the colour field defaults to the index; one tap switches to price. **Card:** "92 · Cascais" with a one-line reason generated from the two strongest and the weakest pillar ("Forte em acesso e liquidez; rendimento baixo."), the six pillar bars one tap away, and the sources.
 2. **"O seu índice":** six sliders, one per pillar, normalised to 100; the map recolours live; saved on the reader's device; the Concierge uses the reader's weights when it suggests places. The official index stays the official one, labelled.
+   - **"O meu clube":** the reader picks a Primeira Liga club; the personal index then measures minutes to that club's stadium instead of the nearest one. The official index never favours a club.
+   - **"Onde como":** a toggle that shows the Michelin and restaurant counts on the card.
 3. **Edition overlay (not part of the index):** "Com {budget} compra {m²} aqui" from the budget field, and the flight time from the edition's main airport (a static table).
 4. **Search:** typing a place returns its card with the score first.
 
 ## 8. Data pipeline
 
-`scripts/index/`: one fetcher per source with a dated raw snapshot in `content/data/index/raw/{source}/{date}/`, one `compute.py` that produces `site/public/data/index.json` (per municipality: index, rank, pillars, indicators with raw value, score, source, date, estimated flag, coverage), unit tests for scaling and imputation, and `RELEASES.md` with one line per release. OSRM runs locally on the Geofabrik Portugal extract. Allowlist additions: `anacom.pt`, `download.geofabrik.de`, `transparencia.sns.gov.pt`, `bandeiraazul.abae.pt`.
+`scripts/index/`: one fetcher per source with a dated raw snapshot in `content/data/index/raw/{source}/{date}/`, one `compute.py` that produces `site/public/data/index.json` (per municipality: index, rank, pillars, indicators with raw value, score, source, date, estimated flag, coverage), unit tests for scaling and imputation, and `RELEASES.md` with one line per release. OSRM runs locally on the Geofabrik Portugal extract. Places (restaurants, gyms, stadiums, Michelin, golf) are counted inside OSRM isochrones from the municipality seat; OSM completeness is reported per municipality against the INE enterprise counts, and where OSM covers less than 60% of the INE count the INE figure is used instead. Allowlist additions: `anacom.pt`, `download.geofabrik.de`, `transparencia.sns.gov.pt`, `bandeiraazul.abae.pt`, `guide.michelin.com`, `ligaportugal.pt`.
