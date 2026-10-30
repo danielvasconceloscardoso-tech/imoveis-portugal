@@ -28,7 +28,7 @@ voici le troisième et dernier e-mail de bienvenue d'Imóveis Portugal, le guide
 
 ## Signer sans prendre l'avion
 
-« Je ne peux pas aller au Portugal juste pour signer. » Le droit portugais ne vous le demande pas. Une procuration signée dans un consulat du Portugal, ou devant un notaire de votre pays avec l'apostille de La Haye, permet à la personne de votre choix, souvent un avocat, de signer le compromis et l'acte en votre nom (source : services consulaires du Portugal, vérifié le 24 octobre 2026). Vous pouvez venir quand même pour la visite, pour les clés, ou pour les deux.
+Vous n'avez pas besoin de venir au Portugal pour signer. Une procuration signée dans un consulat du Portugal, ou devant un notaire de votre pays avec l'apostille de La Haye, permet à la personne de votre choix, souvent un avocat, de signer le compromis et l'acte en votre nom (source : services consulaires du Portugal, vérifié le 24 octobre 2026). Vous pouvez venir quand même pour la visite, pour les clés, ou pour les deux.
 
 Le jour venu, le guichet Casa Pronta fait l'acte et l'inscription au registre foncier en une seule fois, pour 375 € (Justiça.gov.pt, vérifié le 25 octobre 2026). La Casa Pronta demande la licence d'utilisation, ou sa dispense, et le certificat énergétique. Les impôts et les honoraires de l'avocat sont à part.
 

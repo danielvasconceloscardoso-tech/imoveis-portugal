@@ -13,7 +13,7 @@ Escreva um valor e veja, concelho a concelho, quantos metros quadrados pode ter.
 [Mapa]
 
 ## As dúvidas de quem compra a partir de fora
-Não posso ir a Portugal.
+Posso comprar sem ir a Portugal?
 Assina uma procuração no Luxemburgo e um advogado parceiro trata da compra. As visitas podem ser por videochamada. [Falar com um advogado]
 
 Quanto vou pagar no total?

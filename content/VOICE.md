@@ -7,7 +7,7 @@ Target feeling: reliable, optimistic, calm. "This is doable, and they know who c
 ## Voice v3 (prompt 17, D35): the rules
 
 1. **Optimistic and realistic.** Buying from abroad is doable, and we show how. We never dramatise costs or risks and never promise outcomes or returns.
-2. **Obstacle, information, partner.** Every section, FAQ answer, newsletter item and e-book chapter starts from a real obstacle in the reader's own words ("Não posso ir a Portugal", "O banco empresta a quem vive fora?"), answers it with the verified rule or number, and ends with the partner who solves it (lawyer, credit partner, tax adviser, agency, money transfer, developer).
+2. **Obstacle, information, partner.** Every section, FAQ answer, newsletter item and e-book chapter starts from a real question in the reader's own words, framed positively ("Posso comprar sem ir a Portugal?", "O banco empresta a quem vive fora?"; never "Não posso…", EDITORIAL_POLICY rule 10), answers it with the verified rule or number, and ends with the partner who solves it (lawyer, credit partner, tax adviser, agency, money transfer, developer).
 3. **Talk to the reader directly.** PT "o seu", "a sua", "pode" (and "você" where a subject is needed); EN "you"; FR "vous". Never "quem compra", "o comprador", "os utilizadores", "the buyer", "users", "l'acheteur", "ceux qui achètent".
 4. **Costs are information, not a warning.** "Custo total com impostos, escritura e registo: X €" or "Custos de compra". Never "por cima", "a somar", "o preço é o início".
 5. **Respect.** The reader is a capable adult with a plan. No clichés about emigrants (August, saudade, the village).

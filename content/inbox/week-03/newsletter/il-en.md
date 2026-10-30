@@ -28,7 +28,7 @@ this is the third and last welcome email from Imóveis Portugal, the guide to bu
 
 ## You can sign without flying in
 
-"I can't fly to Portugal just to sign." Portuguese law doesn't ask you to. A power of attorney signed at a Portuguese consulate, or before a notary where you live with the Hague Apostille, lets the person you choose, often a lawyer, sign the promissory contract and the deed in your name (source: Portugal's consular services, checked October 24, 2026). You can still come over for the visit, the keys or both.
+You don't need to fly to Portugal to sign. A power of attorney signed at a Portuguese consulate, or before a notary where you live with the Hague Apostille, lets the person you choose, often a lawyer, sign the promissory contract and the deed in your name (source: Portugal's consular services, checked October 24, 2026). You can still come over for the visit, the keys or both.
 
 On the day, a Casa Pronta office does the deed and the land registration in one sitting, for €375, about ₪1,310 at the ECB reference rate of October 23 (Justiça.gov.pt, checked October 25, 2026). Casa Pronta asks for the usage license, or its waiver, and the energy certificate. Taxes and the lawyer's fees are separate.
 

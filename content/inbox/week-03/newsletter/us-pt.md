@@ -28,7 +28,7 @@ este é o terceiro e último email de boas-vindas do Imóveis Portugal, o guia p
 
 ## Assinar sem vir a Portugal
 
-«Não posso ir a Portugal só para assinar.» A lei portuguesa não lhe pede isso. Uma procuração feita num consulado português, ou num notário do país onde vive com a Apostila de Haia, permite que a pessoa que escolher, muitas vezes um advogado, assine o contrato-promessa e a escritura em seu nome (fonte: serviços consulares portugueses, verificado a 24 de outubro de 2026). E pode vir na mesma para a visita, para as chaves ou para as duas coisas.
+Não precisa de vir a Portugal para assinar. Uma procuração feita num consulado português, ou num notário do país onde vive com a Apostila de Haia, permite que a pessoa que escolher, muitas vezes um advogado, assine o contrato-promessa e a escritura em seu nome (fonte: serviços consulares portugueses, verificado a 24 de outubro de 2026). E pode vir na mesma para a visita, para as chaves ou para as duas coisas.
 
 No dia, o balcão Casa Pronta faz a escritura e o registo no mesmo momento, por 375 €, cerca de 420 dólares à taxa de referência do BCE de 23 de outubro (Justiça.gov.pt, verificado a 25 de outubro de 2026). A Casa Pronta pede a licença de utilização, ou a sua dispensa, e o certificado energético. Os impostos e os honorários do advogado contam à parte.
 

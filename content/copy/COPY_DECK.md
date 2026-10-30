@@ -546,14 +546,14 @@ How to edit:
 - FR: Vos questions, nos réponses
 
 ### qa.away.q
-- PT: Não posso ir a Portugal.
-- EN: I can't travel to Portugal.
-- FR: Je ne peux pas aller au Portugal.
+- PT: Posso comprar sem ir a Portugal?
+- EN: Can I buy without going to Portugal?
+- FR: Puis-je acheter sans aller au Portugal ?
 
 ### qa.away.a
-- PT: Assina uma procuração {where} e um advogado parceiro trata da compra. As visitas podem ser por videochamada.
-- EN: You sign a power of attorney {where} and a partner lawyer handles the purchase. Viewings can be done by video call.
-- FR: Vous signez une procuration {where} et un avocat partenaire s'occupe de l'achat. Les visites peuvent se faire en appel vidéo.
+- PT: Sim. Assina uma procuração {where} e um advogado parceiro trata da compra por si. As visitas podem ser por videochamada.
+- EN: Yes. You sign a power of attorney {where} and a partner lawyer handles the purchase for you. Viewings can be done by video call.
+- FR: Oui. Vous signez une procuration {where} et un avocat partenaire s'occupe de l'achat pour vous. Les visites peuvent se faire en appel vidéo.
 
 ### qa.total.q
 - PT: Quanto vou pagar no total?

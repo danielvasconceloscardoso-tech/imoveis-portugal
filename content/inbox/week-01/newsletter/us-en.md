@@ -30,7 +30,7 @@ welcome to Imóveis Portugal. We write about buying a home in Portugal from the 
 
 Until then, three short emails. This one starts where every purchase starts.
 
-If you can't fly to Portugal just to start the paperwork, you don't have to. Before any offer or deed, you need a NIF, the Portuguese tax number: the deed can't be signed without it. A legal representative, such as a lawyer, can request it online for you, and you don't need a tax representative to get it.
+You don't need to fly to Portugal to start the paperwork. Before any offer or deed, you need a NIF, the Portuguese tax number: the deed can't be signed without it. A legal representative, such as a lawyer, can request it online for you, and you don't need a tax representative to get it.
 
 The tax representative comes after the purchase. Once you own the home, you have 15 days to appoint one or join the tax authority's electronic notices, and because the US is outside the EU and the EEA, one of the two is mandatory.
 
