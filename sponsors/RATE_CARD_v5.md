@@ -60,6 +60,16 @@ Benchmarks are market practice, not promises; the partner's own numbers decide.
 - A new-build buyer furnishes and fits out for 20,000–50,000 €. Airlines sell the flights, every month.
 - **Collection sponsor** (Comprar do estrangeiro · Vender e herdar · Golfe · Vinho · Mar · Madeira): 12,000 €/yr per collection, exclusive, labelled. Kitchens, furniture, airlines, wine estates, hotels.
 
+## 7b. The feed: featured posts and campaigns (the Gentleman's Gram / Visit Madeira model)
+
+- Curated lifestyle pages earn from placements: a brand pays per post, priced on followers and fit (lifestyle accounts clear roughly 10 € per 1,000 followers per post); tourism boards (Visit Madeira, Visit Portugal, the regional promotion agencies) pay creators and media for content in their source markets and repost what fits their image. Our feed is that page with a number on every image: the place, the index score, the price per m². Nobody else can post that.
+- **Featured post** (one image or carousel, labelled "Patrocinado"): 300 € pre-launch, repriced every quarter at 10 € per 1,000 followers, minimum 300 €. **Featured reel** (drone or film, 20–40 s): 2× the post price. Posted on all six editions' accounts and in that week's letters.
+- **Golf spot of the week** (post + reel + letter feature): 1,500 € pre-launch; included for Golf Collection partners.
+- **Concelho da semana** (post + reel + the index card + letter feature + the municipality page): 2,500 € pre-launch, 4,900 € from Q1 2027 (CCP art. 128).
+- **Developer launch** (reel + stories + letter slot + the showcase): 2,500 €; included in the per-unit listing.
+- **Tourism-board campaign** (regional promotion agencies, AP Madeira, Turismo de Portugal source-market budgets): 4–8 posts, 2 reels, a collection cover, a letter feature in the editions they target: 7,500–15,000 € per campaign; procurement, so D4 first.
+- Rules: every paid post labelled (Código da Publicidade art. 8; Instagram's paid-partnership tool; France's "collaboration commerciale" wording in the FR captions); facts and sources as everywhere (D12); reposted creator content only with written permission, logged.
+
 ## 8. Readers and professionals
 
 - **Paid call** with the qualified advisor: 150 € / 45 min (unchanged).
@@ -85,8 +95,9 @@ Benchmarks are market practice, not promises; the partner's own numbers decide.
 | Lawyers, tax, insurance: 6 cards | | 22,000 € |
 | Portugal 100 presenting sponsor (a bank) | | 15,000 € |
 | Municipalities: 2 pilots from Q1 2027 | | 10,000 € |
+| Feed: featured posts, golf spots, concelhos, one tourism-board campaign | | 25,000 € |
 | Collections and pro data | 2027 | 0–30,000 € |
-| **Realistic year 1** | | **≈ 200,000 € ARR** |
+| **Realistic year 1** | | **≈ 225,000 € ARR** |
 
 Closing that needs about fifteen signatures in six months, most of them in Portugal: three banks, eight developers, the rest cards. Niche B2B media changes hands at 2–4× revenue, more with proprietary data; the index and the Portugal 100 are what make the multiple.
 
