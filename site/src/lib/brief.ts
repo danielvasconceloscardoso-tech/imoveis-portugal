@@ -28,7 +28,8 @@ export function gather(): BriefFacts | null {
   const places = read<string[]>("ip.places", []);
   const budget = Number(path.budget) || Number(read<number>("ip.budget", 0)) || undefined;
   const f: BriefFacts = { door: path.door === "sell" ? "sell" : "buy", budget, places, when: path.started ? path.when : undefined, inh: path.inh };
-  if (path.ticks?.length || path.started) f.nif = !!path.ticks?.includes("docs.1");
+  // Prompt 43: the stations no longer carry a checklist, so the NIF is only reported when a reader actually ticked it.
+  if (path.ticks?.length) f.nif = path.ticks.includes("docs.1");
   if (f.door === "buy") {
     const cost = sims.cost, pay = sims.payment, aff = sims.afford;
     if (cost) f.total = Math.round(cost.r["r.total"]);

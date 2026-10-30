@@ -4650,10 +4650,217 @@ How to edit:
 
 ## path
 
-### numbers.mapsell
-- PT: Ver no mapa os preços oficiais da zona
-- EN: See the area's official prices on the map
-- FR: Voir sur la carte les prix officiels du secteur
+Prompt 43 §3b: each station is a plain question (st.{k}.q) and a two or three sentence answer (st.{k}.a), then "Saiba mais" and one partner link (p.*) that opens the Concierge with the topic.
+
+### learn
+- PT: Saiba mais
+- EN: Learn more
+- FR: En savoir plus
+
+### p.tag
+- PT: Parceiro
+- EN: Partner
+- FR: Partenaire
+
+### p.lawyer
+- PT: Esclarecer com um advogado parceiro
+- EN: Clarify with a partner lawyer
+- FR: En parler avec un avocat partenaire
+
+### p.advisor
+- PT: Falar com o consultor
+- EN: Talk to the advisor
+- FR: Parler au conseiller
+
+### p.bank
+- PT: Pedir uma simulação a um banco parceiro
+- EN: Ask a partner bank for a simulation
+- FR: Demander une simulation à une banque partenaire
+
+### p.tax
+- PT: Esclarecer com um consultor fiscal parceiro
+- EN: Clarify with a partner tax adviser
+- FR: En parler avec un conseiller fiscal partenaire
+
+### st.place.q
+- PT: Onde posso comprar com o meu orçamento?
+- EN: Where can my budget buy a home?
+- FR: Où acheter avec mon budget ?
+
+### st.place.a
+- PT: O mapa mostra o preço mediano por metro quadrado em cada concelho, com dados do INE, o instituto de estatística português. Assim vê quanto espaço o seu orçamento compra em cada zona. Pode comparar duas ou três zonas lado a lado.
+- EN: The map shows the median price per square metre in each municipality, from INE, Portugal's statistics office. You can see how much space your budget buys in each area. You can also compare two or three areas side by side.
+- FR: La carte montre le prix médian au mètre carré dans chaque commune, selon l'INE, l'institut statistique portugais. Vous voyez ainsi la surface que permet votre budget dans chaque secteur. Vous pouvez aussi comparer deux ou trois secteurs côte à côte.
+
+### st.money.q
+- PT: Como pago a casa?
+- EN: How do I pay for the home?
+- FR: Comment payer le bien ?
+
+### st.money.a
+- PT: Pode pagar com as suas poupanças, com crédito de um banco português ou com o banco do país onde vive. Em Portugal, o banco empresta até 90% do valor para a casa onde vai viver e até 80% para uma casa de férias. O banco pede também a origem do dinheiro, por isso ajuda ter os comprovativos à mão.
+- EN: You can pay with your savings, a mortgage from a Portuguese bank or a loan from your bank at home. In Portugal, banks lend up to 90% of the value for the home you live in and up to 80% for a holiday home. The bank also asks where the money comes from, so it helps to have the proof ready.
+- FR: Vous pouvez payer avec votre épargne, un crédit d'une banque portugaise ou un prêt de votre banque. Au Portugal, la banque prête jusqu'à 90 % de la valeur pour la résidence principale et jusqu'à 80 % pour une résidence secondaire. Elle demande aussi l'origine des fonds : il est utile d'avoir les justificatifs sous la main.
+
+### st.docs.q
+- PT: Que documentos preciso para comprar?
+- EN: Which documents do I need to buy?
+- FR: Quels documents faut-il pour acheter ?
+
+### st.docs.a
+- PT: Precisa do NIF, o seu número fiscal português, que pode pedir online através de um representante, e de um documento de identificação válido. Para assinar a partir do país onde vive, passa uma procuração num consulado português. Também a pode fazer num notário local, com a Apostila de Haia, um selo que a torna válida em Portugal.
+- EN: You need a NIF, your Portuguese tax number, which you can request online through a representative, and a valid passport or ID card. To sign from the country where you live, you give a power of attorney at a Portuguese consulate. A local notary works too, with a Hague Apostille, a stamp that makes it valid in Portugal.
+- FR: Il vous faut un NIF, votre numéro fiscal portugais, que vous pouvez demander en ligne par un représentant, et une pièce d'identité valide. Pour signer depuis votre pays, vous donnez une procuration dans un consulat du Portugal. Un notaire local convient aussi, avec l'apostille de La Haye, un tampon qui la rend valable au Portugal.
+
+### st.struct.q
+- PT: E se quiser viver em Portugal parte do ano?
+- EN: What if I want to live in Portugal part of the year?
+- FR: Et pour vivre au Portugal une partie de l'année ?
+
+### st.struct.a
+- PT: Comprar casa e viver em Portugal são passos separados: para viver cá, há vistos de residência, como o de quem vive de rendimentos próprios (D7). A residência fiscal, o país onde paga o imposto sobre o rendimento, define os impostos que paga em Portugal. Para algumas profissões, o IFICI dá uma taxa especial a quem se muda.
+- EN: Buying a home and living in Portugal are separate steps: to live here, there are residence visas, such as the one for people with their own income (D7). Your tax residence, the country where you pay income tax, sets the taxes you pay in Portugal. For some professions, IFICI gives a special rate to people who move here.
+- FR: Acheter et vivre au Portugal sont deux démarches distinctes : pour vivre ici, il existe des visas de résidence, comme celui des personnes qui vivent de leurs propres revenus (D7). Votre résidence fiscale, le pays où vous payez l'impôt sur le revenu, fixe les impôts que vous payez au Portugal. Pour certaines professions, l'IFICI offre un taux spécial à ceux qui s'installent.
+
+### st.choose.q
+- PT: Como vejo casas à distância?
+- EN: How do I view homes from abroad?
+- FR: Comment visiter des biens à distance ?
+
+### st.choose.a
+- PT: O consultor da agência parceira organiza as visitas: por videochamada, com um familiar ou ao vivo quando vier a Portugal. No mapa, também vê os empreendimentos novos dos promotores parceiros. Quando encontrar a casa, o consultor ajuda a preparar a proposta.
+- EN: The partner agency's advisor arranges the viewings: by video call, with a relative, or in person when you visit Portugal. On the map, you can also see new developments from partner developers. Once you find the home, the advisor helps you prepare the offer.
+- FR: Le conseiller de l'agence partenaire organise les visites : en appel vidéo, avec un proche ou sur place lors de votre venue au Portugal. Sur la carte, vous voyez aussi les programmes neufs des promoteurs partenaires. Une fois le bien trouvé, le conseiller vous aide à préparer l'offre.
+
+### st.cpcv.q
+- PT: O que é o contrato-promessa?
+- EN: What is the promissory contract?
+- FR: Qu'est-ce que le compromis ?
+
+### st.cpcv.a
+- PT: O contrato-promessa de compra e venda (CPCV) assina-se antes da escritura e fixa o preço, a data e o sinal, o valor que paga nesse dia. A lei protege as duas partes: se o vendedor desistir, devolve o sinal em dobro; se for o comprador, o sinal fica com o vendedor.
+- EN: The promissory contract (CPCV) is signed before the deed and sets the price, the date and the deposit (sinal), the amount you pay that day. The law protects both sides: if the seller backs out, they repay the deposit twice over; if the buyer does, the seller keeps it.
+- FR: Le compromis (CPCV) se signe avant l'acte et fixe le prix, la date et les arrhes (sinal), la somme versée ce jour-là. La loi protège les deux parties : si le vendeur se retire, il rend le double des arrhes ; si c'est l'acheteur, le vendeur les garde.
+
+### st.deed.q
+- PT: Como se faz a escritura?
+- EN: How does the deed work?
+- FR: Comment se passe l'acte ?
+
+### st.deed.a
+- PT: A escritura é o ato que põe a casa em seu nome. Antes dela, paga o IMT, o imposto sobre a compra, e o imposto do selo. Num balcão Casa Pronta, a escritura e o registo fazem-se num só momento, pessoalmente ou por procuração.
+- EN: The deed (escritura) is the act that puts the home in your name. Before it, you pay IMT, the tax on the purchase, and stamp duty. At a Casa Pronta desk, the deed and the land registration happen in one sitting, in person or through a power of attorney.
+- FR: L'acte (escritura) transfère le bien à votre nom. Avant l'acte, vous payez l'IMT, l'impôt sur l'achat, et le droit de timbre. Dans un guichet Casa Pronta, l'acte et l'inscription au registre se font en une seule fois, en personne ou par procuration.
+
+### st.estate.q
+- PT: Em nome próprio ou por uma sociedade?
+- EN: In your own name or through a company?
+- FR: En nom propre ou par une société ?
+
+### st.estate.a
+- PT: Pode comprar em seu nome ou através de uma sociedade, e cada forma tem impostos próprios. Quando a soma dos valores patrimoniais, o valor fiscal das casas, passa de 600 000 € por pessoa, aplica-se o AIMI, um adicional ao imposto municipal. As taxas do AIMI são diferentes para pessoas e para sociedades.
+- EN: You can buy in your own name or through a company, and each has its own taxes. When the tax values of your homes in Portugal add up to more than €600,000 per person, AIMI applies, an additional property tax. AIMI rates differ for individuals and companies.
+- FR: Vous pouvez acheter en nom propre ou par une société, et chaque formule a sa fiscalité. Quand la somme des valeurs fiscales de vos biens au Portugal dépasse 600 000 € par personne, l'AIMI s'applique, un impôt additionnel sur l'immobilier. Les taux de l'AIMI diffèrent entre personnes et sociétés.
+
+### st.keys.q
+- PT: O que acontece quando recebo as chaves?
+- EN: What happens when I get the keys?
+- FR: Que se passe-t-il à la remise des clés ?
+
+### st.keys.a
+- PT: Recebe as chaves, passa a água, a luz e o gás para o seu nome e escolhe um seguro para a casa. As Finanças, a autoridade tributária portuguesa, enviam as cartas para a morada fiscal que indicar.
+- EN: You get the keys, move the water, power and gas contracts into your name and choose home insurance. The Finanças, Portugal's tax authority, send their letters to the tax address you give them.
+- FR: Vous recevez les clés, mettez l'eau, l'électricité et le gaz à votre nom et choisissez une assurance habitation. Les Finanças, l'administration fiscale portugaise, envoient leur courrier à l'adresse fiscale que vous indiquez.
+
+### st.own.q
+- PT: Que impostos pago como proprietário?
+- EN: What taxes do I pay as an owner?
+- FR: Quels impôts payer en tant que propriétaire ?
+
+### st.own.a
+- PT: Todos os anos paga o IMI, o imposto municipal sobre a casa, entre 0,3% e 0,45% do valor fiscal. Se arrendar, as rendas de não residentes pagam 25% em Portugal, com taxas mais baixas para contratos longos. O país onde vive pode também ter regras para essas rendas.
+- EN: Each year you pay IMI, the municipal tax on the home, between 0.3% and 0.45% of its tax value. If you rent it out, rent earned by non-residents is taxed at 25% in Portugal, with lower rates for long leases. Your home country may also have rules for that rent.
+- FR: Chaque année, vous payez l'IMI, l'impôt municipal sur le bien, entre 0,3 % et 0,45 % de sa valeur fiscale. Si vous louez, les loyers des non-résidents sont imposés à 25 % au Portugal, avec des taux réduits pour les baux longs. Votre pays peut aussi avoir ses règles pour ces loyers.
+
+### st.later.q
+- PT: E se um dia vender?
+- EN: What if I sell one day?
+- FR: Et si je revends un jour ?
+
+### st.later.a
+- PT: Em Portugal, só metade da mais-valia, o ganho na venda, conta para o IRS, o imposto sobre o rendimento. O país onde vive pode também tributá-la, segundo o acordo fiscal entre os dois países.
+- EN: In Portugal, only half of the capital gain, the profit on the sale, counts for income tax (IRS). Your home country may also tax it, under the tax treaty between the two countries.
+- FR: Au Portugal, seule la moitié de la plus-value, le gain sur la vente, compte pour l'impôt sur le revenu (IRS). Votre pays peut aussi l'imposer, selon la convention fiscale entre les deux pays.
+
+### st.worth.q
+- PT: Quanto vale a minha casa?
+- EN: What is my home worth?
+- FR: Combien vaut mon bien ?
+
+### st.worth.a
+- PT: O mapa mostra o preço mediano por metro quadrado no seu concelho, com dados oficiais do INE. Para um valor da sua casa, o consultor da agência parceira faz uma avaliação sem compromisso.
+- EN: The map shows the median price per square metre in your municipality, from official INE data. For a figure for your own home, the partner agency's advisor gives you a valuation with no commitment.
+- FR: La carte montre le prix médian au mètre carré dans votre commune, selon les données officielles de l'INE. Pour un chiffre sur votre bien, le conseiller de l'agence partenaire fait une estimation sans engagement.
+
+### st.inherit.q
+- PT: Como trato de uma casa herdada?
+- EN: How do I handle an inherited home?
+- FR: Comment gérer un bien hérité ?
+
+### st.inherit.a
+- PT: Os herdeiros comunicam o óbito e os bens às Finanças até ao fim do terceiro mês seguinte, mesmo quando estão isentos. Cônjuge, filhos e pais não pagam o imposto do selo de 10% sobre a herança. A habilitação de herdeiros, o documento que diz quem herda, permite depois registar a casa em nome de cada um.
+- EN: The heirs report the death and the assets to the Finanças, the tax office, by the end of the third following month, even when they are exempt. A spouse or partner, children and parents don't pay the 10% stamp duty on inheritance. A declaration of heirs (habilitação de herdeiros), the document that names who inherits, then lets you register the home in their names.
+- FR: Les héritiers déclarent le décès et les biens aux Finanças, l'administration fiscale, avant la fin du troisième mois suivant, même s'ils sont exonérés. Le conjoint ou partenaire, les enfants et les parents ne paient pas le droit de timbre de 10 % sur la succession. L'acte de notoriété (habilitação de herdeiros), qui désigne les héritiers, permet ensuite d'inscrire le bien à leur nom.
+
+### st.taxes.q
+- PT: Que impostos pago na venda?
+- EN: What tax do I pay when I sell?
+- FR: Quels impôts sur la vente ?
+
+### st.taxes.a
+- PT: Em Portugal, só metade da mais-valia, o ganho na venda, conta para o IRS, o imposto sobre o rendimento. A taxa final depende dos seus rendimentos. O país onde vive pode também tributar o ganho, segundo o acordo fiscal entre os dois países.
+- EN: In Portugal, only half of the capital gain, the profit on the sale, counts for income tax (IRS). The final rate depends on your income. Your home country may also tax the gain, under the tax treaty between the two countries.
+- FR: Au Portugal, seule la moitié de la plus-value, le gain sur la vente, compte pour l'impôt sur le revenu (IRS). Le taux final dépend de vos revenus. Votre pays peut aussi imposer ce gain, selon la convention fiscale entre les deux pays.
+
+### st.prepare.q
+- PT: Que documentos pede a venda?
+- EN: Which documents does the sale need?
+- FR: Quels documents pour la vente ?
+
+### st.prepare.a
+- PT: Para a escritura, junta a identificação e o NIF de quem vende, a ficha técnica da casa, se existir, e a licença de utilização ou a sua dispensa. A licença de utilização é o documento da câmara municipal que permite habitar a casa.
+- EN: For the deed, you bring the sellers' ID and NIF, the home's technical file (ficha técnica) if there is one, and the usage licence or its waiver. The usage licence (licença de utilização) is the town hall's permit that lets people live in the home.
+- FR: Pour l'acte, vous réunissez l'identité et le NIF des vendeurs, la fiche technique du logement (ficha técnica) s'il y en a une, et le permis d'habiter ou sa dispense. Le permis d'habiter (licença de utilização) est l'autorisation de la mairie qui permet d'occuper le logement.
+
+### st.list.q
+- PT: Como ponho a casa à venda?
+- EN: How do I put the home on the market?
+- FR: Comment mettre le bien en vente ?
+
+### st.list.a
+- PT: A agência parceira anuncia a casa, organiza as visitas e traz-lhe as propostas, enquanto vive fora de Portugal. O contrato de mediação, o acordo escrito com a agência, fixa o preço pedido e as condições.
+- EN: The partner agency lists the home, runs the viewings and brings you the offers, while you live abroad. The agency agreement (contrato de mediação) sets the asking price and the terms.
+- FR: L'agence partenaire publie l'annonce, organise les visites et vous présente les offres, pendant que vous vivez à l'étranger. Le mandat (contrato de mediação), l'accord écrit avec l'agence, fixe le prix demandé et les conditions.
+
+### st.sdeed.q
+- PT: Como assino a venda?
+- EN: How do I sign the sale?
+- FR: Comment signer la vente ?
+
+### st.sdeed.a
+- PT: Assina a escritura de venda num notário ou num balcão Casa Pronta, onde a escritura e o registo se fazem num só momento. Pode estar presente ou assinar por procuração, a partir do país onde vive.
+- EN: You sign the deed of sale at a notary or a Casa Pronta desk, where the deed and the registration happen in one sitting. You can attend in person or sign through a power of attorney from the country where you live.
+- FR: Vous signez l'acte de vente chez un notaire ou dans un guichet Casa Pronta, où l'acte et l'enregistrement se font en une seule fois. Vous pouvez être présent ou signer par procuration depuis votre pays.
+
+### st.smoney.q
+- PT: Como trago o dinheiro da venda?
+- EN: How do I bring the money home?
+- FR: Comment rapatrier l'argent de la vente ?
+
+### st.smoney.a
+- PT: O comprador paga para uma conta sua, em Portugal ou no país onde vive. O banco pode pedir o comprovativo da venda para mostrar a origem do dinheiro. O seu país pode também ter declarações próprias para contas no estrangeiro.
+- EN: The buyer pays into your account, in Portugal or in the country where you live. Your bank may ask for proof of the sale to show where the money comes from. Your country may also have its own reporting for accounts abroad.
+- FR: L'acheteur paie sur votre compte, au Portugal ou dans votre pays. Votre banque peut demander la preuve de la vente pour justifier l'origine des fonds. Votre pays peut aussi avoir ses propres déclarations pour les comptes à l'étranger.
 
 ### end.h
 - PT: Leve o percurso consigo
@@ -4664,11 +4871,6 @@ How to edit:
 - PT: O seu progresso fica guardado neste dispositivo.
 - EN: Your progress stays on this device.
 - FR: Votre progression reste sur cet appareil.
-
-### more
-- PT: Mais perguntas desta etapa
-- EN: More questions on this step
-- FR: Autres questions sur cette étape
 
 ### local
 - PT: Cerca de {v}
@@ -4685,430 +4887,90 @@ How to edit:
 - EN: Step {n} of {t}
 - FR: Étape {n} sur {t}
 
-### st.smoney.need.2
-- PT: O comprovativo da venda para o seu banco
-- EN: Proof of the sale for your bank
-- FR: La preuve de la vente pour votre banque
-
-### st.smoney.need.1
-- PT: Uma conta para receber o valor
-- EN: An account to receive the money
-- FR: Un compte pour recevoir la somme
-
-### st.smoney.what
-- PT: Recebe o valor numa conta e transfere-o para o seu país, com as declarações que esse país pede.
-- EN: You receive the money in an account and move it home, with the declarations your country asks for.
-- FR: Vous recevez la somme sur un compte et la transférez chez vous, avec les déclarations demandées par votre pays.
-
 ### st.smoney.h
 - PT: Trazer o dinheiro
 - EN: Moving the money
 - FR: Rapatrier l'argent
-
-### st.sdeed.need.2
-- PT: A procuração, se não estiver presente
-- EN: A power of attorney, if you cannot attend
-- FR: Une procuration, si vous êtes absent
-
-### st.sdeed.need.1
-- PT: Os documentos da casa
-- EN: The home's documents
-- FR: Les documents du bien
-
-### st.sdeed.what
-- PT: Assina a venda num notário ou num balcão Casa Pronta, pessoalmente ou por procuração.
-- EN: You sign the sale at a notary or a Casa Pronta desk, in person or through a power of attorney.
-- FR: Vous signez la vente chez un notaire ou dans un guichet Casa Pronta, en personne ou par procuration.
 
 ### st.sdeed.h
 - PT: A escritura
 - EN: The deed
 - FR: L'acte
 
-### st.list.need.3
-- PT: Quem mostra a casa quando não está
-- EN: Who shows the home when you are away
-- FR: Qui fait visiter en votre absence
-
-### st.list.need.2
-- PT: O preço pedido e o mínimo que aceita
-- EN: The asking price and your floor
-- FR: Le prix demandé et votre minimum
-
-### st.list.need.1
-- PT: O contrato de mediação assinado
-- EN: The signed agency agreement
-- FR: Le mandat signé
-
-### st.list.what
-- PT: A agência parceira anuncia a casa, organiza as visitas e traz-lhe as propostas.
-- EN: The partner agency lists the home, runs the viewings and brings you the offers.
-- FR: L'agence partenaire publie l'annonce, organise les visites et vous présente les offres.
-
 ### st.list.h
 - PT: Pôr à venda com a agência
 - EN: Listing with the agency
 - FR: Mettre en vente avec l'agence
-
-### st.prepare.need.3
-- PT: A certidão permanente do registo predial
-- EN: The land register extract
-- FR: L'extrait du registre foncier
-
-### st.prepare.need.2
-- PT: A licença de utilização
-- EN: The usage licence
-- FR: Le permis d'habiter
-
-### st.prepare.need.1
-- PT: O certificado energético
-- EN: The energy certificate
-- FR: Le certificat énergétique
-
-### st.prepare.what
-- PT: Reúne os documentos que a venda pede e põe a casa pronta para as visitas.
-- EN: You gather the documents the sale needs and get the home ready for viewings.
-- FR: Vous réunissez les documents nécessaires à la vente et préparez le bien pour les visites.
 
 ### st.prepare.h
 - PT: Preparar a casa
 - EN: Preparing the home
 - FR: Préparer le bien
 
-### st.taxes.need.3
-- PT: Um consultor fiscal nos dois países
-- EN: A tax adviser in both countries
-- FR: Un conseiller fiscal dans les deux pays
-
-### st.taxes.need.2
-- PT: As faturas das obras
-- EN: Invoices for works
-- FR: Les factures des travaux
-
-### st.taxes.need.1
-- PT: O valor de compra ou o valor na herança
-- EN: The purchase value or the value at inheritance
-- FR: La valeur d'achat ou la valeur à la succession
-
-### st.taxes.what
-- PT: Calcula a mais-valia, que se paga em Portugal, e vê como o seu país a trata segundo o acordo fiscal.
-- EN: You work out the gain, taxed in Portugal, and how your country treats it under the tax treaty.
-- FR: Vous calculez la plus-value, imposée au Portugal, et voyez comment votre pays la traite selon la convention fiscale.
-
 ### st.taxes.h
 - PT: Os impostos em Portugal e no seu país
 - EN: Taxes in Portugal and at home
 - FR: Les impôts au Portugal et chez vous
-
-### st.inherit.need.3
-- PT: A lista dos bens e das contas
-- EN: A list of the assets and accounts
-- FR: La liste des biens et des comptes
-
-### st.inherit.need.2
-- PT: Os documentos e o NIF de cada herdeiro
-- EN: Each heir's ID and NIF
-- FR: Les pièces d'identité et le NIF de chaque héritier
-
-### st.inherit.need.1
-- PT: A certidão de óbito
-- EN: The death certificate
-- FR: L'acte de décès
-
-### st.inherit.what
-- PT: Comunica o óbito e os bens às Finanças, faz a habilitação de herdeiros e regista a casa em nome de quem a herda.
-- EN: You report the death and the assets to the tax office, establish who the heirs are and register the home in their names.
-- FR: Vous déclarez le décès et les biens aux Finances, établissez qui sont les héritiers et enregistrez le bien à leur nom.
 
 ### st.inherit.h
 - PT: A herança e o registo
 - EN: The inheritance and registration
 - FR: La succession et l'enregistrement
 
-### st.worth.need.3
-- PT: A caderneta predial, se a tiver
-- EN: The tax record, if you have it
-- FR: Le relevé fiscal, si vous l'avez
-
-### st.worth.need.2
-- PT: Fotografias recentes
-- EN: Recent photos
-- FR: Des photos récentes
-
-### st.worth.need.1
-- PT: A morada e a área da casa
-- EN: The address and floor area
-- FR: L'adresse et la surface du bien
-
-### st.worth.what
-- PT: Compara com os preços oficiais da zona e pede uma avaliação à agência parceira, sem compromisso.
-- EN: You compare with the area's official prices and ask the partner agency for a valuation, with no commitment.
-- FR: Vous comparez avec les prix officiels du secteur et demandez une estimation à l'agence partenaire, sans engagement.
-
 ### st.worth.h
 - PT: Quanto vale a casa
 - EN: What the home is worth
 - FR: Ce que vaut le bien
-
-### st.estate.need.2
-- PT: A opinião do seu consultor fiscal
-- EN: Your tax adviser's view
-- FR: L'avis de votre conseiller fiscal
-
-### st.estate.need.1
-- PT: A lista dos imóveis que já tem em Portugal
-- EN: A list of the property you already own in Portugal
-- FR: La liste des biens que vous possédez déjà au Portugal
-
-### st.estate.what
-- PT: Vê o imposto adicional sobre o património imobiliário e compara a compra em nome próprio com a compra por sociedade.
-- EN: You look at the additional property tax and compare buying in your own name with buying through a company.
-- FR: Vous examinez l'impôt additionnel sur le patrimoine immobilier et comparez l'achat en nom propre et par une société.
 
 ### st.estate.h
 - PT: Património e forma de deter a casa
 - EN: Your holdings and how to hold the home
 - FR: Patrimoine et façon de détenir le bien
 
-### st.struct.need.3
-- PT: Uma reunião com advogado e consultor fiscal
-- EN: A meeting with a lawyer and a tax adviser
-- FR: Un rendez-vous avec un avocat et un conseiller fiscal
-
-### st.struct.need.2
-- PT: A situação familiar e quem herda
-- EN: Your family situation and who inherits
-- FR: Votre situation familiale et vos héritiers
-
-### st.struct.need.1
-- PT: Os seus rendimentos dos últimos anos
-- EN: Your income over recent years
-- FR: Vos revenus des dernières années
-
-### st.struct.what
-- PT: Se pensa viver cá parte do ano, decide a residência, o regime fiscal e a forma de deter a casa com os seus consultores.
-- EN: If you plan to live here part of the year, you decide residence, the tax regime and how to hold the home with your advisers.
-- FR: Si vous comptez vivre ici une partie de l'année, vous décidez de la résidence, du régime fiscal et de la façon de détenir le bien avec vos conseillers.
-
 ### st.struct.h
 - PT: Residência e estrutura
 - EN: Residence and structuring
 - FR: Résidence et structuration
-
-### st.later.need.2
-- PT: A escritura de compra e os impostos pagos
-- EN: The purchase deed and the taxes paid
-- FR: L'acte d'achat et les impôts payés
-
-### st.later.need.1
-- PT: As faturas das obras que fizer
-- EN: Invoices for any works you do
-- FR: Les factures des travaux réalisés
-
-### st.later.what
-- PT: Se vender, paga imposto sobre a mais-valia em Portugal, e o seu país pode também tributá-la conforme o acordo fiscal.
-- EN: If you sell, you pay tax on the gain in Portugal, and your country may also tax it under the tax treaty.
-- FR: Si vous vendez, vous payez l'impôt sur la plus-value au Portugal, et votre pays peut aussi l'imposer selon la convention fiscale.
 
 ### st.later.h
 - PT: Vender mais tarde
 - EN: Selling later
 - FR: Vendre plus tard
 
-### st.own.need.3
-- PT: Um contabilista para as declarações
-- EN: An accountant for the returns
-- FR: Un comptable pour les déclarations
-
-### st.own.need.2
-- PT: O registo de alojamento local, se arrendar a turistas
-- EN: A local accommodation registration, if you rent to tourists
-- FR: Un enregistrement d'hébergement local, si vous louez à des touristes
-
-### st.own.need.1
-- PT: A data de pagamento do IMI
-- EN: When IMI is due
-- FR: L'échéance de l'IMI
-
-### st.own.what
-- PT: Paga o IMI todos os anos e, se arrendar, declara as rendas em Portugal e no seu país.
-- EN: You pay IMI each year and, if you rent the home out, declare the rent in Portugal and at home.
-- FR: Vous payez l'IMI chaque année et, si vous louez, déclarez les loyers au Portugal et dans votre pays.
-
 ### st.own.h
 - PT: Ser proprietário, arrendar e segurar
 - EN: Owning, renting and insurance
 - FR: Être propriétaire, louer et assurer
-
-### st.keys.need.3
-- PT: Uma morada para receber as cartas das Finanças
-- EN: An address for tax office letters
-- FR: Une adresse pour le courrier des Finances
-
-### st.keys.need.2
-- PT: Um seguro multirriscos
-- EN: Home insurance
-- FR: Une assurance habitation
-
-### st.keys.need.1
-- PT: Os números de contrato da água, da luz e do gás
-- EN: The water, power and gas contract numbers
-- FR: Les numéros de contrat de l'eau, de l'électricité et du gaz
-
-### st.keys.what
-- PT: Recebe as chaves, muda os contratos de água, luz e gás para o seu nome e decide como segura a casa.
-- EN: You get the keys, move the water, power and gas contracts into your name and choose how to insure the home.
-- FR: Vous recevez les clés, mettez l'eau, l'électricité et le gaz à votre nom et choisissez comment assurer le bien.
 
 ### st.keys.h
 - PT: As chaves
 - EN: The keys
 - FR: Les clés
 
-### st.deed.need.3
-- PT: O seu documento de identificação e o NIF
-- EN: Your ID and NIF
-- FR: Votre pièce d'identité et votre NIF
-
-### st.deed.need.2
-- PT: A caderneta e a certidão do imóvel
-- EN: The property's tax record and land register extract
-- FR: Le relevé fiscal et l'extrait du registre du bien
-
-### st.deed.need.1
-- PT: O comprovativo do IMT e do imposto do selo
-- EN: Proof of IMT and stamp duty paid
-- FR: La preuve du paiement de l'IMT et du droit de timbre
-
-### st.deed.what
-- PT: Paga o IMT e o imposto do selo antes da escritura e assina a compra num notário ou num balcão Casa Pronta.
-- EN: You pay IMT and stamp duty before the deed, then sign the purchase at a notary or a Casa Pronta desk.
-- FR: Vous payez l'IMT et le droit de timbre avant l'acte, puis signez l'achat chez un notaire ou dans un guichet Casa Pronta.
-
 ### st.deed.h
 - PT: Os impostos e a escritura
 - EN: Taxes and the deed
 - FR: Les impôts et l'acte
-
-### st.cpcv.need.3
-- PT: A confirmação do crédito, se o houver
-- EN: Mortgage approval, if you have one
-- FR: L'accord de crédit, le cas échéant
-
-### st.cpcv.need.2
-- PT: O sinal e a data da escritura
-- EN: The deposit and the deed date
-- FR: L'acompte et la date de l'acte
-
-### st.cpcv.need.1
-- PT: O texto do contrato revisto pelo seu advogado
-- EN: The contract reviewed by your lawyer
-- FR: Le contrat relu par votre avocat
-
-### st.cpcv.what
-- PT: Assina o contrato-promessa de compra e venda (CPCV) e paga o sinal. A partir daqui, as duas partes ficam comprometidas.
-- EN: You sign the promissory contract (CPCV) and pay the deposit. From here, both sides are bound.
-- FR: Vous signez le compromis (CPCV) et versez l'acompte. Dès lors, les deux parties sont engagées.
 
 ### st.cpcv.h
 - PT: O contrato-promessa
 - EN: The promissory contract
 - FR: Le compromis
 
-### st.choose.need.3
-- PT: Um advogado para rever o imóvel antes de assinar
-- EN: A lawyer to check the property before you sign
-- FR: Un avocat pour vérifier le bien avant de signer
-
-### st.choose.need.2
-- PT: As datas em que pode visitar, ou visitas por vídeo
-- EN: Dates you can visit, or video viewings
-- FR: Vos dates de visite, ou des visites en vidéo
-
-### st.choose.need.1
-- PT: A lista do que é essencial e do que é desejável
-- EN: Your must-haves and nice-to-haves
-- FR: Vos indispensables et vos souhaits
-
-### st.choose.what
-- PT: Visita casas com a agência parceira, que é a única da plataforma, ou conhece os empreendimentos novos dos promotores parceiros.
-- EN: You view homes with the partner agency, the only one on the platform, or look at new developments from partner developers.
-- FR: Vous visitez des biens avec l'agence partenaire, la seule de la plateforme, ou consultez les programmes neufs des promoteurs partenaires.
-
 ### st.choose.h
 - PT: Escolher a casa
 - EN: Choosing the home
 - FR: Choisir le bien
-
-### st.docs.need.3
-- PT: Procuração, se alguém assinar por si
-- EN: A power of attorney, if someone signs for you
-- FR: Une procuration, si quelqu'un signe pour vous
-
-### st.docs.need.2
-- PT: Passaporte ou cartão de cidadão válido
-- EN: A valid passport or ID card
-- FR: Un passeport ou une carte d'identité valide
-
-### st.docs.need.1
-- PT: NIF (número de identificação fiscal)
-- EN: NIF (tax number)
-- FR: NIF (numéro fiscal)
-
-### st.docs.what
-- PT: Tem um número fiscal português, uma conta e, se preferir assinar à distância, uma procuração.
-- EN: You get a Portuguese tax number, an account and, to sign from where you live, a power of attorney.
-- FR: Vous obtenez un numéro fiscal portugais, un compte et, pour signer depuis chez vous, une procuration.
 
 ### st.docs.h
 - PT: Os documentos
 - EN: The documents
 - FR: Les documents
 
-### st.money.need.3
-- PT: Uma conta para receber e pagar
-- EN: An account to receive and pay from
-- FR: Un compte pour recevoir et payer
-
-### st.money.need.2
-- PT: Prova da origem dos fundos
-- EN: Proof of where the funds come from
-- FR: La preuve de l'origine des fonds
-
-### st.money.need.1
-- PT: Os últimos rendimentos e a declaração de impostos
-- EN: Your latest income and tax return
-- FR: Vos derniers revenus et votre déclaration d'impôts
-
-### st.money.what
-- PT: Decide como paga: com crédito em Portugal, com o banco do seu país ou com capitais próprios, e como transfere o dinheiro.
-- EN: You decide how to pay: a Portuguese mortgage, your home bank or your own funds, and how the money moves.
-- FR: Vous décidez comment payer : un crédit au Portugal, votre banque ou vos fonds propres, et comment l'argent est transféré.
-
 ### st.money.h
 - PT: O financiamento e o dinheiro
 - EN: Financing and moving the money
 - FR: Le financement et l'argent
-
-### st.place.need.3
-- PT: O uso da casa: viver, férias ou arrendar
-- EN: What the home is for: living, holidays or renting
-- FR: L'usage du bien : y vivre, les vacances ou la location
-
-### st.place.need.2
-- PT: Duas ou três zonas para comparar
-- EN: Two or three areas to compare
-- FR: Deux ou trois secteurs à comparer
-
-### st.place.need.1
-- PT: Um valor máximo, com os custos da compra incluídos
-- EN: A ceiling, with the purchase costs included
-- FR: Un plafond, frais d'achat compris
-
-### st.place.what
-- PT: Escolhe a zona com números oficiais: quanto espaço compra o seu orçamento, como os preços evoluíram e quanto rende arrendar.
-- EN: You choose the area with official figures: how much space your budget buys, how prices have moved and what renting yields.
-- FR: Vous choisissez le secteur avec des chiffres officiels : l'espace que permet votre budget, l'évolution des prix et ce que rapporte la location.
 
 ### st.place.h
 - PT: O orçamento e o lugar
@@ -5149,41 +5011,6 @@ How to edit:
 - PT: Partilhar o meu percurso
 - EN: Share my path
 - FR: Partager mon parcours
-
-### sell.cta
-- PT: Pedir uma avaliação à agência parceira
-- EN: Ask the partner agency for a valuation
-- FR: Demander une estimation à l'agence partenaire
-
-### partner
-- PT: Quem trata deste passo
-- EN: Who handles this step
-- FR: Qui s'occupe de cette étape
-
-### numbers.tool
-- PT: Abrir o simulador com o seu valor
-- EN: Open the calculator with your figure
-- FR: Ouvrir le simulateur avec votre montant
-
-### numbers.map
-- PT: Ver no mapa o que o seu orçamento compra
-- EN: See on the map what your budget buys
-- FR: Voir sur la carte ce que permet votre budget
-
-### numbers
-- PT: Os números do seu caso
-- EN: The numbers for your case
-- FR: Les chiffres de votre cas
-
-### asks
-- PT: O que as pessoas perguntam
-- EN: What people ask
-- FR: Ce qu'on demande
-
-### need
-- PT: O que precisa
-- EN: What you need
-- FR: Ce qu'il vous faut
 
 ### done
 - PT: Feito
@@ -5266,9 +5093,9 @@ How to edit:
 - FR: Acheter
 
 ### lede
-- PT: Comprar ou vender uma casa em Portugal a partir {from}, uma etapa de cada vez. Em cada uma, o que acontece, o que precisa, as perguntas que se fazem e quem trata disso consigo.
-- EN: Buying or selling a home in Portugal from {from}, one step at a time. At each one: what happens, what you need, the questions people ask and who handles it with you.
-- FR: Acheter ou vendre un bien au Portugal depuis {from}, une étape à la fois. À chaque étape : ce qui se passe, ce qu'il vous faut, les questions qu'on se pose et qui s'en charge avec vous.
+- PT: Comprar ou vender uma casa em Portugal a partir {from}, uma pergunta de cada vez. Cada resposta cabe em poucas linhas e leva ao artigo que explica mais.
+- EN: Buying or selling a home in Portugal from {from}, one question at a time. Each answer fits in a few lines and links to the article that explains more.
+- FR: Acheter ou vendre un bien au Portugal depuis {from}, une question à la fois. Chaque réponse tient en quelques lignes et renvoie à l'article qui en dit plus.
 
 ### h1
 - PT: Passo a passo
@@ -6245,6 +6072,38 @@ Prompt 36 (D62): map v3. Budget gesture, layer chips, Day/Night, search, time, c
 ## flow
 
 Prompt 35 §3 (D61): the requests as one question at a time (concierge, partner request, private viewing). Same fields, data, consent and routing as the Tally forms (ops/TALLY_CONSULTA.md, ops/SETUP.md §4). Submission: ops/ARCHITECTURE.md.
+
+Prompt 43 §3b: the partner links on the path and the questions open the Concierge with ?topic=lawyer|advisor|bank|tax. Bank and tax have no signed partner yet: the first screen says topic.intro and the request goes to the qualified advisor (D66).
+
+### topic
+- PT: Assunto
+- EN: Topic
+- FR: Sujet
+
+### topic.intro
+- PT: Apresentamos-lhe a pessoa certa.
+- EN: We'll introduce you to the right person.
+- FR: Nous vous présentons la bonne personne.
+
+### topic.lawyer
+- PT: Uma questão jurídica
+- EN: A legal question
+- FR: Une question juridique
+
+### topic.advisor
+- PT: Encontrar a casa
+- EN: Finding the home
+- FR: Trouver le bien
+
+### topic.bank
+- PT: Crédito e banco
+- EN: Mortgage and the bank
+- FR: Crédit et banque
+
+### topic.tax
+- PT: Impostos
+- EN: Taxes
+- FR: Impôts
 
 ### back
 - PT: Voltar

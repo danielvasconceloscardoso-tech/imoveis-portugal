@@ -6,8 +6,8 @@
   cta: tax
   q: "Tenho de declarar em França a casa e a conta em Portugal?"
   a: >-
-    A conta sim, todos os anos. As contas bancárias abertas em Portugal declaram-se com a declaração de
-    rendimentos francesa (formulário 3916), mesmo que não sejam usadas. Se arrendar a casa, as rendas pagam
-    25% em Portugal, e a convenção fiscal entre Portugal e França define como França as tem em conta. Um
-    consultor fiscal parceiro conhece os dois lados.
+    A conta sim, todos os anos: as contas bancárias abertas em Portugal declaram-se com a declaração de
+    rendimentos francesa (formulário 3916), mesmo que não sejam usadas. Se arrendar a casa, as rendas
+    pagam 25% em Portugal, e a convenção fiscal entre Portugal e França define como França as tem em
+    conta.
   facts: [fr-3916, pt-rent-tax-nonresident]

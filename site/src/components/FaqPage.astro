@@ -1,53 +1,58 @@
 ---
-// FAQ as a help centre (prompts 09 and 10; Wise and Stripe help pages as the model): search first, questions
-// grouped by stage and ordered by search interest, short answers with sources, one partner action each.
-// No sponsor yet in a category: the button says "Talk to a partner" and opens the enquiry form.
+// Perguntas (prompts 09, 10 and 27 §2; prompt 43 §3b). One line per question, grouped by step; the answer opens in place
+// (a native <details>, so keyboard and screen readers get it for free): two or three sentences with their sources,
+// "Saiba mais" when an article goes deeper, and one quiet partner link that opens the Concierge with the topic
+// (?topic=lawyer|advisor|bank|tax, scripts/chrome.ts and scripts/flow.ts). Search stays on top.
 import V2 from "../layouts/V2.astro";
-import { config } from "../config";
 import { pathFor, type Lang, type EdCode } from "../i18n";
 import { faqFor, FACTS, fmtDate, DISCLAIMER, Sources, type FaqItem } from "../lib/content";
-import { faqPlace, stationDoor, FAQ_STAGES, type FaqStage } from "../lib/path";
-import Calls from "./Calls.astro";
+import { faqPlace, FAQ_STAGES, type FaqStage } from "../lib/path";
+import { ART_SUB } from "../lib/articles";
+import { postById } from "../lib/blog";
 import { c } from "../lib/copy";
 
 interface Props { lang: Lang; ed: EdCode; }
 const { lang, ed } = Astro.props;
-const talk = pathFor(lang, ed, "talk");
+const consult = pathFor(lang, ed, "consult");
 
-// Sources as superscripts (prompt 11): one numbered list for the whole page, at the bottom.
+// Sources as superscripts (prompt 11): one numbered list for the whole page, folded at the bottom.
 const src = new Sources();
-// Practice questions also offer the two calls with the partner agency (prompt 11, D19).
-const PRACTICE = ["find", "timing", "cpcv", "buy-abroad"];
 // D52: for a high budget (from the map, the path or a link) these questions move to the top of their stage; the rest
 // stays as it is. Nothing is labelled and the threshold is never shown.
 const HIGH_FIRST = ["ifici", "inherit", "visa", "yearly", "lawyer"];
-// Prompt 27 §2: the questions the path adds for selling and inheritance join the hub (answers from the path's sources).
+// Prompt 27 §2: the questions the path adds for selling and inheritance join the list (answers from the path's sources).
 const EXTRA: (FaqItem & { ask?: boolean })[] = [
   { id: "sell-filing", facts: ["pt-is-inheritance-filing"], cta: "tax", ask: false },
   { id: "sell-heirs", facts: [], cta: "lawyer", ask: true },
   { id: "sell-cert", facts: [], cta: "lawyer", ask: true },
 ].map((x, i) => ({ ...x, id: `${lang}-${x.id}`, rank: 100 + i, stage: "after", cta: x.cta as FaqItem["cta"],
   q: c(`journey.q.${x.id.replace("-", ".")}.q`, lang), a: c(`journey.q.${x.id.replace("-", ".")}.a`, lang) }));
-const PLACE: Record<string, [FaqStage, string]> = { "sell-filing": ["inheritance", "inherit"], "sell-heirs": ["inheritance", "inherit"], "sell-cert": ["selling", "prepare"] };
-const journey = pathFor(lang, ed, "journey");
+const PLACE: Record<string, FaqStage> = { "sell-filing": "inheritance", "sell-heirs": "inheritance", "sell-cert": "selling" };
+// Prompt 43 §3b: the partner who solves each topic (the FAQ's own `cta`), and "Saiba mais" where an article goes deeper.
+const TOPIC: Record<string, "lawyer" | "advisor" | "bank" | "tax"> = { lawyer: "lawyer", bank: "bank", fx: "bank", tax: "tax", agency: "advisor", developer: "advisor" };
+const blog = (id: string) => { const p = postById(id, lang); return p ? `${pathFor(lang, ed, "blog")}${p.slug}/` : null; };
+const MORE: [string, () => string | null][] = [
+  ["buy-abroad", () => blog("buy-from-abroad")], ["nif", () => blog("buy-from-abroad")], ["sign", () => blog("buy-from-abroad")],
+  ["lawyer", () => blog("buy-from-abroad")], ["mortgage", () => blog("buy-from-abroad")], ["borrow", () => blog("buy-from-abroad")],
+  ["cpcv", () => blog("buy-from-abroad")], ["money", () => blog("buy-from-abroad")], ["deed", () => blog("buy-from-abroad")],
+  ["costs", () => blog("imt-nonresidents")], ["imt-nonres", () => blog("imt-nonresidents")], ["imt-calc", () => blog("imt-nonresidents")], ["hpp", () => blog("imt-nonresidents")],
+  ["visa", () => pathFor(lang, ed, "private")], ["ifici", () => pathFor(lang, ed, "private")], ["inherit", () => pathFor(lang, ed, "private")], ["yearly", () => pathFor(lang, ed, "private")],
+  ["timing", () => `${pathFor(lang, ed, "articles")}${ART_SUB.prices[lang]}/`],
+];
 const items = [...faqFor(ed, lang), ...EXTRA].map((it: FaqItem & { ask?: boolean }) => {
   const facts = (it.facts || []).map((id) => FACTS[id]);
   const checked = facts.map((f) => f.checked_on).sort().pop();
   const nums = [...new Set((it.facts || []).map((id) => src.n(id)))];
-  let next: { href: string; label: string; who: string };
-  if (it.cta === "agency") next = { href: pathFor(lang, ed, "buy"), label: c("faq.cta.agency", lang), who: `${config.agency.name} · ${c("common.gold", lang)}` };
-  else if (config.partners[it.cta]) next = { href: `${talk}?cat=${it.cta}#form`, label: c(`faq.cta.${it.cta}`, lang), who: `${config.partners[it.cta]} · ${c("common.sponsored", lang)}` };
-  else next = { href: `${talk}?cat=${it.cta}#form`, label: c("common.nav.talk", lang), who: c(`faq.who.${it.cta}`, lang) };
-  const practice = PRACTICE.some((k) => it.id.endsWith(`-${k}`));
+  const topic = TOPIC[it.cta] ?? "advisor";
+  const partner = { href: `${consult}?topic=${topic}`, label: c(`path.p.${topic}`, lang), topic };
+  const more = MORE.filter(([k]) => it.id.endsWith(`-${k}`)).sort((a, b) => b[0].length - a[0].length)[0]?.[1]() ?? null;
   const high = HIGH_FIRST.some((k) => it.id.endsWith(`-${k}`));
-  // Each answer links to its station on the path (prompt 27 §2); the station lists these questions back.
-  const pl = PLACE[it.id.slice(lang.length + 1)] ?? (() => { const f = faqPlace(it.id); return f ? [f.stage, f.station] as [FaqStage, string] : null; })();
-  const stage: FaqStage = pl?.[0] ?? (it.stage === "after" ? "owning" : it.stage);
-  const onpath = pl ? { href: `${journey}?door=${stationDoor(pl[1])}&step=${pl[1]}`, label: c("faq.onpath", lang, { step: c(`path.st.${pl[1]}.h`, lang) }) } : null;
-  return { ...it, stage, onpath, next, nums, checked, practice, high };
+  const stage: FaqStage = PLACE[it.id.slice(lang.length + 1)] ?? faqPlace(it.id)?.stage ?? (it.stage === "after" ? "owning" : it.stage);
+  return { ...it, stage, partner, more, nums, checked, high };
 });
 const stages = FAQ_STAGES.filter((s) => items.some((i) => i.stage === s));
 const lastChecked = items.map((i) => i.checked).filter(Boolean).sort().pop();
+// The visible answer is the structured answer, word for word.
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -63,53 +68,54 @@ const jsonLd = {
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
       <input id="q" type="search" placeholder={c("faq.search", lang)} aria-label={c("faq.search", lang)} autocomplete="off" />
     </div>
-    <ul class="stages">
-      {stages.map((s) => <li><a href={`#${s}`}>{c(`faq.stage.${s}.h`, lang)} <span class="c">{items.filter((i) => i.stage === s).length}</span></a></li>)}
-    </ul>
-    {lastChecked && <p class="small" style="margin-top:16px">{c("faq.updated", lang, { date: fmtDate(lang, lastChecked) })}</p>}
   </div>
-  <div class="frame read">
-    <div class="none" id="none" role="status">
+  <div class="frame read fq">
+    <div class="fq-none" id="none" role="status">
       <p>{c("faq.none", lang)}</p>
-      <a class="btn" href={`${talk}#form`}>{c("common.nav.talk", lang)}</a>
+      <p class="ptn"><span class="ptn-tag">{c("path.p.tag", lang)}</span> <a href={`${consult}?topic=advisor`} data-concierge>{c("path.p.advisor", lang)}<span aria-hidden="true"> →</span></a></p>
     </div>
     {stages.map((s) => (
-      <section class="stage" id={s} aria-labelledby={`${s}-h`}>
-        <h2 id={`${s}-h`}>{c(`faq.stage.${s}.h`, lang)}</h2>
-        <p>{c(`faq.stage.${s}.p`, lang)}</p>
+      <section class="fq-stage" aria-labelledby={`${s}-h`}>
+        <h2 id={`${s}-h`} class="h-small">{c(`faq.stage.${s}.h`, lang)}</h2>
         {items.filter((i) => i.stage === s).map((it) => (
-          <details class="qa" id={it.id} data-high-first={it.high ? "" : undefined}>
+          <details class="fq-qa" id={it.id} data-high-first={it.high ? "" : undefined}>
             <summary>{it.q}</summary>
-            <div class="a">
+            <div class="fq-a">
               <p>{it.a}{it.nums.map((n) => <a class="sup" href={`#fonte-${n}`}>{n}</a>)}</p>
               {it.ask && <p class="small">{c("journey.unverified", lang)}</p>}
-              {it.onpath && <p class="small"><a href={it.onpath.href}>{it.onpath.label}</a></p>}
-              <div class="next" data-agency={it.cta === "agency" ? "" : undefined}>
-                <a class="btn sm" href={it.next.href}>{it.next.label}</a>
-                <span class="who">{it.next.who}</span>
-              </div>
-              {it.practice && <div data-agency><Calls lang={lang} ed={ed} compact /></div>}
+              {it.more && <p class="fq-more"><a href={it.more}>{c("path.learn", lang)}<span class="vh">: {it.q}</span></a></p>}
+              <p class="ptn"><span class="ptn-tag">{c("path.p.tag", lang)}</span> <a href={it.partner.href} data-concierge data-topic={it.partner.topic}>{it.partner.label}<span aria-hidden="true"> →</span></a></p>
             </div>
           </details>
         ))}
       </section>
     ))}
-    <script is:inline>(function(){try{var b=Number(new URLSearchParams(location.search).get("budget"))||Number(localStorage.getItem("ip.budget"))||0;if(b<1e6)return;document.querySelectorAll("section.stage").forEach(function(sec){var first=sec.querySelector("details.qa");[].slice.call(sec.querySelectorAll("details[data-high-first]")).reverse().forEach(function(d){sec.insertBefore(d,sec.querySelector("details.qa"))})})}catch(e){}})();</script>
-    <section class="sources-list" aria-labelledby="fontes">
-      <h2 id="fontes" class="h-small">{c("common.sources", lang)}</h2>
-      <ol>
-        {src.list.map((f, i) => <li id={`fonte-${i + 1}`}><a href={f.url} rel="noopener">{f.title}</a>{f.checked && `, ${c("common.checked", lang, { date: fmtDate(lang, f.checked) })}`}.</li>)}
-      </ol>
+    <script is:inline>(function(){try{var b=Number(new URLSearchParams(location.search).get("budget"))||Number(localStorage.getItem("ip.budget"))||0;if(b<1e6)return;document.querySelectorAll("section.fq-stage").forEach(function(sec){[].slice.call(sec.querySelectorAll("details[data-high-first]")).reverse().forEach(function(d){sec.insertBefore(d,sec.querySelector("details.fq-qa"))})})}catch(e){}})();</script>
+    <section class="sources-list fq-src" aria-labelledby="fontes">
+      <details class="srcs" data-srcs>
+        <summary id="fontes" class="h-small">{c("common.sources", lang)} ({src.list.length})</summary>
+        {lastChecked && <p class="small">{c("faq.updated", lang, { date: fmtDate(lang, lastChecked) })}</p>}
+        <ol>
+          {src.list.map((f, i) => <li id={`fonte-${i + 1}`}><a href={f.url} rel="noopener">{f.title}</a>{f.checked && `, ${c("common.checked", lang, { date: fmtDate(lang, f.checked) })}`}.</li>)}
+        </ol>
+      </details>
     </section>
     <p class="disc">{DISCLAIMER[lang]}</p>
   </div>
   <script is:inline>
     (function () {
-      var q = document.getElementById("q"), none = document.getElementById("none");
+      var q = document.getElementById("q"), none = document.getElementById("none"), srcs = document.querySelector("[data-srcs]");
       var norm = function (s) { return s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase(); };
-      var items = [].slice.call(document.querySelectorAll(".qa")).map(function (d) { return { d: d, t: norm(d.textContent) }; });
-      // Open the question named in the address bar (links from other pages).
-      if (location.hash) { var t = document.getElementById(location.hash.slice(1)); if (t && t.tagName === "DETAILS") t.open = true; }
+      var items = [].slice.call(document.querySelectorAll(".fq-qa")).map(function (d) { return { d: d, t: norm(d.textContent) }; });
+      // Open the question or the source named in the address bar (links from other pages, superscripts).
+      var fromHash = function () {
+        var t = location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1)));
+        if (!t) return;
+        if (t.tagName === "DETAILS") { t.open = true; t.scrollIntoView({ block: "start" }); }
+        else if (srcs && srcs.contains(t)) { srcs.open = true; t.scrollIntoView({ block: "center" }); }
+      };
+      fromHash(); addEventListener("hashchange", fromHash);
+      document.addEventListener("click", function (e) { if (srcs && e.target.closest && e.target.closest("a.sup")) srcs.open = true; });
       q.addEventListener("input", function () {
         var words = norm(q.value).split(/\s+/).filter(Boolean), shown = 0;
         items.forEach(function (it) {
@@ -117,9 +123,42 @@ const jsonLd = {
           it.d.hidden = !ok; if (ok) shown++;
           it.d.open = words.length > 0 && ok && shown <= 3;
         });
-        document.querySelectorAll(".stage").forEach(function (s) { s.hidden = !s.querySelector(".qa:not([hidden])"); });
+        document.querySelectorAll(".fq-stage").forEach(function (s) { s.hidden = !s.querySelector(".fq-qa:not([hidden])"); });
         none.classList.toggle("on", shown === 0);
       });
     })();
   </script>
 </V2>
+
+<style>
+  .fq { padding-bottom: 64px; }
+  .fq-stage { padding-top: 40px; }
+  .fq-stage > h2 { margin: 0 0 8px; }
+  /* One line per question; the answer opens in place under it. */
+  .fq-qa { border-top: 1px solid var(--rule); }
+  .fq-stage .fq-qa:last-child { border-bottom: 1px solid var(--rule); }
+  .fq-qa > summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: baseline; gap: 16px; min-height: 56px; padding: 16px 0; font: 500 17px/1.4 var(--sans); color: var(--ink); }
+  .fq-qa > summary::-webkit-details-marker { display: none; }
+  .fq-qa > summary::after { content: "+"; font: 400 21px/1 var(--sans); color: var(--muted); flex: none; }
+  .fq-qa[open] > summary::after { content: "−"; }
+  .fq-qa > summary:hover { color: var(--accent); }
+  .fq-qa > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .fq-a { padding: 0 0 24px; }
+  .fq-a > p { margin: 0 0 16px; max-width: 38em; }
+  .fq-a > p:first-child { font-size: 17px; line-height: 1.6; }
+  .fq-more a { font-weight: 500; }
+  .fq-a > .ptn { margin: 0; }
+  .ptn { font-size: 15px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; }
+  .ptn-tag { font: 600 13px/1 var(--sans); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .ptn a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; text-decoration-color: var(--rule); }
+  .ptn a:hover { text-decoration-color: currentColor; }
+  .fq-none { display: none; padding: 24px 0; border-top: 1px solid var(--rule); }
+  .fq-none.on { display: block; }
+  .fq-none p { margin: 0 0 8px; }
+  .fq-src { margin-top: 40px; padding-top: 16px; }
+  .srcs summary { cursor: pointer; list-style: none; display: inline-flex; align-items: center; gap: 8px; min-height: 40px; }
+  .srcs summary::-webkit-details-marker { display: none; }
+  .srcs summary::after { content: "+"; font: 400 17px/1 var(--sans); color: var(--muted); }
+  .srcs[open] summary::after { content: "−"; }
+  .vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+</style>

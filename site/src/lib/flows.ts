@@ -59,7 +59,10 @@ export function flowConfig(id: FlowId, lang: Lang, ed: EdCode, hidden: Record<st
       .map((k) => [k, c(`flow.${k}`, lang, k === "of" ? { i: "{i}", n: "{n}" } : {})])) as Record<string, string>,
     extra: { path: c("consult.later.path", lang), map: c("map.open", lang), privacy: c("common.privacy", lang),
       // Prompt 42: the closing line under the next steps, with two text links.
-      more: c("flow.more", lang), morePath: c("flow.more.path", lang), moreArticles: c("flow.more.articles", lang) },
+      more: c("flow.more", lang), morePath: c("flow.more.path", lang), moreArticles: c("flow.more.articles", lang),
+      // Prompt 43 §3b: the partner links open the concierge with ?topic=; the topic is shown in the review and sent.
+      topic: c("flow.topic", lang), topicIntro: c("flow.topic.intro", lang),
+      topicLawyer: c("flow.topic.lawyer", lang), topicAdvisor: c("flow.topic.advisor", lang), topicBank: c("flow.topic.bank", lang), topicTax: c("flow.topic.tax", lang) },
   };
 }
 export type FlowConfig = ReturnType<typeof flowConfig>;

@@ -6,10 +6,9 @@
   cta: tax
   q: "Can I use my 2nd pillar to buy a home in Portugal?"
   a: >-
-    Yes, but only for the home you'll live in. Federal rules allow an early 2nd-pillar withdrawal for your
-    main residence, in Switzerland or abroad, but not for a vacation home or a rental. The minimum
-    withdrawal is 20,000 francs. Your pension fund applies the rules to your case. A partner tax advisor can
-    help you prepare the request.
+    Yes, for the home you'll live in: federal rules allow an early 2nd-pillar withdrawal for your main
+    residence, in Switzerland or abroad, but not for a vacation home or a rental. The minimum withdrawal
+    is 20,000 francs. Your pension fund applies the rules to your case.
   facts: [ch-2nd-pillar-abroad]
 
 - id: en-ch-2p-rules
@@ -18,10 +17,9 @@
   cta: tax
   q: "What are the conditions and effects of a 2nd-pillar withdrawal?"
   a: >-
-    It reduces your future pension and must be repaid if you sell, unless you buy another home to live in
-    within 2 years. It covers one property at a time, once every 5 years, requested at least 3 years before
-    retirement and with your spouse's written consent. After 50, the amount is capped. A partner tax advisor
-    can run the numbers.
+    It reduces your future pension and must be repaid if you sell, unless you buy another home to live
+    in within 2 years. It covers one property at a time, once every 5 years, requested at least 3 years
+    before retirement and with your spouse's written consent. After 50, the amount is capped.
   facts: [ch-2p-conditions, ch-2p-effects]
 
 - id: en-ch-3a
@@ -30,8 +28,7 @@
   cta: tax
   q: "What about pillar 3a?"
   a: >-
-    Yes, pillar 3a can also be withdrawn early for a home of your own. You can use it to buy a home for your
-    own use or to pay down a mortgage. The specific conditions, such as timing and age, depend on your
-    contract and federal rules, so check them with your provider. A partner tax advisor can help you plan
-    it.
+    Yes, pillar 3a can also be withdrawn early to buy a home for your own use or to pay down a mortgage.
+    The specific conditions, such as timing and age, depend on your contract and on federal rules. Your
+    3a provider confirms them for your own case.
   facts: [ch-3a-home]

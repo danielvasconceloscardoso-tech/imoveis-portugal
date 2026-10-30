@@ -6,10 +6,10 @@
   cta: lawyer
   q: "Acheter un bien permet-il de vivre au Portugal ?"
   a: >-
-    Non. Depuis le 7 octobre 2023, l'achat d'un bien n'ouvre plus de nouvelles demandes de golden visa (loi
-    56/2023). Acheter et s'installer au Portugal sont deux démarches distinctes : pour y vivre, il faut un
-    visa de résidence, par exemple celui des personnes vivant de leurs propres revenus (D7) ou le visa CPLP,
-    qui ouvre l'accès au titre de séjour de l'AIMA. Un avocat partenaire peut vous orienter.
+    Acheter et s'installer au Portugal sont deux démarches distinctes : depuis le 7 octobre 2023,
+    l'achat d'un bien n'ouvre plus de nouvelles demandes de golden visa (loi 56/2023). Pour y vivre, il
+    existe des visas de résidence, comme celui des personnes vivant de leurs propres revenus (D7) ou le
+    visa CPLP, qui ouvre l'accès au titre de séjour de l'AIMA, l'agence portugaise des migrations.
   facts: [pt-ari-realestate-ended, pt-visa-own-income, pt-cplp-residence]
 
 - id: fr-br-irpf
@@ -30,8 +30,8 @@
   cta: tax
   q: "Existe-t-il un régime fiscal spécial pour ceux qui s'installent au Portugal ?"
   a: >-
-    Oui, pour certaines professions. L'IFICI applique un taux spécial de 20 % pendant 10 ans aux revenus du
-    travail dans des activités éligibles, comme la recherche, l'enseignement supérieur ou les emplois
-    hautement qualifiés. Il vise ceux qui deviennent résidents fiscaux sans l'avoir été pendant les cinq
-    années précédentes. L'achat d'un bien n'y donne pas accès à lui seul.
+    Oui, pour certaines professions : l'IFICI applique un taux spécial de 20 % pendant 10 ans aux
+    revenus du travail dans des activités éligibles, comme la recherche, l'enseignement supérieur ou les
+    emplois hautement qualifiés. Il vise ceux qui deviennent résidents fiscaux sans l'avoir été pendant
+    les cinq années précédentes. Il dépend du travail, pas de l'achat d'un bien.
   facts: [pt-ifici-20pct]

@@ -6,9 +6,9 @@
   cta: tax
   q: "Puis-je utiliser mon 2e pilier pour acheter au Portugal ?"
   a: >-
-    Oui, mais uniquement pour le logement que vous habiterez. Les règles fédérales permettent un retrait
-    anticipé du 2e pilier pour la résidence principale, en Suisse ou à l'étranger, mais pas pour une
-    résidence secondaire ou un bien loué. Le retrait minimum est de 20 000 francs. Votre caisse de pension
+    Oui, pour le logement que vous habiterez : les règles fédérales permettent un retrait anticipé du 2e
+    pilier pour la résidence principale, en Suisse ou à l'étranger, mais pas pour une résidence
+    secondaire ou un bien loué. Le retrait minimum est de 20 000 francs. Votre caisse de pension
     applique les règles à votre cas.
   facts: [ch-2nd-pillar-abroad]
 
@@ -29,8 +29,7 @@
   cta: tax
   q: "Et le pilier 3a ?"
   a: >-
-    Oui, le pilier 3a peut aussi être retiré par anticipation pour un logement à soi. Il sert à acquérir un
-    logement pour vos propres besoins ou à amortir un prêt hypothécaire. Les conditions précises, comme la
-    fréquence et l'âge, dépendent du contrat et des règles fédérales : vérifiez-les auprès de votre
-    établissement. Un conseiller fiscal partenaire peut vous aider.
+    Oui, le pilier 3a peut aussi être retiré par anticipation pour acquérir un logement pour vos propres
+    besoins ou amortir un prêt hypothécaire. Les conditions précises, comme la fréquence et l'âge,
+    dépendent du contrat et des règles fédérales. Votre établissement les confirme pour votre cas.
   facts: [ch-3a-home]

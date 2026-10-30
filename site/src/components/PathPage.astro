@@ -1,57 +1,77 @@
 ---
-// "Passo a passo" (formerly "Passo a passo", D61) as a path (prompt 27 §3, D51, D52). A start screen with two doors (buy, sell) and three quick
-// answers (country, budget or value, timing; "inherited" for selling), then a route of stations on one line. Each
-// station opens as a card: what happens, what you need (a checklist), what people ask (answered from facts.csv), the
-// numbers for the reader's case, the partner for the step and "Próximo passo". Progress stays on the device.
-// Without JavaScript the page is two plain ordered lists with everything open. Wording: COPY_DECK.md "path.*".
+// "Passo a passo" (D61) as a path (prompt 27 §3, D51, D52): a start screen with two doors (buy, sell) and three quick
+// answers (country, budget or value, timing; "inherited" for selling), then a route of stations, one per screen
+// (prompt 39 §1). Prompt 43 §3b: each station is a plain question, two or three short sentences that answer it,
+// "Saiba mais" to the article or FAQ answer that goes deeper, and one quiet partner link that opens the Concierge
+// with the topic (?topic=lawyer|advisor|bank|tax, scripts/chrome.ts and scripts/flow.ts). Progress stays on the
+// device. Without JavaScript the page is two plain ordered lists with everything open. Wording: COPY_DECK.md "path.*".
 import V2 from "../layouts/V2.astro";
 import CountryBar from "./CountryBar.astro";
 import "../styles/path2.css";
 import { pathFor, HTML_LANG, type Lang, type EdCode } from "../i18n";
-import { Sources, fmtDate, faqFor, RATE, EDITION_CUR } from "../lib/content";
-import { stationsFor, faqPlace, type Door } from "../lib/path";
-import { teamSoFar } from "../lib/team";
-import { SUB } from "../lib/tools";
-import { c, cl, edName } from "../lib/copy";
+import { Sources, fmtDate, RATE, EDITION_CUR } from "../lib/content";
+import { stationsFor, type Door } from "../lib/path";
+import { ART_SUB, type ArtKey } from "../lib/articles";
+import { postById } from "../lib/blog";
+import { c, edName } from "../lib/copy";
 
 interface Props { lang: Lang; ed: EdCode; }
 const { lang, ed } = Astro.props;
 const src = new Sources();
 const where = c(`home.where.${ed}`, lang);
 const vars = { where, from: c(`journey.from.${ed}`, lang) };
-const faq = pathFor(lang, ed, "faq"), sims = pathFor(lang, ed, "sims"), talk = pathFor(lang, ed, "talk");
-const faqItems = faqFor(ed, lang);
-const btn: Record<string, string> = { lawyer: "home.btn.lawyer", bank: "home.btn.bank", tax: "home.btn.tax", fx: "journey.role.fx" };
-const sup = (ns: number[]) => ns.map((i) => `<a class="sup" href="#fonte-${i}">${i}</a>`).join("");
-// Which calculator field takes the reader's figure.
-const FIELD: Record<string, string> = { cost: "price", payment: "price", rent: "price", gains: "sale" };
+const faq = pathFor(lang, ed, "faq"), consult = pathFor(lang, ed, "consult");
 const DOORS: Door[] = ["buy", "sell"];
-// Prompt 39 §1: no paragraph longer than two sentences on the path; the rest is one link away (the page, or the Articles hub).
-const sentences = (t: string) => t.split(/(?<=[.!?])\s+(?=[A-ZÀ-ÝÉ«"])/);
-const long = (t: string) => sentences(t).length > 2;
-const two = (t: string) => (long(t) ? sentences(t).slice(0, 2).join(" ") : t);
+const sup = (ns: number[]) => ns.map((i) => `<a class="sup" href="#fonte-${i}">${i}</a>`).join("");
+
+// Prompt 43 §3b: per station, the partner who solves that step, where "Saiba mais" goes and the facts behind the answer.
+type Topic = "lawyer" | "advisor" | "bank" | "tax";
+type More = { blog: string } | { faq: string } | { art: ArtKey } | { page: "private" };
+const ST: Record<string, { topic: Topic; more: More; facts: string[] }> = {
+  place: { topic: "advisor", more: { art: "map" }, facts: ["ine-m2-2026q2"] },
+  money: { topic: "bank", more: { blog: "buy-from-abroad" }, facts: ["pt-ltv-limits", "pt-aml-funds"] },
+  docs: { topic: "lawyer", more: { blog: "buy-from-abroad" }, facts: ["pt-nif-nonresident", "pt-poa-apostille"] },
+  struct: { topic: "tax", more: { page: "private" }, facts: ["pt-visa-own-income", "pt-ifici-20pct"] },
+  choose: { topic: "advisor", more: { faq: "find" }, facts: [] },
+  cpcv: { topic: "lawyer", more: { faq: "cpcv" }, facts: ["pt-sinal-442"] },
+  deed: { topic: "lawyer", more: { blog: "imt-nonresidents" }, facts: ["pt-is-purchase", "pt-casa-pronta-fees"] },
+  estate: { topic: "tax", more: { page: "private" }, facts: ["pt-aimi-deduction", "pt-aimi-rates"] },
+  keys: { topic: "advisor", more: { blog: "buy-from-abroad" }, facts: [] },
+  own: { topic: "tax", more: { faq: "yearly" }, facts: ["pt-imi-rates", "pt-rent-tax-nonresident"] },
+  later: { topic: "tax", more: { faq: "sell" }, facts: ["pt-cg-50pct"] },
+  worth: { topic: "advisor", more: { art: "prices" }, facts: ["ine-m2-2026q2"] },
+  inherit: { topic: "lawyer", more: { page: "private" }, facts: ["pt-is-inheritance-filing", "pt-is-inheritance-exempt"] },
+  taxes: { topic: "tax", more: { faq: "sell" }, facts: ["pt-cg-50pct"] },
+  prepare: { topic: "lawyer", more: { faq: "deed" }, facts: ["pt-casa-pronta-docs-all"] },
+  list: { topic: "advisor", more: { art: "prices" }, facts: [] },
+  sdeed: { topic: "lawyer", more: { faq: "sign" }, facts: ["pt-casa-pronta-fees", "pt-poa-apostille"] },
+  smoney: { topic: "bank", more: { faq: "money" }, facts: ["pt-aml-funds"] },
+};
+const moreHref = (m: More): string | null => {
+  if ("blog" in m) { const p = postById(m.blog, lang); return p ? `${pathFor(lang, ed, "blog")}${p.slug}/` : null; }
+  if ("faq" in m) return `${faq}#${lang}-${m.faq}`;
+  if ("art" in m) return `${pathFor(lang, ed, "articles")}${ART_SUB[m.art][lang]}/`;
+  return pathFor(lang, ed, m.page);
+};
 const routes = DOORS.map((door) => ({
   door,
-  st: stationsFor(door, ed).map((s) => ({
-    ...s,
-    h: c(`path.st.${s.k}.h`, lang),
-    what: c(`path.st.${s.k}.what`, lang),
-    need: cl(`path.st.${s.k}.need`, lang),
-    qs: s.qs.map((q) => ({ ...q, n: [...new Set(q.facts.map((f) => src.n(f)))] })),
-    more: faqItems.filter((it) => faqPlace(it.id)?.station === s.k),
-    cta: s.cta === "agency" ? { href: pathFor(lang, ed, "consult"), label: c("consult.cta", lang) }
-      : s.cta === "sell" ? { href: pathFor(lang, ed, "consult"), label: c("path.sell.cta", lang) }
-      : { href: `${talk}?cat=${s.cat}#form`, label: c(btn[s.cat!] ?? "common.nav.talk", lang) },
-    tool: s.tool ? { href: `${sims}${SUB[s.tool][lang]}/`, field: FIELD[s.tool] ?? "" } : null,
-  })),
+  st: stationsFor(door, ed).map((s) => {
+    const x = ST[s.k];
+    if (!x) throw new Error(`PathPage: station ${s.k} has no topic`);
+    return {
+      ...s,
+      q: c(`path.st.${s.k}.q`, lang), a: c(`path.st.${s.k}.a`, lang),
+      n: [...new Set(x.facts.map((f) => src.n(f)))],
+      more: moreHref(x.more),
+      partner: { href: `${consult}?topic=${x.topic}`, label: c(`path.p.${x.topic}`, lang), topic: x.topic },
+    };
+  }),
 }));
-// Prompt 28 §2b: at every station, the team so far (each role once), this step's roles marked.
-const teams = Object.fromEntries(routes.map((r) => [r.door, teamSoFar(r.st)])) as Record<Door, ReturnType<typeof teamSoFar>>;
 const cur = EDITION_CUR[ed];
 const rate = cur ? RATE(cur).rate : 0;
 ---
 <V2 lang={lang} ed={ed} page="journey" title={`${c("path.h1", lang)} · ${edName(ed, lang)} | Imóveis Portugal`} description={c("path.lede", lang, vars)} sticky={null}>
-  <div class="path" data-path data-map={pathFor(lang, ed, "map")} data-consult={pathFor(lang, ed, "consult")} data-locale={HTML_LANG[lang]} data-cur={cur ?? ""} data-rate={rate}
+  <div class="path" data-path data-locale={HTML_LANG[lang]} data-cur={cur ?? ""} data-rate={rate}
     data-progress={c("path.progress", lang)} data-stepof={c("path.stepof", lang)} data-local={c("path.local", lang)} data-copied={c("path.copied", lang)} data-here={c("path.here", lang)} data-done={c("path.done", lang)} data-door="buy">
     {/* Before first paint: the answers already given (link or device) set the layout, so nothing moves when the script loads. */}
     <script is:inline>(function(){var r=document.currentScript.parentElement;r.classList.add("is-js");try{var s=JSON.parse(localStorage.getItem("ip.path")||"{}"),q=new URLSearchParams(location.search),d=q.get("door");if(d==="buy"||d==="sell"){s.door=d;s.started=true}var b=Number(q.get("budget"))||s.budget||Number(localStorage.getItem("ip.budget"))||0;if(q.get("inh"))s.inh=q.get("inh")==="1";r.dataset.door=s.door==="sell"?"sell":"buy";r.classList.toggle("started",!!s.started);r.classList.toggle("high",b>=1e6);r.classList.toggle("inh",!!s.inh)}catch(e){}})();</script>
@@ -116,45 +136,16 @@ const rate = cur ? RATE(cur).rate : 0;
         <div class="pwrap">
           <svg class="pline-svg" aria-hidden="true"><path class="pl-base" /><path class="pl-fill" /></svg>
           <ol class="pline">
-            {r.st.map((s, si) => (
+            {r.st.map((s) => (
               <li class="pst" id={`s-${s.k}`} data-k={s.k} {...(s.high ? { "data-high": "" } : {})} {...(s.inherit ? { "data-inherit": "" } : {})}>
                 <span class="pdot" aria-hidden="true"></span>
                 <h3><button type="button" class="pst-head" aria-expanded="true" aria-controls={`b-${s.k}`}>
-                  <span class="pnum" aria-hidden="true"></span><span class="ph3">{s.h}</span><span class="pstate" data-state></span>
+                  <span class="pnum" aria-hidden="true"></span><span class="ph3" id={`q-${s.k}`}>{s.q}</span><span class="pstate" data-state></span>
                 </button></h3>
                 <div class="pst-body" id={`b-${s.k}`}><div class="pin">
-                  <p class="pwhat">{s.what}</p>
-                  <h4 class="h-small">{c("path.need", lang)}</h4>
-                  <ul class="pneed">{s.need.map((t, i) => <li><label><input type="checkbox" data-tick={`${s.k}.${i + 1}`} /> <span>{t}</span></label></li>)}</ul>
-                  {s.qs.length > 0 && <h4 class="h-small">{c("path.asks", lang)}</h4>}
-                  {s.qs.map((q) => (
-                    <details class="pqa">
-                      <summary>{c(q.ck ? `${q.ck}.q` : `journey.q.${q.id}.q`, lang, vars)}</summary>
-                      <p>{two(c(q.ck ? `${q.ck}.a` : `journey.q.${q.a ?? q.id}.a`, lang, vars))}<Fragment set:html={sup(q.n)} />{long(c(q.ck ? `${q.ck}.a` : `journey.q.${q.a ?? q.id}.a`, lang, vars)) && <> <a href={pathFor(lang, ed, q.link === "private" ? "private" : "articles")}>{c("art.read", lang)}</a></>}</p>
-                      {q.ask && <p class="small">{c("journey.unverified", lang)}</p>}
-                    </details>
-                  ))}
-                  {s.more.length > 0 && <p class="small pmore">{c("path.more", lang)}: {s.more.map((it, i) => <>{i > 0 && " · "}<a href={`${faq}#${it.id}`}>{it.q}</a></>)}</p>}
-                  {(s.map || s.tool) && <h4 class="h-small">{c("path.numbers", lang)}</h4>}
-                  {(s.map || s.tool) && <p class="pnums">
-                    {s.map && <a class="act quiet" data-num="map" href={pathFor(lang, ed, "map")}>{c(r.door === "sell" ? "path.numbers.mapsell" : "path.numbers.map", lang)}</a>}
-                    {s.tool && <a class="act quiet" data-num={s.tool.field} href={s.tool.href}>{c("path.numbers.tool", lang)}</a>}
-                  </p>}
-                  <aside class="pteam" aria-label={c(r.door === "sell" ? "team.h.sell" : "team.h", lang)}>
-                    <p class="h-small">{c(r.door === "sell" ? "team.h.sell" : "team.h", lang)}</p>
-                    <p class="small">{c("team.p", lang)}</p>
-                    <ol class="tm">
-                      {teams[r.door][si].map((t, ti) => (
-                        <li class="tm-row" data-sts={t.sts.join(" ")} {...(t.now ? { "data-now": "" } : {})} style={`--d:${ti}`}>
-                          <div class="tm-h"><span class="tm-role">{c(`journey.role.${t.role}`, lang)}</span>{t.partner && <span class="tm-name">{t.partner.name}<span class="tag">{c("common.sponsored", lang)}</span></span>}{t.now && <span class="tm-now">{c("team.now", lang)}</span>}</div>
-                          <div class="tm-do">{c(`team.do.${t.role}`, lang)}{t.partner?.reg && <span class="small"> · {t.partner.reg}</span>}</div>
-                          {t.partner && <label class="tm-ok"><input type="checkbox" data-team={t.role} data-name={t.partner.name} /> {c("team.consent", lang, { name: t.partner.name })}</label>}
-                        </li>
-                      ))}
-                    </ol>
-                    {teams[r.door][si].some((t) => !t.partner) && <p class="small">{c("team.wait", lang)}</p>}
-                    <p class="tm-acts"><a class="btn sm" data-team-send href={`${talk}#form`} aria-disabled="true">{c("team.send", lang)}</a> <a class="act" data-cta={s.cta} href={s.cta.href}>{s.cta.label}</a></p>
-                  </aside>
+                  <p class="pwhat">{s.a}<Fragment set:html={sup(s.n)} /></p>
+                  {s.more && <p class="plearn"><a href={s.more} aria-describedby={`q-${s.k}`}>{c("path.learn", lang)}</a></p>}
+                  <p class="ptn"><span class="ptn-tag">{c("path.p.tag", lang)}</span> <a href={s.partner.href} data-concierge data-topic={s.partner.topic} aria-describedby={`q-${s.k}`}>{s.partner.label}<span class="ptn-ar" aria-hidden="true"> →</span></a></p>
                   <p class="pnext"><button type="button" class="btn" data-next hidden>{c("path.next", lang)}</button></p>
                 </div></div>
               </li>
@@ -173,10 +164,13 @@ const rate = cur ? RATE(cur).rate : 0;
     </section>
   </div>
 
+  {/* Audit 29 Oct §8: the sources stay (D12), folded into one line that opens in place; a superscript opens it. */}
   <section class="sources-list" aria-labelledby="fontes">
     <div class="frame read">
-      <h2 id="fontes" class="h-small">{c("common.sources", lang)}</h2>
-      <ol>{src.list.map((s, i) => <li id={`fonte-${i + 1}`}><a href={s.url} rel="noopener">{s.title}</a>{s.checked && `, ${c("common.checked", lang, { date: fmtDate(lang, s.checked) })}`}.</li>)}</ol>
+      <details class="srcs" data-srcs>
+        <summary id="fontes" class="h-small">{c("common.sources", lang)} ({src.list.length})</summary>
+        <ol>{src.list.map((s, i) => <li id={`fonte-${i + 1}`}><a href={s.url} rel="noopener">{s.title}</a>{s.checked && `, ${c("common.checked", lang, { date: fmtDate(lang, s.checked) })}`}.</li>)}</ol>
+      </details>
     </div>
   </section>
 </V2>
@@ -288,7 +282,6 @@ const rate = cur ? RATE(cur).rate : 0;
       if (isHere) li.setAttribute("aria-current", "step"); else li.removeAttribute("aria-current");
       $("[data-state]", li)!.textContent = isHere ? root.dataset.here! : done ? root.dataset.done! : "";
       $("[data-next]", li)!.hidden = i === list.length - 1;
-      $$<HTMLInputElement>("[data-tick]", li).forEach((t) => (t.checked = st.ticks.includes(t.dataset.tick!)));
     });
     list.forEach((li) => setOpen(li, li.dataset.k === here));
     const n = list.filter((li) => st.done.includes(li.dataset.k!)).length;
@@ -299,42 +292,16 @@ const rate = cur ? RATE(cur).rate : 0;
     $("[data-stepof-t]")!.textContent = root.dataset.stepof!.replace("{n}", String(list.findIndex((li) => li.dataset.k === here) + 1)).replace("{t}", String(list.length));
     const door = $(`button[data-door="${st.door}"] .pd-h`)!.textContent;
     $("[data-sum]")!.textContent = [door, st.budget ? `${nf.format(st.budget)} €` : ""].filter(Boolean).join(" · ");
-    links(); teamRender();
+    links();
     drawAll();
     if (scroll) { toTop(bar); $<HTMLButtonElement>(`#s-${here} button.pst-head`)?.focus({ preventScroll: true }); }
   }
-  // Team panel: a role shows while one of the stations that brings it in is on the route; consent boxes for the same
-  // partner stay in step across stations; the send link names only the partners the reader ticked.
-  const team = new Set<string>();
-  function teamRender() {
-    const on = new Set(visible().map((li) => li.dataset.k!));
-    $$(".tm-row").forEach((row) => { row.hidden = !row.dataset.sts!.split(" ").some((k) => on.has(k)); });
-    $$<HTMLInputElement>("[data-team]").forEach((x) => (x.checked = team.has(x.dataset.name!)));
-    const names = [...team], roles = [...new Set($$<HTMLInputElement>("[data-team]:checked").map((x) => x.dataset.team!))];
-    $$<HTMLAnchorElement>("[data-team-send]").forEach((a) => {
-      a.setAttribute("aria-disabled", String(!names.length));
-      const onlyAgency = roles.length === 1 && roles[0] === "agency";
-      const u = new URL(onlyAgency ? root.dataset.consult! : a.href, location.href);
-      u.search = ""; u.hash = onlyAgency ? "" : "form";
-      if (names.length) u.searchParams.set("team", names.join(", "));
-      const cat = roles.find((r) => r !== "agency"); if (cat && !onlyAgency) u.searchParams.set("cat", cat);
-      if (st.budget) u.searchParams.set("budget", String(st.budget));
-      a.href = u.pathname + u.search + u.hash;
-    });
-  }
-  $$<HTMLInputElement>("[data-team]").forEach((x) => x.addEventListener("change", () => { x.checked ? team.add(x.dataset.name!) : team.delete(x.dataset.name!); teamRender(); }));
-
-  // The reader's figure goes into the map and the calculators; a high budget gets the personal consultation tone.
+  // The reader's budget travels with the partner link, so the Concierge starts with it answered.
   function links() {
-    const b = st.budget;
-    $$<HTMLAnchorElement>("[data-num]").forEach((a) => {
-      const u = new URL(a.href, location.href), k = a.dataset.num!;
-      if (k === "map") { b ? u.searchParams.set("budget", String(b)) : u.searchParams.delete("budget"); }
-      else if (k) { b ? u.searchParams.set(k, String(b)) : u.searchParams.delete(k); }
+    $$<HTMLAnchorElement>("a[data-topic]").forEach((a) => {
+      const u = new URL(a.href, location.href);
+      st.budget ? u.searchParams.set("budget", String(st.budget)) : u.searchParams.delete("budget");
       a.href = u.pathname + u.search;
-    });
-    $$<HTMLAnchorElement>('[data-cta="agency"], [data-cta="sell"]').forEach((a) => {
-      const u = new URL(a.href, location.href); b ? u.searchParams.set("budget", String(b)) : u.searchParams.delete("budget"); a.href = u.pathname + u.search;
     });
   }
   $$(".pst").forEach((li) => {
@@ -348,13 +315,6 @@ const rate = cur ? RATE(cur).rate : 0;
       const list = visible(), i = list.indexOf(li);
       st.step[st.door] = list[i + 1]?.dataset.k ?? k; save(); render(true);
     });
-    $$<HTMLInputElement>("[data-tick]", li).forEach((t) => t.addEventListener("change", () => {
-      st.ticks = st.ticks.filter((x) => x !== t.dataset.tick);
-      if (t.checked) st.ticks.push(t.dataset.tick!);
-      const all = $$<HTMLInputElement>("[data-tick]", li).every((x) => x.checked);
-      if (all && !st.done.includes(k)) st.done.push(k);
-      save(); render();
-    }));
   });
 
   // The line: straight on a phone, a gentle curve on a wide screen; it fills up to where the reader is.
@@ -396,6 +356,12 @@ const rate = cur ? RATE(cur).rate : 0;
     } catch { /* cancelled */ }
   });
 
+  // A superscript opens the folded sources and shows its line.
+  const srcs = document.querySelector<HTMLDetailsElement>("[data-srcs]");
+  const openSrc = () => { const t = location.hash.startsWith("#fonte-") && srcs ? document.getElementById(location.hash.slice(1)) : null; if (t && srcs) { srcs.open = true; t.scrollIntoView({ block: "center" }); } };
+  document.addEventListener("click", (e) => { if ((e.target as HTMLElement).closest?.("a.sup") && srcs) srcs.open = true; });
+  addEventListener("hashchange", openSrc); openSrc();
+
   render(st.started && !!q.get("step"));
 </script>
 
@@ -407,99 +373,82 @@ const rate = cur ? RATE(cur).rate : 0;
   .is-js[data-door="buy"] [data-route="sell"], .is-js[data-door="sell"] [data-route="buy"],
   .is-js[data-door="buy"] [data-for="sell"], .is-js[data-door="sell"] [data-for="buy"],
   .is-js:not(.high) .pst[data-high], .is-js:not(.inh) .pst[data-inherit] { display: none; }
-  .pdoors { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .pdoor { text-align: left; display: grid; gap: 6px; padding: 22px 20px; border-radius: var(--r); border: 1px solid var(--rule); background: var(--card); color: var(--ink); cursor: pointer; font: inherit; transition: border-color .2s, box-shadow .2s; }
+  .pdoors { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .pdoor { text-align: left; display: grid; gap: 8px; padding: 24px; border-radius: var(--r); border: 1px solid var(--rule); background: var(--card); color: var(--ink); cursor: pointer; font: inherit; transition: border-color .2s, box-shadow .2s; }
   .pdoor:hover { border-color: var(--accent); }
   .pdoor[aria-pressed="true"] { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
-  .pd-h { font: 450 1.6rem/1.1 var(--serif); }
+  .pd-h { font: 450 28px/1.1 var(--serif); }
   .pd-p { font-size: 15px; color: var(--muted); }
-  .pchoices { display: grid; gap: 20px; }
-  .pfield { display: grid; gap: 6px; font-weight: 500; }
-  .pfield input { min-height: 52px; padding: 0 16px; border-radius: 10px; border: 1.5px solid var(--rule); background: var(--card); font: 400 1.25rem var(--sans); color: var(--ink); max-width: 16em; }
+  .pchoices { display: grid; gap: 24px; }
+  .pfield { display: grid; gap: 8px; font-weight: 500; }
+  .pfield input { min-height: 52px; padding: 0 16px; border-radius: 10px; border: 1.5px solid var(--rule); background: var(--card); font: 400 21px var(--sans); color: var(--ink); max-width: 16em; }
   .pfield input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
-  .pcheck { display: flex; gap: 10px; align-items: center; }
-  .pwhen { border: 0; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px 18px; }
+  .pcheck { display: flex; gap: 8px; align-items: center; }
+  .pwhen { border: 0; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px 16px; }
   .pwhen legend { font-weight: 500; margin-bottom: 8px; padding: 0; }
   .pwhen label { display: inline-flex; gap: 8px; align-items: center; min-height: 40px; }
   .pchoices .btn { justify-self: start; }
   .path [hidden] { display: none !important; }
-  .pbar { position: sticky; top: var(--hd, 0px); z-index: 3; background: var(--paper); padding-top: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--rule); margin-bottom: 24px; }
+  .pbar { position: sticky; top: var(--hd, 0px); z-index: 3; background: var(--paper); padding-top: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--rule); margin-bottom: 24px; }
   .pbar p { margin: 0; }
   .linkish { background: none; border: 0; padding: 0; color: var(--accent); font: inherit; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
-  .pprog { height: 3px; background: var(--rule); border-radius: 2px; margin: 10px 0 6px; overflow: hidden; }
+  .pprog { height: 3px; background: var(--rule); border-radius: 2px; margin: 8px 0; overflow: hidden; }
   .pprog span { display: block; height: 100%; width: 0; background: var(--accent); transition: width .5s ease; }
-  .proute { margin-bottom: 48px; }
+  .proute { margin-bottom: 40px; }
   .pwrap { position: relative; }
   .pline { list-style: none; margin: 0; padding: 0; counter-reset: st; }
   .pline-svg { position: absolute; left: 0; top: 0; overflow: visible; pointer-events: none; display: none; }
   .pl-base { fill: none; stroke: var(--rule); stroke-width: 2; }
   .pl-fill { fill: none; stroke: var(--accent); stroke-width: 2.5; }
-  .pst { position: relative; padding: 0 0 8px 52px; counter-increment: st; }
+  .pst { position: relative; padding: 0 0 8px 40px; counter-increment: st; }
   /* Without JavaScript: a plain line on the left. */
   .pst::before { content: ""; position: absolute; left: 13px; top: 0; bottom: 0; width: 2px; background: var(--rule); }
   .is-js .pst::before { display: none; }
   .is-js .pline-svg { display: block; }
-  .pdot { position: absolute; left: calc(var(--x, 14px) - 7px); top: 22px; width: 14px; height: 14px; border-radius: 50%; background: var(--paper); border: 2px solid var(--muted); z-index: 1; transition: background .3s, border-color .3s, transform .3s; }
+  .pdot { position: absolute; left: calc(var(--x, 14px) - 7px); top: 24px; width: 14px; height: 14px; border-radius: 50%; background: var(--paper); border: 2px solid var(--muted); z-index: 1; transition: background .3s, border-color .3s, transform .3s; }
   .pst.done .pdot { background: var(--accent); border-color: var(--accent); }
   .pst.here .pdot { border-color: var(--accent); transform: scale(1.25); box-shadow: 0 0 0 5px var(--accent-soft); }
   .pst h3 { margin: 0; }
-  .pst-head { display: flex; align-items: baseline; gap: 12px; width: 100%; padding: 14px 0; background: none; border: 0; text-align: left; color: var(--ink); font: 450 1.35rem/1.25 var(--serif); cursor: pointer; }
+  .pst-head { display: flex; align-items: baseline; gap: 16px; width: 100%; padding: 16px 0; background: none; border: 0; text-align: left; color: var(--ink); font: 450 21px/1.25 var(--serif); cursor: pointer; }
   .pnum::before { content: counter(st, decimal-leading-zero); font: 600 13px/1 var(--sans); letter-spacing: .08em; color: var(--muted); }
   .ph3 { flex: 1; }
-  .pstate { font: 600 12px/1 var(--sans); letter-spacing: .1em; text-transform: uppercase; color: var(--accent); white-space: nowrap; }
+  .pstate { font: 600 13px/1 var(--sans); letter-spacing: .1em; text-transform: uppercase; color: var(--accent); white-space: nowrap; }
   .pst-body { display: grid; grid-template-rows: 1fr; }
   .pin { min-height: 0; overflow: hidden; }
   .is-js .pst-body { grid-template-rows: 0fr; transition: grid-template-rows .35s ease; }
   .is-js .pst.open .pst-body { grid-template-rows: 1fr; }
   .is-js .pst:not(.open) .pin { visibility: hidden; transition: visibility 0s .35s; }
-  .pin > :last-child { margin-bottom: 20px; }
-  .pwhat { margin: 0 0 18px; font-size: 1.05rem; }
-  .pin h4 { margin: 22px 0 10px; }
-  .pneed { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
-  .pneed label { display: flex; gap: 12px; align-items: flex-start; min-height: 40px; padding: 6px 0; cursor: pointer; }
-  .pneed input { width: 20px; height: 20px; margin: 3px 0 0; accent-color: var(--accent); flex: none; }
-  .pneed input:checked + span { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--rule); }
-  .pqa { border-top: 1px solid var(--rule); }
-  .pqa summary { cursor: pointer; padding: 12px 0; font-weight: 500; }
-  .pqa p { margin: 0 0 12px; }
-  .pmore { margin-top: 12px; }
-  .pnums { display: flex; flex-wrap: wrap; gap: 8px 16px; margin: 0; }
-  .pteam { margin-top: 22px; padding: 20px; border: 1px solid var(--rule); border-radius: var(--r); background: var(--card); }
-  .pteam > p { margin: 0 0 8px; }
-  .tm { list-style: none; margin: 14px 0 10px; padding: 0; }
-  .tm-row { padding: 12px 0; border-top: 1px solid var(--rule); }
-  .tm-row .tm-h, .tm-row .tm-do { margin: 0; }
-  .tm-h { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; }
-  .tm-role { font: 450 1.1rem/1.3 var(--serif); }
-  .tm-name { font-weight: 600; display: inline-flex; gap: 8px; align-items: baseline; }
-  .tm-name .tag { font: 600 10px/1 var(--sans); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--rule); border-radius: 4px; padding: 3px 5px; }
-  .tm-now { margin-left: auto; font: 600 11px/1 var(--sans); letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
-  .tm-do { color: var(--muted); font-size: 15px; margin-top: 2px; }
-  .tm-ok { display: flex; gap: 10px; align-items: flex-start; margin-top: 8px; font-size: 15px; cursor: pointer; }
-  .tm-ok input { width: 20px; height: 20px; margin: 1px 0 0; flex: none; accent-color: var(--accent); }
-  .tm-acts { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; margin-top: 12px !important; }
-  .tm-acts .btn[aria-disabled="true"] { opacity: .45; pointer-events: none; }
-  /* The team assembles itself: this step's partners arrive one by one when the station opens. */
-  .is-js .pst.open .tm-row[data-now] { animation: tm-in .5s cubic-bezier(.2,.7,.2,1) both; animation-delay: calc(var(--d) * 90ms + 150ms); }
-  @keyframes tm-in { from { opacity: 0; transform: translateY(6px); } }
-  .pnext { margin: 22px 0 0; }
-  .pend { padding-top: 8px; padding-bottom: 48px; }
+  .pin > :last-child { margin-bottom: 24px; }
+  /* Prompt 43 §3b: the answer, "Saiba mais", one quiet partner link; nothing else on the screen. */
+  .pwhat { margin: 0 0 16px; font-size: 17px; line-height: 1.6; max-width: 34em; }
+  .plearn { margin: 0 0 24px; }
+  .plearn a { font-weight: 500; }
+  .ptn { margin: 0; padding-top: 16px; border-top: 1px solid var(--rule); font-size: 15px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; }
+  .ptn-tag { font: 600 13px/1 var(--sans); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .ptn a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; text-decoration-color: var(--rule); }
+  .ptn a:hover { text-decoration-color: currentColor; }
+  .pnext { margin: 24px 0 0; }
+  .pend { padding-top: 8px; padding-bottom: 40px; }
   /* Prompt 39 §1: one station per screen under a fixed bar; each screen reserves a full viewport, so the scroll that puts
      the step at the top always has room and nothing below can pull it. No folding, no line: nothing moves after an answer. */
   .is-js .pstart { min-height: calc(100svh - var(--hd, 64px) - 24px); align-content: start; }
   .is-js.started .proute { min-height: calc(100svh - var(--hd, 64px)); }
   .is-js.started .pbar { position: static; border-bottom: 0; margin-bottom: 8px; }
-  .pb-row { display: flex; align-items: center; gap: 14px; }
+  .pb-row { display: flex; align-items: center; gap: 16px; }
   .pb-step { flex: 1; font: 600 13px/1 var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
   .is-js.started .pst:not(.here), .is-js.started .proute > h2, .is-js.started .pline-svg, .is-js.started .pdot, .is-js.started .pnum, .is-js.started .pstate { display: none; }
   .is-js.started .pst { padding-left: 0; }
-  .is-js.started .pst-head { cursor: default; font-size: clamp(28px, 4vw, 38px); line-height: 1.12; }
+  .is-js.started .pst-head { cursor: default; font-size: 28px; line-height: 1.15; }
   .is-js.started .pst-head:focus:not(:focus-visible) { outline: none; }
   .is-js.started .pst-body { transition: none; }
   .is-js.started .pst.here { animation: pst-in .3s ease both; }
   @keyframes pst-in { from { opacity: 0; } }
   .pend h2 { margin-bottom: 16px; }
-  @media (min-width: 900px) { .pst { padding-left: 76px; } .is-js.started .pst { padding-left: 0; } }
-  @media (max-width: 520px) { .pdoors { grid-template-columns: 1fr; } .pd-h { font-size: 1.4rem; } }
-  @media (prefers-reduced-motion: reduce) { .is-js .pst-body, .pdot, .pprog span { transition: none; } .is-js.started .pst.here { animation: none; } .is-js .pst.open .tm-row[data-now] { animation: none; } }
+  .srcs summary { cursor: pointer; list-style: none; display: inline-flex; align-items: center; gap: 8px; min-height: 40px; }
+  .srcs summary::-webkit-details-marker { display: none; }
+  .srcs summary::after { content: "+"; font: 400 17px/1 var(--sans); color: var(--muted); }
+  .srcs[open] summary::after { content: "−"; }
+  @media (min-width: 900px) { .pst { padding-left: 64px; } .is-js.started .pst { padding-left: 0; } .is-js.started .pst-head { font-size: 40px; } }
+  @media (max-width: 520px) { .pdoors { grid-template-columns: 1fr; } .pd-h { font-size: 21px; } }
+  @media (prefers-reduced-motion: reduce) { .is-js .pst-body, .pdot, .pprog span { transition: none; } .is-js.started .pst.here { animation: none; } }
 </style>

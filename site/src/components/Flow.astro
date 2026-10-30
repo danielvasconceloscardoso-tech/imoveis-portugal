@@ -54,3 +54,10 @@ const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${cfg.
   import { initFlow } from "../scripts/flow";
   document.querySelectorAll<HTMLElement>("[data-flow]:not([data-sheet-flow])").forEach((el) => { if (!(el as any).__flow) (el as any).__flow = initFlow(el, { param: el.dataset.param! }); });
 </script>
+
+<style is:global>
+  /* Prompt 43 §3b: the calm line for a topic with no signed partner yet, and the topic row in the review (not editable). */
+  .fl-topic { margin: 0 0 8px; font-size: 15px; line-height: 1.5; color: var(--fm, #5b5d63); }
+  .fl-review .fl-fixed { cursor: default; }
+  .fl-review .fl-fixed:hover { background: none !important; }
+</style>

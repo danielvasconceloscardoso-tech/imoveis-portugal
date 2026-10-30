@@ -6,10 +6,9 @@
   cta: lawyer
   q: "Comprar casa dá direito a viver em Portugal?"
   a: >-
-    Não. Desde 7 de outubro de 2023, comprar casa deixou de dar acesso a novos vistos gold (Lei 56/2023).
-    Comprar e viver em Portugal são processos separados: para viver cá precisa de um visto de residência,
-    por exemplo o de quem vive de rendimentos próprios (D7). Um advogado parceiro pode ver qual se aplica a
-    si.
+    Comprar e viver em Portugal são processos separados: desde 7 de outubro de 2023, a compra de casa
+    deixou de dar acesso a novos vistos gold (Lei 56/2023). Para viver cá, pede um visto de residência,
+    por exemplo o de quem vive de rendimentos próprios, conhecido como D7.
   facts: [pt-ari-realestate-ended, pt-visa-own-income]
 
 - id: pt-us-report
@@ -30,10 +29,10 @@
   cta: tax
   q: "A venda da casa em Portugal é tributada nos Estados Unidos?"
   a: >-
-    Pode ser tributada nos dois países, mas sem pagar duas vezes pelo mesmo. Pela convenção entre Portugal e
-    os EUA, Portugal pode tributar a mais-valia de casas em Portugal, e os EUA mantêm o direito de tributar
-    os seus cidadãos. O crédito por imposto estrangeiro (formulário 1116) desconta o imposto português no
-    americano. Um consultor fiscal parceiro faz as contas.
+    Pode ser tributada nos dois países, mas sem pagar duas vezes pelo mesmo. Pela convenção entre
+    Portugal e os EUA, Portugal pode tributar a mais-valia de casas em Portugal, e os EUA mantêm o
+    direito de tributar os seus cidadãos. O crédito por imposto estrangeiro (formulário 1116) desconta o
+    imposto português no americano.
   facts: [us-pt-treaty-gains]
 
 - id: pt-us-ifici
@@ -42,8 +41,8 @@
   cta: tax
   q: "Há um regime fiscal especial para quem se muda para Portugal?"
   a: >-
-    Sim, para algumas profissões. O IFICI aplica uma taxa especial de 20% durante 10 anos ao rendimento do
-    trabalho em atividades elegíveis, como investigação, ensino superior ou empregos altamente qualificados.
-    É para quem passa a residente fiscal e não foi residente em nenhum dos cinco anos anteriores. Comprar
-    casa, por si, não dá acesso. Um consultor fiscal parceiro vê se se aplica.
+    Sim, para algumas profissões: o IFICI aplica uma taxa especial de 20% durante 10 anos ao rendimento
+    do trabalho em atividades elegíveis, como investigação, ensino superior ou empregos altamente
+    qualificados. É para quem passa a residente fiscal e não foi residente em nenhum dos cinco anos
+    anteriores. O regime depende do trabalho, não da compra de casa.
   facts: [pt-ifici-20pct]

@@ -48,6 +48,14 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
     place: q.get("place") || places[0] || "",
   };
   for (const s of steps) if ("prefill" in s && s.prefill && !A[s.id] && pre[s.prefill]) A[s.id] = pre[s.prefill];
+  // Prompt 43 §3b: a partner link (Passo a passo, Perguntas) names the topic. Lawyer opens the lawyer card (D64, its own
+  // consent box); advisor is the normal concierge; bank and tax have no signed partner yet, so the first screen says we
+  // introduce the right person and the request follows the usual routing to the qualified advisor (D66). The topic is
+  // shown in the review list and sent with the request. No partner is named here.
+  const X = F.extra as Record<string, string>;
+  const topic = F.id === "concierge" ? (["lawyer", "advisor", "bank", "tax"].find((t) => t === q.get("topic")) ?? "") : "";
+  const topicLabel = topic ? X[`topic${topic[0].toUpperCase()}${topic.slice(1)}`] : "";
+  const introLine = topic === "bank" || topic === "tax" || (topic === "lawyer" && !LW);
   // The home bar's answers win over older ones, and those steps are skipped: the flow starts at the next question, the
   // progress counts only what is left, and Back still reaches them, editable. ed, door and cg then leave the URL.
   let offset = 0;
@@ -98,7 +106,8 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
       const k = steps.indexOf(x), v = x.type === "choice" ? x.opts.find((o) => o.v === A[x.id])?.l : A[x.id];
       return v ? `<li><button type="button" class="fl-edit" data-goto="${k}"><span>${esc(x.q)}</span><b>${esc(v)}</b></button></li>` : "";
     }).join("");
-    return `<p class="fl-k">${esc(L.review)}</p><ul class="fl-review">${rows}${A.email ? `<li><button type="button" class="fl-edit" data-goto="${steps.findIndex((x) => x.type === "contact")}"><span>${esc(L.email)}</span><b>${esc(A.name ? `${A.name} · ${A.email}` : A.email)}</b></button></li>` : ""}</ul>
+    const topicRow = topic ? `<li><div class="fl-edit fl-fixed"><span>${esc(X.topic)}</span><b>${esc(topicLabel)}</b></div></li>` : "";
+    return `<p class="fl-k">${esc(L.review)}</p><ul class="fl-review">${topicRow}${rows}${A.email ? `<li><button type="button" class="fl-edit" data-goto="${steps.findIndex((x) => x.type === "contact")}"><span>${esc(L.email)}</span><b>${esc(A.name ? `${A.name} · ${A.email}` : A.email)}</b></button></li>` : ""}</ul>
       <button type="button" class="fl-consent" role="checkbox" aria-checked="${A.consent === "1"}" data-consent><i>${CHECK}</i><span>${esc(s.text)} <a href="${F.links.privacy}" target="_blank" rel="noopener">${esc(F.extra.privacy)}</a></span></button>
       <div class="fl-go"><button type="button" class="fl-btn fl-send" data-send ${A.consent === "1" ? "" : "disabled"}>${esc(L.send)}</button></div>
       <input class="fl-hp" data-hp tabindex="-1" autocomplete="off" aria-hidden="true" />`;
@@ -144,7 +153,8 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
     const ask = LW && (i === 0 || s.id === "nif") ? `<p class="fl-ask"><button type="button" class="fl-link" data-lawyer>${esc(i === 0 ? LW.labels.ask : LW.labels.legal)}</button></p>` : "";
     // "Ver novos empreendimentos" on the first screen (one tap to the list); matching buildings under the place question.
     const nb = BL && BL.items.length && i === 0 ? `<button type="button" class="fl-xopt" data-blds><span>${esc(BL.labels.open)}</span><i>${ARROW}</i></button>` : "";
-    const html = `${head()}<div class="fl-step"><h2 id="fl-q" class="fl-q" tabindex="-1">${esc(s.q)}</h2>${i === 0 && F.lede ? `<p class="fl-lede">${esc(F.lede)}</p>` : ""}${body(s)}${nb}${ask}</div>`;
+    const intro = introLine && i === first ? `<p class="fl-topic">${esc(X.topicIntro)}</p>` : "";
+    const html = `${head()}<div class="fl-step">${intro}<h2 id="fl-q" class="fl-q" tabindex="-1">${esc(s.q)}</h2>${i === 0 && F.lede ? `<p class="fl-lede">${esc(F.lede)}</p>` : ""}${body(s)}${nb}${ask}</div>`;
     swap(html, focus);
     url(i);
   }
@@ -287,7 +297,7 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
     let brief = ""; try { brief = sessionStorage.getItem("ip.brief") || ""; } catch { /* none */ }
     const payload = { flow: F.id, project: q.get("project") || "", unit: q.get("unit") || "", ...F.hidden, answers: Object.fromEntries(steps.filter((s) => s.type === "choice" || s.type === "text" || s.type === "slots").map((s) => [s.id, A[s.id] ?? ""])),
       slots: (() => { try { return JSON.parse(A._slots || "[]"); } catch { return []; } })(),
-      labels: answerText(), door: A.door || "", name: A.name || "", email: A.email || "", phone: A.phone || "", consent: A.consent === "1", budget: budgetEur || "", brief, page: location.pathname, hp };
+      labels: [...(topic ? [`${X.topic}: ${topicLabel}`] : []), ...answerText()], topic, door: A.door || "", name: A.name || "", email: A.email || "", phone: A.phone || "", consent: A.consent === "1", budget: budgetEur || "", brief, page: location.pathname, hp };
     let ok = false;
     try { const r = await fetch("/api/request", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(payload) }); ok = r.ok; } catch { ok = false; }
     if (ok) { const r = route(); try { sessionStorage.removeItem(key); sessionStorage.setItem(`${key}.done`, r); } catch { /* none */ } done(r); }
@@ -314,7 +324,11 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
   // ------------------------------------------------------------ start
   const start = Number(q.get(opts.param));
   i = start >= 1 && start <= N ? start - 1 : offset;
+  const first = i;  // the first screen the reader sees (the bank and tax line sits on it)
   const wasDone = q.get(opts.param) === "done" ? (() => { try { return sessionStorage.getItem(`${key}.done`); } catch { return null; } })() : null;
-  if (wasDone) done(wasDone); else render(false);
-  return { go, reset: () => { i = 0; render(false); }, focus: () => stage.querySelector<HTMLElement>(".fl-q")?.focus({ preventScroll: true }), clearUrl: () => url(null), at: () => i };
+  const lawyerFirst = topic === "lawyer" && !!LW && !start;
+  if (wasDone) done(wasDone); else if (lawyerFirst) lawyerScreen(); else render(false);
+  // show(): what the sheet displays each time it opens (the lawyer card for a lawyer link, else the current step).
+  const show = () => (lawyerFirst ? lawyerScreen() : go(i));
+  return { go, show, reset: () => { i = 0; render(false); }, focus: () => stage.querySelector<HTMLElement>(".fl-q")?.focus({ preventScroll: true }), clearUrl: () => url(null), at: () => i };
 }

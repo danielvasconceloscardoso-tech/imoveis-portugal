@@ -6,8 +6,8 @@
   cta: tax
   q: "Dois-je déclarer en France mon bien et mon compte au Portugal ?"
   a: >-
-    Le compte, oui, chaque année. Les comptes bancaires ouverts au Portugal se déclarent avec votre
+    Le compte, oui, chaque année : les comptes bancaires ouverts au Portugal se déclarent avec votre
     déclaration de revenus (formulaire 3916), même inutilisés. Si vous louez le bien, les loyers sont
-    imposés à 25 % au Portugal, et la convention fiscale franco-portugaise fixe la façon dont la France en
-    tient compte. Un conseiller fiscal partenaire connaît les deux côtés.
+    imposés à 25 % au Portugal, et la convention fiscale franco-portugaise fixe la façon dont la France
+    en tient compte.
   facts: [fr-3916, pt-rent-tax-nonresident]

@@ -60,13 +60,15 @@ export function initChrome() {
   const flowEl = sh.querySelector<HTMLElement>("[data-flow]")!, box = sh.querySelector<HTMLElement>(".sh-in")!;
   const slow = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
   let flow: ReturnType<typeof initFlow> | null = null, lastFocus: HTMLElement | null = null, hideT = 0;
+  // The topic the current flow was built with (prompt 43 §3b: ?topic=lawyer|advisor|bank|tax from a partner link).
+  let flowTopic = new URLSearchParams(location.search).get("topic") || "";
   const open = (e?: Event) => {
     e?.preventDefault(); clearTimeout(hideT);
     document.querySelectorAll("details.concierge[open]").forEach((d) => d.removeAttribute("open"));
     if (sh.classList.contains("is-open") && !sh.hidden) return;
     lastFocus = document.activeElement as HTMLElement;
     flow ??= initFlow(flowEl, { param: "concierge" });
-    if (!new URLSearchParams(location.search).has("concierge")) flow.go(flow.at());
+    if (!new URLSearchParams(location.search).has("concierge")) flow.show();
     sh.style.transform = ""; sh.hidden = false; back.hidden = false; document.documentElement.classList.add("sh-lock"); fit();
     // Two frames: the first lays the hidden-off sheet out, the second starts the slide (one frame is not enough in Safari).
     requestAnimationFrame(() => requestAnimationFrame(() => { sh.classList.add("is-open"); back.classList.add("is-open"); flow!.focus(); }));
@@ -81,7 +83,11 @@ export function initChrome() {
     // A place or budget carried by the link (the map card) becomes the flow's prefill.
     const u = new URL(href, location.href); const p = new URLSearchParams(location.search); let changed = false;
     for (const k of ["place", "budget"]) { const v = u.searchParams.get(k); if (v && p.get(k) !== v) { p.set(k, v); changed = true; } }
-    if (changed) history.replaceState(null, "", `${location.pathname}?${p}${location.hash}`);
+    // The partner link's topic (prompt 43 §3b) always matches the link: a link without one clears an earlier topic.
+    const t = u.searchParams.get("topic") || "";
+    t ? p.set("topic", t) : p.delete("topic");
+    if (t !== flowTopic) { flowTopic = t; changed = true; }
+    if (changed || p.toString() !== new URLSearchParams(location.search).toString()) history.replaceState(null, "", `${location.pathname}${p.size ? `?${p}` : ""}${location.hash}`);
     if (changed && flow) { flowEl.querySelector("[data-flow-stage]")!.innerHTML = ""; (flowEl as any).__flow = null; flow = null; }
     open(e);
   };
@@ -89,7 +95,7 @@ export function initChrome() {
   // already answered (scripts/flow.ts reads cg=home, ed, door and budget, skips those steps and drops ed, door, cg).
   w.__ipCgStart = (o) => {
     const p = new URLSearchParams(location.search);
-    p.set("cg", "home"); p.set("ed", o.ed); p.set("door", o.door); o.budget ? p.set("budget", String(o.budget)) : p.delete("budget"); p.delete("concierge");
+    p.set("cg", "home"); p.set("ed", o.ed); p.set("door", o.door); o.budget ? p.set("budget", String(o.budget)) : p.delete("budget"); p.delete("concierge"); p.delete("topic"); flowTopic = "";
     history.replaceState(null, "", `${location.pathname}?${p}${location.hash}`);
     if (flow) { flowEl.querySelector("[data-flow-stage]")!.innerHTML = ""; (flowEl as any).__flow = null; flow = null; }
     sh.classList.remove("is-open"); open(); return true;
