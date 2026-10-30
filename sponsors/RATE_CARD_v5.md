@@ -6,7 +6,8 @@ Benchmarks are market practice, not promises; the partner's own numbers decide.
 
 ## 1. Developers: per unit, not per building
 
-- A developer pays 3–5% commission on every sale (€10,000–17,000 on a €350,000 home) and spends 1–3% of the project's sales value on marketing. "€5,000 per building" is €100 per apartment: a rounding error, and it tells them we don't know our worth.
+- A developer pays 3–5% commission on every sale (10,000–17,000 € on a 350,000 € home), spends 1–3% of the project's sales value on marketing, 5,000–15,000 € on the brochure and renders, 20,000–50,000 € on a launch event, 1,000–3,000 € a month on portal placements. "5,000 € per building" is the price of the brochure for 55 apartments: 100 € a door.
+- What they buy from us is the brochure that reaches six countries, is never out of date, asks the buyer the qualifying questions and reports back. Priced against what they already spend, a 55-unit project at list is one launch event, or two and a half commissions, for twelve months.
 - **Price per unit listed**, flat, for 12 months or until the unit is sold, whichever comes first; the pin, the showcase, the Concierge, the weekly letters in six editions, the sales-team view and the assessment included.
 
 | Price band of the unit | Per unit | A 55-unit building |
@@ -30,11 +31,14 @@ Benchmarks are market practice, not promises; the partner's own numbers decide.
 - A purchase mandate is typically 1,500–3,000 € in fees, more with the NIF, the power of attorney and the deed. Fee-sharing is prohibited, so the price is a flat card per edition.
 - **Partner lawyer card:** 3,600 €/yr per edition, exclusive per edition and language (6 editions × 1 lawyer). One partner in two editions: 6,000 €.
 
-## 4. Mortgages: intermediaries first, banks later, nobody exclusive
+## 4. Banks: the client is worth more than anything else on this card
 
-- A 250,000 € non-resident mortgage earns the bank 15,000–30,000 € of margin over its life. But banks buy slowly (procurement, compliance, six to twelve months), and exclusivity is wrong for us: readers want to compare, a comparison is content, an exclusive is an advert. The mortgage pages compare the banks that actually lend to non-residents, from public price sheets, with sources.
-- **Credit intermediaries** registered with the Banco de Portugal, especially those specialised in non-residents, live on volume and decide in a week. **Finance partner card:** 4,800 €/yr per edition, up to two per edition, never exclusive: the "ask a partner for a simulation" action in Passo a passo and the simulators, the Concierge's finance card.
-- Banks: a feature or collection sponsorship (§7) once we have a year of numbers.
+- The reader is someone moving money and a life to Portugal. The first thing they need, before the NIF, is a Portuguese bank account; the richest of them move 1–5 M€ and finance a 1–3 M€ home. A 5 M€ private-banking client is worth about 50,000 €/yr to a bank; a 3 M€ mortgage, 30,000–45,000 €/yr in margin for twenty years. One client pays five years of any price below.
+- These banks already buy diaspora media: the "residentes no estrangeiro" units (CGD, Millennium bcp, Novobanco, BPI, Santander) advertise on RTP Internacional and in Contacto and Lusojornal. We are diaspora media with the buyer at the moment of decision. That is the pitch, not page views.
+- **Banco parceiro, per edition:** 12,000 €/yr, exclusive in the edition's finance slot: the sponsor slot on the finance pages, the Concierge's finance card, the mortgage step in Passo a passo, the simulators' "simulate with our partner bank" action, one feature a quarter. All six editions: 48,000 €/yr (the Private Partner of D40). The editorial comparison of banks lending to non-residents stays editorial, with sources; exclusivity buys the slot and the card, never the comparison.
+- **Private banking partner (US, Brazil, Israel editions):** 24,000 €/yr per edition, exclusive: the "Private" series (moving wealth, opening the account, residence, the 1 M€+ purchase), and the Concierge's Private card shown when the reader's budget passes 1 M€. For Luxembourg and Switzerland, the same product to banks with Portuguese or Brazilian desks.
+- **Credit intermediaries** (Banco de Portugal register, non-resident specialists): 4,800 €/yr per edition, up to two, non-exclusive, for the mid-market mortgage.
+- Founding Partner −40% applies. Sold now: these units decide on the segment, and they have the budget line already.
 
 ## 5. Insurance, tax advisers, movers of money
 
@@ -65,25 +69,26 @@ Benchmarks are market practice, not promises; the partner's own numbers decide.
 
 ## 9. How any of this gets sold with no audience yet
 
-1. **Sell the pilot, not the year.** 90 days, flat, for the build we actually deliver (showcase, pin, sales-team view, Concierge routing) and a monthly report of what happened (views, requests, qualified summaries). We promise reporting, never results. Renewal at list −40% unless cancelled, so the step-up is in the first signature.
-2. **Sell first to those who need international buyers now and decide fast:** developers with unsold stock in the North and the Algarve, golf-resort developers, credit intermediaries, lawyers. The partner agency's own network and phone calls do this, not email campaigns.
-3. **Not for sale until we have numbers:** banks, Golf Collection, collection sponsors, the Portugal 100 presenting sponsor, pro data, municipal partnerships. Listed on the card so the price exists; pitched in 2027.
+1. **Sell the segment and the moment, not the audience.** Every partner on this card sells to people moving money and a life to Portugal; we hold those people at the moment they decide where and with whom. That is true on day one with 300 subscribers, and the price is set on what one such client is worth to them.
+2. **The annual agreement is the default; the 90-day pilot is the fallback** for a hesitant developer: flat, for the build we deliver and a monthly report, renewing at list −40% unless cancelled. We promise reporting, never results.
+3. **Order of calls:** the "residentes no estrangeiro" and private-banking units of the Portuguese banks; developers with unsold stock in the North and the Algarve and the golf-resort developers; credit intermediaries; lawyers and tax advisers; insurers. Municipalities, collections and pro data follow the Portugal 100 in December.
 4. **Outreach to Portuguese companies does not wait for 8q** if the operator confirms the reading: marketing email to legal persons in Portugal is opt-out, not consent (Lei 41/2004, art. 13.º-A, n.º 3), on legitimate interest (GDPR art. 6(1)(f), recital 47). The stricter regimes (Switzerland, Israel) matter for later.
 
 ## 10. What this adds up to
 
 | Line | Year-1 target | ARR |
 | --- | --- | --- |
+| Banks: 2 editions at 12,000 € and 1 private-banking partner at 24,000 €, founding −40% | | 29,000 € |
 | Developers: 6 projects, founding prices, mixed bands | | 72,000 € |
 | Golf-resort developers: 2 projects | | 40,000 € |
-| Credit intermediaries: 4 cards | | 19,000 € |
-| Lawyers: 4 editions | | 14,000 € |
-| Insurance and tax: 2 | | 8,000 € |
+| Credit intermediaries: 3 cards | | 14,000 € |
+| Lawyers, tax, insurance: 6 cards | | 22,000 € |
+| Portugal 100 presenting sponsor (a bank) | | 15,000 € |
 | Municipalities: 2 pilots from Q1 2027 | | 10,000 € |
-| Portugal 100 sponsor, collections, pro data, banks | 2027, after numbers | 0–30,000 € |
-| **Realistic year 1** | | **≈ 160,000 € ARR** |
+| Collections and pro data | 2027 | 0–30,000 € |
+| **Realistic year 1** | | **≈ 200,000 € ARR** |
 
-Closing that needs about twelve signatures in six months, most of them in Portugal, most of them developers. Niche B2B media changes hands at 2–4× revenue, more with proprietary data; the index and the Portugal 100 are what make the multiple.
+Closing that needs about fifteen signatures in six months, most of them in Portugal: three banks, eight developers, the rest cards. Niche B2B media changes hands at 2–4× revenue, more with proprietary data; the index and the Portugal 100 are what make the multiple.
 
 ## 11. The step-up
 
