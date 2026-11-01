@@ -11,7 +11,7 @@ Build it exactly as `content/data/INDEX_METHOD.md` describes: pipeline, computat
 3. If a source turns out not to exist at municipality level, say so in one line and drop the indicator with the pillar reweighted; never substitute an unofficial source.
 4. The name is "Índice Imóveis Portugal" until the operator confirms it; keep it in one config value.
 
-## 2. The cover
+## 2. The cover (named "Destaque da semana" everywhere on the site and in the letters; see prompt 47 §2.5)
 
 1. Below the hero film on every edition home: one cover story a week. Full-bleed photograph, one headline (at most eight words), one line, one tap. Nothing else in that section.
 2. The newsletter of the week carries the same cover and headline: the site and the letter are the same issue.
