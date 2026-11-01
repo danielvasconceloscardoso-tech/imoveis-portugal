@@ -182,6 +182,11 @@ Status: To do · Doing · Blocked · Done
 | 45b | Approve rate card v5 (sponsors/RATE_CARD_v5.md): per-unit developer pricing (400/700/1,200 € per unit, min 10,000 €), 90-day founding pilots, golf resorts sold as developers, banks 12,000 €/edition exclusive slot (48,000 € all editions) and private banking 24,000 €/edition, credit intermediaries 4,800 €, lawyer card 3,600 €/edition, município pilot 4,900 € from Q1 2027, step-up at 10,000 subscribers; Marble Terrace keeps 5,000 € as the founding reference with the list price in the agreement | Operator | To do | 2026-11-03 |
 | 45c | Confirm the CEO's reading that B2B marketing email to legal persons in Portugal is opt-out (Lei 41/2004, art. 13.º-A, n.º 3; GDPR art. 6(1)(f)), so outreach to Portuguese developers, resorts and intermediaries can start before the full 8q matrix | Daniel | To do | 2026-11-03 |
 | 45a | Confirm the index name ("Índice Imóveis Portugal" is the working name) and review the top 20 / bottom 20 from the back-test before the index goes on the site | Operator | To do | after prompt 45 §1a |
+| 47a | Decide the jurisdiction and incorporate (CEO recommends a Portuguese Lda via Empresa na Hora, manager of record = the partner, so no founder name in any registry); this is D4 | Operator | To do | 2026-11-07 |
+| 47b | Decide the brand path after ops/BRAND_CHECK.pdf: keep "Imóveis Portugal" (figurative mark only) or adopt a distinctive master brand with "Imóveis Portugal" as the descriptor; then buy domains and handles and file INPI + EUIPO | Operator | To do | 2026-11-07 |
+| 47c | Send the three developers the founding booking form (prompt 47 §3) this week; invoices from the new company | Operator / Partner | To do | 2026-11-07 |
+| 47d | Lei de Imprensa / ERC: decide whether the site and letters are a periodical (named director, ficha técnica) from the CTO's memo | Daniel | To do | 2026-11-14 |
+| 47e | Credibility: join the two fastest bodies from ops/CREDIBILITY.md (business association in Porto, bilateral chamber in Luxembourg or France); apply for the IAPMEI SME certificate and Portugal Sou Eu once the Lda exists; prepare the Norte 2030 Vale application | Operator | To do | 2026-11-21 |
 
 ## Last session
 
