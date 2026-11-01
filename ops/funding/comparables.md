@@ -86,7 +86,7 @@ Prompt 50 §2. Research done 2026-11-01 (all sources checked that day). Only rec
 - **Startup Portugal** publishes no separate list of voucher beneficiaries. The PRR C16-i02 records above are the beneficiary data.
 - **Name matching.**
   - The negative result for the big incumbents rests on company names; their legal names could differ.
-  - "Zomeit" and "Hubzome" may belong to the Zome network. This is not verified.
+  - "Hubzome" is Zome: hubzome.pt redirects to zome.pt, whose privacy policy names HUBZome, Lda (Braga); zome.pt calls zomeit.com its consultants' portal (checked 2026-11-01, ops/learn/research_C.md). Shared shareholders not verified (paywalled).
 - **Inferred call names.** The PT2020 call typologies (SI-47 = I&DT, SI-52 = internationalisation, SI-53 = qualification) are inferred from the codes. The title of the 3rd voucher call comes from a web search snippet. We did not open the call PDF.
 - **Coverage.**
   - Kohesio's keyword search does not index beneficiary names, and its 2021–2027 data is partial.
