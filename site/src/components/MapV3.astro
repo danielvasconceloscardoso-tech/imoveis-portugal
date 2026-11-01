@@ -30,7 +30,8 @@ const k = (x: string, v: Record<string, string> = {}) => c(`map3.${x}`, lang, v)
 const labels = {
   sentence: k("sentence", { b: "{b}", a: "{a}", pa: "{pa}", c: "{c}", pc: "{pc}" }), sentenceOne: k("sentence.one", { b: "{b}", a: "{a}", pa: "{pa}" }),
   medians: k("medians", { q: qLabel }), reach: k("reach"), budgetTap: k("budget.tap"),
-  legend: { price: k("legend.price", { q: "{q}" }), g10: k("legend.g10"), rent: k("legend.rent", { q: "{q}" }), yield: k("legend.yield") },
+  legend: { price: k("legend.price", { q: "{q}" }), g10: k("legend.g10"), rent: k("legend.rent", { q: "{q}" }), yield: k("legend.yield"), vac: k("legend.vac") },
+  vacLine: k("card.vacline", { v: "{v}", s: "{s}" }),
   g: { munis: k("g.munis"), pars: k("g.pars"), golf: k("g.golf"), beach: k("g.beach"), devs: k("g.devs") },
   card: { price: k("card.price"), g10: k("card.g10"), rent: k("card.rent"), homes: k("card.homes"), concierge: k("card.concierge"), compare: k("card.compare"),
     details: k("card.details"), m2b: k("card.m2b"), yield: k("chip.yield"), pickb: k("card.pickb", { a: "{a}" }), buys: k("card.buys", { v: "{v}" }) },
@@ -52,7 +53,7 @@ const cfg = { labels, links, photos, briefs: BRIEFS[lang] ?? {}, mortgage: { rat
     summary: p.summary?.[lang], feats: (p.features ?? []).filter((f) => f.card).map((f) => f[lang]),
     now: p.blocks ? p.blocks.reduce((a, b) => a + b.units.reduce((x, u) => x + u.forSale, 0), 0) : null })),
   pl: { view: c("showb.view", lang), visit: c("showb.visit", lang), price: c("showb.price", lang), now: c("showb.now", lang, { n: "{n}" }), tour: c("showb.tour", lang) } };
-const chips = [["price", "chip.price"], ["g10", "chip.g10"], ["rent", "chip.rent"], ["yield", "chip.yield"]] as const;
+const chips = [["price", "chip.price"], ["g10", "chip.g10"], ["rent", "chip.rent"], ["yield", "chip.yield"], ["vac", "chip.vac"]] as const;
 const overlays = [["golf", "chip.golf"], ["beach", "chip.beach"], ["devs", "chip.devs"]] as const;
 const amount = Math.round(300000 * (fx ? fx.rate : 1));
 ---

@@ -5869,6 +5869,21 @@ Prompt 36 (D62): map v3. Budget gesture, layer chips, Day/Night, search, time, c
 - EN: Yield
 - FR: Rendement
 
+### chip.vac
+- PT: Casas vagas
+- EN: Empty homes
+- FR: Logements vacants
+
+### legend.vac
+- PT: Casas vagas, em % do parque habitacional (INE, Censos 2021)
+- EN: Empty homes, as a share of all dwellings (INE, 2021 Census)
+- FR: Logements vacants, en % du parc (INE, recensement 2021)
+
+### card.vacline
+- PT: Nos Censos 2021 (INE), {v} das casas estavam vagas e {s} eram de uso sazonal (segunda habitação): casas por recuperar, e uma ideia de como é a vida fora do verão.
+- EN: In the 2021 Census (INE), {v} of homes stood empty and {s} were seasonal (second homes): homes to restore, and a sense of life outside summer.
+- FR: Au recensement 2021 (INE), {v} des logements étaient vacants et {s} à usage saisonnier (résidences secondaires) : des maisons à rénover, et une idée de la vie hors saison.
+
 ### chip.golf
 - PT: Golfe
 - EN: Golf

@@ -9,7 +9,7 @@ import { track, edOf } from "../lib/track";
 type Series = { n: string; m2: (number | null)[]; rq: (number | null)[]; yield: number | null; g10?: number | null; cagrP?: number | null;
   mo: { c4: number; c8: number | null; w: "up" | "steady" | "down" } | null };
 type Props = { id: number; n: string; s: string; r: string; x: number; y: number; a: number };
-type Layer = "price" | "g10" | "rent" | "yield";
+type Layer = "price" | "g10" | "rent" | "yield" | "vac";
 type Proj = { id: string; name: string; developer: string; muni: string; lon: number; lat: number; render?: string; from: number | null; showcase: string; summary?: string; feats?: string[]; now?: number | null };
 
 const reduce = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -49,7 +49,7 @@ export function initMapV3(root: HTMLElement) {
   // ------------------------------------------------------------ state (every state is a link)
   const stored = (() => { try { return Number(localStorage.getItem("ip.budget")) || 0; } catch { return 0; } })();
   let budget = Math.min(Math.max(Number(q.get("budget")) || stored || 300000, 100000), 20e6);
-  let layer: Layer = (["price", "g10", "rent", "yield"].includes(q.get("layer") || "") ? q.get("layer") : "price") as Layer;
+  let layer: Layer = (["price", "g10", "rent", "yield", "vac"].includes(q.get("layer") || "") ? q.get("layer") : "price") as Layer;
   // 2D or 3D (prompt 37 §3): the link, else the reader's last choice, else 2D on phones and weak devices and 3D on desktop.
   // Reduced motion always gets the flat map.
   const dimSaved = (() => { try { return localStorage.getItem("ip.map.dim"); } catch { return null; } })();
@@ -64,6 +64,7 @@ export function initMapV3(root: HTMLElement) {
   let parishes: { feats: any[]; data: Record<string, Series> } | null = null;
   let golf: any = null, beaches: [number, number, string][] | null = null;
   let breaks: Record<Layer, number[]> = {} as any;
+  let VAC: Record<string, number> | null = null;  // vacant dwellings, loaded with the "vac" layer
   let tourAbort: (() => void) | null = null;
   const projects: Proj[] = cfg.projects || [];
   const projMunis = new Set(projects.map((p) => p.muni));
@@ -87,12 +88,13 @@ export function initMapV3(root: HTMLElement) {
     if (l === "price") return s.m2[i] ?? null;
     if (l === "rent") return s.rq[i] ?? null;
     if (l === "g10") return s.g10 ?? null;
+    if (l === "vac") return (s as Series & { vac?: number }).vac ?? null;
     return s.yield ?? null;
   }
   function quant(list: number[]) { const a = [...list].sort((x, y) => x - y); return [0.03, 0.18, 0.35, 0.5, 0.65, 0.82, 0.97].map((p) => a[Math.floor(p * (a.length - 1))]); }
   function computeBreaks() {
     const all = (l: Layer, everyQ: boolean) => { const v: number[] = []; for (const s of Object.values(P!.munis)) { if (everyQ) for (let i = 0; i <= last(); i++) { const x = value(s, l, i); if (x != null) v.push(x); } else { const x = value(s, l); if (x != null) v.push(x); } } return v; };
-    breaks = { price: quant(all("price", true)), rent: quant(all("rent", true)), g10: quant(all("g10", false)), yield: quant(all("yield", false)) };
+    breaks = { price: quant(all("price", true)), rent: quant(all("rent", true)), g10: quant(all("g10", false)), yield: quant(all("yield", false)), vac: VAC ? quant(all("vac", false)) : [] };
   }
   function colorExpr(): any {
     const b = breaks[layer] || []; const stops: any[] = [];
@@ -163,9 +165,15 @@ export function initMapV3(root: HTMLElement) {
 
   // ------------------------------------------------------------ chips, 2D and 3D, overlays
   root.querySelectorAll<HTMLButtonElement>("[data-layer]").forEach((b) => b.addEventListener("click", () => setLayer(b.dataset.layer as Layer)));
-  function setLayer(l: Layer) {
+  // Prompt 51 §3.3: vacant dwellings, share of the stock (INE, Census 2021, indicator 0012517), loaded only when chosen.
+  async function loadVac() {
+    if (VAC || !P) return;
+    try { const d = await fetch("/data/map/layers.json").then((r) => r.json()); VAC = {}; for (const [k, v] of Object.entries(d.munis as Record<string, { vac?: number; sea?: number }>)) if (typeof v.vac === "number") { VAC[k] = v.vac; const s = P.munis[k] as Series & { vac?: number; sea?: number }; if (s) { s.vac = v.vac; s.sea = (v as { sea?: number }).sea; } } computeBreaks(); } catch { VAC = {}; }
+  }
+  async function setLayer(l: Layer) {
+    if (l === "vac") await loadVac();
     layer = l; root.querySelectorAll("[data-layer]").forEach((b) => b.setAttribute("aria-pressed", String((b as HTMLElement).dataset.layer === l)));
-    const tm = root.querySelector<HTMLElement>("[data-time]"); if (tm) tm.classList.toggle("is-off", l === "g10" || l === "yield");
+    const tm = root.querySelector<HTMLElement>("[data-time]"); if (tm) tm.classList.toggle("is-off", l === "g10" || l === "yield" || l === "vac");
     repaint(); if (selected && !sheet.hidden) showPlace(selected, false); syncUrl(); load();
   }
   root.querySelectorAll<HTMLButtonElement>("[data-dim]").forEach((b) => b.addEventListener("click", () => setDim(b.dataset.dim === "2d")));
@@ -215,7 +223,7 @@ export function initMapV3(root: HTMLElement) {
       const coastPt = (c: number[]) => c[0] < -10 || (c[0] < -8.65 && c[1] < 41.87) || (c[1] < 37.25 && c[0] < -7.41);
       const coast = { type: "MultiLineString", coordinates: [] as number[][][] };
       for (const ln of outer.coordinates) { let seg: number[][] = []; for (const c of ln) { if (coastPt(c)) seg.push(c); else { if (seg.length > 1) coast.coordinates.push(seg); seg = []; } } if (seg.length > 1) coast.coordinates.push(seg); }
-      computeBreaks();
+      computeBreaks(); if (layer === "vac") await loadVac();
       const narrow = root.clientWidth < 700;
       map = new ml.Map({
         container: canvas, attributionControl: false, pixelRatio: Math.min(devicePixelRatio || 1, 2), maxTileCacheSize: narrow ? 48 : 96, dragRotate: !flat, pitchWithRotate: !flat, maxPitch: 72, minZoom: 4.6, maxZoom: 12.5, fadeDuration: 150,
@@ -394,6 +402,8 @@ export function initMapV3(root: HTMLElement) {
     const photo = cfg.photos[slug] ? `<img class="m3-photo" src="/img/v2/${cfg.photos[slug]}-640.webp" srcset="/img/v2/${cfg.photos[slug]}-640.webp 640w, /img/v2/${cfg.photos[slug]}-1024.webp 1024w" sizes="420px" alt="" width="640" height="400">` : `<div class="m3-photo m3-photo-none" style="--c:${colorOf(value(s, layer))}"></div>`;
     let h = `${photo}<div class="m3-sb"><p class="m3-kick">${esc(L.regions[p.r] || "")}</p><h3 tabindex="-1">${esc(p.n)}</h3>${stats(s)}`;
     if (v) h += `<p class="m3-buys">${L.card.buys.replace("{v}", `<b>${nf.format(Math.round(budget / v))}</b>`)}</p>`;
+    const vs = s as (Series & { vac?: number; sea?: number }) | undefined;
+    if (layer === "vac" && vs?.vac != null) h += `<p class="m3-buys">${L.vacLine.replace("{v}", `<b>${nf1.format(vs.vac)}%</b>`).replace("{s}", vs.sea != null ? `<b>${nf1.format(vs.sea)}%</b>` : "—")}</p>`;
     if (s) h += spark(s);
     h += `<div class="m3-acts"><a class="m3-btn m3-btn-p" href="${esc(homes)}">${L.card.homes}</a><a class="m3-btn" href="${cfg.links.consult}?place=${encodeURIComponent(p.n)}&budget=${Math.round(budget)}">${L.card.concierge}</a></div>`;
     h += `<div class="m3-more"><button type="button" class="m3-link" data-compare>${L.card.compare}</button><button type="button" class="m3-link" data-details aria-expanded="false">${L.card.details}</button><button type="button" class="m3-link" data-share>${L.share}</button></div>`;
