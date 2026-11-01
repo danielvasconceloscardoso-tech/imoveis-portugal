@@ -29,6 +29,12 @@
     "by_edition": {
       "lu": 200,
       "fr": 140
+    },
+    "by_country": {
+      "LU": 190,
+      "FR": 120,
+      "CH": 22,
+      "BE": 8
     }
   },
   "requests": {
@@ -58,7 +64,11 @@
         "visit": "in person",
         "status": "visit booked"
       }
-    ]
+    ],
+    "by_country": {
+      "LU": 1,
+      "FR": 1
+    }
   },
   "notes": [
     "Illustrative sample, not real figures."
@@ -69,5 +79,12 @@
     "available": 48,
     "reserved": 4,
     "sold": 3
-  }
+  },
+  "advisor": {
+    "source": "Illustrative sample, not real figures",
+    "response_hours_median": 3.5,
+    "within_24h_pct": 100,
+    "answered": 2
+  },
+  "visits": 1
 }

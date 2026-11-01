@@ -1,0 +1,7 @@
+---
+// Cloudflare Web Analytics (cookie-free, CLAUDE.md stack §5). The token is public by design (it sits in every page),
+// set as the build variable PUBLIC_CF_BEACON_TOKEN (ops/METRICS_SETUP.md). If Cloudflare injects the beacon itself
+// (automatic setup on the domain), leave the variable empty so pages are not counted twice.
+const token = import.meta.env.PUBLIC_CF_BEACON_TOKEN as string | undefined;
+---
+{token && <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={JSON.stringify({ token })}></script>}

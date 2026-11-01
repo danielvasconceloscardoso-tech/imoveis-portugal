@@ -1,0 +1,83 @@
+---
+// The private partner dashboard (prompt 51 §3.1): one unlisted page per developer or partner, opened by its token link,
+// no login. It shows that partner's numbers only, from the same monthly files as the PDF report (lib/dash.ts): the
+// funnel from reach to visit, where readers come from, the requests with their qualified summary (never a name or a
+// contact), the advisor's response time, and month by month. Nothing is estimated: an empty figure says so.
+import Dash from "../../../layouts/Dash.astro";
+import { PARTNERS, partnerMonths, funnel } from "../../../lib/dash";
+
+export function getStaticPaths() { return PARTNERS.map((p) => ({ params: { token: p.token } })); }
+const P = PARTNERS.find((x) => x.token === Astro.params.token)!;
+const L = P.lang;
+const T = {
+  pt: { flag: "Painel privado", none: "Sem dados ainda.", first: "Os primeiros números chegam no fim do primeiro mês com a página publicada. Até lá, cada secção diz \"sem dados ainda\": nada é estimado.",
+    sample: "Exemplo ilustrativo: números fictícios", month: "Mês", lede: "Números agregados, sem dados pessoais. Os mesmos do relatório mensal em PDF.",
+    fun: { h: "O mês num funil", reach: "Leitores alcançados", views: "Viram o empreendimento", clicks: "Clicaram no cartão", requests: "Pediram informação ou visita", visits: "Visitas marcadas" }, ofPrev: "da etapa anterior",
+    reach: "Alcance por edição", reachCols: ["Edição", "Subscritores", "Aberturas", "Visitas ao site"], cty: "De onde vêm os leitores", ctyCols: ["País", "Visualizações", "Parte", "Pedidos"],
+    req: "Pedidos e resumos qualificados", reqCols: ["Data", "Edição", "Tipologia", "Orçamento", "Pagamento", "Prazo", "Visita", "Estado"], reqNote: "Cada pedido segue para o consultor da agência parceira, com o consentimento do leitor que o nomeia. Nunca mostramos nomes ou contactos.",
+    adv: { h: "Resposta do consultor", median: "Tempo mediano até à primeira resposta", within: "Respondidos em 24 horas", answered: "Pedidos respondidos" },
+    hist: "Mês a mês", histCols: ["Mês", "Visualizações", "Cliques", "Pedidos", "Visitas"], avail: "Disponibilidade", availK: { listed: "Listadas", available: "Disponíveis", reserved: "Reservadas", sold: "Vendidas" },
+    src: "Fontes", foot: "Painel privado de {c} · não publicado, fora dos motores de busca. Os números vêm do Cloudflare Web Analytics (sem cookies), da plataforma da carta e do consultor. Imóveis Portugal.",
+    eds: { lu: "Luxemburgo", fr: "França", ch: "Suíça", br: "Brasil", us: "Estados Unidos", il: "Israel" } },
+  en: { flag: "Private dashboard", none: "No data yet.", first: "The first figures arrive at the end of the first month with the page live. Until then each section says \"no data yet\": nothing is estimated.",
+    sample: "Illustrative example: made-up figures", month: "Month", lede: "Aggregate figures, no personal data. The same as the monthly PDF report.",
+    fun: { h: "The month as a funnel", reach: "Readers reached", views: "Saw the project", clicks: "Clicked the card", requests: "Asked for information or a visit", visits: "Visits booked" }, ofPrev: "of the step before",
+    reach: "Reach per edition", reachCols: ["Edition", "Subscribers", "Opens", "Site visits"], cty: "Where readers come from", ctyCols: ["Country", "Views", "Share", "Requests"],
+    req: "Requests and qualified summaries", reqCols: ["Date", "Edition", "Typology", "Budget", "Payment", "Timeline", "Visit", "Status"], reqNote: "Every request goes to the partner agency's advisor, with the reader's consent naming them. We never show names or contacts.",
+    adv: { h: "The advisor's response", median: "Median time to first reply", within: "Answered within 24 hours", answered: "Requests answered" },
+    hist: "Month by month", histCols: ["Month", "Views", "Clicks", "Requests", "Visits"], avail: "Availability", availK: { listed: "Listed", available: "Available", reserved: "Reserved", sold: "Sold" },
+    src: "Sources", foot: "Private dashboard for {c} · not published, kept out of search engines. Figures from Cloudflare Web Analytics (no cookies), the letter platform and the advisor. Imóveis Portugal.",
+    eds: { lu: "Luxembourg", fr: "France", ch: "Switzerland", br: "Brazil", us: "United States", il: "Israel" } },
+}[L];
+const months = partnerMonths(P);
+const d = months[0];
+const nf = new Intl.NumberFormat(L === "pt" ? "pt-PT" : "en-GB", { maximumFractionDigits: 1 });
+const f = (v: unknown) => (typeof v === "number" ? nf.format(v) : "–");
+const monthName = (m: string) => new Date(`${m}-01T12:00:00Z`).toLocaleDateString(L === "pt" ? "pt-PT" : "en-GB", { month: "long", year: "numeric", timeZone: "UTC" });
+const fun = d ? funnel(d) : [];
+const max = Math.max(1, ...fun.map((s) => s.v));
+const eds = Object.entries((d?.reach?.editions || {}) as Record<string, any>);
+const dn = new Intl.DisplayNames([L === "pt" ? "pt-PT" : "en-GB"], { type: "region" });
+const cname = (k: string) => { try { return /^[A-Z]{2}$/.test(k) ? dn.of(k) : k; } catch { return k; } };
+const vc = (d?.showcase?.by_country || {}) as Record<string, number>, rc = (d?.requests?.by_country || {}) as Record<string, number>;
+const ckeys = [...new Set([...Object.keys(vc), ...Object.keys(rc)])].sort((a, b) => (vc[b] || 0) - (vc[a] || 0));
+const tv = Object.values(vc).reduce((a, b) => a + b, 0);
+const a = d?.advisor || {};
+const advRows = ([["median", a.response_hours_median !== undefined ? `${f(a.response_hours_median)} h` : undefined], ["within", a.within_24h_pct !== undefined ? `${f(a.within_24h_pct)} %` : undefined], ["answered", a.answered !== undefined ? f(a.answered) : undefined]] as [keyof typeof T.adv, string | undefined][]).filter(([, v]) => v !== undefined);
+const av = (d?.availability || {}) as Record<string, number>;
+const avK = (Object.keys(T.availK) as (keyof typeof T.availK)[]).filter((k) => av[k] !== undefined);
+const sources = [...new Set([d?.reach?.source, d?.showcase?.source, d?.requests?.source, a.source].filter(Boolean))];
+---
+<Dash title={`${P.company} · ${T.flag}`} lang={L} flag={`${T.flag} · ${P.company}`}>
+  {P.sample && <p class="db-sample">{T.sample}</p>}
+  <h1>{d?.project || P.company}</h1>
+  <p class="db-lede">{d ? `${T.month}: ${monthName(d.month)}. ` : ""}{T.lede}</p>
+  {!d && <div class="db-card"><p class="db-none">{T.first}</p></div>}
+  {d && <>
+    <h2>{T.fun.h}</h2>
+    <div class="db-card">
+      {fun.length ? <ol class="db-fun">{fun.map((s) => <li><span>{T.fun[s.k as keyof typeof T.fun]}</span><span><b>{f(s.v)}</b>{s.pct !== null && <small> · {f(s.pct)} % {T.ofPrev}</small>}</span><span class="bar"><i style={`width:${Math.max(0.5, (100 * s.v) / max)}%`}></i></span></li>)}</ol> : <p class="db-none">{T.none}</p>}
+    </div>
+    <div class="db-two">
+      <div>
+        <h2>{T.reach}</h2>
+        <div class="db-card">{eds.length ? <table><thead><tr>{T.reachCols.map((c, i) => <th class={i ? "n" : undefined}>{c}</th>)}</tr></thead><tbody>{eds.map(([k, e]) => <tr><td>{T.eds[k as keyof typeof T.eds] ?? k}</td><td class="n">{f(e?.subscribers)}</td><td class="n">{f(e?.opens)}</td><td class="n">{f(e?.site_visits)}</td></tr>)}</tbody></table> : <p class="db-none">{T.none}</p>}</div>
+      </div>
+      <div>
+        <h2>{T.cty}</h2>
+        <div class="db-card">{ckeys.length ? <table><thead><tr>{T.ctyCols.map((c, i) => <th class={i ? "n" : undefined}>{c}</th>)}</tr></thead><tbody>{ckeys.map((k) => <tr><td>{cname(k)}</td><td class="n">{f(vc[k] || 0)}</td><td class="n">{tv ? `${Math.round((100 * (vc[k] || 0)) / tv)} %` : "–"}</td><td class="n">{f(rc[k] || 0)}</td></tr>)}</tbody></table> : <p class="db-none">{T.none}</p>}</div>
+      </div>
+    </div>
+    <h2>{T.req}</h2>
+    <div class="db-card">
+      {(d.requests?.summaries?.length) ? <table><thead><tr>{T.reqCols.map((c) => <th>{c}</th>)}</tr></thead><tbody>{d.requests.summaries.map((s: any) => <tr><td>{s.date}</td><td>{T.eds[s.edition as keyof typeof T.eds] ?? s.edition}</td><td>{s.typology ?? "–"}</td><td>{s.budget_band ?? "–"}</td><td>{s.payment ?? "–"}</td><td>{s.timeline ?? "–"}</td><td>{s.visit ?? "–"}</td><td>{s.status ?? "–"}</td></tr>)}</tbody></table>
+        : <p class="db-none">{typeof d.requests?.total === "number" ? `${f(d.requests.total)}` : T.none}</p>}
+      <p class="db-src">{T.reqNote}</p>
+    </div>
+    {advRows.length > 0 && <><h2>{T.adv.h}</h2><div class="db-grid">{advRows.map(([k, v]) => <div class="db-tile"><b>{v}</b><span>{T.adv[k]}</span></div>)}</div></>}
+    {avK.length > 0 && <><h2>{T.avail}</h2><div class="db-grid">{avK.map((k) => <div class="db-tile"><b>{f(av[k])}</b><span>{T.availK[k]}</span></div>)}</div></>}
+    {months.length > 1 && <><h2>{T.hist}</h2><div class="db-card"><table><thead><tr>{T.histCols.map((c, i) => <th class={i ? "n" : undefined}>{c}</th>)}</tr></thead><tbody>{months.map((m) => { const x = Object.fromEntries(funnel(m).map((s) => [s.k, s.v])); return <tr><td>{monthName(m.month)}</td><td class="n">{f(x.views)}</td><td class="n">{f(x.clicks)}</td><td class="n">{f(x.requests)}</td><td class="n">{f(x.visits)}</td></tr>; })}</tbody></table></div></>}
+    {sources.length > 0 && <p class="db-src">{T.src}: {sources.join(" · ")}</p>}
+  </>}
+  <Fragment slot="foot">{T.foot.replace("{c}", P.company)}</Fragment>
+</Dash>

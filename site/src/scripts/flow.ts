@@ -5,6 +5,7 @@
 import type { FlowConfig, Step } from "../lib/flows";
 import type { LawyerCard } from "../lib/lawyers";
 import { slotPicker, slotLabel, type Slot } from "./slots";
+import { track, edOf } from "../lib/track";
 
 const reduce = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 const esc = (t: string) => t.replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[ch]!);
@@ -25,6 +26,8 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
   try { A = JSON.parse(sessionStorage.getItem(key) || "{}"); } catch { /* private mode */ }
   const save = () => { try { sessionStorage.setItem(key, JSON.stringify(A)); } catch { /* private mode */ } };
   let i = 0, dir = 1;
+  // A click on a listed building's card (prompt 51 §3): counted for that developer's report, nothing else is kept.
+  stage.addEventListener("click", (e) => { const b = (e.target as HTMLElement).closest?.("a")?.closest<HTMLElement>("[data-bld]")?.dataset.bld; if (b) track(`${edOf()}/p/${b}/card`); });
 
   // The reader's edition (prompt 37 §1.1): the one in the URL (/{lang}/{ed}/...), else the page's own, else the saved one.
   // sessionStorage is shared by every edition on one domain, so answers kept from another edition (or language) in this
@@ -129,7 +132,7 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
   }
   function cards(list: Bld[]) {
     const T = BL!.labels;
-    return `<ul class="fl-blds">${list.map((b) => `<li class="fl-bld">
+    return `<ul class="fl-blds">${list.map((b) => `<li class="fl-bld" data-bld="${esc(b.id)}">
       ${b.photo ? `<img src="${esc(b.photo)}" alt="" width="800" height="533" loading="lazy" />` : ""}
       <div class="fl-bld-b"><p class="fl-bld-tag">${esc(T.sponsored)}</p><p class="fl-bld-n">${esc(b.name)}</p>
         <p class="fl-bld-m">${esc(b.place)}${b.typologies.length ? ` · ${esc(b.typologies.join(" · "))}` : ""}</p>
@@ -172,7 +175,7 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
   }
   // Each new screen starts at its top (the sheet keeps its scroll otherwise, and the back arrow and question were above the fold).
   const top = () => { const sc = root.closest<HTMLElement>(".sh-in"); if (sc) sc.scrollTop = 0; };
-  const go = (n: number) => { dir = n >= i ? 1 : -1; i = Math.max(0, Math.min(n, N - 1)); render(); top(); };
+  const go = (n: number) => { dir = n >= i ? 1 : -1; i = Math.max(0, Math.min(n, N - 1)); if (i > 0) track(`${edOf()}/flow/${F.id}/start`); render(); top(); };
 
   function wire(el: HTMLElement) {
     const s = steps[i];
@@ -279,7 +282,7 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
       const payload = { flow: "lawyer", lawyer: x.id, lawyerName: `${x.name} (${x.firm})`, ...F.hidden, name: val("name"), email: val("email"), question: val("question"), consent: true, consentText: fill(T.consent), page: location.pathname, hp: "" };
       send.disabled = true; send.textContent = L.sending; let sent = false;
       try { sent = (await fetch("/api/request", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(payload) })).ok; } catch { sent = false; }
-      if (sent) { side(`<div class="fl-done"><span class="fl-tick">${CHECK}</span><h2 class="fl-q" tabindex="-1">${esc(T.doneH)}</h2><p class="fl-lede">${esc(fill(T.doneP))}</p></div>`, () => go(i)); return; }
+      if (sent) { track(`${edOf()}/flow/lawyer/sent`); side(`<div class="fl-done"><span class="fl-tick">${CHECK}</span><h2 class="fl-q" tabindex="-1">${esc(T.doneH)}</h2><p class="fl-lede">${esc(fill(T.doneP))}</p></div>`, () => go(i)); return; }
       send.disabled = false; send.textContent = T.book;
       const body = [`${x.name} (${x.firm})`, `${L.name}: ${payload.name}`, `${L.email}: ${payload.email}`, payload.question, "", `✓ ${payload.consentText}`].filter((v) => v !== undefined).join("\n");
       note(`${esc(L.fallback)} <a class="fl-btn" href="mailto:${F.mailto}?subject=${encodeURIComponent(`${T.book}: ${x.name} (${F.hidden.edition} · ${F.hidden.language})`)}&body=${encodeURIComponent(body)}">${esc(L["fallback.btn"])}</a>`);
@@ -300,7 +303,7 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
       labels: [...(topic ? [`${X.topic}: ${topicLabel}`] : []), ...answerText()], topic, door: A.door || "", name: A.name || "", email: A.email || "", phone: A.phone || "", consent: A.consent === "1", budget: budgetEur || "", brief, page: location.pathname, hp };
     let ok = false;
     try { const r = await fetch("/api/request", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(payload) }); ok = r.ok; } catch { ok = false; }
-    if (ok) { const r = route(); try { sessionStorage.removeItem(key); sessionStorage.setItem(`${key}.done`, r); } catch { /* none */ } done(r); }
+    if (ok) { track(`${edOf()}/flow/${F.id}/sent`); const pj = q.get("project"); if (pj && /^[a-z0-9-]+$/.test(pj)) track(`${edOf()}/p/${pj}/req`); const r = route(); try { sessionStorage.removeItem(key); sessionStorage.setItem(`${key}.done`, r); } catch { /* none */ } done(r); }
     else fallback(payload);
   }
   // The confirmation, then one quiet closing line with two text links (prompt 42). The confirmation stays in the URL

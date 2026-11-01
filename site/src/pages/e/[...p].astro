@@ -1,0 +1,31 @@
+---
+// Event pages for cookie-free counts (prompt 51 §3, lib/track.ts): each one is a load counted by Cloudflare Web
+// Analytics, never shown to a reader, never indexed, absent from the sitemap. The path is the whole message:
+//   /e/{ed}/flow/{flow}/start/   a reader answered the first question of a flow (concierge, partner, viewing, lawyer)
+//   /e/{ed}/flow/{flow}/sent/    the request left with the reader's consent
+//   /e/{ed}/p/{project}/{pin|card|req}/   a partner project's map pin opened, its Concierge card clicked, a request
+//   /e/s/{municipality}/         a place opened on the map (search or tap)
+//   /e/q/{question}/             a question opened on Perguntas
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
+import Beacon from "../../components/Beacon.astro";
+import { ED_ORDER, LANGS } from "../../i18n";
+import { PROJECTS } from "../../lib/projects";
+import { faqFor } from "../../lib/content";
+
+export function getStaticPaths() {
+  const munis = Object.keys(JSON.parse(readFileSync(join(process.cwd(), "public", "data", "map", "layers.json"), "utf8")).munis);
+  const qs = new Set<string>();
+  for (const e of ED_ORDER) for (const l of LANGS) for (const it of faqFor(e, l)) qs.add(it.id);
+  for (const l of LANGS) for (const x of ["sell-filing", "sell-heirs", "sell-cert"]) qs.add(`${l}-${x}`);
+  const out: string[] = [];
+  for (const e of [...ED_ORDER, "xx"]) {
+    for (const f of ["concierge", "partner", "viewing", "lawyer"]) for (const s of ["start", "sent"]) out.push(`${e}/flow/${f}/${s}`);
+    for (const p of PROJECTS) for (const k of ["pin", "card", "req"]) out.push(`${e}/p/${p.id}/${k}`);
+  }
+  for (const m of munis) out.push(`s/${m}`);
+  for (const q of qs) if (/^[a-z0-9-]+$/.test(q)) out.push(`q/${q}`);
+  return out.map((p) => ({ params: { p } }));
+}
+---
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex, nofollow, noarchive"><title>·</title><Beacon /></head><body></body></html>

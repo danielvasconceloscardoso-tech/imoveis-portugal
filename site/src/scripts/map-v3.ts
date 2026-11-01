@@ -4,6 +4,7 @@
 import mapCss from "maplibre-gl/dist/maplibre-gl.css?url";
 import { feature, mesh } from "topojson-client";
 import { savePlace } from "../lib/brief";
+import { track, edOf } from "../lib/track";
 
 type Series = { n: string; m2: (number | null)[]; rq: (number | null)[]; yield: number | null; g10?: number | null; cagrP?: number | null;
   mo: { c4: number; c8: number | null; w: "up" | "steady" | "down" } | null };
@@ -364,6 +365,7 @@ export function initMapV3(root: HTMLElement) {
       padding: isWide() ? { right: 440, left: 0, top: 60, bottom: 120 } : { bottom: canvas.clientHeight * 0.42, top: 60, left: 0, right: 0 } });
   }
   function select(slug: string | null, fly = true) {
+    if (slug) track(`s/${slug}`);
     if (pinA && slug && slug !== pinA) { compare(pinA, slug); return; }
     selected = slug; selPar = null;
     if (map) map.setFilter("sel", ["==", ["get", "s"], slug ?? ""]);
@@ -552,6 +554,7 @@ export function initMapV3(root: HTMLElement) {
 
   // Prompt 38: a partner project's card (photo, name, summary, three features, homes for sale now, price on request).
   function showProject(p: Proj, open = true) {
+    track(`${edOf()}/p/${p.id}/pin`);
     const pl = cfg.pl ?? {};
     const photo = p.render ? `<img class="m3-photo" src="${esc(p.render)}-800.webp" alt="" width="800" height="450">` : "";
     let h = `${photo}<div class="m3-sb"><p class="m3-kick">${esc(byS.get(p.muni)?.n ?? "")} · <span class="m3-tag">${L.sponsored}</span></p><h3 tabindex="-1">${esc(p.name)}</h3>`;

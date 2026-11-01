@@ -20,6 +20,7 @@ const LEGAL: Record<Lang, [string, string]> = { pt: ["Privacidade", "Aviso legal
 const LEGAL_ED: Record<Lang, EdCode> = { pt: "lu", en: "us", fr: "fr" };
 const names = Object.fromEntries(LANGS.map((l) => [l, Object.fromEntries(ED_ORDER.map((e) => [e, edName(e, l)]))]));
 const paths = Object.fromEntries(LANGS.map((l) => [l, Object.fromEntries(ED_ORDER.map((e) => [e, pathFor(l, e, "home")]))]));
+import Beacon from "../components/Beacon.astro";
 ---
 <!doctype html>
 <html lang="en">
@@ -49,6 +50,7 @@ const paths = Object.fromEntries(LANGS.map((l) => [l, Object.fromEntries(ED_ORDE
         document.documentElement.dataset.l = l; document.documentElement.classList.add("js");
       })();
     </script>
+    <Beacon />
   </head>
   <body>
     <div class="op-media" aria-hidden="true">
