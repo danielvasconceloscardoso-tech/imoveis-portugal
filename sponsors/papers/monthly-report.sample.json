@@ -1,0 +1,73 @@
+{
+  "company": "Example Developer, S.A.",
+  "project": "Example Residences",
+  "municipality": "Gondomar",
+  "month": "2026-12",
+  "lang": "en",
+  "reach": {
+    "source": "Illustrative sample, not real figures",
+    "editions": {
+      "lu": {
+        "subscribers": 120,
+        "letters_sent": 480,
+        "opens": 250,
+        "site_visits": 900
+      },
+      "fr": {
+        "subscribers": 80,
+        "letters_sent": 320,
+        "opens": 150,
+        "site_visits": 600
+      }
+    }
+  },
+  "showcase": {
+    "page_views": 340,
+    "pin_opens": 120,
+    "card_views": 800,
+    "card_clicks": 95,
+    "by_edition": {
+      "lu": 200,
+      "fr": 140
+    }
+  },
+  "requests": {
+    "total": 2,
+    "by_edition": {
+      "lu": 1,
+      "fr": 1
+    },
+    "summaries": [
+      {
+        "date": "2026-12-04",
+        "edition": "lu",
+        "typology": "T2",
+        "budget_band": "250–500 k€",
+        "payment": "mortgage",
+        "timeline": "6–12 months",
+        "visit": "video call",
+        "status": "with the advisor"
+      },
+      {
+        "date": "2026-12-11",
+        "edition": "fr",
+        "typology": "T3",
+        "budget_band": "250–500 k€",
+        "payment": "cash",
+        "timeline": "3–6 months",
+        "visit": "in person",
+        "status": "visit booked"
+      }
+    ]
+  },
+  "notes": [
+    "Illustrative sample, not real figures."
+  ],
+  "index_card": {},
+  "availability": {
+    "listed": 55,
+    "available": 48,
+    "reserved": 4,
+    "sold": 3
+  }
+}
