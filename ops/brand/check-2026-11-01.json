@@ -1,0 +1,464 @@
+[
+ {
+  "name": "Imóveis Portugal",
+  "label": "imoveisportugal",
+  "domains": {
+   "com": "registered",
+   "net": "free",
+   "pt": "registered",
+   "fr": "free",
+   "com.br": "check (403)",
+   "lu": "check",
+   "ch": "check",
+   "us": "check",
+   "co.il": "check"
+  },
+  "handles": {
+   "youtube": "unverified",
+   "linkedin": "free",
+   "tiktok": "taken",
+   "instagram": "unverified",
+   "x": "unverified"
+  }
+ },
+ {
+  "name": "Farol",
+  "label": "farol",
+  "domains": {
+   "com": "registered",
+   "net": "registered",
+   "pt": "registered",
+   "fr": "registered",
+   "com.br": "registered",
+   "lu": "check",
+   "ch": "check",
+   "us": "check",
+   "co.il": "check"
+  },
+  "handles": {
+   "youtube": "free",
+   "linkedin": "free",
+   "tiktok": "taken",
+   "instagram": "unverified",
+   "x": "unverified"
+  }
+ },
+ {
+  "name": "Miradouro",
+  "label": "miradouro",
+  "domains": {
+   "com": "registered",
+   "net": "registered",
+   "pt": "registered",
+   "fr": "registered",
+   "com.br": "check (403)",
+   "lu": "check",
+   "ch": "check",
+   "us": "check",
+   "co.il": "check"
+  },
+  "handles": {
+   "youtube": "unverified",
+   "linkedin": "taken",
+   "tiktok": "taken",
+   "instagram": "unverified",
+   "x": "unverified"
+  }
+ },
+ {
+  "name": "Morada",
+  "label": "morada",
+  "domains": {
+   "com": "registered",
+   "net": "registered",
+   "pt": "registered",
+   "fr": "registered",
+   "com.br": "check (403)",
+   "lu": "check",
+   "ch": "check",
+   "us": "check",
+   "co.il": "check"
+  },
+  "handles": {
+   "youtube": "unverified",
+   "linkedin": "taken",
+   "tiktok": "taken",
+   "instagram": "unverified",
+   "x": "unverified"
+  }
+ },
+ {
+  "name": "Solar",
+  "label": "solar",
+  "domains": {
+   "com": "registered",
+   "net": "registered",
+   "pt": "registered",
+   "fr": "registered",
+   "com.br": "registered",
+   "lu": "check",
+   "ch": "check",
+   "us": "check",
+   "co.il": "check"
+  },
+  "handles": {
+   "youtube": "unverified",
+   "linkedin": "taken",
+   "tiktok": "taken",
+   "instagram": "unverified",
+   "x": "unverified"
+  }
+ },
+ {
+  "name": "Raiz",
+  "label": "raiz",
+  "domains": {
+   "com": "registered",
+   "net": "registered",
+   "pt": "registered",
+   "fr": "registered",
+   "com.br": "registered",
+   "lu": "check",
+   "ch": "check",
+   "us": "check",
+   "co.il": "check"
+  },
+  "handles": {
+   "youtube": "free",
+   "linkedin": "taken",
+   "tiktok": "taken",
+   "instagram": "unverified",
+   "x": "unverified"
+  }
+ },
+ {
+  "name": "Mirante",
+  "label": "mirante",
+  "domains": {
+   "com": "registered",
+   "net": "registered",
+   "pt": "registered",
+   "fr": "free",
+   "com.br": "check (403)",
+   "lu": "check",
+   "ch": "check",
+   "us": "check",
+   "co.il": "check"
+  },
+  "handles": {
+   "youtube": "free",
+   "linkedin": "taken",
+   "tiktok": "taken",
+   "instagram": "unverified",
+   "x": "unverified"
+  }
+ },
+ {
+  "name": "Atlas Portugal",
+  "label": "atlasportugal",
+  "domains": {
+   "com": "registered",
+   "net": "free",
+   "pt": "registered",
+   "fr": "free",
+   "com.br": "free",
+   "lu": "check",
+   "ch": "check",
+   "us": "check",
+   "co.il": "check"
+  },
+  "handles": {
+   "youtube": "unverified",
+   "linkedin": "free",
+   "tiktok": "free",
+   "instagram": "unverified",
+   "x": "unverified"
+  }
+ },
+ {
+  "name": "Lugar",
+  "label": "lugar",
+  "domains": {
+   "com": "registered",
+   "net": "registered",
+   "pt": "registered",
+   "fr": "registered",
+   "com.br": "registered",
+   "lu": "check",
+   "ch": "check",
+   "us": "check",
+   "co.il": "check"
+  },
+  "handles": {
+   "youtube": "free",
+   "linkedin": "taken",
+   "tiktok": "taken",
+   "instagram": "unverified",
+   "x": "unverified"
+  }
+ },
+ {
+  "name": "Varanda",
+  "label": "varanda",
+  "domains": {
+   "com": "registered",
+   "net": "registered",
+   "pt": "registered",
+   "fr": "registered",
+   "com.br": "registered",
+   "lu": "check",
+   "ch": "check",
+   "us": "check",
+   "co.il": "check"
+  },
+  "handles": {
+   "youtube": "unverified",
+   "linkedin": "taken",
+   "tiktok": "taken",
+   "instagram": "unverified",
+   "x": "unverified"
+  }
+ },
+ {
+  "name": "Portugal 100",
+  "label": "portugal100",
+  "domains": {
+   "com": "registered",
+   "net": "free",
+   "pt": "registered",
+   "fr": "free",
+   "com.br": "free",
+   "lu": "check",
+   "ch": "check",
+   "us": "check",
+   "co.il": "check"
+  },
+  "handles": {
+   "youtube": "unverified",
+   "linkedin": "free",
+   "tiktok": "taken",
+   "instagram": "unverified",
+   "x": "unverified"
+  }
+ },
+ {
+  "name": "Casa Cem",
+  "label": "casacem",
+  "domains": {
+   "com": "registered",
+   "net": "free",
+   "pt": "free",
+   "fr": "free",
+   "com.br": "registered",
+   "lu": "check",
+   "ch": "check",
+   "us": "check",
+   "co.il": "check"
+  },
+  "handles": {
+   "youtube": "unverified",
+   "linkedin": "free",
+   "tiktok": "taken",
+   "instagram": "unverified",
+   "x": "unverified"
+  }
+ },
+ {
+  "name": "Latitude 39",
+  "label": "latitude39",
+  "domains": {
+   "com": "registered",
+   "net": "registered",
+   "pt": "free",
+   "fr": "free",
+   "com.br": "free",
+   "lu": "check",
+   "ch": "check",
+   "us": "check",
+   "co.il": "check"
+  },
+  "handles": {
+   "youtube": "unverified",
+   "linkedin": "taken",
+   "tiktok": "taken",
+   "instagram": "unverified",
+   "x": "unverified"
+  }
+ },
+ {
+  "name": "Alvora",
+  "label": "alvora",
+  "domains": {
+   "com": "registered",
+   "net": "registered",
+   "pt": "registered",
+   "fr": "registered",
+   "com.br": "registered",
+   "lu": "check",
+   "ch": "check",
+   "us": "check",
+   "co.il": "check"
+  },
+  "handles": {
+   "youtube": "free",
+   "linkedin": "taken",
+   "tiktok": "taken",
+   "instagram": "unverified",
+   "x": "unverified"
+  }
+ },
+ {
+  "name": "Miralto",
+  "label": "miralto",
+  "domains": {
+   "com": "registered",
+   "net": "free",
+   "pt": "free",
+   "fr": "registered",
+   "com.br": "registered",
+   "lu": "check",
+   "ch": "check",
+   "us": "check",
+   "co.il": "check"
+  },
+  "handles": {
+   "youtube": "free",
+   "linkedin": "taken",
+   "tiktok": "taken",
+   "instagram": "unverified",
+   "x": "unverified"
+  }
+ },
+ {
+  "name": "Oravia",
+  "label": "oravia",
+  "domains": {
+   "com": "registered",
+   "net": "registered",
+   "pt": "free",
+   "fr": "registered",
+   "com.br": "registered",
+   "lu": "check",
+   "ch": "check",
+   "us": "check",
+   "co.il": "check"
+  },
+  "handles": {
+   "youtube": "unverified",
+   "linkedin": "taken",
+   "tiktok": "taken",
+   "instagram": "unverified",
+   "x": "unverified"
+  }
+ },
+ {
+  "name": "Velaro",
+  "label": "velaro",
+  "domains": {
+   "com": "registered",
+   "net": "registered",
+   "pt": "free",
+   "fr": "check (fetch failed)",
+   "com.br": "registered",
+   "lu": "check",
+   "ch": "check",
+   "us": "check",
+   "co.il": "check"
+  },
+  "handles": {
+   "youtube": "unverified",
+   "linkedin": "taken",
+   "tiktok": "taken",
+   "instagram": "unverified",
+   "x": "unverified"
+  }
+ },
+ {
+  "name": "Navira",
+  "label": "navira",
+  "domains": {
+   "com": "registered",
+   "net": "registered",
+   "pt": "registered",
+   "fr": "registered",
+   "com.br": "registered",
+   "lu": "check",
+   "ch": "check",
+   "us": "check",
+   "co.il": "check"
+  },
+  "handles": {
+   "youtube": "unverified",
+   "linkedin": "taken",
+   "tiktok": "taken",
+   "instagram": "unverified",
+   "x": "unverified"
+  }
+ },
+ {
+  "name": "Lusoma",
+  "label": "lusoma",
+  "domains": {
+   "com": "registered",
+   "net": "free",
+   "pt": "free",
+   "fr": "free",
+   "com.br": "free",
+   "lu": "check",
+   "ch": "check",
+   "us": "check",
+   "co.il": "check"
+  },
+  "handles": {
+   "youtube": "free",
+   "linkedin": "taken",
+   "tiktok": "taken",
+   "instagram": "unverified",
+   "x": "unverified"
+  }
+ },
+ {
+  "name": "Aurelo",
+  "label": "aurelo",
+  "domains": {
+   "com": "registered",
+   "net": "registered",
+   "pt": "free",
+   "fr": "registered",
+   "com.br": "registered",
+   "lu": "check",
+   "ch": "check",
+   "us": "check",
+   "co.il": "check"
+  },
+  "handles": {
+   "youtube": "unverified",
+   "linkedin": "taken",
+   "tiktok": "taken",
+   "instagram": "unverified",
+   "x": "unverified"
+  }
+ },
+ {
+  "name": "Corvela",
+  "label": "corvela",
+  "domains": {
+   "com": "registered",
+   "net": "registered",
+   "pt": "free",
+   "fr": "registered",
+   "com.br": "registered",
+   "lu": "check",
+   "ch": "check",
+   "us": "check",
+   "co.il": "check"
+  },
+  "handles": {
+   "youtube": "unverified",
+   "linkedin": "free",
+   "tiktok": "taken",
+   "instagram": "unverified",
+   "x": "unverified"
+  }
+ }
+]
