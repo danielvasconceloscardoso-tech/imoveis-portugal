@@ -2,6 +2,7 @@
 // Every page other than the home: media kit, buyer request, how we work, privacy, legal notice, FAQ,
 // talk to a partner and the free guide. Wording: content/copy/COPY_DECK.md.
 import V2 from "../../../layouts/V2.astro";
+import TrustStrip from "../../../components/TrustStrip.astro";
 import BriefBox from "../../../components/BriefBox.astro";
 import { PRICES } from "../../../lib/prices";
 import { PROJECTS, showcases } from "../../../lib/projects";
@@ -186,5 +187,6 @@ const site = config.agency.website.replace(/^https:\/\/|\/$/g, "");
       {Array.from({ length: legal === "privacy" ? 7 : 4 }, (_, j) => j + 1).map((i) => (<><h2 id={legal === "privacy" && i === 7 ? "brief" : undefined}>{c(`legal.${legal}.${i}.h`, lang)}</h2><p>{c(`legal.${legal}.${i}.p`, lang, legalVars)}</p></>))}
     </div>
   )}
+  {(key === "partners" || key === "ours") && <TrustStrip lang={lang} ed={ed} />}
 </V2>
 )}

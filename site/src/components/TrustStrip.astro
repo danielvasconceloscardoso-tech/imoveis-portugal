@@ -1,0 +1,51 @@
+---
+// The honest trust strip (prompt 51 §3.4, prompt 48 §1 and §4): only what is ours today, each line checkable.
+// 1. Licences and professional registrations verified in the official public register (content/partners/verified.csv:
+//    registry, number, link to the public search, date checked). Never an Ordem's or a regulator's emblem: the number,
+//    the link and the date are the credibility (the Ordem dos Advogados forbids third-party use of its emblem).
+// 2. Institutions (memberships, statuses, co-financing) only from a row in content/partners/institutions.csv with the
+//    document or approval reference; the build fails if a logo file exists without its row. Empty today, so nothing shows.
+// 3. Our own rules, each linked to where it is explained: official data with sources, flat sponsorship never per request
+//    (D6), sponsored content labelled, audience measured without cookies.
+import { readFileSync, readdirSync, existsSync } from "node:fs";
+import { join } from "node:path";
+import { pathFor, type Lang, type EdCode } from "../i18n";
+import { c } from "../lib/copy";
+import { fmtDate } from "../lib/content";
+
+interface Props { lang: Lang; ed: EdCode; tone?: "light" | "plain"; }
+const { lang, ed, tone = "plain" } = Astro.props;
+const csv = (f: string) => { const [h, ...r] = readFileSync(join(process.cwd(), "..", "content", "partners", f), "utf8").trim().split("\n"); const k = h.split(","); return r.filter(Boolean).map((l) => Object.fromEntries(l.split(",").map((v, i) => [k[i], v.trim()]))); };
+const verified = csv("verified.csv").filter((r) => r.visible === "1" && r.number && /^https:\/\//.test(r.url) && r.checked);
+const inst = csv("institutions.csv").filter((r) => r.body && r.reference && (!r.expiry || r.expiry >= new Date().toISOString().slice(0, 10)));
+const logoDir = join(process.cwd(), "public", "img", "institutions");
+if (existsSync(logoDir)) for (const f of readdirSync(logoDir)) if (!csv("institutions.csv").some((r) => r.logo === f)) throw new Error(`TrustStrip: logo ${f} has no row in content/partners/institutions.csv`);
+const WORDING = new Set(["Membro de", "Startup reconhecida por", "Licenciado por", "Cofinanciado por", "Parceiro de conteúdo"]);
+for (const r of inst) if (!WORDING.has(r.wording)) throw new Error(`TrustStrip: wording "${r.wording}" not allowed for ${r.body}`);
+const items: { t: string; href?: string; ext?: boolean }[] = [
+  ...verified.map((r) => ({ t: c(r.role === "agency" ? "trust.agency" : "trust.pro", lang, { who: r.who, n: r.number, reg: r.registry, date: fmtDate(lang, r.checked) }), href: r.url, ext: true })),
+  ...inst.map((r) => ({ t: `${r.wording} ${r.body}${r.wording === "Cofinanciado por" ? ` · ${r.reference}` : ""}` })),
+  { t: c("trust.data", lang), href: pathFor(lang, ed, "data") },
+  { t: c("trust.flat", lang), href: pathFor(lang, ed, "how") },
+  { t: c("trust.cookies", lang), href: pathFor(lang, ed, "privacy") },
+];
+---
+<section class={`trust trust-${tone}`} aria-labelledby={`trust-${lang}`}>
+  <div class="trust-in">
+    <h2 id={`trust-${lang}`} class="trust-h">{c("trust.h", lang)}</h2>
+    <ul class="trust-l">
+      {items.map((x) => <li>{x.href ? <a href={x.href} rel={x.ext ? "noopener" : undefined} target={x.ext ? "_blank" : undefined}>{x.t}</a> : x.t}</li>)}
+    </ul>
+  </div>
+</section>
+<style>
+  .trust { border-top: 1px solid var(--rule, #e4e1da); }
+  .trust-in { max-width: 1120px; margin: 0 auto; padding: 24px 16px; display: grid; gap: 8px; }
+  .trust-h { font: 600 12px/1.3 var(--sans, system-ui); letter-spacing: .14em; text-transform: uppercase; color: var(--muted, #5d6066); margin: 0; }
+  .trust-l { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; font: 400 13px/1.5 var(--sans, system-ui); color: var(--ink, #111214); }
+  .trust-l li { padding-left: 16px; position: relative; }
+  .trust-l li::before { content: ""; position: absolute; left: 0; top: .6em; width: 6px; height: 6px; border-radius: 50%; background: var(--green, #2f5d50); }
+  .trust-l a { color: inherit; text-decoration: underline; text-decoration-color: var(--rule, #c9c5bc); text-underline-offset: 3px; }
+  .trust-l a:hover { text-decoration-color: currentColor; }
+  @media (min-width: 860px) { .trust-in { grid-template-columns: 200px 1fr; padding: 24px; } .trust-l { grid-template-columns: 1fr 1fr; column-gap: 40px; } }
+</style>

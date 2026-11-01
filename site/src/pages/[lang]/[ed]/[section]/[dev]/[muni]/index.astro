@@ -2,6 +2,7 @@
 // Partner showcase on the site (prompt 28 §2, D53): /{lang}/{ed}/{partners}/{developer}/{municipality}/. Partner projects
 // only (projects.json partner: true), labelled "Sponsored"; reached from the map's place card and the Partners page.
 import V2 from "../../../../../../layouts/V2.astro";
+import TrustStrip from "../../../../../../components/TrustStrip.astro";
 import Showcase from "../../../../../../components/Showcase.astro";
 import RequestSheet from "../../../../../../components/RequestSheet.astro";
 import { LANGS, ED_ORDER, SLUGS, HTML_LANG, type Lang, type EdCode } from "../../../../../../i18n";
@@ -26,4 +27,5 @@ const title = c("show.title", lang, { developer: ps[0].developer, muni: (PRICES.
   <Showcase lang={lang} locale={HTML_LANG[lang]} projects={ps} label={c("common.sponsored", lang)} href={(_, u) => `${base}${u.id}/`} cur={k ? { code: k, rate: RATE(k).rate } : undefined}
     simHref={`${pathFor(lang, ed, "sims")}${SUB.cost[lang]}/`} mapHref={`${pathFor(lang, ed, "map")}?place=${ps[0].muni}&devs=1`} />
   {ps[0].blocks && <RequestSheet lang={lang} ed={ed} project={ps[0]} />}
+  <TrustStrip lang={lang} ed={ed} />
 </V2>

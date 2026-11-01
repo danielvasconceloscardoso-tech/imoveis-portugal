@@ -7346,3 +7346,35 @@ Prompt 37 §2 and prompt 43 §3: the Artigos hub and its four articles, built by
 - PT: O INE só publica onde há vendas suficientes. Nesses casos, não estimamos nenhum valor.
 - EN: INE publishes only where there are enough sales. In those cases, we estimate nothing.
 - FR: L'INE ne publie que là où les ventes suffisent. Dans ces cas, nous n'estimons aucune valeur.
+
+## trust
+
+### h
+- PT: O que pode verificar
+- EN: What you can check
+- FR: Ce que vous pouvez vérifier
+
+### agency
+- PT: Agência parceira {who}: licença {n}, verificada no registo público do {reg} a {date}
+- EN: Partner agency {who}: licence {n}, checked in the {reg} public register on {date}
+- FR: Agence partenaire {who} : licence {n}, vérifiée au registre public de l'{reg} le {date}
+
+### pro
+- PT: {who}: inscrição {n}, verificada no registo público ({reg}) a {date}
+- EN: {who}: registration {n}, checked in the public register ({reg}) on {date}
+- FR: {who} : inscription {n}, vérifiée au registre public ({reg}) le {date}
+
+### data
+- PT: Números oficiais com fonte e data: INE, Banco de Portugal, BCE
+- EN: Official figures with source and date: INE, Banco de Portugal, ECB
+- FR: Chiffres officiels avec source et date : INE, Banco de Portugal, BCE
+
+### flat
+- PT: Parceiros pagam um patrocínio fixo, nunca por pedido; o conteúdo patrocinado está sempre identificado
+- EN: Partners pay a flat sponsorship, never per request; sponsored content is always labelled
+- FR: Les partenaires paient un parrainage fixe, jamais par demande ; le contenu sponsorisé est toujours signalé
+
+### cookies
+- PT: Medimos a audiência sem cookies
+- EN: We measure our audience without cookies
+- FR: Nous mesurons l'audience sans cookies

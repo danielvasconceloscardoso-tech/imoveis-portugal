@@ -2,6 +2,7 @@
 // Edition home (prompt 32, design v2; prompt 43: five sections, the rest in articles). Wording: COPY_DECK.md "home2.*".
 import V2 from "../../../layouts/V2.astro";
 import HomeD2 from "../../../components/HomeD2.astro";
+import TrustStrip from "../../../components/TrustStrip.astro";
 import { ED_ORDER, LANGS, type EdCode, type Lang } from "../../../i18n";
 import { c, edName } from "../../../lib/copy";
 
@@ -13,4 +14,5 @@ const ed = Astro.params.ed as EdCode;
 ---
 <V2 lang={lang} ed={ed} page="home" d2 title={`Imóveis Portugal · ${edName(ed, lang)}`} description={c("home2.lede", lang)}>
   <HomeD2 lang={lang} ed={ed} />
+  <TrustStrip lang={lang} ed={ed} />
 </V2>
