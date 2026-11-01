@@ -1,0 +1,38 @@
+# Prompt 51 §3: the numbers, fed automatically. Every Monday the week before; on the 1st the month before for each partner.
+# Aggregates only (scripts/metrics/guard.mjs). Commits to main as the brand, which redeploys the private dashboards.
+# Does nothing until the operator adds the Cloudflare secrets (ops/METRICS_SETUP.md).
+name: metrics
+on:
+  schedule:
+    - cron: "23 6 * * 1"   # Mondays 06:23 UTC: last ISO week
+    - cron: "41 6 1 * *"   # the 1st, 06:41 UTC: last month, per partner
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    env:
+      CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+      CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+      CF_SITE_TAGS: ${{ secrets.CF_SITE_TAGS }}
+      BEEHIIV_API_KEY: ${{ secrets.BEEHIIV_API_KEY }}
+      BEEHIIV_PUBS: ${{ secrets.BEEHIIV_PUBS }}
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: main }
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: Week
+        if: env.CF_API_TOKEN != '' && (github.event_name == 'workflow_dispatch' || github.event.schedule == '23 6 * * 1')
+        run: node scripts/metrics/collect.mjs --week
+      - name: Month
+        if: env.CF_API_TOKEN != '' && (github.event_name == 'workflow_dispatch' || github.event.schedule == '41 6 1 * *')
+        run: node scripts/metrics/collect.mjs --month
+      - name: Commit
+        if: env.CF_API_TOKEN != ''
+        run: |
+          git config user.name "Imoveis Portugal"
+          git config user.email ops@imoveisportugal.lu
+          git add ops/metrics ops/METRICS.md sponsors/reports/data
+          git diff --cached --quiet || { git commit -m "Metrics: automatic collection ($(date -u +%F))"; git push origin HEAD:main; }

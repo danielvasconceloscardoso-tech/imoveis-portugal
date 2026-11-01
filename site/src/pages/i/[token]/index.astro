@@ -1,0 +1,68 @@
+---
+// Our internal weekly dashboard (prompt 51 §3.2): unlisted, one token link, no login. From ops/metrics/weekly/*.json,
+// written every Monday by scripts/metrics/collect.mjs (Cloudflare Web Analytics, the cookie-free event pages, beehiiv,
+// the pipeline totals). Subscribers and traffic per edition, Concierge starts and completions, requests per flow and per
+// partner, top places opened on the map, top questions opened on Perguntas, readers' countries, revenue signed against
+// the target. The same week also lands in ops/METRICS.md. Nothing is estimated.
+import Dash from "../../../layouts/Dash.astro";
+import { PRICES } from "../../../lib/prices";
+import { INTERNAL_TOKEN, weeks } from "../../../lib/dash";
+import { faqFor } from "../../../lib/content";
+import { ED_ORDER, LANGS } from "../../../i18n";
+
+export function getStaticPaths() { return [{ params: { token: INTERNAL_TOKEN } }]; }
+const W = weeks(), w = W[W.length - 1];
+const last = W.slice(-12);
+const TARGET = 20000;  // ops/METRICS.md: about 20,000 € signed by Christmas (ops/PLAN.md)
+const nf = new Intl.NumberFormat("en-GB", { maximumFractionDigits: 1 });
+const f = (v: unknown) => (typeof v === "number" ? nf.format(v) : "–");
+const sumEd = (x: any, k: string) => { const v = ED_ORDER.map((e) => x?.editions?.[e]?.[k]).filter((n) => typeof n === "number"); return v.length ? v.reduce((a: number, b: number) => a + b, 0) : null; };
+const series = (k: string) => last.map((x) => (k === "completions" ? x.concierge?.completions ?? null : sumEd(x, k)));
+const spark = (vals: (number | null)[]) => { const v = vals.map((x) => x ?? 0); const mx = Math.max(1, ...v); return v.length > 1 ? v.map((y, i) => `${i ? "L" : "M"}${(100 * i) / (v.length - 1)},${38 - (36 * y) / mx}`).join(" ") : ""; };
+const munis = PRICES.munis as Record<string, any>;
+const qText = new Map<string, string>();
+for (const e of ED_ORDER) for (const l of LANGS) for (const it of faqFor(e, l)) if (!qText.has(it.id)) qText.set(it.id, it.q);
+const ED = { lu: "LU", fr: "FR", ch: "CH", br: "BR", us: "US", il: "IL" } as Record<string, string>;
+const dn = new Intl.DisplayNames(["en-GB"], { type: "region" });
+const cname = (k: string) => { try { return /^[A-Z]{2}$/.test(k) ? dn.of(k) : k; } catch { return k; } };
+const tiles = w ? [
+  ["Newsletter subscribers", sumEd(w, "subscribers"), series("subscribers")], ["Site visits", w.totals?.visits ?? null, series("visits")],
+  ["Concierge completions", w.concierge?.completions ?? null, series("completions")], ["Requests sent", sumEd(w, "requests"), series("requests")],
+] as [string, number | null, (number | null)[]][] : [];
+const signed = w?.business?.revenue_signed_eur ?? null;
+---
+<Dash title="Weekly dashboard · Imóveis Portugal" lang="en" flag="Internal · weekly">
+  <h1>The week</h1>
+  {!w ? <>
+    <p class="db-lede">Nothing collected yet. The first week appears here the Monday after Cloudflare Web Analytics is on and the collector has its keys (ops/METRICS_SETUP.md). Until then ops/METRICS.md says the same: no figure is estimated.</p>
+  </> : <>
+    <p class="db-lede">{w.week} · {w.period} · collected {w.generated}</p>
+    <div class="db-grid">
+      {tiles.map(([l, v, s]) => <div class="db-tile"><b>{f(v)}</b><span>{l}</span>{s.length > 1 && <svg class="spark" viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true"><path d={spark(s)} /></svg>}</div>)}
+      <div class="db-tile"><b>{f(signed)} €</b><span>Revenue signed · target {f(TARGET)} € by Christmas ({signed !== null ? `${Math.round((100 * signed) / TARGET)} %` : "–"}) · {f(w.business?.signed)} sponsors</span></div>
+    </div>
+
+    <h2>Per edition</h2>
+    <div class="db-card"><table><thead><tr><th></th>{ED_ORDER.map((e) => <th class="n">{ED[e]}</th>)}<th class="n">Total</th></tr></thead><tbody>
+      {[["Subscribers", "subscribers"], ["Site visits", "visits"], ["Page views", "page_views"], ["Requests sent", "requests"]].map(([l, k]) => <tr><td>{l}</td>{ED_ORDER.map((e) => <td class="n">{f(w.editions?.[e]?.[k])}</td>)}<td class="n">{f(sumEd(w, k))}</td></tr>)}
+    </tbody></table></div>
+
+    <div class="db-two">
+      <div><h2>Concierge and requests</h2><div class="db-card">
+        <table><thead><tr><th>Flow</th><th class="n">Started</th><th class="n">Sent</th></tr></thead><tbody>
+          <tr><td>Concierge</td><td class="n">{f(w.concierge?.starts)}</td><td class="n">{f(w.concierge?.completions)}</td></tr>
+          {Object.entries(w.requests?.by_flow || {}).filter(([k]) => k !== "concierge").map(([k, v]) => <tr><td>{k}</td><td class="n">–</td><td class="n">{f(v)}</td></tr>)}
+        </tbody></table>
+        <p class="db-src">Requests per partner project: {Object.entries(w.requests?.by_project || {}).map(([k, v]) => `${k} ${f(v)}`).join(" · ") || "none"}</p>
+      </div></div>
+      <div><h2>Readers' countries</h2><div class="db-card">{w.countries?.length ? <table><tbody>{w.countries.map((c: any) => <tr><td>{cname(c.key)}</td><td class="n">{f(c.n)}</td></tr>)}</tbody></table> : <p class="db-none">No data yet.</p>}</div></div>
+      <div><h2>Places opened on the map</h2><div class="db-card">{w.top_places?.length ? <table><tbody>{w.top_places.map((p: any) => <tr><td>{munis[p.key]?.n ?? p.key}</td><td class="n">{f(p.n)}</td></tr>)}</tbody></table> : <p class="db-none">No data yet.</p>}</div></div>
+      <div><h2>Questions opened on Perguntas</h2><div class="db-card">{w.top_questions?.length ? <table><tbody>{w.top_questions.map((q: any) => <tr><td>{qText.get(q.key) ?? q.key}</td><td class="n">{f(q.n)}</td></tr>)}</tbody></table> : <p class="db-none">No data yet.</p>}</div></div>
+    </div>
+
+    <h2>Top pages</h2>
+    <div class="db-card">{w.top_pages?.length ? <table><tbody>{w.top_pages.map((p: any) => <tr><td>{p.key}</td><td class="n">{f(p.n)}</td></tr>)}</tbody></table> : <p class="db-none">No data yet.</p>}</div>
+    <p class="db-src">Sources: {w.sources?.cloudflare} · {w.sources?.beehiiv}</p>
+  </>}
+  <Fragment slot="foot">Internal, unlisted, out of search engines. Aggregates only, no personal data (scripts/metrics/guard.mjs). Weekly history: ops/METRICS.md and ops/metrics/weekly/.</Fragment>
+</Dash>

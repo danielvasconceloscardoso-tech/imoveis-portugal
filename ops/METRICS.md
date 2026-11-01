@@ -1,6 +1,12 @@
 # Metrics
 
-Weekly, filled every Friday. Until the numbers script exists (prompt 14, step 6) the operator copies the figures in by hand. Cookie-free sources only: Cloudflare Web Analytics, beehiiv, the platforms' own insights.
+Weekly, filled automatically every Monday by `scripts/metrics/collect.mjs` (prompt 51; setup in ops/METRICS_SETUP.md) into the block below, with the detail in `ops/metrics/weekly/` and the private dashboard. Until a source is connected its cells read "–"; the operator still adds what no platform sees (social, calls) by hand. Cookie-free sources only: Cloudflare Web Analytics, beehiiv, the platforms' own insights.
+
+## Weekly, automatic (prompt 51)
+
+<!-- auto:weekly:start -->
+No week collected yet: Cloudflare Web Analytics and beehiiv are not connected (ops/METRICS_SETUP.md).
+<!-- auto:weekly:end -->
 
 ## Week of 26 Oct 2026 (before launch)
 
