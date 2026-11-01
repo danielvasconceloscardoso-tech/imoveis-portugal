@@ -1,0 +1,15 @@
+# Seeds for scripts/brand/generate.py (prompt 49 §2). Roots by theme; the generator blends them and adds suffixes.
+atlantic:
+cabo, costa, mar, mare, maris, marina, onda, alva, doura, tejo, sado, mondego, lima, tamega, sagres, nazare, ericeira, oeste, poente, nascente, farta, praia, areia, sal, salina, rocha, falesia, horizonte, ilha, porto, barra, foz, delta, ria, lagoa, baia, enseada, cala, atlantica, oceana
+light:
+luz, lume, lumen, sol, solara, aurora, alba, clara, brilho, lucia, luna, estrela, astra, astro, nova, solis, raio, dia, tarde, verao, prima
+arrival:
+cais, chegada, porta, porto, vela, rumo, norte, bussola, rota, via, nave, navi, ancora, mareta, viagem, regresso, volta, lar, casa, morar, abrigo, terra, solo, raiz, patria, lusa, lusia, luso, ibera, iberia, olisipo, portucale, alma, aura, vida
+view:
+vista, mira, mirar, alto, alta, cimo, cume, torre, varanda, olhar, atalaia, panorama, ver, visor, belvedere, faro, lanterna, terraco
+measure:
+index, indice, metro, medida, escala, grau, cento, cem, mapa, carta, carto, prumo, nivel, regua, ponto, marco, quota, rumo, orbita, eixo, centro, numero, nota, ordem
+latin:
+alma, terra, aura, nova, prima, vera, alta, clara, serena, magna, solida, vita, domus, sedes, locus, porta, fides, aurea, villa, area, ora, oro, ara, aria, lira, mira, sola, tela, vela, liva, vira, rota, nora, dora, lora, mora
+suffixes:
+a, o, ia, io, ora, ana, ly, ix, ea, on, ar, el, ela, ina, ino, ova, era, ira, ova, ura, ena, ola, ida
