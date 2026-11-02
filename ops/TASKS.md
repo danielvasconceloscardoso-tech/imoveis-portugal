@@ -193,9 +193,11 @@ Status: To do · Doing · Blocked · Done
 | 51d | Agree a reply-time commitment with the partner agency's advisor, so the Concierge can say what the reader gets and when, and the report can measure it | CEO / Partner | To do | 2026-11-14 |
 | 51e | Ask ID Investimentos for the documents behind a showcase checklist (licence of use or building permit, energy pre-certificate, ficha técnica), each shown "provided by the developer" with a date | Operator | To do | 2026-11-14 |
 | 51f | Decide the Concierge additions from prompt 51 (readiness label shown to the reader, optional self-declared funding line, opt-in series for "not yet"); all within D6 and consent per recipient | CEO | To do | 2026-11-21 |
-| 54a | Approve the letter prices in sponsors/LETTER_MONETIZATION_v2.md: one ladder for "Apresentado por" (4,000 €/month) and the Gold/Silver/Bronze packages (8–12k €/yr); Friday item 300 or 400 €; per-reader curve from 5,000; whether paid recommendations count as per-lead under D6 | CEO | To do | 2026-11-09 |
+| 54a | Approve the letter prices in sponsors/LETTER_MONETIZATION_v2.md: one ladder for "Apresentado por" (4,000 €/month) and the Gold/Silver/Bronze packages (8–12k €/yr); Friday item 300 or 400 €; per-reader curve from 5,000; whether paid recommendations count as per-lead under D6 | CEO | Superseded by v6 (56b) | 2026-11-09 |
 | 54b | Review sponsors/letter_sponsors.csv (344 companies, 88 priority A) and choose which go into sponsors/pipeline.csv; first calls: banks' non-resident units for January "Apresentado por" | CEO | To do | 2026-11-09 |
 | 54c | Wine Spectator lesson for D69: the paid "dated badge for developments" needs a site or document check and published refusals, or it should go (sponsors/NEWSLETTER_PLAYBOOK.md §2) | CEO | To do | 2026-11-14 |
+| 56a | Research public marketing and advertising spend per category (annual reports' marketing/advertising lines of the Portuguese banks, insurers, hospital groups, airlines, telcos, wine groups; Marktest/MediaMonitor ad-spend rankings; IAB/agency reports on digital share in Portugal) and set the anchors in sponsors/PARTNERSHIPS_v6.md with sources | CTO | To do | 2026-11-06 |
+| 56b | Approve Partnerships v6 (annual category partnerships, Official/Partner/Featured, founding −40%, 90-day pilot at 25%) instead of the per-letter packages | Operator | To do | after 56a |
 
 ## Last session
 
