@@ -12,6 +12,23 @@
 3. **Portugal 100 Presenting Partner** (one company, all categories): the annual ranking, the reveal week, the event, the printed edition.
 4. **Developers** stay on per-unit pricing (rate card v5 §1).
 
+## Geography: national partners, regional where the service is local (operator, 2 Nov)
+
+- One letter for everyone (D74) means the unit is Portugal, not the edition. **Official Partners are national:** they must serve a reader wherever in Portugal they land. Banks, insurers, airlines, telcos, retail, cars, hospital groups with national networks (CUF, Luz Saúde, Lusíadas), universities with several campuses or national reach.
+- **Where the service is local, sell by region:** schools above all, single hospitals, golf, hotels. Five regions: Lisboa e Cascais · Porto e Norte · Centro (Coimbra, Aveiro, Leiria) · Algarve · Madeira e Açores. One "Escola parceira" per region and curriculum (British, American, French, German, IB), so a family in Porto and a family in Cascais each see their school.
+- A national hospital group as the Official Health Partner covers every region; independent hospitals can be Featured where the group has no presence.
+
+## New categories (operator, 2 Nov)
+
+1. **Home setup** (the first months in the new house): Sonae (Continente, Worten), El Corte Inglés, Mercadona, Pingo Doce, IKEA, Leroy Merlin. The pitch: our reader furnishes and stocks a whole house in Portugal, often from abroad, in the first 90 days. Products: the "Primeiros 90 dias" guide and checklist presented by the partner, the Concierge's "casa pronta" step, a series in the letter, delivery-to-a-new-home offers. Mercadona and El Corte Inglés have the strongest reason (an entrant building its name; a premium store for an affluent arrival).
+2. **Insurance, three products:** home (required by the bank with a mortgage), health (expats and returning residents before the SNS registration), life (with the mortgage). Fidelidade, Ageas/Médis, Generali Tranquilidade, Allianz, Zurich, MAPFRE. Official Partner can be one group across all three, or one per product. Our cards stay advertising: the quote happens on the insurer's side (insurance distribution, Lei 7/2019).
+3. **Mobility (cars):** how a car brand pays us: Official Mobility Partner (national, 12 months) with
+   - the "Chegar com carro" guide: bringing a car when moving residence (the vehicle-tax exemption on transfer of residence, CISV art. 58, conditions checked) or buying new in Portugal, presented by the brand;
+   - "Marcar test drive" in the Concierge, consent naming the brand, the request goes to its dealer network (no per-request fee, D6);
+   - a road series in the letter (the N222 along the Douro, the Costa Vicentina, the Madeira coast) driven in the partner's car, labelled;
+   - transport at our events (the golf day, the Douro dinner).
+   Fit: BYD and the new Chinese brands (building awareness), Tesla, Porsche, BMW, Mercedes, Volvo; leasing and renting companies (Ayvens, Arval) for those who don't want to buy yet.
+
 ## Price anchors (to be confirmed with public spend data, task 56a)
 
 | Category | Official Partner, 12 months | Partner | Featured |
@@ -21,11 +38,13 @@
 | Digital banking and investing (Revolut, Trade Republic…) | 80,000–150,000 € | 30,000 € | 10,000 € |
 | Airline | 100,000–200,000 € | 40,000 € | — |
 | Health (hospital group) | 60,000–100,000 € | 25,000 € | 6,000 € per hospital |
-| Education (schools) | 30,000–60,000 € | 15,000 € | 6,000 € per school |
+| Education (schools), per region and curriculum | 20,000–40,000 € | 10,000 € | 6,000 € per school |
 | Higher education | 40,000–80,000 € | 20,000 € | 8,000 € |
 | Insurance | 80,000–120,000 € | 30,000 € | 10,000 € |
 | Wine (house or region) | 50,000–100,000 € | 20,000 € | 6,000 € |
-| Mobility, energy and home, telecoms, luxury | 60,000–150,000 € | 25,000 € | 8,000 € |
+| Mobility (cars, leasing) | 80,000–150,000 € | 30,000 € | 8,000 € per dealer group |
+| Home setup (retail) | 80,000–150,000 € | 30,000 € | 8,000 € |
+| Energy, telecoms, luxury | 60,000–150,000 € | 25,000 € | 8,000 € |
 | Portugal 100 Presenting Partner | 150,000–250,000 € | — | — |
 
 ## How they buy (so the price can be met)
