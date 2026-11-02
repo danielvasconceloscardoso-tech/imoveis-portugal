@@ -15,9 +15,17 @@ CEO, 2 Nov 2026, 22:45. Operator: no score cards. The site, the letter and the p
 ## 2. Light gamification (premium, never childish)
 
 1. **O Passaporte:** a reader collects a stamp for each place they explore on the map or visit in real life (a QR at partner venues later). Ten stamps in a region unlock that region's guide; a full region unlocks a partner perk (a tasting at a quinta, a dinner, a round of golf), offered and paid for by the partner, labelled. Stamps stored on the device only, or in the reader's letter account with consent.
-2. **"Qual é a sua região?":** a six-question quiz (morning person or night owl, sea or mountains, wine or surf, city or village, budget, who comes with you) that ends with a region, its five best things and the homes listed there. Shareable result card.
+2. **"Qual é a sua região?"** (mockup: `design/quiz/quiz_mockup.html` and `Qual_e_a_sua_regiao.png`; build to it): a six-question quiz (morning person or night owl, sea or mountains, wine or surf, city or village, budget, who comes with you) that ends with a region, its five best things and the homes listed there. Shareable result card.
 3. **O desafio da semana** in the letter: a photo of a place, guess where it is; answers revealed next letter; the best guessers named by first name only with consent.
 4. **Roteiros:** "48 horas no Porto", "O Douro em 3 dias", "Comporta sem pressa": a route on the map, stop by stop, ending at the homes in the region.
+
+### The quiz, in detail
+1. **Screens:** intro (full-bleed photo, "Um jogo de dois minutos", one button) → six questions, one per screen, four photo tiles each (tap selects and moves on after 400 ms; "Voltar" always) → result (full-bleed photo of the region, two lines on why it fits, "Este mês" three items from the bank) → "Casas nesta região" with the listed developments and "Ver casas no mapa" → the first Passaporte stamp → share.
+2. **Questions:** Acorda com (mar, montanha, cidade, rio) · Às sete da tarde (varanda e vinho, praia, jantar na cidade, buraco 18) · Fim de semana (surf, golfe, museus e galerias, trilhos e levadas) · Quem vem consigo (família, a dois, sozinho, amigos) · Inverno (20 graus sempre, lareira e frio bom, tanto faz) · Até onde vai o orçamento (four ranges; used only to choose which homes to show, never the region).
+3. **Regions (six results):** O Douro e o Porto · O Minho · Lisboa e Cascais · Comporta e o Alentejo litoral · O Algarve · A Madeira. Each answer adds points to regions in a small table in `content/quiz/weights.json`; ties broken by the "às sete da tarde" answer; second-best region shown as "Também é a sua cara".
+4. **Share card:** 1080×1920 and 1200×630 images generated per region (photo, "A minha região em Portugal", region, one line, "Qual é a sua?") with the link to the quiz; Instagram story and WhatsApp share buttons.
+5. **Letter:** the result offers the letter signup ("Receba o melhor de {região} todas as terças e sextas"), double opt-in, consent unticked.
+6. **No personal data stored without consent;** results kept on the device; counts per region reported anonymously in `ops/METRICS.md`.
 
 ## 3. The concierge, five-star
 
