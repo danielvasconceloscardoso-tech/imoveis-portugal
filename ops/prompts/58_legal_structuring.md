@@ -1,40 +1,40 @@
-# Prompt 58: the legal structure, compared, and the professional way to set it up (due Fri 6 Nov 2026)
+# Prompt 58: Lda in Portugal: IP, startup status, IP box, SIFIDE II and every other benefit (due Fri 6 Nov 2026)
 
-CEO, 2 Nov 2026, 23:00. Operator's request: a comparative analysis of the possible legal structures for the company, judged on tax, running cost, ease of sale (D76: exit above 1 M€) and the founders' needs, and the most professional way to put it in place. **One memo in English, at most 8 pages, plus a one-page comparison table** (rule 15). Due Friday 6 November. The operator is a lawyer: cite every article and source; facts and trade-offs, with a recommendation clearly marked as such.
+CEO, 2 Nov 2026, 23:05. Operator, decided: **everything in Portugal, a Portuguese Lda**, possibly with startup status. No holding, no Luxembourg, no SA. He wants to know how to protect the IP and which tax regimes we can use, and how to qualify for each. **One memo in English, max 8 pages, plus a one-page table** (rule 15). The operator is a lawyer: cite every article, with the version in force in 2026 and the source. Facts and conditions; a recommendation clearly marked.
 
-## 1. The facts to work from
+## 1. IP: what we own and how to protect it
+1. The brand: the Portuguese trademark (INPI, Código da Propriedade Industrial) vs the EU trademark (EUIPO): classes (35, 36, 38, 41, 42), cost, timing, a quick clearance on "Imóveis Portugal" (descriptiveness risk, CPI art. 209 and EUTMR art. 7(1)(c)) and the logo mark as the stronger filing.
+2. The domains: registered in the company's name; the transfer from whoever holds them today.
+3. The software and the site: copyright (CDADC; DL 252/94 for computer programs). Who owns code written by the founders and by AI tools; the assignment to the company (written, CDADC arts. 14 and 44).
+4. The data: the database right (DL 122/2000), the content, the letter archive; the OSM/ODbL share-alike risk; the licences we use.
+5. The documents to sign: founders' IP assignment to the Lda; contractor clauses; confidentiality.
 
-1. Business: a Portugal-based data and services platform (D71), revenue from flat sponsorships and per-unit developer placements, very low costs, no employees at first.
-2. Three founders: two Portugal tax residents (managers of record), one Luxembourg tax resident who will not manage. One founder's family owns the licensed real-estate agency that will be a partner (separate company, arm's-length agreement).
-3. Goals: low running cost, good tax efficiency while it's a cash cow (profits distributed to the founders), and a clean sale of the whole business above 1 M€ within a few years. A holding may come later.
+## 2. Startup status (Lei 21/2023)
+1. The conditions for certification (age, size, innovation, Portuguese seat or establishment, the Startup Portugal procedure) and whether we qualify at incorporation or later.
+2. What it gives in practice: the stock options and employee equity regime (and the IRS treatment), the other benefits, and the obligations.
 
-## 2. Structures to compare
+## 3. The IP box (CIRC art. 50-A)
+1. What qualifies (registered software copyright, patents, designs; trademarks excluded); the 2026 exclusion percentage; the nexus formula; the registration we would need for the platform's software.
+2. Whether a revenue model of sponsorships and listings generates qualifying income at all, with an honest answer.
 
-1. Portuguese **Lda** held directly by the three founders.
-2. Portuguese **SA**.
-3. Lda now, **holding later** (Portuguese holding Lda; contribution of quotas in exchange for holding shares; the tax-neutral regime for share exchanges, CIRC arts. 73 and 77, and its conditions).
-4. Lda held partly through a **Luxembourg holding** for the Luxembourg-resident founder (SARL or SARL-S): withholding on dividends to it (CIRC art. 14 and the Parent-Subsidiary Directive conditions; the anti-abuse clause in CIRC art. 14 and the general anti-abuse rule, LGT art. 38(2)), Luxembourg participation exemption (LIR art. 166 and the Grand-Ducal regulation), substance requirements, running cost.
-5. Holding the founder's interest through an **associação em participação** (DL 231/81) instead of quotas: pros, cons, how a buyer treats it.
+## 4. SIFIDE II (Código Fiscal do Investimento)
+1. What counts as R&D for us (the map, the data pipeline, the matching tools) and what does not; the base and incremental rates; the deadline and ANI certification; whether it is in force for 2026 and to when.
+2. Whether it is worth claiming with almost no payroll.
 
-## 3. For each structure, cover
+## 5. Every other regime worth checking, each with: what it gives, the conditions, does it apply to us, what to do
+1. The SME rate on the first 50,000 € of taxable profit (CIRC art. 87(2)) and any startup or interior reduction.
+2. The simplified regime (CIRC art. 86-A) vs organised accounts.
+3. Derrama in the municipality of the seat (Porto vs Gondomar) and exemptions for new companies.
+4. DLRR (retained and reinvested profits, CFI) and the capitalisation incentive (ICE, CIRC art. 43-D).
+5. IRS Jovem for the founders, and how managers' pay vs dividends is taxed (IRS art. 72).
+6. Social security for unpaid managers (managers of record without pay).
+7. VAT: the regime from day one, the invoices to foreign sponsors (reverse charge), the small-business exemption (CIVA art. 53) and whether to waive it.
+8. Grants that pair with startup status (Portugal 2030 vouchers, Startup Portugal programmes), with the de minimis rule and linked undertakings (the founders' family companies).
 
-1. **Tax in the company:** IRC rate and the SME reduced rate on the first 50,000 € (CIRC art. 87); the simplified regime (art. 86-A) and when it beats the normal regime for a low-cost business; derrama (municipal surcharge) in Porto and Gondomar and any exemptions for new companies; IP box for registered software (CIRC art. 50-A, current percentage and conditions); SIFIDE II; startup status under Lei 21/2023 and what it gives.
-2. **Tax on distributions to each founder:** Portuguese residents (dividends, the 28% special rate or aggregation, IRS art. 72 and 22); the Luxembourg resident (Portuguese withholding, the Portugal–Luxembourg treaty, Luxembourg taxation of the dividend, LIR art. 115(15a)); and through a holding.
-3. **Tax on the exit:** share deal versus asset deal; gains for Portuguese-resident individuals (IRS art. 43 and 72); for the Luxembourg resident (LIR art. 99bis/100, substantial shareholding rules); for a holding (CIRC art. 51-C participation exemption); stamp duty; any IMT exposure (none expected, the company owns no real estate; confirm).
-4. **Running cost per year:** accountant, statutory auditor (CSC arts. 262 and 413), registry acts, Luxembourg costs if any.
-5. **Governance and the founders' agreement:** management, decisions requiring unanimity, transfer restrictions, pre-emption, tag-along and drag-along (for the sale), deadlock, leaver clauses, non-compete, how the agreement binds (CSC art. 17).
-6. **Ease of sale:** transfer formalities (CSC art. 228 for quotas; shares in an SA), what buyers prefer, how long each takes.
-7. **Transparency:** what the commercial register and the RCBE (Lei 89/2017) show and to whom, for each structure.
-8. **The related-party relationship** with the partner agency: transfer pricing (CIRC art. 63) and how to document arm's-length terms; the risk of being seen as a mediator (Lei 15/2013) and how the structure and contracts keep it clean.
-9. **De minimis and funds:** linked-undertaking rules for EU aid (the founder's family companies) and their effect on grants.
+## 6. The set-up, step by step
+1. Incorporation (Empresa na Hora / Empresa Online), the share capital, the seat, the CAE codes (platform and advertising, never real-estate mediation), the articles of association: the clauses to include.
+2. The order: incorporation → IP assignment and domain transfer → trademark filing → accountant → RCBE → bank → startup certification → first invoice.
+3. Who to hire (a contabilista certificado, an IP agent or lawyer for the filings), fair fee ranges, and what to ask them.
 
-## 4. The professional way to set it up
-
-1. The recommended structure now and the trigger for the next step (for example: holding when distributions exceed X, or a year before the sale).
-2. The sequence, step by step: founders' agreement terms, incorporation, capital, registered office, IP and domains into the company, accountant, RCBE, bank, invoicing.
-3. Who to hire and for what: a Portuguese corporate and tax lawyer (scope and a fair fee range), a contabilista certificado, a Luxembourg adviser if a Luxembourg holding is chosen; what to send them before the first meeting; the questions to ask.
-4. The documents to have signed before the first invoice.
-
-## 5. Report
-
-The memo and the table by Friday 6 November. One line on anything you could not verify. Rates and thresholds as they stand in 2026, each with its source and date.
+## 7. Report
+The memo and the table (regime · what it gives · do we qualify · cost/effort · do it now or later) by Fri 6 Nov. One line on anything you could not verify. Ship to design-v2 and main; no PDF over 8 pages, English only.
