@@ -1,5 +1,7 @@
 # Letter sponsors (prompt 54 §4), 2 Nov 2026
 
+> Superseded on 2 Nov 2026 by `sponsors/SPONSORS_V6_SUMMARY.md` (557 companies with Partnerships v6 tags).
+
 The full list is `sponsors/letter_sponsors.csv`: **344 real companies and public bodies**, **companies only**. Each row has:
 - category and country;
 - why the letter fits them;
