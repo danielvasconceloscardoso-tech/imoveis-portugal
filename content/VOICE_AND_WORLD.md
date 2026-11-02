@@ -67,3 +67,16 @@ One image, one name, one line, one number when it fits:
 5. Living people: public work and published reporting only, attributed; no private addresses, no implied endorsement, no photos of them without a licence.
 6. Brands and venues named for what they are, never as partners unless signed and labelled.
 7. Every fact sourced and dated in the file's front matter.
+
+## Ideas bank for the letter and social (operator, 2 Nov; keep using these)
+
+1. **Desire first, the how last** (D72): places, tables, art, wine, football, festas; the buying step in three lines at the end.
+2. **One letter for everyone** (D74), Tuesday and Friday; Tuesday a place and its story, Friday the weekend.
+3. **O desafio** (Morning Brew trivia): Tuesday asks, Friday answers with a two-line story and the share who got it right; themes: artists, football history, wine, Portuguese history, literature, food, festas.
+4. **"Qual é a sua região?"**: the quiz result card is the most shareable thing we make; every post and letter can end with "Qual é a sua?".
+5. **Roteiros**: "48 horas no Porto", "O Douro em 3 dias", "Comporta sem pressa", each ending at the homes in the region.
+6. **Rewards and referrals** (D78): "A lista" on signup; "Traga um amigo" counter in every letter footer; no events, no shipped gifts, no prize draws.
+7. **No score cards, no rankings** (D77): we show what is good about a place, never a number out of 100.
+8. **The five-star concierge**: the partners presented as "a sua equipa", calm and professional.
+9. **Social = the same voice**: one image, one place, one line; the source when there is a fact; the quiz and the letter as the call to action.
+
