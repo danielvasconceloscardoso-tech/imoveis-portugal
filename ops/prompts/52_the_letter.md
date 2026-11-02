@@ -37,6 +37,12 @@ We close people when they fall in love with Portugal, not when they understand I
 
 **The voice and the cast of people, places, art, golf, tables, football and festas live in `content/VOICE_AND_WORLD.md` (D73). The letter and the posts share it: one image of Portugal everywhere.**
 
+**O desafio (operator, 2 Nov), Morning Brew-style trivia in every letter:**
+- Tuesday asks one question with three or four answers; Friday gives the answer with a two-line story behind it and the share of readers who got it right (one-tap poll if the beehiiv plan allows it, otherwise a link that records the vote anonymously).
+- Themes rotate: artists (Vhils, Joana Vasconcelos, Paula Rego, Siza), football history (the clubs, the European cups, the Dragão, Eusébio, Ronaldo), wine (the Douro's demarcation, port, Madeira wine), Portuguese history (the discoveries, the 1755 earthquake, 25 de Abril), literature (Camões, Pessoa, Eça, Saramago), food, places, festas.
+- Facts checked at the source like everything else; the answer links to a place on the map or a story on the site when there is one.
+- A monthly leaderboard by first name only, for readers who opt in.
+
 **The order of every letter:**
 1. **O lugar** (the destaque): one place, one photograph or film still, the number on the image (€/m², 10-year change, later the index), a headline of at most eight words and 80–120 words that make the reader want to be there this weekend. "Ver no mapa →".
 2. **A casa:** one home worth looking at: a partner development with photos and what is available (labelled when it is a partner), or a house type in that place with what it costs. "Ver a casa →".

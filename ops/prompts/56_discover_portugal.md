@@ -14,9 +14,9 @@ CEO, 2 Nov 2026, 22:45. Operator: no score cards. The site, the letter and the p
 
 ## 2. Light gamification (premium, never childish)
 
-1. **O Passaporte:** a reader collects a stamp for each place they explore on the map or visit in real life (a QR at partner venues later). Ten stamps in a region unlock that region's guide; a full region unlocks a partner perk (a tasting at a quinta, a dinner, a round of golf), offered and paid for by the partner, labelled. Stamps stored on the device only, or in the reader's letter account with consent.
+1. **O Passaporte: dropped (operator, 2 Nov).** ~~a reader collects a stamp for each place they explore on the map or visit in real life (a QR at partner venues later). Ten stamps in a region unlock that region's guide; a full region unlocks a partner perk (a tasting at a quinta, a dinner, a round of golf), offered and paid for by the partner, labelled. Stamps stored on the device only, or in the reader's letter account with consent.~~ Remove the passport stamp from the quiz result screen.
 2. **"Qual é a sua região?"** (mockup: `design/quiz/quiz_mockup.html` and `Qual_e_a_sua_regiao.png`; build to it): a six-question quiz (morning person or night owl, sea or mountains, wine or surf, city or village, budget, who comes with you) that ends with a region, its five best things and the homes listed there. Shareable result card.
-3. **O desafio da semana** in the letter: a photo of a place, guess where it is; answers revealed next letter; the best guessers named by first name only with consent.
+3. **O desafio** moves to the letter (operator, 2 Nov; prompt 52): see there. Not on the site.
 4. **Roteiros:** "48 horas no Porto", "O Douro em 3 dias", "Comporta sem pressa": a route on the map, stop by stop, ending at the homes in the region.
 
 ### The quiz, in detail
@@ -36,5 +36,5 @@ CEO, 2 Nov 2026, 22:45. Operator: no score cards. The site, the letter and the p
 ## 4. Scope and shipping
 
 1. Portuguese first. EN and FR only after the operator approves the PT version (rule 15).
-2. Build in this order, each live per D67: §0, §1 (three layers first: Comer, Vinho, Arte), the region view, §2.2 the quiz, §2.4 two roteiros, §3, then the Passaporte.
+2. Build in this order, each live per D67: §0, §1 (three layers first: Comer, Vinho, Arte), the region view, §2.2 the quiz, §2.4 two roteiros, §3.
 3. Report after each step: the commit hash, "live", one line. No PDFs.
