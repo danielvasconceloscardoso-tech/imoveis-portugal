@@ -199,6 +199,8 @@ Status: To do · Doing · Blocked · Done
 | 61a | Decide: market entrants with exclusive lanes (Revolut, Trade Republic, BYD) or Montepio and the other banks together, non-exclusive (D80) | Operator | open | 2026-11-09 |
 | 61b | Sales kit for brother and father: one PT page per category, demo link, booking form and contract at the new prices, pipeline by priority (D80) | CTO | open | 2026-11-09 |
 
+| 62a | Developer packages with the funds pack (D81): tiers, prices, contents, refresh cycle; GDPR check on selling named fund contacts (arts. 6(1)(f), 14) vs company-level data plus introductions | CTO + Operator | open | 2026-11-09 |
+
 ## Last session
 
 2026-11-01 (CTO, prompt 51): the 26 funded companies behind the 27 records were studied as products (ops/learn/, ops/LEARN_FROM_FUNDED.pdf, 5 pages, no company contacted); 9 have a usable public product, 8 left nothing. Shipped live per D67, each with a green Cloudflare build: the cookie-free event counter and partner analytics (funnel, countries, advisor reply time in /sponsor-report; private partner dashboards /p/{token}/), the internal weekly dashboard /i/{token}/ with the automatic block in ops/METRICS.md (workflow waits for the operator's Cloudflare keys, task 51a), the empty and seasonal homes map layer (INE Census 2021) and the honest trust strip (AMI 13250 verified in IMPIC). The worker, DNS and wrangler routes are untouched.
