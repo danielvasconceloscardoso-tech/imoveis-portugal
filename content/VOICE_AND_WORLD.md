@@ -20,23 +20,36 @@ Every name below is a door into a story: who they are, what they made, where to 
 8. **Football and sport:** FC Porto and the Dragão, Benfica and the Luz, Sporting and Alvalade, the derbies, Ronaldo and Funchal; surf at Nazaré and Ericeira; padel; sailing in Cascais.
 9. **Traditions and festas:** São João (Porto), Santos Populares (Lisbon), Senhora d'Agonia (Viana), cante alentejano, the sete saias of Nazaré, Carnaval in Torres Vedras and Ovar, São Martinho, the Christmas bolo-rei, New Year in Funchal, Festa da Flor (Madeira).
 10. **Events worth flying for:** Web Summit (Lisbon), NOS Alive and Primavera Sound (Porto), the Estoril Open, the Algarve golf opens, the Lisbon Book Fair, the art fairs (ARCOlisboa).
-11. **To confirm with the operator:** "killa was here" (who or what is meant).
+11. **Street art in Porto:** Killa Was Here (Porto-based artist; check the artist's own published work and murals before writing), alongside Vhils and Bordalo II.
 
-## How it looks in a letter
+## Patterns that read as AI (banned outright; the operator spots them instantly)
 
-> **Vhils não pinta paredes. Tira-lhes camadas.**
-> Alexandre Farto pega num berbequim e num retrato e escava a parede até a cara aparecer. Começou no Seixal, agora há rostos dele de Hong Kong a Los Angeles. Em Lisboa há dezenas: comece na Rua de São Lázaro e acabe no Marvila.
-> **Depois.** Almoço no JNcQUOI Asia, que fica a cinco minutos e onde ninguém vai pela comida asiática. Vai-se pela sala.
+- The contrast flip: "X não é Y. É Z." / "Não pinta. Escava." / "Not a museum, a garden."
+- The demotion punchline: "O museu é bónus." / "A comida é o menos." / "Ninguém vai pela comida."
+- The reassurance kicker: "Ninguém lhe pede para gostar de arte." / "Ninguém se queixa."
+- The one-word or two-word mic-drop line: "Depois." "Simples." "Literalmente."
+- Superlative headlines without a source: "o melhor jardim de Lisboa".
+- Triplets and lists of three for rhythm. Rhetorical questions. Ending a paragraph on a quip every time.
+- Explaining the joke, or a joke in every paragraph.
 
-> **A Gulbenkian é o melhor jardim de Lisboa. O museu é bónus.**
-> Um arménio que fez fortuna em petróleo chegou a Lisboa em 1942, ficou até morrer e deixou tudo à cidade: Lalique, Rembrandt, Monet, e um jardim onde os lisboetas almoçam ao sol. Entrada no jardim: grátis. Ninguém lhe pede para gostar de arte.
+**What to do instead:** write like a good columnist reporting something specific: a fact the reader didn't know, the name, the date, the detail, said plainly. The headline is news or a concrete angle, not an epigram. Wit comes from the facts themselves, at most once per letter.
+
+## How it looks in a letter (register examples; facts to verify)
+
+> **Killa Was Here, o artista do Porto que anda a assinar a cidade**
+> Quem anda pela Baixa já viu o nome, mesmo sem saber de quem é. [Dois factos verificados sobre o percurso e as obras, com a fonte.] A próxima peça [onde e quando, se publicado].
+> Para ver: [rua ou mural], a dez minutos dos Aliados.
+
+> **A coleção de Calouste Gulbenkian veio para Lisboa por causa da guerra**
+> Gulbenkian chegou a Lisboa em 1942, a meio da Segunda Guerra, e ficou até morrer, em 1955. Deixou a coleção ao país: mais de seis mil peças [confirmar], do Egito antigo a Lalique. A fundação abriu o museu em 1969, na Avenida de Berna, rodeado pelo jardim desenhado por Ribeiro Telles e Viana Barreto [confirmar].
+> Para ver: o núcleo de Lalique, que pouca gente sabe que é dos maiores do mundo [confirmar].
 
 ## How it looks in a post (prompt 46)
 
 One image, one name, one line, one number when it fits:
-- Image: a Vhils face in Lisbon. Caption: "Vhils não pinta. Escava. Há mais de 20 dele em Lisboa [confirm]. Mapa na bio."
-- Image: the 18th green at Monte Rei. Caption: "Jack Nicklaus desenhou-o [confirm]. Os green fees estão longe de Augusta. A casa no fairway, mais perto do que pensa."
-- Image: Joana Vasconcelos's piece at the Gulbenkian or MAAT [confirm current]. Caption: "Lisboa tem arte que não cabe em museus. Literalmente."
+- Image: a Vhils face in Lisbon. Caption: "Vhils, Rua de São Lázaro, Lisboa. Escavado à mão na parede em [ano]. Mais obras dele no mapa, link na bio."
+- Image: the 18th green at Monte Rei. Caption: "Monte Rei, Vila Nova de Cacela. Campo desenhado por Jack Nicklaus [confirm], aberto em [ano]."
+- Image: a Joana Vasconcelos piece on public view [confirm current]. Caption: "Joana Vasconcelos, [obra], [local]. [Um facto concreto: tamanho, material ou onde já esteve.]"
 
 ## Rules for every piece
 
