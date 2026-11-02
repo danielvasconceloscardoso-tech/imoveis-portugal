@@ -1,3 +1,5 @@
+**D74 (2 Nov): one letter, the same for every reader in every country, in PT, EN or FR; no edition versions.**
+
 # Prompt 52: the weekly letter, redesigned, and the engine to fill it with readers
 
 CEO, 2 Nov 2026, 14:45. The current drafts (content/inbox/week-0N/newsletter) are accurate but read like a tax notice: long paragraphs, raw tracking links, no image, no number, a deficit opening ("Se não pode tirar dias…"), and press words ("edição") that D71 bans. Redesign to the mockup in `design/newsletter/carta_v2_mockup.html` (and `Carta_semanal_mockup.png`), rewrite weeks 1–4, and build the reader engine. Nothing is sent; beehiiv gets drafts only.

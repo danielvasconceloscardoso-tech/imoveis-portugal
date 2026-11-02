@@ -23,11 +23,11 @@ Cover, at minimum:
 
 ## 2. The calendar (`content/letter/CALENDAR_DEC26_MAY27.md`)
 
-52 slots, Tuesday and Friday. Tuesday: a place and its story (with "A casa" from the map or a partner). Friday: the weekend (a table, an exhibition, a match, a festa, an event). Built around real dates: São Martinho is gone, so start with Christmas lights, Madeira New Year, Nazaré big-wave season, Carnaval (Torres Vedras, Ovar), almond blossom in the Algarve, Easter, the Estoril Open, the start of the Santos Populares season. Balance across the six editions' interests (the Luxembourg and French editions lean North and Minho; the Swiss to Lisbon and the Algarve; Brazil to Lisbon, Porto, Madeira; the US to Lisbon, Comporta, the Algarve, golf; Israel to Lisbon, Porto, the beaches).
+52 slots, Tuesday and Friday. Tuesday: a place and its story (with "A casa" from the map or a partner). Friday: the weekend (a table, an exhibition, a match, a festa, an event). Built around real dates: São Martinho is gone, so start with Christmas lights, Madeira New Year, Nazaré big-wave season, Carnaval (Torres Vedras, Ovar), almond blossom in the Algarve, Easter, the Estoril Open, the start of the Santos Populares season. **One letter for everyone (operator, 2 Nov, D74):** the same content for every reader, whether in Luxembourg, France, Switzerland, Brazil, the US or Israel, sent in the reader's language (PT, EN, FR). Balance the year across Portugal, not across countries.
 
 ## 3. The 52 letters
 
-1. Full letters in PT-PT for the Luxembourg edition first (the operator reviews these), then adapted for the other five editions and languages (EN, FR; pt-BR register for Brazil) with edition-specific details (flight times from that edition's airport, the communities, the sections of interest).
+1. One letter per slot, written in PT-PT first (the operator reviews these), then the same letter in EN and FR. No edition-specific versions; nothing that assumes where the reader lives (say "de onde estiver", not "do Luxemburgo").
 2. Each letter: the destaque with its photo and number, A casa, Este mês or the weekend item, O número, the partner slot, Como lá chegar (three lines, positive), A sua pergunta.
 3. Run every draft through a checker that fails on the banned patterns of VOICE_AND_WORLD (contrast flip, demotion punchline, kicker, mic-drop, unsourced superlative, banned words, triplets), on sentences over 25 words, and on any fact without a source.
 4. Deliver as `content/letter/2026-12-01_lu-pt.md` etc., plus a contact sheet PDF per month.
@@ -42,8 +42,8 @@ Cover, at minimum:
 ## 5. The monetization plan (`sponsors/LETTER_PLAN.md` + PDF, at most 4 pages)
 
 Write it from the CEO's structure:
-1. **Inventory:** 52 letters × 6 editions = 312 partner slots in six months, plus 12 "Apresentado por" quarters (6 editions × 2 quarters), plus series and weekend sponsorships.
-2. **Founding prices** (until 1,000 subscribers in an edition): partner slot 600 €/month per edition (8 letters), 1,500 €/month all six; "Apresentado por" 4,500 €/quarter per edition; series of 6 letters 2,500 € across editions; Friday weekend item 400 € per letter all editions. Founding −40% for the first ten. Then CPM 40–60 € per 1,000 subscribers per letter, reviewed quarterly. (Final numbers: the operator, task 45b.)
+1. **Inventory (one letter for everyone, D74):** in six months, 52 partner blocks, 26 Friday weekend items, 6 monthly "Apresentado por" and 4 to 6 themed series.
+2. **List prices until 10,000 subscribers** (the Founding Partner −40% for the first ten applies on top): partner block 250 € per letter or 1,500 € a month (eight letters, category exclusive); "Apresentado por" 4,000 € a month; a six-letter series 2,500 €; Friday weekend item 400 € per letter. Then per reader: 60 € per 1,000 subscribers per letter for the block, ×2.5 for "Apresentado por", reviewed every quarter. (Final numbers: the operator, task 45b.)
 3. **Who to sell to first, by calendar fit:** banks' non-resident units for December–January (the year-end decision season), Algarve golf resorts for the golf weeks, developers for their launches, Madeira hotels for New Year, insurers and currency transfer all year.
 4. **Packaging:** sell calendars, not slots (a sponsor buys "the six Algarve letters"); bundle the letter with the social extension and the site placement; exclusivity per category per edition at +50%.
 5. **Proof without audience yet:** the prototypes, the open and click benchmarks of the category (cite public industry figures), the monthly report they will get, the subscriber growth plan; the founding price as the risk discount.
