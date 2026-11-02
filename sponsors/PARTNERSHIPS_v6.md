@@ -29,23 +29,29 @@
    - transport at our events (the golf day, the Douro dinner).
    Fit: BYD and the new Chinese brands (building awareness), Tesla, Porsche, BMW, Mercedes, Volvo; leasing and renting companies (Ayvens, Arval) for those who don't want to buy yet.
 
-## Price anchors (to be confirmed with public spend data, task 56a)
+## Price anchors (task 56a, 2 Nov 2026: reset to public spend; sponsors/BUDGETS_56a.pdf)
 
-| Category | Official Partner, 12 months | Partner | Featured |
-| --- | --- | --- | --- |
-| Banking (traditional, non-resident units) | 120,000–200,000 € | 40,000 € | 12,000 € |
-| Private banking | 100,000–150,000 € | 35,000 € | 12,000 € |
-| Digital banking and investing (Revolut, Trade Republic…) | 80,000–150,000 € | 30,000 € | 10,000 € |
-| Airline | 100,000–200,000 € | 40,000 € | — |
-| Health (hospital group) | 60,000–100,000 € | 25,000 € | 6,000 € per hospital |
-| Education (schools), per region and curriculum | 20,000–40,000 € | 10,000 € | 6,000 € per school |
-| Higher education | 40,000–80,000 € | 20,000 € | 8,000 € |
-| Insurance | 80,000–120,000 € | 30,000 € | 10,000 € |
-| Wine (house or region) | 50,000–100,000 € | 20,000 € | 6,000 € |
-| Mobility (cars, leasing) | 80,000–150,000 € | 30,000 € | 8,000 € per dealer group |
-| Home setup (retail) | 80,000–150,000 € | 30,000 € | 8,000 € |
-| Energy, telecoms, luxury | 60,000–150,000 € | 25,000 € | 8,000 € |
-| Portugal 100 Presenting Partner | 150,000–250,000 € | — | — |
+Rule (CEO to approve): **Official Partner = 1% of the median advertising line (Portugal scope) of the sourced companies in the category**, rounded to 5,000 €. Partner = 30%, Featured = 10%. The advertising lines come from the 2025 annual reports (sponsors/research/spend_A.md, spend_B.md). They are a floor: sponsorship budgets sit outside them.
+
+| Category | Public spend it rests on | Official Partner, 12 months | Partner | Featured |
+| --- | --- | --- | --- | --- |
+| Banking (traditional, non-resident units) | CGD 13.5 M€, novobanco 8.6 M€, Millennium bcp 7.4 M€, Santander Totta 6.2 M€ (median 8.0 M€) | **80,000 €** | 24,000 € | 8,000 € |
+| Mortgage | the same banks (they are the lenders) | **80,000 €** | 24,000 € | 8,000 € |
+| Insurance (home, health, life) | Fidelidade 13.5 M€ | **135,000 €** | 40,000 € | 15,000 € |
+| Health (hospital group) | CUF 4.3 M€, Luz Saúde 1.8 M€ (2023) | **30,000 €** | 10,000 € | 3,000 € per hospital |
+| Airline | TAP 28.9 M€ | **290,000 €** | 85,000 € | — |
+| Telecoms | NOS 40.2 M€ | **400,000 €** | 120,000 € | 40,000 € |
+| Private banking | no public figure found | 100,000–150,000 € (v6, unsourced) | 35,000 € | 12,000 € |
+| Digital banking and investing | no public figure found | 80,000–150,000 € (v6, unsourced) | 30,000 € | 10,000 € |
+| Education (schools), per region and curriculum | no public figure found | 20,000–40,000 € (v6, unsourced) | 10,000 € | 6,000 € per school |
+| Higher education | no public figure found | 40,000–80,000 € (v6, unsourced) | 20,000 € | 8,000 € |
+| Wine (house or region) | private houses, not published | 50,000–100,000 € (v6, unsourced) | 20,000 € | 6,000 € |
+| Mobility (cars, leasing) | not found | 80,000–150,000 € (v6, unsourced) | 30,000 € | 8,000 € per dealer group |
+| Home setup (retail) | Jerónimo Martins group 179 M€, Portugal not broken out | 80,000–150,000 € (v6, unsourced) | 30,000 € | 8,000 € |
+| Energy, luxury, hotels, golf, spirits and coffee | not found | 60,000–150,000 € (v6, unsourced) | 25,000 € | 8,000 € |
+| Portugal 100 Presenting Partner | no comparable figure | 150,000–250,000 € (v6, unsourced) | — | — |
+
+Market: digital advertising in Portugal 612 M€ in 2025 (IAB Europe AdEx, via ECO); total market forecast above 900 M€ (IPG/Magna). MediaMonitor rankings are at rate card (about 10× real spend) and are used to rank, never to price.
 
 ## How they buy (so the price can be met)
 
@@ -57,4 +63,4 @@
 
 ## What a year adds up to
 
-Five Official founding partners at the low end of their ranges, after −40%: about 300,000 €. Plus the Portugal 100 presenting partner and the developers.
+Five Official founding partners in the five sourced categories (banking 80,000 €, insurance 135,000 €, health 30,000 €, airline 290,000 €, telecoms 400,000 €: 935,000 € at list), after −40%: about 561,000 €. Without telecoms and the airline (the two least likely to sign first): about 147,000 €. Plus the Portugal 100 presenting partner and the developers.
