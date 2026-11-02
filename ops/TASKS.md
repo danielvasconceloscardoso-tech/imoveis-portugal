@@ -199,7 +199,7 @@ Status: To do · Doing · Blocked · Done
 | 61a | Decide: market entrants with exclusive lanes (Revolut, Trade Republic, BYD) or Montepio and the other banks together, non-exclusive (D80) | Operator | open | 2026-11-09 |
 | 61b | Sales kit for brother and father: one PT page per category, demo link, booking form and contract at the new prices, pipeline by priority (D80) | CTO | open | 2026-11-09 |
 
-| 62a | Developer packages with the funds pack (D81): tiers, prices, contents, refresh cycle; GDPR check on selling named fund contacts (arts. 6(1)(f), 14) vs company-level data plus introductions | CTO + Operator | open | 2026-11-09 |
+| 62a | PARKED (later stage): developer packages with the funds pack (D81): tiers, prices, contents, refresh cycle; GDPR check on selling named fund contacts (arts. 6(1)(f), 14) vs company-level data plus introductions | CTO + Operator | parked | later |
 
 ## Last session
 
