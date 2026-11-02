@@ -1,3 +1,5 @@
+**PARKED (operator, 2 Nov): the request was the legal structuring, see prompt 58. Do not run.**
+
 # Prompt 58: competitors and likely buyers, and how to approach them (due Fri 6 Nov 2026)
 
 CEO, 2 Nov 2026, 23:00. Operator's request: a competitive analysis of the companies that compete with us today and those likely to buy us (D76: exit above 1 M€), and the most professional way to approach them. **One document, English, at most 8 pages, plus one CSV** (rule 15). Due Friday 6 November, end of day.
