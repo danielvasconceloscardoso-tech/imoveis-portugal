@@ -8,10 +8,12 @@ CEO, 2 Nov 2026, 23:59. Sales are done by the operator's brother and father (D80
 3. Each row: company, category, priority, person (if public), role, generic or professional e-mail, phone, source link, date checked. Prefer role addresses (marketing@, comercial@) when no named contact is published.
 4. B2B e-mails under Lei 41/2004 art. 13-A(3): opt-out in every message; GDPR art. 14 notice in the first message (who we are, why we have the contact, how to object). Task 45c (confirm with the operator) still applies.
 
-## 1. Developers (target: 20 buildings of 40–50 units)
+## 1. Developers: top tier only (operator, 2 Nov: "that's our segment"; target 20 buildings of 40–50 units)
+**Top tier means:** premium and luxury residential (price per m² in the top quartile of its municipality, INE), architect-led or branded residences, a track record of completed projects, buyers from abroad already in their sales mix. No entry-level or volume housebuilders.
+Start from names such as Vanguard Properties, Avenue, Stone Capital, Kronos Homes, VIC Properties, Habitat Invest, JPS Group, Libertas, Mexto, Fortera and the premium arms of the large builders (verify each, add the ones the research finds, drop any that do not fit).
 1. Sources: building permits and licensed projects published by the Câmaras (Porto, Gondomar, Matosinhos, Maia, Vila Nova de Gaia, Valongo, then Lisboa, Cascais, Oeiras, Algarve); new-development listings on the portals (company names only); APPII members; trade press (Vida Imobiliária, Idealista News, Jornal Económico Imobiliário); developers' own sites.
 2. Keep: residential projects with 40+ units, launching or selling in 2026–2027. For each: developer, project, municipality, units, stage, sales contact.
-3. Rank: Porto and Gondomar first (where the partner group knows the market), then the rest of Norte, then Lisboa/Cascais.
+3. Rank by fit (top tier, units available, foreign buyers), then geography: Porto and Norte, Lisboa and Cascais, Comporta and the Algarve, Madeira.
 
 ## 2. Sponsors (priority list in this order)
 1. Digital banks and brokers: Revolut, Trade Republic (country or Iberia marketing and partnerships leads).
