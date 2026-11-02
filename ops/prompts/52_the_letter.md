@@ -33,6 +33,8 @@ We close people when they fall in love with Portugal, not when they understand I
 - **Famous people only from published reporting, attributed in the text** ("segundo a imprensa britânica", "segundo o Financial Times"), never as our own claim, never rumour as fact, never private addresses, and nothing that implies endorsement.
 - Reference drafts: `content/letter/drafts/10_rascunhos_v2_lu-pt.md` (the operator's review sets the final rules).
 
+**The voice and the cast of people, places, art, golf, tables, football and festas live in `content/VOICE_AND_WORLD.md` (D73). The letter and the posts share it: one image of Portugal everywhere.**
+
 **The order of every letter:**
 1. **O lugar** (the destaque): one place, one photograph or film still, the number on the image (€/m², 10-year change, later the index), a headline of at most eight words and 80–120 words that make the reader want to be there this weekend. "Ver no mapa →".
 2. **A casa:** one home worth looking at: a partner development with photos and what is available (labelled when it is a partner), or a house type in that place with what it costs. "Ver a casa →".

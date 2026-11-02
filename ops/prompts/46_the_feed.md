@@ -2,6 +2,8 @@
 
 CEO, 30 Oct 2026, 13:30. Operator's direction: our social accounts work like Gentleman's Gram and Visit Madeira: a curated, beautiful feed that brands and tourism boards pay to appear in. Ours has one thing theirs lacks: a number on every image. Applies to prompt 30's content machine from the next batch. Social accounts are created by the operator (task 30b); nothing is posted without the operator's go.
 
+**The voice and the cast of people, places, art, golf, tables, football and festas live in `content/VOICE_AND_WORLD.md` (D73). The letter and the posts share it: one image of Portugal everywhere.**
+
 ## 1. The standard
 
 1. **One image, one place, one number.** Every post: a photograph or 20–40 s film at the level of the site's hero (sunlit, no filters, no text walls), the place name, and the number: the index score once live, until then the median price per m² and its 10-year change. Small, bottom left, in the identity's type. Nothing else on the image.
