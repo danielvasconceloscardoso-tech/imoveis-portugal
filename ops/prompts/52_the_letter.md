@@ -2,18 +2,29 @@
 
 CEO, 2 Nov 2026, 14:45. The current drafts (content/inbox/week-0N/newsletter) are accurate but read like a tax notice: long paragraphs, raw tracking links, no image, no number, a deficit opening ("Se não pode tirar dias…"), and press words ("edição") that D71 bans. Redesign to the mockup in `design/newsletter/carta_v2_mockup.html` (and `Carta_semanal_mockup.png`), rewrite weeks 1–4, and build the reader engine. Nothing is sent; beehiiv gets drafts only.
 
-## 1. The format ("A carta", one per edition, Thursday 08:00 local)
+## 1. The voice and the order: desire first, the how last (operator, 2 Nov; D72)
 
-Inspiration: Monocle's daily brief (calm, one city, one idea), Wine Spectator's newsletter (the score as the hook), Axios Smart Brevity (one line says why it matters), Morning Brew (a voice people forward). Ours is read in under three minutes.
+We close people when they fall in love with Portugal, not when they understand IMT. The letter sells the life: the places, the houses, the sea, the table, the parties. The practical part comes last, short, as the answer to "how do I get there".
 
-1. **Header:** the brand, the edition and the date ("Luxemburgo · Carta de 3 dez"). Never "edição", "n.º", "jornal".
-2. **Destaque da semana:** one full-width photograph (hero grade, licensed) with **the number** on it, bottom left, over a soft dark gradient (place · €/m² · 10-year change; the index score once live). A headline of at most 10 words, positive. Two sentences. One link: "Ler em 3 minutos →".
-3. **O número da semana:** one large number (Playfair, 64 px) and one sentence on why it matters, plus a link to the matching simulator. Every number sourced; nothing that depends on a pending legal check (30d) until it clears.
-4. **Concelho da semana:** a photo, the index score, the place, the one-line reason, "Com {budget} compra {m²}" for the edition's typical budget, "Ver no mapa →".
-5. **Parceiro · Patrocinado:** one labelled partner block per letter (Código da Publicidade art. 8), visually distinct (warm grey panel), headline, two lines, one link. Empty slot = a house ad for the Concierge.
-6. **A sua pergunta:** one line inviting a reply; the best reply opens the next letter.
-7. **Footer:** disclaimer in one line, sources with dates, unsubscribe (beehiiv), the brand only.
-8. Links are words with an arrow, never raw URLs; UTM parameters stay inside the links.
+**The voice:** Cigar Aficionado (the pleasure, told by someone who knows), Hodinkee (detail and craft, the story behind the object, real expertise worn lightly), Morning Brew (a friend who writes well, quick, a little wit, never cute). Concretely:
+- Write about a real place, a real house, a real afternoon: the light in Comporta at 7 p.m., the tasca in Gondomar that opens at noon, the levada in Madeira, the Douro at harvest, Lisbon on the night of Santo António, New Year's fireworks over Funchal bay.
+- Details over adjectives: the name of the beach, the wine in the glass, the minutes to the airport, the price of lunch. Never "stunning", "breathtaking", "hidden gem", "paradise", "nestled", "boasts", "luxury".
+- One small piece of wit per letter, in the framing, never in the numbers.
+- Short sentences. Second person. A human signs off (the brand, not a name).
+- Every fact still sourced (D12); the beauty is true, so it needs no superlatives.
+
+**The order of every letter:**
+1. **O lugar** (the destaque): one place, one photograph or film still, the number on the image (€/m², 10-year change, later the index), a headline of at most eight words and 80–120 words that make the reader want to be there this weekend. "Ver no mapa →".
+2. **A casa:** one home worth looking at: a partner development with photos and what is available (labelled when it is a partner), or a house type in that place with what it costs. "Ver a casa →".
+3. **O que fazer este mês:** three lines: a festa, a restaurant, a beach, a golf course, a wine harvest, an event in the next four weeks, wherever it is in Portugal.
+4. **O número:** one number about life (sunshine hours, sea temperature in October, the flight time from the edition's airport, the price of a coffee and a pastel de nata) or about the market. Big, sourced.
+5. **Parceiro · Patrocinado:** one labelled partner block.
+6. **Como lá chegar** (last, three lines max): one practical step of the buying path, positive ("Pode comprar sem ir a Portugal: o NIF pede-se online.") and a link to Passo a passo. Never a tax lecture.
+7. **A sua pergunta:** reply, a person reads it.
+
+Header: brand, edition, date ("Luxemburgo · Carta de 3 dez"); never "edição", "n.º", "jornal". Links are words with an arrow; UTMs inside.
+
+**The calendar of desire** (`content/letter/CALENDAR.md`): plan the 12 weeks around what Portugal is doing that week: São Martinho and magusto (11 Nov), the Christmas lights in Porto and Lisbon, Madeira's New Year (fireworks over Funchal), January surf at Nazaré, Carnaval in Ovar and Torres Vedras, almond blossom in the Algarve (February), Easter, the Santos Populares (June), August in the aldeias, harvest in the Douro (September). Each week's place is chosen from it, in all six editions, with the same photo standard as the feed (prompt 46).
 
 ## 2. Design
 
@@ -24,7 +35,7 @@ Inspiration: Monocle's daily brief (calm, one city, one idea), Wine Spectator's 
 
 ## 3. Rewrite weeks 1–4
 
-All six editions, PT, EN, FR (and the pillar topics already planned). Positive framing (EDITORIAL_POLICY rule 10), B1 plain language, no AI tells, every figure sourced, the three welcome emails rebuilt in the same design. Contact sheet PDF of all 4 weeks for the operator.
+All six editions, PT, EN, FR, in the new voice and order. The pillar topics (NIF, total cost, signing from abroad, budget) move to "Como lá chegar" and to the site; the letters lead with places: week 1 Comporta, week 2 the Porto Christmas lights and the Douro, week 3 Madeira and New Year, week 4 the Algarve in winter (adjust to the calendar). The three welcome emails rebuilt the same way: 1) the place that makes people fall for Portugal, 2) a house and what it costs, 3) the way there, made simple. No AI tells, every figure sourced. Contact sheet PDF of all 4 weeks for the operator.
 
 ## 4. The reader engine (target: 10,000 subscribers across editions in 12 months)
 

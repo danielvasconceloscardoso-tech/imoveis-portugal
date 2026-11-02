@@ -38,3 +38,4 @@ We compile reliable information that already exists online, is easy to verify, a
 **FR :** Contenu sponsorisé par [Partenaire]. Les avis et recommandations relèvent de la responsabilité du partenaire.
 **PT-BR:** Conteúdo patrocinado por [Parceiro]. As opiniões e recomendações são de responsabilidade do parceiro.
 **EN:** Sponsored by [Partner]. Views and recommendations are the partner's own.
+11. **Desire first, the how last** (D72, 2 Nov 2026). The letter, the feed and the editions' homes lead with Portugal itself (places, houses, the sea, the table, the festas) and close with one practical step. Voice: Cigar Aficionado, Hodinkee, Morning Brew: details over adjectives, a little wit, no superlatives. Bureaucracy and tax live on the site, in Passo a passo and the articles, not at the top of anything.
