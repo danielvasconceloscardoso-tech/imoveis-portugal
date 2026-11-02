@@ -29,8 +29,13 @@ Study, with sources (annual reports, funding rounds, interviews, pricing pages):
 ## 4. Legal frame (cite articles)
 1. GDPR: aggregate and anonymise; consent wording and purpose for analytics and product use (arts. 5, 6, 7, 13, 89; Recital 26); never sell personal data or per-lead (D6).
 2. Lead data specifically: consent per partner (art. 7), joint controllership with partners (art. 26), retention; the line between advertising and acting as a credit intermediary (DL 81-C/2017), insurance distributor (Lei 7/2019) or real-estate mediator (Lei 15/2013) when we pass a buyer to a bank, insurer or the agency.
-3. Database right and contracts (DL 122/2000), INE and official data licences, OSM ODbL share-alike.
-4. Link with prompt 58: software licence income and the IP box (CIRC art. 50-A); registering the software.
+3. **The licensed route (operator, 2 Nov):** the partner group holds a credit-intermediary registration with Banco de Portugal and a real-estate mediation licence (IMPIC). Leads that need a mortgage or a mediator can go through it, and it can earn the intermediary commission that we cannot. Analyse, with articles:
+   - what the group may earn from banks and sellers, and how our platform is paid without a per-lead fee (flat sponsorship at arm's length, CIRC art. 63; D6);
+   - the disclosure duties to the buyer (the intermediary's identity and status, its ties with lenders, its pay) under DL 81-C/2017, and the consent naming it (GDPR art. 7);
+   - what must be disclosed to the banks about the link between the platform and the intermediary (conflicts, tied/independent status, the banks' own partner due diligence), and the risk if it is not;
+   - how far founder anonymity (hard rule 1) can go while meeting those duties: what is public (registers, RCBE) and what the brand and the site need not show.
+4. Database right and contracts (DL 122/2000), INE and official data licences, OSM ODbL share-alike.
+5. Link with prompt 58: software licence income and the IP box (CIRC art. 50-A); registering the software.
 
 ## 5. What the website must change now
 1. The events to capture, cookie-free and consent-based (a first-party event schema, stored without personal data in the repo).
