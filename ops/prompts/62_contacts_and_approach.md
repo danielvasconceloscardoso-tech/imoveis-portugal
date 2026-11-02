@@ -31,14 +31,16 @@ CEO, 2 Nov 2026, 23:59. Sales are done by the operator's brother and father (D80
 4. The founding offer: first 10 partners −40% in year 1, price locked for year 2, paid upfront for 12 or 6 months (D79).
 5. Never present the platform as a press outlet (D71) or as a mediator; never promise leads or results.
 
-## 3b. The quality bar (operator, 3 Nov): top tier, no AI slop, built to impress a salesman with more than 100 M€ in career sales
-The reader is the operator's father: he has sold property for decades. He will judge it in two minutes. Write for him.
-1. **Talk like a seller, not a marketer.** Open on the developer's problem: selling units to buyers abroad, the time and the cost of reaching them. Numbers, names, terms. No adjectives, no "solução", "ecossistema", "sinergias", "inovador", "premium", "exclusivo", none of the patterns banned in content/VOICE_AND_WORLD.md.
-2. **One page per category, A4, printable,** in the site's design (ivory, Playfair Display headings, Manrope text, the green for labels only). Each page: who the reader is; what the partner gets, concretely; price and terms; the founding offer with its deadline; what happens after they sign (week by week).
-3. **A personalised one-pager for each of the first five top-tier developers, starting with Shalu Investments:** their project on our map (screenshot), how it appears in the Concierge and in a letter, what it costs per unit next to what a sales campaign abroad costs them, and the next step. Public facts about the project only, each with its source.
-4. **The objection sheet:** the eight objections a developer or a bank will raise ("já temos agências", "quantos subscritores têm?", "porque pagar antes de ver resultados?", "o que vos distingue do Idealista?", "quem está por trás?", "e se não vender?", "podemos fazer um piloto?", "preço") with a two-line answer each, true and checkable. Never promise leads, sales or results.
-5. **The contract:** two pages, plain Portuguese, our standard terms (scope, price, payment upfront, 12 or 6 months, labelling, no exclusivity unless bought, termination, GDPR roles).
-6. **Ship one developer kit (Shalu) and one sponsor kit first,** as PDFs to the operator. The operator and his father review; the rest only after their go (rule 15).
+## 3b. The approach and the quality bar (operator, 3 Nov): smooth, optimistic, never forced
+The reader is the operator's father, a salesman with more than 100 M€ in career sales. Smooth operators are the best: we bring people something good and let them want in.
+1. **Bring something before asking for anything.** The first contact is a gift, not a pitch: their project already presented beautifully on our map, a short story about their building or its neighbourhood written in the letter's voice, a photo or a fact about the place they will enjoy. "Fizemos isto sobre o vosso projeto, gostávamos que vissem."
+2. **Optimistic and warm.** Talk about the places, the buyers coming from abroad, what is good about their project and their region. Never their problem, never pressure, never urgency tricks. The founding offer is mentioned once, calmly, as an invitation.
+3. **Quality is the argument.** Premium design (ivory, Playfair Display, Manrope), real photographs, facts with sources, short sentences. No marketing words ("solução", "ecossistema", "sinergias", "inovador"), none of the patterns banned in content/VOICE_AND_WORLD.md.
+4. **One page per category, A4,** that reads like an invitation: what we are, the people we reach, how their name appears with us, what they receive, and the terms at the end, simply stated.
+5. **A personalised one-pager for each of the first five top-tier developers, starting with Shalu Investments:** their project on our map, in the Concierge and in a letter; public facts only, each sourced.
+6. **"Perguntas que nos fazem":** calm two-line answers to the questions a developer or a bank will ask (subscribers, who is behind it, how it differs from a portal, pilots, price). True and checkable; never promise leads, sales or results.
+7. **The contract:** two pages, plain Portuguese.
+8. **Ship the Shalu kit and one sponsor kit first,** as PDFs to the operator. The operator and his father review; the rest only after their go (rule 15).
 
 ## 4. Report
 1. The .xlsx (sheets: Promotores, Patrocinadores, Agências) sent to the operator, not committed.
