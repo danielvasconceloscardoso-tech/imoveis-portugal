@@ -21,6 +21,18 @@ We close people when they fall in love with Portugal, not when they understand I
 > **Ver no mapa →**
 (Figures illustrative; every real letter uses checked numbers.)
 
+
+**Cadence (operator, 2 Nov): Tuesday and Friday, always, 08:00 local, from Tue 1 Dec.** Tuesday: the place and its story. Friday: the weekend: a chef, a festa, a match, a tradition. Christmas and New Year fall on Fridays: short letters, still sent.
+
+**What the letters are about (operator, 2 Nov):**
+- Stories, not prices, at the top: why Louboutin opened a hotel in Melides and who followed; how the Douro was demarcated in 1756, the British port houses, Barca Velha in 1952, the Douro Boys, and whether it becomes the next Bourgogne; Madeira's Michelin stars and Cristiano Ronaldo's airport.
+- Food: the Michelin-starred and the beloved (the chef, the dish, the table), always the current Guide edition.
+- Football: FC Porto and the Dragão, Benfica and Sporting, the rivalry, match days; Ronaldo in Funchal.
+- Traditions: São João in Porto, the Santos Populares, cante alentejano, the sete saias of Nazaré, the ouro of Viana, São Martinho, bolo-rei.
+- Prices never in the hook. Numbers about life (minutes, temperatures, the flight) are welcome; market numbers stay on the map and the site.
+- **Famous people only from published reporting, attributed in the text** ("segundo a imprensa britânica", "segundo o Financial Times"), never as our own claim, never rumour as fact, never private addresses, and nothing that implies endorsement.
+- Reference drafts: `content/letter/drafts/10_rascunhos_v2_lu-pt.md` (the operator's review sets the final rules).
+
 **The order of every letter:**
 1. **O lugar** (the destaque): one place, one photograph or film still, the number on the image (€/m², 10-year change, later the index), a headline of at most eight words and 80–120 words that make the reader want to be there this weekend. "Ver no mapa →".
 2. **A casa:** one home worth looking at: a partner development with photos and what is available (labelled when it is a partner), or a house type in that place with what it costs. "Ver a casa →".
