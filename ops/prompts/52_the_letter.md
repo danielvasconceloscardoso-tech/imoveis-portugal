@@ -6,12 +6,20 @@ CEO, 2 Nov 2026, 14:45. The current drafts (content/inbox/week-0N/newsletter) ar
 
 We close people when they fall in love with Portugal, not when they understand IMT. The letter sells the life: the places, the houses, the sea, the table, the parties. The practical part comes last, short, as the answer to "how do I get there".
 
-**The voice:** Cigar Aficionado (the pleasure, told by someone who knows), Hodinkee (detail and craft, the story behind the object, real expertise worn lightly), Morning Brew (a friend who writes well, quick, a little wit, never cute). Concretely:
-- Write about a real place, a real house, a real afternoon: the light in Comporta at 7 p.m., the tasca in Gondomar that opens at noon, the levada in Madeira, the Douro at harvest, Lisbon on the night of Santo António, New Year's fireworks over Funchal bay.
-- Details over adjectives: the name of the beach, the wine in the glass, the minutes to the airport, the price of lunch. Never "stunning", "breathtaking", "hidden gem", "paradise", "nestled", "boasts", "luxury".
-- One small piece of wit per letter, in the framing, never in the numbers.
-- Short sentences. Second person. A human signs off (the brand, not a name).
-- Every fact still sourced (D12); the beauty is true, so it needs no superlatives.
+**The voice: Morning Brew, not a travel brochure** (operator, 2 Nov: the lyrical version reads as AI). A smart friend who knows Portugal texting you what's worth knowing this week.
+- **Punchy and direct.** Lead with the fact or the hook, then the take. Sentences of 5–15 words. Bold lead-ins.
+- **Conversational and a bit cheeky.** Talk like a person at a bar in Cais do Sodré, not a poet. One joke per section, max; dry, never cringe; never punch down at a place or a reader.
+- **Numbers do the work.** Prices, minutes, temperatures, euros. "Lunch for two: 38 €. Your flight from Lux: 2h30." No adjectives where a number fits.
+- **Banned:** anything lyrical or atmospheric ("a luz desce devagar", "silêncio", "golden hour", "soul", "charm", "nestled", "stunning", "hidden gem", "paradise", "breathtaking"), metaphors, rhetorical questions in a row, triplets of adjectives, ending on a moral.
+- **Test every paragraph:** would a 32-year-old in Luxembourg forward it to a friend with "lol, we should do this"? If not, rewrite.
+- Every fact still sourced (D12).
+
+**Example of the register (PT):**
+> **Comporta já não é segredo. Mas ainda dá.**
+> Os lisboetas descobriram-na há dez anos, os franceses há cinco, e agora o metro quadrado anda nos 4 mil €. Caro? Em Cascais é mais. E aqui a praia é sua às 11 da manhã de um sábado de outubro.
+> **A conta:** 1h15 desde Lisboa. Almoço de arroz de lingueirão para dois, 45 €. Água a 19 graus em outubro.
+> **Ver no mapa →**
+(Figures illustrative; every real letter uses checked numbers.)
 
 **The order of every letter:**
 1. **O lugar** (the destaque): one place, one photograph or film still, the number on the image (€/m², 10-year change, later the index), a headline of at most eight words and 80–120 words that make the reader want to be there this weekend. "Ver no mapa →".
