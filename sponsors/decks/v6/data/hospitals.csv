@@ -1,0 +1,125 @@
+name,group,kind,municipality,lat,lon,coord_source,source_url
+Hospital de Santa Luzia,ULS Alto Minho,SNS,Viana do Castelo,41.696841,-8.832519,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital de Braga,ULS Braga,SNS,Braga,41.567495,-8.399161,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital Santa Maria Maior,ULS Barcelos/Esposende,SNS,Barcelos,41.533301,-8.615963,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital da Senhora da Oliveira,ULS Alto Ave,SNS,Guimarães,41.44245,-8.305686,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital de Vila Nova de Famalicão,ULS Médio Ave,SNS,Vila Nova de Famalicão,41.41279,-8.522527,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital de Santo Tirso,ULS Médio Ave,SNS,Santo Tirso,41.341831,-8.480541,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital da Póvoa de Varzim,ULS Póvoa de Varzim/Vila do Conde,SNS,Póvoa de Varzim,41.382944,-8.758771,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital Pedro Hispano,ULS Matosinhos,SNS,Matosinhos,41.182327,-8.662918,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital de São João,ULS São João,SNS,Porto,41.18106,-8.601198,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital de Santo António,ULS Santo António,SNS,Porto,41.147065,-8.619098,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Centro Materno-Infantil do Norte,ULS Santo António,SNS,Porto,41.151709,-8.623655,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital Eduardo Santos Silva,ULS Gaia/Espinho,SNS,Vila Nova de Gaia,41.104672,-8.592888,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital de São Sebastião,ULS Entre Douro e Vouga,SNS,Santa Maria da Feira,40.930279,-8.546903,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital Padre Américo,ULS Tâmega e Sousa,SNS,Penafiel,41.196759,-8.309087,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital de Vila Real (São Pedro),ULS Trás-os-Montes e Alto Douro,SNS,Vila Real,41.309852,-7.760682,"Photon (komoot, OSM data)",https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital de Chaves,ULS Trás-os-Montes e Alto Douro,SNS,Chaves,41.744267,-7.477331,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital de Lamego,ULS Trás-os-Montes e Alto Douro,SNS,Lamego,41.083255,-7.796098,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital de Bragança,ULS Nordeste,SNS,Bragança,41.802469,-6.767462,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital de Mirandela,ULS Nordeste,SNS,Mirandela,41.485042,-7.189656,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital de Macedo de Cavaleiros,ULS Nordeste,SNS,Macedo de Cavaleiros,41.535013,-6.960451,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital Infante D. Pedro,ULS Região de Aveiro,SNS,Aveiro,40.634573,-8.654837,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospitais da Universidade de Coimbra,ULS Coimbra,SNS,Coimbra,40.220551,-8.41311,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital Pediátrico de Coimbra,ULS Coimbra,SNS,Coimbra,40.223816,-8.413823,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital Distrital da Figueira da Foz,ULS Baixo Mondego,SNS,Figueira da Foz,40.131237,-8.860268,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital de São Teotónio,ULS Viseu Dão-Lafões,SNS,Viseu,40.650327,-7.906457,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital Sousa Martins,ULS Guarda,SNS,Guarda,40.531883,-7.27568,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital Pêro da Covilhã,ULS Cova da Beira,SNS,Covilhã,40.266491,-7.492355,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital Amato Lusitano,ULS Castelo Branco,SNS,Castelo Branco,39.82295,-7.499831,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital de Santo André,ULS Região de Leiria,SNS,Leiria,39.74371,-8.794989,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital de Abrantes,ULS Médio Tejo,SNS,Abrantes,39.456167,-8.198655,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital de Torres Novas,ULS Médio Tejo,SNS,Torres Novas,39.468371,-8.536619,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital de Tomar,ULS Médio Tejo,SNS,Tomar,39.609713,-8.395649,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital de Caldas da Rainha,ULS Oeste,SNS,Caldas da Rainha,39.404412,-9.130138,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital de Torres Vedras,ULS Oeste,SNS,Torres Vedras,39.086165,-9.257145,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital de Peniche,ULS Oeste,SNS,Peniche,39.36345,-9.382794,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital Distrital de Santarém,ULS Lezíria,SNS,Santarém,39.241053,-8.696528,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital de Vila Franca de Xira,ULS Estuário do Tejo,SNS,Vila Franca de Xira,38.977547,-8.985244,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital Beatriz Ângelo,ULS Loures-Odivelas,SNS,Loures,38.8215,-9.175897,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital Prof. Doutor Fernando Fonseca,ULS Amadora/Sintra,SNS,Amadora,38.7436,-9.24676,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital de Cascais Dr. José de Almeida,"Hospital de Cascais (PPP, SNS)",SNS,Cascais,38.730085,-9.418492,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital de São Francisco Xavier,ULS Lisboa Ocidental,SNS,Lisboa,38.707063,-9.217893,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital de Santa Maria,ULS Santa Maria,SNS,Lisboa,38.748585,-9.160851,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital de São José,ULS São José,SNS,Lisboa,38.718199,-9.137945,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital Dona Estefânia,ULS São José,SNS,Lisboa,38.72875,-9.139128,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Maternidade Dr. Alfredo da Costa,ULS São José,SNS,Lisboa,38.732638,-9.147413,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital Garcia de Orta,ULS Almada-Seixal,SNS,Almada,38.673861,-9.176938,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital Nossa Senhora do Rosário,ULS Arco Ribeirinho,SNS,Barreiro,38.654751,-9.057126,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital de São Bernardo,ULS Arrábida,SNS,Setúbal,38.528865,-8.88041,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital do Litoral Alentejano,ULS Litoral Alentejano,SNS,Santiago do Cacém,38.040199,-8.732246,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital Dr. José Maria Grande,ULS Alto Alentejo,SNS,Portalegre,39.300227,-7.427861,"Photon (komoot, OSM data)",https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital de Santa Luzia de Elvas,ULS Alto Alentejo,SNS,Elvas,38.875443,-7.163074,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital do Espírito Santo de Évora,ULS Alentejo Central,SNS,Évora,38.569236,-7.902724,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital José Joaquim Fernandes,ULS Baixo Alentejo,SNS,Beja,38.013798,-7.869658,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital de Faro,ULS Algarve,SNS,Faro,37.024429,-7.928845,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital de Portimão,ULS Algarve,SNS,Portimão,37.155453,-8.539303,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital de Lagos,ULS Algarve,SNS,Lagos,37.097913,-8.682047,OSM Nominatim,https://www.sns.gov.pt/servicos-de-urgencia-sns/
+Hospital Dr. Nélio Mendonça,SESARAM (Madeira),SNS,Funchal,32.648138,-16.924057,OSM Nominatim,https://www.sesaram.pt/
+Hospital do Divino Espírito Santo de Ponta Delgada,SRS Açores,SNS,Ponta Delgada,37.75151,-25.67648,OSM Nominatim,https://www.hdes.pt/
+Hospital de Santo Espírito da Ilha Terceira,SRS Açores,SNS,Angra do Heroísmo,38.668882,-27.219863,OSM Nominatim,https://www.hseit.pt/
+Hospital da Horta,SRS Açores,SNS,Horta,38.531207,-28.636066,OSM Nominatim,https://hospitalhorta.pt/
+Hospital CUF Tejo,CUF,private,Lisboa,38.703412,-9.173285,OSM Nominatim,https://www.cuf.pt/hospitais-e-clinicas
+Hospital CUF Descobertas,CUF,private,Lisboa,38.757981,-9.099504,OSM Nominatim,https://www.cuf.pt/hospitais-e-clinicas
+Hospital CUF Cascais,CUF,private,Cascais,38.708713,-9.432334,"Photon (komoot, OSM data)",https://www.cuf.pt/hospitais-e-clinicas
+Hospital CUF Sintra,CUF,private,Sintra,38.781374,-9.352916,OSM Nominatim,https://www.cuf.pt/hospitais-e-clinicas
+Hospital CUF Torres Vedras,CUF,private,Torres Vedras,39.080164,-9.258662,OSM Nominatim,https://www.cuf.pt/hospitais-e-clinicas
+Hospital CUF Santarém,CUF,private,Santarém,39.24238,-8.703813,OSM Nominatim,https://www.cuf.pt/hospitais-e-clinicas
+Hospital CUF Leiria,CUF,private,Leiria,39.743935,-8.818285,"Photon (komoot, OSM data)",https://www.cuf.pt/hospitais-e-clinicas
+Hospital CUF Coimbra,CUF,private,Coimbra,40.222789,-8.415726,OSM Nominatim,https://www.cuf.pt/hospitais-e-clinicas
+Hospital CUF Viseu,CUF,private,Viseu,40.645236,-7.911384,OSM Nominatim,https://www.cuf.pt/hospitais-e-clinicas
+Hospital CUF Porto,CUF,private,Porto,41.175954,-8.669079,OSM Nominatim,https://www.cuf.pt/hospitais-e-clinicas
+Hospital CUF Trindade,CUF,private,Porto,41.15159,-8.609867,OSM Nominatim,https://www.cuf.pt/hospitais-e-clinicas
+Hospital CUF Arrifana de Sousa,CUF,private,Penafiel,41.208997,-8.285184,"Photon (komoot, OSM data)",https://www.cuf.pt/hospitais-e-clinicas
+Hospital CUF Açores,CUF,private,Lagoa,37.748966,-25.582718,OSM Nominatim,https://www.cuf.pt/hospitais-e-clinicas
+Hospital CUF Alvor,HPA network (CUF),private,Portimão,37.130693,-8.581953,OSM Nominatim,https://www.grupohpa.com/pt/
+Hospital CUF Faro,HPA network (CUF),private,Faro,37.045507,-7.968259,OSM Nominatim,https://www.grupohpa.com/pt/
+Hospital CUF Madeira,HPA network (CUF),private,Funchal,32.647726,-16.941715,OSM Nominatim,https://www.grupohpa.com/pt/
+Hospital CUF Sines,HPA network (CUF),private,Sines,37.959204,-8.863079,OSM Nominatim,https://www.grupohpa.com/pt/
+Hospital São Camilo,HPA,private,Portimão,37.138684,-8.545351,OSM Nominatim,https://www.grupohpa.com/pt/
+Hospital da Luz Lisboa,Luz Saúde,private,Lisboa,38.756193,-9.192415,OSM Nominatim,https://www.hospitaldaluz.pt/
+Hospital da Luz Amadora,Luz Saúde,private,Amadora,38.760839,-9.24335,OSM Nominatim,https://www.hospitaldaluz.pt/
+Hospital da Luz Oeiras,Luz Saúde,private,Oeiras,38.701627,-9.305165,OSM Nominatim,https://www.hospitaldaluz.pt/
+Hospital da Luz Setúbal,Luz Saúde,private,Setúbal,38.533329,-8.9097,OSM Nominatim,https://www.hospitaldaluz.pt/
+Hospital da Luz Coimbra,Luz Saúde,private,Coimbra,40.224711,-8.423782,OSM Nominatim,https://www.hospitaldaluz.pt/
+Hospital da Luz Aveiro,Luz Saúde,private,Aveiro,40.637567,-8.636274,OSM Nominatim,https://www.hospitaldaluz.pt/
+Hospital da Luz Guimarães,Luz Saúde,private,Guimarães,,,,https://www.hospitaldaluz.pt/
+Hospital da Luz Arrábida,Luz Saúde,private,Vila Nova de Gaia,41.14105,-8.635424,OSM Nominatim,https://www.hospitaldaluz.pt/
+Hospital da Luz Póvoa de Varzim,Luz Saúde,private,Póvoa de Varzim,41.394329,-8.764042,OSM Nominatim,https://www.hospitaldaluz.pt/
+Hospital da Luz Vila Real,Luz Saúde,private,Vila Real,41.295878,-7.746633,OSM Nominatim,https://www.hospitaldaluz.pt/
+Hospital da Luz Funchal,Luz Saúde,private,Funchal,32.654155,-16.91387,OSM Nominatim,https://www.hospitaldaluz.pt/
+Hospital Lusíadas Lisboa,Lusíadas Saúde,private,Lisboa,38.749288,-9.17786,OSM Nominatim,https://www.lusiadas.pt/hospitais-clinicas
+Hospital Lusíadas Alfragide,Lusíadas Saúde,private,Amadora,38.742427,-9.230427,OSM Nominatim,https://www.lusiadas.pt/hospitais-clinicas
+Hospital Lusíadas Amadora,Lusíadas Saúde,private,Amadora,38.748676,-9.230611,OSM Nominatim,https://www.lusiadas.pt/hospitais-clinicas
+Hospital Lusíadas Beloura,Lusíadas Saúde,private,Sintra,,,,https://www.lusiadas.pt/hospitais-clinicas
+Hospital Lusíadas Campera,Lusíadas Saúde,private,Alenquer,,,,https://www.lusiadas.pt/hospitais-clinicas
+Hospital Lusíadas Porto,Lusíadas Saúde,private,Porto,41.156544,-8.626185,OSM Nominatim,https://www.lusiadas.pt/hospitais-clinicas
+Hospital Lusíadas Maia,Lusíadas Saúde,private,Maia,41.2554,-8.65298,OSM Nominatim,https://www.lusiadas.pt/hospitais-clinicas
+Hospital Lusíadas Braga,Lusíadas Saúde,private,Braga,41.547666,-8.422674,OSM Nominatim,https://www.lusiadas.pt/hospitais-clinicas
+Hospital Lusíadas Paços de Ferreira,Lusíadas Saúde,private,Paços de Ferreira,,,,https://www.lusiadas.pt/hospitais-clinicas
+Hospital Lusíadas Santa Maria da Feira,Lusíadas Saúde,private,Santa Maria da Feira,40.927513,-8.572174,OSM Nominatim,https://www.lusiadas.pt/hospitais-clinicas
+Hospital Lusíadas Albufeira,Lusíadas Saúde,private,Albufeira,37.102867,-8.233294,OSM Nominatim,https://www.lusiadas.pt/hospitais-clinicas
+Hospital Lusíadas Vilamoura,Lusíadas Saúde,private,Loulé,37.081179,-8.113679,OSM Nominatim,https://www.lusiadas.pt/hospitais-clinicas
+Trofa Saúde Hospital da Trofa,Trofa Saúde,private,Trofa,41.343885,-8.548884,OSM Nominatim,https://www.trofasaude.pt/listagem-das-unidades-hospitalares/
+Trofa Saúde Alfena,Trofa Saúde,private,Valongo,,,,https://www.trofasaude.pt/listagem-das-unidades-hospitalares/
+Trofa Saúde Amadora,Trofa Saúde,private,Amadora,38.775408,-9.218873,OSM Nominatim,https://www.trofasaude.pt/listagem-das-unidades-hospitalares/
+Trofa Saúde Barcelos,Trofa Saúde,private,Barcelos,,,,https://www.trofasaude.pt/listagem-das-unidades-hospitalares/
+Trofa Saúde Braga Norte,Trofa Saúde,private,Braga,41.57926,-8.429721,OSM Nominatim,https://www.trofasaude.pt/listagem-das-unidades-hospitalares/
+Trofa Saúde Braga Centro,Trofa Saúde,private,Braga,41.549957,-8.418813,OSM Nominatim,https://www.trofasaude.pt/listagem-das-unidades-hospitalares/
+Trofa Saúde Braga Sul,Trofa Saúde,private,Braga,,,,https://www.trofasaude.pt/listagem-das-unidades-hospitalares/
+Trofa Saúde Famalicão,Trofa Saúde,private,Vila Nova de Famalicão,41.40005,-8.517073,OSM Nominatim,https://www.trofasaude.pt/listagem-das-unidades-hospitalares/
+Trofa Saúde Gaia,Trofa Saúde,private,Vila Nova de Gaia,41.120756,-8.617985,OSM Nominatim,https://www.trofasaude.pt/listagem-das-unidades-hospitalares/
+Trofa Saúde Guimarães,Trofa Saúde,private,Guimarães,41.44857,-8.341618,OSM Nominatim,https://www.trofasaude.pt/listagem-das-unidades-hospitalares/
+Trofa Saúde Loures,Trofa Saúde,private,Loures,,,,https://www.trofasaude.pt/listagem-das-unidades-hospitalares/
+Trofa Saúde Maia,Trofa Saúde,private,Maia,,,,https://www.trofasaude.pt/listagem-das-unidades-hospitalares/
+Trofa Saúde Boa Nova,Trofa Saúde,private,Matosinhos,,,,https://www.trofasaude.pt/listagem-das-unidades-hospitalares/
+Trofa Saúde São João da Madeira,Trofa Saúde,private,São João da Madeira,40.887646,-8.491329,OSM Nominatim,https://www.trofasaude.pt/listagem-das-unidades-hospitalares/
+Trofa Saúde Senhor do Bonfim,Trofa Saúde,private,Vila do Conde,41.387104,-8.711533,"Photon (komoot, OSM data)",https://www.trofasaude.pt/listagem-das-unidades-hospitalares/
+Trofa Saúde Vila Real,Trofa Saúde,private,Vila Real,41.296261,-7.736097,OSM Nominatim,https://www.trofasaude.pt/listagem-das-unidades-hospitalares/
+Trofa Saúde Valença,Trofa Saúde,private,Valença,,,,https://www.trofasaude.pt/listagem-das-unidades-hospitalares/
+Trofa Saúde Ovar,Trofa Saúde,private,Ovar,40.876514,-8.6344,OSM Nominatim,https://www.trofasaude.pt/listagem-das-unidades-hospitalares/
+Trofa Saúde Santa Maria da Feira,Trofa Saúde,private,Santa Maria da Feira,40.928585,-8.546801,OSM Nominatim,https://www.trofasaude.pt/listagem-das-unidades-hospitalares/
+Trofa Saúde Coge,Trofa Saúde,private,Espinho,41.015238,-8.629357,OSM Nominatim,https://www.trofasaude.pt/listagem-das-unidades-hospitalares/
+Trofa Saúde Marco de Canaveses,Trofa Saúde,private,Marco de Canaveses,,,,https://www.trofasaude.pt/listagem-das-unidades-hospitalares/
+Trofa Saúde Vila do Conde,Trofa Saúde,private,Vila do Conde,,,,https://www.trofasaude.pt/listagem-das-unidades-hospitalares/
+Trofa Saúde Fernando Pessoa,Trofa Saúde,private,Gondomar,,,,https://www.trofasaude.pt/listagem-das-unidades-hospitalares/
