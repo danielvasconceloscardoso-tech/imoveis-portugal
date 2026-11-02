@@ -193,6 +193,8 @@ Status: To do · Doing · Blocked · Done
 | 51d | Agree a reply-time commitment with the partner agency's advisor, so the Concierge can say what the reader gets and when, and the report can measure it | CEO / Partner | To do | 2026-11-14 |
 | 51e | Ask ID Investimentos for the documents behind a showcase checklist (licence of use or building permit, energy pre-certificate, ficha técnica), each shown "provided by the developer" with a date | Operator | To do | 2026-11-14 |
 | 51f | Decide the Concierge additions from prompt 51 (readiness label shown to the reader, optional self-declared funding line, opt-in series for "not yet"); all within D6 and consent per recipient | CEO | To do | 2026-11-21 |
+| 56a | Research public marketing and advertising spend per category (annual reports' marketing/advertising lines of the Portuguese banks, insurers, hospital groups, airlines, telcos, wine groups; Marktest/MediaMonitor ad-spend rankings; IAB/agency reports on digital share in Portugal) and set the anchors in sponsors/PARTNERSHIPS_v6.md with sources | CTO | To do | 2026-11-06 |
+| 56b | Approve Partnerships v6 (annual category partnerships, Official/Partner/Featured, founding −40%, 90-day pilot at 25%) instead of the per-letter packages | Operator | To do | after 56a |
 
 ## Last session
 
