@@ -1,0 +1,50 @@
+# Prompt 54: learn from the people who built the best newsletters and premium media, then the sponsor list
+
+CEO, 2 Nov 2026, 15:30. Read what the best builders of newsletters and premium media have said and written, extract what applies to one premium letter about Portugal (D74), and turn it into a monetization plan that earns the most without damaging the letter; then build the full list of potential sponsors. Nothing is sent.
+
+## 1. Who to study (read their public interviews, talks, podcasts, books, essays, case studies; add others you find)
+
+1. **Morning Brew:** Alex Lieberman and Austin Rief (Rief built the ad business: native ads, pricing, the sales team, the sale to Axel Springer).
+2. **Axios:** Jim VandeHei, Mike Allen, Roy Schwartz (the book "Smart Brevity"; premium sponsorship, few ads at high prices; the sale to Cox).
+3. **The Hustle:** Sam Parr (growth, the sale to HubSpot).
+4. **beehiiv:** Tyler Denk (ex-Morning Brew; the ad network, boosts, recommendations, what top newsletters earn).
+5. **Lenny's Newsletter:** Lenny Rachitsky (sold-out sponsorships, price increases, the waiting list, saying no).
+6. **Not Boring:** Packy McCormick (the sponsored deep dive).
+7. **Puck:** Jon Kelly (premium, paid, insider voice).
+8. **The Real Deal:** Amir Korangy (real-estate media, events, the luxury property advertiser).
+9. **Wine Spectator and Cigar Aficionado:** Marvin Shanken (ratings, events, awards, the advertiser relationship).
+10. **Monocle and Winkreative:** Tyler Brûlé (premium brand, retail, events, branded content done with taste).
+11. **Hodinkee:** Ben Clymer (from blog to commerce; the brand partnerships).
+12. **Robb Report and Mansion Global** (how luxury property is sold in editorial).
+13. **The operators and tools:** Dan Oshinsky (Inbox Collective), Matt McGarry (newsletter growth), Louis Nicholls (SparkLoop, paid recommendations), Paved, Passionfroot, Who Sponsors Stuff (what sponsors buy and pay).
+
+For each: the three to five ideas that matter for us, with the source (URL, date, minute mark for podcasts); short quotes under 15 words only.
+
+## 2. The playbook (`sponsors/NEWSLETTER_PLAYBOOK.md` + PDF, at most 8 pages)
+
+1. **What they agree on** (the rules that recur across most of them), and **where they disagree** (and which side fits us).
+2. **Quality guardrails:** how many ads per letter before readers leave, ad-to-content ratio, native versus display, how they write ads that read like the letter, what they refused and why.
+3. **Pricing:** how they priced at 1,000, 10,000 and 100,000 subscribers; flat versus CPM; when they raised prices; waiting lists; sold-out calendars.
+4. **Products beyond the ad slot:** title sponsorship, series, events, reports, awards (Shanken), commerce (Hodinkee, Monocle), paid tiers (Puck), jobs boards, paid recommendations (SparkLoop, beehiiv boosts), the data product.
+5. **Growth:** referral programs, cross-promotions, paid acquisition costs per subscriber they reported, what worked first.
+6. **The sale:** what made the newsletters sellable and at what multiples (only reported figures, cited).
+
+## 3. The prototype plan for us (`sponsors/LETTER_MONETIZATION_v2.md` + PDF)
+
+Apply the playbook to our letter (one letter for everyone, Tuesday and Friday, D74; voice in VOICE_AND_WORLD, D73):
+1. The products for months 1–6, 7–12 and year 2, with prices and the subscriber thresholds that trigger each (founding, then per reader).
+2. The quality rules we adopt (maximum sponsored elements per letter, labelling, the right to refuse, no per-lead pricing, D6).
+3. Events and experiences that fit (a dinner in the Douro, a golf day, a Lisbon art walk with a partner bank) and their economics.
+4. Three revenue scenarios for 12 months (conservative, base, ambitious) with the assumptions written out.
+
+## 4. The sponsor list (`sponsors/letter_sponsors.csv` + a summary PDF)
+
+At least 300 companies, real and verifiable, **companies only**: name, category, country, why the letter fits them, the calendar slot that fits (e.g. golf weeks), the product to pitch (block, series, Apresentado por, weekend item, event), a public contact page or press/partnerships page URL, the size signal (public revenue or advertising presence), priority (A/B/C). No personal names, no personal emails.
+
+Categories to cover: Portuguese banks' non-resident and private-banking units; international private banks with Portugal desks; mortgage intermediaries; currency transfer and payments; insurers; developers and golf-resort developers; hotels and hotel groups; restaurant groups; wine estates and port houses; spirits; airlines and airports; car brands and dealers in Portugal; luxury goods with Portuguese stores; furniture, kitchens and interiors; architects and interior studios; property services (management, renovation, solar, pools, security); relocation, schools (international schools), healthcare (private hospitals); law and tax firms; art galleries, auction houses and art fairs; events and festivals; golf courses and academies; yachting and marinas; regional tourism boards and municipalities (later, procurement).
+
+Exclude real-estate agencies other than the partner agency (D9).
+
+## 5. Report
+
+The playbook PDF, the prototype plan PDF, the sponsor CSV and summary. One line on anything you could not verify. Nothing is sent.
