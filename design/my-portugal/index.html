@@ -1,0 +1,364 @@
+<!doctype html>
+<!-- Prompt 63 mockup: "O meu Portugal" (seven moments, the assistant, the card, a mesa, os passos, saving).
+     Mobile, Portuguese, static. Nothing here is built into the site until the operator approves.
+     Photos: our licensed library (site/public/img/v2, credits in site/public/img/v2/sources.md).
+     Numbers: INE, median sale price per m², 2.º trimestre de 2026 (site/public/data/prices.json);
+     purchase costs from the site's own simulator (site/src/lib/sims.ts, second home, non-resident, no mortgage).
+     Brands in partner cards are fictional ("Exemplo"). -->
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>O meu Portugal · mockup</title>
+<style>
+@font-face{font-family:P;src:url(../../site/node_modules/@fontsource-variable/playfair-display/files/playfair-display-latin-wght-normal.woff2)}
+@font-face{font-family:M;src:url(../../site/node_modules/@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2)}
+:root{--ink:#111214;--muted:#6b6e74;--paper:#fbfaf7;--rule:#e6e2da;--green:#2f5d50;--gold:#b8955a;--card:#fff}
+*{box-sizing:border-box}
+body{margin:0;background:#e9e6df;font:400 16px/1.45 M,system-ui,sans-serif;color:var(--ink);padding:40px 32px 64px}
+.sheet-h{font:400 34px/1.1 P,Georgia,serif;margin:0 0 6px}
+.sheet-s{color:var(--muted);margin:0 0 32px;max-width:900px;font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(4,390px);gap:40px 32px}
+figure{margin:0}
+figcaption{font:600 12px/1.3 M;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+.ph{width:390px;height:844px;border-radius:44px;background:var(--paper);overflow:hidden;position:relative;box-shadow:0 1px 0 rgba(0,0,0,.04),0 18px 40px rgba(0,0,0,.12)}
+.ph.dark{--ink:#f3f1ec;--muted:#a3a49f;--paper:#111312;--rule:#2a2d2b;--card:#1b1e1c;background:var(--paper);color:var(--ink)}
+.status{height:46px;display:flex;justify-content:space-between;align-items:flex-end;padding:0 28px 6px;font:600 14px M}
+.top{display:flex;justify-content:space-between;align-items:center;padding:8px 22px 0;font:600 12px M;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.dots{display:flex;gap:6px}.dots i{width:6px;height:6px;border-radius:50%;background:var(--rule);display:block}.dots i.on{background:var(--ink)}
+.q{font:400 32px/1.12 P,Georgia,serif;margin:18px 22px 6px}
+.sub{margin:0 22px 14px;color:var(--muted);font-size:15px}
+.full{position:absolute;inset:0}
+.full img{width:100%;height:100%;object-fit:cover;display:block}
+.shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05) 40%,rgba(0,0,0,.72))}
+.on-photo{position:absolute;left:24px;right:24px;bottom:36px;color:#fff}
+.on-photo .q{margin:0 0 10px;color:#fff;font-size:40px}
+.btn{display:inline-flex;align-items:center;justify-content:center;height:52px;padding:0 26px;border-radius:26px;background:var(--ink);color:var(--paper);font:600 16px M;border:0}
+.btn.light{background:#fff;color:#111}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--rule)}
+.foot{position:absolute;left:22px;right:22px;bottom:30px}
+.small{font-size:13px;color:var(--muted)}
+/* 1 · four windows */
+.win{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 16px}
+.win figure{position:relative;height:262px;border-radius:22px;overflow:hidden}
+.win img{width:100%;height:100%;object-fit:cover}
+.win span{position:absolute;left:14px;bottom:12px;color:#fff;font:400 24px P,serif;text-shadow:0 1px 8px rgba(0,0,0,.5)}
+.win .sel{outline:3px solid #fff;outline-offset:-3px}.win .sel:after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 3px var(--ink);border-radius:22px}
+.tick{position:absolute;right:12px;top:12px;width:28px;height:28px;border-radius:50%;background:#fff;display:grid;place-items:center}
+.tick:before{content:"";width:10px;height:6px;border-left:2px solid #111;border-bottom:2px solid #111;transform:rotate(-45deg) translate(1px,-1px)}
+/* the assistant */
+.asst{position:absolute;left:14px;right:14px;bottom:24px;background:var(--card);border:1px solid var(--rule);border-radius:22px;padding:14px 16px;box-shadow:0 12px 30px rgba(0,0,0,.14)}
+.asst p{margin:0 0 12px;font-size:15px;line-height:1.4}
+.asst .who{display:flex;align-items:center;gap:8px;font:600 11px M;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.asst .who i{width:8px;height:8px;border-radius:50%;background:var(--gold);display:block}
+.asst .acts{display:flex;gap:8px}.asst .acts .btn{height:40px;padding:0 18px;font-size:14px}
+/* 2 · swipe cards */
+.stack{position:relative;height:560px;margin:4px 22px 0}
+.sc{position:absolute;inset:0;border-radius:28px;overflow:hidden;background:#000}
+.sc img{width:100%;height:100%;object-fit:cover;opacity:.92}
+.sc .t{position:absolute;left:22px;right:22px;bottom:22px;color:#fff}
+.sc .t b{display:block;font:400 38px/1 P,serif;margin-bottom:8px}
+.sc.back{transform:translateY(-12px) scale(.94);opacity:.5}
+.sc.front{transform:rotate(-3deg) translateX(-8px)}
+.yes{position:absolute;right:18px;top:18px;font:600 13px M;letter-spacing:.12em;text-transform:uppercase;color:#fff;border:2px solid #fff;border-radius:10px;padding:6px 10px;transform:rotate(8deg)}
+.pair{display:flex;justify-content:center;gap:16px;margin-top:18px}
+.round{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--rule);background:var(--card);font:600 13px M}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:0 22px}
+.chip{height:34px;padding:0 14px;border-radius:17px;border:1px solid var(--rule);display:inline-flex;align-items:center;font:600 13px M;background:var(--card)}
+.chip.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+/* 3 · budget */
+.amount{font:400 48px/1 P,serif;margin:14px 22px 4px}
+.slider{margin:14px 22px 6px;height:6px;border-radius:3px;background:var(--rule);position:relative}
+.slider b{position:absolute;left:0;top:0;bottom:0;width:42%;background:var(--ink);border-radius:3px}
+.slider i{position:absolute;left:42%;top:50%;width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+.scale{display:flex;justify-content:space-between;margin:0 22px 16px;color:var(--muted);font-size:12px}
+.reg{display:grid;grid-template-columns:96px 1fr;gap:12px;margin:0 22px 12px;align-items:center}
+.reg img{width:96px;height:72px;object-fit:cover;border-radius:14px}
+.reg b{font:400 24px/1 P,serif;display:block}
+.cost{margin:6px 22px 0;border-top:1px solid var(--rule);padding-top:12px;font-size:14px}
+.cost div{display:flex;justify-content:space-between;padding:3px 0}
+.cost .tot{font-weight:700;font-size:16px;border-top:1px solid var(--rule);margin-top:6px;padding-top:8px}
+.src{margin:10px 22px 0;font-size:11px;color:var(--muted);line-height:1.4}
+/* 4 · season strip */
+.strip{display:flex;gap:8px;overflow:hidden;padding:0 22px}
+.season{flex:0 0 132px;height:178px;border-radius:20px;border:1px solid var(--rule);padding:14px;display:flex;flex-direction:column;justify-content:space-between;background:var(--card)}
+.season b{font:400 22px/1.1 P,serif}.season.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+/* 5, 6 · icon tiles */
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 22px}
+.tile{height:150px;border-radius:22px;border:1px solid var(--rule);background:var(--card);padding:16px;display:flex;flex-direction:column;justify-content:space-between}
+.tile svg{width:34px;height:34px;stroke:currentColor;fill:none;stroke-width:1.6}
+.tile b{font:400 22px P,serif}.tile.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.ages{margin:16px 22px 0}
+/* 7 · team */
+.pc{margin:0 22px 12px;border-radius:22px;border:1px solid var(--rule);background:var(--card);overflow:hidden}
+.pc .why{font:600 11px M;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:14px 16px 0}
+.pc .row{display:flex;gap:12px;padding:10px 16px 16px;align-items:center}
+.pc .logo{width:48px;height:48px;border-radius:12px;background:#e9e4d8;display:grid;place-items:center;font:600 13px M;color:#555}
+.pc .row div{flex:1}.pc .row b{display:block;font-size:16px}.pc .row span{font-size:13px;color:var(--muted)}
+.lab{font:600 10px M;letter-spacing:.12em;text-transform:uppercase;color:#7a5a12}
+.sheetup{position:absolute;left:0;right:0;bottom:0;background:var(--card);border-radius:28px 28px 0 0;padding:22px;box-shadow:0 -10px 40px rgba(0,0,0,.18)}
+.sheetup h3{font:400 26px/1.15 P,serif;margin:0 0 10px}
+.sheetup ul{list-style:none;margin:0 0 14px;padding:0;font-size:15px}
+.sheetup li{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--rule)}
+.sheetup li span{color:var(--muted)}
+.dim{position:absolute;inset:0;background:rgba(0,0,0,.35)}
+/* the card */
+.mycard{margin:10px 18px 0;border-radius:26px;overflow:hidden;background:#14261f;color:#f6f2ea;box-shadow:0 18px 40px rgba(0,0,0,.25)}
+.mycard .img{height:230px;position:relative}.mycard .img img{width:100%;height:100%;object-fit:cover}
+.mycard .img span{position:absolute;left:18px;top:16px;font:600 11px M;letter-spacing:.16em;text-transform:uppercase;color:#fff}
+.mycard .body{padding:18px 20px 20px}
+.mycard h2{font:400 34px/1.05 P,serif;margin:0 0 4px}
+.mycard .meta{display:grid;grid-template-columns:1fr 1fr;gap:12px 16px;margin:16px 0 14px}
+.mycard .meta div{font-size:13px;color:#c9d3cc}.mycard .meta b{display:block;font-size:16px;color:#fff;font-weight:600}
+.team{display:flex;gap:6px;flex-wrap:wrap}.team span{font:600 12px M;border:1px solid rgba(255,255,255,.25);border-radius:14px;padding:6px 10px}
+.acts2{display:flex;gap:8px;margin:16px 18px 0}.acts2 .btn{flex:1;height:48px;font-size:15px}
+.edit{margin:14px 22px 0;font-size:13px;color:var(--muted);display:flex;gap:14px}
+/* save */
+.field{margin:10px 22px 0;height:56px;border-radius:16px;border:1px solid var(--rule);background:var(--card);display:flex;align-items:center;padding:0 16px;font-size:16px;color:var(--muted)}
+.consent{display:flex;gap:12px;margin:16px 22px 0;font-size:14px;line-height:1.45}
+.box{flex:0 0 22px;height:22px;border-radius:6px;border:1.5px solid var(--muted);margin-top:2px}
+/* mesa */
+.board{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 16px}
+.board figure{position:relative;border-radius:18px;overflow:hidden;background:var(--card);border:1px solid var(--rule)}
+.board img{width:100%;height:150px;object-fit:cover;display:block}
+.board figure.tall img{height:250px}
+.board p{margin:0;padding:8px 10px 10px;font-size:13px}.board p b{display:block;font-size:14px}
+.board .k{position:absolute;left:8px;top:8px;background:rgba(255,255,255,.92);color:#111;font:600 10px M;letter-spacing:.1em;text-transform:uppercase;padding:4px 7px;border-radius:8px}
+.col{display:flex;flex-direction:column;gap:8px}
+/* passos */
+.tl{margin:10px 22px 0;position:relative}
+.tl:before{content:"";position:absolute;left:13px;top:8px;bottom:8px;width:2px;background:var(--rule)}
+.st{display:flex;gap:16px;padding:12px 0;position:relative}
+.st i{flex:0 0 28px;height:28px;border-radius:50%;border:2px solid var(--rule);background:var(--paper);display:grid;place-items:center;z-index:1}
+.st.done i{background:var(--green);border-color:var(--green)}
+.st.done i:before{content:"";width:9px;height:5px;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(-45deg) translate(1px,-1px)}
+.st.now i{border-color:var(--ink)}
+.st b{display:block;font-size:17px}.st span{font-size:14px;color:var(--muted)}
+.notes{margin:40px 0 0;max-width:1700px;font-size:14px;color:#333}
+.notes h2{font:400 24px P,serif;margin:0 0 8px}
+.notes ol{margin:0;padding-left:20px}.notes li{margin:0 0 6px}
+</style>
+</head>
+<body>
+<h1 class="sheet-h">O meu Portugal · mockup</h1>
+<p class="sheet-s">Prompt 63. Sete momentos, o assistente, o cartão, a mesa, os passos e o guardar. Telemóvel, português. Fotografias da nossa biblioteca; números do INE (mediana das vendas por m², 2.º trimestre de 2026) e do simulador do site. Marcas dos parceiros fictícias ("Exemplo"). Nada disto está construído no site.</p>
+<div class="grid">
+
+<!-- 0 · entrada -->
+<figure><figcaption>0 · Entrada</figcaption><div class="ph">
+  <div class="full"><img src="../../site/public/img/v2/porto-douro-entardecer-1024.webp" alt=""><div class="shade"></div></div>
+  <div class="status" style="position:relative;color:#fff"><span>9:41</span><span>●●●</span></div>
+  <div class="on-photo">
+    <p class="small" style="color:#e8e3d8;letter-spacing:.14em;text-transform:uppercase;font-weight:600;font-size:12px;margin:0 0 10px">Imóveis Portugal</p>
+    <h1 class="q">O meu Portugal</h1>
+    <p style="margin:0 0 22px;font-size:17px;color:#f1ede5">Sete toques. No fim, um Portugal que é seu.</p>
+    <span class="btn light">Começar</span>
+    <p style="margin:14px 0 0;font-size:13px;color:#d9d4ca">Sem conta. Ninguém lhe telefona.</p>
+  </div>
+</div></figure>
+
+<!-- 1 · a vista da sua janela -->
+<figure><figcaption>1 · A vista da sua janela → estilo de vida</figcaption><div class="ph">
+  <div class="status"><span>9:41</span><span>●●●</span></div>
+  <div class="top"><span>1 de 7</span><span class="dots"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+  <h2 class="q">O que vê da sua janela?</h2>
+  <div class="win">
+    <figure><img src="../../site/public/img/v2/comporta-praia-dunas-640.webp" alt=""><span>Mar</span></figure>
+    <figure class="sel"><img src="../../site/public/img/v2/porto-douro-entardecer-640.webp" alt=""><span>Rio</span><i class="tick"></i></figure>
+    <figure><img src="../../site/public/img/v2/douro-socalcos-640.webp" alt=""><span>Vinha</span></figure>
+    <figure><img src="../../site/public/img/v2/lisboa-alfama-telhados-640.webp" alt=""><span>Cidade</span></figure>
+  </div>
+  <div class="asst"><div class="who"><i></i>O seu assistente</div><p>Rio, então. Vou mostrar-lhe primeiro os lugares com água à porta.</p></div>
+</div></figure>
+
+<!-- 2 · onde se vê -->
+<figure><figcaption>2 · Onde se vê → regiões (até três)</figcaption><div class="ph">
+  <div class="status"><span>9:41</span><span>●●●</span></div>
+  <div class="top"><span>2 de 7</span><span class="dots"><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i></span></div>
+  <h2 class="q" style="margin-bottom:12px">Onde se vê?</h2>
+  <div class="stack">
+    <div class="sc back"><img src="../../site/public/img/v2/comporta-mar-turquesa-640.webp" alt=""></div>
+    <div class="sc front"><img src="../../site/public/img/v2/porto-ribeira-rabelo-1024.webp" alt=""><span class="yes">Gosto</span>
+      <div class="t"><b>Porto</b>Granito, rabelos e o rio que dá nome ao vinho.</div></div>
+  </div>
+  <div class="pair"><span class="round">Passo</span><span class="round" style="background:var(--ink);color:var(--paper);border-color:var(--ink)">Gosto</span></div>
+  <div class="chips" style="margin-top:14px;justify-content:center"><span class="chip on">Porto</span><span class="chip">+ mais duas</span></div>
+</div></figure>
+
+<!-- 3 · orçamento -->
+<figure><figcaption>3 · O que o seu orçamento compra → orçamento</figcaption><div class="ph">
+  <div class="status"><span>9:41</span><span>●●●</span></div>
+  <div class="top"><span>3 de 7</span><span class="dots"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i></span></div>
+  <h2 class="q">O que o seu orçamento compra</h2>
+  <p class="amount">450 000 €</p>
+  <div class="slider"><b></b><i></i></div>
+  <div class="scale"><span>150 mil</span><span>1 milhão</span><span>5 milhões +</span></div>
+  <div class="reg"><img src="../../site/public/img/v2/porto-ribeira-rabelo-640.webp" alt=""><div><b>≈ 124 m²</b><span class="small">no Porto · 3 631 €/m²</span></div></div>
+  <div class="reg"><img src="../../site/public/img/v2/comporta-praia-dunas-640.webp" alt=""><div><b>≈ 177 m²</b><span class="small">em Grândola (Comporta) · 2 543 €/m²</span></div></div>
+  <div class="cost">
+    <div><span>Casa</span><span>450 000 €</span></div>
+    <div><span>IMT</span><span>33 750 €</span></div>
+    <div><span>Imposto do selo</span><span>3 600 €</span></div>
+    <div><span>Escritura (Casa Pronta)</span><span>375 €</span></div>
+    <div class="tot"><span>Custo total</span><span>487 725 €</span></div>
+  </div>
+  <p class="src">INE, valor mediano das vendas por m², 2.º trimestre de 2026. Custos para segunda habitação, não residente, sem crédito, pelo simulador do site.</p>
+</div></figure>
+
+<!-- 4 · o primeiro Natal / a estação -->
+<figure><figcaption>4 · O primeiro Natal em Portugal → prazo</figcaption><div class="ph">
+  <div class="status"><span>9:41</span><span>●●●</span></div>
+  <div class="top"><span>4 de 7</span><span class="dots"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span></div>
+  <h2 class="q">O primeiro Natal em Portugal</h2>
+  <p class="sub">Quando quer cá estar? Uma estação chega; pode mudar quando quiser.</p>
+  <div class="strip">
+    <div class="season"><span class="small">Já a seguir</span><b>Primavera de 2027</b></div>
+    <div class="season on"><span style="font-size:13px;opacity:.7">Daqui a meses</span><b>Verão de 2027</b></div>
+    <div class="season"><span class="small">Com tempo</span><b>Natal de 2027</b></div>
+  </div>
+  <div class="chips" style="margin-top:12px"><span class="chip">2028</span><span class="chip">Ainda não sei</span></div>
+  <div class="asst"><div class="who"><i></i>O seu assistente</div><p>Verão de 2027. Chega a tempo do São João, a 23 de junho.</p></div>
+</div></figure>
+
+<!-- 5 · quem vem consigo -->
+<figure><figcaption>5 · Quem vem consigo → agregado e escolas</figcaption><div class="ph">
+  <div class="status"><span>9:41</span><span>●●●</span></div>
+  <div class="top"><span>5 de 7</span><span class="dots"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span></div>
+  <h2 class="q">Quem vem consigo?</h2>
+  <div class="tiles">
+    <div class="tile"><svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="3"/><circle cx="16" cy="8" r="3"/><path d="M3 20c0-3 2-5 5-5s5 2 5 5M11 20c0-3 2-5 5-5s5 2 5 5"/></svg><b>A dois</b></div>
+    <div class="tile on"><svg viewBox="0 0 24 24"><circle cx="7" cy="7" r="2.5"/><circle cx="17" cy="7" r="2.5"/><circle cx="12" cy="12" r="2"/><path d="M2 21c0-3 2-5 5-5s5 2 5 5M12 21c0-3 2-5 5-5s5 2 5 5"/></svg><b>Família</b></div>
+    <div class="tile"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 21c0-4 3-6 7-6s7 2 7 6"/></svg><b>Sozinho</b></div>
+    <div class="tile"><svg viewBox="0 0 24 24"><circle cx="6" cy="9" r="2.5"/><circle cx="12" cy="7" r="2.5"/><circle cx="18" cy="9" r="2.5"/><path d="M2 20c0-3 2-4 4-4M8 20c0-3 2-5 4-5s4 2 4 5M22 20c0-3-2-4-4-4"/></svg><b>Amigos</b></div>
+  </div>
+  <div class="ages"><p class="small" style="margin:0 0 8px">Idades das crianças, se quiser</p><div class="chips" style="margin:0"><span class="chip">0–5</span><span class="chip on">6–10</span><span class="chip">11–14</span><span class="chip">15–18</span></div></div>
+  <div class="asst"><div class="who"><i></i>O seu assistente</div><p>Há escolas internacionais no Porto. Quer que as mostre perto das casas que guardar?</p><div class="acts"><span class="btn">Mostrar depois</span><span class="btn ghost">Agora não</span></div></div>
+</div></figure>
+
+<!-- 6 · casa para quê -->
+<figure><figcaption>6 · Casa para quê → tipo de compra</figcaption><div class="ph">
+  <div class="status"><span>9:41</span><span>●●●</span></div>
+  <div class="top"><span>6 de 7</span><span class="dots"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
+  <h2 class="q">Casa para quê?</h2>
+  <div class="tiles">
+    <div class="tile on"><svg viewBox="0 0 24 24"><path d="M3 11 12 4l9 7v9H3z"/><path d="M10 20v-5h4v5"/></svg><b>Para viver</b></div>
+    <div class="tile"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M2 20c3-2 6-2 10 0s7 2 10 0"/></svg><b>Para férias</b></div>
+    <div class="tile"><svg viewBox="0 0 24 24"><path d="M4 12h12M12 6l6 6-6 6"/><path d="M20 4v16"/></svg><b>Para um dia voltar</b></div>
+    <div class="tile"><svg viewBox="0 0 24 24"><path d="M4 18 10 12l4 4 6-8"/><path d="M15 8h5v5"/></svg><b>Para investir</b></div>
+  </div>
+</div></figure>
+
+<!-- 7 · a sua equipa -->
+<figure><figcaption>7 · A sua equipa → parceiros (só quando relevante)</figcaption><div class="ph">
+  <div class="status"><span>9:41</span><span>●●●</span></div>
+  <div class="top"><span>7 de 7</span><span class="dots"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></div>
+  <h2 class="q">A sua equipa</h2>
+  <p class="sub">Aparece quando faz falta. Só fica a saber de si quem escolher, no momento em que escolher.</p>
+  <div class="pc"><p class="why">Porque escolheu 450 000 €</p><div class="row"><span class="logo">BE</span><div><b>Banco Exemplo</b><span>Crédito a não residentes · <span class="lab">Patrocinado</span></span></div><span class="btn ghost" style="height:40px;padding:0 14px;font-size:14px">Falar</span></div></div>
+  <div class="pc"><p class="why">Porque vêm crianças dos 6 aos 10</p><div class="row"><span class="logo">EI</span><div><b>Escola Internacional Exemplo</b><span>Currículo britânico, Porto · <span class="lab">Parceiro</span></span></div><span class="btn ghost" style="height:40px;padding:0 14px;font-size:14px">Visitar</span></div></div>
+  <p class="small" style="margin:12px 22px 0">O advogado aparece quando guardar uma casa.</p>
+</div></figure>
+
+<!-- 7b · tocar num parceiro -->
+<figure><figcaption>7b · Tocar num parceiro: o que segue, e para quem</figcaption><div class="ph">
+  <div class="status"><span>9:41</span><span>●●●</span></div>
+  <h2 class="q">A sua equipa</h2>
+  <div class="pc"><p class="why">Porque escolheu 450 000 €</p><div class="row"><span class="logo">BE</span><div><b>Banco Exemplo</b><span>Crédito a não residentes</span></div></div></div>
+  <div class="dim"></div>
+  <div class="sheetup">
+    <h3>Enviar ao Banco Exemplo</h3>
+    <p class="small" style="margin:0 0 12px">Só isto segue, só para este banco, só agora.</p>
+    <ul><li><span>Onde</span>Porto</li><li><span>Quando</span>Verão de 2027</li><li><span>Orçamento</span>400 a 500 mil €</li><li><span>Para</span>Viver, em família</li><li><span>Contacto</span>O seu e-mail</li></ul>
+    <p class="small" style="margin:0 0 14px">O Banco Exemplo responde-lhe por e-mail, quando quiser. Pode apagar este pedido em O meu Portugal.</p>
+    <div style="display:flex;gap:8px"><span class="btn" style="flex:1">Enviar</span><span class="btn ghost" style="flex:1">Agora não</span></div>
+  </div>
+</div></figure>
+
+<!-- o cartão -->
+<figure><figcaption>O cartão → enche-se sozinho</figcaption><div class="ph">
+  <div class="status"><span>9:41</span><span>●●●</span></div>
+  <div class="mycard">
+    <div class="img"><img src="../../site/public/img/v2/porto-douro-entardecer-1024.webp" alt=""><span>O meu Portugal</span></div>
+    <div class="body">
+      <h2>Porto, verão de 2027</h2>
+      <p style="margin:0;color:#c9d3cc;font-size:14px">Com vista para o rio</p>
+      <div class="meta"><div>Regiões<b>Porto · Comporta</b></div><div>Orçamento<b>400 a 500 mil €</b></div><div>Quem vem<b>Família · 6–10</b></div><div>Para<b>Viver</b></div></div>
+      <div class="team"><span>Banco</span><span>Escola</span><span>Advogado</span></div>
+    </div>
+  </div>
+  <div class="acts2"><span class="btn">Partilhar como imagem</span><span class="btn ghost">Guardar</span></div>
+  <div class="edit"><span>Editar</span><span>Descarregar PDF</span><span>Apagar tudo</span></div>
+</div></figure>
+
+<!-- guardar -->
+<figure><figcaption>Guardar o meu Portugal → link mágico, um consentimento</figcaption><div class="ph">
+  <div class="status"><span>9:41</span><span>●●●</span></div>
+  <h2 class="q">Guardar o meu Portugal</h2>
+  <p class="sub">Para voltar a ele de qualquer telemóvel. Sem palavra-passe: enviamos-lhe um link.</p>
+  <div class="field">O seu e-mail</div>
+  <div class="consent"><span class="box"></span><span>Guardem o meu Portugal (regiões, orçamento, prazo, quem vem, para quê) para me mostrarem sugestões. Posso editar ou apagar tudo quando quiser. <u>Política de privacidade</u></span></div>
+  <div style="margin:22px"><span class="btn" style="width:100%;opacity:.45">Enviar o link</span></div>
+  <p class="small" style="margin:0 22px">Nenhum parceiro recebe estes dados. Só recebe o que enviar, a quem escolher, quando tocar no cartão dele. As estatísticas usam números agregados, sem nomes.</p>
+</div></figure>
+
+<!-- a mesa -->
+<figure><figcaption>A mesa → casas, lugares, roteiros guardados</figcaption><div class="ph">
+  <div class="status"><span>9:41</span><span>●●●</span></div>
+  <h2 class="q">A sua mesa</h2>
+  <div class="board">
+    <div class="col">
+      <figure class="tall"><img src="../../site/public/img/v2/porto-ribeira-noite-640.webp" alt=""><span class="k">Casa</span><p><b>T3 junto ao rio</b>Porto · a ver no mapa</p></figure>
+      <figure><img src="../../site/public/img/v2/douro-socalcos-640.webp" alt=""><span class="k">Roteiro</span><p><b>Um fim de semana no Douro</b>3 paragens</p></figure>
+    </div>
+    <div class="col">
+      <figure><img src="../../site/public/img/v2/comporta-praia-dunas-640.webp" alt=""><span class="k">Lugar</span><p><b>Comporta</b>Praia e arrozais</p></figure>
+      <figure class="tall"><img src="../../site/public/img/v2/porto-ponte-luis-i-noite-640.webp" alt="" onerror="this.src='../../site/public/img/porto-ponte-luis-i-noite-640.webp'"><span class="k">Casa</span><p><b>T2 com varanda</b>Vila Nova de Gaia</p></figure>
+    </div>
+  </div>
+  <div class="asst"><div class="who"><i></i>O seu assistente</div><p>Guardou três casas no Porto. Quer ver as escolas a dez minutos?</p><div class="acts"><span class="btn">Ver escolas</span><span class="btn ghost">Agora não</span></div></div>
+</div></figure>
+
+<!-- os passos -->
+<figure><figcaption>Os passos → progresso, nunca uma nota</figcaption><div class="ph">
+  <div class="status"><span>9:41</span><span>●●●</span></div>
+  <h2 class="q">Os seus passos</h2>
+  <p class="sub">Ao seu ritmo. Marcamos o que já fez.</p>
+  <div class="tl">
+    <div class="st done"><i></i><div><b>NIF</b><span>Feito em outubro</span></div></div>
+    <div class="st now"><i></i><div><b>Banco</b><span>Simulação de crédito, quando quiser</span></div></div>
+    <div class="st"><i></i><div><b>Advogado</b><span>Antes do contrato-promessa</span></div></div>
+    <div class="st"><i></i><div><b>Visita</b><span>Verão de 2027</span></div></div>
+    <div class="st"><i></i><div><b>Escritura</b><span>Casa Pronta, num só dia</span></div></div>
+  </div>
+  <div class="asst"><div class="who"><i></i>O seu assistente</div><p>O Douro está em vindima em setembro. Marco no seu calendário?</p><div class="acts"><span class="btn">Marcar</span><span class="btn ghost">Agora não</span></div></div>
+</div></figure>
+
+<!-- modo escuro -->
+<figure><figcaption>Modo escuro · momento 1</figcaption><div class="ph dark">
+  <div class="status"><span>9:41</span><span>●●●</span></div>
+  <div class="top"><span>1 de 7</span><span class="dots"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+  <h2 class="q">O que vê da sua janela?</h2>
+  <div class="win">
+    <figure><img src="../../site/public/img/v2/algarve-praia-da-marinha-640.webp" alt=""><span>Mar</span></figure>
+    <figure><img src="../../site/public/img/v2/porto-douro-entardecer-640.webp" alt=""><span>Rio</span></figure>
+    <figure><img src="../../site/public/img/v2/douro-socalcos-640.webp" alt=""><span>Vinha</span></figure>
+    <figure class="sel"><img src="../../site/public/img/v2/lisboa-alfama-telhados-640.webp" alt=""><span>Cidade</span><i class="tick"></i></figure>
+  </div>
+  <div class="asst"><div class="who"><i></i>O seu assistente</div><p>Cidade. Lisboa e Porto primeiro, então.</p></div>
+</div></figure>
+
+</div>
+
+<div class="notes">
+  <h2>Como funciona, em notas</h2>
+  <ol>
+    <li>Um momento por ecrã, um toque, uma recompensa: a fotografia, os metros quadrados, o custo, uma escola, uma data. Sem formulários; só se escreve o e-mail, uma vez, ao guardar.</li>
+    <li>O assistente fala uma linha de cada vez, oferece uma coisa, nunca repete, nunca pergunta o que já sabe (quiz, mapa, simulador, Concierge). Sem pontos de exclamação nem emojis.</li>
+    <li>Parceiros: não há lista de parceiros em lado nenhum. Um cartão aparece só quando é útil (banco depois do orçamento, escola depois das idades, advogado depois de guardar uma casa). Tocar no cartão abre o resumo exato do que segue e para quem; "Enviar" é o pedido do leitor (RGPD art. 6(1)(b)). Sem toque, nenhum parceiro sabe de nada.</li>
+    <li>Guardar: um só consentimento, desmarcado, ao guardar o perfil; link mágico, sem palavra-passe. Editar, descarregar em PDF e apagar tudo, a qualquer momento.</li>
+    <li>Estatísticas: só números agregados e anónimos (Considerando 26); a política de privacidade lista as categorias de destinatários (art. 13(1)(e)) e dá os nomes a pedido.</li>
+    <li>Medimos, anonimamente: conclusão de cada momento, onde se desiste, quantos partilham o cartão.</li>
+  </ol>
+</div>
+</body>
+</html>
