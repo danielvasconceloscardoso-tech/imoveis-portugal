@@ -20,6 +20,17 @@ CEO, 2 Nov 2026, 15:30. Read what the best builders of newsletters and premium m
 
 For each: the three to five ideas that matter for us, with the source (URL, date, minute mark for podcasts); short quotes under 15 words only.
 
+## 1b. The writing craft (operator, 2 Nov: write like Morning Brew, Cigar Aficionado and Hodinkee: witty, informative, luxurious, cool)
+
+Read at least 20 recent issues of Morning Brew, 10 features from Cigar Aficionado and 10 from Hodinkee (publicly available pages). Extract, with short examples under 15 words each and their URLs:
+1. Headline patterns that work (and the ones that would read as AI in Portuguese).
+2. How they open a story in the first sentence.
+3. How they place wit: where, how often, what kind.
+4. How they convey luxury without adjectives (access, names, numbers, provenance).
+5. How Hodinkee carries expertise: the detail, the reference, the history in one line.
+6. Sentence length, paragraph length, rhythm.
+Then update `content/VOICE_AND_WORLD.md` with a "Craft" section of concrete rules and 10 before/after rewrites of our own lines (before = AI-sounding, after = the blend). Then write 3 sample letters in the blend (PT-PT, one letter for everyone, D74) and send them to the CEO before writing any more.
+
 ## 2. The playbook (`sponsors/NEWSLETTER_PLAYBOOK.md` + PDF, at most 8 pages)
 
 1. **What they agree on** (the rules that recur across most of them), and **where they disagree** (and which side fits us).

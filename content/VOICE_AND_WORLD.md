@@ -2,6 +2,13 @@
 
 Operator, 2 Nov 2026: premium and cool lifestyle, never AI-looking, the same in the letter and the social posts. This file is the single reference for both; prompts 46 and 52 follow it.
 
+## The blend (operator, 2 Nov): witty, informative, luxurious, cool
+
+- **Morning Brew gives the speed and the wit:** news-style headlines with a twist, short paragraphs, a smart aside, the reader treated as a friend.
+- **Cigar Aficionado gives the luxury:** the pleasure taken seriously, the people behind the object, access (the table, the cellar, the owner), never showing off.
+- **Hodinkee gives the expertise:** the detail only an insider knows (the year, the designer, the material, the reference), explained without condescension.
+- Together: a fact you didn't know, from someone who has been there, told quickly, with one line that makes you smile. Luxury comes from the subject and the details, never from adjectives.
+
 ## The voice in one paragraph
 
 Morning Brew's speed with a Portuguese insider's taste. We write like the friend who knows which table to ask for at the Yeatman, why Vhils carves walls instead of painting them, and that the best seat in the Dragão is not the most expensive. Facts first, short sentences, one dry joke, names and details instead of adjectives. Never lyrical, never breathless, never "hidden gem". If a sentence could appear in any travel brochure about any country, delete it.
