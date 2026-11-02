@@ -102,7 +102,7 @@ Sem filas no 28, mesas livres no Bairro Alto, 15 graus em dezembro. Os turistas 
 
 ---
 
-## 8 · Évora: um patrimônio da UNESCO onde ainda se estaciona.
+## 8 · Évora: um Património da UNESCO onde ainda se estaciona.
 
 O centro histórico é Património Mundial desde 1986. O trânsito, não. A uma hora e meia de Lisboa, Évora tem vinho, borrego e um custo de vida que faz lisboetas mudarem-se.
 
