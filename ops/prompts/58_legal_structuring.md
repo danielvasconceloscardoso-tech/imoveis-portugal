@@ -13,7 +13,7 @@ CEO, 2 Nov 2026, 23:00. Operator's request: a comparative analysis of the possib
 1. Portuguese **Lda** held directly by the three founders.
 2. Portuguese **SA**.
 3. Lda now, **holding later** (Portuguese holding Lda; contribution of quotas in exchange for holding shares; the tax-neutral regime for share exchanges, CIRC arts. 73 and 77, and its conditions).
-4. Lda held partly through a **Luxembourg holding** for the Luxembourg-resident founder (SARL or SARL-S): withholding on dividends to it (CIRC art. 14 and the Parent-Subsidiary Directive conditions; anti-abuse rules, CIRC art. 14(? ) and LGT art. 38), Luxembourg participation exemption (LIR art. 166 and the Grand-Ducal regulation), substance requirements, running cost.
+4. Lda held partly through a **Luxembourg holding** for the Luxembourg-resident founder (SARL or SARL-S): withholding on dividends to it (CIRC art. 14 and the Parent-Subsidiary Directive conditions; the anti-abuse clause in CIRC art. 14 and the general anti-abuse rule, LGT art. 38(2)), Luxembourg participation exemption (LIR art. 166 and the Grand-Ducal regulation), substance requirements, running cost.
 5. Holding the founder's interest through an **associação em participação** (DL 231/81) instead of quotas: pros, cons, how a buyer treats it.
 
 ## 3. For each structure, cover
