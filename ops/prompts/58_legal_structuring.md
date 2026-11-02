@@ -1,6 +1,6 @@
-# Prompt 58: Lda in Portugal: IP, startup status, IP box, SIFIDE II and every other benefit (due Fri 6 Nov 2026)
+# Prompt 58: Lda in Portugal: IP, startup status, IP box, SIFIDE II and every other benefit (today, plain text)
 
-CEO, 2 Nov 2026, 23:05. Operator, decided: **everything in Portugal, a Portuguese Lda**, possibly with startup status. No holding, no Luxembourg, no SA. He wants to know how to protect the IP and which tax regimes we can use, and how to qualify for each. **One memo in English, max 8 pages, plus a one-page table** (rule 15). The operator is a lawyer: cite every article, with the version in force in 2026 and the source. Facts and conditions; a recommendation clearly marked.
+CEO, 2 Nov 2026, 23:05. Operator, decided: **everything in Portugal, a Portuguese Lda**, possibly with startup status. No holding, no Luxembourg, no SA. He wants to know how to protect the IP and which tax regimes we can use, and how to qualify for each. English, plain text in the chat (see Format). The operator is a lawyer: cite every article, with the version in force in 2026 and the source. Facts and conditions; a recommendation clearly marked.
 
 ## 1. IP: what we own and how to protect it
 1. The brand: the Portuguese trademark (INPI, Código da Propriedade Industrial) vs the EU trademark (EUIPO): classes (35, 36, 38, 41, 42), cost, timing, a quick clearance on "Imóveis Portugal" (descriptiveness risk, CPI art. 209 and EUTMR art. 7(1)(c)) and the logo mark as the stronger filing.
@@ -36,5 +36,9 @@ CEO, 2 Nov 2026, 23:05. Operator, decided: **everything in Portugal, a Portugues
 2. The order: incorporation → IP assignment and domain transfer → trademark filing → accountant → RCBE → bank → startup certification → first invoice.
 3. Who to hire (a contabilista certificado, an IP agent or lawyer for the filings), fair fee ranges, and what to ask them.
 
-## 7. Report
-The memo and the table (regime · what it gives · do we qualify · cost/effort · do it now or later) by Fri 6 Nov. One line on anything you could not verify. Ship to design-v2 and main; no PDF over 8 pages, English only.
+## Format (operator, 2 Nov, overrides everything above about memos, tables, PDFs and dates)
+1. **No memo, no PDF, no file.** Reply in the chat, as plain text inside one code block (a text box the operator can copy into Word).
+2. **As soon as it is done, today.** No Friday deadline.
+3. **No AI slop:** short plain sentences, facts and numbers, no intros, no summaries of what you will say, no "key takeaways", no bold headings in every line, none of the patterns banned in content/VOICE_AND_WORLD.md.
+4. **Every fact with its source right after it:** the article and law, or the link with the date.
+5. Simple numbered points. As short as the answer allows.

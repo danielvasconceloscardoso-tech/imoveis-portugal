@@ -1,6 +1,6 @@
-# Prompt 60: the software we can build on our data, who has done it, and what the site must change now (due Fri 6 Nov 2026)
+# Prompt 60: the software we can build on our data, who has done it, and what the site must change now (today, plain text)
 
-CEO, 2 Nov 2026, 23:10. Operator: think bigger. The media business pays the bills; the data we collect may be worth more than the media itself, and it changes what a buyer pays at exit (D76). Find the products, the companies that already did it, the money, and what the site must start capturing **now** so the data exists in 12 months. **One memo in English, max 8 pages, plus a one-page table** (rule 15). Options with numbers; the operator decides.
+CEO, 2 Nov 2026, 23:10. Operator: think bigger. The media business pays the bills; the data we collect may be worth more than the media itself, and it changes what a buyer pays at exit (D76). Find the products, the companies that already did it, the money, and what the site must start capturing **now** so the data exists in 12 months. English, plain text in the chat (see Format). Options with numbers; the operator decides.
 
 ## 1. The data we will hold (inventory first)
 1. What we collect or can collect, with consent: quiz answers (region, lifestyle, budget, who comes), Concierge requests (where, budget, timing, financing, country of origin), searches and map use (regions, layers, price filters), letter behaviour (opens, clicks per topic and region), developer listing views and requests, sponsor engagement, desafio answers.
@@ -38,5 +38,9 @@ Study, with sources (annual reports, funding rounds, interviews, pricing pages):
 3. A public "Dados" teaser (one aggregate chart a month) that shows sponsors and buyers what we know, if the operator approves.
 4. What to stop doing or change on the site because of this.
 
-## 6. Report
-The memo, the table (product · buyer · price · comparable · effort · exit value · start when), and a 90-day sequence. Site changes in §5 proposed, not shipped, until the operator says go. One line on anything you could not verify.
+## Format (operator, 2 Nov, overrides everything above about memos, tables, PDFs and dates)
+1. **No memo, no PDF, no file.** Reply in the chat, as plain text inside one code block (a text box the operator can copy into Word).
+2. **As soon as it is done, today.** No Friday deadline.
+3. **No AI slop:** short plain sentences, facts and numbers, no intros, no summaries of what you will say, no "key takeaways", no bold headings in every line, none of the patterns banned in content/VOICE_AND_WORLD.md.
+4. **Every fact with its source right after it:** the article and law, or the link with the date.
+5. Simple numbered points. As short as the answer allows.
