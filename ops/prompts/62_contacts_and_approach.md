@@ -31,6 +31,15 @@ CEO, 2 Nov 2026, 23:59. Sales are done by the operator's brother and father (D80
 4. The founding offer: first 10 partners −40% in year 1, price locked for year 2, paid upfront for 12 or 6 months (D79).
 5. Never present the platform as a press outlet (D71) or as a mediator; never promise leads or results.
 
+## 3b. The quality bar (operator, 3 Nov): top tier, no AI slop, built to impress a salesman with more than 100 M€ in career sales
+The reader is the operator's father: he has sold property for decades. He will judge it in two minutes. Write for him.
+1. **Talk like a seller, not a marketer.** Open on the developer's problem: selling units to buyers abroad, the time and the cost of reaching them. Numbers, names, terms. No adjectives, no "solução", "ecossistema", "sinergias", "inovador", "premium", "exclusivo", none of the patterns banned in content/VOICE_AND_WORLD.md.
+2. **One page per category, A4, printable,** in the site's design (ivory, Playfair Display headings, Manrope text, the green for labels only). Each page: who the reader is; what the partner gets, concretely; price and terms; the founding offer with its deadline; what happens after they sign (week by week).
+3. **A personalised one-pager for each of the first five top-tier developers, starting with Shalu Investments:** their project on our map (screenshot), how it appears in the Concierge and in a letter, what it costs per unit next to what a sales campaign abroad costs them, and the next step. Public facts about the project only, each with its source.
+4. **The objection sheet:** the eight objections a developer or a bank will raise ("já temos agências", "quantos subscritores têm?", "porque pagar antes de ver resultados?", "o que vos distingue do Idealista?", "quem está por trás?", "e se não vender?", "podemos fazer um piloto?", "preço") with a two-line answer each, true and checkable. Never promise leads, sales or results.
+5. **The contract:** two pages, plain Portuguese, our standard terms (scope, price, payment upfront, 12 or 6 months, labelling, no exclusivity unless bought, termination, GDPR roles).
+6. **Ship one developer kit (Shalu) and one sponsor kit first,** as PDFs to the operator. The operator and his father review; the rest only after their go (rule 15).
+
 ## 4. Report
 1. The .xlsx (sheets: Promotores, Patrocinadores, Agências) sent to the operator, not committed.
 2. pipeline.csv updated with company-level rows only.
