@@ -1,4 +1,4 @@
-# Prompt 64: four data moves: the family-house value, owner mode, the Concierge as a product, the demand forecast (D82)
+# Prompt 64: three data moves: the family-house value, the Concierge as a product, the demand forecast (D82)
 
 CEO, 3 Nov 2026, 00:30. Operator approved four moves that make the data worth more than reports. Build the smallest version of each, in this order. Mockups first where marked; Portuguese only; per D67 once approved. No personal data in the repo, no per-lead fees (D6).
 
@@ -10,11 +10,7 @@ CEO, 3 Nov 2026, 00:30. Operator approved four moves that make the data worth mo
 5. Shareable result card ("A casa da avó em Gondomar vale entre X e Y"), the letter signup, and the field added to the anonymised statistics (supply: parish, type, intent, timing).
 6. Mockup first (mobile, PT) in design/house-value/.
 
-## 2. Owner mode in "O meu Portugal" (second)
-1. After the purchase (the buyer ticks "Já comprei" or the home is saved as "a minha casa"), the profile switches to owner mode: the home card, its estimated value over time (same INE method), the calendar of an owner's year (IMI dates, insurance renewal, condominium), and a quiet "a sua equipa" for owners (insurance, renovation, rental management, schools, resale), each card appearing only when relevant.
-2. Partners hear from an owner only when the owner taps their card. Same consent rules as prompt 63 §5.
-3. The family-house tool (§1) feeds owner mode too: an emigrant who already owns a house is an owner from day one.
-4. Mockup first, together with prompt 63's mockup.
+## 2. Owner mode: DROPPED (operator, 3 Nov: it would overcomplicate the site). Do not build.
 
 ## 3. The Concierge as a product (third)
 1. Log every Concierge conversation in the anonymised store: question, topic, place, budget band, step of the path, answer given, what the reader did next. No names, e-mails or free text that identifies a person (strip it before storing). Purpose and retention in the privacy policy; tell readers they are talking to an automated assistant (AI Act art. 50).
@@ -30,4 +26,4 @@ CEO, 3 Nov 2026, 00:30. Operator approved four moves that make the data worth mo
 The "standard file" idea (one-tap profile to any partner) is parked: it needs scale (operator, 3 Nov).
 
 ## 6. Report
-Plain text in the chat, one line per step, with links. Mockups for §1 and §2 to the operator before building.
+Plain text in the chat, one line per step, with links. The mockup for §1 to the operator before building.
