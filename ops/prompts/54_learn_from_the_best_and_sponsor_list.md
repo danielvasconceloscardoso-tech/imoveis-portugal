@@ -59,3 +59,12 @@ Exclude real-estate agencies other than the partner agency (D9).
 ## 5. Report
 
 The playbook PDF, the prototype plan PDF, the sponsor CSV and summary. One line on anything you could not verify. Nothing is sent.
+
+## 6. Extension (operator, 2 Nov): big advertisers in Portugal and brands breaking into the market
+
+Add to `sponsors/letter_sponsors.csv` (same columns, companies only), and a one-page summary:
+1. **Wine, port and spirits** (all large houses and the estates that receive visitors): Sogrape, Symington Family Estates, The Fladgate Partnership, Esporão, Aveleda, Bacalhôa, Casa Ermelinda Freitas, Quinta do Crasto, Niepoort, Quinta do Vallado, Quinta do Vale Meão, Real Companhia Velha, Adega Mayor, the Madeira wine houses, the Vinho Verde and Alentejo commissions; the importers in our six markets.
+2. **The largest advertisers in Portugal** by public data (Media Monitor / Marktest rankings, the advertisers' own reports): retail (Continente/Sonae, Pingo Doce, Lidl, Auchan, Worten, IKEA, Leroy Merlin), telecoms (MEO, NOS, Vodafone), energy (EDP, Galp, Endesa, Iberdrola), beverages (Delta Cafés, Super Bock, Sagres), insurers, banks, car brands.
+3. **Brands breaking into Portugal or growing fast there** (verify each with a dated news source): Mercadona, Digi, BYD and other Chinese car brands, Trade Republic, Revolut, bunq, Tesla; the new luxury hotels in Lisbon, Porto, the Algarve and Comporta; international airlines adding routes to Lisbon, Porto, Faro and Funchal from our six markets (United, Delta, El Al, Luxair, Swiss, Azul, LATAM, Emirates and others); Brazilian banks and fintechs serving Brazilians in Portugal (BTG Pactual, Inter&Co, C6, Itaú and others); luxury maisons on the Avenida da Liberdade.
+4. For each: why our reader matters to them (affluent, international, deciding on Portugal), the product to pitch, the calendar slot, the size signal with its source, priority.
+5. Exclude gambling, tobacco and alcohol rules: alcohol is allowed with the legal warnings and age rules of the Código da Publicidade (art. 17) and of each market; note them per brand. No gambling or tobacco sponsors.
