@@ -7,8 +7,8 @@
   q: "Comprar casa dá direito a viver em Portugal?"
   a: >-
     Comprar e viver em Portugal são processos separados: desde 7 de outubro de 2023, a compra de casa
-    deixou de dar acesso a novos vistos gold (Lei 56/2023). Para viver cá, pede um visto de residência,
-    por exemplo o de quem vive de rendimentos próprios, conhecido como D7.
+    deixou de dar acesso a novos vistos gold (Lei 56/2023). Para viver cá, pede-se um visto de
+    residência, como o de quem vive de rendimentos próprios, conhecido como D7.
   facts: [pt-ari-realestate-ended, pt-visa-own-income]
 
 - id: pt-us-report
@@ -17,10 +17,10 @@
   cta: tax
   q: "Tenho de declarar a conta portuguesa nos Estados Unidos?"
   a: >-
-    Sim, se as suas contas no estrangeiro somarem mais de 10 000 USD em algum momento do ano: os US persons
-    entregam então o FBAR à FinCEN. Se viver fora dos EUA, pode ter ainda de entregar o formulário 8938, com
-    ativos no estrangeiro acima de 200 000 USD no fim do ano ou 300 000 USD em qualquer momento
-    (individual).
+    Tem, se as suas contas no estrangeiro somarem mais de 10 000 USD em algum momento do ano: os US
+    persons entregam então o FBAR à FinCEN. Quem vive fora dos EUA pode ainda ter de entregar o
+    formulário 8938, com ativos no estrangeiro acima de 200 000 USD no fim do ano ou 300 000 USD em
+    qualquer momento (individual).
   facts: [us-fbar, us-8938-abroad]
 
 - id: pt-us-sale
@@ -29,10 +29,10 @@
   cta: tax
   q: "A venda da casa em Portugal é tributada nos Estados Unidos?"
   a: >-
-    Pode ser tributada nos dois países, mas sem pagar duas vezes pelo mesmo. Pela convenção entre
-    Portugal e os EUA, Portugal pode tributar a mais-valia de casas em Portugal, e os EUA mantêm o
-    direito de tributar os seus cidadãos. O crédito por imposto estrangeiro (formulário 1116) desconta o
-    imposto português no americano.
+    Pode ser tributada nos dois países, sem pagar duas vezes pelo mesmo. Pela convenção entre Portugal e
+    os EUA, Portugal pode tributar a mais-valia de casas em Portugal e os EUA mantêm o direito de
+    tributar os seus cidadãos. O crédito por imposto estrangeiro (formulário 1116) desconta o imposto
+    português no americano.
   facts: [us-pt-treaty-gains]
 
 - id: pt-us-ifici
@@ -41,8 +41,8 @@
   cta: tax
   q: "Há um regime fiscal especial para quem se muda para Portugal?"
   a: >-
-    Sim, para algumas profissões: o IFICI aplica uma taxa especial de 20% durante 10 anos ao rendimento
-    do trabalho em atividades elegíveis, como investigação, ensino superior ou empregos altamente
-    qualificados. É para quem passa a residente fiscal e não foi residente em nenhum dos cinco anos
-    anteriores. O regime depende do trabalho, não da compra de casa.
+    O IFICI aplica uma taxa especial de 20% durante 10 anos ao rendimento do trabalho em atividades
+    elegíveis, como investigação, ensino superior ou empregos altamente qualificados. É para quem passa
+    a residente fiscal e não foi residente em nenhum dos cinco anos anteriores. Depende da profissão, e
+    a compra de casa não dá acesso ao regime.
   facts: [pt-ifici-20pct]

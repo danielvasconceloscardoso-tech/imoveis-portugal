@@ -25,11 +25,11 @@ Assunto: Uma casa de 250 000 € em Portugal custa 271 125 €
 
 {{first name | Olá}},
 
-aqui é a Imóveis Portugal, o guia semanal para comprar casa em Portugal a partir de França. A primeira edição chega na quinta-feira, 3 de dezembro, e uma pessoa lê cada resposta.
+hoje mostramos quanto custa, ao todo, uma casa comprada a partir de França. A primeira carta chega na quinta-feira, 3 de dezembro.
 
 ## A conta completa de uma casa de 250 000 €
 
-"Quanto vou pagar ao todo, não só o preço?" É a pergunta que mais ouvimos. Para uma casa de 250 000 €, se não é residente fiscal em Portugal:
+Para uma casa de 250 000 €, se não é residente fiscal em Portugal:
 
 - Preço: 250 000 €
 - IMT: 18 750 €
@@ -37,11 +37,15 @@ aqui é a Imóveis Portugal, o guia semanal para comprar casa em Portugal a part
 - Escritura e registo na Casa Pronta: 375 €
 - Total: 271 125 €
 
-A linha do IMT vem do Código do IMT (artigo 17.º, n.º 10, aditado pelo Decreto-Lei 97/2026): a aquisição de prédio urbano ou fração destinada exclusivamente a habitação por não residentes paga IMT à taxa única de 7,5%, sem isenções nem reduções, salvo exceção. Uma exceção: passar a ser residente fiscal nos dois anos seguintes, com a diferença devolvida a pedido. Se já foi residente fiscal em Portugal, saber se isso conta para a alínea (a) é uma questão em aberto, para um advogado ou consultor fiscal. Um residente que compra a mesma casa para habitação própria e permanente paga 259 417 €.
+Os não residentes pagam IMT à taxa única de 7,5% na compra de prédio urbano ou fração destinada exclusivamente a habitação, sem isenções nem reduções, salvo exceção (Código do IMT, artigo 17.º, n.º 10, aditado pelo Decreto-Lei 97/2026).
 
-Se vive em França e abre uma conta num banco português para pagar a casa, essa conta declara-se todos os anos às Finanças francesas no formulário 3916, mesmo que não a use.
+Uma exceção: tornar-se residente fiscal nos dois anos seguintes; a diferença é devolvida a pedido. Se já foi residente fiscal em Portugal, saber se isso conta para a alínea (a) é uma questão em aberto, para um advogado ou consultor fiscal.
 
-Com crédito, junta-se 0,6% de imposto do selo sobre o empréstimo e a Casa Pronta passa a 700 €, porque regista também a hipoteca. Os honorários do advogado ficam fora destas contas.
+Um residente que compra a mesma casa para habitação própria e permanente paga 259 417 € ao todo.
+
+Se vive em França e abre uma conta num banco português para pagar a casa, declara-a todos os anos às Finanças francesas no formulário 3916, mesmo que não a use.
+
+Com crédito, junta-se 0,6% de imposto do selo sobre o empréstimo, e a Casa Pronta passa a 700 € porque regista também a hipoteca. Os honorários do advogado ficam fora destas contas.
 
 As contas completas, também a 500 000 €: https://imoveisportugal.pt/pt/fr/blog/imt-nao-residentes-2026-custo-total-da-compra/?utm_source=newsletter&utm_medium=email&utm_campaign=w02-total-cost-fr
 

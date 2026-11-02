@@ -25,11 +25,11 @@ Assunto: Casa de 500 000 € em Portugal, 1,89 milhões de shekels
 
 {{first name | Olá}},
 
-aqui é a Imóveis Portugal, o guia semanal para comprar casa em Portugal a partir de Israel. A primeira edição chega na quinta-feira, 3 de dezembro, e uma pessoa lê cada resposta.
+hoje mostramos quanto custa, ao todo, uma casa comprada a partir de Israel. A primeira carta chega na quinta-feira, 3 de dezembro.
 
 ## A conta completa de uma casa de 500 000 €
 
-"Quanto vou pagar ao todo, não só o preço?" É a pergunta que mais ouvimos. Para uma casa de 500 000 €, se não é residente fiscal em Portugal:
+Para uma casa de 500 000 €, se não é residente fiscal em Portugal:
 
 - Preço: 500 000 €
 - IMT: 37 500 €
@@ -37,11 +37,15 @@ aqui é a Imóveis Portugal, o guia semanal para comprar casa em Portugal a part
 - Escritura e registo na Casa Pronta: 375 €
 - Total: 541 875 €, cerca de 1,89 milhões de shekels à taxa de referência do BCE de 23 de outubro de 2026
 
-A linha do IMT vem do Código do IMT (artigo 17.º, n.º 10, aditado pelo Decreto-Lei 97/2026): a aquisição de prédio urbano ou fração destinada exclusivamente a habitação por não residentes paga IMT à taxa única de 7,5%, sem isenções nem reduções, salvo exceção. Uma exceção: passar a ser residente fiscal nos dois anos seguintes, com a diferença devolvida a pedido. Se já foi residente fiscal em Portugal, saber se isso conta para a alínea (a) é uma questão em aberto, para um advogado ou consultor fiscal. Um residente que compra a mesma casa para habitação própria e permanente paga 530 612 €.
+Os não residentes pagam IMT à taxa única de 7,5% na compra de prédio urbano ou fração destinada exclusivamente a habitação, sem isenções nem reduções, salvo exceção (Código do IMT, artigo 17.º, n.º 10, aditado pelo Decreto-Lei 97/2026).
+
+Uma exceção: tornar-se residente fiscal nos dois anos seguintes; a diferença é devolvida a pedido. Se já foi residente fiscal em Portugal, saber se isso conta para a alínea (a) é uma questão em aberto, para um advogado ou consultor fiscal.
+
+Um residente que compra a mesma casa para habitação própria e permanente paga 530 612 € ao todo.
 
 Israel fica fora da UE e do EEE: depois da compra, tem 15 dias para nomear um representante fiscal em Portugal ou aderir às notificações eletrónicas da Autoridade Tributária.
 
-Com crédito, junta-se 0,6% de imposto do selo sobre o empréstimo e a Casa Pronta passa a 700 €, porque regista também a hipoteca. Os honorários do advogado ficam fora destas contas.
+Com crédito, junta-se 0,6% de imposto do selo sobre o empréstimo, e a Casa Pronta passa a 700 € porque regista também a hipoteca. Os honorários do advogado ficam fora destas contas.
 
 As contas completas, também a 250 000 €: https://imoveisportugal.pt/pt/il/blog/imt-nao-residentes-2026-custo-total-da-compra/?utm_source=newsletter&utm_medium=email&utm_campaign=w02-total-cost-il
 

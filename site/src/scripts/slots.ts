@@ -35,7 +35,7 @@ export function slotTimes(): string[] {
 }
 
 const L = {
-  pt: { day: "Escolha um dia", time: "Escolha até três horários", pt: "Lisboa", picked: "Os seus horários", none: "Ainda nenhum horário escolhido.", zone: "Ver também na hora de", remove: "Retirar" },
+  pt: { day: "Escolha um dia", time: "Escolha até três horários", pt: "Lisboa", picked: "Os seus horários", none: "Nenhum horário escolhido.", zone: "Ver também na hora de", remove: "Retirar" },
   en: { day: "Choose a day", time: "Choose up to three times", pt: "Lisbon", picked: "Your times", none: "No time chosen yet.", zone: "Also show the time in", remove: "Remove" },
   fr: { day: "Choisissez un jour", time: "Choisissez jusqu'à trois horaires", pt: "Lisbonne", picked: "Vos horaires", none: "Aucun horaire choisi.", zone: "Afficher aussi l'heure de", remove: "Retirer" },
 };

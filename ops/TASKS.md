@@ -200,8 +200,14 @@ Status: To do · Doing · Blocked · Done
 | 61b | Sales kit for brother and father: one PT page per category, demo link, booking form and contract at the new prices, pipeline by priority (D80) | CTO | open | 2026-11-09 |
 
 | 62a | PARKED (later stage): developer packages with the funds pack (D81): tiers, prices, contents, refresh cycle; GDPR check on selling named fund contacts (arts. 6(1)(f), 14) vs company-level data plus introductions | CTO + Operator | parked | later |
+| 65a | Decide the letter day: the site, the welcome emails and weeks 1–4 still say Thursday (first letter Thu 3 Dec); D74 says Tuesday and Friday from Tue 1 Dec. Copy follows the answer | CEO | open | 2026-11-06 |
+| 65b | Sales kit (sponsors/kit/, PT): set the digital-bank level prices, the developer launch package and the developer terms (all "a confirmar"); update sponsors/papers/booking-form.pt.md to D80 prices; decide the founding-offer deadline | CEO | open | 2026-11-09 |
+| 65c | Check three site facts flagged in the copy pass: journey q.rep.eu.a (EU residents and electronic notifications), map.metric.new ("casas" vs "edifícios" in the INE series), editions.fact.fr ("a maior comunidade portuguesa do mundo", unsourced) | CTO | open | 2026-11-09 |
+| 65d | Verify the six [a confirmar] facts added to content/letter/drafts/10_rascunhos_v2_lu-pt.md (Michelin 2026 stars, Madeira in December, Funchal fireworks) before any letter is sent | CEO | open | before send |
 
 ## Last session
+
+2026-11-03 (CTO, copy pass): Portuguese copy only, no feature touched. Rewritten in the voice of VOICE_AND_WORLD.md, DESIGN_AND_DATA.md and prompt 62 §3b: the copy deck (about 230 PT blocks across the site, Concierge, forms and buttons), the seven PT FAQ files, the PT letters and welcome emails of weeks 1–4 with their beehiiv exports, the letter drafts, the PT media kits; new PT sales kit in sponsors/kit/ (approach, developer page, digital-bank page, Shalu one-pager, Perguntas que nos fazem, e-mails, call script, two PDFs). One layout fix: wide tables scroll inside themselves on a phone. Checked with check-content, check-parity, the build and Playwright on all 450 PT pages at 390 px and desktop; open questions in 65a–65d.
 
 2026-11-01 (CTO, prompt 51): the 26 funded companies behind the 27 records were studied as products (ops/learn/, ops/LEARN_FROM_FUNDED.pdf, 5 pages, no company contacted); 9 have a usable public product, 8 left nothing. Shipped live per D67, each with a green Cloudflare build: the cookie-free event counter and partner analytics (funnel, countries, advisor reply time in /sponsor-report; private partner dashboards /p/{token}/), the internal weekly dashboard /i/{token}/ with the automatic block in ops/METRICS.md (workflow waits for the operator's Cloudflare keys, task 51a), the empty and seasonal homes map layer (INE Census 2021) and the honest trust strip (AMI 13250 verified in IMPIC). The worker, DNS and wrangler routes are untouched.
 

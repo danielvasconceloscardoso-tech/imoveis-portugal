@@ -26,11 +26,11 @@ Assunto: 300 mil euros em Portugal, de Lisboa à Comporta
 
 {{first name | Olá}},
 
-esta é a primeira edição de quinta-feira da Imóveis Portugal. Toda semana, em cinco minutos, um assunto sobre comprar imóvel em Portugal a partir do Brasil, com a fonte de cada número. Responda a este e-mail e uma pessoa lê.
+esta é a primeira carta da Imóveis Portugal. Ela chega toda quinta-feira, com a fonte de cada número. Se você responder, uma pessoa lê.
 
 ## A casa da semana
 
-O primeiro imóvel da nossa imobiliária parceira entra aqui quando ela enviar um com autorização para publicar. Até lá, fica o exemplo de custos: quanto sai um imóvel de 300 mil euros se você não é residente fiscal em Portugal.
+O primeiro imóvel da imobiliária parceira entra aqui quando chegar com autorização para publicar. Até lá, quanto sai um imóvel de 300 mil euros se você não é residente fiscal em Portugal:
 
 - Preço: € 300.000
 - IMT, o imposto de transmissão português, com alíquota única de 7,5% para não residentes: € 22.500
@@ -46,7 +46,7 @@ Faça a conta com o seu preço: https://imoveisportugal.pt/pt/br/simuladores/cus
 
 ## A história
 
-O preço de um imóvel em Portugal fica mais claro em metros quadrados. Pelo valor mediano por m² dos imóveis vendidos nos 12 meses até meados de 2026 (INE), 300 mil euros, cerca de R$ 1,69 milhão, compram:
+Pelo valor mediano por m² dos imóveis vendidos nos 12 meses até meados de 2026 (INE), 300 mil euros, cerca de R$ 1,69 milhão, compram:
 
 - 58 m² em Lisboa
 - 61 m² em Cascais
@@ -59,7 +59,7 @@ O último número é a mediana do município: perto das praias da Comporta, os i
 
 Há dez anos, pela mediana do Porto no início de 2016, € 1.088 por m², o mesmo dinheiro comprava 276 m² na cidade.
 
-Mediana não é imóvel: é o meio de tudo o que foi vendido em um ano, usado e novo. Mostra onde o dinheiro rende mais, não o preço de um apartamento específico.
+A mediana é o valor do meio de tudo o que foi vendido em um ano, usado e novo; cada imóvel tem o seu preço.
 
 A resposta completa, com o método e os números de cada lugar: https://imoveisportugal.pt/pt/br/blog/o-que-o-seu-orcamento-compra/?utm_source=newsletter&utm_medium=email&utm_campaign=w04-launch-br
 
@@ -71,9 +71,9 @@ O mapa abre nos 300 mil euros, com os metros quadrados que eles compram em cada 
 
 ## A pergunta mais buscada
 
-Ainda não temos perguntas de leitores. No Brasil, depois de "imt portugal", que a conta acima responde, a busca mais feita é "morar em portugal". A pergunta por trás dela: comprar imóvel em Portugal dá direito a morar lá?
+Enquanto não chegam perguntas de leitores: no Brasil, depois de "imt portugal", que a conta acima responde, a busca mais feita é "morar em portugal". A pergunta por trás dela: comprar imóvel em Portugal dá direito a morar lá?
 
-Não. Desde 7 de outubro de 2023 (Lei 56/2023), a compra de imóvel não abre novos pedidos de autorização de residência para investimento, o golden visa imobiliário. Para morar em Portugal, você precisa de um visto de residência, como o de quem vive de renda própria (o D7), ou do visto CPLP, tirado em um consulado português, que depois dá acesso à autorização de residência CPLP da AIMA.
+Não, desde 7 de outubro de 2023 (Lei 56/2023): a compra de imóvel não abre novos pedidos de autorização de residência para investimento, o golden visa imobiliário. Para morar em Portugal, você precisa de um visto de residência, como o de quem vive de renda própria (o D7), ou do visto CPLP, tirado em um consulado português, que depois dá acesso à autorização de residência CPLP da AIMA.
 
 A resposta completa: https://imoveisportugal.pt/pt/br/perguntas-frequentes/?utm_source=newsletter&utm_medium=email&utm_campaign=w04-launch-br#pt-br-visa
 

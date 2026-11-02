@@ -26,11 +26,11 @@ Assunto: 1 milhão de euros em Portugal, de Lisboa à Comporta
 
 {{first name | Olá}},
 
-esta é a primeira edição de quinta-feira da Imóveis Portugal. Todas as semanas, em cinco minutos, um tema sobre comprar casa em Portugal a partir de Israel, com a fonte de cada número. Responda a este email e uma pessoa lê-o.
+esta é a primeira carta da Imóveis Portugal. Chega às quintas-feiras, com a fonte de cada número. Se responder, uma pessoa lê.
 
 ## A casa da semana
 
-A primeira casa da nossa agência parceira entra aqui quando chegar com autorização para publicar. Até lá, fica o exemplo de custos: a conta de uma casa de 1 000 000 € se não for residente fiscal em Portugal.
+A primeira casa da agência parceira entra aqui quando chegar com autorização para publicar. Até lá, a conta de uma casa de 1 000 000 €, sem residência fiscal em Portugal:
 
 - Preço: 1 000 000 €
 - IMT, taxa única de 7,5% para não residentes: 75 000 €
@@ -38,13 +38,13 @@ A primeira casa da nossa agência parceira entra aqui quando chegar com autoriza
 - Escritura e registo na Casa Pronta: 375 € (os honorários do advogado são à parte)
 - Total: 1 083 375 €, cerca de 3,79 milhões de shekels ao câmbio de referência do BCE de 23 de outubro de 2026 (3,4939 shekels por euro)
 
-A lei prevê exceções aos 7,5%, com a diferença devolvida a pedido: passar a residente fiscal em Portugal nos dois anos seguintes, ou arrendar a casa a uma renda dentro dos limites nos seis meses seguintes, por 36 dos primeiros 60 meses. Outra abrange quem "tenha sido considerado residente para efeitos fiscais". Como se aplica ao seu passado é pergunta para um consultor fiscal parceiro: https://imoveisportugal.pt/pt/il/falar-com-um-parceiro/?cat=tax&utm_source=newsletter&utm_medium=email&utm_campaign=w04-launch-il#form
+Os 7,5% têm exceções, com a diferença devolvida a pedido: passar a residente fiscal em Portugal nos dois anos seguintes, ou arrendar a casa a uma renda dentro dos limites nos seis meses seguintes, por 36 dos primeiros 60 meses. Outra abrange quem "tenha sido considerado residente para efeitos fiscais"; como se aplica ao seu passado é pergunta para um consultor fiscal parceiro: https://imoveisportugal.pt/pt/il/falar-com-um-parceiro/?cat=tax&utm_source=newsletter&utm_medium=email&utm_campaign=w04-launch-il#form
 
 Faça a conta com o seu preço: https://imoveisportugal.pt/pt/il/simuladores/custo-total/?price=1000000&resident=0&utm_source=newsletter&utm_medium=email&utm_campaign=w04-launch-il
 
 ## A história
 
-O preço das casas em Portugal lê-se melhor em metros quadrados. Ao valor mediano por m² das casas vendidas nos 12 meses até meados de 2026 (INE), 1 000 000 €, cerca de 3,49 milhões de shekels, dão:
+Ao valor mediano por m² das casas vendidas nos 12 meses até meados de 2026 (INE), 1 000 000 €, cerca de 3,49 milhões de shekels, dão:
 
 - 193 m² em Lisboa
 - 205 m² em Cascais
@@ -57,7 +57,7 @@ Este último é a mediana do concelho: as casas junto às praias da Comporta ven
 
 Há dez anos, à mediana de Cascais no início de 2016, 1599 € por m², o mesmo dinheiro dava 625 m² no concelho.
 
-Uma mediana não é uma casa: é o meio de tudo o que se vendeu num ano, usado e novo. Mostra onde o dinheiro rende mais, não o preço de uma casa em concreto.
+A mediana é o valor do meio de tudo o que se vendeu num ano, usado e novo; cada casa tem o seu preço.
 
 A resposta completa, com o método e os números de cada lugar: https://imoveisportugal.pt/pt/il/blog/o-que-o-seu-orcamento-compra/?utm_source=newsletter&utm_medium=email&utm_campaign=w04-launch-il
 
@@ -69,9 +69,9 @@ O mapa abre com 1 000 000 € e mostra os metros quadrados que esse valor compra
 
 ## A pergunta mais pesquisada
 
-Ainda não há perguntas de leitores, por isso começamos pela pesquisa mais feita a partir de Israel, "buy property in portugal". Pode comprar casa em Portugal a viver em Israel?
+Enquanto não chegam perguntas de leitores, respondemos à pesquisa mais feita a partir de Israel, "buy property in portugal": pode comprar casa em Portugal a viver em Israel?
 
-Sim. Não precisa de viver em Portugal nem de ser residente; a lei do IMT tem até uma taxa própria para não residentes. O primeiro documento é o número de contribuinte português (NIF), que pode pedir a partir do estrangeiro, online, através de um representante legal. Depois de comprar, tem 15 dias para nomear um representante fiscal ou aderir às notificações eletrónicas das Finanças; fora da UE, uma das duas é obrigatória. Também não precisa de vir à escritura: uma procuração assinada perante notário com a Apostila de Haia, ou num consulado português, resolve.
+Sim, e a lei do IMT tem até uma taxa própria para não residentes. O primeiro documento é o número de contribuinte português (NIF), que pode pedir online a partir do estrangeiro, através de um representante legal. Depois de comprar, tem 15 dias para nomear um representante fiscal ou aderir às notificações eletrónicas das Finanças; fora da UE, uma das duas é obrigatória. Para a escritura chega uma procuração, assinada perante notário com a Apostila de Haia ou num consulado português.
 
 A resposta completa: https://imoveisportugal.pt/pt/il/perguntas-frequentes/?utm_source=newsletter&utm_medium=email&utm_campaign=w04-launch-il#pt-buy-abroad
 
