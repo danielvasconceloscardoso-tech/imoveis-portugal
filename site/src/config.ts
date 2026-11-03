@@ -65,9 +65,13 @@ export const config = {
   // Form embeds per language (D18): Tally form IDs (e.g. "w4Xyz1") or a full embed URL (beehiiv
   // newsletter embeds are full URLs). Every form gets a hidden "edition" field from the page.
   forms: {
-    newsletter: { pt: "", en: "", fr: "" } as Record<string, string>,
+    // beehiiv v3 form id (a UUID, drawn by beehiiv's loader on the Maré page; home and guide link there) or a full iframe URL.
+    // EN and FR use the PT form until their own copies exist in beehiiv (operator, 3 Nov 2026; ops/ACCOUNTS.md).
+    newsletter: { pt: "c515b523-ee0e-4cd4-9d78-97423874a589", en: "c515b523-ee0e-4cd4-9d78-97423874a589", fr: "c515b523-ee0e-4cd4-9d78-97423874a589" } as Record<string, string>,
     // Public form IDs from ops/ACCOUNTS.md (task 8u). Tally forms are PT only for now; EN and FR copies to create.
-    sponsor: { pt: "KppYG8", en: "KppYG8", fr: "KppYG8" } as Record<string, string>,
+    // EN and FR: empty = the button writes an e-mail to the brand mailbox, until the EN and FR copies exist in Tally
+    // (a Portuguese form on an English page reads as careless to the institutions written to on 3 Nov 2026).
+    sponsor: { pt: "KppYG8", en: "", fr: "" } as Record<string, string>,
     buyer: { pt: "BEEzgN", en: "BEEzgN", fr: "BEEzgN" } as Record<string, string>,
     // "Talk to a partner" requests (category, country, question, consent) to the brand mailbox. See ops/SETUP.md.
     partnerRequest: { pt: "", en: "", fr: "" } as Record<string, string>,

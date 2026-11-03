@@ -127,7 +127,9 @@ const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("h
     <h2 id="h2-nl">{c("home2.nl.h", lang)}</h2>
     <p class="h2-nlwhat">{c("mare.line", lang)}</p>
     <p>{c("home2.nl.p", lang)}</p>
-    {nl ? (
+    {nl && !nl.startsWith("http") ? (
+      <p><a class="h2-btn h2-btn-light" href={`${pathFor(lang, ed, "mare")}?de=home`}>{c("home2.nl.a", lang)}</a></p>
+    ) : nl ? (
       <div class="form-box"><iframe src={nl} title={c("home2.nl.h", lang)} loading="lazy" style="min-height:200px"></iframe></div>
     ) : (
       <form class="h2-nlform" action={mail} method="post" enctype="text/plain" data-issue={latestIssue()?.id ?? ""}>
