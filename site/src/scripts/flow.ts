@@ -23,7 +23,7 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
   // The partner lawyer card (prompt 37 §4, D64), concierge only; absent when no lawyer may show on this build.
   const LW = (() => { try { return JSON.parse(root.querySelector("[data-flow-lawyer]")?.textContent || "null") as LawyerCard | null; } catch { return null; } })();
   // Listed buildings (prompt 39 §3): from projects.json, passed by Flow.astro; absent outside the concierge.
-  type Bld = { id: string; name: string; muni: string; place: string; region: string; near: string[]; typologies: string[]; from: number | null; avail: number | null; photo: string; map: string; visit: string };
+  type Bld = { id: string; name: string; tag?: string; muni: string; place: string; region: string; near: string[]; typologies: string[]; from: number | null; avail: number | null; photo: string; map: string; visit: string };
   const BL = (() => { try { return JSON.parse(root.querySelector("[data-flow-blds]")?.textContent || "null") as { labels: Record<string, string>; items: Bld[] } | null; } catch { return null; } })();
   let A: Record<string, string> = {};
   try { A = JSON.parse(sessionStorage.getItem(key) || "{}"); } catch { /* private mode */ }
@@ -142,7 +142,7 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
     const T = BL!.labels;
     return `<ul class="fl-blds">${list.map((b) => `<li class="fl-bld" data-bld="${esc(b.id)}">
       ${b.photo ? `<img src="${esc(b.photo)}" alt="" width="800" height="533" loading="lazy" />` : ""}
-      <div class="fl-bld-b"><div class="ht-row"><div><p class="fl-bld-tag">${esc(T.sponsored)}</p><p class="fl-bld-n">${esc(b.name)}</p></div>${heartHTML("home", b.id, `${b.name}, ${b.place}`, b.visit ? b.visit.replace(/#.*$/, "") : b.map)}</div>
+      <div class="fl-bld-b"><div class="ht-row"><div><p class="fl-bld-tag">${esc(b.tag || T.sponsored)}</p><p class="fl-bld-n">${esc(b.name)}</p></div>${heartHTML("home", b.id, `${b.name}, ${b.place}`, b.visit ? b.visit.replace(/#.*$/, "") : b.map)}</div>
         <p class="fl-bld-m">${esc(b.place)}${b.typologies.length ? ` · ${esc(b.typologies.join(" · "))}` : ""}</p>
         ${b.avail ? `<p class="fl-bld-m fl-bld-av">${esc(T.avail.replace("{n}", String(b.avail)))}</p>` : ""}
         <p class="fl-bld-p">${b.from != null ? `${esc(T.from)} ${esc(new Intl.NumberFormat(F.hidden.language || "pt", { maximumFractionDigits: 0 }).format(b.from))} €` : esc(T.price)}</p>

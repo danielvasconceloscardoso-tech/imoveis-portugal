@@ -9,7 +9,7 @@ import "../styles/flow.css";
 import "../styles/slots.css";
 import "../styles/lawyer.css";
 import { lawyerCard } from "../lib/lawyers";
-import { PROJECTS, showcases, img } from "../lib/projects";
+import { PROJECTS, showcases, img, labelOf } from "../lib/projects";
 import { PRICES } from "../lib/prices";
 import { SLUGS, pathFor } from "../i18n";
 import MareBlock from "./MareBlock.astro";
@@ -32,7 +32,7 @@ const blds = flow === "concierge" && PROJECTS.length ? {
   items: PROJECTS.map((p) => {
     const host = showcases(PROJECTS).find((ps) => ps.some((x) => x.id === p.id));
     return {
-      id: p.id, name: p.name, muni: p.muni, place: (PRICES.munis[p.muni] as any)?.n ?? p.muni, region: p.region ?? "", near: p.near ?? [],
+      id: p.id, name: p.name, tag: labelOf(p, lang, c("common.sponsored", lang)), muni: p.muni, place: (PRICES.munis[p.muni] as any)?.n ?? p.muni, region: p.region ?? "", near: p.near ?? [],
       typologies: p.typologies, from: p.from,
       // What is available now, from the availability table (units marked for sale); null where the developer publishes none.
       avail: p.blocks ? p.blocks.reduce((n, b) => n + b.units.reduce((m, u) => m + u.forSale, 0), 0) : null, photo: img(p.render ?? p.gallery?.[0], 800),

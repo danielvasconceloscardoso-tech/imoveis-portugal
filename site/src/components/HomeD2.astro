@@ -8,7 +8,7 @@ import { Sources, EDITION_CUR, RATE, fmtDate, homeExample } from "../lib/content
 import { c } from "../lib/copy";
 import { config } from "../config";
 import { PRICES, LAST } from "../lib/prices";
-import { PROJECTS, showcases, img } from "../lib/projects";
+import { PROJECTS, showcases, img, labelOf } from "../lib/projects";
 import { SLUGS } from "../i18n";
 import Heart from "./Heart.astro";
 import { latestIssue } from "../lib/mare";
@@ -93,7 +93,7 @@ const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("h
         <Heart lang={lang} kind="home" id={h.p.id} label={`${h.p.name}, ${h.place}`} href={h.href} />
         <a href={h.href} data-home-card={h.p.id}>
           <span class="h2-hph">{h.p.render && <img src={img(h.p.render, 800)} srcset={`${img(h.p.render, 800)} 800w, ${img(h.p.render)} 1600w`} sizes="(max-width: 760px) 100vw, 560px" alt="" width="800" height="500" loading="lazy" decoding="async" />}</span>
-          <span class="h2-hk">{h.place} · <span class="h2-tag">{c("common.sponsored", lang)}</span></span>
+          <span class="h2-hk">{h.place} · <span class="h2-tag">{labelOf(h.p, lang, c("common.sponsored", lang))}</span></span>
           <span class="h2-hn">{h.p.name}</span>
           {h.now != null && <span class="h2-hm">{c("showb.now", lang, { n: h.now })}</span>}
           <span class="h2-hgo">{c("bar.homes.view", lang)} →</span>

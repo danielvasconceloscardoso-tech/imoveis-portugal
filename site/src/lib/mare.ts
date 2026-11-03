@@ -10,6 +10,7 @@ import { join } from "node:path";
 import yaml from "js-yaml";
 import { marked } from "marked";
 import { DISCLAIMER } from "./content";
+import { PROJECTS } from "./projects";
 import type { EdCode, Lang } from "../i18n";
 
 const dir = join(process.cwd(), "..", "content", "mare", "issues");
@@ -53,6 +54,12 @@ function load(): MareIssue[] {
     const cited = [fm.story_s, ...fm.numbers.map((x: any) => x.s), ...fm.weekend.items.map((x: any) => x.s), fm.challenge.s, fm.home?.s, fm.practical.s].flat().filter((x) => x != null);
     for (const n of cited) if (!ns.has(n)) throw new Error(`mare ${f}: source ${n} is cited but not listed`);
     const issue = { ...fm, id, date, story: m[2].trim(), sources, day: wd === 2 ? "tue" : "fri" } as MareIssue;
+    // Prompt 66 §2: a home whose project is not shown on this build (pending on the live site) leaves the letter, with the
+    // sources only it cited; the others keep their numbers (the list item carries its own number).
+    if (issue.home?.project && !PROJECTS.some((p) => p.id === issue.home!.project)) {
+      const only = new Set(issue.home.s ?? []), rest = new Set(cited.filter((n) => !(fm.home?.s ?? []).includes(n) || cited.filter((x) => x === n).length > 1));
+      issue.home = null; issue.sources = issue.sources.filter((x) => !only.has(x.n) || rest.has(x.n));
+    }
     const text = [issue.intro, issue.headline, issue.story, issue.see?.text, ...issue.numbers.map((x) => `${x.n} ${x.t}`), ...issue.weekend.items.map((x) => `${x.h} ${x.p}`), issue.challenge.q, ...issue.challenge.options, issue.home?.p, issue.practical.p].filter(Boolean).join(" ");
     issue.words = text.split(/\s+/).filter(Boolean).length;
     issue.minutes = Math.max(1, Math.ceil(issue.words / 200));  // 450 to 600 words: "3 min"
@@ -135,7 +142,7 @@ export function renderIssue(i: MareIssue, o: RenderOpts): string {
   const partner = row(i.partner
     ? `${label(i.partner.label ?? "Parceiro · Patrocinado")}<p style="margin:0 0 8px;font:400 20px/1.3 ${SERIF};color:${C.ink}">${esc(i.partner.h)}</p>${p(esc(i.partner.p), ";margin-bottom:0")}${arrow(i.partner.link)}`
     : `${label("Parceiro · Patrocinado")}<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px dashed ${C.rule}"><tr><td align="center" style="padding:26px 16px;font:400 15px/1.4 ${SANS};color:${C.muted}">Espaço de parceiro</td></tr></table>`);
-  const srcs = i.sources.map((s) => `<li style="margin:0 0 4px"><a href="${esc(s.url)}" style="color:${C.muted}">${esc(s.title)}</a></li>`).join("");
+  const srcs = i.sources.map((s) => `<li value="${s.n}" style="margin:0 0 4px"><a href="${esc(s.url)}" style="color:${C.muted}">${esc(s.title)}</a></li>`).join("");
   return `<!doctype html>
 <html lang="pt-PT"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light only"><meta name="supported-color-schemes" content="light">
 <title>${esc(i.subject)}</title>${o.framed ? '<base target="_top">' : ""}

@@ -1,0 +1,107 @@
+---
+// The developer's film and 3D tour on a showcase (prompt 66, O'rizon Living, 3 Nov 2026). Both live on other sites that set
+// their own cookies (YouTube; property-sales-engine.com), and this site is cookie-free: nothing from them loads with the page.
+// The reader sees our own still (the developer's render) and a button; only a tap loads the film (youtube-nocookie.com, in
+// place) or opens the tour (a full-screen sheet with the frame, closed by the button, Esc or Back; "open in a new tab" too).
+// A local film file (H.264 under site/public) plays in a native <video> instead. Each open is one count (p/{id}/film, p/{id}/tour3d).
+// Wording: COPY_DECK.md "orz.*". Styles inline so the other showcases keep their stylesheet as it is.
+import type { Lang } from "../i18n";
+import { type Project, img, present } from "../lib/projects";
+import { existsSync } from "node:fs";
+import { join } from "node:path";
+import { c } from "../lib/copy";
+
+interface Props { lang: Lang; p: Project; kind: "film" | "tour"; }
+const { lang, p, kind } = Astro.props;
+const k = (x: string) => c(`orz.${x}`, lang);
+const f = p.film;
+const local = f?.file && existsSync(join(process.cwd(), "public", f.file)) ? f.file : "";
+const poster = (b?: string) => (b && present([b]).length ? b : p.render ?? "");
+const more = (f?.more ?? []).filter((m) => m.id);
+const t = p.tour3d;
+const PLAY = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>`;
+const X = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>`;
+---
+{kind === "film" && f && (f.id || local) && <section class="sm" aria-labelledby="sm-film-h" data-sm-film data-pid={p.id}>
+  <h2 id="sm-film-h">{k("film.h")}</h2>
+  {local ? <video class="sm-frame" controls preload="none" playsinline poster={img(poster(f.poster))} width="1600" height="900"><source src={local} type="video/mp4" /></video>
+    : <div class="sm-frame"><button type="button" class="sm-play" data-yt={f.id} data-title={f.title ?? p.name} aria-label={`${k("film.play")}: ${f.title ?? p.name}`}>
+        <img src={img(poster(f.poster), 800)} srcset={`${img(poster(f.poster), 800)} 800w, ${img(poster(f.poster))} 1600w`} sizes="(max-width: 1120px) 100vw, 1072px" alt="" width="1600" height="900" loading="lazy" decoding="async" />
+        <span class="sm-btn"><i set:html={PLAY} />{k("film.play")}</span>
+      </button></div>}
+  {more.length > 0 && <ul class="sm-more">{more.map((m) => <li><div class="sm-frame"><button type="button" class="sm-play sm-play-s" data-yt={m.id} data-title={m.title?.[lang] ?? ""} aria-label={`${k("film.play")}: ${m.title?.[lang] ?? ""}`}>
+      <img src={img(poster(m.poster), 800)} alt="" width="800" height="450" loading="lazy" decoding="async" /><span class="sm-btn"><i set:html={PLAY} />{m.title?.[lang]}</span></button></div></li>)}</ul>}
+  {!local && <p class="sm-note">{k("film.note")}</p>}
+</section>}
+
+{kind === "tour" && t && <section class="sm" aria-labelledby="sm-tour-h" data-sm-tour data-pid={p.id}>
+  <h2 id="sm-tour-h">{k("tour.h")}</h2>
+  <p class="sm-lede">{k("tour.p")}</p>
+  <div class="sm-frame sm-tour-still">
+    <img src={img(poster(t.poster), 800)} srcset={`${img(poster(t.poster), 800)} 800w, ${img(poster(t.poster))} 1600w`} sizes="(max-width: 1120px) 100vw, 1072px" alt="" width="1600" height="900" loading="lazy" decoding="async" />
+    <a class="sm-btn sm-tour-open" href={t.url} target="_blank" rel="noopener" data-tour-open>{k("tour.open")}</a>
+  </div>
+  <p class="sm-note">{k("tour.note")}</p>
+  <div class="sm-sheet" data-tour-sheet role="dialog" aria-modal="true" aria-label={k("tour.h")} hidden>
+    <div class="sm-bar"><span>{p.name} · {k("tour.h")}</span><span class="sm-bar-r"><a href={t.url} target="_blank" rel="noopener">{k("tour.newtab")} ↗</a><button type="button" class="sm-x" data-tour-close aria-label={k("close")} set:html={X} /></span></div>
+    <div class="sm-host" data-tour-host data-src={t.url} data-title={`${p.name} · ${k("tour.h")}`}></div>
+  </div>
+</section>}
+
+<style is:inline>
+  .sm { max-width: 1120px; margin: 0 auto; padding: 40px 24px 8px; }
+  .sm h2 { font: 400 28px/1.15 var(--serif); margin: 0 0 16px; }
+  .sm-lede { margin: -4px 0 16px; color: var(--muted); max-width: 40em; }
+  .sm-frame { position: relative; aspect-ratio: 16 / 9; background: #111214; overflow: hidden; }
+  .sm-frame img, .sm-frame iframe, .sm-frame video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border: 0; display: block; }
+  .sm-play { position: absolute; inset: 0; width: 100%; padding: 0; border: 0; background: none; cursor: pointer; }
+  .sm-play img { transition: opacity .25s, transform .3s cubic-bezier(.16, 1, .3, 1); }
+  .sm-play:hover img { opacity: .9; }
+  .sm-btn { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 999px;
+    background: rgba(255, 255, 255, .94); color: #111214; font: 500 15px/1 var(--sans); text-decoration: none; white-space: nowrap; box-shadow: 0 6px 24px rgba(0, 0, 0, .18); }
+  .sm-btn i { display: inline-flex; width: 18px; height: 18px; } .sm-btn svg { width: 18px; height: 18px; fill: currentColor; }
+  .sm-play-s .sm-btn { padding: 10px 16px; font-size: 13px; max-width: calc(100% - 24px); overflow: hidden; text-overflow: ellipsis; }
+  .sm-more { list-style: none; margin: 12px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+  .sm-note { font-size: 13px; color: var(--muted); margin: 12px 0 0; }
+  .sm-sheet { position: fixed; inset: 0; z-index: 90; display: flex; flex-direction: column; background: #111214; }
+  .sm-sheet[hidden] { display: none; }
+  .sm-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 8px 8px 16px; padding-top: calc(8px + env(safe-area-inset-top)); color: #fff; font: 500 13px/1.3 var(--sans); }
+  .sm-bar > span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+  .sm-bar-r { display: inline-flex; align-items: center; gap: 12px; flex: none; } .sm-bar a { color: #fff; }
+  .sm-x { width: 44px; height: 44px; border: 0; border-radius: 999px; background: rgba(255, 255, 255, .14); color: #fff; cursor: pointer; display: inline-grid; place-items: center; }
+  .sm-x svg { width: 20px; height: 20px; stroke: currentColor; stroke-width: 2; fill: none; }
+  .sm-host { flex: 1; position: relative; } .sm-host iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: #fff; }
+</style>
+
+<script>
+  import { track, edOf } from "../lib/track";
+  // The film: the still and the button until a tap; then the player, in place (youtube-nocookie.com, autoplay).
+  document.querySelectorAll<HTMLElement>("[data-sm-film]").forEach((box) => box.addEventListener("click", (e) => {
+    const b = (e.target as HTMLElement).closest<HTMLButtonElement>("[data-yt]"); if (!b) return;
+    const id = b.dataset.yt || ""; if (!/^[\w-]{6,20}$/.test(id)) return;
+    const f = document.createElement("iframe");
+    f.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&playsinline=1`; f.title = b.dataset.title || "";
+    f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen"; f.allowFullscreen = true;
+    b.replaceWith(f); track(`${edOf()}/p/${box.dataset.pid}/film`);
+  }));
+  // The 3D tour: a full-screen sheet; the frame is created on open and removed on close (nothing of it stays loaded).
+  document.querySelectorAll<HTMLElement>("[data-sm-tour]").forEach((box) => {
+    const sheet = box.querySelector<HTMLElement>("[data-tour-sheet]")!, host = box.querySelector<HTMLElement>("[data-tour-host]")!;
+    let last: HTMLElement | null = null, pushed = false;
+    const close = (fromPop = false) => {
+      if (sheet.hidden) return; sheet.hidden = true; host.replaceChildren(); document.documentElement.style.overflow = ""; last?.focus();
+      if (pushed && !fromPop) { pushed = false; history.back(); } else pushed = false;
+    };
+    box.querySelector<HTMLAnchorElement>("[data-tour-open]")!.addEventListener("click", (e) => {
+      e.preventDefault(); last = e.currentTarget as HTMLElement;
+      const f = document.createElement("iframe"); f.src = host.dataset.src || ""; f.title = host.dataset.title || ""; f.allow = "fullscreen; xr-spatial-tracking; gyroscope; accelerometer";
+      host.replaceChildren(f); sheet.hidden = false; document.documentElement.style.overflow = "hidden";
+      sheet.querySelector<HTMLButtonElement>("[data-tour-close]")!.focus();
+      try { history.pushState({ tour3d: 1 }, ""); pushed = true; } catch { /* no history: the button and Esc still close */ }
+      track(`${edOf()}/p/${box.dataset.pid}/tour3d`);
+    });
+    sheet.querySelector("[data-tour-close]")!.addEventListener("click", () => close());
+    addEventListener("keydown", (e) => { if (e.key === "Escape") close(); });
+    addEventListener("popstate", () => close(true));
+  });
+</script>

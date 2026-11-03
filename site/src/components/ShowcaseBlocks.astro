@@ -5,7 +5,7 @@
 // figures and the purchase-cost simulator from the price the reader enters. The [data-req] buttons are wired to the
 // request sheet elsewhere; this component only renders them. Wording: COPY_DECK.md "showb.*" and "show.*".
 import type { Lang } from "../i18n";
-import { type Project, img } from "../lib/projects";
+import { type Project, img, present } from "../lib/projects";
 import { PRICES, LAST } from "../lib/prices";
 import { c } from "../lib/copy";
 import Heart from "./Heart.astro";
@@ -13,6 +13,7 @@ import ShowcaseUnits from "./ShowcaseUnits.astro";
 import ShowcasePlace from "./ShowcasePlace.astro";
 import ShowcaseRelated from "./ShowcaseRelated.astro";
 import DevShare from "./DevShare.astro";
+import ShowcaseMedia from "./ShowcaseMedia.astro";
 
 // related: the developer's showcases in other municipalities ("By the same developer", 3 Nov 2026).
 interface Props { lang: Lang; p: Project; label: string; locale: string; simHref?: string; mapHref?: string; save?: { href: string; muni: string }; related?: { id: string; name: string; place: string; href: string; render?: string | null }[]; share?: boolean; }
@@ -26,7 +27,17 @@ const date = (d?: string) => (d ? new Intl.DateTimeFormat(locale, { day: "numeri
 const blocks = p.blocks ?? [];
 const anySoon = blocks.some((b) => b.units.some((u) => u.soon));
 const forSale = blocks.reduce((a, b) => a + b.units.reduce((x, u) => x + u.forSale, 0), 0);
-const gallery = (p.gallery ?? []).filter((g) => g !== p.render);
+// Prompt 66 (O'rizon): a project with "views" shows those (only files that exist); the film and the 3D tour follow the
+// head and the views; the buildings and the areas by typology, the homes from sale listings, the floor plans and the
+// amenities with photographs come after. Marble Terrace (blocks) keeps its order: gallery, features, availability, units.
+const gallery = p.views ? present(p.views) : (p.gallery ?? []).filter((g) => g !== p.render);
+const late = !blocks.length;
+const amen = present(p.amenityImgs);
+const plans = (p.plans ?? []).filter((x) => present([x.img]).length);
+const listed = !p.unitTable?.length && !!p.units?.length && late;
+const ko = (x: string, v: Record<string, string | number> = {}) => c(`orz.${x}`, lang, v);
+const nf0 = new Intl.NumberFormat(locale);
+const types = [...new Set(p.typologies)];
 const credits = (p.credits ?? []).join("; ");
 ---
 <article class="sb">
@@ -37,24 +48,45 @@ const credits = (p.credits ?? []).join("; ");
     <p class="sb-by">{k("by", { developer: p.developer })}</p>
     <p class="sb-sum">{p.summary?.[lang]}</p>
     <p class="sb-line">{p.lines?.[lang] ?? p.line}</p>
-    <dl class="sb-facts">
+    {blocks.length ? <dl class="sb-facts">
       <div><dt>{k("avail")}</dt><dd>{k("now", { n: forSale })}</dd></div>
       <div><dt>{c("show.homes", lang)}</dt><dd>{k("price")}</dd></div>
-    </dl>
+    </dl> : <dl class="sb-facts">
+      <div><dt>{c("show.homes", lang)}</dt><dd>{p.from ? c("show.from", lang, { v: money(p.from) }) : k("price")}</dd></div>
+      <div><dt>{ko("col.typ")}</dt><dd>{types.join(", ")}</dd></div>
+    </dl>}
     <p class="sb-cta" id="pedir"><button type="button" class="sb-btn sb-btn-p" data-req>{k("visit")}</button>{save && <Heart lang={lang} kind="home" id={p.id} label={`${p.name}, ${save.muni}`} href={save.href} class="sb-ht" />}</p>
     {share && <DevShare lang={lang} id={p.id} />}
   </header>
 
-  {gallery.length > 0 && <section class="sb-sec" aria-label={c("show.gallery", lang)}>
+  {p.film && <ShowcaseMedia lang={lang} p={p} kind="film" />}
+
+  {gallery.length > 0 && <section class="sb-sec" aria-label={c("show.gallery", lang)} aria-labelledby={p.views ? "sb-views" : undefined}>
+    {p.views && <h2 id="sb-views">{ko("views.h")}</h2>}
     <ul class="sb-gal">{gallery.map((g) => <li><img src={img(g, 800)} srcset={`${img(g, 800)} 800w, ${img(g)} 1600w`} sizes="(max-width: 760px) 100vw, 50vw" alt="" width="800" height="560" loading="lazy" /></li>)}</ul>
   </section>}
 
-  {p.features?.length && <section class="sb-sec">
+  {p.tour3d && <ShowcaseMedia lang={lang} p={p} kind="tour" />}
+
+  {!late && p.features?.length && <section class="sb-sec">
     <h2>{k("features")}</h2>
     <ul class="sb-feat">{p.features.map((f) => <li>{f[lang]}</li>)}</ul>{p.featuresNote?.[lang] && <p class="sb-small">{p.featuresNote[lang]}</p>}
   </section>}
 
-  <section class="sb-sec" aria-labelledby="sb-avail">
+  {p.buildings?.length && <section class="sb-sec" aria-labelledby="sb-bld">
+    <h2 id="sb-bld">{ko("bld.h")}</h2>
+    <p class="sb-small sb-lede">{ko("bld.p")}</p>
+    <div class="sb-scroll"><table class="sb-tab sb-bld">
+      <thead><tr><th scope="col"><span class="sb-vh">{ko("bld.h")}</span></th><th scope="col">{ko("bld.phase", { n: "" }).trim()}</th>{types.map((t) => <th scope="col">{t}</th>)}<th scope="col">{ko("bld.total")}</th></tr></thead>
+      <tbody>{p.buildings.map((b) => { const n = b.units ? Object.values(b.units).reduce((a, x) => a + x, 0) : 0; return (
+        <tr><th scope="row" class="sb-bn">{b.id}</th><td>{b.phase ?? "–"}</td>{b.units ? types.map((t) => <td>{b.units![t] ?? "–"}</td>) : <td colspan={types.length} class="sb-pr">{ko("bld.nofig")}</td>}<td class="sb-n">{n || "–"}</td></tr>); })}</tbody>
+    </table></div>
+    {p.typeAreas?.length && <><h3 class="sb-k">{ko("areas.h")}</h3>
+      <dl class="sb-areas">{p.typeAreas.map((a) => <div><dt>{a.t}</dt><dd>{ko("areas.v", { min: nf0.format(a.min), max: nf0.format(a.max) })}</dd></div>)}</dl></>}
+    {p.buildingsSource && <p class="sb-small"><a href={p.buildingsSource} rel="noopener">{k("source")}</a></p>}
+  </section>}
+
+  {blocks.length > 0 && <section class="sb-sec" aria-labelledby="sb-avail">
     <h2 id="sb-avail">{k("avail")}</h2>
     <div class="sb-scroll"><table class="sb-tab">
       <thead><tr><th scope="col">{k("typ")}</th><th scope="col">{k("total")}</th><th scope="col">{k("forsale")}</th>{anySoon && <th scope="col">{k("soon")}</th>}<th scope="col">{k("reserved")}</th><th scope="col">{k("sold")}</th><th scope="col">{c("show.homes", lang)}</th><th scope="col"><span class="sb-vh">{k("interest")}</span></th></tr></thead>
@@ -72,7 +104,19 @@ const credits = (p.credits ?? []).join("; ");
       ))}
     </table></div>
     <p class="sb-small">{k("checked", { date: date(p.availabilityChecked) })} {p.availabilitySource && <a href={p.availabilitySource} rel="noopener">{k("source")}</a>} {p.availabilityNote?.[lang]}</p>
-  </section>{p.unitTable && p.unitTable.length > 0 && <ShowcaseUnits lang={lang} locale={locale} p={p} />}
+  </section>}{((p.unitTable && p.unitTable.length > 0) || listed) && <ShowcaseUnits lang={lang} locale={locale} p={p} />}
+
+  {plans.length > 0 && <section class="sb-sec" aria-labelledby="sb-plans">
+    <h2 id="sb-plans">{ko("plans.h")}</h2>
+    <ul class="sb-gal sb-plans">{plans.map((x) => <li><figure><img src={img(x.img, 800)} srcset={`${img(x.img, 800)} 800w, ${img(x.img)} 1600w`} sizes="(max-width: 760px) 100vw, 50vw" alt={`${p.name}, ${x.t}`} width="800" height="560" loading="lazy" /><figcaption>{x.t}</figcaption></figure></li>)}</ul>
+  </section>}
+
+  {late && p.features?.length && <section class="sb-sec" aria-labelledby="sb-amen">
+    <h2 id="sb-amen">{ko("amen.h")}</h2>
+    {amen.length > 0 && <ul class="sb-gal sb-amen">{amen.map((g) => <li><img src={img(g, 800)} srcset={`${img(g, 800)} 800w, ${img(g)} 1600w`} sizes="(max-width: 760px) 100vw, 33vw" alt="" width="800" height="560" loading="lazy" /></li>)}</ul>}
+    <ul class="sb-feat">{p.features.map((f) => <li>{f[lang]}</li>)}</ul>{p.featuresNote?.[lang] && <p class="sb-small">{p.featuresNote[lang]}</p>}
+    {p.featuresSource && <p class="sb-small"><a href={p.featuresSource} rel="noopener">{ko("amen.src")}</a></p>}
+  </section>}
 
   {mapHref && <section class="sb-sec">
     <h2>{k("map")}</h2>
@@ -105,8 +149,8 @@ const credits = (p.credits ?? []).join("; ");
 
   <footer class="sb-sec sb-foot">
     <p class="sb-cta"><button type="button" class="sb-btn sb-btn-p" data-req>{k("visit")}</button></p>
-    <p>{c("show.credit", lang, { credit: credits })} {p.checked && c("show.published", lang, { date: p.checked })}</p>
-    <details><summary>{c("show.sources", lang)}</summary><ul>{(p.sources ?? []).map((u) => <li><a href={u} rel="noopener">{u}</a></li>)}</ul></details>
+    <p>{c("show.credit", lang, { credit: credits })} {p.checked && !listed && c("show.published", lang, { date: p.checked })}</p>
+    <details><summary>{c("show.sources", lang)}</summary><ul>{(p.sourcesShown ?? p.sources ?? []).map((u) => <li><a href={u} rel="noopener">{u}</a></li>)}</ul></details>
   </footer>
 </article>
 
@@ -165,5 +209,13 @@ const credits = (p.credits ?? []).join("; ");
   .sb-res { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin: 24px 0; }
   .sb-res dt { font-size: 13px; color: var(--muted); } .sb-res dd { margin: 4px 0 0; font: 400 21px/1.1 var(--serif); }
   .sb-small, .sb-foot { font-size: 13px; color: var(--muted); }
+  .sb-lede { margin: -4px 0 16px; }
+  .sb-bld { min-width: 0; } .sb-bld td, .sb-bld th { white-space: nowrap; } .sb-bn { font: 400 21px/1.2 var(--serif); }
+  .sb-k { font: 500 12px/1.3 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 32px 0 12px; }
+  .sb-areas { margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0 24px; }
+  .sb-areas div { padding: 12px 0; border-top: 1px solid color-mix(in srgb, var(--ink) 18%, transparent); }
+  .sb-areas dt { font: 400 21px/1.2 var(--serif); } .sb-areas dd { margin: 4px 0 0; font-size: 15px; color: var(--muted); }
+  .sb-amen { margin-bottom: 24px; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+  .sb-plans figure { margin: 0; } .sb-plans img { object-fit: contain; background: #fff; } .sb-plans figcaption { font: 400 21px/1.2 var(--serif); margin-top: 8px; }
   .sb-small a, .sb-foot a { color: inherit; } .sb-foot { padding-bottom: 64px; } .sb-foot a { word-break: break-all; }
 </style>

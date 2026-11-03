@@ -12,7 +12,7 @@ import { SUB } from "../lib/tools";
 import { c, edName } from "../lib/copy";
 import DevSlots from "./DevSlots.astro";
 import Heart from "./Heart.astro";
-import { PROJECTS, showcases } from "../lib/projects";
+import { PROJECTS, showcases, labelOf } from "../lib/projects";
 import { SLUGS } from "../i18n";
 import { PRICES, LAST } from "../lib/prices";
 import { TILES } from "../lib/maptiles";
@@ -65,7 +65,7 @@ const nearHomes = showcases(PROJECTS).map((ps) => ps[0]).filter((p) => p.muni ==
     <h2 class="h3" style="margin-top:36px">{c("place.next.h", lang)}</h2>
     <p><a class="btn" href={simHref}>{c("place.sim", lang)}</a></p>
     <p><a href={`${pathFor(lang, ed, "consult")}?place=${encodeURIComponent(place.name)}`}>{c("place.homes", lang)}</a> · <a href={`${mapBase}?place=${place.slug}`}>{c("place.map", lang)}</a> · <a href={pathFor(lang, ed, "journey")}>{c("journey.open", lang)}</a> · <a href={pathFor(lang, ed, "data")}>{c("prices.home.open", lang)}</a></p>
-    {nearHomes.map((p) => <p class="place-near"><a href={`/${lang}/${ed}/${SLUGS[lang].partners}/${p.devSlug}/${p.muni}/`}>{c("bar.near", lang, { name: p.name, muni: (PRICES.munis[p.muni] as any)?.n ?? p.muni })} →</a> <span class="small">{c("common.sponsored", lang)}</span></p>)}
+    {nearHomes.map((p) => <p class="place-near"><a href={`/${lang}/${ed}/${SLUGS[lang].partners}/${p.devSlug}/${p.muni}/`}>{c("bar.near", lang, { name: p.name, muni: (PRICES.munis[p.muni] as any)?.n ?? p.muni })} →</a> <span class="small">{labelOf(p, lang, c("common.sponsored", lang))}</span></p>)}
     <DevSlots lang={lang} ed={ed} slug={place.slug} />
     <nav class="others" aria-labelledby="others">
       <h2 id="others" class="h-small">{c("place.others.h", lang)}</h2>

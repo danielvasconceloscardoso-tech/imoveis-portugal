@@ -4,7 +4,7 @@
 // grid (image, typology, area, price as published, delivery), each opening its own page. Used by the site (partners
 // only, labelled "Sponsored") and by each private demo (English). Wording: COPY_DECK.md "show.*".
 import type { Lang } from "../i18n";
-import { type Project, type Unit, img } from "../lib/projects";
+import { type Project, type Unit, img, rich } from "../lib/projects";
 import { PRICES, LAST } from "../lib/prices";
 import { c } from "../lib/copy";
 import ShowcaseBlocks from "./ShowcaseBlocks.astro";
@@ -26,7 +26,7 @@ const from = Math.min(...projects.map((p) => p.from ?? Infinity));
 const checked = projects.map((p) => p.checked).filter(Boolean).sort().pop();
 const credits = [...new Set(projects.flatMap((p) => p.credits ?? []))].join("; ");
 ---
-{projects[0].blocks ? <ShowcaseBlocks lang={lang} p={projects[0]} label={label} locale={locale} simHref={simHref} mapHref={mapHref} save={save} related={related} share={share} /> : (
+{rich(projects[0]) ? <ShowcaseBlocks lang={lang} p={projects[0]} label={label} locale={locale} simHref={simHref} mapHref={mapHref} save={save} related={related} share={share} /> : (
 <article class="sc">
   <figure class="sc-hero"><img src={img(p0.render)} srcset={`${img(p0.render, 800)} 800w, ${img(p0.render)} 1600w`} sizes="100vw" alt={p0.name} width="1600" height="900" fetchpriority="high" /></figure>
   <header class="sc-head">
