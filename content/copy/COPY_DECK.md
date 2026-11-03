@@ -1533,9 +1533,9 @@ How to edit:
 - FR: Cookies
 
 ### privacy.6.p
-- PT: Não usamos cookies de publicidade nem de estatística. A língua e a edição que escolhe ficam só no seu navegador (armazenamento local), sem cookies. Os formulários incorporados podem usar cookies técnicos do serviço.
-- EN: We use no advertising or analytics cookies. The language and edition you choose stay only in your browser (local storage), without cookies. Embedded forms may use technical cookies from their service.
-- FR: Aucun cookie publicitaire ni de mesure d'audience. La langue et l'édition choisies restent uniquement dans votre navigateur (stockage local), sans cookie. Les formulaires intégrés peuvent utiliser des cookies techniques de leur service.
+- PT: Não usamos cookies de publicidade nem de estatística. A língua e a edição que escolhe ficam só no seu navegador (armazenamento local), sem cookies. Os formulários incorporados podem usar cookies técnicos do serviço. Alguns empreendimentos mostram um filme do YouTube e uma visita 3D de property-sales-engine.com: só carregam quando toca em «Ver o filme» ou «Abrir a visita 3D», e a partir daí esses sites podem guardar os seus próprios cookies, segundo as políticas deles. Sem esse toque, nada deles é carregado.
+- EN: We use no advertising or analytics cookies. The language and edition you choose stay only in your browser (local storage), without cookies. Embedded forms may use technical cookies from their service. Some developments show a YouTube film and a 3D tour from property-sales-engine.com. They load only when you tap “Play the film” or “Open the 3D tour”; from then on those sites may set their own cookies, under their own policies. Without that tap, nothing from them loads.
+- FR: Aucun cookie publicitaire ni de mesure d'audience. La langue et l'édition choisies restent uniquement dans votre navigateur (stockage local), sans cookie. Les formulaires intégrés peuvent utiliser des cookies techniques de leur service. Certains programmes proposent un film YouTube et une visite 3D de property-sales-engine.com. Ils ne se chargent que lorsque vous touchez « Voir le film » ou « Ouvrir la visite 3D » ; ces sites peuvent alors déposer leurs propres cookies, selon leurs propres politiques. Sans ce geste, rien d'eux n'est chargé.
 
 ### legal.title
 - PT: Aviso legal
