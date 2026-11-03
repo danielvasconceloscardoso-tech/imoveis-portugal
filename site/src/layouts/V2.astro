@@ -15,10 +15,12 @@ import { EDITIONS, ED_ORDER, LANGS, LANG_NAME, HTML_LANG, pathFor, type Lang, ty
 import { c, edName } from "../lib/copy";
 import { DISCLAIMER } from "../lib/content";
 import CountryBar from "../components/CountryBar.astro";
+import NextStep, { type Next } from "../components/NextStep.astro";
+import "../styles/bar.css";
 
 type Sticky = { href: string; label: string } | null;
 // `paths` overrides the URL per language for pages below a page key (e.g. one calculator under "sims").
-interface Props { lang: Lang; ed: EdCode; page: PageKey | "home"; title: string; description: string; sticky?: Sticky; d2?: boolean; bodyClass?: string; paths?: Record<Lang, string>; noindex?: boolean; canonicalUrl?: string; ogType?: string; ogImage?: string; alternates?: Record<Lang, string>; }
+interface Props { lang: Lang; ed: EdCode; page: PageKey | "home"; title: string; description: string; sticky?: Sticky; d2?: boolean; bodyClass?: string; paths?: Record<Lang, string>; noindex?: boolean; canonicalUrl?: string; ogType?: string; ogImage?: string; alternates?: Record<Lang, string>; next?: Next | false; }
 const { lang, ed, page, title, description, paths, noindex = false, ogType = "website", ogImage, d2 = true, bodyClass } = Astro.props;
 const urlFor = (l: Lang) => paths ? paths[l] : pathFor(l, ed, page);
 const host = config.domainMode === "primary" ? config.primaryDomain : EDITIONS[ed].domain;
@@ -36,6 +38,26 @@ const nav: { k: string; target: PageKey; current: string[] }[] = [
   { k: "partners", target: "partners", current: ["partners", "ours", "talk"] },
 ];
 const more: PageKey[] = ["casa", "data", "consult", "dossiers", "guide", "ours", "talk", "how"];
+// Part 2 (operator, 3 Nov): the same five everywhere: the bar at the thumb on phones, the header on desktop. The six
+// sections above stay in the menu (open on every device now), so Artigos and Parceiros are one tap away as before.
+const five: { k: string; target: PageKey; current: string[]; cg?: boolean; icon: string }[] = [
+  { k: "map", target: "map", current: ["map", "data"], icon: '<path d="M9 4.5 3.5 6.6v13l5.5-2.1 6 2.1 5.5-2.1v-13L15 6.6 9 4.5zM9 4.5v13M15 6.6v13"/>' },
+  { k: "sims", target: "sims", current: ["sims"], icon: '<rect x="5.5" y="3.5" width="13" height="17" rx="2.5"/><path d="M8.8 7.8h6.4M9 12h.01M12 12h.01M15 12h.01M9 15.6h.01M12 15.6h.01M15 15.6h.01"/>' },
+  { k: "concierge", target: "consult", current: ["consult"], cg: true, icon: '<path d="M4 17.5h16M5.8 17.5a6.2 6.2 0 0 1 12.4 0M12 11.3V9.2M10.2 9.2h3.6"/>' },
+  { k: "path", target: "journey", current: ["journey", "casa", "buy", "dossiers", "guide", "private"], icon: '<circle cx="6.5" cy="17.5" r="2"/><circle cx="17.5" cy="6.5" r="2"/><path d="M8.5 17.5h6a3 3 0 0 0 0-6h-5a3 3 0 0 1 0-6h6"/>' },
+  { k: "faq", target: "faq", current: ["faq"], icon: '<circle cx="12" cy="12" r="8.5"/><path d="M9.7 9.6a2.4 2.4 0 1 1 3.3 2.2c-.6.3-1 .8-1 1.4v.6M12 16.6h.01"/>' },
+];
+const savedHref = pathFor(lang, ed, "saved");
+const saveL = { add: c("bar.heart.add", lang), saved: c("bar.heart.saved", lang), removed: c("bar.heart.removed", lang), link: c("bar.saved", lang) };
+// Every page ends with one clear next step (Part 2): the Concierge from most pages, "Voltar" from the legal pages; the
+// forms (Concierge, buyer request, partner, free guide) and the partner pages already end on their own action.
+const next: Next | null = Astro.props.next === false ? null : Astro.props.next ?? (
+  page === "home" ? { kind: "concierge", p: c("bar.next.home.p", lang) }
+  : page === "map" || page === "data" ? { kind: "concierge", p: c("bar.next.map.p", lang) }
+  : page === "sims" ? { kind: "concierge", p: c("bar.next.sims.p", lang) }
+  : page === "privacy" || page === "legal" ? { kind: "back", p: c("bar.next.back.p", lang) }
+  : ["consult", "buy", "talk", "guide", "partners", "saved"].includes(page) ? null
+  : { kind: "concierge", p: c("bar.next.read.p", lang) });
 const subscribe = `${pathFor(lang, ed, "home")}#subscrever`;
 // Default sticky action: the free guide from the home page, a partner from the help pages.
 const sticky: Sticky = Astro.props.sticky !== undefined ? Astro.props.sticky
@@ -72,14 +94,20 @@ import Beacon from "../components/Beacon.astro";
     <slot name="head" />
     <Beacon />
   </head>
-  <body data-ed={ed} class={[sticky && !d2 ? "has-sticky" : "", d2 ? "d2" : "", d2 && page !== "home" ? "d2p" : "", bodyClass ?? ""].filter(Boolean).join(" ") || undefined}>
+  <body data-ed={ed} class={[sticky && !d2 ? "has-sticky" : "", d2 ? "d2" : "", d2 && page !== "home" ? "d2p" : "", d2 ? "has-bb" : "", bodyClass ?? ""].filter(Boolean).join(" ") || undefined}>
     <a class="skip" href="#main">{c("common.skip", lang)}</a>
     <header class={d2 && page !== "home" ? "hd solid" : "hd"}>
       <div class="frame">
         <a class="word" href={pathFor(lang, ed, "home")}>Imóveis Portugal<span class="beta">{c("common.beta", lang)}</span></a>
+        {d2 ? (
+        <nav class="nav nav5" aria-label="Menu">
+          {five.map((n) => <a href={pathFor(lang, ed, n.target)} aria-current={n.current.includes(page) ? "page" : undefined} data-nav-k={n.k} {...(n.cg ? { "data-concierge": "" } : {})}>{c(`bar.nav.${n.k}`, lang)}</a>)}
+        </nav>
+        ) : (
         <nav class="nav" aria-label="Menu">
           {nav.map((n) => <a href={pathFor(lang, ed, n.target)} aria-current={n.current.includes(page) ? "page" : undefined}>{c(`common.navx.${n.k}`, lang)}</a>)}
         </nav>
+        )}
         <div class="tools">
           <details class="cpick">
             <summary aria-label={`${c("common.country.live", lang)}: ${c(`common.country.${ed}`, lang)}`}><span class="cpick-l">{c("common.country.live", lang)}</span> {c(`common.country.${ed}`, lang)}</summary>
@@ -90,6 +118,7 @@ import Beacon from "../components/Beacon.astro";
           </p>
           <a class="nl" href={subscribe}>{c("common.newsletter", lang)}</a>
           {d2 && <button type="button" class="hd-find" data-find-open aria-label={c("find.open", lang)}><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg><kbd>⌘K</kbd></button>}
+          {d2 && <a class="hd-saved" href={savedHref} data-saved-link data-nav-k="saved" aria-label={c("bar.saved", lang)} aria-current={page === "saved" ? "page" : undefined}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.2s-7.2-4.5-7.2-10.1A4.1 4.1 0 0 1 12 7.5a4.1 4.1 0 0 1 7.2 2.6c0 5.6-7.2 10.1-7.2 10.1z"/></svg></a>}
           {d2 && <a class="hd-cg" href={pathFor(lang, ed, "consult")} data-concierge>{c("find.concierge", lang)}</a>}
           <details class="concierge">
             <summary><span class="open">{c("common.menu", lang)}</span><span class="shut">{c("common.close", lang)}</span></summary>
@@ -99,6 +128,7 @@ import Beacon from "../components/Beacon.astro";
               </nav>
               <ul class="csub">
                 {more.map((k) => <li><a href={pathFor(lang, ed, k)} aria-current={page === k ? "page" : undefined}>{c(`common.nav.${k}`, lang)}</a></li>)}
+                {d2 && <li><a href={savedHref} aria-current={page === "saved" ? "page" : undefined}>{c("bar.saved", lang)}</a></li>}
               </ul>
               <CountryBar lang={lang} ed={ed} href={(x) => pathFor(lang, x, page)} variant="menu" />
               <p class="langs cmenu-langs" aria-label={c("common.language", lang)}>
@@ -115,6 +145,7 @@ import Beacon from "../components/Beacon.astro";
     </header>
     <main id="main">
       <slot />
+      {d2 && next && <NextStep lang={lang} ed={ed} next={next} />}
     </main>
     {d2 ? (
     <footer class="ft2">
@@ -193,6 +224,13 @@ import Beacon from "../components/Beacon.astro";
       })();
     </script>
     {d2 && <Chrome lang={lang} ed={ed} page={page} />}
+    {d2 && (
+      <nav class="bb" data-bb aria-label={c("bar.label", lang)}>
+        {five.map((n) => <a href={pathFor(lang, ed, n.target)} aria-current={n.current.includes(page) ? "page" : undefined} data-bb-k={n.k} {...(n.cg ? { "data-concierge": "" } : {})}><svg viewBox="0 0 24 24" aria-hidden="true" set:html={n.icon} /><span>{c(`bar.nav.${n.k}`, lang)}</span></a>)}
+      </nav>
+    )}
+    {d2 && <script type="application/json" id="ip-save-l" set:html={JSON.stringify(saveL)} />}
+    <script>import { initBar } from "../scripts/bar"; initBar();</script>
     <DemoBar />
 </body>
 </html>

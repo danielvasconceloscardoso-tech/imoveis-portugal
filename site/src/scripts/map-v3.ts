@@ -5,6 +5,7 @@ import mapCss from "maplibre-gl/dist/maplibre-gl.css?url";
 import { feature, mesh } from "topojson-client";
 import { savePlace } from "../lib/brief";
 import { track, edOf } from "../lib/track";
+import { heartHTML } from "./hearts";
 
 type Series = { n: string; m2: (number | null)[]; rq: (number | null)[]; yield: number | null; g10?: number | null; cagrP?: number | null;
   mo: { c4: number; c8: number | null; w: "up" | "steady" | "down" } | null };
@@ -400,8 +401,15 @@ export function initMapV3(root: HTMLElement) {
     if (here.length && !overlays.devs) setOverlay("devs", true);  // prompt 38: a place card shows its partner projects
     const homes = here.length ? here[0].showcase : `${cfg.links.buy}?place=${encodeURIComponent(p.n)}&budget=${Math.round(budget)}`;
     const photo = cfg.photos[slug] ? `<img class="m3-photo" src="/img/v2/${cfg.photos[slug]}-640.webp" srcset="/img/v2/${cfg.photos[slug]}-640.webp 640w, /img/v2/${cfg.photos[slug]}-1024.webp 1024w" sizes="420px" alt="" width="640" height="400">` : `<div class="m3-photo m3-photo-none" style="--c:${colorOf(value(s, layer))}"></div>`;
-    let h = `${photo}<div class="m3-sb"><p class="m3-kick">${esc(L.regions[p.r] || "")}</p><h3 tabindex="-1">${esc(p.n)}</h3>${stats(s)}`;
+    // Part 2 (3 Nov): the heart keeps the region in "A sua seleção" (its own page where it has one, else the map on it).
+    const regionHref = cfg.links.pages.includes(slug) ? `${cfg.links.map}${slug}/` : `${cfg.links.map}?place=${slug}`;
+    let h = `${photo}<div class="m3-sb"><p class="m3-kick">${esc(L.regions[p.r] || "")}</p><div class="ht-row"><h3 tabindex="-1">${esc(p.n)}</h3>${heartHTML("region", slug, p.n, regionHref)}</div>${stats(s)}`;
     if (v) h += `<p class="m3-buys">${L.card.buys.replace("{v}", `<b>${nf.format(Math.round(budget / v))}</b>`)}</p>`;
+    // Part 2 (3 Nov): no partner homes here, but some nearby (projects.json "near"): one line to them, never a dead end.
+    if (!here.length && cfg.pl?.near) {
+      const nearBy = projects.filter((x) => x.showcase && (x as Proj & { near?: string[] }).near?.some((n) => plain(n) === plain(p.n)));
+      for (const x of nearBy.slice(0, 2)) h += `<p class="m3-buys m3-near"><a href="${esc(x.showcase)}">${esc(cfg.pl.near.replace("{name}", x.name).replace("{muni}", (x as Proj & { muniName?: string }).muniName ?? ""))} →</a></p>`;
+    }
     const vs = s as (Series & { vac?: number; sea?: number }) | undefined;
     if (layer === "vac" && vs?.vac != null) h += `<p class="m3-buys">${L.vacLine.replace("{v}", `<b>${nf1.format(vs.vac)}%</b>`).replace("{s}", vs.sea != null ? `<b>${nf1.format(vs.sea)}%</b>` : "—")}</p>`;
     if (s) h += spark(s);
@@ -567,7 +575,8 @@ export function initMapV3(root: HTMLElement) {
     track(`${edOf()}/p/${p.id}/pin`);
     const pl = cfg.pl ?? {};
     const photo = p.render ? `<img class="m3-photo" src="${esc(p.render)}-800.webp" alt="" width="800" height="450">` : "";
-    let h = `${photo}<div class="m3-sb"><p class="m3-kick">${esc(byS.get(p.muni)?.n ?? "")} · <span class="m3-tag">${L.sponsored}</span></p><h3 tabindex="-1">${esc(p.name)}</h3>`;
+    const pm = byS.get(p.muni)?.n ?? "";
+    let h = `${photo}<div class="m3-sb"><p class="m3-kick">${esc(pm)} · <span class="m3-tag">${L.sponsored}</span></p><div class="ht-row"><h3 tabindex="-1">${esc(p.name)}</h3>${heartHTML("home", p.id, pm ? `${p.name}, ${pm}` : p.name, p.showcase)}</div>`;
     h += `<p class="m3-buys">${esc(p.summary ?? p.developer)}</p>`;
     if (p.feats?.length) h += `<ul class="m3-det">${p.feats.map((f) => `<li>${esc(f)}</li>`).join("")}</ul>`;
     if (p.now != null && pl.now) h += `<p class="m3-buys"><b>${esc(pl.now.replace("{n}", String(p.now)))}</b></p>`;

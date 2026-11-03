@@ -23,6 +23,8 @@ const title = view === "form" ? c("consult.title", lang) : c(`consult.${view}.ti
 ---
 <V2 lang={lang} ed={ed} page="consult" paths={paths} noindex={view !== "form"} title={`${title} | Imóveis Portugal · ${edName(ed, lang)}`} description={c("consult.lede", lang)} sticky={null}>
   <div class="frame read ph">
+    {/* Part 2 (3 Nov): "Voltar" returns to the page the reader came from (scripts/bar.ts), the home without one. */}
+    <p class="cg-back"><a class="goback" href={pathFor(lang, ed, "home")} data-goback data-next-k="back"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>{c("bar.back", lang)}</a></p>
     <p class="h-small">{c("consult.title", lang)}</p>
     <h1 class={view === "form" ? "vh" : undefined}>{h1}</h1>
     {view === "ok" && <><p class="lede">{c("consult.ok.p", lang)}</p><p>{c("consult.ok.prep", lang)}</p></>}

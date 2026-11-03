@@ -9,6 +9,9 @@ import { PLACES, QUARTERS, NATIONAL, inPlace, placeName, type Place } from "../l
 import { SUB } from "../lib/tools";
 import { c, edName } from "../lib/copy";
 import DevSlots from "./DevSlots.astro";
+import Heart from "./Heart.astro";
+import { PROJECTS, showcases } from "../lib/projects";
+import { SLUGS } from "../i18n";
 import { PRICES, LAST } from "../lib/prices";
 import { lineChart } from "../lib/chart";
 
@@ -38,14 +41,18 @@ const others = PLACES.filter((p) => p.slug !== place.slug);
 const hist = PRICES.munis[place.slug];
 const nHist = src.n("ine-m2-history"), nRent = src.n("ine-rent-2026q2");
 const pchart = hist ? lineChart(PRICES.quarters, [{ label: hist.n, values: hist.m2 }, { label: "Portugal", values: PRICES.regions.PT.m2 }], { breakAt: PRICES.break, breakLabel: c("prices.break", lang), fmt: (v) => nf.format(v), h: 240 }) : "";
+// Part 2 (3 Nov): partner homes in this municipality or near it (projects.json "near"), one tap from the place page.
+const plainS = (x: string) => x.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+const nearHomes = showcases(PROJECTS).map((ps) => ps[0]).filter((p) => p.muni === place.slug || (p.near ?? []).some((n) => plainS(n) === plainS(place.name)));
 const nf2 = new Intl.NumberFormat(HTML_LANG[lang], { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 const nf1 = new Intl.NumberFormat(HTML_LANG[lang], { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 ---
-<V2 lang={lang} ed={ed} page="map" paths={paths} title={`${title} | Imóveis Portugal · ${edName(ed, lang)}`} description={lede} sticky={null}>
+<V2 lang={lang} ed={ed} page="map" paths={paths} title={`${title} | Imóveis Portugal · ${edName(ed, lang)}`} description={lede} sticky={null}
+  next={{ kind: "concierge", p: c("bar.next.map.p", lang), href: `${pathFor(lang, ed, "consult")}?place=${encodeURIComponent(place.name)}` }}>
   <Fragment slot="head"><script type="application/ld+json" set:html={JSON.stringify(ld)} /></Fragment>
   <div class="frame read ph">
     <p class="small" style="margin:0 0 10px"><a href={mapBase}>{c("place.crumb", lang)}</a> · {place.region}</p>
-    <h1>{title}</h1>
+    <div class="ht-row"><h1>{title}</h1><Heart lang={lang} kind="region" id={place.slug} label={placeName(place.name, lang)} href={paths[lang]} /></div>
     <p class="lede">{lede}<a class="sup" href={`#fonte-${n}`}>{n}</a></p>
     <p class="small">{c("place.region", lang, { region: place.region, pt: eur(NATIONAL, lang) })}</p>
   </div>
@@ -61,6 +68,7 @@ const nf1 = new Intl.NumberFormat(HTML_LANG[lang], { minimumFractionDigits: 1, m
     <h2 class="h3" style="margin-top:36px">{c("place.next.h", lang)}</h2>
     <p><a class="btn" href={simHref}>{c("place.sim", lang)}</a></p>
     <p><a href={`${pathFor(lang, ed, "consult")}?place=${encodeURIComponent(place.name)}`}>{c("place.homes", lang)}</a> · <a href={`${mapBase}?place=${place.slug}`}>{c("place.map", lang)}</a> · <a href={pathFor(lang, ed, "journey")}>{c("journey.open", lang)}</a> · <a href={pathFor(lang, ed, "data")}>{c("prices.home.open", lang)}</a></p>
+    {nearHomes.map((p) => <p class="place-near"><a href={`/${lang}/${ed}/${SLUGS[lang].partners}/${p.devSlug}/${p.muni}/`}>{c("bar.near", lang, { name: p.name, muni: (PRICES.munis[p.muni] as any)?.n ?? p.muni })} →</a> <span class="small">{c("common.sponsored", lang)}</span></p>)}
     <DevSlots lang={lang} ed={ed} slug={place.slug} />
     <nav class="others" aria-labelledby="others">
       <h2 id="others" class="h-small">{c("place.others.h", lang)}</h2>
