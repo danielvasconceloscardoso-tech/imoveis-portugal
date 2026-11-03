@@ -24,6 +24,10 @@ const all = issues();
 const base = pathFor(lang, ed, "mare");
 const paths = one ? (Object.fromEntries(LANGS.map((l) => [l, `${pathFor(l, ed, "mare")}${one.id}/`])) as Record<Lang, string>) : undefined;
 const nl = config.forms.newsletter[lang];
+// One field, one click (operator, 3 Nov 2026): with a beehiiv form id the form shows at once, no tick box and no
+// confirmation e-mail; a line under it says what the click does (D87).
+const bh = !!nl && !nl.startsWith("http");
+const Box = bh ? "div" : "form"; // beehiiv draws its own form: no form inside a form
 const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("home.subscribe.subject", lang)} (${ed} · ${lang})`)}`;
 const html = show ? renderIssue(show, { ed, framed: true }) : "";
 const fmt = (d: string) => new Intl.DateTimeFormat(HTML_LANG[lang], { weekday: "long", day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(`${d}T12:00:00Z`));
@@ -44,20 +48,20 @@ const title = one ? `${one.headline} | Maré` : `Maré | Imóveis Portugal · ${
         <p class="mr-line">{c("mare.line", lang)}</p>
       </>
     )}
-    <form class="mr-form" action={nl ? "#" : mail} method="post" enctype="text/plain" data-mare-form data-issue={show?.id ?? ""} data-embed={nl || undefined}>
+    <Box class="mr-form" action={bh ? undefined : nl ? "#" : mail} method={bh ? undefined : "post"} enctype={bh ? undefined : "text/plain"} data-mare-form data-issue={show?.id ?? ""} data-embed={nl || undefined}>
       <input type="hidden" name="edicao" value={ed} />
       <input type="hidden" name="lingua" value={lang} />
       <input type="hidden" name="origem" value="mare" data-mare-from />
       {show && <input type="hidden" name="mare" value={show.id} />}
       {!nl && <label class="mr-email"><span class="vh">{c("mare.email", lang)}</span><input type="email" name="email" required autocomplete="email" placeholder={c("mare.email", lang)} /></label>}
-      <button class="mr-btn" type="submit">{c("mare.a", lang)}</button>
-      <label class="mr-consent"><input type="checkbox" name="consentimento" value="sim" required data-mare-consent data-need={c("mare.consent.need", lang)} /> <span>{c("mare.consent", lang)} <a href={pathFor(lang, ed, "privacy")}>{c("common.privacy", lang)}</a></span></label>
-      <p class="mr-small">{c(nl ? "mare.optin.embed" : "mare.optin.mail", lang)}</p>
+      {bh && <div class="mr-embed" data-mare-embed data-bh={nl} data-mail={mail} data-mail-label={c("mare.a", lang)}></div>}
+      {bh && <p class="mr-small mr-bh-note">{c("mare.oneclick", lang)} <a href={pathFor(lang, ed, "privacy")}>{c("common.privacy", lang)}</a></p>}
+      {!bh && <button class="mr-btn" type="submit">{c("mare.a", lang)}</button>}
+      {!bh && <label class="mr-consent"><input type="checkbox" name="consentimento" value="sim" required data-mare-consent data-need={c("mare.consent.need", lang)} /> <span>{c("mare.consent", lang)} <a href={pathFor(lang, ed, "privacy")}>{c("common.privacy", lang)}</a></span></label>}
+      {!bh && <p class="mr-small">{c(nl ? "mare.optin.embed" : "mare.optin.mail", lang)}</p>}
       <p class="mr-sent" role="status" hidden data-mare-sent>{c("mare.sent", lang)}</p>
-      {nl && (nl.startsWith("http")
-        ? <div class="mr-embed" hidden data-mare-embed><iframe data-base={nl} title={c("mare.title", lang)} style="min-height:220px"></iframe></div>
-        : <div class="mr-embed" hidden data-mare-embed data-bh={nl} data-mail={mail} data-mail-label={c("mare.a", lang)}></div>)}
-    </form>
+      {nl && !bh && <div class="mr-embed" hidden data-mare-embed><iframe data-base={nl} title={c("mare.title", lang)} style="min-height:220px"></iframe></div>}
+    </Box>
     {!one && <p class="mr-when">{c("mare.when", lang)}</p>}
   </section>
 
@@ -108,10 +112,23 @@ const title = one ? `${one.headline} | Maré` : `Maré | Imóveis Portugal · ${
   if (f) {
     const where = de || "mare", issue = f.dataset.issue || "";
     const from = f.querySelector<HTMLInputElement>("[data-mare-from]"); if (from) from.value = where;
-    const box = f.querySelector<HTMLInputElement>("[data-mare-consent]")!;
-    const say = () => box.setCustomValidity(box.checked ? "" : box.dataset.need || "");
-    box.addEventListener("change", say); say();
-    f.addEventListener("submit", (e) => {
+    const bhWrap = f.querySelector<HTMLElement>("[data-mare-embed][data-bh]");
+    if (bhWrap) {
+      // beehiiv's loader draws its own field and button in the box straight away; if nothing appears within 8 s
+      // (blocked script, no network) the reader gets the e-mail request instead, never an empty box.
+      const s = document.createElement("script"); s.async = true; s.src = "https://subscribe-forms.beehiiv.com/v3/loader.js";
+      s.setAttribute("data-beehiiv-form", bhWrap.dataset.bh!); bhWrap.appendChild(s);
+      const a = document.createElement("script"); a.async = true; a.src = "https://subscribe-forms.beehiiv.com/attribution.js"; document.body.appendChild(a);
+      setTimeout(() => {
+        if (bhWrap.querySelector("iframe, form") || document.querySelector("iframe[src*='beehiiv']")) return;
+        const m = document.createElement("a"); m.className = "mr-btn"; m.href = bhWrap.dataset.mail || "#"; m.textContent = bhWrap.dataset.mailLabel || "OK"; bhWrap.appendChild(m);
+      }, 8000);
+      addEventListener("blur", function once() { const el = document.activeElement; if (el && el.tagName === "IFRAME" && (bhWrap.contains(el) || String((el as HTMLIFrameElement).src).includes("beehiiv"))) { evSignup(where, issue); removeEventListener("blur", once); } });
+    }
+    const box = f.querySelector<HTMLInputElement>("[data-mare-consent]");
+    const say = () => { if (box) box.setCustomValidity(box.checked ? "" : box.dataset.need || ""); };
+    box?.addEventListener("change", say); say();
+    if (!bhWrap) f.addEventListener("submit", (e) => {
       say();
       if (!f.checkValidity()) { e.preventDefault(); f.reportValidity(); return; }
       if (f.dataset.embed) {
@@ -179,6 +196,8 @@ const title = one ? `${one.headline} | Maré` : `Maré | Imóveis Portugal · ${
   .mr-small, .mr-sent { grid-column: 1 / -1; margin: 0; font-size: 13px; color: var(--muted); }
   .mr-sent { color: var(--accent); font-size: 14px; }
   .mr-embed { grid-column: 1 / -1; width: 100%; } .mr-embed iframe { width: 100%; border: 0; }
+  .mr-bh-note { text-align: center; max-width: 26rem; }
+  .mr-embed a.mr-btn { display: inline-flex; align-items: center; justify-content: center; width: 100%; max-width: 400px; text-decoration: none; }
   .mr-latest { padding: clamp(56px, 9vw, 120px) var(--gut, 20px); background: #efebe3; text-align: center; }
   .mr-h2 { margin: 0; font-size: clamp(30px, 4.4vw, 44px); line-height: 1.15; }
   .mr-sub { margin: 10px 0 36px; color: var(--muted); }
