@@ -39,9 +39,10 @@ const photos: Record<string, string> = { lisboa: "lisboa-castelo-por-do-sol", po
   funchal: "madeira-funchal-fogo", machico: "madeira-sao-lourenco", "porto-moniz": "madeira-porto-moniz" };
 // D83 part 2: one photograph per region for the postcards and the region card (content/media/SOURCES.md; CC BY ones credited on
 // /credits/). On a municipality's card without its own photograph, the region's appears with a caption naming what it shows.
-// The Centre and the Azores have no verified photograph yet: their cards are typographic.
-const regionPhotos: Record<string, string> = { north: "porto-douro-entardecer", lisbon: "lisboa-castelo-por-do-sol", alentejo: "comporta-mar-turquesa",
-  algarve: "algarve-praia-da-marinha", madeira: "madeira-levada" };
+// Step 2 (3 Nov 2026): the Centre (the Ria de Aveiro at sunset, Murtosa) and the Azores (Sete Cidades from the Vista do Rei)
+// now have theirs too, to the photography standard (content/media/SOURCES.md, "Norte roll-out").
+const regionPhotos: Record<string, string> = { north: "porto-douro-entardecer", centre: "centro-ria-de-aveiro-por-do-sol", lisbon: "lisboa-castelo-por-do-sol", alentejo: "comporta-mar-turquesa",
+  algarve: "algarve-praia-da-marinha", madeira: "madeira-levada", azores: "acores-sete-cidades-vista-do-rei" };
 const k = (x: string, v: Record<string, string> = {}) => c(`map3.${x}`, lang, v);
 const k4 = (x: string, v: Record<string, string> = {}) => c(`map4.${x}`, lang, v);
 const k5 = (x: string, v: Record<string, string> = {}) => c(`card5.${x}`, lang, v);
