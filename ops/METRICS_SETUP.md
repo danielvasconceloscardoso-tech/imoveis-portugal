@@ -47,6 +47,7 @@ The Cloudflare count is the page `/e/{ed}/{event}/`, except the three short fami
 | `map/paid/preview/{rent,g10y,foreign,supply,compare}` | `{ed}/map/paid/preview/{t}/` | place or region, origin | a paid tile (or a locked comparison row) opens the unlock sheet |
 | `map/compare/open` | `{ed}/map/compare/open/` | band (`2` or `3` places), origin `compare` | the comparison page shows two or three places |
 | `map/compare/pair` | `{ed}/map/compare/pair/` | place, origin | the in-map two-place comparison (card link "Comparar") |
+| `paid/preview/{prices-page,art-prices,art-map,art-golf}` | `{ed}/paid/preview/{id}/` | origin `page` | fix step 3 (3 Nov): "Ver a análise completa" on the prices page or a data article opens the unlock sheet |
 | `map/panel/open` | `{ed}/map/panel/open/` | origin | "Camadas" is opened |
 | `heart/region/{on,off}` from the map | `{ed}/heart/region/{s}/` | region, origin `map` | a heart on a map card |
 | `p/{project}/pin` | `{ed}/p/{project}/pin/` | place = project, origin `map` | a partner's map pin is opened |
@@ -69,6 +70,7 @@ The Cloudflare count is the page `/e/{ed}/{event}/`, except the three short fami
 | `letter/signup/{medium}` | `{ed}/letter/signup/{medium}/` | origin = `source/medium/campaign` (first touch in this tab), step = where | the letter signup form is submitted. Media counted: none, email, newsletter, social, paid, cpc, referral, partner, qr, other |
 | `mare/signup/{where}/{issue}` | `{ed}/mare/signup/{where}/{issue}/` | origin = `source/medium/campaign` (first touch), step = where | D83: the same Maré signup, by surface (home, mare, article, concierge, postcard, path, guide) and by the issue whose headline was on screen (the last 12 issues are counted) |
 | `mare/block/{where}/{issue}` | `{ed}/mare/block/{where}/{issue}/` | origin = where | D83: a reader arrives on the Maré page from the quiet block (`?de={where}&h={issue}`, counted on arrival) |
+| `mare/open/{header,hero}` | `{ed}/mare/open/{where}/` | origin = where | fix step 5 (3 Nov): a reader arrives on the Maré page from the header's Maré button (`?de=header`) or the line under "Começar" on the opening page (`?de=hero`), counted on arrival |
 | `art/{id}/open` | `{ed}/art/{id}/open/` | origin `art` | a lifestyle article (D83, content/stories/) is opened |
 | `art/{id}/place` | `{ed}/art/{id}/place/` | place = municipality slug, origin `art` | a place named in the article is followed to its card on the map |
 | `art/{id}/tile` | `{ed}/art/{id}/tile/` | place, origin `art` | the small map tile under "Para ir" is opened |

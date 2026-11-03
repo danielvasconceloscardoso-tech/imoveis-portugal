@@ -1,6 +1,7 @@
 ---
 // Free guide page: one report per edition in pt, en and fr, built from content/facts/facts.csv by
 // `npm run ebooks` (cover image in public/ebooks/covers/). One action: download. Wording: COPY_DECK.md "guide.*".
+// Fix step 5 (3 Nov): the signup says what Maré is ("Maré, a newsletter", then the sentence, mare.line).
 import V2 from "../layouts/V2.astro";
 import Embed from "./Embed.astro";
 import { config } from "../config";
@@ -36,6 +37,7 @@ const file = EBOOK.file(lang, ed);
   <section class="band" aria-labelledby="signup">
     <div class="frame read">
       <h2 id="signup">{c("guide.signup.h", lang)}</h2>
+      <p class="lede" style="margin-top:12px">{c("mare.line", lang)}</p>
       <div style="margin-top:16px">
         <Embed id={config.forms.newsletter[lang]} title={c("guide.signup.h", lang)} cta={c("home.subscribe", lang)} subject={c("home.subscribe.subject", lang)} hidden={{ edition: ed, lang }} height={200} />
       </div>

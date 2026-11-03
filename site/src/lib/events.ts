@@ -8,7 +8,7 @@ import { STATIONS } from "./path";
 import { TOOLS } from "./tools";
 import { flowConfig, type FlowId } from "./flows";
 import { sim1Events } from "./sim1";
-import { TIME_BANDS, UTM_MEDIA, MARE_WHERE } from "./track";
+import { TIME_BANDS, UTM_MEDIA, MARE_WHERE, MARE_OPEN } from "./track";
 import { recentIssueIds } from "./mare";
 import { STORY_IDS } from "./stories";
 
@@ -22,6 +22,9 @@ export const MAP_CARDS = ["muni", "parish", "region", "project", "golf"];
 export const MAP_TILES = ["price", "life", "care", "compare"];
 export const MAP_PAID = ["rent", "g10y", "foreign", "supply", "compare"];
 export const OVERLAYS = ["golf", "beach", "devs"];
+/** Fix step 3 (3 Nov): "Ver a análise completa" on the free pages turned into previews of the paid analysis
+ * (components/AnalysisPreview.astro): ev "paid/preview/{id}" when the unlock sheet opens. */
+export const PREVIEWS = ["prices-page", "art-prices", "art-map", "art-golf"];
 /** The developer page's share: the phone's share sheet, or the link copied. */
 export const SHARE = ["native", "copy"];
 
@@ -50,12 +53,14 @@ export function editionEvents(): string[] {
   for (const r of ["1a", "5a", "10a"]) out.push(`map/chart/${r}`);
   for (const t of MAP_PAID) out.push(`map/paid/preview/${t}`);
   out.push("map/compare/open", "map/compare/pair", "map/panel/open");
+  for (const p of PREVIEWS) out.push(`paid/preview/${p}`);
   for (const s of [...new Set(STATIONS.map((x) => x.k))]) for (const k of ["open", "done"]) out.push(`path/${s}/${k}`);
   for (const k of ["home", "region"]) for (const s of ["on", "off"]) out.push(`heart/${k}/${s}`);
   for (const b of BAR_ITEMS) out.push(`bar/${b}`);
   for (const m of UTM_MEDIA) out.push(`letter/signup/${m}`);
   // Maré (D83): signups and block taps per surface and per headline (the last 12 issues; only the latest is ever shown).
   for (const w of MARE_WHERE) for (const id of recentIssueIds()) for (const k of ["signup", "block"]) out.push(`mare/${k}/${w}/${id}`);
+  for (const w of MARE_OPEN) out.push(`mare/open/${w}`);
   // D83 lifestyle articles (components/StoryPage.astro): opened, a place followed to the map (the municipality goes to
   // the first-party store only), the map tile under "Para ir", the Concierge handover.
   for (const id of STORY_IDS) for (const k of ["open", "place", "tile", "concierge"]) out.push(`art/${id}/${k}`);

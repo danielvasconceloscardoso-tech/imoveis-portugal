@@ -4,8 +4,15 @@
 // with the search phrase, the answer in two sentences ("a"), short paragraphs ("i.N"), question headings ("sN.q") with
 // their paragraphs ("sN.1"…), the table or chart, three follow-up questions ("fN") as a list and FAQPage data, links,
 // sources and the disclaimer (EDITORIAL_POLICY.md). Figures in the text come from the data files at build time.
+// Operator's fix round, 3 Nov 2026 (step 3): the three data articles (ten years of prices, the price per m² by municipality,
+// golf property prices) are previews of the map's paid analysis: the title, the finding in one sentence, the shape of the
+// chart without figures and "Ver a análise completa" (components/AnalysisPreview.astro), then the links, the sources and
+// the disclaimer. Their tables, chart values and question sections stay in the deck (art.*) and the figures are in the
+// analysis (MapAnalysisPage.astro, AnalysisExtra.astro). URLs and titles unchanged. "method" stays a full article.
 import V2 from "../layouts/V2.astro";
 import MareBlock from "./MareBlock.astro";  // D83: the quiet Maré line, last in the article
+import AnalysisPreview from "./AnalysisPreview.astro";
+import type { Shape } from "../lib/preview";
 import { HTML_LANG, LANGS, eur, pathFor, type Lang, type EdCode } from "../i18n";
 import { ART_SUB, GOLF, type ArtKey } from "../lib/articles";
 import { Sources, DISCLAIMER, fmtDate } from "../lib/content";
@@ -71,11 +78,29 @@ const html = (k: string) => esc(c(K(k), lang, V)).replace(TOKENS, (m) => sup(m.s
 })));
 const plain = (k: string) => c(K(k), lang, V).replace(TOKENS, "");
 const run = (p: string) => { const out: string[] = []; for (let i = 1; has(K(`${p}.${i}`)); i++) out.push(html(`${p}.${i}`)); return out; };
-const answer = html("a");
-const intro = run("i");
+// The three previews (fix step 3): only the finding is rendered, so only its sources are cited.
+const PREVIEW = art !== "method";
+const answer = PREVIEW ? "" : html("a");
+const intro = PREVIEW ? [] : run("i");
 const secs: { q: string; ps: string[] }[] = [];
-for (let i = 1; has(K(`s${i}.q`)); i++) secs.push({ q: c(K(`s${i}.q`), lang), ps: run(`s${i}`) });
-const faq = [1, 2, 3].map((i) => ({ q: plain(`f${i}.q`), a: plain(`f${i}.a`) }));
+if (!PREVIEW) for (let i = 1; has(K(`s${i}.q`)); i++) secs.push({ q: c(K(`s${i}.q`), lang), ps: run(`s${i}`) });
+const faq = PREVIEW ? [] : [1, 2, 3].map((i) => ({ q: plain(`f${i}.q`), a: plain(`f${i}.a`) }));
+const P = (k: string) => `fix35.prev.${art}.${k}`;
+const finding = PREVIEW ? esc(c(P("f"), lang)).replace(TOKENS, (m) => sup(m.slice(1, -1).split("}{").map((t) => {
+  if (!CITE[t]) throw new Error(`COPY_DECK.md ${P("f")}: unknown source {${t}}`);
+  return CITE[t]();
+}))) : "";
+// The shapes, real values with no axis value: the three lines indexed to the same start (Porto, the accent, rises
+// furthest); the 308 municipalities from the dearest to the cheapest (the three the finding names in green); each golf
+// parish against its municipality (ratio around 1, the two exceptions in green).
+const idx = (v: (number | null)[]) => { const f = v.find((x) => x != null)!; return v.map((x) => (x == null ? null : x / f)); };
+const golfLead = golf.slice(0, 2).map((p) => p.parish);
+const shape: Shape | null = art === "prices" ? { kind: "lines", series: [{ values: idx(ptP.m2) }, { values: idx(lis.m2) }, { values: idx(por.m2), accent: true }] }
+  : art === "map" ? { kind: "bars", values: priced.map((m) => m.v!), accent: [0, 1, 2] }
+  : art === "golf" ? { kind: "bars", values: golf.map((p) => p.ratio!), base: 1, accent: golf.map((p, i) => (golfLead.includes(p.parish) ? i : -1)).filter((i) => i >= 0) }
+  : null;
+if (art === "map" && priced.slice(0, 3).map((m) => m.s).join() !== "lisboa,cascais,oeiras") throw new Error("ArticlePage: the dearest three changed; update fix35.prev.map.f");
+if (art === "golf" && golfLead.join() !== "Almancil,Canidelo") throw new Error("ArticlePage: the golf exceptions changed; update fix35.prev.golf.f");
 // Where the table or chart sits: the map's list under the last question, the chart and the golf table under the first.
 const insertAt: Record<ArtKey, number> = { map: secs.length - 1, prices: 0, golf: 0, method: -1 };
 
@@ -100,18 +125,27 @@ const title = c(K("h"), lang), description = c(K("p"), lang);
 const ld = [
   { "@context": "https://schema.org", "@type": "Article", headline: title, description, inLanguage: HTML_LANG[lang],
     author: { "@type": "Organization", name: "Imóveis Portugal" }, publisher: { "@type": "Organization", name: "Imóveis Portugal" } },
-  { "@context": "https://schema.org", "@type": "FAQPage",
-    mainEntity: faq.map((x) => ({ "@type": "Question", name: x.q, acceptedAnswer: { "@type": "Answer", text: x.a } })) },
+  ...(faq.length ? [{ "@context": "https://schema.org", "@type": "FAQPage",
+    mainEntity: faq.map((x) => ({ "@type": "Question", name: x.q, acceptedAnswer: { "@type": "Answer", text: x.a } })) }] : []),
 ];
 ---
 <V2 lang={lang} ed={ed} page="articles" title={`${title} | Imóveis Portugal`} description={description} sticky={null} paths={paths} ogType="article">
   <Fragment slot="head"><script type="application/ld+json" set:html={JSON.stringify(ld)} /></Fragment>
   <article class="frame read prose art">
+    {PREVIEW && shape ? (
+    <div class="ph art-prev">
+      <AnalysisPreview lang={lang} ed={ed} id={`art-${art}`} kick={c("art.title", lang)} title={title} finding={finding} shape={shape}
+        y={c(P("y"), lang)} lo={c(P("lo"), lang)} hi={c(P("hi"), lang)} contents={description}
+        legend={art === "prices" ? { accent: por.n, rest: c("fix35.prev.prices.rest", lang) } : undefined} />
+      <p class="small" style="margin-top:40px">{art === "prices" ? `${c("journey.past", lang)} ${c("prices.method", lang)}` : c("map.card.disclaimer", lang)}</p>
+    </div>
+    ) : (
     <div class="ph">
       <p class="small" style="margin:0 0 8px"><a href={hub}>{c("art.title", lang)}</a></p>
       <h1>{title}</h1>
       <p class="lede" set:html={answer} />
     </div>
+    )}
     {intro.map((p) => <p set:html={p} />)}
 
     {secs.map((s, i) => (
@@ -145,10 +179,12 @@ const ld = [
       </>
     ))}
 
+    {faq.length > 0 && (
     <section class="post-faq" aria-labelledby="perguntas">
       <h2 id="perguntas">{c("art.faq", lang)}</h2>
       {faq.map((x) => <details class="h2-q"><summary>{x.q}</summary><p>{x.a}</p></details>)}
     </section>
+    )}
 
     <section class="others" aria-labelledby="next-h">
       <h2 id="next-h" class="h-small">{c("art.next", lang)}</h2>

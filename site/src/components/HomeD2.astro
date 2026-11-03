@@ -68,6 +68,8 @@ const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("h
     </label>
     <button class="h2-go" type="submit">{c("home2.bar.go", lang)}</button>
   </form>
+  {/* Fix step 5 (3 Nov): one quiet line under "Começar": what Maré is, to its page (ev "mare/open/hero" on arrival). */}
+  <p class="h2-mareline"><a href={`${pathFor(lang, ed, "mare")}?de=hero`}>{c("mare.line", lang)}</a></p>
 </section>
 
 <section class="h2-mapsec" aria-labelledby="h2-map">
@@ -123,6 +125,7 @@ const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("h
 <section class="h2-sec h2-dark h2-nl" id="subscrever" aria-labelledby="h2-nl">
   <div class="h2-narrow" data-reveal>
     <h2 id="h2-nl">{c("home2.nl.h", lang)}</h2>
+    <p class="h2-nlwhat">{c("mare.line", lang)}</p>
     <p>{c("home2.nl.p", lang)}</p>
     {nl ? (
       <div class="form-box"><iframe src={nl} title={c("home2.nl.h", lang)} loading="lazy" style="min-height:200px"></iframe></div>

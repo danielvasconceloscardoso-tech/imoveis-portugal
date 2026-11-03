@@ -1,0 +1,159 @@
+---
+// A free page turned into a preview of the map's paid analysis (operator, 3 Nov 2026, fix step 3): the title, the finding
+// in one sentence, the shape of the chart drawn without axis values or figures (a quiet line or bars, the green accent on
+// what the finding names), and "Ver a análise completa", which opens the same unlock sheet as the map (29 € per region,
+// 99 € Portugal, 12 months; "Disponível em breve" while config.mapAnalysis.live is false). The figures themselves are only
+// in the analysis (MapAnalysisPage.astro, AnalysisExtra.astro). The map keeps its own copy of the sheet (MapV3.astro,
+// map-v3.ts): this one is a separate component so the map is untouched. Signal: ev "paid/preview/{id}" (lib/events.ts
+// PREVIEWS) when the sheet opens. Wording: COPY_DECK.md "fix35.prev.*" and the map's "map4.unlock.*".
+import { config } from "../config";
+import { pathFor, type Lang, type EdCode } from "../i18n";
+import { c, cl } from "../lib/copy";
+import type { Shape } from "../lib/preview";
+
+interface Props {
+  lang: Lang; ed: EdCode; id: string;
+  kick: string; title: string; finding: string;   // finding: HTML (the source superscripts)
+  shape: Shape; y: string; lo: string; hi: string; legend?: { accent: string; rest: string };
+  contents: string;
+}
+const { lang, ed, id, kick, title, finding, shape, y, lo, hi, legend, contents } = Astro.props;
+const A = config.mapAnalysis;
+const live = A.live && !!A.stripe.all;
+const k4 = (x: string, v: Record<string, string> = {}) => c(`map4.${x}`, lang, v);
+const unlockList = cl("map4.unlock.list", lang);
+
+// The shape: real values, scaled to the box, with no axis, no tick and no number anywhere.
+const W = 640, H = 200, P = 8;
+let svg = "";
+if (shape.kind === "lines") {
+  const all = shape.series.flatMap((s) => s.values.filter((v): v is number => v != null));
+  const mn = Math.min(...all), mx = Math.max(...all);
+  const n = Math.max(...shape.series.map((s) => s.values.length));
+  const px = (i: number) => P + (i / (n - 1)) * (W - 2 * P), py = (v: number) => H - P - ((v - mn) / (mx - mn || 1)) * (H - 2 * P);
+  // The quiet lines first, the accent on top.
+  for (const s of [...shape.series].sort((a, b) => Number(!!a.accent) - Number(!!b.accent))) {
+    let d = "", pen = false;
+    s.values.forEach((v, i) => { if (v == null) pen = false; else { d += `${pen ? "L" : "M"}${px(i).toFixed(1)},${py(v).toFixed(1)}`; pen = true; } });
+    svg += `<path class="${s.accent ? "apv-la" : "apv-lq"}" d="${d}" vector-effect="non-scaling-stroke"/>`;
+  }
+} else {
+  const v = shape.values, base = shape.base ?? 0;
+  const mx = Math.max(...v.map((x) => Math.abs(x - base))) || 1, n = v.length, slot = (W - 2 * P) / n, bw = Math.max(1, slot * 0.72);
+  const mid = shape.base != null ? H / 2 : H - P, span = shape.base != null ? H / 2 - P : H - 2 * P;
+  if (shape.base != null) svg += `<line class="apv-base" x1="0" x2="${W}" y1="${mid}" y2="${mid}" vector-effect="non-scaling-stroke"/>`;
+  v.forEach((x, i) => {
+    const h = (Math.abs(x - base) / mx) * span, top = x >= base ? mid - h : mid;
+    svg += `<rect class="${shape.accent?.includes(i) ? "apv-ba" : "apv-bq"}" x="${(P + i * slot + (slot - bw) / 2).toFixed(2)}" y="${top.toFixed(1)}" width="${bw.toFixed(2)}" height="${Math.max(1, h).toFixed(1)}" rx="${Math.min(2, bw / 3).toFixed(1)}"/>`;
+  });
+}
+const mapHref = pathFor(lang, ed, "map");
+---
+<section class="apv" data-apv={id} aria-labelledby={`apv-h-${id}`}>
+  <p class="apv-k">{kick}</p>
+  <h1 id={`apv-h-${id}`}>{title}</h1>
+  <p class="apv-f" set:html={finding} />
+  <figure class="apv-fig">
+    <figcaption class="apv-y">{y}{legend && <span class="apv-leg"><i class="apv-dot"></i>{legend.accent}<i class="apv-dot apv-dot-q"></i>{legend.rest}</span>}</figcaption>
+    <svg class="apv-svg" viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" aria-hidden="true" set:html={svg} />
+    <p class="apv-ax" aria-hidden="true"><span>{lo}</span><span>{hi}</span></p>
+  </figure>
+  <p class="apv-note">{c("fix35.prev.shape", lang)}</p>
+  <p class="apv-acts"><button type="button" class="apv-btn" data-apv-open aria-haspopup="dialog">{c("fix35.prev.cta", lang)}</button></p>
+  <p class="apv-in">{contents}</p>
+
+  <div class="apv-unlock" data-apv-unlock hidden role="dialog" aria-modal="true" aria-labelledby={`apv-ul-${id}`}>
+    <div class="apv-box">
+      <button type="button" class="apv-x" data-apv-x aria-label={c("map3.close", lang)}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+      <p class="apv-kick">{k4("tile.paid")}</p>
+      <h2 id={`apv-ul-${id}`}>{k4("unlock.offer", { r: String(A.prices.region), a: String(A.prices.all), m: String(A.months) })}</h2>
+      <p class="apv-p">{k4("unlock.p", { place: "Portugal" })}</p>
+      <ul class="apv-list">{unlockList.map((x) => <li>{x}</li>)}</ul>
+      {live ? (
+        <div class="apv-buy">
+          <a class="apv-b apv-b-p" href={A.stripe.all} rel="noopener">{k4("unlock.buy.all", { v: String(A.prices.all) })}</a>
+          <a class="apv-b" href={mapHref}>{c("fix35.prev.region", lang, { v: String(A.prices.region) })}</a>
+        </div>
+      ) : (
+        <button type="button" class="apv-b apv-b-p apv-off" disabled aria-disabled="true">{k4("unlock.soon")}</button>
+      )}
+      <p class="apv-src">{k4("unlock.note")}</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { ev } from "../lib/track";
+  document.querySelectorAll<HTMLElement>("[data-apv]").forEach((root) => {
+    const open = root.querySelector<HTMLButtonElement>("[data-apv-open]")!, sheet = root.querySelector<HTMLElement>("[data-apv-unlock]")!;
+    const x = sheet.querySelector<HTMLButtonElement>("[data-apv-x]")!;
+    const close = () => {
+      sheet.classList.remove("is-open"); document.documentElement.classList.remove("apv-lock");
+      setTimeout(() => { sheet.hidden = true; }, 220); open.focus({ preventScroll: true });
+    };
+    open.addEventListener("click", () => {
+      ev({ event: `paid/preview/${root.dataset.apv}`, origin: "page" });
+      sheet.hidden = false; document.documentElement.classList.add("apv-lock");
+      requestAnimationFrame(() => sheet.classList.add("is-open"));
+      x.focus({ preventScroll: true });
+    });
+    x.addEventListener("click", close);
+    sheet.addEventListener("click", (e) => { if (e.target === sheet) close(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !sheet.hidden) close(); });
+  });
+</script>
+
+<style>
+  .apv { --apv-g: #2f5d50; --apv-m: #5d6066; --apv-e: cubic-bezier(.16, 1, .3, 1); }
+  .apv-k { margin: 0 0 12px; font: 700 12px/1.2 var(--sans, "Manrope Variable", system-ui, sans-serif); letter-spacing: .14em; text-transform: uppercase; color: var(--apv-m); }
+  .apv h1 { margin: 0; font: 400 clamp(34px, 6vw, 52px)/1.08 var(--serif, "Playfair Display Variable", Georgia, serif); letter-spacing: -.015em; text-wrap: balance; }
+  .apv-f { margin: 20px 0 0; max-width: 36em; font: 400 clamp(19px, 2.4vw, 23px)/1.45 var(--serif, "Playfair Display Variable", Georgia, serif); text-wrap: pretty; }
+  .apv-fig { margin: 40px 0 0; padding: 0; }
+  .apv-y { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 16px; margin: 0 0 12px; font: 600 13px/1.3 var(--sans, "Manrope Variable", system-ui, sans-serif); color: var(--apv-m); }
+  .apv-leg { display: inline-flex; align-items: center; gap: 6px; font-weight: 500; }
+  .apv-dot { display: inline-block; width: 14px; height: 2px; border-radius: 2px; background: var(--apv-g); }
+  .apv-dot-q { margin-left: 10px; background: #c9c5bb; }
+  .apv-svg { display: block; width: 100%; height: clamp(150px, 26vw, 220px); overflow: visible; }
+  .apv-svg :global(.apv-lq) { fill: none; stroke: #c9c5bb; stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; }
+  .apv-svg :global(.apv-la) { fill: none; stroke: var(--apv-g); stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+  .apv-svg :global(.apv-bq) { fill: #d9d5cb; }
+  .apv-svg :global(.apv-ba) { fill: var(--apv-g); }
+  .apv-svg :global(.apv-base) { stroke: #b9b5ab; stroke-width: 1; }
+  .apv-ax { display: flex; justify-content: space-between; margin: 10px 0 0; padding-top: 10px; border-top: 1px solid rgba(120, 120, 110, .22); font: 500 13px/1.2 var(--sans, "Manrope Variable", system-ui, sans-serif); color: var(--apv-m); }
+  .apv-note { margin: 12px 0 0; font-size: 14px; line-height: 1.5; color: var(--apv-m); }
+  .apv-acts { margin: 32px 0 0; }
+  .apv-btn { min-height: 52px; padding: 0 28px; border: 0; border-radius: 999px; background: #111214; color: #fff; font: 600 15px/1 var(--sans, "Manrope Variable", system-ui, sans-serif); cursor: pointer; transition: background-color .25s var(--apv-e), transform .2s var(--apv-e); }
+  .apv-btn:hover { background: var(--apv-g); }
+  .apv-btn:active { transform: scale(.98); }
+  .apv-btn:focus-visible { outline: 2px solid var(--apv-g); outline-offset: 3px; }
+  .apv-in { margin: 20px 0 0; max-width: 40em; font-size: 15px; line-height: 1.55; color: var(--apv-m); }
+
+  /* The unlock sheet: the map's sheet (mapv3.css .m3-unlock), over the whole page. */
+  .apv-unlock { position: fixed; inset: 0; z-index: 90; display: flex; padding: 16px; background: rgba(12, 14, 18, .24); -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); opacity: 0; transition: opacity .22s var(--apv-e); }
+  .apv-unlock[hidden] { display: none; }
+  .apv-unlock.is-open { opacity: 1; }
+  .apv-box { position: relative; margin: auto; width: min(460px, 100%); max-height: 100%; overflow-y: auto; padding: 28px 24px 24px; border-radius: 20px; background: rgba(255, 255, 255, .97); box-shadow: 0 30px 80px rgba(0, 0, 0, .22);
+    transform: translateY(12px); transition: transform .26s var(--apv-e); font-family: var(--sans, "Manrope Variable", system-ui, sans-serif); color: #111214; }
+  .apv-unlock.is-open .apv-box { transform: none; }
+  .apv-kick { margin: 0 0 8px; font: 700 12px/1 var(--sans, "Manrope Variable", system-ui, sans-serif); letter-spacing: .14em; text-transform: uppercase; color: var(--apv-m); }
+  .apv-box h2 { margin: 0; padding-right: 36px; font: 400 26px/1.2 var(--serif, "Playfair Display Variable", Georgia, serif); letter-spacing: -.01em; }
+  .apv-p { margin: 12px 0 0; font-size: 15px; line-height: 1.5; color: var(--apv-m); }
+  .apv-list { margin: 16px 0 20px; padding: 0; list-style: none; font-size: 15px; line-height: 1.45; }
+  .apv-list li { position: relative; padding: 8px 0 8px 22px; border-top: 1px solid rgba(120, 120, 110, .16); }
+  .apv-list li::before { content: ""; position: absolute; left: 2px; top: 15px; width: 8px; height: 8px; border-radius: 50%; background: var(--apv-g); opacity: .7; }
+  .apv-x { position: absolute; top: 16px; right: 16px; width: 34px; height: 34px; margin: 0; padding: 0; border: 0; border-radius: 50%; display: grid; place-items: center; background: rgba(255, 255, 255, .9); box-shadow: 0 1px 6px rgba(0, 0, 0, .14); cursor: pointer; color: #111214; }
+  .apv-x svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+  .apv-buy { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .apv-b { display: flex; align-items: center; justify-content: center; text-align: center; min-height: 50px; padding: 0 16px; border: 0; border-radius: 14px; font: 700 15px/1.2 var(--sans, "Manrope Variable", system-ui, sans-serif); text-decoration: none; background: rgba(120, 120, 110, .12); color: #111214; }
+  .apv-b-p { background: #111214; color: #fff; }
+  .apv-off { width: 100%; opacity: .55; cursor: not-allowed; }
+  .apv-src { margin: 16px 0 0; font-size: 12px; line-height: 1.45; color: var(--apv-m); }
+  :global(html.apv-lock) { overflow: hidden; }
+  @media (max-width: 819px) {
+    .apv-unlock { padding: 0; }
+    .apv-box { margin: auto 0 0; width: 100%; border-radius: 20px 20px 0 0; max-height: 92%; padding-bottom: calc(24px + env(safe-area-inset-bottom)); }
+    .apv-box h2 { font-size: 24px; }
+    .apv-btn { width: 100%; }
+  }
+  @media (prefers-reduced-motion: reduce) { .apv-unlock, .apv-box { transition: none; } }
+</style>
