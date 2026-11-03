@@ -49,6 +49,15 @@ export const config = {
   // exist; then live: true and one Stripe Payment Link per dossier. Prices in euros, VAT included.
   dossiers: { live: false, prices: { compra: 190, zona: 90, private: 950 }, stripe: { compra: "", zona: "", private: "" } },
 
+  // The map's paid analysis (D83 part 2): 29 € per region, 99 € for all of Portugal, 12 months. Payment stays off until the
+  // operator confirms the company and invoicing (D4). While live is false: the unlock sheet's button reads "Disponível em
+  // breve" (disabled) and NO analysis page is built (no route exists on main). To switch on: (1) create two Stripe Payment
+  // Links and paste them in stripe.region / stripe.all; (2) set live: true; (3) build and deploy. The analysis pages are then
+  // built at /{lang}/{ed}/{map}/analise-{region}/ and /analise-portugal/ (noindex, never linked from the site; the payment
+  // link's success URL sends the buyer there), and scripts/map-data/analysis-pdf.mjs prints each one to PDF. To look at the
+  // pages before that, build with PUBLIC_MAP_ANALYSIS_PREVIEW=1 (a preview build only, never on main).
+  mapAnalysis: { live: false, prices: { region: 29, all: 99 }, months: 12, stripe: { region: "", all: "" } },
+
   // Form embeds per language (D18): Tally form IDs (e.g. "w4Xyz1") or a full embed URL (beehiiv
   // newsletter embeds are full URLs). Every form gets a hidden "edition" field from the page.
   forms: {

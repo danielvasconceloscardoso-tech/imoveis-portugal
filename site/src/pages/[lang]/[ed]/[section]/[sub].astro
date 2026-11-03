@@ -16,6 +16,9 @@ import { SUB, ENABLED, type ToolKey } from "../../../../lib/tools";
 import { PLACES, type Place } from "../../../../lib/places";
 import ArticlePage from "../../../../components/ArticlePage.astro";
 import { ARTS, ART_SUB, type ArtKey } from "../../../../lib/articles";
+import MapComparePage from "../../../../components/MapComparePage.astro";
+import MapAnalysisPage from "../../../../components/MapAnalysisPage.astro";
+import { COMPARE_SUB, ANALYSIS_SUB, ANALYSIS_BUILT, type AKey } from "../../../../lib/maptiles";
 
 type Key = ToolKey;
 export function getStaticPaths() {
@@ -23,6 +26,9 @@ export function getStaticPaths() {
   return LANGS.flatMap((lang) => ED_ORDER.flatMap((ed) => [
     ...keys.map((tool) => ({ params: { lang, ed, section: SLUGS[lang].sims, sub: SUB[tool][lang] }, props: { tool } })),
     ...PLACES.map((place) => ({ params: { lang, ed, section: SLUGS[lang].map, sub: place.slug }, props: { place } })),
+    // D83 part 2: the comparison page under the map, and the paid analysis (only once payment is live, or in a preview build).
+    { params: { lang, ed, section: SLUGS[lang].map, sub: COMPARE_SUB[lang] }, props: { compare: true } },
+    ...(ANALYSIS_BUILT ? (Object.keys(ANALYSIS_SUB) as AKey[]).map((akey) => ({ params: { lang, ed, section: SLUGS[lang].map, sub: ANALYSIS_SUB[akey] }, props: { akey } })) : []),
     ...PTYPES.map((ptype) => ({ params: { lang, ed, section: SLUGS[lang].partners, sub: ptype.slug[lang] }, props: { ptype } })),
     ...(["ok", "private", "later"] as const).map((view) => ({ params: { lang, ed, section: SLUGS[lang].consult, sub: CONSULT_SUB[view][lang] }, props: { view } })),
     ...ARTS.map((art) => ({ params: { lang, ed, section: SLUGS[lang].articles, sub: ART_SUB[art][lang] }, props: { art } })),
@@ -31,9 +37,11 @@ export function getStaticPaths() {
 }
 const lang = Astro.params.lang as Lang;
 const ed = Astro.params.ed as EdCode;
-const { tool, place, ptype, view, dossier, art } = Astro.props as { art?: ArtKey; tool?: Key; place?: Place; ptype?: PType; view?: "ok" | "private" | "later"; dossier?: DType };
+const { tool, place, ptype, view, dossier, art, compare, akey } = Astro.props as { compare?: boolean; akey?: AKey; art?: ArtKey; tool?: Key; place?: Place; ptype?: PType; view?: "ok" | "private" | "later"; dossier?: DType };
 ---
-{art ? <ArticlePage lang={lang} ed={ed} art={art} />
+{compare ? <MapComparePage lang={lang} ed={ed} />
+  : akey ? <MapAnalysisPage lang={lang} ed={ed} akey={akey} />
+  : art ? <ArticlePage lang={lang} ed={ed} art={art} />
   : dossier ? <DossierPage lang={lang} ed={ed} type={dossier} />
   : view ? <ConsultPage lang={lang} ed={ed} view={view} />
   : ptype ? <PartnerTypePage lang={lang} ed={ed} type={ptype} />

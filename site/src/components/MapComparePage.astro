@@ -1,0 +1,152 @@
+---
+// "Comparar" (D83 part 2): two or three places the reader saved with a heart (lib/saved.ts, kind "region": a municipality slug,
+// "p-{parish code}" or "r-{region}"), or the ones in ?p=, side by side like an iPhone comparison. The headline rows are free
+// (market €/m², the five-year direction, sunshine, the beach, the flight home); the rest is locked and belongs to the paid
+// analysis (config.mapAnalysis, off until the company and invoicing exist). Built empty, filled in the browser from
+// /data/map/tiles.json. noindex: it is personal. Wording: COPY_DECK.md "map4.*".
+import V2 from "../layouts/V2.astro";
+import { HTML_LANG, LANGS, pathFor, SLUGS, type Lang, type EdCode } from "../i18n";
+import { c, cl, edName } from "../lib/copy";
+import { REGIONS } from "../lib/mapdata";
+import { COMPARE_SUB } from "../lib/maptiles";
+import { config } from "../config";
+
+interface Props { lang: Lang; ed: EdCode; }
+const { lang, ed } = Astro.props;
+const k4 = (x: string, v: Record<string, string> = {}) => c(`map4.${x}`, lang, v);
+const keep = (x: string, names: string[]) => c(x, lang, Object.fromEntries(names.map((n) => [n, `{${n}}`])));
+const A = config.mapAnalysis;
+const mapPath = pathFor(lang, ed, "map");
+const paths = Object.fromEntries(LANGS.map((l) => [l, `/${l}/${ed}/${SLUGS[l].map}/${COMPARE_SUB[l]}/`])) as Record<Lang, string>;
+// Photographs only where they show the place named (the municipality's own, as on the map), else the region's.
+const placePhotos: Record<string, string> = { lisboa: "lisboa-castelo-por-do-sol", porto: "porto-douro-entardecer", cascais: "cascais-baia", lagos: "algarve-porto-de-mos",
+  funchal: "madeira-funchal-fogo", machico: "madeira-sao-lourenco", "porto-moniz": "madeira-porto-moniz" };
+const regionPhotos: Record<string, string> = { north: "porto-douro-entardecer", lisbon: "lisboa-castelo-por-do-sol", alentejo: "comporta-mar-turquesa",
+  algarve: "algarve-praia-da-marinha", madeira: "madeira-levada" };
+const L = {
+  map: mapPath, ed, locale: HTML_LANG[lang], regionPhotos, placePhotos, qfmt: c("map.qfmt", lang),
+  regions: Object.fromEntries(REGIONS.map((r) => [r, c(`map.r.${r}`, lang)])),
+  mkt: k4("tile.mkt"), dir5: k4("compare.dir5"), sun: k4("tile.sun"), beach: k4("tile.beach"), flight: k4("tile.flight", { c: c(`map4.cty.${ed}`, lang) }),
+  rent: k4("compare.rent"), yield: k4("compare.yield"), g10: k4("compare.g10"), foreign: k4("compare.foreign"), supply: k4("compare.supply"),
+  locked: k4("compare.locked"), soon: k4("tile.soon"), need: k4("compare.need"), max: k4("compare.max"), open: k4("compare.open"), regionKick: k4("region.kick"),
+  sunV: keep("map4.tile.sun.v", ["v"]), min: keep("map4.tile.min", ["v"]), parish: keep("map4.cut.parish", ["m"]),
+  kmline: keep("map4.tile.kmline", ["v"]), ap: keep("map4.tile.ap", ["n", "v"]), ty: k4("tile.ty"),
+};
+const unlockList = cl("map4.unlock.list", lang);
+const live = A.live && !!A.stripe.region && !!A.stripe.all;
+---
+<V2 lang={lang} ed={ed} page="map" paths={paths} noindex title={`${k4("compare.h")} | Imóveis Portugal · ${edName(ed, lang)}`} description={k4("compare.lede")}>
+  <div class="cmp4">
+    <p class="cmp4-back"><a href={mapPath}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>{k4("compare.map")}</a></p>
+    <h1>{k4("compare.h")}</h1>
+    <p class="cmp4-lede">{k4("compare.lede")}</p>
+    <div class="cmp4-t" data-cmp data-l={JSON.stringify(L)} aria-live="polite"></div>
+    <p class="cmp4-note small" data-cmp-note hidden></p>
+    <div class="cmp4-empty" data-cmp-empty hidden><p>{k4("compare.need")}</p><a class="cmp4-btn" href={mapPath}>{k4("compare.map")}</a></div>
+    <noscript><p>{k4("compare.need")}</p></noscript>
+    <section class="cmp4-unlock" id="analise" aria-labelledby="cmp4-ul">
+      <p class="cmp4-kick">{k4("tile.paid")}</p>
+      <h2 id="cmp4-ul">{k4("unlock.offer", { r: String(A.prices.region), a: String(A.prices.all), m: String(A.months) })}</h2>
+      <ul>{unlockList.map((x) => <li>{x}</li>)}</ul>
+      {live ? <p class="cmp4-acts"><a class="cmp4-btn" href={A.stripe.region} rel="noopener">{k4("unlock.buy.region", { region: "", v: String(A.prices.region) }).replace(/^ · /, "")}</a> <a class="cmp4-btn cmp4-btn-2" href={A.stripe.all} rel="noopener">{k4("unlock.buy.all", { v: String(A.prices.all) })}</a></p>
+        : <button type="button" class="cmp4-btn cmp4-off" disabled aria-disabled="true">{k4("unlock.soon")}</button>}
+      <p class="small">{k4("unlock.note")}</p>
+    </section>
+    <p class="small cmp4-src" data-cmp-src data-tpl={keep("map4.compare.src", ["q"])}></p>
+  </div>
+</V2>
+
+<style>
+  .cmp4 { max-width: 920px; margin: 0 auto; padding: 32px var(--gut, 20px) 64px; }
+  .cmp4-back a { display: inline-flex; align-items: center; gap: 4px; font-weight: 600; font-size: 14px; color: #2f5d50; text-decoration: none; }
+  .cmp4-back svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; }
+  .cmp4 h1 { font: 400 clamp(34px, 6vw, 48px)/1.08 var(--serif, "Playfair Display Variable", Georgia, serif); margin: 16px 0 12px; letter-spacing: -.015em; }
+  .cmp4-lede { font-size: 17px; line-height: 1.55; color: #5d6066; max-width: 620px; margin: 0 0 32px; }
+  .cmp4-t { --n: 2; }
+  .cmp4-t :global(.c4-h), .cmp4-t :global(.c4-v) { display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: 12px; }
+  .cmp4-t :global(.c4-col) { text-align: center; min-width: 0; }
+  .cmp4-t :global(.c4-col img), .cmp4-t :global(.c4-col .c4-ph) { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 16px; background: radial-gradient(120% 140% at 15% 0%, #faf5e9, #e7decb); }
+  .cmp4-t :global(.c4-k) { margin: 12px 0 4px; font: 700 12px/1.2 var(--sans, "Manrope Variable", system-ui, sans-serif); letter-spacing: .12em; text-transform: uppercase; color: #5d6066; }
+  .cmp4-t :global(.c4-n) { margin: 0; font: 400 clamp(19px, 3.4vw, 26px)/1.15 var(--serif, "Playfair Display Variable", Georgia, serif); overflow-wrap: anywhere; }
+  .cmp4-t :global(.c4-col a) { display: inline-block; margin-top: 8px; font-size: 13px; font-weight: 600; color: #2f5d50; text-decoration: none; }
+  .cmp4-t :global(.c4-r) { padding: 16px 0; border-top: 1px solid rgba(120, 120, 110, .2); }
+  .cmp4-t :global(.c4-r:first-of-type) { margin-top: 24px; }
+  .cmp4-t :global(.c4-l) { display: block; margin: 0 0 8px; text-align: center; font: 700 12px/1.2 var(--sans, "Manrope Variable", system-ui, sans-serif); letter-spacing: .12em; text-transform: uppercase; color: #5d6066; }
+  .cmp4-t :global(.c4-v span) { text-align: center; font: 400 clamp(17px, 3vw, 22px)/1.2 var(--serif, "Playfair Display Variable", Georgia, serif); font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+  .cmp4-t :global(.c4-s) { display: block; margin-top: 4px; font: 500 12px/1.3 var(--sans, "Manrope Variable", system-ui, sans-serif); color: #5d6066; }
+  .cmp4-t :global(.c4-v .c4-soon) { font: 500 14px/1.3 var(--sans, "Manrope Variable", system-ui, sans-serif); color: #8a8d92; }
+  .cmp4-t :global(.c4-lock) { display: block; width: 100%; padding: 16px 0; border: 0; border-top: 1px solid rgba(120, 120, 110, .2); background: none; cursor: pointer; text-align: center; font: inherit; color: inherit; }
+  .cmp4-t :global(.c4-lock .c4-v span) { filter: blur(5px); opacity: .45; user-select: none; }
+  .cmp4-t :global(.c4-lock .c4-l svg) { width: 12px; height: 12px; vertical-align: -1px; margin-left: 6px; fill: none; stroke: currentColor; stroke-width: 1.8; }
+  .cmp4-t :global(.c4-lock:hover .c4-l) { color: #2f5d50; }
+  .cmp4-empty { padding: 32px 0; font-size: 17px; }
+  .cmp4-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 50px; padding: 0 24px; border-radius: 14px; border: 0; background: #111214; color: #fff; font: 700 15px/1.2 var(--sans, "Manrope Variable", system-ui, sans-serif); text-decoration: none; }
+  .cmp4-btn-2 { background: rgba(120, 120, 110, .14); color: #111214; }
+  .cmp4-off { opacity: .55; cursor: not-allowed; width: 100%; max-width: 420px; }
+  .cmp4-unlock { margin-top: 48px; padding: 28px 24px; border-radius: 20px; background: #f6f2ea; }
+  .cmp4-kick { margin: 0 0 8px; font: 700 12px/1 var(--sans, "Manrope Variable", system-ui, sans-serif); letter-spacing: .14em; text-transform: uppercase; color: #5d6066; }
+  .cmp4-unlock h2 { margin: 0 0 16px; font: 400 clamp(22px, 4vw, 28px)/1.2 var(--serif, "Playfair Display Variable", Georgia, serif); }
+  .cmp4-unlock ul { margin: 0 0 20px; padding: 0; list-style: none; font-size: 15px; line-height: 1.45; }
+  .cmp4-unlock li { padding: 8px 0 8px 22px; position: relative; border-top: 1px solid rgba(120, 120, 110, .16); }
+  .cmp4-unlock li::before { content: ""; position: absolute; left: 2px; top: 15px; width: 8px; height: 8px; border-radius: 50%; background: #2f5d50; opacity: .7; }
+  .cmp4-src { margin-top: 24px; color: #5d6066; }
+  @media (max-width: 560px) { .cmp4-t :global(.c4-h), .cmp4-t :global(.c4-v) { gap: 8px; } .cmp4-unlock { padding: 24px 16px; } }
+</style>
+
+<script>
+  import { get } from "../lib/saved";
+  import { ev } from "../lib/track";
+  const box = document.querySelector<HTMLElement>("[data-cmp]");
+  if (box) (async () => {
+    const L = JSON.parse(box.dataset.l || "{}");
+    const esc = (t: string) => String(t).replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[ch]!);
+    const nf = new Intl.NumberFormat(L.locale), nf1 = new Intl.NumberFormat(L.locale, { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+    const eur = new Intl.NumberFormat(L.locale, { style: "currency", currency: "EUR", maximumFractionDigits: 0 });
+    const pct = (v: number) => `${v > 0 ? "+" : v < 0 ? "−" : ""}${nf.format(Math.abs(Math.round(v)))} %`;
+    const fromUrl = (new URLSearchParams(location.search).get("p") || "").split(",").map((s) => s.trim()).filter((s) => /^[a-z0-9-]{2,60}$/.test(s));
+    const saved = get().filter((x) => x.kind === "region").map((x) => x.id);
+    const ids = [...new Set([...fromUrl, ...saved])];
+    let T: any;
+    try { T = await fetch("/data/map/tiles.json").then((r) => r.json()); } catch { T = { m: {}, p: {}, rg: {}, r2: {} }; }
+    type Col = { id: string; name: string; kick: string; href: string; photo: string; d: any };
+    const resolve = (id: string): Col | null => {
+      if (id.startsWith("r-")) { const k = id.slice(2), rg = T.rg?.[k]; if (!rg) return null; const r2 = T.r2?.[rg.c2] ?? {};
+        return { id, name: L.regions[k] ?? k, kick: L.regionKick, href: `${L.map}?region=${k}`, photo: L.regionPhotos[k] ?? "", d: { m2: r2.m2, rr: rg.lo && rg.hi ? [rg.lo, rg.hi] : null, p5: rg.p5 } }; }
+      if (id.startsWith("p-")) { const code = id.slice(2), p = T.p?.[code]; if (!p) return null; const m = T.m?.[p.m] ?? {};
+        return { id, name: p.n, kick: L.parish.replace("{m}", m.n ?? ""), href: `${L.map}?parish=${code}`, photo: L.regionPhotos[m.r] ?? "", d: { ...m, ...p, p10: null } }; }
+      const m = T.m?.[id]; if (!m) return null;
+      return { id, name: m.n, kick: L.regions[m.r] ?? "", href: `${L.map}?place=${id}`, photo: L.placePhotos[id] ?? L.regionPhotos[m.r] ?? "", d: m };
+    };
+    const cols = ids.map(resolve).filter((x): x is Col => !!x).slice(0, 3);
+    const note = document.querySelector<HTMLElement>("[data-cmp-note]")!, empty = document.querySelector<HTMLElement>("[data-cmp-empty]")!;
+    const src = document.querySelector<HTMLElement>("[data-cmp-src]")!; src.textContent = (src.dataset.tpl || "").replace("{q}", T.q ? L.qfmt.replace("{q}", T.q.slice(-1)).replace("{y}", T.q.slice(0, 4)) : "");
+    if (cols.length < 2) { empty.hidden = false; box.hidden = true; return; }
+    if (ids.length > 3) { note.textContent = L.max; note.hidden = false; }
+    box.style.setProperty("--n", String(cols.length));
+    const soon = `<span class="c4-soon">${esc(L.soon)}</span>`;
+    const free: [string, (d: any) => string][] = [
+      // INE: the typology range where it exists ("entre tipologias"), else the median; a region: its concelhos' P10-P90.
+      [L.mkt, (d) => d.rng ? `${nf.format(d.rng[0])}–${eur.format(d.rng[1])}/m²<small class="c4-s">${esc(L.ty)}</small>` : d.rr ? `${nf.format(d.rr[0])}–${eur.format(d.rr[1])}/m²` : d.m2 ? `${eur.format(d.m2)}/m²` : "—"],
+      [L.dir5, (d) => d.p5 != null ? pct(d.p5) : "—"],
+      // Sunshine: no publishable source yet (IPMA's sheets are private use only).
+      [L.sun, (d) => d.sun != null ? esc(L.sunV.replace("{v}", nf.format(d.sun))) : soon],
+      [L.beach, (d) => d.bch != null ? esc(L.kmline.replace("{v}", nf1.format(d.bch))) : d.rr ? "—" : soon],
+      // The flight time is never estimated: the nearest airport in straight-line km, and the time "Em breve".
+      [L.flight, (d) => { const f = d.fl?.[L.ed]; if (f != null) return f >= 60 ? `${Math.floor(f / 60)} h ${String(Math.round(f % 60)).padStart(2, "0")}` : esc(L.min.replace("{v}", nf.format(f)));
+        return d.ap ? `${soon}<small class="c4-s">${esc(L.ap.replace("{n}", AP[d.ap[0]] ?? d.ap[0]).replace("{v}", nf.format(d.ap[1])))}</small>` : d.rr ? "—" : soon; }],
+    ];
+    const AP: Record<string, string> = { LIS: "Lisboa", OPO: "Porto", FAO: "Faro", FNC: "Funchal", PDL: "Ponta Delgada" };
+    const locked = [L.rent, L.yield, L.g10, L.foreign, L.supply];
+    const lockSvg = `<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>`;
+    let h = `<div class="c4-h">${cols.map((c) => `<div class="c4-col">${c.photo ? `<img src="/img/v2/${c.photo}-640.webp" alt="" width="640" height="400" loading="lazy">` : `<span class="c4-ph"></span>`}<p class="c4-k">${esc(c.kick)}</p><p class="c4-n">${esc(c.name)}</p><a href="${esc(c.href)}">${esc(L.open)} →</a></div>`).join("")}</div>`;
+    for (const [label, f] of free) h += `<div class="c4-r"><p class="c4-l">${esc(label)}</p><div class="c4-v">${cols.map((c) => `<span>${f(c.d)}</span>`).join("")}</div></div>`;
+    // Locked rows: a soft shape where the figure goes (never the figure), and the analysis below.
+    for (const label of locked) h += `<button type="button" class="c4-lock" data-lock><span class="c4-l">${esc(label)}${lockSvg}</span><span class="c4-v">${cols.map(() => `<span>0 000</span>`).join("")}</span><span class="vh">${esc(L.locked)}</span></button>`;
+    box.innerHTML = h;
+    ev({ event: "map/compare/open", band: String(cols.length), origin: "compare" });
+    box.querySelectorAll("[data-lock]").forEach((b) => b.addEventListener("click", () => {
+      ev({ event: "map/paid/preview/compare", origin: "compare" });
+      document.getElementById("analise")?.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+    }));
+  })();
+</script>
