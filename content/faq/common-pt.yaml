@@ -193,6 +193,12 @@
   cta: agency
   q: "É boa altura para comprar?"
   a: >-
+    Não fazemos previsões nem damos conselhos de investimento, mas mostramos os factos: segundo o INE, os
+    preços da habitação em Portugal subiram 17,6% em 2025, a maior subida da série. O resto depende do seu
+    orçamento, da região e do que procura numa casa. Um consultor qualificado mostra-lhe o que existe hoje,
+    sem compromisso.
+  # Prompt 66 §3: the wording that names the partner agency, used when config.agency.public is true.
+  a_named: >-
     Não fazemos previsões nem damos conselhos de investimento, mas mostramos os factos: segundo o INE,
     os preços da habitação em Portugal subiram 17,6% em 2025, a maior subida da série. O resto depende
     do seu orçamento, da região e do que procura numa casa. A nossa agência parceira mostra-lhe o que
@@ -205,6 +211,11 @@
   cta: agency
   q: "Podem encontrar-me uma casa?"
   a: >-
+    Diga-nos a região, o orçamento e o prazo: o pedido segue para um consultor qualificado de uma mediadora
+    imobiliária licenciada, que o contacta sem custos para si. Pode ver as casas por videochamada, através
+    de alguém da sua confiança ou ao vivo quando vier a Portugal, e comprar sem estar cá, por procuração.
+  # Prompt 66 §3: the wording that names the partner agency, used when config.agency.public is true.
+  a_named: >-
     Diga-nos a região, o orçamento e o prazo: o pedido segue para a nossa agência parceira licenciada, a
     Habinedita Gondomar, que o contacta sem custos para si. Pode ver as casas por videochamada, através
     de alguém da sua confiança ou ao vivo quando vier a Portugal, e comprar sem estar cá, por

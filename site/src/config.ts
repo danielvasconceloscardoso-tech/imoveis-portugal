@@ -95,7 +95,13 @@ export const config = {
   // Partner agency that receives buyer requests (licensed real-estate mediator).
   // D17: Habinedita Gondomar, the only real-estate agency on the platform, shown as a sponsored partner.
   // Public business details only (ops/prompts/08_partner_agency_habinedita.md).
+  // Prompt 66 §3 (operator, 3 Nov 2026): public = false hides the agency's name, AMI licence and website everywhere on
+  // the site; readers see "a qualified advisor" (copy deck) and the privacy policy names the recipient category "a
+  // qualified advisor at a licensed real-estate brokerage" (GDPR art. 13(1)(e)). Requests still go to this agency
+  // (site/worker MAIL_TO, hard rule 6 unchanged). true brings every mention back as it was (COPY_DECK "## agencynamed",
+  // content/faq a_named). With false, the build fails if any copy block shown on the site still names the agency.
   agency: {
+    public: false,
     name: "Habinedita Gondomar",
     ami: "13250",
     website: "https://habineditagondomar.pt/",

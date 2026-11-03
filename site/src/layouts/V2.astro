@@ -167,7 +167,7 @@ import Beacon from "../components/Beacon.astro";
           <p><span class="ft2-k">{c("home2.ft.langs", lang)}</span> {LANGS.map((l, i) => <>{i > 0 && " · "}<a href={urlFor(l)} data-lang={l} lang={HTML_LANG[l]}>{LANG_NAME[l]}</a></>)}</p>
         </div>
         <p class="ft2-small">{DISCLAIMER[lang]}</p>
-        <p class="ft2-small">{c("common.foot.agency", lang)}: <a href={config.agency.website} rel="noopener">{config.agency.name}</a>, AMI {config.agency.ami}. <a href={pathFor(lang, ed, "privacy")}>{c("common.privacy", lang)}</a> · <a href={pathFor(lang, ed, "legal")}>{c("common.foot.legal", lang)}</a> · <a href="/credits/">{c("common.foot.credits", lang)}</a> · © 2026 Imóveis Portugal</p>
+        <p class="ft2-small">{config.agency.public ? <>{c("common.foot.agency", lang)}: <a href={config.agency.website} rel="noopener">{config.agency.name}</a>, AMI {config.agency.ami}.</> : c("common.foot.agency", lang)} <a href={pathFor(lang, ed, "privacy")}>{c("common.privacy", lang)}</a> · <a href={pathFor(lang, ed, "legal")}>{c("common.foot.legal", lang)}</a> · <a href="/credits/">{c("common.foot.credits", lang)}</a> · © 2026 Imóveis Portugal</p>
       </div>
     </footer>
     ) : (
@@ -204,7 +204,7 @@ import Beacon from "../components/Beacon.astro";
             <ul>{LANGS.map((l) => <li><a href={urlFor(l)} data-lang={l} lang={HTML_LANG[l]}>{LANG_NAME[l]}</a></li>)}</ul>
           </div>
         </div>
-        <p class="legal">{c("common.foot.agency", lang)}: <a href={config.agency.website} rel="noopener">{config.agency.name}</a>, AMI {config.agency.ami}, {c("common.gold", lang)}. © 2026 Imóveis Portugal.</p>
+        <p class="legal">{config.agency.public ? <>{c("common.foot.agency", lang)}: <a href={config.agency.website} rel="noopener">{config.agency.name}</a>, AMI {config.agency.ami}, {c("common.gold", lang)}.</> : c("common.foot.agency", lang)} © 2026 Imóveis Portugal.</p>
       </div>
     </footer>
     )}

@@ -6,6 +6,7 @@ import { join } from "node:path";
 import yaml from "js-yaml";
 import { HTML_LANG, EDITIONS, type EdCode, type Lang } from "../i18n";
 import { c } from "./copy";
+import { config } from "../config";
 
 // Builds run from site/ (npm run build, Cloudflare root directory "site"); content/ sits next to it.
 const contentDir = join(process.cwd(), "..", "content");
@@ -35,10 +36,13 @@ export const FACTS: Record<string, Fact> = Object.fromEntries(
 
 // ---------- FAQ: common-{lang}.yaml plus the edition's own {ed}-{lang}.yaml (prompt 09) ----------
 export type Stage = "before" | "buying" | "after";
-export type FaqItem = { id: string; rank: number; stage: Stage; q: string; a: string; cta: Cat | "agency"; facts: string[] };
+export type FaqItem = { id: string; rank: number; stage: Stage; q: string; a: string; a_named?: string; cta: Cat | "agency"; facts: string[] };
+// Prompt 66 §3: an answer that names the partner agency keeps that wording in `a_named`, used only when
+// config.agency.public is true; otherwise `a` (the qualified-advisor wording) is shown.
 const loadYaml = (name: string) => {
   const f = join(contentDir, "faq", `${name}.yaml`);
-  return existsSync(f) ? ((yaml.load(readFileSync(f, "utf8")) || []) as FaqItem[]) : [];
+  const items = existsSync(f) ? ((yaml.load(readFileSync(f, "utf8")) || []) as FaqItem[]) : [];
+  return items.map(({ a_named, ...it }) => ({ ...it, a: config.agency.public && a_named ? a_named : it.a }));
 };
 // Common and edition questions merged and ordered by search interest (rank).
 export function faqFor(ed: EdCode, lang: Lang): FaqItem[] {

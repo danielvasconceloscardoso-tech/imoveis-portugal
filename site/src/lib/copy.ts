@@ -19,13 +19,18 @@ const DECK = new Map<string, Record<Lang, string>>();
   for (const [k, v] of DECK) for (const l of ["pt", "en", "fr"] as Lang[]) if (!v[l]) throw new Error(`COPY_DECK.md: ${k} has no ${l.toUpperCase()} text`);
 }
 
-const BASE = { agency: config.agency.name, ami: config.agency.ami, email: config.contactEmail };
 export type Vars = Record<string, string | number>;
+// Prompt 66 §3: while config.agency.public is false the agency is not named. Each block that names it has its named
+// wording under "## agencynamed" (same key), used only when the flag is true; with the flag off, {agency} and {ami}
+// are not filled and a block that still holds them fails the build, so the name cannot slip back in unnoticed.
+const NAMED = config.agency.public;
+const BASE: Vars = NAMED ? { agency: config.agency.name, ami: config.agency.ami, email: config.contactEmail } : { email: config.contactEmail };
 
 /** One text from the deck, e.g. c("home.lede", "pt"). Throws on a missing key so typos fail the build. */
 export function c(key: string, lang: Lang, vars: Vars = {}): string {
-  const v = DECK.get(key);
+  const v = (NAMED && DECK.get(`agencynamed.${key}`)) || DECK.get(key);
   if (!v) throw new Error(`COPY_DECK.md: no block "${key}"`);
+  if (!NAMED && /\{(agency|ami)\}/.test(v[lang])) throw new Error(`COPY_DECK.md: ${key} (${lang}) names the agency while config.agency.public is false: move that wording to "## agencynamed"`);
   const all: Vars = { ...BASE, ...vars };
   return v[lang].replace(/\{(\w+)\}/g, (m, k) => (k in all ? String(all[k]) : m));
 }

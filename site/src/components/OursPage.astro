@@ -10,7 +10,10 @@ interface Props { lang: Lang; ed: EdCode; }
 const { lang, ed } = Astro.props;
 const cp = config.creditPartner, ip = config.insurancePartner;
 const group = [
-  { role: c("ours.agency", lang), name: config.agency.name, licence: `AMI ${config.agency.ami}`, tag: c("common.gold", lang) },
+  // Prompt 66 §3: while config.agency.public is false the role shows the qualified advisor, not the agency's name or licence.
+  config.agency.public
+    ? { role: c("ours.agency", lang), name: config.agency.name, licence: `AMI ${config.agency.ami}`, tag: c("common.gold", lang) }
+    : { role: c("ours.agency", lang), name: c("advisor.title", lang), licence: c("advisor.firm", lang), tag: c("common.gold", lang) },
   { role: c("ours.credit", lang), name: cp.name, licence: cp.bdp ? `Banco de Portugal ${cp.bdp}` : "", tag: cp.name ? c("common.sponsored", lang) : "" },
   { role: c("ours.insurance", lang), name: ip.name, licence: ip.asf ? `ASF ${ip.asf}` : "", tag: ip.name ? c("common.sponsored", lang) : "" },
 ];

@@ -23,9 +23,9 @@ const site = config.agency.website.replace(/^https:\/\/|\/$/g, "");
   <div class="frame read prose">
     <div class="partner">
       <span class="tag">{c("common.gold", lang)}</span>
-      <span class="logo">{config.agency.name}</span>
+      <span class="logo">{config.agency.public ? config.agency.name : c("advisor.title", lang)}</span>
       <p style="margin:0">{c("talk.agency.p", lang)}</p>
-      <p class="small" style="margin:0">AMI {config.agency.ami} · <a href={config.agency.website} rel="noopener">{site}</a></p>
+      {config.agency.public && <p class="small" style="margin:0">AMI {config.agency.ami} · <a href={config.agency.website} rel="noopener">{site}</a></p>}
       <a class="btn" style="justify-self:start" href={pathFor(lang, ed, "buy")}>{c("faq.cta.agency", lang)}</a>
     </div>
     <h2>{c("talk.calls.h", lang)}</h2>
