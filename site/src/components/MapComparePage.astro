@@ -11,6 +11,7 @@ import { HTML_LANG, LANGS, pathFor, SLUGS, type Lang, type EdCode } from "../i18
 import { c, cl, edName } from "../lib/copy";
 import { REGIONS } from "../lib/mapdata";
 import { COMPARE_SUB } from "../lib/maptiles";
+import PLACE_PHOTOS from "../data/place-photos.json";
 import { config } from "../config";
 
 interface Props { lang: Lang; ed: EdCode; }
@@ -21,8 +22,8 @@ const A = config.mapAnalysis;
 const mapPath = pathFor(lang, ed, "map");
 const paths = Object.fromEntries(LANGS.map((l) => [l, `/${l}/${ed}/${SLUGS[l].map}/${COMPARE_SUB[l]}/`])) as Record<Lang, string>;
 // Photographs only where they show the place named (the municipality's own, as on the map), else the region's.
-const placePhotos: Record<string, string> = { lisboa: "lisboa-castelo-por-do-sol", porto: "porto-douro-entardecer", cascais: "cascais-baia", lagos: "algarve-porto-de-mos",
-  funchal: "madeira-funchal-fogo", machico: "madeira-sao-lourenco", "porto-moniz": "madeira-porto-moniz" };
+// One list for the map and this page: src/data/place-photos.json (photos pass, 3 Nov 2026).
+const placePhotos: Record<string, string> = Object.fromEntries(Object.entries(PLACE_PHOTOS).filter(([k]) => k !== "_how").map(([k, v]: [string, any]) => [k, v.f]));
 const regionPhotos: Record<string, string> = { north: "porto-douro-entardecer", lisbon: "lisboa-castelo-por-do-sol", alentejo: "comporta-mar-turquesa",
   algarve: "algarve-praia-da-marinha", madeira: "madeira-levada" };
 const L = {

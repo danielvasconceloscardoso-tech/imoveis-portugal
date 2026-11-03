@@ -20,6 +20,7 @@ import { c, cl } from "../lib/copy";
 import { PROJECTS } from "../lib/projects";
 import { config } from "../config";
 import { COMPARE_SUB } from "../lib/maptiles";
+import PLACE_PHOTOS from "../data/place-photos.json";
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import "../styles/mapv3.css";
@@ -34,9 +35,10 @@ const lastQ = PRICES.quarters[PRICES.quarters.length - 1];
 const qfmt = c("map.qfmt", lang);
 const qLabel = qfmt.replace("{q}", lastQ.slice(-1)).replace("{y}", lastQ.slice(0, 4));
 const pages = new Set(PLACES.map((p) => p.slug));
-// Photographs only where they show the place named (prompt 34 §4.5).
-const photos: Record<string, string> = { lisboa: "lisboa-castelo-por-do-sol", porto: "porto-douro-entardecer", cascais: "cascais-baia", lagos: "algarve-porto-de-mos",
-  funchal: "madeira-funchal-fogo", machico: "madeira-sao-lourenco", "porto-moniz": "madeira-porto-moniz" };
+// Photographs only where they show the place named (prompt 34 §4.5): one hero per municipality without a place card, from
+// src/data/place-photos.json (photos pass, 3 Nov 2026; shared with MapComparePage.astro), with its alt text per language.
+const photos: Record<string, string> = Object.fromEntries(Object.entries(PLACE_PHOTOS).filter(([k]) => k !== "_how").map(([k, v]: [string, any]) => [k, v.f]));
+const photoAlt: Record<string, string> = Object.fromEntries(Object.entries(PLACE_PHOTOS).filter(([k]) => k !== "_how").map(([k, v]: [string, any]) => [k, v.alt?.[lang] ?? ""]));
 // D83 part 2: one photograph per region for the postcards and the region card (content/media/SOURCES.md; CC BY ones credited on
 // /credits/). They appear on the region postcards and the region's card only; a municipality without its own photograph shows
 // a quiet band (operator, 3 Nov 2026: never a view of another place).
@@ -91,7 +93,7 @@ const comparePath = `${mapPath}${COMPARE_SUB[lang]}/`;
 const links = { buy: pathFor(lang, ed, "buy"), consult: pathFor(lang, ed, "consult"), map: mapPath, compare: comparePath, pages: [...pages], credits: "/credits/" };
 const pinFile = (id: string) => existsSync(join(process.cwd(), "public", "img", "map", `pin-${id}.webp`)) ? `/img/map/pin-${id}.webp` : "";
 // The area briefs carry rents, yields and ten-year changes (paid analysis): never in the free card (operator, step 1).
-const cfg = { labels, links, photos, regionPhotos, ed, lang,
+const cfg = { labels, links, photos, photoAlt, regionPhotos, ed, lang,
   projects: PROJECTS.map((p) => ({ id: p.id, name: p.name, tag: p.tag?.[lang] ?? "", developer: p.developer, muni: p.muni, lon: p.lon, lat: p.lat, render: p.render, pin: pinFile(p.id) || (p.render ? `${p.render}-800.webp` : ""), from: p.from, showcase: `${pathFor(lang, ed, "partners")}${p.devSlug}/${p.muni}/`,
     // Prompt 38: the project card (summary, three features, homes for sale now from the developer's table).
     summary: p.summary?.[lang], feats: (p.features ?? []).filter((f) => f.card).map((f) => f[lang]),

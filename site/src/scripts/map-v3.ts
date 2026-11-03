@@ -459,7 +459,7 @@ export function initMapV3(root: HTMLElement) {
     const own = slug ? cfg.photos[slug] : "", reg = isRegion ? cfg.regionPhotos?.[r] ?? "" : "";
     const f = own || reg; if (!f) return `<div class="m3-photo m3-photo-none m3-photo-quiet"><span>${esc(L.regions[r] || "")}</span></div>`;
     const cap = !own && T4.ph[f] ? `<figcaption>${esc(T4.ph[f])}</figcaption>` : "";
-    return `<figure class="m3-ph"><img class="m3-photo" src="/img/v2/${f}-640.webp" srcset="/img/v2/${f}-640.webp 640w, /img/v2/${f}-1024.webp 1024w" sizes="420px" alt="" width="640" height="400">${cap}</figure>`;
+    return `<figure class="m3-ph"><img class="m3-photo" src="/img/v2/${f}-640.webp" srcset="/img/v2/${f}-640.webp 640w, /img/v2/${f}-1024.webp 1024w" sizes="420px" alt="${own ? esc(cfg.photoAlt?.[slug!] ?? "") : ""}" width="640" height="400">${cap}</figure>`;
   }
   const dirLine = (p5: number | undefined | null) => p5 == null ? "" : Math.abs(p5) < 2 ? T4.dirFlat : (p5 > 0 ? T4.dirUp : T4.dirDown).replace("{v}", pctF.format(Math.abs(p5) / 100));
   const soonHTML = () => `<span class="m3-soon"><b>${esc(T4.soon)}</b><small>${esc(T4.soonP)}</small></span>`;

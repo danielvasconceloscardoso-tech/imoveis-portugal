@@ -1,0 +1,1331 @@
+{
+ "_how": "WIP of the photos pass (3 Nov 2026), Norte: one hero per municipality, picked by eye from Wikimedia Commons candidates. Each entry: Commons file, licence, author, camera point, crop, alt pt/en/fr, and whether the graded 640/1024/1600 WebP is in site/public/img/v2/ (graded=true). Not yet wired into place-photos.json, credits.ts or SOURCES.md.",
+ "north": {
+  "castelo-de-paiva": [
+   {
+    "title": "File:Rio Douro - Portugal (273252184).jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/e/e2/Rio_Douro_-_Portugal_%28273252184%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "page": "https://commons.wikimedia.org/wiki/File:Rio_Douro_-_Portugal_(273252184).jpg",
+    "pageid": 77477962,
+    "w": 1280,
+    "h": 933,
+    "lic": "CC BY-SA 2.0",
+    "artist": "Vitor Oliveira from Torres Vedras, PORTUGAL",
+    "lat": null,
+    "lon": null,
+    "inside": null,
+    "desc": "<a href=\"http://maps.google.com?q=41.06338468436663,-8.262126445770264(Ilha do Outeiro - Portugal)&t=h\">See where this picture was taken.</a> <a href=\"https://www.flickr.com/groups/geotagging/discuss/72157594165549916/\">[?]</a>",
+    "cats": "Castelo de Paiva|Files with coordinates missing SDC location of creation|Flickr images reviewed by FlickreviewR 2|Photographs by Vitor Oliveira|Douro river in Castelo de Paiva|Douro river in Marco de Canaveses|Douro river in Cinfães|Photographs by Vitor Oliveira, Douro|EN 222 road",
+    "date": "2006-07-18 15:30",
+    "f": "castelo-de-paiva-ilha-dos-amores",
+    "alt": {
+     "pt": "A Ilha dos Amores no Douro, Castelo de Paiva",
+     "en": "Ilha dos Amores on the Douro, Castelo de Paiva",
+     "fr": "L'île des Amours sur le Douro, Castelo de Paiva"
+    },
+    "what": "Ilha dos Amores (Ilha do Outeiro), a small wooded island in the Douro, the Castelo de Paiva bank behind",
+    "graded": true,
+    "web_w": 1024
+   }
+  ],
+  "esposende": [
+   {
+    "title": "File:Esposende 2024 (1).jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/f/f7/Esposende_2024_%281%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "page": "https://commons.wikimedia.org/wiki/File:Esposende_2024_(1).jpg",
+    "pageid": 154205940,
+    "w": 3968,
+    "h": 2976,
+    "lic": "CC BY 4.0",
+    "artist": "Joseolgon",
+    "lat": null,
+    "lon": null,
+    "inside": null,
+    "desc": "Aerial photograph of Esposende Portugal",
+    "cats": "Self-published work|Taken with DJI FC1102 in Portugal|River mouths in Portugal|Files with coordinates missing SDC location of creation|Portugal photographs taken on 2024-07-22|2024 aerial photographs of Portugal|Aerial photographs of Cávado River in Esposende",
+    "date": "2024-07-22 10:46:33",
+    "f": "esposende-ofir-foz-do-cavado",
+    "alt": {
+     "pt": "A restinga de Ofir e a foz do Cávado vistas do ar, Esposende",
+     "en": "The Ofir sand spit and the mouth of the Cávado from the air, Esposende",
+     "fr": "La flèche de sable d'Ofir et l'embouchure du Cávado vues du ciel, Esposende"
+    },
+    "what": "Aerial view of the Ofir sand spit, the beach and the mouth of the Cávado, Esposende beyond",
+    "graded": true,
+    "web_w": 1600
+   }
+  ],
+  "vale-de-cambra": [
+   {
+    "title": "File:Côvo - Portugal (51496953027).jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/9/9a/C%C3%B4vo_-_Portugal_%2851496953027%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "page": "https://commons.wikimedia.org/wiki/File:C%C3%B4vo_-_Portugal_(51496953027).jpg",
+    "pageid": 110500070,
+    "w": 5184,
+    "h": 3456,
+    "lic": "CC BY-SA 2.0",
+    "artist": "Vitor Oliveira from Torres Vedras, PORTUGAL",
+    "lat": 40.847109,
+    "lon": -8.271718,
+    "inside": true,
+    "desc": "Côvo - Portugal 🇵🇹",
+    "cats": "Vale de Cambra|Serra da Freita|Files with coordinates missing SDC location of creation|Flickr images reviewed by FlickreviewR 2|Photographs by Vitor Oliveira",
+    "date": "2021-08-15 11:20",
+    "f": "vale-de-cambra-covo-serra-da-freita",
+    "alt": {
+     "pt": "A aldeia do Côvo entre as fragas da Serra da Freita, Vale de Cambra",
+     "en": "The village of Côvo among the crags of the Serra da Freita, Vale de Cambra",
+     "fr": "Le village de Côvo au milieu des rochers de la Serra da Freita, Vale de Cambra"
+    },
+    "what": "The village of Côvo in a granite valley of the Serra da Freita, Vale de Cambra",
+    "trim": 0.07,
+    "graded": true,
+    "web_w": 1600
+   }
+  ],
+  "guimaraes": [
+   {
+    "title": "File:DJI 0145.paço duques bragançaJPG.jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/3/3e/DJI_0145.pa%C3%A7o_duques_bragan%C3%A7aJPG.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "page": "https://commons.wikimedia.org/wiki/File:DJI_0145.pa%C3%A7o_duques_bragan%C3%A7aJPG.jpg",
+    "pageid": 94029461,
+    "w": 4000,
+    "h": 3000,
+    "lic": "CC BY-SA 4.0",
+    "artist": "LUIS MIGUEL JORGE DUARTE",
+    "lat": null,
+    "lon": null,
+    "inside": null,
+    "desc": "Paço dos Duques de Bragança (Guimarães)",
+    "cats": "Taken with DJI FC220|Castelo de Guimarães|Exterior of Paço dos Duques de Bragança (Guimarães)|Muralhas de Guimarães|Self-published work|Portugal photographs taken on 2019-02-06|Cultural heritage monuments in Portugal with known IDs|Aerial photographs of palaces in Portugal|Uploaded via Campaign:wlm-",
+    "date": "2019-02-06 10:14:30",
+    "f": "guimaraes-paco-dos-duques-castelo",
+    "alt": {
+     "pt": "O Paço dos Duques e o castelo de Guimarães vistos do ar, a cidade e as serras ao fundo",
+     "en": "The Palace of the Dukes and Guimarães castle from the air, the town and hills beyond",
+     "fr": "Le palais des Ducs et le château de Guimarães vus du ciel, la ville et les collines au loin"
+    },
+    "what": "Aerial view of the Paço dos Duques de Bragança and the castle, Guimarães, the town and hills beyond",
+    "graded": true,
+    "web_w": 1600
+   }
+  ],
+  "povoa-de-lanhoso": [
+   {
+    "title": "File:View of Povoa de Lanhoso (4).jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/d/d2/View_of_Povoa_de_Lanhoso_%284%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "page": "https://commons.wikimedia.org/wiki/File:View_of_Povoa_de_Lanhoso_(4).jpg",
+    "pageid": 88174145,
+    "w": 6560,
+    "h": 2352,
+    "lic": "CC BY-SA 4.0",
+    "artist": "Krzysztof Golik",
+    "lat": null,
+    "lon": null,
+    "inside": null,
+    "desc": "View of Póvoa de Lanhoso, Minho, Portugal",
+    "cats": "Póvoa de Lanhoso|Self-published work|Tournasol7's quality images|Files with coordinates missing SDC location of creation|Portugal photographs taken on 2020-02-18",
+    "date": "2020-02-18 18:22:43",
+    "f": "povoa-de-lanhoso-vale",
+    "alt": {
+     "pt": "O vale de Póvoa de Lanhoso, aldeias e serras do Minho",
+     "en": "The valley of Póvoa de Lanhoso, villages and the Minho hills",
+     "fr": "La vallée de Póvoa de Lanhoso, ses villages et les collines du Minho"
+    },
+    "what": "Panorama of Póvoa de Lanhoso, a village in the valley and the Minho hills",
+    "x": 0.45,
+    "graded": true,
+    "web_w": 1600
+   }
+  ],
+  "terras-de-bouro": [
+   {
+    "title": "File:Albufeira da Caniçada - Portugal 🇵🇹 (54816969666).jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/5/5c/Albufeira_da_Cani%C3%A7ada_-_Portugal_%F0%9F%87%B5%F0%9F%87%B9_%2854816969666%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "page": "https://commons.wikimedia.org/wiki/File:Albufeira_da_Cani%C3%A7ada_-_Portugal_%F0%9F%87%B5%F0%9F%87%B9_(54816969666).jpg",
+    "pageid": 176033306,
+    "w": 2048,
+    "h": 1536,
+    "lic": "CC BY-SA 4.0",
+    "artist": "Vitor Oliveira from Torres Vedras, PORTUGAL",
+    "lat": 41.680949,
+    "lon": -8.1772,
+    "inside": true,
+    "desc": "Albufeira da Caniçada - Portugal 🇵🇹",
+    "cats": "Files with coordinates missing SDC location of creation|Flickr images reviewed by FlickreviewR 2|Photographs by Vitor Oliveira|Aerial photographs of Terras de Bouro|Aerial photographs of Albufeira da Caniçada",
+    "date": "2025-08-22 18:15",
+    "f": "terras-de-bouro-albufeira-canicada",
+    "alt": {
+     "pt": "A albufeira da Caniçada vista do ar, Terras de Bouro",
+     "en": "The Caniçada reservoir from the air, Terras de Bouro",
+     "fr": "Le lac de barrage de Caniçada vu du ciel, Terras de Bouro"
+    },
+    "what": "Aerial view of the Caniçada reservoir between wooded slopes, Terras de Bouro",
+    "trim": 0.07,
+    "graded": true,
+    "web_w": 1600
+   }
+  ],
+  "vieira-do-minho": [
+   {
+    "title": "File:Vieira do Minho 2018 (6).jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Vieira_do_Minho_2018_%286%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "page": "https://commons.wikimedia.org/wiki/File:Vieira_do_Minho_2018_(6).jpg",
+    "pageid": 70908736,
+    "w": 3968,
+    "h": 2976,
+    "lic": "CC BY-SA 4.0",
+    "artist": "Joseolgon",
+    "lat": 41.645278,
+    "lon": -8.203056,
+    "inside": true,
+    "desc": "Vieira do Minho, Portugal in 2018.",
+    "cats": "Albufeira da Caniçada|Self-published work|Taken with DJI FC1102 in Portugal|Files with coordinates missing SDC location of creation|Portugal photographs taken on 2018-07-14|2018 aerial photographs of Portugal|Aerial photographs of Vieira do Minho",
+    "date": "2018-07-14 17:42:20",
+    "f": "vieira-do-minho-canicada",
+    "alt": {
+     "pt": "A albufeira da Caniçada entre montes verdes, Vieira do Minho",
+     "en": "The Caniçada reservoir between green hills, Vieira do Minho",
+     "fr": "Le lac de Caniçada entre des collines vertes, Vieira do Minho"
+    },
+    "what": "The Caniçada reservoir and the Gerês hills from above, Vieira do Minho",
+    "graded": true,
+    "web_w": 1600
+   }
+  ],
+  "alfandega-da-fe": [
+   {
+    "title": "File:Baragem de Salgueiro - Portugal (21933389192).jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/a/a2/Baragem_de_Salgueiro_-_Portugal_%2821933389192%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "page": "https://commons.wikimedia.org/wiki/File:Baragem_de_Salgueiro_-_Portugal_(21933389192).jpg",
+    "pageid": 77448116,
+    "w": 3849,
+    "h": 2532,
+    "lic": "CC BY-SA 2.0",
+    "artist": "Vitor Oliveira from Torres Vedras, PORTUGAL",
+    "lat": null,
+    "lon": null,
+    "llsrc": null,
+    "inside": null,
+    "desc": "A barragem de Salgueiro localiza-se no concelho de Alfândega da Fé, distrito de Bragança, Portugal. Situa-se na ribeira do Salgueiro. A barragem foi projectada em 1971 e entrou em funcionamento em 1977.\nBarragem\nÉ uma barragem de aterro (terra homogénea). Possui uma altura de 28 m acima da fundação ",
+    "cats": "Alfândega da Fé|Files with coordinates missing SDC location of creation|Flickr images reviewed by FlickreviewR 2|Photographs by Vitor Oliveira|Barragem de Salgueiro",
+    "date": "2015-10-04 16:31",
+    "f": "alfandega-da-fe-barragem-do-salgueiro",
+    "alt": {
+     "pt": "A barragem do Salgueiro entre olivais e amendoais, Alfândega da Fé",
+     "en": "The Salgueiro reservoir among olive and almond groves, Alfândega da Fé",
+     "fr": "Le lac de barrage de Salgueiro entre oliveraies et amanderaies, Alfândega da Fé"
+    },
+    "what": "The Salgueiro reservoir, olive groves and a village beyond, Alfândega da Fé",
+    "trim": 0.07,
+    "graded": true,
+    "web_w": 1600
+   }
+  ],
+  "freixo-de-espada-a-cinta": [
+   {
+    "title": "File:Barragem de Saucelle vista do Penedo Durão - Freixo de Espada à Cinta (Portugal) (123167519).jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/a/a0/Barragem_de_Saucelle_vista_do_Penedo_Dur%C3%A3o_-_Freixo_de_Espada_%C3%A0_Cinta_%28Portugal%29_%28123167519%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "page": "https://commons.wikimedia.org/wiki/File:Barragem_de_Saucelle_vista_do_Penedo_Dur%C3%A3o_-_Freixo_de_Espada_%C3%A0_Cinta_(Portugal)_(123167519).jpg",
+    "pageid": 77630901,
+    "w": 1280,
+    "h": 856,
+    "lic": "CC BY-SA 2.0",
+    "artist": "Vitor Oliveira from Torres Vedras, PORTUGAL",
+    "lat": null,
+    "lon": null,
+    "llsrc": null,
+    "inside": null,
+    "desc": "Rio Douro (zona de fronteira entre Portugal e Espanha)",
+    "cats": "Saucelle Dam|Miradouro de Penedo Durão|Flickr images reviewed by FlickreviewR 2|Photographs by Vitor Oliveira|Douro river in Freixo de Espada à Cinta|Arribes del Duero|Photographs by Vitor Oliveira, Douro",
+    "date": "2006-04-03 23:39",
+    "f": "freixo-penedo-durao-douro",
+    "alt": {
+     "pt": "O Douro internacional visto do Penedo Durão, Freixo de Espada à Cinta",
+     "en": "The international Douro from the Penedo Durão viewpoint, Freixo de Espada à Cinta",
+     "fr": "Le Douro international vu du belvédère de Penedo Durão, Freixo de Espada à Cinta"
+    },
+    "what": "The Douro gorge and the Saucelle dam seen from the Penedo Durão viewpoint, Freixo de Espada à Cinta",
+    "graded": true,
+    "web_w": 1024
+   }
+  ],
+  "miranda-do-douro": [
+   {
+    "title": "File:Peinha de l Puio 1.jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/c/c8/Peinha_de_l_Puio_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "page": "https://commons.wikimedia.org/wiki/File:Peinha_de_l_Puio_1.jpg",
+    "pageid": 32468375,
+    "w": 4288,
+    "h": 2848,
+    "lic": "CC BY-SA 3.0",
+    "artist": "Xemenendura",
+    "lat": 41.397391,
+    "lon": -6.367545,
+    "llsrc": null,
+    "inside": true,
+    "desc": "Mirador de la Peña del Puio, Picote, Portugal.",
+    "cats": "Miradouro Peinha de l Puio|Self-published work|Images with extracted images|Douro River in the province of Zamora|Douro river in Arribes del Duero Natural Park|Files with coordinates missing SDC location of creation|Portugal photographs taken on 2014-04-13|Sites of Community Importance in Portugal w",
+    "date": "2014-04-13 11:34:29",
+    "f": "miranda-do-douro-peinha-de-l-puio",
+    "alt": {
+     "pt": "O meandro do Douro visto do miradouro da Peinha de l Puio, Picote, Miranda do Douro",
+     "en": "The Douro's bend from the Peinha de l Puio viewpoint, Picote, Miranda do Douro",
+     "fr": "Le méandre du Douro vu du belvédère de Peinha de l Puio, Picote, Miranda do Douro"
+    },
+    "what": "The Douro gorge and its bend seen from the Peinha de l Puio viewpoint, Picote",
+    "graded": true,
+    "web_w": 1600
+   }
+  ],
+  "mogadouro": [
+   {
+    "title": "File:Vista sobre o Rio.jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/e/e8/Vista_sobre_o_Rio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "page": "https://commons.wikimedia.org/wiki/File:Vista_sobre_o_Rio.jpg",
+    "pageid": 72270799,
+    "w": 5184,
+    "h": 3456,
+    "lic": "CC BY-SA 4.0",
+    "artist": "Ecampos12",
+    "lat": null,
+    "lon": null,
+    "llsrc": null,
+    "inside": null,
+    "desc": "Rio Douro visto desde do Castelo dos Mouros",
+    "cats": "Mogadouro|Povoado Fortificado de Vilarinho dos Galegos|Self-published work|Douro River in the province of Salamanca|Douro river in Arribes del Duero Natural Park|Miradouro do Castro de Vilarinho dos Galegos",
+    "date": "2013-08-06",
+    "f": "mogadouro-douro-castelo-dos-mouros",
+    "alt": {
+     "pt": "O vale do Douro visto do Castelo dos Mouros, Vilarinho dos Galegos, Mogadouro",
+     "en": "The Douro valley from the Castelo dos Mouros, Vilarinho dos Galegos, Mogadouro",
+     "fr": "La vallée du Douro vue du Castelo dos Mouros, Vilarinho dos Galegos, Mogadouro"
+    },
+    "what": "The Douro canyon seen from the Castelo dos Mouros hillfort, Vilarinho dos Galegos",
+    "graded": true,
+    "web_w": 1600
+   }
+  ],
+  "torre-de-moncorvo": [
+   {
+    "title": "File:Rio Douro - Portugal (52929327214).jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/6/65/Rio_Douro_-_Portugal_%2852929327214%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "page": "https://commons.wikimedia.org/wiki/File:Rio_Douro_-_Portugal_(52929327214).jpg",
+    "pageid": 132572270,
+    "w": 2048,
+    "h": 1364,
+    "lic": "CC BY-SA 2.0",
+    "artist": "Vitor Oliveira from Torres Vedras, PORTUGAL",
+    "lat": 41.096808,
+    "lon": -7.103375,
+    "llsrc": null,
+    "inside": true,
+    "desc": "Rio Douro - Portugal 🇵🇹",
+    "cats": "Files with coordinates missing SDC location of creation|Flickr images reviewed by FlickreviewR 2|Photographs by Vitor Oliveira|Douro river in Torre de Moncorvo|Photographs by Vitor Oliveira, Douro|Aerial photographs of Torre de Moncorvo|Douro river in Vila Nova de Foz Côa",
+    "date": "2023-04-11 14:51",
+    "f": "torre-de-moncorvo-douro-socalcos",
+    "alt": {
+     "pt": "O Douro entre socalcos de vinha, visto do ar, Torre de Moncorvo",
+     "en": "The Douro between terraced vineyards, from the air, Torre de Moncorvo",
+     "fr": "Le Douro entre les vignes en terrasses, vu du ciel, Torre de Moncorvo"
+    },
+    "what": "Aerial view of the Douro, terraced vineyards and the hills, Torre de Moncorvo",
+    "trim": 0.06,
+    "graded": true,
+    "web_w": 1600
+   }
+  ],
+  "macedo-de-cavaleiros": [
+   {
+    "title": "File:Barragem do Azibo - Portugal 🇵🇹 (54638147100).jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/3/3c/Barragem_do_Azibo_-_Portugal_%F0%9F%87%B5%F0%9F%87%B9_%2854638147100%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "page": "https://commons.wikimedia.org/wiki/File:Barragem_do_Azibo_-_Portugal_%F0%9F%87%B5%F0%9F%87%B9_(54638147100).jpg",
+    "pageid": 176044920,
+    "w": 2048,
+    "h": 1364,
+    "lic": "CC BY-SA 4.0",
+    "artist": "Vitor Oliveira from Torres Vedras, PORTUGAL",
+    "lat": null,
+    "lon": null,
+    "llsrc": null,
+    "inside": null,
+    "desc": "A Barragem do Azibo, construída sobre o leito da Ribeira do Azibo, encontra-se situada na freguesia de Vale da Porca, no Município de Macedo de Cavaleiros, Distrito de Bragança.[1]\nA sua albufeira atinge as freguesias de Salselas, Vale da Porca, Santa Combinha e Podence.\nA Barragem do Rio Azibo tem ",
+    "cats": "Barragem do Azibo|Files with coordinates missing SDC location of creation|Flickr images reviewed by FlickreviewR 2|Photographs by Vitor Oliveira|Photographs by Vitor Oliveira to check|Aerial photographs of Macedo de Cavaleiros",
+    "date": "2025-04-24 16:40",
+    "f": "macedo-albufeira-do-azibo",
+    "alt": {
+     "pt": "A albufeira do Azibo vista do ar, Macedo de Cavaleiros",
+     "en": "The Azibo reservoir from the air, Macedo de Cavaleiros",
+     "fr": "Le lac de l'Azibo vu du ciel, Macedo de Cavaleiros"
+    },
+    "what": "Aerial view of the Azibo reservoir and its wooded shores, Macedo de Cavaleiros",
+    "trim": 0.06,
+    "graded": true,
+    "web_w": 1600
+   }
+  ],
+  "vila-nova-de-foz-coa": [
+   {
+    "title": "File:Foz do Rio Côa - Portugal (53180837481).jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/c/cc/Foz_do_Rio_C%C3%B4a_-_Portugal_%2853180837481%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "page": "https://commons.wikimedia.org/wiki/File:Foz_do_Rio_C%C3%B4a_-_Portugal_(53180837481).jpg",
+    "pageid": 138223722,
+    "w": 2048,
+    "h": 1364,
+    "lic": "CC BY-SA 2.0",
+    "artist": "Vitor Oliveira from Torres Vedras, PORTUGAL",
+    "lat": null,
+    "lon": null,
+    "llsrc": null,
+    "inside": null,
+    "desc": "Foz do Rio Côa - Portugal 🇵🇹",
+    "cats": "Taken with DJI FC3411|Côa railway bridge|Heliports, helipads and helidecks in Portugal|Files with coordinates missing SDC location of creation|Flickr images reviewed by FlickreviewR 2|Photographs by Vitor Oliveira|Photographs by Vitor Oliveira, Douro|Aerial photographs of Côa River|Douro river in Vi",
+    "date": "2023-04-11 14:29",
+    "f": "foz-coa-foz-do-coa-douro",
+    "alt": {
+     "pt": "A foz do Côa no Douro, entre socalcos, vista do ar, Vila Nova de Foz Côa",
+     "en": "Where the Côa meets the Douro, between terraces, from the air, Vila Nova de Foz Côa",
+     "fr": "La confluence du Côa et du Douro, entre les terrasses, vue du ciel, Vila Nova de Foz Côa"
+    },
+    "what": "Aerial view of the mouth of the Côa on the Douro, terraced vineyards, Vila Nova de Foz Côa",
+    "trim": 0.06,
+    "graded": true,
+    "web_w": 1600
+   }
+  ],
+  "amarante": [
+   {
+    "title": "File:Núcleo urbano da cidade de Amarante.jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/0/0b/N%C3%BAcleo_urbano_da_cidade_de_Amarante.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "page": "https://commons.wikimedia.org/wiki/File:N%C3%BAcleo_urbano_da_cidade_de_Amarante.jpg",
+    "pageid": 16797849,
+    "w": 4752,
+    "h": 2673,
+    "lic": "CC BY-SA 3.0",
+    "artist": "Nmmacedo",
+    "lat": 41.26983333,
+    "lon": -8.07633333,
+    "llsrc": null,
+    "inside": true,
+    "desc": "This file was uploaded for Wiki Loves Monuments in Portugal with the unique identifier 97027703.\nEnglish | español | português | português do Brasil | +/−\n\nreview  Done",
+    "cats": "Taken with Canon EOS 500D|Núcleo urbano da cidade de Amarante|Self-published work|Images from Wiki Loves Monuments 2011|Reviewed images from Wiki Loves Monuments 2011 in Portugal|Images from Wiki Loves Monuments 2011 in Portugal|SIPA with known IDs|WLM-PT with known IDs|Files with coordinates missin",
+    "date": "2011-06-23",
+    "f": "amarante-tamega-casario",
+    "alt": {
+     "pt": "As casas de Amarante refletidas no Tâmega",
+     "en": "Amarante's riverside houses reflected in the Tâmega",
+     "fr": "Les maisons d'Amarante se reflétant dans le Tâmega"
+    },
+    "what": "The riverside houses of Amarante's old town reflected in the Tâmega",
+    "graded": true,
+    "web_w": 1600
+   }
+  ],
+  "vinhais": [
+   {
+    "title": "File:Vinhais - Portugal (33052759922).jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/0/02/Vinhais_-_Portugal_%2833052759922%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "page": "https://commons.wikimedia.org/wiki/File:Vinhais_-_Portugal_(33052759922).jpg",
+    "pageid": 78957916,
+    "w": 3730,
+    "h": 1825,
+    "lic": "CC BY-SA 2.0",
+    "artist": "Vitor Oliveira from Torres Vedras, PORTUGAL",
+    "lat": null,
+    "lon": null,
+    "llsrc": null,
+    "inside": null,
+    "desc": "Vinhais - Portugal",
+    "cats": "Vinhais|Castelo de Vinhais|Files with coordinates missing SDC location of creation|Flickr images reviewed by FlickreviewR 2|Photographs by Vitor Oliveira",
+    "date": "2017-03-01 12:29",
+    "f": "vinhais-vila-e-castelo",
+    "alt": {
+     "pt": "Vinhais no alto do monte, o castelo e o casario sob um céu largo",
+     "en": "Vinhais on its hilltop, the castle and the old town under a wide sky",
+     "fr": "Vinhais sur sa colline, le château et la vieille ville sous un ciel immense"
+    },
+    "what": "The hilltop town of Vinhais, its castle walls and houses",
+    "trim": 0.07,
+    "graded": false
+   }
+  ],
+  "braganca": [
+   {
+    "title": "File:Cidadela de Bragança - Portugal 🇵🇹 (54610733055).jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/a/af/Cidadela_de_Bragan%C3%A7a_-_Portugal_%F0%9F%87%B5%F0%9F%87%B9_%2854610733055%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "page": "https://commons.wikimedia.org/wiki/File:Cidadela_de_Bragan%C3%A7a_-_Portugal_%F0%9F%87%B5%F0%9F%87%B9_(54610733055).jpg",
+    "pageid": 176045208,
+    "w": 2048,
+    "h": 1364,
+    "lic": "CC BY-SA 4.0",
+    "artist": "Vitor Oliveira from Torres Vedras, PORTUGAL",
+    "lat": null,
+    "lon": null,
+    "llsrc": null,
+    "inside": null,
+    "desc": "Cidadela de Bragança - Portugal  🇵🇹",
+    "cats": "Files with coordinates missing SDC location of creation|Flickr images reviewed by FlickreviewR 2|Photographs by Vitor Oliveira|Aerial photographs of Bragança|Aerial photographs of Castelo de Bragança",
+    "date": "2025-04-25 17:54",
+    "f": "braganca-cidadela-do-ar",
+    "alt": {
+     "pt": "A cidadela de Bragança vista do ar, muralhas, castelo e telhados",
+     "en": "The citadel of Bragança from the air, its walls, castle and rooftops",
+     "fr": "La citadelle de Bragança vue du ciel, ses remparts, son château et ses toits"
+    },
+    "what": "Aerial view of the walled citadel of Bragança, the castle keep and the red rooftops in late light",
+    "trim": 0.06,
+    "graded": true,
+    "web_w": 1600
+   }
+  ],
+  "baiao": [
+   {
+    "title": "File:Rio Douro - Portugal (48078577412).jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/b/bc/Rio_Douro_-_Portugal_%2848078577412%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "page": "https://commons.wikimedia.org/wiki/File:Rio_Douro_-_Portugal_(48078577412).jpg",
+    "pageid": 79996630,
+    "w": 3888,
+    "h": 2592,
+    "lic": "CC BY-SA 2.0",
+    "artist": "Vitor Oliveira from Torres Vedras, PORTUGAL",
+    "lat": 41.122335,
+    "lon": -7.940227,
+    "llsrc": null,
+    "inside": true,
+    "desc": "Rio Douro - Portugal 🇵🇹",
+    "cats": "Files with coordinates missing SDC location of creation|Flickr images reviewed by FlickreviewR 2|Portugal photographs taken on 2019-06-17|Photographs by Vitor Oliveira|Douro river in Baião|Douro river in Resende|Photographs by Vitor Oliveira, Douro",
+    "date": "2019-06-17 11:05",
+    "f": "baiao-douro-socalcos",
+    "alt": {
+     "pt": "O Douro entre socalcos de vinha, em Baião",
+     "en": "The Douro between terraced vineyards, Baião",
+     "fr": "Le Douro entre les vignes en terrasses, à Baião"
+    },
+    "what": "The Douro valley, terraced vineyards on both banks, a boat on the river, Baião",
+    "trim": 0.06,
+    "graded": true,
+    "web_w": 1600
+   }
+  ],
+  "povoa-de-varzim": [
+   {
+    "title": "File:Cabo Santo André.jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/2/20/Cabo_Santo_Andr%C3%A9.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "page": "https://commons.wikimedia.org/wiki/File:Cabo_Santo_Andr%C3%A9.jpg",
+    "pageid": 61442828,
+    "w": 4164,
+    "h": 2776,
+    "lic": "CC BY-SA 4.0",
+    "artist": "PedroPVZ",
+    "lat": null,
+    "lon": null,
+    "llsrc": null,
+    "inside": null,
+    "desc": "Cape Santo André and sea spray as seen from Jardim da Praia, Povoa de Varzim",
+    "cats": "Dunes of Portugal|Parque Natural do Litoral Norte|Beaches of Póvoa de Varzim|Self-published work|Vegetated dunes in Portugal|Portugal photographs taken on 2017-08-01|Cabo Santo André",
+    "date": "2017-08-01 18:23:44",
+    "f": "povoa-de-varzim-cabo-santo-andre",
+    "alt": {
+     "pt": "A costa do Cabo de Santo André, dunas e mar, Póvoa de Varzim",
+     "en": "The coast at Cabo de Santo André, dunes and sea, Póvoa de Varzim",
+     "fr": "La côte du cap de Santo André, dunes et mer, Póvoa de Varzim"
+    },
+    "what": "The dune boardwalk, the beach and the rocks of Cabo de Santo André, Póvoa de Varzim",
+    "graded": true,
+    "web_w": 1600
+   }
+  ],
+  "vila-do-conde": [
+   {
+    "title": "File:Aerial photograph of Vila do Conde (19).jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/d/d2/Aerial_photograph_of_Vila_do_Conde_%2819%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "page": "https://commons.wikimedia.org/wiki/File:Aerial_photograph_of_Vila_do_Conde_(19).jpg",
+    "pageid": 73383332,
+    "w": 3968,
+    "h": 2976,
+    "lic": "CC BY-SA 4.0",
+    "artist": "Joseolgon",
+    "lat": 41.351667,
+    "lon": -8.738056,
+    "llsrc": null,
+    "inside": true,
+    "desc": "Aerial photograph of Vila do Conde",
+    "cats": "Self-published work|Taken with DJI FC1102 in Portugal|River mouths in Portugal|Files with coordinates missing SDC location of creation|Portugal photographs taken on 2018-10-04|2018 aerial photographs of Portugal|Porto em Vila do Conde|Aerial photograph of Ponte do Rio Ave (Vila do Conde)",
+    "date": "2018-10-04 11:21:20",
+    "f": "vila-do-conde-foz-do-ave-do-ar",
+    "alt": {
+     "pt": "A foz do Ave e Vila do Conde vistas do ar, o mar ao fundo",
+     "en": "The mouth of the Ave and Vila do Conde from the air, the sea beyond",
+     "fr": "L'embouchure de l'Ave et Vila do Conde vues du ciel, la mer au loin"
+    },
+    "what": "Aerial view of the Ave estuary, the town of Vila do Conde and the Atlantic",
+    "graded": true,
+    "web_w": 1600
+   }
+  ],
+  "arcos-de-valdevez": [
+   {
+    "title": "File:Aerial photograph of Rio Lima (2).jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Aerial_photograph_of_Rio_Lima_%282%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "page": "https://commons.wikimedia.org/wiki/File:Aerial_photograph_of_Rio_Lima_(2).jpg",
+    "pageid": 79754110,
+    "w": 3968,
+    "h": 2976,
+    "lic": "CC BY-SA 4.0",
+    "artist": "Joseolgon",
+    "lat": 41.798889,
+    "lon": -8.474167,
+    "llsrc": null,
+    "inside": true,
+    "desc": "Aerial photograph of Rio Lima in Arcos de Valdevez and Ponte da Barca, Portugal.",
+    "cats": "Self-published work|Taken with DJI FC1102 in Portugal|Files with coordinates missing SDC location of creation|Portugal photographs taken on 2019-06-16|2019 aerial photographs of Portugal|Aerial photographs of Arcos de Valdevez|Aerial photographs of Lima River in Portugal|Rio Lima in Arcos de Valdeve",
+    "date": "2019-06-16 16:22:45",
+    "f": "arcos-de-valdevez-rio-lima-do-ar",
+    "alt": {
+     "pt": "O rio Lima entre vinhas e bosques, visto do ar, Arcos de Valdevez",
+     "en": "The Lima river between vineyards and woods, from the air, Arcos de Valdevez",
+     "fr": "Le Lima entre vignes et bois, vu du ciel, Arcos de Valdevez"
+    },
+    "what": "Aerial view of the Lima river, its wooded banks and vineyards, Arcos de Valdevez",
+    "graded": true,
+    "web_w": 1600
+   }
+  ],
+  "caminha": [
+   {
+    "title": "File:Foz do Rio Minho - Portugal 🇵🇹 (54059095682).jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/c/cc/Foz_do_Rio_Minho_-_Portugal_%F0%9F%87%B5%F0%9F%87%B9_%2854059095682%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "page": "https://commons.wikimedia.org/wiki/File:Foz_do_Rio_Minho_-_Portugal_%F0%9F%87%B5%F0%9F%87%B9_(54059095682).jpg",
+    "pageid": 154845042,
+    "w": 2048,
+    "h": 1365,
+    "lic": "CC BY-SA 2.0",
+    "artist": "Vitor Oliveira from Torres Vedras, PORTUGAL",
+    "lat": null,
+    "lon": null,
+    "llsrc": null,
+    "inside": null,
+    "desc": "Foz do Rio Minho - Portugal 🇵🇹",
+    "cats": "Wharves and quays in Portugal|Files with coordinates missing SDC location of creation|Flickr images reviewed by FlickreviewR 2|Photographs by Vitor Oliveira|Minho River in Caminha/A Guarda|Flickr images missing SDC published in",
+    "date": "2023-08-25 17:25",
+    "f": "caminha-foz-do-minho-santa-tecla",
+    "alt": {
+     "pt": "A foz do Minho em Caminha, a praia e o monte de Santa Tecla",
+     "en": "The mouth of the Minho at Caminha, the beach and Mount Santa Tecla",
+     "fr": "L'embouchure du Minho à Caminha, la plage et le mont Santa Tecla"
+    },
+    "what": "The sandy shore at the mouth of the Minho, Caminha, Mount Santa Tecla across the river",
+    "trim": 0.06,
+    "graded": true,
+    "web_w": 1600
+   }
+  ],
+  "melgaco": [
+   {
+    "title": "File:Castelo de Melgaço Aerial view 05.jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/a/a9/Castelo_de_Melga%C3%A7o_Aerial_view_05.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "page": "https://commons.wikimedia.org/wiki/File:Castelo_de_Melga%C3%A7o_Aerial_view_05.jpg",
+    "pageid": 61756614,
+    "w": 3968,
+    "h": 2976,
+    "lic": "CC BY-SA 4.0",
+    "artist": "Joseolgon",
+    "lat": 42.114167,
+    "lon": -8.259444,
+    "llsrc": null,
+    "inside": true,
+    "desc": "Aerial photographs of Castelo de Melgaço, Melgaço, Portugal",
+    "cats": "Self-published work|Taken with DJI FC1102 in Portugal|Files with coordinates missing SDC location of creation|Portugal photographs taken on 2017-08-16|2017 aerial photographs of Portugal|Aerial photographs of Castelo de Melgaço",
+    "date": "2017-08-16 12:07:53",
+    "f": "melgaco-castelo-telhados",
+    "alt": {
+     "pt": "Os telhados de Melgaço e o castelo vistos do ar",
+     "en": "Melgaço's rooftops and castle from the air",
+     "fr": "Les toits de Melgaço et son château vus du ciel"
+    },
+    "what": "Aerial view of Melgaço castle and the red rooftops of the old town",
+    "graded": true,
+    "web_w": 1600
+   }
+  ],
+  "moncao": [
+   {
+    "title": "File:Torre de Lapela (4).jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/b/b1/Torre_de_Lapela_%284%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "page": "https://commons.wikimedia.org/wiki/File:Torre_de_Lapela_(4).jpg",
+    "pageid": 62057313,
+    "w": 3968,
+    "h": 2976,
+    "lic": "CC BY-SA 4.0",
+    "artist": "Joseolgon",
+    "lat": 42.056111,
+    "lon": -8.5375,
+    "llsrc": null,
+    "inside": true,
+    "desc": "Torre de Lapela, Lapela, Monção, Portugal.",
+    "cats": "Self-published work|Taken with DJI FC1102 in Portugal|Portugal photographs taken on 2017-08-31|Files with coordinates missing SDC location of creation|2017 aerial photographs of Portugal|Aerial photographs of Minho River|Aerial photographs of Torre de Lapela",
+    "date": "2017-08-31 14:19:55",
+    "f": "moncao-torre-de-lapela-minho",
+    "alt": {
+     "pt": "A Torre de Lapela sobre o rio Minho, Monção",
+     "en": "The Lapela tower above the Minho, Monção",
+     "fr": "La tour de Lapela au-dessus du Minho, Monção"
+    },
+    "what": "Aerial view of the Torre de Lapela, the village roofs and the Minho river, Monção",
+    "graded": true,
+    "web_w": 1600
+   }
+  ],
+  "ponte-da-barca": [
+   {
+    "title": "File:Rio Lima - Portugal (7272871162).jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/b/b9/Rio_Lima_-_Portugal_%287272871162%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "page": "https://commons.wikimedia.org/wiki/File:Rio_Lima_-_Portugal_(7272871162).jpg",
+    "pageid": 77450791,
+    "w": 7776,
+    "h": 5020,
+    "lic": "CC BY-SA 2.0",
+    "artist": "Vitor Oliveira from Torres Vedras, PORTUGAL",
+    "lat": 41.809581,
+    "lon": -8.42065,
+    "llsrc": null,
+    "inside": true,
+    "desc": "<a href=\"http://loc.alize.us/#/flickr:7272871162\" rel=\"nofollow\">See where this picture was taken.</a> <a href=\"https://www.flickr.com/groups/geotagging/discuss/72157594165549916/\">[?]</a>",
+    "cats": "Files with coordinates missing SDC location of creation|Flickr images reviewed by FlickreviewR 2|Photographs by Vitor Oliveira|Rio Lima in Arcos de Valdevez and Ponte da Barca",
+    "date": "2012-05-26 13:11",
+    "f": "ponte-da-barca-rio-lima",
+    "alt": {
+     "pt": "O rio Lima entre margens arborizadas, Ponte da Barca",
+     "en": "The Lima river between wooded banks, Ponte da Barca",
+     "fr": "Le Lima entre ses rives boisées, Ponte da Barca"
+    },
+    "what": "The Lima river and its wooded bank, the hills of the Peneda beyond, Ponte da Barca",
+    "trim": 0.07,
+    "graded": true,
+    "web_w": 1600
+   }
+  ],
+  "ponte-de-lima": [
+   {
+    "title": "File:Rio Lima in Ponte de Lima.jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/0/0c/Rio_Lima_in_Ponte_de_Lima.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "page": "https://commons.wikimedia.org/wiki/File:Rio_Lima_in_Ponte_de_Lima.jpg",
+    "pageid": 112593715,
+    "w": 3968,
+    "h": 2976,
+    "lic": "CC BY-SA 4.0",
+    "artist": "Joseolgon",
+    "lat": null,
+    "lon": null,
+    "llsrc": null,
+    "inside": null,
+    "desc": "Aerial photograph of Ponte de Lima Portugal.",
+    "cats": "Self-published work|Taken with DJI FC1102 in Portugal|Portugal photographs taken on 2021-11-12|Files with coordinates missing SDC location of creation|2021 aerial photographs of Portugal|Aerial photographs of Lima River in Portugal|Rio Lima in Ponte de Lima|Aerial photographs of Ponte de Lima",
+    "date": "2021-11-12 12:49:41",
+    "f": "ponte-de-lima-rio-lima-outono",
+    "alt": {
+     "pt": "O rio Lima e a ponte de Ponte de Lima vistos do ar, no outono",
+     "en": "The Lima river and the bridge at Ponte de Lima from the air, in autumn",
+     "fr": "Le Lima et le pont de Ponte de Lima vus du ciel, en automne"
+    },
+    "what": "Aerial view of the Lima river, the autumn plane trees and the bridge, Ponte de Lima",
+    "graded": true,
+    "web_w": 1600
+   }
+  ],
+  "valenca": [
+   {
+    "title": "File:4930 Valença, Portugal - panoramio (20).jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/c/c2/4930_Valen%C3%A7a%2C_Portugal_-_panoramio_%2820%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "page": "https://commons.wikimedia.org/wiki/File:4930_Valen%C3%A7a,_Portugal_-_panoramio_(20).jpg",
+    "pageid": 58482648,
+    "w": 3888,
+    "h": 2592,
+    "lic": "CC BY-SA 3.0",
+    "artist": "Lucas Martínez Farra…",
+    "lat": 42.033644,
+    "lon": -8.645897,
+    "llsrc": null,
+    "inside": true,
+    "desc": "4930 Valença, Portugal",
+    "cats": "2013 in Portugal|Fortificações da Praça de Valença do Minho|Panoramio files uploaded by Panoramio upload bot|Panoramio images reviewed by trusted users|Photos from Panoramio|May 2013 in Galicia (Spain)|Files with coordinates missing SDC location of creation|2013 in Tui|Portugal photographs taken on ",
+    "date": "Taken on 24 May 2013",
+    "f": "valenca-fortaleza-minho",
+    "alt": {
+     "pt": "As muralhas da fortaleza de Valença sobre o rio Minho",
+     "en": "The walls of Valença's fortress above the Minho",
+     "fr": "Les remparts de la forteresse de Valença au-dessus du Minho"
+    },
+    "what": "The ramparts of the Valença fortress, the Minho and the bridge to Tui",
+    "graded": true,
+    "web_w": 1600
+   }
+  ],
+  "viana-do-castelo": [
+   {
+    "title": "File:Vista aerea - Viana do Castelo.2 - 29.01.2023.jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/7/73/Vista_aerea_-_Viana_do_Castelo.2_-_29.01.2023.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "page": "https://commons.wikimedia.org/wiki/File:Vista_aerea_-_Viana_do_Castelo.2_-_29.01.2023.jpg",
+    "pageid": 128245243,
+    "w": 4000,
+    "h": 2250,
+    "lic": "CC BY-SA 4.0",
+    "artist": "Bextrel",
+    "lat": 41.691255,
+    "lon": -8.828134,
+    "llsrc": null,
+    "inside": true,
+    "desc": "Aerial view of Viana do Castelo, in Portugal.",
+    "cats": "Self-published work|Files with coordinates missing SDC location of creation|Avenida dos Combatentes da Grande Guerra (Viana do Castelo)|Panoramas taken from Santuário do Monte de Santa Luzia|Aerial photographs of Viana do Castelo",
+    "date": "2023-01-29 17:04:10",
+    "f": "viana-do-castelo-telhados-santa-luzia",
+    "alt": {
+     "pt": "Os telhados de Viana do Castelo e o monte de Santa Luzia",
+     "en": "The rooftops of Viana do Castelo and Mount Santa Luzia",
+     "fr": "Les toits de Viana do Castelo et le mont Santa Luzia"
+    },
+    "what": "Viana do Castelo's rooftops in late light, the Santa Luzia hill and basilica beyond",
+    "graded": true,
+    "web_w": 1600
+   }
+  ],
+  "vila-nova-de-cerveira": [
+   {
+    "title": "File:Foz do Minho - Vista de Vila Nova de Cerveira.JPG",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/8/83/Foz_do_Minho_-_Vista_de_Vila_Nova_de_Cerveira.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "page": "https://commons.wikimedia.org/wiki/File:Foz_do_Minho_-_Vista_de_Vila_Nova_de_Cerveira.JPG",
+    "pageid": 40345604,
+    "w": 1280,
+    "h": 960,
+    "lic": "CC BY-SA 3.0",
+    "artist": "Samuel Fonseca 85",
+    "lat": 41.947213,
+    "lon": -8.728,
+    "llsrc": null,
+    "inside": true,
+    "desc": "Vista da foz do rio Minho a partir de Vila Nova de Cerveira",
+    "cats": "Self-published work|River mouths in Portugal|Images from Wiki Loves Earth 2015 in Portugal|Images from Wiki Loves Earth 2015|Uploaded via Campaign:wle-pt|Files with coordinates missing SDC location of creation|Portugal photographs taken on 2004-05-30|Images from Wiki Loves Earth missing SDC depicts|",
+    "date": "2004-05-30 19:54:16",
+    "f": "cerveira-vale-do-minho",
+    "alt": {
+     "pt": "O vale do Minho até à foz, visto de Vila Nova de Cerveira",
+     "en": "The Minho valley down to the sea, from Vila Nova de Cerveira",
+     "fr": "La vallée du Minho jusqu'à la mer, depuis Vila Nova de Cerveira"
+    },
+    "what": "The Minho valley and its islands down to the river mouth, seen from the hills of Vila Nova de Cerveira",
+    "graded": true,
+    "web_w": 1024
+   }
+  ],
+  "alijo": [
+   {
+    "title": "File:Vista do Pinhão 2.jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/f/f4/Vista_do_Pinh%C3%A3o_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "page": "https://commons.wikimedia.org/wiki/File:Vista_do_Pinh%C3%A3o_2.jpg",
+    "pageid": 16742914,
+    "w": 3888,
+    "h": 2592,
+    "lic": "CC BY-SA 3.0",
+    "artist": "Rafael Nascimento",
+    "lat": null,
+    "lon": null,
+    "llsrc": null,
+    "inside": null,
+    "desc": "8983641",
+    "cats": "Taken with Canon EOS 1000D|Self-published work|Sunsets of Portugal|Mountains at sunset|Images from Wiki Loves Monuments 2011|Reviewed images from Wiki Loves Monuments 2011 in Portugal|Images from Wiki Loves Monuments 2011 in Portugal|IGESPAR with known IDs|WLM-PT with known IDs|Portugal photographs ",
+    "date": "2011-03-10",
+    "f": "alijo-pinhao-por-do-sol",
+    "alt": {
+     "pt": "O Douro no Pinhão ao pôr do sol, Alijó",
+     "en": "The Douro at Pinhão at sunset, Alijó",
+     "fr": "Le Douro à Pinhão au coucher du soleil, Alijó"
+    },
+    "what": "Sunset over the Douro at Pinhão, the hills reflected in the river",
+    "graded": true,
+    "web_w": 1600
+   }
+  ],
+  "chaves": [
+   {
+    "title": "File:Rio Tâmega - Chaves - Portugal (32226254940).jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/1/12/Rio_T%C3%A2mega_-_Chaves_-_Portugal_%2832226254940%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "page": "https://commons.wikimedia.org/wiki/File:Rio_T%C3%A2mega_-_Chaves_-_Portugal_(32226254940).jpg",
+    "pageid": 77607690,
+    "w": 3858,
+    "h": 2572,
+    "lic": "CC BY-SA 2.0",
+    "artist": "Vitor Oliveira from Torres Vedras, PORTUGAL",
+    "lat": null,
+    "lon": null,
+    "llsrc": null,
+    "inside": null,
+    "desc": "Rio Tâmega - Chaves - Portugal",
+    "cats": "Files with coordinates missing SDC location of creation|Flickr images reviewed by FlickreviewR 2|Photographs by Vitor Oliveira|Tâmega river in Chaves",
+    "date": "2015-02-09 00:01",
+    "f": "chaves-tamega-ponte-romana",
+    "alt": {
+     "pt": "O Tâmega, a ponte romana e o casario de Chaves ao fim da tarde",
+     "en": "The Tâmega, the Roman bridge and the old town of Chaves in late light",
+     "fr": "Le Tâmega, le pont romain et la vieille ville de Chaves en fin de journée"
+    },
+    "what": "The Tâmega, the Trajan bridge and the old town of Chaves in late light under a dark sky",
+    "graded": true,
+    "web_w": 1600
+   }
+  ],
+  "mesao-frio": [
+   {
+    "title": "File:Rede - Portugal (11006545056).jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/4/41/Rede_-_Portugal_%2811006545056%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "page": "https://commons.wikimedia.org/wiki/File:Rede_-_Portugal_(11006545056).jpg",
+    "pageid": 78044315,
+    "w": 5832,
+    "h": 3888,
+    "lic": "CC BY-SA 2.0",
+    "artist": "Vitor Oliveira from Torres Vedras, PORTUGAL",
+    "lat": null,
+    "lon": null,
+    "llsrc": null,
+    "inside": null,
+    "desc": "<a href=\"http://loc.alize.us/#/flickr:11006545056\" rel=\"nofollow\">See where this picture was taken.</a> <a href=\"https://www.flickr.com/groups/geotagging/discuss/72157594165549916/\">[?]</a>",
+    "cats": "Files with coordinates missing SDC location of creation|Flickr images reviewed by FlickreviewR 2|Photographs by Vitor Oliveira|Douro river in Mesão Frio|Photographs by Vitor Oliveira, Douro|Flickr images missing SDC published in",
+    "date": "2013-11-22 14:46",
+    "f": "mesao-frio-douro-rede",
+    "alt": {
+     "pt": "O Douro entre socalcos, visto de Rede, Mesão Frio",
+     "en": "The Douro between terraces, from Rede, Mesão Frio",
+     "fr": "Le Douro entre les terrasses, vu de Rede, Mesão Frio"
+    },
+    "what": "The Douro valley and its terraced vineyards seen from Rede, Mesão Frio",
+    "trim": 0.07,
+    "graded": true,
+    "web_w": 1600
+   }
+  ],
+  "mondim-de-basto": [
+   {
+    "title": "File:Alto da Senhora da Graça.jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/f/f9/Alto_da_Senhora_da_Gra%C3%A7a.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "page": "https://commons.wikimedia.org/wiki/File:Alto_da_Senhora_da_Gra%C3%A7a.jpg",
+    "pageid": 76695744,
+    "w": 4807,
+    "h": 3095,
+    "lic": "CC BY-SA 4.0",
+    "artist": "CMMondim",
+    "lat": null,
+    "lon": null,
+    "llsrc": null,
+    "inside": null,
+    "desc": "Vista de parapente.",
+    "cats": "Santuário de Nossa Senhora da Graça|Self-published work|Aerial photographs from paragliders|Aerial photographs of churches in Portugal|Aerial photographs of Mondim de Basto",
+    "date": "2014-04-12",
+    "f": "mondim-senhora-da-graca",
+    "alt": {
+     "pt": "O santuário da Senhora da Graça no alto do Monte Farinha, Mondim de Basto",
+     "en": "The Senhora da Graça sanctuary atop Monte Farinha, Mondim de Basto",
+     "fr": "Le sanctuaire de Senhora da Graça au sommet du Monte Farinha, Mondim de Basto"
+    },
+    "what": "The Senhora da Graça sanctuary on Monte Farinha seen from a paraglider, the Alvão hills beyond",
+    "graded": true,
+    "web_w": 1600
+   }
+  ],
+  "murca": [
+   {
+    "title": "File:Campos de Murça - Portugal (6085305846).jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/6/6c/Campos_de_Mur%C3%A7a_-_Portugal_%286085305846%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "page": "https://commons.wikimedia.org/wiki/File:Campos_de_Mur%C3%A7a_-_Portugal_(6085305846).jpg",
+    "pageid": 78046559,
+    "w": 7776,
+    "h": 5184,
+    "lic": "CC BY-SA 2.0",
+    "artist": "Vitor Oliveira from Torres Vedras, PORTUGAL",
+    "lat": 41.339906,
+    "lon": -7.36752,
+    "llsrc": null,
+    "inside": true,
+    "desc": "<a href=\"http://loc.alize.us/#/flickr:6085305846\" rel=\"nofollow\">See where this picture was taken.</a> <a href=\"https://www.flickr.com/groups/geotagging/discuss/72157594165549916/\">[?]</a>",
+    "cats": "Murça|Files with coordinates missing SDC location of creation|Flickr images reviewed by FlickreviewR 2|Photographs by Vitor Oliveira",
+    "date": "2011-08-26 21:14",
+    "f": "murca-socalcos-do-douro",
+    "alt": {
+     "pt": "Socalcos de vinha nos montes de Murça",
+     "en": "Terraced vineyards on the hills of Murça",
+     "fr": "Vignes en terrasses sur les collines de Murça"
+    },
+    "what": "Terraced vineyards and the hills of the Douro region, Murça",
+    "trim": 0.07,
+    "graded": true,
+    "web_w": 1600
+   }
+  ],
+  "peso-da-regua": [
+   {
+    "title": "File:Uma vista para o rio Douro.jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/1/1e/Uma_vista_para_o_rio_Douro.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "page": "https://commons.wikimedia.org/wiki/File:Uma_vista_para_o_rio_Douro.jpg",
+    "pageid": 78896619,
+    "w": 4618,
+    "h": 2860,
+    "lic": "CC BY-SA 4.0",
+    "artist": "IMCastro",
+    "lat": null,
+    "lon": null,
+    "llsrc": null,
+    "inside": null,
+    "desc": "Peso da Régua,uma cidade  no Douro Vinhateiro.",
+    "cats": "Self-published work|Uploaded via Campaign:wle-pt|Portugal photographs taken on 2017-09-23|Images from Wiki Loves Earth 2019|Images from Wiki Loves Earth 2019 in Portugal|Images from Wiki Loves Earth 2019 in Portugal to check|Images from Wiki Loves Earth missing SDC depicts|Images from Wiki Loves Ear",
+    "date": "2017-09-23 14:27:34",
+    "f": "peso-da-regua-socalcos-douro",
+    "alt": {
+     "pt": "Socalcos de vinha sobre o Douro, Peso da Régua",
+     "en": "Terraced vineyards above the Douro, Peso da Régua",
+     "fr": "Vignes en terrasses au-dessus du Douro, Peso da Régua"
+    },
+    "what": "Curving vineyard terraces above the Douro and a railway bridge, Peso da Régua",
+    "graded": true,
+    "web_w": 1600
+   }
+  ],
+  "sabrosa": [
+   {
+    "title": "File:Cais do Ferrão - Norte 1, Covas do Douro - Sabrosa.jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/0/03/Cais_do_Ferr%C3%A3o_-_Norte_1%2C_Covas_do_Douro_-_Sabrosa.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "page": "https://commons.wikimedia.org/wiki/File:Cais_do_Ferr%C3%A3o_-_Norte_1,_Covas_do_Douro_-_Sabrosa.jpg",
+    "pageid": 79767835,
+    "w": 4096,
+    "h": 2304,
+    "lic": "CC BY-SA 4.0",
+    "artist": "Sanjorgepinho",
+    "lat": 41.160313,
+    "lon": -7.610913,
+    "llsrc": null,
+    "inside": true,
+    "desc": "Vista do Cais do Ferrão, na Freguesia de Covas do Douro no Concelho de Sabrosa",
+    "cats": "Cais do Ferrão|Ferrão halt|Self-published work|Files with coordinates missing SDC location of creation|Douro river in Sabrosa",
+    "date": "2019-05-24 19:50:38",
+    "f": "sabrosa-cais-do-ferrao-douro",
+    "alt": {
+     "pt": "O Douro no Cais do Ferrão, Covas do Douro, com luz de fim de tarde",
+     "en": "The Douro at Cais do Ferrão, Covas do Douro, in late light",
+     "fr": "Le Douro au Cais do Ferrão, Covas do Douro, dans la lumière du soir"
+    },
+    "what": "The Douro at Cais do Ferrão, Covas do Douro, vineyards in late light, Sabrosa",
+    "graded": true,
+    "web_w": 1600
+   }
+  ],
+  "santa-marta-de-penaguiao": [
+   {
+    "title": "File:Vista do Miradouro de São Pedro - Fontes - Portugal (8499108991).jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/6/6a/Vista_do_Miradouro_de_S%C3%A3o_Pedro_-_Fontes_-_Portugal_%288499108991%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "page": "https://commons.wikimedia.org/wiki/File:Vista_do_Miradouro_de_S%C3%A3o_Pedro_-_Fontes_-_Portugal_(8499108991).jpg",
+    "pageid": 78785431,
+    "w": 5832,
+    "h": 3888,
+    "lic": "CC BY-SA 2.0",
+    "artist": "Vitor Oliveira from Torres Vedras, PORTUGAL",
+    "lat": null,
+    "lon": null,
+    "llsrc": null,
+    "inside": null,
+    "desc": "<a href=\"http://loc.alize.us/#/flickr:8499108991\" rel=\"nofollow\">See where this picture was taken.</a> <a href=\"https://www.flickr.com/groups/geotagging/discuss/72157594165549916/\">[?]</a>",
+    "cats": "Fontes (Santa Marta de Penaguião)|Files with coordinates missing SDC location of creation|Flickr images reviewed by FlickreviewR 2|Photographs by Vitor Oliveira",
+    "date": "2013-02-23 08:54",
+    "f": "santa-marta-miradouro-de-sao-pedro",
+    "alt": {
+     "pt": "Vinhas e serras vistas do miradouro de São Pedro, Fontes, Santa Marta de Penaguião",
+     "en": "Vineyards and hills from the São Pedro viewpoint, Fontes, Santa Marta de Penaguião",
+     "fr": "Vignes et montagnes depuis le belvédère de São Pedro, Fontes, Santa Marta de Penaguião"
+    },
+    "what": "Vineyards and the Douro hills from the São Pedro viewpoint, Fontes",
+    "trim": 0.07,
+    "graded": true,
+    "web_w": 1600
+   }
+  ],
+  "valpacos": [
+   {
+    "title": "File:Rio Rabaçal - Portugal (20640176006).jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/9/9d/Rio_Raba%C3%A7al_-_Portugal_%2820640176006%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "page": "https://commons.wikimedia.org/wiki/File:Rio_Raba%C3%A7al_-_Portugal_(20640176006).jpg",
+    "pageid": 78931172,
+    "w": 3888,
+    "h": 2592,
+    "lic": "CC BY-SA 2.0",
+    "artist": "Vitor Oliveira from Torres Vedras, PORTUGAL",
+    "lat": 41.755456,
+    "lon": -7.176818,
+    "llsrc": null,
+    "inside": true,
+    "desc": "Rio Rabaçal - Portugal",
+    "cats": "Valpaços|Rio Rabaçal|Files with coordinates missing SDC location of creation|Flickr images reviewed by FlickreviewR 2|Photographs by Vitor Oliveira",
+    "date": "2015-08-17 23:01",
+    "f": "valpacos-rio-rabacal",
+    "alt": {
+     "pt": "O rio Rabaçal entre encostas, sob nuvens de verão, Valpaços",
+     "en": "The Rabaçal river between steep slopes under summer clouds, Valpaços",
+     "fr": "Le Rabaçal entre des versants abrupts sous les nuages d'été, Valpaços"
+    },
+    "what": "The Rabaçal river in its valley, wooded slopes and summer clouds, Valpaços",
+    "trim": 0.06,
+    "graded": true,
+    "web_w": 1600
+   }
+  ],
+  "armamar": [
+   {
+    "title": "File:Folgosa - Portugal (17368355392).jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/5/52/Folgosa_-_Portugal_%2817368355392%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "page": "https://commons.wikimedia.org/wiki/File:Folgosa_-_Portugal_(17368355392).jpg",
+    "pageid": 77456040,
+    "w": 3888,
+    "h": 2592,
+    "lic": "CC BY-SA 2.0",
+    "artist": "Vitor Oliveira from Torres Vedras, PORTUGAL",
+    "lat": null,
+    "lon": null,
+    "llsrc": null,
+    "inside": null,
+    "desc": "Folgosa - Portugal",
+    "cats": "Files with coordinates missing SDC location of creation|Flickr images reviewed by FlickreviewR 2|Photographs by Vitor Oliveira|Douro river in Peso da Régua|Douro river in Armamar|Photographs by Vitor Oliveira, Douro|Régua Reservoir",
+    "date": "2015-02-09 15:57",
+    "f": "armamar-folgosa-douro",
+    "alt": {
+     "pt": "Folgosa e o Douro entre vinhas, Armamar",
+     "en": "Folgosa and the Douro among vineyards, Armamar",
+     "fr": "Folgosa et le Douro au milieu des vignes, Armamar"
+    },
+    "what": "The village of Folgosa above the Douro, the vineyard slopes beyond, Armamar",
+    "trim": 0.06,
+    "graded": true,
+    "web_w": 1600
+   }
+  ],
+  "cinfaes": [
+   {
+    "title": "File:Rio Douro - Portugal (577378009).jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/3/31/Rio_Douro_-_Portugal_%28577378009%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "page": "https://commons.wikimedia.org/wiki/File:Rio_Douro_-_Portugal_(577378009).jpg",
+    "pageid": 77606756,
+    "w": 1280,
+    "h": 960,
+    "lic": "CC BY-SA 2.0",
+    "artist": "Vitor Oliveira from Torres Vedras, PORTUGAL",
+    "lat": 41.067348,
+    "lon": -8.253243,
+    "llsrc": null,
+    "inside": true,
+    "desc": "<a href=\"http://loc.alize.us/#/flickr:577378009\">See where this picture was taken.</a> <a href=\"https://www.flickr.com/groups/geotagging/discuss/72157594165549916/\">[?]</a>",
+    "cats": "Souselo|Files with coordinates missing SDC location of creation|Flickr images reviewed by FlickreviewR 2|Photographs by Vitor Oliveira|Douro river in Baião|Douro river in Cinfães|Photographs by Vitor Oliveira, Douro|Crestuma-Lever Reservoir|EN 222 road",
+    "date": "2007-03-30 20:20",
+    "f": "cinfaes-douro",
+    "alt": {
+     "pt": "O Douro entre montes verdes, Cinfães",
+     "en": "The Douro between green hills, Cinfães",
+     "fr": "Le Douro entre des collines vertes, Cinfães"
+    },
+    "what": "The Douro bending between green, terraced hills, Cinfães",
+    "graded": true,
+    "web_w": 1024
+   }
+  ],
+  "lamego": [
+   {
+    "title": "File:Vista do Miradouro da Boa Vista - Serra das Meadas - Portugal (51479360709).jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/0/01/Vista_do_Miradouro_da_Boa_Vista_-_Serra_das_Meadas_-_Portugal_%2851479360709%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "page": "https://commons.wikimedia.org/wiki/File:Vista_do_Miradouro_da_Boa_Vista_-_Serra_das_Meadas_-_Portugal_(51479360709).jpg",
+    "pageid": 110500270,
+    "w": 3888,
+    "h": 2532,
+    "lic": "CC BY-SA 2.0",
+    "artist": "Vitor Oliveira from Torres Vedras, PORTUGAL",
+    "lat": null,
+    "lon": null,
+    "llsrc": null,
+    "inside": null,
+    "desc": "Vista do Miradouro da Boa Vista - Serra das Meadas - Portugal 🇵🇹",
+    "cats": "Lamego|Scenic overlooks in Viseu (district)|Files with coordinates missing SDC location of creation|Flickr images reviewed by FlickreviewR 2|Photographs by Vitor Oliveira|Douro river in Lamego|Photographs by Vitor Oliveira, Douro|Serra das Meadas",
+    "date": "2021-02-05 00:10",
+    "f": "lamego-miradouro-da-boa-vista-douro",
+    "alt": {
+     "pt": "O vale do Douro e a Régua vistos do miradouro da Boa Vista, Serra das Meadas, Lamego",
+     "en": "The Douro valley and Régua from the Boa Vista viewpoint, Serra das Meadas, Lamego",
+     "fr": "La vallée du Douro et Régua depuis le belvédère de Boa Vista, Serra das Meadas, Lamego"
+    },
+    "what": "The Douro valley, vineyards and Peso da Régua from the Boa Vista viewpoint on the Serra das Meadas, Lamego",
+    "trim": 0.06,
+    "graded": true,
+    "web_w": 1600
+   }
+  ],
+  "moimenta-da-beira": [
+   {
+    "title": "File:Albufeira de Vilar - Portugal (4282275067).jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/b/b4/Albufeira_de_Vilar_-_Portugal_%284282275067%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "page": "https://commons.wikimedia.org/wiki/File:Albufeira_de_Vilar_-_Portugal_(4282275067).jpg",
+    "pageid": 78044480,
+    "w": 7646,
+    "h": 4554,
+    "lic": "CC BY-SA 2.0",
+    "artist": "Vitor Oliveira from Torres Vedras, PORTUGAL",
+    "lat": 40.968801,
+    "lon": -7.543477,
+    "llsrc": null,
+    "inside": true,
+    "desc": "<a href=\"http://loc.alize.us/#/flickr:4282275067\" rel=\"nofollow\">See where this picture was taken.</a> <a href=\"https://www.flickr.com/groups/geotagging/discuss/72157594165549916/\">[?]</a>",
+    "cats": "Barragem de Vilar|Vilar (Moimenta da Beira)|Files with coordinates missing SDC location of creation|Flickr images reviewed by FlickreviewR 2|Photographs by Vitor Oliveira",
+    "date": "2009-08-11 22:41",
+    "f": "moimenta-albufeira-de-vilar",
+    "alt": {
+     "pt": "A albufeira de Vilar e os seus penedos de granito, Moimenta da Beira",
+     "en": "The Vilar reservoir and its granite boulders, Moimenta da Beira",
+     "fr": "Le lac de Vilar et ses rochers de granit, Moimenta da Beira"
+    },
+    "what": "The Vilar reservoir, granite boulders on the shore and wooded hills, Moimenta da Beira",
+    "graded": true,
+    "web_w": 1600
+   }
+  ],
+  "resende": [
+   {
+    "title": "File:Panorama sobre Barrô e Douro.jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/3/33/Panorama_sobre_Barr%C3%B4_e_Douro.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "page": "https://commons.wikimedia.org/wiki/File:Panorama_sobre_Barr%C3%B4_e_Douro.jpg",
+    "pageid": 65933115,
+    "w": 4000,
+    "h": 2250,
+    "lic": "CC BY-SA 4.0",
+    "artist": "LilianaMarques",
+    "lat": null,
+    "lon": null,
+    "llsrc": null,
+    "inside": null,
+    "desc": "Vista sobre Barrô e o Rio Douro",
+    "cats": "Barrô (Resende)|Self-published work|Aerial photographs of Viseu (district)|Files with coordinates missing SDC location of creation|Douro river in Mesão Frio|Douro river in Resende",
+    "date": "2017-12-05",
+    "f": "resende-barro-douro",
+    "alt": {
+     "pt": "O Douro e Barrô vistos do alto, Resende",
+     "en": "The Douro and Barrô from above, Resende",
+     "fr": "Le Douro et Barrô vus d'en haut, Resende"
+    },
+    "what": "Aerial view of the Douro bend below Barrô, terraces and woods, Resende",
+    "graded": true,
+    "web_w": 1600
+   }
+  ],
+  "sao-joao-da-pesqueira": [
+   {
+    "title": "File:Vista do miradouro de S. Salvador do Mundo - S. João da Pesqueira (151782341).jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/7/7c/Vista_do_miradouro_de_S._Salvador_do_Mundo_-_S._Jo%C3%A3o_da_Pesqueira_%28151782341%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "page": "https://commons.wikimedia.org/wiki/File:Vista_do_miradouro_de_S._Salvador_do_Mundo_-_S._Jo%C3%A3o_da_Pesqueira_(151782341).jpg",
+    "pageid": 78785465,
+    "w": 1280,
+    "h": 822,
+    "lic": "CC BY-SA 2.0",
+    "artist": "Vitor Oliveira from Torres Vedras, PORTUGAL",
+    "lat": null,
+    "lon": null,
+    "llsrc": null,
+    "inside": null,
+    "desc": "Rio Douro",
+    "cats": "Scenic overlooks in Viseu (district)|Flickr images reviewed by FlickreviewR 2|Photographs by Vitor Oliveira|Douro river in Carrazeda de Ansiães|Douro river in São João da Pesqueira|Photographs by Vitor Oliveira, Douro",
+    "date": "2006-05-23 09:24",
+    "f": "sao-joao-da-pesqueira-sao-salvador-do-mundo",
+    "alt": {
+     "pt": "O Douro visto do miradouro de São Salvador do Mundo, São João da Pesqueira",
+     "en": "The Douro from the São Salvador do Mundo viewpoint, São João da Pesqueira",
+     "fr": "Le Douro vu du belvédère de São Salvador do Mundo, São João da Pesqueira"
+    },
+    "what": "The Douro gorge in late light from the São Salvador do Mundo viewpoint",
+    "graded": true,
+    "web_w": 1024
+   }
+  ],
+  "arouca": [
+   {
+    "title": "File:Geossítio 1 - Detrelo da Malhada.jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/b/b7/Geoss%C3%ADtio_1_-_Detrelo_da_Malhada.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "page": "https://commons.wikimedia.org/wiki/File:Geoss%C3%ADtio_1_-_Detrelo_da_Malhada.jpg",
+    "pageid": 94559584,
+    "w": 3551,
+    "h": 1929,
+    "lic": "CC BY-SA 4.0",
+    "artist": "AGA -Associação Geoparque Arouca",
+    "lat": 40.88536667,
+    "lon": -8.25499167,
+    "llsrc": "commons",
+    "inside": true,
+    "desc": "Fotografia Avelino Vieira",
+    "cats": "Self-published work|Files with coordinates missing SDC location of creation|Detrelo da Malhada|Aerial photographs of Arouca",
+    "date": "2016-04-23",
+    "f": "arouca-detrelo-da-malhada",
+    "alt": {
+     "pt": "As serras de Arouca vistas do miradouro do Detrelo da Malhada",
+     "en": "The Arouca hills from the Detrelo da Malhada viewpoint",
+     "fr": "Les montagnes d'Arouca depuis le belvédère du Detrelo da Malhada"
+    },
+    "what": "The ranges of the Arouca Geopark from the Detrelo da Malhada viewpoint under a wide sky",
+    "graded": true,
+    "web_w": 1600
+   }
+  ],
+  "tabuaco": [
+   {
+    "title": "File:Valença do Douro.jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Valen%C3%A7a_do_Douro.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "page": "https://commons.wikimedia.org/wiki/File:Valen%C3%A7a_do_Douro.jpg",
+    "pageid": 17509439,
+    "w": 4288,
+    "h": 2848,
+    "lic": "CC BY-SA 3.0",
+    "artist": "Joseolgon",
+    "lat": null,
+    "lon": null,
+    "llsrc": "commons",
+    "inside": null,
+    "desc": "Landscape in Valença do Douro, Tabuaço, Portugal",
+    "cats": "Taken with Nikon D300|Valença do Douro|Self-published work|Images with extracted images|Vineyards in the Douro valley|Douro river in Sabrosa|Douro river in Tabuaço",
+    "date": "2011-11-20",
+    "f": "tabuaco-valenca-do-douro",
+    "alt": {
+     "pt": "O Douro entre socalcos em Valença do Douro, Tabuaço",
+     "en": "The Douro between terraces at Valença do Douro, Tabuaço",
+     "fr": "Le Douro entre les terrasses à Valença do Douro, Tabuaço"
+    },
+    "what": "The Douro valley and its terraced vineyards at Valença do Douro, Tabuaço",
+    "graded": true,
+    "web_w": 1600
+   }
+  ],
+  "barcelos": [
+   {
+    "title": "File:Barcelos visto de Barcelinhos (45703458555).jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/3/3e/Barcelos_visto_de_Barcelinhos_%2845703458555%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "page": "https://commons.wikimedia.org/wiki/File:Barcelos_visto_de_Barcelinhos_(45703458555).jpg",
+    "pageid": 75614250,
+    "w": 2048,
+    "h": 1368,
+    "lic": "CC BY-SA 2.0",
+    "artist": "Halley Oliveira",
+    "lat": 41.527088,
+    "lon": -8.622778,
+    "llsrc": "commons",
+    "inside": true,
+    "desc": "Ponte Medieval sobre o Rio Cávado, Casa de Azenha, Paço dos Duques, Pelourinho e Igreja Matriz de Barcelos",
+    "cats": "Files with coordinates missing SDC location of creation|Flickr images reviewed by FlickreviewR 2|Cávado River in Barcelos|Buildings in Barcelos|Files from Halley Oliveira Flickr stream",
+    "date": "2019-01-05 16:19",
+    "f": "barcelos-ponte-azenha-paco",
+    "alt": {
+     "pt": "Barcelos vista de Barcelinhos ao fim da tarde: a ponte medieval, a azenha, o açude no Cávado, o Paço dos Condes e a Igreja Matriz",
+     "en": "Barcelos from Barcelinhos in late light: the medieval bridge, the watermill, the weir on the Cávado, the counts' palace and the main church",
+     "fr": "Barcelos vue de Barcelinhos en fin de journée : le pont médiéval, le moulin, le seuil sur le Cávado, le palais des comtes et l'église principale"
+    },
+    "what": "Barcelos from the Barcelinhos bank in late light: the medieval bridge, the azenha (watermill), the weir on the Cávado, the ruins of the Paço dos Condes and the Igreja Matriz (the operator's chosen view)",
+    "x": 0.55,
+    "graded": false
+   }
+  ]
+ }
+}
