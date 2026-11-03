@@ -5,6 +5,7 @@
 // their paragraphs ("sN.1"…), the table or chart, three follow-up questions ("fN") as a list and FAQPage data, links,
 // sources and the disclaimer (EDITORIAL_POLICY.md). Figures in the text come from the data files at build time.
 import V2 from "../layouts/V2.astro";
+import MareBlock from "./MareBlock.astro";  // D83: the quiet Maré line, last in the article
 import { HTML_LANG, LANGS, eur, pathFor, type Lang, type EdCode } from "../i18n";
 import { ART_SUB, GOLF, type ArtKey } from "../lib/articles";
 import { Sources, DISCLAIMER, fmtDate } from "../lib/content";
@@ -160,5 +161,6 @@ const ld = [
     </section>
     <p class="small disclaimer">{DISCLAIMER[lang]}</p>
     <p style="margin-bottom:64px"><a class="more" href={hub}>{c("art.all", lang)}</a></p>
+    <MareBlock lang={lang} ed={ed} where="article" />
   </article>
 </V2>

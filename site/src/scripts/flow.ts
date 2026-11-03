@@ -332,6 +332,7 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
     dir = 1; swap(`<div class="fl-done"><span class="fl-tick">${CHECK}</span><h2 class="fl-q" tabindex="-1">${esc(d.h)}</h2><p class="fl-lede">${esc(d.p)}</p>
       <div class="fl-go"><a class="fl-btn" href="${F.links.path}">${esc(F.extra.path)}</a><a class="fl-link" href="${F.links.map}">${esc(F.extra.map)}</a></div>
       <p class="fl-more">${esc(X.more)} <a href="${Lk.path}">${esc(X.morePath)}</a> · <a href="${Lk.articles}">${esc(X.moreArticles)}</a></p></div>`, true);
+    const mare = root.querySelector<HTMLTemplateElement>("template[data-flow-mare]"); if (mare) stage.lastElementChild?.querySelector(".fl-done")?.append(mare.content.cloneNode(true));  // D83: the quiet Maré line
     const p = new URLSearchParams(location.search); p.set(opts.param, "done"); history.replaceState(null, "", `${location.pathname}?${p}${location.hash}`);
   }
   function fallback(p: Record<string, unknown>) {

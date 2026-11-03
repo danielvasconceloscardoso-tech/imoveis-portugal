@@ -6,6 +6,7 @@
 import V2 from "../layouts/V2.astro";
 import BriefBox from "./BriefBox.astro";
 import Flow from "./Flow.astro";
+import MareBlock from "./MareBlock.astro";
 import { config } from "../config";
 import { LANGS, pathFor, type Lang, type EdCode } from "../i18n";
 import { Sources, fmtDate } from "../lib/content";
@@ -55,12 +56,14 @@ const title = view === "form" ? c("consult.title", lang) : c(`consult.${view}.ti
       <>
         <ul class="ptypes">
           <li><a href={pathFor(lang, ed, "journey")}>{c("consult.later.path", lang)}</a></li>
-          <li><a href={`${pathFor(lang, ed, "home")}#subscrever`}>{c("consult.later.nl", lang)}</a></li>
+          <li><a href={`${pathFor(lang, ed, "mare")}?de=concierge`}>{c("consult.later.nl", lang)}</a></li>
           <li><a href={pathFor(lang, ed, "dossiers")}>{c("consult.later.dossier", lang)}</a></li>
         </ul>
         <p style="margin-top:28px"><a class="more" href={base}>{c("consult.later.book", lang)}</a></p>
       </>
     )}
+    {/* D83: the quiet Maré line at the end of the Concierge (on the form, the done screen carries it: Flow.astro). */}
+    {view !== "form" && <MareBlock lang={lang} ed={ed} where="concierge" />}
     <div style="height:56px"></div>
   </div>
   {src.list.length > 0 && (

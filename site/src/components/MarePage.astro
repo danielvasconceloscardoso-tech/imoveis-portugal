@@ -1,0 +1,176 @@
+---
+// The Maré page (D83, operator 3 Nov 2026), like an Apple product page: the name, large; one line; one e-mail field,
+// one unticked consent box and one button; the latest issue below exactly as it looks in the inbox (the e-mail
+// rendered by lib/mare.ts, framed); the archive as cards (headline and photo). With `issue`, the page of one issue.
+// Signup: the beehiiv embed when config.forms.newsletter has one (shown only after the consent box is ticked and the
+// button pressed), otherwise today's mechanism: the reader's own email opens with the request written (double opt-in
+// then done in beehiiv by the operator). Signals: lib/track.ts evSignup (surface + headline + first-touch UTM) and
+// evMareBlock (an arrival from the quiet block). No e-mail ever leaves the page in an event. Wording: COPY_DECK "mare.*".
+import V2 from "../layouts/V2.astro";
+import { config } from "../config";
+import { HTML_LANG, LANGS, pathFor, type Lang, type EdCode } from "../i18n";
+import { c, edName } from "../lib/copy";
+import { issues, latestIssue, renderIssue, photoUrl, type MareIssue } from "../lib/mare";
+
+interface Props { lang: Lang; ed: EdCode; issue?: MareIssue; }
+const { lang, ed } = Astro.props;
+const one = Astro.props.issue ?? null;
+const show = one ?? latestIssue();
+const all = issues();
+const base = pathFor(lang, ed, "mare");
+const paths = one ? (Object.fromEntries(LANGS.map((l) => [l, `${pathFor(l, ed, "mare")}${one.id}/`])) as Record<Lang, string>) : undefined;
+const nl = config.forms.newsletter[lang];
+const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("home.subscribe.subject", lang)} (${ed} · ${lang})`)}`;
+const html = show ? renderIssue(show, { ed, framed: true }) : "";
+const fmt = (d: string) => new Intl.DateTimeFormat(HTML_LANG[lang], { weekday: "long", day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(`${d}T12:00:00Z`));
+const title = one ? `${one.headline} | Maré` : `Maré | Imóveis Portugal · ${edName(ed, lang)}`;
+---
+<V2 lang={lang} ed={ed} page="mare" paths={paths} title={title} description={one ? one.preheader : c("mare.meta", lang)} sticky={null} next={false}
+  ogImage={show ? `https://${config.primaryDomain}${photoUrl(show.photo.src, 1024)}` : undefined}>
+  <section class={one ? "mr-hero mr-hero-s" : "mr-hero"} aria-labelledby="mr-h">
+    {one ? (
+      <>
+        <p class="mr-back"><a href={base}>{c("mare.issue.back", lang)}</a></p>
+        <p class="mr-kick">Maré · {fmt(one.date)}</p>
+        <h1 id="mr-h" class="mr-h1s">{one.headline}</h1>
+      </>
+    ) : (
+      <>
+        <h1 id="mr-h" class="mr-word">{c("mare.title", lang)}</h1>
+        <p class="mr-line">{c("mare.line", lang)}</p>
+        <p class="mr-when">{c("mare.when", lang)}</p>
+      </>
+    )}
+    <form class="mr-form" action={nl ? "#" : mail} method="post" enctype="text/plain" data-mare-form data-issue={show?.id ?? ""} data-embed={nl || undefined}>
+      <input type="hidden" name="edicao" value={ed} />
+      <input type="hidden" name="lingua" value={lang} />
+      <input type="hidden" name="origem" value="mare" data-mare-from />
+      {show && <input type="hidden" name="mare" value={show.id} />}
+      {!nl && <label class="mr-email"><span class="vh">{c("mare.email", lang)}</span><input type="email" name="email" required autocomplete="email" placeholder={c("mare.email", lang)} /></label>}
+      <button class="mr-btn" type="submit">{c("mare.a", lang)}</button>
+      <label class="mr-consent"><input type="checkbox" name="consentimento" value="sim" required data-mare-consent data-need={c("mare.consent.need", lang)} /> <span>{c("mare.consent", lang)} <a href={pathFor(lang, ed, "privacy")}>{c("common.privacy", lang)}</a></span></label>
+      <p class="mr-small">{c(nl ? "mare.optin.embed" : "mare.optin.mail", lang)}</p>
+      <p class="mr-sent" role="status" hidden data-mare-sent>{c("mare.sent", lang)}</p>
+      {nl && <div class="mr-embed" hidden data-mare-embed><iframe data-base={nl} title={c("mare.title", lang)} style="min-height:220px"></iframe></div>}
+    </form>
+  </section>
+
+  {show && (
+    <section class="mr-latest" aria-labelledby="mr-latest-h">
+      {!one && <h2 id="mr-latest-h" class="mr-h2">{c("mare.latest.h", lang)}</h2>}
+      {one && <h2 id="mr-latest-h" class="vh">{show.subject}</h2>}
+      <p class="mr-sub">{c("mare.latest.p", lang)}{lang !== "pt" && <> {c("mare.pt.only", lang)}</>}</p>
+      <div class="mr-mail">
+        <div class="mr-mail-top" lang="pt-PT">
+          <p><span>{c("mare.inbox.from", lang)}</span> Maré · Imóveis Portugal</p>
+          <p><span>{c("mare.inbox.subject", lang)}</span> <strong>{show.subject}</strong></p>
+          <p class="mr-pre">{show.preheader}</p>
+        </div>
+        <iframe class="mr-frame" title={show.subject} srcdoc={html} lang="pt-PT" loading="lazy" data-mare-frame
+          sandbox="allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe>
+      </div>
+    </section>
+  )}
+
+  {all.length > 0 && (
+    <section class="mr-arch" aria-labelledby="mr-arch-h">
+      <h2 id="mr-arch-h" class="mr-h2">{c("mare.archive.h", lang)}</h2>
+      <ul class="mr-cards">
+        {all.map((x) => (
+          <li><a class="mr-card" href={`${base}${x.id}/`} aria-current={one?.id === x.id ? "page" : undefined}>
+            <img src={photoUrl(x.photo.src, 640)} alt={x.photo.alt} width="640" height="480" loading="lazy" />
+            <span class="mr-card-d">{fmt(x.date)} · {c("mare.minutes", lang, { n: x.minutes })}</span>
+            <span class="mr-card-h" lang="pt-PT">{x.headline}</span>
+          </a></li>
+        ))}
+      </ul>
+    </section>
+  )}
+</V2>
+
+<script>
+  import { evSignup, evMareBlock, rememberUtm, utm } from "../lib/track";
+  rememberUtm();
+  const q = new URLSearchParams(location.search);
+  // Where the reader came from: the quiet block (?de=article&h={issue}) or the page itself. The arrival is counted here
+  // (a count on the click would be lost to the navigation); the URL is then cleaned so a shared link starts fresh.
+  const de = (q.get("de") || "").replace(/[^a-z]/g, ""), h = (q.get("h") || "").replace(/[^0-9-]/g, "");
+  if (de && h) { evMareBlock(de, h); q.delete("de"); q.delete("h"); history.replaceState(null, "", `${location.pathname}${q.toString() ? `?${q}` : ""}${location.hash}`); }
+  const f = document.querySelector<HTMLFormElement>("[data-mare-form]");
+  if (f) {
+    const where = de || "mare", issue = f.dataset.issue || "";
+    const from = f.querySelector<HTMLInputElement>("[data-mare-from]"); if (from) from.value = where;
+    const box = f.querySelector<HTMLInputElement>("[data-mare-consent]")!;
+    const say = () => box.setCustomValidity(box.checked ? "" : box.dataset.need || "");
+    box.addEventListener("change", say); say();
+    f.addEventListener("submit", (e) => {
+      say();
+      if (!f.checkValidity()) { e.preventDefault(); f.reportValidity(); return; }
+      if (f.dataset.embed) {
+        // beehiiv: the embed (its own field and button) opens only now, with the first-touch UTM and the surface.
+        e.preventDefault();
+        const wrap = f.querySelector<HTMLElement>("[data-mare-embed]"), fr = wrap?.querySelector("iframe");
+        if (wrap && fr && !fr.getAttribute("src")) {
+          const u = utm(), url = new URL(fr.dataset.base!);
+          url.searchParams.set("utm_source", u.source === "-" ? "site" : u.source); url.searchParams.set("utm_medium", u.medium === "-" ? where : u.medium);
+          url.searchParams.set("utm_campaign", u.campaign === "-" ? `mare-${issue}` : u.campaign);
+          fr.src = url.toString(); wrap.hidden = false;
+          // The embed hides its own submit: the signup is counted when the reader first goes into the form.
+          addEventListener("blur", function once() { if (document.activeElement === fr) { evSignup(where, issue); removeEventListener("blur", once); } });
+        }
+        return;
+      }
+      evSignup(where, issue);
+      const sent = f.querySelector<HTMLElement>("[data-mare-sent]"); if (sent) setTimeout(() => { sent.hidden = false; }, 400);
+    });
+  }
+  // The e-mail preview: as tall as the e-mail itself, so the page scrolls, not the frame.
+  const fr = document.querySelector<HTMLIFrameElement>("[data-mare-frame]");
+  if (fr) {
+    const fit = () => { try { const d = fr.contentDocument; if (d?.body) fr.style.height = `${d.documentElement.scrollHeight}px`; } catch { /* keep the default */ } };
+    fr.addEventListener("load", () => { fit(); setTimeout(fit, 400); fr.contentDocument?.querySelectorAll("img").forEach((i) => i.addEventListener("load", fit)); });
+    addEventListener("resize", fit);
+    if (fr.contentDocument?.readyState === "complete") fit();
+  }
+</script>
+
+<style>
+  .mr-hero { max-width: 44rem; margin: 0 auto; padding: clamp(56px, 12vw, 140px) var(--gut, 20px) clamp(48px, 8vw, 96px); text-align: center; }
+  .mr-word { margin: 0; font: 400 clamp(88px, 24vw, 208px)/.9 var(--serif); letter-spacing: -.03em; }
+  .mr-line { margin: 28px auto 0; max-width: 26em; text-wrap: balance; font: 400 clamp(22px, 3.4vw, 32px)/1.3 var(--serif); }
+  .mr-when { margin: 14px 0 0; color: var(--muted); font-size: 16px; }
+  .mr-hero-s { text-align: left; max-width: 40rem; padding-top: clamp(40px, 8vw, 88px); }
+  .mr-back { margin: 0 0 28px; font-size: 15px; } .mr-back a { color: var(--muted); }
+  .mr-kick { margin: 0 0 12px; font: 600 12px/1.3 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+  .mr-h1s { margin: 0 0 8px; font-size: clamp(34px, 6vw, 56px); line-height: 1.1; }
+  .mr-form { display: grid; grid-template-columns: 1fr auto; gap: 12px; max-width: 32rem; margin: 40px auto 0; text-align: left; }
+  .mr-hero-s .mr-form { margin-left: 0; }
+  .mr-form[data-embed] { grid-template-columns: 1fr; justify-items: center; }
+  .mr-email input { width: 100%; min-height: 52px; box-sizing: border-box; padding: 0 16px; border: 1px solid #c9c9c4; border-radius: 2px; background: #fff; font: 400 17px/1 var(--sans); color: var(--ink); }
+  .mr-email input:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: transparent; }
+  .mr-btn { min-height: 52px; padding: 0 28px; border: 0; border-radius: 2px; background: var(--ink); color: #fff; font: 600 15px/1 var(--sans); cursor: pointer; transition: background-color .25s var(--ease); white-space: nowrap; }
+  .mr-btn:hover { background: var(--accent); }
+  .mr-consent { grid-column: 1 / -1; display: flex; gap: 12px; align-items: flex-start; font-size: 14px; line-height: 1.5; color: var(--muted); cursor: pointer; }
+  .mr-consent input { width: 18px; height: 18px; margin: 2px 0 0; flex: none; accent-color: var(--accent); }
+  .mr-consent a { color: inherit; }
+  .mr-small, .mr-sent { grid-column: 1 / -1; margin: 0; font-size: 13px; color: var(--muted); }
+  .mr-sent { color: var(--accent); font-size: 14px; }
+  .mr-embed { grid-column: 1 / -1; width: 100%; } .mr-embed iframe { width: 100%; border: 0; }
+  .mr-latest { padding: clamp(56px, 9vw, 120px) var(--gut, 20px); background: #efebe3; text-align: center; }
+  .mr-h2 { margin: 0; font-size: clamp(30px, 4.4vw, 44px); line-height: 1.15; }
+  .mr-sub { margin: 10px 0 36px; color: var(--muted); }
+  .mr-mail { max-width: 640px; margin: 0 auto; text-align: left; background: #fff; border-radius: 14px; box-shadow: 0 1px 2px rgba(17, 18, 20, .06), 0 24px 60px -24px rgba(17, 18, 20, .25); overflow: hidden; }
+  .mr-mail-top { padding: 18px 22px 14px; border-bottom: 1px solid var(--rule); font-size: 14px; line-height: 1.5; }
+  .mr-mail-top p { margin: 0 0 2px; } .mr-mail-top span { display: inline-block; min-width: 4.5em; color: var(--muted); }
+  .mr-pre { color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .mr-frame { display: block; width: 100%; height: 2600px; border: 0; background: #efebe3; }
+  .mr-arch { max-width: 72rem; margin: 0 auto; padding: clamp(56px, 9vw, 120px) var(--gut, 20px); }
+  .mr-cards { list-style: none; margin: 32px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 28px; }
+  .mr-card { display: grid; gap: 10px; text-decoration: none; color: inherit; }
+  .mr-card img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 4px; transition: opacity .25s var(--ease); }
+  .mr-card:hover img { opacity: .9; }
+  .mr-card-d { font-size: 13px; color: var(--muted); }
+  .mr-card-h { font: 400 22px/1.3 var(--serif); }
+  .mr-card[aria-current] .mr-card-h { color: var(--accent); }
+  @media (max-width: 560px) { .mr-form { grid-template-columns: 1fr; } .mr-btn { width: 100%; } }
+</style>

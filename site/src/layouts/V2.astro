@@ -58,7 +58,7 @@ const next: Next | null = Astro.props.next === false ? null : Astro.props.next ?
   : page === "privacy" || page === "legal" ? { kind: "back", p: c("bar.next.back.p", lang) }
   : ["consult", "buy", "talk", "guide", "partners", "saved"].includes(page) ? null
   : { kind: "concierge", p: c("bar.next.read.p", lang) });
-const subscribe = `${pathFor(lang, ed, "home")}#subscrever`;
+const subscribe = pathFor(lang, ed, "mare");  // D83: the Maré page (the home keeps its own form at #subscrever)
 // Default sticky action: the free guide from the home page, a partner from the help pages.
 const sticky: Sticky = Astro.props.sticky !== undefined ? Astro.props.sticky
   : page === "home" || page === "how" ? { href: pathFor(lang, ed, "guide"), label: c("common.sticky.guide", lang) }
@@ -155,7 +155,7 @@ import Beacon from "../components/Beacon.astro";
           <div><p class="ft2-k">{c("home2.ft.buy", lang)}</p><ul><li><a href={`${pathFor(lang, ed, "journey")}?door=buy`}>{c("path.door.buy", lang)}</a></li><li><a href={pathFor(lang, ed, "casa")}>{c("common.nav.casa", lang)}</a></li><li><a href={pathFor(lang, ed, "sims")}>{c("common.nav.sims", lang)}</a></li><li><a href={pathFor(lang, ed, "guide")}>{c("common.nav.guide", lang)}</a></li></ul></div>
           <div><p class="ft2-k">{c("home2.ft.sell", lang)}</p><ul><li><a href={`${pathFor(lang, ed, "journey")}?door=sell`}>{c("path.door.sell", lang)}</a></li><li><a href={pathFor(lang, ed, "data")}>{c("common.nav.data", lang)}</a></li></ul></div>
           <div><p class="ft2-k">{c("home2.ft.map", lang)}</p><ul><li><a href={pathFor(lang, ed, "map")}>{c("common.nav.map", lang)}</a></li><li><a href={pathFor(lang, ed, "data")}>{c("common.nav.data", lang)}</a></li></ul></div>
-          <div><p class="ft2-k">{c("home2.ft.qa", lang)}</p><ul><li><a href={pathFor(lang, ed, "faq")}>{c("common.nav.faq", lang)}</a></li><li><a href={pathFor(lang, ed, "articles")}>{c("common.nav.articles", lang)}</a></li><li><a href={pathFor(lang, ed, "how")}>{c("common.nav.how", lang)}</a></li></ul></div>
+          <div><p class="ft2-k">{c("home2.ft.qa", lang)}</p><ul><li><a href={pathFor(lang, ed, "faq")}>{c("common.nav.faq", lang)}</a></li><li><a href={pathFor(lang, ed, "articles")}>{c("common.nav.articles", lang)}</a></li><li><a href={pathFor(lang, ed, "how")}>{c("common.nav.how", lang)}</a></li><li><a href={pathFor(lang, ed, "mare")}>{c("common.newsletter", lang)}</a></li></ul></div>
           <div><p class="ft2-k">{c("home2.ft.partners", lang)}</p><ul><li><a href={pathFor(lang, ed, "ours")}>{c("common.nav.ours", lang)}</a></li><li><a href={pathFor(lang, ed, "partners")}>{c("common.nav.partners", lang)}</a></li></ul></div>
         </div>
         <div class="ft2-row">

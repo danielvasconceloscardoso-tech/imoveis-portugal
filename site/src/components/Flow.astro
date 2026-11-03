@@ -12,6 +12,7 @@ import { lawyerCard } from "../lib/lawyers";
 import { PROJECTS, showcases, img } from "../lib/projects";
 import { PRICES } from "../lib/prices";
 import { SLUGS, pathFor } from "../i18n";
+import MareBlock from "./MareBlock.astro";
 
 interface Props { lang: Lang; ed: EdCode; flow: FlowId; param?: string; hidden?: Record<string, string>; sheet?: boolean; }
 const { lang, ed, flow, param = "step", hidden = {}, sheet = false } = Astro.props;
@@ -47,6 +48,7 @@ const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${cfg.
   <noscript><p class="fl-lede">{cfg.lede}</p><p><a class="fl-btn" href={mail}>{c("flow.fallback.btn", lang)}</a></p></noscript>
   <script type="application/json" data-flow-cfg set:html={JSON.stringify(cfg)} />
   {blds && <script type="application/json" data-flow-blds set:html={JSON.stringify(blds).replace(/</g, "\\u003c")} />}
+  {flow === "concierge" && <template data-flow-mare><MareBlock lang={lang} ed={ed} where="concierge" /></template>}
   {lawyer && <script type="application/json" data-flow-lawyer set:html={JSON.stringify(lawyer).replace(/</g, "\\u003c")} />}
 </div>
 

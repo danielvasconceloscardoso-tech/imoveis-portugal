@@ -107,9 +107,9 @@ How to edit:
 - FR: Fermer
 
 ### newsletter
-- PT: Newsletter
-- EN: Newsletter
-- FR: Newsletter
+- PT: Maré
+- EN: Maré
+- FR: Maré
 
 ### navx.partners
 - PT: Parceiros
@@ -297,9 +297,9 @@ How to edit:
 - FR: Un contenu payé l'indique toujours.
 
 ### foot.tagline
-- PT: A sua casa em Portugal, a partir de onde vive. Newsletter às quintas-feiras.
-- EN: Your home in Portugal, from wherever you live. A newsletter every Thursday.
-- FR: Votre maison au Portugal, depuis chez vous. Une newsletter chaque jeudi.
+- PT: A sua casa em Portugal, a partir de onde vive. E a Maré, à terça e à sexta, às 8h.
+- EN: Your home in Portugal, from wherever you live. Maré, a newsletter every Tuesday and Friday at 8 a.m..
+- FR: Votre maison au Portugal, depuis chez vous. Maré, une newsletter chaque mardi et vendredi à 8 h.
 
 ### foot.about
 - PT: Sobre
@@ -521,19 +521,19 @@ How to edit:
 - FR: en Israël
 
 ### lede
-- PT: Cada passo, com as regras oficiais e um parceiro quando precisar. Newsletter grátis à quinta-feira.
-- EN: We show you every step, with the official rules and the right numbers, and put you in touch with the people who get it done: the agency, the bank, the lawyer. A newsletter every Thursday, free.
-- FR: Nous montrons chaque étape, avec les règles officielles et les bons chiffres, et vous mettons en relation avec ceux qui s'en chargent : l'agence, la banque, l'avocat. Une newsletter chaque jeudi, gratuite.
+- PT: Cada passo, com as regras oficiais e um parceiro quando precisar. E a Maré, grátis, à terça e à sexta, às 8h.
+- EN: We show you every step, with the official rules and the right numbers, and put you in touch with the people who get it done: the agency, the bank, the lawyer. Maré, a newsletter every Tuesday and Friday at 8 a.m., free.
+- FR: Nous montrons chaque étape, avec les règles officielles et les bons chiffres, et vous mettons en relation avec ceux qui s'en chargent : l'agence, la banque, l'avocat. Maré, une newsletter chaque mardi et vendredi à 8 h, gratuite.
 
 ### subscribe
-- PT: Receber a newsletter
-- EN: Get the newsletter
-- FR: Recevoir la newsletter
+- PT: Receber a Maré
+- EN: Get Maré
+- FR: Recevoir Maré
 
 ### subscribe.subject
-- PT: Quero receber a newsletter
-- EN: Please sign me up for the newsletter
-- FR: Je souhaite recevoir la newsletter
+- PT: Quero receber a Maré
+- EN: Please sign me up for Maré
+- FR: Je souhaite recevoir Maré
 
 ### call.link
 - PT: Pedir 15 minutos grátis
@@ -1024,9 +1024,9 @@ How to edit:
 - FR: {country} : le représentant fiscal et les règles vérifiées de votre pays.
 
 ### signup.h
-- PT: Uma casa e as contas, todas as quintas-feiras
-- EN: One home and its numbers, every Thursday
-- FR: Un bien et ses chiffres, chaque jeudi
+- PT: A Maré, à terça e à sexta, às 8h. Portugal em três minutos.
+- EN: Maré, one home and its numbers, every Tuesday and Friday at 8 a.m.
+- FR: Maré, un bien et ses chiffres, chaque mardi et vendredi à 8 h
 
 ## partners
 
@@ -1041,9 +1041,9 @@ How to edit:
 - FR: Conditions sur demande
 
 ### place.launch.p
-- PT: Um novo empreendimento em destaque no mapa, na página da zona e numa newsletter.
-- EN: A new project featured on the map, on the area page and in one newsletter.
-- FR: Un nouveau programme mis en avant sur la carte, sur la page du secteur et dans une newsletter.
+- PT: Um novo empreendimento em destaque no mapa, na página da zona e num envio da Maré.
+- EN: A new project featured on the map, on the area page and in one issue of Maré.
+- FR: Un nouveau programme mis en avant sur la carte, sur la page du secteur et dans un numéro de Maré.
 
 ### place.launch.h
 - PT: Lançamentos
@@ -1091,9 +1091,9 @@ How to edit:
 - FR: Les chiffres d'audience figureront ici dès qu'ils existeront.
 
 ### proof.3
-- PT: Seis edições em três línguas e uma newsletter todas as quintas-feiras, a partir de 1 de dezembro de 2026.
-- EN: Six editions in three languages and a newsletter every Thursday from 1 December 2026.
-- FR: Six éditions en trois langues et une newsletter chaque jeudi à partir du 1er décembre 2026.
+- PT: Seis edições em três línguas e a Maré, à terça e à sexta, às 8h, a partir de 1 de dezembro de 2026.
+- EN: Six editions in three languages and Maré, a newsletter every Tuesday and Friday at 8 a.m., from 1 December 2026.
+- FR: Six éditions en trois langues et Maré, une newsletter chaque mardi et vendredi à 8 h, à partir du 1er décembre 2026.
 
 ### proof.2
 - PT: Grupo parceiro licenciado: agência imobiliária (AMI {ami}), intermediário de crédito e seguros.
@@ -1141,9 +1141,9 @@ How to edit:
 - FR: Dans un chapitre du guide gratuit.
 
 ### inventory.3
-- PT: Na newsletter de quinta-feira.
-- EN: In the Thursday newsletter.
-- FR: Dans la newsletter du jeudi.
+- PT: Na Maré, à terça e à sexta.
+- EN: In Maré, the Tuesday and Friday newsletter.
+- FR: Dans Maré, la newsletter du mardi et du vendredi.
 
 ### inventory.2
 - PT: Nas perguntas da sua categoria, com uma resposta identificada.
@@ -1370,9 +1370,9 @@ How to edit:
 - FR: Vos données
 
 ### s5.p
-- PT: A newsletter pede dupla confirmação e cada email tem um link para cancelar. Não usamos cookies de publicidade nem de estatística. Os pedidos que envia seguem por email só para a Imóveis Portugal e para a agência parceira, e o site não os guarda.
-- EN: The newsletter uses double opt-in, and every email has an unsubscribe link. We use no advertising or analytics cookies. The requests you send go by email only to Imóveis Portugal and the partner agency, and the site does not store them.
-- FR: La newsletter fonctionne en double confirmation et chaque e-mail contient un lien de désinscription. Aucun cookie publicitaire ni de mesure d'audience. Les demandes que vous envoyez partent par e-mail uniquement chez Imóveis Portugal et l'agence partenaire, et le site ne les conserve pas.
+- PT: A Maré pede dupla confirmação e cada envio tem um link para cancelar. Não usamos cookies de publicidade nem de estatística. Os pedidos que envia seguem por email só para a Imóveis Portugal e para a agência parceira, e o site não os guarda.
+- EN: Maré, our newsletter, uses double opt-in, and every email has an unsubscribe link. We use no advertising or analytics cookies. The requests you send go by email only to Imóveis Portugal and the partner agency, and the site does not store them.
+- FR: Maré, notre newsletter, fonctionne en double confirmation et chaque e-mail contient un lien de désinscription. Aucun cookie publicitaire ni de mesure d'audience. Les demandes que vous envoyez partent par e-mail uniquement chez Imóveis Portugal et l'agence partenaire, et le site ne les conserve pas.
 
 ### s6.h
 - PT: Números de audiência
@@ -1452,9 +1452,9 @@ How to edit:
 - FR: Données traitées et finalités
 
 ### privacy.2.p
-- PT: Newsletter: nome próprio e email, com o seu consentimento (RGPD, art. 6.º, n.º 1, al. a)) e dupla confirmação. Pedidos de compra, de visita e do Concierge: nome, contactos e o que procura, para dar seguimento ao pedido que nos faz antes de qualquer contrato (art. 6.º, n.º 1, al. b)), enviados à Imóveis Portugal e à agência parceira {agency} (AMI {ami}). Pedidos de parceria: dados profissionais, para responder (art. 6.º, n.º 1, al. b)). Pedidos a parceiros: categoria, país, pergunta e contacto, para responder ao seu pedido (art. 6.º, n.º 1, al. b)) e, se o autorizar, passar a um parceiro da categoria.
-- EN: Newsletter: first name and email, with your consent (GDPR, art. 6(1)(a)) and double opt-in. Buying, viewing and Concierge requests: name, contact details and what you're looking for, to act on the request you make before any contract (art. 6(1)(b)), sent to Imóveis Portugal and our partner agency {agency} (AMI {ami}). Partner inquiries: business details, to reply (art. 6(1)(b)). Requests to a partner: category, country, question and contact details, to answer your request (art. 6(1)(b)) and, if you agree, to pass them to a partner in that category.
-- FR: Newsletter : prénom et e-mail, avec votre consentement (RGPD, art. 6, par. 1, a)) et double confirmation. Demandes d'achat, de visite et du Concierge : nom, coordonnées et critères, pour donner suite à la demande que vous faites avant tout contrat (art. 6, par. 1, b)), transmis à Imóveis Portugal et à l'agence partenaire {agency} (AMI {ami}). Demandes de partenariat : données professionnelles, pour répondre (art. 6, par. 1, b)). Demandes à un partenaire : catégorie, pays, question et coordonnées, pour répondre à votre demande (art. 6, par. 1, b)) et, avec votre accord, les transmettre à un partenaire de la catégorie.
+- PT: Maré, a newsletter: email (e o nome próprio, se o der), com o seu consentimento (RGPD, art. 6.º, n.º 1, al. a)) e dupla confirmação. Pedidos de compra, de visita e do Concierge: nome, contactos e o que procura, para dar seguimento ao pedido que nos faz antes de qualquer contrato (art. 6.º, n.º 1, al. b)), enviados à Imóveis Portugal e à agência parceira {agency} (AMI {ami}). Pedidos de parceria: dados profissionais, para responder (art. 6.º, n.º 1, al. b)). Pedidos a parceiros: categoria, país, pergunta e contacto, para responder ao seu pedido (art. 6.º, n.º 1, al. b)) e, se o autorizar, passar a um parceiro da categoria.
+- EN: Maré, the newsletter: first name and email, with your consent (GDPR, art. 6(1)(a)) and double opt-in. Buying, viewing and Concierge requests: name, contact details and what you're looking for, to act on the request you make before any contract (art. 6(1)(b)), sent to Imóveis Portugal and our partner agency {agency} (AMI {ami}). Partner inquiries: business details, to reply (art. 6(1)(b)). Requests to a partner: category, country, question and contact details, to answer your request (art. 6(1)(b)) and, if you agree, to pass them to a partner in that category.
+- FR: Maré, la newsletter : prénom et e-mail, avec votre consentement (RGPD, art. 6, par. 1, a)) et double confirmation. Demandes d'achat, de visite et du Concierge : nom, coordonnées et critères, pour donner suite à la demande que vous faites avant tout contrat (art. 6, par. 1, b)), transmis à Imóveis Portugal et à l'agence partenaire {agency} (AMI {ami}). Demandes de partenariat : données professionnelles, pour répondre (art. 6, par. 1, b)). Demandes à un partenaire : catégorie, pays, question et coordonnées, pour répondre à votre demande (art. 6, par. 1, b)) et, avec votre accord, les transmettre à un partenaire de la catégorie.
 
 ### privacy.3.h
 - PT: Quem recebe os dados
@@ -1462,9 +1462,9 @@ How to edit:
 - FR: Destinataires
 
 ### privacy.3.p
-- PT: A Imóveis Portugal e a agência parceira {agency} (AMI {ami}) recebem os pedidos que envia pelo site (compra, visita, Concierge e pedidos a parceiros), por email, através do Cloudflare Email Routing; o site não os guarda. O parceiro da categoria escolhida, só para pedidos a parceiros e com o seu consentimento. Prestadores que tratam dados por nossa conta: beehiiv (newsletter, EUA, com garantias adequadas para a transferência), Tally (formulários, UE), Cloudflare (alojamento, envio dos pedidos por email e estatísticas sem cookies) e Cal.com (marcação de chamadas).
-- EN: Imóveis Portugal and our partner agency {agency} (AMI {ami}) receive the requests you send on the site (buying, viewing, Concierge and requests to a partner), by email, through Cloudflare Email Routing; the site does not store them. The partner in the chosen category, only for requests to a partner and with your consent. Processors acting for us: beehiiv (newsletter, USA, with appropriate safeguards for the transfer), Tally (forms, EU), Cloudflare (hosting, sending requests by email and cookie-free statistics) and Cal.com (call booking).
-- FR: Imóveis Portugal et l'agence partenaire {agency} (AMI {ami}) reçoivent les demandes que vous envoyez sur le site (achat, visite, Concierge et demandes à un partenaire), par e-mail, via Cloudflare Email Routing ; le site ne les conserve pas. Le partenaire de la catégorie choisie, uniquement pour les demandes à un partenaire et avec votre accord. Sous-traitants : beehiiv (newsletter, États-Unis, avec garanties appropriées pour le transfert), Tally (formulaires, UE), Cloudflare (hébergement, envoi des demandes par e-mail et statistiques sans cookies) et Cal.com (prise de rendez-vous).
+- PT: A Imóveis Portugal e a agência parceira {agency} (AMI {ami}) recebem os pedidos que envia pelo site (compra, visita, Concierge e pedidos a parceiros), por email, através do Cloudflare Email Routing; o site não os guarda. O parceiro da categoria escolhida, só para pedidos a parceiros e com o seu consentimento. Prestadores que tratam dados por nossa conta: beehiiv (envio da Maré, EUA, com garantias adequadas para a transferência), Tally (formulários, UE), Cloudflare (alojamento, envio dos pedidos por email e estatísticas sem cookies) e Cal.com (marcação de chamadas).
+- EN: Imóveis Portugal and our partner agency {agency} (AMI {ami}) receive the requests you send on the site (buying, viewing, Concierge and requests to a partner), by email, through Cloudflare Email Routing; the site does not store them. The partner in the chosen category, only for requests to a partner and with your consent. Processors acting for us: beehiiv (Maré, the newsletter, USA, with appropriate safeguards for the transfer), Tally (forms, EU), Cloudflare (hosting, sending requests by email and cookie-free statistics) and Cal.com (call booking).
+- FR: Imóveis Portugal et l'agence partenaire {agency} (AMI {ami}) reçoivent les demandes que vous envoyez sur le site (achat, visite, Concierge et demandes à un partenaire), par e-mail, via Cloudflare Email Routing ; le site ne les conserve pas. Le partenaire de la catégorie choisie, uniquement pour les demandes à un partenaire et avec votre accord. Sous-traitants : beehiiv (Maré, la newsletter, États-Unis, avec garanties appropriées pour le transfert), Tally (formulaires, UE), Cloudflare (hébergement, envoi des demandes par e-mail et statistiques sans cookies) et Cal.com (prise de rendez-vous).
 
 ### privacy.4.h
 - PT: Durante quanto tempo
@@ -1472,9 +1472,9 @@ How to edit:
 - FR: Durée de conservation
 
 ### privacy.4.p
-- PT: Newsletter: até cancelar a subscrição. Pedidos de compra e pedidos a parceiros: 12 meses. Pedidos de parceria: durante a relação comercial e o prazo legal aplicável.
-- EN: Newsletter: until you unsubscribe. Buying requests and requests to a partner: 12 months. Partner inquiries: for the business relationship and the applicable legal period.
-- FR: Newsletter : jusqu'à votre désinscription. Demandes d'achat et demandes à un partenaire : 12 mois. Demandes de partenariat : pendant la relation commerciale et la durée légale applicable.
+- PT: Maré: até cancelar a subscrição. Pedidos de compra e pedidos a parceiros: 12 meses. Pedidos de parceria: durante a relação comercial e o prazo legal aplicável.
+- EN: Maré, the newsletter: until you unsubscribe. Buying requests and requests to a partner: 12 months. Partner inquiries: for the business relationship and the applicable legal period.
+- FR: Maré, la newsletter : jusqu'à votre désinscription. Demandes d'achat et demandes à un partenaire : 12 mois. Demandes de partenariat : pendant la relation commerciale et la durée légale applicable.
 
 ### privacy.5.h
 - PT: Os seus direitos
@@ -3302,9 +3302,9 @@ How to edit:
 - FR: Votre nom sur le simulateur de crédit, avec la mention « proposé par ».
 
 ### wealth.get.4
-- PT: Presença na newsletter de quinta-feira das edições que escolher.
-- EN: Slots in the Thursday newsletter of the editions you choose.
-- FR: Des présences dans la newsletter du jeudi des éditions choisies.
+- PT: Presença na Maré, à terça e à sexta, nas edições que escolher.
+- EN: Slots in Maré, the Tuesday and Friday newsletter, in the editions you choose.
+- FR: Des présences dans Maré, la newsletter du mardi et du vendredi, dans les éditions choisies.
 
 ### taxlegal.h
 - PT: Para consultores fiscais e advogados
@@ -3372,9 +3372,9 @@ How to edit:
 - FR: La catégorie transferts sur la page Parler à un partenaire et sur la page pas à pas.
 
 ### transfer.get.4
-- PT: Presença na newsletter de quinta-feira das edições que escolher.
-- EN: Slots in the Thursday newsletter of the editions you choose.
-- FR: Des présences dans la newsletter du jeudi des éditions choisies.
+- PT: Presença na Maré, à terça e à sexta, nas edições que escolher.
+- EN: Slots in Maré, the Tuesday and Friday newsletter, in the editions you choose.
+- FR: Des présences dans Maré, la newsletter du mardi et du vendredi, dans les éditions choisies.
 
 ### developers.h
 - PT: Para promotores imobiliários
@@ -3402,9 +3402,9 @@ How to edit:
 - FR: Une page du programme, signalée comme sponsorisée, avec les frais d'achat calculés.
 
 ### developers.get.3
-- PT: Destaque na newsletter das edições que escolher.
-- EN: A feature in the newsletter of the editions you choose.
-- FR: Une mise en avant dans la newsletter des éditions choisies.
+- PT: Destaque na Maré nas edições que escolher.
+- EN: A feature in Maré in the editions you choose.
+- FR: Une mise en avant dans Maré dans les éditions choisies.
 
 ### developers.get.4
 - PT: O seu empreendimento aparece primeiro aos leitores cujo orçamento lhe corresponde.
@@ -4063,9 +4063,9 @@ How to edit:
 - FR: Lancement
 
 ### launch.empty
-- PT: Lugar para lançar um novo empreendimento nesta zona, no mapa, nesta página e numa newsletter.
-- EN: A place to launch a new project in this area. It appears on the map, on this page and in one newsletter.
-- FR: Une place pour lancer un nouveau programme dans ce secteur. Il figure sur la carte, sur cette page et dans une newsletter.
+- PT: Lugar para lançar um novo empreendimento nesta zona, no mapa, nesta página e num envio da Maré.
+- EN: A place to launch a new project in this area. It appears on the map, on this page and in one issue of Maré.
+- FR: Une place pour lancer un nouveau programme dans ce secteur. Il figure sur la carte, sur cette page et dans un numéro de Maré.
 
 ### join
 - PT: Anunciar como promotor
@@ -4205,9 +4205,9 @@ How to edit:
 - FR: Le parcours de votre pays, pas à pas
 
 ### later.nl
-- PT: Receber a newsletter
-- EN: The Thursday newsletter
-- FR: La newsletter du jeudi
+- PT: Receber a Maré
+- EN: Maré, the Tuesday and Friday newsletter
+- FR: Maré, la newsletter du mardi et du vendredi
 
 ### later.dossier
 - PT: Ver os dossiês
@@ -4998,9 +4998,9 @@ Prompt 43 §3b: each station is a plain question (st.{k}.q) and a two or three s
 - FR: Modifier les réponses
 
 ### email.p
-- PT: O primeiro email da newsletter traz o Passo a passo. Pode cancelar quando quiser.
-- EN: Sign up to the newsletter: the first email carries Step by step, and you can leave whenever you want.
-- FR: Inscrivez-vous à la newsletter : le premier e-mail contient le Pas à pas, et vous pouvez partir quand vous voulez.
+- PT: A Maré chega à terça e à sexta, às 8h, e o primeiro envio traz o Passo a passo. Cancela quando quiser.
+- EN: Sign up to Maré, every Tuesday and Friday at 8 a.m.: the first email carries Step by step, and you can leave whenever you want.
+- FR: Inscrivez-vous à Maré, chaque mardi et vendredi à 8 h : le premier e-mail contient le Pas à pas, et vous pouvez partir quand vous voulez.
 
 ### email
 - PT: Receber por email
@@ -5716,12 +5716,12 @@ Design v2 home (prompt 32, D59). Every block: one to three sentences, at most 45
 - FR: Voir les prix et les loyers
 
 ### nl.h
-- PT: Uma carta por semana, à quinta-feira.
-- EN: One letter a week, on Thursdays.
-- FR: Une lettre par semaine, le jeudi.
+- PT: Maré. Portugal, duas vezes por semana.
+- EN: Maré. Every Tuesday and Friday at 8 a.m.
+- FR: Maré. Chaque mardi et vendredi à 8 h.
 
 ### nl.p
-- PT: As regras que mudaram e os novos preços do INE, com a fonte. Grátis: confirma o email uma vez e cancela quando quiser.
+- PT: À terça e à sexta, às 8h: um lugar com história e o que fazer no fim de semana. Três minutos de leitura, grátis. Confirma o email uma vez e cancela quando quiser.
 - EN: The rules that changed, new INE prices and the full cost of one home. Free.
 - FR: Les règles qui ont changé, les nouveaux prix de l'INE et le coût complet d'un bien. Gratuit.
 
@@ -5731,12 +5731,12 @@ Design v2 home (prompt 32, D59). Every block: one to three sentences, at most 45
 - FR: Votre e-mail
 
 ### nl.consent
-- PT: Aceito receber a newsletter. Posso cancelar em qualquer email.
-- EN: I agree to receive the newsletter. I can unsubscribe from any email.
-- FR: J'accepte de recevoir la newsletter. Je peux me désabonner depuis chaque e-mail.
+- PT: Aceito receber a Maré por email. Posso cancelar em qualquer envio.
+- EN: I agree to receive Maré. I can unsubscribe from any email.
+- FR: J'accepte de recevoir Maré. Je peux me désabonner depuis chaque e-mail.
 
 ### nl.a
-- PT: Receber a newsletter
+- PT: Receber a Maré
 - EN: Sign up
 - FR: M'inscrire
 
@@ -7951,3 +7951,135 @@ Requests really sent (operator, 3 Nov 2026): the Concierge, the partner and view
 - PT: Enviado pela Imóveis Portugal. O mesmo pedido segue para a Imóveis Portugal e para o consultor qualificado da agência parceira, que responde ao leitor.
 - EN: Sent by Imóveis Portugal. The same request goes to Imóveis Portugal and to the partner agency's qualified advisor, who replies to the reader.
 - FR: Envoyé par Imóveis Portugal. La même demande part chez Imóveis Portugal et chez le conseiller qualifié de l'agence partenaire, qui répond au lecteur.
+
+## mare
+
+### title
+- PT: Maré
+- EN: Maré
+- FR: Maré
+
+### meta
+- PT: Maré, a newsletter da Imóveis Portugal: Portugal à terça e à sexta, às 8h, em três minutos. Grátis.
+- EN: Maré, the Imóveis Portugal newsletter: Portugal every Tuesday and Friday at 8 a.m., in three minutes. Free.
+- FR: Maré, la newsletter d'Imóveis Portugal : le Portugal chaque mardi et vendredi à 8 h, en trois minutes. Gratuit.
+
+### line
+- PT: Portugal, duas vezes por semana. Três minutos.
+- EN: Portugal, twice a week. Three minutes.
+- FR: Le Portugal, deux fois par semaine. Trois minutes.
+
+### when
+- PT: À terça e à sexta, às 8h. Grátis.
+- EN: Tuesday and Friday, 8 a.m. Free.
+- FR: Mardi et vendredi, 8 h. Gratuit.
+
+### email
+- PT: O seu email
+- EN: Your email
+- FR: Votre e-mail
+
+### consent
+- PT: Aceito receber a Maré por email. Posso cancelar em qualquer envio.
+- EN: I agree to receive Maré by email. I can unsubscribe from any email.
+- FR: J'accepte de recevoir Maré par e-mail. Je peux me désabonner depuis chaque e-mail.
+
+### consent.need
+- PT: Marque a caixa para receber a Maré.
+- EN: Tick the box to receive Maré.
+- FR: Cochez la case pour recevoir Maré.
+
+### a
+- PT: Receber a Maré
+- EN: Get Maré
+- FR: Recevoir Maré
+
+### optin.mail
+- PT: Abre-se o seu email com o pedido escrito. Envie-o e confirme uma vez: a Maré começa na terça ou sexta seguinte.
+- EN: Your email opens with the request written. Send it and confirm once: Maré starts on the next Tuesday or Friday.
+- FR: Votre messagerie s'ouvre avec la demande rédigée. Envoyez-la et confirmez une fois : Maré commence le mardi ou le vendredi suivant.
+
+### optin.embed
+- PT: Confirme o email uma vez: a Maré começa na terça ou sexta seguinte.
+- EN: Confirm your email once: Maré starts on the next Tuesday or Friday.
+- FR: Confirmez votre e-mail une fois : Maré commence le mardi ou le vendredi suivant.
+
+### sent
+- PT: Falta um passo: envie o email que se abriu e confirme quando a Maré lhe escrever.
+- EN: One step left: send the email that opened, then confirm when Maré writes to you.
+- FR: Il reste une étape : envoyez l'e-mail qui s'est ouvert, puis confirmez quand Maré vous écrit.
+
+### latest.h
+- PT: A última Maré
+- EN: The latest Maré
+- FR: La dernière Maré
+
+### latest.p
+- PT: Tal como chega à caixa de correio.
+- EN: Exactly as it arrives in the inbox.
+- FR: Telle qu'elle arrive dans la boîte de réception.
+
+### inbox.from
+- PT: De
+- EN: From
+- FR: De
+
+### inbox.subject
+- PT: Assunto
+- EN: Subject
+- FR: Objet
+
+### pt.only
+- PT: Em português.
+- EN: This issue is in Portuguese.
+- FR: Ce numéro est en portugais.
+
+### archive.h
+- PT: Todas as Marés
+- EN: Every issue
+- FR: Tous les numéros
+
+### archive.read
+- PT: Ler
+- EN: Read
+- FR: Lire
+
+### minutes
+- PT: {n} min de leitura
+- EN: {n} min read
+- FR: {n} min de lecture
+
+### issue.back
+- PT: Todas as Marés
+- EN: Every issue
+- FR: Tous les numéros
+
+### issue.sub
+- PT: Receber as próximas
+- EN: Get the next ones
+- FR: Recevoir les prochains
+
+### day.tue
+- PT: terça
+- EN: Tuesday
+- FR: mardi
+
+### day.fri
+- PT: sexta
+- EN: Friday
+- FR: vendredi
+
+### block.label
+- PT: Maré
+- EN: Maré
+- FR: Maré
+
+### block
+- PT: Esta {dia}: {headline}. Receba às 8h.
+- EN: This {dia} in Maré: “{headline}”. In your inbox at 8 a.m..
+- FR: Ce {dia} dans Maré : « {headline} ». À 8 h dans votre boîte.
+
+### home.more
+- PT: Ver a última Maré
+- EN: See the latest Maré
+- FR: Voir la dernière Maré

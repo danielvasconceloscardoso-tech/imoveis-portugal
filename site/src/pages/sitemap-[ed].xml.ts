@@ -10,7 +10,7 @@ import { ARTS, ART_SUB } from "../lib/articles";
 
 export function getStaticPaths() { return ED_ORDER.map((ed) => ({ params: { ed } })); }
 
-const PAGES: PageKey[] = ["partners", "buy", "how", "privacy", "legal", "faq", "talk", "guide", "sims", "casa", "data", "map", "blog", "private", "ours", "journey", "consult", "dossiers", "articles"];
+const PAGES: PageKey[] = ["partners", "buy", "how", "privacy", "legal", "faq", "talk", "guide", "sims", "casa", "data", "map", "blog", "private", "ours", "journey", "consult", "dossiers", "articles", "mare"];
 
 export function GET({ params }: { params: { ed: EdCode } }) {
   const ed = params.ed, host = `https://${hostFor(ed)}`;

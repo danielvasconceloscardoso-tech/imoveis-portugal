@@ -58,6 +58,8 @@ The Cloudflare count is the page `/e/{ed}/{event}/`, except the three short fami
 | `heart/{home,region}/{on,off}` | `{ed}/heart/…/` | place (home) or region, origin | a heart is set or removed. Helper: `evHeart(kind, id, on, origin)` |
 | `bar/{item}` | `{ed}/bar/{item}/` | origin `bar` | a tap on the phone bottom bar. Helper: `evBar(item)`. Items: home, map, sims, concierge, saved, path, faq, search, menu, letter |
 | `letter/signup/{medium}` | `{ed}/letter/signup/{medium}/` | origin = `source/medium/campaign` (first touch in this tab), step = where | the letter signup form is submitted. Media counted: none, email, newsletter, social, paid, cpc, referral, partner, qr, other |
+| `mare/signup/{where}/{issue}` | `{ed}/mare/signup/{where}/{issue}/` | origin = `source/medium/campaign` (first touch), step = where | D83: the same Maré signup, by surface (home, mare, article, concierge, postcard, path, guide) and by the issue whose headline was on screen (the last 12 issues are counted) |
+| `mare/block/{where}/{issue}` | `{ed}/mare/block/{where}/{issue}/` | origin = where | D83: a reader arrives on the Maré page from the quiet block (`?de={where}&h={issue}`, counted on arrival) |
 
 What the site already knows is reused, so the reader is never asked twice. The Concierge opens with these answers already given, and each one stays editable:
 - the country, from the edition;

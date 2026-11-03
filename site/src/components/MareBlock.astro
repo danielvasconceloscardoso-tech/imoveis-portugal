@@ -1,0 +1,35 @@
+---
+// The quiet Maré block (D83, operator 3 Nov 2026): one line at the end of every article, the Concierge and each map
+// postcard: "Esta {dia}: {headline}. Receba às 8h.", a link to the Maré page. No pop-up, no countdown, no form here.
+// {dia} and {headline} come from the latest issue in content/mare/issues (lib/mare.ts) at build time. `where` names the
+// surface for the signal: the link carries ?de={where}&h={issue}; the Maré page counts the arrival as ev
+// "mare/block/{where}/{issue}" (a count made on the click would be lost to the navigation) and then the signup with the
+// same surface and headline (lib/track.ts evSignup). Wording: COPY_DECK.md "mare.block*".
+import { pathFor, type Lang, type EdCode } from "../i18n";
+import { c } from "../lib/copy";
+import { latestIssue, inline, dayKey } from "../lib/mare";
+
+interface Props { lang: Lang; ed: EdCode; where: "article" | "concierge" | "postcard" | "home" | "path" | "guide"; class?: string; }
+const { lang, ed, where } = Astro.props;
+const i = latestIssue();
+const href = i ? `${pathFor(lang, ed, "mare")}?de=${where}&h=${i.id}` : "";
+---
+{i && (
+  <aside class:list={["mare-b", Astro.props.class]} aria-label={c("mare.block.label", lang)}>
+    <a href={href} data-mare-block={where} data-mare-issue={i.id}>
+      <span class="mare-b-k">{c("mare.block.label", lang)}</span>
+      <span class="mare-b-t">{c("mare.block", lang, { dia: c(dayKey(i), lang), headline: lang === "pt" ? inline(i.headline) : i.headline })}</span>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+    </a>
+  </aside>
+)}
+
+<style is:global>
+  /* Quiet: a hairline, the small label, one line in the serif, an arrow. Ivory only on hover. */
+  .mare-b { margin: 40px 0 0; border-top: 1px solid var(--rule, #e4e4e1); }
+  .mare-b a { display: grid; grid-template-columns: 1fr auto; gap: 6px 16px; align-items: center; padding: 20px 4px; text-decoration: none; color: var(--ink, #111214); transition: background-color .25s ease; }
+  .mare-b a:hover, .mare-b a:focus-visible { background: #fbf9f5; }
+  .mare-b-k { grid-column: 1 / -1; font: 600 11px/1 var(--sans, system-ui, sans-serif); letter-spacing: .16em; text-transform: uppercase; color: var(--accent, #2f5d50); }
+  .mare-b-t { font: 400 19px/1.4 var(--serif, Georgia, serif); }
+  .mare-b svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+</style>

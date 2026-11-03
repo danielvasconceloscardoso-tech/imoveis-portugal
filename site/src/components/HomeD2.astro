@@ -11,6 +11,7 @@ import { PRICES, LAST } from "../lib/prices";
 import { PROJECTS, showcases, img } from "../lib/projects";
 import { SLUGS } from "../i18n";
 import Heart from "./Heart.astro";
+import { latestIssue } from "../lib/mare";
 
 interface Props { lang: Lang; ed: EdCode; }
 const { lang, ed } = Astro.props;
@@ -126,12 +127,13 @@ const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("h
     {nl ? (
       <div class="form-box"><iframe src={nl} title={c("home2.nl.h", lang)} loading="lazy" style="min-height:200px"></iframe></div>
     ) : (
-      <form class="h2-nlform" action={mail} method="post" enctype="text/plain">
+      <form class="h2-nlform" action={mail} method="post" enctype="text/plain" data-issue={latestIssue()?.id ?? ""}>
         <label class="h2-email"><span class="vh">{c("home2.nl.email", lang)}</span><input type="email" name="email" required placeholder={c("home2.nl.email", lang)} autocomplete="email" /></label>
         <button class="h2-btn h2-btn-light" type="submit">{c("home2.nl.a", lang)}</button>
         <label class="h2-consent"><input type="checkbox" required /> <span>{c("home2.nl.consent", lang)} <a href={pathFor(lang, ed, "privacy")}>{c("common.privacy", lang)}</a></span></label>
       </form>
     )}
+    {latestIssue() && <p class="h2-nlmore" style="margin-top:24px;font-size:15px"><a href={pathFor(lang, ed, "mare")}>{c("mare.home.more", lang)}</a></p>}
   </div>
 </section>
 
@@ -163,7 +165,7 @@ const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("h
     });
   }
   // Part 5: a letter signup is counted with the first-touch utm_* of this tab, never the e-mail (lib/track.ts evSignup).
-  document.querySelector<HTMLFormElement>(".h2-nlform")?.addEventListener("submit", () => evSignup("home"));
+  document.querySelector<HTMLFormElement>(".h2-nlform")?.addEventListener("submit", (e) => evSignup("home", (e.currentTarget as HTMLFormElement).dataset.issue || ""));
   // The sources open when a footnote number is followed (they are folded at the foot, prompt 43).
   const openSrc = () => { if (location.hash.startsWith("#fonte")) document.querySelector<HTMLDetailsElement>("[data-sources]")?.setAttribute("open", ""); };
   addEventListener("hashchange", openSrc); openSrc();

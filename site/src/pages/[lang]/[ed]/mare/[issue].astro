@@ -1,0 +1,13 @@
+---
+// One Maré issue (D83): /{lang}/{ed}/mare/{YYYY-MM-DD}/, the e-mail as it arrived, framed, with the archive below.
+import MarePage from "../../../../components/MarePage.astro";
+import { ED_ORDER, LANGS, type EdCode, type Lang } from "../../../../i18n";
+import { issues, type MareIssue } from "../../../../lib/mare";
+
+export function getStaticPaths() {
+  return LANGS.flatMap((lang) => ED_ORDER.flatMap((ed) => issues().map((issue) => ({ params: { lang, ed, issue: issue.id }, props: { issue } }))));
+}
+const lang = Astro.params.lang as Lang, ed = Astro.params.ed as EdCode;
+const { issue } = Astro.props as { issue: MareIssue };
+---
+<MarePage lang={lang} ed={ed} issue={issue} />
