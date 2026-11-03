@@ -8083,3 +8083,142 @@ Requests really sent (operator, 3 Nov 2026): the Concierge, the partner and view
 - PT: Ver a última Maré
 - EN: See the latest Maré
 - FR: Voir la dernière Maré
+
+## lifea
+
+D83 (operator, 3 Nov 2026): the ten lifestyle articles (content/stories/, site/src/components/StoryPage.astro) and their "Para ir" block (components/ParaIr.astro). The article text lives in its own Markdown file; here only the frame around it. The presenting partner of "Para ir" is set in site/src/config.ts (paraIr); empty, the block shows no partner. EN and FR are plain translations for the deck parser: the articles are in Portuguese only.
+
+### mins
+- PT: {n} min de leitura
+- EN: {n} min read
+- FR: {n} min de lecture
+
+### go.h
+- PT: Para ir
+- EN: Getting there
+- FR: Pour y aller
+
+### go.with
+- PT: Para ir, com {partner}
+- EN: Getting there, with {partner}
+- FR: Pour y aller, avec {partner}
+
+### go.where
+- PT: Onde
+- EN: Where
+- FR: Où
+
+### go.when
+- PT: Quando
+- EN: When
+- FR: Quand
+
+### go.fly
+- PT: Voo
+- EN: Flight
+- FR: Vol
+
+### go.flight
+- PT: De {city}, voo direto para {to}: {time} ({flight}).
+- EN: From {city}, direct flight to {to}: {time} ({flight}).
+- FR: De {city}, vol direct vers {to} : {time} ({flight}).
+
+### go.via
+- PT: De {city}, o voo direto vai para Lisboa: {time} ({flight}).
+- EN: From {city}, the direct flight goes to Lisbon: {time} ({flight}).
+- FR: De {city}, le vol direct va à Lisbonne : {time} ({flight}).
+
+### go.sched
+- PT: Horário de inverno publicado; os horários mudam com a estação.
+- EN: Published winter schedule; times change with the season.
+- FR: Horaires d'hiver publiés ; ils changent avec la saison.
+
+### city.lux
+- PT: Luxemburgo
+- EN: Luxembourg
+- FR: Luxembourg
+
+### city.par
+- PT: Paris
+- EN: Paris
+- FR: Paris
+
+### city.gva
+- PT: Genebra
+- EN: Geneva
+- FR: Genève
+
+### city.zrh
+- PT: Zurique
+- EN: Zurich
+- FR: Zurich
+
+### city.sao
+- PT: São Paulo
+- EN: São Paulo
+- FR: São Paulo
+
+### city.nyc
+- PT: Nova Iorque
+- EN: New York
+- FR: New York
+
+### city.tlv
+- PT: Telavive
+- EN: Tel Aviv
+- FR: Tel Aviv
+
+### to.opo
+- PT: o Porto
+- EN: Porto
+- FR: Porto
+
+### to.lis
+- PT: Lisboa
+- EN: Lisbon
+- FR: Lisbonne
+
+### to.fao
+- PT: Faro
+- EN: Faro
+- FR: Faro
+
+### tile
+- PT: {place} no mapa, com as casas da zona
+- EN: {place} on the map, with the homes nearby
+- FR: {place} sur la carte, avec les logements autour
+
+### tile.alt
+- PT: Mapa de {place} e dos concelhos à volta
+- EN: Map of {place} and the municipalities around it
+- FR: Carte de {place} et des communes autour
+
+### sponsored
+- PT: Conteúdo patrocinado por {partner}. As opiniões e recomendações são da responsabilidade do parceiro.
+- EN: Sponsored by {partner}. Views and recommendations are the partner's own.
+- FR: Contenu sponsorisé par {partner}. Les avis et recommandations relèvent de la responsabilité du partenaire.
+
+### all
+- PT: Todos os artigos
+- EN: All articles
+- FR: Tous les articles
+
+### hub.h
+- PT: Para ler em dois minutos
+- EN: Two-minute reads
+- FR: À lire en deux minutes
+
+### guides.h
+- PT: Guias práticos
+- EN: Practical guides
+- FR: Guides pratiques
+
+### guides.p
+- PT: O NIF, os impostos, o crédito e o método por trás dos números, com as fontes oficiais.
+- EN: The NIF, taxes, mortgages and the method behind the figures, with the official sources.
+- FR: Le NIF, les impôts, le crédit et la méthode derrière les chiffres, avec les sources officielles.
+
+### hub.lede
+- PT: Portugal em leituras de dois minutos, com a fonte de cada facto. Os guias práticos vêm a seguir.
+- EN: Portugal in two-minute reads, with the source of every fact. The practical guides follow.
+- FR: Le Portugal en lectures de deux minutes, avec la source de chaque fait. Les guides pratiques suivent.

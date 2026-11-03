@@ -38,6 +38,10 @@ export const config = {
 
   // The residence, tax and inheritance page (prompt 18, D33; D52: no "Private" label, reached through the path and map).
   privateLive: true,
+  // D83 (3 Nov 2026): the presenting partner of the articles' "Para ir" block, e.g. an airline once one signs
+  // ("Para ir, com {name}"). Empty = the block shows no partner and no label. When set, the block carries the
+  // sponsored label (EDITORIAL_POLICY.md) and, if given, one link to the partner's site.
+  paraIr: { partner: "", url: "" },
   // Wealth Partners as they sign (name and licence, e.g. Banco de Portugal or CMVM registration). Public data only.
   privatePartners: [] as { name: string; licence: string }[],
   // Founding partners as they sign (prompt 18, "Our partners" page): category, name, licence. Public data only.

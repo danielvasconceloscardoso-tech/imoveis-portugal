@@ -177,6 +177,39 @@ for (const file of blogFiles) {
   if (fm.faq && (!Array.isArray(fm.faq) || fm.faq.length !== 3 || fm.faq.some((x) => !x.q || !x.a))) err(file, "faq must list exactly three items with q and a");
   for (const x of fm.faq || []) checkText(file, "faq", `${x.q} ${x.a}`);
 }
+// D83 lifestyle articles (content/stories/{id}.pt.md, site/src/lib/stories.ts): Portuguese only, a two-minute read of
+// 350 to 450 words (fact markers and link targets not counted), every fact a [[fact-id]] that exists in facts.csv (at
+// least five markers from two sources), a statement headline (no question, no exclamation), "Para ir" and the Concierge line in the front
+// matter, the Concierge words in [brackets], the banned wording of every other piece. The page adds the disclaimer.
+const storyDir = join(root, "content/stories");
+let stories = 0;
+const readingWords = (b) => b.replace(/\[\[[a-z0-9-]+\]\]/g, "").replace(/\]\([^)]*\)/g, "]").replace(/^#+\s*/gm, "").replace(/[*_[\]]/g, "")
+  .split(/\s+/).filter((w) => /[\p{L}\p{N}]/u.test(w)).length;
+for (const f of existsSync(storyDir) ? readdirSync(storyDir).filter((x) => x.endsWith(".md")) : []) {
+  const file = join(storyDir, f), m = readFileSync(file, "utf8").match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+  stories++;
+  if (!m) { err(file, "front matter missing"); continue; }
+  if (!/\.pt\.md$/.test(f)) err(file, "lifestyle articles are in Portuguese only ({id}.pt.md)");
+  const fm = yaml.load(m[1]) || {}, body = m[2];
+  for (const k of ["id", "lang", "slug", "title", "description", "published", "updated", "order", "place", "photo", "airport", "go", "concierge", "sources"]) if (fm[k] === undefined) err(file, `front matter "${k}" missing`);
+  if (fm.lang !== "pt") err(file, `lang must be pt (is ${fm.lang})`);
+  if (!["OPO", "LIS", "FAO"].includes(fm.airport)) err(file, `airport must be OPO, LIS or FAO`);
+  if (fm.title && (/[?!]/.test(fm.title) || fm.title.length > 80)) err(file, "headline: a statement of at most 80 characters, no question or exclamation mark");
+  if (fm.description && (fm.description.length < 80 || fm.description.length > 160)) err(file, `description has ${fm.description.length} characters (80 to 160)`);
+  if (!fm.photo?.src || !fm.photo?.alt || !fm.photo?.caption) err(file, "photo needs src, alt and caption");
+  if (!fm.go?.where || !fm.go?.when) err(file, '"go" needs where and when');
+  if (fm.concierge && !/\[[^\]]+\]/.test(fm.concierge)) err(file, "concierge line needs the linked words in [brackets]");
+  const n = readingWords(body);
+  if (n < 350 || n > 450) err(file, `body has ${n} words (350 to 450, a two-minute read)`);
+  const cited = [...body.matchAll(/\[\[([a-z0-9-]+)\]\]/g), ...JSON.stringify(fm.go || {}).matchAll(/\[\[([a-z0-9-]+)\]\]/g)].map((x) => x[1]);
+  if (new Set(cited).size < 2 || cited.length < 5) err(file, `${cited.length} fact markers from ${new Set(cited).size} sources (at least 5 markers, 2 sources)`);
+  for (const id of [...cited, ...(fm.sources || [])]) if (!factIds.has(id)) err(file, `unknown fact id ${id}`);
+  for (const id of new Set(cited)) if (!(fm.sources || []).includes(id)) err(file, `fact ${id} cited but not in sources`);
+  if (/[!]/.test(body) || /\?/.test(body.replace(/\]\([^)]*\)/g, "]"))) err(file, "no exclamation marks or questions in the body (VOICE_AND_WORLD.md)");
+  if (/^# /m.test(body)) err(file, "use ## headings; the page supplies the H1");
+  for (const [label, text] of [["title", fm.title || ""], ["description", fm.description || ""], ["body", body], ["go", `${fm.go?.where || ""} ${fm.go?.when || ""}`], ["concierge", fm.concierge || ""], ["caption", `${fm.photo?.caption || ""} ${fm.photo?.alt || ""}`]]) checkText(file, label, text);
+  for (const re of [/\bhidden gem\b/i, /joia escondida/i, /\bdeslumbrante/i, /\bencantador/i, /\bvibrante/i, /\bic[óo]nic[oa]/i, /\bluxo\b/i, /\bluxuos/i, /\bexclusiv/i, /\bparaíso/i]) if (re.test(`${fm.title} ${fm.description} ${body}`)) err(file, `marketing word ${re} (VOICE_AND_WORLD.md)`);
+}
 // Design v2 copy (prompt 32, D59): the "home2" blocks of the copy deck, in PT, EN and FR. Banned words and shapes,
 // sentences of at most 25 words, blocks of at most 45, headlines of at most 8 words that are statements without a
 // colon. "Percurso" and "parcours" stay allowed: they are the navigation's names for the path (D52).
@@ -223,7 +256,7 @@ const V2_SHAPES = [/whether you'?re/i, /^from .+ to /i, /\bimagine\b/i, /\bimagi
     }
   }
 }
-console.log(`checked ${faqs} FAQ files, ${pieces} inbox pieces and ${posts} blog articles and pillar pages against ${factIds.size} facts`);
+console.log(`checked ${faqs} FAQ files, ${pieces} inbox pieces, ${posts} blog articles and pillar pages and ${stories} lifestyle articles against ${factIds.size} facts`);
 if (errors.length) {
   console.log(errors.map((e) => `ERROR ${e}`).join("\n"));
   process.exit(1);

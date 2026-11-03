@@ -1,0 +1,70 @@
+/* The lifestyle articles (D83, components/StoryPage.astro): one photograph, a large light headline, a short read in a
+   narrow column, "Para ir" as a quiet list with a map tile, the Concierge line in the article's own voice. Phone first. */
+.st { padding-bottom: 24px; }
+.st .st-head { max-width: 860px; padding-top: 40px; padding-bottom: 24px; }
+.st-k { margin: 0 0 16px; font: 600 12px/1.4 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.st-k a { color: inherit; text-decoration: none; }
+.st-k a:hover { color: var(--accent); }
+.st h1 { font-size: clamp(32px, 4.6vw, 52px); line-height: 1.08; margin: 0 0 16px; max-width: 16em; text-wrap: balance; }
+.st-meta { margin: 0; font-size: 15px; color: var(--muted); }
+.st-spons { margin: 12px 0 0; font-size: 13px; color: var(--muted); border-left: 2px solid var(--rule); padding-left: 12px; }
+.st-fig { margin: 0 auto 32px; max-width: 1024px; }
+.st-fig img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; background: var(--band, #f4f4f2); }
+.st-fig figcaption { padding-top: 8px; font-size: 13px; color: var(--muted); }
+.st-body { font-size: 18px; line-height: 1.7; }
+.st-body p { margin: 0 0 20px; }
+.st-body h2 { font-size: 24px; line-height: 1.25; margin: 36px 0 12px; }
+.st-body > p:first-child { font-size: 20px; line-height: 1.6; }
+.st a.st-pl { color: inherit; text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent); text-underline-offset: 3px; text-decoration-thickness: 1px; transition: text-decoration-color .25s ease, color .25s ease; }
+.st a.st-pl:hover, .st a.st-pl:focus-visible { color: var(--accent); text-decoration-color: currentColor; }
+
+/* Para ir */
+.st-go { margin: 40px 0 0; padding: 28px 0 8px; border-top: 1px solid var(--rule); }
+.st-go-h { font-size: 26px; margin: 0 0 16px; }
+.st-go-l { margin: 0 0 24px; display: grid; gap: 0; }
+.st-go-l > div { display: grid; grid-template-columns: 88px 1fr; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--rule); }
+.st-go-l dt { font: 600 12px/1.9 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.st-go-l dd { margin: 0; font-size: 16px; line-height: 1.55; }
+.st-go-n { display: block; font-size: 13px; color: var(--muted); margin-top: 4px; }
+.st-tile { display: grid; grid-template-columns: 150px 1fr; align-items: center; gap: 16px; text-decoration: none; color: var(--ink); padding: 8px 0 4px; }
+.st-tile svg { display: block; width: 150px; height: 100px; border-radius: 6px; border: 1px solid var(--rule); background: #f7f5ef; transition: transform .25s ease, box-shadow .25s ease; }
+.st-tile .sea { fill: #f7f5ef; }
+.st-tile .land { fill: #ebe7dc; stroke: #fff; stroke-width: 1; }
+.st-tile .here { fill: var(--accent); fill-opacity: .82; stroke: #fff; stroke-width: 1.2; }
+.st-tile .dev { fill: #fff; stroke: var(--ink); stroke-width: 1.5; }
+.st-tile-t { font: 500 15px/1.4 var(--sans); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.st-tile:hover svg, .st-tile:focus-visible svg { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(17, 18, 20, .08); }
+
+/* The Concierge handover: a sentence, never a banner. */
+.st-cg { margin: 32px 0 40px; font: 400 21px/1.5 var(--serif); }
+.st-cg a { color: var(--accent); text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+.st-src { margin-top: 8px; }
+.st-all { margin: 8px 0 56px; }
+
+/* The articles hub (components/ArticlesPage.astro, Portuguese): the ten reads lead, the guides follow quietly. */
+.st-hub { display: grid; gap: 28px; grid-template-columns: 1fr; margin: 8px 0 48px; padding: 0; list-style: none; }
+.st-card { display: grid; gap: 12px; text-decoration: none; color: var(--ink); }
+.st-card img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 4px; background: #f4f4f2; transition: transform .3s ease; }
+.st-card h2 { font-size: 22px; line-height: 1.25; margin: 0; }
+.st-card p { margin: 0; font-size: 15px; color: var(--muted); }
+.st-card:hover h2 { color: var(--accent); }
+.st-card:hover img { transform: scale(1.01); }
+body.d2 .st-hub-h, .st-hub-h { font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); font-family: var(--sans); font-weight: 600; margin: 24px 0 16px; }
+.st-guides { border-top: 1px solid var(--rule); padding-top: 24px; }
+.st-guides .lede { margin-top: 0; }
+@media (min-width: 720px) {
+  .st .st-head { padding-top: 64px; }
+  .st-hub { grid-template-columns: 1fr 1fr; gap: 40px 32px; }
+  .st-tile { grid-template-columns: 240px 1fr; }
+  .st-tile svg { width: 240px; height: 160px; }
+}
+@media (min-width: 1100px) { .st-hub { grid-template-columns: 1fr 1fr 1fr; } }
+@media (max-width: 719px) {
+  .st-fig { margin-bottom: 24px; }
+  .st-fig figcaption { padding-left: 20px; padding-right: 20px; }
+  .st-go-l > div { grid-template-columns: 72px 1fr; gap: 12px; }
+}
+@media (prefers-reduced-motion: reduce) { .st-tile svg, .st-card img { transition: none; } }
+
+.st-hub-ph, .st-hub-w { max-width: 1120px; }
+.st-guides > * { max-width: 680px; }

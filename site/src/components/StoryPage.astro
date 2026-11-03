@@ -1,0 +1,95 @@
+---
+// One lifestyle article (D83): the photograph, the headline (a fact with an angle), a two-minute read with its places
+// linked to the map, "Para ir" with the flight from the reader's edition and a small map tile, then the Concierge
+// handover in the article's own voice. Sources numbered at the bottom, the disclaimer last (EDITORIAL_POLICY.md).
+// The Maré letter block is added by another part of the D83 work in the "mare" slot below; nothing renders there today.
+// Events (lib/track.ts ev, lib/events.ts): {ed}/art/{id}/open, /place (place = the municipality), /tile, /concierge.
+import V2 from "../layouts/V2.astro";
+import ParaIr from "./ParaIr.astro";
+import MareBlock from "./MareBlock.astro";
+import MapTile from "./MapTile.astro";
+import "../styles/story.css";
+import { HTML_LANG, LANGS, pathFor, type Lang, type EdCode } from "../i18n";
+import { DISCLAIMER, fmtDate } from "../lib/content";
+import { renderStory, photoSet, muniName, routeFor, type Story } from "../lib/stories";
+import { hostFor } from "../lib/host";
+import { CANONICAL_ED } from "../lib/blog";
+import { c } from "../lib/copy";
+
+interface Props { lang: Lang; ed: EdCode; story: Story; }
+const { lang, ed, story } = Astro.props;
+const hub = pathFor(lang, ed, "articles");
+const { html, sources } = renderStory(story, ed);
+// The flight's source is numbered here, before the list renders (components/ParaIr.astro reads the same number).
+sources.n(routeFor(ed, story.airport).route.fact);
+const inline = (t: string) => t.replace(/\[\[([a-z0-9-]+)\]\]/g, (_, id) => `<a class="sup" href="#fonte-${sources.n(id)}">${sources.n(id)}</a>`)
+  .replace(/&(?!#?\w+;)/g, "&amp;");
+const where = inline(story.go.where), when = inline(story.go.when);
+const name = muniName(story.place);
+const consult = `${pathFor(lang, ed, "consult")}?place=${encodeURIComponent(name)}`;
+// The handover line: the words in [brackets] are the link.
+const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+const handover = esc(story.concierge).replace(/\[([^\]]+)\]/, (_, t) => `<a href="${consult}" data-concierge data-story-cg>${t}</a>`);
+const photo = photoSet(story.photo.src);
+const minutes = Math.max(1, Math.round(story.words / 200));
+// Portuguese only: the language switch leads to the articles hub in English and French.
+const paths = Object.fromEntries(LANGS.map((l) => [l, l === lang ? `${hub}${story.slug}/` : pathFor(l, ed, "articles")])) as Record<Lang, string>;
+const canonical = `https://${hostFor(CANONICAL_ED[lang])}${pathFor(lang, CANONICAL_ED[lang], "articles")}${story.slug}/`;
+const ld = { "@context": "https://schema.org", "@type": "Article", headline: story.title, description: story.description, inLanguage: HTML_LANG[lang],
+  datePublished: story.published, dateModified: story.updated, image: `https://${hostFor(ed)}${photo.fallback}`,
+  author: { "@type": "Organization", name: "Imóveis Portugal" }, publisher: { "@type": "Organization", name: "Imóveis Portugal" } };
+---
+<V2 lang={lang} ed={ed} page="articles" title={`${story.title} | Imóveis Portugal`} description={story.description} sticky={null} paths={paths}
+  ogType="article" ogImage={`https://${hostFor(ed)}${photo.fallback}`} canonicalUrl={canonical} next={false}>
+  <Fragment slot="head"><script type="application/ld+json" set:html={JSON.stringify(ld)} /></Fragment>
+  <article class="st" data-story={story.id}>
+    <header class="frame st-head">
+      <p class="st-k"><a href={hub}>{c("art.title", lang)}</a> · <a class="st-pl" href={`${pathFor(lang, ed, "map")}?place=${story.place}`} data-place={story.place}>{name}</a></p>
+      <h1>{story.title}</h1>
+      <p class="st-meta">{c("lifea.mins", lang, { n: minutes })} · {fmtDate(lang, story.updated)}</p>
+      {story.sponsored && <p class="st-spons">{c("lifea.sponsored", lang, { partner: story.sponsored })}</p>}
+    </header>
+    <figure class="st-fig">
+      <picture>
+        {photo.avif && <source type="image/avif" srcset={photo.avif} sizes="(min-width: 1100px) 1040px, 100vw" />}
+        <source type="image/webp" srcset={photo.webp} sizes="(min-width: 1100px) 1040px, 100vw" />
+        <img src={photo.fallback} alt={story.photo.alt} width="1600" height="1000" fetchpriority="high" decoding="async" />
+      </picture>
+      <figcaption class="frame">{story.photo.caption}</figcaption>
+    </figure>
+    <div class="frame read st-body" set:html={html} />
+
+    <div class="frame read">
+      <ParaIr lang={lang} ed={ed} where={where} when={when} airport={story.airport} sources={sources}>
+        <MapTile lang={lang} ed={ed} place={story.place} name={name} story={story.id} />
+      </ParaIr>
+      <p class="st-cg" set:html={handover} />
+      {/* Maré: the letter block goes here (another D83 helper). Keep it after the Concierge line, before the sources. */}
+      <slot name="mare"><MareBlock lang={lang} ed={ed} where="article" /></slot>
+      <section class="sources-list st-src" aria-labelledby="fontes">
+        <h2 id="fontes" class="h-small">{c("common.sources", lang)}</h2>
+        <ol>{sources.list.map((s, i) => <li id={`fonte-${i + 1}`}><a href={s.url} rel="noopener">{s.title}</a>{s.checked && `, ${c("common.checked", lang, { date: fmtDate(lang, s.checked) })}`}.</li>)}</ol>
+      </section>
+      <p class="small disclaimer">{DISCLAIMER[lang]}</p>
+      <p class="st-all"><a class="more" href={hub}>{c("lifea.all", lang)}</a></p>
+    </div>
+  </article>
+</V2>
+
+<script>
+  import { ev } from "../lib/track";
+  // Part of the one event schema (lib/track.ts): the article opened, a place followed to the map, the map tile,
+  // the Concierge handover. The place is a municipality slug; nothing else about the reader.
+  const root = document.querySelector<HTMLElement>("article.st[data-story]");
+  const id = root?.dataset.story;
+  if (root && id) {
+    ev({ event: `art/${id}/open`, origin: "art" });
+    root.addEventListener("click", (e) => {
+      const a = (e.target as HTMLElement).closest?.("a") as HTMLAnchorElement | null;
+      if (!a) return;
+      if (a.dataset.place) ev({ event: `art/${id}/place`, place: a.dataset.place, origin: "art" });
+      else if (a.dataset.tile) ev({ event: `art/${id}/tile`, place: a.dataset.tile, origin: "art" });
+      else if (a.hasAttribute("data-story-cg")) ev({ event: `art/${id}/concierge`, origin: "art" });
+    }, true);
+  }
+</script>
