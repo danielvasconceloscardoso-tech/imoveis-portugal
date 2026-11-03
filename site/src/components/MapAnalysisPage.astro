@@ -8,6 +8,7 @@
 // (typology and new versus existing per place, written by scripts/map-data/tiles.py when the gathered folder has them).
 // Sections without figures say "Em breve". Wording: COPY_DECK.md "map4.a.*".
 import V2 from "../layouts/V2.astro";
+import AnalysisExtra from "./AnalysisExtra.astro";  // fix step 3: the figure sets the free pages no longer show
 import { HTML_LANG, type Lang, type EdCode } from "../i18n";
 import { c, edName } from "../lib/copy";
 import { PRICES, LAST } from "../lib/prices";
@@ -71,6 +72,7 @@ const TYP = ["T0–T1", "T2", "T3", "T4+"];
 
     <h2>{k4("a.g10")}</h2>
     <figure class="pc-chart" set:html={chart} />
+    <AnalysisExtra lang={lang} akey={akey} />
 
     <h2>{k4("a.foreign")}</h2>
     {foreign.length ? (

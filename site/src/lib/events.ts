@@ -22,6 +22,9 @@ export const MAP_CARDS = ["muni", "parish", "region", "project", "golf"];
 export const MAP_TILES = ["price", "life", "care", "compare"];
 export const MAP_PAID = ["rent", "g10y", "foreign", "supply", "compare"];
 export const OVERLAYS = ["golf", "beach", "devs"];
+/** Fix step 3 (3 Nov): "Ver a análise completa" on the free pages turned into previews of the paid analysis
+ * (components/AnalysisPreview.astro): ev "paid/preview/{id}" when the unlock sheet opens. */
+export const PREVIEWS = ["prices-page", "art-prices", "art-map", "art-golf"];
 /** The developer page's share: the phone's share sheet, or the link copied. */
 export const SHARE = ["native", "copy"];
 
@@ -50,6 +53,7 @@ export function editionEvents(): string[] {
   for (const r of ["1a", "5a", "10a"]) out.push(`map/chart/${r}`);
   for (const t of MAP_PAID) out.push(`map/paid/preview/${t}`);
   out.push("map/compare/open", "map/compare/pair", "map/panel/open");
+  for (const p of PREVIEWS) out.push(`paid/preview/${p}`);
   for (const s of [...new Set(STATIONS.map((x) => x.k))]) for (const k of ["open", "done"]) out.push(`path/${s}/${k}`);
   for (const k of ["home", "region"]) for (const s of ["on", "off"]) out.push(`heart/${k}/${s}`);
   for (const b of BAR_ITEMS) out.push(`bar/${b}`);

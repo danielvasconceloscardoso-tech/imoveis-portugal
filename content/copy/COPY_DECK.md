@@ -4232,9 +4232,9 @@ How to edit:
 - FR: Dix ans de prix, commune par commune
 
 ### lede
-- PT: O preço mediano do metro quadrado vendido em cada concelho desde 2016, as rendas dos novos contratos e o rendimento bruto, com a fonte oficial.
-- EN: The median price per square metre sold in each municipality since 2016, rents on new leases and gross yield, with the official source.
-- FR: Le prix médian du mètre carré vendu dans chaque commune depuis 2016, les loyers des nouveaux baux et le rendement brut, avec la source officielle.
+- PT: Na análise completa: o preço mediano do m² vendido em cada concelho desde 2016, trimestre a trimestre, as rendas dos novos contratos e o rendimento bruto, com a fonte oficial.
+- EN: In the full analysis: the median price per square metre sold in each municipality since 2016, quarter by quarter, rents on new leases and gross yield, with the official source.
+- FR: Dans l'analyse complète : le prix médian du mètre carré vendu dans chaque commune depuis 2016, trimestre par trimestre, les loyers des nouveaux baux et le rendement brut, avec la source officielle.
 
 ### national
 - PT: Portugal: de {from} por m² em 2016 para {to} em 2026.
@@ -6768,9 +6768,9 @@ Prompt 37 §2 and prompt 43 §3: the Artigos hub and its four articles, built by
 - FR: Prix au m² par commune au Portugal, lire la carte
 
 ### map.p
-- PT: O preço por m² por concelho em Portugal: como ler o mapa, o que é a mediana e a lista dos 308 concelhos.
-- EN: Portugal price per m² by municipality, explained. What the map's height and colour show, what a median is, and the list of all 308 municipalities.
-- FR: Le prix au m² par commune au Portugal, expliqué. Ce que montrent la hauteur et la couleur de la carte, ce qu'est une médiane, et les 308 communes.
+- PT: O preço por m² de cada concelho está no mapa. Na análise completa: os 308 concelhos lado a lado, com a variação a cinco e a dez anos, as rendas e o rendimento bruto.
+- EN: Each municipality's price per m² is on the map. The full analysis puts all 308 side by side, with the change over five and ten years, rents and gross yield.
+- FR: Le prix au m² de chaque commune est sur la carte. L'analyse complète met les 308 communes côte à côte, avec l'évolution sur cinq et dix ans, les loyers et le rendement brut.
 
 ### map.link
 - PT: Como ler o mapa →
@@ -6908,9 +6908,9 @@ Prompt 37 §2 and prompt 43 §3: the Artigos hub and its four articles, built by
 - FR: Évolution des prix immobiliers au Portugal sur dix ans
 
 ### prices.p
-- PT: A evolução do preço das casas em Portugal de 2016 a 2026, no país, em Lisboa e no Porto: medianas por m² de vendas reais, do INE.
-- EN: Portugal house prices over ten years, 2016 to 2026, for the country, Lisbon and Porto. Median price per m² of real sales, in official INE figures.
-- FR: L'évolution des prix immobiliers au Portugal de 2016 à 2026, pour le pays, Lisbonne et Porto. Prix médian au m² des ventes réelles, chiffres de l'INE.
+- PT: Dez anos de preços das casas em Portugal na análise completa: a mediana por m² de vendas reais, trimestre a trimestre desde 2016, no país, em cada região e em cada concelho, com Lisboa e o Porto lado a lado.
+- EN: Ten years of Portugal house prices in the full analysis: the median price per m² of real sales, quarter by quarter since 2016, for the country, each region and each municipality, with Lisbon and Porto side by side.
+- FR: Dix ans de prix immobiliers au Portugal dans l'analyse complète : le prix médian au m² des ventes réelles, trimestre par trimestre depuis 2016, pour le pays, chaque région et chaque commune, avec Lisbonne et Porto côte à côte.
 
 ### prices.link
 - PT: Dez anos de preços →
@@ -7023,9 +7023,9 @@ Prompt 37 §2 and prompt 43 §3: the Artigos hub and its four articles, built by
 - FR: Prix immobilier près des golfs au Portugal
 
 ### golf.p
-- PT: O preço das casas junto ao golfe em Portugal: a mediana de cada freguesia com campo ao lado da do concelho, sem atribuir a diferença ao golfe.
-- EN: Golf property prices in Portugal: each golf parish's median price per m² next to its municipality's. A comparison, not a cause.
-- FR: Prix immobilier près des golfs au Portugal : la médiane de chaque paroisse avec golf, à côté de celle de sa commune. Une comparaison, pas une cause.
+- PT: O preço das casas junto ao golfe em Portugal, na análise completa: a mediana de cada freguesia com campo ao lado da do concelho, e o rácio entre as duas, sem atribuir a diferença ao golfe.
+- EN: Golf property prices in Portugal, in the full analysis: each golf parish's median price per m² next to its municipality's, and the ratio between them. A comparison, not a cause.
+- FR: Prix immobilier près des golfs au Portugal, dans l'analyse complète : la médiane de chaque paroisse avec golf à côté de celle de sa commune, et le rapport entre les deux. Une comparaison, pas une cause.
 
 ### golf.label
 - PT: Mediana da freguesia vs mediana do concelho, 2.º trimestre de 2026
@@ -8966,3 +8966,117 @@ D83 part 2 (3 Nov 2026): the map in three depths. First glance: photographs and 
 - PT: Usados (INE)
 - EN: Existing (INE)
 - FR: Ancien (INE)
+
+## fix35
+
+Operator's fix round, 3 Nov 2026, steps 3 and 5. Step 3: the prices page and three data articles become previews of the map's paid analysis (title, the finding in one sentence, the shape of the chart without figures, "Ver a análise completa"); the figures they used to give free are in the analysis (components/MapAnalysisPage.astro, components/AnalysisExtra.astro). Step 5: Maré said to be a newsletter wherever it is named (the sentence itself is mare.line, the short form common.newsletter).
+
+### prev.cta
+- PT: Ver a análise completa
+- EN: See the full analysis
+- FR: Voir l'analyse complète
+
+### prev.shape
+- PT: A forma do gráfico, sem os valores. Os números estão na análise completa.
+- EN: The shape of the chart, without the values. The figures are in the full analysis.
+- FR: La forme du graphique, sans les valeurs. Les chiffres sont dans l'analyse complète.
+
+### prev.region
+- PT: Uma região, no mapa · {v} €
+- EN: One region, on the map · €{v}
+- FR: Une région, sur la carte · {v} €
+
+### prev.data.f
+- PT: Em dez anos, o preço do m² subiu em quase todos os concelhos, e a rentabilidade bruta é mais alta onde o m² é mais barato.{sHist}{sRent}
+- EN: Over ten years the price per m² rose in almost every municipality, and gross yield is highest where the square metre is cheapest.{sHist}{sRent}
+- FR: En dix ans, le prix au m² a augmenté dans presque toutes les communes, et le rendement brut est le plus élevé là où le m² est le moins cher.{sHist}{sRent}
+
+### prev.data.y
+- PT: Rentabilidade bruta por concelho
+- EN: Gross yield by municipality
+- FR: Rendement brut par commune
+
+### prev.data.lo
+- PT: m² mais barato
+- EN: Cheapest m²
+- FR: m² le moins cher
+
+### prev.data.hi
+- PT: m² mais caro
+- EN: Dearest m²
+- FR: m² le plus cher
+
+### prev.prices.f
+- PT: Em dez anos, o preço mediano do m² em Portugal subiu em todos os trimestres, e o Porto subiu mais depressa do que Lisboa e do que o país.{sHist}
+- EN: Over ten years, Portugal's median price per m² rose in every quarter, and Porto rose faster than Lisbon and the country as a whole.{sHist}
+- FR: En dix ans, le prix médian au m² au Portugal a augmenté à chaque trimestre, et Porto plus vite que Lisbonne et que l'ensemble du pays.{sHist}
+
+### prev.prices.y
+- PT: Preço por m², com o mesmo ponto de partida
+- EN: Price per m², from the same starting point
+- FR: Prix au m², depuis le même point de départ
+
+### prev.prices.lo
+- PT: Há dez anos
+- EN: Ten years ago
+- FR: Il y a dix ans
+
+### prev.prices.hi
+- PT: Hoje
+- EN: Today
+- FR: Aujourd'hui
+
+### prev.prices.rest
+- PT: Lisboa e Portugal
+- EN: Lisbon and Portugal
+- FR: Lisbonne et le Portugal
+
+### prev.map.f
+- PT: O m² mais caro está em Lisboa, Cascais e Oeiras, e o mais barato no interior do Norte e do Centro, onde o mesmo orçamento compra muitas vezes mais espaço.{sNow}
+- EN: The dearest square metre is in Lisbon, Cascais and Oeiras, the cheapest in the inland North and Centre, where the same budget buys many times the space.{sNow}
+- FR: Le m² le plus cher se trouve à Lisbonne, Cascais et Oeiras, le moins cher dans l'intérieur du Nord et du Centre, où le même budget achète bien plus d'espace.{sNow}
+
+### prev.map.y
+- PT: Preço por m², concelho a concelho
+- EN: Price per m², municipality by municipality
+- FR: Prix au m², commune par commune
+
+### prev.map.lo
+- PT: Mais caro
+- EN: Dearest
+- FR: Le plus cher
+
+### prev.map.hi
+- PT: Mais barato
+- EN: Cheapest
+- FR: Le moins cher
+
+### prev.golf.f
+- PT: Na maioria das freguesias com campo de golfe, o preço por m² fica perto do preço do concelho; Almancil e Canidelo são as exceções, bem acima.{sNow}{sGolf}
+- EN: In most parishes with a golf course, the price per m² sits close to the municipality's; Almancil and Canidelo are the exceptions, well above it.{sNow}{sGolf}
+- FR: Dans la plupart des paroisses avec un golf, le prix au m² reste proche de celui de la commune ; Almancil et Canidelo font exception, nettement au-dessus.{sNow}{sGolf}
+
+### prev.golf.y
+- PT: Freguesias com campo de golfe, face ao concelho
+- EN: Parishes with a golf course, against their municipality
+- FR: Paroisses avec un golf, face à leur commune
+
+### prev.golf.lo
+- PT: Acima do concelho
+- EN: Above the municipality
+- FR: Au-dessus de la commune
+
+### prev.golf.hi
+- PT: Abaixo do concelho
+- EN: Below the municipality
+- FR: En dessous de la commune
+
+### an.ten
+- PT: Dez anos, concelho a concelho
+- EN: Ten years, municipality by municipality
+- FR: Dix ans, commune par commune
+
+### an.golf
+- PT: Golfe: a freguesia face ao concelho
+- EN: Golf: the parish against its municipality
+- FR: Golf : la paroisse face à sa commune
