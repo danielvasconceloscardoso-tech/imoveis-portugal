@@ -7378,3 +7378,182 @@ Prompt 37 §2 and prompt 43 §3: the Artigos hub and its four articles, built by
 - PT: Medimos a audiência sem cookies
 - EN: We measure our audience without cookies
 - FR: Nous mesurons l'audience sans cookies
+
+## bar
+
+Part 2 of 3 Nov 2026 (the journey): the five-item bar at the bottom of the phone (the same five in the desktop header), the hearts and "A sua seleção" (the homes and regions a reader saves on their own device), the closing next step of every page, "Voltar", the homes on the edition home page and the developers' way to an example showcase.
+
+### label
+- PT: Atalhos
+- EN: Shortcuts
+- FR: Raccourcis
+
+### nav.map
+- PT: Mapa
+- EN: Map
+- FR: Carte
+
+### nav.sims
+- PT: Simuladores
+- EN: Calculators
+- FR: Simulateurs
+
+### nav.concierge
+- PT: Concierge
+- EN: Concierge
+- FR: Concierge
+
+### nav.path
+- PT: Passo a passo
+- EN: Step by step
+- FR: Pas à pas
+
+### nav.faq
+- PT: Perguntas
+- EN: Questions
+- FR: Questions
+
+### saved
+- PT: A sua seleção
+- EN: Your selection
+- FR: Votre sélection
+
+### heart.add
+- PT: Guardar na sua seleção
+- EN: Save to your selection
+- FR: Garder dans votre sélection
+
+### heart.saved
+- PT: Guardado na sua seleção
+- EN: Saved to your selection
+- FR: Gardé dans votre sélection
+
+### heart.removed
+- PT: Retirado da sua seleção
+- EN: Removed from your selection
+- FR: Retiré de votre sélection
+
+### page.title
+- PT: A sua seleção
+- EN: Your selection
+- FR: Votre sélection
+
+### page.lede
+- PT: As casas e as zonas que guardou. Ficam neste aparelho, só para si, e não as enviamos a ninguém.
+- EN: The homes and areas you saved. They stay on this device, for you alone, and we send them to no one.
+- FR: Les logements et les zones que vous avez gardés. Ils restent sur cet appareil, pour vous seul, et nous ne les envoyons à personne.
+
+### page.homes
+- PT: Casas
+- EN: Homes
+- FR: Logements
+
+### page.regions
+- PT: Zonas
+- EN: Areas
+- FR: Zones
+
+### page.remove
+- PT: Retirar
+- EN: Remove
+- FR: Retirer
+
+### page.empty.h
+- PT: Ainda não guardou nada
+- EN: Nothing saved yet
+- FR: Rien de gardé pour l'instant
+
+### page.empty.p
+- PT: Toque no coração de uma casa ou de uma zona no mapa e ela fica aqui, à sua espera.
+- EN: Tap the heart on a home or an area on the map and it waits for you here.
+- FR: Touchez le cœur d'un logement ou d'une zone sur la carte : il vous attend ici.
+
+### page.empty.a
+- PT: Abrir o mapa
+- EN: Open the map
+- FR: Ouvrir la carte
+
+### back
+- PT: Voltar
+- EN: Back
+- FR: Retour
+
+### next.h
+- PT: O passo seguinte
+- EN: The next step
+- FR: L'étape suivante
+
+### next.go
+- PT: Começar
+- EN: Start
+- FR: Commencer
+
+### next.home.p
+- PT: Diga-nos onde vive, o orçamento e o que procura. O Concierge prepara o resto com a agência parceira.
+- EN: Tell us where you live, your budget and what you are looking for. The Concierge prepares the rest with the partner agency.
+- FR: Dites-nous où vous vivez, votre budget et ce que vous cherchez. Le Concierge prépare le reste avec l'agence partenaire.
+
+### next.map.p
+- PT: Com uma zona em mente, o Concierge mostra-lhe as casas e o que vem a seguir.
+- EN: With an area in mind, the Concierge shows you the homes and what comes next.
+- FR: Avec une zone en tête, le Concierge vous montre les logements et la suite.
+
+### next.sims.p
+- PT: Com os números feitos, o passo seguinte é uma conversa de 30 minutos com a agência parceira, sem custos.
+- EN: With the numbers done, the next step is a 30-minute call with the partner agency, free of charge.
+- FR: Les chiffres faits, l'étape suivante est un appel de 30 minutes avec l'agence partenaire, sans frais.
+
+### next.read.p
+- PT: Quando quiser, o Concierge junta as suas respostas e marca a primeira conversa com a agência parceira.
+- EN: Whenever you like, the Concierge gathers your answers and books the first call with the partner agency.
+- FR: Quand vous voulez, le Concierge rassemble vos réponses et fixe le premier appel avec l'agence partenaire.
+
+### next.back.p
+- PT: Regresse à página onde estava.
+- EN: Return to the page you were on.
+- FR: Revenez à la page où vous étiez.
+
+### next.show.p
+- PT: Para ver estas casas, peça uma visita privada. A agência parceira trata do resto com o promotor.
+- EN: To see these homes, ask for a private visit. The partner agency handles the rest with the developer.
+- FR: Pour voir ces logements, demandez une visite privée. L'agence partenaire s'occupe du reste avec le promoteur.
+
+### next.saved.p
+- PT: O Concierge começa pelas zonas que guardou.
+- EN: The Concierge starts from the areas you saved.
+- FR: Le Concierge part des zones que vous avez gardées.
+
+### homes.h
+- PT: Casas novas, à venda agora
+- EN: New homes, for sale now
+- FR: Logements neufs, en vente maintenant
+
+### homes.p
+- PT: Empreendimentos apresentados pelos promotores parceiros, com a disponibilidade que eles publicam.
+- EN: Developments presented by partner developers, with the availability they publish.
+- FR: Des programmes présentés par les promoteurs partenaires, avec la disponibilité qu'ils publient.
+
+### homes.view
+- PT: Ver o empreendimento
+- EN: See the development
+- FR: Voir le programme
+
+### dev.example
+- PT: Veja como apresentamos um empreendimento: {name}, {muni}
+- EN: See how we present a development: {name}, {muni}
+- FR: Voyez comment nous présentons un programme : {name}, {muni}
+
+### dev.forDevs
+- PT: Para promotores: como apresentar um empreendimento aqui
+- EN: For developers: how to present a development here
+- FR: Pour les promoteurs : présenter un programme ici
+
+### path.go
+- PT: Ver o meu passo a passo
+- EN: See my step by step
+- FR: Voir mon pas à pas
+
+### near
+- PT: Casas novas perto: {name}, {muni}
+- EN: New homes nearby: {name}, {muni}
+- FR: Logements neufs à proximité : {name}, {muni}
