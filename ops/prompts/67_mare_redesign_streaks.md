@@ -13,6 +13,7 @@ Operator, 4 Nov 2026. Replaces the earlier draft of this prompt. Rules 15 (one l
 2. **One idea per screen.** Photography an Apple keynote would use. Type and spacing with the restraint of a Claridge's menu card. Nothing decorative.
 3. **Every issue teaches** a well-travelled, well-read reader something they did not know about the place: who comes from there, what is made there, what it costs to live there, where to eat. Gems and insights, not tourism copy.
 4. **Every issue has a game** the reader plays in one tap and is rewarded for the same day.
+5. **It holds full attention from the first line** and leaves the reader in awe.
 
 Test: would the editor of How To Spend It or Monocle be jealous of it? If not, it is not done.
 
@@ -48,7 +49,8 @@ Test: would the editor of How To Spend It or Monocle be jealous of it? If not, i
 1. **One message** with your five to eight sharpest questions. Each comes with your recommended answer, so he can reply "yes".
 2. **Cover at least:**
    - the image budget (step 5);
-   - the streak prize (step 7);
+   - the streak prize (step 8);
+   - whether the issue mentions Diogo Jota (step 6);
    - the send days (D83 says Tuesday and Friday at 8h);
    - the three newsletters he wants Maré to sit beside;
    - anything else that changes the design.
@@ -70,7 +72,42 @@ Top tier and licensed, or not used. Present a costed recommendation; the operato
 3. **Free sources only when they meet the bar:** the Câmara and Porto e Norte tourism image banks, Wikimedia Commons at full resolution. Every image at least twice its display width.
 4. **The operator's five Gondomar photos** are web photos without a licence: do not publish them. Draft the permission email to the Câmara for the CEO.
 
-## Step 6: The copy
+## Step 6: The 1 December issue, Gondomar: the story plan
+The reader must give it full attention from the first line and finish it in awe. Open with a question nobody can resist, pay it off, then show the place from angles nobody expects. Be creative with the formats, and propose your own. Ask the operator in step 3 whatever would change the issue.
+
+1. **The opening riddle.** "O que têm em comum Sharon Stone, a rainha Letizia e…?" The answer is Portuguese filigree, and then Gondomar: the gold, the filigree, the workshops, Topázio. The riddle is also the first game question (step 8): one tap to guess.
+   **Verify every name before using it.** Google's AI overview gave the operator these claims, and they do not all hold:
+   - Queen Letizia wore gold filigree earrings at the 2018 Madrid reception for President Marcelo Rebelo de Sousa (¡Hola!, 18 Apr 2018), but the maker is not named;
+   - the "Sharon Stone" Viana-heart medallion is sold by Filigrana Portuguesa, whose address is in Penafiel, not Gondomar, with no date or occasion;
+   - Queen Mary of Denmark, "La Casa de Papel" (Tokyo) and ambassador Randi Charno Levine: no evidence found yet.
+   
+   Say "Gondomar" only where a source says the piece was made there. Otherwise the line is "Portuguese filigree, which is made only in Gondomar and Póvoa de Lanhoso". Find more famous wearers, films and campaigns that do hold up.
+2. **The threads after the gold** (pick the strongest, keep the rest for later issues):
+   - **The river:** 37 km of Douro, the river beaches, the Estação Náutica (October 2026), rowing, the serras of the Parque das Serras do Porto.
+   - **Sport and its stars:** a Gondomar XI, laid out as a team sheet.
+     - Ricardinho (Valbom, six times world's best futsal player).
+     - André Silva, the striker (born in Baguim do Monte; FC Porto, Milan, Leipzig).
+     - Fábio Silva, Jota Silva, Pedro Barbosa, Rómulo.
+     - Luís Frade (handball, Barcelona).
+     
+     Diogo Jota and his brother André Silva (SC Penafiel) started at Gondomar SC and died in July 2025; check whether the Câmara gave them its gold medal of merit. Handle it with restraint, and ask the operator whether to include it. The AI overview mixed up the two André Silvas: check every footballer on Wikipedia PT and zerozero.pt.
+   - **The schools:** how Gondomar's secondary schools rank in the national exams (DGEEC data and the Público or Expresso rankings, latest year), and the private and international schools within 20 minutes by car (our own place data). Present it as a league table.
+   - **Art and the people:** Zulmiro de Carvalho, Júlio Resende, and anyone else the research turns up (Cláudia Pascoal, Eurovision 2018).
+   - **The market:** €2,348/m², +23.4% (INE, Q2 2026), and what €300k buys.
+   - **One table:** The Yeatman across the river, or a better find.
+3. **"And I don't know what…"**: find the angle the operator has not thought of. One line can carry a gem, but no history lessons (for example, whether gold was mined here in Roman times; Fojo das Pombas is in Valongo, so check what lies in Gondomar).
+4. **Formats to consider:**
+   - the riddle;
+   - the team sheet;
+   - the league table;
+   - one number set huge on its own screen;
+   - "the bench": one workshop seen in close-up;
+   - a 48-hour plan;
+   - before-and-after prices.
+   
+   Choose by what holds attention on a phone. A four-minute read stays the goal; propose what to cut.
+
+## Step 7: The copy
 1. **Voice:** Cigar Aficionado plus How To Spend It.
 2. **Method:** Mariana van Zeller's. Pick one thread and follow it to the source with primary data, names, places and numbers. Here that thread is the gold: from the bench of a one-person workshop, to the hallmark at the assay office, to a shop window in Hong Kong. Then the people and businesses that make the place.
 3. **Rules:**
@@ -90,10 +127,10 @@ Top tier and licensed, or not used. Present a costed recommendation; the operato
 6. **Every fact goes into content/facts/facts.csv** with its source and date.
 7. **Three subject lines:** specific, no slop.
 
-## Step 7: The game, answered and rewarded the same day
+## Step 8: The game, answered and rewarded the same day
 Design it like a game designer, with a concierge's manners: no badges, no confetti, no red alerts.
 1. **One tap in the email answers.** A Pages Function records the first tap per issue and opens a beautiful page: right or wrong, the one-line why, the reader's streak, and how the other readers voted.
-2. **The questions are about the place and the market in the issue,** so playing teaches.
+2. **The questions are about the place and the market in the issue,** so playing teaches. The opening riddle (step 6) is question one.
 3. **Five correct answers in a row unlock a prize at once,** on that page. Propose three prizes that cost no human time and produce a data signal, for example:
    - a personal market analysis of the concelho the reader chooses, generated from our data (describe, never advise);
    - early access to a new map feature;
@@ -107,7 +144,7 @@ Design it like a game designer, with a concierge's manners: no badges, no confet
    - update the privacy policy in the same pass;
    - verify beehiiv's merge tag for the subscriber id, and that one tap works in Gmail, Apple Mail and Outlook.
 
-## Step 8: Build the golden sample (rule 17)
+## Step 9: Build the golden sample (rule 17)
 1. **Check beehiiv first.** Verify what the free plan can send: custom HTML and CSS, web fonts (most email apps fall back), image widths, dark mode. Design within it and report what it cannot do.
 2. **Build the 1 December issue** in PT as a beehiiv draft (never sent), inside the D83 pipeline so the site page matches the email.
 3. **Write the acceptance list before you check.** It covers at least:
