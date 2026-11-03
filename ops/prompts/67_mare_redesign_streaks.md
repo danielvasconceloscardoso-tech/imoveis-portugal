@@ -1,72 +1,133 @@
-# Prompt 67: Maré from scratch, the newsletter Claridge's and Steve Jobs would make
+# Prompt 67: Maré, rebuilt. The newsletter Claridge's and Steve Jobs would publish
 
-Operator, 4 Nov 2026. CEO mockups v3 to v8 were all rejected ("looks super Claude", "terrible", "shitty pictures"). You own this now: research, ask, design, build. Rules 15 (one language), 16 (DESIGN_AND_DATA.md) and 17 (golden sample first) apply. Record it as the next free D number.
+Operator, 4 Nov 2026. Replaces the earlier draft of this prompt. Rules 15 (one language), 16 (DESIGN_AND_DATA.md) and 17 (golden sample first) apply. Record it as the next free D number.
 
-## 0. First, ask the operator (one batched message, before any design)
-Ask only what you cannot find yourself. At least:
-1. Three newsletters or pages he would be proud to sit next to in the inbox (his references so far: the HTSI Ghent story on ft.com, Cigar Aficionado news, Hodinkee home, the Substack "The Art of Being a Regular" cover).
-2. The image budget: which licence from section 3, or a commissioned shoot.
-3. The streak prize (section 4): pick or reject the options you propose.
-4. Day and send time, and whether Maré stays weekly.
-5. Anything else that would change the design. Then build without asking again until the sample is ready.
+## Why this matters
+1. **Maré is the asset.** Sponsors buy its readers, and a buyer pays for its list and its engagement at exit (D76).
+2. **Today it is not good enough to forward.** The operator rejected six CEO mockups.
+3. **You own the result end to end:** research, questions, design, copy, images, the game and the build.
 
-## 1. Research before drawing anything
-1. Study and scrape for structure, type, spacing, image treatment and rhythm: the HTSI newsletter and ft.com/htsi, Claridge's (site and emails), Apple (newsroom, product pages, launch emails), Cigar Aficionado, Hodinkee, Monocle's emails, Kinfolk, Aesop's emails. Screenshots on a phone.
-2. Write content/mare/DESIGN.md: what makes each one feel expensive, in numbers (type sizes, line height, margins, how many items per screen, photo ratios, colour count). Then our design system from it.
-3. What the operator rejected, so you do not repeat it:
-   - cream paper, gold letter-spaced labels, forest-green blocks, drop caps, centred italic pull quotes, rounded photos, stat strips;
-   - white page with a generic bold serif, one news-site skin after another;
-   - low-resolution web photos.
-   The bar: one idea per screen, huge calm space, photography that could be an Apple keynote slide, the restraint of a Claridge's menu card.
-4. Fonts: licensed for email and web. Free first; if a paid face is clearly better, price it in the report.
+## The bar
+"Imagine Claridge's and Steve Jobs created a newsletter." In practice:
+1. **A calm four-minute coffee, on a phone,** that makes the reader look forward to the next issue.
+2. **One idea per screen.** Photography an Apple keynote would use. Type and spacing with the restraint of a Claridge's menu card. Nothing decorative.
+3. **Every issue teaches** a well-travelled, well-read reader something they did not know about the place: who comes from there, what is made there, what it costs to live there, where to eat. Gems and insights, not tourism copy.
+4. **Every issue has a game** the reader plays in one tap and is rewarded for the same day.
 
-## 2. Copy: the 1 December issue, Gondomar (PT only for the sample)
-1. **Voice.** Cigar Aficionado plus How To Spend It, written with Mariana van Zeller's method: follow one story to its source with primary data, names and places, no two-beat flourishes ("Comece pelos números." is banned), no history lessons, no invented people. 50/50 property and lifestyle.
-2. **Gondomar only.** Viana belongs in a Viana issue, not here.
-3. **Verified facts you can use** (re-check each and add it to content/facts/facts.csv):
-   - median €2,348/m², +23.4% (INE Q2 2026); €300k buys about 128 m²;
-   - 37 km of Douro riverside; Estação Náutica opened October 2026;
-   - 42% of national gold jewellery output, 445 firms (70% one-person), about 800 jobs, about €60M exports in 2022 to Spain, Hong Kong, Germany, Italy, US, France, Switzerland (Câmara, Jornal de Negócios, 18 Apr 2023). visitportoandnorth says "60%": use 42% unless you find a newer official figure;
-   - filigree made only in Gondomar and Póvoa de Lanhoso, Portuguese intangible heritage 2023, UNESCO candidacy 2025; Rota da Filigrana since 2016;
-   - Topázio, founded 1874 by Manuel José Ferreira Marques, factory in Gondomar, about 30,000 pieces a year, third-largest exporter of the sector (Forbes PT, INE), factory visits Tuesday to Friday;
-   - **Zulmiro de Carvalho**, sculptor, born in Gondomar in 1940, studied at St Martin's in London (Gulbenkian scholarship, 1971-73, met Anthony Caro), monumental works in South Korea and Macau, in the CAM Gulbenkian collection, founding president of the Júlio Resende foundation;
-   - Júlio Resende (1917-2011): Ribeira Negra tile panel at the Ponte Luís I, Lugar do Desenho in Valbom (opened 1997, about 2,000 drawings), buried there; São Paulo Biennial prize 1951;
-   - Ricardinho, from Valbom: six times world's best futsal player (record), world champion 2021;
-   - D8 nomad visa €3,680/month in 2026; Michelin 2026: The Yeatman two stars; 53 starred, 9 with two stars, 3 in Greater Porto.
-4. **Find more yourself** and list them with sources: companies founded or made in Gondomar that a cool reader would know, designers, chefs, artists, athletes, brands that use Gondomar gold or silver, films or campaigns featuring it. The operator wants "facts cool people would like to know".
-5. Subject line: specific, no AI slop, no question bait. Give three options.
+Test: would the editor of How To Spend It or Monocle be jealous of it? If not, it is not done.
 
-## 3. Images and video: top tier, licensed, recommend a paid option
-Hard rule 5 says no paid tool before a sponsor pays. The operator asked for a recommendation, so price it and let him decide:
+## Rejected so far (do not repeat)
+1. **The "Claude luxury" template:** cream paper, gold letter-spaced labels, forest-green blocks, drop caps, centred italic quotes, rounded photos, stat strips. The operator said "looks super Claude".
+2. **A white news-site skin** with a bold serif and low-resolution web photos: "terrible", "shitty pictures".
+3. **The copy:**
+   - two-beat dramatic lines ("Comece pelos números.", "Foi lá que quis ficar.");
+   - AI-slop subject lines;
+   - history lessons (the current content/mare/issues/2026-12-01.md, about 1640, is one);
+   - Viana in a Gondomar issue;
+   - people stories that feel invented;
+   - missing the obvious figures (Zulmiro de Carvalho).
+4. **Polls answered "on Friday".**
 
-| Option | What you get | Price to verify | Note |
-| --- | --- | --- | --- |
-| Commissioned Gondomar shoot (photographer plus drone, one day) | Exclusive photos and film we own | quote 2 or 3 local photographers | Best for exit: the buyer gets assets, not a subscription |
-| Artlist (Max) | Cinematic 4K/8K footage, music | about $40/month, billed yearly | Footage stays licensed for published projects |
-| Envato Elements | Unlimited photos, 4K video, fonts | about $16.50/month, billed yearly | Uneven quality; licence per project |
-| Stocksy | Curated, least "stocky" photos | per image | Expensive, small library |
+## Step 1: Read what exists
+1. The D83 Maré pipeline: content/mare/issues/, site/src/lib/mare.ts and the Maré page.
+2. content/NEWSLETTER_FORMAT.md, VOICE.md, VOICE_AND_WORLD.md, EDITORIAL_POLICY.md and DESIGN_AND_DATA.md.
+3. **A conflict to resolve:** DESIGN_AND_DATA.md says "no gamified noise" and fixes Playfair and Manrope. The operator now wants a game (4 Nov) and has rejected the current look. For Maré, a game with quiet-luxury manners and new type are allowed: propose them and record a decision.
 
-For each: licence for email, web and social, credit rules, whether the licence survives cancellation, and **whether it transfers to a buyer of the brand**. Recommend one. Until he decides, use only what is licensed today: the operator's Gondomar photos are not cleared, so ask the Câmara (draft the email for the CEO) and use Commons or Câmara images meanwhile.
+## Step 2: Research like a creative director
+1. **Study real emails, not homepages.** Archives such as reallygoodemails.com and milled.com hold the actual newsletters of:
+   - Claridge's, Belmond, Aman, Aesop;
+   - Apple;
+   - How To Spend It / FT, Monocle, Hodinkee, Cigar Aficionado, Kinfolk, Mr Porter's The Journal;
+   - Morning Brew, for structure and pace only.
+   
+   Do not create accounts or subscribe.
+2. **Screenshot each at an iPhone viewport,** and measure why it feels expensive: type sizes, line height, margins, words per screen, image ratio and resolution, number of colours, number of items.
+3. **Write content/mare/DESIGN.md:** the findings first, then our system.
 
-## 4. Gamification: answers and prizes the same day
-1. **Daily answer, not Friday.** Each quiz option in the email is a one-tap link carrying the subscriber's id (verify beehiiv's merge tag for it). A Pages Function records the first tap per issue and opens a page with right or wrong, the explanation, and the reader's streak. The photo challenge works the same way: four places to tap, the answer revealed at once.
-2. **Streaks.** Five correct answers in a row unlocks a prize at once on that page. Propose prizes that cost no human time and produce a data signal, for example:
-   - a personal market report for the concelho of the reader's choice, generated from our data (describe, never advise: EDITORIAL_POLICY.md);
-   - early access to new map features;
+## Step 3: Ask the operator, once
+1. **One message** with your five to eight sharpest questions. Each comes with your recommended answer, so he can reply "yes".
+2. **Cover at least:**
+   - the image budget (step 5);
+   - the streak prize (step 7);
+   - the send days (D83 says Tuesday and Friday at 8h);
+   - the three newsletters he wants Maré to sit beside;
+   - anything else that changes the design.
+3. **Then work without stopping** until step 4.
+
+## Step 4: Three directions, then one
+1. **Three genuinely different directions** for the same Gondomar issue, not three colourways.
+2. **Phone screenshots** of each, from the top of the issue to the bottom.
+3. **The operator picks one** (or mixes them). Only then build.
+
+## Step 5: Images and film
+Top tier and licensed, or not used. Present a costed recommendation; the operator decides on money. Hard rule 5 needs his written exception, recorded in DECISIONS.md.
+1. **A commissioned photographer and drone day in Gondomar.** Owned outright, exclusive, and it transfers to a buyer at exit. Get two or three quotes with portfolio links.
+2. **Libraries:** Artlist, Envato Elements, Stocksy, Getty or Adobe Stock. For each:
+   - price and quality;
+   - licence for email, web and social;
+   - whether the licence survives cancellation;
+   - whether it transfers to a buyer of the brand.
+3. **Free sources only when they meet the bar:** the Câmara and Porto e Norte tourism image banks, Wikimedia Commons at full resolution. Every image at least twice its display width.
+4. **The operator's five Gondomar photos** are web photos without a licence: do not publish them. Draft the permission email to the Câmara for the CEO.
+
+## Step 6: The copy
+1. **Voice:** Cigar Aficionado plus How To Spend It.
+2. **Method:** Mariana van Zeller's. Pick one thread and follow it to the source with primary data, names, places and numbers. Here that thread is the gold: from the bench of a one-person workshop, to the hallmark at the assay office, to a shop window in Hong Kong. Then the people and businesses that make the place.
+3. **Rules:**
+   - 50/50 property and lifestyle;
+   - talk to the reader (VOICE.md rule 3);
+   - no history lessons, no flourishes, no invented people; real business stories are welcome;
+   - Gondomar only.
+4. **Research the place properly before writing.** Sources: the Câmara's honours (medalhas de mérito), Wikipedia PT, Infopédia, Gulbenkian, Serralves, local press (JN), INE and Jornal de Negócios. List people, companies, brands, artists, chefs and athletes from Gondomar, each with a source, and pick the best.
+5. **Leads already verified** (check them again):
+   - **Zulmiro de Carvalho:** sculptor, born in Gondomar in 1940. St Martin's in London on a Gulbenkian grant (1971-73), where he met Anthony Caro. Monumental works in South Korea and Macau, a piece in the CAM Gulbenkian collection, founding president of the Júlio Resende foundation.
+   - **Júlio Resende:** the Ribeira Negra tile panel at the Ponte Luís I; the Lugar do Desenho in Valbom (opened 1997, about 2,000 drawings).
+   - **Topázio:** founded 1874, silver, factory in Gondomar, third-largest exporter of the sector.
+   - **The gold cluster:** 42% of national output, 445 firms, about €60M of exports in 2022 (Câmara, 2023). Tourism sites say 60%: use the official figure.
+   - **Filigree:** made only in Gondomar and Póvoa de Lanhoso; national intangible heritage in 2023; UNESCO candidacy in 2025.
+   - **Ricardinho:** from Valbom, six times named the world's best futsal player.
+   - **The market:** €2,348/m², +23.4% (INE, Q2 2026).
+6. **Every fact goes into content/facts/facts.csv** with its source and date.
+7. **Three subject lines:** specific, no slop.
+
+## Step 7: The game, answered and rewarded the same day
+Design it like a game designer, with a concierge's manners: no badges, no confetti, no red alerts.
+1. **One tap in the email answers.** A Pages Function records the first tap per issue and opens a beautiful page: right or wrong, the one-line why, the reader's streak, and how the other readers voted.
+2. **The questions are about the place and the market in the issue,** so playing teaches.
+3. **Five correct answers in a row unlock a prize at once,** on that page. Propose three prizes that cost no human time and produce a data signal, for example:
+   - a personal market analysis of the concelho the reader chooses, generated from our data (describe, never advise);
+   - early access to a new map feature;
    - entry to a monthly draw for a paid call.
-3. **Data and GDPR.** Store a hashed subscriber id and answers in D1 or KV, never in the repo (hard rule 3). Add the purpose to the privacy policy in the same pass. Free tier only.
-4. One-tap must work in Gmail, Apple Mail and Outlook, on phones.
+   
+   The operator picks.
+4. **The photo challenge works the same way:** tap one of four places, and the answer is revealed at once.
+5. **Signals and data (DESIGN_AND_DATA.md):**
+   - the answer, the streak, the prize claimed and the concelho chosen feed the consented profile;
+   - store a hashed subscriber id in D1 or KV, never in the repo;
+   - update the privacy policy in the same pass;
+   - verify beehiiv's merge tag for the subscriber id, and that one tap works in Gmail, Apple Mail and Outlook.
 
-## 5. Build the golden sample (rule 17)
-1. **Check beehiiv first.** Find out what the free plan allows: custom HTML, custom fonts, image sizes, dark mode. Design within what it can send; say what it cannot do.
-2. Build the 1 December PT issue as a beehiiv draft (never sent) plus the template.
-3. Write an acceptance list and check the issue against it: phone and desktop, Gmail app, Apple Mail, Outlook, dark mode, load time, every fact with a source, sponsored label, unsubscribe.
-4. Show the operator phone screenshots and wait for his go before rolling out to other editions or rewriting content/NEWSLETTER_FORMAT.md.
+## Step 8: Build the golden sample (rule 17)
+1. **Check beehiiv first.** Verify what the free plan can send: custom HTML and CSS, web fonts (most email apps fall back), image widths, dark mode. Design within it and report what it cannot do.
+2. **Build the 1 December issue** in PT as a beehiiv draft (never sent), inside the D83 pipeline so the site page matches the email.
+3. **Write the acceptance list before you check.** It covers at least:
+   - phone first: Gmail on iOS and Android, Apple Mail, Outlook, dark mode;
+   - every image at least twice its display width and under 200 KB;
+   - every fact sourced;
+   - the sponsored label and the unsubscribe line;
+   - the one-tap game working end to end, and the prize unlocking at five in a row.
+4. **Send the operator phone screenshots and wait for his go** before touching other editions or NEWSLETTER_FORMAT.md.
 
-## 6. Report
-1. The screenshots.
-2. The questions you asked and his answers.
-3. Your licence recommendation with prices.
-4. The new facts found, with sources.
-5. What beehiiv could not do.
-6. What you could not do instead of a weaker version.
+## Report
+1. Your questions and his answers.
+2. The three directions and the one chosen.
+3. Screenshots of the sample.
+4. The image recommendation, with prices and quotes.
+5. The list of people and companies, with sources.
+6. What beehiiv or the email apps could not do, and anything you did not ship rather than ship a weaker version.
+
+## Don'ts
+1. Do not start from any earlier Maré mockup.
+2. No paid tool or licence without the operator's written go.
+3. No account creation, no personal data in the repo, no founder names.
+4. One language (PT) until the sample is approved (rule 15).
