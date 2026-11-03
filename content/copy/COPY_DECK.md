@@ -7731,6 +7731,7 @@ Part 2 of 3 Nov 2026 (the journey): the five-item bar at the bottom of the phone
 - PT: Casas novas perto: {name}, {muni}
 - EN: New homes nearby: {name}, {muni}
 - FR: Logements neufs à proximité : {name}, {muni}
+
 ## mtvc
 
 ### units.h
