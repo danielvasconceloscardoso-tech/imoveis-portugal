@@ -64,3 +64,20 @@ All self-hosted (built by scripts/map-data/v3_assets.py and v3_extras.py); credi
 ### Golf courses (prompt 36 §9), 28 Oct 2026
 
 `content/facts/golf/courses.csv` (79 courses; notes and weak rows in `content/facts/golf/NOTES.md`) is the map's golf layer (`scripts/map-data/golf_list.py` → `site/public/data/map/golf.json`). Details from Visit Portugal course pages and visitmadeira.com / valedolobo.com; fpg.pt, visitalgarve.pt and most resort sites were blocked from the build environment and are still to be checked against the list. Coordinates: OpenStreetMap Nominatim (never Google). Outlines: OpenStreetMap leisure=golf_course (ODbL) where one lies at the course.
+
+## D83 lifestyle articles (3 Nov 2026)
+
+One photograph per article (content/stories/). Five come from the library above; five are new, found through the Openverse API (Wikimedia Commons and the Unsplash and Pexels sites refused or rate-limited the build environment that night, so only Flickr originals could be fetched, at 1024 px). New files are graded with `resort_grade.py` (1.0), not cropped (photographers' marks kept), cut to `img/v2/<name>-{640,1024}.{avif,webp}` (no 1600: the originals are 1024 px wide). CC BY and CC BY-SA are credited on /credits/ (site/src/lib/credits.ts); our graded copies of CC BY-SA photographs are shared under the same licence.
+
+| File (site/public/) | Article | What it shows | Source page | Author | Licence | Date checked |
+| --- | --- | --- | --- | --- | --- | --- |
+| img/v2/algarve-praia-da-marinha-* | Um inverno sem geada… | Praia da Marinha, Lagoa | (library, above) | | Pixabay Content License | 2026-11-03 |
+| img/v2/lisboa-tejo-cais-* | Portugal está entre os países mais pacíficos… | The Tagus from the Cais das Colunas | (library, above) | | Pixabay Content License | 2026-11-03 |
+| img/v2/matosinhos-she-changes-* | Um dia normal em Matosinhos | Janet Echelman's She Changes over the roundabout | https://www.flickr.com/photos/21446942@N00/29604509272 | Vitor Oliveira (Portuguese_eyes) | CC BY-SA 2.0 | 2026-11-03 |
+| img/v2/porto-douro-palacio-de-cristal-* | A mesa mais estrelada do Porto… | The Douro from the Palácio de Cristal gardens | https://www.flickr.com/photos/24879135@N04/38195462106 | mattk1979 | CC BY-SA 2.0 | 2026-11-03 |
+| img/v2/douro-socalcos-* | O Douro tem 270 anos… | Douro vineyard terraces | (site/public/video/CREDITS.md: Pixabay 5649128) | Ramiro-- | Pixabay Content License | 2026-11-03 |
+| img/v2/leca-piscina-das-mares-* | Siza e Souto de Moura… | Siza's tidal pools, Leça da Palmeira | https://www.flickr.com/photos/21446942@N00/27747007423 | Vitor Oliveira (Portuguese_eyes) | CC BY-SA 2.0 | 2026-11-03 |
+| img/v2/cascais-baia-* | Cascais, de vila de pescadores a casa de reis | The bay of Cascais | (library, above) | | Pixabay Content License | 2026-11-03 |
+| img/v2/porto-foz-farolim-felgueiras-* | As escolas internacionais do Porto e de Lisboa | Felgueiras lighthouse, Foz do Douro (no school exterior was found under a commercial licence) | https://www.flickr.com/photos/42201095@N03/52667959121 | Jocelyn777 Love Europe | CC BY-SA 2.0 | 2026-11-03 |
+| img/v2/porto-ponte-luis-i-noite-* | São João, a noite em que o Porto não dorme | The Luís I bridge at night | Unsplash photo-1569959220744-ff553533f492 (design/directions/photos/CREDITS.md; photographer to confirm) | | Unsplash License | 2026-11-03 |
+| img/v2/vila-do-conde-aqueduto-* | Vila do Conde, o mar a 41 minutos do Porto | The Santa Clara aqueduct | https://www.flickr.com/photos/133200397@N03/46637546551 | Sergei Gussev | CC BY 2.0 | 2026-11-03 |

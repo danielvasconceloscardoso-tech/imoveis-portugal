@@ -16,6 +16,8 @@ import { SUB, ENABLED, type ToolKey } from "../../../../lib/tools";
 import { PLACES, type Place } from "../../../../lib/places";
 import ArticlePage from "../../../../components/ArticlePage.astro";
 import { ARTS, ART_SUB, type ArtKey } from "../../../../lib/articles";
+import StoryPage from "../../../../components/StoryPage.astro";
+import { storiesFor, type Story } from "../../../../lib/stories";
 
 type Key = ToolKey;
 export function getStaticPaths() {
@@ -26,14 +28,17 @@ export function getStaticPaths() {
     ...PTYPES.map((ptype) => ({ params: { lang, ed, section: SLUGS[lang].partners, sub: ptype.slug[lang] }, props: { ptype } })),
     ...(["ok", "private", "later"] as const).map((view) => ({ params: { lang, ed, section: SLUGS[lang].consult, sub: CONSULT_SUB[view][lang] }, props: { view } })),
     ...ARTS.map((art) => ({ params: { lang, ed, section: SLUGS[lang].articles, sub: ART_SUB[art][lang] }, props: { art } })),
+    // D83: the ten lifestyle articles, Portuguese only (lib/stories.ts).
+    ...storiesFor(lang).map((story) => ({ params: { lang, ed, section: SLUGS[lang].articles, sub: story.slug }, props: { story } })),
     ...(["compra", "zona", "private"] as const).map((dossier) => ({ params: { lang, ed, section: SLUGS[lang].dossiers, sub: DOSSIER_SUB[dossier][lang] }, props: { dossier } })),
   ]));
 }
 const lang = Astro.params.lang as Lang;
 const ed = Astro.params.ed as EdCode;
-const { tool, place, ptype, view, dossier, art } = Astro.props as { art?: ArtKey; tool?: Key; place?: Place; ptype?: PType; view?: "ok" | "private" | "later"; dossier?: DType };
+const { tool, place, ptype, view, dossier, art, story } = Astro.props as { story?: Story; art?: ArtKey; tool?: Key; place?: Place; ptype?: PType; view?: "ok" | "private" | "later"; dossier?: DType };
 ---
-{art ? <ArticlePage lang={lang} ed={ed} art={art} />
+{story ? <StoryPage lang={lang} ed={ed} story={story} />
+  : art ? <ArticlePage lang={lang} ed={ed} art={art} />
   : dossier ? <DossierPage lang={lang} ed={ed} type={dossier} />
   : view ? <ConsultPage lang={lang} ed={ed} view={view} />
   : ptype ? <PartnerTypePage lang={lang} ed={ed} type={ptype} />

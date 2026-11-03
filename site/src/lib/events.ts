@@ -9,6 +9,7 @@ import { TOOLS } from "./tools";
 import { flowConfig, type FlowId } from "./flows";
 import { sim1Events } from "./sim1";
 import { TIME_BANDS, UTM_MEDIA } from "./track";
+import { STORY_IDS } from "./stories";
 
 /** The phone bottom bar's items (ev "bar/{item}"). The bar's own helper adds an item here when it adds one to the bar. */
 export const BAR_ITEMS = ["home", "map", "sims", "concierge", "saved", "path", "faq", "search", "menu", "letter"];
@@ -40,6 +41,9 @@ export function editionEvents(): string[] {
   for (const k of ["home", "region"]) for (const s of ["on", "off"]) out.push(`heart/${k}/${s}`);
   for (const b of BAR_ITEMS) out.push(`bar/${b}`);
   for (const m of UTM_MEDIA) out.push(`letter/signup/${m}`);
+  // D83 lifestyle articles (components/StoryPage.astro): opened, a place followed to the map (the municipality goes to
+  // the first-party store only), the map tile under "Para ir", the Concierge handover.
+  for (const id of STORY_IDS) for (const k of ["open", "place", "tile", "concierge"]) out.push(`art/${id}/${k}`);
   return out;
 }
 

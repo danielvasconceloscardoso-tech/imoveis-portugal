@@ -58,6 +58,10 @@ The Cloudflare count is the page `/e/{ed}/{event}/`, except the three short fami
 | `heart/{home,region}/{on,off}` | `{ed}/heart/…/` | place (home) or region, origin | a heart is set or removed. Helper: `evHeart(kind, id, on, origin)` |
 | `bar/{item}` | `{ed}/bar/{item}/` | origin `bar` | a tap on the phone bottom bar. Helper: `evBar(item)`. Items: home, map, sims, concierge, saved, path, faq, search, menu, letter |
 | `letter/signup/{medium}` | `{ed}/letter/signup/{medium}/` | origin = `source/medium/campaign` (first touch in this tab), step = where | the letter signup form is submitted. Media counted: none, email, newsletter, social, paid, cpc, referral, partner, qr, other |
+| `art/{id}/open` | `{ed}/art/{id}/open/` | origin `art` | a lifestyle article (D83, content/stories/) is opened |
+| `art/{id}/place` | `{ed}/art/{id}/place/` | place = municipality slug, origin `art` | a place named in the article is followed to its card on the map |
+| `art/{id}/tile` | `{ed}/art/{id}/tile/` | place, origin `art` | the small map tile under "Para ir" is opened |
+| `art/{id}/concierge` | `{ed}/art/{id}/concierge/` | origin `art` | the Concierge line at the end of the article is followed |
 
 What the site already knows is reused, so the reader is never asked twice. The Concierge opens with these answers already given, and each one stays editable:
 - the country, from the edition;
