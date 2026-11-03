@@ -1,0 +1,97 @@
+{
+  "_how": "Place card, Norte roll-out of the golden sample (operator's step 2, 3 Nov 2026). Read by scripts/map-data/tiles.py together with routes.csv, schools.csv and health.csv in this folder. The free card shows the rows marked card=1 and the chosen beach, city and airport; every row goes to the paid analysis (site/src/data/mapanalysis.json). Flights: facts.csv rows (PlaneMapper scheduled block times, checked 2026-11-03). SOURCES.md in this folder says how each figure was checked.",
+  "slug": "braga",
+  "origin": {
+    "name": "Câmara Municipal de Braga",
+    "lat": 41.550914,
+    "lon": -8.428451,
+    "source": "OpenStreetMap (Nominatim), amenity=townhall (way/108390206), Praça Municipal"
+  },
+  "line": {
+    "pt": "A cidade vista do Bom Jesus do Monte, e a Praia da Apúlia a 27 minutos de carro.",
+    "en": "The city seen from Bom Jesus do Monte, and Praia da Apúlia 27 minutes away by car.",
+    "fr": "La ville vue depuis le Bom Jesus do Monte, et la Praia da Apúlia à 27 minutes en voiture."
+  },
+  "photos": [
+    {
+      "f": "braga-bom-jesus-por-do-sol",
+      "w": 1600,
+      "alt": {
+        "pt": "Braga ao pôr do sol, vista do Bom Jesus do Monte",
+        "en": "Braga at sunset, seen from Bom Jesus do Monte",
+        "fr": "Braga au coucher du soleil, vue depuis le Bom Jesus do Monte"
+      }
+    },
+    {
+      "f": "braga-vista-terreiro-de-moises",
+      "w": 1600,
+      "alt": {
+        "pt": "Braga vista do Terreiro de Moisés, no santuário do Bom Jesus do Monte",
+        "en": "Braga from the Terreiro de Moisés, at the Bom Jesus do Monte sanctuary",
+        "fr": "Braga depuis le Terreiro de Moisés, au sanctuaire du Bom Jesus do Monte"
+      }
+    },
+    {
+      "f": "braga-serras-entardecer",
+      "w": 1600,
+      "alt": {
+        "pt": "A cidade e as serras ao entardecer, do santuário do Bom Jesus do Monte",
+        "en": "The city and the hills at dusk, from the Bom Jesus do Monte sanctuary",
+        "fr": "La ville et les montagnes au crépuscule, depuis le sanctuaire du Bom Jesus do Monte"
+      }
+    }
+  ],
+  "life": {
+    "beach": "apa-ptcn8h",
+    "city": "porto-avenida-dos-aliados",
+    "airport": "aeroporto-do-porto-opo-terminal"
+  },
+  "names": {
+    "apa-ptcn8h": "Praia da Apúlia",
+    "porto-avenida-dos-aliados": "Porto, Aliados",
+    "aeroporto-do-porto-opo-terminal": {
+      "pt": "Aeroporto do Porto",
+      "en": "Porto Airport",
+      "fr": "Aéroport de Porto"
+    }
+  },
+  "flights": {
+    "lu": {
+      "fact": "flight-lux-opo",
+      "from": "LUX",
+      "to": "OPO",
+      "min": 150
+    },
+    "fr": {
+      "fact": "flight-par-opo",
+      "from": "ORY",
+      "to": "OPO",
+      "min": 135
+    },
+    "ch": {
+      "fact": "flight-gva-opo",
+      "from": "GVA",
+      "to": "OPO",
+      "min": 150
+    },
+    "br": {
+      "fact": "flight-sao-opo",
+      "from": "GRU",
+      "to": "OPO",
+      "min": 600
+    },
+    "us": {
+      "fact": "flight-nyc-opo",
+      "from": "EWR",
+      "to": "OPO",
+      "min": 400
+    },
+    "il": {
+      "fact": "flight-tlv-lis",
+      "from": "TLV",
+      "to": "LIS",
+      "min": 370,
+      "via": "LIS"
+    }
+  }
+}

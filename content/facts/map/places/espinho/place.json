@@ -1,0 +1,97 @@
+{
+  "_how": "Place card, Norte roll-out of the golden sample (operator's step 2, 3 Nov 2026). Read by scripts/map-data/tiles.py together with routes.csv, schools.csv and health.csv in this folder. The free card shows the rows marked card=1 and the chosen beach, city and airport; every row goes to the paid analysis (site/src/data/mapanalysis.json). Flights: facts.csv rows (PlaneMapper scheduled block times, checked 2026-11-03). SOURCES.md in this folder says how each figure was checked.",
+  "slug": "espinho",
+  "origin": {
+    "name": "Câmara Municipal de Espinho",
+    "lat": 41.008992,
+    "lon": -8.63944,
+    "source": "OpenStreetMap (Nominatim), amenity=townhall (way/110172781), Praça Doutor José de Oliveira Salvador"
+  },
+  "line": {
+    "pt": "O Atlântico à porta, da Praia da Baía à Lagoa de Paramos, e os Aliados a 23 minutos de carro.",
+    "en": "The Atlantic on the doorstep, from Praia da Baía to the Paramos lagoon, and the Aliados 23 minutes away by car.",
+    "fr": "L'Atlantique au pas de la porte, de la Praia da Baía à la lagune de Paramos, et les Aliados à 23 minutes en voiture."
+  },
+  "photos": [
+    {
+      "f": "espinho-barrinha-por-do-sol",
+      "w": 1600,
+      "alt": {
+        "pt": "Pôr do sol sobre a Barrinha de Esmoriz, a Lagoa de Paramos, em Espinho",
+        "en": "Sunset over the Barrinha de Esmoriz, the Paramos lagoon, Espinho",
+        "fr": "Coucher de soleil sur la Barrinha de Esmoriz, la lagune de Paramos, à Espinho"
+      }
+    },
+    {
+      "f": "espinho-praia-da-baia",
+      "w": 1600,
+      "alt": {
+        "pt": "A Praia da Baía e o Atlântico, em Espinho",
+        "en": "Praia da Baía and the Atlantic, Espinho",
+        "fr": "La Praia da Baía et l'Atlantique, à Espinho"
+      }
+    },
+    {
+      "f": "espinho-praia-de-paramos",
+      "w": 1600,
+      "alt": {
+        "pt": "A Praia de Paramos e a sua capela, em Espinho",
+        "en": "Praia de Paramos and its chapel, Espinho",
+        "fr": "La Praia de Paramos et sa chapelle, à Espinho"
+      }
+    }
+  ],
+  "life": {
+    "beach": "apa-ptcl9w",
+    "city": "porto-avenida-dos-aliados",
+    "airport": "aeroporto-do-porto-opo-terminal"
+  },
+  "names": {
+    "apa-ptcl9w": "Praia da Baía",
+    "porto-avenida-dos-aliados": "Porto, Aliados",
+    "aeroporto-do-porto-opo-terminal": {
+      "pt": "Aeroporto do Porto",
+      "en": "Porto Airport",
+      "fr": "Aéroport de Porto"
+    }
+  },
+  "flights": {
+    "lu": {
+      "fact": "flight-lux-opo",
+      "from": "LUX",
+      "to": "OPO",
+      "min": 150
+    },
+    "fr": {
+      "fact": "flight-par-opo",
+      "from": "ORY",
+      "to": "OPO",
+      "min": 135
+    },
+    "ch": {
+      "fact": "flight-gva-opo",
+      "from": "GVA",
+      "to": "OPO",
+      "min": 150
+    },
+    "br": {
+      "fact": "flight-sao-opo",
+      "from": "GRU",
+      "to": "OPO",
+      "min": 600
+    },
+    "us": {
+      "fact": "flight-nyc-opo",
+      "from": "EWR",
+      "to": "OPO",
+      "min": 400
+    },
+    "il": {
+      "fact": "flight-tlv-lis",
+      "from": "TLV",
+      "to": "LIS",
+      "min": 370,
+      "via": "LIS"
+    }
+  }
+}

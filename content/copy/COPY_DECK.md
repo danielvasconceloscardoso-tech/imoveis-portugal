@@ -8752,6 +8752,16 @@ D83 part 2 (3 Nov 2026): the map in three depths. First glance: photographs and 
 - EN: A levada in the Laurissilva, Madeira
 - FR: Une levada dans la Laurissilva, Madère
 
+### ph.centro-ria-de-aveiro-por-do-sol
+- PT: A Ria de Aveiro ao pôr do sol, Murtosa
+- EN: The Ria de Aveiro at sunset, Murtosa
+- FR: La Ria de Aveiro au coucher du soleil, Murtosa
+
+### ph.acores-sete-cidades-vista-do-rei
+- PT: Lagoa das Sete Cidades, São Miguel
+- EN: Lagoa das Sete Cidades, São Miguel
+- FR: Lagoa das Sete Cidades, São Miguel
+
 ### compare.h
 - PT: Comparar lugares
 - EN: Compare places
