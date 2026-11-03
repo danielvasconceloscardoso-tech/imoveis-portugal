@@ -7898,3 +7898,17 @@ Part 2 of 3 Nov 2026 (the journey): the five-item bar at the bottom of the phone
 - PT: No local, em {place}
 - EN: On site, in {place}
 - FR: Sur place, à {place}
+
+## signals
+
+The share line on a developer's page (night of 3 Nov 2026, part 5): the phone's share sheet, or the link copied. Counted without cookies (lib/track.ts).
+
+### share
+- PT: Partilhar esta página
+- EN: Share this page
+- FR: Partager cette page
+
+### copied
+- PT: Ligação copiada
+- EN: Link copied
+- FR: Lien copié

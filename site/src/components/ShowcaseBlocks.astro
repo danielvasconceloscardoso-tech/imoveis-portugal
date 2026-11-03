@@ -12,10 +12,11 @@ import Heart from "./Heart.astro";
 import ShowcaseUnits from "./ShowcaseUnits.astro";
 import ShowcasePlace from "./ShowcasePlace.astro";
 import ShowcaseRelated from "./ShowcaseRelated.astro";
+import DevShare from "./DevShare.astro";
 
 // related: the developer's showcases in other municipalities ("By the same developer", 3 Nov 2026).
-interface Props { lang: Lang; p: Project; label: string; locale: string; simHref?: string; mapHref?: string; save?: { href: string; muni: string }; related?: { id: string; name: string; place: string; href: string; render?: string | null }[]; }
-const { lang, p, label, locale, simHref, mapHref, save, related = [] } = Astro.props;
+interface Props { lang: Lang; p: Project; label: string; locale: string; simHref?: string; mapHref?: string; save?: { href: string; muni: string }; related?: { id: string; name: string; place: string; href: string; render?: string | null }[]; share?: boolean; }
+const { lang, p, label, locale, simHref, mapHref, save, related = [], share = false } = Astro.props;
 const s = PRICES.munis[p.muni] as any;
 const k = (x: string, v: Record<string, string | number> = {}) => c(`showb.${x}`, lang, v);
 const money = (v: number) => new Intl.NumberFormat(locale, { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(v);
@@ -41,6 +42,7 @@ const credits = (p.credits ?? []).join("; ");
       <div><dt>{c("show.homes", lang)}</dt><dd>{k("price")}</dd></div>
     </dl>
     <p class="sb-cta" id="pedir"><button type="button" class="sb-btn sb-btn-p" data-req>{k("visit")}</button>{save && <Heart lang={lang} kind="home" id={p.id} label={`${p.name}, ${save.muni}`} href={save.href} class="sb-ht" />}</p>
+    {share && <DevShare lang={lang} id={p.id} />}
   </header>
 
   {gallery.length > 0 && <section class="sb-sec" aria-label={c("show.gallery", lang)}>

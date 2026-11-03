@@ -4,7 +4,7 @@
 import mapCss from "maplibre-gl/dist/maplibre-gl.css?url";
 import { feature, mesh } from "topojson-client";
 import { savePlace } from "../lib/brief";
-import { track, edOf } from "../lib/track";
+import { track, edOf, ev, timeBand, rememberPlace } from "../lib/track";
 import { heartHTML } from "./hearts";
 
 type Series = { n: string; m2: (number | null)[]; rq: (number | null)[]; yield: number | null; g10?: number | null; cagrP?: number | null;
@@ -165,7 +165,7 @@ export function initMapV3(root: HTMLElement) {
   amountIn.addEventListener("blur", commit);
 
   // ------------------------------------------------------------ chips, 2D and 3D, overlays
-  root.querySelectorAll<HTMLButtonElement>("[data-layer]").forEach((b) => b.addEventListener("click", () => setLayer(b.dataset.layer as Layer)));
+  root.querySelectorAll<HTMLButtonElement>("[data-layer]").forEach((b) => b.addEventListener("click", () => { setLayer(b.dataset.layer as Layer); ev({ event: `map/layer/${b.dataset.layer}`, place: selected ?? undefined, origin: mode }); }));
   // Prompt 51 §3.3: vacant dwellings, share of the stock (INE, Census 2021, indicator 0012517), loaded only when chosen.
   async function loadVac() {
     if (VAC || !P) return;
@@ -191,7 +191,10 @@ export function initMapV3(root: HTMLElement) {
     map.easeTo({ pitch: flat ? 0 : 50, bearing: flat ? 0 : -12, duration: reduce() ? 0 : 700 });
     if (!flat) governor();
   }
-  root.querySelectorAll<HTMLButtonElement>("[data-overlay]").forEach((b) => b.addEventListener("click", () => setOverlay(b.dataset.overlay as "golf" | "beach" | "devs", !overlays[b.dataset.overlay as "golf"])));
+  root.querySelectorAll<HTMLButtonElement>("[data-overlay]").forEach((b) => b.addEventListener("click", () => {
+    const k = b.dataset.overlay as "golf" | "beach" | "devs", on = !overlays[k];
+    setOverlay(k, on); ev({ event: `map/overlay/${k}/${on ? "on" : "off"}`, place: selected ?? undefined, origin: mode });
+  }));
   async function setOverlay(k: "golf" | "beach" | "devs", on: boolean) {
     overlays[k] = on; root.querySelector(`[data-overlay="${k}"]`)?.setAttribute("aria-pressed", String(on)); syncUrl();
     await load();
@@ -373,15 +376,20 @@ export function initMapV3(root: HTMLElement) {
     map.flyTo({ center: [x, y], zoom: z, pitch: flat ? 0 : 46, duration: reduce() ? 0 : dur, curve: 1.3, easing: ease, essential: true,
       padding: isWide() ? { right: 440, left: 0, top: 60, bottom: 120 } : { bottom: canvas.clientHeight * 0.42, top: 60, left: 0, right: 0 } });
   }
+  // Time on a place (part 5): from the card opening to its closing, another place, a partner card or the page hiding;
+  // sent as a band (lib/track.ts TIME_BANDS), never raw milliseconds.
+  let tPlace: string | null = null, t0 = 0;
+  const timeEnd = () => { if (tPlace && t0) ev({ event: "map/time", place: tPlace, band: timeBand(performance.now() - t0), origin: mode }); tPlace = null; t0 = 0; };
+  const timeStart = (slug: string) => { if (tPlace === slug) return; timeEnd(); tPlace = slug; t0 = performance.now(); };
   function select(slug: string | null, fly = true) {
-    if (slug) track(`s/${slug}`);
+    if (slug) ev({ event: "map/place", place: slug, origin: mode });
     if (pinA && slug && slug !== pinA) { compare(pinA, slug); return; }
     selected = slug; selPar = null;
     if (map) map.setFilter("sel", ["==", ["get", "s"], slug ?? ""]);
     const p = slug ? byS.get(slug) : null;
     if (p && map && fly) flyTo(p.x, p.y, Math.max(map.getZoom(), p.a < 40 ? 8.6 : 7.6));
     syncUrl(); sentence();
-    if (slug && p) { showPlace(slug); savePlace(p.n); } else closeSheet();
+    if (slug && p) { showPlace(slug); savePlace(p.n); rememberPlace(p.n); timeStart(slug); } else closeSheet();
   }
 
   // ------------------------------------------------------------ the place sheet (side on desktop, bottom with three heights on mobile)
@@ -462,7 +470,7 @@ export function initMapV3(root: HTMLElement) {
     sheetIn.querySelectorAll<HTMLButtonElement>("[data-goto]").forEach((b) => b.addEventListener("click", () => select(b.dataset.goto!)));
     if (focus && wasHidden && root.contains(document.activeElement)) sheetIn.querySelector<HTMLElement>("h3")?.focus({ preventScroll: true });
   }
-  function closeSheet() { sheet.classList.remove("is-open"); setTimeout(() => { if (!sheet.classList.contains("is-open")) sheet.hidden = true; }, 260); pinA = null; if (map) map.setFilter("sel", ["==", ["get", "s"], ""]); }
+  function closeSheet() { timeEnd(); sheet.classList.remove("is-open"); setTimeout(() => { if (!sheet.classList.contains("is-open")) sheet.hidden = true; }, 260); pinA = null; if (map) map.setFilter("sel", ["==", ["get", "s"], ""]); }
   function setDetent(d: number) { detent = d; sheet.dataset.detent = String(d); }
   { // drag the sheet between its three heights (mobile)
     const grab = $("[data-grab]"); let y0 = 0, h0 = 0, on = false;
@@ -471,7 +479,7 @@ export function initMapV3(root: HTMLElement) {
     const end = (e: PointerEvent) => { if (!on) return; on = false; sheet.classList.remove("is-drag"); const hh = sheet.getBoundingClientRect().height / root.clientHeight; sheet.style.height = ""; if (Math.abs(e.clientY - y0) < 6) { setDetent(detent === 2 ? 1 : 2); return; } hh < 0.25 ? (hh < 0.12 ? select(null) : setDetent(0)) : setDetent(hh < 0.66 ? 1 : 2); };
     grab.addEventListener("pointerup", end); grab.addEventListener("pointercancel", end);
   }
-  async function share() { syncUrl(); try { if (navigator.share) await navigator.share({ url: location.href }); else { await navigator.clipboard.writeText(location.href); toast(L.copied); } } catch { /* closed */ } }
+  async function share() { syncUrl(); ev({ event: "map/share", place: selected ?? undefined, origin: navigator.share ? "native" : "copy" }); try { if (navigator.share) await navigator.share({ url: location.href }); else { await navigator.clipboard.writeText(location.href); toast(L.copied); } } catch { /* closed */ } }
   function toast(t: string) { const el = $("[data-toast]"); el.textContent = t; el.hidden = false; el.classList.add("is-on"); clearTimeout((el as any).t); (el as any).t = setTimeout(() => { el.classList.remove("is-on"); setTimeout(() => (el.hidden = true), 250); }, 2600); }
 
   // ------------------------------------------------------------ parishes, golf, beaches, developments
@@ -516,7 +524,7 @@ export function initMapV3(root: HTMLElement) {
     return f ? golf.courses[f.properties.c] ?? null : null;
   }
   function showGolf(g: Course) {
-    selected = null; if (map) map.setFilter("sel", ["==", ["get", "s"], ""]);
+    timeEnd(); selected = null; if (map) map.setFilter("sel", ["==", ["get", "s"], ""]);
     const muni = byS.get(g.m)?.n ?? "";
     const when = g.status !== "open" ? L.golf.opening.replace("{y}", g.year || "—") : g.year;
     let h = `<div class="m3-photo m3-photo-none m3-golfband"></div><div class="m3-sb"><p class="m3-kick">${esc([g.resort !== g.n ? g.resort : "", muni].filter(Boolean).join(" · "))}</p><h3 tabindex="-1">${esc(g.n)}</h3>`;
@@ -572,7 +580,7 @@ export function initMapV3(root: HTMLElement) {
 
   // Prompt 38: a partner project's card (photo, name, summary, three features, homes for sale now, price on request).
   function showProject(p: Proj, open = true) {
-    track(`${edOf()}/p/${p.id}/pin`);
+    timeEnd(); ev({ event: `p/${p.id}/pin`, place: p.id, origin: "map" });
     const pl = cfg.pl ?? {};
     const photo = p.render ? `<img class="m3-photo" src="${esc(p.render)}-800.webp" alt="" width="800" height="450">` : "";
     const pm = byS.get(p.muni)?.n ?? "";
@@ -703,9 +711,12 @@ export function initMapV3(root: HTMLElement) {
   // ------------------------------------------------------------ start
   // Nothing moves while the tab is hidden; leaving the page frees the map (and a page restored from the back-forward
   // cache builds it again).
-  document.addEventListener("visibilitychange", () => { if (document.hidden) { stopTour(); stopPlay(); if (rotating) halt(); map?.stop(); } });
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) { timeEnd(); stopTour(); stopPlay(); if (rotating) halt(); map?.stop(); }
+    else if (selected && !sheet.hidden && sheet.classList.contains("is-open")) timeStart(selected);  // back on the open card: the clock runs again
+  });
   let wasLive = false;
-  addEventListener("pagehide", () => { wasLive = !!map; teardown(); });
+  addEventListener("pagehide", () => { timeEnd(); wasLive = !!map; teardown(); });
   addEventListener("pageshow", (e) => { if ((e as PageTransitionEvent).persisted && wasLive) load(); });
   dimButtons();
   if (layer !== "price") setLayer(layer);

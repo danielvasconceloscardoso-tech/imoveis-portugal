@@ -130,8 +130,9 @@ const jsonLd = {
   </script>
   <script>
     // Prompt 51 §3: a question the reader opens by hand is counted (cookie-free, lib/track.ts) for "top questions asked".
-    import { track } from "../lib/track";
-    document.querySelectorAll<HTMLDetailsElement>("details.fq-qa").forEach((d) => d.querySelector("summary")?.addEventListener("click", () => { if (!d.open && d.id) track(`q/${d.id}`); }));
+    // Part 5: through the one event schema (lib/track.ts ev "faq/open", step = the question id; same /e/q/{id}/ page).
+    import { ev } from "../lib/track";
+    document.querySelectorAll<HTMLDetailsElement>("details.fq-qa").forEach((d) => d.querySelector("summary")?.addEventListener("click", () => { if (!d.open && d.id) ev({ event: "faq/open", step: d.id, origin: "faq" }); }));
   </script>
 </V2>
 

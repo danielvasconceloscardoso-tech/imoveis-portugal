@@ -15,12 +15,16 @@
 //   /e/{ed}/save/home/{id}/  /e/{ed}/unsave/home/{id}/   a home saved to or removed from "A sua seleção"
 //   /e/save/region/{municipality}/  /e/unsave/region/{municipality}/   the same for a region
 //   /e/{ed}/saved/go/            a saved item opened from "A sua seleção"
+//   and every other event of the one schema (lib/track.ts ev, lib/events.ts): /e/{ed}/{event}/ (map layers, Passo a
+//   passo stations, flow steps and stops, developer page views and shares, hearts, bottom bar, letter signups) and
+//   /e/s/{municipality}/t/{band}/ (time on a place)
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import Beacon from "../../components/Beacon.astro";
 import { ED_ORDER, LANGS } from "../../i18n";
-import { PROJECTS } from "../../lib/projects";
 import { faqFor } from "../../lib/content";
+import { editionEvents, placeEvents } from "../../lib/events";
+import { PROJECTS } from "../../lib/projects";
 import { sim1Events } from "../../lib/sim1";
 
 export function getStaticPaths() {
@@ -40,8 +44,11 @@ export function getStaticPaths() {
     for (const p of PROJECTS) for (const k of ["pin", "card", "req", "unit", "filter", "rel"]) out.push(`${e}/p/${p.id}/${k}`);
   }
   for (const m of munis) out.push(`s/${m}`, `save/region/${m}`, `unsave/region/${m}`);
+  const per = editionEvents(), times = placeEvents();
+  for (const e of [...ED_ORDER, "xx"]) for (const s of per) out.push(`${e}/${s}`);
+  for (const m of munis) { out.push(`s/${m}`); for (const t of times) out.push(`s/${m}/${t}`); }
   for (const q of qs) if (/^[a-z0-9-]+$/.test(q)) out.push(`q/${q}`);
-  return out.map((p) => ({ params: { p } }));
+  return [...new Set(out)].map((p) => ({ params: { p } }));
 }
 ---
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex, nofollow, noarchive"><title>·</title><Beacon /></head><body></body></html>
