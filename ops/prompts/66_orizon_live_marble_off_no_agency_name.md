@@ -24,17 +24,8 @@ Operator, 3 Nov 2026. Goes live under D67. Record it as the next free D number i
    - the river views;
    - the location with straight-line distances (OpenStreetMap, as for Marble Terrace).
 5. **Material.** The operator will upload Shalu's brochure, renders, plans and video. Ask him where; suggest content/developers/orizon/ for source files and site/public/img/developers/orizon/ for web sizes. Use only material from Shalu or published by Shalu, credited "Shalu Investments". If a piece of the post cannot be rebuilt from what he gives you, say so; do not ship a weaker version (rule 17).
-6. **Around O'rizon: the best of Gondomar.** The message to Shalu says we showcase what makes a place worth living in: its artists, restaurants, schools and local businesses. The O'rizon showcase and the Gondomar card must show that, not only homes and prices. One short section, in the article voice (content/VOICE_AND_WORLD.md), with a real photograph where one exists:
-   - **Craft and culture:** the filigree (Rota da Filigrana, Museu Municipal da Filigrana, the Inventário Nacional do Património Cultural Imaterial listing).
-   - **The river:** the Estação Náutica, the Marina do Freixo, about 37 km of Douro riverside.
-   - **Where to eat:** two or three restaurants by the river or in Valbom, from published guides only (Guia Michelin, Boa Cama Boa Mesa, the Câmara's own pages). No reviews, no ratings copied.
-   - **Daily life:** schools and hospitals within reach, using the golden-sample list already agreed for Gondomar (Colégio Paulo VI, CLIP, Lycée Français International, Hospital de São João, CUF, Lusíadas), with straight-line distances.
-   - **Local businesses** that represent Gondomar well, each with a source. These are editorial picks, so no "Sponsored" label, unless one later becomes a partner.
-   
-   Every fact has its source and date (D12). If you cannot source a pick, leave it out.
-7. **World Cup 2030.** Portugal co-hosts the 2030 FIFA World Cup with Spain and Morocco, and many more people will be looking at Portugal and at Porto. Add one quiet line to the Gondomar card and the O'rizon location facts: the straight-line distance to Estádio do Dragão, with "a 2030 World Cup venue" **only if** FIFA or the Federação Portuguesa de Futebol confirm the Dragão as a venue (cite the page and date). Otherwise just the distance to the stadium, no World Cup claim. No countdowns, no promotional tone.
-8. **The short link** `imoveisportugal.pt/orizon` (site/public/_redirects) points today to the private preview /d/f658bd1eef/. Point it instead to the English map with Gondomar open and the O'rizon pin visible. The message to Shalu says "pick Gondomar, play with the map". Keep the private preview page as it is.
-9. Do not index, do not promote: no social post, no newsletter mention, no sitemap change beyond what the build does. launchReady stays false.
+6. **The short link** `imoveisportugal.pt/orizon` (site/public/_redirects) points today to the private preview /d/f658bd1eef/. Point it instead to the English map with Gondomar open and the O'rizon pin visible. The message to Shalu says "pick Gondomar, play with the map". Keep the private preview page as it is.
+7. Do not index, do not promote: no social post, no newsletter mention, no sitemap change beyond what the build does. launchReady stays false.
 
 ## 2. Marble Terrace switched off, one flag to bring it back
 1. Both `marble-terrace` (Gondomar) and `marble-terrace-vila-do-conde` get `pending: true`. They then disappear from main and stay visible on design-v2. To bring them back: `pending: false`. Write that line in ops/TASKS.md.
@@ -65,11 +56,10 @@ Operator, 3 Nov 2026. Goes live under D67. Record it as the next free D number i
 1. /en/lu/map/ and /pt/lu/mapa/: Gondomar shows the O'rizon pin, labelled "Our pick" / "Seleção", never "Sponsored".
 2. The O'rizon showcase opens from the pin and from the Gondomar card. It has its homes with published prices and the features agreed with the operator, and it looks at least as good as Marble Terrace did.
 3. imoveisportugal.pt/orizon opens the map on Gondomar.
-4. The O'rizon showcase and the Gondomar card show the best of Gondomar (filigree, river, restaurants, schools and hospitals, local businesses), every item sourced, plus the Dragão line, worded as section 1.7 allows.
-5. Marble Terrace appears nowhere on main, Gondomar or Vila do Conde, and still appears on design-v2.
-6. Searching the built main site (dist) for "Habinedita" and "13250" returns nothing.
-7. No sentence reads badly where "agência parceira" was replaced (read every changed block in the three languages).
-8. `node scripts/check-content.mjs`, `node scripts/check-parity.mjs` and the build pass.
+4. Marble Terrace appears nowhere on main, Gondomar or Vila do Conde, and still appears on design-v2.
+5. Searching the built main site (dist) for "Habinedita" and "13250" returns nothing.
+6. No sentence reads badly where "agência parceira" was replaced (read every changed block in the three languages).
+7. `node scripts/check-content.mjs`, `node scripts/check-parity.mjs` and the build pass.
 
 ## 5. Report
 1. The live links: the map on Gondomar and the O'rizon showcase.
