@@ -66,6 +66,8 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
     const given = new Set<string>();
     for (const s of steps) if ("prefill" in s && (s.prefill === "edition" || (s.prefill === "budget" && pre.budget))) { A[s.id] = pre[s.prefill]; given.add(s.id); }
     const door = q0.get("door"); if (door === "buy" || door === "sell" || door === "inherit") A.door = door;
+    // The one-screen simulator (components/Sim1.astro) also names the place it was showing: it wins over an older answer.
+    const pl = q0.get("place"); if (pl) A.place = pl;
     while (offset < N - 1 && given.has(steps[offset].id)) offset++;
     for (const k of ["cg", "ed", "door"]) q0.delete(k);
     history.replaceState(null, "", `${location.pathname}${q0.size ? `?${q0}` : ""}${location.hash}`);

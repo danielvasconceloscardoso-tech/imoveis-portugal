@@ -1,0 +1,325 @@
+---
+// The one-screen simulator (night of 3 Nov 2026, part 3) at the top of the calculators page: the price, the region,
+// what kind of home, what for and how the reader pays, as a slider and taps; the total, the taxes, the mortgage, the
+// monthly payment and the space the price buys in each region update as they move. Maths: lib/sims.ts through
+// lib/sim1.ts (never re-implemented); prices per m²: public/data/prices.json (INE). Each figure carries its source.
+// Signals (lib/track.ts): /e/{ed}/sim1/... for slider bands, taps, rows opened and next steps; no amounts beyond bands.
+// Wording: COPY_DECK.md "sim1.*" (and the calculators' own "sims.r.*" labels).
+import { HTML_LANG, pathFor, type Lang, type EdCode } from "../i18n";
+import { EDITION_CUR, RATE, FACTS } from "../lib/content";
+import { PRICES } from "../lib/prices";
+import { placeName } from "../lib/places";
+import { SUB } from "../lib/tools";
+import { BRIEF_KEYS } from "../lib/brief";
+import { SIM1_REGIONS, SIM1_DEFAULT, SIM1_ENTRY, sim1, toPos } from "../lib/sim1";
+import { c } from "../lib/copy";
+import "../styles/sim1.css";
+
+interface Props { lang: Lang; ed: EdCode; }
+const { lang, ed } = Astro.props;
+const loc = HTML_LANG[lang];
+const cur = EDITION_CUR[ed];
+const fx = cur ? RATE(cur).rate : 1;
+const curCode = cur ?? "EUR";
+
+// INE: the latest published median per m² of each region, and its quarter.
+const qLabel = (q: string) => { const [y, n] = q.split("-Q"); return c("sim1.src.ine", lang, { q: n, y }); };
+const regions = SIM1_REGIONS.map((r) => {
+  const s = PRICES.munis[r.id];
+  if (!s) throw new Error(`sim1: ${r.id} is not in prices.json`);
+  let i = s.m2.length - 1;
+  while (i > 0 && s.m2[i] == null) i--;
+  const n = placeName(s.n, lang);
+  // "no Porto", "no Funchal", "no Peso da Régua", "em Lisboa"; "in Lisbon"; "à Lisbonne".
+  const art = lang === "pt" ? (["Porto", "Funchal", "Peso da Régua"].includes(s.n) ? "no" : "em") : lang === "fr" ? "à" : "in";
+  return { id: r.id, n, sub: r.sub ?? "", m2: s.m2[i] as number, q: qLabel(PRICES.quarters[i]), inplace: `${art} ${n}` };
+});
+const m2 = Object.fromEntries(regions.map((r) => [r.id, r.m2]));
+
+// Sources, in small print next to each figure (the fact's own title, shortened as on the calculators).
+const short = (t: string) => t.split(/[;(]/)[0].trim();
+const srcOf = (id: string) => ({ t: short(FACTS[id].source_title), u: FACTS[id].source_url });
+const SRC = { imtLive: srcOf("pt-imt-hpp-2026"), imtAway: srcOf("pt-imt-nonresident-flat"), is: srcOf("pt-is-purchase"), deed: srcOf("pt-casa-pronta-fees"),
+  rate: srcOf(PRICES.mortgage.fact), ltv: srcOf("pt-ltv-limits"), stamp: srcOf("pt-is-loan-5y"), ine: { t: "", u: FACTS["ine-m2-history"].source_url }, fx: cur ? srcOf(RATE(cur).id) : null };
+
+const month = new Intl.DateTimeFormat(loc, { month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(`${PRICES.mortgage.month}-15T00:00:00Z`));
+const L = {
+  total: c("sims.r.total", lang), local: c("sim1.local", lang, { local: "{local}" }),
+  imt: c("sims.r.imt", lang), is: c("sims.r.is", lang), deed: c("sims.r.deed", lang), loan: c("sims.r.loan", lang), monthly: c("sims.r.monthly", lang),
+  interest: c("sims.r.interest", lang), stamp: c("sims.r.stamp", lang), entry: c("sim1.entry", lang), ltvOver: c("sims.ltv.over", lang, { cap: "{cap}" }),
+  rowBuys: c("sim1.row.buys", lang, { inplace: "{inplace}" }), m2: c("sim1.m2", lang, { n: "{n}" }), m2rate: c("sim1.m2.rate", lang, { v: "{v}" }),
+  src: c("sim1.src", lang, { s: "{s}" }), homes: c("sim1.next.homes", lang, { inplace: "{inplace}" }), save: c("sim1.next.save", lang), saved: c("sim1.next.saved", lang),
+  liveNote: c("sim1.use.live.note", lang), awayNote: c("sim1.use.away.note", lang),
+  apartment: c("sim1.type.apartment", lang), house: c("sim1.type.house", lang), live: c("sim1.use.live", lang), away: c("sim1.use.away", lang),
+  cash: c("sim1.pay.cash", lang), loanPay: c("sim1.pay.loan", lang),
+};
+const base = pathFor(lang, ed, "sims");
+const D = {
+  loc, cur: curCode, fx, ed, regions, m2, L, SRC,
+  paths: { map: pathFor(lang, ed, "map"), consult: pathFor(lang, ed, "consult"), cost: `${base}${SUB.cost[lang]}/`, payment: `${base}${SUB.payment[lang]}/` },
+  brief: { labels: Object.fromEntries(BRIEF_KEYS.map((k) => [k, c(`brief.${k}`, lang)])), from: c(`journey.from.${ed}`, lang) },
+};
+
+// The first result, rendered at build time with the same formatting as the browser (nothing moves when the script runs).
+const st = SIM1_DEFAULT;
+const r0 = sim1(st, m2);
+const money = (v: number, k = "EUR") => new Intl.NumberFormat(loc, { style: "currency", currency: k, maximumFractionDigits: 0, useGrouping: "always" } as Intl.NumberFormatOptions).format(v);
+const num = (v: number) => new Intl.NumberFormat(loc, { maximumFractionDigits: 0, useGrouping: "always" } as Intl.NumberFormatOptions).format(v);
+const pctS = (v: number, d = 0) => `${new Intl.NumberFormat(loc, { minimumFractionDigits: d, maximumFractionDigits: d }).format(v)}${lang === "fr" ? " %" : "%"}`;
+const local = (v: number) => (cur ? L.local.replace("{local}", money(v * fx, curCode)) : "");
+const reg0 = regions.find((r) => r.id === st.region)!;
+const loanTerms = c("sim1.loan.terms", lang, { years: r0.years, month, rate: pctS(r0.rate, 2).replace(/ ?%$/, "") });
+const SEGS: { k: "type" | "use" | "pay"; opts: [string, string][] }[] = [
+  { k: "type", opts: [["apartment", L.apartment], ["house", L.house]] }, { k: "use", opts: [["live", L.live], ["away", L.away]] }, { k: "pay", opts: [["cash", L.cash], ["loan", L.loanPay]] }];
+---
+<section class="s1" id="simulador" data-s1 aria-labelledby="s1-h">
+  <div class="s1-head vh">
+    <h2 id="s1-h" class="s1-h">{c("sim1.h", lang)}</h2>
+    <p class="s1-p">{c("sim1.p", lang)}</p>
+  </div>
+  <div class="s1-grid">
+    <div class="s1-side">
+      <div class="s1-out" aria-live="polite">
+        <div class="s1-big-col">
+          <p class="s1-k">{L.total}</p>
+          <p class="s1-big" data-o="total">{money(r0.buy.total)}</p>
+          <p class="s1-local" data-o="total-local" hidden={!cur}>{local(r0.buy.total)}</p>
+        </div>
+        <div class="s1-big-col s1-mo" data-o="mo" hidden={!r0.credit}>
+          <p class="s1-k">{c("sim1.row.loan", lang)}</p>
+          <p class="s1-big s1-big2" data-o="monthly">{r0.credit && money(r0.credit.monthly)}</p>
+          <p class="s1-local" data-o="monthly-local" hidden={!cur}>{r0.credit && local(r0.credit.monthly)}</p>
+        </div>
+      </div>
+
+      <div class="s1-rows">
+        <details class="s1-row" data-row="costs">
+          <summary><span class="s1-rk">{c("sim1.row.costs", lang)}</span><strong data-o="extra">{money(r0.buy.extra)}</strong></summary>
+          <dl class="s1-dl">
+            <dt>{L.imt}<a class="s1-src" data-o="imt-src" href={SRC.imtAway.u} rel="noopener">{L.src.replace("{s}", SRC.imtAway.t)}</a></dt><dd data-o="imt">{money(r0.buy.imt)}</dd>
+            <dt>{L.is}<a class="s1-src" href={SRC.is.u} rel="noopener">{L.src.replace("{s}", SRC.is.t)}</a></dt><dd data-o="is">{money(r0.buy.is)}</dd>
+            <dt>{L.deed}<a class="s1-src" href={SRC.deed.u} rel="noopener">{L.src.replace("{s}", SRC.deed.t)}</a></dt><dd data-o="deed">{money(r0.buy.deed)}</dd>
+          </dl>
+          <p class="s1-note" data-o="use-note">{L.awayNote}</p>
+          <a class="s1-more" data-next="cost-detail" data-o="cost-href" href={D.paths.cost}>{c("sim1.detail.cost", lang)}</a>
+        </details>
+
+        <details class="s1-row" data-row="loan" data-o="loan-row" hidden={!r0.credit}>
+          <summary><span class="s1-rk">{c("sim1.row.loan", lang)}</span><strong data-o="monthly2">{r0.credit && money(r0.credit.monthly)}</strong></summary>
+          <dl class="s1-dl">
+            <dt>{L.entry}</dt><dd data-o="deposit">{money(r0.deposit)}</dd>
+            <dt>{L.loan}<a class="s1-src" href={SRC.ltv.u} rel="noopener">{L.src.replace("{s}", SRC.ltv.t)}</a></dt><dd data-o="loan">{r0.credit && money(r0.credit.loan)}</dd>
+            <dt>{L.monthly}<a class="s1-src" href={SRC.rate.u} rel="noopener">{L.src.replace("{s}", SRC.rate.t)}</a></dt><dd data-o="monthly3">{r0.credit && money(r0.credit.monthly)}</dd>
+            <dt>{L.interest}</dt><dd data-o="interest">{r0.credit && money(r0.credit.interest)}</dd>
+            <dt>{L.stamp}<a class="s1-src" href={SRC.stamp.u} rel="noopener">{L.src.replace("{s}", SRC.stamp.t)}</a></dt><dd data-o="stamp">{r0.credit && money(r0.credit.stamp)}</dd>
+          </dl>
+          <p class="s1-note">{loanTerms}</p>
+          <p class="s1-warn" data-o="ltv" hidden={!r0.credit?.overCap}>{r0.credit && L.ltvOver.replace("{cap}", String(r0.credit.cap))}</p>
+          <a class="s1-more" data-next="payment-detail" data-o="payment-href" href={D.paths.payment}>{c("sim1.detail.payment", lang)}</a>
+        </details>
+
+        <details class="s1-row" data-row="buys">
+          <summary><span class="s1-rk" data-o="buys-k">{L.rowBuys.replace("{inplace}", reg0.inplace)}</span><strong data-o="area">{L.m2.replace("{n}", num(r0.area[reg0.id]))}</strong></summary>
+          <ul class="s1-buys">{regions.map((r) => (
+            <li><button type="button" class="s1-buy" data-region={r.id} aria-pressed={r.id === st.region ? "true" : "false"}>
+              <span class="s1-buy-n">{r.n}</span><span class="s1-buy-r" data-m2={r.id}>{L.m2rate.replace("{v}", money(r.m2))}</span><strong data-area={r.id}>{L.m2.replace("{n}", num(r0.area[r.id]))}</strong>
+            </button></li>))}
+          </ul>
+          <p class="s1-note">{c("sim1.buys.note", lang)} <a class="s1-src" href={SRC.ine.u} rel="noopener" data-o="ine-src">{L.src.replace("{s}", reg0.q)}</a></p>
+        </details>
+      </div>
+
+      <div class="s1-next">
+        <a class="s1-cta" data-next="homes" data-o="homes" href={`${D.paths.map}?place=${reg0.id}&budget=${st.price}`}>{L.homes.replace("{inplace}", reg0.inplace)}</a>
+        <div class="s1-next2">
+          <button type="button" class="s1-save" data-next="save" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.3 4.6 13a4.6 4.6 0 0 1 6.5-6.5l.9.9.9-.9a4.6 4.6 0 0 1 6.5 6.5Z"/></svg><span data-o="save-l">{L.save}</span></button>
+          <button type="button" class="s1-cg" data-next="concierge">{c("sim1.next.cg", lang)}</button>
+        </div>
+        <p class="s1-fine">{c("sim1.next.cg.note", lang)}</p>
+      </div>
+    </div>
+
+    <div class="s1-in">
+      <div class="s1-f">
+        <div class="s1-lab"><span id="s1-price-l">{c("sim1.price", lang)}</span><output class="s1-val" data-o="price" for="s1-price">{money(st.price)}</output></div>
+        <input id="s1-price" class="s1-range" type="range" min="0" max="1000" step="1" value={toPos(st.price)} aria-labelledby="s1-price-l" data-slider="budget" />
+        <p class="s1-local s1-local-in" data-o="price-local" hidden={!cur}>{local(st.price)}</p>
+      </div>
+
+      <div class="s1-f" role="group" aria-labelledby="s1-reg-l">
+        <div class="s1-lab"><span id="s1-reg-l">{c("sim1.region", lang)}</span></div>
+        <div class="s1-chips">{regions.map((r) => (
+          <button type="button" class="s1-chip" data-region={r.id} aria-pressed={r.id === st.region ? "true" : "false"}><span>{r.n}</span>{r.sub && <small>{r.sub}</small>}</button>
+        ))}</div>
+      </div>
+
+      {SEGS.map((g) => (
+        <div class="s1-f" role="group" aria-labelledby={`s1-${g.k}-l`}>
+          <div class="s1-lab"><span id={`s1-${g.k}-l`}>{c(`sim1.${g.k}`, lang)}</span></div>
+          <div class="s1-seg" data-seg={g.k}>{g.opts.map(([v, l]) => <button type="button" class="s1-seg-b" data-v={v} aria-pressed={v === st[g.k] ? "true" : "false"}>{l}</button>)}</div>
+        </div>
+      ))}
+
+      <div class="s1-f s1-entry" data-o="entry-f" hidden={st.pay !== "loan"}>
+        <div class="s1-lab"><span id="s1-entry-l">{L.entry}</span><output class="s1-val" data-o="entry" for="s1-entry">{pctS(st.entry)} · {money(r0.deposit)}</output></div>
+        <input id="s1-entry" class="s1-range" type="range" min={SIM1_ENTRY.min} max={SIM1_ENTRY.max} step={SIM1_ENTRY.step} value={st.entry} aria-labelledby="s1-entry-l" data-slider="entry" />
+      </div>
+      <p class="s1-fine">{c("sims.estimate", lang)}{SRC.fx && <> <a class="s1-src" href={SRC.fx.u} rel="noopener">{L.src.replace("{s}", SRC.fx.t)}</a></>}</p>
+    </div>
+  </div>
+  <script type="application/json" id="s1-data" set:html={JSON.stringify(D)} />
+</section>
+
+<script>
+  import { sim1, toVal, toPos, budgetBand, entryBand, SIM1_DEFAULT, SIM1_ENTRY, type Sim1State } from "../lib/sim1";
+  import { track, edOf } from "../lib/track";
+  import * as saved from "../lib/saved";
+  import { saveSim, savePlace, gather, summary, type BriefLabels } from "../lib/brief";
+
+  const root = document.querySelector<HTMLElement>("[data-s1]");
+  if (root) {
+    type R = { id: string; n: string; sub: string; m2: number; q: string; inplace: string };
+    type Src = { t: string; u: string };
+    const D = JSON.parse(document.getElementById("s1-data")!.textContent || "{}") as {
+      loc: string; cur: string; fx: number; ed: string; regions: R[]; m2: Record<string, number>; L: Record<string, string>;
+      SRC: Record<string, Src | null>; paths: Record<string, string>; brief: { labels: BriefLabels; from: string };
+    };
+    const L = D.L, ed = edOf();
+    const O = (k: string) => root.querySelector<HTMLElement>(`[data-o="${k}"]`)!;
+    const opt = { maximumFractionDigits: 0, useGrouping: "always" } as Intl.NumberFormatOptions;
+    const eurF = new Intl.NumberFormat(D.loc, { style: "currency", currency: "EUR", ...opt });
+    const locF = new Intl.NumberFormat(D.loc, { style: "currency", currency: D.cur, ...opt });
+    const numF = new Intl.NumberFormat(D.loc, opt);
+    const money = (v: number) => eurF.format(v);
+    const local = (v: number) => (D.cur !== "EUR" ? L.local.replace("{local}", locF.format(v * D.fx)) : "");
+    const pct = (v: number) => `${numF.format(v)}${D.loc.startsWith("fr") ? " %" : "%"}`;
+    const reg = (id: string) => D.regions.find((r) => r.id === id) ?? D.regions[0];
+
+    // The state: from a shared link (?sv=&sr=&st=&su=&sp=&se=), else the budget the reader already gave the map or the path.
+    const q = new URLSearchParams(location.search);
+    const st: Sim1State = { ...SIM1_DEFAULT };
+    const stored = (() => { try { return Number(localStorage.getItem("ip.budget")) || 0; } catch { return 0; } })();
+    const sv = Number(q.get("sv")) || stored;
+    if (sv >= 1e5 && sv <= 1e7) st.price = q.get("sv") ? Math.round(sv) : toVal(toPos(sv));
+    if (D.m2[q.get("sr") || ""]) st.region = q.get("sr")!;
+    if (q.get("st") === "house") st.type = "house";
+    if (q.get("su") === "live") st.use = "live";
+    if (q.get("sp") === "cash") st.pay = "cash";
+    const se = Number(q.get("se"));
+    if (se >= SIM1_ENTRY.min && se <= SIM1_ENTRY.max) st.entry = Math.round(se / SIM1_ENTRY.step) * SIM1_ENTRY.step;
+
+    const priceSl = root.querySelector<HTMLInputElement>('[data-slider="budget"]')!;
+    const entrySl = root.querySelector<HTMLInputElement>('[data-slider="entry"]')!;
+    const fill = (el: HTMLInputElement) => el.style.setProperty("--p", `${((Number(el.value) - Number(el.min)) / (Number(el.max) - Number(el.min))) * 100}%`);
+    const press = (sel: string, on: (b: HTMLElement) => boolean) => root.querySelectorAll<HTMLElement>(sel).forEach((b) => b.setAttribute("aria-pressed", on(b) ? "true" : "false"));
+    const flag = (b: boolean) => (b ? "1" : "0");
+
+    function render(url = true) {
+      const r = sim1(st, D.m2), g = reg(st.region);
+      O("total").textContent = money(r.buy.total);
+      O("total-local").textContent = local(r.buy.total);
+      O("price").textContent = money(st.price);
+      O("price-local").textContent = local(st.price);
+      O("extra").textContent = money(r.buy.extra);
+      O("imt").textContent = money(r.buy.imt);
+      O("is").textContent = money(r.buy.is);
+      O("deed").textContent = money(r.buy.deed);
+      const imtSrc = (r.own ? D.SRC.imtLive : D.SRC.imtAway)!;
+      const a = O("imt-src") as HTMLAnchorElement; a.href = imtSrc.u; a.textContent = L.src.replace("{s}", imtSrc.t);
+      O("use-note").textContent = r.own ? L.liveNote : L.awayNote;
+      (O("cost-href") as HTMLAnchorElement).href = `${D.paths.cost}?price=${st.price}&own=${flag(r.own)}&resident=${flag(r.resident)}&mortgage=${flag(r.loan)}`;
+      const c = r.credit;
+      O("mo").hidden = !c; O("loan-row").hidden = !c; O("entry-f").hidden = !c;
+      O("entry").textContent = `${pct(st.entry)} · ${money(r.deposit)}`;
+      if (c) {
+        for (const k of ["monthly", "monthly2", "monthly3"]) O(k).textContent = money(c.monthly);
+        O("monthly-local").textContent = local(c.monthly);
+        O("deposit").textContent = money(r.deposit);
+        O("loan").textContent = money(c.loan);
+        O("interest").textContent = money(c.interest);
+        O("stamp").textContent = money(c.stamp);
+        O("ltv").hidden = !c.overCap; O("ltv").textContent = L.ltvOver.replace("{cap}", String(c.cap));
+        (O("payment-href") as HTMLAnchorElement).href = `${D.paths.payment}?price=${st.price}&deposit=${r.deposit}&years=${r.years}&rate=${r.rate}&own=${flag(r.own)}`;
+      }
+      O("buys-k").textContent = L.rowBuys.replace("{inplace}", g.inplace);
+      O("area").textContent = L.m2.replace("{n}", numF.format(r.area[g.id]));
+      root.querySelectorAll<HTMLElement>("[data-area]").forEach((el) => { el.textContent = L.m2.replace("{n}", numF.format(r.area[el.dataset.area!])); });
+      O("ine-src").textContent = L.src.replace("{s}", g.q);
+      press("[data-region]", (b) => b.dataset.region === st.region);
+      for (const k of ["type", "use", "pay"] as const) press(`[data-seg="${k}"] .s1-seg-b`, (b) => b.dataset.v === st[k]);
+      priceSl.value = String(toPos(st.price)); entrySl.value = String(st.entry); fill(priceSl); fill(entrySl);
+      (O("homes") as HTMLAnchorElement).href = `${D.paths.map}?place=${g.id}&budget=${st.price}`;
+      O("homes").textContent = L.homes.replace("{inplace}", g.inplace);
+      syncSave();
+      // The inputs in the URL (no personal data), so a simulation can be shared; other parameters are kept.
+      if (!url) return;
+      const p = new URLSearchParams(location.search);
+      p.set("sv", String(st.price)); p.set("sr", st.region); p.set("st", st.type); p.set("su", st.use); p.set("sp", st.pay); p.set("se", String(st.entry));
+      history.replaceState(history.state, "", `${location.pathname}?${p}${location.hash}`);
+    }
+    const regionItem = () => { const g = reg(st.region); return { kind: "region" as const, id: g.id, label: g.n, href: `${D.paths.map}?place=${g.id}` }; };
+    function syncSave() {
+      const on = saved.has("region", st.region), b = root!.querySelector<HTMLElement>(".s1-save")!;
+      b.setAttribute("aria-pressed", on ? "true" : "false"); O("save-l").textContent = on ? L.saved : L.save;
+    }
+    // Kept on this device for the summary a later request can carry (lib/brief.ts, as the calculators do).
+    function keep() {
+      const r = sim1(st, D.m2);
+      saveSim("cost", { price: st.price, own: r.own, resident: r.resident, mortgage: r.loan },
+        { "r.imt": r.buy.imt, "r.is": r.buy.is, "r.deed": r.buy.deed, "r.extra": r.buy.extra, "r.total": r.buy.total });
+      if (r.credit) saveSim("payment", { price: st.price, deposit: r.deposit, years: r.years, rate: r.rate, own: r.own },
+        { "r.loan": r.credit.loan, "r.ltv": r.credit.ltv, "r.monthly": r.credit.monthly, "r.interest": r.credit.interest, "r.stamp": r.credit.stamp });
+      else saveSim("payment", { price: st.price, deposit: r.buy.total, years: r.years, rate: r.rate, own: r.own }, { "r.loan": 0, "r.ltv": 0, "r.monthly": 0, "r.interest": 0, "r.stamp": 0 });
+    }
+
+    // Sliders: live numbers while moving; the signal (the band only) and the saved result once the hand stops.
+    let tB = 0, tE = 0;
+    priceSl.addEventListener("input", () => {
+      st.price = toVal(Number(priceSl.value)); render();
+      clearTimeout(tB); tB = window.setTimeout(() => { track(`${ed}/sim1/budget/${budgetBand(st.price)}`); keep(); }, 700);
+    });
+    entrySl.addEventListener("input", () => {
+      st.entry = Number(entrySl.value); render();
+      clearTimeout(tE); tE = window.setTimeout(() => { track(`${ed}/sim1/entry/${entryBand(st.entry)}`); keep(); }, 700);
+    });
+    // Taps: a region (the chips or the list of what the price buys), the kind of home, what for, how they pay.
+    root.querySelectorAll<HTMLElement>("[data-region]").forEach((b) => b.addEventListener("click", () => {
+      st.region = b.dataset.region!; render(); keep(); track(`${ed}/sim1/region/${st.region}`);
+      if (b.classList.contains("s1-chip")) b.scrollIntoView({ block: "nearest", inline: "nearest", behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+    }));
+    root.querySelectorAll<HTMLElement>("[data-seg]").forEach((g) => g.querySelectorAll<HTMLElement>(".s1-seg-b").forEach((b) => b.addEventListener("click", () => {
+      const k = g.dataset.seg as "type" | "use" | "pay";
+      (st as Record<string, unknown>)[k] = b.dataset.v; render(); keep(); track(`${ed}/sim1/${k}/${b.dataset.v}`);
+    })));
+    // Which cost the reader opens: what worries them most.
+    root.querySelectorAll<HTMLDetailsElement>("details[data-row]").forEach((d) => d.addEventListener("toggle", () => { if (d.open) track(`${ed}/sim1/row/${d.dataset.row}`); }));
+
+    // Next steps.
+    root.querySelectorAll<HTMLAnchorElement>("a[data-next]").forEach((a) => a.addEventListener("click", () => {
+      keep(); track(`${ed}/sim1/next/${a.dataset.next}`);
+      if (a.dataset.next === "homes") { savePlace(reg(st.region).n); try { localStorage.setItem("ip.budget", String(st.price)); } catch { /* storage off */ } }
+    }));
+    root.querySelector(".s1-save")!.addEventListener("click", () => { const on = saved.toggle(regionItem()); syncSave(); track(`${ed}/sim1/next/${on ? "save" : "unsave"}`); });
+    addEventListener("ip:saved", syncSave);
+    addEventListener("storage", (e) => { if (e.key === "ip.saved") syncSave(); });
+    root.querySelector(".s1-cg")!.addEventListener("click", () => {
+      const g = reg(st.region);
+      keep(); savePlace(g.n); track(`${ed}/sim1/next/concierge`);
+      try { localStorage.setItem("ip.budget", String(st.price)); } catch { /* storage off */ }
+      // The readable summary the Concierge sends with the request (scripts/flow.ts reads "ip.brief"), and only then.
+      try {
+        const f = gather(), lab = D.brief.labels;
+        const line = f ? summary(f, lab, money, (v) => `${numF.format(v)}${D.loc.startsWith("fr") ? " %" : "%"}`, D.brief.from) : "";
+        const kind = `${st.type === "house" ? L.house : L.apartment} · ${st.use === "live" ? L.live : L.away}`;
+        sessionStorage.setItem("ip.brief", [line, kind].filter(Boolean).join(" · "));
+      } catch { /* storage off */ }
+      // The Concierge sheet opens with the country, the budget and the place already answered (the home bar's entry).
+      const w = window as unknown as { __ipCgStart?: (o: { ed: string; door: string; budget: number }) => boolean };
+      const p = new URLSearchParams(location.search); p.set("place", g.n);
+      history.replaceState(history.state, "", `${location.pathname}?${p}${location.hash}`);
+      if (!(w.__ipCgStart && w.__ipCgStart({ ed: D.ed, door: "buy", budget: st.price }))) location.href = `${D.paths.consult}?budget=${st.price}&place=${encodeURIComponent(g.n)}`;
+    });
+
+    render(q.has("sv"));
+  }
+</script>

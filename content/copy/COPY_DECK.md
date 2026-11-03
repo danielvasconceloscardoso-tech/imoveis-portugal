@@ -7378,3 +7378,177 @@ Prompt 37 §2 and prompt 43 §3: the Artigos hub and its four articles, built by
 - PT: Medimos a audiência sem cookies
 - EN: We measure our audience without cookies
 - FR: Nous mesurons l'audience sans cookies
+
+## sim1
+
+The one-screen simulator at the top of the calculators page (night of 3 Nov 2026, part 3). Maths from the calculators; every figure with its source in small print.
+
+### h
+- PT: Quanto custa, ao todo
+- EN: What it costs, all in
+- FR: Ce que cela coûte, tout compris
+
+### p
+- PT: Escolha o preço, a região e a forma de pagar. As contas mudam enquanto mexe.
+- EN: Pick the price, the region and how you pay. The figures change as you move.
+- FR: Choisissez le prix, la région et le mode de paiement. Les chiffres changent à mesure.
+
+### price
+- PT: Preço da casa
+- EN: Price of the home
+- FR: Prix du logement
+
+### region
+- PT: Onde
+- EN: Where
+- FR: Où
+
+### type
+- PT: Que casa
+- EN: What kind of home
+- FR: Quel logement
+
+### type.apartment
+- PT: Apartamento
+- EN: Apartment
+- FR: Appartement
+
+### type.house
+- PT: Moradia
+- EN: House
+- FR: Maison
+
+### use
+- PT: Para quê
+- EN: What for
+- FR: Pour quoi faire
+
+### use.live
+- PT: Para viver
+- EN: To live in
+- FR: Pour y vivre
+
+### use.away
+- PT: Férias ou investimento
+- EN: Holidays or investment
+- FR: Vacances ou investissement
+
+### use.live.note
+- PT: Para viver: IMT da habitação própria e permanente, para quem tem ou passa a ter residência fiscal em Portugal.
+- EN: To live in: IMT at the own-home rates, for buyers who are or become tax residents of Portugal.
+- FR: Pour y vivre : IMT au barème de la résidence principale, pour qui est ou devient résident fiscal au Portugal.
+
+### use.away.note
+- PT: Férias ou investimento: IMT de 7,5% para compradores sem residência fiscal em Portugal.
+- EN: Holidays or investment: IMT at 7.5% for buyers who are not tax residents of Portugal.
+- FR: Vacances ou investissement : IMT de 7,5 % pour les acheteurs non résidents fiscaux au Portugal.
+
+### pay
+- PT: Como paga
+- EN: How you pay
+- FR: Comment vous payez
+
+### pay.cash
+- PT: Capitais próprios
+- EN: Own funds
+- FR: Fonds propres
+
+### pay.loan
+- PT: Crédito
+- EN: Mortgage
+- FR: Crédit
+
+### entry
+- PT: Entrada
+- EN: Deposit
+- FR: Apport
+
+### row.costs
+- PT: Impostos e escritura
+- EN: Taxes and deed
+- FR: Impôts et acte
+
+### row.loan
+- PT: Prestação ao mês
+- EN: Monthly payment
+- FR: Mensualité
+
+### row.buys
+- PT: Espaço que compra {inplace}
+- EN: Space it buys {inplace}
+- FR: Surface achetée {inplace}
+
+### m2
+- PT: cerca de {n} m²
+- EN: about {n} m²
+- FR: environ {n} m²
+
+### m2.rate
+- PT: {v} por m²
+- EN: {v} per m²
+- FR: {v} le m²
+
+### loan.terms
+- PT: {years} anos, à taxa média dos novos créditos à habitação em {month}: {rate}%.
+- EN: {years} years, at the average rate on new mortgages in {month}: {rate}%.
+- FR: {years} ans, au taux moyen des nouveaux crédits immobiliers en {month} : {rate} %.
+
+### buys.note
+- PT: Mediana do valor por m² das casas vendidas nos 12 meses anteriores, apartamentos e moradias juntos. Toque numa região para a escolher.
+- EN: Median value per m² of the homes sold in the previous 12 months, apartments and houses together. Tap a region to choose it.
+- FR: Valeur médiane au m² des logements vendus sur les 12 mois précédents, appartements et maisons ensemble. Touchez une région pour la choisir.
+
+### src
+- PT: Fonte: {s}
+- EN: Source: {s}
+- FR: Source : {s}
+
+### src.ine
+- PT: INE, {q}.º trimestre de {y}
+- EN: INE, Q{q} {y}
+- FR: INE, {q}e trimestre {y}
+
+### detail.cost
+- PT: Ver o cálculo completo
+- EN: See the full calculation
+- FR: Voir le calcul complet
+
+### detail.payment
+- PT: Ver o cálculo da prestação
+- EN: See the payment calculation
+- FR: Voir le calcul de la mensualité
+
+### next.homes
+- PT: Ver casas {inplace}
+- EN: See homes {inplace}
+- FR: Voir les logements {inplace}
+
+### next.save
+- PT: Guardar a região
+- EN: Save the region
+- FR: Garder la région
+
+### next.saved
+- PT: Região guardada
+- EN: Region saved
+- FR: Région gardée
+
+### next.cg
+- PT: Abrir o Concierge com estes números
+- EN: Open the Concierge with these figures
+- FR: Ouvrir le Concierge avec ces chiffres
+
+### next.cg.note
+- PT: Os números seguem com o pedido, só se o enviar.
+- EN: The figures go with the request, only if you send it.
+- FR: Les chiffres accompagnent la demande, seulement si vous l'envoyez.
+
+### list.h
+- PT: Ver cada cálculo em detalhe
+- EN: See each calculation in detail
+- FR: Voir chaque calcul en détail
+
+### local
+- PT: cerca de {local}
+- EN: about {local}
+- FR: environ {local}
