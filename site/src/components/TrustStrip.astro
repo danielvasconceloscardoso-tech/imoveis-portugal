@@ -11,12 +11,14 @@ import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { pathFor, type Lang, type EdCode } from "../i18n";
 import { c } from "../lib/copy";
+import { config } from "../config";
 import { fmtDate } from "../lib/content";
 
 interface Props { lang: Lang; ed: EdCode; tone?: "light" | "plain"; }
 const { lang, ed, tone = "plain" } = Astro.props;
 const csv = (f: string) => { const [h, ...r] = readFileSync(join(process.cwd(), "..", "content", "partners", f), "utf8").trim().split("\n"); const k = h.split(","); return r.filter(Boolean).map((l) => Object.fromEntries(l.split(",").map((v, i) => [k[i], v.trim()]))); };
-const verified = csv("verified.csv").filter((r) => r.visible === "1" && r.number && /^https:\/\//.test(r.url) && r.checked);
+// Prompt 66 §3: the agency's licence line stays out while config.agency.public is false (the row in verified.csv is kept).
+const verified = csv("verified.csv").filter((r) => r.visible === "1" && r.number && /^https:\/\//.test(r.url) && r.checked && (r.role !== "agency" || config.agency.public));
 const inst = csv("institutions.csv").filter((r) => r.body && r.reference && (!r.expiry || r.expiry >= new Date().toISOString().slice(0, 10)));
 const logoDir = join(process.cwd(), "public", "img", "institutions");
 if (existsSync(logoDir)) for (const f of readdirSync(logoDir)) if (!csv("institutions.csv").some((r) => r.logo === f)) throw new Error(`TrustStrip: logo ${f} has no row in content/partners/institutions.csv`);

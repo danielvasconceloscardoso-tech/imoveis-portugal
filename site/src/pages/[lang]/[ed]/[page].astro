@@ -105,11 +105,11 @@ const site = config.agency.website.replace(/^https:\/\/|\/$/g, "");
       </section>
       <section class="band white" aria-labelledby="agency">
         <div class="frame split">
-          <div><h2 id="agency">{config.agency.name}</h2></div>
+          <div><h2 id="agency">{config.agency.public ? config.agency.name : c("advisor.partners.h", lang)}</h2></div>
           <div class="partner">
             <span class="tag">{c("common.gold", lang)}</span>
             <p style="margin:0">{c("partners.agency.p", lang)}</p>
-            <p class="small" style="margin:0">AMI {config.agency.ami} · <a href={config.agency.website} rel="noopener">{site}</a></p>
+            {config.agency.public && <p class="small" style="margin:0">AMI {config.agency.ami} · <a href={config.agency.website} rel="noopener">{site}</a></p>}
           </div>
         </div>
       </section>
@@ -152,8 +152,8 @@ const site = config.agency.website.replace(/^https:\/\/|\/$/g, "");
           <ol class="steps">{cl("buy.steps", lang).map((s) => <li>{s}</li>)}</ol>
           <div class="partner" style="margin-top:28px">
             <span class="tag">{c("common.gold", lang)}</span>
-            <span class="logo">{config.agency.name}</span>
-            <p class="small" style="margin:0">AMI {config.agency.ami} · <a href={config.agency.website} rel="noopener">{site}</a></p>
+            <span class="logo">{config.agency.public ? config.agency.name : c("advisor.title", lang)}</span>
+            <p class="small" style="margin:0">{config.agency.public ? <>AMI {config.agency.ami} · <a href={config.agency.website} rel="noopener">{site}</a></> : c("advisor.firm", lang)}</p>
           </div>
           <Calls lang={lang} ed={ed} />
         </div>

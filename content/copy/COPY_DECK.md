@@ -8,6 +8,7 @@ How to edit:
 3. Blocks ending in `.lu`, `.fr`, `.ch`, `.br`, `.us`, `.il` belong to one edition.
 4. Not in this file: the FAQ questions and answers (content/faq/*.yaml), the disclaimers (content/EDITORIAL_POLICY.md), the report text (site/ebooks/), and figures and their sources (content/facts/facts.csv).
 5. Tone (prompt 43, content/EDITORIAL_POLICY.md rules 10 to 12): positive, never deficit (say what the reader can do: "You don't need to be in Portugal to buy a home. Here's how it works."); short sentences a foreigner reads easily, every Portuguese term explained once; no AI tells; at most three short sentences per block.
+6. The partner agency is not named on the site while `config.agency.public` is false (prompt 66): blocks speak of "a qualified advisor". The wording that names it lives in `## agencynamed` (same block keys) and comes back when the flag is true. `{agency}` and `{ami}` may appear only there: the build fails if a block shown with the flag off names the agency.
 
 ## common
 
@@ -267,14 +268,14 @@ How to edit:
 - FR: Ce formulaire est en cours de préparation. En attendant, écrivez-nous à {email}.
 
 ### trust.1.h
-- PT: Agência parceira licenciada
-- EN: Licensed partner agency
-- FR: Agence partenaire agréée
+- PT: Um consultor qualificado
+- EN: A qualified advisor
+- FR: Un conseiller qualifié
 
 ### trust.1.p
-- PT: {agency}, AMI {ami}. Patrocinador.
-- EN: {agency}, AMI license {ami}. Sponsor.
-- FR: {agency}, licence AMI {ami}. Sponsor.
+- PT: De uma mediadora imobiliária licenciada, patrocinadora do Imóveis Portugal.
+- EN: At a licensed real-estate brokerage that sponsors Imóveis Portugal.
+- FR: D'une agence immobilière agréée, sponsor d'Imóveis Portugal.
 
 ### trust.2.h
 - PT: Fontes oficiais
@@ -327,9 +328,9 @@ How to edit:
 - FR: Crédits
 
 ### foot.agency
-- PT: Agência parceira
-- EN: Partner agency
-- FR: Agence partenaire
+- PT: Os pedidos de compra e venda seguem para um consultor qualificado de uma mediadora imobiliária licenciada.
+- EN: Buying and selling requests go to a qualified advisor at a licensed real-estate brokerage.
+- FR: Les demandes d'achat et de vente sont transmises à un conseiller qualifié d'une agence immobilière agréée.
 
 ## editions
 
@@ -537,8 +538,8 @@ How to edit:
 
 ### call.link
 - PT: Pedir 15 minutos grátis
-- EN: Talk to the agency for 15 minutes, free
-- FR: Parler 15 minutes avec l'agence, gratuitement
+- EN: Talk to an advisor for 15 minutes, free
+- FR: Parler 15 minutes avec un conseiller, gratuitement
 
 ### qa.h
 - PT: Perguntas frequentes
@@ -676,9 +677,9 @@ How to edit:
 - FR: Si vous devenez résident fiscal et que c'est votre résidence principale, l'IMT est bien plus bas. Crédit, avocat et change non compris.
 
 ### example.wait
-- PT: Casa de exemplo, até a agência parceira apresentar a primeira casa real.
-- EN: Until the partner agency sends its first real listing, we run the numbers on an example home.
-- FR: En attendant le premier vrai bien de l'agence partenaire, nous faisons les comptes d'un bien d'exemple.
+- PT: Casa de exemplo, até o consultor qualificado apresentar a primeira casa real.
+- EN: Until the qualified advisor sends a first real listing, we run the numbers on an example home.
+- FR: En attendant le premier vrai bien proposé par le conseiller qualifié, nous faisons les comptes d'un bien d'exemple.
 
 ### example.link
 - PT: Ver a conta completa
@@ -686,14 +687,14 @@ How to edit:
 - FR: Voir le calcul complet
 
 ### side.h
-- PT: A agência parceira
-- EN: Our partner agency
-- FR: L'agence partenaire
+- PT: O consultor qualificado
+- EN: Our qualified advisor
+- FR: Le conseiller qualifié
 
 ### side.p
-- PT: Habinedita Gondomar, agência licenciada (AMI {ami}), Patrocinador Gold.
-- EN: Habinedita Gondomar, licensed agency (AMI {ami}), Gold sponsor.
-- FR: Habinedita Gondomar, agence agréée (AMI {ami}), sponsor Gold.
+- PT: De uma mediadora imobiliária licenciada, Patrocinadora Gold.
+- EN: At a licensed real-estate brokerage, a Gold sponsor.
+- FR: D'une agence immobilière agréée, sponsor Gold.
 
 ### blog.h
 - PT: Para ler antes de assinar
@@ -718,9 +719,9 @@ How to edit:
 - FR: Appel de 15 min, gratuit
 
 ### intro.subject
-- PT: Primeira conversa de 15 minutos com a agência
-- EN: 15-minute first call with the agency
-- FR: Premier appel de 15 minutes avec l'agence
+- PT: Primeira conversa de 15 minutos com um consultor
+- EN: 15-minute first call with an advisor
+- FR: Premier appel de 15 minutes avec un conseiller
 
 ## faq
 
@@ -851,8 +852,8 @@ How to edit:
 
 ### cta.agency
 - PT: Receber opções de casas
-- EN: Ask our partner agency
-- FR: Demander à l'agence partenaire
+- EN: Ask a qualified advisor
+- FR: Demander à un conseiller qualifié
 
 ### who.lawyer
 - PT: Advogado
@@ -887,9 +888,9 @@ How to edit:
 - FR: Envoyer ma question
 
 ### calls.h
-- PT: Falar com a agência
-- EN: Talk to the agency
-- FR: Parler à l'agence
+- PT: Falar com um consultor
+- EN: Talk to an advisor
+- FR: Parler à un conseiller
 
 ### title
 - PT: Falar com um parceiro
@@ -902,9 +903,9 @@ How to edit:
 - FR: Pour votre situation, laissez-nous votre question et la catégorie. Nous la transmettons à un partenaire du domaine.
 
 ### agency.p
-- PT: A agência parceira para comprar ou vender a partir de fora: procura, visitas por vídeo ou ao vivo, negociação.
-- EN: Our partner agency, for buying or selling from abroad: search, viewings by video call or in person, and negotiation.
-- FR: Notre agence partenaire pour acheter ou vendre un bien depuis l'étranger : recherche, visites en appel vidéo ou sur place, et négociation.
+- PT: Numa mediadora imobiliária licenciada, para comprar ou vender a partir de fora: procura, visitas por vídeo ou ao vivo, negociação.
+- EN: At a licensed real-estate brokerage, for buying or selling from abroad: search, viewings by video call or in person, and negotiation.
+- FR: Dans une agence immobilière agréée, pour acheter ou vendre depuis l'étranger : recherche, visites en appel vidéo ou sur place, et négociation.
 
 ### cats.h
 - PT: Escolha a categoria
@@ -1096,9 +1097,9 @@ How to edit:
 - FR: Six éditions en trois langues et Maré, une newsletter chaque mardi et vendredi à 8 h, à partir du 1er décembre 2026.
 
 ### proof.2
-- PT: Grupo parceiro licenciado: agência imobiliária (AMI {ami}), intermediário de crédito e seguros.
-- EN: Licensed partner group: estate agency (AMI {ami}), credit intermediary and insurance.
-- FR: Groupe partenaire agréé : agence immobilière (AMI {ami}), intermédiaire de crédit et assurance.
+- PT: Grupo parceiro licenciado: mediação imobiliária, intermediação de crédito e seguros.
+- EN: Licensed partner group: real-estate brokerage, credit intermediation and insurance.
+- FR: Groupe partenaire agréé : agence immobilière, intermédiation de crédit et assurance.
 
 ### proof.1
 - PT: {n} cidadãos portugueses vivem no Luxemburgo, 14,5% da população (STATEC, censos de 2021).
@@ -1211,9 +1212,9 @@ How to edit:
 - FR: Les partenaires fondateurs figurent dès le premier numéro, le 1er décembre 2026. Ils gardent le prix fondateur la deuxième année.
 
 ### agency.p
-- PT: A única agência imobiliária da plataforma. Recebe todos os pedidos de compra ou venda e paga um patrocínio anual fixo, nunca uma comissão por contacto.
-- EN: Our partner agency, and the only real-estate agency on the platform. Every request to buy or sell goes to it. It pays a flat yearly sponsorship, never a fee per lead.
-- FR: Notre agence partenaire, et la seule agence immobilière de la plateforme. Toute demande d'achat ou de vente lui est transmise. Elle verse un parrainage annuel forfaitaire, jamais une commission par contact.
+- PT: Um consultor qualificado de uma mediadora imobiliária licenciada, a única da plataforma. Todos os pedidos de compra ou venda seguem para ele. A mediadora paga um patrocínio anual fixo, nunca uma comissão por contacto.
+- EN: A qualified advisor at a licensed real-estate brokerage, the only one on the platform. Every request to buy or sell goes to the advisor. The brokerage pays a flat yearly sponsorship, never a fee per lead.
+- FR: Un conseiller qualifié d'une agence immobilière agréée, la seule de la plateforme. Toutes les demandes d'achat ou de vente lui sont transmises. L'agence verse un parrainage annuel forfaitaire, jamais une commission par contact.
 
 ### rules.h
 - PT: As nossas regras
@@ -1236,9 +1237,9 @@ How to edit:
 - FR: Chaque partenaire paie un forfait annuel, jamais une commission par contact.
 
 ### rules.4
-- PT: Os pedidos de compra seguem só para a nossa agência parceira licenciada.
-- EN: Buying requests go only to our licensed partner agency.
-- FR: Les demandes d'achat vont uniquement à notre agence partenaire agréée.
+- PT: Os pedidos de compra seguem só para um consultor qualificado de uma mediadora licenciada.
+- EN: Buying requests go only to a qualified advisor at a licensed brokerage.
+- FR: Les demandes d'achat vont uniquement à un conseiller qualifié d'une agence agréée.
 
 ### report.h
 - PT: Os números da sua presença
@@ -1278,9 +1279,9 @@ How to edit:
 - FR: Dites-nous quel bien vous cherchez
 
 ### lede
-- PT: O pedido segue para a agência parceira, {agency} (AMI {ami}), que o contacta com opções. Sem custos.
-- EN: Your request goes to our partner agency, {agency} (AMI license {ami}). The agency will reach out with options. It's free for you.
-- FR: Votre demande part chez notre agence partenaire, {agency} (licence AMI {ami}). L'agence vous contacte avec des propositions. C'est gratuit pour vous.
+- PT: O pedido segue para um consultor qualificado, que o contacta com opções. Sem custos.
+- EN: Your request goes to a qualified advisor, who will reach out with options. It's free for you.
+- FR: Votre demande part chez un conseiller qualifié, qui vous contacte avec des propositions. C'est gratuit pour vous.
 
 ### steps.h
 - PT: A seguir
@@ -1293,9 +1294,9 @@ How to edit:
 - FR: Vous remplissez le formulaire, en deux minutes.
 
 ### steps.2
-- PT: A agência parceira contacta-o em até dois dias úteis.
-- EN: The partner agency reaches out within two business days.
-- FR: L'agence partenaire vous contacte sous deux jours ouvrés.
+- PT: O consultor qualificado contacta-o em até dois dias úteis.
+- EN: The qualified advisor reaches out within two business days.
+- FR: Le conseiller qualifié vous contacte sous deux jours ouvrés.
 
 ### steps.3
 - PT: Se quiser, marca visitas para quando estiver em Portugal.
@@ -1303,9 +1304,9 @@ How to edit:
 - FR: Si vous le souhaitez, elle organise des visites pendant votre séjour au Portugal.
 
 ### small
-- PT: Os seus dados servem só para este pedido e seguem para a agência parceira apenas com o seu consentimento.
-- EN: Your details are used only for this request. They go only to the partner agency, with your consent.
-- FR: Vos données servent uniquement à cette demande. Elles ne vont qu'à l'agence partenaire, avec votre accord.
+- PT: Os seus dados servem só para este pedido e seguem para o consultor qualificado apenas com o seu consentimento.
+- EN: Your details are used only for this request. They go only to the qualified advisor, with your consent.
+- FR: Vos données servent uniquement à cette demande. Elles ne vont qu'au conseiller qualifié, avec votre accord.
 
 ## how
 
@@ -1400,9 +1401,9 @@ How to edit:
 - FR: Une seule agence immobilière
 
 ### s4.p
-- PT: O Imóveis Portugal não faz mediação imobiliária. Os pedidos de compra ou venda seguem só para a {agency}, agência parceira licenciada (AMI {ami}) e patrocinadora.
-- EN: Imóveis Portugal isn't a real-estate broker. Requests to buy or sell a home go only to {agency}. It is our partner agency, licensed (AMI {ami}) and a sponsor.
-- FR: Imóveis Portugal n'est pas un intermédiaire immobilier. Les demandes d'achat ou de vente vont uniquement à {agency}. C'est notre agence partenaire, agréée (AMI {ami}) et sponsor.
+- PT: O Imóveis Portugal não faz mediação imobiliária. Os pedidos de compra ou venda seguem só para um consultor qualificado de uma mediadora imobiliária licenciada, patrocinadora do site.
+- EN: Imóveis Portugal isn't a real-estate broker. Requests to buy or sell a home go only to a qualified advisor at a licensed real-estate brokerage, which is a sponsor.
+- FR: Imóveis Portugal n'est pas un intermédiaire immobilier. Les demandes d'achat ou de vente vont uniquement à un conseiller qualifié d'une agence immobilière agréée, qui est sponsor du site.
 
 ### s5.h
 - PT: Os seus dados
@@ -1410,9 +1411,9 @@ How to edit:
 - FR: Vos données
 
 ### s5.p
-- PT: A Maré pede dupla confirmação e cada envio tem um link para cancelar. Não usamos cookies de publicidade nem de estatística. Os pedidos que envia seguem por email só para a Imóveis Portugal e para a agência parceira, e o site não os guarda.
-- EN: Maré, our newsletter, uses double opt-in, and every email has an unsubscribe link. We use no advertising or analytics cookies. The requests you send go by email only to Imóveis Portugal and the partner agency, and the site does not store them.
-- FR: Maré, notre newsletter, fonctionne en double confirmation et chaque e-mail contient un lien de désinscription. Aucun cookie publicitaire ni de mesure d'audience. Les demandes que vous envoyez partent par e-mail uniquement chez Imóveis Portugal et l'agence partenaire, et le site ne les conserve pas.
+- PT: Para receber a Maré basta um clique: a beehiiv envia as edições e cada email tem um link para cancelar. Não usamos cookies de publicidade nem de estatística. Os pedidos que envia seguem por email só para a Imóveis Portugal e para o consultor qualificado, e o site não os guarda.
+- EN: You join Maré, our newsletter, with one click: beehiiv sends the issues, and every email has an unsubscribe link. We use no advertising or analytics cookies. The requests you send go by email only to Imóveis Portugal and the qualified advisor, and the site does not store them.
+- FR: On s'inscrit à Maré, notre newsletter, d'un clic : beehiiv envoie les numéros et chaque e-mail contient un lien de désinscription. Aucun cookie publicitaire ni de mesure d'audience. Les demandes que vous envoyez partent par e-mail uniquement chez Imóveis Portugal et le conseiller qualifié, et le site ne les conserve pas.
 
 ### s6.h
 - PT: Números de audiência
@@ -1447,9 +1448,9 @@ How to edit:
 ## legal
 
 ### privacy.7.p
-- PT: Se marcar "Incluir este resumo", o seu pedido leva um resumo do que indicou no percurso e nos simuladores: país, orçamento, custo total, capitais próprios e financiamento, uma taxa de esforço indicativa, prazo, se já tem NIF e as zonas cujos preços consultou. Esses valores ficam no seu dispositivo até enviar o pedido e seguem com ele só para a Imóveis Portugal e para a agência parceira {agency}, porque o pediu (RGPD, art. 6.º, n.º 1, alínea b)). O resumo é indicativo, não é uma avaliação de crédito e não serve para nenhuma decisão automatizada sobre si. Para orçamentos elevados, a agência parceira continua a pedir identificação e prova de fundos, como exige a Lei 83/2017.
-- EN: If you tick "Include this summary", your request carries a summary of what you entered on the path and in the calculators: country, budget, total cost, own funds and financing, an indicative debt-to-income ratio, timing, whether you have a NIF and the areas whose prices you looked at. These figures stay on your device until you send the request and go with it only to Imóveis Portugal and our partner agency {agency}, because you asked for it (GDPR art. 6(1)(b)). The summary is indicative, is not a credit assessment and is not used for any automated decision about you. For high budgets, the partner agency still asks for identification and proof of funds, as Lei 83/2017 requires.
-- FR: Si vous cochez « Joindre ce résumé », votre demande contient un résumé de ce que vous avez saisi dans le parcours et les simulateurs : pays, budget, coût total, apport et financement, un taux d'endettement indicatif, échéance, si vous avez un NIF et les secteurs dont vous avez consulté les prix. Ces données restent sur votre appareil jusqu'à l'envoi et partent avec la demande uniquement chez Imóveis Portugal et l'agence partenaire {agency}, parce que vous l'avez demandé (RGPD, art. 6, par. 1, point b). Le résumé est indicatif, n'est pas une évaluation de crédit et ne sert à aucune décision automatisée vous concernant. Pour les budgets élevés, l'agence partenaire demande toujours une pièce d'identité et la preuve des fonds, comme l'exige la Lei 83/2017.
+- PT: Se marcar "Incluir este resumo", o seu pedido leva um resumo do que indicou no percurso e nos simuladores: país, orçamento, custo total, capitais próprios e financiamento, uma taxa de esforço indicativa, prazo, se já tem NIF e as zonas cujos preços consultou. Esses valores ficam no seu dispositivo até enviar o pedido e seguem com ele só para a Imóveis Portugal e para o consultor qualificado da mediadora imobiliária licenciada, porque o pediu (RGPD, art. 6.º, n.º 1, alínea b)). O resumo é indicativo, não é uma avaliação de crédito e não serve para nenhuma decisão automatizada sobre si. Para orçamentos elevados, a mediadora continua a pedir identificação e prova de fundos, como exige a Lei 83/2017.
+- EN: If you tick "Include this summary", your request carries a summary of what you entered on the path and in the calculators: country, budget, total cost, own funds and financing, an indicative debt-to-income ratio, timing, whether you have a NIF and the areas whose prices you looked at. These figures stay on your device until you send the request and go with it only to Imóveis Portugal and the qualified advisor at the licensed real-estate brokerage, because you asked for it (GDPR art. 6(1)(b)). The summary is indicative, is not a credit assessment and is not used for any automated decision about you. For high budgets, the brokerage still asks for identification and proof of funds, as Lei 83/2017 requires.
+- FR: Si vous cochez « Joindre ce résumé », votre demande contient un résumé de ce que vous avez saisi dans le parcours et les simulateurs : pays, budget, coût total, apport et financement, un taux d'endettement indicatif, échéance, si vous avez un NIF et les secteurs dont vous avez consulté les prix. Ces données restent sur votre appareil jusqu'à l'envoi et partent avec la demande uniquement chez Imóveis Portugal et le conseiller qualifié de l'agence immobilière agréée, parce que vous l'avez demandé (RGPD, art. 6, par. 1, point b). Le résumé est indicatif, n'est pas une évaluation de crédit et ne sert à aucune décision automatisée vous concernant. Pour les budgets élevés, l'agence demande toujours une pièce d'identité et la preuve des fonds, comme l'exige la Lei 83/2017.
 
 ### privacy.7.h
 - PT: Resumo enviado com os pedidos
@@ -1492,9 +1493,9 @@ How to edit:
 - FR: Données traitées et finalités
 
 ### privacy.2.p
-- PT: Maré, a newsletter: email (e o nome próprio, se o der), com o seu consentimento (RGPD, art. 6.º, n.º 1, al. a)) e dupla confirmação. Pedidos de compra, de visita e do Concierge: nome, contactos e o que procura, para dar seguimento ao pedido que nos faz antes de qualquer contrato (art. 6.º, n.º 1, al. b)), enviados à Imóveis Portugal e à agência parceira {agency} (AMI {ami}). Pedidos de parceria: dados profissionais, para responder (art. 6.º, n.º 1, al. b)). Pedidos a parceiros: categoria, país, pergunta e contacto, para responder ao seu pedido (art. 6.º, n.º 1, al. b)) e, se o autorizar, passar a um parceiro da categoria.
-- EN: Maré, the newsletter: first name and email, with your consent (GDPR, art. 6(1)(a)) and double opt-in. Buying, viewing and Concierge requests: name, contact details and what you're looking for, to act on the request you make before any contract (art. 6(1)(b)), sent to Imóveis Portugal and our partner agency {agency} (AMI {ami}). Partner inquiries: business details, to reply (art. 6(1)(b)). Requests to a partner: category, country, question and contact details, to answer your request (art. 6(1)(b)) and, if you agree, to pass them to a partner in that category.
-- FR: Maré, la newsletter : prénom et e-mail, avec votre consentement (RGPD, art. 6, par. 1, a)) et double confirmation. Demandes d'achat, de visite et du Concierge : nom, coordonnées et critères, pour donner suite à la demande que vous faites avant tout contrat (art. 6, par. 1, b)), transmis à Imóveis Portugal et à l'agence partenaire {agency} (AMI {ami}). Demandes de partenariat : données professionnelles, pour répondre (art. 6, par. 1, b)). Demandes à un partenaire : catégorie, pays, question et coordonnées, pour répondre à votre demande (art. 6, par. 1, b)) et, avec votre accord, les transmettre à un partenaire de la catégorie.
+- PT: Maré, a newsletter: o seu email, com o seu consentimento (RGPD, art. 6.º, n.º 1, al. a)), dado com um clique no formulário; a beehiiv envia as edições e cada email tem um link para cancelar. Pedidos de compra, de visita e do Concierge: nome, contactos e o que procura, para dar seguimento ao pedido que nos faz antes de qualquer contrato (art. 6.º, n.º 1, al. b)); recebem-nos a Imóveis Portugal e um consultor qualificado de uma mediadora imobiliária licenciada. Pedidos de parceria: dados profissionais, para responder (art. 6.º, n.º 1, al. b)). Pedidos a parceiros: categoria, país, pergunta e contacto, para responder ao seu pedido (art. 6.º, n.º 1, al. b)) e, se o autorizar, passar a um parceiro da categoria.
+- EN: Maré, the newsletter: your email address, with your consent (GDPR, art. 6(1)(a)), given with one click on the form; beehiiv sends the issues and every email has an unsubscribe link. Buying, viewing and Concierge requests: name, contact details and what you're looking for, to act on the request you make before any contract (art. 6(1)(b)), sent to Imóveis Portugal and a qualified advisor at a licensed real-estate brokerage. Partner inquiries: business details, to reply (art. 6(1)(b)). Requests to a partner: category, country, question and contact details, to answer your request (art. 6(1)(b)) and, if you agree, to pass them to a partner in that category.
+- FR: Maré, la newsletter : votre adresse e-mail, avec votre consentement (RGPD, art. 6, par. 1, a)), donné d'un clic dans le formulaire ; beehiiv envoie les numéros et chaque e-mail contient un lien de désinscription. Demandes d'achat, de visite et du Concierge : nom, coordonnées et critères, pour donner suite à la demande que vous faites avant tout contrat (art. 6, par. 1, b)), transmis à Imóveis Portugal et à un conseiller qualifié d'une agence immobilière agréée. Demandes de partenariat : données professionnelles, pour répondre (art. 6, par. 1, b)). Demandes à un partenaire : catégorie, pays, question et coordonnées, pour répondre à votre demande (art. 6, par. 1, b)) et, avec votre accord, les transmettre à un partenaire de la catégorie.
 
 ### privacy.3.h
 - PT: Quem recebe os dados
@@ -1502,9 +1503,9 @@ How to edit:
 - FR: Destinataires
 
 ### privacy.3.p
-- PT: A Imóveis Portugal e a agência parceira {agency} (AMI {ami}) recebem os pedidos que envia pelo site (compra, visita, Concierge e pedidos a parceiros), por email, através do Cloudflare Email Routing; o site não os guarda. O parceiro da categoria escolhida, só para pedidos a parceiros e com o seu consentimento. Prestadores que tratam dados por nossa conta: beehiiv (envio da Maré, EUA, com garantias adequadas para a transferência), Tally (formulários, UE), Cloudflare (alojamento, envio dos pedidos por email e estatísticas sem cookies) e Cal.com (marcação de chamadas).
-- EN: Imóveis Portugal and our partner agency {agency} (AMI {ami}) receive the requests you send on the site (buying, viewing, Concierge and requests to a partner), by email, through Cloudflare Email Routing; the site does not store them. The partner in the chosen category, only for requests to a partner and with your consent. Processors acting for us: beehiiv (Maré, the newsletter, USA, with appropriate safeguards for the transfer), Tally (forms, EU), Cloudflare (hosting, sending requests by email and cookie-free statistics) and Cal.com (call booking).
-- FR: Imóveis Portugal et l'agence partenaire {agency} (AMI {ami}) reçoivent les demandes que vous envoyez sur le site (achat, visite, Concierge et demandes à un partenaire), par e-mail, via Cloudflare Email Routing ; le site ne les conserve pas. Le partenaire de la catégorie choisie, uniquement pour les demandes à un partenaire et avec votre accord. Sous-traitants : beehiiv (Maré, la newsletter, États-Unis, avec garanties appropriées pour le transfert), Tally (formulaires, UE), Cloudflare (hébergement, envoi des demandes par e-mail et statistiques sans cookies) et Cal.com (prise de rendez-vous).
+- PT: A Imóveis Portugal e um consultor qualificado de uma mediadora imobiliária licenciada recebem os pedidos que envia pelo site (compra, visita, Concierge e pedidos a parceiros), por email, através do Cloudflare Email Routing; o site não os guarda. O parceiro da categoria escolhida, só para pedidos a parceiros e com o seu consentimento. Prestadores que tratam dados por nossa conta: beehiiv (envio da Maré, EUA, com garantias adequadas para a transferência), Tally (formulários, UE), Cloudflare (alojamento, envio dos pedidos por email e estatísticas sem cookies) e Cal.com (marcação de chamadas).
+- EN: Imóveis Portugal and a qualified advisor at a licensed real-estate brokerage receive the requests you send on the site (buying, viewing, Concierge and requests to a partner), by email, through Cloudflare Email Routing; the site does not store them. The partner in the chosen category, only for requests to a partner and with your consent. Processors acting for us: beehiiv (Maré, the newsletter, USA, with appropriate safeguards for the transfer), Tally (forms, EU), Cloudflare (hosting, sending requests by email and cookie-free statistics) and Cal.com (call booking).
+- FR: Imóveis Portugal et un conseiller qualifié d'une agence immobilière agréée reçoivent les demandes que vous envoyez sur le site (achat, visite, Concierge et demandes à un partenaire), par e-mail, via Cloudflare Email Routing ; le site ne les conserve pas. Le partenaire de la catégorie choisie, uniquement pour les demandes à un partenaire et avec votre accord. Sous-traitants : beehiiv (Maré, la newsletter, États-Unis, avec garanties appropriées pour le transfert), Tally (formulaires, UE), Cloudflare (hébergement, envoi des demandes par e-mail et statistiques sans cookies) et Cal.com (prise de rendez-vous).
 
 ### privacy.4.h
 - PT: Durante quanto tempo
@@ -1582,14 +1583,14 @@ How to edit:
 - FR: Les articles sont informatifs et ne remplacent pas un conseil juridique, fiscal ou financier. Le contenu sponsorisé est toujours signalé.
 
 ### legal.4.h
-- PT: Agência parceira
-- EN: Partner agency
-- FR: Agence partenaire
+- PT: Pedidos de compra e venda
+- EN: Buying and selling requests
+- FR: Demandes d'achat et de vente
 
 ### legal.4.p
-- PT: {agency}, AMI {ami}, mediadora imobiliária licenciada. O Imóveis Portugal não faz mediação imobiliária.
-- EN: {agency}, AMI license {ami}, a licensed real-estate broker. Imóveis Portugal does not act as a real-estate broker.
-- FR: {agency}, licence AMI {ami}, intermédiaire immobilier agréé. Imóveis Portugal n'exerce pas d'activité d'intermédiation immobilière.
+- PT: Seguem para um consultor qualificado de uma mediadora imobiliária licenciada. O Imóveis Portugal não faz mediação imobiliária.
+- EN: They go to a qualified advisor at a licensed real-estate brokerage. Imóveis Portugal does not act as a real-estate broker.
+- FR: Elles sont transmises à un conseiller qualifié d'une agence immobilière agréée. Imóveis Portugal n'exerce pas d'activité d'intermédiation immobilière.
 
 ## root
 
@@ -2041,9 +2042,9 @@ How to edit:
 - FR: L'impôt dans votre pays de résidence dépend de votre situation. Un conseiller fiscal vérifie les chiffres.
 
 ### agency.p
-- PT: Com um preço em mente, a agência parceira mostra casas nesse valor.
-- EN: If you already have a price in mind, the partner agency can show you homes at that price.
-- FR: Si vous avez déjà un prix en tête, l'agence partenaire vous montre des biens à ce prix.
+- PT: Com um preço em mente, um consultor qualificado mostra-lhe casas nesse valor.
+- EN: If you already have a price in mind, a qualified advisor can show you homes at that price.
+- FR: Si vous avez déjà un prix en tête, un conseiller qualifié vous montre des biens à ce prix.
 
 ### plan.cta
 - PT: Receber o plano em PDF · 5,99 €
@@ -2288,9 +2289,9 @@ How to edit:
 - FR: Voir des biens sans voyager
 
 ### s.agency.p
-- PT: A agência parceira, {agency} (AMI {ami}), procura casas no seu orçamento e mostra-as por videochamada, a um familiar ou ao vivo.
-- EN: Our partner agency, {agency} (AMI {ami}), looks for homes in your budget. It shows them by video call, through a relative or in person.
-- FR: Notre agence partenaire, {agency} (AMI {ami}), cherche des biens dans votre budget. Elle vous les montre en appel vidéo, par un proche ou sur place.
+- PT: Um consultor qualificado de uma mediadora licenciada procura casas no seu orçamento e mostra-as por videochamada, através de um familiar ou ao vivo.
+- EN: A qualified advisor at a licensed brokerage looks for homes in your budget and shows them by video call, through a relative or in person.
+- FR: Un conseiller qualifié d'une agence agréée cherche des biens dans votre budget. Il vous les montre en appel vidéo, par un proche ou sur place.
 
 ### s.credit.h
 - PT: Um crédito a partir de fora
@@ -2589,9 +2590,9 @@ How to edit:
 - FR: Calculer le coût total d'un logement de 100 m² au prix médian
 
 ### homes
-- PT: Pedir consulta à agência
-- EN: See homes in this area with the partner agency
-- FR: Voir des biens dans ce secteur avec l'agence partenaire
+- PT: Ver casas nesta zona com um consultor qualificado
+- EN: See homes in this area with a qualified advisor
+- FR: Voir des biens dans ce secteur avec un conseiller qualifié
 
 ### map
 - PT: Ver no mapa
@@ -2621,9 +2622,9 @@ How to edit:
 - FR: Calculer le coût total
 
 ### proj.askag
-- PT: Receber detalhes da agência
-- EN: Ask through the partner agency
-- FR: Demander via l'agence partenaire
+- PT: Pedir detalhes ao consultor qualificado
+- EN: Ask a qualified advisor
+- FR: Demander à un conseiller qualifié
 
 ### proj.askdev
 - PT: Ver o site do promotor
@@ -3188,9 +3189,9 @@ How to edit:
 - FR: Exemple, annonce publiée
 
 ### note
-- PT: As medianas do INE cobrem concelhos inteiros, sem separar zonas como a Quinta do Lago, em Loulé. Os exemplos são preços pedidos em anúncios, não de venda, e as casas não são da nossa agência parceira.
-- EN: INE medians describe whole municipalities. They don't describe the most sought-after enclaves inside them, such as Quinta do Lago in Loulé. The examples are asking prices from listings, not sale prices. They are not homes from our partner agency.
-- FR: Les médianes de l'INE décrivent des communes entières. Elles ne décrivent pas les secteurs les plus recherchés, comme Quinta do Lago à Loulé. Les exemples sont des prix demandés, pas des prix de vente. Ce ne sont pas des biens de notre agence partenaire.
+- PT: As medianas do INE cobrem concelhos inteiros, sem separar zonas como a Quinta do Lago, em Loulé. Os exemplos são preços pedidos em anúncios, não de venda, e não são casas propostas pelo consultor qualificado.
+- EN: INE medians describe whole municipalities. They don't describe the most sought-after enclaves inside them, such as Quinta do Lago in Loulé. The examples are asking prices from listings, not sale prices. They are not homes offered by the qualified advisor.
+- FR: Les médianes de l'INE décrivent des communes entières. Elles ne décrivent pas les secteurs les plus recherchés, comme Quinta do Lago à Loulé. Les exemples sont des prix demandés, pas des prix de vente. Ce ne sont pas des biens proposés par le conseiller qualifié.
 
 ## private
 
@@ -3452,9 +3453,9 @@ How to edit:
 - FR: Votre programme apparaît en premier aux lecteurs dont le budget lui correspond.
 
 ### developers.rule
-- PT: Os pedidos de visita dos leitores seguem para a nossa agência parceira licenciada, que trabalha com o promotor.
-- EN: Readers' viewing requests go to our licensed partner agency, which works with the developer.
-- FR: Les demandes de visite des lecteurs vont à notre agence partenaire agréée, qui travaille avec le promoteur.
+- PT: Os pedidos de visita dos leitores seguem para um consultor qualificado de uma mediadora licenciada, que trabalha com o promotor.
+- EN: Readers' viewing requests go to a qualified advisor at a licensed brokerage, who works with the developer.
+- FR: Les demandes de visite des lecteurs vont à un conseiller qualifié d'une agence agréée, qui travaille avec le promoteur.
 
 ## ours
 
@@ -4130,14 +4131,14 @@ How to edit:
 - FR: Consultation privée
 
 ### h1
-- PT: Consulta privada com a agência parceira
-- EN: A private consultation with our partner agency
-- FR: Une consultation privée avec notre agence partenaire
+- PT: Consulta privada com um consultor qualificado
+- EN: A private consultation with a qualified advisor
+- FR: Une consultation privée avec un conseiller qualifié
 
 ### lede
-- PT: Quinze minutos por videochamada com a {agency} (AMI {ami}), sem custos. As suas respostas preparam a conversa.
-- EN: Fifteen minutes by video call with {agency} (AMI {ami}), at no cost. Answer a few questions so the conversation starts with your case.
-- FR: Quinze minutes en appel vidéo avec {agency} (AMI {ami}), sans frais. Répondez à quelques questions pour que l'échange parte de votre situation.
+- PT: Quinze minutos por videochamada com um consultor qualificado, sem custos. As suas respostas preparam a conversa.
+- EN: Fifteen minutes by video call with a qualified advisor, at no cost. Answer a few questions so the conversation starts with your case.
+- FR: Quinze minutes en appel vidéo avec un conseiller qualifié, sans frais. Répondez à quelques questions pour que l'échange parte de votre situation.
 
 ### form.h
 - PT: O seu pedido
@@ -4150,9 +4151,9 @@ How to edit:
 - FR: La suite
 
 ### next.1
-- PT: A agência lê o seu pedido e responde por email.
-- EN: The agency reads your request and replies by email.
-- FR: L'agence lit votre demande et vous répond par e-mail.
+- PT: O consultor lê o seu pedido e responde por email.
+- EN: The advisor reads your request and replies by email.
+- FR: Le conseiller lit votre demande et vous répond par e-mail.
 
 ### next.2
 - PT: Na consulta: as zonas, o orçamento, o calendário e os próximos passos.
@@ -4165,9 +4166,9 @@ How to edit:
 - FR: Ensuite, les bons partenaires pour votre cas : crédit, avocat, conseiller fiscal de votre pays.
 
 ### privacy
-- PT: Os seus dados seguem só para a Imóveis Portugal e para a agência parceira, que lhe responde por email.
-- EN: Your details go only to Imóveis Portugal and the partner agency, who reply by email.
-- FR: Vos données ne vont qu'à Imóveis Portugal et à l'agence partenaire, qui vous répond par e-mail.
+- PT: Os seus dados seguem só para a Imóveis Portugal e para o consultor qualificado, que lhe responde por email.
+- EN: Your details go only to Imóveis Portugal and the qualified advisor, who replies by email.
+- FR: Vos données ne vont qu'à Imóveis Portugal et au conseiller qualifié, qui vous répond par e-mail.
 
 ### cta
 - PT: Pedir uma consulta
@@ -4180,9 +4181,9 @@ How to edit:
 - FR: Consultation privée · 15 min · vidéo
 
 ### card.p
-- PT: Com a agência parceira, sem custos. Diga-nos o que procura.
-- EN: With the partner agency, at no cost. Tell us where you are in your plan.
-- FR: Avec l'agence partenaire, sans frais. Dites-nous où vous en êtes.
+- PT: Com um consultor qualificado, sem custos. Diga-nos o que procura.
+- EN: With a qualified advisor, at no cost. Tell us where you are in your plan.
+- FR: Avec un conseiller qualifié, sans frais. Dites-nous où vous en êtes.
 
 ### ok.title
 - PT: Pedido recebido
@@ -4190,14 +4191,14 @@ How to edit:
 - FR: Demande reçue
 
 ### ok.h1
-- PT: O seu pedido chegou à agência
-- EN: Your request has reached the agency
-- FR: Votre demande est arrivée à l'agence
+- PT: O seu pedido chegou ao consultor
+- EN: Your request has reached the advisor
+- FR: Votre demande est arrivée chez le conseiller
 
 ### ok.p
-- PT: A {agency} propõe-lhe por email uma videochamada de 15 minutos, no horário que indicou.
-- EN: Thank you. {agency} will email you to propose a 15-minute video call within the window you gave.
-- FR: Merci. {agency} vous proposera par e-mail un appel vidéo de 15 minutes dans la période indiquée.
+- PT: O consultor qualificado propõe-lhe por email uma videochamada de 15 minutos, no horário que indicou.
+- EN: Thank you. The qualified advisor will email you to propose a 15-minute video call within the window you gave.
+- FR: Merci. Le conseiller qualifié vous proposera par e-mail un appel vidéo de 15 minutes dans la période indiquée.
 
 ### ok.prep
 - PT: Para a conversa: o orçamento, as zonas que lhe interessam e o NIF, se já o tiver.
@@ -4215,14 +4216,14 @@ How to edit:
 - FR: Un conseiller dédié suit votre demande
 
 ### private.p
-- PT: A {agency} propõe-lhe por email uma videochamada de 15 minutos, no horário que indicou.
-- EN: Thank you. {agency} will email you to propose a 15-minute video call within the window you gave.
-- FR: Merci. {agency} vous proposera par e-mail un appel vidéo de 15 minutes dans la période indiquée.
+- PT: O consultor qualificado propõe-lhe por email uma videochamada de 15 minutos, no horário que indicou.
+- EN: Thank you. The qualified advisor will email you to propose a 15-minute video call within the window you gave.
+- FR: Merci. Le conseiller qualifié vous proposera par e-mail un appel vidéo de 15 minutes dans la période indiquée.
 
 ### private.aml
-- PT: Antes das visitas, a agência pede a identificação e a origem dos fundos, como a lei exige a todas as agências imobiliárias em Portugal.
-- EN: Before viewings, the agency asks for the usual identification and information on the origin of funds. Every estate agency in Portugal must do so.
-- FR: Avant les visites, l'agence demande les pièces d'identité habituelles et des informations sur l'origine des fonds. C'est une obligation pour toute agence immobilière au Portugal.
+- PT: Antes das visitas, o consultor pede a identificação e a origem dos fundos, como a lei exige a todas as agências imobiliárias em Portugal.
+- EN: Before viewings, the advisor asks for the usual identification and information on the origin of funds. Every estate agency in Portugal must do so.
+- FR: Avant les visites, le conseiller demande les pièces d'identité habituelles et des informations sur l'origine des fonds. C'est une obligation pour toute agence immobilière au Portugal.
 
 ### later.title
 - PT: Obrigado
@@ -4768,9 +4769,9 @@ Prompt 43 §3b: each station is a plain question (st.{k}.q) and a two or three s
 - FR: Comment visiter des biens à distance ?
 
 ### st.choose.a
-- PT: O consultor da agência parceira organiza as visitas (por videochamada, com um familiar ou ao vivo) e prepara consigo a proposta. O mapa mostra também os empreendimentos novos dos promotores parceiros.
-- EN: The partner agency's advisor arranges the viewings: by video call, with a relative, or in person when you visit Portugal. On the map, you can also see new developments from partner developers. Once you find the home, the advisor helps you prepare the offer.
-- FR: Le conseiller de l'agence partenaire organise les visites : en appel vidéo, avec un proche ou sur place lors de votre venue au Portugal. Sur la carte, vous voyez aussi les programmes neufs des promoteurs partenaires. Une fois le bien trouvé, le conseiller vous aide à préparer l'offre.
+- PT: Um consultor qualificado organiza as visitas (por videochamada, com um familiar ou ao vivo) e prepara consigo a proposta. O mapa mostra também os empreendimentos novos dos promotores parceiros.
+- EN: A qualified advisor arranges the viewings: by video call, with a relative, or in person when you visit Portugal. On the map, you can also see new developments from partner developers. Once you find the home, the advisor helps you prepare the offer.
+- FR: Un conseiller qualifié organise les visites : en appel vidéo, avec un proche ou sur place lors de votre venue au Portugal. Sur la carte, vous voyez aussi les programmes neufs des promoteurs partenaires. Une fois le bien trouvé, le conseiller vous aide à préparer l'offre.
 
 ### st.cpcv.q
 - PT: O que é o contrato-promessa?
@@ -4838,9 +4839,9 @@ Prompt 43 §3b: each station is a plain question (st.{k}.q) and a two or three s
 - FR: Combien vaut mon bien ?
 
 ### st.worth.a
-- PT: O mapa mostra o preço mediano por metro quadrado no seu concelho, com dados do INE. Para a sua casa, o consultor da agência parceira faz uma avaliação sem compromisso.
-- EN: The map shows the median price per square metre in your municipality, from official INE data. For a figure for your own home, the partner agency's advisor gives you a valuation with no commitment.
-- FR: La carte montre le prix médian au mètre carré dans votre commune, selon les données officielles de l'INE. Pour un chiffre sur votre bien, le conseiller de l'agence partenaire fait une estimation sans engagement.
+- PT: O mapa mostra o preço mediano por metro quadrado no seu concelho, com dados do INE. Para a sua casa, um consultor qualificado faz uma avaliação sem compromisso.
+- EN: The map shows the median price per square metre in your municipality, from official INE data. For a figure for your own home, a qualified advisor gives you a valuation with no commitment.
+- FR: La carte montre le prix médian au mètre carré dans votre commune, selon les données officielles de l'INE. Pour un chiffre sur votre bien, un conseiller qualifié fait une estimation sans engagement.
 
 ### st.inherit.q
 - PT: Como trato de uma casa herdada?
@@ -4878,9 +4879,9 @@ Prompt 43 §3b: each station is a plain question (st.{k}.q) and a two or three s
 - FR: Comment mettre le bien en vente ?
 
 ### st.list.a
-- PT: A agência parceira anuncia a casa, mostra-a e traz-lhe as propostas. O contrato de mediação, o acordo escrito com a agência, fixa o preço pedido e as condições.
-- EN: The partner agency lists the home, runs the viewings and brings you the offers, while you live abroad. The agency agreement (contrato de mediação) sets the asking price and the terms.
-- FR: L'agence partenaire publie l'annonce, organise les visites et vous présente les offres, pendant que vous vivez à l'étranger. Le mandat (contrato de mediação), l'accord écrit avec l'agence, fixe le prix demandé et les conditions.
+- PT: Um consultor qualificado anuncia a casa, mostra-a e traz-lhe as propostas. O contrato de mediação, o acordo escrito com a mediadora, fixa o preço pedido e as condições.
+- EN: A qualified advisor lists the home, runs the viewings and brings you the offers, while you live abroad. The brokerage agreement (contrato de mediação) sets the asking price and the terms.
+- FR: Un conseiller qualifié publie l'annonce, organise les visites et vous présente les offres, pendant que vous vivez à l'étranger. Le mandat (contrato de mediação), l'accord écrit avec son agence, fixe le prix demandé et les conditions.
 
 ### st.sdeed.q
 - PT: Como assino a venda?
@@ -4938,9 +4939,9 @@ Prompt 43 §3b: each station is a plain question (st.{k}.q) and a two or three s
 - FR: L'acte
 
 ### st.list.h
-- PT: Pôr à venda com a agência
-- EN: Listing with the agency
-- FR: Mettre en vente avec l'agence
+- PT: Pôr à venda com um consultor
+- EN: Listing with an advisor
+- FR: Mettre en vente avec un conseiller
 
 ### st.prepare.h
 - PT: Preparar a casa
@@ -6191,9 +6192,9 @@ Prompt 43 §3b: the partner links on the path and the questions open the Concier
 - FR: Parler au concierge
 
 ### c.lede
-- PT: Quinze minutos por vídeo com a agência parceira, sem custos. Pedir leva um minuto.
-- EN: A free first 15-minute video call with our partner agency. One question at a time, about a minute in all.
-- FR: Un premier échange vidéo de 15 minutes, gratuit, avec notre agence partenaire. Une question à la fois, une minute en tout.
+- PT: Quinze minutos por vídeo com um consultor qualificado, sem custos. Pedir leva um minuto.
+- EN: A free first 15-minute video call with a qualified advisor. One question at a time, about a minute in all.
+- FR: Un premier échange vidéo de 15 minutes, gratuit, avec un conseiller qualifié. Une question à la fois, une minute en tout.
 
 ### c.country
 - PT: Onde vive?
@@ -6396,9 +6397,9 @@ Prompt 43 §3b: the partner links on the path and the questions open the Concier
 - FR: Une dernière chose
 
 ### c.consent
-- PT: Autorizo o envio deste pedido à {agency} (AMI {ami}), agência imobiliária parceira, para me contactar sobre ele. Li a política de privacidade.
-- EN: I agree that this request is sent to {agency} (AMI {ami}), the partner estate agency, to contact me about it. I have read the privacy policy.
-- FR: J'accepte que cette demande soit transmise à {agency} (AMI {ami}), agence immobilière partenaire, pour me recontacter. J'ai lu la politique de confidentialité.
+- PT: Autorizo que este pedido seja enviado ao consultor qualificado de uma mediadora imobiliária licenciada, para me contactar sobre ele. Li a política de privacidade.
+- EN: I agree that this request is sent to a qualified advisor at a licensed real-estate brokerage, to contact me about it. I have read the privacy policy.
+- FR: J'accepte que cette demande soit transmise à un conseiller qualifié d'une agence immobilière agréée, pour me recontacter. J'ai lu la politique de confidentialité.
 
 ### send
 - PT: Receber a resposta
@@ -6486,14 +6487,14 @@ Prompt 43 §3b: the partner links on the path and the questions open the Concier
 - FR: Sur place, au Portugal
 
 ### v.done.h
-- PT: O pedido seguiu para a agência parceira.
-- EN: Request sent to our partner agency.
-- FR: Demande transmise à notre agence partenaire.
+- PT: O pedido seguiu para o consultor qualificado.
+- EN: Request sent to a qualified advisor.
+- FR: Demande transmise à un conseiller qualifié.
 
 ### v.done.p
-- PT: A {agency} confirma a data por email, normalmente em dois dias úteis.
-- EN: {agency} will confirm the date by email, usually within two working days.
-- FR: {agency} confirme la date par e-mail, en général sous deux jours ouvrés.
+- PT: O consultor confirma a data por email, normalmente em dois dias úteis.
+- EN: The advisor will confirm the date by email, usually within two working days.
+- FR: Le conseiller confirme la date par e-mail, en général sous deux jours ouvrés.
 
 ## find
 
@@ -7703,9 +7704,9 @@ Part 2 of 3 Nov 2026 (the journey): the five-item bar at the bottom of the phone
 - FR: Commencer
 
 ### next.home.p
-- PT: Diga-nos onde vive, o orçamento e o que procura. O Concierge prepara o resto com a agência parceira.
-- EN: Tell us where you live, your budget and what you are looking for. The Concierge prepares the rest with the partner agency.
-- FR: Dites-nous où vous vivez, votre budget et ce que vous cherchez. Le Concierge prépare le reste avec l'agence partenaire.
+- PT: Diga-nos onde vive, o orçamento e o que procura. O Concierge prepara o resto com um consultor qualificado.
+- EN: Tell us where you live, your budget and what you are looking for. The Concierge prepares the rest with a qualified advisor.
+- FR: Dites-nous où vous vivez, votre budget et ce que vous cherchez. Le Concierge prépare le reste avec un conseiller qualifié.
 
 ### next.map.p
 - PT: Com uma zona em mente, o Concierge mostra-lhe as casas e o que vem a seguir.
@@ -7713,14 +7714,14 @@ Part 2 of 3 Nov 2026 (the journey): the five-item bar at the bottom of the phone
 - FR: Avec une zone en tête, le Concierge vous montre les logements et la suite.
 
 ### next.sims.p
-- PT: Com os números feitos, o passo seguinte é uma conversa de 15 minutos com a agência parceira, sem custos.
-- EN: With the numbers done, the next step is a 15-minute call with the partner agency, free of charge.
-- FR: Les chiffres faits, l'étape suivante est un appel de 15 minutes avec l'agence partenaire, sans frais.
+- PT: Com os números feitos, o passo seguinte é uma conversa de 15 minutos com um consultor qualificado, sem custos.
+- EN: With the numbers done, the next step is a 15-minute call with a qualified advisor, free of charge.
+- FR: Les chiffres faits, l'étape suivante est un appel de 15 minutes avec un conseiller qualifié, sans frais.
 
 ### next.read.p
-- PT: Quando quiser, o Concierge junta as suas respostas e marca a primeira conversa com a agência parceira.
-- EN: Whenever you like, the Concierge gathers your answers and books the first call with the partner agency.
-- FR: Quand vous voulez, le Concierge rassemble vos réponses et fixe le premier appel avec l'agence partenaire.
+- PT: Quando quiser, o Concierge junta as suas respostas e marca a primeira conversa com um consultor qualificado.
+- EN: Whenever you like, the Concierge gathers your answers and books the first call with a qualified advisor.
+- FR: Quand vous voulez, le Concierge rassemble vos réponses et fixe le premier appel avec un conseiller qualifié.
 
 ### next.back.p
 - PT: Regresse à página onde estava.
@@ -7728,9 +7729,9 @@ Part 2 of 3 Nov 2026 (the journey): the five-item bar at the bottom of the phone
 - FR: Revenez à la page où vous étiez.
 
 ### next.show.p
-- PT: Para ver estas casas, peça uma visita privada. A agência parceira trata do resto com o promotor.
-- EN: To see these homes, ask for a private visit. The partner agency handles the rest with the developer.
-- FR: Pour voir ces logements, demandez une visite privée. L'agence partenaire s'occupe du reste avec le promoteur.
+- PT: Para ver estas casas, peça uma visita privada. Um consultor qualificado trata do resto com o promotor.
+- EN: To see these homes, ask for a private visit. A qualified advisor handles the rest with the developer.
+- FR: Pour voir ces logements, demandez une visite privée. Un conseiller qualifié s'occupe du reste avec le promoteur.
 
 ### next.saved.p
 - PT: O Concierge começa pelas zonas que guardou.
@@ -7958,9 +7959,9 @@ The share line on a developer's page (night of 3 Nov 2026, part 5): the phone's 
 Requests really sent (operator, 3 Nov 2026): the Concierge, the partner and viewing flows and the showcase request sheet post to /api/request, which e-mails Imóveis Portugal and the partner agency together (GDPR art. 6(1)(b), no consent box). One plain line under the send button names both; the privacy link follows it.
 
 ### notice
-- PT: O seu pedido segue para a {agency}, mediadora licenciada (AMI {ami}), e para a Imóveis Portugal. Responde-lhe por e-mail.
-- EN: When you send, your request goes to Imóveis Portugal and to {agency}, who reply by email.
-- FR: En envoyant, votre demande part chez Imóveis Portugal et chez {agency}, qui vous répond par e-mail.
+- PT: O seu pedido segue para a Imóveis Portugal e para um consultor qualificado, que lhe responde por e-mail.
+- EN: When you send, your request goes to Imóveis Portugal and to a qualified advisor, who replies by email.
+- FR: En envoyant, votre demande part chez Imóveis Portugal et chez un conseiller qualifié, qui vous répond par e-mail.
 
 ### privacy
 - PT: Política de privacidade.
@@ -7968,9 +7969,9 @@ Requests really sent (operator, 3 Nov 2026): the Concierge, the partner and view
 - FR: Politique de confidentialité.
 
 ### to
-- PT: Imóveis Portugal e o consultor qualificado da {agency}
-- EN: Imóveis Portugal and the qualified advisor at {agency}
-- FR: Imóveis Portugal et le conseiller qualifié de {agency}
+- PT: Imóveis Portugal e um consultor qualificado
+- EN: Imóveis Portugal and a qualified advisor
+- FR: Imóveis Portugal et un conseiller qualifié
 
 ### basis.h
 - PT: Base do envio
@@ -7978,9 +7979,9 @@ Requests really sent (operator, 3 Nov 2026): the Concierge, the partner and view
 - FR: Base de l'envoi
 
 ### basis.p
-- PT: Pedido enviado pelo leitor à Imóveis Portugal e à agência parceira {agency} (RGPD, art. 6.º, n.º 1, al. b)): diligências pré-contratuais a pedido do titular.
-- EN: Request sent by the reader to Imóveis Portugal and the partner agency {agency} (GDPR art. 6(1)(b)): steps taken at the reader's request before a contract.
-- FR: Demande envoyée par le lecteur à Imóveis Portugal et à l'agence partenaire {agency} (RGPD, art. 6, par. 1, b)) : mesures précontractuelles prises à la demande de la personne.
+- PT: Pedido enviado pelo leitor à Imóveis Portugal e ao consultor qualificado (RGPD, art. 6.º, n.º 1, al. b)): diligências pré-contratuais a pedido do titular.
+- EN: Request sent by the reader to Imóveis Portugal and the qualified advisor (GDPR art. 6(1)(b)): steps taken at the reader's request before a contract.
+- FR: Demande envoyée par le lecteur à Imóveis Portugal et au conseiller qualifié (RGPD, art. 6, par. 1, b)) : mesures précontractuelles prises à la demande de la personne.
 
 ### last
 - PT: Último pedido enviado nesta sessão.
@@ -7988,9 +7989,9 @@ Requests really sent (operator, 3 Nov 2026): the Concierge, the partner and view
 - FR: Dernière demande envoyée dans cette session.
 
 ### foot
-- PT: Enviado pela Imóveis Portugal. O mesmo pedido segue para a Imóveis Portugal e para o consultor qualificado da agência parceira, que responde ao leitor.
-- EN: Sent by Imóveis Portugal. The same request goes to Imóveis Portugal and to the partner agency's qualified advisor, who replies to the reader.
-- FR: Envoyé par Imóveis Portugal. La même demande part chez Imóveis Portugal et chez le conseiller qualifié de l'agence partenaire, qui répond au lecteur.
+- PT: Enviado pela Imóveis Portugal. O mesmo pedido segue para a Imóveis Portugal e para o consultor qualificado, que responde ao leitor.
+- EN: Sent by Imóveis Portugal. The same request goes to Imóveis Portugal and to the qualified advisor, who replies to the reader.
+- FR: Envoyé par Imóveis Portugal. La même demande part chez Imóveis Portugal et chez le conseiller qualifié, qui répond au lecteur.
 
 ## mare
 
@@ -9398,3 +9399,311 @@ Free versus paid, site-wide (operator, 3 Nov 2026, acceptance line 2: "No 10-yea
 - PT: Em Portugal, a renda mediana dos novos contratos era {rent} por m² ao mês, nos 12 meses até ao {q}: um rendimento bruto de {yield}%. É a renda vezes 12, a dividir pelo preço mediano por m², antes de custos e impostos.
 - EN: In Portugal, the median rent on new leases was {rent} per m² a month in the 12 months to {q}, a gross yield of {yield}%. That is the rent times 12, divided by the median price per m², before costs and tax.
 - FR: Au Portugal, le loyer médian des nouveaux baux était de {rent} le m² par mois sur les 12 mois jusqu'au {q}, soit un rendement brut de {yield} %. C'est le loyer fois 12, divisé par le prix médian au m², avant frais et impôts.
+
+## advisor
+
+Prompt 66 §3 (operator, 3 Nov 2026): while `config.agency.public` is false the site names no agency, no AMI licence and no agency website. Requests still go to the same agency (routing, e-mails and hard rule 6 unchanged); the reader sees "a qualified advisor". These blocks fill the places where the agency's name used to sit.
+
+### who
+- PT: um consultor qualificado
+- EN: a qualified advisor
+- FR: un conseiller qualifié
+
+### title
+- PT: Consultor qualificado
+- EN: Qualified advisor
+- FR: Conseiller qualifié
+
+### firm
+- PT: Mediadora imobiliária licenciada
+- EN: Licensed real-estate brokerage
+- FR: Agence immobilière agréée
+
+### partners.h
+- PT: Quem recebe os pedidos de casa
+- EN: Who receives home requests
+- FR: Qui reçoit les demandes de logement
+
+### casa.consent
+- PT: Autorizo o Imóveis Portugal a enviar esta parte do pedido apenas ao consultor qualificado, para me contactar sobre ela.
+- EN: I authorise Imóveis Portugal to send this part of my request only to the qualified advisor, to contact me about it.
+- FR: J'autorise Imóveis Portugal à transmettre cette partie de ma demande uniquement au conseiller qualifié, pour me contacter à ce sujet.
+
+## agencynamed
+
+The wording that names the partner agency, kept exactly as it was before prompt 66 (only the Maré line corrected for D87). Used instead of the block of the same key when `config.agency.public` is true in site/src/config.ts (lib/copy.ts). Edit here to change what the site says when the agency is named again.
+
+### common.trust.1.h
+- PT: Agência parceira licenciada
+- EN: Licensed partner agency
+- FR: Agence partenaire agréée
+
+### common.trust.1.p
+- PT: {agency}, AMI {ami}. Patrocinador.
+- EN: {agency}, AMI license {ami}. Sponsor.
+- FR: {agency}, licence AMI {ami}. Sponsor.
+
+### common.foot.agency
+- PT: Agência parceira
+- EN: Partner agency
+- FR: Agence partenaire
+
+### home.call.link
+- PT: Pedir 15 minutos grátis
+- EN: Talk to the agency for 15 minutes, free
+- FR: Parler 15 minutes avec l'agence, gratuitement
+
+### home.example.wait
+- PT: Casa de exemplo, até a agência parceira apresentar a primeira casa real.
+- EN: Until the partner agency sends its first real listing, we run the numbers on an example home.
+- FR: En attendant le premier vrai bien de l'agence partenaire, nous faisons les comptes d'un bien d'exemple.
+
+### home.side.h
+- PT: A agência parceira
+- EN: Our partner agency
+- FR: L'agence partenaire
+
+### home.side.p
+- PT: Habinedita Gondomar, agência licenciada (AMI {ami}), Patrocinador Gold.
+- EN: Habinedita Gondomar, licensed agency (AMI {ami}), Gold sponsor.
+- FR: Habinedita Gondomar, agence agréée (AMI {ami}), sponsor Gold.
+
+### calls.intro.subject
+- PT: Primeira conversa de 15 minutos com a agência
+- EN: 15-minute first call with the agency
+- FR: Premier appel de 15 minutes avec l'agence
+
+### faq.cta.agency
+- PT: Receber opções de casas
+- EN: Ask our partner agency
+- FR: Demander à l'agence partenaire
+
+### talk.calls.h
+- PT: Falar com a agência
+- EN: Talk to the agency
+- FR: Parler à l'agence
+
+### talk.agency.p
+- PT: A agência parceira para comprar ou vender a partir de fora: procura, visitas por vídeo ou ao vivo, negociação.
+- EN: Our partner agency, for buying or selling from abroad: search, viewings by video call or in person, and negotiation.
+- FR: Notre agence partenaire pour acheter ou vendre un bien depuis l'étranger : recherche, visites en appel vidéo ou sur place, et négociation.
+
+### partners.proof.2
+- PT: Grupo parceiro licenciado: agência imobiliária (AMI {ami}), intermediário de crédito e seguros.
+- EN: Licensed partner group: estate agency (AMI {ami}), credit intermediary and insurance.
+- FR: Groupe partenaire agréé : agence immobilière (AMI {ami}), intermédiaire de crédit et assurance.
+
+### partners.agency.p
+- PT: A única agência imobiliária da plataforma. Recebe todos os pedidos de compra ou venda e paga um patrocínio anual fixo, nunca uma comissão por contacto.
+- EN: Our partner agency, and the only real-estate agency on the platform. Every request to buy or sell goes to it. It pays a flat yearly sponsorship, never a fee per lead.
+- FR: Notre agence partenaire, et la seule agence immobilière de la plateforme. Toute demande d'achat ou de vente lui est transmise. Elle verse un parrainage annuel forfaitaire, jamais une commission par contact.
+
+### partners.rules.4
+- PT: Os pedidos de compra seguem só para a nossa agência parceira licenciada.
+- EN: Buying requests go only to our licensed partner agency.
+- FR: Les demandes d'achat vont uniquement à notre agence partenaire agréée.
+
+### buy.lede
+- PT: O pedido segue para a agência parceira, {agency} (AMI {ami}), que o contacta com opções. Sem custos.
+- EN: Your request goes to our partner agency, {agency} (AMI license {ami}). The agency will reach out with options. It's free for you.
+- FR: Votre demande part chez notre agence partenaire, {agency} (licence AMI {ami}). L'agence vous contacte avec des propositions. C'est gratuit pour vous.
+
+### buy.steps.2
+- PT: A agência parceira contacta-o em até dois dias úteis.
+- EN: The partner agency reaches out within two business days.
+- FR: L'agence partenaire vous contacte sous deux jours ouvrés.
+
+### buy.small
+- PT: Os seus dados servem só para este pedido e seguem para a agência parceira apenas com o seu consentimento.
+- EN: Your details are used only for this request. They go only to the partner agency, with your consent.
+- FR: Vos données servent uniquement à cette demande. Elles ne vont qu'à l'agence partenaire, avec votre accord.
+
+### how.s4.p
+- PT: O Imóveis Portugal não faz mediação imobiliária. Os pedidos de compra ou venda seguem só para a {agency}, agência parceira licenciada (AMI {ami}) e patrocinadora.
+- EN: Imóveis Portugal isn't a real-estate broker. Requests to buy or sell a home go only to {agency}. It is our partner agency, licensed (AMI {ami}) and a sponsor.
+- FR: Imóveis Portugal n'est pas un intermédiaire immobilier. Les demandes d'achat ou de vente vont uniquement à {agency}. C'est notre agence partenaire, agréée (AMI {ami}) et sponsor.
+
+### how.s5.p
+- PT: Para receber a Maré basta um clique: a beehiiv envia as edições e cada email tem um link para cancelar. Não usamos cookies de publicidade nem de estatística. Os pedidos que envia seguem por email só para a Imóveis Portugal e para a agência parceira, e o site não os guarda.
+- EN: You join Maré, our newsletter, with one click: beehiiv sends the issues, and every email has an unsubscribe link. We use no advertising or analytics cookies. The requests you send go by email only to Imóveis Portugal and the partner agency, and the site does not store them.
+- FR: On s'inscrit à Maré, notre newsletter, d'un clic : beehiiv envoie les numéros et chaque e-mail contient un lien de désinscription. Aucun cookie publicitaire ni de mesure d'audience. Les demandes que vous envoyez partent par e-mail uniquement chez Imóveis Portugal et l'agence partenaire, et le site ne les conserve pas.
+
+### legal.privacy.7.p
+- PT: Se marcar "Incluir este resumo", o seu pedido leva um resumo do que indicou no percurso e nos simuladores: país, orçamento, custo total, capitais próprios e financiamento, uma taxa de esforço indicativa, prazo, se já tem NIF e as zonas cujos preços consultou. Esses valores ficam no seu dispositivo até enviar o pedido e seguem com ele só para a Imóveis Portugal e para a agência parceira {agency}, porque o pediu (RGPD, art. 6.º, n.º 1, alínea b)). O resumo é indicativo, não é uma avaliação de crédito e não serve para nenhuma decisão automatizada sobre si. Para orçamentos elevados, a agência parceira continua a pedir identificação e prova de fundos, como exige a Lei 83/2017.
+- EN: If you tick "Include this summary", your request carries a summary of what you entered on the path and in the calculators: country, budget, total cost, own funds and financing, an indicative debt-to-income ratio, timing, whether you have a NIF and the areas whose prices you looked at. These figures stay on your device until you send the request and go with it only to Imóveis Portugal and our partner agency {agency}, because you asked for it (GDPR art. 6(1)(b)). The summary is indicative, is not a credit assessment and is not used for any automated decision about you. For high budgets, the partner agency still asks for identification and proof of funds, as Lei 83/2017 requires.
+- FR: Si vous cochez « Joindre ce résumé », votre demande contient un résumé de ce que vous avez saisi dans le parcours et les simulateurs : pays, budget, coût total, apport et financement, un taux d'endettement indicatif, échéance, si vous avez un NIF et les secteurs dont vous avez consulté les prix. Ces données restent sur votre appareil jusqu'à l'envoi et partent avec la demande uniquement chez Imóveis Portugal et l'agence partenaire {agency}, parce que vous l'avez demandé (RGPD, art. 6, par. 1, point b). Le résumé est indicatif, n'est pas une évaluation de crédit et ne sert à aucune décision automatisée vous concernant. Pour les budgets élevés, l'agence partenaire demande toujours une pièce d'identité et la preuve des fonds, comme l'exige la Lei 83/2017.
+
+### legal.privacy.2.p
+- PT: Maré, a newsletter: o seu email, com o seu consentimento (RGPD, art. 6.º, n.º 1, al. a)), dado com um clique no formulário; a beehiiv envia as edições e cada email tem um link para cancelar. Pedidos de compra, de visita e do Concierge: nome, contactos e o que procura, para dar seguimento ao pedido que nos faz antes de qualquer contrato (art. 6.º, n.º 1, al. b)), enviados à Imóveis Portugal e à agência parceira {agency} (AMI {ami}). Pedidos de parceria: dados profissionais, para responder (art. 6.º, n.º 1, al. b)). Pedidos a parceiros: categoria, país, pergunta e contacto, para responder ao seu pedido (art. 6.º, n.º 1, al. b)) e, se o autorizar, passar a um parceiro da categoria.
+- EN: Maré, the newsletter: your email address, with your consent (GDPR, art. 6(1)(a)), given with one click on the form; beehiiv sends the issues and every email has an unsubscribe link. Buying, viewing and Concierge requests: name, contact details and what you're looking for, to act on the request you make before any contract (art. 6(1)(b)), sent to Imóveis Portugal and our partner agency {agency} (AMI {ami}). Partner inquiries: business details, to reply (art. 6(1)(b)). Requests to a partner: category, country, question and contact details, to answer your request (art. 6(1)(b)) and, if you agree, to pass them to a partner in that category.
+- FR: Maré, la newsletter : votre adresse e-mail, avec votre consentement (RGPD, art. 6, par. 1, a)), donné d'un clic dans le formulaire ; beehiiv envoie les numéros et chaque e-mail contient un lien de désinscription. Demandes d'achat, de visite et du Concierge : nom, coordonnées et critères, pour donner suite à la demande que vous faites avant tout contrat (art. 6, par. 1, b)), transmis à Imóveis Portugal et à l'agence partenaire {agency} (AMI {ami}). Demandes de partenariat : données professionnelles, pour répondre (art. 6, par. 1, b)). Demandes à un partenaire : catégorie, pays, question et coordonnées, pour répondre à votre demande (art. 6, par. 1, b)) et, avec votre accord, les transmettre à un partenaire de la catégorie.
+
+### legal.privacy.3.p
+- PT: A Imóveis Portugal e a agência parceira {agency} (AMI {ami}) recebem os pedidos que envia pelo site (compra, visita, Concierge e pedidos a parceiros), por email, através do Cloudflare Email Routing; o site não os guarda. O parceiro da categoria escolhida, só para pedidos a parceiros e com o seu consentimento. Prestadores que tratam dados por nossa conta: beehiiv (envio da Maré, EUA, com garantias adequadas para a transferência), Tally (formulários, UE), Cloudflare (alojamento, envio dos pedidos por email e estatísticas sem cookies) e Cal.com (marcação de chamadas).
+- EN: Imóveis Portugal and our partner agency {agency} (AMI {ami}) receive the requests you send on the site (buying, viewing, Concierge and requests to a partner), by email, through Cloudflare Email Routing; the site does not store them. The partner in the chosen category, only for requests to a partner and with your consent. Processors acting for us: beehiiv (Maré, the newsletter, USA, with appropriate safeguards for the transfer), Tally (forms, EU), Cloudflare (hosting, sending requests by email and cookie-free statistics) and Cal.com (call booking).
+- FR: Imóveis Portugal et l'agence partenaire {agency} (AMI {ami}) reçoivent les demandes que vous envoyez sur le site (achat, visite, Concierge et demandes à un partenaire), par e-mail, via Cloudflare Email Routing ; le site ne les conserve pas. Le partenaire de la catégorie choisie, uniquement pour les demandes à un partenaire et avec votre accord. Sous-traitants : beehiiv (Maré, la newsletter, États-Unis, avec garanties appropriées pour le transfert), Tally (formulaires, UE), Cloudflare (hébergement, envoi des demandes par e-mail et statistiques sans cookies) et Cal.com (prise de rendez-vous).
+
+### legal.legal.4.h
+- PT: Agência parceira
+- EN: Partner agency
+- FR: Agence partenaire
+
+### legal.legal.4.p
+- PT: {agency}, AMI {ami}, mediadora imobiliária licenciada. O Imóveis Portugal não faz mediação imobiliária.
+- EN: {agency}, AMI license {ami}, a licensed real-estate broker. Imóveis Portugal does not act as a real-estate broker.
+- FR: {agency}, licence AMI {ami}, intermédiaire immobilier agréé. Imóveis Portugal n'exerce pas d'activité d'intermédiation immobilière.
+
+### sims.agency.p
+- PT: Com um preço em mente, a agência parceira mostra casas nesse valor.
+- EN: If you already have a price in mind, the partner agency can show you homes at that price.
+- FR: Si vous avez déjà un prix en tête, l'agence partenaire vous montre des biens à ce prix.
+
+### casa.s.agency.p
+- PT: A agência parceira, {agency} (AMI {ami}), procura casas no seu orçamento e mostra-as por videochamada, a um familiar ou ao vivo.
+- EN: Our partner agency, {agency} (AMI {ami}), looks for homes in your budget. It shows them by video call, through a relative or in person.
+- FR: Notre agence partenaire, {agency} (AMI {ami}), cherche des biens dans votre budget. Elle vous les montre en appel vidéo, par un proche ou sur place.
+
+### place.homes
+- PT: Pedir consulta à agência
+- EN: See homes in this area with the partner agency
+- FR: Voir des biens dans ce secteur avec l'agence partenaire
+
+### map.proj.askag
+- PT: Receber detalhes da agência
+- EN: Ask through the partner agency
+- FR: Demander via l'agence partenaire
+
+### scen.note
+- PT: As medianas do INE cobrem concelhos inteiros, sem separar zonas como a Quinta do Lago, em Loulé. Os exemplos são preços pedidos em anúncios, não de venda, e as casas não são da nossa agência parceira.
+- EN: INE medians describe whole municipalities. They don't describe the most sought-after enclaves inside them, such as Quinta do Lago in Loulé. The examples are asking prices from listings, not sale prices. They are not homes from our partner agency.
+- FR: Les médianes de l'INE décrivent des communes entières. Elles ne décrivent pas les secteurs les plus recherchés, comme Quinta do Lago à Loulé. Les exemples sont des prix demandés, pas des prix de vente. Ce ne sont pas des biens de notre agence partenaire.
+
+### kit.developers.rule
+- PT: Os pedidos de visita dos leitores seguem para a nossa agência parceira licenciada, que trabalha com o promotor.
+- EN: Readers' viewing requests go to our licensed partner agency, which works with the developer.
+- FR: Les demandes de visite des lecteurs vont à notre agence partenaire agréée, qui travaille avec le promoteur.
+
+### consult.h1
+- PT: Consulta privada com a agência parceira
+- EN: A private consultation with our partner agency
+- FR: Une consultation privée avec notre agence partenaire
+
+### consult.lede
+- PT: Quinze minutos por videochamada com a {agency} (AMI {ami}), sem custos. As suas respostas preparam a conversa.
+- EN: Fifteen minutes by video call with {agency} (AMI {ami}), at no cost. Answer a few questions so the conversation starts with your case.
+- FR: Quinze minutes en appel vidéo avec {agency} (AMI {ami}), sans frais. Répondez à quelques questions pour que l'échange parte de votre situation.
+
+### consult.next.1
+- PT: A agência lê o seu pedido e responde por email.
+- EN: The agency reads your request and replies by email.
+- FR: L'agence lit votre demande et vous répond par e-mail.
+
+### consult.privacy
+- PT: Os seus dados seguem só para a Imóveis Portugal e para a agência parceira, que lhe responde por email.
+- EN: Your details go only to Imóveis Portugal and the partner agency, who reply by email.
+- FR: Vos données ne vont qu'à Imóveis Portugal et à l'agence partenaire, qui vous répond par e-mail.
+
+### consult.card.p
+- PT: Com a agência parceira, sem custos. Diga-nos o que procura.
+- EN: With the partner agency, at no cost. Tell us where you are in your plan.
+- FR: Avec l'agence partenaire, sans frais. Dites-nous où vous en êtes.
+
+### consult.ok.h1
+- PT: O seu pedido chegou à agência
+- EN: Your request has reached the agency
+- FR: Votre demande est arrivée à l'agence
+
+### consult.ok.p
+- PT: A {agency} propõe-lhe por email uma videochamada de 15 minutos, no horário que indicou.
+- EN: Thank you. {agency} will email you to propose a 15-minute video call within the window you gave.
+- FR: Merci. {agency} vous proposera par e-mail un appel vidéo de 15 minutes dans la période indiquée.
+
+### consult.private.p
+- PT: A {agency} propõe-lhe por email uma videochamada de 15 minutos, no horário que indicou.
+- EN: Thank you. {agency} will email you to propose a 15-minute video call within the window you gave.
+- FR: Merci. {agency} vous proposera par e-mail un appel vidéo de 15 minutes dans la période indiquée.
+
+### consult.private.aml
+- PT: Antes das visitas, a agência pede a identificação e a origem dos fundos, como a lei exige a todas as agências imobiliárias em Portugal.
+- EN: Before viewings, the agency asks for the usual identification and information on the origin of funds. Every estate agency in Portugal must do so.
+- FR: Avant les visites, l'agence demande les pièces d'identité habituelles et des informations sur l'origine des fonds. C'est une obligation pour toute agence immobilière au Portugal.
+
+### path.st.choose.a
+- PT: O consultor da agência parceira organiza as visitas (por videochamada, com um familiar ou ao vivo) e prepara consigo a proposta. O mapa mostra também os empreendimentos novos dos promotores parceiros.
+- EN: The partner agency's advisor arranges the viewings: by video call, with a relative, or in person when you visit Portugal. On the map, you can also see new developments from partner developers. Once you find the home, the advisor helps you prepare the offer.
+- FR: Le conseiller de l'agence partenaire organise les visites : en appel vidéo, avec un proche ou sur place lors de votre venue au Portugal. Sur la carte, vous voyez aussi les programmes neufs des promoteurs partenaires. Une fois le bien trouvé, le conseiller vous aide à préparer l'offre.
+
+### path.st.worth.a
+- PT: O mapa mostra o preço mediano por metro quadrado no seu concelho, com dados do INE. Para a sua casa, o consultor da agência parceira faz uma avaliação sem compromisso.
+- EN: The map shows the median price per square metre in your municipality, from official INE data. For a figure for your own home, the partner agency's advisor gives you a valuation with no commitment.
+- FR: La carte montre le prix médian au mètre carré dans votre commune, selon les données officielles de l'INE. Pour un chiffre sur votre bien, le conseiller de l'agence partenaire fait une estimation sans engagement.
+
+### path.st.list.a
+- PT: A agência parceira anuncia a casa, mostra-a e traz-lhe as propostas. O contrato de mediação, o acordo escrito com a agência, fixa o preço pedido e as condições.
+- EN: The partner agency lists the home, runs the viewings and brings you the offers, while you live abroad. The agency agreement (contrato de mediação) sets the asking price and the terms.
+- FR: L'agence partenaire publie l'annonce, organise les visites et vous présente les offres, pendant que vous vivez à l'étranger. Le mandat (contrato de mediação), l'accord écrit avec l'agence, fixe le prix demandé et les conditions.
+
+### path.st.list.h
+- PT: Pôr à venda com a agência
+- EN: Listing with the agency
+- FR: Mettre en vente avec l'agence
+
+### flow.c.lede
+- PT: Quinze minutos por vídeo com a agência parceira, sem custos. Pedir leva um minuto.
+- EN: A free first 15-minute video call with our partner agency. One question at a time, about a minute in all.
+- FR: Un premier échange vidéo de 15 minutes, gratuit, avec notre agence partenaire. Une question à la fois, une minute en tout.
+
+### flow.c.consent
+- PT: Autorizo o envio deste pedido à {agency} (AMI {ami}), agência imobiliária parceira, para me contactar sobre ele. Li a política de privacidade.
+- EN: I agree that this request is sent to {agency} (AMI {ami}), the partner estate agency, to contact me about it. I have read the privacy policy.
+- FR: J'accepte que cette demande soit transmise à {agency} (AMI {ami}), agence immobilière partenaire, pour me recontacter. J'ai lu la politique de confidentialité.
+
+### flow.v.done.h
+- PT: O pedido seguiu para a agência parceira.
+- EN: Request sent to our partner agency.
+- FR: Demande transmise à notre agence partenaire.
+
+### flow.v.done.p
+- PT: A {agency} confirma a data por email, normalmente em dois dias úteis.
+- EN: {agency} will confirm the date by email, usually within two working days.
+- FR: {agency} confirme la date par e-mail, en général sous deux jours ouvrés.
+
+### bar.next.home.p
+- PT: Diga-nos onde vive, o orçamento e o que procura. O Concierge prepara o resto com a agência parceira.
+- EN: Tell us where you live, your budget and what you are looking for. The Concierge prepares the rest with the partner agency.
+- FR: Dites-nous où vous vivez, votre budget et ce que vous cherchez. Le Concierge prépare le reste avec l'agence partenaire.
+
+### bar.next.sims.p
+- PT: Com os números feitos, o passo seguinte é uma conversa de 15 minutos com a agência parceira, sem custos.
+- EN: With the numbers done, the next step is a 15-minute call with the partner agency, free of charge.
+- FR: Les chiffres faits, l'étape suivante est un appel de 15 minutes avec l'agence partenaire, sans frais.
+
+### bar.next.read.p
+- PT: Quando quiser, o Concierge junta as suas respostas e marca a primeira conversa com a agência parceira.
+- EN: Whenever you like, the Concierge gathers your answers and books the first call with the partner agency.
+- FR: Quand vous voulez, le Concierge rassemble vos réponses et fixe le premier appel avec l'agence partenaire.
+
+### bar.next.show.p
+- PT: Para ver estas casas, peça uma visita privada. A agência parceira trata do resto com o promotor.
+- EN: To see these homes, ask for a private visit. The partner agency handles the rest with the developer.
+- FR: Pour voir ces logements, demandez une visite privée. L'agence partenaire s'occupe du reste avec le promoteur.
+
+### send.notice
+- PT: O seu pedido segue para a {agency}, mediadora licenciada (AMI {ami}), e para a Imóveis Portugal. Responde-lhe por e-mail.
+- EN: When you send, your request goes to Imóveis Portugal and to {agency}, who reply by email.
+- FR: En envoyant, votre demande part chez Imóveis Portugal et chez {agency}, qui vous répond par e-mail.
+
+### send.to
+- PT: Imóveis Portugal e o consultor qualificado da {agency}
+- EN: Imóveis Portugal and the qualified advisor at {agency}
+- FR: Imóveis Portugal et le conseiller qualifié de {agency}
+
+### send.basis.p
+- PT: Pedido enviado pelo leitor à Imóveis Portugal e à agência parceira {agency} (RGPD, art. 6.º, n.º 1, al. b)): diligências pré-contratuais a pedido do titular.
+- EN: Request sent by the reader to Imóveis Portugal and the partner agency {agency} (GDPR art. 6(1)(b)): steps taken at the reader's request before a contract.
+- FR: Demande envoyée par le lecteur à Imóveis Portugal et à l'agence partenaire {agency} (RGPD, art. 6, par. 1, b)) : mesures précontractuelles prises à la demande de la personne.
+
+### send.foot
+- PT: Enviado pela Imóveis Portugal. O mesmo pedido segue para a Imóveis Portugal e para o consultor qualificado da agência parceira, que responde ao leitor.
+- EN: Sent by Imóveis Portugal. The same request goes to Imóveis Portugal and to the partner agency's qualified advisor, who replies to the reader.
+- FR: Envoyé par Imóveis Portugal. La même demande part chez Imóveis Portugal et chez le conseiller qualifié de l'agence partenaire, qui répond au lecteur.

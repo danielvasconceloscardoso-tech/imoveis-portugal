@@ -196,6 +196,12 @@
   a: >-
     We don't give investment advice, but we do give the facts: according to Portugal's statistics office
     (INE), home prices rose 17.6% in 2025, the biggest increase on record. What really matters is your
+    budget, the region and what you want from the home. A qualified advisor can show you what's available
+    today, with no commitment.
+  # Prompt 66 §3: the wording that names the partner agency, used when config.agency.public is true.
+  a_named: >-
+    We don't give investment advice, but we do give the facts: according to Portugal's statistics office
+    (INE), home prices rose 17.6% in 2025, the biggest increase on record. What really matters is your
     budget, the region and what you want from the home. Our partner agency can show you what's available
     today, with no commitment.
   facts: [pt-ine-prices-2025]
@@ -206,6 +212,12 @@
   cta: agency
   q: "Can you find me a home?"
   a: >-
+    Yes: tell us the region, your budget and your timeline, and your request goes to a qualified advisor at
+    a licensed real-estate brokerage, who contacts you free of charge. You can view homes by video call,
+    through someone you trust, or in person when you visit. You can also buy from abroad with a power of
+    attorney.
+  # Prompt 66 §3: the wording that names the partner agency, used when config.agency.public is true.
+  a_named: >-
     Yes: tell us the region, your budget and your timeline, and your request goes to our licensed
     partner agency, Habinedita Gondomar, which contacts you free of charge. You can view homes by video
     call, through someone you trust, or in person when you visit. You can also buy from abroad with a

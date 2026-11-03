@@ -20,7 +20,9 @@ const { p, u } = Astro.props as { p: Project; u: Unit };
 const back = `/${lang}/${ed}/${SLUGS[lang].partners}/${p.devSlug}/${p.muni}/`;
 const k = EDITION_CUR[ed];
 const r = config.enquiryRouting;
-const to = r === "developer" ? p.developer : r === "choice" ? `${config.agency.name} · ${p.developer}` : config.agency.name;
+// Prompt 66 §3: "a qualified advisor" instead of the agency's name while config.agency.public is false.
+const agencyTo = config.agency.public ? config.agency.name : c("advisor.who", lang);
+const to = r === "developer" ? p.developer : r === "choice" ? `${agencyTo} · ${p.developer}` : agencyTo;
 const ask = `${pathFor(lang, ed, "consult")}?project=${encodeURIComponent(p.name)}&unit=${encodeURIComponent(u.ref)}${u.price ? `&budget=${u.price}` : ""}`;
 ---
 <V2 lang={lang} ed={ed} page="partners" title={`${p.name} · ${u.typology} | Imóveis Portugal`} description={p.line ?? p.name} paths={Object.fromEntries(LANGS.map((l) => [l, `/${l}/${ed}/${SLUGS[l].partners}/${p.devSlug}/${p.muni}/${u.id}/`])) as Record<Lang, string>}>

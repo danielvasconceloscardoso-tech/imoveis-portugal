@@ -198,6 +198,12 @@
   cta: agency
   q: "Est-ce le bon moment pour acheter ?"
   a: >-
+    Nous ne donnons pas de conseil en investissement, mais nous donnons les faits : selon l'INE, les prix
+    des logements au Portugal ont augmenté de 17,6 % en 2025, la plus forte hausse de la série. Ce qui
+    compte vraiment, c'est votre budget, la région et ce que vous attendez du bien. Un conseiller qualifié
+    vous montre l'offre actuelle, sans engagement.
+  # Prompt 66 §3: the wording that names the partner agency, used when config.agency.public is true.
+  a_named: >-
     Nous ne donnons pas de conseil en investissement, mais nous donnons les faits : selon l'INE, les
     prix des logements au Portugal ont augmenté de 17,6 % en 2025, la plus forte hausse de la série. Ce
     qui compte vraiment, c'est votre budget, la région et ce que vous attendez du bien. L'agence
@@ -210,6 +216,12 @@
   cta: agency
   q: "Pouvez-vous me trouver un bien ?"
   a: >-
+    Oui : indiquez la région, le budget et votre calendrier, et votre demande part chez un conseiller
+    qualifié d'une agence immobilière agréée, qui vous contacte sans frais. Vous visitez en appel vidéo, par
+    une personne de confiance ou sur place lors d'un séjour au Portugal. Vous pouvez aussi acheter à
+    distance, par procuration.
+  # Prompt 66 §3: the wording that names the partner agency, used when config.agency.public is true.
+  a_named: >-
     Oui : indiquez la région, le budget et votre calendrier, et votre demande part chez notre agence
     partenaire agréée, Habinedita Gondomar, qui vous contacte sans frais. Vous visitez en appel vidéo,
     par une personne de confiance ou sur place lors d'un séjour au Portugal. Vous pouvez aussi acheter à

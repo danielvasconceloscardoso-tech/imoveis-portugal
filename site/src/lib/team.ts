@@ -7,7 +7,8 @@ import type { Role } from "./journeys";
 export function partnerFor(role: Role): { name: string; reg?: string } | null {
   const n = (name: string, reg?: string) => (name ? { name, reg } : null);
   switch (role) {
-    case "agency": return n(config.agency.name, `AMI ${config.agency.ami}`);
+    // Prompt 66 §3: no agency name or licence while config.agency.public is false (the role label alone shows).
+    case "agency": return config.agency.public ? n(config.agency.name, `AMI ${config.agency.ami}`) : null;
     case "bank": return n(config.creditPartner.name, config.creditPartner.bdp ? `Banco de Portugal ${config.creditPartner.bdp}` : undefined);
     case "insurance": return n(config.insurancePartner.name, config.insurancePartner.asf ? `ASF ${config.insurancePartner.asf}` : undefined);
     case "wealth": return n(config.privatePartners[0]?.name ?? "", config.privatePartners[0]?.licence);
