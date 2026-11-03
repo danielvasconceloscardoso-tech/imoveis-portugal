@@ -12,7 +12,13 @@ import { TIME_BANDS, UTM_MEDIA } from "./track";
 
 /** The phone bottom bar's items (ev "bar/{item}"). The bar's own helper adds an item here when it adds one to the bar. */
 export const BAR_ITEMS = ["home", "map", "sims", "concierge", "saved", "path", "faq", "search", "menu", "letter"];
-export const LAYERS = ["price", "g10", "rent", "yield", "vac"];
+export const LAYERS = ["none", "price", "g10", "rent", "yield", "vac"];
+/** D83 part 2, the map in three depths: what the search resolved to (the kind; the place slug travels in "place", never the
+ * typed text), the cards opened, the tiles, the chart's range, the comparison and the paid previews. */
+export const MAP_SEARCH = ["munis", "pars", "golf", "beach", "devs"];
+export const MAP_CARDS = ["muni", "parish", "region", "project", "golf"];
+export const MAP_TILES = ["price", "life", "care", "compare"];
+export const MAP_PAID = ["rent", "g10y", "foreign", "supply", "compare"];
 export const OVERLAYS = ["golf", "beach", "devs"];
 /** The developer page's share: the phone's share sheet, or the link copied. */
 export const SHARE = ["native", "copy"];
@@ -36,6 +42,12 @@ export function editionEvents(): string[] {
   for (const l of LAYERS) out.push(`map/layer/${l}`);
   for (const o of OVERLAYS) for (const s of ["on", "off"]) out.push(`map/overlay/${o}/${s}`);
   out.push("map/share");
+  for (const g of MAP_SEARCH) out.push(`map/search/${g}`);
+  for (const k of MAP_CARDS) out.push(`map/card/${k}`);
+  for (const t of MAP_TILES) out.push(`map/tile/${t}`);
+  for (const r of ["1a", "5a", "10a"]) out.push(`map/chart/${r}`);
+  for (const t of MAP_PAID) out.push(`map/paid/preview/${t}`);
+  out.push("map/compare/open", "map/compare/pair", "map/panel/open");
   for (const s of [...new Set(STATIONS.map((x) => x.k))]) for (const k of ["open", "done"]) out.push(`path/${s}/${k}`);
   for (const k of ["home", "region"]) for (const s of ["on", "off"]) out.push(`heart/${k}/${s}`);
   for (const b of BAR_ITEMS) out.push(`bar/${b}`);
