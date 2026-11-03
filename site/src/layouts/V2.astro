@@ -17,6 +17,7 @@ import { DISCLAIMER } from "../lib/content";
 import CountryBar from "../components/CountryBar.astro";
 import NextStep, { type Next } from "../components/NextStep.astro";
 import "../styles/bar.css";
+import "../styles/mare-nav.css";
 
 type Sticky = { href: string; label: string } | null;
 // `paths` overrides the URL per language for pages below a page key (e.g. one calculator under "sims").
@@ -116,7 +117,10 @@ import Beacon from "../components/Beacon.astro";
           <p class="langs" aria-label={c("common.language", lang)}>
             {LANGS.map((l, i) => <>{i > 0 && <span aria-hidden="true">·</span>}<a href={urlFor(l)} hreflang={HTML_LANG[l]} lang={HTML_LANG[l]} aria-current={l === lang ? "true" : undefined}>{l.toUpperCase()}</a></>)}
           </p>
-          <a class="nl" href={subscribe}>{c("common.newsletter", lang)}</a>
+          {/* Fix step 5 (3 Nov): the small Maré button, every page; counted on arrival as ev "mare/open/header" (MarePage). */}
+          {d2 ? (
+          <a class="hd-mare" href={`${subscribe}?de=header`} aria-label={c("common.newsletter", lang)} title={c("mare.line", lang)} aria-current={page === "mare" ? "page" : undefined}>{c("mare.title", lang)}</a>
+          ) : <a class="nl" href={subscribe}>{c("common.newsletter", lang)}</a>}
           {d2 && <button type="button" class="hd-find" data-find-open aria-label={c("find.open", lang)}><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg><kbd>⌘K</kbd></button>}
           {d2 && <a class="hd-saved" href={savedHref} data-saved-link data-nav-k="saved" aria-label={c("bar.saved", lang)} aria-current={page === "saved" ? "page" : undefined}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.2s-7.2-4.5-7.2-10.1A4.1 4.1 0 0 1 12 7.5a4.1 4.1 0 0 1 7.2 2.6c0 5.6-7.2 10.1-7.2 10.1z"/></svg></a>}
           {d2 && <a class="hd-cg" href={pathFor(lang, ed, "consult")} data-concierge>{c("find.concierge", lang)}</a>}

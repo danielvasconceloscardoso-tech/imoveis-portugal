@@ -1,0 +1,33 @@
+/* Fix step 5 (operator, 3 Nov 2026): Maré, clearly the newsletter. The small "Maré" button on the right of the header, on
+   every page, next to the search and the heart, and the quiet line under "Começar" on the opening page. */
+.hd-mare { display: inline-flex; align-items: center; height: 34px; padding: 0 14px; border: 1px solid currentColor; border-radius: 999px;
+  color: inherit; text-decoration: none; font: 500 15px/1 "Playfair Display Variable", Georgia, serif; letter-spacing: .01em; white-space: nowrap;
+  opacity: .85; transition: opacity .2s, background-color .2s, color .2s; }
+.hd-mare:hover, .hd-mare:focus-visible { opacity: 1; }
+.hd-mare[aria-current="page"] { opacity: 1; background: #111214; border-color: #111214; color: #fff !important; }
+body.d2 .hd:not(.solid) .hd-mare[aria-current="page"] { background: #fff; border-color: #fff; color: #111214 !important; }
+/* Room for it without crowding the five: on a phone the header tools sit a little closer; from 1080 to 1365 px, where the
+   five share the header with the tools, the languages move into the menu (as on phones, prompt 43) and the button takes
+   their place. From 1366 px everything sits in the header. */
+@media (max-width: 819px) { .hd-mare { height: 30px; padding: 0 9px; font-size: 14px; } }
+@media (max-width: 420px) {
+  body.d2 header.hd .tools { gap: 6px; }
+  body.d2 header.hd .hd-find { padding: 0 6px; }
+  body.d2 header.hd .hd-saved { width: 30px; }
+}
+@media (max-width: 389px) { body.d2 header.hd .tools { gap: 2px; } body.d2 header.hd .hd-mare { padding: 0 7px; font-size: 13px; } }
+@media (min-width: 1080px) and (max-width: 1365px) {
+  body.d2 header.hd .tools > .langs { display: none !important; }
+  body.d2 header.hd .cmenu .cmenu-langs { display: flex; gap: 8px; font: 600 15px/1 "Manrope Variable", system-ui, sans-serif; letter-spacing: .08em; }
+  body.d2 header.hd .cmenu .cmenu-langs a { color: inherit; text-decoration: none; padding: 8px 2px; }
+  body.d2 header.hd .cmenu .cmenu-langs a[aria-current] { text-decoration: underline; text-underline-offset: 6px; }
+}
+@media print { .hd-mare { display: none !important; } }
+
+.h2-mareline { position: relative; z-index: 2; margin: calc(16px - var(--gut)) var(--gut) var(--gut); text-align: right; font-size: 15px; line-height: 1.45; }
+.h2-mareline a { color: rgba(255, 255, 255, .9); text-decoration: none; border-bottom: 1px solid rgba(255, 255, 255, .4); text-shadow: 0 1px 12px rgba(0, 0, 0, .35); transition: color .2s, border-color .2s; }
+.h2-mareline a:hover, .h2-mareline a:focus-visible { color: #fff; border-color: #fff; }
+@media (max-width: 900px) { .h2-mareline { text-align: left; } }
+
+/* The home signup says what Maré is, in the serif, under the name. */
+.h2-nl.h2-dark p.h2-nlwhat { max-width: 26em; margin-top: 16px; text-wrap: balance; font: 400 clamp(20px, 2.6vw, 26px)/1.35 var(--serif); color: var(--ink); }

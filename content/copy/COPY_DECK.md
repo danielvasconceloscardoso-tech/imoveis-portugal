@@ -107,9 +107,9 @@ How to edit:
 - FR: Fermer
 
 ### newsletter
-- PT: Maré
-- EN: Maré
-- FR: Maré
+- PT: Maré, a newsletter
+- EN: Maré, the newsletter
+- FR: Maré, la newsletter
 
 ### navx.partners
 - PT: Parceiros
@@ -1024,9 +1024,9 @@ How to edit:
 - FR: {country} : le représentant fiscal et les règles vérifiées de votre pays.
 
 ### signup.h
-- PT: A Maré, à terça e à sexta, às 8h. Portugal em três minutos.
-- EN: Maré, one home and its numbers, every Tuesday and Friday at 8 a.m.
-- FR: Maré, un bien et ses chiffres, chaque mardi et vendredi à 8 h
+- PT: Maré, a newsletter
+- EN: Maré, the newsletter
+- FR: Maré, la newsletter
 
 ## partners
 
@@ -4205,9 +4205,9 @@ How to edit:
 - FR: Le parcours de votre pays, pas à pas
 
 ### later.nl
-- PT: Receber a Maré
-- EN: Maré, the Tuesday and Friday newsletter
-- FR: Maré, la newsletter du mardi et du vendredi
+- PT: Maré, a newsletter: insights e pérolas de Portugal, todas as terças e sextas.
+- EN: Maré, the newsletter: insights and hidden gems from Portugal, every Tuesday and Friday.
+- FR: Maré, la newsletter : idées et pépites du Portugal, chaque mardi et vendredi.
 
 ### later.dossier
 - PT: Ver os dossiês
@@ -4998,9 +4998,9 @@ Prompt 43 §3b: each station is a plain question (st.{k}.q) and a two or three s
 - FR: Modifier les réponses
 
 ### email.p
-- PT: A Maré chega à terça e à sexta, às 8h, e o primeiro envio traz o Passo a passo. Cancela quando quiser.
-- EN: Sign up to Maré, every Tuesday and Friday at 8 a.m.: the first email carries Step by step, and you can leave whenever you want.
-- FR: Inscrivez-vous à Maré, chaque mardi et vendredi à 8 h : le premier e-mail contient le Pas à pas, et vous pouvez partir quand vous voulez.
+- PT: A Maré, a newsletter, chega à terça e à sexta, às 8h, e o primeiro envio traz o Passo a passo. Cancela quando quiser.
+- EN: Sign up to Maré, the newsletter, every Tuesday and Friday at 8 a.m.: the first email carries Step by step, and you can leave whenever you want.
+- FR: Inscrivez-vous à Maré, la newsletter, chaque mardi et vendredi à 8 h : le premier e-mail contient le Pas à pas, et vous pouvez partir quand vous voulez.
 
 ### email
 - PT: Receber por email
@@ -5716,12 +5716,12 @@ Design v2 home (prompt 32, D59). Every block: one to three sentences, at most 45
 - FR: Voir les prix et les loyers
 
 ### nl.h
-- PT: Maré. Portugal, duas vezes por semana.
-- EN: Maré. Every Tuesday and Friday at 8 a.m.
-- FR: Maré. Chaque mardi et vendredi à 8 h.
+- PT: Maré
+- EN: Maré
+- FR: Maré
 
 ### nl.p
-- PT: À terça e à sexta, às 8h: um lugar com história e o que fazer no fim de semana. Três minutos de leitura, grátis. Confirma o email uma vez e cancela quando quiser.
+- PT: Às 8h, um lugar com história e o que fazer no fim de semana. Três minutos de leitura, grátis. Confirma o email uma vez e cancela quando quiser.
 - EN: The rules that changed, new INE prices and the full cost of one home. Free.
 - FR: Les règles qui ont changé, les nouveaux prix de l'INE et le coût complet d'un bien. Gratuit.
 
@@ -7965,14 +7965,14 @@ Requests really sent (operator, 3 Nov 2026): the Concierge, the partner and view
 - FR: Maré, la newsletter d'Imóveis Portugal : le Portugal chaque mardi et vendredi à 8 h, en trois minutes. Gratuit.
 
 ### line
-- PT: Portugal, duas vezes por semana. Três minutos.
-- EN: Portugal, twice a week. Three minutes.
-- FR: Le Portugal, deux fois par semaine. Trois minutes.
+- PT: Maré, a newsletter: insights e pérolas de Portugal, todas as terças e sextas.
+- EN: Maré, the newsletter: insights and hidden gems from Portugal, every Tuesday and Friday.
+- FR: Maré, la newsletter : idées et pépites du Portugal, chaque mardi et vendredi.
 
 ### when
-- PT: À terça e à sexta, às 8h. Grátis.
-- EN: Tuesday and Friday, 8 a.m. Free.
-- FR: Mardi et vendredi, 8 h. Gratuit.
+- PT: Às 8h, em três minutos. Grátis.
+- EN: At 8 a.m., in three minutes. Free.
+- FR: À 8 h, en trois minutes. Gratuit.
 
 ### email
 - PT: O seu email
@@ -8070,13 +8070,13 @@ Requests really sent (operator, 3 Nov 2026): the Concierge, the partner and view
 - FR: vendredi
 
 ### block.label
-- PT: Maré
-- EN: Maré
-- FR: Maré
+- PT: Maré, a newsletter
+- EN: Maré, the newsletter
+- FR: Maré, la newsletter
 
 ### block
 - PT: Esta {dia}: {headline}. Receba às 8h.
-- EN: This {dia} in Maré: “{headline}”. In your inbox at 8 a.m..
+- EN: This {dia} in Maré: “{headline}”. In your inbox at 8 a.m.
 - FR: Ce {dia} dans Maré : « {headline} ». À 8 h dans votre boîte.
 
 ### home.more

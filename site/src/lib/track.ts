@@ -122,7 +122,10 @@ export function utm(): { source: string; medium: string; campaign: string } {
 /** The media counted on /e/ for a letter signup; any other medium counts as "other" (the store keeps the exact one). */
 export const UTM_MEDIA = ["none", "email", "newsletter", "social", "paid", "cpc", "referral", "partner", "qr", "other"];
 /** Where a Maré signup or its quiet block lives (D83): the surface that brought the reader to the form. */
-export const MARE_WHERE = ["home", "mare", "article", "concierge", "postcard", "path", "guide"];
+export const MARE_WHERE = ["home", "mare", "article", "concierge", "postcard", "path", "guide", "header", "hero"];
+/** Fix step 5 (3 Nov): the header's Maré button and the line under "Começar" on the opening page, counted on arrival on
+ *  the Maré page (?de=header, ?de=hero) as ev "mare/open/{where}". */
+export const MARE_OPEN = ["header", "hero"];
 /** A Maré signup (never the e-mail): ev "letter/signup/{medium}", origin "source/medium/campaign", step = where; and,
  *  with the issue whose headline was on screen (D83, "which headline converted"), ev "mare/signup/{where}/{issue}" with
  *  the same origin. Two counts on /e/ (by medium, by surface and headline); in the store, count either family, not both. */
