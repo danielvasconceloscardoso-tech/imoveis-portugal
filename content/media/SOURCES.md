@@ -1,3 +1,12 @@
+# Photography standard (operator, 3 Nov 2026; applies to every place, card, postcard and article)
+
+1. **Breathtaking views first:** the river, the sea, the coastline, viewpoints (miradouros), the Douro valley, rooftops at golden hour, the light on the water.
+2. **Wide, full-bleed, warm natural light;** no people in close-up, no clichés, no collages.
+3. **Licences that allow commercial use only:** Unsplash, Pexels, Pixabay Content License, Wikimedia Commons (CC0, CC BY, CC BY-SA, with attribution), our partner developers' renders (for their own projects), Turismo de Portugal's media bank once the operator registers us. Never "all rights reserved", "non-commercial" (NC) or "no derivatives" (ND) for graded copies.
+4. **Every photo is credited on /credits/** (site/src/lib/credits.ts) and listed below with its source URL, author and licence. CC BY-SA copies we grade are shared under the same licence.
+5. **Selection rules per place:** one hero (the place's best view: water, coast, valley or rooftops, golden hour preferred) and two gallery views; the place must be recognisable and named correctly in the alt text; no developer render stands in for a place; if no photo meets the standard, the card says so in the report and is not shipped weaker (CLAUDE.md rule 17).
+6. **Web copies:** graded with scripts/design/resort_grade.py, cut to 640/1024/1600 px WebP (and AVIF where the page uses it).
+
 # Photographs and video on the home page (prompt 33 §1, 27 Oct 2026)
 
 Every photograph carries the one grade, `python3 scripts/design/resort_grade.py <in> <out> 1.3` (bright, warm, soft
