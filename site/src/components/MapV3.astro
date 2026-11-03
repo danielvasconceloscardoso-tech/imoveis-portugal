@@ -21,6 +21,7 @@ import { COMPARE_SUB } from "../lib/maptiles";
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import "../styles/mapv3.css";
+import MareBlock from "./MareBlock.astro";
 
 interface Props { lang: Lang; ed: EdCode; mode?: "page" | "home"; }
 const { lang, ed, mode = "page" } = Astro.props;
@@ -234,7 +235,7 @@ const live = A.live && !!A.stripe.region && !!A.stripe.all;
 
   <!-- MareBlock slot (D83 part 2): the lead puts <MareBlock /> (site/src/components/MareBlock.astro, the Maré newsletter
        block) inside this template; map-v3.ts copies it to the end of every place card and region postcard card. -->
-  <template data-mare-tpl></template>
+  <template data-mare-tpl>{mode === "page" && <MareBlock lang={lang} ed={ed} where="postcard" />}</template>
 
   <noscript><style is:inline>.m3-top, .m3-dock, .m3-cards { display: none !important; }</style><p class="m3-noscript">{k("noscript")}</p></noscript>
   <script type="application/json" data-m3-cfg set:html={JSON.stringify(cfg)} />
