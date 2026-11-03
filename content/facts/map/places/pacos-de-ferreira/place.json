@@ -1,0 +1,69 @@
+{
+ "_how": "Place card, Norte roll-out of the golden sample (operator's step 2, 3 Nov 2026). Read by scripts/map-data/tiles.py together with routes.csv, schools.csv and health.csv in this folder. The free card shows the rows marked card=1 and the chosen beach, city and airport; every row goes to the paid analysis (site/src/data/mapanalysis.json). Flights: facts.csv rows (PlaneMapper scheduled block times, checked 2026-11-03). SOURCES.md in this folder says how each figure was checked.",
+ "slug": "pacos-de-ferreira",
+ "origin": {
+  "name": "Câmara Municipal de Paços de Ferreira",
+  "lat": 41.275869,
+  "lon": -8.376122,
+  "source": "OpenStreetMap (Nominatim), amenity=townhall (way/135262877), Rua Dona Maria II"
+ },
+ "line": {
+  "pt": "A Citânia de Sanfins e a terra do mobiliário, e o Porto (Aliados) a 29 minutos de carro.",
+  "en": "The Citânia de Sanfins hill fort and a town known for its furniture makers, and Porto (Aliados) 29 minutes away by car.",
+  "fr": "La Citânia de Sanfins et une ville réputée pour ses fabricants de meubles, et Porto (Aliados) à 29 minutes en voiture."
+ },
+ "photos": [],
+ "life": {
+  "beach": "apa-ptcd8p",
+  "city": "porto-avenida-dos-aliados",
+  "airport": "aeroporto-do-porto-opo-terminal"
+ },
+ "names": {
+  "apa-ptcd8p": "Praia do Cabo do Mundo",
+  "porto-avenida-dos-aliados": "Porto, Aliados",
+  "aeroporto-do-porto-opo-terminal": {
+   "pt": "Aeroporto do Porto",
+   "en": "Porto Airport",
+   "fr": "Aéroport de Porto"
+  }
+ },
+ "flights": {
+  "lu": {
+   "fact": "flight-lux-opo",
+   "from": "LUX",
+   "to": "OPO",
+   "min": 150
+  },
+  "fr": {
+   "fact": "flight-par-opo",
+   "from": "ORY",
+   "to": "OPO",
+   "min": 135
+  },
+  "ch": {
+   "fact": "flight-gva-opo",
+   "from": "GVA",
+   "to": "OPO",
+   "min": 150
+  },
+  "br": {
+   "fact": "flight-sao-opo",
+   "from": "GRU",
+   "to": "OPO",
+   "min": 600
+  },
+  "us": {
+   "fact": "flight-nyc-opo",
+   "from": "EWR",
+   "to": "OPO",
+   "min": 400
+  },
+  "il": {
+   "fact": "flight-tlv-lis",
+   "from": "TLV",
+   "to": "LIS",
+   "min": 370,
+   "via": "LIS"
+  }
+ }
+}

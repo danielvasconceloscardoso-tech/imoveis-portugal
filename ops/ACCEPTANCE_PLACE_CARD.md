@@ -19,6 +19,8 @@ Also checked: `node scripts/check-content.mjs` and `node scripts/check-parity.mj
 
 The same card, built the same way, for the 85 other municipalities of NUTS II Norte (Gondomar unchanged). Data per place in content/facts/map/places/<slug>/ (routes.csv, schools.csv, health.csv, place.json, SOURCES.md); photographs in content/media/SOURCES.md, "Norte roll-out". A place ships only when every line passes; otherwise it keeps today's card (no place.json) and is listed below with the line it fails.
 
+**Update 3 Nov, evening (operator, D92): photographs no longer block a card.** Lousada, Maia, Paços de Ferreira, Paredes, Penafiel, Santo Tirso, Trofa, Valongo and Vila Verde pass lines 2-7 and now ship with the quiet band; their photographs come in the separate photo step (the four held sets are kept in place.json as `photos_held`). Norte: 18 cards.
+
 **Shipped: 8** (+ Gondomar = 9 Norte cards): Amares, Braga, Espinho, Matosinhos, Porto, Santa Maria da Feira, Vila Nova de Gaia, Vizela. The helper proposed 12; at the ship review (CTO, 3 Nov) Santo Tirso, Trofa, Valongo and Vila Verde were held on line 1 (see the table below); their data is kept in place.held.json, so renaming it back to place.json ships them once the photographs meet the standard.
 **Kept on today's card: 77** (68 fail line 3; 9 pass lines 2-6 but fail line 1: 5 with no photographs found to the standard, 4 held at the ship review).
 

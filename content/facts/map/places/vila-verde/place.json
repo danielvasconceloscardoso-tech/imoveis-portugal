@@ -1,0 +1,102 @@
+{
+ "_how": "Place card, Norte roll-out of the golden sample (operator's step 2, 3 Nov 2026). Read by scripts/map-data/tiles.py together with routes.csv, schools.csv and health.csv in this folder. The free card shows the rows marked card=1 and the chosen beach, city and airport; every row goes to the paid analysis (site/src/data/mapanalysis.json). Flights: facts.csv rows (PlaneMapper scheduled block times, checked 2026-11-03). SOURCES.md in this folder says how each figure was checked.",
+ "slug": "vila-verde",
+ "origin": {
+  "name": "Câmara Municipal de Vila Verde",
+  "lat": 41.648594,
+  "lon": -8.436724,
+  "source": "OpenStreetMap (Nominatim), amenity=townhall (way/159377826), Rua do Município"
+ },
+ "line": {
+  "pt": "O Cávado e a foz do Homem, em Soutelo, e o centro de Braga a 14 minutos de carro.",
+  "en": "The Cávado and the mouth of the Homem at Soutelo, and central Braga 14 minutes away by car.",
+  "fr": "Le Cávado et l'embouchure de l'Homem à Soutelo, et le centre de Braga à 14 minutes en voiture."
+ },
+ "photos": [],
+ "life": {
+  "beach": "apa-ptcn8h",
+  "city": "braga-praca-da-republica",
+  "airport": "aeroporto-do-porto-opo-terminal"
+ },
+ "names": {
+  "apa-ptcn8h": "Praia da Apúlia",
+  "braga-praca-da-republica": {
+   "pt": "Braga, centro",
+   "en": "Braga, city centre",
+   "fr": "Braga, centre-ville"
+  },
+  "aeroporto-do-porto-opo-terminal": {
+   "pt": "Aeroporto do Porto",
+   "en": "Porto Airport",
+   "fr": "Aéroport de Porto"
+  }
+ },
+ "flights": {
+  "lu": {
+   "fact": "flight-lux-opo",
+   "from": "LUX",
+   "to": "OPO",
+   "min": 150
+  },
+  "fr": {
+   "fact": "flight-par-opo",
+   "from": "ORY",
+   "to": "OPO",
+   "min": 135
+  },
+  "ch": {
+   "fact": "flight-gva-opo",
+   "from": "GVA",
+   "to": "OPO",
+   "min": 150
+  },
+  "br": {
+   "fact": "flight-sao-opo",
+   "from": "GRU",
+   "to": "OPO",
+   "min": 600
+  },
+  "us": {
+   "fact": "flight-nyc-opo",
+   "from": "EWR",
+   "to": "OPO",
+   "min": 400
+  },
+  "il": {
+   "fact": "flight-tlv-lis",
+   "from": "TLV",
+   "to": "LIS",
+   "min": 370,
+   "via": "LIS"
+  }
+ },
+ "photos_held": [
+  {
+   "f": "vila-verde-cavado-entardecer",
+   "w": 1600,
+   "alt": {
+    "pt": "O Cávado ao entardecer junto à N201, em Vila Verde",
+    "en": "The Cávado at dusk by the N201, Vila Verde",
+    "fr": "Le Cávado au crépuscule près de la N201, à Vila Verde"
+   }
+  },
+  {
+   "f": "vila-verde-foz-do-homem",
+   "w": 1600,
+   "alt": {
+    "pt": "O rio Homem a chegar ao Cávado, em Soutelo, Vila Verde",
+    "en": "The Homem river meeting the Cávado at Soutelo, Vila Verde",
+    "fr": "La rivière Homem rejoignant le Cávado à Soutelo, Vila Verde"
+   }
+  },
+  {
+   "f": "vila-verde-praia-do-faial",
+   "w": 1600,
+   "alt": {
+    "pt": "A praia fluvial do Faial, no Cávado, em Vila de Prado",
+    "en": "The Faial river beach on the Cávado, Vila de Prado",
+    "fr": "La plage fluviale du Faial, sur le Cávado, à Vila de Prado"
+   }
+  }
+ ]
+}
