@@ -8,6 +8,9 @@ import { Sources, EDITION_CUR, RATE, fmtDate, homeExample } from "../lib/content
 import { c } from "../lib/copy";
 import { config } from "../config";
 import { PRICES, LAST } from "../lib/prices";
+import { PROJECTS, showcases, img } from "../lib/projects";
+import { SLUGS } from "../i18n";
+import Heart from "./Heart.astro";
 
 interface Props { lang: Lang; ed: EdCode; }
 const { lang, ed } = Astro.props;
@@ -30,6 +33,12 @@ const qa = [
   { q: c("home.qa.tax.q", lang), a: c("home.qa.tax.a", lang), s: [] as number[] },
 ];
 // a place card. Every photograph carries the one grade (scripts/design/resort_grade.py); sources in content/media/SOURCES.md.
+// Part 2 (3 Nov): the homes for sale now, two taps from the opening page (edition, then the development).
+const homes = showcases(PROJECTS).map((ps) => {
+  const p = ps[0], place = (PRICES.munis[p.muni] as any)?.n ?? p.muni;
+  const now = p.blocks ? p.blocks.reduce((a, b) => a + b.units.reduce((x, u) => x + u.forSale, 0), 0) : null;
+  return { p, place, now, href: `/${lang}/${ed}/${SLUGS[lang].partners}/${p.devSlug}/${p.muni}/` };
+});
 const nl = config.forms.newsletter[lang];
 const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("home.subscribe.subject", lang)} (${ed} · ${lang})`)}`;
 ---
@@ -68,6 +77,29 @@ const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("h
   {/* Full-bleed, no frame (prompt 32); map v3 (prompt 36): the slow rotation stops after 15 s or at the first touch. */}
   <div class="h2-m3"><MapV3 lang={lang} ed={ed} mode="home" /></div>
 </section>
+
+{homes.length > 0 && (
+<section class="h2-sec h2-homes" aria-labelledby="h2-homes">
+  <div class="h2-text h2-center" data-reveal>
+    <h2 id="h2-homes">{c("bar.homes.h", lang)}</h2>
+    <p>{c("bar.homes.p", lang)}</p>
+  </div>
+  <ul class="h2-hlist">
+    {homes.map((h) => (
+      <li class="h2-hcard">
+        <Heart lang={lang} kind="home" id={h.p.id} label={`${h.p.name}, ${h.place}`} href={h.href} />
+        <a href={h.href} data-home-card={h.p.id}>
+          <span class="h2-hph">{h.p.render && <img src={img(h.p.render, 800)} srcset={`${img(h.p.render, 800)} 800w, ${img(h.p.render)} 1600w`} sizes="(max-width: 760px) 100vw, 560px" alt="" width="800" height="500" loading="lazy" decoding="async" />}</span>
+          <span class="h2-hk">{h.place} · <span class="h2-tag">{c("common.sponsored", lang)}</span></span>
+          <span class="h2-hn">{h.p.name}</span>
+          {h.now != null && <span class="h2-hm">{c("showb.now", lang, { n: h.now })}</span>}
+          <span class="h2-hgo">{c("bar.homes.view", lang)} →</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</section>
+)}
 
 <section class="h2-sec h2-band h2-paths" aria-labelledby="h2-paths">
   <div class="h2-narrow h2-center" data-reveal>
