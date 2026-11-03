@@ -8039,6 +8039,11 @@ Requests really sent (operator, 3 Nov 2026): the Concierge, the partner and view
 - EN: Your email opens with the request written. Send it and confirm once: Maré starts on the next Tuesday or Friday.
 - FR: Votre messagerie s'ouvre avec la demande rédigée. Envoyez-la et confirmez une fois : Maré commence le mardi ou le vendredi suivant.
 
+### oneclick
+- PT: Ao carregar, recebe a Maré por email às terças e sextas. Cancela num clique, em qualquer envio.
+- EN: One click and Maré arrives by email every Tuesday and Friday. Unsubscribe in one click from any issue.
+- FR: Un clic et Maré arrive par e-mail chaque mardi et vendredi. Désinscription en un clic depuis chaque envoi.
+
 ### optin.embed
 - PT: Confirme o email uma vez: a Maré começa na terça ou sexta seguinte.
 - EN: Confirm your email once: Maré starts on the next Tuesday or Friday.
