@@ -7,8 +7,16 @@ data/map/parishes.json; data/map/munis.topo.json) and the partner developments' 
 understands are listed in tiles_src.py).
 A tile whose figures are missing is simply left out of the JSON: the map then shows "Em breve", never a made-up number.
 
-Usage (repo root): python3 scripts/map-data/tiles.py [--src DIR]   (writes tiles.json and site/src/data/mapanalysis.json)
-Output keys:
+Usage (repo root): python3 scripts/map-data/tiles.py [--src DIR]
+Writes (operator's step 1, 3 Nov 2026: free versus paid):
+  site/public/data/map/tiles.json        the free tiles (below); the paid figures are removed from it
+  site/public/data/map/place/<slug>.json one small file per municipality for the card, with the golden sample card ("c5")
+                                         where content/facts/map/places/<slug>/ exists (scripts/map-data/place_cards.py)
+  site/public/data/map/price5.json       the free price layer: market median per quarter, last five years (munis, regions)
+  site/public/data/map/parishes5.json    the same for the parishes
+  site/src/data/mapanalysis.json         the paid analysis (build time only): ten years, one year, typology ranges, new and
+                                         existing, doctors per 1000, sea temperature, region ranges, full school and health lists
+Output keys of tiles.json (before the paid fields are moved out):
   q        latest INE quarter, e.g. "2026-Q2"
   of       NUTS II code -> name
   r2       NUTS II code -> {m2, p1, p5, p10} (and medians of the tile figures, for the plain bands)
@@ -112,8 +120,50 @@ for key in ("sea", "bch", "doc"):
         if isinstance(m.get(key), (int, float)): by.setdefault(m["c2"], []).append(m[key])
     for c2, vals in by.items(): out["r2"].setdefault(c2, {})[key] = round(median(vals), 1)
 
+# ------------------------------------------------------------------ free versus paid (operator, step 1, 3 Nov 2026)
+# The free surfaces (the map card, the layers, the comparison page) read tiles.json and the per-place files; the paid analysis
+# reads site/src/data/mapanalysis.json at build time. Everything on the operator's paid list (ten years, one year, typology
+# ranges, new versus existing, doctors per inhabitant, distributions and medians for bands, sea temperature: not on the free
+# list, so paid by CLAUDE.md rule 17) leaves the public file and goes to the analysis.
+import place_cards  # scripts/map-data/place_cards.py: the golden sample cards (content/facts/map/places/<slug>/)
+PAID_M = ("p1", "p10", "doc", "rng", "ne", "sea")
+PAID_P = ("p1", "rng", "ne")
+ana_path = os.path.join(ROOT, "site", "src", "data", "mapanalysis.json")
+ana = json.load(open(ana_path, encoding="utf8")) if os.path.exists(ana_path) else {"q": out["q"], "m": {}, "p": {}}
+ana["q"] = out["q"]
+for key, PAID, src in (("m", PAID_M, out["m"]), ("p", PAID_P, out["p"])):
+    for slug, row in src.items():
+        moved = {k: row.pop(k) for k in PAID if k in row}
+        for k, v in moved.items(): ana.setdefault(key, {}).setdefault(slug, {}).setdefault(k, v)  # tiles_src's richer "ne" wins
+ana["r2"] = {c2: dict(v) for c2, v in out["r2"].items()}
+ana["rg"] = {k: dict(v) for k, v in out["rg"].items()}
+for v in out["r2"].values():
+    for k in ("p1", "p10", "sea", "bch", "doc"): v.pop(k, None)
+for v in out["rg"].values():
+    for k in ("lo", "hi", "p1"): v.pop(k, None)
+for k in ("sea", "doc"): out["src"].pop(k, None)
+cards = place_cards.build(ROOT, out)
+ana["card"] = {slug: c["paid"] for slug, c in cards.items()}
+json.dump(ana, open(ana_path, "w", encoding="utf8"), ensure_ascii=False, separators=(",", ":"))
+# One small file per municipality for the card (the map opens a place before the whole map has loaded).
+pdir = os.path.join(PUB, "map", "place"); os.makedirs(pdir, exist_ok=True)
+for slug, row in out["m"].items():
+    one = {"q": out["q"], **row}
+    if slug in cards: one["c5"] = cards[slug]["free"]
+    json.dump(one, open(os.path.join(pdir, f"{slug}.json"), "w", encoding="utf8"), ensure_ascii=False, separators=(",", ":"))
+
+# The map's free price layer: the market median quarter by quarter over five years (21 quarters, the same span as the card's
+# five-year direction). Ten years, rents and yields stay in prices.json for the build and the paid analysis.
+K5 = 21
+cut = lambda s: (s or [])[-K5:]
+free5 = {"quarters": Q[-K5:], "regions": {k: {"n": v["n"], "m2": cut(v.get("m2"))} for k, v in prices["regions"].items()},
+         "munis": {k: {"n": v["n"], "r": v.get("r"), "m2": cut(v.get("m2"))} for k, v in prices["munis"].items()}}
+json.dump(free5, open(os.path.join(PUB, "map", "price5.json"), "w", encoding="utf8"), ensure_ascii=False, separators=(",", ":"))
+pars5 = {"quarters": pars["quarters"][-K5:], "parishes": {k: {"n": v["n"], "m": v["m"], "m2": cut(v.get("m2"))} for k, v in pars["parishes"].items()}}
+json.dump(pars5, open(os.path.join(PUB, "map", "parishes5.json"), "w", encoding="utf8"), ensure_ascii=False, separators=(",", ":"))
+
 path = os.path.join(PUB, "map", "tiles.json")
 json.dump(out, open(path, "w", encoding="utf8"), ensure_ascii=False, separators=(",", ":"))
-cov = {k: sum(1 for m in out["m"].values() if k in m) for k in ("m2", "p5", "rng", "ne", "nb", "nbq", "sea", "bch", "ap", "fl", "sch", "hsp", "doc")}
-covp = {k: sum(1 for m in out["p"].values() if k in m) for k in ("m2", "p5", "rng", "ne", "bch", "ap", "sch", "hsp")}
-print(f"tiles.json: {os.path.getsize(path) // 1024} KB · {len(out['m'])} concelhos, {len(out['p'])} freguesias\n  concelhos {cov}\n  freguesias {covp}")
+cov = {k: sum(1 for m in out["m"].values() if k in m) for k in ("m2", "p5", "nb", "nbq", "bch", "ap", "fl", "sch", "hsp")}
+covp = {k: sum(1 for m in out["p"].values() if k in m) for k in ("m2", "p5", "bch", "ap", "sch", "hsp")}
+print(f"tiles.json: {os.path.getsize(path) // 1024} KB · {len(out['m'])} concelhos, {len(out['p'])} freguesias\n  concelhos {cov}\n  freguesias {covp}\n  golden sample cards: {sorted(cards)}")

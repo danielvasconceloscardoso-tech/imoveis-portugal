@@ -6,7 +6,11 @@
 // the browser). Data: prices.json (INE sales and rents), map/layers.json (INE: domicile of the buyer, foreign residents,
 // permits, completions), map/tiles.json (finest cuts, typology, new and existing, when gathered), src/data/mapanalysis.json
 // (typology and new versus existing per place, written by scripts/map-data/tiles.py when the gathered folder has them).
-// Sections without figures say "Em breve". Wording: COPY_DECK.md "map4.a.*".
+// Sections without figures say "Em breve". Wording: COPY_DECK.md "map4.a.*" and "card5.*".
+// Operator, step 1 (3 Nov 2026): everything moved off the free surfaces lands here, nothing is lost: ten years (the chart per
+// golden sample place), rents and gross yield, distributions (where the place sits among the concelhos), the comparison
+// with its neighbours (its NUTS III), doctors per 1000, sea temperature, and the full lists of schools, health services and
+// beaches with OSRM drive times (src/data/mapanalysis.json "card", written by scripts/map-data/place_cards.py).
 import V2 from "../layouts/V2.astro";
 import AnalysisExtra from "./AnalysisExtra.astro";  // fix step 3: the figure sets the free pages no longer show
 import { HTML_LANG, type Lang, type EdCode } from "../i18n";
@@ -26,7 +30,9 @@ const q = PRICES.quarters[LAST], qLabel = c("map.qfmt", lang).replace("{q}", q.s
 const rName = akey === "portugal" ? k4("a.all") : c(`map.r.${akey}`, lang);
 const layers = JSON.parse(readFileSync(join(process.cwd(), "public", "data", "map", "layers.json"), "utf8")).munis as Record<string, any>;
 const extraFile = join(process.cwd(), "src", "data", "mapanalysis.json");
-const extra: Record<string, any> = existsSync(extraFile) ? JSON.parse(readFileSync(extraFile, "utf8")).m ?? {} : {};
+const ANA: Record<string, any> = existsSync(extraFile) ? JSON.parse(readFileSync(extraFile, "utf8")) : {};
+const extra: Record<string, any> = ANA.m ?? {};
+const k5 = (x: string, v: Record<string, string> = {}) => c(`card5.${x}`, lang, v);
 const rows = Object.entries(TILES.m).filter(([, m]) => akey === "portugal" || m.r === akey)
   .map(([s, m]) => ({ s, ...m, ser: PRICES.munis[s], lay: layers[s] ?? {}, ex: extra[s] ?? {} })).sort((a, b) => (b.m2 ?? 0) - (a.m2 ?? 0));
 const meds = rows.map((r) => r.m2).filter((v): v is number => !!v).sort((a, b) => a - b);
@@ -37,7 +43,17 @@ const c2 = akey === "portugal" ? "PT" : TILES.rg[akey]?.c2 ?? "PT";
 const reg = (PRICES.regions as any)[c2], pt = (PRICES.regions as any).PT;
 const chart = lineChart(PRICES.quarters, akey === "portugal" ? [{ label: "Portugal", values: pt.m2 }] : [{ label: reg?.n ?? rName, values: reg?.m2 ?? [] }, { label: "Portugal", values: pt.m2 }],
   { breakAt: PRICES.break, breakLabel: c("prices.break", lang), fmt: (v) => nf.format(v), h: 260 });
-const typ = rows.filter((r) => r.ex.ty), ne = rows.filter((r) => r.ex.ne || r.rng);
+const typ = rows.filter((r) => r.ex.ty), ne = rows.filter((r) => r.ex.ne || r.ex.rng);
+// The golden sample places in this analysis: their drive-time lists, ten years, neighbours and rank among the concelhos.
+const dateF = (d: string) => new Intl.DateTimeFormat(HTML_LANG[lang], { day: "numeric", month: "long", year: "numeric" }).format(new Date(`${d}T12:00:00`));
+const allM2 = Object.values(TILES.m).map((m) => m.m2).filter((v): v is number => !!v).sort((a, b) => a - b);
+const cards = rows.filter((r) => ANA.card?.[r.s]).map((r) => {
+  const card = ANA.card[r.s], ser = PRICES.munis[r.s], reg = (PRICES.regions as any)[r.c2];
+  const chart = ser ? lineChart(PRICES.quarters, [{ label: r.n, values: ser.m2 }, ...(reg ? [{ label: reg.n, values: reg.m2 }] : []), { label: "Portugal", values: pt.m2 }], { breakAt: PRICES.break, breakLabel: c("prices.break", lang), fmt: (v) => nf.format(v), h: 240 }) : "";
+  const below = r.m2 ? allM2.filter((v) => v < r.m2!).length : 0;
+  const neigh = Object.entries(TILES.m).filter(([, m]) => m.n3 === r.n3).map(([s2, m]) => ({ s: s2, n: m.n, m2: m.m2, p5: m.p5, ex: extra[s2] ?? {}, ser: PRICES.munis[s2] })).sort((a, b) => (b.m2 ?? 0) - (a.m2 ?? 0));
+  return { r, card, chart, rank: r.m2 ? Math.round((below / allM2.length) * 100) : null, neigh };
+});
 const foreign = rows.filter((r) => r.lay.dom?.abroad || r.lay.fr);
 const supply = rows.filter((r) => r.lay.lic != null || r.lay.new != null);
 const eurM2 = (v?: number | null) => (v ? `${nf.format(v)} €` : "—");
@@ -86,7 +102,35 @@ const TYP = ["T0–T1", "T2", "T3", "T4+"];
 
     <h2>{k4("a.cmp")}</h2>
     <div class="an4-sc"><table><thead><tr><th>{k4("a.col.place")}</th><th>{k4("a.col.m2")}</th><th>{k4("a.col.p5")}</th><th>{k4("a.col.p10")}</th><th>{k4("tile.sea")}</th><th>{k4("tile.docs")}</th></tr></thead>
-      <tbody>{rows.map((r) => <tr><td>{r.n}</td><td>{eurM2(r.m2)}</td><td>{pct(r.p5)}</td><td>{pct(r.p10)}</td><td>{r.sea != null ? `${nf1.format(r.sea)} °C` : "—"}</td><td>{r.doc != null ? nf1.format(r.doc) : "—"}</td></tr>)}</tbody></table></div>
+      <tbody>{rows.map((r) => <tr><td>{r.n}</td><td>{eurM2(r.m2)}</td><td>{pct(r.p5)}</td><td>{pct(r.ex.p10)}</td><td>{r.ex.sea != null ? `${nf1.format(r.ex.sea)} °C` : "—"}</td><td>{r.ex.doc != null ? nf1.format(r.ex.doc) : "—"}</td></tr>)}</tbody></table></div>
+
+    {cards.map(({ r, card, chart, rank, neigh }) => (
+      <section class="an4-pl" id={`lugar-${r.s}`}>
+        <h2>{k5("a.place", { place: r.n })}</h2>
+        <p class="small">{k5("a.place.p", { o: card.o.name, d: dateF(card.d) })}</p>
+        <h3>{k5("schools")}</h3>
+        <div class="an4-sc"><table><thead><tr><th>{k5("a.col.name")}</th><th>{k5("a.col.kind")}</th><th>{k5("a.col.muni")}</th><th>{k5("a.col.min")}</th></tr></thead>
+          <tbody>{card.sch.map((x: any) => <tr><td>{x.u ? <a href={x.u} rel="noopener">{x.n}</a> : x.n}</td><td>{k5(x.k === "international" ? "kind.intl" : "kind.priv")}</td><td>{x.m}</td><td>{x.min}</td></tr>)}</tbody></table></div>
+        <h3>{k5("health")}</h3>
+        <div class="an4-sc"><table><thead><tr><th>{k5("a.col.name")}</th><th>{k5("a.col.kind")}</th><th>{k5("a.col.min")}</th></tr></thead>
+          <tbody>{card.hsp.map((x: any) => <tr><td>{x.n}{x.op && <><br /><span class="small">{x.op}</span></>}</td><td>{k5(/centro de saúde/.test(x.k) ? "kind.cs" : /public/.test(x.k) ? "kind.hpub" : "kind.hpriv")}</td><td>{x.min}</td></tr>)}</tbody></table></div>
+        <h3>{k5("a.beaches")}</h3>
+        <div class="an4-sc"><table><thead><tr><th>{k5("a.col.name")}</th><th>{k5("a.col.min")}</th></tr></thead>
+          <tbody>{card.bch.map((x: any) => <tr><td>{x.n}</td><td>{x.min}</td></tr>)}</tbody></table></div>
+        <h3>{k5("a.chart", { place: r.n })}</h3>
+        {chart && <figure class="pc-chart" set:html={chart} />}
+        <dl class="an4-kv">
+          <dt>{k4("a.col.rent")}</dt><dd>{r.ser?.rq?.[LAST] ? `${nf2.format(r.ser.rq[LAST]!)} €` : "—"}</dd>
+          <dt>{k4("a.col.yield")}</dt><dd>{r.ser?.yield ? `${nf1.format(r.ser.yield)} %` : "—"}</dd>
+          <dt>{k4("tile.docs")}</dt><dd>{r.ex.doc != null ? nf1.format(r.ex.doc) : "—"}</dd>
+          <dt>P{rank ?? "—"}</dt><dd>{eurM2(r.m2)}</dd>
+          <dt>{k5("a.sea")}</dt><dd>{r.ex.sea != null ? `${nf1.format(r.ex.sea)} °C` : "—"}</dd>
+        </dl>
+        <h3>{r.n3}</h3>
+        <div class="an4-sc"><table><thead><tr><th>{k4("a.col.place")}</th><th>{k4("a.col.m2")}</th><th>{k4("a.col.p5")}</th><th>{k4("a.col.p10")}</th><th>{k4("a.col.rent")}</th><th>{k4("a.col.yield")}</th><th>{k4("tile.docs")}</th></tr></thead>
+          <tbody>{neigh.map((x) => <tr class={x.s === r.s ? "an4-me" : undefined}><td>{x.n}</td><td>{eurM2(x.m2)}</td><td>{pct(x.p5)}</td><td>{pct(x.ex.p10)}</td><td>{x.ser?.rq?.[LAST] ? `${nf2.format(x.ser.rq[LAST]!)} €` : "—"}</td><td>{x.ser?.yield ? `${nf1.format(x.ser.yield)} %` : "—"}</td><td>{x.ex.doc != null ? nf1.format(x.ex.doc) : "—"}</td></tr>)}</tbody></table></div>
+      </section>
+    ))}
 
     <p class="small an4-src">{k4("a.src", { q: qLabel })}</p>
   </article>
@@ -108,5 +152,8 @@ const TYP = ["T0–T1", "T2", "T3", "T4+"];
   .an4-kv dt { font-weight: 700; color: #5d6066; } .an4-kv dd { margin: 0; }
   .an4-soon { color: #5d6066; }
   .an4-src { margin-top: 40px; color: #5d6066; }
+  .an4 h3 { font: 400 20px/1.25 var(--serif, "Playfair Display Variable", Georgia, serif); margin: 32px 0 12px; }
+  .an4 .an4-me td { font-weight: 700; }
+  .an4 td .small { color: #5d6066; }
   @media print { .an4-acts, :global(.hd), :global(.ft), :global(.bb), :global(.nx), :global(.skip) { display: none !important; } .an4 h2 { break-after: avoid; } .an4 table { font-size: 11px; } }
 </style>

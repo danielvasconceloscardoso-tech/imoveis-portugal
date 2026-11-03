@@ -12,10 +12,10 @@ import { track, edOf, ev, evHeart, timeBand, rememberPlace } from "../lib/track"
 import { get as savedItems } from "../lib/saved";
 import { heartHTML } from "./hearts";
 
-type Series = { n: string; m2: (number | null)[]; rq: (number | null)[]; yield: number | null; g10?: number | null; cagrP?: number | null;
-  mo: { c4: number; c8: number | null; w: "up" | "steady" | "down" } | null };
+// The free price layer (operator, step 1): the market median per quarter over the last five years (/data/map/price5.json).
+type Series = { n: string; m2: (number | null)[] };
 type Props = { id: number; n: string; s: string; r: string; x: number; y: number; a: number };
-type Layer = "none" | "price" | "g10" | "rent" | "yield" | "vac";
+type Layer = "none" | "price";
 type Proj = { id: string; name: string; developer: string; muni: string; lon: number; lat: number; render?: string; pin?: string; from: number | null; showcase: string; summary?: string; feats?: string[]; now?: number | null };
 
 const reduce = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -44,10 +44,8 @@ export function initMapV3(root: HTMLElement) {
   const loc = root.dataset.locale || "pt-PT";
   const nf = new Intl.NumberFormat(loc), nf1 = new Intl.NumberFormat(loc, { minimumFractionDigits: 1, maximumFractionDigits: 1 });
   const eur = new Intl.NumberFormat(loc, { style: "currency", currency: "EUR", maximumFractionDigits: 0 });
-  const eur2 = new Intl.NumberFormat(loc, { style: "currency", currency: "EUR", minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const fx = Number(root.dataset.fx) || 0, cur = root.dataset.cur || "";
   const money = (eurV: number) => fx ? `${nf.format(Math.round(eurV * fx / 1000) * 1000)} ${cur}` : eur.format(Math.round(eurV / 1000) * 1000);
-  const pc = (v: number) => `${v > 0 ? "+" : v < 0 ? "−" : ""}${nf1.format(Math.abs(v))}%`;
   const esc = (t: string) => t.replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[ch]!);
   const q = new URLSearchParams(location.search);
   const canvas = $("[data-canvas]"), sheet = $("[data-sheet]"), sheetIn = $("[data-sheet-in]"), tip = $("[data-tip]"), labelsEl = $("[data-labels]");
@@ -56,13 +54,17 @@ export function initMapV3(root: HTMLElement) {
   const stored = (() => { try { return Number(localStorage.getItem("ip.budget")) || 0; } catch { return 0; } })();
   let budget = Math.min(Math.max(Number(q.get("budget")) || stored || 300000, 100000), 20e6);
   // D83 part 2: the first view has no colour layer ("none"); ?layer=price and the others still open with their colours.
-  let layer: Layer = (["price", "g10", "rent", "yield", "vac"].includes(q.get("layer") || "") ? q.get("layer") : "none") as Layer;
+  // Operator, step 1: only the market price stays as a free colour layer; ten years, rents, yields and the other statistics
+  // moved to the paid analysis (an old ?layer=rent link opens the map without colours).
+  let layer: Layer = q.get("layer") === "price" ? "price" : "none";
   // 2D or 3D (prompt 37 §3): the link, else the reader's last choice, else 2D on phones and weak devices and 3D on desktop.
   // Reduced motion always gets the flat map.
   const dimSaved = (() => { try { return localStorage.getItem("ip.map.dim"); } catch { return null; } })();
   const dimAsked = q.get("dim") ?? (q.get("flat") === "1" ? "2d" : null) ?? dimSaved;
   let flat = reduce() || (dimAsked ? dimAsked === "2d" : weak() || matchMedia("(max-width: 760px), (pointer: coarse)").matches);
-  let selected: string | null = q.get("place"), selPar: string | null = q.get("parish"), pinA: string | null = null;
+  // ?place= takes the slug (gondomar); a place name (Gondomar, from the Concierge link) is turned into its slug.
+  const slugOf = (v: string | null) => (v ? plain(v).replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") : null);
+  let selected: string | null = slugOf(q.get("place")), selPar: string | null = q.get("parish"), pinA: string | null = null;
   let selRegion: string | null = q.get("region"), panelOpen = false;
   let overlays = { golf: q.get("golf") === "1", beach: q.get("beach") === "1", devs: mode === "page" ? q.get("devs") !== "0" : q.get("devs") === "1" };
   let P: { quarters: string[]; munis: Record<string, Series> } | null = null;
@@ -72,7 +74,6 @@ export function initMapV3(root: HTMLElement) {
   let parishes: { feats: any[]; data: Record<string, Series> } | null = null;
   let golf: any = null, beaches: [number, number, string][] | null = null;
   let breaks: Record<Layer, number[]> = {} as any;
-  let VAC: Record<string, number> | null = null;  // vacant dwellings, loaded with the "vac" layer
   let tourAbort: (() => void) | null = null;
   const projects: Proj[] = cfg.projects || [];
   const projMunis = new Set(projects.map((p) => p.muni));
@@ -93,16 +94,12 @@ export function initMapV3(root: HTMLElement) {
   // ------------------------------------------------------------ values and colour
   function value(s: Series | undefined, l: Layer, i = at()): number | null {
     if (!s || l === "none") return null;
-    if (l === "price") return s.m2[i] ?? null;
-    if (l === "rent") return s.rq[i] ?? null;
-    if (l === "g10") return s.g10 ?? null;
-    if (l === "vac") return (s as Series & { vac?: number }).vac ?? null;
-    return s.yield ?? null;
+    return s.m2[i] ?? null;
   }
   function quant(list: number[]) { const a = [...list].sort((x, y) => x - y); return [0.03, 0.18, 0.35, 0.5, 0.65, 0.82, 0.97].map((p) => a[Math.floor(p * (a.length - 1))]); }
   function computeBreaks() {
     const all = (l: Layer, everyQ: boolean) => { const v: number[] = []; for (const s of Object.values(P!.munis)) { if (everyQ) for (let i = 0; i <= last(); i++) { const x = value(s, l, i); if (x != null) v.push(x); } else { const x = value(s, l); if (x != null) v.push(x); } } return v; };
-    breaks = { none: [], price: quant(all("price", true)), rent: quant(all("rent", true)), g10: quant(all("g10", false)), yield: quant(all("yield", false)), vac: VAC ? quant(all("vac", false)) : [] };
+    breaks = { none: [], price: quant(all("price", true)) };
   }
   function colorExpr(): any {
     if (layer === "none") return "rgba(0,0,0,0)";
@@ -128,9 +125,9 @@ export function initMapV3(root: HTMLElement) {
   function legend() {
     const lg = $("[data-legend]"); lg.hidden = layer === "none";
     const b = breaks[layer]; if (!b?.length) return;
-    const f = (v: number) => layer === "price" ? eur.format(Math.round(v / 10) * 10) : layer === "rent" ? eur2.format(v) : layer === "g10" ? pc(v) : `${nf1.format(v)}%`;
+    const f = (v: number) => eur.format(Math.round(v / 10) * 10);
     $("[data-lo]").textContent = f(b[0]); $("[data-hi]").textContent = f(b[b.length - 1]);
-    $("[data-legend-t]").textContent = L.legend[layer].replace("{q}", P ? qLabel(P.quarters[at()]) : "");
+    $("[data-legend-t]").textContent = L.legend.price.replace("{q}", P ? qLabel(P.quarters[at()]) : "");
   }
 
   // ------------------------------------------------------------ the budget gesture (log scale, the reader's currency)
@@ -178,16 +175,10 @@ export function initMapV3(root: HTMLElement) {
 
   // ------------------------------------------------------------ chips, 2D and 3D, overlays
   root.querySelectorAll<HTMLButtonElement>("[data-layer]").forEach((b) => b.addEventListener("click", () => { setLayer(b.dataset.layer as Layer); ev({ event: `map/layer/${b.dataset.layer}`, place: selected ?? undefined, origin: mode }); }));
-  // Prompt 51 §3.3: vacant dwellings, share of the stock (INE, Census 2021, indicator 0012517), loaded only when chosen.
-  async function loadVac() {
-    if (VAC || !P) return;
-    try { const d = await fetch("/data/map/layers.json").then((r) => r.json()); VAC = {}; for (const [k, v] of Object.entries(d.munis as Record<string, { vac?: number; sea?: number }>)) if (typeof v.vac === "number") { VAC[k] = v.vac; const s = P.munis[k] as Series & { vac?: number; sea?: number }; if (s) { s.vac = v.vac; s.sea = (v as { sea?: number }).sea; } } computeBreaks(); } catch { VAC = {}; }
-  }
   async function setLayer(l: Layer) {
-    if (l === "vac") await loadVac();
     layer = l; root.querySelectorAll("[data-layer]").forEach((b) => b.setAttribute("aria-pressed", String((b as HTMLElement).dataset.layer === l)));
-    const tm = root.querySelector<HTMLElement>("[data-time]"); if (tm) tm.classList.toggle("is-off", l !== "price" && l !== "rent");
-    repaint(); if (selected && !sheet.hidden && view === "card" && !selPar) showPlace(selected, false); syncUrl(); load();
+    const tm = root.querySelector<HTMLElement>("[data-time]"); if (tm) tm.classList.toggle("is-off", l !== "price");
+    repaint(); syncUrl(); load();
   }
   root.querySelectorAll<HTMLButtonElement>("[data-dim]").forEach((b) => b.addEventListener("click", () => setDim(b.dataset.dim === "2d")));
   function dimButtons() { root.classList.toggle("is-2d", flat); root.querySelectorAll("[data-dim]").forEach((b) => b.setAttribute("aria-pressed", String(((b as HTMLElement).dataset.dim === "2d") === flat))); }
@@ -228,7 +219,7 @@ export function initMapV3(root: HTMLElement) {
     if (loading) return loading;
     loading = (async () => {
       if (!document.querySelector("link[data-maplibre]")) { const l = document.createElement("link"); l.rel = "stylesheet"; l.href = mapCss; l.dataset.maplibre = ""; document.head.append(l); }
-      const [mod, topo, prices, insets, rivers] = await Promise.all([import("maplibre-gl"), fetch("/data/map/munis.topo.json").then((r) => r.json()), fetch("/data/prices.json").then((r) => r.json()),
+      const [mod, topo, prices, insets, rivers] = await Promise.all([import("maplibre-gl"), fetch("/data/map/munis.topo.json").then((r) => r.json()), fetch("/data/map/price5.json").then((r) => r.json()),
         fetch("/data/map/insets.json").then((r) => r.json()).catch(() => ({})), fetch("/data/map/rivers.json").then((r) => r.json()).catch(() => null)]);
       ml = mod.default; P = prices; loadTiles();
       const geo: any = feature(topo, topo.objects.m);
@@ -243,7 +234,7 @@ export function initMapV3(root: HTMLElement) {
       const coastPt = (c: number[]) => c[0] < -10 || (c[0] < -8.65 && c[1] < 41.87) || (c[1] < 37.25 && c[0] < -7.41);
       const coast = { type: "MultiLineString", coordinates: [] as number[][][] };
       for (const ln of outer.coordinates) { let seg: number[][] = []; for (const c of ln) { if (coastPt(c)) seg.push(c); else { if (seg.length > 1) coast.coordinates.push(seg); seg = []; } } if (seg.length > 1) coast.coordinates.push(seg); }
-      computeBreaks(); if (layer === "vac") await loadVac();
+      computeBreaks();
       const narrow = root.clientWidth < 700;
       map = new ml.Map({
         container: canvas, attributionControl: false, pixelRatio: Math.min(devicePixelRatio || 1, 2), maxTileCacheSize: narrow ? 48 : 96, dragRotate: !flat, pitchWithRotate: !flat, maxPitch: 72, minZoom: 4.6, maxZoom: 12.5, fadeDuration: 150,
@@ -308,9 +299,12 @@ export function initMapV3(root: HTMLElement) {
       if (q.get("q") && P && P.quarters.includes(q.get("q")!)) setQuarter(P.quarters.indexOf(q.get("q")!));
       if (overlays.golf) await drawGolf(); if (overlays.beach) await drawBeaches(); if (overlays.devs) drawProjects();
       if (selPar) { await loadParishes(); selectParish(selPar); } else if (selRegion && !selected) showRegion(selRegion); else if (selected) {
-        // Prompt 39 §2.6: a place with a listed project opens on the project card (the place card stays one tap back).
-        const pr = projects.find((x) => x.muni === selected);
-        if (pr) { select(selected, false); flyTo(pr.lon, pr.lat, 12.6); showProject(pr); } else select(selected);
+        // Operator, step 1: a ?place= link opens the place card (the golden sample); the partner project stays on the map as
+        // its pin and as one sponsored line in the card (prompt 39 §2.6 opened the project card first). The card may already
+        // be open (opened before the map, below): then the map only flies to the place.
+        const p = byS.get(selected);
+        if (p && ctx?.kind === "muni" && ctx.id === selected && !sheet.hidden) { map.setFilter("sel", ["==", ["get", "s"], selected]); flyTo(p.x, p.y, Math.max(map.getZoom(), p.a < 40 ? 8.6 : 7.6)); }
+        else select(selected);
       }
       if (mode === "home" && !flat && !selected) startSpin();
       if (!flat) governor();
@@ -382,7 +376,7 @@ export function initMapV3(root: HTMLElement) {
     tip.innerHTML = g ? `${esc(g.n)}${g.holes ? `<b>${g.holes} ${L.golf.holes.toLowerCase()}</b>` : ""}` : `${esc(h!.kind === "par" ? parishes?.feats.find((f) => f.properties.id === h!.key)?.properties.n ?? "" : byS.get(s!)?.n ?? "")}${v != null ? `<b>${fmtV(v)}</b>` : ""}`;
     tip.style.transform = `translate(${pt.x + 14}px, ${pt.y - 34}px)`; tip.hidden = false;
   }
-  const fmtV = (v: number) => layer === "price" ? `${eur.format(v)}/m²` : layer === "rent" ? `${eur2.format(v)}/m²` : layer === "g10" ? pc(v) : `${nf1.format(v)}%`;
+  const fmtV = (v: number) => `${eur.format(v)}/m²`;
   function pick(pt: { x: number; y: number }): { kind: "muni" | "par"; key: string } | null {
     const z = map.getZoom(), ppd = (512 * 2 ** z) / 360;
     const layers = [...(z >= 8.45 && map.getLayer("par-fill") ? ["par-fill"] : []), "muni-fill"];
@@ -419,33 +413,48 @@ export function initMapV3(root: HTMLElement) {
     const p = slug ? byS.get(slug) : null;
     if (p && map && fly) flyTo(p.x, p.y, Math.max(map.getZoom(), p.a < 40 ? 8.6 : 7.6));
     syncUrl(); sentence();
-    if (slug && p) { showPlace(slug); savePlace(p.n); rememberPlace(p.n); timeStart(slug); } else closeSheet();
+    if (slug) {
+      showPlace(slug); timeStart(slug);
+      const remember = (n?: string) => { if (n) { savePlace(n); rememberPlace(n); } };
+      p ? remember(p.n) : loadPlace(slug).then((d) => remember(d?.n));
+    } else closeSheet();
   }
 
   // ------------------------------------------------------------ the place as tiles (D83 part 2: Apple Weather, then Apple Stocks)
-  // The card: photo, name, one line, a heart; free tiles (Preço, Viver aqui, Escolas e saúde); paid tiles with a soft
-  // preview that open the unlock sheet. A tile opens its own view in the same sheet (the chart, or the figures as strips);
-  // "Voltar" returns to the card. The figures come from /data/map/tiles.json; a tile without figures says "Em breve".
-  const T4 = L.t;
+  // Operator, step 1 (3 Nov 2026), the golden sample card: photo (a gallery where the place has its own views), name, one
+  // line, a heart; Preço in words; Viver aqui (minutes by car, the flight); Escolas and Saúde (names and minutes); a small
+  // "Fontes" link; two calls to action (the paid analysis, the advisor); the Maré block. Nothing from the paid list: no
+  // chart, no ten years, no rents or yields, no strips or per-1000 ratios (they moved to the analysis, MapAnalysisPage).
+  // Data: /data/map/place/<slug>.json (scripts/map-data/tiles.py and place_cards.py); parishes and regions: tiles.json.
+  const T4 = L.t, C5 = L.c5;
   const pctF = new Intl.NumberFormat(loc, { style: "percent", maximumFractionDigits: 0 });
-  const pct1 = (v: number) => `${v > 0 ? "+" : v < 0 ? "−" : ""}${nf1.format(Math.abs(v))} %`.replace(" %", loc.startsWith("en") ? "%" : " %");
-  const m2f = (v: number) => `${eur.format(v)}/m²`;
-  const rangeF = (r: [number, number]) => `${nf.format(r[0])}–${eur.format(r[1])}/m²`;
-  const ptIn: Record<string, string> = { Porto: "No", Maia: "Na", "Póvoa de Varzim": "Na", "Figueira da Foz": "Na", Nazaré: "Na", Amadora: "Na", Covilhã: "Na", Guarda: "Na", Horta: "Na",
-    Lourinhã: "Na", Lousã: "Na", Sertã: "Na", Batalha: "Na", Trofa: "Na", Moita: "Na", Mealhada: "Na", Murtosa: "Na", Golegã: "Na", Chamusca: "Na", "Ribeira Grande": "Na", "Ribeira Brava": "Na",
-    Calheta: "Na", "Praia da Vitória": "Na", Cartaxo: "No", Bombarral: "No", Entroncamento: "No", Fundão: "No", Sabugal: "No", Seixal: "No", Barreiro: "No", Montijo: "No", Crato: "No",
-    Redondo: "No", Alandroal: "No", Gavião: "No", Cadaval: "No", Sardoal: "No", Corvo: "No", Nordeste: "No", Funchal: "No", "Porto Santo": "No", "Porto Moniz": "No", "Peso da Régua": "No",
-    "Marco de Canaveses": "No", Norte: "No", Centro: "No", Alentejo: "No", Algarve: "No", Madeira: "Na", Açores: "Nos" };
-  const inName = (n: string) => loc.startsWith("pt") ? `${ptIn[n] ?? "Em"} ${n}` : loc.startsWith("fr") ? `À ${n}` : `In ${n}`;
+  const m2f = (v: number) => C5.m2.replace("{v}", nf.format(v));
   let T: any = null, tilesP: Promise<any> | null = null;
   function loadTiles() { return tilesP ??= fetch("/data/map/tiles.json").then((r) => r.json()).then((d) => (T = d)).catch(() => (T = { m: {}, p: {}, r2: {}, rg: {} })); }
-  type Ctx = { kind: "muni" | "parish" | "region"; id: string; name: string; c2: string; series: (number | null)[]; ref: (number | null)[]; refCode: string; muni?: string; region: string };
-  let view: "card" | "tile" = "card", ctx: Ctx | null = null, rerender: (() => void) | null = null;
-  const regs = () => ((P as any)?.regions ?? {}) as Record<string, { n: string; m2: (number | null)[] }>;
-  const lastOf = (s: (number | null)[]) => { for (let i = s.length - 1; i >= 0; i--) if (s[i] != null) return s[i] as number; return null; };
+  // One small file per municipality (scripts/map-data/tiles.py): the card opens before the whole map has loaded.
+  const placeCache = new Map<string, any>(), placeReq = new Map<string, Promise<any>>();
+  function loadPlace(slug: string): Promise<any> {
+    if (placeCache.has(slug)) return Promise.resolve(placeCache.get(slug));
+    const early = (window as any).__m3place;  // started by MapV3.astro's inline script for a ?place= link
+    if (early && early.slug === slug) { (window as any).__m3place = null; placeReq.set(slug, early.p); }
+    if (!placeReq.has(slug)) placeReq.set(slug, fetch(`/data/map/place/${slug}.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null));
+    return placeReq.get(slug)!.then((d) => { if (d) placeCache.set(slug, d); return d; });
+  }
+  type Ctx = { kind: "muni" | "parish" | "region"; id: string; name: string; c2: string; region: string; muni?: string };
+  let view: "card" | "tile" = "card", ctx: Ctx | null = null, rerender: (() => void) | null = null, srcFor: (() => string) | null = null;
   const evPlace = (x: Ctx) => (x.kind === "region" ? { region: x.id } : { place: x.kind === "parish" ? `p-${x.id}` : x.id });
+  const qName = (k: string) => { const [y, qq] = k.split("-Q"); return L.qfmt.replace("{q}", qq).replace("{y}", y); };
+  const q0Of = (k: string) => { const [y, qq] = k.split("-Q"); return `${Number(y) - 5}-Q${qq}`; };
+  const dateF = (d: string) => { try { return new Intl.DateTimeFormat(loc, { day: "numeric", month: "long", year: "numeric" }).format(new Date(`${d}T12:00:00`)); } catch { return d; } };
 
-  function photoHTML(slug: string | null, r: string): string {
+  // The photograph: the place's own gallery (hero first, swipe for the other views), else its own single photograph,
+  // else the region's with a caption naming what it shows, else a quiet typographic band.
+  function photoHTML(slug: string | null, r: string, c5?: any): string {
+    if (c5?.ph?.length) {
+      const n = c5.ph.length;
+      const imgs = c5.ph.map((p: any, i: number) => `<img class="m3-photo" src="/img/v2/${p.f}-640.webp" srcset="/img/v2/${p.f}-640.webp 640w, /img/v2/${p.f}-1024.webp 1024w${p.w >= 1600 ? `, /img/v2/${p.f}-1600.webp 1600w` : ""}" sizes="(max-width: 819px) 100vw, 420px" alt="${esc(p.alt?.[cfg.lang] ?? "")}" width="640" height="400"${i ? ` loading="lazy"` : ` fetchpriority="high"`} decoding="async" aria-label="${esc(C5.photoN.replace("{i}", String(i + 1)).replace("{n}", String(n)))}">`).join("");
+      return `<figure class="m3-ph m3-gal" data-gal><div class="m3-gal-t" data-gal-t tabindex="0">${imgs}</div>${n > 1 ? `<p class="m3-gal-d" aria-hidden="true">${c5.ph.map((_: any, i: number) => `<i${i ? "" : ` class="is-on"`}></i>`).join("")}</p>` : ""}</figure>`;
+    }
     const own = slug ? cfg.photos[slug] : "", reg = cfg.regionPhotos?.[r] ?? "";
     const f = own || reg; if (!f) return `<div class="m3-photo m3-photo-none m3-photo-quiet"><span>${esc(L.regions[r] || "")}</span></div>`;
     const cap = !own && T4.ph[f] ? `<figcaption>${esc(T4.ph[f])}</figcaption>` : "";
@@ -453,127 +462,122 @@ export function initMapV3(root: HTMLElement) {
   }
   const dirLine = (p5: number | undefined | null) => p5 == null ? "" : Math.abs(p5) < 2 ? T4.dirFlat : (p5 > 0 ? T4.dirUp : T4.dirDown).replace("{v}", pctF.format(Math.abs(p5) / 100));
   const soonHTML = () => `<span class="m3-soon"><b>${esc(T4.soon)}</b><small>${esc(T4.soonP)}</small></span>`;
-  const chev = `<svg class="m3-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>`;
-  const lock = `<svg class="m3-lock" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>`;
-  // A soft preview: an abstract shape, never the figures themselves (they are in the analysis).
-  const ghost = (i: number) => `<svg class="m3-ghost" viewBox="0 0 120 40" preserveAspectRatio="none" aria-hidden="true">${i % 2
-    ? `<rect x="4" y="22" width="14" height="14" rx="2"/><rect x="24" y="14" width="14" height="22" rx="2"/><rect x="44" y="18" width="14" height="18" rx="2"/><rect x="64" y="8" width="14" height="28" rx="2"/><rect x="84" y="12" width="14" height="24" rx="2"/><rect x="104" y="4" width="12" height="32" rx="2"/>`
-    : `<path d="M2 34 C 20 30, 30 26, 44 24 S 70 14, 84 16 S 106 8, 118 4" fill="none" stroke-width="3"/>`}</svg>`;
 
-  // The market: INE's finest cut. INE publishes no quartiles, so a range is the lowest to highest typology median ("entre
-  // tipologias"); otherwise the single median, with new and existing when INE publishes both. A region: its concelhos' P10-P90.
-  // New build: only the partner developments' published prices; "preços sob consulta (promotor)" where a partner has none;
-  // nothing elsewhere.
-  function priceTile(x: Ctx, d: any): string {
-    const med = lastOf(x.series);
-    const mkt = d?.rng ? `${rangeF(d.rng)}<small>${esc(T4.ty)}</small>` : x.kind === "region" && d?.lo && d?.hi ? rangeF([d.lo, d.hi]) : med != null ? m2f(med) : "—";
-    const ne = d?.ne ? `<small>${esc(T4.ne.replace("{n}", nf.format(d.ne[0])).replace("{e}", nf.format(d.ne[1])))} €/m²</small>` : "";
-    const nb = d?.nb ? `<span><small>${esc(T4.nb)}</small><b>${rangeF(d.nb)}</b><small>${esc(T4.nbsrc)}</small></span>` : d?.nbq ? `<span><small>${esc(T4.nb)}</small><b class="m3-dim-t">${esc(T4.onreq2)}</b></span>` : "";
-    return `<button type="button" class="m3-tile m3-tile-w" data-tile="price"><span class="m3-tt">${esc(T4.price)}${chev}</span>
-      <span class="m3-pp${nb ? "" : " m3-pp-1"}"><span><small>${esc(T4.mkt)}</small><b>${mkt}</b>${ne}</span>${nb}</span>
-      <span class="m3-tl">${esc(dirLine(d?.p5))}</span></button>`;
+  // Preço, in words (operator, step 1): the market median, the new build (a partner's published prices, or "preços sob
+  // consulta (promotor)" where a partner project is), and the five-year direction in one sentence. No chart, no range, no
+  // ten years: those are in the paid analysis.
+  function priceTile(d: any): string {
+    const nb = d?.nb ? `<span><small>${esc(C5.nb)}</small><b>${esc(`${nf.format(d.nb[0])}–${m2f(d.nb[1])}`)}</b></span>` : d?.nbq ? `<span><small>${esc(C5.nb)}</small><b class="m3-dim-t">${esc(C5.nbOnreq)}</b></span>` : "";
+    return `<section class="m3-tile m3-tile-w"><h3 class="m3-tt">${esc(T4.price)}</h3>
+      <div class="m3-pp${nb ? "" : " m3-pp-1"}"><span><small>${esc(C5.mkt)}</small><b>${d?.m2 ? esc(m2f(d.m2)) : "—"}</b></span>${nb}</div>
+      ${d?.p5 != null ? `<p class="m3-tl">${esc(dirLine(d.p5))}</p>` : ""}</section>`;
   }
+  const flightTime = (f: number) => (f >= 60 ? `${Math.floor(f / 60)} h ${String(Math.round(f % 60)).padStart(2, "0")}` : C5.min.replace("{v}", nf.format(f)));
+  // A list of names (Playfair) with small figures (minutes), Apple Weather style.
+  const mins = (v: number) => `<span class="m3-mm"><b>${nf.format(v)}</b> min</span>`;
+  const listHTML = (rows: [string, string][]) => `<ul class="m3-ml">${rows.map(([n, v]) => `<li><span class="m3-mn">${n}</span>${v}</li>`).join("")}</ul>`;
+  const tile = (title: string, body: string, note = "") => `<section class="m3-tile m3-tile-w"><h3 class="m3-tt">${esc(title)}${note ? `<small>${esc(note)}</small>` : ""}</h3>${body}</section>`;
   const AP: Record<string, string> = { LIS: "Lisboa", OPO: "Porto", FAO: "Faro", FNC: "Funchal", PDL: "Ponta Delgada" };
-  // Living here (lead, 3 Nov): sea in August (Copernicus Marine Service), the beach and the airport in straight-line km; the
-  // sunshine (IPMA, private use only) and the flight time (no timetable fetched) say "Em breve" until a publishable source.
-  function lifeRows(d: any, all = false): [string, string][] {
-    const rows: [string, string][] = [];
-    if (!d || (d.sea == null && d.bch == null && !d.ap)) return rows;
-    if (d.sea != null) rows.push([T4.sea, `${nf1.format(d.sea)} °C`]);
-    if (d.bch != null) rows.push([T4.beach, esc(T4.kmline.replace("{v}", nf1.format(d.bch)))]);
-    if (d.ap) rows.push([T4.airport, esc(T4.ap.replace("{n}", AP[d.ap[0]] ?? d.ap[0]).replace("{v}", nf.format(d.ap[1])))]);
-    const fl = d.fl?.[cfg.ed];
-    rows.push([T4.flight, fl != null ? (fl >= 60 ? `${Math.floor(fl / 60)} h ${String(Math.round(fl % 60)).padStart(2, "0")}` : T4.min.replace("{v}", nf.format(fl))) : `<span class="m3-dim-t">${esc(T4.soon)}</span>`]);
-    if (all && d.sun == null) rows.push([T4.sun, `<span class="m3-dim-t">${esc(T4.soon)}</span>`]);
-    return rows;
+  function flightRow(fl: any): [string, string] {
+    const f = fl?.[cfg.ed];
+    const v = f ? (f.via ? `<span class="m3-mm"><b>${esc(flightTime(f.min))}</b> ${esc(C5.via)}</span>` : `<span class="m3-mm"><b>${esc(flightTime(f.min))}</b></span>`) : `<span class="m3-mm m3-dim-t">${esc(C5.soon)}</span>`;
+    return [esc(C5.flight), v];
   }
-  function careRows(d: any): [string, string][] {
-    const rows: [string, string][] = [];
-    if (d?.sch) rows.push([T4.school, d.sch.none ? esc(T4.noschool) : T4.km.replace("{n}", esc(d.sch.n)).replace("{v}", nf1.format(d.sch.km))]);
-    if (d?.hsp) rows.push([T4.hosp, T4.km.replace("{n}", esc(d.hsp.n)).replace("{v}", nf1.format(d.hsp.km))]);
-    if (d?.doc != null) rows.push([T4.docs, nf1.format(d.doc)]);
-    return rows;
+  // The golden sample (content/facts/map/places/<slug>/): drive times, the flight, the main schools and health services.
+  function c5Tiles(d: any): string {
+    const c5 = d.c5;
+    const life: [string, string][] = c5.life.map(([, n, m]: [string, any, number]) => [esc(typeof n === "string" ? n : n[cfg.lang] ?? n.pt), mins(m)]);
+    life.push(flightRow(c5.fl));
+    let h = tile(C5.life, listHTML(life), C5.bycar);
+    if (c5.sch?.length) h += tile(C5.schools, listHTML(c5.sch.map(([n, m]: [string, number]) => [esc(n), mins(m)])), C5.within);
+    const note = (t?: string) => (t ? `<small>${esc(t === "@cs" ? C5.tagCs : t)}</small>` : "");
+    if (c5.hsp?.length) h += tile(C5.health, listHTML(c5.hsp.map(([n, m, t]: [string, number, string?]) => [`${esc(n)}${note(t)}`, mins(m)])), C5.within);
+    return h;
   }
-  const rowsTile = (id: string, title: string, rows: [string, string][]) => `<button type="button" class="m3-tile" data-tile="${id}"><span class="m3-tt">${esc(title)}${rows.length ? chev : ""}</span>${rows.length
-    ? `<dl class="m3-tr">${rows.slice(0, 4).map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${v}</dd></div>`).join("")}</dl>` : soonHTML()}</button>`;
-  function tilesHTML(x: Ctx, d: any): string {
-    const life = d ? lifeRows(d) : [], care = d ? careRows(d) : [];
-    const cmpHref = `${cfg.links.compare}?p=${encodeURIComponent(x.kind === "region" ? `r-${x.id}` : x.kind === "parish" ? `p-${x.id}` : x.id)}`;
-    const paid = [["rent", T4.rent], ["g10y", T4.g10y], ["foreign", T4.foreign], ["supply", T4.supply]] as const;
-    // A region card shows its price and the paid tiles; living here, schools and health belong to a place.
-    return `<div class="m3-tiles">${priceTile(x, d)}${x.kind === "region" ? "" : rowsTile("life", T4.life, life) + rowsTile("care", T4.care, care)}</div>
-      <p class="m3-pk m3-pk-paid">${esc(T4.paid)}</p><div class="m3-tiles m3-tiles-paid">${paid.map(([id, t], i) => `<button type="button" class="m3-tile m3-tile-p" data-paid="${id}"><span class="m3-tt">${esc(t)}${lock}</span>${ghost(i)}</button>`).join("")}
-      <a class="m3-tile m3-tile-p" data-paid-cmp href="${esc(cmpHref)}"><span class="m3-tt">${esc(T4.compare)}${chev}</span>${ghost(5)}</a></div>`;
+  // Every other place until step 2 (the roll-out): only the verified figures it has, straight-line distances named as such,
+  // nothing from the paid list (no doctors per 1000, no sea temperature, no strips).
+  function kmTiles(d: any): string {
+    const life: [string, string][] = [];
+    if (d?.bch != null) life.push([esc(T4.beach), `<span class="m3-mm">${esc(T4.kmline.replace("{v}", nf1.format(d.bch)))}</span>`]);
+    if (d?.ap) life.push([esc(T4.airport), `<span class="m3-mm">${esc(T4.ap.replace("{n}", AP[d.ap[0]] ?? d.ap[0]).replace("{v}", nf.format(d.ap[1])))}</span>`]);
+    if (life.length) life.push(flightRow(d.fl ? Object.fromEntries(Object.entries(d.fl).map(([e, m]) => [e, { min: m }])) : null));
+    const care: [string, string][] = [];
+    if (d?.sch) care.push([esc(T4.school), d.sch.none ? `<span class="m3-mm">${esc(T4.noschool)}</span>` : `<span class="m3-mm">${esc(T4.km.replace("{n}", d.sch.n).replace("{v}", nf1.format(d.sch.km)))}</span>`]);
+    if (d?.hsp) care.push([esc(T4.hosp), `<span class="m3-mm">${esc(T4.km.replace("{n}", d.hsp.n).replace("{v}", nf1.format(d.hsp.km)))}</span>`]);
+    return tile(C5.life, life.length ? listHTML(life) : soonHTML()) + tile(T4.care, care.length ? listHTML(care) : soonHTML());
   }
+  // "Fontes": the sources of what the card shows, dated, one tap down (never a paragraph in the card).
+  function sourcesHTML(d: any, x: Ctx): string {
+    const q = T?.q ?? d?.q ?? (P ? P.quarters[last()] : "");
+    const li: string[] = [];
+    if (q) { li.push(C5.src.mkt.replace("{q}", qName(q))); if (d?.p5 != null) li.push(C5.src.dir.replace("{q0}", qName(q0Of(q))).replace("{q}", qName(q))); }
+    if (d?.nbq || d?.nb) li.push(C5.src.nb);
+    const c5 = d?.c5;
+    if (c5) {
+      li.push(C5.src.drive.replace("{o}", c5.o).replace("{d}", dateF(c5.d)));
+      const f = c5.fl?.[cfg.ed]; if (f) li.push(`${C5.src.flight.replace("{from}", f.from).replace("{to}", f.to).replace("{d}", dateF(f.d))}`);
+      if (c5.sch?.length) li.push(C5.src.sch.replace("{d}", dateF(c5.d)));
+      if (c5.hsp?.length) li.push(C5.src.hsp.replace("{d}", dateF(c5.d)));
+      li.push(`<a href="${esc(cfg.links.credits)}">${esc(C5.src.ph)}</a>`);
+    } else if (x.kind !== "region" && (d?.bch != null || d?.sch || d?.hsp)) li.push(C5.src.km);
+    return `<div class="m3-sb m3-tv"><button type="button" class="m3-back" data-back>${chevBack}${esc(T4.back)}</button><p class="m3-kick">${esc(x.name)}</p><h3 tabindex="-1" class="m3-h-s">${esc(C5.srcH)}</h3>
+      <ul class="m3-srcl">${li.map((t) => `<li>${t.startsWith("<a") ? t : esc(t)}</li>`).join("")}</ul><p class="m3-src">${esc(L.disclaimer)}</p></div>`;
+  }
+  // The two calls to action (operator, step 1): the paid analysis (the unlock sheet with its soft preview) and the advisor
+  // (the Concierge, opened on this page with the place already filled in).
+  const ctaHTML = (placeName: string) => `<p class="m3-fontes"><button type="button" class="m3-link" data-sources>${esc(C5.sources)}</button></p>
+    <div class="m3-acts m3-acts-1"><button type="button" class="m3-btn m3-btn-p" data-unlock-open>${esc(C5.ctaPaid)}</button><a class="m3-btn" href="${esc(`${cfg.links.consult}?place=${encodeURIComponent(placeName)}`)}" data-concierge data-cta-consult>${esc(C5.ctaConsult)}</a></div>`;
   const mareHTML = () => `<div class="m3-mare" data-mare-slot>${root.querySelector<HTMLTemplateElement>("[data-mare-tpl]")?.innerHTML ?? ""}</div>`;
-  function muniData(slug: string) { return T?.m?.[slug] ?? null; }
 
   function showPlace(slug: string, open = true) {
-    const p = byS.get(slug); if (!p || !P) return; const s = P.munis[slug], i = last(), v = s?.m2[i] ?? null;
+    const d = placeCache.get(slug);
+    if (!d) { loadPlace(slug).then((x) => { if (x && selected === slug && !pinA) showPlace(slug, open); }); return; }
+    const name = d.n ?? byS.get(slug)?.n ?? slug, r = d.r ?? byS.get(slug)?.r ?? "";
     const here = projects.filter((x) => x.muni === slug && x.showcase);
-    if (here.length && !overlays.devs) setOverlay("devs", true);  // prompt 38: a place card shows its partner projects
-    const homes = here.length ? here[0].showcase : `${cfg.links.buy}?place=${encodeURIComponent(p.n)}&budget=${Math.round(budget)}`;
-    const d = muniData(slug);
-    const x: Ctx = { kind: "muni", id: slug, name: p.n, c2: d?.c2 ?? "", series: s?.m2 ?? [], ref: regs()[d?.c2 ?? ""]?.m2 ?? [], refCode: d?.c2 ?? "PT", region: p.r };
-    if (!T) loadTiles().then(() => { if (ctx?.kind === "muni" && ctx.id === slug && view === "card" && !sheet.hidden && !pinA) showPlace(slug, false); });
-    // Part 2 (3 Nov): the heart keeps the region in "A sua seleção" (its own page where it has one, else the map on it).
+    if (here.length && !overlays.devs && map) setOverlay("devs", true);  // prompt 38: a place card shows its partner projects
+    const x: Ctx = { kind: "muni", id: slug, name, c2: d.c2 ?? "", region: r };
+    // Part 2 (3 Nov): the heart keeps the place in "A sua seleção" (its own page where it has one, else the map on it).
     const regionHref = cfg.links.pages.includes(slug) ? `${cfg.links.map}${slug}/` : `${cfg.links.map}?place=${slug}`;
-    const line = cfg.briefs[slug] && cfg.briefs[slug].length < 140 ? cfg.briefs[slug] : [d?.n3, L.regions[p.r]].filter((z, k, a) => z && a.indexOf(z) === k).join(", ");
-    let h = `${photoHTML(slug, p.r)}<div class="m3-sb"><p class="m3-kick">${esc(L.regions[p.r] || "")}</p><div class="ht-row"><h3 tabindex="-1">${esc(p.n)}</h3>${heartHTML("region", slug, p.n, regionHref)}</div>`;
-    h += `<p class="m3-line">${esc(line)}</p>${tilesHTML(x, d)}`;
-    // Part 2 (3 Nov): no partner homes here, but some nearby (projects.json "near"): one line to them, never a dead end.
-    if (!here.length && cfg.pl?.near) {
-      const nearBy = projects.filter((y) => y.showcase && (y as Proj & { near?: string[] }).near?.some((n) => plain(n) === plain(p.n)));
-      for (const y of nearBy.slice(0, 2)) h += `<p class="m3-buys m3-near"><a href="${esc(y.showcase)}">${esc(cfg.pl.near.replace("{name}", y.name).replace("{muni}", (y as Proj & { muniName?: string }).muniName ?? ""))} →</a></p>`;
-    }
-    const vs = s as (Series & { vac?: number; sea?: number }) | undefined;
-    if (layer === "vac" && vs?.vac != null) h += `<p class="m3-buys">${L.vacLine.replace("{v}", `<b>${nf1.format(vs.vac)}%</b>`).replace("{s}", vs.sea != null ? `<b>${nf1.format(vs.sea)}%</b>` : "—")}</p>`;
-    h += `<div class="m3-acts"><a class="m3-btn m3-btn-p" href="${esc(homes)}">${L.card.homes}</a><a class="m3-btn" href="${cfg.links.consult}?place=${encodeURIComponent(p.n)}&budget=${Math.round(budget)}">${L.card.concierge}</a></div>`;
-    h += `<div class="m3-more"><button type="button" class="m3-link" data-compare>${L.card.compare}</button><button type="button" class="m3-link" data-details aria-expanded="false">${L.card.details}</button><button type="button" class="m3-link" data-share>${L.share}</button></div>`;
-    // "Detalhes": what the card showed before D83, kept one tap down (the budget line, the yearly change, the yield, the
-    // quarterly momentum, the reviewed brief, the place page and the partner projects).
-    let det = "";
-    if (v) det += `<li>${L.card.buys.replace("{v}", `<b>${nf.format(Math.round(budget / v))}</b>`)}</li>`;
-    if (s?.cagrP != null) det += `<li>${L.cagrP.replace("{v}", pc(s.cagrP))}</li>`;
-    if (s?.yield != null) det += `<li>${L.yieldLine.replace("{y}", nf1.format(s.yield) + "%").replace("{r}", nf1.format(cfg.mortgage.rate) + "%").replace("{month}", cfg.mortgage.month)}</li>`;
-    if (s?.mo) det += `<li>${L.mo.replace("{c4}", pc(s.mo.c4)).replace("{c8}", s.mo.c8 == null ? "—" : pc(s.mo.c8))} <strong>${L.mow[s.mo.w]}</strong></li>`;
-    if (cfg.briefs[slug]) det += `<li>${cfg.briefs[slug]}</li>`;
-    if (cfg.links.pages.includes(slug)) det += `<li><a href="${cfg.links.map}${slug}/">${L.page}</a></li>`;
-    if (here.length) det += here.map((y) => `<li><a href="${esc(y.showcase)}">${esc(y.name)} · ${esc(y.developer)}</a> <span class="m3-tag">${L.sponsored}</span></li>`).join("");
-    h += `<ul class="m3-det" data-det hidden>${det}</ul><p class="m3-src">${L.source.replace("{quarter}", qLabel(P.quarters[i]))} ${d?.sea != null ? esc(T4.tsrc) : ""} ${L.disclaimer}</p>${mareHTML()}</div>`;
-    ctx = x; rerender = () => showPlace(slug, false);
+    const line = d.c5?.line?.[cfg.lang] ?? [d.n3, L.regions[r]].filter((z: string, k: number, a: string[]) => z && a.indexOf(z) === k).join(", ");
+    let h = `${photoHTML(slug, r, d.c5)}<div class="m3-sb"><p class="m3-kick">${esc(L.regions[r] || "")}</p><div class="ht-row"><h2 class="m3-h" tabindex="-1">${esc(name)}</h2>${heartHTML("region", slug, name, regionHref)}</div>`;
+    h += `<p class="m3-line">${esc(line)}</p><div class="m3-tiles">${priceTile(d)}${d.c5 ? c5Tiles(d) : kmTiles(d)}</div>`;
+    h += ctaHTML(name);
+    // Developer components stay (CLAUDE.md, COMMON2 rule 3): the partner's homes here, or near, one quiet sponsored line.
+    const nearBy = here.length ? here : projects.filter((y) => y.showcase && (y as Proj & { near?: string[] }).near?.some((n) => plain(n) === plain(name))).slice(0, 2);
+    for (const y of nearBy) h += `<p class="m3-buys m3-near"><a href="${esc(y.showcase)}">${esc(here.length ? C5.homes.replace("{muni}", name).replace("{name}", y.name) : cfg.pl.near.replace("{name}", y.name).replace("{muni}", (y as Proj & { muniName?: string }).muniName ?? ""))} →</a> <span class="m3-tag">${L.sponsored}</span></p>`;
+    h += `${mareHTML()}</div>`;
+    ctx = x; rerender = () => showPlace(slug, false); srcFor = () => sourcesHTML(d, x);
     openSheet(h, open);
   }
   function selectParish(code: string) {
-    const f = parishes?.feats.find((x) => x.properties.id === code); const s = parishes?.data[code]; if (!f || !P) return;
+    const f = parishes?.feats.find((x) => x.properties.id === code); if (!f) return;
     selPar = code; selected = f.properties.m; selRegion = null; syncUrl(); if (map) map.setFilter("sel", ["==", ["get", "s"], ""]);
     ev({ event: "map/card/parish", place: `p-${code}`, origin: mode });
-    const muni = byS.get(f.properties.m), md = muniData(f.properties.m), pd = T?.p?.[code];
-    // The parish's own price (INE, the finest cut it publishes); life, schools and health are the municipality's.
-    const d = md ? { ...md, rng: pd?.rng ?? null, ne: pd?.ne ?? null, p5: pd?.p5 ?? null, nb: null, nbq: null, ...(pd?.bch != null ? { bch: pd.bch } : {}), ...(pd?.ap ? { ap: pd.ap } : {}), ...(pd?.sch ? { sch: pd.sch } : {}), ...(pd?.hsp ? { hsp: pd.hsp } : {}) } : pd ?? null;
-    const x: Ctx = { kind: "parish", id: code, name: f.properties.n, c2: md?.c2 ?? "", series: s?.m2 ?? [], ref: regs()[md?.c2 ?? ""]?.m2 ?? [], refCode: md?.c2 ?? "PT", muni: f.properties.m, region: muni?.r ?? "" };
+    const muni = byS.get(f.properties.m), md = T?.m?.[f.properties.m], pd = T?.p?.[code];
+    // The parish's own price (INE, the finest cut it publishes); beach, airport, school and hospital its own when we have them.
+    const d = { ...(md ?? {}), m2: pd?.m2 ?? null, p5: pd?.p5 ?? null, nb: null, nbq: null, ...(pd?.bch != null ? { bch: pd.bch } : {}), ...(pd?.ap ? { ap: pd.ap } : {}), ...(pd?.sch ? { sch: pd.sch } : {}), ...(pd?.hsp ? { hsp: pd.hsp } : {}) };
+    const x: Ctx = { kind: "parish", id: code, name: f.properties.n, c2: md?.c2 ?? "", muni: f.properties.m, region: muni?.r ?? "" };
     if (!T) loadTiles().then(() => { if (ctx?.kind === "parish" && ctx.id === code && view === "card" && !sheet.hidden) selectParish(code); });
-    let h = `${photoHTML(null, muni?.r ?? "")}<div class="m3-sb"><p class="m3-kick">${esc(T4.cutParish.replace("{m}", muni?.n ?? ""))}</p><div class="ht-row"><h3 tabindex="-1">${esc(f.properties.n)}</h3>${heartHTML("region", `p-${code}`, `${f.properties.n}, ${muni?.n ?? ""}`, `${cfg.links.map}?parish=${code}`)}</div>`;
-    h += `<p class="m3-line">${esc([muni?.n, L.regions[muni?.r ?? ""]].filter(Boolean).join(", "))}</p>${tilesHTML(x, d)}`;
-    h += `<div class="m3-acts"><a class="m3-btn m3-btn-p" href="${cfg.links.buy}?place=${encodeURIComponent(f.properties.n)}&budget=${Math.round(budget)}">${L.card.homes}</a><a class="m3-btn" href="${cfg.links.consult}?place=${encodeURIComponent(f.properties.n)}">${L.card.concierge}</a></div>`;
-    h += `<div class="m3-more"><button type="button" class="m3-link" data-goto="${f.properties.m}">${esc(muni?.n ?? "")}</button><button type="button" class="m3-link" data-share>${L.share}</button></div><p class="m3-src">${L.source.replace("{quarter}", qLabel(P.quarters[last()]))} ${d?.sea != null ? esc(T4.tsrc) : ""} ${L.disclaimer}</p>${mareHTML()}</div>`;
-    ctx = x; rerender = () => selectParish(code);
+    let h = `${photoHTML(null, muni?.r ?? "")}<div class="m3-sb"><p class="m3-kick">${esc(T4.cutParish.replace("{m}", muni?.n ?? ""))}</p><div class="ht-row"><h2 class="m3-h" tabindex="-1">${esc(f.properties.n)}</h2>${heartHTML("region", `p-${code}`, `${f.properties.n}, ${muni?.n ?? ""}`, `${cfg.links.map}?parish=${code}`)}</div>`;
+    h += `<p class="m3-line">${esc([muni?.n, L.regions[muni?.r ?? ""]].filter(Boolean).join(", "))}</p><div class="m3-tiles">${priceTile(d)}${kmTiles(d)}</div>`;
+    h += ctaHTML(f.properties.n);
+    h += `<div class="m3-more"><button type="button" class="m3-link" data-goto="${f.properties.m}">${esc(muni?.n ?? "")}</button></div>${mareHTML()}</div>`;
+    ctx = x; rerender = () => selectParish(code); srcFor = () => sourcesHTML(d, x);
     openSheet(h, true);
   }
-  // A region postcard: the region's photograph and name, its concelhos' price range, the NUTS II median's five years.
+  // A region postcard: the region's photograph and name, its NUTS II median and the five-year direction, in words.
   let regionAt: Record<string, [number, number]> = {};
   async function showRegion(key: string, fly = true) {
     await load(); await loadTiles(); timeEnd();
     selRegion = key; selected = null; selPar = null; syncUrl(); if (map) map.setFilter("sel", ["==", ["get", "s"], ""]);
     ev({ event: "map/card/region", region: key, origin: mode });
     const rg = T?.rg?.[key] ?? {}, c2 = rg.c2 ?? "PT", name = L.regions[key] || key;
-    const x: Ctx = { kind: "region", id: key, name, c2, series: regs()[c2]?.m2 ?? [], ref: regs().PT?.m2 ?? [], refCode: "PT", region: key };
-    const d = { lo: rg.lo, hi: rg.hi, p5: rg.p5, ...(T?.r2?.[c2] ?? {}) };
-    delete (d as any).m2;
-    let h = `${photoHTML(null, key)}<div class="m3-sb"><p class="m3-kick">${esc(T4.regionKick)}</p><div class="ht-row"><h3 tabindex="-1">${esc(name)}</h3>${heartHTML("region", `r-${key}`, name, `${cfg.links.map}?region=${key}`)}</div>`;
-    h += `<p class="m3-line">${esc(T4.regionLine.replace("{n}", nf.format(rg.k ?? 0)).replace("{cities}", (rg.cities ?? []).join(", ")))}</p>${tilesHTML(x, d)}`;
-    h += `<p class="m3-buys m3-hint">${esc(T4.regionPick)}</p><p class="m3-src">${L.source.replace("{quarter}", qLabel(P!.quarters[last()]))} ${L.disclaimer}</p>${mareHTML()}</div>`;
-    ctx = x; rerender = () => showRegion(key, false);
+    const x: Ctx = { kind: "region", id: key, name, c2, region: key };
+    const d = { m2: T?.r2?.[c2]?.m2 ?? rg.m2, p5: rg.p5 };
+    let h = `${photoHTML(null, key)}<div class="m3-sb"><p class="m3-kick">${esc(T4.regionKick)}</p><div class="ht-row"><h2 class="m3-h" tabindex="-1">${esc(name)}</h2>${heartHTML("region", `r-${key}`, name, `${cfg.links.map}?region=${key}`)}</div>`;
+    h += `<p class="m3-line">${esc(T4.regionLine.replace("{n}", nf.format(rg.k ?? 0)).replace("{cities}", (rg.cities ?? []).join(", ")))}</p><div class="m3-tiles">${priceTile(d)}</div>`;
+    h += `<p class="m3-buys m3-hint">${esc(T4.regionPick)}</p>${ctaHTML(name)}${mareHTML()}</div>`;
+    ctx = x; rerender = () => showRegion(key, false); srcFor = () => sourcesHTML(d, x);
     openSheet(h, true);
     if (fly && map) {
       const pts = features.filter((f) => (f.properties as Props).r === key).map((f) => f.properties as Props);
@@ -581,76 +585,13 @@ export function initMapV3(root: HTMLElement) {
         { padding: isWide() ? { left: 280, right: 460, top: 90, bottom: 60 } : { left: 30, right: 30, top: 80, bottom: canvas.clientHeight * 0.5 }, maxZoom: 9, duration: reduce() ? 0 : 1200, pitch: flat ? 0 : 40 });
     }
   }
-
-  // ------------------------------------------------------------ a tile's own view: the chart (price) or the figures as strips
-  function openTile(id: string) {
-    if (!ctx) return; const x = ctx;
-    ev({ event: `map/tile/${id}`, ...evPlace(x), origin: mode });
-    if (id === "price") { chartView(x, 1); return; }
-    // A parish keeps its own beach, airport, school and hospital distances; the rest is its municipality's.
-    const d = x.kind === "region" ? null : x.kind === "parish" ? { ...muniData(x.muni!), ...(T?.p?.[x.id] ?? {}) } : muniData(x.id);
-    const keys: [string, string, (v: number) => string][] = id === "life"
-      ? [["sea", T4.sea, (v) => `${nf1.format(v)} °C`], ["bch", T4.beach, (v) => T4.kmline.replace("{v}", nf1.format(v))]]
-      : [["doc", T4.docs, (v) => nf1.format(v)]];
-    const rows = id === "life" ? lifeRows(d, true) : careRows(d);
-    let h = `<div class="m3-sb m3-tv"><button type="button" class="m3-back" data-back>${chevBack}${esc(T4.back)}</button><p class="m3-kick">${esc(id === "life" ? T4.life : T4.care)} · ${esc(x.name)}</p>`;
-    if (!rows.length) h += `<h3 tabindex="-1">${esc(x.name)}</h3>${soonHTML()}`;
-    else {
-      h += `<h3 tabindex="-1" class="m3-h-s">${esc(x.name)}</h3><dl class="m3-tr m3-tr-l">${rows.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${v}</dd></div>`).join("")}</dl>`;
-      for (const [k, label, f] of keys) { const v = d?.[k]; if (typeof v === "number") h += stripHTML(k, label, v, f, x); }
-    }
-    const src = T?.src ? Object.entries(T.src).filter(([k]) => (id === "life" ? ["sea", "bch", "ap", "fl"] : ["sch", "hsp", "doc"]).includes(k)).map(([, s]: any) => `${esc(s.t)}${s.d ? `, ${esc(s.d)}` : ""}`).join(" · ") : "";
-    h += `${src ? `<p class="m3-src">${src}.</p>` : ""}<p class="m3-src">${L.disclaimer}</p></div>`;
-    showView(h);
+  // "Fontes" opens in the same sheet; "Voltar" returns to the card. (The tiles' charts and strips moved to the paid analysis.)
+  function openSources() {
+    if (!ctx || !srcFor) return;
+    ev({ event: "map/card/sources", ...evPlace(ctx), origin: mode });
+    showView(srcFor());
   }
   const chevBack = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg>`;
-  function band(v: number, ref: number, tol = 0.1) { return v > ref * (1 + tol) ? "above" : v < ref * (1 - tol) ? "below" : "near"; }
-  // Every concelho as a faint tick, this place as the green dot, the NUTS II median as a short line.
-  function stripHTML(k: string, label: string, v: number, f: (v: number) => string, x: Ctx): string {
-    const all = Object.values(T?.m ?? {}).map((m: any) => m[k]).filter((z: any) => typeof z === "number") as number[]; if (all.length < 5) return "";
-    const lo = Math.min(...all), hi = Math.max(...all), at = (z: number) => (hi > lo ? ((z - lo) / (hi - lo)) * 100 : 50);
-    const ref = T?.r2?.[x.c2]?.[k];
-    const b = typeof ref === "number" ? (({ above: T4.sAbove, near: T4.sNear, below: T4.sBelow } as any)[band(v, ref, 0.05)] as string).replace("{of}", T4.of[x.c2] ?? "") : "";
-    return `<div class="m3-strip"><p><b>${esc(label)}</b> ${esc(f(v))}${b ? `, ${esc(b)}` : ""}</p><div class="m3-strip-l" aria-hidden="true">${all.map((z) => `<i style="left:${at(z).toFixed(1)}%"></i>`).join("")}${typeof ref === "number" ? `<s style="left:${at(ref).toFixed(1)}%"></s>` : ""}<b style="left:${at(v).toFixed(1)}%"></b></div><p class="m3-strip-n"><span>${esc(f(lo))}</span><span>${esc(f(hi))}</span></p></div>`;
-  }
-  function chartView(x: Ctx, years: 1 | 5 | 10) {
-    const s = x.series, n = s.length, lastV = lastOf(s);
-    const can = (y: number) => { const st = n - 1 - 4 * y; return st >= 0 && s.slice(st, st + 3).some((v) => v != null); };
-    let h = `<div class="m3-sb m3-tv"><button type="button" class="m3-back" data-back>${chevBack}${esc(T4.back)}</button><p class="m3-kick">${esc(T4.price)} · ${esc(x.name)}</p>`;
-    h += `<h3 tabindex="-1" class="m3-find" data-find></h3><p class="m3-big"><b data-count>${lastV ? m2f(lastV) : "—"}</b><span data-chg></span></p>`;
-    h += `<div class="m3-seg m3-rng" role="group" aria-label="${esc(T4.price)}">${([1, 5, 10] as const).map((y) => `<button type="button" data-range="${y}" aria-pressed="${y === years}"${can(y) ? "" : " disabled"}>${y}A</button>`).join("")}</div>`;
-    h += `<div class="m3-chartw" data-chart></div><p class="m3-band" data-band></p><p class="m3-src">${esc(T4.src.replace("{q}", P ? qLabel(P.quarters[last()]) : ""))}</p></div>`;
-    showView(h);
-    drawChart(x, years);
-    sheetIn.querySelectorAll<HTMLButtonElement>("[data-range]").forEach((b) => b.addEventListener("click", () => {
-      const y = Number(b.dataset.range) as 1 | 5 | 10; sheetIn.querySelectorAll("[data-range]").forEach((z) => z.setAttribute("aria-pressed", String(z === b)));
-      ev({ event: `map/chart/${y}a`, ...evPlace(x), origin: mode }); drawChart(x, y);
-    }));
-  }
-  function drawChart(x: Ctx, years: number) {
-    const s = x.series, n = s.length; let st = Math.max(0, n - 1 - 4 * years); while (st < n - 1 && s[st] == null) st++;
-    const vals = s.slice(st), a = s[st], b = lastOf(s);
-    const qs = P!.quarters.slice(st);
-    const find = sheetIn.querySelector<HTMLElement>("[data-find]")!, big = sheetIn.querySelector<HTMLElement>("[data-count]")!, chg = sheetIn.querySelector<HTMLElement>("[data-chg]")!;
-    const span = (T4.span as any)[years] as string, nm = inName(x.name);
-    if (a && b) {
-      const r = b / a - 1;
-      find.textContent = Math.abs(r) < 0.005 ? T4.flat.replace("{in}", nm).replace("{span}", span) : (r > 0 ? T4.up : T4.down).replace("{in}", nm).replace("{v}", pctF.format(Math.abs(r))).replace("{span}", span);
-      chg.textContent = pct1(r * 100); chg.className = r > 0 ? "is-up" : "";
-    } else find.textContent = x.name;
-    // The number counts up and the line draws in, 300 ms (nothing moves with reduced motion).
-    if (b) { const from = a ?? 0, t0 = performance.now(), dur = reduce() ? 0 : 300;
-      const tick = (now: number) => { const k = dur ? Math.min((now - t0) / dur, 1) : 1; big.textContent = m2f(Math.round(from + (b - from) * ease(k))); if (k < 1) requestAnimationFrame(tick); };
-      requestAnimationFrame(tick); }
-    const nums = vals.filter((v): v is number => v != null), lo = Math.min(...nums), hi = Math.max(...nums), W = 360, H = 150;
-    let d = "", pen = false, lx = 0, ly = 0;
-    vals.forEach((v, i) => { if (v == null) { pen = false; return; } const px = vals.length > 1 ? (i / (vals.length - 1)) * W : W, py = H - 8 - ((v - lo) / (hi - lo || 1)) * (H - 16); d += `${pen ? "L" : "M"}${px.toFixed(1)},${py.toFixed(1)}`; pen = true; lx = px; ly = py; });
-    const yr = (k: string) => (years > 1 ? k.slice(0, 4) : qLabel(k));
-    sheetIn.querySelector<HTMLElement>("[data-chart]")!.innerHTML = `<svg class="m3-chart" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" aria-hidden="true"><line x1="0" x2="${W}" y1="${H - 0.5}" y2="${H - 0.5}" class="m3-cb"/><path class="m3-cl" pathLength="1" d="${d}"/></svg><i class="m3-cdot" style="left:${(lx / W) * 100}%;top:${(ly / H) * 100}%"></i>
-      <p class="m3-cax"><span>${esc(yr(qs[0]))}</span><span>${esc(m2f(lo))} – ${esc(m2f(hi))}</span><span>${esc(yr(qs[qs.length - 1]))}</span></p>`;
-    const ref = lastOf(x.ref), bandEl = sheetIn.querySelector<HTMLElement>("[data-band]")!;
-    bandEl.textContent = b && ref ? (T4 as any)[band(b, ref)].replace("{q}", qLabel(P!.quarters[last()])).replace("{v}", eur.format(b)).replace("{of}", T4.of[x.refCode] ?? "").replace("{r}", eur.format(ref)) : "";
-  }
   function showView(h: string) {
     view = "tile";
     sheetIn.innerHTML = h + `<button type="button" class="m3-x" aria-label="${L.close}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>`;
@@ -659,16 +600,25 @@ export function initMapV3(root: HTMLElement) {
     const was = detent;
     sheetIn.querySelector("[data-back]")?.addEventListener("click", () => { view = "card"; rerender?.(); if (!isWide()) setDetent(was); });
     if (!isWide()) setDetent(2);  // the chart and the strips want the full height on a phone; "Voltar" returns to the height before
-    if (root.contains(document.activeElement)) sheetIn.querySelector<HTMLElement>("h3")?.focus({ preventScroll: true });
+    if (root.contains(document.activeElement)) sheetIn.querySelector<HTMLElement>("h2, h3")?.focus({ preventScroll: true });
   }
 
   // ------------------------------------------------------------ the unlock sheet (paid analysis: off until the company and invoicing exist)
+  // "Ver a análise completa" opens it with a soft preview: what the analysis of this place holds, each item as an abstract
+  // shape (never the figures themselves), and "Disponível em breve" while payment is off (config.mapAnalysis).
   const unlock = $("[data-unlock]");
+  const ghost = (i: number) => `<svg class="m3-ghost" viewBox="0 0 120 40" preserveAspectRatio="none" aria-hidden="true">${i % 2
+    ? `<rect x="4" y="22" width="14" height="14" rx="2"/><rect x="24" y="14" width="14" height="22" rx="2"/><rect x="44" y="18" width="14" height="18" rx="2"/><rect x="64" y="8" width="14" height="28" rx="2"/><rect x="84" y="12" width="14" height="24" rx="2"/><rect x="104" y="4" width="12" height="32" rx="2"/>`
+    : `<path d="M2 34 C 20 30, 30 26, 44 24 S 70 14, 84 16 S 106 8, 118 4" fill="none" stroke-width="3"/>`}</svg>`;
+  const lock = `<svg class="m3-lock" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>`;
   function openUnlock(tile: string) {
     const x = ctx; ev({ event: `map/paid/preview/${tile}`, ...(x ? evPlace(x) : {}), origin: mode });
     const pEl = unlock.querySelector<HTMLElement>("[data-unlock-p]")!, rName = x ? L.regions[x.region] || "" : "";
-    pEl.textContent = (pEl.dataset.tpl || "").replace("{place}", x ? (x.kind === "region" ? x.name : `${x.name}${rName && rName !== x.name ? `, ${rName}` : ""}`) : "Portugal");
-    const kick = unlock.querySelector<HTMLElement>("[data-unlock-kick]")!; kick.textContent = `${T4.paid} · ${(T4 as any)[tile] ?? ""}`;
+    const where = x ? (x.kind === "region" ? x.name : `${x.name}${rName && rName !== x.name ? `, ${rName}` : ""}`) : "Portugal";
+    pEl.textContent = (pEl.dataset.tpl || "").replace("{place}", where);
+    const kick = unlock.querySelector<HTMLElement>("[data-unlock-kick]")!; kick.textContent = T4.paid;
+    const pv = unlock.querySelector<HTMLElement>("[data-unlock-pv]");
+    if (pv) pv.innerHTML = `<p class="m3-pk">${esc(C5.preview.replace("{place}", x?.name ?? "Portugal"))}</p><div class="m3-tiles m3-tiles-paid">${C5.paid.map((t: string, i: number) => `<div class="m3-tile m3-tile-p"><span class="m3-tt">${esc(t)}${lock}</span>${ghost(i)}</div>`).join("")}</div>`;
     const buy = unlock.querySelector<HTMLAnchorElement>("[data-unlock-region]"); if (buy) buy.textContent = (buy.dataset.tpl || "").replace("{region}", rName).replace("{v}", buy.dataset.v || "");
     unlock.hidden = false; requestAnimationFrame(() => unlock.classList.add("is-open"));
     unlock.querySelector<HTMLElement>("[data-unlock-x]")?.focus({ preventScroll: true });
@@ -676,15 +626,16 @@ export function initMapV3(root: HTMLElement) {
   function closeUnlock() { unlock.classList.remove("is-open"); setTimeout(() => (unlock.hidden = true), 220); }
   unlock.querySelector("[data-unlock-x]")!.addEventListener("click", closeUnlock);
   unlock.addEventListener("click", (e) => { if (e.target === unlock) closeUnlock(); });
+  // Two places side by side (a shared link with two places): the market median, what the budget buys and the five-year
+  // direction. The ten years, the rents and the yield moved to the paid analysis (operator, step 1).
   function compare(a: string, b: string) {
     ev({ event: "map/compare/pair", place: b, origin: mode }); view = "card"; ctx = null;
     pinA = null; selected = b; syncUrl(); if (map) map.setFilter("sel", ["in", ["get", "s"], ["literal", [a, b]]]);
-    const col = (slug: string) => { const p = byS.get(slug)!, s = P!.munis[slug], v = s?.m2[last()]; return { n: p.n, s, v }; };
+    const col = (slug: string) => { const p = byS.get(slug)!, s = P!.munis[slug], v = s?.m2[last()], p5 = T?.m?.[slug]?.p5; return { n: p.n, s, v, p5 }; };
     const A = col(a), B = col(b);
     const row = (k: string, f: (x: typeof A) => string) => `<div class="m3-cr"><span>${f(A)}</span><em>${k}</em><span>${f(B)}</span></div>`;
     let h = `<div class="m3-sb m3-cmp"><div class="m3-cr m3-ch"><h3 tabindex="-1">${esc(A.n)}</h3><em></em><h3>${esc(B.n)}</h3></div>`;
-    h += row(L.card.price, (x) => x.v ? eur.format(x.v) : "—") + row(L.card.g10, (x) => x.s?.g10 != null ? pc(x.s.g10) : "—") + row(L.card.rent, (x) => x.s?.rq[last()] ? eur2.format(x.s.rq[last()]!) : "—")
-      + row(L.card.m2b, (x) => x.v ? nf.format(Math.round(budget / x.v)) : "—") + row(L.card.yield, (x) => x.s?.yield != null ? `${nf1.format(x.s.yield)}%` : "—");
+    h += row(L.card.price, (x) => x.v ? eur.format(x.v) : "—") + row(L.card.m2b, (x) => x.v ? nf.format(Math.round(budget / x.v)) : "—") + row(T4.price, (x) => esc(dirLine(x.p5)) || "—");
     h += `<div class="m3-acts"><button type="button" class="m3-btn" data-goto="${a}">${esc(A.n)}</button><button type="button" class="m3-btn" data-goto="${b}">${esc(B.n)}</button></div><p class="m3-src">${L.source.replace("{quarter}", qLabel(P!.quarters[last()]))}</p></div>`;
     openSheet(h, true);
     const pa = byS.get(a)!, pb = byS.get(b)!;
@@ -698,15 +649,17 @@ export function initMapV3(root: HTMLElement) {
     if (!isWide()) setDetent(wasHidden ? 1 : detent);
     sheetIn.querySelector(".m3-x")!.addEventListener("click", () => select(null));
     sheetIn.querySelector("[data-share]")?.addEventListener("click", share);
-    sheetIn.querySelector("[data-compare]")?.addEventListener("click", () => { pinA = selected; toast(L.card.pickb.replace("{a}", byS.get(selected!)?.n ?? "")); });
-    const det = sheetIn.querySelector<HTMLElement>("[data-det]"), db = sheetIn.querySelector<HTMLButtonElement>("[data-details]");
-    db?.addEventListener("click", () => { det!.hidden = !det!.hidden; db.setAttribute("aria-expanded", String(!det!.hidden)); if (!isWide() && !det!.hidden) setDetent(2); });
     sheetIn.querySelectorAll<HTMLButtonElement>("[data-goto]").forEach((b) => b.addEventListener("click", () => select(b.dataset.goto!)));
-    // D83 part 2: the free tiles open their own view; the paid ones the unlock sheet; "Comparar" the comparison page.
-    sheetIn.querySelectorAll<HTMLElement>("[data-tile]").forEach((b) => b.addEventListener("click", () => openTile(b.dataset.tile!)));
-    sheetIn.querySelectorAll<HTMLElement>("[data-paid]").forEach((b) => b.addEventListener("click", () => openUnlock(b.dataset.paid!)));
-    sheetIn.querySelector("[data-paid-cmp]")?.addEventListener("click", () => { if (ctx) ev({ event: "map/tile/compare", ...evPlace(ctx), origin: mode }); });
-    if (focus && wasHidden && root.contains(document.activeElement)) sheetIn.querySelector<HTMLElement>("h3")?.focus({ preventScroll: true });
+    // Operator, step 1: "Fontes" opens the dated sources; "Ver a análise completa" the unlock sheet (soft preview, "Disponível
+    // em breve"); "O consultor ajuda" is a[data-concierge] (scripts/chrome.ts opens the Concierge with ?place= filled in).
+    sheetIn.querySelector("[data-sources]")?.addEventListener("click", openSources);
+    sheetIn.querySelector("[data-unlock-open]")?.addEventListener("click", () => { if (ctx) ev({ event: "map/cta/paid", ...evPlace(ctx), origin: mode }); openUnlock("card"); });
+    sheetIn.querySelector("[data-cta-consult]")?.addEventListener("click", () => { if (ctx) ev({ event: "map/cta/consult", ...evPlace(ctx), origin: mode }); });
+    // The gallery: swipe (or scroll) through the place's views; the dots follow; each new view seen is one event.
+    const gt = sheetIn.querySelector<HTMLElement>("[data-gal-t]");
+    if (gt) { const dots = [...sheetIn.querySelectorAll<HTMLElement>(".m3-gal-d i")]; let seen = 0;
+      gt.addEventListener("scroll", () => { const i = Math.round(gt.scrollLeft / Math.max(1, gt.clientWidth)); dots.forEach((d, k) => d.classList.toggle("is-on", k === i)); if (i > seen && ctx) { seen = i; ev({ event: `map/gallery/${i + 1}`, ...evPlace(ctx), origin: mode }); } }, { passive: true }); }
+    if (focus && wasHidden && root.contains(document.activeElement)) sheetIn.querySelector<HTMLElement>("h2, h3")?.focus({ preventScroll: true });
   }
   function closeSheet() { timeEnd(); ctx = null; rerender = null; view = "card"; if (selRegion) { selRegion = null; syncUrl(); } sheet.classList.remove("is-open"); setTimeout(() => { if (!sheet.classList.contains("is-open")) sheet.hidden = true; }, 260); pinA = null; if (map) map.setFilter("sel", ["==", ["get", "s"], ""]); }
   function setDetent(d: number) { detent = d; sheet.dataset.detent = String(d); }
@@ -724,7 +677,7 @@ export function initMapV3(root: HTMLElement) {
   let parLoading: Promise<void> | null = null;
   function loadParishes() {
     return parLoading ??= (async () => {
-      const [topo, data] = await Promise.all([fetch("/data/map/parishes.topo.json").then((r) => r.json()), fetch("/data/map/parishes.json").then((r) => r.json())]);
+      const [topo, data] = await Promise.all([fetch("/data/map/parishes.topo.json").then((r) => r.json()), fetch("/data/map/parishes5.json").then((r) => r.json())]);
       const geo: any = feature(topo, topo.objects.p); parishes = { feats: geo.features, data: data.parishes };
       map.addSource("pars", { type: "geojson", data: geo, promoteId: "id" });
       map.addLayer({ id: "par-fill", type: "fill", source: "pars", minzoom: 8.2, paint: { "fill-color": colorExpr(), "fill-opacity": ["interpolate", ["linear"], ["zoom"], 8.2, 0, 8.7, 0.8] } as any }, "hill");
@@ -833,7 +786,7 @@ export function initMapV3(root: HTMLElement) {
     openSheet(h, open);
   }
 
-  // ------------------------------------------------------------ time: 2016 to 2026, ten years in about twelve seconds
+  // ------------------------------------------------------------ time: the last five years (21 quarters, /data/map/price5.json) in about twelve seconds
   const scrub = root.querySelector<HTMLElement>("[data-scrub]"), playBtn = root.querySelector<HTMLButtonElement>("[data-play]");
   let playing = 0;
   function setQuarter(i: number) {
@@ -846,7 +799,7 @@ export function initMapV3(root: HTMLElement) {
   }
   function play(totalMs = 12000) {
     return new Promise<void>((res) => {
-      if (!P) { res(); return; } if (layer !== "price" && layer !== "rent") setLayer("price");
+      if (!P) { res(); return; } if (layer !== "price") setLayer("price");
       cancelAnimationFrame(playing); const t0 = performance.now(), n = last(); let lastI = -2;
       playBtn?.classList.add("is-on"); playBtn?.setAttribute("aria-label", L.pause);
       const step = (now: number) => { const k = Math.min((now - t0) / totalMs, 1), i = Math.round(k * n); if (i !== lastI) { lastI = i; setQuarter(i); } if (k < 1) playing = requestAnimationFrame(step); else { stopPlay(); res(); } };
@@ -1010,8 +963,16 @@ export function initMapV3(root: HTMLElement) {
     // then the poster is its exact first frame. A shared link with a state opens straight away.
     ["pointermove", "pointerdown", "touchstart", "focusin", "wheel", "keydown"].forEach((ev) => root.addEventListener(ev, () => load(), { once: true, passive: true }));
     addEventListener("scroll", () => load(), { once: true, passive: true });
-    if (q.has("place") || q.has("parish") || q.has("region") || q.has("q") || q.has("layer")) ("requestIdleCallback" in window ? (window as any).requestIdleCallback : setTimeout)(() => load(), { timeout: 2500 });
+    // A link with a state opens the map straight away; a plain ?place= link shows the card at once (below) and the map wakes
+    // at the first sign of a reader, then flies to the place (operator, step 1: the card in under a second on a phone).
+    if (q.has("parish") || q.has("region") || q.has("q") || q.has("layer")) ("requestIdleCallback" in window ? (window as any).requestIdleCallback : setTimeout)(() => load(), { timeout: 2500 });
+  }
+  // Operator, step 1 (under one second): a ?place= link shows the card at once from the place's small file, before
+  // MapLibre and the map data arrive; the map then flies to it.
+  if (selected && !selPar && mode === "page") {
+    const slug = selected;
+    loadPlace(slug).then((d) => { if (d && selected === slug && sheet.hidden) { ev({ event: "map/place", place: slug, origin: mode }); ev({ event: "map/card/muni", place: slug, origin: mode }); showPlace(slug); timeStart(slug); savePlace(d.n); rememberPlace(d.n); } });
   }
   // For the automated click check (scripts/map-data/clicktest.mjs).
-  (root as any).__mapx = { load, showRegion, openPanel, openTile: (id: string) => openTile(id), view: () => view, pick: (x: number, y: number) => pick({ x, y }), project: (s: string) => { const p = byS.get(s); return p && map ? map.project([p.x, p.y]) : null; }, map: () => map, selected: () => selected, slugs: () => features.map((f) => f.properties.s), tour, setDim, setBudget, setQuarter, quality: () => quality };
+  (root as any).__mapx = { load, showRegion, openPanel, openSources: () => openSources(), view: () => view, pick: (x: number, y: number) => pick({ x, y }), project: (s: string) => { const p = byS.get(s); return p && map ? map.project([p.x, p.y]) : null; }, map: () => map, selected: () => selected, slugs: () => features.map((f) => f.properties.s), tour, setDim, setBudget, setQuarter, quality: () => quality };
 }

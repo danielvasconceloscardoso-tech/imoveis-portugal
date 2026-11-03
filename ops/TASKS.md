@@ -219,6 +219,9 @@ Status: To do · Doing · Blocked · Done
 | 67c | Map data the session could not fetch: flight block times per route (airlines' own search), sunshine normals with IPMA's written permission (IPMA climate department) or CM SAF SARAH-3, SNS emergency list (transparencia.sns.gov.pt); photos for the Centro and Açores postcards | Operator | open | 2026-11-20 |
 | 67d | Decide: rent and gross yield stay free on the map details, layers and place pages, or move behind the paid analysis (29 € region / 99 € Portugal) | CEO | open | 2026-11-10 |
 | 67e | Paid map analysis: when the company and invoicing are ready, two Stripe Payment Links in config.mapAnalysis.stripe and config.mapAnalysis.live = true | Operator | open | after incorporation |
+| 67g | Golden sample place card (Gondomar, branch golden-gondomar): review the screenshots and ops/ACCEPTANCE_PLACE_CARD.md; approve before step 2 rolls the card (drive times, schools, health, photos) out to the other 307 municipalities. 67d is answered by the operator's step 1 (rent and yield are paid on the map path) | Operator | open | 2026-11-05 |
+| 67h | Decide: the "Preços e rendas" page (/dados/), the embeddable map (/embed/map/) and the public /data/prices.json still show ten years, rents and gross yield for every municipality; step 1 says nothing on the paid list may be on a free page. Move them to the paid analysis (and prices.json out of public/) in step 2, or keep them | Operator | open | 2026-11-05 |
+| 67i | A golden-hour photograph of Gondomar (Gramido, Valbom, Melres, the river beaches) under a commercial licence, or the Turismo de Portugal media bank once registered: the sample's three photos are daylight | Operator | open | 2026-11-20 |
 | 67f | Rename the newsletter to Maré in content/inbox and content/letter (website done; the letter files still say carta/quinta-feira) | CEO | open | 2026-11-20 |
 
 ## Last session

@@ -107,3 +107,14 @@ The articles were rewritten (PT, EN, FR) and every photograph reviewed against t
 | img/v2/porto-douro-amanhecer-* | escolas | The Douro at first light, a rabelo boat, Ribeira | (library, above) | vjgalaxy | Pixabay Content License | 2026-11-03 |
 | img/v2/porto-douro-entardecer-* | sao-joao | The Douro and the Luís I bridge at sunset | (library, above) | Unsplash | Unsplash License | 2026-11-03 |
 | img/v2/vila-do-conde-rio-ave-santa-clara-* | vila-do-conde | The Ave River and the Monastery of Santa Clara | https://commons.wikimedia.org/wiki/File:Convento_de_Santa_Clara_(Vila_do_Conde)_(3).jpg | Joseolgon | CC BY 4.0 | 2026-11-03 |
+## Golden sample place card: Gondomar (operator's step 1, 3 Nov 2026)
+
+One hero and two gallery views for Gondomar's card on the map (photography standard above). Found through the Openverse API; the Wikimedia Commons copies of the photographer's Flickr originals were downloaded at 1920 px (Commons thumbnails), cropped (sky, and the bottom edge with the photographer's mark), graded with `resort_grade.py` (1.0) and cut to `img/v2/<name>-{640,1024,1600}.webp` (the hero and the marina: 640 and 1024 only, their crops are 1382 and 1128 px wide). The camera positions in the Flickr metadata were reverse-geocoded with Nominatim: all three are in the municipality of Gondomar. CC BY-SA: credited on /credits/ (site/src/lib/credits.ts); our graded copies are shared under the same licence.
+
+**Not met: golden hour.** No golden-hour photograph of Gondomar (Gramido, Valbom, Melres, the Marina do Freixo or the river beaches) was found under a commercial licence on Openverse (Flickr and Wikimedia Commons; Unsplash and Pexels refused the build environment). All three are clear daylight; the grade warms them. The Marina do Freixo results were the Palácio do Freixo and the Freixo bridge, which are in Porto, not Gondomar.
+
+| File (site/public/) | Where | What it shows | Source page | Author | Licence | Date checked |
+| --- | --- | --- | --- | --- | --- | --- |
+| img/v2/gondomar-douro-gramido-* | Gondomar card, hero | The Douro from Gramido (Valbom, Gondomar), small boats, the terrace on the Gondomar bank | https://commons.wikimedia.org/w/index.php?curid=77637693 (Flickr 38633058680) | Vitor Oliveira (Portuguese_eyes) | CC BY-SA 2.0 | 2026-11-03 |
+| img/v2/gondomar-melres-douro-* | Gondomar card, gallery | The Douro valley from Melres (Gondomar), the far bank and the hills | https://commons.wikimedia.org/w/index.php?curid=77637623 (Flickr 36407281306) | Vitor Oliveira (Portuguese_eyes) | CC BY-SA 2.0 | 2026-11-03 |
+| img/v2/gondomar-marina-melres-* | Gondomar card, gallery | The Marina de Melres (Gondomar) on the Douro | https://commons.wikimedia.org/w/index.php?curid=77637715 (Flickr 41314804074) | Vitor Oliveira (Portuguese_eyes) | CC BY-SA 2.0 | 2026-11-03 |

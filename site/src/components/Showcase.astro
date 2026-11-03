@@ -64,9 +64,7 @@ const credits = [...new Set(projects.flatMap((p) => p.credits ?? []))].join("; "
     <h2>{c("show.ctx", lang, { muni: s.n })}</h2>
     <dl>
       {s.m2[LAST] && <div><dt>{c("show.ctx.m2", lang)}</dt><dd>{money(s.m2[LAST])}</dd></div>}
-      {s.g10 != null && <div><dt>{c("show.ctx.g10", lang)}</dt><dd>{s.g10 > 0 ? "+" : ""}{nf1.format(s.g10)}%</dd></div>}
-      {s.rq?.[LAST] && <div><dt>{c("show.ctx.rent", lang)}</dt><dd>{new Intl.NumberFormat(locale, { style: "currency", currency: "EUR", minimumFractionDigits: 2 }).format(s.rq[LAST])}</dd></div>}
-      {s.yield != null && <div><dt>{c("show.ctx.yield", lang)}</dt><dd>{nf1.format(s.yield)}%</dd></div>}
+      {/* Operator, step 1 (3 Nov 2026): the ten-year change, the rent and the gross yield are paid-analysis items, never on a free page. */}
     </dl>
     <p class="sc-small">{c("show.ctx.src", lang, { q: ql })}</p>
   </aside>

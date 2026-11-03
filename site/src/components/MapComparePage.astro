@@ -1,9 +1,11 @@
 ---
 // "Comparar" (D83 part 2): two or three places the reader saved with a heart (lib/saved.ts, kind "region": a municipality slug,
 // "p-{parish code}" or "r-{region}"), or the ones in ?p=, side by side like an iPhone comparison. The headline rows are free
-// (market €/m², the five-year direction, sunshine, the beach, the flight home); the rest is locked and belongs to the paid
-// analysis (config.mapAnalysis, off until the company and invoicing exist). Built empty, filled in the browser from
-// /data/map/tiles.json. noindex: it is personal. Wording: COPY_DECK.md "map4.*".
+// (market €/m² median, the five-year direction, the beach, the flight home; in minutes where the place has its golden sample
+// card); the rest is locked and belongs to the paid analysis (config.mapAnalysis, off until the company and invoicing exist).
+// Operator, step 1 (3 Nov 2026): no typology ranges or regional P10-P90 (distributions) and no sunshine row on this free page.
+// Built empty, filled in the browser from /data/map/tiles.json and /data/map/place/<slug>.json. noindex: it is personal.
+// Wording: COPY_DECK.md "map4.*", "card5.*".
 import V2 from "../layouts/V2.astro";
 import { HTML_LANG, LANGS, pathFor, SLUGS, type Lang, type EdCode } from "../i18n";
 import { c, cl, edName } from "../lib/copy";
@@ -31,6 +33,7 @@ const L = {
   locked: k4("compare.locked"), soon: k4("tile.soon"), need: k4("compare.need"), max: k4("compare.max"), open: k4("compare.open"), regionKick: k4("region.kick"),
   sunV: keep("map4.tile.sun.v", ["v"]), min: keep("map4.tile.min", ["v"]), parish: keep("map4.cut.parish", ["m"]),
   kmline: keep("map4.tile.kmline", ["v"]), ap: keep("map4.tile.ap", ["n", "v"]), ty: k4("tile.ty"),
+  minc: c("card5.min", lang, { v: "{v}" }), bycar: c("card5.bycar", lang), via: c("card5.flight.via", lang),
 };
 const unlockList = cl("map4.unlock.list", lang);
 const live = A.live && !!A.stripe.region && !!A.stripe.all;
@@ -111,12 +114,16 @@ const live = A.live && !!A.stripe.region && !!A.stripe.all;
     type Col = { id: string; name: string; kick: string; href: string; photo: string; d: any };
     const resolve = (id: string): Col | null => {
       if (id.startsWith("r-")) { const k = id.slice(2), rg = T.rg?.[k]; if (!rg) return null; const r2 = T.r2?.[rg.c2] ?? {};
-        return { id, name: L.regions[k] ?? k, kick: L.regionKick, href: `${L.map}?region=${k}`, photo: L.regionPhotos[k] ?? "", d: { m2: r2.m2, rr: rg.lo && rg.hi ? [rg.lo, rg.hi] : null, p5: rg.p5 } }; }
+        return { id, name: L.regions[k] ?? k, kick: L.regionKick, href: `${L.map}?region=${k}`, photo: L.regionPhotos[k] ?? "", d: { m2: r2.m2, rr: 1, p5: rg.p5 } }; }
       if (id.startsWith("p-")) { const code = id.slice(2), p = T.p?.[code]; if (!p) return null; const m = T.m?.[p.m] ?? {};
-        return { id, name: p.n, kick: L.parish.replace("{m}", m.n ?? ""), href: `${L.map}?parish=${code}`, photo: L.regionPhotos[m.r] ?? "", d: { ...m, ...p, p10: null } }; }
+        return { id, name: p.n, kick: L.parish.replace("{m}", m.n ?? ""), href: `${L.map}?parish=${code}`, photo: L.regionPhotos[m.r] ?? "", d: { ...m, ...p } }; }
       const m = T.m?.[id]; if (!m) return null;
-      return { id, name: m.n, kick: L.regions[m.r] ?? "", href: `${L.map}?place=${id}`, photo: L.placePhotos[id] ?? L.regionPhotos[m.r] ?? "", d: m };
+      return { id, name: m.n, kick: L.regions[m.r] ?? "", href: `${L.map}?place=${id}`, photo: L.placePhotos[id] ?? L.regionPhotos[m.r] ?? "", d: { ...m, c5: C5[id] ?? null } };
     };
+    // The golden sample places (content/facts/map/places/<slug>/): drive times and the flight, from their small file.
+    const C5: Record<string, any> = {};
+    await Promise.all(ids.filter((id) => T.m?.[id]).slice(0, 3).map((id) => fetch(`/data/map/place/${id}.json`).then((r) => (r.ok ? r.json() : null)).then((d) => { if (d?.c5) C5[id] = d.c5; }).catch(() => {})));
+    if (Object.keys(C5).length) L.placePhotos = { ...L.placePhotos, ...Object.fromEntries(Object.entries(C5).map(([k, v]) => [k, v.ph?.[0]?.f ?? ""]).filter(([, f]) => f)) };
     const cols = ids.map(resolve).filter((x): x is Col => !!x).slice(0, 3);
     const note = document.querySelector<HTMLElement>("[data-cmp-note]")!, empty = document.querySelector<HTMLElement>("[data-cmp-empty]")!;
     const src = document.querySelector<HTMLElement>("[data-cmp-src]")!; src.textContent = (src.dataset.tpl || "").replace("{q}", T.q ? L.qfmt.replace("{q}", T.q.slice(-1)).replace("{y}", T.q.slice(0, 4)) : "");
@@ -125,14 +132,16 @@ const live = A.live && !!A.stripe.region && !!A.stripe.all;
     box.style.setProperty("--n", String(cols.length));
     const soon = `<span class="c4-soon">${esc(L.soon)}</span>`;
     const free: [string, (d: any) => string][] = [
-      // INE: the typology range where it exists ("entre tipologias"), else the median; a region: its concelhos' P10-P90.
-      [L.mkt, (d) => d.rng ? `${nf.format(d.rng[0])}–${eur.format(d.rng[1])}/m²<small class="c4-s">${esc(L.ty)}</small>` : d.rr ? `${nf.format(d.rr[0])}–${eur.format(d.rr[1])}/m²` : d.m2 ? `${eur.format(d.m2)}/m²` : "—"],
+      // INE: the median (the typology range and the regions' P10-P90 are distributions: paid analysis).
+      [L.mkt, (d) => d.m2 ? `${eur.format(d.m2)}/m²` : "—"],
       [L.dir5, (d) => d.p5 != null ? pct(d.p5) : "—"],
-      // Sunshine: no publishable source yet (IPMA's sheets are private use only).
-      [L.sun, (d) => d.sun != null ? esc(L.sunV.replace("{v}", nf.format(d.sun))) : soon],
-      [L.beach, (d) => d.bch != null ? esc(L.kmline.replace("{v}", nf1.format(d.bch))) : d.rr ? "—" : soon],
-      // The flight time is never estimated: the nearest airport in straight-line km, and the time "Em breve".
-      [L.flight, (d) => { const f = d.fl?.[L.ed]; if (f != null) return f >= 60 ? `${Math.floor(f / 60)} h ${String(Math.round(f % 60)).padStart(2, "0")}` : esc(L.min.replace("{v}", nf.format(f)));
+      // The beach: minutes by car where the place has its golden sample card, else the straight-line km.
+      [L.beach, (d) => { const b = d.c5?.life?.find((x: any) => x[0] === "beach"); if (b) return `${esc(L.minc.replace("{v}", nf.format(b[2])))}<small class="c4-s">${esc(typeof b[1] === "string" ? b[1] : b[1][L.locale.slice(0, 2)] ?? b[1].pt)} · ${esc(L.bycar)}</small>`;
+        return d.bch != null ? esc(L.kmline.replace("{v}", nf1.format(d.bch))) : d.rr ? "—" : soon; }],
+      // The flight time is only ever a published timetable: else the nearest airport in straight-line km, and "Em breve".
+      [L.flight, (d) => { const g = d.c5?.fl?.[L.ed]; const hm = (f: number) => f >= 60 ? `${Math.floor(f / 60)} h ${String(Math.round(f % 60)).padStart(2, "0")}` : esc(L.min.replace("{v}", nf.format(f)));
+        if (g) return `${hm(g.min)}${g.via ? `<small class="c4-s">${esc(L.via)}</small>` : ""}`;
+        const f = d.fl?.[L.ed]; if (f != null) return hm(f);
         return d.ap ? `${soon}<small class="c4-s">${esc(L.ap.replace("{n}", AP[d.ap[0]] ?? d.ap[0]).replace("{v}", nf.format(d.ap[1])))}</small>` : d.rr ? "—" : soon; }],
     ];
     const AP: Record<string, string> = { LIS: "Lisboa", OPO: "Porto", FAO: "Faro", FNC: "Funchal", PDL: "Ponta Delgada" };
