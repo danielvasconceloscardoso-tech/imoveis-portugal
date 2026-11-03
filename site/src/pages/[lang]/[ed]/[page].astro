@@ -167,6 +167,12 @@ const site = config.agency.website.replace(/^https:\/\/|\/$/g, "");
         <h1>{c("how.h1", lang)}</h1>
         <p class="lede">{c("how.lede", lang)}</p>
       </div>
+      {/* 3 Nov 2026 (operator): who we are, for the press and institutions written to that day, before the rules. */}
+      <h2 id="sobre">{c("how.about.h", lang)}</h2>
+      <p>{c("how.about.p", lang)}</p>
+      <h2>{c("how.about.what.h", lang)}</h2>
+      <p>{c("how.about.what.p", lang)}</p>
+      <p>{c("how.about.motto.p", lang)}</p>
       {[1, 2, 3, 4, 5, 6].map((i) => (<><h2>{c(`how.s${i}.h`, lang)}</h2><p>{c(`how.s${i}.p`, lang)}</p></>))}
       <h2>{c("how.example.h", lang)}</h2>
       <p>{c("how.example.p", lang)}</p>
@@ -175,6 +181,8 @@ const site = config.agency.website.replace(/^https:\/\/|\/$/g, "");
       </ol>
       <h2>{c("how.contact.h", lang)}</h2>
       <p>{c("how.contact.p", lang)}{" "}<a href={`mailto:${config.contactEmail}`}>{config.contactEmail}</a></p>
+      <h2 id="imprensa">{c("how.press.h", lang)}</h2>
+      <p>{c("how.press.p", lang)}{" "}<a href={`mailto:${config.contactEmail}?subject=${encodeURIComponent(c("how.press.subject", lang))}`}>{config.contactEmail}</a></p>
     </div>
   )}
 

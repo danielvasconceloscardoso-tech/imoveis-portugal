@@ -39,7 +39,9 @@ const file = EBOOK.file(lang, ed);
       <h2 id="signup">{c("guide.signup.h", lang)}</h2>
       <p class="lede" style="margin-top:12px">{c("mare.line", lang)}</p>
       <div style="margin-top:16px">
-        <Embed id={config.forms.newsletter[lang]} title={c("guide.signup.h", lang)} cta={c("home.subscribe", lang)} subject={c("home.subscribe.subject", lang)} hidden={{ edition: ed, lang }} height={200} />
+        {config.forms.newsletter[lang] && !config.forms.newsletter[lang].startsWith("http")
+          ? <a class="btn" href={`${pathFor(lang, ed, "mare")}?de=guide`}>{c("home.subscribe", lang)}</a>
+          : <Embed id={config.forms.newsletter[lang]} title={c("guide.signup.h", lang)} cta={c("home.subscribe", lang)} subject={c("home.subscribe.subject", lang)} hidden={{ edition: ed, lang }} height={200} />}
       </div>
       <p class="small" style="margin-top:12px"><a href={pathFor(lang, ed, "privacy")}>{c("common.privacy", lang)}</a></p>
       <p class="disc">{DISCLAIMER[lang]}</p>

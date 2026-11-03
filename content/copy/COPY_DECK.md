@@ -182,9 +182,9 @@ How to edit:
 - FR: Partenaires
 
 ### nav.how
-- PT: Como trabalhamos
-- EN: How we work
-- FR: Notre méthode
+- PT: Sobre nós
+- EN: About us
+- FR: À propos
 
 ### nav.talk
 - PT: Falar com um parceiro
@@ -1310,9 +1310,9 @@ How to edit:
 ## how
 
 ### title
-- PT: Como trabalhamos
-- EN: How we work
-- FR: Notre méthode
+- PT: Sobre nós
+- EN: About us
+- FR: À propos
 
 ### h1
 - PT: Cada facto tem fonte e cada patrocínio está identificado.
@@ -1320,9 +1320,49 @@ How to edit:
 - FR: Des faits sourcés. Des sponsors signalés.
 
 ### lede
-- PT: As regras que seguimos e como o Imóveis Portugal é financiado.
-- EN: What we publish, where the numbers come from and how Imóveis Portugal makes money.
-- FR: Ce que nous publions, d'où viennent les chiffres et comment Imóveis Portugal se finance.
+- PT: Quem somos, de onde vêm os números e como a Imóveis Portugal é financiada.
+- EN: Who we are, where the numbers come from and how Imóveis Portugal makes money.
+- FR: Qui nous sommes, d'où viennent les chiffres et comment Imóveis Portugal se finance.
+
+### about.h
+- PT: Quem somos
+- EN: Who we are
+- FR: Qui sommes-nous
+
+### about.p
+- PT: Todos os anos, milhares de emigrantes, lusodescendentes e estrangeiros decidem comprar casa em Portugal. A maioria faz tudo à distância, com pouca informação e sem saber em quem confiar. A Imóveis Portugal foi criada para eles: uma plataforma de informação independente. Não somos uma agência imobiliária e não recebemos comissões.
+- EN: Every year, thousands of emigrants, people of Portuguese descent and foreigners decide to buy a home in Portugal. Most of them do it from a distance, with little information and no clear idea of whom to trust. Imóveis Portugal was built for them: an independent information platform. We are not a real estate agency and we take no commissions.
+- FR: Chaque année, des milliers d'émigrés, de lusodescendants et d'étrangers décident d'acheter un logement au Portugal. La plupart le font à distance, avec peu d'informations et sans savoir à qui se fier. Imóveis Portugal a été créé pour eux : une plateforme d'information indépendante. Nous ne sommes pas une agence immobilière et nous ne touchons aucune commission.
+
+### about.what.h
+- PT: O que fazemos
+- EN: What we do
+- FR: Ce que nous faisons
+
+### about.what.p
+- PT: Desenvolvemos internamente algoritmos e ferramentas de inteligência artificial que cruzam dados oficiais de preços, território e serviços com aquilo que cada pessoa procura, e mostram-lhe a região e a casa certas. A plataforma junta um mapa interativo do país, um concierge que encaminha cada pedido para parceiros licenciados, e a Maré, a nossa newsletter às terças e sextas. Pelo caminho, damos a conhecer municípios, escolas, hospitais, artistas, restaurantes e negócios portugueses a quem está a escolher onde viver.
+- EN: We have developed our own algorithms and AI tools that match official data on prices, places and services with what each person is looking for, and show them the right region and the right home. The platform brings together an interactive map of the country, a concierge that sends each request to licensed partners, and Maré, our newsletter every Tuesday and Friday. Along the way, we introduce Portuguese municipalities, schools, hospitals, artists, restaurants and businesses to people choosing where to live.
+- FR: Nous avons développé nos propres algorithmes et outils d'intelligence artificielle, qui croisent les données officielles sur les prix, le territoire et les services avec ce que chacun recherche, et lui montrent la bonne région et le bon logement. La plateforme réunit une carte interactive du pays, un concierge qui transmet chaque demande à des partenaires agréés, et Maré, notre newsletter du mardi et du vendredi. Au passage, nous faisons connaître des communes, écoles, hôpitaux, artistes, restaurants et entreprises portugais à ceux qui choisissent où vivre.
+
+### about.motto.p
+- PT: O nosso lema é "Portugal, de perto, mesmo de longe". A missão: tornar a compra de casa em Portugal clara e segura para quem vive fora, e levar mais pessoas e investimento a todo o país.
+- EN: Our motto is "Portugal, up close, even from afar". Our mission: to make buying a home in Portugal clear and safe for people who live abroad, and to bring more people and investment to the whole country.
+- FR: Notre devise : « Le Portugal, de près, même de loin ». Notre mission : rendre l'achat d'un logement au Portugal clair et sûr pour ceux qui vivent à l'étranger, et amener plus de monde et d'investissement dans tout le pays.
+
+### press.h
+- PT: Imprensa, instituições e parcerias
+- EN: Press, institutions and partnerships
+- FR: Presse, institutions et partenariats
+
+### press.p
+- PT: Para entrevistas, pedidos de dados, protocolos ou parcerias, escreva-nos:
+- EN: For interviews, data requests, partnership agreements or collaborations, write to us:
+- FR: Pour une interview, une demande de données, une convention ou un partenariat, écrivez-nous :
+
+### press.subject
+- PT: Imprensa e parcerias
+- EN: Press and partnerships
+- FR: Presse et partenariats
 
 ### s1.h
 - PT: De onde vêm os números
@@ -7998,6 +8038,11 @@ Requests really sent (operator, 3 Nov 2026): the Concierge, the partner and view
 - PT: Abre-se o seu email com o pedido escrito. Envie-o e confirme uma vez: a Maré começa na terça ou sexta seguinte.
 - EN: Your email opens with the request written. Send it and confirm once: Maré starts on the next Tuesday or Friday.
 - FR: Votre messagerie s'ouvre avec la demande rédigée. Envoyez-la et confirmez une fois : Maré commence le mardi ou le vendredi suivant.
+
+### oneclick
+- PT: Ao carregar, recebe a Maré por email às terças e sextas. Cancela num clique, em qualquer envio.
+- EN: One click and Maré arrives by email every Tuesday and Friday. Unsubscribe in one click from any issue.
+- FR: Un clic et Maré arrive par e-mail chaque mardi et vendredi. Désinscription en un clic depuis chaque envoi.
 
 ### optin.embed
 - PT: Confirme o email uma vez: a Maré começa na terça ou sexta seguinte.

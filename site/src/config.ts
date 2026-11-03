@@ -65,10 +65,14 @@ export const config = {
   // Form embeds per language (D18): Tally form IDs (e.g. "w4Xyz1") or a full embed URL (beehiiv
   // newsletter embeds are full URLs). Every form gets a hidden "edition" field from the page.
   forms: {
-    newsletter: { pt: "", en: "", fr: "" } as Record<string, string>,
+    // beehiiv v3 form id (a UUID, drawn by beehiiv's loader on the Maré page; home and guide link there) or a full iframe URL.
+    // One beehiiv form per language: SITE - PT / SITE - EN / SITE - FR (3 Nov 2026; ops/ACCOUNTS.md).
+    newsletter: { pt: "c515b523-ee0e-4cd4-9d78-97423874a589", en: "5ddaeb24-062e-4898-a13f-d41dc289aa20", fr: "4fe3c644-45a3-4a56-83d9-55e996555ebf" } as Record<string, string>,
     // Public form IDs from ops/ACCOUNTS.md (task 8u). Tally forms are PT only for now; EN and FR copies to create.
-    sponsor: { pt: "KppYG8", en: "KppYG8", fr: "KppYG8" } as Record<string, string>,
-    buyer: { pt: "BEEzgN", en: "BEEzgN", fr: "BEEzgN" } as Record<string, string>,
+    // One Tally form per language (3 Nov 2026): "Pedido de parceria" / "Partnership request" / "Demande de partenariat"
+    // and "Pedido de casa" / "Home request" / "Demande de logement". Hidden fields: edition, lang (buyer also budget, place).
+    sponsor: { pt: "KppYG8", en: "7Xqg52", fr: "1WXg5b" } as Record<string, string>,
+    buyer: { pt: "BEEzgN", en: "dbE4VV", fr: "YjPKyv" } as Record<string, string>,
     // "Talk to a partner" requests (category, country, question, consent) to the brand mailbox. See ops/SETUP.md.
     partnerRequest: { pt: "", en: "", fr: "" } as Record<string, string>,
     // Calculator "analyse my case" requests to the credit partner, with the simulation in hidden fields.
