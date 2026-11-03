@@ -64,11 +64,15 @@ for key, (token, keep) in PLAN.items():
 out = os.path.join(ROOT, "content", "developers", "projects.json")
 # Prompt 38: projects entered by hand (no demo, e.g. Marble Terrace) are kept as they are.
 projects += [p for p in json.load(open(out))["projects"] if not p.get("demo")]
+# Prompt 66 (O'rizon): a demo project curated by hand for the live site (it carries "tag") is kept as entered.
+curated = {p["id"]: p for p in json.load(open(out))["projects"] if p.get("demo") and p.get("tag")}
+projects = [curated.get(p["id"], p) for p in projects]
 how = json.load(open(out))["_how"]
 how = ("Developer projects (prompts 26 §1 and 28 §2). partner=true: shown on the public map, the place card ('Partner developers here') and a showcase page, labelled 'Sponsored' "
        "(only once the developer has signed and paid, D6, D38). partner=false: shown only in that developer's private demo (/d/{demo}/). Facts only as published by the developer "
        "or its public listings, with the URL of every item in 'sources' and the date in 'checked'; prices exactly as published (null = on request). "
        "On the site, a partner's line must also be written natively in PT and FR ('lines': {pt, fr}); the English 'line' is used for demos. Built by scripts/developers/import.py."
-       " A hand-entered partner may add 'unitTable' (every home as the developer publishes it, shown on the showcase, no unit pages) and 'location' (stated facts with sources; distances are ours, straight line from OpenStreetMap).")
+       " A hand-entered partner may add 'unitTable' (every home as the developer publishes it, shown on the showcase, no unit pages) and 'location' (stated facts with sources; distances are ours, straight line from OpenStreetMap)."
+       " A project shown on the site without being a sponsor carries 'tag' {pt, en, fr} ('Seleção' / 'Our pick' / 'Sélection'), shown everywhere instead of 'Sponsored' (prompt 66); import.py keeps such a record as entered.")
 json.dump({"_how": how, "projects": projects}, open(out, "w"), indent=1, ensure_ascii=False)
 for p in projects: print(p["demo"], p["id"], p["muni"], len(p["units"]), p["from"], len(p["gallery"]))

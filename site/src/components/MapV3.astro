@@ -92,13 +92,13 @@ const links = { buy: pathFor(lang, ed, "buy"), consult: pathFor(lang, ed, "consu
 const pinFile = (id: string) => existsSync(join(process.cwd(), "public", "img", "map", `pin-${id}.webp`)) ? `/img/map/pin-${id}.webp` : "";
 // The area briefs carry rents, yields and ten-year changes (paid analysis): never in the free card (operator, step 1).
 const cfg = { labels, links, photos, regionPhotos, ed, lang,
-  projects: PROJECTS.map((p) => ({ id: p.id, name: p.name, developer: p.developer, muni: p.muni, lon: p.lon, lat: p.lat, render: p.render, pin: pinFile(p.id) || (p.render ? `${p.render}-800.webp` : ""), from: p.from, showcase: `${pathFor(lang, ed, "partners")}${p.devSlug}/${p.muni}/`,
+  projects: PROJECTS.map((p) => ({ id: p.id, name: p.name, tag: p.tag?.[lang] ?? "", developer: p.developer, muni: p.muni, lon: p.lon, lat: p.lat, render: p.render, pin: pinFile(p.id) || (p.render ? `${p.render}-800.webp` : ""), from: p.from, showcase: `${pathFor(lang, ed, "partners")}${p.devSlug}/${p.muni}/`,
     // Prompt 38: the project card (summary, three features, homes for sale now from the developer's table).
     summary: p.summary?.[lang], feats: (p.features ?? []).filter((f) => f.card).map((f) => f[lang]),
     now: p.blocks ? p.blocks.reduce((a, b) => a + b.units.reduce((x, u) => x + u.forSale, 0), 0) : null,
     // Part 2 (3 Nov): the places a project is near (projects.json), so a card with no homes of its own points to them.
     near: p.near ?? [], muniName: MAP_MUNIS.find((m) => m.s === p.muni)?.n ?? "" })),
-  pl: { view: c("showb.view", lang), visit: c("showb.visit", lang), price: c("showb.price", lang), now: c("showb.now", lang, { n: "{n}" }), tour: c("showb.tour", lang), near: c("bar.near", lang, { name: "{name}", muni: "{muni}" }) } };
+  pl: { view: c("showb.view", lang), visit: c("showb.visit", lang), price: c("showb.price", lang), now: c("showb.now", lang, { n: "{n}" }), near: c("bar.near", lang, { name: "{name}", muni: "{muni}" }) } };
 // Operator, step 1: the market price is the one free colour layer; 10 years, rents, yields and vacant homes are paid.
 const chips = [["price", "chip.price"]] as const;
 const overlays = [["golf", "chip.golf"], ["beach", "chip.beach"], ["devs", "chip.devs"]] as const;

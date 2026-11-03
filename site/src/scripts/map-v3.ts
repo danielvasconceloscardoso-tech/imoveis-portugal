@@ -16,7 +16,7 @@ import { heartHTML } from "./hearts";
 type Series = { n: string; m2: (number | null)[] };
 type Props = { id: number; n: string; s: string; r: string; x: number; y: number; a: number };
 type Layer = "none" | "price";
-type Proj = { id: string; name: string; developer: string; muni: string; lon: number; lat: number; render?: string; pin?: string; from: number | null; showcase: string; summary?: string; feats?: string[]; now?: number | null };
+type Proj = { id: string; name: string; tag?: string; developer: string; muni: string; lon: number; lat: number; render?: string; pin?: string; from: number | null; showcase: string; summary?: string; feats?: string[]; now?: number | null };
 
 const reduce = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 const SKY = { "sky-color": "#f3efe6", "horizon-color": "#f6efe1", "fog-color": "#efe8da", "sky-horizon-blend": 0.6, "horizon-fog-blend": 0.7, "fog-ground-blend": 0.35, "atmosphere-blend": 0.5 };
@@ -545,7 +545,7 @@ export function initMapV3(root: HTMLElement) {
     h += ctaHTML(name);
     // Developer components stay (CLAUDE.md, COMMON2 rule 3): the partner's homes here, or near, one quiet sponsored line.
     const nearBy = here.length ? here : projects.filter((y) => y.showcase && (y as Proj & { near?: string[] }).near?.some((n) => plain(n) === plain(name))).slice(0, 2);
-    for (const y of nearBy) h += `<p class="m3-buys m3-near"><a href="${esc(y.showcase)}">${esc(here.length ? C5.homes.replace("{muni}", name).replace("{name}", y.name) : cfg.pl.near.replace("{name}", y.name).replace("{muni}", (y as Proj & { muniName?: string }).muniName ?? ""))} →</a> <span class="m3-tag">${L.sponsored}</span></p>`;
+    for (const y of nearBy) h += `<p class="m3-buys m3-near"><a href="${esc(y.showcase)}">${esc(here.length ? C5.homes.replace("{muni}", name).replace("{name}", y.name) : cfg.pl.near.replace("{name}", y.name).replace("{muni}", (y as Proj & { muniName?: string }).muniName ?? ""))} →</a> <span class="m3-tag">${esc(y.tag || L.sponsored)}</span></p>`;
     h += `${mareHTML()}</div>`;
     ctx = x; rerender = () => showPlace(slug, false); srcFor = () => sourcesHTML(d, x);
     openSheet(h, open);
@@ -744,7 +744,7 @@ export function initMapV3(root: HTMLElement) {
     for (const p of projects) {
       // D83 part 2: a small photo pin (the developer's own render), the name and "Patrocinado" from city zoom.
       const el = document.createElement("button"); el.type = "button"; el.className = p.pin ? "m3-pin m3-pin-ph" : "m3-pin";
-      el.innerHTML = `<b class="m3-pin-n"></b><span>${esc(p.name)}<em>${L.sponsored}</em></span>${p.pin ? `<img class="m3-pin-img" src="${esc(p.pin)}" alt="" width="44" height="44" decoding="async"><i class="m3-pin-tip" aria-hidden="true"></i>` : `<i class="m3-pin-dot" aria-hidden="true"></i>`}`;
+      el.innerHTML = `<b class="m3-pin-n"></b><span>${esc(p.name)}<em>${esc(p.tag || L.sponsored)}</em></span>${p.pin ? `<img class="m3-pin-img" src="${esc(p.pin)}" alt="" width="44" height="44" decoding="async"><i class="m3-pin-tip" aria-hidden="true"></i>` : `<i class="m3-pin-dot" aria-hidden="true"></i>`}`;
       const x = { p, el, m: null as any, grp: [p] };
       el.addEventListener("click", (e) => {
         e.stopPropagation(); stopTour();
@@ -778,7 +778,7 @@ export function initMapV3(root: HTMLElement) {
     const pl = cfg.pl ?? {};
     const photo = p.render ? `<img class="m3-photo" src="${esc(p.render)}-800.webp" alt="" width="800" height="450">` : "";
     const pm = byS.get(p.muni)?.n ?? "";
-    let h = `${photo}<div class="m3-sb"><p class="m3-kick">${esc(pm)} · <span class="m3-tag">${L.sponsored}</span></p><div class="ht-row"><h3 tabindex="-1">${esc(p.name)}</h3>${heartHTML("home", p.id, pm ? `${p.name}, ${pm}` : p.name, p.showcase)}</div>`;
+    let h = `${photo}<div class="m3-sb"><p class="m3-kick">${esc(pm)} · <span class="m3-tag">${esc(p.tag || L.sponsored)}</span></p><div class="ht-row"><h3 tabindex="-1">${esc(p.name)}</h3>${heartHTML("home", p.id, pm ? `${p.name}, ${pm}` : p.name, p.showcase)}</div>`;
     h += `<p class="m3-buys">${esc(p.summary ?? p.developer)}</p>`;
     if (p.feats?.length) h += `<ul class="m3-det">${p.feats.map((f) => `<li>${esc(f)}</li>`).join("")}</ul>`;
     if (p.now != null && pl.now) h += `<p class="m3-buys"><b>${esc(pl.now.replace("{n}", String(p.now)))}</b></p>`;

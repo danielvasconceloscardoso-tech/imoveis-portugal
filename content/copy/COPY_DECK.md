@@ -9707,3 +9707,172 @@ The wording that names the partner agency, kept exactly as it was before prompt 
 - PT: Enviado pela Imóveis Portugal. O mesmo pedido segue para a Imóveis Portugal e para o consultor qualificado da agência parceira, que responde ao leitor.
 - EN: Sent by Imóveis Portugal. The same request goes to Imóveis Portugal and to the partner agency's qualified advisor, who replies to the reader.
 - FR: Envoyé par Imóveis Portugal. La même demande part chez Imóveis Portugal et chez le conseiller qualifié de l'agence partenaire, qui répond au lecteur.
+
+## orz
+
+Prompt 66 (3 Nov 2026): the O'rizon Living showcase, the first project shown on the site as our pick, without payment ("tag" in projects.json, never "Sponsored"). The film and the 3D tour load only when the reader asks: both come from other sites that set their own cookies. Used by ShowcaseBlocks.astro, ShowcaseUnits.astro and ShowcaseMedia.astro.
+
+### film.h
+- PT: O filme
+- EN: The film
+- FR: Le film
+
+### film.play
+- PT: Ver o filme
+- EN: Play the film
+- FR: Voir le film
+
+### film.note
+- PT: Filme de Shalu Investments. Toca no YouTube, que pode guardar os seus próprios cookies.
+- EN: Film by Shalu Investments. It plays on YouTube, which may set its own cookies.
+- FR: Film de Shalu Investments. Il se lit sur YouTube, qui peut déposer ses propres cookies.
+
+### views.h
+- PT: As vistas
+- EN: The views
+- FR: Les vues
+
+### views.p
+- PT: O rio, a ponte do Freixo e o Porto ao fundo, em imagens do promotor.
+- EN: The river, the Freixo bridge and Porto beyond, in the developer's renders.
+- FR: Le fleuve, le pont do Freixo et Porto au loin, dans les images du promoteur.
+
+### tour.h
+- PT: A visita 3D
+- EN: The 3D tour
+- FR: La visite 3D
+
+### tour.p
+- PT: Os cinco edifícios em maqueta 3D: escolha um edifício, um piso e uma casa, com a planta e as áreas.
+- EN: The five buildings as a 3D model: pick a building, a floor and a home, with its plan and areas.
+- FR: Les cinq immeubles en maquette 3D : choisissez un immeuble, un étage et un logement, avec son plan et ses surfaces.
+
+### tour.open
+- PT: Abrir a visita 3D
+- EN: Open the 3D tour
+- FR: Ouvrir la visite 3D
+
+### tour.note
+- PT: Abre a visita 3D de Shalu Investments, em property-sales-engine.com, que pode guardar os seus próprios cookies.
+- EN: Opens Shalu Investments' 3D tour from property-sales-engine.com, which may set its own cookies.
+- FR: Ouvre la visite 3D de Shalu Investments, sur property-sales-engine.com, qui peut déposer ses propres cookies.
+
+### tour.newtab
+- PT: Abrir num separador novo
+- EN: Open in a new tab
+- FR: Ouvrir dans un nouvel onglet
+
+### close
+- PT: Fechar
+- EN: Close
+- FR: Fermer
+
+### bld.h
+- PT: Cinco edifícios
+- EN: Five buildings
+- FR: Cinq immeubles
+
+### bld.p
+- PT: Os nomes são do promotor. As frações por tipologia são as publicadas para a primeira fase; a segunda fase ainda não tem números.
+- EN: The names are the developer's. Homes by typology as published for the first phase; the second phase has no figures yet.
+- FR: Les noms sont ceux du promoteur. Logements par typologie tels que publiés pour la première phase ; la deuxième phase n'a pas encore de chiffres.
+
+### bld.phase
+- PT: Fase {n}
+- EN: Phase {n}
+- FR: Phase {n}
+
+### bld.total
+- PT: Total
+- EN: Total
+- FR: Total
+
+### bld.nofig
+- PT: Por publicar
+- EN: Not yet published
+- FR: Pas encore publié
+
+### areas.h
+- PT: Áreas por tipologia
+- EN: Areas by typology
+- FR: Surfaces par typologie
+
+### areas.v
+- PT: {min} a {max} m²
+- EN: {min} to {max} m²
+- FR: {min} à {max} m²
+
+### homes.h
+- PT: Casas à venda, com preço publicado
+- EN: Homes for sale, with a published price
+- FR: Logements en vente, avec prix publié
+
+### homes.lede
+- PT: {n} casas anunciadas, de {min} a {max}.
+- EN: {n} homes listed, from {min} to {max}.
+- FR: {n} logements annoncés, de {min} à {max}.
+
+### col.typ
+- PT: Tipologia
+- EN: Typology
+- FR: Typologie
+
+### col.area
+- PT: Área anunciada
+- EN: Listed area
+- FR: Surface annoncée
+
+### col.out
+- PT: Exterior
+- EN: Outdoor
+- FR: Extérieur
+
+### col.price
+- PT: Preço pedido
+- EN: Asking price
+- FR: Prix demandé
+
+### out.balcony
+- PT: varanda
+- EN: balcony
+- FR: balcon
+
+### out.terrace
+- PT: terraço
+- EN: terrace
+- FR: terrasse
+
+### out.garden
+- PT: jardim
+- EN: garden
+- FR: jardin
+
+### out.and
+- PT: e
+- EN: and
+- FR: et
+
+### duplex
+- PT: Duplex
+- EN: Duplex
+- FR: Duplex
+
+### ask
+- PT: Pedir esta casa
+- EN: Ask about this home
+- FR: Demander ce logement
+
+### plans.h
+- PT: Plantas por tipologia
+- EN: Floor plans by typology
+- FR: Plans par typologie
+
+### amen.h
+- PT: No condomínio
+- EN: In the grounds
+- FR: Dans la résidence
+
+### amen.src
+- PT: Lista do promotor
+- EN: The developer's list
+- FR: Liste du promoteur

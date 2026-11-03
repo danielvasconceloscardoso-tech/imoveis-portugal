@@ -15,7 +15,7 @@ type Props = { id: number; n: string; s: string; c: string; r: string; coast: bo
 type Series = { n: string; r?: string; m?: string; m2: number | null; p5?: number };  // the latest median per m², the five-year change in %
 // Prompt 26 §1: partner projects (content/developers/projects.json); demos add theirs from an unlisted file (?demoproj=).
 type Project = { id: string; name: string; developer: string; muni: string; lon: number; lat: number; render?: string; credit?: string;
-  from: number | null; typologies: string[]; delivery?: string | null; url?: string; showcase?: string };
+  from: number | null; typologies: string[]; delivery?: string | null; url?: string; showcase?: string; tag?: string };
 type Metric = "m2" | "price";
 const KEY: Record<Metric, string> = { m2: "pv", price: "pv" };
 type Cfg = {
@@ -192,9 +192,9 @@ export function initMapExplorer(root: HTMLElement) {
     const here = projects.filter((x) => x.muni === slug);  // prompt 26 §1.4: the partner developers active in this area
     // Prompt 28 §2: "Partner developers here", each with its showcase page (the developer's homes, prices as published).
     if (here.length) {
-      const devs = [...new Map(here.filter((x) => x.showcase).map((x) => [x.developer, x.showcase!])).entries()];
+      const devs = [...new Map(here.filter((x) => x.showcase).map((x) => [x.developer, [x.showcase!, x.tag || L.sponsored] as const])).entries()];
       const tgt = cfg.embed ? ` target="_top"` : "";
-      h += `<div class="mapx-devs small"><p class="h-small">${L.partnersHere}</p>${devs.map(([d, u]) => `<p><a class="mapx-dev" href="${esc(u)}"${tgt}>${esc(d)} · ${L.openHomes}</a> <span class="tag">${L.sponsored}</span></p>`).join("")}`
+      h += `<div class="mapx-devs small"><p class="h-small">${L.partnersHere}</p>${devs.map(([d, [u, t]]) => `<p><a class="mapx-dev" href="${esc(u)}"${tgt}>${esc(d)} · ${L.openHomes}</a> <span class="tag">${esc(t)}</span></p>`).join("")}`
         + `<p>${here.map((x) => `<button type="button" class="linkish" data-proj="${x.id}">${x.name}</button>`).join(" · ")}</p></div>`;
     }
     else if (budget >= HIGH && !cfg.embed) h += `<p class="mapx-devs small"><a href="${cfg.links.devHref}">${L.devs}</a></p>`;
@@ -453,7 +453,7 @@ export function initMapExplorer(root: HTMLElement) {
     if (list) list.hidden = shown.length > 0;
     for (const p of shown) {
       const el = document.createElement("button"); el.type = "button"; el.className = "mapx-proj";
-      el.innerHTML = `<span>${p.name}<em>${L.sponsored}</em></span>`; el.setAttribute("aria-label", `${p.name} · ${p.developer} · ${L.sponsored}`);
+      el.innerHTML = `<span>${p.name}<em>${esc(p.tag || L.sponsored)}</em></span>`; el.setAttribute("aria-label", `${p.name} · ${p.developer} · ${p.tag || L.sponsored}`);
       el.addEventListener("click", (e) => { e.stopPropagation(); showProject(p); });
       markers.push(new ml.Marker({ element: el, anchor: "bottom" }).setLngLat([p.lon, p.lat]).addTo(map));
     }
@@ -466,13 +466,13 @@ export function initMapExplorer(root: HTMLElement) {
     const s = P?.munis[p.muni], m = byS.get(p.muni);
     const price = p.from ? L.pfrom.replace("{v}", eur.format(p.from)) : L.ponreq;
     const sim = `${cfg.links.sim}?price=${p.from ?? budget}&own=0&resident=0&mortgage=0`;
-    const ask = (to: "agency" | "developer") => to === "developer" && p.url ? `<a class="btn sm" href="${esc(p.url)}" target="_blank" rel="sponsored noopener">${L.paskdev}</a>`
+    const ask = (to: "agency" | "developer") => to === "developer" && p.url ? `<a class="btn sm" href="${esc(p.url)}" target="_blank" rel="${p.tag ? "noopener" : "sponsored noopener"}">${L.paskdev}</a>`
       : `<a class="btn sm" href="${cfg.consult}?project=${encodeURIComponent(p.name)}&place=${encodeURIComponent(m?.n || "")}">${cfg.routing === "choice" ? L.paskag : L.pask}</a>`;
     const routing = cfg.routing || "agency";
     // A partner's render is a base path (lib/projects.ts, as on the main map: "-800.webp"); a demo's is a full file name.
     const render = p.render ? (/\.(webp|jpe?g|png|avif)$/i.test(p.render) ? p.render : `${p.render}-800.webp`) : "";
     let h = render ? `<img src="${esc(render)}" alt="" width="640" height="400" loading="lazy">` : "";
-    h += `<div class="mapx-card-b"><p class="h-small">${m?.n || ""} · <span class="tag">${L.sponsored}</span></p><h3 tabindex="-1">${p.name}</h3><p class="small">${p.developer}</p>`;
+    h += `<div class="mapx-card-b"><p class="h-small">${m?.n || ""} · <span class="tag">${esc(p.tag || L.sponsored)}</span></p><h3 tabindex="-1">${p.name}</h3><p class="small">${p.developer}</p>`;
     h += `<p class="mapx-big mapx-big-s">${price}</p><ul class="mapx-facts small">`;
     if (p.typologies.length) h += `<li>${L.ptyp.replace("{v}", p.typologies.join(", "))}</li>`;
     if (p.delivery) h += `<li>${L.pdel.replace("{v}", p.delivery)}</li>`;

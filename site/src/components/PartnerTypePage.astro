@@ -14,7 +14,8 @@ interface Props { lang: Lang; ed: EdCode; type: PType; }
 const { lang, ed, type } = Astro.props;
 const k = type.key;
 // Part 2 (3 Nov): a developer reading this page can open a live showcase, to see how their project would look.
-const example = k === "developers" ? showcases(PROJECTS)[0]?.[0] : undefined;
+// The example of a developer page is a sponsor's (a project we show as our pick, without payment, is not an example of the offer).
+const example = k === "developers" ? showcases(PROJECTS).map((ps) => ps[0]).find((p) => !p.tag) : undefined;
 const kitLangs = type.kit.includes(lang) ? [lang, ...type.kit.filter((l) => l !== lang)] : type.kit;
 ---
 <V2 lang={lang} ed={ed} page="partners" title={`${c(`kit.${k}.h`, lang)} | Imóveis Portugal · ${edName(ed, lang)}`} description={c(`kit.${k}.p`, lang)} sticky={{ href: `${pathFor(lang, ed, "partners")}#contacto`, label: c("partners.cta", lang) }}>

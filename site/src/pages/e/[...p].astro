@@ -24,7 +24,7 @@ import Beacon from "../../components/Beacon.astro";
 import { ED_ORDER, LANGS } from "../../i18n";
 import { faqFor } from "../../lib/content";
 import { editionEvents, placeEvents } from "../../lib/events";
-import { PROJECTS } from "../../lib/projects";
+import { PROJECTS, rich } from "../../lib/projects";
 import { sim1Events } from "../../lib/sim1";
 
 export function getStaticPaths() {
@@ -39,9 +39,9 @@ export function getStaticPaths() {
     for (const s of sim1Events()) out.push(`${e}/sim1/${s}`);
     for (const k of ["map", "sims", "concierge", "path", "faq", "saved"]) out.push(`${e}/bar/${k}`, `${e}/nav/${k}`);
     for (const k of ["concierge", "back", "req", "map"]) out.push(`${e}/next/${k}`);
-    for (const p of PROJECTS) for (const id of [p.id, ...(p.units ?? []).map((u) => `${p.id}-${u.id}`)]) if (/^[a-z0-9-]+$/.test(id)) out.push(`${e}/save/home/${id}`, `${e}/unsave/home/${id}`);
+    for (const p of PROJECTS) for (const id of [p.id, ...(rich(p) ? [] : p.units ?? []).map((u) => `${p.id}-${u.id}`)]) if (/^[a-z0-9-]+$/.test(id)) out.push(`${e}/save/home/${id}`, `${e}/unsave/home/${id}`);
     out.push(`${e}/saved/go`);
-    for (const p of PROJECTS) for (const k of ["pin", "card", "req", "unit", "filter", "rel"]) out.push(`${e}/p/${p.id}/${k}`);
+    for (const p of PROJECTS) for (const k of ["pin", "card", "req", "unit", "filter", "rel", "film", "tour3d"]) out.push(`${e}/p/${p.id}/${k}`);
   }
   for (const m of munis) out.push(`s/${m}`, `save/region/${m}`, `unsave/region/${m}`);
   const per = editionEvents(), times = placeEvents();

@@ -13,7 +13,7 @@ import "../styles/slots.css";
 
 type Units = { typology: string; total: number; forSale: number; reserved?: number; sold?: number };
 type Block = { id: string; units: Units[] };
-interface Props { lang: Lang; ed: EdCode; project: { id: string; name: string; developer?: string; muni?: string; blocks?: Block[] } }
+interface Props { lang: Lang; ed: EdCode; project: { id: string; name: string; developer?: string; muni?: string; blocks?: Block[]; units?: { typology: string; price: number | null }[] } }
 const { lang, ed, project } = Astro.props;
 
 // Until the project data lands (the contract with the showcase): the Marble Terrace blocks as agreed.
@@ -22,8 +22,11 @@ const FALLBACK: Block[] = [
   { id: "B", units: [{ typology: "T1", total: 4, forSale: 4 }, { typology: "T2", total: 7, forSale: 7 }, { typology: "T3", total: 6, forSale: 6 }] },
   { id: "C", units: [{ typology: "T1", total: 5, forSale: 5 }, { typology: "T2", total: 5, forSale: 5 }, { typology: "T3", total: 7, forSale: 7 }, { typology: "T4", total: 1, forSale: 1 }] },
 ];
-const blocks = (project.blocks ?? FALLBACK)
-  .map((b) => ({ id: b.id, units: b.units.filter((u) => u.forSale > 0).map((u) => ({ t: u.typology, n: u.forSale })) }))
+// Prompt 66 (O'rizon): no blocks published, so one unnamed group of the typologies with a published price, without a count.
+const listedGroup: Block[] | undefined = !project.blocks && project.units?.length
+  ? [{ id: "", units: [...new Set(project.units.filter((u) => u.price).map((u) => u.typology))].sort().map((t) => ({ typology: t, total: 0, forSale: -1 })) }] : undefined;
+const blocks = (project.blocks ?? listedGroup ?? FALLBACK)
+  .map((b) => ({ id: b.id, units: b.units.filter((u) => u.forSale > 0 || u.forSale === -1).map((u) => ({ t: u.typology, n: Math.max(0, u.forSale) })) }))
   .filter((b) => b.units.length);
 
 const COUNTRY: Record<EdCode, Record<Lang, string>> = {

@@ -25,7 +25,51 @@ const avail = rows.filter((u) => u.status === "available").length, reserved = ro
 const types = [...new Set(rows.map((u) => u.typology))].sort();
 const status = (u: UnitRow) => (u.status === "available" ? k("available") : u.status === "reserved" ? c("showb.reserved", lang) : c("showb.sold", lang));
 const block = (ref: string) => ref.match(/^[A-Z]+/)?.[0] ?? "";
+// Prompt 66 (O'rizon): with no table from the developer, the homes from sale listings with a published price, grouped by
+// typology: typology, asking price, listed area, outdoor space. Never the listing agency, its reference or its link (D9).
+// The button opens the same request sheet with the typology chosen.
+const listed = !rows.length ? [...(p.units ?? [])].filter((u) => u.price).sort((a, b) => a.typology.localeCompare(b.typology) || (a.price ?? 0) - (b.price ?? 0)) : [];
+const ko = (x: string, v: Record<string, string | number> = {}) => c(`orz.${x}`, lang, v);
+const eur = new Intl.NumberFormat(locale, { style: "currency", currency: "EUR", maximumFractionDigits: 0 });
+const lt = [...new Set(listed.map((u) => u.typology))];
+const outL = (o?: { kinds: string[]; m2: number | null }) => {
+  if (!o?.kinds?.length) return "–";
+  const w = o.kinds.map((x) => ko(`out.${x}`));
+  const s = w.length > 1 ? `${w.slice(0, -1).join(", ")} ${ko("out.and")} ${w[w.length - 1]}` : w[0];
+  const t = s.charAt(0).toUpperCase() + s.slice(1);
+  return o.m2 != null ? `${t} · ${nf.format(o.m2)} m²` : t;
+};
+const prices = listed.map((u) => u.price!);
 ---
+{listed.length > 0 && <section class="su" aria-labelledby="su-h" data-su data-pid={p.id}>
+  <h2 id="su-h">{ko("homes.h")}</h2>
+  <p class="su-lede">{ko("homes.lede", { n: listed.length, min: eur.format(Math.min(...prices)), max: eur.format(Math.max(...prices)) })}</p>
+  <div class="su-filter" role="group" aria-label={k("filter")} data-su-filter hidden>
+    <button type="button" aria-pressed="true" data-t="">{k("filter.all")}</button>
+    {lt.map((t) => <button type="button" aria-pressed="false" data-t={t}>{t}</button>)}
+  </div>
+  <div class="su-scroll"><table class="su-tab su-listed">
+    <thead><tr>
+      <th scope="col">{ko("col.typ")}</th><th scope="col">{ko("col.price")}</th><th scope="col" class="su-r">{ko("col.area")}</th><th scope="col">{ko("col.out")}</th><th scope="col"><span class="su-vh">{ko("ask")}</span></th>
+    </tr></thead>
+    {lt.map((t) => (
+      <tbody data-su-floor>
+        <tr class="su-fh"><th scope="rowgroup" colspan="5">{t}</th></tr>
+        {listed.filter((u) => u.typology === t).map((u) => (
+          <tr class="su-row is-av" data-t={u.typology} data-st="available">
+            <th scope="row" class="su-ref">{u.typology}{u.out?.duplex && <span class="su-sub">{ko("duplex")}</span>}</th>
+            <td class="su-typ su-price" data-l={ko("col.price")}>{eur.format(u.price!)}</td>
+            <td class="su-r" data-l={ko("col.area")}>{u.area != null ? `${nf.format(u.area)} m²` : "–"}</td>
+            <td data-l={ko("col.out")}>{outL(u.out)}</td>
+            <td class="su-act"><button type="button" class="su-btn" data-req data-block="" data-typ={u.typology}>{ko("ask")}</button></td>
+          </tr>
+        ))}
+      </tbody>
+    ))}
+  </table></div>
+  <p class="su-small">{p.unitsNote?.[lang]}</p>
+</section>}
+
 {rows.length > 0 && <section class="su" aria-labelledby="su-h" data-su data-pid={p.id}>
   <h2 id="su-h">{k("units.h")}</h2>
   <p class="su-lede">{k("units.lede", { n: rows.length, a: avail, r: reserved })}</p>
@@ -88,6 +132,7 @@ const block = (ref: string) => ref.match(/^[A-Z]+/)?.[0] ?? "";
   .su-ln, .su-sub { display: block; white-space: nowrap; } .su-sub { color: var(--muted); font-size: 13px; }
   .su-row:not(.is-av) .su-st { color: var(--muted); } .su-row.is-av .su-st { font-weight: 600; }
   .su-pr { color: var(--muted); white-space: nowrap; }
+  .su-listed .su-price { font: 400 21px/1.2 var(--serif); white-space: nowrap; }
   .su-row[hidden], .su-tab tbody[hidden] { display: none; }
   @media (max-width: 760px) {
     .su-tab, .su-tab tbody, .su-tab tr, .su-tab th, .su-tab td { display: block; }
@@ -122,8 +167,8 @@ const block = (ref: string) => ref.match(/^[A-Z]+/)?.[0] ?? "";
       t = b.dataset.t || ""; bar.querySelectorAll("[data-t]").forEach((x) => x.setAttribute("aria-pressed", String(x === b))); apply();
       track(`${edOf()}/p/${pid}/filter`);
     }));
-    const a = bar.querySelector<HTMLButtonElement>("[data-av]")!;
-    a.addEventListener("click", () => { av = !av; a.setAttribute("aria-pressed", String(av)); apply(); track(`${edOf()}/p/${pid}/filter`); });
+    const a = bar.querySelector<HTMLButtonElement>("[data-av]");
+    a?.addEventListener("click", () => { av = !av; a.setAttribute("aria-pressed", String(av)); apply(); track(`${edOf()}/p/${pid}/filter`); });
     // The interest button opens the request sheet (scripts/request.ts, via [data-req]); this only counts it.
     box.addEventListener("click", (e) => { if ((e.target as HTMLElement).closest(".su-act [data-req]")) track(`${edOf()}/p/${pid}/unit`); });
   });

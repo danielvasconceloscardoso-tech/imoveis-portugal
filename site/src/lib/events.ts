@@ -43,7 +43,7 @@ export function editionEvents(): string[] {
   // The endpoint did not take the request and the ready-written e-mail was offered instead (3 Nov 2026).
   for (const f of ["concierge", "partner", "viewing"]) out.push(`flow/${f}/fallback`);
   for (const f of ["concierge", "partner", "viewing"] as FlowId[]) for (const s of flowSteps(f)) for (const k of ["step", "stop"]) out.push(`flow/${f}/${k}/${s}`);
-  for (const p of PROJECTS) for (const k of ["pin", "card", "req", "view", "share"]) out.push(`p/${p.id}/${k}`);
+  for (const p of PROJECTS) for (const k of ["pin", "card", "req", "view", "share", "film", "tour3d"]) out.push(`p/${p.id}/${k}`);
   for (const s of sim1Events()) out.push(`sim1/${s}`);
   for (const t of TOOLS) out.push(`sim/${t}/use`);
   for (const l of LAYERS) out.push(`map/layer/${l}`);

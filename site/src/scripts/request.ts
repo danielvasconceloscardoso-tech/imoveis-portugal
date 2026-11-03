@@ -57,7 +57,7 @@ export function initRequest() {
   let i = 0, dir = 1, doneView = false, opener: HTMLElement | null = null;
 
   const intentL = (v?: string) => (v ? T.intent[v] : "");
-  const unitL = (a: Ans) => (a.block && a.typ ? `${T.block} ${a.block} · ${a.typ}` : T.undecided);
+  const unitL = (a: Ans) => (a.typ ? (a.block ? `${T.block} ${a.block} · ${a.typ}` : a.typ) : T.undecided);
 
   // ------------------------------------------------------------ screens
   const head = () => `<div class="fl-head"><button type="button" class="fl-back" data-back ${i === 0 ? "hidden" : ""} aria-label="${esc(T.back)}">${ARROW}</button>
@@ -71,8 +71,8 @@ export function initRequest() {
     if (s === "intent") return `<h2 id="rq-q" class="fl-q" tabindex="-1">${esc(T.q1)}</h2><p class="fl-lede">${esc(T.l1.replace("{name}", C.project.name).replace("{dev}", C.project.developer))}</p>
       <div class="fl-opts" role="radiogroup" aria-labelledby="rq-q">${(["online", "inperson", "buy"] as const).map((v) => opt(v, T.intent[v], A.intent === v, T.intent[`${v}S`])).join("")}</div>`;
     if (s === "home") return `<h2 id="rq-q" class="fl-q" tabindex="-1">${esc(T.q2)}</h2><p class="fl-lede">${esc(T.l2)}</p>
-      ${C.blocks.map((b) => `<p class="rq-bk">${esc(T.block)} ${esc(b.id)}</p><div class="fl-opts fl-row rq-units" role="radiogroup" aria-label="${esc(T.block)} ${esc(b.id)}">${b.units.map((u) =>
-        opt(`${b.id}|${u.t}`, u.t, A.block === b.id && A.typ === u.t, T.forSale.replace("{n}", String(u.n)))).join("")}</div>`).join("")}
+      ${C.blocks.map((b) => `${b.id ? `<p class="rq-bk">${esc(T.block)} ${esc(b.id)}</p>` : ""}<div class="fl-opts fl-row rq-units" role="radiogroup" aria-label="${esc(b.id ? `${T.block} ${b.id}` : T.q2)}">${b.units.map((u) =>
+        opt(`${b.id}|${u.t}`, u.t, A.block === b.id && A.typ === u.t, u.n ? T.forSale.replace("{n}", String(u.n)) : "")).join("")}</div>`).join("")}
       <div class="fl-opts rq-und">${opt("|", T.undecided, A.block === "" && !A.typ)}</div>
       ${A.block !== undefined ? `<div class="fl-go"><button type="button" class="fl-btn" data-next>${esc(T.next)}</button></div>` : ""}`;
     if (s === "when") {
@@ -251,7 +251,7 @@ export function initRequest() {
   function open(pre?: { block?: string; typ?: string }) {
     opener = document.activeElement as HTMLElement;
     i = 0;  // always from the first question; earlier answers stay selected, so it is a few taps
-    if (pre?.block && C.blocks.some((b) => b.id === pre.block && b.units.some((u) => u.t === pre.typ))) { A.block = pre.block; A.typ = pre.typ; save(); }
+    if (pre?.typ && C.blocks.some((b) => b.id === (pre.block ?? "") && b.units.some((u) => u.t === pre.typ))) { A.block = pre.block ?? ""; A.typ = pre.typ; save(); }
     if (!sheet.hidden && sheet.classList.contains("is-open")) { render(); return; }
     sheet.hidden = false; back.hidden = false; lock(true);
     dir = 1; render(false);

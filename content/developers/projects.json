@@ -1,5 +1,5 @@
 {
- "_how": "Developer projects (prompts 26 §1 and 28 §2). partner=true: shown on the public map, the place card ('Partner developers here') and a showcase page, labelled 'Sponsored' (only once the developer has signed and paid, D6, D38). partner=false: shown only in that developer's private demo (/d/{demo}/). Facts only as published by the developer or its public listings, with the URL of every item in 'sources' and the date in 'checked'; prices exactly as published (null = on request). On the site, a partner's line must also be written natively in PT and FR ('lines': {pt, fr}); the English 'line' is used for demos. Built by scripts/developers/import.py. A hand-entered partner may add 'unitTable' (every home as the developer publishes it, shown on the showcase, no unit pages) and 'location' (stated facts with sources; distances are ours, straight line from OpenStreetMap).",
+ "_how": "Developer projects (prompts 26 §1 and 28 §2). partner=true: shown on the public map, the place card ('Partner developers here') and a showcase page, labelled 'Sponsored' (only once the developer has signed and paid, D6, D38). partner=false: shown only in that developer's private demo (/d/{demo}/). Facts only as published by the developer or its public listings, with the URL of every item in 'sources' and the date in 'checked'; prices exactly as published (null = on request). On the site, a partner's line must also be written natively in PT and FR ('lines': {pt, fr}); the English 'line' is used for demos. Built by scripts/developers/import.py. A hand-entered partner may add 'unitTable' (every home as the developer publishes it, shown on the showcase, no unit pages) and 'location' (stated facts with sources; distances are ours, straight line from OpenStreetMap). A project shown on the site without being a sponsor carries 'tag' {pt, en, fr} ('Seleção' / 'Our pick' / 'Sélection'), shown everywhere instead of 'Sponsored' (prompt 66); import.py keeps such a record as entered.",
  "projects": [
   {
    "id": "tomas-ribeiro-79",
@@ -320,19 +320,54 @@
    "developer": "Shalu Investments",
    "devSlug": "shalu-investments",
    "muni": "gondomar",
+   "region": "Norte",
+   "near": [
+    "Porto",
+    "Área Metropolitana do Porto",
+    "Grande Porto"
+   ],
    "lon": -8.56481,
    "lat": 41.1408,
    "line": "Gated condominium of about 200 apartments in five buildings on a 35,000 m² site on the Douro bank next to the Marina do Freixo, designed by Paulo Merlini (PMA), with outdoor pool, heated indoor pool with spa, gym, coworking lounge and playground; T1 to T4.",
+   "lines": {
+    "pt": "Cerca de 200 apartamentos, de T1 a T4, em cinco edifícios que descem em socalcos um terreno de 35 000 m² até ao Douro, junto à Marina do Freixo. Projeto de Paulo Merlini Architects; segundo o promotor, 95% das casas têm vista para o rio. Piscina exterior, spa com piscina interior aquecida, ginásio, sala polivalente, jardins, parque infantil, estacionamento fechado e arrecadação.",
+    "en": "About 200 apartments, T1 to T4, in five buildings that step down a 35,000 m² slope to the Douro beside the Marina do Freixo. Designed by Paulo Merlini Architects; the developer says 95% of the homes look onto the river. Outdoor pool, spa with a heated indoor pool, gym, multipurpose lounge, gardens, a playground, enclosed parking and storage.",
+    "fr": "Environ 200 appartements, du T1 au T4, dans cinq immeubles qui descendent en terrasses un terrain de 35 000 m² jusqu'au Douro, près de la Marina do Freixo. Conçu par Paulo Merlini Architects ; selon le promoteur, 95 % des logements donnent sur le fleuve. Piscine extérieure, spa avec piscine intérieure chauffée, salle de sport, salle polyvalente, jardins, aire de jeux, parking fermé et cave."
+   },
+   "summary": {
+    "pt": "200 apartamentos · T1 a T4 · 5 edifícios",
+    "en": "200 apartments · T1 to T4 · 5 buildings",
+    "fr": "200 appartements · T1 à T4 · 5 immeubles"
+   },
+   "tag": {
+    "pt": "Seleção",
+    "en": "Our pick",
+    "fr": "Sélection"
+   },
    "delivery": null,
-   "url": "https://www.essential-business.pt/2025/10/03/shalu-invests-e100-million-in-luxury-porto-project/",
-   "partner": false,
+   "url": "https://orizonliving.pt/",
+   "partner": true,
    "demo": "f658bd1eef",
-   "checked": "2026-10-26",
-   "render": "/d/f658bd1eef/img/hero-aerial-render-douro",
-   "credit": "O'rizon Living / Shalu Investments, via Essential Business (article featured image; no credit line shown)",
-   "gallery": [],
+   "checked": "2026-11-03",
+   "render": "/img/developers/orizon/aerial-douro",
+   "credit": "Shalu Investments (render, orizonliving.pt)",
+   "gallery": [
+    "/img/developers/orizon/aerial-douro",
+    "/img/developers/orizon/sunset-terraces",
+    "/img/developers/orizon/aerial-river",
+    "/img/developers/orizon/roof-terrace",
+    "/img/developers/orizon/gardens-river",
+    "/img/developers/orizon/garden-terrace",
+    "/img/developers/orizon/living-view",
+    "/img/developers/orizon/bedroom",
+    "/img/developers/orizon/spa-pool",
+    "/img/developers/orizon/gym",
+    "/img/developers/orizon/lounge",
+    "/img/developers/orizon/playground",
+    "/img/developers/orizon/walkway"
+   ],
    "credits": [
-    "O'rizon Living / Shalu Investments, via Essential Business"
+    "Shalu Investments (renders and films, orizonliving.pt)"
    ],
    "from": 360000,
    "typologies": [
@@ -352,7 +387,13 @@
      "price": 385000,
      "priceNote": "asking price as published on Imovirtual, EUR",
      "img": null,
-     "url": "https://www.imovirtual.com/pt/anuncio/apartamento-t1-com-varanda-em-condominio-privado-com-vista-rio-ID1iBWD"
+     "url": "https://www.imovirtual.com/pt/anuncio/apartamento-t1-com-varanda-em-condominio-privado-com-vista-rio-ID1iBWD",
+     "out": {
+      "kinds": [
+       "balcony"
+      ],
+      "m2": 21.6
+     }
     },
     {
      "id": "re2027-2bf210",
@@ -364,7 +405,13 @@
      "price": 390000,
      "priceNote": "asking price as published on Imovirtual, EUR",
      "img": null,
-     "url": "https://www.imovirtual.com/pt/anuncio/apartamento-t1-com-varanda-no-orizon-living-ID1iRU5"
+     "url": "https://www.imovirtual.com/pt/anuncio/apartamento-t1-com-varanda-no-orizon-living-ID1iRU5",
+     "out": {
+      "kinds": [
+       "balcony"
+      ],
+      "m2": 29.7
+     }
     },
     {
      "id": "re2027-2bgf10",
@@ -376,7 +423,14 @@
      "price": 360000,
      "priceNote": "asking price as published on Imovirtual, EUR",
      "img": null,
-     "url": "https://www.imovirtual.com/pt/anuncio/apartamento-t1-com-terraco-e-jardim-no-orizon-living-ID1iRrR"
+     "url": "https://www.imovirtual.com/pt/anuncio/apartamento-t1-com-terraco-e-jardim-no-orizon-living-ID1iRrR",
+     "out": {
+      "kinds": [
+       "terrace",
+       "garden"
+      ],
+      "m2": null
+     }
     },
     {
      "id": "re2027-2bn110",
@@ -388,7 +442,13 @@
      "price": 365000,
      "priceNote": "asking price as published on Imovirtual, EUR",
      "img": null,
-     "url": "https://www.imovirtual.com/pt/anuncio/apartamento-t1-com-jardim-no-orizon-living-ID1iRwE"
+     "url": "https://www.imovirtual.com/pt/anuncio/apartamento-t1-com-jardim-no-orizon-living-ID1iRwE",
+     "out": {
+      "kinds": [
+       "garden"
+      ],
+      "m2": null
+     }
     },
     {
      "id": "re2027-2bn201",
@@ -400,7 +460,14 @@
      "price": 615000,
      "priceNote": "asking price as published on Imovirtual, EUR",
      "img": null,
-     "url": "https://www.imovirtual.com/pt/anuncio/apartamento-t2-no-orizon-living-com-varanda-e-terraco-e-vistas-rio-ID1iRXF"
+     "url": "https://www.imovirtual.com/pt/anuncio/apartamento-t2-no-orizon-living-com-varanda-e-terraco-e-vistas-rio-ID1iRXF",
+     "out": {
+      "kinds": [
+       "balcony",
+       "terrace"
+      ],
+      "m2": 35.5
+     }
     },
     {
      "id": "re2027-2bn111",
@@ -412,7 +479,14 @@
      "price": 670000,
      "priceNote": "asking price as published on Imovirtual, EUR",
      "img": null,
-     "url": "https://www.imovirtual.com/pt/anuncio/t2-no-orizon-living-com-varanda-e-jardim-privativo-vistas-rio-ID1iMK3"
+     "url": "https://www.imovirtual.com/pt/anuncio/t2-no-orizon-living-com-varanda-e-jardim-privativo-vistas-rio-ID1iMK3",
+     "out": {
+      "kinds": [
+       "balcony",
+       "garden"
+      ],
+      "m2": 44.1
+     }
     },
     {
      "id": "re2027-2an106",
@@ -424,7 +498,14 @@
      "price": 699000,
      "priceNote": "asking price as published on Imovirtual, EUR",
      "img": null,
-     "url": "https://www.imovirtual.com/pt/anuncio/apartamento-t2-no-orizon-living-com-varanda-e-jardim-privativo-ID1iCJG"
+     "url": "https://www.imovirtual.com/pt/anuncio/apartamento-t2-no-orizon-living-com-varanda-e-jardim-privativo-ID1iCJG",
+     "out": {
+      "kinds": [
+       "balcony",
+       "garden"
+      ],
+      "m2": 46.6
+     }
     },
     {
      "id": "re2027-2agf02",
@@ -436,7 +517,13 @@
      "price": 775000,
      "priceNote": "asking price as published on Imovirtual, EUR",
      "img": null,
-     "url": "https://www.imovirtual.com/pt/anuncio/apartamento-t3-com-varanda-no-orizon-living-ID1iCKC"
+     "url": "https://www.imovirtual.com/pt/anuncio/apartamento-t3-com-varanda-no-orizon-living-ID1iCKC",
+     "out": {
+      "kinds": [
+       "balcony"
+      ],
+      "m2": 20.2
+     }
     },
     {
      "id": "re2027-2bf205",
@@ -448,7 +535,14 @@
      "price": 695000,
      "priceNote": "asking price as published on Imovirtual, EUR",
      "img": null,
-     "url": "https://www.imovirtual.com/pt/anuncio/apartamento-t3-duplex-com-varanda-vistas-rio-e-cidade-do-porto-ID1iRVg"
+     "url": "https://www.imovirtual.com/pt/anuncio/apartamento-t3-duplex-com-varanda-vistas-rio-e-cidade-do-porto-ID1iRVg",
+     "out": {
+      "kinds": [
+       "balcony"
+      ],
+      "m2": 10.3,
+      "duplex": true
+     }
     },
     {
      "id": "re2027-2bf401",
@@ -460,7 +554,14 @@
      "price": 975000,
      "priceNote": "asking price as published on Imovirtual, EUR",
      "img": null,
-     "url": "https://www.imovirtual.com/pt/anuncio/t3-em-condominio-privado-com-vistas-desafogadas-para-o-rio-douro-ID1if1I"
+     "url": "https://www.imovirtual.com/pt/anuncio/t3-em-condominio-privado-com-vistas-desafogadas-para-o-rio-douro-ID1if1I",
+     "out": {
+      "kinds": [
+       "balcony",
+       "terrace"
+      ],
+      "m2": 115.5
+     }
     },
     {
      "id": "re2027-2an102",
@@ -472,7 +573,13 @@
      "price": 1090000,
      "priceNote": "asking price as published on Imovirtual, EUR",
      "img": null,
-     "url": "https://www.imovirtual.com/pt/anuncio/apartamento-t4-no-orizon-living-com-varanda-vistas-rio-douro-ID1iSmG"
+     "url": "https://www.imovirtual.com/pt/anuncio/apartamento-t4-no-orizon-living-com-varanda-vistas-rio-douro-ID1iSmG",
+     "out": {
+      "kinds": [
+       "balcony"
+      ],
+      "m2": 53.3
+     }
     },
     {
      "id": "re2027-2agf01",
@@ -484,10 +591,28 @@
      "price": 1350000,
      "priceNote": "asking price as published on Imovirtual, EUR",
      "img": null,
-     "url": "https://www.imovirtual.com/pt/anuncio/t4-no-orizon-living-com-varandas-e-terraco-com-vistas-rio-douro-ID1iQ1o"
+     "url": "https://www.imovirtual.com/pt/anuncio/t4-no-orizon-living-com-varandas-e-terraco-com-vistas-rio-douro-ID1iQ1o",
+     "out": {
+      "kinds": [
+       "balcony",
+       "terrace"
+      ],
+      "m2": null
+     }
     }
    ],
    "sources": [
+    "https://orizonliving.pt/",
+    "https://orizonliving.pt/residences/",
+    "https://orizonliving.pt/location/",
+    "https://orizonliving.pt/story/",
+    "https://orizonliving.pt/3dtour/",
+    "https://www.youtube.com/watch?v=8N2uxKxSkno",
+    "https://www.youtube.com/watch?v=0t_LN6OECtI",
+    "https://nominatim.openstreetmap.org/search?q=Marina+do+Freixo&format=json",
+    "https://nominatim.openstreetmap.org/search?q=Avenida+dos+Aliados,+Porto&format=json",
+    "https://nominatim.openstreetmap.org/search?q=Esta%C3%A7%C3%A3o+de+Campanh%C3%A3&format=json",
+    "https://www.openstreetmap.org/#map=15/41.1408/-8.5648",
     "https://www.essential-business.pt/2025/10/03/shalu-invests-e100-million-in-luxury-porto-project/",
     "https://www.imovirtual.com/pt/anuncio/apartamento-t1-com-jardim-no-orizon-living-ID1iRwE",
     "https://www.imovirtual.com/pt/anuncio/apartamento-t1-com-terraco-e-jardim-no-orizon-living-ID1iRrR",
@@ -502,7 +627,220 @@
     "https://www.imovirtual.com/pt/anuncio/t3-em-condominio-privado-com-vistas-desafogadas-para-o-rio-douro-ID1if1I",
     "https://www.imovirtual.com/pt/anuncio/t4-no-orizon-living-com-varandas-e-terraco-com-vistas-rio-douro-ID1iQ1o"
    ],
-   "hideRefs": true
+   "hideRefs": true,
+   "pending": false,
+   "views": [
+    "/img/developers/orizon/sunset-terraces",
+    "/img/developers/orizon/aerial-river",
+    "/img/developers/orizon/roof-terrace",
+    "/img/developers/orizon/gardens-river",
+    "/img/developers/orizon/garden-terrace",
+    "/img/developers/orizon/living-view",
+    "/img/developers/orizon/bedroom"
+   ],
+   "amenityImgs": [
+    "/img/developers/orizon/spa-pool",
+    "/img/developers/orizon/gym",
+    "/img/developers/orizon/lounge",
+    "/img/developers/orizon/playground",
+    "/img/developers/orizon/walkway"
+   ],
+   "film": {
+    "id": "8N2uxKxSkno",
+    "poster": "/img/developers/orizon/aerial-dusk",
+    "title": "O'rizon Living",
+    "date": "2025-10-03",
+    "more": [
+     {
+      "id": "0t_LN6OECtI",
+      "poster": "/img/developers/orizon/living-view",
+      "title": {
+       "pt": "A história do projeto",
+       "en": "The story of the project",
+       "fr": "L'histoire du projet"
+      }
+     }
+    ]
+   },
+   "tour3d": {
+    "url": "https://www.orizon.property-sales-engine.com/",
+    "poster": "/img/developers/orizon/aerial-river",
+    "page": "https://orizonliving.pt/3dtour/"
+   },
+   "features": [
+    {
+     "pt": "Piscina exterior e spa com piscina interior aquecida",
+     "en": "Outdoor pool and a spa with a heated indoor pool",
+     "fr": "Piscine extérieure et spa avec piscine intérieure chauffée",
+     "card": true
+    },
+    {
+     "pt": "Ginásio equipado e sala polivalente",
+     "en": "Equipped gym and a multipurpose lounge",
+     "fr": "Salle de sport équipée et salle polyvalente",
+     "card": true
+    },
+    {
+     "pt": "Estacionamento privativo fechado e arrecadação para objetos e bicicletas",
+     "en": "Private enclosed parking and storage for belongings and bikes",
+     "fr": "Parking privé fermé et rangement pour affaires et vélos",
+     "card": true
+    },
+    {
+     "pt": "Jardins, parque infantil e condomínio fechado",
+     "en": "Gardens, a children's playground and a gated community",
+     "fr": "Jardins, aire de jeux et résidence fermée"
+    },
+    {
+     "pt": "Exposição a sul e a poente; vista de rio em 95% das casas, segundo o promotor",
+     "en": "South and west light; river views from 95% of the homes, according to the developer",
+     "fr": "Exposition sud et ouest ; vue sur le fleuve pour 95 % des logements, selon le promoteur"
+    },
+    {
+     "pt": "Três tipos de casa, nos nomes do promotor: Garden, Veranda e Horizon View",
+     "en": "Three kinds of home, in the developer's names: Garden, Veranda and Horizon View",
+     "fr": "Trois types de logement, selon les noms du promoteur : Garden, Veranda et Horizon View"
+    },
+    {
+     "pt": "Climatização central, piso de madeira multicamada, pavimentos e paredes cerâmicos, armários lacados",
+     "en": "Central climate control, multilayer wood floors, ceramic floors and walls, lacquered wood cabinets",
+     "fr": "Climatisation centrale, parquet multicouche, sols et murs en céramique, placards laqués"
+    },
+    {
+     "pt": "Janelas de correr do chão ao teto, iluminação LED no teto, fachada ventilada em cerâmica",
+     "en": "Floor-to-ceiling sliding windows, LED ceiling lighting, a ventilated ceramic façade",
+     "fr": "Baies coulissantes du sol au plafond, éclairage LED au plafond, façade ventilée en céramique"
+    }
+   ],
+   "featuresSource": "https://orizonliving.pt/residences/",
+   "typeAreas": [
+    {
+     "t": "T1",
+     "min": 61,
+     "max": 88
+    },
+    {
+     "t": "T2",
+     "min": 80,
+     "max": 124
+    },
+    {
+     "t": "T3",
+     "min": 125,
+     "max": 173
+    },
+    {
+     "t": "T4",
+     "min": 159,
+     "max": 203
+    }
+   ],
+   "buildings": [
+    {
+     "id": "Vista",
+     "phase": 1,
+     "units": {
+      "T1": 3,
+      "T2": 12,
+      "T3": 6,
+      "T4": 8
+     }
+    },
+    {
+     "id": "Sun",
+     "phase": 1,
+     "units": {
+      "T1": 9,
+      "T2": 25,
+      "T3": 15,
+      "T4": 7
+     }
+    },
+    {
+     "id": "River",
+     "phase": 2
+    },
+    {
+     "id": "Terra",
+     "phase": 2
+    },
+    {
+     "id": "Sky",
+     "phase": 2
+    }
+   ],
+   "buildingsSource": "https://orizonliving.pt/residences/",
+   "unitsNote": {
+    "pt": "Preços pedidos e áreas como publicados nos anúncios de venda no portal Imovirtual, verificados a 26 de outubro de 2026. Os anúncios não dizem se a área é útil ou bruta; o promotor publica as áreas por tipologia acima. O promotor não publica preços.",
+    "en": "Asking prices and areas as published in the sale listings on the Imovirtual portal, checked on 26 October 2026. The listings do not say whether the area is net or gross; the developer's areas by typology are above. The developer publishes no prices.",
+    "fr": "Prix demandés et surfaces tels que publiés dans les annonces de vente du portail Imovirtual, vérifiés le 26 octobre 2026. Les annonces ne précisent pas s'il s'agit de la surface habitable ou brute ; les surfaces du promoteur par typologie figurent plus haut. Le promoteur ne publie aucun prix."
+   },
+   "location": {
+    "address": {
+     "pt": "Largo Fonte Pedrinha, 4420-456 Valbom, Gondomar, na margem do Douro junto à Marina do Freixo, à saída de Campanhã.",
+     "en": "Largo Fonte Pedrinha, 4420-456 Valbom, Gondomar, on the Douro bank by the Marina do Freixo, just past Campanhã.",
+     "fr": "Largo Fonte Pedrinha, 4420-456 Valbom, Gondomar, sur la rive du Douro près de la Marina do Freixo, juste après Campanhã."
+    },
+    "marks": {
+     "pt": "A Marina do Freixo, o passeio ribeirinho, a ponte do Freixo, a estação de Campanhã (comboio, metro e autocarros), o Alameda Shopping, o Hospital de Santo António, a Universidade do Porto, a CJD International School, a Ribeira e as praias de mar.",
+     "en": "The Marina do Freixo, the riverside walk, the Freixo bridge, Campanhã station (rail, metro and buses), Alameda Shopping, the Hospital de Santo António, the University of Porto, the CJD International School, the Ribeira and the ocean beaches.",
+     "fr": "La Marina do Freixo, la promenade au bord du fleuve, le pont do Freixo, la gare de Campanhã (train, métro et bus), l'Alameda Shopping, l'Hospital de Santo António, l'Université de Porto, la CJD International School, la Ribeira et les plages de l'océan."
+    },
+    "marksSource": "https://orizonliving.pt/location/",
+    "distances": [
+     {
+      "pt": "Marina do Freixo",
+      "en": "Marina do Freixo",
+      "fr": "Marina do Freixo",
+      "m": 1050
+     },
+     {
+      "pt": "Ponte do Freixo",
+      "en": "Freixo bridge",
+      "fr": "Pont do Freixo",
+      "m": 1360
+     },
+     {
+      "pt": "Estação de Campanhã (comboio e metro)",
+      "en": "Campanhã station (rail and metro)",
+      "fr": "Gare de Campanhã (train et métro)",
+      "m": 1940
+     },
+     {
+      "pt": "Avenida dos Aliados, centro do Porto",
+      "en": "Avenida dos Aliados, Porto centre",
+      "fr": "Avenida dos Aliados, centre de Porto",
+      "m": 3940
+     },
+     {
+      "pt": "Praia de Lavadores",
+      "en": "Praia de Lavadores",
+      "fr": "Praia de Lavadores",
+      "m": 8750
+     },
+     {
+      "pt": "Aeroporto Francisco Sá Carneiro",
+      "en": "Francisco Sá Carneiro airport",
+      "fr": "Aéroport Francisco Sá Carneiro",
+      "m": 15430
+     }
+    ],
+    "distSource": "https://www.openstreetmap.org/#map=15/41.1408/-8.5648"
+   },
+   "sourcesShown": [
+    "https://orizonliving.pt/",
+    "https://orizonliving.pt/residences/",
+    "https://orizonliving.pt/location/",
+    "https://orizonliving.pt/story/",
+    "https://orizonliving.pt/3dtour/",
+    "https://www.youtube.com/watch?v=8N2uxKxSkno",
+    "https://www.youtube.com/watch?v=0t_LN6OECtI",
+    "https://nominatim.openstreetmap.org/search?q=Marina+do+Freixo&format=json",
+    "https://nominatim.openstreetmap.org/search?q=Avenida+dos+Aliados,+Porto&format=json",
+    "https://nominatim.openstreetmap.org/search?q=Esta%C3%A7%C3%A3o+de+Campanh%C3%A3&format=json",
+    "https://www.openstreetmap.org/#map=15/41.1408/-8.5648",
+    "https://www.essential-business.pt/2025/10/03/shalu-invests-e100-million-in-luxury-porto-project/"
+   ]
   },
   {
    "id": "prata-factory",
@@ -819,7 +1157,11 @@
    "devSlug": "id-investimentos-imobiliarios",
    "muni": "gondomar",
    "region": "Norte",
-   "near": ["Porto", "Área Metropolitana do Porto", "Grande Porto"],
+   "near": [
+    "Porto",
+    "Área Metropolitana do Porto",
+    "Grande Porto"
+   ],
    "lon": -8.5367,
    "lat": 41.1501,
    "line": "55 apartments in three blocks on Avenida Dr. Mário Soares in Gondomar, T1 to T4, with gym, sauna and Turkish bath, library and coworking, a garden with a water mirror, and a private parking box, solar panels and EV charging for every unit.",
@@ -836,7 +1178,7 @@
    "delivery": null,
    "url": "https://marbleterrace.pt/",
    "partner": true,
-   "pending": false,
+   "pending": true,
    "checked": "2026-10-28",
    "render": "/img/developers/marble-terrace/exterior",
    "credit": "ID Investimentos Imobiliários (render)",
@@ -1039,7 +1381,7 @@
    "delivery": null,
    "url": "https://marbleterrace.pt/viladoconde/",
    "partner": true,
-   "pending": false,
+   "pending": true,
    "checked": "2026-11-03",
    "render": "/img/developers/marble-terrace-vila-do-conde/exterior",
    "credit": "ID Investimentos Imobiliários (render)",
