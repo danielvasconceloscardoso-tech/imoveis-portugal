@@ -7378,3 +7378,170 @@ Prompt 37 §2 and prompt 43 §3: the Artigos hub and its four articles, built by
 - PT: Medimos a audiência sem cookies
 - EN: We measure our audience without cookies
 - FR: Nous mesurons l'audience sans cookies
+
+## mtvc
+
+### units.h
+- PT: Todas as frações
+- EN: Every unit
+- FR: Tous les logements
+
+### units.lede
+- PT: {n} frações: {a} disponíveis, {r} reservadas. Áreas em m², como publicadas pelo promotor.
+- EN: {n} units: {a} available, {r} reserved. Areas in m², as published by the developer.
+- FR: {n} logements : {a} disponibles, {r} réservés. Surfaces en m², telles que publiées par le promoteur.
+
+### filter
+- PT: Mostrar
+- EN: Show
+- FR: Afficher
+
+### filter.all
+- PT: Todas
+- EN: All
+- FR: Tous
+
+### filter.avail
+- PT: Só disponíveis
+- EN: Available only
+- FR: Disponibles seulement
+
+### col.unit
+- PT: Fração
+- EN: Unit
+- FR: Lot
+
+### col.sun
+- PT: Exposição
+- EN: Aspect
+- FR: Orientation
+
+### col.area
+- PT: Área habitável
+- EN: Living area
+- FR: Surface habitable
+
+### col.out
+- PT: Exterior
+- EN: Outdoor
+- FR: Extérieur
+
+### col.park
+- PT: Estacionamento
+- EN: Parking
+- FR: Stationnement
+
+### col.storage
+- PT: Arrumos
+- EN: Storage
+- FR: Cellier
+
+### col.gross
+- PT: Área bruta total
+- EN: Total gross area
+- FR: Surface brute totale
+
+### col.status
+- PT: Estado
+- EN: Status
+- FR: Statut
+
+### col.price
+- PT: Preço
+- EN: Price
+- FR: Prix
+
+### floor0
+- PT: Rés-do-chão
+- EN: Ground floor
+- FR: Rez-de-chaussée
+
+### floorn
+- PT: {n}.º piso
+- EN: Floor {n}
+- FR: Étage {n}
+
+### balcony
+- PT: Varanda {v} m²
+- EN: Balcony {v} m²
+- FR: Balcon {v} m²
+
+### terrace
+- PT: Terraço {v} m²
+- EN: Terrace {v} m²
+- FR: Terrasse {v} m²
+
+### garden
+- PT: Jardim {v} m²
+- EN: Garden {v} m²
+- FR: Jardin {v} m²
+
+### space
+- PT: Lugar, {n} viatura
+- EN: Space, {n} car
+- FR: Place, {n} voiture
+
+### box1
+- PT: Box, {n} viatura
+- EN: Box, {n} car
+- FR: Box, {n} voiture
+
+### box
+- PT: Box, {n} viaturas
+- EN: Box, {n} cars
+- FR: Box, {n} voitures
+
+### available
+- PT: Disponível
+- EN: Available
+- FR: Disponible
+
+### onrequest
+- PT: Sob consulta
+- EN: On request
+- FR: Sur demande
+
+### ask
+- PT: Tenho interesse
+- EN: I'm interested
+- FR: Ça m'intéresse
+
+### place.h
+- PT: A localização
+- EN: The location
+- FR: L'emplacement
+
+### place.src
+- PT: Fonte: promotor
+- EN: Source: the developer
+- FR: Source : le promoteur
+
+### place.marks
+- PT: Assinalados no mapa da brochura do promotor
+- EN: Marked on the developer's brochure map
+- FR: Indiqués sur la carte de la brochure du promoteur
+
+### place.marksrc
+- PT: Brochura do promotor
+- EN: The developer's brochure
+- FR: Brochure du promoteur
+
+### place.dist
+- PT: Distâncias em linha reta, a partir do OpenStreetMap
+- EN: Straight-line distances, from OpenStreetMap
+- FR: Distances à vol d'oiseau, d'après OpenStreetMap
+
+### place.distnote
+- PT: Cálculo nosso, em linha reta, a partir do OpenStreetMap; o percurso a pé ou de carro é mais longo.
+- EN: Our calculation, in a straight line from OpenStreetMap; the route on foot or by car is longer.
+- FR: Notre calcul, à vol d'oiseau d'après OpenStreetMap ; le trajet à pied ou en voiture est plus long.
+
+### related.h
+- PT: Do mesmo promotor
+- EN: By the same developer
+- FR: Du même promoteur
+
+### rq.inperson
+- PT: No local, em {place}
+- EN: On site, in {place}
+- FR: Sur place, à {place}

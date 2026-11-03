@@ -6,7 +6,7 @@ import TrustStrip from "../../../../../../components/TrustStrip.astro";
 import Showcase from "../../../../../../components/Showcase.astro";
 import RequestSheet from "../../../../../../components/RequestSheet.astro";
 import { LANGS, ED_ORDER, SLUGS, HTML_LANG, type Lang, type EdCode } from "../../../../../../i18n";
-import { PROJECTS, showcases, type Project } from "../../../../../../lib/projects";
+import { PROJECTS, showcases, sameDeveloper, type Project } from "../../../../../../lib/projects";
 import { RATE, EDITION_CUR } from "../../../../../../lib/content";
 import { c } from "../../../../../../lib/copy";
 import { PRICES } from "../../../../../../lib/prices";
@@ -22,10 +22,13 @@ const { ps } = Astro.props as { ps: Project[] };
 const base = `/${lang}/${ed}/${SLUGS[lang].partners}/${ps[0].devSlug}/${ps[0].muni}/`;
 const k = EDITION_CUR[ed];
 const title = c("show.title", lang, { developer: ps[0].developer, muni: (PRICES.munis[ps[0].muni] as any).n });
+// The same developer's showcases elsewhere (Marble Terrace Gondomar and Vila do Conde link to each other).
+const related = sameDeveloper(PROJECTS, ps[0].devSlug, ps[0].muni).map((o) => ({ id: o[0].id, name: o[0].name, place: (PRICES.munis[o[0].muni] as any).n,
+  href: `/${lang}/${ed}/${SLUGS[lang].partners}/${o[0].devSlug}/${o[0].muni}/`, render: o[0].render }));
 ---
 <V2 lang={lang} ed={ed} page="partners" title={`${title} | Imóveis Portugal`} description={ps[0].line ?? title} paths={Object.fromEntries(LANGS.map((l) => [l, `/${l}/${ed}/${SLUGS[l].partners}/${ps[0].devSlug}/${ps[0].muni}/`])) as Record<Lang, string>}>
   <Showcase lang={lang} locale={HTML_LANG[lang]} projects={ps} label={c("common.sponsored", lang)} href={(_, u) => `${base}${u.id}/`} cur={k ? { code: k, rate: RATE(k).rate } : undefined}
-    simHref={`${pathFor(lang, ed, "sims")}${SUB.cost[lang]}/`} mapHref={`${pathFor(lang, ed, "map")}?place=${ps[0].muni}&devs=1`} />
+    simHref={`${pathFor(lang, ed, "sims")}${SUB.cost[lang]}/`} mapHref={`${pathFor(lang, ed, "map")}?place=${ps[0].muni}&devs=1`} related={related} />
   {ps[0].blocks && <RequestSheet lang={lang} ed={ed} project={ps[0]} />}
   <TrustStrip lang={lang} ed={ed} />
 </V2>

@@ -4,12 +4,14 @@
 // and [data-req-advisor] shows the request as the partner agency's qualified advisor receives it. scripts/request.ts runs it.
 import { pathFor, type Lang, type EdCode } from "../i18n";
 import { config } from "../config";
+import { c } from "../lib/copy";
+import { PRICES } from "../lib/prices";
 import "../styles/flow.css";
 import "../styles/slots.css";
 
 type Units = { typology: string; total: number; forSale: number; reserved?: number; sold?: number };
 type Block = { id: string; units: Units[] };
-interface Props { lang: Lang; ed: EdCode; project: { id: string; name: string; developer?: string; blocks?: Block[] } }
+interface Props { lang: Lang; ed: EdCode; project: { id: string; name: string; developer?: string; muni?: string; blocks?: Block[] } }
 const { lang, ed, project } = Astro.props;
 
 // Until the project data lands (the contract with the showcase): the Marble Terrace blocks as agreed.
@@ -110,6 +112,9 @@ const T = {
     sampleName: "Acheteur Exemple", calTitle: "Visite · {project}", calDesc: "Créneau souhaité demandé via Imóveis Portugal. À confirmer par le conseiller.",
   },
 }[lang];
+// The in-person visit names the project's own municipality (Vila do Conde, 3 Nov 2026); Gondomar keeps its line as written.
+const place = project.muni ? (PRICES.munis[project.muni] as any)?.n : undefined;
+if (place && project.muni !== "gondomar") T.intent = { ...T.intent, inpersonS: c("mtvc.rq.inperson", lang, { place }) };
 
 const cfg = {
   lang, ed, locale: { pt: "pt-PT", en: "en-GB", fr: "fr-FR" }[lang], project: { id: project.id, name: project.name, developer: project.developer ?? "" },

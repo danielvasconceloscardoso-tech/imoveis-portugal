@@ -1,0 +1,130 @@
+---
+// Every home of a partner development, as the developer publishes it (Marble Terrace Vila do Conde, 3 Nov 2026): grouped by
+// floor, with typology, aspect, living area, outdoor space, parking, storage, total gross area, status and "On request"
+// where a price would be (none published). An available home's button opens the showcase's request sheet pre-filled with
+// block and typology ([data-req], D66): no second form. A table on desktop, one card per home on a phone; a filter by
+// typology and "available only" (without JavaScript every home shows). Wording: COPY_DECK.md "mtvc.*" and "showb.*".
+// Styles are inline so the other showcase pages (Gondomar) keep their stylesheet as it is.
+import type { Lang } from "../i18n";
+import type { Project, UnitRow } from "../lib/projects";
+import { c } from "../lib/copy";
+
+interface Props { lang: Lang; locale: string; p: Project; }
+const { lang, locale, p } = Astro.props;
+const rows = p.unitTable ?? [];
+const k = (x: string, v: Record<string, string | number> = {}) => c(`mtvc.${x}`, lang, v);
+const nf = new Intl.NumberFormat(locale, { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+const m2 = (v: number | null) => (v == null ? "–" : `${nf.format(v)}`);
+// The developer writes the aspect in Portuguese (SO = south-west, NO = north-west); English readers get SW and NW.
+const sun = (s: string) => (lang === "en" ? s.replace(/SO/g, "SW").replace(/NO/g, "NW") : s);
+const out = (u: UnitRow) => [u.balcony && k("balcony", { v: nf.format(u.balcony) }), u.terrace && k("terrace", { v: nf.format(u.terrace) }), u.garden && k("garden", { v: nf.format(u.garden) })].filter(Boolean) as string[];
+const park = (u: UnitRow) => (!u.parking ? "–" : u.parking.kind === "space" ? k("space", { n: u.parking.cars }) : k(u.parking.cars === 1 ? "box1" : "box", { n: u.parking.cars }));
+const floors = [...new Set(rows.map((u) => u.floor))].sort((a, b) => a - b);
+const floorL = (f: number) => (f === 0 ? k("floor0") : k("floorn", { n: f }));
+const avail = rows.filter((u) => u.status === "available").length, reserved = rows.filter((u) => u.status === "reserved").length;
+const types = [...new Set(rows.map((u) => u.typology))].sort();
+const status = (u: UnitRow) => (u.status === "available" ? k("available") : u.status === "reserved" ? c("showb.reserved", lang) : c("showb.sold", lang));
+const block = (ref: string) => ref.match(/^[A-Z]+/)?.[0] ?? "";
+---
+{rows.length > 0 && <section class="su" aria-labelledby="su-h" data-su data-pid={p.id}>
+  <h2 id="su-h">{k("units.h")}</h2>
+  <p class="su-lede">{k("units.lede", { n: rows.length, a: avail, r: reserved })}</p>
+  <div class="su-filter" role="group" aria-label={k("filter")} data-su-filter hidden>
+    <button type="button" aria-pressed="true" data-t="">{k("filter.all")}</button>
+    {types.map((t) => <button type="button" aria-pressed="false" data-t={t}>{t}</button>)}
+    <button type="button" class="su-av" aria-pressed="false" data-av>{k("filter.avail")}</button>
+  </div>
+  <div class="su-scroll"><table class="su-tab">
+    <thead><tr>
+      <th scope="col">{k("col.unit")}</th><th scope="col">{c("showb.typ", lang)}</th><th scope="col">{k("col.sun")}</th><th scope="col" class="su-r">{k("col.area")}</th>
+      <th scope="col">{k("col.out")}</th><th scope="col">{k("col.park")}</th><th scope="col" class="su-r">{k("col.storage")}</th><th scope="col" class="su-r">{k("col.gross")}</th>
+      <th scope="col">{k("col.status")}</th><th scope="col">{k("col.price")}</th><th scope="col"><span class="su-vh">{k("ask")}</span></th>
+    </tr></thead>
+    {floors.map((f) => (
+      <tbody data-su-floor>
+        <tr class="su-fh"><th scope="rowgroup" colspan="11">{floorL(f)}</th></tr>
+        {rows.filter((u) => u.floor === f).map((u) => (
+          <tr class={`su-row ${u.status === "available" ? "is-av" : ""}`} data-t={u.typology} data-st={u.status}>
+            <th scope="row" class="su-ref">{u.ref}</th>
+            <td class="su-typ" data-l={c("showb.typ", lang)}>{u.typology}</td>
+            <td data-l={k("col.sun")}>{sun(u.sun)}</td>
+            <td class="su-r su-big" data-l={k("col.area")}>{m2(u.dwelling)} m²</td>
+            <td data-l={k("col.out")}>{out(u).length ? out(u).map((x, i) => <span class="su-ln">{x}</span>) : "–"}</td>
+            <td data-l={k("col.park")}>{park(u)}{u.parking?.area != null && <span class="su-sub">{m2(u.parking.area)} m²</span>}</td>
+            <td class="su-r" data-l={k("col.storage")}>{u.storage == null ? "–" : `${m2(u.storage)} m²`}</td>
+            <td class="su-r" data-l={k("col.gross")}>{m2(u.gross)} m²</td>
+            <td class="su-st" data-l={k("col.status")}>{status(u)}</td>
+            <td class="su-pr" data-l={k("col.price")}>{u.price ? new Intl.NumberFormat(locale, { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(u.price) : k("onrequest")}</td>
+            <td class="su-act">{u.status === "available" && <button type="button" class="su-btn" data-req data-block={block(u.ref)} data-typ={u.typology} data-unit={u.ref}>{k("ask")}</button>}</td>
+          </tr>
+        ))}
+      </tbody>
+    ))}
+  </table></div>
+  <p class="su-small">{c("showb.checked", lang, { date: new Intl.DateTimeFormat(locale, { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" }).format(new Date(`${p.availabilityChecked}T12:00:00Z`)) })}{" "}{p.availabilitySource && <a href={p.availabilitySource} rel="noopener">{c("showb.source", lang)}</a>}{" "}{p.unitTableNote?.[lang]}</p>
+</section>}
+
+<style is:inline>
+  .su { max-width: 1120px; margin: 0 auto; padding: 40px 24px 8px; }
+  .su h2 { font: 400 28px/1.15 var(--serif); margin: 0 0 16px; }
+  .su-lede { margin: 0 0 16px; color: var(--muted); }
+  .su-small { font-size: 13px; color: var(--muted); } .su-small a { color: inherit; }
+  .su-vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .su-btn { font: 500 13px/1 var(--sans); letter-spacing: .04em; padding: 10px 14px; border: 1px solid var(--ink); background: transparent; color: var(--ink); border-radius: 999px; cursor: pointer; white-space: nowrap; transition: background .2s, color .2s; }
+  .su-btn:hover { background: var(--ink); color: var(--bg, #fff); }
+  .su-filter { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; }
+  .su-filter[hidden] { display: none; }
+  .su-filter button { font: 500 13px/1 var(--sans); padding: 10px 14px; min-height: 40px; border: 1px solid color-mix(in srgb, var(--ink) 30%, transparent); border-radius: 999px; background: transparent; color: var(--ink); cursor: pointer; transition: background .2s, color .2s; }
+  .su-filter button[aria-pressed="true"] { background: var(--ink); color: var(--bg, #fff); border-color: var(--ink); }
+  .su-filter .su-av { margin-left: auto; }
+  .su-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .su-tab { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .su-tab th, .su-tab td { padding: 10px 8px; text-align: left; vertical-align: top; border-bottom: 1px solid color-mix(in srgb, var(--ink) 14%, transparent); }
+  .su-tab thead th { font: 500 11px/1.2 var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); vertical-align: bottom; }
+  .su-tab .su-r { text-align: right; white-space: nowrap; }
+  .su-tab thead .su-r { white-space: normal; }
+  .su-fh th { font: 400 21px/1.2 var(--serif); padding-top: 24px; border-bottom: 1px solid var(--ink); }
+  .su-ref { font-weight: 600; white-space: nowrap; }
+  .su-ln, .su-sub { display: block; white-space: nowrap; } .su-sub { color: var(--muted); font-size: 13px; }
+  .su-row:not(.is-av) .su-st { color: var(--muted); } .su-row.is-av .su-st { font-weight: 600; }
+  .su-pr { color: var(--muted); white-space: nowrap; }
+  .su-row[hidden], .su-tab tbody[hidden] { display: none; }
+  @media (max-width: 760px) {
+    .su-tab, .su-tab tbody, .su-tab tr, .su-tab th, .su-tab td { display: block; }
+    .su-tab thead { display: none; }
+    .su-fh th { padding: 24px 0 8px; }
+    .su-tab .su-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; padding: 16px 0; border-bottom: 1px solid color-mix(in srgb, var(--ink) 14%, transparent); }
+    .su-tab .su-row[hidden] { display: none; }
+    .su-tab .su-row > * { border: 0; padding: 0; text-align: left; }
+    .su-row .su-ref { font: 400 21px/1.2 var(--serif); }
+    .su-tab .su-row .su-typ { font: 400 21px/1.2 var(--serif); text-align: right; }
+    .su-row .su-typ::before { display: none; }
+    .su-row td::before { content: attr(data-l); display: block; font: 500 11px/1.4 var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-top: 8px; }
+    .su-row .su-act { grid-column: 1 / -1; } .su-row .su-act:empty { display: none; }
+    .su-row .su-act .su-btn { margin-top: 12px; width: 100%; padding: 14px 16px; }
+    .su-tab .su-r { white-space: normal; }
+    .su-filter .su-av { margin-left: 0; }
+  }
+</style>
+
+<script>
+  import { track, edOf } from "../lib/track";
+  // Filter by typology and "available only"; a floor with nothing left to show folds away. One count per filter used.
+  document.querySelectorAll<HTMLElement>("[data-su]").forEach((box) => {
+    const bar = box.querySelector<HTMLElement>("[data-su-filter]")!, pid = box.dataset.pid || "";
+    bar.hidden = false;
+    let t = "", av = false;
+    const apply = () => {
+      box.querySelectorAll<HTMLElement>(".su-row").forEach((r) => { r.hidden = (!!t && r.dataset.t !== t) || (av && r.dataset.st !== "available"); });
+      box.querySelectorAll<HTMLElement>("[data-su-floor]").forEach((b) => { b.hidden = !b.querySelector(".su-row:not([hidden])"); });
+    };
+    bar.querySelectorAll<HTMLButtonElement>("[data-t]").forEach((b) => b.addEventListener("click", () => {
+      t = b.dataset.t || ""; bar.querySelectorAll("[data-t]").forEach((x) => x.setAttribute("aria-pressed", String(x === b))); apply();
+      track(`${edOf()}/p/${pid}/filter`);
+    }));
+    const a = bar.querySelector<HTMLButtonElement>("[data-av]")!;
+    a.addEventListener("click", () => { av = !av; a.setAttribute("aria-pressed", String(av)); apply(); track(`${edOf()}/p/${pid}/filter`); });
+    // The interest button opens the request sheet (scripts/request.ts, via [data-req]); this only counts it.
+    box.addEventListener("click", (e) => { if ((e.target as HTMLElement).closest(".su-act [data-req]")) track(`${edOf()}/p/${pid}/unit`); });
+  });
+</script>

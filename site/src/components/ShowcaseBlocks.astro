@@ -8,9 +8,13 @@ import type { Lang } from "../i18n";
 import { type Project, img } from "../lib/projects";
 import { PRICES, LAST } from "../lib/prices";
 import { c } from "../lib/copy";
+import ShowcaseUnits from "./ShowcaseUnits.astro";
+import ShowcasePlace from "./ShowcasePlace.astro";
+import ShowcaseRelated from "./ShowcaseRelated.astro";
 
-interface Props { lang: Lang; p: Project; label: string; locale: string; simHref?: string; mapHref?: string; }
-const { lang, p, label, locale, simHref, mapHref } = Astro.props;
+// related: the developer's showcases in other municipalities ("By the same developer", 3 Nov 2026).
+interface Props { lang: Lang; p: Project; label: string; locale: string; simHref?: string; mapHref?: string; related?: { id: string; name: string; place: string; href: string; render?: string | null }[]; }
+const { lang, p, label, locale, simHref, mapHref, related = [] } = Astro.props;
 const s = PRICES.munis[p.muni] as any;
 const k = (x: string, v: Record<string, string | number> = {}) => c(`showb.${x}`, lang, v);
 const money = (v: number) => new Intl.NumberFormat(locale, { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(v);
@@ -44,7 +48,7 @@ const credits = (p.credits ?? []).join("; ");
 
   {p.features?.length && <section class="sb-sec">
     <h2>{k("features")}</h2>
-    <ul class="sb-feat">{p.features.map((f) => <li>{f[lang]}</li>)}</ul>
+    <ul class="sb-feat">{p.features.map((f) => <li>{f[lang]}</li>)}</ul>{p.featuresNote?.[lang] && <p class="sb-small">{p.featuresNote[lang]}</p>}
   </section>}
 
   <section class="sb-sec" aria-labelledby="sb-avail">
@@ -65,12 +69,12 @@ const credits = (p.credits ?? []).join("; ");
       ))}
     </table></div>
     <p class="sb-small">{k("checked", { date: date(p.availabilityChecked) })} {p.availabilitySource && <a href={p.availabilitySource} rel="noopener">{k("source")}</a>} {p.availabilityNote?.[lang]}</p>
-  </section>
+  </section>{p.unitTable && p.unitTable.length > 0 && <ShowcaseUnits lang={lang} locale={locale} p={p} />}
 
   {mapHref && <section class="sb-sec">
     <h2>{k("map")}</h2>
     <a class="sb-map" href={mapHref}><img src="/img/map3-poster-1200.webp" alt="" width="1200" height="693" loading="lazy" /><span>{k("maplink", { muni: s.n })} →</span></a>
-  </section>}
+  </section>}{p.location && <ShowcasePlace lang={lang} locale={locale} p={p} />}
 
   <aside class="sb-sec sb-ctx" aria-label={c("show.ctx", lang, { muni: s.n })}>
     <h2>{c("show.ctx", lang, { muni: s.n })}</h2>
@@ -94,6 +98,8 @@ const credits = (p.credits ?? []).join("; ");
     </dl>
     {simHref && <p><a href={simHref} data-sbfull>{k("simfull")} →</a></p>}
   </section>
+
+  {related.length > 0 && <ShowcaseRelated lang={lang} from={p.id} developer={p.developer} items={related} />}
 
   <footer class="sb-sec sb-foot">
     <p class="sb-cta"><button type="button" class="sb-btn sb-btn-p" data-req>{k("visit")}</button></p>
