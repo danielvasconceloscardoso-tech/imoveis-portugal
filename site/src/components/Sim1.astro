@@ -2,7 +2,7 @@
 // The one-screen simulator (night of 3 Nov 2026, part 3) at the top of the calculators page: the price, the region,
 // what kind of home, what for and how the reader pays, as a slider and taps; the total, the taxes, the mortgage, the
 // monthly payment and the space the price buys in each region update as they move. Maths: lib/sims.ts through
-// lib/sim1.ts (never re-implemented); prices per m²: public/data/prices.json (INE). Each figure carries its source.
+// lib/sim1.ts (never re-implemented); prices per m²: src/data/prices.json via lib/prices (INE, latest market median). Each figure carries its source.
 // Signals (lib/track.ts): /e/{ed}/sim1/... for slider bands, taps, rows opened and next steps; no amounts beyond bands.
 // Wording: COPY_DECK.md "sim1.*" (and the calculators' own "sims.r.*" labels).
 import { HTML_LANG, pathFor, type Lang, type EdCode } from "../i18n";

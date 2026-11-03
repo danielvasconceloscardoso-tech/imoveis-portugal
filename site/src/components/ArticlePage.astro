@@ -68,7 +68,8 @@ if (art === "golf") Object.assign(V, {
   can: away("Canidelo"), cas: away("Cascais e Estoril"), sil: away("Silvalde"),
   alm: e(parish("Almancil").parish_median_eur_m2!), lou: e(parish("Almancil").municipality_median_eur_m2!),
 });
-if (art === "method") Object.assign(V, { rent: lang === "en" ? `€${nf.format(ptP.rq[LAST]!)}` : `${nf.format(ptP.rq[LAST]!)} €`, yield: n1.format(ptP.yield!) });
+// "method" describes the gross yield without figures (acceptance line 2, 3 Nov 2026): Portugal's median rent and gross yield
+// moved to the paid analysis (MapAnalysisPage.astro, COPY_DECK.md "gate5.a.rent.pt").
 
 // The copy: "a" the answer, "i.N" the opening paragraphs, "sN.q" and "sN.1"… the sections, "fN.q" and "fN.a" the follow-ups.
 const K = (k: string) => `art.${art}.${k}`;

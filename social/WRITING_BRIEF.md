@@ -26,7 +26,7 @@ content/inbox/week-NN/ at the same time; read them if they exist, but do not wai
 ## Rules on top of the playbook
 
 - Weeks 1–3 are before the launch: the site is live, the newsletter's first issue is Thursday 3 December, so actions are "Subscribe: link in bio" or the pillar's page; say "from 1 December" where the launch matters. Week 4 is the launch week.
-- Every figure from content/facts/facts.csv or site/public/data/prices.json, computed with Python; every post lists its fact ids in `sources:`. D34: no single town as the punchline; comparisons use Lisbon, Porto, Cascais, Comporta (Grândola, municipality median), Algarve (Loulé), Madeira (Funchal). Foreign prices only lu-m2-2026q2, fr-m2-2026q3, ch-ge-m2-2024 with their method line.
+- Every figure from content/facts/facts.csv or site/src/data/prices.json, computed with Python; every post lists its fact ids in `sources:`. D34: no single town as the punchline; comparisons use Lisbon, Porto, Cascais, Comporta (Grândola, municipality median), Algarve (Loulé), Madeira (Funchal). Foreign prices only lu-m2-2026q2, fr-m2-2026q3, ch-ge-m2-2024 with their method line.
 - Any mention of the agency carries `partner_status: pending-agreement` in front matter and is not to be scheduled until it is signed. Prefer the lawyer, bank, tax adviser or money-transfer categories, unnamed.
 - Every 7.5% IMT mention is under legal review: say it exactly as facts.csv does.
 - No emojis in images; at most one in a caption. No banned words; no em-dash; no rhetorical-question headlines (a reader-question card's `q` is the reader's own words and is fine).

@@ -1,5 +1,5 @@
 // D83 part 2: the map in three depths, the parts shared at build time by the map, the comparison page and the paid
-// analysis. Data: site/public/data/map/tiles.json (scripts/map-data/tiles.py), prices.json, map/layers.json.
+// analysis. Data: site/public/data/map/tiles.json (scripts/map-data/tiles.py), src/data/prices.json and src/data/layers.json (build time only).
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { config } from "../config";

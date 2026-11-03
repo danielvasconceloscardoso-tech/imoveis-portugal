@@ -7,7 +7,7 @@ launch issue content/inbox/week-04/newsletter/us-en.md (the register to match).
 
 ## Hard rules
 
-1. **Every figure comes from content/facts/facts.csv** (cite its id in `sources:`; in pillar pages also inline as `[[fact-id]]`) **or from site/public/data/prices.json** (INE medians per m² by municipality, key `munis.<slug>.m2[-1]` for Q2 2026, `[0]` for Q1 2016; `g10` is the ten-year change in %, `yield` the gross yield). Read the fact's value and notes before using it. If a number you want is not there, do not use it. Never invent a number, a person, a quote, a reader question or a listing.
+1. **Every figure comes from content/facts/facts.csv** (cite its id in `sources:`; in pillar pages also inline as `[[fact-id]]`) **or from site/src/data/prices.json** (INE medians per m² by municipality, key `munis.<slug>.m2[-1]` for Q2 2026, `[0]` for Q1 2016; `g10` is the ten-year change in %, `yield` the gross yield). Read the fact's value and notes before using it. If a number you want is not there, do not use it. Never invent a number, a person, a quote, a reader question or a listing.
 2. **Currency:** amounts in euros, plus the reader's currency where it helps: CHF (ecb-eur-chf), USD (ecb-eur-usd), BRL (ecb-eur-brl), ILS (ecb-eur-ils), with the ECB reference rate and its date from facts.csv. Compute with Python; round sensibly.
 3. **D34:** no town-against-town punchlines. When places are compared, use Lisbon, Porto, Cascais, Comporta (say "Grândola, Comporta's municipality, municipality median"), the Algarve (Loulé) and Madeira (Funchal). Never Gondomar as a comparison.
 4. **D52:** never the word "private" / "privado" / "privé" for our services; no "luxury", "premium", "exclusive".

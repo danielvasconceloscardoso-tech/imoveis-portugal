@@ -46,7 +46,7 @@ node scripts/check-parity.mjs    # PT / EN / FR parity
 | site/src/components/PathPage.astro | "Passo a passo", the buy and sell route |
 | site/src/styles/d2.css | Design v2 styles (D50/D60 identity) |
 | site/src/i18n.ts, site/src/lib/copy.ts, content/copy/COPY_DECK.md | Languages, editions and every text on the site |
-| site/public/data/prices.json, content/facts/facts.csv | INE prices and rents, and every sourced fact |
+| site/src/data/prices.json (build time only; the free fields in site/public/data/prices.json), content/facts/facts.csv | INE prices and rents, and every sourced fact |
 | content/facts/golf/courses.csv | Our golf course list |
 | site/public/img/v2/, content/media/SOURCES.md | Photographs and their licences |
 | site/worker/index.js | The only server code: /api/* (request forms); everything else is static |

@@ -1,7 +1,7 @@
 """D83 part 2: the data behind the map's tiles, in one compact file, site/public/data/map/tiles.json (public statistics only).
 
-Reads what the site already publishes (site/public/data/prices.json: INE median €/m² per quarter; data/map/layers.json;
-data/map/parishes.json; data/map/munis.topo.json) and the partner developments' published prices
+Reads the build-time data (site/src/data/prices.json: INE median €/m² per quarter; src/data/layers.json; src/data/parishes.json)
+and the public map outlines (site/public/data/map/munis.topo.json) and the partner developments' published prices
 (content/developers/projects.json, partners only), plus, when given, the folder of official figures gathered for the tiles
 (content/facts/map/tiles/ by default, or --src DIR: INE finest cuts, Copernicus, APA, airports, schools, hospitals; the files it
 understands are listed in tiles_src.py).
@@ -32,9 +32,10 @@ ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 PUB = os.path.join(ROOT, "site", "public", "data")
 J = lambda *p: json.load(open(os.path.join(*p), encoding="utf8"))
 
-prices = J(PUB, "prices.json")
-layers = J(PUB, "map", "layers.json")
-pars = J(PUB, "map", "parishes.json")
+SRC = os.path.join(ROOT, "site", "src", "data")  # build time only (ten years, rents, yields: the paid analysis)
+prices = J(SRC, "prices.json")
+layers = J(SRC, "layers.json")
+pars = J(SRC, "parishes.json")
 topo = J(PUB, "map", "munis.topo.json")
 projects = J(ROOT, "content", "developers", "projects.json")["projects"]
 Q = prices["quarters"]; LAST = len(Q) - 1

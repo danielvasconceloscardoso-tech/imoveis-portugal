@@ -16,7 +16,7 @@ import { purchase } from "../../../lib/sims";
 
 export function getStaticPaths() { return DEMOS.map((d) => ({ params: { token: d.token } })); }
 const d = DEMOS.find((x) => x.token === Astro.params.token)!;
-const layers = JSON.parse(readFileSync(join(process.cwd(), "public", "data", "map", "layers.json"), "utf8"));
+const layers = JSON.parse(readFileSync(join(process.cwd(), "src", "data", "layers.json"), "utf8"));
 const nf = new Intl.NumberFormat("en-US"), nf1 = new Intl.NumberFormat("en-US", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 const money = (v: number, cur = "EUR") => new Intl.NumberFormat("en-US", { style: "currency", currency: cur, maximumFractionDigits: 0 }).format(v);
 const q = PRICES.quarters[LAST], ql = `Q${q.slice(-1)} ${q.slice(0, 4)}`;

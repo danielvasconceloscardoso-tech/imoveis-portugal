@@ -7318,9 +7318,9 @@ Prompt 37 §2 and prompt 43 §3: the Artigos hub and its four articles, built by
 - FR: Rendement brut : le loyer médian au m² fois 12, divisé par le prix médian au m². Il porte sur douze mois jusqu'au {q}.{sRent}
 
 ### method.s4.2
-- PT: As rendas são as dos novos contratos. Em Portugal, a mediana era {rent} por m² ao mês: {yield}% brutos.{sRent}
-- EN: Rents are those of new lease contracts. In Portugal, the median rent was {rent} per m² a month, a gross yield of {yield}%.{sRent}
-- FR: Les loyers sont ceux des nouveaux baux. Au Portugal, le loyer médian était de {rent} le m² par mois, soit un rendement brut de {yield} %.{sRent}
+- PT: As rendas são as dos novos contratos de arrendamento: a mediana do INE por m² ao mês. Os valores de Portugal e de cada concelho estão na análise completa.{sRent}
+- EN: Rents are those of new lease contracts: INE's median per m² a month. The figures for Portugal and for each municipality are in the full analysis.{sRent}
+- FR: Les loyers sont ceux des nouveaux baux : la médiane de l'INE au m² par mois. Les chiffres du Portugal et de chaque commune figurent dans l'analyse complète.{sRent}
 
 ### method.s4.3
 - PT: É um valor antes de custos e impostos.
@@ -9379,3 +9379,12 @@ Operator's step 1 (3 Nov 2026): the golden sample place card (Gondomar first). F
 - PT: Centro de saúde (SNS)
 - EN: Health center (SNS)
 - FR: Centre de santé (SNS)
+
+## gate5
+
+Free versus paid, site-wide (operator, 3 Nov 2026, acceptance line 2: "No 10-year data, yield or chart free anywhere"). The national rent and gross yield the method article used to quote, now in the paid analysis (MapAnalysisPage.astro, under "Rendas e rendimento bruto").
+
+### a.rent.pt
+- PT: Em Portugal, a renda mediana dos novos contratos era {rent} por m² ao mês, nos 12 meses até ao {q}: um rendimento bruto de {yield}%. É a renda vezes 12, a dividir pelo preço mediano por m², antes de custos e impostos.
+- EN: In Portugal, the median rent on new leases was {rent} per m² a month in the 12 months to {q}, a gross yield of {yield}%. That is the rent times 12, divided by the median price per m², before costs and tax.
+- FR: Au Portugal, le loyer médian des nouveaux baux était de {rent} le m² par mois sur les 12 mois jusqu'au {q}, soit un rendement brut de {yield} %. C'est le loyer fois 12, divisé par le prix médian au m², avant frais et impôts.

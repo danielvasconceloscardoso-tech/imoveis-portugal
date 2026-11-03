@@ -1,4 +1,4 @@
-// Server-side view of the map data (public/data/map/munis.topo.json and public/data/prices.json, built by
+// Server-side view of the map data (public/data/map/munis.topo.json and src/data/prices.json (build time only), built by
 // scripts/map-data/build.py): the searchable list under the map and the names, without the geometry.
 import { readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";

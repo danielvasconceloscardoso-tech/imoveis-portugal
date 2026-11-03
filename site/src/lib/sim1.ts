@@ -1,5 +1,5 @@
 // The one-screen simulator at the top of the calculators page (night of 3 Nov 2026, part 3): budget, region, use and
-// how the reader pays, results live. Maths: ./sims.ts only (purchase, mortgage); prices per m²: public/data/prices.json.
+// how the reader pays, results live. Maths: ./sims.ts only (purchase, mortgage); prices per m²: src/data/prices.json (the latest market median only).
 // Shared by the component (build time), its script (browser) and the event pages (pages/e/[...p].astro).
 import * as S from "./sims";
 

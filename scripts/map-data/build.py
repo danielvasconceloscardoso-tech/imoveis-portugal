@@ -3,8 +3,9 @@
 Writes
 - site/public/data/map/munis.topo.json     308 concelhos, simplified TopoJSON (object "m"), Madeira and the Azores as insets
 - site/public/data/map/parishes.topo.json  the parishes INE publishes prices or rents for (object "p"), loaded on zoom
-- site/public/data/map/parishes.json       their series (price per m² from 2019-Q4, rent per m² from 2020-Q1)
-- site/public/data/prices.json             per concelho and region: price per m² by quarter from 2016-Q1, rent per m²
+- site/src/data/parishes.json              their series (price per m² from 2019-Q4, rent per m² from 2020-Q1), build time only
+- site/src/data/prices.json                 build time only (not downloadable: ten years, rents and yields are paid, 3 Nov 2026);
+                                           per concelho and region: price per m² by quarter from 2016-Q1, rent per m²
                                            by quarter from 2020-Q1, gross yield, growth, momentum, comparable places
 - content/facts/map/MISMATCHES.md          boundary ↔ INE code matching report
 
@@ -12,6 +13,7 @@ Every figure is INE's (CC BY 4.0): "Fonte: INE" with the period wherever it is s
 contributors (ODbL), geoBoundaries (CC0) for the units the OSM export lacks (see fetch.py and the report).
 
 Usage (from the repo root): python3 scripts/map-data/build.py     needs shapely (pip) and npx (mapshaper 0.6.102)
+Then: python3 scripts/map-data/layers.py, tiles.py and public_prices.py (the free public price files).
 """
 import gzip, json, math, os, re, subprocess, sys, tempfile, unicodedata
 from collections import Counter, defaultdict
@@ -22,6 +24,7 @@ from shapely.validation import make_valid
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 RAW = os.path.join(ROOT, "content", "facts", "map", "raw")
 PUB = os.path.join(ROOT, "site", "public", "data")
+SRC = os.path.join(ROOT, "site", "src", "data")  # build time only: the full series (paid analysis); public_prices.py writes the free files
 load = lambda name: json.load(gzip.open(os.path.join(RAW, name), "rt", encoding="utf8"))
 manifest = json.load(open(os.path.join(RAW, "manifest.json")))["files"]
 
@@ -222,9 +225,9 @@ for d in M:
 out = {"quarters": labels, "break": "2019-Q4", "rentFrom": "2020-Q1", "rentYears": list(range(2020, 2027)),
        "released": {"sales": "2026-10-23", "rents": "2026-09-29"}, "mortgage": {"rate": 3.00, "month": "2026-08", "fact": "bdp-mortgage-rate-2026-08"},
        "parishMunis": sorted({props[c[:4]]["s"] for c in pgeom}), "regions": R, "munis": {d["s"]: {k: v for k, v in d.items() if k != "s"} for d in M.values()}}
-json.dump(out, open(os.path.join(PUB, "prices.json"), "w"), separators=(",", ":"), ensure_ascii=False)
+json.dump(out, open(os.path.join(SRC, "prices.json"), "w"), separators=(",", ":"), ensure_ascii=False)
 pkeep = {c: {k: v for k, v in P[c].items() if k in ("n", "m", "m2", "rq", "yield", "mo", "cagrP20", "cagrR")} for c in pgeom}
-json.dump({"quarters": labels, "parishes": pkeep}, open(os.path.join(PUB, "map", "parishes.json"), "w"), separators=(",", ":"), ensure_ascii=False)
+json.dump({"quarters": labels, "parishes": pkeep}, open(os.path.join(SRC, "parishes.json"), "w"), separators=(",", ":"), ensure_ascii=False)
 
 # ---------------------------------------------------------------- report
 name = lambda d: MUNI[d][1]
