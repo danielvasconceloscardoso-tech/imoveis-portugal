@@ -1,0 +1,3 @@
+# Paços de Ferreira: place-card data, card NOT shipped (operator's step 2, 3 Nov 2026)
+
+The drive times (`routes.csv`), schools (`schools.csv`) and health services (`health.csv`) here were gathered and checked on **2026-11-03** exactly as for the other Norte places (method: content/facts/map/places/gondomar/SOURCES.md and any rolled-out place's SOURCES.md). They pass lines 3 and 4 of ops/ACCEPTANCE_PLACE_CARD.md, but **line 1 failed**: no hero and two gallery views meeting the photography standard (content/media/SOURCES.md) were found with a camera point in the municipality. There is no `place.json`, so `scripts/map-data/place_cards.py` leaves this place on today's card (CLAUDE.md rule 17: never shipped weaker). Add the three photographs and `place.json` to ship it.

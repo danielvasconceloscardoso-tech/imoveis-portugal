@@ -1,0 +1,101 @@
+{
+  "_how": "Place card, Norte roll-out of the golden sample (operator's step 2, 3 Nov 2026). Read by scripts/map-data/tiles.py together with routes.csv, schools.csv and health.csv in this folder. The free card shows the rows marked card=1 and the chosen beach, city and airport; every row goes to the paid analysis (site/src/data/mapanalysis.json). Flights: facts.csv rows (PlaneMapper scheduled block times, checked 2026-11-03). SOURCES.md in this folder says how each figure was checked.",
+  "slug": "porto",
+  "origin": {
+    "name": "Câmara Municipal do Porto",
+    "lat": 41.150093,
+    "lon": -8.610667,
+    "source": "OpenStreetMap (Nominatim), amenity=townhall (relation/3012085), Rua do Clube dos Fenianos"
+  },
+  "line": {
+    "pt": "O Douro e o Atlântico, da Ribeira à Foz, e a Praia do Castelo do Queijo a 10 minutos de carro.",
+    "en": "The Douro and the Atlantic, from the Ribeira to Foz, and Praia do Castelo do Queijo 10 minutes away by car.",
+    "fr": "Le Douro et l'Atlantique, de la Ribeira à Foz, et la Praia do Castelo do Queijo à 10 minutes en voiture."
+  },
+  "photos": [
+    {
+      "f": "porto-praia-internacional-por-do-sol",
+      "w": 1600,
+      "alt": {
+        "pt": "Pôr do sol no Atlântico, na Praia Internacional, na Foz do Porto",
+        "en": "Sunset on the Atlantic at Praia Internacional, Foz, Porto",
+        "fr": "Coucher de soleil sur l'Atlantique à la Praia Internacional, Foz, Porto"
+      }
+    },
+    {
+      "f": "porto-douro-palacio-de-cristal",
+      "w": 1024,
+      "alt": {
+        "pt": "O Douro e a cidade vistos dos jardins do Palácio de Cristal, no Porto",
+        "en": "The Douro and the city from the Palácio de Cristal gardens, Porto",
+        "fr": "Le Douro et la ville depuis les jardins du Palácio de Cristal, à Porto"
+      }
+    },
+    {
+      "f": "porto-foz-farolim-felgueiras",
+      "w": 1024,
+      "alt": {
+        "pt": "O farolim de Felgueiras e o mar na Foz do Douro, no Porto",
+        "en": "The Felgueiras light and the sea at Foz do Douro, Porto",
+        "fr": "Le feu de Felgueiras et la mer à Foz do Douro, à Porto"
+      }
+    }
+  ],
+  "life": {
+    "beach": "apa-ptcd2n",
+    "city": "braga-praca-da-republica",
+    "airport": "aeroporto-do-porto-opo-terminal"
+  },
+  "names": {
+    "apa-ptcd2n": "Praia do Castelo do Queijo",
+    "braga-praca-da-republica": {
+      "pt": "Braga, centro",
+      "en": "Braga, city centre",
+      "fr": "Braga, centre-ville"
+    },
+    "aeroporto-do-porto-opo-terminal": {
+      "pt": "Aeroporto do Porto",
+      "en": "Porto Airport",
+      "fr": "Aéroport de Porto"
+    }
+  },
+  "flights": {
+    "lu": {
+      "fact": "flight-lux-opo",
+      "from": "LUX",
+      "to": "OPO",
+      "min": 150
+    },
+    "fr": {
+      "fact": "flight-par-opo",
+      "from": "ORY",
+      "to": "OPO",
+      "min": 135
+    },
+    "ch": {
+      "fact": "flight-gva-opo",
+      "from": "GVA",
+      "to": "OPO",
+      "min": 150
+    },
+    "br": {
+      "fact": "flight-sao-opo",
+      "from": "GRU",
+      "to": "OPO",
+      "min": 600
+    },
+    "us": {
+      "fact": "flight-nyc-opo",
+      "from": "EWR",
+      "to": "OPO",
+      "min": 400
+    },
+    "il": {
+      "fact": "flight-tlv-lis",
+      "from": "TLV",
+      "to": "LIS",
+      "min": 370,
+      "via": "LIS"
+    }
+  }
+}

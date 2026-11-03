@@ -1,0 +1,101 @@
+{
+  "_how": "Place card, Norte roll-out of the golden sample (operator's step 2, 3 Nov 2026). Read by scripts/map-data/tiles.py together with routes.csv, schools.csv and health.csv in this folder. The free card shows the rows marked card=1 and the chosen beach, city and airport; every row goes to the paid analysis (site/src/data/mapanalysis.json). Flights: facts.csv rows (PlaneMapper scheduled block times, checked 2026-11-03). SOURCES.md in this folder says how each figure was checked.",
+  "slug": "amares",
+  "origin": {
+    "name": "Câmara Municipal de Amares",
+    "lat": 41.630337,
+    "lon": -8.356941,
+    "source": "OpenStreetMap (Nominatim), amenity=townhall (way/184816364), Rua Doutor José Fernandes"
+  },
+  "line": {
+    "pt": "Entre o Cávado e o Homem, e o centro de Braga a 17 minutos de carro.",
+    "en": "Between the Cávado and the Homem rivers, and central Braga 17 minutes away by car.",
+    "fr": "Entre le Cávado et l'Homem, et le centre de Braga à 17 minutes en voiture."
+  },
+  "photos": [
+    {
+      "f": "amares-cavado-prozelo",
+      "w": 1600,
+      "alt": {
+        "pt": "O Cávado em Prozelo, Amares, com a praia fluvial de areia",
+        "en": "The Cávado at Prozelo, Amares, with its sandy river beach",
+        "fr": "Le Cávado à Prozelo, Amares, avec sa plage fluviale de sable"
+      }
+    },
+    {
+      "f": "amares-rio-homem-fiscal",
+      "w": 1600,
+      "alt": {
+        "pt": "O rio Homem em Fiscal, Amares, e um velho moinho de pedra",
+        "en": "The Homem river at Fiscal, Amares, and an old stone mill",
+        "fr": "La rivière Homem à Fiscal, Amares, et un vieux moulin en pierre"
+      }
+    },
+    {
+      "f": "amares-miradouro-senhora-da-paz",
+      "w": 1600,
+      "alt": {
+        "pt": "O vale visto do Miradouro de Nossa Senhora da Paz, em Amares",
+        "en": "The valley from the Nossa Senhora da Paz viewpoint, Amares",
+        "fr": "La vallée depuis le belvédère de Nossa Senhora da Paz, à Amares"
+      }
+    }
+  ],
+  "life": {
+    "beach": "apa-ptcn8h",
+    "city": "braga-praca-da-republica",
+    "airport": "aeroporto-do-porto-opo-terminal"
+  },
+  "names": {
+    "apa-ptcn8h": "Praia da Apúlia",
+    "braga-praca-da-republica": {
+      "pt": "Braga, centro",
+      "en": "Braga, city centre",
+      "fr": "Braga, centre-ville"
+    },
+    "aeroporto-do-porto-opo-terminal": {
+      "pt": "Aeroporto do Porto",
+      "en": "Porto Airport",
+      "fr": "Aéroport de Porto"
+    }
+  },
+  "flights": {
+    "lu": {
+      "fact": "flight-lux-opo",
+      "from": "LUX",
+      "to": "OPO",
+      "min": 150
+    },
+    "fr": {
+      "fact": "flight-par-opo",
+      "from": "ORY",
+      "to": "OPO",
+      "min": 135
+    },
+    "ch": {
+      "fact": "flight-gva-opo",
+      "from": "GVA",
+      "to": "OPO",
+      "min": 150
+    },
+    "br": {
+      "fact": "flight-sao-opo",
+      "from": "GRU",
+      "to": "OPO",
+      "min": 600
+    },
+    "us": {
+      "fact": "flight-nyc-opo",
+      "from": "EWR",
+      "to": "OPO",
+      "min": 400
+    },
+    "il": {
+      "fact": "flight-tlv-lis",
+      "from": "TLV",
+      "to": "LIS",
+      "min": 370,
+      "via": "LIS"
+    }
+  }
+}

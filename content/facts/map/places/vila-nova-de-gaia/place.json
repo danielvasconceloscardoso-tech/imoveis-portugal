@@ -1,0 +1,97 @@
+{
+  "_how": "Place card, Norte roll-out of the golden sample (operator's step 2, 3 Nov 2026). Read by scripts/map-data/tiles.py together with routes.csv, schools.csv and health.csv in this folder. The free card shows the rows marked card=1 and the chosen beach, city and airport; every row goes to the paid analysis (site/src/data/mapanalysis.json). Flights: facts.csv rows (PlaneMapper scheduled block times, checked 2026-11-03). SOURCES.md in this folder says how each figure was checked.",
+  "slug": "vila-nova-de-gaia",
+  "origin": {
+    "name": "Câmara Municipal de Vila Nova de Gaia",
+    "lat": 41.130036,
+    "lon": -8.606625,
+    "source": "OpenStreetMap (Nominatim), amenity=townhall (way/196504094), Avenida da República"
+  },
+  "line": {
+    "pt": "O cais do Douro em frente à Ribeira, as praias do Atlântico, e os Aliados a 7 minutos de carro.",
+    "en": "The Douro quay facing the Ribeira, the Atlantic beaches, and the Aliados 7 minutes away by car.",
+    "fr": "Le quai du Douro face à la Ribeira, les plages de l'Atlantique, et les Aliados à 7 minutes en voiture."
+  },
+  "photos": [
+    {
+      "f": "gaia-praia-por-do-sol",
+      "w": 1600,
+      "alt": {
+        "pt": "Pôr do sol no Atlântico, do passadiço das praias de Vila Nova de Gaia",
+        "en": "Sunset over the Atlantic from the beach boardwalk, Vila Nova de Gaia",
+        "fr": "Coucher de soleil sur l'Atlantique depuis la passerelle des plages, Vila Nova de Gaia"
+      }
+    },
+    {
+      "f": "gaia-cais-rabelos",
+      "w": 1600,
+      "alt": {
+        "pt": "Barcos rabelos no cais de Gaia, sob a ponte Luís I",
+        "en": "Rabelo boats at the Gaia quay, below the Luís I bridge",
+        "fr": "Des bateaux rabelos sur le quai de Gaia, sous le pont Luís I"
+      }
+    },
+    {
+      "f": "gaia-ponte-luis-i-jardim-do-morro",
+      "w": 1600,
+      "alt": {
+        "pt": "A ponte Luís I e a Ribeira do Porto vistas do Jardim do Morro, em Gaia",
+        "en": "The Luís I bridge and Porto's Ribeira from the Jardim do Morro, Gaia",
+        "fr": "Le pont Luís I et la Ribeira de Porto depuis le Jardim do Morro, à Gaia"
+      }
+    }
+  ],
+  "life": {
+    "beach": "apa-ptcq9m",
+    "city": "porto-avenida-dos-aliados",
+    "airport": "aeroporto-do-porto-opo-terminal"
+  },
+  "names": {
+    "apa-ptcq9m": "Praia de Lavadores",
+    "porto-avenida-dos-aliados": "Porto, Aliados",
+    "aeroporto-do-porto-opo-terminal": {
+      "pt": "Aeroporto do Porto",
+      "en": "Porto Airport",
+      "fr": "Aéroport de Porto"
+    }
+  },
+  "flights": {
+    "lu": {
+      "fact": "flight-lux-opo",
+      "from": "LUX",
+      "to": "OPO",
+      "min": 150
+    },
+    "fr": {
+      "fact": "flight-par-opo",
+      "from": "ORY",
+      "to": "OPO",
+      "min": 135
+    },
+    "ch": {
+      "fact": "flight-gva-opo",
+      "from": "GVA",
+      "to": "OPO",
+      "min": 150
+    },
+    "br": {
+      "fact": "flight-sao-opo",
+      "from": "GRU",
+      "to": "OPO",
+      "min": 600
+    },
+    "us": {
+      "fact": "flight-nyc-opo",
+      "from": "EWR",
+      "to": "OPO",
+      "min": 400
+    },
+    "il": {
+      "fact": "flight-tlv-lis",
+      "from": "TLV",
+      "to": "LIS",
+      "min": 370,
+      "via": "LIS"
+    }
+  }
+}
