@@ -32,6 +32,10 @@ export function initRequest() {
   const C: Cfg = JSON.parse(cfgEl.textContent || "{}"), T = C.t;
   const sheet = document.querySelector<HTMLElement>("[data-rq-sheet]")!, back = document.querySelector<HTMLElement>("[data-rq-back]")!;
   const stage = sheet.querySelector<HTMLElement>("[data-rq-stage]")!, sampleBtn = sheet.querySelector<HTMLButtonElement>("[data-rq-sample]")!;
+  // The demo tools (the sample buyer and "O que o consultor recebe") moved off the public pages (operator, 3 Nov 2026):
+  // they appear only with ?demo=1 or on a private demo (/d/…), for showing a developer how a request arrives.
+  const DEMO = new URLSearchParams(location.search).has("demo") || location.pathname.startsWith("/d/");
+  document.querySelectorAll<HTMLElement>("[data-req-advisor]").forEach((b) => { b.hidden = !DEMO; });
   const ad = document.querySelector<HTMLElement>("[data-rq-ad]")!, adBody = ad.querySelector<HTMLElement>("[data-rq-ad-body]")!;
   const tz = readerTz();
   const fmtDay = (dt: Date, zone: string, o: Intl.DateTimeFormatOptions) => new Intl.DateTimeFormat(C.locale, { timeZone: zone, ...o }).format(dt);
@@ -94,8 +98,8 @@ export function initRequest() {
     return `<h2 id="rq-q" class="fl-q" tabindex="-1">${esc(T.q6)}</h2><p class="fl-k">${esc(T.review)}</p><ul class="fl-review">
       ${row(0, T.q1, intentL(A.intent) + (A.intent === "online" ? ` (${T.mode[A.mode || "video"]})` : ""))}${row(1, T.q2, unitL(A))}
       ${row(2, T.picked, A.slots.map((x) => slotLabel(x).main).join(" · "))}${row(3, T.q4, [A.name, A.email, `${A.cc || ""} ${A.phone || ""}`.trim(), A.country].filter(Boolean).join(" · "))}${row(4, T.q5, extra)}</ul>
-      <div class="fl-go"><button type="button" class="fl-btn fl-send" data-send>${esc(T.send)}</button></div>
       <p class="fl-notice">${esc(T.notice)} <a href="${esc(C.privacy)}" target="_blank" rel="noopener">${esc(T.policy)}</a></p>
+      <div class="fl-go"><button type="button" class="fl-btn fl-send" data-send>${esc(T.send)}</button></div>
       <input class="fl-hp" data-hp tabindex="-1" autocomplete="off" aria-hidden="true" />`;
   }
 
@@ -112,7 +116,7 @@ export function initRequest() {
     sheet.querySelector<HTMLElement>(".sh-in")!.scrollTop = 0;
     if (focus) el.querySelector<HTMLElement>(".fl-q")?.focus({ preventScroll: true });
   }
-  const render = (focus = true) => { doneView = false; sampleBtn.hidden = false; swap(`${head()}<div class="fl-step">${screen()}</div>`, focus); };
+  const render = (focus = true) => { doneView = false; sampleBtn.hidden = !DEMO; swap(`${head()}<div class="fl-step">${screen()}</div>`, focus); };
   const go = (n: number) => { dir = n >= i ? 1 : -1; i = Math.max(0, Math.min(n, STEPS.length - 1)); render(); };
   const rerender = () => { const s = stage.firstElementChild as HTMLElement; s.innerHTML = `${head()}<div class="fl-step">${screen()}</div>`; wire(s); };
 

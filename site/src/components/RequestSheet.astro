@@ -124,7 +124,7 @@ const cfg = {
 };
 const X = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>`;
 ---
-<button type="button" class="rq-demo" data-req-advisor><b>{T.demoTag}</b>{T.advisor}</button>
+<button type="button" class="rq-demo" data-req-advisor hidden><b>{T.demoTag}</b>{T.advisor}</button>
 
 <div class="sh-back rq-back" data-rq-back hidden></div>
 <aside class="sh rq-sh" data-rq-sheet role="dialog" aria-modal="true" aria-label={T.title} hidden>
@@ -132,7 +132,7 @@ const X = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L
   <div class="sh-top">
     <p class="sh-title">{project.name}</p>
     <div class="rq-tools">
-      <button type="button" class="rq-sample" data-rq-sample aria-label={T.sample}><b>{T.sampleChip}</b><span class="rq-long">{T.sample}</span><span class="rq-short">{T.sampleShort}</span></button>
+      <button type="button" class="rq-sample" data-rq-sample hidden aria-label={T.sample}><b>{T.sampleChip}</b><span class="rq-long">{T.sample}</span><span class="rq-short">{T.sampleShort}</span></button>
       <button type="button" class="sh-x" data-rq-close aria-label={T.close} set:html={X} />
     </div>
   </div>
@@ -154,7 +154,7 @@ const X = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L
   .rq-demo b, .rq-sample b { padding: 4px 8px; border-radius: 999px; background: #f0e6c8; color: #6b5414; font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
   .rq-tools { display: flex; align-items: center; gap: 8px; min-width: 0; }
   .rq-sample { display: inline-flex; align-items: center; gap: 8px; padding: 4px 12px 4px 4px; border: 0; border-radius: 999px; background: #f3f2ee; font: 600 13px/1.2 "Manrope Variable", system-ui, sans-serif; color: #111214; cursor: pointer; text-align: left; }
-  .rq-sample[hidden] { display: none; } .rq-short { display: none; }
+  .rq-sample[hidden], .rq-demo[hidden] { display: none; } .rq-short { display: none; }
   .rq-sh .sh-in { padding-bottom: calc(28px + env(safe-area-inset-bottom)); }
   .rq .fl-q { margin-top: 24px; }
   .rq .fl-opt small { display: block; margin-top: 3px; font-size: 13px; font-weight: 500; opacity: .7; }

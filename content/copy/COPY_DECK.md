@@ -7918,7 +7918,7 @@ The share line on a developer's page (night of 3 Nov 2026, part 5): the phone's 
 Requests really sent (operator, 3 Nov 2026): the Concierge, the partner and viewing flows and the showcase request sheet post to /api/request, which e-mails Imóveis Portugal and the partner agency together (GDPR art. 6(1)(b), no consent box). One plain line under the send button names both; the privacy link follows it.
 
 ### notice
-- PT: Ao enviar, o seu pedido segue para a Imóveis Portugal e para a {agency}, que lhe responde por e-mail.
+- PT: O seu pedido segue para a {agency}, mediadora licenciada (AMI {ami}), e para a Imóveis Portugal. Responde-lhe por e-mail.
 - EN: When you send, your request goes to Imóveis Portugal and to {agency}, who reply by email.
 - FR: En envoyant, votre demande part chez Imóveis Portugal et chez {agency}, qui vous répond par e-mail.
 

@@ -119,8 +119,8 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
     }).join("");
     const topicRow = topic ? `<li><div class="fl-edit fl-fixed"><span>${esc(X.topic)}</span><b>${esc(topicLabel)}</b></div></li>` : "";
     return `<p class="fl-k">${esc(L.review)}</p><ul class="fl-review">${topicRow}${rows}${A.email ? `<li><button type="button" class="fl-edit" data-goto="${steps.findIndex((x) => x.type === "contact")}"><span>${esc(L.email)}</span><b>${esc(A.name ? `${A.name} · ${A.email}` : A.email)}</b></button></li>` : ""}</ul>
-      <div class="fl-go"><button type="button" class="fl-btn fl-send" data-send>${esc(L.send)}</button></div>
       <p class="fl-notice">${esc(s.type === "review" ? s.text : "")} <a href="${F.links.privacy}" target="_blank" rel="noopener">${esc(X.policy)}</a></p>
+      <div class="fl-go"><button type="button" class="fl-btn fl-send" data-send>${esc(L.send)}</button></div>
       <input class="fl-hp" data-hp tabindex="-1" autocomplete="off" aria-hidden="true" />`;
   }
 

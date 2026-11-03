@@ -53,7 +53,7 @@
 .fl-consent[aria-checked="true"] i { background: var(--fa); border-color: var(--fa); color: #fff; }
 .fl-consent a { color: var(--fa); }
 /* The line under the send button that names both recipients (no box to tick: GDPR art. 6(1)(b), 3 Nov 2026). */
-.fl-notice { margin: 16px 0 0; max-width: 34em; font-size: 14.5px; line-height: 1.55; color: var(--fm); }
+.fl-notice { margin: 20px 0 4px; max-width: 34em; font-size: 14.5px; line-height: 1.55; color: var(--fm); }
 .fl-notice a { color: var(--fi); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
 .fl-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
 .fl-fallback { margin: 18px 0 0; font-size: 15px; line-height: 1.5; display: grid; gap: 12px; justify-items: start; }
