@@ -118,7 +118,7 @@ const rate = cur ? RATE(cur).rate : 0;
             <legend>{c("path.q.timing", lang)}</legend>
             {["soon", "year", "later"].map((t) => <label><input type="radio" name="when" value={t} checked={t === "year"} /> <span>{c(`path.t.${t}`, lang)}</span></label>)}
           </fieldset>
-          <button class="btn" type="submit">{c("path.start", lang)}</button>
+          <button class="btn" type="submit">{c("bar.path.go", lang)}</button>
         </div>
       </div>
     </form>
