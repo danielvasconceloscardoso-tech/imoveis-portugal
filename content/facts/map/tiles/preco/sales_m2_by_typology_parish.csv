@@ -1,0 +1,653 @@
+geocod,place_code,place_name,nuts3,muni_dico,muni_name,muni_slug,period,total_eur_m2,total_eur_m2_2021Q2,total_change_5y_pct,t0_t1_eur_m2,t0_t1_eur_m2_2021Q2,t0_t1_change_5y_pct,t2_eur_m2,t2_eur_m2_2021Q2,t2_change_5y_pct,t3_eur_m2,t3_eur_m2_2021Q2,t3_change_5y_pct,t4plus_eur_m2,t4plus_eur_m2_2021Q2,t4plus_change_5y_pct,typology_range_low,typology_range_high
+112030201,030201,Abade de Neiva,112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+112030202,030202,Aborim,112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+112030203,030203,Adães,112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+112030205,030205,Airó,112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+112030206,030206,Aldreu,112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+112030208,030208,Alvelos,112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+112030209,030209,Arcozelo,112,0302,Barcelos,barcelos,2026-Q2,2005,944,112.4,2169,,,2081,979,112.6,1825,858,112.7,,,,1825,2169
+112030210,030210,Areias,112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+112030212,030212,Balugães,112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+112030213,030213,Barcelinhos,112,0302,Barcelos,barcelos,2026-Q2,2328,1143,103.7,,,,,,,2311,,,,,,,
+112030215,030215,Barqueiros,112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+112030216,030216,Cambeses,112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+112030218,030218,Carapeços,112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+112030220,030220,Carvalhal,112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+112030221,030221,Carvalhas,112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+112030224,030224,Cossourado,112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+112030228,030228,Cristelo,112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+112030234,030234,Fornelos,112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+112030235,030235,Fragoso,112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+112030237,030237,Gilmonde,112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+112030242,030242,Lama,112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+112030243,030243,Lijó,112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+112030244,030244,Macieira de Rates,112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+112030245,030245,Manhente,112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+112030247,030247,Martim,112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+112030252,030252,Moure,112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+112030254,030254,Oliveira,112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+112030255,030255,Palme,112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+112030256,030256,Panque,112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+112030257,030257,Paradela,112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+112030259,030259,Pereira,112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+112030260,030260,Perelhal,112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+112030261,030261,Pousa,112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+112030263,030263,Remelhe,112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+112030264,030264,Roriz,112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+112030265,030265,Rio Covo (Santa Eugénia),112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+112030268,030268,Galegos (Santa Maria),112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+112030272,030272,Galegos (São Martinho),112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+112030277,030277,Tamel (São Veríssimo),112,0302,Barcelos,barcelos,2026-Q2,1572,934,68.3,,,,,,,,,,,,,,
+112030279,030279,Silva,112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+112030282,030282,Ucha,112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+112030283,030283,Várzea,112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+112030287,030287,Vila Seca,112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+112030290,030290,União das freguesias de Alheira e Igreja Nova,112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+112030291,030291,União das freguesias de Alvito (São Pedro e São Martinho) e Couto,112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+112030292,030292,União das freguesias de Areias de Vilar e Encourados,112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+112030294,030294,União das freguesias de Campo e Tamel (São Pedro Fins),112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+112030295,030295,União das freguesias de Carreira e Fonte Coberta,112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+112030296,030296,"União das freguesias de Chorente, Góios, Courel, Pedra Furada e Gueral",112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+112030297,030297,União das freguesias de Creixomil e Mariz,112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+112030298,030298,União das freguesias de Durrães e Tregosa,112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+112030299,030299,União das freguesias de Gamil e Midões,112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+1120302FA,0302FA,"União das freguesias de Milhazes, Vilar de Figos e Faria",112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+1120302FB,0302FB,União das freguesias de Negreiros e Chavão,112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+1120302FC,0302FC,União das freguesias de Quintiães e Aguiar,112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+1120302FD,0302FD,União das freguesias de Sequeade e Bastuço (São João e Santo Estevão),112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+1120302FF,0302FF,União das freguesias de Tamel (Santa Leocádia) e Vilar do Monte,112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+1120302FG,0302FG,"União das freguesias de Viatodos, Grimancelos, Minhotães e Monte de Fralães",112,0302,Barcelos,barcelos,2026-Q2,1293,,,,,,,,,,,,,,,,
+1120302FH,0302FH,União das freguesias de Vila Cova e Feitos,112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+1120302FI,0302FI,Barcelos,112,0302,Barcelos,barcelos,2026-Q2,1897,,,,,,,,,,,,,,,,
+1120302FJ,0302FJ,Rio Covo (Santa Eulália),112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+1120302FK,0302FK,Silveiros,112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+1120302FL,0302FL,Vila Boa,112,0302,Barcelos,barcelos,2026-Q2,2131,,,,,,,,,2101,,,,,,,
+1120302FM,0302FM,Vila Frescaínha (São Martinho),112,0302,Barcelos,barcelos,2026-Q2,2878,,,,,,,,,,,,,,,,
+1120302FN,0302FN,Vila Frescaínha (São Pedro),112,0302,Barcelos,barcelos,2026-Q2,,,,,,,,,,,,,,,,,
+112030301,030301,Adaúfe,112,0303,Braga,braga,2026-Q2,,,,,,,,,,,,,,,,,
+112030312,030312,Espinho,112,0303,Braga,braga,2026-Q2,,,,,,,,,,,,,,,,,
+112030313,030313,Esporões,112,0303,Braga,braga,2026-Q2,,,,,,,,,,,,,,,,,
+112030315,030315,Figueiredo,112,0303,Braga,braga,2026-Q2,,,,,,,,,,,,,,,,,
+112030319,030319,Gualtar,112,0303,Braga,braga,2026-Q2,2602,1318,97.4,3111,1474,111.1,2994,1319,127.0,2182,1163,87.6,,,,2182,3111
+112030322,030322,Lamas,112,0303,Braga,braga,2026-Q2,,,,,,,,,,,,,,,,,
+112030325,030325,Mire de Tibães,112,0303,Braga,braga,2026-Q2,,,,,,,,,,,,,,,,,
+112030330,030330,Padim da Graça,112,0303,Braga,braga,2026-Q2,,,,,,,,,,,,,,,,,
+112030331,030331,Palmeira,112,0303,Braga,braga,2026-Q2,1813,1044,73.7,,,,,,,,,,,1001,,,
+112030334,030334,Pedralva,112,0303,Braga,braga,2026-Q2,,,,,,,,,,,,,,,,,
+112030336,030336,Priscos,112,0303,Braga,braga,2026-Q2,,,,,,,,,,,,,,,,,
+112030338,030338,Ruilhe,112,0303,Braga,braga,2026-Q2,,,,,,,,,,,,,,,,,
+112030349,030349,Braga (São Vicente),112,0303,Braga,braga,2026-Q2,2371,1041,127.8,3488,,,2574,1129,128.0,2151,984,118.6,,,,2151,3488
+112030351,030351,Braga (São Vítor),112,0303,Braga,braga,2026-Q2,2250,1044,115.5,2949,1255,135.0,2556,1107,130.9,2100,1000,110.0,1982,1032,92.1,1982,2949
+112030354,030354,Sequeira,112,0303,Braga,braga,2026-Q2,,,,,,,,,,,,,,,,,
+112030355,030355,Sobreposta,112,0303,Braga,braga,2026-Q2,,,,,,,,,,,,,,,,,
+112030356,030356,Tadim,112,0303,Braga,braga,2026-Q2,,,,,,,,,,,,,,,,,
+112030357,030357,Tebosa,112,0303,Braga,braga,2026-Q2,,,,,,,,,,,,,,,,,
+112030363,030363,União das freguesias de Arentim e Cunha,112,0303,Braga,braga,2026-Q2,,,,,,,,,,,,,,,,,
+112030364,030364,"União das freguesias de Braga (Maximinos, Sé e Cividade)",112,0303,Braga,braga,2026-Q2,2189,1001,118.7,3056,1090,180.4,2211,945,134.0,1895,1086,74.5,,,,1895,3056
+112030365,030365,União das freguesias de Braga (São José de São Lázaro e São João do Souto),112,0303,Braga,braga,2026-Q2,2157,1000,115.7,3100,,,2188,1032,112.0,2000,929,115.3,,,,2000,3100
+112030366,030366,União das freguesias de Cabreiros e Passos (São Julião),112,0303,Braga,braga,2026-Q2,,,,,,,,,,,,,,,,,
+112030367,030367,"União das freguesias de Celeirós, Aveleda e Vimieiro",112,0303,Braga,braga,2026-Q2,,1043,,,,,,,,,,,,,,,
+112030368,030368,União das freguesias de Crespos e Pousada,112,0303,Braga,braga,2026-Q2,,,,,,,,,,,,,,,,,
+112030369,030369,União das freguesias de Escudeiros e Penso (Santo Estêvão e São Vicente),112,0303,Braga,braga,2026-Q2,,,,,,,,,,,,,,,,,
+112030370,030370,União das freguesias de Este (São Pedro e São Mamede),112,0303,Braga,braga,2026-Q2,2507,,,2779,,,,,,,,,,,,,
+112030371,030371,União das freguesias de Ferreiros e Gondizalves,112,0303,Braga,braga,2026-Q2,2134,1057,101.9,,,,2362,,,2049,1048,95.5,,,,2049,2362
+112030372,030372,União das freguesias de Guisande e Oliveira (São Pedro),112,0303,Braga,braga,2026-Q2,,,,,,,,,,,,,,,,,
+112030373,030373,União das freguesias de Lomar e Arcos,112,0303,Braga,braga,2026-Q2,2111,1028,105.4,,,,,,,2105,1035,103.4,,,,,
+112030374,030374,"União das freguesias de Merelim (São Paio), Panoias e Parada de Tibães",112,0303,Braga,braga,2026-Q2,1918,1047,83.2,,,,,,,,,,,,,,
+112030375,030375,União das freguesias de Merelim (São Pedro) e Frossos,112,0303,Braga,braga,2026-Q2,1407,929,51.5,,,,,,,,,,,,,,
+112030376,030376,União das freguesias de Morreira e Trandeiras,112,0303,Braga,braga,2026-Q2,,,,,,,,,,,,,,,,,
+112030377,030377,"União das freguesias de Nogueira, Fraião e Lamaçães",112,0303,Braga,braga,2026-Q2,2422,1314,84.3,,,,2454,1298,89.1,2474,1367,81.0,1971,1279,54.1,1971,2474
+112030378,030378,União das freguesias de Nogueiró e Tenões,112,0303,Braga,braga,2026-Q2,2534,1382,83.4,,,,,,,,,,,,,,
+112030379,030379,"União das freguesias de Real, Dume e Semelhe",112,0303,Braga,braga,2026-Q2,2238,1162,92.6,2748,1091,151.9,2314,992,133.3,2137,1295,65.0,,1094,,2137,2748
+112030380,030380,União das freguesias de Santa Lucrécia de Algeriz e Navarra,112,0303,Braga,braga,2026-Q2,,,,,,,,,,,,,,,,,
+112030381,030381,União das freguesias de Vilaça e Fradelos,112,0303,Braga,braga,2026-Q2,,,,,,,,,,,,,,,,,
+119030801,030801,Aldão,119,0308,Guimarães,guimaraes,2026-Q2,,,,,,,,,,,,,,,,,
+119030804,030804,Azurém,119,0308,Guimarães,guimaraes,2026-Q2,2651,1212,118.7,3591,1667,115.4,2407,1206,99.6,1913,1082,76.8,,,,1913,3591
+119030806,030806,Barco,119,0308,Guimarães,guimaraes,2026-Q2,,,,,,,,,,,,,,,,,
+119030807,030807,Brito,119,0308,Guimarães,guimaraes,2026-Q2,1631,1012,61.2,,,,,,,,,,,,,,
+119030808,030808,Caldelas,119,0308,Guimarães,guimaraes,2026-Q2,1893,959,97.4,2326,,,,,,1772,,,,,,1772,2326
+119030812,030812,Costa,119,0308,Guimarães,guimaraes,2026-Q2,2165,1164,86.0,,,,,,,2066,1240,66.6,,,,,
+119030813,030813,Creixomil,119,0308,Guimarães,guimaraes,2026-Q2,2021,1091,85.2,,,,2255,,,1880,1092,72.2,,,,1880,2255
+119030815,030815,Fermentões,119,0308,Guimarães,guimaraes,2026-Q2,1907,988,93.0,,,,,,,1867,,,,,,,
+119030820,030820,Gonça,119,0308,Guimarães,guimaraes,2026-Q2,,,,,,,,,,,,,,,,,
+119030821,030821,Gondar,119,0308,Guimarães,guimaraes,2026-Q2,,,,,,,,,,,,,,,,,
+119030823,030823,Guardizela,119,0308,Guimarães,guimaraes,2026-Q2,,,,,,,,,,,,,,,,,
+119030824,030824,Infantas,119,0308,Guimarães,guimaraes,2026-Q2,,,,,,,,,,,,,,,,,
+119030827,030827,Longos,119,0308,Guimarães,guimaraes,2026-Q2,,,,,,,,,,,,,,,,,
+119030828,030828,Lordelo,119,0308,Guimarães,guimaraes,2026-Q2,1519,,,,,,,,,,,,,,,,
+119030830,030830,Mesão Frio,119,0308,Guimarães,guimaraes,2026-Q2,1765,1100,60.5,,,,,,,,,,,,,,
+119030831,030831,Moreira de Cónegos,119,0308,Guimarães,guimaraes,2026-Q2,1231,,,,,,,,,,,,,,,,
+119030832,030832,Nespereira,119,0308,Guimarães,guimaraes,2026-Q2,,,,,,,,,,,,,,,,,
+119030835,030835,Pencelo,119,0308,Guimarães,guimaraes,2026-Q2,,,,,,,,,,,,,,,,,
+119030836,030836,Pinheiro,119,0308,Guimarães,guimaraes,2026-Q2,,,,,,,,,,,,,,,,,
+119030837,030837,Polvoreira,119,0308,Guimarães,guimaraes,2026-Q2,,,,,,,,,,,,,,,,,
+119030838,030838,Ponte,119,0308,Guimarães,guimaraes,2026-Q2,1805,943,91.4,,,,2084,957,117.8,1659,956,73.5,,,,1659,2084
+119030840,030840,Ronfe,119,0308,Guimarães,guimaraes,2026-Q2,1538,960,60.2,,,,,,,,,,,,,,
+119030842,030842,Prazins (Santa Eufémia),119,0308,Guimarães,guimaraes,2026-Q2,,,,,,,,,,,,,,,,,
+119030850,030850,Selho (São Cristóvão),119,0308,Guimarães,guimaraes,2026-Q2,,,,,,,,,,,,,,,,,
+119030854,030854,Selho (São Jorge),119,0308,Guimarães,guimaraes,2026-Q2,1525,916,66.5,,,,,,,,,,,,,,
+119030857,030857,Candoso (São Martinho),119,0308,Guimarães,guimaraes,2026-Q2,,,,,,,,,,,,,,,,,
+119030858,030858,Sande (São Martinho),119,0308,Guimarães,guimaraes,2026-Q2,,,,,,,,,,,,,,,,,
+119030865,030865,São Torcato,119,0308,Guimarães,guimaraes,2026-Q2,1511,929,62.6,,,,,,,,,,,,,,
+119030866,030866,Serzedelo,119,0308,Guimarães,guimaraes,2026-Q2,,,,,,,,,,,,,,,,,
+119030868,030868,Silvares,119,0308,Guimarães,guimaraes,2026-Q2,,,,,,,,,,,,,,,,,
+119030871,030871,Urgezes,119,0308,Guimarães,guimaraes,2026-Q2,2100,1124,86.8,2678,,,2234,,,1758,1140,54.2,,,,1758,2678
+119030875,030875,União das freguesias de Abação e Gémeos,119,0308,Guimarães,guimaraes,2026-Q2,,,,,,,,,,,,,,,,,
+119030877,030877,União das freguesias de Arosa e Castelões,119,0308,Guimarães,guimaraes,2026-Q2,,,,,,,,,,,,,,,,,
+119030878,030878,União das freguesias de Atães e Rendufe,119,0308,Guimarães,guimaraes,2026-Q2,,,,,,,,,,,,,,,,,
+119030879,030879,União das freguesias de Briteiros Santo Estêvão e Donim,119,0308,Guimarães,guimaraes,2026-Q2,,,,,,,,,,,,,,,,,
+119030880,030880,União das freguesias de Briteiros São Salvador e Briteiros Santa Leocádia,119,0308,Guimarães,guimaraes,2026-Q2,,,,,,,,,,,,,,,,,
+119030881,030881,União das freguesias de Candoso São Tiago e Mascotelos,119,0308,Guimarães,guimaraes,2026-Q2,2777,1416,96.1,,,,2806,,,,,,,,,,
+119030883,030883,"União das freguesias de Leitões, Oleiros e Figueiredo",119,0308,Guimarães,guimaraes,2026-Q2,,,,,,,,,,,,,,,,,
+119030884,030884,"União das freguesias de Oliveira, São Paio e São Sebastião",119,0308,Guimarães,guimaraes,2026-Q2,1826,1495,22.1,,,,,,,1792,,,,,,,
+119030886,030886,União das freguesias de Sande São Lourenço e Balazar,119,0308,Guimarães,guimaraes,2026-Q2,,,,,,,,,,,,,,,,,
+119030888,030888,União das freguesias de Selho São Lourenço e Gominhães,119,0308,Guimarães,guimaraes,2026-Q2,,,,,,,,,,,,,,,,,
+119030890,030890,"União das freguesias de Souto Santa Maria, Souto São Salvador e Gondomar",119,0308,Guimarães,guimaraes,2026-Q2,,,,,,,,,,,,,,,,,
+119030892,030892,Airão (Santa Maria),119,0308,Guimarães,guimaraes,2026-Q2,,,,,,,,,,,,,,,,,
+119030893,030893,Airão São João,119,0308,Guimarães,guimaraes,2026-Q2,,,,,,,,,,,,,,,,,
+119030894,030894,Calvos,119,0308,Guimarães,guimaraes,2026-Q2,,,,,,,,,,,,,,,,,
+119030895,030895,Conde,119,0308,Guimarães,guimaraes,2026-Q2,,,,,,,,,,,,,,,,,
+119030896,030896,Corvite,119,0308,Guimarães,guimaraes,2026-Q2,,,,,,,,,,,,,,,,,
+119030897,030897,Gandarela,119,0308,Guimarães,guimaraes,2026-Q2,,,,,,,,,,,,,,,,,
+119030898,030898,Prazins Santo Tirso,119,0308,Guimarães,guimaraes,2026-Q2,,,,,,,,,,,,,,,,,
+119030899,030899,Sande (São Clemente),119,0308,Guimarães,guimaraes,2026-Q2,,,,,,,,,,,,,,,,,
+1190309FA,0309FA,Sande (Vila Nova),119,0309,Póvoa de Lanhoso,povoa-de-lanhoso,2026-Q2,,,,,,,,,,,,,,,,,
+1190309FB,0309FB,São Faustino,119,0309,Póvoa de Lanhoso,povoa-de-lanhoso,2026-Q2,,,,,,,,,,,,,,,,,
+1190309FC,0309FC,Serzedo,119,0309,Póvoa de Lanhoso,povoa-de-lanhoso,2026-Q2,,,,,,,,,,,,,,,,,
+1190309FD,0309FD,Tabuadelo,119,0309,Póvoa de Lanhoso,povoa-de-lanhoso,2026-Q2,,,,,,,,,,,,,,,,,
+1190309FE,0309FE,Vermil,119,0309,Póvoa de Lanhoso,povoa-de-lanhoso,2026-Q2,,,,,,,,,,,,,,,,,
+119031204,031204,Bairro,119,0312,Vila Nova de Famalicão,vila-nova-de-famalicao,2026-Q2,1497,,,,,,,,,,,,,,,,
+119031206,031206,Brufe,119,0312,Vila Nova de Famalicão,vila-nova-de-famalicao,2026-Q2,,,,,,,,,,,,,,,,,
+119031210,031210,Castelões,119,0312,Vila Nova de Famalicão,vila-nova-de-famalicao,2026-Q2,,,,,,,,,,,,,,,,,
+119031212,031212,Cruz,119,0312,Vila Nova de Famalicão,vila-nova-de-famalicao,2026-Q2,,,,,,,,,,,,,,,,,
+119031213,031213,Delães,119,0312,Vila Nova de Famalicão,vila-nova-de-famalicao,2026-Q2,1740,885,96.6,,,,,,,,,,,,,,
+119031215,031215,Fradelos,119,0312,Vila Nova de Famalicão,vila-nova-de-famalicao,2026-Q2,,,,,,,,,,,,,,,,,
+119031216,031216,Gavião,119,0312,Vila Nova de Famalicão,vila-nova-de-famalicao,2026-Q2,2051,877,133.9,,,,,,,,,,,,,,
+119031219,031219,Joane,119,0312,Vila Nova de Famalicão,vila-nova-de-famalicao,2026-Q2,1699,955,77.9,,,,,,,1671,946,76.6,,,,,
+119031221,031221,Landim,119,0312,Vila Nova de Famalicão,vila-nova-de-famalicao,2026-Q2,,,,,,,,,,,,,,,,,
+119031223,031223,Louro,119,0312,Vila Nova de Famalicão,vila-nova-de-famalicao,2026-Q2,,,,,,,,,,,,,,,,,
+119031224,031224,Lousado,119,0312,Vila Nova de Famalicão,vila-nova-de-famalicao,2026-Q2,1790,915,95.6,,,,,,,,,,,,,,
+119031225,031225,Mogege,119,0312,Vila Nova de Famalicão,vila-nova-de-famalicao,2026-Q2,,,,,,,,,,,,,,,,,
+119031227,031227,Nine,119,0312,Vila Nova de Famalicão,vila-nova-de-famalicao,2026-Q2,1983,,,,,,,,,,,,,,,,
+119031230,031230,Pedome,119,0312,Vila Nova de Famalicão,vila-nova-de-famalicao,2026-Q2,,,,,,,,,,,,,,,,,
+119031232,031232,Pousada de Saramagos,119,0312,Vila Nova de Famalicão,vila-nova-de-famalicao,2026-Q2,,1014,,,,,,,,,,,,,,,
+119031233,031233,Requião,119,0312,Vila Nova de Famalicão,vila-nova-de-famalicao,2026-Q2,,,,,,,,,,,,,,,,,
+119031234,031234,Riba de Ave,119,0312,Vila Nova de Famalicão,vila-nova-de-famalicao,2026-Q2,1555,812,91.5,,,,,,,,,,,,,,
+119031235,031235,Ribeirão,119,0312,Vila Nova de Famalicão,vila-nova-de-famalicao,2026-Q2,1884,1011,86.4,,,,,,,1987,1043,90.5,,,,,
+119031239,031239,Oliveira (Santa Maria),119,0312,Vila Nova de Famalicão,vila-nova-de-famalicao,2026-Q2,1534,,,,,,,,,,,,,,,,
+119031241,031241,Vale (São Martinho),119,0312,Vila Nova de Famalicão,vila-nova-de-famalicao,2026-Q2,,,,,,,,,,,,,,,,,
+119031242,031242,Oliveira (São Mateus),119,0312,Vila Nova de Famalicão,vila-nova-de-famalicao,2026-Q2,,,,,,,,,,,,,,,,,
+119031247,031247,Vermoim,119,0312,Vila Nova de Famalicão,vila-nova-de-famalicao,2026-Q2,1574,,,,,,,,,,,,,,,,
+119031249,031249,Vilarinho das Cambas,119,0312,Vila Nova de Famalicão,vila-nova-de-famalicao,2026-Q2,,,,,,,,,,,,,,,,,
+119031250,031250,União das freguesias de Antas e Abade de Vermoim,119,0312,Vila Nova de Famalicão,vila-nova-de-famalicao,2026-Q2,2224,1146,94.1,,,,2193,,,2143,1173,82.7,,,,2143,2193
+119031251,031251,União das freguesias de Arnoso (Santa Maria e Santa Eulália) e Sezures,119,0312,Vila Nova de Famalicão,vila-nova-de-famalicao,2026-Q2,1724,,,,,,,,,,,,,,,,
+119031253,031253,União das freguesias de Carreira e Bente,119,0312,Vila Nova de Famalicão,vila-nova-de-famalicao,2026-Q2,,,,,,,,,,,,,,,,,
+119031256,031256,"União das freguesias de Lemenhe, Mouquim e Jesufrei",119,0312,Vila Nova de Famalicão,vila-nova-de-famalicao,2026-Q2,1875,1179,59.0,,,,,,,,,,,,,,
+119031258,031258,União das freguesias de Seide,119,0312,Vila Nova de Famalicão,vila-nova-de-famalicao,2026-Q2,,,,,,,,,,,,,,,,,
+119031259,031259,"União das freguesias de Vale (São Cosme), Telhado e Portela",119,0312,Vila Nova de Famalicão,vila-nova-de-famalicao,2026-Q2,,,,,,,,,,,,,,,,,
+119031260,031260,União das freguesias de Vila Nova de Famalicão e Calendário,119,0312,Vila Nova de Famalicão,vila-nova-de-famalicao,2026-Q2,2079,1049,98.2,2584,999,158.7,2195,1113,97.2,1941,1024,89.6,1690,938,80.2,1690,2584
+119031261,031261,Avidos,119,0312,Vila Nova de Famalicão,vila-nova-de-famalicao,2026-Q2,,,,,,,,,,,,,,,,,
+119031262,031262,Cabeçudos,119,0312,Vila Nova de Famalicão,vila-nova-de-famalicao,2026-Q2,,,,,,,,,,,,,,,,,
+119031263,031263,Cavalões,119,0312,Vila Nova de Famalicão,vila-nova-de-famalicao,2026-Q2,,,,,,,,,,,,,,,,,
+119031264,031264,Esmeriz,119,0312,Vila Nova de Famalicão,vila-nova-de-famalicao,2026-Q2,,,,,,,,,,,,,,,,,
+119031265,031265,Gondifelos,119,0312,Vila Nova de Famalicão,vila-nova-de-famalicao,2026-Q2,,,,,,,,,,,,,,,,,
+119031266,031266,Lagoa,119,0312,Vila Nova de Famalicão,vila-nova-de-famalicao,2026-Q2,,,,,,,,,,,,,,,,,
+119031267,031267,Novais,119,0312,Vila Nova de Famalicão,vila-nova-de-famalicao,2026-Q2,,,,,,,,,,,,,,,,,
+119031268,031268,Outiz,119,0312,Vila Nova de Famalicão,vila-nova-de-famalicao,2026-Q2,,,,,,,,,,,,,,,,,
+119031269,031269,Ruivães,119,0312,Vila Nova de Famalicão,vila-nova-de-famalicao,2026-Q2,,,,,,,,,,,,,,,,,
+11A010402,010402,Alvarenga,11A,0104,Arouca,arouca,2026-Q2,,,,,,,,,,,,,,,,,
+11A010407,010407,Chave,11A,0104,Arouca,arouca,2026-Q2,,,,,,,,,,,,,,,,,
+11A010409,010409,Escariz,11A,0104,Arouca,arouca,2026-Q2,,,,,,,,,,,,,,,,,
+11A010411,010411,Fermedo,11A,0104,Arouca,arouca,2026-Q2,,,,,,,,,,,,,,,,,
+11A010413,010413,Mansores,11A,0104,Arouca,arouca,2026-Q2,,,,,,,,,,,,,,,,,
+11A010414,010414,Moldes,11A,0104,Arouca,arouca,2026-Q2,,,,,,,,,,,,,,,,,
+11A010415,010415,Rossas,11A,0104,Arouca,arouca,2026-Q2,,,,,,,,,,,,,,,,,
+11A010416,010416,Santa Eulália,11A,0104,Arouca,arouca,2026-Q2,,,,,,,,,,,,,,,,,
+11A010417,010417,São Miguel do Mato,11A,0104,Arouca,arouca,2026-Q2,,,,,,,,,,,,,,,,,
+11A010418,010418,Tropeço,11A,0104,Arouca,arouca,2026-Q2,,,,,,,,,,,,,,,,,
+11A010419,010419,Urrô,11A,0104,Arouca,arouca,2026-Q2,,,,,,,,,,,,,,,,,
+11A010420,010420,Várzea,11A,0104,Arouca,arouca,2026-Q2,,,,,,,,,,,,,,,,,
+11A010421,010421,União das freguesias de Arouca e Burgo,11A,0104,Arouca,arouca,2026-Q2,,,,,,,,,,,,,,,,,
+11A010422,010422,União das freguesias de Cabreiros e Albergaria da Serra,11A,0104,Arouca,arouca,2026-Q2,,,,,,,,,,,,,,,,,
+11A010423,010423,União das freguesias de Canelas e Espiunca,11A,0104,Arouca,arouca,2026-Q2,,,,,,,,,,,,,,,,,
+11A010424,010424,União das freguesias de Covelo de Paivó e Janarde,11A,0104,Arouca,arouca,2026-Q2,,,,,,,,,,,,,,,,,
+11A010702,010702,Espinho,11A,0107,Espinho,espinho,2026-Q2,3126,1761,77.5,3365,,,3188,1988,60.4,2824,1743,62.0,,,,2824,3365
+11A010704,010704,Paramos,11A,0107,Espinho,espinho,2026-Q2,,,,,,,,,,,,,,,,,
+11A010705,010705,Silvalde,11A,0107,Espinho,espinho,2026-Q2,1769,,,,,,,,,,,,,,,,
+11A010707,010707,Anta,11A,0107,Espinho,espinho,2026-Q2,2698,,,,,,2798,,,,,,,,,,
+11A010708,010708,Guetim,11A,0107,Espinho,espinho,2026-Q2,,,,,,,,,,,,,,,,,
+11A010901,010901,Argoncilhe,11A,0109,Santa Maria da Feira,santa-maria-da-feira,2026-Q2,2081,903,130.5,,,,2339,,,,,,,,,,
+11A010902,010902,Arrifana,11A,0109,Santa Maria da Feira,santa-maria-da-feira,2026-Q2,1779,919,93.6,,,,,,,,921,,,,,,
+11A010904,010904,Escapães,11A,0109,Santa Maria da Feira,santa-maria-da-feira,2026-Q2,1683,957,75.9,,,,,,,,,,,,,,
+11A010907,010907,Fiães,11A,0109,Santa Maria da Feira,santa-maria-da-feira,2026-Q2,1525,875,74.3,,,,,,,,,,,,,,
+11A010908,010908,Fornos,11A,0109,Santa Maria da Feira,santa-maria-da-feira,2026-Q2,,,,,,,,,,,,,,,,,
+11A010913,010913,Lourosa,11A,0109,Santa Maria da Feira,santa-maria-da-feira,2026-Q2,1744,863,102.1,,,,1827,,,1670,896,86.4,,,,1670,1827
+11A010914,010914,Milheirós de Poiares,11A,0109,Santa Maria da Feira,santa-maria-da-feira,2026-Q2,1446,,,,,,,,,,,,,,,,
+11A010916,010916,Mozelos,11A,0109,Santa Maria da Feira,santa-maria-da-feira,2026-Q2,1813,966,87.7,,,,,1003,,1804,958,88.3,,,,,
+11A010917,010917,Nogueira da Regedoura,11A,0109,Santa Maria da Feira,santa-maria-da-feira,2026-Q2,1913,1043,83.4,,,,,,,,963,,,,,,
+11A010918,010918,São Paio de Oleiros,11A,0109,Santa Maria da Feira,santa-maria-da-feira,2026-Q2,,,,,,,,,,,,,,,,,
+11A010919,010919,Paços de Brandão,11A,0109,Santa Maria da Feira,santa-maria-da-feira,2026-Q2,1772,907,95.4,,,,,,,,,,,,,,
+11A010921,010921,Rio Meão,11A,0109,Santa Maria da Feira,santa-maria-da-feira,2026-Q2,1811,945,91.6,,,,,,,,,,,,,,
+11A010922,010922,Romariz,11A,0109,Santa Maria da Feira,santa-maria-da-feira,2026-Q2,,,,,,,,,,,,,,,,,
+11A010924,010924,Sanguedo,11A,0109,Santa Maria da Feira,santa-maria-da-feira,2026-Q2,,,,,,,,,,,,,,,,,
+11A010925,010925,Santa Maria de Lamas,11A,0109,Santa Maria da Feira,santa-maria-da-feira,2026-Q2,1822,747,143.9,,,,1979,,,,,,,,,,
+11A010926,010926,São João de Ver,11A,0109,Santa Maria da Feira,santa-maria-da-feira,2026-Q2,1880,861,118.4,,,,2028,899,125.6,1759,872,101.7,,,,1759,2028
+11A010935,010935,"União das freguesias de Santa Maria da Feira, Travanca, Sanfins e Espargo",11A,0109,Santa Maria da Feira,santa-maria-da-feira,2026-Q2,1921,1032,86.1,,,,1965,1038,89.3,1963,1034,89.8,,999,,1963,1965
+11A010937,010937,Caldas de São Jorge,11A,0109,Santa Maria da Feira,santa-maria-da-feira,2026-Q2,,,,,,,,,,,,,,,,,
+11A010938,010938,Canedo,11A,0109,Santa Maria da Feira,santa-maria-da-feira,2026-Q2,1685,,,,,,,,,,,,,,,,
+11A010939,010939,Gião,11A,0109,Santa Maria da Feira,santa-maria-da-feira,2026-Q2,,,,,,,,,,,,,,,,,
+11A010940,010940,Guisande,11A,0109,Santa Maria da Feira,santa-maria-da-feira,2026-Q2,,,,,,,,,,,,,,,,,
+11A010941,010941,Lobão,11A,0109,Santa Maria da Feira,santa-maria-da-feira,2026-Q2,1480,,,,,,,,,,,,,,,,
+11A010942,010942,Louredo,11A,0109,Santa Maria da Feira,santa-maria-da-feira,2026-Q2,,,,,,,,,,,,,,,,,
+11A010943,010943,Mosteirô,11A,0109,Santa Maria da Feira,santa-maria-da-feira,2026-Q2,,,,,,,,,,,,,,,,,
+11A010944,010944,Pigeiros,11A,0109,Santa Maria da Feira,santa-maria-da-feira,2026-Q2,,,,,,,,,,,,,,,,,
+11A010945,010945,São Miguel de Souto,11A,0109,Santa Maria da Feira,santa-maria-da-feira,2026-Q2,1414,,,,,,,,,,,,,,,,
+11A010946,010946,Vale,11A,0109,Santa Maria da Feira,santa-maria-da-feira,2026-Q2,,,,,,,,,,,,,,,,,
+11A010947,010947,Vila Maior,11A,0109,Santa Maria da Feira,santa-maria-da-feira,2026-Q2,,,,,,,,,,,,,,,,,
+11A011301,011301,Carregosa,11A,0113,Oliveira de Azeméis,oliveira-de-azemeis,2026-Q2,,,,,,,,,,,,,,,,,
+11A011302,011302,Cesar,11A,0113,Oliveira de Azeméis,oliveira-de-azemeis,2026-Q2,,709,,,,,,,,,,,,,,,
+11A011303,011303,Fajões,11A,0113,Oliveira de Azeméis,oliveira-de-azemeis,2026-Q2,,,,,,,,,,,,,,,,,
+11A011304,011304,Loureiro,11A,0113,Oliveira de Azeméis,oliveira-de-azemeis,2026-Q2,1229,,,,,,,,,,,,,,,,
+11A011305,011305,Macieira de Sarnes,11A,0113,Oliveira de Azeméis,oliveira-de-azemeis,2026-Q2,,,,,,,,,,,,,,,,,
+11A011310,011310,Ossela,11A,0113,Oliveira de Azeméis,oliveira-de-azemeis,2026-Q2,,,,,,,,,,,,,,,,,
+11A011315,011315,São Martinho da Gândara,11A,0113,Oliveira de Azeméis,oliveira-de-azemeis,2026-Q2,,,,,,,,,,,,,,,,,
+11A011318,011318,São Roque,11A,0113,Oliveira de Azeméis,oliveira-de-azemeis,2026-Q2,1606,858,87.2,,,,,,,,,,,,,,
+11A011319,011319,Vila de Cucujães,11A,0113,Oliveira de Azeméis,oliveira-de-azemeis,2026-Q2,1499,833,80.0,,,,,,,1456,834,74.6,,,,,
+11A011321,011321,"União das freguesias de Oliveira de Azeméis, Santiago de Riba-Ul, Ul, Macinhata da Seixa e Madail",11A,0113,Oliveira de Azeméis,oliveira-de-azemeis,2026-Q2,1662,800,107.8,1713,,,1815,744,144.0,1662,869,91.3,1067,,,1067,1815
+11A011322,011322,"União das freguesias de Pinheiro da Bemposta, Travanca e Palmaz",11A,0113,Oliveira de Azeméis,oliveira-de-azemeis,2026-Q2,1086,,,,,,,,,,,,,,,,
+11A011323,011323,Nogueira do Cravo,11A,0113,Oliveira de Azeméis,oliveira-de-azemeis,2026-Q2,1545,,,,,,,,,,,,,,,,
+11A011324,011324,Pindelo,11A,0113,Oliveira de Azeméis,oliveira-de-azemeis,2026-Q2,,,,,,,,,,,,,,,,,
+11A011601,011601,São João da Madeira,11A,0116,São João da Madeira,sao-joao-da-madeira,2026-Q2,1916,931,105.8,2121,,,2004,979,104.7,1772,984,80.1,1271,760,67.2,1271,2121
+11A011901,011901,Arões,11A,0119,Vale de Cambra,vale-de-cambra,2026-Q2,,,,,,,,,,,,,,,,,
+11A011902,011902,São Pedro de Castelões,11A,0119,Vale de Cambra,vale-de-cambra,2026-Q2,1391,922,50.9,,,,,,,,,,,,,,
+11A011903,011903,Cepelos,11A,0119,Vale de Cambra,vale-de-cambra,2026-Q2,,,,,,,,,,,,,,,,,
+11A011905,011905,Junqueira,11A,0119,Vale de Cambra,vale-de-cambra,2026-Q2,,,,,,,,,,,,,,,,,
+11A011906,011906,Macieira de Cambra,11A,0119,Vale de Cambra,vale-de-cambra,2026-Q2,,863,,,,,,,,,,,,,,,
+11A011907,011907,Roge,11A,0119,Vale de Cambra,vale-de-cambra,2026-Q2,,,,,,,,,,,,,,,,,
+11A011910,011910,"União das freguesias de Vila Chã, Codal e Vila Cova de Perrinho",11A,0119,Vale de Cambra,vale-de-cambra,2026-Q2,,861,,,,,,,,,,,,,,,
+11A130405,130405,Lomba,11A,1304,Gondomar,gondomar,2026-Q2,,,,,,,,,,,,,,,,,
+11A130408,130408,Rio Tinto,11A,1304,Gondomar,gondomar,2026-Q2,2509,1253,100.2,2832,1241,128.2,2596,1271,104.2,2323,1248,86.1,1961,1287,52.4,1961,2832
+11A130412,130412,Baguim do Monte (Rio Tinto),11A,1304,Gondomar,gondomar,2026-Q2,2320,1221,90.0,,,,2564,1274,101.3,2221,1194,86.0,,,,2221,2564
+11A130413,130413,União das freguesias de Fânzeres e São Pedro da Cova,11A,1304,Gondomar,gondomar,2026-Q2,2299,1142,101.3,2486,1209,105.6,2431,1139,113.4,2120,1153,83.9,1576,1050,50.1,1576,2486
+11A130414,130414,União das freguesias de Foz do Sousa e Covelo,11A,1304,Gondomar,gondomar,2026-Q2,1681,839,100.4,,,,,,,,,,,,,,
+11A130415,130415,"União das freguesias de Gondomar (São Cosme), Valbom e Jovim",11A,1304,Gondomar,gondomar,2026-Q2,2307,1138,102.7,2467,1122,119.9,2382,1124,111.9,2327,1212,92.0,1923,1019,88.7,1923,2467
+11A130416,130416,União das freguesias de Melres e Medas,11A,1304,Gondomar,gondomar,2026-Q2,1611,,,,,,,,,,,,,,,,
+11A130601,130601,Águas Santas,11A,1306,Maia,maia,2026-Q2,2548,1250,103.8,2894,1218,137.6,2605,1250,108.4,2415,1241,94.6,,,,2415,2894
+11A130603,130603,Folgosa,11A,1306,Maia,maia,2026-Q2,,1098,,,,,,,,,,,,,,,
+11A130608,130608,Milheirós,11A,1306,Maia,maia,2026-Q2,2089,1268,64.7,,,,,,,,,,,,,,
+11A130609,130609,Moreira,11A,1306,Maia,maia,2026-Q2,2625,1430,83.6,2524,1516,66.5,2668,1490,79.1,2453,1189,106.3,2837,,,2453,2837
+11A130613,130613,São Pedro Fins,11A,1306,Maia,maia,2026-Q2,,,,,,,,,,,,,,,,,
+11A130616,130616,Vila Nova da Telha,11A,1306,Maia,maia,2026-Q2,2472,1249,97.9,,,,2577,1291,99.6,,,,,,,,
+11A130617,130617,Pedrouços,11A,1306,Maia,maia,2026-Q2,2428,1486,63.4,2972,2451,21.3,2324,1360,70.9,2336,1251,86.7,,,,2324,2972
+11A130618,130618,Castêlo da Maia,11A,1306,Maia,maia,2026-Q2,2359,1357,73.8,,,,2660,1373,93.7,2167,1294,67.5,,,,2167,2660
+11A130619,130619,Cidade da Maia,11A,1306,Maia,maia,2026-Q2,2698,1476,82.8,3047,1586,92.1,2689,1474,82.4,2565,1453,76.5,2401,1443,66.4,2401,3047
+11A130620,130620,Nogueira e Silva Escura,11A,1306,Maia,maia,2026-Q2,2438,1245,95.8,,,,2508,1227,104.4,2304,1325,73.9,,,,2304,2508
+11A130815,130815,Custóias,11A,1308,Matosinhos,matosinhos,2026-Q2,2616,,,,,,2794,,,2464,,,,,,2464,2794
+11A130816,130816,Guifões,11A,1308,Matosinhos,matosinhos,2026-Q2,2580,,,,,,,,,,,,,,,,
+11A130817,130817,Lavra,11A,1308,Matosinhos,matosinhos,2026-Q2,2673,,,,,,2922,,,,,,,,,,
+11A130818,130818,Leça da Palmeira,11A,1308,Matosinhos,matosinhos,2026-Q2,3546,,,3673,,,3357,,,3442,,,2990,,,2990,3673
+11A130819,130819,Leça do Balio,11A,1308,Matosinhos,matosinhos,2026-Q2,2443,,,,,,2594,,,2500,,,1828,,,1828,2594
+11A130820,130820,Matosinhos,11A,1308,Matosinhos,matosinhos,2026-Q2,3841,,,3971,,,3903,,,3805,,,3008,,,3008,3971
+11A130821,130821,Perafita,11A,1308,Matosinhos,matosinhos,2026-Q2,2550,,,,,,,,,,,,,,,,
+11A130822,130822,Santa Cruz do Bispo,11A,1308,Matosinhos,matosinhos,2026-Q2,,,,,,,,,,,,,,,,,
+11A130823,130823,São Mamede de Infesta,11A,1308,Matosinhos,matosinhos,2026-Q2,2874,,,3541,,,2819,,,2369,,,2155,,,2155,3541
+11A130824,130824,Senhora da Hora,11A,1308,Matosinhos,matosinhos,2026-Q2,3296,,,4113,,,3042,,,2979,,,2755,,,2755,4113
+11A131001,131001,Aguiar de Sousa,11A,1310,Paredes,paredes,2026-Q2,,,,,,,,,,,,,,,,,
+11A131002,131002,Astromil,11A,1310,Paredes,paredes,2026-Q2,,,,,,,,,,,,,,,,,
+11A131003,131003,Baltar,11A,1310,Paredes,paredes,2026-Q2,1862,831,124.1,,,,,,,,,,,,,,
+11A131004,131004,Beire,11A,1310,Paredes,paredes,2026-Q2,,,,,,,,,,,,,,,,,
+11A131008,131008,Cete,11A,1310,Paredes,paredes,2026-Q2,,756,,,,,,,,,,,,,,,
+11A131009,131009,Cristelo,11A,1310,Paredes,paredes,2026-Q2,,,,,,,,,,,,,,,,,
+11A131010,131010,Duas Igrejas,11A,1310,Paredes,paredes,2026-Q2,,1016,,,,,,,,,,,,,,,
+11A131011,131011,Gandra,11A,1310,Paredes,paredes,2026-Q2,1912,1011,89.1,,,,2091,1080,93.6,,,,,,,,
+11A131013,131013,Lordelo,11A,1310,Paredes,paredes,2026-Q2,1659,776,113.8,,,,1760,,,1688,,,,,,1688,1760
+11A131014,131014,Louredo,11A,1310,Paredes,paredes,2026-Q2,,,,,,,,,,,,,,,,,
+11A131017,131017,Parada de Todeia,11A,1310,Paredes,paredes,2026-Q2,,,,,,,,,,,,,,,,,
+11A131018,131018,Rebordosa,11A,1310,Paredes,paredes,2026-Q2,1642,784,109.4,,,,,,,1676,927,80.8,,,,,
+11A131019,131019,Recarei,11A,1310,Paredes,paredes,2026-Q2,,,,,,,,,,,,,,,,,
+11A131020,131020,Sobreira,11A,1310,Paredes,paredes,2026-Q2,,,,,,,,,,,,,,,,,
+11A131021,131021,Sobrosa,11A,1310,Paredes,paredes,2026-Q2,1747,,,,,,,,,,,,,,,,
+11A131022,131022,Vandoma,11A,1310,Paredes,paredes,2026-Q2,,,,,,,,,,,,,,,,,
+11A131024,131024,Vilela,11A,1310,Paredes,paredes,2026-Q2,1297,,,,,,,,,,,,,,,,
+11A131025,131025,Paredes,11A,1310,Paredes,paredes,2026-Q2,1752,929,88.6,2027,,,1942,931,108.6,1658,937,76.9,,,,1658,2027
+11A131202,131202,Bonfim,11A,1312,Porto,porto,2026-Q2,3378,1987,70.0,4211,2574,63.6,3246,1734,87.2,2921,1491,95.9,2457,1187,107.0,2457,4211
+11A131203,131203,Campanhã,11A,1312,Porto,porto,2026-Q2,2836,1897,49.5,3522,2950,19.4,2781,2020,37.7,2681,1147,133.7,2528,1300,94.5,2528,3522
+11A131210,131210,Paranhos,11A,1312,Porto,porto,2026-Q2,3401,2054,65.6,3780,2377,59.0,3282,1975,66.2,2737,1689,62.0,2387,1458,63.7,2387,3780
+11A131211,131211,Ramalde,11A,1312,Porto,porto,2026-Q2,3636,1949,86.6,4122,2052,100.9,3905,1880,107.7,3357,2035,65.0,2904,1819,59.6,2904,4122
+11A131216,131216,"União das freguesias de Aldoar, Foz do Douro e Nevogilde",11A,1312,Porto,porto,2026-Q2,4359,2894,50.6,,2885,,4264,2621,62.7,3994,3219,24.1,4583,2961,54.8,3994,4583
+11A131217,131217,"União das freguesias de Cedofeita, Santo Ildefonso, Sé, Miragaia, São Nicolau e Vitória",11A,1312,Porto,porto,2026-Q2,4160,2504,66.1,4550,2837,60.4,3865,2165,78.5,3069,1880,63.2,2508,1505,66.6,2508,4550
+11A131218,131218,União das freguesias de Lordelo do Ouro e Massarelos,11A,1312,Porto,porto,2026-Q2,3675,2519,45.9,4335,2801,54.8,3408,2461,38.5,3500,2469,41.8,3508,2415,45.3,3408,4335
+11A131305,131305,Balazar,11A,1313,Póvoa de Varzim,povoa-de-varzim,2026-Q2,,,,,,,,,,,,,,,,,
+11A131307,131307,Estela,11A,1313,Póvoa de Varzim,povoa-de-varzim,2026-Q2,,,,,,,,,,,,,,,,,
+11A131308,131308,Laundos,11A,1313,Póvoa de Varzim,povoa-de-varzim,2026-Q2,,,,,,,,,,,,,,,,,
+11A131311,131311,Rates,11A,1313,Póvoa de Varzim,povoa-de-varzim,2026-Q2,,,,,,,,,,,,,,,,,
+11A131316,131316,Aguçadoura,11A,1313,Póvoa de Varzim,povoa-de-varzim,2026-Q2,,,,,,,,,,,,,,,,,
+11A131317,131317,Amorim,11A,1313,Póvoa de Varzim,povoa-de-varzim,2026-Q2,,,,,,,,,,,,,,,,,
+11A131318,131318,Argivai,11A,1313,Póvoa de Varzim,povoa-de-varzim,2026-Q2,,,,,,,,,,,,,,,,,
+11A131319,131319,Aver-o-Mar,11A,1313,Póvoa de Varzim,povoa-de-varzim,2026-Q2,2495,,,,,,2721,,,2285,,,,,,2285,2721
+11A131320,131320,Beiriz,11A,1313,Póvoa de Varzim,povoa-de-varzim,2026-Q2,2284,,,,,,,,,,,,,,,,
+11A131321,131321,Navais,11A,1313,Póvoa de Varzim,povoa-de-varzim,2026-Q2,,,,,,,,,,,,,,,,,
+11A131322,131322,Póvoa de Varzim,11A,1313,Póvoa de Varzim,povoa-de-varzim,2026-Q2,2637,,,3413,,,2779,,,2308,,,1937,,,1937,3413
+11A131323,131323,Terroso,11A,1313,Póvoa de Varzim,povoa-de-varzim,2026-Q2,,,,,,,,,,,,,,,,,
+11A131401,131401,Agrela,11A,1314,Santo Tirso,santo-tirso,2026-Q2,,,,,,,,,,,,,,,,,
+11A131402,131402,Água Longa,11A,1314,Santo Tirso,santo-tirso,2026-Q2,,,,,,,,,,,,,,,,,
+11A131405,131405,Aves,11A,1314,Santo Tirso,santo-tirso,2026-Q2,1729,922,87.5,,,,,,,1731,,,,,,,
+11A131413,131413,Monte Córdova,11A,1314,Santo Tirso,santo-tirso,2026-Q2,1393,,,,,,,,,,,,,,,,
+11A131416,131416,Rebordões,11A,1314,Santo Tirso,santo-tirso,2026-Q2,,758,,,,,,,,,,,,,,,
+11A131418,131418,Reguenga,11A,1314,Santo Tirso,santo-tirso,2026-Q2,,,,,,,,,,,,,,,,,
+11A131419,131419,Roriz,11A,1314,Santo Tirso,santo-tirso,2026-Q2,,,,,,,,,,,,,,,,,
+11A131430,131430,Negrelos (São Tomé),11A,1314,Santo Tirso,santo-tirso,2026-Q2,,,,,,,,,,,,,,,,,
+11A131432,131432,Vilarinho,11A,1314,Santo Tirso,santo-tirso,2026-Q2,,,,,,,,,,,,,,,,,
+11A131433,131433,"União das freguesias de Areias, Sequeiró, Lama e Palmeira",11A,1314,Santo Tirso,santo-tirso,2026-Q2,,777,,,,,,,,,,,,,,,
+11A131434,131434,Vila Nova do Campo,11A,1314,Santo Tirso,santo-tirso,2026-Q2,1626,756,115.1,,,,,,,,,,,,,,
+11A131435,131435,União das freguesias de Carreira e Refojos de Riba de Ave,11A,1314,Santo Tirso,santo-tirso,2026-Q2,,,,,,,,,,,,,,,,,
+11A131436,131436,União das freguesias de Lamelas e Guimarei,11A,1314,Santo Tirso,santo-tirso,2026-Q2,,,,,,,,,,,,,,,,,
+11A131437,131437,"União das freguesias de Santo Tirso, Couto (Santa Cristina e São Miguel) e Burgães",11A,1314,Santo Tirso,santo-tirso,2026-Q2,1867,957,95.1,2060,,,1938,966,100.6,1908,947,101.5,,,,1908,2060
+11A131501,131501,Alfena,11A,1315,Valongo,valongo,2026-Q2,2222,1239,79.3,,1202,,2343,1244,88.3,2149,1215,76.9,,,,2149,2343
+11A131503,131503,Ermesinde,11A,1315,Valongo,valongo,2026-Q2,2369,1261,87.9,2473,1250,97.8,2461,1241,98.3,2306,1290,78.8,1748,1182,47.9,1748,2473
+11A131505,131505,Valongo,11A,1315,Valongo,valongo,2026-Q2,2361,1150,105.3,2500,1066,134.5,2491,1154,115.9,2193,1182,85.5,,1067,,2193,2500
+11A131507,131507,Campo,11A,1315,Valongo,valongo,2026-Q2,2062,,,,,,2338,,,,,,,,,,
+11A131508,131508,Sobrado,11A,1315,Valongo,valongo,2026-Q2,2056,,,,,,,,,,,,,,,,
+11A131602,131602,Árvore,11A,1316,Vila do Conde,vila-do-conde,2026-Q2,2482,1235,101.0,,,,2585,1366,89.2,2218,1200,84.8,,,,2218,2585
+11A131603,131603,Aveleda,11A,1316,Vila do Conde,vila-do-conde,2026-Q2,,,,,,,,,,,,,,,,,
+11A131604,131604,Azurara,11A,1316,Vila do Conde,vila-do-conde,2026-Q2,2266,1322,71.4,,,,,,,,,,,,,,
+11A131607,131607,Fajozes,11A,1316,Vila do Conde,vila-do-conde,2026-Q2,,,,,,,,,,,,,,,,,
+11A131610,131610,Gião,11A,1316,Vila do Conde,vila-do-conde,2026-Q2,,,,,,,,,,,,,,,,,
+11A131611,131611,Guilhabreu,11A,1316,Vila do Conde,vila-do-conde,2026-Q2,,,,,,,,,,,,,,,,,
+11A131612,131612,Junqueira,11A,1316,Vila do Conde,vila-do-conde,2026-Q2,,,,,,,,,,,,,,,,,
+11A131613,131613,Labruge,11A,1316,Vila do Conde,vila-do-conde,2026-Q2,2247,1494,50.4,,,,,,,,,,,,,,
+11A131614,131614,Macieira da Maia,11A,1316,Vila do Conde,vila-do-conde,2026-Q2,1995,,,,,,,,,,,,,,,,
+11A131616,131616,Mindelo,11A,1316,Vila do Conde,vila-do-conde,2026-Q2,2385,1265,88.5,,,,,1265,,2316,,,,,,,
+11A131617,131617,Modivas,11A,1316,Vila do Conde,vila-do-conde,2026-Q2,,,,,,,,,,,,,,,,,
+11A131627,131627,Vila Chã,11A,1316,Vila do Conde,vila-do-conde,2026-Q2,2264,1471,53.9,,,,,,,2257,,,,,,,
+11A131628,131628,Vila do Conde,11A,1316,Vila do Conde,vila-do-conde,2026-Q2,2591,1500,72.7,3116,1536,102.9,2712,1557,74.2,2444,1468,66.5,2059,1263,63.0,2059,3116
+11A131630,131630,Vilar de Pinheiro,11A,1316,Vila do Conde,vila-do-conde,2026-Q2,,1284,,,,,,,,,,,,,,,
+11A131631,131631,"União das freguesias de Bagunte, Ferreiró, Outeiro Maior e Parada",11A,1316,Vila do Conde,vila-do-conde,2026-Q2,,,,,,,,,,,,,,,,,
+11A131636,131636,União das freguesias de Touguinha e Touguinhó,11A,1316,Vila do Conde,vila-do-conde,2026-Q2,2004,1132,77.0,,,,,,,,,,,,,,
+11A131637,131637,União das freguesias de Vilar e Mosteiró,11A,1316,Vila do Conde,vila-do-conde,2026-Q2,,,,,,,,,,,,,,,,,
+11A131638,131638,Arcos,11A,1316,Vila do Conde,vila-do-conde,2026-Q2,,,,,,,,,,,,,,,,,
+11A131639,131639,Canidelo,11A,1316,Vila do Conde,vila-do-conde,2026-Q2,,,,,,,,,,,,,,,,,
+11A131640,131640,Fornelos,11A,1316,Vila do Conde,vila-do-conde,2026-Q2,,,,,,,,,,,,,,,,,
+11A131641,131641,Malta,11A,1316,Vila do Conde,vila-do-conde,2026-Q2,,,,,,,,,,,,,,,,,
+11A131642,131642,Retorta,11A,1316,Vila do Conde,vila-do-conde,2026-Q2,,,,,,,,,,,,,,,,,
+11A131643,131643,Rio Mau,11A,1316,Vila do Conde,vila-do-conde,2026-Q2,,,,,,,,,,,,,,,,,
+11A131644,131644,Tougues,11A,1316,Vila do Conde,vila-do-conde,2026-Q2,,,,,,,,,,,,,,,,,
+11A131645,131645,Vairão,11A,1316,Vila do Conde,vila-do-conde,2026-Q2,,,,,,,,,,,,,,,,,
+11A131701,131701,Arcozelo,11A,1317,Vila Nova de Gaia,vila-nova-de-gaia,2026-Q2,2439,1348,80.9,,1304,,2523,1361,85.4,2274,1367,66.3,2117,1302,62.6,2117,2523
+11A131702,131702,Avintes,11A,1317,Vila Nova de Gaia,vila-nova-de-gaia,2026-Q2,2271,1103,105.9,,,,2364,1173,101.5,2185,1099,98.8,,,,2185,2364
+11A131703,131703,Canelas,11A,1317,Vila Nova de Gaia,vila-nova-de-gaia,2026-Q2,2300,1143,101.2,2700,,,2285,1147,99.2,2176,1187,83.3,,,,2176,2700
+11A131704,131704,Canidelo,11A,1317,Vila Nova de Gaia,vila-nova-de-gaia,2026-Q2,3543,1622,118.4,4046,1616,150.4,3380,1593,112.2,3531,1690,108.9,2963,1757,68.6,2963,4046
+11A131709,131709,Madalena,11A,1317,Vila Nova de Gaia,vila-nova-de-gaia,2026-Q2,2646,1670,58.4,3346,,,2609,1687,54.7,2648,1749,51.4,,,,2609,3346
+11A131712,131712,Oliveira do Douro,11A,1317,Vila Nova de Gaia,vila-nova-de-gaia,2026-Q2,2681,1134,136.4,3115,1193,161.1,2669,1125,137.2,2493,1181,111.1,1605,1131,41.9,1605,3115
+11A131717,131717,São Félix da Marinha,11A,1317,Vila Nova de Gaia,vila-nova-de-gaia,2026-Q2,2473,1361,81.7,,,,2469,1427,73.0,2477,1335,85.5,,963,,2469,2477
+11A131723,131723,Vilar de Andorinho,11A,1317,Vila Nova de Gaia,vila-nova-de-gaia,2026-Q2,2251,1014,122.0,2761,1008,173.9,2224,1015,119.1,2160,1011,113.6,,,,2160,2761
+11A131732,131732,Crestuma,11A,1317,Vila Nova de Gaia,vila-nova-de-gaia,2026-Q2,,,,,,,,,,,,,,,,,
+11A131733,131733,Grijó,11A,1317,Vila Nova de Gaia,vila-nova-de-gaia,2026-Q2,2160,,,,,,2254,,,,,,,,,,
+11A131734,131734,Gulpilhares,11A,1317,Vila Nova de Gaia,vila-nova-de-gaia,2026-Q2,2481,,,,,,2410,,,2260,,,,,,2260,2410
+11A131735,131735,Lever,11A,1317,Vila Nova de Gaia,vila-nova-de-gaia,2026-Q2,,,,,,,,,,,,,,,,,
+11A131736,131736,Mafamude,11A,1317,Vila Nova de Gaia,vila-nova-de-gaia,2026-Q2,2718,,,3109,,,2784,,,2506,,,2204,,,2204,3109
+11A131737,131737,Olival,11A,1317,Vila Nova de Gaia,vila-nova-de-gaia,2026-Q2,2581,,,,,,2683,,,,,,,,,,
+11A131738,131738,Pedroso,11A,1317,Vila Nova de Gaia,vila-nova-de-gaia,2026-Q2,2165,,,2500,,,2350,,,2018,,,,,,2018,2500
+11A131739,131739,Perosinho,11A,1317,Vila Nova de Gaia,vila-nova-de-gaia,2026-Q2,2019,,,,,,,,,,,,,,,,
+11A131740,131740,Sandim,11A,1317,Vila Nova de Gaia,vila-nova-de-gaia,2026-Q2,1273,,,,,,,,,,,,,,,,
+11A131741,131741,Santa Marinha,11A,1317,Vila Nova de Gaia,vila-nova-de-gaia,2026-Q2,2861,,,3440,,,2780,,,2613,,,2128,,,2128,3440
+11A131742,131742,São Pedro da Afurada,11A,1317,Vila Nova de Gaia,vila-nova-de-gaia,2026-Q2,3240,,,,,,,,,,,,,,,,
+11A131743,131743,Seixezelo,11A,1317,Vila Nova de Gaia,vila-nova-de-gaia,2026-Q2,,,,,,,,,,,,,,,,,
+11A131744,131744,Sermonde,11A,1317,Vila Nova de Gaia,vila-nova-de-gaia,2026-Q2,,,,,,,,,,,,,,,,,
+11A131745,131745,Serzedo,11A,1317,Vila Nova de Gaia,vila-nova-de-gaia,2026-Q2,2100,,,,,,,,,,,,,,,,
+11A131746,131746,Valadares,11A,1317,Vila Nova de Gaia,vila-nova-de-gaia,2026-Q2,2461,,,,,,2442,,,,,,,,,,
+11A131747,131747,Vilar do Paraíso,11A,1317,Vila Nova de Gaia,vila-nova-de-gaia,2026-Q2,2377,,,2726,,,2444,,,2205,,,,,,2205,2726
+11A131806,131806,Covelas,11A,1318,Trofa,trofa,2026-Q2,,,,,,,,,,,,,,,,,
+11A131808,131808,Muro,11A,1318,Trofa,trofa,2026-Q2,,,,,,,,,,,,,,,,,
+11A131810,131810,União das freguesias de Bougado (São Martinho e Santiago),11A,1318,Trofa,trofa,2026-Q2,2033,915,122.2,2314,,,2081,972,114.1,1866,900,107.3,,,,1866,2314
+11A131811,131811,União das freguesias de Coronado (São Romão e São Mamede),11A,1318,Trofa,trofa,2026-Q2,1989,979,103.2,,,,2101,1019,106.2,1904,962,97.9,,,,1904,2101
+11A131812,131812,Alvarelhos,11A,1318,Trofa,trofa,2026-Q2,,,,,,,,,,,,,,,,,
+11A131813,131813,Guidões,11A,1318,Trofa,trofa,2026-Q2,,,,,,,,,,,,,,,,,
+150080102,080102,Guia,150,0801,Albufeira,albufeira,2026-Q2,3660,2221,64.8,3889,2167,79.5,3600,2230,61.4,,2308,,,,,3600,3889
+150080103,080103,Paderne,150,0801,Albufeira,albufeira,2026-Q2,2511,1062,136.4,,,,,,,,,,,,,,
+150080104,080104,Ferreiras,150,0801,Albufeira,albufeira,2026-Q2,2840,,,,,,,,,,,,,,,,
+150080106,080106,Albufeira e Olhos de Água,150,0801,Albufeira,albufeira,2026-Q2,3539,2108,67.9,3667,2065,77.6,3192,2143,49.0,3389,2178,55.6,3721,2523,47.5,3192,3721
+150080202,080202,Giões,150,0802,Alcoutim,alcoutim,2026-Q2,,,,,,,,,,,,,,,,,
+150080203,080203,Martim Longo,150,0802,Alcoutim,alcoutim,2026-Q2,,,,,,,,,,,,,,,,,
+150080205,080205,Vaqueiros,150,0802,Alcoutim,alcoutim,2026-Q2,,,,,,,,,,,,,,,,,
+150080206,080206,União das freguesias de Alcoutim e Pereiro,150,0802,Alcoutim,alcoutim,2026-Q2,1035,,,,,,,,,,,,,,,,
+150080301,080301,Aljezur,150,0803,Aljezur,aljezur,2026-Q2,3508,2065,69.9,,,,,1974,,3437,2239,53.5,,,,,
+150080302,080302,Bordeira,150,0803,Aljezur,aljezur,2026-Q2,,,,,,,,,,,,,,,,,
+150080303,080303,Odeceixe,150,0803,Aljezur,aljezur,2026-Q2,,,,,,,,,,,,,,,,,
+150080304,080304,Rogil,150,0803,Aljezur,aljezur,2026-Q2,,,,,,,,,,,,,,,,,
+150080401,080401,Azinhal,150,0804,Castro Marim,castro-marim,2026-Q2,,,,,,,,,,,,,,,,,
+150080402,080402,Castro Marim,150,0804,Castro Marim,castro-marim,2026-Q2,2552,1513,68.7,,,,,,,2351,,,,,,,
+150080403,080403,Odeleite,150,0804,Castro Marim,castro-marim,2026-Q2,,,,,,,,,,,,,,,,,
+150080404,080404,Altura,150,0804,Castro Marim,castro-marim,2026-Q2,3687,1776,107.6,4014,,,,,,,,,,,,,
+150080503,080503,Santa Bárbara de Nexe,150,0805,Faro,faro,2026-Q2,3728,1656,125.1,,,,,,,,,,,1559,,,
+150080506,080506,Montenegro,150,0805,Faro,faro,2026-Q2,3572,1771,101.7,,,,,,,3594,,,,1855,,,
+150080508,080508,União das freguesias de Faro (Sé e São Pedro),150,0805,Faro,faro,2026-Q2,3132,1705,83.7,3555,1917,85.4,3291,1744,88.7,2960,1648,79.6,2523,1405,79.6,2523,3555
+150080509,080509,Conceição,150,0805,Faro,faro,2026-Q2,,,,,,,,,,,,,,,,,
+150080510,080510,Estoi,150,0805,Faro,faro,2026-Q2,2355,,,,,,,,,,,,,,,,
+150080602,080602,Ferragudo,150,0806,Lagoa,lagoa,2026-Q2,3667,2204,66.4,,,,,,,,,,,,,,
+150080604,080604,Porches,150,0806,Lagoa,lagoa,2026-Q2,3715,2128,74.6,3787,2210,71.4,,,,,,,,,,,
+150080607,080607,União das freguesias de Estômbar e Parchal,150,0806,Lagoa,lagoa,2026-Q2,3281,1500,118.7,,,,2991,1484,101.5,3557,1580,125.1,3166,,,2991,3557
+150080608,080608,União das freguesias de Lagoa e Carvoeiro,150,0806,Lagoa,lagoa,2026-Q2,3257,1978,64.7,3687,2218,66.2,3232,1833,76.3,3101,1876,65.3,3003,2292,31.0,3003,3687
+150080703,080703,Luz,150,0807,Lagos,lagos,2026-Q2,4291,2258,90.0,4320,2136,102.2,4273,2255,89.5,4484,2538,76.7,,,,4273,4484
+150080704,080704,Odiáxere,150,0807,Lagos,lagos,2026-Q2,,1470,,,,,,,,,1456,,,,,,
+150080708,080708,São Gonçalo de Lagos,150,0807,Lagos,lagos,2026-Q2,3876,2132,81.8,4115,2423,69.8,3866,2083,85.6,3872,1955,98.1,3564,2231,59.7,3564,4115
+150080709,080709,Barão de São João,150,0807,Lagos,lagos,2026-Q2,,,,,,,,,,,,,,,,,
+150080710,080710,Bensafrim,150,0807,Lagos,lagos,2026-Q2,,,,,,,,,,,,,,,,,
+150080801,080801,Almancil,150,0808,Loulé,loule,2026-Q2,5617,3536,58.9,5431,2943,84.5,4094,2879,42.2,5707,3547,60.9,7817,5179,50.9,4094,7817
+150080802,080802,Alte,150,0808,Loulé,loule,2026-Q2,1642,589,178.8,,,,,,,,,,,,,,
+150080803,080803,Ameixial,150,0808,Loulé,loule,2026-Q2,,,,,,,,,,,,,,,,,
+150080804,080804,Boliqueime,150,0808,Loulé,loule,2026-Q2,2741,1711,60.2,,,,,,,,,,,,,,
+150080805,080805,Quarteira,150,0808,Loulé,loule,2026-Q2,4482,2589,73.1,4473,2439,83.4,4339,2627,65.2,4737,2756,71.9,6175,3097,99.4,4339,6175
+150080807,080807,Salir,150,0808,Loulé,loule,2026-Q2,1250,744,68.0,,,,,,,,,,,,,,
+150080808,080808,Loulé (São Clemente),150,0808,Loulé,loule,2026-Q2,3156,1649,91.4,3107,,,3050,1699,79.5,3148,1597,97.1,3417,1649,107.2,3050,3417
+150080809,080809,Loulé (São Sebastião),150,0808,Loulé,loule,2026-Q2,2899,1669,73.7,,,,2973,,,2626,1669,57.3,,,,2626,2973
+150080813,080813,Benafim,150,0808,Loulé,loule,2026-Q2,,,,,,,,,,,,,,,,,
+150080814,080814,Querença,150,0808,Loulé,loule,2026-Q2,,,,,,,,,,,,,,,,,
+150080815,080815,Tôr,150,0808,Loulé,loule,2026-Q2,,,,,,,,,,,,,,,,,
+150080901,080901,Alferce,150,0809,Monchique,monchique,2026-Q2,,,,,,,,,,,,,,,,,
+150080902,080902,Marmelete,150,0809,Monchique,monchique,2026-Q2,,,,,,,,,,,,,,,,,
+150080903,080903,Monchique,150,0809,Monchique,monchique,2026-Q2,1592,676,135.5,,,,,,,,,,,,,,
+150081003,081003,Olhão,150,0810,Olhão,olhao,2026-Q2,2757,1460,88.8,3513,1676,109.6,2663,1495,78.1,2556,1252,104.2,2551,1462,74.5,2551,3513
+150081004,081004,Pechão,150,0810,Olhão,olhao,2026-Q2,2792,1564,78.5,,,,,,,,,,,,,,
+150081005,081005,Quelfes,150,0810,Olhão,olhao,2026-Q2,2660,1427,86.4,,,,2856,1445,97.6,2564,1410,81.8,2233,1452,53.8,2233,2856
+150081007,081007,Fuseta,150,0810,Olhão,olhao,2026-Q2,2842,,,,,,,,,,,,,,,,
+150081008,081008,Moncarapacho,150,0810,Olhão,olhao,2026-Q2,2970,,,,,,2980,,,3175,,,,,,2980,3175
+150081101,081101,Alvor,150,0811,Portimão,portimao,2026-Q2,3425,1946,76.0,3564,1971,80.8,3617,2083,73.6,2506,,,,,,2506,3617
+150081102,081102,Mexilhoeira Grande,150,0811,Portimão,portimao,2026-Q2,2662,1598,66.6,,,,,,,,,,,,,,
+150081103,081103,Portimão,150,0811,Portimão,portimao,2026-Q2,3248,1659,95.8,3965,1955,102.8,3138,1580,98.6,2691,1365,97.1,2342,1300,80.2,2342,3965
+150081201,081201,São Brás de Alportel,150,0812,São Brás de Alportel,sao-bras-de-alportel,2026-Q2,2452,1335,83.7,,,,2659,1291,106.0,2410,1365,76.6,2255,1289,74.9,2255,2659
+150081303,081303,Armação de Pêra,150,0813,Silves,silves,2026-Q2,3657,1860,96.6,3788,1977,91.6,3424,1765,94.0,,,,,,,3424,3788
+150081305,081305,São Bartolomeu de Messines,150,0813,Silves,silves,2026-Q2,1889,1043,81.1,,,,1870,1034,80.9,2137,1297,64.8,,,,1870,2137
+150081306,081306,São Marcos da Serra,150,0813,Silves,silves,2026-Q2,1193,714,67.1,,,,,,,,,,,,,,
+150081307,081307,Silves,150,0813,Silves,silves,2026-Q2,2604,1319,97.4,2927,,,2724,1476,84.6,2195,1189,84.6,,,,2195,2927
+150081311,081311,Alcantarilha,150,0813,Silves,silves,2026-Q2,2924,,,,,,,,,,,,,,,,
+150081312,081312,Algoz,150,0813,Silves,silves,2026-Q2,2470,,,,,,,,,,,,,,,,
+150081313,081313,Pêra,150,0813,Silves,silves,2026-Q2,2834,,,,,,,,,,,,,,,,
+150081314,081314,Tunes,150,0813,Silves,silves,2026-Q2,2682,,,,,,,,,,,,,,,,
+150081401,081401,Cachopo,150,0814,Tavira,tavira,2026-Q2,,,,,,,,,,,,,,,,,
+150081404,081404,Santa Catarina da Fonte do Bispo,150,0814,Tavira,tavira,2026-Q2,2206,1303,69.3,,,,,,,,,,,,,,
+150081408,081408,Santa Luzia,150,0814,Tavira,tavira,2026-Q2,3762,2361,59.3,,,,,,,,,,,,,,
+150081412,081412,União das freguesias de Tavira (Santa Maria e Santiago),150,0814,Tavira,tavira,2026-Q2,3270,1965,66.4,3582,2015,77.8,3303,1954,69.0,3183,1914,66.3,2598,2081,24.8,2598,3582
+150081413,081413,Cabanas de Tavira,150,0814,Tavira,tavira,2026-Q2,3834,,,4000,,,3624,,,,,,,,,3624,4000
+150081414,081414,Conceição,150,0814,Tavira,tavira,2026-Q2,3051,,,3084,,,3159,,,2994,,,,,,2994,3159
+150081415,081415,Luz de Tavira,150,0814,Tavira,tavira,2026-Q2,3032,,,,,,,,,,,,,,,,
+150081416,081416,Santo Estêvão,150,0814,Tavira,tavira,2026-Q2,,,,,,,,,,,,,,,,,
+150081501,081501,Barão de São Miguel,150,0815,Vila do Bispo,vila-do-bispo,2026-Q2,,,,,,,,,,,,,,,,,
+150081502,081502,Budens,150,0815,Vila do Bispo,vila-do-bispo,2026-Q2,3169,1806,75.5,,,,3048,1682,81.2,,1958,,,,,,
+150081504,081504,Sagres,150,0815,Vila do Bispo,vila-do-bispo,2026-Q2,,,,,,,,,,,,,,,,,
+150081506,081506,Vila do Bispo e Raposeira,150,0815,Vila do Bispo,vila-do-bispo,2026-Q2,,1586,,,,,,,,,,,,,,,
+150081601,081601,Vila Nova de Cacela,150,0816,Vila Real de Santo António,vila-real-de-santo-antonio,2026-Q2,3390,2064,64.2,4542,2437,86.4,3147,2071,52.0,,1950,,,,,3147,4542
+150081602,081602,Vila Real de Santo António,150,0816,Vila Real de Santo António,vila-real-de-santo-antonio,2026-Q2,2725,1474,84.9,3415,1648,107.2,2651,1478,79.4,2457,1352,81.7,,,,2457,3415
+150081603,081603,Monte Gordo,150,0816,Vila Real de Santo António,vila-real-de-santo-antonio,2026-Q2,3465,1986,74.5,3844,2089,84.0,3097,1809,71.2,,,,,,,3097,3844
+192060301,060301,Almalaguês,192,0603,Coimbra,coimbra,2026-Q2,,,,,,,,,,,,,,,,,
+192060309,060309,Brasfemes,192,0603,Coimbra,coimbra,2026-Q2,,,,,,,,,,,,,,,,,
+192060311,060311,Ceira,192,0603,Coimbra,coimbra,2026-Q2,1050,,,,,,,,,,,,,,,,
+192060312,060312,Cernache,192,0603,Coimbra,coimbra,2026-Q2,1084,769,41.0,,,,,,,,,,,,,,
+192060318,060318,Santo António dos Olivais,192,0603,Coimbra,coimbra,2026-Q2,3072,1801,70.6,3604,1990,81.1,3194,1863,71.4,2795,1805,54.8,2574,1493,72.4,2574,3604
+192060320,060320,São João do Campo,192,0603,Coimbra,coimbra,2026-Q2,,,,,,,,,,,,,,,,,
+192060324,060324,São Silvestre,192,0603,Coimbra,coimbra,2026-Q2,,,,,,,,,,,,,,,,,
+192060329,060329,Torres do Mondego,192,0603,Coimbra,coimbra,2026-Q2,,,,,,,,,,,,,,,,,
+192060332,060332,União das freguesias de Antuzede e Vil de Matos,192,0603,Coimbra,coimbra,2026-Q2,,,,,,,,,,,,,,,,,
+192060333,060333,União das freguesias de Assafarge e Antanhol,192,0603,Coimbra,coimbra,2026-Q2,1886,1033,82.6,,,,,,,,,,,,,,
+192060334,060334,"União das freguesias de Coimbra (Sé Nova, Santa Cruz, Almedina e São Bartolomeu)",192,0603,Coimbra,coimbra,2026-Q2,2734,1462,87.0,3345,1776,88.3,2907,1563,86.0,2693,1374,96.0,2046,1265,61.7,2046,3345
+192060335,060335,União das freguesias de Eiras e São Paulo de Frades,192,0603,Coimbra,coimbra,2026-Q2,2108,1088,93.8,2425,1304,86.0,2321,1093,112.4,2093,1060,97.5,1341,,,1341,2425
+192060336,060336,União das freguesias de Santa Clara e Castelo Viegas,192,0603,Coimbra,coimbra,2026-Q2,2341,1465,59.8,3767,1624,132.0,2736,1553,76.2,2137,1366,56.4,,,,2137,3767
+192060337,060337,União das freguesias de São Martinho de Árvore e Lamarosa,192,0603,Coimbra,coimbra,2026-Q2,,,,,,,,,,,,,,,,,
+192060338,060338,União das freguesias de São Martinho do Bispo e Ribeira de Frades,192,0603,Coimbra,coimbra,2026-Q2,1988,1146,73.5,,1325,,2127,1332,59.7,1954,1053,85.6,1623,972,67.0,1623,2127
+192060339,060339,União das freguesias de Souselas e Botão,192,0603,Coimbra,coimbra,2026-Q2,1038,,,,,,,,,,,,,,,,
+192060340,060340,"União das freguesias de Taveiro, Ameal e Arzila",192,0603,Coimbra,coimbra,2026-Q2,1036,599,73.0,,,,,,,,,,,,,,
+192060341,060341,União das freguesias de Trouxemil e Torre de Vilela,192,0603,Coimbra,coimbra,2026-Q2,,,,,,,,,,,,,,,,,
+193100901,100901,Amor,193,1009,Leiria,leiria,2026-Q2,,,,,,,,,,,,,,,,,
+193100902,100902,Arrabal,193,1009,Leiria,leiria,2026-Q2,,,,,,,,,,,,,,,,,
+193100907,100907,Caranguejeira,193,1009,Leiria,leiria,2026-Q2,1826,,,,,,,,,,,,,,,,
+193100909,100909,Coimbrão,193,1009,Leiria,leiria,2026-Q2,1721,971,77.2,,,,,1013,,,,,,,,,
+193100913,100913,Maceira,193,1009,Leiria,leiria,2026-Q2,1402,730,92.1,,,,,,,1436,,,,,,,
+193100915,100915,Milagres,193,1009,Leiria,leiria,2026-Q2,,,,,,,,,,,,,,,,,
+193100921,100921,Regueira de Pontes,193,1009,Leiria,leiria,2026-Q2,,,,,,,,,,,,,,,,,
+193100925,100925,Bajouca,193,1009,Leiria,leiria,2026-Q2,,,,,,,,,,,,,,,,,
+193100926,100926,Bidoeira de Cima,193,1009,Leiria,leiria,2026-Q2,,,,,,,,,,,,,,,,,
+193100932,100932,União das freguesias de Colmeias e Memória,193,1009,Leiria,leiria,2026-Q2,967,,,,,,,,,,,,,,,,
+193100933,100933,"União das freguesias de Leiria, Pousos, Barreira e Cortes",193,1009,Leiria,leiria,2026-Q2,2297,1212,89.5,3249,1500,116.6,2393,1268,88.7,2092,1133,84.6,1827,1034,76.7,1827,3249
+193100934,100934,União das freguesias de Marrazes e Barosa,193,1009,Leiria,leiria,2026-Q2,2073,994,108.6,2554,1173,117.7,2319,1128,105.6,1991,939,112.0,1703,932,82.7,1703,2554
+193100935,100935,União das freguesias de Monte Real e Carvide,193,1009,Leiria,leiria,2026-Q2,1492,677,120.4,,,,,,,,,,,,,,
+193100937,100937,União das freguesias de Parceiros e Azoia,193,1009,Leiria,leiria,2026-Q2,2269,1225,85.2,,,,2477,1252,97.8,2340,1297,80.4,,1022,,2340,2477
+193100938,100938,União das freguesias de Santa Catarina da Serra e Chainça,193,1009,Leiria,leiria,2026-Q2,1149,,,,,,,,,,,,,,,,
+193100939,100939,União das freguesias de Santa Eufémia e Boa Vista,193,1009,Leiria,leiria,2026-Q2,1982,,,,,,,,,,,,,,,,
+193100941,100941,Carreira,193,1009,Leiria,leiria,2026-Q2,,,,,,,,,,,,,,,,,
+193100942,100942,Monte Redondo,193,1009,Leiria,leiria,2026-Q2,,,,,,,,,,,,,,,,,
+193100943,100943,Ortigosa,193,1009,Leiria,leiria,2026-Q2,,,,,,,,,,,,,,,,,
+193100944,100944,Souto da Carpalhosa,193,1009,Leiria,leiria,2026-Q2,,,,,,,,,,,,,,,,,
+1A0110501,110501,Alcabideche,1A0,1105,Cascais,cascais,2026-Q2,4412,2547,73.2,4797,2383,101.3,4415,2547,73.3,4330,2480,74.6,4817,2805,71.7,4330,4817
+1A0110506,110506,São Domingos de Rana,1A0,1105,Cascais,cascais,2026-Q2,4068,2393,70.0,4231,2225,90.2,4455,2395,86.0,4012,2428,65.2,3553,2218,60.2,3553,4455
+1A0110507,110507,União das freguesias de Carcavelos e Parede,1A0,1105,Cascais,cascais,2026-Q2,5071,3019,68.0,5623,3381,66.3,5259,3000,75.3,4889,2866,70.6,4271,2978,43.4,4271,5623
+1A0110508,110508,União das freguesias de Cascais e Estoril,1A0,1105,Cascais,cascais,2026-Q2,5623,3351,67.8,5979,3193,87.3,5029,3241,55.2,5533,3124,77.1,6841,3797,80.2,5029,6841
+1A0110601,110601,Ajuda,1A0,1106,Lisboa,lisboa,2026-Q2,5255,3088,70.2,5343,3050,75.2,5156,3166,62.9,5288,3163,67.2,,,,5156,5343
+1A0110602,110602,Alcântara,1A0,1106,Lisboa,lisboa,2026-Q2,4965,3086,60.9,5975,3091,93.3,5052,3117,62.1,4763,3113,53.0,4432,,,4432,5975
+1A0110607,110607,Beato,1A0,1106,Lisboa,lisboa,2026-Q2,4880,2536,92.4,5180,2650,95.5,4935,2228,121.5,,,,,,,4935,5180
+1A0110608,110608,Benfica,1A0,1106,Lisboa,lisboa,2026-Q2,4792,2782,72.3,5456,2972,83.6,4833,2736,76.6,4550,2743,65.9,4358,2787,56.4,4358,5456
+1A0110610,110610,Campolide,1A0,1106,Lisboa,lisboa,2026-Q2,5580,3336,67.3,6870,3773,82.1,5706,3036,87.9,5078,3359,51.2,4403,2890,52.4,4403,6870
+1A0110611,110611,Carnide,1A0,1106,Lisboa,lisboa,2026-Q2,4690,3266,43.6,,,,,3156,,,3257,,,,,,
+1A0110618,110618,Lumiar,1A0,1106,Lisboa,lisboa,2026-Q2,4877,2909,67.7,5590,2904,92.5,4888,2944,66.0,4761,2910,63.6,4390,2906,51.1,4390,5590
+1A0110621,110621,Marvila,1A0,1106,Lisboa,lisboa,2026-Q2,4952,2955,67.6,,,,4376,,,,,,,,,,
+1A0110633,110633,Olivais,1A0,1106,Lisboa,lisboa,2026-Q2,4399,2729,61.2,,,,4583,2776,65.1,4272,2742,55.8,3883,2500,55.3,3883,4583
+1A0110639,110639,São Domingos de Benfica,1A0,1106,Lisboa,lisboa,2026-Q2,5323,3443,54.6,6101,3935,55.0,5525,3407,62.2,5140,3471,48.1,4409,3152,39.9,4409,6101
+1A0110654,110654,Alvalade,1A0,1106,Lisboa,lisboa,2026-Q2,5152,3704,39.1,6047,3630,66.6,5535,3767,46.9,5341,3863,38.3,4708,3603,30.7,4708,6047
+1A0110655,110655,Areeiro,1A0,1106,Lisboa,lisboa,2026-Q2,5150,3307,55.7,6901,,,5373,3736,43.8,4913,3390,44.9,4399,3107,41.6,4399,6901
+1A0110656,110656,Arroios,1A0,1106,Lisboa,lisboa,2026-Q2,4734,3397,39.4,5897,3750,57.3,5207,3893,33.8,4429,3317,33.5,4159,3104,34.0,4159,5897
+1A0110657,110657,Avenidas Novas,1A0,1106,Lisboa,lisboa,2026-Q2,6144,4202,46.2,7447,4750,56.8,6250,4778,30.8,5993,4334,38.3,5075,3583,41.6,5075,7447
+1A0110658,110658,Belém,1A0,1106,Lisboa,lisboa,2026-Q2,5889,3699,59.2,6275,3102,102.3,5870,3526,66.5,5499,3676,49.6,5692,4018,41.7,5499,6275
+1A0110659,110659,Campo de Ourique,1A0,1106,Lisboa,lisboa,2026-Q2,6055,3571,69.6,6618,3333,98.6,6110,3390,80.2,6280,4052,55.0,5161,3758,37.3,5161,6618
+1A0110660,110660,Estrela,1A0,1106,Lisboa,lisboa,2026-Q2,5770,3854,49.7,5888,3778,55.8,5876,3600,63.2,6037,4120,46.5,5367,3917,37.0,5367,6037
+1A0110661,110661,Misericórdia,1A0,1106,Lisboa,lisboa,2026-Q2,6014,4181,43.8,6275,4000,56.9,6310,4667,35.2,5459,3921,39.2,5325,3858,38.0,5325,6310
+1A0110662,110662,Parque das Nações,1A0,1106,Lisboa,lisboa,2026-Q2,6269,4000,56.7,6477,3432,88.7,6176,4000,54.4,5908,4325,36.6,,4315,,5908,6477
+1A0110663,110663,Penha de França,1A0,1106,Lisboa,lisboa,2026-Q2,4659,2935,58.7,4942,3097,59.6,4811,3056,57.4,4171,2840,46.9,4057,2800,44.9,4057,4942
+1A0110664,110664,Santa Clara,1A0,1106,Lisboa,lisboa,2026-Q2,3850,2386,61.4,2985,,,4042,2220,82.1,3839,2660,44.3,,,,2985,4042
+1A0110665,110665,Santa Maria Maior,1A0,1106,Lisboa,lisboa,2026-Q2,5200,4123,26.1,5709,4741,20.4,4769,3810,25.2,4407,4091,7.7,4958,3260,52.1,4407,5709
+1A0110666,110666,Santo António,1A0,1106,Lisboa,lisboa,2026-Q2,7254,5416,33.9,7374,5979,23.3,7686,5455,40.9,7377,5802,27.1,5502,3930,40.0,5502,7686
+1A0110667,110667,São Vicente,1A0,1106,Lisboa,lisboa,2026-Q2,5045,3542,42.4,5737,3663,56.6,5076,3648,39.1,4732,3506,35.0,4588,2551,79.9,4588,5737
+1A0110702,110702,Bucelas,1A0,1107,Loures,loures,2026-Q2,1859,1625,14.4,,,,,,,,,,,,,,
+1A0110705,110705,Fanhões,1A0,1107,Loures,loures,2026-Q2,,,,,,,,,,,,,,,,,
+1A0110707,110707,Loures,1A0,1107,Loures,loures,2026-Q2,3573,2060,73.4,4114,1934,112.7,3553,1965,80.8,3584,2229,60.8,3309,2089,58.4,3309,4114
+1A0110708,110708,Lousa,1A0,1107,Loures,loures,2026-Q2,,,,,,,,,,,,,,,,,
+1A0110726,110726,União das freguesias de Moscavide e Portela,1A0,1107,Loures,loures,2026-Q2,3818,2412,58.3,4283,2419,77.1,4278,2423,76.6,3659,2421,51.1,3267,2248,45.3,3267,4283
+1A0110727,110727,União das freguesias de Sacavém e Prior Velho,1A0,1107,Loures,loures,2026-Q2,3750,2071,81.1,4072,2191,85.9,3772,1948,93.6,3673,2156,70.4,,,,3673,4072
+1A0110728,110728,"União das freguesias de Santa Iria de Azoia, São João da Talha e Bobadela",1A0,1107,Loures,loures,2026-Q2,3180,1696,87.5,3155,1545,104.2,3309,1681,96.8,3178,1818,74.8,2739,1711,60.1,2739,3309
+1A0110729,110729,União das freguesias de Santo Antão e São Julião do Tojal,1A0,1107,Loures,loures,2026-Q2,2297,1689,36.0,638,,,,,,,,,,,,,
+1A0110730,110730,União das freguesias de Santo António dos Cavaleiros e Frielas,1A0,1107,Loures,loures,2026-Q2,3704,1783,107.7,4778,1915,149.5,3793,1795,111.3,3358,1771,89.6,3442,1591,116.3,3358,4778
+1A0110731,110731,"União das freguesias de Camarate, Unhos e Apelação",1A0,1107,Loures,loures,2026-Q2,2752,1461,88.4,2372,,,2881,1421,102.7,2587,,,,,,2372,2881
+1A0110902,110902,Carvoeira,1A0,1109,Mafra,mafra,2026-Q2,3598,1974,82.3,,,,,,,,,,,,,,
+1A0110904,110904,Encarnação,1A0,1109,Mafra,mafra,2026-Q2,2809,1415,98.5,,,,,,,,,,,,,,
+1A0110906,110906,Ericeira,1A0,1109,Mafra,mafra,2026-Q2,4033,2167,86.1,,2508,,4215,2326,81.2,3756,2046,83.6,3934,1924,104.5,3756,4215
+1A0110909,110909,Mafra,1A0,1109,Mafra,mafra,2026-Q2,3205,1666,92.4,,,,3382,1706,98.2,3171,1641,93.2,2708,1515,78.7,2708,3382
+1A0110911,110911,Milharado,1A0,1109,Mafra,mafra,2026-Q2,2475,1312,88.6,,,,,1267,,,,,,,,,
+1A0110913,110913,Santo Isidoro,1A0,1109,Mafra,mafra,2026-Q2,3364,1712,96.5,,,,,,,,,,,,,,
+1A0110918,110918,União das freguesias de Azueira e Sobral da Abelheira,1A0,1109,Mafra,mafra,2026-Q2,2226,1052,111.6,,,,,,,,,,,,,,
+1A0110919,110919,"União das freguesias de Enxara do Bispo, Gradil e Vila Franca do Rosário",1A0,1109,Mafra,mafra,2026-Q2,2146,1279,67.8,,,,,,,,,,,,,,
+1A0110920,110920,União das freguesias de Igreja Nova e Cheleiros,1A0,1109,Mafra,mafra,2026-Q2,2652,1101,140.9,,,,,,,,,,,,,,
+1A0110921,110921,União das freguesias de Malveira e São Miguel de Alcainça,1A0,1109,Mafra,mafra,2026-Q2,2615,1423,83.8,,,,2847,1439,97.8,2715,1460,86.0,,,,2715,2847
+1A0110922,110922,União das freguesias de Venda do Pinheiro e Santo Estêvão das Galés,1A0,1109,Mafra,mafra,2026-Q2,2843,1522,86.8,,,,3002,1547,94.1,2782,1490,86.7,,,,2782,3002
+1A0111002,111002,Barcarena,1A0,1110,Oeiras,oeiras,2026-Q2,3827,2102,82.1,,,,3797,2047,85.5,,2251,,,,,,
+1A0111009,111009,Porto Salvo,1A0,1110,Oeiras,oeiras,2026-Q2,4340,2317,87.3,4544,,,4340,2308,88.0,4058,,,,,,4058,4544
+1A0111012,111012,"União das freguesias de Algés, Linda-a-Velha e Cruz Quebrada-Dafundo",1A0,1110,Oeiras,oeiras,2026-Q2,4742,2544,86.4,4727,2893,63.4,4915,2574,90.9,4642,2371,95.8,4552,2480,83.5,4552,4915
+1A0111013,111013,União das freguesias de Carnaxide e Queijas,1A0,1110,Oeiras,oeiras,2026-Q2,4175,2339,78.5,4387,2345,87.1,4315,2388,80.7,3979,2189,81.8,4217,2420,74.3,3979,4387
+1A0111014,111014,"União das freguesias de Oeiras e São Julião da Barra, Paço de Arcos e Caxias",1A0,1110,Oeiras,oeiras,2026-Q2,4498,2652,69.6,5210,2801,86.0,4497,2589,73.7,4185,2617,59.9,4012,2700,48.6,4012,5210
+1A0111102,111102,Algueirão-Mem Martins,1A0,1111,Sintra,sintra,2026-Q2,2919,1369,113.2,3365,1333,152.4,3013,1375,119.1,2661,1362,95.4,2562,1419,80.5,2562,3365
+1A0111105,111105,Colares,1A0,1111,Sintra,sintra,2026-Q2,3818,2315,64.9,,,,,,,,,,,2309,,,
+1A0111108,111108,Rio de Mouro,1A0,1111,Sintra,sintra,2026-Q2,2966,1384,114.3,3292,1431,130.0,3032,1364,122.3,2850,1400,103.6,2638,1459,80.8,2638,3292
+1A0111115,111115,Casal de Cambra,1A0,1111,Sintra,sintra,2026-Q2,3126,1700,83.9,,,,3277,1662,97.2,,,,,,,,
+1A0111122,111122,União das freguesias de Agualva e Mira-Sintra,1A0,1111,Sintra,sintra,2026-Q2,3031,1423,113.0,3576,1470,143.3,3084,1461,111.1,2840,1307,117.3,2577,1111,132.0,2577,3576
+1A0111124,111124,União das freguesias do Cacém e São Marcos,1A0,1111,Sintra,sintra,2026-Q2,3171,1473,115.3,3508,1509,132.5,3198,1473,117.1,2901,1468,97.6,,,,2901,3508
+1A0111125,111125,União das freguesias de Massamá e Monte Abraão,1A0,1111,Sintra,sintra,2026-Q2,3111,1505,106.7,3673,1582,132.2,3127,1505,107.8,2889,1471,96.4,2728,1448,88.4,2728,3673
+1A0111128,111128,"União das freguesias de Sintra (Santa Maria e São Miguel, São Martinho e São Pedro de Penaferrim)",1A0,1111,Sintra,sintra,2026-Q2,3509,2053,70.9,3441,2186,57.4,3481,2048,70.0,3561,1924,85.1,3522,2212,59.2,3441,3561
+1A0111129,111129,Almargem do Bispo,1A0,1111,Sintra,sintra,2026-Q2,2226,,,,,,,,,,,,,,,,
+1A0111130,111130,Belas,1A0,1111,Sintra,sintra,2026-Q2,3154,,,3459,,,3115,,,3042,,,3279,,,3042,3459
+1A0111131,111131,Montelavar,1A0,1111,Sintra,sintra,2026-Q2,,,,,,,,,,,,,,,,,
+1A0111132,111132,Pêro Pinheiro,1A0,1111,Sintra,sintra,2026-Q2,2549,,,,,,,,,,,,,,,,
+1A0111133,111133,Queluz,1A0,1111,Sintra,sintra,2026-Q2,3205,,,3717,,,3313,,,2946,,,2855,,,2855,3717
+1A0111134,111134,São João das Lampas,1A0,1111,Sintra,sintra,2026-Q2,2877,,,,,,,,,,,,,,,,
+1A0111135,111135,Terrugem,1A0,1111,Sintra,sintra,2026-Q2,,,,,,,,,,,,,,,,,
+1A0111408,111408,Vialonga,1A0,1114,Vila Franca de Xira,vila-franca-de-xira,2026-Q2,2991,1459,105.0,,,,3125,1383,126.0,2929,1522,92.4,,,,2929,3125
+1A0111409,111409,Vila Franca de Xira,1A0,1114,Vila Franca de Xira,vila-franca-de-xira,2026-Q2,2763,1242,122.5,3139,1144,174.4,2943,1234,138.5,2659,1277,108.2,2034,,,2034,3139
+1A0111412,111412,"União das freguesias de Alhandra, São João dos Montes e Calhandriz",1A0,1114,Vila Franca de Xira,vila-franca-de-xira,2026-Q2,2639,1282,105.9,,,,2936,1228,139.1,2450,1379,77.7,,,,2450,2936
+1A0111413,111413,União das freguesias de Alverca do Ribatejo e Sobralinho,1A0,1114,Vila Franca de Xira,vila-franca-de-xira,2026-Q2,3064,1555,97.0,3159,1578,100.2,3203,1517,111.1,2977,1663,79.0,2632,1447,81.9,2632,3203
+1A0111414,111414,União das freguesias de Castanheira do Ribatejo e Cachoeiras,1A0,1114,Vila Franca de Xira,vila-franca-de-xira,2026-Q2,2564,1101,132.9,,,,2588,1122,130.7,2558,1101,132.3,,,,2558,2588
+1A0111415,111415,União das freguesias de Póvoa de Santa Iria e Forte da Casa,1A0,1114,Vila Franca de Xira,vila-franca-de-xira,2026-Q2,3176,1641,93.5,3423,,,3306,1662,98.9,3025,1643,84.1,,,,3025,3423
+1A0111512,111512,Alfragide,1A0,1115,Amadora,amadora,2026-Q2,3322,2084,59.4,,,,3497,2136,63.7,3244,2066,57.0,,,,3244,3497
+1A0111513,111513,Águas Livres,1A0,1115,Amadora,amadora,2026-Q2,3423,1730,97.9,3839,1808,112.3,3358,1696,98.0,3197,1727,85.1,2958,,,2958,3839
+1A0111514,111514,Encosta do Sol,1A0,1115,Amadora,amadora,2026-Q2,3196,1777,79.9,3517,,,3128,1754,78.3,3185,1821,74.9,,,,3128,3517
+1A0111515,111515,Falagueira-Venda Nova,1A0,1115,Amadora,amadora,2026-Q2,3421,1730,97.7,3930,1879,109.2,3389,1765,92.0,3177,1547,105.4,,,,3177,3930
+1A0111516,111516,Mina de Água,1A0,1115,Amadora,amadora,2026-Q2,3212,1698,89.2,3495,1787,95.6,3291,1720,91.3,2947,1723,71.0,3144,1537,104.6,2947,3495
+1A0111517,111517,Venteira,1A0,1115,Amadora,amadora,2026-Q2,3237,1737,86.4,3970,1879,111.3,3254,1736,87.4,2908,1596,82.2,2484,1564,58.8,2484,3970
+1A0111603,111603,Odivelas,1A0,1116,Odivelas,odivelas,2026-Q2,3678,2134,72.4,4027,2004,100.9,3807,2171,75.4,3427,2100,63.2,3265,,,3265,4027
+1A0111608,111608,União das freguesias de Pontinha e Famões,1A0,1116,Odivelas,odivelas,2026-Q2,3634,2069,75.6,3496,2288,52.8,3917,2000,95.8,3422,2170,57.7,3141,2070,51.7,3141,3917
+1A0111609,111609,União das freguesias de Póvoa de Santo Adrião e Olival Basto,1A0,1116,Odivelas,odivelas,2026-Q2,3384,1946,73.9,4155,1979,110.0,3473,1978,75.6,3197,1894,68.8,,,,3197,4155
+1A0111610,111610,União das freguesias de Ramada e Caneças,1A0,1116,Odivelas,odivelas,2026-Q2,3528,2091,68.7,,,,3712,2150,72.7,3399,2056,65.3,3154,1835,71.9,3154,3712
+1B0150201,150201,Alcochete,1B0,1502,Alcochete,alcochete,2026-Q2,2976,1776,67.6,,,,3044,1699,79.2,2932,1685,74.0,,,,2932,3044
+1B0150202,150202,Samouco,1B0,1502,Alcochete,alcochete,2026-Q2,2663,1257,111.9,,,,,,,,,,,,,,
+1B0150203,150203,São Francisco,1B0,1502,Alcochete,alcochete,2026-Q2,3016,1633,84.7,,,,,,,,,,,,,,
+1B0150303,150303,Costa da Caparica,1B0,1503,Almada,almada,2026-Q2,4520,2367,91.0,5215,2658,96.2,4146,2287,81.3,3739,2313,61.7,,1162,,3739,5215
+1B0150312,150312,"União das freguesias de Almada, Cova da Piedade, Pragal e Cacilhas",1B0,1503,Almada,almada,2026-Q2,3346,1843,81.6,4037,1932,109.0,3536,1905,85.6,3207,1787,79.5,2935,1610,82.3,2935,4037
+1B0150313,150313,União das freguesias de Caparica e Trafaria,1B0,1503,Almada,almada,2026-Q2,3253,1680,93.6,,1815,,3320,1676,98.1,3222,1594,102.1,,,,3222,3320
+1B0150314,150314,União das freguesias de Charneca de Caparica e Sobreda,1B0,1503,Almada,almada,2026-Q2,3435,1902,80.6,4067,1933,110.4,3668,1876,95.5,3321,1967,68.8,3057,1844,65.8,3057,4067
+1B0150315,150315,União das freguesias de Laranjeiro e Feijó,1B0,1503,Almada,almada,2026-Q2,3144,1566,100.8,3650,1687,116.4,3347,1638,104.3,2972,1486,100.0,2853,1449,96.9,2853,3650
+1B0150407,150407,Santo António da Charneca,1B0,1504,Barreiro,barreiro,2026-Q2,2551,966,164.1,,,,2756,981,180.9,2459,965,154.8,,,,2459,2756
+1B0150409,150409,"União das freguesias de Alto do Seixalinho, Santo André e Verderena",1B0,1504,Barreiro,barreiro,2026-Q2,2996,1174,155.2,3300,1183,179.0,3088,1204,156.5,2688,1159,131.9,2625,,,2625,3300
+1B0150410,150410,União das freguesias de Barreiro e Lavradio,1B0,1504,Barreiro,barreiro,2026-Q2,2889,1195,141.8,3438,1211,183.9,3041,1192,155.1,2653,1205,120.2,2344,1021,129.6,2344,3438
+1B0150411,150411,União das freguesias de Palhais e Coina,1B0,1504,Barreiro,barreiro,2026-Q2,2151,1163,85.0,,,,,,,,,,,,,,
+1B0150601,150601,Alhos Vedros,1B0,1506,Moita,moita,2026-Q2,2476,1012,144.7,2948,,,2687,966,178.2,2495,1062,134.9,1857,863,115.2,1857,2948
+1B0150603,150603,Moita,1B0,1506,Moita,moita,2026-Q2,2466,1036,138.0,,,,2662,1047,154.3,2384,994,139.8,,,,2384,2662
+1B0150607,150607,União das freguesias de Baixa da Banheira e Vale da Amoreira,1B0,1506,Moita,moita,2026-Q2,2594,908,185.7,3028,1033,193.1,2640,914,188.8,2330,848,174.8,1942,775,150.6,1942,3028
+1B0150608,150608,União das freguesias de Gaio-Rosário e Sarilhos Pequenos,1B0,1506,Moita,moita,2026-Q2,2670,974,174.1,,,,,,,,,,,,,,
+1B0150701,150701,Canha,1B0,1507,Montijo,montijo,2026-Q2,,,,,,,,,,,,,,,,,
+1B0150704,150704,Sarilhos Grandes,1B0,1507,Montijo,montijo,2026-Q2,,1098,,,,,,,,,,,,,,,
+1B0150709,150709,União das freguesias de Atalaia e Alto Estanqueiro-Jardia,1B0,1507,Montijo,montijo,2026-Q2,2591,1428,81.4,,,,,,,,,,,,,,
+1B0150710,150710,União das freguesias de Montijo e Afonsoeiro,1B0,1507,Montijo,montijo,2026-Q2,2782,1357,105.0,3196,1465,118.2,2945,1332,121.1,2745,1390,97.5,2591,1100,135.5,2591,3196
+1B0150711,150711,União das freguesias de Pegões,1B0,1507,Montijo,montijo,2026-Q2,1979,1021,93.8,,,,,,,,,,,,,,
+1B0150802,150802,Palmela,1B0,1508,Palmela,palmela,2026-Q2,2463,1178,109.1,,,,2669,1132,135.8,2463,1111,121.7,2133,1310,62.8,2133,2669
+1B0150803,150803,Pinhal Novo,1B0,1508,Palmela,palmela,2026-Q2,2526,1132,123.1,2842,1194,138.0,2669,1125,137.2,2379,1135,109.6,2186,1112,96.6,2186,2842
+1B0150804,150804,Quinta do Anjo,1B0,1508,Palmela,palmela,2026-Q2,2609,1389,87.8,3261,1393,134.1,2779,1661,67.3,2391,1329,79.9,2159,1341,61.0,2159,3261
+1B0150806,150806,União das freguesias de Poceirão e Marateca,1B0,1508,Palmela,palmela,2026-Q2,2426,1487,63.1,,,,,,,,,,,,,,
+1B0151002,151002,Amora,1B0,1510,Seixal,seixal,2026-Q2,2804,1270,120.8,3183,1359,134.2,2931,1259,132.8,2598,1256,106.8,2746,1404,95.6,2598,3183
+1B0151005,151005,Corroios,1B0,1510,Seixal,seixal,2026-Q2,3041,1508,101.7,3770,1633,130.9,3160,1470,115.0,2884,1492,93.3,2822,1607,75.6,2822,3770
+1B0151006,151006,Fernão Ferro,1B0,1510,Seixal,seixal,2026-Q2,2949,1584,86.2,,,,3118,1631,91.2,3099,1698,82.5,2618,1470,78.1,2618,3118
+1B0151008,151008,Arrentela,1B0,1510,Seixal,seixal,2026-Q2,2986,,,3249,,,3133,,,2765,,,,,,2765,3249
+1B0151009,151009,Paio Pires,1B0,1510,Seixal,seixal,2026-Q2,3025,,,3209,,,3125,,,2863,,,,,,2863,3209
+1B0151010,151010,Seixal,1B0,1510,Seixal,seixal,2026-Q2,4036,,,,,,3998,,,,,,,,,,
+1B0151101,151101,Sesimbra (Castelo),1B0,1511,Sesimbra,sesimbra,2026-Q2,2837,1465,93.7,3333,1544,115.9,2880,1463,96.9,2765,1432,93.1,2716,1461,85.9,2716,3333
+1B0151102,151102,Sesimbra (Santiago),1B0,1511,Sesimbra,sesimbra,2026-Q2,4380,2669,64.1,4782,2885,65.8,4396,2669,64.7,,,,,,,4396,4782
+1B0151103,151103,Quinta do Conde,1B0,1511,Sesimbra,sesimbra,2026-Q2,3009,1423,111.5,3188,1358,134.8,3108,1372,126.5,2933,1529,91.8,2367,1299,82.2,2367,3188
+1B0151205,151205,Setúbal (São Sebastião),1B0,1512,Setúbal,setubal,2026-Q2,2583,1139,126.8,2912,1238,135.2,2677,1115,140.1,2432,1139,113.5,2132,1166,82.8,2132,2912
+1B0151207,151207,Gâmbia-Pontes-Alto da Guerra,1B0,1512,Setúbal,setubal,2026-Q2,2767,1578,75.3,,,,,1417,,2762,1612,71.3,,,,,
+1B0151208,151208,Sado,1B0,1512,Setúbal,setubal,2026-Q2,2616,1376,90.1,,,,,,,,,,,,,,
+1B0151209,151209,União das freguesias de Azeitão (São Lourenço e São Simão),1B0,1512,Setúbal,setubal,2026-Q2,2979,1634,82.3,,,,3060,1494,104.8,3142,1787,75.8,2707,1634,65.7,2707,3142
+1B0151210,151210,"União das freguesias de Setúbal (São Julião, Nossa Senhora da Anunciada e Santa Maria da Graça)",1B0,1512,Setúbal,setubal,2026-Q2,2944,1388,112.1,3360,1522,120.8,3170,1428,122.0,2709,1339,102.3,2357,1268,85.9,2357,3360
+300310301,310301,Imaculado Coração de Maria,300,3103,Funchal,funchal,2026-Q2,3189,1556,104.9,,,,,1569,,,,,,,,,
+300310302,310302,Monte,300,3103,Funchal,funchal,2026-Q2,1839,1259,46.1,,,,,,,,,,,,,,
+300310303,310303,Funchal (Santa Luzia),300,3103,Funchal,funchal,2026-Q2,2965,1535,93.2,,,,,,,,,,,,,,
+300310304,310304,Funchal (Santa Maria Maior),300,3103,Funchal,funchal,2026-Q2,2859,1439,98.7,,,,3321,1413,135.0,3081,1439,114.1,,,,3081,3321
+300310305,310305,Santo António,300,3103,Funchal,funchal,2026-Q2,2539,1483,71.2,2632,1489,76.8,2994,1563,91.6,2463,1427,72.6,,,,2463,2994
+300310306,310306,São Gonçalo,300,3103,Funchal,funchal,2026-Q2,3042,1530,98.8,,,,,,,,,,,,,,
+300310307,310307,São Martinho,300,3103,Funchal,funchal,2026-Q2,4230,1879,125.1,4429,2130,107.9,4315,1853,132.9,4017,1802,122.9,,1575,,4017,4429
+300310308,310308,Funchal (São Pedro),300,3103,Funchal,funchal,2026-Q2,3324,1659,100.4,,,,,1748,,,,,,,,,
+300310309,310309,São Roque,300,3103,Funchal,funchal,2026-Q2,2426,1436,68.9,,,,,,,,,,,,,,
+300310310,310310,Funchal (Sé),300,3103,Funchal,funchal,2026-Q2,3863,2169,78.1,,,,,2041,,,,,,,,,

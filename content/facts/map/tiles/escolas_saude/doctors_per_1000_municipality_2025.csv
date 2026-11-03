@@ -1,0 +1,309 @@
+muni_dico,muni_name,muni_slug,doctors_per_1000,period,indicator
+0101,Águeda,agueda,3,2025,INE 0012837
+0102,Albergaria-a-Velha,albergaria-a-velha,2.8,2025,INE 0012837
+0103,Anadia,anadia,3.8,2025,INE 0012837
+0104,Arouca,arouca,1.7,2025,INE 0012837
+0105,Aveiro,aveiro,6.5,2025,INE 0012837
+0106,Castelo de Paiva,castelo-de-paiva,1.5,2025,INE 0012837
+0107,Espinho,espinho,7.9,2025,INE 0012837
+0108,Estarreja,estarreja,2.5,2025,INE 0012837
+0109,Santa Maria da Feira,santa-maria-da-feira,3.9,2025,INE 0012837
+0110,Ílhavo,ilhavo,3.8,2025,INE 0012837
+0111,Mealhada,mealhada,4,2025,INE 0012837
+0112,Murtosa,murtosa,2.2,2025,INE 0012837
+0113,Oliveira de Azeméis,oliveira-de-azemeis,2.7,2025,INE 0012837
+0114,Oliveira do Bairro,oliveira-do-bairro,3.2,2025,INE 0012837
+0115,Ovar,ovar,4,2025,INE 0012837
+0116,São João da Madeira,sao-joao-da-madeira,4.3,2025,INE 0012837
+0117,Sever do Vouga,sever-do-vouga,2,2025,INE 0012837
+0118,Vagos,vagos,3.1,2025,INE 0012837
+0119,Vale de Cambra,vale-de-cambra,3.8,2025,INE 0012837
+0201,Aljustrel,aljustrel,1.6,2025,INE 0012837
+0202,Almodôvar,almodovar,1.6,2025,INE 0012837
+0203,Alvito,alvito,1.3,2025,INE 0012837
+0204,Barrancos,barrancos,0.7,2025,INE 0012837
+0205,Beja,beja,5.1,2025,INE 0012837
+0206,Castro Verde,castro-verde,1.6,2025,INE 0012837
+0207,Cuba,cuba,2.4,2025,INE 0012837
+0208,Ferreira do Alentejo,ferreira-do-alentejo,1.2,2025,INE 0012837
+0209,Mértola,mertola,1.3,2025,INE 0012837
+0210,Moura,moura,1.7,2025,INE 0012837
+0211,Odemira,odemira,0.9,2025,INE 0012837
+0212,Ourique,ourique,1,2025,INE 0012837
+0213,Serpa,serpa,1.8,2025,INE 0012837
+0214,Vidigueira,vidigueira,1.5,2025,INE 0012837
+0301,Amares,amares,3.3,2025,INE 0012837
+0302,Barcelos,barcelos,3.6,2025,INE 0012837
+0303,Braga,braga,8.9,2025,INE 0012837
+0304,Cabeceiras de Basto,cabeceiras-de-basto,3,2025,INE 0012837
+0305,Celorico de Basto,celorico-de-basto,1.8,2025,INE 0012837
+0306,Esposende,esposende,5.3,2025,INE 0012837
+0307,Fafe,fafe,4.3,2025,INE 0012837
+0308,Guimarães,guimaraes,4.9,2025,INE 0012837
+0309,Póvoa de Lanhoso,povoa-de-lanhoso,2,2025,INE 0012837
+0310,Terras de Bouro,terras-de-bouro,2.5,2025,INE 0012837
+0311,Vieira do Minho,vieira-do-minho,2.3,2025,INE 0012837
+0312,Vila Nova de Famalicão,vila-nova-de-famalicao,4.3,2025,INE 0012837
+0313,Vila Verde,vila-verde,2.6,2025,INE 0012837
+0314,Vizela,vizela,3.2,2025,INE 0012837
+0401,Alfândega da Fé,alfandega-da-fe,2.6,2025,INE 0012837
+0402,Bragança,braganca,6.3,2025,INE 0012837
+0403,Carrazeda de Ansiães,carrazeda-de-ansiaes,0.8,2025,INE 0012837
+0404,Freixo de Espada à Cinta,freixo-de-espada-a-cinta,1,2025,INE 0012837
+0405,Macedo de Cavaleiros,macedo-de-cavaleiros,3.7,2025,INE 0012837
+0406,Miranda do Douro,miranda-do-douro,2.6,2025,INE 0012837
+0407,Mirandela,mirandela,5.3,2025,INE 0012837
+0408,Mogadouro,mogadouro,2.2,2025,INE 0012837
+0409,Torre de Moncorvo,torre-de-moncorvo,2.8,2025,INE 0012837
+0410,Vila Flor,vila-flor,1.6,2025,INE 0012837
+0411,Vimioso,vimioso,2.2,2025,INE 0012837
+0412,Vinhais,vinhais,1.8,2025,INE 0012837
+0501,Belmonte,belmonte,2.8,2025,INE 0012837
+0502,Castelo Branco,castelo-branco,5.2,2025,INE 0012837
+0503,Covilhã,covilha,6.3,2025,INE 0012837
+0504,Fundão,fundao,3.4,2025,INE 0012837
+0505,Idanha-a-Nova,idanha-a-nova,1.4,2025,INE 0012837
+0506,Oleiros,oleiros,1.3,2025,INE 0012837
+0507,Penamacor,penamacor,1.4,2025,INE 0012837
+0508,Proença-a-Nova,proenca-a-nova,2.2,2025,INE 0012837
+0509,Sertã,serta,1.3,2025,INE 0012837
+0510,Vila de Rei,vila-de-rei,2.5,2025,INE 0012837
+0511,Vila Velha de Ródão,vila-velha-de-rodao,1.5,2025,INE 0012837
+0601,Arganil,arganil,1.1,2025,INE 0012837
+0602,Cantanhede,cantanhede,4,2025,INE 0012837
+0603,Coimbra,coimbra,33,2025,INE 0012837
+0604,Condeixa-a-Nova,condeixa-a-nova,6.9,2025,INE 0012837
+0605,Figueira da Foz,figueira-da-foz,6.8,2025,INE 0012837
+0606,Góis,gois,0.3,2025,INE 0012837
+0607,Lousã,lousa,2.7,2025,INE 0012837
+0608,Mira,mira,4.8,2025,INE 0012837
+0609,Miranda do Corvo,miranda-do-corvo,3.3,2025,INE 0012837
+0610,Montemor-o-Velho,montemor-o-velho,3.2,2025,INE 0012837
+0611,Oliveira do Hospital,oliveira-do-hospital,2.2,2025,INE 0012837
+0612,Pampilhosa da Serra,pampilhosa-da-serra,0.6,2025,INE 0012837
+0613,Penacova,penacova,1.7,2025,INE 0012837
+0614,Penela,penela,3.1,2025,INE 0012837
+0615,Soure,soure,3,2025,INE 0012837
+0616,Tábua,tabua,2,2025,INE 0012837
+0617,Vila Nova de Poiares,vila-nova-de-poiares,1.1,2025,INE 0012837
+0701,Alandroal,alandroal,1.2,2025,INE 0012837
+0702,Arraiolos,arraiolos,2.6,2025,INE 0012837
+0703,Borba,borba,2.6,2025,INE 0012837
+0704,Estremoz,estremoz,2.9,2025,INE 0012837
+0705,Évora,evora,8.3,2025,INE 0012837
+0706,Montemor-o-Novo,montemor-o-novo,1.7,2025,INE 0012837
+0707,Mora,mora,1.4,2025,INE 0012837
+0708,Mourão,mourao,0.8,2025,INE 0012837
+0709,Portel,portel,1.1,2025,INE 0012837
+0710,Redondo,redondo,1.1,2025,INE 0012837
+0711,Reguengos de Monsaraz,reguengos-de-monsaraz,1.4,2025,INE 0012837
+0712,Vendas Novas,vendas-novas,2.3,2025,INE 0012837
+0713,Viana do Alentejo,viana-do-alentejo,1.1,2025,INE 0012837
+0714,Vila Viçosa,vila-vicosa,2.7,2025,INE 0012837
+0801,Albufeira,albufeira,2,2025,INE 0012837
+0802,Alcoutim,alcoutim,2.4,2025,INE 0012837
+0803,Aljezur,aljezur,2.4,2025,INE 0012837
+0804,Castro Marim,castro-marim,1.8,2025,INE 0012837
+0805,Faro,faro,9,2025,INE 0012837
+0806,Lagoa,lagoa,3.1,2025,INE 0012837
+0807,Lagos,lagos,2.4,2025,INE 0012837
+0808,Loulé,loule,2.4,2025,INE 0012837
+0809,Monchique,monchique,1.6,2025,INE 0012837
+0810,Olhão,olhao,2.8,2025,INE 0012837
+0811,Portimão,portimao,5,2025,INE 0012837
+0812,São Brás de Alportel,sao-bras-de-alportel,4.4,2025,INE 0012837
+0813,Silves,silves,1.3,2025,INE 0012837
+0814,Tavira,tavira,2.3,2025,INE 0012837
+0815,Vila do Bispo,vila-do-bispo,0.6,2025,INE 0012837
+0816,Vila Real de Santo António,vila-real-de-santo-antonio,2.1,2025,INE 0012837
+0901,Aguiar da Beira,aguiar-da-beira,2,2025,INE 0012837
+0902,Almeida,almeida,3.6,2025,INE 0012837
+0903,Celorico da Beira,celorico-da-beira,1.8,2025,INE 0012837
+0904,Figueira de Castelo Rodrigo,figueira-de-castelo-rodrigo,3.1,2025,INE 0012837
+0905,Fornos de Algodres,fornos-de-algodres,3.6,2025,INE 0012837
+0906,Gouveia,gouveia,2.3,2025,INE 0012837
+0907,Guarda,guarda,8.2,2025,INE 0012837
+0908,Manteigas,manteigas,3,2025,INE 0012837
+0909,Mêda,meda,1.8,2025,INE 0012837
+0910,Pinhel,pinhel,2.9,2025,INE 0012837
+0911,Sabugal,sabugal,1.7,2025,INE 0012837
+0912,Seia,seia,3.1,2025,INE 0012837
+0913,Trancoso,trancoso,2.2,2025,INE 0012837
+0914,Vila Nova de Foz Côa,vila-nova-de-foz-coa,2.4,2025,INE 0012837
+1001,Alcobaça,alcobaca,1.8,2025,INE 0012837
+1002,Alvaiázere,alvaiazere,2,2025,INE 0012837
+1003,Ansião,ansiao,2,2025,INE 0012837
+1004,Batalha,batalha,2.3,2025,INE 0012837
+1005,Bombarral,bombarral,1.7,2025,INE 0012837
+1006,Caldas da Rainha,caldas-da-rainha,3.6,2025,INE 0012837
+1007,Castanheira de Pêra,castanheira-de-pera,0.7,2025,INE 0012837
+1008,Figueiró dos Vinhos,figueiro-dos-vinhos,3.1,2025,INE 0012837
+1009,Leiria,leiria,4.9,2025,INE 0012837
+1010,Marinha Grande,marinha-grande,1.7,2025,INE 0012837
+1011,Nazaré,nazare,2,2025,INE 0012837
+1012,Óbidos,obidos,1.9,2025,INE 0012837
+1013,Pedrógão Grande,pedrogao-grande,0.5,2025,INE 0012837
+1014,Peniche,peniche,1.6,2025,INE 0012837
+1015,Pombal,pombal,2.4,2025,INE 0012837
+1016,Porto de Mós,porto-de-mos,1.9,2025,INE 0012837
+1101,Alenquer,alenquer,1.7,2025,INE 0012837
+1102,Arruda dos Vinhos,arruda-dos-vinhos,3.3,2025,INE 0012837
+1103,Azambuja,azambuja,1.2,2025,INE 0012837
+1104,Cadaval,cadaval,0.8,2025,INE 0012837
+1105,Cascais,cascais,7.7,2025,INE 0012837
+1106,Lisboa,lisboa,15.3,2025,INE 0012837
+1107,Loures,loures,3.6,2025,INE 0012837
+1108,Lourinhã,lourinha,1.8,2025,INE 0012837
+1109,Mafra,mafra,3,2025,INE 0012837
+1110,Oeiras,oeiras,10.5,2025,INE 0012837
+1111,Sintra,sintra,2.5,2025,INE 0012837
+1112,Sobral de Monte Agraço,sobral-de-monte-agraco,2.2,2025,INE 0012837
+1113,Torres Vedras,torres-vedras,2.7,2025,INE 0012837
+1114,Vila Franca de Xira,vila-franca-de-xira,2.5,2025,INE 0012837
+1115,Amadora,amadora,3.4,2025,INE 0012837
+1116,Odivelas,odivelas,3.4,2025,INE 0012837
+1201,Alter do Chão,alter-do-chao,1.3,2025,INE 0012837
+1202,Arronches,arronches,1.8,2025,INE 0012837
+1203,Avis,avis,1.1,2025,INE 0012837
+1204,Campo Maior,campo-maior,4,2025,INE 0012837
+1205,Castelo de Vide,castelo-de-vide,5,2025,INE 0012837
+1206,Crato,crato,2.1,2025,INE 0012837
+1207,Elvas,elvas,6.2,2025,INE 0012837
+1208,Fronteira,fronteira,1.7,2025,INE 0012837
+1209,Gavião,gaviao,0.9,2025,INE 0012837
+1210,Marvão,marvao,1.7,2025,INE 0012837
+1211,Monforte,monforte,1,2025,INE 0012837
+1212,Nisa,nisa,2.3,2025,INE 0012837
+1213,Ponte de Sor,ponte-de-sor,2,2025,INE 0012837
+1214,Portalegre,portalegre,4.7,2025,INE 0012837
+1215,Sousel,sousel,0.9,2025,INE 0012837
+1301,Amarante,amarante,3.3,2025,INE 0012837
+1302,Baião,baiao,1.6,2025,INE 0012837
+1303,Felgueiras,felgueiras,2.8,2025,INE 0012837
+1304,Gondomar,gondomar,4.9,2025,INE 0012837
+1305,Lousada,lousada,2,2025,INE 0012837
+1306,Maia,maia,8,2025,INE 0012837
+1307,Marco de Canaveses,marco-de-canaveses,2.3,2025,INE 0012837
+1308,Matosinhos,matosinhos,10.8,2025,INE 0012837
+1309,Paços de Ferreira,pacos-de-ferreira,3.2,2025,INE 0012837
+1310,Paredes,paredes,3.1,2025,INE 0012837
+1311,Penafiel,penafiel,3.8,2025,INE 0012837
+1312,Porto,porto,20.7,2025,INE 0012837
+1313,Póvoa de Varzim,povoa-de-varzim,6.3,2025,INE 0012837
+1314,Santo Tirso,santo-tirso,5.3,2025,INE 0012837
+1315,Valongo,valongo,4.2,2025,INE 0012837
+1316,Vila do Conde,vila-do-conde,5.7,2025,INE 0012837
+1317,Vila Nova de Gaia,vila-nova-de-gaia,7.1,2025,INE 0012837
+1318,Trofa,trofa,3.9,2025,INE 0012837
+1401,Abrantes,abrantes,3,2025,INE 0012837
+1402,Alcanena,alcanena,2.2,2025,INE 0012837
+1403,Almeirim,almeirim,2.2,2025,INE 0012837
+1404,Alpiarça,alpiarca,1.3,2025,INE 0012837
+1405,Benavente,benavente,1.7,2025,INE 0012837
+1406,Cartaxo,cartaxo,2.3,2025,INE 0012837
+1407,Chamusca,chamusca,1,2025,INE 0012837
+1408,Constância,constancia,1.5,2025,INE 0012837
+1409,Coruche,coruche,1.9,2025,INE 0012837
+1410,Entroncamento,entroncamento,3.2,2025,INE 0012837
+1411,Ferreira do Zêzere,ferreira-do-zezere,0.9,2025,INE 0012837
+1412,Golegã,golega,1.4,2025,INE 0012837
+1413,Mação,macao,1.3,2025,INE 0012837
+1414,Rio Maior,rio-maior,1.8,2025,INE 0012837
+1415,Salvaterra de Magos,salvaterra-de-magos,1.5,2025,INE 0012837
+1416,Santarém,santarem,5.2,2025,INE 0012837
+1417,Sardoal,sardoal,2.2,2025,INE 0012837
+1418,Tomar,tomar,3.1,2025,INE 0012837
+1419,Torres Novas,torres-novas,4,2025,INE 0012837
+1420,Vila Nova da Barquinha,vila-nova-da-barquinha,1.3,2025,INE 0012837
+1421,Ourém,ourem,1.4,2025,INE 0012837
+1501,Alcácer do Sal,alcacer-do-sal,0.9,2025,INE 0012837
+1502,Alcochete,alcochete,3.9,2025,INE 0012837
+1503,Almada,almada,4.5,2025,INE 0012837
+1504,Barreiro,barreiro,3.1,2025,INE 0012837
+1505,Grândola,grandola,1.6,2025,INE 0012837
+1506,Moita,moita,1.4,2025,INE 0012837
+1507,Montijo,montijo,2.6,2025,INE 0012837
+1508,Palmela,palmela,3.6,2025,INE 0012837
+1509,Santiago do Cacém,santiago-do-cacem,3.4,2025,INE 0012837
+1510,Seixal,seixal,2.4,2025,INE 0012837
+1511,Sesimbra,sesimbra,2,2025,INE 0012837
+1512,Setúbal,setubal,4.8,2025,INE 0012837
+1513,Sines,sines,2.1,2025,INE 0012837
+1601,Arcos de Valdevez,arcos-de-valdevez,2.9,2025,INE 0012837
+1602,Caminha,caminha,5.5,2025,INE 0012837
+1603,Melgaço,melgaco,3.1,2025,INE 0012837
+1604,Monção,moncao,3.2,2025,INE 0012837
+1605,Paredes de Coura,paredes-de-coura,1.5,2025,INE 0012837
+1606,Ponte da Barca,ponte-da-barca,2.7,2025,INE 0012837
+1607,Ponte de Lima,ponte-de-lima,3.6,2025,INE 0012837
+1608,Valença,valenca,1.8,2025,INE 0012837
+1609,Viana do Castelo,viana-do-castelo,6.5,2025,INE 0012837
+1610,Vila Nova de Cerveira,vila-nova-de-cerveira,2.5,2025,INE 0012837
+1701,Alijó,alijo,1.6,2025,INE 0012837
+1702,Boticas,boticas,1.7,2025,INE 0012837
+1703,Chaves,chaves,6.6,2025,INE 0012837
+1704,Mesão Frio,mesao-frio,4.7,2025,INE 0012837
+1705,Mondim de Basto,mondim-de-basto,2.1,2025,INE 0012837
+1706,Montalegre,montalegre,2.1,2025,INE 0012837
+1707,Murça,murca,1.8,2025,INE 0012837
+1708,Peso da Régua,peso-da-regua,3.1,2025,INE 0012837
+1709,Ribeira de Pena,ribeira-de-pena,1.5,2025,INE 0012837
+1710,Sabrosa,sabrosa,1.8,2025,INE 0012837
+1711,Santa Marta de Penaguião,santa-marta-de-penaguiao,2,2025,INE 0012837
+1712,Valpaços,valpacos,2.6,2025,INE 0012837
+1713,Vila Pouca de Aguiar,vila-pouca-de-aguiar,3.1,2025,INE 0012837
+1714,Vila Real,vila-real,8.6,2025,INE 0012837
+1801,Armamar,armamar,1.4,2025,INE 0012837
+1802,Carregal do Sal,carregal-do-sal,1.6,2025,INE 0012837
+1803,Castro Daire,castro-daire,2.2,2025,INE 0012837
+1804,Cinfães,cinfaes,1.1,2025,INE 0012837
+1805,Lamego,lamego,5,2025,INE 0012837
+1806,Mangualde,mangualde,2.5,2025,INE 0012837
+1807,Moimenta da Beira,moimenta-da-beira,3,2025,INE 0012837
+1808,Mortágua,mortagua,3.4,2025,INE 0012837
+1809,Nelas,nelas,3.2,2025,INE 0012837
+1810,Oliveira de Frades,oliveira-de-frades,2,2025,INE 0012837
+1811,Penalva do Castelo,penalva-do-castelo,2.2,2025,INE 0012837
+1812,Penedono,penedono,1.2,2025,INE 0012837
+1813,Resende,resende,1.9,2025,INE 0012837
+1814,Santa Comba Dão,santa-comba-dao,2.8,2025,INE 0012837
+1815,São João da Pesqueira,sao-joao-da-pesqueira,1.9,2025,INE 0012837
+1816,São Pedro do Sul,sao-pedro-do-sul,4.7,2025,INE 0012837
+1817,Sátão,satao,3.4,2025,INE 0012837
+1818,Sernancelhe,sernancelhe,1.6,2025,INE 0012837
+1819,Tabuaço,tabuaco,1.1,2025,INE 0012837
+1820,Tarouca,tarouca,2,2025,INE 0012837
+1821,Tondela,tondela,2.9,2025,INE 0012837
+1822,Vila Nova de Paiva,vila-nova-de-paiva,1.8,2025,INE 0012837
+1823,Viseu,viseu,8.9,2025,INE 0012837
+1824,Vouzela,vouzela,2,2025,INE 0012837
+3101,Calheta (R.A.M.),calheta-r-a-m,1.4,2025,INE 0012837
+3102,Câmara de Lobos,camara-de-lobos,2.5,2025,INE 0012837
+3103,Funchal,funchal,9,2025,INE 0012837
+3104,Machico,machico,3,2025,INE 0012837
+3105,Ponta do Sol,ponta-do-sol,2.2,2025,INE 0012837
+3106,Porto Moniz,porto-moniz,2.5,2025,INE 0012837
+3107,Ribeira Brava,ribeira-brava,2.7,2025,INE 0012837
+3108,Santa Cruz,santa-cruz,4.4,2025,INE 0012837
+3109,Santana,santana,1.7,2025,INE 0012837
+3110,São Vicente,sao-vicente,2.2,2025,INE 0012837
+3201,Porto Santo,porto-santo,1.7,2025,INE 0012837
+4101,Vila do Porto,vila-do-porto,2.3,2025,INE 0012837
+4201,Lagoa (R.A.A.),lagoa-r-a-a,2.8,2025,INE 0012837
+4202,Nordeste,nordeste,1.4,2025,INE 0012837
+4203,Ponta Delgada,ponta-delgada,7,2025,INE 0012837
+4204,Povoação,povoacao,2.3,2025,INE 0012837
+4205,Ribeira Grande,ribeira-grande,2.5,2025,INE 0012837
+4206,Vila Franca do Campo,vila-franca-do-campo,2.3,2025,INE 0012837
+4301,Angra do Heroísmo,angra-do-heroismo,4.9,2025,INE 0012837
+4302,Vila da Praia da Vitória,vila-da-praia-da-vitoria,2.5,2025,INE 0012837
+4401,Santa Cruz da Graciosa,santa-cruz-da-graciosa,1,2025,INE 0012837
+4501,Calheta (R.A.A.),calheta-r-a-a,0.9,2025,INE 0012837
+4502,Velas,velas,2.7,2025,INE 0012837
+4601,Lajes do Pico,lajes-do-pico,2.6,2025,INE 0012837
+4602,Madalena,madalena,1,2025,INE 0012837
+4603,São Roque do Pico,sao-roque-do-pico,3.9,2025,INE 0012837
+4701,Horta,horta,3.6,2025,INE 0012837
+4801,Lajes das Flores,lajes-das-flores,0.7,2025,INE 0012837
+4802,Santa Cruz das Flores,santa-cruz-das-flores,2,2025,INE 0012837
+4901,Corvo,corvo,2.3,2025,INE 0012837

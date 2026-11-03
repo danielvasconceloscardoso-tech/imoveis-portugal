@@ -1,0 +1,490 @@
+dicofre,parish_name,muni_slug,region,point_lat,point_lon,nearest_pt_airport,km_straight_line_to_airport
+010402,Alvarenga,arouca,mainland,40.9585,-8.1523,OPO,54.8
+010407,Chave,arouca,mainland,40.9075,-8.3489,OPO,47.0
+010409,Escariz,arouca,mainland,40.9385,-8.4022,OPO,41.7
+010411,Fermedo,arouca,mainland,40.9555,-8.4204,OPO,39.2
+010413,Mansores,arouca,mainland,40.93,-8.3712,OPO,43.9
+010414,Moldes,arouca,mainland,40.9091,-8.2117,OPO,54.5
+010415,Rossas,arouca,mainland,40.9026,-8.3147,OPO,49.2
+010416,Santa Eulália,arouca,mainland,40.9484,-8.2747,OPO,47.7
+010417,São Miguel do Mato,arouca,mainland,40.989,-8.376,OPO,38.5
+010418,Tropeço,arouca,mainland,40.9439,-8.3194,OPO,45.4
+010419,Urrô,arouca,mainland,40.8848,-8.293,OPO,51.9
+010420,Várzea,arouca,mainland,40.924,-8.3053,OPO,47.9
+010421,União das freguesias de Arouca e Burgo,arouca,mainland,40.9325,-8.2454,OPO,50.7
+010422,União das freguesias de Cabreiros e Albergaria da Serra,arouca,mainland,40.8642,-8.1968,OPO,58.9
+010423,União das freguesias de Canelas e Espiunca,arouca,mainland,40.9609,-8.2099,OPO,50.8
+010424,União das freguesias de Covelo de Paivó e Janarde,arouca,mainland,40.8973,-8.1552,OPO,58.9
+010702,Espinho,espinho,mainland,41.0076,-8.6403,OPO,27.0
+010704,Paramos,espinho,mainland,40.9761,-8.6385,OPO,30.5
+010705,Silvalde,espinho,mainland,40.9929,-8.6273,OPO,28.8
+010901,Argoncilhe,santa-maria-da-feira,mainland,41.0191,-8.543,OPO,28.0
+010902,Arrifana,santa-maria-da-feira,mainland,40.9077,-8.5094,OPO,40.6
+010904,Escapães,santa-maria-da-feira,mainland,40.9342,-8.4999,OPO,38.1
+010907,Fiães,santa-maria-da-feira,mainland,40.9845,-8.5217,OPO,32.3
+010908,Fornos,santa-maria-da-feira,mainland,40.913,-8.5305,OPO,39.4
+010913,Lourosa,santa-maria-da-feira,mainland,40.9835,-8.5456,OPO,31.6
+010914,Milheirós de Poiares,santa-maria-da-feira,mainland,40.9243,-8.4765,OPO,39.9
+010916,Mozelos,santa-maria-da-feira,mainland,41.0015,-8.5568,OPO,29.4
+010917,Nogueira da Regedoura,santa-maria-da-feira,mainland,41.0066,-8.5936,OPO,27.9
+010918,São Paio de Oleiros,santa-maria-da-feira,mainland,40.9907,-8.5942,OPO,29.6
+010919,Paços de Brandão,santa-maria-da-feira,mainland,40.9719,-8.5914,OPO,31.7
+010921,Rio Meão,santa-maria-da-feira,mainland,40.9558,-8.5876,OPO,33.5
+010922,Romariz,santa-maria-da-feira,mainland,40.9463,-8.4564,OPO,38.5
+010924,Sanguedo,santa-maria-da-feira,mainland,41.0087,-8.5209,OPO,29.9
+010925,Santa Maria de Lamas,santa-maria-da-feira,mainland,40.9796,-8.5673,OPO,31.4
+010926,São João de Ver,santa-maria-da-feira,mainland,40.9547,-8.5489,OPO,34.5
+011301,Carregosa,oliveira-de-azemeis,mainland,40.8874,-8.4173,OPO,45.9
+011302,Cesar,oliveira-de-azemeis,mainland,40.9188,-8.4423,OPO,41.8
+011303,Fajões,oliveira-de-azemeis,mainland,40.9165,-8.4187,OPO,43.0
+011304,Loureiro,oliveira-de-azemeis,mainland,40.8008,-8.5256,OPO,51.5
+011305,Macieira de Sarnes,oliveira-de-azemeis,mainland,40.9059,-8.4577,OPO,42.5
+011310,Ossela,oliveira-de-azemeis,mainland,40.8247,-8.4297,OPO,51.6
+011315,São Martinho da Gândara,oliveira-de-azemeis,mainland,40.8473,-8.526,OPO,46.5
+011318,São Roque,oliveira-de-azemeis,mainland,40.8752,-8.4715,OPO,45.1
+011319,Vila de Cucujães,oliveira-de-azemeis,mainland,40.8725,-8.5113,OPO,44.2
+011601,São João da Madeira,sao-joao-da-madeira,mainland,40.8953,-8.4904,OPO,42.4
+011901,Arões,vale-de-cambra,mainland,40.816,-8.279,OPO,58.7
+011902,São Pedro de Castelões,vale-de-cambra,mainland,40.8165,-8.3818,OPO,54.2
+011903,Cepelos,vale-de-cambra,mainland,40.8339,-8.3412,OPO,54.2
+011905,Junqueira,vale-de-cambra,mainland,40.7983,-8.3384,OPO,57.7
+011906,Macieira de Cambra,vale-de-cambra,mainland,40.88,-8.3628,OPO,48.9
+011907,Roge,vale-de-cambra,mainland,40.866,-8.3233,OPO,52.1
+030201,Abade de Neiva,barcelos,mainland,41.5555,-8.6446,OPO,34.2
+030202,Aborim,barcelos,mainland,41.6103,-8.6376,OPO,40.3
+030203,Adães,barcelos,mainland,41.5247,-8.5634,OPO,32.2
+030205,Airó,barcelos,mainland,41.5114,-8.5624,OPO,30.8
+030206,Aldreu,barcelos,mainland,41.6025,-8.7182,OPO,39.4
+030208,Alvelos,barcelos,mainland,41.5093,-8.6202,OPO,29.4
+030209,Arcozelo,barcelos,mainland,41.5423,-8.6099,OPO,33.1
+030210,Areias,barcelos,mainland,41.5598,-8.544,OPO,36.4
+030212,Balugães,barcelos,mainland,41.6452,-8.6382,OPO,44.2
+030213,Barcelinhos,barcelos,mainland,41.5222,-8.617,OPO,30.8
+030215,Barqueiros,barcelos,mainland,41.4726,-8.7302,OPO,25.2
+030216,Cambeses,barcelos,mainland,41.483,-8.5307,OPO,28.9
+030218,Carapeços,barcelos,mainland,41.5971,-8.653,OPO,38.8
+030220,Carvalhal,barcelos,mainland,41.5078,-8.6365,OPO,29.0
+030221,Carvalhas,barcelos,mainland,41.4707,-8.5944,OPO,25.7
+030224,Cossourado,barcelos,mainland,41.628,-8.6243,OPO,42.4
+030228,Cristelo,barcelos,mainland,41.4763,-8.7004,OPO,25.3
+030234,Fornelos,barcelos,mainland,41.5171,-8.6756,OPO,29.8
+030235,Fragoso,barcelos,mainland,41.6081,-8.6882,OPO,39.9
+030237,Gilmonde,barcelos,mainland,41.5089,-8.6565,OPO,29.0
+030242,Lama,barcelos,mainland,41.5701,-8.55,OPO,37.3
+030243,Lijó,barcelos,mainland,41.5711,-8.6089,OPO,36.3
+030244,Macieira de Rates,barcelos,mainland,41.434,-8.6393,OPO,20.9
+030245,Manhente,barcelos,mainland,41.5458,-8.5742,OPO,34.2
+030247,Martim,barcelos,mainland,41.5317,-8.5152,OPO,34.3
+030252,Moure,barcelos,mainland,41.5015,-8.5535,OPO,30.0
+030254,Oliveira,barcelos,mainland,41.5874,-8.5503,OPO,39.2
+030255,Palme,barcelos,mainland,41.5825,-8.7089,OPO,37.2
+030256,Panque,barcelos,mainland,41.6325,-8.5879,OPO,43.3
+030257,Paradela,barcelos,mainland,41.4601,-8.6826,OPO,23.5
+030259,Pereira,barcelos,mainland,41.4885,-8.6343,OPO,26.9
+030260,Perelhal,barcelos,mainland,41.5289,-8.6991,OPO,31.2
+030261,Pousa,barcelos,mainland,41.5536,-8.5147,OPO,36.6
+030263,Remelhe,barcelos,mainland,41.4887,-8.6062,OPO,27.4
+030264,Roriz,barcelos,mainland,41.584,-8.5806,OPO,38.2
+030265,Rio Covo (Santa Eugénia),barcelos,mainland,41.5307,-8.5857,OPO,32.3
+030268,Galegos (Santa Maria),barcelos,mainland,41.5645,-8.5807,OPO,36.1
+030272,Galegos (São Martinho),barcelos,mainland,41.5619,-8.5629,OPO,36.1
+030277,Tamel (São Veríssimo),barcelos,mainland,41.5511,-8.5947,OPO,34.3
+030279,Silva,barcelos,mainland,41.5698,-8.6296,OPO,35.9
+030282,Ucha,barcelos,mainland,41.5751,-8.5114,OPO,38.9
+030283,Várzea,barcelos,mainland,41.5176,-8.5788,OPO,31.0
+030287,Vila Seca,barcelos,mainland,41.5017,-8.6822,OPO,28.1
+030290,União das freguesias de Alheira e Igreja Nova,barcelos,mainland,41.6113,-8.5602,OPO,41.5
+030291,União das freguesias de Alvito (São Pedro e São Martinho) e Couto,barcelos,mainland,41.6035,-8.5948,OPO,40.1
+030292,União das freguesias de Areias de Vilar e Encourados,barcelos,mainland,41.5359,-8.5441,OPO,33.9
+030294,União das freguesias de Campo e Tamel (São Pedro Fins),barcelos,mainland,41.5927,-8.617,OPO,38.6
+030295,União das freguesias de Carreira e Fonte Coberta,barcelos,mainland,41.4832,-8.5539,OPO,28.1
+030297,União das freguesias de Creixomil e Mariz,barcelos,mainland,41.5361,-8.6709,OPO,31.9
+030298,União das freguesias de Durrães e Tregosa,barcelos,mainland,41.631,-8.6823,OPO,42.5
+030299,União das freguesias de Gamil e Midões,barcelos,mainland,41.5121,-8.5984,OPO,30.0
+0302FB,União das freguesias de Negreiros e Chavão,barcelos,mainland,41.4494,-8.5956,OPO,23.4
+0302FC,União das freguesias de Quintiães e Aguiar,barcelos,mainland,41.6172,-8.6585,OPO,41.0
+0302FD,União das freguesias de Sequeade e Bastuço (São João e Santo Estevão),barcelos,mainland,41.5053,-8.5306,OPO,31.1
+0302FF,União das freguesias de Tamel (Santa Leocádia) e Vilar do Monte,barcelos,mainland,41.5765,-8.6612,OPO,36.5
+0302FH,União das freguesias de Vila Cova e Feitos,barcelos,mainland,41.555,-8.7089,OPO,34.1
+030301,Adaúfe,braga,mainland,41.5877,-8.3982,OPO,44.4
+030312,Espinho,braga,mainland,41.5457,-8.3534,OPO,42.8
+030313,Esporões,braga,mainland,41.5102,-8.4141,OPO,36.6
+030315,Figueiredo,braga,mainland,41.4997,-8.4469,OPO,34.0
+030319,Gualtar,braga,mainland,41.5682,-8.3891,OPO,43.0
+030322,Lamas,braga,mainland,41.4996,-8.4326,OPO,34.7
+030325,Mire de Tibães,braga,mainland,41.5778,-8.4805,OPO,40.2
+030330,Padim da Graça,braga,mainland,41.5607,-8.4916,OPO,38.1
+030331,Palmeira,braga,mainland,41.5934,-8.4427,OPO,43.1
+030334,Pedralva,braga,mainland,41.5554,-8.3088,OPO,46.1
+030336,Priscos,braga,mainland,41.495,-8.4767,OPO,32.2
+030338,Ruilhe,braga,mainland,41.4928,-8.4944,OPO,31.2
+030349,Braga (São Vicente),braga,mainland,41.5622,-8.4177,OPO,41.1
+030351,Braga (São Vítor),braga,mainland,41.5591,-8.4057,OPO,41.4
+030354,Sequeira,braga,mainland,41.5321,-8.4708,OPO,36.0
+030355,Sobreposta,braga,mainland,41.5503,-8.3337,OPO,44.3
+030356,Tadim,braga,mainland,41.5098,-8.4964,OPO,32.8
+030357,Tebosa,braga,mainland,41.4831,-8.4836,OPO,30.8
+030363,União das freguesias de Arentim e Cunha,braga,mainland,41.4944,-8.5167,OPO,30.5
+030365,União das freguesias de Braga (São José de São Lázaro e São João do Souto),braga,mainland,41.5444,-8.419,OPO,39.4
+030366,União das freguesias de Cabreiros e Passos (São Julião),braga,mainland,41.541,-8.487,OPO,36.3
+030368,União das freguesias de Crespos e Pousada,braga,mainland,41.6023,-8.3487,OPO,48.0
+030369,União das freguesias de Escudeiros e Penso (Santo Estêvão e São Vicente),braga,mainland,41.4828,-8.4263,OPO,33.5
+030370,União das freguesias de Este (São Pedro e São Mamede),braga,mainland,41.5705,-8.3569,OPO,44.8
+030371,União das freguesias de Ferreiros e Gondizalves,braga,mainland,41.5292,-8.4447,OPO,36.8
+030372,União das freguesias de Guisande e Oliveira (São Pedro),braga,mainland,41.4757,-8.4618,OPO,31.1
+030373,União das freguesias de Lomar e Arcos,braga,mainland,41.5239,-8.4294,OPO,37.0
+030375,União das freguesias de Merelim (São Pedro) e Frossos,braga,mainland,41.5769,-8.4527,OPO,41.1
+030376,União das freguesias de Morreira e Trandeiras,braga,mainland,41.4951,-8.4066,OPO,35.6
+030378,União das freguesias de Nogueiró e Tenões,braga,mainland,41.5536,-8.3833,OPO,42.0
+030380,União das freguesias de Santa Lucrécia de Algeriz e Navarra,braga,mainland,41.5903,-8.3693,OPO,46.0
+030381,União das freguesias de Vilaça e Fradelos,braga,mainland,41.5113,-8.4752,OPO,33.8
+030801,Aldão,guimaraes,mainland,41.4634,-8.2719,OPO,41.6
+030804,Azurém,guimaraes,mainland,41.4531,-8.2955,OPO,39.3
+030806,Barco,guimaraes,mainland,41.4981,-8.3281,OPO,40.4
+030807,Brito,guimaraes,mainland,41.4549,-8.3636,OPO,35.0
+030808,Caldelas,guimaraes,mainland,41.4927,-8.3428,OPO,39.1
+030812,Costa,guimaraes,mainland,41.4389,-8.2746,OPO,39.9
+030813,Creixomil,guimaraes,mainland,41.439,-8.3089,OPO,37.5
+030815,Fermentões,guimaraes,mainland,41.4588,-8.318,OPO,38.2
+030820,Gonça,guimaraes,mainland,41.511,-8.247,OPO,46.4
+030821,Gondar,guimaraes,mainland,41.4217,-8.3699,OPO,32.3
+030823,Guardizela,guimaraes,mainland,41.3874,-8.3639,OPO,30.6
+030824,Infantas,guimaraes,mainland,41.4251,-8.2475,OPO,41.1
+030827,Longos,guimaraes,mainland,41.5223,-8.3682,OPO,40.0
+030828,Lordelo,guimaraes,mainland,41.3714,-8.3715,OPO,29.2
+030830,Mesão Frio,guimaraes,mainland,41.4395,-8.2491,OPO,41.8
+030831,Moreira de Cónegos,guimaraes,mainland,41.3821,-8.345,OPO,31.7
+030832,Nespereira,guimaraes,mainland,41.4069,-8.3287,OPO,34.2
+030835,Pencelo,guimaraes,mainland,41.4694,-8.2989,OPO,40.2
+030836,Pinheiro,guimaraes,mainland,41.416,-8.2867,OPO,37.7
+030837,Polvoreira,guimaraes,mainland,41.4128,-8.304,OPO,36.3
+030838,Ponte,guimaraes,mainland,41.466,-8.3348,OPO,37.6
+030840,Ronfe,guimaraes,mainland,41.4328,-8.3866,OPO,31.9
+030842,Prazins (Santa Eufémia),guimaraes,mainland,41.4901,-8.3183,OPO,40.4
+030850,Selho (São Cristóvão),guimaraes,mainland,41.4143,-8.3443,OPO,33.5
+030854,Selho (São Jorge),guimaraes,mainland,41.4354,-8.358,OPO,34.0
+030857,Candoso (São Martinho),guimaraes,mainland,41.4266,-8.3378,OPO,34.8
+030858,Sande (São Martinho),guimaraes,mainland,41.4949,-8.3621,OPO,38.1
+030865,São Torcato,guimaraes,mainland,41.4863,-8.2603,OPO,43.9
+030866,Serzedelo,guimaraes,mainland,41.4038,-8.3657,OPO,31.4
+030868,Silvares,guimaraes,mainland,41.4429,-8.338,OPO,35.8
+030871,Urgezes,guimaraes,mainland,41.4295,-8.2941,OPO,38.0
+030875,União das freguesias de Abação e Gémeos,guimaraes,mainland,41.4112,-8.2657,OPO,39.0
+030877,União das freguesias de Arosa e Castelões,guimaraes,mainland,41.5516,-8.2128,OPO,51.5
+030878,União das freguesias de Atães e Rendufe,guimaraes,mainland,41.4604,-8.2463,OPO,43.2
+030879,União das freguesias de Briteiros Santo Estêvão e Donim,guimaraes,mainland,41.5128,-8.309,OPO,42.7
+030880,União das freguesias de Briteiros São Salvador e Briteiros Santa Leocádia,guimaraes,mainland,41.5235,-8.3292,OPO,42.3
+030886,União das freguesias de Sande São Lourenço e Balazar,guimaraes,mainland,41.5049,-8.3825,OPO,37.8
+030888,União das freguesias de Selho São Lourenço e Gominhães,guimaraes,mainland,41.479,-8.2849,OPO,41.7
+031204,Bairro,vila-nova-de-famalicao,mainland,41.3731,-8.4266,OPO,25.3
+031206,Brufe,vila-nova-de-famalicao,mainland,41.413,-8.5409,OPO,21.6
+031210,Castelões,vila-nova-de-famalicao,mainland,41.4111,-8.4252,OPO,27.9
+031212,Cruz,vila-nova-de-famalicao,mainland,41.4438,-8.498,OPO,26.5
+031213,Delães,vila-nova-de-famalicao,mainland,41.389,-8.4177,OPO,26.9
+031215,Fradelos,vila-nova-de-famalicao,mainland,41.3735,-8.5977,OPO,15.5
+031216,Gavião,vila-nova-de-famalicao,mainland,41.4246,-8.507,OPO,24.3
+031219,Joane,vila-nova-de-famalicao,mainland,41.439,-8.4219,OPO,30.2
+031221,Landim,vila-nova-de-famalicao,mainland,41.381,-8.4637,OPO,23.3
+031223,Louro,vila-nova-de-famalicao,mainland,41.4337,-8.543,OPO,23.5
+031224,Lousado,vila-nova-de-famalicao,mainland,41.3568,-8.5279,OPO,17.5
+031225,Mogege,vila-nova-de-famalicao,mainland,41.4224,-8.4111,OPO,29.6
+031227,Nine,vila-nova-de-famalicao,mainland,41.4635,-8.5407,OPO,26.5
+031230,Pedome,vila-nova-de-famalicao,mainland,41.4159,-8.3881,OPO,30.7
+031232,Pousada de Saramagos,vila-nova-de-famalicao,mainland,41.4282,-8.4359,OPO,28.5
+031233,Requião,vila-nova-de-famalicao,mainland,41.4108,-8.4891,OPO,24.1
+031234,Riba de Ave,vila-nova-de-famalicao,mainland,41.3894,-8.3869,OPO,29.1
+031235,Ribeirão,vila-nova-de-famalicao,mainland,41.36,-8.5658,OPO,15.6
+031239,Oliveira (Santa Maria),vila-nova-de-famalicao,mainland,41.4073,-8.402,OPO,29.2
+031241,Vale (São Martinho),vila-nova-de-famalicao,mainland,41.4295,-8.4782,OPO,26.2
+031242,Oliveira (São Mateus),vila-nova-de-famalicao,mainland,41.3941,-8.409,OPO,27.8
+031247,Vermoim,vila-nova-de-famalicao,mainland,41.419,-8.4492,OPO,27.0
+031249,Vilarinho das Cambas,vila-nova-de-famalicao,mainland,41.3875,-8.561,OPO,18.3
+031250,União das freguesias de Antas e Abade de Vermoim,vila-nova-de-famalicao,mainland,41.3992,-8.5067,OPO,22.1
+031251,União das freguesias de Arnoso (Santa Maria e Santa Eulália) e Sezures,vila-nova-de-famalicao,mainland,41.4666,-8.4874,OPO,29.1
+031253,União das freguesias de Carreira e Bente,vila-nova-de-famalicao,mainland,41.3788,-8.4423,OPO,24.6
+031258,União das freguesias de Seide,vila-nova-de-famalicao,mainland,41.3984,-8.4674,OPO,24.3
+031260,União das freguesias de Vila Nova de Famalicão e Calendário,vila-nova-de-famalicao,mainland,41.396,-8.5307,OPO,20.6
+060301,Almalaguês,coimbra,mainland,40.1306,-8.3886,OPO,126.8
+060309,Brasfemes,coimbra,mainland,40.268,-8.4032,OPO,111.5
+060311,Ceira,coimbra,mainland,40.1724,-8.3801,OPO,122.4
+060312,Cernache,coimbra,mainland,40.1347,-8.4674,OPO,125.2
+060318,Santo António dos Olivais,coimbra,mainland,40.2204,-8.3926,OPO,116.9
+060320,São João do Campo,coimbra,mainland,40.2367,-8.5107,OPO,113.5
+060324,São Silvestre,coimbra,mainland,40.2292,-8.538,OPO,114.0
+060329,Torres do Mondego,coimbra,mainland,40.2109,-8.3581,OPO,118.6
+060332,União das freguesias de Antuzede e Vil de Matos,coimbra,mainland,40.2746,-8.4803,OPO,109.6
+060333,União das freguesias de Assafarge e Antanhol,coimbra,mainland,40.1673,-8.465,OPO,121.6
+060335,União das freguesias de Eiras e São Paulo de Frades,coimbra,mainland,40.2457,-8.4251,OPO,113.6
+060336,União das freguesias de Santa Clara e Castelo Viegas,coimbra,mainland,40.191,-8.4356,OPO,119.4
+060337,União das freguesias de São Martinho de Árvore e Lamarosa,coimbra,mainland,40.2576,-8.5705,OPO,110.6
+060338,União das freguesias de São Martinho do Bispo e Ribeira de Frades,coimbra,mainland,40.2061,-8.47,OPO,117.3
+060339,União das freguesias de Souselas e Botão,coimbra,mainland,40.3006,-8.4207,OPO,107.7
+080102,Guia,albufeira,mainland,37.1232,-8.2909,FAO,30.5
+080103,Paderne,albufeira,mainland,37.1755,-8.2105,FAO,27.4
+080104,Ferreiras,albufeira,mainland,37.1297,-8.2463,FAO,27.2
+080106,Albufeira e Olhos de Água,albufeira,mainland,37.0997,-8.2336,FAO,24.8
+080202,Giões,alcoutim,mainland,37.4629,-7.6793,FAO,56.0
+080203,Martim Longo,alcoutim,mainland,37.4327,-7.7741,FAO,49.4
+080205,Vaqueiros,alcoutim,mainland,37.3509,-7.6808,FAO,45.3
+080206,União das freguesias de Alcoutim e Pereiro,alcoutim,mainland,37.4565,-7.5338,FAO,62.5
+080301,Aljezur,aljezur,mainland,37.2872,-8.7983,FAO,79.0
+080302,Bordeira,aljezur,mainland,37.2053,-8.8516,FAO,80.6
+080303,Odeceixe,aljezur,mainland,37.417,-8.7742,FAO,83.6
+080304,Rogil,aljezur,mainland,37.38,-8.8,FAO,83.5
+080401,Azinhal,castro-marim,mainland,37.2917,-7.4637,FAO,54.5
+080402,Castro Marim,castro-marim,mainland,37.2277,-7.47,FAO,50.4
+080403,Odeleite,castro-marim,mainland,37.3426,-7.5202,FAO,54.1
+080404,Altura,castro-marim,mainland,37.1944,-7.5091,FAO,45.7
+080503,Santa Bárbara de Nexe,faro,mainland,37.1101,-7.9583,FAO,10.4
+080506,Montenegro,faro,mainland,37.036,-7.9696,FAO,2.1
+080508,União das freguesias de Faro (Sé e São Pedro),faro,mainland,36.9965,-7.91,FAO,6.1
+080602,Ferragudo,lagoa,mainland,37.1197,-8.5158,FAO,49.4
+080604,Porches,lagoa,mainland,37.1308,-8.3957,FAO,39.5
+080607,União das freguesias de Estômbar e Parchal,lagoa,mainland,37.1413,-8.4887,FAO,47.7
+080608,União das freguesias de Lagoa e Carvoeiro,lagoa,mainland,37.1166,-8.4432,FAO,43.1
+080703,Luz,lagos,mainland,37.1008,-8.7378,FAO,68.4
+080704,Odiáxere,lagos,mainland,37.1452,-8.6513,FAO,61.7
+080708,São Gonçalo de Lagos,lagos,mainland,37.114,-8.6868,FAO,64.2
+080801,Almancil,loule,mainland,37.0627,-8.0232,FAO,6.7
+080802,Alte,loule,mainland,37.2393,-8.189,FAO,31.2
+080803,Ameixial,loule,mainland,37.357,-7.9443,FAO,37.8
+080804,Boliqueime,loule,mainland,37.1453,-8.1414,FAO,20.6
+080805,Quarteira,loule,mainland,37.087,-8.0924,FAO,13.1
+080807,Salir,loule,mainland,37.268,-8.0493,FAO,28.6
+080808,Loulé (São Clemente),loule,mainland,37.151,-7.9949,FAO,15.0
+080809,Loulé (São Sebastião),loule,mainland,37.1492,-8.0728,FAO,17.1
+080901,Alferce,monchique,mainland,37.338,-8.4744,FAO,56.9
+080902,Marmelete,monchique,mainland,37.292,-8.6788,FAO,69.5
+080903,Monchique,monchique,mainland,37.3536,-8.5956,FAO,66.6
+081003,Olhão,olhao,mainland,37.0158,-7.8407,FAO,11.8
+081004,Pechão,olhao,mainland,37.0395,-7.8689,FAO,9.6
+081005,Quelfes,olhao,mainland,37.0569,-7.8298,FAO,13.5
+081101,Alvor,portimao,mainland,37.1548,-8.5768,FAO,55.6
+081102,Mexilhoeira Grande,portimao,mainland,37.2063,-8.6191,FAO,60.9
+081103,Portimão,portimao,mainland,37.1767,-8.5364,FAO,52.9
+081201,São Brás de Alportel,sao-bras-de-alportel,mainland,37.1744,-7.8882,FAO,19.0
+081303,Armação de Pêra,silves,mainland,37.1144,-8.366,FAO,36.4
+081305,São Bartolomeu de Messines,silves,mainland,37.2685,-8.2879,FAO,39.4
+081306,São Marcos da Serra,silves,mainland,37.3711,-8.366,FAO,52.5
+081307,Silves,silves,mainland,37.2271,-8.4389,FAO,47.4
+081401,Cachopo,tavira,mainland,37.3181,-7.8087,FAO,36.5
+081404,Santa Catarina da Fonte do Bispo,tavira,mainland,37.1787,-7.7747,FAO,25.2
+081408,Santa Luzia,tavira,mainland,37.0987,-7.6615,FAO,29.2
+081412,União das freguesias de Tavira (Santa Maria e Santiago),tavira,mainland,37.1986,-7.6733,FAO,33.4
+081501,Barão de São Miguel,vila-do-bispo,mainland,37.1072,-8.8001,FAO,74.0
+081502,Budens,vila-do-bispo,mainland,37.0872,-8.8361,FAO,76.9
+081504,Sagres,vila-do-bispo,mainland,37.0332,-8.942,FAO,86.0
+081506,Vila do Bispo e Raposeira,vila-do-bispo,mainland,37.0904,-8.9041,FAO,82.9
+081601,Vila Nova de Cacela,vila-real-de-santo-antonio,mainland,37.1789,-7.5473,FAO,41.9
+081602,Vila Real de Santo António,vila-real-de-santo-antonio,mainland,37.1867,-7.4213,FAO,52.5
+081603,Monte Gordo,vila-real-de-santo-antonio,mainland,37.1832,-7.4543,FAO,49.6
+100901,Amor,leiria,mainland,39.7973,-8.8687,LIS,115.3
+100902,Arrabal,leiria,mainland,39.7051,-8.7311,LIS,108.4
+100907,Caranguejeira,leiria,mainland,39.7531,-8.7046,LIS,114.2
+100909,Coimbrão,leiria,mainland,39.923,-8.915,LIS,128.3
+100913,Maceira,leiria,mainland,39.6896,-8.897,LIS,103.0
+100915,Milagres,leiria,mainland,39.8116,-8.7753,LIS,118.6
+100921,Regueira de Pontes,leiria,mainland,39.798,-8.8158,LIS,116.3
+100925,Bajouca,leiria,mainland,39.8869,-8.7739,LIS,126.8
+100926,Bidoeira de Cima,leiria,mainland,39.8415,-8.7508,LIS,122.4
+100932,União das freguesias de Colmeias e Memória,leiria,mainland,39.8077,-8.696,LIS,120.2
+100934,União das freguesias de Marrazes e Barosa,leiria,mainland,39.7588,-8.846,LIS,111.5
+100935,União das freguesias de Monte Real e Carvide,leiria,mainland,39.8425,-8.8819,LIS,120.0
+100937,União das freguesias de Parceiros e Azoia,leiria,mainland,39.7146,-8.8432,LIS,106.7
+100938,União das freguesias de Santa Catarina da Serra e Chainça,leiria,mainland,39.6796,-8.6856,LIS,107.1
+100939,União das freguesias de Santa Eufémia e Boa Vista,leiria,mainland,39.7715,-8.7483,LIS,115.0
+110501,Alcabideche,cascais,mainland,38.7407,-9.4262,LIS,25.9
+110506,São Domingos de Rana,cascais,mainland,38.7258,-9.3402,LIS,19.1
+110507,União das freguesias de Carcavelos e Parede,cascais,mainland,38.6888,-9.3361,LIS,20.5
+110508,União das freguesias de Cascais e Estoril,cascais,mainland,38.7141,-9.4575,LIS,29.2
+110601,Ajuda,lisboa,mainland,38.7141,-9.1996,LIS,9.5
+110602,Alcântara,lisboa,mainland,38.7175,-9.1848,LIS,8.4
+110607,Beato,lisboa,mainland,38.7296,-9.1116,LIS,6.0
+110608,Benfica,lisboa,mainland,38.7344,-9.1961,LIS,7.6
+110610,Campolide,lisboa,mainland,38.7312,-9.167,LIS,6.3
+110611,Carnide,lisboa,mainland,38.7638,-9.1865,LIS,5.1
+110618,Lumiar,lisboa,mainland,38.7676,-9.1661,LIS,3.3
+110621,Marvila,lisboa,mainland,38.7472,-9.1106,LIS,4.2
+110633,Olivais,lisboa,mainland,38.7727,-9.124,LIS,1.1
+110639,São Domingos de Benfica,lisboa,mainland,38.747,-9.1789,LIS,5.6
+110654,Alvalade,lisboa,mainland,38.7551,-9.1401,LIS,3.0
+110655,Areeiro,lisboa,mainland,38.7419,-9.1323,LIS,4.3
+110656,Arroios,lisboa,mainland,38.7275,-9.1378,LIS,6.0
+110657,Avenidas Novas,lisboa,mainland,38.7397,-9.1509,LIS,4.9
+110658,Belém,lisboa,mainland,38.7016,-9.2126,LIS,11.3
+110659,Campo de Ourique,lisboa,mainland,38.7196,-9.1637,LIS,7.4
+110660,Estrela,lisboa,mainland,38.7064,-9.1677,LIS,8.9
+110661,Misericórdia,lisboa,mainland,38.7109,-9.1482,LIS,7.9
+110662,Parque das Nações,lisboa,mainland,38.7872,-9.0943,LIS,3.3
+110663,Penha de França,lisboa,mainland,38.7284,-9.1237,LIS,5.9
+110664,Santa Clara,lisboa,mainland,38.787,-9.1529,LIS,1.9
+110665,Santa Maria Maior,lisboa,mainland,38.7114,-9.1368,LIS,7.8
+110666,Santo António,lisboa,mainland,38.7205,-9.1467,LIS,6.8
+110667,São Vicente,lisboa,mainland,38.7183,-9.1251,LIS,7.0
+110702,Bucelas,loures,mainland,38.9155,-9.1366,LIS,15.0
+110705,Fanhões,loures,mainland,38.8916,-9.1722,LIS,12.8
+110707,Loures,loures,mainland,38.846,-9.2035,LIS,9.5
+110708,Lousa,loures,mainland,38.8909,-9.2074,LIS,13.9
+110726,União das freguesias de Moscavide e Portela,loures,mainland,38.7828,-9.1106,LIS,1.9
+110727,União das freguesias de Sacavém e Prior Velho,loures,mainland,38.7964,-9.1135,LIS,2.3
+110729,União das freguesias de Santo Antão e São Julião do Tojal,loures,mainland,38.8565,-9.1368,LIS,8.4
+110730,União das freguesias de Santo António dos Cavaleiros e Frielas,loures,mainland,38.8174,-9.1485,LIS,4.3
+110902,Carvoeira,mafra,mainland,38.9423,-9.3977,LIS,29.2
+110904,Encarnação,mafra,mainland,39.0414,-9.3926,LIS,36.7
+110906,Ericeira,mafra,mainland,38.9727,-9.4031,LIS,31.7
+110909,Mafra,mafra,mainland,38.9555,-9.3409,LIS,26.5
+110911,Milharado,mafra,mainland,38.9343,-9.1834,LIS,17.6
+110913,Santo Isidoro,mafra,mainland,38.9962,-9.3788,LIS,32.1
+110918,União das freguesias de Azueira e Sobral da Abelheira,mafra,mainland,39.0047,-9.2861,LIS,28.2
+110920,União das freguesias de Igreja Nova e Cheleiros,mafra,mainland,38.9049,-9.3226,LIS,21.5
+110921,União das freguesias de Malveira e São Miguel de Alcainça,mafra,mainland,38.9289,-9.2735,LIS,20.5
+110922,União das freguesias de Venda do Pinheiro e Santo Estêvão das Galés,mafra,mainland,38.896,-9.2523,LIS,16.5
+111002,Barcarena,oeiras,mainland,38.7369,-9.2806,LIS,13.8
+111009,Porto Salvo,oeiras,mainland,38.7227,-9.3043,LIS,16.3
+111013,União das freguesias de Carnaxide e Queijas,oeiras,mainland,38.725,-9.2279,LIS,10.4
+111102,Algueirão-Mem Martins,sintra,mainland,38.8105,-9.3267,LIS,17.2
+111105,Colares,sintra,mainland,38.7951,-9.4589,LIS,28.4
+111108,Rio de Mouro,sintra,mainland,38.7663,-9.3319,LIS,17.4
+111115,Casal de Cambra,sintra,mainland,38.801,-9.2305,LIS,8.8
+111122,União das freguesias de Agualva e Mira-Sintra,sintra,mainland,38.7772,-9.2948,LIS,14.1
+111124,União das freguesias do Cacém e São Marcos,sintra,mainland,38.7667,-9.3096,LIS,15.5
+111125,União das freguesias de Massamá e Monte Abraão,sintra,mainland,38.755,-9.2753,LIS,12.8
+111408,Vialonga,vila-franca-de-xira,mainland,38.8803,-9.0835,LIS,11.8
+111409,Vila Franca de Xira,vila-franca-de-xira,mainland,38.9105,-8.9583,LIS,20.8
+111413,União das freguesias de Alverca do Ribatejo e Sobralinho,vila-franca-de-xira,mainland,38.9079,-9.0411,LIS,16.2
+111414,União das freguesias de Castanheira do Ribatejo e Cachoeiras,vila-franca-de-xira,mainland,38.9945,-8.9681,LIS,27.6
+111415,União das freguesias de Póvoa de Santa Iria e Forte da Casa,vila-franca-de-xira,mainland,38.8718,-9.0486,LIS,12.4
+111512,Alfragide,amadora,mainland,38.7343,-9.2147,LIS,8.9
+111513,Águas Livres,amadora,mainland,38.7448,-9.2135,LIS,8.1
+111514,Encosta do Sol,amadora,mainland,38.7713,-9.2183,LIS,7.6
+111515,Falagueira-Venda Nova,amadora,mainland,38.7572,-9.22,LIS,8.1
+111516,Mina de Água,amadora,mainland,38.7734,-9.2385,LIS,9.3
+111517,Venteira,amadora,mainland,38.7468,-9.2405,LIS,10.2
+111603,Odivelas,odivelas,mainland,38.7914,-9.1822,LIS,4.5
+111608,União das freguesias de Pontinha e Famões,odivelas,mainland,38.787,-9.2069,LIS,6.5
+111609,União das freguesias de Póvoa de Santo Adrião e Olival Basto,odivelas,mainland,38.7981,-9.1634,LIS,3.3
+111610,União das freguesias de Ramada e Caneças,odivelas,mainland,38.8157,-9.2194,LIS,8.5
+130405,Lomba,gondomar,mainland,41.0268,-8.4114,OPO,33.4
+130408,Rio Tinto,gondomar,mainland,41.1762,-8.5546,OPO,13.3
+130412,Baguim do Monte (Rio Tinto),gondomar,mainland,41.1915,-8.5383,OPO,13.5
+130413,União das freguesias de Fânzeres e São Pedro da Cova,gondomar,mainland,41.1703,-8.5188,OPO,16.1
+130414,União das freguesias de Foz do Sousa e Covelo,gondomar,mainland,41.0986,-8.4797,OPO,23.7
+130416,União das freguesias de Melres e Medas,gondomar,mainland,41.0638,-8.4336,OPO,29.2
+130601,Águas Santas,maia,mainland,41.2074,-8.5721,OPO,10.2
+130603,Folgosa,maia,mainland,41.2755,-8.5256,OPO,13.3
+130608,Milheirós,maia,mainland,41.2181,-8.5869,OPO,8.5
+130609,Moreira,maia,mainland,41.246,-8.6518,OPO,2.4
+130613,São Pedro Fins,maia,mainland,41.245,-8.5583,OPO,10.2
+130616,Vila Nova da Telha,maia,mainland,41.2505,-8.6738,OPO,0.6
+130617,Pedrouços,maia,mainland,41.1873,-8.5887,OPO,10.3
+130618,Castêlo da Maia,maia,mainland,41.2657,-8.6156,OPO,5.7
+130619,Cidade da Maia,maia,mainland,41.2325,-8.6095,OPO,6.2
+130620,Nogueira e Silva Escura,maia,mainland,41.2474,-8.5814,OPO,8.3
+131001,Aguiar de Sousa,paredes,mainland,41.1212,-8.4393,OPO,24.7
+131002,Astromil,paredes,mainland,41.198,-8.4179,OPO,22.7
+131003,Baltar,paredes,mainland,41.1846,-8.3867,OPO,25.6
+131004,Beire,paredes,mainland,41.2432,-8.3196,OPO,30.2
+131008,Cete,paredes,mainland,41.1803,-8.3617,OPO,27.7
+131009,Cristelo,paredes,mainland,41.2279,-8.3619,OPO,26.7
+131010,Duas Igrejas,paredes,mainland,41.2252,-8.3771,OPO,25.5
+131011,Gandra,paredes,mainland,41.1832,-8.4338,OPO,21.9
+131013,Lordelo,paredes,mainland,41.2401,-8.426,OPO,21.3
+131014,Louredo,paredes,mainland,41.2347,-8.3461,OPO,28.0
+131017,Parada de Todeia,paredes,mainland,41.1669,-8.38,OPO,26.7
+131018,Rebordosa,paredes,mainland,41.2167,-8.4162,OPO,22.4
+131019,Recarei,paredes,mainland,41.1557,-8.4332,OPO,23.1
+131020,Sobreira,paredes,mainland,41.1078,-8.4003,OPO,28.2
+131021,Sobrosa,paredes,mainland,41.2488,-8.3536,OPO,27.3
+131022,Vandoma,paredes,mainland,41.1944,-8.4031,OPO,24.0
+131024,Vilela,paredes,mainland,41.2395,-8.3856,OPO,24.7
+131025,Paredes,paredes,mainland,41.2152,-8.3356,OPO,29.1
+131202,Bonfim,porto,mainland,41.1483,-8.5965,OPO,13.2
+131203,Campanhã,porto,mainland,41.1561,-8.5769,OPO,13.5
+131210,Paranhos,porto,mainland,41.1748,-8.606,OPO,10.3
+131211,Ramalde,porto,mainland,41.172,-8.6428,OPO,9.1
+131218,União das freguesias de Lordelo do Ouro e Massarelos,porto,mainland,41.1532,-8.6528,OPO,10.9
+131305,Balazar,povoa-de-varzim,mainland,41.398,-8.6225,OPO,17.3
+131307,Estela,povoa-de-varzim,mainland,41.452,-8.7565,OPO,23.5
+131308,Laundos,povoa-de-varzim,mainland,41.4399,-8.7213,OPO,21.5
+131311,Rates,povoa-de-varzim,mainland,41.4274,-8.6708,OPO,19.9
+131401,Agrela,santo-tirso,mainland,41.255,-8.4668,OPO,17.9
+131402,Água Longa,santo-tirso,mainland,41.2656,-8.5017,OPO,15.0
+131405,Aves,santo-tirso,mainland,41.3673,-8.4067,OPO,26.4
+131413,Monte Córdova,santo-tirso,mainland,41.3193,-8.4178,OPO,23.3
+131416,Rebordões,santo-tirso,mainland,41.3495,-8.4255,OPO,24.0
+131418,Reguenga,santo-tirso,mainland,41.2732,-8.4537,OPO,19.1
+131419,Roriz,santo-tirso,mainland,41.3448,-8.3808,OPO,27.2
+131430,Negrelos (São Tomé),santo-tirso,mainland,41.3451,-8.4049,OPO,25.4
+131432,Vilarinho,santo-tirso,mainland,41.367,-8.3386,OPO,31.4
+131434,Vila Nova do Campo,santo-tirso,mainland,41.349,-8.3515,OPO,29.6
+131435,União das freguesias de Carreira e Refojos de Riba de Ave,santo-tirso,mainland,41.2927,-8.4496,OPO,19.9
+131436,União das freguesias de Lamelas e Guimarei,santo-tirso,mainland,41.2995,-8.4941,OPO,16.5
+131501,Alfena,valongo,mainland,41.2349,-8.523,OPO,13.2
+131503,Ermesinde,valongo,mainland,41.2131,-8.5478,OPO,11.8
+131505,Valongo,valongo,mainland,41.1969,-8.502,OPO,16.0
+131602,Árvore,vila-do-conde,mainland,41.3356,-8.7255,OPO,10.3
+131603,Aveleda,vila-do-conde,mainland,41.2671,-8.691,OPO,2.2
+131604,Azurara,vila-do-conde,mainland,41.3428,-8.7393,OPO,11.5
+131607,Fajozes,vila-do-conde,mainland,41.3227,-8.6992,OPO,8.4
+131610,Gião,vila-do-conde,mainland,41.311,-8.6771,OPO,6.9
+131611,Guilhabreu,vila-do-conde,mainland,41.2944,-8.6359,OPO,6.3
+131612,Junqueira,vila-do-conde,mainland,41.3763,-8.676,OPO,14.2
+131613,Labruge,vila-do-conde,mainland,41.2802,-8.713,OPO,4.4
+131614,Macieira da Maia,vila-do-conde,mainland,41.3431,-8.6835,OPO,10.5
+131616,Mindelo,vila-do-conde,mainland,41.3147,-8.7199,OPO,8.0
+131617,Modivas,vila-do-conde,mainland,41.2938,-8.6961,OPO,5.2
+131627,Vila Chã,vila-do-conde,mainland,41.2954,-8.7239,OPO,6.3
+131628,Vila do Conde,vila-do-conde,mainland,41.3636,-8.7487,OPO,14.0
+131630,Vilar de Pinheiro,vila-do-conde,mainland,41.2695,-8.6624,OPO,2.7
+131636,União das freguesias de Touguinha e Touguinhó,vila-do-conde,mainland,41.3823,-8.7112,OPO,15.0
+131637,União das freguesias de Vilar e Mosteiró,vila-do-conde,mainland,41.2855,-8.6683,OPO,4.2
+131701,Arcozelo,vila-nova-de-gaia,mainland,41.0555,-8.6407,OPO,21.8
+131702,Avintes,vila-nova-de-gaia,mainland,41.1074,-8.5499,OPO,19.2
+131703,Canelas,vila-nova-de-gaia,mainland,41.0776,-8.601,OPO,20.2
+131704,Canidelo,vila-nova-de-gaia,mainland,41.1271,-8.6511,OPO,13.8
+131709,Madalena,vila-nova-de-gaia,mainland,41.1036,-8.6501,OPO,16.4
+131712,Oliveira do Douro,vila-nova-de-gaia,mainland,41.1269,-8.583,OPO,15.8
+131717,São Félix da Marinha,vila-nova-de-gaia,mainland,41.0306,-8.6278,OPO,24.7
+131723,Vilar de Andorinho,vila-nova-de-gaia,mainland,41.1023,-8.5733,OPO,18.6
+131806,Covelas,trofa,mainland,41.299,-8.5419,OPO,12.8
+131808,Muro,trofa,mainland,41.2968,-8.5928,OPO,9.0
+131810,União das freguesias de Bougado (São Martinho e Santiago),trofa,mainland,41.3266,-8.5771,OPO,12.2
+131811,União das freguesias de Coronado (São Romão e São Mamede),trofa,mainland,41.2808,-8.5691,OPO,9.9
+150201,Alcochete,alcochete,mainland,38.712,-8.8671,LIS,24.2
+150202,Samouco,alcochete,mainland,38.7292,-9.0185,LIS,11.4
+150203,São Francisco,alcochete,mainland,38.7335,-8.9725,LIS,14.8
+150303,Costa da Caparica,almada,mainland,38.6481,-9.2363,LIS,17.3
+150313,União das freguesias de Caparica e Trafaria,almada,mainland,38.6601,-9.2184,LIS,15.4
+150314,União das freguesias de Charneca de Caparica e Sobreda,almada,mainland,38.6255,-9.1908,LIS,18.0
+150315,União das freguesias de Laranjeiro e Feijó,almada,mainland,38.6556,-9.1668,LIS,14.3
+150407,Santo António da Charneca,barreiro,mainland,38.6174,-9.0196,LIS,20.6
+150410,União das freguesias de Barreiro e Lavradio,barreiro,mainland,38.6697,-9.0549,LIS,14.1
+150411,União das freguesias de Palhais e Coina,barreiro,mainland,38.5996,-9.0344,LIS,21.9
+150601,Alhos Vedros,moita,mainland,38.6469,-9.0125,LIS,18.2
+150603,Moita,moita,mainland,38.6481,-8.9817,LIS,19.7
+150607,União das freguesias de Baixa da Banheira e Vale da Amoreira,moita,mainland,38.659,-9.0431,LIS,15.6
+150608,União das freguesias de Gaio-Rosário e Sarilhos Pequenos,moita,mainland,38.6805,-9.0059,LIS,15.6
+150701,Canha,montijo,mainland,38.7711,-8.688,LIS,38.5
+150704,Sarilhos Grandes,montijo,mainland,38.6712,-8.9597,LIS,19.3
+150709,União das freguesias de Atalaia e Alto Estanqueiro-Jardia,montijo,mainland,38.6779,-8.928,LIS,21.1
+150710,União das freguesias de Montijo e Afonsoeiro,montijo,mainland,38.7085,-9.0268,LIS,12.2
+150711,União das freguesias de Pegões,montijo,mainland,38.6842,-8.6059,LIS,46.9
+150802,Palmela,palmela,mainland,38.5862,-8.8857,LIS,30.4
+150803,Pinhal Novo,palmela,mainland,38.6437,-8.8859,LIS,26.2
+150804,Quinta do Anjo,palmela,mainland,38.581,-8.9631,LIS,26.6
+150806,União das freguesias de Poceirão e Marateca,palmela,mainland,38.626,-8.7299,LIS,38.9
+151002,Amora,seixal,mainland,38.6166,-9.1275,LIS,18.3
+151005,Corroios,seixal,mainland,38.6337,-9.1571,LIS,16.5
+151006,Fernão Ferro,seixal,mainland,38.5724,-9.097,LIS,23.4
+151101,Sesimbra (Castelo),sesimbra,mainland,38.4948,-9.1323,LIS,31.8
+151103,Quinta do Conde,sesimbra,mainland,38.5636,-9.0435,LIS,25.4
+151205,Setúbal (São Sebastião),setubal,mainland,38.5176,-8.8675,LIS,37.2
+151207,Gâmbia-Pontes-Alto da Guerra,setubal,mainland,38.5444,-8.7736,LIS,40.7
+151208,Sado,setubal,mainland,38.4955,-8.8045,LIS,42.6
+151209,União das freguesias de Azeitão (São Lourenço e São Simão),setubal,mainland,38.5174,-9.0087,LIS,31.2
+310301,Imaculado Coração de Maria,funchal,madeira,32.6612,-16.9166,FNC,14.1
+310302,Monte,funchal,madeira,32.6864,-16.8982,FNC,11.8
+310305,Santo António,funchal,madeira,32.704,-16.9432,FNC,15.9
+310306,São Gonçalo,funchal,madeira,32.6578,-16.876,FNC,10.7
+310307,São Martinho,funchal,madeira,32.6456,-16.9416,FNC,16.9
+310309,São Roque,funchal,madeira,32.6876,-16.9224,FNC,14.0
