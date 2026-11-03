@@ -10,6 +10,7 @@ Public identifiers only (no passwords, keys or tokens). All accounts are on the 
 - Subscribe form "Site – PT": id `c515b523-ee0e-4cd4-9d78-97423874a589`
   - Embed: `<script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="c515b523-ee0e-4cd4-9d78-97423874a589"></script>`
   - Attribution (optional, before </body>): `<script type="text/javascript" async src="https://subscribe-forms.beehiiv.com/attribution.js"></script>`
+- Subscribe forms "SITE - EN": id `5ddaeb24-062e-4898-a13f-d41dc289aa20` · "SITE - FR": id `4fe3c644-45a3-4a56-83d9-55e996555ebf` (3 Nov 2026). All three forms: no header (the Maré page carries the words), brand green button, button "Receber a Maré" / "Get Maré" / "Recevoir Maré", success line in the form's language. Theme edits are drafts until published in the beehiiv form builder. Double opt-in is on at publication level.
 - Open: footer postal address not set ("No Address Set"); beehiiv needs it before the first send. It must be the billing entity's or a business address, never a team member's (D4, hard rule 1). EN and FR forms still to create.
 
 ## Tally (forms, free plan)
