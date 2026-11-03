@@ -130,6 +130,8 @@ const fieldLabel = (id: string, kind: string) => {
 <script>
   import { run, FIELDS, type ToolKey } from "../lib/tools";
   import { saveSim } from "../lib/brief";
+  import { ev, rememberSimBudget } from "../lib/track";
+  import { budgetBand } from "../lib/sim1";
   const form = document.getElementById("sim") as HTMLFormElement;
   const tool = form.dataset.tool as ToolKey;
   const fx = Number(form.dataset.fx) || 1;
@@ -205,6 +207,9 @@ const fieldLabel = (id: string, kind: string) => {
   }
   form.addEventListener("input", render);
   form.addEventListener("submit", (e) => e.preventDefault());
+  // Part 5: the reader used this calculator (lib/track.ts ev "sim/{tool}/use", once the hand stops; the price as a band).
+  let tU = 0;
+  form.addEventListener("input", () => { clearTimeout(tU); tU = window.setTimeout(() => { const v = values(), pr = Number(v.price) || 0; ev({ event: `sim/${tool}/use`, band: pr >= 1e4 ? budgetBand(pr) : undefined, origin: "sims" }); if (tool === "cost" && pr >= 1e5) rememberSimBudget(pr); }, 900); });
 
   // Sliders for prices: log scale from 100 k€ to 10 M€; the number field above takes any amount.
   const toVal = (p: number) => { const x = 1e5 * Math.pow(100, p / 1000); const st = x < 1e6 ? 5000 : x < 5e6 ? 25000 : 50000; return Math.round(x / st) * st; };

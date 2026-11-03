@@ -1,86 +1,39 @@
 ---
-// Prices and rents (prompts 13 and 20 §3): ten years of INE median sale prices per m² by municipality and region,
-// the median rent of new leases and the gross yield, in euros or the reader's currency, up to three places
-// compared on one chart. Describe, never advise (D12): the past-prices line sits by every chart.
-// Data: public/data/prices.json (facts ine-m2-history, ine-rent-2026q2). Wording: COPY_DECK.md "prices.*".
+// Prices and rents (prompts 13 and 20 §3), a preview of the paid analysis since the operator's fix round of 3 Nov 2026
+// (step 3): the title, the finding in one sentence, the shape of the chart without figures and "Ver a análise completa",
+// which opens the map's unlock sheet (components/AnalysisPreview.astro). The ten years of INE prices per municipality, the
+// rents and the gross yields this page used to show free are in the analysis (MapAnalysisPage.astro, AnalysisExtra.astro);
+// the market median of each municipality stays free on the map. Describe, never advise (D12): the past-prices line and the
+// method stay under the shape. URL unchanged. Data: public/data/prices.json (facts ine-m2-history, ine-rent-2026q2).
+// Wording: COPY_DECK.md "prices.*" and "fix35.prev.*".
 import V2 from "../layouts/V2.astro";
-import { HTML_LANG, pathFor, eur, type Lang, type EdCode } from "../i18n";
-import { Sources, fmtDate, EDITION_CUR, RATE } from "../lib/content";
+import AnalysisPreview from "./AnalysisPreview.astro";
+import { pathFor, type Lang, type EdCode } from "../i18n";
+import { Sources, fmtDate } from "../lib/content";
 import { PRICES, LAST } from "../lib/prices";
-import { lineChart, change } from "../lib/chart";
-import { SUB } from "../lib/tools";
-import { PTYPES } from "../lib/packages";
 import { c, edName } from "../lib/copy";
 
 interface Props { lang: Lang; ed: EdCode; }
 const { lang, ed } = Astro.props;
 const src = new Sources();
-const nH = src.n("ine-m2-history"), nR = src.n("ine-rent-2026q2");
-const cur = EDITION_CUR[ed]; const fx = cur ? RATE(cur) : null;
-const nfx = fx ? src.n(fx.id) : 0;
-const nf = new Intl.NumberFormat(HTML_LANG[lang], { maximumFractionDigits: 0 });
-const nf2 = new Intl.NumberFormat(HTML_LANG[lang], { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-const nf1 = new Intl.NumberFormat(HTML_LANG[lang], { minimumFractionDigits: 1, maximumFractionDigits: 1 });
-const pc = (v: number | null) => (v === null ? "—" : `${v >= 0 ? "+" : "−"}${nf.format(Math.abs(v))}${lang === "fr" ? " %" : "%"}`);
-const pt = PRICES.regions.PT;
-const defaults = ["lisboa", "porto", "loule"];
-const chart = lineChart(PRICES.quarters, defaults.map((s) => ({ label: PRICES.munis[s].n, values: PRICES.munis[s].m2 })), { breakAt: PRICES.break, breakLabel: c("prices.break", lang), fmt: (v) => nf.format(v) });
-const regionRows = Object.entries(PRICES.regions).filter(([k]) => k !== "PT");
-const row = (p: { n: string; m2: (number | null)[]; rent: Record<string, number>; yield: number | null }) => ({
-  m2: p.m2[LAST], ten: change(p.m2), one: change(p.m2, 4), rent: p.rent["2026"] ?? null, y: p.yield,
-});
-const links = {
-  buy: pathFor(lang, ed, "consult"), sim: `${pathFor(lang, ed, "sims")}${SUB.cost[lang]}/`, journey: pathFor(lang, ed, "journey"),
-  devs: `${pathFor(lang, ed, "partners")}${PTYPES.find((t) => t.key === "developers")!.slug[lang]}/`, map: pathFor(lang, ed, "map"),
-};
-const L = {
-  break: c("prices.break", lang), remove: c("prices.compare.remove", lang), none: c("prices.none", lang),
-  homes: c("map.a.homes", lang), devs: c("dev.card", lang), sim: c("map.a.sim", lang), journey: c("journey.open", lang), page: c("map.a.page", lang),
-};
-const options = Object.entries(PRICES.munis).filter(([, m]) => m.m2[LAST]).map(([s, m]) => ({ s, n: m.n })).sort((a, b) => a.n.localeCompare(b.n, "pt"));
+const cite: Record<string, () => number> = { sHist: () => src.n("ine-m2-history"), sRent: () => src.n("ine-rent-2026q2") };
+const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+const finding = esc(c("fix35.prev.data.f", lang)).replace(/\{(s[A-Z]\w*)\}/g, (_, t) => `<a class="sup" href="#fonte-${cite[t]()}">${cite[t]()}</a>`);
+// The shape: municipalities from the cheapest square metre to the dearest, in 24 equal groups; each bar is the group's
+// median gross yield (no value shown). The three cheapest groups carry the accent: the finding names them.
+const munis = Object.values(PRICES.munis).filter((m) => m.m2[LAST] && m.yield).sort((a, b) => a.m2[LAST]! - b.m2[LAST]!);
+const G = 24, med = (xs: number[]) => { const s = [...xs].sort((a, b) => a - b), h = s.length >> 1; return s.length % 2 ? s[h] : (s[h - 1] + s[h]) / 2; };
+const bars = Array.from({ length: G }, (_, g) => med(munis.slice(Math.floor((g * munis.length) / G), Math.floor(((g + 1) * munis.length) / G)).map((m) => m.yield!)));
+const title = c("prices.title", lang);
 ---
-<V2 lang={lang} ed={ed} page="data" title={`${c("prices.title", lang)} | Imóveis Portugal · ${edName(ed, lang)}`} description={c("prices.lede", lang)} sticky={null}>
-  <div class="frame read ph">
-    <p class="h-small">{c("prices.title", lang)}</p>
-    <h1>{c("prices.h1", lang)}</h1>
-    <p class="lede">{c("prices.lede", lang)}</p>
-    <p class="big-line">{c("prices.national", lang, { from: eur(pt.m2[0]!, lang), to: eur(pt.m2[LAST]!, lang) })}<a class="sup" href={`#fonte-${nH}`}>{nH}</a></p>
+<V2 lang={lang} ed={ed} page="data" title={`${title} | Imóveis Portugal · ${edName(ed, lang)}`} description={c("prices.lede", lang)} sticky={null}>
+  <div class="frame read ph dp-prev">
+    <AnalysisPreview lang={lang} ed={ed} id="prices-page" kick={title} title={c("prices.h1", lang)} finding={finding}
+      shape={{ kind: "bars", values: bars, accent: [0, 1, 2] }} y={c("fix35.prev.data.y", lang)} lo={c("fix35.prev.data.lo", lang)} hi={c("fix35.prev.data.hi", lang)}
+      contents={c("prices.lede", lang)} />
+    <p class="small dp-past">{c("journey.past", lang)} {c("prices.method", lang)}</p>
+    <p class="dp-map"><a class="more" href={pathFor(lang, ed, "map")}>{c("map.open", lang)}</a></p>
   </div>
-  <div class="frame prices" data-prices data-locale={HTML_LANG[lang]} data-fx={fx ? fx.rate : ""} data-cur={cur ?? ""}>
-    <section aria-labelledby="cmp-h">
-      <h2 id="cmp-h" class="h3">{c("prices.compare.h", lang)}</h2>
-      <div class="pc-controls">
-        <label class="pc-add"><span class="sr">{c("prices.compare.add", lang)}</span>
-          <input list="pc-list" placeholder={c("prices.compare.add", lang)} data-add />
-          <datalist id="pc-list">{options.map((o) => <option value={o.n} data-s={o.s} />)}</datalist>
-        </label>
-        <p class="pc-chips" data-chips>{defaults.map((s) => <button type="button" data-s={s}>{PRICES.munis[s].n} ×</button>)}</p>
-        {fx && <p class="pc-cur" role="group"><button type="button" data-cur-btn="eur" aria-pressed="true">{c("prices.cur.eur", lang)}</button><button type="button" data-cur-btn="local" aria-pressed="false">{c("prices.cur.local", lang, { cur: cur!, date: fmtDate(lang, "2026-10-23") })}</button></p>}
-      </div>
-      <figure class="pc-chart" data-chart set:html={chart} />
-      <p class="small pc-past">{c("journey.past", lang)} {c("prices.method", lang)}</p>
-      <div class="pc-table-wrap">
-        <table class="cmp pc-table">
-          <thead><tr><th scope="col">{c("prices.col.place", lang)}</th><th scope="col">{c("prices.col.m2", lang)}</th><th scope="col">{c("prices.col.10y", lang)}</th><th scope="col">{c("prices.col.1y", lang)}</th><th scope="col">{c("prices.col.rent", lang)}<a class="sup" href={`#fonte-${nR}`}>{nR}</a></th><th scope="col">{c("prices.col.yield", lang)}</th></tr></thead>
-          <tbody data-rows>{defaults.map((s) => { const m = PRICES.munis[s], r = row(m); return (
-            <tr><th scope="row">{m.n}</th><td>{r.m2 ? eur(r.m2, lang) : "—"}</td><td>{pc(r.ten)}</td><td>{pc(r.one)}</td><td>{r.rent ? (lang === "en" ? `€${nf2.format(r.rent)}` : `${nf2.format(r.rent)} €`) : "—"}</td><td>{r.y ? `${nf1.format(r.y)}${lang === "fr" ? " %" : "%"}` : "—"}</td></tr>
-          ); })}</tbody>
-        </table>
-      </div>
-      <div class="pc-links" data-links>{defaults.map((s) => (
-        <p class="small"><strong>{PRICES.munis[s].n}</strong> · <a href={`${links.buy}?place=${encodeURIComponent(PRICES.munis[s].n)}`}>{L.homes}</a> · <a href={`${links.map}${s}/`}>{L.page}</a> · <a href={links.sim}>{L.sim}</a> · <a href={links.devs} class="brass">{L.devs}</a> · <a href={links.journey}>{L.journey}</a></p>
-      ))}</div>
-      <p class="small">{c("prices.yield.note", lang)}{fx && <a class="sup" href={`#fonte-${nfx}`}>{nfx}</a>}</p>
-    </section>
-    <section aria-labelledby="reg-h" class="read" style="margin-top:48px">
-      <h2 id="reg-h" class="h3">{c("prices.regions.h", lang)}</h2>
-      <table class="cmp">
-        <thead><tr><th scope="col">{c("prices.col.place", lang)}</th><th scope="col">{c("prices.col.m2", lang)}</th><th scope="col">{c("prices.col.1y", lang)}</th><th scope="col">{c("prices.col.yield", lang)}</th></tr></thead>
-        <tbody>{[["PT", pt] as const, ...regionRows].map(([, p]) => { const r = row(p); return <tr><th scope="row">{p.n}</th><td>{r.m2 ? eur(r.m2, lang) : "—"}</td><td>{pc(r.one)}</td><td>{r.y ? `${nf1.format(r.y)}${lang === "fr" ? " %" : "%"}` : "—"}</td></tr>; })}</tbody>
-      </table>
-    </section>
-  </div>
-  <script type="application/json" data-prices-labels set:html={JSON.stringify({ L, links })} />
   <section class="sources-list" aria-labelledby="fontes">
     <div class="frame read">
       <h2 id="fontes" class="h-small">{c("common.sources", lang)}</h2>
@@ -89,38 +42,8 @@ const options = Object.entries(PRICES.munis).filter(([, m]) => m.m2[LAST]).map((
   </section>
 </V2>
 
-<script>
-  import { lineChart, change } from "../lib/chart";
-  const root = document.querySelector<HTMLElement>("[data-prices]");
-  if (root) {
-    const { L, links } = JSON.parse(document.querySelector("[data-prices-labels]")!.textContent || "{}");
-    const loc = root.dataset.locale || "pt-PT", fx = Number(root.dataset.fx) || 0, cur = root.dataset.cur || "";
-    const nf = new Intl.NumberFormat(loc, { maximumFractionDigits: 0 }), nf2 = new Intl.NumberFormat(loc, { minimumFractionDigits: 2, maximumFractionDigits: 2 }), nf1 = new Intl.NumberFormat(loc, { minimumFractionDigits: 1, maximumFractionDigits: 1 });
-    const pctSign = loc.startsWith("fr") ? " %" : "%";
-    const pc = (v: number | null) => (v === null ? "—" : `${v >= 0 ? "+" : "−"}${nf.format(Math.abs(v))}${pctSign}`);
-    let picked = [...root.querySelectorAll<HTMLButtonElement>("[data-chips] button")].map((b) => b.dataset.s!);
-    let local = false, data: any = null;
-    const money = (v: number) => local ? new Intl.NumberFormat(loc, { style: "currency", currency: cur, maximumFractionDigits: 0 }).format(v * fx) : new Intl.NumberFormat(loc, { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(v);
-    async function draw() {
-      data ??= await fetch("/data/prices.json").then((r) => r.json());
-      const ms = picked.map((s) => ({ s, ...data.munis[s] }));
-      root!.querySelector("[data-chart]")!.innerHTML = lineChart(data.quarters, ms.map((m) => ({ label: m.n, values: m.m2 })), { breakAt: data.break, breakLabel: L.break, scale: local ? fx : 1, fmt: (v) => nf.format(v) });
-      root!.querySelector("[data-chips]")!.innerHTML = ms.map((m) => `<button type="button" data-s="${m.s}">${m.n} ×</button>`).join("");
-      const last = data.quarters.length - 1;
-      root!.querySelector("[data-rows]")!.innerHTML = ms.map((m) => `<tr><th scope="row">${m.n}</th><td>${m.m2[last] ? money(m.m2[last]) : "—"}</td><td>${pc(change(m.m2))}</td><td>${pc(change(m.m2, 4))}</td><td>${m.rent["2026"] ? (local ? money(m.rent["2026"]).replace(/[.,]00$/, "") : (loc.startsWith("en") ? `€${nf2.format(m.rent["2026"])}` : `${nf2.format(m.rent["2026"])} €`)) : "—"}</td><td>${m.yield ? nf1.format(m.yield) + pctSign : "—"}</td></tr>`).join("");
-      root!.querySelector("[data-links]")!.innerHTML = ms.map((m) => `<p class="small"><strong>${m.n}</strong> · <a href="${links.buy}?place=${encodeURIComponent(m.n)}">${L.homes}</a> · <a href="${links.map}${m.s}/">${L.page}</a> · <a href="${links.sim}">${L.sim}</a> · <a class="brass" href="${links.devs}">${L.devs}</a> · <a href="${links.journey}">${L.journey}</a></p>`).join("");
-    }
-    root.addEventListener("click", (e) => {
-      const chip = (e.target as HTMLElement).closest<HTMLButtonElement>("[data-chips] button");
-      if (chip && picked.length > 1) { picked = picked.filter((s) => s !== chip.dataset.s); draw(); }
-      const cb = (e.target as HTMLElement).closest<HTMLButtonElement>("[data-cur-btn]");
-      if (cb) { local = cb.dataset.curBtn === "local"; root.querySelectorAll("[data-cur-btn]").forEach((b) => b.setAttribute("aria-pressed", String(b === cb))); draw(); }
-    });
-    const add = root.querySelector<HTMLInputElement>("[data-add]")!;
-    add.addEventListener("change", () => {
-      const opt = [...document.querySelectorAll<HTMLOptionElement>("#pc-list option")].find((o) => o.value === add.value);
-      if (opt && !picked.includes(opt.dataset.s!)) { picked = [...picked.slice(-2), opt.dataset.s!]; draw(); }
-      add.value = "";
-    });
-  }
-</script>
+<style>
+  .dp-prev { padding-bottom: 48px; }
+  .dp-past { margin-top: 40px; }
+  .dp-map { margin-top: 16px; }
+</style>

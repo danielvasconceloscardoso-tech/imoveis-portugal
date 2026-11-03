@@ -24,27 +24,27 @@ Assunto: Escritura e registo em Portugal por 375 €
 
 {{first name | Olá}},
 
-este é o terceiro e último email de boas-vindas do Imóveis Portugal, o guia para comprar casa em Portugal a partir do Luxemburgo. Uma pessoa lê cada resposta, e a primeira edição de quinta-feira chega a 3 de dezembro.
+este é o último email de boas-vindas, e é sobre o dia da escritura, que pode fazer-se sem lá estar. A primeira carta chega na quinta-feira, 3 de dezembro.
 
 ## Assinar sem vir a Portugal
 
-Não precisa de vir a Portugal para assinar. Uma procuração feita num consulado português, ou num notário do país onde vive com a Apostila de Haia, permite que a pessoa que escolher, muitas vezes um advogado, assine o contrato-promessa e a escritura em seu nome (fonte: serviços consulares portugueses, verificado a 24 de outubro de 2026). E pode vir na mesma para a visita, para as chaves ou para as duas coisas.
+Uma procuração feita num consulado português, ou num notário do país onde vive com a Apostila de Haia, permite que a pessoa que escolher, muitas vezes um advogado, assine por si o contrato-promessa e a escritura (fonte: serviços consulares portugueses, verificado a 24 de outubro de 2026). A viagem pode ficar para a visita ou para as chaves.
 
-No dia, o balcão Casa Pronta faz a escritura e o registo no mesmo momento, por 375 € (Justiça.gov.pt, verificado a 25 de outubro de 2026). A Casa Pronta pede a licença de utilização, ou a sua dispensa, e o certificado energético. Os impostos e os honorários do advogado contam à parte.
+No balcão Casa Pronta, a escritura e o registo fazem-se no mesmo momento, por 375 € (Justiça.gov.pt, verificado a 25 de outubro de 2026). A Casa Pronta pede a licença de utilização, ou a sua dispensa, e o certificado energético. Impostos e honorários do advogado contam à parte.
 
 ## O que muda a partir do Luxemburgo
 
-Uma procuração feita num notário no Luxemburgo leva a Apostila; feita num consulado português, não precisa. Como vive na UE, depois da escritura o representante fiscal em Portugal é opcional. E como recebe em euros, não há câmbio pelo meio. O que ajuda são os comprovativos da origem do dinheiro: bancos, notários e advogados têm de os pedir quando a operação o justifica.
+Num notário no Luxemburgo, a procuração leva a Apostila; num consulado português, não precisa. Como vive na UE, o representante fiscal em Portugal é opcional depois da escritura. E como recebe em euros, não há câmbio pelo meio. Ajudam os comprovativos da origem do dinheiro: bancos, notários e advogados têm de os pedir quando a operação o justifica.
 
-O passo a passo, com os documentos que a Casa Pronta pede e o que muda para quem vive no Luxemburgo: https://imoveisportugal.pt/pt/lu/blog/escritura-da-casa-com-procuracao/?utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-lu
+O passo a passo e o que muda para quem vive no Luxemburgo: https://imoveisportugal.pt/pt/lu/blog/escritura-da-casa-com-procuracao/?utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-lu
 
-A procuração no conjunto da compra, na etapa 3 do Passo a passo: https://imoveisportugal.pt/pt/lu/passo-a-passo/?door=buy&step=3&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-lu
+A procuração na etapa 3 do Passo a passo: https://imoveisportugal.pt/pt/lu/passo-a-passo/?door=buy&step=3&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-lu
 
 Um advogado parceiro pode redigir a procuração e assinar por si: https://imoveisportugal.pt/pt/lu/falar-com-um-parceiro/?cat=lawyer&utm_source=newsletter&utm_medium=email&utm_campaign=w03-sign-lu#form
 
 Responda a este email com a sua pergunta. Uma pessoa lê-a e responde.
 
-Até quinta-feira, 3 de dezembro, dia da primeira edição.
+Até quinta-feira, 3 de dezembro.
 Imóveis Portugal
 
 ---

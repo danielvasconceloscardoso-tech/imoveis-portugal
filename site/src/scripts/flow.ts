@@ -1,11 +1,14 @@
 // The flow engine (prompt 35 §3, D61): one question per screen, large choices that advance by themselves, our own
 // controls (no browser selects, checkboxes or outlined boxes), every step a link (?step=3 on a page, ?concierge=3 in the
-// sheet), answers kept only in this tab (sessionStorage) and sent once, with the consent, to /api/request.
-// If the endpoint is not configured or fails, the request opens as a ready-written email to the brand mailbox.
+// sheet), answers kept only in this tab (sessionStorage) and sent once to /api/request, which e-mails Imóveis Portugal and
+// the partner agency (no consent box: GDPR art. 6(1)(b), operator 3 Nov 2026; the last screen names both recipients).
+// If the endpoint is not configured or fails, the request opens as a ready-written email to the brand mailbox (and, when
+// the build sets PUBLIC_AGENCY_EMAIL, the partner agency in copy).
 import type { FlowConfig, Step } from "../lib/flows";
 import type { LawyerCard } from "../lib/lawyers";
 import { slotPicker, slotLabel, type Slot } from "./slots";
-import { track, edOf } from "../lib/track";
+import { track, edOf, ev, lastPlace, simBudget } from "../lib/track";
+import { heartHTML } from "./hearts";
 
 const reduce = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 const esc = (t: string) => t.replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[ch]!);
@@ -27,7 +30,7 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
   const save = () => { try { sessionStorage.setItem(key, JSON.stringify(A)); } catch { /* private mode */ } };
   let i = 0, dir = 1;
   // A click on a listed building's card (prompt 51 §3): counted for that developer's report, nothing else is kept.
-  stage.addEventListener("click", (e) => { const b = (e.target as HTMLElement).closest?.("a")?.closest<HTMLElement>("[data-bld]")?.dataset.bld; if (b) track(`${edOf()}/p/${b}/card`); });
+  stage.addEventListener("click", (e) => { const b = (e.target as HTMLElement).closest?.("a")?.closest<HTMLElement>("[data-bld]")?.dataset.bld; if (b) ev({ event: `p/${b}/card`, place: b, origin: F.id }); });
 
   // The reader's edition (prompt 37 §1.1): the one in the URL (/{lang}/{ed}/...), else the page's own, else the saved one.
   // sessionStorage is shared by every edition on one domain, so answers kept from another edition (or language) in this
@@ -42,15 +45,18 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
   if (A._lang !== F.hidden.language) { reset("lang"); A._lang = F.hidden.language; }
 
   // Prefills: the edition, the reader's language, the budget and place from the map or the path, a partner category.
+  // Never ask twice (part 5): after the link, the simulator's budget in this tab (lib/track.ts simBudget) and the last
+  // place opened on the map in this tab (lastPlace) come before the older answers kept on the device.
   const q = new URLSearchParams(location.search);
-  const budgetEur = Number(q.get("budget")) || (() => { try { return Number(localStorage.getItem("ip.budget")) || 0; } catch { return 0; } })();
+  const budgetEur = Number(q.get("budget")) || simBudget() || (() => { try { return Number(localStorage.getItem("ip.budget")) || 0; } catch { return 0; } })();
   const places = (() => { try { return JSON.parse(localStorage.getItem("ip.places") || "[]") as string[]; } catch { return []; } })();
   const pre: Record<string, string> = {
     edition: edNow, lang: F.hidden.language, cat: q.get("cat") || "",
     budget: budgetEur ? (budgetEur <= 300000 ? "1" : budgetEur <= 1e6 ? "2" : budgetEur <= 5e6 ? "3" : "4") : "",
-    place: q.get("place") || places[0] || "",
+    place: q.get("place") || lastPlace() || places[0] || "",
   };
-  for (const s of steps) if ("prefill" in s && s.prefill && !A[s.id] && pre[s.prefill]) A[s.id] = pre[s.prefill];
+  const known = new Set<string>();  // the steps answered from what the site knew (counted as origin "known")
+  for (const s of steps) if ("prefill" in s && s.prefill && !A[s.id] && pre[s.prefill]) { A[s.id] = pre[s.prefill]; known.add(s.id); }
   // Prompt 43 §3b: a partner link (Passo a passo, Perguntas) names the topic. Lawyer opens the lawyer card (D64, its own
   // consent box); advisor is the normal concierge; bank and tax have no signed partner yet, so the first screen says we
   // introduce the right person and the request follows the usual routing to the qualified advisor (D66). The topic is
@@ -66,6 +72,8 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
     const given = new Set<string>();
     for (const s of steps) if ("prefill" in s && (s.prefill === "edition" || (s.prefill === "budget" && pre.budget))) { A[s.id] = pre[s.prefill]; given.add(s.id); }
     const door = q0.get("door"); if (door === "buy" || door === "sell" || door === "inherit") A.door = door;
+    // The one-screen simulator (components/Sim1.astro) also names the place it was showing: it wins over an older answer.
+    const pl = q0.get("place"); if (pl) A.place = pl;
     while (offset < N - 1 && given.has(steps[offset].id)) offset++;
     for (const k of ["cg", "ed", "door"]) q0.delete(k);
     history.replaceState(null, "", `${location.pathname}${q0.size ? `?${q0}` : ""}${location.hash}`);
@@ -104,15 +112,15 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
         ${s.phone ? `<label class="fl-f"><span>${esc(L.phone)}</span><input class="fl-in" data-c="phone" type="tel" inputmode="tel" autocomplete="tel" value="${esc(A.phone || "")}" /></label>` : ""}
         <p class="fl-err" data-err hidden>${esc(L["invalid.email"])}</p></div>
         <div class="fl-go"><button type="button" class="fl-btn" data-next>${esc(L.next)}</button></div>`;
-    // consent: the answers in one calm list (each one a link back to its step), the consent naming the recipient, unticked.
+    // review: the answers in one calm list (each one a link back to its step), the send button, one line naming both recipients.
     const rows = steps.filter((x) => x.type === "choice" || x.type === "text" || x.type === "slots").map((x) => {
       const k = steps.indexOf(x), v = x.type === "choice" ? x.opts.find((o) => o.v === A[x.id])?.l : A[x.id];
       return v ? `<li><button type="button" class="fl-edit" data-goto="${k}"><span>${esc(x.q)}</span><b>${esc(v)}</b></button></li>` : "";
     }).join("");
     const topicRow = topic ? `<li><div class="fl-edit fl-fixed"><span>${esc(X.topic)}</span><b>${esc(topicLabel)}</b></div></li>` : "";
     return `<p class="fl-k">${esc(L.review)}</p><ul class="fl-review">${topicRow}${rows}${A.email ? `<li><button type="button" class="fl-edit" data-goto="${steps.findIndex((x) => x.type === "contact")}"><span>${esc(L.email)}</span><b>${esc(A.name ? `${A.name} · ${A.email}` : A.email)}</b></button></li>` : ""}</ul>
-      <button type="button" class="fl-consent" role="checkbox" aria-checked="${A.consent === "1"}" data-consent><i>${CHECK}</i><span>${esc(s.text)} <a href="${F.links.privacy}" target="_blank" rel="noopener">${esc(F.extra.privacy)}</a></span></button>
-      <div class="fl-go"><button type="button" class="fl-btn fl-send" data-send ${A.consent === "1" ? "" : "disabled"}>${esc(L.send)}</button></div>
+      <p class="fl-notice">${esc(s.type === "review" ? s.text : "")} <a href="${F.links.privacy}" target="_blank" rel="noopener">${esc(X.policy)}</a></p>
+      <div class="fl-go"><button type="button" class="fl-btn fl-send" data-send>${esc(L.send)}</button></div>
       <input class="fl-hp" data-hp tabindex="-1" autocomplete="off" aria-hidden="true" />`;
   }
 
@@ -134,7 +142,7 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
     const T = BL!.labels;
     return `<ul class="fl-blds">${list.map((b) => `<li class="fl-bld" data-bld="${esc(b.id)}">
       ${b.photo ? `<img src="${esc(b.photo)}" alt="" width="800" height="533" loading="lazy" />` : ""}
-      <div class="fl-bld-b"><p class="fl-bld-tag">${esc(T.sponsored)}</p><p class="fl-bld-n">${esc(b.name)}</p>
+      <div class="fl-bld-b"><div class="ht-row"><div><p class="fl-bld-tag">${esc(T.sponsored)}</p><p class="fl-bld-n">${esc(b.name)}</p></div>${heartHTML("home", b.id, `${b.name}, ${b.place}`, b.visit ? b.visit.replace(/#.*$/, "") : b.map)}</div>
         <p class="fl-bld-m">${esc(b.place)}${b.typologies.length ? ` · ${esc(b.typologies.join(" · "))}` : ""}</p>
         ${b.avail ? `<p class="fl-bld-m fl-bld-av">${esc(T.avail.replace("{n}", String(b.avail)))}</p>` : ""}
         <p class="fl-bld-p">${b.from != null ? `${esc(T.from)} ${esc(new Intl.NumberFormat(F.hidden.language || "pt", { maximumFractionDigits: 0 }).format(b.from))} €` : esc(T.price)}</p>
@@ -146,12 +154,28 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
     return `<div class="fl-bldbox" data-blds-box aria-live="polite"><p class="fl-k">${esc(line)}</p>${cards(m.map((x) => x.b))}</div>`;
   };
   function buildingsScreen() {
-    const T = BL!.labels;
+    const T = BL!.labels; engaged = true; reached("buildings");
     side(`${lwHead()}<div class="fl-step"><h2 class="fl-q" tabindex="-1">${esc(T.h)}</h2><p class="fl-lede">${esc(T.lede)}</p>${BL!.items.length ? cards(BL!.items) : `<p class="fl-lede">${esc(T.none)}</p>`}</div>`, () => go(i));
   }
 
+  // ------------------------------------------------------------ signals (part 5, lib/track.ts ev): each step reached, and
+  // where the reader stops (the sheet closed, or the page left, without sending). Answers are never sent, only step ids.
+  const BANDS: Record<string, string> = { "1": "0-300k", "2": "300k-1m", "3": "1-5m", "4": "5m-plus" };
+  const band = () => (A.budget ? BANDS[A.budget] : undefined);
+  let screen = "", stopped = "", engaged = false, finished = false, begun = false;
+  const reached = (id: string) => {
+    if (id === screen) return; screen = id; stopped = "";
+    ev({ event: `flow/${F.id}/step/${id}`, step: id, band: band(), origin: known.has(id) ? "known" : undefined });
+  };
+  function stop() {
+    if (!engaged || finished || !screen || stopped === screen) return;
+    stopped = screen; ev({ event: `flow/${F.id}/stop/${screen}`, step: screen, band: band() });
+  }
+  addEventListener("pagehide", () => { if (root.getClientRects().length) stop(); });
+
   function render(focus = true) {
     const s = steps[i];
+    reached(s.id);
     // "I have a question" on the first screen, and a one-line way to the lawyer on the legal step (the tax number).
     const ask = LW && (i === 0 || s.id === "nif") ? `<p class="fl-ask"><button type="button" class="fl-link" data-lawyer>${esc(i === 0 ? LW.labels.ask : LW.labels.legal)}</button></p>` : "";
     // "Ver novos empreendimentos" on the first screen (one tap to the list); matching buildings under the place question.
@@ -175,7 +199,7 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
   }
   // Each new screen starts at its top (the sheet keeps its scroll otherwise, and the back arrow and question were above the fold).
   const top = () => { const sc = root.closest<HTMLElement>(".sh-in"); if (sc) sc.scrollTop = 0; };
-  const go = (n: number) => { dir = n >= i ? 1 : -1; i = Math.max(0, Math.min(n, N - 1)); if (i > 0) track(`${edOf()}/flow/${F.id}/start`); render(); top(); };
+  const go = (n: number) => { engaged = true; dir = n >= i ? 1 : -1; i = Math.max(0, Math.min(n, N - 1)); if (i > 0 && !begun) { begun = true; ev({ event: `flow/${F.id}/start`, band: band() }); } render(); top(); };
 
   function wire(el: HTMLElement) {
     const s = steps[i];
@@ -213,13 +237,7 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
     el.querySelector("[data-next]")?.addEventListener("click", next);
     el.querySelector("[data-skip]")?.addEventListener("click", () => { delete A[s.id]; if (s.type === "slots") delete A._slots; save(); go(i + 1); });
     el.querySelectorAll<HTMLButtonElement>("[data-goto]").forEach((b) => b.addEventListener("click", () => go(Number(b.dataset.goto))));
-    const cb = el.querySelector<HTMLButtonElement>("[data-consent]"), send = el.querySelector<HTMLButtonElement>("[data-send]");
-    cb?.addEventListener("click", (e) => {
-      if ((e.target as HTMLElement).closest("a")) return;
-      const on = cb.getAttribute("aria-checked") !== "true"; cb.setAttribute("aria-checked", String(on)); A.consent = on ? "1" : ""; save(); send!.disabled = !on;
-    });
-    cb?.addEventListener("keydown", (e) => { if (e.key === " ") { e.preventDefault(); cb.click(); } });
-    send?.addEventListener("click", submit);
+    el.querySelector<HTMLButtonElement>("[data-send]")?.addEventListener("click", submit);
   }
   function next() {
     const s = steps[i];
@@ -243,7 +261,7 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
     return el;
   }
   function lawyerScreen() {
-    const x = LW!.lawyers[0], T = LW!.labels;
+    const x = LW!.lawyers[0], T = LW!.labels; reached("lawyer");
     const face = x.photo ? `<img src="${esc(x.photo)}" alt="" width="72" height="72" loading="lazy" />` : `<span aria-hidden="true">${esc(x.initials)}</span>`;
     const row = (k: string, v: string, note = "") => v ? `<div><dt>${esc(T[k])}</dt><dd>${esc(v)}${note ? `<small>${esc(note)}</small>` : ""}</dd></div>` : "";
     const el = side(`${lwHead()}<div class="fl-step"><h2 class="fl-q" tabindex="-1">${esc(T.h)}</h2><p class="fl-lede">${esc(T.lede)}</p>
@@ -259,7 +277,7 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
     el.querySelector("[data-lw-book]")!.addEventListener("click", bookScreen);
   }
   function bookScreen() {
-    const x = LW!.lawyers[0], T = LW!.labels;
+    const x = LW!.lawyers[0], T = LW!.labels; engaged = true; reached("book");
     const el = side(`${lwHead()}<div class="fl-step"><h2 class="fl-q" tabindex="-1">${esc(fill(T.bookH))}</h2>
       <div class="fl-fields">
         <label class="fl-f"><span>${esc(L.name)}</span><input class="fl-in" data-lw="name" autocomplete="name" value="${esc(A.name || "")}" /></label>
@@ -282,7 +300,7 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
       const payload = { flow: "lawyer", lawyer: x.id, lawyerName: `${x.name} (${x.firm})`, ...F.hidden, name: val("name"), email: val("email"), question: val("question"), consent: true, consentText: fill(T.consent), page: location.pathname, hp: "" };
       send.disabled = true; send.textContent = L.sending; let sent = false;
       try { sent = (await fetch("/api/request", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(payload) })).ok; } catch { sent = false; }
-      if (sent) { track(`${edOf()}/flow/lawyer/sent`); side(`<div class="fl-done"><span class="fl-tick">${CHECK}</span><h2 class="fl-q" tabindex="-1">${esc(T.doneH)}</h2><p class="fl-lede">${esc(fill(T.doneP))}</p></div>`, () => go(i)); return; }
+      if (sent) { finished = true; ev({ event: "flow/lawyer/sent", band: band() }); side(`<div class="fl-done"><span class="fl-tick">${CHECK}</span><h2 class="fl-q" tabindex="-1">${esc(T.doneH)}</h2><p class="fl-lede">${esc(fill(T.doneP))}</p></div>`, () => go(i)); return; }
       send.disabled = false; send.textContent = T.book;
       const body = [`${x.name} (${x.firm})`, `${L.name}: ${payload.name}`, `${L.email}: ${payload.email}`, payload.question, "", `✓ ${payload.consentText}`].filter((v) => v !== undefined).join("\n");
       note(`${esc(L.fallback)} <a class="fl-btn" href="mailto:${F.mailto}?subject=${encodeURIComponent(`${T.book}: ${x.name} (${F.hidden.edition} · ${F.hidden.language})`)}&body=${encodeURIComponent(body)}">${esc(L["fallback.btn"])}</a>`);
@@ -300,25 +318,27 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
     let brief = ""; try { brief = sessionStorage.getItem("ip.brief") || ""; } catch { /* none */ }
     const payload = { flow: F.id, project: q.get("project") || "", unit: q.get("unit") || "", ...F.hidden, answers: Object.fromEntries(steps.filter((s) => s.type === "choice" || s.type === "text" || s.type === "slots").map((s) => [s.id, A[s.id] ?? ""])),
       slots: (() => { try { return JSON.parse(A._slots || "[]"); } catch { return []; } })(),
-      labels: [...(topic ? [`${X.topic}: ${topicLabel}`] : []), ...answerText()], topic, door: A.door || "", name: A.name || "", email: A.email || "", phone: A.phone || "", consent: A.consent === "1", budget: budgetEur || "", brief, page: location.pathname, hp };
+      labels: [...(topic ? [`${X.topic}: ${topicLabel}`] : []), ...answerText()], topic, door: A.door || "", name: A.name || "", email: A.email || "", phone: A.phone || "", budget: budgetEur || "", brief, page: location.pathname, hp };
     let ok = false;
     try { const r = await fetch("/api/request", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(payload) }); ok = r.ok; } catch { ok = false; }
-    if (ok) { track(`${edOf()}/flow/${F.id}/sent`); const pj = q.get("project"); if (pj && /^[a-z0-9-]+$/.test(pj)) track(`${edOf()}/p/${pj}/req`); const r = route(); try { sessionStorage.removeItem(key); sessionStorage.setItem(`${key}.done`, r); } catch { /* none */ } done(r); }
-    else fallback(payload);
+    if (ok) { finished = true; ev({ event: `flow/${F.id}/sent`, band: band() }); const pj = q.get("project"); if (pj && /^[a-z0-9-]+$/.test(pj)) ev({ event: `p/${pj}/req`, place: pj, origin: F.id }); const r = route(); try { sessionStorage.removeItem(key); sessionStorage.setItem(`${key}.done`, r); } catch { /* none */ } done(r); }
+    else { ev({ event: `flow/${F.id}/fallback`, band: band() }); fallback(payload); }
   }
   // The confirmation, then one quiet closing line with two text links (prompt 42). The confirmation stays in the URL
   // (?concierge=done) and in this tab, so Back from those pages returns to it.
   function done(r = route()) {
+    finished = true;
     const d = (F.done as Record<string, { h: string; p: string }>)[r] ?? F.done.ok, X = F.extra as Record<string, string>, Lk = F.links as Record<string, string>;
     dir = 1; swap(`<div class="fl-done"><span class="fl-tick">${CHECK}</span><h2 class="fl-q" tabindex="-1">${esc(d.h)}</h2><p class="fl-lede">${esc(d.p)}</p>
       <div class="fl-go"><a class="fl-btn" href="${F.links.path}">${esc(F.extra.path)}</a><a class="fl-link" href="${F.links.map}">${esc(F.extra.map)}</a></div>
       <p class="fl-more">${esc(X.more)} <a href="${Lk.path}">${esc(X.morePath)}</a> · <a href="${Lk.articles}">${esc(X.moreArticles)}</a></p></div>`, true);
+    const mare = root.querySelector<HTMLTemplateElement>("template[data-flow-mare]"); if (mare) stage.lastElementChild?.querySelector(".fl-done")?.append(mare.content.cloneNode(true));  // D83: the quiet Maré line
     const p = new URLSearchParams(location.search); p.set(opts.param, "done"); history.replaceState(null, "", `${location.pathname}?${p}${location.hash}`);
   }
   function fallback(p: Record<string, unknown>) {
     const subject = `${F.title} (${F.hidden.edition} · ${F.hidden.language})`;
-    const text = [...(p.labels as string[]), `${L.name}: ${p.name}`, `${L.email}: ${p.email}`, p.phone ? `${L.phone}: ${p.phone}` : "", p.brief ? `\n${p.brief}` : "", "", steps[N - 1].type === "consent" ? `✓ ${(steps[N - 1] as Extract<Step, { type: "consent" }>).text}` : ""].filter((x) => x !== "").join("\n");
-    const href = `mailto:${F.mailto}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(text)}`;
+    const text = [...(p.labels as string[]), `${L.name}: ${p.name}`, `${L.email}: ${p.email}`, p.phone ? `${L.phone}: ${p.phone}` : "", p.brief ? `\n${p.brief}` : "", "", steps[N - 1].type === "review" ? (steps[N - 1] as Extract<Step, { type: "review" }>).text : ""].filter((x) => x !== "").join("\n");
+    const href = `mailto:${F.mailto}?${F.mailcc ? `cc=${encodeURIComponent(F.mailcc)}&` : ""}subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(text)}`;
     const btn = stage.querySelector<HTMLButtonElement>("[data-send]")!; btn.textContent = L.send; btn.disabled = false;
     const box = document.createElement("p"); box.className = "fl-fallback"; box.innerHTML = `${esc(L.fallback)} <a class="fl-btn" href="${href}">${esc(L["fallback.btn"])}</a>`;
     stage.querySelector(".fl-fallback")?.remove(); stage.querySelector(".fl-go")?.after(box);
@@ -332,6 +352,6 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
   const lawyerFirst = topic === "lawyer" && !!LW && !start;
   if (wasDone) done(wasDone); else if (lawyerFirst) lawyerScreen(); else render(false);
   // show(): what the sheet displays each time it opens (the lawyer card for a lawyer link, else the current step).
-  const show = () => (lawyerFirst ? lawyerScreen() : go(i));
-  return { go, show, reset: () => { i = 0; render(false); }, focus: () => stage.querySelector<HTMLElement>(".fl-q")?.focus({ preventScroll: true }), clearUrl: () => url(null), at: () => i };
+  const show = () => { engaged = true; return lawyerFirst ? lawyerScreen() : go(i); };
+  return { go, show, stop, mute: () => { finished = true; }, reset: () => { finished = false; i = 0; render(false); }, focus: () => stage.querySelector<HTMLElement>(".fl-q")?.focus({ preventScroll: true }), clearUrl: () => url(null), at: () => i };
 }

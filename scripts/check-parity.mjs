@@ -65,5 +65,30 @@ for (const [id, by] of posts) {
     if ([...a.cites].sort().join() !== [...b.cites].sort().join()) errors.push(`blog ${id}: cited facts differ between pt and ${l}`);
   }
 }
+// D83 lifestyle articles (content/stories/, fix step 4): every article in pt, en and fr with the same order, place,
+// airport, photograph, sources, cited facts and number of sections, a slug of its own per language.
+const storyDir = join(root, "content/stories");
+const stories = new Map();
+for (const f of readdirSync(storyDir).filter((x) => /\.(pt|en|fr)\.md$/.test(x))) {
+  const m = readFileSync(join(storyDir, f), "utf8").match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+  const fm = yaml.load(m[1]), body = m[2];
+  const cites = [...`${body} ${JSON.stringify(fm.go || {})}`.matchAll(/\[\[([a-z0-9-]+)\]\]|\]\(fact:([a-z0-9-]+)\)/g)].map((x) => x[1] || x[2]);
+  const places = [...body.matchAll(/\]\(place:([a-z0-9-]+)\)/g)].map((x) => x[1]);
+  (stories.get(fm.id) ?? stories.set(fm.id, {}).get(fm.id))[fm.lang] = { fm, h2: (body.match(/^## /gm) || []).length, cites: [...new Set(cites)].sort().join(), places: [...new Set(places)].sort().join() };
+}
+for (const [id, by] of stories) {
+  if (Object.keys(by).length !== 3) { errors.push(`story ${id}: missing language (has ${Object.keys(by).join(", ")})`); continue; }
+  for (const l of ["en", "fr"]) {
+    const a = by.pt, b = by[l];
+    for (const k of ["order", "place", "airport"]) if (a.fm[k] !== b.fm[k]) errors.push(`story ${id}: ${k} differs (pt ${a.fm[k]}, ${l} ${b.fm[k]})`);
+    if (a.fm.photo?.src !== b.fm.photo?.src) errors.push(`story ${id}: photo differs between pt and ${l}`);
+    if (JSON.stringify(a.fm.sources) !== JSON.stringify(b.fm.sources)) errors.push(`story ${id}: sources differ between pt and ${l}`);
+    if (String(a.fm.published) !== String(b.fm.published)) errors.push(`story ${id}: published date differs between pt and ${l}`);
+    if (a.h2 !== b.h2) errors.push(`story ${id}: ${l} has ${b.h2} sections, pt has ${a.h2}`);
+    if (a.cites !== b.cites) errors.push(`story ${id}: cited facts differ between pt and ${l}`);
+    if (a.places !== b.places) errors.push(`story ${id}: places linked to the map differ between pt and ${l}`);
+    if (a.fm.slug === b.fm.slug) errors.push(`story ${id}: ${l} needs its own slug`);
+  }
+}
 if (errors.length) { console.log(errors.join("\n")); process.exit(1); }
-console.log(`parity ok: ${groups.size} FAQ groups, ${posts.size} blog articles, copy deck blocks in PT, EN and FR`);
+console.log(`parity ok: ${groups.size} FAQ groups, ${posts.size} blog articles, ${stories.size} lifestyle articles, copy deck blocks in PT, EN and FR`);

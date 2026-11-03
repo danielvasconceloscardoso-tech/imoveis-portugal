@@ -1,0 +1,112 @@
+---
+// The map's paid analysis (D83 part 2): one region, or all of Portugal, in public figures, place by place. Built ONLY when
+// config.mapAnalysis.live is true, or in a preview build with PUBLIC_MAP_ANALYSIS_PREVIEW=1 (lib/maptiles.ts ANALYSIS_BUILT):
+// on main, while payment is off, no such page exists. Always noindex and never linked from the site; the payment link's
+// success URL sends the buyer here, and scripts/map-data/analysis-pdf.mjs prints it to PDF ("Guardar em PDF" does the same in
+// the browser). Data: prices.json (INE sales and rents), map/layers.json (INE: domicile of the buyer, foreign residents,
+// permits, completions), map/tiles.json (finest cuts, typology, new and existing, when gathered), src/data/mapanalysis.json
+// (typology and new versus existing per place, written by scripts/map-data/tiles.py when the gathered folder has them).
+// Sections without figures say "Em breve". Wording: COPY_DECK.md "map4.a.*".
+import V2 from "../layouts/V2.astro";
+import AnalysisExtra from "./AnalysisExtra.astro";  // fix step 3: the figure sets the free pages no longer show
+import { HTML_LANG, type Lang, type EdCode } from "../i18n";
+import { c, edName } from "../lib/copy";
+import { PRICES, LAST } from "../lib/prices";
+import { lineChart } from "../lib/chart";
+import { TILES, ANALYSIS_SUB, type AKey } from "../lib/maptiles";
+import { readFileSync, existsSync } from "node:fs";
+import { join } from "node:path";
+
+interface Props { lang: Lang; ed: EdCode; akey: AKey; }
+const { lang, ed, akey } = Astro.props;
+const k4 = (x: string, v: Record<string, string> = {}) => c(`map4.${x}`, lang, v);
+const nf = new Intl.NumberFormat(HTML_LANG[lang]), nf1 = new Intl.NumberFormat(HTML_LANG[lang], { minimumFractionDigits: 1, maximumFractionDigits: 1 }), nf2 = new Intl.NumberFormat(HTML_LANG[lang], { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const pct = (v?: number | null) => v == null ? "—" : `${v > 0 ? "+" : v < 0 ? "−" : ""}${nf.format(Math.abs(Math.round(v)))} %`;
+const q = PRICES.quarters[LAST], qLabel = c("map.qfmt", lang).replace("{q}", q.slice(-1)).replace("{y}", q.slice(0, 4));
+const rName = akey === "portugal" ? k4("a.all") : c(`map.r.${akey}`, lang);
+const layers = JSON.parse(readFileSync(join(process.cwd(), "public", "data", "map", "layers.json"), "utf8")).munis as Record<string, any>;
+const extraFile = join(process.cwd(), "src", "data", "mapanalysis.json");
+const extra: Record<string, any> = existsSync(extraFile) ? JSON.parse(readFileSync(extraFile, "utf8")).m ?? {} : {};
+const rows = Object.entries(TILES.m).filter(([, m]) => akey === "portugal" || m.r === akey)
+  .map(([s, m]) => ({ s, ...m, ser: PRICES.munis[s], lay: layers[s] ?? {}, ex: extra[s] ?? {} })).sort((a, b) => (b.m2 ?? 0) - (a.m2 ?? 0));
+const meds = rows.map((r) => r.m2).filter((v): v is number => !!v).sort((a, b) => a - b);
+const pick = (f: number) => meds.length ? meds[Math.min(meds.length - 1, Math.round(f * (meds.length - 1)))] : null;
+const p90 = pick(0.9), p50 = pick(0.5), p10 = pick(0.1);
+const top = rows.filter((r) => p90 && r.m2 && r.m2 >= p90);
+const c2 = akey === "portugal" ? "PT" : TILES.rg[akey]?.c2 ?? "PT";
+const reg = (PRICES.regions as any)[c2], pt = (PRICES.regions as any).PT;
+const chart = lineChart(PRICES.quarters, akey === "portugal" ? [{ label: "Portugal", values: pt.m2 }] : [{ label: reg?.n ?? rName, values: reg?.m2 ?? [] }, { label: "Portugal", values: pt.m2 }],
+  { breakAt: PRICES.break, breakLabel: c("prices.break", lang), fmt: (v) => nf.format(v), h: 260 });
+const typ = rows.filter((r) => r.ex.ty), ne = rows.filter((r) => r.ex.ne || r.rng);
+const foreign = rows.filter((r) => r.lay.dom?.abroad || r.lay.fr);
+const supply = rows.filter((r) => r.lay.lic != null || r.lay.new != null);
+const eurM2 = (v?: number | null) => (v ? `${nf.format(v)} €` : "—");
+const TYP = ["T0–T1", "T2", "T3", "T4+"];
+---
+<V2 lang={lang} ed={ed} page="map" noindex title={`${k4("a.title", { region: rName })} | Imóveis Portugal · ${edName(ed, lang)}`} description={k4("a.lede", { region: rName, q: qLabel })} next={false}>
+  <article class="an4">
+    <p class="an4-kick">{k4("tile.paid")} · {qLabel}</p>
+    <h1>{k4("a.title", { region: rName })}</h1>
+    <p class="an4-lede">{k4("a.lede", { region: rName, q: qLabel })}</p>
+    <p class="an4-acts"><button type="button" class="an4-btn" onclick="print()">{k4("a.pdf")}</button> <span class="small">{k4("a.private")}</span></p>
+
+    <h2>{k4("a.typ")}</h2>
+    {typ.length ? (
+      <div class="an4-sc"><table><thead><tr><th>{k4("a.col.place")}</th>{TYP.map((t) => <th>{t}</th>)}</tr></thead>
+        <tbody>{typ.map((r) => <tr><td>{r.n}</td>{TYP.map((t) => <td>{eurM2(r.ex.ty[t])}</td>)}</tr>)}</tbody></table></div>
+    ) : <p class="an4-soon">{k4("tile.soon")}. {k4("tile.soon.p")}</p>}
+
+    <h2>{k4("a.ne")}</h2>
+    {ne.length ? (
+      <div class="an4-sc"><table><thead><tr><th>{k4("a.col.place")}</th><th>{k4("a.col.newine")}</th><th>{k4("a.col.oldine")}</th></tr></thead>
+        <tbody>{ne.map((r) => <tr><td>{r.n}</td><td>{eurM2(r.ex.ne?.n)}</td><td>{eurM2(r.ex.ne?.e)}</td></tr>)}</tbody></table></div>
+    ) : <p class="an4-soon">{k4("tile.soon")}. {k4("tile.soon.p")}</p>}
+
+    <h2>{k4("a.range")}</h2>
+    <dl class="an4-kv"><dt>P10</dt><dd>{eurM2(p10)}</dd><dt>P50</dt><dd>{eurM2(p50)}</dd><dt>P90</dt><dd>{eurM2(p90)}</dd></dl>
+    <p class="small">{top.map((r, i) => <>{i > 0 && " · "}{r.n} {eurM2(r.m2)}</>)}</p>
+
+    <h2>{k4("a.rent")}</h2>
+    <div class="an4-sc"><table><thead><tr><th>{k4("a.col.place")}</th><th>{k4("a.col.rent")}</th><th>{k4("a.col.yield")}</th></tr></thead>
+      <tbody>{rows.filter((r) => r.ser?.rq?.[LAST] || r.ser?.yield).map((r) => <tr><td>{r.n}</td><td>{r.ser?.rq?.[LAST] ? `${nf2.format(r.ser.rq[LAST]!)} €` : "—"}</td><td>{r.ser?.yield ? `${nf1.format(r.ser.yield)} %` : "—"}</td></tr>)}</tbody></table></div>
+
+    <h2>{k4("a.g10")}</h2>
+    <figure class="pc-chart" set:html={chart} />
+    <AnalysisExtra lang={lang} akey={akey} />
+
+    <h2>{k4("a.foreign")}</h2>
+    {foreign.length ? (
+      <div class="an4-sc"><table><thead><tr><th>{k4("a.col.place")}</th><th>{k4("a.col.abroad")}</th><th>{k4("a.col.dom")}</th><th>{k4("a.col.res")}</th></tr></thead>
+        <tbody>{foreign.map((r) => <tr><td>{r.n}</td><td>{eurM2(r.lay.dom?.abroad)}</td><td>{eurM2(r.lay.dom?.pt)}</td><td>{r.lay.fr != null ? nf.format(r.lay.fr) : "—"}</td></tr>)}</tbody></table></div>
+    ) : <p class="an4-soon">{k4("tile.soon")}.</p>}
+
+    <h2>{k4("a.supply")}</h2>
+    <div class="an4-sc"><table><thead><tr><th>{k4("a.col.place")}</th><th>{k4("a.col.lic")}</th><th>{k4("a.col.new")}</th></tr></thead>
+      <tbody>{supply.map((r) => <tr><td>{r.n}</td><td>{r.lay.lic != null ? nf.format(r.lay.lic) : "—"}</td><td>{r.lay.new != null ? nf.format(r.lay.new) : "—"}</td></tr>)}</tbody></table></div>
+
+    <h2>{k4("a.cmp")}</h2>
+    <div class="an4-sc"><table><thead><tr><th>{k4("a.col.place")}</th><th>{k4("a.col.m2")}</th><th>{k4("a.col.p5")}</th><th>{k4("a.col.p10")}</th><th>{k4("tile.sea")}</th><th>{k4("tile.docs")}</th></tr></thead>
+      <tbody>{rows.map((r) => <tr><td>{r.n}</td><td>{eurM2(r.m2)}</td><td>{pct(r.p5)}</td><td>{pct(r.p10)}</td><td>{r.sea != null ? `${nf1.format(r.sea)} °C` : "—"}</td><td>{r.doc != null ? nf1.format(r.doc) : "—"}</td></tr>)}</tbody></table></div>
+
+    <p class="small an4-src">{k4("a.src", { q: qLabel })}</p>
+  </article>
+</V2>
+
+<style>
+  .an4 { max-width: 920px; margin: 0 auto; padding: 32px var(--gut, 20px) 64px; }
+  .an4-kick { margin: 0; font: 700 12px/1 var(--sans, "Manrope Variable", system-ui, sans-serif); letter-spacing: .14em; text-transform: uppercase; color: #5d6066; }
+  .an4 h1 { font: 400 clamp(32px, 6vw, 48px)/1.08 var(--serif, "Playfair Display Variable", Georgia, serif); margin: 12px 0; }
+  .an4 h2 { font: 400 26px/1.2 var(--serif, "Playfair Display Variable", Georgia, serif); margin: 48px 0 16px; padding-top: 24px; border-top: 1px solid rgba(120, 120, 110, .2); }
+  .an4-lede { font-size: 17px; line-height: 1.55; color: #5d6066; }
+  .an4-btn { min-height: 46px; padding: 0 20px; border-radius: 12px; border: 0; background: #111214; color: #fff; font: 700 14px/1 var(--sans, "Manrope Variable", system-ui, sans-serif); cursor: pointer; }
+  .an4-sc { overflow-x: auto; }
+  .an4 table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+  .an4 th, .an4 td { padding: 8px 10px; text-align: right; border-bottom: 1px solid rgba(120, 120, 110, .16); white-space: nowrap; }
+  .an4 th:first-child, .an4 td:first-child { text-align: left; }
+  .an4 th { font: 700 12px/1.2 var(--sans, "Manrope Variable", system-ui, sans-serif); letter-spacing: .06em; text-transform: uppercase; color: #5d6066; }
+  .an4-kv { display: grid; grid-template-columns: repeat(3, auto 1fr); gap: 8px 12px; font-size: 17px; }
+  .an4-kv dt { font-weight: 700; color: #5d6066; } .an4-kv dd { margin: 0; }
+  .an4-soon { color: #5d6066; }
+  .an4-src { margin-top: 40px; color: #5d6066; }
+  @media print { .an4-acts, :global(.hd), :global(.ft), :global(.bb), :global(.nx), :global(.skip) { display: none !important; } .an4 h2 { break-after: avoid; } .an4 table { font-size: 11px; } }
+</style>

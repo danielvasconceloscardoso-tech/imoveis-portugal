@@ -1,0 +1,22 @@
+---
+// Every page ends with one clear next step (Part 2 of 3 Nov): one line and one action. "Começar" always opens the
+// Concierge (the sheet over the page; its page without JavaScript), "Voltar" returns to where the reader was
+// (scripts/bar.ts: history back, this link's address when there is no history), a showcase asks for the private visit.
+// Wording: COPY_DECK.md "bar.next.*". Event: {ed}/next/{concierge|back|req}.
+import { pathFor, type Lang, type EdCode } from "../i18n";
+import { c } from "../lib/copy";
+
+export type Next = { kind: "concierge" | "back" | "req"; p: string; label?: string; href?: string };
+interface Props { lang: Lang; ed: EdCode; next: Next; }
+const { lang, ed, next } = Astro.props;
+const consult = next.href ?? pathFor(lang, ed, "consult");
+---
+<section class="nx" aria-labelledby="nx-h">
+  <div class="nx-in">
+    <h2 class="nx-k" id="nx-h">{c("bar.next.h", lang)}</h2>
+    <p class="nx-p">{next.p}</p>
+    {next.kind === "concierge" && <a class="nx-btn" href={consult} data-concierge data-next-k="concierge" data-next-a>{next.label ?? c("bar.next.go", lang)}</a>}
+    {next.kind === "back" && <a class="nx-btn" href={next.href ?? pathFor(lang, ed, "home")} data-goback data-next-k="back">{next.label ?? c("bar.back", lang)}</a>}
+    {next.kind === "req" && <button type="button" class="nx-btn" data-req data-next-k="req">{next.label}</button>}
+  </div>
+</section>

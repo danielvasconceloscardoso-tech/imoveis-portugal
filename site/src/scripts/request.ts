@@ -1,20 +1,24 @@
 // The buyer's request, "visit or buy" (prompt 38 §1b, D66): one question per screen in a sheet over the showcase. Opened by any
-// [data-req] (data-block / data-typ pre-fill the home) or #pedir. On the preview nothing is sent: no fetch at all; the request
-// is kept in this tab (sessionStorage) so [data-req-advisor] can show it as the partner agency's qualified advisor receives it.
+// [data-req] (data-block / data-typ pre-fill the home) or #pedir. "Enviar" posts the answers to /api/request (flow "viewing",
+// like scripts/flow.ts), which e-mails Imóveis Portugal and the partner agency (operator, 3 Nov 2026; no consent box, GDPR
+// art. 6(1)(b); the last screen names both recipients). If the endpoint is off or fails, the same request opens as a
+// ready-written e-mail. The fictional sample buyer and the private developer demos (/d/...) still send nothing.
+// The last request stays in this tab (sessionStorage) so [data-req-advisor] can show it as the qualified advisor receives it.
 import { LIS, lisbonInstant, readerTz, city, slotDays, slotPicker, type Slot } from "./slots";
+import { ev } from "../lib/track";
 
 type Cfg = {
   lang: string; ed: string; locale: string; project: { id: string; name: string; developer: string };
   blocks: { id: string; units: { t: string; n: number }[] }[]; privacy: string; country: string; dial: string; sampleCountry: string; from: string;
-  t: Record<string, any>;
+  mailcc: string; t: Record<string, any>;
 };
 type Ans = {
   intent?: "online" | "inperson" | "buy"; block?: string; typ?: string; mode?: "video" | "phone"; slots: Slot[];
   name?: string; email?: string; cc?: string; phone?: string; country?: string; budget?: number; pay?: "own" | "mortgage"; horizon?: number;
-  consent?: boolean; ts?: string; tz?: string; page?: string; sample?: boolean;
+  ts?: string; tz?: string; page?: string; sample?: boolean; sent?: boolean;
 };
 
-const STEPS = ["intent", "home", "when", "you", "more", "consent"] as const;
+const STEPS = ["intent", "home", "when", "you", "more", "send"] as const;
 const reduce = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 const esc = (s: unknown) => String(s ?? "").replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[ch]!);
 const CHECK = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"/></svg>`;
@@ -28,6 +32,10 @@ export function initRequest() {
   const C: Cfg = JSON.parse(cfgEl.textContent || "{}"), T = C.t;
   const sheet = document.querySelector<HTMLElement>("[data-rq-sheet]")!, back = document.querySelector<HTMLElement>("[data-rq-back]")!;
   const stage = sheet.querySelector<HTMLElement>("[data-rq-stage]")!, sampleBtn = sheet.querySelector<HTMLButtonElement>("[data-rq-sample]")!;
+  // The demo tools (the sample buyer and "O que o consultor recebe") moved off the public pages (operator, 3 Nov 2026):
+  // they appear only with ?demo=1 or on a private demo (/d/…), for showing a developer how a request arrives.
+  const DEMO = new URLSearchParams(location.search).has("demo") || location.pathname.startsWith("/d/");
+  document.querySelectorAll<HTMLElement>("[data-req-advisor]").forEach((b) => { b.hidden = !DEMO; });
   const ad = document.querySelector<HTMLElement>("[data-rq-ad]")!, adBody = ad.querySelector<HTMLElement>("[data-rq-ad-body]")!;
   const tz = readerTz();
   const fmtDay = (dt: Date, zone: string, o: Intl.DateTimeFormatOptions) => new Intl.DateTimeFormat(C.locale, { timeZone: zone, ...o }).format(dt);
@@ -84,14 +92,15 @@ export function initRequest() {
       <p class="rq-bk">${esc(T.pay)}</p>${pills("pay", [T.pays.own, T.pays.mortgage], A.pay === "own" ? 0 : A.pay === "mortgage" ? 1 : undefined)}
       <p class="rq-bk">${esc(T.horizon)}</p>${pills("horizon", T.horizons, A.horizon)}
       <div class="fl-go"><button type="button" class="fl-btn" data-next>${esc(T.next)}</button><button type="button" class="fl-link" data-skip>${esc(T.skip)}</button></div>`;
-    // consent: the answers as one calm list (each a link back), one unticked box naming the advisor, Send disabled until ticked.
+    // send: the answers as one calm list (each a link back), the send button, one plain line naming both recipients.
     const row = (k: number, l: string, v: string) => (v ? `<li><button type="button" class="fl-edit" data-goto="${k}"><span>${esc(l)}</span><b>${esc(v)}</b></button></li>` : "");
     const extra = [A.budget != null ? T.budgets[A.budget] : "", A.pay ? T.pays[A.pay] : "", A.horizon != null ? T.horizons[A.horizon] : ""].filter(Boolean).join(" · ");
     return `<h2 id="rq-q" class="fl-q" tabindex="-1">${esc(T.q6)}</h2><p class="fl-k">${esc(T.review)}</p><ul class="fl-review">
       ${row(0, T.q1, intentL(A.intent) + (A.intent === "online" ? ` (${T.mode[A.mode || "video"]})` : ""))}${row(1, T.q2, unitL(A))}
       ${row(2, T.picked, A.slots.map((x) => slotLabel(x).main).join(" · "))}${row(3, T.q4, [A.name, A.email, `${A.cc || ""} ${A.phone || ""}`.trim(), A.country].filter(Boolean).join(" · "))}${row(4, T.q5, extra)}</ul>
-      <button type="button" class="fl-consent" role="checkbox" aria-checked="${!!A.consent}" data-consent><i>${CHECK}</i><span>${esc(T.consent)} <a href="${esc(C.privacy)}" target="_blank" rel="noopener">${esc(T.privacy)}</a></span></button>
-      <div class="fl-go"><button type="button" class="fl-btn fl-send" data-send ${A.consent ? "" : "disabled"}>${esc(T.send)}</button></div>`;
+      <p class="fl-notice">${esc(T.notice)} <a href="${esc(C.privacy)}" target="_blank" rel="noopener">${esc(T.policy)}</a></p>
+      <div class="fl-go"><button type="button" class="fl-btn fl-send" data-send>${esc(T.send)}</button></div>
+      <input class="fl-hp" data-hp tabindex="-1" autocomplete="off" aria-hidden="true" />`;
   }
 
   function swap(html: string, focus = true) {
@@ -107,7 +116,7 @@ export function initRequest() {
     sheet.querySelector<HTMLElement>(".sh-in")!.scrollTop = 0;
     if (focus) el.querySelector<HTMLElement>(".fl-q")?.focus({ preventScroll: true });
   }
-  const render = (focus = true) => { doneView = false; sampleBtn.hidden = false; swap(`${head()}<div class="fl-step">${screen()}</div>`, focus); };
+  const render = (focus = true) => { doneView = false; sampleBtn.hidden = !DEMO; swap(`${head()}<div class="fl-step">${screen()}</div>`, focus); };
   const go = (n: number) => { dir = n >= i ? 1 : -1; i = Math.max(0, Math.min(n, STEPS.length - 1)); render(); };
   const rerender = () => { const s = stage.firstElementChild as HTMLElement; s.innerHTML = `${head()}<div class="fl-step">${screen()}</div>`; wire(s); };
 
@@ -124,7 +133,8 @@ export function initRequest() {
     const sp = el.querySelector<HTMLElement>("[data-slots]");
     if (sp) slotPicker(sp, { lang: C.lang, locale: C.locale, get: () => A.slots, set: (v) => { A.slots = v; save(); const nx = el.querySelector<HTMLButtonElement>("[data-next]"); if (nx) nx.disabled = !v.length; } });
     el.querySelectorAll<HTMLInputElement>("[data-c]").forEach((x) => {
-      x.addEventListener("input", () => { (A as any)[x.dataset.c!] = x.value.trim(); save(); });
+      // Own contact details typed over the sample buyer's make it a real request.
+      x.addEventListener("input", () => { (A as any)[x.dataset.c!] = x.value.trim(); if (x.dataset.c !== "country") delete A.sample; save(); });
       x.addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); next(); } });
     });
     el.querySelectorAll<HTMLButtonElement>("[data-pill]").forEach((b) => b.addEventListener("click", () => {
@@ -135,13 +145,7 @@ export function initRequest() {
     el.querySelectorAll("[data-next]").forEach((b) => b.addEventListener("click", next));
     el.querySelectorAll("[data-skip]").forEach((b) => b.addEventListener("click", () => { delete A.budget; delete A.pay; delete A.horizon; save(); go(i + 1); }));
     el.querySelectorAll<HTMLButtonElement>("[data-goto]").forEach((b) => b.addEventListener("click", () => go(Number(b.dataset.goto))));
-    const cb = el.querySelector<HTMLButtonElement>("[data-consent]"), send = el.querySelector<HTMLButtonElement>("[data-send]");
-    cb?.addEventListener("click", (e) => {
-      if ((e.target as HTMLElement).closest("a")) return;
-      A.consent = cb.getAttribute("aria-checked") !== "true"; cb.setAttribute("aria-checked", String(A.consent)); save(); send!.disabled = !A.consent;
-    });
-    cb?.addEventListener("keydown", (e) => { if (e.key === " ") { e.preventDefault(); cb.click(); } });
-    send?.addEventListener("click", submit);
+    el.querySelector<HTMLButtonElement>("[data-send]")?.addEventListener("click", submit);
   }
   function next() {
     if (STEPS[i] === "you") {
@@ -154,17 +158,55 @@ export function initRequest() {
     go(i + 1);
   }
 
-  // ------------------------------------------------------------ the preview sends nothing: keep it for the advisor view
-  function submit() {
+  // ------------------------------------------------------------ sending
+  // The sample buyer (fictional; example.com is a reserved domain) and the private developer demos never send.
+  const isDemo = (a: Ans) => !!a.sample || /@example\.com$/i.test(a.email || "") || location.pathname.startsWith("/d/");
+  const slotText = (x: Slot) => { const l = slotLabel(x); return l.own ? `${l.main} (${l.own})` : l.main; };
+  const intentFull = (a: Ans) => intentL(a.intent) + (a.intent === "online" ? ` (${T.mode[a.mode || "video"]})` : "");
+  // The answers as readable lines: the e-mail body and the ready-written e-mail use the same words as the review.
+  const answerLines = (a: Ans) => [
+    [T.q1, intentFull(a)], [T.q2, `${C.project.name} · ${unitL(a)}`], [T.picked, a.slots.map(slotText).join(" · ")],
+    [T.budget, a.budget != null ? T.budgets[a.budget] : ""], [T.pay, a.pay ? T.pays[a.pay] : ""], [T.horizon, a.horizon != null ? T.horizons[a.horizon] : ""],
+    [T.country, a.country || ""],
+  ].filter(([, v]) => v).map(([k, v]) => `${k}: ${v}`);
+  async function submit() {
+    const btn = stage.querySelector<HTMLButtonElement>("[data-send]")!, hp = stage.querySelector<HTMLInputElement>("[data-hp]")?.value || "";
     A.ts = new Date().toISOString(); A.tz = tz; A.page = location.origin + location.pathname;
-    ss.set(LAST, JSON.stringify(A));
-    const last = A; A = fresh(); ss.set(KEY, "{}");
+    const a = A, demo = isDemo(a);
+    if (!demo) {
+      const payload = { flow: "viewing", edition: C.ed, language: C.lang, page: location.pathname, project: C.project.name, projectId: C.project.id,
+        unit: unitL(a), block: a.block || "", typology: a.typ || "", intent: intentFull(a), slots: a.slots.map(slotText),
+        pay: a.pay ? T.pays[a.pay] : "", horizon: a.horizon != null ? T.horizons[a.horizon] : "",
+        labels: [a.budget != null ? `${T.budget}: ${T.budgets[a.budget]}` : "", a.country ? `${T.country}: ${a.country}` : ""].filter(Boolean),
+        name: a.name || "", email: a.email || "", phone: `${a.cc || ""} ${a.phone || ""}`.trim(), country: a.country || "", hp };
+      btn.disabled = true; btn.textContent = T.sending;
+      let ok = false;
+      try { ok = (await fetch("/api/request", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(payload) })).ok; } catch { ok = false; }
+      if (!ok) { btn.disabled = false; btn.textContent = T.send; ev({ event: "flow/viewing/fallback", place: C.project.id, origin: "sheet" }); fallback(a); return; }
+      ev({ event: "flow/viewing/sent", place: C.project.id, origin: "sheet" }); ev({ event: `p/${C.project.id}/req`, place: C.project.id, origin: "sheet" });
+      a.sent = true;
+    }
+    ss.set(LAST, JSON.stringify(a));
+    const last = a; A = fresh(); ss.set(KEY, "{}");
     doneView = true; sampleBtn.hidden = true; dir = 1;
     swap(`<div class="fl-done"><span class="fl-tick">${CHECK}</span><h2 class="fl-q" tabindex="-1">${esc(T.doneH)}</h2>
-      <p class="rq-demo-note">${esc(T.demo)}</p><p class="rq-next">${esc(T.steps)}</p>
+      ${demo ? `<p class="rq-demo-note">${esc(T.demo)}</p>` : ""}<p class="rq-next">${esc(T.steps)}</p>
       <div class="fl-go"><button type="button" class="fl-btn" data-ics>${esc(T.ics)}</button><button type="button" class="fl-link" data-rq-adv>${esc(T.advisor)}</button></div></div>`);
     stage.querySelector("[data-ics]")?.addEventListener("click", () => ics(last));
     stage.querySelector("[data-rq-adv]")?.addEventListener("click", () => openAdvisor());
+  }
+  // The endpoint is off or failed: the same request as a ready-written e-mail to the brand mailbox, the agency in copy
+  // when the build sets PUBLIC_AGENCY_EMAIL. The answers stay in this tab, so nothing is lost.
+  function fallback(a: Ans) {
+    const subject = `${T.title}: ${intentL(a.intent)} · ${C.project.name} · ${unitL(a)} (${C.ed} · ${C.lang})`;
+    const text = [...answerLines(a), "", `${T.name}: ${a.name || ""}`, `${T.email}: ${a.email || ""}`, `${T.phone}: ${`${a.cc || ""} ${a.phone || ""}`.trim()}`,
+      `${T.adPage}: ${a.page}`, "", T.notice].join("\n");
+    const href = `mailto:${C.from}?${C.mailcc ? `cc=${encodeURIComponent(C.mailcc)}&` : ""}subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(text)}`;
+    stage.querySelector(".fl-fallback")?.remove();
+    const box = document.createElement("p"); box.className = "fl-fallback"; box.setAttribute("role", "status");
+    box.innerHTML = `${esc(T.fallback)} <a class="fl-btn" href="${esc(href)}" data-rq-mail>${esc(T.fallbackBtn)}</a>`;
+    stage.querySelector(".fl-go")?.after(box);
+    box.scrollIntoView({ block: "nearest", behavior: reduce() ? "auto" : "smooth" });
   }
   function ics(a: Ans) {
     const s = a.slots[0]; if (!s) return;
@@ -195,7 +237,7 @@ export function initRequest() {
     return { intent: "online", mode: "video", block: b, typ, slots: [{ d: pick[0], t: "17:30" }, { d: pick[1], t: "12:00" }, { d: pick[2], t: "10:00" }].filter((x) => x.d),
       name: T.sampleName, email: "exemplo@example.com", cc: "+352", phone: "600 000 000", country: C.sampleCountry, budget: 2, pay: "mortgage", horizon: 1, sample: true };
   }
-  sampleBtn.addEventListener("click", () => { A = { ...sample(), consent: false }; save(); dir = 1; i = STEPS.length - 1; render(); });
+  sampleBtn.addEventListener("click", () => { A = sample(); save(); dir = 1; i = STEPS.length - 1; render(); });
 
   // ------------------------------------------------------------ open / close, Esc, focus trap
   const focusables = (root: HTMLElement) => [...root.querySelectorAll<HTMLElement>('a[href], button:not([disabled]), input, [tabindex]:not([tabindex="-1"])')].filter((x) => x.offsetParent !== null && !x.closest("[hidden]"));
@@ -234,11 +276,11 @@ export function initRequest() {
   const fromHash = () => { if (location.hash === "#pedir") open(); };
   addEventListener("hashchange", fromHash); fromHash();
 
-  // ------------------------------------------------------------ what the advisor receives (demo only)
+  // ------------------------------------------------------------ what the advisor receives (the last request, or the sample)
   let adOpener: HTMLElement | null = null;
   function openAdvisor() {
     let a: Ans | null = null; try { a = JSON.parse(ss.get(LAST) || "null"); } catch { a = null; }
-    const isSample = !a; if (!a) a = { ...sample(), consent: true, ts: new Date().toISOString(), tz: "Europe/Luxembourg", page: location.origin + location.pathname };
+    const isSample = !a; if (!a) a = { ...sample(), ts: new Date().toISOString(), tz: "Europe/Luxembourg", page: location.origin + location.pathname };
     adBody.innerHTML = mail(a, isSample);
     adOpener = document.activeElement as HTMLElement;
     ad.hidden = false; requestAnimationFrame(() => requestAnimationFrame(() => ad.classList.add("is-open")));
@@ -258,14 +300,14 @@ export function initRequest() {
     const unitN = C.blocks.find((b) => b.id === a.block)?.units.find((u) => u.t === a.typ)?.n;
     return `<div class="rq-mh"><div><span>${esc(T.adFrom)}</span><b>Imóveis Portugal &lt;${esc(C.from)}&gt;</b></div><div><span>${esc(T.adTo)}</span><b>${esc(T.adTo2)}</b></div><div><span>${esc(T.adSubject)}</span><b>${esc(subj)}</b></div></div>
       <div class="rq-mail"><p class="rq-brand">Imóveis Portugal</p><div class="rq-rule"></div>
-      <h3>${esc(intent)} · ${esc(C.project.name)}</h3><p class="rq-note">${esc(isSample ? T.adSampleNote : T.adLastNote)} ${esc(T.demo)}</p>
+      <h3>${esc(intent)} · ${esc(C.project.name)}</h3><p class="rq-note">${esc(isSample ? `${T.adSampleNote} ${T.demo}` : a.sent ? T.adSent : `${T.adLastNote} ${T.demo}`)}</p>
       <h4>${esc(T.adSummary)}</h4><div class="rq-sum">${kv([
         [T.adIntent, esc(intent)], [T.budget, a.budget != null ? esc(T.budgets[a.budget]) : none], [T.pay, a.pay ? esc(T.pays[a.pay]) : none],
         [T.horizon, a.horizon != null ? esc(T.horizons[a.horizon]) : none], [T.adResidence, a.country ? esc(a.country) : none]])}</div>
       <h4>${esc(T.adUnit)}</h4>${kv([[C.project.name, `${esc(unitL(a))}${unitN ? `<small>${esc(T.forSale.replace("{n}", String(unitN)))}</small>` : ""}`], [T.adEdition, esc(`${C.ed.toUpperCase()} · ${C.lang.toUpperCase()}`)]])}
       <h4>${esc(T.adSlots)}</h4>${kv(a.slots.map((x, k) => { const l = slotLabel(x, zone); return [`${k + 1}`, `${esc(l.main)}${l.own ? `<small>${esc(l.own)} (${esc(zone)})</small>` : ""}`] as [string, string]; }))}
       <h4>${esc(T.adContact)}</h4>${kv([[T.name, esc(a.name)], [T.email, esc(a.email)], [T.phone, esc(`${a.cc || ""} ${a.phone || ""}`.trim())], [T.country, esc(a.country)]])}
-      <h4>${esc(T.adConsent)}</h4>${kv([[T.adWhen, `${esc(when)}<small>${esc(a.ts)} · Europe/Lisbon</small>`], [T.adText, `<p class="rq-quote">${esc(T.consent)}</p>`], [T.adPage, esc(a.page)]])}
+      <h4>${esc(T.adBasis)}</h4>${kv([[T.adWhen, `${esc(when)}<small>${esc(a.ts)} · Europe/Lisbon</small>`], [T.adPage, esc(a.page)]])}<p class="rq-quote rq-basis">${esc(T.basis)}</p>
       <p class="rq-foot">${esc(T.adFooter)}</p></div>`;
   }
 }

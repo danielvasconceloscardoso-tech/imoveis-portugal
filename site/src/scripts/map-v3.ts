@@ -1,16 +1,22 @@
 // Map v3 (prompt 36, D62): the browser side of MapV3.astro. MapLibre loads when the map is needed (in view on the home
 // page; the first interaction, a link with a state, or idle time on the map page). Assets: /tiles/{dem,sea}/ and
 // /data/map/ (scripts/map-data/v3_assets.py, v3_extras.py, build.py, golf.py); prices: /data/prices.json.
+// D83 part 2 (3 Nov 2026), the map in three depths: the first view is clean (layer "none": no price colours, no legend, no
+// budget glow), the place opens as a card of tiles (/data/map/tiles.json, scripts/map-data/tiles.py), a tile opens its chart
+// (1A · 5A · 10A), the paid tiles open the unlock sheet (switched off: "Disponível em breve"). Everything else moved behind
+// "Camadas" (the panel), not removed: the layers and legend, the time slider, the budget, overlays, 2D / 3D and the tours.
 import mapCss from "maplibre-gl/dist/maplibre-gl.css?url";
 import { feature, mesh } from "topojson-client";
 import { savePlace } from "../lib/brief";
-import { track, edOf } from "../lib/track";
+import { track, edOf, ev, evHeart, timeBand, rememberPlace } from "../lib/track";
+import { get as savedItems } from "../lib/saved";
+import { heartHTML } from "./hearts";
 
 type Series = { n: string; m2: (number | null)[]; rq: (number | null)[]; yield: number | null; g10?: number | null; cagrP?: number | null;
   mo: { c4: number; c8: number | null; w: "up" | "steady" | "down" } | null };
 type Props = { id: number; n: string; s: string; r: string; x: number; y: number; a: number };
-type Layer = "price" | "g10" | "rent" | "yield" | "vac";
-type Proj = { id: string; name: string; developer: string; muni: string; lon: number; lat: number; render?: string; from: number | null; showcase: string; summary?: string; feats?: string[]; now?: number | null };
+type Layer = "none" | "price" | "g10" | "rent" | "yield" | "vac";
+type Proj = { id: string; name: string; developer: string; muni: string; lon: number; lat: number; render?: string; pin?: string; from: number | null; showcase: string; summary?: string; feats?: string[]; now?: number | null };
 
 const reduce = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 const SKY = { "sky-color": "#f3efe6", "horizon-color": "#f6efe1", "fog-color": "#efe8da", "sky-horizon-blend": 0.6, "horizon-fog-blend": 0.7, "fog-ground-blend": 0.35, "atmosphere-blend": 0.5 };
@@ -49,13 +55,15 @@ export function initMapV3(root: HTMLElement) {
   // ------------------------------------------------------------ state (every state is a link)
   const stored = (() => { try { return Number(localStorage.getItem("ip.budget")) || 0; } catch { return 0; } })();
   let budget = Math.min(Math.max(Number(q.get("budget")) || stored || 300000, 100000), 20e6);
-  let layer: Layer = (["price", "g10", "rent", "yield", "vac"].includes(q.get("layer") || "") ? q.get("layer") : "price") as Layer;
+  // D83 part 2: the first view has no colour layer ("none"); ?layer=price and the others still open with their colours.
+  let layer: Layer = (["price", "g10", "rent", "yield", "vac"].includes(q.get("layer") || "") ? q.get("layer") : "none") as Layer;
   // 2D or 3D (prompt 37 §3): the link, else the reader's last choice, else 2D on phones and weak devices and 3D on desktop.
   // Reduced motion always gets the flat map.
   const dimSaved = (() => { try { return localStorage.getItem("ip.map.dim"); } catch { return null; } })();
   const dimAsked = q.get("dim") ?? (q.get("flat") === "1" ? "2d" : null) ?? dimSaved;
   let flat = reduce() || (dimAsked ? dimAsked === "2d" : weak() || matchMedia("(max-width: 760px), (pointer: coarse)").matches);
   let selected: string | null = q.get("place"), selPar: string | null = q.get("parish"), pinA: string | null = null;
+  let selRegion: string | null = q.get("region"), panelOpen = false;
   let overlays = { golf: q.get("golf") === "1", beach: q.get("beach") === "1", devs: mode === "page" ? q.get("devs") !== "0" : q.get("devs") === "1" };
   let P: { quarters: string[]; munis: Record<string, Series> } | null = null;
   let qi = -1;  // quarter index; -1 = latest
@@ -75,7 +83,7 @@ export function initMapV3(root: HTMLElement) {
   function syncUrl() {
     const p = new URLSearchParams(location.search);
     const set = (k: string, v: string | null) => (v ? p.set(k, v) : p.delete(k));
-    set("budget", String(Math.round(budget))); set("layer", layer === "price" ? null : layer); set("place", selected); set("parish", selPar);
+    set("budget", String(Math.round(budget))); set("layer", layer === "none" ? null : layer); set("place", selected); set("parish", selPar); set("region", selRegion);
     set("q", qi >= 0 && P ? P.quarters[qi] : null);
     for (const k of ["golf", "beach"] as const) set(k, overlays[k] ? "1" : null);
     set("devs", mode === "page" ? (overlays.devs ? null : "0") : overlays.devs ? "1" : null);  // prompt 39 §2.1: on by default on the map page
@@ -84,7 +92,7 @@ export function initMapV3(root: HTMLElement) {
 
   // ------------------------------------------------------------ values and colour
   function value(s: Series | undefined, l: Layer, i = at()): number | null {
-    if (!s) return null;
+    if (!s || l === "none") return null;
     if (l === "price") return s.m2[i] ?? null;
     if (l === "rent") return s.rq[i] ?? null;
     if (l === "g10") return s.g10 ?? null;
@@ -94,13 +102,16 @@ export function initMapV3(root: HTMLElement) {
   function quant(list: number[]) { const a = [...list].sort((x, y) => x - y); return [0.03, 0.18, 0.35, 0.5, 0.65, 0.82, 0.97].map((p) => a[Math.floor(p * (a.length - 1))]); }
   function computeBreaks() {
     const all = (l: Layer, everyQ: boolean) => { const v: number[] = []; for (const s of Object.values(P!.munis)) { if (everyQ) for (let i = 0; i <= last(); i++) { const x = value(s, l, i); if (x != null) v.push(x); } else { const x = value(s, l); if (x != null) v.push(x); } } return v; };
-    breaks = { price: quant(all("price", true)), rent: quant(all("rent", true)), g10: quant(all("g10", false)), yield: quant(all("yield", false)), vac: VAC ? quant(all("vac", false)) : [] };
+    breaks = { none: [], price: quant(all("price", true)), rent: quant(all("rent", true)), g10: quant(all("g10", false)), yield: quant(all("yield", false)), vac: VAC ? quant(all("vac", false)) : [] };
   }
   function colorExpr(): any {
+    if (layer === "none") return "rgba(0,0,0,0)";
     const b = breaks[layer] || []; const stops: any[] = [];
     b.forEach((v, i) => { if (i === 0 || v > b[i - 1]) stops.push(v, RAMP[i]); });
     return ["case", ["<", ["coalesce", ["feature-state", "v"], -1e9], -1e8], NODATA, stops.length >= 4 ? ["interpolate", ["linear"], ["feature-state", "v"], ...stops] : RAMP[3]];
   }
+  // With no colour layer, a hovered place lifts in ivory (the relief stays the picture).
+  const liftColor = () => (layer === "none" ? "#fbf7ee" : colorExpr());
   const colorOf = (v: number | null) => { if (v == null) return NODATA; const b = breaks[layer]; let i = 0; while (i < b.length - 1 && v > b[i + 1]) i++; return RAMP[i]; };
   function applyValues() {
     if (!map || !P) return;
@@ -111,9 +122,11 @@ export function initMapV3(root: HTMLElement) {
     if (!map?.getLayer("muni-fill")) return;
     map.setPaintProperty("muni-fill", "fill-color", colorExpr());
     if (map.getLayer("par-fill")) map.setPaintProperty("par-fill", "fill-color", colorExpr());
+    map.setPaintProperty("lift", "fill-color", liftColor());
     applyValues(); legend();
   }
   function legend() {
+    const lg = $("[data-legend]"); lg.hidden = layer === "none";
     const b = breaks[layer]; if (!b?.length) return;
     const f = (v: number) => layer === "price" ? eur.format(Math.round(v / 10) * 10) : layer === "rent" ? eur2.format(v) : layer === "g10" ? pc(v) : `${nf1.format(v)}%`;
     $("[data-lo]").textContent = f(b[0]); $("[data-hi]").textContent = f(b[b.length - 1]);
@@ -135,7 +148,7 @@ export function initMapV3(root: HTMLElement) {
     sentence();
     if (map && P) { clearTimeout(reachT); reachT = window.setTimeout(() => { for (const f of features) map.setFeatureState({ source: "munis", id: f.id }, { reach: reaches(f.properties.s) }); }, 30); }
     if (remember) try { localStorage.setItem("ip.budget", String(Math.round(budget))); } catch { /* private mode */ }
-    if (selected && !sheet.hidden && !pinA) showPlace(selected, false);
+    if (selected && !sheet.hidden && !pinA && view === "card" && !selPar) showPlace(selected, false);
     syncUrl();
   }
   function sentence() {
@@ -164,7 +177,7 @@ export function initMapV3(root: HTMLElement) {
   amountIn.addEventListener("blur", commit);
 
   // ------------------------------------------------------------ chips, 2D and 3D, overlays
-  root.querySelectorAll<HTMLButtonElement>("[data-layer]").forEach((b) => b.addEventListener("click", () => setLayer(b.dataset.layer as Layer)));
+  root.querySelectorAll<HTMLButtonElement>("[data-layer]").forEach((b) => b.addEventListener("click", () => { setLayer(b.dataset.layer as Layer); ev({ event: `map/layer/${b.dataset.layer}`, place: selected ?? undefined, origin: mode }); }));
   // Prompt 51 §3.3: vacant dwellings, share of the stock (INE, Census 2021, indicator 0012517), loaded only when chosen.
   async function loadVac() {
     if (VAC || !P) return;
@@ -173,8 +186,8 @@ export function initMapV3(root: HTMLElement) {
   async function setLayer(l: Layer) {
     if (l === "vac") await loadVac();
     layer = l; root.querySelectorAll("[data-layer]").forEach((b) => b.setAttribute("aria-pressed", String((b as HTMLElement).dataset.layer === l)));
-    const tm = root.querySelector<HTMLElement>("[data-time]"); if (tm) tm.classList.toggle("is-off", l === "g10" || l === "yield" || l === "vac");
-    repaint(); if (selected && !sheet.hidden) showPlace(selected, false); syncUrl(); load();
+    const tm = root.querySelector<HTMLElement>("[data-time]"); if (tm) tm.classList.toggle("is-off", l !== "price" && l !== "rent");
+    repaint(); if (selected && !sheet.hidden && view === "card" && !selPar) showPlace(selected, false); syncUrl(); load();
   }
   root.querySelectorAll<HTMLButtonElement>("[data-dim]").forEach((b) => b.addEventListener("click", () => setDim(b.dataset.dim === "2d")));
   function dimButtons() { root.classList.toggle("is-2d", flat); root.querySelectorAll("[data-dim]").forEach((b) => b.setAttribute("aria-pressed", String(((b as HTMLElement).dataset.dim === "2d") === flat))); }
@@ -184,13 +197,16 @@ export function initMapV3(root: HTMLElement) {
     if (!map) { load(); return; }
     rotating = false; stopTour();
     map.setTerrain(flat ? null : { source: "dem", exaggeration: 1.5 });
-    map.setLayoutProperty("hill", "visibility", flat ? "none" : "visible");
+    map.setPaintProperty("hill", "hillshade-exaggeration", flat ? 0.55 : 0.7);
     try { map.setSky(flat ? { "sky-color": "#e7e2d7", "horizon-color": "#e7e2d7", "fog-color": "#e7e2d7", "sky-horizon-blend": 0, "horizon-fog-blend": 0, "fog-ground-blend": 1, "atmosphere-blend": 0 } : SKY); } catch { /* older styles have no sky */ }
     if (flat) { map.dragRotate.disable(); map.touchZoomRotate.disableRotation(); } else { map.dragRotate.enable(); map.touchZoomRotate.enableRotation(); }
     map.easeTo({ pitch: flat ? 0 : 50, bearing: flat ? 0 : -12, duration: reduce() ? 0 : 700 });
     if (!flat) governor();
   }
-  root.querySelectorAll<HTMLButtonElement>("[data-overlay]").forEach((b) => b.addEventListener("click", () => setOverlay(b.dataset.overlay as "golf" | "beach" | "devs", !overlays[b.dataset.overlay as "golf"])));
+  root.querySelectorAll<HTMLButtonElement>("[data-overlay]").forEach((b) => b.addEventListener("click", () => {
+    const k = b.dataset.overlay as "golf" | "beach" | "devs", on = !overlays[k];
+    setOverlay(k, on); ev({ event: `map/overlay/${k}/${on ? "on" : "off"}`, place: selected ?? undefined, origin: mode });
+  }));
   async function setOverlay(k: "golf" | "beach" | "devs", on: boolean) {
     overlays[k] = on; root.querySelector(`[data-overlay="${k}"]`)?.setAttribute("aria-pressed", String(on)); syncUrl();
     await load();
@@ -214,10 +230,14 @@ export function initMapV3(root: HTMLElement) {
       if (!document.querySelector("link[data-maplibre]")) { const l = document.createElement("link"); l.rel = "stylesheet"; l.href = mapCss; l.dataset.maplibre = ""; document.head.append(l); }
       const [mod, topo, prices, insets, rivers] = await Promise.all([import("maplibre-gl"), fetch("/data/map/munis.topo.json").then((r) => r.json()), fetch("/data/prices.json").then((r) => r.json()),
         fetch("/data/map/insets.json").then((r) => r.json()).catch(() => ({})), fetch("/data/map/rivers.json").then((r) => r.json()).catch(() => null)]);
-      ml = mod.default; P = prices;
+      ml = mod.default; P = prices; loadTiles();
       const geo: any = feature(topo, topo.objects.m);
       geo.features.forEach((f: any) => { f.id = f.properties.id; byS.set(f.properties.s, f.properties); });
       features = geo.features;
+      // Where each region's name sits at the national view: the area-weighted middle of its concelhos.
+      const acc: Record<string, [number, number, number]> = {};
+      for (const f of features) { const p = f.properties as Props; const a = acc[p.r] ??= [0, 0, 0]; a[0] += p.x * p.a; a[1] += p.y * p.a; a[2] += p.a; }
+      regionAt = Object.fromEntries(Object.entries(acc).map(([r, [x, y, a]]) => [r, [x / a, y / a]]));
       // The coastline: outer edges of the concelhos, minus the land border with Spain.
       const outer: any = mesh(topo, topo.objects.m, (a: any, b: any) => a === b);
       const coastPt = (c: number[]) => c[0] < -10 || (c[0] < -8.65 && c[1] < 41.87) || (c[1] < 37.25 && c[0] < -7.41);
@@ -246,7 +266,8 @@ export function initMapV3(root: HTMLElement) {
       map.addSource("munis", { type: "geojson", data: geo });
       map.addLayer({ id: "land", type: "fill", source: "munis", paint: { "fill-color": "#efe6d3" } });
       map.addLayer({ id: "muni-fill", type: "fill", source: "munis", paint: { "fill-color": colorExpr(), "fill-opacity": 0.78, "fill-color-transition": { duration: 300, delay: 0 } } as any });
-      map.addLayer({ id: "hill", type: "hillshade", source: "dem2", layout: { visibility: flat ? "none" : "visible" }, paint: { "hillshade-illumination-direction": 225, "hillshade-illumination-anchor": "map", "hillshade-exaggeration": 0.7,
+      // D83 part 2: the relief is the picture of the first view, so the hillshade stays in 2D too (softer); 3D adds the terrain.
+      map.addLayer({ id: "hill", type: "hillshade", source: "dem2", paint: { "hillshade-illumination-direction": 225, "hillshade-illumination-anchor": "map", "hillshade-exaggeration": flat ? 0.55 : 0.7,
         "hillshade-highlight-color": "rgba(255,244,214,0.55)", "hillshade-shadow-color": "rgba(52,64,70,0.42)", "hillshade-accent-color": "rgba(60,60,50,0.15)" } });
       // Madeira and the Azores are drawn moved next to the mainland: their relief is an image in the same place.
       for (const [name, c] of Object.entries(insets) as [string, number[][]][]) {
@@ -254,32 +275,39 @@ export function initMapV3(root: HTMLElement) {
         map.addLayer({ id: `inset-${name}`, type: "raster", source: `inset-${name}`, paint: { "raster-fade-duration": 0 } });
       }
       map.addLayer({ id: "muni-line", type: "line", source: "munis", paint: { "line-color": "rgba(40,50,48,0.16)", "line-width": ["interpolate", ["linear"], ["zoom"], 6, 0.3, 9, 0.8] } });
-      // The budget's reach: the places it buys 100 m² or more in glow softly.
-      map.addLayer({ id: "reach", type: "line", source: "munis", paint: { "line-color": "#fff7df", "line-blur": 3, "line-width": 2.6, "line-opacity": ["case", ["boolean", ["feature-state", "reach"], false], 0.9, 0] } as any });
+      // D83 part 2: the map "by region": the seven regions' borders as soft white lines over the relief.
+      const regionLines: any = mesh(topo, topo.objects.m, (a: any, b: any) => a !== b && a.properties.r !== b.properties.r);
+      map.addSource("regions", { type: "geojson", data: { type: "Feature", properties: {}, geometry: regionLines } });
+      map.addLayer({ id: "region-line", type: "line", source: "regions", paint: { "line-color": "rgba(255,253,246,0.95)", "line-width": ["interpolate", ["linear"], ["zoom"], 5, 1.2, 9, 2.4] } });
+      // The budget's reach: the places it buys 100 m² or more in glow softly (only while "Camadas" is open: no glow at first glance).
+      map.addLayer({ id: "reach", type: "line", source: "munis", paint: { "line-color": "#fff7df", "line-blur": 3, "line-width": 2.6, "line-opacity": reachPaint() } as any });
       map.addSource("coast", { type: "geojson", data: { type: "Feature", properties: {}, geometry: coast } });
       map.addLayer({ id: "coast-glow", type: "line", source: "coast", paint: { "line-color": "#ffffff", "line-width": ["interpolate", ["linear"], ["zoom"], 5, 2.5, 8, 7], "line-blur": ["interpolate", ["linear"], ["zoom"], 5, 2, 8, 6], "line-opacity": 0.55 } });
       map.addLayer({ id: "coast", type: "line", source: "coast", paint: { "line-color": "#fffdf6", "line-width": ["interpolate", ["linear"], ["zoom"], 5, 0.6, 8, 1.2] } });
       if (rivers) { map.addSource("rivers", { type: "geojson", data: rivers }); map.addLayer({ id: "rivers", type: "line", source: "rivers", paint: { "line-color": "#9fbec6", "line-width": ["interpolate", ["linear"], ["zoom"], 6, 0.9, 10, 2.4], "line-opacity": 0.9 } }); }
       map.addLayer({ id: "lift-shadow", type: "line", source: "munis", filter: ["==", ["get", "s"], ""], paint: { "line-color": "rgba(20,30,28,0.35)", "line-width": 7, "line-blur": 7, "line-translate": [3, 5] } });
-      map.addLayer({ id: "lift", type: "fill", source: "munis", filter: ["==", ["get", "s"], ""], paint: { "fill-color": colorExpr(), "fill-translate": [0, -4], "fill-opacity": 0.95 } as any });
+      map.addLayer({ id: "lift", type: "fill", source: "munis", filter: ["==", ["get", "s"], ""], paint: { "fill-color": liftColor(), "fill-translate": [0, -4], "fill-opacity": 0.95 } as any });
       map.addLayer({ id: "lift-line", type: "line", source: "munis", filter: ["==", ["get", "s"], ""], paint: { "line-color": "#ffffff", "line-width": 1.6, "line-translate": [0, -4] } });
       map.addLayer({ id: "sel", type: "line", source: "munis", filter: ["==", ["get", "s"], ""], paint: { "line-color": "#111214", "line-width": 2.2 } });
       if (!flat) map.setTerrain({ source: "dem", exaggeration: 1.5 });
       applyValues(); legend(); sentence();
       root.classList.add("is-live");
-      // Frame the country in the space the glass leaves free: below the top bar, beside (desktop) or above (mobile) the dock.
-      const st = canvas.getBoundingClientRect(), tb = $(".m3-top").getBoundingClientRect(), dk = $(".m3-dock").getBoundingClientRect();
-      const pad = narrow ? { top: tb.bottom - st.top + 6, bottom: st.bottom - dk.top + 6, left: 6, right: 6 } : { top: tb.bottom - st.top + 20, bottom: 40, left: Math.round((dk.right - st.left) * 0.55), right: 60 };
+      // Frame the country in the space the glass leaves free: below the top bar, beside (desktop) or above (mobile) the
+      // region postcards (the map page) or the small dock (the home page).
+      const st = canvas.getBoundingClientRect(), tb = $(".m3-top").getBoundingClientRect();
+      const pcEl = root.querySelector<HTMLElement>("[data-postcards]"), dk = (pcEl && pcEl.offsetParent ? pcEl : $(".m3-dock")).getBoundingClientRect();
+      const pad = narrow ? { top: tb.bottom - st.top + 6, bottom: Math.max(6, st.bottom - dk.top + 6), left: 6, right: 6 }
+        : { top: tb.bottom - st.top + 20, bottom: 40, left: pcEl ? Math.round(dk.right - st.left + 16) : Math.round((dk.right - st.left) * 0.55), right: 60 };
       let fit: any; try { fit = map.cameraForBounds([[-12.4, 36.9], [-6.15, 42.17]], { padding: pad }); } catch { fit = null; }
       fit ??= map.cameraForBounds([[-12.4, 36.9], [-6.15, 42.17]], { padding: 8 });
       // Pitched, the south comes closer to the eye: aim a little south so the Algarve stays in frame.
       const home = { center: flat ? fit.center : [fit.center.lng, fit.center.lat - (narrow ? 0.15 : 0.45)], zoom: fit.zoom + (flat ? 0 : narrow ? 0.28 : 0.2), pitch: flat ? 0 : 50, bearing: flat ? 0 : -12 };
       (root as any).__home = home;
-      if (mode === "page" && !selected && !selPar && !q.has("q") && !reduce()) { map.jumpTo({ center: [-13.4, 38.6], zoom: home.zoom - 1.2, pitch: 22, bearing: home.bearing - 28 }); map.flyTo({ ...home, duration: 3400, curve: 1.15, easing: ease, essential: true }); }
+      if (mode === "page" && !selected && !selPar && !selRegion && !q.has("q") && !reduce()) { map.jumpTo({ center: [-13.4, 38.6], zoom: home.zoom - 1.2, pitch: 22, bearing: home.bearing - 28 }); map.flyTo({ ...home, duration: 3400, curve: 1.15, easing: ease, essential: true }); }
       else map.jumpTo(home);
       if (q.get("q") && P && P.quarters.includes(q.get("q")!)) setQuarter(P.quarters.indexOf(q.get("q")!));
       if (overlays.golf) await drawGolf(); if (overlays.beach) await drawBeaches(); if (overlays.devs) drawProjects();
-      if (selPar) { await loadParishes(); selectParish(selPar); } else if (selected) {
+      if (selPar) { await loadParishes(); selectParish(selPar); } else if (selRegion && !selected) showRegion(selRegion); else if (selected) {
         // Prompt 39 §2.6: a place with a listed project opens on the project card (the place card stays one tap back).
         const pr = projects.find((x) => x.muni === selected);
         if (pr) { select(selected, false); flyTo(pr.lon, pr.lat, 12.6); showProject(pr); } else select(selected);
@@ -323,6 +351,12 @@ export function initMapV3(root: HTMLElement) {
     if (!map) return; const z = map.getZoom(), W = canvas.clientWidth, H = canvas.clientHeight;
     const want = features.map((f) => f.properties as Props).filter((p) => (BIG.includes(p.s) && z > (W < 700 ? 5.2 : 5.9)) || (z > 8.2 && p.a > 2) || z > 9.2);
     const placed: { x: number; y: number; w: number }[] = []; let h = "";
+    // D83 part 2: at the national view, the regions' names first (the map "by region"), quiet capitals.
+    if (z < (W < 700 ? 6.4 : 7.0)) for (const [r, [x, y]] of Object.entries(regionAt)) {
+      const c = map.project([x, y]); const name = L.regions[r] || ""; const w = name.length * 9 + 16;
+      if (c.x < 0 || c.y < 0 || c.x > W || c.y > H || !name) continue;
+      placed.push({ x: c.x, y: c.y, w }); h += `<span class="m3-l0" style="transform:translate(${Math.round(c.x)}px,${Math.round(c.y)}px)">${esc(name)}</span>`;
+    }
     const rank = (p: Props) => { const i = BIG.indexOf(p.s); return i >= 0 ? i : projMunis.has(p.s) ? BIG.length : 1000 - p.a; };
     for (const p of want.sort((a, b) => rank(a) - rank(b))) {
       const c = map.project([p.x, p.y]); if (c.x < 0 || c.y < 0 || c.x > W || c.y > H) continue;
@@ -372,63 +406,278 @@ export function initMapV3(root: HTMLElement) {
     map.flyTo({ center: [x, y], zoom: z, pitch: flat ? 0 : 46, duration: reduce() ? 0 : dur, curve: 1.3, easing: ease, essential: true,
       padding: isWide() ? { right: 440, left: 0, top: 60, bottom: 120 } : { bottom: canvas.clientHeight * 0.42, top: 60, left: 0, right: 0 } });
   }
+  // Time on a place (part 5): from the card opening to its closing, another place, a partner card or the page hiding;
+  // sent as a band (lib/track.ts TIME_BANDS), never raw milliseconds.
+  let tPlace: string | null = null, t0 = 0;
+  const timeEnd = () => { if (tPlace && t0) ev({ event: "map/time", place: tPlace, band: timeBand(performance.now() - t0), origin: mode }); tPlace = null; t0 = 0; };
+  const timeStart = (slug: string) => { if (tPlace === slug) return; timeEnd(); tPlace = slug; t0 = performance.now(); };
   function select(slug: string | null, fly = true) {
-    if (slug) track(`s/${slug}`);
+    if (slug) { ev({ event: "map/place", place: slug, origin: mode }); ev({ event: "map/card/muni", place: slug, origin: mode }); }
     if (pinA && slug && slug !== pinA) { compare(pinA, slug); return; }
-    selected = slug; selPar = null;
+    selected = slug; selPar = null; selRegion = null;
     if (map) map.setFilter("sel", ["==", ["get", "s"], slug ?? ""]);
     const p = slug ? byS.get(slug) : null;
     if (p && map && fly) flyTo(p.x, p.y, Math.max(map.getZoom(), p.a < 40 ? 8.6 : 7.6));
     syncUrl(); sentence();
-    if (slug && p) { showPlace(slug); savePlace(p.n); } else closeSheet();
+    if (slug && p) { showPlace(slug); savePlace(p.n); rememberPlace(p.n); timeStart(slug); } else closeSheet();
   }
 
-  // ------------------------------------------------------------ the place sheet (side on desktop, bottom with three heights on mobile)
-  function spark(s: Series): string {
-    const w = 320, h = 70, vals = s.m2, n = vals.length, hi = Math.max(...vals.filter((v): v is number => v != null)) * 1.05, lo = Math.min(...vals.filter((v): v is number => v != null)) * 0.92;
-    let d = "", pen = false;
-    vals.forEach((v, i) => { if (v == null) { pen = false; return; } const x = (i / (n - 1)) * w, y = h - ((v - lo) / (hi - lo)) * h; d += `${pen ? "L" : "M"}${x.toFixed(1)},${y.toFixed(1)}`; pen = true; });
-    return `<svg class="m3-spark" viewBox="0 0 ${w} ${h + 18}" preserveAspectRatio="none" aria-hidden="true"><path d="${d}" fill="none" stroke="currentColor" stroke-width="1.8" vector-effect="non-scaling-stroke"/><text x="0" y="${h + 16}">${P!.quarters[0].slice(0, 4)}</text><text x="${w}" y="${h + 16}" text-anchor="end">${P!.quarters[n - 1].slice(0, 4)}</text></svg>`;
+  // ------------------------------------------------------------ the place as tiles (D83 part 2: Apple Weather, then Apple Stocks)
+  // The card: photo, name, one line, a heart; free tiles (Preço, Viver aqui, Escolas e saúde); paid tiles with a soft
+  // preview that open the unlock sheet. A tile opens its own view in the same sheet (the chart, or the figures as strips);
+  // "Voltar" returns to the card. The figures come from /data/map/tiles.json; a tile without figures says "Em breve".
+  const T4 = L.t;
+  const pctF = new Intl.NumberFormat(loc, { style: "percent", maximumFractionDigits: 0 });
+  const pct1 = (v: number) => `${v > 0 ? "+" : v < 0 ? "−" : ""}${nf1.format(Math.abs(v))} %`.replace(" %", loc.startsWith("en") ? "%" : " %");
+  const m2f = (v: number) => `${eur.format(v)}/m²`;
+  const rangeF = (r: [number, number]) => `${nf.format(r[0])}–${eur.format(r[1])}/m²`;
+  const ptIn: Record<string, string> = { Porto: "No", Maia: "Na", "Póvoa de Varzim": "Na", "Figueira da Foz": "Na", Nazaré: "Na", Amadora: "Na", Covilhã: "Na", Guarda: "Na", Horta: "Na",
+    Lourinhã: "Na", Lousã: "Na", Sertã: "Na", Batalha: "Na", Trofa: "Na", Moita: "Na", Mealhada: "Na", Murtosa: "Na", Golegã: "Na", Chamusca: "Na", "Ribeira Grande": "Na", "Ribeira Brava": "Na",
+    Calheta: "Na", "Praia da Vitória": "Na", Cartaxo: "No", Bombarral: "No", Entroncamento: "No", Fundão: "No", Sabugal: "No", Seixal: "No", Barreiro: "No", Montijo: "No", Crato: "No",
+    Redondo: "No", Alandroal: "No", Gavião: "No", Cadaval: "No", Sardoal: "No", Corvo: "No", Nordeste: "No", Funchal: "No", "Porto Santo": "No", "Porto Moniz": "No", "Peso da Régua": "No",
+    "Marco de Canaveses": "No", Norte: "No", Centro: "No", Alentejo: "No", Algarve: "No", Madeira: "Na", Açores: "Nos" };
+  const inName = (n: string) => loc.startsWith("pt") ? `${ptIn[n] ?? "Em"} ${n}` : loc.startsWith("fr") ? `À ${n}` : `In ${n}`;
+  let T: any = null, tilesP: Promise<any> | null = null;
+  function loadTiles() { return tilesP ??= fetch("/data/map/tiles.json").then((r) => r.json()).then((d) => (T = d)).catch(() => (T = { m: {}, p: {}, r2: {}, rg: {} })); }
+  type Ctx = { kind: "muni" | "parish" | "region"; id: string; name: string; c2: string; series: (number | null)[]; ref: (number | null)[]; refCode: string; muni?: string; region: string };
+  let view: "card" | "tile" = "card", ctx: Ctx | null = null, rerender: (() => void) | null = null;
+  const regs = () => ((P as any)?.regions ?? {}) as Record<string, { n: string; m2: (number | null)[] }>;
+  const lastOf = (s: (number | null)[]) => { for (let i = s.length - 1; i >= 0; i--) if (s[i] != null) return s[i] as number; return null; };
+  const evPlace = (x: Ctx) => (x.kind === "region" ? { region: x.id } : { place: x.kind === "parish" ? `p-${x.id}` : x.id });
+
+  function photoHTML(slug: string | null, r: string): string {
+    const own = slug ? cfg.photos[slug] : "", reg = cfg.regionPhotos?.[r] ?? "";
+    const f = own || reg; if (!f) return `<div class="m3-photo m3-photo-none m3-photo-quiet"><span>${esc(L.regions[r] || "")}</span></div>`;
+    const cap = !own && T4.ph[f] ? `<figcaption>${esc(T4.ph[f])}</figcaption>` : "";
+    return `<figure class="m3-ph"><img class="m3-photo" src="/img/v2/${f}-640.webp" srcset="/img/v2/${f}-640.webp 640w, /img/v2/${f}-1024.webp 1024w" sizes="420px" alt="" width="640" height="400">${cap}</figure>`;
   }
-  function stats(s: Series | undefined) {
-    const i = last(), v = s?.m2[i] ?? null, r = s?.rq[i] ?? null, g = s?.g10 ?? null;
-    return `<dl class="m3-stats"><div><dt>${L.card.price}</dt><dd>${v ? eur.format(v) : "—"}</dd></div><div><dt>${L.card.g10}</dt><dd>${g != null ? pc(g) : "—"}</dd></div><div><dt>${L.card.rent}</dt><dd>${r ? eur2.format(r) : "—"}</dd></div></dl>`;
+  const dirLine = (p5: number | undefined | null) => p5 == null ? "" : Math.abs(p5) < 2 ? T4.dirFlat : (p5 > 0 ? T4.dirUp : T4.dirDown).replace("{v}", pctF.format(Math.abs(p5) / 100));
+  const soonHTML = () => `<span class="m3-soon"><b>${esc(T4.soon)}</b><small>${esc(T4.soonP)}</small></span>`;
+  const chev = `<svg class="m3-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>`;
+  const lock = `<svg class="m3-lock" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>`;
+  // A soft preview: an abstract shape, never the figures themselves (they are in the analysis).
+  const ghost = (i: number) => `<svg class="m3-ghost" viewBox="0 0 120 40" preserveAspectRatio="none" aria-hidden="true">${i % 2
+    ? `<rect x="4" y="22" width="14" height="14" rx="2"/><rect x="24" y="14" width="14" height="22" rx="2"/><rect x="44" y="18" width="14" height="18" rx="2"/><rect x="64" y="8" width="14" height="28" rx="2"/><rect x="84" y="12" width="14" height="24" rx="2"/><rect x="104" y="4" width="12" height="32" rx="2"/>`
+    : `<path d="M2 34 C 20 30, 30 26, 44 24 S 70 14, 84 16 S 106 8, 118 4" fill="none" stroke-width="3"/>`}</svg>`;
+
+  // The market: INE's finest cut. INE publishes no quartiles, so a range is the lowest to highest typology median ("entre
+  // tipologias"); otherwise the single median, with new and existing when INE publishes both. A region: its concelhos' P10-P90.
+  // New build: only the partner developments' published prices; "preços sob consulta (promotor)" where a partner has none;
+  // nothing elsewhere.
+  function priceTile(x: Ctx, d: any): string {
+    const med = lastOf(x.series);
+    const mkt = d?.rng ? `${rangeF(d.rng)}<small>${esc(T4.ty)}</small>` : x.kind === "region" && d?.lo && d?.hi ? rangeF([d.lo, d.hi]) : med != null ? m2f(med) : "—";
+    const ne = d?.ne ? `<small>${esc(T4.ne.replace("{n}", nf.format(d.ne[0])).replace("{e}", nf.format(d.ne[1])))} €/m²</small>` : "";
+    const nb = d?.nb ? `<span><small>${esc(T4.nb)}</small><b>${rangeF(d.nb)}</b><small>${esc(T4.nbsrc)}</small></span>` : d?.nbq ? `<span><small>${esc(T4.nb)}</small><b class="m3-dim-t">${esc(T4.onreq2)}</b></span>` : "";
+    return `<button type="button" class="m3-tile m3-tile-w" data-tile="price"><span class="m3-tt">${esc(T4.price)}${chev}</span>
+      <span class="m3-pp${nb ? "" : " m3-pp-1"}"><span><small>${esc(T4.mkt)}</small><b>${mkt}</b>${ne}</span>${nb}</span>
+      <span class="m3-tl">${esc(dirLine(d?.p5))}</span></button>`;
   }
+  const AP: Record<string, string> = { LIS: "Lisboa", OPO: "Porto", FAO: "Faro", FNC: "Funchal", PDL: "Ponta Delgada" };
+  // Living here (lead, 3 Nov): sea in August (Copernicus Marine Service), the beach and the airport in straight-line km; the
+  // sunshine (IPMA, private use only) and the flight time (no timetable fetched) say "Em breve" until a publishable source.
+  function lifeRows(d: any, all = false): [string, string][] {
+    const rows: [string, string][] = [];
+    if (!d || (d.sea == null && d.bch == null && !d.ap)) return rows;
+    if (d.sea != null) rows.push([T4.sea, `${nf1.format(d.sea)} °C`]);
+    if (d.bch != null) rows.push([T4.beach, esc(T4.kmline.replace("{v}", nf1.format(d.bch)))]);
+    if (d.ap) rows.push([T4.airport, esc(T4.ap.replace("{n}", AP[d.ap[0]] ?? d.ap[0]).replace("{v}", nf.format(d.ap[1])))]);
+    const fl = d.fl?.[cfg.ed];
+    rows.push([T4.flight, fl != null ? (fl >= 60 ? `${Math.floor(fl / 60)} h ${String(Math.round(fl % 60)).padStart(2, "0")}` : T4.min.replace("{v}", nf.format(fl))) : `<span class="m3-dim-t">${esc(T4.soon)}</span>`]);
+    if (all && d.sun == null) rows.push([T4.sun, `<span class="m3-dim-t">${esc(T4.soon)}</span>`]);
+    return rows;
+  }
+  function careRows(d: any): [string, string][] {
+    const rows: [string, string][] = [];
+    if (d?.sch) rows.push([T4.school, d.sch.none ? esc(T4.noschool) : T4.km.replace("{n}", esc(d.sch.n)).replace("{v}", nf1.format(d.sch.km))]);
+    if (d?.hsp) rows.push([T4.hosp, T4.km.replace("{n}", esc(d.hsp.n)).replace("{v}", nf1.format(d.hsp.km))]);
+    if (d?.doc != null) rows.push([T4.docs, nf1.format(d.doc)]);
+    return rows;
+  }
+  const rowsTile = (id: string, title: string, rows: [string, string][]) => `<button type="button" class="m3-tile" data-tile="${id}"><span class="m3-tt">${esc(title)}${rows.length ? chev : ""}</span>${rows.length
+    ? `<dl class="m3-tr">${rows.slice(0, 4).map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${v}</dd></div>`).join("")}</dl>` : soonHTML()}</button>`;
+  function tilesHTML(x: Ctx, d: any): string {
+    const life = d ? lifeRows(d) : [], care = d ? careRows(d) : [];
+    const cmpHref = `${cfg.links.compare}?p=${encodeURIComponent(x.kind === "region" ? `r-${x.id}` : x.kind === "parish" ? `p-${x.id}` : x.id)}`;
+    const paid = [["rent", T4.rent], ["g10y", T4.g10y], ["foreign", T4.foreign], ["supply", T4.supply]] as const;
+    // A region card shows its price and the paid tiles; living here, schools and health belong to a place.
+    return `<div class="m3-tiles">${priceTile(x, d)}${x.kind === "region" ? "" : rowsTile("life", T4.life, life) + rowsTile("care", T4.care, care)}</div>
+      <p class="m3-pk m3-pk-paid">${esc(T4.paid)}</p><div class="m3-tiles m3-tiles-paid">${paid.map(([id, t], i) => `<button type="button" class="m3-tile m3-tile-p" data-paid="${id}"><span class="m3-tt">${esc(t)}${lock}</span>${ghost(i)}</button>`).join("")}
+      <a class="m3-tile m3-tile-p" data-paid-cmp href="${esc(cmpHref)}"><span class="m3-tt">${esc(T4.compare)}${chev}</span>${ghost(5)}</a></div>`;
+  }
+  const mareHTML = () => `<div class="m3-mare" data-mare-slot>${root.querySelector<HTMLTemplateElement>("[data-mare-tpl]")?.innerHTML ?? ""}</div>`;
+  function muniData(slug: string) { return T?.m?.[slug] ?? null; }
+
   function showPlace(slug: string, open = true) {
     const p = byS.get(slug); if (!p || !P) return; const s = P.munis[slug], i = last(), v = s?.m2[i] ?? null;
     const here = projects.filter((x) => x.muni === slug && x.showcase);
     if (here.length && !overlays.devs) setOverlay("devs", true);  // prompt 38: a place card shows its partner projects
     const homes = here.length ? here[0].showcase : `${cfg.links.buy}?place=${encodeURIComponent(p.n)}&budget=${Math.round(budget)}`;
-    const photo = cfg.photos[slug] ? `<img class="m3-photo" src="/img/v2/${cfg.photos[slug]}-640.webp" srcset="/img/v2/${cfg.photos[slug]}-640.webp 640w, /img/v2/${cfg.photos[slug]}-1024.webp 1024w" sizes="420px" alt="" width="640" height="400">` : `<div class="m3-photo m3-photo-none" style="--c:${colorOf(value(s, layer))}"></div>`;
-    let h = `${photo}<div class="m3-sb"><p class="m3-kick">${esc(L.regions[p.r] || "")}</p><h3 tabindex="-1">${esc(p.n)}</h3>${stats(s)}`;
-    if (v) h += `<p class="m3-buys">${L.card.buys.replace("{v}", `<b>${nf.format(Math.round(budget / v))}</b>`)}</p>`;
+    const d = muniData(slug);
+    const x: Ctx = { kind: "muni", id: slug, name: p.n, c2: d?.c2 ?? "", series: s?.m2 ?? [], ref: regs()[d?.c2 ?? ""]?.m2 ?? [], refCode: d?.c2 ?? "PT", region: p.r };
+    if (!T) loadTiles().then(() => { if (ctx?.kind === "muni" && ctx.id === slug && view === "card" && !sheet.hidden && !pinA) showPlace(slug, false); });
+    // Part 2 (3 Nov): the heart keeps the region in "A sua seleção" (its own page where it has one, else the map on it).
+    const regionHref = cfg.links.pages.includes(slug) ? `${cfg.links.map}${slug}/` : `${cfg.links.map}?place=${slug}`;
+    const line = cfg.briefs[slug] && cfg.briefs[slug].length < 140 ? cfg.briefs[slug] : [d?.n3, L.regions[p.r]].filter((z, k, a) => z && a.indexOf(z) === k).join(", ");
+    let h = `${photoHTML(slug, p.r)}<div class="m3-sb"><p class="m3-kick">${esc(L.regions[p.r] || "")}</p><div class="ht-row"><h3 tabindex="-1">${esc(p.n)}</h3>${heartHTML("region", slug, p.n, regionHref)}</div>`;
+    h += `<p class="m3-line">${esc(line)}</p>${tilesHTML(x, d)}`;
+    // Part 2 (3 Nov): no partner homes here, but some nearby (projects.json "near"): one line to them, never a dead end.
+    if (!here.length && cfg.pl?.near) {
+      const nearBy = projects.filter((y) => y.showcase && (y as Proj & { near?: string[] }).near?.some((n) => plain(n) === plain(p.n)));
+      for (const y of nearBy.slice(0, 2)) h += `<p class="m3-buys m3-near"><a href="${esc(y.showcase)}">${esc(cfg.pl.near.replace("{name}", y.name).replace("{muni}", (y as Proj & { muniName?: string }).muniName ?? ""))} →</a></p>`;
+    }
     const vs = s as (Series & { vac?: number; sea?: number }) | undefined;
     if (layer === "vac" && vs?.vac != null) h += `<p class="m3-buys">${L.vacLine.replace("{v}", `<b>${nf1.format(vs.vac)}%</b>`).replace("{s}", vs.sea != null ? `<b>${nf1.format(vs.sea)}%</b>` : "—")}</p>`;
-    if (s) h += spark(s);
     h += `<div class="m3-acts"><a class="m3-btn m3-btn-p" href="${esc(homes)}">${L.card.homes}</a><a class="m3-btn" href="${cfg.links.consult}?place=${encodeURIComponent(p.n)}&budget=${Math.round(budget)}">${L.card.concierge}</a></div>`;
     h += `<div class="m3-more"><button type="button" class="m3-link" data-compare>${L.card.compare}</button><button type="button" class="m3-link" data-details aria-expanded="false">${L.card.details}</button><button type="button" class="m3-link" data-share>${L.share}</button></div>`;
+    // "Detalhes": what the card showed before D83, kept one tap down (the budget line, the yearly change, the yield, the
+    // quarterly momentum, the reviewed brief, the place page and the partner projects).
     let det = "";
+    if (v) det += `<li>${L.card.buys.replace("{v}", `<b>${nf.format(Math.round(budget / v))}</b>`)}</li>`;
     if (s?.cagrP != null) det += `<li>${L.cagrP.replace("{v}", pc(s.cagrP))}</li>`;
     if (s?.yield != null) det += `<li>${L.yieldLine.replace("{y}", nf1.format(s.yield) + "%").replace("{r}", nf1.format(cfg.mortgage.rate) + "%").replace("{month}", cfg.mortgage.month)}</li>`;
     if (s?.mo) det += `<li>${L.mo.replace("{c4}", pc(s.mo.c4)).replace("{c8}", s.mo.c8 == null ? "—" : pc(s.mo.c8))} <strong>${L.mow[s.mo.w]}</strong></li>`;
     if (cfg.briefs[slug]) det += `<li>${cfg.briefs[slug]}</li>`;
     if (cfg.links.pages.includes(slug)) det += `<li><a href="${cfg.links.map}${slug}/">${L.page}</a></li>`;
-    if (here.length) det += here.map((x) => `<li><a href="${esc(x.showcase)}">${esc(x.name)} · ${esc(x.developer)}</a> <span class="m3-tag">${L.sponsored}</span></li>`).join("");
-    h += `<ul class="m3-det" data-det hidden>${det}</ul><p class="m3-src">${L.source.replace("{quarter}", qLabel(P.quarters[i]))} ${L.disclaimer}</p></div>`;
+    if (here.length) det += here.map((y) => `<li><a href="${esc(y.showcase)}">${esc(y.name)} · ${esc(y.developer)}</a> <span class="m3-tag">${L.sponsored}</span></li>`).join("");
+    h += `<ul class="m3-det" data-det hidden>${det}</ul><p class="m3-src">${L.source.replace("{quarter}", qLabel(P.quarters[i]))} ${d?.sea != null ? esc(T4.tsrc) : ""} ${L.disclaimer}</p>${mareHTML()}</div>`;
+    ctx = x; rerender = () => showPlace(slug, false);
     openSheet(h, open);
   }
   function selectParish(code: string) {
     const f = parishes?.feats.find((x) => x.properties.id === code); const s = parishes?.data[code]; if (!f || !P) return;
-    selPar = code; selected = f.properties.m; syncUrl(); if (map) map.setFilter("sel", ["==", ["get", "s"], ""]);
-    const muni = byS.get(f.properties.m), i = last(), v = s?.m2[i] ?? null;
-    let h = `<div class="m3-photo m3-photo-none" style="--c:${colorOf(value(s, layer))}"></div><div class="m3-sb"><p class="m3-kick">${esc(L.parishOf.replace("{m}", muni?.n ?? ""))}</p><h3 tabindex="-1">${esc(f.properties.n)}</h3>${stats(s)}`;
-    if (v) h += `<p class="m3-buys">${L.card.buys.replace("{v}", `<b>${nf.format(Math.round(budget / v))}</b>`)}</p>`;
-    if (s) h += spark(s);
+    selPar = code; selected = f.properties.m; selRegion = null; syncUrl(); if (map) map.setFilter("sel", ["==", ["get", "s"], ""]);
+    ev({ event: "map/card/parish", place: `p-${code}`, origin: mode });
+    const muni = byS.get(f.properties.m), md = muniData(f.properties.m), pd = T?.p?.[code];
+    // The parish's own price (INE, the finest cut it publishes); life, schools and health are the municipality's.
+    const d = md ? { ...md, rng: pd?.rng ?? null, ne: pd?.ne ?? null, p5: pd?.p5 ?? null, nb: null, nbq: null, ...(pd?.bch != null ? { bch: pd.bch } : {}), ...(pd?.ap ? { ap: pd.ap } : {}), ...(pd?.sch ? { sch: pd.sch } : {}), ...(pd?.hsp ? { hsp: pd.hsp } : {}) } : pd ?? null;
+    const x: Ctx = { kind: "parish", id: code, name: f.properties.n, c2: md?.c2 ?? "", series: s?.m2 ?? [], ref: regs()[md?.c2 ?? ""]?.m2 ?? [], refCode: md?.c2 ?? "PT", muni: f.properties.m, region: muni?.r ?? "" };
+    if (!T) loadTiles().then(() => { if (ctx?.kind === "parish" && ctx.id === code && view === "card" && !sheet.hidden) selectParish(code); });
+    let h = `${photoHTML(null, muni?.r ?? "")}<div class="m3-sb"><p class="m3-kick">${esc(T4.cutParish.replace("{m}", muni?.n ?? ""))}</p><div class="ht-row"><h3 tabindex="-1">${esc(f.properties.n)}</h3>${heartHTML("region", `p-${code}`, `${f.properties.n}, ${muni?.n ?? ""}`, `${cfg.links.map}?parish=${code}`)}</div>`;
+    h += `<p class="m3-line">${esc([muni?.n, L.regions[muni?.r ?? ""]].filter(Boolean).join(", "))}</p>${tilesHTML(x, d)}`;
     h += `<div class="m3-acts"><a class="m3-btn m3-btn-p" href="${cfg.links.buy}?place=${encodeURIComponent(f.properties.n)}&budget=${Math.round(budget)}">${L.card.homes}</a><a class="m3-btn" href="${cfg.links.consult}?place=${encodeURIComponent(f.properties.n)}">${L.card.concierge}</a></div>`;
-    h += `<div class="m3-more"><button type="button" class="m3-link" data-goto="${f.properties.m}">${esc(muni?.n ?? "")}</button><button type="button" class="m3-link" data-share>${L.share}</button></div><p class="m3-src">${L.source.replace("{quarter}", qLabel(P.quarters[i]))} ${L.disclaimer}</p></div>`;
+    h += `<div class="m3-more"><button type="button" class="m3-link" data-goto="${f.properties.m}">${esc(muni?.n ?? "")}</button><button type="button" class="m3-link" data-share>${L.share}</button></div><p class="m3-src">${L.source.replace("{quarter}", qLabel(P.quarters[last()]))} ${d?.sea != null ? esc(T4.tsrc) : ""} ${L.disclaimer}</p>${mareHTML()}</div>`;
+    ctx = x; rerender = () => selectParish(code);
     openSheet(h, true);
   }
+  // A region postcard: the region's photograph and name, its concelhos' price range, the NUTS II median's five years.
+  let regionAt: Record<string, [number, number]> = {};
+  async function showRegion(key: string, fly = true) {
+    await load(); await loadTiles(); timeEnd();
+    selRegion = key; selected = null; selPar = null; syncUrl(); if (map) map.setFilter("sel", ["==", ["get", "s"], ""]);
+    ev({ event: "map/card/region", region: key, origin: mode });
+    const rg = T?.rg?.[key] ?? {}, c2 = rg.c2 ?? "PT", name = L.regions[key] || key;
+    const x: Ctx = { kind: "region", id: key, name, c2, series: regs()[c2]?.m2 ?? [], ref: regs().PT?.m2 ?? [], refCode: "PT", region: key };
+    const d = { lo: rg.lo, hi: rg.hi, p5: rg.p5, ...(T?.r2?.[c2] ?? {}) };
+    delete (d as any).m2;
+    let h = `${photoHTML(null, key)}<div class="m3-sb"><p class="m3-kick">${esc(T4.regionKick)}</p><div class="ht-row"><h3 tabindex="-1">${esc(name)}</h3>${heartHTML("region", `r-${key}`, name, `${cfg.links.map}?region=${key}`)}</div>`;
+    h += `<p class="m3-line">${esc(T4.regionLine.replace("{n}", nf.format(rg.k ?? 0)).replace("{cities}", (rg.cities ?? []).join(", ")))}</p>${tilesHTML(x, d)}`;
+    h += `<p class="m3-buys m3-hint">${esc(T4.regionPick)}</p><p class="m3-src">${L.source.replace("{quarter}", qLabel(P!.quarters[last()]))} ${L.disclaimer}</p>${mareHTML()}</div>`;
+    ctx = x; rerender = () => showRegion(key, false);
+    openSheet(h, true);
+    if (fly && map) {
+      const pts = features.filter((f) => (f.properties as Props).r === key).map((f) => f.properties as Props);
+      if (pts.length) map.fitBounds([[Math.min(...pts.map((p) => p.x)) - 0.15, Math.min(...pts.map((p) => p.y)) - 0.15], [Math.max(...pts.map((p) => p.x)) + 0.15, Math.max(...pts.map((p) => p.y)) + 0.15]],
+        { padding: isWide() ? { left: 280, right: 460, top: 90, bottom: 60 } : { left: 30, right: 30, top: 80, bottom: canvas.clientHeight * 0.5 }, maxZoom: 9, duration: reduce() ? 0 : 1200, pitch: flat ? 0 : 40 });
+    }
+  }
+
+  // ------------------------------------------------------------ a tile's own view: the chart (price) or the figures as strips
+  function openTile(id: string) {
+    if (!ctx) return; const x = ctx;
+    ev({ event: `map/tile/${id}`, ...evPlace(x), origin: mode });
+    if (id === "price") { chartView(x, 1); return; }
+    // A parish keeps its own beach, airport, school and hospital distances; the rest is its municipality's.
+    const d = x.kind === "region" ? null : x.kind === "parish" ? { ...muniData(x.muni!), ...(T?.p?.[x.id] ?? {}) } : muniData(x.id);
+    const keys: [string, string, (v: number) => string][] = id === "life"
+      ? [["sea", T4.sea, (v) => `${nf1.format(v)} °C`], ["bch", T4.beach, (v) => T4.kmline.replace("{v}", nf1.format(v))]]
+      : [["doc", T4.docs, (v) => nf1.format(v)]];
+    const rows = id === "life" ? lifeRows(d, true) : careRows(d);
+    let h = `<div class="m3-sb m3-tv"><button type="button" class="m3-back" data-back>${chevBack}${esc(T4.back)}</button><p class="m3-kick">${esc(id === "life" ? T4.life : T4.care)} · ${esc(x.name)}</p>`;
+    if (!rows.length) h += `<h3 tabindex="-1">${esc(x.name)}</h3>${soonHTML()}`;
+    else {
+      h += `<h3 tabindex="-1" class="m3-h-s">${esc(x.name)}</h3><dl class="m3-tr m3-tr-l">${rows.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${v}</dd></div>`).join("")}</dl>`;
+      for (const [k, label, f] of keys) { const v = d?.[k]; if (typeof v === "number") h += stripHTML(k, label, v, f, x); }
+    }
+    const src = T?.src ? Object.entries(T.src).filter(([k]) => (id === "life" ? ["sea", "bch", "ap", "fl"] : ["sch", "hsp", "doc"]).includes(k)).map(([, s]: any) => `${esc(s.t)}${s.d ? `, ${esc(s.d)}` : ""}`).join(" · ") : "";
+    h += `${src ? `<p class="m3-src">${src}.</p>` : ""}<p class="m3-src">${L.disclaimer}</p></div>`;
+    showView(h);
+  }
+  const chevBack = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg>`;
+  function band(v: number, ref: number, tol = 0.1) { return v > ref * (1 + tol) ? "above" : v < ref * (1 - tol) ? "below" : "near"; }
+  // Every concelho as a faint tick, this place as the green dot, the NUTS II median as a short line.
+  function stripHTML(k: string, label: string, v: number, f: (v: number) => string, x: Ctx): string {
+    const all = Object.values(T?.m ?? {}).map((m: any) => m[k]).filter((z: any) => typeof z === "number") as number[]; if (all.length < 5) return "";
+    const lo = Math.min(...all), hi = Math.max(...all), at = (z: number) => (hi > lo ? ((z - lo) / (hi - lo)) * 100 : 50);
+    const ref = T?.r2?.[x.c2]?.[k];
+    const b = typeof ref === "number" ? (({ above: T4.sAbove, near: T4.sNear, below: T4.sBelow } as any)[band(v, ref, 0.05)] as string).replace("{of}", T4.of[x.c2] ?? "") : "";
+    return `<div class="m3-strip"><p><b>${esc(label)}</b> ${esc(f(v))}${b ? `, ${esc(b)}` : ""}</p><div class="m3-strip-l" aria-hidden="true">${all.map((z) => `<i style="left:${at(z).toFixed(1)}%"></i>`).join("")}${typeof ref === "number" ? `<s style="left:${at(ref).toFixed(1)}%"></s>` : ""}<b style="left:${at(v).toFixed(1)}%"></b></div><p class="m3-strip-n"><span>${esc(f(lo))}</span><span>${esc(f(hi))}</span></p></div>`;
+  }
+  function chartView(x: Ctx, years: 1 | 5 | 10) {
+    const s = x.series, n = s.length, lastV = lastOf(s);
+    const can = (y: number) => { const st = n - 1 - 4 * y; return st >= 0 && s.slice(st, st + 3).some((v) => v != null); };
+    let h = `<div class="m3-sb m3-tv"><button type="button" class="m3-back" data-back>${chevBack}${esc(T4.back)}</button><p class="m3-kick">${esc(T4.price)} · ${esc(x.name)}</p>`;
+    h += `<h3 tabindex="-1" class="m3-find" data-find></h3><p class="m3-big"><b data-count>${lastV ? m2f(lastV) : "—"}</b><span data-chg></span></p>`;
+    h += `<div class="m3-seg m3-rng" role="group" aria-label="${esc(T4.price)}">${([1, 5, 10] as const).map((y) => `<button type="button" data-range="${y}" aria-pressed="${y === years}"${can(y) ? "" : " disabled"}>${y}A</button>`).join("")}</div>`;
+    h += `<div class="m3-chartw" data-chart></div><p class="m3-band" data-band></p><p class="m3-src">${esc(T4.src.replace("{q}", P ? qLabel(P.quarters[last()]) : ""))}</p></div>`;
+    showView(h);
+    drawChart(x, years);
+    sheetIn.querySelectorAll<HTMLButtonElement>("[data-range]").forEach((b) => b.addEventListener("click", () => {
+      const y = Number(b.dataset.range) as 1 | 5 | 10; sheetIn.querySelectorAll("[data-range]").forEach((z) => z.setAttribute("aria-pressed", String(z === b)));
+      ev({ event: `map/chart/${y}a`, ...evPlace(x), origin: mode }); drawChart(x, y);
+    }));
+  }
+  function drawChart(x: Ctx, years: number) {
+    const s = x.series, n = s.length; let st = Math.max(0, n - 1 - 4 * years); while (st < n - 1 && s[st] == null) st++;
+    const vals = s.slice(st), a = s[st], b = lastOf(s);
+    const qs = P!.quarters.slice(st);
+    const find = sheetIn.querySelector<HTMLElement>("[data-find]")!, big = sheetIn.querySelector<HTMLElement>("[data-count]")!, chg = sheetIn.querySelector<HTMLElement>("[data-chg]")!;
+    const span = (T4.span as any)[years] as string, nm = inName(x.name);
+    if (a && b) {
+      const r = b / a - 1;
+      find.textContent = Math.abs(r) < 0.005 ? T4.flat.replace("{in}", nm).replace("{span}", span) : (r > 0 ? T4.up : T4.down).replace("{in}", nm).replace("{v}", pctF.format(Math.abs(r))).replace("{span}", span);
+      chg.textContent = pct1(r * 100); chg.className = r > 0 ? "is-up" : "";
+    } else find.textContent = x.name;
+    // The number counts up and the line draws in, 300 ms (nothing moves with reduced motion).
+    if (b) { const from = a ?? 0, t0 = performance.now(), dur = reduce() ? 0 : 300;
+      const tick = (now: number) => { const k = dur ? Math.min((now - t0) / dur, 1) : 1; big.textContent = m2f(Math.round(from + (b - from) * ease(k))); if (k < 1) requestAnimationFrame(tick); };
+      requestAnimationFrame(tick); }
+    const nums = vals.filter((v): v is number => v != null), lo = Math.min(...nums), hi = Math.max(...nums), W = 360, H = 150;
+    let d = "", pen = false, lx = 0, ly = 0;
+    vals.forEach((v, i) => { if (v == null) { pen = false; return; } const px = vals.length > 1 ? (i / (vals.length - 1)) * W : W, py = H - 8 - ((v - lo) / (hi - lo || 1)) * (H - 16); d += `${pen ? "L" : "M"}${px.toFixed(1)},${py.toFixed(1)}`; pen = true; lx = px; ly = py; });
+    const yr = (k: string) => (years > 1 ? k.slice(0, 4) : qLabel(k));
+    sheetIn.querySelector<HTMLElement>("[data-chart]")!.innerHTML = `<svg class="m3-chart" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" aria-hidden="true"><line x1="0" x2="${W}" y1="${H - 0.5}" y2="${H - 0.5}" class="m3-cb"/><path class="m3-cl" pathLength="1" d="${d}"/></svg><i class="m3-cdot" style="left:${(lx / W) * 100}%;top:${(ly / H) * 100}%"></i>
+      <p class="m3-cax"><span>${esc(yr(qs[0]))}</span><span>${esc(m2f(lo))} – ${esc(m2f(hi))}</span><span>${esc(yr(qs[qs.length - 1]))}</span></p>`;
+    const ref = lastOf(x.ref), bandEl = sheetIn.querySelector<HTMLElement>("[data-band]")!;
+    bandEl.textContent = b && ref ? (T4 as any)[band(b, ref)].replace("{q}", qLabel(P!.quarters[last()])).replace("{v}", eur.format(b)).replace("{of}", T4.of[x.refCode] ?? "").replace("{r}", eur.format(ref)) : "";
+  }
+  function showView(h: string) {
+    view = "tile";
+    sheetIn.innerHTML = h + `<button type="button" class="m3-x" aria-label="${L.close}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>`;
+    sheetIn.scrollTop = 0;
+    sheetIn.querySelector(".m3-x")!.addEventListener("click", () => select(null));
+    const was = detent;
+    sheetIn.querySelector("[data-back]")?.addEventListener("click", () => { view = "card"; rerender?.(); if (!isWide()) setDetent(was); });
+    if (!isWide()) setDetent(2);  // the chart and the strips want the full height on a phone; "Voltar" returns to the height before
+    if (root.contains(document.activeElement)) sheetIn.querySelector<HTMLElement>("h3")?.focus({ preventScroll: true });
+  }
+
+  // ------------------------------------------------------------ the unlock sheet (paid analysis: off until the company and invoicing exist)
+  const unlock = $("[data-unlock]");
+  function openUnlock(tile: string) {
+    const x = ctx; ev({ event: `map/paid/preview/${tile}`, ...(x ? evPlace(x) : {}), origin: mode });
+    const pEl = unlock.querySelector<HTMLElement>("[data-unlock-p]")!, rName = x ? L.regions[x.region] || "" : "";
+    pEl.textContent = (pEl.dataset.tpl || "").replace("{place}", x ? (x.kind === "region" ? x.name : `${x.name}${rName && rName !== x.name ? `, ${rName}` : ""}`) : "Portugal");
+    const kick = unlock.querySelector<HTMLElement>("[data-unlock-kick]")!; kick.textContent = `${T4.paid} · ${(T4 as any)[tile] ?? ""}`;
+    const buy = unlock.querySelector<HTMLAnchorElement>("[data-unlock-region]"); if (buy) buy.textContent = (buy.dataset.tpl || "").replace("{region}", rName).replace("{v}", buy.dataset.v || "");
+    unlock.hidden = false; requestAnimationFrame(() => unlock.classList.add("is-open"));
+    unlock.querySelector<HTMLElement>("[data-unlock-x]")?.focus({ preventScroll: true });
+  }
+  function closeUnlock() { unlock.classList.remove("is-open"); setTimeout(() => (unlock.hidden = true), 220); }
+  unlock.querySelector("[data-unlock-x]")!.addEventListener("click", closeUnlock);
+  unlock.addEventListener("click", (e) => { if (e.target === unlock) closeUnlock(); });
   function compare(a: string, b: string) {
+    ev({ event: "map/compare/pair", place: b, origin: mode }); view = "card"; ctx = null;
     pinA = null; selected = b; syncUrl(); if (map) map.setFilter("sel", ["in", ["get", "s"], ["literal", [a, b]]]);
     const col = (slug: string) => { const p = byS.get(slug)!, s = P!.munis[slug], v = s?.m2[last()]; return { n: p.n, s, v }; };
     const A = col(a), B = col(b);
@@ -443,6 +692,7 @@ export function initMapV3(root: HTMLElement) {
   }
   let detent = 1;  // mobile: 0 peek, 1 half, 2 full
   function openSheet(h: string, focus: boolean) {
+    view = "card";
     sheetIn.innerHTML = h + `<button type="button" class="m3-x" aria-label="${L.close}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>`;
     const wasHidden = sheet.hidden; sheet.hidden = false; requestAnimationFrame(() => sheet.classList.add("is-open"));
     if (!isWide()) setDetent(wasHidden ? 1 : detent);
@@ -452,9 +702,13 @@ export function initMapV3(root: HTMLElement) {
     const det = sheetIn.querySelector<HTMLElement>("[data-det]"), db = sheetIn.querySelector<HTMLButtonElement>("[data-details]");
     db?.addEventListener("click", () => { det!.hidden = !det!.hidden; db.setAttribute("aria-expanded", String(!det!.hidden)); if (!isWide() && !det!.hidden) setDetent(2); });
     sheetIn.querySelectorAll<HTMLButtonElement>("[data-goto]").forEach((b) => b.addEventListener("click", () => select(b.dataset.goto!)));
+    // D83 part 2: the free tiles open their own view; the paid ones the unlock sheet; "Comparar" the comparison page.
+    sheetIn.querySelectorAll<HTMLElement>("[data-tile]").forEach((b) => b.addEventListener("click", () => openTile(b.dataset.tile!)));
+    sheetIn.querySelectorAll<HTMLElement>("[data-paid]").forEach((b) => b.addEventListener("click", () => openUnlock(b.dataset.paid!)));
+    sheetIn.querySelector("[data-paid-cmp]")?.addEventListener("click", () => { if (ctx) ev({ event: "map/tile/compare", ...evPlace(ctx), origin: mode }); });
     if (focus && wasHidden && root.contains(document.activeElement)) sheetIn.querySelector<HTMLElement>("h3")?.focus({ preventScroll: true });
   }
-  function closeSheet() { sheet.classList.remove("is-open"); setTimeout(() => { if (!sheet.classList.contains("is-open")) sheet.hidden = true; }, 260); pinA = null; if (map) map.setFilter("sel", ["==", ["get", "s"], ""]); }
+  function closeSheet() { timeEnd(); ctx = null; rerender = null; view = "card"; if (selRegion) { selRegion = null; syncUrl(); } sheet.classList.remove("is-open"); setTimeout(() => { if (!sheet.classList.contains("is-open")) sheet.hidden = true; }, 260); pinA = null; if (map) map.setFilter("sel", ["==", ["get", "s"], ""]); }
   function setDetent(d: number) { detent = d; sheet.dataset.detent = String(d); }
   { // drag the sheet between its three heights (mobile)
     const grab = $("[data-grab]"); let y0 = 0, h0 = 0, on = false;
@@ -463,7 +717,7 @@ export function initMapV3(root: HTMLElement) {
     const end = (e: PointerEvent) => { if (!on) return; on = false; sheet.classList.remove("is-drag"); const hh = sheet.getBoundingClientRect().height / root.clientHeight; sheet.style.height = ""; if (Math.abs(e.clientY - y0) < 6) { setDetent(detent === 2 ? 1 : 2); return; } hh < 0.25 ? (hh < 0.12 ? select(null) : setDetent(0)) : setDetent(hh < 0.66 ? 1 : 2); };
     grab.addEventListener("pointerup", end); grab.addEventListener("pointercancel", end);
   }
-  async function share() { syncUrl(); try { if (navigator.share) await navigator.share({ url: location.href }); else { await navigator.clipboard.writeText(location.href); toast(L.copied); } } catch { /* closed */ } }
+  async function share() { syncUrl(); ev({ event: "map/share", place: selected ?? undefined, origin: navigator.share ? "native" : "copy" }); try { if (navigator.share) await navigator.share({ url: location.href }); else { await navigator.clipboard.writeText(location.href); toast(L.copied); } } catch { /* closed */ } }
   function toast(t: string) { const el = $("[data-toast]"); el.textContent = t; el.hidden = false; el.classList.add("is-on"); clearTimeout((el as any).t); (el as any).t = setTimeout(() => { el.classList.remove("is-on"); setTimeout(() => (el.hidden = true), 250); }, 2600); }
 
   // ------------------------------------------------------------ parishes, golf, beaches, developments
@@ -508,7 +762,8 @@ export function initMapV3(root: HTMLElement) {
     return f ? golf.courses[f.properties.c] ?? null : null;
   }
   function showGolf(g: Course) {
-    selected = null; if (map) map.setFilter("sel", ["==", ["get", "s"], ""]);
+    ev({ event: "map/card/golf", place: g.m || undefined, origin: mode }); ctx = null;
+    timeEnd(); selected = null; selRegion = null; if (map) map.setFilter("sel", ["==", ["get", "s"], ""]);
     const muni = byS.get(g.m)?.n ?? "";
     const when = g.status !== "open" ? L.golf.opening.replace("{y}", g.year || "—") : g.year;
     let h = `<div class="m3-photo m3-photo-none m3-golfband"></div><div class="m3-sb"><p class="m3-kick">${esc([g.resort !== g.n ? g.resort : "", muni].filter(Boolean).join(" · "))}</p><h3 tabindex="-1">${esc(g.n)}</h3>`;
@@ -533,8 +788,9 @@ export function initMapV3(root: HTMLElement) {
   function drawProjects() {
     markers.forEach((x) => x.m.remove()); markers = []; if (!overlays.devs || !map) return;
     for (const p of projects) {
-      const el = document.createElement("button"); el.type = "button"; el.className = "m3-pin";
-      el.innerHTML = `<b class="m3-pin-n"></b><span>${esc(p.name)}<em>${L.sponsored}</em></span><i class="m3-pin-dot" aria-hidden="true"></i>`;
+      // D83 part 2: a small photo pin (the developer's own render), the name and "Patrocinado" from city zoom.
+      const el = document.createElement("button"); el.type = "button"; el.className = p.pin ? "m3-pin m3-pin-ph" : "m3-pin";
+      el.innerHTML = `<b class="m3-pin-n"></b><span>${esc(p.name)}<em>${L.sponsored}</em></span>${p.pin ? `<img class="m3-pin-img" src="${esc(p.pin)}" alt="" width="44" height="44" decoding="async"><i class="m3-pin-tip" aria-hidden="true"></i>` : `<i class="m3-pin-dot" aria-hidden="true"></i>`}`;
       const x = { p, el, m: null as any, grp: [p] };
       el.addEventListener("click", (e) => {
         e.stopPropagation(); stopTour();
@@ -564,10 +820,11 @@ export function initMapV3(root: HTMLElement) {
 
   // Prompt 38: a partner project's card (photo, name, summary, three features, homes for sale now, price on request).
   function showProject(p: Proj, open = true) {
-    track(`${edOf()}/p/${p.id}/pin`);
+    timeEnd(); ev({ event: `p/${p.id}/pin`, place: p.id, origin: "map" }); ev({ event: "map/card/project", place: p.id, origin: mode }); ctx = null; selRegion = null;
     const pl = cfg.pl ?? {};
     const photo = p.render ? `<img class="m3-photo" src="${esc(p.render)}-800.webp" alt="" width="800" height="450">` : "";
-    let h = `${photo}<div class="m3-sb"><p class="m3-kick">${esc(byS.get(p.muni)?.n ?? "")} · <span class="m3-tag">${L.sponsored}</span></p><h3 tabindex="-1">${esc(p.name)}</h3>`;
+    const pm = byS.get(p.muni)?.n ?? "";
+    let h = `${photo}<div class="m3-sb"><p class="m3-kick">${esc(pm)} · <span class="m3-tag">${L.sponsored}</span></p><div class="ht-row"><h3 tabindex="-1">${esc(p.name)}</h3>${heartHTML("home", p.id, pm ? `${p.name}, ${pm}` : p.name, p.showcase)}</div>`;
     h += `<p class="m3-buys">${esc(p.summary ?? p.developer)}</p>`;
     if (p.feats?.length) h += `<ul class="m3-det">${p.feats.map((f) => `<li>${esc(f)}</li>`).join("")}</ul>`;
     if (p.now != null && pl.now) h += `<p class="m3-buys"><b>${esc(pl.now.replace("{n}", String(p.now)))}</b></p>`;
@@ -649,17 +906,17 @@ export function initMapV3(root: HTMLElement) {
 
   // ------------------------------------------------------------ search, like Spotlight (the magnifier, ⌘K, or "/")
   const spot = $("[data-spot]"), spotIn = $<HTMLInputElement>("[data-spot-in]"), spotRes = $<HTMLUListElement>("[data-spot-res]");
-  type Hit = { g: keyof typeof L.g; n: string; sub?: string; go: () => void };
+  type Hit = { g: keyof typeof L.g; n: string; sub?: string; id?: string; go: () => void };
   let pool: Hit[] = [], active = 0, hits: Hit[] = [];
   async function buildPool() {
     await load();
-    const pl: Hit[] = features.map((f) => { const p = f.properties as Props; return { g: "munis", n: p.n, sub: L.regions[p.r], go: () => select(p.s) }; });
-    for (const [n, x, y, m] of LOCALITIES) pl.push({ g: "munis", n, sub: byS.get(m)?.n, go: () => { select(m, false); flyTo(x, y, 10.2); } });
-    try { const pt = await fetch("/data/map/parishes.topo.json").then((r) => r.json()); for (const f of (feature(pt, pt.objects.p) as any).features) pl.push({ g: "pars", n: f.properties.n, sub: byS.get(f.properties.m)?.n, go: async () => { await loadParishes(); const m = byS.get(f.properties.m)!; flyTo(m.x, m.y, 9.4); setTimeout(() => selectParish(f.properties.id), 900); } }); } catch { /* parishes optional */ }
-    for (const c of (await loadGolf()).courses) pl.push({ g: "golf", n: c.n, sub: byS.get(c.m)?.n, go: async () => { await setOverlay("golf", true); showGolf(c); } });
+    const pl: Hit[] = features.map((f) => { const p = f.properties as Props; return { g: "munis", n: p.n, sub: L.regions[p.r], id: p.s, go: () => select(p.s) }; });
+    for (const [n, x, y, m] of LOCALITIES) pl.push({ g: "munis", n, sub: byS.get(m)?.n, id: m, go: () => { select(m, false); flyTo(x, y, 10.2); } });
+    try { const pt = await fetch("/data/map/parishes.topo.json").then((r) => r.json()); for (const f of (feature(pt, pt.objects.p) as any).features) pl.push({ g: "pars", n: f.properties.n, sub: byS.get(f.properties.m)?.n, id: `p-${f.properties.id}`, go: async () => { await loadParishes(); const m = byS.get(f.properties.m)!; flyTo(m.x, m.y, 9.4); setTimeout(() => selectParish(f.properties.id), 900); } }); } catch { /* parishes optional */ }
+    for (const c of (await loadGolf()).courses) pl.push({ g: "golf", n: c.n, sub: byS.get(c.m)?.n, id: c.m, go: async () => { await setOverlay("golf", true); showGolf(c); } });
     beaches ??= await fetch("/data/map/beaches.json").then((r) => r.json()).catch(() => []);
     for (const [x, y, n] of beaches!) pl.push({ g: "beach", n, go: async () => { await setOverlay("beach", true); flyTo(x, y, 11.6); toast(n); } });
-    for (const p of projects) pl.push({ g: "devs", n: p.name, sub: p.developer, go: () => { flyTo(p.lon, p.lat, 14); setOverlay("devs", true); showProject(p); } });
+    for (const p of projects) pl.push({ g: "devs", n: p.name, sub: p.developer, id: p.id, go: () => { flyTo(p.lon, p.lat, 14); setOverlay("devs", true); showProject(p); } });
     pool = pl;
   }
   function find() {
@@ -675,7 +932,8 @@ export function initMapV3(root: HTMLElement) {
   const mark = () => spotRes.querySelectorAll("[role=option]").forEach((li) => li.setAttribute("aria-selected", String(Number((li as HTMLElement).dataset.i) === active)));
   function openSpot() { spot.hidden = false; requestAnimationFrame(() => spot.classList.add("is-open")); spotIn.value = ""; spotRes.innerHTML = ""; spotIn.focus(); if (!pool.length) buildPool().then(find); halt(); }
   function closeSpot() { spot.classList.remove("is-open"); setTimeout(() => (spot.hidden = true), 200); }
-  const choose = (i: number) => { const h = hits[i]; if (!h) return; closeSpot(); h.go(); };
+  // D83 part 2: the place the search resolved to (a slug or a parish code, never the typed text).
+  const choose = (i: number) => { const h = hits[i]; if (!h) return; ev({ event: `map/search/${h.g}`, place: h.id, origin: mode }); closeSpot(); h.go(); };
   root.querySelector("[data-spot-open]")!.addEventListener("click", openSpot);
   spotIn.addEventListener("input", find);
   spotIn.addEventListener("keydown", (e) => {
@@ -688,18 +946,58 @@ export function initMapV3(root: HTMLElement) {
   spot.addEventListener("click", (e) => { if (e.target === spot) closeSpot(); });
   if (mode === "page") addEventListener("keydown", (e) => {
     if ((e.key === "k" && (e.metaKey || e.ctrlKey)) || (e.key === "/" && !(e.target as HTMLElement).closest("input,textarea"))) { e.preventDefault(); openSpot(); }
+    if (e.key === "Escape" && !unlock.hidden) { closeUnlock(); return; }
+    if (e.key === "Escape" && panelOpen && spot.hidden) { closePanel(); return; }
     if (e.key === "Escape" && !sheet.hidden && spot.hidden) select(null);
   });
+
+  // ------------------------------------------------------------ "Camadas": the panel with everything the first view leaves out
+  function reachPaint(): any { return ["case", ["boolean", ["feature-state", "reach"], false], panelOpen ? 0.9 : 0, 0]; }
+  const panel = $("[data-panel]"), panelBtn = root.querySelector<HTMLButtonElement>("[data-panel-open]");
+  function openPanel() {
+    if (mode !== "page") return;
+    panelOpen = true; panel.hidden = false; requestAnimationFrame(() => panel.classList.add("is-open")); root.classList.add("is-panel");
+    panelBtn?.setAttribute("aria-expanded", "true"); ev({ event: "map/panel/open", origin: mode });
+    if (!isWide() && !sheet.hidden) select(null);
+    load().then(() => { if (map?.getLayer("reach")) map.setPaintProperty("reach", "line-opacity", reachPaint()); sentence(); });
+    panel.querySelector<HTMLElement>("[data-panel-close]")?.focus({ preventScroll: true });
+  }
+  function closePanel() {
+    panelOpen = false; panel.classList.remove("is-open"); root.classList.remove("is-panel"); panelBtn?.setAttribute("aria-expanded", "false");
+    setTimeout(() => { if (!panelOpen) panel.hidden = true; }, 260);
+    if (map?.getLayer("reach")) map.setPaintProperty("reach", "line-opacity", reachPaint());
+    panelBtn?.focus({ preventScroll: true });
+  }
+  panelBtn?.addEventListener("click", () => (panelOpen ? closePanel() : openPanel()));
+  root.querySelector("[data-panel-close]")?.addEventListener("click", closePanel);
+  // The region postcards.
+  root.querySelectorAll<HTMLButtonElement>("[data-region]").forEach((b) => b.addEventListener("click", () => { stopTour(); halt(); showRegion(b.dataset.region!); }));
+  // "Comparar": once two or more places carry a heart, a quiet link to the comparison page.
+  const cmpPill = root.querySelector<HTMLAnchorElement>("[data-cmp-pill]");
+  function syncPill() {
+    if (!cmpPill) return; const n = savedItems().filter((x) => x.kind === "region").length;
+    cmpPill.hidden = n < 2; cmpPill.textContent = L.t.pill.replace("{n}", String(Math.min(n, 3)));
+  }
+  addEventListener("ip:saved", syncPill); addEventListener("storage", (e) => { if (e.key === "ip.saved") syncPill(); }); syncPill();
+  // A heart tapped on the map (cards, region postcards): the one-schema event, with the map as its origin (hearts.ts counts
+  // the older /e/ save path for every heart on the site).
+  let heartT = 0;
+  root.addEventListener("pointerdown", (e) => { if ((e.target as HTMLElement).closest?.("[data-save]")) heartT = performance.now(); }, true);
+  root.addEventListener("keydown", (e) => { if ((e.key === "Enter" || e.key === " ") && (e.target as HTMLElement).closest?.("[data-save]")) heartT = performance.now(); }, true);
+  addEventListener("ip:saved", (e) => { const d = (e as CustomEvent).detail; if (d && performance.now() - heartT < 1500) { heartT = 0; evHeart(d.kind, d.id, d.on, "map"); } });
 
   // ------------------------------------------------------------ start
   // Nothing moves while the tab is hidden; leaving the page frees the map (and a page restored from the back-forward
   // cache builds it again).
-  document.addEventListener("visibilitychange", () => { if (document.hidden) { stopTour(); stopPlay(); if (rotating) halt(); map?.stop(); } });
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) { timeEnd(); stopTour(); stopPlay(); if (rotating) halt(); map?.stop(); }
+    else if (selected && !sheet.hidden && sheet.classList.contains("is-open")) timeStart(selected);  // back on the open card: the clock runs again
+  });
   let wasLive = false;
-  addEventListener("pagehide", () => { wasLive = !!map; teardown(); });
+  addEventListener("pagehide", () => { timeEnd(); wasLive = !!map; teardown(); });
   addEventListener("pageshow", (e) => { if ((e as PageTransitionEvent).persisted && wasLive) load(); });
   dimButtons();
-  if (layer !== "price") setLayer(layer);
+  if (layer !== "none") setLayer(layer);
   for (const k of ["golf", "beach", "devs"] as const) if (overlays[k]) root.querySelector(`[data-overlay="${k}"]`)?.setAttribute("aria-pressed", "true");
   setBudget(budget);
   if (mode === "home") {
@@ -712,8 +1010,8 @@ export function initMapV3(root: HTMLElement) {
     // then the poster is its exact first frame. A shared link with a state opens straight away.
     ["pointermove", "pointerdown", "touchstart", "focusin", "wheel", "keydown"].forEach((ev) => root.addEventListener(ev, () => load(), { once: true, passive: true }));
     addEventListener("scroll", () => load(), { once: true, passive: true });
-    if (q.has("place") || q.has("parish") || q.has("q") || q.has("layer")) ("requestIdleCallback" in window ? (window as any).requestIdleCallback : setTimeout)(() => load(), { timeout: 2500 });
+    if (q.has("place") || q.has("parish") || q.has("region") || q.has("q") || q.has("layer")) ("requestIdleCallback" in window ? (window as any).requestIdleCallback : setTimeout)(() => load(), { timeout: 2500 });
   }
   // For the automated click check (scripts/map-data/clicktest.mjs).
-  (root as any).__mapx = { load, pick: (x: number, y: number) => pick({ x, y }), project: (s: string) => { const p = byS.get(s); return p && map ? map.project([p.x, p.y]) : null; }, map: () => map, selected: () => selected, slugs: () => features.map((f) => f.properties.s), tour, setDim, setBudget, setQuarter, quality: () => quality };
+  (root as any).__mapx = { load, showRegion, openPanel, openTile: (id: string) => openTile(id), view: () => view, pick: (x: number, y: number) => pick({ x, y }), project: (s: string) => { const p = byS.get(s); return p && map ? map.project([p.x, p.y]) : null; }, map: () => map, selected: () => selected, slugs: () => features.map((f) => f.properties.s), tour, setDim, setBudget, setQuarter, quality: () => quality };
 }

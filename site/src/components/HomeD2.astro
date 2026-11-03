@@ -8,6 +8,10 @@ import { Sources, EDITION_CUR, RATE, fmtDate, homeExample } from "../lib/content
 import { c } from "../lib/copy";
 import { config } from "../config";
 import { PRICES, LAST } from "../lib/prices";
+import { PROJECTS, showcases, img } from "../lib/projects";
+import { SLUGS } from "../i18n";
+import Heart from "./Heart.astro";
+import { latestIssue } from "../lib/mare";
 
 interface Props { lang: Lang; ed: EdCode; }
 const { lang, ed } = Astro.props;
@@ -30,6 +34,12 @@ const qa = [
   { q: c("home.qa.tax.q", lang), a: c("home.qa.tax.a", lang), s: [] as number[] },
 ];
 // a place card. Every photograph carries the one grade (scripts/design/resort_grade.py); sources in content/media/SOURCES.md.
+// Part 2 (3 Nov): the homes for sale now, two taps from the opening page (edition, then the development).
+const homes = showcases(PROJECTS).map((ps) => {
+  const p = ps[0], place = (PRICES.munis[p.muni] as any)?.n ?? p.muni;
+  const now = p.blocks ? p.blocks.reduce((a, b) => a + b.units.reduce((x, u) => x + u.forSale, 0), 0) : null;
+  return { p, place, now, href: `/${lang}/${ed}/${SLUGS[lang].partners}/${p.devSlug}/${p.muni}/` };
+});
 const nl = config.forms.newsletter[lang];
 const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("home.subscribe.subject", lang)} (${ed} · ${lang})`)}`;
 ---
@@ -58,6 +68,8 @@ const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("h
     </label>
     <button class="h2-go" type="submit">{c("home2.bar.go", lang)}</button>
   </form>
+  {/* Fix step 5 (3 Nov): one quiet line under "Começar": what Maré is, to its page (ev "mare/open/hero" on arrival). */}
+  <p class="h2-mareline"><a href={`${pathFor(lang, ed, "mare")}?de=hero`}>{c("mare.line", lang)}</a></p>
 </section>
 
 <section class="h2-mapsec" aria-labelledby="h2-map">
@@ -68,6 +80,29 @@ const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("h
   {/* Full-bleed, no frame (prompt 32); map v3 (prompt 36): the slow rotation stops after 15 s or at the first touch. */}
   <div class="h2-m3"><MapV3 lang={lang} ed={ed} mode="home" /></div>
 </section>
+
+{homes.length > 0 && (
+<section class="h2-sec h2-homes" aria-labelledby="h2-homes">
+  <div class="h2-text h2-center" data-reveal>
+    <h2 id="h2-homes">{c("bar.homes.h", lang)}</h2>
+    <p>{c("bar.homes.p", lang)}</p>
+  </div>
+  <ul class="h2-hlist">
+    {homes.map((h) => (
+      <li class="h2-hcard">
+        <Heart lang={lang} kind="home" id={h.p.id} label={`${h.p.name}, ${h.place}`} href={h.href} />
+        <a href={h.href} data-home-card={h.p.id}>
+          <span class="h2-hph">{h.p.render && <img src={img(h.p.render, 800)} srcset={`${img(h.p.render, 800)} 800w, ${img(h.p.render)} 1600w`} sizes="(max-width: 760px) 100vw, 560px" alt="" width="800" height="500" loading="lazy" decoding="async" />}</span>
+          <span class="h2-hk">{h.place} · <span class="h2-tag">{c("common.sponsored", lang)}</span></span>
+          <span class="h2-hn">{h.p.name}</span>
+          {h.now != null && <span class="h2-hm">{c("showb.now", lang, { n: h.now })}</span>}
+          <span class="h2-hgo">{c("bar.homes.view", lang)} →</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</section>
+)}
 
 <section class="h2-sec h2-band h2-paths" aria-labelledby="h2-paths">
   <div class="h2-narrow h2-center" data-reveal>
@@ -90,16 +125,18 @@ const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("h
 <section class="h2-sec h2-dark h2-nl" id="subscrever" aria-labelledby="h2-nl">
   <div class="h2-narrow" data-reveal>
     <h2 id="h2-nl">{c("home2.nl.h", lang)}</h2>
+    <p class="h2-nlwhat">{c("mare.line", lang)}</p>
     <p>{c("home2.nl.p", lang)}</p>
     {nl ? (
       <div class="form-box"><iframe src={nl} title={c("home2.nl.h", lang)} loading="lazy" style="min-height:200px"></iframe></div>
     ) : (
-      <form class="h2-nlform" action={mail} method="post" enctype="text/plain">
+      <form class="h2-nlform" action={mail} method="post" enctype="text/plain" data-issue={latestIssue()?.id ?? ""}>
         <label class="h2-email"><span class="vh">{c("home2.nl.email", lang)}</span><input type="email" name="email" required placeholder={c("home2.nl.email", lang)} autocomplete="email" /></label>
         <button class="h2-btn h2-btn-light" type="submit">{c("home2.nl.a", lang)}</button>
         <label class="h2-consent"><input type="checkbox" required /> <span>{c("home2.nl.consent", lang)} <a href={pathFor(lang, ed, "privacy")}>{c("common.privacy", lang)}</a></span></label>
       </form>
     )}
+    {latestIssue() && <p class="h2-nlmore" style="margin-top:24px;font-size:15px"><a href={pathFor(lang, ed, "mare")}>{c("mare.home.more", lang)}</a></p>}
   </div>
 </section>
 
@@ -112,6 +149,7 @@ const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("h
 </section>
 
 <script>
+  import { evSignup } from "../lib/track";
   // The home bar (prompt 42): "Começar" opens the Concierge sheet on this page, with the country, buy or sell and the
   // budget (in euros) already answered; without the sheet (or without JavaScript) it is a link to the Concierge page.
   const f = document.querySelector<HTMLFormElement>("[data-bar]");
@@ -129,6 +167,8 @@ const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("h
       if (eur) out.value = String(eur); else out.disabled = true;
     });
   }
+  // Part 5: a letter signup is counted with the first-touch utm_* of this tab, never the e-mail (lib/track.ts evSignup).
+  document.querySelector<HTMLFormElement>(".h2-nlform")?.addEventListener("submit", (e) => evSignup("home", (e.currentTarget as HTMLFormElement).dataset.issue || ""));
   // The sources open when a footnote number is followed (they are folded at the foot, prompt 43).
   const openSrc = () => { if (location.hash.startsWith("#fonte")) document.querySelector<HTMLDetailsElement>("[data-sources]")?.setAttribute("open", ""); };
   addEventListener("hashchange", openSrc); openSrc();

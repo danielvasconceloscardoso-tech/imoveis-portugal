@@ -6,7 +6,7 @@
   cta: tax
   q: "Tenho de declarar no Luxemburgo as rendas da casa em Portugal?"
   a: >-
-    As rendas pagam imposto em Portugal, a 25% para não residentes, e o Luxemburgo não as volta a
-    tributar, segundo a convenção entre os dois países. O Luxemburgo isenta esse rendimento, mas pode
-    tê-lo em conta para calcular a taxa sobre o resto. O que declara lá depende do seu caso.
+    As rendas pagam imposto em Portugal, a 25% para não residentes, e pela convenção entre os dois
+    países o Luxemburgo isenta esse rendimento. Pode, ainda assim, tê-lo em conta para calcular a taxa
+    sobre o resto dos seus rendimentos. O que declara no Luxemburgo depende do seu caso.
   facts: [lu-pt-treaty-property, pt-rent-tax-nonresident]

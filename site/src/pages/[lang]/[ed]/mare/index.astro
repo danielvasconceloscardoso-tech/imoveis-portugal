@@ -1,0 +1,11 @@
+---
+// Maré, the newsletter's page (D83): /{lang}/{ed}/mare/ (the slug is "mare" in every language, i18n.ts SLUGS).
+import MarePage from "../../../../components/MarePage.astro";
+import { ED_ORDER, LANGS, type EdCode, type Lang } from "../../../../i18n";
+
+export function getStaticPaths() {
+  return LANGS.flatMap((lang) => ED_ORDER.map((ed) => ({ params: { lang, ed } })));
+}
+const lang = Astro.params.lang as Lang, ed = Astro.params.ed as EdCode;
+---
+<MarePage lang={lang} ed={ed} />

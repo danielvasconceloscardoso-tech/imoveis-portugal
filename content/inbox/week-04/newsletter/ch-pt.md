@@ -25,11 +25,11 @@ Subject: 1 m² em Genebra, mais de 2 m² em Lisboa
 
 {{first name | Olá}},
 
-a Imóveis Portugal abriu na terça-feira, 1 de dezembro, e esta é a primeira edição. Todas as quintas-feiras, em cinco minutos, um tema sobre comprar casa em Portugal a partir da Suíça, com a fonte de cada número. Uma pessoa lê cada resposta.
+a Imóveis Portugal abriu na terça-feira, 1 de dezembro, e esta é a primeira carta. Chega às quintas-feiras, com a fonte de cada número. Se responder, uma pessoa lê.
 
 ## A casa da semana
 
-A primeira casa da nossa agência parceira aparece aqui com a autorização dela por escrito. Até lá, uma casa de 300 000 €, sem crédito e sem residência fiscal em Portugal, à taxa de referência do BCE de 23 de outubro de 2026 (1 € = 0,9227 CHF):
+A primeira casa da agência parceira entra aqui com a autorização dela por escrito. Até lá, a conta de uma casa de 300 000 €, sem crédito e sem residência fiscal em Portugal, à taxa de referência do BCE de 23 de outubro de 2026 (1 € = 0,9227 CHF):
 
 - Preço: 300 000 €, cerca de 276 800 CHF
 - IMT, taxa única de 7,5% para não residentes: 22 500 €
@@ -37,7 +37,7 @@ A primeira casa da nossa agência parceira aparece aqui com a autorização dela
 - Escritura e registo no balcão Casa Pronta: 375 €
 - Custo total com impostos, escritura e registo: 325 275 €, cerca de 300 100 CHF
 
-Há exceções aos 7,5%: se passar a residente fiscal em Portugal nos dois anos seguintes, a diferença é devolvida a pedido. Se já viveu em Portugal, a exceção para quem "tenha sido considerado residente para efeitos fiscais" é uma pergunta para um advogado parceiro.
+Os 7,5% têm exceções. Se passar a residente fiscal em Portugal nos dois anos seguintes, a diferença é devolvida a pedido. Se já viveu em Portugal, a exceção para quem "tenha sido considerado residente para efeitos fiscais" é pergunta para um advogado parceiro.
 
 Do lado suíço, o 2.º pilar pode ser levantado antecipadamente para a sua residência principal, também no estrangeiro (mínimo 20 000 CHF), não para uma casa de férias. Reduz a reforma futura e é reembolsado na venda. Um consultor fiscal parceiro faz as contas: https://imoveisportugal.pt/pt/ch/falar-com-um-parceiro/?cat=tax&utm_source=newsletter&utm_medium=email&utm_campaign=w04-launch-ch#form
 
@@ -56,7 +56,7 @@ As contas com o seu preço: https://imoveisportugal.pt/pt/ch/simuladores/custo-t
 
 Em 2016, a 1 088 €/m², os mesmos 300 000 € davam 276 m² no Porto: o preço subiu 234% em dez anos.
 
-Uma mediana não é uma casa: é o meio de tudo o que se vendeu num ano, novo e usado. Mostra onde o dinheiro rende mais metros, não o preço de um apartamento nem o das zonas mais procuradas, como a costa de Comporta.
+A mediana é o valor do meio de tudo o que se vendeu num ano, novo e usado; um apartamento concreto, ou a costa de Comporta, tem o seu preço.
 
 Dez anos por concelho: https://imoveisportugal.pt/pt/ch/precos-das-casas/?utm_source=newsletter&utm_medium=email&utm_campaign=w04-launch-ch
 
@@ -70,7 +70,7 @@ O lugar é a primeira etapa do percurso de compra: https://imoveisportugal.pt/pt
 
 ## A pergunta mais pesquisada
 
-Ainda sem perguntas de leitores, eis a mais pesquisada da nossa página de perguntas: posso comprar casa em Portugal se viver no estrangeiro? Sim, e a lei do IMT tem até uma taxa própria para não residentes. Precisa de um NIF, que pode pedir a partir da Suíça através de um representante. Fora da UE e do Espaço Económico Europeu, como na Suíça, depois da compra tem 15 dias para nomear um representante fiscal ou aderir às notificações eletrónicas das Finanças. A escritura faz-se por procuração, assinada num consulado português ou num notário suíço com a Apostila de Haia.
+Enquanto não chegam perguntas de leitores, respondemos à mais pesquisada na nossa página de perguntas: posso comprar casa em Portugal se viver no estrangeiro? Sim, e a lei do IMT tem até uma taxa própria para não residentes. Precisa de um NIF, que pode pedir a partir da Suíça através de um representante. Como a Suíça fica fora da UE e do Espaço Económico Europeu, depois da compra tem 15 dias para nomear um representante fiscal ou aderir às notificações eletrónicas das Finanças. A escritura pode fazer-se por procuração, assinada num consulado português ou num notário suíço com a Apostila de Haia.
 
 Um advogado parceiro pode tratar de tudo isto: https://imoveisportugal.pt/pt/ch/falar-com-um-parceiro/?cat=lawyer&utm_source=newsletter&utm_medium=email&utm_campaign=w04-launch-ch#form
 
@@ -90,7 +90,7 @@ A Habinedita Gondomar (AMI 13250) é a agência licenciada que recebe os pedidos
 
 ## Fecho
 
-Responda a este email com a sua pergunta. Respondemos a todas, e as melhores dão a edição da próxima quinta-feira.
+Responda a este email com a sua pergunta. Todas têm resposta, e as melhores dão o tema da próxima quinta-feira.
 
 Até quinta-feira,
 Imóveis Portugal

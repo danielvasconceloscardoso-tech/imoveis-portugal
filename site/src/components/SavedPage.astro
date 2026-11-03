@@ -1,0 +1,75 @@
+---
+// "A sua seleção" (Part 2 of 3 Nov): the homes and regions the reader saved with a heart, read from their own device
+// (lib/saved.ts, localStorage "ip.saved"); nothing is sent or kept anywhere else, so the page is built empty and filled
+// in the browser. An empty selection points to the map. noindex: it is personal. Wording: COPY_DECK.md "bar.*".
+import V2 from "../layouts/V2.astro";
+import { LANGS, pathFor, type Lang, type EdCode } from "../i18n";
+import { c, edName } from "../lib/copy";
+
+interface Props { lang: Lang; ed: EdCode; }
+const { lang, ed } = Astro.props;
+const k = (x: string) => c(`bar.${x}`, lang);
+const L = { homes: k("page.homes"), regions: k("page.regions"), remove: k("page.remove"), add: k("heart.add"), noRegion: k("next.read.p") };
+const consult = pathFor(lang, ed, "consult");
+---
+<V2 lang={lang} ed={ed} page="saved" noindex title={`${k("page.title")} | Imóveis Portugal · ${edName(ed, lang)}`} description={k("page.lede")}
+  next={{ kind: "concierge", p: k("next.saved.p"), href: consult }}>
+  <div class="sv">
+    <p class="sv-back"><a class="goback" href={pathFor(lang, ed, "home")} data-goback data-next-k="back"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>{k("back")}</a></p>
+    <h1>{k("page.title")}</h1>
+    <p class="sv-lede">{k("page.lede")}</p>
+    <div class="sv-list" data-sv data-l={JSON.stringify(L)} aria-live="polite"></div>
+    <div class="sv-empty" data-sv-empty hidden>
+      <h2>{k("page.empty.h")}</h2>
+      <p>{k("page.empty.p")}</p>
+      <a class="nx-btn" href={pathFor(lang, ed, "map")} data-next-k="map">{k("page.empty.a")}</a>
+    </div>
+    <noscript><p class="sv-lede">{k("page.empty.p")}</p><p><a class="nx-btn" href={pathFor(lang, ed, "map")}>{k("page.empty.a")}</a></p></noscript>
+  </div>
+</V2>
+
+<script>
+  import { get, type Item } from "../lib/saved";
+  import { heartHTML } from "../scripts/hearts";
+  import { track, edOf } from "../lib/track";
+  const box = document.querySelector<HTMLElement>("[data-sv]"), empty = document.querySelector<HTMLElement>("[data-sv-empty]");
+  if (box && empty) {
+    const L = JSON.parse(box.dataset.l || "{}");
+    const esc = (t: string) => t.replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[ch]!);
+    const safe = (h: string) => (/^\/[^/]/.test(h) ? h : "#");  // only this site's own pages
+    const group = (title: string, items: Item[]) => items.length ? `<section class="sv-g"><h2>${esc(title)} <span>${items.length}</span></h2><ul>${items.map((x) =>
+      `<li class="sv-i"><a href="${esc(safe(x.href))}" data-sv-go>${esc(x.label)}</a>${heartHTML(x.kind, x.id, x.label, x.href)}</li>`).join("")}</ul></section>` : "";
+    const draw = () => {
+      const all = get(), homes = all.filter((x) => x.kind === "home"), regions = all.filter((x) => x.kind === "region");
+      box.innerHTML = group(L.homes, homes) + group(L.regions, regions);
+      empty.hidden = all.length > 0;
+      // "Começar" carries the first saved region to the Concierge (its place question is then already answered).
+      const go = document.querySelector<HTMLAnchorElement>("[data-next-a]");
+      if (go) { const u = new URL(go.href); regions[0] ? u.searchParams.set("place", regions[0].label) : u.searchParams.delete("place"); go.href = u.pathname + u.search; }
+      // Without a saved region the closing line speaks of the Concierge in general.
+      const line = document.querySelector<HTMLElement>(".nx-p"); if (line && !regions.length) line.textContent = L.noRegion;
+    };
+    // A removed item stays on screen (its heart empty) until the page is opened again, so a mistaken tap can be undone.
+    let drawn = false;
+    addEventListener("ip:saved", () => { if (!drawn) draw(); });
+    addEventListener("storage", (e) => { if (e.key === "ip.saved") draw(); });
+    draw(); drawn = get().length > 0;
+    box.addEventListener("click", (e) => { if ((e.target as HTMLElement).closest("[data-sv-go]")) track(`${edOf()}/saved/go`); });
+  }
+</script>
+
+<style>
+  .sv { max-width: 44rem; margin: 0 auto; padding: 32px var(--gut, 24px) 24px; }
+  .sv h1 { font: 400 clamp(40px, 1.6rem + 4vw, 64px)/1.05 var(--serif); letter-spacing: -.015em; margin: 8px 0 16px; }
+  .sv-lede { color: var(--muted); max-width: 34rem; margin: 0 0 40px; }
+  .sv :global(.sv-g) { margin: 0 0 40px; }
+  .sv :global(.sv-g h2) { font: 600 12px/1 var(--sans); letter-spacing: .16em; text-transform: uppercase; color: var(--muted); margin: 0 0 8px; }
+  .sv :global(.sv-g h2 span) { margin-left: 4px; color: var(--ink); }
+  .sv :global(.sv-g ul) { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
+  .sv :global(.sv-i) { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--rule); }
+  .sv :global(.sv-i a) { font: 400 clamp(21px, 1rem + 1vw, 24px)/1.25 var(--serif); color: var(--ink); text-decoration: none; min-width: 0; overflow-wrap: anywhere; }
+  .sv :global(.sv-i a:hover) { color: var(--accent); }
+  .sv-empty { padding: 32px 0 16px; border-top: 1px solid var(--rule); }
+  .sv-empty h2 { font: 400 28px/1.2 var(--serif); margin: 0 0 8px; }
+  .sv-empty p { color: var(--muted); margin: 0 0 24px; max-width: 30rem; }
+</style>

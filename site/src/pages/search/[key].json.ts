@@ -18,6 +18,7 @@ export const GET: APIRoute = ({ props }) => {
   const items: [string, string, string, string?][] = [];  // [group, name, url, sub]
   for (const k of ["journey", "map", "sims", "articles", "faq", "partners", "consult", "data", "blog", "how"] as const)
     items.push(["page", c(`common.nav.${k === "journey" ? "journey" : k}`, lang), pathFor(lang, ed, k)]);
+  items.push(["page", c("common.newsletter", lang), pathFor(lang, ed, "mare")]);  // Maré, the newsletter (D83)
   for (const m of MAP_MUNIS) items.push(["place", m.n, `${map}?place=${m.s}`, c(`map.r.${m.r}`, lang)]);
   for (const t of TOOLS.filter((x) => ENABLED.includes(x))) items.push(["sim", c(`sims.${t}.name`, lang), `${sims}${SUB[t][lang]}/`]);
   const seen = new Set<string>();

@@ -1,27 +1,58 @@
 ---
 // The Artigos hub (prompt 37 §2), built like the Simuladores hub: one card per article, a short line, one action.
-// Our four reference articles first, then the blog posts of this language.
+// D83 (3 Nov 2026; EN and FR in fix step 4): in every language the ten lifestyle articles lead (lib/stories.ts,
+// photograph and headline), then a quiet "Practical guides" group with the blog guides (buying from abroad, IMT) and
+// the four reference articles. A language without lifestyle articles keeps the old list. Nothing removed.
 import V2 from "../layouts/V2.astro";
+import "../styles/story.css";
 import { pathFor, type Lang, type EdCode } from "../i18n";
 import { ARTS, ART_SUB } from "../lib/articles";
 import { postsFor } from "../lib/blog";
+import { storiesFor, photoSet } from "../lib/stories";
 import { DISCLAIMER } from "../lib/content";
 import { c, edName } from "../lib/copy";
 
 interface Props { lang: Lang; ed: EdCode; }
 const { lang, ed } = Astro.props;
 const base = pathFor(lang, ed, "articles"), blog = pathFor(lang, ed, "blog");
-const cards = [
-  ...ARTS.map((a) => ({ h: c(`art.${a}.h`, lang), p: c(`art.${a}.p`, lang), href: `${base}${ART_SUB[a][lang]}/` })),
-  ...postsFor(lang).map((p) => ({ h: p.title, p: p.description, href: `${blog}${p.slug}/` })),
-];
+const refs = ARTS.map((a) => ({ h: c(`art.${a}.h`, lang), p: c(`art.${a}.p`, lang), href: `${base}${ART_SUB[a][lang]}/` }));
+const posts = postsFor(lang).map((p) => ({ h: p.title, p: p.description, href: `${blog}${p.slug}/` }));
+const stories = storiesFor(lang).map((s) => ({ ...s, ph: photoSet(s.photo.src), href: `${base}${s.slug}/` }));
+// With the lifestyle articles, the practical guides (NIF, taxes, mortgage) come first in their group; otherwise the old order.
+const cards = stories.length ? [...posts, ...refs] : [...refs, ...posts];
 ---
 <V2 lang={lang} ed={ed} page="articles" title={`${c("art.title", lang)} | Imóveis Portugal · ${edName(ed, lang)}`} description={c("art.lede", lang)} sticky={null}>
-  <div class="frame read ph">
+  <div class={stories.length ? "frame ph st-hub-ph" : "frame read ph"}>
     <h1>{c("art.title", lang)}</h1>
-    <p class="lede">{c("art.lede", lang)}</p>
+    <p class="lede">{c(stories.length ? "lifea.hub.lede" : "art.lede", lang)}</p>
   </div>
-  <div class="frame read tool-list art-list">
+  {stories.length > 0 && (
+    <section class="frame st-hub-w" aria-labelledby="st-hub-h">
+      <h2 id="st-hub-h" class="st-hub-h">{c("lifea.hub.h", lang)}</h2>
+      <ul class="st-hub">
+        {stories.map((s, i) => (
+          <li>
+            <a class="st-card" href={s.href} data-story-card={s.id}>
+              <picture>
+                {s.ph.avif && <source type="image/avif" srcset={s.ph.avif} sizes="(min-width: 1100px) 340px, (min-width: 720px) 50vw, 100vw" />}
+                <source type="image/webp" srcset={s.ph.webp} sizes="(min-width: 1100px) 340px, (min-width: 720px) 50vw, 100vw" />
+                <img src={s.ph.fallback} alt={s.photo.alt} width="1024" height="683" loading={i < 2 ? "eager" : "lazy"} decoding="async" />
+              </picture>
+              <h2>{s.title}</h2>
+              <p>{s.description}</p>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+  <div class={`frame tool-list art-list${stories.length ? " st-guides st-hub-w" : " read"}`}>
+    {stories.length > 0 && (
+      <>
+        <h2 class="st-hub-h" id="guias">{c("lifea.guides.h", lang)}</h2>
+        <p class="lede">{c("lifea.guides.p", lang)}</p>
+      </>
+    )}
     {cards.map((x) => (
       <div class="qa-item">
         <h2 class="h3"><a href={x.href}>{x.h}</a></h2>

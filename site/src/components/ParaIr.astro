@@ -1,0 +1,30 @@
+---
+// "Para ir" (D83): where, when and the flight from the reader's edition, at the end of every lifestyle article.
+// A presenting partner can be added later in one place, site/src/config.ts (paraIr): the heading then reads
+// "Para ir, com {partner}" and the sponsored label shows (EDITORIAL_POLICY.md). Empty, nothing extra renders.
+// The flight is a published schedule (lib/stories.ts ROUTES, facts.csv "flight-*"), numbered with the article's sources.
+import { config } from "../config";
+import type { Lang, EdCode } from "../i18n";
+import { routeFor, flightTime, type Airport } from "../lib/stories";
+import type { Sources } from "../lib/content";
+import { c } from "../lib/copy";
+
+/** where and when arrive as HTML (their fact markers already numbered by the article). */
+interface Props { lang: Lang; ed: EdCode; where: string; when: string; airport: Airport; sources: Sources; }
+const { lang, ed, where, when, airport, sources } = Astro.props;
+const partner = (config.paraIr?.partner ?? "").trim(), url = (config.paraIr?.url ?? "").trim();
+const { route, direct } = routeFor(ed, airport);
+const n = sources.n(route.fact);
+const vars = { city: c(`lifea.city.${route.city}`, lang), to: c(`lifea.to.${route.to.toLowerCase()}`, lang), time: flightTime(route.fact), flight: route.flight };
+const fly = c(direct ? "lifea.go.flight" : "lifea.go.via", lang, vars);
+---
+<section class="st-go" aria-labelledby="st-go-h" data-partner={partner || undefined}>
+  <h2 id="st-go-h" class="st-go-h">{partner ? c("lifea.go.with", lang, { partner }) : c("lifea.go.h", lang)}</h2>
+  {partner && <p class="st-spons">{c("lifea.sponsored", lang, { partner })}{url && <> <a href={url} rel="sponsored noopener">{url.replace(/^https?:\/\/(www\.)?|\/$/g, "")}</a></>}</p>}
+  <dl class="st-go-l">
+    <div><dt>{c("lifea.go.where", lang)}</dt><dd set:html={where} /></div>
+    <div><dt>{c("lifea.go.when", lang)}</dt><dd set:html={when} /></div>
+    <div><dt>{c("lifea.go.fly", lang)}</dt><dd>{fly}<a class="sup" href={`#fonte-${n}`}>{n}</a> <span class="st-go-n">{c("lifea.go.sched", lang)}</span></dd></div>
+  </dl>
+  <slot />
+</section>

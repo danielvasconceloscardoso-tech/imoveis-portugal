@@ -7,10 +7,11 @@ import { PLACES } from "../lib/places";
 import { SUB, ENABLED } from "../lib/tools";
 import { PTYPES } from "../lib/packages";
 import { ARTS, ART_SUB } from "../lib/articles";
+import { storiesFor } from "../lib/stories";
 
 export function getStaticPaths() { return ED_ORDER.map((ed) => ({ params: { ed } })); }
 
-const PAGES: PageKey[] = ["partners", "buy", "how", "privacy", "legal", "faq", "talk", "guide", "sims", "casa", "data", "map", "blog", "private", "ours", "journey", "consult", "dossiers", "articles"];
+const PAGES: PageKey[] = ["partners", "buy", "how", "privacy", "legal", "faq", "talk", "guide", "sims", "casa", "data", "map", "blog", "private", "ours", "journey", "consult", "dossiers", "articles", "mare"];
 
 export function GET({ params }: { params: { ed: EdCode } }) {
   const ed = params.ed, host = `https://${hostFor(ed)}`;
@@ -22,6 +23,8 @@ export function GET({ params }: { params: { ed: EdCode } }) {
     for (const p of PLACES) urls.push(`${host}${pathFor(lang, ed, "map")}${p.slug}/`);
     for (const a of ARTS) urls.push(`${host}${pathFor(lang, ed, "articles")}${ART_SUB[a][lang]}/`);
     for (const t of PTYPES) urls.push(`${host}${pathFor(lang, ed, "partners")}${t.slug[lang]}/`);
+    // D83 lifestyle articles (Portuguese): like the blog, only on their canonical edition.
+    if (CANONICAL_ED[lang] === ed) for (const s of storiesFor(lang)) urls.push(`${host}${pathFor(lang, ed, "articles")}${s.slug}/`);
     if (CANONICAL_ED[lang] === ed) for (const p of postsFor(lang)) urls.push(`${host}${pathFor(lang, ed, "blog")}${p.slug}/`);
   }
   const body = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `  <url><loc>${u}</loc></url>`).join("\n")}\n</urlset>\n`;

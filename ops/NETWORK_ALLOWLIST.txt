@@ -591,3 +591,14 @@ racius.com
 *.racius.com
 einforma.pt
 *.einforma.pt
+# 3 Nov 2026: the map in three depths (D83 part 2): INE, PORDATA, IPMA, Copernicus Marine, APA, SNS, OpenStreetMap extracts
+transparencia.sns.gov.pt
+download.geofabrik.de
+marine.copernicus.eu
+*.marine.copernicus.eu
+data.marine.copernicus.eu
+s3.waw3-1.cloudferro.com
+wui.cmsaf.eu
+*.cmsaf.eu
+pordata.pt
+*.pordata.pt

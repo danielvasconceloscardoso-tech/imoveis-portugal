@@ -118,7 +118,7 @@ const rate = cur ? RATE(cur).rate : 0;
             <legend>{c("path.q.timing", lang)}</legend>
             {["soon", "year", "later"].map((t) => <label><input type="radio" name="when" value={t} checked={t === "year"} /> <span>{c(`path.t.${t}`, lang)}</span></label>)}
           </fieldset>
-          <button class="btn" type="submit">{c("path.start", lang)}</button>
+          <button class="btn" type="submit">{c("bar.path.go", lang)}</button>
         </div>
       </div>
     </form>
@@ -158,7 +158,7 @@ const rate = cur ? RATE(cur).rate : 0;
     <section class="frame read pend" data-end aria-labelledby="pend-h">
       <h2 id="pend-h">{c("path.end.h", lang)}</h2>
       <p><button type="button" class="btn ghost" data-share>{c("path.share", lang)}</button> <span class="small" data-share-out role="status"></span></p>
-      <p><a class="act" href={`${pathFor(lang, ed, "home")}#subscrever`}>{c("path.email", lang)}</a></p>
+      <p><a class="act" href={`${pathFor(lang, ed, "mare")}?de=path`}>{c("path.email", lang)}</a></p>
       <p class="small">{c("path.email.p", lang)} {c("path.saved", lang)}</p>
       <p><a class="more" href={faq}>{c("path.faq", lang)}</a></p>
     </section>
@@ -176,6 +176,8 @@ const rate = cur ? RATE(cur).rate : 0;
 </V2>
 
 <script>
+  import { ev } from "../lib/track";
+  import { budgetBand } from "../lib/sim1";
   // D52: from this budget the route adds its quiet stations; the figure is internal and never shown.
   const HIGH = 1e6;
   const root = document.querySelector<HTMLElement>("[data-path]")!;
@@ -269,6 +271,7 @@ const rate = cur ? RATE(cur).rate : 0;
   const shown = (li: HTMLElement) => (li.dataset.high === undefined || st.budget >= HIGH) && (li.dataset.inherit === undefined || st.inh);
   const visible = () => $$(`[data-route="${st.door}"] .pst`).filter(shown);
   const setOpen = (li: HTMLElement, open: boolean) => { li.classList.toggle("open", open); $("button.pst-head", li)!.setAttribute("aria-expanded", String(open)); };
+  let lastOpen = "";
   function render(scroll = false) {
     showDoor(); showLocal();
     root.classList.toggle("started", st.started); root.classList.toggle("high", st.budget >= HIGH); root.classList.toggle("inh", st.inh);
@@ -276,6 +279,8 @@ const rate = cur ? RATE(cur).rate : 0;
     const list = visible();
     if (!list.some((li) => li.dataset.k === st.step[st.door])) st.step[st.door] = list.find((li) => !st.done.includes(li.dataset.k!))?.dataset.k ?? list[0].dataset.k!;
     const here = st.step[st.door];
+    // Part 5: a station on screen is "opened" once per page (lib/track.ts ev "path/{station}/open").
+    if (here !== lastOpen) { lastOpen = here; ev({ event: `path/${here}/open`, step: here, band: st.budget ? budgetBand(st.budget) : undefined, origin: st.door }); }
     list.forEach((li, i) => {
       const k = li.dataset.k!, isHere = k === here, done = st.done.includes(k);
       li.classList.toggle("here", isHere); li.classList.toggle("done", done);
@@ -307,11 +312,12 @@ const rate = cur ? RATE(cur).rate : 0;
   $$(".pst").forEach((li) => {
     const k = li.dataset.k!;
     $("button.pst-head", li)!.addEventListener("click", () => {
-      if (!st.started) { setOpen(li, !li.classList.contains("open")); drawAll(); return; }
+      if (!st.started) { const open = !li.classList.contains("open"); setOpen(li, open); drawAll(); if (open) ev({ event: `path/${k}/open`, step: k, origin: "preview" }); return; }
       // One station per screen: its title no longer folds it.
     });
     $("[data-next]", li)!.addEventListener("click", () => {
       if (!st.done.includes(k)) st.done.push(k);
+      ev({ event: `path/${k}/done`, step: k, origin: st.door });
       const list = visible(), i = list.indexOf(li);
       st.step[st.door] = list[i + 1]?.dataset.k ?? k; save(); render(true);
     });

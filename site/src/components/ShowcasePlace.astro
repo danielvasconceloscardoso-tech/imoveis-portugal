@@ -1,0 +1,44 @@
+---
+// The location of a partner development, facts only (Marble Terrace Vila do Conde, 3 Nov 2026): the address and fronts as
+// the developer states them, what the developer's brochure map marks around it, and straight-line distances that are our
+// own calculation from OpenStreetMap (never a walking or driving time). Each part names its source. Wording: "mtvc.place.*".
+// Styles are inline so the other showcase pages keep their stylesheet as it is.
+import type { Lang } from "../i18n";
+import type { Project } from "../lib/projects";
+import { c } from "../lib/copy";
+
+interface Props { lang: Lang; locale: string; p: Project; }
+const { lang, locale, p } = Astro.props;
+const L = p.location;
+const k = (x: string) => c(`mtvc.place.${x}`, lang);
+const dist = (m: number) => (m < 1000 ? `≈ ${new Intl.NumberFormat(locale).format(Math.round(m / 10) * 10)} m` : `≈ ${new Intl.NumberFormat(locale, { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(m / 1000)} km`);
+---
+{L && <section class="sp" aria-labelledby="sp-h">
+  <h2 id="sp-h">{k("h")}</h2>
+  {L.address?.[lang] && <p class="sp-addr">{L.address[lang]}{" "}{p.url && <a class="sp-src" href={p.url} rel="noopener">{k("src")}</a>}</p>}
+  <div class="sp-grid">
+    {L.distances?.length && <div>
+      <h3 class="sp-k">{k("dist")}</h3>
+      <dl class="sp-dist">{L.distances.map((d) => <div><dt>{d[lang]}</dt><dd>{dist(d.m)}</dd></div>)}</dl>
+      <p class="sp-small">{k("distnote")}{" "}{L.distSource && <a href={L.distSource} rel="noopener">© OpenStreetMap</a>}</p>
+    </div>}
+    {L.marks?.[lang] && <div>
+      <h3 class="sp-k">{k("marks")}</h3>
+      <p>{L.marks[lang]}</p>
+      {L.marksSource && <p class="sp-small"><a href={L.marksSource} rel="noopener">{k("marksrc")}</a></p>}
+    </div>}
+  </div>
+</section>}
+
+<style is:inline>
+  .sp { max-width: 1120px; margin: 0 auto; padding: 40px 24px 8px; }
+  .sp h2 { font: 400 28px/1.15 var(--serif); margin: 0 0 16px; }
+  .sp h3.sp-k { font: 500 12px/1.3 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 0 0 12px; }
+  .sp-addr { font-size: 17px; max-width: 40em; margin: 0 0 32px; }
+  .sp-src, .sp-small a { color: var(--muted); font-size: 13px; }
+  .sp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px 40px; }
+  .sp-dist { margin: 0; }
+  .sp-dist div { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-top: 1px solid color-mix(in srgb, var(--ink) 18%, transparent); }
+  .sp-dist dt { font-size: 15px; } .sp-dist dd { margin: 0; font: 400 21px/1.1 var(--serif); white-space: nowrap; }
+  .sp-small { font-size: 13px; color: var(--muted); margin: 12px 0 0; }
+</style>

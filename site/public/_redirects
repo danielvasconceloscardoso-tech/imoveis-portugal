@@ -18,3 +18,14 @@
 /pt/:ed/blog/imt-7-5-nao-residentes/ /pt/:ed/blog/imt-nao-residentes/ 301
 /en/:ed/blog/7-5-percent-transfer-tax-non-residents/ /en/:ed/blog/imt-portugal-non-residents/ 301
 /fr/:ed/blog/imt-7-5-pour-les-non-residents/ /fr/:ed/blog/imt-portugal-non-residents/ 301
+# Fix step 4 (3 Nov 2026): the ten lifestyle articles were rewritten with new titles; the first Portuguese addresses keep working.
+/pt/:ed/artigos/um-inverno-sem-geada-a-menos-de-tres-horas-do-luxemburgo/ /pt/:ed/artigos/o-dia-mais-frio-de-faro-em-trinta-anos/ 301
+/pt/:ed/artigos/portugal-esta-entre-os-paises-mais-pacificos-do-mundo/ /pt/:ed/artigos/portugal-7-pais-mais-pacifico-do-mundo/ 301
+/pt/:ed/artigos/um-dia-normal-em-matosinhos/ /pt/:ed/artigos/matosinhos-uma-das-68-cidades-da-gastronomia-da-unesco/ 301
+/pt/:ed/artigos/a-mesa-mais-estrelada-do-porto/ /pt/:ed/artigos/no-unico-duas-estrelas-do-porto-os-snacks-fazem-se-ao-balcao/ 301
+/pt/:ed/artigos/o-douro-tem-270-anos-de-vinho-demarcado/ /pt/:ed/artigos/o-primeiro-porto-vintage-num-catalogo-da-christies-foi-um-1765/ 301
+/pt/:ed/artigos/siza-e-souto-de-moura-dois-pritzker-da-mesma-cidade/ /pt/:ed/artigos/souto-de-moura-estudava-escultura-ate-conhecer-donald-judd/ 301
+/pt/:ed/artigos/cascais-de-vila-de-pescadores-a-casa-de-reis/ /pt/:ed/artigos/em-cascais-um-maregrafo-de-1882-ainda-mede-o-mar/ 301
+/pt/:ed/artigos/as-escolas-internacionais-do-porto-e-de-lisboa/ /pt/:ed/artigos/a-escola-britanica-do-porto-abriu-em-1894/ 301
+/pt/:ed/artigos/sao-joao-a-noite-em-que-o-porto-nao-dorme/ /pt/:ed/artigos/o-fogo-de-sao-joao-dura-12-minutos/ 301
+/pt/:ed/artigos/vila-do-conde-o-mar-a-41-minutos-do-porto/ /pt/:ed/artigos/vila-do-conde-guarda-uma-nau-do-seculo-xvi/ 301

@@ -40,7 +40,7 @@ const subject = `${c("casa.form.subject", lang)} (${ed} · ${lang})`;
       </section>
     ))}
 
-    <form class="sim casa-form" id="pedido" data-mail={config.contactEmail} data-subject={subject} novalidate>
+    <form class="sim casa-form" id="pedido" data-mail={config.contactEmail} data-cc={((import.meta.env.PUBLIC_AGENCY_EMAIL as string | undefined) || "").trim()} data-subject={subject} novalidate>
       <h2 class="h3">{c("casa.form.h", lang)}</h2>
       <fieldset class="field">
         <legend>{c("casa.form.need", lang)}</legend>
@@ -83,7 +83,7 @@ const subject = `${c("casa.form.subject", lang)} (${ed} · ${lang})`;
     const el = (n: string) => f.elements.namedItem(n) as HTMLInputElement;
     const row = (n: string) => `${el(n).closest("label")?.querySelector("span")?.textContent}: ${el(n).value.trim()}`;
     const lines = [...chosen.map((n) => `- ${n.dataset.label} → ${n.dataset.to} (✓)`), "", row("region"), row("budget"), row("when"), "", el("message").value.trim()];
-    send.href = `mailto:${f.dataset.mail}?subject=${encodeURIComponent(f.dataset.subject || "")}&body=${encodeURIComponent(lines.join("\n"))}`;
+    send.href = `mailto:${f.dataset.mail}?${f.dataset.cc ? `cc=${encodeURIComponent(f.dataset.cc)}&` : ""}subject=${encodeURIComponent(f.dataset.subject || "")}&body=${encodeURIComponent(lines.join("\n"))}`;
   }
   f.addEventListener("input", sync);
   f.addEventListener("change", sync);

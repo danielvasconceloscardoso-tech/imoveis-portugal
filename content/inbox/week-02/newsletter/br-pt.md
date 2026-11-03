@@ -25,11 +25,11 @@ Assunto: Imóvel de 250 000 € em Portugal sai por R$ 1,53 milhão
 
 {{first name | Olá}},
 
-aqui é a Imóveis Portugal, o guia semanal para você comprar um imóvel em Portugal a partir do Brasil. A primeira edição chega na quinta-feira, 3 de dezembro, e uma pessoa lê cada resposta.
+hoje mostramos quanto custa, no total, um imóvel comprado a partir do Brasil. A primeira carta chega na quinta-feira, 3 de dezembro.
 
 ## A conta completa de um imóvel de 250 000 €
 
-"Quanto vou pagar no total, e não só o preço?" É a pergunta que mais recebemos. Para um imóvel de 250 000 €, se você não é residente fiscal em Portugal:
+Para um imóvel de 250 000 €, se você não é residente fiscal em Portugal:
 
 - Preço: 250 000 €
 - IMT (o imposto de transmissão português): 18 750 €
@@ -37,11 +37,15 @@ aqui é a Imóveis Portugal, o guia semanal para você comprar um imóvel em Por
 - Escritura e registro na Casa Pronta: 375 €
 - Total: 271 125 €, cerca de R$ 1,53 milhão pela taxa de referência do BCE de 23 de outubro de 2026
 
-A linha do IMT vem do Código do IMT de Portugal (artigo 17.º, n.º 10, incluído pelo Decreto-Lei 97/2026): a aquisição de imóvel urbano ou unidade destinada exclusivamente à habitação por não residentes paga IMT com alíquota única de 7,5%, sem isenção nem redução, salvo exceção. Uma exceção: você se tornar residente fiscal em até dois anos, com a diferença devolvida mediante pedido. Se você já foi residente fiscal em Portugal, saber se isso conta para a alínea (a) é uma questão em aberto, para um advogado ou consultor tributário. Um residente que compra o mesmo imóvel como moradia própria e permanente paga 259 417 €.
+Não residentes pagam IMT com alíquota única de 7,5% na compra de imóvel urbano ou unidade destinada exclusivamente à habitação, sem isenção nem redução, salvo exceção (Código do IMT de Portugal, artigo 17.º, n.º 10, incluído pelo Decreto-Lei 97/2026).
+
+Uma exceção: você se tornar residente fiscal em até dois anos; a diferença é devolvida mediante pedido. Se você já foi residente fiscal em Portugal, saber se isso conta para a alínea (a) é uma questão em aberto, para um advogado ou consultor tributário.
+
+Um residente que compra o mesmo imóvel como moradia própria e permanente paga 259 417 € no total.
 
 No Brasil, o imóvel entra na ficha "Bens e Direitos" da declaração do IRPF, com o valor de compra em euros convertido em dólares e depois em reais pela cotação de venda do Banco Central na data da compra.
 
-Com financiamento, entra o imposto do selo de 0,6% sobre o empréstimo e a Casa Pronta passa a 700 €, porque registra também a hipoteca. Os honorários do advogado ficam fora dessa conta.
+Com financiamento, entra o imposto do selo de 0,6% sobre o empréstimo, e a Casa Pronta passa a 700 € porque registra também a hipoteca. Os honorários do advogado ficam fora dessa conta.
 
 As contas completas, também com 500 000 €: https://imoveisportugal.pt/pt/br/blog/imt-nao-residentes-2026-custo-total-da-compra/?utm_source=newsletter&utm_medium=email&utm_campaign=w02-total-cost-br
 

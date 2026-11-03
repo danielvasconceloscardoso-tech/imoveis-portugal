@@ -26,25 +26,27 @@ Subject: Como tirar o NIF de Portugal sem sair do Brasil
 
 {{first name | Olá}},
 
-que bom ter você na Imóveis Portugal. A gente escreve sobre comprar imóvel em Portugal a partir do Brasil, passo a passo e com a fonte de cada número. A primeira edição chega na quinta-feira, 3 de dezembro, e uma pessoa lê cada resposta que você mandar.
+que bom ter você na Imóveis Portugal. A gente escreve sobre comprar imóvel em Portugal a partir do Brasil, com a fonte de cada número. A primeira carta chega na quinta-feira, 3 de dezembro.
 
-Até lá, você recebe três e-mails curtos. Este começa por onde começa toda compra.
+Até lá, você recebe três e-mails curtos. Este é sobre o primeiro documento de toda compra.
 
-Se pegar um voo para Lisboa só para começar a papelada não está nos seus planos, não precisa. Antes de qualquer proposta ou escritura, você precisa do NIF, o número de contribuinte português, que em Portugal cumpre um papel parecido com o do CPF: sem ele, a escritura não é assinada. Um representante legal, como um advogado, pode tirar o NIF on-line por você, e para isso não é preciso representante fiscal.
+O NIF, o número de contribuinte português, faz em Portugal um papel parecido com o do CPF: sem ele, a escritura não é assinada. Ele sai on-line, e o voo para Lisboa fica para quando você for ver imóveis.
 
-O representante fiscal vem depois da compra. Quando o imóvel passar a ser seu, você tem 15 dias para nomear um ou aderir às notificações eletrônicas da Autoridade Tributária, a Receita de Portugal. Como o Brasil fica fora da União Europeia e do EEE, uma das duas opções é obrigatória.
+Um representante legal, como um advogado, pode tirar o NIF por você, sem representante fiscal.
+
+Depois da compra, você tem 15 dias para nomear um representante fiscal ou aderir às notificações eletrônicas da Autoridade Tributária, a Receita de Portugal. Como o Brasil fica fora da União Europeia e do EEE, uma das duas opções é obrigatória.
 
 Fonte: Autoridade Tributária (folheto sobre o NIF para cidadãos estrangeiros não residentes) e Lei Geral Tributária, artigo 19. Verificado em 24 de outubro de 2026.
 
-Do lado brasileiro, o imóvel entra na declaração do IRPF, em Bens e Direitos, com o valor de compra convertido em dólares e depois em reais pela cotação de venda do Banco Central na data da compra.
+No Brasil, o imóvel entra na declaração do IRPF, em Bens e Direitos, com o valor de compra convertido em dólares e depois em reais pela cotação de venda do Banco Central na data da compra.
 
-A resposta completa, com um trecho para cada país: https://imoveisportugal.pt/pt/br/blog/nif-portugal-online-a-partir-do-estrangeiro/?utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-br
+A resposta completa, país por país: https://imoveisportugal.pt/pt/br/blog/nif-portugal-online-a-partir-do-estrangeiro/?utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-br
 
 Onde o NIF entra na compra, etapa 2 de 9: https://imoveisportugal.pt/pt/br/passo-a-passo/?door=buy&step=2&utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-br
 
-Um advogado parceiro pode tirar o seu NIF on-line e, mais adiante, assinar a escritura por você, com uma procuração feita no consulado português ou em cartório com a Apostila de Haia: https://imoveisportugal.pt/pt/br/falar-com-um-parceiro/?cat=lawyer&utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-br#form
+Um advogado parceiro faz o pedido por você e, mais adiante, pode assinar a escritura com uma procuração feita no consulado português ou em cartório com a Apostila de Haia: https://imoveisportugal.pt/pt/br/falar-com-um-parceiro/?cat=lawyer&utm_source=newsletter&utm_medium=email&utm_campaign=w01-nif-br#form
 
-Responda a este e-mail com a sua pergunta. A gente responde todas, e as mais comuns viram tema das próximas edições.
+Responda a este e-mail com a sua pergunta. Uma pessoa lê e responde a todas.
 
 Até quinta-feira, 3 de dezembro,
 Imóveis Portugal

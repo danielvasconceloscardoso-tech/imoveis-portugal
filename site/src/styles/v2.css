@@ -318,6 +318,8 @@ a.sup + a.sup::before { content: ","; color: var(--muted); margin-right: 1px; }
 .cmp .bar { display: inline-block; height: 8px; width: calc(var(--w) * 0.55); min-width: 4px; background: var(--accent-soft); border-radius: 4px; margin-right: 8px; vertical-align: middle; }
 .cmp tr.hl .bar { background: var(--accent); }
 .cmp tr.abroad th, .cmp tr.abroad td { background: #fbfaf7; }
+/* A table of five or more columns scrolls inside itself on a phone instead of widening the page. */
+@media (max-width: 600px) { .cmp:has(thead th:nth-child(5)) { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; } }
 .sim { display: grid; gap: 16px; background: var(--card); border: 1px solid var(--rule); border-radius: var(--r); padding: 24px; }
 .field { display: grid; gap: 8px; border: 0; margin: 0; padding: 0; }
 .field > span, .field legend { font-weight: 500; font-size: 15px; padding: 0; }

@@ -8,8 +8,8 @@
   a: >-
     Comprar e viver em Portugal são processos separados: desde 7 de outubro de 2023, a compra de casa
     deixou de dar acesso a novos vistos gold (Lei 56/2023). Para viver cá, há vistos de residência, como
-    o de quem vive de rendimentos próprios (D7) ou o visto CPLP, que dá acesso à autorização de
-    residência da AIMA, a agência portuguesa para as migrações.
+    o de rendimentos próprios (D7) ou o visto CPLP, que leva à autorização de residência da AIMA, a
+    agência portuguesa para as migrações.
   facts: [pt-ari-realestate-ended, pt-visa-own-income, pt-cplp-residence]
 
 - id: pt-br-irpf
@@ -18,10 +18,10 @@
   cta: tax
   q: "Tenho de declarar a casa no imposto de renda brasileiro?"
   a: >-
-    Sim, se for residente fiscal no Brasil. A casa entra em Bens e Direitos na declaração do IRPF, pelo
-    valor de compra convertido em dólares e depois em reais, à cotação de venda do Banco Central na data da
-    compra. Se os seus bens no estrangeiro somarem 1 000 000 de dólares ou mais a 31 de dezembro, entrega
-    também a declaração CBE.
+    Quem é residente fiscal no Brasil declara a casa em Bens e Direitos, no IRPF, pelo valor de compra
+    convertido em dólares e depois em reais, à cotação de venda do Banco Central na data da compra. Com
+    bens no estrangeiro de 1 000 000 de dólares ou mais a 31 de dezembro, entrega também a declaração
+    CBE.
   facts: [br-bens-exterior, br-cbe]
 
 - id: pt-br-ifici
@@ -30,8 +30,8 @@
   cta: tax
   q: "Há um regime fiscal especial para quem se muda para Portugal?"
   a: >-
-    Sim, para algumas profissões: o IFICI aplica uma taxa especial de 20% durante 10 anos ao rendimento
-    do trabalho em atividades elegíveis, como investigação, ensino superior ou empregos altamente
-    qualificados. É para quem passa a residente fiscal e não foi residente em nenhum dos cinco anos
-    anteriores. O regime depende do trabalho, não da compra de casa.
+    O IFICI aplica uma taxa especial de 20% durante 10 anos ao rendimento do trabalho em atividades
+    elegíveis, como investigação, ensino superior ou empregos altamente qualificados. É para quem passa
+    a residente fiscal e não foi residente em nenhum dos cinco anos anteriores. Depende da profissão, e
+    a compra de casa não dá acesso ao regime.
   facts: [pt-ifici-20pct]

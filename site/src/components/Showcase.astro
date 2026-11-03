@@ -8,9 +8,12 @@ import { type Project, type Unit, img } from "../lib/projects";
 import { PRICES, LAST } from "../lib/prices";
 import { c } from "../lib/copy";
 import ShowcaseBlocks from "./ShowcaseBlocks.astro";
+import Heart from "./Heart.astro";
+import DevShare from "./DevShare.astro";
 
-interface Props { lang: Lang; projects: Project[]; href: (p: Project, u: Unit) => string; label: string; cur?: { code: string; rate: number }; locale: string; simHref?: string; mapHref?: string; }
-const { lang, projects, href, label, cur, locale, simHref, mapHref } = Astro.props;
+interface Props { lang: Lang; projects: Project[]; href: (p: Project, u: Unit) => string; label: string; cur?: { code: string; rate: number }; locale: string; simHref?: string; mapHref?: string; save?: { href: string; muni: string };
+  related?: { id: string; name: string; place: string; href: string; render?: string | null }[]; share?: boolean; }
+const { lang, projects, href, label, cur, locale, simHref, mapHref, save, related, share = false } = Astro.props;
 const p0 = projects[0];
 const s = PRICES.munis[p0.muni] as any;
 const money = (v: number, k = "EUR") => new Intl.NumberFormat(locale, { style: "currency", currency: k, maximumFractionDigits: 0 }).format(v);
@@ -23,7 +26,7 @@ const from = Math.min(...projects.map((p) => p.from ?? Infinity));
 const checked = projects.map((p) => p.checked).filter(Boolean).sort().pop();
 const credits = [...new Set(projects.flatMap((p) => p.credits ?? []))].join("; ");
 ---
-{projects[0].blocks ? <ShowcaseBlocks lang={lang} p={projects[0]} label={label} locale={locale} simHref={simHref} mapHref={mapHref} /> : (
+{projects[0].blocks ? <ShowcaseBlocks lang={lang} p={projects[0]} label={label} locale={locale} simHref={simHref} mapHref={mapHref} save={save} related={related} share={share} /> : (
 <article class="sc">
   <figure class="sc-hero"><img src={img(p0.render)} srcset={`${img(p0.render, 800)} 800w, ${img(p0.render)} 1600w`} sizes="100vw" alt={p0.name} width="1600" height="900" fetchpriority="high" /></figure>
   <header class="sc-head">
@@ -35,6 +38,7 @@ const credits = [...new Set(projects.flatMap((p) => p.credits ?? []))].join("; "
       <div><dt>{c("map.proj.typ", lang, { v: "" }).replace(/[:\s]+$/, "")}</dt><dd>{[...new Set(projects.flatMap((p) => p.typologies))].map(typ).join(", ")}</dd></div>
       {p0.delivery && <div><dt>{c("show.delivery", lang, { v: "" }).trim()}</dt><dd>{p0.delivery}</dd></div>}
     </dl>
+    {share && <DevShare lang={lang} id={p0.id} />}
   </header>
 
   {projects.map((p) => (
@@ -43,7 +47,7 @@ const credits = [...new Set(projects.flatMap((p) => p.credits ?? []))].join("; "
       {projects.length > 1 && <p class="sc-pline">{lineOf(p)}</p>}
       <ul class="sc-grid">
         {p.units!.map((u, ui) => (
-          <li><a class="sc-card" href={href(p, u)}>
+          <li class="sc-li">{save && <Heart lang={lang} kind="home" id={`${p.id}-${u.id}`} label={`${p.name}, ${typ(u.typology)}${u.name ? ` ${u.name}` : ""}, ${save.muni}`} href={href(p, u)} class="ht-on-ph" />}<a class="sc-card" href={href(p, u)}>
             <img src={img(u.img ?? (p.gallery?.length ? p.gallery[ui % p.gallery.length] : p.render), 800)} alt="" width="800" height="560" loading="lazy" />
             <span class="sc-typ">{typ(u.typology)}{u.name && <span> · {u.name}</span>}</span>
             <span class="sc-meta">{[!p.hideRefs && u.ref, u.area != null && (u.typology === "Plot" ? c("show.plotarea", lang, { v: nf.format(u.area) }) : `${nf.format(u.area)} m²`), p.delivery && c("show.delivery", lang, { v: p.delivery })].filter(Boolean).join(" · ")}</span>
@@ -88,6 +92,7 @@ const credits = [...new Set(projects.flatMap((p) => p.credits ?? []))].join("; "
   .sc-proj { max-width: 1120px; margin: 0 auto; padding: 40px 24px 8px; }
   .sc-proj h2, .sc-ctx h2 { font: 400 28px/1.15 var(--serif); margin: 0 0 8px; } .sc-pline { color: var(--muted); margin: 0 0 8px; max-width: 46em; }
   .sc-grid { list-style: none; margin: 24px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 40px var(--gap); }
+  .sc-li { position: relative; }
   .sc-card { display: grid; gap: 8px; text-decoration: none; color: var(--ink); }
   .sc-card img { width: 100%; height: auto; aspect-ratio: 10 / 7; object-fit: cover; display: block; margin-bottom: 12px; transition: opacity .3s; }
   .sc-card:hover img { opacity: .9; }

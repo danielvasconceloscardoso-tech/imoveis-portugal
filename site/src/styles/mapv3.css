@@ -27,28 +27,33 @@
   background: var(--g2); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); box-shadow: var(--sh); }
 .m3-tip b { display: block; font: 400 17px/1.25 var(--m3serif); margin-top: 2px; }
 
-/* The top: search, the chips, 2D and 3D. */
+/* The top: search, the compare link (once two places carry a heart) and "Camadas" (D83 part 2: the chips moved into the panel). */
 .m3-top { position: absolute; z-index: 5; top: 16px; left: 16px; right: 16px; display: flex; align-items: center; gap: 12px; pointer-events: none; }
 .m3-top > * { pointer-events: auto; }
-.m3-searchbtn, .m3-chips, .m3-seg { background: var(--g); -webkit-backdrop-filter: blur(20px) saturate(1.5); backdrop-filter: blur(20px) saturate(1.5); border: 1px solid var(--gl); box-shadow: var(--sh); border-radius: 999px; }
+.m3-searchbtn, .m3-layersbtn, .m3-cmp-pill, .m3-seg { background: var(--g); -webkit-backdrop-filter: blur(20px) saturate(1.5); backdrop-filter: blur(20px) saturate(1.5); border: 1px solid var(--gl); box-shadow: var(--sh); border-radius: 999px; }
 .m3-searchbtn { display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 16px 0 16px; font-size: 15px; color: var(--gm) !important; min-width: 220px; transition: background-color .2s var(--e); }
 .m3-searchbtn:hover { background: var(--g2); }
-.m3-searchbtn span { flex: 1; text-align: left; }
+.m3-searchbtn span { flex: 1; min-width: 0; text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .m3-searchbtn kbd { font: 600 12px/1 var(--m3sans); border: 1px solid currentColor; border-radius: 6px; padding: 3px 4px; opacity: .6; }
-.m3-chips { display: flex; align-items: center; gap: 2px; height: 44px; padding: 4px; overflow-x: auto; scrollbar-width: none; }
+.m3-layersbtn { margin-left: auto; display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 16px; font-size: 14px; font-weight: 600; transition: background-color .2s var(--e); }
+.m3-layersbtn:hover, .m3-layersbtn[aria-expanded="true"] { background: var(--g2); }
+.m3-cmp-pill { margin-left: auto; display: flex; align-items: center; height: 44px; padding: 0 16px; font-size: 14px; font-weight: 600; color: #2f5d50 !important; text-decoration: none; }
+.m3-cmp-pill:not([hidden]) + .m3-layersbtn { margin-left: 0; }
+.m3-chips { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
 .m3-chips::-webkit-scrollbar { display: none; }
-.m3-chip { height: 34px; padding: 0 16px; border-radius: 999px; font-size: 13px; font-weight: 600; white-space: nowrap; color: var(--gm) !important; transition: background-color .25s var(--e), color .25s var(--e); }
+.m3-chip { height: 34px; padding: 0 14px; border-radius: 999px; font-size: 13px; font-weight: 600; white-space: nowrap; color: var(--gm) !important; background: rgba(120, 120, 110, .1) !important; transition: background-color .25s var(--e), color .25s var(--e); }
 .m3-chip:hover { color: var(--gi) !important; }
-.m3-chip[aria-pressed="true"] { background: var(--gi); color: #fff !important; }
-.m3-chip-o[aria-pressed="true"] { background: #2f5d50; color: #fff !important; }
+.m3-chip[aria-pressed="true"] { background: var(--gi) !important; color: #fff !important; }
+.m3-chip-o[aria-pressed="true"] { background: #2f5d50 !important; color: #fff !important; }
 .m3-sep { width: 1px; height: 18px; background: currentColor; opacity: .15; margin: 0 8px; flex: none; }
-.m3-seg { margin-left: auto; display: flex; gap: 2px; height: 44px; padding: 4px; }
+.m3-seg { display: inline-flex; justify-self: start; gap: 2px; height: 44px; padding: 4px; }
 .m3-seg button { display: flex; align-items: center; gap: 8px; height: 34px; padding: 0 12px; border-radius: 999px; font-size: 13px; font-weight: 600; color: var(--gm); transition: background-color .25s var(--e), color .25s var(--e); }
 .m3-seg button svg { width: 16px; height: 16px; }
 .m3-seg button[aria-pressed="true"] { background: var(--g2); color: var(--gi); box-shadow: 0 1px 4px rgba(0, 0, 0, .12); }
 
-/* The dock: the budget gesture, time, tours and a one-line legend. */
-.m3-dock { position: absolute; z-index: 5; left: 16px; bottom: 16px; width: 380px; padding: 16px 24px 16px; border-radius: 20px; display: grid; gap: 16px;
+/* "Camadas": the panel with the colour layers and their legend, overlays, 2D / 3D, time, the budget and the tours (D83 part 2).
+   On the home page the same element is the small dock with "Abrir o mapa". */
+.m3-dock { position: absolute; z-index: 6; left: 16px; top: 76px; bottom: 16px; width: 360px; padding: 16px 20px; border-radius: 20px; display: grid; align-content: start; gap: 16px; overflow-y: auto; overscroll-behavior: contain;
   background: var(--g); -webkit-backdrop-filter: blur(20px) saturate(1.5); backdrop-filter: blur(20px) saturate(1.5); border: 1px solid var(--gl); box-shadow: var(--sh);
   transition: opacity .3s var(--e), transform .3s var(--e); }
 .m3-budget-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
@@ -63,6 +68,13 @@
 .m3-slider.is-drag .m3-thumb, .m3-slider:active .m3-thumb { transform: scale(1.18); }
 .m3-sentence { margin: 0; min-height: 2.6em; font: 400 17px/1.4 var(--m3serif); }
 .m3-sentence span { display: block; margin-top: 4px; font: 500 12px/1.3 var(--m3sans); color: var(--gm); }
+.m3-page .m3-dock { opacity: 0; transform: translateX(-16px); }
+.m3-page .m3-dock.is-open { opacity: 1; transform: none; }
+.m3-home .m3-dock { top: auto; width: auto; padding: 0; background: none; border: 0; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; overflow: visible; }
+.m3-panel-head { display: flex; align-items: center; justify-content: space-between; }
+.m3-panel-x { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: rgba(120, 120, 110, .12) !important; }
+.m3-pg { display: grid; gap: 8px; padding-top: 12px; border-top: 1px solid rgba(120, 120, 110, .18); }
+.m3-pk { margin: 4px 0 0; font: 700 12px/1 var(--m3sans); letter-spacing: .14em; text-transform: uppercase; color: var(--gm); }
 .m3-tools { display: grid; gap: 12px; padding-top: 12px; border-top: 1px solid rgba(120, 120, 110, .18); }
 .m3-time { display: flex; align-items: center; gap: 12px; transition: opacity .3s; }
 .m3-time.is-off { opacity: .35; pointer-events: none; }
@@ -76,7 +88,8 @@
 .m3-tours { display: flex; flex-wrap: wrap; gap: 8px; }
 .m3-tour { font-size: 13px; font-weight: 600; padding: 8px 12px; border-radius: 999px; background: rgba(120, 120, 110, .1) !important; transition: background-color .2s var(--e); }
 .m3-tour:hover { background: rgba(120, 120, 110, .2) !important; }
-.m3-legend { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; font: 600 12px/1 var(--m3sans); font-variant-numeric: tabular-nums; }
+.m3-legend { position: absolute; z-index: 5; right: 16px; bottom: 30px; max-width: 320px; padding: 12px 16px; border-radius: 16px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; font: 600 12px/1 var(--m3sans); font-variant-numeric: tabular-nums;
+  background: var(--g); -webkit-backdrop-filter: blur(20px) saturate(1.5); backdrop-filter: blur(20px) saturate(1.5); border: 1px solid var(--gl); box-shadow: var(--sh); }
 .m3-ramp { width: 120px; height: 2px; border-radius: 2px; background: linear-gradient(90deg, #ecdfc2, #d9d3a9, #b8c49b, #91ae8c, #6b957d, #47796a, #285c51); }
 .m3-legend-t { flex-basis: 100%; font-weight: 500; color: var(--gm); font-size: 12px; }
 .m3-open { justify-self: start; font: 600 13px/1 var(--m3sans); letter-spacing: .02em; padding: 12px 16px; border-radius: 12px; background: var(--gi); color: var(--g2) !important; text-decoration: none; }
@@ -173,12 +186,17 @@
   .m3-top { top: 10px; left: 10px; right: 10px; flex-wrap: wrap; gap: 8px; }
   .m3-searchbtn { flex: 1; min-width: 0; } .m3-searchbtn kbd { display: none; }
   .m3-seg span { display: none; } .m3-seg button { padding: 0 12px; }
-  .m3-chips { order: 3; flex: 1 1 100%; height: 40px; } .m3-chip { height: 30px; padding: 0 12px; }
-  .m3-dock { left: 10px; right: 10px; bottom: 10px; width: auto; padding: 16px 16px 12px; gap: 12px; border-radius: 20px; }
+  .m3-layersbtn { padding: 0 14px; } .m3-cmp-pill { padding: 0 14px; white-space: nowrap; }
+  .m3-cmp-pill:not([hidden]) ~ .m3-layersbtn span { display: none; }
+  .m3-dock { left: 0; right: 0; top: auto; bottom: 0; width: auto; max-height: 74%; padding: 16px 16px calc(16px + env(safe-area-inset-bottom)); gap: 12px; border-radius: 20px 20px 0 0; border-bottom: 0; }
+  .m3-page .m3-dock { transform: translateY(24px); }
+  .m3-home .m3-dock { left: 10px; right: auto; bottom: 10px; padding: 0; border: 0; }
+  .m3-legend { left: 10px; right: 10px; bottom: 112px; max-width: none; }
+  .m3.is-panel .m3-legend { display: none; }
   .m3-amount, .m3-amount-in { font-size: 21px !important; }
   .m3-sentence { font-size: 15px; line-height: 1.35; min-height: 0; }
   .m3-tools { grid-template-columns: 1fr; padding-top: 12px; }
-  .m3-time { display: none; }
+  /* D83 part 2: in the "Camadas" sheet there is room for the time slider on phones too. */
   .m3-budget-head .m3-k { font-size: 12px; }
   .m3-sentence span { display: inline; margin: 0 0 0 4px; }
   .m3-tours { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin: 0 -16px; padding: 0 16px; } .m3-tours::-webkit-scrollbar { display: none; }
@@ -192,7 +210,8 @@
   .m3-sheet-in { padding: 0 12px 12px; }
   .m3-sheet[data-detent="0"] .m3-photo { display: none; }
   .m3-x { top: 4px; right: 14px; }
-  .m3:has(.m3-sheet.is-open) .m3-dock { opacity: 0; transform: translateY(20px); pointer-events: none; }
+  .m3:has(.m3-sheet.is-open) .m3-dock, .m3:has(.m3-sheet.is-open) .m3-cards, .m3:has(.m3-sheet.is-open) .m3-legend { opacity: 0; transform: translateY(20px); pointer-events: none; }
+  .m3.is-panel .m3-cards { opacity: 0; pointer-events: none; }
   .m3-sheet h3 { font-size: 28px; }
   .m3-caption { top: auto; bottom: 46%; font-size: 15px; max-width: calc(100% - 24px); white-space: normal; text-align: center; }
   .m3-attr { display: none; }
@@ -211,3 +230,124 @@ body.d2.m3p .sources-list { padding-top: 32px; }
 .m3-stats .m3-dd-s { font-size: 15px; line-height: 1.25; white-space: normal; }
 
 .m3-dim button { min-width: 44px; justify-content: center; font-weight: 600; letter-spacing: .02em; }
+
+/* ---------------------------------------------------------------- D83 part 2: the map in three depths ----------------- */
+/* First view: the regions' names, the postcards, photo pins. */
+.m3-l0 { font: 700 12px/1 var(--m3sans); letter-spacing: .26em; text-transform: uppercase; color: #4a4f4a !important; opacity: .82; }
+.m3-cards { position: absolute; z-index: 4; left: 16px; top: 76px; width: 176px; display: flex; flex-direction: column; gap: 8px; transition: opacity .3s var(--e), transform .3s var(--e); }
+.m3.is-panel .m3-cards { opacity: 0; pointer-events: none; }
+.m3-pc { position: relative; height: 64px; border-radius: 14px; overflow: hidden; text-align: left; background: #ece4d3 !important; box-shadow: var(--sh); transition: transform .2s var(--e), box-shadow .2s var(--e); }
+.m3-pc:hover { transform: translateY(-1px); box-shadow: 0 14px 34px rgba(24, 30, 36, .16); }
+.m3-pc img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.m3-pc-none { position: absolute; inset: 0; background: radial-gradient(120% 120% at 20% 10%, #f8f2e4, #e2d8c2); }
+.m3-pc img + .m3-pc-n { color: #fff; text-shadow: 0 1px 8px rgba(0, 0, 0, .45); }
+.m3-pc:has(img)::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 35%, rgba(10, 14, 16, .4)); pointer-events: none; }
+.m3-pc-n { position: absolute; z-index: 2; left: 12px; bottom: 10px; font: 400 17px/1.1 var(--m3serif); color: var(--gi); }
+.m3-pin-ph { gap: 0; }
+.m3-pin-img { display: block; width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2.5px solid #fff; box-shadow: 0 3px 10px rgba(17, 18, 20, .35); background: #e9e4d8; transition: transform .2s var(--e); }
+.m3-pin-ph:hover .m3-pin-img { transform: scale(1.08); }
+.m3-pin-tip { width: 10px; height: 10px; margin-top: -6px; background: #fff; transform: rotate(45deg); box-shadow: 2px 2px 4px rgba(17, 18, 20, .18); }
+.m3-pin-ph span { margin-bottom: 6px; order: -1; }
+.m3-pin-ph.is-cluster .m3-pin-img { box-shadow: 0 3px 10px rgba(17, 18, 20, .35), 6px -4px 0 -1px #fff; }
+.m3-pin-ph.is-cluster .m3-pin-n { position: absolute; top: -6px; right: -10px; min-width: 22px; height: 22px; padding: 0 6px; border-radius: 11px; font-size: 12px; background: var(--gi); border-width: 2px; }
+.m3-pin-ph { position: relative; }
+
+/* The card: photo with a caption naming what it shows, the line, the tiles. */
+.m3-ph { position: relative; margin: 0; }
+.m3-ph figcaption { position: absolute; left: 12px; bottom: 10px; right: 12px; font: 500 12px/1.3 var(--m3sans); color: #fff; text-shadow: 0 1px 6px rgba(0, 0, 0, .55); }
+.m3-photo-quiet { display: flex; align-items: flex-end; padding: 14px 16px; aspect-ratio: 16 / 5; background: radial-gradient(120% 140% at 15% 0%, #faf5e9, #e7decb); }
+.m3-photo-quiet span { font: 400 15px/1 var(--m3serif); color: var(--gm); letter-spacing: .02em; }
+.m3-line { margin: 8px 0 0; font-size: 14px; line-height: 1.45; color: var(--gm); }
+.m3-sheet .ht-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.m3-tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 20px; }
+.m3-tiles-paid { margin-top: 8px; grid-template-columns: 1fr 1fr; }
+.m3-tile { display: flex; flex-direction: column; align-items: stretch; gap: 8px; min-height: 96px; padding: 12px 14px 14px !important; border-radius: 16px; text-align: left; text-decoration: none;
+  background: rgba(120, 120, 110, .08) !important; color: var(--gi) !important; transition: background-color .2s var(--e), transform .2s var(--e); }
+.m3-tile:hover { background: rgba(120, 120, 110, .14) !important; }
+.m3-tile:active { transform: scale(.985); }
+.m3-tile-w { grid-column: 1 / -1; }
+.m3-tt { display: flex; align-items: center; justify-content: space-between; gap: 8px; font: 700 12px/1.2 var(--m3sans); letter-spacing: .12em; text-transform: uppercase; color: var(--gm); }
+.m3-tt svg { width: 14px; height: 14px; opacity: .7; }
+.m3-pp { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.m3-pp > span { display: grid; gap: 4px; align-content: start; }
+.m3-pp small { font: 600 12px/1.2 var(--m3sans); color: var(--gm); }
+.m3-pp b { font: 400 21px/1.15 var(--m3serif); font-variant-numeric: tabular-nums; }
+.m3-pp b.m3-dim-t { font-size: 17px; color: var(--gm); }
+.m3-pp b + small, .m3-pp b small { font-weight: 500; }
+.m3-pp b small { display: block; margin-top: 2px; }
+.m3-pp-1 { grid-template-columns: 1fr; }
+.m3-tr dd .m3-dim-t, .m3-dim-t { color: var(--gm); }
+.m3-tl { font: 400 15px/1.4 var(--m3serif); }
+.m3-tr { margin: 0; display: grid; gap: 8px; }
+.m3-tr div { display: grid; gap: 2px; }
+.m3-tr dt { font: 600 12px/1.25 var(--m3sans); color: var(--gm); }
+.m3-tr dd { margin: 0; font: 400 15px/1.25 var(--m3serif); font-variant-numeric: tabular-nums; }
+.m3-tr-l { margin-top: 16px; gap: 12px; } .m3-tr-l dd { font-size: 21px; }
+.m3-soon { display: grid; gap: 4px; } .m3-soon b { font: 400 17px/1.2 var(--m3serif); } .m3-soon small { font-size: 12px; line-height: 1.35; color: var(--gm); }
+.m3-pk-paid { margin-top: 20px; }
+.m3-tile-p { min-height: 84px; }
+.m3-ghost { width: 100%; height: 30px; fill: #2f5d50; stroke: #2f5d50; opacity: .28; filter: blur(2.2px); }
+.m3-lock { width: 13px !important; height: 13px !important; }
+.m3-hint { font-size: 15px !important; color: var(--gm); }
+.m3-mare:empty { display: none; }
+.m3-mare { margin-top: 20px; }
+
+/* A tile's own view: the chart (Apple Stocks) or the strips. */
+.m3-tv { padding-top: 8px; }
+.m3-back { display: inline-flex; align-items: center; gap: 4px; margin: 0 0 16px -4px; padding: 8px 4px !important; font-size: 14px; font-weight: 600; color: #2f5d50 !important; }
+.m3-back svg { width: 16px; height: 16px; }
+.m3-sheet h3.m3-find { font-size: 28px; line-height: 1.15; }
+.m3-sheet h3.m3-h-s { font-size: 32px; }
+.m3-big { display: flex; align-items: baseline; gap: 12px; margin: 16px 0 0; }
+.m3-big b { font: 400 34px/1 var(--m3serif); font-variant-numeric: tabular-nums; }
+.m3-big span { font: 700 14px/1 var(--m3sans); color: var(--gm); font-variant-numeric: tabular-nums; }
+.m3-big span.is-up { color: #2f5d50; }
+.m3-rng { margin-top: 16px; height: 38px; background: rgba(120, 120, 110, .1); border-radius: 999px; }
+.m3-rng button { height: 30px; min-width: 52px; justify-content: center; }
+.m3-rng button[disabled] { opacity: .35; cursor: default; }
+.m3-chartw { position: relative; margin-top: 20px; }
+.m3-chart { display: block; width: 100%; height: 160px; overflow: visible; }
+.m3-cb { stroke: rgba(120, 120, 110, .3); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.m3-cl { fill: none; stroke: #2f5d50; stroke-width: 2.2; stroke-linejoin: round; stroke-linecap: round; vector-effect: non-scaling-stroke; stroke-dasharray: 1; stroke-dashoffset: 1; animation: m3draw .3s var(--e) forwards; }
+@keyframes m3draw { to { stroke-dashoffset: 0; } }
+.m3-cdot { position: absolute; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: #2f5d50; box-shadow: 0 0 0 4px rgba(47, 93, 80, .16); opacity: 0; animation: m3in .2s .28s var(--e) forwards; }
+@keyframes m3in { to { opacity: 1; } }
+.m3-chartw { height: auto; }
+.m3-chartw .m3-chart { height: 160px; }
+.m3-cax { display: flex; justify-content: space-between; gap: 8px; margin: 8px 0 0; font: 600 12px/1.2 var(--m3sans); color: var(--gm); font-variant-numeric: tabular-nums; }
+.m3-band { margin: 16px 0 0; font: 400 17px/1.45 var(--m3serif); }
+.m3-strip { margin-top: 24px; }
+.m3-strip p { margin: 0; font-size: 15px; line-height: 1.4; }
+.m3-strip-l { position: relative; height: 28px; margin-top: 12px; border-bottom: 1px solid rgba(120, 120, 110, .25); }
+.m3-strip-l i { position: absolute; bottom: 0; width: 1px; height: 12px; background: rgba(60, 64, 60, .22); }
+.m3-strip-l s { position: absolute; bottom: 0; width: 2px; height: 22px; margin-left: -1px; background: var(--gi); }
+.m3-strip-l b { position: absolute; bottom: 4px; width: 12px; height: 12px; margin-left: -6px; border-radius: 50%; background: #2f5d50; box-shadow: 0 0 0 3px #fff; }
+.m3-strip-n { display: flex; justify-content: space-between; margin-top: 6px !important; font: 600 12px/1 var(--m3sans) !important; color: var(--gm); }
+
+/* The unlock sheet. */
+.m3-unlock { position: absolute; inset: 0; z-index: 9; display: flex; padding: 16px; background: rgba(12, 14, 18, .24); -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); opacity: 0; transition: opacity .22s var(--e); }
+.m3-unlock.is-open { opacity: 1; }
+.m3-unlock-box { position: relative; margin: auto; width: min(460px, 100%); max-height: 100%; overflow-y: auto; padding: 28px 24px 24px; border-radius: 20px; background: rgba(255, 255, 255, .96); box-shadow: 0 30px 80px rgba(0, 0, 0, .22);
+  transform: translateY(12px); transition: transform .26s var(--e); }
+.m3-unlock.is-open .m3-unlock-box { transform: none; }
+.m3-unlock h3 { margin: 0; padding-right: 36px; font: 400 26px/1.2 var(--m3serif); letter-spacing: -.01em; }
+.m3-unlock-p { margin: 12px 0 0; font-size: 15px; line-height: 1.5; color: var(--gm); }
+.m3-unlock-list { margin: 16px 0 20px; padding: 0; list-style: none; font-size: 15px; line-height: 1.45; }
+.m3-unlock-list li { position: relative; padding: 8px 0 8px 22px; border-top: 1px solid rgba(120, 120, 110, .16); }
+.m3-unlock-list li::before { content: ""; position: absolute; left: 2px; top: 15px; width: 8px; height: 8px; border-radius: 50%; background: #2f5d50; opacity: .7; }
+.m3-unlock .m3-x { top: 16px; right: 16px; }
+.m3-btn-off { width: 100%; opacity: .55; cursor: not-allowed; }
+.m3-btn-off:hover { background: var(--gi) !important; color: var(--g2) !important; }
+@media (prefers-reduced-motion: reduce) { .m3-cl { animation: none; stroke-dashoffset: 0; } .m3-cdot { animation: none; opacity: 1; } }
+
+@media (max-width: 819px) {
+  .m3-cards { top: auto; left: 0; right: 0; bottom: 10px; width: auto; flex-direction: row; overflow-x: auto; scrollbar-width: none; padding: 0 10px; scroll-padding: 0 10px; scroll-snap-type: x proximity; }
+  .m3-cards::-webkit-scrollbar { display: none; }
+  .m3-pc { flex: none; width: 112px; height: 84px; scroll-snap-align: start; }
+  .m3-unlock-box { margin: auto 0 0; width: 100%; border-radius: 20px 20px 0 0; max-height: 92%; padding-bottom: calc(24px + env(safe-area-inset-bottom)); }
+  .m3-unlock h3 { font-size: 24px !important; }
+  .m3-unlock { padding: 0; }
+  .m3-tiles { margin-top: 16px; }
+  .m3-pp b { font-size: 19px; }
+}
+@media (min-width: 820px) { .m3:has(.m3-sheet.is-open) .m3-attr { opacity: 0; } }

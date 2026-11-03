@@ -1,0 +1,35 @@
+---
+// "By the same developer" (3 Nov 2026): the developer's showcases in other municipalities, one quiet link each, at the end
+// of a showcase. Nothing renders when the developer has only one. Styles inline so the showcase stylesheet stays as it is.
+import type { Lang } from "../i18n";
+import { c } from "../lib/copy";
+import { img } from "../lib/projects";
+
+interface Props { lang: Lang; from: string; developer: string; items: { id: string; name: string; place: string; href: string; render?: string | null }[]; }
+const { lang, from, developer, items } = Astro.props;
+---
+{items.length > 0 && <section class="sr" aria-labelledby="sr-h" data-sr={from}>
+  <h2 id="sr-h">{c("mtvc.related.h", lang)}</h2>
+  <p class="sr-by">{developer}</p>
+  <ul>{items.map((x) => <li><a href={x.href} data-sr-to={x.id}>
+    {x.render && <img src={img(x.render, 800)} alt="" width="800" height="450" loading="lazy" />}
+    <span class="sr-n">{x.name}</span><span class="sr-p">{x.place} →</span></a></li>)}</ul>
+</section>}
+
+<style is:inline>
+  .sr { max-width: 1120px; margin: 0 auto; padding: 40px 24px 8px; }
+  .sr h2 { font: 400 28px/1.15 var(--serif); margin: 0; }
+  .sr-by { margin: 8px 0 16px; font-size: 15px; color: var(--muted); }
+  .sr ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 360px)); gap: 24px; }
+  .sr a { display: grid; gap: 4px; color: var(--ink); text-decoration: none; }
+  .sr img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; display: block; margin-bottom: 8px; transition: opacity .25s; }
+  .sr a:hover img { opacity: .9; }
+  .sr-n { font: 400 21px/1.2 var(--serif); } .sr-p { font-size: 15px; color: var(--muted); }
+</style>
+
+<script>
+  import { track, edOf } from "../lib/track";
+  document.querySelectorAll<HTMLElement>("[data-sr]").forEach((box) => box.addEventListener("click", (e) => {
+    if ((e.target as HTMLElement).closest("a[data-sr-to]")) track(`${edOf()}/p/${box.dataset.sr}/rel`);
+  }));
+</script>
