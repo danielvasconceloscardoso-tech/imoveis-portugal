@@ -116,9 +116,9 @@ const live = A.live && !!A.stripe.region && !!A.stripe.all;
       if (id.startsWith("r-")) { const k = id.slice(2), rg = T.rg?.[k]; if (!rg) return null; const r2 = T.r2?.[rg.c2] ?? {};
         return { id, name: L.regions[k] ?? k, kick: L.regionKick, href: `${L.map}?region=${k}`, photo: L.regionPhotos[k] ?? "", d: { m2: r2.m2, rr: 1, p5: rg.p5 } }; }
       if (id.startsWith("p-")) { const code = id.slice(2), p = T.p?.[code]; if (!p) return null; const m = T.m?.[p.m] ?? {};
-        return { id, name: p.n, kick: L.parish.replace("{m}", m.n ?? ""), href: `${L.map}?parish=${code}`, photo: L.regionPhotos[m.r] ?? "", d: { ...m, ...p } }; }
+        return { id, name: p.n, kick: L.parish.replace("{m}", m.n ?? ""), href: `${L.map}?parish=${code}`, photo: "", d: { ...m, ...p } }; }
       const m = T.m?.[id]; if (!m) return null;
-      return { id, name: m.n, kick: L.regions[m.r] ?? "", href: `${L.map}?place=${id}`, photo: L.placePhotos[id] ?? L.regionPhotos[m.r] ?? "", d: { ...m, c5: C5[id] ?? null } };
+      return { id, name: m.n, kick: L.regions[m.r] ?? "", href: `${L.map}?place=${id}`, photo: L.placePhotos[id] ?? "", d: { ...m, c5: C5[id] ?? null } };
     };
     // The golden sample places (content/facts/map/places/<slug>/): drive times and the flight, from their small file.
     const C5: Record<string, any> = {};

@@ -448,14 +448,15 @@ export function initMapV3(root: HTMLElement) {
   const dateF = (d: string) => { try { return new Intl.DateTimeFormat(loc, { day: "numeric", month: "long", year: "numeric" }).format(new Date(`${d}T12:00:00`)); } catch { return d; } };
 
   // The photograph: the place's own gallery (hero first, swipe for the other views), else its own single photograph,
-  // else the region's with a caption naming what it shows, else a quiet typographic band.
-  function photoHTML(slug: string | null, r: string, c5?: any): string {
+  // else a quiet typographic band. The region's photograph appears only on the region's own card (operator, 3 Nov: a
+  // municipality or parish never shows a view of another place, e.g. Viseu with the Ria de Aveiro).
+  function photoHTML(slug: string | null, r: string, c5?: any, isRegion = false): string {
     if (c5?.ph?.length) {
       const n = c5.ph.length;
       const imgs = c5.ph.map((p: any, i: number) => `<img class="m3-photo" src="/img/v2/${p.f}-640.webp" srcset="/img/v2/${p.f}-640.webp 640w, /img/v2/${p.f}-1024.webp 1024w${p.w >= 1600 ? `, /img/v2/${p.f}-1600.webp 1600w` : ""}" sizes="(max-width: 819px) 100vw, 420px" alt="${esc(p.alt?.[cfg.lang] ?? "")}" width="640" height="400"${i ? ` loading="lazy"` : ` fetchpriority="high"`} decoding="async" aria-label="${esc(C5.photoN.replace("{i}", String(i + 1)).replace("{n}", String(n)))}">`).join("");
       return `<figure class="m3-ph m3-gal" data-gal><div class="m3-gal-t" data-gal-t tabindex="0">${imgs}</div>${n > 1 ? `<p class="m3-gal-d" aria-hidden="true">${c5.ph.map((_: any, i: number) => `<i${i ? "" : ` class="is-on"`}></i>`).join("")}</p>` : ""}</figure>`;
     }
-    const own = slug ? cfg.photos[slug] : "", reg = cfg.regionPhotos?.[r] ?? "";
+    const own = slug ? cfg.photos[slug] : "", reg = isRegion ? cfg.regionPhotos?.[r] ?? "" : "";
     const f = own || reg; if (!f) return `<div class="m3-photo m3-photo-none m3-photo-quiet"><span>${esc(L.regions[r] || "")}</span></div>`;
     const cap = !own && T4.ph[f] ? `<figcaption>${esc(T4.ph[f])}</figcaption>` : "";
     return `<figure class="m3-ph"><img class="m3-photo" src="/img/v2/${f}-640.webp" srcset="/img/v2/${f}-640.webp 640w, /img/v2/${f}-1024.webp 1024w" sizes="420px" alt="" width="640" height="400">${cap}</figure>`;
@@ -574,7 +575,7 @@ export function initMapV3(root: HTMLElement) {
     const rg = T?.rg?.[key] ?? {}, c2 = rg.c2 ?? "PT", name = L.regions[key] || key;
     const x: Ctx = { kind: "region", id: key, name, c2, region: key };
     const d = { m2: T?.r2?.[c2]?.m2 ?? rg.m2, p5: rg.p5 };
-    let h = `${photoHTML(null, key)}<div class="m3-sb"><p class="m3-kick">${esc(T4.regionKick)}</p><div class="ht-row"><h2 class="m3-h" tabindex="-1">${esc(name)}</h2>${heartHTML("region", `r-${key}`, name, `${cfg.links.map}?region=${key}`)}</div>`;
+    let h = `${photoHTML(null, key, undefined, true)}<div class="m3-sb"><p class="m3-kick">${esc(T4.regionKick)}</p><div class="ht-row"><h2 class="m3-h" tabindex="-1">${esc(name)}</h2>${heartHTML("region", `r-${key}`, name, `${cfg.links.map}?region=${key}`)}</div>`;
     h += `<p class="m3-line">${esc(T4.regionLine.replace("{n}", nf.format(rg.k ?? 0)).replace("{cities}", (rg.cities ?? []).join(", ")))}</p><div class="m3-tiles">${priceTile(d)}</div>`;
     h += `<p class="m3-buys m3-hint">${esc(T4.regionPick)}</p>${ctaHTML(name)}${mareHTML()}</div>`;
     ctx = x; rerender = () => showRegion(key, false); srcFor = () => sourcesHTML(d, x);
