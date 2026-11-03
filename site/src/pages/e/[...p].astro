@@ -4,6 +4,8 @@
 //   /e/{ed}/flow/{flow}/start/   a reader answered the first question of a flow (concierge, partner, viewing, lawyer)
 //   /e/{ed}/flow/{flow}/sent/    the request left with the reader's consent
 //   /e/{ed}/p/{project}/{pin|card|req}/   a partner project's map pin opened, its Concierge card clicked, a request
+//   /e/{ed}/p/{project}/{unit|filter|rel}/   on a showcase: a home's "I'm interested" in the unit table, the unit filter
+//                                used, a "By the same developer" link followed (3 Nov 2026)
 //   /e/s/{municipality}/         a place opened on the map (search or tap)
 //   /e/q/{question}/             a question opened on Perguntas
 //   /e/{ed}/sim1/{what}/{value}/ the one-screen simulator: slider band, region, type, use, payment, row opened, next step
@@ -35,6 +37,7 @@ export function getStaticPaths() {
     for (const k of ["concierge", "back", "req", "map"]) out.push(`${e}/next/${k}`);
     for (const p of PROJECTS) for (const id of [p.id, ...(p.units ?? []).map((u) => `${p.id}-${u.id}`)]) if (/^[a-z0-9-]+$/.test(id)) out.push(`${e}/save/home/${id}`, `${e}/unsave/home/${id}`);
     out.push(`${e}/saved/go`);
+    for (const p of PROJECTS) for (const k of ["pin", "card", "req", "unit", "filter", "rel"]) out.push(`${e}/p/${p.id}/${k}`);
   }
   for (const m of munis) out.push(`s/${m}`, `save/region/${m}`, `unsave/region/${m}`);
   for (const q of qs) if (/^[a-z0-9-]+$/.test(q)) out.push(`q/${q}`);

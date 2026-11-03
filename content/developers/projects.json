@@ -1,5 +1,5 @@
 {
- "_how": "Developer projects (prompts 26 §1 and 28 §2). partner=true: shown on the public map, the place card ('Partner developers here') and a showcase page, labelled 'Sponsored' (only once the developer has signed and paid, D6, D38). partner=false: shown only in that developer's private demo (/d/{demo}/). Facts only as published by the developer or its public listings, with the URL of every item in 'sources' and the date in 'checked'; prices exactly as published (null = on request). On the site, a partner's line must also be written natively in PT and FR ('lines': {pt, fr}); the English 'line' is used for demos. Built by scripts/developers/import.py.",
+ "_how": "Developer projects (prompts 26 §1 and 28 §2). partner=true: shown on the public map, the place card ('Partner developers here') and a showcase page, labelled 'Sponsored' (only once the developer has signed and paid, D6, D38). partner=false: shown only in that developer's private demo (/d/{demo}/). Facts only as published by the developer or its public listings, with the URL of every item in 'sources' and the date in 'checked'; prices exactly as published (null = on request). On the site, a partner's line must also be written natively in PT and FR ('lines': {pt, fr}); the English 'line' is used for demos. Built by scripts/developers/import.py. A hand-entered partner may add 'unitTable' (every home as the developer publishes it, shown on the showcase, no unit pages) and 'location' (stated facts with sources; distances are ours, straight line from OpenStreetMap).",
  "projects": [
   {
    "id": "tomas-ribeiro-79",
@@ -1009,6 +1009,279 @@
     "https://marbleterrace.pt/",
     "https://idinvestimentosimobiliarios.com/",
     "https://nominatim.openstreetmap.org/search?q=Avenida+Dr.+M%C3%A1rio+Soares,+Gondomar&format=json"
+   ]
+  },
+  {
+   "id": "marble-terrace-vila-do-conde",
+   "name": "Marble Terrace Vila do Conde",
+   "developer": "ID Investimentos Imobiliários",
+   "devSlug": "id-investimentos-imobiliarios",
+   "muni": "vila-do-conde",
+   "region": "Norte",
+   "near": [
+    "Porto",
+    "Área Metropolitana do Porto",
+    "Póvoa de Varzim"
+   ],
+   "lon": -8.7454,
+   "lat": 41.3711,
+   "line": "46 apartments, T1 to T4, in one building of ground floor plus four floors on Avenida General Humberto Delgado in Portas Fronhas, Vila do Conde, with gym, spa with sauna and Turkish bath, coworking, library, a garden with a playground and solar panels for every unit.",
+   "lines": {
+    "pt": "46 apartamentos de T1 a T4 num edifício de rés-do-chão e quatro pisos na Avenida General Humberto Delgado, em Portas Fronhas, Vila do Conde, com ginásio, spa com sauna e banho turco, cowork, biblioteca, jardim com parque infantil e painéis solares em cada fração.",
+    "en": "46 apartments, T1 to T4, in one building of ground floor plus four floors on Avenida General Humberto Delgado in Portas Fronhas, Vila do Conde, with gym, spa with sauna and Turkish bath, coworking, library, a garden with a playground and solar panels for every unit.",
+    "fr": "46 appartements du T1 au T4 dans un immeuble de rez-de-chaussée et quatre étages sur l'Avenida General Humberto Delgado, à Portas Fronhas, Vila do Conde, avec salle de sport, spa avec sauna et hammam, coworking, bibliothèque, jardin avec aire de jeux et panneaux solaires pour chaque logement."
+   },
+   "summary": {
+    "pt": "46 apartamentos · T1 a T4 · 1 edifício",
+    "en": "46 apartments · T1 to T4 · 1 building",
+    "fr": "46 appartements · T1 à T4 · 1 immeuble"
+   },
+   "delivery": null,
+   "url": "https://marbleterrace.pt/viladoconde/",
+   "partner": true,
+   "pending": false,
+   "checked": "2026-11-03",
+   "render": "/img/developers/marble-terrace-vila-do-conde/exterior",
+   "credit": "ID Investimentos Imobiliários (render)",
+   "gallery": [
+    "/img/developers/marble-terrace-vila-do-conde/exterior",
+    "/img/developers/marble-terrace-vila-do-conde/facade",
+    "/img/developers/marble-terrace-vila-do-conde/facade-garden",
+    "/img/developers/marble-terrace-vila-do-conde/facade-street",
+    "/img/developers/marble-terrace-vila-do-conde/entrance",
+    "/img/developers/marble-terrace-vila-do-conde/pergola",
+    "/img/developers/marble-terrace-vila-do-conde/garden",
+    "/img/developers/marble-terrace-vila-do-conde/garden-walk",
+    "/img/developers/marble-terrace-vila-do-conde/gym",
+    "/img/developers/marble-terrace-vila-do-conde/living",
+    "/img/developers/marble-terrace-vila-do-conde/living-2",
+    "/img/developers/marble-terrace-vila-do-conde/bedroom",
+    "/img/developers/marble-terrace-vila-do-conde/bedroom-2"
+   ],
+   "credits": [
+    "ID Investimentos Imobiliários (render)"
+   ],
+   "from": null,
+   "typologies": [
+    "T1",
+    "T2",
+    "T3",
+    "T4"
+   ],
+   "features": [
+    {
+     "pt": "Ginásio Technogym, spa com sauna e banho turco, balneários",
+     "en": "Technogym gym, spa with sauna and Turkish bath, changing rooms",
+     "fr": "Salle de sport Technogym, spa avec sauna et hammam, vestiaires",
+     "card": true
+    },
+    {
+     "pt": "Painéis solares fotovoltaicos independentes em cada fração",
+     "en": "Separate solar panels for every unit",
+     "fr": "Panneaux solaires photovoltaïques indépendants pour chaque logement",
+     "card": true
+    },
+    {
+     "pt": "Estacionamento: lugar para os T1, box privativa para os T2, T3 e T4",
+     "en": "Parking: a space for each T1, a private box for each T2, T3 and T4",
+     "fr": "Stationnement : une place pour les T1, un box privé pour les T2, T3 et T4",
+     "card": true
+    },
+    {
+     "pt": "Sala de condomínio com biblioteca, sala de cowork mobilada com copa, sala polivalente",
+     "en": "Residents' room with library, furnished coworking room with kitchenette, multipurpose room",
+     "fr": "Salle de copropriété avec bibliothèque, salle de coworking meublée avec kitchenette, salle polyvalente"
+    },
+    {
+     "pt": "Jardim, zona de estar exterior e parque infantil; lavandaria comum",
+     "en": "Garden, outdoor seating area and playground; shared laundry",
+     "fr": "Jardin, espace de détente extérieur et aire de jeux ; laverie commune"
+    },
+    {
+     "pt": "Fachada ventilada (Knauf Insulation) em quartzo «mármore verde» e cerâmica Porcelanosa; caixilharia Technal com corte térmico e vidro duplo",
+     "en": "Ventilated façade (Knauf Insulation) in “green marble” quartz and Porcelanosa ceramic; Technal thermal-break frames with double glazing",
+     "fr": "Façade ventilée (Knauf Insulation) en quartz « marbre vert » et céramique Porcelanosa ; menuiseries Technal à rupture de pont thermique et double vitrage"
+    },
+    {
+     "pt": "Cozinha com ilha em quartzo e equipamentos Miele; casas de banho Living Ceramics, louças suspensas Geberit; piso laminado de carvalho",
+     "en": "Kitchen with a quartz island and Miele appliances; Living Ceramics bathrooms, wall-hung Geberit sanitaryware; oak laminate floors",
+     "fr": "Cuisine avec îlot en quartz et électroménager Miele ; salles de bains Living Ceramics, sanitaires suspendus Geberit ; sol stratifié chêne"
+    },
+    {
+     "pt": "Ar condicionado Haier por condutas, com app; bomba de calor multisplit para clima e águas quentes",
+     "en": "Ducted Haier air conditioning with an app; multisplit heat pump for heating, cooling and hot water",
+     "fr": "Climatisation Haier gainable avec application ; pompe à chaleur multisplit pour le chauffage, le rafraîchissement et l'eau chaude"
+    },
+    {
+     "pt": "Videoporteiro digital, porta de segurança Dierre, deteção de incêndio e de monóxido de carbono nas garagens e zonas comuns",
+     "en": "Digital video door entry, Dierre security door, fire and carbon monoxide detection in the garages and common areas",
+     "fr": "Vidéophone numérique, porte de sécurité Dierre, détection d'incendie et de monoxyde de carbone dans les garages et parties communes"
+    },
+    {
+     "pt": "Tomada para carregamento elétrico ligada à fração, em função da disponibilidade da corrente elétrica; portões acionados por telemóvel",
+     "en": "EV charging socket linked to the unit, subject to the electrical supply available; gates opened from a phone",
+     "fr": "Prise de recharge électrique reliée au logement, selon la puissance électrique disponible ; portails commandés par téléphone"
+    },
+    {
+     "pt": "Área habitável de 67 a 216 m²; jardins no rés-do-chão, terraços no 4.º piso",
+     "en": "Living area from 67 to 216 m²; gardens on the ground floor, terraces on the 4th floor",
+     "fr": "Surface habitable de 67 à 216 m² ; jardins au rez-de-chaussée, terrasses au 4e étage"
+    }
+   ],
+   "featuresNote": {
+    "pt": "Segundo o promotor, alguns materiais, equipamentos e acabamentos podem ter ligeiras alterações.",
+    "en": "According to the developer, some materials, equipment and finishes may change slightly.",
+    "fr": "Selon le promoteur, certains matériaux, équipements et finitions peuvent légèrement changer."
+   },
+   "blocks": [
+    {
+     "id": "A",
+     "units": [
+      {
+       "typology": "T1",
+       "total": 14,
+       "forSale": 4,
+       "reserved": 10,
+       "sold": 0
+      },
+      {
+       "typology": "T2",
+       "total": 19,
+       "forSale": 2,
+       "reserved": 17,
+       "sold": 0
+      },
+      {
+       "typology": "T3",
+       "total": 10,
+       "forSale": 9,
+       "reserved": 1,
+       "sold": 0
+      },
+      {
+       "typology": "T4",
+       "total": 3,
+       "forSale": 3,
+       "reserved": 0,
+       "sold": 0
+      }
+     ]
+    }
+   ],
+   "availabilityChecked": "2026-11-03",
+   "availabilitySource": "https://marbleterrace.pt/viladoconde/",
+   "availabilityNote": {
+    "pt": "Tabela de frações publicada pelo promotor em marbleterrace.pt/viladoconde, com áreas, exposição, estacionamento e estado, sem preços.",
+    "en": "Unit table published by the developer at marbleterrace.pt/viladoconde, with areas, aspect, parking and status, without prices.",
+    "fr": "Tableau des logements publié par le promoteur sur marbleterrace.pt/viladoconde, avec surfaces, orientation, stationnement et statut, sans prix."
+   },
+   "unitTableNote": {
+    "pt": "O promotor não publica preços. Valores como publicados, incluindo onde a área bruta total não coincide com a soma das partes (fração A4.4).",
+    "en": "The developer publishes no prices. Figures as published, including where the total gross area does not match the sum of its parts (unit A4.4).",
+    "fr": "Le promoteur ne publie aucun prix. Valeurs telles que publiées, y compris lorsque la surface brute totale ne correspond pas à la somme des parties (lot A4.4)."
+   },
+   "unitTable": [
+    {"ref": "A0.1", "typology": "T1", "floor": 0, "sun": "SO", "gross": 139.45, "dwelling": 70.8, "balcony": 11.3, "terrace": null, "garden": 33.2, "parking": {"kind": "space", "cars": 1, "area": 17.2}, "storage": 6.95, "price": null, "status": "reserved"},
+    {"ref": "A0.2", "typology": "T1", "floor": 0, "sun": "SO", "gross": 125.6, "dwelling": 70.65, "balcony": 7.5, "terrace": null, "garden": 23.3, "parking": {"kind": "space", "cars": 1, "area": 17.2}, "storage": 6.95, "price": null, "status": "available"},
+    {"ref": "A0.3", "typology": "T1", "floor": 0, "sun": "SO", "gross": 122.4, "dwelling": 70.8, "balcony": 7.5, "terrace": null, "garden": 23.3, "parking": {"kind": "space", "cars": 1, "area": 14.6}, "storage": 6.2, "price": null, "status": "reserved"},
+    {"ref": "A0.4", "typology": "T1", "floor": 0, "sun": "SO", "gross": 123.05, "dwelling": 70.65, "balcony": 7.5, "terrace": null, "garden": 23.3, "parking": {"kind": "space", "cars": 1, "area": 14.6}, "storage": 7.0, "price": null, "status": "reserved"},
+    {"ref": "A0.5", "typology": "T1", "floor": 0, "sun": "SO", "gross": 118.05, "dwelling": 67.35, "balcony": 7.1, "terrace": null, "garden": 22.1, "parking": {"kind": "space", "cars": 1, "area": 15.2}, "storage": 6.3, "price": null, "status": "reserved"},
+    {"ref": "A0.6", "typology": "T2", "floor": 0, "sun": "NO/NE/SE", "gross": 179.65, "dwelling": 110.35, "balcony": 5.7, "terrace": null, "garden": 29.4, "parking": {"kind": "box", "cars": 2, "area": 27.9}, "storage": 6.3, "price": null, "status": "reserved"},
+    {"ref": "A0.7", "typology": "T3", "floor": 0, "sun": "SO/NO/NE", "gross": 360.05, "dwelling": 147.55, "balcony": 47.1, "terrace": null, "garden": 115.6, "parking": {"kind": "box", "cars": 3, "area": 43.5}, "storage": 6.3, "price": null, "status": "available"},
+    {"ref": "A1.1", "typology": "T1", "floor": 1, "sun": "SO", "gross": 101.45, "dwelling": 67.2, "balcony": 13.2, "terrace": null, "garden": null, "parking": {"kind": "space", "cars": 1, "area": 15.15}, "storage": 5.9, "price": null, "status": "available"},
+    {"ref": "A1.2", "typology": "T1", "floor": 1, "sun": "SO", "gross": 101.45, "dwelling": 67.2, "balcony": 13.2, "terrace": null, "garden": null, "parking": {"kind": "space", "cars": 1, "area": 15.15}, "storage": 5.9, "price": null, "status": "reserved"},
+    {"ref": "A1.3", "typology": "T1", "floor": 1, "sun": "SO", "gross": 103.6, "dwelling": 67.2, "balcony": 13.2, "terrace": null, "garden": null, "parking": {"kind": "space", "cars": 1, "area": 17.2}, "storage": 6.0, "price": null, "status": "available"},
+    {"ref": "A1.4", "typology": "T2", "floor": 1, "sun": "SO/NE", "gross": 170.85, "dwelling": 115.45, "balcony": 21.2, "terrace": null, "garden": null, "parking": {"kind": "box", "cars": 2, "area": 27.9}, "storage": 6.3, "price": null, "status": "reserved"},
+    {"ref": "A1.5", "typology": "T2", "floor": 1, "sun": "SO/NE", "gross": 170.75, "dwelling": 115.35, "balcony": 21.2, "terrace": null, "garden": null, "parking": {"kind": "box", "cars": 2, "area": 27.9}, "storage": 6.3, "price": null, "status": "reserved"},
+    {"ref": "A1.6", "typology": "T2", "floor": 1, "sun": "SO/NE", "gross": 170.8, "dwelling": 115.4, "balcony": 21.2, "terrace": null, "garden": null, "parking": {"kind": "box", "cars": 2, "area": 27.9}, "storage": 6.3, "price": null, "status": "reserved"},
+    {"ref": "A1.7", "typology": "T2", "floor": 1, "sun": "SO/NE", "gross": 170.85, "dwelling": 115.45, "balcony": 21.2, "terrace": null, "garden": null, "parking": {"kind": "box", "cars": 2, "area": 27.9}, "storage": 6.3, "price": null, "status": "reserved"},
+    {"ref": "A1.8", "typology": "T2", "floor": 1, "sun": "SE/SO", "gross": 205.15, "dwelling": 133.4, "balcony": 35.3, "terrace": null, "garden": null, "parking": {"kind": "box", "cars": 2, "area": 30.25}, "storage": 6.2, "price": null, "status": "available"},
+    {"ref": "A1.9", "typology": "T2", "floor": 1, "sun": "NO/NE/SE", "gross": 166.75, "dwelling": 110.1, "balcony": 21.3, "terrace": null, "garden": null, "parking": {"kind": "box", "cars": 2, "area": 29.15}, "storage": 6.2, "price": null, "status": "reserved"},
+    {"ref": "A1.10", "typology": "T3", "floor": 1, "sun": "SO/NO/NE", "gross": 221.2, "dwelling": 148.15, "balcony": 23.0, "terrace": null, "garden": null, "parking": {"kind": "box", "cars": 3, "area": 43.5}, "storage": 6.55, "price": null, "status": "available"},
+    {"ref": "A1.11", "typology": "T3", "floor": 1, "sun": "SE/NO", "gross": 250.9, "dwelling": 173.5, "balcony": 27.9, "terrace": null, "garden": null, "parking": {"kind": "box", "cars": 3, "area": 42.55}, "storage": 6.95, "price": null, "status": "available"},
+    {"ref": "A2.1", "typology": "T1", "floor": 2, "sun": "SO", "gross": 101.8, "dwelling": 67.2, "balcony": 13.2, "terrace": null, "garden": null, "parking": {"kind": "space", "cars": 1, "area": 15.2}, "storage": 6.2, "price": null, "status": "available"},
+    {"ref": "A2.2", "typology": "T1", "floor": 2, "sun": "SO", "gross": 101.85, "dwelling": 67.2, "balcony": 13.2, "terrace": null, "garden": null, "parking": {"kind": "space", "cars": 1, "area": 15.25}, "storage": 6.2, "price": null, "status": "reserved"},
+    {"ref": "A2.3", "typology": "T1", "floor": 2, "sun": "SO", "gross": 101.65, "dwelling": 67.2, "balcony": 13.2, "terrace": null, "garden": null, "parking": {"kind": "space", "cars": 1, "area": 15.25}, "storage": 6.0, "price": null, "status": "reserved"},
+    {"ref": "A2.4", "typology": "T2", "floor": 2, "sun": "SO/NE", "gross": 170.85, "dwelling": 115.45, "balcony": 21.2, "terrace": null, "garden": null, "parking": {"kind": "box", "cars": 2, "area": 27.9}, "storage": 6.3, "price": null, "status": "reserved"},
+    {"ref": "A2.5", "typology": "T2", "floor": 2, "sun": "SO/NE", "gross": 175.75, "dwelling": 115.35, "balcony": 21.2, "terrace": null, "garden": null, "parking": {"kind": "box", "cars": 2, "area": 32.9}, "storage": 6.3, "price": null, "status": "reserved"},
+    {"ref": "A2.6", "typology": "T2", "floor": 2, "sun": "SO/NE", "gross": 172.05, "dwelling": 115.4, "balcony": 21.2, "terrace": null, "garden": null, "parking": {"kind": "box", "cars": 2, "area": 29.15}, "storage": 6.3, "price": null, "status": "reserved"},
+    {"ref": "A2.7", "typology": "T2", "floor": 2, "sun": "SO/NE", "gross": 173.85, "dwelling": 115.45, "balcony": 21.2, "terrace": null, "garden": null, "parking": {"kind": "box", "cars": 2, "area": 30.25}, "storage": 6.95, "price": null, "status": "reserved"},
+    {"ref": "A2.8", "typology": "T2", "floor": 2, "sun": "SE/SO", "gross": 205.25, "dwelling": 133.4, "balcony": 35.3, "terrace": null, "garden": null, "parking": {"kind": "box", "cars": 2, "area": 30.25}, "storage": 6.3, "price": null, "status": "available"},
+    {"ref": "A2.9", "typology": "T2", "floor": 2, "sun": "NO/NE/SE", "gross": 164.85, "dwelling": 110.1, "balcony": 21.3, "terrace": null, "garden": null, "parking": {"kind": "box", "cars": 2, "area": 26.9}, "storage": 6.55, "price": null, "status": "reserved"},
+    {"ref": "A2.10", "typology": "T3", "floor": 2, "sun": "SO/NO/NE", "gross": 220.7, "dwelling": 148.15, "balcony": 23.0, "terrace": null, "garden": null, "parking": {"kind": "box", "cars": 3, "area": 42.55}, "storage": 7.0, "price": null, "status": "available"},
+    {"ref": "A2.11", "typology": "T3", "floor": 2, "sun": "SE/NO", "gross": 250.25, "dwelling": 173.5, "balcony": 27.9, "terrace": null, "garden": null, "parking": {"kind": "box", "cars": 3, "area": 42.55}, "storage": 6.3, "price": null, "status": "available"},
+    {"ref": "A3.1", "typology": "T1", "floor": 3, "sun": "SO", "gross": 114.35, "dwelling": 67.2, "balcony": 13.2, "terrace": null, "garden": null, "parking": {"kind": "box", "cars": 1, "area": 27.75}, "storage": 6.2, "price": null, "status": "reserved"},
+    {"ref": "A3.2", "typology": "T1", "floor": 3, "sun": "SO", "gross": 114.35, "dwelling": 67.2, "balcony": 13.2, "terrace": null, "garden": null, "parking": {"kind": "box", "cars": 1, "area": 27.75}, "storage": 6.2, "price": null, "status": "reserved"},
+    {"ref": "A3.3", "typology": "T1", "floor": 3, "sun": "SO", "gross": 103.7, "dwelling": 67.2, "balcony": 13.2, "terrace": null, "garden": null, "parking": {"kind": "space", "cars": 1, "area": 17.2}, "storage": 6.1, "price": null, "status": "reserved"},
+    {"ref": "A3.4", "typology": "T2", "floor": 3, "sun": "SO/NE", "gross": 173.1, "dwelling": 115.45, "balcony": 21.2, "terrace": null, "garden": null, "parking": {"kind": "box", "cars": 2, "area": 30.25}, "storage": 6.2, "price": null, "status": "reserved"},
+    {"ref": "A3.5", "typology": "T2", "floor": 3, "sun": "SO/NE", "gross": 173.0, "dwelling": 115.35, "balcony": 21.2, "terrace": null, "garden": null, "parking": {"kind": "box", "cars": 2, "area": 30.25}, "storage": 6.2, "price": null, "status": "reserved"},
+    {"ref": "A3.6", "typology": "T2", "floor": 3, "sun": "SO/NE", "gross": 169.7, "dwelling": 115.4, "balcony": 21.2, "terrace": null, "garden": null, "parking": {"kind": "box", "cars": 2, "area": 26.9}, "storage": 6.2, "price": null, "status": "reserved"},
+    {"ref": "A3.7", "typology": "T2", "floor": 3, "sun": "SO/NE", "gross": 175.2, "dwelling": 115.45, "balcony": 21.2, "terrace": null, "garden": null, "parking": {"kind": "box", "cars": 2, "area": 30.25}, "storage": 8.3, "price": null, "status": "reserved"},
+    {"ref": "A3.8", "typology": "T2", "floor": 3, "sun": "SE/SO", "gross": 218.25, "dwelling": 133.4, "balcony": 35.3, "terrace": null, "garden": null, "parking": {"kind": "box", "cars": 3, "area": 42.55}, "storage": 7.0, "price": null, "status": "reserved"},
+    {"ref": "A3.9", "typology": "T2", "floor": 3, "sun": "NO/NE/SE", "gross": 168.35, "dwelling": 110.1, "balcony": 21.3, "terrace": null, "garden": null, "parking": {"kind": "box", "cars": 2, "area": 30.85}, "storage": 6.1, "price": null, "status": "reserved"},
+    {"ref": "A3.10", "typology": "T3", "floor": 3, "sun": "SO/NO/NE", "gross": 222.0, "dwelling": 148.15, "balcony": 23.0, "terrace": null, "garden": null, "parking": {"kind": "box", "cars": 3, "area": 42.55}, "storage": 8.3, "price": null, "status": "reserved"},
+    {"ref": "A3.11", "typology": "T3", "floor": 3, "sun": "SE/NO", "gross": 252.25, "dwelling": 173.5, "balcony": 27.9, "terrace": null, "garden": null, "parking": {"kind": "box", "cars": 3, "area": 42.55}, "storage": 8.3, "price": null, "status": "available"},
+    {"ref": "A4.1", "typology": "T3", "floor": 4, "sun": "SE/SO", "gross": 279.55, "dwelling": 176.7, "balcony": null, "terrace": 45.3, "garden": null, "parking": {"kind": "box", "cars": 3, "area": 43.5}, "storage": 14.05, "price": null, "status": "available"},
+    {"ref": "A4.2", "typology": "T3", "floor": 4, "sun": "SO/NE", "gross": 271.8, "dwelling": 176.1, "balcony": null, "terrace": 43.9, "garden": null, "parking": {"kind": "box", "cars": 3, "area": 43.5}, "storage": 8.3, "price": null, "status": "available"},
+    {"ref": "A4.3", "typology": "T3", "floor": 4, "sun": "SO/NE", "gross": 299.5, "dwelling": 176.1, "balcony": null, "terrace": 43.9, "garden": null, "parking": {"kind": "box", "cars": 3, "area": 69.8}, "storage": 9.7, "price": null, "status": "available"},
+    {"ref": "A4.4", "typology": "T4", "floor": 4, "sun": "SO/NE", "gross": 372.0, "dwelling": 215.7, "balcony": null, "terrace": 61.0, "garden": null, "parking": {"kind": "box", "cars": 4, "area": 63.15}, "storage": 12.15, "price": null, "status": "available"},
+    {"ref": "A4.5", "typology": "T4", "floor": 4, "sun": "SO/NO/NE", "gross": 374.4, "dwelling": 209.0, "balcony": null, "terrace": 44.9, "garden": null, "parking": {"kind": "box", "cars": 4, "area": 120.5}, "storage": null, "price": null, "status": "available"},
+    {"ref": "A4.6", "typology": "T4", "floor": 4, "sun": "NO/NE/SE", "gross": 393.25, "dwelling": 209.5, "balcony": null, "terrace": 69.95, "garden": null, "parking": {"kind": "box", "cars": 5, "area": 113.8}, "storage": null, "price": null, "status": "available"}
+   ],
+   "location": {
+    "address": {
+     "pt": "Avenida General Humberto Delgado, em Portas Fronhas, à entrada de Vila do Conde. O edifício tem frentes para a Avenida General Humberto Delgado, a Avenida Portas Fronhas (EN 206) e a Rua Manuel da Rocha.",
+     "en": "Avenida General Humberto Delgado, in Portas Fronhas, at the entrance to Vila do Conde. The building fronts Avenida General Humberto Delgado, Avenida Portas Fronhas (EN 206) and Rua Manuel da Rocha.",
+     "fr": "Avenida General Humberto Delgado, à Portas Fronhas, à l'entrée de Vila do Conde. L'immeuble donne sur l'Avenida General Humberto Delgado, l'Avenida Portas Fronhas (EN 206) et la Rua Manuel da Rocha."
+    },
+    "marks": {
+     "pt": "Estações de metro São Brás, Portas Fronhas e Alto de Pega; praias A Prainha e Praia dos Barcos; Estádio do Rio Ave; Parque urbano João Paulo II; supermercados Continente, Mercadona, Lidl e Pingo Doce.",
+     "en": "Metro stations São Brás, Portas Fronhas and Alto de Pega; the beaches A Prainha and Praia dos Barcos; the Rio Ave stadium; Parque urbano João Paulo II; Continente, Mercadona, Lidl and Pingo Doce supermarkets.",
+     "fr": "Stations de métro São Brás, Portas Fronhas et Alto de Pega ; plages A Prainha et Praia dos Barcos ; stade du Rio Ave ; Parque urbano João Paulo II ; supermarchés Continente, Mercadona, Lidl et Pingo Doce."
+    },
+    "marksSource": "https://marbleterrace.pt/viladoconde/wp-content/uploads/2026/10/marble-terrace-vila-do-conde-pt.pdf",
+    "distances": [
+     {
+      "pt": "Metro Portas Fronhas",
+      "en": "Portas Fronhas metro",
+      "fr": "Métro Portas Fronhas",
+      "m": 410
+     },
+     {
+      "pt": "Metro São Brás",
+      "en": "São Brás metro",
+      "fr": "Métro São Brás",
+      "m": 740
+     },
+     {
+      "pt": "Estádio do Rio Ave",
+      "en": "Rio Ave stadium",
+      "fr": "Stade du Rio Ave",
+      "m": 1000
+     },
+     {
+      "pt": "Praia do Peixe",
+      "en": "Praia do Peixe",
+      "fr": "Praia do Peixe",
+      "m": 1500
+     },
+     {
+      "pt": "Praia das Caxinas",
+      "en": "Praia das Caxinas",
+      "fr": "Praia das Caxinas",
+      "m": 1800
+     }
+    ],
+    "distSource": "https://www.openstreetmap.org/#map=15/41.3711/-8.7454"
+   },
+   "sources": [
+    "https://marbleterrace.pt/viladoconde/",
+    "https://marbleterrace.pt/viladoconde/wp-content/uploads/2026/10/mapa_acabamentos_v2_pt.pdf",
+    "https://marbleterrace.pt/viladoconde/wp-content/uploads/2026/10/marble-terrace-vila-do-conde-pt.pdf",
+    "https://marbleterrace.pt/",
+    "https://idinvestimentosimobiliarios.com/",
+    "https://nominatim.openstreetmap.org/reverse?lat=41.3711&lon=-8.7454&format=json",
+    "https://www.openstreetmap.org/#map=15/41.3711/-8.7454"
    ]
   }
  ]

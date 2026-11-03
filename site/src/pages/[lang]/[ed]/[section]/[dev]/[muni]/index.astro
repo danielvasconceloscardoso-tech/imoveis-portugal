@@ -6,7 +6,7 @@ import TrustStrip from "../../../../../../components/TrustStrip.astro";
 import Showcase from "../../../../../../components/Showcase.astro";
 import RequestSheet from "../../../../../../components/RequestSheet.astro";
 import { LANGS, ED_ORDER, SLUGS, HTML_LANG, type Lang, type EdCode } from "../../../../../../i18n";
-import { PROJECTS, showcases, type Project } from "../../../../../../lib/projects";
+import { PROJECTS, showcases, sameDeveloper, type Project } from "../../../../../../lib/projects";
 import { RATE, EDITION_CUR } from "../../../../../../lib/content";
 import { c } from "../../../../../../lib/copy";
 import { PRICES } from "../../../../../../lib/prices";
@@ -29,10 +29,13 @@ const muniName = (PRICES.munis[ps[0].muni] as any).n as string;
 const next = ps[0].blocks ? { kind: "req" as const, p: c("bar.next.show.p", lang), label: c("showb.visit", lang) }
   : { kind: "concierge" as const, p: c("bar.next.show.p", lang), href: `${pathFor(lang, ed, "consult")}?project=${encodeURIComponent(ps[0].name)}&place=${encodeURIComponent(muniName)}` };
 const devPage = `${pathFor(lang, ed, "partners")}${PTYPES.find((t) => t.key === "developers")!.slug[lang]}/`;
+// The same developer's showcases elsewhere (Marble Terrace Gondomar and Vila do Conde link to each other).
+const related = sameDeveloper(PROJECTS, ps[0].devSlug, ps[0].muni).map((o) => ({ id: o[0].id, name: o[0].name, place: (PRICES.munis[o[0].muni] as any).n,
+  href: `/${lang}/${ed}/${SLUGS[lang].partners}/${o[0].devSlug}/${o[0].muni}/`, render: o[0].render }));
 ---
 <V2 lang={lang} ed={ed} page="partners" title={`${title} | Imóveis Portugal`} description={ps[0].line ?? title} paths={Object.fromEntries(LANGS.map((l) => [l, `/${l}/${ed}/${SLUGS[l].partners}/${ps[0].devSlug}/${ps[0].muni}/`])) as Record<Lang, string>} next={next}>
   <Showcase lang={lang} locale={HTML_LANG[lang]} projects={ps} label={c("common.sponsored", lang)} href={(_, u) => `${base}${u.id}/`} cur={k ? { code: k, rate: RATE(k).rate } : undefined}
-    simHref={`${pathFor(lang, ed, "sims")}${SUB.cost[lang]}/`} mapHref={`${pathFor(lang, ed, "map")}?place=${ps[0].muni}&devs=1`} save={{ href: base, muni: muniName }} />
+    simHref={`${pathFor(lang, ed, "sims")}${SUB.cost[lang]}/`} mapHref={`${pathFor(lang, ed, "map")}?place=${ps[0].muni}&devs=1`} save={{ href: base, muni: muniName }} related={related} />
   {ps[0].blocks && <RequestSheet lang={lang} ed={ed} project={ps[0]} />}
   <TrustStrip lang={lang} ed={ed} />
   <p class="sc-devs"><a href={devPage}>{c("bar.dev.forDevs", lang)} →</a></p>
