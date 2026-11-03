@@ -8,9 +8,11 @@ import type { Lang } from "../i18n";
 import { type Project, img } from "../lib/projects";
 import { PRICES, LAST } from "../lib/prices";
 import { c } from "../lib/copy";
+import DevShare from "./DevShare.astro";
 
-interface Props { lang: Lang; p: Project; label: string; locale: string; simHref?: string; mapHref?: string; }
-const { lang, p, label, locale, simHref, mapHref } = Astro.props;
+// share: the site's developer page only (part 5: the share line and the view and share signals; never on a private demo).
+interface Props { lang: Lang; p: Project; label: string; locale: string; simHref?: string; mapHref?: string; share?: boolean; }
+const { lang, p, label, locale, simHref, mapHref, share = false } = Astro.props;
 const s = PRICES.munis[p.muni] as any;
 const k = (x: string, v: Record<string, string | number> = {}) => c(`showb.${x}`, lang, v);
 const money = (v: number) => new Intl.NumberFormat(locale, { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(v);
@@ -36,6 +38,7 @@ const credits = (p.credits ?? []).join("; ");
       <div><dt>{c("show.homes", lang)}</dt><dd>{k("price")}</dd></div>
     </dl>
     <p class="sb-cta" id="pedir"><button type="button" class="sb-btn sb-btn-p" data-req>{k("visit")}</button></p>
+    {share && <DevShare lang={lang} id={p.id} />}
   </header>
 
   {gallery.length > 0 && <section class="sb-sec" aria-label={c("show.gallery", lang)}>

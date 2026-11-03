@@ -1,10 +1,12 @@
 // The site chrome (prompt 35 §3.3-3.4): one search for everything (⌘K or the magnifier) and the concierge sheet.
 import { initFlow } from "./flow";
+import { rememberUtm } from "../lib/track";
 
 const plain = (s: string) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
 const esc = (t: string) => t.replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[ch]!);
 
 export function initChrome() {
+  rememberUtm();  // part 5: the first-touch utm_* of this tab (values only), for the letter signup's signal
   // ------------------------------------------------------------ search
   const fd = document.querySelector<HTMLElement>("[data-find]");
   const mapSpot = () => document.querySelector<HTMLElement>('[data-m3][data-mode="page"] [data-spot-open]');
@@ -76,7 +78,7 @@ export function initChrome() {
   const close = () => {
     sh.classList.remove("is-open"); back.classList.remove("is-open"); document.documentElement.classList.remove("sh-lock");
     clearTimeout(hideT); hideT = window.setTimeout(() => { sh.hidden = true; back.hidden = true; sh.style.transform = ""; }, slow() ? 0 : 380);
-    flow?.clearUrl(); lastFocus?.focus({ preventScroll: true });
+    flow?.stop(); flow?.clearUrl(); lastFocus?.focus({ preventScroll: true });  // part 5: where the reader stopped
   };
   // Every link to the concierge page opens the sheet instead, over what the reader was looking at (the page stays as a link).
   const fromLink = (href: string, e?: Event) => {
@@ -88,7 +90,7 @@ export function initChrome() {
     t ? p.set("topic", t) : p.delete("topic");
     if (t !== flowTopic) { flowTopic = t; changed = true; }
     if (changed || p.toString() !== new URLSearchParams(location.search).toString()) history.replaceState(null, "", `${location.pathname}${p.size ? `?${p}` : ""}${location.hash}`);
-    if (changed && flow) { flowEl.querySelector("[data-flow-stage]")!.innerHTML = ""; (flowEl as any).__flow = null; flow = null; }
+    if (changed && flow) { flow.mute(); flowEl.querySelector("[data-flow-stage]")!.innerHTML = ""; (flowEl as any).__flow = null; flow = null; }
     open(e);
   };
   // The home bar's "Começar" (prompt 42): the sheet opens on this page with the edition, buy or sell and the budget
@@ -97,7 +99,7 @@ export function initChrome() {
     const p = new URLSearchParams(location.search);
     p.set("cg", "home"); p.set("ed", o.ed); p.set("door", o.door); o.budget ? p.set("budget", String(o.budget)) : p.delete("budget"); p.delete("concierge"); p.delete("topic"); flowTopic = "";
     history.replaceState(null, "", `${location.pathname}?${p}${location.hash}`);
-    if (flow) { flowEl.querySelector("[data-flow-stage]")!.innerHTML = ""; (flowEl as any).__flow = null; flow = null; }
+    if (flow) { flow.mute(); flowEl.querySelector("[data-flow-stage]")!.innerHTML = ""; (flowEl as any).__flow = null; flow = null; }
     sh.classList.remove("is-open"); open(); return true;
   };
   const cgPath = document.querySelector<HTMLAnchorElement>("a[data-concierge]")?.pathname;

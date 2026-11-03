@@ -172,7 +172,7 @@ const SEGS: { k: "type" | "use" | "pay"; opts: [string, string][] }[] = [
 
 <script>
   import { sim1, toVal, toPos, budgetBand, entryBand, SIM1_DEFAULT, SIM1_ENTRY, type Sim1State } from "../lib/sim1";
-  import { track, edOf } from "../lib/track";
+  import { ev, evHeart, rememberSimBudget } from "../lib/track";
   import * as saved from "../lib/saved";
   import { saveSim, savePlace, gather, summary, type BriefLabels } from "../lib/brief";
 
@@ -184,7 +184,7 @@ const SEGS: { k: "type" | "use" | "pay"; opts: [string, string][] }[] = [
       loc: string; cur: string; fx: number; ed: string; regions: R[]; m2: Record<string, number>; L: Record<string, string>;
       SRC: Record<string, Src | null>; paths: Record<string, string>; brief: { labels: BriefLabels; from: string };
     };
-    const L = D.L, ed = edOf();
+    const L = D.L;
     const O = (k: string) => root.querySelector<HTMLElement>(`[data-o="${k}"]`)!;
     const opt = { maximumFractionDigits: 0, useGrouping: "always" } as Intl.NumberFormatOptions;
     const eurF = new Intl.NumberFormat(D.loc, { style: "currency", currency: "EUR", ...opt });
@@ -262,8 +262,12 @@ const SEGS: { k: "type" | "use" | "pay"; opts: [string, string][] }[] = [
       const on = saved.has("region", st.region), b = root!.querySelector<HTMLElement>(".s1-save")!;
       b.setAttribute("aria-pressed", on ? "true" : "false"); O("save-l").textContent = on ? L.saved : L.save;
     }
+    // Every interaction through the one event schema (part 5, lib/track.ts ev): the same /e/{ed}/sim1/… pages as before,
+    // and, for the first-party store, the region and the budget band (never the amount).
+    const sig = (what: string) => ev({ event: `sim1/${what}`, region: st.region, band: budgetBand(st.price), origin: "sim1" });
     // Kept on this device for the summary a later request can carry (lib/brief.ts, as the calculators do).
     function keep() {
+      rememberSimBudget(st.price);  // part 5: the Concierge starts with this budget answered (scripts/flow.ts)
       const r = sim1(st, D.m2);
       saveSim("cost", { price: st.price, own: r.own, resident: r.resident, mortgage: r.loan },
         { "r.imt": r.buy.imt, "r.is": r.buy.is, "r.deed": r.buy.deed, "r.extra": r.buy.extra, "r.total": r.buy.total });
@@ -276,35 +280,35 @@ const SEGS: { k: "type" | "use" | "pay"; opts: [string, string][] }[] = [
     let tB = 0, tE = 0;
     priceSl.addEventListener("input", () => {
       st.price = toVal(Number(priceSl.value)); render();
-      clearTimeout(tB); tB = window.setTimeout(() => { track(`${ed}/sim1/budget/${budgetBand(st.price)}`); keep(); }, 700);
+      clearTimeout(tB); tB = window.setTimeout(() => { sig(`budget/${budgetBand(st.price)}`); keep(); }, 700);
     });
     entrySl.addEventListener("input", () => {
       st.entry = Number(entrySl.value); render();
-      clearTimeout(tE); tE = window.setTimeout(() => { track(`${ed}/sim1/entry/${entryBand(st.entry)}`); keep(); }, 700);
+      clearTimeout(tE); tE = window.setTimeout(() => { sig(`entry/${entryBand(st.entry)}`); keep(); }, 700);
     });
     // Taps: a region (the chips or the list of what the price buys), the kind of home, what for, how they pay.
     root.querySelectorAll<HTMLElement>("[data-region]").forEach((b) => b.addEventListener("click", () => {
-      st.region = b.dataset.region!; render(); keep(); track(`${ed}/sim1/region/${st.region}`);
+      st.region = b.dataset.region!; render(); keep(); sig(`region/${st.region}`);
       if (b.classList.contains("s1-chip")) b.scrollIntoView({ block: "nearest", inline: "nearest", behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
     }));
     root.querySelectorAll<HTMLElement>("[data-seg]").forEach((g) => g.querySelectorAll<HTMLElement>(".s1-seg-b").forEach((b) => b.addEventListener("click", () => {
       const k = g.dataset.seg as "type" | "use" | "pay";
-      (st as Record<string, unknown>)[k] = b.dataset.v; render(); keep(); track(`${ed}/sim1/${k}/${b.dataset.v}`);
+      (st as Record<string, unknown>)[k] = b.dataset.v; render(); keep(); sig(`${k}/${b.dataset.v}`);
     })));
     // Which cost the reader opens: what worries them most.
-    root.querySelectorAll<HTMLDetailsElement>("details[data-row]").forEach((d) => d.addEventListener("toggle", () => { if (d.open) track(`${ed}/sim1/row/${d.dataset.row}`); }));
+    root.querySelectorAll<HTMLDetailsElement>("details[data-row]").forEach((d) => d.addEventListener("toggle", () => { if (d.open) sig(`row/${d.dataset.row}`); }));
 
     // Next steps.
     root.querySelectorAll<HTMLAnchorElement>("a[data-next]").forEach((a) => a.addEventListener("click", () => {
-      keep(); track(`${ed}/sim1/next/${a.dataset.next}`);
+      keep(); sig(`next/${a.dataset.next}`);
       if (a.dataset.next === "homes") { savePlace(reg(st.region).n); try { localStorage.setItem("ip.budget", String(st.price)); } catch { /* storage off */ } }
     }));
-    root.querySelector(".s1-save")!.addEventListener("click", () => { const on = saved.toggle(regionItem()); syncSave(); track(`${ed}/sim1/next/${on ? "save" : "unsave"}`); });
+    root.querySelector(".s1-save")!.addEventListener("click", () => { const on = saved.toggle(regionItem()); syncSave(); sig(`next/${on ? "save" : "unsave"}`); evHeart("region", st.region, on, "sim1"); });
     addEventListener("ip:saved", syncSave);
     addEventListener("storage", (e) => { if (e.key === "ip.saved") syncSave(); });
     root.querySelector(".s1-cg")!.addEventListener("click", () => {
       const g = reg(st.region);
-      keep(); savePlace(g.n); track(`${ed}/sim1/next/concierge`);
+      keep(); savePlace(g.n); sig(`next/concierge`);
       try { localStorage.setItem("ip.budget", String(st.price)); } catch { /* storage off */ }
       // The readable summary the Concierge sends with the request (scripts/flow.ts reads "ip.brief"), and only then.
       try {

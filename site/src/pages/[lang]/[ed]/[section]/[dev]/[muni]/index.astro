@@ -25,7 +25,7 @@ const title = c("show.title", lang, { developer: ps[0].developer, muni: (PRICES.
 ---
 <V2 lang={lang} ed={ed} page="partners" title={`${title} | Imóveis Portugal`} description={ps[0].line ?? title} paths={Object.fromEntries(LANGS.map((l) => [l, `/${l}/${ed}/${SLUGS[l].partners}/${ps[0].devSlug}/${ps[0].muni}/`])) as Record<Lang, string>}>
   <Showcase lang={lang} locale={HTML_LANG[lang]} projects={ps} label={c("common.sponsored", lang)} href={(_, u) => `${base}${u.id}/`} cur={k ? { code: k, rate: RATE(k).rate } : undefined}
-    simHref={`${pathFor(lang, ed, "sims")}${SUB.cost[lang]}/`} mapHref={`${pathFor(lang, ed, "map")}?place=${ps[0].muni}&devs=1`} />
+    simHref={`${pathFor(lang, ed, "sims")}${SUB.cost[lang]}/`} mapHref={`${pathFor(lang, ed, "map")}?place=${ps[0].muni}&devs=1`} share />
   {ps[0].blocks && <RequestSheet lang={lang} ed={ed} project={ps[0]} />}
   <TrustStrip lang={lang} ed={ed} />
 </V2>

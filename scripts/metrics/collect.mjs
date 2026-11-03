@@ -81,15 +81,20 @@ function digest(rows) {
   const ed = Object.fromEntries(EDS.map((e) => [e, { visits: 0, views: 0 }]));
   const pages = new Map(), countries = new Map(), places = new Map(), questions = new Map();
   const flows = {}, proj = {};
+  // Part 5 (lib/track.ts ev, lib/events.ts): time on a place by band, flow steps and stops, and every other event by name.
+  const placeTime = {}, events = new Map();
   let visits = 0, views = 0;
   for (const r of rows) {
     const parts = r.path.split("/").filter(Boolean);
     if (parts[0] === "e") {
-      if (parts[1] === "s" && parts[2]) add(places, parts[2], r.n);
+      if (parts[1] === "s" && parts[2] && parts[3] === "t" && parts[4]) { const t = (placeTime[parts[2]] ??= {}); t[parts[4]] = (t[parts[4]] || 0) + r.n; }
+      else if (parts[1] === "s" && parts[2]) add(places, parts[2], r.n);
       else if (parts[1] === "q" && parts[2]) add(questions, parts[2], r.n);
-      else if (parts[2] === "flow") { const f = (flows[parts[3]] ??= { start: 0, sent: 0, by_edition: {} }); if (parts[4] in f) f[parts[4]] += r.n; if (parts[4] === "sent") f.by_edition[parts[1]] = (f.by_edition[parts[1]] || 0) + r.n; }
-      else if (parts[2] === "p") { const p = (proj[parts[3]] ??= { pin: 0, card: 0, req: 0, req_by_edition: {}, req_by_country: {} }); if (parts[4] in p && parts[4] !== "req_by_edition") p[parts[4]] += r.n;
+      else if (parts[2] === "flow") { const f = (flows[parts[3]] ??= { start: 0, sent: 0, by_edition: {}, steps: {}, stops: {} }); if (parts[4] === "start" || parts[4] === "sent") f[parts[4]] += r.n; if (parts[4] === "sent") f.by_edition[parts[1]] = (f.by_edition[parts[1]] || 0) + r.n;
+        if ((parts[4] === "step" || parts[4] === "stop") && parts[5]) { const m = f[`${parts[4]}s`]; m[parts[5]] = (m[parts[5]] || 0) + r.n; } }
+      else if (parts[2] === "p") { const p = (proj[parts[3]] ??= { pin: 0, card: 0, req: 0, req_by_edition: {}, req_by_country: {} }); if (["pin", "card", "req", "view", "share"].includes(parts[4])) p[parts[4]] = (p[parts[4]] || 0) + r.n;
         if (parts[4] === "req") { p.req_by_edition[parts[1]] = (p.req_by_edition[parts[1]] || 0) + r.n; p.req_by_country[r.country] = (p.req_by_country[r.country] || 0) + r.n; } }
+      else if (parts.length > 2) add(events, parts.slice(2).join("/"), r.n);  // e.g. map/layer/rent, path/docs/done, letter/signup/email
       continue;
     }
     visits += r.visits; views += r.n; add(countries, r.country, r.visits);
@@ -100,7 +105,8 @@ function digest(rows) {
       p.views_by_edition = p.views_by_edition || {}; if (EDS.includes(parts[1])) p.views_by_edition[parts[1]] = (p.views_by_edition[parts[1]] || 0) + r.n;
       p.views_by_country = p.views_by_country || {}; p.views_by_country[r.country] = (p.views_by_country[r.country] || 0) + r.n; }
   }
-  return { visits, views, editions: ed, top_pages: top(pages, 15), countries: top(countries, 12), top_places: top(places, 10), top_questions: top(questions, 10), flows, projects: proj };
+  return { visits, views, editions: ed, top_pages: top(pages, 15), countries: top(countries, 12), top_places: top(places, 10), top_questions: top(questions, 10), flows, projects: proj,
+    place_time: Object.fromEntries(top(places, 10).map(({ key }) => [key, placeTime[key] || {}])), events: top(events, 60) };
 }
 
 // ---------- the pipeline: totals only, never a company name ----------
@@ -133,6 +139,7 @@ if (P.kind === "week") {
     concierge: d ? { starts: flows.concierge?.start || 0, completions: flows.concierge?.sent || 0 } : null,
     requests: d ? { by_flow: Object.fromEntries(Object.entries(flows).map(([k, v]) => [k, v.sent])), by_project: Object.fromEntries(Object.entries(d.projects).map(([k, v]) => [k, v.req])) } : null,
     top_pages: d?.top_pages ?? null, countries: d?.countries ?? null, top_places: d?.top_places ?? null, top_questions: d?.top_questions ?? null,
+    place_time: d?.place_time ?? null, flow_steps: d ? Object.fromEntries(Object.entries(flows).map(([k, v]) => [k, { steps: v.steps, stops: v.stops }])) : null, events: d?.events ?? null,
     business: business(), manual,
   };
   write(join(root, "ops", "metrics", "weekly", `${P.id}.json`), o);
@@ -149,7 +156,7 @@ if (P.kind === "week") {
     const o = {
       company: pa.company, project: p0?.name, municipality: p0?.muni, month: P.id, lang: pa.lang, generated: iso(new Date()),
       reach: { source: `${sources.cloudflare} · ${sources.beehiiv}`, editions: d || bh.ok ? Object.fromEntries(EDS.map((e) => [e, { subscribers: bh.ok ? bh.eds[e]?.subscribers ?? null : null, site_visits: d ? d.editions[e].visits : null }])) : {} },
-      showcase: d ? { source: sources.cloudflare, page_views: sum("page_views"), pin_opens: sum("pin"), card_clicks: sum("card"), by_edition: merge("views_by_edition"), by_country: merge("views_by_country") } : { source: sources.cloudflare },
+      showcase: d ? { source: sources.cloudflare, page_views: sum("page_views"), pin_opens: sum("pin"), card_clicks: sum("card"), shares: sum("share"), by_edition: merge("views_by_edition"), by_country: merge("views_by_country") } : { source: sources.cloudflare },
       requests: { source: d ? `${sources.cloudflare} (counts) · summaries and status from the advisor` : "request log not connected", ...(d ? { total: sum("req"), by_edition: merge("req_by_edition"), by_country: merge("req_by_country") } : {}), ...(manual.requests || {}) },
       advisor: manual.advisor || {}, visits: manual.visits ?? null, availability: manual.availability || {}, index_card: manual.index_card || {}, notes: manual.notes || [],
     };

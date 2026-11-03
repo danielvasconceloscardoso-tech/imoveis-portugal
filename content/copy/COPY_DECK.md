@@ -7552,3 +7552,17 @@ The one-screen simulator at the top of the calculators page (night of 3 Nov 2026
 - PT: cerca de {local}
 - EN: about {local}
 - FR: environ {local}
+
+## signals
+
+The share line on a developer's page (night of 3 Nov 2026, part 5): the phone's share sheet, or the link copied. Counted without cookies (lib/track.ts).
+
+### share
+- PT: Partilhar esta página
+- EN: Share this page
+- FR: Partager cette page
+
+### copied
+- PT: Ligação copiada
+- EN: Link copied
+- FR: Lien copié

@@ -7,13 +7,15 @@
 //   /e/s/{municipality}/         a place opened on the map (search or tap)
 //   /e/q/{question}/             a question opened on Perguntas
 //   /e/{ed}/sim1/{what}/{value}/ the one-screen simulator: slider band, region, type, use, payment, row opened, next step
+//   and every other event of the one schema (lib/track.ts ev, lib/events.ts): /e/{ed}/{event}/ (map layers, Passo a
+//   passo stations, flow steps and stops, developer page views and shares, hearts, bottom bar, letter signups) and
+//   /e/s/{municipality}/t/{band}/ (time on a place)
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import Beacon from "../../components/Beacon.astro";
 import { ED_ORDER, LANGS } from "../../i18n";
-import { PROJECTS } from "../../lib/projects";
 import { faqFor } from "../../lib/content";
-import { sim1Events } from "../../lib/sim1";
+import { editionEvents, placeEvents } from "../../lib/events";
 
 export function getStaticPaths() {
   const munis = Object.keys(JSON.parse(readFileSync(join(process.cwd(), "public", "data", "map", "layers.json"), "utf8")).munis);
@@ -21,12 +23,9 @@ export function getStaticPaths() {
   for (const e of ED_ORDER) for (const l of LANGS) for (const it of faqFor(e, l)) qs.add(it.id);
   for (const l of LANGS) for (const x of ["sell-filing", "sell-heirs", "sell-cert"]) qs.add(`${l}-${x}`);
   const out: string[] = [];
-  for (const e of [...ED_ORDER, "xx"]) {
-    for (const f of ["concierge", "partner", "viewing", "lawyer"]) for (const s of ["start", "sent"]) out.push(`${e}/flow/${f}/${s}`);
-    for (const p of PROJECTS) for (const k of ["pin", "card", "req"]) out.push(`${e}/p/${p.id}/${k}`);
-    for (const s of sim1Events()) out.push(`${e}/sim1/${s}`);
-  }
-  for (const m of munis) out.push(`s/${m}`);
+  const per = editionEvents(), times = placeEvents();
+  for (const e of [...ED_ORDER, "xx"]) for (const s of per) out.push(`${e}/${s}`);
+  for (const m of munis) { out.push(`s/${m}`); for (const t of times) out.push(`s/${m}/${t}`); }
   for (const q of qs) if (/^[a-z0-9-]+$/.test(q)) out.push(`q/${q}`);
   return out.map((p) => ({ params: { p } }));
 }

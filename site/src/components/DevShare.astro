@@ -1,0 +1,41 @@
+---
+// A developer's page on the site (part 5, night of 3 Nov 2026): one quiet line to share it (the phone's share sheet,
+// else the link copied), and the two signals a partner's report needs: the page seen and the page shared
+// (lib/track.ts ev "p/{project}/view" and "p/{project}/share"; origin = native or copy). Never on the private demos.
+// Wording: COPY_DECK.md "signals.*".
+import type { Lang } from "../i18n";
+import { c } from "../lib/copy";
+interface Props { lang: Lang; id: string; }
+const { lang, id } = Astro.props;
+---
+<p class="dvs" data-dev-share={id}>
+  <button type="button" class="dvs-b" data-dvs-b><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7.5 8.5 12 4l4.5 4.5M5 13v6h14v-6"/></svg><span>{c("signals.share", lang)}</span></button>
+  <span class="dvs-ok" data-dvs-ok role="status" hidden>{c("signals.copied", lang)}</span>
+</p>
+
+<script>
+  import { ev } from "../lib/track";
+  document.querySelectorAll<HTMLElement>("[data-dev-share]").forEach((box, k) => {
+    const id = box.dataset.devShare!, b = box.querySelector<HTMLButtonElement>("[data-dvs-b]")!, ok = box.querySelector<HTMLElement>("[data-dvs-ok]")!;
+    if (k === 0) ev({ event: `p/${id}/view`, place: id, origin: document.referrer && new URL(document.referrer).origin === location.origin ? "site" : "outside" });
+    b.addEventListener("click", async () => {
+      const url = `${location.origin}${location.pathname}`;
+      if (navigator.share) {
+        ev({ event: `p/${id}/share`, place: id, origin: "native" });
+        try { await navigator.share({ title: document.title, url }); } catch { /* closed */ }
+        return;
+      }
+      ev({ event: `p/${id}/share`, place: id, origin: "copy" });
+      try { await navigator.clipboard.writeText(url); } catch { /* no clipboard: the address bar still has it */ }
+      ok.hidden = false; clearTimeout((ok as any).t); (ok as any).t = setTimeout(() => (ok.hidden = true), 2600);
+    });
+  });
+</script>
+
+<style>
+  .dvs { grid-column: 1 / -1; display: flex; align-items: center; gap: 16px; margin: 8px 0 0; min-height: 44px; }
+  .dvs-b { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0; border: 0; background: none; color: var(--ink); font: 500 15px/1.2 var(--sans); cursor: pointer; text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+  .dvs-b svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+  .dvs-b:hover { text-decoration-thickness: 2px; }
+  .dvs-ok { font: 500 14px/1.2 var(--sans); color: var(--muted); transition: opacity .25s ease; }
+</style>

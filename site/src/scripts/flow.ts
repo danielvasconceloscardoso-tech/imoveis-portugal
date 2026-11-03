@@ -5,7 +5,7 @@
 import type { FlowConfig, Step } from "../lib/flows";
 import type { LawyerCard } from "../lib/lawyers";
 import { slotPicker, slotLabel, type Slot } from "./slots";
-import { track, edOf } from "../lib/track";
+import { ev, lastPlace, simBudget } from "../lib/track";
 
 const reduce = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 const esc = (t: string) => t.replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[ch]!);
@@ -27,7 +27,7 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
   const save = () => { try { sessionStorage.setItem(key, JSON.stringify(A)); } catch { /* private mode */ } };
   let i = 0, dir = 1;
   // A click on a listed building's card (prompt 51 §3): counted for that developer's report, nothing else is kept.
-  stage.addEventListener("click", (e) => { const b = (e.target as HTMLElement).closest?.("a")?.closest<HTMLElement>("[data-bld]")?.dataset.bld; if (b) track(`${edOf()}/p/${b}/card`); });
+  stage.addEventListener("click", (e) => { const b = (e.target as HTMLElement).closest?.("a")?.closest<HTMLElement>("[data-bld]")?.dataset.bld; if (b) ev({ event: `p/${b}/card`, place: b, origin: F.id }); });
 
   // The reader's edition (prompt 37 §1.1): the one in the URL (/{lang}/{ed}/...), else the page's own, else the saved one.
   // sessionStorage is shared by every edition on one domain, so answers kept from another edition (or language) in this
@@ -42,15 +42,18 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
   if (A._lang !== F.hidden.language) { reset("lang"); A._lang = F.hidden.language; }
 
   // Prefills: the edition, the reader's language, the budget and place from the map or the path, a partner category.
+  // Never ask twice (part 5): after the link, the simulator's budget in this tab (lib/track.ts simBudget) and the last
+  // place opened on the map in this tab (lastPlace) come before the older answers kept on the device.
   const q = new URLSearchParams(location.search);
-  const budgetEur = Number(q.get("budget")) || (() => { try { return Number(localStorage.getItem("ip.budget")) || 0; } catch { return 0; } })();
+  const budgetEur = Number(q.get("budget")) || simBudget() || (() => { try { return Number(localStorage.getItem("ip.budget")) || 0; } catch { return 0; } })();
   const places = (() => { try { return JSON.parse(localStorage.getItem("ip.places") || "[]") as string[]; } catch { return []; } })();
   const pre: Record<string, string> = {
     edition: edNow, lang: F.hidden.language, cat: q.get("cat") || "",
     budget: budgetEur ? (budgetEur <= 300000 ? "1" : budgetEur <= 1e6 ? "2" : budgetEur <= 5e6 ? "3" : "4") : "",
-    place: q.get("place") || places[0] || "",
+    place: q.get("place") || lastPlace() || places[0] || "",
   };
-  for (const s of steps) if ("prefill" in s && s.prefill && !A[s.id] && pre[s.prefill]) A[s.id] = pre[s.prefill];
+  const known = new Set<string>();  // the steps answered from what the site knew (counted as origin "known")
+  for (const s of steps) if ("prefill" in s && s.prefill && !A[s.id] && pre[s.prefill]) { A[s.id] = pre[s.prefill]; known.add(s.id); }
   // Prompt 43 §3b: a partner link (Passo a passo, Perguntas) names the topic. Lawyer opens the lawyer card (D64, its own
   // consent box); advisor is the normal concierge; bank and tax have no signed partner yet, so the first screen says we
   // introduce the right person and the request follows the usual routing to the qualified advisor (D66). The topic is
@@ -148,12 +151,28 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
     return `<div class="fl-bldbox" data-blds-box aria-live="polite"><p class="fl-k">${esc(line)}</p>${cards(m.map((x) => x.b))}</div>`;
   };
   function buildingsScreen() {
-    const T = BL!.labels;
+    const T = BL!.labels; engaged = true; reached("buildings");
     side(`${lwHead()}<div class="fl-step"><h2 class="fl-q" tabindex="-1">${esc(T.h)}</h2><p class="fl-lede">${esc(T.lede)}</p>${BL!.items.length ? cards(BL!.items) : `<p class="fl-lede">${esc(T.none)}</p>`}</div>`, () => go(i));
   }
 
+  // ------------------------------------------------------------ signals (part 5, lib/track.ts ev): each step reached, and
+  // where the reader stops (the sheet closed, or the page left, without sending). Answers are never sent, only step ids.
+  const BANDS: Record<string, string> = { "1": "0-300k", "2": "300k-1m", "3": "1-5m", "4": "5m-plus" };
+  const band = () => (A.budget ? BANDS[A.budget] : undefined);
+  let screen = "", stopped = "", engaged = false, finished = false, begun = false;
+  const reached = (id: string) => {
+    if (id === screen) return; screen = id; stopped = "";
+    ev({ event: `flow/${F.id}/step/${id}`, step: id, band: band(), origin: known.has(id) ? "known" : undefined });
+  };
+  function stop() {
+    if (!engaged || finished || !screen || stopped === screen) return;
+    stopped = screen; ev({ event: `flow/${F.id}/stop/${screen}`, step: screen, band: band() });
+  }
+  addEventListener("pagehide", () => { if (root.getClientRects().length) stop(); });
+
   function render(focus = true) {
     const s = steps[i];
+    reached(s.id);
     // "I have a question" on the first screen, and a one-line way to the lawyer on the legal step (the tax number).
     const ask = LW && (i === 0 || s.id === "nif") ? `<p class="fl-ask"><button type="button" class="fl-link" data-lawyer>${esc(i === 0 ? LW.labels.ask : LW.labels.legal)}</button></p>` : "";
     // "Ver novos empreendimentos" on the first screen (one tap to the list); matching buildings under the place question.
@@ -177,7 +196,7 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
   }
   // Each new screen starts at its top (the sheet keeps its scroll otherwise, and the back arrow and question were above the fold).
   const top = () => { const sc = root.closest<HTMLElement>(".sh-in"); if (sc) sc.scrollTop = 0; };
-  const go = (n: number) => { dir = n >= i ? 1 : -1; i = Math.max(0, Math.min(n, N - 1)); if (i > 0) track(`${edOf()}/flow/${F.id}/start`); render(); top(); };
+  const go = (n: number) => { engaged = true; dir = n >= i ? 1 : -1; i = Math.max(0, Math.min(n, N - 1)); if (i > 0 && !begun) { begun = true; ev({ event: `flow/${F.id}/start`, band: band() }); } render(); top(); };
 
   function wire(el: HTMLElement) {
     const s = steps[i];
@@ -245,7 +264,7 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
     return el;
   }
   function lawyerScreen() {
-    const x = LW!.lawyers[0], T = LW!.labels;
+    const x = LW!.lawyers[0], T = LW!.labels; reached("lawyer");
     const face = x.photo ? `<img src="${esc(x.photo)}" alt="" width="72" height="72" loading="lazy" />` : `<span aria-hidden="true">${esc(x.initials)}</span>`;
     const row = (k: string, v: string, note = "") => v ? `<div><dt>${esc(T[k])}</dt><dd>${esc(v)}${note ? `<small>${esc(note)}</small>` : ""}</dd></div>` : "";
     const el = side(`${lwHead()}<div class="fl-step"><h2 class="fl-q" tabindex="-1">${esc(T.h)}</h2><p class="fl-lede">${esc(T.lede)}</p>
@@ -261,7 +280,7 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
     el.querySelector("[data-lw-book]")!.addEventListener("click", bookScreen);
   }
   function bookScreen() {
-    const x = LW!.lawyers[0], T = LW!.labels;
+    const x = LW!.lawyers[0], T = LW!.labels; engaged = true; reached("book");
     const el = side(`${lwHead()}<div class="fl-step"><h2 class="fl-q" tabindex="-1">${esc(fill(T.bookH))}</h2>
       <div class="fl-fields">
         <label class="fl-f"><span>${esc(L.name)}</span><input class="fl-in" data-lw="name" autocomplete="name" value="${esc(A.name || "")}" /></label>
@@ -284,7 +303,7 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
       const payload = { flow: "lawyer", lawyer: x.id, lawyerName: `${x.name} (${x.firm})`, ...F.hidden, name: val("name"), email: val("email"), question: val("question"), consent: true, consentText: fill(T.consent), page: location.pathname, hp: "" };
       send.disabled = true; send.textContent = L.sending; let sent = false;
       try { sent = (await fetch("/api/request", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(payload) })).ok; } catch { sent = false; }
-      if (sent) { track(`${edOf()}/flow/lawyer/sent`); side(`<div class="fl-done"><span class="fl-tick">${CHECK}</span><h2 class="fl-q" tabindex="-1">${esc(T.doneH)}</h2><p class="fl-lede">${esc(fill(T.doneP))}</p></div>`, () => go(i)); return; }
+      if (sent) { finished = true; ev({ event: "flow/lawyer/sent", band: band() }); side(`<div class="fl-done"><span class="fl-tick">${CHECK}</span><h2 class="fl-q" tabindex="-1">${esc(T.doneH)}</h2><p class="fl-lede">${esc(fill(T.doneP))}</p></div>`, () => go(i)); return; }
       send.disabled = false; send.textContent = T.book;
       const body = [`${x.name} (${x.firm})`, `${L.name}: ${payload.name}`, `${L.email}: ${payload.email}`, payload.question, "", `✓ ${payload.consentText}`].filter((v) => v !== undefined).join("\n");
       note(`${esc(L.fallback)} <a class="fl-btn" href="mailto:${F.mailto}?subject=${encodeURIComponent(`${T.book}: ${x.name} (${F.hidden.edition} · ${F.hidden.language})`)}&body=${encodeURIComponent(body)}">${esc(L["fallback.btn"])}</a>`);
@@ -305,12 +324,13 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
       labels: [...(topic ? [`${X.topic}: ${topicLabel}`] : []), ...answerText()], topic, door: A.door || "", name: A.name || "", email: A.email || "", phone: A.phone || "", consent: A.consent === "1", budget: budgetEur || "", brief, page: location.pathname, hp };
     let ok = false;
     try { const r = await fetch("/api/request", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(payload) }); ok = r.ok; } catch { ok = false; }
-    if (ok) { track(`${edOf()}/flow/${F.id}/sent`); const pj = q.get("project"); if (pj && /^[a-z0-9-]+$/.test(pj)) track(`${edOf()}/p/${pj}/req`); const r = route(); try { sessionStorage.removeItem(key); sessionStorage.setItem(`${key}.done`, r); } catch { /* none */ } done(r); }
+    if (ok) { finished = true; ev({ event: `flow/${F.id}/sent`, band: band() }); const pj = q.get("project"); if (pj && /^[a-z0-9-]+$/.test(pj)) ev({ event: `p/${pj}/req`, place: pj, origin: F.id }); const r = route(); try { sessionStorage.removeItem(key); sessionStorage.setItem(`${key}.done`, r); } catch { /* none */ } done(r); }
     else fallback(payload);
   }
   // The confirmation, then one quiet closing line with two text links (prompt 42). The confirmation stays in the URL
   // (?concierge=done) and in this tab, so Back from those pages returns to it.
   function done(r = route()) {
+    finished = true;
     const d = (F.done as Record<string, { h: string; p: string }>)[r] ?? F.done.ok, X = F.extra as Record<string, string>, Lk = F.links as Record<string, string>;
     dir = 1; swap(`<div class="fl-done"><span class="fl-tick">${CHECK}</span><h2 class="fl-q" tabindex="-1">${esc(d.h)}</h2><p class="fl-lede">${esc(d.p)}</p>
       <div class="fl-go"><a class="fl-btn" href="${F.links.path}">${esc(F.extra.path)}</a><a class="fl-link" href="${F.links.map}">${esc(F.extra.map)}</a></div>
@@ -334,6 +354,6 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
   const lawyerFirst = topic === "lawyer" && !!LW && !start;
   if (wasDone) done(wasDone); else if (lawyerFirst) lawyerScreen(); else render(false);
   // show(): what the sheet displays each time it opens (the lawyer card for a lawyer link, else the current step).
-  const show = () => (lawyerFirst ? lawyerScreen() : go(i));
-  return { go, show, reset: () => { i = 0; render(false); }, focus: () => stage.querySelector<HTMLElement>(".fl-q")?.focus({ preventScroll: true }), clearUrl: () => url(null), at: () => i };
+  const show = () => { engaged = true; return lawyerFirst ? lawyerScreen() : go(i); };
+  return { go, show, stop, mute: () => { finished = true; }, reset: () => { finished = false; i = 0; render(false); }, focus: () => stage.querySelector<HTMLElement>(".fl-q")?.focus({ preventScroll: true }), clearUrl: () => url(null), at: () => i };
 }

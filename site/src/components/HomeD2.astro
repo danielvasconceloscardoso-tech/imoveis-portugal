@@ -112,6 +112,7 @@ const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("h
 </section>
 
 <script>
+  import { evSignup } from "../lib/track";
   // The home bar (prompt 42): "Começar" opens the Concierge sheet on this page, with the country, buy or sell and the
   // budget (in euros) already answered; without the sheet (or without JavaScript) it is a link to the Concierge page.
   const f = document.querySelector<HTMLFormElement>("[data-bar]");
@@ -129,6 +130,8 @@ const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("h
       if (eur) out.value = String(eur); else out.disabled = true;
     });
   }
+  // Part 5: a letter signup is counted with the first-touch utm_* of this tab, never the e-mail (lib/track.ts evSignup).
+  document.querySelector<HTMLFormElement>(".h2-nlform")?.addEventListener("submit", () => evSignup("home"));
   // The sources open when a footnote number is followed (they are folded at the foot, prompt 43).
   const openSrc = () => { if (location.hash.startsWith("#fonte")) document.querySelector<HTMLDetailsElement>("[data-sources]")?.setAttribute("open", ""); };
   addEventListener("hashchange", openSrc); openSrc();
