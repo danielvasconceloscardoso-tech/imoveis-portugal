@@ -17,6 +17,9 @@ Public identifiers only (no passwords, keys or tokens). All accounts are on the 
   - Fields: Empresa*, Setor* (Banco privado / Gestão de património, Banco / Crédito, Advogado, Consultoria fiscal, Transferências de dinheiro, Promotor imobiliário, Seguros, Outro), País*, Nome*, Email profissional*, Mensagem, consent checkbox* (unticked)
   - Hidden fields: `edition`, `language`
 - **Pedido de casa**: https://tally.so/r/BEEzgN (form id `BEEzgN`)
+- **Partnership request** (EN): https://tally.so/r/7Xqg52 · **Demande de partenariat** (FR): https://tally.so/r/1WXg5b. Same fields as the PT form; sector list also has Press / Media and Association / Public institution (added to PT too, 3 Nov 2026)
+- **Home request** (EN): https://tally.so/r/dbE4VV · **Demande de logement** (FR): https://tally.so/r/YjPKyv. Same fields and consent naming Habinedita Gondomar (AMI 13250)
+- Hidden fields on all six forms: `edition`, `lang` (home requests also `budget`, `place`); PT forms renamed `language` → `lang` on 3 Nov 2026 to match what the site sends. Owner e-mail notification on for all six
   - Fields: Região ou concelho*, Orçamento*, Quando quer comprar* (3 meses / 3–12 meses / mais de um ano), País onde vive*, Nome*, Email*, Telefone (opcional), consent checkbox* naming Habinedita Gondomar (AMI 13250) and the privacy policy (unticked)
   - Hidden fields: `edition`, `language`, `budget`, `place` (prefilled from the map and simulators via URL parameters)
 - Both: email notification of every submission to geralportugalimoveis@gmail.com; button "Enviar pedido"; PT only for now (EN and FR copies to create).
