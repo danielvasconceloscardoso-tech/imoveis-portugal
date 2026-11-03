@@ -6,6 +6,7 @@ import type { FlowConfig, Step } from "../lib/flows";
 import type { LawyerCard } from "../lib/lawyers";
 import { slotPicker, slotLabel, type Slot } from "./slots";
 import { track, edOf } from "../lib/track";
+import { heartHTML } from "./hearts";
 
 const reduce = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 const esc = (t: string) => t.replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[ch]!);
@@ -134,7 +135,7 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
     const T = BL!.labels;
     return `<ul class="fl-blds">${list.map((b) => `<li class="fl-bld" data-bld="${esc(b.id)}">
       ${b.photo ? `<img src="${esc(b.photo)}" alt="" width="800" height="533" loading="lazy" />` : ""}
-      <div class="fl-bld-b"><p class="fl-bld-tag">${esc(T.sponsored)}</p><p class="fl-bld-n">${esc(b.name)}</p>
+      <div class="fl-bld-b"><div class="ht-row"><div><p class="fl-bld-tag">${esc(T.sponsored)}</p><p class="fl-bld-n">${esc(b.name)}</p></div>${heartHTML("home", b.id, `${b.name}, ${b.place}`, b.visit ? b.visit.replace(/#.*$/, "") : b.map)}</div>
         <p class="fl-bld-m">${esc(b.place)}${b.typologies.length ? ` · ${esc(b.typologies.join(" · "))}` : ""}</p>
         ${b.avail ? `<p class="fl-bld-m fl-bld-av">${esc(T.avail.replace("{n}", String(b.avail)))}</p>` : ""}
         <p class="fl-bld-p">${b.from != null ? `${esc(T.from)} ${esc(new Intl.NumberFormat(F.hidden.language || "pt", { maximumFractionDigits: 0 }).format(b.from))} €` : esc(T.price)}</p>

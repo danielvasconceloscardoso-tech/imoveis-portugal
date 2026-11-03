@@ -6,6 +6,12 @@
 //   /e/{ed}/p/{project}/{pin|card|req}/   a partner project's map pin opened, its Concierge card clicked, a request
 //   /e/s/{municipality}/         a place opened on the map (search or tap)
 //   /e/q/{question}/             a question opened on Perguntas
+//   /e/{ed}/bar/{k}/  /e/{ed}/nav/{k}/   a tap on the five (map, sims, concierge, path, faq; saved = the heart link):
+//                                phone bar or desktop header (Part 2, 3 Nov)
+//   /e/{ed}/next/{k}/            the closing next step of a page (concierge, back, req, map)
+//   /e/{ed}/save/home/{id}/  /e/{ed}/unsave/home/{id}/   a home saved to or removed from "A sua seleção"
+//   /e/save/region/{municipality}/  /e/unsave/region/{municipality}/   the same for a region
+//   /e/{ed}/saved/go/            a saved item opened from "A sua seleção"
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import Beacon from "../../components/Beacon.astro";
@@ -22,8 +28,12 @@ export function getStaticPaths() {
   for (const e of [...ED_ORDER, "xx"]) {
     for (const f of ["concierge", "partner", "viewing", "lawyer"]) for (const s of ["start", "sent"]) out.push(`${e}/flow/${f}/${s}`);
     for (const p of PROJECTS) for (const k of ["pin", "card", "req"]) out.push(`${e}/p/${p.id}/${k}`);
+    for (const k of ["map", "sims", "concierge", "path", "faq", "saved"]) out.push(`${e}/bar/${k}`, `${e}/nav/${k}`);
+    for (const k of ["concierge", "back", "req", "map"]) out.push(`${e}/next/${k}`);
+    for (const p of PROJECTS) for (const id of [p.id, ...(p.units ?? []).map((u) => `${p.id}-${u.id}`)]) if (/^[a-z0-9-]+$/.test(id)) out.push(`${e}/save/home/${id}`, `${e}/unsave/home/${id}`);
+    out.push(`${e}/saved/go`);
   }
-  for (const m of munis) out.push(`s/${m}`);
+  for (const m of munis) out.push(`s/${m}`, `save/region/${m}`, `unsave/region/${m}`);
   for (const q of qs) if (/^[a-z0-9-]+$/.test(q)) out.push(`q/${q}`);
   return out.map((p) => ({ params: { p } }));
 }

@@ -8,9 +8,10 @@ import type { Lang } from "../i18n";
 import { type Project, img } from "../lib/projects";
 import { PRICES, LAST } from "../lib/prices";
 import { c } from "../lib/copy";
+import Heart from "./Heart.astro";
 
-interface Props { lang: Lang; p: Project; label: string; locale: string; simHref?: string; mapHref?: string; }
-const { lang, p, label, locale, simHref, mapHref } = Astro.props;
+interface Props { lang: Lang; p: Project; label: string; locale: string; simHref?: string; mapHref?: string; save?: { href: string; muni: string }; }
+const { lang, p, label, locale, simHref, mapHref, save } = Astro.props;
 const s = PRICES.munis[p.muni] as any;
 const k = (x: string, v: Record<string, string | number> = {}) => c(`showb.${x}`, lang, v);
 const money = (v: number) => new Intl.NumberFormat(locale, { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(v);
@@ -35,7 +36,7 @@ const credits = (p.credits ?? []).join("; ");
       <div><dt>{k("avail")}</dt><dd>{k("now", { n: forSale })}</dd></div>
       <div><dt>{c("show.homes", lang)}</dt><dd>{k("price")}</dd></div>
     </dl>
-    <p class="sb-cta" id="pedir"><button type="button" class="sb-btn sb-btn-p" data-req>{k("visit")}</button></p>
+    <p class="sb-cta" id="pedir"><button type="button" class="sb-btn sb-btn-p" data-req>{k("visit")}</button>{save && <Heart lang={lang} kind="home" id={p.id} label={`${p.name}, ${save.muni}`} href={save.href} class="sb-ht" />}</p>
   </header>
 
   {gallery.length > 0 && <section class="sb-sec" aria-label={c("show.gallery", lang)}>
