@@ -3,3 +3,6 @@ __pycache__/
 site/ebooks/out/
 sponsors/demos/tmp-*/
 sponsors/contacts/*.xlsx
+
+# Local dependency folder or its symlink (worktrees link it), never committed
+site/node_modules
