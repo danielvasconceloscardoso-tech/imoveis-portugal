@@ -8987,9 +8987,9 @@ Operator's fix round, 3 Nov 2026, steps 3 and 5. Step 3: the prices page and thr
 - FR: Une région, sur la carte · {v} €
 
 ### prev.data.f
-- PT: Em dez anos, o preço do m² subiu em quase todos os concelhos, e a rentabilidade bruta é mais alta onde o m² é mais barato.{sHist}{sRent}
-- EN: Over ten years the price per m² rose in almost every municipality, and gross yield is highest where the square metre is cheapest.{sHist}{sRent}
-- FR: En dix ans, le prix au m² a augmenté dans presque toutes les communes, et le rendement brut est le plus élevé là où le m² est le moins cher.{sHist}{sRent}
+- PT: Em dez anos, o preço do m² subiu em quase todos os concelhos.{sHist}
+- EN: Over ten years the price per m² rose in almost every municipality.{sHist}
+- FR: En dix ans, le prix au m² a augmenté dans presque toutes les communes.{sHist}
 
 ### prev.data.y
 - PT: Rentabilidade bruta por concelho
