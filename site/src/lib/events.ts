@@ -20,7 +20,9 @@ export const LAYERS = ["none", "price", "g10", "rent", "yield", "vac"];
 export const MAP_SEARCH = ["munis", "pars", "golf", "beach", "devs"];
 export const MAP_CARDS = ["muni", "parish", "region", "project", "golf"];
 export const MAP_TILES = ["price", "life", "care", "compare"];
-export const MAP_PAID = ["rent", "g10y", "foreign", "supply", "compare"];
+export const MAP_PAID = ["rent", "g10y", "foreign", "supply", "compare", "card"];
+/** Operator, step 1 (3 Nov 2026), the golden sample card: "Fontes", the two calls to action and the gallery views seen. */
+export const MAP_CARD5 = ["card/sources", "cta/paid", "cta/consult", "gallery/2", "gallery/3"];
 export const OVERLAYS = ["golf", "beach", "devs"];
 /** Fix step 3 (3 Nov): "Ver a análise completa" on the free pages turned into previews of the paid analysis
  * (components/AnalysisPreview.astro): ev "paid/preview/{id}" when the unlock sheet opens. */
@@ -52,6 +54,7 @@ export function editionEvents(): string[] {
   for (const t of MAP_TILES) out.push(`map/tile/${t}`);
   for (const r of ["1a", "5a", "10a"]) out.push(`map/chart/${r}`);
   for (const t of MAP_PAID) out.push(`map/paid/preview/${t}`);
+  for (const t of MAP_CARD5) out.push(`map/${t}`);
   out.push("map/compare/open", "map/compare/pair", "map/panel/open");
   for (const p of PREVIEWS) out.push(`paid/preview/${p}`);
   for (const s of [...new Set(STATIONS.map((x) => x.k))]) for (const k of ["open", "done"]) out.push(`path/${s}/${k}`);
