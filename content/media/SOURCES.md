@@ -90,3 +90,15 @@ One photograph per article (content/stories/). Five come from the library above;
 | img/v2/porto-foz-farolim-felgueiras-* | As escolas internacionais do Porto e de Lisboa | Felgueiras lighthouse, Foz do Douro (no school exterior was found under a commercial licence) | https://www.flickr.com/photos/42201095@N03/52667959121 | Jocelyn777 Love Europe | CC BY-SA 2.0 | 2026-11-03 |
 | img/v2/porto-ponte-luis-i-noite-* | São João, a noite em que o Porto não dorme | The Luís I bridge at night | Unsplash photo-1569959220744-ff553533f492 (design/directions/photos/CREDITS.md; photographer to confirm) | | Unsplash License | 2026-11-03 |
 | img/v2/vila-do-conde-aqueduto-* | Vila do Conde, o mar a 41 minutos do Porto | The Santa Clara aqueduct | https://www.flickr.com/photos/133200397@N03/46637546551 | Sergei Gussev | CC BY 2.0 | 2026-11-03 |
+
+## Golden sample place card: Gondomar (operator's step 1, 3 Nov 2026)
+
+One hero and two gallery views for Gondomar's card on the map (photography standard above). Found through the Openverse API; the Wikimedia Commons copies of the photographer's Flickr originals were downloaded at 1920 px (Commons thumbnails), cropped (sky, and the bottom edge with the photographer's mark), graded with `resort_grade.py` (1.0) and cut to `img/v2/<name>-{640,1024,1600}.webp` (the hero and the marina: 640 and 1024 only, their crops are 1382 and 1128 px wide). The camera positions in the Flickr metadata were reverse-geocoded with Nominatim: all three are in the municipality of Gondomar. CC BY-SA: credited on /credits/ (site/src/lib/credits.ts); our graded copies are shared under the same licence.
+
+**Not met: golden hour.** No golden-hour photograph of Gondomar (Gramido, Valbom, Melres, the Marina do Freixo or the river beaches) was found under a commercial licence on Openverse (Flickr and Wikimedia Commons; Unsplash and Pexels refused the build environment). All three are clear daylight; the grade warms them. The Marina do Freixo results were the Palácio do Freixo and the Freixo bridge, which are in Porto, not Gondomar.
+
+| File (site/public/) | Where | What it shows | Source page | Author | Licence | Date checked |
+| --- | --- | --- | --- | --- | --- | --- |
+| img/v2/gondomar-douro-gramido-* | Gondomar card, hero | The Douro from Gramido (Valbom, Gondomar), small boats, the terrace on the Gondomar bank | https://commons.wikimedia.org/w/index.php?curid=77637693 (Flickr 38633058680) | Vitor Oliveira (Portuguese_eyes) | CC BY-SA 2.0 | 2026-11-03 |
+| img/v2/gondomar-melres-douro-* | Gondomar card, gallery | The Douro valley from Melres (Gondomar), the far bank and the hills | https://commons.wikimedia.org/w/index.php?curid=77637623 (Flickr 36407281306) | Vitor Oliveira (Portuguese_eyes) | CC BY-SA 2.0 | 2026-11-03 |
+| img/v2/gondomar-marina-melres-* | Gondomar card, gallery | The Marina de Melres (Gondomar) on the Douro | https://commons.wikimedia.org/w/index.php?curid=77637715 (Flickr 41314804074) | Vitor Oliveira (Portuguese_eyes) | CC BY-SA 2.0 | 2026-11-03 |

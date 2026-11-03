@@ -108,7 +108,7 @@
 .m3-photo-none { background: radial-gradient(120% 90% at 30% 20%, color-mix(in srgb, var(--c) 70%, #fff), var(--c)); aspect-ratio: 16 / 6; }
 .m3-sb { padding: 16px 12px 8px; }
 .m3-kick { margin: 0 0 8px; font: 700 12px/1 var(--m3sans); letter-spacing: .14em; text-transform: uppercase; color: var(--gm); }
-.m3-sheet h3 { margin: 0; font: 400 40px/1.08 var(--m3serif); letter-spacing: -.015em; outline: none !important; }
+.m3-sheet h3, .m3-sheet h2.m3-h { margin: 0; font: 400 40px/1.08 var(--m3serif); letter-spacing: -.015em; outline: none !important; }
 .m3-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 24px 0 0; }
 .m3-stats div { padding: 12px 12px 12px; border-radius: 14px; background: rgba(120, 120, 110, .08); }
 .m3-stats dt { font: 600 12px/1.25 var(--m3sans); color: var(--gm); letter-spacing: .02em; }
@@ -212,7 +212,7 @@
   .m3-x { top: 4px; right: 14px; }
   .m3:has(.m3-sheet.is-open) .m3-dock, .m3:has(.m3-sheet.is-open) .m3-cards, .m3:has(.m3-sheet.is-open) .m3-legend { opacity: 0; transform: translateY(20px); pointer-events: none; }
   .m3.is-panel .m3-cards { opacity: 0; pointer-events: none; }
-  .m3-sheet h3 { font-size: 28px; }
+  .m3-sheet h3, .m3-sheet h2.m3-h { font-size: 28px; }
   .m3-caption { top: auto; bottom: 46%; font-size: 15px; max-width: calc(100% - 24px); white-space: normal; text-align: center; }
   .m3-attr { display: none; }
   .m3-home .m3-stage { height: 88svh; }
@@ -340,7 +340,46 @@ body.d2.m3p .sources-list { padding-top: 32px; }
 .m3-btn-off:hover { background: var(--gi) !important; color: var(--g2) !important; }
 @media (prefers-reduced-motion: reduce) { .m3-cl { animation: none; stroke-dashoffset: 0; } .m3-cdot { animation: none; opacity: 1; } }
 
+/* Operator, step 1 (3 Nov 2026): the golden sample card. The hero runs edge to edge (a gallery where the place has its own
+   views: swipe, dots); the tiles are quiet panels, not buttons; names in Playfair, minutes as small figures (Apple Weather). */
+.m3-gal { margin: -12px -12px 0; overflow: hidden; }
+.m3-gal-t { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; outline: none; }
+.m3-gal-t::-webkit-scrollbar { display: none; }
+.m3-gal-t .m3-photo { flex: 0 0 100%; border-radius: 0; scroll-snap-align: start; scroll-snap-stop: always; aspect-ratio: 16 / 10; }
+.m3-gal-d { position: absolute; left: 0; right: 0; bottom: 10px; display: flex; justify-content: center; gap: 6px; margin: 0; pointer-events: none; }
+.m3-gal-d i { width: 6px; height: 6px; border-radius: 50%; background: rgba(255, 255, 255, .55); box-shadow: 0 0 4px rgba(0, 0, 0, .25); transition: background-color .2s var(--e), transform .2s var(--e); }
+.m3-gal-d i.is-on { background: #fff; transform: scale(1.2); }
+section.m3-tile { min-height: 0; gap: 12px; }
+section.m3-tile:hover { background: rgba(120, 120, 110, .08) !important; }
+section.m3-tile:active { transform: none; }
+.m3-sheet h3.m3-tt { margin: 0; font: 700 12px/1.2 var(--m3sans); letter-spacing: .12em; }
+.m3-tt small { font: 600 12px/1.2 var(--m3sans); letter-spacing: 0; text-transform: none; color: var(--gm); opacity: .85; }
+.m3-ml { list-style: none; margin: 0; padding: 0; display: grid; }
+.m3-ml li { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 8px 0; border-top: 1px solid rgba(120, 120, 110, .16); }
+.m3-ml li:first-child { border-top: 0; padding-top: 0; }
+.m3-ml li:last-child { padding-bottom: 0; }
+.m3-mn { font: 400 17px/1.3 var(--m3serif); min-width: 0; overflow-wrap: anywhere; }
+.m3-mm { flex: none; font: 600 12px/1.3 var(--m3sans); color: var(--gm); font-variant-numeric: tabular-nums; text-align: right; max-width: 55%; }
+.m3-mm b { font-weight: 700; font-size: 13px; color: var(--gi); }
+.m3-mn small { display: block; margin-top: 2px; font: 600 12px/1.3 var(--m3sans); color: var(--gm); }
+.m3-pp b.m3-dim-t { font: 400 15px/1.3 var(--m3serif); }
+.m3-acts-1 { grid-template-columns: 1fr; margin-top: 12px; }
+p.m3-tl { margin: 0; }
+.m3-fontes { margin: 12px 0 0; }
+.m3-fontes .m3-link { font-size: 13px; padding: 8px 0 !important; }
+.m3-srcl { list-style: none; margin: 16px 0 0; padding: 0; font-size: 14px; line-height: 1.5; }
+.m3-srcl li { padding: 12px 0; border-top: 1px solid rgba(120, 120, 110, .18); }
+.m3-srcl a { color: #2f5d50; font-weight: 600; }
+.m3-near { font-size: 15px !important; }
+.m3-near a { color: var(--gi); text-decoration: none; }
+.m3-unlock-pv .m3-pk { margin: 20px 0 8px; font: 700 12px/1.2 var(--m3sans); letter-spacing: .12em; text-transform: uppercase; color: var(--gm); }
+.m3-unlock-pv .m3-tiles-paid { margin-top: 0; }
+.m3-unlock-pv .m3-tile-p { min-height: 84px; cursor: default; }
+.m3-unlock-pv .m3-tile-p:hover { background: rgba(120, 120, 110, .08) !important; }
+.m3-unlock-pv .m3-tile-p .m3-tt { text-transform: none; letter-spacing: 0; font: 600 13px/1.3 var(--m3sans); align-items: flex-start; }
+
 @media (max-width: 819px) {
+  .m3-gal { margin: 0 -12px; }
   .m3-cards { top: auto; left: 0; right: 0; bottom: 10px; width: auto; flex-direction: row; overflow-x: auto; scrollbar-width: none; padding: 0 10px; scroll-padding: 0 10px; scroll-snap-type: x proximity; }
   .m3-cards::-webkit-scrollbar { display: none; }
   .m3-pc { flex: none; width: 112px; height: 84px; scroll-snap-align: start; }

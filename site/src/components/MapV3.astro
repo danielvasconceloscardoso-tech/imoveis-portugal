@@ -3,15 +3,17 @@
 // 1. First glance: our own quiet basemap (sea depth, relief from AWS Terrain Tiles, coastline, rivers, Playfair and Manrope
 //    labels), the region postcards (our own photographs), the partner developments as small photo pins, a search box.
 //    No numbers, no price colours, no legend.
-// 2. A tap opens the place as a card of tiles, Apple Weather style (price, living here, schools and health; the paid tiles
-//    with a soft preview). 3. A tile opens its chart, Apple Stocks style (1A · 5A · 10A).
-// Everything the map did before is one tap away under "Camadas": the price colours and the other layers with their legend,
+// 2. A tap opens the place as a card of tiles, Apple Weather style (operator, step 1, 3 Nov 2026, the golden sample, Gondomar:
+//    price in words, living here in minutes by car, schools and health by name with minutes, "Fontes", two calls to action).
+// 3. The paid analysis (ten years and their chart, rents and yield, distributions, neighbours, doctors, full lists) is behind
+//    "Ver a análise completa": the unlock sheet with a soft preview, "Disponível em breve" while payment is off.
+// Everything else the map did before is one tap away under "Camadas": the market price colours with their legend,
 // the quarterly time slider, the budget gesture, golf, beaches and developments, 2D / 3D and the guided tours.
 // Everything self-hosted (site/public/tiles, site/public/data/map; scripts/map-data/v3_assets.py, v3_extras.py, tiles.py).
-// The embed keeps MapExplorer.astro. Wording: COPY_DECK.md "map4.*", "map3.*" and "map.*".
+// The embed keeps MapExplorer.astro. Wording: COPY_DECK.md "card5.*", "map4.*", "map3.*" and "map.*".
 import { HTML_LANG, pathFor, type Lang, type EdCode } from "../i18n";
 import { EDITION_CUR, RATE } from "../lib/content";
-import { MAP_MUNIS, REGIONS, BRIEFS } from "../lib/mapdata";
+import { MAP_MUNIS, REGIONS } from "../lib/mapdata";
 import { PRICES } from "../lib/prices";
 import { PLACES } from "../lib/places";
 import { c, cl } from "../lib/copy";
@@ -42,22 +44,21 @@ const regionPhotos: Record<string, string> = { north: "porto-douro-entardecer", 
   algarve: "algarve-praia-da-marinha", madeira: "madeira-levada" };
 const k = (x: string, v: Record<string, string> = {}) => c(`map3.${x}`, lang, v);
 const k4 = (x: string, v: Record<string, string> = {}) => c(`map4.${x}`, lang, v);
+const k5 = (x: string, v: Record<string, string> = {}) => c(`card5.${x}`, lang, v);
 const keep = (x: string, names: string[]) => c(x, lang, Object.fromEntries(names.map((n) => [n, `{${n}}`])));
 const A = config.mapAnalysis;
 const labels = {
   sentence: k("sentence", { b: "{b}", a: "{a}", pa: "{pa}", c: "{c}", pc: "{pc}" }), sentenceOne: k("sentence.one", { b: "{b}", a: "{a}", pa: "{pa}" }),
   medians: k("medians", { q: qLabel }), reach: k("reach"), budgetTap: k("budget.tap"),
-  legend: { price: k("legend.price", { q: "{q}" }), g10: k("legend.g10"), rent: k("legend.rent", { q: "{q}" }), yield: k("legend.yield"), vac: k("legend.vac") },
-  vacLine: k("card.vacline", { v: "{v}", s: "{s}" }),
+  // Operator, step 1: only the market price is a free colour layer (ten years, rents, yields, vacant homes: paid analysis).
+  legend: { price: k("legend.price", { q: "{q}" }) },
   g: { munis: k("g.munis"), pars: k("g.pars"), golf: k("g.golf"), beach: k("g.beach"), devs: k("g.devs") },
-  card: { price: k("card.price"), g10: k("card.g10"), rent: k("card.rent"), homes: k("card.homes"), concierge: k("card.concierge"), compare: k("card.compare"),
-    details: k("card.details"), m2b: k("card.m2b"), yield: k("chip.yield"), pickb: k("card.pickb", { a: "{a}" }), buys: k("card.buys", { v: "{v}" }) },
+  card: { price: k("card.price"), homes: k("card.homes"), concierge: k("card.concierge"), m2b: k("card.m2b"), pickb: k("card.pickb", { a: "{a}" }) },
   play: k("play"), pause: k("pause"), takeover: k("tour.takeover"), golfcap: k("tour.golfcap", { n: "{n}" }), timecap: k("tour.timecap", { q: "{q}" }), close: k("close"),
   tours: { coast: k("tour.coast"), golf: k("tour.golf"), madeira: k("tour.madeira"), time: k("tour.time") },
   qfmt, median: c("map.card.median", lang, { v: "{v}", quarter: "{quarter}" }), nodata: c("map.card.nodata", lang), parishOf: c("map.par.of", lang, { m: "{m}" }),
   source: c("map.card.source", lang, { quarter: "{quarter}" }), disclaimer: c("map.card.disclaimer", lang), share: c("map.share", lang), copied: c("map.copied", lang),
-  cagrP: c("map.card.cagrp", lang, { v: "{v}" }), yieldLine: c("map.card.yield", lang, { y: "{y}", r: "{r}", month: "{month}" }), mo: c("map.card.mo", lang, { c4: "{c4}", c8: "{c8}" }),
-  mow: { up: c("map.mo.up", lang), steady: c("map.mo.steady", lang), down: c("map.mo.down", lang) }, page: c("map.a.page", lang), sponsored: c("dev.sponsored", lang),
+  page: c("map.a.page", lang), sponsored: c("dev.sponsored", lang),
   pfrom: c("map.proj.from", lang, { v: "{v}" }), ponreq: c("map.proj.onreq", lang), golfUnnamed: c("map.golf.unnamed", lang), nomatch: c("map.find.none", lang),
   golf: Object.fromEntries(["holes", "design", "opened", "status", "opening", "homes", "site", "src"].map((x) => [x, c(`golf.${x}`, lang, x === "opening" ? { y: "{y}" } : {})])),
   regions: Object.fromEntries(REGIONS.map((r) => [r, c(`map.r.${r}`, lang)])), credits: k("credits"),
@@ -67,26 +68,28 @@ const labels = {
     price: k4("tile.price"), mkt: k4("tile.mkt"), nb: k4("tile.nb"), nbsrc: k4("tile.nbsrc"), onreq: k4("tile.onreq"),
     dirUp: keep("map4.tile.dir.up", ["v"]), dirDown: keep("map4.tile.dir.down", ["v"]), dirFlat: k4("tile.dir.flat"),
     life: k4("tile.life"), sun: k4("tile.sun"), sunV: keep("map4.tile.sun.v", ["v"]), sea: k4("tile.sea"), beach: k4("tile.beach"), min: keep("map4.tile.min", ["v"]),
-    flight: k4("tile.flight", { c: c(`map4.cty.${ed}`, lang) }), kmline: keep("map4.tile.kmline", ["v"]), airport: k4("tile.airport"), ap: keep("map4.tile.ap", ["n", "v"]),
-    noschool: k4("tile.noschool"), tsrc: k4("tile.src"), onreq2: k4("tile.onreq2"), ty: k4("tile.ty"), ne: keep("map4.tile.ne", ["n", "e"]), care: k4("tile.care"), school: k4("tile.school"), hosp: k4("tile.hosp"), docs: k4("tile.docs"), km: keep("map4.tile.km", ["n", "v"]),
-    soon: k4("tile.soon"), soonP: k4("tile.soon.p"), open: k4("tile.open"),
-    rent: k4("tile.rent"), g10y: k4("tile.g10y"), foreign: k4("tile.foreign"), supply: k4("tile.supply"), compare: k4("tile.compare"), paid: k4("tile.paid"),
-    span: { 1: k4("chart.span.1"), 5: k4("chart.span.5"), 10: k4("chart.span.10") },
-    up: keep("map4.chart.up", ["in", "v", "span"]), down: keep("map4.chart.down", ["in", "v", "span"]), flat: keep("map4.chart.flat", ["in", "span"]),
-    above: keep("map4.chart.above", ["q", "v", "of", "r"]), near: keep("map4.chart.near", ["q", "v", "of", "r"]), below: keep("map4.chart.below", ["q", "v", "of", "r"]),
-    src: keep("map4.chart.src", ["q"]), back: k4("back"),
-    sAbove: keep("map4.strip.above", ["of"]), sNear: keep("map4.strip.near", ["of"]), sBelow: keep("map4.strip.below", ["of"]), sNote: keep("map4.strip.note", ["place"]),
-    of: Object.fromEntries(["11", "19", "1D", "1A", "1B", "1C", "15", "20", "30", "PT"].map((x) => [x, c(`map4.of.${x}`, lang)])),
+    kmline: keep("map4.tile.kmline", ["v"]), airport: k4("tile.airport"), ap: keep("map4.tile.ap", ["n", "v"]),
+    noschool: k4("tile.noschool"), care: k4("tile.care"), school: k4("tile.school"), hosp: k4("tile.hosp"), km: keep("map4.tile.km", ["n", "v"]),
+    soon: k4("tile.soon"), soonP: k4("tile.soon.p"), paid: k4("tile.paid"), back: k4("back"),
     ph: Object.fromEntries(Object.values(regionPhotos).map((f) => [f, c(`map4.ph.${f}`, lang)])),
     pill: keep("map4.compare.pill", ["n"]), layerNone: k4("layer.none"),
   },
+  // Operator, step 1: the golden sample card (COPY_DECK.md "card5").
+  c5: {
+    mkt: k5("mkt"), m2: keep("card5.m2", ["v"]), nb: k5("nb"), nbOnreq: k5("nb.onreq"), life: k5("life"), bycar: k5("bycar"), min: keep("card5.min", ["v"]),
+    flight: k5("flight", { c: c(`map4.cty.${ed}`, lang) }), via: k5("flight.via"), soon: k5("flight.soon"), schools: k5("schools"), health: k5("health"), within: k5("within"),
+    sources: k5("sources"), ctaPaid: k5("cta.paid"), ctaConsult: k5("cta.consult"), homes: keep("card5.homes", ["muni", "name"]), photoN: keep("card5.photo.n", ["i", "n"]),
+    srcH: k5("src.h"), tagCs: k5("tag.cs"), preview: keep("card5.preview", ["place"]), paid: cl("card5.paid", lang),
+    src: { mkt: keep("card5.src.mkt", ["q"]), dir: keep("card5.src.dir", ["q0", "q"]), nb: k5("src.nb"), drive: keep("card5.src.drive", ["o", "d"]),
+      flight: keep("card5.src.flight", ["from", "to", "d"]), sch: keep("card5.src.sch", ["d"]), hsp: keep("card5.src.hsp", ["d"]), ph: k5("src.ph"), km: k5("src.km") },
+  },
 };
-const month = new Intl.DateTimeFormat(HTML_LANG[lang], { month: "long", year: "numeric" }).format(new Date(`${PRICES.mortgage.month}-15`));
 const mapPath = pathFor(lang, ed, "map");
 const comparePath = `${mapPath}${COMPARE_SUB[lang]}/`;
-const links = { buy: pathFor(lang, ed, "buy"), consult: pathFor(lang, ed, "consult"), map: mapPath, compare: comparePath, pages: [...pages] };
+const links = { buy: pathFor(lang, ed, "buy"), consult: pathFor(lang, ed, "consult"), map: mapPath, compare: comparePath, pages: [...pages], credits: "/credits/" };
 const pinFile = (id: string) => existsSync(join(process.cwd(), "public", "img", "map", `pin-${id}.webp`)) ? `/img/map/pin-${id}.webp` : "";
-const cfg = { labels, links, photos, regionPhotos, ed, briefs: BRIEFS[lang] ?? {}, mortgage: { rate: PRICES.mortgage.rate, month },
+// The area briefs carry rents, yields and ten-year changes (paid analysis): never in the free card (operator, step 1).
+const cfg = { labels, links, photos, regionPhotos, ed, lang,
   projects: PROJECTS.map((p) => ({ id: p.id, name: p.name, developer: p.developer, muni: p.muni, lon: p.lon, lat: p.lat, render: p.render, pin: pinFile(p.id) || (p.render ? `${p.render}-800.webp` : ""), from: p.from, showcase: `${pathFor(lang, ed, "partners")}${p.devSlug}/${p.muni}/`,
     // Prompt 38: the project card (summary, three features, homes for sale now from the developer's table).
     summary: p.summary?.[lang], feats: (p.features ?? []).filter((f) => f.card).map((f) => f[lang]),
@@ -94,7 +97,8 @@ const cfg = { labels, links, photos, regionPhotos, ed, briefs: BRIEFS[lang] ?? {
     // Part 2 (3 Nov): the places a project is near (projects.json), so a card with no homes of its own points to them.
     near: p.near ?? [], muniName: MAP_MUNIS.find((m) => m.s === p.muni)?.n ?? "" })),
   pl: { view: c("showb.view", lang), visit: c("showb.visit", lang), price: c("showb.price", lang), now: c("showb.now", lang, { n: "{n}" }), tour: c("showb.tour", lang), near: c("bar.near", lang, { name: "{name}", muni: "{muni}" }) } };
-const chips = [["price", "chip.price"], ["g10", "chip.g10"], ["rent", "chip.rent"], ["yield", "chip.yield"], ["vac", "chip.vac"]] as const;
+// Operator, step 1: the market price is the one free colour layer; 10 years, rents, yields and vacant homes are paid.
+const chips = [["price", "chip.price"]] as const;
 const overlays = [["golf", "chip.golf"], ["beach", "chip.beach"], ["devs", "chip.devs"]] as const;
 const amount = Math.round(300000 * (fx ? fx.rate : 1));
 const regionList = ["north", "centre", "lisbon", "alentejo", "algarve", "madeira", "azores"] as const;
@@ -211,6 +215,7 @@ const live = A.live && !!A.stripe.region && !!A.stripe.all;
         <p class="m3-kick" data-unlock-kick>{k4("tile.paid")}</p>
         <h3 id={`m3-ul-${mode}`}>{k4("unlock.offer", { r: String(A.prices.region), a: String(A.prices.all), m: String(A.months) })}</h3>
         <p class="m3-unlock-p" data-unlock-p data-tpl={keep("map4.unlock.p", ["place"])}></p>
+        <div class="m3-unlock-pv" data-unlock-pv></div>
         <ul class="m3-unlock-list">{unlockList.map((x) => <li>{x}</li>)}</ul>
         {live ? (
           <div class="m3-acts">
@@ -242,7 +247,13 @@ const live = A.live && !!A.stripe.region && !!A.stripe.all;
 </div>
 
 <script>
-  // Fetched once the page is idle, so the map never competes with the first paint.
+  // Fetched once the page is idle, so the map never competes with the first paint. A ?place= link (operator, step 1: the
+  // card in under a second) starts the place's small file at once and runs the map script without waiting for idle time.
   const run = () => import("../scripts/map-v3").then(({ initMapV3 }) => document.querySelectorAll<HTMLElement>("[data-m3]").forEach((el) => initMapV3(el)));
-  "requestIdleCallback" in window ? requestIdleCallback(run, { timeout: 1200 }) : setTimeout(run, 300);
+  const place = new URLSearchParams(location.search).get("place");
+  const slug = place && place.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  if (slug && document.querySelector("[data-m3][data-mode=page]")) {
+    (window as any).__m3place = { slug, p: fetch(`/data/map/place/${slug}.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null) };
+    run();
+  } else "requestIdleCallback" in window ? requestIdleCallback(run, { timeout: 1200 }) : setTimeout(run, 300);
 </script>

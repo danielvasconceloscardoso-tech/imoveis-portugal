@@ -6045,9 +6045,9 @@ Prompt 36 (D62): map v3. Budget gesture, layer chips, Day/Night, search, time, c
 - FR: Madère
 
 ### tour.time
-- PT: Dez anos em vinte segundos
-- EN: Ten years in twenty seconds
-- FR: Dix ans en vingt secondes
+- PT: Cinco anos em vinte segundos
+- EN: Five years in twenty seconds
+- FR: Cinq ans en vingt secondes
 
 ### tour.takeover
 - PT: Toque no mapa para continuar por si.
@@ -8966,3 +8966,257 @@ D83 part 2 (3 Nov 2026): the map in three depths. First glance: photographs and 
 - PT: Usados (INE)
 - EN: Existing (INE)
 - FR: Ancien (INE)
+
+## card5
+
+Operator's step 1 (3 Nov 2026): the golden sample place card (Gondomar first). Free: photo, name, one line, heart, Preço in words (market median, new build, the five-year direction), Viver aqui (minutes by car to the beach, Porto and the airport; the flight), Escolas and Saúde (names and minutes), a small "Fontes" link and two calls to action. Paid (the analysis behind "Ver a análise completa"): ten years, rents and yield, distributions, the comparison with neighbours, doctors per inhabitant, the full lists. The place's own facts (the line, the names, the minutes) come from content/facts/map/places/<slug>/.
+
+### mkt
+- PT: Mercado
+- EN: Market
+- FR: Marché
+
+### m2
+- PT: {v} €/m²
+- EN: €{v}/m²
+- FR: {v} €/m²
+
+### nb
+- PT: Construção nova
+- EN: New build
+- FR: Neuf
+
+### nb.onreq
+- PT: preços sob consulta (promotor)
+- EN: prices on request (developer)
+- FR: prix sur demande (promoteur)
+
+### life
+- PT: Viver aqui
+- EN: Living here
+- FR: Vivre ici
+
+### bycar
+- PT: de carro
+- EN: by car
+- FR: en voiture
+
+### min
+- PT: {v} min
+- EN: {v} min
+- FR: {v} min
+
+### flight
+- PT: Voo desde {c}
+- EN: Flight from {c}
+- FR: Vol depuis {c}
+
+### flight.via
+- PT: até Lisboa, sem voo direto
+- EN: to Lisbon, no direct flight
+- FR: jusqu'à Lisbonne, sans vol direct
+
+### flight.soon
+- PT: em breve
+- EN: coming soon
+- FR: bientôt
+
+### schools
+- PT: Escolas
+- EN: Schools
+- FR: Écoles
+
+### health
+- PT: Saúde
+- EN: Health
+- FR: Santé
+
+### within
+- PT: a 20 minutos de carro
+- EN: within 20 minutes by car
+- FR: à 20 minutes en voiture
+
+### sources
+- PT: Fontes
+- EN: Sources
+- FR: Sources
+
+### cta.paid
+- PT: Ver a análise completa
+- EN: See the full analysis
+- FR: Voir l'analyse complète
+
+### cta.consult
+- PT: O consultor ajuda
+- EN: Ask the advisor
+- FR: Le conseiller vous aide
+
+### homes
+- PT: Casas novas em {muni}: {name}
+- EN: New homes in {muni}: {name}
+- FR: Logements neufs à {muni} : {name}
+
+### photo.n
+- PT: Fotografia {i} de {n}
+- EN: Photo {i} of {n}
+- FR: Photo {i} sur {n}
+
+### src.h
+- PT: Fontes
+- EN: Sources
+- FR: Sources
+
+### src.mkt
+- PT: Mercado: INE, valor mediano das vendas de alojamentos familiares por m² nos 12 meses até ao {q}.
+- EN: Market: INE, median price per m² of homes sold in the 12 months to {q}.
+- FR: Marché : INE, prix médian au m² des logements vendus sur les 12 mois jusqu'au {q}.
+
+### src.dir
+- PT: Direção a cinco anos: o mesmo indicador do INE, do {q0} ao {q}.
+- EN: Five-year direction: the same INE indicator, {q0} to {q}.
+- FR: Tendance sur cinq ans : le même indicateur de l'INE, du {q0} au {q}.
+
+### src.nb
+- PT: Construção nova: o promotor parceiro, que publica os preços sob consulta.
+- EN: New build: the partner developer, which gives prices on request.
+- FR: Neuf : le promoteur partenaire, qui communique ses prix sur demande.
+
+### src.drive
+- PT: Tempos de carro: OSRM, com dados do OpenStreetMap, a partir da {o}, sem trânsito, arredondados ao minuto. Consultado a {d}.
+- EN: Driving times: OSRM, with OpenStreetMap data, from the {o}, without traffic, rounded to the minute. Checked on {d}.
+- FR: Temps en voiture : OSRM, avec les données d'OpenStreetMap, depuis la {o}, sans trafic, arrondis à la minute. Consulté le {d}.
+
+### src.flight
+- PT: Voo: horário publicado do voo direto {from}–{to} (PlaneMapper). Consultado a {d}.
+- EN: Flight: the published schedule of the direct {from}–{to} flight (PlaneMapper). Checked on {d}.
+- FR: Vol : l'horaire publié du vol direct {from}–{to} (PlaneMapper). Consulté le {d}.
+
+### src.sch
+- PT: Escolas: DGEEC (InfoEscolas, dados de 2023/24) e o site de cada escola; as escolas internacionais não constam do InfoEscolas e foram confirmadas no próprio site. Consultado a {d}.
+- EN: Schools: DGEEC (InfoEscolas, 2023/24 data) and each school's own site; the international schools are not in InfoEscolas and were confirmed on their own sites. Checked on {d}.
+- FR: Écoles : DGEEC (InfoEscolas, données 2023/24) et le site de chaque école ; les écoles internationales ne figurent pas dans InfoEscolas et ont été confirmées sur leur propre site. Consulté le {d}.
+
+### src.hsp
+- PT: Saúde: ERS, registo público de prestadores de cuidados de saúde (inclui os hospitais e centros de saúde do SNS). Consultado a {d}.
+- EN: Health: ERS, the public register of healthcare providers (it includes the SNS hospitals and health centres). Checked on {d}.
+- FR: Santé : ERS, le registre public des prestataires de soins (il comprend les hôpitaux et centres de santé du SNS). Consulté le {d}.
+
+### src.ph
+- PT: Fotografias: autores e licenças na página de créditos.
+- EN: Photographs: authors and licences on the credits page.
+- FR: Photographies : auteurs et licences sur la page des crédits.
+
+### src.km
+- PT: Praia, aeroporto, escola e hospital: distâncias em linha reta, calculadas por nós (APA, OpenStreetMap, SNS), até termos os tempos de carro deste concelho.
+- EN: Beach, airport, school and hospital: straight-line distances calculated by us (APA, OpenStreetMap, SNS), until we have this municipality's driving times.
+- FR: Plage, aéroport, école et hôpital : distances à vol d'oiseau calculées par nous (APA, OpenStreetMap, SNS), en attendant les temps en voiture de cette commune.
+
+### preview
+- PT: O que está na análise de {place}
+- EN: What the analysis of {place} holds
+- FR: Ce que contient l'analyse de {place}
+
+### paid.1
+- PT: Dez anos de preços, trimestre a trimestre, e o gráfico
+- EN: Ten years of prices, quarter by quarter, with the chart
+- FR: Dix ans de prix, trimestre par trimestre, avec le graphique
+
+### paid.2
+- PT: Rendas e rendimento bruto
+- EN: Rents and gross yield
+- FR: Loyers et rendement brut
+
+### paid.3
+- PT: Onde o lugar fica entre os 308 concelhos e a comparação com os vizinhos
+- EN: Where the place sits among the 308 municipalities, and how it compares with its neighbors
+- FR: La place du lieu parmi les 308 communes et la comparaison avec ses voisines
+
+### paid.4
+- PT: Médicos por habitante e as listas completas de escolas e de saúde
+- EN: Doctors per resident and the full lists of schools and health services
+- FR: Médecins par habitant et les listes complètes des écoles et des services de santé
+
+### a.place
+- PT: {place}: escolas, saúde e praias a 20 minutos de carro
+- EN: {place}: schools, health and beaches within 20 minutes by car
+- FR: {place} : écoles, santé et plages à 20 minutes en voiture
+
+### a.place.p
+- PT: Tempos de carro OSRM a partir da {o}, sem trânsito. Escolas: DGEEC InfoEscolas e sites das escolas. Saúde: registo da ERS. Consultado a {d}.
+- EN: OSRM driving times from the {o}, without traffic. Schools: DGEEC InfoEscolas and the schools' sites. Health: the ERS register. Checked on {d}.
+- FR: Temps en voiture OSRM depuis la {o}, sans trafic. Écoles : DGEEC InfoEscolas et les sites des écoles. Santé : registre de l'ERS. Consulté le {d}.
+
+### a.col.min
+- PT: Minutos
+- EN: Minutes
+- FR: Minutes
+
+### a.col.kind
+- PT: Tipo
+- EN: Type
+- FR: Type
+
+### a.col.muni
+- PT: Concelho
+- EN: Municipality
+- FR: Commune
+
+### a.beaches
+- PT: Praias de mar
+- EN: Sea beaches
+- FR: Plages océanes
+
+### a.chart
+- PT: {place}: dez anos de preços
+- EN: {place}: ten years of prices
+- FR: {place} : dix ans de prix
+
+### a.sea
+- PT: Temperatura do mar em agosto (Copernicus, 1991–2020)
+- EN: Sea temperature in August (Copernicus, 1991–2020)
+- FR: Température de la mer en août (Copernicus, 1991–2020)
+
+### place.lede
+- PT: Preço mediano das casas vendidas {in} nos 12 meses até ao {q}: {v} por m². {dir}
+- EN: The median price of homes sold {in} in the 12 months to {q} was {v} per square meter. {dir}
+- FR: Le prix médian des logements vendus {in} sur les 12 mois jusqu'au {q} s'élève à {v} le mètre carré. {dir}
+
+### place.paid
+- PT: Os dez anos de preços, as rendas e o rendimento bruto estão na análise completa.
+- EN: Ten years of prices, rents and gross yield are in the full analysis.
+- FR: Les dix ans de prix, les loyers et le rendement brut figurent dans l'analyse complète.
+
+### tag.cs
+- PT: centro de saúde
+- EN: health center
+- FR: centre de santé
+
+### a.col.name
+- PT: Nome
+- EN: Name
+- FR: Nom
+
+### kind.intl
+- PT: Escola internacional
+- EN: International school
+- FR: École internationale
+
+### kind.priv
+- PT: Colégio privado, currículo português
+- EN: Private school, Portuguese curriculum
+- FR: École privée, programme portugais
+
+### kind.hpub
+- PT: Hospital público (SNS)
+- EN: Public hospital (SNS)
+- FR: Hôpital public (SNS)
+
+### kind.hpriv
+- PT: Hospital privado
+- EN: Private hospital
+- FR: Hôpital privé
+
+### kind.cs
+- PT: Centro de saúde (SNS)
+- EN: Health center (SNS)
+- FR: Centre de santé (SNS)

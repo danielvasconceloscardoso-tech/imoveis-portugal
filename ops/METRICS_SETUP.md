@@ -42,9 +42,13 @@ The Cloudflare count is the page `/e/{ed}/{event}/`, except the three short fami
 | `map/share` | `{ed}/map/share/` | place, origin (`native`, `copy`) | the place card's share button |
 | `map/search/{munis,pars,golf,beach,devs}` | `{ed}/map/search/{g}/` | place (the slug or `p-{parish code}` the search resolved to; never the typed text), origin | a search result is chosen (D83 part 2) |
 | `map/card/{muni,parish,region,project,golf}` | `{ed}/map/card/{k}/` | place or region, origin | a card opens |
-| `map/tile/{price,life,care,compare}` | `{ed}/map/tile/{t}/` | place or region, origin | a free tile is opened (or "Comparar") |
+| `map/tile/{price,life,care,compare}` | `{ed}/map/tile/{t}/` | place or region, origin | a free tile is opened (or "Comparar"); since step 1 (3 Nov 2026) the card's tiles no longer open (no chart or strips free): kept for older pages |
 | `map/chart/{1a,5a,10a}` | `{ed}/map/chart/{r}/` | place or region, origin | the chart's range is changed |
 | `map/paid/preview/{rent,g10y,foreign,supply,compare}` | `{ed}/map/paid/preview/{t}/` | place or region, origin | a paid tile (or a locked comparison row) opens the unlock sheet |
+| `map/paid/preview/card` | `{ed}/map/paid/preview/card/` | place or region, origin | "Ver a análise completa" on the place card opens the unlock sheet (operator, step 1, 3 Nov 2026) |
+| `map/card/sources` | `{ed}/map/card/sources/` | place or region, origin | the card's "Fontes" link (step 1) |
+| `map/cta/{paid,consult}` | `{ed}/map/cta/{k}/` | place or region, origin | the card's two calls to action: the paid analysis, "O consultor ajuda" (the Concierge with the place filled in) (step 1) |
+| `map/gallery/{2,3}` | `{ed}/map/gallery/{i}/` | place, origin | a gallery view seen on a place card with its own photographs (step 1) |
 | `map/compare/open` | `{ed}/map/compare/open/` | band (`2` or `3` places), origin `compare` | the comparison page shows two or three places |
 | `map/compare/pair` | `{ed}/map/compare/pair/` | place, origin | the in-map two-place comparison (card link "Comparar") |
 | `map/panel/open` | `{ed}/map/panel/open/` | origin | "Camadas" is opened |
