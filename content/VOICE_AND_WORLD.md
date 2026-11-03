@@ -80,3 +80,11 @@ One image, one name, one line, one number when it fits:
 8. **The five-star concierge**: the partners presented as "a sua equipa", calm and professional.
 9. **Social = the same voice**: one image, one place, one line; the source when there is a fact; the quiz and the letter as the call to action.
 
+
+## Articles: the voice (operator, 3 Nov)
+**Ben Clymer + Cigar Aficionado + Mariana van Zeller.** The passionate expert who has handled the object (Clymer), the pleasure and the access (Cigar Aficionado), the reporter who went there and tells you what she saw and who she met (van Zeller). Curious, immersive, concrete, a little personal.
+1. Open in the scene: a place, a person, a moment, a detail. Never a definition, never context first.
+2. Tell it as a story: who, where, what you would notice if you were there. One surprising detail per paragraph.
+3. **Banned signposting:** sentences or headings that announce what comes next or label a section ("O que o índice mede e quem o publica", "Eis porquê", "Vamos por partes", "Em resumo", "A resposta curta", question headings). No headings at all in a 2-minute read unless they are a place name.
+4. **No arguments of authority in the text:** no "segundo o INE", "de acordo com", "um estudo de". State the fact plainly; link the source on the key words, or put it in a footnote. The reader trusts the details, not the citations.
+5. Still banned: contrast flips, mic-drop lines, triplets, rhetorical questions, the adjectives listed above.
