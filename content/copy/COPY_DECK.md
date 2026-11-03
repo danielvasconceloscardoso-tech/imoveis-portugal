@@ -7552,6 +7552,7 @@ The one-screen simulator at the top of the calculators page (night of 3 Nov 2026
 - PT: cerca de {local}
 - EN: about {local}
 - FR: environ {local}
+
 ## bar
 
 Part 2 of 3 Nov 2026 (the journey): the five-item bar at the bottom of the phone (the same five in the desktop header), the hearts and "A sua seleção" (the homes and regions a reader saves on their own device), the closing next step of every page, "Voltar", the homes on the edition home page and the developers' way to an example showcase.
