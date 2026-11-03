@@ -66,8 +66,8 @@ export const config = {
   // newsletter embeds are full URLs). Every form gets a hidden "edition" field from the page.
   forms: {
     // beehiiv v3 form id (a UUID, drawn by beehiiv's loader on the Maré page; home and guide link there) or a full iframe URL.
-    // EN and FR use the PT form until their own copies exist in beehiiv (operator, 3 Nov 2026; ops/ACCOUNTS.md).
-    newsletter: { pt: "c515b523-ee0e-4cd4-9d78-97423874a589", en: "c515b523-ee0e-4cd4-9d78-97423874a589", fr: "c515b523-ee0e-4cd4-9d78-97423874a589" } as Record<string, string>,
+    // One beehiiv form per language: SITE - PT / SITE - EN / SITE - FR (3 Nov 2026; ops/ACCOUNTS.md).
+    newsletter: { pt: "c515b523-ee0e-4cd4-9d78-97423874a589", en: "5ddaeb24-062e-4898-a13f-d41dc289aa20", fr: "4fe3c644-45a3-4a56-83d9-55e996555ebf" } as Record<string, string>,
     // Public form IDs from ops/ACCOUNTS.md (task 8u). Tally forms are PT only for now; EN and FR copies to create.
     // One Tally form per language (3 Nov 2026): "Pedido de parceria" / "Partnership request" / "Demande de partenariat"
     // and "Pedido de casa" / "Home request" / "Demande de logement". Hidden fields: edition, lang (buyer also budget, place).
