@@ -30,5 +30,11 @@ export function initBar() {
     const typing = (el: Element | null) => !!el && (el as HTMLElement).matches?.("input:not([type=checkbox]):not([type=radio]):not([type=range]), textarea, select, [contenteditable]");
     document.addEventListener("focusin", (e) => bb.classList.toggle("is-away", typing(e.target as Element)));
     document.addEventListener("focusout", () => setTimeout(() => bb.classList.toggle("is-away", typing(document.activeElement)), 60));
+    // Out of the way while a sheet, the search, the menu or a dialog is open: watch those few elements only.
+    const overlays = [...document.querySelectorAll<HTMLElement>(".sh, [data-cg-back], details.concierge, .fd, .m3-spot, .rq-ad, .dmb")];
+    const cover = () => bb.classList.toggle("is-cover", overlays.some((el) => (el.tagName === "DETAILS" ? (el as HTMLDetailsElement).open : !el.hidden)));
+    const mo = new MutationObserver(cover);
+    overlays.forEach((el) => mo.observe(el, { attributes: true, attributeFilter: ["hidden", "open"] }));
+    cover();
   }
 }

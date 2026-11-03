@@ -16,8 +16,8 @@
   .bb a[aria-current] { color: #2f5d50; }
   .bb a:focus-visible { outline: 2px solid #2f5d50; outline-offset: -4px; border-radius: 12px; }
   /* Out of the way while a sheet, the search, the menu or a dialog is open, and while the keyboard is up. */
-  .bb.is-away, html.sh-lock .bb, html:has(.sh:not([hidden])) .bb, html:has(details.concierge[open]) .bb, html:has(.fd:not([hidden])) .bb,
-  html:has(.m3-spot:not([hidden])) .bb, html:has(.rq-ad:not([hidden])) .bb, html:has(.dmb:not([hidden])) .bb {
+  /* (scripts/bar.ts sets is-cover from the overlays themselves; no html:has(), which would restyle the page on every change) */
+  .bb.is-away, .bb.is-cover, html.sh-lock .bb {
     transform: translateY(calc(100% + 2px)); visibility: hidden; transition: transform .26s cubic-bezier(.16, 1, .3, 1), visibility 0s linear .26s; }
   /* Nothing hides behind it: the page ends above it, the map stops above it, the demo chip sits on it. */
   body.has-bb { padding-bottom: calc(62px + env(safe-area-inset-bottom)); }
