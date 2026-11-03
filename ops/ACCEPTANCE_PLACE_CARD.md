@@ -19,8 +19,8 @@ Also checked: `node scripts/check-content.mjs` and `node scripts/check-parity.mj
 
 The same card, built the same way, for the 85 other municipalities of NUTS II Norte (Gondomar unchanged). Data per place in content/facts/map/places/<slug>/ (routes.csv, schools.csv, health.csv, place.json, SOURCES.md); photographs in content/media/SOURCES.md, "Norte roll-out". A place ships only when every line passes; otherwise it keeps today's card (no place.json) and is listed below with the line it fails.
 
-**Shipped: 12** (+ Gondomar = 13 Norte cards): Amares, Braga, Espinho, Matosinhos, Porto, Santa Maria da Feira, Santo Tirso, Trofa, Valongo, Vila Nova de Gaia, Vila Verde, Vizela.
-**Kept on today's card: 73** (68 fail line 3, 5 pass lines 2-4 but fail line 1).
+**Shipped: 8** (+ Gondomar = 9 Norte cards): Amares, Braga, Espinho, Matosinhos, Porto, Santa Maria da Feira, Vila Nova de Gaia, Vizela. The helper proposed 12; at the ship review (CTO, 3 Nov) Santo Tirso, Trofa, Valongo and Vila Verde were held on line 1 (see the table below); their data is kept in place.held.json, so renaming it back to place.json ships them once the photographs meet the standard.
+**Kept on today's card: 77** (68 fail line 3; 9 pass lines 2-6 but fail line 1: 5 with no photographs found to the standard, 4 held at the ship review).
 
 How each line was checked for the roll-out:
 
@@ -40,6 +40,10 @@ Places kept on today's card, with the failing line:
 
 | Municipality | Line | Why |
 | --- | --- | --- |
+| Santo Tirso | 1 | Held at the ship review (CTO, 3 Nov): passes lines 2-6, but the three Commons photographs are flat daylight snapshots of the river, not a wide view in warm light (photography standard, content/media/SOURCES.md). Data kept in place.held.json; ships when the photographs meet the standard (TASKS 68b). |
+| Trofa | 1 | Held at the ship review (CTO, 3 Nov): passes lines 2-6, but the three Commons photographs are flat daylight snapshots of the river, not a wide view in warm light (photography standard, content/media/SOURCES.md). Data kept in place.held.json; ships when the photographs meet the standard (TASKS 68b). |
+| Valongo | 1 | Held at the ship review (CTO, 3 Nov): passes lines 2-6, but the three Commons photographs are flat daylight snapshots of the river, not a wide view in warm light (photography standard, content/media/SOURCES.md). Data kept in place.held.json; ships when the photographs meet the standard (TASKS 68b). |
+| Vila Verde | 1 | Held at the ship review (CTO, 3 Nov): passes lines 2-6, but the three Commons photographs are flat daylight snapshots of the river, not a wide view in warm light (photography standard, content/media/SOURCES.md). Data kept in place.held.json; ships when the photographs meet the standard (TASKS 68b). |
 | Alfândega da Fé | 3 | 0 private or international school(s) within 20 minutes by car (needs 5); 1 health service(s) within 20 minutes by car: 0 hospital(s) and the nearest centro de saúde (needs 5). Photographs not searched (line 3 already fails). |
 | Alijó | 3 | 0 private or international school(s) within 20 minutes by car (needs 5); 1 health service(s) within 20 minutes by car: 0 hospital(s) and the nearest centro de saúde (needs 5). Photographs not searched (line 3 already fails). |
 | Amarante | 3 | 3 private or international school(s) within 20 minutes by car (needs 5); 4 health service(s) within 20 minutes by car: 3 hospital(s) and the nearest centro de saúde (needs 5). Photographs not searched (line 3 already fails). |
