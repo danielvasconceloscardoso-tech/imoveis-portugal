@@ -1,6 +1,6 @@
 // Map v3 (prompt 36, D62): the browser side of MapV3.astro. MapLibre loads when the map is needed (in view on the home
 // page; the first interaction, a link with a state, or idle time on the map page). Assets: /tiles/{dem,sea}/ and
-// /data/map/ (scripts/map-data/v3_assets.py, v3_extras.py, build.py, golf.py); prices: /data/prices.json.
+// /data/map/ (scripts/map-data/v3_assets.py, v3_extras.py, build.py, golf.py); prices: /data/map/price5.json (free: five years of market medians).
 // D83 part 2 (3 Nov 2026), the map in three depths: the first view is clean (layer "none": no price colours, no legend, no
 // budget glow), the place opens as a card of tiles (/data/map/tiles.json, scripts/map-data/tiles.py), a tile opens its chart
 // (1A · 5A · 10A), the paid tiles open the unlock sheet (switched off: "Disponível em breve"). Everything else moved behind

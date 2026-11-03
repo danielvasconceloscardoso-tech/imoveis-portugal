@@ -3,8 +3,8 @@
 Which parishes have golf: the OpenStreetMap golf outlines (golf.py, raw/osm-golf.geojson.gz) intersected with the
 OpenStreetMap parish boundaries matched to INE codes (raw/osm-freguesias.geojson.gz, as build.py). A parish counts as a
 golf parish when it holds at least 10 ha of a course or a quarter of one. Prices: INE median value per m² of family
-dwellings sold in the last 12 months (indicator 0012234, all dwellings), as built into site/public/data/prices.json
-(concelhos, 2016-Q1 to the latest quarter, Metodologia 2018 to 2019-Q3) and site/public/data/map/parishes.json
+dwellings sold in the last 12 months (indicator 0012234, all dwellings), as built into site/src/data/prices.json
+(concelhos, 2016-Q1 to the latest quarter, Metodologia 2018 to 2019-Q3) and site/src/data/parishes.json
 (parishes, from 2019-Q4: INE publishes parish medians only under Metodologia 2022, and only where enough sales).
 
 Writes content/data/golf-premium.json. The method and the reading rules are in content/data/GOLF_PREMIUM.md.
@@ -17,8 +17,9 @@ from shapely.geometry import shape
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from golf import courses, clean, ha, RAW, PUB, ROOT  # noqa: E402
 
-prices = json.load(open(os.path.join(PUB, "..", "prices.json")))
-pdata = json.load(open(os.path.join(PUB, "parishes.json")))
+SRC = os.path.join(ROOT, "site", "src", "data")  # the full series, build time only
+prices = json.load(open(os.path.join(SRC, "prices.json")))
+pdata = json.load(open(os.path.join(SRC, "parishes.json")))
 Q = prices["quarters"]; assert pdata["quarters"] == Q
 LAST = len(Q) - 1
 Q19, Q10 = Q.index("2019-Q4"), Q.index(f"{int(Q[LAST][:4]) - 10}-{Q[LAST][5:]}")

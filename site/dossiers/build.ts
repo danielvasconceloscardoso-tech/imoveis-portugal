@@ -1,5 +1,5 @@
 // Paid dossiers (prompt 21 §3, D39): personalised PDFs in the brand's report design, compiled only from
-// content/facts/facts.csv, the INE series (public/data/prices.json) and the reader's inputs. Information, not advice.
+// content/facts/facts.csv, the INE series (src/data/prices.json) and the reader's inputs. Information, not advice.
 //   Dossiê de compra (190 €) · Relatório de zona (90 €) · Dossiê Private (950 €)
 // Run from site/:  npx tsx dossiers/build.ts --type compra --ed lu --lang pt --budget 450000 --area porto --purpose holiday
 //                  npx tsx dossiers/build.ts --samples      (the three public samples, Luxembourg reader, in PT)

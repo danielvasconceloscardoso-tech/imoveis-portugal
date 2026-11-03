@@ -3,7 +3,7 @@
 Everything the 3D map shows comes from here and is rebuilt by two scripts (from the repo root):
 
 1. `python3 scripts/map-data/fetch.py` downloads the raw files into `raw/` and records each URL, licence and download date in `raw/manifest.json`. Requests to INE run one at a time with retries.
-2. `python3 scripts/map-data/build.py` (needs `pip install shapely` and npx) writes `site/public/data/map/` (TopoJSON boundaries and parish series), `site/public/data/prices.json` and `MISMATCHES.md`.
+2. `python3 scripts/map-data/build.py` (needs `pip install shapely` and npx) writes `site/public/data/map/` (TopoJSON boundaries), `site/src/data/parishes.json` and `site/src/data/prices.json` (the full series, build time only) and `MISMATCHES.md`; then `python3 scripts/map-data/public_prices.py` writes the free public files (`site/public/data/prices.json`, `site/public/data/map/parishes.json`: latest median and five-year change).
 3. After `npm run build` in site/, `node scripts/map-data/clicktest.mjs` clicks every concelho and writes `CLICKTEST.md`.
 
 ## Sources

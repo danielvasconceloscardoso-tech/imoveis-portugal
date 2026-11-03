@@ -1,6 +1,6 @@
 """Prompt 25 §4: phase 2 layers, INE only for now (licence CC BY 4.0, checked on dados.gov.pt for every indicator).
 
-Fetches the raw files into content/facts/map/raw/ine/ (manifest updated) and writes site/public/data/map/layers.json:
+Fetches the raw files into content/facts/map/raw/ine/ (manifest updated) and writes site/src/data/layers.json (build time only, read by the paid analysis):
 per concelho slug, the figures the map can show as layers and the place card lists as facts.
 - dom:  median €/m² by the buyer's tax domicile (Portugal / abroad), quarter, 0012239 (INE publishes ~58 concelhos)
 - sea, vac: share of seasonal-use (second homes) and vacant dwellings, Census 2021, 0012516 and 0012517
@@ -35,7 +35,7 @@ def fetch(v, p):
 
 rows = {v: list(fetch(v, p)["Dados"].values())[0] for v, p in LAYERS.items()}
 json.dump(manifest, open(os.path.join(RAW, "manifest.json"), "w"), indent=1, ensure_ascii=False, sort_keys=True)
-prices = json.load(open(os.path.join(ROOT, "site", "public", "data", "prices.json")))
+prices = json.load(open(os.path.join(ROOT, "site", "src", "data", "prices.json")))
 topo = json.load(open(os.path.join(ROOT, "site", "public", "data", "map", "munis.topo.json")))
 slug_of = {g["properties"]["c"][-4:]: g["properties"]["s"] for g in topo["objects"]["m"]["geometries"]}
 num = lambda r: float(r["valor"]) if r.get("valor") not in (None, "", "x", "-") else None
@@ -56,6 +56,6 @@ for r in rows["0013247"]:
 for r in rows["0013219"]:
     if len(r["geocod"]) == 7 and r.get("dim_3_t") in ("Total", "Brasil"): put(r["geocod"][-4:], "fr" if r["dim_3_t"] == "Total" else "br", int(num(r) or 0))
 periods = {"dom": "2026-Q2", "sea": "2021", "vac": "2021", "area": "2021", "lic": "2025", "new": "2025", "fr": "2023", "br": "2023"}
-json.dump({"periods": periods, "munis": out}, open(os.path.join(ROOT, "site", "public", "data", "map", "layers.json"), "w"), separators=(",", ":"), ensure_ascii=False)
+json.dump({"periods": periods, "munis": out}, open(os.path.join(ROOT, "site", "src", "data", "layers.json"), "w"), separators=(",", ":"), ensure_ascii=False)
 cov = {k: sum(1 for m in out.values() if k in m) for k in periods}
 print("coverage", cov); print("porto", out.get("porto"))

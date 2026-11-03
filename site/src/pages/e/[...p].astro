@@ -28,7 +28,7 @@ import { PROJECTS } from "../../lib/projects";
 import { sim1Events } from "../../lib/sim1";
 
 export function getStaticPaths() {
-  const munis = Object.keys(JSON.parse(readFileSync(join(process.cwd(), "public", "data", "map", "layers.json"), "utf8")).munis);
+  const munis = Object.keys(JSON.parse(readFileSync(join(process.cwd(), "src", "data", "layers.json"), "utf8")).munis);
   const qs = new Set<string>();
   for (const e of ED_ORDER) for (const l of LANGS) for (const it of faqFor(e, l)) qs.add(it.id);
   for (const l of LANGS) for (const x of ["sell-filing", "sell-heirs", "sell-cert"]) qs.add(`${l}-${x}`);

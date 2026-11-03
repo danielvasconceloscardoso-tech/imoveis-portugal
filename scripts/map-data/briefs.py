@@ -1,4 +1,4 @@
-"""Prompt 25 §2.4: a short quarterly brief per concelho, generated from the INE data (site/public/data/prices.json).
+"""Prompt 25 §2.4: a short quarterly brief per concelho, generated from the INE data (site/src/data/prices.json, build time only).
 
 Writes content/map/briefs/{quarter}.json with every brief marked "reviewed": false. A person reads each one, edits it if
 needed and sets "reviewed": true; only reviewed briefs reach the site (site/src/lib/mapdata.ts). Editorial responsibility
@@ -10,7 +10,7 @@ Usage (from the repo root): python3 scripts/map-data/briefs.py
 import json, os
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-P = json.load(open(os.path.join(ROOT, "site", "public", "data", "prices.json")))
+P = json.load(open(os.path.join(ROOT, "site", "src", "data", "prices.json")))
 q = P["quarters"][-1]; y, n = q.split("-Q")
 QL = {"pt": f"{n}.º trimestre de {y}", "en": f"Q{n} {y}", "fr": f"{n}e trimestre {y}"}
 

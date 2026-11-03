@@ -3,7 +3,7 @@
 // config.mapAnalysis.live is true, or in a preview build with PUBLIC_MAP_ANALYSIS_PREVIEW=1 (lib/maptiles.ts ANALYSIS_BUILT):
 // on main, while payment is off, no such page exists. Always noindex and never linked from the site; the payment link's
 // success URL sends the buyer here, and scripts/map-data/analysis-pdf.mjs prints it to PDF ("Guardar em PDF" does the same in
-// the browser). Data: prices.json (INE sales and rents), map/layers.json (INE: domicile of the buyer, foreign residents,
+// the browser). Data: src/data/prices.json (INE sales and rents, build time only), src/data/layers.json (INE: domicile of the buyer, foreign residents,
 // permits, completions), map/tiles.json (finest cuts, typology, new and existing, when gathered), src/data/mapanalysis.json
 // (typology and new versus existing per place, written by scripts/map-data/tiles.py when the gathered folder has them).
 // Sections without figures say "Em breve". Wording: COPY_DECK.md "map4.a.*" and "card5.*".
@@ -28,7 +28,7 @@ const nf = new Intl.NumberFormat(HTML_LANG[lang]), nf1 = new Intl.NumberFormat(H
 const pct = (v?: number | null) => v == null ? "—" : `${v > 0 ? "+" : v < 0 ? "−" : ""}${nf.format(Math.abs(Math.round(v)))} %`;
 const q = PRICES.quarters[LAST], qLabel = c("map.qfmt", lang).replace("{q}", q.slice(-1)).replace("{y}", q.slice(0, 4));
 const rName = akey === "portugal" ? k4("a.all") : c(`map.r.${akey}`, lang);
-const layers = JSON.parse(readFileSync(join(process.cwd(), "public", "data", "map", "layers.json"), "utf8")).munis as Record<string, any>;
+const layers = JSON.parse(readFileSync(join(process.cwd(), "src", "data", "layers.json"), "utf8")).munis as Record<string, any>;
 const extraFile = join(process.cwd(), "src", "data", "mapanalysis.json");
 const ANA: Record<string, any> = existsSync(extraFile) ? JSON.parse(readFileSync(extraFile, "utf8")) : {};
 const extra: Record<string, any> = ANA.m ?? {};
@@ -57,6 +57,9 @@ const cards = rows.filter((r) => ANA.card?.[r.s]).map((r) => {
 const foreign = rows.filter((r) => r.lay.dom?.abroad || r.lay.fr);
 const supply = rows.filter((r) => r.lay.lic != null || r.lay.new != null);
 const eurM2 = (v?: number | null) => (v ? `${nf.format(v)} €` : "—");
+// Portugal's median rent and gross yield (moved here from the method article, acceptance line 2) and the region's, first in the table.
+const rentPt = c("gate5.a.rent.pt", lang, { rent: lang === "en" ? `€${nf2.format(pt.rq[LAST])}` : `${nf2.format(pt.rq[LAST])} €`, yield: nf1.format(pt.yield), q: qLabel });
+const rentTop = [...(akey === "portugal" ? [] : [reg]), pt].filter((x) => x?.rq?.[LAST] || x?.yield);
 const TYP = ["T0–T1", "T2", "T3", "T4+"];
 ---
 <V2 lang={lang} ed={ed} page="map" noindex title={`${k4("a.title", { region: rName })} | Imóveis Portugal · ${edName(ed, lang)}`} description={k4("a.lede", { region: rName, q: qLabel })} next={false}>
@@ -83,8 +86,9 @@ const TYP = ["T0–T1", "T2", "T3", "T4+"];
     <p class="small">{top.map((r, i) => <>{i > 0 && " · "}{r.n} {eurM2(r.m2)}</>)}</p>
 
     <h2>{k4("a.rent")}</h2>
+    <p>{rentPt}</p>
     <div class="an4-sc"><table><thead><tr><th>{k4("a.col.place")}</th><th>{k4("a.col.rent")}</th><th>{k4("a.col.yield")}</th></tr></thead>
-      <tbody>{rows.filter((r) => r.ser?.rq?.[LAST] || r.ser?.yield).map((r) => <tr><td>{r.n}</td><td>{r.ser?.rq?.[LAST] ? `${nf2.format(r.ser.rq[LAST]!)} €` : "—"}</td><td>{r.ser?.yield ? `${nf1.format(r.ser.yield)} %` : "—"}</td></tr>)}</tbody></table></div>
+      <tbody>{rentTop.map((x) => <tr class="an4-me"><td>{x.n}</td><td>{x.rq?.[LAST] ? `${nf2.format(x.rq[LAST])} €` : "—"}</td><td>{x.yield ? `${nf1.format(x.yield)} %` : "—"}</td></tr>)}{rows.filter((r) => r.ser?.rq?.[LAST] || r.ser?.yield).map((r) => <tr><td>{r.n}</td><td>{r.ser?.rq?.[LAST] ? `${nf2.format(r.ser.rq[LAST]!)} €` : "—"}</td><td>{r.ser?.yield ? `${nf1.format(r.ser.yield)} %` : "—"}</td></tr>)}</tbody></table></div>
 
     <h2>{k4("a.g10")}</h2>
     <figure class="pc-chart" set:html={chart} />
