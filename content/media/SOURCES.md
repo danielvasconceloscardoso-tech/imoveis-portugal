@@ -90,3 +90,20 @@ One photograph per article (content/stories/). Five come from the library above;
 | img/v2/porto-foz-farolim-felgueiras-* | As escolas internacionais do Porto e de Lisboa | Felgueiras lighthouse, Foz do Douro (no school exterior was found under a commercial licence) | https://www.flickr.com/photos/42201095@N03/52667959121 | Jocelyn777 Love Europe | CC BY-SA 2.0 | 2026-11-03 |
 | img/v2/porto-ponte-luis-i-noite-* | São João, a noite em que o Porto não dorme | The Luís I bridge at night | Unsplash photo-1569959220744-ff553533f492 (design/directions/photos/CREDITS.md; photographer to confirm) | | Unsplash License | 2026-11-03 |
 | img/v2/vila-do-conde-aqueduto-* | Vila do Conde, o mar a 41 minutos do Porto | The Santa Clara aqueduct | https://www.flickr.com/photos/133200397@N03/46637546551 | Sergei Gussev | CC BY 2.0 | 2026-11-03 |
+
+## Fix step 4, 3 Nov 2026: the ten lifestyle articles, one view each
+
+The articles were rewritten (PT, EN, FR) and every photograph reviewed against the standard above. Four were replaced by views that meet it (the Felgueiras lighthouse standing in for the schools, the Luís I bridge at night for São João, She Changes at midday for Matosinhos, the aqueduct for Vila do Conde); Faro now shows Faro instead of Praia da Marinha (Lagoa); Lisbon and Cascais moved to warmer views from the library. New files were found through the Wikimedia Commons API (the Unsplash, Pexels and Pixabay APIs need keys; Commons and Flickr rate-limited the build environment, so two more candidates, a Cascais sunset and the Foz do Douro, could not be downloaded), graded with `resort_grade.py` (1.0) and cut to `img/v2/<name>-{640,1024,1600}.{avif,webp}`. The previous files stay on disk.
+
+| File (site/public/) | Article | What it shows | Source page | Author | Licence | Date checked |
+| --- | --- | --- | --- | --- | --- | --- |
+| img/v2/faro-ria-formosa-por-do-sol-* | inverno-faro | The Ria Formosa at sunset from the Praia de Faro bridge | https://commons.wikimedia.org/wiki/File:Sunset_from_the_Ponte_Praia_de_Faro_(36487363454).jpg | Eduard Marmet | CC BY-SA 2.0 | 2026-11-03 |
+| img/v2/lisboa-castelo-por-do-sol-* | paz-portugal | Lisbon from São Jorge castle at sunset | (library, above) | Steve Gardner | CC BY 2.0 | 2026-11-03 |
+| img/v2/matosinhos-leixoes-por-do-sol-* | dia-matosinhos | Sunset on Matosinhos beach, the Leixões cruise terminal in silhouette | https://commons.wikimedia.org/wiki/File:Matosinhos_Harbour_(38677455861).jpg | prilfish | CC BY 2.0 | 2026-11-03 |
+| img/v2/porto-douro-palacio-de-cristal-* | mesa-porto | The Douro from the Palácio de Cristal gardens (kept; daylight, 1024 px original) | (D83, above) | mattk1979 | CC BY-SA 2.0 | 2026-11-03 |
+| img/v2/douro-socalcos-* | douro-270 | Douro vineyard terraces (kept) | (D83, above) | Ramiro-- | Pixabay Content License | 2026-11-03 |
+| img/v2/leca-piscina-das-mares-* | siza-souto | Siza's tidal pools, Leça da Palmeira (kept; the article's subject; 1024 px original) | (D83, above) | Vitor Oliveira | CC BY-SA 2.0 | 2026-11-03 |
+| img/v2/cascais-boca-do-inferno-* | cascais-reis | Boca do Inferno, Cascais, at golden hour | (library, above) | BernardoUPloud | Pixabay Content License | 2026-11-03 |
+| img/v2/porto-douro-amanhecer-* | escolas | The Douro at first light, a rabelo boat, Ribeira | (library, above) | vjgalaxy | Pixabay Content License | 2026-11-03 |
+| img/v2/porto-douro-entardecer-* | sao-joao | The Douro and the Luís I bridge at sunset | (library, above) | Unsplash | Unsplash License | 2026-11-03 |
+| img/v2/vila-do-conde-rio-ave-santa-clara-* | vila-do-conde | The Ave River and the Monastery of Santa Clara | https://commons.wikimedia.org/wiki/File:Convento_de_Santa_Clara_(Vila_do_Conde)_(3).jpg | Joseolgon | CC BY 4.0 | 2026-11-03 |

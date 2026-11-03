@@ -1,9 +1,9 @@
 ---
 id: douro-270
 lang: pt
-slug: o-douro-tem-270-anos-de-vinho-demarcado
-title: "O Douro tem 270 anos de vinho demarcado"
-description: "A 10 de setembro de 1756 nasceu a primeira região demarcada de vinho do mundo, no Douro. O alvará de Pombal, os marcos de granito e o rio aberto em 1792."
+slug: o-primeiro-porto-vintage-num-catalogo-da-christies-foi-um-1765
+title: "O primeiro Porto Vintage num catálogo da Christie's foi um 1765"
+description: "Apareceu num leilão de 1768, doze anos depois do alvará de D. José I que criou a Região Demarcada do Douro, a primeira denominação de origem do mundo."
 published: 2026-11-03
 updated: 2026-11-03
 order: 5
@@ -16,30 +16,18 @@ photo:
 go:
   where: "Peso da Régua, onde fica o Museu do Douro, no edifício da antiga Companhia.[[ivdp-milestones]]"
   when: "O ano inteiro. A data a guardar é 10 de setembro, o dia em que a Companhia foi criada, em 1756.[[ivdp-1756]]"
-concierge: "Se quiser ver casas com o Douro à janela, da Régua ao Pinhão, [o Concierge trata disso]."
+concierge: "Se quiser uma casa com o Douro à janela, da Régua ao Pinhão, [o Concierge mostra-lhe o que há]."
 sources: [ivdp-1756, ivdp-milestones, ivdp-region]
 ---
 
-A 10 de setembro de 1756, um alvará de D. José I criou a Companhia Geral da Agricultura das Vinhas do Alto Douro e, com ela, a Região Demarcada do Douro. Em 2026 fez 270 anos.[[ivdp-1756]]
+Num catálogo de leilões da Christie's de 1768 aparece, pela primeira vez, um vinho do Porto Vintage. A colheita era a de 1765.[[ivdp-milestones]] Poucos anos antes, o vinho do Douro tinha estado em crise. Ao longo desse século, eram mercadores ingleses, holandeses e alemães, instalados no Porto, que o compravam e o exportavam pelo porto da cidade.[[ivdp-milestones]]
 
-## A primeira do mundo
+O sucesso na exportação trouxera imitações. Vinhos de várias origens eram [corrigidos para passar por Porto](fact:ivdp-1756): baga de sabugueiro para a cor, vinho espanhol mais carregado, açúcar para esconder a má aguardente. Por volta de 1750 a qualidade estava em causa, e em 1754 os compradores ingleses não compraram vinho aos lavradores.
 
-O Instituto dos Vinhos do Douro e do Porto considera-a a primeira denominação de origem do mundo. Pela primeira vez, um produto agrícola conhecido, feito numa área delimitada, ganhou regras próprias e uma entidade para as fazer cumprir.[[ivdp-1756]]
+A resposta chegou a 10 de setembro de 1756, num alvará de D. José I que criou a Companhia Geral da Agricultura das Vinhas do Alto Douro e, com ela, a Região Demarcada. Passou a haver um cadastro das parcelas de vinha, quantidades máximas de venda, preços conforme a qualidade verificada pelos funcionários da Companhia e a proibição de juntar ao vinho o que lhe mudasse o perfil. O Marquês de Pombal trazia o modelo da sua experiência como embaixador em Londres e em Viena.[[ivdp-1756]]
 
-As regras eram concretas: um cadastro das parcelas de vinha, quantidades máximas de venda, preços conforme a qualidade provada pelos funcionários da Companhia e a proibição de juntar ao vinho o que lhe mudasse o perfil. O objetivo era fechar a região a vinhos de fora.[[ivdp-1756]]
+Foi a primeira denominação de origem do mundo. A França só fixou o conceito de appellation d'origine no primeiro quartel do século XX.[[ivdp-1756]]
 
-O IVDP lembra que o Marquês de Pombal trouxe a ideia da sua experiência como embaixador em Londres e em Viena.[[ivdp-1756]]
+No terreno, as demarcações pombalinas fizeram-se entre 1757 e 1761, e D. Maria I alargou a área em 1788. Em 1792 acabaram as obras que destruíram o Cachão da Valeira, o rochedo que fechava o rio perto de [São João da Pesqueira](place:sao-joao-da-pesqueira), e o Douro passou a navegar-se até Espanha.[[ivdp-milestones]]
 
-## Marcos de granito
-
-Entre 1757 e 1761 fizeram-se as demarcações pombalinas, a primeira delimitação da região no terreno. Em 1788, D. Maria I alargou a área demarcada.[[ivdp-milestones]]
-
-Em 1792 terminaram as obras que destruíram o Cachão da Valeira, um rochedo de granito que barrava o rio perto de [São João da Pesqueira](place:sao-joao-da-pesqueira). A partir daí, o Douro passou a navegar-se até Espanha e a vinha pôde estender-se para leste.[[ivdp-milestones]][[ivdp-region]]
-
-O primeiro Vintage a aparecer num catálogo de leilões da Christie's surgiu em 1768.[[ivdp-milestones]]
-
-## A região hoje
-
-A Região Demarcada tem 247 420 hectares e três sub-regiões: o Baixo Corgo, o Cima Corgo, até ao Cachão da Valeira, e o Douro Superior, até à fronteira. No Baixo Corgo, o mais próximo do Porto, a vinha ocupa cerca de 29% da área, de Barqueiros e Barrô, nas duas margens, até ao rio Corgo.[[ivdp-region]] Em 2001, a UNESCO classificou o Alto Douro Vinhateiro como Património Mundial, na categoria de paisagem cultural evolutiva e viva.[[ivdp-milestones]]
-
-O edifício da antiga Companhia, em [Peso da Régua](place:peso-da-regua), é desde 20 de dezembro de 2008 a sede do Museu do Douro, criado por lei em 1997 como um museu de território.[[ivdp-milestones]] Ao lado do alvará, a história regista os outros protagonistas: os mercadores do vinho, estabelecidos em [Vila Nova de Gaia](place:vila-nova-de-gaia) e no [Porto](place:porto), cujas contas a Companhia também veio equilibrar.[[ivdp-1756]]
+Hoje a [Região Demarcada](fact:ivdp-region) tem 247 420 hectares, do Baixo Corgo, onde a vinha cobre cerca de 29% da terra, ao Cima Corgo e ao Douro Superior, que chega à fronteira. A UNESCO classificou o Alto Douro Vinhateiro como Património Mundial em 2001.[[ivdp-milestones]] Em [Peso da Régua](place:peso-da-regua), o edifício da antiga Companhia é desde 20 de dezembro de 2008 a sede do Museu do Douro.[[ivdp-milestones]] Durante séculos, as pipas desciam o rio até [Vila Nova de Gaia](place:vila-nova-de-gaia) nos barcos rabelos. Saíram de cena com a barragem do Carrapatelo, construída entre 1964 e 1971, a primeira de cinco no Douro português; o comboio e depois os camiões-cisterna ficaram com o transporte.[[ivdp-milestones]] Os mercadores cujas contas o alvará também acertou tinham casa em Gaia e no [Porto](place:porto).[[ivdp-1756]]

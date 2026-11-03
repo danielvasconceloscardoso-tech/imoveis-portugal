@@ -1,47 +1,33 @@
 ---
 id: inverno-faro
 lang: pt
-slug: um-inverno-sem-geada-a-menos-de-tres-horas-do-luxemburgo
-title: "Um inverno sem geada fica a menos de três horas do Luxemburgo"
-description: "Faro tem 16,3 °C de máxima média em janeiro e zero dias de geada por ano. O voo direto do Luxemburgo demora 2 h 55. Os números do IPMA e da MeteoLux."
+slug: o-dia-mais-frio-de-faro-em-trinta-anos
+title: "O dia mais frio de Faro em trinta anos foi 5 de fevereiro de 2012"
+description: "Nessa noite, a estação 554 do IPMA, em Faro, desceu a 0,3 °C negativos. Em janeiro, a máxima média de Faro é de 16,3 °C; a do Findel, no Luxemburgo, de 3,8."
 published: 2026-11-03
 updated: 2026-11-03
 order: 1
 place: faro
 airport: FAO
 photo:
-  src: img/v2/algarve-praia-da-marinha
-  alt: "Falésias douradas e água verde-clara na Praia da Marinha, no Algarve"
-  caption: "Praia da Marinha, Lagoa, no Algarve."
+  src: img/v2/faro-ria-formosa-por-do-sol
+  alt: "O sol a pôr-se sobre a Ria Formosa, visto da ponte da Praia de Faro"
+  caption: "A Ria Formosa ao pôr do sol, da ponte da Praia de Faro."
 go:
   where: "Faro, no Algarve, com aeroporto próprio. Loulé fica a oeste, Olhão e Tavira a leste."
   when: "De dezembro a fevereiro, os meses mais frescos, com máximas médias entre 16 e 17 °C.[[ipma-faro-normals]]"
-concierge: "Se quiser ver casas entre Faro e Loulé para passar lá o próximo inverno, [o Concierge trata disso]."
+concierge: "Se quiser passar o próximo janeiro entre Faro e Loulé, [o Concierge mostra-lhe as casas]."
 sources: [ipma-faro-normals, meteolux-findel-normals, flight-lux-fao, flight-lux-opo]
 ---
 
-Em janeiro, a máxima média em [Faro](place:faro) é de 16,3 °C. No aeroporto do Findel, no mesmo mês, é de 3,8 °C.[[ipma-faro-normals]][[meteolux-findel-normals]] São as normais climatológicas de 1991 a 2020, as médias de trinta anos que o IPMA e a MeteoLux publicam para cada estação.
+Na noite de 5 de fevereiro de 2012, o termómetro da estação 554 do IPMA, em [Faro](place:faro), a cinco metros acima do mar, desceu a 0,3 °C negativos. Foi a noite mais fria, e o valor mais baixo, em trinta anos de [normais climatológicas](fact:ipma-faro-normals), de 1991 a 2020. Na linha dos dias de geada, aqueles em que a mínima fica abaixo de zero, a média anual de Faro é de 0,0.
 
-## A linha da geada
+No aeroporto do Findel, a mesma linha soma [64,4 dias por ano](fact:meteolux-findel-normals), 16,9 só em janeiro. Para quem sai do Luxemburgo nesse mês, a diferença está toda numa linha da tabela: a máxima média de janeiro é de 3,8 °C no Findel e de 16,3 °C em Faro, onde as mínimas médias ficam nos 8,3 °C.[[ipma-faro-normals]][[meteolux-findel-normals]]
 
-A tabela de Faro tem uma linha que, lida no Luxemburgo, parece gralha de impressão. Dias de geada, com a mínima abaixo de zero: 0,0 por ano.[[ipma-faro-normals]] No Findel são 64,4, quase 17 só em janeiro.[[meteolux-findel-normals]]
+O inverno de Faro dura três meses. Dezembro tem 17,1 °C de máxima média, janeiro 16,3 e fevereiro 17,0, e em março a média já vai nos 18,9.[[ipma-faro-normals]] Na média do ano, a máxima de Faro fica nos 22,3 °C. O janeiro mais quente das três décadas teve um dia de 21,9 °C, a 28 de janeiro de 2003.[[ipma-faro-normals]]
 
-Em trinta anos, a temperatura mais baixa medida na estação de Faro foi de 0,3 °C negativos, a 5 de fevereiro de 2012. A mínima média de janeiro fica nos 8,3 °C.[[ipma-faro-normals]]
+A chuva também se conta em linhas curtas. Faro recebe 455 milímetros por ano, pouco mais de metade dos 831 do Findel, e em janeiro há, em média, seis dias com mais de um milímetro.[[ipma-faro-normals]][[meteolux-findel-normals]] No verão, a conta faz-se ao contrário. Julho tem 29,4 °C de máxima média em Faro, agosto 29,2, e a estação soma 115 dias com máximas de 25 °C ou mais por ano. O Findel soma 38.[[ipma-faro-normals]][[meteolux-findel-normals]]
 
-## Três meses de inverno
+O [voo LG785 da Luxair](fact:flight-lux-fao) descola do Luxemburgo às 16:00 e aterra em Faro às 17:55, hora local, depois de 2 h 55 no ar; com o fuso, quem chega ganha uma hora ao relógio. Para o Porto, a mesma companhia faz a viagem em [2 h 30](fact:flight-lux-opo).
 
-Em Faro, só dezembro, janeiro e fevereiro têm máximas médias abaixo dos 18 °C, e nenhum desce dos 16. Em março, a média já vai em 18,9 °C, e o dia mais quente de janeiro em trinta anos chegou aos 21,9 °C, a 28 de janeiro de 2003. No Findel, de novembro a março, a máxima média nunca passa dos 10 °C.[[ipma-faro-normals]][[meteolux-findel-normals]]
-
-A chuva conta a mesma história. Faro soma 455 milímetros por ano, pouco mais de metade dos 831 do Findel. Em janeiro, chove em média seis dias com mais de um milímetro.[[ipma-faro-normals]][[meteolux-findel-normals]]
-
-O verão, por seu lado, é longo. A estação de Faro regista 115 dias por ano com máximas de 25 °C ou mais; o Findel, 38.[[ipma-faro-normals]][[meteolux-findel-normals]]
-
-## O voo
-
-O voo da Luxair LG785 sai do Luxemburgo às 16:00 e aterra em Faro às 17:55, hora local. São 2 h 55 no horário publicado, e o fuso devolve uma hora ao relógio de quem chega.[[flight-lux-fao]] Para o Porto, a mesma companhia faz a viagem em 2 h 30.[[flight-lux-opo]]
-
-## À volta de Faro
-
-O concelho de Faro tem a cidade e o aeroporto. A oeste fica [Loulé](place:loule); a leste, [Olhão](place:olhao) e [Tavira](place:tavira). A estação do IPMA que dá estes números está a cinco metros de altitude, com coordenadas publicadas na própria ficha.[[ipma-faro-normals]]
-
-Para comparar com a sua cidade, as normais de cada estação estão publicadas nas fontes no fim deste artigo, com a data em que as consultámos.
+O concelho de Faro tem a cidade e o aeroporto. A oeste fica [Loulé](place:loule); a leste, [Olhão](place:olhao) e [Tavira](place:tavira). As fichas das duas estações, com as coordenadas de cada uma e os valores mês a mês, estão nas fontes, para quem quiser pôr ao lado a da sua própria cidade.

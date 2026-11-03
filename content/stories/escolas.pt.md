@@ -1,43 +1,35 @@
 ---
 id: escolas
 lang: pt
-slug: as-escolas-internacionais-do-porto-e-de-lisboa
-title: "As escolas internacionais do Porto e de Lisboa"
-description: "A Oporto British School abriu em 1894, a St. Julian's em 1932, a americana CAISL em 1956. Currículos e moradas, tirados das próprias escolas."
+slug: a-escola-britanica-do-porto-abriu-em-1894
+title: "A escola britânica do Porto abriu em 1894, a 300 metros da praia"
+description: "A Oporto British School fica na Rua da Cerca, na Foz, e recebe alunos dos 3 aos 18 anos. A alemã tem 125 anos; a americana de Lisboa começou com nove alunos."
 published: 2026-11-03
 updated: 2026-11-03
 order: 8
 place: porto
 airport: OPO
 photo:
-  src: img/v2/porto-foz-farolim-felgueiras
-  alt: "O farolim de Felgueiras e as ondas nas rochas da Foz do Douro, no Porto"
-  caption: "O farolim de Felgueiras, na Foz do Douro, a poucas ruas da Oporto British School."
+  src: img/v2/porto-douro-amanhecer
+  alt: "O Douro ao amanhecer no Porto, com um barco rabelo e o casario da Ribeira na margem"
+  caption: "O Douro ao amanhecer, no Porto."
 go:
-  where: "No Porto, a Foz e a zona de Guerra Junqueiro. Em Lisboa, Carcavelos (Cascais), Linhó (Sintra) e a Avenida Duarte Pacheco."
+  where: "No Porto, a Foz e a zona de Guerra Junqueiro. À volta de Lisboa, Carcavelos (Cascais), Linhó (Sintra) e a Avenida Duarte Pacheco."
   when: "As visitas marcam-se diretamente com cada escola, pelos contactos que publica no seu site."
-concierge: "Se quiser ver casas perto de uma destas escolas, no Porto ou em Lisboa, [o Concierge trata disso]."
+concierge: "Se quiser a escola a uma caminhada de casa, no Porto ou em Lisboa, [o Concierge procura a casa a partir dela]."
 sources: [school-obs, school-dsporto, school-clip, school-stjulians, school-caisl, school-lfcl]
 ---
 
-A Oporto British School foi fundada em 1894, na Rua da Cerca, no [Porto](place:porto). A própria escola diz que fica a 300 metros da praia, e recebe alunos dos 3 aos 18 anos.[[school-obs]] Este artigo junta seis escolas internacionais das duas cidades, com o que cada uma publica sobre si: currículo, idades e morada. Sem classificações nem propinas.
+Na Rua da Cerca, 338, na Foz do [Porto](place:porto), a [Oporto British School](fact:school-obs) está a 300 metros da praia. O site da escola abre com cinco números lado a lado: 1894, o ano da fundação; 577 alunos; 30 nacionalidades; 16 alunos por turma, em média; e os 300 metros até à areia. Recebe crianças a partir dos 3 anos e acompanha-as até aos 18, numa escola que se apresenta como internacional britânica.
 
-## No Porto
+Na Rua Guerra Junqueiro, 162, a [Deutsche Schule Porto](fact:school-dsporto) conta 125 anos. É bilingue do jardim de infância ao Abitur internacional, que se faz em alemão, e não pede alemão a quem entra no jardim de infância. Os alunos trabalham em quatro línguas, alemão, português, inglês e francês, e as universidades portuguesas aceitam o Abitur para o acesso ao ensino superior.
 
-A Oporto British School apresenta-se como escola internacional britânica. Tem 577 alunos de 30 nacionalidades, em turmas de 16 em média, e a morada completa é Rua da Cerca, 338, na Foz.[[school-obs]]
+A [CLIP, Oporto International School](fact:school-clip), vai do pré-escolar ao Form 12, com 1226 alunos de 56 nacionalidades. Apresenta-se como Cambridge School, acreditada pelo Council of International Schools.
 
-A Deutsche Schule Porto conta 125 anos. É bilingue, do jardim de infância ao Abitur internacional, que se faz em alemão. Não é preciso saber alemão para entrar no jardim de infância, e as universidades portuguesas aceitam o Abitur para o acesso ao ensino superior. Os alunos trabalham em alemão, português, inglês e francês. Fica na Rua Guerra Junqueiro, 162.[[school-dsporto]]
+A escola americana de Lisboa começou num apartamento. Em 1956, Anthony McKenna abriu em Pedrouços, em [Lisboa](place:lisboa), uma escola com nove alunos, para trazer o ensino americano para Portugal. É hoje a [Carlucci American International School of Lisbon](fact:school-caisl), na Rua António dos Reis, 95, no campus do Linhó, em [Sintra](place:sintra), com o IB entre as acreditações que publica.
 
-A CLIP, Oporto International School, vai do pré-escolar ao Form 12 e tem 1226 alunos de 56 nacionalidades. Apresenta-se como Cambridge School e acreditada pelo Council of International Schools.[[school-clip]]
+A [St. Julian's School](fact:school-stjulians) é mais antiga. Está desde 1932 na Quinta Nova, em Carcavelos, entre a praia de Carcavelos e Lisboa, no concelho de [Cascais](place:cascais). Dá o Diploma do Bacharelato Internacional e o programa profissional do IB, e tem um currículo bilingue dos 6 aos 14 anos.
 
-## Em Lisboa e à volta
+Na Avenida Duarte Pacheco, 32, em Lisboa, o [Lycée français Charles Lepierre](fact:school-lfcl) pertence à rede da AEFE, a agência das escolas francesas no estrangeiro: 600 escolas em 138 países, todas com o currículo nacional francês, o mesmo que os alunos teriam numa escola em França.
 
-A St. Julian's School existe desde 1932 e ocupa a Quinta Nova, em Carcavelos, concelho de [Cascais](place:cascais), entre a praia e a cidade. Oferece o Diploma do Bacharelato Internacional e o programa profissional do IB, e tem um currículo bilingue dos 6 aos 14 anos.[[school-stjulians]]
-
-A Carlucci American International School of Lisbon começou em 1956 com nove alunos, num apartamento em Pedrouços, em [Lisboa](place:lisboa). O fundador, Anthony McKenna, queria trazer a escola americana para Portugal. Hoje está no campus do Linhó, em [Sintra](place:sintra), e o IB aparece entre as acreditações que publica.[[school-caisl]]
-
-O Lycée français Charles Lepierre fica na Avenida Duarte Pacheco, em Lisboa. Faz parte da rede da AEFE, a agência que coordena as escolas francesas no estrangeiro: 600 escolas em 138 países, todas com o currículo nacional francês.[[school-lfcl]]
-
-## No mapa
-
-As moradas publicadas ficam, no Porto, no lado ocidental da cidade, perto do mar; à volta de Lisboa, em Carcavelos, no Linhó e no centro da cidade. Os contactos de cada uma estão no seu próprio site, ligado nas fontes deste artigo.
+No mapa, as moradas do Porto ficam todas do lado ocidental da cidade, perto do mar. As de Lisboa dividem-se entre Carcavelos, o Linhó e o centro da cidade. As visitas marcam-se com cada escola, pelos contactos que publica no próprio site.

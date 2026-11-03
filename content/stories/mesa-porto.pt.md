@@ -1,9 +1,9 @@
 ---
 id: mesa-porto
 lang: pt
-slug: a-mesa-mais-estrelada-do-porto
-title: "A mesa mais estrelada do Porto tem jardim e vista para o Douro"
-description: "O Antiqvvm, do chef Vítor Matos, é o único duas estrelas Michelin no concelho do Porto em 2026. Fica junto ao Museu Romântico, com jardim sobre o rio."
+slug: no-unico-duas-estrelas-do-porto-os-snacks-fazem-se-ao-balcao
+title: "No único duas estrelas dentro do Porto, os primeiros snacks fazem-se ao balcão"
+description: "O Antiqvvm, de Vítor Matos, tem um jardim virado para o Douro, ao lado do Museu Romântico. É o único duas estrelas Michelin dentro do concelho do Porto."
 published: 2026-11-03
 updated: 2026-11-03
 order: 4
@@ -12,34 +12,22 @@ airport: OPO
 photo:
   src: img/v2/porto-douro-palacio-de-cristal
   alt: "O Douro e as casas do Porto vistos dos jardins do Palácio de Cristal"
-  caption: "O Douro visto dos jardins do Palácio de Cristal, ao lado do Museu Romântico."
+  caption: "O Douro visto dos jardins do Palácio de Cristal, no Porto."
 go:
-  where: "Rua de Entre Quintas, 220, no Porto, junto ao Museu Romântico e aos jardins do Palácio de Cristal.[[michelin-antiqvvm]]"
+  where: "Rua de Entre Quintas, 220, no Porto, junto ao Museu Romântico.[[michelin-antiqvvm]]"
   when: "Com reserva. A página do restaurante no Guia MICHELIN tem a ligação para marcar mesa.[[michelin-antiqvvm]]"
-concierge: "Se quiser ver casas a uma caminhada do Palácio de Cristal, [o Concierge trata disso]."
+concierge: "Se quiser jantar no Antiqvvm e voltar a pé para casa, [o Concierge procura-a consigo]."
 sources: [michelin-antiqvvm, michelin-2026-porto-2stars, michelin-2026-portugal, michelin-2026-porto-new]
 ---
 
-No guia Michelin de 2026, o [Porto](place:porto) tem três restaurantes com duas estrelas na sua região, e só um dentro do concelho: o Antiqvvm, do chef Vítor Matos.[[michelin-2026-porto-2stars]] Os outros dois ficam do outro lado das fronteiras municipais, o The Yeatman em [Vila Nova de Gaia](place:vila-nova-de-gaia) e a Casa de Chá da Boa Nova em Leça da Palmeira, [Matosinhos](place:matosinhos).
+No Antiqvvm, a refeição começa ao balcão. Os primeiros snacks preparam-se ali, à vista, para quem quiser ver. Depois passa-se à sala, num edifício ao lado do Museu Romântico, na Rua de Entre Quintas, 220, com um jardim virado para o Douro onde também se come. Há dois [menus de degustação](fact:michelin-antiqvvm): o Orgânico, vegetariano, e o Ensaios Sensoriais.
 
-## Duas estrelas é o teto, por agora
+A cozinha de Vítor Matos assenta no produto e não o esconde: carabineiro, salmonete, caviar, wagyu, trufa negra, em pratos de aparência simples. Um deles chama-se Gamba violeta & Moqueca.[[michelin-antiqvvm]]
 
-Em Portugal, a categoria mais alta do guia de 2026 é a das duas estrelas, com nove restaurantes em todo o país. A única novidade nessa categoria foi o Fifty Seconds, em [Lisboa](place:lisboa). Uma estrela têm 44 casas, dez delas novas.[[michelin-2026-portugal]] Na prática, o Antiqvvm partilha o lugar mais alto do país com oito outras mesas.
+O restaurante tem duas estrelas Michelin, e na [região do Porto](fact:michelin-2026-porto-2stars) há mais duas casas assim, ambas do outro lado da fronteira do concelho: o The Yeatman Gastronomic Restaurant, em [Vila Nova de Gaia](place:vila-nova-de-gaia), e a Casa de Chá da Boa Nova, em Leça da Palmeira, [Matosinhos](place:matosinhos). Na Boa Nova, o sommelier Carlos Monteiro recebeu este ano o prémio Michelin para o Sommelier. Dentro do [Porto](place:porto), o Antiqvvm está sozinho nesse degrau.
 
-## A morada
+O guia de 2026 foi apresentado a 10 de março, no Funchal, e não deu três estrelas a nenhuma casa portuguesa. Nove restaurantes têm duas, e a única entrada nova nessa categoria foi o Fifty Seconds, em [Lisboa](place:lisboa). Há 44 com uma estrela, dez deles novos.[[michelin-2026-portugal]]
 
-O endereço é a Rua de Entre Quintas, 220. O restaurante ocupa um edifício junto ao Museu Romântico, com um jardim onde também se come, virado para o Douro.[[michelin-antiqvvm]]
+Quatro dessas estrelas novas ficaram no Porto, todas no mesmo ano, e cada uma tem a sua maneira de servir.[[michelin-2026-porto-new]] O dop, no centro, é de Rui Paula, o mesmo chef da Boa Nova, com o chef residente Sandro Teixeira e um menu chamado Não há futuro sem memória, em 6, 10 ou 14 momentos. O Éon ocupa o Palacete Severo, um hotel cheio de arte, onde Tiago Bonito serve o menu Lés a Lés, em 9 ou 14 pratos. O Gastro by Elemento, junto ao Estádio do Dragão, é de Ricardo Dias Ferreira e cozinha a fogo e em forno de lenha, num menu de 15 momentos. O In Diferente é da chef brasileira Angélica Salvador, que trabalha peixe das lotas de Matosinhos e de Aveiro.
 
-## A cozinha
-
-O guia descreve uma cozinha criativa, de pratos de aparência simples construídos sobre o produto: carabineiro, salmonete, caviar, wagyu, trufa negra. Há dois menus de degustação. O Orgânico é vegetariano; o outro chama-se Ensaios Sensoriais. Os primeiros snacks fazem-se num balcão à vista, para quem quiser ver a preparação.[[michelin-antiqvvm]]
-
-Um dos pratos que o guia cita resume a casa num título: Gamba violeta & Moqueca.[[michelin-antiqvvm]]
-
-## A cidade à volta
-
-O Antiqvvm não está sozinho. Em 2026, o Porto ganhou quatro novas estrelas Michelin de uma vez: dop, Éon, Gastro by Elemento e In Diferente. O próprio guia escreve que a cidade se torna assim um destino gastronómico internacional de primeiro nível.[[michelin-2026-portugal]]
-
-As quatro não se parecem. O dop, no centro, é de Rui Paula, com um menu chamado Não há futuro sem memória, em 6, 10 ou 14 momentos. O Éon fica no Palacete Severo, um hotel cheio de obras de arte, com o chef Tiago Bonito. O Gastro by Elemento, junto ao Estádio do Dragão, cozinha a fogo e em forno de lenha. O In Diferente é da chef brasileira Angélica Salvador, que trabalha com peixe das lotas de Matosinhos e de Aveiro.[[michelin-2026-porto-new]]
-
-O prémio Michelin para o Serviço do mesmo ano foi para Adácio Ribeiro, que dirige a sala do Vila Foz, também no Porto.[[michelin-2026-portugal]]
+Na sala do Vila Foz, também no Porto, quem dirige o serviço é Adácio Ribeiro, prémio Michelin para o Serviço em 2026.[[michelin-2026-portugal]]

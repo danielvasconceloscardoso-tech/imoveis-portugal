@@ -8086,7 +8086,7 @@ Requests really sent (operator, 3 Nov 2026): the Concierge, the partner and view
 
 ## lifea
 
-D83 (operator, 3 Nov 2026): the ten lifestyle articles (content/stories/, site/src/components/StoryPage.astro) and their "Para ir" block (components/ParaIr.astro). The article text lives in its own Markdown file; here only the frame around it. The presenting partner of "Para ir" is set in site/src/config.ts (paraIr); empty, the block shows no partner. EN and FR are plain translations for the deck parser: the articles are in Portuguese only.
+D83 (operator, 3 Nov 2026): the ten lifestyle articles (content/stories/, site/src/components/StoryPage.astro) and their "Para ir" block (components/ParaIr.astro). The article text lives in its own Markdown file; here only the frame around it. The presenting partner of "Para ir" is set in site/src/config.ts (paraIr); empty, the block shows no partner. Since fix step 4 (3 Nov 2026) the articles exist in PT, EN and FR (content/stories/{id}.{lang}.md), so every line below is read on the site in all three languages.
 
 ### mins
 - PT: {n} min de leitura

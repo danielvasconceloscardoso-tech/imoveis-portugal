@@ -1,8 +1,10 @@
-// The ten lifestyle articles of D83 (operator, 3 Nov 2026): two-minute reads in Portuguese (pt-PT), one photograph each,
+// The ten lifestyle articles of D83 (operator, 3 Nov 2026): two-minute reads in Portuguese (pt-PT), American English and
+// French of France (fix step 4, 3 Nov: same voice, facts and sources in each language), one photograph each,
 // every fact a marker [[fact-id]] from content/facts/facts.csv (EDITORIAL_POLICY.md), every place a link to its card on
 // the map ([Matosinhos](place:matosinhos)), then "Para ir" (components/ParaIr.astro), a small map tile and the Concierge
-// handover in the article's own voice. One Markdown file per article: content/stories/{id}.pt.md.
-// URL: /pt/{ed}/artigos/{slug}/ (the Artigos hub, next to the four reference articles of lib/articles.ts).
+// handover in the article's own voice. One Markdown file per article and language: content/stories/{id}.{pt,en,fr}.md,
+// each with its own slug. URL: /pt/{ed}/artigos/{slug}/, /en/{ed}/articles/{slug}/, /fr/{ed}/articles/{slug}/ (the
+// Artigos hub, next to the four reference articles of lib/articles.ts); hreflang links the three versions of one id.
 // Checked by scripts/check-content.mjs (front matter, 350 to 450 words, sources, banned wording).
 import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { join } from "node:path";
@@ -43,16 +45,18 @@ export const readingWords = (body: string) => body
 function load(): Story[] {
   if (!existsSync(dir)) return [];
   const out: Story[] = [];
-  for (const f of readdirSync(dir).filter((x) => /\.pt\.md$/.test(x)).sort()) {
+  for (const f of readdirSync(dir).filter((x) => /\.(pt|en|fr)\.md$/.test(x)).sort()) {
     const m = readFileSync(join(dir, f), "utf8").match(FM);
     if (!m) throw new Error(`stories ${f}: front matter missing`);
     const fm = yaml.load(m[1]) as Record<string, any>;
+    if (f !== `${fm.id}.${fm.lang}.md`) throw new Error(`stories ${f}: file name must be {id}.{lang}.md`);
     for (const k of ["id", "lang", "slug", "title", "description", "published", "updated", "order", "place", "photo", "airport", "go", "concierge", "sources"])
       if (fm[k] === undefined) throw new Error(`stories ${f}: front matter "${k}" missing`);
     if (!MUNI.has(fm.place)) throw new Error(`stories ${f}: unknown place ${fm.place}`);
     if (!existsSync(join(pub, `${fm.photo.src}-640.webp`))) throw new Error(`stories ${f}: photo ${fm.photo.src}-640.webp missing`);
     for (const id of fm.sources) if (!FACTS[id]) throw new Error(`stories ${f}: unknown fact ${id}`);
     for (const [, id] of m[2].matchAll(/\[\[([a-z0-9-]+)\]\]/g)) if (!FACTS[id]) throw new Error(`stories ${f}: unknown fact ${id}`);
+    for (const [, id] of m[2].matchAll(/\]\(fact:([a-z0-9-]+)\)/g)) if (!FACTS[id]) throw new Error(`stories ${f}: unknown fact ${id}`);
     for (const [, s] of m[2].matchAll(/\]\(place:([a-z0-9-]+)\)/g)) if (!MUNI.has(s)) throw new Error(`stories ${f}: unknown place ${s}`);
     out.push({ ...fm, published: iso(fm.published), updated: iso(fm.updated), body: m[2], words: readingWords(m[2]) } as Story);
   }
@@ -60,9 +64,12 @@ function load(): Story[] {
 }
 const ALL = load();
 
-/** Portuguese only (D83): the other languages keep the reference articles. */
+/** The lifestyle articles in one language, in their reading order. */
 export const storiesFor = (lang: Lang): Story[] => ALL.filter((s) => s.lang === lang);
+/** One id per article, shared by its three languages (events: lib/events.ts, art/{id}/...). */
 export const STORY_IDS = [...new Set(ALL.map((s) => s.id))];
+/** The same article in another language (hreflang, the language switch), or undefined when that version is missing. */
+export const storyIn = (id: string, lang: Lang): Story | undefined => ALL.find((s) => s.id === id && s.lang === lang);
 export const muniName = (slug: string) => MUNI.get(slug)?.n ?? slug;
 
 /** Responsive photograph: the widths that exist on disk (640, 1024 and 1600 where the original allows). */
@@ -72,12 +79,17 @@ export function photoSet(src: string) {
   return { webp: set("webp"), avif: widths.every((w) => existsSync(join(pub, `${src}-${w}.avif`))) ? set("avif") : "", fallback: `/${src}-${widths[widths.length - 1]}.webp`, widths };
 }
 
-/** Body as HTML: [[fact-id]] a numbered source, [Name](place:slug) a quiet link to the place on the map. */
+/** Body as HTML: [[fact-id]] a numbered source; [words](fact:id) the words themselves linked to the source (it joins
+ * the numbered list too); [Name](place:slug) a quiet link to the place on the map. */
 export function renderStory(s: Story, ed: EdCode): { html: string; sources: Sources; places: string[] } {
   const src = new Sources();
   const map = pathFor(s.lang, ed, "map");
   const places: string[] = [];
   const text = s.body
+    .replace(/\[([^\]]+)\]\(fact:([a-z0-9-]+)\)/g, (_, words, id) => {
+      const f = FACTS[id]; src.n(id);
+      return `<a class="st-src-l" href="${f.source_url}" rel="noopener" title="${f.source_title.replace(/"/g, "&quot;")}">${words}</a>`;
+    })
     .replace(/\[\[([a-z0-9-]+)\]\]/g, (_, id) => `<a class="sup" href="#fonte-${src.n(id)}">${src.n(id)}</a>`)
     .replace(/\[([^\]]+)\]\(place:([a-z0-9-]+)\)/g, (_, name, slug) => {
       places.push(slug);

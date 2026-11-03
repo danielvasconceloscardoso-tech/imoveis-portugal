@@ -177,7 +177,8 @@ for (const file of blogFiles) {
   if (fm.faq && (!Array.isArray(fm.faq) || fm.faq.length !== 3 || fm.faq.some((x) => !x.q || !x.a))) err(file, "faq must list exactly three items with q and a");
   for (const x of fm.faq || []) checkText(file, "faq", `${x.q} ${x.a}`);
 }
-// D83 lifestyle articles (content/stories/{id}.pt.md, site/src/lib/stories.ts): Portuguese only, a two-minute read of
+// D83 lifestyle articles (content/stories/{id}.{pt,en,fr}.md, site/src/lib/stories.ts; EN and FR since fix step 4,
+// parity between the three in check-parity.mjs): a two-minute read of
 // 350 to 450 words (fact markers and link targets not counted), every fact a [[fact-id]] that exists in facts.csv (at
 // least five markers from two sources), a statement headline (no question, no exclamation), "Para ir" and the Concierge line in the front
 // matter, the Concierge words in [brackets], the banned wording of every other piece. The page adds the disclaimer.
@@ -189,10 +190,10 @@ for (const f of existsSync(storyDir) ? readdirSync(storyDir).filter((x) => x.end
   const file = join(storyDir, f), m = readFileSync(file, "utf8").match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
   stories++;
   if (!m) { err(file, "front matter missing"); continue; }
-  if (!/\.pt\.md$/.test(f)) err(file, "lifestyle articles are in Portuguese only ({id}.pt.md)");
   const fm = yaml.load(m[1]) || {}, body = m[2];
+  if (!/\.(pt|en|fr)\.md$/.test(f) || f !== `${fm.id}.${fm.lang}.md`) err(file, "file name must be {id}.{lang}.md, lang pt, en or fr");
   for (const k of ["id", "lang", "slug", "title", "description", "published", "updated", "order", "place", "photo", "airport", "go", "concierge", "sources"]) if (fm[k] === undefined) err(file, `front matter "${k}" missing`);
-  if (fm.lang !== "pt") err(file, `lang must be pt (is ${fm.lang})`);
+  if (!["pt", "en", "fr"].includes(fm.lang)) err(file, `lang must be pt, en or fr (is ${fm.lang})`);
   if (!["OPO", "LIS", "FAO"].includes(fm.airport)) err(file, `airport must be OPO, LIS or FAO`);
   if (fm.title && (/[?!]/.test(fm.title) || fm.title.length > 80)) err(file, "headline: a statement of at most 80 characters, no question or exclamation mark");
   if (fm.description && (fm.description.length < 80 || fm.description.length > 160)) err(file, `description has ${fm.description.length} characters (80 to 160)`);
@@ -201,14 +202,26 @@ for (const f of existsSync(storyDir) ? readdirSync(storyDir).filter((x) => x.end
   if (fm.concierge && !/\[[^\]]+\]/.test(fm.concierge)) err(file, "concierge line needs the linked words in [brackets]");
   const n = readingWords(body);
   if (n < 350 || n > 450) err(file, `body has ${n} words (350 to 450, a two-minute read)`);
-  const cited = [...body.matchAll(/\[\[([a-z0-9-]+)\]\]/g), ...JSON.stringify(fm.go || {}).matchAll(/\[\[([a-z0-9-]+)\]\]/g)].map((x) => x[1]);
+  // A fact counts as a numbered marker [[id]] or as a source linked on the words, [words](fact:id) (fix step 4).
+  const cited = [...body.matchAll(/\[\[([a-z0-9-]+)\]\]/g), ...body.matchAll(/\]\(fact:([a-z0-9-]+)\)/g), ...JSON.stringify(fm.go || {}).matchAll(/\[\[([a-z0-9-]+)\]\]/g)].map((x) => x[1]);
   if (new Set(cited).size < 2 || cited.length < 5) err(file, `${cited.length} fact markers from ${new Set(cited).size} sources (at least 5 markers, 2 sources)`);
   for (const id of [...cited, ...(fm.sources || [])]) if (!factIds.has(id)) err(file, `unknown fact id ${id}`);
   for (const id of new Set(cited)) if (!(fm.sources || []).includes(id)) err(file, `fact ${id} cited but not in sources`);
-  if (/[!]/.test(body) || /\?/.test(body.replace(/\]\([^)]*\)/g, "]"))) err(file, "no exclamation marks or questions in the body (VOICE_AND_WORLD.md)");
+  if (/[!]/.test(body.replace(/\]\([^)]*\)/g, "]")) || /\?/.test(body.replace(/\]\([^)]*\)/g, "]"))) err(file, "no exclamation marks or questions in the body (VOICE_AND_WORLD.md)");
+  // Operator, 3 Nov (VOICE_AND_WORLD.md, "Articles: the voice"): no headings in a two-minute read, no signposting, no
+  // arguments of authority in the text (the source is linked on the words or numbered), in all three languages.
+  if (/^#{1,6} /m.test(body)) err(file, "no headings in a lifestyle article (VOICE_AND_WORLD.md, Articles)");
+  const prose = `${fm.description || ""} ${body.replace(/\]\([^)]*\)/g, "]")}`;
+  for (const re of [/\bsegundo (o|a|os|as)\b/i, /\bde acordo com\b/i, /\baccording to\b/i, /\bselon (le|la|les|l')/i, /\bd'apr[èe]s (le|la|les|l')/i,
+    /\bum estudo\b/i, /\ba study\b/i, /\bune [ée]tude\b/i, /\bem resumo\b/i, /\beis porqu/i, /\bvamos por partes\b/i, /\ba resposta curta\b/i,
+    /\bin short\b/i, /\bhere'?s why\b/i, /\bthe short answer\b/i, /\ben r[ée]sum[ée]\b/i, /\bvoici pourquoi\b/i, /\bla r[ée]ponse courte\b/i,
+    /\b(neste|deste|este) artigo\b/i, /\bthis article\b/i, /\bcet article\b/i, /o que (o|a) .{1,30} mede/i, /what (it|the .{1,30}) measures/i, /ce qu'(il|elle) mesure/i])
+    if (re.test(prose)) err(file, `signposting or authority wording ${re} (VOICE_AND_WORLD.md, Articles)`);
   if (/^# /m.test(body)) err(file, "use ## headings; the page supplies the H1");
   for (const [label, text] of [["title", fm.title || ""], ["description", fm.description || ""], ["body", body], ["go", `${fm.go?.where || ""} ${fm.go?.when || ""}`], ["concierge", fm.concierge || ""], ["caption", `${fm.photo?.caption || ""} ${fm.photo?.alt || ""}`]]) checkText(file, label, text);
-  for (const re of [/\bhidden gem\b/i, /joia escondida/i, /\bdeslumbrante/i, /\bencantador/i, /\bvibrante/i, /\bic[óo]nic[oa]/i, /\bluxo\b/i, /\bluxuos/i, /\bexclusiv/i, /\bparaíso/i]) if (re.test(`${fm.title} ${fm.description} ${body}`)) err(file, `marketing word ${re} (VOICE_AND_WORLD.md)`);
+  for (const re of [/\bhidden gem\b/i, /joia escondida/i, /\bdeslumbrante/i, /\bencantador/i, /\bvibrante/i, /\bic[óo]nic[oa]/i, /\bluxo\b/i, /\bluxuos/i, /\bexclusiv/i, /\bparaíso/i,
+    /\bstunning\b/i, /\bbreathtaking\b/i, /\bnestled\b/i, /\bboasts?\b/i, /\bluxur/i, /\bcurated\b/i, /\bvibrant\b/i, /\biconic\b/i, /\bcharming\b/i, /\bparadise\b/i, /\bmust-see\b/i,
+    /\bjoyau cach/i, /[ée]poustouflant/i, /couper le souffle/i, /\bnich[ée]e?s?\b/i, /\bluxe\b/i, /\bluxueu/i, /\bembl[ée]matique/i, /\bcharmant/i, /\bvibrant/i, /\bincontournable/i, /\bparadis\b/i]) if (re.test(`${fm.title} ${fm.description} ${body}`)) err(file, `marketing word ${re} (VOICE_AND_WORLD.md)`);
 }
 // Design v2 copy (prompt 32, D59): the "home2" blocks of the copy deck, in PT, EN and FR. Banned words and shapes,
 // sentences of at most 25 words, blocks of at most 45, headlines of at most 8 words that are statements without a

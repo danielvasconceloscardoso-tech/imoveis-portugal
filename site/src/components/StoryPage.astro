@@ -11,7 +11,7 @@ import MapTile from "./MapTile.astro";
 import "../styles/story.css";
 import { HTML_LANG, LANGS, pathFor, type Lang, type EdCode } from "../i18n";
 import { DISCLAIMER, fmtDate } from "../lib/content";
-import { renderStory, photoSet, muniName, routeFor, type Story } from "../lib/stories";
+import { renderStory, photoSet, muniName, routeFor, storyIn, type Story } from "../lib/stories";
 import { hostFor } from "../lib/host";
 import { CANONICAL_ED } from "../lib/blog";
 import { c } from "../lib/copy";
@@ -32,8 +32,12 @@ const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replac
 const handover = esc(story.concierge).replace(/\[([^\]]+)\]/, (_, t) => `<a href="${consult}" data-concierge data-story-cg>${t}</a>`);
 const photo = photoSet(story.photo.src);
 const minutes = Math.max(1, Math.round(story.words / 200));
-// Portuguese only: the language switch leads to the articles hub in English and French.
-const paths = Object.fromEntries(LANGS.map((l) => [l, l === lang ? `${hub}${story.slug}/` : pathFor(l, ed, "articles")])) as Record<Lang, string>;
+// The language switch and hreflang lead to the same article in the other two languages (each with its own slug);
+// a language without this article falls back to its articles hub.
+const paths = Object.fromEntries(LANGS.map((l) => {
+  const other = storyIn(story.id, l);
+  return [l, other ? `${pathFor(l, ed, "articles")}${other.slug}/` : pathFor(l, ed, "articles")];
+})) as Record<Lang, string>;
 const canonical = `https://${hostFor(CANONICAL_ED[lang])}${pathFor(lang, CANONICAL_ED[lang], "articles")}${story.slug}/`;
 const ld = { "@context": "https://schema.org", "@type": "Article", headline: story.title, description: story.description, inLanguage: HTML_LANG[lang],
   datePublished: story.published, dateModified: story.updated, image: `https://${hostFor(ed)}${photo.fallback}`,

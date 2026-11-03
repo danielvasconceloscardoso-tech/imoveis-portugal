@@ -17,6 +17,9 @@
 .st-body > p:first-child { font-size: 20px; line-height: 1.6; }
 .st a.st-pl { color: inherit; text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent); text-underline-offset: 3px; text-decoration-thickness: 1px; transition: text-decoration-color .25s ease, color .25s ease; }
 .st a.st-pl:hover, .st a.st-pl:focus-visible { color: var(--accent); text-decoration-color: currentColor; }
+/* fix step 4: a source linked on the words themselves (lib/stories.ts, [words](fact:id)): dotted, so it reads apart from a place */
+.st a.st-src-l { color: inherit; text-decoration: underline dotted; text-decoration-color: color-mix(in srgb, var(--accent) 60%, transparent); text-underline-offset: 3px; text-decoration-thickness: 1px; transition: color .25s ease; }
+.st a.st-src-l:hover, .st a.st-src-l:focus-visible { color: var(--accent); }
 
 /* Para ir */
 .st-go { margin: 40px 0 0; padding: 28px 0 8px; border-top: 1px solid var(--rule); }

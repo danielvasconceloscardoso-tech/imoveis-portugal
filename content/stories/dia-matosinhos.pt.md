@@ -1,43 +1,33 @@
 ---
 id: dia-matosinhos
 lang: pt
-slug: um-dia-normal-em-matosinhos
-title: "Um dia normal em Matosinhos"
-description: "Matosinhos é Cidade Criativa da gastronomia da UNESCO desde 2025. O porto de 1884, a lota, a rede de Janet Echelman e a piscina de Siza, num dia."
+slug: matosinhos-uma-das-68-cidades-da-gastronomia-da-unesco
+title: "Matosinhos é uma das 68 cidades da gastronomia na rede da UNESCO"
+description: "Na candidatura entraram mais de 400 restaurantes, pescadores e peixeiras. Em 2025, Matosinhos passou a ser uma das 68 cidades da gastronomia da UNESCO."
 published: 2026-11-03
 updated: 2026-11-03
 order: 3
 place: matosinhos
 airport: OPO
 photo:
-  src: img/v2/matosinhos-she-changes
-  alt: "A escultura de rede vermelha e branca de Janet Echelman suspensa sobre a rotunda junto ao mar, em Matosinhos"
-  caption: "She Changes, de Janet Echelman, junto à praia de Matosinhos."
+  src: img/v2/matosinhos-leixoes-por-do-sol
+  alt: "O sol a pôr-se no mar em Matosinhos, com os edifícios do porto de Leixões em silhueta"
+  caption: "O pôr do sol na praia de Matosinhos, com o porto de Leixões ao fundo."
 go:
   where: "Matosinhos, logo a norte do Porto, com Leça da Palmeira do outro lado do porto de Leixões."
   when: "O ano inteiro. Em fevereiro, às quintas-feiras, o Degustar Matosinhos serve uma travessa de marisco para dois a preço fixo de 70 €.[[matosinhos-degustar-2026]]"
-concierge: "Se quiser ver casas a poucas ruas da praia de Matosinhos, [o Concierge trata disso]."
+concierge: "Se quiser ficar a poucas ruas da lota e da praia, [o Concierge mostra-lhe as casas de Matosinhos]."
 sources: [matosinhos-unesco-gastronomy, matosinhos-gastronomy-history, echelman-she-changes, pritzker-siza-1992, michelin-2026-portugal, michelin-2026-porto-2stars, matosinhos-degustar-2026]
 ---
 
-A 31 de outubro de 2025, a UNESCO pôs [Matosinhos](place:matosinhos) na sua rede de Cidades Criativas, na gastronomia. A rede tem 408 cidades; só 68 entraram pela comida.[[matosinhos-unesco-gastronomy]] A candidatura foi feita com mais de 400 restaurantes, e é fácil perceber de onde eles vêm.
+Na rotunda da Cidade Salvador, junto à praia de [Matosinhos](place:matosinhos), a rede de Janet Echelman projeta no chão sombras que mudam com o vento. Está ali desde 2005, chama-se She Changes e pesa uma tonelada. Pende de um anel de aço de 20 toneladas, inclinado para o mar, a 13,5 metros do chão no ponto mais baixo e a 27 no mais alto, seguro por três mastros de 25 a 50 metros, brancos com riscas vermelhas, pintados como as chaminés e os faróis da zona. A rede junta 36 secções de malha de densidades diferentes, unidas à mão. O arquiteto do conjunto foi Eduardo Souto de Moura.[[echelman-she-changes]]
 
-## De manhã
+Quem mora em Matosinhos vê nela coisas diferentes: redes de pesca, mastros, as chaminés das fábricas antigas, renda portuguesa. A cidade fez dela o seu [símbolo gráfico](fact:echelman-she-changes).
 
-O dia começa no mar. O porto de Leixões foi construído em 1884 e mudou a economia da terra: pesca, conservas, construção, comércio. No início do século XX havia 59 fábricas de conservas na cidade.[[matosinhos-gastronomy-history]]
+As chaminés eram de conserveiras. O porto de Leixões, construído em 1884, mudou a economia da terra, e no início do século XX havia em Matosinhos 59 fábricas de conservas, conhecidas pela qualidade do peixe e pelo desenho das latas. A indústria ainda emprega centenas de pessoas, e [dois terços são mulheres](fact:matosinhos-gastronomy-history). A lota abastece a cidade de peixe e marisco, e os mercados municipais de Matosinhos e de Angeiras juntam mais de 80 bancas e 13 restaurantes.[[matosinhos-gastronomy-history]]
 
-A lota continua a abastecer a cidade de peixe e marisco todos os dias. Os mercados municipais de Matosinhos e de Angeiras juntam mais de 80 bancas de comida e 13 restaurantes.[[matosinhos-gastronomy-history]]
+Foi essa gente que assinou a candidatura à UNESCO: mais de 400 restaurantes, pescadores, peixeiras, conserveiras, chefs com e sem estrela Michelin, cientistas, agricultores e designers. A 31 de outubro de 2025, Dia Mundial das Cidades, a diretora-geral da UNESCO, Audrey Azoulay, anunciou o resultado. Matosinhos entrou na [rede das Cidades Criativas](fact:matosinhos-unesco-gastronomy), que tem 408 cidades em mais de cem países. Só 68 estão lá pela gastronomia.
 
-## Ao meio-dia
+Do outro lado do porto, em [Leça da Palmeira](place:matosinhos), a Casa de Chá da Boa Nova, que Álvaro Siza desenhou em 1963, é hoje o restaurante de Rui Paula.[[pritzker-siza-1992]] Tem duas estrelas Michelin, e é uma das três casas da região do [Porto](place:porto) com essa distinção.[[michelin-2026-porto-2stars]] O sommelier, Carlos Monteiro, recebeu em 2026 o prémio Michelin para o Sommelier.[[michelin-2026-portugal]]
 
-À hora de almoço, o cheiro a brasa diz o resto. A câmara descreve a cidade pelo peixe que os pescadores trazem e pela grelha onde ele acaba.[[matosinhos-gastronomy-history]]
-
-## À tarde
-
-Na rotunda junto à praia está a peça que a cidade adotou como símbolo. É de Janet Echelman, chama-se She Changes e está ali desde 2005. A rede pesa uma tonelada e pende de um anel de aço de 20 toneladas, sustentado por três mastros brancos e vermelhos de 25 a 50 metros, pintados como as chaminés e os faróis da costa. A rede junta 36 secções de malha de densidades diferentes, unidas à mão. O arquiteto do conjunto foi Eduardo Souto de Moura.[[echelman-she-changes]] O anel inclina-se para o mar: está a 13,5 metros do chão no ponto mais baixo e a 27 no mais alto.[[echelman-she-changes]]
-
-Do outro lado do porto, em [Leça da Palmeira](place:matosinhos), ficam duas obras de Álvaro Siza, nascido em Matosinhos em 1933: a piscina de Leça, entre as rochas, e a Casa de Chá da Boa Nova. As primeiras obras que construiu, ainda estudante, foram quatro casas em Matosinhos.[[pritzker-siza-1992]] A casa de chá é hoje restaurante do chef Rui Paula, com duas estrelas Michelin, um dos três da região do [Porto](place:porto) com essa distinção. O sommelier da casa, Carlos Monteiro, recebeu em 2026 o prémio Michelin para o Sommelier.[[michelin-2026-portugal]][[michelin-2026-porto-2stars]]
-
-## À noite
-
-O jantar volta à grelha e à lota da manhã. Em fevereiro, às quintas-feiras, a câmara organiza o Degustar Matosinhos, com uma travessa de marisco para dois a preço fixo.[[matosinhos-degustar-2026]]
+Em fevereiro, às quintas-feiras, o [Degustar Matosinhos](fact:matosinhos-degustar-2026) põe nas mesas dos restaurantes aderentes uma travessa de marisco para dois a preço fixo.

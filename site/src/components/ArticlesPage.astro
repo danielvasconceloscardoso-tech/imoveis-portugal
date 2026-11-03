@@ -1,8 +1,8 @@
 ---
 // The Artigos hub (prompt 37 §2), built like the Simuladores hub: one card per article, a short line, one action.
-// D83 (3 Nov 2026): in Portuguese the ten lifestyle articles lead (lib/stories.ts, photograph and headline), then a
-// quiet "Guias práticos" group with the blog guides (buying from abroad, IMT) and the four reference articles. In
-// English and French the list stays as it was: the four reference articles, then the blog posts. Nothing removed.
+// D83 (3 Nov 2026; EN and FR in fix step 4): in every language the ten lifestyle articles lead (lib/stories.ts,
+// photograph and headline), then a quiet "Practical guides" group with the blog guides (buying from abroad, IMT) and
+// the four reference articles. A language without lifestyle articles keeps the old list. Nothing removed.
 import V2 from "../layouts/V2.astro";
 import "../styles/story.css";
 import { pathFor, type Lang, type EdCode } from "../i18n";

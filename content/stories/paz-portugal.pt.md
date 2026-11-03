@@ -1,51 +1,31 @@
 ---
 id: paz-portugal
 lang: pt
-slug: portugal-esta-entre-os-paises-mais-pacificos-do-mundo
-title: "Portugal está entre os países mais pacíficos do mundo"
-description: "No Global Peace Index 2026, Portugal é o 7.º de 163 países, à frente de Singapura, da Finlândia e do Japão. O que o índice mede e quem o publica."
+slug: portugal-7-pais-mais-pacifico-do-mundo
+title: "Portugal é o 7.º país mais pacífico do mundo, a 0,266 pontos da Islândia"
+description: "No Global Peace Index 2026, Portugal tem 1,427 pontos. A Áustria, 6.ª, está seis milésimas à frente; Singapura, 8.ª, oito atrás; a Islândia lidera."
 published: 2026-11-03
 updated: 2026-11-03
 order: 2
 place: lisboa
 airport: LIS
 photo:
-  src: img/v2/lisboa-tejo-cais
-  alt: "Um veleiro no Tejo visto do Cais das Colunas, em Lisboa, ao fim da tarde"
-  caption: "O Tejo a partir do Cais das Colunas, Lisboa."
+  src: img/v2/lisboa-castelo-por-do-sol
+  alt: "Lisboa vista do Castelo de São Jorge ao pôr do sol, com os telhados, o Tejo e a ponte 25 de Abril"
+  caption: "Lisboa do Castelo de São Jorge, ao fim da tarde."
 go:
   where: "O país inteiro: o índice mede países, de Bragança a Faro, Madeira e Açores incluídos."
-  when: "O ano inteiro. O Global Peace Index sai todos os anos em junho; a edição de 2026 é a 20.ª.[[gpi-2026-method]]"
-concierge: "Se quiser começar por Lisboa e ver casas perto do rio, [o Concierge trata disso]."
+  when: "O ano inteiro. A edição de 2026 do Global Peace Index saiu em junho e é a 20.ª.[[gpi-2026-method]]"
+concierge: "Se quiser começar por Lisboa, com o rio à vista, [o Concierge mostra-lhe as casas]."
 sources: [gpi-2026-portugal, gpi-2026-method]
 ---
 
-Portugal é o 7.º país mais pacífico do mundo no Global Peace Index 2026, entre 163 países e territórios.[[gpi-2026-portugal]] O índice é publicado pelo Institute for Economics & Peace, um centro de estudos com sede em Sydney, e vai na 20.ª edição.[[gpi-2026-method]]
+Na tabela do [Global Peace Index 2026](fact:gpi-2026-portugal), a linha de Portugal diz 7, Portugal, 1,427. A Áustria, na linha de cima, tem 1,421. Singapura, na de baixo, tem 1,435. São seis milésimas para um lado e oito para o outro, e aqui conta-se como no golfe: ganha a pontuação mais baixa.
 
-## Como se mede
+No topo está a Islândia, com 1,161, primeira pelo 19.º ano seguido. Entre ela e Portugal ficam a Nova Zelândia, a Suíça, a Eslovénia, a Irlanda e a Áustria; depois de Singapura vêm a Finlândia e o Japão, que fecha os dez primeiros. Ao lado de cada nome, uma seta conta o ano: a de Portugal sobe um lugar, com a pontuação a melhorar 0,020; a Áustria e Singapura descem um lugar cada; o Japão sobe três. A Dinamarca ficou à porta, em 11.º, com 1,504.[[gpi-2026-portugal]] Quem lê a edição suíça encontra a Suíça em 3.º, com 1,363. Mais abaixo na mesma tabela, a Espanha, o único vizinho de Portugal por terra, é 27.ª, com 1,654; a Alemanha é 28.ª, com 1,657; a Itália, 35.ª, com 1,712; e o Reino Unido, 39.º, com 1,73.[[gpi-2026-portugal]]
 
-O GPI junta 23 indicadores, uns qualitativos e outros quantitativos, em três domínios: a segurança dentro de cada sociedade, os conflitos em curso, dentro e fora de portas, e o grau de militarização.[[gpi-2026-method]] Cada país recebe uma pontuação, e aqui a regra é a do golfe: quanto mais baixa, melhor.
+O índice é feito em Sydney pelo [Institute for Economics & Peace](fact:gpi-2026-method) e chegou em junho de 2026 à 20.ª edição. Cobre 163 países e territórios, onde vive 99,7% da população mundial, e mede cada um em 23 indicadores, uns qualitativos e outros quantitativos, agrupados em segurança dentro da sociedade, conflitos em curso e militarização.[[gpi-2026-method]]
 
-Portugal tem 1,427 pontos e subiu um lugar face à edição anterior.[[gpi-2026-portugal]] Os 163 países e territórios do índice juntam 99,7% da população mundial.[[gpi-2026-method]]
+O ano à volta não foi bom. A paz média no mundo piorou 0,7%, pela 12.ª vez seguida, com 99 países a piorar e 62 a melhorar.[[gpi-2026-method]] Portugal está no segundo grupo. Na Europa Ocidental e Central, a região que junta sete dos dez países mais pacíficos do mundo, é o 6.º.[[gpi-2026-method]]
 
-## Quem está à frente
-
-A Islândia lidera pelo 19.º ano seguido, com 1,161. Seguem-se a Nova Zelândia, a Suíça, a Eslovénia, a Irlanda e a Áustria. Portugal vem logo a seguir, à frente de Singapura, da Finlândia e do Japão, que fecha os dez primeiros.[[gpi-2026-portugal]] A edição de 2026 saiu em junho, com o relatório completo publicado em Sydney.[[gpi-2026-method]]
-
-Para quem lê a edição suíça, a comparação é curta: a Suíça está em 3.º lugar, com 1,363, quatro posições acima.[[gpi-2026-portugal]]
-
-## Um ano em que o mundo piorou
-
-O contexto torna a posição mais interessante. Em 2026, a paz média no mundo piorou 0,7%, pela 12.ª vez seguida: 99 países pioraram e 62 melhoraram.[[gpi-2026-method]] Portugal está no segundo grupo, com a pontuação a descer 0,020.[[gpi-2026-portugal]]
-
-## A vizinhança
-
-O relatório agrupa os países por regiões. Na Europa Ocidental e Central estão sete dos dez países mais pacíficos do mundo, e Portugal é o 6.º da região.[[gpi-2026-method]]
-
-O índice trabalha ao nível do país, sem classificar cidades. A posição vale por isso para todo o território, de [Bragança](place:braganca) a [Faro](place:faro), e para as ilhas, do [Funchal](place:funchal) a [Ponta Delgada](place:ponta-delgada).
-
-## O que o número diz, e o que não diz
-
-O GPI compara países entre si, com dados públicos e o mesmo método todos os anos. Não diz nada sobre uma rua ou um bairro em concreto, nem pretende dizer.
-
-O relatório completo, com o método e as tabelas de 163 países, é de acesso livre e está nas fontes, no fim deste artigo.
+A pontuação é do país inteiro, sem cidades nem bairros. Vale da mesma maneira em [Bragança](place:braganca) e em [Faro](place:faro), no [Funchal](place:funchal) e em [Ponta Delgada](place:ponta-delgada), e não diz nada sobre uma rua em concreto. As tabelas dos 163 países, indicador a indicador e com a seta de cada um, estão no relatório completo, que é de acesso livre e está ligado nas fontes, no fundo da página.
