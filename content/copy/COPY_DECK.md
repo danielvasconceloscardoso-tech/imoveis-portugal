@@ -8222,3 +8222,747 @@ D83 (operator, 3 Nov 2026): the ten lifestyle articles (content/stories/, site/s
 - PT: Portugal em leituras de dois minutos, com a fonte de cada facto. Os guias práticos vêm a seguir.
 - EN: Portugal in two-minute reads, with the source of every fact. The practical guides follow.
 - FR: Le Portugal en lectures de deux minutes, avec la source de chaque fait. Les guides pratiques suivent.
+
+## map4
+
+D83 part 2 (3 Nov 2026): the map in three depths. First glance: photographs and names, no numbers. A tap opens the place as tiles (price, life, schools and health); a tile opens its chart; the full analysis (29 € per region, 99 € for Portugal, 12 months) stays switched off until the company and invoicing are ready. The price colours, the quarterly time slider, the budget, the layers and the tours move behind "Camadas". PT is the text; EN and FR repeat a plain translation.
+
+### search
+- PT: Procurar um lugar
+- EN: Find a place
+- FR: Chercher un lieu
+
+### search.hint
+- PT: Concelho, freguesia, praia ou campo de golfe
+- EN: Municipality, parish, beach or golf course
+- FR: Commune, paroisse, plage ou golf
+
+### layers
+- PT: Camadas
+- EN: Layers
+- FR: Calques
+
+### layers.h
+- PT: Camadas e dados
+- EN: Layers and data
+- FR: Calques et données
+
+### layers.close
+- PT: Fechar
+- EN: Close
+- FR: Fermer
+
+### layer.none
+- PT: Só o mapa
+- EN: Map only
+- FR: Carte seule
+
+### layer.colour
+- PT: Cor no mapa
+- EN: Colour on the map
+- FR: Couleur sur la carte
+
+### layer.on
+- PT: No mapa
+- EN: On the map
+- FR: Sur la carte
+
+### layer.view
+- PT: Vista
+- EN: View
+- FR: Vue
+
+### layer.time
+- PT: Evolução trimestral
+- EN: Quarter by quarter
+- FR: Trimestre par trimestre
+
+### layer.tours
+- PT: Visitas guiadas
+- EN: Guided tours
+- FR: Visites guidées
+
+### regions
+- PT: Regiões
+- EN: Regions
+- FR: Régions
+
+### region.line
+- PT: {n} concelhos · {cities}
+- EN: {n} municipalities · {cities}
+- FR: {n} communes · {cities}
+
+### region.kick
+- PT: Região
+- EN: Region
+- FR: Région
+
+### region.pick
+- PT: Toque num concelho para o ver de perto.
+- EN: Tap a municipality to see it up close.
+- FR: Touchez une commune pour la voir de près.
+
+### cut.muni
+- PT: Valores do concelho
+- EN: Municipality figures
+- FR: Chiffres de la commune
+
+### cut.parish
+- PT: Freguesia de {m}
+- EN: Parish in {m}
+- FR: Paroisse de {m}
+
+### tile.price
+- PT: Preço
+- EN: Price
+- FR: Prix
+
+### tile.mkt
+- PT: Mercado
+- EN: Market
+- FR: Marché
+
+### tile.nb
+- PT: Construção nova
+- EN: New build
+- FR: Neuf
+
+### tile.nbsrc
+- PT: preços pedidos, fonte: promotor
+- EN: asking prices, source: developer
+- FR: prix demandés, source : promoteur
+
+### tile.onreq
+- PT: sob consulta
+- EN: on request
+- FR: sur demande
+
+### tile.dir.up
+- PT: Em cinco anos, o preço mediano subiu {v}.
+- EN: Over five years, the median price rose {v}.
+- FR: En cinq ans, le prix médian a augmenté de {v}.
+
+### tile.dir.down
+- PT: Em cinco anos, o preço mediano desceu {v}.
+- EN: Over five years, the median price fell {v}.
+- FR: En cinq ans, le prix médian a baissé de {v}.
+
+### tile.dir.flat
+- PT: Em cinco anos, o preço mediano ficou praticamente igual.
+- EN: Over five years, the median price barely moved.
+- FR: En cinq ans, le prix médian a peu bougé.
+
+### tile.life
+- PT: Viver aqui
+- EN: Living here
+- FR: Vivre ici
+
+### tile.sun
+- PT: Sol por ano
+- EN: Sunshine a year
+- FR: Soleil par an
+
+### tile.sun.v
+- PT: {v} h
+- EN: {v} h
+- FR: {v} h
+
+### tile.sea
+- PT: Mar em agosto
+- EN: Sea in August
+- FR: Mer en août
+
+### tile.beach
+- PT: Até à praia
+- EN: To the beach
+- FR: Jusqu'à la plage
+
+### tile.min
+- PT: {v} min
+- EN: {v} min
+- FR: {v} min
+
+### tile.flight
+- PT: Voo para {c}
+- EN: Flight to {c}
+- FR: Vol vers {c}
+
+### tile.care
+- PT: Escolas e saúde
+- EN: Schools and health
+- FR: Écoles et santé
+
+### tile.school
+- PT: Escola internacional
+- EN: International school
+- FR: École internationale
+
+### tile.hosp
+- PT: Hospital
+- EN: Hospital
+- FR: Hôpital
+
+### tile.docs
+- PT: Médicos residentes por 1000 habitantes (INE)
+- EN: Resident doctors per 1,000 people (INE)
+- FR: Médecins résidents pour 1 000 habitants (INE)
+
+### tile.km
+- PT: {n}, a {v} km
+- EN: {n}, {v} km away
+- FR: {n}, à {v} km
+
+### tile.soon
+- PT: Em breve
+- EN: Coming soon
+- FR: Bientôt
+
+### tile.soon.p
+- PT: Estamos a reunir estes números nas fontes oficiais.
+- EN: We are gathering these figures from the official sources.
+- FR: Nous rassemblons ces chiffres auprès des sources officielles.
+
+### tile.open
+- PT: Ver o gráfico
+- EN: See the chart
+- FR: Voir le graphique
+
+### tile.rent
+- PT: Rendas e rendimento
+- EN: Rents and yield
+- FR: Loyers et rendement
+
+### tile.g10y
+- PT: Evolução 10 anos
+- EN: Ten years
+- FR: Dix ans
+
+### tile.foreign
+- PT: Procura estrangeira
+- EN: Foreign demand
+- FR: Demande étrangère
+
+### tile.supply
+- PT: Nova oferta
+- EN: New supply
+- FR: Offre nouvelle
+
+### tile.compare
+- PT: Comparar
+- EN: Compare
+- FR: Comparer
+
+### tile.paid
+- PT: Análise completa
+- EN: Full analysis
+- FR: Analyse complète
+
+### unlock.offer
+- PT: Análise completa: {r} € por região · {a} € Portugal inteiro, {m} meses
+- EN: Full analysis: €{r} per region · €{a} for all of Portugal, {m} months
+- FR: Analyse complète : {r} € par région · {a} € tout le Portugal, {m} mois
+
+### unlock.p
+- PT: Os números públicos de {place}, organizados lugar a lugar, com as fontes ao lado.
+- EN: The public figures for {place}, organised place by place, with the sources alongside.
+- FR: Les chiffres publics de {place}, organisés lieu par lieu, sources à l'appui.
+
+### unlock.soon
+- PT: Disponível em breve
+- EN: Available soon
+- FR: Bientôt disponible
+
+### unlock.buy.region
+- PT: {region} · {v} €
+- EN: {region} · €{v}
+- FR: {region} · {v} €
+
+### unlock.buy.all
+- PT: Portugal inteiro · {v} €
+- EN: All of Portugal · €{v}
+- FR: Tout le Portugal · {v} €
+
+### unlock.list.1
+- PT: Preços por tipologia, do T0 ao T4 e mais
+- EN: Prices by number of bedrooms, T0 to T4 and above
+- FR: Prix par typologie, du T0 au T4 et plus
+
+### unlock.list.2
+- PT: Novo e usado, lado a lado
+- EN: New and existing homes, side by side
+- FR: Neuf et ancien, côte à côte
+
+### unlock.list.3
+- PT: Intervalos de preço e a banda mais alta do mercado
+- EN: Price ranges and the top band of the market
+- FR: Fourchettes de prix et la tranche haute du marché
+
+### unlock.list.4
+- PT: Rendas e rendimento bruto
+- EN: Rents and gross yield
+- FR: Loyers et rendement brut
+
+### unlock.list.5
+- PT: Dez anos de preços, trimestre a trimestre
+- EN: Ten years of prices, quarter by quarter
+- FR: Dix ans de prix, trimestre par trimestre
+
+### unlock.list.6
+- PT: O preço pago por compradores com domicílio fiscal fora de Portugal
+- EN: The price paid by buyers taxed outside Portugal
+- FR: Le prix payé par les acheteurs domiciliés hors du Portugal
+
+### unlock.list.7
+- PT: Nova oferta: licenças e obras concluídas
+- EN: New supply: permits and completions
+- FR: Offre nouvelle : permis et achèvements
+
+### unlock.list.8
+- PT: Comparação completa entre lugares e um PDF para guardar
+- EN: A full comparison between places and a PDF to keep
+- FR: Une comparaison complète entre lieux et un PDF à garder
+
+### unlock.note
+- PT: Factos públicos do INE, da PORDATA e do IPMA. Descrevem o mercado; não são aconselhamento.
+- EN: Public facts from INE, PORDATA and IPMA. They describe the market; they are not advice.
+- FR: Faits publics de l'INE, de PORDATA et de l'IPMA. Ils décrivent le marché ; ce n'est pas un conseil.
+
+### chart.span.1
+- PT: num ano
+- EN: in a year
+- FR: en un an
+
+### chart.span.5
+- PT: em cinco anos
+- EN: in five years
+- FR: en cinq ans
+
+### chart.span.10
+- PT: em dez anos
+- EN: in ten years
+- FR: en dix ans
+
+### chart.up
+- PT: {in}, o preço subiu {v} {span}
+- EN: {in}, prices rose {v} {span}
+- FR: {in}, le prix a augmenté de {v} {span}
+
+### chart.down
+- PT: {in}, o preço desceu {v} {span}
+- EN: {in}, prices fell {v} {span}
+- FR: {in}, le prix a baissé de {v} {span}
+
+### chart.flat
+- PT: {in}, o preço ficou estável {span}
+- EN: {in}, prices held steady {span}
+- FR: {in}, le prix est resté stable {span}
+
+### chart.above
+- PT: No {q}, a mediana foi de {v}/m², acima da mediana {of} ({r}/m²).
+- EN: In {q}, the median was {v}/m², above the median for {of} ({r}/m²).
+- FR: Au {q}, la médiane était de {v}/m², au-dessus de la médiane {of} ({r}/m²).
+
+### chart.near
+- PT: No {q}, a mediana foi de {v}/m², perto da mediana {of} ({r}/m²).
+- EN: In {q}, the median was {v}/m², close to the median for {of} ({r}/m²).
+- FR: Au {q}, la médiane était de {v}/m², proche de la médiane {of} ({r}/m²).
+
+### chart.below
+- PT: No {q}, a mediana foi de {v}/m², abaixo da mediana {of} ({r}/m²).
+- EN: In {q}, the median was {v}/m², below the median for {of} ({r}/m²).
+- FR: Au {q}, la médiane était de {v}/m², en dessous de la médiane {of} ({r}/m²).
+
+### chart.src
+- PT: Fonte: INE, valor mediano das vendas por m², {q}. Descreve o mercado; não é aconselhamento.
+- EN: Source: INE, median sale value per m², {q}. It describes the market; it is not advice.
+- FR: Source : INE, valeur médiane des ventes au m², {q}. Cela décrit le marché ; ce n'est pas un conseil.
+
+### strip.above
+- PT: acima da mediana {of}
+- EN: above the median for {of}
+- FR: au-dessus de la médiane {of}
+
+### strip.near
+- PT: perto da mediana {of}
+- EN: close to the median for {of}
+- FR: proche de la médiane {of}
+
+### strip.below
+- PT: abaixo da mediana {of}
+- EN: below the median for {of}
+- FR: en dessous de la médiane {of}
+
+### strip.note
+- PT: Cada traço é um concelho; o ponto verde é {place}.
+- EN: Each tick is a municipality; the green dot is {place}.
+- FR: Chaque trait est une commune ; le point vert est {place}.
+
+### back
+- PT: Voltar
+- EN: Back
+- FR: Retour
+
+### of.11
+- PT: do Norte
+- EN: the North
+- FR: du Nord
+
+### of.19
+- PT: do Centro
+- EN: the Centre
+- FR: du Centre
+
+### of.1D
+- PT: do Oeste e Vale do Tejo
+- EN: Oeste and Vale do Tejo
+- FR: de l'Oeste et Vale do Tejo
+
+### of.1A
+- PT: da Grande Lisboa
+- EN: Greater Lisbon
+- FR: du Grand Lisbonne
+
+### of.1B
+- PT: da Península de Setúbal
+- EN: the Setúbal Peninsula
+- FR: de la péninsule de Setúbal
+
+### of.1C
+- PT: do Alentejo
+- EN: the Alentejo
+- FR: de l'Alentejo
+
+### of.15
+- PT: do Algarve
+- EN: the Algarve
+- FR: de l'Algarve
+
+### of.20
+- PT: dos Açores
+- EN: the Azores
+- FR: des Açores
+
+### of.30
+- PT: da Madeira
+- EN: Madeira
+- FR: de Madère
+
+### of.PT
+- PT: de Portugal
+- EN: Portugal
+- FR: du Portugal
+
+### cty.lu
+- PT: o Luxemburgo
+- EN: Luxembourg
+- FR: le Luxembourg
+
+### cty.fr
+- PT: Paris
+- EN: Paris
+- FR: Paris
+
+### cty.ch
+- PT: Genebra
+- EN: Geneva
+- FR: Genève
+
+### cty.br
+- PT: São Paulo
+- EN: São Paulo
+- FR: São Paulo
+
+### cty.us
+- PT: Nova Iorque
+- EN: New York
+- FR: New York
+
+### cty.il
+- PT: Telavive
+- EN: Tel Aviv
+- FR: Tel-Aviv
+
+### ph.porto-douro-entardecer
+- PT: O Douro e a ponte Luís I, Porto
+- EN: The Douro and the Luís I bridge, Porto
+- FR: Le Douro et le pont Luís I, Porto
+
+### ph.lisboa-castelo-por-do-sol
+- PT: Lisboa vista do Castelo de São Jorge
+- EN: Lisbon from São Jorge castle
+- FR: Lisbonne depuis le château Saint-Georges
+
+### ph.comporta-mar-turquesa
+- PT: Comporta, Alcácer do Sal
+- EN: Comporta, Alcácer do Sal
+- FR: Comporta, Alcácer do Sal
+
+### ph.algarve-praia-da-marinha
+- PT: Praia da Marinha, Lagoa
+- EN: Praia da Marinha, Lagoa
+- FR: Praia da Marinha, Lagoa
+
+### ph.madeira-levada
+- PT: Uma levada na Laurissilva, Madeira
+- EN: A levada in the Laurissilva, Madeira
+- FR: Une levada dans la Laurissilva, Madère
+
+### compare.h
+- PT: Comparar lugares
+- EN: Compare places
+- FR: Comparer des lieux
+
+### compare.lede
+- PT: Dois ou três lugares guardados com o coração, lado a lado. As primeiras linhas são livres; o resto faz parte da análise completa.
+- EN: Two or three places saved with the heart, side by side. The first rows are free; the rest is part of the full analysis.
+- FR: Deux ou trois lieux gardés avec le cœur, côte à côte. Les premières lignes sont libres ; le reste fait partie de l'analyse complète.
+
+### compare.pill
+- PT: Comparar {n}
+- EN: Compare {n}
+- FR: Comparer {n}
+
+### compare.need
+- PT: Toque no coração de dois ou três lugares no mapa e volte aqui.
+- EN: Tap the heart on two or three places on the map, then come back here.
+- FR: Touchez le cœur de deux ou trois lieux sur la carte, puis revenez ici.
+
+### compare.max
+- PT: Mostramos os três lugares guardados mais recentes.
+- EN: Showing the three most recently saved places.
+- FR: Nous montrons les trois lieux gardés les plus récents.
+
+### compare.map
+- PT: Voltar ao mapa
+- EN: Back to the map
+- FR: Retour à la carte
+
+### compare.dir5
+- PT: 5 anos
+- EN: 5 years
+- FR: 5 ans
+
+### compare.rent
+- PT: Renda por m²
+- EN: Rent per m²
+- FR: Loyer au m²
+
+### compare.yield
+- PT: Rendimento bruto
+- EN: Gross yield
+- FR: Rendement brut
+
+### compare.g10
+- PT: 10 anos
+- EN: 10 years
+- FR: 10 ans
+
+### compare.foreign
+- PT: Compradores de fora
+- EN: Buyers from abroad
+- FR: Acheteurs étrangers
+
+### compare.supply
+- PT: Obras novas
+- EN: New buildings
+- FR: Constructions neuves
+
+### compare.locked
+- PT: Na análise completa
+- EN: In the full analysis
+- FR: Dans l'analyse complète
+
+### compare.src
+- PT: Fontes: INE (preços, {q}), IPMA e PORDATA. Descreve, não aconselha.
+- EN: Sources: INE (prices, {q}), IPMA and PORDATA. It describes; it does not advise.
+- FR: Sources : INE (prix, {q}), IPMA et PORDATA. Cela décrit, sans conseiller.
+
+### a.title
+- PT: Análise completa · {region}
+- EN: Full analysis · {region}
+- FR: Analyse complète · {region}
+
+### a.all
+- PT: Portugal inteiro
+- EN: All of Portugal
+- FR: Tout le Portugal
+
+### a.lede
+- PT: {region} em números públicos, lugar a lugar: preços, rendas, dez anos, procura estrangeira e obras novas. Dados de {q}.
+- EN: {region} in public figures, place by place: prices, rents, ten years, foreign demand and new building. Data for {q}.
+- FR: {region} en chiffres publics, lieu par lieu : prix, loyers, dix ans, demande étrangère et constructions neuves. Données de {q}.
+
+### a.typ
+- PT: Preços por tipologia
+- EN: Prices by number of bedrooms
+- FR: Prix par typologie
+
+### a.ne
+- PT: Novo e usado
+- EN: New and existing
+- FR: Neuf et ancien
+
+### a.range
+- PT: Intervalos e banda alta
+- EN: Ranges and the top band
+- FR: Fourchettes et tranche haute
+
+### a.rent
+- PT: Rendas e rendimento bruto
+- EN: Rents and gross yield
+- FR: Loyers et rendement brut
+
+### a.g10
+- PT: Dez anos de preços
+- EN: Ten years of prices
+- FR: Dix ans de prix
+
+### a.foreign
+- PT: Procura estrangeira
+- EN: Foreign demand
+- FR: Demande étrangère
+
+### a.supply
+- PT: Nova oferta
+- EN: New supply
+- FR: Offre nouvelle
+
+### a.cmp
+- PT: Todos os concelhos, lado a lado
+- EN: Every municipality, side by side
+- FR: Toutes les communes, côte à côte
+
+### a.col.place
+- PT: Concelho
+- EN: Municipality
+- FR: Commune
+
+### a.col.m2
+- PT: €/m²
+- EN: €/m²
+- FR: €/m²
+
+### a.col.p5
+- PT: 5 anos
+- EN: 5 years
+- FR: 5 ans
+
+### a.col.p10
+- PT: 10 anos
+- EN: 10 years
+- FR: 10 ans
+
+### a.col.rent
+- PT: Renda €/m²
+- EN: Rent €/m²
+- FR: Loyer €/m²
+
+### a.col.yield
+- PT: Rendimento
+- EN: Yield
+- FR: Rendement
+
+### a.col.abroad
+- PT: €/m² de fora
+- EN: €/m² from abroad
+- FR: €/m² de l'étranger
+
+### a.col.dom
+- PT: €/m² residentes
+- EN: €/m² residents
+- FR: €/m² résidents
+
+### a.col.res
+- PT: Residentes estrangeiros
+- EN: Foreign residents
+- FR: Résidents étrangers
+
+### a.col.lic
+- PT: Licenças
+- EN: Permits
+- FR: Permis
+
+### a.col.new
+- PT: Obras novas concluídas
+- EN: New buildings completed
+- FR: Constructions neuves achevées
+
+### a.col.lo
+- PT: De
+- EN: From
+- FR: De
+
+### a.col.hi
+- PT: Até
+- EN: To
+- FR: À
+
+### a.pdf
+- PT: Guardar em PDF
+- EN: Save as PDF
+- FR: Enregistrer en PDF
+
+### a.private
+- PT: Análise para o comprador. Não partilhar esta ligação.
+- EN: Analysis for the buyer. Please do not share this link.
+- FR: Analyse pour l'acheteur. Merci de ne pas partager ce lien.
+
+### a.src
+- PT: Fontes: INE (vendas, rendas, licenças, obras, residentes, {q}), PORDATA, IPMA e os preços publicados pelos promotores. Descreve o mercado; não é aconselhamento.
+- EN: Sources: INE (sales, rents, permits, completions, residents, {q}), PORDATA, IPMA and the developers' published prices. It describes the market; it is not advice.
+- FR: Sources : INE (ventes, loyers, permis, achèvements, résidents, {q}), PORDATA, IPMA et les prix publiés par les promoteurs. Cela décrit le marché ; ce n'est pas un conseil.
+
+### compare.open
+- PT: Ver no mapa
+- EN: See on the map
+- FR: Voir sur la carte
+
+### tile.kmline
+- PT: {v} km em linha reta
+- EN: {v} km in a straight line
+- FR: {v} km à vol d'oiseau
+
+### tile.airport
+- PT: Aeroporto
+- EN: Airport
+- FR: Aéroport
+
+### tile.ap
+- PT: {n}, {v} km em linha reta
+- EN: {n}, {v} km in a straight line
+- FR: {n}, {v} km à vol d'oiseau
+
+### tile.noschool
+- PT: Nenhuma na região
+- EN: None in the region
+- FR: Aucune dans la région
+
+### tile.onreq2
+- PT: preços sob consulta (promotor)
+- EN: prices on request (developer)
+- FR: prix sur demande (promoteur)
+
+### tile.ty
+- PT: entre tipologias
+- EN: across typologies
+- FR: selon la typologie
+
+### tile.ne
+- PT: novos {n} · usados {e}
+- EN: new {n} · existing {e}
+- FR: neuf {n} · ancien {e}
+
+### tile.src
+- PT: Mar em agosto: Copernicus Marine Service (1991–2020). Praias: APA. Aeroportos: OpenStreetMap. Médicos: INE (2025). Distâncias em linha reta, calculadas por nós.
+- EN: Sea in August: Copernicus Marine Service (1991–2020). Beaches: APA. Airports: OpenStreetMap. Doctors: INE (2025). Straight-line distances, calculated by us.
+- FR: Mer en août : Copernicus Marine Service (1991–2020). Plages : APA. Aéroports : OpenStreetMap. Médecins : INE (2025). Distances à vol d'oiseau, calculées par nous.
+
+### a.col.newine
+- PT: Novos (INE)
+- EN: New (INE)
+- FR: Neuf (INE)
+
+### a.col.oldine
+- PT: Usados (INE)
+- EN: Existing (INE)
+- FR: Ancien (INE)

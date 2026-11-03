@@ -1,0 +1,309 @@
+muni_dico,muni_name,muni_slug,region,point_lat,point_lon,doctors_per_1000_2025,nearest_intl_school,school_curriculum,school_municipality,km_straight_line_to_school,nearest_public_emergency_hospital,public_hospital_group,km_straight_line_to_public_emergency,nearest_any_hospital,any_hospital_kind,km_straight_line_to_any_hospital
+0101,Águeda,agueda,mainland,40.5853,-8.4115,3,Deutsche Schule zu Porto,German,Porto,66.0,Hospital Infante D. Pedro,ULS Região de Aveiro,21.3,Hospital da Luz Aveiro,private,19.8
+0102,Albergaria-a-Velha,albergaria-a-velha,mainland,40.7269,-8.4632,2.8,Deutsche Schule zu Porto,German,Porto,49.7,Hospital Infante D. Pedro,ULS Região de Aveiro,19.1,Hospital da Luz Aveiro,private,17.7
+0103,Anadia,anadia,mainland,40.4508,-8.4236,3.8,Deutsche Schule zu Porto,German,Porto,80.2,Hospital Pediátrico de Coimbra,ULS Coimbra,25.3,Hospital da Luz Coimbra,private,25.1
+0104,Arouca,arouca,mainland,40.9237,-8.1929,1.7,Deutsche Schule zu Porto,German,Porto,45.2,Hospital de São Sebastião,ULS Entre Douro e Vouga,29.7,Trofa Saúde São João da Madeira,private,25.4
+0105,Aveiro,aveiro,mainland,40.6481,-8.6213,6.5,Oporto British School,British,Porto,56.3,Hospital Infante D. Pedro,ULS Região de Aveiro,3.2,Hospital da Luz Aveiro,private,1.7
+0106,Castelo de Paiva,castelo-de-paiva,mainland,41.0159,-8.2887,1.5,Deutsche Schule zu Porto,German,Porto,33.0,Hospital Padre Américo,ULS Tâmega e Sousa,20.2,Hospital Padre Américo,SNS,20.2
+0107,Espinho,espinho,mainland,40.9991,-8.6272,7.9,Deutsche Schule zu Porto,German,Porto,17.2,Hospital de São Sebastião,ULS Entre Douro e Vouga,10.2,Trofa Saúde Coge,private,1.8
+0108,Estarreja,estarreja,mainland,40.7429,-8.5663,2.5,Deutsche Schule zu Porto,German,Porto,46.1,Hospital Infante D. Pedro,ULS Região de Aveiro,14.2,Hospital da Luz Aveiro,private,13.1
+0109,Santa Maria da Feira,santa-maria-da-feira,mainland,40.9567,-8.5368,3.9,Deutsche Schule zu Porto,German,Porto,23.5,Hospital de São Sebastião,ULS Entre Douro e Vouga,3.1,Hospital de São Sebastião,SNS,3.1
+0110,Ílhavo,ilhavo,mainland,40.6135,-8.7175,3.8,Oporto British School,British,Porto,60.0,Hospital Infante D. Pedro,ULS Região de Aveiro,5.8,Hospital Infante D. Pedro,SNS,5.8
+0111,Mealhada,mealhada,mainland,40.36,-8.446,4,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,79.0,Hospital Pediátrico de Coimbra,ULS Coimbra,15.4,Hospital da Luz Coimbra,private,15.2
+0112,Murtosa,murtosa,mainland,40.7586,-8.6756,2.2,Oporto British School,British,Porto,43.8,Hospital Infante D. Pedro,ULS Região de Aveiro,13.9,Trofa Saúde Ovar,private,13.6
+0113,Oliveira de Azeméis,oliveira-de-azemeis,mainland,40.8299,-8.475,2.7,Deutsche Schule zu Porto,German,Porto,38.5,Hospital de São Sebastião,ULS Entre Douro e Vouga,12.7,Trofa Saúde São João da Madeira,private,6.6
+0114,Oliveira do Bairro,oliveira-do-bairro,mainland,40.5241,-8.5437,3.2,Deutsche Schule zu Porto,German,Porto,70.5,Hospital Infante D. Pedro,ULS Região de Aveiro,15.5,Hospital da Luz Aveiro,private,14.8
+0115,Ovar,ovar,mainland,40.8666,-8.6293,4,Deutsche Schule zu Porto,German,Porto,32.0,Hospital de São Sebastião,ULS Entre Douro e Vouga,9.9,Trofa Saúde Ovar,private,1.2
+0116,São João da Madeira,sao-joao-da-madeira,mainland,40.8953,-8.4904,4.3,Deutsche Schule zu Porto,German,Porto,31.3,Hospital de São Sebastião,ULS Entre Douro e Vouga,6.1,Trofa Saúde São João da Madeira,private,0.9
+0117,Sever do Vouga,sever-do-vouga,mainland,40.7362,-8.3722,2,Deutsche Schule zu Porto,German,Porto,51.5,Hospital de São Sebastião,ULS Entre Douro e Vouga,26.1,Trofa Saúde São João da Madeira,private,19.6
+0118,Vagos,vagos,mainland,40.5104,-8.6807,3.1,Oporto British School,British,Porto,71.4,Hospital Infante D. Pedro,ULS Região de Aveiro,14.0,Hospital Infante D. Pedro,SNS,14.0
+0119,Vale de Cambra,vale-de-cambra,mainland,40.8357,-8.335,3.8,Deutsche Schule zu Porto,German,Porto,43.6,Hospital de São Sebastião,ULS Entre Douro e Vouga,20.7,Trofa Saúde São João da Madeira,private,14.4
+0201,Aljustrel,aljustrel,mainland,37.8924,-8.2124,1.6,Deutsche Schule Algarve,German,Silves,84.9,Hospital José Joaquim Fernandes,ULS Baixo Alentejo,32.9,Hospital José Joaquim Fernandes,SNS,32.9
+0202,Almodôvar,almodovar,mainland,37.4736,-8.0918,1.6,Vilamoura International School,British,Loulé,40.1,Hospital de Faro,ULS Algarve,52.0,Hospital Lusíadas Albufeira,private,43.1
+0203,Alvito,alvito,mainland,38.2353,-8.0483,1.3,St. Peter's International School / International School of Palmela,British,Palmela,90.9,Hospital José Joaquim Fernandes,ULS Baixo Alentejo,29.2,Hospital José Joaquim Fernandes,SNS,29.2
+0204,Barrancos,barrancos,mainland,38.1382,-7.0526,0.7,Colégio Santiago Internacional,other,Tavira,124.5,Hospital José Joaquim Fernandes,ULS Baixo Alentejo,72.8,Hospital José Joaquim Fernandes,SNS,72.8
+0205,Beja,beja,mainland,37.9704,-7.9045,5.1,Colégio Santiago Internacional,other,Tavira,96.8,Hospital José Joaquim Fernandes,ULS Baixo Alentejo,5.7,Hospital José Joaquim Fernandes,SNS,5.7
+0206,Castro Verde,castro-verde,mainland,37.7137,-8.0455,1.6,Vilamoura International School,British,Loulé,67.1,Hospital José Joaquim Fernandes,ULS Baixo Alentejo,36.8,Hospital José Joaquim Fernandes,SNS,36.8
+0207,Cuba,cuba,mainland,38.1752,-7.9007,2.4,St. Peter's International School / International School of Palmela,British,Palmela,105.4,Hospital José Joaquim Fernandes,ULS Baixo Alentejo,18.2,Hospital José Joaquim Fernandes,SNS,18.2
+0208,Ferreira do Alentejo,ferreira-do-alentejo,mainland,38.0868,-8.1841,1.2,St. Peter's International School / International School of Palmela,British,Palmela,89.2,Hospital José Joaquim Fernandes,ULS Baixo Alentejo,28.7,Hospital José Joaquim Fernandes,SNS,28.7
+0209,Mértola,mertola,mainland,37.6357,-7.717,1.3,Colégio Santiago Internacional,other,Tavira,57.3,Hospital José Joaquim Fernandes,ULS Baixo Alentejo,44.1,Hospital José Joaquim Fernandes,SNS,44.1
+0210,Moura,moura,mainland,38.1661,-7.3334,1.7,Colégio Santiago Internacional,other,Tavira,119.3,Hospital José Joaquim Fernandes,ULS Baixo Alentejo,49.9,Hospital José Joaquim Fernandes,SNS,49.9
+0211,Odemira,odemira,mainland,37.5777,-8.6183,0.9,Deutsche Schule Algarve,German,Silves,50.5,Hospital de Portimão,ULS Algarve,47.5,Hospital de Portimão,SNS,47.5
+0212,Ourique,ourique,mainland,37.6492,-8.2508,1,Deutsche Schule Algarve,German,Silves,57.9,Hospital José Joaquim Fernandes,ULS Baixo Alentejo,52.6,Hospital José Joaquim Fernandes,SNS,52.6
+0213,Serpa,serpa,mainland,37.9231,-7.4908,1.8,Colégio Santiago Internacional,other,Tavira,90.0,Hospital José Joaquim Fernandes,ULS Baixo Alentejo,34.7,Hospital José Joaquim Fernandes,SNS,34.7
+0214,Vidigueira,vidigueira,mainland,38.1741,-7.7616,1.5,St. Peter's International School / International School of Palmela,British,Palmela,116.6,Hospital José Joaquim Fernandes,ULS Baixo Alentejo,20.2,Hospital José Joaquim Fernandes,SNS,20.2
+0301,Amares,amares,mainland,41.6502,-8.3574,3.3,CLIB - The Braga International School,IB,Braga,9.3,Hospital de Braga,ULS Braga,9.8,Hospital de Braga,SNS,9.8
+0302,Barcelos,barcelos,mainland,41.543,-8.6192,3.6,CLIB - The Braga International School,IB,Braga,19.4,Hospital Santa Maria Maior,ULS Barcelos/Esposende,1.1,Hospital Santa Maria Maior,SNS,1.1
+0303,Braga,braga,mainland,41.545,-8.4405,8.9,CLIB - The Braga International School,IB,Braga,5.1,Hospital de Braga,ULS Braga,4.3,Hospital Lusíadas Braga,private,1.5
+0304,Cabeceiras de Basto,cabeceiras-de-basto,mainland,41.5327,-7.9731,3,CLIB - The Braga International School,IB,Braga,34.8,Hospital da Senhora da Oliveira,ULS Alto Ave,29.5,Hospital da Senhora da Oliveira,SNS,29.5
+0305,Celorico de Basto,celorico-de-basto,mainland,41.4009,-8.0426,1.8,CLIB - The Braga International School,IB,Braga,34.4,Hospital da Senhora da Oliveira,ULS Alto Ave,22.4,Hospital da Senhora da Oliveira,SNS,22.4
+0306,Esposende,esposende,mainland,41.5592,-8.7599,5.3,CLIB - The Braga International School,IB,Braga,30.9,Hospital Santa Maria Maior,ULS Barcelos/Esposende,12.3,Hospital Santa Maria Maior,SNS,12.3
+0307,Fafe,fafe,mainland,41.4777,-8.1523,4.3,CLIB - The Braga International School,IB,Braga,22.2,Hospital da Senhora da Oliveira,ULS Alto Ave,13.4,Hospital da Senhora da Oliveira,SNS,13.4
+0308,Guimarães,guimaraes,mainland,41.4685,-8.3285,4.9,CLIB - The Braga International School,IB,Braga,12.3,Hospital da Senhora da Oliveira,ULS Alto Ave,3.5,Trofa Saúde Guimarães,private,2.5
+0309,Póvoa de Lanhoso,povoa-de-lanhoso,mainland,41.5857,-8.2595,2,CLIB - The Braga International School,IB,Braga,10.9,Hospital de Braga,ULS Braga,11.8,Hospital de Braga,SNS,11.8
+0310,Terras de Bouro,terras-de-bouro,mainland,41.7438,-8.1827,2.5,CLIB - The Braga International School,IB,Braga,25.8,Hospital de Braga,ULS Braga,26.6,Hospital de Braga,SNS,26.6
+0311,Vieira do Minho,vieira-do-minho,mainland,41.6268,-8.0999,2.3,CLIB - The Braga International School,IB,Braga,24.8,Hospital de Braga,ULS Braga,25.7,Hospital de Braga,SNS,25.7
+0312,Vila Nova de Famalicão,vila-nova-de-famalicao,mainland,41.4231,-8.4972,4.3,CLIB - The Braga International School,IB,Braga,18.7,Hospital de Vila Nova de Famalicão,ULS Médio Ave,2.4,Hospital de Vila Nova de Famalicão,SNS,2.4
+0313,Vila Verde,vila-verde,mainland,41.6716,-8.4663,2.6,CLIB - The Braga International School,IB,Braga,13.0,Hospital de Braga,ULS Braga,12.9,Trofa Saúde Braga Norte,private,10.7
+0314,Vizela,vizela,mainland,41.3645,-8.2986,3.2,CLIB - The Braga International School,IB,Braga,24.0,Hospital da Senhora da Oliveira,ULS Alto Ave,8.7,Hospital da Senhora da Oliveira,SNS,8.7
+0401,Alfândega da Fé,alfandega-da-fe,mainland,41.3342,-6.9586,2.6,CLIB - The Braga International School,IB,Braga,122.0,Hospital de Macedo de Cavaleiros,ULS Nordeste,22.3,Hospital de Macedo de Cavaleiros,SNS,22.3
+0402,Bragança,braganca,mainland,41.7877,-6.7305,6.3,CLIB - The Braga International School,IB,Braga,139.8,Hospital de Bragança,ULS Nordeste,3.5,Hospital de Bragança,SNS,3.5
+0403,Carrazeda de Ansiães,carrazeda-de-ansiaes,mainland,41.2226,-7.3159,0.8,CLIB - The Braga International School,IB,Braga,97.5,Hospital de Mirandela,ULS Nordeste,31.0,Hospital de Mirandela,SNS,31.0
+0404,Freixo de Espada à Cinta,freixo-de-espada-a-cinta,mainland,41.0754,-6.8453,1,CLIB - The Braga International School,IB,Braga,140.1,Hospital de Macedo de Cavaleiros,ULS Nordeste,52.0,Hospital de Macedo de Cavaleiros,SNS,52.0
+0405,Macedo de Cavaleiros,macedo-de-cavaleiros,mainland,41.5051,-6.8416,3.7,CLIB - The Braga International School,IB,Braga,129.0,Hospital de Macedo de Cavaleiros,ULS Nordeste,10.4,Hospital de Macedo de Cavaleiros,SNS,10.4
+0406,Miranda do Douro,miranda-do-douro,mainland,41.573,-6.3058,2.6,CLIB - The Braga International School,IB,Braga,173.3,Hospital de Bragança,ULS Nordeste,46.1,Hospital de Bragança,SNS,46.1
+0407,Mirandela,mirandela,mainland,41.489,-7.1525,5.3,CLIB - The Braga International School,IB,Braga,103.3,Hospital de Mirandela,ULS Nordeste,3.1,Hospital de Mirandela,SNS,3.1
+0408,Mogadouro,mogadouro,mainland,41.352,-6.6362,2.2,CLIB - The Braga International School,IB,Braga,148.0,Hospital de Macedo de Cavaleiros,ULS Nordeste,33.8,Hospital de Macedo de Cavaleiros,SNS,33.8
+0409,Torre de Moncorvo,torre-de-moncorvo,mainland,41.1811,-7.0209,2.8,CLIB - The Braga International School,IB,Braga,122.0,Hospital de Mirandela,ULS Nordeste,36.6,Hospital de Mirandela,SNS,36.6
+0410,Vila Flor,vila-flor,mainland,41.3151,-7.181,1.6,CLIB - The Braga International School,IB,Braga,104.6,Hospital de Mirandela,ULS Nordeste,18.9,Hospital de Mirandela,SNS,18.9
+0411,Vimioso,vimioso,mainland,41.5658,-6.5699,2.2,CLIB - The Braga International School,IB,Braga,151.3,Hospital de Bragança,ULS Nordeste,31.0,Hospital de Bragança,SNS,31.0
+0412,Vinhais,vinhais,mainland,41.8323,-7.0717,1.8,CLIB - The Braga International School,IB,Braga,113.2,Hospital de Bragança,ULS Nordeste,25.4,Hospital de Bragança,SNS,25.4
+0501,Belmonte,belmonte,mainland,40.3397,-7.3248,2.8,Deutsche Schule zu Porto,German,Porto,142.9,Hospital Pêro da Covilhã,ULS Cova da Beira,16.4,Hospital Pêro da Covilhã,SNS,16.4
+0502,Castelo Branco,castelo-branco,mainland,39.8649,-7.4808,5.2,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,124.2,Hospital Amato Lusitano,ULS Castelo Branco,4.9,Hospital Amato Lusitano,SNS,4.9
+0503,Covilhã,covilha,mainland,40.2923,-7.461,6.3,Deutsche Schule zu Porto,German,Porto,137.9,Hospital Pêro da Covilhã,ULS Cova da Beira,3.9,Hospital Pêro da Covilhã,SNS,3.9
+0504,Fundão,fundao,mainland,40.1195,-7.4142,3.4,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,135.3,Hospital Pêro da Covilhã,ULS Cova da Beira,17.6,Hospital Pêro da Covilhã,SNS,17.6
+0505,Idanha-a-Nova,idanha-a-nova,mainland,39.9187,-7.0943,1.4,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,157.6,Hospital Amato Lusitano,ULS Castelo Branco,36.2,Hospital Amato Lusitano,SNS,36.2
+0506,Oleiros,oleiros,mainland,39.9644,-7.8385,1.3,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,95.9,Hospital Amato Lusitano,ULS Castelo Branco,32.9,Hospital Amato Lusitano,SNS,32.9
+0507,Penamacor,penamacor,mainland,40.1839,-7.1227,1.4,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,161.1,Hospital Pêro da Covilhã,ULS Cova da Beira,32.7,Hospital Pêro da Covilhã,SNS,32.7
+0508,Proença-a-Nova,proenca-a-nova,mainland,39.7361,-7.8579,2.2,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,91.4,Hospital Amato Lusitano,ULS Castelo Branco,32.1,Hospital Amato Lusitano,SNS,32.1
+0509,Sertã,serta,mainland,39.8253,-8.0846,1.3,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,72.4,Hospital de Tomar,ULS Médio Tejo,35.8,Hospital de Tomar,SNS,35.8
+0510,Vila de Rei,vila-de-rei,mainland,39.6878,-8.1639,2.5,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,65.7,Hospital de Tomar,ULS Médio Tejo,21.7,Hospital de Tomar,SNS,21.7
+0511,Vila Velha de Ródão,vila-velha-de-rodao,mainland,39.6996,-7.6411,1.5,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,110.1,Hospital Amato Lusitano,ULS Castelo Branco,18.3,Hospital Amato Lusitano,SNS,18.3
+0601,Arganil,arganil,mainland,40.226,-7.9509,1.1,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,98.4,Hospital Pêro da Covilhã,ULS Cova da Beira,39.2,Hospital Pêro da Covilhã,SNS,39.2
+0602,Cantanhede,cantanhede,mainland,40.3647,-8.623,4,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,72.8,Hospital Pediátrico de Coimbra,ULS Coimbra,23.7,Hospital da Luz Coimbra,private,23.0
+0603,Coimbra,coimbra,mainland,40.2113,-8.4316,33,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,66.2,Hospitais da Universidade de Coimbra,ULS Coimbra,1.9,Hospital da Luz Coimbra,private,1.6
+0604,Condeixa-a-Nova,condeixa-a-nova,mainland,40.0876,-8.5084,6.9,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,51.6,Hospitais da Universidade de Coimbra,ULS Coimbra,16.9,Hospitais da Universidade de Coimbra,SNS,16.9
+0605,Figueira da Foz,figueira-da-foz,mainland,40.2078,-8.8058,6.8,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,51.7,Hospital Distrital da Figueira da Foz,ULS Baixo Mondego,9.7,Hospital Distrital da Figueira da Foz,SNS,9.7
+0606,Góis,gois,mainland,40.1201,-8.106,0.3,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,81.1,Hospitais da Universidade de Coimbra,ULS Coimbra,28.4,Hospitais da Universidade de Coimbra,SNS,28.4
+0607,Lousã,lousa,mainland,40.1251,-8.2277,2.7,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,72.6,Hospitais da Universidade de Coimbra,ULS Coimbra,19.0,Hospitais da Universidade de Coimbra,SNS,19.0
+0608,Mira,mira,mainland,40.4305,-8.755,4.8,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,76.8,Hospital Infante D. Pedro,ULS Região de Aveiro,24.2,Hospital Infante D. Pedro,SNS,24.2
+0609,Miranda do Corvo,miranda-do-corvo,mainland,40.0865,-8.3371,3.3,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,62.5,Hospitais da Universidade de Coimbra,ULS Coimbra,16.2,Hospitais da Universidade de Coimbra,SNS,16.2
+0610,Montemor-o-Velho,montemor-o-velho,mainland,40.2338,-8.6586,3.2,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,58.2,Hospital Distrital da Figueira da Foz,ULS Baixo Mondego,20.6,Hospital da Luz Coimbra,private,20.0
+0611,Oliveira do Hospital,oliveira-do-hospital,mainland,40.3276,-7.8522,2.2,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,111.6,Hospital Pêro da Covilhã,ULS Cova da Beira,31.3,Hospital Pêro da Covilhã,SNS,31.3
+0612,Pampilhosa da Serra,pampilhosa-da-serra,mainland,40.1235,-7.8712,0.6,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,99.0,Hospital Pêro da Covilhã,ULS Cova da Beira,35.9,Hospital Pêro da Covilhã,SNS,35.9
+0613,Penacova,penacova,mainland,40.2958,-8.3094,1.7,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,80.1,Hospital Pediátrico de Coimbra,ULS Coimbra,11.9,Hospital Pediátrico de Coimbra,SNS,11.9
+0614,Penela,penela,mainland,40.0029,-8.358,3.1,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,56.0,Hospitais da Universidade de Coimbra,ULS Coimbra,24.7,Hospitais da Universidade de Coimbra,SNS,24.7
+0615,Soure,soure,mainland,40.0708,-8.6381,3,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,43.1,Hospital Distrital da Figueira da Foz,ULS Baixo Mondego,20.1,Hospital Distrital da Figueira da Foz,SNS,20.1
+0616,Tábua,tabua,mainland,40.3186,-8.0431,2,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,98.1,Hospital Pediátrico de Coimbra,ULS Coimbra,33.2,Hospital Pediátrico de Coimbra,SNS,33.2
+0617,Vila Nova de Poiares,vila-nova-de-poiares,mainland,40.2195,-8.2285,1.1,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,79.0,Hospitais da Universidade de Coimbra,ULS Coimbra,15.7,Hospitais da Universidade de Coimbra,SNS,15.7
+0701,Alandroal,alandroal,mainland,38.6091,-7.3767,1.2,St. Peter's International School / International School of Palmela,British,Palmela,141.2,Hospital de Santa Luzia de Elvas,ULS Alto Alentejo,34.9,Hospital de Santa Luzia de Elvas,SNS,34.9
+0702,Arraiolos,arraiolos,mainland,38.7791,-7.9164,2.6,St. Peter's International School / International School of Palmela,British,Palmela,96.9,Hospital do Espírito Santo de Évora,ULS Alentejo Central,23.4,Hospital do Espírito Santo de Évora,SNS,23.4
+0703,Borba,borba,mainland,38.7731,-7.498,2.6,St. Peter's International School / International School of Palmela,British,Palmela,132.4,Hospital de Santa Luzia de Elvas,ULS Alto Alentejo,31.2,Hospital de Santa Luzia de Elvas,SNS,31.2
+0704,Estremoz,estremoz,mainland,38.8426,-7.5978,2.9,St. Peter's International School / International School of Palmela,British,Palmela,125.4,Hospital de Santa Luzia de Elvas,ULS Alto Alentejo,37.8,Hospital de Santa Luzia de Elvas,SNS,37.8
+0705,Évora,evora,mainland,38.5091,-7.8532,8.3,St. Peter's International School / International School of Palmela,British,Palmela,100.0,Hospital do Espírito Santo de Évora,ULS Alentejo Central,8.0,Hospital do Espírito Santo de Évora,SNS,8.0
+0706,Montemor-o-Novo,montemor-o-novo,mainland,38.693,-8.2594,1.7,St. Peter's International School / International School of Palmela,British,Palmela,65.8,Hospital do Espírito Santo de Évora,ULS Alentejo Central,33.9,Hospital do Espírito Santo de Évora,SNS,33.9
+0707,Mora,mora,mainland,38.9406,-8.1624,1.4,St. Peter's International School / International School of Palmela,British,Palmela,83.5,Hospital do Espírito Santo de Évora,ULS Alentejo Central,47.0,Hospital do Espírito Santo de Évora,SNS,47.0
+0708,Mourão,mourao,mainland,38.3772,-7.3231,0.8,Colégio Santiago Internacional,other,Tavira,142.4,Hospital do Espírito Santo de Évora,ULS Alentejo Central,54.8,Hospital do Espírito Santo de Évora,SNS,54.8
+0709,Portel,portel,mainland,38.3079,-7.6799,1.1,St. Peter's International School / International School of Palmela,British,Palmela,118.6,Hospital do Espírito Santo de Évora,ULS Alentejo Central,34.9,Hospital do Espírito Santo de Évora,SNS,34.9
+0710,Redondo,redondo,mainland,38.6536,-7.5997,1.1,St. Peter's International School / International School of Palmela,British,Palmela,122.1,Hospital do Espírito Santo de Évora,ULS Alentejo Central,28.0,Hospital do Espírito Santo de Évora,SNS,28.0
+0711,Reguengos de Monsaraz,reguengos-de-monsaraz,mainland,38.4159,-7.4905,1.4,St. Peter's International School / International School of Palmela,British,Palmela,132.5,Hospital do Espírito Santo de Évora,ULS Alentejo Central,39.7,Hospital do Espírito Santo de Évora,SNS,39.7
+0712,Vendas Novas,vendas-novas,mainland,38.6867,-8.4647,2.3,St. Peter's International School / International School of Palmela,British,Palmela,48.3,Hospital de São Bernardo,ULS Arrábida,40.2,Hospital de São Bernardo,SNS,40.2
+0713,Viana do Alentejo,viana-do-alentejo,mainland,38.3995,-8.1665,1.1,St. Peter's International School / International School of Palmela,British,Palmela,75.0,Hospital do Espírito Santo de Évora,ULS Alentejo Central,29.7,Hospital do Espírito Santo de Évora,SNS,29.7
+0714,Vila Viçosa,vila-vicosa,mainland,38.7562,-7.4097,2.7,St. Peter's International School / International School of Palmela,British,Palmela,139.7,Hospital de Santa Luzia de Elvas,ULS Alto Alentejo,25.1,Hospital de Santa Luzia de Elvas,SNS,25.1
+0801,Albufeira,albufeira,mainland,37.1707,-8.2069,2,Vilamoura International School,British,Loulé,8.2,Hospital de Portimão,ULS Algarve,29.5,Hospital Lusíadas Albufeira,private,7.9
+0802,Alcoutim,alcoutim,mainland,37.4158,-7.6876,2.4,Colégio Santiago Internacional,other,Tavira,32.7,Hospital de Faro,ULS Algarve,48.5,Hospital CUF Faro,private,48.1
+0803,Aljezur,aljezur,mainland,37.2928,-8.8042,2.4,Barlavento International Primary School,British,Lagos,21.9,Hospital de Lagos,ULS Algarve,24.2,Hospital de Lagos,SNS,24.2
+0804,Castro Marim,castro-marim,mainland,37.3225,-7.5506,1.8,Colégio Santiago Internacional,other,Tavira,23.8,Hospital de Faro,ULS Algarve,47.1,Hospital de Faro,SNS,47.1
+0805,Faro,faro,mainland,37.0286,-7.9352,9,Nobel Algarve British International School - Almancil,British,Loulé,12.3,Hospital de Faro,ULS Algarve,0.7,Hospital de Faro,SNS,0.7
+0806,Lagoa,lagoa,mainland,37.1313,-8.4802,3.1,Deutsche Schule Algarve,German,Silves,4.7,Hospital de Portimão,ULS Algarve,5.9,Hospital São Camilo,private,5.8
+0807,Lagos,lagos,mainland,37.154,-8.728,2.4,Barlavento International Primary School,British,Lagos,5.5,Hospital de Lagos,ULS Algarve,7.4,Hospital de Lagos,SNS,7.4
+0808,Loulé,loule,mainland,37.2199,-8.0623,2.4,Vilamoura International School,British,Loulé,13.7,Hospital de Faro,ULS Algarve,24.7,Hospital Lusíadas Vilamoura,private,16.1
+0809,Monchique,monchique,mainland,37.3174,-8.5391,1.6,Deutsche Schule Algarve,German,Silves,21.0,Hospital de Portimão,ULS Algarve,18.0,Hospital de Portimão,SNS,18.0
+0810,Olhão,olhao,mainland,37.0685,-7.7924,2.8,Colégio Santiago Internacional,other,Tavira,14.0,Hospital de Faro,ULS Algarve,13.1,Hospital de Faro,SNS,13.1
+0811,Portimão,portimao,mainland,37.1887,-8.5795,5,Deutsche Schule Algarve,German,Silves,13.8,Hospital de Portimão,ULS Algarve,5.1,Hospital de Portimão,SNS,5.1
+0812,São Brás de Alportel,sao-bras-de-alportel,mainland,37.1744,-7.8882,4.4,Nobel Algarve British International School - Almancil,British,Loulé,16.7,Hospital de Faro,ULS Algarve,17.1,Hospital CUF Faro,private,16.0
+0813,Silves,silves,mainland,37.2892,-8.3254,1.3,Deutsche Schule Algarve,German,Silves,18.2,Hospital de Portimão,ULS Algarve,24.1,Hospital Lusíadas Albufeira,private,22.3
+0814,Tavira,tavira,mainland,37.1828,-7.6825,2.3,Colégio Santiago Internacional,other,Tavira,7.2,Hospital de Faro,ULS Algarve,28.1,Hospital de Faro,SNS,28.1
+0815,Vila do Bispo,vila-do-bispo,mainland,37.0979,-8.8838,0.6,Barlavento International Primary School,British,Lagos,13.6,Hospital de Lagos,ULS Algarve,17.9,Hospital de Lagos,SNS,17.9
+0816,Vila Real de Santo António,vila-real-de-santo-antonio,mainland,37.1789,-7.5473,2.1,Colégio Santiago Internacional,other,Tavira,11.0,Hospital de Faro,ULS Algarve,37.9,Hospital de Faro,SNS,37.9
+0901,Aguiar da Beira,aguiar-da-beira,mainland,40.7955,-7.5291,2,Deutsche Schule zu Porto,German,Porto,101.2,Hospital de São Teotónio,ULS Viseu Dão-Lafões,35.7,Hospital de São Teotónio,SNS,35.7
+0902,Almeida,almeida,mainland,40.6564,-6.9109,3.6,Deutsche Schule zu Porto,German,Porto,155.3,Hospital Sousa Martins,ULS Guarda,33.8,Hospital Sousa Martins,SNS,33.8
+0903,Celorico da Beira,celorico-da-beira,mainland,40.6192,-7.3843,1.8,Deutsche Schule zu Porto,German,Porto,121.0,Hospital Sousa Martins,ULS Guarda,13.4,Hospital Sousa Martins,SNS,13.4
+0904,Figueira de Castelo Rodrigo,figueira-de-castelo-rodrigo,mainland,40.8887,-6.9524,3.1,CLIB - The Braga International School,IB,Braga,142.0,Hospital Sousa Martins,ULS Guarda,48.1,Hospital Sousa Martins,SNS,48.1
+0905,Fornos de Algodres,fornos-de-algodres,mainland,40.6586,-7.5022,3.6,Deutsche Schule zu Porto,German,Porto,110.2,Hospital Sousa Martins,ULS Guarda,23.8,Hospital Sousa Martins,SNS,23.8
+0906,Gouveia,gouveia,mainland,40.4965,-7.5822,2.3,Deutsche Schule zu Porto,German,Porto,115.0,Hospital Sousa Martins,ULS Guarda,26.2,Hospital Sousa Martins,SNS,26.2
+0907,Guarda,guarda,mainland,40.5247,-7.2492,8.2,Deutsche Schule zu Porto,German,Porto,136.1,Hospital Sousa Martins,ULS Guarda,2.4,Hospital Sousa Martins,SNS,2.4
+0908,Manteigas,manteigas,mainland,40.3599,-7.5545,3,Deutsche Schule zu Porto,German,Porto,126.9,Hospital Pêro da Covilhã,ULS Cova da Beira,11.6,Hospital Pêro da Covilhã,SNS,11.6
+0909,Mêda,meda,mainland,40.9332,-7.2577,1.8,CLIB - The Braga International School,IB,Braga,118.1,Hospital Sousa Martins,ULS Guarda,44.7,Hospital Sousa Martins,SNS,44.7
+0910,Pinhel,pinhel,mainland,40.7322,-7.0969,2.9,Deutsche Schule zu Porto,German,Porto,137.6,Hospital Sousa Martins,ULS Guarda,26.9,Hospital Sousa Martins,SNS,26.9
+0911,Sabugal,sabugal,mainland,40.3808,-6.9458,1.7,Deutsche Schule zu Porto,German,Porto,166.4,Hospital Sousa Martins,ULS Guarda,32.6,Hospital Sousa Martins,SNS,32.6
+0912,Seia,seia,mainland,40.3624,-7.6841,3.1,Deutsche Schule zu Porto,German,Porto,119.1,Hospital Pêro da Covilhã,ULS Cova da Beira,19.4,Hospital Pêro da Covilhã,SNS,19.4
+0913,Trancoso,trancoso,mainland,40.7868,-7.3201,2.2,Deutsche Schule zu Porto,German,Porto,117.9,Hospital Sousa Martins,ULS Guarda,28.6,Hospital Sousa Martins,SNS,28.6
+0914,Vila Nova de Foz Côa,vila-nova-de-foz-coa,mainland,41.0785,-7.2635,2.4,CLIB - The Braga International School,IB,Braga,108.7,Hospital de Lamego,ULS Trás-os-Montes e Alto Douro,44.6,Hospital de Lamego,SNS,44.6
+1001,Alcobaça,alcobaca,mainland,39.5172,-8.9618,1.8,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,26.3,Hospital de Caldas da Rainha,ULS Oeste,19.1,Hospital de Caldas da Rainha,SNS,19.1
+1002,Alvaiázere,alvaiazere,mainland,39.8103,-8.3868,2,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,46.6,Hospital de Tomar,ULS Médio Tejo,22.3,Hospital de Tomar,SNS,22.3
+1003,Ansião,ansiao,mainland,39.9451,-8.4583,2,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,45.4,Hospitais da Universidade de Coimbra,ULS Coimbra,30.9,Hospitais da Universidade de Coimbra,SNS,30.9
+1004,Batalha,batalha,mainland,39.6414,-8.74,2.3,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,20.2,Hospital de Santo André,ULS Região de Leiria,12.3,Hospital de Santo André,SNS,12.3
+1005,Bombarral,bombarral,mainland,39.2809,-9.1559,1.7,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,56.0,Hospital de Caldas da Rainha,ULS Oeste,13.9,Hospital de Caldas da Rainha,SNS,13.9
+1006,Caldas da Rainha,caldas-da-rainha,mainland,39.4174,-9.0646,3.6,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,39.1,Hospital de Caldas da Rainha,ULS Oeste,5.8,Hospital de Caldas da Rainha,SNS,5.8
+1007,Castanheira de Pêra,castanheira-de-pera,mainland,40.0111,-8.2033,0.7,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,68.1,Hospitais da Universidade de Coimbra,ULS Coimbra,29.3,Hospitais da Universidade de Coimbra,SNS,29.3
+1008,Figueiró dos Vinhos,figueiro-dos-vinhos,mainland,39.9356,-8.3051,3.1,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,56.9,Hospitais da Universidade de Coimbra,ULS Coimbra,33.0,Hospitais da Universidade de Coimbra,SNS,33.0
+1009,Leiria,leiria,mainland,39.7729,-8.7809,4.9,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,12.7,Hospital de Santo André,ULS Região de Leiria,3.5,Hospital de Santo André,SNS,3.5
+1010,Marinha Grande,marinha-grande,mainland,39.7809,-8.9611,1.7,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,4.3,Hospital de Santo André,ULS Região de Leiria,14.8,Hospital CUF Leiria,private,12.9
+1011,Nazaré,nazare,mainland,39.6065,-9.0397,2,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,18.9,Hospital de Caldas da Rainha,ULS Oeste,23.8,Hospital de Caldas da Rainha,SNS,23.8
+1012,Óbidos,obidos,mainland,39.3616,-9.2291,1.9,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,50.6,Hospital de Caldas da Rainha,ULS Oeste,9.7,Hospital de Caldas da Rainha,SNS,9.7
+1013,Pedrógão Grande,pedrogao-grande,mainland,39.9252,-8.1767,0.5,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,66.9,Hospitais da Universidade de Coimbra,ULS Coimbra,38.5,Hospitais da Universidade de Coimbra,SNS,38.5
+1014,Peniche,peniche,mainland,39.3349,-9.3114,1.6,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,56.9,Hospital de Peniche,ULS Oeste,6.9,Hospital de Peniche,SNS,6.9
+1015,Pombal,pombal,mainland,39.9013,-8.6208,2.4,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,30.9,Hospital de Santo André,ULS Região de Leiria,23.0,Hospital de Santo André,SNS,23.0
+1016,Porto de Mós,porto-de-mos,mainland,39.5593,-8.8018,1.9,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,24.0,Hospital de Santo André,ULS Região de Leiria,20.5,Hospital de Santo André,SNS,20.5
+1101,Alenquer,alenquer,mainland,39.0995,-9.0327,1.7,United Lisbon International School,American,Lisboa,38.7,Hospital de Vila Franca de Xira,ULS Estuário do Tejo,14.2,Hospital de Vila Franca de Xira,SNS,14.2
+1102,Arruda dos Vinhos,arruda-dos-vinhos,mainland,38.9886,-9.0623,3.3,United Lisbon International School,American,Lisboa,26.1,Hospital de Vila Franca de Xira,ULS Estuário do Tejo,6.8,Hospital de Vila Franca de Xira,SNS,6.8
+1103,Azambuja,azambuja,mainland,39.0792,-8.8767,1.2,United Lisbon International School,American,Lisboa,41.1,Hospital de Vila Franca de Xira,ULS Estuário do Tejo,14.7,Hospital de Vila Franca de Xira,SNS,14.7
+1104,Cadaval,cadaval,mainland,39.239,-9.057,0.8,United Lisbon International School,American,Lisboa,53.8,Hospital de Caldas da Rainha,ULS Oeste,19.4,Hospital de Caldas da Rainha,SNS,19.4
+1105,Cascais,cascais,mainland,38.7294,-9.4378,7.7,St. George's School,British,Cascais,1.1,Hospital de Cascais Dr. José de Almeida,"Hospital de Cascais (PPP, SNS)",1.7,Hospital de Cascais Dr. José de Almeida,SNS,1.7
+1106,Lisboa,lisboa,mainland,38.7463,-9.1514,15.3,Queen Elizabeth's School,British,Lisboa,1.5,Hospital de Santa Maria,ULS Santa Maria,0.9,Hospital de Santa Maria,SNS,0.9
+1107,Loures,loures,mainland,38.8606,-9.1657,3.6,Deutsche Schule Lissabon,German,Lisboa,11.4,Hospital Beatriz Ângelo,ULS Loures-Odivelas,4.4,Hospital Beatriz Ângelo,SNS,4.4
+1108,Lourinhã,lourinha,mainland,39.2598,-9.2555,1.8,Carlucci American International School of Lisbon,American,Sintra,55.7,Hospital de Peniche,ULS Oeste,15.9,Hospital de Peniche,SNS,15.9
+1109,Mafra,mafra,mainland,38.9458,-9.3135,3,Carlucci American International School of Lisbon,American,Sintra,20.6,Hospital de Torres Vedras,ULS Oeste,16.3,Hospital CUF Torres Vedras,private,15.7
+1110,Oeiras,oeiras,mainland,38.7227,-9.288,10.5,Oeiras International School,IB,Oeiras,1.0,Hospital Prof. Doutor Fernando Fonseca,ULS Amadora/Sintra,4.3,Hospital da Luz Oeiras,private,2.8
+1111,Sintra,sintra,mainland,38.8279,-9.3879,2.5,Carlucci American International School of Lisbon,American,Sintra,6.7,Hospital de Cascais Dr. José de Almeida,"Hospital de Cascais (PPP, SNS)",11.2,Hospital CUF Sintra,private,6.0
+1112,Sobral de Monte Agraço,sobral-de-monte-agraco,mainland,39.0108,-9.1396,2.2,Deutsche Schule Lissabon,German,Lisboa,28.1,Hospital de Torres Vedras,ULS Oeste,13.2,Hospital CUF Torres Vedras,private,12.9
+1113,Torres Vedras,torres-vedras,mainland,39.1055,-9.2508,2.7,Carlucci American International School of Lisbon,American,Sintra,39.1,Hospital de Torres Vedras,ULS Oeste,2.2,Hospital de Torres Vedras,SNS,2.2
+1114,Vila Franca de Xira,vila-franca-de-xira,mainland,38.92,-8.9746,2.5,United Lisbon International School,American,Lisboa,21.5,Hospital de Vila Franca de Xira,ULS Estuário do Tejo,6.5,Hospital de Vila Franca de Xira,SNS,6.5
+1115,Amadora,amadora,mainland,38.7607,-9.228,3.4,Deutsche Schule Lissabon,German,Lisboa,5.6,Hospital Prof. Doutor Fernando Fonseca,ULS Amadora/Sintra,2.5,Hospital da Luz Amadora,private,1.3
+1116,Odivelas,odivelas,mainland,38.7925,-9.1984,3.4,Deutsche Schule Lissabon,German,Lisboa,4.9,Hospital Beatriz Ângelo,ULS Loures-Odivelas,3.8,Trofa Saúde Amadora,private,2.6
+1201,Alter do Chão,alter-do-chao,mainland,39.2081,-7.7407,1.3,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,118.4,Hospital Dr. José Maria Grande,ULS Alto Alentejo,28.8,Hospital Dr. José Maria Grande,SNS,28.8
+1202,Arronches,arronches,mainland,39.1279,-7.2513,1.8,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,159.8,Hospital Dr. José Maria Grande,ULS Alto Alentejo,24.5,Hospital Dr. José Maria Grande,SNS,24.5
+1203,Avis,avis,mainland,39.0948,-7.8772,1.1,United Lisbon International School,American,Lisboa,112.9,Hospital Dr. José Maria Grande,ULS Alto Alentejo,45.0,Hospital Dr. José Maria Grande,SNS,45.0
+1204,Campo Maior,campo-maior,mainland,39.0296,-7.0395,4,St. Peter's International School / International School of Palmela,British,Palmela,177.4,Hospital de Santa Luzia de Elvas,ULS Alto Alentejo,20.2,Hospital de Santa Luzia de Elvas,SNS,20.2
+1205,Castelo de Vide,castelo-de-vide,mainland,39.4579,-7.4996,5,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,126.6,Hospital Dr. José Maria Grande,ULS Alto Alentejo,18.6,Hospital Dr. José Maria Grande,SNS,18.6
+1206,Crato,crato,mainland,39.2987,-7.607,2.1,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,123.9,Hospital Dr. José Maria Grande,ULS Alto Alentejo,15.4,Hospital Dr. José Maria Grande,SNS,15.4
+1207,Elvas,elvas,mainland,38.9487,-7.2515,6.2,St. Peter's International School / International School of Palmela,British,Palmela,157.4,Hospital de Santa Luzia de Elvas,ULS Alto Alentejo,11.2,Hospital de Santa Luzia de Elvas,SNS,11.2
+1208,Fronteira,fronteira,mainland,39.0778,-7.6107,1.7,St. Peter's International School / International School of Palmela,British,Palmela,133.0,Hospital Dr. José Maria Grande,ULS Alto Alentejo,29.3,Hospital Dr. José Maria Grande,SNS,29.3
+1209,Gavião,gaviao,mainland,39.4074,-7.8761,0.9,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,97.9,Hospital de Abrantes,ULS Médio Tejo,28.2,Hospital de Abrantes,SNS,28.2
+1210,Marvão,marvao,mainland,39.4226,-7.3564,1.7,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,139.5,Hospital Dr. José Maria Grande,ULS Alto Alentejo,14.9,Hospital Dr. José Maria Grande,SNS,14.9
+1211,Monforte,monforte,mainland,39.0469,-7.4343,1,St. Peter's International School / International School of Palmela,British,Palmela,145.7,Hospital Dr. José Maria Grande,ULS Alto Alentejo,28.2,Hospital Dr. José Maria Grande,SNS,28.2
+1212,Nisa,nisa,mainland,39.526,-7.6668,2.3,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,110.8,Hospital Dr. José Maria Grande,ULS Alto Alentejo,32.4,Hospital Dr. José Maria Grande,SNS,32.4
+1213,Ponte de Sor,ponte-de-sor,mainland,39.1074,-8.1886,2,United Lisbon International School,American,Lisboa,88.6,Hospital de Abrantes,ULS Médio Tejo,38.8,Hospital de Abrantes,SNS,38.8
+1214,Portalegre,portalegre,mainland,39.2559,-7.432,4.7,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,139.6,Hospital Dr. José Maria Grande,ULS Alto Alentejo,4.9,Hospital Dr. José Maria Grande,SNS,4.9
+1215,Sousel,sousel,mainland,38.9503,-7.8356,0.9,St. Peter's International School / International School of Palmela,British,Palmela,109.5,Hospital do Espírito Santo de Évora,ULS Alentejo Central,42.8,Hospital do Espírito Santo de Évora,SNS,42.8
+1301,Amarante,amarante,mainland,41.2609,-8.0287,3.3,CLIB - The Braga International School,IB,Braga,45.6,Hospital de Vila Real (São Pedro),ULS Trás-os-Montes e Alto Douro,23.0,Hospital CUF Arrifana de Sousa,private,22.2
+1302,Baião,baiao,mainland,41.1571,-8.0021,1.6,Deutsche Schule zu Porto,German,Porto,53.2,Hospital de Lamego,ULS Trás-os-Montes e Alto Douro,19.1,Hospital de Lamego,SNS,19.1
+1303,Felgueiras,felgueiras,mainland,41.3542,-8.1962,2.8,CLIB - The Braga International School,IB,Braga,28.9,Hospital da Senhora da Oliveira,ULS Alto Ave,13.4,Hospital da Senhora da Oliveira,SNS,13.4
+1304,Gondomar,gondomar,mainland,41.1065,-8.4957,4.9,Deutsche Schule zu Porto,German,Porto,13.0,Hospital Eduardo Santos Silva,ULS Gaia/Espinho,8.1,Hospital Eduardo Santos Silva,SNS,8.1
+1305,Lousada,lousada,mainland,41.2806,-8.29,2,Deutsche Schule zu Porto,German,Porto,32.3,Hospital Padre Américo,ULS Tâmega e Sousa,9.5,Hospital CUF Arrifana de Sousa,private,8.0
+1306,Maia,maia,mainland,41.2529,-8.6116,8,CLIP - Oporto International School,British,Porto,10.1,Hospital de São João,ULS São João,8.0,Hospital Lusíadas Maia,private,3.5
+1307,Marco de Canaveses,marco-de-canaveses,mainland,41.1705,-8.1445,2.3,Deutsche Schule zu Porto,German,Porto,41.3,Hospital Padre Américo,ULS Tâmega e Sousa,14.1,Hospital CUF Arrifana de Sousa,private,12.5
+1308,Matosinhos,matosinhos,mainland,41.2004,-8.6822,10.8,CLIP - Oporto International School,British,Porto,3.2,Hospital Pedro Hispano,ULS Matosinhos,2.6,Hospital Pedro Hispano,SNS,2.6
+1309,Paços de Ferreira,pacos-de-ferreira,mainland,41.293,-8.369,3.2,Deutsche Schule zu Porto,German,Porto,27.3,Hospital de Santo Tirso,ULS Médio Ave,10.8,Hospital de Santo Tirso,SNS,10.8
+1310,Paredes,paredes,mainland,41.1969,-8.4,3.1,Deutsche Schule zu Porto,German,Porto,20.4,Hospital Padre Américo,ULS Tâmega e Sousa,7.6,Hospital Padre Américo,SNS,7.6
+1311,Penafiel,penafiel,mainland,41.1519,-8.2886,3.8,Deutsche Schule zu Porto,German,Porto,29.2,Hospital Padre Américo,ULS Tâmega e Sousa,5.3,Hospital Padre Américo,SNS,5.3
+1312,Porto,porto,mainland,41.1632,-8.6075,20.7,Deutsche Schule zu Porto,German,Porto,2.7,Centro Materno-Infantil do Norte,ULS Santo António,1.9,Hospital CUF Trindade,private,1.3
+1313,Póvoa de Varzim,povoa-de-varzim,mainland,41.4237,-8.7495,6.3,CLIP - Oporto International School,British,Porto,28.6,Hospital da Póvoa de Varzim,ULS Póvoa de Varzim/Vila do Conde,4.6,Hospital da Luz Póvoa de Varzim,private,3.5
+1314,Santo Tirso,santo-tirso,mainland,41.3255,-8.4642,5.3,Deutsche Schule zu Porto,German,Porto,23.9,Hospital de Santo Tirso,ULS Médio Ave,2.3,Hospital de Santo Tirso,SNS,2.3
+1315,Valongo,valongo,mainland,41.2069,-8.487,4.2,Deutsche Schule zu Porto,German,Porto,13.9,Hospital de São João,ULS São João,10.0,Hospital de São João,SNS,10.0
+1316,Vila do Conde,vila-do-conde,mainland,41.3273,-8.6867,5.7,CLIP - Oporto International School,British,Porto,17.2,Hospital da Póvoa de Varzim,ULS Póvoa de Varzim/Vila do Conde,8.6,Trofa Saúde Senhor do Bonfim,private,7.0
+1317,Vila Nova de Gaia,vila-nova-de-gaia,mainland,41.081,-8.6021,7.1,Deutsche Schule zu Porto,German,Porto,8.6,Hospital Eduardo Santos Silva,ULS Gaia/Espinho,2.7,Hospital Eduardo Santos Silva,SNS,2.7
+1318,Trofa,trofa,mainland,41.3086,-8.5643,3.9,CLIP - Oporto International School,British,Porto,17.5,Hospital de Santo Tirso,ULS Médio Ave,7.9,Trofa Saúde Hospital da Trofa,private,4.1
+1401,Abrantes,abrantes,mainland,39.3928,-8.1361,3,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,78.7,Hospital de Abrantes,ULS Médio Tejo,8.9,Hospital de Abrantes,SNS,8.9
+1402,Alcanena,alcanena,mainland,39.4614,-8.6764,2.2,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,38.8,Hospital de Torres Novas,ULS Médio Tejo,12.0,Hospital de Torres Novas,SNS,12.0
+1403,Almeirim,almeirim,mainland,39.1755,-8.6361,2.2,United Lisbon International School,American,Lisboa,61.9,Hospital Distrital de Santarém,ULS Lezíria,9.0,Hospital Distrital de Santarém,SNS,9.0
+1404,Alpiarça,alpiarca,mainland,39.251,-8.5843,1.3,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,63.0,Hospital Distrital de Santarém,ULS Lezíria,9.7,Hospital Distrital de Santarém,SNS,9.7
+1405,Benavente,benavente,mainland,38.8632,-8.8094,1.7,United Lisbon International School,American,Lisboa,28.4,Hospital de Vila Franca de Xira,ULS Estuário do Tejo,19.8,Hospital de Vila Franca de Xira,SNS,19.8
+1406,Cartaxo,cartaxo,mainland,39.1503,-8.7863,2.3,United Lisbon International School,American,Lisboa,51.9,Hospital Distrital de Santarém,ULS Lezíria,12.7,Hospital CUF Santarém,private,12.5
+1407,Chamusca,chamusca,mainland,39.2683,-8.3805,1,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,71.4,Hospital de Torres Novas,ULS Médio Tejo,26.0,Hospital de Torres Novas,SNS,26.0
+1408,Constância,constancia,mainland,39.3731,-8.2701,1.5,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,70.3,Hospital de Abrantes,ULS Médio Tejo,11.1,Hospital de Abrantes,SNS,11.1
+1409,Coruche,coruche,mainland,38.9589,-8.4683,1.9,United Lisbon International School,American,Lisboa,59.8,Hospital Distrital de Santarém,ULS Lezíria,37.0,Hospital Distrital de Santarém,SNS,37.0
+1410,Entroncamento,entroncamento,mainland,39.4602,-8.4801,3.2,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,50.2,Hospital de Torres Novas,ULS Médio Tejo,4.9,Hospital de Torres Novas,SNS,4.9
+1411,Ferreira do Zêzere,ferreira-do-zezere,mainland,39.7271,-8.2934,0.9,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,54.2,Hospital de Tomar,ULS Médio Tejo,15.7,Hospital de Tomar,SNS,15.7
+1412,Golegã,golega,mainland,39.366,-8.5349,1.4,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,54.5,Hospital de Torres Novas,ULS Médio Tejo,11.4,Hospital de Torres Novas,SNS,11.4
+1413,Mação,macao,mainland,39.6121,-7.9926,1.3,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,81.5,Hospital de Abrantes,ULS Médio Tejo,24.8,Hospital de Abrantes,SNS,24.8
+1414,Rio Maior,rio-maior,mainland,39.3207,-8.9095,1.8,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,48.0,Hospital Distrital de Santarém,ULS Lezíria,20.4,Hospital CUF Santarém,private,19.7
+1415,Salvaterra de Magos,salvaterra-de-magos,mainland,39.0462,-8.6887,1.5,United Lisbon International School,American,Lisboa,48.5,Hospital Distrital de Santarém,ULS Lezíria,21.7,Hospital Distrital de Santarém,SNS,21.7
+1416,Santarém,santarem,mainland,39.3125,-8.7094,5.2,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,52.3,Hospital Distrital de Santarém,ULS Lezíria,8.0,Hospital CUF Santarém,private,7.8
+1417,Sardoal,sardoal,mainland,39.5711,-8.1391,2.2,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,70.4,Hospital de Abrantes,ULS Médio Tejo,13.8,Hospital de Abrantes,SNS,13.8
+1418,Tomar,tomar,mainland,39.5954,-8.3906,3.1,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,49.1,Hospital de Tomar,ULS Médio Tejo,1.6,Hospital de Tomar,SNS,1.6
+1419,Torres Novas,torres-novas,mainland,39.5045,-8.5575,4,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,42.0,Hospital de Torres Novas,ULS Médio Tejo,4.4,Hospital de Torres Novas,SNS,4.4
+1420,Vila Nova da Barquinha,vila-nova-da-barquinha,mainland,39.4829,-8.4315,1.3,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,51.9,Hospital de Torres Novas,ULS Médio Tejo,9.2,Hospital de Torres Novas,SNS,9.2
+1421,Ourém,ourem,mainland,39.7121,-8.5639,1.4,CLIC - Colégio Luso-Internacional do Centro,other,Marinha Grande,31.4,Hospital de Tomar,ULS Médio Tejo,18.4,Hospital de Tomar,SNS,18.4
+1501,Alcácer do Sal,alcacer-do-sal,mainland,38.3833,-8.5074,0.9,St. Peter's International School / International School of Palmela,British,Palmela,47.7,Hospital de São Bernardo,ULS Arrábida,36.3,Hospital de São Bernardo,SNS,36.3
+1502,Alcochete,alcochete,mainland,38.7117,-8.8681,3.9,St. Peter's International School / International School of Palmela,British,Palmela,19.5,Hospital Nossa Senhora do Rosário,ULS Arco Ribeirinho,17.6,Hospital Nossa Senhora do Rosário,SNS,17.6
+1503,Almada,almada,mainland,38.6463,-9.2033,4.5,PaRK International School - Restelo,British,Lisboa,7.0,Hospital Garcia de Orta,ULS Almada-Seixal,3.8,Hospital Garcia de Orta,SNS,3.8
+1504,Barreiro,barreiro,mainland,38.6104,-9.0329,3.1,St. Peter's International School / International School of Palmela,British,Palmela,5.3,Hospital Nossa Senhora do Rosário,ULS Arco Ribeirinho,5.4,Hospital Nossa Senhora do Rosário,SNS,5.4
+1505,Grândola,grandola,mainland,38.1445,-8.4925,1.6,St. Peter's International School / International School of Palmela,British,Palmela,64.8,Hospital do Litoral Alentejano,ULS Litoral Alentejano,24.0,Hospital do Litoral Alentejano,SNS,24.0
+1506,Moita,moita,mainland,38.6614,-9.0068,1.4,St. Peter's International School / International School of Palmela,British,Palmela,10.2,Hospital Nossa Senhora do Rosário,ULS Arco Ribeirinho,4.4,Hospital Nossa Senhora do Rosário,SNS,4.4
+1507,Montijo,montijo,mainland,38.7257,-8.6401,2.6,St. Peter's International School / International School of Palmela,British,Palmela,35.8,Hospital de São Bernardo,ULS Arrábida,30.2,Hospital de São Bernardo,SNS,30.2
+1508,Palmela,palmela,mainland,38.6245,-8.8167,3.6,St. Peter's International School / International School of Palmela,British,Palmela,17.1,Hospital de São Bernardo,ULS Arrábida,12.0,Hospital de São Bernardo,SNS,12.0
+1509,Santiago do Cacém,santiago-do-cacem,mainland,37.9538,-8.581,3.4,St. Peter's International School / International School of Palmela,British,Palmela,77.7,Hospital do Litoral Alentejano,ULS Litoral Alentejano,16.4,Hospital do Litoral Alentejano,SNS,16.4
+1510,Seixal,seixal,mainland,38.6075,-9.0998,2.4,St. Peter's International School / International School of Palmela,British,Palmela,9.6,Hospital Nossa Senhora do Rosário,ULS Arco Ribeirinho,6.4,Hospital Nossa Senhora do Rosário,SNS,6.4
+1511,Sesimbra,sesimbra,mainland,38.4986,-9.1243,2,St. Peter's International School / International School of Palmela,British,Palmela,13.4,Hospital Nossa Senhora do Rosário,ULS Arco Ribeirinho,18.3,Hospital Nossa Senhora do Rosário,SNS,18.3
+1512,Setúbal,setubal,mainland,38.5085,-8.7935,4.8,St. Peter's International School / International School of Palmela,British,Palmela,19.3,Hospital de São Bernardo,ULS Arrábida,7.9,Hospital de São Bernardo,SNS,7.9
+1513,Sines,sines,mainland,37.909,-8.7543,2.1,St. Peter's International School / International School of Palmela,British,Palmela,76.6,Hospital do Litoral Alentejano,ULS Litoral Alentejano,14.7,Hospital CUF Sines,private,11.1
+1601,Arcos de Valdevez,arcos-de-valdevez,mainland,41.8968,-8.3693,2.9,CLIB - The Braga International School,IB,Braga,36.4,Hospital de Braga,ULS Braga,36.7,Trofa Saúde Braga Norte,private,35.7
+1602,Caminha,caminha,mainland,41.8539,-8.8042,5.5,CLIB - The Braga International School,IB,Braga,46.8,Hospital de Santa Luzia,ULS Alto Minho,17.6,Hospital de Santa Luzia,SNS,17.6
+1603,Melgaço,melgaco,mainland,42.0684,-8.244,3.1,CLIB - The Braga International School,IB,Braga,56.7,Hospital de Braga,ULS Braga,57.2,Trofa Saúde Braga Norte,private,56.5
+1604,Monção,moncao,mainland,42.0271,-8.4654,3.2,CLIB - The Braga International School,IB,Braga,51.2,Hospital de Santa Luzia,ULS Alto Minho,47.7,Hospital de Santa Luzia,SNS,47.7
+1605,Paredes de Coura,paredes-de-coura,mainland,41.9178,-8.5542,1.5,CLIB - The Braga International School,IB,Braga,41.0,Hospital de Santa Luzia,ULS Alto Minho,33.7,Hospital de Santa Luzia,SNS,33.7
+1606,Ponte da Barca,ponte-da-barca,mainland,41.8218,-8.2574,2.7,CLIB - The Braga International School,IB,Braga,30.0,Hospital de Braga,ULS Braga,30.6,Trofa Saúde Braga Norte,private,30.5
+1607,Ponte de Lima,ponte-de-lima,mainland,41.7691,-8.5931,3.6,CLIB - The Braga International School,IB,Braga,27.9,Hospital de Santa Luzia,ULS Alto Minho,21.4,Hospital de Santa Luzia,SNS,21.4
+1608,Valença,valenca,mainland,42.0028,-8.6091,1.8,CLIB - The Braga International School,IB,Braga,51.5,Hospital de Santa Luzia,ULS Alto Minho,38.7,Hospital de Santa Luzia,SNS,38.7
+1609,Viana do Castelo,viana-do-castelo,mainland,41.7115,-8.7531,6.5,CLIB - The Braga International School,IB,Braga,34.1,Hospital de Santa Luzia,ULS Alto Minho,6.8,Hospital de Santa Luzia,SNS,6.8
+1610,Vila Nova de Cerveira,vila-nova-de-cerveira,mainland,41.9175,-8.71,2.5,CLIB - The Braga International School,IB,Braga,47.0,Hospital de Santa Luzia,ULS Alto Minho,26.6,Hospital de Santa Luzia,SNS,26.6
+1701,Alijó,alijo,mainland,41.302,-7.4725,1.6,CLIB - The Braga International School,IB,Braga,82.0,Hospital de Vila Real (São Pedro),ULS Trás-os-Montes e Alto Douro,24.1,Trofa Saúde Vila Real,private,22.0
+1702,Boticas,boticas,mainland,41.655,-7.8083,1.7,CLIB - The Braga International School,IB,Braga,49.2,Hospital de Chaves,ULS Trás-os-Montes e Alto Douro,29.2,Hospital de Chaves,SNS,29.2
+1703,Chaves,chaves,mainland,41.7482,-7.4828,6.6,CLIB - The Braga International School,IB,Braga,77.8,Hospital de Chaves,ULS Trás-os-Montes e Alto Douro,0.6,Hospital de Chaves,SNS,0.6
+1704,Mesão Frio,mesao-frio,mainland,41.1694,-7.8469,4.7,CLIB - The Braga International School,IB,Braga,63.5,Hospital de Lamego,ULS Trás-os-Montes e Alto Douro,10.5,Hospital de Lamego,SNS,10.5
+1705,Mondim de Basto,mondim-de-basto,mainland,41.3807,-7.8924,2.1,CLIB - The Braga International School,IB,Braga,46.4,Hospital de Vila Real (São Pedro),ULS Trás-os-Montes e Alto Douro,13.5,Hospital de Vila Real (São Pedro),SNS,13.5
+1706,Montalegre,montalegre,mainland,41.7813,-7.937,2.1,CLIB - The Braga International School,IB,Braga,44.3,Hospital de Chaves,ULS Trás-os-Montes e Alto Douro,38.3,Hospital de Chaves,SNS,38.3
+1707,Murça,murca,mainland,41.4345,-7.4429,1.8,CLIB - The Braga International School,IB,Braga,80.2,Hospital de Mirandela,ULS Nordeste,21.8,Hospital de Mirandela,SNS,21.8
+1708,Peso da Régua,peso-da-regua,mainland,41.1735,-7.7068,3.1,CLIB - The Braga International School,IB,Braga,72.0,Hospital de Lamego,ULS Trás-os-Montes e Alto Douro,12.5,Hospital de Lamego,SNS,12.5
+1709,Ribeira de Pena,ribeira-de-pena,mainland,41.4804,-7.8293,1.5,CLIB - The Braga International School,IB,Braga,47.6,Hospital de Vila Real (São Pedro),ULS Trás-os-Montes e Alto Douro,19.8,Hospital de Vila Real (São Pedro),SNS,19.8
+1710,Sabrosa,sabrosa,mainland,41.2292,-7.5958,1.8,CLIB - The Braga International School,IB,Braga,76.2,Hospital de Vila Real (São Pedro),ULS Trás-os-Montes e Alto Douro,16.4,Trofa Saúde Vila Real,private,13.9
+1711,Santa Marta de Penaguião,santa-marta-de-penaguiao,mainland,41.2221,-7.8019,2,CLIB - The Braga International School,IB,Braga,62.4,Hospital de Vila Real (São Pedro),ULS Trás-os-Montes e Alto Douro,10.3,Hospital da Luz Vila Real,private,9.4
+1712,Valpaços,valpacos,mainland,41.588,-7.3466,2.6,CLIB - The Braga International School,IB,Braga,86.7,Hospital de Mirandela,ULS Nordeste,17.4,Hospital de Mirandela,SNS,17.4
+1713,Vila Pouca de Aguiar,vila-pouca-de-aguiar,mainland,41.5117,-7.6145,3.1,CLIB - The Braga International School,IB,Braga,64.7,Hospital de Vila Real (São Pedro),ULS Trás-os-Montes e Alto Douro,25.5,Hospital de Vila Real (São Pedro),SNS,25.5
+1714,Vila Real,vila-real,mainland,41.332,-7.7044,8.6,CLIB - The Braga International School,IB,Braga,62.9,Hospital de Vila Real (São Pedro),ULS Trás-os-Montes e Alto Douro,5.3,Trofa Saúde Vila Real,private,4.8
+1801,Armamar,armamar,mainland,41.1034,-7.6745,1.4,CLIB - The Braga International School,IB,Braga,79.0,Hospital de Lamego,ULS Trás-os-Montes e Alto Douro,10.4,Hospital de Lamego,SNS,10.4
+1802,Carregal do Sal,carregal-do-sal,mainland,40.4632,-7.969,1.6,Deutsche Schule zu Porto,German,Porto,95.2,Hospital de São Teotónio,ULS Viseu Dão-Lafões,21.5,Hospital CUF Viseu,private,20.8
+1803,Castro Daire,castro-daire,mainland,40.9126,-7.9354,2.2,Deutsche Schule zu Porto,German,Porto,64.7,Hospital de Lamego,ULS Trás-os-Montes e Alto Douro,22.3,Hospital de Lamego,SNS,22.3
+1804,Cinfães,cinfaes,mainland,41.0377,-8.1609,1.1,Deutsche Schule zu Porto,German,Porto,42.0,Hospital Padre Américo,ULS Tâmega e Sousa,21.6,Hospital Padre Américo,SNS,21.6
+1805,Lamego,lamego,mainland,41.0905,-7.8069,5,Deutsche Schule zu Porto,German,Porto,69.9,Hospital de Lamego,ULS Trás-os-Montes e Alto Douro,1.2,Hospital de Lamego,SNS,1.2
+1806,Mangualde,mangualde,mainland,40.594,-7.766,2.5,Deutsche Schule zu Porto,German,Porto,96.2,Hospital de São Teotónio,ULS Viseu Dão-Lafões,13.4,Hospital de São Teotónio,SNS,13.4
+1807,Moimenta da Beira,moimenta-da-beira,mainland,40.9634,-7.6371,3,Deutsche Schule zu Porto,German,Porto,86.5,Hospital de Lamego,ULS Trás-os-Montes e Alto Douro,18.9,Hospital de Lamego,SNS,18.9
+1808,Mortágua,mortagua,mainland,40.4159,-8.2451,3.4,Deutsche Schule zu Porto,German,Porto,88.5,Hospital Pediátrico de Coimbra,ULS Coimbra,25.7,Hospital Pediátrico de Coimbra,SNS,25.7
+1809,Nelas,nelas,mainland,40.5323,-7.8742,3.2,Deutsche Schule zu Porto,German,Porto,94.3,Hospital de São Teotónio,ULS Viseu Dão-Lafões,13.4,Hospital CUF Viseu,private,12.9
+1810,Oliveira de Frades,oliveira-de-frades,mainland,40.7195,-8.2722,2,Deutsche Schule zu Porto,German,Porto,57.2,Hospital de São Teotónio,ULS Viseu Dão-Lafões,31.8,Trofa Saúde São João da Madeira,private,26.3
+1811,Penalva do Castelo,penalva-do-castelo,mainland,40.6685,-7.6625,2.2,Deutsche Schule zu Porto,German,Porto,98.1,Hospital de São Teotónio,ULS Viseu Dão-Lafões,20.7,Hospital de São Teotónio,SNS,20.7
+1812,Penedono,penedono,mainland,40.999,-7.4179,1.2,CLIB - The Braga International School,IB,Braga,103.0,Hospital de Lamego,ULS Trás-os-Montes e Alto Douro,33.1,Hospital de Lamego,SNS,33.1
+1813,Resende,resende,mainland,41.068,-7.9487,1.9,Deutsche Schule zu Porto,German,Porto,58.5,Hospital de Lamego,ULS Trás-os-Montes e Alto Douro,12.9,Hospital de Lamego,SNS,12.9
+1814,Santa Comba Dão,santa-comba-dao,mainland,40.4037,-8.1115,2.8,Deutsche Schule zu Porto,German,Porto,94.5,Hospital de São Teotónio,ULS Viseu Dão-Lafões,32.4,Hospital CUF Viseu,private,31.7
+1815,São João da Pesqueira,sao-joao-da-pesqueira,mainland,41.1472,-7.4351,1.9,CLIB - The Braga International School,IB,Braga,92.4,Hospital de Lamego,ULS Trás-os-Montes e Alto Douro,31.1,Trofa Saúde Vila Real,private,30.1
+1816,São Pedro do Sul,sao-pedro-do-sul,mainland,40.8175,-8.0555,4.7,Deutsche Schule zu Porto,German,Porto,61.5,Hospital de São Teotónio,ULS Viseu Dão-Lafões,22.4,Hospital de São Teotónio,SNS,22.4
+1817,Sátão,satao,mainland,40.7627,-7.6723,3.4,Deutsche Schule zu Porto,German,Porto,92.0,Hospital de São Teotónio,ULS Viseu Dão-Lafões,23.4,Hospital de São Teotónio,SNS,23.4
+1818,Sernancelhe,sernancelhe,mainland,40.924,-7.4928,1.6,Deutsche Schule zu Porto,German,Porto,99.3,Hospital de Lamego,ULS Trás-os-Montes e Alto Douro,31.0,Hospital de Lamego,SNS,31.0
+1819,Tabuaço,tabuaco,mainland,41.0807,-7.5719,1.1,CLIB - The Braga International School,IB,Braga,87.2,Hospital de Lamego,ULS Trás-os-Montes e Alto Douro,18.8,Hospital de Lamego,SNS,18.8
+1820,Tarouca,tarouca,mainland,41.0064,-7.7604,2,Deutsche Schule zu Porto,German,Porto,75.3,Hospital de Lamego,ULS Trás-os-Montes e Alto Douro,9.1,Hospital de Lamego,SNS,9.1
+1821,Tondela,tondela,mainland,40.5457,-8.097,2.9,Deutsche Schule zu Porto,German,Porto,81.5,Hospital de São Teotónio,ULS Viseu Dão-Lafões,19.9,Hospital CUF Viseu,private,19.2
+1822,Vila Nova de Paiva,vila-nova-de-paiva,mainland,40.8821,-7.7692,1.8,Deutsche Schule zu Porto,German,Porto,78.9,Hospital de Lamego,ULS Trás-os-Montes e Alto Douro,22.5,Hospital de Lamego,SNS,22.5
+1823,Viseu,viseu,mainland,40.697,-7.8967,8.9,Deutsche Schule zu Porto,German,Porto,80.3,Hospital de São Teotónio,ULS Viseu Dão-Lafões,5.3,Hospital de São Teotónio,SNS,5.3
+1824,Vouzela,vouzela,mainland,40.6847,-8.1043,2,Deutsche Schule zu Porto,German,Porto,68.8,Hospital de São Teotónio,ULS Viseu Dão-Lafões,17.1,Hospital CUF Viseu,private,16.9
+3101,Calheta (R.A.M.),calheta-r-a-m,madeira,32.7716,-17.1922,1.4,International Sharing School - Madeira,British,Funchal,29.7,Hospital Dr. Nélio Mendonça,SESARAM (Madeira),28.6,Hospital CUF Madeira,private,27.2
+3102,Câmara de Lobos,camara-de-lobos,madeira,32.6756,-16.9852,2.5,International Sharing School - Madeira,British,Funchal,7.6,Hospital Dr. Nélio Mendonça,SESARAM (Madeira),6.5,Hospital CUF Madeira,private,5.1
+3103,Funchal,funchal,madeira,32.6878,-16.9242,9,International Sharing School - Madeira,British,Funchal,4.1,Hospital Dr. Nélio Mendonça,SESARAM (Madeira),4.4,Hospital da Luz Funchal,private,3.9
+3104,Machico,machico,madeira,32.7334,-16.7818,3,International Sharing School - Madeira,British,Funchal,14.8,Hospital Dr. Nélio Mendonça,SESARAM (Madeira),16.3,Hospital da Luz Funchal,private,15.2
+3105,Ponta do Sol,ponta-do-sol,madeira,32.7098,-17.1026,2.2,International Sharing School - Madeira,British,Funchal,19.3,Hospital Dr. Nélio Mendonça,SESARAM (Madeira),18.1,Hospital CUF Madeira,private,16.6
+3106,Porto Moniz,porto-moniz,madeira,32.837,-17.1816,2.5,International Sharing School - Madeira,British,Funchal,32.7,Hospital Dr. Nélio Mendonça,SESARAM (Madeira),32.0,Hospital CUF Madeira,private,30.8
+3107,Ribeira Brava,ribeira-brava,madeira,32.697,-17.0398,2.7,International Sharing School - Madeira,British,Funchal,13.3,Hospital Dr. Nélio Mendonça,SESARAM (Madeira),12.1,Hospital CUF Madeira,private,10.7
+3108,Santa Cruz,santa-cruz,madeira,32.6896,-16.8362,4.4,International Sharing School - Madeira,British,Funchal,7.8,Hospital Dr. Nélio Mendonça,SESARAM (Madeira),9.4,Hospital da Luz Funchal,private,8.3
+3109,Santana,santana,madeira,32.7818,-16.9016,1.7,International Sharing School - Madeira,British,Funchal,14.3,Hospital Dr. Nélio Mendonça,SESARAM (Madeira),15.0,Hospital da Luz Funchal,private,14.2
+3110,São Vicente,sao-vicente,madeira,32.7904,-16.9928,2.2,International Sharing School - Madeira,British,Funchal,17.2,Hospital Dr. Nélio Mendonça,SESARAM (Madeira),17.1,Hospital CUF Madeira,private,16.6
+3201,Porto Santo,porto-santo,madeira,33.076,-16.3402,1.7,International Sharing School - Madeira,British,Funchal,70.9,Hospital Dr. Nélio Mendonça,SESARAM (Madeira),72.4,Hospital da Luz Funchal,private,71.2
+4101,Vila do Porto,vila-do-porto,azores,36.98071,-25.08607,2.3,none in region,,,,Hospital do Divino Espírito Santo de Ponta Delgada,SRS Açores,100.3,Hospital CUF Açores,private,96.0
+4201,Lagoa (R.A.A.),lagoa-r-a-a,azores,37.73893,-25.51821,2.8,none in region,,,,Hospital do Divino Espírito Santo de Ponta Delgada,SRS Açores,14.0,Hospital CUF Açores,private,5.8
+4202,Nordeste,nordeste,azores,37.82357,-25.18321,1.4,none in region,,,,Hospital do Divino Espírito Santo de Ponta Delgada,SRS Açores,44.1,Hospital CUF Açores,private,36.1
+4203,Ponta Delgada,ponta-delgada,azores,37.85107,-25.77607,7,none in region,,,,Hospital do Divino Espírito Santo de Ponta Delgada,SRS Açores,14.1,Hospital do Divino Espírito Santo de Ponta Delgada,SNS,14.1
+4204,Povoação,povoacao,azores,37.76357,-25.30357,2.3,none in region,,,,Hospital do Divino Espírito Santo de Ponta Delgada,SRS Açores,32.8,Hospital CUF Açores,private,24.6
+4205,Ribeira Grande,ribeira-grande,azores,37.79929,-25.48714,2.5,none in region,,,,Hospital do Divino Espírito Santo de Ponta Delgada,SRS Açores,17.5,Hospital CUF Açores,private,10.1
+4206,Vila Franca do Campo,vila-franca-do-campo,azores,37.74857,-25.41857,2.3,none in region,,,,Hospital do Divino Espírito Santo de Ponta Delgada,SRS Açores,22.7,Hospital CUF Açores,private,14.4
+4301,Angra do Heroísmo,angra-do-heroismo,azores,38.73536,-27.32571,4.9,none in region,,,,Hospital de Santo Espírito da Ilha Terceira,SRS Açores,11.8,Hospital de Santo Espírito da Ilha Terceira,SNS,11.8
+4302,Vila da Praia da Vitória,vila-da-praia-da-vitoria,azores,38.73571,-27.10429,2.5,none in region,,,,Hospital de Santo Espírito da Ilha Terceira,SRS Açores,12.5,Hospital de Santo Espírito da Ilha Terceira,SNS,12.5
+4401,Santa Cruz da Graciosa,santa-cruz-da-graciosa,azores,39.05679,-28.02179,1,none in region,,,,Hospital da Horta,SRS Açores,79.1,Hospital da Horta,SNS,79.1
+4501,Calheta (R.A.A.),calheta-r-a-a,azores,38.62429,-27.99107,0.9,none in region,,,,Hospital da Horta,SRS Açores,57.0,Hospital da Horta,SNS,57.0
+4502,Velas,velas,azores,38.66286,-28.10071,2.7,none in region,,,,Hospital da Horta,SRS Açores,48.8,Hospital da Horta,SNS,48.8
+4601,Lajes do Pico,lajes-do-pico,azores,38.41821,-28.22571,2.6,none in region,,,,Hospital da Horta,SRS Açores,37.9,Hospital da Horta,SNS,37.9
+4602,Madalena,madalena,azores,38.50321,-28.48071,1,none in region,,,,Hospital da Horta,SRS Açores,13.9,Hospital da Horta,SNS,13.9
+4603,São Roque do Pico,sao-roque-do-pico,azores,38.51214,-28.37857,3.9,none in region,,,,Hospital da Horta,SRS Açores,22.5,Hospital da Horta,SNS,22.5
+4701,Horta,horta,azores,38.58321,-28.69786,3.6,none in region,,,,Hospital da Horta,SRS Açores,7.9,Hospital da Horta,SNS,7.9
+4801,Lajes das Flores,lajes-das-flores,azores,39.41107,-31.21929,0.7,none in region,,,,Hospital da Horta,SRS Açores,243.8,Hospital da Horta,SNS,243.8
+4802,Santa Cruz das Flores,santa-cruz-das-flores,azores,39.46607,-31.18214,2,none in region,,,,Hospital da Horta,SRS Açores,243.3,Hospital da Horta,SNS,243.3
+4901,Corvo,corvo,azores,39.7,-31.10571,2.3,none in region,,,,Hospital da Horta,SRS Açores,249.6,Hospital da Horta,SNS,249.6

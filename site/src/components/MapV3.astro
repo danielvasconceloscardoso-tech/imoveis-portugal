@@ -1,17 +1,25 @@
 ---
-// Map v3 (prompt 36, D62): Portugal as a sculpted landscape you touch. Our own basemap (sea depth, sand land, relief from
-// AWS Terrain Tiles with golden-hour light from the southwest, coastline, rivers, Playfair and Manrope labels), the price
-// as a colour field draped on the relief, a 2D / 3D switch, the budget as a gesture with a live sentence,
-// layer chips, search like Spotlight (⌘K), a time scrubber, compare, guided tours and the place as a sheet.
-// Everything self-hosted (site/public/tiles, site/public/data/map; scripts/map-data/v3_assets.py and v3_extras.py).
-// The embed keeps MapExplorer.astro. Wording: COPY_DECK.md "map3.*" and "map.*".
-import { HTML_LANG, pathFor, eur, type Lang, type EdCode } from "../i18n";
+// Map v3 (prompt 36, D62), rebuilt in three depths (D83 part 2, 3 Nov 2026: "the numbers are the cherry, not the cake").
+// 1. First glance: our own quiet basemap (sea depth, relief from AWS Terrain Tiles, coastline, rivers, Playfair and Manrope
+//    labels), the region postcards (our own photographs), the partner developments as small photo pins, a search box.
+//    No numbers, no price colours, no legend.
+// 2. A tap opens the place as a card of tiles, Apple Weather style (price, living here, schools and health; the paid tiles
+//    with a soft preview). 3. A tile opens its chart, Apple Stocks style (1A · 5A · 10A).
+// Everything the map did before is one tap away under "Camadas": the price colours and the other layers with their legend,
+// the quarterly time slider, the budget gesture, golf, beaches and developments, 2D / 3D and the guided tours.
+// Everything self-hosted (site/public/tiles, site/public/data/map; scripts/map-data/v3_assets.py, v3_extras.py, tiles.py).
+// The embed keeps MapExplorer.astro. Wording: COPY_DECK.md "map4.*", "map3.*" and "map.*".
+import { HTML_LANG, pathFor, type Lang, type EdCode } from "../i18n";
 import { EDITION_CUR, RATE } from "../lib/content";
 import { MAP_MUNIS, REGIONS, BRIEFS } from "../lib/mapdata";
 import { PRICES } from "../lib/prices";
 import { PLACES } from "../lib/places";
-import { c } from "../lib/copy";
+import { c, cl } from "../lib/copy";
 import { PROJECTS } from "../lib/projects";
+import { config } from "../config";
+import { COMPARE_SUB } from "../lib/maptiles";
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import "../styles/mapv3.css";
 
 interface Props { lang: Lang; ed: EdCode; mode?: "page" | "home"; }
@@ -26,7 +34,15 @@ const pages = new Set(PLACES.map((p) => p.slug));
 // Photographs only where they show the place named (prompt 34 §4.5).
 const photos: Record<string, string> = { lisboa: "lisboa-castelo-por-do-sol", porto: "porto-douro-entardecer", cascais: "cascais-baia", lagos: "algarve-porto-de-mos",
   funchal: "madeira-funchal-fogo", machico: "madeira-sao-lourenco", "porto-moniz": "madeira-porto-moniz" };
+// D83 part 2: one photograph per region for the postcards and the region card (content/media/SOURCES.md; CC BY ones credited on
+// /credits/). On a municipality's card without its own photograph, the region's appears with a caption naming what it shows.
+// The Centre and the Azores have no verified photograph yet: their cards are typographic.
+const regionPhotos: Record<string, string> = { north: "porto-douro-entardecer", lisbon: "lisboa-castelo-por-do-sol", alentejo: "comporta-mar-turquesa",
+  algarve: "algarve-praia-da-marinha", madeira: "madeira-levada" };
 const k = (x: string, v: Record<string, string> = {}) => c(`map3.${x}`, lang, v);
+const k4 = (x: string, v: Record<string, string> = {}) => c(`map4.${x}`, lang, v);
+const keep = (x: string, names: string[]) => c(x, lang, Object.fromEntries(names.map((n) => [n, `{${n}}`])));
+const A = config.mapAnalysis;
 const labels = {
   sentence: k("sentence", { b: "{b}", a: "{a}", pa: "{pa}", c: "{c}", pc: "{pc}" }), sentenceOne: k("sentence.one", { b: "{b}", a: "{a}", pa: "{pa}" }),
   medians: k("medians", { q: qLabel }), reach: k("reach"), budgetTap: k("budget.tap"),
@@ -44,11 +60,33 @@ const labels = {
   pfrom: c("map.proj.from", lang, { v: "{v}" }), ponreq: c("map.proj.onreq", lang), golfUnnamed: c("map.golf.unnamed", lang), nomatch: c("map.find.none", lang),
   golf: Object.fromEntries(["holes", "design", "opened", "status", "opening", "homes", "site", "src"].map((x) => [x, c(`golf.${x}`, lang, x === "opening" ? { y: "{y}" } : {})])),
   regions: Object.fromEntries(REGIONS.map((r) => [r, c(`map.r.${r}`, lang)])), credits: k("credits"),
+  // D83 part 2: the tiles, the charts, the unlock sheet and the comparison.
+  t: {
+    regionKick: k4("region.kick"), regionLine: keep("map4.region.line", ["n", "cities"]), regionPick: k4("region.pick"), cutParish: keep("map4.cut.parish", ["m"]),
+    price: k4("tile.price"), mkt: k4("tile.mkt"), nb: k4("tile.nb"), nbsrc: k4("tile.nbsrc"), onreq: k4("tile.onreq"),
+    dirUp: keep("map4.tile.dir.up", ["v"]), dirDown: keep("map4.tile.dir.down", ["v"]), dirFlat: k4("tile.dir.flat"),
+    life: k4("tile.life"), sun: k4("tile.sun"), sunV: keep("map4.tile.sun.v", ["v"]), sea: k4("tile.sea"), beach: k4("tile.beach"), min: keep("map4.tile.min", ["v"]),
+    flight: k4("tile.flight", { c: c(`map4.cty.${ed}`, lang) }), kmline: keep("map4.tile.kmline", ["v"]), airport: k4("tile.airport"), ap: keep("map4.tile.ap", ["n", "v"]),
+    noschool: k4("tile.noschool"), tsrc: k4("tile.src"), onreq2: k4("tile.onreq2"), ty: k4("tile.ty"), ne: keep("map4.tile.ne", ["n", "e"]), care: k4("tile.care"), school: k4("tile.school"), hosp: k4("tile.hosp"), docs: k4("tile.docs"), km: keep("map4.tile.km", ["n", "v"]),
+    soon: k4("tile.soon"), soonP: k4("tile.soon.p"), open: k4("tile.open"),
+    rent: k4("tile.rent"), g10y: k4("tile.g10y"), foreign: k4("tile.foreign"), supply: k4("tile.supply"), compare: k4("tile.compare"), paid: k4("tile.paid"),
+    span: { 1: k4("chart.span.1"), 5: k4("chart.span.5"), 10: k4("chart.span.10") },
+    up: keep("map4.chart.up", ["in", "v", "span"]), down: keep("map4.chart.down", ["in", "v", "span"]), flat: keep("map4.chart.flat", ["in", "span"]),
+    above: keep("map4.chart.above", ["q", "v", "of", "r"]), near: keep("map4.chart.near", ["q", "v", "of", "r"]), below: keep("map4.chart.below", ["q", "v", "of", "r"]),
+    src: keep("map4.chart.src", ["q"]), back: k4("back"),
+    sAbove: keep("map4.strip.above", ["of"]), sNear: keep("map4.strip.near", ["of"]), sBelow: keep("map4.strip.below", ["of"]), sNote: keep("map4.strip.note", ["place"]),
+    of: Object.fromEntries(["11", "19", "1D", "1A", "1B", "1C", "15", "20", "30", "PT"].map((x) => [x, c(`map4.of.${x}`, lang)])),
+    ph: Object.fromEntries(Object.values(regionPhotos).map((f) => [f, c(`map4.ph.${f}`, lang)])),
+    pill: keep("map4.compare.pill", ["n"]), layerNone: k4("layer.none"),
+  },
 };
 const month = new Intl.DateTimeFormat(HTML_LANG[lang], { month: "long", year: "numeric" }).format(new Date(`${PRICES.mortgage.month}-15`));
-const links = { buy: pathFor(lang, ed, "buy"), consult: pathFor(lang, ed, "consult"), map: pathFor(lang, ed, "map"), pages: [...pages] };
-const cfg = { labels, links, photos, briefs: BRIEFS[lang] ?? {}, mortgage: { rate: PRICES.mortgage.rate, month },
-  projects: PROJECTS.map((p) => ({ id: p.id, name: p.name, developer: p.developer, muni: p.muni, lon: p.lon, lat: p.lat, render: p.render, from: p.from, showcase: `${pathFor(lang, ed, "partners")}${p.devSlug}/${p.muni}/`,
+const mapPath = pathFor(lang, ed, "map");
+const comparePath = `${mapPath}${COMPARE_SUB[lang]}/`;
+const links = { buy: pathFor(lang, ed, "buy"), consult: pathFor(lang, ed, "consult"), map: mapPath, compare: comparePath, pages: [...pages] };
+const pinFile = (id: string) => existsSync(join(process.cwd(), "public", "img", "map", `pin-${id}.webp`)) ? `/img/map/pin-${id}.webp` : "";
+const cfg = { labels, links, photos, regionPhotos, ed, briefs: BRIEFS[lang] ?? {}, mortgage: { rate: PRICES.mortgage.rate, month },
+  projects: PROJECTS.map((p) => ({ id: p.id, name: p.name, developer: p.developer, muni: p.muni, lon: p.lon, lat: p.lat, render: p.render, pin: pinFile(p.id) || (p.render ? `${p.render}-800.webp` : ""), from: p.from, showcase: `${pathFor(lang, ed, "partners")}${p.devSlug}/${p.muni}/`,
     // Prompt 38: the project card (summary, three features, homes for sale now from the developer's table).
     summary: p.summary?.[lang], feats: (p.features ?? []).filter((f) => f.card).map((f) => f[lang]),
     now: p.blocks ? p.blocks.reduce((a, b) => a + b.units.reduce((x, u) => x + u.forSale, 0), 0) : null,
@@ -58,12 +96,15 @@ const cfg = { labels, links, photos, briefs: BRIEFS[lang] ?? {}, mortgage: { rat
 const chips = [["price", "chip.price"], ["g10", "chip.g10"], ["rent", "chip.rent"], ["yield", "chip.yield"], ["vac", "chip.vac"]] as const;
 const overlays = [["golf", "chip.golf"], ["beach", "chip.beach"], ["devs", "chip.devs"]] as const;
 const amount = Math.round(300000 * (fx ? fx.rate : 1));
+const regionList = ["north", "centre", "lisbon", "alentejo", "algarve", "madeira", "azores"] as const;
+const unlockList = cl("map4.unlock.list", lang);
+const live = A.live && !!A.stripe.region && !!A.stripe.all;
 ---
 <div class={`m3 m3-${mode}`} data-m3 data-mode={mode} data-locale={HTML_LANG[lang]} data-fx={fx ? fx.rate : ""} data-cur={fx ? cur : ""} data-quarter={lastQ}>
   <div class="m3-stage">
     <picture>
       <source media="(max-width: 819px)" srcset="/img/map3-poster-m.webp" width="640" height="1274" />
-      <img class="m3-poster" src="/img/map3-poster-1200.webp" srcset="/img/map3-poster-1200.webp 1200w, /img/map3-poster-1800.webp 1800w" sizes="100vw" width="1200" height="693" alt={c("map.legend.m2", lang, { quarter: qLabel })} loading={mode === "home" ? "lazy" : "eager"} fetchpriority={mode === "page" ? "high" : undefined} />
+      <img class="m3-poster" src="/img/map3-poster-1200.webp" srcset="/img/map3-poster-1200.webp 1200w, /img/map3-poster-1800.webp 1800w" sizes="100vw" width="1200" height="693" alt={c("map.title", lang)} loading={mode === "home" ? "lazy" : "eager"} fetchpriority={mode === "page" ? "high" : undefined} />
     </picture>
     <div class="m3-canvas" data-canvas></div>
     <div class="m3-labels" data-labels aria-hidden="true"></div>
@@ -72,23 +113,65 @@ const amount = Math.round(300000 * (fx ? fx.rate : 1));
     <div class="m3-top">
       <button type="button" class="m3-searchbtn" data-spot-open aria-haspopup="dialog">
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg>
-        <span>{k("search.short")}</span><kbd>⌘K</kbd>
+        <span>{k4("search")}</span><kbd>⌘K</kbd>
       </button>
+      {mode === "page" && <a class="m3-cmp-pill" data-cmp-pill href={comparePath} hidden></a>}
       {mode === "page" && (
-        <div class="m3-chips" role="group" aria-label={k("layers")}>
-          {chips.map(([id, key], i) => <button type="button" class="m3-chip" data-layer={id} aria-pressed={i === 0 ? "true" : "false"}>{k(key)}</button>)}
-          <span class="m3-sep" aria-hidden="true"></span>
-          {overlays.map(([id, key]) => <button type="button" class="m3-chip m3-chip-o" data-overlay={id} aria-pressed={id === "devs" && PROJECTS.length ? "true" : "false"}>{k(key)}</button>)}
-        </div>
+        <button type="button" class="m3-layersbtn" data-panel-open aria-expanded="false" aria-controls="m3-panel">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 3 8l9 5 9-5-9-5z"/><path d="m3 13 9 5 9-5"/></svg>
+          <span>{k4("layers")}</span>
+        </button>
       )}
-      <div class="m3-seg m3-dim" role="group" aria-label="2D / 3D">
-        <button type="button" data-dim="2d" aria-pressed="false">2D</button>
-        <button type="button" data-dim="3d" aria-pressed="true">3D</button>
-      </div>
     </div>
 
-    <div class="m3-dock">
-      <div class="m3-budget">
+    {mode === "page" && (
+      <nav class="m3-cards" data-postcards aria-label={k4("regions")}>
+        {regionList.map((r) => (
+          <button type="button" class="m3-pc" data-region={r}>
+            {regionPhotos[r] ? <img src={`/img/map/pc-${regionPhotos[r]}.webp`} alt="" width="144" height="96" loading="lazy" decoding="async" /> : <span class="m3-pc-none" aria-hidden="true"></span>}
+            <span class="m3-pc-n">{c(`map.r.${r}`, lang)}</span>
+          </button>
+        ))}
+      </nav>
+    )}
+
+    <!-- "Camadas": everything the first view leaves out (D83 part 2), one quiet tap away. -->
+    <div class="m3-dock" id="m3-panel" data-panel hidden={mode === "page" ? true : undefined}>
+      {mode === "page" && (
+        <div class="m3-panel-head">
+          <p class="m3-k">{k4("layers.h")}</p>
+          <button type="button" class="m3-panel-x" data-panel-close aria-label={k4("layers.close")}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+        </div>
+      )}
+      {mode === "page" && (
+        <div class="m3-pg">
+          <p class="m3-pk">{k4("layer.colour")}</p>
+          <div class="m3-chips" role="group" aria-label={k("layers")}>
+            <button type="button" class="m3-chip" data-layer="none" aria-pressed="true">{k4("layer.none")}</button>
+            {chips.map(([id, key]) => <button type="button" class="m3-chip" data-layer={id} aria-pressed="false">{k(key)}</button>)}
+          </div>
+          <p class="m3-pk">{k4("layer.on")}</p>
+          <div class="m3-chips" role="group" aria-label={k4("layer.on")}>
+            {overlays.map(([id, key]) => <button type="button" class="m3-chip m3-chip-o" data-overlay={id} aria-pressed={id === "devs" && PROJECTS.length ? "true" : "false"}>{k(key)}</button>)}
+          </div>
+          <p class="m3-pk">{k4("layer.view")}</p>
+          <div class="m3-seg m3-dim" role="group" aria-label="2D / 3D">
+            <button type="button" data-dim="2d" aria-pressed="false">2D</button>
+            <button type="button" data-dim="3d" aria-pressed="true">3D</button>
+          </div>
+        </div>
+      )}
+      {mode === "page" && (
+        <div class="m3-pg">
+          <p class="m3-pk">{k4("layer.time")}</p>
+          <div class="m3-time is-off" data-time>
+            <button type="button" class="m3-play" data-play aria-label={k("play")}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></button>
+            <div class="m3-scrub" data-scrub role="slider" tabindex="0" aria-label={k("time")}><span class="m3-track"><span class="m3-fill" data-sfill></span></span><span class="m3-thumb" data-sthumb></span></div>
+            <span class="m3-year" data-year>{lastQ.slice(0, 4)}</span>
+          </div>
+        </div>
+      )}
+      <div class="m3-budget m3-pg" hidden={mode === "home" ? true : undefined}>
         <div class="m3-budget-head">
           <span class="m3-k">{k("budget.label")}</span>
           <button type="button" class="m3-amount" data-amount title={k("budget.tap")}>{nf.format(amount)} {fx ? cur : "€"}</button>
@@ -100,21 +183,17 @@ const amount = Math.round(300000 * (fx ? fx.rate : 1));
         <p class="m3-sentence" data-sentence aria-live="polite"></p>
       </div>
       {mode === "page" && (
-        <div class="m3-tools">
-          <div class="m3-time" data-time>
-            <button type="button" class="m3-play" data-play aria-label={k("play")}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></button>
-            <div class="m3-scrub" data-scrub role="slider" tabindex="0" aria-label={k("time")}><span class="m3-track"><span class="m3-fill" data-sfill></span></span><span class="m3-thumb" data-sthumb></span></div>
-            <span class="m3-year" data-year>{lastQ.slice(0, 4)}</span>
-          </div>
+        <div class="m3-pg">
+          <p class="m3-pk">{k4("layer.tours")}</p>
           <div class="m3-tours" role="group" aria-label={k("tours")}>
             {(["coast", "golf", "madeira", "time"] as const).map((t) => <button type="button" class="m3-tour" data-tour={t}>{k(`tour.${t}`)}</button>)}
             {PROJECTS.slice(0, 1).map((p) => <button type="button" class="m3-tour" data-tour={`project:${p.id}`}>{p.name}, {MAP_MUNIS.find((m) => m.s === p.muni)?.n ?? ""}</button>)}
           </div>
         </div>
       )}
-      <div class="m3-legend" data-legend><span data-lo></span><span class="m3-ramp"></span><span data-hi></span><span class="m3-legend-t" data-legend-t></span></div>
       {mode === "home" && <a class="m3-open" href={links.map}>{c("home2.map.a", lang)}</a>}
     </div>
+    <div class="m3-legend" data-legend hidden><span data-lo></span><span class="m3-ramp"></span><span data-hi></span><span class="m3-legend-t" data-legend-t></span></div>
 
     <aside class="m3-sheet" data-sheet hidden aria-live="polite">
       <button type="button" class="m3-grab" data-grab aria-hidden="true" tabindex="-1"><span></span></button>
@@ -123,17 +202,41 @@ const amount = Math.round(300000 * (fx ? fx.rate : 1));
     <p class="m3-caption" data-caption hidden aria-live="polite"></p>
     <p class="m3-toast" data-toast role="status" hidden></p>
     <p class="m3-attr small">{k("credits")}</p>
+
+    <!-- The unlock sheet: the paid analysis, switched off until the company and invoicing are ready (config.mapAnalysis). -->
+    <div class="m3-unlock" data-unlock hidden role="dialog" aria-modal="true" aria-labelledby={`m3-ul-${mode}`}>
+      <div class="m3-unlock-box">
+        <button type="button" class="m3-x" data-unlock-x aria-label={k("close")}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+        <p class="m3-kick" data-unlock-kick>{k4("tile.paid")}</p>
+        <h3 id={`m3-ul-${mode}`}>{k4("unlock.offer", { r: String(A.prices.region), a: String(A.prices.all), m: String(A.months) })}</h3>
+        <p class="m3-unlock-p" data-unlock-p data-tpl={keep("map4.unlock.p", ["place"])}></p>
+        <ul class="m3-unlock-list">{unlockList.map((x) => <li>{x}</li>)}</ul>
+        {live ? (
+          <div class="m3-acts">
+            <a class="m3-btn m3-btn-p" data-unlock-region href={A.stripe.region} data-tpl={keep("map4.unlock.buy.region", ["region", "v"])} data-v={A.prices.region} rel="noopener">{k4("unlock.buy.region", { region: "", v: String(A.prices.region) })}</a>
+            <a class="m3-btn" href={A.stripe.all} rel="noopener">{k4("unlock.buy.all", { v: String(A.prices.all) })}</a>
+          </div>
+        ) : (
+          <button type="button" class="m3-btn m3-btn-p m3-btn-off" disabled aria-disabled="true">{k4("unlock.soon")}</button>
+        )}
+        <p class="m3-src">{k4("unlock.note")}</p>
+      </div>
+    </div>
   </div>
 
-  <div class="m3-spot" data-spot hidden role="dialog" aria-modal="true" aria-label={k("search")}>
+  <div class="m3-spot" data-spot hidden role="dialog" aria-modal="true" aria-label={k4("search")}>
     <div class="m3-spot-box">
       <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg>
-      <input type="search" data-spot-in role="combobox" aria-expanded="true" aria-controls={`m3-res-${mode}`} aria-autocomplete="list" autocomplete="off" placeholder={k("search")} />
+      <input type="search" data-spot-in role="combobox" aria-expanded="true" aria-controls={`m3-res-${mode}`} aria-autocomplete="list" autocomplete="off" placeholder={k4("search.hint")} aria-label={k4("search")} />
       <ul id={`m3-res-${mode}`} role="listbox" data-spot-res></ul>
     </div>
   </div>
 
-  <noscript><style is:inline>.m3-top, .m3-dock { display: none !important; }</style><p class="m3-noscript">{k("noscript")}</p></noscript>
+  <!-- MareBlock slot (D83 part 2): the lead puts <MareBlock /> (site/src/components/MareBlock.astro, the Maré newsletter
+       block) inside this template; map-v3.ts copies it to the end of every place card and region postcard card. -->
+  <template data-mare-tpl></template>
+
+  <noscript><style is:inline>.m3-top, .m3-dock, .m3-cards { display: none !important; }</style><p class="m3-noscript">{k("noscript")}</p></noscript>
   <script type="application/json" data-m3-cfg set:html={JSON.stringify(cfg)} />
 </div>
 

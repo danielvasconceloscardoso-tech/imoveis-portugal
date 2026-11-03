@@ -37,9 +37,18 @@ The Cloudflare count is the page `/e/{ed}/{event}/`, except the three short fami
 | --- | --- | --- | --- |
 | `map/place` | `s/{place}/` | place, origin (`page`, `home`) | a place is opened on the map (tap or search) |
 | `map/time` | `s/{place}/t/{band}/` | place, band | the place card closes, another place or card opens, or the page is hidden |
-| `map/layer/{price,g10,rent,yield,vac}` | `{ed}/map/layer/{l}/` | place (if a card is open), origin | a layer button is tapped |
+| `map/layer/{none,price,g10,rent,yield,vac}` | `{ed}/map/layer/{l}/` | place (if a card is open), origin | a layer button is tapped |
 | `map/overlay/{golf,beach,devs}/{on,off}` | `{ed}/map/overlay/…/` | place, origin | an overlay button is tapped |
 | `map/share` | `{ed}/map/share/` | place, origin (`native`, `copy`) | the place card's share button |
+| `map/search/{munis,pars,golf,beach,devs}` | `{ed}/map/search/{g}/` | place (the slug or `p-{parish code}` the search resolved to; never the typed text), origin | a search result is chosen (D83 part 2) |
+| `map/card/{muni,parish,region,project,golf}` | `{ed}/map/card/{k}/` | place or region, origin | a card opens |
+| `map/tile/{price,life,care,compare}` | `{ed}/map/tile/{t}/` | place or region, origin | a free tile is opened (or "Comparar") |
+| `map/chart/{1a,5a,10a}` | `{ed}/map/chart/{r}/` | place or region, origin | the chart's range is changed |
+| `map/paid/preview/{rent,g10y,foreign,supply,compare}` | `{ed}/map/paid/preview/{t}/` | place or region, origin | a paid tile (or a locked comparison row) opens the unlock sheet |
+| `map/compare/open` | `{ed}/map/compare/open/` | band (`2` or `3` places), origin `compare` | the comparison page shows two or three places |
+| `map/compare/pair` | `{ed}/map/compare/pair/` | place, origin | the in-map two-place comparison (card link "Comparar") |
+| `map/panel/open` | `{ed}/map/panel/open/` | origin | "Camadas" is opened |
+| `heart/region/{on,off}` from the map | `{ed}/heart/region/{s}/` | region, origin `map` | a heart on a map card |
 | `p/{project}/pin` | `{ed}/p/{project}/pin/` | place = project, origin `map` | a partner's map pin is opened |
 | `p/{project}/card` | `{ed}/p/{project}/card/` | place, origin = flow | a listed building's card is clicked in the Concierge |
 | `p/{project}/req` | `{ed}/p/{project}/req/` | place, origin = flow | a request about that project is sent |
