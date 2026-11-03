@@ -973,8 +973,8 @@ How to edit:
 
 ### form.intro
 - PT: Usamos estes dados só para responder e, com a sua autorização, para os passar a um parceiro da categoria.
-- EN: Category, country you live in, your question and your consent. We use these details only to reply and, if you agree, to pass them to a partner in that category.
-- FR: Catégorie, pays de résidence, votre question et votre consentement. Nous utilisons ces données uniquement pour répondre et, avec votre accord, pour les transmettre à un partenaire de la catégorie.
+- EN: Category, country you live in and your question. We use these details only to reply and, if you agree, to pass them to a partner in that category.
+- FR: Catégorie, pays de résidence et votre question. Nous utilisons ces données uniquement pour répondre et, avec votre accord, pour les transmettre à un partenaire de la catégorie.
 
 ## guide
 
@@ -1370,9 +1370,9 @@ How to edit:
 - FR: Vos données
 
 ### s5.p
-- PT: A newsletter pede dupla confirmação e cada email tem um link para cancelar. Não usamos cookies de publicidade nem de estatística. Os pedidos de compra só seguem para a agência parceira com o seu consentimento.
-- EN: The newsletter uses double opt-in, and every email has an unsubscribe link. We use no advertising or analytics cookies. Buying requests go to the partner agency only with your consent.
-- FR: La newsletter fonctionne en double confirmation et chaque e-mail contient un lien de désinscription. Aucun cookie publicitaire ni de mesure d'audience. Les demandes d'achat ne vont à l'agence partenaire qu'avec votre accord.
+- PT: A newsletter pede dupla confirmação e cada email tem um link para cancelar. Não usamos cookies de publicidade nem de estatística. Os pedidos que envia seguem por email só para a Imóveis Portugal e para a agência parceira, e o site não os guarda.
+- EN: The newsletter uses double opt-in, and every email has an unsubscribe link. We use no advertising or analytics cookies. The requests you send go by email only to Imóveis Portugal and the partner agency, and the site does not store them.
+- FR: La newsletter fonctionne en double confirmation et chaque e-mail contient un lien de désinscription. Aucun cookie publicitaire ni de mesure d'audience. Les demandes que vous envoyez partent par e-mail uniquement chez Imóveis Portugal et l'agence partenaire, et le site ne les conserve pas.
 
 ### s6.h
 - PT: Números de audiência
@@ -1407,9 +1407,9 @@ How to edit:
 ## legal
 
 ### privacy.7.p
-- PT: Se marcar "Incluir este resumo", o seu pedido leva um resumo do que indicou no percurso e nos simuladores: país, orçamento, custo total, capitais próprios e financiamento, uma taxa de esforço indicativa, prazo, se já tem NIF e as zonas cujos preços consultou. Esses valores ficam no seu dispositivo até enviar o pedido e só seguem para os parceiros que escolheu, com o seu consentimento (RGPD, art. 6.º, n.º 1, alínea a), e art. 7.º). O resumo é indicativo, não é uma avaliação de crédito e não serve para nenhuma decisão automatizada sobre si. Para orçamentos elevados, a agência parceira continua a pedir identificação e prova de fundos, como exige a Lei 83/2017.
-- EN: If you tick "Include this summary", your request carries a summary of what you entered on the path and in the calculators: country, budget, total cost, own funds and financing, an indicative debt-to-income ratio, timing, whether you have a NIF and the areas whose prices you looked at. These figures stay on your device until you send the request and go only to the partners you chose, with your consent (GDPR art. 6(1)(a) and art. 7). The summary is indicative, is not a credit assessment and is not used for any automated decision about you. For high budgets, the partner agency still asks for identification and proof of funds, as Lei 83/2017 requires.
-- FR: Si vous cochez « Joindre ce résumé », votre demande contient un résumé de ce que vous avez saisi dans le parcours et les simulateurs : pays, budget, coût total, apport et financement, un taux d'endettement indicatif, échéance, si vous avez un NIF et les secteurs dont vous avez consulté les prix. Ces données restent sur votre appareil jusqu'à l'envoi et ne vont qu'aux partenaires que vous avez choisis, avec votre consentement (RGPD, art. 6, par. 1, point a, et art. 7). Le résumé est indicatif, n'est pas une évaluation de crédit et ne sert à aucune décision automatisée vous concernant. Pour les budgets élevés, l'agence partenaire demande toujours une pièce d'identité et la preuve des fonds, comme l'exige la Lei 83/2017.
+- PT: Se marcar "Incluir este resumo", o seu pedido leva um resumo do que indicou no percurso e nos simuladores: país, orçamento, custo total, capitais próprios e financiamento, uma taxa de esforço indicativa, prazo, se já tem NIF e as zonas cujos preços consultou. Esses valores ficam no seu dispositivo até enviar o pedido e seguem com ele só para a Imóveis Portugal e para a agência parceira {agency}, porque o pediu (RGPD, art. 6.º, n.º 1, alínea b)). O resumo é indicativo, não é uma avaliação de crédito e não serve para nenhuma decisão automatizada sobre si. Para orçamentos elevados, a agência parceira continua a pedir identificação e prova de fundos, como exige a Lei 83/2017.
+- EN: If you tick "Include this summary", your request carries a summary of what you entered on the path and in the calculators: country, budget, total cost, own funds and financing, an indicative debt-to-income ratio, timing, whether you have a NIF and the areas whose prices you looked at. These figures stay on your device until you send the request and go with it only to Imóveis Portugal and our partner agency {agency}, because you asked for it (GDPR art. 6(1)(b)). The summary is indicative, is not a credit assessment and is not used for any automated decision about you. For high budgets, the partner agency still asks for identification and proof of funds, as Lei 83/2017 requires.
+- FR: Si vous cochez « Joindre ce résumé », votre demande contient un résumé de ce que vous avez saisi dans le parcours et les simulateurs : pays, budget, coût total, apport et financement, un taux d'endettement indicatif, échéance, si vous avez un NIF et les secteurs dont vous avez consulté les prix. Ces données restent sur votre appareil jusqu'à l'envoi et partent avec la demande uniquement chez Imóveis Portugal et l'agence partenaire {agency}, parce que vous l'avez demandé (RGPD, art. 6, par. 1, point b). Le résumé est indicatif, n'est pas une évaluation de crédit et ne sert à aucune décision automatisée vous concernant. Pour les budgets élevés, l'agence partenaire demande toujours une pièce d'identité et la preuve des fonds, comme l'exige la Lei 83/2017.
 
 ### privacy.7.h
 - PT: Resumo enviado com os pedidos
@@ -1452,9 +1452,9 @@ How to edit:
 - FR: Données traitées et finalités
 
 ### privacy.2.p
-- PT: Newsletter: nome próprio e email, com o seu consentimento (RGPD, art. 6.º, n.º 1, al. a)) e dupla confirmação. Pedidos de compra: nome, contactos e o que procura, com o seu consentimento, para os enviarmos à agência parceira {agency} (AMI {ami}). Pedidos de parceria: dados profissionais, para responder (art. 6.º, n.º 1, al. b)). Pedidos a parceiros: categoria, país, pergunta e contacto, com o seu consentimento, para responder e, se o autorizar, passar a um parceiro da categoria.
-- EN: Newsletter: first name and email, with your consent (GDPR, art. 6(1)(a)) and double opt-in. Buying requests: name, contact details and what you're looking for, with your consent, to pass them to our partner agency {agency} (AMI {ami}). Partner inquiries: business details, to reply (art. 6(1)(b)). Requests to a partner: category, country, question and contact details, with your consent, to reply and, if you agree, to pass them to a partner in that category.
-- FR: Newsletter : prénom et e-mail, avec votre consentement (RGPD, art. 6, par. 1, a)) et double confirmation. Demandes d'achat : nom, coordonnées et critères, avec votre consentement, transmis à l'agence partenaire {agency} (AMI {ami}). Demandes de partenariat : données professionnelles, pour répondre (art. 6, par. 1, b)). Demandes à un partenaire : catégorie, pays, question et coordonnées, avec votre consentement, pour répondre et, avec votre accord, les transmettre à un partenaire de la catégorie.
+- PT: Newsletter: nome próprio e email, com o seu consentimento (RGPD, art. 6.º, n.º 1, al. a)) e dupla confirmação. Pedidos de compra, de visita e do Concierge: nome, contactos e o que procura, para dar seguimento ao pedido que nos faz antes de qualquer contrato (art. 6.º, n.º 1, al. b)), enviados à Imóveis Portugal e à agência parceira {agency} (AMI {ami}). Pedidos de parceria: dados profissionais, para responder (art. 6.º, n.º 1, al. b)). Pedidos a parceiros: categoria, país, pergunta e contacto, para responder ao seu pedido (art. 6.º, n.º 1, al. b)) e, se o autorizar, passar a um parceiro da categoria.
+- EN: Newsletter: first name and email, with your consent (GDPR, art. 6(1)(a)) and double opt-in. Buying, viewing and Concierge requests: name, contact details and what you're looking for, to act on the request you make before any contract (art. 6(1)(b)), sent to Imóveis Portugal and our partner agency {agency} (AMI {ami}). Partner inquiries: business details, to reply (art. 6(1)(b)). Requests to a partner: category, country, question and contact details, to answer your request (art. 6(1)(b)) and, if you agree, to pass them to a partner in that category.
+- FR: Newsletter : prénom et e-mail, avec votre consentement (RGPD, art. 6, par. 1, a)) et double confirmation. Demandes d'achat, de visite et du Concierge : nom, coordonnées et critères, pour donner suite à la demande que vous faites avant tout contrat (art. 6, par. 1, b)), transmis à Imóveis Portugal et à l'agence partenaire {agency} (AMI {ami}). Demandes de partenariat : données professionnelles, pour répondre (art. 6, par. 1, b)). Demandes à un partenaire : catégorie, pays, question et coordonnées, pour répondre à votre demande (art. 6, par. 1, b)) et, avec votre accord, les transmettre à un partenaire de la catégorie.
 
 ### privacy.3.h
 - PT: Quem recebe os dados
@@ -1462,9 +1462,9 @@ How to edit:
 - FR: Destinataires
 
 ### privacy.3.p
-- PT: A agência parceira, só para pedidos de compra. O parceiro da categoria escolhida, só para pedidos a parceiros e com o seu consentimento. Prestadores que tratam dados por nossa conta: beehiiv (newsletter, EUA, com garantias adequadas para a transferência), Tally (formulários, UE), Cloudflare (alojamento e estatísticas sem cookies) e Cal.com (marcação de chamadas).
-- EN: The partner agency, only for buying requests. The partner in the chosen category, only for requests to a partner and with your consent. Processors acting for us: beehiiv (newsletter, USA, with appropriate safeguards for the transfer), Tally (forms, EU), Cloudflare (hosting and cookie-free statistics) and Cal.com (call booking).
-- FR: L'agence partenaire, uniquement pour les demandes d'achat. Le partenaire de la catégorie choisie, uniquement pour les demandes à un partenaire et avec votre accord. Sous-traitants : beehiiv (newsletter, États-Unis, avec garanties appropriées pour le transfert), Tally (formulaires, UE), Cloudflare (hébergement et statistiques sans cookies) et Cal.com (prise de rendez-vous).
+- PT: A Imóveis Portugal e a agência parceira {agency} (AMI {ami}) recebem os pedidos que envia pelo site (compra, visita, Concierge e pedidos a parceiros), por email, através do Cloudflare Email Routing; o site não os guarda. O parceiro da categoria escolhida, só para pedidos a parceiros e com o seu consentimento. Prestadores que tratam dados por nossa conta: beehiiv (newsletter, EUA, com garantias adequadas para a transferência), Tally (formulários, UE), Cloudflare (alojamento, envio dos pedidos por email e estatísticas sem cookies) e Cal.com (marcação de chamadas).
+- EN: Imóveis Portugal and our partner agency {agency} (AMI {ami}) receive the requests you send on the site (buying, viewing, Concierge and requests to a partner), by email, through Cloudflare Email Routing; the site does not store them. The partner in the chosen category, only for requests to a partner and with your consent. Processors acting for us: beehiiv (newsletter, USA, with appropriate safeguards for the transfer), Tally (forms, EU), Cloudflare (hosting, sending requests by email and cookie-free statistics) and Cal.com (call booking).
+- FR: Imóveis Portugal et l'agence partenaire {agency} (AMI {ami}) reçoivent les demandes que vous envoyez sur le site (achat, visite, Concierge et demandes à un partenaire), par e-mail, via Cloudflare Email Routing ; le site ne les conserve pas. Le partenaire de la catégorie choisie, uniquement pour les demandes à un partenaire et avec votre accord. Sous-traitants : beehiiv (newsletter, États-Unis, avec garanties appropriées pour le transfert), Tally (formulaires, UE), Cloudflare (hébergement, envoi des demandes par e-mail et statistiques sans cookies) et Cal.com (prise de rendez-vous).
 
 ### privacy.4.h
 - PT: Durante quanto tempo
@@ -4095,9 +4095,9 @@ How to edit:
 - FR: Une consultation privée avec notre agence partenaire
 
 ### lede
-- PT: Trinta minutos por videochamada com a {agency} (AMI {ami}), sem custos. As suas respostas preparam a conversa.
-- EN: Thirty minutes by video call with {agency} (AMI {ami}), at no cost. Answer a few questions so the conversation starts with your case.
-- FR: Trente minutes en appel vidéo avec {agency} (AMI {ami}), sans frais. Répondez à quelques questions pour que l'échange parte de votre situation.
+- PT: Quinze minutos por videochamada com a {agency} (AMI {ami}), sem custos. As suas respostas preparam a conversa.
+- EN: Fifteen minutes by video call with {agency} (AMI {ami}), at no cost. Answer a few questions so the conversation starts with your case.
+- FR: Quinze minutes en appel vidéo avec {agency} (AMI {ami}), sans frais. Répondez à quelques questions pour que l'échange parte de votre situation.
 
 ### form.h
 - PT: O seu pedido
@@ -4125,9 +4125,9 @@ How to edit:
 - FR: Ensuite, les bons partenaires pour votre cas : crédit, avocat, conseiller fiscal de votre pays.
 
 ### privacy
-- PT: Os seus dados seguem só para a agência parceira, com o seu consentimento.
-- EN: Your details go only to the partner agency, with your consent.
-- FR: Vos données ne vont qu'à l'agence partenaire, avec votre accord.
+- PT: Os seus dados seguem só para a Imóveis Portugal e para a agência parceira, que lhe responde por email.
+- EN: Your details go only to Imóveis Portugal and the partner agency, who reply by email.
+- FR: Vos données ne vont qu'à Imóveis Portugal et à l'agence partenaire, qui vous répond par e-mail.
 
 ### cta
 - PT: Pedir uma consulta
@@ -4135,9 +4135,9 @@ How to edit:
 - FR: Demander une consultation privée
 
 ### card.h
-- PT: Consulta privada · 30 min · vídeo
-- EN: Private consultation · 30 min · video
-- FR: Consultation privée · 30 min · vidéo
+- PT: Consulta privada · 15 min · vídeo
+- EN: Private consultation · 15 min · video
+- FR: Consultation privée · 15 min · vidéo
 
 ### card.p
 - PT: Com a agência parceira, sem custos. Diga-nos o que procura.
@@ -4155,9 +4155,9 @@ How to edit:
 - FR: Votre demande est arrivée à l'agence
 
 ### ok.p
-- PT: A {agency} propõe-lhe por email uma videochamada de 30 minutos, no horário que indicou.
-- EN: Thank you. {agency} will email you to propose a 30-minute video call within the window you gave.
-- FR: Merci. {agency} vous proposera par e-mail un appel vidéo de 30 minutes dans la période indiquée.
+- PT: A {agency} propõe-lhe por email uma videochamada de 15 minutos, no horário que indicou.
+- EN: Thank you. {agency} will email you to propose a 15-minute video call within the window you gave.
+- FR: Merci. {agency} vous proposera par e-mail un appel vidéo de 15 minutes dans la période indiquée.
 
 ### ok.prep
 - PT: Para a conversa: o orçamento, as zonas que lhe interessam e o NIF, se já o tiver.
@@ -4175,9 +4175,9 @@ How to edit:
 - FR: Un conseiller dédié suit votre demande
 
 ### private.p
-- PT: A {agency} propõe-lhe por email uma videochamada de 30 minutos, no horário que indicou.
-- EN: Thank you. {agency} will email you to propose a 30-minute video call within the window you gave.
-- FR: Merci. {agency} vous proposera par e-mail un appel vidéo de 30 minutes dans la période indiquée.
+- PT: A {agency} propõe-lhe por email uma videochamada de 15 minutos, no horário que indicou.
+- EN: Thank you. {agency} will email you to propose a 15-minute video call within the window you gave.
+- FR: Merci. {agency} vous proposera par e-mail un appel vidéo de 15 minutes dans la période indiquée.
 
 ### private.aml
 - PT: Antes das visitas, a agência pede a identificação e a origem dos fundos, como a lei exige a todas as agências imobiliárias em Portugal.
@@ -6151,9 +6151,9 @@ Prompt 43 §3b: the partner links on the path and the questions open the Concier
 - FR: Parler au concierge
 
 ### c.lede
-- PT: Trinta minutos por vídeo com a agência parceira, sem custos. Pedir leva um minuto.
-- EN: A free first 30-minute video call with our partner agency. One question at a time, about a minute in all.
-- FR: Un premier échange vidéo de 30 minutes, gratuit, avec notre agence partenaire. Une question à la fois, une minute en tout.
+- PT: Quinze minutos por vídeo com a agência parceira, sem custos. Pedir leva um minuto.
+- EN: A free first 15-minute video call with our partner agency. One question at a time, about a minute in all.
+- FR: Un premier échange vidéo de 15 minutes, gratuit, avec notre agence partenaire. Une question à la fois, une minute en tout.
 
 ### c.country
 - PT: Onde vive?
@@ -7673,9 +7673,9 @@ Part 2 of 3 Nov 2026 (the journey): the five-item bar at the bottom of the phone
 - FR: Avec une zone en tête, le Concierge vous montre les logements et la suite.
 
 ### next.sims.p
-- PT: Com os números feitos, o passo seguinte é uma conversa de 30 minutos com a agência parceira, sem custos.
-- EN: With the numbers done, the next step is a 30-minute call with the partner agency, free of charge.
-- FR: Les chiffres faits, l'étape suivante est un appel de 30 minutes avec l'agence partenaire, sans frais.
+- PT: Com os números feitos, o passo seguinte é uma conversa de 15 minutos com a agência parceira, sem custos.
+- EN: With the numbers done, the next step is a 15-minute call with the partner agency, free of charge.
+- FR: Les chiffres faits, l'étape suivante est un appel de 15 minutes avec l'agence partenaire, sans frais.
 
 ### next.read.p
 - PT: Quando quiser, o Concierge junta as suas respostas e marca a primeira conversa com a agência parceira.
@@ -7912,3 +7912,42 @@ The share line on a developer's page (night of 3 Nov 2026, part 5): the phone's 
 - PT: Ligação copiada
 - EN: Link copied
 - FR: Lien copié
+
+## send
+
+Requests really sent (operator, 3 Nov 2026): the Concierge, the partner and viewing flows and the showcase request sheet post to /api/request, which e-mails Imóveis Portugal and the partner agency together (GDPR art. 6(1)(b), no consent box). One plain line under the send button names both; the privacy link follows it.
+
+### notice
+- PT: Ao enviar, o seu pedido segue para a Imóveis Portugal e para a {agency}, que lhe responde por e-mail.
+- EN: When you send, your request goes to Imóveis Portugal and to {agency}, who reply by email.
+- FR: En envoyant, votre demande part chez Imóveis Portugal et chez {agency}, qui vous répond par e-mail.
+
+### privacy
+- PT: Política de privacidade.
+- EN: Privacy policy.
+- FR: Politique de confidentialité.
+
+### to
+- PT: Imóveis Portugal e o consultor qualificado da {agency}
+- EN: Imóveis Portugal and the qualified advisor at {agency}
+- FR: Imóveis Portugal et le conseiller qualifié de {agency}
+
+### basis.h
+- PT: Base do envio
+- EN: Why it is sent
+- FR: Base de l'envoi
+
+### basis.p
+- PT: Pedido enviado pelo leitor à Imóveis Portugal e à agência parceira {agency} (RGPD, art. 6.º, n.º 1, al. b)): diligências pré-contratuais a pedido do titular.
+- EN: Request sent by the reader to Imóveis Portugal and the partner agency {agency} (GDPR art. 6(1)(b)): steps taken at the reader's request before a contract.
+- FR: Demande envoyée par le lecteur à Imóveis Portugal et à l'agence partenaire {agency} (RGPD, art. 6, par. 1, b)) : mesures précontractuelles prises à la demande de la personne.
+
+### last
+- PT: Último pedido enviado nesta sessão.
+- EN: Last request sent in this session.
+- FR: Dernière demande envoyée dans cette session.
+
+### foot
+- PT: Enviado pela Imóveis Portugal. O mesmo pedido segue para a Imóveis Portugal e para o consultor qualificado da agência parceira, que responde ao leitor.
+- EN: Sent by Imóveis Portugal. The same request goes to Imóveis Portugal and to the partner agency's qualified advisor, who replies to the reader.
+- FR: Envoyé par Imóveis Portugal. La même demande part chez Imóveis Portugal et chez le conseiller qualifié de l'agence partenaire, qui répond au lecteur.

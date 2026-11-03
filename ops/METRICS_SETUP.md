@@ -51,7 +51,8 @@ The Cloudflare count is the page `/e/{ed}/{event}/`, except the three short fami
 | `flow/{flow}/start` | `{ed}/flow/{flow}/start/` | band | the reader moves past the first screen (concierge, partner, viewing, lawyer) |
 | `flow/{flow}/step/{step}` | `{ed}/flow/{flow}/step/{step}/` | step, band, origin `known` when the site pre-filled it | a step is shown (also `lawyer`, `book`, `buildings` side screens) |
 | `flow/{flow}/stop/{step}` | `{ed}/flow/{flow}/stop/{step}/` | step, band | the sheet closes, or the page is left, without sending |
-| `flow/{flow}/sent` | `{ed}/flow/{flow}/sent/` | band | the request left with consent |
+| `flow/{flow}/sent` | `{ed}/flow/{flow}/sent/` | band, origin `sheet` for the showcase request sheet | the request was sent to /api/request (Imóveis Portugal and the partner agency) |
+| `flow/{flow}/fallback` | `{ed}/flow/{flow}/fallback/` | band, origin `sheet` for the showcase request sheet | /api/request did not take it; the ready-written e-mail was offered (concierge, partner, viewing) |
 | `sim1/{what}/{value}` | `{ed}/sim1/…/` | region, band, origin `sim1` | every interaction with the one-screen simulator (budget, entry, region, type, use, pay, row, next) |
 | `sim/{tool}/use` | `{ed}/sim/{tool}/use/` | band (price) | a classic calculator is used (once the hand stops) |
 | `heart/{home,region}/{on,off}` | `{ed}/heart/…/` | place (home) or region, origin | a heart is set or removed. Helper: `evHeart(kind, id, on, origin)` |

@@ -5,24 +5,24 @@ For the partner agency to send, from its own mailbox, after reading each request
 ## 1. Qualified (timing within 12 months)
 
 **PT** · Assunto: A sua consulta privada · Imóveis Portugal
-Olá [nome], obrigado pelo seu pedido. Proponho uma videochamada de 30 minutos em [data e hora, hora de Lisboa], dentro da janela que indicou. Se preferir outra hora, basta responder a este email. Para começarmos já no seu caso, tenha à mão o orçamento, as zonas que lhe interessam e, se já tiver, o seu NIF. Até breve, [nome], Habinedita Gondomar (AMI 13250), agência parceira do Imóveis Portugal.
+Olá [nome], obrigado pelo seu pedido. Proponho uma videochamada de 15 minutos em [data e hora, hora de Lisboa], dentro da janela que indicou. Se preferir outra hora, basta responder a este email. Para começarmos já no seu caso, tenha à mão o orçamento, as zonas que lhe interessam e, se já tiver, o seu NIF. Até breve, [nome], Habinedita Gondomar (AMI 13250), agência parceira do Imóveis Portugal.
 
 **EN** · Subject: Your private consultation · Imóveis Portugal
-Hello [name], thank you for your request. I'd suggest a 30-minute video call on [date and time, Lisbon time], within the window you gave. If another time suits you better, just reply to this email. So we can start with your case, have your budget, the areas you like and, if you have one, your NIF to hand. Speak soon, [name], Habinedita Gondomar (AMI 13250), Imóveis Portugal's partner agency.
+Hello [name], thank you for your request. I'd suggest a 15-minute video call on [date and time, Lisbon time], within the window you gave. If another time suits you better, just reply to this email. So we can start with your case, have your budget, the areas you like and, if you have one, your NIF to hand. Speak soon, [name], Habinedita Gondomar (AMI 13250), Imóveis Portugal's partner agency.
 
 **FR** · Objet : Votre consultation privée · Imóveis Portugal
-Bonjour [nom], merci pour votre demande. Je vous propose un appel vidéo de 30 minutes le [date et heure, heure de Lisbonne], dans la période indiquée. Si un autre horaire vous convient mieux, répondez simplement à cet e-mail. Pour partir de votre situation, ayez sous la main votre budget, les secteurs qui vous intéressent et, si vous l'avez, votre NIF. À bientôt, [nom], Habinedita Gondomar (AMI 13250), agence partenaire d'Imóveis Portugal.
+Bonjour [nom], merci pour votre demande. Je vous propose un appel vidéo de 15 minutes le [date et heure, heure de Lisbonne], dans la période indiquée. Si un autre horaire vous convient mieux, répondez simplement à cet e-mail. Pour partir de votre situation, ayez sous la main votre budget, les secteurs qui vous intéressent et, si vous l'avez, votre NIF. À bientôt, [nom], Habinedita Gondomar (AMI 13250), agence partenaire d'Imóveis Portugal.
 
 ## 2. Dedicated adviser (high budget; D52: the threshold and the word "Private" are never shown)
 
 **PT** · Assunto: A sua consulta · um consultor dedicado
-Olá [nome], obrigado pelo seu pedido. Vou acompanhá-lo pessoalmente e proponho uma videochamada de 30 minutos em [data e hora]. Antes das visitas, peço a identificação habitual e informação sobre a origem dos fundos, como a lei exige a todas as agências imobiliárias em Portugal (Lei 83/2017). Para as questões de residência, fiscalidade e estrutura, apresento-lhe depois os parceiros Private certos para o seu país. Com os melhores cumprimentos, [nome], Habinedita Gondomar (AMI 13250).
+Olá [nome], obrigado pelo seu pedido. Vou acompanhá-lo pessoalmente e proponho uma videochamada de 15 minutos em [data e hora]. Antes das visitas, peço a identificação habitual e informação sobre a origem dos fundos, como a lei exige a todas as agências imobiliárias em Portugal (Lei 83/2017). Para as questões de residência, fiscalidade e estrutura, apresento-lhe depois os parceiros Private certos para o seu país. Com os melhores cumprimentos, [nome], Habinedita Gondomar (AMI 13250).
 
 **EN** · Subject: Your consultation · a dedicated adviser
-Hello [name], thank you for your request. I will personally take care of it and would suggest a 30-minute video call on [date and time]. Before viewings, I'll ask for the usual identification and information on the origin of funds, as the law requires of every estate agency in Portugal (Lei 83/2017). For residence, tax and structuring questions, I'll then introduce the right Private partners for your country. Kind regards, [name], Habinedita Gondomar (AMI 13250).
+Hello [name], thank you for your request. I will personally take care of it and would suggest a 15-minute video call on [date and time]. Before viewings, I'll ask for the usual identification and information on the origin of funds, as the law requires of every estate agency in Portugal (Lei 83/2017). For residence, tax and structuring questions, I'll then introduce the right Private partners for your country. Kind regards, [name], Habinedita Gondomar (AMI 13250).
 
 **FR** · Objet : Votre consultation · un conseiller dédié
-Bonjour [nom], merci pour votre demande. Je la suivrai personnellement et vous propose un appel vidéo de 30 minutes le [date et heure]. Avant les visites, je vous demanderai les pièces d'identité habituelles et des informations sur l'origine des fonds, comme la loi l'exige de toute agence immobilière au Portugal (Lei 83/2017). Pour la résidence, la fiscalité et la structuration, je vous présenterai ensuite les partenaires Private adaptés à votre pays. Bien cordialement, [nom], Habinedita Gondomar (AMI 13250).
+Bonjour [nom], merci pour votre demande. Je la suivrai personnellement et vous propose un appel vidéo de 15 minutes le [date et heure]. Avant les visites, je vous demanderai les pièces d'identité habituelles et des informations sur l'origine des fonds, comme la loi l'exige de toute agence immobilière au Portugal (Lei 83/2017). Pour la résidence, la fiscalité et la structuration, je vous présenterai ensuite les partenaires Private adaptés à votre pays. Bien cordialement, [nom], Habinedita Gondomar (AMI 13250).
 
 ## 3. Not yet (timing over 12 months or not sure)
 

@@ -1,6 +1,8 @@
 // The requests as one question at a time (prompt 35 §3.9, D61): the concierge (the free first call with the partner
-// agency), a partner request and a private viewing. Same fields, data, consent and routing as the Tally forms they replace
-// (ops/TALLY_CONSULTA.md, ops/SETUP.md §4); submission through /api/request (worker/index.js, ops/ARCHITECTURE.md).
+// agency), a partner request and a private viewing. Same fields and routing as the Tally forms they replace
+// (ops/TALLY_CONSULTA.md, ops/SETUP.md §4); submission through /api/request (worker/index.js, ops/ARCHITECTURE.md), which
+// e-mails Imóveis Portugal and the partner agency together (operator, 3 Nov 2026: GDPR art. 6(1)(b), no consent box).
+// The last screen is the review: the answers, the send button and one line naming both recipients (COPY_DECK "send.*").
 // Built here at build time into a small JSON the browser engine (scripts/flow.ts) renders. Wording: COPY_DECK.md "flow.*".
 import { ED_ORDER, pathFor, type Lang, type EdCode } from "../i18n";
 import { CATS } from "./content";
@@ -14,7 +16,7 @@ export type Step =
   | { id: string; type: "text"; q: string; ph: string; multi?: boolean; prefill?: "place"; optional?: boolean }
   | { id: string; type: "contact"; q: string; phone: boolean }
   | { id: string; type: "slots"; q: string; optional?: boolean }
-  | { id: string; type: "consent"; q: string; text: string };
+  | { id: string; type: "review"; q: string; text: string };
 
 const n = (prefix: string, count: number, lang: Lang): Opt[] => Array.from({ length: count }, (_, i) => ({ v: String(i + 1), l: c(`${prefix}.${i + 1}`, lang) }));
 
@@ -22,6 +24,8 @@ export function flowConfig(id: FlowId, lang: Lang, ed: EdCode, hidden: Record<st
   const country: Step = { id: "country", type: "choice", q: c("flow.c.country", lang), prefill: "edition",
     opts: [...ED_ORDER.map((x) => ({ v: x, l: c(`common.country.${x}`, lang) })), { v: "other", l: c("flow.other", lang) }] };
   const contact = (phone: boolean): Step => ({ id: "contact", type: "contact", q: c("flow.contact", lang), phone });
+  // The last screen (id "consent" kept so the step counts keep their names): the review and the recipients line.
+  const review: Step = { id: "consent", type: "review", q: c("flow.consent.h", lang), text: c("send.notice", lang) };
   const window: Step = { id: "window", type: "choice", q: c("flow.c.window", lang), opts: n("flow.c.window", 3, lang) };
   const steps: Step[] = id === "concierge" ? [
     country,
@@ -33,17 +37,17 @@ export function flowConfig(id: FlowId, lang: Lang, ed: EdCode, hidden: Record<st
     { id: "place", type: "text", q: c("flow.c.place", lang), ph: c("flow.c.place.ph", lang), prefill: "place", optional: true },
     { id: "lang", type: "choice", q: c("flow.c.lang", lang), opts: [{ v: "pt", l: "Português" }, { v: "en", l: "English" }, { v: "fr", l: "Français" }], prefill: "lang", row: true },
     window, contact(true),
-    { id: "consent", type: "consent", q: c("flow.consent.h", lang), text: c("flow.c.consent", lang) },
+    review,
   ] : id === "partner" ? [
     { id: "cat", type: "choice", q: c("flow.p.cat", lang), opts: CATS.map((k) => ({ v: k, l: c(`talk.cat.${k}.h`, lang) })), prefill: "cat" },
     country,
     { id: "question", type: "text", q: c("flow.p.question", lang), ph: c("flow.p.question.ph", lang), multi: true },
     contact(false),
-    { id: "consent", type: "consent", q: c("flow.consent.h", lang), text: c("flow.p.consent", lang) },
+    review,
   ] : [
     { id: "how", type: "choice", q: c("flow.v.how", lang), opts: n("flow.v.how", 2, lang), row: true },
     window, country, contact(true),
-    { id: "consent", type: "consent", q: c("flow.consent.h", lang), text: c("flow.c.consent", lang) },
+    review,
   ];
   const done = id === "concierge"
     ? { ok: { h: c("consult.ok.h1", lang), p: c("consult.ok.p", lang) }, private: { h: c("consult.private.h1", lang), p: c("consult.private.p", lang) }, later: { h: c("consult.later.h1", lang), p: c("consult.later.p", lang) } }
@@ -54,10 +58,12 @@ export function flowConfig(id: FlowId, lang: Lang, ed: EdCode, hidden: Record<st
     lede: id === "concierge" ? c("flow.c.lede", lang) : "",
     hidden: { edition: ed, language: lang, ...hidden },
     mailto: config.contactEmail,
+    // The ready-written e-mail's copy to the partner agency, when the build sets PUBLIC_AGENCY_EMAIL (never in the repo).
+    mailcc: ((import.meta.env.PUBLIC_AGENCY_EMAIL as string | undefined) || "").trim(),
     links: { path: pathFor(lang, ed, "journey"), map: pathFor(lang, ed, "map"), privacy: pathFor(lang, ed, "privacy"), articles: pathFor(lang, ed, "articles") },
     labels: Object.fromEntries(["back", "next", "skip", "of", "close", "send", "sending", "review", "fallback", "fallback.btn", "invalid.email", "name", "email", "phone"]
       .map((k) => [k, c(`flow.${k}`, lang, k === "of" ? { i: "{i}", n: "{n}" } : {})])) as Record<string, string>,
-    extra: { path: c("consult.later.path", lang), map: c("map.open", lang), privacy: c("common.privacy", lang),
+    extra: { path: c("consult.later.path", lang), map: c("map.open", lang), privacy: c("common.privacy", lang), policy: c("send.privacy", lang),
       // Prompt 42: the closing line under the next steps, with two text links.
       more: c("flow.more", lang), morePath: c("flow.more.path", lang), moreArticles: c("flow.more.articles", lang),
       // Prompt 43 §3b: the partner links open the concierge with ?topic=; the topic is shown in the review and sent.
