@@ -3,6 +3,7 @@
 // (a native <details>, so keyboard and screen readers get it for free): two or three sentences with their sources,
 // "Saiba mais" when an article goes deeper, and one quiet partner link that opens the Concierge with the topic
 // (?topic=lawyer|advisor|bank|tax, scripts/chrome.ts and scripts/flow.ts). Search stays on top.
+import { srcTitle } from "../lib/srctitle";
 import V2 from "../layouts/V2.astro";
 import { pathFor, type Lang, type EdCode } from "../i18n";
 import { faqFor, FACTS, fmtDate, DISCLAIMER, Sources, type FaqItem } from "../lib/content";
@@ -96,7 +97,7 @@ const jsonLd = {
         <summary id="fontes" class="h-small">{c("common.sources", lang)} ({src.list.length})</summary>
         {lastChecked && <p class="small">{c("faq.updated", lang, { date: fmtDate(lang, lastChecked) })}</p>}
         <ol>
-          {src.list.map((f, i) => <li id={`fonte-${i + 1}`}><a href={f.url} rel="noopener">{f.title}</a>{f.checked && `, ${c("common.checked", lang, { date: fmtDate(lang, f.checked) })}`}.</li>)}
+          {src.list.map((f, i) => <li id={`fonte-${i + 1}`}><a href={f.url} rel="noopener">{srcTitle(f.title, lang)}</a>{f.checked && `, ${c("common.checked", lang, { date: fmtDate(lang, f.checked) })}`}.</li>)}
         </ol>
       </details>
     </section>

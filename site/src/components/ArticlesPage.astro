@@ -17,7 +17,7 @@ const { lang, ed } = Astro.props;
 const base = pathFor(lang, ed, "articles"), blog = pathFor(lang, ed, "blog");
 const refs = ARTS.map((a) => ({ h: c(`art.${a}.h`, lang), p: c(`art.${a}.p`, lang), href: `${base}${ART_SUB[a][lang]}/` }));
 const posts = postsFor(lang).map((p) => ({ h: p.title, p: p.description, href: `${blog}${p.slug}/` }));
-const stories = storiesFor(lang).map((s) => ({ ...s, ph: photoSet(s.photo.src), href: `${base}${s.slug}/` }));
+const stories = storiesFor(lang, ed).map((s) => ({ ...s, ph: photoSet(s.photo.src), href: `${base}${s.slug}/` }));
 // With the lifestyle articles, the practical guides (NIF, taxes, mortgage) come first in their group; otherwise the old order.
 const cards = stories.length ? [...posts, ...refs] : [...refs, ...posts];
 ---

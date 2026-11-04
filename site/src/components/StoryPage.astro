@@ -4,6 +4,7 @@
 // handover in the article's own voice. Sources numbered at the bottom, the disclaimer last (EDITORIAL_POLICY.md).
 // The Maré letter block is added by another part of the D83 work in the "mare" slot below; nothing renders there today.
 // Events (lib/track.ts ev, lib/events.ts): {ed}/art/{id}/open, /place (place = the municipality), /tile, /concierge.
+import { srcTitle } from "../lib/srctitle";
 import V2 from "../layouts/V2.astro";
 import ParaIr from "./ParaIr.astro";
 import MareBlock from "./MareBlock.astro";
@@ -11,9 +12,8 @@ import MapTile from "./MapTile.astro";
 import "../styles/story.css";
 import { HTML_LANG, LANGS, pathFor, type Lang, type EdCode } from "../i18n";
 import { DISCLAIMER, fmtDate } from "../lib/content";
-import { renderStory, photoSet, muniName, routeFor, storyIn, type Story } from "../lib/stories";
+import { renderStory, photoSet, muniName, routeFor, storyIn, storyHome, type Story } from "../lib/stories";
 import { hostFor } from "../lib/host";
-import { CANONICAL_ED } from "../lib/blog";
 import { c } from "../lib/copy";
 
 interface Props { lang: Lang; ed: EdCode; story: Story; }
@@ -38,7 +38,8 @@ const paths = Object.fromEntries(LANGS.map((l) => {
   const other = storyIn(story.id, l);
   return [l, other ? `${pathFor(l, ed, "articles")}${other.slug}/` : pathFor(l, ed, "articles")];
 })) as Record<Lang, string>;
-const canonical = `https://${hostFor(CANONICAL_ED[lang])}${pathFor(lang, CANONICAL_ED[lang], "articles")}${story.slug}/`;
+const home = storyHome(story);
+const canonical = `https://${hostFor(home)}${pathFor(lang, home, "articles")}${story.slug}/`;
 const ld = { "@context": "https://schema.org", "@type": "Article", headline: story.title, description: story.description, inLanguage: HTML_LANG[lang],
   datePublished: story.published, dateModified: story.updated, image: `https://${hostFor(ed)}${photo.fallback}`,
   author: { "@type": "Organization", name: "Imóveis Portugal" }, publisher: { "@type": "Organization", name: "Imóveis Portugal" } };
@@ -72,7 +73,7 @@ const ld = { "@context": "https://schema.org", "@type": "Article", headline: sto
       <slot name="mare"><MareBlock lang={lang} ed={ed} where="article" /></slot>
       <section class="sources-list st-src" aria-labelledby="fontes">
         <h2 id="fontes" class="h-small">{c("common.sources", lang)}</h2>
-        <ol>{sources.list.map((s, i) => <li id={`fonte-${i + 1}`}><a href={s.url} rel="noopener">{s.title}</a>{s.checked && `, ${c("common.checked", lang, { date: fmtDate(lang, s.checked) })}`}.</li>)}</ol>
+        <ol>{sources.list.map((s, i) => <li id={`fonte-${i + 1}`}><a href={s.url} rel="noopener">{srcTitle(s.title, lang)}</a>{s.checked && `, ${c("common.checked", lang, { date: fmtDate(lang, s.checked) })}`}.</li>)}</ol>
       </section>
       <p class="small disclaimer">{DISCLAIMER[lang]}</p>
       <p class="st-all"><a class="more" href={hub}>{c("lifea.all", lang)}</a></p>

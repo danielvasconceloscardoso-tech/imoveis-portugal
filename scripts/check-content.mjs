@@ -195,6 +195,8 @@ for (const f of existsSync(storyDir) ? readdirSync(storyDir).filter((x) => x.end
   for (const k of ["id", "lang", "slug", "title", "description", "published", "updated", "order", "place", "photo", "airport", "go", "concierge", "sources"]) if (fm[k] === undefined) err(file, `front matter "${k}" missing`);
   if (!["pt", "en", "fr"].includes(fm.lang)) err(file, `lang must be pt, en or fr (is ${fm.lang})`);
   if (!["OPO", "LIS", "FAO"].includes(fm.airport)) err(file, `airport must be OPO, LIS or FAO`);
+  // Prompt 70 (J-11): an article written for one country lists its editions; it is built and listed only there.
+  if (fm.editions !== undefined && (!Array.isArray(fm.editions) || !fm.editions.length || fm.editions.some((e) => !["lu", "fr", "ch", "br", "us", "il"].includes(e)))) err(file, "editions must be a list of edition codes (lu, fr, ch, br, us, il)");
   if (fm.title && (/[?!]/.test(fm.title) || fm.title.length > 80)) err(file, "headline: a statement of at most 80 characters, no question or exclamation mark");
   if (fm.description && (fm.description.length < 80 || fm.description.length > 160)) err(file, `description has ${fm.description.length} characters (80 to 160)`);
   if (!fm.photo?.src || !fm.photo?.alt || !fm.photo?.caption) err(file, "photo needs src, alt and caption");

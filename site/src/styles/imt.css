@@ -35,3 +35,16 @@
 /* A quiet "How it works" next to an IMT figure (simulator, Concierge, map, project card). */
 .imt-tap { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline dotted; text-decoration-thickness: 1px; text-underline-offset: 3px; text-align: left; }
 .imt-tap:hover { color: var(--fa, #2f5d50); }
+/* Prompt 70: the edition's currency beside a big figure (J-10), the condition under the money back, the link to the other
+   exceptions (J-28), and the workings folded behind "How it's worked out" (MI-23). */
+.imt-fx { display: block; margin-top: 4px; font: 500 14px/1.3 "Manrope Variable", system-ui, sans-serif; color: var(--fm); letter-spacing: 0; }
+.imt-more .imt-if { margin-top: 10px; font-size: 15px; color: rgba(255, 255, 255, .78); }
+.imt-other { font-size: 15px !important; }
+.imt-other a { color: var(--fa); font-weight: 600; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.imt-how { margin-top: 22px; }
+.imt-how > summary { display: flex; align-items: center; gap: 8px; min-height: 44px; cursor: pointer; list-style: none; font-weight: 600; font-size: 15.5px; color: var(--fi); }
+.imt-how > summary::-webkit-details-marker { display: none; }
+.imt-how > summary::after { content: ""; width: 8px; height: 8px; margin-left: 2px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg) translateY(-3px); transition: transform .2s; }
+.imt-how[open] > summary::after { transform: rotate(-135deg) translateY(-1px); }
+.imt-how > .imt-blk { margin-top: 10px; }
+.imt-how > .imt-src { margin: 12px 2px 0 !important; overflow-wrap: anywhere; }

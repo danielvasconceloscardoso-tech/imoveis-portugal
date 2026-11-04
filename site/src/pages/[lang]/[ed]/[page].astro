@@ -78,7 +78,7 @@ const site = config.agency.website.replace(/^https:\/\/|\/$/g, "");
         <div class="frame">
           <h2 id="packages">{c("partners.place.h", lang)}</h2>
           <ul class="ptypes">{["area", "checkpoint", "private", "launch"].map((k) => <li><span class="pl-h">{c(`partners.place.${k}.h`, lang)}</span><span class="pl-p">{c(`partners.place.${k}.p`, lang)}</span></li>)}</ul>
-          <p class="lede" style="margin-top:20px">{c("partners.terms", lang)} <a href="#contacto">{c("partners.cta", lang)}</a></p>
+          <p class="lede" style="margin-top:20px">{c("partners.terms", lang)}{" "}<a href="#contacto">{c("partners.cta", lang)}</a></p>
           <p style="margin-top:24px;max-width:40em">{c("partners.network.p", lang)}</p>
           <h3 style="margin-top:40px">{c("kit.types.h", lang)}</h3>
           <ul class="ptypes">{PTYPES.map((t) => <li><a href={`${pathFor(lang, ed, "partners")}${t.slug[lang]}/`}>{c(`kit.${t.key}.label`, lang)}</a></li>)}</ul>
@@ -192,8 +192,9 @@ const site = config.agency.website.replace(/^https:\/\/|\/$/g, "");
         <h1>{c(`legal.${legal}.h1`, lang)}</h1>
         <p class="lede">{c(`legal.${legal}.intro`, lang)}</p>
       </div>
-      {!config.launchReady && <p class="draft">{c("legal.draft", lang)}</p>}
-      {Array.from({ length: legal === "privacy" ? 7 : 4 }, (_, j) => j + 1).map((i) => (<><h2 id={legal === "privacy" && i === 7 ? "brief" : undefined}>{c(`legal.${legal}.${i}.h`, lang)}</h2><p>{c(`legal.${legal}.${i}.p`, lang, legalVars)}</p></>))}
+      {/* Prompt 70 (J-13, A-01, MI-07): until the company is registered (D71) the publisher block says so in one true line,
+          with the contact address, instead of a draft note and bracketed placeholders. Nothing is invented. */}
+      {Array.from({ length: legal === "privacy" ? 7 : 4 }, (_, j) => j + 1).map((i) => (<><h2 id={legal === "privacy" && i === 7 ? "brief" : undefined}>{c(`legal.${legal}.${i}.h`, lang)}</h2><p>{i === 1 && !ent.name ? c("legal.pending", lang, { email: config.contactEmail }) : c(`legal.${legal}.${i}.p`, lang, legalVars)}</p></>))}
     </div>
   )}
   {(key === "partners" || key === "ours") && <TrustStrip lang={lang} ed={ed} />}

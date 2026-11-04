@@ -9,6 +9,7 @@
 // chart without figures and "Ver a análise completa" (components/AnalysisPreview.astro), then the links, the sources and
 // the disclaimer. Their tables, chart values and question sections stay in the deck (art.*) and the figures are in the
 // analysis (MapAnalysisPage.astro, AnalysisExtra.astro). URLs and titles unchanged. "method" stays a full article.
+import { srcTitle } from "../lib/srctitle";
 import V2 from "../layouts/V2.astro";
 import MareBlock from "./MareBlock.astro";  // D83: the quiet Maré line, last in the article
 import AnalysisPreview from "./AnalysisPreview.astro";
@@ -194,7 +195,7 @@ const ld = [
 
     <section class="sources-list" aria-labelledby="fontes">
       <h2 id="fontes" class="h-small">{c("common.sources", lang)}</h2>
-      <ol>{src.list.map((s, i) => <li id={`fonte-${i + 1}`}><a href={s.url} rel="noopener">{s.title}</a>{s.checked && `, ${c("common.checked", lang, { date: fmtDate(lang, s.checked) })}`}.</li>)}</ol>
+      <ol>{src.list.map((s, i) => <li id={`fonte-${i + 1}`}><a href={s.url} rel="noopener">{srcTitle(s.title, lang)}</a>{s.checked && `, ${c("common.checked", lang, { date: fmtDate(lang, s.checked) })}`}.</li>)}</ol>
     </section>
     <p class="small disclaimer">{DISCLAIMER[lang]}</p>
     <p style="margin-bottom:64px"><a class="more" href={hub}>{c("art.all", lang)}</a></p>

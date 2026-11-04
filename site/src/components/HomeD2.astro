@@ -2,6 +2,7 @@
 // Design v2 home (prompt 32, D59, "the Claridge's pass"): the film or photograph with the path bar, then one idea per
 // section, one to three sentences and one action each, a lot of space. Every feature stays as in v1: the map is the
 // same component, the path bar opens the same path. Wording: content/copy/COPY_DECK.md, blocks "home2.*".
+import { srcTitle } from "../lib/srctitle";
 import MapV3 from "./MapV3.astro";
 import { ED_ORDER, HTML_LANG, eur, pathFor, type EdCode, type Lang } from "../i18n";
 import { Sources, EDITION_CUR, RATE, fmtDate, homeExample } from "../lib/content";
@@ -146,7 +147,7 @@ const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("h
 <section class="h2-sources">
   <details class="h2-narrow" data-sources>
     <summary id="fontes">{c("common.sources", lang)} ({src.list.length})</summary>
-    <ol>{src.list.map((s, i) => <li id={`fonte-${i + 1}`}><a href={s.url} rel="noopener">{s.title}</a>{s.checked && `, ${c("common.checked", lang, { date: fmtDate(lang, s.checked) })}`}.</li>)}</ol>
+    <ol>{src.list.map((s, i) => <li id={`fonte-${i + 1}`}><a href={s.url} rel="noopener">{srcTitle(s.title, lang)}</a>{s.checked && `, ${c("common.checked", lang, { date: fmtDate(lang, s.checked) })}`}.</li>)}</ol>
   </details>
 </section>
 

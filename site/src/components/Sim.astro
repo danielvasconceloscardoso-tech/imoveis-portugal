@@ -2,6 +2,7 @@
 // One calculator page (prompts 12 and 13). Runs in the browser: nothing is stored or sent unless the reader
 // ticks the consent box and sends a request. The inputs live in the URL so a simulation can be shared.
 // Wording: COPY_DECK.md "sims.*"; maths: src/lib/sims.ts; fields and results: src/lib/tools.ts.
+import { srcTitle } from "../lib/srctitle";
 import V2 from "../layouts/V2.astro";
 import Calls from "./Calls.astro";
 import { config } from "../config";
@@ -87,6 +88,8 @@ const fieldLabel = (id: string, kind: string) => {
       <dl class="st-lines" id="rows">{first.rows.filter((r) => !r.strong).map((r) => <><dt>{c(`sims.${r.k}`, lang)}{rowSrc[r.k === "r.imt" ? "r.imt.nr" : r.k] && <a class="st-src" href={`#fonte-${rowSrc[r.k === "r.imt" ? "r.imt.nr" : r.k].n}`}>{rowSrc[r.k === "r.imt" ? "r.imt.nr" : r.k].t}</a>}</dt><dd>{show(r.v, r.fmt)}</dd></>)}</dl>
       </details>
       <p class="warn" id="warn" hidden></p>
+      {/* Prompt 70 (A-11): a primary home bought as a non-resident: the difference that comes back, and the IMT screen. */}
+      {(tool === "imt" || tool === "cost") && <p class="small" id="imt-back" hidden data-tpl={c("p69.imt.sim", lang, { back: "{back}" })}><span></span> <a href="#" data-imt="0" data-imt-from="link">{c("p69.imt.how", lang)} →</a></p>}
       <p class="small">{c("sims.estimate", lang)}{nums.map((i) => <a class="sup" href={`#fonte-${i}`}>{i}</a>)}</p>
       {next === "credit" && cp.name && <p class="sponsor-line">{c("sims.sponsor", lang, { name: cp.name, bdp: cp.bdp })}</p>}
       <p class="st-actions no-print"><button type="button" class="btn ghost sm" id="share" data-done={c("sims.copied", lang)}>{c("sims.share", lang)}</button> <button type="button" class="btn ghost sm" id="pdf">{c("sims.pdf", lang)}</button></p>
@@ -105,7 +108,7 @@ const fieldLabel = (id: string, kind: string) => {
         <><p>{c("sims.credit.none", lang)}</p><a class="btn" href={`${talk}?cat=bank#form`}>{c("faq.cta.bank", lang)}</a></>
       ))}
       {next === "tax" && (<><p>{c("sims.tax.p", lang)}</p><a class="btn" href={`${talk}?cat=tax#form`}>{c("faq.cta.tax", lang)}</a></>)}
-      {next === "agency" && (<div data-agency><p>{c("sims.agency.p", lang)}</p><a class="btn" href={pathFor(lang, ed, "buy")}>{c("faq.cta.agency", lang)}</a><Calls lang={lang} ed={ed} compact /></div>)}
+      {next === "agency" && (<div data-agency><p>{c("sims.agency.p", lang)}</p><a class="btn" href={pathFor(lang, ed, "consult")} data-concierge data-sim-cg>{c("sims.agency.cta", lang)}</a><Calls lang={lang} ed={ed} compact /></div>)}
       <p style="margin-top:20px"><a class="more" href={pathFor(lang, ed, "dossiers")}>{c("consult.later.dossier", lang)}</a></p>
     </section>
 
@@ -120,7 +123,7 @@ const fieldLabel = (id: string, kind: string) => {
   <section class="sources-list" aria-labelledby="fontes">
     <div class="frame read">
       <h2 id="fontes" class="h-small">{c("common.sources", lang)}</h2>
-      <ol>{src.list.map((s, i) => <li id={`fonte-${i + 1}`}><a href={s.url} rel="noopener">{s.title}</a>{s.checked && `, ${c("common.checked", lang, { date: fmtDate(lang, s.checked) })}`}.</li>)}</ol>
+      <ol>{src.list.map((s, i) => <li id={`fonte-${i + 1}`}><a href={s.url} rel="noopener">{srcTitle(s.title, lang)}</a>{s.checked && `, ${c("common.checked", lang, { date: fmtDate(lang, s.checked) })}`}.</li>)}</ol>
     </div>
   </section>
   <script type="application/json" id="sim-labels" set:html={JSON.stringify(labels)} />
@@ -132,6 +135,7 @@ const fieldLabel = (id: string, kind: string) => {
   import { saveSim } from "../lib/brief";
   import { ev, rememberSimBudget } from "../lib/track";
   import { budgetBand } from "../lib/sim1";
+  import { imt as imtOf } from "../lib/sims";
   const form = document.getElementById("sim") as HTMLFormElement;
   const tool = form.dataset.tool as ToolKey;
   const fx = Number(form.dataset.fx) || 1;
@@ -186,6 +190,12 @@ const fieldLabel = (id: string, kind: string) => {
       const lt = document.getElementById("st-local")!;
       lt.textContent = total.fmt === "eur" && cur !== "EUR" ? (lt.dataset.tpl || "").replace("{local}", local.format(total.v * fx)) : "\u00a0";
     }
+    const ib = document.getElementById("imt-back");
+    if (ib) {
+      const pr = Number(v.price) || 0, back = Math.round(imtOf(pr, false, false) - imtOf(pr, true, true));
+      ib.hidden = !(v.own === true && v.resident !== true && pr >= 1e4 && back > 0);
+      if (!ib.hidden) { ib.querySelector("span")!.textContent = (ib.dataset.tpl || "").replace("{back}", eur.format(back)); const a = ib.querySelector<HTMLAnchorElement>("a")!; a.dataset.imt = String(pr); a.href = `${location.pathname}?imt=${pr}`; }
+    }
     const w = document.getElementById("warn")!;
     if (out.warn && L[out.warn.k]) { w.hidden = false; w.textContent = L[out.warn.k].replace(/\{(\w+)\}/g, (m, k) => String(out.warn!.vars?.[k] ?? m)); }
     else w.hidden = true;
@@ -194,7 +204,7 @@ const fieldLabel = (id: string, kind: string) => {
     // Keep the inputs in the URL (no personal data), for sharing and for the plan.
     const p = new URLSearchParams();
     for (const [k, x] of Object.entries(v)) p.set(k, typeof x === "boolean" ? (x ? "1" : "0") : String(x));
-    history.replaceState(null, "", `${location.pathname}?${p}`);
+    history.replaceState(history.state, "", `${location.pathname}?${p}`);
     const plan = document.getElementById("plan-link") as HTMLAnchorElement | null;
     if (plan) plan.href = `${plan.href.split("?")[0]}?tool=${tool}&${p}`;
     const send = document.getElementById("credit-send") as HTMLAnchorElement | null;
@@ -205,11 +215,18 @@ const fieldLabel = (id: string, kind: string) => {
         : `${send.dataset.mail}&body=${encodeURIComponent(`${location.href}\n\n${summary}`)}`;
     }
   }
+  // Prompt 70 (MI-06): the advisor button opens the Concierge with the price typed here (chrome.ts reads ?budget=).
+  const simCg = document.querySelector<HTMLAnchorElement>("[data-sim-cg]");
+  const cgBudget = () => { if (!simCg) return; const u = new URL(simCg.href); const pr = Number(values().price) || 0; pr >= 1e4 ? u.searchParams.set("budget", String(Math.round(pr))) : u.searchParams.delete("budget"); simCg.href = u.toString(); };
   form.addEventListener("input", render);
+  form.addEventListener("input", cgBudget); cgBudget();
   form.addEventListener("submit", (e) => e.preventDefault());
   // Part 5: the reader used this calculator (lib/track.ts ev "sim/{tool}/use", once the hand stops; the price as a band).
   let tU = 0;
-  form.addEventListener("input", () => { clearTimeout(tU); tU = window.setTimeout(() => { const v = values(), pr = Number(v.price) || 0; ev({ event: `sim/${tool}/use`, band: pr >= 1e4 ? budgetBand(pr) : undefined, origin: "sims" }); if (tool === "cost" && pr >= 1e5) rememberSimBudget(pr); }, 900); });
+  // Prompt 70 (MI-14): the price the reader typed (any calculator with a price) is the Concierge's budget in this tab; a
+  // default left untouched is not.
+  let typedPrice = false;
+  form.addEventListener("input", (e) => { if ((e.target as HTMLInputElement).name === "price") typedPrice = true; clearTimeout(tU); tU = window.setTimeout(() => { const v = values(), pr = Number(v.price) || 0; ev({ event: `sim/${tool}/use`, band: pr >= 1e4 ? budgetBand(pr) : undefined, origin: "sims" }); if (typedPrice && pr >= 1e5) rememberSimBudget(pr); }, 900); });
 
   // Sliders for prices: log scale from 100 k€ to 10 M€; the number field above takes any amount.
   const toVal = (p: number) => { const x = 1e5 * Math.pow(100, p / 1000); const st = x < 1e6 ? 5000 : x < 5e6 ? 25000 : 50000; return Math.round(x / st) * st; };

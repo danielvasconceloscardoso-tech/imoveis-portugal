@@ -30,7 +30,14 @@ const bh = !!nl && !nl.startsWith("http");
 const Box = bh ? "div" : "form"; // beehiiv draws its own form: no form inside a form
 const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("home.subscribe.subject", lang)} (${ed} · ${lang})`)}`;
 const html = show ? renderIssue(show, { ed, framed: true }) : "";
-const fmt = (d: string) => new Intl.DateTimeFormat(HTML_LANG[lang], { weekday: "long", day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(`${d}T12:00:00Z`));
+// French writes the first day of a month "1er" (prompt 70, S-27).
+const fr1 = (s: string) => (lang === "fr" ? s.replace(/(^|\s)1 (?=\p{L})/u, "$11er ") : s);
+const fmt = (d: string) => fr1(new Intl.DateTimeFormat(HTML_LANG[lang], { weekday: "long", day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(`${d}T12:00:00Z`)));
+const dayMonth = (d: string) => fr1(new Intl.DateTimeFormat(HTML_LANG[lang], { day: "numeric", month: "long", timeZone: "UTC" }).format(new Date(`${d}T12:00:00Z`)));
+// Prompt 70 (A-21): before its date, the issue shown is a preview of the first Maré, said so with its date.
+const ahead = !!show && !one && show.date > new Date().toISOString().slice(0, 10);
+// Prompt 70 (J-06): an issue title in the reader's language when the issue has one (headline_en / headline_fr), else none.
+const headIn = (x: MareIssue) => (lang === "pt" ? x.headline : (x as unknown as Record<string, string | undefined>)[`headline_${lang}`] ?? "");
 const title = one ? `${one.headline} | Maré` : `Maré | Imóveis Portugal · ${edName(ed, lang)}`;
 ---
 <V2 lang={lang} ed={ed} page="mare" paths={paths} title={title} description={one ? one.preheader : c("mare.meta", lang)} sticky={null} next={false}
@@ -54,12 +61,17 @@ const title = one ? `${one.headline} | Maré` : `Maré | Imóveis Portugal · ${
       <input type="hidden" name="origem" value="mare" data-mare-from />
       {show && <input type="hidden" name="mare" value={show.id} />}
       {!nl && <label class="mr-email"><span class="vh">{c("mare.email", lang)}</span><input type="email" name="email" required autocomplete="email" placeholder={c("mare.email", lang)} /></label>}
+      {/* Prompt 70 (S-18, A-21, MI-29): our own field and button paint at once in the site's fonts and work from the first
+          second; beehiiv's form loads after the page (or on the first tap) off screen, takes over with what was typed,
+          and sends. If it never arrives, the button opens the reader's own email with the request written. */}
+      {bh && <label class="mr-email" data-mare-own><span class="vh">{c("mare.email", lang)}</span><input type="email" required autocomplete="email" placeholder={c("mare.email", lang)} /></label>}
+      {bh && <button class="mr-btn" type="button" data-mare-go>{c("mare.a", lang)}</button>}
       {bh && <div class="mr-embed" data-mare-embed data-bh={nl} data-mail={mail} data-mail-label={c("mare.a", lang)}></div>}
       {bh && <p class="mr-small mr-bh-note">{c("mare.oneclick", lang)} <a href={pathFor(lang, ed, "privacy")}>{c("common.privacy", lang)}</a></p>}
       {!bh && <button class="mr-btn" type="submit">{c("mare.a", lang)}</button>}
       {!bh && <label class="mr-consent"><input type="checkbox" name="consentimento" value="sim" required data-mare-consent data-need={c("mare.consent.need", lang)} /> <span>{c("mare.consent", lang)} <a href={pathFor(lang, ed, "privacy")}>{c("common.privacy", lang)}</a></span></label>}
       {!bh && <p class="mr-small">{c(nl ? "mare.optin.embed" : "mare.optin.mail", lang)}</p>}
-      <p class="mr-sent" role="status" hidden data-mare-sent>{c("mare.sent", lang)}</p>
+      <p class="mr-sent" role="status" hidden data-mare-sent>{c(bh ? "mare.thanks" : "mare.sent", lang)}</p>
       {nl && !bh && <div class="mr-embed" hidden data-mare-embed><iframe data-base={nl} title={c("mare.title", lang)} style="min-height:220px"></iframe></div>}
     </Box>
     {!one && <p class="mr-when">{c("mare.when", lang)}</p>}
@@ -67,9 +79,9 @@ const title = one ? `${one.headline} | Maré` : `Maré | Imóveis Portugal · ${
 
   {show && (
     <section class="mr-latest" aria-labelledby="mr-latest-h">
-      {!one && <h2 id="mr-latest-h" class="mr-h2">{c("mare.latest.h", lang)}</h2>}
+      {!one && <h2 id="mr-latest-h" class="mr-h2">{ahead ? c("mare.first.h", lang, { date: dayMonth(show.date) }) : c("mare.latest.h", lang)}</h2>}
       {one && <h2 id="mr-latest-h" class="vh">{show.subject}</h2>}
-      <p class="mr-sub">{c("mare.latest.p", lang)}{lang !== "pt" && <> {c("mare.pt.only", lang)}</>}</p>
+      <p class="mr-sub">{c(ahead ? "mare.first.p" : "mare.latest.p", lang)}{lang !== "pt" && <>{" "}{c("mare.pt.only", lang)}</>}</p>
       <div class="mr-mail">
         <div class="mr-mail-top" lang="pt-PT">
           <p><span>{c("mare.inbox.from", lang)}</span> Maré · Imóveis Portugal</p>
@@ -90,7 +102,7 @@ const title = one ? `${one.headline} | Maré` : `Maré | Imóveis Portugal · ${
           <li><a class="mr-card" href={`${base}${x.id}/`} aria-current={one?.id === x.id ? "page" : undefined}>
             <img src={photoUrl(x.photo.src, 640)} alt={x.photo.alt} width="640" height="480" loading="lazy" />
             <span class="mr-card-d">{fmt(x.date)} · {c("mare.minutes", lang, { n: x.minutes })}</span>
-            <span class="mr-card-h" lang="pt-PT">{x.headline}</span>
+            {headIn(x) && <span class="mr-card-h" lang={lang === "pt" ? "pt-PT" : HTML_LANG[lang]}>{headIn(x)}</span>}
           </a></li>
         ))}
       </ul>
@@ -105,24 +117,59 @@ const title = one ? `${one.headline} | Maré` : `Maré | Imóveis Portugal · ${
   // Where the reader came from: the quiet block (?de=article&h={issue}) or the page itself. The arrival is counted here
   // (a count on the click would be lost to the navigation); the URL is then cleaned so a shared link starts fresh.
   const de = (q.get("de") || "").replace(/[^a-z]/g, ""), h = (q.get("h") || "").replace(/[^0-9-]/g, "");
-  if (de && h) { evMareBlock(de, h); q.delete("de"); q.delete("h"); history.replaceState(null, "", `${location.pathname}${q.toString() ? `?${q}` : ""}${location.hash}`); }
+  if (de && h) { evMareBlock(de, h); q.delete("de"); q.delete("h"); history.replaceState(history.state, "", `${location.pathname}${q.toString() ? `?${q}` : ""}${location.hash}`); }
   // Fix step 5: the header button and the line under "Começar" (no headline on screen there, so no issue in the event).
-  else if (de === "header" || de === "hero" || de === "home" || de === "guide") { ev({ event: `mare/open/${de}`, origin: de }); q.delete("de"); history.replaceState(null, "", `${location.pathname}${q.toString() ? `?${q}` : ""}${location.hash}`); }
+  else if (de === "header" || de === "hero" || de === "home" || de === "guide") { ev({ event: `mare/open/${de}`, origin: de }); q.delete("de"); history.replaceState(history.state, "", `${location.pathname}${q.toString() ? `?${q}` : ""}${location.hash}`); }
   const f = document.querySelector<HTMLFormElement>("[data-mare-form]");
   if (f) {
     const where = de || "mare", issue = f.dataset.issue || "";
     const from = f.querySelector<HTMLInputElement>("[data-mare-from]"); if (from) from.value = where;
     const bhWrap = f.querySelector<HTMLElement>("[data-mare-embed][data-bh]");
     if (bhWrap) {
-      // beehiiv's loader draws its own field and button in the box straight away; if nothing appears within 8 s
-      // (blocked script, no network) the reader gets the e-mail request instead, never an empty box.
-      const s = document.createElement("script"); s.async = true; s.src = "https://subscribe-forms.beehiiv.com/v3/loader.js";
-      s.setAttribute("data-beehiiv-form", bhWrap.dataset.bh!); bhWrap.appendChild(s);
-      const a = document.createElement("script"); a.async = true; a.src = "https://subscribe-forms.beehiiv.com/attribution.js"; document.body.appendChild(a);
-      setTimeout(() => {
-        if (bhWrap.querySelector("iframe, form") || document.querySelector("iframe[src*='beehiiv']")) return;
-        const m = document.createElement("a"); m.className = "mr-btn"; m.href = bhWrap.dataset.mail || "#"; m.textContent = bhWrap.dataset.mailLabel || "OK"; bhWrap.appendChild(m);
-      }, 8000);
+      // Prompt 70 (S-18): our field works at once; beehiiv's loader comes after the page has loaded (or at the first
+      // focus or tap on the field), off screen. When its form is there it takes over, with what the reader typed; a press
+      // on our button before that waits for it and then sends through it. If nothing appears within 8 s of loading
+      // (blocked script, no network) our button opens the reader's own email with the request written, never a dead end.
+      const own = f.querySelector<HTMLElement>("[data-mare-own]"), ownIn = own?.querySelector("input") ?? null, go = f.querySelector<HTMLButtonElement>("[data-mare-go]");
+      const sent = f.querySelector<HTMLElement>("[data-mare-sent]");
+      let loaded = false, ready = false, queued = false, failed = false;
+      const bhInput = () => bhWrap.querySelector<HTMLInputElement>('input[type="email"], input[name*="email" i]');
+      const setVal = (el: HTMLInputElement, v: string) => { Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, "value")?.set?.call(el, v); el.dispatchEvent(new Event("input", { bubbles: true })); el.dispatchEvent(new Event("change", { bubbles: true })); };
+      const send = () => { const fm = bhWrap.querySelector("form"); const b = fm?.querySelector<HTMLElement>('button[type="submit"], button:not([type]), input[type="submit"]'); if (b) b.click(); else fm?.requestSubmit?.(); };
+      const take = () => {
+        if (ready) return true;
+        const bi = bhInput(), fr = bhWrap.querySelector("iframe");
+        if (!bi && !fr) return false;
+        ready = true;
+        const typed = ownIn?.value ?? "", had = document.activeElement === ownIn;
+        if (bi && typed) setVal(bi, typed);
+        if (own) own.hidden = true; if (go) go.hidden = true;
+        bhWrap.classList.add("is-ready");
+        if (bi && had) bi.focus();
+        if (bi && queued) send();
+        return true;
+      };
+      const load = () => {
+        if (loaded) return; loaded = true;
+        new MutationObserver(() => take()).observe(bhWrap, { childList: true, subtree: true });
+        const s = document.createElement("script"); s.async = true; s.src = "https://subscribe-forms.beehiiv.com/v3/loader.js";
+        s.setAttribute("data-beehiiv-form", bhWrap.dataset.bh!); bhWrap.appendChild(s);
+        const a = document.createElement("script"); a.async = true; a.src = "https://subscribe-forms.beehiiv.com/attribution.js"; document.body.appendChild(a);
+        setTimeout(() => { if (!take()) failed = true; if (failed && queued && bhWrap.dataset.mail) location.href = bhWrap.dataset.mail; }, 8000);
+      };
+      if (document.readyState === "complete") setTimeout(load, 300); else addEventListener("load", () => setTimeout(load, 300), { once: true });
+      ownIn?.addEventListener("focus", load, { once: true });
+      go?.addEventListener("click", () => {
+        if (ownIn && !ownIn.checkValidity()) { ownIn.reportValidity(); return; }
+        if (failed) { if (bhWrap.dataset.mail) location.href = bhWrap.dataset.mail; return; }
+        queued = true; go.disabled = true; go.setAttribute("aria-busy", "true"); load(); take();
+      });
+      ownIn?.addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); go?.click(); } });
+      // MI-29: a calm line of our own once beehiiv's form is sent (its own message may also show).
+      let thanked = false;
+      const thank = () => { if (thanked) return; thanked = true; evSignup(where, issue); if (sent) setTimeout(() => { sent.hidden = false; }, 600); };
+      bhWrap.addEventListener("submit", thank, true);
+      bhWrap.addEventListener("click", (e) => { if ((e.target as HTMLElement).closest('button, input[type="submit"]') && bhInput()?.checkValidity() && bhInput()?.value) setTimeout(thank, 900); }, true);
       addEventListener("blur", function once() { const el = document.activeElement; if (el && el.tagName === "IFRAME" && (bhWrap.contains(el) || String((el as HTMLIFrameElement).src).includes("beehiiv"))) { evSignup(where, issue); removeEventListener("blur", once); } });
     }
     const box = f.querySelector<HTMLInputElement>("[data-mare-consent]");
@@ -185,7 +232,13 @@ const title = one ? `${one.headline} | Maré` : `Maré | Imóveis Portugal · ${
   .mr-h1s { margin: 0 0 8px; font-size: clamp(34px, 6vw, 56px); line-height: 1.1; }
   .mr-form { display: grid; grid-template-columns: 1fr auto; gap: 12px; max-width: 32rem; margin: 40px auto 0; text-align: left; }
   .mr-hero-s .mr-form { margin-left: 0; }
-  .mr-form[data-embed] { grid-template-columns: 1fr; justify-items: center; }
+  .mr-form[data-embed] { grid-template-columns: 1fr auto; }
+  .mr-form[data-embed] > .mr-small, .mr-form[data-embed] > .mr-sent { text-align: center; }
+  /* beehiiv's form, once it takes over: the site's fonts from its first paint, the button text centred. */
+  .mr-embed[data-bh]:not(.is-ready) { position: absolute; left: -9999px; top: 0; width: 32rem; max-width: 90vw; }
+  .mr-embed[data-bh].is-ready { display: grid; justify-items: center; }
+  .mr-embed :is(input, button, select, textarea, label, p) { font-family: var(--sans) !important; }
+  .mr-embed button { display: inline-flex !important; align-items: center; justify-content: center !important; text-align: center !important; }
   .mr-email input { width: 100%; min-height: 52px; box-sizing: border-box; padding: 0 16px; border: 1px solid #c9c9c4; border-radius: 2px; background: #fff; font: 400 17px/1 var(--sans); color: var(--ink); }
   .mr-email input:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: transparent; }
   .mr-btn { min-height: 52px; padding: 0 28px; border: 0; border-radius: 2px; background: var(--ink); color: #fff; font: 600 15px/1 var(--sans); cursor: pointer; transition: background-color .25s var(--ease); white-space: nowrap; }
@@ -214,5 +267,5 @@ const title = one ? `${one.headline} | Maré` : `Maré | Imóveis Portugal · ${
   .mr-card-d { font-size: 13px; color: var(--muted); }
   .mr-card-h { font: 400 22px/1.3 var(--serif); }
   .mr-card[aria-current] .mr-card-h { color: var(--accent); }
-  @media (max-width: 560px) { .mr-form { grid-template-columns: 1fr; } .mr-btn { width: 100%; } }
+  @media (max-width: 560px) { .mr-form, .mr-form[data-embed] { grid-template-columns: 1fr; } .mr-btn { width: 100%; } }
 </style>

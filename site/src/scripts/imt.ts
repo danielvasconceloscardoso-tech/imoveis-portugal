@@ -10,7 +10,7 @@ const esc = (t: string) => t.replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "
 export const IMT_FROM = ["sim1", "concierge", "map", "project", "link"];
 
 type D = { loc: string; L: Record<string, string>; SRC: { nr: string; back: string; res: string; list: { t: string; u: string; d: string }[] }; checked: string[];
-  calc: string; table: Bracket[]; flatFrom: number; nrRate: number };
+  calc: string; table: Bracket[]; flatFrom: number; nrRate: number; faq: string; fx: { cur: string; rate: number; tpl: string } | null };
 
 export function initImt() {
   const sh = document.querySelector<HTMLElement>("[data-imt-sheet]"), back = document.querySelector<HTMLElement>("[data-imt-back]");
@@ -24,7 +24,10 @@ export function initImt() {
   const pct = (v: number) => `${new Intl.NumberFormat(D.loc, { maximumFractionDigits: 4 }).format(v)}${D.loc.startsWith("fr") ? " %" : "%"}`;
   const fill = (t: string, v: Record<string, string>) => t.replace(/\{(\w+)\}/g, (m, k) => (k in v ? v[k] : m));
   const slow = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
-  let price = 300000, from = "link", lastFocus: HTMLElement | null = null, hideT = 0, io: IntersectionObserver | null = null;
+  let price = 300000, from = "link", lastFocus: HTMLElement | null = null, hideT = 0, io: IntersectionObserver | null = null, howOpen = false, pushed = false;
+  // J-10: "about $25,200" beside a big figure on the editions with their own currency (rounded to 100).
+  const local = D.fx ? new Intl.NumberFormat(D.loc, { style: "currency", currency: D.fx.cur, maximumFractionDigits: 0 }) : null;
+  const fxs = (v: number) => (D.fx && local ? `<span class="imt-fx">${esc(D.fx.tpl.replace("{local}", local.format(Math.round((v * D.fx.rate) / 100) * 100)))}</span>` : "");
 
   // The resident, primary-home figure, split as the code splits it (art. 17.º n.º 3): the part up to the previous
   // bracket's limit at that limit's average rate, the excess at the marginal rate. Above the table, a flat rate.
@@ -50,13 +53,17 @@ export function initImt() {
     const more = backAmt > 0
       ? fill(L["imt.more"], { price: P, back: eur.format(Math.round(backAmt)), nr: eur.format(Math.round(nr)), res: eur.format(Math.round(res)) })
       : fill(L["imt.more.none"], { top: eur.format(D.flatFrom) });
-    const src = (t: string) => `<p class="imt-src">${esc(t)}</p>`;
-    return `<section class="imt-blk" data-imt-row="nr"><h3>${esc(L["imt.nr.k"])}</h3><p class="imt-big" data-imt-o="nr">${esc(eur.format(Math.round(nr)))}</p><p>${esc(L["imt.nr.p"])}</p>${src(D.SRC.nr)}</section>
-      <section class="imt-blk" data-imt-row="back"><h3>${esc(L["imt.back.k"])}</h3><ol class="imt-routes"><li>${esc(L["imt.back.1"])}</li><li>${esc(L["imt.back.2"])}</li></ol><p>${esc(L["imt.back.p"])}</p>${src(D.SRC.back)}</section>
-      <section class="imt-blk" data-imt-row="res"><h3>${esc(L["imt.res.k"])}</h3><p class="imt-big" data-imt-o="res">${esc(eur.format(Math.round(res)))}</p><p>${esc(yours)}</p>
+    // Prompt 70 (MI-23): the answer first (the non-resident figure, then what can come back and how), the workings
+    // (the resident brackets and the legal references) behind "How it's worked out"; nothing removed.
+    return `<section class="imt-blk" data-imt-row="nr"><h3>${esc(L["imt.nr.k"])}</h3><p class="imt-big" data-imt-o="nr">${esc(eur.format(Math.round(nr)))}${fxs(nr)}</p><p>${esc(L["imt.nr.p"])} ${esc(L["imt.nr.who"])}</p></section>
+      <section class="imt-blk imt-more" data-imt-more><h3>${esc(L["imt.more.k"])}</h3><p data-imt-o="more">${esc(more)}</p>${backAmt > 0 ? `<p class="imt-if">${esc(L["imt.more.if"])}</p>` : ""}</section>
+      <section class="imt-blk" data-imt-row="back"><h3>${esc(L["imt.back.k"])}</h3><ol class="imt-routes"><li>${esc(L["imt.back.1"])}</li><li>${esc(L["imt.back.2"])}</li></ol><p>${esc(L["imt.back.p"])}</p>
+        <p class="imt-other"><a href="${esc(D.faq)}">${esc(L["imt.other"])} →</a></p></section>
+      <details class="imt-how" data-imt-how${howOpen ? " open" : ""}><summary>${esc(L["imt.how.k"])}</summary>
+        <section class="imt-blk" data-imt-row="res"><h3>${esc(L["imt.res.k"])}</h3><p class="imt-big" data-imt-o="res">${esc(eur.format(Math.round(res)))}${fxs(res)}</p><p>${esc(yours)}</p>
         <table class="imt-tab"><thead><tr><th scope="col">${esc(L["imt.col.to"])}</th><th scope="col">${esc(L["imt.col.rate"])}</th></tr></thead><tbody>${rows}</tbody></table>
-        <p class="imt-note">${esc(L["imt.res.p"])}</p>${src(D.SRC.res)}</section>
-      <section class="imt-blk imt-more" data-imt-more><h3>${esc(L["imt.more.k"])}</h3><p data-imt-o="more">${esc(more)}</p></section>
+        <p class="imt-note">${esc(L["imt.res.p"])}</p></section>
+        <p class="imt-src">${esc(L["imt.refs"])}: ${esc([...new Set([D.SRC.nr, D.SRC.back, D.SRC.res])].join(" · "))}</p></details>
       <section class="imt-blk imt-srcs"><h3>${esc(L["imt.src.k"])}</h3><ul>${D.SRC.list.map((x, k) => `<li><a href="${esc(x.u)}" target="_blank" rel="noopener">${esc(x.t)}</a>, ${esc(D.checked[k] ?? "")}</li>`).join("")}</ul>
         <p class="imt-disc">${esc(L["imt.disc"])}</p><p><a class="imt-calc" data-imt-calc href="${esc(`${D.calc}?price=${price}&own=0&resident=0`)}">${esc(L["imt.calc"])} →</a></p></section>`;
   }
@@ -79,6 +86,7 @@ export function initImt() {
     body.querySelector(".imt-h")!.textContent = fill(L["imt.h"], { price: eur.format(price) });
     body.querySelector("[data-imt-out]")!.innerHTML = html();
     body.querySelector("[data-imt-calc]")?.addEventListener("click", () => ev({ event: "imt/calc", band: budgetBand(price), origin: from }));
+    body.querySelector<HTMLDetailsElement>("[data-imt-how]")?.addEventListener("toggle", (e) => { howOpen = (e.target as HTMLDetailsElement).open; });
     io?.disconnect();
     const more = body.querySelector("[data-imt-more]");
     if (more && "IntersectionObserver" in window) {
@@ -86,38 +94,41 @@ export function initImt() {
       io.observe(more);
     }
   }
-  function url(on: boolean) {
-    const p = new URLSearchParams(location.search);
-    on ? p.set("imt", String(price)) : p.delete("imt");
-    history.replaceState(history.state, "", `${location.pathname}${p.size ? `?${p}` : ""}${location.hash}`);
-  }
-  function open(p: number, f: string) {
+  const imtHref = (on: boolean) => { const p = new URLSearchParams(location.search); on ? p.set("imt", String(price)) : p.delete("imt"); return `${location.pathname}${p.size ? `?${p}` : ""}${location.hash}`; };
+  function url(on: boolean) { history.replaceState(history.state, "", imtHref(on)); }
+  function open(p: number, f: string, onLoad = false) {
     clearTimeout(hideT);
     price = p >= 10000 && p <= 50e6 ? Math.round(p) : 300000; from = IMT_FROM.includes(f) ? f : "link";
     lastFocus = document.activeElement as HTMLElement;
-    box.scrollTop = 0; draw(false);
+    box.scrollTop = 0; howOpen = false; draw(false);
     sh!.hidden = false; back!.hidden = false; document.documentElement.classList.add("sh-lock");
     requestAnimationFrame(() => requestAnimationFrame(() => { sh!.classList.add("is-open"); back!.classList.add("is-open"); body.querySelector<HTMLElement>(".imt-h")?.focus({ preventScroll: true }); }));
-    url(true);
+    // Prompt 70 (S-03): opening is a history entry, so the browser's Back closes the screen and leaves the page as it was.
+    // A link that opens the page on the screen (?imt= on load) has no entry of its own: ✕ then only clears ?imt=.
+    if (!onLoad && history.state?.ipSheet !== "imt") { history.pushState({ ...(history.state || {}), ipSheet: "imt" }, "", imtHref(true)); pushed = true; }
+    else url(true);
     ev({ event: `imt/open/${from}`, band: budgetBand(price), origin: from });
   }
-  function close() {
-    if (sh!.hidden) return;
+  function close(fromHistory = false) {
+    if (sh!.hidden || !sh!.classList.contains("is-open") && !fromHistory) return;
     sh!.classList.remove("is-open"); back!.classList.remove("is-open");
     // The Concierge sheet may still be open underneath: the page stays locked while it is.
     if (!document.querySelector("[data-cg-sheet].is-open")) document.documentElement.classList.remove("sh-lock");
     hideT = window.setTimeout(() => { sh!.hidden = true; back!.hidden = true; }, slow() ? 0 : 320);
-    io?.disconnect(); url(false); lastFocus?.focus({ preventScroll: true });
+    io?.disconnect(); lastFocus?.focus({ preventScroll: true });
+    if (fromHistory) { pushed = false; return; }
+    if (pushed && history.state?.ipSheet === "imt") { pushed = false; history.back(); } else url(false);
   }
+  addEventListener("popstate", () => { if (!sh.hidden && sh.classList.contains("is-open") && history.state?.ipSheet !== "imt") close(true); });
   document.addEventListener("click", (e) => {
     const a = (e.target as HTMLElement).closest?.<HTMLElement>("[data-imt]");
     if (!a || sh.contains(a) || (e as MouseEvent).metaKey || (e as MouseEvent).ctrlKey) return;
     e.preventDefault(); e.stopPropagation();
     open(Number(a.dataset.imt), a.dataset.imtFrom || "link");
   }, true);
-  sh.querySelector("[data-imt-x]")!.addEventListener("click", close);
-  back.addEventListener("click", close);
+  sh.querySelector("[data-imt-x]")!.addEventListener("click", () => close());
+  back.addEventListener("click", () => close());
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !sh.hidden) { e.stopPropagation(); close(); } }, true);
   const q = Number(new URLSearchParams(location.search).get("imt"));
-  if (q) open(q, "link");
+  if (q) open(q, "link", true);
 }

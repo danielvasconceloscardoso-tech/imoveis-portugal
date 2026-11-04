@@ -5,11 +5,14 @@
 import V2 from "../layouts/V2.astro";
 import { LANGS, pathFor, type Lang, type EdCode } from "../i18n";
 import { c, edName } from "../lib/copy";
+import { COMPARE_SUB } from "../lib/maptiles";
 
 interface Props { lang: Lang; ed: EdCode; }
 const { lang, ed } = Astro.props;
 const k = (x: string) => c(`bar.${x}`, lang);
-const L = { homes: k("page.homes"), regions: k("page.regions"), remove: k("page.remove"), add: k("heart.add"), noRegion: k("next.read.p") };
+// p70 (A-07): two or more saved places open side by side on the map's comparison page (the cards' own free rows).
+const L = { homes: k("page.homes"), regions: k("page.regions"), remove: k("page.remove"), add: k("heart.add"), noRegion: k("next.read.p"),
+  compare: `${pathFor(lang, ed, "map")}${COMPARE_SUB[lang]}/`, pill: c("map4.compare.pill", lang, { n: "{n}" }) };
 const consult = pathFor(lang, ed, "consult");
 ---
 <V2 lang={lang} ed={ed} page="saved" noindex title={`${k("page.title")} | Imóveis Portugal · ${edName(ed, lang)}`} description={k("page.lede")}
@@ -41,7 +44,8 @@ const consult = pathFor(lang, ed, "consult");
       `<li class="sv-i"><a href="${esc(safe(x.href))}" data-sv-go>${esc(x.label)}</a>${heartHTML(x.kind, x.id, x.label, x.href)}</li>`).join("")}</ul></section>` : "";
     const draw = () => {
       const all = get(), homes = all.filter((x) => x.kind === "home"), regions = all.filter((x) => x.kind === "region");
-      box.innerHTML = group(L.homes, homes) + group(L.regions, regions);
+      const cmp = regions.length >= 2 ? `<p class="sv-cmp"><a class="nx-btn" href="${esc(L.compare)}" data-sv-go>${esc(L.pill.replace("{n}", String(Math.min(regions.length, 3))))} →</a></p>` : "";
+      box.innerHTML = group(L.homes, homes) + group(L.regions, regions) + cmp;
       empty.hidden = all.length > 0;
       // "Começar" carries the first saved region to the Concierge (its place question is then already answered).
       const go = document.querySelector<HTMLAnchorElement>("[data-next-a]");
@@ -69,6 +73,7 @@ const consult = pathFor(lang, ed, "consult");
   .sv :global(.sv-i) { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--rule); }
   .sv :global(.sv-i a) { font: 400 clamp(21px, 1rem + 1vw, 24px)/1.25 var(--serif); color: var(--ink); text-decoration: none; min-width: 0; overflow-wrap: anywhere; }
   .sv :global(.sv-i a:hover) { color: var(--accent); }
+  .sv :global(.sv-cmp) { margin: -24px 0 40px; }
   .sv-empty { padding: 32px 0 16px; border-top: 1px solid var(--rule); }
   .sv-empty h2 { font: 400 28px/1.2 var(--serif); margin: 0 0 8px; }
   .sv-empty p { color: var(--muted); margin: 0 0 24px; max-width: 30rem; }

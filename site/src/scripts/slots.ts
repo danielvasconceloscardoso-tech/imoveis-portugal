@@ -44,6 +44,30 @@ const ZONES = ["Europe/Luxembourg", "Europe/Paris", "Europe/Zurich", "America/Sa
 const zoneKey = "ip.tz";
 export const zoneNow = () => { try { return localStorage.getItem(zoneKey) || readerTz(); } catch { return readerTz(); } };
 export const city = (tz: string) => tz.split("/").pop()!.replace(/_/g, " ");
+// Prompt 70 (A-18, MI-15): the zone's city in the page's language, and the same with its preposition for the zone line
+// ("Horas do Luxemburgo", "Heures du Luxembourg", "Times in New York"). Zones not listed keep their English name.
+const CITY: Record<string, { pt: string; fr: string; en?: string; ptOf?: string; frOf?: string }> = {
+  "Europe/Luxembourg": { pt: "Luxemburgo", fr: "Luxembourg", ptOf: "do Luxemburgo", frOf: "du Luxembourg" },
+  "Europe/Paris": { pt: "Paris", fr: "Paris" }, "Europe/Zurich": { pt: "Zurique", fr: "Zurich" },
+  "America/Sao_Paulo": { pt: "São Paulo", fr: "São Paulo", en: "São Paulo" }, "America/New_York": { pt: "Nova Iorque", fr: "New York" },
+  "Asia/Jerusalem": { pt: "Jerusalém", fr: "Jérusalem" }, "Europe/Lisbon": { pt: "Lisboa", fr: "Lisbonne", en: "Lisbon" },
+  "Europe/London": { pt: "Londres", fr: "Londres" }, "Europe/Brussels": { pt: "Bruxelas", fr: "Bruxelles" }, "Europe/Berlin": { pt: "Berlim", fr: "Berlin" },
+  "Europe/Madrid": { pt: "Madrid", fr: "Madrid" }, "Europe/Amsterdam": { pt: "Amesterdão", fr: "Amsterdam" }, "Europe/Geneva": { pt: "Genebra", fr: "Genève" },
+  "America/Los_Angeles": { pt: "Los Angeles", fr: "Los Angeles" }, "America/Chicago": { pt: "Chicago", fr: "Chicago" }, "America/Toronto": { pt: "Toronto", fr: "Toronto" },
+};
+const lg = (locale: string) => (locale.slice(0, 2) === "pt" ? "pt" : locale.slice(0, 2) === "fr" ? "fr" : "en");
+export const cityName = (tz: string, locale: string) => { const k = lg(locale), x = CITY[tz]; return (x && (k === "en" ? x.en : x[k])) || city(tz); };
+/** "do Luxemburgo", "de Paris"; "du Luxembourg", "d'Amsterdam"; "in New York". */
+export function cityOf(tz: string, locale: string) {
+  const k = lg(locale), x = CITY[tz], n = cityName(tz, locale);
+  if (k === "pt") return x?.ptOf || `de ${n}`;
+  if (k === "fr") return x?.frOf || (/^[aeiouyhâéèêîôûAEIOUYHÉ]/.test(n) ? `d'${n}` : `de ${n}`);
+  return `in ${n}`;
+}
+// Prompt 70 (J-07): a 12-hour clock where the reader's clock is one (the US edition, or an en-US browser on an English page).
+let H12 = false;
+export const setClock = (h12: boolean) => { H12 = h12; };
+const hmOpts = (): Intl.DateTimeFormatOptions => ({ hour: H12 ? "numeric" : "2-digit", minute: "2-digit", hourCycle: H12 ? "h12" : "h23" });
 
 export function slotLabel(s: Slot, locale: string, lang: keyof typeof L, zone = zoneNow()) {
   const at = lisbonInstant(s.d, s.t), T = L[lang];
@@ -67,9 +91,10 @@ export function ownZone(ed: string): { zone: string; how: "own" | "edition" | "l
 export function slotOwn(s: Slot, locale: string, zone: string, lisbon: string, shift: { next: string; prev: string }) {
   const at = lisbonInstant(s.d, s.t), f = (z: string, o: Intl.DateTimeFormatOptions) => new Intl.DateTimeFormat(locale, { timeZone: z, ...o }).format(at);
   const dz = new Intl.DateTimeFormat("en-CA", { timeZone: zone, year: "numeric", month: "2-digit", day: "2-digit" }).format(at), d = dz === s.d ? "" : dz > s.d ? shift.next : shift.prev;
-  const hm2 = f(zone, { hour: "2-digit", minute: "2-digit", hourCycle: "h23" });
-  if (zone === LIS) return { main: `${f(LIS, { weekday: "short", day: "numeric", month: "short" })}, ${s.t} ${lisbon}`, lis: "", time: s.t, shift: "" };
-  return { main: `${f(zone, { weekday: "short", day: "numeric", month: "short" })}, ${hm2} ${city(zone)}`, lis: `${s.t} ${lisbon}`, time: hm2, shift: d };
+  const hm2 = f(zone, hmOpts()), lisT = f(LIS, hmOpts());
+  const h24 = Number(new Intl.DateTimeFormat("en-GB", { timeZone: zone, hour: "2-digit", hourCycle: "h23" }).format(at));
+  if (zone === LIS) return { main: `${f(LIS, { weekday: "short", day: "numeric", month: "short" })}, ${lisT} ${lisbon}`, lis: "", time: lisT, shift: "", h24 };
+  return { main: `${f(zone, { weekday: "short", day: "numeric", month: "short" })}, ${hm2} ${cityName(zone, locale)}`, lis: `${lisT} ${lisbon}`, time: hm2, shift: d, h24 };
 }
 type OwnLabels = { day: string; time: string; picked: string; none: string; remove: string; tz: string; same: string; change: string; zone: string; lisbon: string; next: string; prev: string };
 
@@ -119,17 +144,17 @@ function ownPicker(host: HTMLElement, o: { locale: string; get: () => Slot[]; se
   const sh = { next: T.next, prev: T.prev };
   // Prompt 70: only the times the reader is awake for (07:00 to 21:59 where they live); a New York reader is never offered 04:00.
   // A time they picked earlier stays offered, and if a zone left nothing awake, every time shows.
-  const awake = (d: string) => { const S = o.get(), ok = times.filter((t) => { const h = Number(slotOwn({ d, t }, o.locale, zone, T.lisbon, sh).time.slice(0, 2));
+  const awake = (d: string) => { const S = o.get(), ok = times.filter((t) => { const h = slotOwn({ d, t }, o.locale, zone, T.lisbon, sh).h24;
     return (h >= 7 && h < 22) || S.some((x) => x.d === d && x.t === t); }); return ok.length ? ok : times; };
   function draw() {
     const S = o.get(), taken = (t: string) => S.some((x) => x.d === day && x.t === t);
     const scroll = host.querySelector(".rq-days")?.scrollLeft ?? 0;
-    const zl = zone === LIS ? T.same : T.tz.replace("{city}", city(zone));
+    const zl = zone === LIS ? T.same : T.tz.replace("{ofcity}", cityOf(zone, o.locale));
     host.innerHTML = `<p class="rq-bk">${esc(T.day)}</p><div class="rq-days">${days.map((d) =>
       `<button type="button" class="rq-day" data-day="${d}" aria-pressed="${d === day}"><span>${esc(fd(d, { weekday: "short" }))}</span><b>${esc(fd(d, { day: "numeric" }))}</b><span>${esc(fd(d, { month: "short" }))}</span></button>`).join("")}</div>
       <p class="rq-bk">${esc(T.time)}</p>
       <p class="sp-tz" data-tz-line>${esc(zl)} <button type="button" class="sp-tz-ch" data-tz-ch aria-expanded="${open}">${esc(T.change)}</button></p>
-      <div class="sp-zones" role="group" aria-label="${esc(T.zone)}" ${open ? "" : "hidden"}><span>${esc(T.zone)}</span>${zones.map((z) => `<button type="button" class="rq-pill" data-zone="${esc(z)}" aria-pressed="${z === zone}">${esc(z === LIS ? T.lisbon : city(z))}</button>`).join("")}</div>
+      <div class="sp-zones" role="group" aria-label="${esc(T.zone)}" ${open ? "" : "hidden"}><span>${esc(T.zone)}</span>${zones.map((z) => `<button type="button" class="rq-pill" data-zone="${esc(z)}" aria-pressed="${z === zone}">${esc(z === LIS ? T.lisbon : cityName(z, o.locale))}</button>`).join("")}</div>
       <div class="rq-times rq-own">${awake(day).map((t) => { const l = slotOwn({ d: day, t }, o.locale, zone, T.lisbon, sh);
         return `<button type="button" class="rq-time" data-time="${t}" aria-pressed="${taken(t)}" ${!taken(t) && S.length >= max ? "disabled" : ""}><b>${esc(l.time)}${l.shift ? ` <small>${esc(l.shift)}</small>` : ""}</b>${l.lis ? `<span>${esc(l.lis)}</span>` : ""}</button>`; }).join("")}</div>
       <p class="rq-bk">${esc(T.picked)} (${S.length}/${max})</p>

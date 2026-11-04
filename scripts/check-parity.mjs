@@ -81,6 +81,7 @@ for (const [id, by] of stories) {
   for (const l of ["en", "fr"]) {
     const a = by.pt, b = by[l];
     for (const k of ["order", "place", "airport"]) if (a.fm[k] !== b.fm[k]) errors.push(`story ${id}: ${k} differs (pt ${a.fm[k]}, ${l} ${b.fm[k]})`);
+    if (JSON.stringify(a.fm.editions ?? null) !== JSON.stringify(b.fm.editions ?? null)) errors.push(`story ${id}: editions differ between pt and ${l}`);
     if (a.fm.photo?.src !== b.fm.photo?.src) errors.push(`story ${id}: photo differs between pt and ${l}`);
     if (JSON.stringify(a.fm.sources) !== JSON.stringify(b.fm.sources)) errors.push(`story ${id}: sources differ between pt and ${l}`);
     if (String(a.fm.published) !== String(b.fm.published)) errors.push(`story ${id}: published date differs between pt and ${l}`);

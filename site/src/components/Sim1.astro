@@ -32,7 +32,9 @@ const regions = SIM1_REGIONS.map((r) => {
   const n = placeName(s.n, lang);
   // "no Porto", "no Funchal", "no Peso da Régua", "em Lisboa"; "in Lisbon"; "à Lisbonne".
   const art = lang === "pt" ? (["Porto", "Funchal", "Peso da Régua"].includes(s.n) ? "no" : "em") : lang === "fr" ? "à" : "in";
-  return { id: r.id, n, sub: r.sub ?? "", m2: s.m2[i] as number, q: qLabel(PRICES.quarters[i]), inplace: `${art} ${n}` };
+  // Prompt 70 (S-25): a chip shown by its better-known place keeps that name in the result ("na Comporta (Alcácer do Sal)").
+  const subArt = lang === "pt" ? (r.sub === "Comporta" ? "na" : "em") : art;
+  return { id: r.id, n, sub: r.sub ?? "", m2: s.m2[i] as number, q: qLabel(PRICES.quarters[i]), inplace: r.sub ? `${subArt} ${r.sub} (${n})` : `${art} ${n}` };
 });
 const m2 = Object.fromEntries(regions.map((r) => [r.id, r.m2]));
 
@@ -157,6 +159,8 @@ const SEGS: { k: "type" | "use" | "pay"; opts: [string, string][] }[] = [
         <div class="s1-f" role="group" aria-labelledby={`s1-${g.k}-l`}>
           <div class="s1-lab"><span id={`s1-${g.k}-l`}>{c(`sim1.${g.k}`, lang)}</span></div>
           <div class="s1-seg" data-seg={g.k}>{g.opts.map(([v, l]) => <button type="button" class="s1-seg-b" data-v={v} aria-pressed={v === st[g.k] ? "true" : "false"}>{l}</button>)}</div>
+          {/* Prompt 70 (S-25): the type does not change the taxes (it goes with the summary for the advisor); said once, so the unchanged total is not a surprise. */}
+          {g.k === "type" && <p class="s1-fine" style="margin-top:6px">{c("sim1.type.note", lang)}</p>}
         </div>
       ))}
 

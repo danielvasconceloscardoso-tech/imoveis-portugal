@@ -1,0 +1,32 @@
+---
+// The 404 for one edition and language (prompt 70, J-24, MI-11): the site's header, fonts and bottom bar, the message in
+// the language of the address, and the ways out a lost reader needs (the map, the calculators, the Concierge, the home).
+// Built at /{lang}/{ed}/404.html and /{lang}/404.html (astro.config.mjs moves them there): Cloudflare serves the
+// nearest 404.html for an address that does not exist (wrangler.jsonc not_found_handling "404-page").
+import V2 from "../layouts/V2.astro";
+import { LANGS, pathFor, type EdCode, type Lang } from "../i18n";
+import { c } from "../lib/copy";
+
+interface Props { lang: Lang; ed: EdCode; }
+const { lang, ed } = Astro.props;
+const paths = Object.fromEntries(LANGS.map((l) => [l, pathFor(l, ed, "home")])) as Record<Lang, string>;
+const ways: { k: string; href: string; cg?: boolean }[] = [
+  { k: "bar.nav.map", href: pathFor(lang, ed, "map") },
+  { k: "bar.nav.sims", href: pathFor(lang, ed, "sims") },
+  { k: "bar.nav.concierge", href: pathFor(lang, ed, "consult"), cg: true },
+];
+---
+<V2 lang={lang} ed={ed} page="home" solid noindex paths={paths} title={`${c("root.notfound", lang)} | Imóveis Portugal`} description={c("root.notfound.p", lang)} next={false} sticky={null}>
+  <div class="h2-sec nf">
+    <h1>{c("root.notfound", lang)}</h1>
+    <p>{c("root.notfound.p", lang)}</p>
+    <p class="nf-ways">{ways.map((w) => <a class="h2-btn" href={w.href} {...(w.cg ? { "data-concierge": "" } : {})}>{c(w.k, lang)}</a>)}</p>
+    <p><a class="h2-link" href={pathFor(lang, ed, "home")}>{c("root.notfound.home", lang)}</a></p>
+  </div>
+</V2>
+<style>
+  .nf { max-width: 40rem; margin: 0 auto; padding-top: 72px; }
+  .nf h1 { font-size: clamp(40px, 6vw, 64px); line-height: 1.05; margin: 0 0 24px; }
+  .nf p { color: var(--muted); margin: 0 0 32px; }
+  .nf-ways { display: flex; flex-wrap: wrap; gap: 12px; }
+</style>

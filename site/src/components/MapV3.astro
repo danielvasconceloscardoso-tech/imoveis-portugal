@@ -21,6 +21,7 @@ import { PROJECTS } from "../lib/projects";
 import { config } from "../config";
 import { COMPARE_SUB } from "../lib/maptiles";
 import { SUB } from "../lib/tools";
+import { SIM1_REGIONS } from "../lib/sim1";
 import PLACE_PHOTOS from "../data/place-photos.json";
 import { existsSync, readFileSync } from "node:fs";
 import { FACTS } from "../lib/content";
@@ -65,7 +66,7 @@ const labels = {
   qfmt, median: c("map.card.median", lang, { v: "{v}", quarter: "{quarter}" }), nodata: c("map.card.nodata", lang), parishOf: c("map.par.of", lang, { m: "{m}" }),
   source: c("map.card.source", lang, { quarter: "{quarter}" }), disclaimer: c("map.card.disclaimer", lang), share: c("map.share", lang), copied: c("map.copied", lang),
   page: c("map.a.page", lang), sponsored: c("dev.sponsored", lang),
-  pfrom: c("map.proj.from", lang, { v: "{v}" }), ponreq: c("map.proj.onreq", lang), golfUnnamed: c("map.golf.unnamed", lang), nomatch: c("map.find.none", lang),
+  pfrom: c("map.proj.from", lang, { v: "{v}" }), ponreq: c("map.proj.onreq", lang), golfUnnamed: c("map.golf.unnamed", lang), nomatch: c("map.find.none", lang), findWait: c("map.find.wait", lang),
   golf: Object.fromEntries(["holes", "design", "opened", "status", "opening", "homes", "site", "src"].map((x) => [x, c(`golf.${x}`, lang, x === "opening" ? { y: "{y}" } : {})])),
   regions: Object.fromEntries(REGIONS.map((r) => [r, c(`map.r.${r}`, lang)])), credits: k("credits"),
   // D83 part 2: the tiles, the charts, the unlock sheet and the comparison.
@@ -84,7 +85,7 @@ const labels = {
   c5: {
     mkt: k5("mkt"), m2: keep("card5.m2", ["v"]), nb: k5("nb"), nbOnreq: k5("nb.onreq"), life: k5("life"), bycar: k5("bycar"), min: keep("card5.min", ["v"]),
     flight: k5("flight", { c: c(`map4.cty.${ed}`, lang) }), via: k5("flight.via"), soon: k5("flight.soon"), schools: k5("schools"), health: k5("health"), within: k5("within"),
-    sources: k5("sources"), ctaPaid: k5("cta.paid"), ctaConsult: k5("cta.consult"), homes: keep("card5.homes", ["muni", "name"]), photoN: keep("card5.photo.n", ["i", "n"]),
+    sources: k5("sources"), total: keep("card5.total", ["total"]), ctaPaid: k5("cta.paid"), ctaConsult: k5("cta.consult"), homes: keep("card5.homes", ["muni", "name"]), photoN: keep("card5.photo.n", ["i", "n"]),
     srcH: k5("src.h"), tagCs: k5("tag.cs"), preview: keep("card5.preview", ["place"]), paid: cl("card5.paid", lang),
     src: { mkt: keep("card5.src.mkt", ["q"]), dir: keep("card5.src.dir", ["q0", "q"]), nb: k5("src.nb"), drive: keep("card5.src.drive", ["o", "d"]),
       flight: keep("card5.src.flight", ["from", "to", "d"]), sch: keep("card5.src.sch", ["d"]), hsp: keep("card5.src.hsp", ["d"]), ph: k5("src.ph"), km: k5("src.km") },
@@ -92,7 +93,9 @@ const labels = {
 };
 const mapPath = pathFor(lang, ed, "map");
 const comparePath = `${mapPath}${COMPARE_SUB[lang]}/`;
-const links = { buy: pathFor(lang, ed, "buy"), consult: pathFor(lang, ed, "consult"), map: mapPath, compare: comparePath, pages: [...pages], credits: "/credits/", imt: `${pathFor(lang, ed, "sims")}${SUB.imt[lang]}/` };
+const links = { buy: pathFor(lang, ed, "buy"), consult: pathFor(lang, ed, "consult"), map: mapPath, compare: comparePath, pages: [...pages], credits: "/credits/", imt: `${pathFor(lang, ed, "sims")}${SUB.imt[lang]}/`,
+  // p70 (J-02): the place card's budget line opens the one-screen simulator at that budget (and the place, where it has it).
+  sims: pathFor(lang, ed, "sims"), simR: SIM1_REGIONS.map((r) => r.id), cost: `${pathFor(lang, ed, "sims")}${SUB.cost[lang]}/` };
 // Prompt 71 §2 (US edition, English only): the south coast, one arrival and three stops (content/facts/map/south/stops.json;
 // COPY_DECK.md "p71.south.*"). A stop shows only with its photograph on disk and every fact it rests on in facts.csv.
 const SOUTH = JSON.parse(readFileSync(join(process.cwd(), "..", "content", "facts", "map", "south", "stops.json"), "utf8"));
@@ -138,6 +141,11 @@ const amount = Math.round(300000 * (fx ? fx.rate : 1));
 const regionList = ["north", "centre", "lisbon", "alentejo", "algarve", "madeira", "azores"] as const;
 const unlockList = cl("map4.unlock.list", lang);
 const live = A.live && !!A.stripe.region && !!A.stripe.all;
+// p70 (A-24): the names a ?place= link's waiting card shows at once, only where the slug alone would spell them wrongly
+// (accents, "do", "da"); the place's own file fills the card in.
+const small = new Set(["de", "do", "da", "dos", "das", "e", "a"]);
+const fromSlug = (s: string) => s.split("-").map((w, i) => (i && small.has(w) ? w : w.charAt(0).toUpperCase() + w.slice(1))).join(" ");
+const skelNames = Object.fromEntries(MAP_MUNIS.filter((m) => fromSlug(m.s) !== m.n).map((m) => [m.s, m.n]));
 ---
 <div class={`m3 m3-${mode}`} data-m3 data-mode={mode} data-locale={HTML_LANG[lang]} data-fx={fx ? fx.rate : ""} data-cur={fx ? cur : ""} data-quarter={lastQ}>
   <div class="m3-stage">
@@ -219,7 +227,7 @@ const live = A.live && !!A.stripe.region && !!A.stripe.all;
       <div class="m3-budget m3-pg" hidden={mode === "home" ? true : undefined}>
         <div class="m3-budget-head">
           <span class="m3-k">{k("budget.label")}</span>
-          <button type="button" class="m3-amount" data-amount title={k("budget.tap")}>{nf.format(amount)} {fx ? cur : "€"}</button>
+          <button type="button" class="m3-amount" data-amount title={k("budget.tap")}>{new Intl.NumberFormat(HTML_LANG[lang], { style: "currency", currency: fx ? cur! : "EUR", maximumFractionDigits: 0 }).format(amount)}</button>
           <input class="m3-amount-in" data-amount-in type="text" inputmode="numeric" hidden aria-label={k("budget.label")} />
         </div>
         <div class="m3-slider" data-slider role="slider" tabindex="0" aria-label={k("budget.label")} aria-valuemin="100000" aria-valuemax="20000000" aria-valuenow="300000">
@@ -284,6 +292,12 @@ const live = A.live && !!A.stripe.region && !!A.stripe.all;
 
   <noscript><style is:inline>.m3-top, .m3-dock, .m3-cards { display: none !important; }</style><p class="m3-noscript">{k("noscript")}</p></noscript>
   <script type="application/json" data-m3-cfg set:html={JSON.stringify(cfg)} />
+  {mode === "page" && <script type="application/json" data-m3-names set:html={JSON.stringify(skelNames)} />}
+  {/* p70 (A-24): a ?place= link's card frame (the place's name and quiet bars) shows with the first paint, before any
+       script file arrives; map-v3.ts fills it in from the place's small file. */}
+  {mode === "page" && (
+    <script is:inline>(function(){try{var v=new URLSearchParams(location.search).get("place");if(!v)return;var slug=v.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");var s=document.currentScript,root=s&&s.closest("[data-m3]"),sheet=root&&root.querySelector("[data-sheet]"),inner=root&&root.querySelector("[data-sheet-in]");if(!slug||!sheet||!inner||!sheet.hidden)return;var names=JSON.parse((root.querySelector("[data-m3-names]")||{}).textContent||"{}"),small=["de","do","da","dos","das","e","a"];var name=names[slug]||slug.split("-").map(function(w,i){return i&&small.indexOf(w)>=0?w:w.charAt(0).toUpperCase()+w.slice(1)}).join(" ");inner.innerHTML='<div class="m3-photo m3-skel-ph"></div><div class="m3-sb"><p class="m3-skel m3-skel-k"></p><h2 class="m3-h"></h2></div><div class="m3-sb m3-skel-b"><p class="m3-skel"></p><p class="m3-skel"></p><p class="m3-skel m3-skel-s"></p></div>';inner.querySelector("h2").textContent=name;sheet.dataset.skel="1";sheet.setAttribute("aria-busy","true");sheet.dataset.detent="1";sheet.hidden=false;sheet.classList.add("is-open")}catch(e){}})();</script>
+  )}
 </div>
 
 <script>

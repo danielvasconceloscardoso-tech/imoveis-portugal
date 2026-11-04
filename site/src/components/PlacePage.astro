@@ -3,6 +3,7 @@
 // the IMI range, the cost calculator prefilled and the partner agency. Data: src/lib/places.ts. Wording: "place.*".
 // Operator, step 1 (3 Nov 2026): a free page. The trend is the five-year direction in words (as on the map card); the ten
 // years and their chart, the rent and the gross yield moved to the paid analysis (MapAnalysisPage), named in one line.
+import { srcTitle } from "../lib/srctitle";
 import V2 from "../layouts/V2.astro";
 import { hostFor } from "../lib/host";
 import { EDITIONS, HTML_LANG, LANGS, pathFor, eur, type Lang, type EdCode } from "../i18n";
@@ -75,7 +76,7 @@ const nearHomes = showcases(PROJECTS).map((ps) => ps[0]).filter((p) => p.muni ==
   <section class="sources-list" aria-labelledby="fontes">
     <div class="frame read">
       <h2 id="fontes" class="h-small">{c("common.sources", lang)}</h2>
-      <ol>{src.list.map((s, i) => <li id={`fonte-${i + 1}`}><a href={s.url} rel="noopener">{s.title}</a>{s.checked && `, ${c("common.checked", lang, { date: fmtDate(lang, s.checked) })}`}.</li>)}</ol>
+      <ol>{src.list.map((s, i) => <li id={`fonte-${i + 1}`}><a href={s.url} rel="noopener">{srcTitle(s.title, lang)}</a>{s.checked && `, ${c("common.checked", lang, { date: fmtDate(lang, s.checked) })}`}.</li>)}</ol>
     </div>
   </section>
 </V2>

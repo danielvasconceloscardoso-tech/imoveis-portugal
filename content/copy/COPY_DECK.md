@@ -33,14 +33,14 @@ How to edit:
 - FR: Pas à pas
 
 ### nav.dossiers
-- PT: Dossiês
+- PT: Dossiers
 - EN: Dossiers
 - FR: Dossiers
 
 ### nav.consult
-- PT: Consulta privada
-- EN: Private consultation
-- FR: Consultation privée
+- PT: Concierge
+- EN: Concierge
+- FR: Concierge
 
 ### navx.prices
 - PT: Preços
@@ -124,7 +124,7 @@ How to edit:
 
 ### navx.sims
 - PT: Simuladores
-- EN: Simulators
+- EN: Calculators
 - FR: Simulateurs
 
 ### navx.map
@@ -148,9 +148,9 @@ How to edit:
 - FR: Prix et loyers
 
 ### nav.casa
-- PT: Passo a passo
-- EN: Step by step
-- FR: Pas à pas
+- PT: Comprar a partir de fora
+- EN: Buying from abroad
+- FR: Acheter depuis l'étranger
 
 ### nav.sims
 - PT: Simuladores
@@ -299,7 +299,7 @@ How to edit:
 
 ### foot.tagline
 - PT: A sua casa em Portugal, a partir de onde vive. E a Maré, à terça e à sexta, às 8h.
-- EN: Your home in Portugal, from wherever you live. Maré, a newsletter every Tuesday and Friday at 8 a.m..
+- EN: Your home in Portugal, from wherever you live. Maré, a newsletter every Tuesday and Friday at 8 a.m. Lisbon time.
 - FR: Votre maison au Portugal, depuis chez vous. Maré, une newsletter chaque mardi et vendredi à 8 h.
 
 ### foot.about
@@ -1462,6 +1462,11 @@ How to edit:
 - EN: Draft. Fields in square brackets will be filled in once the entity is set up.
 - FR: Brouillon. Les champs entre crochets seront complétés une fois l'entité définie.
 
+### pending
+- PT: Imóveis Portugal. A sociedade que publica este site está a ser registada em Portugal; o nome, a sede e o registo aparecem aqui antes do lançamento, a 1 de dezembro de 2026. Contacto: {email}.
+- EN: Imóveis Portugal. The company that publishes this site is being registered in Portugal; its name, address and registration will appear here before launch on December 1, 2026. Contact: {email}.
+- FR: Imóveis Portugal. La société qui publie ce site est en cours d'immatriculation au Portugal ; sa dénomination, son siège et son immatriculation figureront ici avant le lancement, le 1er décembre 2026. Contact : {email}.
+
 ### privacy.title
 - PT: Privacidade
 - EN: Privacy
@@ -1613,6 +1618,16 @@ How to edit:
 - PT: Página não encontrada
 - EN: Page not found
 - FR: Page introuvable
+
+### notfound.p
+- PT: Este endereço não existe ou mudou de lugar. Continue por aqui:
+- EN: This address doesn't exist, or it has moved. You can carry on from here:
+- FR: Cette adresse n'existe pas ou a changé. Vous pouvez continuer d'ici :
+
+### notfound.home
+- PT: Voltar ao início
+- EN: Back to the home page
+- FR: Retour à l'accueil
 
 ## sims
 
@@ -2046,6 +2061,11 @@ How to edit:
 - EN: If you already have a price in mind, a qualified advisor can show you homes at that price.
 - FR: Si vous avez déjà un prix en tête, un conseiller qualifié vous montre des biens à ce prix.
 
+### agency.cta
+- PT: Falar com o Concierge
+- EN: Talk to the Concierge
+- FR: Parler au Concierge
+
 ### plan.cta
 - PT: Receber o plano em PDF · 5,99 €
 - EN: Purchase plan as a PDF, with three mortgage scenarios and the document checklist · €5.99
@@ -2098,8 +2118,8 @@ How to edit:
 
 ### r.deed
 - PT: Escritura e registo (Casa Pronta)
-- EN: Deed and registration (Casa Pronta)
-- FR: Acte et enregistrement (Casa Pronta)
+- EN: Deed and registration (Casa Pronta, the state's one-stop desk)
+- FR: Acte et enregistrement (Casa Pronta, le guichet unique de l'État)
 
 ### r.extra
 - PT: Impostos, escritura e registo
@@ -2382,6 +2402,11 @@ How to edit:
 - PT: a equipa do Imóveis Portugal
 - EN: the Imóveis Portugal team
 - FR: l'équipe d'Imóveis Portugal
+
+### form.consent.team
+- PT: Autorizo o Imóveis Portugal a enviar esta parte do pedido apenas à equipa do Imóveis Portugal, para me contactar sobre ela.
+- EN: I authorise Imóveis Portugal to send this part of my request only to the Imóveis Portugal team, to contact me about it.
+- FR: J'autorise Imóveis Portugal à transmettre cette partie de ma demande uniquement à l'équipe d'Imóveis Portugal, pour me contacter à ce sujet.
 
 ### form.tying
 - PT: Nenhum serviço depende de outro: o crédito nunca obriga a contratar o seguro ou outro produto do nosso parceiro (Decreto-Lei 74-A/2017).
@@ -2895,6 +2920,16 @@ How to edit:
 - PT: Nenhum concelho com esse nome.
 - EN: No municipality by that name.
 - FR: Aucune commune de ce nom.
+
+### find.wait
+- PT: A procurar…
+- EN: Searching…
+- FR: Recherche…
+
+
+
+
+
 
 ### find
 - PT: Procurar concelho
@@ -3465,9 +3500,9 @@ How to edit:
 - FR: Nos partenaires
 
 ### lede
-- PT: Cada parceiro com a sua licença e a indicação de patrocinado. Primeiro o grupo parceiro (casa, crédito e seguros), depois os parceiros fundadores, à medida que assinam.
-- EN: Each partner is shown with its licence and the sponsored label. First the partner group, which handles the home, the mortgage and insurance; then the founding partners, as they sign.
-- FR: Chaque partenaire figure avec sa licence et la mention sponsorisé. D'abord le groupe partenaire, qui s'occupe du bien, du crédit et des assurances ; puis les partenaires fondateurs, à mesure qu'ils signent.
+- PT: Cada parceiro com a sua licença e a indicação de patrocinado. Primeiro o grupo parceiro, depois os promotores e os parceiros fundadores, à medida que assinam.
+- EN: Each partner is shown with its licence and the sponsored label. First the partner group, then the developers and the founding partners, as they sign.
+- FR: Chaque partenaire figure avec sa licence et la mention sponsorisé. D'abord le groupe partenaire, puis les promoteurs et les partenaires fondateurs, à mesure qu'ils signent.
 
 ### group.h
 - PT: O grupo parceiro
@@ -3503,6 +3538,16 @@ How to edit:
 - PT: Os parceiros fundadores aparecem aqui à medida que assinam, até 1 de dezembro de 2026.
 - EN: Founding partners appear here as they sign, until December 1, 2026.
 - FR: Les partenaires fondateurs apparaissent ici à mesure qu'ils signent, jusqu'au 1er décembre 2026.
+
+### devs.h
+- PT: Promotores
+- EN: Developers
+- FR: Promoteurs
+
+### devs.role
+- PT: Promotor imobiliário
+- EN: Developer
+- FR: Promoteur immobilier
 
 ### join
 - PT: Ver como ser parceiro
@@ -4126,14 +4171,14 @@ How to edit:
 - FR: Un conseiller dédié suit votre demande.
 
 ### title
-- PT: Consulta privada
-- EN: Private consultation
-- FR: Consultation privée
+- PT: Concierge
+- EN: Concierge
+- FR: Concierge
 
 ### h1
-- PT: Consulta privada com um consultor qualificado
-- EN: A private consultation with a qualified advisor
-- FR: Une consultation privée avec un conseiller qualifié
+- PT: O Concierge, 15 minutos com um consultor qualificado
+- EN: The Concierge, 15 minutes with a qualified advisor
+- FR: Le Concierge, 15 minutes avec un conseiller qualifié
 
 ### lede
 - PT: Quinze minutos por videochamada com um consultor qualificado, sem custos. As suas respostas preparam a conversa.
@@ -4151,9 +4196,9 @@ How to edit:
 - FR: La suite
 
 ### next.1
-- PT: O consultor lê o seu pedido e responde por email.
-- EN: The advisor reads your request and replies by email.
-- FR: Le conseiller lit votre demande et vous répond par e-mail.
+- PT: O consultor lê o seu pedido, confirma a hora por email e liga-lhe.
+- EN: The advisor reads your request, confirms the time by email and calls you.
+- FR: Le conseiller lit votre demande, confirme l'heure par e-mail et vous appelle.
 
 ### next.2
 - PT: Na consulta: as zonas, o orçamento, o calendário e os próximos passos.
@@ -4171,14 +4216,14 @@ How to edit:
 - FR: Vos données ne vont qu'à Imóveis Portugal et au conseiller qualifié, qui vous répond par e-mail.
 
 ### cta
-- PT: Pedir uma consulta
-- EN: Request a private consultation
-- FR: Demander une consultation privée
+- PT: Falar com o Concierge
+- EN: Talk to the Concierge
+- FR: Parler au Concierge
 
 ### card.h
-- PT: Consulta privada · 15 min · vídeo
-- EN: Private consultation · 15 min · video
-- FR: Consultation privée · 15 min · vidéo
+- PT: Concierge · 15 min · vídeo
+- EN: Concierge · 15 min · video
+- FR: Concierge · 15 min · vidéo
 
 ### card.p
 - PT: Com um consultor qualificado, sem custos. Diga-nos em que ponto está.
@@ -4251,14 +4296,14 @@ How to edit:
 - FR: Maré, la newsletter : idées et pépites du Portugal, chaque mardi et vendredi.
 
 ### later.dossier
-- PT: Os dossiês, com os números do seu caso
+- PT: Os dossiers, com os números do seu caso
 - EN: The dossiers, with the figures for your case
 - FR: Les dossiers, avec les chiffres de votre cas
 
 ### later.book
-- PT: Quando a compra estiver mais perto, peça aqui a sua consulta privada.
-- EN: When your purchase is closer, request your private consultation here.
-- FR: Quand votre achat sera plus proche, demandez ici votre consultation privée.
+- PT: Quando a compra estiver mais perto, fale aqui com o Concierge.
+- EN: When your purchase is closer, talk to the Concierge here.
+- FR: Quand votre achat sera plus proche, parlez ici au Concierge.
 
 ## prices
 
@@ -4385,7 +4430,7 @@ How to edit:
 ## dossier
 
 ### title
-- PT: Dossiês
+- PT: Dossiers
 - EN: Dossiers
 - FR: Dossiers
 
@@ -4400,7 +4445,7 @@ How to edit:
 - FR: Des rapports PDF établis à partir des règles officielles et des données de l'INE pour votre pays, votre budget et votre secteur. De l'information, pas du conseil : pour décider, les bons partenaires à chaque étape.
 
 ### compra.h
-- PT: Dossiê de compra
+- PT: Dossier de compra
 - EN: Purchase dossier
 - FR: Dossier d'achat
 
@@ -4420,7 +4465,7 @@ How to edit:
 - FR: Un secteur en profondeur : dix ans de prix, loyers des nouveaux baux et rendement brut, comparaison avec les communes voisines, programmes partenaires signalés et comment y acheter depuis l'étranger.
 
 ### private.h
-- PT: Dossiê de residência e património
+- PT: Dossier de residência e património
 - EN: Residence and estate dossier
 - FR: Dossier résidence et patrimoine
 
@@ -4450,12 +4495,12 @@ How to edit:
 - FR: Voir un exemple (PDF)
 
 ### order
-- PT: Receber o meu dossiê
+- PT: Receber o meu dossier
 - EN: Prepare my dossier
 - FR: Préparer mon dossier
 
 ### form.h
-- PT: Para quem é o dossiê
+- PT: Para quem é o dossier
 - EN: Who the dossier is for
 - FR: Pour qui est le dossier
 
@@ -4709,9 +4754,9 @@ Prompt 43 §3b: each station is a plain question (st.{k}.q) and a two or three s
 - FR: En parler avec un avocat partenaire
 
 ### p.advisor
-- PT: Falar com o consultor
-- EN: Talk to the advisor
-- FR: Parler au conseiller
+- PT: Falar com o Concierge
+- EN: Talk to the Concierge
+- FR: Parler au Concierge
 
 ### p.bank
 - PT: Perguntar a um banco
@@ -4749,7 +4794,7 @@ Prompt 43 §3b: each station is a plain question (st.{k}.q) and a two or three s
 - FR: Quels documents faut-il pour acheter ?
 
 ### st.docs.a
-- PT: O NIF, o número fiscal português, pedido online através de um representante, e um documento de identificação válido. Para assinar de onde vive, uma procuração feita num consulado português ou num notário local, com a Apostila de Haia, o selo que a torna válida em Portugal.
+- PT: O NIF, o número fiscal português, pedido online através de um representante (se já o tem, está feito), e um documento de identificação válido. Para assinar de onde vive, uma procuração feita num consulado português ou num notário local, com a Apostila de Haia, o selo que a torna válida em Portugal.
 - EN: You need a NIF, your Portuguese tax number, which you can request online through a representative, and a valid passport or ID card. To sign from the country where you live, you give a power of attorney at a Portuguese consulate. A local notary works too, with a Hague Apostille, a stamp that makes it valid in Portugal.
 - FR: Il vous faut un NIF, votre numéro fiscal portugais, que vous pouvez demander en ligne par un représentant, et une pièce d'identité valide. Pour signer depuis votre pays, vous donnez une procuration dans un consulat du Portugal. Un notaire local convient aussi, avec l'apostille de La Haye, un tampon qui la rend valable au Portugal.
 
@@ -5401,9 +5446,9 @@ Prompt 28 §2b (D54): the qualified summary that goes with a partner enquiry (in
 - FR: La demande part vers {to}, avec le résumé de votre cas si vous choisissez de le joindre. Sur place ou en vidéo.
 
 ### viewing
-- PT: Pedir uma visita
-- EN: Arrange a private viewing
-- FR: Organiser une visite privée
+- PT: Marcar uma visita privada
+- EN: Book a private visit
+- FR: Réserver une visite privée
 
 ### cost.open
 - PT: Calcular com este preço
@@ -5547,7 +5592,7 @@ Design v2 home (prompt 32, D59). Every block: one to three sentences, at most 45
 - FR: Une maison au Portugal, sans quitter Israël.
 
 ### lede
-- PT: Os preços oficiais dos 308 concelhos e o custo completo de cada compra.
+- PT: Os preços oficiais dos 308 concelhos, o custo completo de cada compra e quem trata de cada passo.
 - EN: Official prices for 308 municipalities, the real cost of each purchase and who handles each step.
 - FR: Les prix officiels de 308 communes, le coût réel de chaque achat et qui s'occupe de chaque étape.
 
@@ -5762,9 +5807,9 @@ Design v2 home (prompt 32, D59). Every block: one to three sentences, at most 45
 - FR: Maré
 
 ### nl.p
-- PT: Às 8h, um lugar com história e o que fazer no fim de semana. Três minutos de leitura, grátis. Confirma o email uma vez e cancela quando quiser.
-- EN: The rules that changed, new INE prices and the full cost of one home. Free.
-- FR: Les règles qui ont changé, les nouveaux prix de l'INE et le coût complet d'un bien. Gratuit.
+- PT: Às 8h de Lisboa, um lugar com história e o que fazer no fim de semana. Três minutos de leitura, grátis. Cancele quando quiser.
+- EN: At 8 a.m. Lisbon time, a place with a story and what to do at the weekend. A three-minute read, free. Leave whenever you like.
+- FR: À 8 h, heure de Lisbonne, un lieu chargé d'histoire et que faire le week-end. Trois minutes de lecture, gratuit. Vous partez quand vous voulez.
 
 ### nl.email
 - PT: O seu email
@@ -6021,9 +6066,9 @@ Prompt 36 (D62): map v3. Budget gesture, layer chips, Day/Night, search, time, c
 - FR: Voir les biens ici
 
 ### card.concierge
-- PT: Falar com o concierge
-- EN: Talk to the concierge
-- FR: Parler au concierge
+- PT: Falar com o Concierge
+- EN: Talk to the Concierge
+- FR: Parler au Concierge
 
 ### card.compare
 - PT: Comparar
@@ -6187,9 +6232,9 @@ Prompt 43 §3b: the partner links on the path and the questions open the Concier
 - FR: Fermer
 
 ### c.title
-- PT: Falar com o concierge
-- EN: Talk to the concierge
-- FR: Parler au concierge
+- PT: Falar com o Concierge
+- EN: Talk to the Concierge
+- FR: Parler au Concierge
 
 ### c.lede
 - PT: Quinze minutos por vídeo com um consultor qualificado, sem custos. Pedir leva um minuto.
@@ -6307,9 +6352,9 @@ Prompt 43 §3b: the partner links on the path and the questions open the Concier
 - FR: Comment pensez-vous payer ?
 
 ### c.fin.1
-- PT: Pronto pagamento
-- EN: Cash
-- FR: Comptant
+- PT: Capitais próprios (sem crédito)
+- EN: Own funds (no mortgage)
+- FR: Fonds propres (sans crédit)
 
 ### c.fin.2
 - PT: Com crédito
@@ -6467,9 +6512,9 @@ Prompt 43 §3b: the partner links on the path and the questions open the Concier
 - FR: Nous répondons par e-mail, en général sous deux jours ouvrés.
 
 ### v.title
-- PT: Pedir uma visita
-- EN: Ask for a private viewing
-- FR: Demander une visite privée
+- PT: Marcar uma visita privada
+- EN: Book a private visit
+- FR: Réserver une visite privée
 
 ### v.how
 - PT: Como prefere visitar?
@@ -6568,6 +6613,16 @@ Prompt 35 §3.1 (D61): the path's start as one question at a time.
 - EN: Where do you live?
 - FR: Où vivez-vous ?
 
+### where
+- PT: Vive {where}.
+- EN: You live {where}.
+- FR: Vous vivez {where}.
+
+### where.change
+- PT: Mudar
+- EN: Change
+- FR: Modifier
+
 ### budget
 - PT: Quanto, mais ou menos?
 - EN: Roughly how much?
@@ -6636,8 +6691,8 @@ Prompt 36 §9 (D62): the golf card on the map, from our own list (content/facts/
 
 ### typ
 - PT: Tipologia
-- EN: Type
-- FR: Typologie
+- EN: Type (T1 = 1 bedroom)
+- FR: Typologie (T1 = 1 chambre)
 
 ### total
 - PT: Total
@@ -6680,9 +6735,9 @@ Prompt 36 §9 (D62): the golf card on the map, from our own list (content/facts/
 - FR: Ce logement m'intéresse
 
 ### visit
-- PT: Pedir uma visita
-- EN: Request a private visit
-- FR: Demander une visite privée
+- PT: Marcar uma visita privada
+- EN: Book a private visit
+- FR: Réserver une visite privée
 
 ### price
 - PT: Preço sob consulta
@@ -6701,8 +6756,8 @@ Prompt 36 §9 (D62): the golf card on the map, from our own list (content/facts/
 
 ### view
 - PT: Ver o empreendimento
-- EN: View the development
-- FR: Voir la résidence
+- EN: See the development
+- FR: Voir le programme
 
 ### map
 - PT: No mapa
@@ -7459,6 +7514,11 @@ The one-screen simulator at the top of the calculators page (night of 3 Nov 2026
 - EN: House
 - FR: Maison
 
+### type.note
+- PT: Os impostos são os mesmos para um apartamento ou uma moradia.
+- EN: The taxes are the same for an apartment or a house.
+- FR: Les impôts sont les mêmes pour un appartement ou une maison.
+
 ### use
 - PT: Para quê
 - EN: What for
@@ -7629,29 +7689,29 @@ Part 2 of 3 Nov 2026 (the journey): the five-item bar at the bottom of the phone
 - FR: Questions
 
 ### saved
-- PT: A sua seleção
-- EN: Your selection
-- FR: Votre sélection
+- PT: Os seus favoritos
+- EN: Your favorites
+- FR: Vos favoris
 
 ### heart.add
-- PT: Guardar na sua seleção
-- EN: Save to your selection
-- FR: Garder dans votre sélection
+- PT: Guardar nos favoritos
+- EN: Save to your favorites
+- FR: Ajouter à vos favoris
 
 ### heart.saved
-- PT: Guardado na sua seleção
-- EN: Saved to your selection
-- FR: Gardé dans votre sélection
+- PT: Guardado nos favoritos
+- EN: Saved to your favorites
+- FR: Ajouté à vos favoris
 
 ### heart.removed
-- PT: Retirado da sua seleção
-- EN: Removed from your selection
-- FR: Retiré de votre sélection
+- PT: Retirado dos favoritos
+- EN: Removed from your favorites
+- FR: Retiré de vos favoris
 
 ### page.title
-- PT: A sua seleção
-- EN: Your selection
-- FR: Votre sélection
+- PT: Os seus favoritos
+- EN: Your favorites
+- FR: Vos favoris
 
 ### page.lede
 - PT: As casas e as zonas que guardou. Ficam neste aparelho, só para si, e não as enviamos a ninguém.
@@ -7729,9 +7789,9 @@ Part 2 of 3 Nov 2026 (the journey): the five-item bar at the bottom of the phone
 - FR: Revenez à la page où vous étiez.
 
 ### next.show.p
-- PT: Para ver estas casas, peça uma visita privada. Um consultor qualificado trata do resto com o promotor.
-- EN: To see these homes, ask for a private visit. A qualified advisor handles the rest with the developer.
-- FR: Pour voir ces logements, demandez une visite privée. Un conseiller qualifié s'occupe du reste avec le promoteur.
+- PT: Para ver estas casas, marque uma visita privada. Um consultor qualificado trata do resto com o promotor.
+- EN: To see these homes, book a private visit. A qualified advisor handles the rest with the developer.
+- FR: Pour voir ces logements, réservez une visite privée. Un conseiller qualifié s'occupe du reste avec le promoteur.
 
 ### next.saved.p
 - PT: O Concierge começa pelas zonas que guardou.
@@ -8001,19 +8061,19 @@ Requests really sent (operator, 3 Nov 2026): the Concierge, the partner and view
 - FR: Maré
 
 ### meta
-- PT: Maré, a newsletter da Imóveis Portugal: Portugal à terça e à sexta, às 8h, em três minutos. Grátis.
-- EN: Maré, the Imóveis Portugal newsletter: Portugal every Tuesday and Friday at 8 a.m., in three minutes. Free.
-- FR: Maré, la newsletter d'Imóveis Portugal : le Portugal chaque mardi et vendredi à 8 h, en trois minutes. Gratuit.
+- PT: Maré, a newsletter da Imóveis Portugal: Portugal à terça e à sexta, às 8h de Lisboa, em três minutos. Grátis.
+- EN: Maré, the Imóveis Portugal newsletter: Portugal every Tuesday and Friday at 8 a.m. Lisbon time, in three minutes. Free.
+- FR: Maré, la newsletter d'Imóveis Portugal : le Portugal chaque mardi et vendredi à 8 h, heure de Lisbonne, en trois minutes. Gratuit.
 
 ### line
-- PT: Maré, a newsletter: insights e pérolas de Portugal, todas as terças e sextas.
+- PT: Maré, a newsletter: ideias e pérolas de Portugal, todas as terças e sextas.
 - EN: Maré, the newsletter: insights and hidden gems from Portugal, every Tuesday and Friday.
 - FR: Maré, la newsletter : idées et pépites du Portugal, chaque mardi et vendredi.
 
 ### when
-- PT: Às 8h, em três minutos. Grátis.
-- EN: At 8 a.m., in three minutes. Free.
-- FR: À 8 h, en trois minutes. Gratuit.
+- PT: Às 8h de Lisboa, em três minutos. Grátis.
+- EN: At 8 a.m. Lisbon time, in three minutes. Free.
+- FR: À 8 h, heure de Lisbonne, en trois minutes. Gratuit.
 
 ### email
 - PT: O seu email
@@ -8055,6 +8115,11 @@ Requests really sent (operator, 3 Nov 2026): the Concierge, the partner and view
 - EN: One step left: send the email that opened, then confirm when Maré writes to you.
 - FR: Il reste une étape : envoyez l'e-mail qui s'est ouvert, puis confirmez quand Maré vous écrit.
 
+### thanks
+- PT: Obrigado. A Maré começa na terça ou sexta seguinte; se chegar um email de confirmação, basta um clique.
+- EN: Thank you. Maré starts on the next Tuesday or Friday; if a confirmation email arrives, one click is enough.
+- FR: Merci. Maré commence le mardi ou le vendredi suivant ; si un e-mail de confirmation arrive, un clic suffit.
+
 ### latest.h
 - PT: A última Maré
 - EN: The latest Maré
@@ -8064,6 +8129,16 @@ Requests really sent (operator, 3 Nov 2026): the Concierge, the partner and view
 - PT: Tal como chega à caixa de correio.
 - EN: Exactly as it arrives in the inbox.
 - FR: Telle qu'elle arrive dans la boîte de réception.
+
+### first.h
+- PT: A primeira Maré, a {date}
+- EN: The first Maré, on {date}
+- FR: La première Maré, le {date}
+
+### first.p
+- PT: Uma antevisão, tal como vai chegar à caixa de correio.
+- EN: A preview, exactly as it will arrive in the inbox.
+- FR: Un aperçu, tel qu'il arrivera dans la boîte de réception.
 
 ### inbox.from
 - PT: De
@@ -8077,8 +8152,8 @@ Requests really sent (operator, 3 Nov 2026): the Concierge, the partner and view
 
 ### pt.only
 - PT: Em português.
-- EN: This issue is in Portuguese.
-- FR: Ce numéro est en portugais.
+- EN: The first issues are in Portuguese.
+- FR: Les premiers numéros sont en portugais.
 
 ### archive.h
 - PT: Todas as Marés
@@ -8121,14 +8196,19 @@ Requests really sent (operator, 3 Nov 2026): the Concierge, the partner and view
 - FR: Maré, la newsletter
 
 ### block
-- PT: Esta {dia}: {headline}. Receba às 8h.
-- EN: This {dia} in Maré: “{headline}”. In your inbox at 8 a.m.
-- FR: Ce {dia} dans Maré : « {headline} ». À 8 h dans votre boîte.
+- PT: Esta {dia}: {headline}. Receba às 8h de Lisboa.
+- EN: This {dia} in Maré: “{headline}”. In your inbox at 8 a.m. Lisbon time.
+- FR: Ce {dia} dans Maré : « {headline} ». À 8 h, heure de Lisbonne, dans votre boîte.
+
+### block.plain
+- PT: Ideias e pérolas de Portugal, todas as terças e sextas, às 8h de Lisboa.
+- EN: Ideas and hidden gems from Portugal, every Tuesday and Friday at 8 a.m. Lisbon time.
+- FR: Idées et pépites du Portugal, chaque mardi et vendredi à 8 h, heure de Lisbonne.
 
 ### home.more
-- PT: Ver a última Maré
-- EN: See the latest Maré
-- FR: Voir la dernière Maré
+- PT: Ver a Maré
+- EN: See Maré
+- FR: Voir Maré
 
 ## lifea
 
@@ -9217,14 +9297,19 @@ Operator's step 1 (3 Nov 2026): the golden sample place card (Gondomar first). F
 - FR: Voir l'analyse complète
 
 ### cta.consult
-- PT: O consultor ajuda
-- EN: Ask the advisor
-- FR: Le conseiller vous aide
+- PT: Falar com o Concierge
+- EN: Talk to the Concierge
+- FR: Parler au Concierge
 
 ### homes
 - PT: Casas novas em {muni}: {name}
 - EN: New homes in {muni}: {name}
 - FR: Logements neufs à {muni} : {name}
+
+### total
+- PT: Total a pagar ≈ {total}, com IMT, imposto do selo e escritura
+- EN: Total to pay ≈ {total}, with IMT, stamp duty and deed
+- FR: Total à payer ≈ {total}, avec IMT, droit de timbre et acte
 
 ### photo.n
 - PT: Fotografia {i} de {n}
@@ -9584,9 +9669,9 @@ The wording that names the partner agency, kept exactly as it was before prompt 
 - FR: Les demandes de visite des lecteurs vont à notre agence partenaire agréée, qui travaille avec le promoteur.
 
 ### consult.h1
-- PT: Consulta privada com a agência parceira
-- EN: A private consultation with our partner agency
-- FR: Une consultation privée avec notre agence partenaire
+- PT: O Concierge, 15 minutos com a agência parceira
+- EN: The Concierge, 15 minutes with our partner agency
+- FR: Le Concierge, 15 minutes avec l'agence partenaire
 
 ### consult.lede
 - PT: Quinze minutos por videochamada com a {agency} (AMI {ami}), sem custos. As suas respostas preparam a conversa.
@@ -9684,14 +9769,24 @@ The wording that names the partner agency, kept exactly as it was before prompt 
 - FR: Quand vous voulez, le Concierge rassemble vos réponses et fixe le premier appel avec l'agence partenaire.
 
 ### bar.next.show.p
-- PT: Para ver estas casas, peça uma visita privada. A agência parceira trata do resto com o promotor.
-- EN: To see these homes, ask for a private visit. The partner agency handles the rest with the developer.
-- FR: Pour voir ces logements, demandez une visite privée. L'agence partenaire s'occupe du reste avec le promoteur.
+- PT: Para ver estas casas, marque uma visita privada. A agência parceira trata do resto com o promotor.
+- EN: To see these homes, book a private visit. The partner agency handles the rest with the developer.
+- FR: Pour voir ces logements, réservez une visite privée. L'agence partenaire s'occupe du reste avec le promoteur.
 
 ### send.notice
 - PT: O seu pedido segue para a {agency}, mediadora licenciada (AMI {ami}), e para a Imóveis Portugal. Responde-lhe por e-mail.
 - EN: When you send, your request goes to Imóveis Portugal and to {agency}, who reply by email.
 - FR: En envoyant, votre demande part chez Imóveis Portugal et chez {agency}, qui vous répond par e-mail.
+
+### p69.notice
+- PT: O seu pedido segue para a {agency}, mediadora licenciada (AMI {ami}), e para a Imóveis Portugal. A {agency} confirma a hora por email e liga-lhe.
+- EN: Your request goes to Imóveis Portugal and to {agency}, who confirm the time by email and call you.
+- FR: Votre demande part chez Imóveis Portugal et chez {agency}, qui confirme l'heure par e-mail et vous appelle.
+
+### p69.notice.later
+- PT: O seu pedido segue para a {agency}, mediadora licenciada (AMI {ami}), e para a Imóveis Portugal. A {agency} escreve-lhe por email para combinar a hora.
+- EN: Your request goes to Imóveis Portugal and to {agency}, who email you to agree on a time.
+- FR: Votre demande part chez Imóveis Portugal et chez {agency}, qui vous écrit par e-mail pour convenir d'une heure.
 
 ### send.to
 - PT: Imóveis Portugal e o consultor qualificado da {agency}
@@ -9794,8 +9889,8 @@ Prompt 66 (3 Nov 2026): the O'rizon Living showcase, the first project shown on 
 
 ### areas.h
 - PT: Áreas por tipologia
-- EN: Areas by typology
-- FR: Surfaces par typologie
+- EN: Areas by type (T1 = 1 bedroom)
+- FR: Surfaces par typologie (T1 = 1 chambre)
 
 ### areas.v
 - PT: {min} a {max} m²
@@ -9814,8 +9909,8 @@ Prompt 66 (3 Nov 2026): the O'rizon Living showcase, the first project shown on 
 
 ### col.typ
 - PT: Tipologia
-- EN: Typology
-- FR: Typologie
+- EN: Type (T1 = 1 bedroom)
+- FR: Typologie (T1 = 1 chambre)
 
 ### col.area
 - PT: Área anunciada
@@ -9882,49 +9977,49 @@ Prompt 66 (3 Nov 2026): the O'rizon Living showcase, the first project shown on 
 Prompt 68 (4 Nov 2026), the method's worked example (content/METHOD.md): a place with partner projects that carry a "hero" line in projects.json, and with an arrival in its place.json, opens as an arrival (the photograph, the name, one line), then its developments as photo tiles in one format (alphabetical, no ranking; each opens its card: the render, one line, one action), then the next questions, one line each, opening on tap, then one more thing. Gondomar is the sample (rule 17). The place's own lines (the arrival, the last line) live in content/facts/map/places/<slug>/place.json; the project's line in projects.json. Used by site/src/scripts/map-v3.ts.
 
 ### q.life
-- PT: {city}? {v} min.
-- EN: {city}? {v} min.
-- FR: {city} ? {v} min.
+- PT: {city} a {v} min de carro
+- EN: {city}, {v} min away by car
+- FR: {city} à {v} min en voiture
 
 ### q.schools
-- PT: Escolas? {n} a menos de {m} min.
-- EN: Schools? {n} within {m} min.
-- FR: Écoles ? {n} à moins de {m} min.
+- PT: Escolas: {n} a menos de {m} min
+- EN: Schools: {n} within {m} min
+- FR: Écoles : {n} à moins de {m} min
 
 ### q.price
-- PT: {b}? Cerca de {a} m².
-- EN: {b}? About {a} m².
-- FR: {b} ? Environ {a} m².
+- PT: Com {b}: cerca de {a} m²
+- EN: {b} buys about {a} m²
+- FR: Avec {b} : environ {a} m²
 
 ### q.health
-- PT: Saúde? Um hospital a {v} min.
-- EN: Health? A hospital {v} min away.
-- FR: Santé ? Un hôpital à {v} min.
+- PT: Um hospital a {v} min
+- EN: A hospital {v} min away
+- FR: Un hôpital à {v} min
 
 ### q.sea
-- PT: O mar? {v} km em linha reta.
-- EN: The sea? {v} km as the crow flies.
-- FR: La mer ? {v} km à vol d'oiseau.
+- PT: O mar a {v} km em linha reta
+- EN: The sea {v} km away as the crow flies
+- FR: La mer à {v} km à vol d'oiseau
 
 ### q.sea.min
-- PT: O mar? {v} min.
-- EN: The sea? {v} min.
-- FR: La mer ? {v} min.
+- PT: O mar a {v} min
+- EN: The sea {v} min away
+- FR: La mer à {v} min
 
 ### q.health.cs
-- PT: Saúde? Um centro de saúde a {v} min.
-- EN: Health? A health center {v} min away.
-- FR: Santé ? Un centre de santé à {v} min.
+- PT: Um centro de saúde a {v} min
+- EN: A health center {v} min away
+- FR: Un centre de santé à {v} min
 
 ### visit
 - PT: Marcar uma visita privada
-- EN: Book a private viewing
+- EN: Book a private visit
 - FR: Réserver une visite privée
 
 ### view
 - PT: Ver o empreendimento
-- EN: View the development
-- FR: Voir la résidence
+- EN: See the development
+- FR: Voir le programme
 
 ### credit
 - PT: Imagem: {c}
@@ -9957,19 +10052,19 @@ Prompt 69 (4 Nov 2026), the Concierge in three steps and IMT explained where the
 - FR: Ce que vous regardiez
 
 ### help.project
-- PT: {name}, em {place}
-- EN: {name}, in {place}
-- FR: {name}, à {place}
+- PT: {name}, {inplace}
+- EN: {name}, {inplace}
+- FR: {name}, {inplace}
 
 ### help.place
-- PT: Uma casa em {place}
-- EN: A home in {place}
-- FR: Un logement à {place}
+- PT: Uma casa {inplace}
+- EN: A home {inplace}
+- FR: Un logement {inplace}
 
 ### help.placebudget
-- PT: Uma casa em {place}, por cerca de {price}
-- EN: A home in {place}, around {price}
-- FR: Un logement à {place}, autour de {price}
+- PT: Uma casa {inplace}, por cerca de {price}
+- EN: A home {inplace}, around {price}
+- FR: Un logement {inplace}, autour de {price}
 
 ### help.budget
 - PT: Uma casa por cerca de {price}
@@ -10007,9 +10102,9 @@ Prompt 69 (4 Nov 2026), the Concierge in three steps and IMT explained where the
 - FR: Je préfère convenir d'une heure par e-mail
 
 ### tz
-- PT: Horas de {city}, com Lisboa por baixo.
-- EN: Times in {city}, with Lisbon underneath.
-- FR: Heures de {city}, avec Lisbonne en dessous.
+- PT: Horas {ofcity}, com Lisboa por baixo.
+- EN: Times {ofcity}, with Lisbon underneath.
+- FR: Heures {ofcity}, avec Lisbonne en dessous.
 
 ### tz.same
 - PT: Horas de Lisboa.
@@ -10080,6 +10175,61 @@ Prompt 69 (4 Nov 2026), the Concierge in three steps and IMT explained where the
 - PT: Marcar a chamada
 - EN: Book the call
 - FR: Réserver l'appel
+
+### send.later
+- PT: Enviar
+- EN: Send
+- FR: Envoyer
+
+### notice
+- PT: O seu pedido segue para a Imóveis Portugal e para um consultor qualificado, que confirma a hora por email e lhe liga.
+- EN: Your request goes to Imóveis Portugal and to a qualified advisor, who confirms the time by email and calls you.
+- FR: Votre demande part chez Imóveis Portugal et chez un conseiller qualifié, qui confirme l'heure par e-mail et vous appelle.
+
+### notice.later
+- PT: O seu pedido segue para a Imóveis Portugal e para um consultor qualificado, que lhe escreve por email para combinar a hora.
+- EN: Your request goes to Imóveis Portugal and to a qualified advisor, who emails you to agree on a time.
+- FR: Votre demande part chez Imóveis Portugal et chez un conseiller qualifié, qui vous écrit par e-mail pour convenir d'une heure.
+
+### phone
+- PT: Telefone (ligamos para este número)
+- EN: Phone (we call this number)
+- FR: Téléphone (nous appelons ce numéro)
+
+### email
+- PT: Email (para a confirmação)
+- EN: Email (for the confirmation)
+- FR: E-mail (pour la confirmation)
+
+### err.name
+- PT: Indique o seu nome.
+- EN: Enter your name.
+- FR: Indiquez votre nom.
+
+### err.email
+- PT: Indique o seu email.
+- EN: Enter your email.
+- FR: Indiquez votre e-mail.
+
+### err.phone
+- PT: Indique um telefone: o consultor liga para este número.
+- EN: Enter a phone number: the advisor calls you on it.
+- FR: Indiquez un téléphone : le conseiller vous appelle à ce numéro.
+
+### err.phone.bad
+- PT: Este número parece incompleto.
+- EN: This number looks incomplete.
+- FR: Ce numéro semble incomplet.
+
+### place
+- PT: Onde, em Portugal? Até três sítios.
+- EN: Where in Portugal? Up to three places.
+- FR: Où, au Portugal ? Jusqu'à trois lieux.
+
+### place.ph
+- PT: Ex.: Gondomar, Vila do Conde
+- EN: e.g. Gondomar, Vila do Conde
+- FR: Ex. : Gondomar, Vila do Conde
 
 ### done.h
 - PT: A partir daqui, tratamos nós.
@@ -10172,8 +10322,8 @@ Prompt 69 (4 Nov 2026), the Concierge in three steps and IMT explained where the
 - FR: 7,5 % du prix, sans exonération ni réduction.
 
 ### imt.back.k
-- PT: Duas formas de receber a diferença
-- EN: Two ways the difference comes back
+- PT: Duas formas de recuperar a diferença
+- EN: Two ways to get the difference back
 - FR: Deux façons de récupérer la différence
 
 ### imt.back.1
@@ -10187,9 +10337,9 @@ Prompt 69 (4 Nov 2026), the Concierge in three steps and IMT explained where the
 - FR: Vous louez le logement comme résidence dans les 6 mois, pendant au moins 36 mois sur les 5 premières années, à un loyer dans les plafonds légaux.
 
 ### imt.back.p
-- PT: Nos dois casos, a diferença é devolvida a pedido, no prazo de 6 meses.
-- EN: In both cases, the difference is refunded on request, within 6 months.
-- FR: Dans les deux cas, la différence est remboursée sur demande, dans un délai de 6 mois.
+- PT: Nos dois casos, paga primeiro os 7,5%. Depois tem 6 meses para pedir a diferença às Finanças (AT), a contar de quando passa a residente ou assina o arrendamento.
+- EN: In both cases you pay 7.5% first. Then you have 6 months to ask the tax office (AT) for the difference, counted from when you become resident or sign the lease.
+- FR: Dans les deux cas, vous payez d'abord 7,5 %. Vous avez ensuite 6 mois pour demander la différence au fisc portugais (AT), à compter de votre installation comme résident ou de la signature du bail.
 
 ### imt.res.k
 - PT: Residente fiscal, habitação própria e permanente
@@ -10237,14 +10387,44 @@ Prompt 69 (4 Nov 2026), the Concierge in three steps and IMT explained where the
 - FR: Encore une chose
 
 ### imt.more
-- PT: A {price}, {back} voltam a pedido: paga {nr} na compra e, como residente, na sua habitação própria e permanente, o IMT é de {res}.
-- EN: At {price}, {back} comes back on request: you pay {nr} at purchase, and as a resident, in your primary home, the IMT is {res}.
-- FR: À {price}, {back} vous reviennent sur demande : vous payez {nr} à l'achat et, résident, dans votre résidence principale, l'IMT est de {res}.
+- PT: A {price}, paga {nr} na compra. Se passar a residente nos 2 anos seguintes e for a sua habitação própria e permanente, o IMT é de {res}: pode pedir {back} de volta.
+- EN: At {price}, you pay {nr} at purchase. If you move to Portugal within 2 years and make it your primary home, the IMT is {res}: you can ask for {back} back.
+- FR: À {price}, vous payez {nr} à l'achat. Si vous devenez résident dans les 2 ans et en faites votre résidence principale, l'IMT est de {res} : vous pouvez demander {back} en retour.
 
 ### imt.more.none
 - PT: Acima de {top}, os residentes também pagam 7,5%: não há diferença a devolver.
 - EN: Above {top}, residents also pay 7.5%: there is no difference to refund.
 - FR: Au-delà de {top}, les résidents paient aussi 7,5 % : il n'y a pas de différence à rembourser.
+
+### imt.more.if
+- PT: Se não passar a residente nem arrendar a casa por longo prazo, nada é devolvido.
+- EN: If you neither move there nor let it long-term, nothing comes back.
+- FR: Si vous ne vous installez pas et ne louez pas à long terme, rien n'est remboursé.
+
+### imt.nr.who
+- PT: Conta a residência fiscal, não a nacionalidade.
+- EN: What counts is tax residency, not nationality.
+- FR: C'est la résidence fiscale qui compte, pas la nationalité.
+
+### imt.other
+- PT: Outras exceções, nas perguntas frequentes
+- EN: Other exceptions, in the FAQ
+- FR: Autres exceptions, dans les questions fréquentes
+
+### imt.how.k
+- PT: Como se calcula
+- EN: How it's worked out
+- FR: Comment c'est calculé
+
+### imt.refs
+- PT: Referências legais
+- EN: Legal references
+- FR: Références légales
+
+### imt.sim
+- PT: Se passar a residente fiscal nos 2 anos seguintes, pode pedir {back} de volta.
+- EN: If you become a tax resident within 2 years, you can ask for {back} back.
+- FR: Si vous devenez résident fiscal dans les 2 ans, vous pouvez demander {back} en retour.
 
 ### imt.src.k
 - PT: Fontes

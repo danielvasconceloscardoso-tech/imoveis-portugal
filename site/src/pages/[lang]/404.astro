@@ -1,0 +1,9 @@
+---
+// The 404 for an address with a language but no edition (/en/anything): the language's own edition (CANONICAL_ED).
+import NotFound from "../../components/NotFound.astro";
+import { LANGS, type Lang } from "../../i18n";
+import { CANONICAL_ED } from "../../lib/blog";
+export function getStaticPaths() { return LANGS.map((lang) => ({ params: { lang } })); }
+const { lang } = Astro.params as { lang: Lang };
+---
+<NotFound lang={lang} ed={CANONICAL_ED[lang]} />

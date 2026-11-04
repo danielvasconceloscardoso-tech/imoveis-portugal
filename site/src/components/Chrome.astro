@@ -16,7 +16,7 @@ const L = { place: c("find.g.place", lang), faq: c("find.g.faq", lang), sim: c("
 
 <div class="fd" data-find hidden role="dialog" aria-modal="true" aria-label={c("find.open", lang)} data-index={`/search/${lang}-${ed}.json`} data-labels={JSON.stringify(L)}>
   <div class="fd-box">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg>
+    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg>
     <input type="search" data-find-in role="combobox" aria-expanded="true" aria-controls="fd-res" aria-autocomplete="list" autocomplete="off" placeholder={c("find.ph", lang)} />
     <ul id="fd-res" role="listbox" data-find-res></ul>
   </div>
@@ -27,7 +27,7 @@ const L = { place: c("find.g.place", lang), faq: c("find.g.faq", lang), sim: c("
   <div class="sh-back" data-cg-back hidden></div>
   <aside class="sh" data-cg-sheet hidden role="dialog" aria-modal="true" aria-label={c("flow.c.title", lang)}>
     <span class="sh-grab" aria-hidden="true"></span>
-    <div class="sh-top"><p class="sh-title">{c("flow.c.title", lang)}</p><button type="button" class="sh-x" data-cg-x aria-label={c("flow.close", lang)}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+    <div class="sh-top"><p class="sh-title">{c("flow.c.title", lang)}</p><button type="button" class="sh-x" data-cg-x aria-label={c("flow.close", lang)}><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
     <div class="sh-in"><Flow lang={lang} ed={ed} flow="concierge" param="concierge" sheet /></div>
   </aside>
 )}

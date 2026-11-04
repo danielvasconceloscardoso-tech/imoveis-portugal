@@ -248,3 +248,54 @@ body.d2 .h2-sec.h2-artline { padding-top: 32px; padding-bottom: 32px; }
 body.d2 .hd:not(.solid) { background: rgba(10, 11, 12, .3); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
 /* The smallest phones (320 px, iPhone SE 1st gen): the header's five items fit without clipping "Menu". */
 @media (max-width: 359px) { html body.d2 header.hd .word { font-size: 16px; } html body.d2 header.hd .hd-mare { padding-left: 7px; padding-right: 7px; } html body.d2 header.hd .hd-saved { width: 28px; } }
+
+/* Prompt 70 fix round (chrome). J-01: the menu sheet sits inside the header, so on the home page it inherited the
+   header's white type and shadow (white on cream, 1.02:1). The sheet sets its own ink, on every page type. */
+body.d2 .hd .cmenu { color: var(--ink); text-shadow: none; }
+/* J-14: `body.d2 a { color: inherit }` beat `.btn`, so green buttons took the ink around them (2.5:1). Buttons keep
+   their own colours: light type on the green (7:1), the ghost button green on paper. */
+body.d2 a.btn, body.d2 button.btn { color: var(--accent-ink, #fbf9f4); }
+body.d2 a.btn.ghost, body.d2 button.btn.ghost { color: var(--accent); }
+body.d2 .hd .tools a.btn { color: var(--accent-ink, #fbf9f4); } body.d2 .hd .tools a.btn.ghost { color: var(--accent); }
+/* A-12, MI-26: the site is light (a dark theme is a design decision); forced dark modes must not half-invert it. */
+:root { color-scheme: light; }
+/* J-15: the subtitle on a bright frame of the film. A quiet, soft shade under the words only; the photograph stays. */
+.h2-hero-text::before { content: ""; position: absolute; inset: -28px -36px -20px; z-index: -1; background: rgba(10, 11, 12, .4); filter: blur(36px); border-radius: 48px; pointer-events: none; }
+.h2-hero-text p { color: #fff; text-shadow: 0 1px 2px rgba(0, 0, 0, .55), 0 0 16px rgba(0, 0, 0, .4); }
+/* J-23: the ⌘K hint only where there is a keyboard and a mouse; no BETA tag on small or touch screens. */
+.hd-find kbd { display: none; }
+@media (hover: hover) and (pointer: fine) and (min-width: 820px) and (max-width: 1079px), (hover: hover) and (pointer: fine) and (min-width: 1600px) { body.d2 .hd .hd-find kbd { display: inline; } }
+@media (max-width: 1079px), (pointer: coarse) { body.d2 .hd .beta { display: none; } }
+/* J-16: a 44 px hit area for the header's small controls, without changing how they look. On phones the search and the
+   heart become 44 px boxes with the same glyph (no border there), the Maré pill and the Menu reach 44 px in height. */
+.hd-mare, .hd-find, .hd-saved, .sh-x { position: relative; }
+.hd-mare::after, .sh-x::after { content: ""; position: absolute; left: 50%; top: 50%; width: max(100%, 44px); height: max(100%, 44px); transform: translate(-50%, -50%); }
+@media (max-width: 819px) {
+  html body.d2 header.hd .tools { gap: 0; }
+  html body.d2 header.hd .hd-mare { margin-right: 2px; }
+  html body.d2 header.hd .hd-find, html body.d2 header.hd .hd-saved { width: 44px; height: 44px; padding: 0; justify-content: center; }
+  html body.d2 header.hd details.concierge > summary { min-height: 44px; display: flex; align-items: center; padding: 0 0 0 6px; box-sizing: border-box; }
+}
+/* Narrow phones: the row holds the name and four controls only if the name and the two icon boxes give a little back. */
+@media (max-width: 419px) { html body.d2 header.hd .word { font-size: 19px; } html body.d2 header.hd details.concierge > summary { min-width: 44px; padding: 0; justify-content: flex-end; } }
+@media (max-width: 389px) { html body.d2 header.hd .hd-find, html body.d2 header.hd .hd-saved { width: 40px; } }
+@media (max-width: 374px) { html body.d2 header.hd .word { font-size: 18px; } html body.d2 header.hd .hd-find, html body.d2 header.hd .hd-saved { width: 38px; } }
+@media (max-width: 359px) { html body.d2 header.hd .word { font-size: 16px; } html body.d2 header.hd .hd-find { width: 30px; } html body.d2 header.hd .hd-saved { width: 28px; } }
+/* S-23: on phones the opening screen ends above the bottom bar, so "Começar" is never behind it; and a photograph still on
+   its way (slow network) shows a calm, slowly breathing sand box instead of a dead one. */
+@media (max-width: 1079px) { body.has-bb .h2-hero { min-height: calc(100svh - 62px - env(safe-area-inset-bottom, 0px)); } }
+.h2-hcard .h2-hph, .h2-ph { animation: ip-wait 1.6s ease-in-out infinite alternate; }
+@keyframes ip-wait { from { background-color: #f8f4ed; } to { background-color: #ece4d6; } }
+@media (prefers-reduced-motion: reduce) { .h2-hcard .h2-hph, .h2-ph { animation: none; } }
+/* S-23: on a phone the opening screen holds the headline, the line and the whole path bar with "Começar": each field puts its
+   label beside its answer (one row instead of two), a little less air above and below. */
+@media (max-width: 600px) {
+  .h2-hero h1 { margin-bottom: 16px; }
+  .h2-hero-text { margin-bottom: 24px; }
+  .h2-hero-text p { line-height: 1.5; }
+  .h2-bar .h2-f { grid-template-columns: minmax(5.5em, auto) 1fr; align-items: center; gap: 12px; padding: 8px 16px; }
+  .h2-bar .h2-f > [data-amt-label] { grid-column: 1; }
+  .h2-bar .h2-f select { padding-top: 10px; padding-bottom: 10px; }
+  .h2-bar .h2-f .h2-amt { min-height: 44px; align-items: center; }
+  .h2-bar .h2-go { min-height: 52px; }
+}

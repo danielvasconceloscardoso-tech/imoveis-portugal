@@ -2,6 +2,7 @@
 // One article (task 15). Answer first (the short answer), then the body with numbered sources, then the partner
 // action and the disclaimer (editorial policy). Search: one canonical URL per language (D24), hreflang between the
 // three languages, Article and BreadcrumbList data, a single H1.
+import { srcTitle } from "../lib/srctitle";
 import V2 from "../layouts/V2.astro";
 import MareBlock from "./MareBlock.astro";  // D83: the quiet Maré line, last in the article
 import { config } from "../config";
@@ -79,7 +80,7 @@ const faqH = { pt: "Perguntas frequentes", en: "Frequently asked questions", fr:
     <section class="sources-list" aria-labelledby="fontes">
       <h2 id="fontes" class="h-small">{c("common.sources", lang)}</h2>
       <ol>
-        {sources.list.map((f, i) => <li id={`fonte-${i + 1}`}><a href={f.url} rel="noopener">{f.title}</a>{f.checked && `, ${c("common.checked", lang, { date: fmtDate(lang, f.checked) })}`}.</li>)}
+        {sources.list.map((f, i) => <li id={`fonte-${i + 1}`}><a href={f.url} rel="noopener">{srcTitle(f.title, lang)}</a>{f.checked && `, ${c("common.checked", lang, { date: fmtDate(lang, f.checked) })}`}.</li>)}
       </ol>
     </section>
     <p class="disc">{DISCLAIMER[lang]}</p>

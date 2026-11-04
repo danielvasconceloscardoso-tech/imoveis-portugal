@@ -38,7 +38,8 @@ const subject = `${c("casa.form.subject", lang)} (${ed} · ${lang})`;
       <section class="qa-item" aria-labelledby={`s-${x.k}`}>
         <h2 id={`s-${x.k}`} class="h3">{label(x.k)}</h2>
         <p>{c(`casa.s.${x.k}.p`, lang)}</p>
-        <p class="small">{x.name ? <><strong>{x.name}</strong>{x.licence && ` · ${x.licence}`}{x.tag && <>{" "}<span class="tag">{x.tag}</span></>}</> : c("casa.partner.none", lang)}</p>
+        {/* Prompt 70 (J-29, A-23): the partner line only when a partner exists; no "to be announced" placeholder. */}
+        {x.name && <p class="small"><strong>{x.name}</strong>{x.licence && ` · ${x.licence}`}{x.tag && <>{" "}<span class="tag">{x.tag}</span></>}</p>}
         {x.k === "agency" && <Calls lang={lang} ed={ed} compact />}
       </section>
     ))}
@@ -55,7 +56,7 @@ const subject = `${c("casa.form.subject", lang)} (${ed} · ${lang})`;
       <label class="field"><span>{c("casa.form.message", lang)}</span><textarea name="message" rows="3"></textarea></label>
       <fieldset class="field consents" hidden>
         <legend>{c("casa.form.consent.h", lang)}</legend>
-        {parts.map((x) => <label class="consent" data-for={x.k} hidden><input type="checkbox" name="consent" value={x.k} /> <span>{x.k === "agency" && !config.agency.public ? c("advisor.casa.consent", lang) : c("casa.form.consent", lang, { name: x.name || team })}</span></label>)}
+        {parts.map((x) => <label class="consent" data-for={x.k} hidden><input type="checkbox" name="consent" value={x.k} /> <span>{x.k === "agency" && !config.agency.public ? c("advisor.casa.consent", lang) : x.name ? c("casa.form.consent", lang, { name: x.name }) : c("casa.form.consent.team", lang)}</span></label>)}
       </fieldset>
       <p class="small">{c("casa.form.tying", lang)} {c("casa.form.never", lang)}</p>
       <a class="btn" id="casa-send" aria-disabled="true" href="#">{c("casa.form.send", lang)}</a>

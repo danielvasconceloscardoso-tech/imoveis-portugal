@@ -6,7 +6,7 @@
 // the build sets PUBLIC_AGENCY_EMAIL, the partner agency in copy).
 import type { FlowConfig, Step } from "../lib/flows";
 import type { LawyerCard } from "../lib/lawyers";
-import { slotPicker, slotLabel, slotOwn, ownZone, type Slot } from "./slots";
+import { slotPicker, slotLabel, slotOwn, ownZone, slotDays, setClock, type Slot } from "./slots";
 import { imt as imtOf } from "../lib/sims";
 import { track, edOf, ev, lastPlace, simBudget } from "../lib/track";
 import { heartHTML } from "./hearts";
@@ -16,7 +16,7 @@ const esc = (t: string) => t.replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "
 const CHECK = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"/></svg>`;
 const ARROW = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>`;
 
-export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () => void } = { param: "step" }) {
+export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () => void; sheet?: boolean } = { param: "step" }) {
   const F: FlowConfig = JSON.parse(root.querySelector("[data-flow-cfg]")!.textContent || "{}");
   const L = F.labels, steps = F.steps, N = steps.length;
   // Prompt 69: after the confirmation, the optional preparation runs on the same engine, one question per screen.
@@ -29,9 +29,28 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
   // Listed buildings (prompt 39 §3): from projects.json, passed by Flow.astro; absent outside the concierge.
   type Bld = { id: string; name: string; tag?: string; muni: string; place: string; region: string; near: string[]; typologies: string[]; from: number | null; avail: number | null; photo: string; map: string; visit: string };
   const BL = (() => { try { return JSON.parse(root.querySelector("[data-flow-blds]")?.textContent || "null") as { labels: Record<string, string>; items: Bld[] } | null; } catch { return null; } })();
-  let A: Record<string, string> = {};
-  try { A = JSON.parse(sessionStorage.getItem(key) || "{}"); } catch { /* private mode */ }
-  const save = () => { try { sessionStorage.setItem(key, JSON.stringify(A)); } catch { /* private mode */ } };
+  // Prompt 70 (A-03, S-19): the answers live in this tab (sessionStorage); the ones that say nothing about who the reader
+  // is (help, budget, place, the chosen times, the preparation) are also kept on this device for 24 hours, so a closed
+  // tab does not lose them. Name, e-mail, phone and free text are never written to localStorage (GDPR, data minimisation).
+  const KEEP = `${key}.keep`, PERSONAL = ["name", "email", "phone", "lwq", "question"];
+  let A: Record<string, string> = {}, fromSession = false;
+  try { const raw = sessionStorage.getItem(key); if (raw) { A = JSON.parse(raw); fromSession = true; } } catch { /* private mode */ }
+  if (!fromSession) try {
+    const kept = JSON.parse(localStorage.getItem(KEEP) || "null") as { t: number; A: Record<string, string> } | null;
+    if (kept && Date.now() - kept.t < 864e5) A = kept.A || {}; else localStorage.removeItem(KEEP);
+  } catch { /* private mode */ }
+  const save = () => {
+    try { sessionStorage.setItem(key, JSON.stringify(A)); } catch { /* private mode */ }
+    try { localStorage.setItem(KEEP, JSON.stringify({ t: Date.now(), A: Object.fromEntries(Object.entries(A).filter(([k]) => !PERSONAL.includes(k))) })); } catch { /* private mode */ }
+  };
+  // Times kept from an earlier day: only those still ahead stay chosen.
+  { let sl: Slot[] = []; try { sl = JSON.parse(A._slots || "[]"); } catch { sl = []; }
+    const first = slotDays()[0] || "", ok = sl.filter((x) => x.d >= first), sid = steps.find((x) => x.type === "slots")?.id;
+    if (ok.length !== sl.length) { if (ok.length) A._slots = JSON.stringify(ok); else delete A._slots;
+      if (sid) { if (ok.length) A[sid] = ok.map((x) => slotLabel(x, document.documentElement.lang || "pt", (F.hidden.language || "pt") as "pt").both).join(" · "); else delete A[sid]; } } }
+  // Prompt 70 (J-07): a 12-hour clock where the reader reads English the American way: the US edition in English, or an
+  // en-US browser on an English page.
+  setClock(F.hidden.language === "en" && (F.hidden.edition === "us" || navigator.language === "en-US"));
   let i = 0, dir = 1;
   // A click on a listed building's card (prompt 51 §3): counted for that developer's report, nothing else is kept.
   stage.addEventListener("click", (e) => { const b = (e.target as HTMLElement).closest?.("a")?.closest<HTMLElement>("[data-bld]")?.dataset.bld; if (b) ev({ event: `p/${b}/card`, place: b, origin: F.id }); });
@@ -52,7 +71,10 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
   // Never ask twice (part 5): after the link, the simulator's budget in this tab (lib/track.ts simBudget) and the last
   // place opened on the map in this tab (lastPlace) come before the older answers kept on the device.
   const q = new URLSearchParams(location.search);
-  const budgetEur = Number(q.get("budget")) || simBudget() || (() => { try { return Number(localStorage.getItem("ip.budget")) || 0; } catch { return 0; } })();
+  // Prompt 70 (MI-14): a budget only when the reader gave one: the home bar's (cg=home), else the one they set in a
+  // simulator in this tab or on the map or path (ip.budget). A ?budget= left in the URL by a page's default is not one.
+  const storedBudget = (() => { try { return Number(localStorage.getItem("ip.budget")) || 0; } catch { return 0; } })();
+  const budgetEur = (fromHome && Number(q.get("budget"))) || simBudget() || storedBudget;
   const places = (() => { try { return JSON.parse(localStorage.getItem("ip.places") || "[]") as string[]; } catch { return []; } })();
   const pre: Record<string, string> = {
     edition: edNow, lang: F.hidden.language, cat: q.get("cat") || "",
@@ -80,27 +102,50 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
     const pl = q0.get("place"); if (pl) A.place = pl;
     while (offset < N - 1 && given.has(steps[offset].id)) offset++;
     for (const k of ["cg", "ed", "door"]) q0.delete(k);
-    history.replaceState(null, "", `${location.pathname}${q0.size ? `?${q0}` : ""}${location.hash}`);
+    history.replaceState(history.state, "", `${location.pathname}${q0.size ? `?${q0}` : ""}${location.hash}`);
   }
   // Prompt 69, the arrival: the first step opens on what the reader came from, already chosen. A project (?project=, the
   // map's project card), else a place (?place=, the map card, the simulator's region), with the budget when the link or
   // the simulator gave one, else the budget alone. One tap on another option changes it.
   const locale = document.documentElement.lang || F.hidden.language || "pt";
   const eur = (v: number) => new Intl.NumberFormat(locale, { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(v);
-  const ctxProject = F.id === "concierge" ? BL?.items.find((b) => b.id === q.get("project")) ?? null : null;
+  // Prompt 70 (MI-08): the project of the page the reader is on (a development's page) when no link named one.
+  const pageProject = BL?.items.find((b) => b.visit && location.pathname.startsWith(b.visit.replace(/#.*$/, ""))) ?? null;
+  const ctxProject = F.id === "concierge" ? BL?.items.find((b) => b.id === q.get("project")) ?? pageProject : null;
+  const projectId = ctxProject?.id || q.get("project") || "";
   // The map keeps its own ?place= as a slug (gondomar): shown as the place's name.
   const qPlace = q.get("place") || "", slugPlace = /^[a-z0-9-]+$/.test(qPlace);
   const ctxPlace = ctxProject ? ctxProject.place : (slugPlace ? BL?.items.find((b) => b.muni === qPlace)?.place || lastPlace() : qPlace) || lastPlace() || "";
-  const ctxBudget = F.id === "concierge" ? budgetEur : 0;
+  // Prompt 70 (J-08): a budget typed in the edition's own currency on the home bar is shown as typed, euros second, both
+  // rounded to three figures ($400,000 (≈ €357,000), never €357,366).
+  const nice = (v: number) => { const p = 10 ** Math.max(0, Math.floor(Math.log10(Math.max(1, v))) - 2); return Math.round(v / p) * p; };
+  const FX = (F as { fx?: { cur: string; rate: number } | null }).fx ?? null, typedLocal = !!(fromHome && FX && Number(q.get("budget")));
+  const ctxBudget = F.id === "concierge" ? (typedLocal ? nice(budgetEur) : budgetEur) : 0;
+  const money = (v: number) => typedLocal ? `${new Intl.NumberFormat(locale, { style: "currency", currency: FX!.cur, maximumFractionDigits: 0 }).format(nice(v * FX!.rate))} (≈ ${eur(nice(v))})` : eur(v);
   const ctxKind = ctxProject ? "project" : ctxPlace ? "place" : ctxBudget ? "budget" : "none";
   const fillP = (t: string, v: Record<string, string>) => t.replace(/\{(\w+)\}/g, (m, k) => (k in v ? v[k] : m));
-  const ctxLabel = !P["help.place"] ? "" : ctxProject ? fillP(P["help.project"], { name: ctxProject.name, place: ctxProject.place })
-    : ctxPlace && ctxBudget ? fillP(P["help.placebudget"], { place: ctxPlace, price: eur(ctxBudget) })
-    : ctxPlace ? fillP(P["help.place"], { place: ctxPlace }) : ctxBudget ? fillP(P["help.budget"], { price: eur(ctxBudget) }) : "";
+  // Prompt 70 (MI-15): the place with its preposition and article ("no Porto", "na Nazaré", "em Gondomar"; "à Porto",
+  // "en Algarve"; "in the Algarve").
+  const fold = (t: string) => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+  const PT_ART: Record<string, string> = Object.fromEntries([
+    ...["porto", "algarve", "alentejo", "minho", "douro", "norte", "centro", "oeste", "ribatejo", "funchal", "barreiro", "seixal", "montijo", "cartaxo", "entroncamento", "fundao", "sabugal", "crato", "redondo", "cadaval", "bombarral", "estoril", "geres", "porto santo", "alandroal", "marco de canaveses", "oeste e vale do tejo"].map((x) => [x, "no"]),
+    ...["nazare", "amadora", "figueira da foz", "guarda", "covilha", "lourinha", "golega", "batalha", "madeira", "povoa de varzim", "lousa", "mealhada", "moita", "trofa", "maia", "chamusca", "serta", "ericeira", "comporta", "costa da caparica", "grande lisboa", "peninsula de setubal", "praia da vitoria", "ribeira grande", "horta", "marinha grande", "murtosa", "vidigueira", "regiao autonoma da madeira", "regiao autonoma dos acores", "area metropolitana de lisboa", "area metropolitana do porto"].map((x) => [x, "na"]),
+    ["acores", "nos"]]);
+  const FR_ART: Record<string, string> = { algarve: "en", alentejo: "dans l'", douro: "dans le ", minho: "dans le ", acores: "aux ", madeira: "à " };
+  const EN_ART: Record<string, string> = { algarve: "in the ", alentejo: "in the ", douro: "in the ", minho: "in the " };
+  const inPlace = (pl: string) => { const k = fold(pl), l = (F.hidden.language || "pt").slice(0, 2);
+    if (l === "pt") return `${PT_ART[k] || "em"} ${pl}`;
+    if (l === "fr") { const a = FR_ART[k]; return a ? (a.endsWith("'") || a.endsWith(" ") ? `${a}${pl}` : `${a} ${pl}`) : `à ${pl}`; }
+    return `${EN_ART[k] || "in "}${pl}`; };
+  const ctxLabel = !P["help.place"] ? "" : ctxProject ? fillP(P["help.project"], { name: ctxProject.name, place: ctxProject.place, inplace: inPlace(ctxProject.place) })
+    : ctxPlace && ctxBudget ? fillP(P["help.placebudget"], { place: ctxPlace, inplace: inPlace(ctxPlace), price: money(ctxBudget) })
+    : ctxPlace ? fillP(P["help.place"], { place: ctxPlace, inplace: inPlace(ctxPlace) }) : ctxBudget ? fillP(P["help.budget"], { price: money(ctxBudget) }) : "";
+  // The context in words the language does not change (MI-13: a language switch keeps the reader's own choice).
+  const ctxKey = `${ctxKind}|${ctxProject?.id ?? ""}|${fold(ctxPlace)}|${ctxBudget}`, sameCtx = A._ctxk === ctxKey;
   if (steps.some((s) => s.type === "help")) {
-    if (ctxLabel && A._ctx !== ctxLabel) { A.help = "ctx"; known.add("help"); }
+    if (ctxLabel && !sameCtx) { A.help = "ctx"; known.add("help"); }
     if (!ctxLabel && A.help === "ctx") delete A.help;
-    A._ctx = ctxLabel;
+    A._ctx = ctxLabel; A._ctxk = ctxKey;
     if (fromHome && (A.door === "sell" || A.door === "inherit") && !ctxLabel) A.help = "sell";
     if ((topic === "tax" || topic === "bank") && !ctxLabel) A.help = "costs";
     if (pre.budget && A._bud !== String(budgetEur)) { A.budget = pre.budget; A._bud = String(budgetEur); known.add("help"); }
@@ -111,16 +156,63 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
   const ctxPrice = ctxProject?.from || ctxBudget || 0;
   save();
 
-  function url(n: number | null) {
-    if (prepMode) return;  // the preparation lives after the confirmation (?concierge=done)
-    const p = new URLSearchParams(location.search);
-    n == null ? p.delete(opts.param) : p.set(opts.param, String(n + 1));
-    history.replaceState(null, "", `${location.pathname}${p.size ? `?${p}` : ""}${location.hash}`);
+  // ------------------------------------------------------------ history (prompt 70: J-03, A-02, MI-01, S-02)
+  // Every screen is a history entry: a step forward pushes one (?concierge=2, ?step=2; the preparation ?concierge=p1…),
+  // so the browser's Back (Android Back, the swipe) goes back one screen. In the sheet, opening pushes the first entry and
+  // Back from it closes the sheet onto the page it was opened from (scripts/chrome.ts); ✕ goes back over those entries.
+  // depth counts the entries this flow pushed above the page's own (kept in history.state, so a reload keeps it).
+  const sheet = !!opts.sheet;
+  let depth = Number(history.state?.ipK) || 0, clearing = false, view: "step" | "done" | "prep" | "side" = "step", sent = false;
+  const href = (v: string | null) => { const p = new URLSearchParams(location.search); v == null ? p.delete(opts.param) : p.set(opts.param, v); return `${location.pathname}${p.size ? `?${p}` : ""}${location.hash}`; };
+  const val = (n: number) => (prepMode ? `p${n + 1}` : String(n + 1));
+  function url(n: number | null) { history.replaceState({ ...(history.state || {}), ipK: depth }, "", href(n == null ? null : val(n))); }
+  function push(v: string) { depth++; history.pushState({ ipK: depth, ipFlow: F.id }, "", href(v)); }
+  const minDepth = () => (sheet ? 1 : 0);
+  const back = () => { if (depth > minDepth()) history.back(); else if (i > 0 || prepMode) go(i - 1, false); else leave(); };
+  // The page's ‹ on the first step: back where the reader came from on this site, else the edition's home (MI-18: one back).
+  function leave() {
+    if (sheet) { opts.onClose?.(); return; }
+    let same = false; try { same = !!document.referrer && new URL(document.referrer).origin === location.origin; } catch { same = false; }
+    if (same && history.length > 1) history.go(-(depth + 1)); else location.href = (F.links as Record<string, string>).home || "/";
   }
+  /** The browser moved through history: show the screen its URL names. "close": the sheet closes (the browser is already
+   *  on the page's entry); "leave": the request was sent, so the sheet closes and goes back over its remaining entries. */
+  function pop(): "close" | "leave" | "open" | "none" {
+    depth = Number(history.state?.ipK) || 0;
+    const v = new URLSearchParams(location.search).get(opts.param);
+    if (clearing) { clearing = false; if (v != null) url(null); return "none"; }
+    if (v == null) {
+      if (sheet) return "close";
+      if (sent) { history.go(-1); return "none"; }  // the request is sent: Back leaves the page rather than reopening it
+      if (view === "step" && i === offset && !prepMode) return "none";
+      prepMode = false; S = steps; dir = -1; i = offset; render(true, false); top(); return "none";
+    }
+    if (v === "done") { if (view !== "done") { dir = -1; done(lastRoute || route(), false); top(); } return "open"; }
+    const pm = /^p(\d+)$/.exec(v);
+    if (pm) {
+      if (prepSent) { history.back(); return "open"; }  // the preparation is sent: Back passes its questions on the way down
+      if (!sent) { if (view !== "done") done(lastRoute || route(), false); return "open"; }
+      const n = Math.max(0, Math.min(Number(pm[1]) - 1, PREP.length - 1));
+      if (prepMode && view === "step" && n === i) return "open";
+      dir = n < i || !prepMode ? (prepMode ? -1 : 1) : 1; prepMode = true; S = PREP; i = n; render(true, false); top(); return "open";
+    }
+    if (sent) { if (sheet) return "leave"; history.go(-(depth + 1)); return "none"; }
+    const n = Math.max(0, Math.min(Number(v) - 1, N - 1));
+    if (!Number.isFinite(n)) return "open";
+    if (view === "step" && !prepMode && n === i) return "open";
+    dir = n < i ? -1 : 1; prepMode = false; S = steps; i = n; render(true, false); top(); return "open";
+  }
+  /** ✕ on the sheet: back over the entries the flow pushed, so the page is where the reader left it. */
+  function unwind() {
+    if (depth > 0) { clearing = true; const d = depth; depth = 0; history.go(-d); }
+    else url(null);
+  }
+  if (!sheet) addEventListener("popstate", () => { if (root.isConnected) pop(); });
+
   const head = () => {
     if (i < offset) offset = 0;  // back among the answers given on the home page: count every step again
     const len = S.length, k = Math.min(i + 1, len) - (prepMode ? 0 : offset), n = len - (prepMode ? 0 : offset);
-    return `<div class="fl-head"><button type="button" class="fl-back" data-back ${i === 0 && !prepMode ? "hidden" : ""} aria-label="${esc(L.back)}">${ARROW}</button>
+    return `<div class="fl-head"><button type="button" class="fl-back" data-back ${i === 0 && !prepMode && sheet ? "hidden" : ""} aria-label="${esc(L.back)}">${ARROW}</button>
     <div class="fl-prog" role="progressbar" aria-label="${esc(F.title)}" aria-valuemin="1" aria-valuemax="${n}" aria-valuenow="${k}"><span style="width:${(k / n) * 100}%"></span></div>
     <span class="fl-of">${esc(L.of.replace("{i}", String(k)).replace("{n}", String(n)))}</span></div>`;
   };
@@ -133,13 +225,13 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
       const all = [...(ctxLabel ? [{ v: "ctx", l: ctxLabel }] : []), ...s.opts];
       return `<div class="fl-opts" role="radiogroup" aria-labelledby="fl-q">${all.map((o) =>
         `<button type="button" class="fl-opt${o.v === "ctx" ? " fl-ctx" : ""}" role="radio" aria-checked="${A.help === o.v}" data-v="${esc(o.v)}"><span>${o.v === "ctx" ? `<small>${esc(P["help.ctx"])}</small>` : ""}${esc(o.l)}</span><i>${CHECK}</i></button>`).join("")}</div>
-        <p class="fl-k" id="fl-bud">${esc(s.budget.q)}</p><div class="fl-pills" role="radiogroup" aria-labelledby="fl-bud">${s.budget.opts.map((o) =>
+        <p class="fl-k" id="fl-bud">${esc(s.budget.q)}</p><div class="fl-pills" data-budget-row role="radiogroup" aria-labelledby="fl-bud">${s.budget.opts.map((o) =>
         `<button type="button" class="fl-pill" role="radio" aria-checked="${A.budget === o.v}" data-b="${esc(o.v)}">${esc(o.l)}</button>`).join("")}</div>
         <p class="fl-err" data-err hidden></p>
         <div class="fl-go"><button type="button" class="fl-btn" data-next>${esc(L.next)}</button></div>`;
     }
     if (s.type === "text") {
-      const chips = s.prefill === "place" ? places.slice(0, 4).filter(Boolean) : [];
+      const chips = s.prefill === "place" ? [...new Set([ctxPlace, ...places])].filter((x) => x && !(A[s.id] || "").split(",").map((y) => y.trim()).includes(x)).slice(0, 4) : [];
       return `${s.multi ? `<textarea class="fl-in fl-area" data-in rows="4" placeholder="${esc(s.ph)}" aria-labelledby="fl-q">${esc(A[s.id] || "")}</textarea>`
         : `<input class="fl-in" data-in type="text" autocomplete="off" placeholder="${esc(s.ph)}" value="${esc(A[s.id] || "")}" aria-labelledby="fl-q" />`}
         ${chips.length ? `<div class="fl-chips">${chips.map((c) => `<button type="button" class="fl-chip" data-chip="${esc(c)}">${esc(c)}</button>`).join("")}</div>` : ""}
@@ -148,17 +240,22 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
     }
     if (s.type === "slots") return `<div data-slots></div>
         <div class="fl-go"><button type="button" class="fl-btn" data-next>${esc(L.next)}</button>${s.optional ? `<button type="button" class="fl-link" data-skip>${esc(s.skip || L.skip)}</button>` : ""}</div>`;
-    if (s.type === "contact") return `<div class="fl-fields">
-        <label class="fl-f"><span>${esc(L.name)}</span><input class="fl-in" data-c="name" autocomplete="name" value="${esc(A.name || "")}" /></label>
-        <label class="fl-f"><span>${esc(L.email)}</span><input class="fl-in" data-c="email" type="email" inputmode="email" autocomplete="email" value="${esc(A.email || "")}" /></label>
-        ${s.phone ? `<label class="fl-f"><span>${esc(L.phone)}</span><input class="fl-in" data-c="phone" type="tel" inputmode="tel" autocomplete="tel" value="${esc(A.phone || "")}" /></label>` : ""}
-        <p class="fl-err" data-err hidden>${esc(L["invalid.email"])}</p></div>
+    if (s.type === "contact") {
+      // Prompt 70 (A-10, A-27, S-20): for a call, the name and the phone are needed and say why; each field has its own
+      // message under it, cleared as the reader types. Agreeing the time by e-mail (no time chosen) makes the phone optional.
+      const call = !!s.call && hasSlots();
+      const fld = (k: string, label: string, attrs: string) => `<div class="fl-fw"><label class="fl-f"><span>${esc(label)}</span><input class="fl-in" data-c="${k}" ${attrs} value="${esc(A[k] || "")}" /></label><p class="fl-err" data-err-for="${k}" role="alert" hidden></p></div>`;
+      return `<div class="fl-fields">
+        ${fld("name", L.name, `autocomplete="name"`)}
+        ${fld("email", s.call && P.email ? P.email : L.email, `type="email" inputmode="email" autocomplete="email"`)}
+        ${s.phone ? fld("phone", call && P.phone ? P.phone : L.phone, `type="tel" inputmode="tel" autocomplete="tel"`) : ""}</div>
         ${s.lang ? `<p class="fl-k" id="fl-lang">${esc(s.lang.q)}</p><div class="fl-pills" role="radiogroup" aria-labelledby="fl-lang">${s.lang.opts.map((o) =>
           `<button type="button" class="fl-pill" role="radio" aria-checked="${A.lang === o.v}" data-lang="${esc(o.v)}">${esc(o.l)}</button>`).join("")}</div>` : ""}
-        ${s.send ? `<p class="fl-notice">${esc(s.notice || "")} <a href="${F.links.privacy}" target="_blank" rel="noopener">${esc(X.policy)}</a></p>
-          <div class="fl-go"><button type="button" class="fl-btn fl-send" data-send>${esc(P.send || L.send)}</button></div>
+        ${s.send ? `<p class="fl-notice">${esc(s.call && !call && P["notice.later"] ? P["notice.later"] : s.notice || "")} <a href="${F.links.privacy}" target="_blank" rel="noopener">${esc(X.policy)}</a></p>
+          <div class="fl-go"><button type="button" class="fl-btn fl-send" data-send>${esc(sendLabel())}</button></div>
           <input class="fl-hp" data-hp tabindex="-1" autocomplete="off" aria-hidden="true" />`
         : `<div class="fl-go"><button type="button" class="fl-btn" data-next>${esc(L.next)}</button></div>`}`;
+    }
     // review: the answers in one calm list (each one a link back to its step), the send button, one line naming both recipients.
     const rows = steps.filter((x) => x.type === "choice" || x.type === "text" || x.type === "slots").map((x) => {
       const k = steps.indexOf(x), v = x.type === "choice" ? x.opts.find((o) => o.v === A[x.id])?.l : A[x.id];
@@ -221,9 +318,10 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
   addEventListener("pagehide", () => { if (root.getClientRects().length) stop(); });
 
   let ctxSent = false;
-  function render(focus = true) {
+  function render(focus = true, writeUrl = true) {
     const s = S[i];
-    reached(s.id);
+    reached(s.id); view = "step"; root.dataset.step = s.id;
+    if (!prepMode && A._i !== String(i)) { A._i = String(i); save(); }  // MI-13: the step, so a language switch reopens it
     if (s.type === "help" && !ctxSent) { ctxSent = true; ev({ event: `flow/${F.id}/ctx/${ctxKind}`, band: band(), origin: ctxKind === "none" ? undefined : "known" }); }
     // "I have a question" on the first screen, and a one-line way to the lawyer on the legal step (the tax number).
     const ask = LW && !prepMode && (i === 0 || s.id === "nif" || s.id === "prep-nif") ? `<p class="fl-ask"><button type="button" class="fl-link" data-lawyer>${esc(i === 0 ? LW.labels.ask : LW.labels.legal)}</button></p>` : "";
@@ -234,7 +332,7 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
     const lede = s.type === "help" ? s.lede : i === 0 && !prepMode && F.lede ? F.lede : prepMode && i === 0 ? P["prep.p"] : "";
     const html = `${head()}<div class="fl-step">${intro}<h2 id="fl-q" class="fl-q" tabindex="-1">${esc(s.q)}</h2>${lede ? `<p class="fl-lede">${esc(lede)}</p>` : ""}${body(s)}${nb}${ask}</div>`;
     swap(html, focus);
-    url(i);
+    if (writeUrl) url(i);
   }
   // Prompt 69, the Back bug: one screen on show, in both directions. The leaving screen used to be the stage's first
   // child, so a second tap within the 260 ms slide (Back, Back) faded the wrong one and left the previous step drawn
@@ -257,19 +355,28 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
     if (focus) el.querySelector<HTMLElement>(".fl-q")?.focus({ preventScroll: true });
   }
   // Each new screen starts at its top (the sheet keeps its scroll otherwise, and the back arrow and question were above the fold).
-  const top = () => { const sc = root.closest<HTMLElement>(".sh-in"); if (sc) sc.scrollTop = 0; };
-  const go = (n: number) => {
+  // Prompt 70 (J-05): on the page too: a shorter step after a long one left the reader below the flow, so the page scrolls
+  // back to the flow's top (under the sticky header) whenever that top is out of view.
+  const top = () => {
+    const sc = root.closest<HTMLElement>(".sh-in"); if (sc) { sc.scrollTop = 0; return; }
+    const hd = [...document.querySelectorAll<HTMLElement>("header, .v2-head, .hdr")].find((h) => /fixed|sticky/.test(getComputedStyle(h).position));
+    const off = (hd ? Math.max(0, hd.getBoundingClientRect().bottom) : 0) + 12, r = root.getBoundingClientRect();
+    if (r.top < off || r.top > innerHeight * 0.6) scrollTo({ top: Math.max(0, scrollY + r.top - off), behavior: "auto" });
+  };
+  const go = (n: number, record = true) => {
     engaged = true; dir = n >= i ? 1 : -1;
     if (prepMode && n < 0) { prepMode = false; S = steps; i = N - 1; dir = -1; done(lastRoute || route()); top(); return; }  // Back from the first preparation question
     if (prepMode && n >= S.length) { sendPrep(); return; }
-    i = Math.max(0, Math.min(n, S.length - 1));
+    const to = Math.max(0, Math.min(n, S.length - 1));
+    if (record && to !== i) push(val(to));
+    i = to;
     if (i > 0 && !begun && !prepMode) { begun = true; ev({ event: `flow/${F.id}/start`, band: band() }); }
     render(); top();
   };
 
   function wire(el: HTMLElement) {
     const s = S[i];
-    el.querySelector("[data-back]")?.addEventListener("click", () => go(i - 1));
+    el.querySelector("[data-back]")?.addEventListener("click", back);
     el.querySelector("[data-lawyer]")?.addEventListener("click", lawyerScreen);
     el.querySelector("[data-blds]")?.addEventListener("click", buildingsScreen);
     el.querySelectorAll<HTMLButtonElement>(".fl-opt").forEach((b, k, all) => {
@@ -300,8 +407,19 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
       const box = el.querySelector("[data-blds-box]"); if (box) box.outerHTML = matchBox();
     });
     inp?.addEventListener("keydown", (e) => { if (e.key === "Enter" && !(inp instanceof HTMLTextAreaElement)) { e.preventDefault(); next(); } });
-    el.querySelectorAll<HTMLButtonElement>("[data-chip]").forEach((b) => b.addEventListener("click", () => { if (inp) { inp.value = b.dataset.chip!; A[s.id] = inp.value; save(); } next(); }));
-    el.querySelectorAll<HTMLInputElement>("[data-c]").forEach((x) => x.addEventListener("input", () => { A[x.dataset.c!] = x.value.trim(); save(); }));
+    el.querySelectorAll<HTMLButtonElement>("[data-chip]").forEach((b) => b.addEventListener("click", () => {
+      if (!inp) return;
+      // Prompt 70 (A-29): in the preparation a place joins the list (up to three) instead of replacing it.
+      if (s.id === "prep-place") {
+        const list = inp.value.split(",").map((x) => x.trim()).filter(Boolean); if (!list.includes(b.dataset.chip!)) list.push(b.dataset.chip!);
+        inp.value = list.slice(0, 3).join(", "); A[s.id] = inp.value; save(); b.remove(); inp.focus(); return;
+      }
+      inp.value = b.dataset.chip!; A[s.id] = inp.value; save(); next();
+    }));
+    el.querySelectorAll<HTMLInputElement>("[data-c]").forEach((x) => x.addEventListener("input", () => {
+      A[x.dataset.c!] = x.value.trim(); save();
+      const e = el.querySelector<HTMLElement>(`[data-err-for="${x.dataset.c}"]`); if (e && !e.hidden) { e.hidden = true; x.removeAttribute("aria-invalid"); }
+    }));
     el.querySelectorAll<HTMLInputElement>("[data-c]").forEach((x) => x.addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); next(); } }));
     // The advisor's slots (prompt 41 §2): the same picker as the request flow; the readable times are the answer.
     const sp = el.querySelector<HTMLElement>("[data-slots]");
@@ -316,18 +434,32 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
     el.querySelector("[data-next]")?.addEventListener("click", next);
     el.querySelector("[data-skip]")?.addEventListener("click", () => { delete A[s.id]; if (s.type === "slots") delete A._slots; save(); go(i + 1); });
     el.querySelectorAll<HTMLButtonElement>("[data-goto]").forEach((b) => b.addEventListener("click", () => go(Number(b.dataset.goto))));
-    el.querySelector<HTMLButtonElement>("[data-send]")?.addEventListener("click", () => { if (validEmail()) submit(); });
+    el.querySelector<HTMLButtonElement>("[data-send]")?.addEventListener("click", () => { if (validContact()) submit(); });
   }
-  // The e-mail is what the advisor replies to (worker/index.js requires it): checked before the step moves on or sends.
-  function validEmail() {
-    const ok = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(A.email || "");
-    const err = stage.lastElementChild?.querySelector<HTMLElement>("[data-err]"); if (err) err.hidden = ok;
-    if (!ok) stage.lastElementChild?.querySelector<HTMLInputElement>('[data-c="email"]')?.focus();
-    return ok;
+  const hasSlots = () => !!A._slots && A._slots !== "[]";
+  // MI-20: "Book the call" only when a time was chosen; agreeing the time by e-mail sends the request.
+  const sendLabel = () => (F.id === "concierge" && P.send ? (hasSlots() || !P["send.later"] ? P.send : P["send.later"]) : L.send);
+  // The e-mail is what the advisor replies to (worker/index.js requires it); for a call, the name and the phone too.
+  // Each missing or incomplete field gets its own message under it (prompt 70, A-27, S-20); the first one takes the focus.
+  function validContact() {
+    const s = S[i], scr = stage.lastElementChild as HTMLElement | null;
+    if (s.type !== "contact" || !scr) return true;
+    const call = !!s.call, errs: [string, string][] = [];
+    if (call && !(A.name || "").trim()) errs.push(["name", L["err.name"]]);
+    const em = (A.email || "").trim();
+    if (!em) errs.push(["email", L["err.email"]]); else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)) errs.push(["email", L["invalid.email"]]);
+    const ph = (A.phone || "").replace(/\D/g, "");
+    if (s.phone) { if (call && hasSlots() && !ph) errs.push(["phone", L["err.phone"]]); else if (ph && ph.length < 6) errs.push(["phone", L["err.phone.bad"]]); }
+    scr.querySelectorAll<HTMLElement>("[data-err-for]").forEach((e) => {
+      const m = errs.find((x) => x[0] === e.dataset.errFor); e.hidden = !m; e.textContent = m ? m[1] : "";
+      const inp = scr.querySelector<HTMLInputElement>(`[data-c="${e.dataset.errFor}"]`); m ? inp?.setAttribute("aria-invalid", "true") : inp?.removeAttribute("aria-invalid");
+    });
+    if (errs.length) scr.querySelector<HTMLInputElement>(`[data-c="${errs[0][0]}"]`)?.focus();
+    return !errs.length;
   }
   function next() {
     const s = S[i];
-    if (s.type === "contact" && !validEmail()) return;
+    if (s.type === "contact" && !validContact()) return;
     if (s.type === "help" && !A.help) { stage.lastElementChild?.querySelector<HTMLElement>(".fl-opt")?.focus(); return; }
     if (s.type === "text" && !s.optional && !(A[s.id] || "").trim()) { stage.querySelector<HTMLElement>("[data-in]")?.focus(); return; }
     go(i + 1);
@@ -339,7 +471,7 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
   const lwHead = () => `<div class="fl-head"><button type="button" class="fl-back" data-lw-back aria-label="${esc(L.back)}">${ARROW}</button><span class="fl-prog lw-prog"></span></div>`;
   const fill = (t: string) => { const x = LW!.lawyers[0]; return t.replace("{name}", x.name).replace("{firm}", x.firm); };
   function side(html: string, back: () => void) {
-    dir = 1; swap(html, true); top();
+    dir = 1; swap(html, true); top(); view = "side";
     const el = stage.lastElementChild as HTMLElement; el.querySelector("[data-lw-back]")?.addEventListener("click", () => { dir = -1; back(); });
     return el;
   }
@@ -409,20 +541,21 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
     const scr = stage.lastElementChild as HTMLElement, btn = scr.querySelector<HTMLButtonElement>("[data-send]")!; const hp = scr.querySelector<HTMLInputElement>("[data-hp]")?.value || "";
     btn.disabled = true; btn.textContent = L.sending;
     let brief = ""; try { brief = sessionStorage.getItem("ip.brief") || ""; } catch { /* none */ }
-    const payload = { flow: F.id, project: q.get("project") || "", unit: q.get("unit") || "", ...F.hidden, answers: answerIds(),
+    const payload = { flow: F.id, project: projectId, unit: q.get("unit") || "", ...F.hidden, answers: answerIds(),
       slots: (() => { try { return JSON.parse(A._slots || "[]"); } catch { return []; } })(),
       labels: [...(topic ? [`${X.topic}: ${topicLabel}`] : []), ...answerText()], topic, door: A.door || "", name: A.name || "", email: A.email || "", phone: A.phone || "", budget: budgetEur || "", brief, page: location.pathname, hp };
     let ok = false;
     try { const r = await fetch("/api/request", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(payload) }); ok = r.ok; } catch { ok = false; }
-    if (ok) { finished = true; ev({ event: `flow/${F.id}/sent`, band: band() }); const pj = q.get("project"); if (pj && /^[a-z0-9-]+$/.test(pj)) ev({ event: `p/${pj}/req`, place: pj, origin: F.id }); const r = route();
-      // The answers leave this tab's storage once sent; the times stay (as slots, no name) so the confirmation can show them again.
-      try { sessionStorage.removeItem(key); sessionStorage.setItem(`${key}.done`, r); sessionStorage.setItem(`${key}.slots`, A._slots || "[]"); } catch { /* none */ } done(r); }
+    if (ok) { finished = true; sent = true; ev({ event: `flow/${F.id}/sent`, band: band() }); const pj = projectId; if (pj && /^[a-z0-9-]+$/.test(pj)) ev({ event: `p/${pj}/req`, place: pj, origin: F.id }); const r = route();
+      // The answers leave this tab's storage once sent (and the device's 24-hour copy); the times stay (as slots, no name)
+      // so the confirmation can show them again.
+      try { sessionStorage.removeItem(key); localStorage.removeItem(KEEP); sessionStorage.setItem(`${key}.done`, r); sessionStorage.setItem(`${key}.slots`, A._slots || "[]"); } catch { /* none */ } done(r); }
     else { ev({ event: `flow/${F.id}/fallback`, band: band() }); fallback(payload); }
   }
   // The confirmation, then one quiet closing line with two text links (prompt 42). The confirmation stays in the URL
   // (?concierge=done) and in this tab, so Back from those pages returns to it.
-  function done(r = route()) {
-    finished = true; prepMode = false; S = steps; lastRoute = r;
+  function done(r = route(), writeUrl = true) {
+    finished = true; prepMode = false; S = steps; lastRoute = r; view = "done"; root.dataset.step = "done";
     const d = (F.done as Record<string, { h: string; p: string }>)[r] ?? F.done.ok, X = F.extra as Record<string, string>, Lk = F.links as Record<string, string>;
     // Prompt 69: the times the reader chose (their zone first, Lisbon underneath), the optional preparation, and the IMT
     // line at the price they came with (one tap to the IMT screen).
@@ -434,19 +567,19 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
     }
     const prep = F.id !== "concierge" || !PREP.length ? "" : prepSent ? `<p class="fl-prepd" data-prep-done>${CHECK}<span>${esc(P["prep.done.h"])}</span></p>`
       : A.email ? `<button type="button" class="fl-xopt fl-prep" data-prep><span>${esc(P.prep)}<small>${esc(P["prep.p"])}</small></span><i>${ARROW}</i></button>` : "";
-    const imtL = F.id === "concierge" && ctxPrice && P["imt.line"] ? `<p class="fl-imt">${esc(fillP(P["imt.line"], { price: eur(ctxPrice), imt: eur(imtOf(ctxPrice, false, false)) }))} <a class="fl-link" href="${esc(`${Lk.imt}?price=${ctxPrice}&own=0&resident=0`)}" data-imt="${ctxPrice}" data-imt-from="concierge">${esc(P["imt.how"])} →</a></p>` : "";
+    const imtL = F.id === "concierge" && ctxPrice && P["imt.line"] ? `<p class="fl-imt">${esc(fillP(P["imt.line"], { price: eur(ctxPrice), imt: eur(Math.round(imtOf(ctxPrice, false, false))) }))} <a class="fl-link" href="${esc(`${Lk.imt}?price=${ctxPrice}&own=0&resident=0`)}" data-imt="${ctxPrice}" data-imt-from="concierge">${esc(P["imt.how"])} →</a></p>` : "";
     dir = 1; swap(`<div class="fl-done"><span class="fl-tick">${CHECK}</span><h2 class="fl-q" tabindex="-1">${esc(d.h)}</h2><p class="fl-lede">${esc(d.p)}</p>${times}${prep}${imtL}
       <div class="fl-go"><a class="fl-btn" href="${F.links.path}">${esc(F.extra.path)}</a><a class="fl-link" href="${F.links.map}">${esc(F.extra.map)}</a></div>
       <p class="fl-more">${esc(X.more)} <a href="${Lk.path}">${esc(X.morePath)}</a> · <a href="${Lk.articles}">${esc(X.moreArticles)}</a></p></div>`, true);
     const mare = root.querySelector<HTMLTemplateElement>("template[data-flow-mare]"); if (mare) stage.lastElementChild?.querySelector(".fl-done")?.append(mare.content.cloneNode(true));  // D83: the quiet Maré line
     stage.lastElementChild?.querySelector("[data-prep]")?.addEventListener("click", prepOpen);
-    const p = new URLSearchParams(location.search); p.set(opts.param, "done"); history.replaceState(null, "", `${location.pathname}?${p}${location.hash}`);
+    if (writeUrl) history.replaceState({ ...(history.state || {}), ipK: depth }, "", href("done"));
   }
   // ------------------------------------------------------------ the preparation (prompt 69): after the confirmation,
   // optional, one question per screen (purpose, when they plan to buy, NIF, financing, where), then sent to the same
   // address as the request (/api/request, flow "concierge", with "Request: Preparation for the call"): no new routing.
   function prepOpen() {
-    prepMode = true; S = PREP; i = 0; dir = 1;
+    prepMode = true; S = PREP; i = 0; dir = 1; push(val(0));
     const pl = PREP.find((x) => x.type === "text" && x.prefill === "place"); if (pl && !A[pl.id] && ctxPlace) A[pl.id] = ctxPlace;
     ev({ event: `flow/${F.id}/prep/open`, band: band() }); render(); top();
   }
@@ -455,11 +588,11 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
     if (!labels.length) { go(-1); return; }  // nothing answered: back to the confirmation
     const scr = stage.lastElementChild as HTMLElement, btn = scr.querySelector<HTMLButtonElement>("[data-next]");
     if (btn) { btn.disabled = true; btn.textContent = L.sending; }
-    const payload = { flow: F.id, intent: P["prep.intent"], project: q.get("project") || "", ...F.hidden, answers: Object.fromEntries(PREP.map((s) => [s.id, A[s.id] ?? ""])), labels,
+    const payload = { flow: F.id, intent: P["prep.intent"], project: projectId, ...F.hidden, answers: Object.fromEntries(PREP.map((s) => [s.id, A[s.id] ?? ""])), labels,
       name: A.name || "", email: A.email || "", phone: A.phone || "", page: location.pathname, hp: "" };
     let ok = false;
     try { ok = (await fetch("/api/request", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(payload) })).ok; } catch { ok = false; }
-    if (ok) { prepSent = true; ev({ event: `flow/${F.id}/prep/sent`, band: band() }); prepMode = false; S = steps; i = N - 1; done(lastRoute || route()); top(); return; }
+    if (ok) { prepSent = true; ev({ event: `flow/${F.id}/prep/sent`, band: band() }); prepMode = false; S = steps; i = N - 1; done(lastRoute || route()); top(); return; }  // this entry now shows the confirmation
     ev({ event: `flow/${F.id}/prep/fallback`, band: band() });
     if (btn) { btn.disabled = false; btn.textContent = P["prep.send"]; }
     const href = `mailto:${F.mailto}?${F.mailcc ? `cc=${encodeURIComponent(F.mailcc)}&` : ""}subject=${encodeURIComponent(`${P["prep.intent"]} (${F.hidden.edition} · ${F.hidden.language})`)}&body=${encodeURIComponent([...labels, `${L.name}: ${payload.name}`, `${L.email}: ${payload.email}`].join("\n"))}`;
@@ -470,19 +603,27 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
     const subject = `${F.title} (${F.hidden.edition} · ${F.hidden.language})`;
     const text = [...(p.labels as string[]), `${L.name}: ${p.name}`, `${L.email}: ${p.email}`, p.phone ? `${L.phone}: ${p.phone}` : "", p.brief ? `\n${p.brief}` : "", "", steps[N - 1].type === "review" ? (steps[N - 1] as Extract<Step, { type: "review" }>).text : (steps[N - 1] as { notice?: string }).notice || ""].filter((x) => x !== "").join("\n");
     const href = `mailto:${F.mailto}?${F.mailcc ? `cc=${encodeURIComponent(F.mailcc)}&` : ""}subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(text)}`;
-    const scr = stage.lastElementChild as HTMLElement, btn = scr.querySelector<HTMLButtonElement>("[data-send]")!; btn.textContent = F.id === "concierge" && P.send ? P.send : L.send; btn.disabled = false;
+    const scr = stage.lastElementChild as HTMLElement, btn = scr.querySelector<HTMLButtonElement>("[data-send]")!; btn.textContent = sendLabel(); btn.disabled = false;
     const box = document.createElement("p"); box.className = "fl-fallback"; box.innerHTML = `${esc(L.fallback)} <a class="fl-btn" href="${href}">${esc(L["fallback.btn"])}</a>`;
     scr.querySelector(".fl-fallback")?.remove(); scr.querySelector(".fl-go")?.after(box);
   }
 
   // ------------------------------------------------------------ start
-  const start = Number(q.get(opts.param));
-  i = start >= 1 && start <= N ? start - 1 : offset;
+  const pv = q.get(opts.param), start = Number(pv);
+  // MI-13: back in this tab on the same context (a language switch, another page), the reader's step comes back too.
+  const resume = fromSession && sameCtx && !fromHome && !pv && Number(A._i) > 0 && Number(A._i) < N ? Number(A._i) : 0;
+  i = start >= 1 && start <= N ? start - 1 : resume || offset;
   const first = i;  // the first screen the reader sees (the bank and tax line sits on it)
-  const wasDone = q.get(opts.param) === "done" ? (() => { try { return sessionStorage.getItem(`${key}.done`); } catch { return null; } })() : null;
+  const wasDone = pv === "done" || /^p\d+$/.test(pv || "") ? (() => { try { return sessionStorage.getItem(`${key}.done`); } catch { return null; } })() : null;
   const lawyerFirst = topic === "lawyer" && !!LW && !start;
-  if (wasDone) done(wasDone); else if (lawyerFirst) lawyerScreen(); else render(false);
+  // In the sheet, nothing is written to the URL until it opens (show() pushes that entry).
+  if (wasDone) { sent = true; done(wasDone); } else if (lawyerFirst) lawyerScreen(); else render(false, !sheet || pv != null);
   // show(): what the sheet displays each time it opens (the lawyer card for a lawyer link, else the current step).
-  const show = () => { engaged = true; return lawyerFirst ? lawyerScreen() : go(i); };
-  return { go, show, stop, mute: () => { finished = true; }, reset: () => { finished = false; prepMode = false; S = steps; i = 0; render(false); }, focus: () => stage.querySelector<HTMLElement>(".fl-q")?.focus({ preventScroll: true }), clearUrl: () => url(null), at: () => i };
+  const show = () => {
+    engaged = true;
+    // Reopened on a later step (MI-13: the reader's step came back), each step up to it gets its entry, so Back walks them.
+    if (sheet && !new URLSearchParams(location.search).has(opts.param)) { if (view === "done") push("done"); else for (let n = Math.min(offset, i); n <= i; n++) push(val(n)); }
+    if (view === "done") return; return lawyerFirst ? lawyerScreen() : go(i, false);
+  };
+  return { go, show, stop, pop, unwind, mute: () => { finished = true; }, reset: () => { finished = false; prepMode = false; S = steps; i = 0; render(false); }, focus: () => stage.querySelector<HTMLElement>(".fl-q")?.focus({ preventScroll: true }), clearUrl: () => url(null), at: () => i };
 }
