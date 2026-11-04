@@ -80,23 +80,23 @@ export function flowConfig(id: FlowId, lang: Lang, ed: EdCode, hidden: Record<st
     review,
   ];
   const done = id === "concierge"
-    ? { ok: { h: c("p69.done.h", lang), p: c("p69.done.p", lang) }, private: { h: c("p69.done.h", lang), p: c("p69.done.p", lang) }, later: { h: c("p69.done.h", lang), p: c("p69.done.p.later", lang) } }
+    ? { ok: { h: c("p69.done.h", lang), p: c("p69.done.p", lang) }, private: { h: c("p69.done.h", lang), p: c("p69.done.p", lang) }, later: { h: c("p69.done.h.later", lang), p: c("p69.done.p.later", lang) } }
     : id === "partner" ? { ok: { h: c("flow.p.done.h", lang), p: c("flow.p.done.p", lang) } } : { ok: { h: c("flow.v.done.h", lang), p: c("flow.v.done.p", lang) } };
   // Prompt 69: the words the three steps, the confirmation, the preparation and the IMT line need in the browser.
-  const P69 = id === "concierge" ? Object.fromEntries(["help.ctx", "help.project", "help.place", "help.placebudget", "help.budget", "tz", "tz.same", "tz.change", "tz.zone",
+  const P69 = id === "concierge" ? Object.fromEntries(["help.ctx", "help.about", "help.project", "help.place", "help.placebudget", "help.budget", "tz", "tz.same", "tz.change", "tz.zone",
     "tz.lisbon", "tz.next", "tz.prev", "slot.day", "slot.time", "slot.picked", "slot.none", "slot.remove", "done.times", "prep", "prep.p", "prep.send", "prep.done.h", "prep.intent",
-    "imt.line", "imt.how", "send", "send.later", "notice.later", "phone", "email"].map((k) => [k, c(`p69.${k}`, lang, Object.fromEntries(["name", "place", "inplace", "price", "city", "ofcity", "imt"].map((x) => [x, `{${x}}`])))])) : {};
+    "imt.line", "imt.how", "send", "send.later", "notice.later", "phone", "email", "req", "cc", "slot.kept", "visit.title", "visit.when", "visit.done", "visit.done.later", "visit.intent"].map((k) => [k, c(`p69.${k}`, lang, Object.fromEntries(["name", "place", "inplace", "price", "city", "ofcity", "imt"].map((x) => [x, `{${x}}`])))])) : {};
   // Prompt 70 (J-08): the edition's own currency, for a budget the reader typed in it on the home bar (ECB reference rate).
   const cur = EDITION_CUR[ed];
   return {
-    id, steps, done, prep, p69: P69 as Record<string, string>, fx: id === "concierge" && cur ? { cur, rate: RATE(cur).rate } : null,
+    id, steps, done, prep, p69: P69 as Record<string, string>, cv: id === "concierge" ? cvLabels(lang) : null, fx: id === "concierge" && cur ? { cur, rate: RATE(cur).rate } : null,
     title: c(id === "concierge" ? "flow.c.title" : id === "partner" ? "flow.p.title" : "flow.v.title", lang),
     lede: id === "concierge" ? c("flow.c.lede", lang) : "",
     hidden: { edition: ed, language: lang, ...hidden },
     mailto: config.contactEmail,
     // The ready-written e-mail's copy to the partner agency, when the build sets PUBLIC_AGENCY_EMAIL (never in the repo).
     mailcc: ((import.meta.env.PUBLIC_AGENCY_EMAIL as string | undefined) || "").trim(),
-    links: { path: pathFor(lang, ed, "journey"), map: pathFor(lang, ed, "map"), privacy: pathFor(lang, ed, "privacy"), articles: pathFor(lang, ed, "articles"), imt: `${pathFor(lang, ed, "sims")}${SUB.imt[lang]}/`, home: pathFor(lang, ed, "home") },
+    links: { profile: pathFor(lang, ed, "profile"), sims: pathFor(lang, ed, "sims"), path: pathFor(lang, ed, "journey"), map: pathFor(lang, ed, "map"), privacy: pathFor(lang, ed, "privacy"), articles: pathFor(lang, ed, "articles"), imt: `${pathFor(lang, ed, "sims")}${SUB.imt[lang]}/`, home: pathFor(lang, ed, "home") },
     labels: { ...Object.fromEntries(["back", "next", "skip", "of", "close", "send", "sending", "review", "fallback", "fallback.btn", "invalid.email", "name", "email", "phone"]
       .map((k) => [k, c(`flow.${k}`, lang, k === "of" ? { i: "{i}", n: "{n}" } : {})])),
       // Prompt 70 (A-27, S-20): one message under each field that is missing or incomplete.
@@ -110,5 +110,19 @@ export function flowConfig(id: FlowId, lang: Lang, ed: EdCode, hidden: Record<st
   };
 }
 export type FlowConfig = ReturnType<typeof flowConfig>;
+/** Prompt 74: the words of the buyer profile (COPY_DECK "cv.*"), with the country, budget and use names it shows. */
+export function cvLabels(lang: Lang): Record<string, string> {
+  const keys = ["h", "pct", "k.country", "k.budget", "k.use", "k.fin", "k.total", "k.timeline", "k.nif", "k.resident", "k.interest", "k.time", "fin.cash", "fin.loan", "fin.loan.p",
+    "timeline.6", "timeline.12", "timeline.later", "nif.yes", "nif.no", "resident.yes", "resident.no", "resident.maybe", "q.timeline", "q.nif", "q.resident", "refund",
+    "src.edition", "src.simulator", "src.map", "src.concierge", "src.answers", "src.favorites", "src.mare", "edit", "place.ph", "place.add", "remove", "ready", "sending", "sent", "failed",
+    "consent", "summary", "intent", "goes", "page.title", "page.lede", "page.costs", "page.price", "page.imt", "page.imt.res", "page.is", "page.deed", "page.total", "page.short", "page.print",
+    "page.empty", "page.empty.a", "page.made", "page.note", "page.clear"];
+  return {
+    ...Object.fromEntries(keys.map((k) => [k, c(`cv.${k}`, lang)])),
+    ...Object.fromEntries(ED_ORDER.map((x) => [`country.${x}`, c(`common.country.${x}`, lang)])), "country.other": c("flow.other", lang),
+    ...Object.fromEntries([1, 2, 3, 4].map((x) => [`budget.${x}`, c(`flow.c.budget.${x}`, lang)])),
+    "use.live": c("sim1.use.live", lang), "use.away": c("sim1.use.away", lang), sep: lang === "fr" ? "\u00a0: " : ": ",
+  };
+}
 /** The Concierge's step ids before prompt 69 (eleven questions), still built as /e/ pages so older counts keep their pages. */
 export const CONCIERGE_V1_STEPS = ["country", "budget", "purpose", "when", "fin", "nif", "place", "lang", "window", "contact", "consent"];

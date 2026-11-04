@@ -26,6 +26,7 @@ Path of a request:
 1. The reader answers in the flow; answers stay in that browser tab only (`sessionStorage`) until sent.
 2. On "Send request", the page posts JSON to `/api/request`.
 3. The Worker sends one email per address in `MAIL_TO` (the brand mailbox and Habinedita Gondomar), with `Reply-To` set to the reader; it answers 200 if at least one was sent, 502 if none, 503 while not configured.
+   - Prompt 74: each message is plain text plus the same in HTML. A Concierge request carries the buyer profile (`site/src/lib/cv.ts`): every field with its source, the completeness figure and the developer consent line. The Worker never e-mails a developer; a ticked, named box is recorded as the buyer's permission for Imóveis Portugal to pass the profile on. `scripts/test-worker.mjs` covers it.
 4. The partner agency receives buyer and seller requests directly (hard rule 6, D14); the brand mailbox keeps the same copy. Partner-category requests are answered by the brand, as before.
 5. If the endpoint is not configured or fails, the flow shows the same request as a ready-written email to the brand mailbox (one tap), with the agency in copy when the build variable `PUBLIC_AGENCY_EMAIL` is set, so no request is ever lost.
 

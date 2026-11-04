@@ -153,8 +153,8 @@
   aside.sh .sh-in .fl-f span { margin-top: 12px; }
   aside.sh .sh-in .fl-f .fl-in { padding: 8px 0; }
   aside.sh .sh-in .fl-notice { margin-top: 14px; font-size: 14px; }
-  .fl-pills[data-budget-row] { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
-  .fl-pills[data-budget-row] .fl-pill { padding: 8px 4px !important; border-radius: 14px; font-size: 13.5px !important; line-height: 1.2; text-align: center; }
+  .fl-pills[data-budget-row] { gap: 6px; }
+  .fl-pills[data-budget-row] .fl-pill { padding: 9px 8px !important; font-size: 13.5px !important; line-height: 1.2; }
 }
 /* The page version on a phone (J-27): the step's action stays in reach above the bottom bar instead of under it. */
 @media (max-width: 819px) {
@@ -183,14 +183,13 @@
   html aside.sh .sh-in .fl-opts { margin-top: 10px; gap: 6px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
   html aside.sh .sh-in .fl-opt { min-height: 44px; padding: 8px 14px !important; font-size: 15px !important; border-radius: 14px; }
   html aside.sh .sh-in .fl-step > .fl-k, aside.sh .sh-in .rq-bk { margin-top: 10px; }
-  html aside.sh .sh-in .fl-pills[data-budget-row] { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
-  html aside.sh .sh-in .fl-pill { padding: 7px 6px !important; font-size: 13.5px !important; text-align: center; }
+  html aside.sh .sh-in .fl-pills[data-budget-row] { gap: 6px; }
+  html aside.sh .sh-in .fl-pill { padding: 7px 8px !important; font-size: 13.5px !important; text-align: center; }
   /* The action floats at the bottom right, so the choices on the left are never under it. */
   html aside.sh .sh-in .fl-step > .fl-go { margin-top: 10px; padding: 0 0 28px; justify-content: flex-end; background: none; pointer-events: none; }
   html aside.sh .sh-in .fl-step > .fl-go > * { pointer-events: auto; }
   html aside.sh .sh-in .fl-step > .fl-go .fl-btn { box-shadow: 0 6px 18px rgba(0, 0, 0, .18); }
   html aside.sh .sh-in .fl-step > .fl-go .fl-link { padding: 8px 12px !important; border-radius: 12px; background: rgba(252, 252, 252, .94) !important; }
-  html aside.sh .sh-in .fl-pills[data-budget-row], html aside.sh .sh-in .fl-pills, html aside.sh .sh-in .fl-opts { max-width: calc(100% - 180px); }
   html aside.sh .sh-in .fl-btn { min-height: 44px; }
   html aside.sh .sh-in .fl-fields { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 18px; }
   html aside.sh .sh-in .fl-f span { margin-top: 8px; }
@@ -203,3 +202,63 @@
 .fl-back, .sp-tz-ch, .fl-go .fl-link, .fl-ask .fl-link { position: relative; }
 .fl-back::after { content: ""; position: absolute; inset: -4px; }
 .sp-tz-ch::after, .fl-go .fl-link::after, .fl-ask .fl-link::after { content: ""; position: absolute; left: -8px; right: -8px; top: 50%; height: 44px; min-width: 44px; transform: translateY(-50%); }
+
+/* Prompt 73 §1: step 1. Each budget chip on one line (the row wraps between chips, never inside one), the context as one
+   small "Sobre:" line under the doors, a budget typed in dollars shown as typed, and Continue full width. */
+.fl-pills[data-budget-row] .fl-pill { flex: 1 0 auto; white-space: nowrap; text-align: center; }
+.fl-about { margin: 10px 0 0; font-size: 14px; line-height: 1.4; color: var(--fm, #5b5d63); }
+.fl-typed { margin-left: 6px; font-size: 13.5px; font-weight: 500; letter-spacing: 0; text-transform: none; color: var(--fm, #5b5d63); }
+.fl-go-w .fl-btn { flex: 1 1 100%; width: 100%; }
+
+/* Round 2 (A-25, J-22, J72-18): the step's action bar in the sheet's footer (scripts/flow.ts moves it there), outside the
+   scrolling area: the scroll area ends above the bar, so no chip, time or link is ever under it. Safe area included. */
+.sh-foot { flex: none; padding: 10px 26px calc(14px + env(safe-area-inset-bottom)); border-top: 1px solid rgba(17, 18, 20, .07); background: rgba(252, 252, 252, .98); border-radius: 0 0 20px 20px; }
+.sh-foot[hidden] { display: none; }
+.sh-foot .fl-go { margin: 0; padding: 0; gap: 8px 18px; }
+.sh-foot .fl-go .fl-btn { flex: 1 1 100%; width: 100%; }
+.sh-foot .fl-go .fl-link { margin: 0 auto; }
+@media (max-width: 819px) { .sh-foot { padding: 8px 20px calc(10px + env(safe-area-inset-bottom)); border-radius: 0; } .sh-foot .fl-btn { min-height: 48px; } }
+@media (max-height: 520px) and (orientation: landscape) {
+  html aside.sh .sh-foot { padding: 6px max(20px, env(safe-area-inset-right)) calc(8px + env(safe-area-inset-bottom)) 20px; border-radius: 0 0 0 20px; }
+  html aside.sh .sh-foot .fl-go { flex-wrap: nowrap; }
+  html aside.sh .sh-foot .fl-go .fl-btn { flex: 1 1 auto; min-height: 42px; box-shadow: none; }
+  html aside.sh .sh-foot .fl-go .fl-link { margin: 0; white-space: nowrap; background: none !important; }
+  .consult .fl-step > .fl-go { position: static; }
+}
+/* Round 2: times kept from earlier said once; "required" marked before the send; the phone's country code as a prefix. */
+.fl-kept { margin: 6px 0 0; font-size: 14px; color: var(--fa); font-weight: 600; }
+.fl-req { margin-left: 6px; font-style: normal; font-size: 11.5px; font-weight: 600; letter-spacing: .02em; text-transform: none; color: var(--fm, #5b5d63); }
+html .fl .fl-f span.fl-tel { display: flex; align-items: flex-end; gap: 10px; margin-top: 0; font-size: inherit; font-weight: inherit; letter-spacing: 0; text-transform: none; color: inherit; }
+.fl-tel .fl-cc { flex: none; width: 4.6em; text-align: left; }
+.fl-tel [data-c] { flex: 1; min-width: 0; }
+
+/* Prompt 74: the buyer profile. One plain line on the last step; on the confirmation, the card: each line one tap to
+   change (its source in small type), the missing answers as rows of pills, the places as chips, "Pronto" full width. */
+.fl-cvline { margin: 14px 0 0; font-size: 13.5px; line-height: 1.45; color: var(--fm, #5b5d63); }
+.cv { margin-top: 26px; padding: 18px 18px 16px; border-radius: 18px; background: var(--fs, #f3f2ee); }
+.cv-top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.cv-h { margin: 0; font-size: 17px; font-weight: 700; color: var(--fi); }
+.cv-pct { flex: none; font-size: 13px; font-weight: 700; color: var(--fa); }
+.cv-list { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 2px; }
+.cv-line { display: flex; width: 100%; align-items: baseline; justify-content: space-between; gap: 12px; min-height: 44px; margin: 0; padding: 10px 0 !important;
+  border: 0; border-bottom: 1px solid rgba(17, 18, 20, .08); background: none !important; text-align: left; font-size: 15.5px !important; font-weight: 500 !important; color: var(--fi) !important; cursor: pointer; }
+.cv-line small { flex: none; font-size: 12px; font-weight: 500; color: var(--fm, #5b5d63); }
+.cv-line.cv-fixed { cursor: default; }
+.cv-miss span { color: var(--fm, #5b5d63); } .cv-miss b { color: var(--fa); font-size: 18px; }
+.cv-row.cv-editing, .cv-int { padding: 8px 0 10px; border-bottom: 1px solid rgba(17, 18, 20, .08); }
+.cv-k { margin: 0 0 6px; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--fm, #5b5d63); }
+.cv-chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.cv-chip { display: inline-flex; align-items: center; gap: 2px; padding: 4px 4px 4px 12px; border-radius: 999px; background: #fff; font-size: 14.5px; font-weight: 600; color: var(--fi); }
+.cv-chip button { width: 32px; height: 32px; border: 0; border-radius: 50%; background: none; font-size: 18px; line-height: 1; color: var(--fm, #5b5d63); cursor: pointer; }
+.cv-add { display: flex; align-items: flex-end; gap: 12px; margin-top: 6px; }
+.cv-add .fl-in { flex: 1; min-width: 0; padding: 8px 0; font-size: 15px; }
+.cv-q { margin-top: 16px; }
+.cv-qq { margin: 0 0 8px; font-size: 15.5px; font-weight: 650; color: var(--fi); }
+.cv-pills .fl-pill { white-space: nowrap; background: #fff !important; }
+.cv-pills .fl-pill[aria-checked="true"] { background: var(--fi) !important; }
+.cv-refund { margin: 6px 0 0; font-size: 13.5px; color: var(--fa); font-weight: 600; }
+.cv-consent { margin-top: 16px; background: #fff !important; }
+.cv-go { margin-top: 18px; }
+.cv-go .fl-btn { flex: 1 1 100%; width: 100%; }
+.cv-status { margin: 10px 0 0; font-size: 14px; color: var(--fm, #5b5d63); }
+.fl .cv-line { border-bottom: 1px solid rgba(17, 18, 20, .08); }

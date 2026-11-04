@@ -180,7 +180,7 @@ How to edit:
 ### nav.partners
 - PT: Para parceiros
 - EN: For partners
-- FR: Partenaires
+- FR: Pour les partenaires
 
 ### nav.how
 - PT: Sobre nós
@@ -238,9 +238,9 @@ How to edit:
 - FR: Sponsor Gold
 
 ### partners.line
-- PT: Empresas: ver como ser parceiro.
-- EN: Does your business serve people who live abroad? See the partner terms.
-- FR: Votre entreprise sert une clientèle installée à l'étranger ? Voyez les conditions partenaires.
+- PT: Empresas: ser parceiro.
+- EN: Businesses: become a partner.
+- FR: Entreprises : devenir partenaire.
 
 ### sponsored
 - PT: Patrocinado
@@ -264,8 +264,8 @@ How to edit:
 
 ### form.pending
 - PT: Formulário em preparação. Escreva-nos para {email}.
-- EN: This form is being set up. In the meantime, write to us at {email}.
-- FR: Ce formulaire est en cours de préparation. En attendant, écrivez-nous à {email}.
+- EN: Form coming soon. Write to {email}.
+- FR: Formulaire en préparation. Écrivez à {email}.
 
 ### trust.1.h
 - PT: Um consultor qualificado
@@ -273,7 +273,7 @@ How to edit:
 - FR: Un conseiller qualifié
 
 ### trust.1.p
-- PT: De uma mediadora imobiliária licenciada, patrocinadora do Imóveis Portugal.
+- PT: De uma mediadora imobiliária licenciada, patrocinadora da Imóveis Portugal.
 - EN: At a licensed real-estate brokerage that sponsors Imóveis Portugal.
 - FR: D'une agence immobilière agréée, sponsor d'Imóveis Portugal.
 
@@ -776,14 +776,14 @@ How to edit:
 - FR: Acheter au Portugal depuis l'étranger, question par question
 
 ### lede
-- PT: Respostas curtas, cada número com a fonte oficial.
-- EN: The questions people ask most, answered in a few lines. Every number links to its official source.
-- FR: Les questions les plus posées, en quelques lignes. Chaque chiffre renvoie à sa source officielle.
+- PT: Respostas curtas, com a fonte oficial.
+- EN: Short answers, with the official source.
+- FR: Réponses courtes, avec la source officielle.
 
 ### search
-- PT: Pesquisar: IMT, crédito, procuração…
-- EN: Search: transfer tax, mortgage, power of attorney…
-- FR: Rechercher : IMT, crédit, procuration…
+- PT: Pesquisar: IMT, crédito…
+- EN: Search: tax, mortgage…
+- FR: Rechercher : IMT, crédit…
 
 ### stage.before.h
 - PT: Antes de comprar
@@ -816,9 +816,9 @@ How to edit:
 - FR: Impôts annuels, location et déclarations.
 
 ### none
-- PT: Ainda não temos essa pergunta. Pode enviá-la a um parceiro da categoria.
-- EN: We couldn't find that question. Send it to a partner and get an answer for your case.
-- FR: Nous n'avons pas trouvé cette question. Posez-la à un partenaire pour une réponse adaptée à votre cas.
+- PT: Nada encontrado.
+- EN: Nothing found.
+- FR: Aucun résultat.
 
 ### updated
 - PT: Fontes verificadas a {date}
@@ -851,7 +851,7 @@ How to edit:
 - FR: Parler à un promoteur
 
 ### cta.agency
-- PT: Receber opções de casas
+- PT: Perguntar a um consultor qualificado
 - EN: Ask a qualified advisor
 - FR: Demander à un conseiller qualifié
 
@@ -883,9 +883,9 @@ How to edit:
 ## talk
 
 ### form.cta
-- PT: Receber a resposta
-- EN: Send my question
-- FR: Envoyer ma question
+- PT: Enviar pergunta
+- EN: Send question
+- FR: Envoyer la question
 
 ### calls.h
 - PT: Falar com um consultor
@@ -899,8 +899,8 @@ How to edit:
 
 ### lede
 - PT: A sua pergunta segue para um parceiro da categoria que escolher.
-- EN: For your own situation, leave us your question and the category. We'll pass it to a partner in that field.
-- FR: Pour votre situation, laissez-nous votre question et la catégorie. Nous la transmettons à un partenaire du domaine.
+- EN: Your question goes to a partner in the category you choose.
+- FR: Votre question va à un partenaire de la catégorie choisie.
 
 ### agency.p
 - PT: Numa mediadora imobiliária licenciada, para comprar ou vender a partir de fora: procura, visitas por vídeo ou ao vivo, negociação.
@@ -914,8 +914,8 @@ How to edit:
 
 ### launch
 - PT: Estes parceiros chegam a 1 de dezembro de 2026. Até lá, as perguntas frequentes têm a regra e a fonte oficial.
-- EN: Partners in these categories arrive at launch, on December 1, 2026. Until then, every frequent question has the rule and its official source.
-- FR: Les partenaires de ces catégories arrivent au lancement, le 1er décembre 2026. D'ici là, chaque question fréquente donne la règle et sa source officielle.
+- EN: These partners arrive on December 1, 2026. Until then, the FAQ gives the rule and the official source.
+- FR: Ces partenaires arrivent le 1er décembre 2026. D'ici là, les questions fréquentes donnent la règle et la source officielle.
 
 ### cat.lawyer.h
 - PT: Advogado
@@ -974,8 +974,8 @@ How to edit:
 
 ### form.intro
 - PT: Usamos estes dados só para responder e, com a sua autorização, para os passar a um parceiro da categoria.
-- EN: Category, country you live in and your question. We use these details only to reply and, if you agree, to pass them to a partner in that category.
-- FR: Catégorie, pays de résidence et votre question. Nous utilisons ces données uniquement pour répondre et, avec votre accord, pour les transmettre à un partenaire de la catégorie.
+- EN: We use these details only to reply and, if you agree, to pass them to a partner in that category.
+- FR: Nous utilisons ces données uniquement pour répondre et, avec votre accord, pour les transmettre à un partenaire de la catégorie.
 
 ## guide
 
@@ -1257,16 +1257,16 @@ How to edit:
 - FR: Réserver un appel
 
 ### form.intro
-- PT: Deixe os seus dados e respondemos num dia útil.
-- EN: Leave your details and we'll reply within one business day.
-- FR: Laissez vos coordonnées : nous répondons sous un jour ouvré.
+- PT: Resposta num dia útil.
+- EN: Answer within one business day.
+- FR: Réponse sous un jour ouvré.
 
 ## buy
 
 ### cta
-- PT: Receber opções de casas
-- EN: Send my request
-- FR: Envoyer ma demande
+- PT: Enviar pedido
+- EN: Send request
+- FR: Envoyer la demande
 
 ### title
 - PT: Encontrar casa
@@ -1280,8 +1280,8 @@ How to edit:
 
 ### lede
 - PT: O pedido segue para um consultor qualificado, que o contacta com opções. Sem custos.
-- EN: Your request goes to a qualified advisor, who will reach out with options. It's free for you.
-- FR: Votre demande part chez un conseiller qualifié, qui vous contacte avec des propositions. C'est gratuit pour vous.
+- EN: Your request goes to a qualified advisor, who contacts you with options. Free.
+- FR: Votre demande va à un conseiller qualifié, qui vous contacte avec des propositions. Gratuit.
 
 ### steps.h
 - PT: A seguir
@@ -1289,9 +1289,9 @@ How to edit:
 - FR: Ensuite
 
 ### steps.1
-- PT: Preenche o formulário, em dois minutos.
-- EN: You fill in the form, in two minutes.
-- FR: Vous remplissez le formulaire, en deux minutes.
+- PT: Preenche o formulário: dois minutos.
+- EN: You fill in the form: two minutes.
+- FR: Vous remplissez le formulaire : deux minutes.
 
 ### steps.2
 - PT: O consultor qualificado contacta-o em até dois dias úteis.
@@ -1299,9 +1299,9 @@ How to edit:
 - FR: Le conseiller qualifié vous contacte sous deux jours ouvrés.
 
 ### steps.3
-- PT: Se quiser, marca visitas para quando estiver em Portugal.
-- EN: If you'd like, it sets up viewings for when you're in Portugal.
-- FR: Si vous le souhaitez, elle organise des visites pendant votre séjour au Portugal.
+- PT: Se quiser, o consultor marca visitas para quando estiver em Portugal.
+- EN: If you like, the advisor sets up viewings for when you're in Portugal.
+- FR: Si vous le souhaitez, le conseiller organise des visites pendant votre séjour au Portugal.
 
 ### small
 - PT: Os seus dados servem só para este pedido e seguem para o consultor qualificado apenas com o seu consentimento.
@@ -1401,7 +1401,7 @@ How to edit:
 - FR: Une seule agence immobilière
 
 ### s4.p
-- PT: O Imóveis Portugal não faz mediação imobiliária. Os pedidos de compra ou venda seguem só para um consultor qualificado de uma mediadora imobiliária licenciada, patrocinadora do site.
+- PT: A Imóveis Portugal não faz mediação imobiliária. Os pedidos de compra ou venda seguem só para um consultor qualificado de uma mediadora imobiliária licenciada, patrocinadora do site.
 - EN: Imóveis Portugal isn't a real-estate broker. Requests to buy or sell a home go only to a qualified advisor at a licensed real-estate brokerage, which is a sponsor.
 - FR: Imóveis Portugal n'est pas un intermédiaire immobilier. Les demandes d'achat ou de vente vont uniquement à un conseiller qualifié d'une agence immobilière agréée, qui est sponsor du site.
 
@@ -1448,14 +1448,14 @@ How to edit:
 ## legal
 
 ### privacy.7.p
-- PT: Se marcar "Incluir este resumo", o seu pedido leva um resumo do que indicou no percurso e nos simuladores: país, orçamento, custo total, capitais próprios e financiamento, uma taxa de esforço indicativa, prazo, se já tem NIF e as zonas cujos preços consultou. Esses valores ficam no seu dispositivo até enviar o pedido e seguem com ele só para a Imóveis Portugal e para o consultor qualificado da mediadora imobiliária licenciada, porque o pediu (RGPD, art. 6.º, n.º 1, alínea b)). O resumo é indicativo, não é uma avaliação de crédito e não serve para nenhuma decisão automatizada sobre si. Para orçamentos elevados, a mediadora continua a pedir identificação e prova de fundos, como exige a Lei 83/2017.
-- EN: If you tick "Include this summary", your request carries a summary of what you entered on the path and in the calculators: country, budget, total cost, own funds and financing, an indicative debt-to-income ratio, timing, whether you have a NIF and the areas whose prices you looked at. These figures stay on your device until you send the request and go with it only to Imóveis Portugal and the qualified advisor at the licensed real-estate brokerage, because you asked for it (GDPR art. 6(1)(b)). The summary is indicative, is not a credit assessment and is not used for any automated decision about you. For high budgets, the brokerage still asks for identification and proof of funds, as Lei 83/2017 requires.
-- FR: Si vous cochez « Joindre ce résumé », votre demande contient un résumé de ce que vous avez saisi dans le parcours et les simulateurs : pays, budget, coût total, apport et financement, un taux d'endettement indicatif, échéance, si vous avez un NIF et les secteurs dont vous avez consulté les prix. Ces données restent sur votre appareil jusqu'à l'envoi et partent avec la demande uniquement chez Imóveis Portugal et le conseiller qualifié de l'agence immobilière agréée, parce que vous l'avez demandé (RGPD, art. 6, par. 1, point b). Le résumé est indicatif, n'est pas une évaluation de crédit et ne sert à aucune décision automatisée vous concernant. Pour les budgets élevés, l'agence demande toujours une pièce d'identité et la preuve des fonds, comme l'exige la Lei 83/2017.
+- PT: O site junta no seu dispositivo (armazenamento local) o que fez e respondeu: o país da edição, o orçamento, o uso, o financiamento e a entrada, o custo total e o IMT do simulador, as zonas e os empreendimentos que abriu ou guardou e quanto tempo passou em cada uma, o prazo, se já tem NIF e se pensa passar a residente. Fica no seu dispositivo até o apagar, e pode vê-lo e imprimi-lo em «O meu perfil de comprador». Quando envia um pedido ao Concierge, o perfil segue com ele, com a origem de cada linha, só para a Imóveis Portugal e para o consultor qualificado, porque o pediu (RGPD, art. 6.º, n.º 1, al. b)). Um promotor só o recebe se marcar a caixa, desmarcada, com o nome desse promotor (art. 6.º, n.º 1, al. a)), e pode retirar esse consentimento a qualquer momento. Para os relatórios aos promotores contamos só quantos perfis completos chegam por empreendimento, sem nenhum dado pessoal. O perfil é indicativo, não é uma avaliação de crédito e não serve para nenhuma decisão automatizada sobre si. Para orçamentos elevados, o consultor continua a pedir identificação e prova de fundos, como exige a Lei 83/2017.
+- EN: The site gathers on your device (local storage) what you did and answered: your edition's country, budget, use, financing and down payment, the simulator's total cost and IMT, the areas and developments you opened or saved and how long you spent on each, your timeline, whether you have a NIF and whether you plan to become a resident. It stays on your device until you delete it, and you can see and print it under “My buyer profile”. When you send a Concierge request, the profile goes with it, with where each line came from, only to Imóveis Portugal and the qualified advisor, because you asked for it (GDPR art. 6(1)(b)). A developer receives it only if you tick the unticked box naming that developer (art. 6(1)(a)), and you can withdraw that consent at any time. For the developers' reports we only count how many complete profiles arrive per development, with no personal data. The profile is indicative, is not a credit assessment and is not used for any automated decision about you. For high budgets, the advisor still asks for identification and proof of funds, as Lei 83/2017 requires.
+- FR: Le site rassemble sur votre appareil (stockage local) ce que vous avez fait et répondu : le pays de votre édition, le budget, l'usage, le financement et l'apport, le coût total et l'IMT du simulateur, les secteurs et programmes ouverts ou gardés et le temps passé sur chacun, l'échéance, si vous avez un NIF et si vous pensez devenir résident. Il reste sur votre appareil jusqu'à ce que vous l'effaciez, et vous pouvez le voir et l'imprimer dans « Mon profil d'acheteur ». Quand vous envoyez une demande au Concierge, le profil part avec elle, avec l'origine de chaque ligne, uniquement chez Imóveis Portugal et le conseiller qualifié, parce que vous l'avez demandé (RGPD, art. 6, par. 1, b)). Un promoteur ne le reçoit que si vous cochez la case, non cochée, à son nom (art. 6, par. 1, a)), et vous pouvez retirer cet accord à tout moment. Pour les rapports aux promoteurs, nous comptons seulement combien de profils complets arrivent par programme, sans aucune donnée personnelle. Le profil est indicatif, n'est pas une évaluation de crédit et ne sert à aucune décision automatisée vous concernant. Pour les budgets élevés, le conseiller demande toujours une pièce d'identité et la preuve des fonds, comme l'exige la Lei 83/2017.
 
 ### privacy.7.h
-- PT: Resumo enviado com os pedidos
-- EN: Summary sent with requests
-- FR: Résumé joint aux demandes
+- PT: O seu perfil de comprador
+- EN: Your buyer profile
+- FR: Votre profil d'acheteur
 
 ### draft
 - PT: Rascunho. Os campos entre parênteses retos são preenchidos quando a entidade estiver definida.
@@ -1508,9 +1508,9 @@ How to edit:
 - FR: Destinataires
 
 ### privacy.3.p
-- PT: A Imóveis Portugal e um consultor qualificado de uma mediadora imobiliária licenciada recebem os pedidos que envia pelo site (compra, visita, Concierge e pedidos a parceiros), por email, através do Cloudflare Email Routing; o site não os guarda. O parceiro da categoria escolhida, só para pedidos a parceiros e com o seu consentimento. Prestadores que tratam dados por nossa conta: beehiiv (envio da Maré, EUA, com garantias adequadas para a transferência), Tally (formulários, UE), Cloudflare (alojamento, envio dos pedidos por email e estatísticas sem cookies) e Cal.com (marcação de chamadas).
-- EN: Imóveis Portugal and a qualified advisor at a licensed real-estate brokerage receive the requests you send on the site (buying, viewing, Concierge and requests to a partner), by email, through Cloudflare Email Routing; the site does not store them. The partner in the chosen category, only for requests to a partner and with your consent. Processors acting for us: beehiiv (Maré, the newsletter, USA, with appropriate safeguards for the transfer), Tally (forms, EU), Cloudflare (hosting, sending requests by email and cookie-free statistics) and Cal.com (call booking).
-- FR: Imóveis Portugal et un conseiller qualifié d'une agence immobilière agréée reçoivent les demandes que vous envoyez sur le site (achat, visite, Concierge et demandes à un partenaire), par e-mail, via Cloudflare Email Routing ; le site ne les conserve pas. Le partenaire de la catégorie choisie, uniquement pour les demandes à un partenaire et avec votre accord. Sous-traitants : beehiiv (Maré, la newsletter, États-Unis, avec garanties appropriées pour le transfert), Tally (formulaires, UE), Cloudflare (hébergement, envoi des demandes par e-mail et statistiques sans cookies) et Cal.com (prise de rendez-vous).
+- PT: A Imóveis Portugal e um consultor qualificado de uma mediadora imobiliária licenciada recebem os pedidos que envia pelo site (compra, visita, Concierge e pedidos a parceiros), por email, através do Cloudflare Email Routing; o site não os guarda. O parceiro da categoria escolhida, só para pedidos a parceiros e com o seu consentimento. O promotor de um empreendimento, só se marcar a caixa com o nome dele: recebe por nós o seu perfil de comprador. Prestadores que tratam dados por nossa conta: beehiiv (envio da Maré, EUA, com garantias adequadas para a transferência), Tally (formulários, UE), Cloudflare (alojamento, envio dos pedidos por email e estatísticas sem cookies) e Cal.com (marcação de chamadas).
+- EN: Imóveis Portugal and a qualified advisor at a licensed real-estate brokerage receive the requests you send on the site (buying, viewing, Concierge and requests to a partner), by email, through Cloudflare Email Routing; the site does not store them. The partner in the chosen category, only for requests to a partner and with your consent. A development's developer, only if you tick the box with its name: it receives your buyer profile through us. Processors acting for us: beehiiv (Maré, the newsletter, USA, with appropriate safeguards for the transfer), Tally (forms, EU), Cloudflare (hosting, sending requests by email and cookie-free statistics) and Cal.com (call booking).
+- FR: Imóveis Portugal et un conseiller qualifié d'une agence immobilière agréée reçoivent les demandes que vous envoyez sur le site (achat, visite, Concierge et demandes à un partenaire), par e-mail, via Cloudflare Email Routing ; le site ne les conserve pas. Le partenaire de la catégorie choisie, uniquement pour les demandes à un partenaire et avec votre accord. Le promoteur d'un programme, uniquement si vous cochez la case à son nom : il reçoit votre profil d'acheteur par notre intermédiaire. Sous-traitants : beehiiv (Maré, la newsletter, États-Unis, avec garanties appropriées pour le transfert), Tally (formulaires, UE), Cloudflare (hébergement, envoi des demandes par e-mail et statistiques sans cookies) et Cal.com (prise de rendez-vous).
 
 ### privacy.4.h
 - PT: Durante quanto tempo
@@ -1538,9 +1538,9 @@ How to edit:
 - FR: Cookies
 
 ### privacy.6.p
-- PT: Não usamos cookies de publicidade nem de estatística. A língua e a edição que escolhe ficam só no seu navegador (armazenamento local), sem cookies. Os formulários incorporados podem usar cookies técnicos do serviço. Alguns empreendimentos mostram um filme do YouTube e uma visita 3D de property-sales-engine.com: só carregam quando toca em «Ver o filme» ou «Abrir a visita 3D», e a partir daí esses sites podem guardar os seus próprios cookies, segundo as políticas deles. Sem esse toque, nada deles é carregado.
-- EN: We use no advertising or analytics cookies. The language and edition you choose stay only in your browser (local storage), without cookies. Embedded forms may use technical cookies from their service. Some developments show a YouTube film and a 3D tour from property-sales-engine.com. They load only when you tap “Play the film” or “Open the 3D tour”; from then on those sites may set their own cookies, under their own policies. Without that tap, nothing from them loads.
-- FR: Aucun cookie publicitaire ni de mesure d'audience. La langue et l'édition choisies restent uniquement dans votre navigateur (stockage local), sans cookie. Les formulaires intégrés peuvent utiliser des cookies techniques de leur service. Certains programmes proposent un film YouTube et une visite 3D de property-sales-engine.com. Ils ne se chargent que lorsque vous touchez « Voir le film » ou « Ouvrir la visite 3D » ; ces sites peuvent alors déposer leurs propres cookies, selon leurs propres politiques. Sans ce geste, rien d'eux n'est chargé.
+- PT: Não usamos cookies de publicidade nem de estatística. A língua e a edição que escolhe ficam só no seu navegador (armazenamento local), sem cookies. Os formulários incorporados podem usar cookies técnicos do serviço. Alguns empreendimentos mostram um filme do YouTube e uma visita 3D de property-sales-engine.com: só carregam quando toca em «Ver o filme» ou «Abrir a visita 3D», e a partir daí esses sites podem guardar os seus próprios cookies, segundo as políticas deles. Sem esse toque, nada deles é carregado. As respostas do Concierge que não dizem quem é (o que procura, orçamento, sítio e horas escolhidas) ficam também no seu dispositivo durante 24 horas, para não se perderem se fechar a página, e são apagadas quando envia o pedido; o nome, o email e o telefone nunca ficam.
+- EN: We use no advertising or analytics cookies. The language and edition you choose stay only in your browser (local storage), without cookies. Embedded forms may use technical cookies from their service. Some developments show a YouTube film and a 3D tour from property-sales-engine.com. They load only when you tap “Play the film” or “Open the 3D tour”; from then on those sites may set their own cookies, under their own policies. Without that tap, nothing from them loads. Concierge answers that say nothing about who you are (what you need, budget, place and chosen times) are also kept on your device for 24 hours, so closing the page does not lose them, and are deleted when you send the request; your name, email and phone never are.
+- FR: Aucun cookie publicitaire ni de mesure d'audience. La langue et l'édition choisies restent uniquement dans votre navigateur (stockage local), sans cookie. Les formulaires intégrés peuvent utiliser des cookies techniques de leur service. Certains programmes proposent un film YouTube et une visite 3D de property-sales-engine.com. Ils ne se chargent que lorsque vous touchez « Voir le film » ou « Ouvrir la visite 3D » ; ces sites peuvent alors déposer leurs propres cookies, selon leurs propres politiques. Sans ce geste, rien d'eux n'est chargé. Les réponses au Concierge qui ne disent rien de vous (votre besoin, budget, lieu et horaires choisis) restent aussi sur votre appareil pendant 24 heures, pour ne pas les perdre si vous fermez la page, et sont effacées à l'envoi de la demande ; vos nom, e-mail et téléphone, jamais.
 
 ### legal.title
 - PT: Aviso legal
@@ -1553,7 +1553,7 @@ How to edit:
 - FR: Mentions légales
 
 ### legal.intro
-- PT: Quem publica o Imóveis Portugal e em que condições.
+- PT: Quem publica a Imóveis Portugal e em que condições.
 - EN: Who publishes Imóveis Portugal, and on what terms.
 - FR: Qui publie Imóveis Portugal, et à quelles conditions.
 
@@ -1593,7 +1593,7 @@ How to edit:
 - FR: Demandes d'achat et de vente
 
 ### legal.4.p
-- PT: Seguem para um consultor qualificado de uma mediadora imobiliária licenciada. O Imóveis Portugal não faz mediação imobiliária.
+- PT: Seguem para um consultor qualificado de uma mediadora imobiliária licenciada. A Imóveis Portugal não faz mediação imobiliária.
 - EN: They go to a qualified advisor at a licensed real-estate brokerage. Imóveis Portugal does not act as a real-estate broker.
 - FR: Elles sont transmises à un conseiller qualifié d'une agence immobilière agréée. Imóveis Portugal n'exerce pas d'activité d'intermédiation immobilière.
 
@@ -1620,9 +1620,9 @@ How to edit:
 - FR: Page introuvable
 
 ### notfound.p
-- PT: Este endereço não existe ou mudou de lugar. Continue por aqui:
-- EN: This address doesn't exist, or it has moved. You can carry on from here:
-- FR: Cette adresse n'existe pas ou a changé. Vous pouvez continuer d'ici :
+- PT: Este endereço não existe ou mudou.
+- EN: This address doesn't exist or has moved.
+- FR: Cette adresse n'existe pas ou a changé.
 
 ### notfound.home
 - PT: Voltar ao início
@@ -1972,14 +1972,14 @@ How to edit:
 - FR: Simulateurs
 
 ### lede
-- PT: As contas fazem-se no seu navegador, com as regras de 2026 e a fonte de cada taxa. Não guardamos o que escreve.
-- EN: Worked out in your browser, with the 2026 rules and the source of every rate. Nothing you type is stored.
-- FR: Calculs faits dans votre navigateur, avec les règles de 2026 et la source de chaque taux. Rien de ce que vous saisissez n'est enregistré.
+- PT: Quanto custa comprar, com as regras de 2026.
+- EN: What buying costs, under the 2026 rules.
+- FR: Ce que coûte l'achat, règles 2026.
 
 ### estimate
-- PT: Estimativa com as regras em vigor. Não é uma proposta de crédito nem aconselhamento fiscal.
-- EN: An estimate under current rules. Not a credit offer and not tax advice.
-- FR: Estimation selon les règles en vigueur. Ce n'est ni une offre de crédit ni un conseil fiscal.
+- PT: Estimativa, não é aconselhamento fiscal nem proposta de crédito. Não guardamos o que escreve.
+- EN: An estimate, not tax advice or a credit offer. We don't store what you type.
+- FR: Estimation, ni conseil fiscal ni offre de crédit. Nous ne conservons pas ce que vous saisissez.
 
 ### result.h
 - PT: Resultado
@@ -2300,8 +2300,8 @@ How to edit:
 
 ### lede
 - PT: Casa, crédito, seguros, advogado, impostos e envio do dinheiro: um só pedido, e cada parte segue apenas para o parceiro que autorizar.
-- EN: Home, mortgage, insurance, lawyer, tax and sending the money. For each step, the rule and the partner who handles it. Choose what you need in one request. Each part goes only to the partner you authorise.
-- FR: Bien, crédit, assurances, avocat, impôts et envoi de l'argent. Pour chaque étape, la règle et le partenaire qui s'en charge. Choisissez ce dont vous avez besoin en une seule demande. Chaque partie va uniquement au partenaire que vous autorisez.
+- EN: Home, mortgage, insurance, lawyer, tax and sending the money: one request, and each part goes only to the partner you authorise.
+- FR: Bien, crédit, assurances, avocat, impôts et envoi de l'argent : une seule demande, et chaque partie va uniquement au partenaire que vous autorisez.
 
 ### s.agency.h
 - PT: Ver casas sem viajar
@@ -2340,8 +2340,8 @@ How to edit:
 
 ### s.lawyer.p
 - PT: Um advogado trata do contrato-promessa, da procuração e da escritura; um consultor fiscal, do NIF, do representante fiscal e dos impostos onde vive.
-- EN: A lawyer handles the promissory contract, the power of attorney and the deed. A tax adviser handles the NIF, the tax representative and tax where you live.
-- FR: Un avocat s'occupe du compromis, de la procuration et de l'acte. Un conseiller fiscal s'occupe du NIF, du représentant fiscal et de l'impôt dans votre pays.
+- EN: A lawyer handles the promissory contract, the power of attorney and the deed. A tax adviser handles the NIF (Portuguese tax number), the tax representative and tax where you live.
+- FR: Un avocat s'occupe du compromis, de la procuration et de l'acte. Un conseiller fiscal s'occupe du NIF (numéro fiscal portugais), du représentant fiscal et de l'impôt dans votre pays.
 
 ### s.fx.h
 - PT: Enviar o dinheiro
@@ -2374,9 +2374,9 @@ How to edit:
 - FR: Région au Portugal
 
 ### form.budget
-- PT: Orçamento (€)
-- EN: Budget (€)
-- FR: Budget (€)
+- PT: Orçamento
+- EN: Budget
+- FR: Budget
 
 ### form.when
 - PT: Quando quer comprar
@@ -2385,8 +2385,8 @@ How to edit:
 
 ### form.message
 - PT: Outros pormenores
-- EN: Anything else we should know
-- FR: Autre chose à nous dire
+- EN: Other details
+- FR: Autres détails
 
 ### form.consent.h
 - PT: Para quem segue cada parte
@@ -2394,39 +2394,99 @@ How to edit:
 - FR: Qui reçoit chaque partie
 
 ### form.consent
-- PT: Autorizo o Imóveis Portugal a enviar esta parte do pedido apenas a {name}, para me contactar sobre ela.
-- EN: I authorise Imóveis Portugal to send this part of my request only to {name}, to contact me about it.
-- FR: J'autorise Imóveis Portugal à transmettre cette partie de ma demande uniquement à {name}, pour me contacter à ce sujet.
+- PT: {parts}: autorizo o envio a {name}, para me contactarem.
+- EN: {parts}: I authorise sending this to {name}, to contact me.
+- FR: {parts} : j'autorise l'envoi à {name}, pour me contacter.
 
 ### form.team
-- PT: a equipa do Imóveis Portugal
+- PT: a equipa da Imóveis Portugal
 - EN: the Imóveis Portugal team
 - FR: l'équipe d'Imóveis Portugal
 
 ### form.consent.team
-- PT: Autorizo o Imóveis Portugal a enviar esta parte do pedido apenas à equipa do Imóveis Portugal, para me contactar sobre ela.
-- EN: I authorise Imóveis Portugal to send this part of my request only to the Imóveis Portugal team, to contact me about it.
-- FR: J'autorise Imóveis Portugal à transmettre cette partie de ma demande uniquement à l'équipe d'Imóveis Portugal, pour me contacter à ce sujet.
+- PT: {parts}: autorizo a Imóveis Portugal a tratar este pedido e a contactar-me.
+- EN: {parts}: I authorise Imóveis Portugal to handle this request and contact me.
+- FR: {parts} : j'autorise Imóveis Portugal à traiter cette demande et à me contacter.
 
 ### form.tying
-- PT: Nenhum serviço depende de outro: o crédito nunca obriga a contratar o seguro ou outro produto do nosso parceiro (Decreto-Lei 74-A/2017).
-- EN: No service depends on another: a mortgage never requires our partner's insurance or any other product (Decreto-Lei 74-A/2017).
-- FR: Aucun service ne dépend d'un autre : un crédit n'oblige jamais à souscrire l'assurance ou un autre produit de notre partenaire (Decreto-Lei 74-A/2017).
+- PT: O crédito nunca obriga a contratar o seguro ou outro produto do parceiro (Decreto-Lei 74-A/2017).
+- EN: A mortgage never requires the partner's insurance or any other product (Decreto-Lei 74-A/2017).
+- FR: Un crédit n'oblige jamais à souscrire l'assurance ou un autre produit du partenaire (Decreto-Lei 74-A/2017).
 
 ### form.never
-- PT: Não vendemos nem cedemos dados a ninguém. O Imóveis Portugal recebe só o patrocínio fixo dos parceiros, nunca uma comissão por pedido.
-- EN: We never sell or pass on your data. Imóveis Portugal receives only the partners' flat sponsorship, never a fee per request.
-- FR: Nous ne vendons ni ne cédons vos données. Imóveis Portugal reçoit seulement le sponsoring forfaitaire des partenaires, jamais une commission par demande.
+- PT: Não vendemos os seus dados. Os parceiros pagam um patrocínio fixo, nunca uma comissão por pedido.
+- EN: We never sell your data. Partners pay a flat sponsorship, never a fee per request.
+- FR: Nous ne vendons pas vos données. Les partenaires versent un sponsoring forfaitaire, jamais une commission par demande.
 
 ### form.send
-- PT: Receber a resposta
-- EN: Send the request
+- PT: Enviar pedido
+- EN: Send request
 - FR: Envoyer la demande
 
 ### form.how
-- PT: Abre o seu email com o pedido já escrito para nós. Respondemos em dois dias úteis.
-- EN: The button opens your email with the request already written, to send to our address. You get an answer within two working days.
-- FR: Le bouton ouvre votre messagerie avec la demande déjà rédigée, à envoyer à notre adresse. Réponse sous deux jours ouvrés.
+- PT: Resposta em dois dias úteis.
+- EN: Answer within two working days.
+- FR: Réponse sous deux jours ouvrés.
+
+### n.agency
+- PT: Ver casas
+- EN: Viewing homes
+- FR: Voir des biens
+
+### n.credit
+- PT: Crédito
+- EN: Mortgage
+- FR: Crédit
+
+### n.insurance
+- PT: Seguros
+- EN: Insurance
+- FR: Assurances
+
+### n.lawyer
+- PT: Advogado e impostos
+- EN: Lawyer and tax
+- FR: Avocat et impôts
+
+### n.fx
+- PT: Envio do dinheiro
+- EN: Sending money
+- FR: Envoi d'argent
+
+### form.name
+- PT: Nome
+- EN: Name
+- FR: Nom
+
+### form.email
+- PT: Email
+- EN: Email
+- FR: E-mail
+
+### form.err.email
+- PT: Escreva um email válido.
+- EN: Enter a valid email.
+- FR: Saisissez un e-mail valide.
+
+### form.sending
+- PT: A enviar…
+- EN: Sending…
+- FR: Envoi…
+
+### form.sent
+- PT: Pedido enviado. Resposta em dois dias úteis.
+- EN: Request sent. Answer within two working days.
+- FR: Demande envoyée. Réponse sous deux jours ouvrés.
+
+### form.fallback
+- PT: Não foi enviado. Envie-o por email:
+- EN: It didn't go through. Send it by email:
+- FR: L'envoi a échoué. Envoyez-la par e-mail :
+
+### form.fallback.a
+- PT: Abrir o email
+- EN: Open email
+- FR: Ouvrir l'e-mail
 
 ### form.subject
 - PT: Pedido: comprar a partir de fora
@@ -2440,8 +2500,8 @@ How to edit:
 
 ### licences.p
 - PT: A licença de cada parceiro: AMI para a agência, Banco de Portugal para o crédito, ASF para os seguros, Ordem dos Advogados para os advogados.
-- EN: We show each partner's licence. AMI for the agency, Banco de Portugal for the mortgage, ASF for insurance, the Bar for lawyers.
-- FR: Nous affichons la licence de chaque partenaire. AMI pour l'agence, Banco de Portugal pour le crédit, ASF pour l'assurance, l'Ordre pour les avocats.
+- EN: Each partner's licence: AMI for the agency, Banco de Portugal for the mortgage, ASF for insurance, the Bar for lawyers.
+- FR: La licence de chaque partenaire : AMI pour l'agence, Banco de Portugal pour le crédit, ASF pour l'assurance, l'Ordre pour les avocats.
 
 ## data
 
@@ -2653,8 +2713,8 @@ How to edit:
 
 ### proj.askdev
 - PT: Ver o site do promotor
-- EN: Contact the developer
-- FR: Contacter le promoteur
+- EN: See the developer's site
+- FR: Voir le site du promoteur
 
 ### proj.ask
 - PT: Receber detalhes
@@ -3510,9 +3570,9 @@ How to edit:
 - FR: Nos partenaires
 
 ### lede
-- PT: Cada parceiro com a sua licença e a indicação de patrocinado. Primeiro o grupo parceiro, depois os promotores e os parceiros fundadores, à medida que assinam.
-- EN: Each partner is shown with its licence and the sponsored label. First the partner group, then the developers and the founding partners, as they sign.
-- FR: Chaque partenaire figure avec sa licence et la mention sponsorisé. D'abord le groupe partenaire, puis les promoteurs et les partenaires fondateurs, à mesure qu'ils signent.
+- PT: Cada parceiro com a sua licença e a indicação de patrocinado.
+- EN: Each partner with its licence and the sponsored label.
+- FR: Chaque partenaire avec sa licence et la mention sponsorisé.
 
 ### group.h
 - PT: O grupo parceiro
@@ -3883,8 +3943,8 @@ How to edit:
 
 ### q.nif.q
 - PT: Preciso de NIF?
-- EN: Do I need a NIF?
-- FR: Ai-je besoin d'un NIF ?
+- EN: Do I need a NIF (Portuguese tax number)?
+- FR: Ai-je besoin d'un NIF (numéro fiscal portugais) ?
 
 ### q.nif.a
 - PT: Sim, antes de assinar. Pede-se online, através de um representante legal, ou presencialmente, sem precisar de representante fiscal.
@@ -4257,8 +4317,8 @@ How to edit:
 
 ### ok.prep
 - PT: Para a conversa: o orçamento, as zonas que lhe interessam e o NIF, se já o tiver.
-- EN: To prepare, have your budget, the areas you like and, if you have one, your NIF to hand.
-- FR: Pour préparer l'échange, ayez sous la main votre budget, les secteurs qui vous intéressent et, si vous l'avez, votre NIF.
+- EN: To prepare, have your budget, the areas you like and, if you have one, your NIF (Portuguese tax number) to hand.
+- FR: Pour préparer l'échange, ayez sous la main votre budget, les secteurs qui vous intéressent et, si vous l'avez, votre NIF (numéro fiscal portugais).
 
 ### private.title
 - PT: Um consultor dedicado
@@ -5190,8 +5250,8 @@ Prompt 43 §3b: each station is a plain question (st.{k}.q) and a two or three s
 
 ### lede
 - PT: Comprar ou vender casa em Portugal a partir {from}, uma pergunta de cada vez.
-- EN: Buying or selling a home in Portugal from {from}, one question at a time. Each answer fits in a few lines and links to the article that explains more.
-- FR: Acheter ou vendre un bien au Portugal depuis {from}, une question à la fois. Chaque réponse tient en quelques lignes et renvoie à l'article qui en dit plus.
+- EN: Buying or selling a home in Portugal from {from}, one question at a time.
+- FR: Acheter ou vendre un bien au Portugal depuis {from}, une question à la fois.
 
 ### h1
 - PT: Passo a passo
@@ -5239,8 +5299,8 @@ Prompt 27: the path (two doors, stations, checklist). Blocks path.st.{k}.h / .wh
 
 ### do.lawyer
 - PT: Trata do NIF, da procuração e da escritura.
-- EN: Handles your NIF, the power of attorney and the deed.
-- FR: S'occupe du NIF, de la procuration et de l'acte.
+- EN: Handles your NIF (Portuguese tax number), the power of attorney and the deed.
+- FR: S'occupe du NIF (numéro fiscal portugais), de la procuration et de l'acte.
 
 ### do.developer
 - PT: Apresenta as casas novas do empreendimento e as condições de venda.
@@ -5297,9 +5357,9 @@ Prompt 28 §2b (D54): "Your team for this purchase", the partners a case needs, 
 - FR: Indicatif, pas une évaluation de crédit
 
 ### data
-- PT: Viu os preços de 10 anos de {places}
-- EN: Looked at 10-year prices for {places}
-- FR: A consulté les prix sur 10 ans de {places}
+- PT: Interesse: {places}
+- EN: Interested in: {places}
+- FR: Intérêt : {places}
 
 ### nonif
 - PT: Ainda sem NIF
@@ -5357,8 +5417,8 @@ Prompt 28 §2b (D54): "Your team for this purchase", the partners a case needs, 
 - FR: Budget total {v} frais inclus
 
 ### own
-- PT: Capitais próprios {v}
-- EN: Own funds {v}
+- PT: Entrada {v}
+- EN: Deposit {v}
 - FR: Apport {v}
 
 ### loan
@@ -5383,18 +5443,18 @@ Prompt 28 §2b (D54): "Your team for this purchase", the partners a case needs, 
 
 ### none
 - PT: Sem valores do percurso ou dos simuladores: o pedido segue com as suas respostas.
-- EN: You have not entered any figures on the path or in the calculators yet: the request goes with your answers only.
-- FR: Vous n'avez encore saisi aucun montant dans le parcours ni dans les simulateurs : la demande part avec vos seules réponses.
+- EN: No figures from the path or the calculators: the request goes with your answers.
+- FR: Aucun montant du parcours ni des simulateurs : la demande part avec vos réponses.
 
 ### include
-- PT: Incluir este resumo no pedido
-- EN: Include this summary in my request
-- FR: Joindre ce résumé à ma demande
+- PT: Incluir este resumo
+- EN: Include this summary
+- FR: Joindre ce résumé
 
 ### p
-- PT: O que indicou no percurso e nos simuladores, para o parceiro começar pelo seu caso. Valores indicativos, não uma avaliação de crédito; nenhuma decisão sobre si se baseia neste resumo.
-- EN: A summary of what you already entered on the path and in the calculators, so the partner starts with your case. Indicative figures, not a credit assessment: nobody decides anything about you from this summary.
-- FR: Un résumé de ce que vous avez déjà indiqué dans le parcours et les simulateurs, pour que le partenaire parte de votre cas. Des montants indicatifs, pas une évaluation de crédit : personne ne décide quoi que ce soit à votre sujet à partir de ce résumé.
+- PT: Para o consultor começar pelo seu caso.
+- EN: So the advisor starts from your case.
+- FR: Pour que le conseiller parte de votre cas.
 
 ### h
 - PT: O que segue com o seu pedido
@@ -5921,9 +5981,9 @@ Prompt 36 (D62): map v3. Budget gesture, layer chips, Day/Night, search, time, c
 - FR: Votre budget
 
 ### budget.tap
-- PT: Toque para escrever o valor
-- EN: Tap the amount to type it
-- FR: Touchez le montant pour le saisir
+- PT: Toque para escrever
+- EN: Tap to type
+- FR: Touchez pour saisir
 
 ### sentence
 - PT: Com cerca de {b}, compra perto de {a} m² em {pa} e {c} m² em {pc}.
@@ -5997,8 +6057,8 @@ Prompt 36 (D62): map v3. Budget gesture, layer chips, Day/Night, search, time, c
 
 ### layers
 - PT: Camadas
-- EN: Map layers
-- FR: Couches de la carte
+- EN: Layers
+- FR: Calques
 
 ### legend.price
 - PT: Preço mediano por m², {q}
@@ -6172,8 +6232,8 @@ Prompt 36 (D62): map v3. Budget gesture, layer chips, Day/Night, search, time, c
 
 ### noscript
 - PT: O mapa precisa de JavaScript. Na lista abaixo, os 308 concelhos e o preço de cada um.
-- EN: The map needs JavaScript. The list of all 308 municipalities, with each one's price, is just below.
-- FR: La carte a besoin de JavaScript. La liste des 308 communes, avec le prix de chacune, est juste en dessous.
+- EN: The map needs JavaScript. All 308 municipalities and their prices are in the list below.
+- FR: La carte a besoin de JavaScript. Les 308 communes et leurs prix sont dans la liste ci-dessous.
 
 ### credits
 - PT: Fonte: INE · © OpenStreetMap contributors · Relevo: Terrain Tiles (AWS Open Data)
@@ -6267,24 +6327,24 @@ Prompt 43 §3b: the partner links on the path and the questions open the Concier
 - FR: Quel est, à peu près, votre budget ?
 
 ### c.budget.1
-- PT: Até 300 mil €
-- EN: Up to €300k
-- FR: Jusqu'à 300 k€
+- PT: < 300 mil €
+- EN: < €300k
+- FR: < 300 k€
 
 ### c.budget.2
-- PT: 300 mil € a 1 M€
-- EN: €300k to €1M
-- FR: 300 k€ à 1 M€
+- PT: 300 mil–1 M€
+- EN: €300k–1M
+- FR: 300 k€–1 M€
 
 ### c.budget.3
-- PT: 1 a 5 M€
-- EN: €1M to €5M
-- FR: 1 à 5 M€
+- PT: 1–5 M€
+- EN: €1–5M
+- FR: 1–5 M€
 
 ### c.budget.4
-- PT: Mais de 5 M€
-- EN: Over €5M
-- FR: Plus de 5 M€
+- PT: > 5 M€
+- EN: > €5M
+- FR: > 5 M€
 
 ### more
 - PT: Até lá, cada etapa está explicada em
@@ -6379,7 +6439,7 @@ Prompt 43 §3b: the partner links on the path and the questions open the Concier
 ### c.nif
 - PT: Já tem NIF português?
 - EN: Do you already have a Portuguese tax number (NIF)?
-- FR: Avez-vous déjà un NIF portugais ?
+- FR: Avez-vous déjà un NIF (numéro fiscal portugais) ?
 
 ### yes
 - PT: Sim
@@ -7494,10 +7554,6 @@ The one-screen simulator at the top of the calculators page (night of 3 Nov 2026
 - EN: What it costs, all in
 - FR: Ce que cela coûte, tout compris
 
-### p
-- PT: Escolha o preço, a região e a forma de pagar. As contas mudam enquanto mexe.
-- EN: Pick the price, the region and how you pay. The figures change as you move.
-- FR: Choisissez le prix, la région et le mode de paiement. Les chiffres changent à mesure.
 
 ### price
 - PT: Preço da casa
@@ -7509,30 +7565,14 @@ The one-screen simulator at the top of the calculators page (night of 3 Nov 2026
 - EN: Where
 - FR: Où
 
-### type
-- PT: Que casa
-- EN: What kind of home
-- FR: Quel logement
 
-### type.apartment
-- PT: Apartamento
-- EN: Apartment
-- FR: Appartement
 
-### type.house
-- PT: Moradia
-- EN: House
-- FR: Maison
 
-### type.note
-- PT: Os impostos são os mesmos para um apartamento ou uma moradia.
-- EN: The taxes are the same for an apartment or a house.
-- FR: Les impôts sont les mêmes pour un appartement ou une maison.
 
 ### use
-- PT: Para quê
-- EN: What for
-- FR: Pour quoi faire
+- PT: Uso
+- EN: Use
+- FR: Usage
 
 ### use.live
 - PT: Para viver
@@ -7560,14 +7600,14 @@ The one-screen simulator at the top of the calculators page (night of 3 Nov 2026
 - FR: Comment vous payez
 
 ### pay.cash
-- PT: Capitais próprios
-- EN: Own funds
-- FR: Fonds propres
+- PT: Sem crédito
+- EN: No mortgage
+- FR: Sans crédit
 
 ### pay.loan
-- PT: Crédito
-- EN: Mortgage
-- FR: Crédit
+- PT: Com crédito
+- EN: With a mortgage
+- FR: Avec crédit
 
 ### entry
 - PT: Entrada
@@ -7724,9 +7764,9 @@ Part 2 of 3 Nov 2026 (the journey): the five-item bar at the bottom of the phone
 - FR: Vos favoris
 
 ### page.lede
-- PT: As casas e as zonas que guardou. Ficam neste aparelho, só para si, e não as enviamos a ninguém.
-- EN: The homes and areas you saved. They stay on this device, for you alone, and we send them to no one.
-- FR: Les logements et les zones que vous avez gardés. Ils restent sur cet appareil, pour vous seul, et nous ne les envoyons à personne.
+- PT: Ficam só neste aparelho.
+- EN: Kept on this device only.
+- FR: Gardés sur cet appareil uniquement.
 
 ### page.homes
 - PT: Casas
@@ -7749,9 +7789,9 @@ Part 2 of 3 Nov 2026 (the journey): the five-item bar at the bottom of the phone
 - FR: Rien de gardé pour l'instant
 
 ### page.empty.p
-- PT: Toque no coração de uma casa ou de uma zona no mapa e ela fica aqui, à sua espera.
-- EN: Tap the heart on a home or an area on the map and it waits for you here.
-- FR: Touchez le cœur d'un logement ou d'une zone sur la carte : il vous attend ici.
+- PT: Toque no coração de um lugar no mapa.
+- EN: Tap the heart on a place on the map.
+- FR: Touchez le cœur d'un lieu sur la carte.
 
 ### page.empty.a
 - PT: Abrir o mapa
@@ -7774,34 +7814,34 @@ Part 2 of 3 Nov 2026 (the journey): the five-item bar at the bottom of the phone
 - FR: Commencer
 
 ### next.home.p
-- PT: Diga-nos onde vive, o orçamento e o que procura. O Concierge prepara o resto com um consultor qualificado.
-- EN: Tell us where you live, your budget and what you are looking for. The Concierge prepares the rest with a qualified advisor.
-- FR: Dites-nous où vous vivez, votre budget et ce que vous cherchez. Le Concierge prépare le reste avec un conseiller qualifié.
+- PT: Um consultor liga-lhe à hora que escolher.
+- EN: An advisor calls you when you choose.
+- FR: Un conseiller vous appelle quand vous voulez.
 
 ### next.map.p
-- PT: Com uma zona em mente, o Concierge mostra-lhe as casas e o que vem a seguir.
-- EN: With an area in mind, the Concierge shows you the homes and what comes next.
-- FR: Avec une zone en tête, le Concierge vous montre les logements et la suite.
+- PT: Uma zona em mente? Um consultor mostra-lhe as casas.
+- EN: An area in mind? An advisor shows you the homes.
+- FR: Une zone en tête ? Un conseiller vous montre les logements.
 
 ### next.sims.p
-- PT: Com os números feitos, o passo seguinte é uma conversa de 15 minutos com um consultor qualificado, sem custos.
-- EN: With the numbers done, the next step is a 15-minute call with a qualified advisor, free of charge.
-- FR: Les chiffres faits, l'étape suivante est un appel de 15 minutes avec un conseiller qualifié, sans frais.
+- PT: Uma conversa de 15 minutos com um consultor, grátis.
+- EN: A 15-minute call with an advisor, free.
+- FR: Un appel de 15 minutes avec un conseiller, gratuit.
 
 ### next.read.p
-- PT: Quando quiser, o Concierge junta as suas respostas e marca a primeira conversa com um consultor qualificado.
-- EN: Whenever you like, the Concierge gathers your answers and books the first call with a qualified advisor.
-- FR: Quand vous voulez, le Concierge rassemble vos réponses et fixe le premier appel avec un conseiller qualifié.
+- PT: Um consultor liga-lhe à hora que escolher.
+- EN: An advisor calls you when you choose.
+- FR: Un conseiller vous appelle quand vous voulez.
 
 ### next.back.p
-- PT: Regresse à página onde estava.
-- EN: Return to the page you were on.
-- FR: Revenez à la page où vous étiez.
+- PT: Volte à página onde estava.
+- EN: Back to the page you were on.
+- FR: Retour à la page où vous étiez.
 
 ### next.show.p
-- PT: Para ver estas casas, marque uma visita privada. Um consultor qualificado trata do resto com o promotor.
-- EN: To see these homes, book a private visit. A qualified advisor handles the rest with the developer.
-- FR: Pour voir ces logements, réservez une visite privée. Un conseiller qualifié s'occupe du reste avec le promoteur.
+- PT: Para ver estas casas, marque uma visita privada.
+- EN: To see these homes, book a private visit.
+- FR: Pour voir ces logements, réservez une visite privée.
 
 ### next.saved.p
 - PT: O Concierge começa pelas zonas que guardou.
@@ -8030,8 +8070,8 @@ Requests really sent (operator, 3 Nov 2026): the Concierge, the partner and view
 
 ### notice
 - PT: O seu pedido segue para a Imóveis Portugal e para um consultor qualificado, que lhe responde por e-mail.
-- EN: When you send, your request goes to Imóveis Portugal and to a qualified advisor, who replies by email.
-- FR: En envoyant, votre demande part chez Imóveis Portugal et chez un conseiller qualifié, qui vous répond par e-mail.
+- EN: Your request goes to Imóveis Portugal and a qualified advisor, who replies by email.
+- FR: Votre demande va à Imóveis Portugal et à un conseiller qualifié, qui vous répond par e-mail.
 
 ### privacy
 - PT: Política de privacidade.
@@ -8106,19 +8146,19 @@ Requests really sent (operator, 3 Nov 2026): the Concierge, the partner and view
 - FR: Recevoir Maré
 
 ### optin.mail
-- PT: Abre-se o seu email com o pedido escrito. Envie-o e confirme uma vez: a Maré começa na terça ou sexta seguinte.
-- EN: Your email opens with the request written. Send it and confirm once: Maré starts on the next Tuesday or Friday.
-- FR: Votre messagerie s'ouvre avec la demande rédigée. Envoyez-la et confirmez une fois : Maré commence le mardi ou le vendredi suivant.
+- PT: Abre o seu email com o pedido escrito. Envie-o.
+- EN: Opens your email with the request written. Send it.
+- FR: Ouvre votre messagerie avec la demande rédigée. Envoyez-la.
 
 ### oneclick
-- PT: Ao carregar, recebe a Maré por email às terças e sextas. Cancela num clique, em qualquer envio.
-- EN: One click and Maré arrives by email every Tuesday and Friday. Unsubscribe in one click from any issue.
-- FR: Un clic et Maré arrive par e-mail chaque mardi et vendredi. Désinscription en un clic depuis chaque envoi.
+- PT: Cancela num clique, em qualquer envio.
+- EN: Unsubscribe in one click, from any issue.
+- FR: Désinscription en un clic, depuis chaque envoi.
 
 ### optin.embed
-- PT: Confirme o email uma vez: a Maré começa na terça ou sexta seguinte.
-- EN: Confirm your email once: Maré starts on the next Tuesday or Friday.
-- FR: Confirmez votre e-mail une fois : Maré commence le mardi ou le vendredi suivant.
+- PT: Depois, confirme o seu email.
+- EN: Then confirm your email.
+- FR: Ensuite, confirmez votre e-mail.
 
 ### sent
 - PT: Falta um passo: envie o email que se abriu e confirme quando a Maré lhe escrever.
@@ -8126,9 +8166,14 @@ Requests really sent (operator, 3 Nov 2026): the Concierge, the partner and view
 - FR: Il reste une étape : envoyez l'e-mail qui s'est ouvert, puis confirmez quand Maré vous écrit.
 
 ### thanks
-- PT: Obrigado. A Maré começa na terça ou sexta seguinte; se chegar um email de confirmação, basta um clique.
-- EN: Thank you. Maré starts on the next Tuesday or Friday; if a confirmation email arrives, one click is enough.
-- FR: Merci. Maré commence le mardi ou le vendredi suivant ; si un e-mail de confirmation arrive, un clic suffit.
+- PT: Feito. Se chegar um email de confirmação, basta um clique.
+- EN: Done. If a confirmation email arrives, one click is enough.
+- FR: C'est fait. Si un e-mail de confirmation arrive, un clic suffit.
+
+### confirm
+- PT: Confirme aqui: {email}
+- EN: Confirm here: {email}
+- FR: Confirmez ici : {email}
 
 ### latest.h
 - PT: A última Maré
@@ -8264,6 +8309,11 @@ D83 (operator, 3 Nov 2026): the ten lifestyle articles (content/stories/, site/s
 - EN: From {city}, the direct flight goes to Lisbon: {time} ({flight}).
 - FR: De {city}, le vol direct va à Lisbonne : {time} ({flight}).
 
+### go.season
+- PT: De {city}, voo direto para {to} no verão, quatro por semana ({flight}).
+- EN: From {city}, direct flight to {to} in summer, four a week ({flight}).
+- FR: De {city}, vol direct vers {to} en été, quatre par semaine ({flight}).
+
 ### go.sched
 - PT: Horário de inverno publicado; os horários mudam com a estação.
 - EN: Published winter schedule; times change with the season.
@@ -8351,8 +8401,8 @@ D83 (operator, 3 Nov 2026): the ten lifestyle articles (content/stories/, site/s
 
 ### guides.p
 - PT: O NIF, os impostos, o crédito e o método por trás dos números, com as fontes oficiais.
-- EN: The NIF, taxes, mortgages and the method behind the figures, with the official sources.
-- FR: Le NIF, les impôts, le crédit et la méthode derrière les chiffres, avec les sources officielles.
+- EN: The NIF (Portuguese tax number), taxes, mortgages and the method behind the figures, with the official sources.
+- FR: Le NIF (numéro fiscal portugais), les impôts, le crédit et la méthode derrière les chiffres, avec les sources officielles.
 
 ### hub.lede
 - PT: Portugal em leituras de dois minutos, com a fonte de cada facto. Os guias práticos vêm a seguir.
@@ -8395,7 +8445,7 @@ D83 part 2 (3 Nov 2026): the map in three depths. First glance: photographs and 
 
 ### layer.colour
 - PT: Cor no mapa
-- EN: Colour on the map
+- EN: Color on the map
 - FR: Couleur sur la carte
 
 ### layer.on
@@ -8863,20 +8913,25 @@ D83 part 2 (3 Nov 2026): the map in three depths. First glance: photographs and 
 - EN: Two or three places saved with the heart, side by side. The first rows are free; the rest is part of the full analysis.
 - FR: Deux ou trois lieux gardés avec le cœur, côte à côte. Les premières lignes sont libres ; le reste fait partie de l'analyse complète.
 
+### compare.lede.free
+- PT: Dois ou três lugares guardados, lado a lado.
+- EN: Two or three saved places, side by side.
+- FR: Deux ou trois lieux gardés, côte à côte.
+
 ### compare.pill
 - PT: Comparar {n}
 - EN: Compare {n}
 - FR: Comparer {n}
 
 ### compare.need
-- PT: Toque no coração de dois ou três lugares no mapa e volte aqui.
-- EN: Tap the heart on two or three places on the map, then come back here.
-- FR: Touchez le cœur de deux ou trois lieux sur la carte, puis revenez ici.
+- PT: Toque no coração de dois ou três lugares no mapa.
+- EN: Tap the heart on two or three places on the map.
+- FR: Touchez le cœur de deux ou trois lieux sur la carte.
 
 ### compare.max
-- PT: Mostramos os três lugares guardados mais recentes.
-- EN: Showing the three most recently saved places.
-- FR: Nous montrons les trois lieux gardés les plus récents.
+- PT: Os três lugares guardados mais recentes.
+- EN: The three most recently saved places.
+- FR: Les trois lieux gardés les plus récents.
 
 ### compare.map
 - PT: Voltar ao mapa
@@ -8919,9 +8974,14 @@ D83 part 2 (3 Nov 2026): the map in three depths. First glance: photographs and 
 - FR: Dans l'analyse complète
 
 ### compare.src
-- PT: Fontes: INE (preços, {q}), IPMA e PORDATA. Descreve, não aconselha.
-- EN: Sources: INE (prices, {q}), IPMA and PORDATA. It describes; it does not advise.
-- FR: Sources : INE (prix, {q}), IPMA et PORDATA. Cela décrit, sans conseiller.
+- PT: Fontes: INE (preços, {q}), IPMA e PORDATA. Não é aconselhamento.
+- EN: Sources: INE (prices, {q}), IPMA and PORDATA. Not advice.
+- FR: Sources : INE (prix, {q}), IPMA et PORDATA. Ce n'est pas un conseil.
+
+### compare.more
+- PT: Rendas, rendimento e dez anos de preços: em breve.
+- EN: Rents, yields and ten years of prices: coming soon.
+- FR: Loyers, rendements et dix ans de prix : bientôt.
 
 ### a.title
 - PT: Análise completa · {region}
@@ -9520,9 +9580,9 @@ Prompt 66 §3 (operator, 3 Nov 2026): while `config.agency.public` is false the 
 - FR: Qui reçoit les demandes de logement
 
 ### casa.consent
-- PT: Autorizo o Imóveis Portugal a enviar esta parte do pedido apenas ao consultor qualificado, para me contactar sobre ela.
-- EN: I authorise Imóveis Portugal to send this part of my request only to the qualified advisor, to contact me about it.
-- FR: J'autorise Imóveis Portugal à transmettre cette partie de ma demande uniquement au conseiller qualifié, pour me contacter à ce sujet.
+- PT: {parts}: autorizo o envio ao consultor qualificado, para me contactar.
+- EN: {parts}: I authorise sending this to the qualified advisor, to contact me.
+- FR: {parts} : j'autorise l'envoi au conseiller qualifié, pour me contacter.
 
 ## agencynamed
 
@@ -9569,7 +9629,7 @@ The wording that names the partner agency, kept exactly as it was before prompt 
 - FR: Premier appel de 15 minutes avec l'agence
 
 ### faq.cta.agency
-- PT: Receber opções de casas
+- PT: Perguntar à agência parceira
 - EN: Ask our partner agency
 - FR: Demander à l'agence partenaire
 
@@ -9614,7 +9674,7 @@ The wording that names the partner agency, kept exactly as it was before prompt 
 - FR: Vos données servent uniquement à cette demande. Elles ne vont qu'à l'agence partenaire, avec votre accord.
 
 ### how.s4.p
-- PT: O Imóveis Portugal não faz mediação imobiliária. Os pedidos de compra ou venda seguem só para a {agency}, agência parceira licenciada (AMI {ami}) e patrocinadora.
+- PT: A Imóveis Portugal não faz mediação imobiliária. Os pedidos de compra ou venda seguem só para a {agency}, agência parceira licenciada (AMI {ami}) e patrocinadora.
 - EN: Imóveis Portugal isn't a real-estate broker. Requests to buy or sell a home go only to {agency}. It is our partner agency, licensed (AMI {ami}) and a sponsor.
 - FR: Imóveis Portugal n'est pas un intermédiaire immobilier. Les demandes d'achat ou de vente vont uniquement à {agency}. C'est notre agence partenaire, agréée (AMI {ami}) et sponsor.
 
@@ -9624,9 +9684,9 @@ The wording that names the partner agency, kept exactly as it was before prompt 
 - FR: On s'inscrit à Maré, notre newsletter, d'un clic : beehiiv envoie les numéros et chaque e-mail contient un lien de désinscription. Aucun cookie publicitaire ni de mesure d'audience. Les demandes que vous envoyez partent par e-mail uniquement chez Imóveis Portugal et l'agence partenaire, et le site ne les conserve pas.
 
 ### legal.privacy.7.p
-- PT: Se marcar "Incluir este resumo", o seu pedido leva um resumo do que indicou no percurso e nos simuladores: país, orçamento, custo total, capitais próprios e financiamento, uma taxa de esforço indicativa, prazo, se já tem NIF e as zonas cujos preços consultou. Esses valores ficam no seu dispositivo até enviar o pedido e seguem com ele só para a Imóveis Portugal e para a agência parceira {agency}, porque o pediu (RGPD, art. 6.º, n.º 1, alínea b)). O resumo é indicativo, não é uma avaliação de crédito e não serve para nenhuma decisão automatizada sobre si. Para orçamentos elevados, a agência parceira continua a pedir identificação e prova de fundos, como exige a Lei 83/2017.
-- EN: If you tick "Include this summary", your request carries a summary of what you entered on the path and in the calculators: country, budget, total cost, own funds and financing, an indicative debt-to-income ratio, timing, whether you have a NIF and the areas whose prices you looked at. These figures stay on your device until you send the request and go with it only to Imóveis Portugal and our partner agency {agency}, because you asked for it (GDPR art. 6(1)(b)). The summary is indicative, is not a credit assessment and is not used for any automated decision about you. For high budgets, the partner agency still asks for identification and proof of funds, as Lei 83/2017 requires.
-- FR: Si vous cochez « Joindre ce résumé », votre demande contient un résumé de ce que vous avez saisi dans le parcours et les simulateurs : pays, budget, coût total, apport et financement, un taux d'endettement indicatif, échéance, si vous avez un NIF et les secteurs dont vous avez consulté les prix. Ces données restent sur votre appareil jusqu'à l'envoi et partent avec la demande uniquement chez Imóveis Portugal et l'agence partenaire {agency}, parce que vous l'avez demandé (RGPD, art. 6, par. 1, point b). Le résumé est indicatif, n'est pas une évaluation de crédit et ne sert à aucune décision automatisée vous concernant. Pour les budgets élevés, l'agence partenaire demande toujours une pièce d'identité et la preuve des fonds, comme l'exige la Lei 83/2017.
+- PT: O site junta no seu dispositivo (armazenamento local) o que fez e respondeu: o país da edição, o orçamento, o uso, o financiamento e a entrada, o custo total e o IMT do simulador, as zonas e os empreendimentos que abriu ou guardou e quanto tempo passou em cada uma, o prazo, se já tem NIF e se pensa passar a residente. Fica no seu dispositivo até o apagar, e pode vê-lo e imprimi-lo em «O meu perfil de comprador». Quando envia um pedido ao Concierge, o perfil segue com ele, com a origem de cada linha, só para a Imóveis Portugal e para a agência parceira {agency}, porque o pediu (RGPD, art. 6.º, n.º 1, al. b)). Um promotor só o recebe se marcar a caixa, desmarcada, com o nome desse promotor (art. 6.º, n.º 1, al. a)), e pode retirar esse consentimento a qualquer momento. Para os relatórios aos promotores contamos só quantos perfis completos chegam por empreendimento, sem nenhum dado pessoal. O perfil é indicativo, não é uma avaliação de crédito e não serve para nenhuma decisão automatizada sobre si. Para orçamentos elevados, a agência parceira continua a pedir identificação e prova de fundos, como exige a Lei 83/2017.
+- EN: The site gathers on your device (local storage) what you did and answered: your edition's country, budget, use, financing and down payment, the simulator's total cost and IMT, the areas and developments you opened or saved and how long you spent on each, your timeline, whether you have a NIF and whether you plan to become a resident. It stays on your device until you delete it, and you can see and print it under “My buyer profile”. When you send a Concierge request, the profile goes with it, with where each line came from, only to Imóveis Portugal and our partner agency {agency}, because you asked for it (GDPR art. 6(1)(b)). A developer receives it only if you tick the unticked box naming that developer (art. 6(1)(a)), and you can withdraw that consent at any time. For the developers' reports we only count how many complete profiles arrive per development, with no personal data. The profile is indicative, is not a credit assessment and is not used for any automated decision about you. For high budgets, the partner agency still asks for identification and proof of funds, as Lei 83/2017 requires.
+- FR: Le site rassemble sur votre appareil (stockage local) ce que vous avez fait et répondu : le pays de votre édition, le budget, l'usage, le financement et l'apport, le coût total et l'IMT du simulateur, les secteurs et programmes ouverts ou gardés et le temps passé sur chacun, l'échéance, si vous avez un NIF et si vous pensez devenir résident. Il reste sur votre appareil jusqu'à ce que vous l'effaciez, et vous pouvez le voir et l'imprimer dans « Mon profil d'acheteur ». Quand vous envoyez une demande au Concierge, le profil part avec elle, avec l'origine de chaque ligne, uniquement chez Imóveis Portugal et l'agence partenaire {agency}, parce que vous l'avez demandé (RGPD, art. 6, par. 1, b)). Un promoteur ne le reçoit que si vous cochez la case, non cochée, à son nom (art. 6, par. 1, a)), et vous pouvez retirer cet accord à tout moment. Pour les rapports aux promoteurs, nous comptons seulement combien de profils complets arrivent par programme, sans aucune donnée personnelle. Le profil est indicatif, n'est pas une évaluation de crédit et ne sert à aucune décision automatisée vous concernant. Pour les budgets élevés, l'agence partenaire demande toujours une pièce d'identité et la preuve des fonds, comme l'exige la Lei 83/2017.
 
 ### legal.privacy.2.p
 - PT: Maré, a newsletter: o seu email, com o seu consentimento (RGPD, art. 6.º, n.º 1, al. a)), dado com um clique no formulário; a beehiiv envia as edições e cada email tem um link para cancelar. Pedidos de compra, de visita e do Concierge: nome, contactos e o que procura, para dar seguimento ao pedido que nos faz antes de qualquer contrato (art. 6.º, n.º 1, al. b)), enviados à Imóveis Portugal e à agência parceira {agency} (AMI {ami}). Pedidos de parceria: dados profissionais, para responder (art. 6.º, n.º 1, al. b)). Pedidos a parceiros: categoria, país, pergunta e contacto, para responder ao seu pedido (art. 6.º, n.º 1, al. b)) e, se o autorizar, passar a um parceiro da categoria.
@@ -9634,9 +9694,9 @@ The wording that names the partner agency, kept exactly as it was before prompt 
 - FR: Maré, la newsletter : votre adresse e-mail, avec votre consentement (RGPD, art. 6, par. 1, a)), donné d'un clic dans le formulaire ; beehiiv envoie les numéros et chaque e-mail contient un lien de désinscription. Demandes d'achat, de visite et du Concierge : nom, coordonnées et critères, pour donner suite à la demande que vous faites avant tout contrat (art. 6, par. 1, b)), transmis à Imóveis Portugal et à l'agence partenaire {agency} (AMI {ami}). Demandes de partenariat : données professionnelles, pour répondre (art. 6, par. 1, b)). Demandes à un partenaire : catégorie, pays, question et coordonnées, pour répondre à votre demande (art. 6, par. 1, b)) et, avec votre accord, les transmettre à un partenaire de la catégorie.
 
 ### legal.privacy.3.p
-- PT: A Imóveis Portugal e a agência parceira {agency} (AMI {ami}) recebem os pedidos que envia pelo site (compra, visita, Concierge e pedidos a parceiros), por email, através do Cloudflare Email Routing; o site não os guarda. O parceiro da categoria escolhida, só para pedidos a parceiros e com o seu consentimento. Prestadores que tratam dados por nossa conta: beehiiv (envio da Maré, EUA, com garantias adequadas para a transferência), Tally (formulários, UE), Cloudflare (alojamento, envio dos pedidos por email e estatísticas sem cookies) e Cal.com (marcação de chamadas).
-- EN: Imóveis Portugal and our partner agency {agency} (AMI {ami}) receive the requests you send on the site (buying, viewing, Concierge and requests to a partner), by email, through Cloudflare Email Routing; the site does not store them. The partner in the chosen category, only for requests to a partner and with your consent. Processors acting for us: beehiiv (Maré, the newsletter, USA, with appropriate safeguards for the transfer), Tally (forms, EU), Cloudflare (hosting, sending requests by email and cookie-free statistics) and Cal.com (call booking).
-- FR: Imóveis Portugal et l'agence partenaire {agency} (AMI {ami}) reçoivent les demandes que vous envoyez sur le site (achat, visite, Concierge et demandes à un partenaire), par e-mail, via Cloudflare Email Routing ; le site ne les conserve pas. Le partenaire de la catégorie choisie, uniquement pour les demandes à un partenaire et avec votre accord. Sous-traitants : beehiiv (Maré, la newsletter, États-Unis, avec garanties appropriées pour le transfert), Tally (formulaires, UE), Cloudflare (hébergement, envoi des demandes par e-mail et statistiques sans cookies) et Cal.com (prise de rendez-vous).
+- PT: A Imóveis Portugal e a agência parceira {agency} (AMI {ami}) recebem os pedidos que envia pelo site (compra, visita, Concierge e pedidos a parceiros), por email, através do Cloudflare Email Routing; o site não os guarda. O parceiro da categoria escolhida, só para pedidos a parceiros e com o seu consentimento. O promotor de um empreendimento, só se marcar a caixa com o nome dele: recebe por nós o seu perfil de comprador. Prestadores que tratam dados por nossa conta: beehiiv (envio da Maré, EUA, com garantias adequadas para a transferência), Tally (formulários, UE), Cloudflare (alojamento, envio dos pedidos por email e estatísticas sem cookies) e Cal.com (marcação de chamadas).
+- EN: Imóveis Portugal and our partner agency {agency} (AMI {ami}) receive the requests you send on the site (buying, viewing, Concierge and requests to a partner), by email, through Cloudflare Email Routing; the site does not store them. The partner in the chosen category, only for requests to a partner and with your consent. A development's developer, only if you tick the box with its name: it receives your buyer profile through us. Processors acting for us: beehiiv (Maré, the newsletter, USA, with appropriate safeguards for the transfer), Tally (forms, EU), Cloudflare (hosting, sending requests by email and cookie-free statistics) and Cal.com (call booking).
+- FR: Imóveis Portugal et l'agence partenaire {agency} (AMI {ami}) reçoivent les demandes que vous envoyez sur le site (achat, visite, Concierge et demandes à un partenaire), par e-mail, via Cloudflare Email Routing ; le site ne les conserve pas. Le partenaire de la catégorie choisie, uniquement pour les demandes à un partenaire et avec votre accord. Le promoteur d'un programme, uniquement si vous cochez la case à son nom : il reçoit votre profil d'acheteur par notre intermédiaire. Sous-traitants : beehiiv (Maré, la newsletter, États-Unis, avec garanties appropriées pour le transfert), Tally (formulaires, UE), Cloudflare (hébergement, envoi des demandes par e-mail et statistiques sans cookies) et Cal.com (prise de rendez-vous).
 
 ### legal.legal.4.h
 - PT: Agência parceira
@@ -9644,7 +9704,7 @@ The wording that names the partner agency, kept exactly as it was before prompt 
 - FR: Agence partenaire
 
 ### legal.legal.4.p
-- PT: {agency}, AMI {ami}, mediadora imobiliária licenciada. O Imóveis Portugal não faz mediação imobiliária.
+- PT: {agency}, AMI {ami}, mediadora imobiliária licenciada. A Imóveis Portugal não faz mediação imobiliária.
 - EN: {agency}, AMI license {ami}, a licensed real-estate broker. Imóveis Portugal does not act as a real-estate broker.
 - FR: {agency}, licence AMI {ami}, intermédiaire immobilier agréé. Imóveis Portugal n'exerce pas d'activité d'intermédiation immobilière.
 
@@ -10052,9 +10112,9 @@ Prompt 69 (4 Nov 2026), the Concierge in three steps and IMT explained where the
 - FR: En quoi pouvons-nous vous aider ?
 
 ### lede
-- PT: Um consultor qualificado liga-lhe à hora que escolher.
-- EN: A qualified advisor calls you at the time you choose.
-- FR: Un conseiller qualifié vous appelle à l'heure que vous choisissez.
+- PT: Um consultor liga-lhe à hora que escolher.
+- EN: An advisor calls you when you choose.
+- FR: Un conseiller vous appelle quand vous voulez.
 
 ### help.ctx
 - PT: O que estava a ver
@@ -10081,20 +10141,25 @@ Prompt 69 (4 Nov 2026), the Concierge in three steps and IMT explained where the
 - EN: A home around {price}
 - FR: Un logement autour de {price}
 
+### help.about
+- PT: Sobre: {name}
+- EN: About: {name}
+- FR: À propos : {name}
+
 ### help.home
-- PT: Encontrar casa em Portugal
-- EN: Finding a home in Portugal
-- FR: Trouver un logement au Portugal
+- PT: Comprar casa
+- EN: Buy a home
+- FR: Acheter
 
 ### help.costs
-- PT: Os custos, os impostos e os papéis da compra
-- EN: The costs, taxes and paperwork of buying
-- FR: Les frais, les impôts et les formalités de l'achat
+- PT: Custos e impostos
+- EN: Costs and taxes
+- FR: Frais et impôts
 
 ### help.sell
-- PT: Vender ou herdar uma casa
-- EN: Selling or inheriting a home
-- FR: Vendre ou hériter d'un logement
+- PT: Vender ou herdar
+- EN: Sell or inherit
+- FR: Vendre ou hériter
 
 ### budget
 - PT: Orçamento
@@ -10110,6 +10175,26 @@ Prompt 69 (4 Nov 2026), the Concierge in three steps and IMT explained where the
 - PT: Prefiro combinar por email
 - EN: I'd rather agree a time by email
 - FR: Je préfère convenir d'une heure par e-mail
+### visit.title
+- PT: Marcar uma visita privada
+- EN: Book a private visit
+- FR: Réserver une visite privée
+### visit.when
+- PT: Quando lhe podemos ligar para marcar a visita?
+- EN: When can we call you to arrange the visit?
+- FR: Quand pouvons-nous vous appeler pour organiser la visite ?
+### visit.done
+- PT: O consultor liga-lhe a essa hora para marcar a visita a {name}.
+- EN: The advisor calls you at that time to arrange the visit to {name}.
+- FR: Le conseiller vous appelle à cette heure-là pour organiser la visite de {name}.
+### visit.done.later
+- PT: O consultor escreve-lhe por email para marcar a visita a {name}.
+- EN: The advisor emails you to arrange the visit to {name}.
+- FR: Le conseiller vous écrit par e-mail pour organiser la visite de {name}.
+### visit.intent
+- PT: Visita privada a {name} (ligar para marcar)
+- EN: Private visit to {name} (call to arrange)
+- FR: Visite privée de {name} (appeler pour organiser)
 
 ### tz
 - PT: Horas {ofcity}, com Lisboa por baixo.
@@ -10170,6 +10255,10 @@ Prompt 69 (4 Nov 2026), the Concierge in three steps and IMT explained where the
 - PT: Retirar
 - EN: Remove
 - FR: Retirer
+### slot.kept
+- PT: Guardámos as horas que escolheu.
+- EN: We kept the times you chose.
+- FR: Nous avons gardé les horaires choisis.
 
 ### reach
 - PT: Como chegamos até si?
@@ -10202,14 +10291,22 @@ Prompt 69 (4 Nov 2026), the Concierge in three steps and IMT explained where the
 - FR: Votre demande part chez Imóveis Portugal et chez un conseiller qualifié, qui vous écrit par e-mail pour convenir d'une heure.
 
 ### phone
-- PT: Telefone (ligamos para este número)
-- EN: Phone (we call this number)
-- FR: Téléphone (nous appelons ce numéro)
+- PT: Telefone
+- EN: Phone
+- FR: Téléphone
 
 ### email
-- PT: Email (para a confirmação)
-- EN: Email (for the confirmation)
-- FR: E-mail (pour la confirmation)
+- PT: Email
+- EN: Email
+- FR: E-mail
+### req
+- PT: obrigatório
+- EN: required
+- FR: obligatoire
+### cc
+- PT: Indicativo do país
+- EN: Country code
+- FR: Indicatif du pays
 
 ### err.name
 - PT: Indique o seu nome.
@@ -10242,9 +10339,14 @@ Prompt 69 (4 Nov 2026), the Concierge in three steps and IMT explained where the
 - FR: Ex. : Gondomar, Vila do Conde
 
 ### done.h
-- PT: A partir daqui, tratamos nós.
-- EN: We'll take it from here.
-- FR: Nous prenons le relais.
+- PT: Marcado.
+- EN: Booked.
+- FR: Réservé.
+
+### done.h.later
+- PT: Enviado.
+- EN: Sent.
+- FR: Envoyé.
 
 ### done.p
 - PT: Um consultor qualificado confirma a hora por email e liga-lhe a essa hora.
@@ -10300,6 +10402,10 @@ Prompt 69 (4 Nov 2026), the Concierge in three steps and IMT explained where the
 - PT: IMT a {price}? {imt} sem residência fiscal.
 - EN: IMT at {price}? {imt} as a non-resident.
 - FR: L'IMT à {price} ? {imt} pour un non-résident.
+### total.nr
+- PT: não residente, sem crédito
+- EN: non-resident, no mortgage
+- FR: non-résident, sans crédit
 
 ### imt.title
 - PT: O IMT, explicado
@@ -10461,6 +10567,320 @@ Prompt 69 (4 Nov 2026), the Concierge in three steps and IMT explained where the
 - EN: How IMT is calculated
 - FR: Comment l'IMT est calculé
 
+## cv
+
+Prompt 74 (4 Nov 2026): the buyer profile that builds itself (D54, D79). Functional register (content/METHOD.md, "Two registers"). The confirmation card "O seu perfil de comprador" (site/src/scripts/cvcard.ts), the line on the Concierge's last step, and the one-page summary (site/src/components/ProfilePage.astro). The data stays on the reader's device (site/src/lib/cv.ts) until a request is sent.
+
+### h
+- PT: O seu perfil de comprador
+- EN: Your buyer profile
+- FR: Votre profil d'acheteur
+
+### pct
+- PT: Perfil {n}%
+- EN: Profile {n}%
+- FR: Profil {n} %
+
+### k.country
+- PT: Vive em
+- EN: Lives in
+- FR: Réside
+
+### k.budget
+- PT: Orçamento
+- EN: Budget
+- FR: Budget
+
+### k.use
+- PT: Uso
+- EN: Use
+- FR: Usage
+
+### k.fin
+- PT: Financiamento
+- EN: Financing
+- FR: Financement
+
+### k.total
+- PT: Custo total
+- EN: Total cost
+- FR: Coût total
+
+### k.timeline
+- PT: Comprar
+- EN: Buying
+- FR: Achat
+
+### k.nif
+- PT: NIF
+- EN: NIF
+- FR: NIF
+
+### k.resident
+- PT: Residente em Portugal
+- EN: Moving to Portugal
+- FR: Résident au Portugal
+
+### k.interest
+- PT: Interesse
+- EN: Interested in
+- FR: Intérêt
+
+### k.time
+- PT: Tempo no mapa
+- EN: Time on the map
+- FR: Temps sur la carte
+
+### fin.cash
+- PT: Sem crédito
+- EN: No mortgage
+- FR: Sans crédit
+
+### fin.loan
+- PT: Com crédito
+- EN: With a mortgage
+- FR: Avec crédit
+
+### fin.loan.p
+- PT: Com crédito, entrada {p}%
+- EN: With a mortgage, {p}% down
+- FR: Avec crédit, apport {p} %
+
+### timeline.6
+- PT: < 6 meses
+- EN: < 6 months
+- FR: < 6 mois
+
+### timeline.12
+- PT: 6–12 meses
+- EN: 6–12 months
+- FR: 6–12 mois
+
+### timeline.later
+- PT: Mais tarde
+- EN: Later
+- FR: Plus tard
+
+### nif.yes
+- PT: Sim
+- EN: Yes
+- FR: Oui
+
+### nif.no
+- PT: Ainda não
+- EN: Not yet
+- FR: Pas encore
+
+### resident.yes
+- PT: Sim
+- EN: Yes
+- FR: Oui
+
+### resident.no
+- PT: Não
+- EN: No
+- FR: Non
+
+### resident.maybe
+- PT: Talvez
+- EN: Maybe
+- FR: Peut-être
+
+### q.timeline
+- PT: Quando quer comprar?
+- EN: When do you want to buy?
+- FR: Quand voulez-vous acheter ?
+
+### q.nif
+- PT: Já tem NIF?
+- EN: Do you have a NIF?
+- FR: Avez-vous un NIF ?
+
+### q.resident
+- PT: Pensa passar a residente em Portugal?
+- EN: Do you plan to become a resident in Portugal?
+- FR: Pensez-vous devenir résident au Portugal ?
+
+### refund
+- PT: Se sim: {v} de IMT de volta.
+- EN: If yes: {v} of IMT back.
+- FR: Si oui : {v} d'IMT remboursés.
+
+### src.edition
+- PT: edição
+- EN: edition
+- FR: édition
+
+### src.simulator
+- PT: simulador
+- EN: simulator
+- FR: simulateur
+
+### src.map
+- PT: mapa
+- EN: map
+- FR: carte
+
+### src.concierge
+- PT: Concierge
+- EN: Concierge
+- FR: Concierge
+
+### src.answers
+- PT: respostas
+- EN: answers
+- FR: réponses
+
+### src.favorites
+- PT: favoritos
+- EN: favorites
+- FR: favoris
+
+### src.mare
+- PT: Maré
+- EN: Maré
+- FR: Maré
+
+### edit
+- PT: Alterar
+- EN: Change
+- FR: Modifier
+
+### place.ph
+- PT: Outro sítio
+- EN: Another place
+- FR: Autre lieu
+
+### place.add
+- PT: Juntar
+- EN: Add
+- FR: Ajouter
+
+### remove
+- PT: Retirar
+- EN: Remove
+- FR: Retirer
+
+### ready
+- PT: Pronto
+- EN: Done
+- FR: Terminé
+
+### sending
+- PT: A enviar…
+- EN: Sending…
+- FR: Envoi…
+
+### sent
+- PT: O consultor já tem o seu perfil.
+- EN: The advisor has your profile.
+- FR: Le conseiller a votre profil.
+
+### failed
+- PT: Não foi possível enviar. O consultor recebeu o perfil com o pedido.
+- EN: Could not send. The advisor got the profile with your request.
+- FR: Envoi impossible. Le conseiller a reçu le profil avec la demande.
+
+### consent
+- PT: Partilhar este perfil com {dev}, promotor de {name}.
+- EN: Share this profile with {dev}, the developer of {name}.
+- FR: Partager ce profil avec {dev}, promoteur de {name}.
+
+### summary
+- PT: Abrir o resumo (PDF)
+- EN: Open the summary (PDF)
+- FR: Ouvrir le résumé (PDF)
+
+### intent
+- PT: Perfil do comprador
+- EN: Buyer profile
+- FR: Profil de l'acheteur
+
+### goes
+- PT: Segue com o pedido: {list}.
+- EN: Goes with the request: {list}.
+- FR: Joint à la demande : {list}.
+
+### page.title
+- PT: O meu perfil de comprador
+- EN: My buyer profile
+- FR: Mon profil d'acheteur
+
+### page.lede
+- PT: Para levar ao banco ou ao advogado.
+- EN: To take to your bank or lawyer.
+- FR: À montrer à votre banque ou à votre avocat.
+
+### page.costs
+- PT: Custos da compra
+- EN: Purchase costs
+- FR: Frais d'achat
+
+### page.price
+- PT: Preço
+- EN: Price
+- FR: Prix
+
+### page.imt
+- PT: IMT (não residente)
+- EN: IMT (non-resident)
+- FR: IMT (non-résident)
+
+### page.imt.res
+- PT: IMT (habitação própria)
+- EN: IMT (own home)
+- FR: IMT (résidence principale)
+
+### page.is
+- PT: Imposto do selo
+- EN: Stamp duty
+- FR: Droit de timbre
+
+### page.deed
+- PT: Escritura e registo
+- EN: Deed and registration
+- FR: Acte et enregistrement
+
+### page.total
+- PT: Total
+- EN: Total
+- FR: Total
+
+### page.short
+- PT: Lista curta
+- EN: Shortlist
+- FR: Sélection
+
+### page.print
+- PT: Guardar como PDF
+- EN: Save as PDF
+- FR: Enregistrer en PDF
+
+### page.empty
+- PT: Ainda não há perfil neste dispositivo.
+- EN: No profile on this device yet.
+- FR: Pas encore de profil sur cet appareil.
+
+### page.empty.a
+- PT: Abrir o simulador
+- EN: Open the calculator
+- FR: Ouvrir le simulateur
+
+### page.made
+- PT: Feito neste dispositivo a {d}.
+- EN: Made on this device on {d}.
+- FR: Établi sur cet appareil le {d}.
+
+### page.clear
+- PT: Apagar este perfil do dispositivo
+- EN: Delete this profile from this device
+- FR: Effacer ce profil de cet appareil
+
+### page.note
+- PT: Indicativo, com as regras de 2026: não é uma avaliação de crédito nem aconselhamento fiscal.
+- EN: Indicative, under the 2026 rules: not a credit assessment or tax advice.
+- FR: Indicatif, règles 2026 : ni évaluation de crédit ni conseil fiscal.
+
 ## p71
 
 Prompt 71 (4 Nov 2026), US edition, English only: "Closer than you think" (site/src/pages/en/us/closer-than-you-think.astro, site/src/lib/closer.ts) and the south-coast arrival on the US map (site/src/components/MapV3.astro, site/src/scripts/map-v3.ts). Feel: "Portugal is closer than California." The PT and FR lines repeat the English: these blocks are only shown on the US edition, in English (the parity check needs all three lines). Figures and their sources: content/facts/facts.csv and content/facts/flights/SOURCES.md.
@@ -10486,14 +10906,14 @@ Prompt 71 (4 Nov 2026), US edition, English only: "Closer than you think" (site/
 - FR: {n} min
 
 ### hero.more
-- PT: Lisbon is {n} minutes further than Los Angeles.
-- EN: Lisbon is {n} minutes further than Los Angeles.
-- FR: Lisbon is {n} minutes further than Los Angeles.
+- PT: Lisbon is {n} minutes further than {dom}.
+- EN: Lisbon is {n} minutes further than {dom}.
+- FR: Lisbon is {n} minutes further than {dom}.
 
 ### hero.less
-- PT: Lisbon is {n} minutes closer than Los Angeles.
-- EN: Lisbon is {n} minutes closer than Los Angeles.
-- FR: Lisbon is {n} minutes closer than Los Angeles.
+- PT: Lisbon is {n} minutes closer than {dom}.
+- EN: Lisbon is {n} minutes closer than {dom}.
+- FR: Lisbon is {n} minutes closer than {dom}.
 
 ### pick
 - PT: Your city
@@ -10526,9 +10946,9 @@ Prompt 71 (4 Nov 2026), US edition, English only: "Closer than you think" (site/
 - FR: Leave after dinner, land for breakfast.
 
 ### night.l
-- PT: {dep} from {city}, {arr} in Ponta Delgada, with {airline}.
-- EN: {dep} from {city}, {arr} in Ponta Delgada, with {airline}.
-- FR: {dep} from {city}, {arr} in Ponta Delgada, with {airline}.
+- PT: {dep} from {city}, {arr} in {to}, with {airline}.
+- EN: {dep} from {city}, {arr} in {to}, with {airline}.
+- FR: {dep} from {city}, {arr} in {to}, with {airline}.
 
 ### routes.h
 - PT: Every nonstop from the US
@@ -10659,3 +11079,18 @@ Prompt 71 (4 Nov 2026), US edition, English only: "Closer than you think" (site/
 - PT: Praia da Falésia: Tripadvisor's best beach in the world, 2024.
 - EN: Praia da Falésia: Tripadvisor's best beach in the world, 2024.
 - FR: Praia da Falésia: Tripadvisor's best beach in the world, 2024.
+
+### night.ls
+- PT: {dep} from {city}, {arr} in {to}, with {airline}, {season}.
+- EN: {dep} from {city}, {arr} in {to}, with {airline}, {season}.
+- FR: {dep} from {city}, {arr} in {to}, with {airline}, {season}.
+
+### hero.h
+- PT: {h} h
+- EN: {h} h
+- FR: {h} h
+
+### hero.nonstop
+- PT: ahead, in Lisbon. {airline} flies there nonstop, {season}.
+- EN: ahead, in Lisbon. {airline} flies there nonstop, {season}.
+- FR: ahead, in Lisbon. {airline} flies there nonstop, {season}.

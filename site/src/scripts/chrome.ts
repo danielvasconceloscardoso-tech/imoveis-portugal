@@ -54,7 +54,7 @@ export function initChrome() {
   // transition and the sheet looked as if nothing happened), the menu left open over it, a link handler in the bubble
   // phase that any other handler could swallow, and taps made before this module ran (they now wait in a small inline
   // shim, Chrome.astro, instead of leaving for the concierge page).
-  const w = window as unknown as { __ipCgShim?: EventListener; __ipCgPending?: string; __ipCgReady?: boolean; __ipCgStart?: (o: { ed: string; door: string; budget: number }) => boolean };
+  const w = window as unknown as { __ipCgShim?: EventListener; __ipCgPending?: string; __ipCgReady?: boolean; __ipCgStart?: (o: { ed: string; door: string; budget: number; from?: string }) => boolean };
   const sh = document.querySelector<HTMLElement>("[data-cg-sheet]"), back = document.querySelector<HTMLElement>("[data-cg-back]");
   if (w.__ipCgShim) document.removeEventListener("click", w.__ipCgShim, true);
   if (!sh || !back) { if (w.__ipCgPending) location.href = w.__ipCgPending; return; }
@@ -97,6 +97,8 @@ export function initChrome() {
     for (const k of ["place", "budget"]) { const v = u.searchParams.get(k); if (v && p.get(k) !== v) { p.set(k, v); changed = true; } }
     // Prompt 69: the project a card opened it from (?project=, the map's project card) is the first step's context.
     { const v = u.searchParams.get("project"); if (v && p.get("project") !== v) { p.set("project", v); changed = true; } }
+    // Prompt 73 (from=sim: a calculator) and J72-03 (visit=1: "Book a private visit") always match the link.
+    for (const k of ["from", "visit"]) { const v = u.searchParams.get(k) || ""; if (v !== (p.get(k) || "")) { v ? p.set(k, v) : p.delete(k); changed = true; } }
     // The partner link's topic (prompt 43 §3b) always matches the link: a link without one clears an earlier topic.
     const t = u.searchParams.get("topic") || "";
     t ? p.set("topic", t) : p.delete("topic");
@@ -110,6 +112,8 @@ export function initChrome() {
   w.__ipCgStart = (o) => {
     const p = new URLSearchParams(location.search);
     p.set("cg", "home"); p.set("ed", o.ed); p.set("door", o.door); o.budget ? p.set("budget", String(o.budget)) : p.delete("budget"); p.delete("concierge"); p.delete("topic"); flowTopic = "";
+    // Prompt 73 §1: the simulator says so (from=sim), and the Concierge opens on "Custos e impostos"; never a visit.
+    o.from ? p.set("from", o.from) : p.delete("from"); p.delete("visit");
     history.replaceState(history.state, "", `${location.pathname}?${p}${location.hash}`);
     if (flow) { flow.mute(); flowEl.querySelector("[data-flow-stage]")!.innerHTML = ""; (flowEl as any).__flow = null; flow = null; }
     sh.classList.remove("is-open"); open(); return true;

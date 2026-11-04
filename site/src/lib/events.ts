@@ -44,8 +44,11 @@ export function flowSteps(id: FlowId): string[] {
  * the confirmation (ev "flow/concierge/prep/{open,sent,fallback}"), the time zone the times were shown in (ev
  * "flow/concierge/tz/{own,edition,lisbon}") and the IMT screen: opened from each surface (ev "imt/open/{from}"), the price
  * changed on it, its last line seen, the full calculator followed. */
-export const CG_CTX = ["project", "place", "budget", "none"];
+export const CG_CTX = ["project", "place", "budget", "sim", "none"];
 export const CG_PREP = ["open", "sent", "fallback"];
+/** Prompt 74: the buyer profile on the confirmation: "Pronto" sent, shared with the named developer, summary opened, and
+ *  a qualified profile (4 of the 5 key fields) sent with a request (ev "flow/concierge/cv/{k}"; per development "p/{id}/cvq"). */
+export const CG_CV = ["ready", "share", "summary", "qualified"];
 export const CG_TZ = ["own", "edition", "lisbon"];
 export const IMT_FROM = ["sim1", "concierge", "map", "project", "link"];
 export const IMT_ACTS = ["price", "more", "calc"];
@@ -57,8 +60,9 @@ export function editionEvents(): string[] {
   // The endpoint did not take the request and the ready-written e-mail was offered instead (3 Nov 2026).
   for (const f of ["concierge", "partner", "viewing"]) out.push(`flow/${f}/fallback`);
   for (const f of ["concierge", "partner", "viewing"] as FlowId[]) for (const s of flowSteps(f)) for (const k of ["step", "stop"]) out.push(`flow/${f}/${k}/${s}`);
-  for (const p of PROJECTS) for (const k of ["pin", "card", "req", "view", "share", "film", "tour3d"]) out.push(`p/${p.id}/${k}`);
+  for (const p of PROJECTS) for (const k of ["pin", "card", "req", "view", "share", "film", "tour3d", "cvq", "cvshare"]) out.push(`p/${p.id}/${k}`);
   for (const k of CG_CTX) out.push(`flow/concierge/ctx/${k}`);
+  for (const k of CG_CV) out.push(`flow/concierge/cv/${k}`);
   for (const k of CG_PREP) out.push(`flow/concierge/prep/${k}`);
   for (const k of CG_TZ) out.push(`flow/concierge/tz/${k}`);
   for (const f of IMT_FROM) out.push(`imt/open/${f}`);
@@ -76,6 +80,8 @@ export function editionEvents(): string[] {
   for (const t of MAP_CARD5) out.push(`map/${t}`);
   for (const t of MAP_P68) out.push(`map/${t}`);
   out.push("map/compare/open", "map/compare/pair", "map/panel/open");
+  // Prompt 71 §2: the south coast on the US map (Mike, M72-22: its events had no /e/ page).
+  out.push("map/south", "map/south/golf");
   for (const p of PREVIEWS) out.push(`paid/preview/${p}`);
   for (const s of [...new Set(STATIONS.map((x) => x.k))]) for (const k of ["open", "done"]) out.push(`path/${s}/${k}`);
   for (const k of ["home", "region"]) for (const s of ["on", "off"]) out.push(`heart/${k}/${s}`);

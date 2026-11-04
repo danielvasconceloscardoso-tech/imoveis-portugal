@@ -22,6 +22,7 @@ import PathPage from "../../../components/PathPage.astro";
 import ConsultPage from "../../../components/ConsultPage.astro";
 import DossierPage from "../../../components/DossierPage.astro";
 import SavedPage from "../../../components/SavedPage.astro";
+import ProfilePage from "../../../components/ProfilePage.astro";
 import { PTYPES } from "../../../lib/packages";
 import { config } from "../../../config";
 import { ED_ORDER, LANGS, SLUGS, eur, pathFor, type EdCode, type Lang, type PageKey } from "../../../i18n";
@@ -29,7 +30,7 @@ import { homeFacts, fmtDate } from "../../../lib/content";
 import { c, cl, edName } from "../../../lib/copy";
 
 export function getStaticPaths() {
-  const keys: PageKey[] = ["partners", "buy", "how", "privacy", "legal", "faq", "talk", "guide", "sims", "casa", "data", "map", "private", "ours", "journey", "consult", "dossiers", "articles", "saved"];
+  const keys: PageKey[] = ["partners", "buy", "how", "privacy", "legal", "faq", "talk", "guide", "sims", "casa", "data", "map", "private", "ours", "journey", "consult", "dossiers", "articles", "saved", "profile"];
   return LANGS.flatMap((lang) => ED_ORDER.flatMap((ed) => keys.map((key) => ({ params: { lang, ed, page: SLUGS[lang][key] }, props: { key } }))));
 }
 const lang = Astro.params.lang as Lang;
@@ -42,13 +43,15 @@ const ph = (v: string, label: string) => v || `[${label}]`;
 const PH = { pt: ["Entidade", "Morada", "n.º de registo", "n.º de IVA"], en: ["Entity", "Address", "registration no.", "VAT no."], fr: ["Entité", "Adresse", "n° d'immatriculation", "n° de TVA"] }[lang];
 const legalVars = { entity: ph(ent.name, PH[0]), address: ph(ent.address, PH[1]), register: ph(ent.register, PH[2]), vat: ph(ent.vat, PH[3]), email: config.contactEmail };
 const legal = key === "privacy" || key === "legal" ? key : null;
+// Prompt 73 (James J2-07): the community figure follows the edition. facts.csv holds one (lu-portuguese-2021, STATEC);
+// the other editions have none yet, so partners.proof.1 shows on the Luxembourg edition only.
 const luN = new Intl.NumberFormat(lang === "en" ? "en" : lang === "fr" ? "fr" : "pt-PT").format(93659);
 
 const titles: Partial<Record<PageKey, string>> = { partners: c("partners.title", lang), buy: c("buy.title", lang), how: c("how.title", lang), privacy: c("legal.privacy.title", lang), legal: c("legal.legal.title", lang) };
 const descs: Partial<Record<PageKey, string>> = { partners: c("partners.lede", lang), buy: c("buy.lede", lang), how: c("how.lede", lang), privacy: c("legal.privacy.intro", lang), legal: c("legal.legal.intro", lang) };
 const site = config.agency.website.replace(/^https:\/\/|\/$/g, "");
 ---
-{key === "saved" ? <SavedPage lang={lang} ed={ed} /> : key === "faq" ? <FaqPage lang={lang} ed={ed} /> : key === "articles" ? <ArticlesPage lang={lang} ed={ed} /> : key === "sims" ? <SimsPage lang={lang} ed={ed} /> : key === "casa" ? <CasaPage lang={lang} ed={ed} /> : key === "data" ? <DataPage lang={lang} ed={ed} /> : key === "map" ? <MapPage lang={lang} ed={ed} /> : key === "private" ? <PrivatePage lang={lang} ed={ed} /> : key === "ours" ? <OursPage lang={lang} ed={ed} /> : key === "journey" ? <PathPage lang={lang} ed={ed} /> : key === "consult" ? <ConsultPage lang={lang} ed={ed} /> : key === "dossiers" ? <DossierPage lang={lang} ed={ed} /> : key === "talk" ? <TalkPage lang={lang} ed={ed} /> : key === "guide" ? <GuidePage lang={lang} ed={ed} /> : (
+{key === "saved" ? <SavedPage lang={lang} ed={ed} /> : key === "profile" ? <ProfilePage lang={lang} ed={ed} /> : key === "faq" ? <FaqPage lang={lang} ed={ed} /> : key === "articles" ? <ArticlesPage lang={lang} ed={ed} /> : key === "sims" ? <SimsPage lang={lang} ed={ed} /> : key === "casa" ? <CasaPage lang={lang} ed={ed} /> : key === "data" ? <DataPage lang={lang} ed={ed} /> : key === "map" ? <MapPage lang={lang} ed={ed} /> : key === "private" ? <PrivatePage lang={lang} ed={ed} /> : key === "ours" ? <OursPage lang={lang} ed={ed} /> : key === "journey" ? <PathPage lang={lang} ed={ed} /> : key === "consult" ? <ConsultPage lang={lang} ed={ed} /> : key === "dossiers" ? <DossierPage lang={lang} ed={ed} /> : key === "talk" ? <TalkPage lang={lang} ed={ed} /> : key === "guide" ? <GuidePage lang={lang} ed={ed} /> : (
 <V2 lang={lang} ed={ed} page={key} title={`${titles[key]} | Imóveis Portugal · ${edName(ed, lang)}`} description={descs[key] ?? ""}
   sticky={key === "partners" ? { href: "#contacto", label: c("partners.cta", lang) } : undefined}>
   {key === "partners" && (
@@ -100,7 +103,7 @@ const site = config.agency.website.replace(/^https:\/\/|\/$/g, "");
       <section class="band" aria-labelledby="proof">
         <div class="frame split">
           <div><h2 id="proof">{c("partners.proof.h", lang)}</h2></div>
-          <div><ul class="list" style="margin-top:0">{cl("partners.proof", lang, { n: luN }).map((r) => <li>{r}</li>)}</ul></div>
+          <div><ul class="list" style="margin-top:0">{cl("partners.proof", lang, { n: luN }).filter((_, i) => i > 0 || ed === "lu").map((r) => <li>{r}</li>)}</ul></div>
         </div>
       </section>
       <section class="band white" aria-labelledby="agency">

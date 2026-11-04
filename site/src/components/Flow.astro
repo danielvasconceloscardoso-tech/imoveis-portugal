@@ -22,9 +22,9 @@ const lawyer = flow === "concierge" ? lawyerCard(lang) : null;
 // Listed buildings in the concierge (prompt 39 §3): projects.json via lib/projects (the same source as the map and the
 // showcase pages). "Pedir visita privada" opens the showcase's own request sheet (#pedir, D66): no second form here.
 const BL_T = {
-  pt: { open: "Ver novos empreendimentos", h: "Novos empreendimentos", lede: "Edifícios novos apresentados por promotores parceiros.", here: "Disponível agora em {p}", near: "Perto, em {p}", avail: "{n} para venda agora", match: "Empreendimentos nesta zona", price: "Preço sob consulta", from: "Desde", map: "Ver no mapa", visit: "Pedir visita privada", none: "Ainda não há empreendimentos listados nesta zona." },
-  en: { open: "See new developments", h: "New developments", lede: "New buildings presented by partner developers.", here: "Available now in {p}", near: "Nearby, in {p}", avail: "{n} for sale now", match: "Developments in this area", price: "Price on request", from: "From", map: "See on the map", visit: "Request a private visit", none: "No listed developments in this area yet." },
-  fr: { open: "Voir le programme", h: "Programmes neufs", lede: "Immeubles neufs présentés par des promoteurs partenaires.", here: "Disponible maintenant à {p}", near: "À proximité, à {p}", avail: "{n} en vente maintenant", match: "Programmes dans cette zone", price: "Prix sur demande", from: "À partir de", map: "Voir sur la carte", visit: "Demander une visite privée", none: "Pas encore de programme listé dans cette zone." },
+  pt: { open: "Ver novos empreendimentos", one: "Ver {name}", h: "Novos empreendimentos", lede: "Edifícios novos apresentados por promotores parceiros.", here: "Disponível agora em {p}", near: "Perto, em {p}", avail: "{n} para venda agora", match: "Empreendimentos nesta zona", price: "Preço sob consulta", from: "Desde", map: "Ver no mapa", visit: "Pedir visita privada", none: "Ainda não há empreendimentos listados nesta zona." },
+  en: { open: "See new developments", one: "See {name}", h: "New developments", lede: "New buildings presented by partner developers.", here: "Available now in {p}", near: "Nearby, in {p}", avail: "{n} for sale now", match: "Developments in this area", price: "Price on request", from: "From", map: "See on the map", visit: "Request a private visit", none: "No listed developments in this area yet." },
+  fr: { open: "Voir les programmes neufs", one: "Voir {name}", h: "Programmes neufs", lede: "Immeubles neufs présentés par des promoteurs partenaires.", here: "Disponible maintenant à {p}", near: "À proximité, à {p}", avail: "{n} en vente maintenant", match: "Programmes dans cette zone", price: "Prix sur demande", from: "À partir de", map: "Voir sur la carte", visit: "Demander une visite privée", none: "Pas encore de programme listé dans cette zone." },
 }[lang];
 const withPage = new Set(showcases(PROJECTS).map((ps) => ps[0].id));
 const blds = flow === "concierge" && PROJECTS.length ? {
@@ -32,7 +32,7 @@ const blds = flow === "concierge" && PROJECTS.length ? {
   items: PROJECTS.map((p) => {
     const host = showcases(PROJECTS).find((ps) => ps.some((x) => x.id === p.id));
     return {
-      id: p.id, name: p.name, tag: labelOf(p, lang, c("common.sponsored", lang)), muni: p.muni, place: (PRICES.munis[p.muni] as any)?.n ?? p.muni, region: p.region ?? "", near: p.near ?? [],
+      id: p.id, name: p.name, developer: p.developer, tag: labelOf(p, lang, c("common.sponsored", lang)), muni: p.muni, place: (PRICES.munis[p.muni] as any)?.n ?? p.muni, region: p.region ?? "", near: p.near ?? [],
       typologies: p.typologies, from: p.from,
       // What is available now, from the availability table (units marked for sale); null where the developer publishes none.
       avail: p.blocks ? p.blocks.reduce((n, b) => n + b.units.reduce((m, u) => m + u.forSale, 0), 0) : null, photo: img(p.render ?? p.gallery?.[0], 800),

@@ -4,7 +4,6 @@
 // Wording: COPY_DECK.md "sims.*"; maths: src/lib/sims.ts; fields and results: src/lib/tools.ts.
 import { srcTitle } from "../lib/srctitle";
 import V2 from "../layouts/V2.astro";
-import Calls from "./Calls.astro";
 import { config } from "../config";
 import { LANGS, HTML_LANG, pathFor, eur, type Lang, type EdCode } from "../i18n";
 import { Sources, fmtDate, EDITION_CUR, RATE, FACTS } from "../lib/content";
@@ -108,7 +107,7 @@ const fieldLabel = (id: string, kind: string) => {
         <><p>{c("sims.credit.none", lang)}</p><a class="btn" href={`${talk}?cat=bank#form`}>{c("faq.cta.bank", lang)}</a></>
       ))}
       {next === "tax" && (<><p>{c("sims.tax.p", lang)}</p><a class="btn" href={`${talk}?cat=tax#form`}>{c("faq.cta.tax", lang)}</a></>)}
-      {next === "agency" && (<div data-agency><p>{c("sims.agency.p", lang)}</p><a class="btn" href={pathFor(lang, ed, "consult")} data-concierge data-sim-cg>{c("sims.agency.cta", lang)}</a><Calls lang={lang} ed={ed} compact /></div>)}
+      {next === "agency" && (<div data-agency><p>{c("sims.agency.p", lang)}</p><a class="btn" href={pathFor(lang, ed, "consult")} data-concierge data-sim-cg>{c("sims.agency.cta", lang)}</a></div>)}
       <p style="margin-top:20px"><a class="more" href={pathFor(lang, ed, "dossiers")}>{c("consult.later.dossier", lang)}</a></p>
     </section>
 
@@ -204,7 +203,7 @@ const fieldLabel = (id: string, kind: string) => {
     // Keep the inputs in the URL (no personal data), for sharing and for the plan.
     const p = new URLSearchParams();
     for (const [k, x] of Object.entries(v)) p.set(k, typeof x === "boolean" ? (x ? "1" : "0") : String(x));
-    history.replaceState(history.state, "", `${location.pathname}?${p}`);
+    history.replaceState(history.state, "", `${location.pathname}${p.size ? `?${p}` : ""}`);  // MI2-06: no bare "?"
     const plan = document.getElementById("plan-link") as HTMLAnchorElement | null;
     if (plan) plan.href = `${plan.href.split("?")[0]}?tool=${tool}&${p}`;
     const send = document.getElementById("credit-send") as HTMLAnchorElement | null;
@@ -217,7 +216,7 @@ const fieldLabel = (id: string, kind: string) => {
   }
   // Prompt 70 (MI-06): the advisor button opens the Concierge with the price typed here (chrome.ts reads ?budget=).
   const simCg = document.querySelector<HTMLAnchorElement>("[data-sim-cg]");
-  const cgBudget = () => { if (!simCg) return; const u = new URL(simCg.href); const pr = Number(values().price) || 0; pr >= 1e4 ? u.searchParams.set("budget", String(Math.round(pr))) : u.searchParams.delete("budget"); simCg.href = u.toString(); };
+  const cgBudget = () => { if (!simCg) return; const u = new URL(simCg.href); const pr = Number(values().price) || 0; pr >= 1e4 ? u.searchParams.set("budget", String(Math.round(pr))) : u.searchParams.delete("budget"); u.searchParams.set("from", "sim"); simCg.href = u.toString(); };
   form.addEventListener("input", render);
   form.addEventListener("input", cgBudget); cgBudget();
   form.addEventListener("submit", (e) => e.preventDefault());

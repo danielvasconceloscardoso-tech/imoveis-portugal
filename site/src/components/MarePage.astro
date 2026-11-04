@@ -67,6 +67,7 @@ const title = one ? `${one.headline} | Maré` : `Maré | Imóveis Portugal · ${
       {bh && <label class="mr-email" data-mare-own><span class="vh">{c("mare.email", lang)}</span><input type="email" required autocomplete="email" placeholder={c("mare.email", lang)} /></label>}
       {bh && <button class="mr-btn" type="button" data-mare-go>{c("mare.a", lang)}</button>}
       {bh && <div class="mr-embed" data-mare-embed data-bh={nl} data-mail={mail} data-mail-label={c("mare.a", lang)}></div>}
+      {bh && <p class="mr-small mr-confirm" role="status" hidden data-mare-confirm data-tpl={c("mare.confirm", lang, { email: "{email}" })}></p>}
       {bh && <p class="mr-small mr-bh-note">{c("mare.oneclick", lang)} <a href={pathFor(lang, ed, "privacy")}>{c("common.privacy", lang)}</a></p>}
       {!bh && <button class="mr-btn" type="submit">{c("mare.a", lang)}</button>}
       {!bh && <label class="mr-consent"><input type="checkbox" name="consentimento" value="sim" required data-mare-consent data-need={c("mare.consent.need", lang)} /> <span>{c("mare.consent", lang)} <a href={pathFor(lang, ed, "privacy")}>{c("common.privacy", lang)}</a></span></label>}
@@ -136,17 +137,27 @@ const title = one ? `${one.headline} | Maré` : `Maré | Imóveis Portugal · ${
       const bhInput = () => bhWrap.querySelector<HTMLInputElement>('input[type="email"], input[name*="email" i]');
       const setVal = (el: HTMLInputElement, v: string) => { Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, "value")?.set?.call(el, v); el.dispatchEvent(new Event("input", { bubbles: true })); el.dispatchEvent(new Event("change", { bubbles: true })); };
       const send = () => { const fm = bhWrap.querySelector("form"); const b = fm?.querySelector<HTMLElement>('button[type="submit"], button:not([type]), input[type="submit"]'); if (b) b.click(); else fm?.requestSubmit?.(); };
+      // Prompt 73 (Sophie J2-01, severity 4): our field is never taken away while the reader uses it. beehiiv's form
+      // replaces it only if the reader has not touched our field yet. Once they have, our field stays: on the button,
+      // a beehiiv field in this page gets the typed address and sends; beehiiv's framed form (another site, it cannot be
+      // filled from here) shows only then, under one line that repeats the address to confirm, never mid-typing.
+      let touched = false;
+      const confirmLine = f.querySelector<HTMLElement>("[data-mare-confirm]");
+      const swap = (bi: HTMLInputElement | null) => {
+        const typed = ownIn?.value.trim() ?? "", had = document.activeElement === ownIn;
+        if (bi && typed) setVal(bi, typed);
+        if (own) own.hidden = true; if (go) go.hidden = true;
+        bhWrap.classList.add("is-ready");
+        if (!bi && typed && confirmLine) { confirmLine.textContent = (confirmLine.dataset.tpl || "").replace("{email}", typed); confirmLine.hidden = false; }
+        if (bi && had) bi.focus(); else if (!bi && touched) bhWrap.querySelector("iframe")?.focus();
+      };
       const take = () => {
         if (ready) return true;
         const bi = bhInput(), fr = bhWrap.querySelector("iframe");
         if (!bi && !fr) return false;
         ready = true;
-        const typed = ownIn?.value ?? "", had = document.activeElement === ownIn;
-        if (bi && typed) setVal(bi, typed);
-        if (own) own.hidden = true; if (go) go.hidden = true;
-        bhWrap.classList.add("is-ready");
-        if (bi && had) bi.focus();
-        if (bi && queued) send();
+        if (queued && bi) { setVal(bi, ownIn?.value.trim() ?? ""); send(); return true; }  // sent through beehiiv, our field stays
+        if (queued || !touched) swap(bi);
         return true;
       };
       const load = () => {
@@ -158,11 +169,14 @@ const title = one ? `${one.headline} | Maré` : `Maré | Imóveis Portugal · ${
         setTimeout(() => { if (!take()) failed = true; if (failed && queued && bhWrap.dataset.mail) location.href = bhWrap.dataset.mail; }, 8000);
       };
       if (document.readyState === "complete") setTimeout(load, 300); else addEventListener("load", () => setTimeout(load, 300), { once: true });
-      ownIn?.addEventListener("focus", load, { once: true });
+      ownIn?.addEventListener("focus", () => { touched = true; load(); });
+      ownIn?.addEventListener("input", () => { touched = true; });
       go?.addEventListener("click", () => {
         if (ownIn && !ownIn.checkValidity()) { ownIn.reportValidity(); return; }
         if (failed) { if (bhWrap.dataset.mail) location.href = bhWrap.dataset.mail; return; }
-        queued = true; go.disabled = true; go.setAttribute("aria-busy", "true"); load(); take();
+        queued = true; load();
+        if (ready) { const bi = bhInput(); if (bi) { setVal(bi, ownIn?.value.trim() ?? ""); send(); } else swap(null); return; }
+        go.disabled = true; go.setAttribute("aria-busy", "true"); take();
       });
       ownIn?.addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); go?.click(); } });
       // MI-29: a calm line of our own once beehiiv's form is sent (its own message may also show).
@@ -250,6 +264,7 @@ const title = one ? `${one.headline} | Maré` : `Maré | Imóveis Portugal · ${
   .mr-sent { color: var(--accent); font-size: 14px; }
   .mr-embed { grid-column: 1 / -1; width: 100%; } .mr-embed iframe { width: 100%; border: 0; }
   .mr-bh-note { text-align: center; max-width: 26rem; }
+  .mr-confirm { text-align: center; color: var(--ink); }
   .mr-embed a.mr-btn { display: inline-flex; align-items: center; justify-content: center; width: 100%; max-width: 400px; text-decoration: none; }
   .mr-latest { padding: clamp(56px, 9vw, 120px) var(--gut, 20px); background: #efebe3; text-align: center; }
   .mr-h2 { margin: 0; font-size: clamp(30px, 4.4vw, 44px); line-height: 1.15; }

@@ -5,7 +5,6 @@
 // D52) or "later" (otherwise). The rule is applied in Tally's redirect and shown to nobody. Wording: COPY_DECK.md "consult.*".
 import { srcTitle } from "../lib/srctitle";
 import V2 from "../layouts/V2.astro";
-import BriefBox from "./BriefBox.astro";
 import Flow from "./Flow.astro";
 import MareBlock from "./MareBlock.astro";
 import { config } from "../config";
@@ -28,7 +27,7 @@ const title = view === "form" ? c("consult.title", lang) : c(`consult.${view}.ti
     {/* Part 2 (3 Nov): "Voltar" returns to the page the reader came from (scripts/bar.ts), the home without one. Prompt 70
         (MI-18): on the form, the flow's own ‹ does that on its first step, so the page shows one back, not two. */}
     {view !== "form" && <p class="cg-back"><a class="goback" href={pathFor(lang, ed, "home")} data-goback data-next-k="back"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>{c("bar.back", lang)}</a></p>}
-    <p class="h-small">{c("consult.title", lang)}</p>
+    <p class="h-small" data-cg-title={view === "form" ? "" : undefined}>{c("consult.title", lang)}</p>
     <h1 class={view === "form" ? "vh" : undefined}>{h1}</h1>
     {view === "ok" && <><p class="lede">{c("consult.ok.p", lang)}</p><p>{c("consult.ok.prep", lang)}</p></>}
     {view === "private" && <><p class="lede">{c("consult.private.p", lang)}</p><p>{c("consult.private.aml", lang)}<a class="sup" href={`#fonte-${nAml}`}>{nAml}</a></p><p>{c("consult.ok.prep", lang)}</p></>}
@@ -42,9 +41,7 @@ const title = view === "form" ? c("consult.title", lang) : c(`consult.${view}.ti
         <script is:inline>(function(){try{var b=Number(new URLSearchParams(location.search).get("budget"))||Number(localStorage.getItem("ip.budget"))||0;if(b>=1e6)document.querySelector("[data-dedicated]").hidden=false}catch(e){}})();</script>
         {/* Prompt 35 §3.9: one question at a time, our own controls; same fields, consent and routing as the Tally form. */}
         <Flow lang={lang} ed={ed} flow="concierge" />
-        {/* Prompt 70 (MI-18): the summary box once, on the last step under the send button, and only when there is a
-            summary to send (scripts/flow.ts marks the step on .fl[data-step]); nothing is removed from the box itself. */}
-        <div class="cg-brief"><BriefBox lang={lang} ed={ed} /></div>
+        {/* Round 2 (MI2-04), prompt 74: no summary box here; the last step says in one line what goes with the request (scripts/flow.ts). */}
         <h2 class="h3" style="margin-top:40px">{c("consult.next.h", lang)}</h2>
         <ol class="steps-plain">{cl("consult.next", lang).map((x) => <li>{x}</li>)}</ol>
       </>
@@ -81,11 +78,4 @@ const title = view === "form" ? c("consult.title", lang) : c(`consult.${view}.ti
 </V2>
 
 <style is:global>
-  .consult .cg-brief { display: none; margin-top: 18px; }
-  .consult:has(.fl[data-step="reach"]) .cg-brief:has([data-brief-ok]:not([hidden])) { display: block; }
-  .consult .cg-brief .brief { padding: 12px 16px; }
-  .consult .cg-brief .brief > .h-small, .consult .cg-brief .brief > .small:first-of-type, .consult .cg-brief .brief-note { display: none; }
-  .consult .cg-brief .brief-line { margin: 0 0 6px; font-size: 13.5px; }
-  .consult .cg-brief .brief-ok { display: inline-flex; gap: 8px; margin-right: 12px; font-size: 14.5px; }
-  .consult .cg-brief .brief > .small:last-of-type { display: inline; font-size: 13.5px; }
 </style>

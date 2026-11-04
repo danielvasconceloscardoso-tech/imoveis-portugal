@@ -1,0 +1,108 @@
+---
+// "O meu perfil de comprador" (prompt 74 §3, D79 "O meu Portugal"): the reader's one-page summary, to keep and reuse
+// with a bank or a lawyer: the profile, the full purchase costs, IMT and its refund, the timeline, the NIF and the
+// shortlist. Built empty and filled in the browser from the reader's own device (lib/cv.ts): nothing is sent or kept
+// anywhere else. Prints to one A4 page (the print stylesheet below hides the site around it). noindex: it is personal.
+// Wording: COPY_DECK.md "cv.*" (and "p69.imt.sim" for the refund line).
+import V2 from "../layouts/V2.astro";
+import { HTML_LANG, pathFor, type Lang, type EdCode } from "../i18n";
+import { cvLabels } from "../lib/flows";
+import { c, edName } from "../lib/copy";
+
+interface Props { lang: Lang; ed: EdCode; }
+const { lang, ed } = Astro.props;
+const L = cvLabels(lang);
+const D = { L, ed, locale: HTML_LANG[lang], back: c("p69.imt.sim", lang, { back: "{back}" }), sims: pathFor(lang, ed, "sims") };
+---
+<V2 lang={lang} ed={ed} page="profile" noindex title={`${L["page.title"]} | Imóveis Portugal · ${edName(ed, lang)}`} description={L["page.lede"]}>
+  <article class="cvp" data-cvp>
+    <header class="cvp-top">
+      <p class="cvp-brand">Imóveis Portugal</p>
+      <h1>{L["page.title"]}</h1>
+      <p class="cvp-lede">{L["page.lede"]}</p>
+      <p class="cvp-meta" data-cvp-meta></p>
+    </header>
+    <div data-cvp-body></div>
+    <div class="cvp-empty" data-cvp-empty hidden>
+      <p>{L["page.empty"]}</p>
+      <a class="nx-btn" href={D.sims}>{L["page.empty.a"]}</a>
+    </div>
+    <p class="cvp-acts"><button type="button" class="nx-btn" data-cvp-print>{L["page.print"]}</button> <button type="button" class="cvp-clear" data-cvp-clear>{L["page.clear"]}</button></p>
+    <p class="cvp-note">{L["page.note"]}</p>
+  </article>
+  <script type="application/json" id="cvp-data" set:html={JSON.stringify(D).replace(/</g, "\\u003c")} />
+</V2>
+
+<script>
+  import { build, line, costs, refund, type CvL } from "../lib/cv";
+  import { get } from "../lib/saved";
+  const root = document.querySelector<HTMLElement>("[data-cvp]");
+  if (root) {
+    const D = JSON.parse(document.getElementById("cvp-data")!.textContent || "{}") as { L: CvL; ed: string; locale: string; back: string; sims: string };
+    const L = D.L, esc = (t: string) => t.replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[ch]!);
+    const eur = (v: number) => new Intl.NumberFormat(D.locale, { style: "currency", currency: "EUR", maximumFractionDigits: 0, useGrouping: "always" } as unknown as Intl.NumberFormatOptions).format(v);
+    const b = build({ edition: D.ed });
+    const known = b.fields.filter((f) => f.k !== "country" && f.k !== "time");
+    if (!known.length) (root.querySelector("[data-cvp-empty]") as HTMLElement).hidden = false;
+    else {
+      const date = new Intl.DateTimeFormat(D.locale, { day: "numeric", month: "long", year: "numeric" }).format(new Date());
+      root.querySelector("[data-cvp-meta]")!.textContent = `${L["page.made"].replace("{d}", date)} · ${L.pct.replace("{n}", String(b.pct))}`;
+      const rows = b.fields.filter((f) => f.k !== "total" && f.k !== "interest" && f.k !== "time")
+        .map((f) => `<li><span>${esc(line(f, L, eur))}</span><small>${esc(L[`src.${f.src}`] || "")}</small></li>`).join("");
+      // The costs at the simulator's price (else the development's published price): non-resident unless "Para viver".
+      const sm = b.sim ?? (b.price ? { price: b.price, use: "away" as const, pay: "cash" as const, entry: 0 } : null);
+      let cost = "";
+      if (sm) {
+        const k = costs(sm), back = sm.use === "away" ? refund(sm.price) : 0;
+        const tr = (a: string, v: number, strong = false) => `<tr${strong ? ' class="cvp-tot"' : ""}><th scope="row">${esc(a)}</th><td>${esc(eur(v))}</td></tr>`;
+        cost = `<section class="cvp-s"><h2>${esc(L["page.costs"])}</h2><table class="cvp-t">${tr(L["page.price"], sm.price)}${tr(sm.use === "live" ? L["page.imt.res"] : L["page.imt"], k.imt)}${tr(L["page.is"], k.is)}${tr(L["page.deed"], k.deed)}${tr(L["page.total"], k.total, true)}</table>
+          ${back ? `<p class="cvp-back">${esc(D.back.replace("{back}", eur(back)))}</p>` : ""}</section>`;
+      }
+      const favs = get();
+      const short = b.interest.map((x) => { const f = favs.find((y) => y.label.split(",")[0] === x.name); const h = f && /^\/[^/]/.test(f.href) ? f.href : "";
+        return `<li>${h ? `<a href="${esc(h)}">${esc(x.name)}</a>` : esc(x.name)}<small>${esc(L[`src.${x.src}`] || "")}</small></li>`; }).join("");
+      root.querySelector("[data-cvp-body]")!.innerHTML = `<section class="cvp-s"><h2>${esc(L.h)}</h2><ul class="cvp-l">${rows}</ul></section>${cost}
+        ${short ? `<section class="cvp-s"><h2>${esc(L["page.short"])}</h2><ul class="cvp-l">${short}</ul></section>` : ""}`;
+    }
+    root.querySelector("[data-cvp-print]")!.addEventListener("click", () => print());
+    // The reader's right to erase, on their own device: the profile, the simulator's state and the time on each place.
+    root.querySelector("[data-cvp-clear]")!.addEventListener("click", () => { try { for (const k of ["ip.cv", "ip.sim1", "ip.sims", "ip.dwell", "ip.places"]) localStorage.removeItem(k); } catch { /* storage off */ } location.reload(); });
+  }
+</script>
+
+<style>
+  .cvp { max-width: 44rem; margin: 0 auto; padding: 32px var(--gut, 24px) 48px; }
+  .cvp-brand { margin: 0; font: 700 12px/1 var(--sans); letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+  .cvp h1 { font: 400 clamp(34px, 1.4rem + 3vw, 52px)/1.08 var(--serif); letter-spacing: -.01em; margin: 10px 0 8px; }
+  .cvp-lede { margin: 0 0 6px; color: var(--muted); }
+  .cvp-meta { margin: 0 0 28px; font-size: 14px; color: var(--muted); }
+  .cvp :global(.cvp-s) { margin: 0 0 28px; break-inside: avoid; }
+  .cvp :global(.cvp-s h2) { font: 600 12px/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 0 0 8px; }
+  .cvp :global(.cvp-l) { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
+  .cvp :global(.cvp-l li) { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 9px 0; border-bottom: 1px solid var(--rule); font-size: 16px; }
+  .cvp :global(.cvp-l small) { flex: none; font-size: 12px; color: var(--muted); }
+  .cvp :global(.cvp-t) { width: 100%; border-collapse: collapse; font-size: 16px; }
+  .cvp :global(.cvp-t th), .cvp :global(.cvp-t td) { padding: 8px 0; border-bottom: 1px solid var(--rule); text-align: left; font-weight: 400; }
+  .cvp :global(.cvp-t td) { text-align: right; font-variant-numeric: tabular-nums; }
+  .cvp :global(.cvp-tot th), .cvp :global(.cvp-tot td) { font-weight: 700; }
+  .cvp :global(.cvp-back) { margin: 10px 0 0; font-size: 14.5px; }
+  .cvp-empty { padding: 8px 0 16px; } .cvp-empty p { color: var(--muted); }
+  .cvp-acts { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin: 8px 0 12px; }
+  .cvp-clear { border: 0; background: none; padding: 10px 0; font: inherit; font-size: 14px; color: var(--muted); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+  .cvp-note { font-size: 13px; color: var(--muted); margin: 0; }
+  /* One clean A4 page: only the summary, black on white, no site chrome, no buttons. */
+  @media print {
+    @page { size: A4; margin: 16mm 16mm 18mm; }
+    :global(body) { background: #fff !important; }
+    :global(body > *:not(main)), :global(main > *:not(.cvp)), :global(header.hd), :global(.ft), :global(.ft2), :global(.bb), :global(.sh), :global(.sh-back), :global(.nx) { display: none !important; }
+    :global(main) { padding: 0 !important; margin: 0 !important; }
+    .cvp { max-width: none; padding: 0; color: #000; }
+    .cvp h1 { font-size: 26px; margin: 4px 0 4px; }
+    .cvp-meta { margin-bottom: 14px; }
+    .cvp :global(.cvp-s) { margin-bottom: 14px; }
+    .cvp :global(.cvp-l li), .cvp :global(.cvp-t th), .cvp :global(.cvp-t td) { padding: 4px 0; font-size: 12.5px; }
+    .cvp :global(.cvp-back), .cvp-note { font-size: 11.5px; }
+    .cvp-acts, .cvp-empty { display: none !important; }
+    .cvp :global(a) { color: #000; text-decoration: none; }
+  }
+</style>

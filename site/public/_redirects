@@ -29,6 +29,23 @@
 /pt/:ed/artigos/as-escolas-internacionais-do-porto-e-de-lisboa/ /pt/:ed/artigos/a-escola-britanica-do-porto-abriu-em-1894/ 301
 /pt/:ed/artigos/sao-joao-a-noite-em-que-o-porto-nao-dorme/ /pt/:ed/artigos/o-fogo-de-sao-joao-dura-12-minutos/ 301
 /pt/:ed/artigos/vila-do-conde-o-mar-a-41-minutos-do-porto/ /pt/:ed/artigos/vila-do-conde-guarda-uma-nau-do-seculo-xvi/ 301
+# Prompt 73 (James J2-08): the Faro article is written for the Luxembourg edition only (editions: [lu]); its old addresses
+# in the other editions go to the same article on the Luxembourg edition.
+/en/fr/articles/faros-coldest-day-in-thirty-years/ /en/lu/articles/faros-coldest-day-in-thirty-years/ 301
+/fr/fr/articles/le-jour-le-plus-froid-de-faro-en-trente-ans/ /fr/lu/articles/le-jour-le-plus-froid-de-faro-en-trente-ans/ 301
+/pt/fr/artigos/o-dia-mais-frio-de-faro-em-trinta-anos/ /pt/lu/artigos/o-dia-mais-frio-de-faro-em-trinta-anos/ 301
+/en/ch/articles/faros-coldest-day-in-thirty-years/ /en/lu/articles/faros-coldest-day-in-thirty-years/ 301
+/fr/ch/articles/le-jour-le-plus-froid-de-faro-en-trente-ans/ /fr/lu/articles/le-jour-le-plus-froid-de-faro-en-trente-ans/ 301
+/pt/ch/artigos/o-dia-mais-frio-de-faro-em-trinta-anos/ /pt/lu/artigos/o-dia-mais-frio-de-faro-em-trinta-anos/ 301
+/en/br/articles/faros-coldest-day-in-thirty-years/ /en/lu/articles/faros-coldest-day-in-thirty-years/ 301
+/fr/br/articles/le-jour-le-plus-froid-de-faro-en-trente-ans/ /fr/lu/articles/le-jour-le-plus-froid-de-faro-en-trente-ans/ 301
+/pt/br/artigos/o-dia-mais-frio-de-faro-em-trinta-anos/ /pt/lu/artigos/o-dia-mais-frio-de-faro-em-trinta-anos/ 301
+/en/us/articles/faros-coldest-day-in-thirty-years/ /en/lu/articles/faros-coldest-day-in-thirty-years/ 301
+/fr/us/articles/le-jour-le-plus-froid-de-faro-en-trente-ans/ /fr/lu/articles/le-jour-le-plus-froid-de-faro-en-trente-ans/ 301
+/pt/us/artigos/o-dia-mais-frio-de-faro-em-trinta-anos/ /pt/lu/artigos/o-dia-mais-frio-de-faro-em-trinta-anos/ 301
+/en/il/articles/faros-coldest-day-in-thirty-years/ /en/lu/articles/faros-coldest-day-in-thirty-years/ 301
+/fr/il/articles/le-jour-le-plus-froid-de-faro-en-trente-ans/ /fr/lu/articles/le-jour-le-plus-froid-de-faro-en-trente-ans/ 301
+/pt/il/artigos/o-dia-mais-frio-de-faro-em-trinta-anos/ /pt/lu/artigos/o-dia-mais-frio-de-faro-em-trinta-anos/ 301
 # Prompt 66 (3 Nov 2026): the short link opens the English map (the private preview /d/f658bd1eef/ stays as it is).
 # Prompt 68 (4 Nov 2026): it opens O'rizon Living's own card on the map, with Gondomar in view (?project=).
 # p70 (J-12): it opens the page /orizon/ (site/public/orizon/index.html), which picks the visitor's edition and language.

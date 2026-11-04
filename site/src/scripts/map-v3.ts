@@ -7,7 +7,7 @@
 // "Camadas" (the panel), not removed: the layers and legend, the time slider, the budget, overlays, 2D / 3D and the tours.
 import mapCss from "maplibre-gl/dist/maplibre-gl.css?url";
 import { feature, mesh } from "topojson-client";
-import { savePlace } from "../lib/brief";
+import { savePlace, saveDwell } from "../lib/brief";
 import { track, edOf, ev, evHeart, timeBand, rememberPlace } from "../lib/track";
 import { get as savedItems } from "../lib/saved";
 import { imt as imtOf, purchase } from "../lib/sims";
@@ -122,7 +122,7 @@ export function initMapV3(root: HTMLElement) {
     set("q", qi >= 0 && P ? P.quarters[qi] : null);
     for (const k of ["golf", "beach"] as const) set(k, overlays[k] ? "1" : null);
     set("devs", mode === "page" ? (overlays.devs ? null : "0") : overlays.devs ? "1" : null);  // prompt 39 §2.1: on by default on the map page
-    history.replaceState(history.state, "", `${location.pathname}?${p}${location.hash}`);
+    history.replaceState(history.state, "", `${location.pathname}${p.size ? `?${p}` : ""}${location.hash}`);  // p73 (MI2-06): no stray "?"
   }
   // p70 (J-04): each card the reader opens on the map page is one step in the browser's history, so Back closes a place's
   // card back to the region (or the map) instead of leaving the page. The URL stays the state (?place=, ?region=, ...).
@@ -515,7 +515,7 @@ export function initMapV3(root: HTMLElement) {
   // Time on a place (part 5): from the card opening to its closing, another place, a partner card or the page hiding;
   // sent as a band (lib/track.ts TIME_BANDS), never raw milliseconds.
   let tPlace: string | null = null, t0 = 0;
-  const timeEnd = () => { if (tPlace && t0) ev({ event: "map/time", place: tPlace, band: timeBand(performance.now() - t0), origin: mode }); tPlace = null; t0 = 0; };
+  const timeEnd = () => { if (tPlace && t0) { ev({ event: "map/time", place: tPlace, band: timeBand(performance.now() - t0), origin: mode }); saveDwell(byS.get(tPlace)?.n ?? tPlace, performance.now() - t0); } tPlace = null; t0 = 0; };  // prompt 74: the time also goes to the buyer profile, on the device
   const timeStart = (slug: string) => { if (tPlace === slug) return; timeEnd(); tPlace = slug; t0 = performance.now(); };
   function select(slug: string | null, fly = true) {
     if (slug) { ev({ event: "map/place", place: slug, origin: mode }); ev({ event: "map/card/muni", place: slug, origin: mode }); }
@@ -722,7 +722,7 @@ export function initMapV3(root: HTMLElement) {
   // p70 (MI-02): next to a development's published price, the whole purchase in one figure (price, IMT, stamp duty and the
   // deed, lib/sims.ts purchase(), a non-resident buying a second home, cash); one tap opens the total-cost calculator at
   // that price. Without a published price nothing is shown (never an invented price).
-  const totalLine = (price: number) => C5.total && cfg.links.cost ? `<p class="m3-line m3-imt"><a class="m3-link" href="${esc(`${cfg.links.cost}?price=${price}&own=0&resident=0&mortgage=0`)}" data-total>${esc(C5.total.replace("{total}", eur.format(purchase(price, false, false, false).total)))} →</a></p>` : imtLine(price, "project");
+  const totalLine = (price: number) => C5.total && cfg.links.cost ? `<p class="m3-line m3-imt"><a class="m3-link" href="${esc(`${cfg.links.cost}?price=${price}&own=0&resident=0&mortgage=0`)}" data-total>${esc(C5.total.replace("{total}", eur.format(purchase(price, false, false, false).total)))} →</a>${cfg.p69?.nr ? `<small class="m3-nr" style="display:block;font-size:12.5px;opacity:.75">${esc(cfg.p69.nr)}</small>` : ""}</p>` : imtLine(price, "project");
   function arrivalHTML(slug: string, d: any, name: string, href: string, hs: Proj[]): string {
     const c5 = d.c5, P8 = cfg.p68, lang = cfg.lang;
     const arrive = d.arr?.line?.[lang] ?? c5?.line?.[lang] ?? "";
@@ -972,7 +972,8 @@ export function initMapV3(root: HTMLElement) {
     timeEnd(); selected = null; selRegion = null; if (map?.getLayer("sel")) map.setFilter("sel", ["==", ["get", "s"], ""]);
     const muni = byS.get(g.m)?.n ?? "";
     const when = g.status !== "open" ? L.golf.opening.replace("{y}", g.year || "—") : g.year;
-    let h = `<div class="m3-photo m3-photo-none m3-golfband"></div><div class="m3-sb"><p class="m3-kick">${esc([g.resort !== g.n ? g.resort : "", muni].filter(Boolean).join(" · "))}</p><h3 tabindex="-1">${esc(g.n)}</h3>`;
+    // Mike (M72-08): no photograph of the course under a licence we can use, so no picture area (never a placeholder).
+    let h = `<div class="m3-sb m3-golf-top"><p class="m3-kick">${esc([g.resort !== g.n ? g.resort : "", muni].filter(Boolean).join(" · "))}</p><h3 tabindex="-1">${esc(g.n)}</h3>`;
     h += `<dl class="m3-stats"><div><dt>${L.golf.holes}</dt><dd>${g.holes ?? "—"}</dd></div><div><dt>${L.golf.design}</dt><dd class="m3-dd-s">${esc(g.designer || "—")}</dd></div><div><dt>${g.status !== "open" ? L.golf.status : L.golf.opened}</dt><dd class="m3-dd-s">${esc(when || "—")}</dd></div></dl>`;
     h += `<div class="m3-acts"><a class="m3-btn m3-btn-p" href="${cfg.links.buy}?place=${encodeURIComponent(muni)}&budget=${Math.round(budget)}">${L.golf.homes}</a><a class="m3-btn" href="${cfg.links.consult}?place=${encodeURIComponent(muni)}">${L.card.concierge}</a></div>`;
     h += `<div class="m3-more">${g.m ? `<button type="button" class="m3-link" data-goto="${g.m}">${esc(muni)}</button>` : ""}${g.url ? `<a class="m3-link" href="${esc(g.url)}" rel="noopener" target="_blank">${L.golf.site}</a>` : ""}</div>`;
@@ -1192,6 +1193,8 @@ export function initMapV3(root: HTMLElement) {
     sheetIn.querySelector("[data-south-next]")?.addEventListener("click", async () => {
       if (nx) { southStop(i + 1); return; }
       ev({ event: "map/south/golf", origin: mode }); await setOverlay("golf", true); closeSheet();
+      // The golf layer is seen over the golf coast (the Algarve stop), wherever the tour ended.
+      const gc = S.find((z) => z.id === "algarve"); if (gc && map) map.flyTo({ center: [gc.lon, gc.lat], zoom: gc.z, bearing: flat ? 0 : gc.b, pitch: flat ? 0 : 50, duration: reduce() ? 0 : 1800, essential: true });
     });
   }
   root.querySelectorAll<HTMLButtonElement>("[data-south]").forEach((b) => b.addEventListener("click", () => southStop(0)));
