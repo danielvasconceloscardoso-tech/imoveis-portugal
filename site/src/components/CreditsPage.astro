@@ -1,0 +1,52 @@
+---
+// /credits/ (prompt 33 §1.4): the photographs that ask for a credit, linked from the footer. Prompt 73 (John J72-20): one page
+// per language (/pt/credits/, /en/credits/, /fr/credits/; /credits/ stays, in Portuguese), each line once: credits that read
+// the same (place, title, author, licence) share one line with a numbered link per photograph. Licence texts as they are.
+import "../styles/v2.css";
+import { CREDITS, type Credit } from "../lib/credits";
+import { HTML_LANG, LANGS, type Lang } from "../i18n";
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const T = {
+  pt: { title: "Créditos", h1: "Créditos das fotografias", other: "As restantes fotografias e vídeos vêm do Pixabay e do Mixkit, com licenças que não pedem crédito.", map: "Mapa",
+    prices: "Preços e rendas por m²", rate: "Taxa de juro", bounds: "Limites dos concelhos e freguesias, campos de golfe e praias", relief: "Relevo", rivers: "Rios", pd: "domínio público", lib: "Mapa" },
+  en: { title: "Credits", h1: "Photo credits", other: "The other photographs and videos come from Pixabay and Mixkit, under licences that ask for no credit.", map: "Map",
+    prices: "Prices and rents per m²", rate: "Interest rate", bounds: "Municipal and parish boundaries, golf courses and beaches", relief: "Relief", rivers: "Rivers", pd: "public domain", lib: "Map" },
+  fr: { title: "Crédits", h1: "Crédits photo", other: "Les autres photos et vidéos viennent de Pixabay et de Mixkit, sous des licences qui ne demandent pas de crédit.", map: "Carte",
+    prices: "Prix et loyers au m²", rate: "Taux d'intérêt", bounds: "Limites des communes et des paroisses, terrains de golf et plages", relief: "Relief", rivers: "Rivières", pd: "domaine public", lib: "Carte" },
+}[lang];
+const groups: { c: Credit; urls: string[] }[] = [];
+for (const x of CREDITS) {
+  const g = groups.find((y) => y.c.place === x.place && y.c.title === x.title && y.c.author === x.author && y.c.licence === x.licence && y.c.licenceUrl === x.licenceUrl);
+  if (g) { if (x.url && !g.urls.includes(x.url)) g.urls.push(x.url); } else groups.push({ c: x, urls: x.url ? [x.url] : [] });
+}
+---
+<!doctype html>
+<html lang={HTML_LANG[lang]}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{T.title} · Imóveis Portugal</title>
+    <meta name="robots" content="noindex" />
+    {LANGS.map((l) => <link rel="alternate" hreflang={HTML_LANG[l]} href={`/${l}/credits/`} />)}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <header class="hd"><div class="frame"><a class="word" href="/">Imóveis Portugal</a>
+      <p class="langs" style="margin-left:auto">{LANGS.map((l, i) => <>{i > 0 && <span aria-hidden="true">·</span>}<a href={`/${l}/credits/`} hreflang={HTML_LANG[l]} lang={HTML_LANG[l]} aria-current={l === lang ? "true" : undefined}>{l.toUpperCase()}</a></>)}</p></div></header>
+    <main class="frame read" style="padding-top:64px;padding-bottom:96px">
+      <h1>{T.h1}</h1>
+      <ul>{groups.map(({ c: x, urls }) => <li>{x.place}: {urls.length <= 1 ? (urls[0] ? <a href={urls[0]} rel="noopener">{x.title}</a> : x.title) : <>{x.title} ({urls.map((u, i) => <>{i > 0 && ", "}<a href={u} rel="noopener">{i + 1}</a></>)})</>}, {x.author}, <a href={x.licenceUrl} rel="license noopener">{x.licence}</a>.</li>)}</ul>
+      <p>{T.other}</p>
+      <h2>{T.map}</h2>
+      <ul>
+        <li>{T.prices}: <a href="https://www.ine.pt/" rel="noopener">INE, Instituto Nacional de Estatística</a>. {T.rate}: <a href="https://www.bportugal.pt/" rel="noopener">Banco de Portugal</a>.</li>
+        <li>{T.bounds}: © <a href="https://www.openstreetmap.org/copyright" rel="noopener">OpenStreetMap contributors</a>, <a href="https://opendatacommons.org/licenses/odbl/" rel="license noopener">ODbL</a>.</li>
+        <li>{T.relief}: <a href="https://registry.opendata.aws/terrain-tiles/" rel="noopener">Terrain Tiles</a> (Mapzen, AWS Open Data). EU-DEM: produced using Copernicus data and information funded by the European Union, EU-DEM layers. SRTM and GMTED2010: courtesy of the U.S. Geological Survey. ETOPO1: Amante, C. and B. W. Eakins, NOAA National Geophysical Data Center.</li>
+        <li>{T.rivers}: <a href="https://www.naturalearthdata.com/" rel="noopener">Natural Earth</a>; {T.pd}.</li>
+        <li>{T.lib}: <a href="https://maplibre.org/" rel="noopener">MapLibre GL JS</a>, BSD-3-Clause.</li>
+      </ul>
+    </main>
+  </body>
+</html>

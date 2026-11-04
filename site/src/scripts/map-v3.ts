@@ -106,7 +106,7 @@ export function initMapV3(root: HTMLElement) {
     set("q", qi >= 0 && P ? P.quarters[qi] : null);
     for (const k of ["golf", "beach"] as const) set(k, overlays[k] ? "1" : null);
     set("devs", mode === "page" ? (overlays.devs ? null : "0") : overlays.devs ? "1" : null);  // prompt 39 §2.1: on by default on the map page
-    history.replaceState(history.state, "", `${location.pathname}?${p}${location.hash}`);
+    history.replaceState(history.state, "", `${location.pathname}${p.size ? `?${p}` : ""}${location.hash}`);  // p73 (MI2-06): no stray "?"
   }
   // p70 (J-04): each card the reader opens on the map page is one step in the browser's history, so Back closes a place's
   // card back to the region (or the map) instead of leaving the page. The URL stays the state (?place=, ?region=, ...).

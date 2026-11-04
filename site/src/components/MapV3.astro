@@ -93,7 +93,7 @@ const labels = {
 };
 const mapPath = pathFor(lang, ed, "map");
 const comparePath = `${mapPath}${COMPARE_SUB[lang]}/`;
-const links = { buy: pathFor(lang, ed, "buy"), consult: pathFor(lang, ed, "consult"), map: mapPath, compare: comparePath, pages: [...pages], credits: "/credits/", imt: `${pathFor(lang, ed, "sims")}${SUB.imt[lang]}/`,
+const links = { buy: pathFor(lang, ed, "buy"), consult: pathFor(lang, ed, "consult"), map: mapPath, compare: comparePath, pages: [...pages], credits: `/${lang}/credits/`, imt: `${pathFor(lang, ed, "sims")}${SUB.imt[lang]}/`,
   // p70 (J-02): the place card's budget line opens the one-screen simulator at that budget (and the place, where it has it).
   sims: pathFor(lang, ed, "sims"), simR: SIM1_REGIONS.map((r) => r.id), cost: `${pathFor(lang, ed, "sims")}${SUB.cost[lang]}/` };
 // Prompt 71 §2 (US edition, English only): the south coast, one arrival and three stops (content/facts/map/south/stops.json;

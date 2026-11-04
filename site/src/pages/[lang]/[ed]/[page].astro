@@ -42,6 +42,8 @@ const ph = (v: string, label: string) => v || `[${label}]`;
 const PH = { pt: ["Entidade", "Morada", "n.º de registo", "n.º de IVA"], en: ["Entity", "Address", "registration no.", "VAT no."], fr: ["Entité", "Adresse", "n° d'immatriculation", "n° de TVA"] }[lang];
 const legalVars = { entity: ph(ent.name, PH[0]), address: ph(ent.address, PH[1]), register: ph(ent.register, PH[2]), vat: ph(ent.vat, PH[3]), email: config.contactEmail };
 const legal = key === "privacy" || key === "legal" ? key : null;
+// Prompt 73 (James J2-07): the community figure follows the edition. facts.csv holds one (lu-portuguese-2021, STATEC);
+// the other editions have none yet, so partners.proof.1 shows on the Luxembourg edition only.
 const luN = new Intl.NumberFormat(lang === "en" ? "en" : lang === "fr" ? "fr" : "pt-PT").format(93659);
 
 const titles: Partial<Record<PageKey, string>> = { partners: c("partners.title", lang), buy: c("buy.title", lang), how: c("how.title", lang), privacy: c("legal.privacy.title", lang), legal: c("legal.legal.title", lang) };
@@ -100,7 +102,7 @@ const site = config.agency.website.replace(/^https:\/\/|\/$/g, "");
       <section class="band" aria-labelledby="proof">
         <div class="frame split">
           <div><h2 id="proof">{c("partners.proof.h", lang)}</h2></div>
-          <div><ul class="list" style="margin-top:0">{cl("partners.proof", lang, { n: luN }).map((r) => <li>{r}</li>)}</ul></div>
+          <div><ul class="list" style="margin-top:0">{cl("partners.proof", lang, { n: luN }).filter((_, i) => i > 0 || ed === "lu").map((r) => <li>{r}</li>)}</ul></div>
         </div>
       </section>
       <section class="band white" aria-labelledby="agency">

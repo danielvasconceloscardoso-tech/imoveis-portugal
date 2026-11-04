@@ -1,0 +1,8 @@
+---
+// /pt/credits/, /en/credits/, /fr/credits/ (prompt 73, John J72-20): the credits page in the reader's language.
+import CreditsPage from "../../components/CreditsPage.astro";
+import { LANGS, type Lang } from "../../i18n";
+export function getStaticPaths() { return LANGS.map((lang) => ({ params: { lang } })); }
+const lang = Astro.params.lang as Lang;
+---
+<CreditsPage lang={lang} />

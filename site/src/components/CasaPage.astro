@@ -2,13 +2,16 @@
 // "Comprar a partir de fora, passo a passo" (prompt 13, D23; renamed in prompt 17): our version of an Ecossistema Casa for people
 // abroad. One page, one request, one consent box per partner, each naming who receives that part
 // (GDPR arts. 6(1)(a) and 7). No tying (DL 74-A/2017). Flat sponsorship only (D6), never a fee per request.
-// Until a request form exists, the button opens the reader's own email with the request written out.
+// Prompt 73 (James J2-06, Ana J2-01): the request is sent in place to /api/request (flow "concierge", the same address
+// and routing as the Concierge: worker/index.js MAIL_TO), with a ready-written email only if sending fails. One consent
+// box per recipient, naming the parts it covers (no two boxes alike). The budget is in the edition's currency.
 // Wording: COPY_DECK.md "casa.*".
 import V2 from "../layouts/V2.astro";
 import Calls from "./Calls.astro";
 import { config } from "../config";
 import { pathFor, type Lang, type EdCode } from "../i18n";
 import { c, edName } from "../lib/copy";
+import { EDITION_CUR } from "../lib/content";
 
 interface Props { lang: Lang; ed: EdCode; }
 const { lang, ed } = Astro.props;
@@ -26,7 +29,20 @@ const parts = [
   { k: "fx", name: p.fx, licence: "", tag: p.fx ? c("common.sponsored", lang) : "" },
 ];
 const label = (k: string) => c(`casa.s.${k}.h`, lang);
+const short = (k: string) => c(`casa.n.${k}`, lang);
 const subject = `${c("casa.form.subject", lang)} (${ed} · ${lang})`;
+// One consent box per recipient: the advisor, each named partner, and the Imóveis Portugal team for the parts with no
+// partner yet. "{parts}" is filled in the browser with the parts the reader ticked.
+const keep = { parts: "{parts}" };
+const groups: { id: string; parts: string[]; text: string }[] = [];
+for (const x of parts) {
+  const id = x.k === "agency" ? "agency" : x.name ? `p-${x.k}` : "team";
+  const text = x.k === "agency" ? (config.agency.public ? c("casa.form.consent", lang, { ...keep, name: config.agency.name }) : c("advisor.casa.consent", lang, keep))
+    : x.name ? c("casa.form.consent", lang, { ...keep, name: x.name }) : c("casa.form.consent.team", lang, keep);
+  const g = groups.find((y) => y.id === id); if (g) g.parts.push(x.k); else groups.push({ id, parts: [x.k], text });
+}
+const cur = EDITION_CUR[ed] ?? "EUR";
+const sym = ({ EUR: "€", USD: "$", CHF: "CHF", BRL: "R$", ILS: "₪" } as Record<string, string>)[cur];
 ---
 <V2 lang={lang} ed={ed} page="casa" title={`${c("casa.title", lang)} | Imóveis Portugal · ${edName(ed, lang)}`} description={c("casa.lede", lang)} sticky={{ href: "#pedido", label: c("casa.form.send", lang) }}>
   <div class="frame read ph">
@@ -44,22 +60,29 @@ const subject = `${c("casa.form.subject", lang)} (${ed} · ${lang})`;
       </section>
     ))}
 
-    <form class="sim casa-form" id="pedido" data-mail={config.contactEmail} data-cc={((import.meta.env.PUBLIC_AGENCY_EMAIL as string | undefined) || "").trim()} data-subject={subject} novalidate>
+    <form class="sim casa-form" id="pedido" data-mail={config.contactEmail} data-cc={((import.meta.env.PUBLIC_AGENCY_EMAIL as string | undefined) || "").trim()} data-subject={subject}
+      data-intent={c("casa.form.subject", lang)} data-ed={ed} data-lang={lang} data-cur={cur} data-sending={c("casa.form.sending", lang)} data-sent={c("casa.form.sent", lang)} novalidate>
       <h2 class="h3">{c("casa.form.h", lang)}</h2>
       <fieldset class="field">
         <legend>{c("casa.form.need", lang)}</legend>
-        {parts.map((x) => <label class="check"><input type="checkbox" name="need" value={x.k} data-label={label(x.k)} data-to={x.name || team} /> {label(x.k)}</label>)}
+        {parts.map((x) => <label class="check"><input type="checkbox" name="need" value={x.k} data-label={short(x.k)} data-to={x.name || team} /> {short(x.k)}</label>)}
       </fieldset>
       <label class="field"><span>{c("casa.form.region", lang)}</span><input type="text" name="region" autocomplete="off" /></label>
-      <label class="field"><span>{c("casa.form.budget", lang)}</span><input type="number" name="budget" inputmode="decimal" step="1000" min="0" /></label>
+      <label class="field"><span>{c("casa.form.budget", lang)} ({sym})</span><input type="number" name="budget" inputmode="decimal" step="1000" min="0" /></label>
       <label class="field"><span>{c("casa.form.when", lang)}</span><input type="text" name="when" autocomplete="off" /></label>
       <label class="field"><span>{c("casa.form.message", lang)}</span><textarea name="message" rows="3"></textarea></label>
+      <label class="field"><span>{c("casa.form.name", lang)}</span><input type="text" name="name" autocomplete="name" /></label>
+      <label class="field"><span>{c("casa.form.email", lang)}</span><input type="email" name="email" inputmode="email" autocomplete="email" required /></label>
+      <p class="small casa-err" data-err="email" role="alert" hidden>{c("casa.form.err.email", lang)}</p>
+      <input type="text" name="hp" tabindex="-1" autocomplete="off" aria-hidden="true" class="vh" />
       <fieldset class="field consents" hidden>
         <legend>{c("casa.form.consent.h", lang)}</legend>
-        {parts.map((x) => <label class="consent" data-for={x.k} hidden><input type="checkbox" name="consent" value={x.k} /> <span>{x.k === "agency" && !config.agency.public ? c("advisor.casa.consent", lang) : x.name ? c("casa.form.consent", lang, { name: x.name }) : c("casa.form.consent.team", lang)}</span></label>)}
+        {groups.map((g) => <label class="consent" data-group={g.id} data-parts={g.parts.join(" ")} hidden><input type="checkbox" name="consent" value={g.id} /> <span data-tpl={g.text}></span></label>)}
       </fieldset>
       <p class="small">{c("casa.form.tying", lang)} {c("casa.form.never", lang)}</p>
-      <a class="btn" id="casa-send" aria-disabled="true" href="#">{c("casa.form.send", lang)}</a>
+      <button type="submit" class="btn" id="casa-send" disabled>{c("casa.form.send", lang)}</button>
+      <p class="small" data-status role="status" hidden></p>
+      <p class="small casa-fallback" data-fallback hidden>{c("casa.form.fallback", lang)} <a class="btn ghost" data-mailto href="#">{c("casa.form.fallback.a", lang)}</a></p>
       <p class="small">{c("casa.form.how", lang)} <a href={pathFor(lang, ed, "privacy")}>{c("common.privacy", lang)}</a></p>
     </form>
 
@@ -74,23 +97,47 @@ const subject = `${c("casa.form.subject", lang)} (${ed} · ${lang})`;
 </V2>
 <script>
   const f = document.getElementById("pedido") as HTMLFormElement;
-  const send = document.getElementById("casa-send") as HTMLAnchorElement;
+  const send = document.getElementById("casa-send") as HTMLButtonElement;
   const box = f.querySelector(".consents") as HTMLFieldSetElement;
+  const el = (n: string) => f.elements.namedItem(n) as HTMLInputElement;
+  const needs = () => [...f.querySelectorAll<HTMLInputElement>('input[name="need"]')];
+  const groups = () => [...f.querySelectorAll<HTMLElement>(".consent[data-group]")];
   function sync() {
-    const needs = [...f.querySelectorAll<HTMLInputElement>('input[name="need"]')];
-    const chosen = needs.filter((n) => n.checked);
+    const chosen = needs().filter((n) => n.checked).map((n) => n.value);
     box.hidden = chosen.length === 0;
-    for (const n of needs) { const l = f.querySelector<HTMLElement>(`.consent[data-for="${n.value}"]`)!; l.hidden = !n.checked; if (!n.checked) (l.querySelector("input") as HTMLInputElement).checked = false; }
-    const ok = chosen.length > 0 && chosen.every((n) => f.querySelector<HTMLInputElement>(`.consent[data-for="${n.value}"] input`)!.checked);
-    send.setAttribute("aria-disabled", ok ? "false" : "true");
-    if (!ok) { send.href = "#"; return; }
-    const el = (n: string) => f.elements.namedItem(n) as HTMLInputElement;
-    const row = (n: string) => `${el(n).closest("label")?.querySelector("span")?.textContent}: ${el(n).value.trim()}`;
-    const lines = [...chosen.map((n) => `- ${n.dataset.label} → ${n.dataset.to} (✓)`), "", row("region"), row("budget"), row("when"), "", el("message").value.trim()];
-    send.href = `mailto:${f.dataset.mail}?${f.dataset.cc ? `cc=${encodeURIComponent(f.dataset.cc)}&` : ""}subject=${encodeURIComponent(f.dataset.subject || "")}&body=${encodeURIComponent(lines.join("\n"))}`;
+    for (const g of groups()) {
+      const mine = (g.dataset.parts || "").split(" ").filter((k) => chosen.includes(k));
+      g.hidden = mine.length === 0;
+      if (!mine.length) (g.querySelector("input") as HTMLInputElement).checked = false;
+      const names = mine.map((k) => f.querySelector<HTMLInputElement>(`input[name="need"][value="${k}"]`)!.dataset.label);
+      const span = g.querySelector<HTMLElement>("span[data-tpl]")!; span.textContent = (span.dataset.tpl || "").replace("{parts}", names.join(", "));
+    }
+    send.disabled = !(chosen.length > 0 && groups().filter((g) => !g.hidden).every((g) => (g.querySelector("input") as HTMLInputElement).checked));
+  }
+  function payload() {
+    const row = (n: string) => { const v = el(n).value.trim(); return v ? `${el(n).closest("label")?.querySelector("span")?.textContent}: ${v}${n === "budget" ? ` ${f.dataset.cur}` : ""}` : ""; };
+    const chosen = needs().filter((n) => n.checked);
+    const ticks = groups().filter((g) => !g.hidden).map((g) => `✓ ${g.querySelector("span")?.textContent}`);
+    const labels = [...chosen.map((n) => `${n.dataset.label} → ${n.dataset.to}`), row("region"), row("budget"), row("when"), row("message"), ...ticks].filter(Boolean);
+    return { flow: "concierge", intent: f.dataset.intent, edition: f.dataset.ed, language: f.dataset.lang, labels, name: el("name").value.trim(), email: el("email").value.trim(), page: location.pathname, hp: el("hp").value };
   }
   f.addEventListener("input", sync);
   f.addEventListener("change", sync);
-  send.addEventListener("click", (e) => { if (send.getAttribute("aria-disabled") === "true") e.preventDefault(); });
+  f.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (send.disabled) return;
+    const p = payload(), bad = !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(p.email);
+    f.querySelector<HTMLElement>('[data-err="email"]')!.hidden = !bad;
+    if (bad) { el("email").focus(); return; }
+    const status = f.querySelector<HTMLElement>("[data-status]")!, fb = f.querySelector<HTMLElement>("[data-fallback]")!;
+    send.disabled = true; status.textContent = f.dataset.sending || ""; status.hidden = false; fb.hidden = true;
+    let ok = false;
+    try { ok = (await fetch("/api/request", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(p) })).ok; } catch { ok = false; }
+    if (ok) { status.textContent = f.dataset.sent || ""; send.hidden = true; return; }
+    status.hidden = true; send.disabled = false;
+    const body = [...p.labels, "", `${p.name}`, p.email].join("\n");
+    fb.querySelector<HTMLAnchorElement>("[data-mailto]")!.href = `mailto:${f.dataset.mail}?${f.dataset.cc ? `cc=${encodeURIComponent(f.dataset.cc)}&` : ""}subject=${encodeURIComponent(f.dataset.subject || "")}&body=${encodeURIComponent(body)}`;
+    fb.hidden = false;
+  });
   sync();
 </script>

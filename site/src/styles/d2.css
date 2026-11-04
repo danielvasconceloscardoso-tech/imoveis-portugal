@@ -299,3 +299,15 @@ body.d2 .hd .tools a.btn { color: var(--accent-ink, #fbf9f4); } body.d2 .hd .too
   .h2-bar .h2-f .h2-amt { min-height: 44px; align-items: center; }
   .h2-bar .h2-go { min-height: 52px; }
 }
+
+/* Prompt 73 (James J2-01, Sophie J2-10): a phone held sideways brings the header's Concierge pill back with `display:
+   revert`, which made it an inline link and left its label at the top edge. It is a centred pill again. */
+@media (max-width: 1079px) and (orientation: landscape) and (max-height: 500px) {
+  html body.d2 header.hd .hd-cg { display: inline-flex; align-items: center; justify-content: center; line-height: 1; }
+}
+/* James J2-02: PT · EN · FR over the film reads in white (the Menu's colour, over 4.5:1 on the header's dark glass), and
+   each language is a 44 px target without changing how the row looks. */
+body.d2 .hd:not(.solid) .tools > .langs, body.d2 .hd:not(.solid) .tools > .langs a { color: #fff; }
+body.d2 .hd:not(.solid) .tools > .langs span { color: rgba(255, 255, 255, .7); }
+body.d2 .hd .tools > .langs a { position: relative; }
+body.d2 .hd .tools > .langs a::after { content: ""; position: absolute; left: 50%; top: 50%; width: 44px; height: 44px; transform: translate(-50%, -50%); }
