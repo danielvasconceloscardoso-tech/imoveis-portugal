@@ -1,12 +1,80 @@
 {
-  "_how": "Prompt 71 §2 (4 Nov 2026): the US edition's south-coast arrival on the map, read by site/src/components/MapV3.astro (ed us only). One stop each: the camera ([lon, lat, zoom, bearing]), the photograph (site/public/img/v2/<ph>-{640,1024,1600}.webp; credits in site/src/lib/credits.ts and content/media/SOURCES.md), the facts.csv ids behind the line and the number, and the drive from Lisbon (Praça do Comércio, -9.1365, 38.7077) by OSRM (router.project-osrm.org, OpenStreetMap data, checked 2026-11-04; minutes and km as returned, miles = km / 1.609). The golf counts are counted at build time from content/facts/golf/courses.csv (open courses in the listed municipalities). Wording: COPY_DECK.md p71.south.*.",
-  "from": { "name": "Lisboa, Praça do Comércio", "lon": -9.1365, "lat": 38.7077 },
+  "_how": "Prompt 71 §2 (4 Nov 2026): the US edition's south-coast arrival on the map, read by site/src/components/MapV3.astro (ed us only). Mike (M72-05): a US golfer meets the Algarve golf coast first, then Comporta, then Sines; the last stop's action turns the golf layer on over the Algarve. One stop each: the camera ([lon, lat, zoom, bearing]), the photograph (site/public/img/v2/<ph>-{640,1024,1600}.webp; credits in site/src/lib/credits.ts and content/media/SOURCES.md), the facts.csv ids behind the line and the number, and the drive from Lisbon (Praça do Comércio, -9.1365, 38.7077) by OSRM (router.project-osrm.org, OpenStreetMap data, checked 2026-11-04; minutes and km as returned, miles = km / 1.609). The golf counts are counted at build time from content/facts/golf/courses.csv (open courses in the listed municipalities). Wording: COPY_DECK.md p71.south.*.",
+  "from": {
+    "name": "Lisboa, Praça do Comércio",
+    "lon": -9.1365,
+    "lat": 38.7077
+  },
   "checked": "2026-11-04",
   "stops": [
-    { "id": "sines", "name": "Sines", "lon": -8.8697, "lat": 37.956, "z": 11.4, "b": -24, "ph": "sines-baia", "facts": ["sines-microsoft-ai-hub"], "drive": { "min": 120, "km": 161 } },
-    { "id": "comporta", "name": "Comporta", "lon": -8.7856, "lat": 38.3793, "z": 10.4, "b": -10, "ph": "comporta-mar-turquesa", "golf": ["Grândola", "Alcácer do Sal"], "drive": { "min": 97, "km": 120 } },
-    { "id": "algarve", "name": "The Algarve", "lon": -8.18, "lat": 37.09, "z": 9.2, "b": 8, "ph": "algarve-golfe-amanhecer", "facts": ["vilamoura-marina-berths", "falesia-tripadvisor-2024"],
-      "golf": ["Vila do Bispo", "Lagos", "Portimão", "Lagoa", "Silves", "Albufeira", "Loulé", "Faro", "Olhão", "Tavira", "Vila Real de Santo António", "Castro Marim", "Aljezur", "Monchique", "São Brás de Alportel", "Alcoutim"],
-      "drive": { "min": 181, "km": 265, "to": "Vilamoura marina (-8.1185, 37.0757)" } }
+    {
+      "id": "algarve",
+      "name": "The Algarve",
+      "lon": -8.18,
+      "lat": 37.09,
+      "z": 9.2,
+      "b": 8,
+      "ph": "algarve-golfe-amanhecer",
+      "facts": [
+        "vilamoura-marina-berths",
+        "falesia-tripadvisor-2024"
+      ],
+      "golf": [
+        "Vila do Bispo",
+        "Lagos",
+        "Portimão",
+        "Lagoa",
+        "Silves",
+        "Albufeira",
+        "Loulé",
+        "Faro",
+        "Olhão",
+        "Tavira",
+        "Vila Real de Santo António",
+        "Castro Marim",
+        "Aljezur",
+        "Monchique",
+        "São Brás de Alportel",
+        "Alcoutim"
+      ],
+      "drive": {
+        "min": 181,
+        "km": 265,
+        "to": "Vilamoura marina (-8.1185, 37.0757)"
+      }
+    },
+    {
+      "id": "comporta",
+      "name": "Comporta",
+      "lon": -8.7856,
+      "lat": 38.3793,
+      "z": 10.4,
+      "b": -10,
+      "ph": "comporta-mar-turquesa",
+      "golf": [
+        "Grândola",
+        "Alcácer do Sal"
+      ],
+      "drive": {
+        "min": 97,
+        "km": 120
+      }
+    },
+    {
+      "id": "sines",
+      "name": "Sines",
+      "lon": -8.8697,
+      "lat": 37.956,
+      "z": 11.4,
+      "b": -24,
+      "ph": "sines-baia",
+      "facts": [
+        "sines-microsoft-ai-hub"
+      ],
+      "drive": {
+        "min": 120,
+        "km": 161
+      }
+    }
   ]
 }

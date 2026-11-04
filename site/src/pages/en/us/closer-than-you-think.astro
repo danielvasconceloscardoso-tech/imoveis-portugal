@@ -17,8 +17,15 @@ const lang = "en" as const, ed = "us" as const;
 const k = (key: string, v: Record<string, string | number> = {}) => c(`p71.${key}`, lang, v);
 const self = "/en/us/closer-than-you-think/";
 const nf = new Intl.NumberFormat("en-US");
-const ny = CITIES.find((x) => x.id === "new-york")!;
-const heroN = ny.pt && ny.dom ? ny.pt.min! - ny.dom.min : null;
+// Mike (M72-01, M72-02): the headline follows the picked city. With a reported flight time to Lisbon (a US carrier's),
+// the one number is the difference against the domestic trip beside it; without one (TAP's routes report no time to US
+// DOT), there is nothing to set the domestic trip against, so that city shows no bars: its number is the time difference
+// (live) and its line the nonstop.
+const heroOf = (x: (typeof CITIES)[number]) => {
+  if (x.pt && x.dom) { const n = x.pt.min! - x.dom.min; return { n: k("hero.n", { n: nf.format(Math.abs(n)) }), line: k(n >= 0 ? "hero.more" : "hero.less", { n: Math.abs(n), dom: AIRPORT[x.dom.d] }), live: false }; }
+  const r = x.routes.find((z) => z.d === "LIS") ?? x.routes[0];
+  return { n: k("hero.h", { h: "5" }), line: k("hero.nonstop", { airline: r.airline, season: r.season }), live: true };
+};
 const airlines = new Set(ROUTES.map((r) => r.car));
 const cardFile = (id: string) => `/share/closer-${id}.png`;
 const hasCard = (id: string) => existsSync(join(process.cwd(), "public", "share", `closer-${id}.png`));
@@ -27,9 +34,9 @@ const mapSouth = `${pathFor(lang, ed, "map")}?tour=south`;
 // The card (prompt 71 §1.6): one per city with a reported flight time to Portugal, 1080 x 1350, drawn below as a hidden
 // template and saved as a PNG by scripts/share/closer-cards.mjs (it opens this page with ?shot=<city>).
 const shots = CITIES.filter((x) => x.pt && x.dom);
-const deltaLine = (n: number) => (n >= 0 ? k("hero.more", { n }) : k("hero.less", { n: -n }));
 // Each city's bars: the domestic trip, the flight to Portugal where a time is reported, Honolulu where it says more.
 const bars = (x: (typeof CITIES)[number]) => {
+  if (!x.pt) return [];
   const list = [x.dom && { lab: k("to", { from: AIRPORT[x.dom.o], to: AIRPORT[x.dom.d] }), min: x.dom.min, pt: false },
     x.pt && { lab: k("to", { from: AIRPORT[x.pt.o], to: AIRPORT[x.pt.d] }), min: x.pt.min!, pt: true },
     x.far && { lab: k("to", { from: AIRPORT[x.far.o], to: AIRPORT[x.far.d] }), min: x.far.min, pt: false }].filter(Boolean) as { lab: string; min: number; pt: boolean }[];
@@ -37,7 +44,7 @@ const bars = (x: (typeof CITIES)[number]) => {
   return list.map((b) => ({ ...b, w: Math.round((b.min / max) * 100) }));
 };
 ---
-<V2 lang={lang} ed={ed} page="map" title={`${k("title")} | Imóveis Portugal · USA`} description={k("desc")} paths={{ pt: self, en: self, fr: self }}
+<V2 lang={lang} ed={ed} page="map" title={`${k("title")} | Imóveis Portugal · USA`} description={k("desc")} paths={{ pt: "/pt/us/", en: self, fr: "/fr/us/" }}
   ogImage={hasCard("new-york") ? `https://${config.primaryDomain}${cardFile("new-york")}` : undefined} bodyClass="cl-page">
   <style>
     .cl { --cl-ink: #10233a; --cl-pt: #b5532b; --cl-us: #9aa7b6; }
@@ -49,7 +56,7 @@ const bars = (x: (typeof CITIES)[number]) => {
     .cl-pick { display: flex; flex-wrap: wrap; gap: 8px; margin: 34px 0 22px; padding: 0; list-style: none; }
     .cl-pick button { font: 500 15px/1 var(--sans); padding: 11px 15px; border-radius: 999px; border: 1px solid var(--rule); background: var(--card); color: var(--ink); cursor: pointer; min-height: 44px; }
     .cl-pick button[aria-pressed="true"] { background: var(--cl-ink); color: #fff; border-color: var(--cl-ink); }
-    .cl-city[hidden] { display: none; }
+    .cl-city[hidden], .cl-k[hidden], .cl-hn[hidden] { display: none; }
     .cl-bars { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; max-width: 720px; }
     .cl-bar { display: grid; gap: 6px; }
     .cl-bar span { display: flex; justify-content: space-between; gap: 12px; font: 500 15px/1.3 var(--sans); }
@@ -100,9 +107,9 @@ const bars = (x: (typeof CITIES)[number]) => {
   </style>
   <div class="cl" data-cl data-tz-tpl={k("tz")} data-now-tpl={k("now")}>
     <section class="frame cl-hero">
-      <p class="cl-k">{k("kick", { city: "New York" })}</p>
+      {CITIES.map((x, i) => <p class="cl-k" data-hero={x.id} hidden={i !== 0}>{k("kick", { city: x.name })}</p>)}
       <h1 class="cl-h1">{k("title")}</h1>
-      {heroN != null && <><p class="cl-n">{k("hero.n", { n: nf.format(heroN) })}</p><p class="cl-nl">{deltaLine(heroN)}</p></>}
+      {CITIES.map((x, i) => { const h = heroOf(x); return <div class="cl-hn" data-hero={x.id} hidden={i !== 0}><p class="cl-n" data-h={h.live ? x.tz : undefined}>{h.n}</p><p class="cl-nl">{h.line}</p></div>; })}
 
       <ul class="cl-pick" role="group" aria-label={k("pick")}>
         {CITIES.map((x, i) => <li><button type="button" data-city={x.id} aria-pressed={i === 0 ? "true" : "false"}>{x.name}</button></li>)}
@@ -112,7 +119,7 @@ const bars = (x: (typeof CITIES)[number]) => {
           <ul class="cl-bars">
             {bars(x).map((b) => <li class={`cl-bar${b.pt ? " is-pt" : ""}`} style={`--w:${b.w}%`}><span>{b.lab}<b>{hm(b.min)}</b></span><i aria-hidden="true"></i></li>)}
           </ul>
-          {!x.pt && x.routes.map((r) => <p class="cl-ns">{k("nonstop", { to: AIRPORT[r.d], airline: r.airline, season: r.season })}</p>)}
+          {!x.pt && x.routes.filter((r, j, a) => r !== (a.find((z) => z.d === "LIS") ?? a[0])).map((r) => <p class="cl-ns">{k("nonstop", { to: AIRPORT[r.d], airline: r.airline, season: r.season })}</p>)}
           <p class="cl-tz"><span data-tz-line>{k("tz", { h: "5", city: x.name })}</span><small data-now></small></p>
         </div>
       ))}
@@ -122,7 +129,7 @@ const bars = (x: (typeof CITIES)[number]) => {
       <section class="cl-night">
         <div class="frame">
           <h2>{k("night.h")}</h2>
-          <ul>{NIGHT.map((n) => <li><b>{n.dep}</b><em aria-hidden="true"></em><b>{n.arr}</b><span style="grid-column:1/-1">{k("night.l", { dep: n.dep, city: AIRPORT[n.from] === "JFK" ? "New York JFK" : AIRPORT[n.from], arr: n.arr, airline: n.airline })}</span></li>)}</ul>
+          <ul>{NIGHT.map((n) => <li><b>{n.dep}</b><em aria-hidden="true"></em><b>{n.arr}</b><span style="grid-column:1/-1">{k(n.season ? "night.ls" : "night.l", { dep: n.dep, city: AIRPORT[n.from] === "JFK" ? "New York JFK" : AIRPORT[n.from], arr: n.arr, to: AIRPORT[n.to], airline: n.airline, season: n.season ?? "" })}</span></li>)}</ul>
         </div>
       </section>
     )}
@@ -172,6 +179,8 @@ const bars = (x: (typeof CITIES)[number]) => {
         small.textContent = root.dataset.nowTpl!.replace("{t}", fmt(tz).format(now)).replace("{city}", name).replace("{t2}", fmt("Europe/Lisbon").format(now));
       });
     }
+    // A city with no reported flight time: its big number is the live time difference.
+    root.querySelectorAll<HTMLElement>("[data-h]").forEach((n) => (n.textContent = (n.textContent || "").replace(/^\d+/, String(off(n.dataset.h!)))));
     tick(); setInterval(tick, 30000);
     // ?shot=<city>: only that city's card, full size (scripts/share/closer-cards.mjs saves it as the PNG).
     const shot = new URLSearchParams(location.search).get("shot");
@@ -181,6 +190,7 @@ const bars = (x: (typeof CITIES)[number]) => {
       const id = b.dataset.city!;
       root.querySelectorAll<HTMLButtonElement>("[data-city]").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
       root.querySelectorAll<HTMLElement>("[data-panel]").forEach((p) => (p.hidden = p.dataset.panel !== id));
+      root.querySelectorAll<HTMLElement>("[data-hero]").forEach((p) => (p.hidden = p.dataset.hero !== id));
       let any = false;
       root.querySelectorAll<HTMLElement>("[data-card]").forEach((im) => { im.hidden = im.dataset.card !== id; any ||= !im.hidden; });
       const wrap = root.querySelector<HTMLElement>("[data-cardwrap]"); if (wrap) wrap.hidden = !any;

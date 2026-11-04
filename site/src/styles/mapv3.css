@@ -475,3 +475,6 @@ p.m3-tl { margin: 0; }
   .m3-page .m3-stage { min-height: 0; }
   .m3-sheet, .m3-sheet[data-detent="0"], .m3-sheet[data-detent="2"], .m3-sheet.is-arr[data-detent="1"] { height: calc(100% - 8px); }
 }
+/* Mike (M72-08): the golf card has no picture area; its text keeps clear of the close button. */
+.m3-sb.m3-golf-top { padding-top: 22px; }
+.m3-golf-top > .m3-kick, .m3-golf-top > h3 { padding-right: 52px; }
