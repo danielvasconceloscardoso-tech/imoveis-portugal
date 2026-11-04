@@ -5,7 +5,7 @@ Operator, 4 Nov 2026. Replaces the earlier draft of this prompt. Rules 15 (one l
 ## Why this matters
 1. **Maré is the asset.** Sponsors buy its readers, and a buyer pays for its list and its engagement at exit (D76).
 2. **Today it is not good enough to forward.** The operator rejected six CEO mockups.
-3. **You own the result end to end:** research, questions, design, copy, images, the game and the build.
+3. **You own the result end to end:** research, questions, design, copy, the game and the build.
 
 ## The bar
 "Imagine Claridge's and Steve Jobs created a newsletter." In practice:
@@ -48,8 +48,7 @@ Test: would the editor of How To Spend It or Monocle be jealous of it? If not, i
 ## Step 3: Ask the operator, once
 1. **One message** with your five to eight sharpest questions. Each comes with your recommended answer, so he can reply "yes".
 2. **Cover at least:**
-   - the image budget (step 5);
-   - the streak prize (step 8);
+   - the streak prize (step 7);
    - the send days (D83 says Tuesday and Friday at 8h);
    - the three newsletters he wants Maré to sit beside;
    - anything else that changes the design.
@@ -60,21 +59,10 @@ Test: would the editor of How To Spend It or Monocle be jealous of it? If not, i
 2. **Phone screenshots** of each, from the top of the issue to the bottom.
 3. **The operator picks one** (or mixes them). Only then build.
 
-## Step 5: Images and film
-Top tier and licensed, or not used. Present a costed recommendation; the operator decides on money. Hard rule 5 needs his written exception, recorded in DECISIONS.md.
-1. **A commissioned photographer and drone day in Gondomar.** Owned outright, exclusive, and it transfers to a buyer at exit. Get two or three quotes with portfolio links.
-2. **Libraries:** Artlist, Envato Elements, Stocksy, Getty or Adobe Stock. For each:
-   - price and quality;
-   - licence for email, web and social;
-   - whether the licence survives cancellation;
-   - whether it transfers to a buyer of the brand.
-3. **Free sources only when they meet the bar:** the Câmara and Porto e Norte tourism image banks, Wikimedia Commons at full resolution. Every image at least twice its display width.
-4. **The operator's five Gondomar photos** are web photos without a licence: do not publish them. Draft the permission email to the Câmara for the CEO.
-
-## Step 6: The 1 December issue, Gondomar: the story plan
+## Step 5: The 1 December issue, Gondomar: the story plan
 The reader must give it full attention from the first line and finish it in awe. Open with a question nobody can resist, pay it off, then show the place from angles nobody expects. Be creative with the formats, and propose your own. Ask the operator in step 3 whatever would change the issue.
 
-1. **The opening riddle.** "O que têm em comum Sharon Stone, a rainha Letizia e…?" The answer is Portuguese filigree, and then Gondomar: the gold, the filigree, the workshops, Topázio. The riddle is also the first game question (step 8): one tap to guess.
+1. **The opening riddle.** "O que têm em comum Sharon Stone, a rainha Letizia e…?" The answer is Portuguese filigree, and then Gondomar: the gold, the filigree, the workshops, Topázio. The riddle is also the first game question (step 7): one tap to guess.
    **Verify every name before using it.** Google's AI overview gave the operator these claims, and they do not all hold:
    - Queen Letizia wore gold filigree earrings at the 2018 Madrid reception for President Marcelo Rebelo de Sousa (¡Hola!, 18 Apr 2018), but the maker is not named;
    - the "Sharon Stone" Viana-heart medallion is sold by Filigrana Portuguesa, whose address is in Penafiel, not Gondomar, with no date or occasion;
@@ -99,7 +87,7 @@ The reader must give it full attention from the first line and finish it in awe.
    
    Choose by what holds attention on a phone. A four-minute read stays the goal; propose what to cut.
 
-## Step 7: The copy
+## Step 6: The copy
 1. **Voice:** Cigar Aficionado plus How To Spend It.
 2. **Method:** Mariana van Zeller's. Pick one thread and follow it to the source with primary data, names, places and numbers. Here that thread is the gold: from the bench of a one-person workshop, to the hallmark at the assay office, to a shop window in Hong Kong. Then the people and businesses that make the place.
 3. **Rules:**
@@ -119,10 +107,10 @@ The reader must give it full attention from the first line and finish it in awe.
 6. **Every fact goes into content/facts/facts.csv** with its source and date.
 7. **Three subject lines:** specific, no slop.
 
-## Step 8: The game, answered and rewarded the same day
+## Step 7: The game, answered and rewarded the same day
 Design it like a game designer, with a concierge's manners: no badges, no confetti, no red alerts.
 1. **One tap in the email answers.** A Pages Function records the first tap per issue and opens a beautiful page: right or wrong, the one-line why, the reader's streak, and how the other readers voted.
-2. **The questions are about the place and the market in the issue,** so playing teaches. The opening riddle (step 6) is question one.
+2. **The questions are about the place and the market in the issue,** so playing teaches. The opening riddle (step 5) is question one.
 3. **Five correct answers in a row unlock a prize at once,** on that page. Propose three prizes that cost no human time and produce a data signal, for example:
    - a personal market analysis of the concelho the reader chooses, generated from our data (describe, never advise);
    - early access to a new map feature;
@@ -136,7 +124,7 @@ Design it like a game designer, with a concierge's manners: no badges, no confet
    - update the privacy policy in the same pass;
    - verify beehiiv's merge tag for the subscriber id, and that one tap works in Gmail, Apple Mail and Outlook.
 
-## Step 9: Build the golden sample (rule 17)
+## Step 8: Build the golden sample (rule 17)
 1. **Check beehiiv first.** Verify what the free plan can send: custom HTML and CSS, web fonts (most email apps fall back), image widths, dark mode. Design within it and report what it cannot do.
 2. **Build the 1 December issue** in PT as a beehiiv draft (never sent), inside the D83 pipeline so the site page matches the email.
 3. **Write the acceptance list before you check.** It covers at least:
@@ -151,9 +139,8 @@ Design it like a game designer, with a concierge's manners: no badges, no confet
 1. Your questions and his answers.
 2. The three directions and the one chosen.
 3. Screenshots of the sample.
-4. The image recommendation, with prices and quotes.
-5. The list of people and companies, with sources.
-6. What beehiiv or the email apps could not do, and anything you did not ship rather than ship a weaker version.
+4. The list of people and companies, with sources.
+5. What beehiiv or the email apps could not do, and anything you did not ship rather than ship a weaker version.
 
 ## Don'ts
 1. Do not start from any earlier Maré mockup.
