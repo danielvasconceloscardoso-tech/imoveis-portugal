@@ -51,10 +51,10 @@ Test: would the editor of How To Spend It or Monocle be jealous of it? If not, i
 2. **Never put a design choice in a question:** fonts, colours, layout and look are shown as the three directions in step 4, built from your research. They are not answered with "yes".
 3. **Already decided, do not ask again:**
    - his references: How To Spend It (the Ghent story on ft.com), Cigar Aficionado, Hodinkee, and the Substack "The Art of Being a Regular"; the bar is Claridge's plus Apple;
-   - the prize: a free market analysis of the concelho the reader chooses (step 7);
+   - send days: Tuesday and Friday (operator, 4 Nov; D83 stands);
    - the game pays out the same day (step 7);
    - Diogo Jota, recognition only (step 5).
-4. **Ask at least:** the send days (D83 says Tuesday and Friday at 8h).
+4. **Ask only what is left** after the list above.
 5. **Then work without stopping** until step 4.
 
 ## Step 4: Three directions, then one
@@ -110,23 +110,34 @@ The reader must give it full attention from the first line and finish it in awe.
 6. **Every fact goes into content/facts/facts.csv** with its source and date.
 7. **Three subject lines:** specific, no slop.
 
-## Step 7: The game: five in a row, prize the same morning
-Design it like a game designer, with a concierge's manners: no badges, no confetti, no red alerts.
-1. **Five questions per issue, played in one sitting.**
-   - Question one is in the email (the opening riddle, step 5): one tap.
-   - The tap opens a page that serves questions two to five at once, one tap each.
-   - Five correct in a row unlocks the prize there and then. A wrong answer ends that run; the reader can play again with the next issue.
-   - No streak spread over weeks, and no answer "on Friday".
-2. **After each tap:** right or wrong, the one-line why, and how the other readers voted.
-3. **The questions are about the place and the market in the issue,** so playing teaches.
-4. **The prize (operator, 4 Nov):** a free market analysis of the concelho the reader chooses, generated from our data and delivered at once on the page. Describe, never advise (EDITORIAL_POLICY.md). It costs no human time.
-5. **The photo challenge** can be one of the five: tap one of four places, and the answer is revealed at once.
+## Step 7: The game: a rush every Tuesday and Friday, prizes the same day
+The operator wants readers to feel a rush, with prizes that are free for us (no cash cost) and worth having for them.
+1. **Research first.** Search online for the games and rewards that work best and say why:
+   - newsletter games and referral programmes (Morning Brew, The Hustle, Axios, The Skimm);
+   - NYT Games and Wordle, Duolingo streaks, the Robinhood free-stock lottery, scratch cards, mystery boxes;
+   - airline and hotel loyalty tiers.
+   
+   Extract the mechanics: instant feedback, variable rewards, near-misses, scarcity ("the first 50"), streaks, levels, rankings by edition, sharing a result.
+2. **Prizes free for us,** at least ten ideas, ranked. For example:
+   - digital: a market analysis of the concelho the reader chooses, generated from our data; early access; the reader's name in the next issue;
+   - given by partners in exchange for exposure: a filigree piece from a Gondomar workshop, a Topázio piece, a dinner, a hotel night, a session with a partner;
+   - status: a reader level that unlocks something.
+   
+   Partner prizes are arranged by the CEO: list who to ask and what they get.
+3. **The rules of play:**
+   - the reader answers in the email with one tap;
+   - the page that opens carries the run on;
+   - the prize is unlocked the same day, never "on Friday";
+   - a run of five correct in one sitting is the baseline. Improve on it with what the research shows.
+4. **Manners:** the rush comes from the stakes and the reveal, not from noise. No confetti, no red alerts, no fake countdowns.
+5. **The questions are about the place and the market in the issue,** so playing teaches. The opening riddle (step 5) is question one. The photo challenge can be one of them.
 6. **Signals and data (DESIGN_AND_DATA.md):**
-   - each answer, each completed run, the prize claimed and the concelho chosen feed the consented profile;
+   - every answer, run, level and prize claimed feeds the consented profile;
    - store a hashed subscriber id in D1 or KV, never in the repo;
    - update the privacy policy in the same pass;
    - verify beehiiv's merge tag for the subscriber id, and that one tap works in Gmail, Apple Mail and Outlook;
-   - if the operator must create the D1 or KV store, send him the exact steps.
+   - if the operator must create the store, send him the exact steps.
+7. **Show the operator** the three best game designs with their prizes, as phone screenshots next to the three directions (step 4). He picks.
 
 ## Photos and the home block
 1. **Photos:** the operator decides the source.
