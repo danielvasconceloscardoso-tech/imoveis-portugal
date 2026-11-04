@@ -35,5 +35,5 @@
 /orizon /orizon/ 302
 # Prompt 71 §3 (4 Nov 2026): Arrow Global / Details on the US map, ready and switched off while their projects are pending.
 # Prompt 72 switches it on (with `pending: false` in content/developers/projects.json): remove the "# " from the two lines.
-# /arrow /en/us/map/?pins=the-uncommon,springs-els-club,palmares 302
-# /arrow/ /en/us/map/?pins=the-uncommon,springs-els-club,palmares 302
+/arrow /en/us/map/?pins=the-uncommon,springs-els-club,palmares 302
+/arrow/ /en/us/map/?pins=the-uncommon,springs-els-club,palmares 302
