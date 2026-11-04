@@ -475,3 +475,23 @@ p.m3-tl { margin: 0; }
   .m3-page .m3-stage { min-height: 0; }
   .m3-sheet, .m3-sheet[data-detent="0"], .m3-sheet[data-detent="2"], .m3-sheet.is-arr[data-detent="1"] { height: calc(100% - 8px); }
 }
+/* p70 r3 (J72-14): on the /arrow view (?pins=) the picks' chips stack one under the other rather than hide (map-v3.ts). */
+.m3-pin-t { margin-top: calc(3px + var(--chip-y, 0px)); }
+/* p70 r3 (J2-06, J72-24): a development's photograph waits on its own pin photograph (already loaded), never an empty box. */
+.m3-sheet img[style*="background-image"] { background-size: cover; background-position: center; }
+/* p70 r3 (J72-11): a card without a photograph keeps its heart clear of the close button. */
+.m3-sheet-in > .m3-sb:first-child .ht-row { padding-right: 48px; }
+/* p70 r3 (J72-21): a phone held sideways sees the name, the price and the button beside a shorter photograph. */
+@media (max-height: 500px) and (orientation: landscape) {
+  .m3-sheet .m3-hero-top, .m3-sheet .m3-photo, .m3-sheet .m3-gal-t .m3-photo, .m3-sheet .m3-dev-f img { aspect-ratio: auto !important; height: 34vh; }
+  /* A development's card: the photograph beside the name, price and button. */
+  .m3-sheet-in:has(> .m3-hero-top) { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); column-gap: 16px; align-items: start; }
+  .m3-sheet-in > .m3-hero-top { margin: 0; width: 100%; height: auto; aspect-ratio: 4 / 3 !important; border-radius: 14px; position: sticky; top: 0; }
+  .m3-sheet-in:has(> .m3-hero-top) > .m3-sb { padding-top: 0; }
+  .m3-sheet-in:has(> .m3-hero-top) h2.m3-h { font-size: 26px; }
+  .m3-sheet-in:has(> .m3-hero-top) .ht-row { padding-right: 48px; }
+}
+/* p70 r3 (M72-10): on a tablet the region postcards step aside while a card is open, so they never cover its pins. */
+@media (min-width: 820px) and (max-width: 1079px) { .m3:has(.m3-sheet.is-open) .m3-cards { opacity: 0; transform: translateX(-16px); pointer-events: none; } }
+/* p70 r3 (J2-08, Ana): below the map, the page's text starts above the tab bar's top edge, so none of it shows through it. */
+@media (max-width: 1079px) { body.has-bb.m3p .m3-after { padding-top: calc(48px + 62px + env(safe-area-inset-bottom)); } }

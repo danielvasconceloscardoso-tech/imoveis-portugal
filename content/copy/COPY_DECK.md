@@ -2926,6 +2926,16 @@ How to edit:
 - EN: Searching…
 - FR: Recherche…
 
+### wait.line
+- PT: A ligação está lenta. O cartão abre assim que chegar.
+- EN: The connection is slow. The card opens as soon as it arrives.
+- FR: La connexion est lente. La fiche s'ouvre dès qu'elle arrive.
+
+### wait.btn
+- PT: Tentar de novo
+- EN: Try again
+- FR: Réessayer
+
 
 
 
@@ -9362,9 +9372,9 @@ Operator's step 1 (3 Nov 2026): the golden sample place card (Gondomar first). F
 - FR: Photographies : auteurs et licences sur la page des crédits.
 
 ### src.km
-- PT: Praia, aeroporto, escola e hospital: distâncias em linha reta, calculadas por nós (APA, OpenStreetMap, SNS), até termos os tempos de carro deste concelho.
-- EN: Beach, airport, school and hospital: straight-line distances calculated by us (APA, OpenStreetMap, SNS), until we have this municipality's driving times.
-- FR: Plage, aéroport, école et hôpital : distances à vol d'oiseau calculées par nous (APA, OpenStreetMap, SNS), en attendant les temps en voiture de cette commune.
+- PT: Distâncias em linha reta, calculadas por nós até termos os tempos de carro deste concelho: praia e aeroporto a partir da câmara municipal (APA, OpenStreetMap), escola e hospital a partir do centro do concelho (SNS, OpenStreetMap).
+- EN: Straight-line distances, calculated by us until we have this municipality's driving times: beach and airport from the town hall (APA, OpenStreetMap), school and hospital from the middle of the municipality (SNS, OpenStreetMap).
+- FR: Distances à vol d'oiseau, calculées par nous en attendant les temps en voiture de cette commune : plage et aéroport depuis la mairie (APA, OpenStreetMap), école et hôpital depuis le centre de la commune (SNS, OpenStreetMap).
 
 ### preview
 - PT: O que está na análise de {place}
@@ -9997,9 +10007,9 @@ Prompt 68 (4 Nov 2026), the method's worked example (content/METHOD.md): a place
 - FR: Un hôpital à {v} min
 
 ### q.sea
-- PT: O mar a {v} km em linha reta
-- EN: The sea {v} km away as the crow flies
-- FR: La mer à {v} km à vol d'oiseau
+- PT: O mar a {v} km do centro, em linha reta
+- EN: The sea {v} km from town, as the crow flies
+- FR: La mer à {v} km du centre, à vol d'oiseau
 
 ### q.sea.min
 - PT: O mar a {v} min
