@@ -31,6 +31,10 @@ Goes live under D67, except section 3, which waits for the operator's go. Follow
    - Sines: Microsoft's AI hub, about €8.6B / $10B (ECO and Dinheiro Vivo, Nov 2025);
    - Comporta;
    - the Algarve golf coast.
+   
+   Add two facts to the Algarve stop, each with its source:
+   - Praia da Falésia: number 1 in Tripadvisor's Travellers' Choice best beaches in the world, 2024;
+   - Vilamoura: Portugal's largest marina, about 845 berths.
 2. **Each stop:** one photograph, one line, one number, and its distance from Lisbon.
 3. **Golf layer:** every course on the Algarve and Comporta coast with its name, its holes and its architect where published. Check that Arrow's courses (Details) are named correctly.
 
@@ -43,6 +47,10 @@ The operator has no material from Arrow yet.
    - Palmares Ocean Living & Golf (Lagos, 27 holes, Robert Trent Jones Jr., bought for €400M);
    - their hotels;
    - Restart SCR ("Pathway to Portugal", a Golden Visa fund for Americans and Canadians).
+   - their own websites, studied page by page:
+     - vilamouraworld.com: The Uncommon Beach Residences (the last seafront project in the Golden Triangle; beach club, country club, concierge), Springs at the Els Club (78 villas and townhouses by Norfin, due Q4 2027), the Nova Marina for superyachts;
+     - elsclubvilamoura.com;
+     - Palmares' own site.
 2. **Prepare in projects.json,** with published facts and prices only:
    - the Els Club Vilamoura;
    - Palmares Ocean Living & Golf;
