@@ -13,9 +13,14 @@ import { demoProjects, img } from "../../../lib/projects";
 import { PRICES, LAST } from "../../../lib/prices";
 import { FACTS } from "../../../lib/content";
 import { purchase } from "../../../lib/sims";
+import { PREVIEWS, type Preview } from "../../../lib/previews";
+import ProjectPreview from "../../../components/ProjectPreview.astro";
 
-export function getStaticPaths() { return DEMOS.map((d) => ({ params: { token: d.token } })); }
-const d = DEMOS.find((x) => x.token === Astro.params.token)!;
+// Prompt 71 §3: the same address also serves a project preview (lib/previews.ts), drawn by ProjectPreview.astro; the demo's
+// own data then stays the first demo's, unused.
+export function getStaticPaths() { return [...DEMOS.map((d) => ({ params: { token: d.token } })), ...PREVIEWS.map((p) => ({ params: { token: p.token }, props: { preview: p } }))]; }
+const preview = (Astro.props as { preview?: Preview }).preview;
+const d = DEMOS.find((x) => x.token === Astro.params.token) ?? DEMOS[0];
 const layers = JSON.parse(readFileSync(join(process.cwd(), "src", "data", "layers.json"), "utf8"));
 const nf = new Intl.NumberFormat("en-US"), nf1 = new Intl.NumberFormat("en-US", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 const money = (v: number, cur = "EUR") => new Intl.NumberFormat("en-US", { style: "currency", currency: cur, maximumFractionDigits: 0 }).format(v);
@@ -39,6 +44,7 @@ const checkedMain = main.map((p) => p.checked).filter(Boolean).sort().pop() ?? c
 const priceOf = (p: (typeof ps)[number]) => (p.from ? `From ${money(p.from)}` : "Price on request") + (p.from && p.units?.some((u) => !u.price) ? " · each home on request" : "");
 const steps = walkSteps(d);
 ---
+{preview ? <ProjectPreview p={preview} /> : (
 <Demo title={`Private preview · ${d.developer} · Imóveis Portugal`} developer={d.developer} accent={d.accent}>
   <style is:global>
     .dp-cover img { width: 100%; height: min(78vh, 820px); object-fit: cover; display: block; }
@@ -153,3 +159,4 @@ const steps = walkSteps(d);
   <div class="final"><p>Your buyers, wherever they live.</p><span class="flag">Imóveis Portugal</span><p class="small" style="font:400 13px/1 var(--sans);margin-top:16px">Launching 1 December 2026</p></div>
   <div class="wrap" style="padding-bottom:40px"><p class="src">Homes, prices and images: {d.developer}, as published ({checked}). {d.sources.map((x) => x.t).join("; ")}. Item sources: {sources.map((u, i) => <>{i > 0 && " · "}<a href={u} rel="noopener">{u}</a></>)}</p></div>
 </Demo>
+)}

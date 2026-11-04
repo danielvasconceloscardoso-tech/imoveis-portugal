@@ -1653,6 +1653,179 @@
     "https://nominatim.openstreetmap.org/reverse?lat=41.3711&lon=-8.7454&format=json",
     "https://www.openstreetmap.org/#map=15/41.3711/-8.7454"
    ]
+  },
+  {
+   "id": "the-uncommon",
+   "name": "The Uncommon Beach Residences",
+   "developer": "Vilamoura World (Arrow Global / Details)",
+   "devSlug": "vilamoura-world",
+   "muni": "loule",
+   "near": [
+    "Vilamoura",
+    "Quarteira"
+   ],
+   "lon": -8.107,
+   "lat": 37.0725,
+   "line": "92 beachfront apartments, T1 to T4, of 64 to 251 m², at the east end of Vilamoura beach, with outdoor pools, concierge, housekeeping and maintenance, A+ energy certification and a solar self-consumption community; from €740,000 as published.",
+   "lines": {
+    "pt": "92 apartamentos junto à praia, de T1 a T4, de 64 a 251 m², no extremo nascente da praia de Vilamoura, com piscinas exteriores, concierge, limpeza e manutenção, certificado energético A+ e comunidade solar de autoconsumo; desde 740 000 €, como publicado.",
+    "en": "92 beachfront apartments, T1 to T4, of 64 to 251 m², at the east end of Vilamoura beach, with outdoor pools, concierge, housekeeping and maintenance, A+ energy certification and a solar self-consumption community; from €740,000 as published.",
+    "fr": "92 appartements en front de mer, du T1 au T4, de 64 à 251 m², à l'extrémité est de la plage de Vilamoura, avec piscines extérieures, conciergerie, ménage et entretien, certificat énergétique A+ et communauté solaire d'autoconsommation ; à partir de 740 000 €, tel que publié."
+   },
+   "summary": {
+    "pt": "92 apartamentos · T1 a T4 · junto à praia",
+    "en": "92 apartments · T1 to T4 · beachfront",
+    "fr": "92 appartements · T1 à T4 · front de mer"
+   },
+   "hero": {
+    "pt": "92 apartamentos junto à praia, em Vilamoura.",
+    "en": "92 beachfront apartments in Vilamoura.",
+    "fr": "92 appartements en front de mer, à Vilamoura."
+   },
+   "heroImg": "/img/developers/the-uncommon/rooftop-sea",
+   "render": "/img/developers/the-uncommon/rooftop-sea",
+   "credit": "Arrow Global / Details (render, vilamouraworld.com)",
+   "from": 740000,
+   "typologies": [
+    "T1",
+    "T2",
+    "T3",
+    "T4"
+   ],
+   "delivery": null,
+   "url": "https://www.vilamouraworld.com/real-estate/the-uncommon/",
+   "sources": [
+    "https://www.vilamouraworld.com/real-estate/the-uncommon/",
+    "https://www.vilamouraworld.com/wp-content/uploads/2025/10/Mapa-de-Vilamoura-5-25_EN-min-02.png"
+   ],
+   "locationNote": "Pin placed from the developer's own map of Vilamoura (east end of Vilamoura beach); approximate.",
+   "partner": true,
+   "pending": true,
+   "demo": "a7c3e91f42",
+   "checked": "2026-11-04",
+   "tag": {
+    "pt": "Seleção",
+    "en": "Our pick",
+    "fr": "Sélection"
+   },
+   "region": "Algarve"
+  },
+  {
+   "id": "springs-els-club",
+   "name": "Springs at The Els Club",
+   "developer": "Vilamoura World (Arrow Global / Details)",
+   "devSlug": "vilamoura-world",
+   "muni": "loule",
+   "near": [
+    "Vilamoura",
+    "Quarteira"
+   ],
+   "lon": -8.144,
+   "lat": 37.104,
+   "line": "78 homes beside The Els Club Vilamoura: three- and four-bedroom villas and two- and three-bedroom townhouses, with a country club (reception, lounge, kids club, bar, restaurant, gym, spa with indoor pool, sauna and Turkish bath, and a lazy river). The developer publishes no prices.",
+   "lines": {
+    "pt": "78 casas junto ao The Els Club Vilamoura: moradias de três e quatro quartos e casas em banda de dois e três quartos, com um country club (receção, lounge, kids club, bar, restaurante, ginásio, spa com piscina interior, sauna e banho turco, e um lazy river). O promotor não publica preços.",
+    "en": "78 homes beside The Els Club Vilamoura: three- and four-bedroom villas and two- and three-bedroom townhouses, with a country club (reception, lounge, kids club, bar, restaurant, gym, spa with indoor pool, sauna and Turkish bath, and a lazy river). The developer publishes no prices.",
+    "fr": "78 logements à côté de The Els Club Vilamoura : villas de trois et quatre chambres et maisons de ville de deux et trois chambres, avec un country club (réception, lounge, kids club, bar, restaurant, salle de sport, spa avec piscine intérieure, sauna et hammam, et une lazy river). Le promoteur ne publie pas de prix."
+   },
+   "summary": {
+    "pt": "78 casas · moradias e casas em banda · golfe",
+    "en": "78 homes · villas and townhouses · golf",
+    "fr": "78 logements · villas et maisons de ville · golf"
+   },
+   "hero": {
+    "pt": "78 moradias e casas em banda junto ao The Els Club.",
+    "en": "78 villas and townhouses beside The Els Club.",
+    "fr": "78 villas et maisons de ville à côté de The Els Club."
+   },
+   "heroImg": "/img/developers/springs-els-club/townhouses",
+   "render": "/img/developers/springs-els-club/townhouses",
+   "credit": "Arrow Global / Details (render, vilamouraworld.com)",
+   "from": null,
+   "typologies": [
+    "T2",
+    "T3",
+    "T4"
+   ],
+   "delivery": null,
+   "url": "https://www.vilamouraworld.com/real-estate/springs-els-club/",
+   "sources": [
+    "https://www.vilamouraworld.com/real-estate/springs-els-club/",
+    "https://www.vilamouraworld.com/real-estate/the-els-club-estates/",
+    "https://www.theelsclubvilamoura.com/"
+   ],
+   "locationNote": "Pin beside The Els Club course (its OpenStreetMap outline); the developer says 'neighbouring The Els Club' and publishes no address; approximate.",
+   "partner": true,
+   "pending": true,
+   "demo": "a7c3e91f42",
+   "checked": "2026-11-04",
+   "tag": {
+    "pt": "Seleção",
+    "en": "Our pick",
+    "fr": "Sélection"
+   },
+   "region": "Algarve"
+  },
+  {
+   "id": "palmares",
+   "name": "Palmares Ocean Living & Golf",
+   "developer": "Palmares Ocean Living & Golf (Arrow Global / Details)",
+   "devSlug": "palmares",
+   "muni": "lagos",
+   "near": [
+    "Lagos",
+    "Odiáxere",
+    "Alvor",
+    "Portimão"
+   ],
+   "lon": -8.64133,
+   "lat": 37.12641,
+   "line": "A resort above Meia Praia and the Alvor estuary: a 27-hole course by Robert Trent Jones Jr. (three nines: Alvor, Lagos, Praia) and homes by RCR Arquitectes. Signature Residences: 29 apartments from €630,000; Signature Apartments II, under construction: 44 apartments from €600,000; sea-view plots from €1,100,000; the 20-room Beach House hotel.",
+   "lines": {
+    "pt": "Um resort sobre a Meia Praia e o estuário do Alvor: um campo de 27 buracos de Robert Trent Jones Jr. (três voltas de nove: Alvor, Lagos, Praia) e casas da RCR Arquitectes. Signature Residences: 29 apartamentos desde 630 000 €; Signature Apartments II, em construção: 44 apartamentos desde 600 000 €; lotes com vista mar desde 1 100 000 €; o hotel Beach House, de 20 quartos.",
+    "en": "A resort above Meia Praia and the Alvor estuary: a 27-hole course by Robert Trent Jones Jr. (three nines: Alvor, Lagos, Praia) and homes by RCR Arquitectes. Signature Residences: 29 apartments from €630,000; Signature Apartments II, under construction: 44 apartments from €600,000; sea-view plots from €1,100,000; the 20-room Beach House hotel.",
+    "fr": "Un resort au-dessus de Meia Praia et de l'estuaire d'Alvor : un parcours de 27 trous de Robert Trent Jones Jr. (trois boucles de neuf : Alvor, Lagos, Praia) et des logements de RCR Arquitectes. Signature Residences : 29 appartements à partir de 630 000 € ; Signature Apartments II, en construction : 44 appartements à partir de 600 000 € ; terrains avec vue mer à partir de 1 100 000 € ; l'hôtel Beach House, de 20 chambres."
+   },
+   "summary": {
+    "pt": "27 buracos · apartamentos e lotes · Lagos",
+    "en": "27 holes · apartments and plots · Lagos",
+    "fr": "27 trous · appartements et terrains · Lagos"
+   },
+   "hero": {
+    "pt": "27 buracos e casas da RCR Arquitectes sobre a baía de Lagos.",
+    "en": "27 holes and homes by RCR Arquitectes above Lagos Bay.",
+    "fr": "27 trous et des logements de RCR Arquitectes au-dessus de la baie de Lagos."
+   },
+   "heroImg": "/img/developers/palmares/aerial-golf",
+   "render": "/img/developers/palmares/aerial-golf",
+   "credit": "Arrow Global / Details (render, palmaresliving.com)",
+   "from": 600000,
+   "typologies": [
+    "T1",
+    "T2",
+    "T3"
+   ],
+   "delivery": null,
+   "url": "https://www.palmaresliving.com/real-estate/",
+   "sources": [
+    "https://www.palmaresliving.com/",
+    "https://www.palmaresliving.com/real-estate/",
+    "https://www.palmaresliving.com/real-estate/signature-residences-3/",
+    "https://www.palmaresliving.com/real-estate/singature-apartments-2/",
+    "https://www.palmaresliving.com/real-estate/plots/",
+    "https://www.palmaresliving.com/golf/golf-course/",
+    "https://www.palmaresliving.com/masterplan/"
+   ],
+   "partner": true,
+   "pending": true,
+   "demo": "a7c3e91f42",
+   "checked": "2026-11-04",
+   "tag": {
+    "pt": "Seleção",
+    "en": "Our pick",
+    "fr": "Sélection"
+   },
+   "region": "Algarve"
   }
  ]
 }

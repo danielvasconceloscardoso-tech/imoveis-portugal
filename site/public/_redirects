@@ -33,3 +33,7 @@
 # Prompt 68 (4 Nov 2026): it opens O'rizon Living's own card on the map, with Gondomar in view (?project=).
 /orizon /en/lu/map/?project=orizon 302
 /orizon/ /en/lu/map/?project=orizon 302
+# Prompt 71 §3 (4 Nov 2026): Arrow Global / Details on the US map, ready and switched off while their projects are pending.
+# Prompt 72 switches it on (with `pending: false` in content/developers/projects.json): remove the "# " from the two lines.
+# /arrow /en/us/map/?pins=the-uncommon,springs-els-club,palmares 302
+# /arrow/ /en/us/map/?pins=the-uncommon,springs-els-club,palmares 302
