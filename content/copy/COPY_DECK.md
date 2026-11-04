@@ -10085,6 +10085,26 @@ Prompt 69 (4 Nov 2026), the Concierge in three steps and IMT explained where the
 - PT: Prefiro combinar por email
 - EN: I'd rather agree a time by email
 - FR: Je préfère convenir d'une heure par e-mail
+### visit.title
+- PT: Marcar uma visita privada
+- EN: Book a private visit
+- FR: Réserver une visite privée
+### visit.when
+- PT: Quando lhe podemos ligar para marcar a visita?
+- EN: When can we call you to arrange the visit?
+- FR: Quand pouvons-nous vous appeler pour organiser la visite ?
+### visit.done
+- PT: O consultor liga-lhe a essa hora para marcar a visita a {name}.
+- EN: The advisor calls you at that time to arrange the visit to {name}.
+- FR: Le conseiller vous appelle à cette heure-là pour organiser la visite de {name}.
+### visit.done.later
+- PT: O consultor escreve-lhe por email para marcar a visita a {name}.
+- EN: The advisor emails you to arrange the visit to {name}.
+- FR: Le conseiller vous écrit par e-mail pour organiser la visite de {name}.
+### visit.intent
+- PT: Visita privada a {name} (ligar para marcar)
+- EN: Private visit to {name} (call to arrange)
+- FR: Visite privée de {name} (appeler pour organiser)
 
 ### tz
 - PT: Horas {ofcity}, com Lisboa por baixo.
@@ -10145,6 +10165,10 @@ Prompt 69 (4 Nov 2026), the Concierge in three steps and IMT explained where the
 - PT: Retirar
 - EN: Remove
 - FR: Retirer
+### slot.kept
+- PT: Guardámos as horas que escolheu.
+- EN: We kept the times you chose.
+- FR: Nous avons gardé les horaires choisis.
 
 ### reach
 - PT: Como chegamos até si?
@@ -10177,14 +10201,22 @@ Prompt 69 (4 Nov 2026), the Concierge in three steps and IMT explained where the
 - FR: Votre demande part chez Imóveis Portugal et chez un conseiller qualifié, qui vous écrit par e-mail pour convenir d'une heure.
 
 ### phone
-- PT: Telefone (ligamos para este número)
-- EN: Phone (we call this number)
-- FR: Téléphone (nous appelons ce numéro)
+- PT: Telefone
+- EN: Phone
+- FR: Téléphone
 
 ### email
-- PT: Email (para a confirmação)
-- EN: Email (for the confirmation)
-- FR: E-mail (pour la confirmation)
+- PT: Email
+- EN: Email
+- FR: E-mail
+### req
+- PT: obrigatório
+- EN: required
+- FR: obligatoire
+### cc
+- PT: Indicativo do país
+- EN: Country code
+- FR: Indicatif du pays
 
 ### err.name
 - PT: Indique o seu nome.
@@ -10275,6 +10307,10 @@ Prompt 69 (4 Nov 2026), the Concierge in three steps and IMT explained where the
 - PT: IMT a {price}? {imt} sem residência fiscal.
 - EN: IMT at {price}? {imt} as a non-resident.
 - FR: L'IMT à {price} ? {imt} pour un non-résident.
+### total.nr
+- PT: não residente, sem crédito
+- EN: non-resident, no mortgage
+- FR: non-résident, sans crédit
 
 ### imt.title
 - PT: O IMT, explicado

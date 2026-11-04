@@ -85,7 +85,7 @@ export function flowConfig(id: FlowId, lang: Lang, ed: EdCode, hidden: Record<st
   // Prompt 69: the words the three steps, the confirmation, the preparation and the IMT line need in the browser.
   const P69 = id === "concierge" ? Object.fromEntries(["help.ctx", "help.about", "help.project", "help.place", "help.placebudget", "help.budget", "tz", "tz.same", "tz.change", "tz.zone",
     "tz.lisbon", "tz.next", "tz.prev", "slot.day", "slot.time", "slot.picked", "slot.none", "slot.remove", "done.times", "prep", "prep.p", "prep.send", "prep.done.h", "prep.intent",
-    "imt.line", "imt.how", "send", "send.later", "notice.later", "phone", "email"].map((k) => [k, c(`p69.${k}`, lang, Object.fromEntries(["name", "place", "inplace", "price", "city", "ofcity", "imt"].map((x) => [x, `{${x}}`])))])) : {};
+    "imt.line", "imt.how", "send", "send.later", "notice.later", "phone", "email", "req", "cc", "slot.kept", "visit.title", "visit.when", "visit.done", "visit.done.later", "visit.intent"].map((k) => [k, c(`p69.${k}`, lang, Object.fromEntries(["name", "place", "inplace", "price", "city", "ofcity", "imt"].map((x) => [x, `{${x}}`])))])) : {};
   // Prompt 70 (J-08): the edition's own currency, for a budget the reader typed in it on the home bar (ECB reference rate).
   const cur = EDITION_CUR[ed];
   return {

@@ -672,7 +672,7 @@ export function initMapV3(root: HTMLElement) {
   // p70 (MI-02): next to a development's published price, the whole purchase in one figure (price, IMT, stamp duty and the
   // deed, lib/sims.ts purchase(), a non-resident buying a second home, cash); one tap opens the total-cost calculator at
   // that price. Without a published price nothing is shown (never an invented price).
-  const totalLine = (price: number) => C5.total && cfg.links.cost ? `<p class="m3-line m3-imt"><a class="m3-link" href="${esc(`${cfg.links.cost}?price=${price}&own=0&resident=0&mortgage=0`)}" data-total>${esc(C5.total.replace("{total}", eur.format(purchase(price, false, false, false).total)))} →</a></p>` : imtLine(price, "project");
+  const totalLine = (price: number) => C5.total && cfg.links.cost ? `<p class="m3-line m3-imt"><a class="m3-link" href="${esc(`${cfg.links.cost}?price=${price}&own=0&resident=0&mortgage=0`)}" data-total>${esc(C5.total.replace("{total}", eur.format(purchase(price, false, false, false).total)))} →</a>${cfg.p69?.nr ? `<small class="m3-nr" style="display:block;font-size:12.5px;opacity:.75">${esc(cfg.p69.nr)}</small>` : ""}</p>` : imtLine(price, "project");
   function arrivalHTML(slug: string, d: any, name: string, href: string, hs: Proj[]): string {
     const c5 = d.c5, P8 = cfg.p68, lang = cfg.lang;
     const arrive = d.arr?.line?.[lang] ?? c5?.line?.[lang] ?? "";

@@ -117,7 +117,7 @@ const pinFile = (id: string) => existsSync(join(process.cwd(), "public", "img", 
 const cfg = { labels, links, photos, photoAlt, regionPhotos, ed, lang,
   projects: PROJECTS.map((p) => ({ id: p.id, name: p.name, tag: p.tag?.[lang] ?? "", developer: p.developer, muni: p.muni, lon: p.lon, lat: p.lat, render: p.render, pin: pinFile(p.id) || (p.render ? `${p.render}-800.webp` : ""), from: p.from,
     ...(p.units?.length || p.blocks?.length ? { showcase: `${pathFor(lang, ed, "partners")}${p.devSlug}/${p.muni}/` }
-      : { showcase: p.url ?? "", visit: `${pathFor(lang, ed, "consult")}?project=${encodeURIComponent(p.id)}&place=${encodeURIComponent(MAP_MUNIS.find((m) => m.s === p.muni)?.n ?? "")}` }),
+      : { showcase: p.url ?? "", visit: `${pathFor(lang, ed, "consult")}?project=${encodeURIComponent(p.id)}&place=${encodeURIComponent(MAP_MUNIS.find((m) => m.s === p.muni)?.n ?? "")}&visit=1` }),
     // Prompt 38: the project card (summary, three features, homes for sale now from the developer's table).
     summary: p.summary?.[lang], feats: (p.features ?? []).filter((f) => f.card).map((f) => f[lang]),
     now: p.blocks ? p.blocks.reduce((a, b) => a + b.units.reduce((x, u) => x + u.forSale, 0), 0) : null,
@@ -130,7 +130,7 @@ const cfg = { labels, links, photos, photoAlt, regionPhotos, ed, lang,
     q: { life: keep("p68.q.life", ["city", "v"]), schools: keep("p68.q.schools", ["n", "m"]), price: keep("p68.q.price", ["b", "a"]), health: keep("p68.q.health", ["v"]), sea: keep("p68.q.sea", ["v"]), seaMin: keep("p68.q.sea.min", ["v"]), healthCs: keep("p68.q.health.cs", ["v"]) } },
   // Prompt 69: the IMT line on the place card's price question and on the project card (one tap to the IMT screen), and
   // the Concierge from the project card, opened on that project.
-  p69: { imt: keep("p69.imt.map", ["price", "imt"]), how: c("p69.imt.how", lang), cg: c("flow.c.title", lang) },
+  p69: { imt: keep("p69.imt.map", ["price", "imt"]), how: c("p69.imt.how", lang), cg: c("flow.c.title", lang), nr: c("p69.total.nr", lang) },
   // Prompt 71 §2: the south coast (US edition only; empty elsewhere).
   south, p71: south.length ? { k: k7("k"), next: k7("next"), golf: k7("golf") } : null,
   pl: { view: c("showb.view", lang), visit: c("showb.visit", lang), price: c("showb.price", lang), now: c("showb.now", lang, { n: "{n}" }), near: c("bar.near", lang, { name: "{name}", muni: "{muni}" }) } };

@@ -2,7 +2,7 @@
 
 Written by `node scripts/check-parity.mjs` on every run (prompt 69). Read it before each release: every Concierge block of `content/copy/COPY_DECK.md` (sections `flow`, `consult`, `send`, `p69`) in PT, EN and FR, one row each. The check never fails on wording; the flags are what a machine can see and a reader decides.
 
-192 blocks, 2 flagged.
+201 blocks, 2 flagged.
 
 ## Corrected on 4 Nov 2026 (prompt 69)
 
@@ -158,6 +158,11 @@ Written by `node scripts/check-parity.mjs` on every run (prompt 69). Read it bef
 | `p69.budget` | Orçamento | Budget | Budget |
 | `p69.when` | Quando lhe podemos ligar? | When can we call you? | Quand pouvons-nous vous appeler ? |
 | `p69.when.skip` | Prefiro combinar por email | I'd rather agree a time by email | Je préfère convenir d'une heure par e-mail |
+| `p69.visit.title` | Marcar uma visita privada | Book a private visit | Réserver une visite privée |
+| `p69.visit.when` | Quando lhe podemos ligar para marcar a visita? | When can we call you to arrange the visit? | Quand pouvons-nous vous appeler pour organiser la visite ? |
+| `p69.visit.done` | O consultor liga-lhe a essa hora para marcar a visita a {name}. | The advisor calls you at that time to arrange the visit to {name}. | Le conseiller vous appelle à cette heure-là pour organiser la visite de {name}. |
+| `p69.visit.done.later` | O consultor escreve-lhe por email para marcar a visita a {name}. | The advisor emails you to arrange the visit to {name}. | Le conseiller vous écrit par e-mail pour organiser la visite de {name}. |
+| `p69.visit.intent` | Visita privada a {name} (ligar para marcar) | Private visit to {name} (call to arrange) | Visite privée de {name} (appeler pour organiser) |
 | `p69.tz` | Horas {ofcity}, com Lisboa por baixo. | Times {ofcity}, with Lisbon underneath. | Heures {ofcity}, avec Lisbonne en dessous. |
 | `p69.tz.same` | Horas de Lisboa. | Lisbon times. | Heures de Lisbonne. |
 | `p69.tz.change` | Mudar | Change | Modifier |
@@ -170,14 +175,17 @@ Written by `node scripts/check-parity.mjs` on every run (prompt 69). Read it bef
 | `p69.slot.picked` | As suas horas | Your times | Vos horaires |
 | `p69.slot.none` | Ainda não escolheu uma hora. | No time chosen yet. | Aucun horaire choisi pour l'instant. |
 | `p69.slot.remove` | Retirar | Remove | Retirer |
+| `p69.slot.kept` | Guardámos as horas que escolheu. | We kept the times you chose. | Nous avons gardé les horaires choisis. |
 | `p69.reach` | Como chegamos até si? | How do we reach you? | Comment vous joindre ? |
 | `p69.lang` | Língua da chamada | Language of the call | Langue de l'appel |
 | `p69.send` | Marcar a chamada | Book the call | Réserver l'appel |
 | `p69.send.later` | Enviar | Send | Envoyer |
 | `p69.notice` | O seu pedido segue para a Imóveis Portugal e para um consultor qualificado, que confirma a hora por email e lhe liga. | Your request goes to Imóveis Portugal and to a qualified advisor, who confirms the time by email and calls you. | Votre demande part chez Imóveis Portugal et chez un conseiller qualifié, qui confirme l'heure par e-mail et vous appelle. |
 | `p69.notice.later` | O seu pedido segue para a Imóveis Portugal e para um consultor qualificado, que lhe escreve por email para combinar a hora. | Your request goes to Imóveis Portugal and to a qualified advisor, who emails you to agree on a time. | Votre demande part chez Imóveis Portugal et chez un conseiller qualifié, qui vous écrit par e-mail pour convenir d'une heure. |
-| `p69.phone` | Telefone (ligamos para este número) | Phone (we call this number) | Téléphone (nous appelons ce numéro) |
-| `p69.email` | Email (para a confirmação) | Email (for the confirmation) | E-mail (pour la confirmation) |
+| `p69.phone` | Telefone | Phone | Téléphone |
+| `p69.email` | Email | Email | E-mail |
+| `p69.req` | obrigatório | required | obligatoire |
+| `p69.cc` | Indicativo do país | Country code | Indicatif du pays |
 | `p69.err.name` | Indique o seu nome. | Enter your name. | Indiquez votre nom. |
 | `p69.err.email` | Indique o seu email. | Enter your email. | Indiquez votre e-mail. |
 | `p69.err.phone` | Indique um telefone: o consultor liga para este número. | Enter a phone number: the advisor calls you on it. | Indiquez un téléphone : le conseiller vous appelle à ce numéro. |
@@ -196,6 +204,7 @@ Written by `node scripts/check-parity.mjs` on every run (prompt 69). Read it bef
 | `p69.imt.line` | IMT de {price}: {imt} se não for residente fiscal. | IMT on {price}: {imt} if you are not a tax resident. | IMT sur {price} : {imt} si vous n'êtes pas résident fiscal. |
 | `p69.imt.how` | Como se calcula | How it works | Comment il se calcule |
 | `p69.imt.map` | IMT a {price}? {imt} sem residência fiscal. | IMT at {price}? {imt} as a non-resident. | L'IMT à {price} ? {imt} pour un non-résident. |
+| `p69.total.nr` | não residente, sem crédito | non-resident, no mortgage | non-résident, sans crédit |
 | `p69.imt.title` | O IMT, explicado | IMT, explained | L'IMT, expliqué |
 | `p69.imt.h` | O IMT de uma casa de {price} | IMT on a {price} home | L'IMT d'un logement à {price} |
 | `p69.imt.what` | O imposto municipal sobre as transmissões, pago antes da escritura. | The property transfer tax, paid before the deed. | L'impôt sur les transmissions immobilières, payé avant l'acte. |

@@ -32,14 +32,20 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
   // Prompt 70 (A-03, S-19): the answers live in this tab (sessionStorage); the ones that say nothing about who the reader
   // is (help, budget, place, the chosen times, the preparation) are also kept on this device for 24 hours, so a closed
   // tab does not lose them. Name, e-mail, phone and free text are never written to localStorage (GDPR, data minimisation).
-  const KEEP = `${key}.keep`, PERSONAL = ["name", "email", "phone", "lwq", "question"];
-  let A: Record<string, string> = {}, fromSession = false;
+  // Round 2 (MI2-02): once a request is sent (in any tab), its answers and times are never restored: the send writes
+  // `${key}.sent`, and a copy kept before that moment is dropped. After the send this flow writes nothing to the device.
+  const KEEP = `${key}.keep`, SENT = `${key}.sent`, PERSONAL = ["name", "email", "phone", "lwq", "question"];
+  let A: Record<string, string> = {}, fromSession = false, fromKeep = false, isSent = false;
+  const sentAt = () => { try { return Number(localStorage.getItem(SENT)) || 0; } catch { return 0; } };
   try { const raw = sessionStorage.getItem(key); if (raw) { A = JSON.parse(raw); fromSession = true; } } catch { /* private mode */ }
+  if (fromSession && Number(A._t || 0) < sentAt()) { A = {}; fromSession = false; }
   if (!fromSession) try {
     const kept = JSON.parse(localStorage.getItem(KEEP) || "null") as { t: number; A: Record<string, string> } | null;
-    if (kept && Date.now() - kept.t < 864e5) A = kept.A || {}; else localStorage.removeItem(KEEP);
+    if (kept && Date.now() - kept.t < 864e5 && kept.t > sentAt()) { A = kept.A || {}; fromKeep = true; } else localStorage.removeItem(KEEP);
   } catch { /* private mode */ }
   const save = () => {
+    if (isSent) return;
+    A._t = String(Date.now());
     try { sessionStorage.setItem(key, JSON.stringify(A)); } catch { /* private mode */ }
     try { localStorage.setItem(KEEP, JSON.stringify({ t: Date.now(), A: Object.fromEntries(Object.entries(A).filter(([k]) => !PERSONAL.includes(k))) })); } catch { /* private mode */ }
   };
@@ -48,6 +54,7 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
     const first = slotDays()[0] || "", ok = sl.filter((x) => x.d >= first), sid = steps.find((x) => x.type === "slots")?.id;
     if (ok.length !== sl.length) { if (ok.length) A._slots = JSON.stringify(ok); else delete A._slots;
       if (sid) { if (ok.length) A[sid] = ok.map((x) => slotLabel(x, document.documentElement.lang || "pt", (F.hidden.language || "pt") as "pt").both).join(" · "); else delete A[sid]; } } }
+  let keptTimes = (fromSession || fromKeep) && !!A._slots && A._slots !== "[]";
   // Prompt 70 (J-07): a 12-hour clock where the reader reads English the American way: the US edition in English, or an
   // en-US browser on an English page.
   setClock(F.hidden.language === "en" && (F.hidden.edition === "us" || navigator.language === "en-US"));
@@ -111,11 +118,14 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
   const eur = (v: number) => new Intl.NumberFormat(locale, { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(v);
   // Prompt 70 (MI-08): the project of the page the reader is on (a development's page) when no link named one.
   const pageProject = BL?.items.find((b) => b.visit && location.pathname.startsWith(b.visit.replace(/#.*$/, ""))) ?? null;
-  const ctxProject = F.id === "concierge" ? BL?.items.find((b) => b.id === q.get("project")) ?? pageProject : null;
+  // Round 2 (J2-05, A-03): opened with nothing to go on (the bottom bar, the header, a link with no project or place), the
+  // Concierge comes back to the context of the request the reader left unsent (this tab, or the 24-hour copy).
+  const restore = F.id === "concierge" && !fromHome && !pageProject && !["project", "place", "budget", "from", "visit", "topic"].some((k) => q.has(k)) && !!(A._cp || A._cpl || A._csim);
+  const ctxProject = F.id === "concierge" ? BL?.items.find((b) => b.id === q.get("project")) ?? pageProject ?? (restore ? BL?.items.find((b) => b.id === A._cp) ?? null : null) : null;
   const projectId = ctxProject?.id || q.get("project") || "";
   // The map keeps its own ?place= as a slug (gondomar): shown as the place's name.
   const qPlace = q.get("place") || "", slugPlace = /^[a-z0-9-]+$/.test(qPlace);
-  const ctxPlace = ctxProject ? ctxProject.place : (slugPlace ? BL?.items.find((b) => b.muni === qPlace)?.place || lastPlace() : qPlace) || lastPlace() || "";
+  const ctxPlace = ctxProject ? ctxProject.place : (slugPlace ? BL?.items.find((b) => b.muni === qPlace)?.place || lastPlace() : qPlace) || (restore ? A._cpl || "" : "") || lastPlace() || "";
   // Prompt 70 (J-08): a budget typed in the edition's own currency on the home bar is shown as typed, euros second, both
   // rounded to three figures ($400,000 (≈ €357,000), never €357,366).
   const nice = (v: number) => { const p = 10 ** Math.max(0, Math.floor(Math.log10(Math.max(1, v))) - 2); return Math.round(v / p) * p; };
@@ -123,7 +133,10 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
   const ctxBudget = F.id === "concierge" ? (typedLocal ? nice(budgetEur) : budgetEur) : 0;
   const money = (v: number) => typedLocal ? `${new Intl.NumberFormat(locale, { style: "currency", currency: FX!.cur, maximumFractionDigits: 0 }).format(nice(v * FX!.rate))} (≈ ${eur(nice(v))})` : eur(v);
   // Prompt 73 §1: from the simulator ("from=sim", components/Sim1.astro and the calculators), the context is the costs.
-  const fromSim = F.id === "concierge" && q.get("from") === "sim";
+  const fromSim = F.id === "concierge" && (q.get("from") === "sim" || (restore && A._csim === "1"));
+  // J72-03: "Book a private visit" on a development (?visit=1): the same request to the same advisor (hard rule 6), said
+  // as what it is: the title, the time question and the confirmation speak of arranging the visit to that development.
+  const visit = F.id === "concierge" && !!ctxProject && (q.get("visit") === "1" || (restore && A._cvis === "1"));
   const ctxKind = fromSim ? "sim" : ctxProject ? "project" : ctxPlace ? "place" : ctxBudget ? "budget" : "none";
   const fillP = (t: string, v: Record<string, string>) => t.replace(/\{(\w+)\}/g, (m, k) => (k in v ? v[k] : m));
   // Prompt 70 (MI-15): the place with its preposition and article ("no Porto", "na Nazaré", "em Gondomar"; "à Porto",
@@ -153,7 +166,7 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
   if (steps.some((s) => s.type === "help")) {
     if (ctxKind !== "none" && !sameCtx) { A.help = fromSim ? "costs" : "home"; known.add("help"); }
     if (A.help === "ctx") A.help = "home";  // an answer kept from before prompt 73
-    A._ctx = ctxLabel; A._ctxk = ctxKey;
+    A._ctx = ctxLabel; A._ctxk = ctxKey; A._cp = ctxProject?.id ?? ""; A._cpl = ctxPlace; A._csim = fromSim ? "1" : ""; A._cvis = visit ? "1" : "";
     if (fromHome && (A.door === "sell" || A.door === "inherit") && !ctxProject) A.help = "sell";
     if ((topic === "tax" || topic === "bank") && ctxKind === "none") A.help = "costs";
     if (pre.budget && A._bud !== String(budgetEur)) { A.budget = pre.budget; A._bud = String(budgetEur); known.add("help"); }
@@ -164,6 +177,9 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
   // The price the IMT line on the confirmation speaks of: the project's starting price, else the budget the reader gave.
   const ctxPrice = ctxProject?.from || ctxBudget || 0;
   save();
+  // J72-03: the sheet's (or the page's) title says "Book a private visit" when that is what the reader asked for.
+  { const t = root.closest("aside.sh")?.querySelector<HTMLElement>(".sh-title") ?? (!opts.sheet ? document.querySelector<HTMLElement>("[data-cg-title]") : null);
+    if (t && P["visit.title"]) { t.textContent = visit ? P["visit.title"] : F.title; root.closest("aside.sh")?.setAttribute("aria-label", t.textContent); } }
 
   // ------------------------------------------------------------ history (prompt 70: J-03, A-02, MI-01, S-02)
   // Every screen is a history entry: a step forward pushes one (?concierge=2, ?step=2; the preparation ?concierge=p1…),
@@ -171,6 +187,14 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
   // Back from it closes the sheet onto the page it was opened from (scripts/chrome.ts); ✕ goes back over those entries.
   // depth counts the entries this flow pushed above the page's own (kept in history.state, so a reload keeps it).
   const sheet = !!opts.sheet;
+  const foot = sheet ? root.closest("aside.sh")?.querySelector<HTMLElement>("[data-sh-foot]") ?? null : null;
+  /** An element of the screen on show, or of its action bar in the sheet's footer. */
+  const pick = <T extends HTMLElement>(scr: HTMLElement, sel: string) => (scr.querySelector<T>(sel) ?? foot?.querySelector<T>(sel) ?? null);
+  /** A note under the action: after the bar on a page, at the end of the step (in view) in the sheet. */
+  const noteAfterGo = (scr: HTMLElement, box: HTMLElement) => {
+    const go = pick(scr, ".fl-go");
+    if (go && go.parentElement !== foot) go.after(box); else { scr.querySelector(".fl-step, .fl-done")?.append(box); box.scrollIntoView({ block: "nearest" }); }
+  };
   let depth = Number(history.state?.ipK) || 0, clearing = false, view: "step" | "done" | "prep" | "side" = "step", sent = false;
   const href = (v: string | null) => { const p = new URLSearchParams(location.search); v == null ? p.delete(opts.param) : p.set(opts.param, v); return `${location.pathname}${p.size ? `?${p}` : ""}${location.hash}`; };
   const val = (n: number) => (prepMode ? `p${n + 1}` : String(n + 1));
@@ -248,17 +272,22 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
         ${BL && s.id === "place" ? matchBox() : ""}
         <div class="fl-go"><button type="button" class="fl-btn" data-next>${esc(prepMode && i === S.length - 1 ? P["prep.send"] : L.next)}</button>${s.optional ? `<button type="button" class="fl-link" data-skip>${esc(L.skip)}</button>` : ""}</div>`;
     }
-    if (s.type === "slots") return `<div data-slots></div>
+    // Round 2 (MI2-02, A-03): times kept from earlier are said to be kept, so a tap that removes one is no surprise.
+    if (s.type === "slots") return `${keptTimes && hasSlots() && P["slot.kept"] ? `<p class="fl-kept">${esc(P["slot.kept"])}</p>` : ""}<div data-slots></div>
         <div class="fl-go"><button type="button" class="fl-btn" data-next>${esc(L.next)}</button>${s.optional ? `<button type="button" class="fl-link" data-skip>${esc(s.skip || L.skip)}</button>` : ""}</div>`;
     if (s.type === "contact") {
       // Prompt 70 (A-10, A-27, S-20): for a call, the name and the phone are needed and say why; each field has its own
       // message under it, cleared as the reader types. Agreeing the time by e-mail (no time chosen) makes the phone optional.
+      // Round 2 (J2-04, M72-15): what a call needs is marked "required" before the reader taps send, and the phone carries
+      // the edition's country code as a prefix the reader can change; a number typed without "+" or "00" is sent with it.
       const call = !!s.call && hasSlots();
-      const fld = (k: string, label: string, attrs: string) => `<div class="fl-fw"><label class="fl-f"><span>${esc(label)}</span><input class="fl-in" data-c="${k}" ${attrs} value="${esc(A[k] || "")}" /></label><p class="fl-err" data-err-for="${k}" role="alert" hidden></p></div>`;
+      const req = (on: boolean) => (on && P.req ? ` <em class="fl-req">${esc(P.req)}</em>` : "");
+      const fld = (k: string, label: string, attrs: string, need = false, pre = "") => `<div class="fl-fw"><label class="fl-f"><span>${esc(label)}${req(need)}</span>${pre ? `<span class="fl-tel">${pre}` : ""}<input class="fl-in" data-c="${k}" ${attrs}${need ? ` aria-required="true"` : ""} value="${esc(A[k] || "")}" />${pre ? "</span>" : ""}</label><p class="fl-err" data-err-for="${k}" role="alert" hidden></p></div>`;
+      const cc = `<input class="fl-in fl-cc" data-cc type="tel" inputmode="tel" autocomplete="tel-country-code" aria-label="${esc(P.cc || "+")}" value="${esc(ccNow())}" size="5" />`;
       return `<div class="fl-fields">
-        ${fld("name", L.name, `autocomplete="name"`)}
-        ${fld("email", s.call && P.email ? P.email : L.email, `type="email" inputmode="email" autocomplete="email"`)}
-        ${s.phone ? fld("phone", call && P.phone ? P.phone : L.phone, `type="tel" inputmode="tel" autocomplete="tel"`) : ""}</div>
+        ${fld("name", L.name, `autocomplete="name"`, call)}
+        ${fld("email", s.call && P.email ? P.email : L.email, `type="email" inputmode="email" autocomplete="email"`, !!s.call)}
+        ${s.phone ? fld("phone", call && P.phone ? P.phone : L.phone, `type="tel" inputmode="tel" autocomplete="tel-national"`, call, cc) : ""}</div>
         ${s.lang ? `<p class="fl-k" id="fl-lang">${esc(s.lang.q)}</p><div class="fl-pills" role="radiogroup" aria-labelledby="fl-lang">${s.lang.opts.map((o) =>
           `<button type="button" class="fl-pill" role="radio" aria-checked="${A.lang === o.v}" data-lang="${esc(o.v)}">${esc(o.l)}</button>`).join("")}</div>` : ""}
         ${s.send ? `<p class="fl-notice">${esc(s.call && !call && P["notice.later"] ? P["notice.later"] : s.notice || "")} <a href="${F.links.privacy}" target="_blank" rel="noopener">${esc(X.policy)}</a></p>
@@ -308,8 +337,8 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
     return `<div class="fl-bldbox" data-blds-box aria-live="polite"><p class="fl-k">${esc(line)}</p>${cards(m.map((x) => x.b))}</div>`;
   };
   function buildingsScreen() {
-    const T = BL!.labels; engaged = true; reached("buildings");
-    side(`${lwHead()}<div class="fl-step"><h2 class="fl-q" tabindex="-1">${esc(T.h)}</h2><p class="fl-lede">${esc(T.lede)}</p>${BL!.items.length ? cards(BL!.items) : `<p class="fl-lede">${esc(T.none)}</p>`}</div>`, () => go(i));
+    const T = BL!.labels, list = ctxProject ? [ctxProject] : BL!.items; engaged = true; reached("buildings");
+    side(`${lwHead()}<div class="fl-step"><h2 class="fl-q" tabindex="-1">${esc(ctxProject ? ctxProject.name : T.h)}</h2>${ctxProject ? "" : `<p class="fl-lede">${esc(T.lede)}</p>`}${list.length ? cards(list) : `<p class="fl-lede">${esc(T.none)}</p>`}</div>`, () => go(i));
   }
 
   // ------------------------------------------------------------ signals (part 5, lib/track.ts ev): each step reached, and
@@ -336,18 +365,21 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
     // "I have a question" on the first screen, and a one-line way to the lawyer on the legal step (the tax number).
     const ask = LW && !prepMode && (i === 0 || s.id === "nif" || s.id === "prep-nif") ? `<p class="fl-ask"><button type="button" class="fl-link" data-lawyer>${esc(i === 0 ? LW.labels.ask : LW.labels.legal)}</button></p>` : "";
     // "Ver novos empreendimentos" on the first screen (one tap to the list); matching buildings under the place question.
-    const nb = BL && BL.items.length && i === 0 && !prepMode ? `<button type="button" class="fl-xopt" data-blds><span>${esc(BL.labels.open)}</span><i>${ARROW}</i></button>` : "";
+    // Round 2 (Sophie J2-07): the button names what it opens: the development the reader came from, else how many.
+    const nbL = ctxProject && BL?.labels.one ? BL.labels.one.replace("{name}", ctxProject.name) : `${BL?.labels.open ?? ""} (${BL?.items.length ?? 0})`;
+    const nb = BL && BL.items.length && i === 0 && !prepMode ? `<button type="button" class="fl-xopt" data-blds><span>${esc(nbL)}</span><i>${ARROW}</i></button>` : "";
     const intro = introLine && i === first && !prepMode ? `<p class="fl-topic">${esc(X.topicIntro)}</p>` : "";
     // Prompt 69: the first step's one line ("A qualified advisor calls you at the time you choose") replaces the old lede.
     const lede = s.type === "help" ? s.lede : i === 0 && !prepMode && F.lede ? F.lede : prepMode && i === 0 ? P["prep.p"] : "";
-    const html = `${head()}<div class="fl-step">${intro}<h2 id="fl-q" class="fl-q" tabindex="-1">${esc(s.q)}</h2>${lede ? `<p class="fl-lede">${esc(lede)}</p>` : ""}${body(s)}${nb}${ask}</div>`;
-    swap(html, focus);
+    const qText = visit && s.type === "slots" && P["visit.when"] ? P["visit.when"] : s.q;
+    const html = `${head()}<div class="fl-step">${intro}<h2 id="fl-q" class="fl-q" tabindex="-1">${esc(qText)}</h2>${lede ? `<p class="fl-lede">${esc(lede)}</p>` : ""}${body(s)}${nb}${ask}</div>`;
+    swap(html, focus, true);
     if (writeUrl) url(i);
   }
   // Prompt 69, the Back bug: one screen on show, in both directions. The leaving screen used to be the stage's first
   // child, so a second tap within the 260 ms slide (Back, Back) faded the wrong one and left the previous step drawn
   // under the new one for good. Now every screen but the one on show is removed at once, and that one leaves inert.
-  function swap(html: string, focus: boolean) {
+  function swap(html: string, focus: boolean, bar = false) {
     const kids = [...stage.children] as HTMLElement[], old = kids.pop() ?? null;
     for (const k of kids) k.remove();
     const el = document.createElement("div"); el.className = "fl-screen"; el.innerHTML = html;
@@ -362,6 +394,9 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
       setTimeout(() => { old.remove(); el.classList.remove("is-entering"); }, 280);
     } else { stage.replaceChildren(el); }
     wire(el);
+    // Round 2 (A-25, J-22, J72-18): in the sheet, a step's action bar lives in the sheet's footer, outside the scrolling
+    // area, so the scroll area ends above it and nothing (chips, times, "Mudar") is ever under the bar.
+    if (foot) { const go = bar ? el.querySelector<HTMLElement>(":scope > .fl-step > .fl-go") : null; foot.replaceChildren(...(go ? [go] : [])); foot.hidden = !go; }
     if (focus) el.querySelector<HTMLElement>(".fl-q")?.focus({ preventScroll: true });
   }
   // Each new screen starts at its top (the sheet keeps its scroll otherwise, and the back arrow and question were above the fold).
@@ -431,6 +466,7 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
       const e = el.querySelector<HTMLElement>(`[data-err-for="${x.dataset.c}"]`); if (e && !e.hidden) { e.hidden = true; x.removeAttribute("aria-invalid"); }
     }));
     el.querySelectorAll<HTMLInputElement>("[data-c]").forEach((x) => x.addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); next(); } }));
+    el.querySelector<HTMLInputElement>("[data-cc]")?.addEventListener("input", (e) => { A.cc = (e.target as HTMLInputElement).value.trim(); save(); });
     // The advisor's slots (prompt 41 §2): the same picker as the request flow; the readable times are the answer.
     const sp = el.querySelector<HTMLElement>("[data-slots]");
     if (sp) {
@@ -439,7 +475,7 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
       // Prompt 69: the Concierge shows the reader's own time zone first, Lisbon underneath; the advisor still reads Lisbon first.
       const own = F.id === "concierge" && P.tz ? { ed: F.hidden.edition, onZone: (how: string) => ev({ event: `flow/${F.id}/tz/${how}`, origin: how }),
         labels: { day: P["slot.day"], time: P["slot.time"], picked: P["slot.picked"], none: P["slot.none"], remove: P["slot.remove"], tz: P.tz, same: P["tz.same"], change: P["tz.change"], zone: P["tz.zone"], lisbon: P["tz.lisbon"], next: P["tz.next"], prev: P["tz.prev"] } } : undefined;
-      slotPicker(sp, { lang, locale, own, get, set: (v) => { A._slots = JSON.stringify(v); A[s.id] = v.map((x) => slotLabel(x, locale, lang as "pt").both).join(" · "); if (!v.length) delete A[s.id]; save(); } });
+      slotPicker(sp, { lang, locale, own, get, set: (v) => { keptTimes = false; A._slots = JSON.stringify(v); A[s.id] = v.map((x) => slotLabel(x, locale, lang as "pt").both).join(" · "); if (!v.length) delete A[s.id]; save(); } });
     }
     el.querySelector("[data-next]")?.addEventListener("click", next);
     el.querySelector("[data-skip]")?.addEventListener("click", () => { delete A[s.id]; if (s.type === "slots") delete A._slots; save(); go(i + 1); });
@@ -447,6 +483,11 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
     el.querySelector<HTMLButtonElement>("[data-send]")?.addEventListener("click", () => { if (validContact()) submit(); });
   }
   const hasSlots = () => !!A._slots && A._slots !== "[]";
+  // M72-15: the edition's calling code (the reader can change it), and the number in international form when sent.
+  const CC: Record<string, string> = { lu: "+352", fr: "+33", ch: "+41", br: "+55", us: "+1", il: "+972" };
+  const ccNow = () => { const v = (A.cc ?? CC[F.hidden.edition] ?? "+351").replace(/[^\d+]/g, ""); return v ? (v.startsWith("+") ? v : `+${v.replace(/^00/, "")}`) : ""; };
+  const intl = (ph: string) => { const t = (ph || "").trim(); if (!t) return ""; if (t.startsWith("+")) return t; if (/^00\d/.test(t)) return `+${t.slice(2)}`;
+    const c = ccNow(); return c ? `${c} ${t.replace(/^0(?=\d)/, "")}` : t; };
   // MI-20: "Book the call" only when a time was chosen; agreeing the time by e-mail sends the request.
   const sendLabel = () => (F.id === "concierge" && P.send ? (hasSlots() || !P["send.later"] ? P.send : P["send.later"]) : L.send);
   // The e-mail is what the advisor replies to (worker/index.js requires it); for a call, the name and the phone too.
@@ -458,7 +499,7 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
     if (call && !(A.name || "").trim()) errs.push(["name", L["err.name"]]);
     const em = (A.email || "").trim();
     if (!em) errs.push(["email", L["err.email"]]); else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)) errs.push(["email", L["invalid.email"]]);
-    const ph = (A.phone || "").replace(/\D/g, "");
+    const ph = (A.phone || "").replace(/\D/g, "");  // the national part: the country code is checked apart
     if (s.phone) { if (call && hasSlots() && !ph) errs.push(["phone", L["err.phone"]]); else if (ph && ph.length < 6) errs.push(["phone", L["err.phone.bad"]]); }
     scr.querySelectorAll<HTMLElement>("[data-err-for]").forEach((e) => {
       const m = errs.find((x) => x[0] === e.dataset.errFor); e.hidden = !m; e.textContent = m ? m[1] : "";
@@ -549,25 +590,28 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
   const answerIds = () => Object.fromEntries(steps.flatMap((s): [string, string][] => s.type === "help" ? [["help", A.help ?? ""], ["ctx", ctxLabel], ["budget", A.budget ?? ""], ["place", ctxPlace]]
     : s.type === "contact" && s.lang ? [["lang", A.lang ?? ""]] : s.type === "choice" || s.type === "text" || s.type === "slots" ? [[s.id, A[s.id] ?? ""]] : []));
   async function submit() {
-    const scr = stage.lastElementChild as HTMLElement, btn = scr.querySelector<HTMLButtonElement>("[data-send]")!; const hp = scr.querySelector<HTMLInputElement>("[data-hp]")?.value || "";
+    const scr = stage.lastElementChild as HTMLElement, btn = pick<HTMLButtonElement>(scr, "[data-send]")!; const hp = scr.querySelector<HTMLInputElement>("[data-hp]")?.value || "";
     btn.disabled = true; btn.textContent = L.sending;
     let brief = ""; try { brief = sessionStorage.getItem("ip.brief") || ""; } catch { /* none */ }
-    const payload = { flow: F.id, project: projectId, unit: q.get("unit") || "", ...F.hidden, answers: answerIds(),
+    const payload = { flow: F.id, project: projectId, unit: q.get("unit") || "", ...F.hidden, answers: answerIds(), intent: visit && P["visit.intent"] ? fillP(P["visit.intent"], { name: ctxProject!.name }) : "",
       slots: (() => { try { return JSON.parse(A._slots || "[]"); } catch { return []; } })(),
-      labels: [...(topic ? [`${X.topic}: ${topicLabel}`] : []), ...answerText()], topic, door: A.door || "", name: A.name || "", email: A.email || "", phone: A.phone || "", budget: budgetEur || "", brief, page: location.pathname, hp };
+      labels: [...(topic ? [`${X.topic}: ${topicLabel}`] : []), ...answerText()], topic, door: A.door || "", name: A.name || "", email: A.email || "", phone: intl(A.phone || ""), budget: budgetEur || "", brief, page: location.pathname, hp };
     let ok = false;
     try { const r = await fetch("/api/request", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(payload) }); ok = r.ok; } catch { ok = false; }
     if (ok) { finished = true; sent = true; ev({ event: `flow/${F.id}/sent`, band: band() }); const pj = projectId; if (pj && /^[a-z0-9-]+$/.test(pj)) ev({ event: `p/${pj}/req`, place: pj, origin: F.id }); const r = route();
       // The answers leave this tab's storage once sent (and the device's 24-hour copy); the times stay (as slots, no name)
       // so the confirmation can show them again.
-      try { sessionStorage.removeItem(key); localStorage.removeItem(KEEP); sessionStorage.setItem(`${key}.done`, r); sessionStorage.setItem(`${key}.slots`, A._slots || "[]"); } catch { /* none */ } done(r); }
+      isSent = true;
+      try { sessionStorage.removeItem(key); localStorage.removeItem(KEEP); localStorage.setItem(SENT, String(Date.now())); sessionStorage.setItem(`${key}.done`, r); sessionStorage.setItem(`${key}.slots`, A._slots || "[]"); } catch { /* none */ } done(r); }
     else { ev({ event: `flow/${F.id}/fallback`, band: band() }); fallback(payload); }
   }
   // The confirmation, then one quiet closing line with two text links (prompt 42). The confirmation stays in the URL
   // (?concierge=done) and in this tab, so Back from those pages returns to it.
   function done(r = route(), writeUrl = true) {
     finished = true; prepMode = false; S = steps; lastRoute = r; view = "done"; root.dataset.step = "done";
-    const d = (F.done as Record<string, { h: string; p: string }>)[r] ?? F.done.ok, X = F.extra as Record<string, string>, Lk = F.links as Record<string, string>;
+    const d0 = (F.done as Record<string, { h: string; p: string }>)[r] ?? F.done.ok, X = F.extra as Record<string, string>, Lk = F.links as Record<string, string>;
+    const vp = visit ? P[r === "later" ? "visit.done.later" : "visit.done"] : "";
+    const d = vp ? { h: d0.h, p: fillP(vp, { name: ctxProject!.name }) } : d0;
     // Prompt 69: the times the reader chose (their zone first, Lisbon underneath), the optional preparation, and the IMT
     // line at the price they came with (one tap to the IMT screen).
     let times = "";
@@ -597,10 +641,10 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
   async function sendPrep() {
     const labels = PREP.map((s) => { const v = s.type === "choice" ? s.opts.find((o) => o.v === A[s.id])?.l : A[s.id]; return v ? `${s.q} ${v}` : ""; }).filter(Boolean);
     if (!labels.length) { go(-1); return; }  // nothing answered: back to the confirmation
-    const scr = stage.lastElementChild as HTMLElement, btn = scr.querySelector<HTMLButtonElement>("[data-next]");
+    const scr = stage.lastElementChild as HTMLElement, btn = pick<HTMLButtonElement>(scr, "[data-next]");
     if (btn) { btn.disabled = true; btn.textContent = L.sending; }
     const payload = { flow: F.id, intent: P["prep.intent"], project: projectId, ...F.hidden, answers: Object.fromEntries(PREP.map((s) => [s.id, A[s.id] ?? ""])), labels,
-      name: A.name || "", email: A.email || "", phone: A.phone || "", page: location.pathname, hp: "" };
+      name: A.name || "", email: A.email || "", phone: intl(A.phone || ""), page: location.pathname, hp: "" };
     let ok = false;
     try { ok = (await fetch("/api/request", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(payload) })).ok; } catch { ok = false; }
     if (ok) { prepSent = true; ev({ event: `flow/${F.id}/prep/sent`, band: band() }); prepMode = false; S = steps; i = N - 1; done(lastRoute || route()); top(); return; }  // this entry now shows the confirmation
@@ -608,27 +652,27 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
     if (btn) { btn.disabled = false; btn.textContent = P["prep.send"]; }
     const href = `mailto:${F.mailto}?${F.mailcc ? `cc=${encodeURIComponent(F.mailcc)}&` : ""}subject=${encodeURIComponent(`${P["prep.intent"]} (${F.hidden.edition} · ${F.hidden.language})`)}&body=${encodeURIComponent([...labels, `${L.name}: ${payload.name}`, `${L.email}: ${payload.email}`].join("\n"))}`;
     const box = document.createElement("p"); box.className = "fl-fallback"; box.innerHTML = `${esc(L.fallback)} <a class="fl-btn" href="${href}">${esc(L["fallback.btn"])}</a>`;
-    scr.querySelector(".fl-fallback")?.remove(); scr.querySelector(".fl-go")?.after(box);
+    scr.querySelector(".fl-fallback")?.remove(); noteAfterGo(scr, box);
   }
   function fallback(p: Record<string, unknown>) {
     const subject = `${F.title} (${F.hidden.edition} · ${F.hidden.language})`;
     const text = [...(p.labels as string[]), `${L.name}: ${p.name}`, `${L.email}: ${p.email}`, p.phone ? `${L.phone}: ${p.phone}` : "", p.brief ? `\n${p.brief}` : "", "", steps[N - 1].type === "review" ? (steps[N - 1] as Extract<Step, { type: "review" }>).text : (steps[N - 1] as { notice?: string }).notice || ""].filter((x) => x !== "").join("\n");
     const href = `mailto:${F.mailto}?${F.mailcc ? `cc=${encodeURIComponent(F.mailcc)}&` : ""}subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(text)}`;
-    const scr = stage.lastElementChild as HTMLElement, btn = scr.querySelector<HTMLButtonElement>("[data-send]")!; btn.textContent = sendLabel(); btn.disabled = false;
+    const scr = stage.lastElementChild as HTMLElement, btn = pick<HTMLButtonElement>(scr, "[data-send]")!; btn.textContent = sendLabel(); btn.disabled = false;
     const box = document.createElement("p"); box.className = "fl-fallback"; box.innerHTML = `${esc(L.fallback)} <a class="fl-btn" href="${href}">${esc(L["fallback.btn"])}</a>`;
-    scr.querySelector(".fl-fallback")?.remove(); scr.querySelector(".fl-go")?.after(box);
+    scr.querySelector(".fl-fallback")?.remove(); noteAfterGo(scr, box);
   }
 
   // ------------------------------------------------------------ start
   const pv = q.get(opts.param), start = Number(pv);
   // MI-13: back in this tab on the same context (a language switch, another page), the reader's step comes back too.
-  const resume = fromSession && sameCtx && !fromHome && !pv && Number(A._i) > 0 && Number(A._i) < N ? Number(A._i) : 0;
+  const resume = (fromSession || fromKeep) && sameCtx && !fromHome && !pv && Number(A._i) > 0 && Number(A._i) < N ? Number(A._i) : 0;
   i = start >= 1 && start <= N ? start - 1 : resume || offset;
   const first = i;  // the first screen the reader sees (the bank and tax line sits on it)
   const wasDone = pv === "done" || /^p\d+$/.test(pv || "") ? (() => { try { return sessionStorage.getItem(`${key}.done`); } catch { return null; } })() : null;
   const lawyerFirst = topic === "lawyer" && !!LW && !start;
   // In the sheet, nothing is written to the URL until it opens (show() pushes that entry).
-  if (wasDone) { sent = true; done(wasDone); } else if (lawyerFirst) lawyerScreen(); else render(false, !sheet || pv != null);
+  if (wasDone) { sent = true; isSent = true; done(wasDone); } else if (lawyerFirst) lawyerScreen(); else render(false, !sheet || pv != null);
   // show(): what the sheet displays each time it opens (the lawyer card for a lawyer link, else the current step).
   const show = () => {
     engaged = true;
