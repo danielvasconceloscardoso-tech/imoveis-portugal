@@ -7,7 +7,8 @@
 // Rates: lib/sims.ts (imt, IMT_HPP_TABLE), whose figures come from content/facts/facts.csv; the build stops if the facts
 // and the table disagree, or if the prompt's worked example (300 000 €: 22 500 €, 10 542 €, 11 958 € back) no longer holds.
 // Without JavaScript, every data-imt element is a link to the full IMT calculator.
-import { FACTS } from "../lib/content";
+import { FACTS, EDITION_CUR, RATE } from "../lib/content";
+import { srcTitle } from "../lib/srctitle";
 import { imt, IMT_HPP_TABLE, IMT_FLAT_FROM, IMT_NONRES } from "../lib/sims";
 import { pathFor, HTML_LANG, type Lang, type EdCode } from "../i18n";
 import { SUB } from "../lib/tools";
@@ -38,20 +39,27 @@ for (const k of ["2 years", "6 months", "36 months", "5 years"]) if (!ex.value.i
 const date = (d: string) => new Intl.DateTimeFormat(HTML_LANG[lang], { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(`${d}T12:00:00Z`));
 const checked = (d: string) => c("p69.imt.src.checked", lang, { d: date(d) });
 // The legal references, as cited (the same in every language), and the official texts.
+// Prompt 70 (J-10, MI-23): the citations sit with the sources, behind "How it's worked out", not under each figure.
+// The edition's own currency beside the big figures, at the ECB reference rate the calculators use (lib/content RATE).
+const cur = EDITION_CUR[ed], fxF = cur ? FACTS[RATE(cur).id] : null;
 const SRC = {
   nr: "CIMT, art. 17.º, n.º 10; DL 97/2026",
   back: "CIMT, art. 17.º, n.os 10 a 12; DL 97/2026",
   res: "CIMT, art. 17.º, n.º 1, al. a); Lei 73-A/2025",
   list: [
-    { t: hpp.source_title, u: hpp.source_url, d: hpp.checked_on },
-    { t: nr.source_title, u: nr.source_url, d: nr.checked_on },
+    { t: srcTitle(hpp.source_title, lang), u: hpp.source_url, d: hpp.checked_on },
+    { t: srcTitle(nr.source_title, lang), u: nr.source_url, d: nr.checked_on },
     { t: "Decreto-Lei 97/2026, Diário da República", u: (ex.notes.match(/https:\/\/files\.diariodarepublica\.pt\/\S+\.pdf/) ?? [""])[0], d: ex.checked_on },
+    ...(fxF ? [{ t: srcTitle(fxF.source_title, lang), u: fxF.source_url, d: fxF.checked_on }] : []),
   ].filter((s) => s.u),
 };
 const L = Object.fromEntries(["imt.title", "imt.h", "imt.what", "imt.price", "imt.nr.k", "imt.nr.p", "imt.back.k", "imt.back.1", "imt.back.2", "imt.back.p",
   "imt.res.k", "imt.res.p", "imt.res.yours", "imt.res.flat", "imt.col.to", "imt.col.rate", "imt.col.flat", "imt.col.above", "imt.more.k", "imt.more", "imt.more.none",
-  "imt.src.k", "imt.disc", "imt.calc"].map((k) => [k, c(`p69.${k}`, lang, Object.fromEntries((["price", "imt", "a", "b", "top", "rate", "rest", "v", "back", "nr", "res"]).map((x) => [x, `{${x}}`])))]));
-const D = { loc: HTML_LANG[lang], L, SRC, calc: `${pathFor(lang, ed, "sims")}${SUB.imt[lang]}/`, table: IMT_HPP_TABLE, flatFrom: IMT_FLAT_FROM, nrRate: IMT_NONRES };
+  "imt.src.k", "imt.disc", "imt.calc", "imt.more.if", "imt.nr.who", "imt.other", "imt.how.k", "imt.refs"].map((k) => [k, c(`p69.${k}`, lang, Object.fromEntries((["price", "imt", "a", "b", "top", "rate", "rest", "v", "back", "nr", "res"]).map((x) => [x, `{${x}}`])))]));
+const D = { loc: HTML_LANG[lang], L, SRC, calc: `${pathFor(lang, ed, "sims")}${SUB.imt[lang]}/`, table: IMT_HPP_TABLE, flatFrom: IMT_FLAT_FROM, nrRate: IMT_NONRES,
+  // J-28, A-04: the other exceptions (among them having been a tax resident, still unsettled in facts.csv) are the FAQ's answer.
+  faq: `${pathFor(lang, ed, "faq")}#${lang}-imt-nonres`,
+  fx: cur ? { cur, rate: RATE(cur).rate, tpl: c("sim1.local", lang, { local: "{local}" }) } : null };
 ---
 <div class="sh-back imt-back" data-imt-back hidden></div>
 <aside class="sh imt-sh" data-imt-sheet hidden role="dialog" aria-modal="true" aria-labelledby="imt-h">
