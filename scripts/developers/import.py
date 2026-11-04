@@ -67,6 +67,12 @@ projects += [p for p in json.load(open(out))["projects"] if not p.get("demo")]
 # Prompt 66 (O'rizon): a demo project curated by hand for the live site (it carries "tag") is kept as entered.
 curated = {p["id"]: p for p in json.load(open(out))["projects"] if p.get("demo") and p.get("tag")}
 projects = [curated.get(p["id"], p) for p in projects]
+# Prompts 68 and D95: the hand-entered display fields ("tag", "hero", "heroImg") survive a re-import for every project.
+kept = {p["id"]: p for p in json.load(open(out))["projects"]}
+for p in projects:
+    for k in ("tag", "hero", "heroImg"):
+        if k not in p and k in kept.get(p["id"], {}):
+            p[k] = kept[p["id"]][k]
 how = json.load(open(out))["_how"]
 how = ("Developer projects (prompts 26 §1 and 28 §2). partner=true: shown on the public map, the place card ('Partner developers here') and a showcase page, labelled 'Sponsored' "
        "(only once the developer has signed and paid, D6, D38). partner=false: shown only in that developer's private demo (/d/{demo}/). Facts only as published by the developer "

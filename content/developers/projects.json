@@ -1181,6 +1181,11 @@
     "en": "55 apartments · T1 to T4 · 3 blocks",
     "fr": "55 appartements · T1 à T4 · 3 blocs"
    },
+   "tag": {
+    "pt": "Parceiro",
+    "en": "Our partner",
+    "fr": "Partenaire"
+   },
    "hero": {
     "pt": "55 apartamentos em três blocos, na Avenida Dr. Mário Soares.",
     "en": "55 apartments in three blocks on Avenida Dr. Mário Soares.",
@@ -1389,6 +1394,11 @@
     "pt": "46 apartamentos · T1 a T4 · 1 edifício",
     "en": "46 apartments · T1 to T4 · 1 building",
     "fr": "46 appartements · T1 à T4 · 1 immeuble"
+   },
+   "tag": {
+    "pt": "Parceiro",
+    "en": "Our partner",
+    "fr": "Partenaire"
    },
    "hero": {
     "pt": "46 apartamentos em Portas Fronhas, à entrada de Vila do Conde.",
