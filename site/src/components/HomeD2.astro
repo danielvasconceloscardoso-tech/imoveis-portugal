@@ -55,7 +55,7 @@ const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("h
     <img src="/video/hero-portugal-poster.webp?v=6e9a1bc" width="1280" height="720" alt="" fetchpriority="high" />
   </picture>
   {/* p70 r3 (J-25): the film (1.9 MB) is asked for only after the page has loaded, and only on a fast connection; the poster is the hero until then. */}
-  <video class="h2-hero-media h2-hero-film" muted loop playsinline preload="none" poster="/video/hero-portugal-poster.webp?v=6e9a1bc" data-hero-film data-src="/video/hero-portugal.mp4?v=6e9a1bc" aria-hidden="true"></video>
+  <video class="h2-hero-media h2-hero-film" muted loop playsinline preload="none" poster="/video/hero-portugal-poster.webp?v=6e9a1bc" data-hero-film data-ambient data-ctl-host=".h2-hero .h2-bar" data-src="/video/hero-portugal.mp4?v=6e9a1bc" data-pause-l={c("film.pause", lang)} data-play-l={c("film.play", lang)} aria-hidden="true"></video>
   <div class="h2-hero-text">
     <h1 id="h2-h1">{c(`home2.h1.${ed}`, lang)}</h1>
     <p>{c("home2.lede", lang)}</p>
@@ -157,6 +157,7 @@ const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("h
 </section>
 
 <script>
+  import { initAmbient } from "../scripts/ambient";
   import { evSignup } from "../lib/track";
   // The home bar (prompt 42): "Começar" opens the Concierge sheet on this page, with the country, buy or sell and the
   // budget (in euros) already answered; without the sheet (or without JavaScript) it is a link to the Concierge page.
@@ -187,25 +188,9 @@ const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("h
     const io = new IntersectionObserver((es) => es.forEach((x) => { if (x.isIntersecting) { x.target.classList.add("in"); io.unobserve(x.target); } }), { rootMargin: "0px 0px -10% 0px" });
     document.querySelectorAll("[data-reveal]").forEach((el) => io.observe(el));
   }
-  // The hero film starts at once (autoplay, muted, looping) and shows as soon as it plays; the poster stays only for
-  // reduced motion. If the browser blocks autoplay (iPhone Low Power Mode), the first touch or scroll starts it.
-  const film = document.querySelector<HTMLVideoElement>("[data-hero-film]");
-  if (film) {
-    if (matchMedia("(prefers-reduced-motion: reduce)").matches) { film.pause(); film.removeAttribute("autoplay"); film.preload = "none"; }
-    else {
-      film.muted = true;
-      const shown = () => film.classList.add("on");
-      film.addEventListener("playing", shown);
-      const gestures = ["touchstart", "pointerdown", "scroll", "keydown", "wheel"];
-      const kick = () => { film.play().then(() => gestures.forEach((g) => removeEventListener(g, kick))).catch(() => {}); };
-      const start = () => film.play().then(shown).catch(() => gestures.forEach((g) => addEventListener(g, kick, { passive: true })));
-      // Prompt 77: the film starts at once again, on every connection (the poster shows until it plays). Only the reader's
-      // own "Save-Data" keeps the still. 548440e had made it wait for the load event and a "4g" reading, so on a desktop
-      // whose page load ran long, or whose browser reported "3g", it never started.
-      const cn = (navigator as any).connection;
-      if (!(cn && cn.saveData === true)) { film.src = film.dataset.src || ""; film.preload = "auto"; film.autoplay = true; start(); }
-    }
-  }
+  // Prompt 78 §0: the hero film moves on its own on every device, reduced motion included (scripts/ambient.ts: muted,
+  // looping, from when it is in view, the first touch or scroll if autoplay is blocked, a quiet pause control).
+  initAmbient();
   // The header sits on the photograph until the page scrolls.
   const hd = document.querySelector(".hd"); const on = () => hd?.classList.toggle("solid", scrollY > 40); on(); addEventListener("scroll", on, { passive: true });
 </script>

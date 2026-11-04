@@ -73,7 +73,7 @@ export function initMapExplorer(root: HTMLElement) {
   let inLocal = false;  // the field shows the reader's currency instead of euros
   let metric: Metric = ((q.get("metric") || "") in KEY ? q.get("metric") : "m2") as Metric;  // an old ?metric=yield opens the budget view
   let selected: string | null = q.get("place"), selPar: string | null = q.get("parish");
-  let filter = "all", region = "", flat = reduce() || lowPower() || q.get("flat") === "1";
+  let filter = "all", region = "", flat = lowPower() || q.get("flat") === "1"; // prompt 78 §0: reduced motion keeps 3D
   let map: any = null, ml: any = null, features: any[] = [], loading: Promise<void> | null = null, rotating = false;
   // Prompt 34: on the home page the slow rotation stops for good after 15 seconds or at the first interaction.
   let halted = false, haltTimer = 0;

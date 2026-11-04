@@ -11094,3 +11094,15 @@ Prompt 71 (4 Nov 2026), US edition, English only: "Closer than you think" (site/
 - PT: ahead, in Lisbon. {airline} flies there nonstop, {season}.
 - EN: ahead, in Lisbon. {airline} flies there nonstop, {season}.
 - FR: ahead, in Lisbon. {airline} flies there nonstop, {season}.
+
+## film
+
+### pause
+- PT: Pausar o filme
+- EN: Pause the film
+- FR: Mettre le film en pause
+
+### play
+- PT: Ver o filme
+- EN: Play the film
+- FR: Lire le film

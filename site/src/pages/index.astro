@@ -109,17 +109,17 @@ import Beacon from "../components/Beacon.astro";
         var a = e.target.closest && e.target.closest("a[data-ed]");
         if (a) try { localStorage.setItem("ip-lang", a.dataset.lang); localStorage.setItem("ip-ed", a.dataset.ed); } catch (_) {}
       });
-      // The film after the page has loaded, and only on a decent connection without reduced motion: the poster stays otherwise.
+      // Prompt 78 §0: the film moves on its own on every device, reduced motion included; only Save-Data keeps the poster.
+      // Blocked autoplay (iPhone Low Power Mode) starts on the first touch, scroll or key.
       var v = document.querySelector("[data-film]"), c = navigator.connection || {};
-      var still = matchMedia("(prefers-reduced-motion: reduce)").matches || c.saveData || /(^|-)2g$/.test(c.effectiveType || "");
-      if (v && !still) addEventListener("load", function () {
-        v.src = "/video/hero-portugal.mp4?v=6e9a1bc";
+      if (v && !c.saveData) {
+        v.muted = true; v.setAttribute("muted", ""); v.src = "/video/hero-portugal.mp4?v=6e9a1bc"; v.preload = "auto";
         v.addEventListener("playing", function () { v.classList.add("on"); }, { once: true });
         var p = v.play(); if (p && p.catch) p.catch(function () {
           var kick = function () { v.play().catch(function () {}); };
-          ["touchstart", "pointerdown", "scroll", "keydown"].forEach(function (g) { addEventListener(g, kick, { once: true, passive: true }); });
+          ["touchstart", "pointerdown", "scroll", "keydown", "wheel"].forEach(function (g) { addEventListener(g, kick, { once: true, passive: true }); });
         });
-      });
+      }
     </script>
 
     <style is:global>
