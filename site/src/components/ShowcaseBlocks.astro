@@ -69,7 +69,7 @@ const cost = p.from ? purchase(p.from, false, false, false) as Record<string, nu
         <div><dt>{c("sims.r.deed", lang)}</dt><dd data-r="deed">{money(cost.deed)}</dd></div>
         <div><dt>{c("sims.r.total", lang)}</dt><dd data-r="total">{money(cost.total)}</dd></div>
       </dl>
-      {simHref && <p class="sb-small"><a href={`${simHref}?price=${p.from}`} data-sbfull>{k("simfull")} →</a></p>}
+      {simHref && <p class="sb-small"><a href={`${simHref}?price=${p.from}&project=${encodeURIComponent(p.id)}`} data-sbfull>{k("simfull")} →</a></p>}
     </section>}
     <p class="sb-cta" id="pedir"><button type="button" class="sb-btn sb-btn-p" data-req>{k("visit")}</button>{save && <Heart lang={lang} kind="home" id={p.id} label={`${p.name}, ${save.muni}`} href={save.href} class="sb-ht" />}</p>
     {share && <DevShare lang={lang} id={p.id} />}
@@ -162,12 +162,11 @@ const cost = p.from ? purchase(p.from, false, false, false) as Record<string, nu
   document.querySelectorAll<HTMLElement>("[data-sbsim]").forEach((box) => {
     const input = box.querySelector<HTMLInputElement>("[data-sbprice]")!, res = box.querySelector<HTMLElement>("[data-sbres]")!, full = box.querySelector<HTMLAnchorElement>("[data-sbfull]");
     const eur = new Intl.NumberFormat(box.dataset.locale, { style: "currency", currency: "EUR", maximumFractionDigits: 0 });
-    const base = (full?.getAttribute("href") ?? "").split("?")[0];
     input.addEventListener("input", () => {
       const v = Number(input.value); if (!(v > 0)) { res.hidden = true; return; }
       const r = purchase(v, false, false, false) as Record<string, number>;
       for (const k of ["imt", "is", "deed", "total"]) res.querySelector(`[data-r="${k}"]`)!.textContent = eur.format(r[k]);
-      res.hidden = false; if (full) full.href = `${base}?price=${Math.round(v)}`;
+      res.hidden = false; if (full) { const u = new URL(full.href); u.searchParams.set("price", String(Math.round(v))); full.href = u.pathname + u.search; }  // p70 r3 (MI2-03): the project stays in the link
     });
   });
 </script>

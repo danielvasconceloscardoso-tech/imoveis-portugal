@@ -41,6 +41,10 @@ const homes = showcases(PROJECTS).map((ps) => {
   const now = p.blocks ? p.blocks.reduce((a, b) => a + b.units.reduce((x, u) => x + u.forSale, 0), 0) : null;
   return { p, place, now, href: `/${lang}/${ed}/${SLUGS[lang].partners}/${p.devSlug}/${p.muni}/` };
 });
+// p70 r3 (J72-15): on the US edition the Algarve picks come first. They have no showcase page on the site, so each opens
+// its own card on the map (?project=).
+if (ed === "us") homes.unshift(...PROJECTS.filter((p) => p.tag && p.hero && !(p.units?.length || p.blocks?.length) && (PRICES.munis[p.muni] as any)?.r === "algarve")
+  .map((p) => ({ p, place: (PRICES.munis[p.muni] as any)?.n ?? p.muni, now: null as number | null, href: `${pathFor(lang, ed, "map")}?project=${encodeURIComponent(p.id)}` })));
 const nl = config.forms.newsletter[lang];
 const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("home.subscribe.subject", lang)} (${ed} · ${lang})`)}`;
 ---
@@ -50,7 +54,8 @@ const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("h
     <source type="image/avif" srcset="/video/hero-portugal-poster.avif?v=6e9a1bc" />
     <img src="/video/hero-portugal-poster.webp?v=6e9a1bc" width="1280" height="720" alt="" fetchpriority="high" />
   </picture>
-  <video class="h2-hero-media h2-hero-film" autoplay muted loop playsinline preload="auto" data-hero-film aria-hidden="true"><source src="/video/hero-portugal.mp4?v=6e9a1bc" type="video/mp4" /></video>
+  {/* p70 r3 (J-25): the film (1.9 MB) is asked for only after the page has loaded, and only on a fast connection; the poster is the hero until then. */}
+  <video class="h2-hero-media h2-hero-film" muted loop playsinline preload="none" data-hero-film data-src="/video/hero-portugal.mp4?v=6e9a1bc" aria-hidden="true"></video>
   <div class="h2-hero-text">
     <h1 id="h2-h1">{c(`home2.h1.${ed}`, lang)}</h1>
     <p>{c("home2.lede", lang)}</p>
@@ -194,7 +199,10 @@ const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("h
       const gestures = ["touchstart", "pointerdown", "scroll", "keydown", "wheel"];
       const kick = () => { film.play().then(() => gestures.forEach((g) => removeEventListener(g, kick))).catch(() => {}); };
       const start = () => film.play().then(shown).catch(() => gestures.forEach((g) => addEventListener(g, kick, { passive: true })));
-      if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start, { once: true }); else start();
+      // p70 r3 (J-25): after the load event, and not on a slow or data-saving connection (where the browser says so).
+      const cn = (navigator as any).connection, fast = !cn || (cn.saveData !== true && (!cn.effectiveType || cn.effectiveType === "4g"));
+      const go = () => { if (!fast) return; film.src = film.dataset.src || ""; film.preload = "auto"; start(); };
+      if (document.readyState === "complete") go(); else addEventListener("load", go, { once: true });
     }
   }
   // The header sits on the photograph until the page scrolls.

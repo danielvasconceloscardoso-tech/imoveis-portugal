@@ -36,7 +36,7 @@ const title = ps.length === 1 ? `${ps[0].name}, ${(PRICES.munis[ps[0].muni] as a
 // the project named; and a developer checking the page finds the way to the developers' page.
 const muniName = (PRICES.munis[ps[0].muni] as any).n as string;
 const next = rich(ps[0]) ? { kind: "req" as const, p: c("bar.next.show.p", lang), label: c("showb.visit", lang) }
-  : { kind: "concierge" as const, p: c("bar.next.show.p", lang), href: `${pathFor(lang, ed, "consult")}?project=${encodeURIComponent(ps[0].name)}&place=${encodeURIComponent(muniName)}` };
+  : { kind: "concierge" as const, p: c("bar.next.show.p", lang), href: `${pathFor(lang, ed, "consult")}?project=${encodeURIComponent(ps[0].id)}&place=${encodeURIComponent(muniName)}` };  // p70 r3 (MI2-03): the id, as the Concierge reads it
 const devPage = `${pathFor(lang, ed, "partners")}${PTYPES.find((t) => t.key === "developers")!.slug[lang]}/`;
 // The same developer's showcases elsewhere (Marble Terrace Gondomar and Vila do Conde link to each other).
 const related = sameDeveloper(PROJECTS, ps[0].devSlug, ps[0].muni).map((o) => ({ id: o[0].id, name: o[0].name, place: (PRICES.munis[o[0].muni] as any).n,
