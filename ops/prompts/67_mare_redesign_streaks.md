@@ -48,7 +48,15 @@ Test: would the editor of How To Spend It or Monocle be jealous of it? If not, i
    
    Do not create accounts or subscribe.
 2. **Screenshot each at an iPhone viewport,** and measure why it feels expensive: type sizes, line height, margins, words per screen, image ratio and resolution, number of colours, number of items.
-3. **Write content/mare/DESIGN.md:** the findings first, then our system.
+3. **Study Morning Brew's structure in depth (operator: "super good").** Search online and find several recent issues in full: their own archive, the email archives, and articles on how Morning Brew built its format. Map an issue from top to bottom:
+   - the order of sections and their names;
+   - the length of each item;
+   - how it opens and how it closes;
+   - where the market numbers, the games, the referral programme and the ads sit;
+   - the tone and the jokes.
+   
+   Write down what works and why, then adapt that structure to Maré (property and lifestyle, Portugal) with the Claridge's finish.
+4. **Write content/mare/DESIGN.md:** the findings first, the Morning Brew structure map, then our system.
 
 ## Step 3: Ask the operator, once
 1. **One message,** only for facts and business decisions you cannot settle yourself, each with your recommended answer.
