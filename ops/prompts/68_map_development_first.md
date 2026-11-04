@@ -1,42 +1,61 @@
-# Prompt 68: On the map, the development comes first again
+# Prompt 68: Tapping Gondomar, done the Jobs / Belmond / Claridge's way
 
-Operator, 4 Nov 2026: "The map no longer shows the developments as before. It was easier to see the development on the map and when I clicked Gondomar. Now I have a bunch of text."
+Operator, 4 Nov 2026:
+- "The map no longer shows the developments as before. It was easier to see the development on the map and when I clicked Gondomar. Now I have a bunch of text."
+- On the card photos: "I hate the Gondomar pictures on that card. See the view Shalu has. That's Gondomar. What we have looks like a poor block."
 
-Goes live under D67. Rules 16 and 17 apply: Gondomar is the sample. Record it as the next free D number.
+Goes live under D67. Follow content/METHOD.md (CLAUDE.md rule 16) and rule 17: Gondomar is the sample. Record it as the next free D number.
 
-## What changed (3 Nov, from the commits)
-1. **d7ee789a (D83 part 2, "clean first view")** made the first view sparse and moved the layers behind "Camadas".
-2. **01c7d48b (golden sample place card)** changed what a click on Gondomar opens.
-   - Before, `?place=gondomar` and the click opened the partner project's card first (prompt 39 §2.6, prompt 38 §3).
-   - Now they open the long place card: gallery, price in words, drive times, seven schools and seven health centres by name, sources, two buttons. The development is one small line at the very bottom (map-v3.ts `showPlace`, the `nearBy` loop).
-3. **f35f3722 (prompt 66)** hid Marble Terrace on main, so only O'rizon is left in Gondomar.
-4. **The short link /orizon** opens `/en/lu/map/?place=gondomar`, so Shalu lands on that wall of text, not on his project.
+## What went wrong (3 Nov commits)
+1. **01c7d48b** made a tap on Gondomar open a long report: a gallery, the price in words, drive times, seven schools and seven health centres by name, sources and two buttons. The development is one line at the bottom (map-v3.ts `showPlace`, the `nearBy` loop). Before, the partner project's card opened first (prompt 39 §2.6).
+2. **d7ee789a ("clean first view")** moved most of the map behind "Camadas".
+3. **The three card photos** (gondomar-douro-gramido, gondomar-melres-douro, gondomar-marina-melres) are small, flat midday shots of Gondomar's rural east. Shalu's aerials show Gondomar at its best: the wide Douro at Valbom and the Freixo, the bridges, Porto behind, at golden hour.
+4. **/orizon** opens that long card, not O'rizon.
 
-## Fix
-1. **Pins.** Every shown development has its photo pin visible from the opening view of Portugal, clustered with a count when zoomed out (prompt 39 §2 rule 2). It is not hidden behind "Camadas", and it carries its tag (O'rizon: "Seleção" / "Our pick" / "Sélection").
-2. **A place with a partner development opens the development first.** Gondomar opens O'rizon's card at the top: its best photograph, the name and tag, the homes, typologies and buildings, three features, what is for sale now, the published prices, and two actions ("Ver o empreendimento", "Pedir visita privada"). The place card sits right below it, or one tap away under the place's name. Generic, from projects.json: the next partner place works with no code change.
-3. **The place card loses the wall of text.**
-   - Each tile shows one number and one line, for example "Escolas · 7 a menos de 15 min" or "Porto · 15 min de carro".
-   - The full lists and the sources open on tap.
-   - Nothing on the first screen of the card that a reader has to read line by line.
-   - Keep every free/paid boundary as it is.
-4. **/orizon opens O'rizon's card on the map** (Gondomar in view, the card open), in English. Add a `?project=` parameter if none exists. Keep the private preview /d/f658bd1eef/ as it is.
-5. **Nothing else changes.** Data, prices, events, Marble Terrace pending.
+## The five questions (METHOD.md), answered for this moment
+1. **Feel:** "I have arrived somewhere I could live, and someone has already thought of everything."
+2. **Arrival:**
+   - the camera comes down the Douro to Gondomar (3D, about 2 s; any touch takes over; reduced motion jumps);
+   - the name in large type, and one line: "Gondomar. O Douro, a 12 minutos dos Aliados" (OSRM, already in place.json).
+   - No photograph until a hero photograph exists (step 3 below): the flight is the arrival.
+3. **Hero:**
+   - O'rizon's photo pin stands at its real spot, visible from the opening view of Portugal, labelled "Seleção" / "Our pick" / "Sélection".
+   - The card opens on O'rizon: the full-bleed render, one line ("200 casas sobre o Douro, junto à Marina do Freixo"), and one action, "Marcar uma visita privada".
+   - "Ver o empreendimento" sits below as a quiet link.
+4. **The next questions,** one line each, opening on tap: "Porto? 12 min." "Escolas? 7 a menos de 15 min." "300 000 €? Cerca de 128 m²."
+   - The lists, the sources and the paid tiles live behind these taps.
+   - Nothing on the first screen that has to be read line by line. Every free/paid boundary stays as it is.
+5. **One more thing:** the last line of the card is "Daqui sai 42% da ourivesaria portuguesa." (Câmara de Gondomar, 2023; add it to facts.csv.)
+
+The pattern comes from projects.json, so the next partner place works with no code change.
+
+## Photographs
+1. **Remove the three current photos** from the Gondomar card on main now. Keep the files.
+2. **Write the hero brief** in content/media/SOURCES.md:
+   - an aerial from Valbom looking west to the Freixo bridge and Porto, golden or blue hour;
+   - then the Gramido riverfront at sunset;
+   - then a close-up of filigree being made.
+3. **The operator chooses the source** (Shalu's permission, a drone pilot, or a licence). Do not buy or use anything without his go, and never use Shalu's renders as the place's photograph.
+
+## /orizon
+Opens O'rizon's card on the map, in English, with Gondomar in view. Add `?project=` if it does not exist. The private preview /d/f658bd1eef/ stays as it is.
 
 ## Before you push
 1. Tag `backup/pre-68-2026-11-04` on main and design-v2.
 2. Run the checks and the build.
-3. Make phone screenshots, before and after, of:
-   - the opening view of Portugal;
+3. Make before and after phone screenshots of:
+   - the opening view;
    - a tap on Gondomar;
    - imoveisportugal.lu/orizon.
 
-## Acceptance (check on main after the push, phone and desktop)
-1. The O'rizon pin, with its photo, is visible on the opening view and labelled "Seleção" / "Our pick", never "Patrocinado".
-2. Tapping Gondomar shows O'rizon first, with its photo, the homes and the two actions, before any place text.
-3. The Gondomar place card fits its key facts on one phone screen; the lists open on tap.
+## Acceptance (on main, phone and desktop)
+1. The O'rizon pin, with its photo, shows on the opening view, labelled "Seleção" / "Our pick", never "Patrocinado".
+2. Tapping Gondomar gives the arrival, then O'rizon first, then the one-line answers. Nothing on the first screen reads like a report.
+3. No low-quality photograph on the Gondomar card.
 4. /orizon opens O'rizon's card in English.
 5. The checks and the build pass, and the live link works.
 
 ## Report
-The live links, the before and after screenshots, and what you could not do. Wait for the operator's go before applying the shorter place card to places other than Gondomar (rule 17).
+1. The live links and the before and after screenshots.
+2. What you could not do.
+3. Wait for the operator's go before applying the pattern to other places (rule 17).
