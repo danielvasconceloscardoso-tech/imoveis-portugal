@@ -27,6 +27,7 @@ import { existsSync, readFileSync } from "node:fs";
 import { FACTS } from "../lib/content";
 import { join } from "node:path";
 import "../styles/mapv3.css";
+import "../styles/golf-mode.css";
 import MareBlock from "./MareBlock.astro";
 
 interface Props { lang: Lang; ed: EdCode; mode?: "page" | "home"; }
@@ -133,6 +134,9 @@ const cfg = { labels, links, photos, photoAlt, regionPhotos, ed, lang,
   p69: { imt: keep("p69.imt.map", ["price", "imt"]), how: c("p69.imt.how", lang), cg: c("flow.c.title", lang), nr: c("p69.total.nr", lang) },
   // Prompt 71 §2: the south coast (US edition only; empty elsewhere).
   south, p71: south.length ? { k: k7("k"), next: k7("next"), golf: k7("golf") } : null,
+  // Prompt 78: golf mode (golf-mode.ts; COPY_DECK.md "p78"). The 2027 line names only what facts.csv holds.
+  p78: { ...Object.fromEntries(["tag", "holes", "courses", "door.h", "door.car", "door.tee", "near", "site", "homes", "year.k", "src.drive", "src.outline", "flags"].map((x) => [x, keep(`p78.${x}`, ["n", "name", "v", "d"])])),
+    door: true, year: [FACTS["pga-champions-portugal-invitational-2027"] && c("p78.year.pga", lang), FACTS["f1-portugal-2027-dates"] && c("p78.year.f1", lang)].filter(Boolean) },
   pl: { view: c("showb.view", lang), visit: c("showb.visit", lang), price: c("showb.price", lang), now: c("showb.now", lang, { n: "{n}" }), near: c("bar.near", lang, { name: "{name}", muni: "{muni}" }) } };
 // Operator, step 1: the market price is the one free colour layer; 10 years, rents, yields and vacant homes are paid.
 const chips = [["price", "chip.price"]] as const;
@@ -163,6 +167,9 @@ const skelNames = Object.fromEntries(MAP_MUNIS.filter((m) => fromSlug(m.s) !== m
         <span>{k4("search")}</span><kbd>⌘K</kbd>
       </button>
       {mode === "page" && <a class="m3-cmp-pill" data-cmp-pill href={comparePath} hidden></a>}
+      {mode === "page" && (
+        <button type="button" class="m3-golfbtn" data-golf aria-pressed="false" aria-label={c("p78.toggle.aria", lang)}><span>{c("p78.toggle", lang)}</span></button>
+      )}
       {mode === "page" && (
         <button type="button" class="m3-layersbtn" data-panel-open aria-expanded="false" aria-controls="m3-panel">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 3 8l9 5 9-5-9-5z"/><path d="m3 13 9 5 9-5"/></svg>

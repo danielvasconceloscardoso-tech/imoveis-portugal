@@ -1,0 +1,4 @@
+id,kind,name,short,lat,lon,point_source,fact,caption_pt,caption_en,caption_fr
+vilamoura-marina,marina,Marina de Vilamoura,Marina de Vilamoura,37.0766676,-8.1214326,"OpenStreetMap (Nominatim), leisure=marina, way/450048113, 2026-11-04",vilamoura-marina-berths,"A maior de Portugal, diz a marina","Portugal's largest, says the marina","La plus grande du Portugal, selon la marina"
+praia-da-falesia,beach,Praia da Falésia,Falésia,37.0805,-8.14946,site/public/data/map/beaches.json,falesia-tripadvisor-2024,"N.º 1 do Tripadvisor, 2024","Tripadvisor's No. 1, 2024","N° 1 Tripadvisor, 2024"
+vilamoura,town,Vilamoura,Vilamoura,37.077,-8.118,site/src/scripts/map-v3.ts LOCALITIES,,,,

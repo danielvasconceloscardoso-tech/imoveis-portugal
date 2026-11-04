@@ -1,0 +1,101 @@
+/* Golf mode (prompt 78, site/src/scripts/golf-mode.ts): Algarve summer, one sun, quiet type. Everything here is scoped to
+   .m3.is-golf or to the golf marks, so the normal map is untouched. Three refinements of the v3 look (data-gm-look a|b|c)
+   share one structure and differ only in their tokens. */
+.m3 { --gm-flag: #f4c430; --gm-terra: #c0623a; --gm-ink: #1c2a2b; --gm-green: #1d6a45; --gm-halo: #fbf6ea; }
+.m3[data-gm-look="b"] { --gm-flag: #efc04a; --gm-terra: #b56a48; --gm-ink: #24302f; --gm-green: #2a6e4c; --gm-halo: #fbf8f0; }
+.m3[data-gm-look="c"] { --gm-flag: #f5b829; --gm-terra: #bb5527; --gm-ink: #1b2626; --gm-green: #1b6440; --gm-halo: #faf2e2; }
+
+/* The switch: a pill like "Layers"; on, the green of the brand's button. The icon is drawn (golf-mode.ts), never an emoji. */
+.m3-golfbtn { margin-left: auto; display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 16px 0 14px; font-size: 14px; font-weight: 600; border-radius: 999px;
+  background: var(--g) !important; -webkit-backdrop-filter: blur(20px) saturate(1.5); backdrop-filter: blur(20px) saturate(1.5); border: 1px solid var(--gl) !important; box-shadow: var(--sh);
+  transition: background-color .25s var(--e), color .25s var(--e); }
+.m3-golfbtn:hover { background: var(--g2) !important; }
+.m3-golfbtn svg { width: 17px; height: 17px; stroke-width: 1.6; }
+.m3-golfbtn[aria-pressed="true"] { background: var(--gm-green) !important; color: #fff !important; border-color: transparent !important; }
+.m3-cmp-pill:not([hidden]) + .m3-golfbtn, .m3-golfbtn + .m3-layersbtn { margin-left: 0; }
+@media (max-width: 819px) { .m3-golfbtn { padding: 0 14px 0 12px; } }
+
+/* The glass is whiter in golf mode (the white glass header of v3); the region postcards step aside for the coast. */
+.m3.is-golf { --g: rgba(255, 255, 255, .82); --gl: rgba(255, 255, 255, .9); }
+.m3.is-golf .m3-cards { opacity: 0; pointer-events: none; transform: translateX(-12px); }
+.m3.is-golf.gm-near .m3-labels { opacity: 0; }
+.m3-labels { transition: opacity .3s var(--e); }
+
+/* The flags: a white pin, a yellow flag, a dark cup; a soft shadow on the ground away from the sun. */
+.gm-flag { position: relative; display: block; width: 64px; height: 80px; padding: 0; margin: 0; border: 0; background: none; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.gm-flag:focus-visible { outline: none; }
+.gm-flag:focus-visible .gm-f-svg { filter: drop-shadow(0 0 3px #fff) drop-shadow(0 0 2px var(--gm-green)); }
+.gm-f { position: absolute; inset: 0; transform: scale(var(--s, 1)); transform-origin: 32px 80px; transition: transform .25s var(--e); }
+.gm-flag:hover .gm-f { transform: scale(calc(var(--s, 1) * 1.08)); }
+.m3 .gm-f-svg { position: relative; display: block; width: 64px; height: 80px; overflow: visible; stroke: none; filter: drop-shadow(0 .6px .4px rgba(20, 32, 24, .22)); }
+.gm-sh { position: absolute; left: 32px; top: 78.5px; width: var(--gm-shl, 20px); height: 2.2px; margin-top: -1.1px; border-radius: 2px; transform-origin: 0 50%; transform: rotate(var(--gm-sha, -.6rad));
+  background: linear-gradient(90deg, rgba(36, 48, 30, .34), rgba(36, 48, 30, .12) 70%, rgba(36, 48, 30, 0)); filter: blur(.5px); }
+.gm-sh::after { content: ""; position: absolute; right: 0; top: -2px; width: 9px; height: 5px; border-radius: 50%; background: rgba(36, 48, 30, .14); filter: blur(1.2px); }
+.gm-wave { transform-box: view-box; transform-origin: 33px 12px; animation: gm-breathe 6.4s ease-in-out infinite; }
+@keyframes gm-breathe { 0%, 100% { transform: none; } 35% { transform: skewY(-2.4deg) scaleX(.95); } 70% { transform: skewY(1.2deg) scaleX(.985); } }
+.gm-n { position: absolute; left: 47px; top: -4px; display: none; place-items: center; min-width: 22px; height: 22px; padding: 0 6px; border-radius: 11px; background: #fff; color: var(--gm-ink);
+  font: 700 12px/1 var(--m3sans); box-shadow: 0 2px 8px rgba(20, 30, 30, .16); }
+.gm-flag.is-n .gm-n { display: grid; }
+
+/* Names: Playfair italic for the courses and the places that matter; small terracotta caps for what they are. */
+.gm-lab, .gm-grp, .gm-cap, .gm-town { pointer-events: none; white-space: nowrap; opacity: 0; visibility: hidden; transition: opacity .3s var(--e), visibility 0s linear .3s; }
+.gm-lab.is-on, .gm-grp.is-on, .gm-cap.is-on, .gm-town.is-on { opacity: 1; visibility: visible; transition: opacity .3s var(--e), visibility 0s; }
+.gm-lab { position: absolute; left: 32px; top: 80px; display: grid; gap: 3px; text-align: left; }
+.gm-lab em, .gm-grp em { font: italic 400 21px/1 var(--m3serif); letter-spacing: -.005em; color: var(--gm-ink);
+  text-shadow: 0 0 2px var(--gm-halo), 0 0 6px var(--gm-halo), 0 0 14px var(--gm-halo); }
+.gm-lab small, .gm-grp small, .gm-cap small { font: 700 10.5px/1.1 var(--m3sans); letter-spacing: .17em; text-transform: uppercase; color: var(--gm-terra);
+  text-shadow: 0 0 2px var(--gm-halo), 0 0 6px var(--gm-halo); }
+.gm-grp { display: grid; gap: 5px; justify-items: center; translate: var(--gx, 0) calc(var(--gy, 0) - 4px); }
+.gm-grp em { font-size: 25px; }
+.gm-cap { display: flex; align-items: flex-end; gap: 7px; }
+.gm-cap i { flex: none; width: 12px; height: 12px; box-sizing: border-box; border-radius: 50%; border: 2.5px solid var(--gm-terra); background: #fff; box-shadow: 0 1px 3px rgba(30, 40, 40, .2); }
+.gm-cap span { display: grid; gap: 3px; padding-bottom: 1px; }
+.gm-cap b { font: 600 13px/1.1 var(--m3sans); color: var(--gm-ink); text-shadow: 0 0 2px var(--gm-halo), 0 0 6px var(--gm-halo), 0 0 12px var(--gm-halo); }
+.gm-town { font: 600 11px/1 var(--m3sans); letter-spacing: .3em; text-transform: uppercase; color: rgba(36, 44, 46, .62); padding-bottom: 2px;
+  text-shadow: 0 0 2px var(--gm-halo), 0 0 6px var(--gm-halo), 0 0 12px var(--gm-halo); }
+
+/* The developments' photo pins float above the ground: a thin white stem, a white ring where they stand, the name above. */
+.m3.is-golf .m3-pin-ph { padding-bottom: 52px; }
+.m3.is-golf .m3-pin-ph::after { content: ""; position: absolute; left: 50%; bottom: 7px; width: 1.6px; height: 47px; margin-left: -.8px; border-radius: 1px; background: #fff; box-shadow: 0 0 1.5px rgba(20, 32, 32, .35); }
+.m3.is-golf .m3-pin-ph::before { content: ""; position: absolute; left: 50%; bottom: 0; width: 11px; height: 11px; margin-left: -5.5px; box-sizing: border-box; border-radius: 50%; border: 2.5px solid #fff; background: var(--gm-green);
+  box-shadow: 0 0 0 .5px rgba(20, 30, 30, .2), var(--gm-shx, 3px) calc(var(--gm-shy, 2px) * .4) 4px rgba(30, 40, 30, .28); }
+.m3.is-golf .m3-pin-tip, .m3.is-golf .m3-pin-t { display: none !important; }
+.m3.is-golf .m3-pin-img { width: 56px; height: 56px; border: 3px solid #fff; box-shadow: var(--gm-shx, 3px) var(--gm-shy, 4px) 12px rgba(30, 40, 30, .16), 0 1px 3px rgba(20, 30, 30, .16); }
+.m3.is-golf .m3-pin span { display: none; }
+.m3.is-golf .m3-pin.gm-named span { display: block; padding: 0 0 7px; background: none; box-shadow: none; text-align: center; font: 600 13.5px/1.15 var(--m3sans); color: var(--gm-ink);
+  text-shadow: 0 0 2px var(--gm-halo), 0 0 6px var(--gm-halo), 0 0 12px var(--gm-halo); }
+.m3.is-golf .m3-pin em { margin-top: 4px; font-size: 10.5px; letter-spacing: .18em; color: var(--gm-terra); }
+
+/* The 2027 line, bottom left, white glass. */
+.gm-year { position: absolute; z-index: 5; left: 16px; bottom: 28px; margin: 0; display: flex; align-items: baseline; gap: 12px; max-width: min(640px, calc(100% - 460px)); padding: 11px 18px; border-radius: 999px;
+  font: 500 13px/1.3 var(--m3sans); color: var(--gm-ink); background: var(--g); -webkit-backdrop-filter: blur(20px) saturate(1.5); backdrop-filter: blur(20px) saturate(1.5); border: 1px solid var(--gl); box-shadow: var(--sh); }
+.gm-year b { flex: none; font: 700 10.5px/1 var(--m3sans); letter-spacing: .18em; text-transform: uppercase; color: var(--gm-terra); }
+@media (max-width: 819px) {
+  .gm-year { left: 10px; right: 10px; bottom: 12px; max-width: none; border-radius: 16px; font-size: 12.5px; padding: 10px 14px; transition: opacity .25s var(--e); }
+  .m3-sheet.is-open ~ .gm-year { opacity: 0; pointer-events: none; }
+}
+
+/* The hole card: the name in Playfair italic, one line, one number, two quiet links. */
+.m3-sheet h2.gm-name { font-style: italic; font-size: 44px; line-height: 1.02; }
+.gm-card-np { padding-top: 26px; }
+.gm-card-np > .m3-kick, .gm-card-np > h2 { padding-right: 52px; }
+.gm-one { margin: 10px 0 0; font: 700 11px/1.3 var(--m3sans); letter-spacing: .16em; text-transform: uppercase; color: var(--gm-terra); }
+.gm-num { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 8px; margin: 22px 0 0; padding: 16px 0 0; border-top: 1px solid rgba(120, 120, 110, .18); }
+.gm-num b { font: 400 52px/1 var(--m3serif); letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.gm-num span { font: 400 21px/1 var(--m3serif); }
+.gm-num small { flex-basis: 100%; margin-top: 6px; font: 500 14px/1.35 var(--m3sans); color: var(--gm); }
+.gm-links { margin: 14px 0 0; }
+.gm-door { margin: 18px 0 0; }
+.gm-door[hidden] { display: none; }
+.gm-door .m3-tt.gm-door-h { color: var(--gm-green, #1d6a45); margin-bottom: 8px; }
+.m3:not(.is-golf) .gm-door .m3-tt.gm-door-h { color: var(--gm); }
+
+@media (prefers-reduced-motion: reduce) {
+  .gm-wave { animation: none; }
+  .gm-lab, .gm-grp, .gm-cap, .gm-town, .gm-f, .m3-labels { transition: none; }
+}
+
+/* The one action on a card is the brand's green in golf mode (v3). */
+.m3.is-golf .m3-btn-p { background: var(--gm-green) !important; color: #fff !important; }
+.m3.is-golf .m3-btn-p:hover { background: #17573a !important; }
+.m3.is-golf .m3-pin.gm-far, .m3.is-golf .m3-pin.gm-far *, .gm-far, .gm-far * { visibility: hidden !important; }

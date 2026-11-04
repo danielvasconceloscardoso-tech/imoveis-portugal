@@ -11094,3 +11094,97 @@ Prompt 71 (4 Nov 2026), US edition, English only: "Closer than you think" (site/
 - PT: ahead, in Lisbon. {airline} flies there nonstop, {season}.
 - EN: ahead, in Lisbon. {airline} flies there nonstop, {season}.
 - FR: ahead, in Lisbon. {airline} flies there nonstop, {season}.
+
+## p78
+
+Prompt 78 (4 Nov 2026): golf mode on the map (site/src/scripts/golf-mode.ts). Functional copy is plain (content/METHOD.md, "Two registers"); course and development names are set in Playfair italic by the page, never in the copy.
+
+### toggle
+- PT: Golfe
+- EN: Golf
+- FR: Golf
+
+### toggle.aria
+- PT: Modo golfe
+- EN: Golf mode
+- FR: Mode golf
+
+### tag
+- PT: Seleção
+- EN: Our pick
+- FR: Sélection
+
+### holes
+- PT: {n} buracos
+- EN: {n} holes
+- FR: {n} trous
+
+### courses
+- PT: {n} campos
+- EN: {n} courses
+- FR: {n} parcours
+
+### door.h
+- PT: Da sua porta
+- EN: From your door
+- FR: De votre porte
+
+### door.car
+- PT: de carro
+- EN: by car
+- FR: en voiture
+
+### door.tee
+- PT: {name}, primeiro tee
+- EN: {name}, first tee
+- FR: {name}, premier départ
+
+### min
+- PT: {v} min
+- EN: {v} min
+- FR: {v} min
+
+### near
+- PT: de carro, desde {name}
+- EN: by car from {name}
+- FR: en voiture depuis {name}
+
+### site
+- PT: Site do campo
+- EN: Course site
+- FR: Site du parcours
+
+### homes
+- PT: As casas
+- EN: The homes
+- FR: Les logements
+
+### year.k
+- PT: Em 2027
+- EN: In 2027
+- FR: En 2027
+
+### year.pga
+- PT: PGA Tour Champions no The Els Club
+- EN: PGA Tour Champions at The Els Club
+- FR: PGA Tour Champions à The Els Club
+
+### year.f1
+- PT: Fórmula 1 em Portimão, 18 a 20 de junho
+- EN: Formula 1 at Portimão, 18 to 20 June
+- FR: Formule 1 à Portimão, du 18 au 20 juin
+
+### src.drive
+- PT: Tempo de carro: OSRM, dados OpenStreetMap, sem trânsito, {d}
+- EN: Drive time: OSRM, OpenStreetMap data, no traffic, {d}
+- FR: Temps de trajet : OSRM, données OpenStreetMap, sans trafic, {d}
+
+### src.outline
+- PT: Contornos dos campos: OpenStreetMap
+- EN: Course outlines: OpenStreetMap
+- FR: Contours des parcours : OpenStreetMap
+
+### flags
+- PT: {n} campos de golfe
+- EN: {n} golf courses
+- FR: {n} parcours de golf

@@ -12,6 +12,7 @@ import { track, edOf, ev, evHeart, timeBand, rememberPlace } from "../lib/track"
 import { get as savedItems } from "../lib/saved";
 import { imt as imtOf, purchase } from "../lib/sims";
 import { heartHTML } from "./hearts";
+import { createGolf } from "./golf-mode";
 
 // The free price layer (operator, step 1): the market median per quarter over the last five years (/data/map/price5.json).
 type Series = { n: string; m2: (number | null)[] };
@@ -103,6 +104,8 @@ export function initMapV3(root: HTMLElement) {
   let golf: any = null, beaches: [number, number, string][] | null = null;
   let breaks: Record<Layer, number[]> = {} as any;
   let tourAbort: (() => void) | null = null;
+  // Prompt 78: golf mode (golf-mode.ts), created at the start below; the map page only.
+  let golfX: ReturnType<typeof createGolf> | null = null;
   const projects: Proj[] = cfg.projects || [];
   const projMunis = new Set(projects.map((p) => p.muni));
   // Prompt 68 (4 Nov 2026), the golden sample of the method (content/METHOD.md): a place whose shown partner projects carry
@@ -252,7 +255,7 @@ export function initMapV3(root: HTMLElement) {
   // Remove the map and its markers and free the GPU (leaving the page, or a lost context); load() builds it again.
   async function teardown() {
     if (loading) await loading.catch(() => {});  // never pull the map from under a load in progress
-    clearTimeout(lostT); stopTour(); stopPlay(); rotating = false;
+    clearTimeout(lostT); stopTour(); stopPlay(); rotating = false; golfX?.detach();
     markers.forEach((m) => m.m.remove()); markers = []; still?.remove(); still = null;
     try { map?.remove(); } catch { /* already gone */ }
     map = null; loading = null; parLoading = null; clusterOn = false; root.classList.remove("is-live");
@@ -368,7 +371,7 @@ export function initMapV3(root: HTMLElement) {
       if (mode === "page" && q.get("tour") === "south" && cfg.south?.length) southStop(0);
       if (mode === "home" && !flat && !selected) startSpin();
       if (!flat) governor();
-      map.on("click", (e: any) => { stopTour(); const gc = overlays.golf ? golfAt(e.point) : null; if (gc) { showGolf(gc); return; } const h = pick(e.point); if (!h) return; if (h.kind === "par") selectParish(h.key); else select(h.key); });
+      map.on("click", (e: any) => { stopTour(); if (golfX?.click(e.point)) return; const gc = overlays.golf ? golfAt(e.point) : null; if (gc) { showGolf(gc); return; } const h = pick(e.point); if (!h) return; if (h.kind === "par") selectParish(h.key); else select(h.key); });
       map.on("mousemove", (e: any) => hover(e.point)); map.on("mouseout", () => hover(null));
       map.on("move", labelsSoon); map.on("zoomend", () => { if (map.getZoom() > 7.8) loadParishes(); });
       ["pointerdown", "wheel", "touchstart"].forEach((ev) => canvas.addEventListener(ev, () => { stopTour(); halt(); arrStop(); }, { passive: true }));
@@ -379,6 +382,7 @@ export function initMapV3(root: HTMLElement) {
       map.on("error", (e: any) => { if (e?.sourceId) bad.add(e.sourceId); });
       addEventListener("online", () => { if (!map) return; for (const id of bad) try { const src = map.getSource(id); const t = src?.tiles ?? src?._options?.tiles; if (t && src.setTiles) src.setTiles(t); } catch { /* source gone */ } bad.clear(); map.triggerRepaint(); });
       loadTiles();
+      golfX?.attach();  // prompt 78: golf mode comes on (again) once the map stands
     })();
     return loading;
   }
@@ -1086,11 +1090,12 @@ export function initMapV3(root: HTMLElement) {
       // Prompt 68: the label only where the data gives one (O'rizon's "tag"); a development not yet signed carries none.
       hh += `<div class="m3-sb m3-arr"><p class="m3-kick">${esc(pm2)}${p.tag ? ` · <span class="m3-tag">${esc(p.tag)}</span>` : ""}</p><div class="ht-row"><h2 class="m3-h" tabindex="-1">${esc(p.name)}</h2>${heartHTML("home", p.id, pm2 ? `${p.name}, ${pm2}` : p.name, p.showcase)}</div>`;
       hh += `<p class="m3-arr-l">${esc(p.hero)}</p>${p.from ? `<p class="m3-line">${esc(L.pfrom.replace("{v}", eur.format(p.from)))}</p>${totalLine(p.from)}` : ""}`;
+      hh += golfX?.door(p) ?? "";  // prompt 78: "From your door"
       hh += `<a class="m3-btn m3-btn-p m3-btn-w" href="${esc(p.visit || `${p.showcase}#pedir`)}" data-visit>${esc(cfg.p68.visit)}</a>`;
       // Prompt 69: the Concierge from the project card opens on this project (its first step already chosen).
       const cg = cfg.p69 ? `<a class="m3-link" href="${esc(`${cfg.links.consult}?project=${encodeURIComponent(p.id)}&place=${encodeURIComponent(pm2)}`)}" data-concierge data-cta-consult>${esc(cfg.p69.cg)} →</a>` : "";
       hh += `<p class="m3-hero-v m3-quiet"><a class="m3-link" href="${esc(p.showcase)}" data-view${/^https?:/.test(p.showcase) ? ` target="_blank" rel="noopener"` : ""}>${esc(cfg.p68.view)} →</a>${byS.has(p.muni) || pm2 ? `<button type="button" class="m3-link" data-goto="${esc(p.muni)}">${esc(pm2)} →</button>` : ""}${cg}</p></div>`;
-      openSheet(hh, open, true);
+      openSheet(hh, open, true); golfX?.fill(sheetIn);
       sheetIn.querySelector("[data-visit]")?.addEventListener("click", () => ev({ event: "map/visit", place: p.muni, step: p.id, origin: mode }));
       sheetIn.querySelector("[data-view]")?.addEventListener("click", () => ev({ event: "map/hero/view", place: p.muni, step: p.id, origin: mode }));
       return;
@@ -1101,9 +1106,9 @@ export function initMapV3(root: HTMLElement) {
     h += `<p class="m3-buys">${esc(p.summary ?? p.developer)}</p>`;
     if (p.feats?.length) h += `<ul class="m3-det">${p.feats.map((f) => `<li>${esc(f)}</li>`).join("")}</ul>`;
     if (p.now != null && pl.now) h += `<p class="m3-buys"><b>${esc(pl.now.replace("{n}", String(p.now)))}</b></p>`;
-    h += `<p class="m3-buys">${p.from ? L.pfrom.replace("{v}", eur.format(p.from)) : esc(pl.price ?? L.ponreq)}</p>${p.from ? totalLine(p.from) : ""}`;
+    h += `<p class="m3-buys">${p.from ? L.pfrom.replace("{v}", eur.format(p.from)) : esc(pl.price ?? L.ponreq)}</p>${p.from ? totalLine(p.from) : ""}${golfX?.door(p) ?? ""}`;
     h += `<div class="m3-acts"><a class="m3-btn m3-btn-p" href="${esc(p.showcase)}">${esc(pl.view ?? p.name)}</a><a class="m3-btn" href="${esc(p.visit || `${p.showcase}#pedir`)}">${esc(pl.visit ?? "")}</a></div></div>`;
-    openSheet(h, open);
+    openSheet(h, open); golfX?.fill(sheetIn);
   }
 
   // ------------------------------------------------------------ time: the last five years (21 quarters, /data/map/price5.json) in about twelve seconds
@@ -1331,6 +1336,11 @@ export function initMapV3(root: HTMLElement) {
       if (par && parishes) selectParish(par); else if (pj) showProject(pj); else if (pl) select(pl); else if (rg) showRegion(rg); else select(null);
     } finally { restoring = false; }
   });
+  // Prompt 78: golf mode (?mode=golf, /golf, /arrow) on the map page; its hooks above are attach, detach, click, door and fill.
+  if (mode === "page") golfX = createGolf({ root, cfg, q, reduce, isFlat: () => flat, quality: () => quality, load, map: () => map, ml: () => ml, sheetIn, projects, openSheet, showProject, ev, esc,
+    isWide, padL, padTop, governor, sky: () => (flat ? { "sky-color": "#e7e2d7", "horizon-color": "#e7e2d7", "fog-color": "#e7e2d7", "sky-horizon-blend": 0, "horizon-fog-blend": 0, "fog-ground-blend": 1, "atmosphere-blend": 0 } : SKY),
+    pins: () => markers, golfOverlay: () => overlays.golf, setGolfOverlay: (on) => setOverlay("golf", on), stopAll: () => { stopTour(); halt(); arrStop(); } });
+  if (golfX && q.get("mode") === "golf") load();
   dimButtons();
   if (layer !== "none" && layer !== layer0) setLayer(layer);
   else if (layer !== "none") { root.querySelectorAll<HTMLElement>("[data-layer]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.layer === layer))); root.querySelector("[data-time]")?.classList.remove("is-off"); }
@@ -1373,5 +1383,5 @@ export function initMapV3(root: HTMLElement) {
     });
   }
   // For the automated click check (scripts/map-data/clicktest.mjs).
-  (root as any).__mapx = { load, showRegion, openPanel, openSources: () => openSources(), view: () => view, pick: (x: number, y: number) => pick({ x, y }), project: (s: string) => { const p = byS.get(s); return p && map ? map.project([p.x, p.y]) : null; }, map: () => map, selected: () => selected, slugs: () => features.map((f) => f.properties.s), tour, setDim, setBudget, setQuarter, quality: () => quality };
+  (root as any).__mapx = { load, showRegion, openPanel, openSources: () => openSources(), view: () => view, pick: (x: number, y: number) => pick({ x, y }), project: (s: string) => { const p = byS.get(s); return p && map ? map.project([p.x, p.y]) : null; }, map: () => map, golf: () => golfX, selected: () => selected, slugs: () => features.map((f) => f.properties.s), tour, setDim, setBudget, setQuarter, quality: () => quality };
 }
