@@ -58,6 +58,8 @@ export function initMapV3(root: HTMLElement) {
   // ------------------------------------------------------------ state (every state is a link)
   const stored = (() => { try { return Number(localStorage.getItem("ip.budget")) || 0; } catch { return 0; } })();
   let budget = Math.min(Math.max(Number(q.get("budget")) || stored || 300000, 100000), 20e6);
+  // p70 (MI-14): the budget goes into the link only once the reader has set one (a ?budget= link, or the slider or amount).
+  let budgetSet = q.has("budget");
   // D83 part 2: the first view has no colour layer ("none"); ?layer=price and the others still open with their colours.
   // Operator, step 1: only the market price stays as a free colour layer; ten years, rents, yields and the other statistics
   // moved to the paid analysis (an old ?layer=rent link opens the map without colours).
@@ -97,7 +99,7 @@ export function initMapV3(root: HTMLElement) {
   function syncUrl() {
     const p = new URLSearchParams(location.search);
     const set = (k: string, v: string | null) => (v ? p.set(k, v) : p.delete(k));
-    set("budget", String(Math.round(budget))); set("layer", layer === "none" ? null : layer); set("place", selected); set("parish", selPar); set("region", selRegion); set("project", selProj);
+    set("budget", budgetSet ? String(Math.round(budget)) : null); set("layer", layer === "none" ? null : layer); set("place", selected); set("parish", selPar); set("region", selRegion); set("project", selProj);
     set("q", qi >= 0 && P ? P.quarters[qi] : null);
     for (const k of ["golf", "beach"] as const) set(k, overlays[k] ? "1" : null);
     set("devs", mode === "page" ? (overlays.devs ? null : "0") : overlays.devs ? "1" : null);  // prompt 39 §2.1: on by default on the map page
@@ -166,7 +168,7 @@ export function initMapV3(root: HTMLElement) {
     amountBtn.textContent = moneyCur(budget);
     sentence();
     if (map && P) { clearTimeout(reachT); reachT = window.setTimeout(() => { for (const f of features) map.setFeatureState({ source: "munis", id: f.id }, { reach: reaches(f.properties.s) }); }, 30); }
-    if (remember) try { localStorage.setItem("ip.budget", String(Math.round(budget))); } catch { /* private mode */ }
+    if (remember) { budgetSet = true; try { localStorage.setItem("ip.budget", String(Math.round(budget))); } catch { /* private mode */ } }
     if (selected && !sheet.hidden && !pinA && view === "card" && !selPar) showPlace(selected, false);
     syncUrl();
   }
@@ -488,7 +490,7 @@ export function initMapV3(root: HTMLElement) {
     if (!slug && !restoring && mode === "page" && history.state?.m3 === "" && cardKey()) { history.back(); return; }
     if (slug) step(`place:${slug}`);
     arrStop(); selected = slug; selPar = null; selRegion = null; selProj = null;
-    if (map) map.setFilter("sel", ["==", ["get", "s"], slug ?? ""]);
+    if (map?.getLayer("sel")) map.setFilter("sel", ["==", ["get", "s"], slug ?? ""]);
     const p = slug ? byS.get(slug) : null;
     if (p && map && fly) heroOf(slug) ? arriveAt(slug!) : flyTo(p.x, p.y, zoomFor(p));
     syncUrl(); sentence();
@@ -736,7 +738,7 @@ export function initMapV3(root: HTMLElement) {
   }
   function selectParish(code: string) {
     const f = parishes?.feats.find((x) => x.properties.id === code); if (!f) return;
-    step(`parish:${code}`); selPar = code; selected = f.properties.m; selRegion = null; syncUrl(); if (map) map.setFilter("sel", ["==", ["get", "s"], ""]);
+    step(`parish:${code}`); selPar = code; selected = f.properties.m; selRegion = null; syncUrl(); if (map?.getLayer("sel")) map.setFilter("sel", ["==", ["get", "s"], ""]);
     ev({ event: "map/card/parish", place: `p-${code}`, origin: mode });
     const muni = byS.get(f.properties.m), md = T?.m?.[f.properties.m], pd = T?.p?.[code];
     // The parish's own price (INE, the finest cut it publishes); beach, airport, school and hospital its own when we have them.
@@ -756,7 +758,7 @@ export function initMapV3(root: HTMLElement) {
     step(`region:${key}`);
     // p70 (S-09): the region's card opens from its small file at once; the map, when it is ready, frames the region.
     load(); await loadTiles(); timeEnd();
-    selRegion = key; selected = null; selPar = null; syncUrl(); if (map) map.setFilter("sel", ["==", ["get", "s"], ""]);
+    selRegion = key; selected = null; selPar = null; syncUrl(); if (map?.getLayer("sel")) map.setFilter("sel", ["==", ["get", "s"], ""]);
     ev({ event: "map/card/region", region: key, origin: mode });
     const rg = T?.rg?.[key] ?? {}, c2 = rg.c2 ?? "PT", name = L.regions[key] || key;
     const x: Ctx = { kind: "region", id: key, name, c2, region: key };
@@ -818,7 +820,7 @@ export function initMapV3(root: HTMLElement) {
   // direction. The ten years, the rents and the yield moved to the paid analysis (operator, step 1).
   function compare(a: string, b: string) {
     ev({ event: "map/compare/pair", place: b, origin: mode }); view = "card"; ctx = null;
-    pinA = null; selected = b; syncUrl(); if (map) map.setFilter("sel", ["in", ["get", "s"], ["literal", [a, b]]]);
+    pinA = null; selected = b; syncUrl(); if (map?.getLayer("sel")) map.setFilter("sel", ["in", ["get", "s"], ["literal", [a, b]]]);
     const col = (slug: string) => { const p = byS.get(slug)!, s = P!.munis[slug], v = s?.m2[last()], p5 = T?.m?.[slug]?.p5; return { n: p.n, s, v, p5 }; };
     const A = col(a), B = col(b);
     const row = (k: string, f: (x: typeof A) => string) => `<div class="m3-cr"><span>${f(A)}</span><em>${k}</em><span>${f(B)}</span></div>`;
@@ -854,7 +856,7 @@ export function initMapV3(root: HTMLElement) {
   function closeSheet() { timeEnd(); arrStop(); if (selProj) { selProj = null; syncUrl(); }
     // The 2D map (phones) is tilted only for an arrival: closing the card sets it flat again.
     if (map && flat && (map.getPitch() > 0.5 || Math.abs(map.getBearing()) > 0.5)) map.easeTo({ pitch: 0, bearing: 0, duration: reduce() ? 0 : 600 });
-    ctx = null; rerender = null; view = "card"; if (selRegion) { selRegion = null; syncUrl(); } sheet.classList.remove("is-open"); setTimeout(() => { if (!sheet.classList.contains("is-open")) sheet.hidden = true; }, 260); pinA = null; if (map) map.setFilter("sel", ["==", ["get", "s"], ""]); }
+    ctx = null; rerender = null; view = "card"; if (selRegion) { selRegion = null; syncUrl(); } sheet.classList.remove("is-open"); setTimeout(() => { if (!sheet.classList.contains("is-open")) sheet.hidden = true; }, 260); pinA = null; if (map?.getLayer("sel")) map.setFilter("sel", ["==", ["get", "s"], ""]); }
   function setDetent(d: number) { detent = d; sheet.dataset.detent = String(d); }
   { // drag the sheet between its three heights (mobile)
     const grab = $("[data-grab]"); let y0 = 0, h0 = 0, on = false;
@@ -909,7 +911,7 @@ export function initMapV3(root: HTMLElement) {
   }
   function showGolf(g: Course) {
     ev({ event: "map/card/golf", place: g.m || undefined, origin: mode }); ctx = null;
-    timeEnd(); selected = null; selRegion = null; if (map) map.setFilter("sel", ["==", ["get", "s"], ""]);
+    timeEnd(); selected = null; selRegion = null; if (map?.getLayer("sel")) map.setFilter("sel", ["==", ["get", "s"], ""]);
     const muni = byS.get(g.m)?.n ?? "";
     const when = g.status !== "open" ? L.golf.opening.replace("{y}", g.year || "—") : g.year;
     let h = `<div class="m3-photo m3-photo-none m3-golfband"></div><div class="m3-sb"><p class="m3-kick">${esc([g.resort !== g.n ? g.resort : "", muni].filter(Boolean).join(" · "))}</p><h3 tabindex="-1">${esc(g.n)}</h3>`;

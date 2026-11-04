@@ -136,7 +136,7 @@ export function initMapExplorer(root: HTMLElement) {
     p.set("budget", String(budget)); metric === "m2" ? p.delete("metric") : p.set("metric", metric);
     selected ? p.set("place", selected) : p.delete("place"); selPar ? p.set("parish", selPar) : p.delete("parish");
     golfOn ? p.set("golf", "1") : p.delete("golf");
-    history.replaceState(null, "", `${location.pathname}?${p}${location.hash}`);
+    history.replaceState(history.state, "", `${location.pathname}?${p}${location.hash}`);  // p70: keep other layers' history state
   }
   const HIGH = 1e6;  // internal only (D52): from here the list brings the dearer places forward; never shown to the reader
   let lastHigh: boolean | null = null;
