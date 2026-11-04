@@ -6,3 +6,6 @@ sponsors/contacts/*.xlsx
 
 # Local dependency folder or its symlink (worktrees link it), never committed
 site/node_modules
+
+# Visual check diff images (scripts/visual-check.mjs), never committed
+ops/snapshots/diff/
