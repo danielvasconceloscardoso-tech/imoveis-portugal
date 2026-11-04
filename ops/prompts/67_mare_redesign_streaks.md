@@ -10,7 +10,11 @@ Operator, 4 Nov 2026. Replaces the earlier draft of this prompt. Rules 15 (one l
 ## The bar
 "Imagine Claridge's and Steve Jobs created a newsletter." In practice:
 1. **A calm four-minute coffee, on a phone,** that makes the reader look forward to the next issue.
-2. **One idea per screen.** Photography an Apple keynote would use. Type and spacing with the restraint of a Claridge's menu card. Nothing decorative.
+2. **Morning Brew × Claridge's (operator, 4 Nov).**
+   - From Morning Brew: the format and the energy. Easy to scan, short sections, a lively conversational pace, things you want to forward.
+   - From Claridge's and luxury: the finish. Photography an Apple keynote would use, refined type and spacing, nothing cheap or cluttered.
+   
+   Fun to read, expensive to look at.
 3. **Every issue teaches** a well-travelled, well-read reader something they did not know about the place: who comes from there, what is made there, what it costs to live there, where to eat. Gems and insights, not tourism copy.
 4. **Every issue has a game** the reader plays in one tap and is rewarded for the same day.
 5. **It holds full attention from the first line** and leaves the reader in awe.
@@ -40,7 +44,7 @@ Test: would the editor of How To Spend It or Monocle be jealous of it? If not, i
    - Claridge's, Belmond, Aman, Aesop;
    - Apple;
    - How To Spend It / FT, Monocle, Hodinkee, Cigar Aficionado, Kinfolk, Mr Porter's The Journal;
-   - Morning Brew, for structure and pace only.
+   - Morning Brew: format, sections, pace and tone (half of the brief).
    
    Do not create accounts or subscribe.
 2. **Screenshot each at an iPhone viewport,** and measure why it feels expensive: type sizes, line height, margins, words per screen, image ratio and resolution, number of colours, number of items.
@@ -58,7 +62,7 @@ Test: would the editor of How To Spend It or Monocle be jealous of it? If not, i
 5. **Then work without stopping** until step 4.
 
 ## Step 4: Three directions, then one
-1. **Three genuinely different directions** for the same Gondomar issue, not three colourways.
+1. **Three genuinely different directions** for the same Gondomar issue, not three colourways. Each is a different blend of Morning Brew and Claridge's.
 2. **Phone screenshots** of each, from the top of the issue to the bottom.
 3. **The operator picks one** (or mixes them). Only then build.
 
