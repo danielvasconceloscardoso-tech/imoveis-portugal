@@ -16,7 +16,7 @@ The next session starts from this file. Agent subtasks return a summary of 10 li
 | 71 | US: closer than you think, south coast, Arrow | done (D99) |
 | 72 | Algarve gems, US article, Arrow live, John and Mike agents | done (D100). John and Mike agents: check |
 | 77 | URGENT: restore home film, white box, cut headline; visual check before every push | done (D104): film, edition list, headline guard, hero colours; visual check + baseline, rule 14 |
-| 78 | Golf mode: green map, holes for Details courses, From your door; /arrow in golf mode | to do (right after 77) |
+| 78 | Golf mode v3: Algarve summer in 3D, refined by a Belmond-level designer agent; From your door; /arrow in golf mode | to do (NEXT); operator's yes on screenshots before live |
 | 73 | Functional copy in plain words; Concierge step 1 | done (D101) |
 | 74 | Buyer CV builds itself | done (D102) |
 | 76 | Everything from 67–75 in every language and edition, live | to do (after 74) |
