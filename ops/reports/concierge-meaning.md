@@ -2,7 +2,7 @@
 
 Written by `node scripts/check-parity.mjs` on every run (prompt 69). Read it before each release: every Concierge block of `content/copy/COPY_DECK.md` (sections `flow`, `consult`, `send`, `p69`) in PT, EN and FR, one row each. The check never fails on wording; the flags are what a machine can see and a reader decides.
 
-191 blocks, 2 flagged.
+192 blocks, 2 flagged.
 
 ## Corrected on 4 Nov 2026 (prompt 69)
 
@@ -37,8 +37,8 @@ Written by `node scripts/check-parity.mjs` on every run (prompt 69). Read it bef
 | Block | PT | EN | FR |
 | --- | --- | --- | --- |
 | `consult.dedicated` | Um consultor dedicado acompanha o seu pedido. | A dedicated adviser takes care of your request. | Un conseiller dédié suit votre demande. |
-| `consult.title` | Consulta privada | Private consultation | Consultation privée |
-| `consult.h1` | Consulta privada com um consultor qualificado | A private consultation with a qualified advisor | Une consultation privée avec un conseiller qualifié |
+| `consult.title` | Concierge | Concierge | Concierge |
+| `consult.h1` | O Concierge, 15 minutos com um consultor qualificado | The Concierge, 15 minutes with a qualified advisor | Le Concierge, 15 minutes avec un conseiller qualifié |
 | `consult.lede` | Quinze minutos por videochamada com um consultor qualificado, sem custos. As suas respostas preparam a conversa. | Fifteen minutes by video call with a qualified advisor, at no cost. Answer a few questions so the conversation starts with your case. | Quinze minutes en appel vidéo avec un conseiller qualifié, sans frais. Répondez à quelques questions pour que l'échange parte de votre situation. |
 | `consult.form.h` | O seu pedido | Your request | Votre demande |
 | `consult.next.h` | O que acontece a seguir | What happens next | La suite |
@@ -46,8 +46,8 @@ Written by `node scripts/check-parity.mjs` on every run (prompt 69). Read it bef
 | `consult.next.2` | Na consulta: as zonas, o orçamento, o calendário e os próximos passos. | In the consultation: areas, budget, timing and the next steps. | Pendant la consultation : les secteurs, le budget, le calendrier et les prochaines étapes. |
 | `consult.next.3` | Depois, os parceiros certos para o seu caso: crédito, advogado, consultor fiscal do seu país. | Then the right partners for your case: mortgage, lawyer, a tax adviser for your country. | Ensuite, les bons partenaires pour votre cas : crédit, avocat, conseiller fiscal de votre pays. |
 | `consult.privacy` | Os seus dados seguem só para a Imóveis Portugal e para o consultor qualificado, que lhe responde por email. | Your details go only to Imóveis Portugal and the qualified advisor, who replies by email. | Vos données ne vont qu'à Imóveis Portugal et au conseiller qualifié, qui vous répond par e-mail. |
-| `consult.cta` | Pedir uma consulta | Request a private consultation | Demander une consultation privée |
-| `consult.card.h` | Consulta privada · 15 min · vídeo | Private consultation · 15 min · video | Consultation privée · 15 min · vidéo |
+| `consult.cta` | Falar com o Concierge | Talk to the Concierge | Parler au Concierge |
+| `consult.card.h` | Concierge · 15 min · vídeo | Concierge · 15 min · video | Concierge · 15 min · vidéo |
 | `consult.card.p` (corrected) | Com um consultor qualificado, sem custos. Diga-nos em que ponto está. | With a qualified advisor, at no cost. Tell us where you are in your plan. | Avec un conseiller qualifié, sans frais. Dites-nous où vous en êtes. |
 | `consult.ok.title` | Pedido recebido | Request received | Demande reçue |
 | `consult.ok.h1` | O seu pedido chegou ao consultor | Your request has reached the advisor | Votre demande est arrivée chez le conseiller |
@@ -62,8 +62,8 @@ Written by `node scripts/check-parity.mjs` on every run (prompt 69). Read it bef
 | `consult.later.p` (corrected) | Pelo que nos diz, tem tempo para preparar a compra com calma. Eis o essencial nesta fase. | From what you tell us, you have time to prepare calmly. Here is what matters at this stage. | D'après vos réponses, vous avez le temps de préparer votre achat sereinement. Voici l'essentiel pour cette étape. |
 | `consult.later.path` (corrected) | O percurso do seu país, passo a passo | Your country's path, step by step | Le parcours de votre pays, pas à pas |
 | `consult.later.nl` | Maré, a newsletter: insights e pérolas de Portugal, todas as terças e sextas. | Maré, the newsletter: insights and hidden gems from Portugal, every Tuesday and Friday. | Maré, la newsletter : idées et pépites du Portugal, chaque mardi et vendredi. |
-| `consult.later.dossier` (corrected) | Os dossiês, com os números do seu caso | The dossiers, with the figures for your case | Les dossiers, avec les chiffres de votre cas |
-| `consult.later.book` (corrected) | Quando a compra estiver mais perto, peça aqui a sua consulta privada. | When your purchase is closer, request your private consultation here. | Quand votre achat sera plus proche, demandez ici votre consultation privée. |
+| `consult.later.dossier` (corrected) | Os dossiers, com os números do seu caso | The dossiers, with the figures for your case | Les dossiers, avec les chiffres de votre cas |
+| `consult.later.book` (corrected) | Quando a compra estiver mais perto, fale aqui com o Concierge. | When your purchase is closer, talk to the Concierge here. | Quand votre achat sera plus proche, parlez ici au Concierge. |
 | `flow.topic` | Assunto | Topic | Sujet |
 | `flow.topic.intro` | Apresentamos-lhe a pessoa certa. | We'll introduce you to the right person. | Nous vous présentons la bonne personne. |
 | `flow.topic.lawyer` | Uma questão jurídica | A legal question | Une question juridique |
@@ -80,10 +80,10 @@ Written by `node scripts/check-parity.mjs` on every run (prompt 69). Read it bef
 | `flow.c.country` | Onde vive? | Where do you live? | Où vivez-vous ? |
 | `flow.other` | Outro país | Another country | Un autre pays |
 | `flow.c.budget` (corrected) | Qual é, mais ou menos, o seu orçamento? | Roughly what is your budget? | Quel est, à peu près, votre budget ? |
-| `flow.c.budget.1` | Até 300 mil € | Up to €300k | Jusqu'à 300 k€ |
-| `flow.c.budget.2` | 300 mil € a 1 M€ | €300k to €1M | 300 k€ à 1 M€ |
-| `flow.c.budget.3` | 1 a 5 M€ | €1M to €5M | 1 à 5 M€ |
-| `flow.c.budget.4` | Mais de 5 M€ | Over €5M | Plus de 5 M€ |
+| `flow.c.budget.1` | < 300 mil € | < €300k | < 300 k€ |
+| `flow.c.budget.2` | 300 mil–1 M€ | €300k–1M | 300 k€–1 M€ |
+| `flow.c.budget.3` | 1–5 M€ | €1–5M | 1–5 M€ |
+| `flow.c.budget.4` | > 5 M€ | > €5M | > 5 M€ |
 | `flow.more` (corrected) | Até lá, cada etapa está explicada em | Until then, every stage is explained in | D'ici là, chaque étape est expliquée dans |
 | `flow.more.path` | Passo a passo | Step by step | Pas à pas |
 | `flow.more.articles` | Artigos | Articles | Articles |
@@ -145,15 +145,16 @@ Written by `node scripts/check-parity.mjs` on every run (prompt 69). Read it bef
 | `send.last` | Último pedido enviado nesta sessão. | Last request sent in this session. | Dernière demande envoyée dans cette session. |
 | `send.foot` | Enviado pela Imóveis Portugal. O mesmo pedido segue para a Imóveis Portugal e para o consultor qualificado, que responde ao leitor. | Sent by Imóveis Portugal. The same request goes to Imóveis Portugal and to the qualified advisor, who replies to the reader. | Envoyé par Imóveis Portugal. La même demande part chez Imóveis Portugal et chez le conseiller qualifié, qui répond au lecteur. |
 | `p69.help` | Em que podemos ajudar? | What can we help with? | En quoi pouvons-nous vous aider ? |
-| `p69.lede` | Um consultor qualificado liga-lhe à hora que escolher. | A qualified advisor calls you at the time you choose. | Un conseiller qualifié vous appelle à l'heure que vous choisissez. |
+| `p69.lede` | Um consultor liga-lhe à hora que escolher. | An advisor calls you when you choose. | Un conseiller vous appelle quand vous voulez. |
 | `p69.help.ctx` | O que estava a ver | What you were looking at | Ce que vous regardiez |
 | `p69.help.project` | {name}, {inplace} | {name}, {inplace} | {name}, {inplace} |
 | `p69.help.place` | Uma casa {inplace} | A home {inplace} | Un logement {inplace} |
 | `p69.help.placebudget` | Uma casa {inplace}, por cerca de {price} | A home {inplace}, around {price} | Un logement {inplace}, autour de {price} |
 | `p69.help.budget` | Uma casa por cerca de {price} | A home around {price} | Un logement autour de {price} |
-| `p69.help.home` | Encontrar casa em Portugal | Finding a home in Portugal | Trouver un logement au Portugal |
-| `p69.help.costs` | Os custos, os impostos e os papéis da compra | The costs, taxes and paperwork of buying | Les frais, les impôts et les formalités de l'achat |
-| `p69.help.sell` | Vender ou herdar uma casa | Selling or inheriting a home | Vendre ou hériter d'un logement |
+| `p69.help.about` | Sobre: {name} | About: {name} | À propos : {name} |
+| `p69.help.home` | Comprar casa | Buy a home | Acheter |
+| `p69.help.costs` | Custos e impostos | Costs and taxes | Frais et impôts |
+| `p69.help.sell` | Vender ou herdar | Sell or inherit | Vendre ou hériter |
 | `p69.budget` | Orçamento | Budget | Budget |
 | `p69.when` | Quando lhe podemos ligar? | When can we call you? | Quand pouvons-nous vous appeler ? |
 | `p69.when.skip` | Prefiro combinar por email | I'd rather agree a time by email | Je préfère convenir d'une heure par e-mail |

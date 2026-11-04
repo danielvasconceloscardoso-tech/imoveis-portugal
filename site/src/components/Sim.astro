@@ -217,7 +217,7 @@ const fieldLabel = (id: string, kind: string) => {
   }
   // Prompt 70 (MI-06): the advisor button opens the Concierge with the price typed here (chrome.ts reads ?budget=).
   const simCg = document.querySelector<HTMLAnchorElement>("[data-sim-cg]");
-  const cgBudget = () => { if (!simCg) return; const u = new URL(simCg.href); const pr = Number(values().price) || 0; pr >= 1e4 ? u.searchParams.set("budget", String(Math.round(pr))) : u.searchParams.delete("budget"); simCg.href = u.toString(); };
+  const cgBudget = () => { if (!simCg) return; const u = new URL(simCg.href); const pr = Number(values().price) || 0; pr >= 1e4 ? u.searchParams.set("budget", String(Math.round(pr))) : u.searchParams.delete("budget"); u.searchParams.set("from", "sim"); simCg.href = u.toString(); };
   form.addEventListener("input", render);
   form.addEventListener("input", cgBudget); cgBudget();
   form.addEventListener("submit", (e) => e.preventDefault());

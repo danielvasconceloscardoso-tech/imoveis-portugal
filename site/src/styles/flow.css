@@ -153,8 +153,8 @@
   aside.sh .sh-in .fl-f span { margin-top: 12px; }
   aside.sh .sh-in .fl-f .fl-in { padding: 8px 0; }
   aside.sh .sh-in .fl-notice { margin-top: 14px; font-size: 14px; }
-  .fl-pills[data-budget-row] { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
-  .fl-pills[data-budget-row] .fl-pill { padding: 8px 4px !important; border-radius: 14px; font-size: 13.5px !important; line-height: 1.2; text-align: center; }
+  .fl-pills[data-budget-row] { gap: 6px; }
+  .fl-pills[data-budget-row] .fl-pill { padding: 9px 8px !important; font-size: 13.5px !important; line-height: 1.2; }
 }
 /* The page version on a phone (J-27): the step's action stays in reach above the bottom bar instead of under it. */
 @media (max-width: 819px) {
@@ -183,8 +183,8 @@
   html aside.sh .sh-in .fl-opts { margin-top: 10px; gap: 6px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
   html aside.sh .sh-in .fl-opt { min-height: 44px; padding: 8px 14px !important; font-size: 15px !important; border-radius: 14px; }
   html aside.sh .sh-in .fl-step > .fl-k, aside.sh .sh-in .rq-bk { margin-top: 10px; }
-  html aside.sh .sh-in .fl-pills[data-budget-row] { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
-  html aside.sh .sh-in .fl-pill { padding: 7px 6px !important; font-size: 13.5px !important; text-align: center; }
+  html aside.sh .sh-in .fl-pills[data-budget-row] { gap: 6px; }
+  html aside.sh .sh-in .fl-pill { padding: 7px 8px !important; font-size: 13.5px !important; text-align: center; }
   /* The action floats at the bottom right, so the choices on the left are never under it. */
   html aside.sh .sh-in .fl-step > .fl-go { margin-top: 10px; padding: 0 0 28px; justify-content: flex-end; background: none; pointer-events: none; }
   html aside.sh .sh-in .fl-step > .fl-go > * { pointer-events: auto; }
@@ -203,3 +203,10 @@
 .fl-back, .sp-tz-ch, .fl-go .fl-link, .fl-ask .fl-link { position: relative; }
 .fl-back::after { content: ""; position: absolute; inset: -4px; }
 .sp-tz-ch::after, .fl-go .fl-link::after, .fl-ask .fl-link::after { content: ""; position: absolute; left: -8px; right: -8px; top: 50%; height: 44px; min-width: 44px; transform: translateY(-50%); }
+
+/* Prompt 73 §1: step 1. Each budget chip on one line (the row wraps between chips, never inside one), the context as one
+   small "Sobre:" line under the doors, a budget typed in dollars shown as typed, and Continue full width. */
+.fl-pills[data-budget-row] .fl-pill { flex: 1 0 auto; white-space: nowrap; text-align: center; }
+.fl-about { margin: 10px 0 0; font-size: 14px; line-height: 1.4; color: var(--fm, #5b5d63); }
+.fl-typed { margin-left: 6px; font-size: 13.5px; font-weight: 500; letter-spacing: 0; text-transform: none; color: var(--fm, #5b5d63); }
+.fl-go-w .fl-btn { flex: 1 1 100%; width: 100%; }

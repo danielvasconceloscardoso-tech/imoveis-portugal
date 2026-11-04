@@ -44,7 +44,7 @@ export function flowSteps(id: FlowId): string[] {
  * the confirmation (ev "flow/concierge/prep/{open,sent,fallback}"), the time zone the times were shown in (ev
  * "flow/concierge/tz/{own,edition,lisbon}") and the IMT screen: opened from each surface (ev "imt/open/{from}"), the price
  * changed on it, its last line seen, the full calculator followed. */
-export const CG_CTX = ["project", "place", "budget", "none"];
+export const CG_CTX = ["project", "place", "budget", "sim", "none"];
 export const CG_PREP = ["open", "sent", "fallback"];
 export const CG_TZ = ["own", "edition", "lisbon"];
 export const IMT_FROM = ["sim1", "concierge", "map", "project", "link"];

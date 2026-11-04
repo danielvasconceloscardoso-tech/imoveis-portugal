@@ -23,7 +23,7 @@ export function sim1Events(): string[] {
   for (const [, b] of BUDGET_BANDS) out.push(`budget/${b}`);
   for (let e = SIM1_ENTRY.min; e <= SIM1_ENTRY.max; e += 10) out.push(`entry/${e}`);
   for (const r of SIM1_REGIONS) out.push(`region/${r.id}`);
-  for (const t of ["apartment", "house"]) out.push(`type/${t}`);
+  for (const t of ["apartment", "house"]) out.push(`type/${t}`);  // prompt 73 §2: the toggle is gone; its pages stay for older counts
   for (const u of ["live", "away"]) out.push(`use/${u}`);
   for (const p of ["cash", "loan"]) out.push(`pay/${p}`);
   for (const r of ["costs", "loan", "buys"]) out.push(`row/${r}`);
@@ -35,8 +35,8 @@ export function sim1Events(): string[] {
 export const toVal = (p: number) => { const x = 1e5 * Math.pow(100, p / 1000); const st = x < 1e6 ? 5000 : x < 5e6 ? 25000 : 50000; return Math.round(x / st) * st; };
 export const toPos = (x: number) => Math.round((1000 * Math.log(Math.min(Math.max(x, 1e5), 1e7) / 1e5)) / Math.log(100));
 
-export type Sim1State = { price: number; region: string; type: "apartment" | "house"; use: "live" | "away"; pay: "cash" | "loan"; entry: number };
-export const SIM1_DEFAULT: Sim1State = { price: 400000, region: "lisboa", type: "apartment", use: "away", pay: "loan", entry: SIM1_ENTRY.def };
+export type Sim1State = { price: number; region: string; use: "live" | "away"; pay: "cash" | "loan"; entry: number };
+export const SIM1_DEFAULT: Sim1State = { price: 400000, region: "lisboa", use: "away", pay: "loan", entry: SIM1_ENTRY.def };
 
 /** The whole result, from the calculators' own functions: "Para viver" = own permanent home of a tax resident
  *  (Código do IMT art. 17.º n.º 1 al. a), LTV 90%); "Férias ou investimento" = non-resident buyer (n.º 10, LTV 80%). */

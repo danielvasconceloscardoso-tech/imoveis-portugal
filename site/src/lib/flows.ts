@@ -83,7 +83,7 @@ export function flowConfig(id: FlowId, lang: Lang, ed: EdCode, hidden: Record<st
     ? { ok: { h: c("p69.done.h", lang), p: c("p69.done.p", lang) }, private: { h: c("p69.done.h", lang), p: c("p69.done.p", lang) }, later: { h: c("p69.done.h", lang), p: c("p69.done.p.later", lang) } }
     : id === "partner" ? { ok: { h: c("flow.p.done.h", lang), p: c("flow.p.done.p", lang) } } : { ok: { h: c("flow.v.done.h", lang), p: c("flow.v.done.p", lang) } };
   // Prompt 69: the words the three steps, the confirmation, the preparation and the IMT line need in the browser.
-  const P69 = id === "concierge" ? Object.fromEntries(["help.ctx", "help.project", "help.place", "help.placebudget", "help.budget", "tz", "tz.same", "tz.change", "tz.zone",
+  const P69 = id === "concierge" ? Object.fromEntries(["help.ctx", "help.about", "help.project", "help.place", "help.placebudget", "help.budget", "tz", "tz.same", "tz.change", "tz.zone",
     "tz.lisbon", "tz.next", "tz.prev", "slot.day", "slot.time", "slot.picked", "slot.none", "slot.remove", "done.times", "prep", "prep.p", "prep.send", "prep.done.h", "prep.intent",
     "imt.line", "imt.how", "send", "send.later", "notice.later", "phone", "email"].map((k) => [k, c(`p69.${k}`, lang, Object.fromEntries(["name", "place", "inplace", "price", "city", "ofcity", "imt"].map((x) => [x, `{${x}}`])))])) : {};
   // Prompt 70 (J-08): the edition's own currency, for a budget the reader typed in it on the home bar (ECB reference rate).

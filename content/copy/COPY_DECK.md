@@ -1972,14 +1972,14 @@ How to edit:
 - FR: Simulateurs
 
 ### lede
-- PT: As contas fazem-se no seu navegador, com as regras de 2026 e a fonte de cada taxa. Não guardamos o que escreve.
-- EN: Worked out in your browser, with the 2026 rules and the source of every rate. Nothing you type is stored.
-- FR: Calculs faits dans votre navigateur, avec les règles de 2026 et la source de chaque taux. Rien de ce que vous saisissez n'est enregistré.
+- PT: Quanto custa comprar, com as regras de 2026.
+- EN: What buying costs, under the 2026 rules.
+- FR: Ce que coûte l'achat, règles 2026.
 
 ### estimate
-- PT: Estimativa com as regras em vigor. Não é uma proposta de crédito nem aconselhamento fiscal.
-- EN: An estimate under current rules. Not a credit offer and not tax advice.
-- FR: Estimation selon les règles en vigueur. Ce n'est ni une offre de crédit ni un conseil fiscal.
+- PT: Estimativa, não é aconselhamento fiscal nem proposta de crédito. Não guardamos o que escreve.
+- EN: An estimate, not tax advice or a credit offer. We don't store what you type.
+- FR: Estimation, ni conseil fiscal ni offre de crédit. Nous ne conservons pas ce que vous saisissez.
 
 ### result.h
 - PT: Resultado
@@ -6257,24 +6257,24 @@ Prompt 43 §3b: the partner links on the path and the questions open the Concier
 - FR: Quel est, à peu près, votre budget ?
 
 ### c.budget.1
-- PT: Até 300 mil €
-- EN: Up to €300k
-- FR: Jusqu'à 300 k€
+- PT: < 300 mil €
+- EN: < €300k
+- FR: < 300 k€
 
 ### c.budget.2
-- PT: 300 mil € a 1 M€
-- EN: €300k to €1M
-- FR: 300 k€ à 1 M€
+- PT: 300 mil–1 M€
+- EN: €300k–1M
+- FR: 300 k€–1 M€
 
 ### c.budget.3
-- PT: 1 a 5 M€
-- EN: €1M to €5M
-- FR: 1 à 5 M€
+- PT: 1–5 M€
+- EN: €1–5M
+- FR: 1–5 M€
 
 ### c.budget.4
-- PT: Mais de 5 M€
-- EN: Over €5M
-- FR: Plus de 5 M€
+- PT: > 5 M€
+- EN: > €5M
+- FR: > 5 M€
 
 ### more
 - PT: Até lá, cada etapa está explicada em
@@ -7484,10 +7484,6 @@ The one-screen simulator at the top of the calculators page (night of 3 Nov 2026
 - EN: What it costs, all in
 - FR: Ce que cela coûte, tout compris
 
-### p
-- PT: Escolha o preço, a região e a forma de pagar. As contas mudam enquanto mexe.
-- EN: Pick the price, the region and how you pay. The figures change as you move.
-- FR: Choisissez le prix, la région et le mode de paiement. Les chiffres changent à mesure.
 
 ### price
 - PT: Preço da casa
@@ -7499,30 +7495,14 @@ The one-screen simulator at the top of the calculators page (night of 3 Nov 2026
 - EN: Where
 - FR: Où
 
-### type
-- PT: Que casa
-- EN: What kind of home
-- FR: Quel logement
 
-### type.apartment
-- PT: Apartamento
-- EN: Apartment
-- FR: Appartement
 
-### type.house
-- PT: Moradia
-- EN: House
-- FR: Maison
 
-### type.note
-- PT: Os impostos são os mesmos para um apartamento ou uma moradia.
-- EN: The taxes are the same for an apartment or a house.
-- FR: Les impôts sont les mêmes pour un appartement ou une maison.
 
 ### use
-- PT: Para quê
-- EN: What for
-- FR: Pour quoi faire
+- PT: Uso
+- EN: Use
+- FR: Usage
 
 ### use.live
 - PT: Para viver
@@ -7550,14 +7530,14 @@ The one-screen simulator at the top of the calculators page (night of 3 Nov 2026
 - FR: Comment vous payez
 
 ### pay.cash
-- PT: Capitais próprios
-- EN: Own funds
-- FR: Fonds propres
+- PT: Sem crédito
+- EN: No mortgage
+- FR: Sans crédit
 
 ### pay.loan
-- PT: Crédito
-- EN: Mortgage
-- FR: Crédit
+- PT: Com crédito
+- EN: With a mortgage
+- FR: Avec crédit
 
 ### entry
 - PT: Entrada
@@ -10042,9 +10022,9 @@ Prompt 69 (4 Nov 2026), the Concierge in three steps and IMT explained where the
 - FR: En quoi pouvons-nous vous aider ?
 
 ### lede
-- PT: Um consultor qualificado liga-lhe à hora que escolher.
-- EN: A qualified advisor calls you at the time you choose.
-- FR: Un conseiller qualifié vous appelle à l'heure que vous choisissez.
+- PT: Um consultor liga-lhe à hora que escolher.
+- EN: An advisor calls you when you choose.
+- FR: Un conseiller vous appelle quand vous voulez.
 
 ### help.ctx
 - PT: O que estava a ver
@@ -10071,20 +10051,25 @@ Prompt 69 (4 Nov 2026), the Concierge in three steps and IMT explained where the
 - EN: A home around {price}
 - FR: Un logement autour de {price}
 
+### help.about
+- PT: Sobre: {name}
+- EN: About: {name}
+- FR: À propos : {name}
+
 ### help.home
-- PT: Encontrar casa em Portugal
-- EN: Finding a home in Portugal
-- FR: Trouver un logement au Portugal
+- PT: Comprar casa
+- EN: Buy a home
+- FR: Acheter
 
 ### help.costs
-- PT: Os custos, os impostos e os papéis da compra
-- EN: The costs, taxes and paperwork of buying
-- FR: Les frais, les impôts et les formalités de l'achat
+- PT: Custos e impostos
+- EN: Costs and taxes
+- FR: Frais et impôts
 
 ### help.sell
-- PT: Vender ou herdar uma casa
-- EN: Selling or inheriting a home
-- FR: Vendre ou hériter d'un logement
+- PT: Vender ou herdar
+- EN: Sell or inherit
+- FR: Vendre ou hériter
 
 ### budget
 - PT: Orçamento

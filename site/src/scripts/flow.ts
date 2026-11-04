@@ -122,7 +122,9 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
   const FX = (F as { fx?: { cur: string; rate: number } | null }).fx ?? null, typedLocal = !!(fromHome && FX && Number(q.get("budget")));
   const ctxBudget = F.id === "concierge" ? (typedLocal ? nice(budgetEur) : budgetEur) : 0;
   const money = (v: number) => typedLocal ? `${new Intl.NumberFormat(locale, { style: "currency", currency: FX!.cur, maximumFractionDigits: 0 }).format(nice(v * FX!.rate))} (≈ ${eur(nice(v))})` : eur(v);
-  const ctxKind = ctxProject ? "project" : ctxPlace ? "place" : ctxBudget ? "budget" : "none";
+  // Prompt 73 §1: from the simulator ("from=sim", components/Sim1.astro and the calculators), the context is the costs.
+  const fromSim = F.id === "concierge" && q.get("from") === "sim";
+  const ctxKind = fromSim ? "sim" : ctxProject ? "project" : ctxPlace ? "place" : ctxBudget ? "budget" : "none";
   const fillP = (t: string, v: Record<string, string>) => t.replace(/\{(\w+)\}/g, (m, k) => (k in v ? v[k] : m));
   // Prompt 70 (MI-15): the place with its preposition and article ("no Porto", "na Nazaré", "em Gondomar"; "à Porto",
   // "en Algarve"; "in the Algarve").
@@ -142,13 +144,20 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
     : ctxPlace ? fillP(P["help.place"], { place: ctxPlace, inplace: inPlace(ctxPlace) }) : ctxBudget ? fillP(P["help.budget"], { price: money(ctxBudget) }) : "";
   // The context in words the language does not change (MI-13: a language switch keeps the reader's own choice).
   const ctxKey = `${ctxKind}|${ctxProject?.id ?? ""}|${fold(ctxPlace)}|${ctxBudget}`, sameCtx = A._ctxk === ctxKey;
+  // Prompt 73 §1: the context pre-selects one of the three doors and is never an option itself. From the simulator:
+  // "Custos e impostos"; from a place or a development: "Comprar casa", with "Sobre: <name>" under the doors. Its words
+  // (ctxLabel) still travel with the request, so the advisor sees what the reader was looking at.
+  const about = ctxKind === "project" ? ctxProject!.name : ctxKind === "place" ? ctxPlace : "";
+  // J72-19: from a development with a published price, its budget band, when the reader gave no budget of their own.
+  const bandOf = (v: number) => (v <= 300000 ? "1" : v <= 1e6 ? "2" : v <= 5e6 ? "3" : "4");
   if (steps.some((s) => s.type === "help")) {
-    if (ctxLabel && !sameCtx) { A.help = "ctx"; known.add("help"); }
-    if (!ctxLabel && A.help === "ctx") delete A.help;
+    if (ctxKind !== "none" && !sameCtx) { A.help = fromSim ? "costs" : "home"; known.add("help"); }
+    if (A.help === "ctx") A.help = "home";  // an answer kept from before prompt 73
     A._ctx = ctxLabel; A._ctxk = ctxKey;
-    if (fromHome && (A.door === "sell" || A.door === "inherit") && !ctxLabel) A.help = "sell";
-    if ((topic === "tax" || topic === "bank") && !ctxLabel) A.help = "costs";
+    if (fromHome && (A.door === "sell" || A.door === "inherit") && !ctxProject) A.help = "sell";
+    if ((topic === "tax" || topic === "bank") && ctxKind === "none") A.help = "costs";
     if (pre.budget && A._bud !== String(budgetEur)) { A.budget = pre.budget; A._bud = String(budgetEur); known.add("help"); }
+    else if (!pre.budget && ctxProject?.from && A._bud !== `p${ctxProject.from}`) { A.budget = bandOf(ctxProject.from); A._bud = `p${ctxProject.from}`; known.add("help"); }
     if (A._lang2 !== F.hidden.language) { A.lang = F.hidden.language; A._lang2 = F.hidden.language; }
     A.lang ||= F.hidden.language;
   }
@@ -221,14 +230,15 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
     if (s.type === "choice") return `<div class="fl-opts${s.row || s.opts.length <= 3 ? " fl-row" : ""}" role="radiogroup" aria-labelledby="fl-q">${s.opts.map((o) =>
       `<button type="button" class="fl-opt" role="radio" aria-checked="${A[s.id] === o.v}" data-v="${esc(o.v)}"><span>${esc(o.l)}</span><i>${CHECK}</i></button>`).join("")}</div>${s.optional ? `<div class="fl-go"><button type="button" class="fl-link" data-skip>${esc(L.skip)}</button></div>` : ""}`;
     if (s.type === "help") {
-      // Prompt 69, step 1: what the reader came from first (chosen), then the other doors; the budget as one row of pills.
-      const all = [...(ctxLabel ? [{ v: "ctx", l: ctxLabel }] : []), ...s.opts];
-      return `<div class="fl-opts" role="radiogroup" aria-labelledby="fl-q">${all.map((o) =>
-        `<button type="button" class="fl-opt${o.v === "ctx" ? " fl-ctx" : ""}" role="radio" aria-checked="${A.help === o.v}" data-v="${esc(o.v)}"><span>${o.v === "ctx" ? `<small>${esc(P["help.ctx"])}</small>` : ""}${esc(o.l)}</span><i>${CHECK}</i></button>`).join("")}</div>
-        <p class="fl-k" id="fl-bud">${esc(s.budget.q)}</p><div class="fl-pills" data-budget-row role="radiogroup" aria-labelledby="fl-bud">${s.budget.opts.map((o) =>
+      // Prompt 73 §1, step 1: three doors, one of them chosen from where the reader came from, "Sobre: <name>" under them;
+      // the budget as one row of pills (a typed dollar budget shown as typed, J-08); Continue full width.
+      return `<div class="fl-opts" role="radiogroup" aria-labelledby="fl-q">${s.opts.map((o) =>
+        `<button type="button" class="fl-opt" role="radio" aria-checked="${A.help === o.v}" data-v="${esc(o.v)}"><span>${esc(o.l)}</span><i>${CHECK}</i></button>`).join("")}</div>
+        ${about && P["help.about"] ? `<p class="fl-about">${esc(fillP(P["help.about"], { name: about }))}</p>` : ""}
+        <p class="fl-k" id="fl-bud">${esc(s.budget.q)}${typedLocal && ctxBudget ? ` <small class="fl-typed">${esc(money(ctxBudget))}</small>` : ""}</p><div class="fl-pills" data-budget-row role="radiogroup" aria-labelledby="fl-bud">${s.budget.opts.map((o) =>
         `<button type="button" class="fl-pill" role="radio" aria-checked="${A.budget === o.v}" data-b="${esc(o.v)}">${esc(o.l)}</button>`).join("")}</div>
         <p class="fl-err" data-err hidden></p>
-        <div class="fl-go"><button type="button" class="fl-btn" data-next>${esc(L.next)}</button></div>`;
+        <div class="fl-go fl-go-w"><button type="button" class="fl-btn" data-next>${esc(L.next)}</button></div>`;
     }
     if (s.type === "text") {
       const chips = s.prefill === "place" ? [...new Set([ctxPlace, ...places])].filter((x) => x && !(A[s.id] || "").split(",").map((y) => y.trim()).includes(x)).slice(0, 4) : [];
@@ -526,7 +536,8 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
   const route = () => F.id !== "concierge" ? "ok" : A.budget === "3" || A.budget === "4" ? "private" : A._slots && A._slots !== "[]" ? "ok" : "later";
   // Prompt 69: step 1 (what for, the context and the budget) and step 3 (the language of the call) are read out too.
   const helpText = (s: Extract<Step, { type: "help" }>) => [
-    A.help ? `${s.q} ${A.help === "ctx" ? ctxLabel : s.opts.find((o) => o.v === A.help)?.l ?? ""}` : "",
+    A.help ? `${s.q} ${s.opts.find((o) => o.v === A.help)?.l ?? ""}` : "",
+    ctxLabel && P["help.ctx"] ? `${P["help.ctx"]}: ${ctxLabel}` : "",
     A.budget ? `${s.budget.q}: ${s.budget.opts.find((o) => o.v === A.budget)?.l ?? ""}` : "",
   ];
   const answerText = () => steps.flatMap((s) => {
@@ -535,7 +546,7 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
     if (s.type !== "choice" && s.type !== "text" && s.type !== "slots") return [];
     const v = s.type === "choice" ? s.opts.find((o) => o.v === A[s.id])?.l : A[s.id]; return [v ? `${s.q} ${v}` : ""];
   }).filter(Boolean);
-  const answerIds = () => Object.fromEntries(steps.flatMap((s): [string, string][] => s.type === "help" ? [["help", A.help === "ctx" ? ctxLabel : A.help ?? ""], ["budget", A.budget ?? ""], ["place", ctxPlace]]
+  const answerIds = () => Object.fromEntries(steps.flatMap((s): [string, string][] => s.type === "help" ? [["help", A.help ?? ""], ["ctx", ctxLabel], ["budget", A.budget ?? ""], ["place", ctxPlace]]
     : s.type === "contact" && s.lang ? [["lang", A.lang ?? ""]] : s.type === "choice" || s.type === "text" || s.type === "slots" ? [[s.id, A[s.id] ?? ""]] : []));
   async function submit() {
     const scr = stage.lastElementChild as HTMLElement, btn = scr.querySelector<HTMLButtonElement>("[data-send]")!; const hp = scr.querySelector<HTMLInputElement>("[data-hp]")?.value || "";
