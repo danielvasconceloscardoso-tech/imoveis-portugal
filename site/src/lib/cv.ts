@@ -72,10 +72,11 @@ export function build(live: Ctx = {}): Built {
   for (const p of read<string[]>("ip.places", [])) add(p, "map");
   add(read<string>("ip.mare.place", ""), "mare");
   for (const p of s.add) add(p, "answers");
-  const interest = list.slice(0, 6);
+  // D54: everything sent is shown to the buyer first. The time spent on each place only orders the interest (the place the
+  // reader came from stays first, then the longest looked at); the minutes themselves are never sent.
+  const [head, ...rest] = list;
+  const interest = (head ? [head, ...rest.sort((a, b) => (b.ms ?? 0) - (a.ms ?? 0))] : []).slice(0, 6);
   f("interest", interest.map((x) => x.name).join(", "), interest[0]?.src ?? "map");
-  const timed = interest.filter((x) => x.ms && x.ms >= 5000);
-  if (timed.length) f("time", timed.map((x) => `${x.name} ${x.ms! < 60000 ? `${Math.round(x.ms! / 1000)} s` : `${Math.round(x.ms! / 60000)} min`}`).join(", "), "map");
   const has = (k: Key) => out.some((x) => x.k === k);
   const pct = Math.round((100 * SCORED.filter(has).length) / SCORED.length);
   return { fields: out, pct, qualified: KEY5.filter(has).length >= 4, price, sim: sm, ctx, interest };
