@@ -1,5 +1,5 @@
 {
-  "_how": "Golden sample place card (operator's step 1, 3 Nov 2026). Read by scripts/map-data/tiles.py together with routes.csv, schools.csv and health.csv in this folder. The free card shows the rows marked card=1 and the chosen beach, city and airport; every row goes to the paid analysis (site/src/data/mapanalysis.json). Flights: facts.csv rows (PlaneMapper scheduled block times, checked 2026-11-03). SOURCES.md in this folder says how each figure was checked. Prompt 68 (4 Nov 2026): 'arrive' is the arrival line under the name ({min} = OSRM minutes to the 'city' point in routes.csv); 'more' is the card's last line, its fact in content/facts/facts.csv; 'camera' is the arrival flight, [lon, lat, zoom, bearing, pitch] from upstream down the Douro (river line from site/public/data/map/rivers.json) to the partner project. The photographs are Shalu Investments' aerial views (authorised by the operator, 4 Nov 2026); the three earlier photographs stay in site/public/img/v2/.",
+  "_how": "Golden sample place card (operator's step 1, 3 Nov 2026). Read by scripts/map-data/tiles.py together with routes.csv, schools.csv and health.csv in this folder. The free card shows the rows marked card=1 and the chosen beach, city and airport; every row goes to the paid analysis (site/src/data/mapanalysis.json). Flights: facts.csv rows (PlaneMapper scheduled block times, checked 2026-11-03). SOURCES.md in this folder says how each figure was checked. Prompt 68 (4 Nov 2026): 'arrive' is the arrival line under the name ({min} = OSRM minutes to the 'city' point in routes.csv); 'more' is the card's last line, its fact in content/facts/facts.csv; 'camera' is the arrival flight, [lon, lat, zoom, bearing, pitch] from upstream down the Douro (river line from site/public/data/map/rivers.json) to the partner developments (the camera ends between O'rizon Living and Marble Terrace). The photographs are Shalu Investments' aerial views (authorised by the operator, 4 Nov 2026); the three earlier photographs stay in site/public/img/v2/.",
   "slug": "gondomar",
   "origin": {
     "name": "Câmara Municipal de Gondomar, Praça Manuel Guedes",
@@ -122,9 +122,9 @@
       56
     ],
     [
-      -8.5648,
-      41.1408,
-      11.5,
+      -8.5508,
+      41.1455,
+      11.3,
       -68,
       58
     ]

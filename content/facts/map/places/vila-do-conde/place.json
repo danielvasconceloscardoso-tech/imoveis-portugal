@@ -1,0 +1,42 @@
+{
+  "_how": "Prompt 68 (operator, 4 Nov 2026: \"Also add the one in Vila do Conde\"): the arrival only. Vila do Conde has no golden-sample folder yet (no OSRM drive times, no school or health rows): its card keeps today's tiles (the price, the straight-line distances) behind the one-line answers. 'arrive' is the line under the name, from the Metro do Porto timetable (facts.csv metro-b-vila-do-conde); 'more' is the card's last line (facts.csv vdc-aqueduct, Câmara Municipal de Vila do Conde, checked 2026-11-04); 'camera' is the arrival flight, [lon, lat, zoom, bearing, pitch], up the coast from the Ave estuary to Marble Terrace Vila do Conde in Portas Fronhas. Read by scripts/map-data/place_cards.py.",
+  "slug": "vila-do-conde",
+  "arrive": {
+    "fact": "metro-b-vila-do-conde",
+    "pt": "O mar e o Ave, a 41 minutos da Trindade de metro.",
+    "en": "The sea and the Ave, 41 minutes from Trindade by metro.",
+    "fr": "La mer et l'Ave, à 41 minutes de Trindade en métro.",
+    "src": {
+      "pt": "Metro: Metro do Porto, horários da linha B (setembro de 2026), Bx expresso",
+      "en": "Metro: Metro do Porto, line B timetable (September 2026), Bx express",
+      "fr": "Métro : Metro do Porto, horaires de la ligne B (septembre 2026), Bx express"
+    }
+  },
+  "more": {
+    "fact": "vdc-aqueduct",
+    "pt": "O aqueduto de Santa Clara foi construído com 999 arcos.",
+    "en": "The Santa Clara aqueduct was built with 999 arches.",
+    "fr": "L'aqueduc de Santa Clara a été bâti avec 999 arches.",
+    "src": {
+      "pt": "Aqueduto: Câmara Municipal de Vila do Conde, Monumentos Nacionais",
+      "en": "Aqueduct: Câmara Municipal de Vila do Conde, Monumentos Nacionais",
+      "fr": "Aqueduc : Câmara Municipal de Vila do Conde, Monumentos Nacionais"
+    }
+  },
+  "camera": [
+    [
+      -8.79,
+      41.31,
+      10.7,
+      18,
+      56
+    ],
+    [
+      -8.7454,
+      41.3711,
+      12.0,
+      8,
+      58
+    ]
+  ]
+}

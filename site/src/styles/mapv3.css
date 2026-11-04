@@ -394,24 +394,26 @@ p.m3-tl { margin: 0; }
 /* Prompt 68 (4 Nov 2026), the method's worked example: the pick's photo pin keeps its short label at every zoom; a place
    with a hero project opens as an arrival (photograph, name, one line), then the project (render, one line, one action),
    then the next questions (one line each, opening on tap), then one more thing. */
-.m3-pin-pick { z-index: 3; }
-.m3-pin-t { position: absolute; left: calc(50% + 25px); top: 12px; padding: 5px 8px 4px; border-radius: 999px; background: rgba(255, 255, 255, .95); color: #7a5e28;
+.m3-pin-t { position: absolute; left: 50%; top: 100%; transform: translateX(-50%); margin-top: 3px; padding: 4px 7px 3px; border-radius: 999px; background: rgba(255, 255, 255, .95); color: #7a5e28;
   font: 700 10px/1 var(--m3sans); letter-spacing: .12em; text-transform: uppercase; white-space: nowrap; box-shadow: 0 2px 8px rgba(17, 18, 20, .22); pointer-events: none; }
 .m3-pin.is-named .m3-pin-t, .m3-pin.is-cluster .m3-pin-t { display: none; }
 .m3-cr { position: absolute; left: 12px; right: auto !important; bottom: 9px !important; font: 500 11px/1.2 var(--m3sans) !important; color: rgba(255, 255, 255, .92) !important; text-shadow: 0 1px 4px rgba(0, 0, 0, .6); pointer-events: none; }
 .m3-sheet h2.m3-h-xl { font-size: 48px; line-height: 1; letter-spacing: -.02em; }
 .m3-arr { padding-top: 18px; padding-bottom: 4px; }
 .m3-arr-l { margin: 10px 0 0; font: 400 19px/1.4 var(--m3serif); color: var(--gi); }
-.m3-hero { margin: 16px -12px 0; }
-.m3-hero-f { position: relative; margin: 0; }
-.m3-hero-i { display: block; width: 100%; aspect-ratio: 2 / 1; object-fit: cover; background: #e9e4d8; }
-.m3-hero-t { position: absolute; left: 16px; top: 14px; padding: 6px 10px 5px; border-radius: 999px; background: rgba(255, 255, 255, .95); box-shadow: 0 2px 8px rgba(17, 18, 20, .18); line-height: 1; }
-.m3-hero-t .m3-tag { font-size: 11px; }
+.m3-devs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 14px 0 0; padding: 0 12px; }
+.m3-devs-1 { grid-template-columns: 1fr; }
+.m3-dev { display: flex; flex-direction: column; align-items: stretch; gap: 0; min-width: 0; margin: 0; padding: 0 !important; border: 0; background: none !important; text-align: left; color: var(--gi) !important; cursor: pointer; }
+.m3-dev-f { position: relative; display: block; border-radius: 14px; overflow: hidden; background: #e9e4d8; }
+.m3-dev-f img { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; transition: transform .3s var(--e); }
+.m3-devs-1 .m3-dev-f img { aspect-ratio: 2 / 1; }
+.m3-dev:hover .m3-dev-f img { transform: scale(1.03); }
+.m3-dev:focus-visible { outline: 2px solid #2f5d50; outline-offset: 3px; border-radius: 14px; }
+.m3-dev-t { position: absolute; left: 8px; top: 8px; padding: 4px 7px 3px; border-radius: 999px; background: rgba(255, 255, 255, .95); line-height: 1; box-shadow: 0 2px 6px rgba(17, 18, 20, .16); }
+.m3-dev-t .m3-tag { font-size: 10px; }
+.m3-dev-n { margin-top: 8px; font: 400 19px/1.2 var(--m3serif); }
+.m3-dev-l { margin-top: 3px; font: 500 13px/1.35 var(--m3sans); color: var(--gm); }
 .m3-gal-arr .m3-gal-t .m3-photo { aspect-ratio: 16 / 9; }
-.m3-hero-b { padding: 14px 24px 4px; }
-.m3-hero-b .m3-kick { margin-bottom: 6px; }
-.m3-sheet h3.m3-hero-n { font-size: 28px; line-height: 1.12; }
-.m3-hero-l { margin: 8px 0 0; font: 400 17px/1.45 var(--m3serif); color: var(--gi); }
 .m3-btn-w { width: 100%; margin-top: 14px; }
 .m3-hero-v { margin: 6px 0 0; text-align: center; }
 .m3-hero-v.m3-quiet { justify-content: center; }
@@ -437,12 +439,12 @@ p.m3-tl { margin: 0; }
 .m3-quiet .m3-link:hover, .m3-hero-v .m3-link:hover { text-decoration: underline; text-underline-offset: 3px; }
 .m3-onemore { margin: 28px 0 12px; padding: 24px 8px 0; border-top: 1px solid rgba(120, 120, 110, .22); font: italic 400 21px/1.4 var(--m3serif); text-align: center; color: var(--gi); }
 @media (max-width: 819px) {
-  .m3-gal-arr .m3-gal-t .m3-photo { aspect-ratio: 2 / 1; }
-  .m3-sheet.is-arr[data-detent="1"] { height: 60%; }
+  .m3-sheet.is-arr[data-detent="1"] { height: 62%; }
+  .m3-gal-arr .m3-gal-t .m3-photo, .m3-ph-arr .m3-photo { aspect-ratio: 12 / 5; }
+  .m3-ph-arr { margin: 0 -12px; } .m3-ph-arr .m3-photo { border-radius: 0; }
   .m3-sheet h2.m3-h-xl { font-size: 42px; }
   .m3-arr { padding-top: 14px; }
   .m3-arr-l { font-size: 18px; margin-top: 6px; }
-  .m3-hero-b { padding: 14px 24px 4px; }
   .m3-hero-top { margin: 0 -12px; aspect-ratio: 2 / 1; }
   .m3-sheet[data-detent="0"] .m3-hero-top { display: none; }
 }

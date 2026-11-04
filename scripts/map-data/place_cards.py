@@ -31,6 +31,28 @@ def _facts(root):
         return {r["id"]: r for r in csv.DictReader(f)}
 
 
+def _arrival(pl, facts, city_min):
+    """Prompt 68 (4 Nov 2026): the arrival line under the name ({min}: OSRM minutes to the card's city point; or a line
+    with its own facts.csv id), the card's last line ("one more thing", only with its fact in facts.csv) and the arrival
+    flight ([lon, lat, zoom, bearing, pitch] keyframes). Every line that rests on a fact carries its source for "Fontes"."""
+    arr, src = {}, []
+    def sourced(x):
+        if not x.get("fact"): return True
+        f = facts.get(x["fact"])
+        if not f: return False  # a line whose fact is not in facts.csv is never shown
+        if x.get("src"): src.append({"t": x["src"], "u": f["source_url"], "d": f["checked_on"]})
+        return True
+    a = pl.get("arrive")
+    if a and ("{min}" not in a.get("pt", "") or city_min is not None) and sourced(a):
+        arr["line"] = {k: a[k].replace("{min}", str(city_min)) for k in ("pt", "en", "fr") if a.get(k)}
+    m = pl.get("more")
+    if m and m.get("fact") and sourced(m):
+        arr["more"] = {k: m[k] for k in ("pt", "en", "fr") if m.get(k)}
+    if pl.get("camera"): arr["cam"] = pl["camera"]
+    if src: arr["src"] = src
+    return arr
+
+
 def build(root, out):
     base = os.path.join(root, "content", "facts", "map", "places")
     if not os.path.isdir(base): return {}
@@ -40,6 +62,12 @@ def build(root, out):
         d = os.path.join(base, slug)
         if slug not in out["m"] or not os.path.exists(os.path.join(d, "place.json")): continue
         pl = json.load(open(os.path.join(d, "place.json"), encoding="utf8"))
+        # Prompt 68: a place.json may hold only the arrival (no origin, no drive times): the place keeps its own tiles and
+        # gets the arrival line, the last line and the camera ("arr"), each line with its facts.csv source.
+        if "origin" not in pl:
+            arr = _arrival(pl, facts, None)
+            if arr: cards[slug] = {"free": None, "paid": None, "arr": arr}
+            continue
         routes = {r["id"]: r for r in _rows(os.path.join(d, "routes.csv"))}
         mins = lambda r: round(float(r["drive_min"]))
         life = []
@@ -63,16 +91,6 @@ def build(root, out):
             "hsp": [[r["name"], mins(r)] + ([r["card_note"]] if r.get("card_note") else []) for r in hsp if r["card"] == "1"],
             "o": pl["origin"]["name"], "d": checked,
         }
-        # Prompt 68 (4 Nov 2026): the arrival line under the name ({min}: OSRM minutes to the card's city point), the card's
-        # last line ("one more thing", only with its fact in facts.csv) and the arrival flight down to the place.
-        city = routes.get(pl["life"]["city"])
-        if pl.get("arrive") and city:
-            free["arrive"] = {k: v.replace("{min}", str(mins(city))) for k, v in pl["arrive"].items()}
-        more = pl.get("more")
-        if more and facts.get(more.get("fact", "")):
-            fact = facts[more["fact"]]
-            free["more"] = {**{k: more[k] for k in ("pt", "en", "fr") if more.get(k)}, "src": more.get("src"), "u": fact["source_url"], "d": fact["checked_on"]}
-        if pl.get("camera"): free["cam"] = pl["camera"]
         beaches = sorted((r for r in routes.values() if r["kind"] == "beach"), key=lambda r: float(r["drive_min"]))
         paid = {
             "o": pl["origin"], "d": checked,
@@ -80,5 +98,6 @@ def build(root, out):
             "hsp": [{"n": r["name"], "k": r["kind"], "op": r["operator"], "a": r["address"], "min": mins(r), "km": float(r["drive_km"]), "src": r["registry"]} for r in hsp],
             "bch": [{"n": r["name"], "min": mins(r), "km": float(r["drive_km"])} for r in beaches],
         }
-        cards[slug] = {"free": free, "paid": paid}
+        city = routes.get(pl["life"]["city"])
+        cards[slug] = {"free": free, "paid": paid, "arr": _arrival(pl, facts, mins(city) if city else None)}
     return cards

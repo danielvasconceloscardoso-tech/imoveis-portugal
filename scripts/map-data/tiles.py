@@ -144,13 +144,14 @@ for v in out["rg"].values():
     for k in ("lo", "hi", "p1"): v.pop(k, None)
 for k in ("sea", "doc"): out["src"].pop(k, None)
 cards = place_cards.build(ROOT, out)
-ana["card"] = {slug: c["paid"] for slug, c in cards.items()}
+ana["card"] = {slug: c["paid"] for slug, c in cards.items() if c.get("paid")}
 json.dump(ana, open(ana_path, "w", encoding="utf8"), ensure_ascii=False, separators=(",", ":"))
 # One small file per municipality for the card (the map opens a place before the whole map has loaded).
 pdir = os.path.join(PUB, "map", "place"); os.makedirs(pdir, exist_ok=True)
 for slug, row in out["m"].items():
     one = {"q": out["q"], **row}
-    if slug in cards: one["c5"] = cards[slug]["free"]
+    if slug in cards and cards[slug].get("free"): one["c5"] = cards[slug]["free"]
+    if slug in cards and cards[slug].get("arr"): one["arr"] = cards[slug]["arr"]  # prompt 68: the arrival
     json.dump(one, open(os.path.join(pdir, f"{slug}.json"), "w", encoding="utf8"), ensure_ascii=False, separators=(",", ":"))
 
 # The map's free price layer: the market median quarter by quarter over five years (21 quarters, the same span as the card's
@@ -167,4 +168,4 @@ path = os.path.join(PUB, "map", "tiles.json")
 json.dump(out, open(path, "w", encoding="utf8"), ensure_ascii=False, separators=(",", ":"))
 cov = {k: sum(1 for m in out["m"].values() if k in m) for k in ("m2", "p5", "nb", "nbq", "bch", "ap", "fl", "sch", "hsp")}
 covp = {k: sum(1 for m in out["p"].values() if k in m) for k in ("m2", "p5", "bch", "ap", "sch", "hsp")}
-print(f"tiles.json: {os.path.getsize(path) // 1024} KB · {len(out['m'])} concelhos, {len(out['p'])} freguesias\n  concelhos {cov}\n  freguesias {covp}\n  golden sample cards: {sorted(cards)}")
+print(f"tiles.json: {os.path.getsize(path) // 1024} KB · {len(out['m'])} concelhos, {len(out['p'])} freguesias\n  concelhos {cov}\n  freguesias {covp}\n  golden sample cards: {sorted(k for k, c in cards.items() if c.get('free'))}\n  arrivals: {sorted(k for k, c in cards.items() if c.get('arr'))}")

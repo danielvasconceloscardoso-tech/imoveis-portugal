@@ -9879,7 +9879,7 @@ Prompt 66 (3 Nov 2026): the O'rizon Living showcase, the first project shown on 
 
 ## p68
 
-Prompt 68 (4 Nov 2026), the method's worked example (content/METHOD.md): a place with a partner project that carries a "hero" line in projects.json opens as an arrival (the photograph, the name, one line), then the project as the hero (the render, one line, one action), then the next questions, one line each, opening on tap, then one more thing. Gondomar is the sample (rule 17). The place's own lines (the arrival, the last line) live in content/facts/map/places/<slug>/place.json; the project's line in projects.json. Used by site/src/scripts/map-v3.ts.
+Prompt 68 (4 Nov 2026), the method's worked example (content/METHOD.md): a place with partner projects that carry a "hero" line in projects.json, and with an arrival in its place.json, opens as an arrival (the photograph, the name, one line), then its developments as photo tiles in one format (alphabetical, no ranking; each opens its card: the render, one line, one action), then the next questions, one line each, opening on tap, then one more thing. Gondomar is the sample (rule 17). The place's own lines (the arrival, the last line) live in content/facts/map/places/<slug>/place.json; the project's line in projects.json. Used by site/src/scripts/map-v3.ts.
 
 ### q.life
 - PT: {city}? {v} min.
@@ -9900,6 +9900,11 @@ Prompt 68 (4 Nov 2026), the method's worked example (content/METHOD.md): a place
 - PT: Saúde? Um hospital a {v} min.
 - EN: Health? A hospital {v} min away.
 - FR: Santé ? Un hôpital à {v} min.
+
+### q.sea
+- PT: O mar? {v} km em linha reta.
+- EN: The sea? {v} km as the crow flies.
+- FR: La mer ? {v} km à vol d'oiseau.
 
 ### q.health.cs
 - PT: Saúde? Um centro de saúde a {v} min.

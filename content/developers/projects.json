@@ -1181,10 +1181,16 @@
     "en": "55 apartments · T1 to T4 · 3 blocks",
     "fr": "55 appartements · T1 à T4 · 3 blocs"
    },
+   "hero": {
+    "pt": "55 apartamentos em três blocos, na Avenida Dr. Mário Soares.",
+    "en": "55 apartments in three blocks on Avenida Dr. Mário Soares.",
+    "fr": "55 appartements en trois blocs, sur l'Avenida Dr. Mário Soares."
+   },
+   "heroImg": "/img/developers/marble-terrace/exterior",
    "delivery": null,
    "url": "https://marbleterrace.pt/",
    "partner": true,
-   "pending": true,
+   "pending": false,
    "checked": "2026-10-28",
    "render": "/img/developers/marble-terrace/exterior",
    "credit": "ID Investimentos Imobiliários (render)",
@@ -1384,10 +1390,16 @@
     "en": "46 apartments · T1 to T4 · 1 building",
     "fr": "46 appartements · T1 à T4 · 1 immeuble"
    },
+   "hero": {
+    "pt": "46 apartamentos em Portas Fronhas, à entrada de Vila do Conde.",
+    "en": "46 apartments in Portas Fronhas, at the entrance to Vila do Conde.",
+    "fr": "46 appartements à Portas Fronhas, à l'entrée de Vila do Conde."
+   },
+   "heroImg": "/img/developers/marble-terrace-vila-do-conde/exterior",
    "delivery": null,
    "url": "https://marbleterrace.pt/viladoconde/",
    "partner": true,
-   "pending": true,
+   "pending": false,
    "checked": "2026-11-03",
    "render": "/img/developers/marble-terrace-vila-do-conde/exterior",
    "credit": "ID Investimentos Imobiliários (render)",

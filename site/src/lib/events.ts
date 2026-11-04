@@ -23,9 +23,9 @@ export const MAP_TILES = ["price", "life", "care", "compare"];
 export const MAP_PAID = ["rent", "g10y", "foreign", "supply", "compare", "card"];
 /** Operator, step 1 (3 Nov 2026), the golden sample card: "Fontes", the two calls to action and the gallery views seen. */
 export const MAP_CARD5 = ["card/sources", "cta/paid", "cta/consult", "gallery/2", "gallery/3"];
-/** Prompt 68 (4 Nov 2026), the arrival card (a place whose partner project carries a hero line): the arrival shown, the
- * project shown first, the private viewing asked, the showcase opened, each next question opened, the last line seen. */
-export const MAP_P68 = ["arrive", "hero", "hero/view", "visit", "qa/life", "qa/schools", "qa/price", "qa/health", "more"];
+/** Prompt 68 (4 Nov 2026), the arrival card (a place whose partner project carries a hero line): the arrival shown, each
+ * development tile shown and tapped, the private viewing asked, the showcase opened, each next question opened, the last line seen. */
+export const MAP_P68 = ["arrive", "hero", "hero/tap", "hero/view", "visit", "qa/life", "qa/schools", "qa/price", "qa/health", "qa/near", "more"];
 export const OVERLAYS = ["golf", "beach", "devs"];
 /** Fix step 3 (3 Nov): "Ver a análise completa" on the free pages turned into previews of the paid analysis
  * (components/AnalysisPreview.astro): ev "paid/preview/{id}" when the unlock sheet opens. */
