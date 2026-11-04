@@ -449,3 +449,8 @@ p.m3-tl { margin: 0; }
   .m3-sheet[data-detent="0"] .m3-hero-top { display: none; }
 }
 @media (prefers-reduced-motion: reduce) { .m3-qp, .m3-qb svg { transition: none; } }
+
+/* Prompt 71 §2: the south coast (US edition): a stop's one number, large, with its label beside it. */
+.m3-south-n { display: flex; align-items: baseline; gap: 10px; margin: 14px 0 0; }
+.m3-south-n b { font: 400 2.6rem/1 var(--m3serif); color: var(--gi); letter-spacing: -.01em; }
+.m3-south-n span { font-size: 14px; line-height: 1.35; color: var(--gm); }

@@ -1,0 +1,13 @@
+origin,dest,flights_jan_jul_2026,gate_min,scheduled_min,carriers,distance_mi,fact
+JFK,LAX,5859,369,378,AA B6 DL F9,2475,us-domestic-jfk-lax
+EWR,LAX,2473,357,367,AS B6 NK UA,2454,us-domestic-ewr-lax
+BOS,LAX,2803,382,389,AA B6 DL UA,2611,us-domestic-bos-lax
+IAD,LAX,1487,332,344,AA UA,2288,us-domestic-iad-lax
+PHL,LAX,1356,349,359,AA F9,2402,us-domestic-phl-lax
+MIA,LAX,1951,338,351,AA DL,2342,us-domestic-mia-lax
+ORD,LAX,4022,268,276,AA DL F9 NK UA,1744,us-domestic-ord-lax
+SFO,JFK,3906,330,340,AA AS B6 DL,2586,us-domestic-sfo-jfk
+LAX,JFK,5865,318,328,AA B6 DL F9,2475,us-domestic-lax-jfk
+JFK,HNL,402,663,667,AS DL,4983,us-domestic-jfk-hnl
+EWR,HNL,75,663,680,UA,4962,us-domestic-ewr-hnl
+ORD,HNL,320,543,555,AA UA,4243,us-domestic-ord-hnl

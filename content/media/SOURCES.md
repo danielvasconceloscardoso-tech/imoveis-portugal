@@ -250,3 +250,14 @@ Operator's method (D92 and the fast pass that followed): the concelhos with no p
 | img/v2/vila-do-conde-foz-do-ave-do-ar-* | Vila do Conde (map card) | Aerial photograph of Vila do Conde (19).jpg | https://commons.wikimedia.org/wiki/File:Aerial_photograph_of_Vila_do_Conde_(19).jpg | Joseolgon | CC BY-SA 4.0 | helper pick, camera point checked | 2026-11-03 |
 | img/v2/cerveira-vale-do-minho-* | Vila Nova de Cerveira (map card) | Foz do Minho - Vista de Vila Nova de Cerveira.JPG | https://commons.wikimedia.org/wiki/File:Foz_do_Minho_-_Vista_de_Vila_Nova_de_Cerveira.JPG | Samuel Fonseca 85 | CC BY-SA 3.0 | helper pick, camera point checked | 2026-11-03 |
 | img/v2/foz-coa-foz-do-coa-douro-* | Vila Nova de Foz Côa (map card) | Foz do Rio Côa - Portugal (53180837481).jpg | https://commons.wikimedia.org/wiki/File:Foz_do_Rio_C%C3%B4a_-_Portugal_(53180837481).jpg | Vitor Oliveira from Torres Vedras, PORTUGAL | CC BY-SA 2.0 | helper pick, camera point checked | 2026-11-03 |
+
+## Prompt 71: the south coast on the US map, and Arrow Global / Details (4 Nov 2026)
+
+| File | Where | What it shows | Source | Licence | Checked |
+|---|---|---|---|---|---|
+| img/v2/sines-baia-* | US map, south coast, stop 1 (Sines) | Praia Vasco da Gama and the bay of Sines from above, the port's cranes on the horizon (centre of a panorama cut to 16:10, 640/1024/1600, no grading) | Alvesgaspar, Wikimedia Commons, https://commons.wikimedia.org/wiki/File:Sines_November_2021-15.jpg | CC BY-SA 4.0 | 2026-11-04 |
+| img/v2/comporta-mar-turquesa-* | US map, south coast, stop 2 (Comporta) | (library, above) | Šarūnas Burdulis, Flickr | CC BY-SA 2.0 | 2026-11-04 |
+| img/v2/algarve-golfe-amanhecer-* | US map, south coast, stop 3 (the Algarve golf coast) | (library, above) | Pixabay 1268298 | Pixabay Content License | 2026-11-04 |
+| img/developers/the-uncommon/*, img/developers/springs-els-club/*, img/developers/palmares/* | Arrow / Details developments (pending: design-v2 and the private preview only) | The developers' own renders, from vilamouraworld.com and palmaresliving.com | Arrow Global / Details (Vilamoura World; Palmares Ocean Living & Golf), published material, credited to them | Their published material, credited (prompt 71 §3); not used on main while pending | 2026-11-04 |
+
+Commons' API and upload host rate-limited the build environment (HTTP 429) for part of the session; the Sines file was found through the Commons search and its file page (author and licence read there) and fetched through Special:FilePath.

@@ -18,7 +18,10 @@ type Series = { n: string; m2: (number | null)[] };
 type Props = { id: number; n: string; s: string; r: string; x: number; y: number; a: number };
 type Layer = "none" | "price";
 type Proj = { id: string; name: string; tag?: string; developer: string; muni: string; lon: number; lat: number; render?: string; pin?: string; from: number | null; showcase: string; summary?: string; feats?: string[]; now?: number | null;
-  near?: string[]; muniName?: string; hero?: string; heroImg?: string };
+  near?: string[]; muniName?: string; hero?: string; heroImg?: string;
+  // Prompt 71 §3: a development without a showcase page on the site ("Our pick", no unit list) asks for its private visit
+  // through the Concierge ("visit"); "showcase" is then the developer's own site.
+  visit?: string };
 
 const reduce = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 const SKY = { "sky-color": "#f3efe6", "horizon-color": "#f6efe1", "fog-color": "#efe8da", "sky-horizon-blend": 0.6, "horizon-fog-blend": 0.7, "fog-ground-blend": 0.35, "atmosphere-blend": 0.5 };
@@ -320,6 +323,11 @@ export function initMapV3(root: HTMLElement) {
         const pr = projects.find((x) => x.id === selProj);
         if (pr) { map.setFilter("sel", ["==", ["get", "s"], pr.muni]); arriveAt(pr.muni, pr); }
       }
+      // Prompt 71: ?pins=<id>,<id> frames those developments (the /arrow short link); ?tour=south starts the south coast.
+      const pinIds = (q.get("pins") ?? "").split(",").filter((id) => projects.some((p) => p.id === id));
+      if (mode === "page" && pinIds.length && !selected && !selProj) { const b = new ml.LngLatBounds(); projects.filter((p) => pinIds.includes(p.id)).forEach((p) => b.extend([p.lon, p.lat]));
+        map.stop(); map.fitBounds(b, { padding: isWide() ? { left: 300, right: 140, top: 130, bottom: 90 } : { left: 110, right: 110, top: 150, bottom: canvas.clientHeight * 0.3 }, maxZoom: 11.4, pitch: flat ? 0 : 45, duration: reduce() ? 0 : 1800 }); }
+      if (mode === "page" && q.get("tour") === "south" && cfg.south?.length) southStop(0);
       if (mode === "home" && !flat && !selected) startSpin();
       if (!flat) governor();
       map.on("click", (e: any) => { stopTour(); const gc = overlays.golf ? golfAt(e.point) : null; if (gc) { showGolf(gc); return; } const h = pick(e.point); if (!h) return; if (h.kind === "par") selectParish(h.key); else select(h.key); });
@@ -930,7 +938,9 @@ export function initMapV3(root: HTMLElement) {
       for (let i = 0; i < g.length; i++) for (const o of [...left]) { const a = at0.get(g[i])!, b = at0.get(o)!; if (Math.hypot(a.x - b.x, a.y - b.y) < 52) { g.push(o); left.delete(o); } }
       g.sort((a, b) => a.p.lon - b.p.lon);
       const cx = g.reduce((t, x) => t + at0.get(x)!.x, 0) / g.length, cy = g.reduce((t, x) => t + at0.get(x)!.y, 0) / g.length;
-      g.forEach((x, i) => { const pt = at0.get(x)!; off.set(x, g.length > 1 ? [cx + (i - (g.length - 1) / 2) * 54 - pt.x, cy - pt.y] : [0, 0]); });
+      // Prompt 71: two picks side by side (Vilamoura) stand wider apart, so their "Our pick" labels never overlap.
+      const gap = g.filter((x) => x.p.hero && x.p.tag).length > 1 ? 84 : 54;
+      g.forEach((x, i) => { const pt = at0.get(x)!; off.set(x, g.length > 1 ? [cx + (i - (g.length - 1) / 2) * gap - pt.x, cy - pt.y] : [0, 0]); });
     }
     for (const m of vis) {
       const o = off.get(m) ?? [0, 0], prev = (m as any).off as [number, number] | undefined;
@@ -955,7 +965,7 @@ export function initMapV3(root: HTMLElement) {
       // Prompt 68: the label only where the data gives one (O'rizon's "tag"); a development not yet signed carries none.
       hh += `<div class="m3-sb m3-arr"><p class="m3-kick">${esc(pm2)}${p.tag ? ` · <span class="m3-tag">${esc(p.tag)}</span>` : ""}</p><div class="ht-row"><h2 class="m3-h" tabindex="-1">${esc(p.name)}</h2>${heartHTML("home", p.id, pm2 ? `${p.name}, ${pm2}` : p.name, p.showcase)}</div>`;
       hh += `<p class="m3-arr-l">${esc(p.hero)}</p>${p.from ? `<p class="m3-line">${esc(L.pfrom.replace("{v}", eur.format(p.from)))}</p>${imtLine(p.from, "project")}` : ""}`;
-      hh += `<a class="m3-btn m3-btn-p m3-btn-w" href="${esc(p.showcase)}#pedir" data-visit>${esc(cfg.p68.visit)}</a>`;
+      hh += `<a class="m3-btn m3-btn-p m3-btn-w" href="${esc(p.visit || `${p.showcase}#pedir`)}" data-visit>${esc(cfg.p68.visit)}</a>`;
       // Prompt 69: the Concierge from the project card opens on this project (its first step already chosen).
       const cg = cfg.p69 ? `<a class="m3-link" href="${esc(`${cfg.links.consult}?project=${encodeURIComponent(p.id)}&place=${encodeURIComponent(pm2)}`)}" data-concierge data-cta-consult>${esc(cfg.p69.cg)} →</a>` : "";
       hh += `<p class="m3-hero-v m3-quiet"><a class="m3-link" href="${esc(p.showcase)}" data-view>${esc(cfg.p68.view)} →</a>${byS.has(p.muni) || pm2 ? `<button type="button" class="m3-link" data-goto="${esc(p.muni)}">${esc(pm2)} →</button>` : ""}${cg}</p></div>`;
@@ -971,7 +981,7 @@ export function initMapV3(root: HTMLElement) {
     if (p.feats?.length) h += `<ul class="m3-det">${p.feats.map((f) => `<li>${esc(f)}</li>`).join("")}</ul>`;
     if (p.now != null && pl.now) h += `<p class="m3-buys"><b>${esc(pl.now.replace("{n}", String(p.now)))}</b></p>`;
     h += `<p class="m3-buys">${p.from ? L.pfrom.replace("{v}", eur.format(p.from)) : esc(pl.price ?? L.ponreq)}</p>${p.from ? imtLine(p.from, "project") : ""}`;
-    h += `<div class="m3-acts"><a class="m3-btn m3-btn-p" href="${esc(p.showcase)}">${esc(pl.view ?? p.name)}</a><a class="m3-btn" href="${esc(p.showcase)}#pedir">${esc(pl.visit ?? "")}</a></div></div>`;
+    h += `<div class="m3-acts"><a class="m3-btn m3-btn-p" href="${esc(p.showcase)}">${esc(pl.view ?? p.name)}</a><a class="m3-btn" href="${esc(p.visit || `${p.showcase}#pedir`)}">${esc(pl.visit ?? "")}</a></div></div>`;
     openSheet(h, open);
   }
 
@@ -1039,6 +1049,32 @@ export function initMapV3(root: HTMLElement) {
     if (!stop) { caption(""); root.classList.remove("is-touring"); tourAbort = null; }
   }
   root.querySelectorAll<HTMLButtonElement>("[data-tour]").forEach((b) => b.addEventListener("click", () => tour(b.dataset.tour!)));
+
+  // ------------------------------------------------------------ prompt 71 §2: the south coast (US edition only, cfg.south)
+  // One arrival, three stops (Sines, Comporta, the Algarve golf coast): the camera flies to each, and the card shows one
+  // photograph, the name, one line, one number and the drive from Lisbon; "Next" goes on, the last stop turns the golf
+  // layer on. Any touch on the map takes over, as on the tours. Wording: COPY_DECK.md "p71.south.*".
+  type Stop = { id: string; name: string; lon: number; lat: number; z: number; b: number; ph?: string; line: string; num: string; lab: string; dist: string; more?: string[]; src: { t: string; u: string }[] };
+  async function southStop(i: number) {
+    const S: Stop[] = cfg.south ?? [], st = S[i]; if (!st) return;
+    await load(); stopTour(); halt(); arrStop(); selected = null; selRegion = null; selProj = null; ctx = null; syncUrl();
+    if (map) { map.setFilter("sel", ["==", ["get", "s"], ""]); map.flyTo({ center: [st.lon, st.lat], zoom: st.z, bearing: flat ? 0 : st.b, pitch: flat ? 0 : 55, duration: reduce() ? 0 : 2200, curve: 1.3, easing: ease, essential: true,
+      padding: isWide() ? { right: 440, left: 0, top: 60, bottom: 80 } : { bottom: canvas.clientHeight * 0.55, top: 70, left: 0, right: 0 } }); }
+    ev({ event: "map/south", step: st.id, origin: mode });
+    const nx = S[i + 1], P7 = cfg.p71;
+    let h = st.ph ? `<img class="m3-photo m3-hero-top" src="${esc(st.ph)}-1024.webp" srcset="${esc(st.ph)}-640.webp 640w, ${esc(st.ph)}-1024.webp 1024w, ${esc(st.ph)}-1600.webp 1600w" sizes="(max-width: 819px) 100vw, 400px" alt="" width="1024" height="640">` : `<div class="m3-photo m3-photo-none"></div>`;
+    h += `<div class="m3-sb m3-arr"><p class="m3-kick">${esc(P7.k.replace("{i}", String(i + 1)).replace("{n}", String(S.length)))}</p><h2 class="m3-h m3-h-xl" tabindex="-1">${esc(st.name)}</h2>`;
+    h += `<p class="m3-arr-l">${esc(st.line)}</p><p class="m3-south-n"><b>${esc(st.num)}</b><span>${esc(st.lab)}</span></p><p class="m3-line">${esc(st.dist)}</p>`;
+    for (const m of st.more ?? []) h += `<p class="m3-line">${esc(m)}</p>`;
+    h += `<button type="button" class="m3-btn m3-btn-p m3-btn-w" data-south-next>${esc(nx ? P7.next.replace("{name}", nx.name) : P7.golf)} →</button>`;
+    h += `<p class="m3-src">${st.src.map((z) => `<a href="${esc(z.u)}" rel="noopener" target="_blank">${esc(z.t)}</a>`).join(" · ")}</p></div>`;
+    openSheet(h, true, true); sheetIn.scrollTop = 0;
+    sheetIn.querySelector("[data-south-next]")?.addEventListener("click", async () => {
+      if (nx) { southStop(i + 1); return; }
+      ev({ event: "map/south/golf", origin: mode }); await setOverlay("golf", true); closeSheet();
+    });
+  }
+  root.querySelectorAll<HTMLButtonElement>("[data-south]").forEach((b) => b.addEventListener("click", () => southStop(0)));
 
   // ------------------------------------------------------------ the home page's slow rotation (prompt 34 §2)
   let rotating = false, halted = false, haltTimer = 0;
@@ -1154,7 +1190,7 @@ export function initMapV3(root: HTMLElement) {
     addEventListener("scroll", () => load(), { once: true, passive: true });
     // A link with a state opens the map straight away; a plain ?place= link shows the card at once (below) and the map wakes
     // at the first sign of a reader, then flies to the place (operator, step 1: the card in under a second on a phone).
-    if (q.has("parish") || q.has("region") || q.has("q") || q.has("layer")) ("requestIdleCallback" in window ? (window as any).requestIdleCallback : setTimeout)(() => load(), { timeout: 2500 });
+    if (q.has("parish") || q.has("region") || q.has("q") || q.has("layer") || q.has("pins") || q.has("tour")) ("requestIdleCallback" in window ? (window as any).requestIdleCallback : setTimeout)(() => load(), { timeout: 2500 });
     // Prompt 68: the pick's photo pin belongs to the opening view of Portugal, so with one on the map (and the
     // developments shown) the map wakes once the page is idle instead of waiting for the reader.
     else if (overlays.devs && projects.some((p) => p.hero)) ("requestIdleCallback" in window ? (window as any).requestIdleCallback : setTimeout)(() => load(), { timeout: 1500 });

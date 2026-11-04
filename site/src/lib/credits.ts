@@ -1,3 +1,4 @@
+import { PROJECTS } from "./projects";
 // Prompt 33 §1.4 and prompt 34 §4: photographs under CC BY or CC BY-SA are credited here, on /credits/, never in a caption.
 // Everything else on the site is Pixabay, Mixkit, Unsplash or public domain (no credit required). The full list is content/media/SOURCES.md.
 export type Credit = { file: string; place: string; title: string; author: string; url: string; licence: string; licenceUrl: string };
@@ -23,6 +24,8 @@ export const CREDITS: Credit[] = [
   // (images with O'rizon Living drawn in), used with Shalu Investments' permission (operator, 4 Nov 2026). The three
   // photographs above are off the card; their files stay.
   { file: "img/v2/gondomar-aerial-*", place: "Valbom, Gondomar", title: "O'rizon Living, aerial views of the Douro", author: "Shalu Investments", url: "https://orizonliving.pt/", licence: "com autorização · with permission · avec autorisation", licenceUrl: "https://orizonliving.pt/" },
+  // Prompt 71 §2 (4 Nov 2026): the south coast's Sines stop (US map), a Wikimedia Commons panorama cut to 16:10.
+  { file: "img/v2/sines-baia-*", place: "Sines", title: "Sines November 2021-15", author: "Alvesgaspar", url: "https://commons.wikimedia.org/wiki/File:Sines_November_2021-15.jpg", licence: "CC BY-SA 4.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0/" },
   { file: "img/v2/vila-do-conde-aqueduto-*", place: "Vila do Conde", title: "Vila do Conde", author: "Sergei Gussev", url: "https://www.flickr.com/photos/133200397@N03/46637546551", licence: "CC BY 2.0", licenceUrl: BY },
   // Fix step 4 (3 Nov 2026): the lifestyle articles' new photographs, from Wikimedia Commons (graded, 640/1024/1600).
   { file: "img/v2/faro-ria-formosa-por-do-sol-*", place: "Faro", title: "Sunset from the Ponte Praia de Faro", author: "Eduard Marmet", url: "https://commons.wikimedia.org/wiki/File:Sunset_from_the_Ponte_Praia_de_Faro_(36487363454).jpg", licence: "CC BY-SA 2.0", licenceUrl: BYSA },
@@ -137,3 +140,8 @@ export const CREDITS: Credit[] = [
   { file: "img/v2/cerveira-vale-do-minho-*", place: "Vila Nova de Cerveira", title: "Foz do Minho - Vista de Vila Nova de Cerveira.JPG", author: "Samuel Fonseca 85", url: "https://commons.wikimedia.org/wiki/File:Foz_do_Minho_-_Vista_de_Vila_Nova_de_Cerveira.JPG", licence: "CC BY-SA 3.0", licenceUrl: "https://creativecommons.org/licenses/" },
   { file: "img/v2/foz-coa-foz-do-coa-douro-*", place: "Vila Nova de Foz Côa", title: "Foz do Rio Côa - Portugal (53180837481).jpg", author: "Vitor Oliveira from Torres Vedras, PORTUGAL", url: "https://commons.wikimedia.org/wiki/File:Foz_do_Rio_C%C3%B4a_-_Portugal_(53180837481).jpg", licence: "CC BY-SA 2.0", licenceUrl: "https://creativecommons.org/licenses/" },
 ];
+// Prompt 71 §3: the developers' own images on the map and the private preview, credited to them; listed only where the
+// project is shown on this build (never on the live branch while it is pending).
+const ARROW = "their published material, credited";
+for (const p of PROJECTS.filter((x) => ["the-uncommon", "springs-els-club", "palmares"].includes(x.id)))
+  CREDITS.push({ file: `img/developers/${p.id}/*`, place: p.muni === "lagos" ? "Lagos" : "Vilamoura, Loulé", title: p.name, author: "Arrow Global / Details", url: p.url ?? "", licence: ARROW, licenceUrl: p.url ?? "" });

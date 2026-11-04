@@ -10270,3 +10270,202 @@ Prompt 69 (4 Nov 2026), the Concierge in three steps and IMT explained where the
 - PT: Como se calcula o IMT
 - EN: How IMT is calculated
 - FR: Comment l'IMT est calculé
+
+## p71
+
+Prompt 71 (4 Nov 2026), US edition, English only: "Closer than you think" (site/src/pages/en/us/closer-than-you-think.astro, site/src/lib/closer.ts) and the south-coast arrival on the US map (site/src/components/MapV3.astro, site/src/scripts/map-v3.ts). Feel: "Portugal is closer than California." The PT and FR lines repeat the English: these blocks are only shown on the US edition, in English (the parity check needs all three lines). Figures and their sources: content/facts/facts.csv and content/facts/flights/SOURCES.md.
+
+### title
+- PT: Closer than you think
+- EN: Closer than you think
+- FR: Closer than you think
+
+### desc
+- PT: From New York, Lisbon is about half an hour further than Los Angeles. Every nonstop from the US to Portugal, with its airline and season.
+- EN: From New York, Lisbon is about half an hour further than Los Angeles. Every nonstop from the US to Portugal, with its airline and season.
+- FR: From New York, Lisbon is about half an hour further than Los Angeles. Every nonstop from the US to Portugal, with its airline and season.
+
+### kick
+- PT: From {city}
+- EN: From {city}
+- FR: From {city}
+
+### hero.n
+- PT: {n} min
+- EN: {n} min
+- FR: {n} min
+
+### hero.more
+- PT: Lisbon is {n} minutes further than Los Angeles.
+- EN: Lisbon is {n} minutes further than Los Angeles.
+- FR: Lisbon is {n} minutes further than Los Angeles.
+
+### hero.less
+- PT: Lisbon is {n} minutes closer than Los Angeles.
+- EN: Lisbon is {n} minutes closer than Los Angeles.
+- FR: Lisbon is {n} minutes closer than Los Angeles.
+
+### pick
+- PT: Your city
+- EN: Your city
+- FR: Your city
+
+### to
+- PT: {from} to {to}
+- EN: {from} to {to}
+- FR: {from} to {to}
+
+### nonstop
+- PT: Nonstop to {to} with {airline}, {season}.
+- EN: Nonstop to {to} with {airline}, {season}.
+- FR: Nonstop to {to} with {airline}, {season}.
+
+### tz
+- PT: Lisbon is {h} hours ahead of {city}.
+- EN: Lisbon is {h} hours ahead of {city}.
+- FR: Lisbon is {h} hours ahead of {city}.
+
+### now
+- PT: Now: {t} in {city}, {t2} in Lisbon.
+- EN: Now: {t} in {city}, {t2} in Lisbon.
+- FR: Now: {t} in {city}, {t2} in Lisbon.
+
+### night.h
+- PT: Leave after dinner, land for breakfast.
+- EN: Leave after dinner, land for breakfast.
+- FR: Leave after dinner, land for breakfast.
+
+### night.l
+- PT: {dep} from {city}, {arr} in Ponta Delgada, with {airline}.
+- EN: {dep} from {city}, {arr} in Ponta Delgada, with {airline}.
+- FR: {dep} from {city}, {arr} in Ponta Delgada, with {airline}.
+
+### routes.h
+- PT: Every nonstop from the US
+- EN: Every nonstop from the US
+- FR: Every nonstop from the US
+
+### routes.n
+- PT: {n} routes, {a} airlines, flown in 2026.
+- EN: {n} routes, {a} airlines, flown in 2026.
+- FR: {n} routes, {a} airlines, flown in 2026.
+
+### card.h
+- PT: The card
+- EN: The card
+- FR: The card
+
+### card.dl
+- PT: Save the card
+- EN: Save the card
+- FR: Save the card
+
+### card.more
+- PT: further to {to} than to {dom}.
+- EN: further to {to} than to {dom}.
+- FR: further to {to} than to {dom}.
+
+### card.less
+- PT: closer to {to} than to {dom}.
+- EN: closer to {to} than to {dom}.
+- FR: closer to {to} than to {dom}.
+
+### card.foot
+- PT: Average time gate to gate, Jan to Jul 2026. US Department of Transportation.
+- EN: Average time gate to gate, Jan to Jul 2026. US Department of Transportation.
+- FR: Average time gate to gate, Jan to Jul 2026. US Department of Transportation.
+
+### note
+- PT: Times are the average gate to gate, January to July 2026, as the airlines report them to the US Department of Transportation. Seasons are the months flown in 2025 and 2026.
+- EN: Times are the average gate to gate, January to July 2026, as the airlines report them to the US Department of Transportation. Seasons are the months flown in 2025 and 2026.
+- FR: Times are the average gate to gate, January to July 2026, as the airlines report them to the US Department of Transportation. Seasons are the months flown in 2025 and 2026.
+
+### next
+- PT: The south coast, on the map
+- EN: The south coast, on the map
+- FR: The south coast, on the map
+
+### sources
+- PT: Sources
+- EN: Sources
+- FR: Sources
+
+### south.chip
+- PT: The south coast
+- EN: The south coast
+- FR: The south coast
+
+### south.k
+- PT: Stop {i} of {n}
+- EN: Stop {i} of {n}
+- FR: Stop {i} of {n}
+
+### south.dist
+- PT: {h} from Lisbon · {mi} mi
+- EN: {h} from Lisbon · {mi} mi
+- FR: {h} from Lisbon · {mi} mi
+
+### south.next
+- PT: Next: {name}
+- EN: Next: {name}
+- FR: Next: {name}
+
+### south.golf
+- PT: Every golf course
+- EN: Every golf course
+- FR: Every golf course
+
+### south.sines.line
+- PT: Microsoft's largest investment in Portugal is going in here.
+- EN: Microsoft's largest investment in Portugal is going in here.
+- FR: Microsoft's largest investment in Portugal is going in here.
+
+### south.sines.num
+- PT: $10B+
+- EN: $10B+
+- FR: $10B+
+
+### south.sines.lab
+- PT: for AI infrastructure, from 2026
+- EN: for AI infrastructure, from 2026
+- FR: for AI infrastructure, from 2026
+
+### south.comporta.line
+- PT: Rice fields and pine woods behind the dunes, south of Lisbon.
+- EN: Rice fields and pine woods behind the dunes, south of Lisbon.
+- FR: Rice fields and pine woods behind the dunes, south of Lisbon.
+
+### south.comporta.num
+- PT: {n}
+- EN: {n}
+- FR: {n}
+
+### south.comporta.lab
+- PT: golf courses from Tróia to Melides
+- EN: golf courses from Tróia to Melides
+- FR: golf courses from Tróia to Melides
+
+### south.algarve.line
+- PT: The golf coast, from Vilamoura to Lagos.
+- EN: The golf coast, from Vilamoura to Lagos.
+- FR: The golf coast, from Vilamoura to Lagos.
+
+### south.algarve.num
+- PT: {n}
+- EN: {n}
+- FR: {n}
+
+### south.algarve.lab
+- PT: golf courses on the Algarve coast
+- EN: golf courses on the Algarve coast
+- FR: golf courses on the Algarve coast
+
+### south.algarve.marina
+- PT: Vilamoura: Portugal's largest marina, {n} berths.
+- EN: Vilamoura: Portugal's largest marina, {n} berths.
+- FR: Vilamoura: Portugal's largest marina, {n} berths.
+
+### south.algarve.beach
+- PT: Praia da Falésia: Tripadvisor's best beach in the world, 2024.
+- EN: Praia da Falésia: Tripadvisor's best beach in the world, 2024.
+- FR: Praia da Falésia: Tripadvisor's best beach in the world, 2024.

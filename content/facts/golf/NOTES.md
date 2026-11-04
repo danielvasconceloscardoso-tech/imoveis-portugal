@@ -117,3 +117,11 @@ To follow the requested source order exactly, whitelist `fpg.pt`, `visitalgarve.
   - Golf Aldeia dos Capuchos (Visit Lisboa, the official Lisbon tourism board)
 - **Official page seen only through search extracts**: Ombria (ombria.com media page), Els Club (ernieels.com), and CostaTerra (discoverylandco.com).
 - **All Visit Portugal rows**: the pages were read through search-result extracts, not opened directly (bot challenge). Years and designers are as Visit Portugal states them.
+
+## Prompt 71 §2 (4 Nov 2026): Arrow Global / Details courses checked against the owners' own sites
+
+- **Palmares** (Lagos): renamed to the owner's names: the three nines are Alvor, Lagos and Praia (not "Lakes"), the resort is "Palmares Ocean Living & Golf" (no longer Onyria), the architect "Robert Trent Jones Jr." as Palmares writes it (the same person as "Robert Trent Jones II"); website palmaresliving.com/golf/golf-course/ (facts.csv palmares-golf-27-holes).
+- **Vilamoura** (Loulé), Arrow's five courses (facts.csv arrow-vilamoura-golf-courses): Old Course (Frank Pennink, 1969), Pinhal (1976; Frank Pennink, "refined" by Robert Trent Jones Sr in 1985: added to the designer), Laguna (Joseph Lee), Millennium (2000) per vilamouraworld.com/destination/golf/; source_url moved there for Old Course, Pinhal and Laguna. The resort label stays "Vilamoura (Dom Pedro Golf)": Vilamoura World still books these courses through dompedrogolf.com (and the name keeps golf_list.py's match to their OpenStreetMap outlines).
+- **The Els Club Vilamoura**: private club, 18 holes redesigned by Ernie Els from the Victoria course (theelsclubvilamoura.com, now its website).
+- **Monte Rei** (Vila Real de Santo António) is also an Arrow / Details asset (arrow-details-algarve); its row is unchanged.
+- "12 golf courses" (prompt 72): Arrow's own pages name Vilamoura's five, Palmares (27 holes) and Monte Rei; no count of 12 was found on a primary source.

@@ -1,0 +1,35 @@
+origin,dest,carrier,carrier_name,season,deps_2025,deps_2026_jan_jul,gate_min_2026,distance_mi,shown,fact
+BOS,LIS,DL,Delta Air Lines,all year,312,155,380,3192,1,us-route-dl-bos-lis
+BOS,LIS,S4,Azores Airlines,,0,2,,3192,0,
+BOS,LIS,TP,TAP Air Portugal,all year,638,370,,3192,1,us-route-tp-bos-lis
+BOS,LIS,VR,VR,,0,1,,3192,0,
+BOS,OPO,S4,Azores Airlines,,1,0,,3144,0,
+BOS,OPO,TP,TAP Air Portugal,Mar to Oct,93,60,,3144,1,us-route-tp-bos-opo
+BOS,PDL,S4,Azores Airlines,all year,371,198,,2395,1,us-route-s4-bos-pdl
+BOS,TER,S4,Azores Airlines,all year,47,31,,2298,1,us-route-s4-bos-ter
+BOS,TER,TP,TAP Air Portugal,,1,0,,2298,0,
+CLT,TER,AA,American Airlines,,1,0,,2946,0,
+EWR,FAO,UA,United Airlines,May to Sep,74,44,426,3494,1,us-route-ua-ewr-fao
+EWR,FNC,UA,United Airlines,May to Sep,45,32,399,3178,1,us-route-ua-ewr-fnc
+EWR,LIS,TP,TAP Air Portugal,all year,673,384,,3384,1,us-route-tp-ewr-lis
+EWR,LIS,UA,United Airlines,all year,361,208,396,3384,1,us-route-ua-ewr-lis
+EWR,OPO,TP,TAP Air Portugal,all year,348,189,,3340,1,us-route-tp-ewr-opo
+EWR,OPO,UA,United Airlines,Feb to Nov,363,230,410,3340,1,us-route-ua-ewr-opo
+EWR,PDL,TP,TAP Air Portugal,,1,0,,2576,0,
+EWR,PDL,UA,United Airlines,May to Sep,99,66,320,2576,1,us-route-ua-ewr-pdl
+EWR,SMA,UA,United Airlines,,0,1,454,2622,0,
+IAD,LIS,TP,TAP Air Portugal,all year,529,295,,3591,1,us-route-tp-iad-lis
+IAD,LIS,UA,United Airlines,all year,311,165,423,3591,1,us-route-ua-iad-lis
+JFK,LIS,DL,Delta Air Lines,all year,363,208,405,3367,1,us-route-dl-jfk-lis
+JFK,LIS,S4,Azores Airlines,,2,1,,3367,0,
+JFK,LIS,TP,TAP Air Portugal,all year,351,195,,3367,1,us-route-tp-jfk-lis
+JFK,OPO,DL,Delta Air Lines,since May 2026,0,71,411,3322,1,us-route-dl-jfk-opo
+JFK,PDL,S4,Azores Airlines,all year,193,80,,2557,1,us-route-s4-jfk-pdl
+JFK,SMA,S4,Azores Airlines,,0,1,,2602,0,
+JFK,TER,S4,Azores Airlines,,35,1,,2462,0,
+LAX,LIS,TP,TAP Air Portugal,all year (since May 2025),118,105,,5690,1,us-route-tp-lax-lis
+MIA,LIS,TP,TAP Air Portugal,all year,506,301,,4157,1,us-route-tp-mia-lis
+ORD,LIS,TP,TAP Air Portugal,all year,202,111,,4009,1,us-route-tp-ord-lis
+PHL,LIS,AA,American Airlines,all year,351,201,400,3457,1,us-route-aa-phl-lis
+SFO,LIS,TP,TAP Air Portugal,all year,213,119,,5681,1,us-route-tp-sfo-lis
+SFO,TER,TP,TAP Air Portugal,Jun to Sep,16,9,,4918,1,us-route-tp-sfo-ter

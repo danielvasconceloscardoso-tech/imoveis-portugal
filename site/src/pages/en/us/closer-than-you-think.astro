@@ -1,0 +1,190 @@
+---
+// Prompt 71 §1 (US edition, English only; COPY_DECK.md "p71"): "Closer than you think". Feel: "Portugal is closer than
+// California." One hero number (from New York, Lisbon against Los Angeles), the reader's own city beside the domestic trip
+// they already make, the time difference live, "leave after dinner, land for breakfast", every nonstop from the US, and the
+// card (a 1080 x 1350 picture per city in /share/, made by scripts/share/closer-cards.mjs, for Instagram and Maré).
+// Data: site/src/lib/closer.ts (US DOT figures and Azores Airlines' timetable, each row with its facts.csv id).
+import V2 from "../../../layouts/V2.astro";
+import { c } from "../../../lib/copy";
+import { CITIES, NIGHT, ROUTES, AIRPORT, hm, closerFacts } from "../../../lib/closer";
+import { DISCLAIMER, fmtDate } from "../../../lib/content";
+import { pathFor } from "../../../i18n";
+import { config } from "../../../config";
+import { existsSync } from "node:fs";
+import { join } from "node:path";
+
+const lang = "en" as const, ed = "us" as const;
+const k = (key: string, v: Record<string, string | number> = {}) => c(`p71.${key}`, lang, v);
+const self = "/en/us/closer-than-you-think/";
+const nf = new Intl.NumberFormat("en-US");
+const ny = CITIES.find((x) => x.id === "new-york")!;
+const heroN = ny.pt && ny.dom ? ny.pt.min! - ny.dom.min : null;
+const airlines = new Set(ROUTES.map((r) => r.car));
+const cardFile = (id: string) => `/share/closer-${id}.png`;
+const hasCard = (id: string) => existsSync(join(process.cwd(), "public", "share", `closer-${id}.png`));
+const facts = closerFacts();
+const mapSouth = `${pathFor(lang, ed, "map")}?tour=south`;
+// The card (prompt 71 §1.6): one per city with a reported flight time to Portugal, 1080 x 1350, drawn below as a hidden
+// template and saved as a PNG by scripts/share/closer-cards.mjs (it opens this page with ?shot=<city>).
+const shots = CITIES.filter((x) => x.pt && x.dom);
+const deltaLine = (n: number) => (n >= 0 ? k("hero.more", { n }) : k("hero.less", { n: -n }));
+// Each city's bars: the domestic trip, the flight to Portugal where a time is reported, Honolulu where it says more.
+const bars = (x: (typeof CITIES)[number]) => {
+  const list = [x.dom && { lab: k("to", { from: AIRPORT[x.dom.o], to: AIRPORT[x.dom.d] }), min: x.dom.min, pt: false },
+    x.pt && { lab: k("to", { from: AIRPORT[x.pt.o], to: AIRPORT[x.pt.d] }), min: x.pt.min!, pt: true },
+    x.far && { lab: k("to", { from: AIRPORT[x.far.o], to: AIRPORT[x.far.d] }), min: x.far.min, pt: false }].filter(Boolean) as { lab: string; min: number; pt: boolean }[];
+  const max = Math.max(...list.map((b) => b.min));
+  return list.map((b) => ({ ...b, w: Math.round((b.min / max) * 100) }));
+};
+---
+<V2 lang={lang} ed={ed} page="map" title={`${k("title")} | Imóveis Portugal · USA`} description={k("desc")} paths={{ pt: self, en: self, fr: self }}
+  ogImage={hasCard("new-york") ? `https://${config.primaryDomain}${cardFile("new-york")}` : undefined} bodyClass="cl-page">
+  <style>
+    .cl { --cl-ink: #10233a; --cl-pt: #b5532b; --cl-us: #9aa7b6; }
+    .cl-hero { padding-top: 56px; padding-bottom: 24px; }
+    .cl-k { font: 600 12px/1.2 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 0 0 14px; }
+    .cl-h1 { font: 400 clamp(2.4rem, 1.8rem + 3vw, 4.2rem)/1.04 var(--serif); margin: 0 0 22px; color: var(--cl-ink); }
+    .cl-n { font: 400 clamp(4.6rem, 3rem + 8vw, 8.4rem)/0.9 var(--serif); color: var(--cl-pt); margin: 0; letter-spacing: -.02em; }
+    .cl-nl { font: 400 clamp(1.25rem, 1.05rem + .8vw, 1.6rem)/1.3 var(--serif); margin: 10px 0 0; max-width: 30ch; }
+    .cl-pick { display: flex; flex-wrap: wrap; gap: 8px; margin: 34px 0 22px; padding: 0; list-style: none; }
+    .cl-pick button { font: 500 15px/1 var(--sans); padding: 11px 15px; border-radius: 999px; border: 1px solid var(--rule); background: var(--card); color: var(--ink); cursor: pointer; min-height: 44px; }
+    .cl-pick button[aria-pressed="true"] { background: var(--cl-ink); color: #fff; border-color: var(--cl-ink); }
+    .cl-city[hidden] { display: none; }
+    .cl-bars { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; max-width: 720px; }
+    .cl-bar { display: grid; gap: 6px; }
+    .cl-bar span { display: flex; justify-content: space-between; gap: 12px; font: 500 15px/1.3 var(--sans); }
+    .cl-bar b { font: 400 1.5rem/1 var(--serif); white-space: nowrap; }
+    .cl-bar i { display: block; height: 14px; border-radius: 7px; background: var(--cl-us); width: var(--w); transform-origin: left; animation: cl-grow .9s cubic-bezier(.2,.7,.2,1) both; }
+    .cl-bar.is-pt i { background: var(--cl-pt); } .cl-bar.is-pt span { color: var(--cl-pt); }
+    @keyframes cl-grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+    @media (prefers-reduced-motion: reduce) { .cl-bar i { animation: none; } }
+    .cl-ns { margin: 14px 0 0; font-size: 15px; color: var(--muted); }
+    .cl-tz { font: 400 1.25rem/1.4 var(--serif); margin: 22px 0 0; }
+    .cl-tz small { display: block; font: 400 14px/1.4 var(--sans); color: var(--muted); margin-top: 4px; }
+    .cl-night { background: var(--cl-ink); color: #fff; padding: 48px 0; margin: 48px 0 0; }
+    .cl-night h2 { font: 400 clamp(1.8rem, 1.4rem + 2vw, 2.8rem)/1.1 var(--serif); margin: 0 0 18px; color: #fff; }
+    .cl-night ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+    .cl-night li { display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: center; font: 400 1.05rem/1.3 var(--sans); }
+    .cl-night li b { font: 400 1.7rem/1 var(--serif); white-space: nowrap; }
+    .cl-night li em { font-style: normal; height: 2px; background: linear-gradient(90deg, #ffffff55, #f2b48f); border-radius: 2px; }
+    .cl-night p { margin: 14px 0 0; color: #c9d2dc; font-size: 14px; }
+    .cl-routes { padding-top: 48px; padding-bottom: 8px; }
+    .cl-routes h2, .cl-cardh { font: 400 clamp(1.6rem, 1.3rem + 1.4vw, 2.3rem)/1.15 var(--serif); margin: 0 0 6px; }
+    .cl-rt { list-style: none; margin: 18px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 10px 28px; }
+    .cl-rt li { display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; padding: 10px 0; border-bottom: 1px solid var(--rule); font-size: 15px; }
+    .cl-rt .r { font-weight: 600; } .cl-rt .t { font: 400 1.15rem/1 var(--serif); text-align: right; } .cl-rt .s { color: var(--muted); font-size: 13px; grid-column: 1 / -1; }
+    .cl-card { margin: 40px 0 0; display: grid; grid-template-columns: minmax(0, 360px) 1fr; gap: 32px; align-items: end; }
+    .cl-card[hidden], .cl-card img[hidden] { display: none; }
+    .cl-card img { width: 100%; height: auto; aspect-ratio: 4 / 5; border-radius: 12px; box-shadow: 0 18px 40px #10233a2e; display: block; }
+    .cl-card .btn { margin-top: 14px; }
+    @media (max-width: 720px) { .cl-card { grid-template-columns: 1fr; } .cl-card img { max-width: 420px; } }
+    .cl-next { display: inline-block; margin: 40px 0 0; font: 400 1.4rem/1.2 var(--serif); color: var(--cl-ink); }
+    .cl-shot { display: none; }
+    :global(html.is-shot body > *:not(.cl-shotbox)) { display: none !important; }
+    :global(.cl-shotbox) { position: fixed; inset: 0; z-index: 9999; background: #10233a; }
+    :global(.cl-shotbox) .cl-shot { display: flex; }
+    .cl-shot { width: 1080px; height: 1350px; flex-direction: column; justify-content: space-between; padding: 96px 88px 80px; background: radial-gradient(120% 80% at 80% 0%, #1d3b5c 0%, #10233a 60%); color: #fff; font-family: var(--sans); }
+    .cl-shot .cs-k { font: 600 26px/1 var(--sans); letter-spacing: .18em; text-transform: uppercase; color: #f2b48f; margin: 0; }
+    .cl-shot .cs-h { font: 400 92px/1.02 var(--serif); margin: 26px 0 0; }
+    .cl-shot ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 44px; }
+    .cl-shot li span { display: flex; justify-content: space-between; font: 500 34px/1.2 var(--sans); margin-bottom: 14px; }
+    .cl-shot li b { font: 400 52px/1 var(--serif); }
+    .cl-shot li i { display: block; height: 26px; border-radius: 13px; background: #9aa7b6; width: var(--w); }
+    .cl-shot li.is-pt i { background: #e0784a; } .cl-shot li.is-pt span { color: #f6c2a4; }
+    .cl-shot .cs-n { font: 400 210px/1 var(--serif); color: #f08a5d; margin: 0 0 18px; letter-spacing: -.02em; }
+    .cl-shot .cs-l { font: 400 46px/1.2 var(--serif); margin: 12px 0 0; max-width: 18ch; }
+    .cl-shot .cs-f { display: flex; justify-content: space-between; align-items: end; gap: 40px; font: 400 22px/1.35 var(--sans); color: #b9c4d0; }
+    .cl-shot .cs-f b { font: 500 30px/1 var(--serif); color: #fff; white-space: nowrap; }
+    .cl-src { margin: 48px 0 24px; font-size: 13px; color: var(--muted); }
+    .cl-src summary { cursor: pointer; font-weight: 600; } .cl-src li { margin: 6px 0; } .cl-src a { color: var(--muted); overflow-wrap: anywhere; }
+  </style>
+  <div class="cl" data-cl data-tz-tpl={k("tz")} data-now-tpl={k("now")}>
+    <section class="frame cl-hero">
+      <p class="cl-k">{k("kick", { city: "New York" })}</p>
+      <h1 class="cl-h1">{k("title")}</h1>
+      {heroN != null && <><p class="cl-n">{k("hero.n", { n: nf.format(heroN) })}</p><p class="cl-nl">{deltaLine(heroN)}</p></>}
+
+      <ul class="cl-pick" role="group" aria-label={k("pick")}>
+        {CITIES.map((x, i) => <li><button type="button" data-city={x.id} aria-pressed={i === 0 ? "true" : "false"}>{x.name}</button></li>)}
+      </ul>
+      {CITIES.map((x, i) => (
+        <div class="cl-city" data-panel={x.id} data-tz={x.tz} data-name={x.name} hidden={i !== 0}>
+          <ul class="cl-bars">
+            {bars(x).map((b) => <li class={`cl-bar${b.pt ? " is-pt" : ""}`} style={`--w:${b.w}%`}><span>{b.lab}<b>{hm(b.min)}</b></span><i aria-hidden="true"></i></li>)}
+          </ul>
+          {!x.pt && x.routes.map((r) => <p class="cl-ns">{k("nonstop", { to: AIRPORT[r.d], airline: r.airline, season: r.season })}</p>)}
+          <p class="cl-tz"><span data-tz-line>{k("tz", { h: "5", city: x.name })}</span><small data-now></small></p>
+        </div>
+      ))}
+    </section>
+
+    {NIGHT.length > 0 && (
+      <section class="cl-night">
+        <div class="frame">
+          <h2>{k("night.h")}</h2>
+          <ul>{NIGHT.map((n) => <li><b>{n.dep}</b><em aria-hidden="true"></em><b>{n.arr}</b><span style="grid-column:1/-1">{k("night.l", { dep: n.dep, city: AIRPORT[n.from] === "JFK" ? "New York JFK" : AIRPORT[n.from], arr: n.arr, airline: n.airline })}</span></li>)}</ul>
+        </div>
+      </section>
+    )}
+
+    <section class="frame cl-routes">
+      <h2>{k("routes.h")}</h2>
+      <p class="muted">{k("routes.n", { n: ROUTES.length, a: airlines.size })}</p>
+      <ul class="cl-rt">
+        {ROUTES.map((r) => <li><span class="r">{AIRPORT[r.o]} → {AIRPORT[r.d]}</span><span class="t">{r.min ? hm(r.min) : ""}</span><span class="s">{r.airline} · {r.season}</span></li>)}
+      </ul>
+      <p class="small muted" style="margin-top:14px">{k("note")}</p>
+
+      {CITIES.filter((x) => hasCard(x.id)).length > 0 && (
+        <div class="cl-card" data-cardwrap>
+          {CITIES.map((x, i) => hasCard(x.id) && <img data-card={x.id} hidden={i !== 0} src={cardFile(x.id)} width="1080" height="1350" alt={`${k("title")}: ${bars(x).map((b) => `${b.lab} ${hm(b.min)}`).join(", ")}`} loading="lazy" decoding="async" />)}
+          <div><h2 class="cl-cardh">{k("card.h")}</h2><a class="btn" data-card-dl href={cardFile(CITIES[0].id)} download>{k("card.dl")}</a></div>
+        </div>
+      )}
+
+      <a class="cl-next" href={mapSouth}>{k("next")} →</a>
+
+      <details class="cl-src">
+        <summary>{k("sources")}</summary>
+        <ul>{facts.map((f) => <li>{f.source_title} ({fmtDate(lang, f.checked_on)}): <a href={f.source_url} rel="noopener" target="_blank">{f.source_url}</a></li>)}</ul>
+      </details>
+      <p class="small muted">{DISCLAIMER.en}</p>
+    </section>
+    {shots.map((x) => (
+      <div class="cl-shot" data-shot={x.id} aria-hidden="true">
+        <div><p class="cs-k">{k("title")}</p><p class="cs-h">{k("kick", { city: x.name })}</p></div>
+        <ul>{bars(x).filter((b) => !b.lab.includes("Honolulu")).map((b, i, a) => { const max = Math.max(...a.map((z) => z.min)); return <li class={b.pt ? "is-pt" : ""} style={`--w:${Math.round((b.min / max) * 100)}%`}><span>{b.lab}<b>{hm(b.min)}</b></span><i></i></li>; })}</ul>
+        <div><p class="cs-n">{k("hero.n", { n: nf.format(Math.abs(x.pt!.min! - x.dom!.min)) })}</p><p class="cs-l">{k(x.pt!.min! >= x.dom!.min ? "card.more" : "card.less", { to: AIRPORT[x.pt!.d], dom: AIRPORT[x.dom!.d] })}</p></div>
+        <div class="cs-f"><span>{k("card.foot")}</span><b>Imóveis Portugal</b></div>
+      </div>
+    ))}
+  </div>
+  <script>
+    // The picker (one city at a time, the card follows) and the live clock in the reader's city and in Lisbon.
+    const root = document.querySelector<HTMLElement>("[data-cl]")!;
+    const fmt = (tz: string) => new Intl.DateTimeFormat("en-US", { timeZone: tz, hour: "numeric", minute: "2-digit" });
+    const off = (tz: string) => { const d = new Date(); const p = (z: string) => new Date(d.toLocaleString("en-US", { timeZone: z })).getTime(); return Math.round((p("Europe/Lisbon") - p(tz)) / 3600000); };
+    function tick() {
+      root.querySelectorAll<HTMLElement>("[data-panel]").forEach((p) => {
+        const tz = p.dataset.tz!, name = p.dataset.name!, h = off(tz), now = new Date();
+        const line = p.querySelector("[data-tz-line]")!, small = p.querySelector("[data-now]")!;
+        line.textContent = root.dataset.tzTpl!.replace("{h}", String(h)).replace("{city}", name);
+        small.textContent = root.dataset.nowTpl!.replace("{t}", fmt(tz).format(now)).replace("{city}", name).replace("{t2}", fmt("Europe/Lisbon").format(now));
+      });
+    }
+    tick(); setInterval(tick, 30000);
+    // ?shot=<city>: only that city's card, full size (scripts/share/closer-cards.mjs saves it as the PNG).
+    const shot = new URLSearchParams(location.search).get("shot");
+    const tpl = shot ? root.querySelector<HTMLElement>(`[data-shot="${CSS.escape(shot)}"]`) : null;
+    if (tpl) { const box = document.createElement("div"); box.className = "cl-shotbox"; box.append(tpl); document.body.append(box); document.documentElement.classList.add("is-shot"); }
+    root.querySelectorAll<HTMLButtonElement>("[data-city]").forEach((b) => b.addEventListener("click", () => {
+      const id = b.dataset.city!;
+      root.querySelectorAll<HTMLButtonElement>("[data-city]").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+      root.querySelectorAll<HTMLElement>("[data-panel]").forEach((p) => (p.hidden = p.dataset.panel !== id));
+      let any = false;
+      root.querySelectorAll<HTMLElement>("[data-card]").forEach((im) => { im.hidden = im.dataset.card !== id; any ||= !im.hidden; });
+      const wrap = root.querySelector<HTMLElement>("[data-cardwrap]"); if (wrap) wrap.hidden = !any;
+      const dl = root.querySelector<HTMLAnchorElement>("[data-card-dl]"); if (dl) dl.href = `/share/closer-${id}.png`;
+    }));
+  </script>
+</V2>

@@ -22,7 +22,8 @@ import { config } from "../config";
 import { COMPARE_SUB } from "../lib/maptiles";
 import { SUB } from "../lib/tools";
 import PLACE_PHOTOS from "../data/place-photos.json";
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
+import { FACTS } from "../lib/content";
 import { join } from "node:path";
 import "../styles/mapv3.css";
 import MareBlock from "./MareBlock.astro";
@@ -92,10 +93,28 @@ const labels = {
 const mapPath = pathFor(lang, ed, "map");
 const comparePath = `${mapPath}${COMPARE_SUB[lang]}/`;
 const links = { buy: pathFor(lang, ed, "buy"), consult: pathFor(lang, ed, "consult"), map: mapPath, compare: comparePath, pages: [...pages], credits: "/credits/", imt: `${pathFor(lang, ed, "sims")}${SUB.imt[lang]}/` };
+// Prompt 71 §2 (US edition, English only): the south coast, one arrival and three stops (content/facts/map/south/stops.json;
+// COPY_DECK.md "p71.south.*"). A stop shows only with its photograph on disk and every fact it rests on in facts.csv.
+const SOUTH = JSON.parse(readFileSync(join(process.cwd(), "..", "content", "facts", "map", "south", "stops.json"), "utf8"));
+const golfRows = readFileSync(join(process.cwd(), "..", "content", "facts", "golf", "courses.csv"), "utf8").split("\n").slice(1).filter(Boolean);
+const golfIn = (munis: string[]) => golfRows.filter((r) => /,open,/.test(r) && munis.some((m) => r.includes(`,${m},`))).length;
+const nfUS = new Intl.NumberFormat("en-US"), k7 = (x: string, v: Record<string, string | number> = {}) => c(`p71.south.${x}`, "en", v);
+const driveH = (m: number) => { const r = Math.round(m / 5) * 5; return r % 60 ? `${Math.floor(r / 60)} h ${String(r % 60).padStart(2, "0")}` : `${r / 60} h`; };
+const marinaN = (FACTS["vilamoura-marina-berths"]?.value.match(/^(\d+) berths/) ?? [])[1];
+const south = ed !== "us" || lang !== "en" ? [] : (SOUTH.stops as any[]).filter((st) => (st.facts ?? []).every((f: string) => FACTS[f]) && existsSync(join(process.cwd(), "public", "img", "v2", `${st.ph}-1024.webp`))).map((st) => ({
+  id: st.id, name: st.name, lon: st.lon, lat: st.lat, z: st.z, b: st.b, ph: `/img/v2/${st.ph}`,
+  line: k7(`${st.id}.line`), num: k7(`${st.id}.num`, { n: st.golf ? golfIn(st.golf) : "" }), lab: k7(`${st.id}.lab`),
+  dist: k7("dist", { h: driveH(st.drive.min), mi: nfUS.format(Math.round(st.drive.km / 1.609)) }),
+  more: st.id === "algarve" ? [marinaN && k7("algarve.marina", { n: marinaN }), FACTS["falesia-tripadvisor-2024"] && k7("algarve.beach")].filter(Boolean) : [],
+  src: [...(st.facts ?? []).map((f: string) => ({ t: FACTS[f].source_title.split(",")[0], u: FACTS[f].source_url })),
+    { t: "Drive: OSRM, OpenStreetMap", u: "https://www.openstreetmap.org/copyright" }],
+}));
 const pinFile = (id: string) => existsSync(join(process.cwd(), "public", "img", "map", `pin-${id}.webp`)) ? `/img/map/pin-${id}.webp` : "";
 // The area briefs carry rents, yields and ten-year changes (paid analysis): never in the free card (operator, step 1).
 const cfg = { labels, links, photos, photoAlt, regionPhotos, ed, lang,
-  projects: PROJECTS.map((p) => ({ id: p.id, name: p.name, tag: p.tag?.[lang] ?? "", developer: p.developer, muni: p.muni, lon: p.lon, lat: p.lat, render: p.render, pin: pinFile(p.id) || (p.render ? `${p.render}-800.webp` : ""), from: p.from, showcase: `${pathFor(lang, ed, "partners")}${p.devSlug}/${p.muni}/`,
+  projects: PROJECTS.map((p) => ({ id: p.id, name: p.name, tag: p.tag?.[lang] ?? "", developer: p.developer, muni: p.muni, lon: p.lon, lat: p.lat, render: p.render, pin: pinFile(p.id) || (p.render ? `${p.render}-800.webp` : ""), from: p.from,
+    ...(p.units?.length || p.blocks?.length ? { showcase: `${pathFor(lang, ed, "partners")}${p.devSlug}/${p.muni}/` }
+      : { showcase: p.url ?? "", visit: `${pathFor(lang, ed, "consult")}?project=${encodeURIComponent(p.id)}&place=${encodeURIComponent(MAP_MUNIS.find((m) => m.s === p.muni)?.n ?? "")}` }),
     // Prompt 38: the project card (summary, three features, homes for sale now from the developer's table).
     summary: p.summary?.[lang], feats: (p.features ?? []).filter((f) => f.card).map((f) => f[lang]),
     now: p.blocks ? p.blocks.reduce((a, b) => a + b.units.reduce((x, u) => x + u.forSale, 0), 0) : null,
@@ -109,6 +128,8 @@ const cfg = { labels, links, photos, photoAlt, regionPhotos, ed, lang,
   // Prompt 69: the IMT line on the place card's price question and on the project card (one tap to the IMT screen), and
   // the Concierge from the project card, opened on that project.
   p69: { imt: keep("p69.imt.map", ["price", "imt"]), how: c("p69.imt.how", lang), cg: c("flow.c.title", lang) },
+  // Prompt 71 §2: the south coast (US edition only; empty elsewhere).
+  south, p71: south.length ? { k: k7("k"), next: k7("next"), golf: k7("golf") } : null,
   pl: { view: c("showb.view", lang), visit: c("showb.visit", lang), price: c("showb.price", lang), now: c("showb.now", lang, { n: "{n}" }), near: c("bar.near", lang, { name: "{name}", muni: "{muni}" }) } };
 // Operator, step 1: the market price is the one free colour layer; 10 years, rents, yields and vacant homes are paid.
 const chips = [["price", "chip.price"]] as const;
@@ -144,6 +165,12 @@ const live = A.live && !!A.stripe.region && !!A.stripe.all;
 
     {mode === "page" && (
       <nav class="m3-cards" data-postcards aria-label={k4("regions")}>
+        {south.length > 0 && (
+          <button type="button" class="m3-pc m3-pc-south" data-south>
+            <img src={`/img/map/pc-${regionPhotos.algarve}.webp`} alt="" width="144" height="96" loading="lazy" decoding="async" />
+            <span class="m3-pc-n">{k7("chip")}</span>
+          </button>
+        )}
         {regionList.map((r) => (
           <button type="button" class="m3-pc" data-region={r}>
             {regionPhotos[r] ? <img src={`/img/map/pc-${regionPhotos[r]}.webp`} alt="" width="144" height="96" loading="lazy" decoding="async" /> : <span class="m3-pc-none" aria-hidden="true"></span>}
