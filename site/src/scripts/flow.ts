@@ -102,7 +102,7 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
     const pl = q0.get("place"); if (pl) A.place = pl;
     while (offset < N - 1 && given.has(steps[offset].id)) offset++;
     for (const k of ["cg", "ed", "door"]) q0.delete(k);
-    history.replaceState(null, "", `${location.pathname}${q0.size ? `?${q0}` : ""}${location.hash}`);
+    history.replaceState(history.state, "", `${location.pathname}${q0.size ? `?${q0}` : ""}${location.hash}`);
   }
   // Prompt 69, the arrival: the first step opens on what the reader came from, already chosen. A project (?project=, the
   // map's project card), else a place (?place=, the map card, the simulator's region), with the budget when the link or

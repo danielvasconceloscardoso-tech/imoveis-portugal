@@ -117,9 +117,9 @@ const title = one ? `${one.headline} | Maré` : `Maré | Imóveis Portugal · ${
   // Where the reader came from: the quiet block (?de=article&h={issue}) or the page itself. The arrival is counted here
   // (a count on the click would be lost to the navigation); the URL is then cleaned so a shared link starts fresh.
   const de = (q.get("de") || "").replace(/[^a-z]/g, ""), h = (q.get("h") || "").replace(/[^0-9-]/g, "");
-  if (de && h) { evMareBlock(de, h); q.delete("de"); q.delete("h"); history.replaceState(null, "", `${location.pathname}${q.toString() ? `?${q}` : ""}${location.hash}`); }
+  if (de && h) { evMareBlock(de, h); q.delete("de"); q.delete("h"); history.replaceState(history.state, "", `${location.pathname}${q.toString() ? `?${q}` : ""}${location.hash}`); }
   // Fix step 5: the header button and the line under "Começar" (no headline on screen there, so no issue in the event).
-  else if (de === "header" || de === "hero" || de === "home" || de === "guide") { ev({ event: `mare/open/${de}`, origin: de }); q.delete("de"); history.replaceState(null, "", `${location.pathname}${q.toString() ? `?${q}` : ""}${location.hash}`); }
+  else if (de === "header" || de === "hero" || de === "home" || de === "guide") { ev({ event: `mare/open/${de}`, origin: de }); q.delete("de"); history.replaceState(history.state, "", `${location.pathname}${q.toString() ? `?${q}` : ""}${location.hash}`); }
   const f = document.querySelector<HTMLFormElement>("[data-mare-form]");
   if (f) {
     const where = de || "mare", issue = f.dataset.issue || "";

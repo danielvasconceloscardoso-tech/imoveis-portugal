@@ -260,7 +260,7 @@ export function initRequest() {
   function close() {
     sheet.classList.remove("is-open"); back.classList.remove("is-open"); lock(false);
     setTimeout(() => { sheet.hidden = true; back.hidden = true; }, reduce() ? 0 : 280);
-    if (location.hash === "#pedir") history.replaceState(null, "", location.pathname + location.search);
+    if (location.hash === "#pedir") history.replaceState(history.state, "", location.pathname + location.search);
     opener?.focus?.({ preventScroll: true });
   }
   sheet.querySelector("[data-rq-close]")!.addEventListener("click", close);
