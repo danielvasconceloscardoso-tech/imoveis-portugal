@@ -4,6 +4,7 @@
 // handover in the article's own voice. Sources numbered at the bottom, the disclaimer last (EDITORIAL_POLICY.md).
 // The Maré letter block is added by another part of the D83 work in the "mare" slot below; nothing renders there today.
 // Events (lib/track.ts ev, lib/events.ts): {ed}/art/{id}/open, /place (place = the municipality), /tile, /concierge.
+import { srcTitle } from "../lib/srctitle";
 import V2 from "../layouts/V2.astro";
 import ParaIr from "./ParaIr.astro";
 import MareBlock from "./MareBlock.astro";
@@ -72,7 +73,7 @@ const ld = { "@context": "https://schema.org", "@type": "Article", headline: sto
       <slot name="mare"><MareBlock lang={lang} ed={ed} where="article" /></slot>
       <section class="sources-list st-src" aria-labelledby="fontes">
         <h2 id="fontes" class="h-small">{c("common.sources", lang)}</h2>
-        <ol>{sources.list.map((s, i) => <li id={`fonte-${i + 1}`}><a href={s.url} rel="noopener">{s.title}</a>{s.checked && `, ${c("common.checked", lang, { date: fmtDate(lang, s.checked) })}`}.</li>)}</ol>
+        <ol>{sources.list.map((s, i) => <li id={`fonte-${i + 1}`}><a href={s.url} rel="noopener">{srcTitle(s.title, lang)}</a>{s.checked && `, ${c("common.checked", lang, { date: fmtDate(lang, s.checked) })}`}.</li>)}</ol>
       </section>
       <p class="small disclaimer">{DISCLAIMER[lang]}</p>
       <p class="st-all"><a class="more" href={hub}>{c("lifea.all", lang)}</a></p>

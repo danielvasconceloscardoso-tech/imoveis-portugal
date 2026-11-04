@@ -2,6 +2,7 @@
 // One calculator page (prompts 12 and 13). Runs in the browser: nothing is stored or sent unless the reader
 // ticks the consent box and sends a request. The inputs live in the URL so a simulation can be shared.
 // Wording: COPY_DECK.md "sims.*"; maths: src/lib/sims.ts; fields and results: src/lib/tools.ts.
+import { srcTitle } from "../lib/srctitle";
 import V2 from "../layouts/V2.astro";
 import Calls from "./Calls.astro";
 import { config } from "../config";
@@ -120,7 +121,7 @@ const fieldLabel = (id: string, kind: string) => {
   <section class="sources-list" aria-labelledby="fontes">
     <div class="frame read">
       <h2 id="fontes" class="h-small">{c("common.sources", lang)}</h2>
-      <ol>{src.list.map((s, i) => <li id={`fonte-${i + 1}`}><a href={s.url} rel="noopener">{s.title}</a>{s.checked && `, ${c("common.checked", lang, { date: fmtDate(lang, s.checked) })}`}.</li>)}</ol>
+      <ol>{src.list.map((s, i) => <li id={`fonte-${i + 1}`}><a href={s.url} rel="noopener">{srcTitle(s.title, lang)}</a>{s.checked && `, ${c("common.checked", lang, { date: fmtDate(lang, s.checked) })}`}.</li>)}</ol>
     </div>
   </section>
   <script type="application/json" id="sim-labels" set:html={JSON.stringify(labels)} />

@@ -3,6 +3,7 @@
 // through the qualification form (Tally BEEzgN, extended; fields in ops/TALLY_CONSULTA.md). The form redirects to
 // one of three confirmation pages: "ok" (timing within 12 months), "private" (high budget: "a dedicated adviser",
 // D52) or "later" (otherwise). The rule is applied in Tally's redirect and shown to nobody. Wording: COPY_DECK.md "consult.*".
+import { srcTitle } from "../lib/srctitle";
 import V2 from "../layouts/V2.astro";
 import BriefBox from "./BriefBox.astro";
 import Flow from "./Flow.astro";
@@ -70,7 +71,7 @@ const title = view === "form" ? c("consult.title", lang) : c(`consult.${view}.ti
     <section class="sources-list" aria-labelledby="fontes">
       <div class="frame read">
         <h2 id="fontes" class="h-small">{c("common.sources", lang)}</h2>
-        <ol>{src.list.map((s, i) => <li id={`fonte-${i + 1}`}><a href={s.url} rel="noopener">{s.title}</a>{s.checked && `, ${c("common.checked", lang, { date: fmtDate(lang, s.checked) })}`}.</li>)}</ol>
+        <ol>{src.list.map((s, i) => <li id={`fonte-${i + 1}`}><a href={s.url} rel="noopener">{srcTitle(s.title, lang)}</a>{s.checked && `, ${c("common.checked", lang, { date: fmtDate(lang, s.checked) })}`}.</li>)}</ol>
       </div>
     </section>
   )}
