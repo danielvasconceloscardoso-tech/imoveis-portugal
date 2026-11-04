@@ -53,8 +53,30 @@ export function slotLabel(s: Slot, locale: string, lang: keyof typeof L, zone = 
   return { main, own, both: own ? `${main} · ${own}` : main };
 }
 
-/** Renders the picker into host and keeps it live; set() receives the sorted slots on every change. */
-export function slotPicker(host: HTMLElement, o: { lang: string; locale: string; get: () => Slot[]; set: (s: Slot[]) => void; max?: number }) {
+// Prompt 69: the Concierge shows the times in the reader's own zone first, Lisbon in small type underneath. The zone is the
+// browser's (Intl), else the edition's city when the browser gives none (or only UTC); the reader can change it in one tap.
+export const ED_ZONE: Record<string, string> = { lu: "Europe/Luxembourg", fr: "Europe/Paris", ch: "Europe/Zurich", br: "America/Sao_Paulo", us: "America/New_York", il: "Asia/Jerusalem" };
+const realZone = (tz: string) => !!tz && tz !== "UTC" && !/^Etc\//.test(tz);
+/** The zone the reader's times are shown in, and where it came from: the reader's own choice or browser ("own"), the edition. */
+export function ownZone(ed: string): { zone: string; how: "own" | "edition" | "lisbon" } {
+  let saved = ""; try { saved = localStorage.getItem(zoneKey) || ""; } catch { /* private mode */ }
+  const tz = saved || readerTz(), zone = realZone(tz) ? tz : ED_ZONE[ed] || LIS;
+  return { zone, how: zone === LIS ? "lisbon" : realZone(tz) ? "own" : "edition" };
+}
+/** A slot in the reader's zone first ("Thu 6 Nov, 15:00 Luxembourg"), Lisbon second ("14:00 Lisbon"), for the picker and the confirmation. */
+export function slotOwn(s: Slot, locale: string, zone: string, lisbon: string, shift: { next: string; prev: string }) {
+  const at = lisbonInstant(s.d, s.t), f = (z: string, o: Intl.DateTimeFormatOptions) => new Intl.DateTimeFormat(locale, { timeZone: z, ...o }).format(at);
+  const dz = new Intl.DateTimeFormat("en-CA", { timeZone: zone, year: "numeric", month: "2-digit", day: "2-digit" }).format(at), d = dz === s.d ? "" : dz > s.d ? shift.next : shift.prev;
+  const hm2 = f(zone, { hour: "2-digit", minute: "2-digit", hourCycle: "h23" });
+  if (zone === LIS) return { main: `${f(LIS, { weekday: "short", day: "numeric", month: "short" })}, ${s.t} ${lisbon}`, lis: "", time: s.t, shift: "" };
+  return { main: `${f(zone, { weekday: "short", day: "numeric", month: "short" })}, ${hm2} ${city(zone)}`, lis: `${s.t} ${lisbon}`, time: hm2, shift: d };
+}
+type OwnLabels = { day: string; time: string; picked: string; none: string; remove: string; tz: string; same: string; change: string; zone: string; lisbon: string; next: string; prev: string };
+
+/** Renders the picker into host and keeps it live; set() receives the sorted slots on every change. With `own`, the
+ *  reader's zone comes first and Lisbon sits underneath (prompt 69, the Concierge); without, Lisbon first (the request sheet). */
+export function slotPicker(host: HTMLElement, o: { lang: string; locale: string; get: () => Slot[]; set: (s: Slot[]) => void; max?: number; own?: { ed: string; labels: OwnLabels; onZone?: (how: string) => void } }) {
+  if (o.own) return ownPicker(host, { ...o, own: o.own });
   const lang = (["pt", "en", "fr"].includes(o.lang) ? o.lang : "en") as keyof typeof L, T = L[lang], max = o.max ?? 3;
   const days = slotDays(), times = slotTimes();
   let day = o.get()[0]?.d && days.includes(o.get()[0].d) ? o.get()[0].d : days[0], zone = zoneNow();
@@ -75,6 +97,46 @@ export function slotPicker(host: HTMLElement, o: { lang: string; locale: string;
     host.querySelector(".rq-days")!.scrollLeft = scroll; host.querySelector(".sp-zones")!.scrollLeft = zscroll;
     host.querySelectorAll<HTMLButtonElement>("[data-day]").forEach((b) => b.addEventListener("click", () => { day = b.dataset.day!; draw(); }));
     host.querySelectorAll<HTMLButtonElement>("[data-zone]").forEach((b) => b.addEventListener("click", () => { zone = b.dataset.zone!; try { localStorage.setItem(zoneKey, zone); } catch { /* private mode */ } draw(); }));
+    host.querySelectorAll<HTMLButtonElement>("[data-time]").forEach((b) => b.addEventListener("click", () => {
+      const s = [...o.get()], t = b.dataset.time!, k = s.findIndex((x) => x.d === day && x.t === t);
+      if (k >= 0) s.splice(k, 1); else if (s.length < max) s.push({ d: day, t });
+      s.sort((p, q) => (p.d + p.t).localeCompare(q.d + q.t)); o.set(s); draw();
+    }));
+    host.querySelectorAll<HTMLButtonElement>("[data-rm]").forEach((b) => b.addEventListener("click", () => { const s = [...o.get()]; s.splice(Number(b.dataset.rm), 1); o.set(s); draw(); }));
+  }
+  draw();
+}
+
+// Prompt 69: the Concierge's picker. One day row, then the times in the reader's zone (large) with Lisbon (small) under
+// each; the zone named in one line with "Change" beside it, which opens the edition cities and Lisbon.
+function ownPicker(host: HTMLElement, o: { locale: string; get: () => Slot[]; set: (s: Slot[]) => void; max?: number; own: { ed: string; labels: OwnLabels; onZone?: (how: string) => void } }) {
+  const T = o.own.labels, max = o.max ?? 3, days = slotDays(), times = slotTimes();
+  let { zone, how } = ownZone(o.own.ed), open = false;
+  o.own.onZone?.(how);
+  let day = o.get()[0]?.d && days.includes(o.get()[0].d) ? o.get()[0].d : days[0];
+  const zones = [...new Set([...(realZone(readerTz()) ? [readerTz()] : []), ED_ZONE[o.own.ed], ...ZONES, LIS].filter(Boolean))];
+  const fd = (d: string, opt: Intl.DateTimeFormatOptions) => new Intl.DateTimeFormat(o.locale, { timeZone: LIS, ...opt }).format(lisbonInstant(d, "12:00"));
+  const sh = { next: T.next, prev: T.prev };
+  function draw() {
+    const S = o.get(), taken = (t: string) => S.some((x) => x.d === day && x.t === t);
+    const scroll = host.querySelector(".rq-days")?.scrollLeft ?? 0;
+    const zl = zone === LIS ? T.same : T.tz.replace("{city}", city(zone));
+    host.innerHTML = `<p class="rq-bk">${esc(T.day)}</p><div class="rq-days">${days.map((d) =>
+      `<button type="button" class="rq-day" data-day="${d}" aria-pressed="${d === day}"><span>${esc(fd(d, { weekday: "short" }))}</span><b>${esc(fd(d, { day: "numeric" }))}</b><span>${esc(fd(d, { month: "short" }))}</span></button>`).join("")}</div>
+      <p class="rq-bk">${esc(T.time)}</p>
+      <p class="sp-tz" data-tz-line>${esc(zl)} <button type="button" class="sp-tz-ch" data-tz-ch aria-expanded="${open}">${esc(T.change)}</button></p>
+      <div class="sp-zones" role="group" aria-label="${esc(T.zone)}" ${open ? "" : "hidden"}><span>${esc(T.zone)}</span>${zones.map((z) => `<button type="button" class="rq-pill" data-zone="${esc(z)}" aria-pressed="${z === zone}">${esc(z === LIS ? T.lisbon : city(z))}</button>`).join("")}</div>
+      <div class="rq-times rq-own">${times.map((t) => { const l = slotOwn({ d: day, t }, o.locale, zone, T.lisbon, sh);
+        return `<button type="button" class="rq-time" data-time="${t}" aria-pressed="${taken(t)}" ${!taken(t) && S.length >= max ? "disabled" : ""}><b>${esc(l.time)}${l.shift ? ` <small>${esc(l.shift)}</small>` : ""}</b>${l.lis ? `<span>${esc(l.lis)}</span>` : ""}</button>`; }).join("")}</div>
+      <p class="rq-bk">${esc(T.picked)} (${S.length}/${max})</p>
+      ${S.length ? `<ul class="rq-picked">${S.map((x, k) => { const l = slotOwn(x, o.locale, zone, T.lisbon, sh); return `<li><div><b>${esc(l.main)}${l.shift ? ` (${esc(l.shift)})` : ""}</b>${l.lis ? `<small>${esc(l.lis)}</small>` : ""}</div><button type="button" class="rq-rm" data-rm="${k}" aria-label="${esc(T.remove)}">${X}</button></li>`; }).join("")}</ul>` : `<p class="rq-hint">${esc(T.none)}</p>`}`;
+    host.querySelector(".rq-days")!.scrollLeft = scroll;
+    host.querySelectorAll<HTMLButtonElement>("[data-day]").forEach((b) => b.addEventListener("click", () => { day = b.dataset.day!; draw(); }));
+    host.querySelector<HTMLButtonElement>("[data-tz-ch]")!.addEventListener("click", () => { open = !open; draw(); });
+    host.querySelectorAll<HTMLButtonElement>("[data-zone]").forEach((b) => b.addEventListener("click", () => {
+      zone = b.dataset.zone!; how = zone === LIS ? "lisbon" : "own"; open = false; try { localStorage.setItem(zoneKey, zone); } catch { /* private mode */ }
+      o.own.onZone?.(how); o.set(o.get()); draw();
+    }));
     host.querySelectorAll<HTMLButtonElement>("[data-time]").forEach((b) => b.addEventListener("click", () => {
       const s = [...o.get()], t = b.dataset.time!, k = s.findIndex((x) => x.d === day && x.t === t);
       if (k >= 0) s.splice(k, 1); else if (s.length < max) s.push({ d: day, t });

@@ -108,3 +108,27 @@
 /* The closing line under the next steps (prompt 42): one quiet paragraph, two text links, nothing else. */
 .fl-more { margin: 36px 0 0; max-width: 34em; font-size: 15px; line-height: 1.65; color: var(--fm); }
 .fl-more a { color: var(--fi); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+
+/* Prompt 69: the Concierge in three steps. Step 1: what the reader came from, first and chosen, with a small kicker; the
+   budget and (step 3) the language of the call as one row of pills; the confirmation's times, the preparation and the IMT line. */
+.fl-ctx span small { display: block; margin-bottom: 3px; font-size: 11.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; opacity: .7; }
+.fl-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.fl-pill { padding: 10px 15px !important; border-radius: 999px; background: var(--fs) !important; font-size: 14.5px !important; font-weight: 600 !important; transition: background-color .2s var(--fe), color .2s var(--fe); }
+.fl-pill:hover { background: #ebe9e3 !important; }
+.fl-pill[aria-checked="true"] { background: var(--fi) !important; color: #fff !important; }
+.fl-step > .fl-k { margin-top: 24px; }
+.fl-times { margin-top: 4px; }
+.fl-prep span { display: grid; gap: 3px; } .fl-prep small { font-size: 13.5px; font-weight: 500; color: var(--fm); }
+.fl-prepd { display: flex; align-items: center; gap: 10px; margin: 22px 0 0; font-size: 15px; font-weight: 600; color: var(--fa); }
+.fl-prepd svg { width: 20px; height: 20px; flex: none; }
+.fl-imt { margin: 22px 0 0; max-width: 34em; font-size: 15px; line-height: 1.55; color: var(--fm); }
+.fl-imt .fl-link { white-space: nowrap; }
+/* The slide between screens (scripts/flow.ts swap): the new screen comes in from --fl-dx, the old one leaves the other way,
+   lifted out of the flow so the two never stack, and is removed after 260 ms. */
+@keyframes fl-in { from { opacity: 0; transform: translateX(var(--fl-dx, 28px)); } }
+@keyframes fl-out { to { opacity: 0; transform: translateX(var(--fl-dx, -28px)); } }
+.fl-screen.is-entering { animation: fl-in .26s var(--fe) both; }
+.fl-screen.is-leaving { position: absolute; inset: 0 0 auto 0; pointer-events: none; animation: fl-out .26s var(--fe) forwards; }
+/* In the sheet, a step's action stays in reach while the step scrolls (the phone: step 1 and the times are taller than the screen). */
+.sh-in .fl-step > .fl-go { position: sticky; bottom: -28px; z-index: 2; margin-bottom: -28px; padding: 14px 0 28px; background: linear-gradient(rgba(252, 252, 252, 0), rgb(252, 252, 252) 22px); }
+@media (max-width: 819px) { .sh-in .fl-step > .fl-go { margin-top: 22px; } }

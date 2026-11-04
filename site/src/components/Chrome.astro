@@ -3,6 +3,7 @@
 // one search for the whole site (the magnifier, ⌘K) and the concierge as a sheet over the page the reader is on.
 // Without JavaScript the Concierge button goes to its page.
 import Flow from "./Flow.astro";
+import ImtSheet from "./ImtSheet.astro";
 import { pathFor, type Lang, type EdCode, type PageKey } from "../i18n";
 import { c } from "../lib/copy";
 import "../styles/chrome.css";
@@ -30,6 +31,8 @@ const L = { place: c("find.g.place", lang), faq: c("find.g.faq", lang), sim: c("
     <div class="sh-in"><Flow lang={lang} ed={ed} flow="concierge" param="concierge" sheet /></div>
   </aside>
 )}
+
+<ImtSheet lang={lang} ed={ed} />
 
 <script>
   import { initChrome } from "../scripts/chrome";

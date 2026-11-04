@@ -3,10 +3,13 @@
 
 // IMT brackets (Código do IMT, art. 17.º, n.º 1, Lei 73-A/2025): [top of bracket, marginal %, average % at the top]
 // Facts: pt-imt-hpp-2026 (own permanent home), pt-imt-second-home-2026 (other homes, resident buyer).
-type Bracket = [number, number, number | null];
+export type Bracket = [number, number, number | null];
 const IMT_HPP: Bracket[] = [[106346, 0, 0], [145470, 2, 0.5379], [198347, 5, 1.7274], [330539, 7, 3.8361], [660982, 8, null]];
 const IMT_OTHER: Bracket[] = [[106346, 1, 1], [145470, 2, 1.2689], [198347, 5, 2.2636], [330539, 7, 4.1578], [633931, 8, null]];
 const IMT_FLAT_TOP = 1150853; // 6% flat up to this value, 7.5% above
+// Prompt 69: the IMT screen (scripts/imt.ts) shows the reader's own bracket, so the table is read from here, never copied.
+export const IMT_HPP_TABLE: readonly Bracket[] = IMT_HPP;
+export const IMT_FLAT_FROM = IMT_FLAT_TOP;
 export const IMT_NONRES = 7.5; // pt-imt-nonresident-flat (art. 17.º, n.º 10)
 export const IS_PURCHASE = 0.8; // pt-is-purchase
 export const IS_LOAN = 0.6; // pt-is-loan-5y

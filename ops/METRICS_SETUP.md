@@ -74,6 +74,13 @@ The Cloudflare count is the page `/e/{ed}/{event}/`, except the three short fami
 | `flow/{flow}/stop/{step}` | `{ed}/flow/{flow}/stop/{step}/` | step, band | the sheet closes, or the page is left, without sending |
 | `flow/{flow}/sent` | `{ed}/flow/{flow}/sent/` | band, origin `sheet` for the showcase request sheet | the request was sent to /api/request (Imóveis Portugal and the partner agency) |
 | `flow/{flow}/fallback` | `{ed}/flow/{flow}/fallback/` | band, origin `sheet` for the showcase request sheet | /api/request did not take it; the ready-written e-mail was offered (concierge, partner, viewing) |
+| `flow/concierge/step/{help,call,reach}` | `{ed}/flow/concierge/step/{s}/` | step, band, origin `known` when the site pre-filled it | prompt 69: the Concierge's three steps (what can we help with, when can we call you, how do we reach you). The eleven steps before it (`country` … `consent`) keep their pages |
+| `flow/concierge/ctx/{project,place,budget,none}` | `{ed}/flow/concierge/ctx/{k}/` | band, origin `known` | prompt 69: what the first step opened on (the project card, a place card or the simulator's region, the budget alone, or nothing known) |
+| `flow/concierge/tz/{own,edition,lisbon}` | `{ed}/flow/concierge/tz/{k}/` | origin = the same | prompt 69: the zone the call times were shown in: the reader's own (browser, or chosen), the edition's city (the browser gave none), or Lisbon |
+| `flow/concierge/prep/{open,sent,fallback}` | `{ed}/flow/concierge/prep/{k}/` | band | prompt 69: "Help the advisor prepare the call (30 s)" after the confirmation: opened, sent to /api/request (same routing), or the ready-written e-mail offered |
+| `flow/concierge/step/prep-{purpose,horizon,nif,fin,place}` | `{ed}/flow/concierge/step/prep-{q}/` | step, band | prompt 69: each preparation question shown (stops are not counted: the request is already sent) |
+| `imt/open/{sim1,concierge,map,project,link}` | `{ed}/imt/open/{from}/` | band (the price's budget band), origin = from | prompt 69: the IMT screen opens: from the simulator's IMT line, the Concierge's confirmation, the map card's price question, the project card, or a shared `?imt=` link |
+| `imt/{price,more,calc}` | `{ed}/imt/{k}/` | band, origin = from | prompt 69: on the IMT screen, a new price typed, the last line ("one more thing") seen, the full calculator followed |
 | `sim1/{what}/{value}` | `{ed}/sim1/…/` | region, band, origin `sim1` | every interaction with the one-screen simulator (budget, entry, region, type, use, pay, row, next) |
 | `sim/{tool}/use` | `{ed}/sim/{tool}/use/` | band (price) | a classic calculator is used (once the hand stops) |
 | `heart/{home,region}/{on,off}` | `{ed}/heart/…/` | place (home) or region, origin | a heart is set or removed. Helper: `evHeart(kind, id, on, origin)` |
@@ -88,6 +95,7 @@ The Cloudflare count is the page `/e/{ed}/{event}/`, except the three short fami
 | `art/{id}/concierge` | `{ed}/art/{id}/concierge/` | origin `art` | the Concierge line at the end of the article is followed |
 
 What the site already knows is reused, so the reader is never asked twice. The Concierge opens with these answers already given, and each one stays editable:
+- what it can help with (prompt 69): the project (`?project=`, the map's project card), else the place, with the budget when known; the language of the call, from the page;
 - the country, from the edition;
 - the budget band, from the link, else the simulator used in this tab, else the budget saved on the device;
 - the place, from the link, else the last place opened on the map in this tab, else the last place saved on the device.

@@ -1,0 +1,37 @@
+/* The IMT screen (prompt 69, components/ImtSheet.astro): the Concierge sheet's shape (flow.css .sh), one level above it,
+   so it can open over the Concierge's confirmation. Playfair for the heading, Manrope for the rest, the flow's colours. */
+.imt-back { z-index: 80; }
+.imt-sh { z-index: 81; }
+.imt { --fi: #111214; --fm: #5d6066; --fs: #f3f2ee; --fa: #2f5d50; font-family: "Manrope Variable", system-ui, -apple-system, sans-serif; color: var(--fi); padding-bottom: 12px; }
+.imt-h { margin: 6px 0 8px; font: 400 clamp(26px, 3.6vw, 34px)/1.15 "Playfair Display Variable", Georgia, serif; letter-spacing: -.015em; outline: none; }
+.imt-lede { margin: 0; font-size: 15.5px; line-height: 1.55; color: var(--fm); }
+.imt-price { display: flex; align-items: baseline; gap: 10px; margin: 18px 0 4px; padding: 10px 0; border-bottom: 1.5px solid #d9d5cc; }
+.imt-price:focus-within { border-bottom-color: var(--fa); }
+.imt-price span { flex: none; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--fm); }
+.imt-price input { flex: 1; min-width: 0; border: 0; background: none; padding: 0; font: 600 22px/1.2 "Manrope Variable", system-ui, sans-serif; color: var(--fi); text-align: right; outline: none; font-variant-numeric: tabular-nums; }
+.imt-blk { margin-top: 22px; padding: 18px 20px; border-radius: 18px; background: var(--fs); }
+.imt .imt-blk h3 { margin: 0; font-family: "Manrope Variable", system-ui, -apple-system, sans-serif; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--fm); }
+.imt-blk p { margin: 8px 0 0; font-size: 15.5px; line-height: 1.55; }
+.imt-big { margin-top: 6px !important; font: 600 30px/1.1 "Manrope Variable", system-ui, sans-serif !important; font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
+.imt-routes { margin: 10px 0 0; padding-left: 1.3em; font-size: 15.5px; line-height: 1.55; }
+.imt-routes li + li { margin-top: 8px; }
+.imt-src { font-size: 12.5px !important; color: var(--fm); margin-top: 10px !important; }
+.imt-tab { width: 100%; margin-top: 12px; border-collapse: collapse; font-size: 14.5px; font-variant-numeric: tabular-nums; }
+.imt-tab th { text-align: left; font-size: 11.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--fm); padding: 0 0 6px; }
+.imt-tab th + th, .imt-tab td + td { text-align: right; }
+.imt-tab td { padding: 8px 0; border-top: 1px solid #e3e0d8; }
+.imt-tab tr.is-you td { font-weight: 700; }
+.imt-tab tr.is-you td:first-child::before { content: ""; display: inline-block; width: 7px; height: 7px; margin: 0 8px 1px 0; border-radius: 50%; background: var(--fa); }
+.imt-note { font-size: 13.5px !important; color: var(--fm); }
+.imt-more { background: var(--fi); color: #fff; }
+.imt .imt-more h3 { color: rgba(255, 255, 255, .7); }
+.imt-more p { font-size: 17px; line-height: 1.5; }
+.imt-srcs { background: none; padding: 0 2px; }
+.imt-srcs ul { margin: 10px 0 0; padding-left: 1.1em; font-size: 13.5px; line-height: 1.5; color: var(--fm); }
+.imt-srcs li + li { margin-top: 6px; }
+.imt-srcs a, .imt-calc { color: var(--fi); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; overflow-wrap: anywhere; }
+.imt-disc { font-size: 13px !important; color: var(--fm); }
+.imt-calc { font-weight: 600; font-size: 15px; color: var(--fa); }
+/* A quiet "How it works" next to an IMT figure (simulator, Concierge, map, project card). */
+.imt-tap { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline dotted; text-decoration-thickness: 1px; text-underline-offset: 3px; text-align: left; }
+.imt-tap:hover { color: var(--fa, #2f5d50); }

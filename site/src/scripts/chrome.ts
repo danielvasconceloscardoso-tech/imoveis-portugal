@@ -85,6 +85,8 @@ export function initChrome() {
     // A place or budget carried by the link (the map card) becomes the flow's prefill.
     const u = new URL(href, location.href); const p = new URLSearchParams(location.search); let changed = false;
     for (const k of ["place", "budget"]) { const v = u.searchParams.get(k); if (v && p.get(k) !== v) { p.set(k, v); changed = true; } }
+    // Prompt 69: the project a card opened it from (?project=, the map's project card) is the first step's context.
+    { const v = u.searchParams.get("project"); if (v && p.get("project") !== v) { p.set("project", v); changed = true; } }
     // The partner link's topic (prompt 43 §3b) always matches the link: a link without one clears an earlier topic.
     const t = u.searchParams.get("topic") || "";
     t ? p.set("topic", t) : p.delete("topic");

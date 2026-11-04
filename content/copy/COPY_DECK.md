@@ -4181,7 +4181,7 @@ How to edit:
 - FR: Consultation privée · 15 min · vidéo
 
 ### card.p
-- PT: Com um consultor qualificado, sem custos. Diga-nos o que procura.
+- PT: Com um consultor qualificado, sem custos. Diga-nos em que ponto está.
 - EN: With a qualified advisor, at no cost. Tell us where you are in your plan.
 - FR: Avec un conseiller qualifié, sans frais. Dites-nous où vous en êtes.
 
@@ -4236,12 +4236,12 @@ How to edit:
 - FR: Merci pour votre demande
 
 ### later.p
-- PT: O essencial para preparar a compra com calma.
+- PT: Pelo que nos diz, tem tempo para preparar a compra com calma. Eis o essencial nesta fase.
 - EN: From what you tell us, you have time to prepare calmly. Here is what matters at this stage.
 - FR: D'après vos réponses, vous avez le temps de préparer votre achat sereinement. Voici l'essentiel pour cette étape.
 
 ### later.path
-- PT: Ver o passo a passo
+- PT: O percurso do seu país, passo a passo
 - EN: Your country's path, step by step
 - FR: Le parcours de votre pays, pas à pas
 
@@ -4251,12 +4251,12 @@ How to edit:
 - FR: Maré, la newsletter : idées et pépites du Portugal, chaque mardi et vendredi.
 
 ### later.dossier
-- PT: Ver os dossiês
+- PT: Os dossiês, com os números do seu caso
 - EN: The dossiers, with the figures for your case
 - FR: Les dossiers, avec les chiffres de votre cas
 
 ### later.book
-- PT: Pedir a consulta
+- PT: Quando a compra estiver mais perto, peça aqui a sua consulta privada.
 - EN: When your purchase is closer, request your private consultation here.
 - FR: Quand votre achat sera plus proche, demandez ici votre consultation privée.
 
@@ -6193,8 +6193,8 @@ Prompt 43 §3b: the partner links on the path and the questions open the Concier
 
 ### c.lede
 - PT: Quinze minutos por vídeo com um consultor qualificado, sem custos. Pedir leva um minuto.
-- EN: A free first 15-minute video call with a qualified advisor. One question at a time, about a minute in all.
-- FR: Un premier échange vidéo de 15 minutes, gratuit, avec un conseiller qualifié. Une question à la fois, une minute en tout.
+- EN: Fifteen minutes by video with a qualified advisor, at no cost. Asking takes a minute.
+- FR: Quinze minutes en vidéo avec un conseiller qualifié, sans frais. La demande prend une minute.
 
 ### c.country
 - PT: Onde vive?
@@ -6207,7 +6207,7 @@ Prompt 43 §3b: the partner links on the path and the questions open the Concier
 - FR: Un autre pays
 
 ### c.budget
-- PT: Qual é o orçamento?
+- PT: Qual é, mais ou menos, o seu orçamento?
 - EN: Roughly what is your budget?
 - FR: Quel est, à peu près, votre budget ?
 
@@ -6233,8 +6233,8 @@ Prompt 43 §3b: the partner links on the path and the questions open the Concier
 
 ### more
 - PT: Até lá, cada etapa está explicada em
-- EN: Until then, should it help, our Step by step and articles walk through each stage. Everything else, we'll go through together, at your pace.
-- FR: D'ici là, si cela vous est utile, notre Pas à pas et nos articles présentent chaque étape. Nous verrons le reste ensemble, à votre rythme.
+- EN: Until then, every stage is explained in
+- FR: D'ici là, chaque étape est expliquée dans
 
 ### more.path
 - PT: Passo a passo
@@ -6248,23 +6248,23 @@ Prompt 43 §3b: the partner links on the path and the questions open the Concier
 
 ### c.purpose
 - PT: Para que é a casa?
-- EN: What is it for?
-- FR: Pour quoi faire ?
+- EN: What is the home for?
+- FR: À quoi servira le logement ?
 
 ### c.purpose.1
 - PT: Casa para viver
 - EN: A home to live in
-- FR: Résidence principale
+- FR: Un logement pour y vivre
 
 ### c.purpose.2
 - PT: Casa de férias
 - EN: A holiday home
-- FR: Résidence secondaire
+- FR: Une maison de vacances
 
 ### c.purpose.3
 - PT: Para arrendar
-- EN: Rental income
-- FR: Revenus locatifs
+- EN: To rent out
+- FR: Pour le louer
 
 ### c.purpose.4
 - PT: Regresso a Portugal
@@ -6277,7 +6277,7 @@ Prompt 43 §3b: the partner links on the path and the questions open the Concier
 - FR: Investissement
 
 ### c.when
-- PT: Quando prefere a videochamada?
+- PT: Quando pensa comprar?
 - EN: When do you plan to buy?
 - FR: Quand pensez-vous acheter ?
 
@@ -6343,13 +6343,13 @@ Prompt 43 §3b: the partner links on the path and the questions open the Concier
 
 ### c.place.ph
 - PT: Uma região ou um concelho
-- EN: A region, a town, or "not sure yet"
-- FR: Une région, une commune, ou « je ne sais pas encore »
+- EN: A region or a town
+- FR: Une région ou une commune
 
 ### c.lang
-- PT: Em que língua prefere?
+- PT: Em que língua prefere a chamada?
 - EN: Which language would you like for the call?
-- FR: Dans quelle langue préférez-vous échanger ?
+- FR: Dans quelle langue préférez-vous l'appel ?
 
 ### c.window
 - PT: A que horas prefere? (hora de Lisboa)
@@ -6402,7 +6402,7 @@ Prompt 43 §3b: the partner links on the path and the questions open the Concier
 - FR: J'accepte que cette demande soit transmise à un conseiller qualifié d'une agence immobilière agréée, pour me recontacter. J'ai lu la politique de confidentialité.
 
 ### send
-- PT: Receber a resposta
+- PT: Enviar o pedido
 - EN: Send request
 - FR: Envoyer la demande
 
@@ -6417,7 +6417,7 @@ Prompt 43 §3b: the partner links on the path and the questions open the Concier
 - FR: Votre demande
 
 ### fallback
-- PT: Não foi possível enviar daqui. O email já está escrito:
+- PT: Não foi possível enviar daqui. Envie-o por email, já está escrito:
 - EN: We couldn't send it from here. Send it by email, it's already written:
 - FR: L'envoi n'a pas abouti d'ici. Envoyez-la par e-mail, elle est déjà rédigée :
 
@@ -6427,7 +6427,7 @@ Prompt 43 §3b: the partner links on the path and the questions open the Concier
 - FR: Ouvrir l'e-mail
 
 ### invalid.email
-- PT: Verifique o email.
+- PT: Este endereço de email parece incompleto.
 - EN: This email address doesn't look complete.
 - FR: Cette adresse e-mail semble incomplète.
 
@@ -6458,13 +6458,13 @@ Prompt 43 §3b: the partner links on the path and the questions open the Concier
 
 ### p.done.h
 - PT: Recebemos a sua pergunta.
-- EN: Received. We'll reply by email.
-- FR: Bien reçu. Nous répondons par e-mail.
+- EN: We have your question.
+- FR: Nous avons bien reçu votre question.
 
 ### p.done.p
 - PT: Respondemos por email, normalmente em dois dias úteis.
-- EN: Usually within two working days. Meanwhile, the step-by-step guide and the map are here.
-- FR: En général sous deux jours ouvrés. En attendant, le pas à pas et la carte sont là.
+- EN: We reply by email, usually within two working days.
+- FR: Nous répondons par e-mail, en général sous deux jours ouvrés.
 
 ### v.title
 - PT: Pedir uma visita
@@ -9935,3 +9935,338 @@ Prompt 68 (4 Nov 2026), the method's worked example (content/METHOD.md): a place
 - PT: {t}, consultado a {d}.
 - EN: {t}, checked {d}.
 - FR: {t}, consulté le {d}.
+
+
+## p69
+
+Prompt 69 (4 Nov 2026), the Concierge in three steps and IMT explained where the number is (content/METHOD.md). Feel: "I asked once, and someone has it in hand." Step 1 opens on what the reader came from (the project, the place, the budget), already chosen; step 2 is one time picker in the reader's own time zone with Lisbon underneath (it replaces flow.c.when and flow.c.window, kept unused); step 3 is the e-mail or phone and the language of the call, and sends. After the confirmation, the optional preparation asks what can wait (purpose, timeline, NIF, financing, where). The IMT screen opens from the simulator, the Concierge's confirmation, the map card and the project card. Used by site/src/lib/flows.ts, site/src/scripts/flow.ts, site/src/scripts/slots.ts, site/src/components/ImtSheet.astro and site/src/scripts/imt.ts. Rates and references: content/facts/facts.csv (pt-imt-nonresident-flat, pt-imt-nonresident-exceptions, pt-imt-hpp-2026).
+
+### help
+- PT: Em que podemos ajudar?
+- EN: What can we help with?
+- FR: En quoi pouvons-nous vous aider ?
+
+### lede
+- PT: Um consultor qualificado liga-lhe à hora que escolher.
+- EN: A qualified advisor calls you at the time you choose.
+- FR: Un conseiller qualifié vous appelle à l'heure que vous choisissez.
+
+### help.ctx
+- PT: O que estava a ver
+- EN: What you were looking at
+- FR: Ce que vous regardiez
+
+### help.project
+- PT: {name}, em {place}
+- EN: {name}, in {place}
+- FR: {name}, à {place}
+
+### help.place
+- PT: Uma casa em {place}
+- EN: A home in {place}
+- FR: Un logement à {place}
+
+### help.placebudget
+- PT: Uma casa em {place}, por cerca de {price}
+- EN: A home in {place}, around {price}
+- FR: Un logement à {place}, autour de {price}
+
+### help.budget
+- PT: Uma casa por cerca de {price}
+- EN: A home around {price}
+- FR: Un logement autour de {price}
+
+### help.home
+- PT: Encontrar casa em Portugal
+- EN: Finding a home in Portugal
+- FR: Trouver un logement au Portugal
+
+### help.costs
+- PT: Os custos, os impostos e os papéis da compra
+- EN: The costs, taxes and paperwork of buying
+- FR: Les frais, les impôts et les formalités de l'achat
+
+### help.sell
+- PT: Vender ou herdar uma casa
+- EN: Selling or inheriting a home
+- FR: Vendre ou hériter d'un logement
+
+### budget
+- PT: Orçamento
+- EN: Budget
+- FR: Budget
+
+### when
+- PT: Quando lhe podemos ligar?
+- EN: When can we call you?
+- FR: Quand pouvons-nous vous appeler ?
+
+### when.skip
+- PT: Prefiro combinar por email
+- EN: I'd rather agree a time by email
+- FR: Je préfère convenir d'une heure par e-mail
+
+### tz
+- PT: Horas de {city}, com Lisboa por baixo.
+- EN: Times in {city}, with Lisbon underneath.
+- FR: Heures de {city}, avec Lisbonne en dessous.
+
+### tz.same
+- PT: Horas de Lisboa.
+- EN: Lisbon times.
+- FR: Heures de Lisbonne.
+
+### tz.change
+- PT: Mudar
+- EN: Change
+- FR: Modifier
+
+### tz.zone
+- PT: Mostrar as horas de
+- EN: Show the times for
+- FR: Afficher les heures de
+
+### tz.lisbon
+- PT: Lisboa
+- EN: Lisbon
+- FR: Lisbonne
+
+### tz.next
+- PT: +1 dia
+- EN: +1 day
+- FR: +1 jour
+
+### tz.prev
+- PT: −1 dia
+- EN: −1 day
+- FR: −1 jour
+
+### slot.day
+- PT: Escolha um dia
+- EN: Choose a day
+- FR: Choisissez un jour
+
+### slot.time
+- PT: Escolha até três horas
+- EN: Choose up to three times
+- FR: Choisissez jusqu'à trois horaires
+
+### slot.picked
+- PT: As suas horas
+- EN: Your times
+- FR: Vos horaires
+
+### slot.none
+- PT: Ainda não escolheu uma hora.
+- EN: No time chosen yet.
+- FR: Aucun horaire choisi pour l'instant.
+
+### slot.remove
+- PT: Retirar
+- EN: Remove
+- FR: Retirer
+
+### reach
+- PT: Como chegamos até si?
+- EN: How do we reach you?
+- FR: Comment vous joindre ?
+
+### lang
+- PT: Língua da chamada
+- EN: Language of the call
+- FR: Langue de l'appel
+
+### send
+- PT: Marcar a chamada
+- EN: Book the call
+- FR: Réserver l'appel
+
+### done.h
+- PT: A partir daqui, tratamos nós.
+- EN: We'll take it from here.
+- FR: Nous prenons le relais.
+
+### done.p
+- PT: Um consultor qualificado confirma a hora por email e liga-lhe a essa hora.
+- EN: A qualified advisor confirms the time by email, then calls you at that time.
+- FR: Un conseiller qualifié confirme l'heure par e-mail, puis vous appelle à cette heure-là.
+
+### done.p.later
+- PT: Um consultor qualificado escreve-lhe por email para combinar a hora.
+- EN: A qualified advisor emails you to agree on a time.
+- FR: Un conseiller qualifié vous écrit par e-mail pour convenir d'une heure.
+
+### done.times
+- PT: As horas que escolheu
+- EN: The times you chose
+- FR: Les horaires que vous avez choisis
+
+### prep
+- PT: Ajude o consultor a preparar a chamada (30 s)
+- EN: Help the advisor prepare the call (30 s)
+- FR: Aidez le conseiller à préparer l'appel (30 s)
+
+### prep.p
+- PT: Cinco perguntas, todas opcionais.
+- EN: Five questions, all optional.
+- FR: Cinq questions, toutes facultatives.
+
+### prep.send
+- PT: Enviar ao consultor
+- EN: Send to the advisor
+- FR: Envoyer au conseiller
+
+### prep.done.h
+- PT: Obrigado. O consultor já tem tudo.
+- EN: Thank you. The advisor has it all.
+- FR: Merci. Le conseiller a tout en main.
+
+### prep.intent
+- PT: Preparação da chamada
+- EN: Preparation for the call
+- FR: Préparation de l'appel
+
+### imt.line
+- PT: IMT de {price}: {imt} se não for residente fiscal.
+- EN: IMT on {price}: {imt} if you are not a tax resident.
+- FR: IMT sur {price} : {imt} si vous n'êtes pas résident fiscal.
+
+### imt.how
+- PT: Como se calcula
+- EN: How it works
+- FR: Comment il se calcule
+
+### imt.map
+- PT: IMT a {price}? {imt} sem residência fiscal.
+- EN: IMT at {price}? {imt} as a non-resident.
+- FR: L'IMT à {price} ? {imt} pour un non-résident.
+
+### imt.title
+- PT: O IMT, explicado
+- EN: IMT, explained
+- FR: L'IMT, expliqué
+
+### imt.h
+- PT: O IMT de uma casa de {price}
+- EN: IMT on a {price} home
+- FR: L'IMT d'un logement à {price}
+
+### imt.what
+- PT: O imposto municipal sobre as transmissões, pago antes da escritura.
+- EN: The property transfer tax, paid before the deed.
+- FR: L'impôt sur les transmissions immobilières, payé avant l'acte.
+
+### imt.price
+- PT: Preço
+- EN: Price
+- FR: Prix
+
+### imt.nr.k
+- PT: Sem residência fiscal em Portugal
+- EN: Not a Portuguese tax resident
+- FR: Non-résident fiscal au Portugal
+
+### imt.nr.p
+- PT: 7,5% do preço, sem isenção nem redução.
+- EN: 7.5% of the price, with no exemption or reduction.
+- FR: 7,5 % du prix, sans exonération ni réduction.
+
+### imt.back.k
+- PT: Duas formas de receber a diferença
+- EN: Two ways the difference comes back
+- FR: Deux façons de récupérer la différence
+
+### imt.back.1
+- PT: Passa a residente fiscal em Portugal nos 2 anos seguintes à compra.
+- EN: You become a Portuguese tax resident within 2 years of the purchase.
+- FR: Vous devenez résident fiscal au Portugal dans les 2 ans qui suivent l'achat.
+
+### imt.back.2
+- PT: Arrenda a casa para habitação nos 6 meses seguintes, durante pelo menos 36 meses nos primeiros 5 anos, com renda dentro dos limites legais.
+- EN: You let the home as a residence within 6 months, for at least 36 months in the first 5 years, at a rent within the legal caps.
+- FR: Vous louez le logement comme résidence dans les 6 mois, pendant au moins 36 mois sur les 5 premières années, à un loyer dans les plafonds légaux.
+
+### imt.back.p
+- PT: Nos dois casos, a diferença é devolvida a pedido, no prazo de 6 meses.
+- EN: In both cases, the difference is refunded on request, within 6 months.
+- FR: Dans les deux cas, la différence est remboursée sur demande, dans un délai de 6 mois.
+
+### imt.res.k
+- PT: Residente fiscal, habitação própria e permanente
+- EN: Tax resident, primary home
+- FR: Résident fiscal, résidence principale
+
+### imt.res.p
+- PT: Por escalões: a parte até ao limite do escalão anterior paga a taxa média desse limite, o resto paga a taxa marginal.
+- EN: By bracket: the part up to the previous bracket's limit pays the average rate at that limit, the rest pays the marginal rate.
+- FR: Par tranches : la part jusqu'au plafond de la tranche précédente paie le taux moyen de ce plafond, le reste paie le taux marginal.
+
+### imt.res.yours
+- PT: A {price}: {a} sobre os primeiros {top}, mais {rate} sobre {rest}, {b}.
+- EN: At {price}: {a} on the first {top}, plus {rate} of {rest}, {b}.
+- FR: À {price} : {a} sur les premiers {top}, plus {rate} de {rest}, soit {b}.
+
+### imt.res.flat
+- PT: A {price}: {rate} sobre todo o valor.
+- EN: At {price}: {rate} of the whole price.
+- FR: À {price} : {rate} sur la totalité du prix.
+
+### imt.col.to
+- PT: Até
+- EN: Up to
+- FR: Jusqu'à
+
+### imt.col.rate
+- PT: Taxa marginal
+- EN: Marginal rate
+- FR: Taux marginal
+
+### imt.col.flat
+- PT: {rate} sobre todo o valor
+- EN: {rate} of the whole price
+- FR: {rate} sur la totalité
+
+### imt.col.above
+- PT: Acima de {v}
+- EN: Above {v}
+- FR: Au-delà de {v}
+
+### imt.more.k
+- PT: Mais uma coisa
+- EN: One more thing
+- FR: Encore une chose
+
+### imt.more
+- PT: A {price}, {back} voltam a pedido: paga {nr} na compra e, como residente, na sua habitação própria e permanente, o IMT é de {res}.
+- EN: At {price}, {back} comes back on request: you pay {nr} at purchase, and as a resident, in your primary home, the IMT is {res}.
+- FR: À {price}, {back} vous reviennent sur demande : vous payez {nr} à l'achat et, résident, dans votre résidence principale, l'IMT est de {res}.
+
+### imt.more.none
+- PT: Acima de {top}, os residentes também pagam 7,5%: não há diferença a devolver.
+- EN: Above {top}, residents also pay 7.5%: there is no difference to refund.
+- FR: Au-delà de {top}, les résidents paient aussi 7,5 % : il n'y a pas de différence à rembourser.
+
+### imt.src.k
+- PT: Fontes
+- EN: Sources
+- FR: Sources
+
+### imt.src.checked
+- PT: consultado a {d}
+- EN: checked {d}
+- FR: consulté le {d}
+
+### imt.disc
+- PT: Informação, não aconselhamento fiscal. Taxas em vigor em 2026.
+- EN: Information, not tax advice. Rates in force in 2026.
+- FR: Information, pas un conseil fiscal. Taux en vigueur en 2026.
+
+### imt.calc
+- PT: Abrir o simulador completo
+- EN: Open the full calculator
+- FR: Ouvrir le simulateur complet
+
+### imt.open
+- PT: Como se calcula o IMT
+- EN: How IMT is calculated
+- FR: Comment l'IMT est calculé

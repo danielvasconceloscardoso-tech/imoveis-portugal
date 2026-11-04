@@ -32,3 +32,8 @@
 .rq-time b small { font-size: 12px; margin-left: 2px; }
 .rq-time span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 @media (max-width: 819px) { .rq-time { padding: 12px 12px !important; } .rq-time b { font-size: 17px; } .rq-times { grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); } }
+/* Prompt 69: the Concierge's picker in the reader's own time zone, Lisbon underneath; the zone in one line with "Change". */
+.sp-tz { margin: 8px 0 0; font-size: 14px; line-height: 1.5; color: var(--fm); }
+.sp-tz-ch { margin-left: 6px; font-weight: 600 !important; color: var(--fa) !important; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.sp-zones[hidden] { display: none; }
+.rq-own .rq-time b small { font-size: 11px; font-weight: 600; color: var(--fm); margin-left: 2px; }

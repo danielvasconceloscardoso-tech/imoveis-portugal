@@ -6,7 +6,7 @@
 import { PROJECTS } from "./projects";
 import { STATIONS } from "./path";
 import { TOOLS } from "./tools";
-import { flowConfig, type FlowId } from "./flows";
+import { flowConfig, CONCIERGE_V1_STEPS, type FlowId } from "./flows";
 import { sim1Events } from "./sim1";
 import { TIME_BANDS, UTM_MEDIA, MARE_WHERE, MARE_OPEN } from "./track";
 import { recentIssueIds } from "./mare";
@@ -35,9 +35,20 @@ export const SHARE = ["native", "copy"];
 
 /** The step ids of a flow, as the reader meets them (lib/flows.ts), plus the side screens of the Concierge. */
 export function flowSteps(id: FlowId): string[] {
-  const ids = flowConfig(id, "pt", "lu").steps.map((s) => s.id);
-  return id === "concierge" ? [...ids, "lawyer", "book", "buildings"] : ids;
+  const cfg = flowConfig(id, "pt", "lu"), ids = cfg.steps.map((s) => s.id);
+  // Prompt 69: the three steps, the optional preparation after the confirmation, and the eleven steps before it (kept).
+  return id === "concierge" ? [...new Set([...ids, ...cfg.prep.map((s) => s.id), ...CONCIERGE_V1_STEPS, "lawyer", "book", "buildings"])] : ids;
 }
+
+/** Prompt 69: what the Concierge's first step was opened on (ev "flow/concierge/ctx/{k}"), the optional preparation after
+ * the confirmation (ev "flow/concierge/prep/{open,sent,fallback}"), the time zone the times were shown in (ev
+ * "flow/concierge/tz/{own,edition,lisbon}") and the IMT screen: opened from each surface (ev "imt/open/{from}"), the price
+ * changed on it, its last line seen, the full calculator followed. */
+export const CG_CTX = ["project", "place", "budget", "none"];
+export const CG_PREP = ["open", "sent", "fallback"];
+export const CG_TZ = ["own", "edition", "lisbon"];
+export const IMT_FROM = ["sim1", "concierge", "map", "project", "link"];
+export const IMT_ACTS = ["price", "more", "calc"];
 
 /** Paths per edition (after "/e/{ed}/"). */
 export function editionEvents(): string[] {
@@ -47,6 +58,11 @@ export function editionEvents(): string[] {
   for (const f of ["concierge", "partner", "viewing"]) out.push(`flow/${f}/fallback`);
   for (const f of ["concierge", "partner", "viewing"] as FlowId[]) for (const s of flowSteps(f)) for (const k of ["step", "stop"]) out.push(`flow/${f}/${k}/${s}`);
   for (const p of PROJECTS) for (const k of ["pin", "card", "req", "view", "share", "film", "tour3d"]) out.push(`p/${p.id}/${k}`);
+  for (const k of CG_CTX) out.push(`flow/concierge/ctx/${k}`);
+  for (const k of CG_PREP) out.push(`flow/concierge/prep/${k}`);
+  for (const k of CG_TZ) out.push(`flow/concierge/tz/${k}`);
+  for (const f of IMT_FROM) out.push(`imt/open/${f}`);
+  for (const k of IMT_ACTS) out.push(`imt/${k}`);
   for (const s of sim1Events()) out.push(`sim1/${s}`);
   for (const t of TOOLS) out.push(`sim/${t}/use`);
   for (const l of LAYERS) out.push(`map/layer/${l}`);

@@ -56,7 +56,7 @@ const L = {
 const base = pathFor(lang, ed, "sims");
 const D = {
   loc, cur: curCode, fx, ed, regions, m2, L, SRC,
-  paths: { map: pathFor(lang, ed, "map"), consult: pathFor(lang, ed, "consult"), cost: `${base}${SUB.cost[lang]}/`, payment: `${base}${SUB.payment[lang]}/` },
+  paths: { map: pathFor(lang, ed, "map"), consult: pathFor(lang, ed, "consult"), cost: `${base}${SUB.cost[lang]}/`, payment: `${base}${SUB.payment[lang]}/`, imt: `${base}${SUB.imt[lang]}/` },
   brief: { labels: Object.fromEntries(BRIEF_KEYS.map((k) => [k, c(`brief.${k}`, lang)])), from: c(`journey.from.${ed}`, lang) },
 };
 
@@ -96,7 +96,7 @@ const SEGS: { k: "type" | "use" | "pay"; opts: [string, string][] }[] = [
         <details class="s1-row" data-row="costs">
           <summary><span class="s1-rk">{c("sim1.row.costs", lang)}</span><strong data-o="extra">{money(r0.buy.extra)}</strong></summary>
           <dl class="s1-dl">
-            <dt>{L.imt}<a class="s1-src" data-o="imt-src" href={SRC.imtAway.u} rel="noopener">{L.src.replace("{s}", SRC.imtAway.t)}</a></dt><dd data-o="imt">{money(r0.buy.imt)}</dd>
+            <dt><a class="imt-tap" data-o="imt-tap" href={`${D.paths.imt}?price=${st.price}&own=0&resident=0`} data-imt={st.price} data-imt-from="sim1" title={c("p69.imt.open", lang)}>{L.imt}</a><a class="s1-src" data-o="imt-src" href={SRC.imtAway.u} rel="noopener">{L.src.replace("{s}", SRC.imtAway.t)}</a></dt><dd data-o="imt">{money(r0.buy.imt)}</dd>
             <dt>{L.is}<a class="s1-src" href={SRC.is.u} rel="noopener">{L.src.replace("{s}", SRC.is.t)}</a></dt><dd data-o="is">{money(r0.buy.is)}</dd>
             <dt>{L.deed}<a class="s1-src" href={SRC.deed.u} rel="noopener">{L.src.replace("{s}", SRC.deed.t)}</a></dt><dd data-o="deed">{money(r0.buy.deed)}</dd>
           </dl>
@@ -222,6 +222,8 @@ const SEGS: { k: "type" | "use" | "pay"; opts: [string, string][] }[] = [
       O("price-local").textContent = local(st.price);
       O("extra").textContent = money(r.buy.extra);
       O("imt").textContent = money(r.buy.imt);
+      // Prompt 69: the IMT label opens the IMT screen at this price (scripts/imt.ts); without JavaScript, the calculator.
+      const it = O("imt-tap") as HTMLAnchorElement; it.dataset.imt = String(st.price); it.href = `${D.paths.imt}?price=${st.price}&own=0&resident=0`;
       O("is").textContent = money(r.buy.is);
       O("deed").textContent = money(r.buy.deed);
       const imtSrc = (r.own ? D.SRC.imtLive : D.SRC.imtAway)!;

@@ -10,6 +10,7 @@ import { feature, mesh } from "topojson-client";
 import { savePlace } from "../lib/brief";
 import { track, edOf, ev, evHeart, timeBand, rememberPlace } from "../lib/track";
 import { get as savedItems } from "../lib/saved";
+import { imt as imtOf } from "../lib/sims";
 import { heartHTML } from "./hearts";
 
 // The free price layer (operator, step 1): the market median per quarter over the last five years (/data/map/price5.json).
@@ -619,6 +620,9 @@ export function initMapV3(root: HTMLElement) {
   // new is free, nothing free is lost); "Fontes" and the advisor as quiet links; the Maré block; and the card's last line,
   // set apart: one more thing.
   const chevDown = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>`;
+  // Prompt 69: wherever IMT shows on the map, one tap opens the IMT screen at that price (scripts/imt.ts, in the site
+  // chrome); without it (the embedded map), the link is the full IMT calculator.
+  const imtLine = (price: number, from: "map" | "project") => cfg.p69 ? `<p class="m3-line m3-imt"><a class="m3-link imt-tap" href="${esc(`${cfg.links.imt}?price=${price}&own=0&resident=0`)}" data-imt="${price}" data-imt-from="${from}">${esc(cfg.p69.imt.replace("{price}", eur.format(price)).replace("{imt}", eur.format(imtOf(price, false, false))))}</a></p>` : "";
   function arrivalHTML(slug: string, d: any, name: string, href: string, hs: Proj[]): string {
     const c5 = d.c5, P8 = cfg.p68, lang = cfg.lang;
     const arrive = d.arr?.line?.[lang] ?? c5?.line?.[lang] ?? "";
@@ -649,7 +653,7 @@ export function initMapV3(root: HTMLElement) {
     }
     if (d.m2) {
       const a = Math.round(budget / d.m2);
-      qs.push(["price", P8.q.price.replace("{b}", money(budget)).replace("{a}", nf.format(a)), `${priceTile(d)}<div class="m3-acts m3-acts-1"><button type="button" class="m3-btn" data-unlock-open>${esc(C5.ctaPaid)}</button></div>`]);
+      qs.push(["price", P8.q.price.replace("{b}", money(budget)).replace("{a}", nf.format(a)), `${priceTile(d)}${imtLine(Math.round(budget), "map")}<div class="m3-acts m3-acts-1"><button type="button" class="m3-btn" data-unlock-open>${esc(C5.ctaPaid)}</button></div>`]);
     }
     if (c5?.hsp?.length) {
       const near = c5.hsp.reduce((a: any[], b: any[]) => (b[1] < a[1] ? b : a));
@@ -657,7 +661,8 @@ export function initMapV3(root: HTMLElement) {
       qs.push(["health", (near[2] === "@cs" ? P8.q.healthCs : P8.q.health).replace("{v}", nf.format(near[1])), `<p class="m3-tt">${esc(C5.health)}<small>${esc(C5.within)}</small></p>${listHTML(c5.hsp.map(([n, m, t]: [string, number, string?]) => [`${esc(n)}${note(t)}`, mins(m)]))}`]);
     }
     h += `<div class="m3-sb m3-qa">${qs.map(([id, q, body]) => `<div class="m3-q" data-q="${id}"><button type="button" class="m3-qb" aria-expanded="false" aria-controls="m3q-${mode}-${id}"><span>${esc(q)}</span>${chevDown}</button><div class="m3-qp" id="m3q-${mode}-${id}" role="region" inert><div class="m3-qi">${body}</div></div></div>`).join("")}`;
-    h += `<p class="m3-fontes m3-quiet"><button type="button" class="m3-link" data-sources>${esc(C5.sources)}</button><a class="m3-link" href="${esc(`${cfg.links.consult}?place=${encodeURIComponent(name)}`)}" data-concierge data-cta-consult>${esc(C5.ctaConsult)}</a></p>`;
+    // Prompt 69: the Concierge opens on this place and the budget the card speaks of (its first step already chosen).
+    h += `<p class="m3-fontes m3-quiet"><button type="button" class="m3-link" data-sources>${esc(C5.sources)}</button><a class="m3-link" href="${esc(`${cfg.links.consult}?place=${encodeURIComponent(name)}&budget=${Math.round(budget)}`)}" data-concierge data-cta-consult>${esc(C5.ctaConsult)}</a></p>`;
     h += `${mareHTML()}`;
     // One more thing: the card's last line, with its fact (facts.csv) behind "Fontes".
     const more = d.arr?.more?.[lang];
@@ -948,9 +953,11 @@ export function initMapV3(root: HTMLElement) {
       let hh = `${img ? `<img class="m3-photo m3-hero-top" src="${esc(img)}-800.webp" srcset="${esc(img)}-800.webp 800w, ${esc(img)}-1600.webp 1600w" sizes="(max-width: 819px) 100vw, 400px" alt="" width="800" height="450" fetchpriority="high">` : ""}`;
       // Prompt 68: the label only where the data gives one (O'rizon's "tag"); a development not yet signed carries none.
       hh += `<div class="m3-sb m3-arr"><p class="m3-kick">${esc(pm2)}${p.tag ? ` · <span class="m3-tag">${esc(p.tag)}</span>` : ""}</p><div class="ht-row"><h2 class="m3-h" tabindex="-1">${esc(p.name)}</h2>${heartHTML("home", p.id, pm2 ? `${p.name}, ${pm2}` : p.name, p.showcase)}</div>`;
-      hh += `<p class="m3-arr-l">${esc(p.hero)}</p>${p.from ? `<p class="m3-line">${esc(L.pfrom.replace("{v}", eur.format(p.from)))}</p>` : ""}`;
+      hh += `<p class="m3-arr-l">${esc(p.hero)}</p>${p.from ? `<p class="m3-line">${esc(L.pfrom.replace("{v}", eur.format(p.from)))}</p>${imtLine(p.from, "project")}` : ""}`;
       hh += `<a class="m3-btn m3-btn-p m3-btn-w" href="${esc(p.showcase)}#pedir" data-visit>${esc(cfg.p68.visit)}</a>`;
-      hh += `<p class="m3-hero-v m3-quiet"><a class="m3-link" href="${esc(p.showcase)}" data-view>${esc(cfg.p68.view)} →</a>${byS.has(p.muni) || pm2 ? `<button type="button" class="m3-link" data-goto="${esc(p.muni)}">${esc(pm2)} →</button>` : ""}</p></div>`;
+      // Prompt 69: the Concierge from the project card opens on this project (its first step already chosen).
+      const cg = cfg.p69 ? `<a class="m3-link" href="${esc(`${cfg.links.consult}?project=${encodeURIComponent(p.id)}&place=${encodeURIComponent(pm2)}`)}" data-concierge data-cta-consult>${esc(cfg.p69.cg)} →</a>` : "";
+      hh += `<p class="m3-hero-v m3-quiet"><a class="m3-link" href="${esc(p.showcase)}" data-view>${esc(cfg.p68.view)} →</a>${byS.has(p.muni) || pm2 ? `<button type="button" class="m3-link" data-goto="${esc(p.muni)}">${esc(pm2)} →</button>` : ""}${cg}</p></div>`;
       openSheet(hh, open, true);
       sheetIn.querySelector("[data-visit]")?.addEventListener("click", () => ev({ event: "map/visit", place: p.muni, step: p.id, origin: mode }));
       sheetIn.querySelector("[data-view]")?.addEventListener("click", () => ev({ event: "map/hero/view", place: p.muni, step: p.id, origin: mode }));
@@ -962,7 +969,7 @@ export function initMapV3(root: HTMLElement) {
     h += `<p class="m3-buys">${esc(p.summary ?? p.developer)}</p>`;
     if (p.feats?.length) h += `<ul class="m3-det">${p.feats.map((f) => `<li>${esc(f)}</li>`).join("")}</ul>`;
     if (p.now != null && pl.now) h += `<p class="m3-buys"><b>${esc(pl.now.replace("{n}", String(p.now)))}</b></p>`;
-    h += `<p class="m3-buys">${p.from ? L.pfrom.replace("{v}", eur.format(p.from)) : esc(pl.price ?? L.ponreq)}</p>`;
+    h += `<p class="m3-buys">${p.from ? L.pfrom.replace("{v}", eur.format(p.from)) : esc(pl.price ?? L.ponreq)}</p>${p.from ? imtLine(p.from, "project") : ""}`;
     h += `<div class="m3-acts"><a class="m3-btn m3-btn-p" href="${esc(p.showcase)}">${esc(pl.view ?? p.name)}</a><a class="m3-btn" href="${esc(p.showcase)}#pedir">${esc(pl.visit ?? "")}</a></div></div>`;
     openSheet(h, open);
   }
