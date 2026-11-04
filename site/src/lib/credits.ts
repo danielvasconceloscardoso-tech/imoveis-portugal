@@ -144,6 +144,7 @@ export const CREDITS: Credit[] = [
 ];
 // Prompt 71 §3: the developers' own images on the map and the private preview, credited to them; listed only where the
 // project is shown on this build (never on the live branch while it is pending).
-const ARROW = "their published material, credited";
+// Prompt 72 (John, J72-04): the rights holder named on the source page first (Vilamoura World, Palmares), then the group.
+const ARROW = "image from the developer's own website";
 for (const p of PROJECTS.filter((x) => ["the-uncommon", "springs-els-club", "palmares"].includes(x.id)))
-  CREDITS.push({ file: `img/developers/${p.id}/*`, place: p.muni === "lagos" ? "Lagos" : "Vilamoura, Loulé", title: p.name, author: "Arrow Global / Details", url: p.url ?? "", licence: ARROW, licenceUrl: p.url ?? "" });
+  CREDITS.push({ file: `img/developers/${p.id}/*`, place: p.muni === "lagos" ? "Lagos" : "Vilamoura, Loulé", title: p.name, author: `© ${p.muni === "lagos" ? "Palmares Ocean Living & Golf" : "Vilamoura World"} (Arrow Global / Details)`, url: p.url ?? "", licence: ARROW, licenceUrl: p.url ?? "" });
