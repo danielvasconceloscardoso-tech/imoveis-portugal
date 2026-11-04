@@ -137,6 +137,14 @@ async function shoot(browser, origin, outDir) {
         if (pg.map) {
           await page.waitForSelector("canvas", { state: "attached", timeout: 30000 });
           await page.waitForTimeout(MAP_WAIT);
+          // A map view (?pins=, a card's camera) may still be settling: wait until two shots 1.5 s apart are identical (up to 20 s).
+          let prev = await page.screenshot({ scale: "css", animations: "disabled" });
+          for (let k = 0; k < 13; k++) {
+            await page.waitForTimeout(1500);
+            const cur = await page.screenshot({ scale: "css", animations: "disabled" });
+            if (cur.equals(prev)) break;
+            prev = cur;
+          }
         } else await page.waitForTimeout(400);
         await page.evaluate(() => document.fonts.ready);
         const h = await page.evaluate(() => Math.max(document.documentElement.scrollHeight, document.body?.scrollHeight ?? 0));
