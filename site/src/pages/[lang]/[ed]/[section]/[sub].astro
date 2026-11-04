@@ -35,7 +35,7 @@ export function getStaticPaths() {
     ...(["ok", "private", "later"] as const).map((view) => ({ params: { lang, ed, section: SLUGS[lang].consult, sub: CONSULT_SUB[view][lang] }, props: { view } })),
     ...ARTS.map((art) => ({ params: { lang, ed, section: SLUGS[lang].articles, sub: ART_SUB[art][lang] }, props: { art } })),
     // D83: the ten lifestyle articles, in PT, EN and FR, each language under its own slug (lib/stories.ts).
-    ...storiesFor(lang).map((story) => ({ params: { lang, ed, section: SLUGS[lang].articles, sub: story.slug }, props: { story } })),
+    ...storiesFor(lang, ed).map((story) => ({ params: { lang, ed, section: SLUGS[lang].articles, sub: story.slug }, props: { story } })),
     ...(["compra", "zona", "private"] as const).map((dossier) => ({ params: { lang, ed, section: SLUGS[lang].dossiers, sub: DOSSIER_SUB[dossier][lang] }, props: { dossier } })),
   ]));
 }

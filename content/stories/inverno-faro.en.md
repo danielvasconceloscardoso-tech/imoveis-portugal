@@ -8,6 +8,7 @@ published: 2026-11-03
 updated: 2026-11-03
 order: 1
 place: faro
+editions: [lu]
 airport: FAO
 photo:
   src: img/v2/faro-ria-formosa-por-do-sol

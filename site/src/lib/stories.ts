@@ -10,7 +10,8 @@ import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import yaml from "js-yaml";
 import { marked } from "marked";
-import { pathFor, type EdCode, type Lang } from "../i18n";
+import { ED_ORDER, pathFor, type EdCode, type Lang } from "../i18n";
+import { CANONICAL_ED } from "./blog";
 import { FACTS, Sources } from "./content";
 import { MAP_MUNIS } from "./mapdata";
 
@@ -30,12 +31,16 @@ export type Story = {
   sources: string[];
   /** a sponsor's name when the piece is paid for: the sponsored label shows (EDITORIAL_POLICY.md) */
   sponsored?: string;
+  /** Prompt 70 (J-11): the editions an article is written for (front matter `editions: [lu]`, when it speaks to readers of
+   * one country, e.g. Faro against Luxembourg's Findel). Absent: every edition. */
+  editions?: EdCode[];
   body: string; words: number;
 };
 
 const iso = (d: unknown) => (d instanceof Date ? d.toISOString().slice(0, 10) : String(d));
 const FM = /^---\n([\s\S]*?)\n---\n([\s\S]*)$/;
 const MUNI = new Map(MAP_MUNIS.map((m) => [m.s, m]));
+const ED_CODES = new Set<string>(ED_ORDER);
 
 /** The words a reader reads: the body without fact markers, link targets and Markdown signs. */
 export const readingWords = (body: string) => body
@@ -53,6 +58,7 @@ function load(): Story[] {
     for (const k of ["id", "lang", "slug", "title", "description", "published", "updated", "order", "place", "photo", "airport", "go", "concierge", "sources"])
       if (fm[k] === undefined) throw new Error(`stories ${f}: front matter "${k}" missing`);
     if (!MUNI.has(fm.place)) throw new Error(`stories ${f}: unknown place ${fm.place}`);
+    if (fm.editions !== undefined && (!Array.isArray(fm.editions) || !fm.editions.length || fm.editions.some((e: string) => !ED_CODES.has(e)))) throw new Error(`stories ${f}: editions must list edition codes`);
     if (!existsSync(join(pub, `${fm.photo.src}-640.webp`))) throw new Error(`stories ${f}: photo ${fm.photo.src}-640.webp missing`);
     for (const id of fm.sources) if (!FACTS[id]) throw new Error(`stories ${f}: unknown fact ${id}`);
     for (const [, id] of m[2].matchAll(/\[\[([a-z0-9-]+)\]\]/g)) if (!FACTS[id]) throw new Error(`stories ${f}: unknown fact ${id}`);
@@ -64,8 +70,12 @@ function load(): Story[] {
 }
 const ALL = load();
 
-/** The lifestyle articles in one language, in their reading order. */
-export const storiesFor = (lang: Lang): Story[] => ALL.filter((s) => s.lang === lang);
+/** Whether an article is listed and built in an edition (prompt 70, J-11: an article written for one country stays there). */
+export const inEdition = (s: Story, ed: EdCode) => !s.editions || s.editions.includes(ed);
+/** The lifestyle articles in one language and edition, in their reading order. */
+export const storiesFor = (lang: Lang, ed: EdCode): Story[] => ALL.filter((s) => s.lang === lang && inEdition(s, ed));
+/** The edition that holds an article's canonical address: the language's own edition when the article is there. */
+export const storyHome = (s: Story): EdCode => (inEdition(s, CANONICAL_ED[s.lang]) ? CANONICAL_ED[s.lang] : s.editions![0]);
 /** One id per article, shared by its three languages (events: lib/events.ts, art/{id}/...). */
 export const STORY_IDS = [...new Set(ALL.map((s) => s.id))];
 /** The same article in another language (hreflang, the language switch), or undefined when that version is missing. */
