@@ -21,9 +21,11 @@ import "../styles/mare-nav.css";
 
 type Sticky = { href: string; label: string } | null;
 // `paths` overrides the URL per language for pages below a page key (e.g. one calculator under "sims").
-interface Props { lang: Lang; ed: EdCode; page: PageKey | "home"; title: string; description: string; sticky?: Sticky; d2?: boolean; bodyClass?: string; paths?: Record<Lang, string>; noindex?: boolean; canonicalUrl?: string; ogType?: string; ogImage?: string; alternates?: Record<Lang, string>; next?: Next | false; }
+// `solid`: the paper header on a page with no photograph at the top, even when `page` is "home" (the 404, prompt 70).
+interface Props { lang: Lang; ed: EdCode; page: PageKey | "home"; title: string; description: string; sticky?: Sticky; d2?: boolean; bodyClass?: string; paths?: Record<Lang, string>; noindex?: boolean; canonicalUrl?: string; ogType?: string; ogImage?: string; alternates?: Record<Lang, string>; next?: Next | false; solid?: boolean; }
 const { lang, ed, page, title, description, paths, noindex = false, ogType = "website", ogImage, d2 = true, bodyClass } = Astro.props;
 const urlFor = (l: Lang) => paths ? paths[l] : pathFor(l, ed, page);
+const solid = d2 && (Astro.props.solid ?? page !== "home");
 const host = config.domainMode === "primary" ? config.primaryDomain : EDITIONS[ed].domain;
 const canonical = Astro.props.canonicalUrl ?? `https://${host}${urlFor(lang)}`;
 // Prompt 34 (D37, D52), prompt 37 §2 (operator, 28 Oct): six items, never wrapping: the path, the map, the calculators,
@@ -36,9 +38,12 @@ const nav: { k: string; target: PageKey; current: string[] }[] = [
   { k: "sims", target: "sims", current: ["sims"] },
   { k: "articles", target: "articles", current: ["articles", "blog"] },
   { k: "faq", target: "faq", current: ["faq"] },
-  { k: "partners", target: "partners", current: ["partners", "ours", "talk"] },
+  // Prompt 70 (A-20, J-17): the reader's "Partners" opens the directory of partners they can talk to; the sponsor page
+  // ("For partners") stays in the footer.
+  { k: "partners", target: "ours", current: ["ours", "talk"] },
 ];
-const more: PageKey[] = ["casa", "data", "consult", "dossiers", "guide", "ours", "talk", "how"];
+// Prompt 70: "ours" is the sixth item above now, and the Concierge is the menu's own button, so neither repeats here.
+const more: PageKey[] = ["casa", "data", "dossiers", "guide", "talk", "how"];
 // Part 2 (operator, 3 Nov): the same five everywhere: the bar at the thumb on phones, the header on desktop. The six
 // sections above stay in the menu (open on every device now), so Artigos and Parceiros are one tap away as before.
 const five: { k: string; target: PageKey; current: string[]; cg?: boolean; icon: string }[] = [
@@ -74,6 +79,8 @@ import Beacon from "../components/Beacon.astro";
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#f6f3ee" />
+    {/* Prompt 70 (A-12): the site is light; a browser's forced dark mode must not half-invert it. */}
+    <meta name="color-scheme" content="light" />
     <title>{title}</title>
     <meta name="description" content={description} />
     {(!config.launchReady || noindex) && <meta name="robots" content="noindex, nofollow" />}
@@ -91,13 +98,13 @@ import Beacon from "../components/Beacon.astro";
     <meta property="og:locale" content={HTML_LANG[lang].replace("-", "_")} />
     {ogImage && <meta property="og:image" content={ogImage} />}
     <meta name="twitter:card" content="summary_large_image" />
-    {page === "home" && <script type="application/ld+json" set:html={JSON.stringify({ "@context": "https://schema.org", "@type": "Organization", name: "Imóveis Portugal", url: `https://${host}/`, email: config.contactEmail, description: description, areaServed: ["LU", "FR", "CH", "BR", "US", "IL", "PT"] })} />}
+    {page === "home" && !Astro.props.solid && <script type="application/ld+json" set:html={JSON.stringify({ "@context": "https://schema.org", "@type": "Organization", name: "Imóveis Portugal", url: `https://${host}/`, email: config.contactEmail, description: description, areaServed: ["LU", "FR", "CH", "BR", "US", "IL", "PT"] })} />}
     <slot name="head" />
     <Beacon />
   </head>
-  <body data-ed={ed} class={[sticky && !d2 ? "has-sticky" : "", d2 ? "d2" : "", d2 && page !== "home" ? "d2p" : "", d2 ? "has-bb" : "", bodyClass ?? ""].filter(Boolean).join(" ") || undefined}>
+  <body data-ed={ed} class={[sticky && !d2 ? "has-sticky" : "", d2 ? "d2" : "", solid ? "d2p" : "", d2 ? "has-bb" : "", bodyClass ?? ""].filter(Boolean).join(" ") || undefined}>
     <a class="skip" href="#main">{c("common.skip", lang)}</a>
-    <header class={d2 && page !== "home" ? "hd solid" : "hd"}>
+    <header class={solid ? "hd solid" : "hd"}>
       <div class="frame">
         <a class="word" href={pathFor(lang, ed, "home")}>Imóveis Portugal<span class="beta">{c("common.beta", lang)}</span></a>
         {d2 ? (
@@ -216,6 +223,9 @@ import Beacon from "../components/Beacon.astro";
         document.addEventListener("click", (e) => {
           const a = e.target.closest && e.target.closest("a[data-lang]");
           if (a) localStorage.setItem("ip-lang", a.dataset.lang);
+          // Prompt 70 (A-26): a language link keeps what the reader is looking at (?place=gondomar, #section).
+          var l = e.target.closest && e.target.closest("a[hreflang], a[data-lang]");
+          if (l && (location.search || location.hash) && l.origin === location.origin && !/[?#]/.test(l.getAttribute("href") || "")) l.href = l.pathname + location.search + location.hash;
           // Close an open picker when tapping elsewhere.
           document.querySelectorAll("details.pick[open]").forEach((d) => { if (!d.contains(e.target)) d.removeAttribute("open"); });
         });
