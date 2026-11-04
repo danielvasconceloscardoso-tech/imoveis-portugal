@@ -80,8 +80,8 @@ export function initMapV3(root: HTMLElement) {
   // D83 part 2: the first view has no colour layer ("none"); ?layer=price and the others still open with their colours.
   // Operator, step 1: only the market price stays as a free colour layer; ten years, rents, yields and the other statistics
   // moved to the paid analysis (an old ?layer=rent link opens the map without colours).
-  // p70 r3 (J-02): the US edition's map page opens on the market price colours (one setting; ?layer=none is the plain map).
-  const layer0: Layer = cfg.ed === "us" && mode === "page" ? "price" : "none";
+  // Prompt 77: no edition opens on the colours (p70 r3 had made the US map open on them, which no prompt asked for).
+  const layer0: Layer = "none";
   let layer: Layer = q.get("layer") === "price" ? "price" : q.get("layer") === "none" ? "none" : layer0;
   // 2D or 3D (prompt 37 §3): the link, else the reader's last choice, else 2D on phones and weak devices and 3D on desktop.
   // Reduced motion always gets the flat map.

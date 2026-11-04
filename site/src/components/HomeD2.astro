@@ -55,7 +55,7 @@ const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("h
     <img src="/video/hero-portugal-poster.webp?v=6e9a1bc" width="1280" height="720" alt="" fetchpriority="high" />
   </picture>
   {/* p70 r3 (J-25): the film (1.9 MB) is asked for only after the page has loaded, and only on a fast connection; the poster is the hero until then. */}
-  <video class="h2-hero-media h2-hero-film" muted loop playsinline preload="none" data-hero-film data-src="/video/hero-portugal.mp4?v=6e9a1bc" aria-hidden="true"></video>
+  <video class="h2-hero-media h2-hero-film" muted loop playsinline preload="none" poster="/video/hero-portugal-poster.webp?v=6e9a1bc" data-hero-film data-src="/video/hero-portugal.mp4?v=6e9a1bc" aria-hidden="true"></video>
   <div class="h2-hero-text">
     <h1 id="h2-h1">{c(`home2.h1.${ed}`, lang)}</h1>
     <p>{c("home2.lede", lang)}</p>
@@ -199,10 +199,11 @@ const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("h
       const gestures = ["touchstart", "pointerdown", "scroll", "keydown", "wheel"];
       const kick = () => { film.play().then(() => gestures.forEach((g) => removeEventListener(g, kick))).catch(() => {}); };
       const start = () => film.play().then(shown).catch(() => gestures.forEach((g) => addEventListener(g, kick, { passive: true })));
-      // p70 r3 (J-25): after the load event, and not on a slow or data-saving connection (where the browser says so).
-      const cn = (navigator as any).connection, fast = !cn || (cn.saveData !== true && (!cn.effectiveType || cn.effectiveType === "4g"));
-      const go = () => { if (!fast) return; film.src = film.dataset.src || ""; film.preload = "auto"; start(); };
-      if (document.readyState === "complete") go(); else addEventListener("load", go, { once: true });
+      // Prompt 77: the film starts at once again, on every connection (the poster shows until it plays). Only the reader's
+      // own "Save-Data" keeps the still. 548440e had made it wait for the load event and a "4g" reading, so on a desktop
+      // whose page load ran long, or whose browser reported "3g", it never started.
+      const cn = (navigator as any).connection;
+      if (!(cn && cn.saveData === true)) { film.src = film.dataset.src || ""; film.preload = "auto"; film.autoplay = true; start(); }
     }
   }
   // The header sits on the photograph until the page scrolls.
