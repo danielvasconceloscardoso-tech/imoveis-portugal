@@ -8,6 +8,28 @@ Operator, 4 Nov 2026:
 
 Arrow Global's team is about to look at the site (John Calvão: "my team will reach out"). Run right after prompt 77. Follow content/METHOD.md and content/DESIGN_AND_DATA.md (rule 16). PT, EN and FR. Record it as the next free D number.
 
+## 0. FIRST, before golf mode: the site is static, and the films do not move
+Operator, 4 Nov, 23:09: "The site is static. The videos are not moving and that's crucial."
+
+1. **The rule:** every film on the site moves on its own, with no tap, on phone and desktop. Muted, looping, inline, starting when it comes into view:
+   1. the home hero;
+   2. the place arrivals;
+   3. the development films;
+   4. the card flyovers.
+
+   A film that only plays after a tap counts as broken.
+2. **Find out why, on his phone first.** Check in this order:
+   1. **Reduce Motion.** With "Reduce Motion" on in iOS, HomeD2.astro keeps the still and map-v3.ts forces the map flat (`flat = two || reduce()`). That one setting makes the whole site look static. New rule:
+      1. the films play;
+      2. the 3D map stays 3D;
+      3. reduced motion only shortens camera glides into jumps and removes decorative fades;
+      4. each film gets a small, quiet pause control (WCAG 2.2.2).
+   2. **iPhone Low Power Mode** blocks autoplay. Start the film on the first touch or scroll anywhere on the page, which the home film already does. Do the same for every other film, and make sure the poster is the film's first frame so nothing jumps.
+   3. **Films that load only on a tap** (`preload="none"`, `controls`, ShowcaseMedia.astro) become ambient loops, with the full film with sound one tap away.
+   4. **File size and encoding:** H.264, faststart, a phone version under 3 MB, served from our own domain.
+3. **Test** in Playwright WebKit as an iPhone and in Chromium desktop, each with reduced motion on and off. Save a 5-second screen recording of the home hero and of one place card on each, as files. Then run the visual check.
+4. **Report** the cause in one line, the fix, and the recordings. This part goes live straight away under D67; it does not wait for the golf-mode yes.
+
 ## References (in ops/prompts/assets/78/)
 1. **v3_vilamoura_from_the_sea.jpg** and **v3_coast_palmares_to_vilamoura.jpg**: the approved direction. This is the floor, not the ceiling.
 2. **v2_superseded_dark.jpg**: keep its cluster of standing flags; drop its dark palette.
