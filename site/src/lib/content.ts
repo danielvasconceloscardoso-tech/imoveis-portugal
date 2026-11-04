@@ -62,8 +62,10 @@ export const DISCLAIMER: Record<Lang, string> = { pt: disclaimerFor("PT (LU, CH)
 
 export const CATS: Cat[] = ["lawyer", "bank", "tax", "fx", "developer"];
 
-export const fmtDate = (lang: Lang, iso: string) =>
-  new Intl.DateTimeFormat(HTML_LANG[lang], { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(`${iso}T00:00:00Z`));
+export const fmtDate = (lang: Lang, iso: string) => {
+  const s = new Intl.DateTimeFormat(HTML_LANG[lang], { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(`${iso}T00:00:00Z`));
+  return lang === "fr" ? s.replace(/^1 /, "1er ") : s;  // prompt 70 (S-27): "1er décembre"
+};
 
 // ---------- free e-book, one per edition (site/ebooks, built by `npm run ebooks`) ----------
 export const EBOOK = { file: (lang: Lang, ed: EdCode) => `/ebooks/imoveis-portugal-guia-custos-${ed}-${lang}.pdf` };

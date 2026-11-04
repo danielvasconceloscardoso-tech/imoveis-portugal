@@ -6603,6 +6603,16 @@ Prompt 35 §3.1 (D61): the path's start as one question at a time.
 - EN: Where do you live?
 - FR: Où vivez-vous ?
 
+### where
+- PT: Vive {where}.
+- EN: You live {where}.
+- FR: Vous vivez {where}.
+
+### where.change
+- PT: Mudar
+- EN: Change
+- FR: Modifier
+
 ### budget
 - PT: Quanto, mais ou menos?
 - EN: Roughly how much?
@@ -6736,8 +6746,8 @@ Prompt 36 §9 (D62): the golf card on the map, from our own list (content/facts/
 
 ### view
 - PT: Ver o empreendimento
-- EN: View the development
-- FR: Voir la résidence
+- EN: See the development
+- FR: Voir le programme
 
 ### map
 - PT: No mapa
@@ -7664,29 +7674,29 @@ Part 2 of 3 Nov 2026 (the journey): the five-item bar at the bottom of the phone
 - FR: Questions
 
 ### saved
-- PT: A sua seleção
-- EN: Your selection
-- FR: Votre sélection
+- PT: Os seus favoritos
+- EN: Your favorites
+- FR: Vos favoris
 
 ### heart.add
-- PT: Guardar na sua seleção
-- EN: Save to your selection
-- FR: Garder dans votre sélection
+- PT: Guardar nos favoritos
+- EN: Save to your favorites
+- FR: Ajouter à vos favoris
 
 ### heart.saved
-- PT: Guardado na sua seleção
-- EN: Saved to your selection
-- FR: Gardé dans votre sélection
+- PT: Guardado nos favoritos
+- EN: Saved to your favorites
+- FR: Ajouté à vos favoris
 
 ### heart.removed
-- PT: Retirado da sua seleção
-- EN: Removed from your selection
-- FR: Retiré de votre sélection
+- PT: Retirado dos favoritos
+- EN: Removed from your favorites
+- FR: Retiré de vos favoris
 
 ### page.title
-- PT: A sua seleção
-- EN: Your selection
-- FR: Votre sélection
+- PT: Os seus favoritos
+- EN: Your favorites
+- FR: Vos favoris
 
 ### page.lede
 - PT: As casas e as zonas que guardou. Ficam neste aparelho, só para si, e não as enviamos a ninguém.
@@ -9978,8 +9988,8 @@ Prompt 68 (4 Nov 2026), the method's worked example (content/METHOD.md): a place
 
 ### view
 - PT: Ver o empreendimento
-- EN: View the development
-- FR: Voir la résidence
+- EN: See the development
+- FR: Voir le programme
 
 ### credit
 - PT: Imagem: {c}

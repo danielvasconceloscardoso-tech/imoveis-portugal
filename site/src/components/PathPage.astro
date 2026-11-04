@@ -5,6 +5,7 @@
 // "Saiba mais" to the article or FAQ answer that goes deeper, and one quiet partner link that opens the Concierge
 // with the topic (?topic=lawyer|advisor|bank|tax, scripts/chrome.ts and scripts/flow.ts). Progress stays on the
 // device. Without JavaScript the page is two plain ordered lists with everything open. Wording: COPY_DECK.md "path.*".
+import { srcTitle } from "../lib/srctitle";
 import V2 from "../layouts/V2.astro";
 import CountryBar from "./CountryBar.astro";
 import "../styles/path2.css";
@@ -103,6 +104,8 @@ const rate = cur ? RATE(cur).rate : 0;
         </div>
         <div class="pq" data-q="3">
           <h2 class="pq-h">{c("pathx.budget", lang)}</h2>
+          {/* Prompt 70 (MI-27): the edition already says where the reader lives; the question is skipped, the answer shown with a way to change it. */}
+          <p class="small pq-where">{c("pathx.where", lang, { where })} <button type="button" class="linkish" data-pq-where>{c("pathx.where.change", lang)}</button></p>
           <label class="pfield">
             <span data-for="buy">{c("path.q.budget", lang)}</span><span data-for="sell">{c("path.q.value", lang)}</span>
             <input type="text" inputmode="numeric" autocomplete="off" data-budget placeholder="300 000" />
@@ -169,7 +172,7 @@ const rate = cur ? RATE(cur).rate : 0;
     <div class="frame read">
       <details class="srcs" data-srcs>
         <summary id="fontes" class="h-small">{c("common.sources", lang)} ({src.list.length})</summary>
-        <ol>{src.list.map((s, i) => <li id={`fonte-${i + 1}`}><a href={s.url} rel="noopener">{s.title}</a>{s.checked && `, ${c("common.checked", lang, { date: fmtDate(lang, s.checked) })}`}.</li>)}</ol>
+        <ol>{src.list.map((s, i) => <li id={`fonte-${i + 1}`}><a href={s.url} rel="noopener">{srcTitle(s.title, lang)}</a>{s.checked && `, ${c("common.checked", lang, { date: fmtDate(lang, s.checked) })}`}.</li>)}</ol>
       </details>
     </div>
   </section>
@@ -247,7 +250,8 @@ const rate = cur ? RATE(cur).rate : 0;
     };
     start.classList.add("stepped");
     qs.forEach((q) => $(".pq-h", q)?.setAttribute("tabindex", "-1"));
-    $$("button[data-door]", start).forEach((b) => b.addEventListener("click", () => setTimeout(() => showQ(1), reduce ? 0 : 220)));
+    $$("button[data-door]", start).forEach((b) => b.addEventListener("click", () => setTimeout(() => showQ(2), reduce ? 0 : 220)));
+    $("[data-pq-where]", start)?.addEventListener("click", () => showQ(1));
     $$("[data-pq-next]", start).forEach((b) => b.addEventListener("click", () => showQ(qi + 1)));
     $$<HTMLButtonElement>("[data-chip]", start).forEach((b) => b.addEventListener("click", () => { input.value = nf.format(Number(b.dataset.chip)); read(); render(); setTimeout(() => showQ(3), reduce ? 0 : 220); }));
     $$<HTMLInputElement>('input[name="when"]', start).forEach((r) => r.addEventListener("click", () => setTimeout(() => start.requestSubmit(), reduce ? 0 : 260)));  // click: also when the answer was already selected

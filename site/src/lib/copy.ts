@@ -32,8 +32,11 @@ export function c(key: string, lang: Lang, vars: Vars = {}): string {
   if (!v) throw new Error(`COPY_DECK.md: no block "${key}"`);
   if (!NAMED && /\{(agency|ami)\}/.test(v[lang])) throw new Error(`COPY_DECK.md: ${key} (${lang}) names the agency while config.agency.public is false: move that wording to "## agencynamed"`);
   const all: Vars = { ...BASE, ...vars };
-  return v[lang].replace(/\{(\w+)\}/g, (m, k) => (k in all ? String(all[k]) : m));
+  const out = v[lang].replace(/\{(\w+)\}/g, (m, k) => (k in all ? String(all[k]) : m));
+  return lang === "fr" ? frSpaces(out) : out;
 }
+/** French typography (prompt 70, S-27): a non-breaking space before ? ! ; : and inside « », so a sign never starts a line. */
+function frSpaces(t: string) { return t.replace(/ ([?!;»])/g, "\u202f$1").replace(/ :(?=\s|$)/g, "\u00a0:").replace(/« /g, "«\u00a0"); }
 /** True if the deck has this block (for optional wording). */
 export const has = (key: string) => DECK.has(key);
 /** Numbered blocks as a list: cl("home.weekly", "pt") → home.weekly.1, .2, … */
