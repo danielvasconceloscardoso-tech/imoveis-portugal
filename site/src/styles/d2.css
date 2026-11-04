@@ -260,7 +260,8 @@ body.d2 .hd .tools a.btn { color: var(--accent-ink, #fbf9f4); } body.d2 .hd .too
 /* A-12, MI-26: the site is light (a dark theme is a design decision); forced dark modes must not half-invert it. */
 :root { color-scheme: light; }
 /* J-15: the subtitle on a bright frame of the film. A quiet, soft shade under the words only; the photograph stays. */
-.h2-hero-text::before { content: ""; position: absolute; inset: -28px -36px -20px; z-index: -1; background: rgba(10, 11, 12, .4); filter: blur(36px); border-radius: 48px; pointer-events: none; }
+/* Prompt 77 (operator: "the colours look better" without it): no shade band behind the hero text; it spanned the full
+   width and dulled the photograph. The subtitle keeps its own soft text shadow for bright frames. */
 .h2-hero-text p { color: #fff; text-shadow: 0 1px 2px rgba(0, 0, 0, .55), 0 0 16px rgba(0, 0, 0, .4); }
 /* J-23: the ⌘K hint only where there is a keyboard and a mouse; no BETA tag on small or touch screens. */
 .hd-find kbd { display: none; }
