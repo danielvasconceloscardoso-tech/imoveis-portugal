@@ -311,3 +311,11 @@ body.d2 .hd:not(.solid) .tools > .langs, body.d2 .hd:not(.solid) .tools > .langs
 body.d2 .hd:not(.solid) .tools > .langs span { color: rgba(255, 255, 255, .7); }
 body.d2 .hd .tools > .langs a { position: relative; }
 body.d2 .hd .tools > .langs a::after { content: ""; position: absolute; left: 50%; top: 50%; width: 44px; height: 44px; transform: translate(-50%, -50%); }
+/* Prompt 77: the edition list under "I live in …" in the header. The header's white text (.hd, since design v2) reached its
+   links through `body.d2 a { color: inherit }`, so the list was white on white: an empty white box over the hero. */
+body.d2 .hd .cpick-menu, body.d2 .hd .cpick-menu a { color: var(--ink); text-shadow: none; }
+body.d2 .hd .cpick-menu a[aria-current] { color: var(--accent); }
+/* Prompt 77: the hero headline never leaves the screen, whatever the width (320 to 2560 px) or the zoom: it may wrap, never
+   overflow or start left of the edge. */
+.h2-hero-text { min-width: 0; max-width: 100%; box-sizing: border-box; }
+.h2-hero h1 { overflow-wrap: break-word; max-width: min(11em, 100%); }
