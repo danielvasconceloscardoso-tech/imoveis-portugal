@@ -1,10 +1,611 @@
 {
-  "_how": "One hero photograph for a municipality's map card when it has no place card of its own (content/facts/map/places/<slug>/ has the galleries). slug -> {f: file stem in site/public/img/v2/ (640 and 1024 WebP), alt: pt/en/fr}. Read by MapV3.astro and MapComparePage.astro. Every file is listed in content/media/SOURCES.md and, when its licence asks, credited on /credits/ (site/src/lib/credits.ts). Photography standard: content/media/SOURCES.md, top.",
-  "lisboa": { "f": "lisboa-castelo-por-do-sol", "alt": { "pt": "Lisboa vista do Castelo de São Jorge ao pôr do sol, os telhados e o Tejo", "en": "Lisbon from São Jorge Castle at sunset, the rooftops and the Tagus", "fr": "Lisbonne depuis le château de São Jorge au coucher du soleil, les toits et le Tage" } },
-  "porto": { "f": "porto-douro-entardecer", "alt": { "pt": "O Douro e a ponte Luís I ao entardecer, Porto", "en": "The Douro and the Luís I bridge at sunset, Porto", "fr": "Le Douro et le pont Luís I au coucher du soleil, Porto" } },
-  "cascais": { "f": "cascais-baia", "alt": { "pt": "A baía de Cascais, pequenos barcos e a vila", "en": "The bay of Cascais, small boats and the old town", "fr": "La baie de Cascais, ses petits bateaux et la vieille ville" } },
-  "lagos": { "f": "algarve-porto-de-mos", "alt": { "pt": "As falésias douradas sobre a praia de Porto de Mós, Lagos", "en": "Golden cliffs above Porto de Mós beach, Lagos", "fr": "Les falaises dorées au-dessus de la plage de Porto de Mós, Lagos" } },
-  "funchal": { "f": "madeira-funchal-fogo", "alt": { "pt": "Fogo de artifício de passagem de ano sobre a baía do Funchal", "en": "New Year's Eve fireworks over Funchal bay", "fr": "Le feu d'artifice du Nouvel An au-dessus de la baie de Funchal" } },
-  "machico": { "f": "madeira-sao-lourenco", "alt": { "pt": "A Ponta de São Lourenço, Machico, com luz quente", "en": "Ponta de São Lourenço, Machico, in warm light", "fr": "La pointe de São Lourenço, Machico, dans une lumière chaude" } },
-  "porto-moniz": { "f": "madeira-porto-moniz", "alt": { "pt": "As piscinas naturais do Porto Moniz, Madeira", "en": "The natural pools of Porto Moniz, Madeira", "fr": "Les piscines naturelles de Porto Moniz, Madère" } }
+ "_how": "One hero photograph for a municipality's map card when it has no place card of its own (content/facts/map/places/<slug>/ has the galleries). slug -> {f: file stem in site/public/img/v2/ (640 and 1024 WebP), alt: pt/en/fr}. Read by MapV3.astro and MapComparePage.astro. Every file is listed in content/media/SOURCES.md and, when its licence asks, credited on /credits/ (site/src/lib/credits.ts). Photography standard: content/media/SOURCES.md, top.",
+ "lisboa": {
+  "f": "lisboa-castelo-por-do-sol",
+  "alt": {
+   "pt": "Lisboa vista do Castelo de São Jorge ao pôr do sol, os telhados e o Tejo",
+   "en": "Lisbon from São Jorge Castle at sunset, the rooftops and the Tagus",
+   "fr": "Lisbonne depuis le château de São Jorge au coucher du soleil, les toits et le Tage"
+  }
+ },
+ "porto": {
+  "f": "porto-douro-entardecer",
+  "alt": {
+   "pt": "O Douro e a ponte Luís I ao entardecer, Porto",
+   "en": "The Douro and the Luís I bridge at sunset, Porto",
+   "fr": "Le Douro et le pont Luís I au coucher du soleil, Porto"
+  }
+ },
+ "cascais": {
+  "f": "cascais-baia",
+  "alt": {
+   "pt": "A baía de Cascais, pequenos barcos e a vila",
+   "en": "The bay of Cascais, small boats and the old town",
+   "fr": "La baie de Cascais, ses petits bateaux et la vieille ville"
+  }
+ },
+ "lagos": {
+  "f": "algarve-porto-de-mos",
+  "alt": {
+   "pt": "As falésias douradas sobre a praia de Porto de Mós, Lagos",
+   "en": "Golden cliffs above Porto de Mós beach, Lagos",
+   "fr": "Les falaises dorées au-dessus de la plage de Porto de Mós, Lagos"
+  }
+ },
+ "funchal": {
+  "f": "madeira-funchal-fogo",
+  "alt": {
+   "pt": "Fogo de artifício de passagem de ano sobre a baía do Funchal",
+   "en": "New Year's Eve fireworks over Funchal bay",
+   "fr": "Le feu d'artifice du Nouvel An au-dessus de la baie de Funchal"
+  }
+ },
+ "machico": {
+  "f": "madeira-sao-lourenco",
+  "alt": {
+   "pt": "A Ponta de São Lourenço, Machico, com luz quente",
+   "en": "Ponta de São Lourenço, Machico, in warm light",
+   "fr": "La pointe de São Lourenço, Machico, dans une lumière chaude"
+  }
+ },
+ "porto-moniz": {
+  "f": "madeira-porto-moniz",
+  "alt": {
+   "pt": "As piscinas naturais do Porto Moniz, Madeira",
+   "en": "The natural pools of Porto Moniz, Madeira",
+   "fr": "Les piscines naturelles de Porto Moniz, Madère"
+  }
+ },
+ "abrantes": {
+  "f": "abrantes-praca-raimundo-soares-com-casa-da-camara",
+  "alt": {
+   "pt": "Abrantes: Praça Raimundo Soares com Casa da Câmara Municipal de Abrantes à direita, com Fonte das Três-Marias ao centro",
+   "en": "Abrantes: Praça Raimundo Soares com Casa da Câmara Municipal de Abrantes à direita, com Fonte das Três-Marias ao centro",
+   "fr": "Abrantes : Praça Raimundo Soares com Casa da Câmara Municipal de Abrantes à direita, com Fonte das Três-Marias ao centro"
+  }
+ },
+ "agueda": {
+  "f": "agueda-tribunal-de-agueda",
+  "alt": {
+   "pt": "Águeda: Tribunal de Águeda",
+   "en": "Águeda: Tribunal de Águeda",
+   "fr": "Águeda : Tribunal de Águeda"
+  }
+ },
+ "aguiar-da-beira": {
+  "f": "aguiar-da-beira-aguiar-da-beira",
+  "alt": {
+   "pt": "Aguiar da Beira: Aguiar da Beira",
+   "en": "Aguiar da Beira: Aguiar da Beira",
+   "fr": "Aguiar da Beira : Aguiar da Beira"
+  }
+ },
+ "alandroal": {
+  "f": "alandroal-castelo-e-igreja-matriz-do-alandroal-por",
+  "alt": {
+   "pt": "Alandroal: Castelo e igreja matriz do Alandroal (Portugal)",
+   "en": "Alandroal: Castelo e igreja matriz do Alandroal (Portugal)",
+   "fr": "Alandroal : Castelo e igreja matriz do Alandroal (Portugal)"
+  }
+ },
+ "albergaria-a-velha": {
+  "f": "albergaria-a-velha-camara-municipal-de-albergaria-a-velha",
+  "alt": {
+   "pt": "Albergaria-a-Velha: Câmara Municipal de Albergaria-a-Velha",
+   "en": "Albergaria-a-Velha: Câmara Municipal de Albergaria-a-Velha",
+   "fr": "Albergaria-a-Velha : Câmara Municipal de Albergaria-a-Velha"
+  }
+ },
+ "albufeira": {
+  "f": "albufeira-albufeira-portugal",
+  "alt": {
+   "pt": "Albufeira: Albufeira (Portugal)",
+   "en": "Albufeira: Albufeira (Portugal)",
+   "fr": "Albufeira : Albufeira (Portugal)"
+  }
+ },
+ "alcanena": {
+  "f": "alcanena-alcanena-portugal",
+  "alt": {
+   "pt": "Alcanena: Alcanena - Portugal",
+   "en": "Alcanena: Alcanena - Portugal",
+   "fr": "Alcanena : Alcanena - Portugal"
+  }
+ },
+ "alcochete": {
+  "f": "alcochete-alcochete-2013-3",
+  "alt": {
+   "pt": "Alcochete: Alcochete 2013-3",
+   "en": "Alcochete: Alcochete 2013-3",
+   "fr": "Alcochete : Alcochete 2013-3"
+  }
+ },
+ "alfandega-da-fe": {
+  "f": "alfandega-da-fe-barragem-do-salgueiro",
+  "alt": {
+   "pt": "A barragem do Salgueiro entre olivais e amendoais, Alfândega da Fé",
+   "en": "The Salgueiro reservoir among olive and almond groves, Alfândega da Fé",
+   "fr": "Le lac de barrage de Salgueiro entre oliveraies et amanderaies, Alfândega da Fé"
+  }
+ },
+ "alijo": {
+  "f": "alijo-pinhao-por-do-sol",
+  "alt": {
+   "pt": "O Douro no Pinhão ao pôr do sol, Alijó",
+   "en": "The Douro at Pinhão at sunset, Alijó",
+   "fr": "Le Douro à Pinhão au coucher du soleil, Alijó"
+  }
+ },
+ "aljezur": {
+  "f": "aljezur-vista-geral-de-aljezur-16-10-2019",
+  "alt": {
+   "pt": "Aljezur: Vista geral de Aljezur - 16.10.2019",
+   "en": "Aljezur: Vista geral de Aljezur - 16.10.2019",
+   "fr": "Aljezur : Vista geral de Aljezur - 16.10.2019"
+  }
+ },
+ "aljustrel": {
+  "f": "aljustrel-aljustrel-portugal",
+  "alt": {
+   "pt": "Aljustrel: Aljustrel - Portugal 🇵🇹",
+   "en": "Aljustrel: Aljustrel - Portugal 🇵🇹",
+   "fr": "Aljustrel : Aljustrel - Portugal 🇵🇹"
+  }
+ },
+ "almeida": {
+  "f": "almeida-the-gates-of-almeida-iii",
+  "alt": {
+   "pt": "Almeida: The gates of Almeida III",
+   "en": "Almeida: The gates of Almeida III",
+   "fr": "Almeida : The gates of Almeida III"
+  }
+ },
+ "alvaiazere": {
+  "f": "alvaiazere-alvaiazere-vista-parcial-10x15-a-partir",
+  "alt": {
+   "pt": "Alvaiázere: Alvaiázere vista parcial 10x15 a partir da Capela de Nossa Senhora de Covões",
+   "en": "Alvaiázere: Alvaiázere vista parcial 10x15 a partir da Capela de Nossa Senhora de Covões",
+   "fr": "Alvaiázere : Alvaiázere vista parcial 10x15 a partir da Capela de Nossa Senhora de Covões"
+  }
+ },
+ "amarante": {
+  "f": "amarante-tamega-casario",
+  "alt": {
+   "pt": "As casas de Amarante refletidas no Tâmega",
+   "en": "Amarante's riverside houses reflected in the Tâmega",
+   "fr": "Les maisons d'Amarante se reflétant dans le Tâmega"
+  }
+ },
+ "anadia": {
+  "f": "anadia-anadia-portugal",
+  "alt": {
+   "pt": "Anadia: Anadia - Portugal",
+   "en": "Anadia: Anadia - Portugal",
+   "fr": "Anadia : Anadia - Portugal"
+  }
+ },
+ "ansiao": {
+  "f": "ansiao-ansiao-portugal",
+  "alt": {
+   "pt": "Ansião: Ansião - Portugal",
+   "en": "Ansião: Ansião - Portugal",
+   "fr": "Ansião : Ansião - Portugal"
+  }
+ },
+ "arcos-de-valdevez": {
+  "f": "arcos-de-valdevez-rio-lima-do-ar",
+  "alt": {
+   "pt": "O rio Lima entre vinhas e bosques, visto do ar, Arcos de Valdevez",
+   "en": "The Lima river between vineyards and woods, from the air, Arcos de Valdevez",
+   "fr": "Le Lima entre vignes et bois, vu du ciel, Arcos de Valdevez"
+  }
+ },
+ "arganil": {
+  "f": "arganil-alqueve-portugal",
+  "alt": {
+   "pt": "Arganil: Alqueve - Portugal",
+   "en": "Arganil: Alqueve - Portugal",
+   "fr": "Arganil : Alqueve - Portugal"
+  }
+ },
+ "armamar": {
+  "f": "armamar-folgosa-douro",
+  "alt": {
+   "pt": "Folgosa e o Douro entre vinhas, Armamar",
+   "en": "Folgosa and the Douro among vineyards, Armamar",
+   "fr": "Folgosa et le Douro au milieu des vignes, Armamar"
+  }
+ },
+ "arouca": {
+  "f": "arouca-detrelo-da-malhada",
+  "alt": {
+   "pt": "As serras de Arouca vistas do miradouro do Detrelo da Malhada",
+   "en": "The Arouca hills from the Detrelo da Malhada viewpoint",
+   "fr": "Les montagnes d'Arouca depuis le belvédère du Detrelo da Malhada"
+  }
+ },
+ "arraiolos": {
+  "f": "arraiolos-arraiolos1",
+  "alt": {
+   "pt": "Arraiolos: Arraiolos1",
+   "en": "Arraiolos: Arraiolos1",
+   "fr": "Arraiolos : Arraiolos1"
+  }
+ },
+ "aveiro": {
+  "f": "aveiro-ria-de-aveiro",
+  "alt": {
+   "pt": "Aveiro: Ria de Aveiro",
+   "en": "Aveiro: Ria de Aveiro",
+   "fr": "Aveiro : Ria de Aveiro"
+  }
+ },
+ "baiao": {
+  "f": "baiao-douro-socalcos",
+  "alt": {
+   "pt": "O Douro entre socalcos de vinha, em Baião",
+   "en": "The Douro between terraced vineyards, Baião",
+   "fr": "Le Douro entre les vignes en terrasses, à Baião"
+  }
+ },
+ "barcelos": {
+  "f": "barcelos-barcelos-visto-de-barcelinhos",
+  "alt": {
+   "pt": "Barcelos: Barcelos visto de Barcelinhos",
+   "en": "Barcelos: Barcelos visto de Barcelinhos",
+   "fr": "Barcelos : Barcelos visto de Barcelinhos"
+  }
+ },
+ "barrancos": {
+  "f": "barrancos-barrancos-portugal",
+  "alt": {
+   "pt": "Barrancos: Barrancos - Portugal",
+   "en": "Barrancos: Barrancos - Portugal",
+   "fr": "Barrancos : Barrancos - Portugal"
+  }
+ },
+ "beja": {
+  "f": "beja-beja-portugal-cathedrale",
+  "alt": {
+   "pt": "Beja: Beja (portugal) - Cathedrale",
+   "en": "Beja: Beja (portugal) - Cathedrale",
+   "fr": "Beja : Beja (portugal) - Cathedrale"
+  }
+ },
+ "belmonte": {
+  "f": "belmonte-villa-de-belmonte",
+  "alt": {
+   "pt": "Belmonte: Villa de Belmonte",
+   "en": "Belmonte: Villa de Belmonte",
+   "fr": "Belmonte : Villa de Belmonte"
+  }
+ },
+ "borba": {
+  "f": "borba-borba-portugal",
+  "alt": {
+   "pt": "Borba: Borba - Portugal",
+   "en": "Borba: Borba - Portugal",
+   "fr": "Borba : Borba - Portugal"
+  }
+ },
+ "braganca": {
+  "f": "braganca-cidadela-do-ar",
+  "alt": {
+   "pt": "A cidadela de Bragança vista do ar, muralhas, castelo e telhados",
+   "en": "The citadel of Bragança from the air, its walls, castle and rooftops",
+   "fr": "La citadelle de Bragança vue du ciel, ses remparts, son château et ses toits"
+  }
+ },
+ "cabeceiras-de-basto": {
+  "f": "cabeceiras-de-basto-a-swimming-hole",
+  "alt": {
+   "pt": "Cabeceiras de Basto: A swimming hole",
+   "en": "Cabeceiras de Basto: A swimming hole",
+   "fr": "Cabeceiras de Basto : A swimming hole"
+  }
+ },
+ "cadaval": {
+  "f": "cadaval-camara-municipal-do-cadaval-03",
+  "alt": {
+   "pt": "Cadaval: Câmara Municipal do Cadaval 03",
+   "en": "Cadaval: Câmara Municipal do Cadaval 03",
+   "fr": "Cadaval : Câmara Municipal do Cadaval 03"
+  }
+ },
+ "caminha": {
+  "f": "caminha-foz-do-minho-santa-tecla",
+  "alt": {
+   "pt": "A foz do Minho em Caminha, a praia e o monte de Santa Tecla",
+   "en": "The mouth of the Minho at Caminha, the beach and Mount Santa Tecla",
+   "fr": "L'embouchure du Minho à Caminha, la plage et le mont Santa Tecla"
+  }
+ },
+ "castelo-de-paiva": {
+  "f": "castelo-de-paiva-ilha-dos-amores",
+  "alt": {
+   "pt": "A Ilha dos Amores no Douro, Castelo de Paiva",
+   "en": "Ilha dos Amores on the Douro, Castelo de Paiva",
+   "fr": "L'île des Amours sur le Douro, Castelo de Paiva"
+  }
+ },
+ "chaves": {
+  "f": "chaves-tamega-ponte-romana",
+  "alt": {
+   "pt": "O Tâmega, a ponte romana e o casario de Chaves ao fim da tarde",
+   "en": "The Tâmega, the Roman bridge and the old town of Chaves in late light",
+   "fr": "Le Tâmega, le pont romain et la vieille ville de Chaves en fin de journée"
+  }
+ },
+ "cinfaes": {
+  "f": "cinfaes-douro",
+  "alt": {
+   "pt": "O Douro entre montes verdes, Cinfães",
+   "en": "The Douro between green hills, Cinfães",
+   "fr": "Le Douro entre des collines vertes, Cinfães"
+  }
+ },
+ "esposende": {
+  "f": "esposende-ofir-foz-do-cavado",
+  "alt": {
+   "pt": "A restinga de Ofir e a foz do Cávado vistas do ar, Esposende",
+   "en": "The Ofir sand spit and the mouth of the Cávado from the air, Esposende",
+   "fr": "La flèche de sable d'Ofir et l'embouchure du Cávado vues du ciel, Esposende"
+  }
+ },
+ "freixo-de-espada-a-cinta": {
+  "f": "freixo-penedo-durao-douro",
+  "alt": {
+   "pt": "O Douro internacional visto do Penedo Durão, Freixo de Espada à Cinta",
+   "en": "The international Douro from the Penedo Durão viewpoint, Freixo de Espada à Cinta",
+   "fr": "Le Douro international vu du belvédère de Penedo Durão, Freixo de Espada à Cinta"
+  }
+ },
+ "guimaraes": {
+  "f": "guimaraes-paco-dos-duques-castelo",
+  "alt": {
+   "pt": "O Paço dos Duques e o castelo de Guimarães vistos do ar, a cidade e as serras ao fundo",
+   "en": "The Palace of the Dukes and Guimarães castle from the air, the town and hills beyond",
+   "fr": "Le palais des Ducs et le château de Guimarães vus du ciel, la ville et les collines au loin"
+  }
+ },
+ "lamego": {
+  "f": "lamego-miradouro-da-boa-vista-douro",
+  "alt": {
+   "pt": "O vale do Douro e a Régua vistos do miradouro da Boa Vista, Serra das Meadas, Lamego",
+   "en": "The Douro valley and Régua from the Boa Vista viewpoint, Serra das Meadas, Lamego",
+   "fr": "La vallée du Douro et Régua depuis le belvédère de Boa Vista, Serra das Meadas, Lamego"
+  }
+ },
+ "macedo-de-cavaleiros": {
+  "f": "macedo-albufeira-do-azibo",
+  "alt": {
+   "pt": "A albufeira do Azibo vista do ar, Macedo de Cavaleiros",
+   "en": "The Azibo reservoir from the air, Macedo de Cavaleiros",
+   "fr": "Le lac de l'Azibo vu du ciel, Macedo de Cavaleiros"
+  }
+ },
+ "melgaco": {
+  "f": "melgaco-castelo-telhados",
+  "alt": {
+   "pt": "Os telhados de Melgaço e o castelo vistos do ar",
+   "en": "Melgaço's rooftops and castle from the air",
+   "fr": "Les toits de Melgaço et son château vus du ciel"
+  }
+ },
+ "mesao-frio": {
+  "f": "mesao-frio-douro-rede",
+  "alt": {
+   "pt": "O Douro entre socalcos, visto de Rede, Mesão Frio",
+   "en": "The Douro between terraces, from Rede, Mesão Frio",
+   "fr": "Le Douro entre les terrasses, vu de Rede, Mesão Frio"
+  }
+ },
+ "miranda-do-douro": {
+  "f": "miranda-do-douro-peinha-de-l-puio",
+  "alt": {
+   "pt": "O meandro do Douro visto do miradouro da Peinha de l Puio, Picote, Miranda do Douro",
+   "en": "The Douro's bend from the Peinha de l Puio viewpoint, Picote, Miranda do Douro",
+   "fr": "Le méandre du Douro vu du belvédère de Peinha de l Puio, Picote, Miranda do Douro"
+  }
+ },
+ "mogadouro": {
+  "f": "mogadouro-douro-castelo-dos-mouros",
+  "alt": {
+   "pt": "O vale do Douro visto do Castelo dos Mouros, Vilarinho dos Galegos, Mogadouro",
+   "en": "The Douro valley from the Castelo dos Mouros, Vilarinho dos Galegos, Mogadouro",
+   "fr": "La vallée du Douro vue du Castelo dos Mouros, Vilarinho dos Galegos, Mogadouro"
+  }
+ },
+ "moimenta-da-beira": {
+  "f": "moimenta-albufeira-de-vilar",
+  "alt": {
+   "pt": "A albufeira de Vilar e os seus penedos de granito, Moimenta da Beira",
+   "en": "The Vilar reservoir and its granite boulders, Moimenta da Beira",
+   "fr": "Le lac de Vilar et ses rochers de granit, Moimenta da Beira"
+  }
+ },
+ "moncao": {
+  "f": "moncao-torre-de-lapela-minho",
+  "alt": {
+   "pt": "A Torre de Lapela sobre o rio Minho, Monção",
+   "en": "The Lapela tower above the Minho, Monção",
+   "fr": "La tour de Lapela au-dessus du Minho, Monção"
+  }
+ },
+ "mondim-de-basto": {
+  "f": "mondim-senhora-da-graca",
+  "alt": {
+   "pt": "O santuário da Senhora da Graça no alto do Monte Farinha, Mondim de Basto",
+   "en": "The Senhora da Graça sanctuary atop Monte Farinha, Mondim de Basto",
+   "fr": "Le sanctuaire de Senhora da Graça au sommet du Monte Farinha, Mondim de Basto"
+  }
+ },
+ "murca": {
+  "f": "murca-socalcos-do-douro",
+  "alt": {
+   "pt": "Socalcos de vinha nos montes de Murça",
+   "en": "Terraced vineyards on the hills of Murça",
+   "fr": "Vignes en terrasses sur les collines de Murça"
+  }
+ },
+ "peso-da-regua": {
+  "f": "peso-da-regua-socalcos-douro",
+  "alt": {
+   "pt": "Socalcos de vinha sobre o Douro, Peso da Régua",
+   "en": "Terraced vineyards above the Douro, Peso da Régua",
+   "fr": "Vignes en terrasses au-dessus du Douro, Peso da Régua"
+  }
+ },
+ "ponte-da-barca": {
+  "f": "ponte-da-barca-rio-lima",
+  "alt": {
+   "pt": "O rio Lima entre margens arborizadas, Ponte da Barca",
+   "en": "The Lima river between wooded banks, Ponte da Barca",
+   "fr": "Le Lima entre ses rives boisées, Ponte da Barca"
+  }
+ },
+ "ponte-de-lima": {
+  "f": "ponte-de-lima-rio-lima-outono",
+  "alt": {
+   "pt": "O rio Lima e a ponte de Ponte de Lima vistos do ar, no outono",
+   "en": "The Lima river and the bridge at Ponte de Lima from the air, in autumn",
+   "fr": "Le Lima et le pont de Ponte de Lima vus du ciel, en automne"
+  }
+ },
+ "povoa-de-lanhoso": {
+  "f": "povoa-de-lanhoso-vale",
+  "alt": {
+   "pt": "O vale de Póvoa de Lanhoso, aldeias e serras do Minho",
+   "en": "The valley of Póvoa de Lanhoso, villages and the Minho hills",
+   "fr": "La vallée de Póvoa de Lanhoso, ses villages et les collines du Minho"
+  }
+ },
+ "povoa-de-varzim": {
+  "f": "povoa-de-varzim-cabo-santo-andre",
+  "alt": {
+   "pt": "A costa do Cabo de Santo André, dunas e mar, Póvoa de Varzim",
+   "en": "The coast at Cabo de Santo André, dunes and sea, Póvoa de Varzim",
+   "fr": "La côte du cap de Santo André, dunes et mer, Póvoa de Varzim"
+  }
+ },
+ "resende": {
+  "f": "resende-barro-douro",
+  "alt": {
+   "pt": "O Douro e Barrô vistos do alto, Resende",
+   "en": "The Douro and Barrô from above, Resende",
+   "fr": "Le Douro et Barrô vus d'en haut, Resende"
+  }
+ },
+ "sabrosa": {
+  "f": "sabrosa-cais-do-ferrao-douro",
+  "alt": {
+   "pt": "O Douro no Cais do Ferrão, Covas do Douro, com luz de fim de tarde",
+   "en": "The Douro at Cais do Ferrão, Covas do Douro, in late light",
+   "fr": "Le Douro au Cais do Ferrão, Covas do Douro, dans la lumière du soir"
+  }
+ },
+ "santa-marta-de-penaguiao": {
+  "f": "santa-marta-miradouro-de-sao-pedro",
+  "alt": {
+   "pt": "Vinhas e serras vistas do miradouro de São Pedro, Fontes, Santa Marta de Penaguião",
+   "en": "Vineyards and hills from the São Pedro viewpoint, Fontes, Santa Marta de Penaguião",
+   "fr": "Vignes et montagnes depuis le belvédère de São Pedro, Fontes, Santa Marta de Penaguião"
+  }
+ },
+ "sao-joao-da-pesqueira": {
+  "f": "sao-joao-da-pesqueira-sao-salvador-do-mundo",
+  "alt": {
+   "pt": "O Douro visto do miradouro de São Salvador do Mundo, São João da Pesqueira",
+   "en": "The Douro from the São Salvador do Mundo viewpoint, São João da Pesqueira",
+   "fr": "Le Douro vu du belvédère de São Salvador do Mundo, São João da Pesqueira"
+  }
+ },
+ "tabuaco": {
+  "f": "tabuaco-valenca-do-douro",
+  "alt": {
+   "pt": "O Douro entre socalcos em Valença do Douro, Tabuaço",
+   "en": "The Douro between terraces at Valença do Douro, Tabuaço",
+   "fr": "Le Douro entre les terrasses à Valença do Douro, Tabuaço"
+  }
+ },
+ "terras-de-bouro": {
+  "f": "terras-de-bouro-albufeira-canicada",
+  "alt": {
+   "pt": "A albufeira da Caniçada vista do ar, Terras de Bouro",
+   "en": "The Caniçada reservoir from the air, Terras de Bouro",
+   "fr": "Le lac de barrage de Caniçada vu du ciel, Terras de Bouro"
+  }
+ },
+ "torre-de-moncorvo": {
+  "f": "torre-de-moncorvo-douro-socalcos",
+  "alt": {
+   "pt": "O Douro entre socalcos de vinha, visto do ar, Torre de Moncorvo",
+   "en": "The Douro between terraced vineyards, from the air, Torre de Moncorvo",
+   "fr": "Le Douro entre les vignes en terrasses, vu du ciel, Torre de Moncorvo"
+  }
+ },
+ "vale-de-cambra": {
+  "f": "vale-de-cambra-covo-serra-da-freita",
+  "alt": {
+   "pt": "A aldeia do Côvo entre as fragas da Serra da Freita, Vale de Cambra",
+   "en": "The village of Côvo among the crags of the Serra da Freita, Vale de Cambra",
+   "fr": "Le village de Côvo au milieu des rochers de la Serra da Freita, Vale de Cambra"
+  }
+ },
+ "valenca": {
+  "f": "valenca-fortaleza-minho",
+  "alt": {
+   "pt": "As muralhas da fortaleza de Valença sobre o rio Minho",
+   "en": "The walls of Valença's fortress above the Minho",
+   "fr": "Les remparts de la forteresse de Valença au-dessus du Minho"
+  }
+ },
+ "valpacos": {
+  "f": "valpacos-rio-rabacal",
+  "alt": {
+   "pt": "O rio Rabaçal entre encostas, sob nuvens de verão, Valpaços",
+   "en": "The Rabaçal river between steep slopes under summer clouds, Valpaços",
+   "fr": "Le Rabaçal entre des versants abrupts sous les nuages d'été, Valpaços"
+  }
+ },
+ "viana-do-castelo": {
+  "f": "viana-do-castelo-telhados-santa-luzia",
+  "alt": {
+   "pt": "Os telhados de Viana do Castelo e o monte de Santa Luzia",
+   "en": "The rooftops of Viana do Castelo and Mount Santa Luzia",
+   "fr": "Les toits de Viana do Castelo et le mont Santa Luzia"
+  }
+ },
+ "vieira-do-minho": {
+  "f": "vieira-do-minho-canicada",
+  "alt": {
+   "pt": "A albufeira da Caniçada entre montes verdes, Vieira do Minho",
+   "en": "The Caniçada reservoir between green hills, Vieira do Minho",
+   "fr": "Le lac de Caniçada entre des collines vertes, Vieira do Minho"
+  }
+ },
+ "vila-do-conde": {
+  "f": "vila-do-conde-foz-do-ave-do-ar",
+  "alt": {
+   "pt": "A foz do Ave e Vila do Conde vistas do ar, o mar ao fundo",
+   "en": "The mouth of the Ave and Vila do Conde from the air, the sea beyond",
+   "fr": "L'embouchure de l'Ave et Vila do Conde vues du ciel, la mer au loin"
+  }
+ },
+ "vila-nova-de-cerveira": {
+  "f": "cerveira-vale-do-minho",
+  "alt": {
+   "pt": "O vale do Minho até à foz, visto de Vila Nova de Cerveira",
+   "en": "The Minho valley down to the sea, from Vila Nova de Cerveira",
+   "fr": "La vallée du Minho jusqu'à la mer, depuis Vila Nova de Cerveira"
+  }
+ },
+ "vila-nova-de-foz-coa": {
+  "f": "foz-coa-foz-do-coa-douro",
+  "alt": {
+   "pt": "A foz do Côa no Douro, entre socalcos, vista do ar, Vila Nova de Foz Côa",
+   "en": "Where the Côa meets the Douro, between terraces, from the air, Vila Nova de Foz Côa",
+   "fr": "La confluence du Côa et du Douro, entre les terrasses, vue du ciel, Vila Nova de Foz Côa"
+  }
+ }
 }
