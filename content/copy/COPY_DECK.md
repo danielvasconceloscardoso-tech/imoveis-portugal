@@ -2098,8 +2098,8 @@ How to edit:
 
 ### r.deed
 - PT: Escritura e registo (Casa Pronta)
-- EN: Deed and registration (Casa Pronta)
-- FR: Acte et enregistrement (Casa Pronta)
+- EN: Deed and registration (Casa Pronta, the state's one-stop desk)
+- FR: Acte et enregistrement (Casa Pronta, le guichet unique de l'État)
 
 ### r.extra
 - PT: Impostos, escritura e registo
@@ -2895,6 +2895,36 @@ How to edit:
 - PT: Nenhum concelho com esse nome.
 - EN: No municipality by that name.
 - FR: Aucune commune de ce nom.
+
+### find.wait
+- PT: A procurar…
+- EN: Searching…
+- FR: Recherche…
+
+### srcl.ine
+- PT: INE, Estatísticas de preços da habitação ao nível local, indicador 0012234 (2.º trimestre de 2026)
+- EN: INE (Statistics Portugal), local housing price statistics, indicator 0012234 (Q2 2026)
+- FR: INE (institut statistique du Portugal), statistiques des prix du logement au niveau local, indicateur 0012234 (2e trimestre 2026)
+
+### srcl.rent
+- PT: INE, Estatísticas de rendas da habitação ao nível local, indicador 0014696
+- EN: INE (Statistics Portugal), local housing rent statistics, indicator 0014696
+- FR: INE (institut statistique du Portugal), statistiques des loyers au niveau local, indicateur 0014696
+
+### srcl.bdp
+- PT: Banco de Portugal, BPstat, série 12533735 (taxa de juro, empréstimos a particulares para habitação, novas operações)
+- EN: Banco de Portugal, BPstat series 12533735 (interest rate, loans to individuals for house purchase, new business)
+- FR: Banco de Portugal, BPstat, série 12533735 (taux d'intérêt, prêts immobiliers aux particuliers, nouvelles opérations)
+
+### srcl.osm
+- PT: © colaboradores do OpenStreetMap (ODbL), através da exportação osm-boundaries; geoBoundaries (CC0)
+- EN: © OpenStreetMap contributors (ODbL), via the osm-boundaries export; geoBoundaries (CC0)
+- FR: © contributeurs d'OpenStreetMap (ODbL), via l'export osm-boundaries ; geoBoundaries (CC0)
+
+### srcl.golf
+- PT: Campos de golfe (a camada Golfe): OpenStreetMap leisure=golf_course, © colaboradores do OpenStreetMap (ODbL)
+- EN: Golf courses (the Golf layer): OpenStreetMap leisure=golf_course, © OpenStreetMap contributors (ODbL)
+- FR: Parcours de golf (la couche Golf) : OpenStreetMap leisure=golf_course, © contributeurs d'OpenStreetMap (ODbL)
 
 ### find
 - PT: Procurar concelho
@@ -6636,8 +6666,8 @@ Prompt 36 §9 (D62): the golf card on the map, from our own list (content/facts/
 
 ### typ
 - PT: Tipologia
-- EN: Type
-- FR: Typologie
+- EN: Type (T1 = 1 bedroom)
+- FR: Typologie (T1 = 1 chambre)
 
 ### total
 - PT: Total
@@ -9226,6 +9256,11 @@ Operator's step 1 (3 Nov 2026): the golden sample place card (Gondomar first). F
 - EN: New homes in {muni}: {name}
 - FR: Logements neufs à {muni} : {name}
 
+### total
+- PT: Total a pagar ≈ {total}, com IMT, imposto do selo e escritura
+- EN: Total to pay ≈ {total}, with IMT, stamp duty and deed
+- FR: Total à payer ≈ {total}, avec IMT, droit de timbre et acte
+
 ### photo.n
 - PT: Fotografia {i} de {n}
 - EN: Photo {i} of {n}
@@ -9794,8 +9829,8 @@ Prompt 66 (3 Nov 2026): the O'rizon Living showcase, the first project shown on 
 
 ### areas.h
 - PT: Áreas por tipologia
-- EN: Areas by typology
-- FR: Surfaces par typologie
+- EN: Areas by type (T1 = 1 bedroom)
+- FR: Surfaces par typologie (T1 = 1 chambre)
 
 ### areas.v
 - PT: {min} a {max} m²
@@ -9814,8 +9849,8 @@ Prompt 66 (3 Nov 2026): the O'rizon Living showcase, the first project shown on 
 
 ### col.typ
 - PT: Tipologia
-- EN: Typology
-- FR: Typologie
+- EN: Type (T1 = 1 bedroom)
+- FR: Typologie (T1 = 1 chambre)
 
 ### col.area
 - PT: Área anunciada
@@ -9882,39 +9917,39 @@ Prompt 66 (3 Nov 2026): the O'rizon Living showcase, the first project shown on 
 Prompt 68 (4 Nov 2026), the method's worked example (content/METHOD.md): a place with partner projects that carry a "hero" line in projects.json, and with an arrival in its place.json, opens as an arrival (the photograph, the name, one line), then its developments as photo tiles in one format (alphabetical, no ranking; each opens its card: the render, one line, one action), then the next questions, one line each, opening on tap, then one more thing. Gondomar is the sample (rule 17). The place's own lines (the arrival, the last line) live in content/facts/map/places/<slug>/place.json; the project's line in projects.json. Used by site/src/scripts/map-v3.ts.
 
 ### q.life
-- PT: {city}? {v} min.
-- EN: {city}? {v} min.
-- FR: {city} ? {v} min.
+- PT: {city} a {v} min de carro
+- EN: {city}, {v} min away by car
+- FR: {city} à {v} min en voiture
 
 ### q.schools
-- PT: Escolas? {n} a menos de {m} min.
-- EN: Schools? {n} within {m} min.
-- FR: Écoles ? {n} à moins de {m} min.
+- PT: Escolas: {n} a menos de {m} min
+- EN: Schools: {n} within {m} min
+- FR: Écoles : {n} à moins de {m} min
 
 ### q.price
-- PT: {b}? Cerca de {a} m².
-- EN: {b}? About {a} m².
-- FR: {b} ? Environ {a} m².
+- PT: Com {b}: cerca de {a} m²
+- EN: {b} buys about {a} m²
+- FR: Avec {b} : environ {a} m²
 
 ### q.health
-- PT: Saúde? Um hospital a {v} min.
-- EN: Health? A hospital {v} min away.
-- FR: Santé ? Un hôpital à {v} min.
+- PT: Um hospital a {v} min
+- EN: A hospital {v} min away
+- FR: Un hôpital à {v} min
 
 ### q.sea
-- PT: O mar? {v} km em linha reta.
-- EN: The sea? {v} km as the crow flies.
-- FR: La mer ? {v} km à vol d'oiseau.
+- PT: O mar a {v} km em linha reta
+- EN: The sea {v} km away as the crow flies
+- FR: La mer à {v} km à vol d'oiseau
 
 ### q.sea.min
-- PT: O mar? {v} min.
-- EN: The sea? {v} min.
-- FR: La mer ? {v} min.
+- PT: O mar a {v} min
+- EN: The sea {v} min away
+- FR: La mer à {v} min
 
 ### q.health.cs
-- PT: Saúde? Um centro de saúde a {v} min.
-- EN: Health? A health center {v} min away.
-- FR: Santé ? Un centre de santé à {v} min.
+- PT: Um centro de saúde a {v} min
+- EN: A health center {v} min away
+- FR: Un centre de santé à {v} min
 
 ### visit
 - PT: Marcar uma visita privada
