@@ -29,7 +29,7 @@ Run after prompt 74. Goes live under D67. Follow content/METHOD.md. Record it as
    - Vilamoura: the marina, the Els Club and the PGA Tour;
    - Falésia: on the Vilamoura card or its own pin;
    - Portimão (F1) and Senhor Frango: as places to go from the Algarve destinations, not as cards of their own.
-6. **Developments sit in their destination:** O'rizon and Marble Terrace stay on Gondomar's card and reachable from the map; no development is hidden by this change.
+6. **Developments sit in their destination:** Gondomar (O'rizon, Marble Terrace) and Vila do Conde (Marble Terrace) keep their cards and stay reachable from the map; no development is hidden by this change.
 7. **Concelhos that are not destinations stay searchable and reachable from a development,** but get no pin of their own on the opening view.
 
 ## 3. Everywhere else, not just the map
@@ -42,7 +42,7 @@ Run after prompt 74. Goes live under D67. Follow content/METHOD.md. Record it as
 3. **Articles built around a place that is not a destination:**
    - rewrite them around the nearest destination where it reads naturally;
    - otherwise unlist them (`draft: true`, not deleted, out of the sitemap and lists);
-   - Gondomar stays because O'rizon and Marble Terrace are there.
+   - Gondomar and Vila do Conde stay, because O'rizon and Marble Terrace are there.
 4. **Report a table:** the piece, the place it named, and what it names now (or "unlisted").
 
 ## Acceptance (on main, phone and desktop, PT, EN and FR)
