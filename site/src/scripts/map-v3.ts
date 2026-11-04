@@ -610,7 +610,8 @@ export function initMapV3(root: HTMLElement) {
     // Developer components stay (CLAUDE.md, COMMON2 rule 3): the partner's homes here, or near, one quiet sponsored line.
     const nearBy = here.length ? here : projects.filter((y) => y.showcase && (y as Proj & { near?: string[] }).near?.some((n) => plain(n) === plain(name))).slice(0, 2);
     for (const y of nearBy) h += `<p class="m3-buys m3-near"><a href="${esc(y.showcase)}">${esc(here.length ? C5.homes.replace("{muni}", name).replace("{name}", y.name) : cfg.pl.near.replace("{name}", y.name).replace("{muni}", (y as Proj & { muniName?: string }).muniName ?? ""))} →</a> <span class="m3-tag">${esc(y.tag || L.sponsored)}</span></p>`;
-    h += `${mareHTML()}</div>`;
+    // Prompt 72: the card's last line ("one more thing", place_cards.py arr.more), its source behind "Fontes", as on the arrival card.
+    h += `${mareHTML()}${d.arr?.more?.[cfg.lang] ? `<p class="m3-onemore" data-more>${esc(d.arr.more[cfg.lang])}</p>` : ""}</div>`;
     ctx = x; rerender = () => showPlace(slug, false); srcFor = () => sourcesHTML(d, x);
     openSheet(h, open);
   }

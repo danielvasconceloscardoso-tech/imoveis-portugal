@@ -1,0 +1,15 @@
+{
+  "_how": "Prompt 72 (4 Nov 2026): the card's last line only ('one more thing', content/METHOD.md question 5). No origin, so the place keeps today's card (rule 17: not a golden sample); scripts/map-data/place_cards.py adds 'arr.more' to its place file and the source to 'Fontes'. The fact and how it was checked: content/facts/facts.csv, id in 'fact'.",
+  "slug": "sines",
+  "more": {
+    "fact": "sines-microsoft-ai-hub",
+    "pt": "O maior investimento da Microsoft em Portugal é aqui: mais de 10 mil milhões de dólares em computação de IA, a partir de 2026.",
+    "en": "Microsoft's largest investment in Portugal is here: more than $10 billion in AI computing, from 2026.",
+    "fr": "Le plus gros investissement de Microsoft au Portugal est ici : plus de 10 milliards de dollars en calcul pour l'IA, à partir de 2026.",
+    "src": {
+      "pt": "IA: Microsoft, 11 de novembro de 2025",
+      "en": "AI: Microsoft, November 11, 2025",
+      "fr": "IA : Microsoft, 11 novembre 2025"
+    }
+  }
+}

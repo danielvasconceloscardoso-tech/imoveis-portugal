@@ -1,0 +1,15 @@
+{
+  "_how": "Prompt 72 (4 Nov 2026): the card's last line only ('one more thing', content/METHOD.md question 5). No origin, so the place keeps today's card (rule 17: not a golden sample); scripts/map-data/place_cards.py adds 'arr.more' to its place file and the source to 'Fontes'. The fact and how it was checked: content/facts/facts.csv, id in 'fact'.",
+  "slug": "alcacer-do-sal",
+  "more": {
+    "fact": "comporta-alcacer-do-sal",
+    "pt": "A Comporta é aqui, no concelho de Alcácer do Sal.",
+    "en": "Comporta is here, in the municipality of Alcácer do Sal.",
+    "fr": "Comporta, c'est ici, sur la commune d'Alcácer do Sal.",
+    "src": {
+      "pt": "Comporta: Direção-Geral do Território, CAOP2025",
+      "en": "Comporta: Direção-Geral do Território, CAOP2025",
+      "fr": "Comporta : Direção-Geral do Território, CAOP2025"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "_how": "Prompt 72 (4 Nov 2026): the card's last line only ('one more thing', content/METHOD.md question 5). No origin, so the place keeps today's card (rule 17: not a golden sample); scripts/map-data/place_cards.py adds 'arr.more' to its place file and the source to 'Fontes'. The fact and how it was checked: content/facts/facts.csv, id in 'fact'.",
+  "slug": "lagos",
+  "more": {
+    "fact": "palmares-golf-27-holes",
+    "pt": "O Palmares é aqui: 27 buracos de Robert Trent Jones Jr., sobre a ria de Alvor e a baía de Lagos.",
+    "en": "Palmares is here: 27 holes by Robert Trent Jones Jr., above the Alvor estuary and Lagos Bay.",
+    "fr": "Palmares, c'est ici : 27 trous de Robert Trent Jones Jr., au-dessus de la ria d'Alvor et de la baie de Lagos.",
+    "src": {
+      "pt": "Golfe: Palmares Ocean Living & Golf, o campo",
+      "en": "Golf: Palmares Ocean Living & Golf, the course",
+      "fr": "Golf : Palmares Ocean Living & Golf, le parcours"
+    }
+  }
+}

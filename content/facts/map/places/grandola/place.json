@@ -1,0 +1,15 @@
+{
+  "_how": "Prompt 72 (4 Nov 2026): the card's last line only ('one more thing', content/METHOD.md question 5). No origin, so the place keeps today's card (rule 17: not a golden sample); scripts/map-data/place_cards.py adds 'arr.more' to its place file and the source to 'Fontes'. The fact and how it was checked: content/facts/facts.csv, id in 'fact'.",
+  "slug": "grandola",
+  "more": {
+    "fact": "melides-grandola",
+    "pt": "Melides é aqui, no concelho de Grândola.",
+    "en": "Melides is here, in the municipality of Grândola.",
+    "fr": "Melides, c'est ici, sur la commune de Grândola.",
+    "src": {
+      "pt": "Melides: Direção-Geral do Território, CAOP2025",
+      "en": "Melides: Direção-Geral do Território, CAOP2025",
+      "fr": "Melides : Direção-Geral do Território, CAOP2025"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "_how": "Prompt 72 (4 Nov 2026): the card's last line only ('one more thing', content/METHOD.md question 5). No origin, so the place keeps today's card (rule 17: not a golden sample); scripts/map-data/place_cards.py adds 'arr.more' to its place file and the source to 'Fontes'. The fact and how it was checked: content/facts/facts.csv, id in 'fact'.",
+  "slug": "portimao",
+  "more": {
+    "fact": "f1-portimao-2027-2028",
+    "pt": "A Fórmula 1 volta aqui em 2027 e 2028, ao Autódromo Internacional do Algarve.",
+    "en": "Formula 1 comes back here in 2027 and 2028, to the Autódromo Internacional do Algarve.",
+    "fr": "La Formule 1 revient ici en 2027 et 2028, à l'Autódromo Internacional do Algarve.",
+    "src": {
+      "pt": "Fórmula 1: formula1.com, 16 de dezembro de 2025",
+      "en": "Formula 1: formula1.com, December 16, 2025",
+      "fr": "Formule 1 : formula1.com, 16 décembre 2025"
+    }
+  }
+}

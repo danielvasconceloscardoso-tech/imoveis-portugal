@@ -46,7 +46,10 @@ def _arrival(pl, facts, city_min):
     if a and ("{min}" not in a.get("pt", "") or city_min is not None) and sourced(a):
         arr["line"] = {k: a[k].replace("{min}", str(city_min)) for k in ("pt", "en", "fr") if a.get(k)}
     m = pl.get("more")
-    if m and m.get("fact") and sourced(m):
+    # Prompt 72: a last line may rest on more than one fact ("also": [{fact, src}], e.g. Loulé's marina and golf); it shows
+    # only when every one of its facts is in facts.csv.
+    mf = [m, *m.get("also", [])] if m and m.get("fact") else []
+    if mf and all(z.get("fact") in facts for z in mf) and all([sourced(z) for z in mf]):
         arr["more"] = {k: m[k] for k in ("pt", "en", "fr") if m.get(k)}
     if pl.get("camera"): arr["cam"] = pl["camera"]
     if src: arr["src"] = src

@@ -1,0 +1,25 @@
+{
+  "_how": "Prompt 72 (4 Nov 2026): the card's last line only ('one more thing', content/METHOD.md question 5). No origin, so the place keeps today's card (rule 17: not a golden sample); scripts/map-data/place_cards.py adds 'arr.more' to its place file and the source to 'Fontes'. The fact and how it was checked: content/facts/facts.csv, id in 'fact'.",
+  "slug": "loule",
+  "more": {
+    "fact": "vilamoura-marina-berths",
+    "pt": "Vilamoura é aqui: a maior marina de Portugal, 825 postos de amarração, e o Els Club, onde o PGA Tour Champions jogou pela primeira vez em Portugal, em 2026.",
+    "en": "Vilamoura is here: Portugal's largest marina, 825 berths, and the Els Club, where the PGA Tour Champions first played in Portugal, in 2026.",
+    "fr": "Vilamoura, c'est ici : la plus grande marina du Portugal, 825 anneaux, et l'Els Club, où le PGA Tour Champions a joué pour la première fois au Portugal, en 2026.",
+    "src": {
+      "pt": "Marina: Marina de Vilamoura, informação da marina",
+      "en": "Marina: Marina de Vilamoura, marina information",
+      "fr": "Marina : Marina de Vilamoura, informations sur la marina"
+    },
+    "also": [
+      {
+        "fact": "pga-champions-portugal-invitational-2026",
+        "src": {
+          "pt": "Golfe: PGA Tour, 21 de julho de 2025",
+          "en": "Golf: PGA Tour, July 21, 2025",
+          "fr": "Golf : PGA Tour, 21 juillet 2025"
+        }
+      }
+    ]
+  }
+}

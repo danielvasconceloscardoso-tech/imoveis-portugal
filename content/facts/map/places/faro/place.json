@@ -1,0 +1,15 @@
+{
+  "_how": "Prompt 72 (4 Nov 2026): the card's last line only ('one more thing', content/METHOD.md question 5). No origin, so the place keeps today's card (rule 17: not a golden sample); scripts/map-data/place_cards.py adds 'arr.more' to its place file and the source to 'Fontes'. The fact and how it was checked: content/facts/facts.csv, id in 'fact'.",
+  "slug": "faro",
+  "more": {
+    "fact": "flight-ewr-fao-united",
+    "pt": "No verão, a United voa sem escalas de Newark, Nova Iorque, para Faro, quatro vezes por semana.",
+    "en": "In summer, United flies nonstop from Newark, New York, to Faro, four times a week.",
+    "fr": "L'été, United relie sans escale Newark, New York, à Faro, quatre fois par semaine.",
+    "src": {
+      "pt": "Voo: United Airlines, 28 de abril de 2026",
+      "en": "Flight: United Airlines, April 28, 2026",
+      "fr": "Vol : United Airlines, 28 avril 2026"
+    }
+  }
+}
