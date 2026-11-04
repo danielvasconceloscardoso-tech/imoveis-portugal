@@ -3,9 +3,9 @@
   "slug": "faro",
   "more": {
     "fact": "flight-ewr-fao-united",
-    "pt": "No verão, a United voa sem escalas de Newark, Nova Iorque, para Faro, quatro vezes por semana.",
-    "en": "In summer, United flies nonstop from Newark, New York, to Faro, four times a week.",
-    "fr": "L'été, United relie sans escale Newark, New York, à Faro, quatre fois par semaine.",
+    "pt": "No verão, a United voa sem escalas de Newark (Nova Iorque) para Faro, quatro vezes por semana.",
+    "en": "In summer, United flies nonstop from New York (Newark) to Faro, four times a week.",
+    "fr": "L'été, United relie sans escale New York (Newark) à Faro, quatre fois par semaine.",
     "src": {
       "pt": "Voo: United Airlines, 28 de abril de 2026",
       "en": "Flight: United Airlines, April 28, 2026",
