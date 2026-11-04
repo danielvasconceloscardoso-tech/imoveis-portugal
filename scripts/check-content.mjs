@@ -194,6 +194,7 @@ for (const f of existsSync(storyDir) ? readdirSync(storyDir).filter((x) => x.end
   if (!/\.(pt|en|fr)\.md$/.test(f) || f !== `${fm.id}.${fm.lang}.md`) err(file, "file name must be {id}.{lang}.md, lang pt, en or fr");
   for (const k of ["id", "lang", "slug", "title", "description", "published", "updated", "order", "place", "photo", "airport", "go", "concierge", "sources"]) if (fm[k] === undefined) err(file, `front matter "${k}" missing`);
   if (!["pt", "en", "fr"].includes(fm.lang)) err(file, `lang must be pt, en or fr (is ${fm.lang})`);
+  if (fm.only !== undefined && fm.only !== fm.lang) err(file, `"only" names the one language of a single-language article and must equal lang (${fm.lang})`);
   if (!["OPO", "LIS", "FAO"].includes(fm.airport)) err(file, `airport must be OPO, LIS or FAO`);
   if (fm.title && (/[?!]/.test(fm.title) || fm.title.length > 80)) err(file, "headline: a statement of at most 80 characters, no question or exclamation mark");
   if (fm.description && (fm.description.length < 80 || fm.description.length > 160)) err(file, `description has ${fm.description.length} characters (80 to 160)`);

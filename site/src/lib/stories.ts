@@ -12,7 +12,7 @@ import yaml from "js-yaml";
 import { marked } from "marked";
 import { pathFor, type EdCode, type Lang } from "../i18n";
 import { FACTS, Sources } from "./content";
-import { MAP_MUNIS } from "./mapdata";
+import { MAP_MUNIS, REGIONS } from "./mapdata";
 
 const dir = join(process.cwd(), "..", "content", "stories");
 const pub = join(process.cwd(), "public");
@@ -58,6 +58,7 @@ function load(): Story[] {
     for (const [, id] of m[2].matchAll(/\[\[([a-z0-9-]+)\]\]/g)) if (!FACTS[id]) throw new Error(`stories ${f}: unknown fact ${id}`);
     for (const [, id] of m[2].matchAll(/\]\(fact:([a-z0-9-]+)\)/g)) if (!FACTS[id]) throw new Error(`stories ${f}: unknown fact ${id}`);
     for (const [, s] of m[2].matchAll(/\]\(place:([a-z0-9-]+)\)/g)) if (!MUNI.has(s)) throw new Error(`stories ${f}: unknown place ${s}`);
+    for (const [, r] of m[2].matchAll(/\]\(region:([a-z]+)\)/g)) if (!(REGIONS as readonly string[]).includes(r)) throw new Error(`stories ${f}: unknown region ${r}`);
     out.push({ ...fm, published: iso(fm.published), updated: iso(fm.updated), body: m[2], words: readingWords(m[2]) } as Story);
   }
   return out.sort((a, b) => a.order - b.order);
@@ -94,7 +95,9 @@ export function renderStory(s: Story, ed: EdCode): { html: string; sources: Sour
     .replace(/\[([^\]]+)\]\(place:([a-z0-9-]+)\)/g, (_, name, slug) => {
       places.push(slug);
       return `<a class="st-pl" href="${map}?place=${slug}" data-place="${slug}">${name}</a>`;
-    });
+    })
+    // Prompt 72: [words](region:algarve) opens the edition's map on a region card (?region=, scripts/map-v3.ts showRegion).
+    .replace(/\[([^\]]+)\]\(region:([a-z]+)\)/g, (_, words, key) => `<a class="st-pl" href="${map}?region=${key}">${words}</a>`);
   for (const id of s.sources) src.n(id);
   const dedup = text.replace(/(<a class="sup" href="#fonte-(\d+)">\2<\/a>)(?:<a class="sup" href="#fonte-\2">\2<\/a>)+/g, "$1");
   return { html: marked.parse(dedup, { gfm: true, async: false }) as string, sources: src, places: [...new Set(places)] };
