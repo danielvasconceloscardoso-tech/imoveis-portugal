@@ -46,6 +46,9 @@ export function flowSteps(id: FlowId): string[] {
  * changed on it, its last line seen, the full calculator followed. */
 export const CG_CTX = ["project", "place", "budget", "sim", "none"];
 export const CG_PREP = ["open", "sent", "fallback"];
+/** Prompt 74: the buyer profile on the confirmation: "Pronto" sent, shared with the named developer, summary opened, and
+ *  a qualified profile (4 of the 5 key fields) sent with a request (ev "flow/concierge/cv/{k}"; per development "p/{id}/cvq"). */
+export const CG_CV = ["ready", "share", "summary", "qualified"];
 export const CG_TZ = ["own", "edition", "lisbon"];
 export const IMT_FROM = ["sim1", "concierge", "map", "project", "link"];
 export const IMT_ACTS = ["price", "more", "calc"];
@@ -57,8 +60,9 @@ export function editionEvents(): string[] {
   // The endpoint did not take the request and the ready-written e-mail was offered instead (3 Nov 2026).
   for (const f of ["concierge", "partner", "viewing"]) out.push(`flow/${f}/fallback`);
   for (const f of ["concierge", "partner", "viewing"] as FlowId[]) for (const s of flowSteps(f)) for (const k of ["step", "stop"]) out.push(`flow/${f}/${k}/${s}`);
-  for (const p of PROJECTS) for (const k of ["pin", "card", "req", "view", "share", "film", "tour3d"]) out.push(`p/${p.id}/${k}`);
+  for (const p of PROJECTS) for (const k of ["pin", "card", "req", "view", "share", "film", "tour3d", "cvq", "cvshare"]) out.push(`p/${p.id}/${k}`);
   for (const k of CG_CTX) out.push(`flow/concierge/ctx/${k}`);
+  for (const k of CG_CV) out.push(`flow/concierge/cv/${k}`);
   for (const k of CG_PREP) out.push(`flow/concierge/prep/${k}`);
   for (const k of CG_TZ) out.push(`flow/concierge/tz/${k}`);
   for (const f of IMT_FROM) out.push(`imt/open/${f}`);

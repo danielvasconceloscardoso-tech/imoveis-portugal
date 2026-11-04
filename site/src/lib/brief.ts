@@ -19,6 +19,12 @@ export function savePlace(name: string) {
   try { const p = read<string[]>("ip.places", []).filter((x) => x !== name); p.unshift(name); localStorage.setItem("ip.places", JSON.stringify(p.slice(0, 3))); } catch { /* storage off */ }
 }
 
+/** Prompt 74: the time spent on each place card (map-v3.ts timeEnd), summed per place on the device, for the buyer profile. */
+export function saveDwell(name: string, ms: number) {
+  if (!name || !(ms > 0)) return;
+  try { const d = read<Record<string, number>>("ip.dwell", {}); d[name] = Math.min(36e5, (d[name] || 0) + Math.round(Math.min(ms, 6e5))); localStorage.setItem("ip.dwell", JSON.stringify(d)); } catch { /* storage off */ }
+}
+
 export type BriefFacts = { door: "buy" | "sell"; budget?: number; total?: number; own?: number; loan?: number; dsti?: number; when?: string; nif?: boolean; inh?: boolean; places: string[] };
 
 /** What the reader entered, gathered from the device. */

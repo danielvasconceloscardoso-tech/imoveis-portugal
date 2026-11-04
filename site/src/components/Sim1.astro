@@ -10,7 +10,6 @@ import { EDITION_CUR, RATE, FACTS } from "../lib/content";
 import { PRICES } from "../lib/prices";
 import { placeName } from "../lib/places";
 import { SUB } from "../lib/tools";
-import { BRIEF_KEYS } from "../lib/brief";
 import { SIM1_REGIONS, SIM1_DEFAULT, SIM1_ENTRY, sim1, toPos } from "../lib/sim1";
 import { c } from "../lib/copy";
 import "../styles/sim1.css";
@@ -59,7 +58,6 @@ const base = pathFor(lang, ed, "sims");
 const D = {
   loc, cur: curCode, fx, ed, regions, m2, L, SRC,
   paths: { map: pathFor(lang, ed, "map"), consult: pathFor(lang, ed, "consult"), cost: `${base}${SUB.cost[lang]}/`, payment: `${base}${SUB.payment[lang]}/`, imt: `${base}${SUB.imt[lang]}/` },
-  brief: { labels: Object.fromEntries(BRIEF_KEYS.map((k) => [k, c(`brief.${k}`, lang)])), from: c(`journey.from.${ed}`, lang) },
 };
 
 // The first result, rendered at build time with the same formatting as the browser (nothing moves when the script runs).
@@ -175,7 +173,8 @@ const SEGS: { k: "use" | "pay"; opts: [string, string][] }[] = [
   import { sim1, toVal, toPos, budgetBand, entryBand, SIM1_DEFAULT, SIM1_ENTRY, type Sim1State } from "../lib/sim1";
   import { ev, evHeart, rememberSimBudget } from "../lib/track";
   import * as saved from "../lib/saved";
-  import { saveSim, savePlace, gather, summary, type BriefLabels } from "../lib/brief";
+  import { saveSim, savePlace } from "../lib/brief";
+  import { saveSim1 } from "../lib/cv";
 
   const root = document.querySelector<HTMLElement>("[data-s1]");
   if (root) {
@@ -183,7 +182,7 @@ const SEGS: { k: "use" | "pay"; opts: [string, string][] }[] = [
     type Src = { t: string; u: string };
     const D = JSON.parse(document.getElementById("s1-data")!.textContent || "{}") as {
       loc: string; cur: string; fx: number; ed: string; regions: R[]; m2: Record<string, number>; L: Record<string, string>;
-      SRC: Record<string, Src | null>; paths: Record<string, string>; brief: { labels: BriefLabels; from: string };
+      SRC: Record<string, Src | null>; paths: Record<string, string>;
     };
     const L = D.L;
     const O = (k: string) => root.querySelector<HTMLElement>(`[data-o="${k}"]`)!;
@@ -257,7 +256,7 @@ const SEGS: { k: "use" | "pay"; opts: [string, string][] }[] = [
       if (!url) return;
       const p = new URLSearchParams(location.search);
       p.set("sv", String(st.price)); p.set("sr", st.region); p.delete("st"); p.set("su", st.use); p.set("sp", st.pay); p.set("se", String(st.entry));
-      history.replaceState(history.state, "", `${location.pathname}?${p}${location.hash}`);
+      history.replaceState(history.state, "", `${location.pathname}${p.size ? `?${p}` : ""}${location.hash}`);
     }
     const regionItem = () => { const g = reg(st.region); return { kind: "region" as const, id: g.id, label: g.n, href: `${D.paths.map}?place=${g.id}` }; };
     function syncSave() {
@@ -270,6 +269,7 @@ const SEGS: { k: "use" | "pay"; opts: [string, string][] }[] = [
     // Kept on this device for the summary a later request can carry (lib/brief.ts, as the calculators do).
     function keep() {
       rememberSimBudget(st.price);  // part 5: the Concierge starts with this budget answered (scripts/flow.ts)
+      const g0 = reg(st.region); saveSim1({ price: st.price, region: g0.id, regionName: g0.n, use: st.use, pay: st.pay, entry: st.entry });  // prompt 74: the buyer profile
       const r = sim1(st, D.m2);
       saveSim("cost", { price: st.price, own: r.own, resident: r.resident, mortgage: r.loan },
         { "r.imt": r.buy.imt, "r.is": r.buy.is, "r.deed": r.buy.deed, "r.extra": r.buy.extra, "r.total": r.buy.total });
@@ -312,17 +312,11 @@ const SEGS: { k: "use" | "pay"; opts: [string, string][] }[] = [
       const g = reg(st.region);
       keep(); savePlace(g.n); sig(`next/concierge`);
       try { localStorage.setItem("ip.budget", String(st.price)); } catch { /* storage off */ }
-      // The readable summary the Concierge sends with the request (scripts/flow.ts reads "ip.brief"), and only then.
-      try {
-        const f = gather(), lab = D.brief.labels;
-        const line = f ? summary(f, lab, money, (v) => `${numF.format(v)}${D.loc.startsWith("fr") ? " %" : "%"}`, D.brief.from) : "";
-        const kind = st.use === "live" ? L.live : L.away;
-        sessionStorage.setItem("ip.brief", [line, kind].filter(Boolean).join(" · "));
-      } catch { /* storage off */ }
+      // Prompt 74: the Concierge builds the buyer profile from "ip.sim1" (lib/cv.ts); no summary is written for it any more.
       // The Concierge sheet opens with the country, the budget and the place already answered (the home bar's entry).
       const w = window as unknown as { __ipCgStart?: (o: { ed: string; door: string; budget: number; from?: string }) => boolean };
       const p = new URLSearchParams(location.search); p.set("place", g.n);
-      history.replaceState(history.state, "", `${location.pathname}?${p}${location.hash}`);
+      history.replaceState(history.state, "", `${location.pathname}${p.size ? `?${p}` : ""}${location.hash}`);
       if (!(w.__ipCgStart && w.__ipCgStart({ ed: D.ed, door: "buy", budget: st.price, from: "sim" }))) location.href = `${D.paths.consult}?budget=${st.price}&place=${encodeURIComponent(g.n)}&from=sim`;
     });
 

@@ -10,6 +10,8 @@ import { slotPicker, slotLabel, slotOwn, ownZone, slotDays, setClock, type Slot 
 import { imt as imtOf } from "../lib/sims";
 import { track, edOf, ev, lastPlace, simBudget } from "../lib/track";
 import { heartHTML } from "./hearts";
+import { build as cvBuild, setCtx as cvSetCtx, payload as cvPayload, line as cvLine, type Ctx as CvCtx } from "../lib/cv";
+import { cvCard } from "./cvcard";
 
 const reduce = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 const esc = (t: string) => t.replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[ch]!);
@@ -27,7 +29,7 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
   // The partner lawyer card (prompt 37 §4, D64), concierge only; absent when no lawyer may show on this build.
   const LW = (() => { try { return JSON.parse(root.querySelector("[data-flow-lawyer]")?.textContent || "null") as LawyerCard | null; } catch { return null; } })();
   // Listed buildings (prompt 39 §3): from projects.json, passed by Flow.astro; absent outside the concierge.
-  type Bld = { id: string; name: string; tag?: string; muni: string; place: string; region: string; near: string[]; typologies: string[]; from: number | null; avail: number | null; photo: string; map: string; visit: string };
+  type Bld = { id: string; name: string; developer?: string; tag?: string; muni: string; place: string; region: string; near: string[]; typologies: string[]; from: number | null; avail: number | null; photo: string; map: string; visit: string };
   const BL = (() => { try { return JSON.parse(root.querySelector("[data-flow-blds]")?.textContent || "null") as { labels: Record<string, string>; items: Bld[] } | null; } catch { return null; } })();
   // Prompt 70 (A-03, S-19): the answers live in this tab (sessionStorage); the ones that say nothing about who the reader
   // is (help, budget, place, the chosen times, the preparation) are also kept on this device for 24 hours, so a closed
@@ -129,7 +131,7 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
   // Prompt 70 (J-08): a budget typed in the edition's own currency on the home bar is shown as typed, euros second, both
   // rounded to three figures ($400,000 (≈ €357,000), never €357,366).
   const nice = (v: number) => { const p = 10 ** Math.max(0, Math.floor(Math.log10(Math.max(1, v))) - 2); return Math.round(v / p) * p; };
-  const FX = (F as { fx?: { cur: string; rate: number } | null }).fx ?? null, typedLocal = !!(fromHome && FX && Number(q.get("budget")));
+  const FX = (F as { fx?: { cur: string; rate: number } | null }).fx ?? null, typedLocal = !!(fromHome && FX && Number(q.get("budget")) && q.get("from") !== "sim");  // the simulator's budget is in euros
   const ctxBudget = F.id === "concierge" ? (typedLocal ? nice(budgetEur) : budgetEur) : 0;
   const money = (v: number) => typedLocal ? `${new Intl.NumberFormat(locale, { style: "currency", currency: FX!.cur, maximumFractionDigits: 0 }).format(nice(v * FX!.rate))} (≈ ${eur(nice(v))})` : eur(v);
   // Prompt 73 §1: from the simulator ("from=sim", components/Sim1.astro and the calculators), the context is the costs.
@@ -176,6 +178,10 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
   }
   // The price the IMT line on the confirmation speaks of: the project's starting price, else the budget the reader gave.
   const ctxPrice = ctxProject?.from || ctxBudget || 0;
+  // Prompt 74: the buyer profile (lib/cv.ts) reads what the Concierge knows now; its words are COPY_DECK "cv.*".
+  const CV = (F as { cv?: Record<string, string> | null }).cv ?? null;
+  const cvCtx = (): CvCtx => ({ edition: edNow, budget: A.budget, help: A.help, place: ctxPlace,
+    project: ctxProject ? { id: ctxProject.id, name: ctxProject.name, developer: ctxProject.developer, place: ctxProject.place, from: ctxProject.from } : undefined });
   save();
   // J72-03: the sheet's (or the page's) title says "Book a private visit" when that is what the reader asked for.
   { const t = root.closest("aside.sh")?.querySelector<HTMLElement>(".sh-title") ?? (!opts.sheet ? document.querySelector<HTMLElement>("[data-cg-title]") : null);
@@ -290,6 +296,7 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
         ${s.phone ? fld("phone", call && P.phone ? P.phone : L.phone, `type="tel" inputmode="tel" autocomplete="tel-national"`, call, cc) : ""}</div>
         ${s.lang ? `<p class="fl-k" id="fl-lang">${esc(s.lang.q)}</p><div class="fl-pills" role="radiogroup" aria-labelledby="fl-lang">${s.lang.opts.map((o) =>
           `<button type="button" class="fl-pill" role="radio" aria-checked="${A.lang === o.v}" data-lang="${esc(o.v)}">${esc(o.l)}</button>`).join("")}</div>` : ""}
+        ${s.send && CV ? cvGoes() : ""}
         ${s.send ? `<p class="fl-notice">${esc(s.call && !call && P["notice.later"] ? P["notice.later"] : s.notice || "")} <a href="${F.links.privacy}" target="_blank" rel="noopener">${esc(X.policy)}</a></p>
           <div class="fl-go"><button type="button" class="fl-btn fl-send" data-send>${esc(sendLabel())}</button></div>
           <input class="fl-hp" data-hp tabindex="-1" autocomplete="off" aria-hidden="true" />`
@@ -483,6 +490,12 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
     el.querySelector<HTMLButtonElement>("[data-send]")?.addEventListener("click", () => { if (validContact()) submit(); });
   }
   const hasSlots = () => !!A._slots && A._slots !== "[]";
+  // Round 2 (MI2-04) and prompt 74: on the last step, one plain line says what goes with the request, only what the
+  // reader did or chose (never "viu os preços de 10 anos"), and nothing when there is nothing to say.
+  const cvGoes = () => {
+    const b = cvBuild(cvCtx()), list = b.fields.filter((f) => ["country", "budget", "use", "fin", "interest"].includes(f.k)).map((f) => cvLine(f, CV!, eur));
+    return list.length ? `<p class="fl-cvline">${esc(CV!.goes.replace("{list}", list.join(" · ")))}</p>` : "";
+  };
   // M72-15: the edition's calling code (the reader can change it), and the number in international form when sent.
   const CC: Record<string, string> = { lu: "+352", fr: "+33", ch: "+41", br: "+55", us: "+1", il: "+972" };
   const ccNow = () => { const v = (A.cc ?? CC[F.hidden.edition] ?? "+351").replace(/[^\d+]/g, ""); return v ? (v.startsWith("+") ? v : `+${v.replace(/^00/, "")}`) : ""; };
@@ -589,16 +602,25 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
   }).filter(Boolean);
   const answerIds = () => Object.fromEntries(steps.flatMap((s): [string, string][] => s.type === "help" ? [["help", A.help ?? ""], ["ctx", ctxLabel], ["budget", A.budget ?? ""], ["place", ctxPlace]]
     : s.type === "contact" && s.lang ? [["lang", A.lang ?? ""]] : s.type === "choice" || s.type === "text" || s.type === "slots" ? [[s.id, A[s.id] ?? ""]] : []));
+  // Prompt 74 §4.3: a qualified buyer (4 of the 5 key fields) counted once per request, for that development's report.
+  let cvqDone = false;
+  function cvQualified() { if (cvqDone) return; cvqDone = true; ev({ event: `flow/${F.id}/cv/qualified`, band: band() }); if (projectId && /^[a-z0-9-]+$/.test(projectId)) ev({ event: `p/${projectId}/cvq`, place: projectId, origin: F.id }); }
   async function submit() {
     const scr = stage.lastElementChild as HTMLElement, btn = pick<HTMLButtonElement>(scr, "[data-send]")!; const hp = scr.querySelector<HTMLInputElement>("[data-hp]")?.value || "";
     btn.disabled = true; btn.textContent = L.sending;
-    let brief = ""; try { brief = sessionStorage.getItem("ip.brief") || ""; } catch { /* none */ }
+    // Prompt 74: the Concierge carries the buyer profile (lib/cv.ts) instead of the older ticked summary ("ip.brief"),
+    // which the partner flows keep.
+    let brief = ""; if (F.id !== "concierge") try { brief = sessionStorage.getItem("ip.brief") || ""; } catch { /* none */ }
+    const cvB = CV ? cvBuild(cvCtx()) : null, cv = cvB ? cvPayload(cvB, CV!, eur) : undefined;
     const payload = { flow: F.id, project: projectId, unit: q.get("unit") || "", ...F.hidden, answers: answerIds(), intent: visit && P["visit.intent"] ? fillP(P["visit.intent"], { name: ctxProject!.name }) : "",
       slots: (() => { try { return JSON.parse(A._slots || "[]"); } catch { return []; } })(),
-      labels: [...(topic ? [`${X.topic}: ${topicLabel}`] : []), ...answerText()], topic, door: A.door || "", name: A.name || "", email: A.email || "", phone: intl(A.phone || ""), budget: budgetEur || "", brief, page: location.pathname, hp };
+      labels: [...(topic ? [`${X.topic}: ${topicLabel}`] : []), ...answerText()], topic, door: A.door || "", name: A.name || "", email: A.email || "", phone: intl(A.phone || ""), budget: budgetEur || "", brief, cv, profile: CV ? (F.links as Record<string, string>).profile : "", page: location.pathname, hp };
     let ok = false;
     try { const r = await fetch("/api/request", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(payload) }); ok = r.ok; } catch { ok = false; }
     if (ok) { finished = true; sent = true; ev({ event: `flow/${F.id}/sent`, band: band() }); const pj = projectId; if (pj && /^[a-z0-9-]+$/.test(pj)) ev({ event: `p/${pj}/req`, place: pj, origin: F.id }); const r = route();
+      if (CV) { cvSetCtx(cvCtx()); if (cvB?.qualified) cvQualified(); }
+      // The confirmation's "Pronto" sends the profile again, so who sent it stays in this tab (never on the device).
+      try { sessionStorage.setItem(`${key}.who`, JSON.stringify({ name: A.name || "", email: A.email || "", phone: intl(A.phone || ""), project: projectId })); } catch { /* none */ }
       // The answers leave this tab's storage once sent (and the device's 24-hour copy); the times stay (as slots, no name)
       // so the confirmation can show them again.
       isSent = true;
@@ -620,7 +642,8 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
       const z = ownZone(F.hidden.edition).zone, sh = { next: P["tz.next"], prev: P["tz.prev"] };
       if (sl.length) times = `<p class="fl-k">${esc(P["done.times"])}</p><ul class="rq-picked fl-times">${sl.map((x) => { const l = slotOwn(x, locale, z, P["tz.lisbon"], sh); return `<li><div><b>${esc(l.main)}${l.shift ? ` (${esc(l.shift)})` : ""}</b>${l.lis ? `<small>${esc(l.lis)}</small>` : ""}</div></li>`; }).join("")}</ul>`;
     }
-    const prep = F.id !== "concierge" || !PREP.length ? "" : prepSent ? `<p class="fl-prepd" data-prep-done>${CHECK}<span>${esc(P["prep.done.h"])}</span></p>`
+    // Prompt 74: the buyer profile card replaces the five-question preparation (kept, unused, in lib/flows.ts).
+    const prep = CV ? `<div data-cv></div>` : F.id !== "concierge" || !PREP.length ? "" : prepSent ? `<p class="fl-prepd" data-prep-done>${CHECK}<span>${esc(P["prep.done.h"])}</span></p>`
       : A.email ? `<button type="button" class="fl-xopt fl-prep" data-prep><span>${esc(P.prep)}<small>${esc(P["prep.p"])}</small></span><i>${ARROW}</i></button>` : "";
     const imtL = F.id === "concierge" && ctxPrice && P["imt.line"] ? `<p class="fl-imt">${esc(fillP(P["imt.line"], { price: eur(ctxPrice), imt: eur(Math.round(imtOf(ctxPrice, false, false))) }))} <a class="fl-link" href="${esc(`${Lk.imt}?price=${ctxPrice}&own=0&resident=0`)}" data-imt="${ctxPrice}" data-imt-from="concierge">${esc(P["imt.how"])} →</a></p>` : "";
     dir = 1; swap(`<div class="fl-done"><span class="fl-tick">${CHECK}</span><h2 class="fl-q" tabindex="-1">${esc(d.h)}</h2><p class="fl-lede">${esc(d.p)}</p>${times}${prep}${imtL}
@@ -628,6 +651,22 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
       <p class="fl-more">${esc(X.more)} <a href="${Lk.path}">${esc(X.morePath)}</a> · <a href="${Lk.articles}">${esc(X.moreArticles)}</a></p></div>`, true);
     const mare = root.querySelector<HTMLTemplateElement>("template[data-flow-mare]"); if (mare) stage.lastElementChild?.querySelector(".fl-done")?.append(mare.content.cloneNode(true));  // D83: the quiet Maré line
     stage.lastElementChild?.querySelector("[data-prep]")?.addEventListener("click", prepOpen);
+    const cvHost = stage.lastElementChild?.querySelector<HTMLElement>("[data-cv]");
+    if (cvHost && CV) {
+      let who: { name: string; email: string; phone: string; project: string } | null = null;
+      try { who = JSON.parse(sessionStorage.getItem(`${key}.who`) || "null"); } catch { who = null; }
+      const dev = ctxProject?.developer ? { name: ctxProject.developer, project: ctxProject.name } : undefined;
+      cvCard(cvHost, { L: CV, ctx: cvCtx, locale, eds: edOpts.filter((x) => x !== "other").length ? edOpts.filter((x) => x !== "other") : ["lu", "fr", "ch", "br", "us", "il"],
+        profile: (F.links as Record<string, string>).profile, dev,
+        onEvent: (k) => { if (k === "summary" || k === "ready" || k === "share") ev({ event: `flow/${F.id}/cv/${k}`, band: band() }); if (k === "share" && projectId) ev({ event: `p/${projectId}/cvshare`, place: projectId, origin: F.id }); },
+        send: who?.email ? async (cv, labels) => {
+          const body = { flow: F.id, intent: CV.intent, project: who!.project || projectId, ...F.hidden, labels, cv, profile: (F.links as Record<string, string>).profile,
+            name: who!.name, email: who!.email, phone: who!.phone, page: location.pathname, hp: "" };
+          let ok = false; try { ok = (await fetch("/api/request", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) })).ok; } catch { ok = false; }
+          if (ok && cv.qualified) cvQualified();
+          return ok;
+        } : undefined });
+    }
     if (writeUrl) history.replaceState({ ...(history.state || {}), ipK: depth }, "", href("done"));
   }
   // ------------------------------------------------------------ the preparation (prompt 69): after the confirmation,

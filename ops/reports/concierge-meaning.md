@@ -2,7 +2,7 @@
 
 Written by `node scripts/check-parity.mjs` on every run (prompt 69). Read it before each release: every Concierge block of `content/copy/COPY_DECK.md` (sections `flow`, `consult`, `send`, `p69`) in PT, EN and FR, one row each. The check never fails on wording; the flags are what a machine can see and a reader decides.
 
-201 blocks, 2 flagged.
+202 blocks, 2 flagged.
 
 ## Corrected on 4 Nov 2026 (prompt 69)
 
@@ -30,7 +30,7 @@ Written by `node scripts/check-parity.mjs` on every run (prompt 69). Read it bef
 ## Flagged
 
 - `consult.next.h`: length far from PT (FR)
-- `flow.c.nif`: length far from PT (EN)
+- `flow.c.nif`: length far from PT (EN); length far from PT (FR)
 
 ## Every block
 
@@ -52,7 +52,7 @@ Written by `node scripts/check-parity.mjs` on every run (prompt 69). Read it bef
 | `consult.ok.title` | Pedido recebido | Request received | Demande reçue |
 | `consult.ok.h1` | O seu pedido chegou ao consultor | Your request has reached the advisor | Votre demande est arrivée chez le conseiller |
 | `consult.ok.p` | O consultor qualificado propõe-lhe por email uma videochamada de 15 minutos, no horário que indicou. | Thank you. The qualified advisor will email you to propose a 15-minute video call within the window you gave. | Merci. Le conseiller qualifié vous proposera par e-mail un appel vidéo de 15 minutes dans la période indiquée. |
-| `consult.ok.prep` | Para a conversa: o orçamento, as zonas que lhe interessam e o NIF, se já o tiver. | To prepare, have your budget, the areas you like and, if you have one, your NIF to hand. | Pour préparer l'échange, ayez sous la main votre budget, les secteurs qui vous intéressent et, si vous l'avez, votre NIF. |
+| `consult.ok.prep` | Para a conversa: o orçamento, as zonas que lhe interessam e o NIF, se já o tiver. | To prepare, have your budget, the areas you like and, if you have one, your NIF (Portuguese tax number) to hand. | Pour préparer l'échange, ayez sous la main votre budget, les secteurs qui vous intéressent et, si vous l'avez, votre NIF (numéro fiscal portugais). |
 | `consult.private.title` | Um consultor dedicado | A dedicated adviser | Un conseiller dédié |
 | `consult.private.h1` | Um consultor dedicado acompanha o seu pedido | A dedicated adviser is taking care of your request | Un conseiller dédié suit votre demande |
 | `consult.private.p` | O consultor qualificado propõe-lhe por email uma videochamada de 15 minutos, no horário que indicou. | Thank you. The qualified advisor will email you to propose a 15-minute video call within the window you gave. | Merci. Le conseiller qualifié vous proposera par e-mail un appel vidéo de 15 minutes dans la période indiquée. |
@@ -102,7 +102,7 @@ Written by `node scripts/check-parity.mjs` on every run (prompt 69). Read it bef
 | `flow.c.fin.1` | Capitais próprios (sem crédito) | Own funds (no mortgage) | Fonds propres (sans crédit) |
 | `flow.c.fin.2` | Com crédito | With a mortgage | Avec un crédit |
 | `flow.c.fin.3` | Ainda não decidi | Not decided yet | Pas encore décidé |
-| `flow.c.nif` | Já tem NIF português? | Do you already have a Portuguese tax number (NIF)? | Avez-vous déjà un NIF portugais ? |
+| `flow.c.nif` | Já tem NIF português? | Do you already have a Portuguese tax number (NIF)? | Avez-vous déjà un NIF (numéro fiscal portugais) ? |
 | `flow.yes` | Sim | Yes | Oui |
 | `flow.no` | Ainda não | Not yet | Pas encore |
 | `flow.c.place` | Onde, em Portugal? | Where in Portugal? | Où, au Portugal ? |
@@ -192,7 +192,8 @@ Written by `node scripts/check-parity.mjs` on every run (prompt 69). Read it bef
 | `p69.err.phone.bad` | Este número parece incompleto. | This number looks incomplete. | Ce numéro semble incomplet. |
 | `p69.place` | Onde, em Portugal? Até três sítios. | Where in Portugal? Up to three places. | Où, au Portugal ? Jusqu'à trois lieux. |
 | `p69.place.ph` | Ex.: Gondomar, Vila do Conde | e.g. Gondomar, Vila do Conde | Ex. : Gondomar, Vila do Conde |
-| `p69.done.h` | A partir daqui, tratamos nós. | We'll take it from here. | Nous prenons le relais. |
+| `p69.done.h` | Marcado. | Booked. | Réservé. |
+| `p69.done.h.later` | Enviado. | Sent. | Envoyé. |
 | `p69.done.p` | Um consultor qualificado confirma a hora por email e liga-lhe a essa hora. | A qualified advisor confirms the time by email, then calls you at that time. | Un conseiller qualifié confirme l'heure par e-mail, puis vous appelle à cette heure-là. |
 | `p69.done.p.later` | Um consultor qualificado escreve-lhe por email para combinar a hora. | A qualified advisor emails you to agree on a time. | Un conseiller qualifié vous écrit par e-mail pour convenir d'une heure. |
 | `p69.done.times` | As horas que escolheu | The times you chose | Les horaires que vous avez choisis |

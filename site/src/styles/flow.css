@@ -231,3 +231,34 @@
 html .fl .fl-f span.fl-tel { display: flex; align-items: flex-end; gap: 10px; margin-top: 0; font-size: inherit; font-weight: inherit; letter-spacing: 0; text-transform: none; color: inherit; }
 .fl-tel .fl-cc { flex: none; width: 4.6em; text-align: left; }
 .fl-tel [data-c] { flex: 1; min-width: 0; }
+
+/* Prompt 74: the buyer profile. One plain line on the last step; on the confirmation, the card: each line one tap to
+   change (its source in small type), the missing answers as rows of pills, the places as chips, "Pronto" full width. */
+.fl-cvline { margin: 14px 0 0; font-size: 13.5px; line-height: 1.45; color: var(--fm, #5b5d63); }
+.cv { margin-top: 26px; padding: 18px 18px 16px; border-radius: 18px; background: var(--fs, #f3f2ee); }
+.cv-top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.cv-h { margin: 0; font-size: 17px; font-weight: 700; color: var(--fi); }
+.cv-pct { flex: none; font-size: 13px; font-weight: 700; color: var(--fa); }
+.cv-list { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 2px; }
+.cv-line { display: flex; width: 100%; align-items: baseline; justify-content: space-between; gap: 12px; min-height: 44px; margin: 0; padding: 10px 0 !important;
+  border: 0; border-bottom: 1px solid rgba(17, 18, 20, .08); background: none !important; text-align: left; font-size: 15.5px !important; font-weight: 500 !important; color: var(--fi) !important; cursor: pointer; }
+.cv-line small { flex: none; font-size: 12px; font-weight: 500; color: var(--fm, #5b5d63); }
+.cv-line.cv-fixed { cursor: default; }
+.cv-miss span { color: var(--fm, #5b5d63); } .cv-miss b { color: var(--fa); font-size: 18px; }
+.cv-row.cv-editing, .cv-int { padding: 8px 0 10px; border-bottom: 1px solid rgba(17, 18, 20, .08); }
+.cv-k { margin: 0 0 6px; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--fm, #5b5d63); }
+.cv-chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.cv-chip { display: inline-flex; align-items: center; gap: 2px; padding: 4px 4px 4px 12px; border-radius: 999px; background: #fff; font-size: 14.5px; font-weight: 600; color: var(--fi); }
+.cv-chip button { width: 32px; height: 32px; border: 0; border-radius: 50%; background: none; font-size: 18px; line-height: 1; color: var(--fm, #5b5d63); cursor: pointer; }
+.cv-add { display: flex; align-items: flex-end; gap: 12px; margin-top: 6px; }
+.cv-add .fl-in { flex: 1; min-width: 0; padding: 8px 0; font-size: 15px; }
+.cv-q { margin-top: 16px; }
+.cv-qq { margin: 0 0 8px; font-size: 15.5px; font-weight: 650; color: var(--fi); }
+.cv-pills .fl-pill { white-space: nowrap; background: #fff !important; }
+.cv-pills .fl-pill[aria-checked="true"] { background: var(--fi) !important; }
+.cv-refund { margin: 6px 0 0; font-size: 13.5px; color: var(--fa); font-weight: 600; }
+.cv-consent { margin-top: 16px; background: #fff !important; }
+.cv-go { margin-top: 18px; }
+.cv-go .fl-btn { flex: 1 1 100%; width: 100%; }
+.cv-status { margin: 10px 0 0; font-size: 14px; color: var(--fm, #5b5d63); }
+.fl .cv-line { border-bottom: 1px solid rgba(17, 18, 20, .08); }

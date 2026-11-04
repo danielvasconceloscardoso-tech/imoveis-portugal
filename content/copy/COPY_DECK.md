@@ -1448,14 +1448,14 @@ How to edit:
 ## legal
 
 ### privacy.7.p
-- PT: Se marcar "Incluir este resumo", o seu pedido leva um resumo do que indicou no percurso e nos simuladores: país, orçamento, custo total, capitais próprios e financiamento, uma taxa de esforço indicativa, prazo, se já tem NIF e as zonas cujos preços consultou. Esses valores ficam no seu dispositivo até enviar o pedido e seguem com ele só para a Imóveis Portugal e para o consultor qualificado da mediadora imobiliária licenciada, porque o pediu (RGPD, art. 6.º, n.º 1, alínea b)). O resumo é indicativo, não é uma avaliação de crédito e não serve para nenhuma decisão automatizada sobre si. Para orçamentos elevados, a mediadora continua a pedir identificação e prova de fundos, como exige a Lei 83/2017.
-- EN: If you tick "Include this summary", your request carries a summary of what you entered on the path and in the calculators: country, budget, total cost, own funds and financing, an indicative debt-to-income ratio, timing, whether you have a NIF and the areas whose prices you looked at. These figures stay on your device until you send the request and go with it only to Imóveis Portugal and the qualified advisor at the licensed real-estate brokerage, because you asked for it (GDPR art. 6(1)(b)). The summary is indicative, is not a credit assessment and is not used for any automated decision about you. For high budgets, the brokerage still asks for identification and proof of funds, as Lei 83/2017 requires.
-- FR: Si vous cochez « Joindre ce résumé », votre demande contient un résumé de ce que vous avez saisi dans le parcours et les simulateurs : pays, budget, coût total, apport et financement, un taux d'endettement indicatif, échéance, si vous avez un NIF et les secteurs dont vous avez consulté les prix. Ces données restent sur votre appareil jusqu'à l'envoi et partent avec la demande uniquement chez Imóveis Portugal et le conseiller qualifié de l'agence immobilière agréée, parce que vous l'avez demandé (RGPD, art. 6, par. 1, point b). Le résumé est indicatif, n'est pas une évaluation de crédit et ne sert à aucune décision automatisée vous concernant. Pour les budgets élevés, l'agence demande toujours une pièce d'identité et la preuve des fonds, comme l'exige la Lei 83/2017.
+- PT: O site junta no seu dispositivo (armazenamento local) o que fez e respondeu: o país da edição, o orçamento, o uso, o financiamento e a entrada, o custo total e o IMT do simulador, as zonas e os empreendimentos que abriu ou guardou e quanto tempo passou em cada uma, o prazo, se já tem NIF e se pensa passar a residente. Fica no seu dispositivo até o apagar, e pode vê-lo e imprimi-lo em «O meu perfil de comprador». Quando envia um pedido ao Concierge, o perfil segue com ele, com a origem de cada linha, só para a Imóveis Portugal e para o consultor qualificado, porque o pediu (RGPD, art. 6.º, n.º 1, al. b)). Um promotor só o recebe se marcar a caixa, desmarcada, com o nome desse promotor (art. 6.º, n.º 1, al. a)), e pode retirar esse consentimento a qualquer momento. Para os relatórios aos promotores contamos só quantos perfis completos chegam por empreendimento, sem nenhum dado pessoal. O perfil é indicativo, não é uma avaliação de crédito e não serve para nenhuma decisão automatizada sobre si. Para orçamentos elevados, o consultor continua a pedir identificação e prova de fundos, como exige a Lei 83/2017.
+- EN: The site gathers on your device (local storage) what you did and answered: your edition's country, budget, use, financing and down payment, the simulator's total cost and IMT, the areas and developments you opened or saved and how long you spent on each, your timeline, whether you have a NIF and whether you plan to become a resident. It stays on your device until you delete it, and you can see and print it under “My buyer profile”. When you send a Concierge request, the profile goes with it, with where each line came from, only to Imóveis Portugal and the qualified advisor, because you asked for it (GDPR art. 6(1)(b)). A developer receives it only if you tick the unticked box naming that developer (art. 6(1)(a)), and you can withdraw that consent at any time. For the developers' reports we only count how many complete profiles arrive per development, with no personal data. The profile is indicative, is not a credit assessment and is not used for any automated decision about you. For high budgets, the advisor still asks for identification and proof of funds, as Lei 83/2017 requires.
+- FR: Le site rassemble sur votre appareil (stockage local) ce que vous avez fait et répondu : le pays de votre édition, le budget, l'usage, le financement et l'apport, le coût total et l'IMT du simulateur, les secteurs et programmes ouverts ou gardés et le temps passé sur chacun, l'échéance, si vous avez un NIF et si vous pensez devenir résident. Il reste sur votre appareil jusqu'à ce que vous l'effaciez, et vous pouvez le voir et l'imprimer dans « Mon profil d'acheteur ». Quand vous envoyez une demande au Concierge, le profil part avec elle, avec l'origine de chaque ligne, uniquement chez Imóveis Portugal et le conseiller qualifié, parce que vous l'avez demandé (RGPD, art. 6, par. 1, b)). Un promoteur ne le reçoit que si vous cochez la case, non cochée, à son nom (art. 6, par. 1, a)), et vous pouvez retirer cet accord à tout moment. Pour les rapports aux promoteurs, nous comptons seulement combien de profils complets arrivent par programme, sans aucune donnée personnelle. Le profil est indicatif, n'est pas une évaluation de crédit et ne sert à aucune décision automatisée vous concernant. Pour les budgets élevés, le conseiller demande toujours une pièce d'identité et la preuve des fonds, comme l'exige la Lei 83/2017.
 
 ### privacy.7.h
-- PT: Resumo enviado com os pedidos
-- EN: Summary sent with requests
-- FR: Résumé joint aux demandes
+- PT: O seu perfil de comprador
+- EN: Your buyer profile
+- FR: Votre profil d'acheteur
 
 ### draft
 - PT: Rascunho. Os campos entre parênteses retos são preenchidos quando a entidade estiver definida.
@@ -1508,9 +1508,9 @@ How to edit:
 - FR: Destinataires
 
 ### privacy.3.p
-- PT: A Imóveis Portugal e um consultor qualificado de uma mediadora imobiliária licenciada recebem os pedidos que envia pelo site (compra, visita, Concierge e pedidos a parceiros), por email, através do Cloudflare Email Routing; o site não os guarda. O parceiro da categoria escolhida, só para pedidos a parceiros e com o seu consentimento. Prestadores que tratam dados por nossa conta: beehiiv (envio da Maré, EUA, com garantias adequadas para a transferência), Tally (formulários, UE), Cloudflare (alojamento, envio dos pedidos por email e estatísticas sem cookies) e Cal.com (marcação de chamadas).
-- EN: Imóveis Portugal and a qualified advisor at a licensed real-estate brokerage receive the requests you send on the site (buying, viewing, Concierge and requests to a partner), by email, through Cloudflare Email Routing; the site does not store them. The partner in the chosen category, only for requests to a partner and with your consent. Processors acting for us: beehiiv (Maré, the newsletter, USA, with appropriate safeguards for the transfer), Tally (forms, EU), Cloudflare (hosting, sending requests by email and cookie-free statistics) and Cal.com (call booking).
-- FR: Imóveis Portugal et un conseiller qualifié d'une agence immobilière agréée reçoivent les demandes que vous envoyez sur le site (achat, visite, Concierge et demandes à un partenaire), par e-mail, via Cloudflare Email Routing ; le site ne les conserve pas. Le partenaire de la catégorie choisie, uniquement pour les demandes à un partenaire et avec votre accord. Sous-traitants : beehiiv (Maré, la newsletter, États-Unis, avec garanties appropriées pour le transfert), Tally (formulaires, UE), Cloudflare (hébergement, envoi des demandes par e-mail et statistiques sans cookies) et Cal.com (prise de rendez-vous).
+- PT: A Imóveis Portugal e um consultor qualificado de uma mediadora imobiliária licenciada recebem os pedidos que envia pelo site (compra, visita, Concierge e pedidos a parceiros), por email, através do Cloudflare Email Routing; o site não os guarda. O parceiro da categoria escolhida, só para pedidos a parceiros e com o seu consentimento. O promotor de um empreendimento, só se marcar a caixa com o nome dele: recebe por nós o seu perfil de comprador. Prestadores que tratam dados por nossa conta: beehiiv (envio da Maré, EUA, com garantias adequadas para a transferência), Tally (formulários, UE), Cloudflare (alojamento, envio dos pedidos por email e estatísticas sem cookies) e Cal.com (marcação de chamadas).
+- EN: Imóveis Portugal and a qualified advisor at a licensed real-estate brokerage receive the requests you send on the site (buying, viewing, Concierge and requests to a partner), by email, through Cloudflare Email Routing; the site does not store them. The partner in the chosen category, only for requests to a partner and with your consent. A development's developer, only if you tick the box with its name: it receives your buyer profile through us. Processors acting for us: beehiiv (Maré, the newsletter, USA, with appropriate safeguards for the transfer), Tally (forms, EU), Cloudflare (hosting, sending requests by email and cookie-free statistics) and Cal.com (call booking).
+- FR: Imóveis Portugal et un conseiller qualifié d'une agence immobilière agréée reçoivent les demandes que vous envoyez sur le site (achat, visite, Concierge et demandes à un partenaire), par e-mail, via Cloudflare Email Routing ; le site ne les conserve pas. Le partenaire de la catégorie choisie, uniquement pour les demandes à un partenaire et avec votre accord. Le promoteur d'un programme, uniquement si vous cochez la case à son nom : il reçoit votre profil d'acheteur par notre intermédiaire. Sous-traitants : beehiiv (Maré, la newsletter, États-Unis, avec garanties appropriées pour le transfert), Tally (formulaires, UE), Cloudflare (hébergement, envoi des demandes par e-mail et statistiques sans cookies) et Cal.com (prise de rendez-vous).
 
 ### privacy.4.h
 - PT: Durante quanto tempo
@@ -1538,9 +1538,9 @@ How to edit:
 - FR: Cookies
 
 ### privacy.6.p
-- PT: Não usamos cookies de publicidade nem de estatística. A língua e a edição que escolhe ficam só no seu navegador (armazenamento local), sem cookies. Os formulários incorporados podem usar cookies técnicos do serviço. Alguns empreendimentos mostram um filme do YouTube e uma visita 3D de property-sales-engine.com: só carregam quando toca em «Ver o filme» ou «Abrir a visita 3D», e a partir daí esses sites podem guardar os seus próprios cookies, segundo as políticas deles. Sem esse toque, nada deles é carregado.
-- EN: We use no advertising or analytics cookies. The language and edition you choose stay only in your browser (local storage), without cookies. Embedded forms may use technical cookies from their service. Some developments show a YouTube film and a 3D tour from property-sales-engine.com. They load only when you tap “Play the film” or “Open the 3D tour”; from then on those sites may set their own cookies, under their own policies. Without that tap, nothing from them loads.
-- FR: Aucun cookie publicitaire ni de mesure d'audience. La langue et l'édition choisies restent uniquement dans votre navigateur (stockage local), sans cookie. Les formulaires intégrés peuvent utiliser des cookies techniques de leur service. Certains programmes proposent un film YouTube et une visite 3D de property-sales-engine.com. Ils ne se chargent que lorsque vous touchez « Voir le film » ou « Ouvrir la visite 3D » ; ces sites peuvent alors déposer leurs propres cookies, selon leurs propres politiques. Sans ce geste, rien d'eux n'est chargé.
+- PT: Não usamos cookies de publicidade nem de estatística. A língua e a edição que escolhe ficam só no seu navegador (armazenamento local), sem cookies. Os formulários incorporados podem usar cookies técnicos do serviço. Alguns empreendimentos mostram um filme do YouTube e uma visita 3D de property-sales-engine.com: só carregam quando toca em «Ver o filme» ou «Abrir a visita 3D», e a partir daí esses sites podem guardar os seus próprios cookies, segundo as políticas deles. Sem esse toque, nada deles é carregado. As respostas do Concierge que não dizem quem é (o que procura, orçamento, sítio e horas escolhidas) ficam também no seu dispositivo durante 24 horas, para não se perderem se fechar a página, e são apagadas quando envia o pedido; o nome, o email e o telefone nunca ficam.
+- EN: We use no advertising or analytics cookies. The language and edition you choose stay only in your browser (local storage), without cookies. Embedded forms may use technical cookies from their service. Some developments show a YouTube film and a 3D tour from property-sales-engine.com. They load only when you tap “Play the film” or “Open the 3D tour”; from then on those sites may set their own cookies, under their own policies. Without that tap, nothing from them loads. Concierge answers that say nothing about who you are (what you need, budget, place and chosen times) are also kept on your device for 24 hours, so closing the page does not lose them, and are deleted when you send the request; your name, email and phone never are.
+- FR: Aucun cookie publicitaire ni de mesure d'audience. La langue et l'édition choisies restent uniquement dans votre navigateur (stockage local), sans cookie. Les formulaires intégrés peuvent utiliser des cookies techniques de leur service. Certains programmes proposent un film YouTube et une visite 3D de property-sales-engine.com. Ils ne se chargent que lorsque vous touchez « Voir le film » ou « Ouvrir la visite 3D » ; ces sites peuvent alors déposer leurs propres cookies, selon leurs propres politiques. Sans ce geste, rien d'eux n'est chargé. Les réponses au Concierge qui ne disent rien de vous (votre besoin, budget, lieu et horaires choisis) restent aussi sur votre appareil pendant 24 heures, pour ne pas les perdre si vous fermez la page, et sont effacées à l'envoi de la demande ; vos nom, e-mail et téléphone, jamais.
 
 ### legal.title
 - PT: Aviso legal
@@ -4247,8 +4247,8 @@ How to edit:
 
 ### ok.prep
 - PT: Para a conversa: o orçamento, as zonas que lhe interessam e o NIF, se já o tiver.
-- EN: To prepare, have your budget, the areas you like and, if you have one, your NIF to hand.
-- FR: Pour préparer l'échange, ayez sous la main votre budget, les secteurs qui vous intéressent et, si vous l'avez, votre NIF.
+- EN: To prepare, have your budget, the areas you like and, if you have one, your NIF (Portuguese tax number) to hand.
+- FR: Pour préparer l'échange, ayez sous la main votre budget, les secteurs qui vous intéressent et, si vous l'avez, votre NIF (numéro fiscal portugais).
 
 ### private.title
 - PT: Um consultor dedicado
@@ -5287,9 +5287,9 @@ Prompt 28 §2b (D54): "Your team for this purchase", the partners a case needs, 
 - FR: Indicatif, pas une évaluation de crédit
 
 ### data
-- PT: Viu os preços de 10 anos de {places}
-- EN: Looked at 10-year prices for {places}
-- FR: A consulté les prix sur 10 ans de {places}
+- PT: Interesse: {places}
+- EN: Interested in: {places}
+- FR: Intérêt : {places}
 
 ### nonif
 - PT: Ainda sem NIF
@@ -6369,7 +6369,7 @@ Prompt 43 §3b: the partner links on the path and the questions open the Concier
 ### c.nif
 - PT: Já tem NIF português?
 - EN: Do you already have a Portuguese tax number (NIF)?
-- FR: Avez-vous déjà un NIF portugais ?
+- FR: Avez-vous déjà un NIF (numéro fiscal portugais) ?
 
 ### yes
 - PT: Sim
@@ -9594,9 +9594,9 @@ The wording that names the partner agency, kept exactly as it was before prompt 
 - FR: On s'inscrit à Maré, notre newsletter, d'un clic : beehiiv envoie les numéros et chaque e-mail contient un lien de désinscription. Aucun cookie publicitaire ni de mesure d'audience. Les demandes que vous envoyez partent par e-mail uniquement chez Imóveis Portugal et l'agence partenaire, et le site ne les conserve pas.
 
 ### legal.privacy.7.p
-- PT: Se marcar "Incluir este resumo", o seu pedido leva um resumo do que indicou no percurso e nos simuladores: país, orçamento, custo total, capitais próprios e financiamento, uma taxa de esforço indicativa, prazo, se já tem NIF e as zonas cujos preços consultou. Esses valores ficam no seu dispositivo até enviar o pedido e seguem com ele só para a Imóveis Portugal e para a agência parceira {agency}, porque o pediu (RGPD, art. 6.º, n.º 1, alínea b)). O resumo é indicativo, não é uma avaliação de crédito e não serve para nenhuma decisão automatizada sobre si. Para orçamentos elevados, a agência parceira continua a pedir identificação e prova de fundos, como exige a Lei 83/2017.
-- EN: If you tick "Include this summary", your request carries a summary of what you entered on the path and in the calculators: country, budget, total cost, own funds and financing, an indicative debt-to-income ratio, timing, whether you have a NIF and the areas whose prices you looked at. These figures stay on your device until you send the request and go with it only to Imóveis Portugal and our partner agency {agency}, because you asked for it (GDPR art. 6(1)(b)). The summary is indicative, is not a credit assessment and is not used for any automated decision about you. For high budgets, the partner agency still asks for identification and proof of funds, as Lei 83/2017 requires.
-- FR: Si vous cochez « Joindre ce résumé », votre demande contient un résumé de ce que vous avez saisi dans le parcours et les simulateurs : pays, budget, coût total, apport et financement, un taux d'endettement indicatif, échéance, si vous avez un NIF et les secteurs dont vous avez consulté les prix. Ces données restent sur votre appareil jusqu'à l'envoi et partent avec la demande uniquement chez Imóveis Portugal et l'agence partenaire {agency}, parce que vous l'avez demandé (RGPD, art. 6, par. 1, point b). Le résumé est indicatif, n'est pas une évaluation de crédit et ne sert à aucune décision automatisée vous concernant. Pour les budgets élevés, l'agence partenaire demande toujours une pièce d'identité et la preuve des fonds, comme l'exige la Lei 83/2017.
+- PT: O site junta no seu dispositivo (armazenamento local) o que fez e respondeu: o país da edição, o orçamento, o uso, o financiamento e a entrada, o custo total e o IMT do simulador, as zonas e os empreendimentos que abriu ou guardou e quanto tempo passou em cada uma, o prazo, se já tem NIF e se pensa passar a residente. Fica no seu dispositivo até o apagar, e pode vê-lo e imprimi-lo em «O meu perfil de comprador». Quando envia um pedido ao Concierge, o perfil segue com ele, com a origem de cada linha, só para a Imóveis Portugal e para a agência parceira {agency}, porque o pediu (RGPD, art. 6.º, n.º 1, al. b)). Um promotor só o recebe se marcar a caixa, desmarcada, com o nome desse promotor (art. 6.º, n.º 1, al. a)), e pode retirar esse consentimento a qualquer momento. Para os relatórios aos promotores contamos só quantos perfis completos chegam por empreendimento, sem nenhum dado pessoal. O perfil é indicativo, não é uma avaliação de crédito e não serve para nenhuma decisão automatizada sobre si. Para orçamentos elevados, a agência parceira continua a pedir identificação e prova de fundos, como exige a Lei 83/2017.
+- EN: The site gathers on your device (local storage) what you did and answered: your edition's country, budget, use, financing and down payment, the simulator's total cost and IMT, the areas and developments you opened or saved and how long you spent on each, your timeline, whether you have a NIF and whether you plan to become a resident. It stays on your device until you delete it, and you can see and print it under “My buyer profile”. When you send a Concierge request, the profile goes with it, with where each line came from, only to Imóveis Portugal and our partner agency {agency}, because you asked for it (GDPR art. 6(1)(b)). A developer receives it only if you tick the unticked box naming that developer (art. 6(1)(a)), and you can withdraw that consent at any time. For the developers' reports we only count how many complete profiles arrive per development, with no personal data. The profile is indicative, is not a credit assessment and is not used for any automated decision about you. For high budgets, the partner agency still asks for identification and proof of funds, as Lei 83/2017 requires.
+- FR: Le site rassemble sur votre appareil (stockage local) ce que vous avez fait et répondu : le pays de votre édition, le budget, l'usage, le financement et l'apport, le coût total et l'IMT du simulateur, les secteurs et programmes ouverts ou gardés et le temps passé sur chacun, l'échéance, si vous avez un NIF et si vous pensez devenir résident. Il reste sur votre appareil jusqu'à ce que vous l'effaciez, et vous pouvez le voir et l'imprimer dans « Mon profil d'acheteur ». Quand vous envoyez une demande au Concierge, le profil part avec elle, avec l'origine de chaque ligne, uniquement chez Imóveis Portugal et l'agence partenaire {agency}, parce que vous l'avez demandé (RGPD, art. 6, par. 1, b)). Un promoteur ne le reçoit que si vous cochez la case, non cochée, à son nom (art. 6, par. 1, a)), et vous pouvez retirer cet accord à tout moment. Pour les rapports aux promoteurs, nous comptons seulement combien de profils complets arrivent par programme, sans aucune donnée personnelle. Le profil est indicatif, n'est pas une évaluation de crédit et ne sert à aucune décision automatisée vous concernant. Pour les budgets élevés, l'agence partenaire demande toujours une pièce d'identité et la preuve des fonds, comme l'exige la Lei 83/2017.
 
 ### legal.privacy.2.p
 - PT: Maré, a newsletter: o seu email, com o seu consentimento (RGPD, art. 6.º, n.º 1, al. a)), dado com um clique no formulário; a beehiiv envia as edições e cada email tem um link para cancelar. Pedidos de compra, de visita e do Concierge: nome, contactos e o que procura, para dar seguimento ao pedido que nos faz antes de qualquer contrato (art. 6.º, n.º 1, al. b)), enviados à Imóveis Portugal e à agência parceira {agency} (AMI {ami}). Pedidos de parceria: dados profissionais, para responder (art. 6.º, n.º 1, al. b)). Pedidos a parceiros: categoria, país, pergunta e contacto, para responder ao seu pedido (art. 6.º, n.º 1, al. b)) e, se o autorizar, passar a um parceiro da categoria.
@@ -9604,9 +9604,9 @@ The wording that names the partner agency, kept exactly as it was before prompt 
 - FR: Maré, la newsletter : votre adresse e-mail, avec votre consentement (RGPD, art. 6, par. 1, a)), donné d'un clic dans le formulaire ; beehiiv envoie les numéros et chaque e-mail contient un lien de désinscription. Demandes d'achat, de visite et du Concierge : nom, coordonnées et critères, pour donner suite à la demande que vous faites avant tout contrat (art. 6, par. 1, b)), transmis à Imóveis Portugal et à l'agence partenaire {agency} (AMI {ami}). Demandes de partenariat : données professionnelles, pour répondre (art. 6, par. 1, b)). Demandes à un partenaire : catégorie, pays, question et coordonnées, pour répondre à votre demande (art. 6, par. 1, b)) et, avec votre accord, les transmettre à un partenaire de la catégorie.
 
 ### legal.privacy.3.p
-- PT: A Imóveis Portugal e a agência parceira {agency} (AMI {ami}) recebem os pedidos que envia pelo site (compra, visita, Concierge e pedidos a parceiros), por email, através do Cloudflare Email Routing; o site não os guarda. O parceiro da categoria escolhida, só para pedidos a parceiros e com o seu consentimento. Prestadores que tratam dados por nossa conta: beehiiv (envio da Maré, EUA, com garantias adequadas para a transferência), Tally (formulários, UE), Cloudflare (alojamento, envio dos pedidos por email e estatísticas sem cookies) e Cal.com (marcação de chamadas).
-- EN: Imóveis Portugal and our partner agency {agency} (AMI {ami}) receive the requests you send on the site (buying, viewing, Concierge and requests to a partner), by email, through Cloudflare Email Routing; the site does not store them. The partner in the chosen category, only for requests to a partner and with your consent. Processors acting for us: beehiiv (Maré, the newsletter, USA, with appropriate safeguards for the transfer), Tally (forms, EU), Cloudflare (hosting, sending requests by email and cookie-free statistics) and Cal.com (call booking).
-- FR: Imóveis Portugal et l'agence partenaire {agency} (AMI {ami}) reçoivent les demandes que vous envoyez sur le site (achat, visite, Concierge et demandes à un partenaire), par e-mail, via Cloudflare Email Routing ; le site ne les conserve pas. Le partenaire de la catégorie choisie, uniquement pour les demandes à un partenaire et avec votre accord. Sous-traitants : beehiiv (Maré, la newsletter, États-Unis, avec garanties appropriées pour le transfert), Tally (formulaires, UE), Cloudflare (hébergement, envoi des demandes par e-mail et statistiques sans cookies) et Cal.com (prise de rendez-vous).
+- PT: A Imóveis Portugal e a agência parceira {agency} (AMI {ami}) recebem os pedidos que envia pelo site (compra, visita, Concierge e pedidos a parceiros), por email, através do Cloudflare Email Routing; o site não os guarda. O parceiro da categoria escolhida, só para pedidos a parceiros e com o seu consentimento. O promotor de um empreendimento, só se marcar a caixa com o nome dele: recebe por nós o seu perfil de comprador. Prestadores que tratam dados por nossa conta: beehiiv (envio da Maré, EUA, com garantias adequadas para a transferência), Tally (formulários, UE), Cloudflare (alojamento, envio dos pedidos por email e estatísticas sem cookies) e Cal.com (marcação de chamadas).
+- EN: Imóveis Portugal and our partner agency {agency} (AMI {ami}) receive the requests you send on the site (buying, viewing, Concierge and requests to a partner), by email, through Cloudflare Email Routing; the site does not store them. The partner in the chosen category, only for requests to a partner and with your consent. A development's developer, only if you tick the box with its name: it receives your buyer profile through us. Processors acting for us: beehiiv (Maré, the newsletter, USA, with appropriate safeguards for the transfer), Tally (forms, EU), Cloudflare (hosting, sending requests by email and cookie-free statistics) and Cal.com (call booking).
+- FR: Imóveis Portugal et l'agence partenaire {agency} (AMI {ami}) reçoivent les demandes que vous envoyez sur le site (achat, visite, Concierge et demandes à un partenaire), par e-mail, via Cloudflare Email Routing ; le site ne les conserve pas. Le partenaire de la catégorie choisie, uniquement pour les demandes à un partenaire et avec votre accord. Le promoteur d'un programme, uniquement si vous cochez la case à son nom : il reçoit votre profil d'acheteur par notre intermédiaire. Sous-traitants : beehiiv (Maré, la newsletter, États-Unis, avec garanties appropriées pour le transfert), Tally (formulaires, UE), Cloudflare (hébergement, envoi des demandes par e-mail et statistiques sans cookies) et Cal.com (prise de rendez-vous).
 
 ### legal.legal.4.h
 - PT: Agência parceira
@@ -10249,9 +10249,14 @@ Prompt 69 (4 Nov 2026), the Concierge in three steps and IMT explained where the
 - FR: Ex. : Gondomar, Vila do Conde
 
 ### done.h
-- PT: A partir daqui, tratamos nós.
-- EN: We'll take it from here.
-- FR: Nous prenons le relais.
+- PT: Marcado.
+- EN: Booked.
+- FR: Réservé.
+
+### done.h.later
+- PT: Enviado.
+- EN: Sent.
+- FR: Envoyé.
 
 ### done.p
 - PT: Um consultor qualificado confirma a hora por email e liga-lhe a essa hora.
@@ -10471,6 +10476,320 @@ Prompt 69 (4 Nov 2026), the Concierge in three steps and IMT explained where the
 - PT: Como se calcula o IMT
 - EN: How IMT is calculated
 - FR: Comment l'IMT est calculé
+
+## cv
+
+Prompt 74 (4 Nov 2026): the buyer profile that builds itself (D54, D79). Functional register (content/METHOD.md, "Two registers"). The confirmation card "O seu perfil de comprador" (site/src/scripts/cvcard.ts), the line on the Concierge's last step, and the one-page summary (site/src/components/ProfilePage.astro). The data stays on the reader's device (site/src/lib/cv.ts) until a request is sent.
+
+### h
+- PT: O seu perfil de comprador
+- EN: Your buyer profile
+- FR: Votre profil d'acheteur
+
+### pct
+- PT: Perfil {n}%
+- EN: Profile {n}%
+- FR: Profil {n} %
+
+### k.country
+- PT: Vive em
+- EN: Lives in
+- FR: Réside
+
+### k.budget
+- PT: Orçamento
+- EN: Budget
+- FR: Budget
+
+### k.use
+- PT: Uso
+- EN: Use
+- FR: Usage
+
+### k.fin
+- PT: Financiamento
+- EN: Financing
+- FR: Financement
+
+### k.total
+- PT: Custo total
+- EN: Total cost
+- FR: Coût total
+
+### k.timeline
+- PT: Comprar
+- EN: Buying
+- FR: Achat
+
+### k.nif
+- PT: NIF
+- EN: NIF
+- FR: NIF
+
+### k.resident
+- PT: Residente em Portugal
+- EN: Moving to Portugal
+- FR: Résident au Portugal
+
+### k.interest
+- PT: Interesse
+- EN: Interested in
+- FR: Intérêt
+
+### k.time
+- PT: Tempo no mapa
+- EN: Time on the map
+- FR: Temps sur la carte
+
+### fin.cash
+- PT: Sem crédito
+- EN: No mortgage
+- FR: Sans crédit
+
+### fin.loan
+- PT: Com crédito
+- EN: With a mortgage
+- FR: Avec crédit
+
+### fin.loan.p
+- PT: Com crédito, entrada {p}%
+- EN: With a mortgage, {p}% down
+- FR: Avec crédit, apport {p} %
+
+### timeline.6
+- PT: < 6 meses
+- EN: < 6 months
+- FR: < 6 mois
+
+### timeline.12
+- PT: 6–12 meses
+- EN: 6–12 months
+- FR: 6–12 mois
+
+### timeline.later
+- PT: Mais tarde
+- EN: Later
+- FR: Plus tard
+
+### nif.yes
+- PT: Sim
+- EN: Yes
+- FR: Oui
+
+### nif.no
+- PT: Ainda não
+- EN: Not yet
+- FR: Pas encore
+
+### resident.yes
+- PT: Sim
+- EN: Yes
+- FR: Oui
+
+### resident.no
+- PT: Não
+- EN: No
+- FR: Non
+
+### resident.maybe
+- PT: Talvez
+- EN: Maybe
+- FR: Peut-être
+
+### q.timeline
+- PT: Quando quer comprar?
+- EN: When do you want to buy?
+- FR: Quand voulez-vous acheter ?
+
+### q.nif
+- PT: Já tem NIF?
+- EN: Do you have a NIF?
+- FR: Avez-vous un NIF ?
+
+### q.resident
+- PT: Pensa passar a residente em Portugal?
+- EN: Do you plan to become a resident in Portugal?
+- FR: Pensez-vous devenir résident au Portugal ?
+
+### refund
+- PT: Se sim: {v} de IMT de volta.
+- EN: If yes: {v} of IMT back.
+- FR: Si oui : {v} d'IMT remboursés.
+
+### src.edition
+- PT: edição
+- EN: edition
+- FR: édition
+
+### src.simulator
+- PT: simulador
+- EN: simulator
+- FR: simulateur
+
+### src.map
+- PT: mapa
+- EN: map
+- FR: carte
+
+### src.concierge
+- PT: Concierge
+- EN: Concierge
+- FR: Concierge
+
+### src.answers
+- PT: respostas
+- EN: answers
+- FR: réponses
+
+### src.favorites
+- PT: favoritos
+- EN: favorites
+- FR: favoris
+
+### src.mare
+- PT: Maré
+- EN: Maré
+- FR: Maré
+
+### edit
+- PT: Alterar
+- EN: Change
+- FR: Modifier
+
+### place.ph
+- PT: Outro sítio
+- EN: Another place
+- FR: Autre lieu
+
+### place.add
+- PT: Juntar
+- EN: Add
+- FR: Ajouter
+
+### remove
+- PT: Retirar
+- EN: Remove
+- FR: Retirer
+
+### ready
+- PT: Pronto
+- EN: Done
+- FR: Terminé
+
+### sending
+- PT: A enviar…
+- EN: Sending…
+- FR: Envoi…
+
+### sent
+- PT: O consultor já tem o seu perfil.
+- EN: The advisor has your profile.
+- FR: Le conseiller a votre profil.
+
+### failed
+- PT: Não foi possível enviar. O consultor recebeu o perfil com o pedido.
+- EN: Could not send. The advisor got the profile with your request.
+- FR: Envoi impossible. Le conseiller a reçu le profil avec la demande.
+
+### consent
+- PT: Partilhar este perfil com {dev}, promotor de {name}.
+- EN: Share this profile with {dev}, the developer of {name}.
+- FR: Partager ce profil avec {dev}, promoteur de {name}.
+
+### summary
+- PT: Abrir o resumo (PDF)
+- EN: Open the summary (PDF)
+- FR: Ouvrir le résumé (PDF)
+
+### intent
+- PT: Perfil do comprador
+- EN: Buyer profile
+- FR: Profil de l'acheteur
+
+### goes
+- PT: Segue com o pedido: {list}.
+- EN: Goes with the request: {list}.
+- FR: Joint à la demande : {list}.
+
+### page.title
+- PT: O meu perfil de comprador
+- EN: My buyer profile
+- FR: Mon profil d'acheteur
+
+### page.lede
+- PT: Para levar ao banco ou ao advogado.
+- EN: To take to your bank or lawyer.
+- FR: À montrer à votre banque ou à votre avocat.
+
+### page.costs
+- PT: Custos da compra
+- EN: Purchase costs
+- FR: Frais d'achat
+
+### page.price
+- PT: Preço
+- EN: Price
+- FR: Prix
+
+### page.imt
+- PT: IMT (não residente)
+- EN: IMT (non-resident)
+- FR: IMT (non-résident)
+
+### page.imt.res
+- PT: IMT (habitação própria)
+- EN: IMT (own home)
+- FR: IMT (résidence principale)
+
+### page.is
+- PT: Imposto do selo
+- EN: Stamp duty
+- FR: Droit de timbre
+
+### page.deed
+- PT: Escritura e registo
+- EN: Deed and registration
+- FR: Acte et enregistrement
+
+### page.total
+- PT: Total
+- EN: Total
+- FR: Total
+
+### page.short
+- PT: Lista curta
+- EN: Shortlist
+- FR: Sélection
+
+### page.print
+- PT: Guardar como PDF
+- EN: Save as PDF
+- FR: Enregistrer en PDF
+
+### page.empty
+- PT: Ainda não há perfil neste dispositivo.
+- EN: No profile on this device yet.
+- FR: Pas encore de profil sur cet appareil.
+
+### page.empty.a
+- PT: Abrir o simulador
+- EN: Open the calculator
+- FR: Ouvrir le simulateur
+
+### page.made
+- PT: Feito neste dispositivo a {d}.
+- EN: Made on this device on {d}.
+- FR: Établi sur cet appareil le {d}.
+
+### page.clear
+- PT: Apagar este perfil do dispositivo
+- EN: Delete this profile from this device
+- FR: Effacer ce profil de cet appareil
+
+### page.note
+- PT: Indicativo, com as regras de 2026: não é uma avaliação de crédito nem aconselhamento fiscal.
+- EN: Indicative, under the 2026 rules: not a credit assessment or tax advice.
+- FR: Indicatif, règles 2026 : ni évaluation de crédit ni conseil fiscal.
 
 ## p71
 

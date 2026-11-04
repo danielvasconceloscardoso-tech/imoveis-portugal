@@ -66,6 +66,9 @@ The Cloudflare count is the page `/e/{ed}/{event}/`, except the three short fami
 | `p/{project}/req` | `{ed}/p/{project}/req/` | place, origin = flow | a request about that project is sent |
 | `p/{project}/view` | `{ed}/p/{project}/view/` | place, origin (`site`, `outside`) | the developer's page is opened on the site (never on the private demos) |
 | `p/{project}/share` | `{ed}/p/{project}/share/` | place, origin (`native`, `copy`) | "Partilhar esta página" on the developer's page |
+| `p/{project}/cvq` | `{ed}/p/{project}/cvq/` | place = project, origin = flow | prompt 74: a request about that project left with a qualified buyer profile (4 of the 5 key fields: country, budget, use, timeline, financing), once per request (at the send, or at "Pronto" when the answers complete it) |
+| `p/{project}/cvshare` | `{ed}/p/{project}/cvshare/` | place, origin = flow | prompt 74: the buyer ticked the box naming that project's developer and sent the profile |
+| `flow/concierge/cv/{ready,share,summary,qualified}` | `{ed}/flow/concierge/cv/{k}/` | band | prompt 74: the profile card's "Pronto" sent; sent with the developer box ticked; the one-page summary opened; a qualified profile sent (any project or none) |
 | `faq/open` | `q/{id}/` | step = question id | a question is opened on Perguntas |
 | `path/{station}/open` | `{ed}/path/{station}/open/` | step, band (budget), origin (`buy`, `sell`, `preview`) | a Passo a passo station comes on screen |
 | `path/{station}/done` | `{ed}/path/{station}/done/` | step, origin | "Próximo passo" on a station |
@@ -103,6 +106,17 @@ What the site already knows is reused, so the reader is never asked twice. The C
 These come from `sessionStorage` (`ip.place`, `ip.sim1.budget`, `ip.utm`) and the existing `localStorage` keys. They stay on the reader's device and are never sent.
 
 The collector (`scripts/metrics/collect.mjs`) reads the new pages into `place_time` (top places, by band), `flow_steps` (steps and stops per flow), `events` (every other event, by name) and the developers' `view` and `share` counts.
+
+## Qualified buyers per developer per month (prompt 74, sponsor report)
+
+The buyer profile lives on the reader's device (`site/src/lib/cv.ts`); we store nothing about it. What we count is one event page per request that leaves with a qualified profile: `/e/{ed}/p/{project}/cvq/`.
+
+1. Qualified means 4 of the 5 key fields are filled: country (the edition, or the reader's answer), budget, use, timeline, financing. The page decides it when the request leaves; the count carries no field, no name and no amount.
+2. The count per developer per month is the sum, over that developer's projects (`content/developers/projects.json`, `developer`), of the `cvq` page loads in the calendar month, across editions. The collector reads them like every other `p/{project}/…` page (the `events` table, by name).
+3. `cvshare` counts the profiles the buyer chose to share with that developer (the unticked, named box). Those profiles reach the developer only through Imóveis Portugal: the Worker never e-mails a developer.
+4. Limits: an ad blocker hides the count; a reader who sends twice about one project counts twice (one request each).
+
+The sponsor report (`/sponsor-report`) can show "Compradores qualificados: N" per month once the collector has a full month. Until then the number is 0, not estimated.
 
 ## The links (unlisted, noindex, never in a menu or the sitemap)
 

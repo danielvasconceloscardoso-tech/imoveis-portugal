@@ -7,7 +7,7 @@
 // "Camadas" (the panel), not removed: the layers and legend, the time slider, the budget, overlays, 2D / 3D and the tours.
 import mapCss from "maplibre-gl/dist/maplibre-gl.css?url";
 import { feature, mesh } from "topojson-client";
-import { savePlace } from "../lib/brief";
+import { savePlace, saveDwell } from "../lib/brief";
 import { track, edOf, ev, evHeart, timeBand, rememberPlace } from "../lib/track";
 import { get as savedItems } from "../lib/saved";
 import { imt as imtOf, purchase } from "../lib/sims";
@@ -489,7 +489,7 @@ export function initMapV3(root: HTMLElement) {
   // Time on a place (part 5): from the card opening to its closing, another place, a partner card or the page hiding;
   // sent as a band (lib/track.ts TIME_BANDS), never raw milliseconds.
   let tPlace: string | null = null, t0 = 0;
-  const timeEnd = () => { if (tPlace && t0) ev({ event: "map/time", place: tPlace, band: timeBand(performance.now() - t0), origin: mode }); tPlace = null; t0 = 0; };
+  const timeEnd = () => { if (tPlace && t0) { ev({ event: "map/time", place: tPlace, band: timeBand(performance.now() - t0), origin: mode }); saveDwell(byS.get(tPlace)?.n ?? tPlace, performance.now() - t0); } tPlace = null; t0 = 0; };  // prompt 74: the time also goes to the buyer profile, on the device
   const timeStart = (slug: string) => { if (tPlace === slug) return; timeEnd(); tPlace = slug; t0 = performance.now(); };
   function select(slug: string | null, fly = true) {
     if (slug) { ev({ event: "map/place", place: slug, origin: mode }); ev({ event: "map/card/muni", place: slug, origin: mode }); }
