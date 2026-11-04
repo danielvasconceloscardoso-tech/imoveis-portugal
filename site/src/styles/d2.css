@@ -241,3 +241,10 @@ body.d2 .h2-sec.h2-artline { padding-top: 32px; padding-bottom: 32px; }
 .h2-sources summary::-webkit-details-marker { display: none; }
 .h2-sources summary::after { content: " +"; } .h2-sources details[open] summary::after { content: " −"; }
 .h2-sources ol { margin-top: 12px; }
+
+/* Prompt 70 (header bug, operator's phone): the headline never shares space with the header. The hero's content starts
+   below the header and the notch (safe area); over the photo the header sits on a flat dark glass so it reads on any image. */
+.h2-hero { padding-top: calc(68px + env(safe-area-inset-top, 0px) + 24px); }
+body.d2 .hd:not(.solid) { background: rgba(10, 11, 12, .3); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+/* The smallest phones (320 px, iPhone SE 1st gen): the header's five items fit without clipping "Menu". */
+@media (max-width: 359px) { html body.d2 header.hd .word { font-size: 16px; } html body.d2 header.hd .hd-mare { padding-left: 7px; padding-right: 7px; } html body.d2 header.hd .hd-saved { width: 28px; } }
