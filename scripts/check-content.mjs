@@ -194,6 +194,7 @@ for (const f of existsSync(storyDir) ? readdirSync(storyDir).filter((x) => x.end
   if (!/\.(pt|en|fr)\.md$/.test(f) || f !== `${fm.id}.${fm.lang}.md`) err(file, "file name must be {id}.{lang}.md, lang pt, en or fr");
   for (const k of ["id", "lang", "slug", "title", "description", "published", "updated", "order", "place", "photo", "airport", "go", "concierge", "sources"]) if (fm[k] === undefined) err(file, `front matter "${k}" missing`);
   if (!["pt", "en", "fr"].includes(fm.lang)) err(file, `lang must be pt, en or fr (is ${fm.lang})`);
+  if (fm.only !== undefined && fm.only !== fm.lang) err(file, `"only" names the one language of a single-language article and must equal lang (${fm.lang})`);
   if (!["OPO", "LIS", "FAO"].includes(fm.airport)) err(file, `airport must be OPO, LIS or FAO`);
   // Prompt 70 (J-11): an article written for one country lists its editions; it is built and listed only there.
   if (fm.editions !== undefined && (!Array.isArray(fm.editions) || !fm.editions.length || fm.editions.some((e) => !["lu", "fr", "ch", "br", "us", "il"].includes(e)))) err(file, "editions must be a list of edition codes (lu, fr, ch, br, us, il)");

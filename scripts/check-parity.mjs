@@ -76,8 +76,14 @@ for (const f of readdirSync(storyDir).filter((x) => /\.(pt|en|fr)\.md$/.test(x))
   const places = [...body.matchAll(/\]\(place:([a-z0-9-]+)\)/g)].map((x) => x[1]);
   (stories.get(fm.id) ?? stories.set(fm.id, {}).get(fm.id))[fm.lang] = { fm, h2: (body.match(/^## /gm) || []).length, cites: [...new Set(cites)].sort().join(), places: [...new Set(places)].sort().join() };
 }
+// Prompt 72: an article written for one edition in one language only says so in its front matter ("only: en"); it is
+// then the single version of its id and has nothing to be compared with. Every other article still needs all three.
+let single = 0;
 for (const [id, by] of stories) {
-  if (Object.keys(by).length !== 3) { errors.push(`story ${id}: missing language (has ${Object.keys(by).join(", ")})`); continue; }
+  const langs = Object.keys(by);
+  if (langs.length === 1 && by[langs[0]].fm.only === langs[0]) { single++; continue; }
+  if (langs.some((l) => by[l].fm.only)) { errors.push(`story ${id}: "only: ${langs.map((l) => by[l].fm.only).find(Boolean)}" but it exists in ${langs.join(", ")}`); continue; }
+  if (langs.length !== 3) { errors.push(`story ${id}: missing language (has ${langs.join(", ")})`); continue; }
   for (const l of ["en", "fr"]) {
     const a = by.pt, b = by[l];
     for (const k of ["order", "place", "airport"]) if (a.fm[k] !== b.fm[k]) errors.push(`story ${id}: ${k} differs (pt ${a.fm[k]}, ${l} ${b.fm[k]})`);
@@ -171,4 +177,4 @@ const MEANING_FIXED = {
 }
 
 if (errors.length) { console.log(errors.join("\n")); process.exit(1); }
-console.log(`parity ok: ${groups.size} FAQ groups, ${posts.size} blog articles, ${stories.size} lifestyle articles, copy deck blocks in PT, EN and FR`);
+console.log(`parity ok: ${groups.size} FAQ groups, ${posts.size} blog articles, ${stories.size} lifestyle articles (${single} in one language only), copy deck blocks in PT, EN and FR`);

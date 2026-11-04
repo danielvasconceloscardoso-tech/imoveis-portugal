@@ -107,6 +107,14 @@ The articles were rewritten (PT, EN, FR) and every photograph reviewed against t
 | img/v2/porto-douro-amanhecer-* | escolas | The Douro at first light, a rabelo boat, Ribeira | (library, above) | vjgalaxy | Pixabay Content License | 2026-11-03 |
 | img/v2/porto-douro-entardecer-* | sao-joao | The Douro and the Luís I bridge at sunset | (library, above) | Unsplash | Unsplash License | 2026-11-03 |
 | img/v2/vila-do-conde-rio-ave-santa-clara-* | vila-do-conde | The Ave River and the Monastery of Santa Clara | https://commons.wikimedia.org/wiki/File:Convento_de_Santa_Clara_(Vila_do_Conde)_(3).jpg | Joseolgon | CC BY 4.0 | 2026-11-03 |
+## Prompt 72, 4 Nov 2026: "The Florida of Europe" (US edition, EN only)
+
+One photograph for the article (content/stories/florida-europa.en.md). Found through the Wikimedia Commons API (Commons rate-limited the build environment; the cliffs-top views of Falésia could not be downloaded), 1920 px Commons thumbnail, cut to 16:10 (sky and foreground trimmed), graded with `resort_grade.py` (1.0) and cut to `img/v2/<name>-{640,1024,1600}.{avif,webp}`. People are small and seen from behind. CC BY: credited on /credits/ (site/src/lib/credits.ts).
+
+| File (site/public/) | Article | What it shows | Source page | Author | Licence | Date checked |
+| --- | --- | --- | --- | --- | --- | --- |
+| img/v2/algarve-falesia-* | florida-europa | Praia da Falésia: the shore, the Atlantic and the orange cliffs | https://commons.wikimedia.org/wiki/File:Praia_da_Fal%C3%A9sia_(36312533302).jpg | xlibber | CC BY 2.0 | 2026-11-04 |
+
 ## Golden sample place card: Gondomar (operator's step 1, 3 Nov 2026)
 
 One hero and two gallery views for Gondomar's card on the map (photography standard above). Found through the Openverse API; the Wikimedia Commons copies of the photographer's Flickr originals were downloaded at 1920 px (Commons thumbnails), cropped (sky, and the bottom edge with the photographer's mark), graded with `resort_grade.py` (1.0) and cut to `img/v2/<name>-{640,1024,1600}.webp` (the hero and the marina: 640 and 1024 only, their crops are 1382 and 1128 px wide). The camera positions in the Flickr metadata were reverse-geocoded with Nominatim: all three are in the municipality of Gondomar. CC BY-SA: credited on /credits/ (site/src/lib/credits.ts); our graded copies are shared under the same licence.

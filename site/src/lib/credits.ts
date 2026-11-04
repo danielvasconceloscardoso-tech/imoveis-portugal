@@ -31,6 +31,8 @@ export const CREDITS: Credit[] = [
   { file: "img/v2/faro-ria-formosa-por-do-sol-*", place: "Faro", title: "Sunset from the Ponte Praia de Faro", author: "Eduard Marmet", url: "https://commons.wikimedia.org/wiki/File:Sunset_from_the_Ponte_Praia_de_Faro_(36487363454).jpg", licence: "CC BY-SA 2.0", licenceUrl: BYSA },
   { file: "img/v2/matosinhos-leixoes-por-do-sol-*", place: "Matosinhos", title: "Matosinhos Harbour", author: "prilfish", url: "https://commons.wikimedia.org/wiki/File:Matosinhos_Harbour_(38677455861).jpg", licence: "CC BY 2.0", licenceUrl: BY },
   { file: "img/v2/vila-do-conde-rio-ave-santa-clara-*", place: "Vila do Conde", title: "Convento de Santa Clara (Vila do Conde)", author: "Joseolgon", url: "https://commons.wikimedia.org/wiki/File:Convento_de_Santa_Clara_(Vila_do_Conde)_(3).jpg", licence: "CC BY 4.0", licenceUrl: "https://creativecommons.org/licenses/by/4.0/" },
+  // Prompt 72 (4 Nov 2026): "The Florida of Europe", the US edition's Algarve article; Wikimedia Commons, 1920 px, cut to 16:10, graded.
+  { file: "img/v2/algarve-falesia-*", place: "Praia da Falésia, Algarve", title: "Praia da Falésia (36312533302)", author: "xlibber", url: "https://commons.wikimedia.org/wiki/File:Praia_da_Fal%C3%A9sia_(36312533302).jpg", licence: "CC BY 2.0", licenceUrl: BY },
   // Step 2, Norte roll-out of the place card and the Centre and Azores postcards (3 Nov 2026): Wikimedia Commons copies
   // (1920 px, or 1280 where the original is smaller), cut to 16:10 (the photographer's mark trimmed where there was one),
   // graded with resort_grade.py. content/media/SOURCES.md, "Norte roll-out", has each camera point.
