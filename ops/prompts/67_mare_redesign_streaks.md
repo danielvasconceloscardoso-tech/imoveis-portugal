@@ -50,7 +50,6 @@ Test: would the editor of How To Spend It or Monocle be jealous of it? If not, i
 2. **Cover at least:**
    - the image budget (step 5);
    - the streak prize (step 8);
-   - whether the issue mentions Diogo Jota (step 6);
    - the send days (D83 says Tuesday and Friday at 8h);
    - the three newsletters he wants Maré to sit beside;
    - anything else that changes the design.
@@ -84,7 +83,7 @@ The reader must give it full attention from the first line and finish it in awe.
    Say "Gondomar" only where a source says the piece was made there. Otherwise the line is "Portuguese filigree, which is made only in Gondomar and Póvoa de Lanhoso". Find more famous wearers, films and campaigns that do hold up.
 2. **The threads after the gold** (pick the strongest, keep the rest for later issues):
    - **The river:** 37 km of Douro, the river beaches, the Estação Náutica (October 2026), rowing, the serras of the Parque das Serras do Porto.
-   - **A sports city.** Say it plainly: football, canoeing and rowing on the Douro, volleyball, tennis and more. Find the clubs, the facilities and the results that prove it, each with a source. Names come in only as proof, in passing, never as a team sheet: Ricardinho (Valbom, six times world's best futsal player), André Silva the striker (born in Baguim do Monte), Luís Frade (handball, Barcelona). Diogo Jota and his brother André Silva (SC Penafiel) started at Gondomar SC and died in July 2025: ask the operator whether to mention it at all. Check every name on Wikipedia PT and zerozero.pt (the AI overview mixed up the two André Silvas).
+   - **A sports city.** Say it plainly: football, canoeing and rowing on the Douro, volleyball, tennis and more. Find the clubs, the facilities and the results that prove it, each with a source. Names come in only as proof, in passing, never as a team sheet: Ricardinho (Valbom, six times world's best futsal player), André Silva the striker (born in Baguim do Monte), Luís Frade (handball, Barcelona). **Diogo Jota (operator, 4 Nov: include him).** He and his brother André Silva (SC Penafiel) started at Gondomar SC and died in July 2025. Include them as recognition, never as promotion: one quiet, factual line of respect, set apart from the game, the sponsor, prices and any call to action. No photo of him without a clear licence, no superlatives, no use in a subject line or social post. Check the facts (Gondomar SC, the Câmara's gold medal of merit) on primary sources. Check every name on Wikipedia PT and zerozero.pt (the AI overview mixed up the two André Silvas).
    - **The schools:** how Gondomar's secondary schools rank in the national exams (DGEEC data and the Público or Expresso rankings, latest year), and the private and international schools within 20 minutes by car (our own place data). Present it as a league table.
    - **Art and the people:** Zulmiro de Carvalho, Júlio Resende, and anyone else the research turns up (Cláudia Pascoal, Eurovision 2018).
    - **The market:** €2,348/m², +23.4% (INE, Q2 2026), and what €300k buys.
