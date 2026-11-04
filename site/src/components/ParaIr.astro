@@ -16,7 +16,7 @@ const partner = (config.paraIr?.partner ?? "").trim(), url = (config.paraIr?.url
 const { route, direct } = routeFor(ed, airport);
 const n = sources.n(route.fact);
 const vars = { city: c(`lifea.city.${route.city}`, lang), to: c(`lifea.to.${route.to.toLowerCase()}`, lang), time: flightTime(route.fact), flight: route.flight };
-const fly = c(direct ? "lifea.go.flight" : "lifea.go.via", lang, vars);
+const fly = c(route.season ? "lifea.go.season" : direct ? "lifea.go.flight" : "lifea.go.via", lang, vars);
 ---
 <section class="st-go" aria-labelledby="st-go-h" data-partner={partner || undefined}>
   <h2 id="st-go-h" class="st-go-h">{partner ? c("lifea.go.with", lang, { partner }) : c("lifea.go.h", lang)}</h2>
@@ -24,7 +24,7 @@ const fly = c(direct ? "lifea.go.flight" : "lifea.go.via", lang, vars);
   <dl class="st-go-l">
     <div><dt>{c("lifea.go.where", lang)}</dt><dd set:html={where} /></div>
     <div><dt>{c("lifea.go.when", lang)}</dt><dd set:html={when} /></div>
-    <div><dt>{c("lifea.go.fly", lang)}</dt><dd>{fly}<a class="sup" href={`#fonte-${n}`}>{n}</a> <span class="st-go-n">{c("lifea.go.sched", lang)}</span></dd></div>
+    <div><dt>{c("lifea.go.fly", lang)}</dt><dd>{fly}<a class="sup" href={`#fonte-${n}`}>{n}</a> {!route.season && <span class="st-go-n">{c("lifea.go.sched", lang)}</span>}</dd></div>
   </dl>
   <slot />
 </section>

@@ -117,14 +117,17 @@ export function renderStory(s: Story, ed: EdCode): { html: string; sources: Sour
 // Published schedules, one sourced flight per route (facts.csv "flight-*", PlaneMapper, checked 3 Nov 2026). The origin
 // follows the edition: LU Luxembourg, FR Paris, CH Geneva (Zurich for Faro), BR São Paulo, US New York, IL Tel Aviv.
 // Where no direct route is in the file, the line gives the edition's direct flight to Lisbon instead.
-export type Route = { city: string; fact: string; flight: string; to: Airport };
-const R = (city: string, fact: string, flight: string, to: Airport): Route => ({ city, fact, flight, to });
+// `season`: a seasonal route (summer only, so many a week), said in words instead of a flight time and winter schedule.
+export type Route = { city: string; fact: string; flight: string; to: Airport; season?: boolean };
+const R = (city: string, fact: string, flight: string, to: Airport, season = false): Route => ({ city, fact, flight, to, season });
 export const ROUTES: Record<EdCode, Partial<Record<Airport, Route>>> = {
   lu: { OPO: R("lux", "flight-lux-opo", "Luxair LG3761", "OPO"), LIS: R("lux", "flight-lux-lis", "TAP TP693", "LIS"), FAO: R("lux", "flight-lux-fao", "Luxair LG785", "FAO") },
   fr: { OPO: R("par", "flight-par-opo", "TAP TP455", "OPO"), LIS: R("par", "flight-par-lis", "TAP TP433", "LIS"), FAO: R("par", "flight-par-fao", "Transavia TO7678", "FAO") },
   ch: { OPO: R("gva", "flight-gva-opo", "TAP TP939", "OPO"), LIS: R("gva", "flight-gva-lis", "TAP TP941", "LIS"), FAO: R("zrh", "flight-zrh-fao", "Edelweiss WK268", "FAO") },
   br: { OPO: R("sao", "flight-sao-opo", "TAP TP94", "OPO"), LIS: R("sao", "flight-sao-lis", "TAP TP82", "LIS") },
-  us: { OPO: R("nyc", "flight-nyc-opo", "TAP TP212", "OPO"), LIS: R("nyc", "flight-nyc-lis", "TAP TP210", "LIS") },
+  // Prompt 73 (John J72-09): an article set at Faro (airport: FAO) gets United's seasonal Newark-Faro nonstop, not the
+  // edition's Lisbon flight.
+  us: { OPO: R("nyc", "flight-nyc-opo", "TAP TP212", "OPO"), LIS: R("nyc", "flight-nyc-lis", "TAP TP210", "LIS"), FAO: R("nyc", "flight-ewr-fao-united", "United", "FAO", true) },
   il: { LIS: R("tlv", "flight-tlv-lis", "El Al LY375", "LIS") },
 };
 /** The route for this edition and airport, or the edition's Lisbon flight when there is no direct one in the file. */

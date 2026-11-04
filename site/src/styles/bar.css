@@ -109,3 +109,5 @@
   html .consult .fl-step > .fl-go { bottom: env(safe-area-inset-bottom); }
   html body.has-bb .h2-hero { min-height: calc(100svh - env(safe-area-inset-bottom, 0px)); }
 }
+/* Prompt 73 (Ana J2-08): the page under the bar no longer shows through it; the bar is nearly opaque. */
+@media (max-width: 1079px) { .bb { background: rgba(255, 255, 255, .97); } }

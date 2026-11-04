@@ -357,7 +357,7 @@ a.sup + a.sup::before { content: ","; color: var(--muted); margin-right: 1px; }
 .casa-form h2 { margin: 0 0 4px; }
 .check { display: flex; align-items: center; gap: 12px; min-height: 40px; font-size: 17px; }
 .check input { width: 20px; height: 20px; accent-color: var(--accent); }
-.field input[type="text"], .field textarea { font: 400 17px/1.4 var(--sans); padding: 12px 16px; border: 1px solid var(--rule); border-radius: 8px; background: var(--paper); color: var(--ink); width: 100%; }
+.field input[type="text"], .field input[type="email"], .field textarea { font: 400 17px/1.4 var(--sans); padding: 12px 16px; border: 1px solid var(--rule); border-radius: 8px; background: var(--paper); color: var(--ink); width: 100%; }
 .consents { display: grid; gap: 12px; }
 .region { border-top: 1px solid var(--rule); padding: 8px 0; }
 .region > summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; min-height: 48px; }

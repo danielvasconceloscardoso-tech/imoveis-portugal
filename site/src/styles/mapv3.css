@@ -475,3 +475,11 @@ p.m3-tl { margin: 0; }
   .m3-page .m3-stage { min-height: 0; }
   .m3-sheet, .m3-sheet[data-detent="0"], .m3-sheet[data-detent="2"], .m3-sheet.is-arr[data-detent="1"] { height: calc(100% - 8px); }
 }
+/* Prompt 73 (James J-16): the Layers chips keep their 34 px look and get a 44 px tall hit area; rows sit 10 px apart so
+   two chips' areas never overlap. */
+.m3-chips { row-gap: 10px; }
+.m3-chip { position: relative; }
+.m3-chip::after { content: ""; position: absolute; left: 0; right: 0; top: -5px; bottom: -5px; }
+/* Mike (M72-08): the golf card has no picture area; its text keeps clear of the close button. */
+.m3-sb.m3-golf-top { padding-top: 22px; }
+.m3-golf-top > .m3-kick, .m3-golf-top > h3 { padding-right: 52px; }

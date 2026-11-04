@@ -38,24 +38,27 @@ const L = {
 };
 const unlockList = cl("map4.unlock.list", lang);
 const live = A.live && !!A.stripe.region && !!A.stripe.all;
+// Prompt 73 (Ana J2-03): while the paid analysis cannot be bought, no blurred locked rows and no offer: the free rows only,
+// and one small line.
+(L as Record<string, unknown>).live = live;
 ---
 <V2 lang={lang} ed={ed} page="map" paths={paths} noindex title={`${k4("compare.h")} | Imóveis Portugal · ${edName(ed, lang)}`} description={k4("compare.lede")}>
   <div class="cmp4">
     <p class="cmp4-back"><a href={mapPath}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>{k4("compare.map")}</a></p>
     <h1>{k4("compare.h")}</h1>
-    <p class="cmp4-lede">{k4("compare.lede")}</p>
+    <p class="cmp4-lede">{k4(live ? "compare.lede" : "compare.lede.free")}</p>
     <div class="cmp4-t" data-cmp data-l={JSON.stringify(L)} aria-live="polite"></div>
     <p class="cmp4-note small" data-cmp-note hidden></p>
     <div class="cmp4-empty" data-cmp-empty hidden><p>{k4("compare.need")}</p><a class="cmp4-btn" href={mapPath}>{k4("compare.map")}</a></div>
     <noscript><p>{k4("compare.need")}</p></noscript>
-    <section class="cmp4-unlock" id="analise" aria-labelledby="cmp4-ul">
+    {live ? <section class="cmp4-unlock" id="analise" aria-labelledby="cmp4-ul">
       <p class="cmp4-kick">{k4("tile.paid")}</p>
       <h2 id="cmp4-ul">{k4("unlock.offer", { r: String(A.prices.region), a: String(A.prices.all), m: String(A.months) })}</h2>
       <ul>{unlockList.map((x) => <li>{x}</li>)}</ul>
       {live ? <p class="cmp4-acts"><a class="cmp4-btn" href={A.stripe.region} rel="noopener">{k4("unlock.buy.region", { region: "", v: String(A.prices.region) }).replace(/^ · /, "")}</a> <a class="cmp4-btn cmp4-btn-2" href={A.stripe.all} rel="noopener">{k4("unlock.buy.all", { v: String(A.prices.all) })}</a></p>
         : <button type="button" class="cmp4-btn cmp4-off" disabled aria-disabled="true">{k4("unlock.soon")}</button>}
       <p class="small">{k4("unlock.note")}</p>
-    </section>
+    </section> : <p class="small cmp4-more">{k4("compare.more")}</p>}
     <p class="small cmp4-src" data-cmp-src data-tpl={keep("map4.compare.src", ["q"])}></p>
   </div>
 </V2>
@@ -151,7 +154,7 @@ const live = A.live && !!A.stripe.region && !!A.stripe.all;
     let h = `<div class="c4-h">${cols.map((c) => `<div class="c4-col">${c.photo ? `<img src="/img/v2/${c.photo}-640.webp" alt="" width="640" height="400" loading="lazy">` : `<span class="c4-ph"></span>`}<p class="c4-k">${esc(c.kick)}</p><p class="c4-n">${esc(c.name)}</p><a href="${esc(c.href)}">${esc(L.open)} →</a></div>`).join("")}</div>`;
     for (const [label, f] of free) h += `<div class="c4-r"><p class="c4-l">${esc(label)}</p><div class="c4-v">${cols.map((c) => `<span>${f(c.d)}</span>`).join("")}</div></div>`;
     // Locked rows: a soft shape where the figure goes (never the figure), and the analysis below.
-    for (const label of locked) h += `<button type="button" class="c4-lock" data-lock><span class="c4-l">${esc(label)}${lockSvg}</span><span class="c4-v">${cols.map(() => `<span>0 000</span>`).join("")}</span><span class="vh">${esc(L.locked)}</span></button>`;
+    if (L.live) for (const label of locked) h += `<button type="button" class="c4-lock" data-lock><span class="c4-l">${esc(label)}${lockSvg}</span><span class="c4-v">${cols.map(() => `<span>0 000</span>`).join("")}</span><span class="vh">${esc(L.locked)}</span></button>`;
     box.innerHTML = h;
     ev({ event: "map/compare/open", band: String(cols.length), origin: "compare" });
     box.querySelectorAll("[data-lock]").forEach((b) => b.addEventListener("click", () => {

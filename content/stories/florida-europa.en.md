@@ -25,7 +25,7 @@ United's UA281 leaves New York (Newark) at 9:30 p.m. and lands in [Faro](place:f
 
 In Vilamoura, in the municipality of [Loulé](place:loule), the course at The Els Club is Ernie Els's design. From July 31 to August 2, 2026, it hosted the first Portugal Invitational of the PGA Tour Champions: 78 players, a $3 million purse, and the first PGA Tour-sanctioned individual stroke-play event held in Portugal. The agreement behind it runs for five years.[[pga-champions-portugal-invitational-2026]]
 
-Vilamoura's marina is the largest in Portugal, with 825 berths for boats up to 60 meters. In 2024, its 50th year, it launched a new marina with 68 berths for vessels of 20 to 50 meters.[[vilamoura-marina-berths]]
+Vilamoura's marina is the largest in Portugal, with 825 berths for boats up to 60 meters. In 2024, its 50th year, it launched a new marina with 68 berths for larger yachts.[[vilamoura-marina-berths]]
 
 Farther west, in [Lagos](place:lagos), Palmares has 27 holes in three nines, named Alvor, Lagos and Praia, designed by Robert Trent Jones Jr. The course sits above the Alvor estuary and Lagos Bay.[[palmares-golf-27-holes]]
 
