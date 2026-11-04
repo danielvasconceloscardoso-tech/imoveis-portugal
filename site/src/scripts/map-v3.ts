@@ -923,7 +923,8 @@ export function initMapV3(root: HTMLElement) {
     timeEnd(); selected = null; selRegion = null; if (map?.getLayer("sel")) map.setFilter("sel", ["==", ["get", "s"], ""]);
     const muni = byS.get(g.m)?.n ?? "";
     const when = g.status !== "open" ? L.golf.opening.replace("{y}", g.year || "—") : g.year;
-    let h = `<div class="m3-photo m3-photo-none m3-golfband"></div><div class="m3-sb"><p class="m3-kick">${esc([g.resort !== g.n ? g.resort : "", muni].filter(Boolean).join(" · "))}</p><h3 tabindex="-1">${esc(g.n)}</h3>`;
+    // Mike (M72-08): no photograph of the course under a licence we can use, so no picture area (never a placeholder).
+    let h = `<div class="m3-sb m3-golf-top"><p class="m3-kick">${esc([g.resort !== g.n ? g.resort : "", muni].filter(Boolean).join(" · "))}</p><h3 tabindex="-1">${esc(g.n)}</h3>`;
     h += `<dl class="m3-stats"><div><dt>${L.golf.holes}</dt><dd>${g.holes ?? "—"}</dd></div><div><dt>${L.golf.design}</dt><dd class="m3-dd-s">${esc(g.designer || "—")}</dd></div><div><dt>${g.status !== "open" ? L.golf.status : L.golf.opened}</dt><dd class="m3-dd-s">${esc(when || "—")}</dd></div></dl>`;
     h += `<div class="m3-acts"><a class="m3-btn m3-btn-p" href="${cfg.links.buy}?place=${encodeURIComponent(muni)}&budget=${Math.round(budget)}">${L.golf.homes}</a><a class="m3-btn" href="${cfg.links.consult}?place=${encodeURIComponent(muni)}">${L.card.concierge}</a></div>`;
     h += `<div class="m3-more">${g.m ? `<button type="button" class="m3-link" data-goto="${g.m}">${esc(muni)}</button>` : ""}${g.url ? `<a class="m3-link" href="${esc(g.url)}" rel="noopener" target="_blank">${L.golf.site}</a>` : ""}</div>`;
@@ -1126,6 +1127,8 @@ export function initMapV3(root: HTMLElement) {
     sheetIn.querySelector("[data-south-next]")?.addEventListener("click", async () => {
       if (nx) { southStop(i + 1); return; }
       ev({ event: "map/south/golf", origin: mode }); await setOverlay("golf", true); closeSheet();
+      // The golf layer is seen over the golf coast (the Algarve stop), wherever the tour ended.
+      const gc = S.find((z) => z.id === "algarve"); if (gc && map) map.flyTo({ center: [gc.lon, gc.lat], zoom: gc.z, bearing: flat ? 0 : gc.b, pitch: flat ? 0 : 50, duration: reduce() ? 0 : 1800, essential: true });
     });
   }
   root.querySelectorAll<HTMLButtonElement>("[data-south]").forEach((b) => b.addEventListener("click", () => southStop(0)));

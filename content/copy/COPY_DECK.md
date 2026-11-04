@@ -10556,14 +10556,14 @@ Prompt 71 (4 Nov 2026), US edition, English only: "Closer than you think" (site/
 - FR: {n} min
 
 ### hero.more
-- PT: Lisbon is {n} minutes further than Los Angeles.
-- EN: Lisbon is {n} minutes further than Los Angeles.
-- FR: Lisbon is {n} minutes further than Los Angeles.
+- PT: Lisbon is {n} minutes further than {dom}.
+- EN: Lisbon is {n} minutes further than {dom}.
+- FR: Lisbon is {n} minutes further than {dom}.
 
 ### hero.less
-- PT: Lisbon is {n} minutes closer than Los Angeles.
-- EN: Lisbon is {n} minutes closer than Los Angeles.
-- FR: Lisbon is {n} minutes closer than Los Angeles.
+- PT: Lisbon is {n} minutes closer than {dom}.
+- EN: Lisbon is {n} minutes closer than {dom}.
+- FR: Lisbon is {n} minutes closer than {dom}.
 
 ### pick
 - PT: Your city
@@ -10596,9 +10596,9 @@ Prompt 71 (4 Nov 2026), US edition, English only: "Closer than you think" (site/
 - FR: Leave after dinner, land for breakfast.
 
 ### night.l
-- PT: {dep} from {city}, {arr} in Ponta Delgada, with {airline}.
-- EN: {dep} from {city}, {arr} in Ponta Delgada, with {airline}.
-- FR: {dep} from {city}, {arr} in Ponta Delgada, with {airline}.
+- PT: {dep} from {city}, {arr} in {to}, with {airline}.
+- EN: {dep} from {city}, {arr} in {to}, with {airline}.
+- FR: {dep} from {city}, {arr} in {to}, with {airline}.
 
 ### routes.h
 - PT: Every nonstop from the US
@@ -10729,3 +10729,18 @@ Prompt 71 (4 Nov 2026), US edition, English only: "Closer than you think" (site/
 - PT: Praia da Falésia: Tripadvisor's best beach in the world, 2024.
 - EN: Praia da Falésia: Tripadvisor's best beach in the world, 2024.
 - FR: Praia da Falésia: Tripadvisor's best beach in the world, 2024.
+
+### night.ls
+- PT: {dep} from {city}, {arr} in {to}, with {airline}, {season}.
+- EN: {dep} from {city}, {arr} in {to}, with {airline}, {season}.
+- FR: {dep} from {city}, {arr} in {to}, with {airline}, {season}.
+
+### hero.h
+- PT: {h} h
+- EN: {h} h
+- FR: {h} h
+
+### hero.nonstop
+- PT: ahead, in Lisbon. {airline} flies there nonstop, {season}.
+- EN: ahead, in Lisbon. {airline} flies there nonstop, {season}.
+- FR: ahead, in Lisbon. {airline} flies there nonstop, {season}.

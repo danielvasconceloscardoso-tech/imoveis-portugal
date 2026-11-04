@@ -47,7 +47,10 @@ export const CITIES: City[] = DEFS.map((c) => ({
 })).filter((c) => c.routes.length);
 
 // Leave after dinner, land for breakfast: Azores Airlines' own timetable (winter 2026-27), New York and Boston to the Azores.
-export const NIGHT = [
+// Mike (M72-03): the overnight to the golf coast first, United's Newark to Faro in its season (facts.csv
+// flight-ewr-fao-ua281-times, the same row the US article uses).
+export const NIGHT: { city: string; from: string; to: string; dep: string; arr: string; airline: string; fact: string; season?: string }[] = [
+  { city: "new-york", from: "EWR", to: "FAO", dep: "9:30 pm", arr: "9:50 am", airline: "United", fact: "flight-ewr-fao-ua281-times", season: "May to September" },
   { city: "new-york", from: "JFK", to: "PDL", dep: "9:20 pm", arr: "6:55 am", airline: "Azores Airlines", fact: "flight-jfk-pdl-azores-airlines" },
   { city: "boston", from: "BOS", to: "PDL", dep: "9:25 pm", arr: "6:20 am", airline: "Azores Airlines", fact: "flight-bos-pdl-azores-airlines" },
 ].filter((n) => FACTS[n.fact]);
