@@ -1,0 +1,79 @@
+<!doctype html><html lang="pt"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Maré · O cofre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font:400 17px/1.55 'Instrument Sans',-apple-system,'Helvetica Neue','Segoe UI',Roboto,Arial,sans-serif;background:#141414;color:#ffffff;min-height:100vh}
+body.light{background:#ffffff;color:#141414}
+.top{display:flex;justify-content:space-between;align-items:baseline;padding:18px 24px 16px}
+.wm{font:400 30px/1 'Instrument Serif','Bodoni 72',Didot,'Iowan Old Style',Charter,Constantia,'Noto Serif',serif;letter-spacing:-.01em}
+.run{font:500 13px/1 'Instrument Sans',-apple-system,'Helvetica Neue','Segoe UI',Roboto,Arial,sans-serif;color:#a39d95} .light .run{color:#6b6660}
+.vault{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover}
+.vault.short{aspect-ratio:2/1}
+.pad{padding:0 24px}
+.k{font:500 14px/1.3 'Instrument Sans',-apple-system,'Helvetica Neue','Segoe UI',Roboto,Arial,sans-serif;color:#8db6cb} .light .k{color:#2f5d74}
+.kg{font:500 13px/1.3 'Instrument Sans',-apple-system,'Helvetica Neue','Segoe UI',Roboto,Arial,sans-serif;color:#a39d95} .light .kg{color:#6b6660}
+h1{font:400 40px/1.05 'Instrument Serif','Bodoni 72',Didot,'Iowan Old Style',Charter,Constantia,'Noto Serif',serif;letter-spacing:-.01em;margin-top:10px}
+h2{font:400 29px/1.08 'Instrument Serif','Bodoni 72',Didot,'Iowan Old Style',Charter,Constantia,'Noto Serif',serif;letter-spacing:-.01em;margin-top:8px}
+.why{font-size:16px;line-height:1.55;color:#d9d5cf;margin-top:12px} .light .why{color:#141414}
+.why sup{font-size:10px;color:#a39d95}
+.doors{display:flex;gap:6px;margin-top:22px}
+.doors span{flex:1;height:6px;background:#3a3835} .doors span.o{background:#ffffff}
+.light .doors span{background:#e4e1dc} .light .doors span.o{background:#141414}
+.dl{display:flex;justify-content:space-between;font:400 13px/1.4 'Instrument Sans',-apple-system,'Helvetica Neue','Segoe UI',Roboto,Arial,sans-serif;color:#a39d95;margin-top:9px}
+.light .dl{color:#6b6660}
+.rule{height:1px;background:#3a3835;margin:26px 0} .light .rule{background:#e4e1dc}
+.opt{display:block;width:100%;text-align:left;background:none;border:1px solid #3a3835;color:#ffffff;font:500 17px/1.3 'Instrument Sans',-apple-system,'Helvetica Neue','Segoe UI',Roboto,Arial,sans-serif;padding:16px 20px;margin-top:10px;cursor:pointer}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
+.num{background:none;border:1px solid #3a3835;color:#ffffff;font:400 52px/1 'Instrument Serif','Bodoni 72',Didot,'Iowan Old Style',Charter,Constantia,'Noto Serif',serif;letter-spacing:-.05em;height:112px;cursor:pointer}
+.note{font:400 13px/1.5 'Instrument Sans',-apple-system,'Helvetica Neue','Segoe UI',Roboto,Arial,sans-serif;color:#a39d95;margin-top:16px} .light .note{color:#6b6660}
+.card{border-top:1px solid #e4e1dc;padding:12px 0 0;margin-top:12px;font-size:15px;line-height:1.5}
+.card b{font-weight:600}
+.sel{display:flex;gap:8px;margin-top:10px}
+.sel span{flex:1;border:1px solid #e4e1dc;padding:12px 14px;font-size:15px;color:#6b6660}
+.btn{background:#141414;color:#ffffff;font:500 15px/1 'Instrument Sans',-apple-system,'Helvetica Neue','Segoe UI',Roboto,Arial,sans-serif;padding:14px 18px;border:0;white-space:nowrap}
+.btn.ghost{background:none;color:#141414;border:1px solid #141414}
+.sw{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:12px;font-size:15px;line-height:1.4}
+.sw i{flex:none;width:44px;height:26px;border:1px solid #6b6660;position:relative}
+.sw i:after{content:'';position:absolute;left:3px;top:3px;width:18px;height:18px;background:#6b6660}
+.ph{position:absolute;right:10px;top:10px;font:500 11px/1 'Instrument Sans',-apple-system,'Helvetica Neue','Segoe UI',Roboto,Arial,sans-serif;background:rgba(0,0,0,.6);color:#fff;padding:5px 7px}
+.wrap{position:relative}
+</style></head><body>
+<div class="top"><span class="wm">Maré</span><span class="run">O cofre · 1 de 3</span></div>
+<div class="wrap"><img class="vault short" id="v" src="../img/vault-1-1200x800.jpg" alt="O cofre, uma porta aberta"></div>
+<div class="pad" style="padding-top:22px">
+  <p class="kg" id="mine">Pergunta 1 · a sua resposta: Cerca de 1 milhão</p>
+  <h1 id="verdict">Certo: cerca de 1&nbsp;milhão.</h1>
+  <p class="why">1&nbsp;004&nbsp;838 peças e 1&nbsp;631&nbsp;kg de ouro, 5% menos do que em 2022. Em Gondomar, a Contrastaria fica no edifício Goldpark.</p>
+  <div id="d"><div class="doors"><span class="o"></span><span class=""></span><span class=""></span></div><div class="dl"><span>1 de 3 portas abertas</span><span>À terceira, o cofre abre-se hoje</span></div></div>
+  <div class="rule"></div>
+  <p class="k">Pergunta 2 de 3</p>
+  <h2>A ponte de Edgar Cardoso em Foz do Sousa, Gondomar, de 1948, serviu de ensaio para que ponte do&nbsp;Porto?</h2>
+  <button class="opt" data-q="2" data-a="A">Arrábida</button>
+  <button class="opt" data-q="2" data-a="B">São João</button>
+  <button class="opt" data-q="2" data-a="C">Infante</button>
+  <button class="opt" data-q="2" data-a="D">Freixo</button>
+</div>
+<script>
+const opts = {A:'Cerca de 250 mil',B:'Cerca de 500 mil',C:'Cerca de 1 milhão',D:'Cerca de 2 milhões'};
+const a1 = new URLSearchParams(location.search).get('a1') || 'C';
+document.getElementById('mine').textContent = 'Pergunta 1 · a sua resposta: ' + (opts[a1] || '');
+if (a1 !== 'C') {
+  document.getElementById('verdict').innerHTML = 'Foi cerca de 1&nbsp;milhão.';
+  document.getElementById('v').src = '../img/vault-0-1200x800.jpg';
+  document.getElementById('d').innerHTML = `<div class="doors"><span class=""></span><span class=""></span><span class=""></span></div><div class="dl"><span>0 de 3 portas abertas</span><span>Esta porta fica fechada; há uma pergunta de reserva</span></div>`;
+  document.querySelector('.run').textContent = 'O cofre · 0 de 3';
+}
+</script>
+<script>
+const shownAt = performance.now();
+function realTap(e){ return e.isTrusted && navigator.userActivation && navigator.userActivation.hasBeenActive && performance.now() - shownAt > 1500; }
+document.querySelectorAll('[data-q]').forEach(b => b.addEventListener('pointerup', e => {
+  if (!realTap(e)) return;               // scanners, prefetch and scripted clicks stop here
+  // fetch('/api/mare/answer', {method:'POST', body: JSON.stringify({run, q: b.dataset.q, a: b.dataset.a})})
+  console.log('answer', b.dataset.q, b.dataset.a);
+}));
+</script>
+</body></html>

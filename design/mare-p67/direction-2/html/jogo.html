@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Maré · O jogo · Gondomar</title>
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Instrument+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ground:#EFEFEA; --ink:#1B2326; --grey:#5E676A; --acc:#A3432A; --ph:#D9DBD4; --hair:#B9BDB6;
+    --head: Gloock, 'Bodoni 72', Didot, 'Iowan Old Style', Constantia, 'Noto Serif', serif;
+    --text: Newsreader, 'Iowan Old Style', Charter, 'Sitka Text', Cambria, 'Noto Serif', serif;
+    --sans: 'Instrument Sans', -apple-system, 'Helvetica Neue', 'Segoe UI', Roboto, Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --ground:#121617; --ink:#E8E9E4; --grey:#9BA3A4; --acc:#E0805F; --ph:#262C2D; --hair:#3A4243; }
+  }
+  * { box-sizing:border-box; }
+  html,body { margin:0; background:var(--ground); color:var(--ink); }
+  body { font-family:var(--text); -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:600px; margin:0 auto; padding:0 22px 40px; }
+  header { display:flex; justify-content:space-between; align-items:flex-end; padding:22px 0 12px; border-bottom:1px solid var(--ink); }
+  .mark { font-family:var(--head); font-size:34px; line-height:32px; letter-spacing:-.01em; }
+  .meta { font-family:var(--sans); font-size:12.5px; color:var(--grey); text-align:right; line-height:1.35; }
+  .run { display:flex; align-items:center; justify-content:space-between; padding:12px 0 0; font-family:var(--sans); font-size:13px; color:var(--grey); }
+  .sq { display:flex; gap:6px; }
+  .sq i { width:16px; height:16px; border:1.5px solid var(--hair); display:block; }
+  .sq i.ok { background:var(--ink); border-color:var(--ink); }
+  .sq i.miss { border-color:var(--acc); background:linear-gradient(135deg, transparent 46%, var(--acc) 46%, var(--acc) 54%, transparent 54%); }
+  .sq i.now { border-color:var(--ink); }
+  .kick { font-family:var(--sans); font-size:13px; line-height:18px; font-weight:600; color:var(--acc); margin:0 0 10px; }
+  h1 { font-family:var(--head); font-weight:400; font-size:31px; line-height:1.13; margin:0 0 14px; letter-spacing:-.005em; }
+  h2 { font-family:var(--text); font-weight:400; font-size:29px; line-height:1.14; letter-spacing:-.012em; margin:0 0 16px; }
+  p { font-size:18px; line-height:1.55; margin:0 0 12px; }
+  .small { font-family:var(--sans); font-size:13px; line-height:1.45; color:var(--grey); margin:0; }
+  .reveal { padding:26px 0 24px; border-bottom:1px solid var(--ink); }
+  .reveal .verdict { font-family:var(--head); font-size:40px; line-height:1.05; margin:0 0 10px; }
+  .q { padding:26px 0 0; }
+  .opt { display:flex; align-items:center; width:100%; text-align:left; background:none; border:1px solid var(--ink); color:var(--ink);
+         padding:14px 16px; margin:0 0 10px; font-family:var(--sans); font-size:17px; line-height:22px; cursor:pointer; }
+  .opt b { font-family:var(--head); font-weight:400; font-size:20px; width:26px; display:inline-block; }
+  .photo { display:block; width:calc(100% + 44px); margin:0 -22px 18px; height:auto; }
+  .credit { font-family:var(--sans); font-size:12px; color:var(--grey); margin:-10px 0 16px; }
+  .slider { margin:12px 0 6px; }
+  .track { position:relative; height:44px; }
+  .track .line { position:absolute; left:0; right:0; top:21px; height:1px; background:var(--ink); }
+  .track .tick { position:absolute; top:15px; width:1px; height:13px; background:var(--ink); }
+  .track .thumb { position:absolute; top:8px; width:28px; height:28px; margin-left:-14px; border:1.5px solid var(--ink); background:var(--ground); }
+  .track .truth { position:absolute; top:4px; width:2px; height:36px; margin-left:-1px; background:var(--acc); }
+  .scale { display:flex; justify-content:space-between; font-family:var(--sans); font-size:12.5px; color:var(--grey); }
+  .est { display:flex; justify-content:space-between; align-items:baseline; border-top:1px solid var(--ink); border-bottom:1px solid var(--hair); padding:12px 0; margin-top:14px; font-family:var(--sans); font-size:15.5px; }
+  .est .v { font-family:var(--head); font-size:28px; }
+  .est + .est { border-top:0; }
+  .card { border-top:1px solid var(--ink); padding:18px 0 0; margin-top:22px; }
+  .primary { display:block; width:100%; background:var(--ink); color:var(--ground); border:0; padding:15px 18px; font-family:var(--sans); font-size:16px; font-weight:600; text-align:center; text-decoration:none; margin-top:14px; }
+  .secondary { display:block; width:100%; background:none; color:var(--ink); border:1px solid var(--ink); padding:14px 18px; font-family:var(--sans); font-size:16px; font-weight:600; text-align:center; text-decoration:none; margin-top:10px; }
+  select { width:100%; appearance:none; -webkit-appearance:none; background:transparent; border:0; border-bottom:1px solid var(--ink); color:var(--ink); font-family:var(--head); font-size:26px; padding:6px 28px 8px 0; border-radius:0;
+    background-image:linear-gradient(45deg, transparent 50%, var(--ink) 50%), linear-gradient(135deg, var(--ink) 50%, transparent 50%);
+    background-position:calc(100% - 12px) 20px, calc(100% - 6px) 20px; background-size:6px 6px; background-repeat:no-repeat; }
+  .grid { font-family:var(--sans); font-size:15px; display:flex; gap:5px; margin:8px 0 6px; }
+  .grid i { width:22px; height:22px; display:block; background:var(--ink); }
+  .grid i.miss { background:none; border:1.5px solid var(--ink); }
+  .levels { width:100%; border-collapse:collapse; font-family:var(--sans); font-size:15px; margin-top:6px; }
+  .levels td { padding:11px 0; border-top:1px solid var(--hair); }
+  .levels tr:first-child td { border-top:1px solid var(--ink); }
+  .levels td:last-child { text-align:right; color:var(--grey); }
+  .levels .on td { font-weight:600; }
+  .levels .on td:last-child { color:var(--ink); }
+  .switch { display:flex; gap:12px; align-items:flex-start; font-family:var(--sans); font-size:14px; line-height:1.4; color:var(--grey); margin-top:16px; }
+  .switch span.box { flex:0 0 38px; height:22px; border:1.5px solid var(--grey); position:relative; }
+  .switch span.box::after { content:""; position:absolute; left:3px; top:3px; width:13px; height:13px; background:var(--grey); }
+  .screen { display:none; }
+  .screen.on { display:block; }
+  .prov { font-family:var(--sans); font-size:11px; color:var(--grey); padding-top:8px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="mark">Maré</div>
+    <div class="meta">O jogo · Gondomar<br>Terça, 1 de dezembro</div>
+  </header>
+
+  <!-- Screen: the page the email tap opens: question 1 revealed, question 2 below. It records nothing on load. -->
+  <section class="screen" id="reveal">
+    <div class="run"><span id="r-run">1 de 3 · certa</span><span class="sq"><i class="ok" id="r-sq"></i><i class="now"></i><i></i></span></div>
+    <div class="reveal">
+      <div class="kick" id="r-kick">A sua resposta: cerca de 1 milhão</div>
+      <div class="verdict" id="r-verdict">Certa.</div>
+      <p>1&nbsp;004&nbsp;838 peças e 1&nbsp;631 kg de ouro, 5% menos do que em 2022. Em Gondomar, a Contrastaria fica no edifício Goldpark.</p>
+      <p class="small">Contrastaria (INCM), 2023 em números; Contrastaria, Apresentação.</p>
+    </div>
+    <div class="q">
+      <div class="kick">Pergunta 2 de 3</div>
+      <h2>A ponte de Edgar Cardoso em Foz do Sousa, Gondomar, de 1948, serviu de ensaio para que ponte do Porto?</h2>
+      <button class="opt" data-q="2" data-a="A"><b>A</b>Arrábida</button>
+      <button class="opt" data-q="2" data-a="B"><b>B</b>São João</button>
+      <button class="opt" data-q="2" data-a="C"><b>C</b>Infante</button>
+      <button class="opt" data-q="2" data-a="D"><b>D</b>Freixo</button>
+      <p class="small" style="margin-top:8px">Uma falha por jogo é perdoada: em troca, vem uma pergunta extra. A jogada só fica guardada a partir do primeiro toque nesta página.</p>
+    </div>
+  </section>
+
+  <!-- Screen: the extra question after a forgiven miss (the second tide): a number, estimated -->
+  <section class="screen" id="number">
+    <div class="run"><span>Pergunta extra · segunda maré</span><span class="sq"><i class="ok"></i><i class="miss"></i><i class="ok"></i><i class="now"></i></span></div>
+    <div class="q">
+      <div class="kick">A pergunta extra · o número</div>
+      <h2>Quanto custava o metro quadrado mediano de uma casa em Gondomar em&nbsp;2021?</h2>
+      <div class="slider">
+        <div class="track">
+          <div class="line"></div>
+          <div class="tick" style="left:0"></div><div class="tick" style="left:25%"></div><div class="tick" style="left:50%"></div><div class="tick" style="left:75%"></div><div class="tick" style="left:100%"></div>
+          <div class="truth" style="left:45.6%"></div>
+          <div class="thumb" style="left:50%"></div>
+        </div>
+        <div class="scale"><span>500 €</span><span>2&nbsp;000 €</span></div>
+      </div>
+      <div class="est"><span>A sua estimativa</span><span class="v">1&nbsp;250 €</span></div>
+      <div class="est"><span>O valor</span><span class="v">1&nbsp;184 €</span></div>
+      <div class="reveal" style="border-bottom:0;padding-top:22px">
+        <div class="verdict" style="font-size:36px">Certa, a 6%.</div>
+        <p>Dentro de 10% conta. Em 2026, o mesmo metro quadrado custa 2&nbsp;348 €.</p>
+        <p class="small">INE, preços da habitação ao nível local, 2.º trimestre de 2021 e de 2026 (medianas de todas as casas vendidas).</p>
+      </div>
+      <a class="primary" href="#">Ver o prémio</a>
+    </div>
+  </section>
+
+  <!-- Screen: the prize, unlocked the same day -->
+  <section class="screen" id="prize">
+    <div class="run"><span>Três certas · uma falha perdoada</span><span class="sq"><i class="ok"></i><i class="miss"></i><i class="ok"></i><i class="ok"></i></span></div>
+    <div class="reveal" style="padding-bottom:22px">
+      <div class="kick">Três seguidas</div>
+      <div class="verdict">O prémio desta terça está aberto.</div>
+      <p>A análise de um concelho à sua escolha: dez anos de preços, rendas e vizinhos, com as fontes. Fica sua durante 30 dias.</p>
+      <select aria-label="Concelho"><option>Gondomar</option><option>Porto</option><option>Matosinhos</option></select>
+      <a class="primary" href="#">Abrir a análise</a>
+    </div>
+    <div class="card" style="border-top:0">
+      <div class="kick">Partilhar sem revelar respostas</div>
+      <div class="grid"><i></i><i class="miss"></i><i></i><i></i></div>
+      <p class="small">Maré 01 · Gondomar · três certas, uma segunda maré</p>
+      <a class="secondary" href="#">Enviar a um amigo</a>
+    </div>
+    <div class="card">
+      <div class="kick">O seu nível</div>
+      <table class="levels">
+        <tr class="on"><td>Freguês</td><td>hoje</td></tr>
+        <tr><td>Habitué · a carta de domingo</td><td>4 Marés certas</td></tr>
+        <tr><td>Da casa · o guia do comprador</td><td>12 Marés certas</td></tr>
+      </table>
+      <label class="switch"><span class="box"></span><span>Usar as minhas respostas para escolher o que me mostram. Desligado; pode mudar quando quiser.</span></label>
+    </div>
+  </section>
+</div>
+<script>
+/* Scanner-safe: the page never writes on load. A write happens only on a trusted tap,
+   after the page has been visible for 1.5 s, with user activation. Here the write is mocked. */
+(function () {
+  var qs = new URLSearchParams(location.search);
+  var screen = qs.get('screen') || 'reveal';
+  var el = document.getElementById(screen) || document.getElementById('reveal');
+  el.classList.add('on');
+  var a1 = (qs.get('a1') || 'C').toUpperCase();
+  var opts = { A: 'cerca de 250 mil', B: 'cerca de 500 mil', C: 'cerca de 1 milhão', D: 'cerca de 2 milhões' };
+  if (screen === 'reveal' && opts[a1]) {
+    document.getElementById('r-kick').textContent = 'A sua resposta: ' + opts[a1];
+    if (a1 !== 'C') {
+      document.getElementById('r-verdict').textContent = 'Cerca de 1 milhão.';
+      document.getElementById('r-run').textContent = '1 de 3 · segunda maré usada';
+      document.getElementById('r-sq').className = 'miss';
+    }
+  }
+  var visibleAt = document.visibilityState === 'visible' ? performance.now() : Infinity;
+  document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'visible' && visibleAt === Infinity) visibleAt = performance.now(); });
+  document.querySelectorAll('.opt').forEach(function (b) {
+    b.addEventListener('click', function (e) {
+      var human = e.isTrusted && navigator.userActivation && navigator.userActivation.hasBeenActive && performance.now() - visibleAt > 1500;
+      if (!human) return;
+      /* fetch('/api/mare/answer', {method:'POST', body: JSON.stringify({issue:'2026-12-01', a1:a1, q:+b.dataset.q, a:b.dataset.a, s:qs.get('s')})}) */
+    });
+  });
+})();
+</script>
+</body>
+</html>
