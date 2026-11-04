@@ -9906,6 +9906,11 @@ Prompt 68 (4 Nov 2026), the method's worked example (content/METHOD.md): a place
 - EN: The sea? {v} km as the crow flies.
 - FR: La mer ? {v} km à vol d'oiseau.
 
+### q.sea.min
+- PT: O mar? {v} min.
+- EN: The sea? {v} min.
+- FR: La mer ? {v} min.
+
 ### q.health.cs
 - PT: Saúde? Um centro de saúde a {v} min.
 - EN: Health? A health center {v} min away.

@@ -1,6 +1,17 @@
 {
-  "_how": "Prompt 68 (operator, 4 Nov 2026: \"Also add the one in Vila do Conde\"): the arrival only. Vila do Conde has no golden-sample folder yet (no OSRM drive times, no school or health rows): its card keeps today's tiles (the price, the straight-line distances) behind the one-line answers. 'arrive' is the line under the name, from the Metro do Porto timetable (facts.csv metro-b-vila-do-conde); 'more' is the card's last line (facts.csv vdc-aqueduct, Câmara Municipal de Vila do Conde, checked 2026-11-04); 'camera' is the arrival flight, [lon, lat, zoom, bearing, pitch], up the coast from the Ave estuary to Marble Terrace Vila do Conde in Portas Fronhas. Read by scripts/map-data/place_cards.py.",
+  "_how": "Place card of Vila do Conde, built as the golden sample (Gondomar) and the Norte roll-out (operator, 4 Nov 2026: \"Why don't you have school or hospitals data?\"). Read by scripts/map-data/tiles.py with routes.csv, schools.csv and health.csv in this folder; SOURCES.md says how each figure was checked. The free card shows the rows marked card=1 and the chosen beach, city and airport; every row goes to the paid analysis. Prompt 68: 'arrive' is the line under the name (Metro do Porto timetable, facts.csv metro-b-vila-do-conde); 'more' is the card's last line (facts.csv vdc-aqueduct); 'camera' is the arrival flight, [lon, lat, zoom, bearing, pitch], up the coast from the Ave estuary to Marble Terrace Vila do Conde in Portas Fronhas. The photograph is the one the map already showed for Vila do Conde (site/src/data/place-photos.json; credits in content/media/SOURCES.md).",
   "slug": "vila-do-conde",
+  "origin": {
+    "name": "Câmara Municipal de Vila do Conde",
+    "lat": 41.354229,
+    "lon": -8.743352,
+    "source": "OpenStreetMap (Nominatim), amenity=townhall (way/75689015), Praça Vasco da Gama"
+  },
+  "line": {
+    "pt": "O mar e o Ave, a 41 minutos da Trindade de metro.",
+    "en": "The sea and the Ave, 41 minutes from Trindade by metro.",
+    "fr": "La mer et l'Ave, à 41 minutes de Trindade en métro."
+  },
   "arrive": {
     "fact": "metro-b-vila-do-conde",
     "pt": "O mar e o Ave, a 41 minutos da Trindade de metro.",
@@ -10,6 +21,70 @@
       "pt": "Metro: Metro do Porto, horários da linha B (setembro de 2026), Bx expresso",
       "en": "Metro: Metro do Porto, line B timetable (September 2026), Bx express",
       "fr": "Métro : Metro do Porto, horaires de la ligne B (septembre 2026), Bx express"
+    }
+  },
+  "photos": [
+    {
+      "f": "vila-do-conde-foz-do-ave-do-ar",
+      "w": 1600,
+      "alt": {
+        "pt": "A foz do Ave e Vila do Conde vistas do ar, o mar ao fundo",
+        "en": "The mouth of the Ave and Vila do Conde from the air, the sea beyond",
+        "fr": "L'embouchure de l'Ave et Vila do Conde vues du ciel, la mer au loin"
+      }
+    }
+  ],
+  "life": {
+    "beach": "apa-ptcf8v",
+    "city": "porto-avenida-dos-aliados",
+    "airport": "aeroporto-do-porto-opo-terminal"
+  },
+  "names": {
+    "apa-ptcf8v": "Praia de Vila do Conde",
+    "porto-avenida-dos-aliados": "Porto, Aliados",
+    "aeroporto-do-porto-opo-terminal": {
+      "pt": "Aeroporto do Porto",
+      "en": "Porto Airport",
+      "fr": "Aéroport de Porto"
+    }
+  },
+  "flights": {
+    "lu": {
+      "fact": "flight-lux-opo",
+      "from": "LUX",
+      "to": "OPO",
+      "min": 150
+    },
+    "fr": {
+      "fact": "flight-par-opo",
+      "from": "ORY",
+      "to": "OPO",
+      "min": 135
+    },
+    "ch": {
+      "fact": "flight-gva-opo",
+      "from": "GVA",
+      "to": "OPO",
+      "min": 150
+    },
+    "br": {
+      "fact": "flight-sao-opo",
+      "from": "GRU",
+      "to": "OPO",
+      "min": 600
+    },
+    "us": {
+      "fact": "flight-nyc-opo",
+      "from": "EWR",
+      "to": "OPO",
+      "min": 400
+    },
+    "il": {
+      "fact": "flight-tlv-lis",
+      "from": "TLV",
+      "to": "LIS",
+      "min": 370,
+      "via": "LIS"
     }
   },
   "more": {

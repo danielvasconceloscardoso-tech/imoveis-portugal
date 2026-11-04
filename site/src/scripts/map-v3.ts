@@ -631,7 +631,9 @@ export function initMapV3(root: HTMLElement) {
       return `<button type="button" class="m3-dev" data-dev="${esc(pr.id)}"><span class="m3-dev-f">${img ? `<img src="${esc(img)}-800.webp" alt="" width="800" height="450" decoding="async">` : ""}${pr.tag ? `<span class="m3-dev-t"><span class="m3-tag">${esc(pr.tag)}</span></span>` : ""}</span><span class="m3-dev-n">${esc(pr.name)}</span><span class="m3-dev-l">${esc(pr.hero ?? "")}</span></button>`; }).join("")}</div>`;
     // The next questions.
     const qs: [string, string, string][] = [];
-    const city = c5?.life?.find((z: any[]) => z[0] === "city");
+    const city = c5?.life?.find((z: any[]) => z[0] === "city"), sea = c5?.life?.find((z: any[]) => z[0] === "beach");
+    // The sea first where it is close (ten minutes or less by car, e.g. Vila do Conde): its own line, the beach behind it.
+    if (sea && sea[2] <= 10 && P8.q.seaMin) qs.push(["near", P8.q.seaMin.replace("{v}", nf.format(sea[2])), `<p class="m3-tt">${esc(C5.life)}<small>${esc(C5.bycar)}</small></p>${listHTML([[esc(typeof sea[1] === "string" ? sea[1] : sea[1][lang] ?? sea[1].pt), mins(sea[2])]])}`]);
     if (city) {
       const cn = (typeof city[1] === "string" ? city[1] : city[1][lang] ?? city[1].pt).split(",")[0].trim();
       const life: [string, string][] = c5.life.map(([, n, m]: [string, any, number]) => [esc(typeof n === "string" ? n : n[lang] ?? n.pt), mins(m)]);
@@ -641,8 +643,8 @@ export function initMapV3(root: HTMLElement) {
     // Without the golden sample's drive times (e.g. Vila do Conde), today's straight-line tiles sit behind one line.
     if (!c5 && d.bch != null && P8.q.sea) qs.push(["near", P8.q.sea.replace("{v}", nf1.format(d.bch)), kmTiles(d)]);
     if (c5?.sch?.length) {
-      // The count and the limit come from the card's rows (schools.csv, card=1): the next five minutes above the farthest.
-      const top = Math.max(...c5.sch.map((z: any[]) => z[1] as number)), lim = (Math.floor(top / 5) + 1) * 5;
+      // The count comes from the card's rows (schools.csv, card=1).
+      const lim = 20;  // every school in schools.csv is within 20 minutes by car (place_cards.py MAX_MIN); the card counts its rows
       qs.push(["schools", P8.q.schools.replace("{n}", nf.format(c5.sch.length)).replace("{m}", nf.format(lim)), `<p class="m3-tt">${esc(C5.schools)}<small>${esc(C5.within)}</small></p>${listHTML(c5.sch.map(([n, m]: [string, number]) => [esc(n), mins(m)]))}`]);
     }
     if (d.m2) {
