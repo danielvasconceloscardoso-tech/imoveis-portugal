@@ -13,12 +13,16 @@ interface Props { lang: Lang; ed: EdCode; where: "article" | "concierge" | "post
 const { lang, ed, where } = Astro.props;
 const i = latestIssue();
 const href = i ? `${pathFor(lang, ed, "mare")}?de=${where}&h=${i.id}` : "";
+// Prompt 70 (J-06, MI-09): Maré is written in Portuguese for now. On EN and FR pages the line names the issue only when the
+// issue carries a title in that language (front matter headline_en / headline_fr); otherwise it says what Maré is, never
+// a Portuguese title. The Maré page says once that the first issues are in Portuguese.
+const head = !i ? "" : lang === "pt" ? inline(i.headline) : ((i as unknown as Record<string, string | undefined>)[`headline_${lang}`] ?? "");
 ---
 {i && (
   <aside class:list={["mare-b", Astro.props.class]} aria-label={c("mare.block.label", lang)}>
     <a href={href} data-mare-block={where} data-mare-issue={i.id}>
       <span class="mare-b-k">{c("mare.block.label", lang)}</span>
-      <span class="mare-b-t">{c("mare.block", lang, { dia: c(dayKey(i), lang), headline: lang === "pt" ? inline(i.headline) : i.headline })}</span>
+      <span class="mare-b-t">{head ? c("mare.block", lang, { dia: c(dayKey(i), lang), headline: head }) : c("mare.block.plain", lang)}</span>
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
     </a>
   </aside>
