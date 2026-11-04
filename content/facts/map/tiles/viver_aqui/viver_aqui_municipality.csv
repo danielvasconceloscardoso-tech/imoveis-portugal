@@ -1,309 +1,309 @@
 muni_dico,muni_name,muni_slug,region,point_lat,point_lon,nearest_sst_stretch,sst_stretch_km,sst_aug_1991_2020,sst_annual_1991_2020,nearest_sea_bathing_water,km_straight_line_to_sea_bathing_water,nearest_pt_airport,km_straight_line_to_airport
-0101,Águeda,agueda,mainland,40.5853,-8.4115,Aveiro (Ovar–Ílhavo–Vagos),36.3,17.7,15.7,BICO,25.8,OPO,77.2
-0102,Albergaria-a-Velha,albergaria-a-velha,mainland,40.7269,-8.4632,Aveiro (Ovar–Ílhavo–Vagos),31.0,17.7,15.7,BICO,15.7,OPO,60.8
-0103,Anadia,anadia,mainland,40.4508,-8.4236,Aveiro (Ovar–Ílhavo–Vagos),42.1,17.7,15.7,AREÃO,31.3,OPO,91.3
-0104,Arouca,arouca,mainland,40.9237,-8.1929,Porto–Matosinhos–Gaia–Espinho,47.7,17.1,15.3,PARAMOS,38.8,OPO,54.6
-0105,Aveiro,aveiro,mainland,40.6481,-8.6213,Aveiro (Ovar–Ílhavo–Vagos),17.4,17.7,15.7,JARDIM DE OUDINOT,9.0,OPO,67.0
-0106,Castelo de Paiva,castelo-de-paiva,mainland,41.0159,-8.2887,Porto–Matosinhos–Gaia–Espinho,37.2,17.1,15.3,MARBELO,30.0,OPO,41.8
-0107,Espinho,espinho,mainland,40.9991,-8.6272,Porto–Matosinhos–Gaia–Espinho,11.8,17.1,15.3,ESPINHO-RUA 37,1.7,OPO,28.1
-0108,Estarreja,estarreja,mainland,40.7429,-8.5663,Aveiro (Ovar–Ílhavo–Vagos),23.1,17.7,15.7,BICO,7.2,OPO,57.1
-0109,Santa Maria da Feira,santa-maria-da-feira,mainland,40.9567,-8.5368,Porto–Matosinhos–Gaia–Espinho,20.6,17.1,15.3,PARAMOS,9.8,OPO,34.7
-0110,Ílhavo,ilhavo,mainland,40.6135,-8.7175,Aveiro (Ovar–Ílhavo–Vagos),11.4,17.7,15.7,COSTA NOVA,3.1,OPO,70.7
-0111,Mealhada,mealhada,mainland,40.36,-8.446,Figueira da Foz–Mira,45.6,17.6,15.8,BARRINHA DE MIRA,31.6,OPO,100.8
-0112,Murtosa,murtosa,mainland,40.7586,-8.6756,Aveiro (Ovar–Ílhavo–Vagos),15.7,17.7,15.7,MONTE BRANCO (RIA AVEIRO),2.2,OPO,54.5
-0113,Oliveira de Azeméis,oliveira-de-azemeis,mainland,40.8299,-8.475,Aveiro (Ovar–Ílhavo–Vagos),34.1,17.7,15.7,AREÍNHO (RIA AVEIRO),15.8,OPO,49.7
-0114,Oliveira do Bairro,oliveira-do-bairro,mainland,40.5241,-8.5437,Aveiro (Ovar–Ílhavo–Vagos),29.1,17.7,15.7,VAGUEIRA,19.6,OPO,81.4
-0115,Ovar,ovar,mainland,40.8666,-8.6293,Porto–Matosinhos–Gaia–Espinho,24.5,17.1,15.3,AREÍNHO (RIA AVEIRO),3.6,OPO,42.7
-0116,São João da Madeira,sao-joao-da-madeira,mainland,40.8953,-8.4904,Porto–Matosinhos–Gaia–Espinho,28.1,17.1,15.3,SANTA MARINHA - CORTEGAÇA SUL,14.7,OPO,42.4
-0117,Sever do Vouga,sever-do-vouga,mainland,40.7362,-8.3722,Aveiro (Ovar–Ílhavo–Vagos),38.8,17.7,15.7,BICO,23.4,OPO,62.6
-0118,Vagos,vagos,mainland,40.5104,-8.6807,Aveiro (Ovar–Ílhavo–Vagos),22.0,17.7,15.7,AREÃO,8.7,OPO,82.1
-0119,Vale de Cambra,vale-de-cambra,mainland,40.8357,-8.335,Porto–Matosinhos–Gaia–Espinho,42.2,17.1,15.3,AREÍNHO (RIA AVEIRO),27.5,OPO,54.3
-0201,Aljustrel,aljustrel,mainland,37.8924,-8.2124,Alentejo coast (Comporta–Sines),63.2,18.5,16.8,GRANDE DE PORTO COVO,51.2,FAO,99.5
-0202,Almodôvar,almodovar,mainland,37.4736,-8.0918,Algarve central (Albufeira–Loulé),50.0,21.0,17.9,BELHARUCAS,43.3,FAO,51.8
-0203,Alvito,alvito,mainland,38.2353,-8.0483,Setúbal–Tróia,79.3,19.1,16.9,GALÉ-FONTAÍNHAS,63.8,LIS,112.1
-0204,Barrancos,barrancos,mainland,38.1382,-7.0526,Algarve east (Tavira–Vila Real de Santo António),132.1,21.8,18.4,SANTO ANTÓNIO,112.1,FAO,148.7
-0205,Beja,beja,mainland,37.9704,-7.9045,Alentejo coast (Comporta–Sines),89.5,18.5,16.8,VIEIRINHA-VALE DE FIGUEIROS,78.9,FAO,106.1
-0206,Castro Verde,castro-verde,mainland,37.7137,-8.0455,Algarve central (Albufeira–Loulé),76.9,21.0,17.9,VILA NOVA DE MILFONTES-FURNAS RIO,64.8,FAO,77.7
-0207,Cuba,cuba,mainland,38.1752,-7.9007,Alentejo coast (Comporta–Sines),92.4,18.5,16.8,GALÉ-FONTAÍNHAS,76.7,LIS,126.6
-0208,Ferreira do Alentejo,ferreira-do-alentejo,mainland,38.0868,-8.1841,Alentejo coast (Comporta–Sines),66.1,18.5,16.8,ABERTA NOVA,53.2,LIS,113.0
-0209,Mértola,mertola,mainland,37.6357,-7.717,Algarve east (Tavira–Vila Real de Santo António),69.1,21.8,18.4,LOTA,55.3,FAO,72.4
-0210,Moura,moura,mainland,38.1661,-7.3334,Algarve east (Tavira–Vila Real de Santo António),128.7,21.8,18.4,MONTE GORDO,110.5,FAO,139.6
-0211,Odemira,odemira,mainland,37.5777,-8.6183,Costa Vicentina (Odemira–Aljezur),25.4,18.3,16.8,ZAMBUJEIRA DO MAR,16.1,FAO,84.4
-0212,Ourique,ourique,mainland,37.6492,-8.2508,Costa Vicentina (Odemira–Aljezur),58.3,18.3,16.8,VILA NOVA DE MILFONTES-FURNAS RIO,47.4,FAO,74.4
-0213,Serpa,serpa,mainland,37.9231,-7.4908,Algarve east (Tavira–Vila Real de Santo António),100.1,21.8,18.4,MONTE GORDO,83.0,FAO,109.4
-0214,Vidigueira,vidigueira,mainland,38.1741,-7.7616,Alentejo coast (Comporta–Sines),104.2,18.5,16.8,GALÉ-FONTAÍNHAS,88.9,FAO,130.0
-0301,Amares,amares,mainland,41.6502,-8.3574,Esposende–Póvoa de Varzim–Vila do Conde,47.3,16.5,15.1,MARINHAS-CEPÃES,37.8,OPO,52.1
-0302,Barcelos,barcelos,mainland,41.543,-8.6192,Esposende–Póvoa de Varzim–Vila do Conde,22.6,16.5,15.1,FÃO-OFIR,14.3,OPO,33.1
-0303,Braga,braga,mainland,41.545,-8.4405,Esposende–Póvoa de Varzim–Vila do Conde,37.0,16.5,15.1,APÚLIA,29.0,OPO,38.5
-0304,Cabeceiras de Basto,cabeceiras-de-basto,mainland,41.5327,-7.9731,Esposende–Póvoa de Varzim–Vila do Conde,75.4,16.5,15.1,RAMALHA,67.2,OPO,66.9
-0305,Celorico de Basto,celorico-de-basto,mainland,41.4009,-8.0426,Porto–Matosinhos–Gaia–Espinho,67.6,17.1,15.3,ÁRVORE,58.7,OPO,55.9
-0306,Esposende,esposende,mainland,41.5592,-8.7599,Esposende–Póvoa de Varzim–Vila do Conde,13.4,16.5,15.1,MARINHAS-CEPÃES,2.9,OPO,35.1
-0307,Fafe,fafe,mainland,41.4777,-8.1523,Esposende–Póvoa de Varzim–Vila do Conde,60.2,16.5,15.1,ÁRVORE,51.7,OPO,50.9
-0308,Guimarães,guimaraes,mainland,41.4685,-8.3285,Esposende–Póvoa de Varzim–Vila do Conde,45.5,16.5,15.1,RAMALHA,37.3,OPO,38.2
-0309,Póvoa de Lanhoso,povoa-de-lanhoso,mainland,41.5857,-8.2595,Esposende–Póvoa de Varzim–Vila do Conde,52.7,16.5,15.1,MARINHAS-CEPÃES,44.6,OPO,51.3
-0310,Terras de Bouro,terras-de-bouro,mainland,41.7438,-8.1827,Minho (Caminha–Viana do Castelo),61.6,16.1,14.9,RODANHO,54.1,OPO,68.9
-0311,Vieira do Minho,vieira-do-minho,mainland,41.6268,-8.0999,Esposende–Póvoa de Varzim–Vila do Conde,66.7,16.5,15.1,MARINHAS-CEPÃES,58.3,OPO,64.1
-0312,Vila Nova de Famalicão,vila-nova-de-famalicao,mainland,41.4231,-8.4972,Esposende–Póvoa de Varzim–Vila do Conde,32.0,16.5,15.1,ÁRVORE,22.7,OPO,24.7
-0313,Vila Verde,vila-verde,mainland,41.6716,-8.4663,Minho (Caminha–Viana do Castelo),38.5,16.1,14.9,CASTELO DE NEIVA,29.6,OPO,50.3
-0314,Vizela,vizela,mainland,41.3645,-8.2986,Porto–Matosinhos–Gaia–Espinho,48.0,17.1,15.3,ÁRVORE,37.0,OPO,34.4
-0401,Alfândega da Fé,alfandega-da-fe,mainland,41.3342,-6.9586,Porto–Matosinhos–Gaia–Espinho,150.6,17.1,15.3,VALADARES SUL,144.7,OPO,144.2
-0402,Bragança,braganca,mainland,41.7877,-6.7305,Esposende–Póvoa de Varzim–Vila do Conde,181.6,16.5,15.1,MARINHAS-CEPÃES,173.3,OPO,173.0
-0403,Carrazeda de Ansiães,carrazeda-de-ansiaes,mainland,41.2226,-7.3159,Porto–Matosinhos–Gaia–Espinho,119.1,17.1,15.3,VALADARES SUL,113.3,OPO,114.1
-0404,Freixo de Espada à Cinta,freixo-de-espada-a-cinta,mainland,41.0754,-6.8453,Porto–Matosinhos–Gaia–Espinho,157.6,17.1,15.3,MARBELO,151.1,OPO,154.8
-0405,Macedo de Cavaleiros,macedo-de-cavaleiros,mainland,41.5051,-6.8416,Porto–Matosinhos–Gaia–Espinho,164.5,17.1,15.3,LAVADORES,158.2,OPO,156.0
-0406,Miranda do Douro,miranda-do-douro,mainland,41.573,-6.3058,Porto–Matosinhos–Gaia–Espinho,209.5,17.1,15.3,LAVADORES,203.3,OPO,201.3
-0407,Mirandela,mirandela,mainland,41.489,-7.1525,Porto–Matosinhos–Gaia–Espinho,139.2,17.1,15.3,FOZ,132.8,OPO,130.3
-0408,Mogadouro,mogadouro,mainland,41.352,-6.6362,Porto–Matosinhos–Gaia–Espinho,177.4,17.1,15.3,VALADARES SUL,171.5,OPO,171.1
-0409,Torre de Moncorvo,torre-de-moncorvo,mainland,41.1811,-7.0209,Porto–Matosinhos–Gaia–Espinho,143.2,17.1,15.3,S. FÉLIX DA MARINHA,137.2,OPO,139.0
-0410,Vila Flor,vila-flor,mainland,41.3151,-7.181,Porto–Matosinhos–Gaia–Espinho,131.9,17.1,15.3,CANIDE NORTE,126.0,OPO,125.5
-0411,Vimioso,vimioso,mainland,41.5658,-6.5699,Porto–Matosinhos–Gaia–Espinho,188.1,17.1,15.3,LAVADORES,181.8,OPO,179.5
-0412,Vinhais,vinhais,mainland,41.8323,-7.0717,Minho (Caminha–Viana do Castelo),154.1,16.1,14.9,PEDRAS RUIVAS,145.4,OPO,148.8
-0501,Belmonte,belmonte,mainland,40.3397,-7.3248,Aveiro (Ovar–Ílhavo–Vagos),132.2,17.7,15.7,BICO,120.1,OPO,152.5
-0502,Castelo Branco,castelo-branco,mainland,39.8649,-7.4808,Figueira da Foz–Mira,127.7,17.6,15.8,COVA-GALA,121.4,OPO,184.3
-0503,Covilhã,covilha,mainland,40.2923,-7.461,Aveiro (Ovar–Ílhavo–Vagos),123.0,17.7,15.7,BICO,111.7,OPO,147.8
-0504,Fundão,fundao,mainland,40.1195,-7.4142,Figueira da Foz–Mira,128.6,17.6,15.8,BARRINHA DE MIRA,123.2,OPO,164.8
-0505,Idanha-a-Nova,idanha-a-nova,mainland,39.9187,-7.0943,Figueira da Foz–Mira,158.4,17.6,15.8,COVA-GALA,152.4,OPO,199.5
-0506,Oleiros,oleiros,mainland,39.9644,-7.8385,Figueira da Foz–Mira,95.4,17.6,15.8,COVA-GALA,89.1,OPO,159.5
-0507,Penamacor,penamacor,mainland,40.1839,-7.1227,Figueira da Foz–Mira,153.1,17.6,15.8,BICO,142.8,OPO,176.8
-0508,Proença-a-Nova,proenca-a-nova,mainland,39.7361,-7.8579,Figueira da Foz–Mira,103.2,17.6,15.8,OSSO DA BALEIA,94.9,LIS,152.7
-0509,Sertã,serta,mainland,39.8253,-8.0846,Figueira da Foz–Mira,81.5,17.6,15.8,OSSO DA BALEIA,73.4,LIS,147.0
-0510,Vila de Rei,vila-de-rei,mainland,39.6878,-8.1639,Leiria coast (Marinha Grande–Nazaré),82.3,17.8,16.1,PEDRÓGÃO SUL,72.1,LIS,130.8
-0511,Vila Velha de Ródão,vila-velha-de-rodao,mainland,39.6996,-7.6411,Figueira da Foz–Mira,121.6,17.6,15.8,OSSO DA BALEIA,113.8,LIS,164.1
-0601,Arganil,arganil,mainland,40.226,-7.9509,Figueira da Foz–Mira,82.9,17.6,15.8,BARRINHA DE MIRA,76.2,OPO,129.3
-0602,Cantanhede,cantanhede,mainland,40.3647,-8.623,Figueira da Foz–Mira,33.2,17.6,15.8,PALHEIRÃO,17.4,OPO,98.4
-0603,Coimbra,coimbra,mainland,40.2113,-8.4316,Figueira da Foz–Mira,42.1,17.6,15.8,TOCHA,37.5,OPO,117.3
-0604,Condeixa-a-Nova,condeixa-a-nova,mainland,40.0876,-8.5084,Figueira da Foz–Mira,36.7,17.6,15.8,COVA-GALA,30.5,OPO,129.9
-0605,Figueira da Foz,figueira-da-foz,mainland,40.2078,-8.8058,Figueira da Foz–Mira,10.8,17.6,15.8,QUIAIOS,7.6,OPO,116.3
-0606,Góis,gois,mainland,40.1201,-8.106,Figueira da Foz–Mira,69.9,17.6,15.8,CABEDELO SUL,64.4,OPO,134.5
-0607,Lousã,lousa,mainland,40.1251,-8.2277,Figueira da Foz–Mira,59.5,17.6,15.8,CABEDELO SUL,54.0,OPO,130.7
-0608,Mira,mira,mainland,40.4305,-8.755,Aveiro (Ovar–Ílhavo–Vagos),27.8,17.7,15.7,BARRINHA DE MIRA,4.4,OPO,91.2
-0609,Miranda do Corvo,miranda-do-corvo,mainland,40.0865,-8.3371,Figueira da Foz–Mira,50.9,17.6,15.8,COVA-GALA,45.0,OPO,132.5
-0610,Montemor-o-Velho,montemor-o-velho,mainland,40.2338,-8.6586,Figueira da Foz–Mira,23.5,17.6,15.8,TOCHA,19.1,OPO,112.9
-0611,Oliveira do Hospital,oliveira-do-hospital,mainland,40.3276,-7.8522,Aveiro (Ovar–Ílhavo–Vagos),90.9,17.7,15.7,BICO,80.9,OPO,123.9
-0612,Pampilhosa da Serra,pampilhosa-da-serra,mainland,40.1235,-7.8712,Figueira da Foz–Mira,89.7,17.6,15.8,CABEDELO SUL,84.3,OPO,142.5
-0613,Penacova,penacova,mainland,40.2958,-8.3094,Figueira da Foz–Mira,54.0,17.6,15.8,BARRINHA DE MIRA,45.0,OPO,110.5
-0614,Penela,penela,mainland,40.0029,-8.358,Figueira da Foz–Mira,51.9,17.6,15.8,COSTA DE LAVOS,45.2,OPO,141.2
-0615,Soure,soure,mainland,40.0708,-8.6381,Figueira da Foz–Mira,27.0,17.6,15.8,COVA-GALA,20.2,OPO,131.1
-0616,Tábua,tabua,mainland,40.3186,-8.0431,Figueira da Foz–Mira,76.5,17.6,15.8,BARRINHA DE MIRA,65.8,OPO,116.5
-0617,Vila Nova de Poiares,vila-nova-de-poiares,mainland,40.2195,-8.2285,Figueira da Foz–Mira,59.4,17.6,15.8,TOCHA,53.8,OPO,120.6
-0701,Alandroal,alandroal,mainland,38.6091,-7.3767,Setúbal–Tróia,136.2,19.1,16.9,COMPORTA,126.8,LIS,153.5
-0702,Arraiolos,arraiolos,mainland,38.7791,-7.9164,Setúbal–Tróia,96.1,19.1,16.9,COMPORTA,89.0,LIS,105.4
-0703,Borba,borba,mainland,38.7731,-7.498,Setúbal–Tróia,129.9,19.1,16.9,COMPORTA,121.6,LIS,141.6
-0704,Estremoz,estremoz,mainland,38.8426,-7.5978,Setúbal–Tróia,124.3,19.1,16.9,COMPORTA,116.7,LIS,133.1
-0705,Évora,evora,mainland,38.5091,-7.8532,Setúbal–Tróia,93.8,19.1,16.9,CARVALHAL,84.0,LIS,115.1
-0706,Montemor-o-Novo,montemor-o-novo,mainland,38.693,-8.2594,Setúbal–Tróia,65.1,19.1,16.9,COMPORTA,58.7,LIS,76.3
-0707,Mora,mora,mainland,38.9406,-8.1624,Setúbal–Tróia,87.6,19.1,16.9,ALBARQUEL,80.9,LIS,85.8
-0708,Mourão,mourao,mainland,38.3772,-7.3231,Setúbal–Tróia,139.7,19.1,16.9,PEGO,127.4,FAO,161.7
-0709,Portel,portel,mainland,38.3079,-7.6799,Setúbal–Tróia,109.3,19.1,16.9,PEGO,95.9,LIS,136.8
-0710,Redondo,redondo,mainland,38.6536,-7.5997,Setúbal–Tróia,118.0,19.1,16.9,COMPORTA,109.1,LIS,133.7
-0711,Reguengos de Monsaraz,reguengos-de-monsaraz,mainland,38.4159,-7.4905,Setúbal–Tróia,125.0,19.1,16.9,CARVALHAL,113.2,LIS,148.3
-0712,Vendas Novas,vendas-novas,mainland,38.6867,-8.4647,Setúbal–Tróia,49.5,19.1,16.9,ATLÂNTICA,43.3,LIS,58.8
-0713,Viana do Alentejo,viana-do-alentejo,mainland,38.3995,-8.1665,Setúbal–Tróia,66.1,19.1,16.9,CARVALHAL,54.6,LIS,94.0
-0714,Vila Viçosa,vila-vicosa,mainland,38.7562,-7.4097,Setúbal–Tróia,136.7,19.1,16.9,COMPORTA,128.2,LIS,149.3
-0801,Albufeira,albufeira,mainland,37.1707,-8.2069,Algarve central (Albufeira–Loulé),17.8,21.0,17.9,MARIA LUÍSA,9.1,FAO,26.8
-0802,Alcoutim,alcoutim,mainland,37.4158,-7.6876,Algarve east (Tavira–Vila Real de Santo António),44.6,21.8,18.4,LOTA,31.8,FAO,51.0
-0803,Aljezur,aljezur,mainland,37.2928,-8.8042,Costa Vicentina (Odemira–Aljezur),21.2,18.3,16.8,ARRIFANA,5.5,FAO,79.7
-0804,Castro Marim,castro-marim,mainland,37.3225,-7.5506,Algarve east (Tavira–Vila Real de Santo António),33.2,21.8,18.4,ALAGOA-ALTURA,17.7,FAO,50.6
-0805,Faro,faro,mainland,37.0286,-7.9352,Faro–Olhão (Ria Formosa),8.0,21.4,18.3,FARO-MAR,5.9,FAO,3.7
-0806,Lagoa,lagoa,mainland,37.1313,-8.4802,Algarve west (Lagos–Portimão),14.5,20.2,17.6,CARVOEIRO,4.0,FAO,46.7
-0807,Lagos,lagos,mainland,37.154,-8.728,Algarve west (Lagos–Portimão),19.7,20.2,17.6,LUZ,7.5,FAO,68.6
-0808,Loulé,loule,mainland,37.2199,-8.0623,Algarve central (Albufeira–Loulé),22.4,21.0,17.9,VILAMOURA,17.2,FAO,23.8
-0809,Monchique,monchique,mainland,37.3174,-8.5391,Algarve west (Lagos–Portimão),32.7,20.2,17.6,VAU,22.1,FAO,60.2
-0810,Olhão,olhao,mainland,37.0685,-7.7924,Faro–Olhão (Ria Formosa),12.7,21.4,18.3,CAVACOS,3.4,FAO,17.1
-0811,Portimão,portimao,mainland,37.1887,-8.5795,Algarve west (Lagos–Portimão),18.2,20.2,17.6,ALVOR-POENTE,7.6,FAO,57.0
-0812,São Brás de Alportel,sao-bras-de-alportel,mainland,37.1744,-7.8882,Faro–Olhão (Ria Formosa),22.2,21.4,18.3,CAVACOS,17.4,FAO,19.0
-0813,Silves,silves,mainland,37.2892,-8.3254,Algarve central (Albufeira–Loulé),34.3,21.0,17.9,ARMAÇÃO DE PÊRA,21.2,FAO,43.4
-0814,Tavira,tavira,mainland,37.1828,-7.6825,Algarve east (Tavira–Vila Real de Santo António),20.0,21.8,18.4,ILHA DE TAVIRA-MAR,9.8,FAO,31.7
-0815,Vila do Bispo,vila-do-bispo,mainland,37.0979,-8.8838,Sagres–Vila do Bispo,14.1,18.9,17.2,CORDOAMA,5.0,FAO,81.2
-0816,Vila Real de Santo António,vila-real-de-santo-antonio,mainland,37.1789,-7.5473,Algarve east (Tavira–Vila Real de Santo António),17.3,21.8,18.4,MANTA ROTA,3.2,FAO,41.9
-0901,Aguiar da Beira,aguiar-da-beira,mainland,40.7955,-7.5291,Porto–Matosinhos–Gaia–Espinho,105.2,17.1,15.3,BICO,94.7,OPO,108.9
-0902,Almeida,almeida,mainland,40.6564,-6.9109,Porto–Matosinhos–Gaia–Espinho,159.5,17.1,15.3,BICO,146.8,OPO,162.5
-0903,Celorico da Beira,celorico-da-beira,mainland,40.6192,-7.3843,Aveiro (Ovar–Ílhavo–Vagos),121.7,17.7,15.7,BICO,107.4,OPO,129.4
-0904,Figueira de Castelo Rodrigo,figueira-de-castelo-rodrigo,mainland,40.8887,-6.9524,Porto–Matosinhos–Gaia–Espinho,150.2,17.1,15.3,SILVALDE,142.8,OPO,150.3
-0905,Fornos de Algodres,fornos-de-algodres,mainland,40.6586,-7.5022,Aveiro (Ovar–Ílhavo–Vagos),111.6,17.7,15.7,BICO,97.1,OPO,118.7
-0906,Gouveia,gouveia,mainland,40.4965,-7.5822,Aveiro (Ovar–Ílhavo–Vagos),106.8,17.7,15.7,BICO,93.8,OPO,124.6
-0907,Guarda,guarda,mainland,40.5247,-7.2492,Aveiro (Ovar–Ílhavo–Vagos),134.1,17.7,15.7,BICO,120.4,OPO,144.8
-0908,Manteigas,manteigas,mainland,40.3599,-7.5545,Aveiro (Ovar–Ílhavo–Vagos),113.0,17.7,15.7,BICO,101.3,OPO,136.9
-0909,Mêda,meda,mainland,40.9332,-7.2577,Porto–Matosinhos–Gaia–Espinho,124.1,17.1,15.3,SILVALDE,116.9,OPO,124.3
-0910,Pinhel,pinhel,mainland,40.7322,-7.0969,Porto–Matosinhos–Gaia–Espinho,142.0,17.1,15.3,BICO,130.9,OPO,144.8
-0911,Sabugal,sabugal,mainland,40.3808,-6.9458,Aveiro (Ovar–Ílhavo–Vagos),162.2,17.7,15.7,BICO,149.1,OPO,175.0
-0912,Seia,seia,mainland,40.3624,-7.6841,Aveiro (Ovar–Ílhavo–Vagos),102.5,17.7,15.7,BICO,91.3,OPO,129.4
-0913,Trancoso,trancoso,mainland,40.7868,-7.3201,Porto–Matosinhos–Gaia–Espinho,122.3,17.1,15.3,BICO,112.2,OPO,125.2
-0914,Vila Nova de Foz Côa,vila-nova-de-foz-coa,mainland,41.0785,-7.2635,Porto–Matosinhos–Gaia–Espinho,122.5,17.1,15.3,MARBELO,116.0,OPO,120.1
-1001,Alcobaça,alcobaca,mainland,39.5172,-8.9618,Leiria coast (Marinha Grande–Nazaré),22.4,17.8,16.1,SALGADO,13.3,LIS,83.2
-1002,Alvaiázere,alvaiazere,mainland,39.8103,-8.3868,Figueira da Foz–Mira,61.2,17.6,15.8,OSSO DA BALEIA,49.8,LIS,131.2
-1003,Ansião,ansiao,mainland,39.9451,-8.4583,Figueira da Foz–Mira,47.2,17.6,15.8,LEIROSA,39.0,LIS,141.8
-1004,Batalha,batalha,mainland,39.6414,-8.74,Leiria coast (Marinha Grande–Nazaré),33.2,17.8,16.1,PAREDES DE VITÓRIA,27.5,LIS,101.5
-1005,Bombarral,bombarral,mainland,39.2809,-9.1559,Oeste (Peniche–Lourinhã–Torres Vedras),24.0,17.6,16.0,AREIA BRANCA-FOZ,15.6,LIS,55.6
-1006,Caldas da Rainha,caldas-da-rainha,mainland,39.4174,-9.0646,Leiria coast (Marinha Grande–Nazaré),29.1,17.8,16.1,S. MARTINHO DO PORTO,12.0,LIS,71.0
-1007,Castanheira de Pêra,castanheira-de-pera,mainland,40.0111,-8.2033,Figueira da Foz–Mira,64.0,17.6,15.8,COVA-GALA,57.7,OPO,143.4
-1008,Figueiró dos Vinhos,figueiro-dos-vinhos,mainland,39.9356,-8.3051,Figueira da Foz–Mira,59.1,17.6,15.8,COSTA DE LAVOS,51.6,LIS,146.7
-1009,Leiria,leiria,mainland,39.7729,-8.7809,Leiria coast (Marinha Grande–Nazaré),31.4,17.8,16.1,VIEIRA,20.0,LIS,114.4
-1010,Marinha Grande,marinha-grande,mainland,39.7809,-8.9611,Leiria coast (Marinha Grande–Nazaré),18.3,17.8,16.1,PRAIA VELHA,5.8,LIS,112.2
-1011,Nazaré,nazare,mainland,39.6065,-9.0397,Leiria coast (Marinha Grande–Nazaré),10.6,17.8,16.1,NAZARÉ,3.1,LIS,92.1
-1012,Óbidos,obidos,mainland,39.3616,-9.2291,Oeste (Peniche–Lourinhã–Torres Vedras),22.7,17.6,16.0,VALE DE JANELAS,6.0,LIS,65.1
-1013,Pedrógão Grande,pedrogao-grande,mainland,39.9252,-8.1767,Figueira da Foz–Mira,69.5,17.6,15.8,COSTA DE LAVOS,62.4,LIS,151.4
-1014,Peniche,peniche,mainland,39.3349,-9.3114,Oeste (Peniche–Lourinhã–Torres Vedras),15.7,17.6,16.0,S. BERNARDINO,4.0,LIS,63.5
-1015,Pombal,pombal,mainland,39.9013,-8.6208,Figueira da Foz–Mira,40.0,17.6,15.8,OSSO DA BALEIA,27.4,LIS,132.1
-1016,Porto de Mós,porto-de-mos,mainland,39.5593,-8.8018,Leiria coast (Marinha Grande–Nazaré),30.5,17.8,16.1,NAZARÉ,23.9,LIS,91.1
-1101,Alenquer,alenquer,mainland,39.0995,-9.0327,Oeste (Peniche–Lourinhã–Torres Vedras),36.6,17.6,16.0,PORTO NOVO,29.3,LIS,36.4
-1102,Arruda dos Vinhos,arruda-dos-vinhos,mainland,38.9886,-9.0623,Oeste (Peniche–Lourinhã–Torres Vedras),40.9,17.6,16.0,BALEIA OU DO SUL,30.8,LIS,23.9
-1103,Azambuja,azambuja,mainland,39.0792,-8.8767,Oeste (Peniche–Lourinhã–Torres Vedras),50.0,17.6,16.0,VALMITÃO,42.8,LIS,39.8
-1104,Cadaval,cadaval,mainland,39.239,-9.057,Oeste (Peniche–Lourinhã–Torres Vedras),31.7,17.6,16.0,AREIA BRANCA-FOZ,24.2,LIS,51.3
-1105,Cascais,cascais,mainland,38.7294,-9.4378,Lisbon–Cascais (estuary mouth),11.5,18.0,16.3,GUINCHO,3.2,LIS,27.1
-1106,Lisboa,lisboa,mainland,38.7463,-9.1514,Lisbon–Cascais (estuary mouth),17.0,18.0,16.3,CAXIAS,11.9,LIS,4.2
-1107,Loures,loures,mainland,38.8606,-9.1657,Lisbon–Cascais (estuary mouth),24.8,18.0,16.3,CAXIAS,20.4,LIS,9.3
-1108,Lourinhã,lourinha,mainland,39.2598,-9.2555,Oeste (Peniche–Lourinhã–Torres Vedras),15.1,17.6,16.0,AREIA BRANCA-FOZ,7.0,LIS,54.3
-1109,Mafra,mafra,mainland,38.9458,-9.3135,Lisbon–Cascais (estuary mouth),30.1,18.0,16.3,FOZ DO LIZANDRO-RIO,8.7,LIS,24.1
-1110,Oeiras,oeiras,mainland,38.7227,-9.288,Lisbon–Cascais (estuary mouth),6.2,18.0,16.3,CAXIAS,3.0,LIS,15.0
-1111,Sintra,sintra,mainland,38.8279,-9.3879,Lisbon–Cascais (estuary mouth),17.9,18.0,16.3,AZENHAS DO MAR,6.6,LIS,22.8
-1112,Sobral de Monte Agraço,sobral-de-monte-agraco,mainland,39.0108,-9.1396,Oeste (Peniche–Lourinhã–Torres Vedras),34.3,17.6,16.0,RIBEIRA DE ILHAS,24.3,LIS,25.6
-1113,Torres Vedras,torres-vedras,mainland,39.1055,-9.2508,Oeste (Peniche–Lourinhã–Torres Vedras),20.1,17.6,16.0,AMANHÃ (SANTA CRUZ),11.6,LIS,37.5
-1114,Vila Franca de Xira,vila-franca-de-xira,mainland,38.92,-8.9746,Lisbon–Cascais (estuary mouth),40.8,18.0,16.3,CAXIAS,35.8,LIS,20.6
-1115,Amadora,amadora,mainland,38.7607,-9.228,Lisbon–Cascais (estuary mouth),12.7,18.0,16.3,CAXIAS,8.0,LIS,8.6
-1116,Odivelas,odivelas,mainland,38.7925,-9.1984,Lisbon–Cascais (estuary mouth),17.1,18.0,16.3,CAXIAS,12.4,LIS,5.9
-1201,Alter do Chão,alter-do-chao,mainland,39.2081,-7.7407,Leiria coast (Marinha Grande–Nazaré),129.7,17.8,16.1,NAZARÉ,122.7,LIS,129.3
-1202,Arronches,arronches,mainland,39.1279,-7.2513,Setúbal–Tróia,164.8,19.1,16.9,COMPORTA,158.2,LIS,167.1
-1203,Avis,avis,mainland,39.0948,-7.8772,Setúbal–Tróia,117.5,19.1,16.9,ALBARQUEL,110.9,LIS,114.0
-1204,Campo Maior,campo-maior,mainland,39.0296,-7.0395,Setúbal–Tróia,176.8,19.1,16.9,COMPORTA,169.3,LIS,183.1
-1205,Castelo de Vide,castelo-de-vide,mainland,39.4579,-7.4996,Leiria coast (Marinha Grande–Nazaré),141.4,17.8,16.1,VIEIRA,134.4,LIS,159.7
-1206,Crato,crato,mainland,39.2987,-7.607,Leiria coast (Marinha Grande–Nazaré),136.8,17.8,16.1,NAZARÉ,130.5,LIS,143.7
-1207,Elvas,elvas,mainland,38.9487,-7.2515,Setúbal–Tróia,156.5,19.1,16.9,COMPORTA,148.9,LIS,163.9
-1208,Fronteira,fronteira,mainland,39.0778,-7.6107,Setúbal–Tróia,135.1,19.1,16.9,ATLÂNTICA,128.9,LIS,135.7
-1209,Gavião,gaviao,mainland,39.4074,-7.8761,Leiria coast (Marinha Grande–Nazaré),111.1,17.8,16.1,NAZARÉ,105.1,LIS,128.8
-1210,Marvão,marvao,mainland,39.4226,-7.3564,Leiria coast (Marinha Grande–Nazaré),154.2,17.8,16.1,VIEIRA,147.3,LIS,169.0
-1211,Monforte,monforte,mainland,39.0469,-7.4343,Setúbal–Tróia,146.6,19.1,16.9,COMPORTA,140.0,LIS,149.8
-1212,Nisa,nisa,mainland,39.526,-7.6668,Leiria coast (Marinha Grande–Nazaré),126.0,17.8,16.1,VIEIRA,118.3,LIS,151.1
-1213,Ponte de Sor,ponte-de-sor,mainland,39.1074,-8.1886,Setúbal–Tróia,99.2,19.1,16.9,ALBARQUEL,91.5,LIS,89.3
-1214,Portalegre,portalegre,mainland,39.2559,-7.432,Leiria coast (Marinha Grande–Nazaré),152.6,17.8,16.1,NAZARÉ,146.3,LIS,156.1
-1215,Sousel,sousel,mainland,38.9503,-7.8356,Setúbal–Tróia,111.1,19.1,16.9,ATLÂNTICA,104.9,LIS,113.8
-1301,Amarante,amarante,mainland,41.2609,-8.0287,Porto–Matosinhos–Gaia–Espinho,61.8,17.1,15.3,LAVADORES,55.5,OPO,54.5
-1302,Baião,baiao,mainland,41.1571,-8.0021,Porto–Matosinhos–Gaia–Espinho,61.2,17.1,15.3,VALADARES SUL,55.4,OPO,57.6
-1303,Felgueiras,felgueiras,mainland,41.3542,-8.1962,Porto–Matosinhos–Gaia–Espinho,54.0,17.1,15.3,LABRUGE,45.3,OPO,42.1
-1304,Gondomar,gondomar,mainland,41.1065,-8.4957,Porto–Matosinhos–Gaia–Espinho,19.5,17.1,15.3,VALADARES SUL,13.7,OPO,22.1
-1305,Lousada,lousada,mainland,41.2806,-8.29,Porto–Matosinhos–Gaia–Espinho,43.0,17.1,15.3,FOZ,35.5,OPO,32.8
-1306,Maia,maia,mainland,41.2529,-8.6116,Porto–Matosinhos–Gaia–Espinho,21.9,17.1,15.3,CABO DO MUNDO,9.3,OPO,5.8
-1307,Marco de Canaveses,marco-de-canaveses,mainland,41.1705,-8.1445,Porto–Matosinhos–Gaia–Espinho,49.8,17.1,15.3,VALADARES SUL,43.9,OPO,45.7
-1308,Matosinhos,matosinhos,mainland,41.2004,-8.6822,Porto–Matosinhos–Gaia–Espinho,14.4,17.1,15.3,LEÇA DA PALMEIRA,2.3,OPO,5.4
-1309,Paços de Ferreira,pacos-de-ferreira,mainland,41.293,-8.369,Porto–Matosinhos–Gaia–Espinho,38.4,17.1,15.3,FUNTÃO,30.0,OPO,26.5
-1310,Paredes,paredes,mainland,41.1969,-8.4,Porto–Matosinhos–Gaia–Espinho,30.4,17.1,15.3,LAVADORES,23.7,OPO,24.1
-1311,Penafiel,penafiel,mainland,41.1519,-8.2886,Porto–Matosinhos–Gaia–Espinho,37.5,17.1,15.3,VALADARES SUL,31.7,OPO,34.5
-1312,Porto,porto,mainland,41.1632,-8.6075,Porto–Matosinhos–Gaia–Espinho,13.9,17.1,15.3,FOZ,6.0,OPO,11.3
-1313,Póvoa de Varzim,povoa-de-varzim,mainland,41.4237,-8.7495,Esposende–Póvoa de Varzim–Vila do Conde,11.9,16.5,15.1,PAIMÓ,3.0,OPO,20.3
-1314,Santo Tirso,santo-tirso,mainland,41.3255,-8.4642,Porto–Matosinhos–Gaia–Espinho,35.4,17.1,15.3,VILA CHÃ,22.8,OPO,20.0
-1315,Valongo,valongo,mainland,41.2069,-8.487,Porto–Matosinhos–Gaia–Espinho,24.7,17.1,15.3,FOZ,17.1,OPO,16.8
-1316,Vila do Conde,vila-do-conde,mainland,41.3273,-8.6867,Esposende–Póvoa de Varzim–Vila do Conde,22.7,16.5,15.1,ÁRVORE,4.5,OPO,8.7
-1317,Vila Nova de Gaia,vila-nova-de-gaia,mainland,41.081,-8.6021,Porto–Matosinhos–Gaia–Espinho,10.3,17.1,15.3,DUNAS MAR,4.6,OPO,19.8
-1318,Trofa,trofa,mainland,41.3086,-8.5643,Porto–Matosinhos–Gaia–Espinho,29.2,17.1,15.3,LABRUGE,14.2,OPO,11.7
-1401,Abrantes,abrantes,mainland,39.3928,-8.1361,Leiria coast (Marinha Grande–Nazaré),90.4,17.8,16.1,NAZARÉ,83.9,LIS,109.6
-1402,Alcanena,alcanena,mainland,39.4614,-8.6764,Leiria coast (Marinha Grande–Nazaré),45.2,17.8,16.1,NAZARÉ,37.6,LIS,85.3
-1403,Almeirim,almeirim,mainland,39.1755,-8.6361,Oeste (Peniche–Lourinhã–Torres Vedras),68.2,17.6,16.0,S. MARTINHO DO PORTO,56.8,LIS,61.3
-1404,Alpiarça,alpiarca,mainland,39.251,-8.5843,Leiria coast (Marinha Grande–Nazaré),66.2,17.8,16.1,S. MARTINHO DO PORTO,55.4,LIS,70.5
-1405,Benavente,benavente,mainland,38.8632,-8.8094,Lisbon–Cascais (estuary mouth),49.4,18.0,16.3,ALBARQUEL,40.3,LIS,29.4
-1406,Cartaxo,cartaxo,mainland,39.1503,-8.7863,Oeste (Peniche–Lourinhã–Torres Vedras),55.7,17.6,16.0,PORTO DINHEIRO,48.7,LIS,50.8
-1407,Chamusca,chamusca,mainland,39.2683,-8.3805,Leiria coast (Marinha Grande–Nazaré),78.3,17.8,16.1,SALGADO,70.1,LIS,84.6
-1408,Constância,constancia,mainland,39.3731,-8.2701,Leiria coast (Marinha Grande–Nazaré),80.6,17.8,16.1,NAZARÉ,73.6,LIS,99.3
-1409,Coruche,coruche,mainland,38.9589,-8.4683,Setúbal–Tróia,71.4,19.1,16.9,ALBARQUEL,63.1,LIS,60.8
-1410,Entroncamento,entroncamento,mainland,39.4602,-8.4801,Leiria coast (Marinha Grande–Nazaré),60.2,17.8,16.1,NAZARÉ,53.4,LIS,94.2
-1411,Ferreira do Zêzere,ferreira-do-zezere,mainland,39.7271,-8.2934,Leiria coast (Marinha Grande–Nazaré),71.4,17.8,16.1,PEDRÓGÃO SUL,60.2,LIS,127.6
-1412,Golegã,golega,mainland,39.366,-8.5349,Leiria coast (Marinha Grande–Nazaré),61.2,17.8,16.1,NAZARÉ,53.3,LIS,83.0
-1413,Mação,macao,mainland,39.6121,-7.9926,Leiria coast (Marinha Grande–Nazaré),97.2,17.8,16.1,VIEIRA,88.8,LIS,134.8
-1414,Rio Maior,rio-maior,mainland,39.3207,-8.9095,Leiria coast (Marinha Grande–Nazaré),43.5,17.8,16.1,S. MARTINHO DO PORTO,28.6,LIS,63.0
-1415,Salvaterra de Magos,salvaterra-de-magos,mainland,39.0462,-8.6887,Oeste (Peniche–Lourinhã–Torres Vedras),66.5,17.6,16.0,VALMITÃO,59.4,LIS,48.4
-1416,Santarém,santarem,mainland,39.3125,-8.7094,Leiria coast (Marinha Grande–Nazaré),53.8,17.8,16.1,S. MARTINHO DO PORTO,42.7,LIS,69.5
-1417,Sardoal,sardoal,mainland,39.5711,-8.1391,Leiria coast (Marinha Grande–Nazaré),85.2,17.8,16.1,VIEIRA,79.0,LIS,122.6
-1418,Tomar,tomar,mainland,39.5954,-8.3906,Leiria coast (Marinha Grande–Nazaré),63.5,17.8,16.1,S. PEDRO DE MOEL,57.8,LIS,110.8
-1419,Torres Novas,torres-novas,mainland,39.5045,-8.5575,Leiria coast (Marinha Grande–Nazaré),52.2,17.8,16.1,NAZARÉ,45.7,LIS,94.5
-1420,Vila Nova da Barquinha,vila-nova-da-barquinha,mainland,39.4829,-8.4315,Leiria coast (Marinha Grande–Nazaré),63.2,17.8,16.1,NAZARÉ,56.8,LIS,98.7
-1421,Ourém,ourem,mainland,39.7121,-8.5639,Leiria coast (Marinha Grande–Nazaré),48.2,17.8,16.1,VIEIRA,39.4,LIS,114.5
-1501,Alcácer do Sal,alcacer-do-sal,mainland,38.3833,-8.5074,Setúbal–Tróia,36.7,19.1,16.9,CARVALHAL,25.4,LIS,70.0
-1502,Alcochete,alcochete,mainland,38.7117,-8.8681,Setúbal–Tróia,32.3,19.1,16.9,ALBARQUEL,22.8,LIS,24.1
-1503,Almada,almada,mainland,38.6463,-9.2033,Lisbon–Cascais (estuary mouth),11.0,18.0,16.3,SAÚDE,3.0,LIS,16.2
-1504,Barreiro,barreiro,mainland,38.6104,-9.0329,Setúbal–Tróia,22.7,19.1,16.9,FONTE DA TELHA,14.9,LIS,20.8
-1505,Grândola,grandola,mainland,38.1445,-8.4925,Alentejo coast (Comporta–Sines),42.3,18.5,16.8,ABERTA NOVA,25.6,LIS,90.0
-1506,Moita,moita,mainland,38.6614,-9.0068,Setúbal–Tróia,27.2,19.1,16.9,ALBARQUEL,18.6,LIS,17.2
-1507,Montijo,montijo,mainland,38.7257,-8.6401,Setúbal–Tróia,41.6,19.1,16.9,ALBARQUEL,33.8,LIS,43.1
-1508,Palmela,palmela,mainland,38.6245,-8.8167,Setúbal–Tróia,24.1,19.1,16.9,ALBARQUEL,15.3,LIS,32.4
-1509,Santiago do Cacém,santiago-do-cacem,mainland,37.9538,-8.581,Alentejo coast (Comporta–Sines),30.2,18.5,16.8,MORGAVEL,19.9,LIS,103.8
-1510,Seixal,seixal,mainland,38.6075,-9.0998,Lisbon–Cascais (estuary mouth),20.9,18.0,16.3,FONTE DA TELHA,9.4,LIS,19.5
-1511,Sesimbra,sesimbra,mainland,38.4986,-9.1243,Costa da Caparica–Sesimbra,13.4,18.2,16.6,LAGOA DE ALBUFEIRA,4.7,LIS,31.4
-1512,Setúbal,setubal,mainland,38.5085,-8.7935,Setúbal–Tróia,14.7,19.1,16.9,ATLÂNTICA,8.7,LIS,42.2
-1513,Sines,sines,mainland,37.909,-8.7543,Alentejo coast (Comporta–Sines),16.7,18.5,16.8,MORGAVEL,4.1,LIS,102.4
-1601,Arcos de Valdevez,arcos-de-valdevez,mainland,41.8968,-8.3693,Minho (Caminha–Viana do Castelo),49.9,16.1,14.9,PEDRAS RUIVAS,37.8,OPO,76.5
-1602,Caminha,caminha,mainland,41.8539,-8.8042,Minho (Caminha–Viana do Castelo),17.5,16.1,14.9,PEDRAS RUIVAS,4.4,OPO,68.1
-1603,Melgaço,melgaco,mainland,42.0684,-8.244,Minho (Caminha–Viana do Castelo),68.1,16.1,14.9,PEDRAS RUIVAS,52.0,OPO,98.1
-1604,Monção,moncao,mainland,42.0271,-8.4654,Minho (Caminha–Viana do Castelo),50.8,16.1,14.9,PEDRAS RUIVAS,33.4,OPO,88.3
-1605,Paredes de Coura,paredes-de-coura,mainland,41.9178,-8.5542,Minho (Caminha–Viana do Castelo),37.5,16.1,14.9,PEDRAS RUIVAS,22.7,OPO,75.1
-1606,Ponte da Barca,ponte-da-barca,mainland,41.8218,-8.2574,Minho (Caminha–Viana do Castelo),56.4,16.1,14.9,PEDRAS RUIVAS,47.7,OPO,72.8
-1607,Ponte de Lima,ponte-de-lima,mainland,41.7691,-8.5931,Minho (Caminha–Viana do Castelo),28.0,16.1,14.9,FOZ DO LIMA,22.2,OPO,58.3
-1608,Valença,valenca,mainland,42.0028,-8.6091,Minho (Caminha–Viana do Castelo),40.5,16.1,14.9,PEDRAS RUIVAS,21.8,OPO,84.0
-1609,Viana do Castelo,viana-do-castelo,mainland,41.7115,-8.7531,Minho (Caminha–Viana do Castelo),14.3,16.1,14.9,FOZ DO LIMA,7.5,OPO,51.8
-1610,Vila Nova de Cerveira,vila-nova-de-cerveira,mainland,41.9175,-8.71,Minho (Caminha–Viana do Castelo),27.8,16.1,14.9,PEDRAS RUIVAS,10.0,OPO,74.4
-1701,Alijó,alijo,mainland,41.302,-7.4725,Porto–Matosinhos–Gaia–Espinho,107.8,17.1,15.3,CANIDE NORTE,101.8,OPO,101.1
-1702,Boticas,boticas,mainland,41.655,-7.8083,Esposende–Póvoa de Varzim–Vila do Conde,91.0,16.5,15.1,MARINHAS-CEPÃES,82.7,OPO,85.6
-1703,Chaves,chaves,mainland,41.7482,-7.4828,Esposende–Póvoa de Varzim–Vila do Conde,119.7,16.5,15.1,MARINHAS-CEPÃES,111.0,OPO,114.1
-1704,Mesão Frio,mesao-frio,mainland,41.1694,-7.8469,Porto–Matosinhos–Gaia–Espinho,74.3,17.1,15.3,VALADARES SUL,68.5,OPO,70.3
-1705,Mondim de Basto,mondim-de-basto,mainland,41.3807,-7.8924,Porto–Matosinhos–Gaia–Espinho,77.5,17.1,15.3,FOZ,70.4,OPO,67.4
-1706,Montalegre,montalegre,mainland,41.7813,-7.937,Minho (Caminha–Viana do Castelo),82.2,16.1,14.9,PEDRAS RUIVAS,74.6,OPO,85.6
-1707,Murça,murca,mainland,41.4345,-7.4429,Porto–Matosinhos–Gaia–Espinho,114.4,17.1,15.3,FOZ,107.8,OPO,105.3
-1708,Peso da Régua,peso-da-regua,mainland,41.1735,-7.7068,Porto–Matosinhos–Gaia–Espinho,86.0,17.1,15.3,VALADARES SUL,80.1,OPO,81.9
-1709,Ribeira de Pena,ribeira-de-pena,mainland,41.4804,-7.8293,Esposende–Póvoa de Varzim–Vila do Conde,87.1,16.5,15.1,ÁRVORE,77.8,OPO,75.5
-1710,Sabrosa,sabrosa,mainland,41.2292,-7.5958,Porto–Matosinhos–Gaia–Espinho,96.1,17.1,15.3,VALADARES SUL,90.2,OPO,90.7
-1711,Santa Marta de Penaguião,santa-marta-de-penaguiao,mainland,41.2221,-7.8019,Porto–Matosinhos–Gaia–Espinho,79.0,17.1,15.3,VALADARES SUL,73.1,OPO,73.5
-1712,Valpaços,valpacos,mainland,41.588,-7.3466,Esposende–Póvoa de Varzim–Vila do Conde,127.8,16.5,15.1,ÁRVORE,119.6,OPO,117.4
-1713,Vila Pouca de Aguiar,vila-pouca-de-aguiar,mainland,41.5117,-7.6145,Porto–Matosinhos–Gaia–Espinho,104.7,17.1,15.3,ÁRVORE,96.0,OPO,93.6
-1714,Vila Real,vila-real,mainland,41.332,-7.7044,Porto–Matosinhos–Gaia–Espinho,90.0,17.1,15.3,LAVADORES,83.7,OPO,82.1
-1801,Armamar,armamar,mainland,41.1034,-7.6745,Porto–Matosinhos–Gaia–Espinho,88.1,17.1,15.3,MARBELO,81.9,OPO,85.7
-1802,Carregal do Sal,carregal-do-sal,mainland,40.4632,-7.969,Aveiro (Ovar–Ílhavo–Vagos),76.0,17.7,15.7,BICO,64.7,OPO,105.9
-1803,Castro Daire,castro-daire,mainland,40.9126,-7.9354,Porto–Matosinhos–Gaia–Espinho,68.7,17.1,15.3,SILVALDE,60.4,OPO,72.8
-1804,Cinfães,cinfaes,mainland,41.0377,-8.1609,Porto–Matosinhos–Gaia–Espinho,47.5,17.1,15.3,MARBELO,40.7,OPO,49.4
-1805,Lamego,lamego,mainland,41.0905,-7.8069,Porto–Matosinhos–Gaia–Espinho,77.0,17.1,15.3,MARBELO,70.7,OPO,75.2
-1806,Mangualde,mangualde,mainland,40.594,-7.766,Aveiro (Ovar–Ílhavo–Vagos),89.8,17.7,15.7,BICO,76.1,OPO,105.9
-1807,Moimenta da Beira,moimenta-da-beira,mainland,40.9634,-7.6371,Porto–Matosinhos–Gaia–Espinho,92.1,17.1,15.3,SILVALDE,84.9,OPO,93.0
-1808,Mortágua,mortagua,mainland,40.4159,-8.2451,Aveiro (Ovar–Ílhavo–Vagos),56.8,17.7,15.7,AREÃO,46.9,OPO,99.6
-1809,Nelas,nelas,mainland,40.5323,-7.8742,Aveiro (Ovar–Ílhavo–Vagos),81.8,17.7,15.7,BICO,69.1,OPO,104.6
-1810,Oliveira de Frades,oliveira-de-frades,mainland,40.7195,-8.2722,Aveiro (Ovar–Ílhavo–Vagos),46.9,17.7,15.7,BICO,31.9,OPO,68.1
-1811,Penalva do Castelo,penalva-do-castelo,mainland,40.6685,-7.6625,Aveiro (Ovar–Ílhavo–Vagos),98.0,17.7,15.7,BICO,83.5,OPO,107.1
-1812,Penedono,penedono,mainland,40.999,-7.4179,Porto–Matosinhos–Gaia–Espinho,110.0,17.1,15.3,MARBELO,103.0,OPO,109.3
-1813,Resende,resende,mainland,41.068,-7.9487,Porto–Matosinhos–Gaia–Espinho,65.1,17.1,15.3,MARBELO,58.6,OPO,64.5
-1814,Santa Comba Dão,santa-comba-dao,mainland,40.4037,-8.1115,Aveiro (Ovar–Ílhavo–Vagos),67.4,17.7,15.7,BICO,58.2,OPO,105.5
-1815,São João da Pesqueira,sao-joao-da-pesqueira,mainland,41.1472,-7.4351,Porto–Matosinhos–Gaia–Espinho,108.4,17.1,15.3,S. FÉLIX DA MARINHA,102.3,OPO,104.8
-1816,São Pedro do Sul,sao-pedro-do-sul,mainland,40.8175,-8.0555,Porto–Matosinhos–Gaia–Espinho,63.1,17.1,15.3,BICO,51.0,OPO,71.0
-1817,Sátão,satao,mainland,40.7627,-7.6723,Porto–Matosinhos–Gaia–Espinho,95.0,17.1,15.3,BICO,82.4,OPO,100.4
-1818,Sernancelhe,sernancelhe,mainland,40.924,-7.4928,Porto–Matosinhos–Gaia–Espinho,104.8,17.1,15.3,SILVALDE,97.2,OPO,105.9
-1819,Tabuaço,tabuaco,mainland,41.0807,-7.5719,Porto–Matosinhos–Gaia–Espinho,96.7,17.1,15.3,MARBELO,90.2,OPO,94.6
-1820,Tarouca,tarouca,mainland,41.0064,-7.7604,Porto–Matosinhos–Gaia–Espinho,81.3,17.1,15.3,MARBELO,74.3,OPO,81.6
-1821,Tondela,tondela,mainland,40.5457,-8.097,Aveiro (Ovar–Ílhavo–Vagos),63.1,17.7,15.7,BICO,51.0,OPO,92.3
-1822,Vila Nova de Paiva,vila-nova-de-paiva,mainland,40.8821,-7.7692,Porto–Matosinhos–Gaia–Espinho,83.1,17.1,15.3,PARAMOS,74.7,OPO,86.6
-1823,Viseu,viseu,mainland,40.697,-7.8967,Aveiro (Ovar–Ílhavo–Vagos),78.3,17.7,15.7,BICO,63.6,OPO,90.0
-1824,Vouzela,vouzela,mainland,40.6847,-8.1043,Aveiro (Ovar–Ílhavo–Vagos),60.8,17.7,15.7,BICO,46.3,OPO,79.2
-3101,Calheta (R.A.M.),calheta-r-a-m,madeira,32.7716,-17.1922,Madeira north (São Vicente–Santana),23.3,23.4,20.6,PORTO,3.7,FNC,40.0
-3102,Câmara de Lobos,camara-de-lobos,madeira,32.6756,-16.9852,Madeira south (Funchal–Câmara de Lobos–Calheta),11.2,23.7,20.8,FAJÃ DAS BEBRAS,2.8,FNC,20.0
-3103,Funchal,funchal,madeira,32.6878,-16.9242,Madeira south (Funchal–Câmara de Lobos–Calheta),13.4,23.7,20.8,SANTIAGO,5.2,FNC,14.2
-3104,Machico,machico,madeira,32.7334,-16.7818,Madeira east (Machico–Santa Cruz),5.4,23.2,20.5,BANDA D'ALÉM,2.5,FNC,3.9
-3105,Ponta do Sol,ponta-do-sol,madeira,32.7098,-17.1026,Madeira south (Funchal–Câmara de Lobos–Calheta),19.2,23.7,20.8,ANJOS-PONTA DO SOL,2.7,FNC,30.9
-3106,Porto Moniz,porto-moniz,madeira,32.837,-17.1816,Madeira north (São Vicente–Santana),19.8,23.4,20.6,PORTO MONIZ,3.7,FNC,41.2
-3107,Ribeira Brava,ribeira-brava,madeira,32.697,-17.0398,Madeira south (Funchal–Câmara de Lobos–Calheta),14.9,23.7,20.8,RIBEIRA BRAVA,3.9,FNC,25.0
-3108,Santa Cruz,santa-cruz,madeira,32.6896,-16.8362,Madeira east (Machico–Santa Cruz),11.1,23.2,20.5,BOAVENTURA,3.9,FNC,6.0
-3109,Santana,santana,madeira,32.7818,-16.9016,Madeira north (São Vicente–Santana),12.4,23.4,20.6,RIBEIRA DO FAIAL,5.1,FNC,15.1
-3110,São Vicente,sao-vicente,madeira,32.7904,-16.9928,Madeira north (São Vicente–Santana),9.6,23.4,20.6,PONTA DELGADA,4.2,FNC,22.9
-3201,Porto Santo,porto-santo,madeira,33.076,-16.3402,Porto Santo,6.5,23.0,20.3,PORTO SANTO-PORTO DAS SALEMAS,2.1,FNC,58.2
-4101,Vila do Porto,vila-do-porto,azores,36.98071,-25.08607,Santa Maria,7.1,23.6,19.5,FORMOSA,1.9,PDL,100.7
-4201,Lagoa (R.A.A.),lagoa-r-a-a,azores,37.73893,-25.51821,São Miguel south (Ponta Delgada),13.9,23.1,19.0,BAIXA DA AREIA,2.4,PDL,16.1
-4202,Nordeste,nordeste,azores,37.82357,-25.18321,São Miguel north (Ribeira Grande),30.6,23.2,18.9,PORTINHO DO FAIAL DA TERRA,9.4,PDL,46.4
-4203,Ponta Delgada,ponta-delgada,azores,37.85107,-25.77607,São Miguel south (Ponta Delgada),16.6,23.1,19.0,PRAIA DOS MOSTEIROS,6.1,PDL,13.7
-4204,Povoação,povoacao,azores,37.76357,-25.30357,São Miguel north (Ribeira Grande),23.1,23.2,18.9,PRAIA DO FOGO (RIBEIRA QUENTE),3.9,PDL,35.0
-4205,Ribeira Grande,ribeira-grande,azores,37.79929,-25.48714,São Miguel north (Ribeira Grande),9.1,23.2,18.9,POÇAS DA RIBEIRA GRANDE,4.3,PDL,19.8
-4206,Vila Franca do Campo,vila-franca-do-campo,azores,37.74857,-25.41857,São Miguel north (Ribeira Grande),16.9,23.2,18.9,VINHA DA AREIA,3.6,PDL,24.9
-4301,Angra do Heroísmo,angra-do-heroismo,azores,38.73536,-27.32571,Terceira (Angra do Heroísmo),15.1,22.9,18.6,CINCO RIBEIRAS,6.7,PDL,179.7
-4302,Vila da Praia da Vitória,vila-da-praia-da-vitoria,azores,38.73571,-27.10429,Terceira (Angra do Heroísmo),16.2,22.9,18.6,SARGENTOS,4.0,PDL,164.9
-4401,Santa Cruz da Graciosa,santa-cruz-da-graciosa,azores,39.05679,-28.02179,Graciosa,2.0,23.2,18.7,ZONA BALNEAR SANTA CRUZ (CALHETA),3.6,PDL,249.4
-4501,Calheta (R.A.A.),calheta-r-a-a,azores,38.62429,-27.99107,São Jorge,11.6,23.3,18.8,PORTINHOS-FAJÃ GRANDE,3.1,PDL,222.8
-4502,Velas,velas,azores,38.66286,-28.10071,São Jorge,4.7,23.3,18.8,POÇA DOS FRADES,9.5,PDL,233.3
-4601,Lajes do Pico,lajes-do-pico,azores,38.41821,-28.22571,Pico,22.2,23.4,19.1,CAMINHO DE BAIXO (SANTA BÁRBARA),3.3,PDL,233.3
-4602,Madalena,madalena,azores,38.50321,-28.48071,Faial (Horta),12.8,23.2,18.9,POCINHO,5.2,PDL,257.4
-4603,São Roque do Pico,sao-roque-do-pico,azores,38.51214,-28.37857,Pico,17.4,23.4,19.1,FURNA DE SANTO ANTÓNIO,4.6,PDL,249.3
-4701,Horta,horta,azores,38.58321,-28.69786,Faial (Horta),9.1,23.2,18.9,FAJÃ,6.5,PDL,278.1
-4801,Lajes das Flores,lajes-das-flores,azores,39.41107,-31.21929,Flores,5.0,23.5,19.0,FAJÃ GRANDE,6.4,PDL,514.2
-4802,Santa Cruz das Flores,santa-cruz-das-flores,azores,39.46607,-31.18214,Flores,9.2,23.5,19.0,SANTA CRUZ DAS FLORES,5.3,PDL,513.2
-4901,Corvo,corvo,azores,39.7,-31.10571,Corvo,3.8,23.4,18.9,CORVO/AREIA,3.4,PDL,516.8
+0101,Águeda,agueda,mainland,40.57558,-8.44688,Aveiro (Ovar–Ílhavo–Vagos),36.3,17.7,15.7,BICO,24.3,OPO,77.4
+0102,Albergaria-a-Velha,albergaria-a-velha,mainland,40.69095,-8.48019,Aveiro (Ovar–Ílhavo–Vagos),31.0,17.7,15.7,BICO,15.0,OPO,64.3
+0103,Anadia,anadia,mainland,40.44276,-8.43562,Aveiro (Ovar–Ílhavo–Vagos),42.1,17.7,15.7,AREÃO,30.6,OPO,92.0
+0104,Arouca,arouca,mainland,40.92874,-8.24320,Porto–Matosinhos–Gaia–Espinho,47.7,17.1,15.3,PARAMOS,34.6,OPO,51.1
+0105,Aveiro,aveiro,mainland,40.64027,-8.65362,Aveiro (Ovar–Ílhavo–Vagos),17.4,17.7,15.7,JARDIM DE OUDINOT,6.3,OPO,67.7
+0106,Castelo de Paiva,castelo-de-paiva,mainland,41.04074,-8.27158,Porto–Matosinhos–Gaia–Espinho,37.2,17.1,15.3,MARBELO,31.4,OPO,41.3
+0107,Espinho,espinho,mainland,41.00899,-8.63944,Porto–Matosinhos–Gaia–Espinho,11.8,17.1,15.3,ESPINHO-BAÍA,0.6,OPO,26.9
+0108,Estarreja,estarreja,mainland,40.75237,-8.56993,Aveiro (Ovar–Ílhavo–Vagos),23.1,17.7,15.7,BICO,7.2,OPO,56.0
+0109,Santa Maria da Feira,santa-maria-da-feira,mainland,40.92530,-8.54263,Porto–Matosinhos–Gaia–Espinho,20.6,17.1,15.3,SANTA MARINHA - CORTEGAÇA SUL,9.8,OPO,37.8
+0110,Ílhavo,ilhavo,mainland,40.59969,-8.66604,Aveiro (Ovar–Ílhavo–Vagos),11.4,17.7,15.7,JARDIM DE OUDINOT,6.9,OPO,72.2
+0111,Mealhada,mealhada,mainland,40.36,-8.446,Figueira da Foz–Mira,45.6,17.6,15.8,,,,
+0112,Murtosa,murtosa,mainland,40.74996,-8.65058,Aveiro (Ovar–Ílhavo–Vagos),15.7,17.7,15.7,BICO,2.2,OPO,55.5
+0113,Oliveira de Azeméis,oliveira-de-azemeis,mainland,40.83918,-8.47769,Aveiro (Ovar–Ílhavo–Vagos),34.1,17.7,15.7,AREÍNHO (RIA AVEIRO),15.5,OPO,48.6
+0114,Oliveira do Bairro,oliveira-do-bairro,mainland,40.51292,-8.49632,Aveiro (Ovar–Ílhavo–Vagos),29.1,17.7,15.7,VAGUEIRA,23.8,OPO,83.3
+0115,Ovar,ovar,mainland,40.85922,-8.62508,Porto–Matosinhos–Gaia–Espinho,24.5,17.1,15.3,AREÍNHO (RIA AVEIRO),3.4,OPO,43.6
+0116,São João da Madeira,sao-joao-da-madeira,mainland,40.89734,-8.48877,Porto–Matosinhos–Gaia–Espinho,28.1,17.1,15.3,SANTA MARINHA - CORTEGAÇA SUL,14.8,OPO,42.3
+0117,Sever do Vouga,sever-do-vouga,mainland,40.73422,-8.37039,Aveiro (Ovar–Ílhavo–Vagos),38.8,17.7,15.7,BICO,23.6,OPO,62.9
+0118,Vagos,vagos,mainland,40.54872,-8.67843,Aveiro (Ovar–Ílhavo–Vagos),22.0,17.7,15.7,VAGUEIRA,7.9,OPO,77.9
+0119,Vale de Cambra,vale-de-cambra,mainland,40.85016,-8.39352,Porto–Matosinhos–Gaia–Espinho,42.2,17.1,15.3,AREÍNHO (RIA AVEIRO),22.6,OPO,50.4
+0201,Aljustrel,aljustrel,mainland,37.87861,-8.16160,Alentejo coast (Comporta–Sines),63.2,18.5,16.8,GRANDE DE PORTO COVO,55.6,FAO,97.2
+0202,Almodôvar,almodovar,mainland,37.51135,-8.06098,Algarve central (Albufeira–Loulé),50.0,21.0,17.9,BELHARUCAS,48.0,FAO,55.5
+0203,Alvito,alvito,mainland,38.25614,-7.99235,Setúbal–Tróia,79.3,19.1,16.9,PEGO,68.8,LIS,115.0
+0204,Barrancos,barrancos,mainland,38.12940,-6.97552,Algarve east (Tavira–Vila Real de Santo António),132.1,21.8,18.4,SANTO ANTÓNIO,113.4,FAO,151.8
+0205,Beja,beja,mainland,38.01589,-7.86513,Alentejo coast (Comporta–Sines),89.5,18.5,16.8,ABERTA NOVA,82.2,FAO,111.4
+0206,Castro Verde,castro-verde,mainland,37.69818,-8.08204,Algarve central (Albufeira–Loulé),76.9,21.0,17.9,VILA NOVA DE MILFONTES-FURNAS RIO,61.6,FAO,76.3
+0207,Cuba,cuba,mainland,38.16653,-7.89105,Alentejo coast (Comporta–Sines),92.4,18.5,16.8,GALÉ-FONTAÍNHAS,77.6,LIS,127.8
+0208,Ferreira do Alentejo,ferreira-do-alentejo,mainland,38.05845,-8.11656,Alentejo coast (Comporta–Sines),66.1,18.5,16.8,ABERTA NOVA,59.7,FAO,116.4
+0209,Mértola,mertola,mainland,37.63668,-7.66421,Algarve east (Tavira–Vila Real de Santo António),69.1,21.8,18.4,ALAGOA-ALTURA,54.0,FAO,74.1
+0210,Moura,moura,mainland,38.14318,-7.45054,Algarve east (Tavira–Vila Real de Santo António),128.7,21.8,18.4,MONTE GORDO,107.4,FAO,133.4
+0211,Odemira,odemira,mainland,37.59640,-8.64201,Costa Vicentina (Odemira–Aljezur),25.4,18.3,16.8,ZAMBUJEIRA DO MAR,15.2,FAO,87.4
+0212,Ourique,ourique,mainland,37.65335,-8.22476,Costa Vicentina (Odemira–Aljezur),58.3,18.3,16.8,VILA NOVA DE MILFONTES-FURNAS RIO,49.6,FAO,74.1
+0213,Serpa,serpa,mainland,37.94330,-7.59696,Algarve east (Tavira–Vila Real de Santo António),100.1,21.8,18.4,CABEÇO,86.2,FAO,108.2
+0214,Vidigueira,vidigueira,mainland,38.20957,-7.79961,Alentejo coast (Comporta–Sines),104.2,18.5,16.8,GALÉ-FONTAÍNHAS,85.5,LIS,132.2
+0301,Amares,amares,mainland,41.63034,-8.35694,Esposende–Póvoa de Varzim–Vila do Conde,47.3,16.5,15.1,MARINHAS-CEPÃES,37.3,OPO,50.2
+0302,Barcelos,barcelos,mainland,41.52913,-8.62227,Esposende–Póvoa de Varzim–Vila do Conde,22.6,16.5,15.1,FÃO-OFIR,13.8,OPO,31.5
+0303,Braga,braga,mainland,41.55091,-8.42845,Esposende–Póvoa de Varzim–Vila do Conde,37.0,16.5,15.1,APÚLIA,30.1,OPO,39.6
+0304,Cabeceiras de Basto,cabeceiras-de-basto,mainland,41.51381,-7.99332,Esposende–Póvoa de Varzim–Vila do Conde,75.4,16.5,15.1,RAMALHA,65.4,OPO,64.4
+0305,Celorico de Basto,celorico-de-basto,mainland,41.39297,-7.99965,Porto–Matosinhos–Gaia–Espinho,67.6,17.1,15.3,ÁRVORE,62.2,OPO,59.1
+0306,Esposende,esposende,mainland,41.53141,-8.78065,Esposende–Póvoa de Varzim–Vila do Conde,13.4,16.5,15.1,FÃO-OFIR,1.7,OPO,32.5
+0307,Fafe,fafe,mainland,41.45271,-8.17005,Esposende–Póvoa de Varzim–Vila do Conde,60.2,16.5,15.1,ÁRVORE,49.5,OPO,48.2
+0308,Guimarães,guimaraes,mainland,41.44427,-8.29216,Esposende–Póvoa de Varzim–Vila do Conde,45.5,16.5,15.1,ÁRVORE,39.5,OPO,39.0
+0309,Póvoa de Lanhoso,povoa-de-lanhoso,mainland,41.57687,-8.27286,Esposende–Póvoa de Varzim–Vila do Conde,52.7,16.5,15.1,FÃO-OFIR,43.4,OPO,49.8
+0310,Terras de Bouro,terras-de-bouro,mainland,41.7438,-8.1827,Minho (Caminha–Viana do Castelo),61.6,16.1,14.9,,,,
+0311,Vieira do Minho,vieira-do-minho,mainland,41.63431,-8.13970,Esposende–Póvoa de Varzim–Vila do Conde,66.7,16.5,15.1,MARINHAS-CEPÃES,55.1,OPO,62.2
+0312,Vila Nova de Famalicão,vila-nova-de-famalicao,mainland,41.40998,-8.52043,Esposende–Póvoa de Varzim–Vila do Conde,32.0,16.5,15.1,ÁRVORE,20.4,OPO,22.3
+0313,Vila Verde,vila-verde,mainland,41.64859,-8.43672,Minho (Caminha–Viana do Castelo),38.5,16.1,14.9,RIO DE MOINHOS,31.5,OPO,48.9
+0314,Vizela,vizela,mainland,41.37879,-8.31071,Porto–Matosinhos–Gaia–Espinho,48.0,17.1,15.3,ÁRVORE,36.2,OPO,34.1
+0401,Alfândega da Fé,alfandega-da-fe,mainland,41.34208,-6.96310,Porto–Matosinhos–Gaia–Espinho,150.6,17.1,15.3,CANIDE NORTE,144.5,OPO,143.8
+0402,Bragança,braganca,mainland,41.80523,-6.76482,Esposende–Póvoa de Varzim–Vila do Conde,181.6,16.5,15.1,MARINHAS-CEPÃES,170.8,OPO,171.0
+0403,Carrazeda de Ansiães,carrazeda-de-ansiaes,mainland,41.24261,-7.30633,Porto–Matosinhos–Gaia–Espinho,119.1,17.1,15.3,VALADARES SUL,114.4,OPO,114.9
+0404,Freixo de Espada à Cinta,freixo-de-espada-a-cinta,mainland,41.08965,-6.80817,Porto–Matosinhos–Gaia–Espinho,157.6,17.1,15.3,MARBELO,154.2,OPO,157.7
+0405,Macedo de Cavaleiros,macedo-de-cavaleiros,mainland,41.53860,-6.96077,Porto–Matosinhos–Gaia–Espinho,164.5,17.1,15.3,FOZ,149.6,OPO,147.0
+0406,Miranda do Douro,miranda-do-douro,mainland,41.49422,-6.27381,Porto–Matosinhos–Gaia–Espinho,209.5,17.1,15.3,CANIDE NORTE,204.0,OPO,202.6
+0407,Mirandela,mirandela,mainland,41.48534,-7.18171,Porto–Matosinhos–Gaia–Espinho,139.2,17.1,15.3,FOZ,130.3,OPO,127.8
+0408,Mogadouro,mogadouro,mainland,41.34039,-6.71593,Porto–Matosinhos–Gaia–Espinho,177.4,17.1,15.3,VALADARES SUL,164.8,OPO,164.4
+0409,Torre de Moncorvo,torre-de-moncorvo,mainland,41.17531,-7.05213,Porto–Matosinhos–Gaia–Espinho,143.2,17.1,15.3,S. FÉLIX DA MARINHA,134.5,OPO,136.4
+0410,Vila Flor,vila-flor,mainland,41.30911,-7.15379,Porto–Matosinhos–Gaia–Espinho,131.9,17.1,15.3,VALADARES SUL,128.1,OPO,127.7
+0411,Vimioso,vimioso,mainland,41.58370,-6.52814,Porto–Matosinhos–Gaia–Espinho,188.1,17.1,15.3,LAVADORES,185.7,OPO,183.3
+0412,Vinhais,vinhais,mainland,41.83513,-7.00228,Minho (Caminha–Viana do Castelo),154.1,16.1,14.9,PEDRAS RUIVAS,151.1,OPO,154.1
+0501,Belmonte,belmonte,mainland,40.35862,-7.35127,Aveiro (Ovar–Ílhavo–Vagos),132.2,17.7,15.7,BICO,117.2,OPO,149.4
+0502,Castelo Branco,castelo-branco,mainland,39.82272,-7.49303,Figueira da Foz–Mira,127.7,17.6,15.8,COVA-GALA,121.6,LIS,182.5
+0503,Covilhã,covilha,mainland,40.28047,-7.50465,Aveiro (Ovar–Ílhavo–Vagos),123.0,17.7,15.7,BICO,109.0,OPO,146.3
+0504,Fundão,fundao,mainland,40.13806,-7.50055,Figueira da Foz–Mira,128.6,17.6,15.8,BARRINHA DE MIRA,115.6,OPO,158.6
+0505,Idanha-a-Nova,idanha-a-nova,mainland,39.9187,-7.0943,Figueira da Foz–Mira,158.4,17.6,15.8,,,,
+0506,Oleiros,oleiros,mainland,39.9644,-7.8385,Figueira da Foz–Mira,95.4,17.6,15.8,,,,
+0507,Penamacor,penamacor,mainland,40.16808,-7.17164,Figueira da Foz–Mira,153.1,17.6,15.8,BICO,139.8,OPO,175.0
+0508,Proença-a-Nova,proenca-a-nova,mainland,39.75297,-7.92396,Figueira da Foz–Mira,103.2,17.6,15.8,OSSO DA BALEIA,88.9,LIS,150.0
+0509,Sertã,serta,mainland,39.80934,-8.09763,Figueira da Foz–Mira,81.5,17.6,15.8,OSSO DA BALEIA,72.9,LIS,144.9
+0510,Vila de Rei,vila-de-rei,mainland,39.67320,-8.14655,Leiria coast (Marinha Grande–Nazaré),82.3,17.8,16.1,PEDRÓGÃO SUL,74.1,LIS,130.6
+0511,Vila Velha de Ródão,vila-velha-de-rodao,mainland,39.6996,-7.6411,Figueira da Foz–Mira,121.6,17.6,15.8,,,,
+0601,Arganil,arganil,mainland,40.21748,-8.05469,Figueira da Foz–Mira,82.9,17.6,15.8,PALHEIRÃO,68.1,OPO,126.2
+0602,Cantanhede,cantanhede,mainland,40.34591,-8.59353,Figueira da Foz–Mira,33.2,17.6,15.8,PALHEIRÃO,20.3,OPO,100.7
+0603,Coimbra,coimbra,mainland,40.21121,-8.42879,Figueira da Foz–Mira,42.1,17.6,15.8,TOCHA,37.7,OPO,117.3
+0604,Condeixa-a-Nova,condeixa-a-nova,mainland,40.11291,-8.49902,Figueira da Foz–Mira,36.7,17.6,15.8,CABEDELO SUL,31.1,OPO,127.2
+0605,Figueira da Foz,figueira-da-foz,mainland,40.14827,-8.85486,Figueira da Foz–Mira,10.8,17.6,15.8,CABEDELO (FIGUEIRA DA FOZ),1.1,OPO,123.3
+0606,Góis,gois,mainland,40.15479,-8.11059,Figueira da Foz–Mira,69.9,17.6,15.8,CABEDELO SUL,64.0,OPO,130.8
+0607,Lousã,lousa,mainland,40.11093,-8.24590,Figueira da Foz–Mira,59.5,17.6,15.8,CABEDELO SUL,52.5,OPO,131.7
+0608,Mira,mira,mainland,40.42867,-8.73627,Aveiro (Ovar–Ílhavo–Vagos),27.8,17.7,15.7,BARRINHA DE MIRA,5.9,OPO,91.3
+0609,Miranda do Corvo,miranda-do-corvo,mainland,40.09288,-8.33275,Figueira da Foz–Mira,50.9,17.6,15.8,COVA-GALA,45.3,OPO,131.8
+0610,Montemor-o-Velho,montemor-o-velho,mainland,40.17264,-8.68473,Figueira da Foz–Mira,23.5,17.6,15.8,CABEDELO SUL,15.6,OPO,119.7
+0611,Oliveira do Hospital,oliveira-do-hospital,mainland,40.35924,-7.86177,Aveiro (Ovar–Ílhavo–Vagos),90.9,17.7,15.7,BICO,78.3,OPO,120.6
+0612,Pampilhosa da Serra,pampilhosa-da-serra,mainland,40.04633,-7.95037,Figueira da Foz–Mira,89.7,17.6,15.8,COVA-GALA,78.2,OPO,147.2
+0613,Penacova,penacova,mainland,40.26990,-8.28118,Figueira da Foz–Mira,54.0,17.6,15.8,PALHEIRÃO,48.0,OPO,113.9
+0614,Penela,penela,mainland,40.02985,-8.38990,Figueira da Foz–Mira,51.9,17.6,15.8,COVA-GALA,41.7,OPO,137.8
+0615,Soure,soure,mainland,40.06088,-8.62588,Figueira da Foz–Mira,27.0,17.6,15.8,COVA-GALA,21.5,OPO,132.2
+0616,Tábua,tabua,mainland,40.35973,-8.02797,Figueira da Foz–Mira,76.5,17.6,15.8,BARRINHA DE MIRA,66.2,OPO,113.1
+0617,Vila Nova de Poiares,vila-nova-de-poiares,mainland,40.21034,-8.25922,Figueira da Foz–Mira,59.4,17.6,15.8,TOCHA,51.5,OPO,120.8
+0701,Alandroal,alandroal,mainland,38.70234,-7.40321,Setúbal–Tróia,136.2,19.1,16.9,COMPORTA,127.0,LIS,150.2
+0702,Arraiolos,arraiolos,mainland,38.72551,-7.98494,Setúbal–Tróia,96.1,19.1,16.9,COMPORTA,80.9,LIS,99.6
+0703,Borba,borba,mainland,38.80560,-7.45427,Setúbal–Tróia,129.9,19.1,16.9,COMPORTA,126.5,LIS,145.4
+0704,Estremoz,estremoz,mainland,38.84159,-7.58591,Setúbal–Tróia,124.3,19.1,16.9,COMPORTA,117.6,LIS,134.1
+0705,Évora,evora,mainland,38.57243,-7.90950,Setúbal–Tróia,93.8,19.1,16.9,COMPORTA,80.7,LIS,108.6
+0706,Montemor-o-Novo,montemor-o-novo,mainland,38.64683,-8.21851,Setúbal–Tróia,65.1,19.1,16.9,COMPORTA,58.9,LIS,80.6
+0707,Mora,mora,mainland,38.94612,-8.16355,Setúbal–Tróia,87.6,19.1,16.9,ALBARQUEL,81.2,LIS,85.8
+0708,Mourão,mourao,mainland,38.38342,-7.34374,Setúbal–Tróia,139.7,19.1,16.9,PEGO,125.6,LIS,161.6
+0709,Portel,portel,mainland,38.30963,-7.70306,Setúbal–Tróia,109.3,19.1,16.9,PEGO,93.9,LIS,134.9
+0710,Redondo,redondo,mainland,38.64642,-7.54673,Setúbal–Tróia,118.0,19.1,16.9,COMPORTA,113.3,LIS,138.3
+0711,Reguengos de Monsaraz,reguengos-de-monsaraz,mainland,38.42480,-7.53496,Setúbal–Tróia,125.0,19.1,16.9,CARVALHAL,109.5,LIS,144.3
+0712,Vendas Novas,vendas-novas,mainland,38.67790,-8.45514,Setúbal–Tróia,49.5,19.1,16.9,ATLÂNTICA,43.4,LIS,59.8
+0713,Viana do Alentejo,viana-do-alentejo,mainland,38.33430,-8.00078,Setúbal–Tróia,66.1,19.1,16.9,PEGO,68.1,LIS,110.2
+0714,Vila Viçosa,vila-vicosa,mainland,38.77852,-7.41793,Setúbal–Tróia,136.7,19.1,16.9,COMPORTA,128.4,LIS,148.6
+0801,Albufeira,albufeira,mainland,37.09009,-8.24584,Algarve central (Albufeira–Loulé),17.8,21.0,17.9,PESCADORES,0.5,FAO,25.4
+0802,Alcoutim,alcoutim,mainland,37.47150,-7.47167,Algarve east (Tavira–Vila Real de Santo António),44.6,21.8,18.4,MONTE GORDO,32.8,FAO,67.3
+0803,Aljezur,aljezur,mainland,37.31608,-8.79937,Costa Vicentina (Odemira–Aljezur),21.2,18.3,16.8,AMOREIRA-RIO,4.8,FAO,80.3
+0804,Castro Marim,castro-marim,mainland,37.21725,-7.44289,Algarve east (Tavira–Vila Real de Santo António),33.2,21.8,18.4,MONTE GORDO,4.6,FAO,52.1
+0805,Faro,faro,mainland,37.01389,-7.93450,Faro–Olhão (Ria Formosa),8.0,21.4,18.3,FARO-MAR,5.5,FAO,3.5
+0806,Lagoa,lagoa,mainland,37.13514,-8.45663,Algarve west (Lagos–Portimão),14.5,20.2,17.6,CARVOEIRO,4.5,FAO,44.8
+0807,Lagos,lagos,mainland,37.10835,-8.67791,Algarve west (Lagos–Portimão),19.7,20.2,17.6,BATATA,1.5,FAO,63.3
+0808,Loulé,loule,mainland,37.13884,-8.02244,Algarve central (Albufeira–Loulé),22.4,21.0,17.9,FORTE NOVO,10.4,FAO,14.2
+0809,Monchique,monchique,mainland,37.32028,-8.55573,Algarve west (Lagos–Portimão),32.7,20.2,17.6,ALVOR-POENTE,22.3,FAO,61.6
+0810,Olhão,olhao,mainland,37.02495,-7.84171,Faro–Olhão (Ria Formosa),12.7,21.4,18.3,ARMONA-RIA,3.1,FAO,11.8
+0811,Portimão,portimao,mainland,37.13694,-8.53817,Algarve west (Lagos–Portimão),18.2,20.2,17.6,ROCHA,2.3,FAO,51.8
+0812,São Brás de Alportel,sao-bras-de-alportel,mainland,37.15069,-7.88854,Faro–Olhão (Ria Formosa),22.2,21.4,18.3,CAVACOS,15.2,FAO,16.6
+0813,Silves,silves,mainland,37.18896,-8.43998,Algarve central (Albufeira–Loulé),34.3,21.0,17.9,CARVOEIRO,10.7,FAO,45.5
+0814,Tavira,tavira,mainland,37.12579,-7.64980,Algarve east (Tavira–Vila Real de Santo António),20.0,21.8,18.4,ILHA DE TAVIRA-MAR,3.2,FAO,31.2
+0815,Vila do Bispo,vila-do-bispo,mainland,37.08219,-8.91275,Sagres–Vila do Bispo,14.1,18.9,17.2,CASTELEJO,3.5,FAO,83.6
+0816,Vila Real de Santo António,vila-real-de-santo-antonio,mainland,37.19471,-7.41510,Algarve east (Tavira–Vila Real de Santo António),17.3,21.8,18.4,SANTO ANTÓNIO,2.5,FAO,53.3
+0901,Aguiar da Beira,aguiar-da-beira,mainland,40.81790,-7.54180,Porto–Matosinhos–Gaia–Espinho,105.2,17.1,15.3,BICO,93.8,OPO,106.8
+0902,Almeida,almeida,mainland,40.72483,-6.90629,Porto–Matosinhos–Gaia–Espinho,159.5,17.1,15.3,BICO,146.9,OPO,159.9
+0903,Celorico da Beira,celorico-da-beira,mainland,40.63475,-7.39392,Aveiro (Ovar–Ílhavo–Vagos),121.7,17.7,15.7,BICO,106.4,OPO,127.8
+0904,Figueira de Castelo Rodrigo,figueira-de-castelo-rodrigo,mainland,40.8887,-6.9524,Porto–Matosinhos–Gaia–Espinho,150.2,17.1,15.3,,,,
+0905,Fornos de Algodres,fornos-de-algodres,mainland,40.62032,-7.53924,Aveiro (Ovar–Ílhavo–Vagos),111.6,17.7,15.7,BICO,94.5,OPO,118.6
+0906,Gouveia,gouveia,mainland,40.49513,-7.59145,Aveiro (Ovar–Ílhavo–Vagos),106.8,17.7,15.7,BICO,93.1,OPO,124.1
+0907,Guarda,guarda,mainland,40.5247,-7.2492,Aveiro (Ovar–Ílhavo–Vagos),134.1,17.7,15.7,,,,
+0908,Manteigas,manteigas,mainland,40.40070,-7.54075,Aveiro (Ovar–Ílhavo–Vagos),113.0,17.7,15.7,BICO,100.6,OPO,134.5
+0909,Mêda,meda,mainland,40.96336,-7.26139,Porto–Matosinhos–Gaia–Espinho,124.1,17.1,15.3,SECA,116.4,OPO,123.0
+0910,Pinhel,pinhel,mainland,40.77598,-7.06334,Porto–Matosinhos–Gaia–Espinho,142.0,17.1,15.3,BICO,133.7,OPO,145.5
+0911,Sabugal,sabugal,mainland,40.35164,-7.09247,Aveiro (Ovar–Ílhavo–Vagos),162.2,17.7,15.7,BICO,138.2,OPO,166.8
+0912,Seia,seia,mainland,40.42114,-7.70379,Aveiro (Ovar–Ílhavo–Vagos),102.5,17.7,15.7,BICO,87.0,OPO,123.4
+0913,Trancoso,trancoso,mainland,40.77794,-7.35048,Porto–Matosinhos–Gaia–Espinho,122.3,17.1,15.3,BICO,109.6,OPO,123.3
+0914,Vila Nova de Foz Côa,vila-nova-de-foz-coa,mainland,41.08341,-7.13611,Porto–Matosinhos–Gaia–Espinho,122.5,17.1,15.3,MARBELO,126.7,OPO,130.6
+1001,Alcobaça,alcobaca,mainland,39.55239,-8.97653,Leiria coast (Marinha Grande–Nazaré),22.4,17.8,16.1,NAZARÉ,10.1,LIS,86.8
+1002,Alvaiázere,alvaiazere,mainland,39.82506,-8.38224,Figueira da Foz–Mira,61.2,17.6,15.8,OSSO DA BALEIA,49.5,LIS,132.8
+1003,Ansião,ansiao,mainland,39.91152,-8.43619,Figueira da Foz–Mira,47.2,17.6,15.8,OSSO DA BALEIA,42.0,LIS,139.2
+1004,Batalha,batalha,mainland,39.65956,-8.82319,Leiria coast (Marinha Grande–Nazaré),33.2,17.8,16.1,PAREDES DE VITÓRIA,20.1,LIS,101.2
+1005,Bombarral,bombarral,mainland,39.26808,-9.15530,Oeste (Peniche–Lourinhã–Torres Vedras),24.0,17.6,16.0,AREIA BRANCA-FOZ,15.6,LIS,54.2
+1006,Caldas da Rainha,caldas-da-rainha,mainland,39.40706,-9.13556,Leiria coast (Marinha Grande–Nazaré),29.1,17.8,16.1,FOZ DO ARELHO-LAGOA,7.9,LIS,69.6
+1007,Castanheira de Pêra,castanheira-de-pera,mainland,40.00594,-8.21135,Figueira da Foz–Mira,64.0,17.6,15.8,COVA-GALA,57.1,OPO,143.8
+1008,Figueiró dos Vinhos,figueiro-dos-vinhos,mainland,39.90263,-8.27552,Figueira da Foz–Mira,59.1,17.6,15.8,LEIROSA,55.3,LIS,144.8
+1009,Leiria,leiria,mainland,39.74086,-8.81111,Leiria coast (Marinha Grande–Nazaré),31.4,17.8,16.1,PRAIA VELHA,18.9,LIS,110.2
+1010,Marinha Grande,marinha-grande,mainland,39.74995,-8.93310,Leiria coast (Marinha Grande–Nazaré),18.3,17.8,16.1,PRAIA VELHA,8.5,LIS,109.1
+1011,Nazaré,nazare,mainland,39.59907,-9.06893,Leiria coast (Marinha Grande–Nazaré),10.6,17.8,16.1,NAZARÉ,0.6,LIS,91.1
+1012,Óbidos,obidos,mainland,39.36048,-9.15715,Oeste (Peniche–Lourinhã–Torres Vedras),22.7,17.6,16.0,FOZ DO ARELHO-LAGOA,9.5,LIS,64.5
+1013,Pedrógão Grande,pedrogao-grande,mainland,39.91797,-8.14543,Figueira da Foz–Mira,69.5,17.6,15.8,COSTA DE LAVOS,65.2,LIS,152.2
+1014,Peniche,peniche,mainland,39.35692,-9.37852,Oeste (Peniche–Lourinhã–Torres Vedras),15.7,17.6,16.0,PORTO DA AREIA SUL,1.0,LIS,67.5
+1015,Pombal,pombal,mainland,39.91542,-8.62915,Figueira da Foz–Mira,40.0,17.6,15.8,OSSO DA BALEIA,26.2,LIS,133.3
+1016,Porto de Mós,porto-de-mos,mainland,39.60181,-8.81778,Leiria coast (Marinha Grande–Nazaré),30.5,17.8,16.1,NAZARÉ,22.1,LIS,95.2
+1101,Alenquer,alenquer,mainland,39.05542,-9.00963,Oeste (Peniche–Lourinhã–Torres Vedras),36.6,17.6,16.0,SANTA RITA-SUL,32.9,LIS,32.3
+1102,Arruda dos Vinhos,arruda-dos-vinhos,mainland,38.98323,-9.07736,Oeste (Peniche–Lourinhã–Torres Vedras),40.9,17.6,16.0,BALEIA OU DO SUL,29.4,LIS,23.0
+1103,Azambuja,azambuja,mainland,39.06882,-8.86821,Oeste (Peniche–Lourinhã–Torres Vedras),50.0,17.6,16.0,PORTO NOVO,43.9,LIS,39.3
+1104,Cadaval,cadaval,mainland,39.23937,-9.10149,Oeste (Peniche–Lourinhã–Torres Vedras),31.7,17.6,16.0,AREIA BRANCA-FOZ,20.4,LIS,51.0
+1105,Cascais,cascais,mainland,38.7294,-9.4378,Lisbon–Cascais (estuary mouth),11.5,18.0,16.3,,,,
+1106,Lisboa,lisboa,mainland,38.74953,-9.15019,Lisbon–Cascais (estuary mouth),17.0,18.0,16.3,CAXIAS,12.2,LIS,3.8
+1107,Loures,loures,mainland,38.83057,-9.16869,Lisbon–Cascais (estuary mouth),24.8,18.0,16.3,CAXIAS,17.3,LIS,6.4
+1108,Lourinhã,lourinha,mainland,39.24361,-9.31173,Oeste (Peniche–Lourinhã–Torres Vedras),15.1,17.6,16.0,PERALTA,2.6,LIS,53.7
+1109,Mafra,mafra,mainland,38.94100,-9.33198,Lisbon–Cascais (estuary mouth),30.1,18.0,16.3,FOZ DO LIZANDRO-RIO,7.1,LIS,24.8
+1110,Oeiras,oeiras,mainland,38.69279,-9.31403,Lisbon–Cascais (estuary mouth),6.2,18.0,16.3,SANTO AMARO,1.0,LIS,18.6
+1111,Sintra,sintra,mainland,38.79910,-9.38837,Lisbon–Cascais (estuary mouth),17.9,18.0,16.3,MAÇÃS,7.7,LIS,22.3
+1112,Sobral de Monte Agraço,sobral-de-monte-agraco,mainland,39.01837,-9.15190,Oeste (Peniche–Lourinhã–Torres Vedras),34.3,17.6,16.0,S. LOURENÇO,23.3,LIS,26.5
+1113,Torres Vedras,torres-vedras,mainland,39.09111,-9.25692,Oeste (Peniche–Lourinhã–Torres Vedras),20.1,17.6,16.0,MIRANTE (SANTA CRUZ),11.9,LIS,36.1
+1114,Vila Franca de Xira,vila-franca-de-xira,mainland,38.95407,-8.98985,Lisbon–Cascais (estuary mouth),40.8,18.0,16.3,FOZ DO LIZANDRO-RIO,36.7,LIS,22.8
+1115,Amadora,amadora,mainland,38.76039,-9.23593,Lisbon–Cascais (estuary mouth),12.7,18.0,16.3,CAXIAS,7.7,LIS,9.3
+1116,Odivelas,odivelas,mainland,38.79027,-9.17945,Lisbon–Cascais (estuary mouth),17.1,18.0,16.3,CAXIAS,13.1,LIS,4.3
+1201,Alter do Chão,alter-do-chao,mainland,39.19993,-7.65843,Leiria coast (Marinha Grande–Nazaré),129.7,17.8,16.1,NAZARÉ,129.7,LIS,135.6
+1202,Arronches,arronches,mainland,39.12231,-7.28500,Setúbal–Tróia,164.8,19.1,16.9,COMPORTA,155.4,LIS,164.1
+1203,Avis,avis,mainland,39.05594,-7.88936,Setúbal–Tróia,117.5,19.1,16.9,ALBARQUEL,107.6,LIS,111.8
+1204,Campo Maior,campo-maior,mainland,39.01261,-7.06925,Setúbal–Tróia,176.8,19.1,16.9,COMPORTA,166.1,LIS,180.3
+1205,Castelo de Vide,castelo-de-vide,mainland,39.41542,-7.45527,Leiria coast (Marinha Grande–Nazaré),141.4,17.8,16.1,VIEIRA,139.7,LIS,161.0
+1206,Crato,crato,mainland,39.28523,-7.64525,Leiria coast (Marinha Grande–Nazaré),136.8,17.8,16.1,NAZARÉ,127.8,LIS,140.1
+1207,Elvas,elvas,mainland,38.88078,-7.16415,Setúbal–Tróia,156.5,19.1,16.9,COMPORTA,152.9,LIS,170.8
+1208,Fronteira,fronteira,mainland,39.05663,-7.64764,Setúbal–Tróia,135.1,19.1,16.9,ATLÂNTICA,125.0,LIS,132.0
+1209,Gavião,gaviao,mainland,39.46540,-7.93295,Leiria coast (Marinha Grande–Nazaré),111.1,17.8,16.1,NAZARÉ,99.1,LIS,128.4
+1210,Marvão,marvao,mainland,39.4226,-7.3564,Leiria coast (Marinha Grande–Nazaré),154.2,17.8,16.1,,,,
+1211,Monforte,monforte,mainland,39.05275,-7.43914,Setúbal–Tróia,146.6,19.1,16.9,COMPORTA,140.0,LIS,149.5
+1212,Nisa,nisa,mainland,39.51848,-7.64883,Leiria coast (Marinha Grande–Nazaré),126.0,17.8,16.1,VIEIRA,120.1,LIS,151.9
+1213,Ponte de Sor,ponte-de-sor,mainland,39.25207,-8.00861,Setúbal–Tróia,99.2,19.1,16.9,NAZARÉ,99.5,LIS,110.3
+1214,Portalegre,portalegre,mainland,39.29490,-7.42913,Leiria coast (Marinha Grande–Nazaré),152.6,17.8,16.1,NAZARÉ,145.4,LIS,157.8
+1215,Sousel,sousel,mainland,38.95283,-7.67578,Setúbal–Tróia,111.1,19.1,16.9,COMPORTA,116.8,LIS,127.5
+1301,Amarante,amarante,mainland,41.26975,-8.07847,Porto–Matosinhos–Gaia–Espinho,61.8,17.1,15.3,LAVADORES,51.8,OPO,50.4
+1302,Baião,baiao,mainland,41.16431,-8.03413,Porto–Matosinhos–Gaia–Espinho,61.2,17.1,15.3,VALADARES SUL,52.9,OPO,54.9
+1303,Felgueiras,felgueiras,mainland,41.36575,-8.19781,Porto–Matosinhos–Gaia–Espinho,54.0,17.1,15.3,ÁRVORE,45.4,OPO,42.3
+1304,Gondomar,gondomar,mainland,41.14402,-8.53652,Porto–Matosinhos–Gaia–Espinho,19.5,17.1,15.3,CANIDE NORTE,11.1,OPO,16.8
+1305,Lousada,lousada,mainland,41.27682,-8.28206,Porto–Matosinhos–Gaia–Espinho,43.0,17.1,15.3,FOZ,35.9,OPO,33.4
+1306,Maia,maia,mainland,41.23339,-8.62251,Porto–Matosinhos–Gaia–Espinho,21.9,17.1,15.3,CABO DO MUNDO,7.9,OPO,5.1
+1307,Marco de Canaveses,marco-de-canaveses,mainland,41.18590,-8.14933,Porto–Matosinhos–Gaia–Espinho,49.8,17.1,15.3,CANIDE NORTE,43.8,OPO,45.0
+1308,Matosinhos,matosinhos,mainland,41.18319,-8.68324,Porto–Matosinhos–Gaia–Espinho,14.4,17.1,15.3,MATOSINHOS,1.1,OPO,7.3
+1309,Paços de Ferreira,pacos-de-ferreira,mainland,41.27587,-8.37612,Porto–Matosinhos–Gaia–Espinho,38.4,17.1,15.3,MATOSINHOS,28.8,OPO,25.6
+1310,Paredes,paredes,mainland,41.20865,-8.33367,Porto–Matosinhos–Gaia–Espinho,30.4,17.1,15.3,LAVADORES,29.4,OPO,29.3
+1311,Penafiel,penafiel,mainland,41.20669,-8.28416,Porto–Matosinhos–Gaia–Espinho,37.5,17.1,15.3,LAVADORES,33.3,OPO,33.5
+1312,Porto,porto,mainland,41.15009,-8.61067,Porto–Matosinhos–Gaia–Espinho,13.9,17.1,15.3,LAVADORES,5.4,OPO,12.4
+1313,Póvoa de Varzim,povoa-de-varzim,mainland,41.37956,-8.75997,Esposende–Póvoa de Varzim–Vila do Conde,11.9,16.5,15.1,ZONA URBANA SUL II,0.8,OPO,16.0
+1314,Santo Tirso,santo-tirso,mainland,41.34172,-8.47288,Porto–Matosinhos–Gaia–Espinho,35.4,17.1,15.3,ÁRVORE,22.3,OPO,20.2
+1315,Valongo,valongo,mainland,41.19113,-8.49753,Porto–Matosinhos–Gaia–Espinho,24.7,17.1,15.3,FOZ,15.7,OPO,16.6
+1316,Vila do Conde,vila-do-conde,mainland,41.35423,-8.74335,Esposende–Póvoa de Varzim–Vila do Conde,22.7,16.5,15.1,FRENTE URBANA NORTE,1.2,OPO,12.8
+1317,Vila Nova de Gaia,vila-nova-de-gaia,mainland,41.13004,-8.60662,Porto–Matosinhos–Gaia–Espinho,10.3,17.1,15.3,CANIDE NORTE,5.1,OPO,14.6
+1318,Trofa,trofa,mainland,41.32848,-8.56600,Porto–Matosinhos–Gaia–Espinho,29.2,17.1,15.3,ÁRVORE,14.5,OPO,13.0
+1401,Abrantes,abrantes,mainland,39.46296,-8.19783,Leiria coast (Marinha Grande–Nazaré),90.4,17.8,16.1,NAZARÉ,76.8,LIS,110.6
+1402,Alcanena,alcanena,mainland,39.45945,-8.66748,Leiria coast (Marinha Grande–Nazaré),45.2,17.8,16.1,NAZARÉ,38.4,LIS,85.4
+1403,Almeirim,almeirim,mainland,39.20923,-8.62885,Oeste (Peniche–Lourinhã–Torres Vedras),68.2,17.6,16.0,S. MARTINHO DO PORTO,54.9,LIS,64.5
+1404,Alpiarça,alpiarca,mainland,39.26461,-8.57916,Leiria coast (Marinha Grande–Nazaré),66.2,17.8,16.1,S. MARTINHO DO PORTO,55.1,LIS,71.9
+1405,Benavente,benavente,mainland,38.98368,-8.81001,Lisbon–Cascais (estuary mouth),49.4,18.0,16.3,CAXIAS,51.2,LIS,35.8
+1406,Cartaxo,cartaxo,mainland,39.15990,-8.78834,Oeste (Peniche–Lourinhã–Torres Vedras),55.7,17.6,16.0,FOZ DO ARELHO-LAGOA,47.9,LIS,51.5
+1407,Chamusca,chamusca,mainland,39.35963,-8.48048,Leiria coast (Marinha Grande–Nazaré),78.3,17.8,16.1,NAZARÉ,57.7,LIS,85.5
+1408,Constância,constancia,mainland,39.47652,-8.33932,Leiria coast (Marinha Grande–Nazaré),80.6,17.8,16.1,NAZARÉ,64.6,LIS,103.2
+1409,Coruche,coruche,mainland,38.95818,-8.52705,Setúbal–Tróia,71.4,19.1,16.9,ALBARQUEL,60.1,LIS,55.9
+1410,Entroncamento,entroncamento,mainland,39.46539,-8.46816,Leiria coast (Marinha Grande–Nazaré),60.2,17.8,16.1,NAZARÉ,54.2,LIS,95.2
+1411,Ferreira do Zêzere,ferreira-do-zezere,mainland,39.69409,-8.29049,Leiria coast (Marinha Grande–Nazaré),71.4,17.8,16.1,VIEIRA,61.7,LIS,124.7
+1412,Golegã,golega,mainland,39.40260,-8.48949,Leiria coast (Marinha Grande–Nazaré),61.2,17.8,16.1,NAZARÉ,54.9,LIS,88.6
+1413,Mação,macao,mainland,39.55664,-7.99580,Leiria coast (Marinha Grande–Nazaré),97.2,17.8,16.1,VIEIRA,90.8,LIS,130.5
+1414,Rio Maior,rio-maior,mainland,39.33674,-8.93656,Leiria coast (Marinha Grande–Nazaré),43.5,17.8,16.1,S. MARTINHO DO PORTO,25.8,LIS,64.1
+1415,Salvaterra de Magos,salvaterra-de-magos,mainland,39.0462,-8.6887,Oeste (Peniche–Lourinhã–Torres Vedras),66.5,17.6,16.0,,,,
+1416,Santarém,santarem,mainland,39.23917,-8.68714,Leiria coast (Marinha Grande–Nazaré),53.8,17.8,16.1,S. MARTINHO DO PORTO,48.9,LIS,63.8
+1417,Sardoal,sardoal,mainland,39.53468,-8.16138,Leiria coast (Marinha Grande–Nazaré),85.2,17.8,16.1,PAREDES DE VITÓRIA,78.5,LIS,118.4
+1418,Tomar,tomar,mainland,39.60353,-8.41550,Leiria coast (Marinha Grande–Nazaré),63.5,17.8,16.1,S. PEDRO DE MOEL,55.4,LIS,110.3
+1419,Torres Novas,torres-novas,mainland,39.48002,-8.53933,Leiria coast (Marinha Grande–Nazaré),52.2,17.8,16.1,NAZARÉ,47.9,LIS,93.0
+1420,Vila Nova da Barquinha,vila-nova-da-barquinha,mainland,39.45816,-8.43110,Leiria coast (Marinha Grande–Nazaré),63.2,17.8,16.1,NAZARÉ,57.5,LIS,96.6
+1421,Ourém,ourem,mainland,39.65818,-8.57803,Leiria coast (Marinha Grande–Nazaré),48.2,17.8,16.1,S. PEDRO DE MOEL,40.4,LIS,108.6
+1501,Alcácer do Sal,alcacer-do-sal,mainland,38.37087,-8.51275,Setúbal–Tróia,36.7,19.1,16.9,CARVALHAL,24.5,LIS,70.5
+1502,Alcochete,alcochete,mainland,38.75621,-8.96115,Setúbal–Tróia,32.3,19.1,16.9,SAÚDE,27.2,LIS,15.1
+1503,Almada,almada,mainland,38.67663,-9.16397,Lisbon–Cascais (estuary mouth),11.0,18.0,16.3,PRAIA NOVA/NOVA PRAIA,7.6,LIS,11.9
+1504,Barreiro,barreiro,mainland,38.66058,-9.07447,Setúbal–Tróia,22.7,19.1,16.9,CASTELO,13.5,LIS,14.3
+1505,Grândola,grandola,mainland,38.17698,-8.56901,Alentejo coast (Comporta–Sines),42.3,18.5,16.8,GALÉ-FONTAÍNHAS,18.5,LIS,83.1
+1506,Moita,moita,mainland,38.6614,-9.0068,Setúbal–Tróia,27.2,19.1,16.9,,,,
+1507,Montijo,montijo,mainland,38.70491,-8.97555,Setúbal–Tróia,41.6,19.1,16.9,ALBARQUEL,22.3,LIS,16.0
+1508,Palmela,palmela,mainland,38.56730,-8.89917,Setúbal–Tróia,24.1,19.1,16.9,ALBARQUEL,6.5,LIS,31.2
+1509,Santiago do Cacém,santiago-do-cacem,mainland,38.01647,-8.69295,Alentejo coast (Comporta–Sines),30.2,18.5,16.8,FONTE DO CORTIÇO,12.2,LIS,93.2
+1510,Seixal,seixal,mainland,38.6075,-9.0998,Lisbon–Cascais (estuary mouth),20.9,18.0,16.3,,,,
+1511,Sesimbra,sesimbra,mainland,38.44369,-9.09982,Costa da Caparica–Sesimbra,13.4,18.2,16.6,CALIFÓRNIA,0.2,LIS,37.6
+1512,Setúbal,setubal,mainland,38.52471,-8.89209,Setúbal–Tróia,14.7,19.1,16.9,ALBARQUEL,2.5,LIS,35.3
+1513,Sines,sines,mainland,37.95476,-8.86443,Alentejo coast (Comporta–Sines),16.7,18.5,16.8,VASCO DA GAMA,0.2,LIS,94.8
+1601,Arcos de Valdevez,arcos-de-valdevez,mainland,41.8968,-8.3693,Minho (Caminha–Viana do Castelo),49.9,16.1,14.9,,,,
+1602,Caminha,caminha,mainland,41.87648,-8.83852,Minho (Caminha–Viana do Castelo),17.5,16.1,14.9,PEDRAS RUIVAS,1.9,OPO,71.0
+1603,Melgaço,melgaco,mainland,42.11270,-8.25924,Minho (Caminha–Viana do Castelo),68.1,16.1,14.9,PEDRAS RUIVAS,52.9,OPO,102.2
+1604,Monção,moncao,mainland,42.07848,-8.48061,Minho (Caminha–Viana do Castelo),50.8,16.1,14.9,PEDRAS RUIVAS,35.3,OPO,93.7
+1605,Paredes de Coura,paredes-de-coura,mainland,41.91203,-8.56017,Minho (Caminha–Viana do Castelo),37.5,16.1,14.9,PEDRAS RUIVAS,22.1,OPO,74.4
+1606,Ponte da Barca,ponte-da-barca,mainland,41.80672,-8.41690,Minho (Caminha–Viana do Castelo),56.4,16.1,14.9,PEDRAS RUIVAS,35.1,OPO,65.8
+1607,Ponte de Lima,ponte-de-lima,mainland,41.76744,-8.58280,Minho (Caminha–Viana do Castelo),28.0,16.1,14.9,FOZ DO LIMA,22.9,OPO,58.2
+1608,Valença,valenca,mainland,42.03086,-8.64519,Minho (Caminha–Viana do Castelo),40.5,16.1,14.9,PEDRAS RUIVAS,21.6,OPO,87.0
+1609,Viana do Castelo,viana-do-castelo,mainland,41.69460,-8.82942,Minho (Caminha–Viana do Castelo),14.3,16.1,14.9,FOZ DO LIMA,1.4,OPO,51.1
+1610,Vila Nova de Cerveira,vila-nova-de-cerveira,mainland,41.93926,-8.74398,Minho (Caminha–Viana do Castelo),27.8,16.1,14.9,PEDRAS RUIVAS,8.6,OPO,76.9
+1701,Alijó,alijo,mainland,41.27619,-7.47510,Porto–Matosinhos–Gaia–Espinho,107.8,17.1,15.3,CANIDE NORTE,101.1,OPO,100.8
+1702,Boticas,boticas,mainland,41.68723,-7.66810,Esposende–Póvoa de Varzim–Vila do Conde,91.0,16.5,15.1,MARINHAS-CEPÃES,94.7,OPO,97.4
+1703,Chaves,chaves,mainland,41.74008,-7.47180,Esposende–Póvoa de Varzim–Vila do Conde,119.7,16.5,15.1,MARINHAS-CEPÃES,111.8,OPO,114.5
+1704,Mesão Frio,mesao-frio,mainland,41.1694,-7.8469,Porto–Matosinhos–Gaia–Espinho,74.3,17.1,15.3,,,,
+1705,Mondim de Basto,mondim-de-basto,mainland,41.41123,-7.95259,Porto–Matosinhos–Gaia–Espinho,77.5,17.1,15.3,ÁRVORE,66.3,OPO,63.4
+1706,Montalegre,montalegre,mainland,41.82319,-7.79185,Minho (Caminha–Viana do Castelo),82.2,16.1,14.9,PEDRAS RUIVAS,85.9,OPO,97.7
+1707,Murça,murca,mainland,41.40835,-7.45383,Porto–Matosinhos–Gaia–Espinho,114.4,17.1,15.3,LAVADORES,106.2,OPO,103.9
+1708,Peso da Régua,peso-da-regua,mainland,41.16321,-7.78922,Porto–Matosinhos–Gaia–Espinho,86.0,17.1,15.3,VALADARES SUL,73.2,OPO,75.2
+1709,Ribeira de Pena,ribeira-de-pena,mainland,41.52010,-7.79382,Esposende–Póvoa de Varzim–Vila do Conde,87.1,16.5,15.1,ÁRVORE,81.7,OPO,79.9
+1710,Sabrosa,sabrosa,mainland,41.26499,-7.57497,Porto–Matosinhos–Gaia–Espinho,96.1,17.1,15.3,CANIDE NORTE,92.6,OPO,92.4
+1711,Santa Marta de Penaguião,santa-marta-de-penaguiao,mainland,41.21110,-7.78701,Porto–Matosinhos–Gaia–Espinho,79.0,17.1,15.3,VALADARES SUL,74.1,OPO,74.8
+1712,Valpaços,valpacos,mainland,41.60971,-7.31212,Esposende–Póvoa de Varzim–Vila do Conde,127.8,16.5,15.1,RAMALHA,122.8,OPO,120.9
+1713,Vila Pouca de Aguiar,vila-pouca-de-aguiar,mainland,41.50047,-7.64241,Porto–Matosinhos–Gaia–Espinho,104.7,17.1,15.3,ÁRVORE,93.5,OPO,91.0
+1714,Vila Real,vila-real,mainland,41.29430,-7.74620,Porto–Matosinhos–Gaia–Espinho,90.0,17.1,15.3,LAVADORES,79.3,OPO,78.2
+1801,Armamar,armamar,mainland,41.10960,-7.69215,Porto–Matosinhos–Gaia–Espinho,88.1,17.1,15.3,MARBELO,80.5,OPO,84.1
+1802,Carregal do Sal,carregal-do-sal,mainland,40.43532,-8.00263,Aveiro (Ovar–Ílhavo–Vagos),76.0,17.7,15.7,BICO,63.7,OPO,106.9
+1803,Castro Daire,castro-daire,mainland,40.89813,-7.93317,Porto–Matosinhos–Gaia–Espinho,68.7,17.1,15.3,PARAMOS,60.8,OPO,73.8
+1804,Cinfães,cinfaes,mainland,41.07491,-8.09540,Porto–Matosinhos–Gaia–Espinho,47.5,17.1,15.3,MARBELO,46.5,OPO,52.6
+1805,Lamego,lamego,mainland,41.10098,-7.80982,Porto–Matosinhos–Gaia–Espinho,77.0,17.1,15.3,MARBELO,70.6,OPO,74.7
+1806,Mangualde,mangualde,mainland,40.594,-7.766,Aveiro (Ovar–Ílhavo–Vagos),89.8,17.7,15.7,,,,
+1807,Moimenta da Beira,moimenta-da-beira,mainland,40.97977,-7.61350,Porto–Matosinhos–Gaia–Espinho,92.1,17.1,15.3,SECA,86.7,OPO,94.2
+1808,Mortágua,mortagua,mainland,40.39694,-8.22921,Aveiro (Ovar–Ílhavo–Vagos),56.8,17.7,15.7,BARRINHA DE MIRA,48.7,OPO,102.1
+1809,Nelas,nelas,mainland,40.53398,-7.85196,Aveiro (Ovar–Ílhavo–Vagos),81.8,17.7,15.7,BICO,70.8,OPO,105.7
+1810,Oliveira de Frades,oliveira-de-frades,mainland,40.73305,-8.17400,Aveiro (Ovar–Ílhavo–Vagos),46.9,17.7,15.7,BICO,40.1,OPO,71.4
+1811,Penalva do Castelo,penalva-do-castelo,mainland,40.6685,-7.6625,Aveiro (Ovar–Ílhavo–Vagos),98.0,17.7,15.7,,,,
+1812,Penedono,penedono,mainland,40.999,-7.4179,Porto–Matosinhos–Gaia–Espinho,110.0,17.1,15.3,,,,
+1813,Resende,resende,mainland,41.10606,-7.96486,Porto–Matosinhos–Gaia–Espinho,65.1,17.1,15.3,S. FÉLIX DA MARINHA,57.7,OPO,61.9
+1814,Santa Comba Dão,santa-comba-dao,mainland,40.39668,-8.13262,Aveiro (Ovar–Ílhavo–Vagos),67.4,17.7,15.7,AREÃO,56.7,OPO,105.4
+1815,São João da Pesqueira,sao-joao-da-pesqueira,mainland,41.1472,-7.4351,Porto–Matosinhos–Gaia–Espinho,108.4,17.1,15.3,,,,
+1816,São Pedro do Sul,sao-pedro-do-sul,mainland,40.8175,-8.0555,Porto–Matosinhos–Gaia–Espinho,63.1,17.1,15.3,,,,
+1817,Sátão,satao,mainland,40.74172,-7.73254,Porto–Matosinhos–Gaia–Espinho,95.0,17.1,15.3,BICO,77.3,OPO,97.5
+1818,Sernancelhe,sernancelhe,mainland,40.89744,-7.49601,Porto–Matosinhos–Gaia–Espinho,104.8,17.1,15.3,SILVALDE,97.3,OPO,106.7
+1819,Tabuaço,tabuaco,mainland,41.11666,-7.56837,Porto–Matosinhos–Gaia–Espinho,96.7,17.1,15.3,MARBELO,90.9,OPO,94.2
+1820,Tarouca,tarouca,mainland,41.01618,-7.77594,Porto–Matosinhos–Gaia–Espinho,81.3,17.1,15.3,MARBELO,73.0,OPO,80.0
+1821,Tondela,tondela,mainland,40.51598,-8.07922,Aveiro (Ovar–Ílhavo–Vagos),63.1,17.7,15.7,BICO,53.7,OPO,95.9
+1822,Vila Nova de Paiva,vila-nova-de-paiva,mainland,40.85165,-7.72914,Porto–Matosinhos–Gaia–Espinho,83.1,17.1,15.3,AREÍNHO (RIA AVEIRO),78.5,OPO,91.2
+1823,Viseu,viseu,mainland,40.65758,-7.91422,Aveiro (Ovar–Ílhavo–Vagos),78.3,17.7,15.7,BICO,62.6,OPO,92.0
+1824,Vouzela,vouzela,mainland,40.72258,-8.10973,Aveiro (Ovar–Ílhavo–Vagos),60.8,17.7,15.7,BICO,45.5,OPO,75.6
+3101,Calheta (R.A.M.),calheta-r-a-m,madeira,32.7716,-17.1922,Madeira north (São Vicente–Santana),23.3,23.4,20.6,,,,
+3102,Câmara de Lobos,camara-de-lobos,madeira,32.64919,-16.97817,Madeira south (Funchal–Câmara de Lobos–Calheta),11.2,23.7,20.8,VIGÁRIO,0.1,FNC,20.0
+3103,Funchal,funchal,madeira,32.65003,-16.90857,Madeira south (Funchal–Câmara de Lobos–Calheta),13.4,23.7,20.8,SANTIAGO,1.0,FNC,13.8
+3104,Machico,machico,madeira,32.71866,-16.76535,Madeira east (Machico–Santa Cruz),5.4,23.2,20.5,BANDA D'ALÉM,0.3,FNC,2.3
+3105,Ponta do Sol,ponta-do-sol,madeira,32.68006,-17.10416,Madeira south (Funchal–Câmara de Lobos–Calheta),19.2,23.7,20.8,PONTA DO SOL,0.1,FNC,31.1
+3106,Porto Moniz,porto-moniz,madeira,32.86515,-17.17158,Madeira north (São Vicente–Santana),19.8,23.4,20.6,PORTO MONIZ,0.4,FNC,41.6
+3107,Ribeira Brava,ribeira-brava,madeira,32.67130,-17.06396,Madeira south (Funchal–Câmara de Lobos–Calheta),14.9,23.7,20.8,RIBEIRA BRAVA,0.3,FNC,27.4
+3108,Santa Cruz,santa-cruz,madeira,32.68807,-16.79214,Madeira east (Machico–Santa Cruz),11.1,23.2,20.5,SÃO FERNANDO,0.3,FNC,2.2
+3109,Santana,santana,madeira,32.80541,-16.88223,Madeira north (São Vicente–Santana),12.4,23.4,20.6,RIBEIRA DO FAIAL,3.4,FNC,15.6
+3110,São Vicente,sao-vicente,madeira,32.80363,-17.04618,Madeira north (São Vicente–Santana),9.6,23.4,20.6,CLUBE NAVAL DE SÃO VICENTE,1.6,FNC,28.1
+3201,Porto Santo,porto-santo,madeira,33.05972,-16.33517,Porto Santo,6.5,23.0,20.3,PORTO SANTO-FONTINHA,0.5,FNC,57.3
+4101,Vila do Porto,vila-do-porto,azores,36.95312,-25.14319,Santa Maria,7.1,23.6,19.5,ANJOS,5.6,PDL,100.8
+4201,Lagoa (R.A.A.),lagoa-r-a-a,azores,37.74450,-25.57006,São Miguel south (Ponta Delgada),13.9,23.1,19.0,PISCINAS NATURAIS DA LAGOA,0.4,PDL,11.5
+4202,Nordeste,nordeste,azores,37.83254,-25.14652,São Miguel north (Ribeira Grande),30.6,23.2,18.9,PORTINHO DO FAIAL DA TERRA,11.3,PDL,49.8
+4203,Ponta Delgada,ponta-delgada,azores,37.73907,-25.66937,São Miguel south (Ponta Delgada),16.6,23.1,19.0,PISCINA NATURAL DAS PORTAS DO MAR,0.7,PDL,2.8
+4204,Povoação,povoacao,azores,37.74667,-25.24585,São Miguel north (Ribeira Grande),23.1,23.2,18.9,RIBEIRA DOS PELAMES,0.3,PDL,40.0
+4205,Ribeira Grande,ribeira-grande,azores,37.82277,-25.52051,São Miguel north (Ribeira Grande),9.1,23.2,18.9,POÇAS DA RIBEIRA GRANDE,0.5,PDL,18.2
+4206,Vila Franca do Campo,vila-franca-do-campo,azores,37.71516,-25.43574,São Miguel north (Ribeira Grande),16.9,23.2,18.9,CORPO SANTO,0.7,PDL,23.6
+4301,Angra do Heroísmo,angra-do-heroismo,azores,38.65596,-27.21822,Terceira (Angra do Heroísmo),15.1,22.9,18.6,PRAINHA (ANGRA DO HEROÍSMO),0.7,PDL,166.9
+4302,Vila da Praia da Vitória,vila-da-praia-da-vitoria,azores,38.73571,-27.10429,Terceira (Angra do Heroísmo),16.2,22.9,18.6,,,,
+4401,Santa Cruz da Graciosa,santa-cruz-da-graciosa,azores,39.05679,-28.02179,Graciosa,2.0,23.2,18.7,,,,
+4501,Calheta (R.A.A.),calheta-r-a-a,azores,38.60094,-28.01211,São Jorge,11.6,23.3,18.8,PORTINHOS-FAJÃ GRANDE,0.1,PDL,223.4
+4502,Velas,velas,azores,38.68116,-28.20670,São Jorge,4.7,23.3,18.8,POÇA DOS FRADES,0.4,PDL,242.5
+4601,Lajes do Pico,lajes-do-pico,azores,38.39945,-28.25332,Pico,22.2,23.4,19.1,CLUBE NAVAL DAS LAJES,0.1,PDL,235.0
+4602,Madalena,madalena,azores,38.53462,-28.52695,Faial (Horta),12.8,23.2,18.9,MADALENA,0.5,PDL,262.3
+4603,São Roque do Pico,sao-roque-do-pico,azores,38.52592,-28.31959,Pico,17.4,23.4,19.1,PISCINA DO CAIS,0.2,PDL,245.0
+4701,Horta,horta,azores,38.53748,-28.62660,Faial (Horta),9.1,23.2,18.9,CONCEIÇÃO,0.8,PDL,270.6
+4801,Lajes das Flores,lajes-das-flores,azores,39.37846,-31.17542,Flores,5.0,23.5,19.0,SANTA CRUZ DAS FLORES,10.0,PDL,509.4
+4802,Santa Cruz das Flores,santa-cruz-das-flores,azores,39.46607,-31.18214,Flores,9.2,23.5,19.0,,,,
+4901,Corvo,corvo,azores,39.7,-31.10571,Corvo,3.8,23.4,18.9,,,,
