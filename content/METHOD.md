@@ -24,6 +24,14 @@ Speaks like the head concierge at Claridge's, sees like a Belmond travel writer,
 - Never invent a detail to make a sentence pretty.
 - Read it aloud as the concierge would at his desk. If he would not say it, cut it.
 
+## Two registers (operator, 4 Nov: "clear, direct shit in everything that's functional", Y Combinator style)
+1. **Editorial** (Maré, articles, the last line of a card): the head concierge, as above.
+2. **Functional** (simulators, the Concierge, forms, map controls, buttons, labels, errors, navigation): Y Combinator plain.
+   - Say what it is, in as few words as a person needs. Labels of 1 to 3 words.
+   - No sentence explaining how the tool works, what we store or how good it is. The one exception is a line that prevents a mistake or that the law requires: then one small line at the bottom.
+   - If a control changes nothing, delete the control instead of explaining it.
+   - No jargon where a plain word exists ("Sem crédito", not "Capitais próprios").
+
 ## Worked example: tapping Gondomar on the map
 **Today (a report):** gallery, price in words, drive times, seven schools and seven health centres by name, sources, two buttons, and the development as one line at the bottom.
 
