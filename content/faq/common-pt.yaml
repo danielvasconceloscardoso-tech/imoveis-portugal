@@ -11,7 +11,7 @@
   q: "Posso comprar casa em Portugal se viver no estrangeiro?"
   a: >-
     Pode comprar casa em Portugal sem viver cá nem ser residente; o Código do IMT tem até uma taxa
-    própria para não residentes. Antes de assinar, precisa do NIF, o número de contribuinte português.
+    própria para não residentes. Antes de assinar, precisa do NIF, o número de contribuinte português; se já o tem, esse passo está feito.
     Quem vive fora da UE nomeia também um representante fiscal ou adere às notificações eletrónicas das
     Finanças.
   facts: [pt-nonresidents-buy, pt-nif-nonresident, pt-tax-rep]
@@ -45,7 +45,7 @@
   q: "Como peço o NIF?"
   a: >-
     O NIF, o número de contribuinte português, pede-se online através de um representante legal ou ao
-    balcão das Finanças, sem precisar de representante fiscal. É o primeiro passo de qualquer compra.
+    balcão das Finanças, sem precisar de representante fiscal. É o primeiro passo de qualquer compra; quem já tem NIF salta-o.
     Depois de comprar, quem vive fora da UE tem 15 dias para nomear um representante fiscal ou aderir às
     notificações eletrónicas.
   facts: [pt-nif-nonresident, pt-tax-rep]
@@ -56,7 +56,7 @@
   cta: tax
   q: "Os não residentes pagam mais IMT?"
   a: >-
-    Desde maio de 2026, os não residentes fiscais pagam IMT à taxa única de 7,5%, sem isenções. Há
+    Sim: desde maio de 2026, os não residentes fiscais pagam IMT à taxa única de 7,5%, sem isenções. Há
     exceções para quem já foi considerado residente fiscal, quem passa a residente nos dois anos
     seguintes e quem arrenda a casa para habitação dentro dos limites de renda da lei; nos dois últimos
     casos, a diferença é devolvida a pedido.

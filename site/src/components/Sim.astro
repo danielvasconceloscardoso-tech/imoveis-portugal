@@ -105,7 +105,7 @@ const fieldLabel = (id: string, kind: string) => {
         <><p>{c("sims.credit.none", lang)}</p><a class="btn" href={`${talk}?cat=bank#form`}>{c("faq.cta.bank", lang)}</a></>
       ))}
       {next === "tax" && (<><p>{c("sims.tax.p", lang)}</p><a class="btn" href={`${talk}?cat=tax#form`}>{c("faq.cta.tax", lang)}</a></>)}
-      {next === "agency" && (<div data-agency><p>{c("sims.agency.p", lang)}</p><a class="btn" href={pathFor(lang, ed, "buy")}>{c("faq.cta.agency", lang)}</a><Calls lang={lang} ed={ed} compact /></div>)}
+      {next === "agency" && (<div data-agency><p>{c("sims.agency.p", lang)}</p><a class="btn" href={pathFor(lang, ed, "consult")} data-concierge data-sim-cg>{c("sims.agency.cta", lang)}</a><Calls lang={lang} ed={ed} compact /></div>)}
       <p style="margin-top:20px"><a class="more" href={pathFor(lang, ed, "dossiers")}>{c("consult.later.dossier", lang)}</a></p>
     </section>
 
@@ -205,7 +205,11 @@ const fieldLabel = (id: string, kind: string) => {
         : `${send.dataset.mail}&body=${encodeURIComponent(`${location.href}\n\n${summary}`)}`;
     }
   }
+  // Prompt 70 (MI-06): the advisor button opens the Concierge with the price typed here (chrome.ts reads ?budget=).
+  const simCg = document.querySelector<HTMLAnchorElement>("[data-sim-cg]");
+  const cgBudget = () => { if (!simCg) return; const u = new URL(simCg.href); const pr = Number(values().price) || 0; pr >= 1e4 ? u.searchParams.set("budget", String(Math.round(pr))) : u.searchParams.delete("budget"); simCg.href = u.toString(); };
   form.addEventListener("input", render);
+  form.addEventListener("input", cgBudget); cgBudget();
   form.addEventListener("submit", (e) => e.preventDefault());
   // Part 5: the reader used this calculator (lib/track.ts ev "sim/{tool}/use", once the hand stops; the price as a band).
   let tU = 0;

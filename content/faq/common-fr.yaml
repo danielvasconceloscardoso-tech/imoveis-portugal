@@ -22,8 +22,8 @@
   cta: tax
   q: "Quels sont les frais d'achat, au-delà du prix ?"
   a: >-
-    Prévoyez l'IMT, un droit de timbre de 0,8 % et l'acte avec l'enregistrement, qui coûte 375 € ou 700
-    € au guichet Casa Pronta. Si vous n'êtes pas résident fiscal au Portugal, l'IMT est de 7,5 % du
+    Prévoyez l'IMT (les droits de mutation), un droit de timbre de 0,8 % et l'acte avec l'enregistrement,
+    qui coûte 375 € ou 700 € au guichet public Casa Pronta. Si vous n'êtes pas résident fiscal au Portugal, l'IMT est de 7,5 % du
     prix, sauf exceptions. Avec un crédit s'ajoutent 0,6 % de droit de timbre sur le prêt et 4 % sur les
     intérêts.
   facts: [pt-is-purchase, pt-imt-nonresident-flat, pt-imt-nonresident-exceptions, pt-is-loan-5y, pt-is-interest, pt-casa-pronta-fees]
@@ -60,7 +60,7 @@
   a: >-
     Oui : depuis mai 2026, un acheteur non-résident fiscal au Portugal paie l'IMT au taux unique de 7,5 %,
     sans exonération. Exceptions : avoir déjà été considéré comme résident fiscal, le devenir dans les deux
-    ans, ou louer le logement comme résidence principale avec un loyer plafonné par la loi. Dans ces deux
+    ans, ou louer le logement à usage d'habitation avec un loyer plafonné par la loi. Dans ces deux
     derniers cas, la différence est remboursée sur demande.
   facts: [pt-imt-nonresident-flat, pt-imt-nonresident-exceptions]
 
@@ -68,7 +68,7 @@
   rank: 6
   stage: buying
   cta: tax
-  q: "Habitação própria e permanente (HPP) : de quoi s'agit-il et y aurai-je droit ?"
+  q: "Résidence principale et permanente (HPP) : de quoi s'agit-il et y aurai-je droit ?"
   a: >-
     C'est le logement acheté exclusivement pour être votre résidence principale ; en matière d'impôt sur le
     revenu, la preuve est le domicile fiscal. Il donne droit au barème d'IMT le plus bas (0 % jusqu'à 106
