@@ -29,7 +29,7 @@
 /pt/:ed/artigos/as-escolas-internacionais-do-porto-e-de-lisboa/ /pt/:ed/artigos/a-escola-britanica-do-porto-abriu-em-1894/ 301
 /pt/:ed/artigos/sao-joao-a-noite-em-que-o-porto-nao-dorme/ /pt/:ed/artigos/o-fogo-de-sao-joao-dura-12-minutos/ 301
 /pt/:ed/artigos/vila-do-conde-o-mar-a-41-minutos-do-porto/ /pt/:ed/artigos/vila-do-conde-guarda-uma-nau-do-seculo-xvi/ 301
-# Prompt 66 (3 Nov 2026): the short link opens the English map on Gondomar, with the O'rizon Living pin (the private
-# preview /d/f658bd1eef/ stays as it is).
-/orizon /en/lu/map/?place=gondomar 302
-/orizon/ /en/lu/map/?place=gondomar 302
+# Prompt 66 (3 Nov 2026): the short link opens the English map (the private preview /d/f658bd1eef/ stays as it is).
+# Prompt 68 (4 Nov 2026): it opens O'rizon Living's own card on the map, with Gondomar in view (?project=).
+/orizon /en/lu/map/?project=orizon 302
+/orizon/ /en/lu/map/?project=orizon 302

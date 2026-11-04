@@ -99,7 +99,12 @@ const cfg = { labels, links, photos, photoAlt, regionPhotos, ed, lang,
     summary: p.summary?.[lang], feats: (p.features ?? []).filter((f) => f.card).map((f) => f[lang]),
     now: p.blocks ? p.blocks.reduce((a, b) => a + b.units.reduce((x, u) => x + u.forSale, 0), 0) : null,
     // Part 2 (3 Nov): the places a project is near (projects.json), so a card with no homes of its own points to them.
-    near: p.near ?? [], muniName: MAP_MUNIS.find((m) => m.s === p.muni)?.n ?? "" })),
+    near: p.near ?? [], muniName: MAP_MUNIS.find((m) => m.s === p.muni)?.n ?? "",
+    // Prompt 68: a project with a "hero" line opens its place as an arrival with the project first (the golden sample).
+    hero: p.hero?.[lang] ?? "", heroImg: p.heroImg ?? "" })),
+  // Prompt 68 (COPY_DECK.md "p68"): the arrival card's action, the next questions, the photo credit, the last line's source.
+  p68: { visit: c("p68.visit", lang), view: c("p68.view", lang), credit: keep("p68.credit", ["c"]), moreSrc: keep("p68.more.src", ["t", "d"]),
+    q: { life: keep("p68.q.life", ["city", "v"]), schools: keep("p68.q.schools", ["n", "m"]), price: keep("p68.q.price", ["b", "a"]), health: keep("p68.q.health", ["v"]), healthCs: keep("p68.q.health.cs", ["v"]) } },
   pl: { view: c("showb.view", lang), visit: c("showb.visit", lang), price: c("showb.price", lang), now: c("showb.now", lang, { n: "{n}" }), near: c("bar.near", lang, { name: "{name}", muni: "{muni}" }) } };
 // Operator, step 1: the market price is the one free colour layer; 10 years, rents, yields and vacant homes are paid.
 const chips = [["price", "chip.price"]] as const;
@@ -256,7 +261,9 @@ const live = A.live && !!A.stripe.region && !!A.stripe.all;
   const run = () => import("../scripts/map-v3").then(({ initMapV3 }) => document.querySelectorAll<HTMLElement>("[data-m3]").forEach((el) => initMapV3(el)));
   const place = new URLSearchParams(location.search).get("place");
   const slug = place && place.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-  if (slug && document.querySelector("[data-m3][data-mode=page]")) {
+  // Prompt 68: ?project=<id> opens that project's card at once, on the map (the /orizon short link).
+  if (new URLSearchParams(location.search).get("project") && document.querySelector("[data-m3][data-mode=page]")) run();
+  else if (slug && document.querySelector("[data-m3][data-mode=page]")) {
     (window as any).__m3place = { slug, p: fetch(`/data/map/place/${slug}.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null) };
     run();
   } else "requestIdleCallback" in window ? requestIdleCallback(run, { timeout: 1200 }) : setTimeout(run, 300);

@@ -390,3 +390,60 @@ p.m3-tl { margin: 0; }
   .m3-pp b { font-size: 19px; }
 }
 @media (min-width: 820px) { .m3:has(.m3-sheet.is-open) .m3-attr { opacity: 0; } }
+
+/* Prompt 68 (4 Nov 2026), the method's worked example: the pick's photo pin keeps its short label at every zoom; a place
+   with a hero project opens as an arrival (photograph, name, one line), then the project (render, one line, one action),
+   then the next questions (one line each, opening on tap), then one more thing. */
+.m3-pin-pick { z-index: 3; }
+.m3-pin-t { position: absolute; left: calc(50% + 25px); top: 12px; padding: 5px 8px 4px; border-radius: 999px; background: rgba(255, 255, 255, .95); color: #7a5e28;
+  font: 700 10px/1 var(--m3sans); letter-spacing: .12em; text-transform: uppercase; white-space: nowrap; box-shadow: 0 2px 8px rgba(17, 18, 20, .22); pointer-events: none; }
+.m3-pin.is-named .m3-pin-t, .m3-pin.is-cluster .m3-pin-t { display: none; }
+.m3-cr { position: absolute; left: 12px; right: auto !important; bottom: 9px !important; font: 500 11px/1.2 var(--m3sans) !important; color: rgba(255, 255, 255, .92) !important; text-shadow: 0 1px 4px rgba(0, 0, 0, .6); pointer-events: none; }
+.m3-sheet h2.m3-h-xl { font-size: 48px; line-height: 1; letter-spacing: -.02em; }
+.m3-arr { padding-top: 18px; padding-bottom: 4px; }
+.m3-arr-l { margin: 10px 0 0; font: 400 19px/1.4 var(--m3serif); color: var(--gi); }
+.m3-hero { margin: 16px -12px 0; }
+.m3-hero-f { position: relative; margin: 0; }
+.m3-hero-i { display: block; width: 100%; aspect-ratio: 2 / 1; object-fit: cover; background: #e9e4d8; }
+.m3-hero-t { position: absolute; left: 16px; top: 14px; padding: 6px 10px 5px; border-radius: 999px; background: rgba(255, 255, 255, .95); box-shadow: 0 2px 8px rgba(17, 18, 20, .18); line-height: 1; }
+.m3-hero-t .m3-tag { font-size: 11px; }
+.m3-gal-arr .m3-gal-t .m3-photo { aspect-ratio: 16 / 9; }
+.m3-hero-b { padding: 14px 24px 4px; }
+.m3-hero-b .m3-kick { margin-bottom: 6px; }
+.m3-sheet h3.m3-hero-n { font-size: 28px; line-height: 1.12; }
+.m3-hero-l { margin: 8px 0 0; font: 400 17px/1.45 var(--m3serif); color: var(--gi); }
+.m3-btn-w { width: 100%; margin-top: 14px; }
+.m3-hero-v { margin: 6px 0 0; text-align: center; }
+.m3-hero-v.m3-quiet { justify-content: center; }
+.m3-hero-top { margin: -12px -12px 0; width: calc(100% + 24px); max-width: none; border-radius: 0; aspect-ratio: 16 / 10; }
+.m3-qa { padding-top: 20px; }
+.m3-q { border-top: 1px solid rgba(120, 120, 110, .18); }
+.m3-q:last-of-type { border-bottom: 1px solid rgba(120, 120, 110, .18); }
+.m3-qb { display: flex; width: 100%; align-items: center; justify-content: space-between; gap: 12px; margin: 0; padding: 15px 0 !important; border: 0; background: none !important; text-align: left;
+  font: 400 19px/1.3 var(--m3serif) !important; color: var(--gi) !important; cursor: pointer; }
+.m3-qb svg { flex: none; width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; opacity: .55; transition: transform .25s var(--e); }
+.m3-q.is-open .m3-qb svg { transform: rotate(180deg); }
+.m3-qb:focus-visible { outline: 2px solid #2f5d50; outline-offset: 2px; border-radius: 6px; }
+.m3-qp { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .25s var(--e); }
+.m3-q.is-open .m3-qp { grid-template-rows: 1fr; }
+.m3-qi { min-height: 0; overflow: hidden; }
+.m3-qi::after { content: ""; display: block; height: 16px; }
+.m3-qi > p.m3-tt { margin: 0 0 10px; }
+.m3-qi .m3-tile { margin: 0; }
+.m3-qi .m3-acts-1 { margin-top: 10px; }
+.m3-quiet { display: flex; flex-wrap: wrap; gap: 0 20px; }
+.m3-fontes.m3-quiet { margin-top: 10px; }
+.m3-quiet .m3-link, .m3-hero-v .m3-link { text-decoration: none; }
+.m3-quiet .m3-link:hover, .m3-hero-v .m3-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+.m3-onemore { margin: 28px 0 12px; padding: 24px 8px 0; border-top: 1px solid rgba(120, 120, 110, .22); font: italic 400 21px/1.4 var(--m3serif); text-align: center; color: var(--gi); }
+@media (max-width: 819px) {
+  .m3-gal-arr .m3-gal-t .m3-photo { aspect-ratio: 2 / 1; }
+  .m3-sheet.is-arr[data-detent="1"] { height: 60%; }
+  .m3-sheet h2.m3-h-xl { font-size: 42px; }
+  .m3-arr { padding-top: 14px; }
+  .m3-arr-l { font-size: 18px; margin-top: 6px; }
+  .m3-hero-b { padding: 14px 24px 4px; }
+  .m3-hero-top { margin: 0 -12px; aspect-ratio: 2 / 1; }
+  .m3-sheet[data-detent="0"] .m3-hero-top { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .m3-qp, .m3-qb svg { transition: none; } }

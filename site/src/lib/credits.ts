@@ -19,6 +19,10 @@ export const CREDITS: Credit[] = [
   { file: "img/v2/gondomar-douro-gramido-*", place: "Gramido, Valbom, Gondomar", title: "Gramido - Portugal (38633058680)", author: "Vitor Oliveira (Portuguese_eyes)", url: "https://commons.wikimedia.org/w/index.php?curid=77637693", licence: "CC BY-SA 2.0", licenceUrl: BYSA },
   { file: "img/v2/gondomar-melres-douro-*", place: "Melres, Gondomar", title: "Melres - Portugal (36407281306)", author: "Vitor Oliveira (Portuguese_eyes)", url: "https://commons.wikimedia.org/w/index.php?curid=77637623", licence: "CC BY-SA 2.0", licenceUrl: BYSA },
   { file: "img/v2/gondomar-marina-melres-*", place: "Marina de Melres, Gondomar", title: "Marina de Melres - Portugal (41314804074)", author: "Vitor Oliveira (Portuguese_eyes)", url: "https://commons.wikimedia.org/w/index.php?curid=77637715", licence: "CC BY-SA 2.0", licenceUrl: BYSA },
+  // Prompt 68 (4 Nov 2026): Gondomar's card now opens on the developer's aerial views of the Douro at Valbom and the Freixo
+  // (images with O'rizon Living drawn in), used with Shalu Investments' permission (operator, 4 Nov 2026). The three
+  // photographs above are off the card; their files stay.
+  { file: "img/v2/gondomar-aerial-*", place: "Valbom, Gondomar", title: "O'rizon Living, aerial views of the Douro", author: "Shalu Investments", url: "https://orizonliving.pt/", licence: "com autorização · with permission · avec autorisation", licenceUrl: "https://orizonliving.pt/" },
   { file: "img/v2/vila-do-conde-aqueduto-*", place: "Vila do Conde", title: "Vila do Conde", author: "Sergei Gussev", url: "https://www.flickr.com/photos/133200397@N03/46637546551", licence: "CC BY 2.0", licenceUrl: BY },
   // Fix step 4 (3 Nov 2026): the lifestyle articles' new photographs, from Wikimedia Commons (graded, 640/1024/1600).
   { file: "img/v2/faro-ria-formosa-por-do-sol-*", place: "Faro", title: "Sunset from the Ponte Praia de Faro", author: "Eduard Marmet", url: "https://commons.wikimedia.org/wiki/File:Sunset_from_the_Ponte_Praia_de_Faro_(36487363454).jpg", licence: "CC BY-SA 2.0", licenceUrl: BYSA },

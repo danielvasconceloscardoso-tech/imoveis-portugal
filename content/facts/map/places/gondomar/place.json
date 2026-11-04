@@ -1,5 +1,5 @@
 {
-  "_how": "Golden sample place card (operator's step 1, 3 Nov 2026). Read by scripts/map-data/tiles.py together with routes.csv, schools.csv and health.csv in this folder. The free card shows the rows marked card=1 and the chosen beach, city and airport; every row goes to the paid analysis (site/src/data/mapanalysis.json). Flights: facts.csv rows (PlaneMapper scheduled block times, checked 2026-11-03). SOURCES.md in this folder says how each figure was checked.",
+  "_how": "Golden sample place card (operator's step 1, 3 Nov 2026). Read by scripts/map-data/tiles.py together with routes.csv, schools.csv and health.csv in this folder. The free card shows the rows marked card=1 and the chosen beach, city and airport; every row goes to the paid analysis (site/src/data/mapanalysis.json). Flights: facts.csv rows (PlaneMapper scheduled block times, checked 2026-11-03). SOURCES.md in this folder says how each figure was checked. Prompt 68 (4 Nov 2026): 'arrive' is the arrival line under the name ({min} = OSRM minutes to the 'city' point in routes.csv); 'more' is the card's last line, its fact in content/facts/facts.csv; 'camera' is the arrival flight, [lon, lat, zoom, bearing, pitch] from upstream down the Douro (river line from site/public/data/map/rivers.json) to the partner project. The photographs are Shalu Investments' aerial views (authorised by the operator, 4 Nov 2026); the three earlier photographs stay in site/public/img/v2/.",
   "slug": "gondomar",
   "origin": {
     "name": "Câmara Municipal de Gondomar, Praça Manuel Guedes",
@@ -12,32 +12,40 @@
     "en": "The Douro on the doorstep, from Gramido to Melres, and the Aliados 12 minutes away by car.",
     "fr": "Le Douro au pas de la porte, de Gramido à Melres, et les Aliados à 12 minutes en voiture."
   },
+  "arrive": {
+    "pt": "O Douro, a {min} minutos dos Aliados.",
+    "en": "The Douro, {min} minutes from the Aliados.",
+    "fr": "Le Douro, à {min} minutes des Aliados."
+  },
   "photos": [
     {
-      "f": "gondomar-douro-gramido",
-      "w": 1024,
-      "alt": {
-        "pt": "O Douro visto de Gramido, em Valbom, Gondomar, com pequenos barcos no rio",
-        "en": "The Douro seen from Gramido, Valbom, Gondomar, with small boats on the river",
-        "fr": "Le Douro vu de Gramido, à Valbom, Gondomar, avec de petites barques sur le fleuve"
-      }
-    },
-    {
-      "f": "gondomar-melres-douro",
+      "f": "gondomar-aerial-dusk",
       "w": 1600,
+      "credit": "Shalu Investments",
       "alt": {
-        "pt": "O vale do Douro visto de Melres, Gondomar",
-        "en": "The Douro valley seen from Melres, Gondomar",
-        "fr": "La vallée du Douro vue de Melres, Gondomar"
+        "pt": "O Douro ao entardecer, de Valbom à ponte do Freixo, com o Porto ao fundo; imagem do promotor com o O'rizon Living na margem",
+        "en": "The Douro at dusk, from Valbom to the Freixo bridge, with Porto beyond; the developer's image with O'rizon Living on the bank",
+        "fr": "Le Douro au crépuscule, de Valbom au pont do Freixo, avec Porto au loin ; image du promoteur avec O'rizon Living sur la rive"
       }
     },
     {
-      "f": "gondomar-marina-melres",
-      "w": 1024,
+      "f": "gondomar-aerial-river",
+      "w": 1600,
+      "credit": "Shalu Investments",
       "alt": {
-        "pt": "A Marina de Melres, no Douro, em Gondomar",
-        "en": "The Marina de Melres on the Douro, Gondomar",
-        "fr": "La marina de Melres, sur le Douro, à Gondomar"
+        "pt": "O Douro em Valbom de dia, a ponte do Freixo e o Porto; imagem do promotor com o O'rizon Living na margem",
+        "en": "The Douro at Valbom by day, the Freixo bridge and Porto; the developer's image with O'rizon Living on the bank",
+        "fr": "Le Douro à Valbom en journée, le pont do Freixo et Porto ; image du promoteur avec O'rizon Living sur la rive"
+      }
+    },
+    {
+      "f": "gondomar-aerial-douro",
+      "w": 1600,
+      "credit": "Shalu Investments",
+      "alt": {
+        "pt": "Os terraços do O'rizon Living sobre o Douro, rio acima; imagem do promotor",
+        "en": "O'rizon Living's terraces above the Douro, looking upriver; the developer's image",
+        "fr": "Les terrasses d'O'rizon Living au-dessus du Douro, vers l'amont ; image du promoteur"
       }
     }
   ],
@@ -93,5 +101,32 @@
       "min": 370,
       "via": "LIS"
     }
-  }
+  },
+  "more": {
+    "fact": "gondomar-ourivesaria-42",
+    "pt": "Daqui sai 42% da ourivesaria portuguesa.",
+    "en": "42% of Portugal's gold and silver jewelry is made here.",
+    "fr": "42 % de l'orfèvrerie portugaise sort d'ici.",
+    "src": {
+      "pt": "Ourivesaria: Câmara Municipal de Gondomar, no Jornal de Negócios de 18 de abril de 2023",
+      "en": "Jewelry: Câmara Municipal de Gondomar, in Jornal de Negócios, April 18, 2023",
+      "fr": "Orfèvrerie : Câmara Municipal de Gondomar, dans le Jornal de Negócios du 18 avril 2023"
+    }
+  },
+  "camera": [
+    [
+      -8.503,
+      41.089,
+      10.6,
+      -40,
+      56
+    ],
+    [
+      -8.5648,
+      41.1408,
+      11.5,
+      -68,
+      58
+    ]
+  ]
 }

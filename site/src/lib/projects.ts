@@ -23,7 +23,9 @@ export type Project = { id: string; name: string; developer: string; devSlug?: s
   // appears only when its files exist under site/public (no empty boxes).
   tag?: L3; views?: string[]; amenityImgs?: string[]; plans?: { t: string; img: string }[]; film?: Film; tour3d?: { url: string; poster?: string; page?: string };
   typeAreas?: { t: string; min: number; max: number }[]; buildings?: { id: string; phase?: number; units?: Record<string, number> }[]; buildingsSource?: string;
-  featuresSource?: string; unitsNote?: L3; sourcesShown?: string[] };
+  featuresSource?: string; unitsNote?: L3; sourcesShown?: string[];
+  // Prompt 68 (4 Nov 2026): one line and one render: the map opens the project's place on it (arrival, the project first).
+  hero?: L3; heroImg?: string };
 export type Film = { id?: string; file?: string; poster?: string; title?: string; date?: string; more?: { id: string; poster?: string; title?: L3 }[] };
 type L3 = Partial<Record<"pt" | "en" | "fr", string>>;
 export type UnitRow = { ref: string; typology: string; floor: number; sun: string; gross: number | null; dwelling: number | null; balcony: number | null; terrace: number | null; garden: number | null;

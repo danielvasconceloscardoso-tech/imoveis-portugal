@@ -9876,3 +9876,52 @@ Prompt 66 (3 Nov 2026): the O'rizon Living showcase, the first project shown on 
 - PT: Lista do promotor
 - EN: The developer's list
 - FR: Liste du promoteur
+
+## p68
+
+Prompt 68 (4 Nov 2026), the method's worked example (content/METHOD.md): a place with a partner project that carries a "hero" line in projects.json opens as an arrival (the photograph, the name, one line), then the project as the hero (the render, one line, one action), then the next questions, one line each, opening on tap, then one more thing. Gondomar is the sample (rule 17). The place's own lines (the arrival, the last line) live in content/facts/map/places/<slug>/place.json; the project's line in projects.json. Used by site/src/scripts/map-v3.ts.
+
+### q.life
+- PT: {city}? {v} min.
+- EN: {city}? {v} min.
+- FR: {city} ? {v} min.
+
+### q.schools
+- PT: Escolas? {n} a menos de {m} min.
+- EN: Schools? {n} within {m} min.
+- FR: Écoles ? {n} à moins de {m} min.
+
+### q.price
+- PT: {b}? Cerca de {a} m².
+- EN: {b}? About {a} m².
+- FR: {b} ? Environ {a} m².
+
+### q.health
+- PT: Saúde? Um hospital a {v} min.
+- EN: Health? A hospital {v} min away.
+- FR: Santé ? Un hôpital à {v} min.
+
+### q.health.cs
+- PT: Saúde? Um centro de saúde a {v} min.
+- EN: Health? A health center {v} min away.
+- FR: Santé ? Un centre de santé à {v} min.
+
+### visit
+- PT: Marcar uma visita privada
+- EN: Book a private viewing
+- FR: Réserver une visite privée
+
+### view
+- PT: Ver o empreendimento
+- EN: View the development
+- FR: Voir la résidence
+
+### credit
+- PT: Imagem: {c}
+- EN: Image: {c}
+- FR: Image : {c}
+
+### more.src
+- PT: {t}, consultado a {d}.
+- EN: {t}, checked {d}.
+- FR: {t}, consulté le {d}.

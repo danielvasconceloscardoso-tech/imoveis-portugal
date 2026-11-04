@@ -1,5 +1,5 @@
 {
- "_how": "Developer projects (prompts 26 §1 and 28 §2). partner=true: shown on the public map, the place card ('Partner developers here') and a showcase page, labelled 'Sponsored' (only once the developer has signed and paid, D6, D38). partner=false: shown only in that developer's private demo (/d/{demo}/). Facts only as published by the developer or its public listings, with the URL of every item in 'sources' and the date in 'checked'; prices exactly as published (null = on request). On the site, a partner's line must also be written natively in PT and FR ('lines': {pt, fr}); the English 'line' is used for demos. Built by scripts/developers/import.py. A hand-entered partner may add 'unitTable' (every home as the developer publishes it, shown on the showcase, no unit pages) and 'location' (stated facts with sources; distances are ours, straight line from OpenStreetMap). A project shown on the site without being a sponsor carries 'tag' {pt, en, fr} ('Seleção' / 'Our pick' / 'Sélection'), shown everywhere instead of 'Sponsored' (prompt 66); import.py keeps such a record as entered.",
+ "_how": "Developer projects (prompts 26 §1 and 28 §2). partner=true: shown on the public map, the place card ('Partner developers here') and a showcase page, labelled 'Sponsored' (only once the developer has signed and paid, D6, D38). partner=false: shown only in that developer's private demo (/d/{demo}/). Facts only as published by the developer or its public listings, with the URL of every item in 'sources' and the date in 'checked'; prices exactly as published (null = on request). On the site, a partner's line must also be written natively in PT and FR ('lines': {pt, fr}); the English 'line' is used for demos. Built by scripts/developers/import.py. A hand-entered partner may add 'unitTable' (every home as the developer publishes it, shown on the showcase, no unit pages) and 'location' (stated facts with sources; distances are ours, straight line from OpenStreetMap). A project shown on the site without being a sponsor carries 'tag' {pt, en, fr} ('Seleção' / 'Our pick' / 'Sélection'), shown everywhere instead of 'Sponsored' (prompt 66); import.py keeps such a record as entered. A project may carry 'hero' {pt, en, fr} (one line) and 'heroImg' (a render): the map then opens its place on it, as the card's hero (prompt 68: arrival, the project first, the next questions, one more thing).",
  "projects": [
   {
    "id": "tomas-ribeiro-79",
@@ -344,6 +344,12 @@
     "en": "Our pick",
     "fr": "Sélection"
    },
+   "hero": {
+    "pt": "200 casas sobre o Douro, junto à Marina do Freixo.",
+    "en": "200 homes above the Douro, beside the Marina do Freixo.",
+    "fr": "200 logements au-dessus du Douro, près de la Marina do Freixo."
+   },
+   "heroImg": "/img/developers/orizon/sunset-terraces",
    "delivery": null,
    "url": "https://orizonliving.pt/",
    "partner": true,

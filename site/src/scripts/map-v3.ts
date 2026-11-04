@@ -16,7 +16,8 @@ import { heartHTML } from "./hearts";
 type Series = { n: string; m2: (number | null)[] };
 type Props = { id: number; n: string; s: string; r: string; x: number; y: number; a: number };
 type Layer = "none" | "price";
-type Proj = { id: string; name: string; tag?: string; developer: string; muni: string; lon: number; lat: number; render?: string; pin?: string; from: number | null; showcase: string; summary?: string; feats?: string[]; now?: number | null };
+type Proj = { id: string; name: string; tag?: string; developer: string; muni: string; lon: number; lat: number; render?: string; pin?: string; from: number | null; showcase: string; summary?: string; feats?: string[]; now?: number | null;
+  near?: string[]; muniName?: string; hero?: string; heroImg?: string };
 
 const reduce = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 const SKY = { "sky-color": "#f3efe6", "horizon-color": "#f6efe1", "fog-color": "#efe8da", "sky-horizon-blend": 0.6, "horizon-fog-blend": 0.7, "fog-ground-blend": 0.35, "atmosphere-blend": 0.5 };
@@ -66,6 +67,8 @@ export function initMapV3(root: HTMLElement) {
   const slugOf = (v: string | null) => (v ? plain(v).replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") : null);
   let selected: string | null = slugOf(q.get("place")), selPar: string | null = q.get("parish"), pinA: string | null = null;
   let selRegion: string | null = q.get("region"), panelOpen = false;
+  // Prompt 68: ?project=<id> opens that project's card on the map (the /orizon short link).
+  let selProj: string | null = q.get("project");
   let overlays = { golf: q.get("golf") === "1", beach: q.get("beach") === "1", devs: mode === "page" ? q.get("devs") !== "0" : q.get("devs") === "1" };
   let P: { quarters: string[]; munis: Record<string, Series> } | null = null;
   let qi = -1;  // quarter index; -1 = latest
@@ -77,6 +80,10 @@ export function initMapV3(root: HTMLElement) {
   let tourAbort: (() => void) | null = null;
   const projects: Proj[] = cfg.projects || [];
   const projMunis = new Set(projects.map((p) => p.muni));
+  // Prompt 68 (4 Nov 2026), the golden sample of the method (content/METHOD.md): a place whose shown partner project carries
+  // a "hero" line (projects.json) opens as an arrival, with the project first. Every other place keeps its card (rule 17).
+  const heroOf = (slug: string | null) => (slug ? projects.find((p) => p.muni === slug && p.hero && p.showcase) ?? null : null);
+  if (selProj && !projects.some((p) => p.id === selProj)) selProj = null;
   const last = () => (P ? P.quarters.length - 1 : 0);
   const at = () => (qi < 0 ? last() : qi);
   const qLabel = (k: string) => { const [y, qq] = k.split("-Q"); return L.qfmt.replace("{q}", qq).replace("{y}", y); };
@@ -84,7 +91,7 @@ export function initMapV3(root: HTMLElement) {
   function syncUrl() {
     const p = new URLSearchParams(location.search);
     const set = (k: string, v: string | null) => (v ? p.set(k, v) : p.delete(k));
-    set("budget", String(Math.round(budget))); set("layer", layer === "none" ? null : layer); set("place", selected); set("parish", selPar); set("region", selRegion);
+    set("budget", String(Math.round(budget))); set("layer", layer === "none" ? null : layer); set("place", selected); set("parish", selPar); set("region", selRegion); set("project", selProj);
     set("q", qi >= 0 && P ? P.quarters[qi] : null);
     for (const k of ["golf", "beach"] as const) set(k, overlays[k] ? "1" : null);
     set("devs", mode === "page" ? (overlays.devs ? null : "0") : overlays.devs ? "1" : null);  // prompt 39 §2.1: on by default on the map page
@@ -294,7 +301,7 @@ export function initMapV3(root: HTMLElement) {
       // Pitched, the south comes closer to the eye: aim a little south so the Algarve stays in frame.
       const home = { center: flat ? fit.center : [fit.center.lng, fit.center.lat - (narrow ? 0.15 : 0.45)], zoom: fit.zoom + (flat ? 0 : narrow ? 0.28 : 0.2), pitch: flat ? 0 : 50, bearing: flat ? 0 : -12 };
       (root as any).__home = home;
-      if (mode === "page" && !selected && !selPar && !selRegion && !q.has("q") && !reduce()) { map.jumpTo({ center: [-13.4, 38.6], zoom: home.zoom - 1.2, pitch: 22, bearing: home.bearing - 28 }); map.flyTo({ ...home, duration: 3400, curve: 1.15, easing: ease, essential: true }); }
+      if (mode === "page" && !selected && !selPar && !selRegion && !selProj && !q.has("q") && !reduce()) { map.jumpTo({ center: [-13.4, 38.6], zoom: home.zoom - 1.2, pitch: 22, bearing: home.bearing - 28 }); map.flyTo({ ...home, duration: 3400, curve: 1.15, easing: ease, essential: true }); }
       else map.jumpTo(home);
       if (q.get("q") && P && P.quarters.includes(q.get("q")!)) setQuarter(P.quarters.indexOf(q.get("q")!));
       if (overlays.golf) await drawGolf(); if (overlays.beach) await drawBeaches(); if (overlays.devs) drawProjects();
@@ -303,15 +310,19 @@ export function initMapV3(root: HTMLElement) {
         // its pin and as one sponsored line in the card (prompt 39 §2.6 opened the project card first). The card may already
         // be open (opened before the map, below): then the map only flies to the place.
         const p = byS.get(selected);
-        if (p && ctx?.kind === "muni" && ctx.id === selected && !sheet.hidden) { map.setFilter("sel", ["==", ["get", "s"], selected]); flyTo(p.x, p.y, Math.max(map.getZoom(), p.a < 40 ? 8.6 : 7.6)); }
+        if (p && ctx?.kind === "muni" && ctx.id === selected && !sheet.hidden) { map.setFilter("sel", ["==", ["get", "s"], selected]); heroOf(selected) ? arriveAt(selected) : flyTo(p.x, p.y, Math.max(map.getZoom(), p.a < 40 ? 8.6 : 7.6)); }
         else select(selected);
+      } else if (selProj) {
+        // Prompt 68: the project's card is open (below); the camera comes down to it with its municipality outlined.
+        const pr = projects.find((x) => x.id === selProj);
+        if (pr) { map.setFilter("sel", ["==", ["get", "s"], pr.muni]); arriveAt(pr.muni, pr); }
       }
       if (mode === "home" && !flat && !selected) startSpin();
       if (!flat) governor();
       map.on("click", (e: any) => { stopTour(); const gc = overlays.golf ? golfAt(e.point) : null; if (gc) { showGolf(gc); return; } const h = pick(e.point); if (!h) return; if (h.kind === "par") selectParish(h.key); else select(h.key); });
       map.on("mousemove", (e: any) => hover(e.point)); map.on("mouseout", () => hover(null));
       map.on("move", labelsSoon); map.on("zoomend", () => { if (map.getZoom() > 7.8) loadParishes(); });
-      ["pointerdown", "wheel", "touchstart"].forEach((ev) => canvas.addEventListener(ev, () => { stopTour(); halt(); }, { passive: true }));
+      ["pointerdown", "wheel", "touchstart"].forEach((ev) => canvas.addEventListener(ev, () => { stopTour(); halt(); arrStop(); }, { passive: true }));
       if (mode === "home") ["pointerdown", "touchstart", "wheel", "keydown", "focusin", "input"].forEach((ev) => root.addEventListener(ev, halt, { passive: true }));
       placeLabels();
     })();
@@ -344,19 +355,32 @@ export function initMapV3(root: HTMLElement) {
   function placeLabels() {
     if (!map) return; const z = map.getZoom(), W = canvas.clientWidth, H = canvas.clientHeight;
     const want = features.map((f) => f.properties as Props).filter((p) => (BIG.includes(p.s) && z > (W < 700 ? 5.2 : 5.9)) || (z > 8.2 && p.a > 2) || z > 9.2);
-    const placed: { x: number; y: number; w: number }[] = []; let h = "";
+    const placed: { x: number; y: number; w: number; h?: number }[] = []; let h = "";
+    // Prompt 68: the visible photo pins (a 44 px photograph above its point, the short label to its right) are kept clear:
+    // a name that would sit on one moves above or below it, or waits for a closer zoom.
+    const cv = canvas.getBoundingClientRect();
+    for (const mk of markers) {
+      if (mk.el.style.display === "none") continue;
+      for (const el of [mk.el, mk.el.querySelector<HTMLElement>(".m3-pin-t")]) {
+        const r = el?.getBoundingClientRect(); if (!r || !r.width || r.right < cv.left || r.left > cv.right || r.bottom < cv.top || r.top > cv.bottom) continue;
+        placed.push({ x: r.left - cv.left + r.width / 2, y: r.top - cv.top + r.height / 2, w: r.width + 6, h: r.height + 2 });
+      }
+    }
+    const clash = (x: number, y: number, w: number) => placed.some((o) => Math.abs(o.x - x) < (o.w + w) / 2 && Math.abs(o.y - y) < ((o.h ?? 18) + 18) / 2);
     // D83 part 2: at the national view, the regions' names first (the map "by region"), quiet capitals.
     if (z < (W < 700 ? 6.4 : 7.0)) for (const [r, [x, y]] of Object.entries(regionAt)) {
       const c = map.project([x, y]); const name = L.regions[r] || ""; const w = name.length * 9 + 16;
       if (c.x < 0 || c.y < 0 || c.x > W || c.y > H || !name) continue;
-      placed.push({ x: c.x, y: c.y, w }); h += `<span class="m3-l0" style="transform:translate(${Math.round(c.x)}px,${Math.round(c.y)}px)">${esc(name)}</span>`;
+      const ry = [c.y, c.y + 22, c.y - 22, c.y + 44].find((yy) => !clash(c.x, yy, w)) ?? c.y;
+      placed.push({ x: c.x, y: ry, w }); h += `<span class="m3-l0" style="transform:translate(${Math.round(c.x)}px,${Math.round(ry)}px)">${esc(name)}</span>`;
     }
     const rank = (p: Props) => { const i = BIG.indexOf(p.s); return i >= 0 ? i : projMunis.has(p.s) ? BIG.length : 1000 - p.a; };
     for (const p of want.sort((a, b) => rank(a) - rank(b))) {
       const c = map.project([p.x, p.y]); if (c.x < 0 || c.y < 0 || c.x > W || c.y > H) continue;
       const big = BIG.includes(p.s), w = p.n.length * (big ? 8.5 : 6.5) + 8;
       // Over the place if there is room, otherwise just above or just below it; dropped only when all three are taken.
-      const y = [c.y, c.y - 17, c.y + 17].find((yy) => !placed.some((o) => Math.abs(o.x - c.x) < (o.w + w) / 2 && Math.abs(o.y - yy) < 18));
+      // A big name (Porto) next to a photo pin may also step a little further down or up rather than disappear.
+      const y = [c.y, c.y - 17, c.y + 17, ...(big ? [c.y + 32, c.y - 34] : [])].find((yy) => !clash(c.x, yy, w));
       if (y === undefined) continue;
       placed.push({ x: c.x, y, w }); h += `<span class="${big ? "m3-l1" : "m3-l2"}" style="transform:translate(${Math.round(c.x)}px,${Math.round(y)}px)">${esc(p.n)}</span>`;
       if (placed.length > 70) break;
@@ -400,6 +424,33 @@ export function initMapV3(root: HTMLElement) {
     map.flyTo({ center: [x, y], zoom: z, pitch: flat ? 0 : 46, duration: reduce() ? 0 : dur, curve: 1.3, easing: ease, essential: true,
       padding: isWide() ? { right: 440, left: 0, top: 60, bottom: 120 } : { bottom: canvas.clientHeight * 0.42, top: 60, left: 0, right: 0 } });
   }
+  // Prompt 68, the arrival (content/METHOD.md, question 3): the camera comes down the Douro to the place in about two
+  // seconds, in 3D (pitched and turned along the river), and stops on the partner project. The flight is the place's own
+  // ("camera" in content/facts/map/places/<slug>/place.json: [lon, lat, zoom, bearing, pitch] keyframes); without one,
+  // a single flight to the project. Any touch, drag or wheel on the map takes over at once; reduced motion jumps there.
+  let arrAbort: (() => void) | null = null;
+  function arrStop() { const a = arrAbort; arrAbort = null; a?.(); }
+  function arriveAt(slug: string, pr = heroOf(slug)) {
+    if (!map || !pr) return;
+    arrStop();
+    const go = (cam?: number[][]) => {
+      if (!map) return;
+      // Phone: the arrival card stands a little taller (60%), so the project's render already shows; the place sits above it.
+      const padding = isWide() ? { right: 440, left: 0, top: 60, bottom: 120 } : { bottom: canvas.clientHeight * 0.6, top: 70, left: 0, right: 0 };
+      const kf = (k: number[]) => ({ center: [k[0], k[1]] as [number, number], zoom: k[2], bearing: k[3], pitch: k[4], padding });
+      const end = cam?.length ? kf(cam[cam.length - 1]) : { center: [pr.lon, pr.lat] as [number, number], zoom: 11.8, bearing: -20, pitch: 55, padding };
+      ev({ event: "map/arrive", place: slug, step: pr.id, origin: mode }); tip.hidden = true;
+      if (reduce()) { map.jumpTo(end); return; }
+      let stop = false; arrAbort = () => { stop = true; map?.stop(); };
+      const done = () => { if (!stop) arrAbort = null; };
+      if (cam && cam.length > 1) {
+        // Down from where the reader is to the river upstream (ease in), then along the river to the project (ease out).
+        map.flyTo({ ...kf(cam[0]), duration: 1000, curve: 1.2, easing: (t: number) => t * t, essential: true });
+        map.once("moveend", () => { if (stop || !map) return; map.easeTo({ ...end, duration: 1150, easing: (t: number) => 1 - (1 - t) * (1 - t), essential: true }); map.once("moveend", done); });
+      } else { map.flyTo({ ...end, duration: 2000, curve: 1.3, easing: ease, essential: true }); map.once("moveend", done); }
+    };
+    const c = placeCache.get(slug); c ? go(c.c5?.cam) : loadPlace(slug).then((d) => { if ((selected === slug || selProj === pr.id) && map) go(d?.c5?.cam); });
+  }
   // Time on a place (part 5): from the card opening to its closing, another place, a partner card or the page hiding;
   // sent as a band (lib/track.ts TIME_BANDS), never raw milliseconds.
   let tPlace: string | null = null, t0 = 0;
@@ -408,10 +459,10 @@ export function initMapV3(root: HTMLElement) {
   function select(slug: string | null, fly = true) {
     if (slug) { ev({ event: "map/place", place: slug, origin: mode }); ev({ event: "map/card/muni", place: slug, origin: mode }); }
     if (pinA && slug && slug !== pinA) { compare(pinA, slug); return; }
-    selected = slug; selPar = null; selRegion = null;
+    arrStop(); selected = slug; selPar = null; selRegion = null; selProj = null;
     if (map) map.setFilter("sel", ["==", ["get", "s"], slug ?? ""]);
     const p = slug ? byS.get(slug) : null;
-    if (p && map && fly) flyTo(p.x, p.y, Math.max(map.getZoom(), p.a < 40 ? 8.6 : 7.6));
+    if (p && map && fly) heroOf(slug) ? arriveAt(slug!) : flyTo(p.x, p.y, Math.max(map.getZoom(), p.a < 40 ? 8.6 : 7.6));
     syncUrl(); sentence();
     if (slug) {
       showPlace(slug); timeStart(slug);
@@ -454,7 +505,9 @@ export function initMapV3(root: HTMLElement) {
     if (c5?.ph?.length) {
       const n = c5.ph.length;
       const imgs = c5.ph.map((p: any, i: number) => `<img class="m3-photo" src="/img/v2/${p.f}-640.webp" srcset="/img/v2/${p.f}-640.webp 640w, /img/v2/${p.f}-1024.webp 1024w${p.w >= 1600 ? `, /img/v2/${p.f}-1600.webp 1600w` : ""}" sizes="(max-width: 819px) 100vw, 420px" alt="${esc(p.alt?.[cfg.lang] ?? "")}" width="640" height="400"${i ? ` loading="lazy"` : ` fetchpriority="high"`} decoding="async" aria-label="${esc(C5.photoN.replace("{i}", String(i + 1)).replace("{n}", String(n)))}">`).join("");
-      return `<figure class="m3-ph m3-gal" data-gal><div class="m3-gal-t" data-gal-t tabindex="0">${imgs}</div>${n > 1 ? `<p class="m3-gal-d" aria-hidden="true">${c5.ph.map((_: any, i: number) => `<i${i ? "" : ` class="is-on"`}></i>`).join("")}</p>` : ""}</figure>`;
+      // Prompt 68: a photograph that asks for a credit (the developer's own views) carries it, small, on the image.
+      const cr = c5.ph[0]?.credit && cfg.p68 ? `<figcaption class="m3-cr">${esc(cfg.p68.credit.replace("{c}", c5.ph[0].credit))}</figcaption>` : "";
+      return `<figure class="m3-ph m3-gal" data-gal><div class="m3-gal-t" data-gal-t tabindex="0">${imgs}</div>${n > 1 ? `<p class="m3-gal-d" aria-hidden="true">${c5.ph.map((_: any, i: number) => `<i${i ? "" : ` class="is-on"`}></i>`).join("")}</p>` : ""}${cr}</figure>`;
     }
     const own = slug ? cfg.photos[slug] : "", reg = isRegion ? cfg.regionPhotos?.[r] ?? "" : "";
     const f = own || reg; if (!f) return `<div class="m3-photo m3-photo-none m3-photo-quiet"><span>${esc(L.regions[r] || "")}</span></div>`;
@@ -519,6 +572,7 @@ export function initMapV3(root: HTMLElement) {
       const f = c5.fl?.[cfg.ed]; if (f) li.push(`${C5.src.flight.replace("{from}", f.from).replace("{to}", f.to).replace("{d}", dateF(f.d))}`);
       if (c5.sch?.length) li.push(C5.src.sch.replace("{d}", dateF(c5.d)));
       if (c5.hsp?.length) li.push(C5.src.hsp.replace("{d}", dateF(c5.d)));
+      const mo = c5.more?.src?.[cfg.lang]; if (mo && cfg.p68) li.push(`<a href="${esc(c5.more.u)}" rel="noopener" target="_blank">${esc(cfg.p68.moreSrc.replace("{t}", mo).replace("{d}", dateF(c5.more.d)))}</a>`);
       li.push(`<a href="${esc(cfg.links.credits)}">${esc(C5.src.ph)}</a>`);
     } else if (x.kind !== "region" && (d?.bch != null || d?.sch || d?.hsp)) li.push(C5.src.km);
     return `<div class="m3-sb m3-tv"><button type="button" class="m3-back" data-back>${chevBack}${esc(T4.back)}</button><p class="m3-kick">${esc(x.name)}</p><h3 tabindex="-1" class="m3-h-s">${esc(C5.srcH)}</h3>
@@ -540,6 +594,12 @@ export function initMapV3(root: HTMLElement) {
     // Part 2 (3 Nov): the heart keeps the place in "A sua seleção" (its own page where it has one, else the map on it).
     const regionHref = cfg.links.pages.includes(slug) ? `${cfg.links.map}${slug}/` : `${cfg.links.map}?place=${slug}`;
     const line = d.c5?.line?.[cfg.lang] ?? [d.n3, L.regions[r]].filter((z: string, k: number, a: string[]) => z && a.indexOf(z) === k).join(", ");
+    const hp = heroOf(slug);
+    if (hp && d.c5 && cfg.p68) {
+      ctx = x; rerender = () => showPlace(slug, false); srcFor = () => sourcesHTML(d, x);
+      openSheet(arrivalHTML(slug, d, name, regionHref, hp), open, true); wireArrival(slug, hp, open);
+      return;
+    }
     let h = `${photoHTML(slug, r, d.c5)}<div class="m3-sb"><p class="m3-kick">${esc(L.regions[r] || "")}</p><div class="ht-row"><h2 class="m3-h" tabindex="-1">${esc(name)}</h2>${heartHTML("region", slug, name, regionHref)}</div>`;
     h += `<p class="m3-line">${esc(line)}</p><div class="m3-tiles">${priceTile(d)}${d.c5 ? c5Tiles(d) : kmTiles(d)}</div>`;
     h += ctaHTML(name);
@@ -549,6 +609,74 @@ export function initMapV3(root: HTMLElement) {
     h += `${mareHTML()}</div>`;
     ctx = x; rerender = () => showPlace(slug, false); srcFor = () => sourcesHTML(d, x);
     openSheet(h, open);
+  }
+  // Prompt 68: the place as an arrival (content/METHOD.md). First screen: the photograph, the name, one line; then the
+  // partner project as the hero (the render, one line, one action, a quiet link); then the next questions, one line each,
+  // opening on tap (the same free lists and tiles as the golden sample card: nothing new is free, nothing free is lost);
+  // "Fontes" and the advisor as quiet links; the Maré block; and the card's last line, set apart: one more thing.
+  const chevDown = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>`;
+  function arrivalHTML(slug: string, d: any, name: string, href: string, pr: Proj): string {
+    const c5 = d.c5, P8 = cfg.p68, lang = cfg.lang;
+    const arrive = c5.arrive?.[lang] ?? c5.line?.[lang] ?? "";
+    let h = `${photoHTML(slug, d.r ?? "", c5).replace('class="m3-ph m3-gal"', 'class="m3-ph m3-gal m3-gal-arr"')}<div class="m3-sb m3-arr"><div class="ht-row"><h2 class="m3-h m3-h-xl" tabindex="-1">${esc(name)}</h2>${heartHTML("region", slug, name, href)}</div>`;
+    h += `<p class="m3-arr-l">${esc(arrive)}</p></div>`;
+    // The hero: the project's render, edge to edge, its label (never "Sponsored" for a pick of ours), one line, one action.
+    const img = pr.heroImg || pr.render || "";
+    const tag = `<span class="m3-tag">${esc(pr.tag || L.sponsored)}</span>`;
+    h += `<section class="m3-hero" data-hero aria-label="${esc(pr.name)}">${img ? `<figure class="m3-hero-f"><img class="m3-hero-i" src="${esc(img)}-800.webp" srcset="${esc(img)}-800.webp 800w, ${esc(img)}-1600.webp 1600w" sizes="(max-width: 819px) 100vw, 400px" alt="" width="800" height="450" decoding="async"><figcaption class="m3-hero-t">${tag}</figcaption></figure>` : ""}
+      <div class="m3-hero-b">${img ? "" : `<p class="m3-kick">${tag}</p>`}<h3 class="m3-hero-n">${esc(pr.name)}</h3><p class="m3-hero-l">${esc(pr.hero ?? "")}</p>
+      <a class="m3-btn m3-btn-p m3-btn-w" href="${esc(pr.showcase)}#pedir" data-visit>${esc(P8.visit)}</a>
+      <p class="m3-hero-v"><a class="m3-link" href="${esc(pr.showcase)}" data-view>${esc(P8.view)} →</a></p></div></section>`;
+    // The next questions.
+    const qs: [string, string, string][] = [];
+    const city = c5.life.find((z: any[]) => z[0] === "city");
+    if (city) {
+      const cn = (typeof city[1] === "string" ? city[1] : city[1][lang] ?? city[1].pt).split(",")[0].trim();
+      const life: [string, string][] = c5.life.map(([, n, m]: [string, any, number]) => [esc(typeof n === "string" ? n : n[lang] ?? n.pt), mins(m)]);
+      life.push(flightRow(c5.fl));
+      qs.push(["life", P8.q.life.replace("{city}", cn).replace("{v}", nf.format(city[2])), `<p class="m3-tt">${esc(C5.life)}<small>${esc(C5.bycar)}</small></p>${listHTML(life)}`]);
+    }
+    if (c5.sch?.length) {
+      // The count and the limit come from the card's rows (schools.csv, card=1): the next five minutes above the farthest.
+      const top = Math.max(...c5.sch.map((z: any[]) => z[1] as number)), lim = (Math.floor(top / 5) + 1) * 5;
+      qs.push(["schools", P8.q.schools.replace("{n}", nf.format(c5.sch.length)).replace("{m}", nf.format(lim)), `<p class="m3-tt">${esc(C5.schools)}<small>${esc(C5.within)}</small></p>${listHTML(c5.sch.map(([n, m]: [string, number]) => [esc(n), mins(m)]))}`]);
+    }
+    if (d.m2) {
+      const a = Math.round(budget / d.m2);
+      qs.push(["price", P8.q.price.replace("{b}", money(budget)).replace("{a}", nf.format(a)), `${priceTile(d)}<div class="m3-acts m3-acts-1"><button type="button" class="m3-btn" data-unlock-open>${esc(C5.ctaPaid)}</button></div>`]);
+    }
+    if (c5.hsp?.length) {
+      const near = c5.hsp.reduce((a: any[], b: any[]) => (b[1] < a[1] ? b : a));
+      const note = (t?: string) => (t ? `<small>${esc(t === "@cs" ? C5.tagCs : t)}</small>` : "");
+      qs.push(["health", (near[2] === "@cs" ? P8.q.healthCs : P8.q.health).replace("{v}", nf.format(near[1])), `<p class="m3-tt">${esc(C5.health)}<small>${esc(C5.within)}</small></p>${listHTML(c5.hsp.map(([n, m, t]: [string, number, string?]) => [`${esc(n)}${note(t)}`, mins(m)]))}`]);
+    }
+    h += `<div class="m3-sb m3-qa">${qs.map(([id, q, body]) => `<div class="m3-q" data-q="${id}"><button type="button" class="m3-qb" aria-expanded="false" aria-controls="m3q-${mode}-${id}"><span>${esc(q)}</span>${chevDown}</button><div class="m3-qp" id="m3q-${mode}-${id}" role="region" inert><div class="m3-qi">${body}</div></div></div>`).join("")}`;
+    h += `<p class="m3-fontes m3-quiet"><button type="button" class="m3-link" data-sources>${esc(C5.sources)}</button><a class="m3-link" href="${esc(`${cfg.links.consult}?place=${encodeURIComponent(name)}`)}" data-concierge data-cta-consult>${esc(C5.ctaConsult)}</a></p>`;
+    h += `${mareHTML()}`;
+    // One more thing: the card's last line, with its fact (facts.csv) behind "Fontes".
+    const more = c5.more?.[lang];
+    if (more) h += `<p class="m3-onemore" data-more>${esc(more)}</p>`;
+    return h + `</div>`;
+  }
+  // The arrival card's signals (one schema, lib/track.ts): the project first seen, the visit asked, each question opened,
+  // the last line seen.
+  function wireArrival(slug: string, pr: Proj, opened: boolean) {
+    if (opened) ev({ event: "map/hero", place: slug, step: pr.id, origin: mode });
+    sheetIn.querySelector("[data-visit]")?.addEventListener("click", () => ev({ event: "map/visit", place: slug, step: pr.id, origin: mode }));
+    sheetIn.querySelector("[data-view]")?.addEventListener("click", () => ev({ event: "map/hero/view", place: slug, step: pr.id, origin: mode }));
+    sheetIn.querySelectorAll<HTMLElement>("[data-q]").forEach((qq) => {
+      const b = qq.querySelector<HTMLButtonElement>(".m3-qb")!, panel = qq.querySelector<HTMLElement>(".m3-qp")!;
+      b.addEventListener("click", () => {
+        const on = b.getAttribute("aria-expanded") !== "true";
+        b.setAttribute("aria-expanded", String(on)); qq.classList.toggle("is-open", on); panel.inert = !on;
+        if (on) { ev({ event: `map/qa/${qq.dataset.q}`, place: slug, origin: mode }); if (!isWide() && detent < 2) setDetent(2); }
+      });
+    });
+    const more = sheetIn.querySelector<HTMLElement>("[data-more]");
+    if (more && "IntersectionObserver" in window) {
+      const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { io.disconnect(); ev({ event: "map/more", place: slug, origin: mode }); } }, { root: sheetIn, threshold: 0.9 });
+      io.observe(more);
+    }
   }
   function selectParish(code: string) {
     const f = parishes?.feats.find((x) => x.properties.id === code); if (!f) return;
@@ -643,8 +771,8 @@ export function initMapV3(root: HTMLElement) {
     if (map) map.fitBounds([[Math.min(pa.x, pb.x), Math.min(pa.y, pb.y)], [Math.max(pa.x, pb.x), Math.max(pa.y, pb.y)]], { padding: isWide() ? { left: 80, right: 520, top: 120, bottom: 160 } : { left: 40, right: 40, top: 100, bottom: canvas.clientHeight * 0.5 }, maxZoom: 9, duration: reduce() ? 0 : 1200, pitch: flat ? 0 : 40 });
   }
   let detent = 1;  // mobile: 0 peek, 1 half, 2 full
-  function openSheet(h: string, focus: boolean) {
-    view = "card";
+  function openSheet(h: string, focus: boolean, arr = false) {
+    view = "card"; sheet.classList.toggle("is-arr", arr);
     sheetIn.innerHTML = h + `<button type="button" class="m3-x" aria-label="${L.close}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>`;
     const wasHidden = sheet.hidden; sheet.hidden = false; requestAnimationFrame(() => sheet.classList.add("is-open"));
     if (!isWide()) setDetent(wasHidden ? 1 : detent);
@@ -662,7 +790,10 @@ export function initMapV3(root: HTMLElement) {
       gt.addEventListener("scroll", () => { const i = Math.round(gt.scrollLeft / Math.max(1, gt.clientWidth)); dots.forEach((d, k) => d.classList.toggle("is-on", k === i)); if (i > seen && ctx) { seen = i; ev({ event: `map/gallery/${i + 1}`, ...evPlace(ctx), origin: mode }); } }, { passive: true }); }
     if (focus && wasHidden && root.contains(document.activeElement)) sheetIn.querySelector<HTMLElement>("h2, h3")?.focus({ preventScroll: true });
   }
-  function closeSheet() { timeEnd(); ctx = null; rerender = null; view = "card"; if (selRegion) { selRegion = null; syncUrl(); } sheet.classList.remove("is-open"); setTimeout(() => { if (!sheet.classList.contains("is-open")) sheet.hidden = true; }, 260); pinA = null; if (map) map.setFilter("sel", ["==", ["get", "s"], ""]); }
+  function closeSheet() { timeEnd(); arrStop(); if (selProj) { selProj = null; syncUrl(); }
+    // The 2D map (phones) is tilted only for an arrival: closing the card sets it flat again.
+    if (map && flat && (map.getPitch() > 0.5 || Math.abs(map.getBearing()) > 0.5)) map.easeTo({ pitch: 0, bearing: 0, duration: reduce() ? 0 : 600 });
+    ctx = null; rerender = null; view = "card"; if (selRegion) { selRegion = null; syncUrl(); } sheet.classList.remove("is-open"); setTimeout(() => { if (!sheet.classList.contains("is-open")) sheet.hidden = true; }, 260); pinA = null; if (map) map.setFilter("sel", ["==", ["get", "s"], ""]); }
   function setDetent(d: number) { detent = d; sheet.dataset.detent = String(d); }
   { // drag the sheet between its three heights (mobile)
     const grab = $("[data-grab]"); let y0 = 0, h0 = 0, on = false;
@@ -743,8 +874,10 @@ export function initMapV3(root: HTMLElement) {
     markers.forEach((x) => x.m.remove()); markers = []; if (!overlays.devs || !map) return;
     for (const p of projects) {
       // D83 part 2: a small photo pin (the developer's own render), the name and "Patrocinado" from city zoom.
-      const el = document.createElement("button"); el.type = "button"; el.className = p.pin ? "m3-pin m3-pin-ph" : "m3-pin";
-      el.innerHTML = `<b class="m3-pin-n"></b><span>${esc(p.name)}<em>${esc(p.tag || L.sponsored)}</em></span>${p.pin ? `<img class="m3-pin-img" src="${esc(p.pin)}" alt="" width="44" height="44" decoding="async"><i class="m3-pin-tip" aria-hidden="true"></i>` : `<i class="m3-pin-dot" aria-hidden="true"></i>`}`;
+      // Prompt 68: a pick of ours with a hero line keeps its short label ("Seleção") at every zoom, never merges into a
+      // group, and stands above the other pins (the opening view of Portugal shows it).
+      const el = document.createElement("button"); el.type = "button"; el.className = `${p.pin ? "m3-pin m3-pin-ph" : "m3-pin"}${p.hero ? " m3-pin-pick" : ""}`;
+      el.innerHTML = `<b class="m3-pin-n"></b><span>${esc(p.name)}<em>${esc(p.tag || L.sponsored)}</em></span>${p.pin ? `<img class="m3-pin-img" src="${esc(p.pin)}" alt="" width="44" height="44" decoding="async"><i class="m3-pin-tip" aria-hidden="true"></i>` : `<i class="m3-pin-dot" aria-hidden="true"></i>`}${p.hero && p.tag ? `<small class="m3-pin-t" aria-hidden="true">${esc(p.tag)}</small>` : ""}`;
       const x = { p, el, m: null as any, grp: [p] };
       el.addEventListener("click", (e) => {
         e.stopPropagation(); stopTour();
@@ -763,19 +896,35 @@ export function initMapV3(root: HTMLElement) {
     const at = new Map(markers.map((x) => [x, map.project([x.p.lon, x.p.lat])]));
     for (const a of markers) {
       if (done.has(a)) continue; done.add(a); const ca = at.get(a)!; const grp = [a];
-      if (z < 14) for (const b of markers) if (!done.has(b)) { const cb = at.get(b)!; if (Math.hypot(ca.x - cb.x, ca.y - cb.y) < 44) { grp.push(b); done.add(b); } }
+      if (z < 14 && !a.p.hero) for (const b of markers) if (!done.has(b) && !b.p.hero) { const cb = at.get(b)!; if (Math.hypot(ca.x - cb.x, ca.y - cb.y) < 44) { grp.push(b); done.add(b); } }
       a.grp = grp.map((g) => g.p); a.el.style.display = "";
       for (const b of grp.slice(1)) { b.grp = []; b.el.style.display = "none"; }
       const n = grp.length; a.el.classList.toggle("is-cluster", n > 1); a.el.classList.toggle("is-named", n === 1 && z >= 10);  // §2.3: the name at city zoom
       a.el.querySelector(".m3-pin-n")!.textContent = n > 1 ? String(n) : "";
-      a.el.setAttribute("aria-label", n > 1 ? `${n} · ${L.g.devs}` : a.p.name);
+      a.el.setAttribute("aria-label", n > 1 ? `${n} · ${L.g.devs}` : a.p.tag ? `${a.p.name}, ${a.p.tag}` : a.p.name);
     }
+    labelsSoon();  // the place names make room for the pins
   }
 
   // Prompt 38: a partner project's card (photo, name, summary, three features, homes for sale now, price on request).
   function showProject(p: Proj, open = true) {
     timeEnd(); ev({ event: `p/${p.id}/pin`, place: p.id, origin: "map" }); ev({ event: "map/card/project", place: p.id, origin: mode }); ctx = null; selRegion = null;
     const pl = cfg.pl ?? {};
+    selProj = p.id; selected = null; syncUrl();
+    if (p.hero && cfg.p68) {
+      // Prompt 68: a project with a hero line opens like the hero of its place's card: the render, the name, one line, one
+      // action (the private viewing, on the showcase's own request sheet), the showcase as a quiet link, and its place.
+      const img = p.heroImg || p.render || "", pm2 = byS.get(p.muni)?.n ?? p.muniName ?? "";
+      let hh = `${img ? `<img class="m3-photo m3-hero-top" src="${esc(img)}-800.webp" srcset="${esc(img)}-800.webp 800w, ${esc(img)}-1600.webp 1600w" sizes="(max-width: 819px) 100vw, 400px" alt="" width="800" height="450" fetchpriority="high">` : ""}`;
+      hh += `<div class="m3-sb m3-arr"><p class="m3-kick">${esc(pm2)} · <span class="m3-tag">${esc(p.tag || L.sponsored)}</span></p><div class="ht-row"><h2 class="m3-h" tabindex="-1">${esc(p.name)}</h2>${heartHTML("home", p.id, pm2 ? `${p.name}, ${pm2}` : p.name, p.showcase)}</div>`;
+      hh += `<p class="m3-arr-l">${esc(p.hero)}</p>${p.from ? `<p class="m3-line">${esc(L.pfrom.replace("{v}", eur.format(p.from)))}</p>` : ""}`;
+      hh += `<a class="m3-btn m3-btn-p m3-btn-w" href="${esc(p.showcase)}#pedir" data-visit>${esc(cfg.p68.visit)}</a>`;
+      hh += `<p class="m3-hero-v m3-quiet"><a class="m3-link" href="${esc(p.showcase)}" data-view>${esc(cfg.p68.view)} →</a>${byS.has(p.muni) || pm2 ? `<button type="button" class="m3-link" data-goto="${esc(p.muni)}">${esc(pm2)} →</button>` : ""}</p></div>`;
+      openSheet(hh, open, true);
+      sheetIn.querySelector("[data-visit]")?.addEventListener("click", () => ev({ event: "map/visit", place: p.muni, step: p.id, origin: mode }));
+      sheetIn.querySelector("[data-view]")?.addEventListener("click", () => ev({ event: "map/hero/view", place: p.muni, step: p.id, origin: mode }));
+      return;
+    }
     const photo = p.render ? `<img class="m3-photo" src="${esc(p.render)}-800.webp" alt="" width="800" height="450">` : "";
     const pm = byS.get(p.muni)?.n ?? "";
     let h = `${photo}<div class="m3-sb"><p class="m3-kick">${esc(pm)} · <span class="m3-tag">${esc(p.tag || L.sponsored)}</span></p><div class="ht-row"><h3 tabindex="-1">${esc(p.name)}</h3>${heartHTML("home", p.id, pm ? `${p.name}, ${pm}` : p.name, p.showcase)}</div>`;
@@ -967,10 +1116,17 @@ export function initMapV3(root: HTMLElement) {
     // A link with a state opens the map straight away; a plain ?place= link shows the card at once (below) and the map wakes
     // at the first sign of a reader, then flies to the place (operator, step 1: the card in under a second on a phone).
     if (q.has("parish") || q.has("region") || q.has("q") || q.has("layer")) ("requestIdleCallback" in window ? (window as any).requestIdleCallback : setTimeout)(() => load(), { timeout: 2500 });
+    // Prompt 68: the pick's photo pin belongs to the opening view of Portugal, so with one on the map (and the
+    // developments shown) the map wakes once the page is idle instead of waiting for the reader.
+    else if (overlays.devs && projects.some((p) => p.hero)) ("requestIdleCallback" in window ? (window as any).requestIdleCallback : setTimeout)(() => load(), { timeout: 1500 });
   }
   // Operator, step 1 (under one second): a ?place= link shows the card at once from the place's small file, before
   // MapLibre and the map data arrive; the map then flies to it.
-  if (selected && !selPar && mode === "page") {
+  if (selProj && !selected && !selPar && mode === "page") {
+    // Prompt 68: ?project=<id> (the /orizon short link): the project's card at once, then the map comes down to it.
+    const pr = projects.find((x) => x.id === selProj); if (pr) { showProject(pr); load(); }
+  } else if (selected && !selPar && mode === "page") {
+    if (heroOf(selected)) load();  // the arrival is part of the card: the map wakes at once
     const slug = selected;
     loadPlace(slug).then((d) => { if (d && selected === slug && sheet.hidden) { ev({ event: "map/place", place: slug, origin: mode }); ev({ event: "map/card/muni", place: slug, origin: mode }); showPlace(slug); timeStart(slug); savePlace(d.n); rememberPlace(d.n); } });
   }

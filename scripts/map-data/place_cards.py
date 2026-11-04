@@ -2,7 +2,9 @@
 
 Files read (all checked at their sources on the date in each row; SOURCES.md in the folder says how):
   place.json   origin point, one line about life there (PT, EN, FR), photographs (hero first), which beach, city and airport
-               the card names, flights per edition (facts.csv ids: published scheduled block times)
+               the card names, flights per edition (facts.csv ids: published scheduled block times); optional (prompt 68):
+               "arrive" (the arrival line, {min} = minutes to the city point), "more" (the card's last line and its
+               facts.csv id) and "camera" (the arrival flight, [lon, lat, zoom, bearing, pitch] keyframes)
   routes.csv   OSRM drive times (router.project-osrm.org, OpenStreetMap data) from the origin to every point
   schools.csv  schools within 20 minutes by car (DGEEC InfoEscolas and each school's own site); card=1 on the free card
   health.csv   hospitals and health centres within 20 minutes by car (ERS public registry); card=1 on the free card,
@@ -61,6 +63,16 @@ def build(root, out):
             "hsp": [[r["name"], mins(r)] + ([r["card_note"]] if r.get("card_note") else []) for r in hsp if r["card"] == "1"],
             "o": pl["origin"]["name"], "d": checked,
         }
+        # Prompt 68 (4 Nov 2026): the arrival line under the name ({min}: OSRM minutes to the card's city point), the card's
+        # last line ("one more thing", only with its fact in facts.csv) and the arrival flight down to the place.
+        city = routes.get(pl["life"]["city"])
+        if pl.get("arrive") and city:
+            free["arrive"] = {k: v.replace("{min}", str(mins(city))) for k, v in pl["arrive"].items()}
+        more = pl.get("more")
+        if more and facts.get(more.get("fact", "")):
+            fact = facts[more["fact"]]
+            free["more"] = {**{k: more[k] for k in ("pt", "en", "fr") if more.get(k)}, "src": more.get("src"), "u": fact["source_url"], "d": fact["checked_on"]}
+        if pl.get("camera"): free["cam"] = pl["camera"]
         beaches = sorted((r for r in routes.values() if r["kind"] == "beach"), key=lambda r: float(r["drive_min"]))
         paid = {
             "o": pl["origin"], "d": checked,

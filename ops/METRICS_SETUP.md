@@ -47,6 +47,12 @@ The Cloudflare count is the page `/e/{ed}/{event}/`, except the three short fami
 | `map/paid/preview/{rent,g10y,foreign,supply,compare}` | `{ed}/map/paid/preview/{t}/` | place or region, origin | a paid tile (or a locked comparison row) opens the unlock sheet |
 | `map/paid/preview/card` | `{ed}/map/paid/preview/card/` | place or region, origin | "Ver a análise completa" on the place card opens the unlock sheet (operator, step 1, 3 Nov 2026) |
 | `map/card/sources` | `{ed}/map/card/sources/` | place or region, origin | the card's "Fontes" link (step 1) |
+| `map/arrive` | `{ed}/map/arrive/` | place, step (the project id), origin | prompt 68: the arrival flight to a place with a hero project starts (tap, `?place=`, `?project=`) |
+| `map/hero` | `{ed}/map/hero/` | place, step (the project id), origin | prompt 68: the place card opens on its hero project |
+| `map/visit` | `{ed}/map/visit/` | place, step (the project id), origin | prompt 68: "Marcar uma visita privada" on the map (the showcase's request sheet opens) |
+| `map/hero/view` | `{ed}/map/hero/view/` | place, step (the project id), origin | prompt 68: "Ver o empreendimento" on the map |
+| `map/qa/{life,schools,price,health}` | `{ed}/map/qa/{q}/` | place, origin | prompt 68: one of the next questions is opened |
+| `map/more` | `{ed}/map/more/` | place, origin | prompt 68: the card's last line ("one more thing") comes into view |
 | `map/cta/{paid,consult}` | `{ed}/map/cta/{k}/` | place or region, origin | the card's two calls to action: the paid analysis, "O consultor ajuda" (the Concierge with the place filled in) (step 1) |
 | `map/gallery/{2,3}` | `{ed}/map/gallery/{i}/` | place, origin | a gallery view seen on a place card with its own photographs (step 1) |
 | `map/compare/open` | `{ed}/map/compare/open/` | band (`2` or `3` places), origin `compare` | the comparison page shows two or three places |

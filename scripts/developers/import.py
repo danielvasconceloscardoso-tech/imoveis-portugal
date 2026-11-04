@@ -73,6 +73,7 @@ how = ("Developer projects (prompts 26 §1 and 28 §2). partner=true: shown on t
        "or its public listings, with the URL of every item in 'sources' and the date in 'checked'; prices exactly as published (null = on request). "
        "On the site, a partner's line must also be written natively in PT and FR ('lines': {pt, fr}); the English 'line' is used for demos. Built by scripts/developers/import.py."
        " A hand-entered partner may add 'unitTable' (every home as the developer publishes it, shown on the showcase, no unit pages) and 'location' (stated facts with sources; distances are ours, straight line from OpenStreetMap)."
-       " A project shown on the site without being a sponsor carries 'tag' {pt, en, fr} ('Seleção' / 'Our pick' / 'Sélection'), shown everywhere instead of 'Sponsored' (prompt 66); import.py keeps such a record as entered.")
+       " A project shown on the site without being a sponsor carries 'tag' {pt, en, fr} ('Seleção' / 'Our pick' / 'Sélection'), shown everywhere instead of 'Sponsored' (prompt 66); import.py keeps such a record as entered."
+       " A project may carry 'hero' {pt, en, fr} (one line) and 'heroImg' (a render): the map then opens its place on it, as the card's hero (prompt 68: arrival, the project first, the next questions, one more thing).")
 json.dump({"_how": how, "projects": projects}, open(out, "w"), indent=1, ensure_ascii=False)
 for p in projects: print(p["demo"], p["id"], p["muni"], len(p["units"]), p["from"], len(p["gallery"]))
