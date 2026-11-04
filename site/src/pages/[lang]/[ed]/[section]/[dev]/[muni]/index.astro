@@ -30,7 +30,8 @@ if (to) return new Response(`<!doctype html><html lang="${lang}"><head><meta cha
 const { ps } = Astro.props as { ps: Project[] };
 const base = `/${lang}/${ed}/${SLUGS[lang].partners}/${ps[0].devSlug}/${ps[0].muni}/`;
 const k = EDITION_CUR[ed];
-const title = c("show.title", lang, { developer: ps[0].developer, muni: (PRICES.munis[ps[0].muni] as any).n });
+// p70 (MI-24): a page with one development is titled with the development's own name, as its heading is.
+const title = ps.length === 1 ? `${ps[0].name}, ${(PRICES.munis[ps[0].muni] as any).n}` : c("show.title", lang, { developer: ps[0].developer, muni: (PRICES.munis[ps[0].muni] as any).n });
 // Part 2 (3 Nov): the page ends on the private visit (the request sheet) where there is one, else on the Concierge with
 // the project named; and a developer checking the page finds the way to the developers' page.
 const muniName = (PRICES.munis[ps[0].muni] as any).n as string;

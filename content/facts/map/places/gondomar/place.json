@@ -9,13 +9,13 @@
   },
   "line": {
     "pt": "O Douro à porta, de Gramido a Melres, e os Aliados a 12 minutos de carro.",
-    "en": "The Douro on the doorstep, from Gramido to Melres, and the Aliados 12 minutes away by car.",
-    "fr": "Le Douro au pas de la porte, de Gramido à Melres, et les Aliados à 12 minutes en voiture."
+    "en": "The Douro on the doorstep, from Gramido to Melres, and downtown Porto 12 minutes away by car.",
+    "fr": "Le Douro au pas de la porte, de Gramido à Melres, et le centre de Porto à 12 minutes en voiture."
   },
   "arrive": {
     "pt": "O Douro, a {min} minutos dos Aliados.",
-    "en": "The Douro, {min} minutes from the Aliados.",
-    "fr": "Le Douro, à {min} minutes des Aliados."
+    "en": "The Douro, {min} minutes from downtown Porto.",
+    "fr": "Le Douro, à {min} minutes du centre de Porto."
   },
   "photos": [
     {

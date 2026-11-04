@@ -14,6 +14,7 @@ import ShowcasePlace from "./ShowcasePlace.astro";
 import ShowcaseRelated from "./ShowcaseRelated.astro";
 import DevShare from "./DevShare.astro";
 import ShowcaseMedia from "./ShowcaseMedia.astro";
+import { purchase } from "../lib/sims";
 
 // related: the developer's showcases in other municipalities ("By the same developer", 3 Nov 2026).
 interface Props { lang: Lang; p: Project; label: string; locale: string; simHref?: string; mapHref?: string; save?: { href: string; muni: string }; related?: { id: string; name: string; place: string; href: string; render?: string | null }[]; share?: boolean; }
@@ -39,6 +40,9 @@ const ko = (x: string, v: Record<string, string | number> = {}) => c(`orz.${x}`,
 const nf0 = new Intl.NumberFormat(locale);
 const types = [...new Set(p.typologies)];
 const credits = (p.credits ?? []).join("; ");
+// p70 (MI-02, MI-03): what the purchase costs sits next to the published "From" price, already worked out at that price; a
+// development without a published price shows no cost box at all (never an invented price).
+const cost = p.from ? purchase(p.from, false, false, false) as Record<string, number> : null;
 ---
 <article class="sb">
   <figure class="sb-hero"><img src={img(p.render)} srcset={`${img(p.render, 800)} 800w, ${img(p.render)} 1600w`} sizes="100vw" alt={p.name} width="1600" height="900" fetchpriority="high" /></figure>
@@ -55,6 +59,18 @@ const credits = (p.credits ?? []).join("; ");
       <div><dt>{c("show.homes", lang)}</dt><dd>{p.from ? c("show.from", lang, { v: money(p.from) }) : k("price")}</dd></div>
       <div><dt>{ko("col.typ")}</dt><dd>{types.join(", ")}</dd></div>
     </dl>}
+    {cost && <section class="sb-sim" data-sbsim data-locale={locale} aria-labelledby="sb-sim-h">
+      <h2 id="sb-sim-h">{k("sim")}</h2>
+      <p class="sb-small">{k("simlede")}</p>
+      <label class="sb-in"><span>{k("simprice")}</span><input type="number" inputmode="numeric" min="0" step="1000" value={p.from} data-sbprice /></label>
+      <dl class="sb-res" data-sbres>
+        <div><dt>{c("sims.r.imt", lang)}</dt><dd data-r="imt">{money(cost.imt)}</dd></div>
+        <div><dt>{c("sims.r.is", lang)}</dt><dd data-r="is">{money(cost.is)}</dd></div>
+        <div><dt>{c("sims.r.deed", lang)}</dt><dd data-r="deed">{money(cost.deed)}</dd></div>
+        <div><dt>{c("sims.r.total", lang)}</dt><dd data-r="total">{money(cost.total)}</dd></div>
+      </dl>
+      {simHref && <p class="sb-small"><a href={`${simHref}?price=${p.from}`} data-sbfull>{k("simfull")} →</a></p>}
+    </section>}
     <p class="sb-cta" id="pedir"><button type="button" class="sb-btn sb-btn-p" data-req>{k("visit")}</button>{save && <Heart lang={lang} kind="home" id={p.id} label={`${p.name}, ${save.muni}`} href={save.href} class="sb-ht" />}</p>
     {share && <DevShare lang={lang} id={p.id} />}
   </header>
@@ -132,19 +148,6 @@ const credits = (p.credits ?? []).join("; ");
     <p class="sb-small">{c("show.ctx.src", lang, { q: ql })}</p>
   </aside>
 
-  <section class="sb-sec sb-sim" data-sbsim data-locale={locale}>
-    <h2>{k("sim")}</h2>
-    <p class="sb-small">{k("simlede")}</p>
-    <label class="sb-in"><span>{k("simprice")}</span><input type="number" inputmode="numeric" min="0" step="1000" placeholder="350000" data-sbprice /></label>
-    <dl class="sb-res" data-sbres hidden>
-      <div><dt>{c("sims.r.imt", lang)}</dt><dd data-r="imt"></dd></div>
-      <div><dt>{c("sims.r.is", lang)}</dt><dd data-r="is"></dd></div>
-      <div><dt>{c("sims.r.deed", lang)}</dt><dd data-r="deed"></dd></div>
-      <div><dt>{c("sims.r.total", lang)}</dt><dd data-r="total"></dd></div>
-    </dl>
-    {simHref && <p><a href={simHref} data-sbfull>{k("simfull")} →</a></p>}
-  </section>
-
   {related.length > 0 && <ShowcaseRelated lang={lang} from={p.id} developer={p.developer} items={related} />}
 
   <footer class="sb-sec sb-foot">
@@ -159,7 +162,7 @@ const credits = (p.credits ?? []).join("; ");
   document.querySelectorAll<HTMLElement>("[data-sbsim]").forEach((box) => {
     const input = box.querySelector<HTMLInputElement>("[data-sbprice]")!, res = box.querySelector<HTMLElement>("[data-sbres]")!, full = box.querySelector<HTMLAnchorElement>("[data-sbfull]");
     const eur = new Intl.NumberFormat(box.dataset.locale, { style: "currency", currency: "EUR", maximumFractionDigits: 0 });
-    const base = full?.getAttribute("href") ?? "";
+    const base = (full?.getAttribute("href") ?? "").split("?")[0];
     input.addEventListener("input", () => {
       const v = Number(input.value); if (!(v > 0)) { res.hidden = true; return; }
       const r = purchase(v, false, false, false) as Record<string, number>;
@@ -204,6 +207,8 @@ const credits = (p.credits ?? []).join("; ");
   .sb-ctx { border-top: 1px solid var(--ink); margin-top: 40px; }
   .sb-ctx dl { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin: 16px 0; }
   .sb-ctx dt { font-size: 15px; color: var(--muted); } .sb-ctx dd { margin: 4px 0 0; font: 400 28px/1.1 var(--serif); }
+  .sb-sim { margin: 24px 0 0; padding: 16px 0 0; border-top: 1px solid color-mix(in srgb, var(--ink) 18%, transparent); }
+  .sb-sim h2 { font-size: 21px; margin: 0 0 4px; } .sb-sim .sb-res { margin: 16px 0 8px; }
   .sb-in { display: grid; gap: 8px; max-width: 320px; font-size: 15px; }
   .sb-in input { font: 400 21px var(--sans); padding: 12px 12px; border: 1px solid var(--ink); background: transparent; color: var(--ink); }
   .sb-res { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin: 24px 0; }

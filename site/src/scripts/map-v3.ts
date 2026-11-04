@@ -10,7 +10,7 @@ import { feature, mesh } from "topojson-client";
 import { savePlace } from "../lib/brief";
 import { track, edOf, ev, evHeart, timeBand, rememberPlace } from "../lib/track";
 import { get as savedItems } from "../lib/saved";
-import { imt as imtOf } from "../lib/sims";
+import { imt as imtOf, purchase } from "../lib/sims";
 import { heartHTML } from "./hearts";
 
 // The free price layer (operator, step 1): the market median per quarter over the last five years (/data/map/price5.json).
@@ -47,7 +47,10 @@ export function initMapV3(root: HTMLElement) {
   const nf = new Intl.NumberFormat(loc), nf1 = new Intl.NumberFormat(loc, { minimumFractionDigits: 1, maximumFractionDigits: 1 });
   const eur = new Intl.NumberFormat(loc, { style: "currency", currency: "EUR", maximumFractionDigits: 0 });
   const fx = Number(root.dataset.fx) || 0, cur = root.dataset.cur || "";
-  const money = (eurV: number) => fx ? `${nf.format(Math.round(eurV * fx / 1000) * 1000)} ${cur}` : eur.format(Math.round(eurV / 1000) * 1000);
+  // p70 (J-09): one budget, one format: the reader's currency first with its symbol, the euros after it ("$336,000 (€300,000)").
+  const curF = fx ? new Intl.NumberFormat(loc, { style: "currency", currency: cur, maximumFractionDigits: 0 }) : null;
+  const moneyCur = (eurV: number) => curF ? curF.format(Math.round(eurV * fx / 1000) * 1000) : eur.format(Math.round(eurV / 1000) * 1000);
+  const money = (eurV: number) => curF ? `${moneyCur(eurV)} (${eur.format(Math.round(eurV / 1000) * 1000)})` : moneyCur(eurV);
   const esc = (t: string) => t.replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[ch]!);
   const q = new URLSearchParams(location.search);
   const canvas = $("[data-canvas]"), sheet = $("[data-sheet]"), sheetIn = $("[data-sheet-in]"), tip = $("[data-tip]"), labelsEl = $("[data-labels]");
@@ -55,6 +58,8 @@ export function initMapV3(root: HTMLElement) {
   // ------------------------------------------------------------ state (every state is a link)
   const stored = (() => { try { return Number(localStorage.getItem("ip.budget")) || 0; } catch { return 0; } })();
   let budget = Math.min(Math.max(Number(q.get("budget")) || stored || 300000, 100000), 20e6);
+  // p70 (MI-14): the budget goes into the link only once the reader has set one (a ?budget= link, or the slider or amount).
+  let budgetSet = q.has("budget");
   // D83 part 2: the first view has no colour layer ("none"); ?layer=price and the others still open with their colours.
   // Operator, step 1: only the market price stays as a free colour layer; ten years, rents, yields and the other statistics
   // moved to the paid analysis (an old ?layer=rent link opens the map without colours).
@@ -94,11 +99,20 @@ export function initMapV3(root: HTMLElement) {
   function syncUrl() {
     const p = new URLSearchParams(location.search);
     const set = (k: string, v: string | null) => (v ? p.set(k, v) : p.delete(k));
-    set("budget", String(Math.round(budget))); set("layer", layer === "none" ? null : layer); set("place", selected); set("parish", selPar); set("region", selRegion); set("project", selProj);
+    set("budget", budgetSet ? String(Math.round(budget)) : null); set("layer", layer === "none" ? null : layer); set("place", selected); set("parish", selPar); set("region", selRegion); set("project", selProj);
     set("q", qi >= 0 && P ? P.quarters[qi] : null);
     for (const k of ["golf", "beach"] as const) set(k, overlays[k] ? "1" : null);
     set("devs", mode === "page" ? (overlays.devs ? null : "0") : overlays.devs ? "1" : null);  // prompt 39 §2.1: on by default on the map page
-    history.replaceState(null, "", `${location.pathname}?${p}${location.hash}`);
+    history.replaceState(history.state, "", `${location.pathname}?${p}${location.hash}`);
+  }
+  // p70 (J-04): each card the reader opens on the map page is one step in the browser's history, so Back closes a place's
+  // card back to the region (or the map) instead of leaving the page. The URL stays the state (?place=, ?region=, ...).
+  let restoring = false;
+  const keyOf = (par: string | null, pr: string | null, pl: string | null, rg: string | null) => (par ? `parish:${par}` : pr ? `project:${pr}` : pl ? `place:${pl}` : rg ? `region:${rg}` : "");
+  const cardKey = () => keyOf(selPar, selProj, selected, selRegion);
+  function step(next: string) {
+    if (mode !== "page" || restoring || !next || next === cardKey()) return;
+    history.pushState({ m3: cardKey() }, "", location.href);
   }
 
   // ------------------------------------------------------------ values and colour
@@ -151,10 +165,10 @@ export function initMapV3(root: HTMLElement) {
     budget = Math.min(Math.max(b, 100000), 20e6);
     const t = toT(budget); thumb.style.left = `${t * 100}%`; fill.style.width = `${t * 100}%`;
     slider.setAttribute("aria-valuenow", String(Math.round(budget))); slider.setAttribute("aria-valuetext", money(budget));
-    amountBtn.textContent = money(budget);
+    amountBtn.textContent = moneyCur(budget);
     sentence();
     if (map && P) { clearTimeout(reachT); reachT = window.setTimeout(() => { for (const f of features) map.setFeatureState({ source: "munis", id: f.id }, { reach: reaches(f.properties.s) }); }, 30); }
-    if (remember) try { localStorage.setItem("ip.budget", String(Math.round(budget))); } catch { /* private mode */ }
+    if (remember) { budgetSet = true; try { localStorage.setItem("ip.budget", String(Math.round(budget))); } catch { /* private mode */ } }
     if (selected && !sheet.hidden && !pinA && view === "card" && !selPar) showPlace(selected, false);
     syncUrl();
   }
@@ -302,18 +316,25 @@ export function initMapV3(root: HTMLElement) {
       let fit: any; try { fit = map.cameraForBounds([[-12.4, 36.9], [-6.15, 42.17]], { padding: pad }); } catch { fit = null; }
       fit ??= map.cameraForBounds([[-12.4, 36.9], [-6.15, 42.17]], { padding: 8 });
       // Pitched, the south comes closer to the eye: aim a little south so the Algarve stays in frame.
-      const home = { center: flat ? fit.center : [fit.center.lng, fit.center.lat - (narrow ? 0.15 : 0.45)], zoom: fit.zoom + (flat ? 0 : narrow ? 0.28 : 0.2), pitch: flat ? 0 : 50, bearing: flat ? 0 : -12 };
+      // p70 (MI-12): on a desktop the country comes a little closer (+0.4, was +0.2), filling the space beside the postcards.
+      const home = { center: flat ? fit.center : [fit.center.lng, fit.center.lat - (narrow ? 0.15 : 0.45)], zoom: fit.zoom + (flat ? 0 : narrow ? 0.28 : 0.4), pitch: flat ? 0 : 50, bearing: flat ? 0 : -12 };
       (root as any).__home = home;
-      if (mode === "page" && !selected && !selPar && !selRegion && !selProj && !q.has("q") && !reduce()) { map.jumpTo({ center: [-13.4, 38.6], zoom: home.zoom - 1.2, pitch: 22, bearing: home.bearing - 28 }); map.flyTo({ ...home, duration: 3400, curve: 1.15, easing: ease, essential: true }); }
+      // p70 (S-09): the flight in plays only when the map is ready early; on a slow network the still picture has stood in its
+      // place, so the live map takes its framing without a jump.
+      const dl = selected ? byS.get(selected) : null, dp = selProj ? projects.find((x) => x.id === selProj) : null;
+      if (mode === "page" && !selected && !selPar && !selRegion && !selProj && !q.has("q") && !reduce() && performance.now() < 4500) { map.jumpTo({ center: [-13.4, 38.6], zoom: home.zoom - 1.2, pitch: 22, bearing: home.bearing - 28 }); map.flyTo({ ...home, duration: 3400, curve: 1.15, easing: ease, essential: true }); }
+      // p70 (MI-22, A-08): a ?place= or ?project= link starts the live map on that place, so the camera never waits on the
+      // tiles of the whole country (the short flight to it follows).
+      else if (mode === "page" && !selPar && (dl || dp)) map.jumpTo({ ...home, center: dp ? [dp.lon, dp.lat] : [dl!.x, dl!.y], zoom: Math.max(home.zoom, dp ? 10 : zoomFor(dl!) - 0.6) });
       else map.jumpTo(home);
       if (q.get("q") && P && P.quarters.includes(q.get("q")!)) setQuarter(P.quarters.indexOf(q.get("q")!));
       if (overlays.golf) await drawGolf(); if (overlays.beach) await drawBeaches(); if (overlays.devs) drawProjects();
-      if (selPar) { await loadParishes(); selectParish(selPar); } else if (selRegion && !selected) showRegion(selRegion); else if (selected) {
+      if (selPar) { await loadParishes(); selectParish(selPar); } else if (selRegion && !selected) { if (!(ctx?.kind === "region" && ctx.id === selRegion && !sheet.hidden)) showRegion(selRegion); } else if (selected) {
         // Operator, step 1: a ?place= link opens the place card (the golden sample); the partner project stays on the map as
         // its pin and as one sponsored line in the card (prompt 39 §2.6 opened the project card first). The card may already
         // be open (opened before the map, below): then the map only flies to the place.
         const p = byS.get(selected);
-        if (p && ctx?.kind === "muni" && ctx.id === selected && !sheet.hidden) { map.setFilter("sel", ["==", ["get", "s"], selected]); heroOf(selected) ? arriveAt(selected) : flyTo(p.x, p.y, Math.max(map.getZoom(), p.a < 40 ? 8.6 : 7.6)); }
+        if (p && ctx?.kind === "muni" && ctx.id === selected && !sheet.hidden) { map.setFilter("sel", ["==", ["get", "s"], selected]); heroOf(selected) ? arriveAt(selected) : flyTo(p.x, p.y, zoomFor(p)); }
         else select(selected);
       } else if (selProj) {
         // Prompt 68: the project's card is open (below); the camera comes down to it with its municipality outlined.
@@ -357,7 +378,7 @@ export function initMapV3(root: HTMLElement) {
   const labelsSoon = () => { if (labT) return; labT = requestAnimationFrame(() => { labT = 0; placeLabels(); }); };
   function placeLabels() {
     if (!map) return; const z = map.getZoom(), W = canvas.clientWidth, H = canvas.clientHeight;
-    const want = features.map((f) => f.properties as Props).filter((p) => (BIG.includes(p.s) && z > (W < 700 ? 5.2 : 5.9)) || (z > 8.2 && p.a > 2) || z > 9.2);
+    const want = features.map((f) => f.properties as Props).filter((p) => p.s === selected || (BIG.includes(p.s) && z > (W < 700 ? 5.2 : 5.9)) || (z > 8.2 && p.a > 2) || z > 9.2);
     const placed: { x: number; y: number; w: number; h?: number }[] = []; let h = "";
     // Prompt 68: the visible photo pins (a 44 px photograph above its point, the short label to its right) are kept clear:
     // a name that would sit on one moves above or below it, or waits for a closer zoom.
@@ -377,13 +398,14 @@ export function initMapV3(root: HTMLElement) {
       const [rx, ry] = ([[0, 0], [0, 22], [0, -22], [0, 44], [0, 66], [64, 0], [-64, 0], [64, 30], [-64, 30]] as const).map(([dx, dy]) => [c.x + dx, c.y + dy]).find(([xx, yy]) => !clash(xx, yy, w)) ?? [c.x, c.y];
       placed.push({ x: rx, y: ry, w }); h += `<span class="m3-l0" style="transform:translate(${Math.round(rx)}px,${Math.round(ry)}px)">${esc(name)}</span>`;
     }
-    const rank = (p: Props) => { const i = BIG.indexOf(p.s); return i >= 0 ? i : projMunis.has(p.s) ? BIG.length : 1000 - p.a; };
+    // p70 (A-08): the place whose card is open is named first, whatever else wants the room.
+    const rank = (p: Props) => { if (p.s === selected) return -1; const i = BIG.indexOf(p.s); return i >= 0 ? i : projMunis.has(p.s) ? BIG.length : 1000 - p.a; };
     for (const p of want.sort((a, b) => rank(a) - rank(b))) {
       const c = map.project([p.x, p.y]); if (c.x < 0 || c.y < 0 || c.x > W || c.y > H) continue;
       const big = BIG.includes(p.s), w = p.n.length * (big ? 8.5 : 6.5) + 8;
       // Over the place if there is room, otherwise just above or just below it; dropped only when all three are taken.
       // A big name (Porto) next to a photo pin may also step a little further down or up rather than disappear.
-      const y = [c.y, c.y - 17, c.y + 17, ...(big ? [c.y + 32, c.y - 34] : [])].find((yy) => !clash(c.x, yy, w));
+      const y = [c.y, c.y - 17, c.y + 17, ...(big || p.s === selected ? [c.y + 32, c.y - 34, c.y + 48] : [])].find((yy) => !clash(c.x, yy, w)) ?? (p.s === selected ? c.y : undefined);
       if (y === undefined) continue;
       placed.push({ x: c.x, y, w }); h += `<span class="${big ? "m3-l1" : "m3-l2"}" style="transform:translate(${Math.round(c.x)}px,${Math.round(y)}px)">${esc(p.n)}</span>`;
       if (placed.length > 70) break;
@@ -423,6 +445,8 @@ export function initMapV3(root: HTMLElement) {
     return best ? { kind: "muni", key: best.s } : null;
   }
   const isWide = () => root.clientWidth >= 820;
+  // p70 (A-08): a place's card zooms in by the place's size (Matosinhos, 67 km², fills the view instead of the whole Norte).
+  const zoomFor = (p: Props) => Math.max(map?.getZoom() ?? 0, p.a < 40 ? 9.4 : p.a < 120 ? 9.0 : p.a < 400 ? 8.4 : 7.6);
   function flyTo(x: number, y: number, z: number, dur = 1200) {
     map.flyTo({ center: [x, y], zoom: z, pitch: flat ? 0 : 46, duration: reduce() ? 0 : dur, curve: 1.3, easing: ease, essential: true,
       padding: isWide() ? { right: 440, left: 0, top: 60, bottom: 120 } : { bottom: canvas.clientHeight * 0.42, top: 60, left: 0, right: 0 } });
@@ -462,10 +486,13 @@ export function initMapV3(root: HTMLElement) {
   function select(slug: string | null, fly = true) {
     if (slug) { ev({ event: "map/place", place: slug, origin: mode }); ev({ event: "map/card/muni", place: slug, origin: mode }); }
     if (pinA && slug && slug !== pinA) { compare(pinA, slug); return; }
+    // Closing a card that was opened from the bare map goes back one step, so Back never shows it again.
+    if (!slug && !restoring && mode === "page" && history.state?.m3 === "" && cardKey()) { history.back(); return; }
+    if (slug) step(`place:${slug}`);
     arrStop(); selected = slug; selPar = null; selRegion = null; selProj = null;
-    if (map) map.setFilter("sel", ["==", ["get", "s"], slug ?? ""]);
+    if (map?.getLayer("sel")) map.setFilter("sel", ["==", ["get", "s"], slug ?? ""]);
     const p = slug ? byS.get(slug) : null;
-    if (p && map && fly) heroOf(slug) ? arriveAt(slug!) : flyTo(p.x, p.y, Math.max(map.getZoom(), p.a < 40 ? 8.6 : 7.6));
+    if (p && map && fly) heroOf(slug) ? arriveAt(slug!) : flyTo(p.x, p.y, zoomFor(p));
     syncUrl(); sentence();
     if (slug) {
       showPlace(slug); timeStart(slug);
@@ -513,7 +540,8 @@ export function initMapV3(root: HTMLElement) {
       return `<figure class="m3-ph m3-gal" data-gal><div class="m3-gal-t" data-gal-t tabindex="0">${imgs}</div>${n > 1 ? `<p class="m3-gal-d" aria-hidden="true">${c5.ph.map((_: any, i: number) => `<i${i ? "" : ` class="is-on"`}></i>`).join("")}</p>` : ""}${cr}</figure>`;
     }
     const own = slug ? cfg.photos[slug] : "", reg = isRegion ? cfg.regionPhotos?.[r] ?? "" : "";
-    const f = own || reg; if (!f) return `<div class="m3-photo m3-photo-none m3-photo-quiet"><span>${esc(L.regions[r] || "")}</span></div>`;
+    // p70 (MI-25): without a photograph of the place itself, no picture box at all (the kicker already names the region).
+    const f = own || reg; if (!f) return "";
     const cap = !own && T4.ph[f] ? `<figcaption>${esc(T4.ph[f])}</figcaption>` : "";
     return `<figure class="m3-ph"><img class="m3-photo" src="/img/v2/${f}-640.webp" srcset="/img/v2/${f}-640.webp 640w, /img/v2/${f}-1024.webp 1024w" sizes="420px" alt="${own ? esc(cfg.photoAlt?.[slug!] ?? "") : ""}" width="640" height="400">${cap}</figure>`;
   }
@@ -523,11 +551,18 @@ export function initMapV3(root: HTMLElement) {
   // Preço, in words (operator, step 1): the market median, the new build (a partner's published prices, or "preços sob
   // consulta (promotor)" where a partner project is), and the five-year direction in one sentence. No chart, no range, no
   // ten years: those are in the paid analysis.
-  function priceTile(d: any): string {
-    const nb = d?.nb ? `<span><small>${esc(C5.nb)}</small><b>${esc(`${nf.format(d.nb[0])}–${m2f(d.nb[1])}`)}</b></span>` : d?.nbq ? `<span><small>${esc(C5.nb)}</small><b class="m3-dim-t">${esc(C5.nbOnreq)}</b></span>` : "";
+  // p70 (J-02): on a place, parish or region card, one line answers "what does my budget buy here" in the reader's currency
+  // (the same sum as the calculators: the budget over the market median), and opens the simulator at that budget.
+  const buyLine = (d: any, slug = "") => {
+    if (!d?.m2 || !cfg.p68 || !cfg.links.sims) return "";
+    const href = `${cfg.links.sims}?sv=${Math.round(budget)}${cfg.links.simR?.includes(slug) ? `&sr=${slug}` : ""}`;
+    return `<p class="m3-tl m3-buy"><a class="m3-link" href="${esc(href)}" data-buy-line>${esc(cfg.p68.q.price.replace("{b}", money(budget)).replace("{a}", nf.format(Math.round(budget / d.m2))))} →</a></p>`;
+  };
+  function priceTile(d: any, buy = ""): string {
+    const nb = d?.nb ? `<span><small>${esc(C5.nb)}</small><b>${esc(`${C5.m2.split("{v}")[0]}${nf.format(d.nb[0])}–${m2f(d.nb[1])}`)}</b></span>` : d?.nbq ? `<span><small>${esc(C5.nb)}</small><b class="m3-dim-t">${esc(C5.nbOnreq)}</b></span>` : "";
     return `<section class="m3-tile m3-tile-w"><h3 class="m3-tt">${esc(T4.price)}</h3>
       <div class="m3-pp${nb ? "" : " m3-pp-1"}"><span><small>${esc(C5.mkt)}</small><b>${d?.m2 ? esc(m2f(d.m2)) : "—"}</b></span>${nb}</div>
-      ${d?.p5 != null ? `<p class="m3-tl">${esc(dirLine(d.p5))}</p>` : ""}</section>`;
+      ${buy}${d?.p5 != null ? `<p class="m3-tl">${esc(dirLine(d.p5))}</p>` : ""}</section>`;
   }
   const flightTime = (f: number) => (f >= 60 ? `${Math.floor(f / 60)} h ${String(Math.round(f % 60)).padStart(2, "0")}` : C5.min.replace("{v}", nf.format(f)));
   // A list of names (Playfair) with small figures (minutes), Apple Weather style.
@@ -535,16 +570,17 @@ export function initMapV3(root: HTMLElement) {
   const listHTML = (rows: [string, string][]) => `<ul class="m3-ml">${rows.map(([n, v]) => `<li><span class="m3-mn">${n}</span>${v}</li>`).join("")}</ul>`;
   const tile = (title: string, body: string, note = "") => `<section class="m3-tile m3-tile-w"><h3 class="m3-tt">${esc(title)}${note ? `<small>${esc(note)}</small>` : ""}</h3>${body}</section>`;
   const AP: Record<string, string> = { LIS: "Lisboa", OPO: "Porto", FAO: "Faro", FNC: "Funchal", PDL: "Ponta Delgada" };
-  function flightRow(fl: any): [string, string] {
-    const f = fl?.[cfg.ed];
-    const v = f ? (f.via ? `<span class="m3-mm"><b>${esc(flightTime(f.min))}</b> ${esc(C5.via)}</span>` : `<span class="m3-mm"><b>${esc(flightTime(f.min))}</b></span>`) : `<span class="m3-mm m3-dim-t">${esc(C5.soon)}</span>`;
-    return [esc(C5.flight), v];
+  // p70 (J-21): without a published flight for this edition the row is left out (never "coming soon"); the data stays.
+  function flightRow(fl: any): [string, string][] {
+    const f = fl?.[cfg.ed]; if (!f?.min) return [];
+    const v = f.via ? `<span class="m3-mm"><b>${esc(flightTime(f.min))}</b> ${esc(C5.via)}</span>` : `<span class="m3-mm"><b>${esc(flightTime(f.min))}</b></span>`;
+    return [[esc(C5.flight), v]];
   }
   // The golden sample (content/facts/map/places/<slug>/): drive times, the flight, the main schools and health services.
   function c5Tiles(d: any): string {
     const c5 = d.c5;
     const life: [string, string][] = c5.life.map(([, n, m]: [string, any, number]) => [esc(typeof n === "string" ? n : n[cfg.lang] ?? n.pt), mins(m)]);
-    life.push(flightRow(c5.fl));
+    life.push(...flightRow(c5.fl));
     let h = tile(C5.life, listHTML(life), C5.bycar);
     if (c5.sch?.length) h += tile(C5.schools, listHTML(c5.sch.map(([n, m]: [string, number]) => [esc(n), mins(m)])), C5.within);
     const note = (t?: string) => (t ? `<small>${esc(t === "@cs" ? C5.tagCs : t)}</small>` : "");
@@ -557,7 +593,7 @@ export function initMapV3(root: HTMLElement) {
     const life: [string, string][] = [];
     if (d?.bch != null) life.push([esc(T4.beach), `<span class="m3-mm">${esc(T4.kmline.replace("{v}", nf1.format(d.bch)))}</span>`]);
     if (d?.ap) life.push([esc(T4.airport), `<span class="m3-mm">${esc(T4.ap.replace("{n}", AP[d.ap[0]] ?? d.ap[0]).replace("{v}", nf.format(d.ap[1])))}</span>`]);
-    if (life.length) life.push(flightRow(d.fl ? Object.fromEntries(Object.entries(d.fl).map(([e, m]) => [e, { min: m }])) : null));
+    if (life.length) life.push(...flightRow(d.fl ? Object.fromEntries(Object.entries(d.fl).map(([e, m]) => [e, { min: m }])) : null));
     const care: [string, string][] = [];
     if (d?.sch) care.push([esc(T4.school), d.sch.none ? `<span class="m3-mm">${esc(T4.noschool)}</span>` : `<span class="m3-mm">${esc(T4.km.replace("{n}", d.sch.n).replace("{v}", nf1.format(d.sch.km)))}</span>`]);
     if (d?.hsp) care.push([esc(T4.hosp), `<span class="m3-mm">${esc(T4.km.replace("{n}", d.hsp.n).replace("{v}", nf1.format(d.hsp.km)))}</span>`]);
@@ -597,7 +633,8 @@ export function initMapV3(root: HTMLElement) {
     const x: Ctx = { kind: "muni", id: slug, name, c2: d.c2 ?? "", region: r };
     // Part 2 (3 Nov): the heart keeps the place in "A sua seleção" (its own page where it has one, else the map on it).
     const regionHref = cfg.links.pages.includes(slug) ? `${cfg.links.map}${slug}/` : `${cfg.links.map}?place=${slug}`;
-    const line = d.c5?.line?.[cfg.lang] ?? [d.n3, L.regions[r]].filter((z: string, k: number, a: string[]) => z && a.indexOf(z) === k).join(", ");
+    // p70 (MI-25): the region is named once, in the kicker above the name.
+    const line = d.c5?.line?.[cfg.lang] ?? [d.n3].filter((z: string) => z && z !== L.regions[r]).join(", ");
     const hs = heroesOf(slug);
     if (hs.length && d.arr && cfg.p68) {
       ctx = x; rerender = () => showPlace(slug, false); srcFor = () => sourcesHTML(d, x);
@@ -605,7 +642,7 @@ export function initMapV3(root: HTMLElement) {
       return;
     }
     let h = `${photoHTML(slug, r, d.c5)}<div class="m3-sb"><p class="m3-kick">${esc(L.regions[r] || "")}</p><div class="ht-row"><h2 class="m3-h" tabindex="-1">${esc(name)}</h2>${heartHTML("region", slug, name, regionHref)}</div>`;
-    h += `<p class="m3-line">${esc(line)}</p><div class="m3-tiles">${priceTile(d)}${d.c5 ? c5Tiles(d) : kmTiles(d)}</div>`;
+    h += `${line ? `<p class="m3-line">${esc(line)}</p>` : ""}<div class="m3-tiles">${priceTile(d, buyLine(d, slug))}${d.c5 ? c5Tiles(d) : kmTiles(d)}</div>`;
     h += ctaHTML(name);
     // Developer components stay (CLAUDE.md, COMMON2 rule 3): the partner's homes here, or near, one quiet sponsored line.
     const nearBy = here.length ? here : projects.filter((y) => y.showcase && (y as Proj & { near?: string[] }).near?.some((n) => plain(n) === plain(name))).slice(0, 2);
@@ -623,6 +660,10 @@ export function initMapV3(root: HTMLElement) {
   // Prompt 69: wherever IMT shows on the map, one tap opens the IMT screen at that price (scripts/imt.ts, in the site
   // chrome); without it (the embedded map), the link is the full IMT calculator.
   const imtLine = (price: number, from: "map" | "project") => cfg.p69 ? `<p class="m3-line m3-imt"><a class="m3-link imt-tap" href="${esc(`${cfg.links.imt}?price=${price}&own=0&resident=0`)}" data-imt="${price}" data-imt-from="${from}">${esc(cfg.p69.imt.replace("{price}", eur.format(price)).replace("{imt}", eur.format(imtOf(price, false, false))))}</a></p>` : "";
+  // p70 (MI-02): next to a development's published price, the whole purchase in one figure (price, IMT, stamp duty and the
+  // deed, lib/sims.ts purchase(), a non-resident buying a second home, cash); one tap opens the total-cost calculator at
+  // that price. Without a published price nothing is shown (never an invented price).
+  const totalLine = (price: number) => C5.total && cfg.links.cost ? `<p class="m3-line m3-imt"><a class="m3-link" href="${esc(`${cfg.links.cost}?price=${price}&own=0&resident=0&mortgage=0`)}" data-total>${esc(C5.total.replace("{total}", eur.format(purchase(price, false, false, false).total)))} →</a></p>` : imtLine(price, "project");
   function arrivalHTML(slug: string, d: any, name: string, href: string, hs: Proj[]): string {
     const c5 = d.c5, P8 = cfg.p68, lang = cfg.lang;
     const arrive = d.arr?.line?.[lang] ?? c5?.line?.[lang] ?? "";
@@ -637,11 +678,13 @@ export function initMapV3(root: HTMLElement) {
     const qs: [string, string, string][] = [];
     const city = c5?.life?.find((z: any[]) => z[0] === "city"), sea = c5?.life?.find((z: any[]) => z[0] === "beach");
     // The sea first where it is close (ten minutes or less by car, e.g. Vila do Conde): its own line, the beach behind it.
-    if (sea && sea[2] <= 10 && P8.q.seaMin) qs.push(["near", P8.q.seaMin.replace("{v}", nf.format(sea[2])), `<p class="m3-tt">${esc(C5.life)}<small>${esc(C5.bycar)}</small></p>${listHTML([[esc(typeof sea[1] === "string" ? sea[1] : sea[1][lang] ?? sea[1].pt), mins(sea[2])]])}`]);
+    const seaOwn = !!(sea && sea[2] <= 10 && P8.q.seaMin);
+    if (seaOwn) qs.push(["near", P8.q.seaMin.replace("{v}", nf.format(sea[2])), `<p class="m3-tt">${esc(C5.life)}<small>${esc(C5.bycar)}</small></p>${listHTML([[esc(typeof sea[1] === "string" ? sea[1] : sea[1][lang] ?? sea[1].pt), mins(sea[2])]])}`]);
     if (city) {
       const cn = (typeof city[1] === "string" ? city[1] : city[1][lang] ?? city[1].pt).split(",")[0].trim();
-      const life: [string, string][] = c5.life.map(([, n, m]: [string, any, number]) => [esc(typeof n === "string" ? n : n[lang] ?? n.pt), mins(m)]);
-      life.push(flightRow(c5.fl));
+      // p70 (A-09): a beach that already has its own question ("The sea? 3 min.") is not listed again under the city.
+      const life: [string, string][] = c5.life.filter((z: any[]) => !(seaOwn && z === sea)).map(([, n, m]: [string, any, number]) => [esc(typeof n === "string" ? n : n[lang] ?? n.pt), mins(m)]);
+      life.push(...flightRow(c5.fl));
       qs.push(["life", P8.q.life.replace("{city}", cn).replace("{v}", nf.format(city[2])), `<p class="m3-tt">${esc(C5.life)}<small>${esc(C5.bycar)}</small></p>${listHTML(life)}`]);
     }
     // Without the golden sample's drive times (e.g. Vila do Conde), today's straight-line tiles sit behind one line.
@@ -695,7 +738,7 @@ export function initMapV3(root: HTMLElement) {
   }
   function selectParish(code: string) {
     const f = parishes?.feats.find((x) => x.properties.id === code); if (!f) return;
-    selPar = code; selected = f.properties.m; selRegion = null; syncUrl(); if (map) map.setFilter("sel", ["==", ["get", "s"], ""]);
+    step(`parish:${code}`); selPar = code; selected = f.properties.m; selRegion = null; syncUrl(); if (map?.getLayer("sel")) map.setFilter("sel", ["==", ["get", "s"], ""]);
     ev({ event: "map/card/parish", place: `p-${code}`, origin: mode });
     const muni = byS.get(f.properties.m), md = T?.m?.[f.properties.m], pd = T?.p?.[code];
     // The parish's own price (INE, the finest cut it publishes); beach, airport, school and hospital its own when we have them.
@@ -703,7 +746,7 @@ export function initMapV3(root: HTMLElement) {
     const x: Ctx = { kind: "parish", id: code, name: f.properties.n, c2: md?.c2 ?? "", muni: f.properties.m, region: muni?.r ?? "" };
     if (!T) loadTiles().then(() => { if (ctx?.kind === "parish" && ctx.id === code && view === "card" && !sheet.hidden) selectParish(code); });
     let h = `${photoHTML(null, muni?.r ?? "")}<div class="m3-sb"><p class="m3-kick">${esc(T4.cutParish.replace("{m}", muni?.n ?? ""))}</p><div class="ht-row"><h2 class="m3-h" tabindex="-1">${esc(f.properties.n)}</h2>${heartHTML("region", `p-${code}`, `${f.properties.n}, ${muni?.n ?? ""}`, `${cfg.links.map}?parish=${code}`)}</div>`;
-    h += `<p class="m3-line">${esc([muni?.n, L.regions[muni?.r ?? ""]].filter(Boolean).join(", "))}</p><div class="m3-tiles">${priceTile(d)}${kmTiles(d)}</div>`;
+    h += `<p class="m3-line">${esc([muni?.n, L.regions[muni?.r ?? ""]].filter(Boolean).join(", "))}</p><div class="m3-tiles">${priceTile(d, buyLine(d, f.properties.m))}${kmTiles(d)}</div>`;
     h += ctaHTML(f.properties.n);
     h += `<div class="m3-more"><button type="button" class="m3-link" data-goto="${f.properties.m}">${esc(muni?.n ?? "")}</button></div>${mareHTML()}</div>`;
     ctx = x; rerender = () => selectParish(code); srcFor = () => sourcesHTML(d, x);
@@ -712,18 +755,21 @@ export function initMapV3(root: HTMLElement) {
   // A region postcard: the region's photograph and name, its NUTS II median and the five-year direction, in words.
   let regionAt: Record<string, [number, number]> = {};
   async function showRegion(key: string, fly = true) {
-    await load(); await loadTiles(); timeEnd();
-    selRegion = key; selected = null; selPar = null; syncUrl(); if (map) map.setFilter("sel", ["==", ["get", "s"], ""]);
+    step(`region:${key}`);
+    // p70 (S-09): the region's card opens from its small file at once; the map, when it is ready, frames the region.
+    load(); await loadTiles(); timeEnd();
+    selRegion = key; selected = null; selPar = null; syncUrl(); if (map?.getLayer("sel")) map.setFilter("sel", ["==", ["get", "s"], ""]);
     ev({ event: "map/card/region", region: key, origin: mode });
     const rg = T?.rg?.[key] ?? {}, c2 = rg.c2 ?? "PT", name = L.regions[key] || key;
     const x: Ctx = { kind: "region", id: key, name, c2, region: key };
     const d = { m2: T?.r2?.[c2]?.m2 ?? rg.m2, p5: rg.p5 };
     let h = `${photoHTML(null, key, undefined, true)}<div class="m3-sb"><p class="m3-kick">${esc(T4.regionKick)}</p><div class="ht-row"><h2 class="m3-h" tabindex="-1">${esc(name)}</h2>${heartHTML("region", `r-${key}`, name, `${cfg.links.map}?region=${key}`)}</div>`;
-    h += `<p class="m3-line">${esc(T4.regionLine.replace("{n}", nf.format(rg.k ?? 0)).replace("{cities}", (rg.cities ?? []).join(", ")))}</p><div class="m3-tiles">${priceTile(d)}</div>`;
+    h += `<p class="m3-line">${esc(T4.regionLine.replace("{n}", nf.format(rg.k ?? 0)).replace("{cities}", (rg.cities ?? []).join(", ")))}</p><div class="m3-tiles">${priceTile(d, buyLine(d))}</div>`;
     h += `<p class="m3-buys m3-hint">${esc(T4.regionPick)}</p>${ctaHTML(name)}${mareHTML()}</div>`;
     ctx = x; rerender = () => showRegion(key, false); srcFor = () => sourcesHTML(d, x);
     openSheet(h, true);
-    if (fly && map) {
+    if (fly) await load();
+    if (fly && map && selRegion === key) {
       const pts = features.filter((f) => (f.properties as Props).r === key).map((f) => f.properties as Props);
       if (pts.length) map.fitBounds([[Math.min(...pts.map((p) => p.x)) - 0.15, Math.min(...pts.map((p) => p.y)) - 0.15], [Math.max(...pts.map((p) => p.x)) + 0.15, Math.max(...pts.map((p) => p.y)) + 0.15]],
         { padding: isWide() ? { left: 280, right: 460, top: 90, bottom: 60 } : { left: 30, right: 30, top: 80, bottom: canvas.clientHeight * 0.5 }, maxZoom: 9, duration: reduce() ? 0 : 1200, pitch: flat ? 0 : 40 });
@@ -774,7 +820,7 @@ export function initMapV3(root: HTMLElement) {
   // direction. The ten years, the rents and the yield moved to the paid analysis (operator, step 1).
   function compare(a: string, b: string) {
     ev({ event: "map/compare/pair", place: b, origin: mode }); view = "card"; ctx = null;
-    pinA = null; selected = b; syncUrl(); if (map) map.setFilter("sel", ["in", ["get", "s"], ["literal", [a, b]]]);
+    pinA = null; selected = b; syncUrl(); if (map?.getLayer("sel")) map.setFilter("sel", ["in", ["get", "s"], ["literal", [a, b]]]);
     const col = (slug: string) => { const p = byS.get(slug)!, s = P!.munis[slug], v = s?.m2[last()], p5 = T?.m?.[slug]?.p5; return { n: p.n, s, v, p5 }; };
     const A = col(a), B = col(b);
     const row = (k: string, f: (x: typeof A) => string) => `<div class="m3-cr"><span>${f(A)}</span><em>${k}</em><span>${f(B)}</span></div>`;
@@ -788,8 +834,10 @@ export function initMapV3(root: HTMLElement) {
   let detent = 1;  // mobile: 0 peek, 1 half, 2 full
   function openSheet(h: string, focus: boolean, arr = false) {
     view = "card"; sheet.classList.toggle("is-arr", arr);
+    // p70 (A-24): the waiting card MapV3.astro drew for a ?place= link is replaced in place (it counts as the first opening).
+    const skel = !!sheet.dataset.skel; if (skel) { delete sheet.dataset.skel; sheet.removeAttribute("aria-busy"); }
     sheetIn.innerHTML = h + `<button type="button" class="m3-x" aria-label="${L.close}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>`;
-    const wasHidden = sheet.hidden; sheet.hidden = false; requestAnimationFrame(() => sheet.classList.add("is-open"));
+    const wasHidden = sheet.hidden || skel; sheet.hidden = false; requestAnimationFrame(() => sheet.classList.add("is-open"));
     if (!isWide()) setDetent(wasHidden ? 1 : detent);
     sheetIn.querySelector(".m3-x")!.addEventListener("click", () => select(null));
     sheetIn.querySelector("[data-share]")?.addEventListener("click", share);
@@ -808,7 +856,7 @@ export function initMapV3(root: HTMLElement) {
   function closeSheet() { timeEnd(); arrStop(); if (selProj) { selProj = null; syncUrl(); }
     // The 2D map (phones) is tilted only for an arrival: closing the card sets it flat again.
     if (map && flat && (map.getPitch() > 0.5 || Math.abs(map.getBearing()) > 0.5)) map.easeTo({ pitch: 0, bearing: 0, duration: reduce() ? 0 : 600 });
-    ctx = null; rerender = null; view = "card"; if (selRegion) { selRegion = null; syncUrl(); } sheet.classList.remove("is-open"); setTimeout(() => { if (!sheet.classList.contains("is-open")) sheet.hidden = true; }, 260); pinA = null; if (map) map.setFilter("sel", ["==", ["get", "s"], ""]); }
+    ctx = null; rerender = null; view = "card"; if (selRegion) { selRegion = null; syncUrl(); } sheet.classList.remove("is-open"); setTimeout(() => { if (!sheet.classList.contains("is-open")) sheet.hidden = true; }, 260); pinA = null; if (map?.getLayer("sel")) map.setFilter("sel", ["==", ["get", "s"], ""]); }
   function setDetent(d: number) { detent = d; sheet.dataset.detent = String(d); }
   { // drag the sheet between its three heights (mobile)
     const grab = $("[data-grab]"); let y0 = 0, h0 = 0, on = false;
@@ -863,7 +911,7 @@ export function initMapV3(root: HTMLElement) {
   }
   function showGolf(g: Course) {
     ev({ event: "map/card/golf", place: g.m || undefined, origin: mode }); ctx = null;
-    timeEnd(); selected = null; selRegion = null; if (map) map.setFilter("sel", ["==", ["get", "s"], ""]);
+    timeEnd(); selected = null; selRegion = null; if (map?.getLayer("sel")) map.setFilter("sel", ["==", ["get", "s"], ""]);
     const muni = byS.get(g.m)?.n ?? "";
     const when = g.status !== "open" ? L.golf.opening.replace("{y}", g.year || "—") : g.year;
     let h = `<div class="m3-photo m3-photo-none m3-golfband"></div><div class="m3-sb"><p class="m3-kick">${esc([g.resort !== g.n ? g.resort : "", muni].filter(Boolean).join(" · "))}</p><h3 tabindex="-1">${esc(g.n)}</h3>`;
@@ -930,6 +978,9 @@ export function initMapV3(root: HTMLElement) {
       g.sort((a, b) => a.p.lon - b.p.lon);
       const cx = g.reduce((t, x) => t + at0.get(x)!.x, 0) / g.length, cy = g.reduce((t, x) => t + at0.get(x)!.y, 0) / g.length;
       g.forEach((x, i) => { const pt = at0.get(x)!; off.set(x, g.length > 1 ? [cx + (i - (g.length - 1) / 2) * 54 - pt.x, cy - pt.y] : [0, 0]); });
+      // p70 (J-19): pins standing side by side are closer than their short labels are wide, so the labels wait for a closer
+      // zoom (the photographs alone at the overview); every pin keeps its label in its aria-label.
+      g.forEach((x) => x.el.classList.toggle("is-crowd", g.length > 1));
     }
     for (const m of vis) {
       const o = off.get(m) ?? [0, 0], prev = (m as any).off as [number, number] | undefined;
@@ -937,13 +988,16 @@ export function initMapV3(root: HTMLElement) {
       const p0 = at0.get(m)!, x0 = p0.x + o[0], y0 = p0.y + o[1];
       const room = !vis.some((n) => n !== m && Math.abs(at0.get(n)!.x + (off.get(n)?.[0] ?? 0) - x0) < 170 && Math.abs(at0.get(n)!.y + (off.get(n)?.[1] ?? 0) - y0) < 90);
       m.el.classList.toggle("is-named", !m.el.classList.contains("is-cluster") && z >= 10 && room);
+      // p70 (J-19, MI-22): two short labels that would touch (pins apart, labels wider than the gap) both wait too.
+      const lw = (n: typeof m) => (n.p.hero && n.p.tag ? n.p.tag.length * 7 + 18 : 0), w0 = lw(m);
+      if (w0 && !m.el.classList.contains("is-crowd")) m.el.classList.toggle("is-crowd", vis.some((n) => n !== m && lw(n) && Math.abs(at0.get(n)!.x + (off.get(n)?.[0] ?? 0) - x0) < (w0 + lw(n)) / 2 + 6 && Math.abs(at0.get(n)!.y + (off.get(n)?.[1] ?? 0) - y0) < 26));
     }
     labelsSoon();  // the place names make room for the pins
   }
 
   // Prompt 38: a partner project's card (photo, name, summary, three features, homes for sale now, price on request).
   function showProject(p: Proj, open = true) {
-    timeEnd(); ev({ event: `p/${p.id}/pin`, place: p.id, origin: "map" }); ev({ event: "map/card/project", place: p.id, origin: mode }); ctx = null; selRegion = null;
+    step(`project:${p.id}`); timeEnd(); ev({ event: `p/${p.id}/pin`, place: p.id, origin: "map" }); ev({ event: "map/card/project", place: p.id, origin: mode }); ctx = null; selRegion = null;
     const pl = cfg.pl ?? {};
     selProj = p.id; selected = null; syncUrl();
     if (p.hero && cfg.p68) {
@@ -953,7 +1007,7 @@ export function initMapV3(root: HTMLElement) {
       let hh = `${img ? `<img class="m3-photo m3-hero-top" src="${esc(img)}-800.webp" srcset="${esc(img)}-800.webp 800w, ${esc(img)}-1600.webp 1600w" sizes="(max-width: 819px) 100vw, 400px" alt="" width="800" height="450" fetchpriority="high">` : ""}`;
       // Prompt 68: the label only where the data gives one (O'rizon's "tag"); a development not yet signed carries none.
       hh += `<div class="m3-sb m3-arr"><p class="m3-kick">${esc(pm2)}${p.tag ? ` · <span class="m3-tag">${esc(p.tag)}</span>` : ""}</p><div class="ht-row"><h2 class="m3-h" tabindex="-1">${esc(p.name)}</h2>${heartHTML("home", p.id, pm2 ? `${p.name}, ${pm2}` : p.name, p.showcase)}</div>`;
-      hh += `<p class="m3-arr-l">${esc(p.hero)}</p>${p.from ? `<p class="m3-line">${esc(L.pfrom.replace("{v}", eur.format(p.from)))}</p>${imtLine(p.from, "project")}` : ""}`;
+      hh += `<p class="m3-arr-l">${esc(p.hero)}</p>${p.from ? `<p class="m3-line">${esc(L.pfrom.replace("{v}", eur.format(p.from)))}</p>${totalLine(p.from)}` : ""}`;
       hh += `<a class="m3-btn m3-btn-p m3-btn-w" href="${esc(p.showcase)}#pedir" data-visit>${esc(cfg.p68.visit)}</a>`;
       // Prompt 69: the Concierge from the project card opens on this project (its first step already chosen).
       const cg = cfg.p69 ? `<a class="m3-link" href="${esc(`${cfg.links.consult}?project=${encodeURIComponent(p.id)}&place=${encodeURIComponent(pm2)}`)}" data-concierge data-cta-consult>${esc(cfg.p69.cg)} →</a>` : "";
@@ -969,7 +1023,7 @@ export function initMapV3(root: HTMLElement) {
     h += `<p class="m3-buys">${esc(p.summary ?? p.developer)}</p>`;
     if (p.feats?.length) h += `<ul class="m3-det">${p.feats.map((f) => `<li>${esc(f)}</li>`).join("")}</ul>`;
     if (p.now != null && pl.now) h += `<p class="m3-buys"><b>${esc(pl.now.replace("{n}", String(p.now)))}</b></p>`;
-    h += `<p class="m3-buys">${p.from ? L.pfrom.replace("{v}", eur.format(p.from)) : esc(pl.price ?? L.ponreq)}</p>${p.from ? imtLine(p.from, "project") : ""}`;
+    h += `<p class="m3-buys">${p.from ? L.pfrom.replace("{v}", eur.format(p.from)) : esc(pl.price ?? L.ponreq)}</p>${p.from ? totalLine(p.from) : ""}`;
     h += `<div class="m3-acts"><a class="m3-btn m3-btn-p" href="${esc(p.showcase)}">${esc(pl.view ?? p.name)}</a><a class="m3-btn" href="${esc(p.showcase)}#pedir">${esc(pl.visit ?? "")}</a></div></div>`;
     openSheet(h, open);
   }
@@ -1048,24 +1102,32 @@ export function initMapV3(root: HTMLElement) {
   // ------------------------------------------------------------ search, like Spotlight (the magnifier, ⌘K, or "/")
   const spot = $("[data-spot]"), spotIn = $<HTMLInputElement>("[data-spot-in]"), spotRes = $<HTMLUListElement>("[data-spot-res]");
   type Hit = { g: keyof typeof L.g; n: string; sub?: string; id?: string; go: () => void };
-  let pool: Hit[] = [], active = 0, hits: Hit[] = [];
+  let pool: Hit[] = [], active = 0, hits: Hit[] = [], poolReady = false, enterWaiting = false;
+  // p70 (MI-04, S-10): the places are searchable as soon as their small list (munis.topo.json) is here, before the map
+  // itself; until then the list says "Searching…" (never "not found") and an Enter waits for it, then opens the first match.
   async function buildPool() {
+    load();
+    const topo = features.length ? null : await fetch("/data/map/munis.topo.json").then((r) => r.json()).catch(() => null);
+    const props: Props[] = features.length ? features.map((f) => f.properties as Props) : topo ? (feature(topo, topo.objects.m) as any).features.map((f: any) => f.properties as Props) : [];
+    const nameOf = (s: string) => byS.get(s)?.n ?? props.find((p) => p.s === s)?.n;
+    const pl: Hit[] = props.map((p) => ({ g: "munis", n: p.n, sub: L.regions[p.r], id: p.s, go: () => select(p.s) }));
+    for (const [n, x, y, m] of LOCALITIES) pl.push({ g: "munis", n, sub: nameOf(m), id: m, go: () => { select(m, false); if (map) flyTo(x, y, 10.2); else load().then(() => flyTo(x, y, 10.2)); } });
+    for (const p of projects) pl.push({ g: "devs", n: p.name, sub: p.developer, id: p.id, go: () => { if (map) flyTo(p.lon, p.lat, 14); setOverlay("devs", true); showProject(p); } });
+    pool = [...pl]; poolReady = true; find();
+    if (enterWaiting) { enterWaiting = false; if (hits.length) choose(active); }
     await load();
-    const pl: Hit[] = features.map((f) => { const p = f.properties as Props; return { g: "munis", n: p.n, sub: L.regions[p.r], id: p.s, go: () => select(p.s) }; });
-    for (const [n, x, y, m] of LOCALITIES) pl.push({ g: "munis", n, sub: byS.get(m)?.n, id: m, go: () => { select(m, false); flyTo(x, y, 10.2); } });
     try { const pt = await fetch("/data/map/parishes.topo.json").then((r) => r.json()); for (const f of (feature(pt, pt.objects.p) as any).features) pl.push({ g: "pars", n: f.properties.n, sub: byS.get(f.properties.m)?.n, id: `p-${f.properties.id}`, go: async () => { await loadParishes(); const m = byS.get(f.properties.m)!; flyTo(m.x, m.y, 9.4); setTimeout(() => selectParish(f.properties.id), 900); } }); } catch { /* parishes optional */ }
     for (const c of (await loadGolf()).courses) pl.push({ g: "golf", n: c.n, sub: byS.get(c.m)?.n, id: c.m, go: async () => { await setOverlay("golf", true); showGolf(c); } });
     beaches ??= await fetch("/data/map/beaches.json").then((r) => r.json()).catch(() => []);
     for (const [x, y, n] of beaches!) pl.push({ g: "beach", n, go: async () => { await setOverlay("beach", true); flyTo(x, y, 11.6); toast(n); } });
-    for (const p of projects) pl.push({ g: "devs", n: p.name, sub: p.developer, id: p.id, go: () => { flyTo(p.lon, p.lat, 14); setOverlay("devs", true); showProject(p); } });
-    pool = pl;
+    pool = pl; if (!spot.hidden && spotIn.value.trim()) find();
   }
   function find() {
     const t = plain(spotIn.value.trim()); active = 0;
     hits = !t ? [] : pool.filter((h) => plain(h.n).includes(t)).sort((a, b) => Number(!plain(a.n).startsWith(t)) - Number(!plain(b.n).startsWith(t)) || (a.g === "munis" ? -1 : 0) - (b.g === "munis" ? -1 : 0)).slice(0, 12);
     let g = "", h = "";
     hits.forEach((x, i) => { if (x.g !== g) { g = x.g; h += `<li class="m3-rg" role="presentation">${L.g[g]}</li>`; } h += `<li role="option" id="m3o-${i}" data-i="${i}" aria-selected="${i === active}">${esc(x.n)}${x.sub ? `<span>${esc(x.sub)}</span>` : ""}</li>`; });
-    if (t && !hits.length) h = `<li class="m3-none">${L.nomatch}</li>`;
+    if (t && !hits.length) h = `<li class="m3-none">${poolReady ? L.nomatch : L.findWait}</li>`;
     spotRes.innerHTML = h; hits.length ? spotIn.setAttribute("aria-activedescendant", "m3o-0") : spotIn.removeAttribute("aria-activedescendant");
     // Type "Comp" and the map already glides there.
     if (hits[0] && hits[0].g === "munis" && plain(hits[0].n).startsWith(t) && t.length >= 3 && map) { const lo = LOCALITIES.find((l) => l[0] === hits[0].n); const p = lo ? { x: lo[1], y: lo[2] } : features.find((f) => f.properties.n === hits[0].n)?.properties; if (p) map.easeTo({ center: [p.x, p.y], zoom: Math.max(map.getZoom(), 7.4), duration: 700 }); }
@@ -1080,7 +1142,7 @@ export function initMapV3(root: HTMLElement) {
   spotIn.addEventListener("keydown", (e) => {
     if (e.key === "ArrowDown") { active = Math.min(active + 1, hits.length - 1); mark(); e.preventDefault(); }
     else if (e.key === "ArrowUp") { active = Math.max(active - 1, 0); mark(); e.preventDefault(); }
-    else if (e.key === "Enter") { choose(active); e.preventDefault(); } else if (e.key === "Escape") closeSpot();
+    else if (e.key === "Enter") { e.preventDefault(); if (!poolReady) enterWaiting = true; else { if (!hits.length) find(); choose(active); } } else if (e.key === "Escape") closeSpot();
     if (hits.length) spotIn.setAttribute("aria-activedescendant", `m3o-${active}`);
   });
   spotRes.addEventListener("click", (e) => { const li = (e.target as HTMLElement).closest<HTMLElement>("[data-i]"); if (li) choose(Number(li.dataset.i)); });
@@ -1137,6 +1199,16 @@ export function initMapV3(root: HTMLElement) {
   let wasLive = false;
   addEventListener("pagehide", () => { timeEnd(); wasLive = !!map; teardown(); });
   addEventListener("pageshow", (e) => { if ((e as PageTransitionEvent).persisted && wasLive) load(); });
+  if (mode === "page") addEventListener("popstate", () => {
+    const u = new URLSearchParams(location.search);
+    const par = u.get("parish"), pr = u.get("project"), pl = slugOf(u.get("place")), rg = u.get("region");
+    if (keyOf(par, pr, pl, rg) === cardKey()) return;  // another layer's own history step (the Concierge sheet), not the map's
+    restoring = true;
+    try {
+      stopTour(); const pj = pr ? projects.find((x) => x.id === pr) : null;
+      if (par && parishes) selectParish(par); else if (pj) showProject(pj); else if (pl) select(pl); else if (rg) showRegion(rg); else select(null);
+    } finally { restoring = false; }
+  });
   dimButtons();
   if (layer !== "none") setLayer(layer);
   for (const k of ["golf", "beach", "devs"] as const) if (overlays[k]) root.querySelector(`[data-overlay="${k}"]`)?.setAttribute("aria-pressed", "true");
@@ -1160,13 +1232,16 @@ export function initMapV3(root: HTMLElement) {
   }
   // Operator, step 1 (under one second): a ?place= link shows the card at once from the place's small file, before
   // MapLibre and the map data arrive; the map then flies to it.
-  if (selProj && !selected && !selPar && mode === "page") {
+  if (selRegion && !selected && !selPar && !selProj && mode === "page") showRegion(selRegion);  // p70 (S-09): the card first
+  else if (selProj && !selected && !selPar && mode === "page") {
     // Prompt 68: ?project=<id> (the /orizon short link): the project's card at once, then the map comes down to it.
     const pr = projects.find((x) => x.id === selProj); if (pr) { showProject(pr); load(); }
   } else if (selected && !selPar && mode === "page") {
     if (heroOf(selected)) load();  // the arrival is part of the card: the map wakes at once
     const slug = selected;
-    loadPlace(slug).then((d) => { if (d && selected === slug && sheet.hidden) { ev({ event: "map/place", place: slug, origin: mode }); ev({ event: "map/card/muni", place: slug, origin: mode }); showPlace(slug); timeStart(slug); savePlace(d.n); rememberPlace(d.n); } });
+    loadPlace(slug).then((d) => {
+      if (!d && sheet.dataset.skel) { delete sheet.dataset.skel; sheet.removeAttribute("aria-busy"); sheet.classList.remove("is-open"); sheet.hidden = true; }
+      if (d && selected === slug && (sheet.hidden || sheet.dataset.skel)) { ev({ event: "map/place", place: slug, origin: mode }); ev({ event: "map/card/muni", place: slug, origin: mode }); showPlace(slug); timeStart(slug); savePlace(d.n); rememberPlace(d.n); } });
   }
   // For the automated click check (scripts/map-data/clicktest.mjs).
   (root as any).__mapx = { load, showRegion, openPanel, openSources: () => openSources(), view: () => view, pick: (x: number, y: number) => pick({ x, y }), project: (s: string) => { const p = byS.get(s); return p && map ? map.project([p.x, p.y]) : null; }, map: () => map, selected: () => selected, slugs: () => features.map((f) => f.properties.s), tour, setDim, setBudget, setQuarter, quality: () => quality };
