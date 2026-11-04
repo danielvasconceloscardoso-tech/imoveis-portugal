@@ -132,3 +132,74 @@
 /* In the sheet, a step's action stays in reach while the step scrolls (the phone: step 1 and the times are taller than the screen). */
 .sh-in .fl-step > .fl-go { position: sticky; bottom: -28px; z-index: 2; margin-bottom: -28px; padding: 14px 0 28px; background: linear-gradient(rgba(252, 252, 252, 0), rgb(252, 252, 252) 22px); }
 @media (max-width: 819px) { .sh-in .fl-step > .fl-go { margin-top: 22px; } }
+
+/* Prompt 70 (J-27, S-20): on a phone, step 1 and step 3 fit above their action. Tighter spacing in the sheet, the budget as
+   one row of four, a slimmer action bar. Selectors carry .sh-in so they win over sheet.css whatever the bundle order. */
+.sh-in .fl-step > .fl-go { padding-top: 8px; }
+@media (max-width: 819px) and (orientation: portrait) {
+  html aside.sh { height: min(calc(100svh - 28px), 760px); }
+  html aside.sh .sh-in { padding-top: 4px; }
+  aside.sh .sh-in .fl-head { height: 32px; }
+  aside.sh .sh-in .fl-ctx span small { margin-bottom: 1px; }
+  aside.sh .sh-in .fl-btn { min-height: 48px; }
+}
+@media (max-width: 819px) {
+  aside.sh .sh-in .fl-q { margin-top: 10px; font-size: 25px; }
+  aside.sh .sh-in .fl-lede { margin-bottom: 4px; font-size: 15px; line-height: 1.45; }
+  aside.sh .sh-in .fl-opts { margin-top: 14px; }
+  aside.sh .sh-in .fl-opt { min-height: 48px; padding: 11px 18px !important; font-size: 16px !important; }
+  aside.sh .sh-in .fl-step > .fl-k { margin-top: 12px; }
+  aside.sh .sh-in .fl-step > .fl-go { margin-top: 16px; }
+  aside.sh .sh-in .fl-f span { margin-top: 12px; }
+  aside.sh .sh-in .fl-f .fl-in { padding: 8px 0; }
+  aside.sh .sh-in .fl-notice { margin-top: 14px; font-size: 14px; }
+  .fl-pills[data-budget-row] { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+  .fl-pills[data-budget-row] .fl-pill { padding: 8px 4px !important; border-radius: 14px; font-size: 13.5px !important; line-height: 1.2; text-align: center; }
+}
+/* The page version on a phone (J-27): the step's action stays in reach above the bottom bar instead of under it. */
+@media (max-width: 819px) {
+  .consult .fl-q { margin-top: 18px; font-size: 26px; }
+  .consult .fl-f span { margin-top: 12px; }
+  .consult .fl-f .fl-in { padding: 8px 0; }
+  .consult .fl-step > .fl-k { margin-top: 16px; }
+  .consult .fl-notice { margin-top: 12px; font-size: 14px; }
+}
+@media (max-width: 1079px) {
+  .consult .fl-step > .fl-go { position: sticky; bottom: calc(62px + env(safe-area-inset-bottom)); z-index: 2; padding: 10px 0 12px; background: linear-gradient(rgba(246, 243, 238, 0), var(--paper, #f6f3ee) 18px); }
+}
+/* Prompt 70 (J-22, A-25, S-13): a phone held sideways. The sheet takes the full height on the right, its header and the
+   question get compact, the choices sit in two columns, and the action bar is slim, so the options stay visible. */
+@media (max-height: 520px) and (orientation: landscape) {
+  html aside.sh { top: 0; bottom: var(--kb, 0px); left: auto; right: 0; width: min(640px, 100vw); height: auto; max-height: none; border-radius: 20px 0 0 20px; }
+  html aside.sh:not(.is-open) { transform: translateX(105%); }
+  html aside.sh .sh-grab { display: none; }
+  html aside.sh .sh-top { padding: 8px max(14px, env(safe-area-inset-right)) 0 20px; }
+  html aside.sh .sh-in { padding: 4px max(20px, env(safe-area-inset-right)) 28px 20px; }
+  html aside.sh .fl-stage { min-height: 0; }
+  html aside.sh .fl-head { height: 28px; }
+  html aside.sh .fl-back { width: 30px; height: 30px; }
+  html aside.sh .sh-in .fl-q { margin: 8px 0 4px; font-size: 22px; }
+  html aside.sh .sh-in .fl-lede { margin: 0; font-size: 14px; line-height: 1.4; }
+  html aside.sh .sh-in .fl-opts { margin-top: 10px; gap: 6px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  html aside.sh .sh-in .fl-opt { min-height: 44px; padding: 8px 14px !important; font-size: 15px !important; border-radius: 14px; }
+  html aside.sh .sh-in .fl-step > .fl-k, aside.sh .sh-in .rq-bk { margin-top: 10px; }
+  html aside.sh .sh-in .fl-pills[data-budget-row] { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+  html aside.sh .sh-in .fl-pill { padding: 7px 6px !important; font-size: 13.5px !important; text-align: center; }
+  /* The action floats at the bottom right, so the choices on the left are never under it. */
+  html aside.sh .sh-in .fl-step > .fl-go { margin-top: 10px; padding: 0 0 28px; justify-content: flex-end; background: none; pointer-events: none; }
+  html aside.sh .sh-in .fl-step > .fl-go > * { pointer-events: auto; }
+  html aside.sh .sh-in .fl-step > .fl-go .fl-btn { box-shadow: 0 6px 18px rgba(0, 0, 0, .18); }
+  html aside.sh .sh-in .fl-step > .fl-go .fl-link { padding: 8px 12px !important; border-radius: 12px; background: rgba(252, 252, 252, .94) !important; }
+  html aside.sh .sh-in .fl-pills[data-budget-row], html aside.sh .sh-in .fl-pills, html aside.sh .sh-in .fl-opts { max-width: calc(100% - 180px); }
+  html aside.sh .sh-in .fl-btn { min-height: 44px; }
+  html aside.sh .sh-in .fl-fields { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 18px; }
+  html aside.sh .sh-in .fl-f span { margin-top: 8px; }
+  html aside.sh .sh-in .fl-f .fl-in { padding: 6px 0; }
+  html aside.sh .sh-in .fl-notice { margin-top: 10px; font-size: 13.5px; }
+  html aside.sh .sh-in .rq-days { margin: 8px -20px 0; padding: 4px 20px 4px; } html aside.sh .rq-day { padding: 8px 10px !important; } html aside.sh .rq-day b { font-size: 18px; margin-top: 2px; }
+  html aside.sh .rq-times { grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: 6px; } html aside.sh .rq-time { padding: 8px 10px !important; }
+}
+/* Prompt 70 (J-16): 44 × 44 hit areas for the small controls (Back, Change, Skip), the look unchanged. */
+.fl-back, .sp-tz-ch, .fl-go .fl-link, .fl-ask .fl-link { position: relative; }
+.fl-back::after { content: ""; position: absolute; inset: -4px; }
+.sp-tz-ch::after, .fl-go .fl-link::after, .fl-ask .fl-link::after { content: ""; position: absolute; left: -8px; right: -8px; top: 50%; height: 44px; min-width: 44px; transform: translateY(-50%); }
