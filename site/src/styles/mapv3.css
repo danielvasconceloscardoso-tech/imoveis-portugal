@@ -452,7 +452,7 @@ p.m3-tl { margin: 0; }
 @media (prefers-reduced-motion: reduce) { .m3-qp, .m3-qb svg { transition: none; } }
 
 /* p70 (A-24): the waiting card of a ?place= link: the name at once, quiet bars until the place's file arrives. */
-.m3-skel-ph { aspect-ratio: 16 / 10; background: #ece7dc; }
+.m3-skel-ph { aspect-ratio: 16 / 6; background: #ece7dc; }
 .m3-skel { height: 14px; margin: 0 0 12px; border-radius: 7px; background: #ece7dc; }
 .m3-skel-k { width: 30%; height: 10px; }
 .m3-skel-s { width: 55%; }
@@ -463,3 +463,11 @@ p.m3-tl { margin: 0; }
 }
 /* p70 (S-26): the card is solid, so the map's town names never show through its text. */
 .m3-sheet { background: #fbfaf7; }
+/* p70 (S-23): until the home page's still picture arrives, the map's own colours (sea to land), not an empty beige box. */
+.m3-home .m3-stage { background: linear-gradient(100deg, #6f8fa0 0%, #8fadb9 52%, #c9d6d6 66%, #e7e2d7 80%); }
+/* p70 (S-13): a phone held sideways is short: the map fits the screen above the tab bar, and an open card takes its height,
+   so the card never slips under the tab bar. */
+@media (max-width: 819px) and (max-height: 500px) and (orientation: landscape) {
+  .m3-page .m3-stage { min-height: 0; }
+  .m3-sheet, .m3-sheet[data-detent="0"], .m3-sheet[data-detent="2"], .m3-sheet.is-arr[data-detent="1"] { height: calc(100% - 8px); }
+}

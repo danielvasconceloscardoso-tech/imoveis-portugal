@@ -2901,30 +2901,10 @@ How to edit:
 - EN: Searching…
 - FR: Recherche…
 
-### srcl.ine
-- PT: INE, Estatísticas de preços da habitação ao nível local, indicador 0012234 (2.º trimestre de 2026)
-- EN: INE (Statistics Portugal), local housing price statistics, indicator 0012234 (Q2 2026)
-- FR: INE (institut statistique du Portugal), statistiques des prix du logement au niveau local, indicateur 0012234 (2e trimestre 2026)
 
-### srcl.rent
-- PT: INE, Estatísticas de rendas da habitação ao nível local, indicador 0014696
-- EN: INE (Statistics Portugal), local housing rent statistics, indicator 0014696
-- FR: INE (institut statistique du Portugal), statistiques des loyers au niveau local, indicateur 0014696
 
-### srcl.bdp
-- PT: Banco de Portugal, BPstat, série 12533735 (taxa de juro, empréstimos a particulares para habitação, novas operações)
-- EN: Banco de Portugal, BPstat series 12533735 (interest rate, loans to individuals for house purchase, new business)
-- FR: Banco de Portugal, BPstat, série 12533735 (taux d'intérêt, prêts immobiliers aux particuliers, nouvelles opérations)
 
-### srcl.osm
-- PT: © colaboradores do OpenStreetMap (ODbL), através da exportação osm-boundaries; geoBoundaries (CC0)
-- EN: © OpenStreetMap contributors (ODbL), via the osm-boundaries export; geoBoundaries (CC0)
-- FR: © contributeurs d'OpenStreetMap (ODbL), via l'export osm-boundaries ; geoBoundaries (CC0)
 
-### srcl.golf
-- PT: Campos de golfe (a camada Golfe): OpenStreetMap leisure=golf_course, © colaboradores do OpenStreetMap (ODbL)
-- EN: Golf courses (the Golf layer): OpenStreetMap leisure=golf_course, © OpenStreetMap contributors (ODbL)
-- FR: Parcours de golf (la couche Golf) : OpenStreetMap leisure=golf_course, © contributeurs d'OpenStreetMap (ODbL)
 
 ### find
 - PT: Procurar concelho
@@ -6051,9 +6031,9 @@ Prompt 36 (D62): map v3. Budget gesture, layer chips, Day/Night, search, time, c
 - FR: Voir les biens ici
 
 ### card.concierge
-- PT: Falar com o concierge
-- EN: Talk to the concierge
-- FR: Parler au concierge
+- PT: Falar com o Concierge
+- EN: Talk to the Concierge
+- FR: Parler au Concierge
 
 ### card.compare
 - PT: Comparar
@@ -9247,9 +9227,9 @@ Operator's step 1 (3 Nov 2026): the golden sample place card (Gondomar first). F
 - FR: Voir l'analyse complète
 
 ### cta.consult
-- PT: O consultor ajuda
-- EN: Ask the advisor
-- FR: Le conseiller vous aide
+- PT: Falar com o Concierge
+- EN: Talk to the Concierge
+- FR: Parler au Concierge
 
 ### homes
 - PT: Casas novas em {muni}: {name}

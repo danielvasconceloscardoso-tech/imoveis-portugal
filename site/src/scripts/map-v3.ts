@@ -314,7 +314,8 @@ export function initMapV3(root: HTMLElement) {
       let fit: any; try { fit = map.cameraForBounds([[-12.4, 36.9], [-6.15, 42.17]], { padding: pad }); } catch { fit = null; }
       fit ??= map.cameraForBounds([[-12.4, 36.9], [-6.15, 42.17]], { padding: 8 });
       // Pitched, the south comes closer to the eye: aim a little south so the Algarve stays in frame.
-      const home = { center: flat ? fit.center : [fit.center.lng, fit.center.lat - (narrow ? 0.15 : 0.45)], zoom: fit.zoom + (flat ? 0 : narrow ? 0.28 : 0.2), pitch: flat ? 0 : 50, bearing: flat ? 0 : -12 };
+      // p70 (MI-12): on a desktop the country comes a little closer (+0.4, was +0.2), filling the space beside the postcards.
+      const home = { center: flat ? fit.center : [fit.center.lng, fit.center.lat - (narrow ? 0.15 : 0.45)], zoom: fit.zoom + (flat ? 0 : narrow ? 0.28 : 0.4), pitch: flat ? 0 : 50, bearing: flat ? 0 : -12 };
       (root as any).__home = home;
       // p70 (S-09): the flight in plays only when the map is ready early; on a slow network the still picture has stood in its
       // place, so the live map takes its framing without a jump.
@@ -402,7 +403,7 @@ export function initMapV3(root: HTMLElement) {
       const big = BIG.includes(p.s), w = p.n.length * (big ? 8.5 : 6.5) + 8;
       // Over the place if there is room, otherwise just above or just below it; dropped only when all three are taken.
       // A big name (Porto) next to a photo pin may also step a little further down or up rather than disappear.
-      const y = [c.y, c.y - 17, c.y + 17, ...(big || p.s === selected ? [c.y + 32, c.y - 34] : [])].find((yy) => !clash(c.x, yy, w)) ?? (p.s === selected ? c.y : undefined);
+      const y = [c.y, c.y - 17, c.y + 17, ...(big || p.s === selected ? [c.y + 32, c.y - 34, c.y + 48] : [])].find((yy) => !clash(c.x, yy, w)) ?? (p.s === selected ? c.y : undefined);
       if (y === undefined) continue;
       placed.push({ x: c.x, y, w }); h += `<span class="${big ? "m3-l1" : "m3-l2"}" style="transform:translate(${Math.round(c.x)}px,${Math.round(y)}px)">${esc(p.n)}</span>`;
       if (placed.length > 70) break;
@@ -985,6 +986,9 @@ export function initMapV3(root: HTMLElement) {
       const p0 = at0.get(m)!, x0 = p0.x + o[0], y0 = p0.y + o[1];
       const room = !vis.some((n) => n !== m && Math.abs(at0.get(n)!.x + (off.get(n)?.[0] ?? 0) - x0) < 170 && Math.abs(at0.get(n)!.y + (off.get(n)?.[1] ?? 0) - y0) < 90);
       m.el.classList.toggle("is-named", !m.el.classList.contains("is-cluster") && z >= 10 && room);
+      // p70 (J-19, MI-22): two short labels that would touch (pins apart, labels wider than the gap) both wait too.
+      const lw = (n: typeof m) => (n.p.hero && n.p.tag ? n.p.tag.length * 7 + 18 : 0), w0 = lw(m);
+      if (w0 && !m.el.classList.contains("is-crowd")) m.el.classList.toggle("is-crowd", vis.some((n) => n !== m && lw(n) && Math.abs(at0.get(n)!.x + (off.get(n)?.[0] ?? 0) - x0) < (w0 + lw(n)) / 2 + 6 && Math.abs(at0.get(n)!.y + (off.get(n)?.[1] ?? 0) - y0) < 26));
     }
     labelsSoon();  // the place names make room for the pins
   }

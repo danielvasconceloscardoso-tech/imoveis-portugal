@@ -266,6 +266,11 @@ const skelNames = Object.fromEntries(MAP_MUNIS.filter((m) => fromSlug(m.s) !== m
   <noscript><style is:inline>.m3-top, .m3-dock, .m3-cards { display: none !important; }</style><p class="m3-noscript">{k("noscript")}</p></noscript>
   <script type="application/json" data-m3-cfg set:html={JSON.stringify(cfg)} />
   {mode === "page" && <script type="application/json" data-m3-names set:html={JSON.stringify(skelNames)} />}
+  {/* p70 (A-24): a ?place= link's card frame (the place's name and quiet bars) shows with the first paint, before any
+       script file arrives; map-v3.ts fills it in from the place's small file. */}
+  {mode === "page" && (
+    <script is:inline>(function(){try{var v=new URLSearchParams(location.search).get("place");if(!v)return;var slug=v.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");var s=document.currentScript,root=s&&s.closest("[data-m3]"),sheet=root&&root.querySelector("[data-sheet]"),inner=root&&root.querySelector("[data-sheet-in]");if(!slug||!sheet||!inner||!sheet.hidden)return;var names=JSON.parse((root.querySelector("[data-m3-names]")||{}).textContent||"{}"),small=["de","do","da","dos","das","e","a"];var name=names[slug]||slug.split("-").map(function(w,i){return i&&small.indexOf(w)>=0?w:w.charAt(0).toUpperCase()+w.slice(1)}).join(" ");inner.innerHTML='<div class="m3-photo m3-skel-ph"></div><div class="m3-sb"><p class="m3-skel m3-skel-k"></p><h2 class="m3-h"></h2></div><div class="m3-sb m3-skel-b"><p class="m3-skel"></p><p class="m3-skel"></p><p class="m3-skel m3-skel-s"></p></div>';inner.querySelector("h2").textContent=name;sheet.dataset.skel="1";sheet.setAttribute("aria-busy","true");sheet.dataset.detent="1";sheet.hidden=false;sheet.classList.add("is-open")}catch(e){}})();</script>
+  )}
 </div>
 
 <script>
@@ -278,17 +283,6 @@ const skelNames = Object.fromEntries(MAP_MUNIS.filter((m) => fromSlug(m.s) !== m
   if (new URLSearchParams(location.search).get("project") && document.querySelector("[data-m3][data-mode=page]")) run();
   else if (slug && document.querySelector("[data-m3][data-mode=page]")) {
     (window as any).__m3place = { slug, p: fetch(`/data/map/place/${slug}.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null) };
-    // p70 (A-24): the card's frame shows at once (the place's name and quiet bars) and fills in when the place's file arrives.
-    const root = document.querySelector<HTMLElement>("[data-m3][data-mode=page]")!, sheet = root.querySelector<HTMLElement>("[data-sheet]"), inner = root.querySelector<HTMLElement>("[data-sheet-in]");
-    if (sheet && inner && sheet.hidden) {
-      let names: Record<string, string> = {}; try { names = JSON.parse(root.querySelector("[data-m3-names]")?.textContent || "{}"); } catch { /* the slug spells it */ }
-      const small = ["de", "do", "da", "dos", "das", "e", "a"];
-      const name = names[slug] ?? slug.split("-").map((w, i) => (i && small.includes(w) ? w : w.charAt(0).toUpperCase() + w.slice(1))).join(" ");
-      const h2 = document.createElement("h2"); h2.className = "m3-h"; h2.textContent = name;
-      inner.innerHTML = `<div class="m3-photo m3-skel-ph"></div><div class="m3-sb"><p class="m3-skel m3-skel-k"></p></div><div class="m3-sb m3-skel-b"><p class="m3-skel"></p><p class="m3-skel"></p><p class="m3-skel m3-skel-s"></p></div>`;
-      inner.children[1].append(h2); sheet.dataset.skel = "1"; sheet.setAttribute("aria-busy", "true"); sheet.dataset.detent = "1"; sheet.hidden = false;
-      requestAnimationFrame(() => sheet.classList.add("is-open"));
-    }
     run();
   } else "requestIdleCallback" in window ? requestIdleCallback(run, { timeout: 1200 }) : setTimeout(run, 300);
 </script>
