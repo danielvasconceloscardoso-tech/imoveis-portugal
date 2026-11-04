@@ -17,10 +17,10 @@ Goes live under D67. Follow content/METHOD.md (CLAUDE.md rule 16) and rule 17: G
 2. **Arrival:**
    - the camera comes down the Douro to Gondomar (3D, about 2 s; any touch takes over; reduced motion jumps);
    - the name in large type, and one line: "Gondomar. O Douro, a 12 minutos dos Aliados" (OSRM, already in place.json).
-3. **Hero:**
-   - O'rizon's photo pin stands at its real spot, visible from the opening view of Portugal, labelled "Seleção" / "Our pick" / "Sélection".
-   - The card opens on O'rizon: the full-bleed render, one line ("200 casas sobre o Douro, junto à Marina do Freixo"), and one action, "Marcar uma visita privada".
-   - "Ver o empreendimento" sits below as a quiet link.
+3. **Hero: the developments, found freely (operator, 4 Nov: "let people navigate freely and find both").**
+   - O'rizon and Marble Terrace are both on the map. Each photo pin stands at its real spot, visible from the opening view of Portugal, with the same pin size.
+   - Tapping a pin opens that development's card: the full-bleed render, one line, and one action, "Marcar uma visita privada". "Ver o empreendimento" sits below as a quiet link.
+   - The Gondomar card shows both developments as two photo tiles in the same format, with no question, no chooser and no ranking. Each tile opens its card.
 4. **The next questions,** one line each, opening on tap: "Porto? 12 min." "Escolas? 7 a menos de 15 min." "300 000 €? Cerca de 128 m²."
    - The lists, the sources and the paid tiles live behind these taps.
    - Nothing on the first screen that has to be read line by line. Every free/paid boundary stays as it is.
@@ -32,6 +32,9 @@ The pattern comes from projects.json, so the next partner place works with no co
 Shalu has authorised it (operator, 4 Nov).
 1. **The Gondomar card photographs are Shalu's river aerials,** credited "Shalu Investments": aerial-douro, aerial-dusk and aerial-river in site/public/img/developers/orizon/.
 2. **The three old photos come off the card.** Keep the files.
+
+## Marble Terrace back on main
+`marble-terrace` and `marble-terrace-vila-do-conde` go back to `pending: false` (TASKS 70a).
 
 ## /orizon
 Opens O'rizon's card on the map, in English, with Gondomar in view. Add `?project=` if it does not exist. The private preview /d/f658bd1eef/ stays as it is.
@@ -45,8 +48,8 @@ Opens O'rizon's card on the map, in English, with Gondomar in view. Add `?projec
    - imoveisportugal.lu/orizon.
 
 ## Acceptance (on main, phone and desktop)
-1. The O'rizon pin, with its photo, shows on the opening view, labelled "Seleção" / "Our pick", never "Patrocinado".
-2. Tapping Gondomar gives the arrival, then O'rizon first, then the one-line answers. Nothing on the first screen reads like a report.
+1. The O'rizon and Marble Terrace pins, with their photos, show on the opening view at the same size. O'rizon is labelled "Seleção" / "Our pick", never "Patrocinado".
+2. Tapping Gondomar gives the arrival, the two development tiles and the one-line answers. Nothing on the first screen reads like a report.
 3. The Gondomar card shows Shalu's aerials, credited.
 4. /orizon opens O'rizon's card in English.
 5. The checks and the build pass, and the live link works.
