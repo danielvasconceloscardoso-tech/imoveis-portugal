@@ -4151,9 +4151,9 @@ How to edit:
 - FR: La suite
 
 ### next.1
-- PT: O consultor lê o seu pedido e responde por email.
-- EN: The advisor reads your request and replies by email.
-- FR: Le conseiller lit votre demande et vous répond par e-mail.
+- PT: O consultor lê o seu pedido, confirma a hora por email e liga-lhe.
+- EN: The advisor reads your request, confirms the time by email and calls you.
+- FR: Le conseiller lit votre demande, confirme l'heure par e-mail et vous appelle.
 
 ### next.2
 - PT: Na consulta: as zonas, o orçamento, o calendário e os próximos passos.
