@@ -136,20 +136,34 @@
 /* Prompt 70 (J-27, S-20): on a phone, step 1 and step 3 fit above their action. Tighter spacing in the sheet, the budget as
    one row of four, a slimmer action bar. Selectors carry .sh-in so they win over sheet.css whatever the bundle order. */
 .sh-in .fl-step > .fl-go { padding-top: 8px; }
+@media (max-width: 819px) and (orientation: portrait) {
+  html aside.sh { height: min(calc(100svh - 28px), 760px); }
+  html aside.sh .sh-in { padding-top: 4px; }
+  aside.sh .sh-in .fl-head { height: 32px; }
+  aside.sh .sh-in .fl-ctx span small { margin-bottom: 1px; }
+  aside.sh .sh-in .fl-btn { min-height: 48px; }
+}
 @media (max-width: 819px) {
-  aside.sh .sh-in .fl-q { margin-top: 14px; font-size: 26px; }
+  aside.sh .sh-in .fl-q { margin-top: 10px; font-size: 25px; }
   aside.sh .sh-in .fl-lede { margin-bottom: 4px; font-size: 15px; line-height: 1.45; }
   aside.sh .sh-in .fl-opts { margin-top: 14px; }
-  aside.sh .sh-in .fl-opt { min-height: 50px; padding: 12px 18px !important; font-size: 16px !important; }
-  aside.sh .sh-in .fl-step > .fl-k { margin-top: 16px; }
+  aside.sh .sh-in .fl-opt { min-height: 48px; padding: 11px 18px !important; font-size: 16px !important; }
+  aside.sh .sh-in .fl-step > .fl-k { margin-top: 12px; }
   aside.sh .sh-in .fl-step > .fl-go { margin-top: 16px; }
   aside.sh .sh-in .fl-f span { margin-top: 12px; }
   aside.sh .sh-in .fl-f .fl-in { padding: 8px 0; }
   aside.sh .sh-in .fl-notice { margin-top: 14px; font-size: 14px; }
   .fl-pills[data-budget-row] { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
-  .fl-pills[data-budget-row] .fl-pill { padding: 9px 4px !important; border-radius: 14px; font-size: 13.5px !important; line-height: 1.2; text-align: center; }
+  .fl-pills[data-budget-row] .fl-pill { padding: 8px 4px !important; border-radius: 14px; font-size: 13.5px !important; line-height: 1.2; text-align: center; }
 }
 /* The page version on a phone (J-27): the step's action stays in reach above the bottom bar instead of under it. */
+@media (max-width: 819px) {
+  .consult .fl-q { margin-top: 18px; font-size: 26px; }
+  .consult .fl-f span { margin-top: 12px; }
+  .consult .fl-f .fl-in { padding: 8px 0; }
+  .consult .fl-step > .fl-k { margin-top: 16px; }
+  .consult .fl-notice { margin-top: 12px; font-size: 14px; }
+}
 @media (max-width: 1079px) {
   .consult .fl-step > .fl-go { position: sticky; bottom: calc(62px + env(safe-area-inset-bottom)); z-index: 2; padding: 10px 0 12px; background: linear-gradient(rgba(246, 243, 238, 0), var(--paper, #f6f3ee) 18px); }
 }
@@ -182,7 +196,7 @@
   html aside.sh .sh-in .fl-f span { margin-top: 8px; }
   html aside.sh .sh-in .fl-f .fl-in { padding: 6px 0; }
   html aside.sh .sh-in .fl-notice { margin-top: 10px; font-size: 13.5px; }
-  html aside.sh .rq-days { padding-bottom: 4px; } html aside.sh .rq-day { padding: 8px 10px !important; } html aside.sh .rq-day b { font-size: 18px; margin-top: 2px; }
+  html aside.sh .sh-in .rq-days { margin: 8px -20px 0; padding: 4px 20px 4px; } html aside.sh .rq-day { padding: 8px 10px !important; } html aside.sh .rq-day b { font-size: 18px; margin-top: 2px; }
   html aside.sh .rq-times { grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: 6px; } html aside.sh .rq-time { padding: 8px 10px !important; }
 }
 /* Prompt 70 (J-16): 44 × 44 hit areas for the small controls (Back, Change, Skip), the look unchanged. */
