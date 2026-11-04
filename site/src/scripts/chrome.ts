@@ -69,17 +69,27 @@ export function initChrome() {
     document.querySelectorAll("details.concierge[open]").forEach((d) => d.removeAttribute("open"));
     if (sh.classList.contains("is-open") && !sh.hidden) return;
     lastFocus = document.activeElement as HTMLElement;
-    flow ??= initFlow(flowEl, { param: "concierge" });
+    // Prompt 70: the flow keeps the sheet's history (scripts/flow.ts): opening pushes an entry, Back closes onto this page.
+    flow ??= initFlow(flowEl, { param: "concierge", sheet: true, onClose: () => close() });
     if (!new URLSearchParams(location.search).has("concierge")) flow.show();
     sh.style.transform = ""; sh.hidden = false; back.hidden = false; document.documentElement.classList.add("sh-lock"); fit();
     // Two frames: the first lays the hidden-off sheet out, the second starts the slide (one frame is not enough in Safari).
     requestAnimationFrame(() => requestAnimationFrame(() => { sh.classList.add("is-open"); back.classList.add("is-open"); flow!.focus(); }));
   };
-  const close = () => {
+  // fromHistory: the browser already went back (Back from the first step); otherwise ✕, the backdrop, Esc or the grabber
+  // go back over the entries the flow pushed, so the page under it is the one it was opened from.
+  const close = (fromHistory = false) => {
+    if (sh.hidden || !sh.classList.contains("is-open")) return;
     sh.classList.remove("is-open"); back.classList.remove("is-open"); document.documentElement.classList.remove("sh-lock");
     clearTimeout(hideT); hideT = window.setTimeout(() => { sh.hidden = true; back.hidden = true; sh.style.transform = ""; }, slow() ? 0 : 380);
-    flow?.stop(); flow?.clearUrl(); lastFocus?.focus({ preventScroll: true });  // part 5: where the reader stopped
+    flow?.stop(); if (!fromHistory) flow?.unwind(); lastFocus?.focus({ preventScroll: true });  // part 5: where the reader stopped
   };
+  addEventListener("popstate", () => {
+    if (!flow) { if (new URLSearchParams(location.search).has("concierge")) open(); return; }
+    const r = flow.pop();
+    if (r === "close") close(true); else if (r === "leave") close();
+    else if (r === "open" && (sh.hidden || !sh.classList.contains("is-open"))) open();  // Forward after Back: the sheet comes back
+  });
   // Every link to the concierge page opens the sheet instead, over what the reader was looking at (the page stays as a link).
   const fromLink = (href: string, e?: Event) => {
     // A place or budget carried by the link (the map card) becomes the flow's prefill.
@@ -91,7 +101,7 @@ export function initChrome() {
     const t = u.searchParams.get("topic") || "";
     t ? p.set("topic", t) : p.delete("topic");
     if (t !== flowTopic) { flowTopic = t; changed = true; }
-    if (changed || p.toString() !== new URLSearchParams(location.search).toString()) history.replaceState(null, "", `${location.pathname}${p.size ? `?${p}` : ""}${location.hash}`);
+    if (changed || p.toString() !== new URLSearchParams(location.search).toString()) history.replaceState(history.state, "", `${location.pathname}${p.size ? `?${p}` : ""}${location.hash}`);
     if (changed && flow) { flow.mute(); flowEl.querySelector("[data-flow-stage]")!.innerHTML = ""; (flowEl as any).__flow = null; flow = null; }
     open(e);
   };
@@ -100,7 +110,7 @@ export function initChrome() {
   w.__ipCgStart = (o) => {
     const p = new URLSearchParams(location.search);
     p.set("cg", "home"); p.set("ed", o.ed); p.set("door", o.door); o.budget ? p.set("budget", String(o.budget)) : p.delete("budget"); p.delete("concierge"); p.delete("topic"); flowTopic = "";
-    history.replaceState(null, "", `${location.pathname}?${p}${location.hash}`);
+    history.replaceState(history.state, "", `${location.pathname}?${p}${location.hash}`);
     if (flow) { flow.mute(); flowEl.querySelector("[data-flow-stage]")!.innerHTML = ""; (flowEl as any).__flow = null; flow = null; }
     sh.classList.remove("is-open"); open(); return true;
   };
@@ -110,8 +120,8 @@ export function initChrome() {
     if (!a || sh.contains(a) || e.metaKey || e.ctrlKey || e.shiftKey || (e as MouseEvent).button > 0) return;
     if (a.hasAttribute("data-concierge") || (cgPath && a.pathname === cgPath && a.origin === location.origin)) fromLink(a.href, e);
   }, true);
-  sh.querySelector("[data-cg-x]")!.addEventListener("click", close);
-  back.addEventListener("click", close);
+  sh.querySelector("[data-cg-x]")!.addEventListener("click", () => close());
+  back.addEventListener("click", () => close());
   addEventListener("keydown", (e) => { if (e.key === "Escape" && !sh.hidden) close(); });
 
   // iPhone (prompt 37 §1.3): the sheet sits on the visual viewport, so the keyboard never covers the field being typed in.

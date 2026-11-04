@@ -2,7 +2,7 @@
 
 Written by `node scripts/check-parity.mjs` on every run (prompt 69). Read it before each release: every Concierge block of `content/copy/COPY_DECK.md` (sections `flow`, `consult`, `send`, `p69`) in PT, EN and FR, one row each. The check never fails on wording; the flags are what a machine can see and a reader decides.
 
-174 blocks, 3 flagged.
+191 blocks, 2 flagged.
 
 ## Corrected on 4 Nov 2026 (prompt 69)
 
@@ -30,7 +30,6 @@ Written by `node scripts/check-parity.mjs` on every run (prompt 69). Read it bef
 ## Flagged
 
 - `consult.next.h`: length far from PT (FR)
-- `flow.c.fin.1`: length far from PT (EN); length far from PT (FR)
 - `flow.c.nif`: length far from PT (EN)
 
 ## Every block
@@ -76,7 +75,7 @@ Written by `node scripts/check-parity.mjs` on every run (prompt 69). Read it bef
 | `flow.skip` | Saltar | Skip | Passer |
 | `flow.of` | {i} de {n} | {i} of {n} | {i} sur {n} |
 | `flow.close` | Fechar | Close | Fermer |
-| `flow.c.title` | Falar com o concierge | Talk to the concierge | Parler au concierge |
+| `flow.c.title` | Falar com o Concierge | Talk to the Concierge | Parler au Concierge |
 | `flow.c.lede` (corrected) | Quinze minutos por vídeo com um consultor qualificado, sem custos. Pedir leva um minuto. | Fifteen minutes by video with a qualified advisor, at no cost. Asking takes a minute. | Quinze minutes en vidéo avec un conseiller qualifié, sans frais. La demande prend une minute. |
 | `flow.c.country` | Onde vive? | Where do you live? | Où vivez-vous ? |
 | `flow.other` | Outro país | Another country | Un autre pays |
@@ -100,7 +99,7 @@ Written by `node scripts/check-parity.mjs` on every run (prompt 69). Read it bef
 | `flow.c.when.3` | Daqui a mais de um ano | In more than a year | Dans plus d'un an |
 | `flow.c.when.4` | Ainda não sei | Not sure yet | Je ne sais pas encore |
 | `flow.c.fin` | Como pensa pagar? | How do you plan to pay? | Comment pensez-vous payer ? |
-| `flow.c.fin.1` | Pronto pagamento | Cash | Comptant |
+| `flow.c.fin.1` | Capitais próprios (sem crédito) | Own funds (no mortgage) | Fonds propres (sans crédit) |
 | `flow.c.fin.2` | Com crédito | With a mortgage | Avec un crédit |
 | `flow.c.fin.3` | Ainda não decidi | Not decided yet | Pas encore décidé |
 | `flow.c.nif` | Já tem NIF português? | Do you already have a Portuguese tax number (NIF)? | Avez-vous déjà un NIF portugais ? |
@@ -132,7 +131,7 @@ Written by `node scripts/check-parity.mjs` on every run (prompt 69). Read it bef
 | `flow.p.consent` | Autorizo que o meu pedido seja usado para me responderem e, se eu pedir, enviado a um parceiro da categoria escolhida. Li a política de privacidade. | I agree that my request is used to reply to me and, if I ask, passed to a partner in the chosen category. I have read the privacy policy. | J'accepte que ma demande serve à me répondre et, si je le demande, soit transmise à un partenaire de la catégorie choisie. J'ai lu la politique de confidentialité. |
 | `flow.p.done.h` (corrected) | Recebemos a sua pergunta. | We have your question. | Nous avons bien reçu votre question. |
 | `flow.p.done.p` (corrected) | Respondemos por email, normalmente em dois dias úteis. | We reply by email, usually within two working days. | Nous répondons par e-mail, en général sous deux jours ouvrés. |
-| `flow.v.title` | Pedir uma visita | Ask for a private viewing | Demander une visite privée |
+| `flow.v.title` | Marcar uma visita privada | Book a private visit | Réserver une visite privée |
 | `flow.v.how` | Como prefere visitar? | How would you like to view it? | Comment souhaitez-vous visiter ? |
 | `flow.v.how.1` | Por videochamada | By video call | En visioconférence |
 | `flow.v.how.2` | Ao vivo, em Portugal | In person, in Portugal | Sur place, au Portugal |
@@ -148,9 +147,9 @@ Written by `node scripts/check-parity.mjs` on every run (prompt 69). Read it bef
 | `p69.help` | Em que podemos ajudar? | What can we help with? | En quoi pouvons-nous vous aider ? |
 | `p69.lede` | Um consultor qualificado liga-lhe à hora que escolher. | A qualified advisor calls you at the time you choose. | Un conseiller qualifié vous appelle à l'heure que vous choisissez. |
 | `p69.help.ctx` | O que estava a ver | What you were looking at | Ce que vous regardiez |
-| `p69.help.project` | {name}, em {place} | {name}, in {place} | {name}, à {place} |
-| `p69.help.place` | Uma casa em {place} | A home in {place} | Un logement à {place} |
-| `p69.help.placebudget` | Uma casa em {place}, por cerca de {price} | A home in {place}, around {price} | Un logement à {place}, autour de {price} |
+| `p69.help.project` | {name}, {inplace} | {name}, {inplace} | {name}, {inplace} |
+| `p69.help.place` | Uma casa {inplace} | A home {inplace} | Un logement {inplace} |
+| `p69.help.placebudget` | Uma casa {inplace}, por cerca de {price} | A home {inplace}, around {price} | Un logement {inplace}, autour de {price} |
 | `p69.help.budget` | Uma casa por cerca de {price} | A home around {price} | Un logement autour de {price} |
 | `p69.help.home` | Encontrar casa em Portugal | Finding a home in Portugal | Trouver un logement au Portugal |
 | `p69.help.costs` | Os custos, os impostos e os papéis da compra | The costs, taxes and paperwork of buying | Les frais, les impôts et les formalités de l'achat |
@@ -158,7 +157,7 @@ Written by `node scripts/check-parity.mjs` on every run (prompt 69). Read it bef
 | `p69.budget` | Orçamento | Budget | Budget |
 | `p69.when` | Quando lhe podemos ligar? | When can we call you? | Quand pouvons-nous vous appeler ? |
 | `p69.when.skip` | Prefiro combinar por email | I'd rather agree a time by email | Je préfère convenir d'une heure par e-mail |
-| `p69.tz` | Horas de {city}, com Lisboa por baixo. | Times in {city}, with Lisbon underneath. | Heures de {city}, avec Lisbonne en dessous. |
+| `p69.tz` | Horas {ofcity}, com Lisboa por baixo. | Times {ofcity}, with Lisbon underneath. | Heures {ofcity}, avec Lisbonne en dessous. |
 | `p69.tz.same` | Horas de Lisboa. | Lisbon times. | Heures de Lisbonne. |
 | `p69.tz.change` | Mudar | Change | Modifier |
 | `p69.tz.zone` | Mostrar as horas de | Show the times for | Afficher les heures de |
@@ -173,6 +172,17 @@ Written by `node scripts/check-parity.mjs` on every run (prompt 69). Read it bef
 | `p69.reach` | Como chegamos até si? | How do we reach you? | Comment vous joindre ? |
 | `p69.lang` | Língua da chamada | Language of the call | Langue de l'appel |
 | `p69.send` | Marcar a chamada | Book the call | Réserver l'appel |
+| `p69.send.later` | Enviar | Send | Envoyer |
+| `p69.notice` | O seu pedido segue para a Imóveis Portugal e para um consultor qualificado, que confirma a hora por email e lhe liga. | Your request goes to Imóveis Portugal and to a qualified advisor, who confirms the time by email and calls you. | Votre demande part chez Imóveis Portugal et chez un conseiller qualifié, qui confirme l'heure par e-mail et vous appelle. |
+| `p69.notice.later` | O seu pedido segue para a Imóveis Portugal e para um consultor qualificado, que lhe escreve por email para combinar a hora. | Your request goes to Imóveis Portugal and to a qualified advisor, who emails you to agree on a time. | Votre demande part chez Imóveis Portugal et chez un conseiller qualifié, qui vous écrit par e-mail pour convenir d'une heure. |
+| `p69.phone` | Telefone (ligamos para este número) | Phone (we call this number) | Téléphone (nous appelons ce numéro) |
+| `p69.email` | Email (para a confirmação) | Email (for the confirmation) | E-mail (pour la confirmation) |
+| `p69.err.name` | Indique o seu nome. | Enter your name. | Indiquez votre nom. |
+| `p69.err.email` | Indique o seu email. | Enter your email. | Indiquez votre e-mail. |
+| `p69.err.phone` | Indique um telefone: o consultor liga para este número. | Enter a phone number: the advisor calls you on it. | Indiquez un téléphone : le conseiller vous appelle à ce numéro. |
+| `p69.err.phone.bad` | Este número parece incompleto. | This number looks incomplete. | Ce numéro semble incomplet. |
+| `p69.place` | Onde, em Portugal? Até três sítios. | Where in Portugal? Up to three places. | Où, au Portugal ? Jusqu'à trois lieux. |
+| `p69.place.ph` | Ex.: Gondomar, Vila do Conde | e.g. Gondomar, Vila do Conde | Ex. : Gondomar, Vila do Conde |
 | `p69.done.h` | A partir daqui, tratamos nós. | We'll take it from here. | Nous prenons le relais. |
 | `p69.done.p` | Um consultor qualificado confirma a hora por email e liga-lhe a essa hora. | A qualified advisor confirms the time by email, then calls you at that time. | Un conseiller qualifié confirme l'heure par e-mail, puis vous appelle à cette heure-là. |
 | `p69.done.p.later` | Um consultor qualificado escreve-lhe por email para combinar a hora. | A qualified advisor emails you to agree on a time. | Un conseiller qualifié vous écrit par e-mail pour convenir d'une heure. |
@@ -191,10 +201,10 @@ Written by `node scripts/check-parity.mjs` on every run (prompt 69). Read it bef
 | `p69.imt.price` | Preço | Price | Prix |
 | `p69.imt.nr.k` | Sem residência fiscal em Portugal | Not a Portuguese tax resident | Non-résident fiscal au Portugal |
 | `p69.imt.nr.p` | 7,5% do preço, sem isenção nem redução. | 7.5% of the price, with no exemption or reduction. | 7,5 % du prix, sans exonération ni réduction. |
-| `p69.imt.back.k` | Duas formas de receber a diferença | Two ways the difference comes back | Deux façons de récupérer la différence |
+| `p69.imt.back.k` | Duas formas de recuperar a diferença | Two ways to get the difference back | Deux façons de récupérer la différence |
 | `p69.imt.back.1` | Passa a residente fiscal em Portugal nos 2 anos seguintes à compra. | You become a Portuguese tax resident within 2 years of the purchase. | Vous devenez résident fiscal au Portugal dans les 2 ans qui suivent l'achat. |
 | `p69.imt.back.2` | Arrenda a casa para habitação nos 6 meses seguintes, durante pelo menos 36 meses nos primeiros 5 anos, com renda dentro dos limites legais. | You let the home as a residence within 6 months, for at least 36 months in the first 5 years, at a rent within the legal caps. | Vous louez le logement comme résidence dans les 6 mois, pendant au moins 36 mois sur les 5 premières années, à un loyer dans les plafonds légaux. |
-| `p69.imt.back.p` | Nos dois casos, a diferença é devolvida a pedido, no prazo de 6 meses. | In both cases, the difference is refunded on request, within 6 months. | Dans les deux cas, la différence est remboursée sur demande, dans un délai de 6 mois. |
+| `p69.imt.back.p` | Nos dois casos, paga primeiro os 7,5%. Depois tem 6 meses para pedir a diferença às Finanças (AT), a contar de quando passa a residente ou assina o arrendamento. | In both cases you pay 7.5% first. Then you have 6 months to ask the tax office (AT) for the difference, counted from when you become resident or sign the lease. | Dans les deux cas, vous payez d'abord 7,5 %. Vous avez ensuite 6 mois pour demander la différence au fisc portugais (AT), à compter de votre installation comme résident ou de la signature du bail. |
 | `p69.imt.res.k` | Residente fiscal, habitação própria e permanente | Tax resident, primary home | Résident fiscal, résidence principale |
 | `p69.imt.res.p` | Por escalões: a parte até ao limite do escalão anterior paga a taxa média desse limite, o resto paga a taxa marginal. | By bracket: the part up to the previous bracket's limit pays the average rate at that limit, the rest pays the marginal rate. | Par tranches : la part jusqu'au plafond de la tranche précédente paie le taux moyen de ce plafond, le reste paie le taux marginal. |
 | `p69.imt.res.yours` | A {price}: {a} sobre os primeiros {top}, mais {rate} sobre {rest}, {b}. | At {price}: {a} on the first {top}, plus {rate} of {rest}, {b}. | À {price} : {a} sur les premiers {top}, plus {rate} de {rest}, soit {b}. |
@@ -204,8 +214,14 @@ Written by `node scripts/check-parity.mjs` on every run (prompt 69). Read it bef
 | `p69.imt.col.flat` | {rate} sobre todo o valor | {rate} of the whole price | {rate} sur la totalité |
 | `p69.imt.col.above` | Acima de {v} | Above {v} | Au-delà de {v} |
 | `p69.imt.more.k` | Mais uma coisa | One more thing | Encore une chose |
-| `p69.imt.more` | A {price}, {back} voltam a pedido: paga {nr} na compra e, como residente, na sua habitação própria e permanente, o IMT é de {res}. | At {price}, {back} comes back on request: you pay {nr} at purchase, and as a resident, in your primary home, the IMT is {res}. | À {price}, {back} vous reviennent sur demande : vous payez {nr} à l'achat et, résident, dans votre résidence principale, l'IMT est de {res}. |
+| `p69.imt.more` | A {price}, paga {nr} na compra. Se passar a residente nos 2 anos seguintes e for a sua habitação própria e permanente, o IMT é de {res}: pode pedir {back} de volta. | At {price}, you pay {nr} at purchase. If you move to Portugal within 2 years and make it your primary home, the IMT is {res}: you can ask for {back} back. | À {price}, vous payez {nr} à l'achat. Si vous devenez résident dans les 2 ans et en faites votre résidence principale, l'IMT est de {res} : vous pouvez demander {back} en retour. |
 | `p69.imt.more.none` | Acima de {top}, os residentes também pagam 7,5%: não há diferença a devolver. | Above {top}, residents also pay 7.5%: there is no difference to refund. | Au-delà de {top}, les résidents paient aussi 7,5 % : il n'y a pas de différence à rembourser. |
+| `p69.imt.more.if` | Se não passar a residente nem arrendar a casa por longo prazo, nada é devolvido. | If you neither move there nor let it long-term, nothing comes back. | Si vous ne vous installez pas et ne louez pas à long terme, rien n'est remboursé. |
+| `p69.imt.nr.who` | Conta a residência fiscal, não a nacionalidade. | What counts is tax residency, not nationality. | C'est la résidence fiscale qui compte, pas la nationalité. |
+| `p69.imt.other` | Outras exceções, nas perguntas frequentes | Other exceptions, in the FAQ | Autres exceptions, dans les questions fréquentes |
+| `p69.imt.how.k` | Como se calcula | How it's worked out | Comment c'est calculé |
+| `p69.imt.refs` | Referências legais | Legal references | Références légales |
+| `p69.imt.sim` | Se passar a residente fiscal nos 2 anos seguintes, pode pedir {back} de volta. | If you become a tax resident within 2 years, you can ask for {back} back. | Si vous devenez résident fiscal dans les 2 ans, vous pouvez demander {back} en retour. |
 | `p69.imt.src.k` | Fontes | Sources | Sources |
 | `p69.imt.src.checked` | consultado a {d} | checked {d} | consulté le {d} |
 | `p69.imt.disc` | Informação, não aconselhamento fiscal. Taxas em vigor em 2026. | Information, not tax advice. Rates in force in 2026. | Information, pas un conseil fiscal. Taux en vigueur en 2026. |
