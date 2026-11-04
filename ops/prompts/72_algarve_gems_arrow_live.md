@@ -60,6 +60,26 @@ Operator, 4 Nov 2026: "Add F1, the PGA Tour and all that stuff to the articles o
    - visible on the map like O'rizon.
 4. **Short link `/arrow`:** opens the US edition map, in English, on Vilamoura with the three pins in view.
 
+## 5. After it's done: two more agents (same method as prompt 70)
+Spawn them in parallel on the live site and log every tap, expectation, feeling (1 to 5) and the words that confused them. Fix what they find, then re-run until clean.
+
+1. **"John": a Luso-American hospitality investor, like John Calvão (Arrow).**
+   - Bilingual, lived in the US, runs hotels, golf and marinas in the Algarve.
+   - He opens /arrow from a LinkedIn message on his phone between meetings.
+   - His question: "Is this serious, accurate and beautiful enough to put our name next to? Would it bring us the right Americans?"
+   - He checks every fact about Vilamoura, the Els Club and Palmares: names, numbers, credits, the tag.
+   - He flags anything that looks amateur, salesy or wrong.
+2. **"Mike": an American golfer, 55, from Connecticut, thinking about a second home.**
+   - iPad on the couch, then his laptop to show his wife.
+   - Journeys:
+     - the "Closer than you think" card from New York;
+     - the golf layer;
+     - the Els Club, Palmares and Vilamoura;
+     - Falésia, F1 and Senhor Frango;
+     - the 7.5% IMT and its refund;
+     - booking a call.
+   - His test: "Could I see myself there, and do I know what to do next?"
+
 ## Acceptance (on main, phone first)
 1. The nine cards show their gem as the last line, sourced.
 2. The article is on the US edition, EN, with sources and the disclaimer.
@@ -68,5 +88,6 @@ Operator, 4 Nov 2026: "Add F1, the PGA Tour and all that stuff to the articles o
 
 ## Report
 1. The /arrow link and the article link.
-2. Phone screenshots of the Loulé card, a project card and the article.
-3. Any fact you could not confirm (left out, not softened).
+2. The findings of John and Mike: what was wrong, and what you fixed.
+3. Phone screenshots of the Loulé card, a project card and the article.
+4. Any fact you could not confirm (left out, not softened).
