@@ -117,6 +117,10 @@ function ownPicker(host: HTMLElement, o: { locale: string; get: () => Slot[]; se
   const zones = [...new Set([...(realZone(readerTz()) ? [readerTz()] : []), ED_ZONE[o.own.ed], ...ZONES, LIS].filter(Boolean))];
   const fd = (d: string, opt: Intl.DateTimeFormatOptions) => new Intl.DateTimeFormat(o.locale, { timeZone: LIS, ...opt }).format(lisbonInstant(d, "12:00"));
   const sh = { next: T.next, prev: T.prev };
+  // Prompt 70: only the times the reader is awake for (07:00 to 21:59 where they live); a New York reader is never offered 04:00.
+  // A time they picked earlier stays offered, and if a zone left nothing awake, every time shows.
+  const awake = (d: string) => { const S = o.get(), ok = times.filter((t) => { const h = Number(slotOwn({ d, t }, o.locale, zone, T.lisbon, sh).time.slice(0, 2));
+    return (h >= 7 && h < 22) || S.some((x) => x.d === d && x.t === t); }); return ok.length ? ok : times; };
   function draw() {
     const S = o.get(), taken = (t: string) => S.some((x) => x.d === day && x.t === t);
     const scroll = host.querySelector(".rq-days")?.scrollLeft ?? 0;
@@ -126,7 +130,7 @@ function ownPicker(host: HTMLElement, o: { locale: string; get: () => Slot[]; se
       <p class="rq-bk">${esc(T.time)}</p>
       <p class="sp-tz" data-tz-line>${esc(zl)} <button type="button" class="sp-tz-ch" data-tz-ch aria-expanded="${open}">${esc(T.change)}</button></p>
       <div class="sp-zones" role="group" aria-label="${esc(T.zone)}" ${open ? "" : "hidden"}><span>${esc(T.zone)}</span>${zones.map((z) => `<button type="button" class="rq-pill" data-zone="${esc(z)}" aria-pressed="${z === zone}">${esc(z === LIS ? T.lisbon : city(z))}</button>`).join("")}</div>
-      <div class="rq-times rq-own">${times.map((t) => { const l = slotOwn({ d: day, t }, o.locale, zone, T.lisbon, sh);
+      <div class="rq-times rq-own">${awake(day).map((t) => { const l = slotOwn({ d: day, t }, o.locale, zone, T.lisbon, sh);
         return `<button type="button" class="rq-time" data-time="${t}" aria-pressed="${taken(t)}" ${!taken(t) && S.length >= max ? "disabled" : ""}><b>${esc(l.time)}${l.shift ? ` <small>${esc(l.shift)}</small>` : ""}</b>${l.lis ? `<span>${esc(l.lis)}</span>` : ""}</button>`; }).join("")}</div>
       <p class="rq-bk">${esc(T.picked)} (${S.length}/${max})</p>
       ${S.length ? `<ul class="rq-picked">${S.map((x, k) => { const l = slotOwn(x, o.locale, zone, T.lisbon, sh); return `<li><div><b>${esc(l.main)}${l.shift ? ` (${esc(l.shift)})` : ""}</b>${l.lis ? `<small>${esc(l.lis)}</small>` : ""}</div><button type="button" class="rq-rm" data-rm="${k}" aria-label="${esc(T.remove)}">${X}</button></li>`; }).join("")}</ul>` : `<p class="rq-hint">${esc(T.none)}</p>`}`;
