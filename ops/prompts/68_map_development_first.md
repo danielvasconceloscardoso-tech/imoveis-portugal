@@ -17,7 +17,6 @@ Goes live under D67. Follow content/METHOD.md (CLAUDE.md rule 16) and rule 17: G
 2. **Arrival:**
    - the camera comes down the Douro to Gondomar (3D, about 2 s; any touch takes over; reduced motion jumps);
    - the name in large type, and one line: "Gondomar. O Douro, a 12 minutos dos Aliados" (OSRM, already in place.json).
-   - No photograph until a hero photograph exists (step 3 below): the flight is the arrival.
 3. **Hero:**
    - O'rizon's photo pin stands at its real spot, visible from the opening view of Portugal, labelled "Seleção" / "Our pick" / "Sélection".
    - The card opens on O'rizon: the full-bleed render, one line ("200 casas sobre o Douro, junto à Marina do Freixo"), and one action, "Marcar uma visita privada".
@@ -30,12 +29,9 @@ Goes live under D67. Follow content/METHOD.md (CLAUDE.md rule 16) and rule 17: G
 The pattern comes from projects.json, so the next partner place works with no code change.
 
 ## Photographs
-1. **Remove the three current photos** from the Gondomar card on main now. Keep the files.
-2. **Write the hero brief** in content/media/SOURCES.md:
-   - an aerial from Valbom looking west to the Freixo bridge and Porto, golden or blue hour;
-   - then the Gramido riverfront at sunset;
-   - then a close-up of filigree being made.
-3. **The operator chooses the source** (Shalu's permission, a drone pilot, or a licence). Do not buy or use anything without his go, and never use Shalu's renders as the place's photograph.
+Shalu has authorised it (operator, 4 Nov).
+1. **The Gondomar card photographs are Shalu's river aerials,** credited "Shalu Investments": aerial-douro, aerial-dusk and aerial-river in site/public/img/developers/orizon/.
+2. **The three old photos come off the card.** Keep the files.
 
 ## /orizon
 Opens O'rizon's card on the map, in English, with Gondomar in view. Add `?project=` if it does not exist. The private preview /d/f658bd1eef/ stays as it is.
@@ -51,7 +47,7 @@ Opens O'rizon's card on the map, in English, with Gondomar in view. Add `?projec
 ## Acceptance (on main, phone and desktop)
 1. The O'rizon pin, with its photo, shows on the opening view, labelled "Seleção" / "Our pick", never "Patrocinado".
 2. Tapping Gondomar gives the arrival, then O'rizon first, then the one-line answers. Nothing on the first screen reads like a report.
-3. No low-quality photograph on the Gondomar card.
+3. The Gondomar card shows Shalu's aerials, credited.
 4. /orizon opens O'rizon's card in English.
 5. The checks and the build pass, and the live link works.
 
