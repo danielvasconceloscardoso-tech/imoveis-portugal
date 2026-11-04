@@ -78,6 +78,9 @@ import Beacon from "../components/Beacon.astro";
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    {/* Prompt 70 (S-04): a stylesheet lost to a dropped signal is fetched again (when the browser is back online, else after
+        a short wait, up to five times), so a page never stays unstyled once the connection returns. */}
+    <script is:inline>(function(){var n={};function again(l){var h=(l.getAttribute("data-href")||l.href).split("#")[0],k=(n[h]||0)+1;if(k>5)return;n[h]=k;var go=function(){var c=l.cloneNode();c.setAttribute("data-href",h);c.href=h+(h.indexOf("?")<0?"?":"&")+"retry="+k;c.onload=function(){l.parentNode&&l.parentNode.removeChild(l)};l.parentNode.insertBefore(c,l.nextSibling)};navigator.onLine===false?addEventListener("online",go,{once:true}):setTimeout(go,1200*k)}addEventListener("error",function(e){var t=e.target;if(t&&t.tagName==="LINK"&&/stylesheet/.test(t.rel))again(t)},true)})();</script>
     <meta name="theme-color" content="#f6f3ee" />
     {/* Prompt 70 (A-12): the site is light; a browser's forced dark mode must not half-invert it. */}
     <meta name="color-scheme" content="light" />
@@ -128,8 +131,8 @@ import Beacon from "../components/Beacon.astro";
           {d2 ? (
           <a class="hd-mare" href={`${subscribe}?de=header`} aria-label={c("common.newsletter", lang)} title={c("mare.line", lang)} aria-current={page === "mare" ? "page" : undefined}>{c("mare.title", lang)}</a>
           ) : <a class="nl" href={subscribe}>{c("common.newsletter", lang)}</a>}
-          {d2 && <button type="button" class="hd-find" data-find-open aria-label={c("find.open", lang)}><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg><kbd>⌘K</kbd></button>}
-          {d2 && <a class="hd-saved" href={savedHref} data-saved-link data-nav-k="saved" aria-label={c("bar.saved", lang)} aria-current={page === "saved" ? "page" : undefined}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.2s-7.2-4.5-7.2-10.1A4.1 4.1 0 0 1 12 7.5a4.1 4.1 0 0 1 7.2 2.6c0 5.6-7.2 10.1-7.2 10.1z"/></svg></a>}
+          {d2 && <button type="button" class="hd-find" data-find-open aria-label={c("find.open", lang)}><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg><kbd>⌘K</kbd></button>}
+          {d2 && <a class="hd-saved" href={savedHref} data-saved-link data-nav-k="saved" aria-label={c("bar.saved", lang)} aria-current={page === "saved" ? "page" : undefined}><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20.2s-7.2-4.5-7.2-10.1A4.1 4.1 0 0 1 12 7.5a4.1 4.1 0 0 1 7.2 2.6c0 5.6-7.2 10.1-7.2 10.1z"/></svg></a>}
           {d2 && <a class="hd-cg" href={pathFor(lang, ed, "consult")} data-concierge>{c("find.concierge", lang)}</a>}
           <details class="concierge">
             <summary><span class="open">{c("common.menu", lang)}</span><span class="shut">{c("common.close", lang)}</span></summary>
@@ -240,7 +243,7 @@ import Beacon from "../components/Beacon.astro";
     {d2 && <Chrome lang={lang} ed={ed} page={page} />}
     {d2 && (
       <nav class="bb" data-bb aria-label={c("bar.label", lang)}>
-        {five.map((n) => <a href={pathFor(lang, ed, n.target)} aria-current={n.current.includes(page) ? "page" : undefined} data-bb-k={n.k} {...(n.cg ? { "data-concierge": "" } : {})}><svg viewBox="0 0 24 24" aria-hidden="true" set:html={n.icon} /><span>{c(`bar.nav.${n.k}`, lang)}</span></a>)}
+        {five.map((n) => <a href={pathFor(lang, ed, n.target)} aria-current={n.current.includes(page) ? "page" : undefined} data-bb-k={n.k} {...(n.cg ? { "data-concierge": "" } : {})}><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" set:html={n.icon} /><span>{c(`bar.nav.${n.k}`, lang)}</span></a>)}
       </nav>
     )}
     {d2 && <script type="application/json" id="ip-save-l" set:html={JSON.stringify(saveL)} />}

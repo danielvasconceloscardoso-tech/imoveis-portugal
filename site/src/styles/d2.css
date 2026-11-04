@@ -256,8 +256,11 @@ body.d2 .hd .cmenu { color: var(--ink); text-shadow: none; }
    their own colours: light type on the green (7:1), the ghost button green on paper. */
 body.d2 a.btn, body.d2 button.btn { color: var(--accent-ink, #fbf9f4); }
 body.d2 a.btn.ghost, body.d2 button.btn.ghost { color: var(--accent); }
+body.d2 .hd .tools a.btn { color: var(--accent-ink, #fbf9f4); } body.d2 .hd .tools a.btn.ghost { color: var(--accent); }
+/* A-12, MI-26: the site is light (a dark theme is a design decision); forced dark modes must not half-invert it. */
+:root { color-scheme: light; }
 /* J-15: the subtitle on a bright frame of the film. A quiet, soft shade under the words only; the photograph stays. */
-.h2-hero-text::before { content: ""; position: absolute; inset: -16px -24px -8px; z-index: -1; background: rgba(10, 11, 12, .34); filter: blur(32px); border-radius: 48px; pointer-events: none; }
+.h2-hero-text::before { content: ""; position: absolute; inset: -28px -36px -20px; z-index: -1; background: rgba(10, 11, 12, .4); filter: blur(36px); border-radius: 48px; pointer-events: none; }
 .h2-hero-text p { color: #fff; text-shadow: 0 1px 2px rgba(0, 0, 0, .55), 0 0 16px rgba(0, 0, 0, .4); }
 /* J-23: the ⌘K hint only where there is a keyboard and a mouse; no BETA tag on small or touch screens. */
 .hd-find kbd { display: none; }
@@ -278,3 +281,21 @@ body.d2 a.btn.ghost, body.d2 button.btn.ghost { color: var(--accent); }
 @media (max-width: 389px) { html body.d2 header.hd .hd-find, html body.d2 header.hd .hd-saved { width: 40px; } }
 @media (max-width: 374px) { html body.d2 header.hd .word { font-size: 18px; } html body.d2 header.hd .hd-find, html body.d2 header.hd .hd-saved { width: 38px; } }
 @media (max-width: 359px) { html body.d2 header.hd .word { font-size: 16px; } html body.d2 header.hd .hd-find { width: 30px; } html body.d2 header.hd .hd-saved { width: 28px; } }
+/* S-23: on phones the opening screen ends above the bottom bar, so "Começar" is never behind it; and a photograph still on
+   its way (slow network) shows a calm, slowly breathing sand box instead of a dead one. */
+@media (max-width: 1079px) { body.has-bb .h2-hero { min-height: calc(100svh - 62px - env(safe-area-inset-bottom, 0px)); } }
+.h2-hcard .h2-hph, .h2-ph { animation: ip-wait 1.6s ease-in-out infinite alternate; }
+@keyframes ip-wait { from { background-color: #f8f4ed; } to { background-color: #ece4d6; } }
+@media (prefers-reduced-motion: reduce) { .h2-hcard .h2-hph, .h2-ph { animation: none; } }
+/* S-23: on a phone the opening screen holds the headline, the line and the whole path bar with "Começar": each field puts its
+   label beside its answer (one row instead of two), a little less air above and below. */
+@media (max-width: 600px) {
+  .h2-hero h1 { margin-bottom: 16px; }
+  .h2-hero-text { margin-bottom: 24px; }
+  .h2-hero-text p { line-height: 1.5; }
+  .h2-bar .h2-f { grid-template-columns: minmax(5.5em, auto) 1fr; align-items: center; gap: 12px; padding: 8px 16px; }
+  .h2-bar .h2-f > [data-amt-label] { grid-column: 1; }
+  .h2-bar .h2-f select { padding-top: 10px; padding-bottom: 10px; }
+  .h2-bar .h2-f .h2-amt { min-height: 44px; align-items: center; }
+  .h2-bar .h2-go { min-height: 52px; }
+}

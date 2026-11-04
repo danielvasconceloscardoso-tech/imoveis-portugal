@@ -23,7 +23,7 @@ const head = !i ? "" : lang === "pt" ? inline(i.headline) : ((i as unknown as Re
     <a href={href} data-mare-block={where} data-mare-issue={i.id}>
       <span class="mare-b-k">{c("mare.block.label", lang)}</span>
       <span class="mare-b-t">{head ? c("mare.block", lang, { dia: c(dayKey(i), lang), headline: head }) : c("mare.block.plain", lang)}</span>
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
     </a>
   </aside>
 )}
