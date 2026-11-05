@@ -11188,3 +11188,15 @@ Prompt 78 (4 Nov 2026): golf mode on the map (site/src/scripts/golf-mode.ts). Fu
 - PT: {n} campos de golfe
 - EN: {n} golf courses
 - FR: {n} parcours de golf
+
+## film
+
+### pause
+- PT: Pausar o filme
+- EN: Pause the film
+- FR: Mettre le film en pause
+
+### play
+- PT: Ver o filme
+- EN: Play the film
+- FR: Lire le film

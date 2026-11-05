@@ -138,7 +138,8 @@ body.d2 main { padding-top: 0; }
 /* ---------------------------------------------------------------- 27 Oct (prompt 32 update) */
 /* The hero film fades in over its poster; reduced motion keeps the poster. */
 .h2-hero-film { object-fit: cover; opacity: 0; transition: opacity 1.4s var(--ease); } .h2-hero-film.on { opacity: 1; }
-@media (prefers-reduced-motion: reduce) { .h2-hero-film { display: none; } }
+/* Prompt 78 §0: with reduced motion the film still plays (it only loses the fade); the reader has a pause control. */
+@media (prefers-reduced-motion: reduce) { .h2-hero-film { transition: none; } }
 
 /* Six places: 3×2 on desktop, a swipeable row on phones. */
 .h2-cards6 { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(40px, 4vw, 64px) clamp(24px, 3vw, 48px); max-width: 1280px; margin: 64px auto 0; }
@@ -320,3 +321,14 @@ body.d2 .hd .cpick-menu a[aria-current] { color: var(--accent); }
    overflow or start left of the edge. */
 .h2-hero-text { min-width: 0; max-width: 100%; box-sizing: border-box; }
 .h2-hero h1 { overflow-wrap: break-word; max-width: min(11em, 100%); }
+
+/* Prompt 78 §0: the quiet pause control on every ambient film (scripts/ambient.ts; WCAG 2.2.2). */
+.film-ctl { position: absolute; right: 16px; bottom: 16px; z-index: 3; width: 36px; height: 36px; display: grid; place-items: center; padding: 0; border: 0; border-radius: 50%;
+  background: rgba(10, 11, 12, .32); color: #fff; cursor: pointer; opacity: .72; transition: opacity .2s; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+.film-ctl:hover, .film-ctl:focus-visible { opacity: 1; }
+.film-ctl:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.film-ctl::after { content: ""; position: absolute; inset: -4px; }
+.film-ctl svg { width: 14px; height: 14px; fill: currentColor; }
+/* On the home hero the control sits just above the bar's top-right corner, in the gap under the subtitle, clear of the headline. */
+.h2-bar { position: relative; }
+.h2-bar > .film-ctl { top: -38px; right: 0; bottom: auto; width: 30px; height: 30px; }

@@ -134,14 +134,21 @@ async function shoot(browser, origin, outDir) {
         const vh = size.viewport.height;
         // First screen plus one scroll: scroll through it so reveal-on-scroll sections show, then back to the top.
         for (const y of [vh / 2, vh, vh * 1.5, vh * 2, 0]) { await page.evaluate((y) => window.scrollTo(0, y), y); await page.waitForTimeout(150); }
-        if (pg.map) {
+        // A page with a map (the map pages, and the homes' "what your budget buys" preview) waits for the map, then until
+        // two shots 1.5 s apart are identical (up to 20 s): a camera still settling must not count as a difference.
+        // The homes' map preview wakes on the first scroll only if it is in view then (a race): wake it on purpose, the way a
+        // reader's touch does, so every run sees the live map.
+        const homeMap = await page.$("[data-m3][data-mode=home]");
+        if (homeMap) await homeMap.dispatchEvent("pointerdown");
+        const hasMap = pg.map || !!homeMap || (await page.locator("canvas").count()) > 0;
+        if (hasMap) {
           await page.waitForSelector("canvas", { state: "attached", timeout: 30000 });
-          await page.waitForTimeout(MAP_WAIT);
-          // A map view (?pins=, a card's camera) may still be settling: wait until two shots 1.5 s apart are identical (up to 20 s).
-          let prev = await page.screenshot({ scale: "css", animations: "disabled" });
+          await page.waitForTimeout(pg.map ? MAP_WAIT : 2500);
+          const clip = { x: 0, y: 0, width: size.viewport.width, height: Math.min(vh * 2, 1800) };
+          let prev = await page.screenshot({ scale: "css", animations: "disabled", fullPage: true, clip });
           for (let k = 0; k < 13; k++) {
             await page.waitForTimeout(1500);
-            const cur = await page.screenshot({ scale: "css", animations: "disabled" });
+            const cur = await page.screenshot({ scale: "css", animations: "disabled", fullPage: true, clip });
             if (cur.equals(prev)) break;
             prev = cur;
           }

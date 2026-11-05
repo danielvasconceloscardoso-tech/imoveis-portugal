@@ -85,10 +85,10 @@ export function initMapV3(root: HTMLElement) {
   const layer0: Layer = "none";
   let layer: Layer = q.get("layer") === "price" ? "price" : q.get("layer") === "none" ? "none" : layer0;
   // 2D or 3D (prompt 37 §3): the link, else the reader's last choice, else 2D on phones and weak devices and 3D on desktop.
-  // Reduced motion always gets the flat map.
   const dimSaved = (() => { try { return localStorage.getItem("ip.map.dim"); } catch { return null; } })();
   const dimAsked = q.get("dim") ?? (q.get("flat") === "1" ? "2d" : null) ?? dimSaved;
-  let flat = reduce() || (dimAsked ? dimAsked === "2d" : weak() || matchMedia("(max-width: 760px), (pointer: coarse)").matches);
+  // Prompt 78 §0: reduced motion no longer forces the flat map; it only turns camera glides into jumps (duration 0 below).
+  let flat = dimAsked ? dimAsked === "2d" : weak() || matchMedia("(max-width: 760px), (pointer: coarse)").matches;
   // ?place= takes the slug (gondomar); a place name (Gondomar, from the Concierge link) is turned into its slug.
   const slugOf = (v: string | null) => (v ? plain(v).replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") : null);
   let selected: string | null = slugOf(q.get("place")), selPar: string | null = q.get("parish"), pinA: string | null = null;
@@ -230,7 +230,7 @@ export function initMapV3(root: HTMLElement) {
   function dimButtons() { root.classList.toggle("is-2d", flat); root.querySelectorAll("[data-dim]").forEach((b) => b.setAttribute("aria-pressed", String(((b as HTMLElement).dataset.dim === "2d") === flat))); }
   // 2D: no terrain, no hillshade, no sky, north up and no tilt; the same layers, card, search and tours. 3D: today's relief.
   function setDim(two: boolean) {
-    flat = two || reduce(); dimButtons(); try { localStorage.setItem("ip.map.dim", flat ? "2d" : "3d"); } catch {}
+    flat = two; dimButtons(); try { localStorage.setItem("ip.map.dim", flat ? "2d" : "3d"); } catch {}
     if (!map) { load(); return; }
     rotating = false; stopTour();
     map.setTerrain(flat ? null : { source: "dem", exaggeration: 1.5 });
@@ -1207,7 +1207,8 @@ export function initMapV3(root: HTMLElement) {
   // ------------------------------------------------------------ the home page's slow rotation (prompt 34 §2)
   let rotating = false, halted = false, haltTimer = 0;
   function spin() { if (!rotating || !map) return; map.easeTo({ bearing: map.getBearing() + 6, duration: 4000, easing: (t: number) => t }); map.once("moveend", spin); }
-  function startSpin() { if (halted || rotating || !map) return; rotating = true; if (!haltTimer) haltTimer = window.setTimeout(halt, 15000); spin(); }
+  // Prompt 78 §0: reduced motion keeps the 3D map but not its decorative spin.
+  function startSpin() { if (halted || rotating || !map || reduce()) return; rotating = true; if (!haltTimer) haltTimer = window.setTimeout(halt, 15000); spin(); }
   function halt() { if (halted) return; halted = true; clearTimeout(haltTimer); if (rotating && map) map.stop(); rotating = false; }
 
   // ------------------------------------------------------------ search, like Spotlight (the magnifier, ⌘K, or "/")
