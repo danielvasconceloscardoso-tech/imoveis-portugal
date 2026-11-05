@@ -56,5 +56,4 @@
 # opens golf mode on Vilamoura. Any edition's map takes ?mode=golf.
 # Prompt 78b (J-01): /arrow is a page of its own (site/public/arrow/index.html), so a shared link unfurls as golf mode.
 /arrow /arrow/ 301
-/golf /en/us/map/?mode=golf 302
-/golf/ /en/us/map/?mode=golf 302
+/golf /golf/ 301
