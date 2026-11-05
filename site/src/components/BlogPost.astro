@@ -17,9 +17,9 @@ const { lang, ed, post } = Astro.props;
 const { html, sources } = render(post, ed);
 const base = (l: Lang, e: EdCode) => `${pathFor(l, e, "blog")}`;
 const slugs = postSlugs(post.id);
-const paths = Object.fromEntries(LANGS.map((l) => [l, `${base(l, ed)}${slugs[l]}/`])) as Record<Lang, string>;
+const paths = Object.fromEntries(LANGS.map((l) => [l, slugs[l] ? `${base(l, ed)}${slugs[l]}/` : base(l, ed)])) as Record<Lang, string>;
 const abs = (l: Lang) => `https://${hostFor(CANONICAL_ED[l])}${base(l, CANONICAL_ED[l])}${slugs[l]}/`;
-const alternates = Object.fromEntries(LANGS.map((l) => [l, abs(l)])) as Record<Lang, string>;
+const alternates = Object.fromEntries(LANGS.filter((l) => Boolean(slugs[l])).map((l) => [l, abs(l)])) as Record<Lang, string>;
 const related = post.related.map((id) => postById(id, lang)).filter(Boolean) as Post[];
 const talk = pathFor(lang, ed, "talk");
 const next = post.cta === "agency"
@@ -66,10 +66,10 @@ const faqH = { pt: "Perguntas frequentes", en: "Frequently asked questions", fr:
         {post.faq.map((x) => <details class="h2-q"><summary>{x.q}</summary><p>{x.a}</p></details>)}
       </section>
     )}
-    <div class="next" style="margin-top:32px">
+    {post.cta !== "none" && <div class="next" style="margin-top:32px">
       <a class="btn sm" href={next.href}>{next.label}</a>
       <span class="who">{next.who}</span>
-    </div>
+    </div>}
     <p class="small tools-line"><a href={pathFor(lang, ed, "faq")}>{c("common.nav.faq", lang)}</a> · <a href={pathFor(lang, ed, "sims")}>{c("common.nav.sims", lang)}</a> · <a href={pathFor(lang, ed, "map")}>{c("place.crumb", lang)}</a></p>
     {related.length > 0 && (
       <section class="others" aria-labelledby="next-h">
