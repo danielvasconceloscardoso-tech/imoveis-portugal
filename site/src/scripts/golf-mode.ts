@@ -300,7 +300,7 @@ export function createGolf(h: GolfHost) {
       const p = map.project([m.p.lon, m.p.lat]); m.el.classList.add("gm-named");
       const nfl = flags.map((f) => (f as any).p).filter(Boolean).sort((a: any, b: any) => Math.hypot(a.x - p.x, a.y - p.y) - Math.hypot(b.x - p.x, b.y - p.y))[0];
       let lean = nfl && Math.hypot(nfl.x - p.x, nfl.y - p.y) < 220 ? (p.x >= nfl.x ? 1 : -1) * (wide ? 34 : 22) : 0;
-      const sp = m.el.querySelector<HTMLElement>(":scope > span"), sw = Math.max(sp?.scrollWidth ?? 120, 80), sh = 38, topMin = 64;
+      const sp = m.el.querySelector<HTMLElement>(":scope > span"), sw = Math.max(sp?.offsetWidth ?? 120, 80) + 8, sh = (sp?.offsetHeight ?? 44) + 6, topMin = 64;
       // Taller or further aside until it touches no other pin or flag, and never under the top bar.
       const box = (st: number, ln: number): Box => ({ x: p.x + ln - Math.max(img, sw) / 2, y: p.y - st - img - sh, w: Math.max(img, sw), h: img + sh });
       const dir = lean >= 0 ? 1 : -1, tries: [number, number][] = [];
