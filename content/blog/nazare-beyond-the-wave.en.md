@@ -7,7 +7,7 @@ description: "Beyond the viral wave: Nazaré's underwater canyon, fishing tradit
 tldr: "Nazaré's waves are extraordinary. But the Atlantic canyon, the town's fishing history and the people who live there are equally worthy of attention."
 published: 2026-11-05
 updated: 2026-11-05
-cta: agency
+cta: none
 related: []
 sources: []
 ---
