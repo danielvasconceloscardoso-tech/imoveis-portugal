@@ -299,7 +299,7 @@ export function initMapV3(root: HTMLElement) {
   // Remove the map and its markers and free the GPU (leaving the page, or a lost context); load() builds it again.
   async function teardown() {
     if (loading) await loading.catch(() => {});  // never pull the map from under a load in progress
-    clearTimeout(lostT); clearTimeout(reachT); stopTour(); stopPlay(); arrStop(); rotating = false; golfX?.detach();
+    clearTimeout(lostT); clearTimeout(reachT); clearTimeout(pinOpacityTask); pinOpacityTask = 0; pinOpacityQueue.clear(); stopTour(); stopPlay(); arrStop(); rotating = false; golfX?.detach();
     invalidateProjection(); reachState.clear(); cancelAnimationFrame(hoverFrame); hoverFrame = 0; hoverPoint = null;
     cancelAnimationFrame(labT); labT = 0; hoverS = null; tip.hidden = true;
     cancelAnimationFrame(cardResizeFrame); cardResizeFrame = 0;
@@ -396,7 +396,9 @@ export function initMapV3(root: HTMLElement) {
         const paintingMap = map;
         const reveal = () => {
           if (map !== paintingMap || !paintingMap.isSourceLoaded("munis")) return;
-          if (!paintingMap.queryRenderedFeatures(undefined, { layers: ["land"] }).length) return;
+          // render fires after painter.render: a loaded municipality source has
+          // now painted its land layer. A feature query here would synchronously
+          // read terrain GPU coordinates merely to reconfirm the same frame.
           paintingMap.off("render", reveal);
           canvas.style.opacity = "1"; root.classList.add("is-live"); root.dataset.mapPainted = "true";
           root.dispatchEvent(new Event("m3:painted"));
@@ -424,7 +426,10 @@ export function initMapV3(root: HTMLElement) {
       // place, so the live map takes its framing without a jump.
       const dl = selected ? byS.get(selected) : null, dp = selProj ? projects.find((x) => x.id === selProj) : null;
       const mainArrival = premium && q.get("mode") !== "golf";
-      if (mode === "page" && !selected && !selPar && !selRegion && !selProj && !q.has("q") && !reduce() && performance.now() < 4500) { map.jumpTo({ center: [-13.4, 38.6], zoom: home.zoom - (mainArrival ? 0.45 : 1.2), pitch: mainArrival ? flat ? 0 : 40 : 22, bearing: mainArrival && flat ? 0 : home.bearing - (mainArrival ? 8 : 28) }); map.flyTo({ ...home, duration: mainArrival ? 900 : 3400, curve: 1.15, easing: ease, essential: true }); }
+      // The premium intro already supplies the arrival. Start its live terrain
+      // on the final national frame rather than forcing extra GPU depth checks
+      // along a second automatic flight while tiles and pins are warming up.
+      if (!mainArrival && mode === "page" && !selected && !selPar && !selRegion && !selProj && !q.has("q") && !reduce() && performance.now() < 4500) { map.jumpTo({ center: [-13.4, 38.6], zoom: home.zoom - 1.2, pitch: 22, bearing: home.bearing - 28 }); map.flyTo({ ...home, duration: 3400, curve: 1.15, easing: ease, essential: true }); }
       // p70 (MI-22, A-08): a ?place= or ?project= link starts the live map on that place, so the camera never waits on the
       // tiles of the whole country (the short flight to it follows).
       else if (mode === "page" && !selPar && (dl || dp)) map.jumpTo({ ...home, center: dp ? [dp.lon, dp.lat] : [dl!.x, dl!.y], zoom: Math.max(home.zoom, dp ? 10 : zoomFor(dl!) - 0.6) });
@@ -1126,10 +1131,37 @@ export function initMapV3(root: HTMLElement) {
   // Prompt 39 §2.2: one pin per listed project, visible from the opening view. Pins closer than 44 px on screen merge into
   // one with a count; a tap on it zooms in until they part. DOM markers, so the same code works flat and on the 3D terrain.
   let markers: { p: Proj; el: HTMLButtonElement; m: any; grp: Proj[] }[] = [], clusterOn = false, clT = 0;
+  // MapLibre 4.7 checks each DOM marker's terrain occlusion in a frame promise.
+  // Its synchronous depth readbacks otherwise form one long microtask queue.
+  // Retain the exact native check, coalesce repeated requests for each marker,
+  // and give input/paint a task boundary between checks. Golf keeps its own path.
+  const pinOpacityQueue = new Map<any, { check: (force: boolean) => void; force: boolean }>();
+  let pinOpacityTask = 0;
+  const flushPinOpacity = () => {
+    pinOpacityTask = 0;
+    const entry = pinOpacityQueue.entries().next().value;
+    if (entry) {
+      const [marker, pending] = entry; pinOpacityQueue.delete(marker);
+      if (mainPresentation() && marker._map && marker._map === map) pending.check(pending.force);
+    }
+    if (pinOpacityQueue.size) pinOpacityTask = window.setTimeout(flushPinOpacity, 0);
+  };
+  const deferPinOcclusion = (marker: any) => {
+    const nativeCheck = marker._updateOpacity;
+    if (typeof nativeCheck !== "function") return marker;
+    marker._updateOpacity = (force = false) => {
+      if (!mainPresentation()) return nativeCheck.call(marker, force);
+      const pending = pinOpacityQueue.get(marker);
+      if (pending) pending.force ||= force;
+      else pinOpacityQueue.set(marker, { check: (nextForce) => nativeCheck.call(marker, nextForce), force });
+      if (!pinOpacityTask) pinOpacityTask = window.setTimeout(flushPinOpacity, 0);
+    };
+    return marker;
+  };
   const PIN_OFF = 30, pinsView = mode === "page" && q.has("pins");
   const onLand = (x: number, y: number) => { try { return !map.getLayer("land") || map.queryRenderedFeatures([x, y], { layers: ["land"] }).length > 0; } catch { return true; } };
   function drawProjects() {
-    markers.forEach((x) => x.m.remove()); markers = []; if (!overlays.devs || !map) return;
+    markers.forEach((x) => { pinOpacityQueue.delete(x.m); x.m.remove(); }); markers = []; if (!overlays.devs || !map) return;
     for (const p of projects) {
       // D83 part 2: a small photo pin (the developer's own render), the name and "Patrocinado" from city zoom.
       // Prompt 68: a development with a hero line is found freely: its pin never merges into a group (close pins stand side
@@ -1144,7 +1176,7 @@ export function initMapV3(root: HTMLElement) {
         if (map.getZoom() < 10) flyTo(p.lon, p.lat, 12.6);
         showProject(p);
       });
-      x.m = new ml.Marker({ element: el, anchor: "bottom" }).setLngLat([p.lon, p.lat]).addTo(map);
+      x.m = deferPinOcclusion(new ml.Marker({ element: el, anchor: "bottom" })).setLngLat([p.lon, p.lat]).addTo(map);
       markers.push(x);
     }
     if (!clusterOn) { clusterOn = true; map.on("move", () => { if (!clT) clT = requestAnimationFrame(() => { clT = 0; clusterPins(); }); }); }

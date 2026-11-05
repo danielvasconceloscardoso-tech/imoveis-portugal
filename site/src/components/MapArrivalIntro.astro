@@ -39,7 +39,7 @@ const pt = lang === "pt";
 <style>
   .map-arrival { position: absolute; inset: 0; z-index: 8; pointer-events: none; color: #243b35; }
   .map-arrival[hidden] { display: none !important; }
-  .map-arrival__card { position: absolute; left: clamp(24px, 4vw, 64px); bottom: 48px; width: min(440px, 42vw); overflow: hidden; pointer-events: auto; background: #f8f5ed; border: 1px solid rgba(255,255,255,.7); border-radius: 5px; box-shadow: 0 20px 64px rgba(26,48,42,.15); animation: arrival-in 360ms ease-out both; }
+  .map-arrival__card { position: absolute; left: clamp(24px, 4vw, 64px); bottom: 48px; width: min(440px, 42vw); overflow: hidden; pointer-events: auto; background: #f8f5ed; border: 1px solid rgba(255,255,255,.7); border-radius: 5px; box-shadow: 0 20px 64px rgba(26,48,42,.15); }
   .map-arrival__photo { position: relative; height: clamp(150px, 24svh, 220px); overflow: hidden; margin: 0; background: #d2e1dc; }
   .map-arrival__photo picture, .map-arrival__photo img { display: block; width: 100%; height: 100%; }
   .map-arrival__photo img { object-fit: cover; object-position: center 54%; animation: arrival-landscape 2100ms ease-out both; }
@@ -57,9 +57,8 @@ const pt = lang === "pt";
   .map-arrival__explore svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.5; }
   .map-arrival.is-leaving .map-arrival__card { pointer-events: none; animation: arrival-out 220ms ease-in both; }
   :global([data-map-arrival-frame][data-arrival-active] .m3-cards) { opacity: 0; pointer-events: none; }
-  @keyframes arrival-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
   @keyframes arrival-landscape { from { transform: scale(1.035); } to { transform: scale(1); } }
-  @keyframes arrival-out { to { opacity: 0; transform: translateY(12px); } }
+  @keyframes arrival-out { to { opacity: 0; } }
   @media (max-width: 700px) {
     .map-arrival__card { left: 16px; right: 16px; bottom: max(82px, env(safe-area-inset-bottom)); width: auto; }
     .map-arrival__photo { height: clamp(100px, 17svh, 150px); }

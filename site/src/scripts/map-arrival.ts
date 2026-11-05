@@ -36,16 +36,21 @@ export function initMapArrival(intro: HTMLElement) {
   intro.hidden = false;
   frame.dataset.arrivalActive = "true";
   ev({ event: "map/arrival/shown", origin: "map" });
+  const card = intro.querySelector<HTMLElement>(".map-arrival__card")!;
   let ended = false;
-  let timer: ReturnType<typeof setTimeout>;
-  const finish = (reason: "explore" | "skip" | "complete", immediate = false) => {
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  let remaining = 1880;
+  let timerStarted = 0;
+  let hovered = false;
+  const finish = (reason: "explore" | "skip" | "complete", immediate = false, focusMap = false) => {
     if (ended) return;
     ended = true;
     clearTimeout(timer);
+    timer = undefined;
     delete frame.dataset.arrivalActive;
     const heldFocus = intro.contains(document.activeElement);
     intro.inert = true;
-    if (heldFocus) root.querySelector<HTMLElement>("[data-spot-open]")?.focus({ preventScroll: true });
+    if (heldFocus || focusMap) root.querySelector<HTMLElement>("[data-spot-open]")?.focus({ preventScroll: true });
     if (immediate || reduce.matches) intro.hidden = true;
     else {
       intro.classList.add("is-leaving");
@@ -59,15 +64,35 @@ export function initMapArrival(intro: HTMLElement) {
     window.removeEventListener("pagehide", leave);
     document.removeEventListener("visibilitychange", visibility);
     reduce.removeEventListener("change", reduced);
+    card.removeEventListener("pointerenter", pointerEnter);
+    card.removeEventListener("pointerleave", pointerLeave);
+    intro.removeEventListener("focusin", pause);
+    intro.removeEventListener("focusout", focusOut);
   };
+  // Keep a control under the reader's pointer or keyboard focus until they finish.
+  // This pauses only the optional card; the map is already loading and interactive.
+  const pause = () => {
+    if (timer === undefined) return;
+    clearTimeout(timer);
+    timer = undefined;
+    remaining = Math.max(0, remaining - (performance.now() - timerStarted));
+  };
+  const resume = () => {
+    if (ended || hovered || intro.contains(document.activeElement) || timer !== undefined) return;
+    timerStarted = performance.now();
+    timer = setTimeout(() => finish("complete"), remaining);
+  };
+  const pointerEnter = () => { hovered = true; pause(); };
+  const pointerLeave = () => { hovered = false; resume(); };
+  const focusOut = () => queueMicrotask(resume);
   const interact = () => finish("skip", true);
   const escape = (event: KeyboardEvent) => { if (event.key === "Escape") finish("skip", true); };
   const scroll = () => finish("skip", true);
   const reduced = () => { if (reduce.matches) finish("skip", true); };
   const leave = () => finish("skip", true);
   const visibility = () => { if (document.hidden) finish("skip", true); };
-  intro.querySelector("[data-map-arrival-explore]")?.addEventListener("click", () => finish("explore", true));
-  intro.querySelector("[data-map-arrival-skip]")?.addEventListener("click", () => finish("skip", true));
+  intro.querySelector("[data-map-arrival-explore]")?.addEventListener("click", () => finish("explore", true, true));
+  intro.querySelector("[data-map-arrival-skip]")?.addEventListener("click", () => finish("skip", true, true));
   root.addEventListener("pointerdown", interact, { passive: true });
   root.addEventListener("focusin", interact);
   window.addEventListener("keydown", escape);
@@ -75,6 +100,11 @@ export function initMapArrival(intro: HTMLElement) {
   window.addEventListener("pagehide", leave);
   document.addEventListener("visibilitychange", visibility);
   reduce.addEventListener("change", reduced);
-  // 2.1 seconds total, independent of network/map readiness. No mandatory wait after a tap.
-  timer = setTimeout(() => finish("complete"), 1880);
+  card.addEventListener("pointerenter", pointerEnter);
+  card.addEventListener("pointerleave", pointerLeave);
+  intro.addEventListener("focusin", pause);
+  intro.addEventListener("focusout", focusOut);
+  // Passive arrival: 2.1 seconds total, independent of network/map readiness.
+  // A tap is always immediate; leaving the controls resumes only the remaining time.
+  resume();
 }
