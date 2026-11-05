@@ -11149,6 +11149,11 @@ Prompt 78 (4 Nov 2026): golf mode on the map (site/src/scripts/golf-mode.ts). Fu
 - EN: by car from {name}
 - FR: en voiture depuis {name}
 
+### next
+- PT: Ao lado do {name}
+- EN: Next to {name}
+- FR: À côté de {name}
+
 ### site
 - PT: Site do campo
 - EN: Course site

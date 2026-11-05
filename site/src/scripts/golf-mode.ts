@@ -5,7 +5,7 @@
 // returns to where the reader was. map-v3.ts only calls createGolf() and a few hooks (attach, detach, click, door, fill).
 // Data: /data/map/golf-mode.json (scripts/map-data/golf_mode.py: Details' verified courses with their first tee and
 // OpenStreetMap outline, the OSRM drive times, the towns and the sourced captions). Wording: COPY_DECK.md "p78.*".
-// Three refinements of the approved v3 look are kept as presets for the operator's choice (?look=a|b|c); one ships.
+// The look is "Noon", the operator's pick of three refinements of the approved v3 (4 Nov 2026).
 
 type Course = { id: string; n: string; short: string; resort: string; grp: string; holes: number | null; arch: string; x: number; y: number; tee: string; url: string;
   photo: string; credit: string; src: { t: string; u: string }[]; near: { id: string; name: string; min: number } | null; outline: any; gids?: number[] };
@@ -24,22 +24,12 @@ export type GolfHost = {
 };
 
 // The light: one sun for the whole scene, from the south-west as on the hillshade (225°), so every shadow falls to the
-// north-east. The sea is a smooth ramp drawn from the coastline outwards (shore turquoise to Atlantic blue): our own depth
-// tiles are coarse at coast distance, so golf mode lays the ramp over a deep-blue ground instead of stretching them.
-const LOOKS: Record<"a" | "b" | "c", Look> = {
-  // a. Noon: Slim Aarons' pool light. Clear blue sky to a warm horizon, turquoise on the sand, cream land, bright turf.
-  a: { sky: { "sky-color": "#7cc4ec", "horizon-color": "#f7ebd9", "fog-color": "#f4ead9", "sky-horizon-blend": 0.6, "horizon-fog-blend": 0.7, "fog-ground-blend": 0.35, "atmosphere-blend": 0 },
-    land: "#f6ebd6", hill: ["rgba(255,252,240,0.5)", "#e9dac0", 0.12, 225], sea: ["#5fd6d2", "#2bb3c6", "#1d8fc4", "#0f5fa8"],
-    sand: "#f2dfb2", ochre: "#c98d4c", turf: ["#6fd173", "#4db352"], side: "#2f8a3e", glow: "#fff6d8", other: "#a9d98f", sun: 225, shadow: 1 },
-  // b. Riviera: the same noon printed softer, like Belmond's paper maps: more haze, a gentler sea, ivory land.
-  b: { sky: { "sky-color": "#92cbea", "horizon-color": "#f8f0e3", "fog-color": "#f6eee2", "sky-horizon-blend": 0.6, "horizon-fog-blend": 0.75, "fog-ground-blend": 0.45, "atmosphere-blend": 0 },
-    land: "#f8f0e0", hill: ["rgba(255,253,245,0.5)", "#ece0ca", 0.1, 225], sea: ["#7adbd5", "#45bccb", "#2b97c4", "#1a6aab"],
-    sand: "#f1e2bd", ochre: "#c49559", turf: ["#78cf79", "#58b85a"], side: "#3a8e47", glow: "#fff9e6", other: "#b3dc9c", sun: 225, shadow: 0.8 },
-  // c. Late light: the sun lower in the west-south-west, warmer land, a deeper sea, longer shadows.
-  c: { sky: { "sky-color": "#6cb8e6", "horizon-color": "#f9e4cb", "fog-color": "#f4e3cc", "sky-horizon-blend": 0.55, "horizon-fog-blend": 0.65, "fog-ground-blend": 0.35, "atmosphere-blend": 0 },
-    land: "#f5e6cc", hill: ["rgba(255,244,222,0.55)", "#e6d2b1", 0.14, 250], sea: ["#52d0cf", "#22a9c2", "#1584be", "#0b559f"],
-    sand: "#f0d6a0", ochre: "#c4823f", turf: ["#68cc6c", "#47ad4c"], side: "#2a8039", glow: "#ffefc8", other: "#a2d488", sun: 250, shadow: 1.35 },
-};
+// north-east. The sea is a smooth ramp drawn from the coastline outwards (shore turquoise to Atlantic blue) over our own
+// depth tiles, recoloured and flattened (they are coarse at coast distance, and the only data that tells sea from Spain).
+// Noon: Slim Aarons' pool light. Clear blue sky to a warm horizon, turquoise on the sand, cream land, bright turf.
+const LK: Look = { sky: { "sky-color": "#7cc4ec", "horizon-color": "#f7ebd9", "fog-color": "#f4ead9", "sky-horizon-blend": 0.6, "horizon-fog-blend": 0.7, "fog-ground-blend": 0.35, "atmosphere-blend": 0 },
+  land: "#f6ebd6", hill: ["rgba(255,252,240,0.5)", "#e9dac0", 0.12, 225], sea: ["#5fd6d2", "#2bb3c6", "#1d8fc4", "#0f5fa8"],
+  sand: "#f2dfb2", ochre: "#c98d4c", turf: ["#6fd173", "#4db352"], side: "#2f8a3e", glow: "#fff6d8", other: "#a9d98f", sun: 225, shadow: 1 };
 const FLAG = (s: number) => `<svg class="gm-f-svg" viewBox="0 0 64 80" width="64" height="80" aria-hidden="true">
   <ellipse cx="32" cy="76.5" rx="6.4" ry="2.3" fill="#1b2a22"/><ellipse cx="32" cy="76" rx="4.2" ry="1.3" fill="#0d1612"/>
   <path d="M32 76.2V7" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><path d="M32.8 75V8" stroke="rgba(30,40,40,.2)" stroke-width=".8"/>
@@ -52,9 +42,6 @@ export function createGolf(h: GolfHost) {
   const { root, cfg, esc } = h, G = cfg.p78 ?? {}, lang = cfg.lang;
   const btn = root.querySelector<HTMLButtonElement>("[data-golf]");
   if (btn && !btn.querySelector("svg")) btn.insertAdjacentHTML("afterbegin", ICON);
-  const lookQ = h.q.get("look");
-  const lookId = (lookQ === "b" || lookQ === "c" ? lookQ : "a") as "a" | "b" | "c";
-  const LK = LOOKS[lookId];
   let want = h.q.get("mode") === "golf", active = false, busy: Promise<void> | null = null;
   let dataP: Promise<Data | null> | null = null;
   const data = () => (dataP ??= fetch("/data/map/golf-mode.json").then((r) => (r.ok ? r.json() : null)).catch(() => null));
@@ -77,7 +64,7 @@ export function createGolf(h: GolfHost) {
 
   // The mown stripes: a small tile of two greens in 45° bands, as a mower leaves them (world-aligned, so it never swims).
   function stripes(map: any) {
-    const id = `gm-stripe-${lookId}`; if (map.hasImage(id)) return id;
+    const id = "gm-stripe"; if (map.hasImage(id)) return id;
     const n = 32, c = document.createElement("canvas"); c.width = c.height = n; const g = c.getContext("2d")!;
     g.fillStyle = LK.turf[0]; g.fillRect(0, 0, n, n); g.fillStyle = LK.turf[1];
     for (let k = -n; k < n * 2; k += 16) { g.beginPath(); g.moveTo(k, 0); g.lineTo(k + 8, 0); g.lineTo(k + 8 - n, n); g.lineTo(k - n, n); g.closePath(); g.fill(); }
@@ -91,7 +78,7 @@ export function createGolf(h: GolfHost) {
     h.stopAll();
     const c = map.getCenter();
     saved = { cam: { center: [c.lng, c.lat], zoom: map.getZoom(), pitch: map.getPitch(), bearing: map.getBearing(), padding: map.getPadding() }, terrain: map.getTerrain?.() ?? null, sky: h.sky(), overlay: h.golfOverlay(), paint: [], filt: [], flat: h.isFlat() };
-    active = true; root.classList.add("is-golf"); root.dataset.gmLook = lookId; btn?.setAttribute("aria-pressed", "true");
+    active = true; root.classList.add("is-golf"); btn?.setAttribute("aria-pressed", "true");
     if (!saved.overlay) await h.setGolfOverlay(true);
     if (!active) return;
     // The land, the sea, the relief: Algarve summer (golf mode only).
@@ -158,7 +145,9 @@ export function createGolf(h: GolfHost) {
   function glide(map: any) {
     // The camera stands over the sea looking north, the sea along the bottom of the screen; padding the top lowers the
     // vanishing point (MapLibre's field of view is fixed), so the summer sky shows below the header.
-    const H = map.getCanvas().clientHeight, to = { ...(h.isWide() ? HERO.desk : HERO.phone), padding: { top: Math.round(H * (h.isWide() ? 0.2 : 0.16)), bottom: 0, left: 0, right: 0 } }, far = Math.abs(map.getZoom() - to.zoom) > 3;
+    // /arrow (?pins=): the coast from Palmares to Vilamoura, so the three developments and every Algarve flag are in view.
+    const coast = h.q.has("pins") ? (h.isWide() ? { center: [-8.4, 37.035], zoom: 10.25, pitch: 67, bearing: 72 } : { center: [-8.33, 37.02], zoom: 9.55, pitch: 62, bearing: 72 }) : null;
+    const H = map.getCanvas().clientHeight, to = { ...(coast ?? (h.isWide() ? HERO.desk : HERO.phone)), padding: { top: coast ? 0 : Math.round(H * (h.isWide() ? 0.2 : 0.16)), bottom: 0, left: 0, right: 0 } }, far = Math.abs(map.getZoom() - to.zoom) > 3;
     if (h.reduce()) { map.jumpTo(to); return; }
     // The reader may take over at any moment; anything else that cuts the glide short (the fps governor dropping the
     // terrain mid-flight) is finished with a short ease, so golf mode always arrives.
@@ -199,7 +188,7 @@ export function createGolf(h: GolfHost) {
       // The golf layer golf mode switched on goes too (map-v3 draws it again the next time the reader asks for it).
       const m2 = h.map(); if (m2) { for (const id of ["golfpt-o", "golfpt", "golf"]) if (m2.getLayer(id)) m2.removeLayer(id); for (const id of ["golfpt", "golf"]) if (m2.getSource(id)) m2.removeSource(id); }
     }
-    saved = null; root.classList.remove("is-golf", "gm-near"); delete root.dataset.gmLook; btn?.setAttribute("aria-pressed", "false");
+    saved = null; root.classList.remove("is-golf", "gm-near"); btn?.setAttribute("aria-pressed", "false");
     setUrl(false); h.ev({ event: "map/golf/off", origin: root.dataset.mode });
     fill(h.sheetIn);
   }
@@ -319,7 +308,12 @@ export function createGolf(h: GolfHost) {
     const ui: Box[] = [];
     for (const el of root.querySelectorAll<HTMLElement>(".m3-top > *:not([hidden]), .gm-year, .m3-sheet.is-open, .m3-attr")) { const r = el.getBoundingClientRect(); if (r.width) ui.push({ x: r.left - cv.left - 6, y: r.top - cv.top - 6, w: r.width + 12, h: r.height + 12 }); }
     const placed: Box[] = [...ui, ...fbox, ...pbox];
-    const free = (b: Box) => b.x > 4 && b.x + b.w < W - 4 && b.y > 4 && b.y + b.h < H - 4 && !hit(b, placed);
+    // Names keep a little air between them (8 px), not just no overlap.
+    const air = (b: Box): Box => ({ x: b.x - 8, y: b.y - 8, w: b.w + 16, h: b.h + 16 });
+    const free = (b: Box) => b.x > 4 && b.x + b.w < W - 4 && b.y > 4 && b.y + b.h < H - 4 && !hit(air(b), placed);
+    // On land when it can be: a name over the deep sea reads less well.
+    const onLand = (b: Box) => !map.getLayer("land") || [[b.x + 2, b.y + 2], [b.x + b.w - 2, b.y + 2], [b.x + 2, b.y + b.h - 2], [b.x + b.w - 2, b.y + b.h - 2], [b.x + b.w / 2, b.y + b.h / 2]]
+      .every((pt) => map.queryRenderedFeatures(pt as [number, number], { layers: ["land"] }).length > 0);
     // Off the turf: a name never sits on a course (lit or not).
     const turf = ["gm-top", "gm-side", "golf"].filter((id) => map.getLayer(id));
     const offTurf = (b: Box) => !turf.length || !map.queryRenderedFeatures([[b.x, b.y], [b.x + b.w, b.y + b.h]], { layers: turf }).length;
@@ -334,7 +328,7 @@ export function createGolf(h: GolfHost) {
         const opts: Box[] = [];
         for (let k = 0; k < (wide ? 5 : 3); k++) opts.push(R(p.x + 4, top - f.h - 2 - k * (f.h + 4)), R(p.x - f.w - 4, top - f.h - 2 - k * (f.h + 4)), ...(k ? [] : [R(p.x + 30 * s, top + 2)]));
         // Zero collisions first: a name with no free place waits (its flag still stands, its card still opens).
-        const best = opts.find((b) => free(b) && offTurf(b)) ?? opts.find(free);
+        const best = opts.find((b) => free(b) && offTurf(b) && onLand(b)) ?? opts.find((b) => free(b) && offTurf(b)) ?? opts.find(free);
         if (best) { placed.push(best); ok = true; lab.style.translate = `${Math.round(best.x - p.x)}px ${Math.round(best.y - p.y)}px`; }
       }
       lab.classList.toggle("is-on", ok);
@@ -373,10 +367,14 @@ export function createGolf(h: GolfHost) {
     const ph = c.photo ? `<figure class="m3-ph gm-ph"><img class="m3-photo m3-hero-top" src="${esc(c.photo)}-800.webp" data-srcset="${esc(c.photo)}-800.webp 800w, ${esc(c.photo)}-1600.webp 1600w" sizes="(max-width: 819px) 100vw, 400px" alt="" width="800" height="450">${c.credit && cfg.p68 ? `<figcaption class="m3-cr">${esc(cfg.p68.credit.replace("{c}", c.credit))}</figcaption>` : ""}</figure>` : "";
     let x = `${ph}<div class="m3-sb m3-arr gm-card${ph ? "" : " gm-card-np"}"><p class="m3-kick">${esc(c.resort && c.resort !== c.n ? c.resort : "")}${c.resort && c.resort !== c.n ? " · " : ""}<span class="m3-tag">${esc(T("tag"))}</span></p>`;
     x += `<h2 class="m3-h gm-name" tabindex="-1">${esc(c.n)}</h2><p class="gm-one">${esc([c.holes ? T("holes", { n: c.holes }) : "", c.arch].filter(Boolean).join(" · "))}</p>`;
-    if (c.near) x += `<p class="gm-num"><b>${nf.format(c.near.min)}</b><span>min</span><small>${esc(T("near", { name: c.near.name }))}</small></p>`;
+    // A development named after the course (Springs at The Els Club) stands beside it: its pin is only approximate, so no
+    // minutes from it, just where it is.
+    const beside = c.near && c.near.name.toLowerCase().includes(c.short.toLowerCase());
+    if (c.near && beside) x += `<p class="gm-num gm-next"><small>${esc(T("next", { name: c.near.name }))}</small></p>`;
+    else if (c.near) x += `<p class="gm-num"><b>${nf.format(c.near.min)}</b><span>min</span><small>${esc(T("near", { name: c.near.name }))}</small></p>`;
     x += `<p class="m3-quiet gm-links">${c.url ? `<a class="m3-link" href="${esc(c.url)}" target="_blank" rel="noopener" data-gm-site>${esc(T("site"))} ↗</a>` : ""}${nearDevs.length ? `<button type="button" class="m3-link" data-gm-homes>${esc(T("homes"))} · ${nf.format(nearDevs.length)}</button>` : ""}</p>`;
     const dt = (() => { try { return new Intl.DateTimeFormat(root.dataset.locale, { day: "numeric", month: "long", year: "numeric" }).format(new Date(`${D.checked}T12:00:00`)); } catch { return D.checked; } })();
-    x += `<p class="m3-src">${c.src.map((s) => `<a href="${esc(s.u)}" target="_blank" rel="noopener">${esc(s.t)}</a>`).join(" · ")}${c.near ? ` · ${esc(T("src.drive", { d: dt }))}` : ""} · ${esc(T("src.outline"))}</p></div>`;
+    x += `<p class="m3-src">${c.src.map((s) => `<a href="${esc(s.u)}" target="_blank" rel="noopener">${esc(s.t)}</a>`).join(" · ")}${c.near && !beside ? ` · ${esc(T("src.drive", { d: dt }))}` : ""} · ${esc(T("src.outline"))}</p></div>`;
     h.openSheet(x, true, true);
     h.sheetIn.querySelector("[data-gm-site]")?.addEventListener("click", () => h.ev({ event: "map/golf/site", place: c.id, origin: root.dataset.mode }));
     h.sheetIn.querySelector("[data-gm-homes]")?.addEventListener("click", () => {
@@ -421,6 +419,5 @@ export function createGolf(h: GolfHost) {
       if (!active) return; active = false; clearInterval(glintT); cancelAnimationFrame(raf); raf = 0; mo?.disconnect(); mo = null;
       marks.forEach((x) => x.m.remove()); marks = []; year?.remove(); year = null; ids.layers = []; ids.sources = []; ids.images = []; saved = null;
     },
-    look: lookId,
   };
 }

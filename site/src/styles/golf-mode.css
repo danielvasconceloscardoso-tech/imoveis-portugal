@@ -1,9 +1,6 @@
-/* Golf mode (prompt 78, site/src/scripts/golf-mode.ts): Algarve summer, one sun, quiet type. Everything here is scoped to
-   .m3.is-golf or to the golf marks, so the normal map is untouched. Three refinements of the v3 look (data-gm-look a|b|c)
-   share one structure and differ only in their tokens. */
+/* Golf mode (prompt 78, site/src/scripts/golf-mode.ts): Algarve summer ("Noon"), one sun, quiet type. Everything here is
+   scoped to .m3.is-golf or to the golf marks, so the normal map is untouched. */
 .m3 { --gm-flag: #f5c431; --gm-terra: #c4552d; --gm-ink: #1c2b2a; --gm-green: #1d6a45; --gm-halo: #fbf4e6; }
-.m3[data-gm-look="b"] { --gm-terra: #b8613d; --gm-ink: #22302f; --gm-green: #2a6e4c; --gm-halo: #fbf8f0; }
-.m3[data-gm-look="c"] { --gm-terra: #bb4f24; --gm-ink: #1b2626; --gm-green: #1b6440; --gm-halo: #faf0de; }
 
 /* The switch: a pill like "Layers"; on, the green of the brand's button. The icon is drawn (golf-mode.ts), never an emoji. */
 .m3-golfbtn { margin-left: auto; display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 16px 0 14px; font-size: 14px; font-weight: 600; border-radius: 999px;
@@ -43,10 +40,10 @@
 .gm-lab, .gm-grp, .gm-cap, .gm-town { pointer-events: none; white-space: nowrap; opacity: 0; visibility: hidden; transition: opacity .3s var(--e), visibility 0s linear .3s; }
 .gm-lab.is-on, .gm-grp.is-on, .gm-cap.is-on, .gm-town.is-on { opacity: 1; visibility: visible; transition: opacity .3s var(--e), visibility 0s; }
 .gm-lab { position: absolute; left: 32px; top: 80px; display: grid; gap: 3px; text-align: left; }
-.gm-lab em, .gm-grp em { font: italic 400 26px/1 var(--m3serif); letter-spacing: -.005em; color: var(--gm-ink);
-  text-shadow: 0 0 2px var(--gm-halo), 0 0 6px var(--gm-halo), 0 0 14px var(--gm-halo); }
-.gm-lab small, .gm-grp small, .gm-cap small { font: 700 11px/1.1 var(--m3sans); letter-spacing: .18em; text-transform: uppercase; color: var(--gm-terra);
-  text-shadow: 0 0 2px var(--gm-halo), 0 0 6px var(--gm-halo); }
+/* A full cream halo (several layers), so a name reads at 4.5:1 or better even where it crosses the sea. */
+.m3 { --gm-halo-s: 0 0 1px var(--gm-halo), 0 0 2px var(--gm-halo), 0 0 3px var(--gm-halo), 0 0 6px var(--gm-halo), 0 0 10px var(--gm-halo), 0 0 16px var(--gm-halo); }
+.gm-lab em, .gm-grp em { font: italic 400 26px/1 var(--m3serif); letter-spacing: -.005em; color: var(--gm-ink); text-shadow: var(--gm-halo-s); }
+.gm-lab small, .gm-grp small, .gm-cap small { font: 700 11px/1.1 var(--m3sans); letter-spacing: .18em; text-transform: uppercase; color: var(--gm-terra); text-shadow: var(--gm-halo-s); }
 .gm-grp { display: grid; gap: 5px; justify-items: center; translate: var(--gx, 0) calc(var(--gy, 0) - 4px); }
 .gm-grp em { font-size: 28px; }
 @media (max-width: 819px) { .gm-lab em { font-size: 20px; } .gm-grp em { font-size: 22px; } }
@@ -92,6 +89,7 @@
 .gm-num { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 8px; margin: 22px 0 0; padding: 16px 0 0; border-top: 1px solid rgba(120, 120, 110, .18); }
 .gm-num b { font: 400 52px/1 var(--m3serif); letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
 .gm-num span { font: 400 21px/1 var(--m3serif); }
+.gm-num.gm-next small { margin-top: 0; font: 400 21px/1.3 var(--m3serif); color: var(--gm-ink); }
 .gm-num small { flex-basis: 100%; margin-top: 6px; font: 500 14px/1.35 var(--m3sans); color: var(--gm); }
 .gm-links { margin: 14px 0 0; }
 .gm-door { margin: 18px 0 0; }
