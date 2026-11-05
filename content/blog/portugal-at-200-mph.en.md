@@ -7,7 +7,7 @@ description: "From the Algarve circuit to Portuguese racing culture: the country
 tldr: "The Algarve's racing circuit is about more than speed: its elevation, Portuguese engineering and sporting history tell a compelling story."
 published: 2026-11-05
 updated: 2026-11-05
-cta: agency
+cta: none
 related: []
 sources: []
 ---
