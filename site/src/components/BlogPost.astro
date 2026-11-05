@@ -22,7 +22,7 @@ const abs = (l: Lang) => `https://${hostFor(CANONICAL_ED[l])}${base(l, CANONICAL
 const alternates = Object.fromEntries(LANGS.filter((l) => Boolean(slugs[l])).map((l) => [l, abs(l)])) as Record<Lang, string>;
 const related = post.related.map((id) => postById(id, lang)).filter(Boolean) as Post[];
 const talk = pathFor(lang, ed, "talk");
-const next = post.cta === "agency"
+const next = post.cta === "none" ? null : post.cta === "agency"
   ? { href: pathFor(lang, ed, "buy"), label: c("faq.cta.agency", lang), who: `${config.agency.public ? config.agency.name : c("advisor.title", lang)} · ${c("common.gold", lang)}` }
   : config.partners[post.cta]
     ? { href: `${talk}?cat=${post.cta}#form`, label: c(`faq.cta.${post.cta}`, lang), who: `${config.partners[post.cta]} · ${c("common.sponsored", lang)}` }
@@ -66,7 +66,7 @@ const faqH = { pt: "Perguntas frequentes", en: "Frequently asked questions", fr:
         {post.faq.map((x) => <details class="h2-q"><summary>{x.q}</summary><p>{x.a}</p></details>)}
       </section>
     )}
-    {post.cta !== "none" && <div class="next" style="margin-top:32px">
+    {next && <div class="next" style="margin-top:32px">
       <a class="btn sm" href={next.href}>{next.label}</a>
       <span class="who">{next.who}</span>
     </div>}
