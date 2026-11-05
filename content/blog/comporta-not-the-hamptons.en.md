@@ -7,7 +7,7 @@ description: "A more revealing look at Comporta: rice fields, fishing traditions
 tldr: "Comporta is often called Portugal's Hamptons. The comparison makes sense at first glance, but its rice fields, fishing communities and working landscape tell a better story."
 published: 2026-11-05
 updated: 2026-11-05
-cta: agency
+cta: none
 related: []
 sources: []
 ---
