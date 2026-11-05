@@ -38,3 +38,9 @@ This prepares the old site locally. It does not change production. Any merge,
 production rollback or deployment requires explicit operator approval. Do not
 reset or force-push `main`. Cloudflare deployment history and external bindings
 must be checked separately before an approved production recovery.
+
+## Issue 4 development baseline
+
+`codex/issue-4-main-map` starts from `main` at `2eadc1932b770db1862c5016cb3e1515a47a606f`. The owner had merged the earlier development work before this branch was created. That commit is a verified Git baseline, not a verified production deployment identity. The permanent pre-Codex backup branch/tag above remain unchanged at `77552be5a5a5bdfbbf6517e4f5525408af5d03db`.
+
+See [ISSUE-4-RELEASE.md](ISSUE-4-RELEASE.md) for the release candidate and validation. Inspect the Issue 4 baseline on a separate recovery branch if needed; never force-reset `main`. Any future production rollback also requires explicit operator approval.

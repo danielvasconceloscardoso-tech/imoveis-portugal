@@ -233,6 +233,8 @@ Status: To do · Doing · Blocked · Done
 
 ## Last session
 
+2026-11-05 · CTO · Issue 4: implemented the US/Luxembourg main-map transformation on `codex/issue-4-main-map`: optional photographic entry, natural terrain palette, horizontal region rail, sourced editorial cards and responsive camera/control geometry. Golf remains Issue 3; protected backup references are unchanged. Release validation and review evidence: `docs/ISSUE-4-RELEASE.md`. No production merge or deployment.
+
 2026-11-05 · CTO: verified and pushed permanent pre-Codex branch/tag at `77552be5a5a5bdfbbf6517e4f5525408af5d03db`; development only on `codex/development-2026-11-05`. Added read-only PR validation and three accessibility/keyboard improvements with specialist review. No production merge or deployment. See `docs/TESTING.md` and `docs/DEVELOPMENT-BASELINE.md` for checks and remaining API/configuration blockers.
 
 2026-11-03 (CTO helper, step 2 Centro, branch centro): the place card rolled out to the 111 Centro municipalities with the Norte method (DGEEC private schools, ERS hospitals, OSRM from the Câmara). 2 pass every data line and ship with photographs to come (Coimbra, Condeixa-a-Nova); 109 keep today's card on line 3 (ops/ACCEPTANCE_PLACE_CARD.md "Centro roll-out"). Not merged or pushed (69a-69c).
