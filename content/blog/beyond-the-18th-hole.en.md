@@ -7,7 +7,7 @@ description: "How golf, architecture and the landscape shape daily life around V
 tldr: "The best reason to live near a Portuguese golf course may have little to do with your scorecard. The landscapes, communities and routines tell a richer story."
 published: 2026-11-05
 updated: 2026-11-05
-cta: agency
+cta: none
 related: []
 sources: []
 ---
