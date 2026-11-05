@@ -1,5 +1,7 @@
 # Programme-first Regressar experience
 
+The operator explicitly approved production publication on 6 November 2026. The release integrates the existing editorial `main` baseline `6d7834d40047007ea48b3882e7c65a2c50ba57af` without overwriting those changes.
+
 The visitor declares country and net pay, compares Portuguese annual gross requirements, then chooses photographic questions and reveals a municipality that meets every selected supported taste and the illustrative housing ceiling. A separate, source-backed local-life section shows indicative floor areas, required deposit, schools and actual hospitals. Salary and screening answers stay in browser memory.
 
 ## What changed
@@ -14,7 +16,7 @@ The visitor declares country and net pay, compares Portuguese annual gross requi
 
 ## Validation
 
-- Production-mode static build passed: 7,369 pages.
+- Initial feature build: 7,369 pages. Final integrated production candidate: 7,411 pages, preserving 42 new editorial routes.
 - 44 fiscal, FX, ranking, screening and local-data contracts passed; TypeScript and content/parity passed.
 - 48 current desktop/mobile browser cases verified by test identity: 46 healthy cases from the full run plus two stronger corrected source-date-location assertions rerun successfully. No skipped cases are counted as passes. An earlier unreachable-preview attempt is retained as infrastructure history.
 - Six whole-page axe states passed with zero automatic violations, runtime errors or horizontal overflow, including expanded conditional-programme controls and Matosinhos local-life data. Image/pseudo-background contrast remains a manual audit category; the actual 66% dark overlay is checked across viewports and bounds white-text contrast even over white imagery. This is not WCAG certification.
@@ -28,6 +30,6 @@ The visitor declares country and net pay, compares Portuguese annual gross requi
 
 Reports: `site/artifacts/issue10/programme-final-coverage.json`, `programme-axe-results.json`, `programme-lighthouse/summary.json`. Real compiled preview: `http://127.0.0.1:4334/pt/lu/regressar/`; English and French use the same route under `/en/us/` and `/fr/fr/`. The only change after these feature audits is the calculator-index link label; its static build and link are checked separately.
 
-Branch: `codex/issue-10-regressar`. Permanent backup branch `backup/pre-codex-2026-11-05` and tag `pre-codex-2026-11-05` remain immutable at `77552be5a5a5bdfbbf6517e4f5525408af5d03db`. No production merge or deployment is included.
+Branch: `codex/issue-10-regressar`. Permanent backup branch `backup/pre-codex-2026-11-05` and tag `pre-codex-2026-11-05` remain immutable at `77552be5a5a5bdfbbf6517e4f5525408af5d03db`. The initial review did not include production publication. Subsequent explicit operator approval authorizes the current production release; its remote commit and verification status are recorded in `site/artifacts/issue10/programme-production-release.json`.
 
 See [screening rules](ISSUE-10-PROGRAMME.md), [local data](ISSUE-10-LIFE.md), [creative brief](ISSUE-10-EXPERIENCE.md), [QA](ISSUE-10-PROGRAMME-QA.md), and [original tax model limits](ISSUE-10-TAX.md).
