@@ -77,12 +77,12 @@ const faqH = { pt: "Perguntas frequentes", en: "Frequently asked questions", fr:
         <ul>{related.map((r) => <li><a href={`${base(lang, ed)}${r.slug}/`}>{r.title}</a></li>)}</ul>
       </section>
     )}
-    <section class="sources-list" aria-labelledby="fontes">
+    {sources.list.length > 0 && <section class="sources-list" aria-labelledby="fontes">
       <h2 id="fontes" class="h-small">{c("common.sources", lang)}</h2>
       <ol>
         {sources.list.map((f, i) => <li id={`fonte-${i + 1}`}><a href={f.url} rel="noopener">{srcTitle(f.title, lang)}</a>{f.checked && `, ${c("common.checked", lang, { date: fmtDate(lang, f.checked) })}`}.</li>)}
       </ol>
-    </section>
+    </section>}
     <p class="disc">{DISCLAIMER[lang]}</p>
     <MareBlock lang={lang} ed={ed} where="article" />
   </article>
