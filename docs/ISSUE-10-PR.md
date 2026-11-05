@@ -1,17 +1,15 @@
-A visitor enters their country and take-home salary, sees the estimated annual gross required in Portugal, and reveals a place matching their tastes and housing budget. The experience uses an original photographic arrival, an annual tax ledger, progressive assumptions and a small interactive MapLibre map linked to the existing main map.
+Programa Regressar now leads the experience: an independent programme reference, conditional eligibility screening, and gross-salary comparisons for the same Portuguese annual net target. Visitors then choose photographic questions and reveal a municipality matching every selected supported preference and an explicit housing scenario.
 
-- Portuguese, English and French; declared net only, explicit month/year and 12/13/14 payments.
-- Standard annual employee model and opt-in Article 12-A comparison; dated ECB conversion, no invented foreign taxes.
-- Thirteen source-backed mainland municipalities. All selected supported preferences and the housing-budget limit are hard constraints; empty states stay honest.
-- Salary stays in browser memory; no salary in URLs, storage or network payloads. Reduced motion and keyboard access supported.
-- Existing main map, Golf modules and other calculators preserved. No production deployment.
+- Country and declared net salary remain the only initial financial inputs. Month/year and 12/13/14 payments stay explicit; no foreign tax or foreign gross is inferred.
+- Unknown, failed or out-of-model screening answers cannot activate relief. Changed answers revoke the comparison; legacy return cohorts receive historical-rule guidance rather than a false blanket denial.
+- Indicative rental/purchase areas use existing INE medians, with deposit and mortgage assumptions separated. Thirteen municipalities provide source/date-backed school and actual-hospital records, with driving and straight-line distances kept distinct.
+- Photographic questions, responsive MapLibre selection, reduced motion and accessible city labels. Salary and screening answers remain in browser memory.
+- The typographic identity follows the supplied visual reference and explicitly disclaims government partnership/validation. No official graphic-logo asset or fresh statutory verification is claimed. Fiscal review remains required; housing estimates are not credit approval or available listings.
 
-Fiscal boundary: an indicative model for a single mainland resident employee without dependants, other income or personal tax credits, supported annual net EUR20,000–500,000. New primary-source retrieval is blocked by the environment; statutory assumptions require independent tax review. This is not a legally verified tool, a government partnership, a live FX service or mortgage approval. Regional living costs are not fabricated.
+Validation: production build 7,369 pages; 44 engine/data contracts; 48 current desktop/mobile browser identities passed; six whole-page axe states without automatic violations; TypeScript/content/parity passed. Lighthouse performance/accessibility: **100/100 mobile and desktop**, with unchanged 2.5s LCP/0.1 CLS budgets. No screenshot deliverable. Hosted CI has not run.
 
-Validation: production build 7,369 pages; 27 engine/data contracts; 36 desktop/mobile cases; six axe states with zero automatic violations. Final Lighthouse performance/accessibility: 100/100 on both mobile and desktop; unchanged 2.5s LCP and 0.1 CLS budgets passed. TypeScript and content/parity passed. Hosted CI has not run. Screenshots omitted as requested.
+[Current release and evidence](https://github.com/danielvasconceloscardoso-tech/imoveis-portugal/blob/codex/issue-10-regressar/docs/ISSUE-10-PROGRAMME-RELEASE.md) · [QA](https://github.com/danielvasconceloscardoso-tech/imoveis-portugal/blob/codex/issue-10-regressar/docs/ISSUE-10-PROGRAMME-QA.md)
 
-Detailed validation is documented in [release notes](https://github.com/danielvasconceloscardoso-tech/imoveis-portugal/blob/codex/issue-10-regressar/docs/ISSUE-10-RELEASE.md) and [QA](https://github.com/danielvasconceloscardoso-tech/imoveis-portugal/blob/codex/issue-10-regressar/docs/ISSUE-10-QA.md).
-
-Permanent backup branch and tag preserved at `77552be5a5a5bdfbbf6517e4f5525408af5d03db`.
+Original backup branch/tag preserved at `77552be5a5a5bdfbbf6517e4f5525408af5d03db`. Existing main-map/Golf modules are unchanged. No production merge or deployment.
 
 Closes #10.

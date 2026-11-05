@@ -18,7 +18,7 @@
     "test:lighthouse": "node scripts/lighthouse-check.mjs",
     "test:config": "tsc --noEmit --skipLibCheck --moduleResolution bundler --module esnext --target es2022 playwright.config.ts tests/e2e/*.spec.ts src/scripts/regressar.ts",
     "test:marker": "node scripts/test-marker-queue.mjs",
-    "test:regressar": "node --import tsx scripts/test-regressar-tax.mjs && node --import tsx scripts/test-regressar-fx.mjs && node --import tsx scripts/test-regressar-places.mjs"
+    "test:regressar": "node --import tsx scripts/test-regressar-tax.mjs && node --import tsx scripts/test-regressar-fx.mjs && node --import tsx scripts/test-regressar-places.mjs && node --import tsx scripts/test-regressar-eligibility.mjs && node --import tsx scripts/test-regressar-life.mjs"
   },
   "dependencies": {
     "@fontsource-variable/jost": "^5.3.0",

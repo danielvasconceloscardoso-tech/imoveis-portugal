@@ -1,0 +1,163 @@
+import { test as base, expect, type Page } from '@playwright/test';
+
+// Programme qualification and life data are local. Never send a salary, lead or form.
+const test = base.extend({
+  page: async ({ page, baseURL }, use) => {
+    const errors: string[] = [];
+    page.on('pageerror', error => errors.push(error.message));
+    await page.route('**/*', route => {
+      const request = route.request();
+      return request.method() === 'GET' && new URL(request.url()).origin === new URL(baseURL!).origin
+        ? route.continue() : route.abort();
+    });
+    await use(page);
+    expect(errors, 'uncaught browser errors').toEqual([]);
+  },
+});
+const criteria = ['priorResidence', 'outsidePreviousFiveYears', 'taxRegular', 'noNhrRegistration'] as const;
+const criterion = (page: Page, id: typeof criteria[number]) => page.locator(`[data-r-eligibility="${id}"]`);
+const money = (value: string | null) => Number((value || '').replace(/\D/g, ''));
+
+async function open(page: Page) {
+  await page.goto('/pt/lu/regressar/', { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('[data-regressar]')).toBeVisible();
+  await page.locator('[data-r-country]').selectOption('lu');
+}
+async function calculate(page: Page) {
+  await page.locator('[data-r-net]').fill('4500');
+  await page.locator('[data-r-calculate]').click();
+  await expect(page.locator('[data-r-result]')).toBeVisible();
+}
+async function showControl(page: Page, selector: string) {
+  const control = page.locator(selector);
+  for (let level = 0; level < 5 && !(await control.isVisible()); level++) {
+    const disclosure = control.locator('xpath=ancestor::details[not(@open)]').first();
+    await expect(disclosure).toHaveCount(1);
+    await disclosure.locator(':scope > summary').click();
+  }
+  await expect(control).toBeVisible();
+}
+async function qualify(page: Page) {
+  await showControl(page, '[data-r-return-year]');
+  await page.locator('[data-r-return-year]').selectOption('2026');
+  for (const id of criteria) await criterion(page, id).selectOption('yes');
+}
+
+test('Programme is the visible reference and the independent relationship is explicit', async ({ page }) => {
+  await open(page);
+  await expect(page.locator('[data-r-programme]')).toBeVisible();
+  await expect(page.locator('[data-r-programme]')).toContainText(/Programa\s*Regressar/i);
+  await expect(page.locator('[data-r-programme-note]')).toBeVisible();
+  await expect(page.locator('[data-r-programme-note]')).toContainText(/independente|sem parceria|não.*oficial/i);
+  const overlayAlphas = await page.locator('.rx-arrival-photo').evaluate(element => {
+    const style = getComputedStyle(element, '::after');
+    const paint = style.backgroundImage === 'none' ? style.backgroundColor : style.backgroundImage;
+    return [...paint.matchAll(/rgba\([^)]*,\s*([\d.]+)\)/g)].map(match => Number(match[1]));
+  });
+  expect(overlayAlphas.length, 'photo text needs a real contrast overlay').toBeGreaterThan(0);
+  expect(overlayAlphas.every(alpha => alpha >= 0.66), 'small white photo text retains the reviewed contrast floor').toBe(true);
+  // Source verification limits remain visible rather than being replaced by a government endorsement.
+  await calculate(page);
+  await expect(page.locator('[data-r-result]')).toContainText(/pressupostos por confirmar|revisão fiscal/i);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+});
+
+test('Unknown and partial programme answers never activate the fiscal benefit', async ({ page }) => {
+  await open(page);
+  await calculate(page);
+  const benefit = page.locator('[data-r-benefit]');
+  await expect(benefit).not.toBeChecked();
+  await expect(benefit).toBeDisabled();
+  await showControl(page, '[data-r-return-year]');
+  await expect(page.locator('[data-r-eligibility-status]')).toHaveAttribute('data-status', 'incomplete');
+  await page.locator('[data-r-return-year]').selectOption('2023');
+  await expect(page.locator('[data-r-eligibility-status]')).toHaveAttribute('data-status', 'incomplete');
+  await expect(benefit).toBeDisabled();
+  await page.locator('[data-r-return-year]').selectOption('2027');
+  await expect(page.locator('[data-r-eligibility-status]')).toHaveAttribute('data-status', 'not-eligible');
+  await expect(benefit).toBeDisabled();
+  await page.locator('[data-r-return-year]').selectOption('2026');
+  for (const id of criteria.slice(0, -1)) await criterion(page, id).selectOption('yes');
+  await expect(benefit).toBeDisabled();
+  await expect(benefit).not.toBeChecked();
+  await expect(page.locator('[data-r-eligibility-status]')).toHaveAttribute('data-status', 'incomplete');
+});
+
+test('A complete conditional checklist enables comparison without granting eligibility', async ({ page }) => {
+  await open(page);
+  await calculate(page);
+  const standard = money(await page.locator('[data-r-gross]').textContent());
+  const target = await page.locator('[data-r-net-result]').textContent();
+  await qualify(page);
+  await expect(page.locator('[data-r-eligibility-status]')).toHaveAttribute('data-status', 'potentially-eligible');
+  await expect(page.locator('[data-r-benefit]')).toBeEnabled();
+  await page.locator('[data-r-benefit]').check();
+  await page.locator('[data-r-calculate]').click();
+  await expect(page.locator('[data-r-result]')).toBeVisible();
+  expect(money(await page.locator('[data-r-gross]').textContent())).toBeLessThan(standard);
+  await expect(page.locator('[data-r-net-result]')).toHaveText(target!);
+  await expect(page.locator('[data-r-eligibility-status]')).not.toContainText(/elegibilidade confirmada|aprovado/i);
+});
+
+test('A disqualifying answer revokes an active relief comparison and restores the standard result', async ({ page }) => {
+  await open(page);
+  await calculate(page);
+  const standard = await page.locator('[data-r-gross]').textContent();
+  await qualify(page);
+  await page.locator('[data-r-benefit]').check();
+  await page.locator('[data-r-calculate]').click();
+  await criterion(page, 'outsidePreviousFiveYears').selectOption('no');
+  await expect(page.locator('[data-r-benefit]')).not.toBeChecked();
+  await expect(page.locator('[data-r-benefit]')).toBeDisabled();
+  await expect(page.locator('[data-r-eligibility-status]')).toHaveAttribute('data-status', 'not-eligible');
+  await page.locator('[data-r-calculate]').click();
+  await expect(page.locator('[data-r-gross]')).toHaveText(standard!);
+});
+
+test('Image choices keep their accessible selection state and reveal a compatible municipality', async ({ page }) => {
+  await open(page);
+  await calculate(page);
+  const choices = page.locator('[data-r-preference]');
+  await expect(choices).toHaveCount(6);
+  for (const button of await choices.all()) {
+    await expect(button).toHaveAccessibleName(/.+/);
+    await expect(button.locator('img')).toHaveCount(1);
+    await expect(button.locator('img')).toHaveAttribute('loading', 'lazy');
+    await button.scrollIntoViewIfNeeded();
+    await expect.poll(() => button.locator('img').evaluate((image: HTMLImageElement) => image.complete && image.naturalWidth > 0), { message: 'the image question loads a real local photograph' }).toBe(true);
+    await expect(button).toHaveAttribute('aria-pressed', 'false');
+  }
+  const beach = page.locator('[data-r-preference="beach"]');
+  await beach.click();
+  await expect(beach).toHaveAttribute('aria-pressed', 'true');
+  await page.locator('[data-r-reveal]').click();
+  await expect(page.locator('[data-r-city]')).toBeVisible();
+  await expect(page.locator('[data-r-city-evidence]')).toContainText(/Praia/);
+});
+
+test('A sourced city reveals housing power, real schools and actual hospitals', async ({ page }) => {
+  await open(page);
+  await calculate(page);
+  // Matosinhos is the source-backed member satisfying all six supported tastes.
+  for (const preference of ['beach', 'golf', 'art', 'food', 'schools', 'airport']) {
+    await page.locator(`[data-r-preference="${preference}"]`).click();
+  }
+  await page.locator('[data-r-reveal]').click();
+  await expect(page.locator('[data-r-city-name]')).toHaveText('Matosinhos');
+  await expect(page.locator('[data-r-buying-power]')).toBeVisible();
+  await expect(page.locator('[data-r-buying-power]')).toContainText(/m²/);
+  for (const selector of ['[data-r-schools]', '[data-r-hospitals]']) {
+    const list = page.locator(selector);
+    await showControl(page, selector);
+    await expect(list).toBeVisible();
+    expect(await list.locator('li').count()).toBeGreaterThan(0);
+    expect(await list.locator('a[href]').count()).toBeGreaterThan(0);
+    await expect(list).toContainText(/km|min/i);
+    await expect(list).toContainText(/2026-\d{2}-\d{2}/);
+  }
+  await expect(page.locator('[data-r-hospitals]')).not.toContainText(/USF Oceanos|USF Anémona/);
+  await expect(page.locator('[data-r-life-note]')).toContainText(/Origem.*Matosinhos/);
+  await expect(page.locator('[data-r-life-note]')).toContainText(/privadas e internacionais/);
+  await expect(page.locator('[data-r-map]')).toHaveAttribute('href', /[?&]place=matosinhos/);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+});

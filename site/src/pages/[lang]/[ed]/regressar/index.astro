@@ -2,6 +2,7 @@
 import Regressar from '../../../../components/Regressar.astro';
 import { LANGS, LANG_NAME, HTML_LANG, ED_ORDER, EDITIONS, pathFor, type Lang, type EdCode } from '../../../../i18n';
 import { config } from '../../../../config';
+import { experienceCopy } from '../../../../lib/regressar-experience-copy';
 import '@fontsource-variable/manrope/wght.css';
 import '@fontsource-variable/playfair-display/wght.css';
 import serif from '@fontsource-variable/playfair-display/files/playfair-display-latin-wght-normal.woff2?url';
@@ -11,6 +12,7 @@ export function getStaticPaths() {
 }
 const lang = Astro.params.lang as Lang;
 const ed = Astro.params.ed as EdCode;
+const experience = experienceCopy(lang);
 const title = {pt:'O seu rendimento. A sua vida em Portugal.',en:'Your income. Your life in Portugal.',fr:'Votre revenu. Votre vie au Portugal.'}[lang];
 const labels = {
   pt: { home: 'Imóveis Portugal — início', language: 'Idioma', skip: 'Ir para o simulador', privacy: 'Privacidade', legal: 'Aviso legal', calculators: 'Simuladores', map: 'Mapa', related: 'Mais em Portugal' },
@@ -42,10 +44,11 @@ const urlFor = (language: Lang) => `https://${host}/${language}/${ed}/regressar/
   <body class="regressar-page">
     <a class="rx-skip" href="#rx-main">{labels.skip}</a>
     <header class="rx-masthead">
-      <a class="rx-brand" href={pathFor(lang, ed, 'home')} aria-label={labels.home}>Imóveis Portugal<span aria-hidden="true">.</span></a>
+      <div class="rx-identity"><a class="rx-brand" href={pathFor(lang, ed, 'home')} aria-label={labels.home}>Imóveis Portugal</a><span class="rx-identity-cross" aria-hidden="true">×</span><a class="rx-programme-wordmark" data-r-programme href="https://www.programaregressar.gov.pt/" target="_blank" rel="noopener noreferrer"><span>Programa</span><strong>Regressar</strong></a></div>
       <nav class="rx-languages" aria-label={labels.language}>
         {LANGS.map(language => <a href={`/${language}/${ed}/regressar/`} lang={HTML_LANG[language]} aria-label={LANG_NAME[language]} aria-current={language === lang ? 'page' : undefined}>{language.toUpperCase()}</a>)}
       </nav>
+      <p class="rx-programme-note" data-r-programme-note>{experience.programmeNote}</p>
     </header>
     <main id="rx-main"><Regressar lang={lang} ed={ed} /></main>
     <footer class="rx-site-footer"><a class="rx-footer-brand" href={pathFor(lang, ed, 'home')}>Imóveis Portugal</a><nav aria-label={labels.related}><a href={pathFor(lang, ed, 'map')}>{labels.map}</a><a href={pathFor(lang, ed, 'sims')}>{labels.calculators}</a><a href={pathFor(lang, ed, 'privacy')}>{labels.privacy}</a><a href={pathFor(lang, ed, 'legal')}>{labels.legal}</a></nav></footer>
@@ -55,10 +58,11 @@ const urlFor = (language: Lang) => `https://${host}/${language}/${ed}/regressar/
 <style is:global>
   :root{color-scheme:light;background:#f6f3eb;color:#233d34;font-family:"Manrope Variable",Manrope,sans-serif;font-synthesis:none;-webkit-font-smoothing:antialiased}
   *{box-sizing:border-box}body{margin:0}button,input,select{font:inherit}button,a,input,select,summary{-webkit-tap-highlight-color:transparent}a{color:inherit}a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #ae7633;outline-offset:5px}main{display:block}button:disabled{cursor:default}img{max-width:100%}
-  .rx-masthead{height:68px;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:0 clamp(22px,4vw,64px);border-bottom:1px solid #d7dcd0;background:#f6f3eb}
+  .rx-masthead{min-height:105px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:0 20px;padding:16px clamp(22px,4vw,64px) 12px;border-top:8px solid #173d31;border-bottom:1px solid #d7dcd0;background:#f6f3eb}
+  .rx-identity{display:flex;align-items:center;gap:23px;min-width:0}.rx-identity-cross{font:300 27px/1 "Manrope Variable",Manrope,sans-serif;color:#ac7040}.rx-programme-wordmark{display:flex;flex-direction:column;gap:3px;font-size:11px;line-height:1.1;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;min-height:44px;justify-content:center;font-weight:600;color:#173a42}.rx-programme-wordmark strong{font:inherit}.rx-programme-note{grid-column:1/-1;font-size:10px;line-height:1.7;color:#58665d;margin:9px 0 0;max-width:850px}
   .rx-brand{font:400 24px/1 "Playfair Display Variable",Georgia,serif;letter-spacing:-.04em;text-decoration:none;white-space:nowrap}.rx-brand span{color:#89724d}.rx-languages{display:flex;align-items:center;gap:4px}.rx-languages a{display:flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;font-size:10px;text-decoration:none;letter-spacing:.06em;color:#627168}.rx-languages a[aria-current=page]{color:#233d34;text-decoration:underline;text-underline-offset:7px}
   .rx-skip{position:absolute;left:20px;top:10px;padding:12px 18px;z-index:20;background:#233d34;color:#fff;transform:translateY(-180%);font-size:12px}.rx-skip:focus{transform:translateY(0)}
   .rx-site-footer{display:flex;justify-content:space-between;align-items:center;gap:25px;max-width:1240px;margin:auto;padding:28px 64px 40px;border-top:1px solid #d7dcd0}.rx-footer-brand{font:400 18px/1.4 "Playfair Display Variable",Georgia,serif;letter-spacing:-.025em;text-decoration:none}.rx-site-footer nav{display:flex;flex-wrap:wrap;gap:8px 25px}.rx-site-footer nav a{display:flex;align-items:center;min-height:44px;font-size:10px;text-decoration:none;color:#627168}.rx-site-footer nav a:hover{text-decoration:underline;text-underline-offset:4px}
-  @media(max-width:760px){.rx-masthead{padding:0 20px;gap:8px}.rx-brand{font-size:21px}.rx-languages{gap:0}.rx-languages a{min-width:38px}.rx-site-footer{align-items:flex-start;flex-direction:column;padding:25px 25px 35px;gap:14px}.rx-site-footer nav{gap:5px 24px}.rx-site-footer nav a{font-size:11px}}
+  @media(max-width:760px){.rx-masthead{padding:13px 20px 12px;gap:0;grid-template-columns:1fr}.rx-identity{justify-content:center;gap:18px}.rx-brand{font-size:21px}.rx-programme-wordmark{font-size:10px}.rx-languages{justify-content:center;gap:0;grid-row:2;margin-top:5px}.rx-languages a{min-width:44px;min-height:36px}.rx-programme-note{text-align:center;font-size:9px;margin-top:5px}.rx-site-footer{align-items:flex-start;flex-direction:column;padding:25px 25px 35px;gap:14px}.rx-site-footer nav{gap:5px 24px}.rx-site-footer nav a{font-size:11px}}
   @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>

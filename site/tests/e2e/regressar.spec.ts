@@ -96,6 +96,12 @@ test('article 12-A is opt-in and reduces required gross for the same target', as
   // Hypotheses are progressive disclosure, not additional required fields.
   const benefit = page.locator('[data-r-benefit]');
   await revealControl(page, '[data-r-benefit]');
+  await revealControl(page, '[data-r-return-year]');
+  await page.locator('[data-r-return-year]').selectOption('2026');
+  for(const id of ['priorResidence','outsidePreviousFiveYears','taxRegular','noNhrRegistration']) {
+    await page.locator(`[data-r-eligibility="${id}"]`).selectOption('yes');
+  }
+  await expect(benefit).toBeEnabled();
   await benefit.check();
   await page.locator('[data-r-calculate]').click();
   expect(digits(await page.locator('[data-r-gross]').textContent())).toBeLessThan(standard);

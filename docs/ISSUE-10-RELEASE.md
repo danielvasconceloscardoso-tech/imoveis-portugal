@@ -1,5 +1,7 @@
 # Issue 10 — Regressar prototype
 
+This initial report is superseded by the [programme-first release](ISSUE-10-PROGRAMME-RELEASE.md) for the current iteration.
+
 A declared take-home salary becomes a Portuguese annual gross estimate, then a source-backed place to explore. The arrival asks for country and net salary; annualisation and tax assumptions stay behind progressive controls. The city reveal filters by affordability and every selected supported preference before any animation starts.
 
 ## Review routes

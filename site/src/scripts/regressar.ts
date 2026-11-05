@@ -2,6 +2,7 @@ import { regressarCopy } from '../lib/regressar-copy';
 import { COUNTRIES, getCountry, convertNetToEuro } from '../lib/regressar-fx';
 import { annualizeNet, grossForNet, TAX_2026 } from '../lib/regressar-tax';
 import { rankCities, regressarMapHref, type Preference, type RankedCity, type HousingMode } from '../lib/regressar-places';
+import { assessEligibility, ELIGIBILITY_QUESTIONS, ELIGIBILITY_COPY, type EligibilityAnswers, type EligibilityAnswer } from '../lib/regressar-eligibility';
 import type { Lang, EdCode } from '../i18n';
 
 /** Salary values remain in this closure: no storage, URL serialization or analytics payload. */
@@ -17,14 +18,28 @@ export function initRegressar() {
  const country=q<HTMLSelectElement>('country'), net=q<HTMLInputElement>('net'), period=q<HTMLSelectElement>('period'), payments=q<HTMLSelectElement>('payments');
  const result=q('result'), error=q('error'), discovery=q('discovery'), benefit=q<HTMLInputElement>('benefit'), reveal=q<HTMLButtonElement>('reveal');
  let targetAnnual=0, revealIndex=0, generation=0;
+ let lifeAbort:AbortController|undefined;
  let mapTask:Promise<import("./regressar-map").RegressarMapHandle>|undefined;
  let mapMatches:RankedCity[]=[], mapSelected="";
  const preferences=new Set<Preference>();
  const signal=(step:string)=>root.dispatchEvent(new CustomEvent('regressar:step',{bubbles:true,detail:{step}}));
  const range={pt:'Este modelo cobre líquidos anuais equivalentes entre 20 000 € e 500 000 €. Abaixo desse intervalo, o mínimo de existência exige outro cálculo.',en:'This model covers equivalent annual net income from €20,000 to €500,000. Below this range, minimum-income protection requires a different calculation.',fr:'Ce modèle couvre un revenu net annuel équivalent de 20 000 € à 500 000 €. En dessous, la protection du minimum de revenu exige un autre calcul.'}[lang];
- const resetCity=()=>{generation++;mapMatches=[];mapSelected='';q('mini-map').hidden=true;const preview=q('reveal-preview');if(preview)preview.hidden=true;q('city').hidden=true;q('no-match').hidden=true;reveal.disabled=false;reveal.textContent=c.reveal;reveal.removeAttribute('aria-busy');revealIndex=0;};
+ const resetCity=()=>{generation++;lifeAbort?.abort();mapMatches=[];mapSelected='';q('mini-map').hidden=true;q('local-life').hidden=true;const preview=q('reveal-preview');if(preview)preview.hidden=true;q('city').hidden=true;q('no-match').hidden=true;reveal.disabled=false;reveal.textContent=c.reveal;reveal.removeAttribute('aria-busy');revealIndex=0;};
  function syncCountry(){const current=getCountry(country.value);text('currency',current.currency);net.setAttribute('aria-label',`${c.netSalary} (${current.currency})`);}
  function syncPeriod(){payments.disabled=period.value==='year';payments.closest<HTMLElement>('[data-r-payment-wrap]')?.toggleAttribute('hidden',period.value==='year');}
+ function eligibility(){
+  const answers:EligibilityAnswers={returnYear:q<HTMLSelectElement>('return-year').value?Number(q<HTMLSelectElement>('return-year').value):null};
+  for(const {id} of ELIGIBILITY_QUESTIONS)answers[id]=root.querySelector<HTMLSelectElement>(`[data-r-eligibility="${id}"]`)?.value as EligibilityAnswer;
+  return assessEligibility(answers);
+ }
+ function refreshEligibility(){
+  const assessment=eligibility(), copy=ELIGIBILITY_COPY[lang], status=q('eligibility-status');
+  status.dataset.status=assessment.status;
+  status.textContent=assessment.reasons.includes('legacy-rules-required')?copy.legacy:assessment.reasons.includes('outside-return-window')?copy.window:copy[assessment.status];
+  benefit.disabled=!assessment.benefitMayBeCompared;
+  if(benefit.disabled)benefit.checked=false;
+  if(targetAnnual)calculate(false);
+ }
  function calculate(scroll=true){
   error.hidden=true;net.removeAttribute('aria-invalid');
   try {
@@ -38,7 +53,12 @@ export function initRegressar() {
    const annualLocal=annualizeNet(amount,period.value as 'month'|'year',Number(payments.value));
    targetAnnual=convertNetToEuro(annualLocal,country.value);
    if(targetAnnual<20000||targetAnnual>500000)throw new Error(range);
+   const allowed=eligibility().benefitMayBeCompared;
+   benefit.disabled=!allowed;if(!allowed)benefit.checked=false;
    const standard=grossForNet(targetAnnual,{regressar:false});
+   const conditional=allowed?grossForNet(targetAnnual,{regressar:true}):null;
+   text('standard-gross',euro(standard.grossAnnual));text('benefit-gross',conditional?euro(conditional.grossAnnual):'—');
+   text('programme-difference',conditional?`${{pt:'Menos bruto necessário',en:'Less gross required',fr:'Brut nécessaire en moins'}[lang]}: ${euro(standard.grossAnnual-conditional.grossAnnual)} / ${c.year.toLowerCase()}`:'');
    const projected=benefit.checked?grossForNet(targetAnnual,{regressar:true}):standard;
    text('gross',euro(projected.grossAnnual));text('net-result',euro(projected.netAnnual));
    text('declared',euro(targetAnnual));text('irs',euro(projected.irs));text('ss',euro(projected.socialSecurity));text('solidarity',euro(projected.solidarity));
@@ -55,6 +75,8 @@ export function initRegressar() {
  }
  root.querySelector('form')?.addEventListener('submit',e=>{e.preventDefault();calculate();});
  benefit.addEventListener('change',()=>{if(targetAnnual)calculate(false);});
+ q('return-year').addEventListener('change',refreshEligibility);
+ root.querySelectorAll<HTMLSelectElement>('[data-r-eligibility]').forEach(el=>el.addEventListener('change',refreshEligibility));
  for(const e of [country,net,period,payments])e.addEventListener('input',()=>{targetAnnual=0;result.hidden=true;discovery.hidden=true;resetCity();error.hidden=true;});
  country.addEventListener('change',syncCountry);period.addEventListener('change',syncPeriod);
  root.querySelectorAll<HTMLButtonElement>('[data-r-preference]').forEach(button=>button.addEventListener('click',()=>{const value=button.dataset.rPreference as Preference;preferences.has(value)?preferences.delete(value):preferences.add(value);button.setAttribute('aria-pressed',String(preferences.has(value)));resetCity();signal('preference');}));
@@ -62,15 +84,20 @@ export function initRegressar() {
  async function showPlace(place:RankedCity,matches:RankedCity[]){
   const city=q('city');text('city-name',place.name);text('city-story',place.line[lang]);
   const photo=q<HTMLImageElement>('city-photo');photo.src=place.photo;photo.alt=place.alt[lang];
-  text('city-housing',`${euro(place.monthlyHousing)} / ${c.month.toLowerCase()}`);text('city-cost',`${euro(place.monthlyHousing)} / ${c.month.toLowerCase()}`);
+  text('city-housing',`${q<HTMLSelectElement>('housing').value==='rent'?c.rent:c.buy} · 80 m²`);text('city-cost',`${euro(place.monthlyHousing)} / ${c.month.toLowerCase()}`);
   text('city-price',`${euro(place.priceM2)} / m²`);text('city-period',`INE · ${place.period}`);
   text('city-credit',place.photoCredit||'');text('city-deposit',q<HTMLSelectElement>('housing').value==='buy'?`${{pt:'Entrada necessária',en:'Deposit required',fr:'Apport nécessaire'}[lang]}: ${euro(place.deposit)} + ${{pt:'impostos e despesas',en:'taxes and fees',fr:'impôts et frais'}[lang]}`:'');text('after-housing',euro(targetAnnual/12-place.monthlyHousing));
   text('city-budget',`${euro(targetAnnual/12*.35)} / ${c.month.toLowerCase()}`);
   const link=q<HTMLAnchorElement>('map');link.href=regressarMapHref(place.id,lang,ed);
   const evidence=q('city-evidence');evidence.replaceChildren();
-  for(const preference of preferences){const fact=place.evidence[preference];if(!fact)continue;const li=document.createElement('li'),a=document.createElement('a');a.href=fact.source;a.target='_blank';a.rel='noopener';a.textContent=`${c.preferences[preference]} · ${fact.detail}${fact.value!==null&&fact.unit==='km-straight-line'?` · ${fact.value} km`:''}`;li.append(a);evidence.append(li);}
+  for(const preference of preferences){const fact=place.evidence[preference];if(!fact)continue;const li=document.createElement('li'),a=document.createElement('a');a.href=fact.source;a.target='_blank';a.rel='noopener';a.textContent=`${c.preferences[preference]} · ${fact.detail}${fact.value!==null&&fact.unit==='km-straight-line'?` · ${fact.value} km ${{pt:'em linha reta',en:'straight line',fr:'à vol d’oiseau'}[lang]}`:''}`;li.append(a);evidence.append(li);}
   if(!preferences.size){const li=document.createElement('li');li.textContent=`80 m² · ${Math.round(place.monthlyHousing/(targetAnnual/12)*100)}% ${c.netSalary.toLowerCase()} / ${c.month.toLowerCase()}`;evidence.append(li);}
-  city.hidden=false;city.dataset.place=place.id;reveal.textContent=c.another;
+  city.hidden=false;q('local-life').hidden=false;city.dataset.place=place.id;reveal.textContent=c.another;
+  lifeAbort?.abort();lifeAbort=new AbortController();const lifeSignal=lifeAbort.signal, monthly=targetAnnual/12;
+  for(const name of ['schools','hospitals','buying-power']){const el=q(name);if(el){el.replaceChildren();el.setAttribute('aria-busy','true');}}
+  text('life-note','');
+  void import('./regressar-life-view').then(({renderRegressarLife})=>{if(!lifeSignal.aborted)return renderRegressarLife(root,place,monthly,lang,lifeSignal);}).catch(()=>{if(!lifeSignal.aborted)text('life-note',{pt:'Não foi possível carregar estes dados. A ligação ao mapa continua disponível.',en:'These details could not be loaded. The map link remains available.',fr:'Ces données ne sont pas disponibles. Le lien vers la carte reste accessible.'}[lang]);});
+
   q('city-name').focus({preventScroll:true});city.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});
   signal('place');
   const container=q('mini-map');
@@ -101,5 +128,5 @@ export function initRegressar() {
  }
  const sources=q('sources');
  if(sources){const ul=document.createElement('ul');for(const source of TAX_2026.sources){const li=document.createElement('li'),a=document.createElement('a');a.href=source.url;a.textContent=source.name;a.rel='noopener';a.target='_blank';li.append(a);ul.append(li);}sources.append(ul);}
- syncCountry();syncPeriod();signal('arrival');
+ syncCountry();syncPeriod();refreshEligibility();signal('arrival');
 }

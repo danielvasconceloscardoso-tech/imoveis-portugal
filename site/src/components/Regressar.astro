@@ -1,12 +1,24 @@
 ---
 import type { EdCode, Lang } from "../i18n";
 import { regressarCopy } from "../lib/regressar-copy";
+import { experienceCopy, imageQuestions } from "../lib/regressar-experience-copy";
+import { ELIGIBILITY_QUESTIONS } from "../lib/regressar-eligibility";
 import { COUNTRIES } from "../lib/regressar-fx";
 import "../styles/regressar.css";
 
 interface Props { lang: Lang; ed: EdCode; }
 const { lang, ed } = Astro.props;
 const t = regressarCopy(lang);
+const x = experienceCopy(lang);
+const answerLabels = {pt:{unknown:"Por responder",yes:"Sim",no:"Não",year:"Ano do regresso",title:"Regressar. À sua maneira."},en:{unknown:"Not answered",yes:"Yes",no:"No",year:"Return year",title:"Return. On your terms."},fr:{unknown:"Sans réponse",yes:"Oui",no:"Non",year:"Année du retour",title:"Revenir. À votre rythme."}}[lang];
+const preferenceImages = {
+  beach: {src:"matosinhos-leixoes-por-do-sol",alt:{pt:"Pôr do sol em Matosinhos, com o terminal de Leixões em silhueta",en:"Sunset in Matosinhos, with the Leixões terminal in silhouette",fr:"Coucher de soleil à Matosinhos, avec le terminal de Leixões en silhouette"}},
+  golf: {src:"algarve-golfe-amanhecer",alt:{pt:"Um fairway no Algarve, com nevoeiro da manhã",en:"A fairway in the Algarve in morning mist",fr:"Un fairway en Algarve dans la brume du matin"}},
+  art: {src:"braga-bom-jesus-por-do-sol",alt:{pt:"Braga ao pôr do sol, vista do Bom Jesus",en:"Braga at sunset, seen from Bom Jesus",fr:"Braga au coucher du soleil, vue du Bom Jesus"}},
+  food: {src:"porto-douro-entardecer",alt:{pt:"O Douro e a ponte Luís I ao entardecer, Porto",en:"The Douro and Luís I bridge at dusk, Porto",fr:"Le Douro et le pont Luís I au crépuscule, Porto"}},
+  schools: {src:"guimaraes-paco-dos-duques-castelo",alt:{pt:"O Paço dos Duques e o castelo de Guimarães, num contexto urbano",en:"The Palace of the Dukes and Guimarães castle in their urban setting",fr:"Le palais des Ducs et le château de Guimarães dans leur cadre urbain"}},
+  airport: {src:"porto-douro-amanhecer",alt:{pt:"O Porto e o Douro ao amanhecer, como contexto da região",en:"Porto and the Douro at dawn, showing the region's setting",fr:"Porto et le Douro à l’aube, pour situer la région"}},
+};
 const country = COUNTRIES.some((c) => c.id === ed) ? ed : "lu";
 const initialCurrency = COUNTRIES.find((c) => c.id === country)?.currency ?? "EUR";
 const fiscalReview = {
@@ -29,7 +41,7 @@ const extras = {
       </picture>
       <figcaption>Porto · Douro</figcaption>
     </figure>
-    <div class="rx-welcome"><h1 id="rx-title">{t.title}</h1><p>{t.lede}</p></div>
+    <div class="rx-welcome"><h1 id="rx-title">{answerLabels.title}</h1><p>{x.introduction}</p></div>
     <form class="rx-entry" data-r-form novalidate>
       <label class="rx-country" for="rx-country"><span>{t.country}</span><select id="rx-country" data-r-country>{COUNTRIES.map((c) => <option value={c.id} selected={c.id === country}>{t.countries[c.id]}</option>)}</select></label>
       <div class="rx-salary">
@@ -53,13 +65,28 @@ const extras = {
       <div><dt>{t.solidarity}</dt><dd data-r-solidarity>—</dd></div>
       <div class="rx-ledger-total"><dt>{t.annualNet}</dt><dd data-r-net-result>—</dd></div>
     </dl>
-    <div class="rx-benefit"><label><input type="checkbox" data-r-benefit /><span>{t.benefitTitle}</span></label><p>{t.benefitNote}</p><p data-r-alternative></p><details><summary>{t.benefitCondition}</summary><p>{extras.benefit}</p><a href="https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/cirs_rep/Pages/irs12a.aspx" target="_blank" rel="noopener noreferrer">CIRS · Artigo 12.º-A ↗</a></details></div>
+    <section class="rx-benefit" aria-labelledby="rx-programme-title">
+      <div class="rx-programme-intro">
+        <p class="rx-kicker">{x.programmeTitle}</p><h3 id="rx-programme-title">{x.compare}</h3>
+        <p>{t.benefitNote}</p>
+        <label class="rx-benefit-toggle"><input type="checkbox" data-r-benefit disabled aria-describedby="rx-eligibility-status" /><span>{t.benefitTitle}</span></label>
+        <dl class="rx-relief-comparison"><div><dt>{t.standard}</dt><dd data-r-standard-gross>—</dd></div><div><dt>{t.eligible}</dt><dd data-r-benefit-gross>—</dd></div></dl><p class="rx-programme-difference" data-r-programme-difference></p><p class="rx-comparison" data-r-alternative hidden></p>
+        <p class="rx-eligibility-status" id="rx-eligibility-status" data-r-eligibility-status data-status="incomplete" role="status">{x.incomplete}</p>
+      </div>
+      <details class="rx-eligibility" data-r-eligibility-panel>
+        <summary>{x.eligibility}</summary>
+        <label class="rx-eligibility-year" for="rx-return-year"><span>{answerLabels.year}</span><select id="rx-return-year" data-r-return-year><option value="">{answerLabels.unknown}</option>{[2022,2023,2024,2025,2026,2027].map(year=><option value={year}>{year}</option>)}</select></label>
+        {ELIGIBILITY_QUESTIONS.map(question=><label class="rx-eligibility-question" for={`rx-eligibility-${question.id}`}><span>{question.label[lang]}<small>{question.hint[lang]}</small></span><select id={`rx-eligibility-${question.id}`} data-r-eligibility={question.id}><option value="unknown">{answerLabels.unknown}</option><option value="yes">{answerLabels.yes}</option><option value="no">{answerLabels.no}</option></select></label>)}
+        <details class="rx-programme-rules"><summary>{x.conditions}</summary><p>{extras.benefit}</p><a href="https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/cirs_rep/Pages/irs12a.aspx" target="_blank" rel="noopener noreferrer">CIRS · Artigo 12.º-A</a></details>
+        <a class="rx-official-source" href="https://www.programaregressar.gov.pt/pt/medida-de-apoio-fiscal/" target="_blank" rel="noopener noreferrer">{x.officialProgramme}</a>
+      </details>
+    </section>
     <details class="rx-method" data-r-method><summary>{t.assumptions}</summary><p>{extras.taxAssumptions}</p><p>{extras.tax}</p><p>{fiscalReview[1]}</p><div data-r-method-detail></div><p>{t.disclaimer}</p></details>
   </section>
 
   <section class="rx-discovery" data-r-discovery hidden aria-labelledby="rx-tastes-title">
-    <div class="rx-discovery-intro"><p class="rx-kicker">Portugal</p><h2 id="rx-tastes-title">{t.tastes}</h2><p>{t.tastesNote}</p></div>
-    <div class="rx-preferences" role="group" aria-label={t.tastes}>{(["beach", "golf", "art", "food", "schools", "airport"] as const).map((p) => <button type="button" data-r-preference={p} aria-pressed="false">{t.preferences[p]}</button>)}</div>
+    <div class="rx-discovery-intro"><p class="rx-kicker">Portugal</p><h2 id="rx-tastes-title">{x.revealQuestion}</h2><p>{t.tastesNote}</p></div>
+    <div class="rx-preferences rx-image-questions" role="group" aria-label={t.tastes}>{imageQuestions.map(question => <button type="button" data-r-preference={question.id} aria-pressed="false" aria-label={`${question.answer[lang]}. ${question.question[lang]}`}><img src={`/img/v2/${preferenceImages[question.id].src}-640.webp`} alt={preferenceImages[question.id].alt[lang]} width="640" height="420" loading="lazy" decoding="async" /><span class="rx-image-question"><strong>{question.answer[lang]}</strong><span>{question.question[lang]}</span></span><span class="rx-choice-mark" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m5 12 4 4L19 6" stroke="currentColor" stroke-width="2" /></svg></span></button>)}</div>
     <div class="rx-housing"><label for="rx-housing"><span>{t.housingBudget}</span><select id="rx-housing" data-r-housing><option value="rent">{t.rent}</option><option value="buy">{t.buy}</option></select></label><p><strong data-r-budget>—</strong></p><p class="rx-fine">{extras.housing}</p></div>
     <details class="rx-housing-details"><summary>{t.housingAssumptions}</summary><p>{extras.rent}</p><p>{extras.buy}</p><p>{extras.formula}</p><p>{extras.tastes}</p><p>{extras.reserveHint}</p></details>
     <button class="rx-primary rx-reveal" type="button" data-r-reveal><span>{t.reveal}</span><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.5" /></svg></button>
@@ -68,6 +95,11 @@ const extras = {
     <section class="rx-city" data-r-city hidden aria-labelledby="rx-city-name">
       <figure class="rx-city-photo"><img data-r-city-photo data-r-photo src="/img/v2/porto-douro-entardecer-1024.webp" alt="" loading="lazy" width="1024" height="683" /><figcaption data-r-city-credit></figcaption></figure>
       <div class="rx-city-copy"><p class="rx-kicker">{extras.one}</p><h2 id="rx-city-name" data-r-city-name tabindex="-1"></h2><p class="rx-city-story" data-r-city-story data-r-story></p><p class="rx-city-cost"><strong data-r-city-cost data-r-cost></strong></p><p class="rx-fine" data-r-city-period></p><ul class="rx-city-evidence" data-r-city-evidence data-r-evidence></ul><p class="rx-fine" data-r-city-housing></p><p class="rx-fine" data-r-city-price></p><p class="rx-fine" data-r-city-deposit></p><p class="rx-remaining"><span>{t.afterHousing}</span> <strong data-r-after-housing></strong><small>{t.availableBeforeLivingCosts}</small></p><a class="rx-primary" data-r-map href="#"><span>{t.openMap}</span><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.5" /></svg></a></div>
+    </section>
+    <section class="rx-local-life" data-r-local-life hidden aria-labelledby="rx-life-title">
+      <div class="rx-power"><h3 id="rx-life-title">{x.power}</h3><div data-r-buying-power></div><p class="rx-fine" data-r-power-note></p></div>
+      <div class="rx-life-columns"><section aria-labelledby="rx-schools-title"><h3 id="rx-schools-title">{x.schools}</h3><ul data-r-schools></ul></section><section aria-labelledby="rx-hospitals-title"><h3 id="rx-hospitals-title">{x.hospitals}</h3><ul data-r-hospitals></ul></section></div>
+      <p class="rx-fine" data-r-life-note>{x.coverageNote}</p><p class="rx-fine">{x.medicalNote} {x.distanceNote}</p>
     </section>
     <div class="rx-mini-map" data-r-mini-map hidden role="region" aria-label={extras.map}></div>
   </section>
