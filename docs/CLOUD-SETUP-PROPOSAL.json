@@ -1,0 +1,11 @@
+{
+  "config": {
+    "install_script": "#!/usr/bin/env bash\nset -euo pipefail\ncd /workspace/imoveis-portugal/site\nnpm ci --no-audit --no-fund\ntest -x /usr/bin/chromium\n",
+    "start_skill": "Use /workspace/imoveis-portugal, the existing checkout. Each task is isolated; do not create a Git worktree unless the user explicitly requests one. Inspect git status and the branch before working. Preserve backup/pre-codex-2026-11-05 and pre-codex-2026-11-05 permanently. Work on the development branch; no merge/deploy/force-push to main.\nFrom /workspace/imoveis-portugal/site start: ASTRO_TELEMETRY_DISABLED=1 WORKERS_CI_BRANCH=main npm run dev -- --host 127.0.0.1 --port 4321. Verify HTTP200 plus interactive language selection; a listening port alone is insufficient. WORKERS_CI_BRANCH is a local content-filter flag, not a deployment command.\nFor validation run npm run test:content, npm run test:worker and ASTRO_TELEMETRY_DISABLED=1 WORKERS_CI_BRANCH=main npm run build:test. Run PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium npm run test:e2e against the completed build. The runner starts its own preview on4323 unless E2E_BASE_URL is set. For Lighthouse start npm run preview -- --host 127.0.0.1 --port 4323 --outDir ./artifacts/dist, then node scripts/wait-for-preview.mjs and CHROME_PATH=/usr/bin/chromium npm run test:lighthouse. See docs/TESTING.md for route budgets and limitations.\nProcesses must restart in each task; dependencies/build files may be retained. Never expose loopback preview links in the onboarding UI. No production credentials are required by these tests. API access to api.github.com is needed only to create/read pull requests; reuse injected GitHub authentication and never request raw token values.",
+    "network": {
+      "allowed_domains": [
+        "api.github.com"
+      ]
+    }
+  }
+}

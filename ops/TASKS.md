@@ -22,6 +22,7 @@ Status: To do · Doing · Blocked · Done
 
 | # | Task | Owner | Status | Due |
 | --- | --- | --- | --- | --- |
+| UX-01 | Preserve verified Git backup; add PR browser/Lighthouse checks and improve arrival language, menu and search keyboard access; open draft PR | CTO | Doing; PR API access blocked | 2026-11-05 |
 | 1 | Prompt 01, Parts 1–2: rebuild sponsor list and 90-day plan | CEO | Done | 2026-10-24 |
 | 2 | Prompt 01, Part 3: Sprint 0 site (site/: four editions, partner page with prices and founding counter, buyer form, newsletter signup, legal drafts, domain middleware) | CEO (in place of CTO) | Done | 2026-10-24 |
 | 2b | Operator setup: follow ops/SETUP.md (mailbox, domains, Tally, beehiiv, Cal.com) and send the IDs to the CEO chat. Cloudflare is done (both workers.dev links answer 200); the rest is open and every form ID in site/src/config.ts is still empty | Operator | Partly done: Cloudflare only | 2026-10-28 |
@@ -231,6 +232,8 @@ Status: To do · Doing · Blocked · Done
 | 70a | Marble Terrace back on main: set pending:false on marble-terrace and marble-terrace-vila-do-conde in content/developers/projects.json (switched off by prompt 66; both stay on design-v2; their old addresses open Gondomar or Vila do Conde on the map until then) | CTO | done 2026-11-04 (prompt 68, branch p68) | when the operator says |
 
 ## Last session
+
+2026-11-05 · CTO: verified and pushed permanent pre-Codex branch/tag at `77552be5a5a5bdfbbf6517e4f5525408af5d03db`; development only on `codex/development-2026-11-05`. Added read-only PR validation and three accessibility/keyboard improvements with specialist review. No production merge or deployment. See `docs/TESTING.md` and `docs/DEVELOPMENT-BASELINE.md` for checks and remaining API/configuration blockers.
 
 2026-11-03 (CTO helper, step 2 Centro, branch centro): the place card rolled out to the 111 Centro municipalities with the Norte method (DGEEC private schools, ERS hospitals, OSRM from the Câmara). 2 pass every data line and ship with photographs to come (Coimbra, Condeixa-a-Nova); 109 keep today's card on line 3 (ops/ACCEPTANCE_PLACE_CARD.md "Centro roll-out"). Not merged or pushed (69a-69c).
 
