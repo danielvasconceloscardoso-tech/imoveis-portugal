@@ -7,7 +7,7 @@ description: "What New Yorkers should know about the Algarve: Faro flights, Vila
 tldr: "Seasonal nonstop service between Newark and Faro in 2026 made Algarve travel unusually convenient for some New Yorkers. Here's how Vilamoura, Quinta do Lago and Lagos compare."
 published: 2026-11-05
 updated: 2026-11-05
-cta: agency
+cta: none
 related: []
 sources: []
 ---
