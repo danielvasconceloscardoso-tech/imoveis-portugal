@@ -13,6 +13,7 @@ import { get as savedItems } from "../lib/saved";
 import { imt as imtOf, purchase } from "../lib/sims";
 import { heartHTML } from "./hearts";
 import { createGolf } from "./golf-mode";
+import { placeStory, placeDetailHTML, placeHistoryHTML, creditFor, photoCreditHTML } from "./map-place-presentation";
 
 // The free price layer (operator, step 1): the market median per quarter over the last five years (/data/map/price5.json).
 type Series = { n: string; m2: (number | null)[] };
@@ -46,6 +47,7 @@ export function initMapV3(root: HTMLElement) {
   if ((root as any).__m3init) return; (root as any).__m3init = true;
   const cfg = JSON.parse(root.querySelector("[data-m3-cfg]")!.textContent || "{}");
   const L = cfg.labels, mode = root.dataset.mode as "page" | "home";
+  const premium = mode === "page" && root.hasAttribute("data-main-premium");
   const $ = <T extends HTMLElement = HTMLElement>(s: string) => root.querySelector<T>(s)!;
   const loc = root.dataset.locale || "pt-PT";
   const nf = new Intl.NumberFormat(loc), nf1 = new Intl.NumberFormat(loc, { minimumFractionDigits: 1, maximumFractionDigits: 1 });
@@ -58,6 +60,13 @@ export function initMapV3(root: HTMLElement) {
   const esc = (t: string) => t.replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[ch]!);
   const q = new URLSearchParams(location.search);
   const canvas = $("[data-canvas]"), sheet = $("[data-sheet]"), sheetIn = $("[data-sheet-in]"), tip = $("[data-tip]"), labelsEl = $("[data-labels]");
+  if (premium) {
+    // The authentic geographic poster stays underneath an interactive canvas
+    // until the first frame containing municipality geometry has been drawn.
+    canvas.style.opacity = "0"; canvas.style.transition = reduce() ? "none" : "opacity 160ms ease-out";
+    const poster = root.querySelector<HTMLElement>(".m3-poster");
+    if (poster) poster.style.transition = reduce() ? "none" : "opacity 160ms ease-out";
+  }
   // p70 r3 (J2-02): every map data file is fetched with a retry, so a few seconds without signal never leave the map as a
   // still picture: the next try comes when the browser is back online, or after a growing wait (1 s, 2 s, 4 s ... 15 s), or
   // at once from "Try again" (window.__m3retry). A missing file (404) is null, as before.
@@ -100,12 +109,36 @@ export function initMapV3(root: HTMLElement) {
   let qi = -1;  // quarter index; -1 = latest
   let map: any = null, ml: any = null, loading: Promise<void> | null = null;
   let features: any[] = []; const byS = new Map<string, Props>();
+  // Projecting through 3D terrain samples its depth texture. Reuse each place's
+  // screen point until the camera/elevation changes instead of every hover.
+  const projectedPlaces = new Map<string, { x: number; y: number }>();
+  let projectionNeedsRender = true, projectionStyle = "";
+  const invalidateProjection = () => { projectedPlaces.clear(); projectionNeedsRender = true; };
+  const finishProjectionRender = () => {
+    if (!map) return;
+    const terrain = map.getTerrain?.();
+    const style = `${map.transform?.fov}|${terrain?.source}|${terrain?.exaggeration}`;
+    // A hover highlight repaints but does not move a place. Keep its cached point
+    // until the camera/elevation changes, then refresh once after the new frame.
+    if (projectionNeedsRender || style !== projectionStyle) {
+      projectedPlaces.clear(); projectionStyle = style; projectionNeedsRender = false;
+      labelsSoon();
+    }
+  };
+  const projectPlace = (p: Props) => {
+    let point = projectedPlaces.get(p.s);
+    if (!point) { point = map.project([p.x, p.y]); projectedPlaces.set(p.s, point!); }
+    return point!;
+  };
   let parishes: { feats: any[]; data: Record<string, Series> } | null = null;
   let golf: any = null, beaches: [number, number, string][] | null = null;
   let breaks: Record<Layer, number[]> = {} as any;
   let tourAbort: (() => void) | null = null;
   // Prompt 78: golf mode (golf-mode.ts), created at the start below; the map page only.
   let golfX: ReturnType<typeof createGolf> | null = null;
+  const mainPresentation = () => premium && !golfX?.on();
+  const shortLandscape = () => mainPresentation() && matchMedia("(max-height: 500px) and (orientation: landscape)").matches;
+  let cameraTouched = false, refitNational: (() => void) | null = null;
   const projects: Proj[] = cfg.projects || [];
   const projMunis = new Set(projects.map((p) => p.muni));
   // Prompt 68 (4 Nov 2026), the golden sample of the method (content/METHOD.md): a place whose shown partner projects carry
@@ -156,9 +189,13 @@ export function initMapV3(root: HTMLElement) {
   // With no colour layer, a hovered place lifts in ivory (the relief stays the picture).
   const liftColor = () => (layer === "none" ? "#fbf7ee" : colorExpr());
   const colorOf = (v: number | null) => { if (v == null) return NODATA; const b = breaks[layer]; let i = 0; while (i < b.length - 1 && v > b[i + 1]) i++; return RAMP[i]; };
+  const reachState = new Map<number, boolean>();
   function applyValues() {
     if (!map || !P) return;
-    for (const f of features) map.setFeatureState({ source: "munis", id: f.id }, { v: value(P.munis[f.properties.s], layer) ?? -1e9, reach: reaches(f.properties.s) });
+    for (const f of features) {
+      const reach = reaches(f.properties.s); reachState.set(f.id, reach);
+      map.setFeatureState({ source: "munis", id: f.id }, { v: value(P.munis[f.properties.s], layer) ?? -1e9, reach });
+    }
     if (parishes && map.getSource("pars")) for (const f of parishes.feats) map.setFeatureState({ source: "pars", id: f.properties.id }, { v: value(parishes.data[f.properties.id], layer) ?? -1e9 });
   }
   function repaint() {
@@ -189,7 +226,14 @@ export function initMapV3(root: HTMLElement) {
     slider.setAttribute("aria-valuenow", String(Math.round(budget))); slider.setAttribute("aria-valuetext", money(budget));
     amountBtn.textContent = moneyCur(budget);
     sentence();
-    if (map && P) { clearTimeout(reachT); reachT = window.setTimeout(() => { for (const f of features) map.setFeatureState({ source: "munis", id: f.id }, { reach: reaches(f.properties.s) }); }, 30); }
+    if (map && P) { clearTimeout(reachT); reachT = window.setTimeout(() => {
+      if (!map?.getSource("munis")) return;
+      for (const f of features) {
+        const reach = reaches(f.properties.s);
+        if (reachState.get(f.id) === reach) continue;
+        reachState.set(f.id, reach); map.setFeatureState({ source: "munis", id: f.id }, { reach });
+      }
+    }, 30); }
     if (remember) { budgetSet = true; try { localStorage.setItem("ip.budget", String(Math.round(budget))); } catch { /* private mode */ } }
     if (selected && !sheet.hidden && !pinA && view === "card" && !selPar) showPlace(selected, false);
     syncUrl();
@@ -251,14 +295,18 @@ export function initMapV3(root: HTMLElement) {
   }
 
   // ------------------------------------------------------------ the map
-  let lostT = 0;
+  let lostT = 0, cardResizeFrame = 0;
   // Remove the map and its markers and free the GPU (leaving the page, or a lost context); load() builds it again.
   async function teardown() {
     if (loading) await loading.catch(() => {});  // never pull the map from under a load in progress
-    clearTimeout(lostT); stopTour(); stopPlay(); rotating = false; golfX?.detach();
+    clearTimeout(lostT); clearTimeout(reachT); stopTour(); stopPlay(); arrStop(); rotating = false; golfX?.detach();
+    invalidateProjection(); reachState.clear(); cancelAnimationFrame(hoverFrame); hoverFrame = 0; hoverPoint = null;
+    cancelAnimationFrame(labT); labT = 0; hoverS = null; tip.hidden = true;
+    cancelAnimationFrame(cardResizeFrame); cardResizeFrame = 0;
     markers.forEach((m) => m.m.remove()); markers = []; still?.remove(); still = null;
     try { map?.remove(); } catch { /* already gone */ }
     map = null; loading = null; parLoading = null; clusterOn = false; root.classList.remove("is-live");
+    delete root.dataset.mapPainted; if (premium) canvas.style.opacity = "0";
   }
   async function rebuild(toFlat: boolean) { await teardown(); if (toFlat) { flat = true; dimButtons(); } load(); }
   function load(): Promise<void> {
@@ -284,11 +332,25 @@ export function initMapV3(root: HTMLElement) {
       computeBreaks();
       const narrow = root.clientWidth < 700;
       map = new ml.Map({
-        container: canvas, attributionControl: false, pixelRatio: Math.min(devicePixelRatio || 1, 2), maxTileCacheSize: narrow ? 48 : 96, dragRotate: !flat, pitchWithRotate: !flat, maxPitch: 72, minZoom: 4.6, maxZoom: 12.5, fadeDuration: 150,
+        container: canvas, attributionControl: false, pixelRatio: Math.min(devicePixelRatio || 1, 2), maxTileCacheSize: narrow ? 48 : 96, dragRotate: !flat, pitchWithRotate: !flat, maxPitch: 72, minZoom: shortLandscape() ? 4 : 4.6, maxZoom: 12.5, fadeDuration: 150,
         center: [-8.6, 39.5], zoom: narrow ? 5.6 : 6.2, pitch: flat ? 0 : 52, bearing: flat ? 0 : -12,
         style: { version: 8, sources: {}, layers: [{ id: "bg", type: "background", paint: { "background-color": "#e7e2d7" } }],
           ...(flat ? {} : { sky: SKY }) } as any,
       });
+      // Camera moves, newly decoded elevation and resizes can all move a label.
+      // Invalidating on render also covers golf mode's field-of-view changes.
+      map.on("move", invalidateProjection); map.on("resize", invalidateProjection); map.on("render", finishProjectionRender);
+      map.on("resize", () => {
+        if (!mainPresentation() || cardResizeFrame) return;
+        cardResizeFrame = requestAnimationFrame(() => {
+          cardResizeFrame = 0;
+          if (!map || !mainPresentation()) return;
+          if (shortLandscape()) map.setMinZoom(4);
+          if (!sheet.hidden) { arrStop(); map.jumpTo({ padding: mainCardPadding() }); }
+          else if (!cameraTouched && !selected && !selPar && !selRegion && !selProj && !q.has("pins") && !q.has("tour")) refitNational?.();
+        });
+      });
+      map.on("sourcedata", (event: any) => { if (event.sourceId === "dem" || event.sourceId === "dem2") invalidateProjection(); });
       await new Promise<void>((res) => map.on("load", () => res()));
       // iPhone Safari can drop the WebGL context under memory pressure. MapLibre restores it when the browser gives it
       // back; if that hasn't happened within 3 s, the map is rebuilt flat (2D), so the reader never sees a blank map.
@@ -329,23 +391,40 @@ export function initMapV3(root: HTMLElement) {
       map.addLayer({ id: "sel", type: "line", source: "munis", filter: ["==", ["get", "s"], ""], paint: { "line-color": "#111214", "line-width": 2.2 } });
       if (!flat) map.setTerrain({ source: "dem", exaggeration: 1.5 });
       applyValues(); legend(); sentence();
-      root.classList.add("is-live");
+      if (!premium) root.classList.add("is-live");
+      else {
+        const paintingMap = map;
+        const reveal = () => {
+          if (map !== paintingMap || !paintingMap.isSourceLoaded("munis")) return;
+          if (!paintingMap.queryRenderedFeatures(undefined, { layers: ["land"] }).length) return;
+          paintingMap.off("render", reveal);
+          canvas.style.opacity = "1"; root.classList.add("is-live"); root.dataset.mapPainted = "true";
+          root.dispatchEvent(new Event("m3:painted"));
+        };
+        paintingMap.on("render", reveal);
+      }
       // Frame the country in the space the glass leaves free: below the top bar, beside (desktop) or above (mobile) the
       // region postcards (the map page) or the small dock (the home page).
+      const fitHome = () => {
+      const short = shortLandscape(), narrow = root.clientWidth < 700;
       const st = canvas.getBoundingClientRect(), tb = $(".m3-top").getBoundingClientRect();
       const pcEl = root.querySelector<HTMLElement>("[data-postcards]"), dk = (pcEl && pcEl.offsetParent ? pcEl : $(".m3-dock")).getBoundingClientRect();
-      const pad = narrow ? { top: tb.bottom - st.top + 6, bottom: Math.max(6, st.bottom - dk.top + 6), left: 6, right: 6 }
+      const pad = mainPresentation() ? { top: tb.bottom - st.top + 16, bottom: Math.max(20, st.bottom - dk.top + 16), left: 24, right: 24 } : narrow ? { top: tb.bottom - st.top + 6, bottom: Math.max(6, st.bottom - dk.top + 6), left: 6, right: 6 }
         : { top: tb.bottom - st.top + 20, bottom: 40, left: pcEl ? Math.round(dk.right - st.left + 16) : Math.round((dk.right - st.left) * 0.55), right: 60 };
       let fit: any; try { fit = map.cameraForBounds([[-12.4, 36.9], [-6.15, 42.17]], { padding: pad }); } catch { fit = null; }
       fit ??= map.cameraForBounds([[-12.4, 36.9], [-6.15, 42.17]], { padding: 8 });
       // Pitched, the south comes closer to the eye: aim a little south so the Algarve stays in frame.
       // p70 (MI-12): on a desktop the country comes a little closer (+0.4, was +0.2), filling the space beside the postcards.
-      const home = { center: flat ? fit.center : [fit.center.lng, fit.center.lat - (narrow ? 0.15 : 0.45)], zoom: fit.zoom + (flat ? 0 : narrow ? 0.28 : 0.4), pitch: flat ? 0 : 50, bearing: flat ? 0 : -12 };
+      return { center: flat || short ? fit.center : [fit.center.lng, fit.center.lat - (narrow ? 0.15 : 0.45)], zoom: fit.zoom + (flat || short ? 0 : narrow ? 0.28 : 0.4), pitch: flat ? 0 : short ? 35 : 50, bearing: flat ? 0 : -12 };
+      };
+      const home = fitHome();
+      refitNational = () => { const next = fitHome(); (root as any).__home = next; map.jumpTo(next); };
       (root as any).__home = home;
       // p70 (S-09): the flight in plays only when the map is ready early; on a slow network the still picture has stood in its
       // place, so the live map takes its framing without a jump.
       const dl = selected ? byS.get(selected) : null, dp = selProj ? projects.find((x) => x.id === selProj) : null;
-      if (mode === "page" && !selected && !selPar && !selRegion && !selProj && !q.has("q") && !reduce() && performance.now() < 4500) { map.jumpTo({ center: [-13.4, 38.6], zoom: home.zoom - 1.2, pitch: 22, bearing: home.bearing - 28 }); map.flyTo({ ...home, duration: 3400, curve: 1.15, easing: ease, essential: true }); }
+      const mainArrival = premium && q.get("mode") !== "golf";
+      if (mode === "page" && !selected && !selPar && !selRegion && !selProj && !q.has("q") && !reduce() && performance.now() < 4500) { map.jumpTo({ center: [-13.4, 38.6], zoom: home.zoom - (mainArrival ? 0.45 : 1.2), pitch: mainArrival ? flat ? 0 : 40 : 22, bearing: mainArrival && flat ? 0 : home.bearing - (mainArrival ? 8 : 28) }); map.flyTo({ ...home, duration: mainArrival ? 900 : 3400, curve: 1.15, easing: ease, essential: true }); }
       // p70 (MI-22, A-08): a ?place= or ?project= link starts the live map on that place, so the camera never waits on the
       // tiles of the whole country (the short flight to it follows).
       else if (mode === "page" && !selPar && (dl || dp)) map.jumpTo({ ...home, center: dp ? [dp.lon, dp.lat] : [dl!.x, dl!.y], zoom: Math.max(home.zoom, dp ? 10 : zoomFor(dl!) - 0.6) });
@@ -372,10 +451,8 @@ export function initMapV3(root: HTMLElement) {
       if (mode === "home" && !flat && !selected) startSpin();
       if (!flat) governor();
       map.on("click", (e: any) => { stopTour(); if (golfX?.click(e.point)) return; const gc = overlays.golf ? golfAt(e.point) : null; if (gc) { showGolf(gc); return; } if (golfX?.on()) return; const h = pick(e.point); if (!h) return; if (h.kind === "par") selectParish(h.key); else select(h.key); });
-      map.on("mousemove", (e: any) => hover(e.point)); map.on("mouseout", () => hover(null));
+      map.on("mousemove", (e: any) => hoverSoon(e.point)); map.on("mouseout", () => { cancelAnimationFrame(hoverFrame); hoverFrame = 0; hoverPoint = null; hover(null); });
       map.on("move", labelsSoon); map.on("zoomend", () => { if (map.getZoom() > 7.8) loadParishes(); });
-      ["pointerdown", "wheel", "touchstart"].forEach((ev) => canvas.addEventListener(ev, () => { stopTour(); halt(); arrStop(); }, { passive: true }));
-      if (mode === "home") ["pointerdown", "touchstart", "wheel", "keydown", "focusin", "input"].forEach((ev) => root.addEventListener(ev, halt, { passive: true }));
       placeLabels();
       // p70 r3 (J2-02): sea and relief tiles that failed while the signal was gone load again once it is back.
       const bad = new Set<string>();
@@ -408,7 +485,7 @@ export function initMapV3(root: HTMLElement) {
   }
 
   // ------------------------------------------------------------ labels: Playfair for the big places, Manrope as you zoom
-  let labT = 0;
+  let labT = 0, labelHTML = "";
   const labelsSoon = () => { if (labT) return; labT = requestAnimationFrame(() => { labT = 0; placeLabels(); }); };
   function placeLabels() {
     if (!map) return; const z = map.getZoom(), W = canvas.clientWidth, H = canvas.clientHeight;
@@ -435,7 +512,7 @@ export function initMapV3(root: HTMLElement) {
     // p70 (A-08): the place whose card is open is named first, whatever else wants the room.
     const rank = (p: Props) => { if (p.s === selected) return -1; const i = BIG.indexOf(p.s); return i >= 0 ? i : projMunis.has(p.s) ? BIG.length : 1000 - p.a; };
     for (const p of want.sort((a, b) => rank(a) - rank(b))) {
-      const c = map.project([p.x, p.y]); if (c.x < 0 || c.y < 0 || c.x > W || c.y > H) continue;
+      const c = projectPlace(p); if (c.x < 0 || c.y < 0 || c.x > W || c.y > H) continue;
       const big = BIG.includes(p.s), w = p.n.length * (big ? 8.5 : 6.5) + 8;
       // Over the place if there is room, otherwise just above or just below it; dropped only when all three are taken.
       // A big name (Porto) next to a photo pin may also step a little further down or up rather than disappear.
@@ -444,12 +521,24 @@ export function initMapV3(root: HTMLElement) {
       placed.push({ x: c.x, y, w }); h += `<span class="${big ? "m3-l1" : "m3-l2"}" style="transform:translate(${Math.round(c.x)}px,${Math.round(y)}px)">${esc(p.n)}</span>`;
       if (placed.length > 70) break;
     }
-    labelsEl.innerHTML = h;
+    // Keep unchanged nodes (and their measured glyph layout) when rounded screen
+    // coordinates have not changed; golf's collision observer need not rerun.
+    if (h !== labelHTML) { labelsEl.innerHTML = h; labelHTML = h; }
   }
 
   // ------------------------------------------------------------ hover, pick, select
   let hoverS: string | null = null;
+  let hoverFrame = 0, hoverPoint: { x: number; y: number } | null = null;
+  function hoverSoon(point: { x: number; y: number }) {
+    hoverPoint = point;
+    if (hoverFrame) return;
+    hoverFrame = requestAnimationFrame(() => {
+      hoverFrame = 0;
+      if (map && !document.hidden && hoverPoint) hover(hoverPoint);
+    });
+  }
   function hover(pt: { x: number; y: number } | null) {
+    if (!map) return;
     // Prompt 78b (J-06): golf mode names courses, never the parish under the pointer.
     const h = pt && !golfX?.on() ? pick(pt) : null; const s = h?.kind === "muni" ? h.key : null;
     const g = pt && overlays.golf ? golfAt(pt) : null;
@@ -466,29 +555,36 @@ export function initMapV3(root: HTMLElement) {
     const layers = [...(z >= 8.45 && map.getLayer("par-fill") ? ["par-fill"] : []), "muni-fill"];
     const hit = map.queryRenderedFeatures([pt.x, pt.y], { layers })[0];
     const hp: Props | undefined = hit && hit.layer.id === "muni-fill" ? byS.get(hit.properties.s) : undefined;
-    const dh = hp ? (() => { const c = map.project([hp.x, hp.y]); return Math.hypot(c.x - pt.x, c.y - pt.y); })() : 1e9;
+    const dh = hp ? (() => { const c = projectPlace(hp); return Math.hypot(c.x - pt.x, c.y - pt.y); })() : 1e9;
     let best: Props | null = null, bd = 1e9;
     for (const f of features) {
       const p: Props = f.properties; if (p === hp) continue;
       if (Math.sqrt(p.a * 1e-4) * ppd >= 26) continue;
-      const c = map.project([p.x, p.y]); const d = Math.hypot(c.x - pt.x, c.y - pt.y);
+      const c = projectPlace(p); const d = Math.hypot(c.x - pt.x, c.y - pt.y);
       if (d < 16 && d < bd && d < dh * 0.6) { best = p; bd = d; }
     }
     if (best) return { kind: "muni", key: best.s };
     if (hit) return hit.layer.id === "par-fill" ? { kind: "par", key: String(hit.properties.id) } : { kind: "muni", key: hit.properties.s };
-    for (const f of features) { const p: Props = f.properties; const c = map.project([p.x, p.y]); const d = Math.hypot(c.x - pt.x, c.y - pt.y); if (d < 28 && d < bd) { best = p; bd = d; } }
+    for (const f of features) { const p: Props = f.properties; const c = projectPlace(p); const d = Math.hypot(c.x - pt.x, c.y - pt.y); if (d < 28 && d < bd) { best = p; bd = d; } }
     return best ? { kind: "muni", key: best.s } : null;
   }
   const isWide = () => root.clientWidth >= 820;
   // p70 r3 (J72-12): a pin the camera stops on (anchored at its foot, about 60 px tall, its name above it) stays below the
   // search bar; (M72-10): beside the region postcards, never under them (iPad portrait).
   const padTop = (bottom: number) => { const t = root.querySelector(".m3-top")?.getBoundingClientRect(), cv = canvas.getBoundingClientRect(); const want = t ? Math.round(t.bottom - cv.top + 104) : 70; return Math.max(60, Math.min(want, cv.height - bottom - 40)); };
-  const padL = () => { const pc = root.querySelector<HTMLElement>("[data-postcards]"); return pc && pc.offsetParent && isWide() ? Math.max(0, Math.round(pc.getBoundingClientRect().right - canvas.getBoundingClientRect().left + 12)) : 0; };
+  const padL = () => { if (mainPresentation()) return 24; const pc = root.querySelector<HTMLElement>("[data-postcards]"); return pc && pc.offsetParent && isWide() ? Math.max(0, Math.round(pc.getBoundingClientRect().right - canvas.getBoundingClientRect().left + 12)) : 0; };
+  const mainCardPadding = () => {
+    const landscape = matchMedia("(max-height: 500px) and (orientation: landscape)").matches;
+    if (isWide() || landscape) return { left: 24, right: landscape ? Math.min(340, root.clientWidth * 0.48) + 24 : 464, top: padTop(landscape ? 24 : 80), bottom: landscape ? 24 : 80 };
+    const bottom = canvas.clientHeight * 0.6;
+    return { left: 12, right: 12, top: padTop(bottom), bottom };
+  };
   // p70 (A-08): a place's card zooms in by the place's size (Matosinhos, 67 km², fills the view instead of the whole Norte).
   const zoomFor = (p: Props) => Math.max(map?.getZoom() ?? 0, p.a < 40 ? 9.4 : p.a < 120 ? 9.0 : p.a < 400 ? 8.4 : 7.6);
   function flyTo(x: number, y: number, z: number, dur = 1200) {
-    map.flyTo({ center: [x, y], zoom: z, pitch: golfX?.on() ? golfX.pitch(z) : flat ? 0 : 46, duration: reduce() ? 0 : dur, curve: 1.3, easing: ease, essential: true,
-      padding: isWide() ? { right: 440, left: padL(), top: padTop(120), bottom: 120 } : { bottom: canvas.clientHeight * 0.42, top: padTop(canvas.clientHeight * 0.42), left: 0, right: 0 } });
+    const main = premium && !golfX?.on(), bottom = canvas.clientHeight * (main ? 0.6 : 0.42);
+    map.flyTo({ center: [x, y], zoom: z, pitch: golfX?.on() ? golfX.pitch(z) : flat ? 0 : 46, duration: reduce() ? 0 : main ? Math.min(dur, 950) : dur, curve: 1.3, easing: ease, essential: true,
+      padding: main ? mainCardPadding() : isWide() ? { right: 440, left: padL(), top: padTop(120), bottom: 120 } : { bottom, top: padTop(bottom), left: 0, right: 0 } });
   }
   // Prompt 68, the arrival (content/METHOD.md, question 3): the camera comes down the Douro to the place in about two
   // seconds, in 3D (pitched and turned along the river), and stops on the partner project. The flight is the place's own
@@ -496,23 +592,34 @@ export function initMapV3(root: HTMLElement) {
   // a single flight to the project. Any touch, drag or wheel on the map takes over at once; reduced motion jumps there.
   let arrAbort: (() => void) | null = null;
   function arrStop() { const a = arrAbort; arrAbort = null; a?.(); }
+  // Bind once per root, including after a WebGL context rebuild. Taking control
+  // also cancels an arrival whose place data is still in flight.
+  ["pointerdown", "wheel", "touchstart", "keydown"].forEach((event) => canvas.addEventListener(event, () => { cameraTouched = true; stopTour(); halt(); arrStop(); if (premium && !golfX?.on()) map?.stop(); }, { passive: true }));
+  if (mode === "home") ["pointerdown", "touchstart", "wheel", "keydown", "focusin", "input"].forEach((event) => root.addEventListener(event, halt, { passive: true }));
   function arriveAt(slug: string, pr = heroOf(slug)) {
     if (!map || !pr) return;
     arrStop();
+    const arrivalMap = map;
+    let stop = false;
+    let next: (() => void) | null = null;
+    const done = () => { if (!stop && arrAbort === abort) arrAbort = null; };
+    const abort = () => { stop = true; arrivalMap.off("moveend", done); if (next) arrivalMap.off("moveend", next); arrivalMap.stop(); };
+    arrAbort = abort;
     const go = (cam?: number[][]) => {
-      if (!map) return;
+      if (stop || map !== arrivalMap) return;
       // Phone: the arrival card stands a little taller (60%), so the project's render already shows; the place sits above it.
-      const padding = isWide() ? { right: 440, left: padL(), top: padTop(120), bottom: 120 } : { bottom: canvas.clientHeight * 0.62, top: padTop(canvas.clientHeight * 0.62), left: 0, right: 0 };
-      const kf = (k: number[]) => ({ center: [k[0], k[1]] as [number, number], zoom: k[2], bearing: k[3], pitch: k[4], padding });
-      const end = cam?.length ? kf(cam[cam.length - 1]) : { center: [pr.lon, pr.lat] as [number, number], zoom: 11.8, bearing: -20, pitch: 55, padding };
+      const main = premium && !golfX?.on(), bottom = canvas.clientHeight * (main ? 0.6 : 0.62);
+      const padding = main ? mainCardPadding() : isWide() ? { right: 440, left: padL(), top: padTop(120), bottom: 120 } : { bottom, top: padTop(bottom), left: 0, right: 0 };
+      const kf = (k: number[]) => ({ center: [k[0], k[1]] as [number, number], zoom: k[2], bearing: main && flat ? 0 : k[3], pitch: main && flat ? 0 : k[4], padding });
+      const end = cam?.length ? kf(cam[cam.length - 1]) : { center: [pr.lon, pr.lat] as [number, number], zoom: 11.8, bearing: main && flat ? 0 : -20, pitch: main && flat ? 0 : 55, padding };
       ev({ event: "map/arrive", place: slug, step: pr.id, origin: mode }); tip.hidden = true;
-      if (reduce()) { map.jumpTo(end); return; }
-      let stop = false; arrAbort = () => { stop = true; map?.stop(); };
-      const done = () => { if (!stop) arrAbort = null; };
+      if (reduce()) { map.jumpTo(end); done(); return; }
+      if (main) { map.flyTo({ ...end, duration: 950, curve: 1.15, easing: ease, essential: true }); map.once("moveend", done); return; }
       if (cam && cam.length > 1) {
         // Down from where the reader is to the river upstream (ease in), then along the river to the project (ease out).
         map.flyTo({ ...kf(cam[0]), duration: 1000, curve: 1.2, easing: (t: number) => t * t, essential: true });
-        map.once("moveend", () => { if (stop || !map) return; map.easeTo({ ...end, duration: 1150, easing: (t: number) => 1 - (1 - t) * (1 - t), essential: true }); map.once("moveend", done); });
+        next = () => { if (stop || map !== arrivalMap) return; map.easeTo({ ...end, duration: 1150, easing: (t: number) => 1 - (1 - t) * (1 - t), essential: true }); map.once("moveend", done); };
+        map.once("moveend", next);
       } else { map.flyTo({ ...end, duration: 2000, curve: 1.3, easing: ease, essential: true }); map.once("moveend", done); }
     };
     const c = placeCache.get(slug); c ? go(c.arr?.cam) : loadPlace(slug).then((d) => { if ((selected === slug || selProj === pr.id) && map) go(d?.arr?.cam); });
@@ -523,6 +630,7 @@ export function initMapV3(root: HTMLElement) {
   const timeEnd = () => { if (tPlace && t0) { ev({ event: "map/time", place: tPlace, band: timeBand(performance.now() - t0), origin: mode }); saveDwell(byS.get(tPlace)?.n ?? tPlace, performance.now() - t0); } tPlace = null; t0 = 0; };  // prompt 74: the time also goes to the buyer profile, on the device
   const timeStart = (slug: string) => { if (tPlace === slug) return; timeEnd(); tPlace = slug; t0 = performance.now(); };
   function select(slug: string | null, fly = true) {
+    if (slug || selected) cameraTouched = true;
     if (slug) { ev({ event: "map/place", place: slug, origin: mode }); ev({ event: "map/card/muni", place: slug, origin: mode }); }
     if (pinA && slug && slug !== pinA) { compare(pinA, slug); return; }
     // Closing a card that was opened from the bare map goes back one step, so Back never shows it again.
@@ -598,14 +706,16 @@ export function initMapV3(root: HTMLElement) {
       const n = c5.ph.length;
       const imgs = c5.ph.map((p: any, i: number) => `<img class="m3-photo" ${i ? "data-src" : "src"}="/img/v2/${p.f}-640.webp" data-srcset="/img/v2/${p.f}-640.webp 640w, /img/v2/${p.f}-1024.webp 1024w${p.w >= 1600 ? `, /img/v2/${p.f}-1600.webp 1600w` : ""}" sizes="(max-width: 819px) 100vw, 420px" alt="${esc(p.alt?.[cfg.lang] ?? "")}" width="640" height="400"${i ? ` loading="lazy"` : ` fetchpriority="high"`} decoding="async" aria-label="${esc(C5.photoN.replace("{i}", String(i + 1)).replace("{n}", String(n)))}">`).join("");
       // Prompt 68: a photograph that asks for a credit (the developer's own views) carries it, small, on the image.
-      const cr = c5.ph[0]?.credit && cfg.p68 ? `<figcaption class="m3-cr">${esc(cfg.p68.credit.replace("{c}", c5.ph[0].credit))}</figcaption>` : "";
+      const authors = [...new Set<string>(c5.ph.map((p: any) => p.credit || creditFor(p.f, cfg.photoCredits)).filter(Boolean))].join(" · ");
+      const cr = c5.ph[0]?.credit && cfg.p68 ? `<figcaption class="m3-cr">${esc(cfg.p68.credit.replace("{c}", c5.ph[0].credit))}</figcaption>` : mainPresentation() ? photoCreditHTML(authors, cfg.links.credits, cfg.mainPresentation.photoCredit) : "";
       return `<figure class="m3-ph m3-gal" data-gal><div class="m3-gal-t" data-gal-t tabindex="0">${imgs}</div>${n > 1 ? `<p class="m3-gal-d" aria-hidden="true">${c5.ph.map((_: any, i: number) => `<i${i ? "" : ` class="is-on"`}></i>`).join("")}</p>` : ""}${cr}</figure>`;
     }
     const own = slug ? cfg.photos[slug] : "", reg = isRegion ? cfg.regionPhotos?.[r] ?? "" : "";
     // p70 (MI-25): without a photograph of the place itself, no picture box at all (the kicker already names the region).
     const f = own || reg; if (!f) return "";
     const cap = !own && T4.ph[f] ? `<figcaption>${esc(T4.ph[f])}</figcaption>` : "";
-    return `<figure class="m3-ph"><img class="m3-photo" src="/img/v2/${f}-640.webp" data-srcset="/img/v2/${f}-640.webp 640w, /img/v2/${f}-1024.webp 1024w" sizes="420px" alt="${own ? esc(cfg.photoAlt?.[slug!] ?? "") : ""}" width="640" height="400">${cap}</figure>`;
+    const credit = mainPresentation() ? photoCreditHTML(creditFor(f, cfg.photoCredits), cfg.links.credits, cfg.mainPresentation.photoCredit) : "";
+    return `<figure class="m3-ph"><img class="m3-photo" src="/img/v2/${f}-640.webp" data-srcset="/img/v2/${f}-640.webp 640w, /img/v2/${f}-1024.webp 1024w" sizes="420px" alt="${own ? esc(cfg.photoAlt?.[slug!] ?? "") : ""}" width="640" height="400">${cap}${credit}</figure>`;
   }
   const dirLine = (p5: number | undefined | null) => p5 == null ? "" : Math.abs(p5) < 2 ? T4.dirFlat : (p5 > 0 ? T4.dirUp : T4.dirDown).replace("{v}", pctF.format(Math.abs(p5) / 100));
   const soonHTML = () => `<span class="m3-soon"><b>${esc(T4.soon)}</b><small>${esc(T4.soonP)}</small></span>`;
@@ -624,7 +734,7 @@ export function initMapV3(root: HTMLElement) {
     const nb = d?.nb ? `<span><small>${esc(C5.nb)}</small><b>${esc(`${C5.m2.split("{v}")[0]}${nf.format(d.nb[0])}–${m2f(d.nb[1])}`)}</b></span>` : d?.nbq ? `<span><small>${esc(C5.nb)}</small><b class="m3-dim-t">${esc(C5.nbOnreq)}</b></span>` : "";
     return `<section class="m3-tile m3-tile-w"><h3 class="m3-tt">${esc(T4.price)}</h3>
       <div class="m3-pp${nb ? "" : " m3-pp-1"}"><span><small>${esc(C5.mkt)}</small><b>${d?.m2 ? esc(m2f(d.m2)) : "—"}</b></span>${nb}</div>
-      ${buy}${d?.p5 != null ? `<p class="m3-tl">${esc(dirLine(d.p5))}</p>` : ""}</section>`;
+      ${buy}${d?.p5 != null ? `<p class="m3-tl">${esc(dirLine(d.p5))}</p>` : ""}${mainPresentation() && (d?.q || root.dataset.quarter) ? `<p class="m3-price-period">INE · ${esc(qName(d?.q || root.dataset.quarter!))}</p>` : ""}</section>`;
   }
   const flightTime = (f: number) => (f >= 60 ? `${Math.floor(f / 60)} h ${String(Math.round(f % 60)).padStart(2, "0")}` : C5.min.replace("{v}", nf.format(f)));
   // A list of names (Playfair) with small figures (minutes), Apple Weather style.
@@ -682,7 +792,7 @@ export function initMapV3(root: HTMLElement) {
   }
   // The two calls to action (operator, step 1): the paid analysis (the unlock sheet with its soft preview) and the advisor
   // (the Concierge, opened on this page with the place already filled in).
-  const ctaHTML = (placeName: string) => `<p class="m3-fontes"><button type="button" class="m3-link" data-sources>${esc(C5.sources)}</button></p>
+  const ctaHTML = (placeName: string) => mainPresentation() ? `<div class="m3-acts m3-acts-1"><a class="m3-btn m3-btn-p" href="${esc(`${cfg.links.consult}?place=${encodeURIComponent(placeName)}&budget=${Math.round(budget)}`)}" data-concierge data-cta-consult>${esc(C5.ctaConsult)}</a></div><p class="m3-fontes"><button type="button" class="m3-link" data-unlock-open>${esc(C5.ctaPaid)}</button><button type="button" class="m3-link" data-sources>${esc(C5.sources)}</button></p>` : `<p class="m3-fontes"><button type="button" class="m3-link" data-sources>${esc(C5.sources)}</button></p>
     <div class="m3-acts m3-acts-1"><button type="button" class="m3-btn m3-btn-p" data-unlock-open>${esc(C5.ctaPaid)}</button><a class="m3-btn" href="${esc(`${cfg.links.consult}?place=${encodeURIComponent(placeName)}`)}" data-concierge data-cta-consult>${esc(C5.ctaConsult)}</a></div>`;
   const mareHTML = () => `<div class="m3-mare" data-mare-slot>${root.querySelector<HTMLTemplateElement>("[data-mare-tpl]")?.innerHTML ?? ""}</div>`;
 
@@ -704,14 +814,17 @@ export function initMapV3(root: HTMLElement) {
       return;
     }
     let h = `${photoHTML(slug, r, d.c5)}<div class="m3-sb"><p class="m3-kick">${esc(L.regions[r] || "")}</p><div class="ht-row"><h2 class="m3-h" tabindex="-1">${esc(name)}</h2>${heartHTML("region", slug, name, regionHref)}</div>`;
-    h += `${line ? `<p class="m3-line">${esc(line)}</p>` : ""}<div class="m3-tiles">${priceTile(d, buyLine(d, slug))}${d.c5 ? c5Tiles(d) : kmTiles(d)}</div>`;
+    const story = mainPresentation() ? placeStory(d, cfg.lang, line) : line;
+    h += `${story ? `<p class="${mainPresentation() ? "m3-place-story" : "m3-line"}">${esc(story)}</p>` : ""}<div class="m3-tiles">${priceTile(d, buyLine(d, slug))}${mainPresentation() ? "" : d.c5 ? c5Tiles(d) : kmTiles(d)}</div>`;
     h += ctaHTML(name);
+    if (mainPresentation()) h += placeDetailHTML(cfg.mainPresentation.details, `<div class="m3-tiles">${d.c5 ? c5Tiles(d) : kmTiles(d)}</div>`, "life");
+    if (mainPresentation() && d.m2) h += placeDetailHTML(cfg.mainPresentation.costs, imtLine(Math.round(budget), "map"), "costs");
     // Developer components stay (CLAUDE.md, COMMON2 rule 3): the partner's homes here, or near, one quiet sponsored line.
     const nearBy = here.length ? here : projects.filter((y) => y.showcase && (y as Proj & { near?: string[] }).near?.some((n) => plain(n) === plain(name))).slice(0, 2);
     for (const y of nearBy) h += `<p class="m3-buys m3-near"><a href="${esc(y.showcase)}"${/^https?:/.test(y.showcase) ? ` target="_blank" rel="noopener"` : ""}>${esc(here.length ? C5.homes.replace("{muni}", name).replace("{name}", y.name) : cfg.pl.near.replace("{name}", y.name).replace("{muni}", (y as Proj & { muniName?: string }).muniName ?? ""))} →</a> <span class="m3-tag">${esc(y.tag || L.sponsored)}</span></p>`;
     // Prompt 72: the card's last line ("one more thing", place_cards.py arr.more), its source behind "Fontes", as on the arrival card.
     // p70 r3 (J72-10): the last line of content comes before the Maré block, never after it.
-    h += `${d.arr?.more?.[cfg.lang] ? `<p class="m3-onemore" data-more>${esc(d.arr.more[cfg.lang])}</p>` : ""}${mareHTML()}</div>`;
+    h += `${mainPresentation() ? placeHistoryHTML(d, cfg.lang, cfg.mainPresentation.story) : d.arr?.more?.[cfg.lang] ? `<p class="m3-onemore" data-more>${esc(d.arr.more[cfg.lang])}</p>` : ""}${mareHTML()}</div>`;
     ctx = x; rerender = () => showPlace(slug, false); srcFor = () => sourcesHTML(d, x);
     openSheet(h, open);
   }
@@ -734,6 +847,7 @@ export function initMapV3(root: HTMLElement) {
     const ph = photoHTML(slug, d.r ?? "", c5, false);
     let h = `${ph.replace('class="m3-ph m3-gal"', 'class="m3-ph m3-gal m3-gal-arr"').replace('class="m3-ph"', 'class="m3-ph m3-ph-arr"')}<div class="m3-sb m3-arr"><div class="ht-row"><h2 class="m3-h m3-h-xl" tabindex="-1">${esc(name)}</h2>${heartHTML("region", slug, name, href)}</div>`;
     if (arrive) h += `<p class="m3-arr-l">${esc(arrive)}</p>`;
+    if (mainPresentation()) h += `<div class="m3-tiles">${priceTile(d, buyLine(d, slug))}</div>${ctaHTML(name)}`;
     h += `</div>`;
     // The developments: the same tile for each (its label only where the data gives one, never "Sponsored" for a pick).
     h += `<div class="m3-devs${hs.length === 1 ? " m3-devs-1" : ""}">${hs.map((pr) => { const img = pr.heroImg || pr.render || "";
@@ -758,7 +872,7 @@ export function initMapV3(root: HTMLElement) {
       const lim = 20;  // every school in schools.csv is within 20 minutes by car (place_cards.py MAX_MIN); the card counts its rows
       qs.push(["schools", P8.q.schools.replace("{n}", nf.format(c5.sch.length)).replace("{m}", nf.format(lim)), `<p class="m3-tt">${esc(C5.schools)}<small>${esc(C5.within)}</small></p>${listHTML(c5.sch.map(([n, m]: [string, number]) => [esc(n), mins(m)]))}`]);
     }
-    if (d.m2) {
+    if (d.m2 && !mainPresentation()) {
       const a = Math.round(budget / d.m2);
       qs.push(["price", P8.q.price.replace("{b}", money(budget)).replace("{a}", nf.format(a)), `${priceTile(d)}${imtLine(Math.round(budget), "map")}<div class="m3-acts m3-acts-1"><button type="button" class="m3-btn" data-unlock-open>${esc(C5.ctaPaid)}</button></div>`]);
     }
@@ -769,9 +883,9 @@ export function initMapV3(root: HTMLElement) {
     }
     // p70 r3 (J72-10): one more thing comes right after the questions, before the quiet links and the Maré block.
     const more = d.arr?.more?.[lang];
-    h += `<div class="m3-sb m3-qa">${qs.map(([id, q, body]) => `<div class="m3-q" data-q="${id}"><button type="button" class="m3-qb" aria-expanded="false" aria-controls="m3q-${mode}-${id}"><span>${esc(q)}</span>${chevDown}</button><div class="m3-qp" id="m3q-${mode}-${id}" role="region" inert><div class="m3-qi">${body}</div></div></div>`).join("")}${more ? `<p class="m3-onemore" data-more>${esc(more)}</p>` : ""}`;
+    h += `<div class="m3-sb m3-qa">${qs.map(([id, q, body]) => `<div class="m3-q" data-q="${id}"><button type="button" class="m3-qb" aria-expanded="false" aria-controls="m3q-${mode}-${id}"><span>${esc(q)}</span>${chevDown}</button><div class="m3-qp" id="m3q-${mode}-${id}" role="region" inert><div class="m3-qi">${body}</div></div></div>`).join("")}${mainPresentation() ? `${d.m2 ? placeDetailHTML(cfg.mainPresentation.costs, imtLine(Math.round(budget), "map"), "costs") : ""}${placeHistoryHTML(d, lang, cfg.mainPresentation.story)}` : more ? `<p class="m3-onemore" data-more>${esc(more)}</p>` : ""}`;
     // Prompt 69: the Concierge opens on this place and the budget the card speaks of (its first step already chosen).
-    h += `<p class="m3-fontes m3-quiet"><button type="button" class="m3-link" data-sources>${esc(C5.sources)}</button><a class="m3-link" href="${esc(`${cfg.links.consult}?place=${encodeURIComponent(name)}&budget=${Math.round(budget)}`)}" data-concierge data-cta-consult>${esc(C5.ctaConsult)}</a></p>`;
+    if (!mainPresentation()) h += `<p class="m3-fontes m3-quiet"><button type="button" class="m3-link" data-sources>${esc(C5.sources)}</button><a class="m3-link" href="${esc(`${cfg.links.consult}?place=${encodeURIComponent(name)}&budget=${Math.round(budget)}`)}" data-concierge data-cta-consult>${esc(C5.ctaConsult)}</a></p>`;
     h += `${mareHTML()}`;
     return h + `</div>`;
   }
@@ -800,6 +914,8 @@ export function initMapV3(root: HTMLElement) {
     }
   }
   function selectParish(code: string) {
+    cameraTouched = true;
+    arrStop();
     const f = parishes?.feats.find((x) => x.properties.id === code); if (!f) return;
     step(`parish:${code}`); selPar = code; selected = f.properties.m; selRegion = null; syncUrl(); if (map?.getLayer("sel")) map.setFilter("sel", ["==", ["get", "s"], ""]);
     ev({ event: "map/card/parish", place: `p-${code}`, origin: mode });
@@ -818,6 +934,8 @@ export function initMapV3(root: HTMLElement) {
   // A region postcard: the region's photograph and name, its NUTS II median and the five-year direction, in words.
   let regionAt: Record<string, [number, number]> = {};
   async function showRegion(key: string, fly = true) {
+    cameraTouched = true;
+    arrStop();
     step(`region:${key}`);
     // p70 (S-09): the region's card opens from its small file at once; the map, when it is ready, frames the region.
     load(); await loadTiles(); timeEnd();
@@ -835,7 +953,7 @@ export function initMapV3(root: HTMLElement) {
     if (fly && map && selRegion === key) {
       const pts = features.filter((f) => (f.properties as Props).r === key).map((f) => f.properties as Props);
       if (pts.length) map.fitBounds([[Math.min(...pts.map((p) => p.x)) - 0.15, Math.min(...pts.map((p) => p.y)) - 0.15], [Math.max(...pts.map((p) => p.x)) + 0.15, Math.max(...pts.map((p) => p.y)) + 0.15]],
-        { padding: isWide() ? { left: 280, right: 460, top: 90, bottom: 60 } : { left: 30, right: 30, top: 80, bottom: canvas.clientHeight * 0.5 }, maxZoom: 9, duration: reduce() ? 0 : 1200, pitch: flat ? 0 : 40 });
+        { padding: mainPresentation() ? mainCardPadding() : isWide() ? { left: 280, right: 460, top: 90, bottom: 60 } : { left: 30, right: 30, top: 80, bottom: canvas.clientHeight * 0.5 }, maxZoom: 9, duration: reduce() ? 0 : mainPresentation() ? 950 : 1200, pitch: flat ? 0 : 40 });
     }
   }
   // "Fontes" opens in the same sheet; "Voltar" returns to the card. (The tiles' charts and strips moved to the paid analysis.)
@@ -849,7 +967,10 @@ export function initMapV3(root: HTMLElement) {
     view = "tile";
     sheetIn.innerHTML = h + `<button type="button" class="m3-x" aria-label="${L.close}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>`;
     sheetIn.scrollTop = 0;
-    sheetIn.querySelector(".m3-x")!.addEventListener("click", () => select(null));
+    const close = sheetIn.querySelector(".m3-x")!;
+    sheet.querySelector(":scope > .m3-x")?.remove();
+    if (mainPresentation()) sheet.append(close);
+    close.addEventListener("click", () => select(null));
     const was = detent;
     sheetIn.querySelector("[data-back]")?.addEventListener("click", () => { view = "card"; rerender?.(); if (!isWide()) setDetent(was); });
     if (!isWide()) setDetent(2);  // the chart and the strips want the full height on a phone; "Voltar" returns to the height before
@@ -896,13 +1017,18 @@ export function initMapV3(root: HTMLElement) {
   }
   let detent = 1;  // mobile: 0 peek, 1 half, 2 full
   function openSheet(h: string, focus: boolean, arr = false) {
+    const detailsOpen = !focus ? [...sheetIn.querySelectorAll<HTMLDetailsElement>("details[data-place-detail][open]")].map((el) => el.dataset.placeDetail) : [];
     view = "card"; sheet.classList.toggle("is-arr", arr);
     // p70 (A-24): the waiting card MapV3.astro drew for a ?place= link is replaced in place (it counts as the first opening).
     const skel = !!sheet.dataset.skel; if (skel) { delete sheet.dataset.skel; sheet.removeAttribute("aria-busy"); }
     sheetIn.innerHTML = h + `<button type="button" class="m3-x" aria-label="${L.close}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>`;
+    sheetIn.querySelectorAll<HTMLDetailsElement>("details[data-place-detail]").forEach((el) => { el.open = detailsOpen.includes(el.dataset.placeDetail); el.addEventListener("toggle", () => { if (el.open && ctx) ev({ event: `map/qa/${el.dataset.placeDetail}`, ...evPlace(ctx), origin: mode }); }); });
     const wasHidden = sheet.hidden || skel; sheet.hidden = false; requestAnimationFrame(() => sheet.classList.add("is-open"));
     if (!isWide()) setDetent(wasHidden ? 1 : detent);
-    sheetIn.querySelector(".m3-x")!.addEventListener("click", () => select(null)); wireImgs(sheetIn);
+    const close = sheetIn.querySelector(".m3-x")!;
+    sheet.querySelector(":scope > .m3-x")?.remove();
+    if (mainPresentation()) sheet.append(close);
+    close.addEventListener("click", () => select(null)); wireImgs(sheetIn);
     sheetIn.querySelector("[data-share]")?.addEventListener("click", share);
     sheetIn.querySelectorAll<HTMLButtonElement>("[data-goto]").forEach((b) => b.addEventListener("click", () => select(b.dataset.goto!)));
     // Operator, step 1: "Fontes" opens the dated sources; "Ver a análise completa" the unlock sheet (soft preview, "Disponível
@@ -1327,7 +1453,7 @@ export function initMapV3(root: HTMLElement) {
   // Nothing moves while the tab is hidden; leaving the page frees the map (and a page restored from the back-forward
   // cache builds it again).
   document.addEventListener("visibilitychange", () => {
-    if (document.hidden) { timeEnd(); stopTour(); stopPlay(); if (rotating) halt(); map?.stop(); }
+    if (document.hidden) { timeEnd(); stopTour(); stopPlay(); arrStop(); if (rotating) halt(); map?.stop(); }
     else if (selected && !sheet.hidden && sheet.classList.contains("is-open")) timeStart(selected);  // back on the open card: the clock runs again
   });
   let wasLive = false;
@@ -1394,5 +1520,6 @@ export function initMapV3(root: HTMLElement) {
     });
   }
   // For the automated click check (scripts/map-data/clicktest.mjs).
-  (root as any).__mapx = { load, showRegion, openPanel, openSources: () => openSources(), view: () => view, pick: (x: number, y: number) => pick({ x, y }), project: (s: string) => { const p = byS.get(s); return p && map ? map.project([p.x, p.y]) : null; }, map: () => map, golf: () => golfX, selected: () => selected, slugs: () => features.map((f) => f.properties.s), tour, setDim, setBudget, setQuarter, quality: () => quality };
+  (root as any).__mapx = { load, showRegion, openPanel, openSources: () => openSources(), view: () => view, pick: (x: number, y: number) => pick({ x, y }), project: (s: string) => { const p = byS.get(s); return p && map ? projectPlace(p) : null; }, map: () => map, golf: () => golfX, selected: () => selected, slugs: () => features.map((f) => f.properties.s), tour, setDim, setBudget, setQuarter, quality: () => quality };
+  root.dispatchEvent(new Event("m3:ready"));
 }

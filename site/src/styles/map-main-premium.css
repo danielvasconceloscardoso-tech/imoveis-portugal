@@ -1,0 +1,187 @@
+/* Main map, US and Luxembourg. The landscape remains the canvas; each control is a quiet instrument.
+   Existing data, photographs, keyboard handlers and map layer behavior remain the source of truth. */
+.m3[data-main-premium]:not(.is-golf) {
+  --gi: #243a33;
+  --gm: #66706a;
+  --g: rgba(250, 248, 242, .95);
+  --g2: #faf8f2;
+  --gl: rgba(42, 64, 55, .14);
+  --sh: 0 5px 24px rgba(29, 52, 45, .1);
+  --map-paper: #f7f4ed;
+  --map-rule: rgba(42, 64, 55, .14);
+}
+.m3[data-main-premium]:not(.is-golf) .m3-stage { background: #9bbfc4; }
+.m3[data-main-premium]:not(.is-golf) .m3-top { top: 24px; left: 24px; right: 24px; gap: 10px; }
+.m3[data-main-premium]:not(.is-golf) .m3-searchbtn,
+.m3[data-main-premium]:not(.is-golf) .m3-layersbtn,
+.m3[data-main-premium]:not(.is-golf) .m3-golfbtn,
+.m3[data-main-premium]:not(.is-golf) .m3-cmp-pill {
+  height: 48px; border-radius: 9px; border: 1px solid var(--map-rule);
+  background: var(--g); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  box-shadow: var(--sh); font-size: 13px; letter-spacing: .01em;
+}
+.m3[data-main-premium]:not(.is-golf) .m3-searchbtn { width: 300px; padding: 0 16px; }
+.m3[data-main-premium]:not(.is-golf) .m3-searchbtn svg { width: 17px; height: 17px; }
+.m3[data-main-premium]:not(.is-golf) .m3-searchbtn kbd { font-size: 10px; opacity: .65; }
+.m3[data-main-premium]:not(.is-golf) .m3-layersbtn[aria-expanded="true"] { color: #fff; background: var(--gi); }
+.m3[data-main-premium]:not(.is-golf) .m3-dock { top: 84px; left: 24px; bottom: 24px; border-radius: 12px; background: var(--map-paper); padding: 22px; }
+.m3[data-main-premium]:not(.is-golf) .m3-panel-x { min-width: 44px; min-height: 44px; }
+.m3[data-main-premium]:not(.is-golf) .m3-pk { font-size: 10px; letter-spacing: .13em; }
+.m3[data-main-premium]:not(.is-golf) .m3-chip { border-radius: 6px; }
+.m3[data-main-premium]:not(.is-golf) .m3-tour { border-radius: 6px; min-height: 40px; }
+
+/* A single low filmstrip leaves the whole coast available to explore. */
+.m3[data-main-premium]:not(.is-golf) .m3-cards {
+  top: auto; bottom: 36px; left: 24px; right: 24px; width: auto;
+  flex-direction: row; gap: 10px; overflow-x: auto; padding: 4px 0;
+  scrollbar-width: none; scroll-snap-type: x proximity;
+}
+.m3[data-main-premium]:not(.is-golf) .m3-cards::-webkit-scrollbar { display: none; }
+.m3[data-main-premium]:not(.is-golf) .m3-pc { flex: 0 0 130px; height: 91px; border-radius: 7px; scroll-snap-align: start; box-shadow: 0 3px 16px rgba(27, 46, 39, .14); }
+.m3[data-main-premium]:not(.is-golf) .m3-pc:has(img)::after { background: linear-gradient(180deg, transparent 15%, rgba(11, 29, 27, .67)); }
+.m3[data-main-premium]:not(.is-golf) .m3-pc-n { left: 12px; bottom: 12px; font-size: 18px; letter-spacing: -.01em; }
+.m3[data-main-premium]:not(.is-golf):has(.m3-sheet.is-open) .m3-cards,
+.m3[data-main-premium]:not(.is-golf).is-panel .m3-cards { opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(12px); }
+.m3[data-main-premium]:not(.is-golf) .m3-attr { bottom: 9px; right: 24px; font-size: 10px; color: #344c48; }
+.m3[data-main-premium]:not(.is-golf) .m3-legend { bottom: 148px; right: 24px; border-radius: 8px; }
+
+/* One continuous sheet, with typography and rules instead of a dashboard of boxes. */
+.m3[data-main-premium]:not(.is-golf) .m3-sheet {
+  top: 88px; right: 24px; bottom: 24px; width: 420px; border-radius: 12px;
+  background: var(--map-paper); border: 1px solid rgba(255, 255, 255, .7);
+  box-shadow: 0 16px 64px rgba(23, 47, 40, .2); backdrop-filter: none; -webkit-backdrop-filter: none;
+}
+.m3[data-main-premium]:not(.is-golf) .m3-sheet-in { padding: 0 0 22px; scrollbar-width: thin; scrollbar-color: #c7cec5 transparent; }
+.m3[data-main-premium]:not(.is-golf) .m3-sb { padding: 22px 26px 0; }
+.m3[data-main-premium]:not(.is-golf) .m3-sheet-in > .m3-ph,
+.m3[data-main-premium]:not(.is-golf) .m3-gal,
+.m3[data-main-premium]:not(.is-golf) .m3-ph-arr { margin: 0; }
+.m3[data-main-premium]:not(.is-golf) .m3-photo,
+.m3[data-main-premium]:not(.is-golf) .m3-gal-t .m3-photo,
+.m3[data-main-premium]:not(.is-golf) .m3-gal-arr .m3-gal-t .m3-photo { aspect-ratio: 16 / 8; border-radius: 0; object-fit: cover; }
+.m3[data-main-premium]:not(.is-golf) .m3-hero-top { width: 100%; margin: 0; border-radius: 0; }
+.m3[data-main-premium]:not(.is-golf) .m3-kick { font-size: 10px; letter-spacing: .16em; margin-bottom: 9px; }
+.m3[data-main-premium]:not(.is-golf) .m3-sheet h2.m3-h,
+.m3[data-main-premium]:not(.is-golf) .m3-sheet h2.m3-h-xl { font-size: 38px; line-height: 1.1; letter-spacing: -.035em; overflow-wrap: anywhere; }
+.m3[data-main-premium]:not(.is-golf) .m3-line,
+.m3[data-main-premium]:not(.is-golf) .m3-arr-l,
+.m3[data-main-premium]:not(.is-golf) .m3-place-story { font: 400 14px/1.6 var(--m3sans); color: #58665f; margin: 10px 0 0; }
+.m3[data-main-premium]:not(.is-golf) .m3-sheet .ht-row { align-items: flex-start; gap: 10px; }
+.m3[data-main-premium]:not(.is-golf) .ht { flex: none; min-width: 44px; min-height: 44px; }
+.m3[data-main-premium]:not(.is-golf) .m3-x { width: 44px; height: 44px; top: 12px; right: 12px; z-index: 4; background: #faf8f2 !important; }
+.m3[data-main-premium]:not(.is-golf) .m3-tiles { margin-top: 22px; gap: 0; }
+.m3[data-main-premium]:not(.is-golf) section.m3-tile { background: transparent !important; padding: 18px 0 !important; border-radius: 0; border-top: 1px solid var(--map-rule); gap: 12px; }
+.m3[data-main-premium]:not(.is-golf) .m3-sheet h3.m3-tt { font-size: 10px; letter-spacing: .12em; font-weight: 700; }
+.m3[data-main-premium]:not(.is-golf) .m3-pp b { font-size: 24px; }
+.m3[data-main-premium]:not(.is-golf) .m3-pp small { font-size: 11px; font-weight: 500; }
+.m3[data-main-premium]:not(.is-golf) .m3-buy { order: -1; }
+.m3[data-main-premium]:not(.is-golf) .m3-buy .m3-link { display: block; font: 400 25px/1.3 var(--m3serif); letter-spacing: -.02em; text-decoration: none; padding: 0 !important; }
+.m3[data-main-premium]:not(.is-golf) .m3-buy .m3-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+.m3[data-main-premium]:not(.is-golf) .m3-price-period { font-size: 10px; color: var(--gm); margin: 4px 0 0; }
+.m3[data-main-premium]:not(.is-golf) .m3-tl { font-size: 12px; line-height: 1.5; }
+.m3[data-main-premium]:not(.is-golf) .m3-mn { font-size: 16px; }
+.m3[data-main-premium]:not(.is-golf) .m3-acts { grid-template-columns: 1fr; margin-top: 20px; gap: 7px; }
+.m3[data-main-premium]:not(.is-golf) .m3-btn { min-height: 48px; border-radius: 7px; font-size: 13px !important; }
+.m3[data-main-premium]:not(.is-golf) .m3-btn-p { background: #284d40 !important; color: #fff !important; }
+.m3[data-main-premium]:not(.is-golf) .m3-btn-p:hover { background: #1d3d32 !important; }
+.m3[data-main-premium]:not(.is-golf) .m3-fontes { display: flex; flex-wrap: wrap; gap: 0 20px; margin-top: 14px; }
+.m3[data-main-premium]:not(.is-golf) .m3-fontes .m3-link { min-height: 44px; display: inline-flex; align-items: center; font-size: 11px; }
+.m3[data-main-premium]:not(.is-golf) .m3-devs { padding: 0 26px; margin-top: 24px; }
+.m3[data-main-premium]:not(.is-golf) .m3-dev-f { border-radius: 6px; }
+.m3[data-main-premium]:not(.is-golf) .m3-devs-1 .m3-dev-f img { aspect-ratio: 2.4 / 1; }
+.m3[data-main-premium]:not(.is-golf) .m3-dev-n { font-size: 22px; }
+.m3[data-main-premium]:not(.is-golf) .m3-dev-l { font-size: 12px; line-height: 1.5; }
+.m3[data-main-premium]:not(.is-golf) .m3-qa { padding-top: 24px; }
+.m3[data-main-premium]:not(.is-golf) .m3-qb { min-height: 54px; font-size: 17px !important; }
+.m3[data-main-premium]:not(.is-golf) .m3-onemore { font-size: 19px; }
+
+/* Each extra answer is there when asked. Native disclosure controls work without JS. */
+.m3[data-main-premium]:not(.is-golf) .m3-place-detail { border-top: 1px solid var(--map-rule); }
+.m3[data-main-premium]:not(.is-golf) .m3-place-detail:last-of-type { border-bottom: 1px solid var(--map-rule); }
+.m3[data-main-premium]:not(.is-golf) .m3-place-detail > summary { display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 54px; cursor: pointer; list-style: none; font: 400 18px/1.35 var(--m3serif); }
+.m3[data-main-premium]:not(.is-golf) .m3-place-detail > summary::-webkit-details-marker { display: none; }
+.m3[data-main-premium]:not(.is-golf) .m3-place-detail > summary svg { width: 15px; height: 15px; transition: transform .2s; }
+.m3[data-main-premium]:not(.is-golf) .m3-place-detail[open] > summary svg { transform: rotate(180deg); }
+.m3[data-main-premium]:not(.is-golf) .m3-place-detail-body { padding-bottom: 18px; }
+.m3[data-main-premium]:not(.is-golf) .m3-place-detail-body > .m3-tiles { margin-top: 0; }
+.m3[data-main-premium]:not(.is-golf) .m3-place-detail-body section.m3-tile:first-child { border: 0; padding-top: 4px !important; }
+.m3[data-main-premium]:not(.is-golf) .m3-place-detail-body .m3-place-story { margin-top: 0; }
+.m3[data-main-premium]:not(.is-golf) .m3-photo-credit { position: absolute; left: 10px; right: auto; bottom: 10px; margin: 0; z-index: 2; font: 500 10px/1.4 var(--m3sans); }
+.m3[data-main-premium]:not(.is-golf) .m3-photo-credit a { display: block; padding: 5px 7px; border-radius: 3px; background: rgba(18, 37, 32, .75); color: #fff; text-decoration: none; text-shadow: none; }
+.m3[data-main-premium]:not(.is-golf) .m3-photo-credit a:hover { text-decoration: underline; }
+.m3[data-main-premium]:not(.is-golf) .m3-gal-d { bottom: 12px; justify-content: flex-end; padding-right: 14px; }
+
+@media (max-width: 819px) {
+  .m3[data-main-premium]:not(.is-golf) .m3-stage { min-height: 0; }
+  .m3[data-main-premium]:not(.is-golf) .m3-top { top: 12px; left: 12px; right: 12px; gap: 6px; flex-wrap: nowrap; }
+  .m3[data-main-premium]:not(.is-golf) .m3-searchbtn { width: auto; padding: 0 12px; gap: 8px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-layersbtn,
+  .m3[data-main-premium]:not(.is-golf) .m3-golfbtn { padding: 0 11px; gap: 6px; font-size: 12px; flex-shrink: 0; }
+  .m3[data-main-premium]:not(.is-golf) .m3-cmp-pill { position: absolute; top: 56px; right: 0; height: 40px; font-size: 12px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-cards { bottom: 15px; left: 0; right: 0; gap: 8px; padding: 4px 12px; scroll-padding: 12px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-pc { flex-basis: 114px; height: 82px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-pc-n { font-size: 17px; left: 10px; bottom: 10px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-sheet,
+  .m3[data-main-premium]:not(.is-golf) .m3-sheet.is-arr[data-detent="1"] { top: auto; left: 0; right: 0; bottom: 0; width: auto; height: 60%; border-radius: 16px 16px 0 0; border-bottom: 0; }
+  .m3[data-main-premium]:not(.is-golf) .m3-sheet[data-detent="0"] { height: 148px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-sheet[data-detent="2"] { height: calc(100% - 8px); }
+  .m3[data-main-premium]:not(.is-golf) .m3-grab { height: 20px; background: var(--map-paper); }
+  .m3[data-main-premium]:not(.is-golf) .m3-grab span { width: 32px; height: 3px; background: #abb5aa; }
+  .m3[data-main-premium]:not(.is-golf) .m3-sb { padding: 12px 22px 0; }
+  .m3[data-main-premium]:not(.is-golf) .m3-photo,
+  .m3[data-main-premium]:not(.is-golf) .m3-gal-t .m3-photo,
+  .m3[data-main-premium]:not(.is-golf) .m3-gal-arr .m3-gal-t .m3-photo { height: 108px; aspect-ratio: auto; }
+  .m3[data-main-premium]:not(.is-golf) .m3-sheet h2.m3-h,
+  .m3[data-main-premium]:not(.is-golf) .m3-sheet h2.m3-h-xl { font-size: 33px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-line,
+  .m3[data-main-premium]:not(.is-golf) .m3-arr-l,
+  .m3[data-main-premium]:not(.is-golf) .m3-place-story { font-size: 13px; line-height: 1.5; margin-top: 5px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-tiles { margin-top: 10px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-buy .m3-link { font-size: 17px; line-height: 1.35; }
+  .m3[data-main-premium]:not(.is-golf) section.m3-tile:has(.m3-buy) { padding: 10px 0 !important; gap: 7px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-tile:has(.m3-buy) .m3-pp b { font-size: 21px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-tile:has(.m3-buy) .m3-price-period { order: 1; margin-top: 0; }
+  .m3[data-main-premium]:not(.is-golf) .m3-tile:has(.m3-buy) > .m3-tl:not(.m3-buy) { order: 2; }
+  .m3[data-main-premium]:not(.is-golf) .m3-acts { margin-top: 12px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-devs { padding: 0 22px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-dock { top: auto; left: 0; right: 0; bottom: 0; max-height: 78%; padding: 18px 22px; border-radius: 16px 16px 0 0; }
+  .m3[data-main-premium]:not(.is-golf) .m3-legend { bottom: 116px; left: 12px; right: 12px; }
+}
+
+/* A short phone uses the same side-by-side map/card relationship as a desktop. */
+@media (max-height: 500px) and (orientation: landscape) {
+  .m3[data-main-premium]:not(.is-golf) .m3-stage { min-height: 0; }
+  .m3[data-main-premium]:not(.is-golf) .m3-top { top: 10px; left: 12px; right: 12px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-searchbtn { width: 200px; flex: none; }
+  .m3[data-main-premium]:not(.is-golf) .m3-sheet,
+  .m3[data-main-premium]:not(.is-golf) .m3-sheet[data-detent],
+  /* golf-mode.css has a legacy global landscape rule: these scoped overrides keep main-map controls clear. */
+  .m3[data-main-premium]:not(.is-golf) .m3-sheet.is-arr[data-detent="1"] { top: 68px !important; bottom: 10px !important; left: auto !important; right: 12px !important; width: min(340px, 48%) !important; height: auto !important; border-radius: 10px !important; }
+  .m3[data-main-premium]:not(.is-golf) .m3-grab { display: none; }
+  .m3[data-main-premium]:not(.is-golf) .m3-sheet .m3-photo,
+  .m3[data-main-premium]:not(.is-golf) .m3-sheet .m3-gal-t .m3-photo,
+  .m3[data-main-premium]:not(.is-golf) .m3-sheet .m3-dev-f img { height: 64px !important; }
+  .m3[data-main-premium]:not(.is-golf) .m3-sheet-in:has(> .m3-hero-top) { display: block; }
+  .m3[data-main-premium]:not(.is-golf) .m3-sheet-in > .m3-hero-top { position: static; height: 64px !important; aspect-ratio: auto !important; }
+  .m3[data-main-premium]:not(.is-golf) .m3-sb { padding: 8px 20px 0; }
+  .m3[data-main-premium]:not(.is-golf) .m3-sheet h2.m3-h { font-size: 26px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-line,
+  .m3[data-main-premium]:not(.is-golf) .m3-arr-l,
+  .m3[data-main-premium]:not(.is-golf) .m3-place-story { margin-top: 3px; font-size: 12px; line-height: 1.35; }
+  .m3[data-main-premium]:not(.is-golf) .m3-tiles { margin-top: 6px; }
+  .m3[data-main-premium]:not(.is-golf) section.m3-tile:has(.m3-buy) { padding: 6px 0 !important; gap: 4px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-tile:has(.m3-buy) .m3-pp { order: 0; }
+  .m3[data-main-premium]:not(.is-golf) .m3-tile:has(.m3-buy) .m3-pp b { font-size: 19px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-tile:has(.m3-buy) .m3-price-period { order: 1; margin: 0; }
+  .m3[data-main-premium]:not(.is-golf) .m3-tile:has(.m3-buy) > .m3-buy { order: 2; }
+  .m3[data-main-premium]:not(.is-golf) .m3-tile:has(.m3-buy) > .m3-tl:not(.m3-buy) { order: 3; }
+  .m3[data-main-premium]:not(.is-golf) .m3-buy .m3-link { font-size: 17px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-cards { bottom: 28px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-pc { height: 68px; flex-basis: 105px; }
+}
+@media (max-width: 1079px) and (max-height: 500px) and (orientation: landscape) {
+  .m3[data-main-premium]:not(.is-golf) .m3-stage { height: calc(100svh - 68px - env(safe-area-inset-bottom)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .m3[data-main-premium]:not(.is-golf) .m3-place-detail > summary svg { transition: none; }
+}

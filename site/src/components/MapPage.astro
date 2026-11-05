@@ -3,6 +3,7 @@
 import { srcTitle } from "../lib/srctitle";
 import V2 from "../layouts/V2.astro";
 import MapV3 from "./MapV3.astro";
+import MapArrivalIntro from "./MapArrivalIntro.astro";
 import { pathFor, type Lang, type EdCode } from "../i18n";
 import { ART_SUB } from "../lib/articles";
 import { Sources, fmtDate } from "../lib/content";
@@ -10,6 +11,7 @@ import { c, edName } from "../lib/copy";
 
 interface Props { lang: Lang; ed: EdCode; }
 const { lang, ed } = Astro.props;
+const arrival = (lang === "en" && ed === "us") || (lang === "pt" && ed === "lu");
 const src = new Sources();
 const arts = pathFor(lang, ed, "articles"); // prompt 37 §2: the note and the municipality table now live in two articles
 const n = src.n("ine-m2-2026q2");
@@ -20,7 +22,12 @@ src.raw("https://wiki.openstreetmap.org/wiki/Tag:leisure%3Dgolf_course", "Golf c
 ---
 <V2 lang={lang} ed={ed} page="map" title={`${c("map.title", lang)} | Imóveis Portugal · ${edName(ed, lang)}`} description={c("map.lede", lang)} sticky={null} d2 bodyClass="m3p">
   <h1 class="vh">{c("map.title", lang)}</h1>
-  <MapV3 lang={lang} ed={ed} mode="page" />
+  {arrival ? (
+    <div class="map-arrival-frame" data-map-arrival-frame>
+      <MapV3 lang={lang} ed={ed} mode="page" />
+      <MapArrivalIntro lang={lang} />
+    </div>
+  ) : <MapV3 lang={lang} ed={ed} mode="page" />}
   <div class="m3-after">
     <p class="lede">{c("map.lede", lang)}<a class="sup" href={`#fonte-${n}`}>{n}</a></p>
     <p class="small m3-arts"><a href={`${arts}${ART_SUB.map[lang]}/`}>{c("art.map.link", lang)}</a> · <a href={`${arts}${ART_SUB.method[lang]}/`}>{c("art.method.link", lang)}</a></p>
@@ -32,3 +39,7 @@ src.raw("https://wiki.openstreetmap.org/wiki/Tag:leisure%3Dgolf_course", "Golf c
     </div>
   </section>
 </V2>
+
+<style>
+  .map-arrival-frame { position: relative; }
+</style>

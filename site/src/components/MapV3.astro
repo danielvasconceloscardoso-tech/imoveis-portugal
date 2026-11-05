@@ -28,10 +28,13 @@ import { FACTS } from "../lib/content";
 import { join } from "node:path";
 import "../styles/mapv3.css";
 import "../styles/golf-mode.css";
+import "../styles/map-main-premium.css";
+import { CREDITS } from "../lib/credits";
 import MareBlock from "./MareBlock.astro";
 
 interface Props { lang: Lang; ed: EdCode; mode?: "page" | "home"; }
 const { lang, ed, mode = "page" } = Astro.props;
+const mainPremium = mode === "page" && ((lang === "en" && ed === "us") || (lang === "pt" && ed === "lu"));
 const cur = EDITION_CUR[ed];
 const fx = cur && cur !== "EUR" ? RATE(cur) : null;
 const nf = new Intl.NumberFormat(HTML_LANG[lang]);
@@ -116,6 +119,17 @@ const south = ed !== "us" || lang !== "en" ? [] : (SOUTH.stops as any[]).filter(
 const pinFile = (id: string) => existsSync(join(process.cwd(), "public", "img", "map", `pin-${id}.webp`)) ? `/img/map/pin-${id}.webp` : "";
 // The area briefs carry rents, yields and ten-year changes (paid analysis): never in the free card (operator, step 1).
 const cfg = { labels, links, photos, photoAlt, regionPhotos, ed, lang,
+  ...(mainPremium ? {
+    mainPresentation: {
+      details: lang === "pt" ? "Viver aqui" : "Living here",
+      costs: lang === "pt" ? "Custos da compra" : "Buying costs",
+      story: lang === "pt" ? "Sobre este lugar" : "About this place",
+      photoCredit: lang === "pt" ? "Fotografia" : "Photography",
+      period: `INE · ${qLabel}`,
+    },
+    // Reuse the existing rights registry. Prefixes also match the approved Gondomar aerial gallery.
+    photoCredits: Object.fromEntries(CREDITS.filter((p) => p.file.startsWith("img/v2/")).map((p) => [p.file.replace(/^img\/v2\//, "").replace(/\*$/, ""), p.author])),
+  } : {}),
   projects: PROJECTS.map((p) => ({ id: p.id, name: p.name, tag: p.tag?.[lang] ?? "", developer: p.developer, muni: p.muni, lon: p.lon, lat: p.lat, render: p.render, pin: pinFile(p.id) || (p.render ? `${p.render}-800.webp` : ""), from: p.from,
     ...(p.units?.length || p.blocks?.length ? { showcase: `${pathFor(lang, ed, "partners")}${p.devSlug}/${p.muni}/` }
       : { showcase: p.url ?? "", visit: `${pathFor(lang, ed, "consult")}?project=${encodeURIComponent(p.id)}&place=${encodeURIComponent(MAP_MUNIS.find((m) => m.s === p.muni)?.n ?? "")}&visit=1` }),
@@ -151,7 +165,7 @@ const small = new Set(["de", "do", "da", "dos", "das", "e", "a"]);
 const fromSlug = (s: string) => s.split("-").map((w, i) => (i && small.has(w) ? w : w.charAt(0).toUpperCase() + w.slice(1))).join(" ");
 const skelNames = Object.fromEntries(MAP_MUNIS.filter((m) => fromSlug(m.s) !== m.n).map((m) => [m.s, m.n]));
 ---
-<div class={`m3 m3-${mode}`} data-m3 data-mode={mode} data-locale={HTML_LANG[lang]} data-fx={fx ? fx.rate : ""} data-cur={fx ? cur : ""} data-quarter={lastQ} data-wait-line={c("map.wait.line", lang)} data-wait-btn={c("map.wait.btn", lang)}>
+<div class={`m3 m3-${mode}`} data-m3 data-main-premium={mainPremium ? "true" : undefined} data-mode={mode} data-locale={HTML_LANG[lang]} data-fx={fx ? fx.rate : ""} data-cur={fx ? cur : ""} data-quarter={lastQ} data-wait-line={c("map.wait.line", lang)} data-wait-btn={c("map.wait.btn", lang)}>
   <div class="m3-stage">
     <picture>
       <source media="(max-width: 819px)" srcset="/img/map3-poster-m.webp" width="640" height="1274" />
@@ -323,7 +337,8 @@ const skelNames = Object.fromEntries(MAP_MUNIS.filter((m) => fromSlug(m.s) !== m
     // p70 r3 (S-09): the inline script above has usually started the place's file already, at the first paint.
     (window as any).__m3place ??= { slug, p: fetch(`/data/map/place/${slug}.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null) };
     run();
-  } else "requestIdleCallback" in window ? requestIdleCallback(() => run(), { timeout: 1200 }) : setTimeout(() => run(), 300);
+  } else if (document.querySelector("[data-main-premium]")) run();
+  else "requestIdleCallback" in window ? requestIdleCallback(() => run(), { timeout: 1200 }) : setTimeout(() => run(), 300);
   // p70 r3 (J72-13): on the map page without a ?place= card (the /arrow link, ?project=, the plain map), MapLibre starts
   // downloading now, beside the map script, instead of after it (a ?place= card keeps the connection to itself first).
   if (!slug && document.querySelector("[data-m3][data-mode=page]")) import("maplibre-gl").catch(() => {});
