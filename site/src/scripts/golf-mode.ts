@@ -308,9 +308,9 @@ export function createGolf(h: GolfHost) {
       let [stem, ln] = tries.find(([st, l]) => { const b = box(st, l); return b.y >= topMin && !hit(b, pbox) && !hit(b, fbox); }) ?? tries.reduce((a, t) => (box(t[0], t[1]).y > box(a[0], a[1]).y ? t : a));
       if (box(stem, ln).y < topMin) stem = Math.max(40, stem - (topMin - box(stem, ln).y));
       lean = ln; const b = box(stem, lean);
-      // The stem itself is in the way of names too.
-      pbox.push(b, { x: Math.min(p.x, p.x + lean) - 4, y: p.y - stem, w: Math.abs(lean) + 8, h: stem });
+      // The name is kept inside the screen (shifted, never cut); the box follows it. The stem is in the way of names too.
       const left = p.x + lean - sw / 2, nx = left < 8 ? 8 - left : left + sw > W - 8 ? W - 8 - (left + sw) : 0;
+      pbox.push(b, { x: left + nx, y: b.y, w: sw, h: sh }, { x: Math.min(p.x, p.x + lean) - 4, y: p.y - stem, w: Math.abs(lean) + 8, h: stem });
       m.el.style.setProperty("--gm-stem", `${stem}px`); m.el.style.setProperty("--gm-lean", `${lean}px`); m.el.style.setProperty("--gm-nx", `${Math.round(nx)}px`);
       m.el.style.setProperty("--gm-slen", `${Math.round(Math.hypot(stem, lean))}px`); m.el.style.setProperty("--gm-srot", `${Math.atan2(lean, stem)}rad`);
     }
