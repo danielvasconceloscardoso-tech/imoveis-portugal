@@ -137,8 +137,8 @@ test('map loads its canvas and local data', async ({ page }) => {
   expect((await data.json()).length).toBeGreaterThan(0);
 });
 
-test('arrival initial language follows the browser before a saved preference', async ({ browser, baseURL }) => {
-  const context = await browser.newContext({ locale: 'fr-FR' });
+test('arrival initial language follows the browser before a saved preference', async ({ browser, baseURL, viewport, isMobile, hasTouch, deviceScaleFactor }) => {
+  const context = await browser.newContext({ locale: 'fr-FR', viewport, isMobile, hasTouch, deviceScaleFactor });
   try {
     const page = await context.newPage();
     await page.route('**/*', route => new URL(route.request().url()).origin === new URL(baseURL!).origin ? route.continue() : route.abort());
