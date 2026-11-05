@@ -106,3 +106,12 @@
 .m3.is-golf .m3-btn-p { background: var(--gm-green) !important; color: #fff !important; }
 .m3.is-golf .m3-btn-p:hover { background: #17573a !important; }
 .m3.is-golf .m3-pin.gm-far, .m3.is-golf .m3-pin.gm-far *, .gm-far, .gm-far * { visibility: hidden !important; }
+
+/* The horizon: cream haze into the sky, over the far edge of the map (golf-mode.ts places it on the horizon line). */
+.gm-haze { position: absolute; left: 0; right: 0; height: 96px; pointer-events: none;
+  background: linear-gradient(180deg, rgba(244, 234, 217, 0) 0, #f4ead9 14px, #f4ead9 34px, rgba(244, 234, 217, .85) 52px, rgba(244, 234, 217, 0) 96px); }
+.gm-haze[hidden] { display: none; }
+/* Phones: a caption sits below its point, on the sea side, on a small cream chip. */
+@media (max-width: 819px) {
+  .gm-cap span { order: 1; margin: 0 0 0 4px; padding: 4px 7px 5px; border-radius: 7px; background: rgba(251, 244, 230, .94); box-shadow: 0 1px 4px rgba(20, 40, 50, .12); }
+}

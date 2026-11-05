@@ -52,7 +52,7 @@ export function createGolf(h: GolfHost) {
   let saved: { cam: any; terrain: any; sky: any; overlay: boolean; paint: [string, string, any][]; filt: [string, any][]; flat: boolean } | null = null;
   const ids = { layers: [] as string[], sources: [] as string[], images: [] as string[] };
   let marks: { m: any; el: HTMLElement; kind: string; c?: Course; grp?: string; w: number; h: number }[] = [];
-  let year: HTMLElement | null = null, glintT = 0, raf = 0, mo: MutationObserver | null = null;
+  let haze: HTMLElement | null = null, year: HTMLElement | null = null, glintT = 0, raf = 0, mo: MutationObserver | null = null;
   function paint(map: any, id: string, prop: string, v: any) {
     if (!map.getLayer(id)) return;
     if (!saved!.paint.some(([a, b]) => a === id && b === prop)) saved!.paint.push([id, prop, map.getPaintProperty(id, prop)]);
@@ -129,6 +129,7 @@ export function createGolf(h: GolfHost) {
     if (!saved.terrain && h.quality() === 0) map.setTerrain({ source: "dem", exaggeration: 1.5 });
     try { map.setSky(LK.sky); } catch { /* no sky in this style */ }
     for (const m of h.pins()) m.m.setOpacity?.("1", "1");
+    haze = document.createElement("div"); haze.className = "gm-haze"; haze.setAttribute("aria-hidden", "true"); map.getCanvas().after(haze);
     drawMarks(map, ml, D);
     drawYear();
     map.on("move", layoutSoon); map.on("moveend", placeSoon); map.on("resize", placeSoon); map.on("styledata", layoutSoon);
@@ -164,7 +165,7 @@ export function createGolf(h: GolfHost) {
   async function leave() {
     const map = h.map(); if (!active || !saved) return;
     active = false; clearInterval(glintT); cancelAnimationFrame(raf); raf = 0; cancelAnimationFrame(raf2); raf2 = 0; mo?.disconnect(); mo = null;
-    marks.forEach((x) => x.m.remove()); marks = []; year?.remove(); year = null;
+    marks.forEach((x) => x.m.remove()); marks = []; year?.remove(); year = null; haze?.remove(); haze = null;
     root.querySelectorAll(".m3-pin.gm-named, .m3-pin.gm-far").forEach((e) => e.classList.remove("gm-named", "gm-far"));
     for (const m of h.pins()) m.m.setOpacity?.();
     root.querySelectorAll<HTMLElement>("[data-labels] span").forEach((s) => (s.style.visibility = ""));
@@ -202,7 +203,7 @@ export function createGolf(h: GolfHost) {
   function drawMarks(map: any, ml: any, D: Data) {
     const tag = T("tag"), mk = (el: HTMLElement, x: number, y: number, kind: string, extra: Partial<typeof marks[0]> = {}) => {
       // Upright and always whole: MapLibre would dim a marker it thinks the relief hides (opacityWhenCovered).
-      const m = new ml.Marker({ element: el, anchor: kind === "cap" ? "bottom-left" : "bottom", offset: kind === "cap" ? [-6, 6] : [0, 0], opacityWhenCovered: "1" }).setLngLat([x, y]).addTo(map);
+      const sea = kind === "cap" && !h.isWide(), m = new ml.Marker({ element: el, anchor: kind === "cap" ? (sea ? "top-left" : "bottom-left") : "bottom", offset: kind === "cap" ? [-6, sea ? -6 : 6] : [0, 0], opacityWhenCovered: "1" }).setLngLat([x, y]).addTo(map);
       // MapLibre names every marker "Map marker": the flag keeps its own name (course, holes, architect, "Our pick").
       if (el.dataset.label) el.setAttribute("aria-label", el.dataset.label); else el.setAttribute("aria-hidden", "true");
       marks.push({ m, el, kind, w: 0, h: 0, ...extra });
@@ -268,6 +269,11 @@ export function createGolf(h: GolfHost) {
     const ctr = map.getCenter(), reach = map.getPitch() > 45 ? 12 * 2 ** (13 - z) + 8 : 1e9;
     const farOf = (x: number, y: number) => Math.hypot((x - ctr.lng) * 89, (y - ctr.lat) * 111) > reach;
     for (const m of h.pins()) m.el.classList.toggle("gm-far", farOf(m.p.lon, m.p.lat));
+    // The horizon is cream into sky: a band of haze over the far edge, where the far sea and pins would show through the fog.
+    // Its line: where the view ray is level (the vertical field of view and the pitch, from the padded centre).
+    if (haze) { const fov = ((map.transform?.fov ?? 36.87) * Math.PI) / 180, pad = map.getPadding(), cy = (pad.top + H - pad.bottom) / 2;
+      const y = cy - (H / 2 / Math.tan(fov / 2)) * Math.tan(Math.PI / 2 - (map.getPitch() * Math.PI) / 180);
+      haze.style.top = `${Math.round(y - 14)}px`; haze.hidden = !(y > -40 && y < H * 0.6); }
     for (const x of marks) x.el.classList.toggle("gm-far", farOf(x.m.getLngLat().lng, x.m.getLngLat().lat));
     for (const x of marks) if (!x.w && x.el.style.display !== "none") { const l = x.el.querySelector<HTMLElement>(".gm-lab") ?? x.el; x.w = l.offsetWidth; x.h = l.offsetHeight; }
     // 1. The flags stand, all of them: clustered with a count only far out (under zoom 9), never hidden by a name.
@@ -284,22 +290,23 @@ export function createGolf(h: GolfHost) {
     // 2. The photo pins float on a long white stem that leans away from the nearest flag; a pin that would touch another
     //    stands taller. Their name and "Our pick" show at every zoom, kept inside the screen.
     const pins = h.pins().filter((m) => m.el.style.display !== "none" && !m.el.classList.contains("gm-far"));
+    const tb = root.querySelector(".m3-top")?.getBoundingClientRect(), topBar = tb ? Math.max(58, tb.bottom - cv.top) : 58;
     const stem0 = wide ? 140 : 90, img = wide ? 76 : 64, pbox: Box[] = [];
     for (const m of [...pins].sort((a, b) => a.p.lon - b.p.lon)) {
       const p = map.project([m.p.lon, m.p.lat]); m.el.classList.add("gm-named");
       const nfl = flags.map((f) => (f as any).p).filter(Boolean).sort((a: any, b: any) => Math.hypot(a.x - p.x, a.y - p.y) - Math.hypot(b.x - p.x, b.y - p.y))[0];
       let lean = nfl && Math.hypot(nfl.x - p.x, nfl.y - p.y) < 220 ? (p.x >= nfl.x ? 1 : -1) * (wide ? 34 : 22) : 0;
-      const sp = m.el.querySelector<HTMLElement>(":scope > span"), sw = Math.max(sp?.offsetWidth ?? 120, 80) + 8, sh = (sp?.offsetHeight ?? 44) + 6, topMin = 64;
+      const sp = m.el.querySelector<HTMLElement>(":scope > span"), sw = Math.max(sp?.offsetWidth ?? 120, 80) + 8, sh = (sp?.offsetHeight ?? 44) + 6, topMin = topBar + 6;
       // Taller or further aside until it touches no other pin or flag, and never under the top bar.
       const box = (st: number, ln: number): Box => ({ x: p.x + ln - Math.max(img, sw) / 2, y: p.y - st - img - sh, w: Math.max(img, sw), h: img + sh });
       const dir = lean >= 0 ? 1 : -1, tries: [number, number][] = [];
       for (const st of [stem0, stem0 + 52, stem0 - 30]) for (const ln of [lean, lean + dir * 90, lean - dir * 90, lean + dir * 180]) tries.push([st, ln]);
       let [stem, ln] = tries.find(([st, l]) => { const b = box(st, l); return b.y >= topMin && !hit(b, pbox) && !hit(b, fbox); }) ?? tries.reduce((a, t) => (box(t[0], t[1]).y > box(a[0], a[1]).y ? t : a));
-      if (box(stem, ln).y < topMin) stem = Math.max(40, stem - (topMin - box(stem, ln).y));
+      if (box(stem, ln).y < topMin) stem = Math.max(wide ? 40 : 26, stem - (topMin - box(stem, ln).y));
       lean = ln; const b = box(stem, lean);
       // The name is kept inside the screen (shifted, never cut); the box follows it. The stem is in the way of names too.
       const left = p.x + lean - sw / 2, nx = left < 8 ? 8 - left : left + sw > W - 8 ? W - 8 - (left + sw) : 0;
-      pbox.push(b, { x: left + nx, y: b.y, w: sw, h: sh }, { x: Math.min(p.x, p.x + lean) - 4, y: p.y - stem, w: Math.abs(lean) + 8, h: stem });
+      pbox.push({ x: p.x + lean - img / 2 - 3, y: b.y + sh, w: img + 6, h: img }, { x: left + nx, y: b.y, w: sw, h: sh }, { x: Math.min(p.x, p.x + lean) - 4, y: p.y - stem, w: Math.abs(lean) + 8, h: stem });
       m.el.style.setProperty("--gm-stem", `${stem}px`); m.el.style.setProperty("--gm-lean", `${lean}px`); m.el.style.setProperty("--gm-nx", `${Math.round(nx)}px`);
       m.el.style.setProperty("--gm-slen", `${Math.round(Math.hypot(stem, lean))}px`); m.el.style.setProperty("--gm-srot", `${Math.atan2(lean, stem)}rad`);
     }
@@ -328,7 +335,10 @@ export function createGolf(h: GolfHost) {
         const opts: Box[] = [];
         for (let k = 0; k < (wide ? 5 : 3); k++) opts.push(R(p.x + 4, top - f.h - 2 - k * (f.h + 4)), R(p.x - f.w - 4, top - f.h - 2 - k * (f.h + 4)), ...(k ? [] : [R(p.x + 30 * s, top + 2)]));
         // Zero collisions first: a name with no free place waits (its flag still stands, its card still opens).
-        const best = opts.find((b) => free(b) && offTurf(b) && onLand(b)) ?? opts.find((b) => free(b) && offTurf(b)) ?? opts.find(free);
+        // With air first. The Els Club, the hero course (first in the data), is placed first and may stand closer (touching
+        // nothing); every other name yields rather than crowd.
+        const tight = (b: Box) => b.x > 4 && b.x + b.w < W - 4 && b.y > 4 && b.y + b.h < H - 4 && !hit(b, placed);
+        const best = opts.find((b) => free(b) && offTurf(b) && onLand(b)) ?? opts.find((b) => free(b) && offTurf(b)) ?? opts.find(free) ?? (f === flags[0] ? opts.find((b) => tight(b) && offTurf(b)) ?? opts.find(tight) : undefined);
         if (best) { placed.push(best); ok = true; lab.style.translate = `${Math.round(best.x - p.x)}px ${Math.round(best.y - p.y)}px`; }
       }
       lab.classList.toggle("is-on", ok);
@@ -347,8 +357,9 @@ export function createGolf(h: GolfHost) {
     }
     // 4. The sourced captions (Falésia, the marina) above their point, on the land side; 5. the towns where free.
     for (const kind of ["cap", "town"]) for (const x of marks.filter((m) => m.kind === kind && !m.el.classList.contains("gm-far"))) {
-      const p = map.project(x.m.getLngLat()), b = kind === "cap" ? { x: p.x - 6, y: p.y - x.h + 6, w: x.w, h: x.h } : { x: p.x - x.w / 2, y: p.y - x.h, w: x.w, h: x.h };
-      const ok = z >= (kind === "cap" ? 10.4 : 9.2) && x.w > 0 && free(b) && offTurf(b);
+      // A caption stands above its point on land (desktop), or below it on the sea side on a chip (phones, where the coast runs close).
+      const p = map.project(x.m.getLngLat()), b = kind === "cap" ? { x: p.x - 6, y: wide ? p.y - x.h + 6 : p.y - 6, w: x.w, h: x.h } : { x: p.x - x.w / 2, y: p.y - x.h, w: x.w, h: x.h };
+      const ok = z >= (kind === "cap" ? 10.4 : 9.2) && x.w > 0 && free(b) && (kind === "cap" && !wide ? true : offTurf(b));
       x.el.classList.toggle("is-on", ok); if (ok) placed.push(b);
     }
     mine = placed; hideClashing();
@@ -385,7 +396,10 @@ export function createGolf(h: GolfHost) {
     const map = h.map(); if (map) map.easeTo({ center: [c.x, c.y], zoom: Math.max(map.getZoom(), 13.1), pitch: Math.max(map.getPitch(), 58), padding: pad(), duration: h.reduce() ? 0 : 1100, essential: true });
   }
   // Phone: the course sits in the top 40% of the screen, clear of the card.
-  const pad = () => (h.isWide() ? { right: 440, left: h.padL(), top: h.padTop(120), bottom: 80 } : { bottom: Math.round(h.root.clientHeight * 0.62), top: 70, left: 0, right: 0 });
+  const pad = () => (h.isWide() ? { right: 440, left: h.padL(), top: h.padTop(120), bottom: 80 } : phonePad());
+  // Phone: the course just above the card, with room over it for a pin (stem, photo, name) below the controls.
+  const phonePad = () => { const cv = h.map()?.getCanvas().getBoundingClientRect(), t = root.querySelector(".m3-top")?.getBoundingClientRect(), H = cv?.height ?? root.clientHeight;
+    return { bottom: Math.round(H * 0.6), top: Math.round((t && cv ? t.bottom - cv.top : 56) + 200), left: 0, right: 0 }; };
 
   // ------------------------------------------------------------ "From your door" on every development card
   // The nearest course, beach and marina by car (OSRM, offline); in golf mode the first tee comes first.
@@ -417,7 +431,7 @@ export function createGolf(h: GolfHost) {
     // The map is being removed (leaving the page, a lost context): what golf mode added goes with it; the wish stays.
     detach() {
       if (!active) return; active = false; clearInterval(glintT); cancelAnimationFrame(raf); raf = 0; mo?.disconnect(); mo = null;
-      marks.forEach((x) => x.m.remove()); marks = []; year?.remove(); year = null; ids.layers = []; ids.sources = []; ids.images = []; saved = null;
+      marks.forEach((x) => x.m.remove()); marks = []; year?.remove(); year = null; haze?.remove(); haze = null; ids.layers = []; ids.sources = []; ids.images = []; saved = null;
     },
   };
 }
