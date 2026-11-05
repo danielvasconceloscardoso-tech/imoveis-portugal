@@ -97,7 +97,7 @@ export function initRegressar() {
  const method=q('method-detail');
  if(method){
   const explanation={pt:'Bruto − 11% Segurança Social − IRS progressivo − solidariedade = líquido anual. Dedução específica: maior de 4 587,09 € e contribuições obrigatórias; proporcional no cenário 12.º-A. Sem deduções pessoais à coleta. Bruto encontrado por pesquisa em cêntimos; apresentação arredondada ao euro.',en:'Gross − 11% social security − progressive income tax − solidarity = annual net. Specific deduction: greater of €4,587.09 and mandatory contributions, proportionally allocated for Article 12-A. No personal tax credits. Gross solved in cents; displayed amounts rounded to euros.',fr:'Brut − 11 % de cotisations − impôt progressif − solidarité = net annuel. Déduction spécifique : maximum de 4 587,09 € et des cotisations obligatoires, réparti proportionnellement pour l’article 12-A. Aucun crédit d’impôt personnel. Calcul en centimes ; affichage arrondi à l’euro.'}[lang];
-  method.textContent=explanation;
+  method.textContent=`${explanation} ${c.updated}: ${TAX_2026.updated} · ${TAX_2026.version}.`;
  }
  const sources=q('sources');
  if(sources){const ul=document.createElement('ul');for(const source of TAX_2026.sources){const li=document.createElement('li'),a=document.createElement('a');a.href=source.url;a.textContent=source.name;a.rel='noopener';a.target='_blank';li.append(a);ul.append(li);}sources.append(ul);}

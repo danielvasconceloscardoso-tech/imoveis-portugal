@@ -37,7 +37,7 @@ const extras = {
         <div class="rx-amount"><input id="rx-net" data-r-net type="text" inputmode="decimal" autocomplete="off" placeholder="4 500" required aria-describedby="rx-error rx-range" /><span data-r-currency>{initialCurrency}</span></div>
         <label class="rx-period" for="rx-period"><span class="rx-sr">{t.period}</span><select id="rx-period" data-r-period><option value="month">{t.month}</option><option value="year">{t.year}</option></select></label>
       </div>
-      <details class="rx-entry-details" data-r-payment-wrap><summary>{t.payments}</summary><label for="rx-payments">{t.payments}<select id="rx-payments" data-r-payments><option value="12">12</option><option value="14">14</option></select></label><p data-r-pay-note>{t.paymentsNote}</p></details>
+      <details class="rx-entry-details" data-r-payment-wrap><summary>{t.payments}</summary><label for="rx-payments">{t.payments}<select id="rx-payments" data-r-payments><option value="12">12</option><option value="13">13</option><option value="14">14</option></select></label><p data-r-pay-note>{t.paymentsNote}</p></details>
       <p id="rx-error" class="rx-error" data-r-error role="alert" hidden></p>
       <button class="rx-primary" data-r-calculate type="submit"><span>{t.calculate}</span><span aria-hidden="true">↗</span></button>
       <p class="rx-fine" id="rx-range">{extras.range}</p>
@@ -67,7 +67,7 @@ const extras = {
     <p class="rx-no-match" data-r-no-match role="status" hidden>{t.noMatch}</p>
     <section class="rx-city" data-r-city hidden aria-labelledby="rx-city-name">
       <figure class="rx-city-photo"><img data-r-city-photo data-r-photo src="/img/v2/porto-douro-entardecer-1024.webp" alt="" loading="lazy" width="1024" height="683" /><figcaption data-r-city-credit></figcaption></figure>
-      <div class="rx-city-copy"><p class="rx-kicker">{extras.one}</p><h2 id="rx-city-name" data-r-city-name tabindex="-1"></h2><p class="rx-city-story" data-r-city-story data-r-story></p><p class="rx-city-cost"><strong data-r-city-cost data-r-cost></strong></p><p class="rx-fine" data-r-city-period></p><div class="rx-city-evidence" data-r-city-evidence data-r-evidence></div><p class="rx-fine" data-r-city-housing></p><p class="rx-fine" data-r-city-price></p><p class="rx-fine" data-r-city-deposit></p><p class="rx-remaining"><span>{t.afterHousing}</span> <strong data-r-after-housing></strong><small>{t.availableBeforeLivingCosts}</small></p><a class="rx-primary" data-r-map href="#"><span>{t.openMap}</span><span aria-hidden="true">↗</span></a></div>
+      <div class="rx-city-copy"><p class="rx-kicker">{extras.one}</p><h2 id="rx-city-name" data-r-city-name tabindex="-1"></h2><p class="rx-city-story" data-r-city-story data-r-story></p><p class="rx-city-cost"><strong data-r-city-cost data-r-cost></strong></p><p class="rx-fine" data-r-city-period></p><ul class="rx-city-evidence" data-r-city-evidence data-r-evidence></ul><p class="rx-fine" data-r-city-housing></p><p class="rx-fine" data-r-city-price></p><p class="rx-fine" data-r-city-deposit></p><p class="rx-remaining"><span>{t.afterHousing}</span> <strong data-r-after-housing></strong><small>{t.availableBeforeLivingCosts}</small></p><a class="rx-primary" data-r-map href="#"><span>{t.openMap}</span><span aria-hidden="true">↗</span></a></div>
     </section>
     <div class="rx-mini-map" data-r-mini-map hidden aria-label={extras.map}></div>
   </section>

@@ -12,7 +12,7 @@ if (!['127.0.0.1', 'localhost', '[::1]'].includes(base.hostname)) {
   throw new Error('LIGHTHOUSE_BASE_URL must target a local build.');
 }
 const output = fileURLToPath(new URL('../artifacts/lighthouse/', import.meta.url));
-const allPages = [{name:'arrival',path:'/'},{name:'home-us',path:'/en/us/'},{name:'map-us',path:'/en/us/map/'},{name:'home-lu',path:'/pt/lu/'},{name:'map-lu',path:'/pt/lu/mapa/'}];
+const allPages = [{name:'regressar',path:'/pt/lu/regressar/'},{name:'arrival',path:'/'},{name:'home-us',path:'/en/us/'},{name:'map-us',path:'/en/us/map/'},{name:'home-lu',path:'/pt/lu/'},{name:'map-lu',path:'/pt/lu/mapa/'}];
 const requested = process.env.LIGHTHOUSE_PAGES?.split(',');
 if (requested?.some(name => !allPages.some(page => page.name === name))) throw new Error('Unknown LIGHTHOUSE_PAGES target.');
 const pages = requested ? allPages.filter(page => requested.includes(page.name)) : allPages;
@@ -22,13 +22,14 @@ const pages = requested ? allPages.filter(page => requested.includes(page.name))
 // the map's user-facing LCP and layout stability instead. Never pretend the
 // diagnostic map score passed the arrival/home score floor.
 const budgets = {
+  regressar: { minimum: {performance:0.90,accessibility:0.95}, maximum: {'largest-contentful-paint':2500,'cumulative-layout-shift':0.1} },
   arrival: { minimum: {performance:0.70,accessibility:0.90} },
   'home-us': { minimum: {performance:0.70,accessibility:0.90} },
   'home-lu': { minimum: {performance:0.70,accessibility:0.90} },
   'map-lu': { minimum: {accessibility:0.90}, maximum: {'largest-contentful-paint':4000,'cumulative-layout-shift':0.1}, diagnostic:['performance','total-blocking-time'] },
   'map-us': { minimum: {accessibility:0.90}, maximum: {'largest-contentful-paint':4000,'cumulative-layout-shift':0.1}, diagnostic:['performance','total-blocking-time'] },
 };
-console.log('Route budgets: arrival/home performance >=70; all accessibility >=90; map LCP <=4000ms and CLS <=0.1. Map performance/TBT are diagnostic under software WebGL.');
+console.log('Route budgets: Regressar performance >=90, accessibility >=95, LCP <=2500ms, CLS <=0.1; arrival/home performance >=70; all accessibility >=90; map LCP <=4000ms and CLS <=0.1. Map performance/TBT are diagnostic under software WebGL.');
 const blockedUrlPatterns = [
   '*://static.cloudflareinsights.com/*', '*://cloudflareinsights.com/*',
   '*://*.beehiiv.com/*', '*://beehiiv.com/*', '*://*.tally.so/*', '*://tally.so/*',

@@ -10,6 +10,6 @@ const ed = Astro.params.ed as EdCode;
 const title = {pt:'O seu rendimento. A sua vida em Portugal.',en:'Your income. Your life in Portugal.',fr:'Votre revenu. Votre vie au Portugal.'}[lang];
 const paths = Object.fromEntries(LANGS.map(l => [l, `/${l}/${ed}/regressar/`])) as Record<Lang,string>;
 ---
-<V2 lang={lang} ed={ed} page="sims" title={`${title} | Imóveis Portugal`} description={title} sticky={null} next={false} paths={paths}>
+<V2 lang={lang} ed={ed} page="sims" bodyClass="regressar-page" title={`${title} | Imóveis Portugal`} description={title} sticky={null} next={false} paths={paths}>
   <Regressar lang={lang} ed={ed} />
 </V2>
