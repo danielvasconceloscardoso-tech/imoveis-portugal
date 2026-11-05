@@ -12,8 +12,8 @@ type Course = { id: string; n: string; short: string; resort: string; grp: strin
 type Door = { k: "course" | "beach" | "marina"; n: string; id: string; min: number; tee: boolean };
 type Data = { checked: string; glints?: number[][]; courses: Course[]; door: Record<string, Door[]>; towns: [string, number, number][]; caps: { id: string; n: string; x: number; y: number; cap: Record<string, string>; src: { t: string; u: string } }[]; gids: number[] };
 type Look = {
-  sky: Record<string, any>; bg: string; land: string; sea: [number, number, number, number, number]; hill: [string, string, number, number];
-  shallow: [string, string]; sand: string; ochre: string; turf: [string, string]; glow: string; other: string; sun: number; shadow: number;
+  sky: Record<string, any>; land: string; hill: [string, string, number, number]; sea: [string, string, string, string];
+  sand: string; ochre: string; turf: [string, string]; side: string; glow: string; other: string; sun: number; shadow: number;
 };
 export type GolfHost = {
   root: HTMLElement; cfg: any; q: URLSearchParams; reduce: () => boolean; isFlat: () => boolean; quality: () => number;
@@ -24,28 +24,28 @@ export type GolfHost = {
 };
 
 // The light: one sun for the whole scene, from the south-west as on the hillshade (225°), so every shadow falls to the
-// north-east. Colours calibrated on the sea tiles' own range (shallow 210/228/228, deep 146/180/191) through MapLibre's
-// raster ops: [hue, saturation, contrast, brightness min, brightness max].
+// north-east. The sea is a smooth ramp drawn from the coastline outwards (shore turquoise to Atlantic blue): our own depth
+// tiles are coarse at coast distance, so golf mode lays the ramp over a deep-blue ground instead of stretching them.
 const LOOKS: Record<"a" | "b" | "c", Look> = {
-  // a. Noon: Slim Aarons' pool light. Clear blue sky to a pale horizon, Atlantic blue, turquoise along the sand, cream land.
-  a: { sky: { "sky-color": "#78b4e3", "horizon-color": "#eef4f2", "fog-color": "#f1efe6", "sky-horizon-blend": 0.45, "horizon-fog-blend": 0.3, "fog-ground-blend": 0.8, "atmosphere-blend": 0.6 },
-    bg: "#efe5cf", land: "#f7efdd", sea: [12, 0.79, 0.38, 0, 0.5], hill: ["rgba(255,250,232,0.65)", "rgba(110,96,66,0.30)", 0.6, 225],
-    shallow: ["#5ccdc8", "#a6ebe2"], sand: "#f1dcab", ochre: "#c98d4c", turf: ["#4c9c4c", "#5aad58"], glow: "#fbffe6", other: "#acd69a", sun: 225, shadow: 1 },
-  // b. Riviera: the same noon, printed softer (Belmond's paper maps): more haze, gentler sea, ivory land, quieter greens.
-  b: { sky: { "sky-color": "#9cc6e6", "horizon-color": "#f3f1ea", "fog-color": "#f3efe6", "sky-horizon-blend": 0.6, "horizon-fog-blend": 0.45, "fog-ground-blend": 0.7, "atmosphere-blend": 0.5 },
-    bg: "#f0e8d8", land: "#f8f2e4", sea: [10, 0.7, 0.4, 0.04, 0.56], hill: ["rgba(255,252,240,0.6)", "rgba(110,100,80,0.24)", 0.5, 225],
-    shallow: ["#7fd3cc", "#bdeee6"], sand: "#efdfb8", ochre: "#c49559", turf: ["#5a9d57", "#67aa62"], glow: "#fdfff0", other: "#b6d9a6", sun: 225, shadow: 0.8 },
-  // c. Late light: the sun lower in the west-south-west, warmer land, a deeper sea that makes the turquoise sing, longer shadows.
-  c: { sky: { "sky-color": "#6fa9dc", "horizon-color": "#f7ecdc", "fog-color": "#f4ead8", "sky-horizon-blend": 0.5, "horizon-fog-blend": 0.35, "fog-ground-blend": 0.78, "atmosphere-blend": 0.65 },
-    bg: "#eedfc4", land: "#f6ead3", sea: [14, 0.82, 0.4, 0, 0.46], hill: ["rgba(255,240,210,0.7)", "rgba(104,82,56,0.36)", 0.65, 250],
-    shallow: ["#4fc6c6", "#9fe6dc"], sand: "#f0d6a0", ochre: "#c4823f", turf: ["#489848", "#56a954"], glow: "#fff6d8", other: "#a9d293", sun: 250, shadow: 1.35 },
+  // a. Noon: Slim Aarons' pool light. Clear blue sky to a warm horizon, turquoise on the sand, cream land, bright turf.
+  a: { sky: { "sky-color": "#7cc4ec", "horizon-color": "#f7ebd9", "fog-color": "#f4ead9", "sky-horizon-blend": 0.6, "horizon-fog-blend": 0.7, "fog-ground-blend": 0.35, "atmosphere-blend": 0 },
+    land: "#f6ebd6", hill: ["rgba(255,252,240,0.5)", "#e9dac0", 0.12, 225], sea: ["#5fd6d2", "#2bb3c6", "#1d8fc4", "#0f5fa8"],
+    sand: "#f2dfb2", ochre: "#c98d4c", turf: ["#6fd173", "#4db352"], side: "#2f8a3e", glow: "#fff6d8", other: "#a9d98f", sun: 225, shadow: 1 },
+  // b. Riviera: the same noon printed softer, like Belmond's paper maps: more haze, a gentler sea, ivory land.
+  b: { sky: { "sky-color": "#92cbea", "horizon-color": "#f8f0e3", "fog-color": "#f6eee2", "sky-horizon-blend": 0.6, "horizon-fog-blend": 0.75, "fog-ground-blend": 0.45, "atmosphere-blend": 0 },
+    land: "#f8f0e0", hill: ["rgba(255,253,245,0.5)", "#ece0ca", 0.1, 225], sea: ["#7adbd5", "#45bccb", "#2b97c4", "#1a6aab"],
+    sand: "#f1e2bd", ochre: "#c49559", turf: ["#78cf79", "#58b85a"], side: "#3a8e47", glow: "#fff9e6", other: "#b3dc9c", sun: 225, shadow: 0.8 },
+  // c. Late light: the sun lower in the west-south-west, warmer land, a deeper sea, longer shadows.
+  c: { sky: { "sky-color": "#6cb8e6", "horizon-color": "#f9e4cb", "fog-color": "#f4e3cc", "sky-horizon-blend": 0.55, "horizon-fog-blend": 0.65, "fog-ground-blend": 0.35, "atmosphere-blend": 0 },
+    land: "#f5e6cc", hill: ["rgba(255,244,222,0.55)", "#e6d2b1", 0.14, 250], sea: ["#52d0cf", "#22a9c2", "#1584be", "#0b559f"],
+    sand: "#f0d6a0", ochre: "#c4823f", turf: ["#68cc6c", "#47ad4c"], side: "#2a8039", glow: "#ffefc8", other: "#a2d488", sun: 250, shadow: 1.35 },
 };
 const FLAG = (s: number) => `<svg class="gm-f-svg" viewBox="0 0 64 80" width="64" height="80" aria-hidden="true">
-  <ellipse cx="32" cy="76.5" rx="6.4" ry="2.3" fill="#1f2a24"/><ellipse cx="32" cy="76" rx="4.2" ry="1.3" fill="#0f1612"/>
-  <path d="M32 76.2V7" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><path d="M32.7 75V8" stroke="rgba(30,40,40,.18)" stroke-width=".8"/>
-  <circle cx="32" cy="6.2" r="1.9" fill="#fff"/>
-  <g class="gm-wave" style="animation-delay:${-s * 1.7}s"><path d="M33 8.2c4.6-1 9.6 1.4 14.6 2.6 2.2.5 4.4.6 6.4.2-1.5 1.6-1.6 3.8-.2 5.8-5.6 1-10.6-1.5-15.4-2.5-1.9-.4-3.7-.4-5.4 0z" fill="var(--gm-flag)"/>
-  <path d="M33 8.2c4.6-1 9.6 1.4 14.6 2.6 2.2.5 4.4.6 6.4.2-1 1-1.4 2.2-1.3 3.4-5.4.7-10-1.8-14.5-2.7-1.8-.4-3.5-.4-5.2-.1z" fill="rgba(255,255,255,.28)"/></g></svg>`;
+  <ellipse cx="32" cy="76.5" rx="6.4" ry="2.3" fill="#1b2a22"/><ellipse cx="32" cy="76" rx="4.2" ry="1.3" fill="#0d1612"/>
+  <path d="M32 76.2V7" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><path d="M32.8 75V8" stroke="rgba(30,40,40,.2)" stroke-width=".8"/>
+  <circle cx="32" cy="6.2" r="2" fill="#fff"/>
+  <g class="gm-wave" style="animation-delay:${-s * 1.7}s"><path d="M33 8c5.6-1.3 11.4 1.8 17.6 3.2 2.7.6 5.4.7 7.9.2-1.9 2.3-2 5.4-.3 8.2-6.8 1.3-12.9-1.9-18.8-3.2-2.3-.5-4.5-.5-6.4 0z" fill="#f5c431"/>
+  <path d="M33 8c5.6-1.3 11.4 1.8 17.6 3.2 2.7.6 5.4.7 7.9.2-1.3 1.4-1.8 3.1-1.7 4.8-6.6 1-12.2-2.4-17.7-3.6-2.2-.5-4.3-.5-6.1-.1z" fill="rgba(255,255,255,.3)"/></g></svg>`;
 const ICON = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 20.5V3.6"/><path d="M8.6 4c2.6-.5 5.4 1.3 9.4 1.2-1.2 1.4-1.2 3 0 4.4-4 .2-6.8-1.6-9.4-1.1z" fill="currentColor" stroke="none"/><ellipse cx="8" cy="20.6" rx="3.6" ry="1"/></svg>`;
 
 export function createGolf(h: GolfHost) {
@@ -95,21 +95,25 @@ export function createGolf(h: GolfHost) {
     if (!saved.overlay) await h.setGolfOverlay(true);
     if (!active) return;
     // The land, the sea, the relief: Algarve summer (golf mode only).
-    paint(map, "bg", "background-color", LK.bg); paint(map, "land", "fill-color", LK.land);
-    for (const id of ["sea", "seafar"]) { const [hu, sa, co, b0, b1] = LK.sea; paint(map, id, "raster-hue-rotate", hu); paint(map, id, "raster-saturation", sa); paint(map, id, "raster-contrast", co); paint(map, id, "raster-brightness-min", b0); paint(map, id, "raster-brightness-max", b1); }
+    // The sea: our depth tiles (the only source that knows sea from Spain's land) turned Atlantic blue with their depth
+    // steps flattened (negative contrast), so they never band; the ramp to the shore is drawn over them (below).
+    paint(map, "bg", "background-color", LK.land); paint(map, "land", "fill-color", LK.land);
+    for (const id of ["sea", "seafar"]) { paint(map, id, "raster-hue-rotate", 12); paint(map, id, "raster-saturation", 0.97); paint(map, id, "raster-contrast", -0.8); paint(map, id, "raster-brightness-min", 0.02); paint(map, id, "raster-brightness-max", 0.6); }
     paint(map, "hill", "hillshade-highlight-color", LK.hill[0]); paint(map, "hill", "hillshade-shadow-color", LK.hill[1]); paint(map, "hill", "hillshade-exaggeration", LK.hill[2]); paint(map, "hill", "hillshade-illumination-direction", LK.hill[3]);
+    paint(map, "hill", "hillshade-accent-color", "rgba(0,0,0,0)");
     paint(map, "muni-line", "line-opacity", 0); paint(map, "region-line", "line-opacity", 0); paint(map, "reach", "line-opacity", 0); paint(map, "rivers", "line-color", "#86c6cc");
-    // The sand and the thin ochre line where the land meets the sea; turquoise shallows under the land's edge.
+    // The sand and the thin ochre line where the land meets the sea.
     paint(map, "coast-glow", "line-color", LK.sand); paint(map, "coast-glow", "line-opacity", 1); paint(map, "coast-glow", "line-blur", ["interpolate", ["linear"], ["zoom"], 7, 0.5, 12, 2]);
     paint(map, "coast-glow", "line-width", ["interpolate", ["exponential", 1.6], ["zoom"], 7, 1.5, 10, 4, 12.5, 11]);
     paint(map, "coast", "line-color", LK.ochre); paint(map, "coast", "line-width", ["interpolate", ["linear"], ["zoom"], 7, 0.5, 12, 1.3]); paint(map, "coast", "line-opacity", 0.85);
-    if (map.getSource("coast")) {
-      addLayer(map, { id: "gm-shallow-o", type: "line", source: "coast", layout: { "line-join": "round", "line-cap": "round" }, paint: { "line-color": LK.shallow[0], "line-opacity": 0.9, "line-width": ["interpolate", ["exponential", 1.7], ["zoom"], 6, 6, 9, 30, 13, 300], "line-blur": ["interpolate", ["exponential", 1.7], ["zoom"], 6, 6, 9, 26, 13, 240] } }, "land");
-      addLayer(map, { id: "gm-shallow-i", type: "line", source: "coast", layout: { "line-join": "round", "line-cap": "round" }, paint: { "line-color": LK.shallow[1], "line-opacity": 0.95, "line-width": ["interpolate", ["exponential", 1.7], ["zoom"], 6, 2, 9, 8, 13, 150], "line-blur": ["interpolate", ["exponential", 1.7], ["zoom"], 6, 2, 9, 7, 13, 110] } }, "land");
-    }
+    // The sea ramp, outwards from the shore: turquoise, lagoon, Atlantic, over the deep blue ground (bevel joins: no spikes).
+    if (map.getSource("coast")) [[2, 360, 300, 0.95], [1, 150, 110, 0.95], [0, 48, 30, 0.95]].forEach(([c, w, b, o]) => {
+      const zw = (v: number) => ["interpolate", ["exponential", 1.5], ["zoom"], 7, v / 24, 10, v / 2.6, 13, v];
+      addLayer(map, { id: `gm-sea${c}`, type: "line", source: "coast", layout: { "line-join": "bevel", "line-cap": "butt" }, paint: { "line-color": LK.sea[c], "line-opacity": o, "line-width": zw(w), "line-blur": zw(b) } }, "land");
+    });
     // Every other course: a lighter green, so the golf map is complete; Details' courses are drawn below, raised and lit.
     const gids = D.gids ?? [];
-    paint(map, "golf", "fill-color", LK.other); paint(map, "golf", "fill-opacity", ["interpolate", ["linear"], ["zoom"], 8.5, 0, 9.4, 0.92]);
+    paint(map, "golf", "fill-color", LK.other); paint(map, "golf", "fill-opacity", ["interpolate", ["linear"], ["zoom"], 8.5, 0, 9.4, 0.8]);
     filt(map, "golf", ["!", ["in", ["get", "c"], ["literal", gids]]]);
     filt(map, "golfpt-o", ["all", ["get", "o"], ["!", ["in", ["get", "c"], ["literal", gids]]]]);
     filt(map, "golfpt", ["all", ["!", ["get", "o"]], ["!", ["in", ["get", "c"], ["literal", gids]]]]);
@@ -117,19 +121,21 @@ export function createGolf(h: GolfHost) {
     for (const id of ["golfpt", "golfpt-o"]) { paint(map, id, "circle-color", ["case", ["get", "soon"], "#ffffff", "#79ad6c"]); paint(map, id, "circle-stroke-color", "#ffffff"); paint(map, id, "circle-pitch-scale", "viewport");
       paint(map, id, "circle-radius", ["interpolate", ["linear"], ["zoom"], 6, 2, 9, 3.2, 12, 5]); paint(map, id, "circle-stroke-width", 1.2); }
     addSource(map, "gm-c", { type: "geojson", data: { type: "FeatureCollection", features: D.courses.filter((x) => x.outline).map((x) => ({ type: "Feature", properties: { id: x.id }, geometry: x.outline })) } });
-    addLayer(map, { id: "gm-glow", type: "line", source: "gm-c", minzoom: 8.4, paint: { "line-color": LK.glow, "line-opacity": ["interpolate", ["linear"], ["zoom"], 8.4, 0, 9.4, 0.85], "line-width": ["interpolate", ["exponential", 1.5], ["zoom"], 9, 3, 12, 12, 14, 26], "line-blur": ["interpolate", ["exponential", 1.5], ["zoom"], 9, 3, 12, 10, 14, 22] } });
-    addLayer(map, { id: "gm-ext", type: "fill-extrusion", source: "gm-c", minzoom: 8.4, paint: { "fill-extrusion-pattern": stripes(map), "fill-extrusion-opacity": 0.97, "fill-extrusion-vertical-gradient": true,
-      // A few metres close up; a little more from afar, so the edge still reads as turf standing out of the land.
-      "fill-extrusion-height": ["interpolate", ["linear"], ["zoom"], 9, 70, 12, 22, 14.5, 6], "fill-extrusion-base": 0 } as any });
+    addLayer(map, { id: "gm-glow", type: "line", source: "gm-c", minzoom: 8.4, paint: { "line-color": LK.glow, "line-opacity": ["interpolate", ["linear"], ["zoom"], 8.4, 0, 9.4, 0.55], "line-width": ["interpolate", ["exponential", 1.5], ["zoom"], 9, 3, 12, 10, 14, 20], "line-blur": 8 } });
+    // The turf: 7 m, its sides a deeper green, its top mown in stripes (a side slab and a thin striped top, so the sides
+    // keep their own colour; MapLibre would stripe the walls too).
+    const hgt = (k: number) => ["interpolate", ["linear"], ["zoom"], 9, 40 * k, 11, 16 * k, 13, 7 * k];
+    addLayer(map, { id: "gm-side", type: "fill-extrusion", source: "gm-c", minzoom: 8.4, paint: { "fill-extrusion-color": LK.side, "fill-extrusion-height": hgt(0.96), "fill-extrusion-base": 0, "fill-extrusion-vertical-gradient": false, "fill-extrusion-opacity": 1 } as any });
+    addLayer(map, { id: "gm-top", type: "fill-extrusion", source: "gm-c", minzoom: 8.4, paint: { "fill-extrusion-pattern": stripes(map), "fill-extrusion-height": hgt(1), "fill-extrusion-base": hgt(0.96), "fill-extrusion-vertical-gradient": false, "fill-extrusion-opacity": 1 } as any });
     // Slow glints on the water. Decoration only: they hold still under reduced motion and on phones (fps first).
     if (D.glints?.length) {
       for (const k of [0, 1]) {
-        addSource(map, `gm-g${k}`, { type: "geojson", data: { type: "FeatureCollection", features: D.glints.filter((_: any, i: number) => i % 2 === k).map(([x, y, r]: number[]) => ({ type: "Feature", properties: { r }, geometry: { type: "Point", coordinates: [x, y] } })) } });
+        addSource(map, `gm-g${k}`, { type: "geojson", data: { type: "FeatureCollection", features: D.glints.filter((_: any, i: number) => i % 4 === k).map(([x, y, r]: number[]) => ({ type: "Feature", properties: { r }, geometry: { type: "Point", coordinates: [x, y] } })) } });
         addLayer(map, { id: `gm-g${k}`, type: "circle", source: `gm-g${k}`, minzoom: 9, paint: { "circle-color": "#ffffff", "circle-blur": 0.7, "circle-pitch-alignment": "map",
-          "circle-radius": ["interpolate", ["linear"], ["zoom"], 9, ["*", 0.6, ["get", "r"]], 13, ["*", 2, ["get", "r"]]], "circle-opacity": k ? 0.08 : 0.38, "circle-opacity-transition": { duration: 2600, delay: 0 } } as any }, "land");
+          "circle-radius": ["interpolate", ["linear"], ["zoom"], 9, ["*", 0.6, ["get", "r"]], 13, ["*", 2, ["get", "r"]]], "circle-opacity": k ? 0.1 : 0.5, "circle-opacity-transition": { duration: 2600, delay: 0 } } as any }, "land");
       }
       const moving = !h.reduce() && matchMedia("(pointer: fine)").matches;
-      if (moving) { let on = 0; glintT = window.setInterval(() => { if (document.hidden || !active || h.quality() > 0) return; on ^= 1; map.setPaintProperty("gm-g0", "circle-opacity", on ? 0.08 : 0.38); map.setPaintProperty("gm-g1", "circle-opacity", on ? 0.38 : 0.08); }, 2800); }
+      if (moving) { let on = 0; glintT = window.setInterval(() => { if (document.hidden || !active || h.quality() > 0) return; on ^= 1; map.setPaintProperty("gm-g0", "circle-opacity", on ? 0.1 : 0.5); map.setPaintProperty("gm-g1", "circle-opacity", on ? 0.5 : 0.1); }, 2800); }
     }
     // Closer than the normal map goes (12.5): a course reads as turf from about 13.
     (saved as any).maxZoom = map.getMaxZoom(); map.setMaxZoom(14.5);
@@ -138,20 +144,21 @@ export function createGolf(h: GolfHost) {
     for (const m of h.pins()) m.m.setOpacity?.("1", "1");
     drawMarks(map, ml, D);
     drawYear();
-    map.on("move", layoutSoon); map.on("resize", layoutSoon); map.on("styledata", layoutSoon);
-    mo = new MutationObserver((ms) => { if (ms.some((m) => m.type === "attributes")) layoutSoon(); else hideClashing(); });
+    map.on("move", layoutSoon); map.on("moveend", placeSoon); map.on("resize", placeSoon); map.on("styledata", layoutSoon);
+    mo = new MutationObserver((ms) => { if (ms.some((m) => m.type === "attributes")) placeSoon(); else hideClashing(); });
     const lab = root.querySelector("[data-labels]"); if (lab) mo.observe(lab, { childList: true });
     const sh = root.querySelector("[data-sheet]"); if (sh) mo.observe(sh, { attributes: true, attributeFilter: ["class", "hidden", "data-detent"] });  // a card opens: names step out of its way
     setUrl(true); h.ev({ event: "map/golf/on", origin: root.dataset.mode });
     glide(map);
-    layout(); h.governor();
+    layout(true); h.governor();
     fill(h.sheetIn);
   }
   // The glide in: about 1.2 s to Vilamoura seen from the sea, pitched along the coast (inside maxPitch 72).
-  const HERO = { desk: { center: [-8.124, 37.0935], zoom: 13.2, pitch: 70, bearing: 16 }, phone: { center: [-8.13, 37.097], zoom: 11.95, pitch: 64, bearing: 12 } };
+  const HERO = { desk: { center: [-8.1265, 37.0905], zoom: 13.2, pitch: 72, bearing: -10 }, phone: { center: [-8.1285, 37.0905], zoom: 12.3, pitch: 70, bearing: -10 } };
   function glide(map: any) {
-    // The camera looks along the coast from the sea, the coast level across the screen; the haze closes the top.
-    const H = map.getCanvas().clientHeight, to = { ...(h.isWide() ? HERO.desk : HERO.phone), padding: { top: Math.round(H * (h.isWide() ? 0.04 : 0.04)), bottom: 0, left: 0, right: 0 } }, far = Math.abs(map.getZoom() - to.zoom) > 3;
+    // The camera stands over the sea looking north, the sea along the bottom of the screen; padding the top lowers the
+    // vanishing point (MapLibre's field of view is fixed), so the summer sky shows below the header.
+    const H = map.getCanvas().clientHeight, to = { ...(h.isWide() ? HERO.desk : HERO.phone), padding: { top: Math.round(H * (h.isWide() ? 0.2 : 0.16)), bottom: 0, left: 0, right: 0 } }, far = Math.abs(map.getZoom() - to.zoom) > 3;
     if (h.reduce()) { map.jumpTo(to); return; }
     // The reader may take over at any moment; anything else that cuts the glide short (the fps governor dropping the
     // terrain mid-flight) is finished with a short ease, so golf mode always arrives.
@@ -167,14 +174,14 @@ export function createGolf(h: GolfHost) {
   // ------------------------------------------------------------ off: back exactly to the normal map
   async function leave() {
     const map = h.map(); if (!active || !saved) return;
-    active = false; clearInterval(glintT); cancelAnimationFrame(raf); raf = 0; mo?.disconnect(); mo = null;
+    active = false; clearInterval(glintT); cancelAnimationFrame(raf); raf = 0; cancelAnimationFrame(raf2); raf2 = 0; mo?.disconnect(); mo = null;
     marks.forEach((x) => x.m.remove()); marks = []; year?.remove(); year = null;
     root.querySelectorAll(".m3-pin.gm-named, .m3-pin.gm-far").forEach((e) => e.classList.remove("gm-named", "gm-far"));
     for (const m of h.pins()) m.m.setOpacity?.();
     root.querySelectorAll<HTMLElement>("[data-labels] span").forEach((s) => (s.style.visibility = ""));
     root.style.removeProperty("--gm-shx"); root.style.removeProperty("--gm-shy");
     if (map) {
-      map.off("move", layoutSoon); map.off("resize", layoutSoon); map.off("styledata", layoutSoon);
+      map.off("move", layoutSoon); map.off("moveend", placeSoon); map.off("resize", placeSoon); map.off("styledata", layoutSoon);
       for (const id of [...ids.layers].reverse()) if (map.getLayer(id)) map.removeLayer(id);
       for (const id of ids.sources) if (map.getSource(id)) map.removeSource(id);
       for (const id of ids.images) if (map.hasImage(id)) map.removeImage(id);
@@ -211,9 +218,6 @@ export function createGolf(h: GolfHost) {
       if (el.dataset.label) el.setAttribute("aria-label", el.dataset.label); else el.setAttribute("aria-hidden", "true");
       marks.push({ m, el, kind, w: 0, h: 0, ...extra });
     };
-    // Where a course's name can sit on its own turf (the middle of its largest outline), when the flag's sides are taken.
-    for (const c of D.courses) if (c.outline && !(c as any).mid) { let best: number[][] = []; for (const poly of c.outline.coordinates) if (poly[0].length > best.length) best = poly[0];
-      (c as any).mid = [best.reduce((a, p) => a + p[0], 0) / best.length, best.reduce((a, p) => a + p[1], 0) / best.length]; }
     D.courses.forEach((c, i) => {
       const el = document.createElement("button"); el.type = "button"; el.className = "gm-flag";
       el.dataset.label = [c.n, c.holes ? T("holes", { n: c.holes }) : "", c.arch, tag].filter(Boolean).join(", ");
@@ -242,7 +246,7 @@ export function createGolf(h: GolfHost) {
       const el = document.createElement("div"); el.className = "gm-town"; el.setAttribute("aria-hidden", "true"); el.textContent = n;
       mk(el, x, y, "town");
     }
-    requestAnimationFrame(() => { for (const x of marks) { const l = x.el.querySelector<HTMLElement>(".gm-lab") ?? x.el; x.w = l.offsetWidth; x.h = l.offsetHeight; } layout(); });
+    requestAnimationFrame(() => { for (const x of marks) { const l = x.el.querySelector<HTMLElement>(".gm-lab") ?? x.el; x.w = l.offsetWidth; x.h = l.offsetHeight; } layout(true); });
   }
   function drawYear() {
     const items: string[] = G.year ?? []; if (!items.length) return;
@@ -250,13 +254,18 @@ export function createGolf(h: GolfHost) {
     year.innerHTML = `<b>${esc(T("year.k"))}</b><span>${items.map(esc).join(" · ")}</span>`;
     root.querySelector(".m3-stage")?.append(year);
   }
-  const layoutSoon = () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; layout(); }); };
+  // Every frame while the map moves: sizes, shadows, clusters and the photo pins (cheap). The names are placed when the
+  // camera rests (and when a card opens): they keep their side while the map moves, so nothing jumps between frames.
+  const layoutSoon = () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; layout(false); }); };
+  let raf2 = 0; const placeSoon = () => { if (!raf2) raf2 = requestAnimationFrame(() => { raf2 = 0; layout(true); }); };
   type Box = { x: number; y: number; w: number; h: number };
   const hit = (a: Box, list: Box[]) => list.some((b) => a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y);
   let mine: Box[] = [];
-  function layout() {
+  // The flag's size: about 56 px of pole from zoom 13, never under 30 px at zoom 10 (pole = 69 of the flag's 80 units).
+  const flagScale = (z: number) => Math.min(0.84, Math.max(0.44, 0.44 + (z - 10) * (0.37 / 3)));
+  function layout(place: boolean) {
     const map = h.map(); if (!map || !active) return;
-    const z = map.getZoom(), cv = map.getCanvas().getBoundingClientRect(), W = cv.width, H = cv.height;
+    const z = map.getZoom(), cv = map.getCanvas().getBoundingClientRect(), W = cv.width, H = cv.height, wide = h.isWide();
     // The parish borders arrive later (from z 7.8): quiet them as soon as they exist.
     if (map.getLayer("par-line") && !saved!.paint.some(([a]) => a === "par-line")) paint(map, "par-line", "line-opacity", 0);
     root.classList.toggle("gm-near", z >= 9.4);
@@ -265,77 +274,86 @@ export function createGolf(h: GolfHost) {
     const shx = Math.sin(az), shy = -Math.cos(az) * Math.max(0.25, k);
     root.style.setProperty("--gm-sha", `${Math.atan2(shy, shx)}rad`); root.style.setProperty("--gm-shl", `${Math.round(18 * LK.shadow * Math.hypot(shx, shy) + 6)}px`);
     root.style.setProperty("--gm-shx", `${(shx * 6 * LK.shadow).toFixed(1)}px`); root.style.setProperty("--gm-shy", `${(shy * 6 * LK.shadow + 2).toFixed(1)}px`);
-    // A name is measured the first time it can be (a flag inside a far cluster has no size yet).
-    for (const x of marks) if (!x.w && x.el.style.display !== "none") { const l = x.el.querySelector<HTMLElement>(".gm-lab") ?? x.el; x.w = l.offsetWidth; x.h = l.offsetHeight; }
     // Near the horizon, far-away marks (Porto's pins seen from the Algarve) would stand in the sky: only what is within
     // reach of the view stands.
-    const ctr = map.getCenter(), reach = map.getPitch() > 45 ? 25 * 2 ** (13 - z) + 30 : 1e9;
+    const ctr = map.getCenter(), reach = map.getPitch() > 45 ? 12 * 2 ** (13 - z) + 8 : 1e9;
     const farOf = (x: number, y: number) => Math.hypot((x - ctr.lng) * 89, (y - ctr.lat) * 111) > reach;
     for (const m of h.pins()) m.el.classList.toggle("gm-far", farOf(m.p.lon, m.p.lat));
     for (const x of marks) x.el.classList.toggle("gm-far", farOf(x.m.getLngLat().lng, x.m.getLngLat().lat));
-    const boxes: Box[] = [];
-    // 0. The interface: the top bar, the 2027 line and an open card are never written under.
-    for (const el of root.querySelectorAll<HTMLElement>(".m3-top > *:not([hidden]), .gm-year, .m3-sheet.is-open")) { const r = el.getBoundingClientRect(); if (r.width) boxes.push({ x: r.left - cv.left - 6, y: r.top - cv.top - 6, w: r.width + 12, h: r.height + 12 }); }
-    // 1. The developments' photo pins stand first: their photographs are never covered.
-    const pins = h.pins().filter((m) => m.el.style.display !== "none" && !m.el.classList.contains("gm-far"));
-    for (const m of pins) { const im = m.el.querySelector<HTMLElement>(".m3-pin-img"); if (!im) continue; const r = im.getBoundingClientRect(); boxes.push({ x: r.left - cv.left - 2, y: r.top - cv.top - 2, w: r.width + 4, h: r.height + 50 }); }
-    // 2. The flags: smaller with distance (higher on the screen is further away when the map is pitched), clustered far out.
+    for (const x of marks) if (!x.w && x.el.style.display !== "none") { const l = x.el.querySelector<HTMLElement>(".gm-lab") ?? x.el; x.w = l.offsetWidth; x.h = l.offsetHeight; }
+    // 1. The flags stand, all of them: clustered with a count only far out (under zoom 9), never hidden by a name.
     const flags = marks.filter((x) => x.kind === "flag" && !x.el.classList.contains("gm-far")), far = z < 9;
-    const P = new Map(flags.map((x) => [x, map.project([x.c!.x, x.c!.y])]));
-    const base = Math.min(1.08, Math.max(0.5, (z - 8.2) / 4.2));
-    const lead = new Map<string, typeof flags>();
+    const s0 = flagScale(z), lead = new Map<string, typeof flags>();
     for (const f of flags) { const g = far && f.grp ? f.grp : f.c!.id; lead.set(g, [...(lead.get(g) ?? []), f]); }
-    for (const [, fs] of lead) {
-      fs.forEach((f, i) => {
-        const p = P.get(f)!, depth = map.getPitch() > 20 ? 0.62 + 0.38 * Math.min(1, Math.max(0, p.y / H)) : 1, s = +(base * depth).toFixed(3);
-        const show = i === 0, inView = p.x > -40 && p.x < W + 40 && p.y > -10 && p.y < H + 90;
-        f.el.style.display = show ? "" : "none"; (f as any).s = s; (f as any).p = p;
-        f.el.style.setProperty("--s", String(s));
-        const n = f.el.querySelector<HTMLElement>(".gm-n")!; n.textContent = fs.length > 1 ? nf.format(fs.length) : ""; f.el.classList.toggle("is-n", fs.length > 1);
-        if (show && inView) boxes.push({ x: p.x - 8 * s, y: p.y - 78 * s, w: 32 * s, h: 78 * s });
-      });
+    const fbox: Box[] = [];
+    for (const [, fs] of lead) fs.forEach((f, i) => {
+      const p = map.project([f.c!.x, f.c!.y]), depth = map.getPitch() > 20 ? 0.86 + 0.14 * Math.min(1, Math.max(0, p.y / H)) : 1, s = +(s0 * depth).toFixed(3);
+      f.el.style.display = i === 0 ? "" : "none"; (f as any).s = s; (f as any).p = p; f.el.style.setProperty("--s", String(s));
+      const n = f.el.querySelector<HTMLElement>(".gm-n")!; n.textContent = fs.length > 1 ? nf.format(fs.length) : ""; f.el.classList.toggle("is-n", fs.length > 1);
+      if (i === 0) fbox.push({ x: p.x - 6 * s, y: p.y - 76 * s, w: 36 * s, h: 78 * s });
+    });
+    // 2. The photo pins float on a long white stem that leans away from the nearest flag; a pin that would touch another
+    //    stands taller. Their name and "Our pick" show at every zoom, kept inside the screen.
+    const pins = h.pins().filter((m) => m.el.style.display !== "none" && !m.el.classList.contains("gm-far"));
+    const stem0 = wide ? 140 : 90, img = wide ? 76 : 64, pbox: Box[] = [];
+    for (const m of [...pins].sort((a, b) => a.p.lon - b.p.lon)) {
+      const p = map.project([m.p.lon, m.p.lat]); m.el.classList.add("gm-named");
+      const nfl = flags.map((f) => (f as any).p).filter(Boolean).sort((a: any, b: any) => Math.hypot(a.x - p.x, a.y - p.y) - Math.hypot(b.x - p.x, b.y - p.y))[0];
+      let lean = nfl && Math.hypot(nfl.x - p.x, nfl.y - p.y) < 220 ? (p.x >= nfl.x ? 1 : -1) * (wide ? 34 : 22) : 0;
+      const sp = m.el.querySelector<HTMLElement>(":scope > span"), sw = Math.max(sp?.scrollWidth ?? 120, 80), sh = 38, topMin = 64;
+      // Taller or further aside until it touches no other pin or flag, and never under the top bar.
+      const box = (st: number, ln: number): Box => ({ x: p.x + ln - Math.max(img, sw) / 2, y: p.y - st - img - sh, w: Math.max(img, sw), h: img + sh });
+      const dir = lean >= 0 ? 1 : -1, tries: [number, number][] = [];
+      for (const st of [stem0, stem0 + 52, stem0 - 30]) for (const ln of [lean, lean + dir * 90, lean - dir * 90, lean + dir * 180]) tries.push([st, ln]);
+      let [stem, ln] = tries.find(([st, l]) => { const b = box(st, l); return b.y >= topMin && !hit(b, pbox) && !hit(b, fbox); }) ?? tries.reduce((a, t) => (box(t[0], t[1]).y > box(a[0], a[1]).y ? t : a));
+      if (box(stem, ln).y < topMin) stem = Math.max(40, stem - (topMin - box(stem, ln).y));
+      lean = ln; const b = box(stem, lean);
+      // The stem itself is in the way of names too.
+      pbox.push(b, { x: Math.min(p.x, p.x + lean) - 4, y: p.y - stem, w: Math.abs(lean) + 8, h: stem });
+      const left = p.x + lean - sw / 2, nx = left < 8 ? 8 - left : left + sw > W - 8 ? W - 8 - (left + sw) : 0;
+      m.el.style.setProperty("--gm-stem", `${stem}px`); m.el.style.setProperty("--gm-lean", `${lean}px`); m.el.style.setProperty("--gm-nx", `${Math.round(nx)}px`);
+      m.el.style.setProperty("--gm-slen", `${Math.round(Math.hypot(stem, lean))}px`); m.el.style.setProperty("--gm-srot", `${Math.atan2(lean, stem)}rad`);
     }
-    const placed: Box[] = [...boxes];
-    // 3. The developments' names (with their "Our pick"), where there is room.
-    for (const m of pins) {
-      const im = m.el.querySelector<HTMLElement>(".m3-pin-img"), sp = m.el.querySelector<HTMLElement>(":scope > span"); if (!im || !sp) continue;
-      const r = im.getBoundingClientRect(), w = Math.max(sp.scrollWidth, 60), hh = 34, b = { x: r.left - cv.left + r.width / 2 - w / 2, y: r.top - cv.top - hh - 4, w, h: hh };
-      const ok = z >= 9.4 && !hit(b, placed) && b.y > 60; m.el.classList.toggle("gm-named", ok); if (ok) placed.push(b);
-    }
-    // 4. Course names next to their flags close up; the group's name from afar.
+    if (!place) { hideClashing(); return; }
+    // 0. The interface: the top bar, the 2027 line and an open card are never written under.
+    const ui: Box[] = [];
+    for (const el of root.querySelectorAll<HTMLElement>(".m3-top > *:not([hidden]), .gm-year, .m3-sheet.is-open, .m3-attr")) { const r = el.getBoundingClientRect(); if (r.width) ui.push({ x: r.left - cv.left - 6, y: r.top - cv.top - 6, w: r.width + 12, h: r.height + 12 }); }
+    const placed: Box[] = [...ui, ...fbox, ...pbox];
+    const free = (b: Box) => b.x > 4 && b.x + b.w < W - 4 && b.y > 4 && b.y + b.h < H - 4 && !hit(b, placed);
+    // Off the turf: a name never sits on a course (lit or not).
+    const turf = ["gm-top", "gm-side", "golf"].filter((id) => map.getLayer(id));
+    const offTurf = (b: Box) => !turf.length || !map.queryRenderedFeatures([[b.x, b.y], [b.x + b.w, b.y + b.h]], { layers: turf }).length;
+    // 3. Details' courses first: every one named, beside its flag (top right, top left, right), stepping up a line if
+    //    taken; close up each course, from afar a group's name for the group.
     const near = z >= 11.3, single = (f: typeof flags[0]) => !f.grp || flags.filter((g) => g.grp === f.grp).length < 2;
     for (const f of flags) {
       const lab = f.el.querySelector<HTMLElement>(".gm-lab")!, s = (f as any).s as number, p = (f as any).p;
-      let side = "";
-      if ((near || (single(f) && z >= 9)) && f.el.style.display !== "none" && f.w) {
-        // Beside the flag first, then at the cup, above, below: the first place that touches nothing.
-        const R = (x: number, y: number): Box => ({ x, y, w: f.w, h: f.h });
-        const opts: [string, Box][] = [["r", R(p.x + 24 * s, p.y - 70 * s - f.h / 2 + 6)], ["l", R(p.x - 6 * s - f.w - 4, p.y - 70 * s - f.h / 2 + 6)],
-          ["rc", R(p.x + 10, p.y - f.h + 4)], ["lc", R(p.x - f.w - 10, p.y - f.h + 4)], ["t", R(p.x + 10 * s - f.w / 2, p.y - 84 * s - f.h)],
-          ["b", R(p.x - f.w / 2, p.y + 8)], ["rm", R(p.x + 12, p.y - 36 * s - f.h / 2)], ["lm", R(p.x - f.w - 12, p.y - 36 * s - f.h / 2)]];
-        // On its own turf, only where that is plainly beside its flag (so a name is never read as another course's).
-        const mid = (f.c as any).mid; if (mid) { const q = map.project(mid); if (Math.hypot(q.x - p.x, q.y - p.y) < 130) opts.splice(2, 0, ["on", R(q.x - f.w / 2, q.y - f.h / 2)]); }
-        for (const [sd, b] of opts) if (!hit(b, placed) && b.x > 4 && b.x + b.w < W - 4 && b.y > 64 && b.y + b.h < H - 4) { side = sd; placed.push(b); lab.style.translate = `${Math.round(b.x - p.x)}px ${Math.round(b.y - p.y)}px`; break; }
+      let ok = false;
+      if ((near || single(f)) && f.el.style.display !== "none" && f.w) {
+        const top = p.y - 76 * s, R = (x: number, y: number): Box => ({ x, y, w: f.w, h: f.h });
+        const opts: Box[] = [];
+        for (let k = 0; k < 5; k++) opts.push(R(p.x + 4, top - f.h - 2 - k * (f.h + 4)), R(p.x - f.w - 4, top - f.h - 2 - k * (f.h + 4)), ...(k ? [] : [R(p.x + 30 * s, top + 2)]));
+        let best = opts.find((b) => free(b) && offTurf(b)) ?? opts.find(free) ?? opts[0];
+        placed.push(best); ok = true; lab.style.translate = `${Math.round(best.x - p.x)}px ${Math.round(best.y - p.y)}px`;
       }
-      lab.dataset.side = side; lab.classList.toggle("is-on", !!side);
+      lab.classList.toggle("is-on", ok);
     }
     for (const g of marks.filter((x) => x.kind === "grp")) {
-      const fs = flags.filter((f) => f.grp === g.grp && f.el.style.display !== "none"), ps = fs.map((f) => (f as any).p), s = Math.max(...fs.map((f) => (f as any).s), 0.5);
+      const fs = flags.filter((f) => f.grp === g.grp && f.el.style.display !== "none"), ps = fs.map((f) => (f as any).p), s = Math.max(...fs.map((f) => (f as any).s), 0.44);
       let ok = false;
       if (!near && z >= 9 && ps.length && g.w) {
         const cx = ps.reduce((a, p) => a + p.x, 0) / ps.length, top = Math.min(...ps.map((p) => p.y)) - 80 * s, bot = Math.max(...ps.map((p) => p.y));
         const x0 = Math.min(...ps.map((p) => p.x)), x1 = Math.max(...ps.map((p) => p.x)), a = map.project(g.m.getLngLat());
-        // Above the flags, below them, then to either side.
-        const opts = [{ x: cx - g.w / 2, y: top - g.h - 4 }, { x: cx - g.w / 2, y: bot + 10 }, { x: x1 + 40 * s, y: (top + bot) / 2 - g.h / 2 }, { x: x0 - g.w - 16 * s, y: (top + bot) / 2 - g.h / 2 }];
-        for (const o of opts) { const b = { ...o, w: g.w, h: g.h }; if (!hit(b, placed) && b.y > 64 && b.x > 4 && b.x + b.w < W - 4 && b.y + b.h < H - 4) { ok = true; placed.push(b);
+        const opts = [{ x: cx - g.w / 2, y: top - g.h - 4 }, { x: x1 + 30 * s, y: top - g.h / 2 }, { x: x0 - g.w - 16 * s, y: top - g.h / 2 }, { x: cx - g.w / 2, y: bot + 10 }];
+        for (const o of opts) { const b = { ...o, w: g.w, h: g.h }; if (free(b)) { ok = true; placed.push(b);
           g.el.style.setProperty("--gx", `${Math.round(b.x + g.w / 2 - a.x)}px`); g.el.style.setProperty("--gy", `${Math.round(b.y + g.h + 4 - a.y)}px`); break; } }
       }
       g.el.classList.toggle("is-on", ok);
     }
-    // 5. The sourced captions (Falésia, the marina), then 6. the towns: each only where it is free.
+    // 4. The sourced captions (Falésia, the marina) above their point, on the land side; 5. the towns where free.
     for (const kind of ["cap", "town"]) for (const x of marks.filter((m) => m.kind === kind && !m.el.classList.contains("gm-far"))) {
       const p = map.project(x.m.getLngLat()), b = kind === "cap" ? { x: p.x - 6, y: p.y - x.h + 6, w: x.w, h: x.h } : { x: p.x - x.w / 2, y: p.y - x.h, w: x.w, h: x.h };
-      const ok = z >= (kind === "cap" ? 10.4 : 9.2) && x.w > 0 && !hit(b, placed) && b.y > 64 && b.x > 4 && b.x + b.w < W - 4 && b.y + b.h < H - 4;
+      const ok = z >= (kind === "cap" ? 10.4 : 9.2) && x.w > 0 && free(b) && offTurf(b);
       x.el.classList.toggle("is-on", ok); if (ok) placed.push(b);
     }
     mine = placed; hideClashing();
@@ -367,7 +385,8 @@ export function createGolf(h: GolfHost) {
     });
     const map = h.map(); if (map) map.easeTo({ center: [c.x, c.y], zoom: Math.max(map.getZoom(), 13.1), pitch: Math.max(map.getPitch(), 58), padding: pad(), duration: h.reduce() ? 0 : 1100, essential: true });
   }
-  const pad = () => (h.isWide() ? { right: 440, left: h.padL(), top: h.padTop(120), bottom: 80 } : { bottom: h.root.clientHeight * 0.5, top: h.padTop(h.root.clientHeight * 0.5), left: 0, right: 0 });
+  // Phone: the course sits in the top 40% of the screen, clear of the card.
+  const pad = () => (h.isWide() ? { right: 440, left: h.padL(), top: h.padTop(120), bottom: 80 } : { bottom: Math.round(h.root.clientHeight * 0.62), top: 70, left: 0, right: 0 });
 
   // ------------------------------------------------------------ "From your door" on every development card
   // The nearest course, beach and marina by car (OSRM, offline); in golf mode the first tee comes first.
@@ -390,8 +409,8 @@ export function createGolf(h: GolfHost) {
     door, fill,
     // A tap on a lit course (its raised outline) opens its hole card, before the map's own click (the place card).
     click(pt: { x: number; y: number }) {
-      const map = h.map(); if (!active || !map?.getLayer("gm-ext")) return false;
-      const f = map.queryRenderedFeatures([[pt.x - 3, pt.y - 3], [pt.x + 3, pt.y + 3]], { layers: ["gm-ext"] })[0]; if (!f) return false;
+      const map = h.map(); if (!active || !map?.getLayer("gm-top")) return false;
+      const f = map.queryRenderedFeatures([[pt.x - 3, pt.y - 3], [pt.x + 3, pt.y + 3]], { layers: ["gm-top", "gm-side"] })[0]; if (!f) return false;
       data().then((D) => { const c = D?.courses.find((x) => x.id === f.properties.id); if (c) hole(c); }); return true;
     },
     // The map was built (again): golf mode comes back if the reader had it on.
