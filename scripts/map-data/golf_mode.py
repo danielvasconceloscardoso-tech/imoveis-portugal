@@ -61,6 +61,15 @@ def table(src, dst):
 def mins(m): return max(1, round(m))
 
 
+def dedupe(src):
+    """One line per source title (two releases from the same publisher are one source line, its first link)."""
+    seen, out = set(), []
+    for x in src:
+        if x["t"] in seen: continue
+        seen.add(x["t"]); out.append(x)
+    return out
+
+
 facts = {r["id"]: r for r in csv.DictReader(open(FACTS, encoding="utf-8"))}
 det = [r for r in csv.DictReader(open(DET, encoding="utf-8")) if r.get("verified", "").strip().lower() == "yes"]
 allc = [r for r in csv.DictReader(open(ALL, encoding="utf-8")) if r["status"] == "open"]
@@ -87,15 +96,19 @@ for i, r in enumerate(det):
     if best and best[0] <= NEAR_MAX:
         p = projects[best[1]]
         near = {"id": p["id"], "name": p["name"], "min": mins(best[0])}
-        log.append([r["id"], "course→development", p["id"], p["name"], r["tee_lat"], r["tee_lon"], p["lat"], p["lon"], f"{best[0]:.1f}", f"{tt[i][best[1]][1]:.1f}", SRC, TODAY])
+    # Every development within an hour by car, nearest first: the hole card and the homes' "From your door" share them.
+    devs = sorted(({"id": projects[j]["id"], "name": projects[j]["name"], "min": mins(t[0])} for j, t in enumerate(tt[i]) if t[0] is not None and t[0] <= 60), key=lambda d: d["min"])
+    for d in devs:
+        j = next(k for k, pp in enumerate(projects) if pp["id"] == d["id"])
+        log.append([r["id"], "course→development", d["id"], d["name"], r["tee_lat"], r["tee_lon"], projects[j]["lat"], projects[j]["lon"], f"{tt[i][j][0]:.1f}", f"{tt[i][j][1]:.1f}", SRC, TODAY])
     polys = []
     for g in geo: polys += g["coordinates"] if g["type"] == "MultiPolygon" else [g["coordinates"]]
     rnd = lambda ring: [[round(x, 5), round(y, 5)] for x, y in ring]
     courses.append({"id": r["id"], "n": re.sub(r"\s*\(.*\)$", "", r["name"]), "short": r.get("short") or r["name"], "resort": r.get("resort", ""), "grp": r.get("group", ""),
         "holes": int(r["holes"]) if r["holes"].strip() else None, "arch": r["architect"], "x": float(r["tee_lon"]), "y": float(r["tee_lat"]),
         "tee": r.get("tee_kind", "tee"), "url": r["url"], "photo": r.get("photo", ""), "credit": r.get("photo_credit", ""),
-        "fact": r.get("fact", ""), "src": [{"t": t.strip(), "u": u.strip()} for t, u in zip(r["source_titles"].split("|"), r["source_urls"].split("|")) if u.strip()],
-        "near": near, "outline": {"type": "MultiPolygon", "coordinates": [[rnd(ring) for ring in poly] for poly in polys]} if polys else None})
+        "fact": r.get("fact", ""), "note": r.get("note", ""), "src": dedupe([{"t": t.strip(), "u": u.strip()} for t, u in zip(r["source_titles"].split("|"), r["source_urls"].split("|")) if u.strip()]),
+        "near": near, "devs": devs, "outline": {"type": "MultiPolygon", "coordinates": [[rnd(ring) for ring in poly] for poly in polys]} if polys else None})
 
 # 2. "From your door": the nearest course, beach and marina from each development, by car.
 door = {}
@@ -145,7 +158,7 @@ rnd = random.Random(78)
 glints = []
 for x, y, n in beaches:
     if -8.95 < x < -7.42 and 36.9 < y < 37.13:
-        for _ in range(3): glints.append([round(x + rnd.uniform(-0.012, 0.012), 5), round(y - rnd.uniform(0.004, 0.07), 5), round(rnd.uniform(0.6, 1.5), 2)])
+        for _ in range(2): glints.append([round(x + rnd.uniform(-0.012, 0.012), 5), round(y - rnd.uniform(0.004, 0.05), 5), round(rnd.uniform(0.5, 1.0), 2)])
 
 json.dump({"_how": "scripts/map-data/golf_mode.py (prompt 78); drive times: content/facts/golf/door_routes.csv", "checked": TODAY,
     "courses": courses, "gids": gids, "glints": glints, "door": door, "towns": towns, "caps": caps}, open(OUT, "w"), ensure_ascii=False, separators=(",", ":"))

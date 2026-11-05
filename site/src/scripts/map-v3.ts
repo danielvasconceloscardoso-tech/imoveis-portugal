@@ -22,7 +22,7 @@ type Proj = { id: string; name: string; tag?: string; developer: string; muni: s
   near?: string[]; muniName?: string; hero?: string; heroImg?: string;
   // Prompt 71 §3: a development without a showcase page on the site ("Our pick", no unit list) asks for its private visit
   // through the Concierge ("visit"); "showcase" is then the developer's own site.
-  visit?: string };
+  visit?: string; credit?: string };
 
 const reduce = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 const SKY = { "sky-color": "#f3efe6", "horizon-color": "#f6efe1", "fog-color": "#efe8da", "sky-horizon-blend": 0.6, "horizon-fog-blend": 0.7, "fog-ground-blend": 0.35, "atmosphere-blend": 0.5 };
@@ -123,7 +123,7 @@ export function initMapV3(root: HTMLElement) {
     const set = (k: string, v: string | null) => (v ? p.set(k, v) : p.delete(k));
     set("budget", budgetSet ? String(Math.round(budget)) : null); set("layer", layer === layer0 ? null : layer); set("place", selected); set("parish", selPar); set("region", selRegion); set("project", selProj);
     set("q", qi >= 0 && P ? P.quarters[qi] : null);
-    for (const k of ["golf", "beach"] as const) set(k, overlays[k] ? "1" : null);
+    for (const k of ["golf", "beach"] as const) set(k, overlays[k] && !(k === "golf" && golfX?.on()) ? "1" : null);  // p78b: golf mode is one switch (mode=golf)
     set("devs", mode === "page" ? (overlays.devs ? null : "0") : overlays.devs ? "1" : null);  // prompt 39 §2.1: on by default on the map page
     history.replaceState(history.state, "", `${location.pathname}${p.size ? `?${p}` : ""}${location.hash}`);  // p73 (MI2-06): no stray "?"
   }
@@ -371,7 +371,7 @@ export function initMapV3(root: HTMLElement) {
       if (mode === "page" && q.get("tour") === "south" && cfg.south?.length) southStop(0);
       if (mode === "home" && !flat && !selected) startSpin();
       if (!flat) governor();
-      map.on("click", (e: any) => { stopTour(); if (golfX?.click(e.point)) return; const gc = overlays.golf ? golfAt(e.point) : null; if (gc) { showGolf(gc); return; } const h = pick(e.point); if (!h) return; if (h.kind === "par") selectParish(h.key); else select(h.key); });
+      map.on("click", (e: any) => { stopTour(); if (golfX?.click(e.point)) return; const gc = overlays.golf ? golfAt(e.point) : null; if (gc) { showGolf(gc); return; } if (golfX?.on()) return; const h = pick(e.point); if (!h) return; if (h.kind === "par") selectParish(h.key); else select(h.key); });
       map.on("mousemove", (e: any) => hover(e.point)); map.on("mouseout", () => hover(null));
       map.on("move", labelsSoon); map.on("zoomend", () => { if (map.getZoom() > 7.8) loadParishes(); });
       ["pointerdown", "wheel", "touchstart"].forEach((ev) => canvas.addEventListener(ev, () => { stopTour(); halt(); arrStop(); }, { passive: true }));
@@ -450,7 +450,8 @@ export function initMapV3(root: HTMLElement) {
   // ------------------------------------------------------------ hover, pick, select
   let hoverS: string | null = null;
   function hover(pt: { x: number; y: number } | null) {
-    const h = pt ? pick(pt) : null; const s = h?.kind === "muni" ? h.key : null;
+    // Prompt 78b (J-06): golf mode names courses, never the parish under the pointer.
+    const h = pt && !golfX?.on() ? pick(pt) : null; const s = h?.kind === "muni" ? h.key : null;
     const g = pt && overlays.golf ? golfAt(pt) : null;
     if (s !== hoverS) { hoverS = s; for (const id of ["lift", "lift-line", "lift-shadow"]) map.setFilter(id, ["==", ["get", "s"], s ?? ""]); }
     map.getCanvas().style.cursor = h || g ? "pointer" : "";
@@ -977,8 +978,11 @@ export function initMapV3(root: HTMLElement) {
     const muni = byS.get(g.m)?.n ?? "";
     const when = g.status !== "open" ? L.golf.opening.replace("{y}", g.year || "—") : g.year;
     // Mike (M72-08): no photograph of the course under a licence we can use, so no picture area (never a placeholder).
-    let h = `<div class="m3-sb m3-golf-top"><p class="m3-kick">${esc([g.resort !== g.n ? g.resort : "", muni].filter(Boolean).join(" · "))}</p><h3 tabindex="-1">${esc(g.n)}</h3>`;
-    h += `<dl class="m3-stats"><div><dt>${L.golf.holes}</dt><dd>${g.holes ?? "—"}</dd></div><div><dt>${L.golf.design}</dt><dd class="m3-dd-s">${esc(g.designer || "—")}</dd></div><div><dt>${g.status !== "open" ? L.golf.status : L.golf.opened}</dt><dd class="m3-dd-s">${esc(when || "—")}</dd></div></dl>`;
+    const [gn, former] = (() => { const m = g.n.match(/^(.*?)\s*\((former [^)]*)\)$/); return m ? [m[1], m[2]] : [g.n, ""]; })();
+    let h = `<div class="m3-sb m3-golf-top"><p class="m3-kick">${esc([g.resort !== g.n ? g.resort : "", muni].filter(Boolean).join(" · "))}</p><h3 tabindex="-1">${esc(gn)}</h3>${former ? `<p class="m3-src" style="margin-top:4px">${esc(former)}</p>` : ""}`;
+    // p78b (M-11): only the fields we have; a former name goes on a small line under the name.
+    const st = [g.holes ? `<div><dt>${L.golf.holes}</dt><dd>${g.holes}</dd></div>` : "", g.designer ? `<div><dt>${L.golf.design}</dt><dd class="m3-dd-s">${esc(g.designer)}</dd></div>` : "", when ? `<div><dt>${g.status !== "open" ? L.golf.status : L.golf.opened}</dt><dd class="m3-dd-s">${esc(when)}</dd></div>` : ""].filter(Boolean);
+    if (st.length) h += `<dl class="m3-stats" style="grid-template-columns:repeat(${st.length},1fr)">${st.join("")}</dl>`;
     h += `<div class="m3-acts"><a class="m3-btn m3-btn-p" href="${cfg.links.buy}?place=${encodeURIComponent(muni)}&budget=${Math.round(budget)}">${L.golf.homes}</a><a class="m3-btn" href="${cfg.links.consult}?place=${encodeURIComponent(muni)}">${L.card.concierge}</a></div>`;
     h += `<div class="m3-more">${g.m ? `<button type="button" class="m3-link" data-goto="${g.m}">${esc(muni)}</button>` : ""}${g.url ? `<a class="m3-link" href="${esc(g.url)}" rel="noopener" target="_blank">${L.golf.site}</a>` : ""}</div>`;
     h += `<p class="m3-src">${L.golf.src}</p></div>`;
@@ -1086,9 +1090,11 @@ export function initMapV3(root: HTMLElement) {
       // Prompt 68: a project with a hero line opens like the hero of its place's card: the render, the name, one line, one
       // action (the private viewing, on the showcase's own request sheet), the showcase as a quiet link, and its place.
       const img = p.heroImg || p.render || "", pm2 = byS.get(p.muni)?.n ?? p.muniName ?? "";
-      let hh = `${img ? `<img class="m3-photo m3-hero-top" src="${esc(img)}-800.webp"${phThumb(p)} data-srcset="${esc(img)}-800.webp 800w, ${esc(img)}-1600.webp 1600w" sizes="(max-width: 819px) 100vw, 400px" alt="" width="800" height="450" fetchpriority="high">` : ""}`;
+      // p78b (J-07): the developer's image carries its credit, as the courses' do.
+      const cr = p.credit && cfg.p68 ? `<figcaption class="m3-cr">${esc(cfg.p68.credit.replace("{c}", p.credit.replace(/^©\s*/, "© ").replace(/,.*$/, "")))}</figcaption>` : "";
+      let hh = `${img ? `<figure class="m3-ph m3-proj-ph"><img class="m3-photo m3-hero-top" src="${esc(img)}-800.webp"${phThumb(p)} data-srcset="${esc(img)}-800.webp 800w, ${esc(img)}-1600.webp 1600w" sizes="(max-width: 819px) 100vw, 400px" alt="" width="800" height="450" fetchpriority="high">${cr}</figure>` : ""}`;
       // Prompt 68: the label only where the data gives one (O'rizon's "tag"); a development not yet signed carries none.
-      hh += `<div class="m3-sb m3-arr"><p class="m3-kick">${esc(pm2)}${p.tag ? ` · <span class="m3-tag">${esc(p.tag)}</span>` : ""}</p><div class="ht-row"><h2 class="m3-h" tabindex="-1">${esc(p.name)}</h2>${heartHTML("home", p.id, pm2 ? `${p.name}, ${pm2}` : p.name, p.showcase)}</div>`;
+      hh += `<div class="m3-sb m3-arr m3-proj"><p class="m3-kick">${esc(pm2)}${p.tag ? ` · <span class="m3-tag">${esc(p.tag)}</span>` : ""}</p><div class="ht-row"><h2 class="m3-h" tabindex="-1">${esc(p.name)}</h2>${heartHTML("home", p.id, pm2 ? `${p.name}, ${pm2}` : p.name, p.showcase)}</div>`;
       hh += `<p class="m3-arr-l">${esc(p.hero)}</p>${p.from ? `<p class="m3-line">${esc(L.pfrom.replace("{v}", eur.format(p.from)))}</p>${totalLine(p.from)}` : ""}`;
       hh += golfX?.door(p) ?? "";  // prompt 78: "From your door"
       hh += `<a class="m3-btn m3-btn-p m3-btn-w" href="${esc(p.visit || `${p.showcase}#pedir`)}" data-visit>${esc(cfg.p68.visit)}</a>`;
@@ -1340,7 +1346,11 @@ export function initMapV3(root: HTMLElement) {
   // Prompt 78: golf mode (?mode=golf, /golf, /arrow) on the map page; its hooks above are attach, detach, click, door and fill.
   if (mode === "page") golfX = createGolf({ root, cfg, q, reduce, isFlat: () => flat, quality: () => quality, load, map: () => map, ml: () => ml, sheetIn, projects, openSheet, showProject, ev, esc,
     isWide, padL, padTop, governor, sky: () => (flat ? { "sky-color": "#e7e2d7", "horizon-color": "#e7e2d7", "fog-color": "#e7e2d7", "sky-horizon-blend": 0, "horizon-fog-blend": 0, "fog-ground-blend": 1, "atmosphere-blend": 0 } : SKY),
-    pins: () => markers, golfOverlay: () => overlays.golf, setGolfOverlay: (on) => setOverlay("golf", on), stopAll: () => { stopTour(); halt(); arrStop(); } });
+    pins: () => markers, golfOverlay: () => overlays.golf, setGolfOverlay: (on) => setOverlay("golf", on), stopAll: () => { stopTour(); halt(); arrStop(); },
+    // p78b (UX-02, UX-03): the open card owns the place; golf mode frames it instead of flying elsewhere.
+    subject: () => { if (sheet.hidden) return null; const pj = selProj ? projects.find((x) => x.id === selProj) : null; if (pj) return { kind: "project", lon: pj.lon, lat: pj.lat, zoom: 13 };
+      const pl = selected ? byS.get(selected) : null; if (pl && !selPar) return { kind: "place", lon: pl.x, lat: pl.y, zoom: Math.min(11.6, zoomFor(pl) + 0.6) }; return selRegion || selPar || ctx ? { kind: "other" } : null; },
+    closeCard: () => select(null), forget: () => { timeEnd(); selProj = null; selected = null; selPar = null; selRegion = null; ctx = null; if (map?.getLayer("sel")) map.setFilter("sel", ["==", ["get", "s"], ""]); syncUrl(); } });
   if (golfX && q.get("mode") === "golf") load();
   dimButtons();
   if (layer !== "none" && layer !== layer0) setLayer(layer);

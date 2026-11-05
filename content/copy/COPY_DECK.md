@@ -11154,6 +11154,26 @@ Prompt 78 (4 Nov 2026): golf mode on the map (site/src/scripts/golf-mode.ts). Fu
 - EN: Next to {name}
 - FR: À côté de {name}
 
+### door.next
+- PT: Ao lado
+- EN: Next door
+- FR: À côté
+
+### mark
+- PT: Gerido pela Details
+- EN: Managed by Details
+- FR: Géré par Details
+
+### private
+- PT: Clube privado de sócios
+- EN: Private members' club
+- FR: Club privé de membres
+
+### reset
+- PT: Voltar a Vilamoura
+- EN: Back to Vilamoura
+- FR: Retour à Vilamoura
+
 ### site
 - PT: Site do campo
 - EN: Course site
@@ -11170,14 +11190,14 @@ Prompt 78 (4 Nov 2026): golf mode on the map (site/src/scripts/golf-mode.ts). Fu
 - FR: En 2027
 
 ### year.pga
-- PT: PGA Tour Champions no The Els Club
-- EN: PGA Tour Champions at The Els Club
-- FR: PGA Tour Champions à The Els Club
+- PT: PGA Tour Champions no The Els Club, 30 jul.–1 ago.
+- EN: PGA Tour Champions at The Els Club, 30 Jul–1 Aug
+- FR: PGA Tour Champions à The Els Club, 30 juil.–1er août
 
 ### year.f1
-- PT: Fórmula 1 em Portimão, 18 a 20 de junho
-- EN: Formula 1 at Portimão, 18 to 20 June
-- FR: Formule 1 à Portimão, du 18 au 20 juin
+- PT: Fórmula 1 em Portimão, 18–20 jun.
+- EN: Formula 1 at Portimão, 18–20 June
+- FR: Formule 1 à Portimão, 18–20 juin
 
 ### src.drive
 - PT: Tempo de carro: OSRM, dados OpenStreetMap, sem trânsito, {d}
