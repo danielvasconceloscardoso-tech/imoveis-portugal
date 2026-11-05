@@ -139,6 +139,60 @@ export function initMapV3(root: HTMLElement) {
   const mainPresentation = () => premium && !golfX?.on();
   const shortLandscape = () => mainPresentation() && matchMedia("(max-height: 500px) and (orientation: landscape)").matches;
   let cameraTouched = false, refitNational: (() => void) | null = null;
+  // Presentation only: keep the same DEM, bathymetry, geometry, price ramp and
+  // detail. Snapshot original paints so Golf enters from its unchanged base.
+  const mainPaint: [string, string, any][] = [
+    ["bg", "background-color", "#e1e5da"],
+    ["land", "fill-color", "#dce3d2"],
+    ["hill", "hillshade-highlight-color", "rgba(250,248,232,0.38)"],
+    ["hill", "hillshade-shadow-color", "rgba(45,69,57,0.26)"],
+    ["hill", "hillshade-accent-color", "rgba(81,106,78,0.08)"],
+    ["muni-line", "line-color", "#718576"],
+    ["muni-line", "line-opacity", ["interpolate", ["linear"], ["zoom"], 4, 0.14, 7, 0.28, 9, 0.62, 12, 0.85]],
+    ["region-line", "line-color", "#f2f4e9"],
+    ["region-line", "line-opacity", ["interpolate", ["linear"], ["zoom"], 4, 0.42, 7, 0.66, 10, 0.78]],
+    ["region-line", "line-width", ["interpolate", ["linear"], ["zoom"], 5, 0.8, 9, 1.6]],
+    ["par-line", "line-color", "#718576"],
+    ["par-line", "line-opacity", ["interpolate", ["linear"], ["zoom"], 8.2, 0.22, 10, 0.62, 12, 0.85]],
+    ["coast-glow", "line-color", "#f5f3e4"],
+    ["coast-glow", "line-opacity", 0.4],
+    ["coast", "line-color", "#f6f5e8"],
+    ["rivers", "line-color", "#80a4ac"],
+    ["sel", "line-color", "#294d42"],
+    ...["sea", "seafar"].flatMap((id): [string, string, any][] => [
+      [id, "raster-saturation", -0.18],
+      [id, "raster-contrast", 0.08],
+      [id, "raster-brightness-max", 0.91],
+    ]),
+  ];
+  const originalMainPaint = new Map<string, [string, string, any]>();
+  function setMainPalette(on = mainPresentation()) {
+    if (!premium || !map?.getLayer("land")) return;
+    if (on) for (const [id, property, value] of mainPaint) {
+      if (!map.getLayer(id)) continue;
+      const key = `${id}:${property}`;
+      if (!originalMainPaint.has(key)) originalMainPaint.set(key, [id, property, map.getPaintProperty(id, property) ?? null]);
+      map.setPaintProperty(id, property, value);
+    }
+    else for (const [id, property, value] of originalMainPaint.values()) if (map.getLayer(id)) map.setPaintProperty(id, property, value);
+  }
+  const placeSheetClose = (inMain = mainPresentation()) => {
+    if (!premium) return;
+    const from = inMain ? sheetIn : sheet, to = inMain ? sheet : sheetIn;
+    const close = from.querySelector<HTMLElement>(":scope > .m3-x");
+    if (close) { const focused = document.activeElement === close; to.querySelector(":scope > .m3-x")?.remove(); to.append(close); if (focused) close.focus({ preventScroll: true }); }
+  };
+  if (premium) {
+    let wasGolf = root.classList.contains("is-golf");
+    new MutationObserver(() => {
+      const isGolf = root.classList.contains("is-golf");
+      if (isGolf === wasGolf) return;
+      wasGolf = isGolf;
+      // Golf restores its saved base before removing this class. Its unhead()
+      // also returns the close button to the scroll; re-anchor it on exit.
+      if (!isGolf) { setMainPalette(); placeSheetClose(); }
+    }).observe(root, { attributes: true, attributeFilter: ["class"] });
+  }
   const projects: Proj[] = cfg.projects || [];
   const projMunis = new Set(projects.map((p) => p.muni));
   // Prompt 68 (4 Nov 2026), the golden sample of the method (content/METHOD.md): a place whose shown partner projects carry
@@ -281,7 +335,7 @@ export function initMapV3(root: HTMLElement) {
     map.setPaintProperty("hill", "hillshade-exaggeration", flat ? 0.55 : 0.7);
     try { map.setSky(flat ? { "sky-color": "#e7e2d7", "horizon-color": "#e7e2d7", "fog-color": "#e7e2d7", "sky-horizon-blend": 0, "horizon-fog-blend": 0, "fog-ground-blend": 1, "atmosphere-blend": 0 } : SKY); } catch { /* older styles have no sky */ }
     if (flat) { map.dragRotate.disable(); map.touchZoomRotate.disableRotation(); } else { map.dragRotate.enable(); map.touchZoomRotate.enableRotation(); }
-    map.easeTo({ pitch: flat ? 0 : 50, bearing: flat ? 0 : -12, duration: reduce() ? 0 : 700 });
+    map.easeTo({ pitch: flat ? 0 : mainPresentation() ? 35 : 50, bearing: flat ? 0 : -12, duration: reduce() ? 0 : 700 });
     if (!flat) governor();
   }
   root.querySelectorAll<HTMLButtonElement>("[data-overlay]").forEach((b) => b.addEventListener("click", () => {
@@ -307,6 +361,7 @@ export function initMapV3(root: HTMLElement) {
     try { map?.remove(); } catch { /* already gone */ }
     map = null; loading = null; parLoading = null; clusterOn = false; root.classList.remove("is-live");
     delete root.dataset.mapPainted; if (premium) canvas.style.opacity = "0";
+    originalMainPaint.clear();
   }
   async function rebuild(toFlat: boolean) { await teardown(); if (toFlat) { flat = true; dimButtons(); } load(); }
   function load(): Promise<void> {
@@ -390,6 +445,7 @@ export function initMapV3(root: HTMLElement) {
       map.addLayer({ id: "lift-line", type: "line", source: "munis", filter: ["==", ["get", "s"], ""], paint: { "line-color": "#ffffff", "line-width": 1.6, "line-translate": [0, -4] } });
       map.addLayer({ id: "sel", type: "line", source: "munis", filter: ["==", ["get", "s"], ""], paint: { "line-color": "#111214", "line-width": 2.2 } });
       if (!flat) map.setTerrain({ source: "dem", exaggeration: 1.5 });
+      setMainPalette();
       applyValues(); legend(); sentence();
       if (!premium) root.classList.add("is-live");
       else {
@@ -417,7 +473,8 @@ export function initMapV3(root: HTMLElement) {
       fit ??= map.cameraForBounds([[-12.4, 36.9], [-6.15, 42.17]], { padding: 8 });
       // Pitched, the south comes closer to the eye: aim a little south so the Algarve stays in frame.
       // p70 (MI-12): on a desktop the country comes a little closer (+0.4, was +0.2), filling the space beside the postcards.
-      return { center: flat || short ? fit.center : [fit.center.lng, fit.center.lat - (narrow ? 0.15 : 0.45)], zoom: fit.zoom + (flat || short ? 0 : narrow ? 0.28 : 0.4), pitch: flat ? 0 : short ? 35 : 50, bearing: flat ? 0 : -12 };
+      const natural = mainPresentation();
+      return { center: flat || short || natural ? fit.center : [fit.center.lng, fit.center.lat - (narrow ? 0.15 : 0.45)], zoom: fit.zoom + (flat || short || natural ? 0 : narrow ? 0.28 : 0.4), pitch: flat ? 0 : short || natural ? 35 : 50, bearing: flat ? 0 : -12 };
       };
       const home = fitHome();
       refitNational = () => { const next = fitHome(); (root as any).__home = next; map.jumpTo(next); };
@@ -1071,6 +1128,7 @@ export function initMapV3(root: HTMLElement) {
       map.addSource("pars", { type: "geojson", data: geo, promoteId: "id" });
       map.addLayer({ id: "par-fill", type: "fill", source: "pars", minzoom: 8.2, paint: { "fill-color": colorExpr(), "fill-opacity": ["interpolate", ["linear"], ["zoom"], 8.2, 0, 8.7, 0.8] } as any }, "hill");
       map.addLayer({ id: "par-line", type: "line", source: "pars", minzoom: 8.2, paint: { "line-color": "rgba(40,50,48,0.22)", "line-width": 0.5 } }, "hill");
+      if (mainPresentation()) setMainPalette();
       applyValues();
     })();
   }
@@ -1504,7 +1562,7 @@ export function initMapV3(root: HTMLElement) {
   // Prompt 78: golf mode (?mode=golf, /golf, /arrow) on the map page; its hooks above are attach, detach, click, door and fill.
   if (mode === "page") golfX = createGolf({ root, cfg, q, reduce, isFlat: () => flat, quality: () => quality, load, map: () => map, ml: () => ml, sheetIn, projects, openSheet, showProject, ev, esc,
     isWide, padL, padTop, governor, sky: () => (flat ? { "sky-color": "#e7e2d7", "horizon-color": "#e7e2d7", "fog-color": "#e7e2d7", "sky-horizon-blend": 0, "horizon-fog-blend": 0, "fog-ground-blend": 1, "atmosphere-blend": 0 } : SKY),
-    pins: () => markers, golfOverlay: () => overlays.golf, setGolfOverlay: (on) => setOverlay("golf", on), stopAll: () => { stopTour(); halt(); arrStop(); },
+    pins: () => markers, golfOverlay: () => overlays.golf, setGolfOverlay: (on) => setOverlay("golf", on), stopAll: () => { stopTour(); halt(); arrStop(); setMainPalette(false); placeSheetClose(false); },
     // p78b (UX-02, UX-03): the open card owns the place; golf mode frames it instead of flying elsewhere.
     subject: () => { if (sheet.hidden) return null; const pj = selProj ? projects.find((x) => x.id === selProj) : null; if (pj) return { kind: "project", lon: pj.lon, lat: pj.lat, zoom: 13 };
       const pl = selected ? byS.get(selected) : null; if (pl && !selPar) return { kind: "place", lon: pl.x, lat: pl.y, zoom: Math.min(11.6, zoomFor(pl) + 0.6) }; return selRegion || selPar || ctx ? { kind: "other" } : null; },
