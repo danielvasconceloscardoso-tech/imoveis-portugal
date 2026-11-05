@@ -44,6 +44,8 @@ const pendingImages = {
 export default defineConfig({
   site: "https://imoveisportugal.pt",
   trailingSlash: "always",
+  // Test builds and reports contain thousands of files; keep them out of the dev watcher.
+  vite: { server: { watch: { ignored: ["**/artifacts/**", "**/playwright-report/**", "**/test-results/**"] } } },
   build: { format: "directory" },
   integrations: [notFoundPages, pendingImages],
 });

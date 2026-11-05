@@ -137,8 +137,8 @@ import Beacon from "../components/Beacon.astro";
           {d2 && <a class="hd-saved" href={savedHref} data-saved-link data-nav-k="saved" aria-label={c("bar.saved", lang)} aria-current={page === "saved" ? "page" : undefined}><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20.2s-7.2-4.5-7.2-10.1A4.1 4.1 0 0 1 12 7.5a4.1 4.1 0 0 1 7.2 2.6c0 5.6-7.2 10.1-7.2 10.1z"/></svg></a>}
           {d2 && <a class="hd-cg" href={pathFor(lang, ed, "consult")} data-concierge>{c("find.concierge", lang)}</a>}
           <details class="concierge">
-            <summary><span class="open">{c("common.menu", lang)}</span><span class="shut">{c("common.close", lang)}</span></summary>
-            <div class="cmenu">
+            <summary aria-controls="site-menu"><span class="open">{c("common.menu", lang)}</span><span class="shut">{c("common.close", lang)}</span></summary>
+            <div class="cmenu" id="site-menu">
               <nav class="cmain" aria-label="Menu">
                 {nav.map((n) => <a href={pathFor(lang, ed, n.target)} aria-current={n.current.includes(page) ? "page" : undefined}>{c(`common.navx.${n.k}`, lang)}</a>)}
               </nav>
@@ -249,7 +249,7 @@ import Beacon from "../components/Beacon.astro";
       </nav>
     )}
     {d2 && <script type="application/json" id="ip-save-l" set:html={JSON.stringify(saveL)} />}
-    <script>import { initBar } from "../scripts/bar"; initBar();</script>
+    <script>import { initBar } from "../scripts/bar"; import { initNavigation } from "../scripts/navigation"; initNavigation(); initBar();</script>
     <DemoBar />
 </body>
 </html>

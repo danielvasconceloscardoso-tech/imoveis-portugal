@@ -1,6 +1,7 @@
 // The site chrome (prompt 35 §3.3-3.4): one search for everything (⌘K or the magnifier) and the concierge sheet.
 import { initFlow } from "./flow";
 import { rememberUtm } from "../lib/track";
+import { closeNavigationMenus, isolateBackground, trapFocus } from "./navigation";
 
 const plain = (s: string) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
 const esc = (t: string) => t.replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[ch]!);
@@ -13,6 +14,7 @@ export function initChrome() {
   if (fd) {
     const L = JSON.parse(fd.dataset.labels || "{}");
     const inp = fd.querySelector<HTMLInputElement>("[data-find-in]")!, res = fd.querySelector<HTMLUListElement>("[data-find-res]")!;
+    let searchOpen = false, searchOpener: HTMLElement | null = null, releaseSearch: (() => void) | undefined, searchHide = 0;
     let idx: [string, string, string, string?][] | null = null, hits: typeof idx = [], act = 0;
     const order = ["page", "place", "step", "sim", "faq"];
     const load = async () => { idx ??= await fetch(fd.dataset.index!).then((r) => r.json()).catch(() => []); };
@@ -28,23 +30,42 @@ export function initChrome() {
       hits.length ? inp.setAttribute("aria-activedescendant", "fd-0") : inp.removeAttribute("aria-activedescendant");
     };
     const mark = () => { res.querySelectorAll("[role=option]").forEach((li, i) => li.setAttribute("aria-selected", String(i === act))); inp.setAttribute("aria-activedescendant", `fd-${act}`); res.querySelector(`#fd-${act}`)?.scrollIntoView({ block: "nearest" }); };
-    const open = async () => {
+    const open = async (event?: Event) => {
       const ms = mapSpot(); if (ms) { ms.click(); return; }  // on the map page, the map's own search (it also finds golf, beaches, parishes)
-      fd.hidden = false; requestAnimationFrame(() => fd.classList.add("is-open")); inp.value = ""; res.innerHTML = ""; inp.focus(); await load(); find();
+      if (searchOpen) { inp.focus(); return; }
+      searchOpener = event?.currentTarget instanceof HTMLElement ? event.currentTarget : document.activeElement as HTMLElement;
+      const menu = searchOpener?.closest<HTMLDetailsElement>("details.concierge[open]");
+      if (menu) searchOpener = menu.querySelector<HTMLElement>(":scope > summary");
+      closeNavigationMenus();
+      clearTimeout(searchHide); searchOpen = true;
+      fd.hidden = false; releaseSearch = isolateBackground(fd); document.documentElement.classList.add("find-lock");
+      requestAnimationFrame(() => { if (searchOpen) fd.classList.add("is-open"); });
+      inp.value = ""; inp.removeAttribute("aria-activedescendant"); res.innerHTML = ""; inp.focus(); await load(); find();
     };
-    const close = () => { fd.classList.remove("is-open"); setTimeout(() => (fd.hidden = true), 200); };
+    const close = () => {
+      if (!searchOpen) return;
+      searchOpen = false; fd.classList.remove("is-open");
+      releaseSearch?.(); releaseSearch = undefined; document.documentElement.classList.remove("find-lock");
+      clearTimeout(searchHide); searchHide = window.setTimeout(() => { fd.hidden = true; }, 200);
+      if (searchOpener?.isConnected) searchOpener.focus({ preventScroll: true });
+    };
     document.querySelectorAll("[data-find-open]").forEach((b) => b.addEventListener("click", open));
     inp.addEventListener("input", async () => { await load(); find(); });
     inp.addEventListener("keydown", (e) => {
       if (e.key === "ArrowDown") { act = Math.min(act + 1, (hits?.length ?? 1) - 1); mark(); e.preventDefault(); }
       else if (e.key === "ArrowUp") { act = Math.max(act - 1, 0); mark(); e.preventDefault(); }
       else if (e.key === "Enter") { const a = res.querySelector<HTMLAnchorElement>(`#fd-${act} a`); if (a) location.href = a.href; e.preventDefault(); }
-      else if (e.key === "Escape") close();
     });
+    fd.addEventListener("keydown", (e) => {
+      if (!searchOpen) return;
+      if (e.key === "Escape") { e.preventDefault(); e.stopPropagation(); close(); }
+      else trapFocus(e, fd);
+    });
+    document.addEventListener("focusin", (e) => { if (searchOpen && !fd.contains(e.target as Node)) inp.focus(); });
     fd.addEventListener("click", (e) => { if (e.target === fd) close(); });
     addEventListener("keydown", (e) => {
       if (mapSpot()) return;  // the map page handles ⌘K itself
-      if ((e.key === "k" && (e.metaKey || e.ctrlKey)) || (e.key === "/" && !(e.target as HTMLElement).closest("input,textarea,[contenteditable]"))) { e.preventDefault(); fd.hidden ? open() : close(); }
+      if ((e.key === "k" && (e.metaKey || e.ctrlKey)) || (e.key === "/" && !(e.target as HTMLElement).closest("input,textarea,[contenteditable]"))) { e.preventDefault(); searchOpen ? close() : open(); }
     });
   }
 
@@ -66,9 +87,10 @@ export function initChrome() {
   let flowTopic = new URLSearchParams(location.search).get("topic") || "";
   const open = (e?: Event) => {
     e?.preventDefault(); clearTimeout(hideT);
-    document.querySelectorAll("details.concierge[open]").forEach((d) => d.removeAttribute("open"));
+    const menuOpener = document.activeElement?.closest("details.concierge[open]")?.querySelector<HTMLElement>(":scope > summary");
+    closeNavigationMenus();
     if (sh.classList.contains("is-open") && !sh.hidden) return;
-    lastFocus = document.activeElement as HTMLElement;
+    lastFocus = menuOpener ?? document.activeElement as HTMLElement;
     // Prompt 70: the flow keeps the sheet's history (scripts/flow.ts): opening pushes an entry, Back closes onto this page.
     flow ??= initFlow(flowEl, { param: "concierge", sheet: true, onClose: () => close() });
     if (!new URLSearchParams(location.search).has("concierge")) flow.show();

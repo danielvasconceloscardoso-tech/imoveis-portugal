@@ -47,6 +47,7 @@ import Beacon from "../components/Beacon.astro";
       (function () {
         var l; try { l = localStorage.getItem("ip-lang"); } catch (_) {}
         if (["pt", "en", "fr"].indexOf(l) < 0) { var n = (navigator.language || "en").slice(0, 2).toLowerCase(); l = n === "pt" || n === "fr" ? n : "en"; }
+        document.documentElement.lang = l === "pt" ? "pt-PT" : l;
         document.documentElement.dataset.l = l; document.documentElement.classList.add("js");
       })();
     </script>
@@ -92,6 +93,8 @@ import Beacon from "../components/Beacon.astro";
     <script is:inline define:vars={{ names, GO, paths }}>
       var root = document.documentElement;
       function setLang(l) {
+        if (["pt", "en", "fr"].indexOf(l) < 0) return;
+        root.lang = l === "pt" ? "pt-PT" : l;
         root.dataset.l = l;
         document.querySelectorAll("[data-set]").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.set === l)); });
       }
@@ -134,7 +137,7 @@ import Beacon from "../components/Beacon.astro";
       /* Legibility over any frame of the film: a quiet veil, darker at the bottom. */
       .op-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8,10,12,.4) 0%, rgba(8,10,12,.34) 45%, rgba(8,10,12,.74) 100%); }
       .op-langs { position: fixed; z-index: 2; top: max(14px, env(safe-area-inset-top)); right: max(16px, env(safe-area-inset-right)); display: flex; align-items: center; gap: 4px; font: 500 13px/1 var(--sans); letter-spacing: .12em; color: rgba(255,255,255,.7); }
-      .op-langs button { font: inherit; letter-spacing: inherit; color: rgba(255,255,255,.8); background: none; border: 0; padding: 14px 6px; cursor: pointer; }
+      .op-langs button { font: inherit; letter-spacing: inherit; color: rgba(255,255,255,.8); background: none; border: 0; padding: 14px 6px; min-width: 44px; min-height: 44px; cursor: pointer; }
       .op-langs button[aria-pressed="true"] { color: #fff; text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 1px; }
       .op { position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 96px 20px 40px; }
       .op-name { margin: 0; font: 400 clamp(2.9rem, 1.6rem + 5.4vw, 6.2rem)/1.02 var(--serif); letter-spacing: -.015em; text-shadow: 0 1px 24px rgba(0,0,0,.25); }

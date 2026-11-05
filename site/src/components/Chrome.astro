@@ -17,7 +17,7 @@ const L = { place: c("find.g.place", lang), faq: c("find.g.faq", lang), sim: c("
 <div class="fd" data-find hidden role="dialog" aria-modal="true" aria-label={c("find.open", lang)} data-index={`/search/${lang}-${ed}.json`} data-labels={JSON.stringify(L)}>
   <div class="fd-box">
     <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg>
-    <input type="search" data-find-in role="combobox" aria-expanded="true" aria-controls="fd-res" aria-autocomplete="list" autocomplete="off" placeholder={c("find.ph", lang)} />
+    <input type="search" data-find-in role="combobox" aria-label={c("find.ph", lang)} aria-expanded="true" aria-controls="fd-res" aria-autocomplete="list" autocomplete="off" placeholder={c("find.ph", lang)} />
     <ul id="fd-res" role="listbox" data-find-res></ul>
   </div>
 </div>

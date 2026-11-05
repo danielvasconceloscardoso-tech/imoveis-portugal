@@ -1,6 +1,7 @@
 ---
 // Partner showcase on the site (prompt 28 §2, D53): /{lang}/{ed}/{partners}/{developer}/{municipality}/. Partner projects
 // only (projects.json partner: true), labelled "Sponsored"; reached from the map's place card and the Partners page.
+import { redirectPage } from "../../../../../../lib/redirect";
 import V2 from "../../../../../../layouts/V2.astro";
 import TrustStrip from "../../../../../../components/TrustStrip.astro";
 import Showcase from "../../../../../../components/Showcase.astro";
@@ -26,7 +27,7 @@ export function getStaticPaths() {
 }
 const lang = Astro.params.lang as Lang, ed = Astro.params.ed as EdCode;
 const { to } = Astro.props as { to?: string };
-if (to) return new Response(`<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0; url=${to}"><link rel="canonical" href="${to}"><title>Imóveis Portugal</title><script>location.replace(${JSON.stringify(to)} + location.hash)</script></head><body><p><a href="${to}">${to}</a></p></body></html>`, { headers: { "content-type": "text/html; charset=utf-8" } });
+if (to) return redirectPage(to, lang);
 const { ps } = Astro.props as { ps: Project[] };
 const base = `/${lang}/${ed}/${SLUGS[lang].partners}/${ps[0].devSlug}/${ps[0].muni}/`;
 const k = EDITION_CUR[ed];

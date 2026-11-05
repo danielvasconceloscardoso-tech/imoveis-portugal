@@ -1,0 +1,53 @@
+name: Pull request validation
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: pr-validation-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      ASTRO_TELEMETRY_DISABLED: '1'
+      WORKERS_CI_BRANCH: main
+      CI: 'true'
+    defaults:
+      run:
+        working-directory: site
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+      - run: npm ci --no-audit --no-fund
+      - run: npx playwright install --with-deps chromium
+      - name: Content, translations and request endpoint
+        run: npm run test:content && npm run test:worker
+      - name: Production-mode static build
+        run: npm run build:test
+      - name: Desktop and mobile end-to-end tests
+        run: npm run test:e2e
+      - name: Performance and accessibility budgets
+        run: |
+          npm run preview -- --host 127.0.0.1 --port 4323 --outDir ./artifacts/dist > /tmp/imoveis-preview.log 2>&1 &
+          node scripts/wait-for-preview.mjs
+          npm run test:lighthouse
+      - name: Upload test evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: validation-${{ github.run_attempt }}
+          path: |
+            site/playwright-report/
+            site/test-results/
+            site/artifacts/lighthouse/
+          retention-days: 14

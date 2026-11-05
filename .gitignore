@@ -9,3 +9,8 @@ site/node_modules
 
 # Visual check diff images (scripts/visual-check.mjs), never committed
 ops/snapshots/diff/
+
+# Local validation reports and static test builds
+site/artifacts/
+site/playwright-report/
+site/test-results/
