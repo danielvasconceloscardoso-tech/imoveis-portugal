@@ -91,6 +91,8 @@ import Beacon from "../components/Beacon.astro";
     {(!config.launchReady || noindex) && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonical} />
     {LANGS.map((l) => <link rel="alternate" hreflang={HTML_LANG[l]} href={Astro.props.alternates ? Astro.props.alternates[l] : `https://${host}${urlFor(l)}`} />)}
+    {/* Match the home picture's preferred format; unsupported browsers discover its WebP fallback normally. */}
+    {d2 && page === "home" && !solid && <link rel="preload" href="/video/hero-portugal-poster.avif?v=6e9a1bc" as="image" type="image/avif" fetchpriority="high" />}
     {/* Preload the faces the page sets its first words in: Playfair and Manrope on design-v2 pages, Newsreader elsewhere. */}
     {d2 ? <><link rel="preload" href={d2serif} as="font" type="font/woff2" crossorigin /><link rel="preload" href={d2sans} as="font" type="font/woff2" crossorigin /></> : <link rel="preload" href={serif} as="font" type="font/woff2" crossorigin />}
     <script is:inline>document.documentElement.classList.add("js")</script>

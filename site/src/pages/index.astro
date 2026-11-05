@@ -33,7 +33,7 @@ import Beacon from "../components/Beacon.astro";
     <link rel="canonical" href={`${host}/`} />
     {LANGS.flatMap((l) => ED_ORDER.map((e) => <link rel="alternate" hreflang={`${l}-${e.toUpperCase()}`} href={`${host}${pathFor(l, e, "home")}`} />))}
     <link rel="alternate" hreflang="x-default" href={`${host}/`} />
-    <link rel="preload" href="/video/hero-portugal-poster.webp?v=6e9a1bc" as="image" fetchpriority="high" />
+    <link rel="preload" href="/video/hero-portugal-poster.avif?v=6e9a1bc" as="image" type="image/avif" fetchpriority="high" />
     <link rel="preload" href={serif} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={sans} as="font" type="font/woff2" crossorigin />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -101,27 +101,38 @@ import Beacon from "../components/Beacon.astro";
       setLang(root.dataset.l || "en");
       document.querySelectorAll("[data-set]").forEach(function (b) { b.addEventListener("click", function () { setLang(b.dataset.set); try { localStorage.setItem("ip-lang", b.dataset.set); } catch (_) {} }); });
       // A returning visitor: one more line, never a redirect.
-      var sl, se; try { sl = localStorage.getItem("ip-lang"); se = localStorage.getItem("ip-ed"); } catch (_) {}
+      var se; try { se = localStorage.getItem("ip-ed"); } catch (_) {}
       if (["lu", "fr", "ch", "br", "us", "il"].indexOf(se) > -1) {
         document.querySelectorAll("[data-go]").forEach(function (p) {
-          var a = p.querySelector("a"), l = a.dataset.lang, gl = ["pt", "en", "fr"].indexOf(sl) > -1 ? sl : l;
-          a.href = paths[gl][se]; a.textContent = GO[l].replace("{e}", names[l][se]); a.dataset.ed = se; a.dataset.lang = gl; p.hidden = false;
+          var a = p.querySelector("a"), l = a.dataset.lang;
+          a.href = paths[l][se]; a.textContent = GO[l].replace("{e}", names[l][se]); a.dataset.ed = se; p.hidden = false;
         });
       }
       document.addEventListener("click", function (e) {
         var a = e.target.closest && e.target.closest("a[data-ed]");
         if (a) try { localStorage.setItem("ip-lang", a.dataset.lang); localStorage.setItem("ip-ed", a.dataset.ed); } catch (_) {}
       });
-      // Prompt 78 §0: the film moves on its own on every device, reduced motion included; only Save-Data keeps the poster.
-      // Blocked autoplay (iPhone Low Power Mode) starts on the first touch, scroll or key.
+      // Preserve autoplay, including reduced motion, but let the poster paint before downloading the film.
+      // Background tabs and a film paused earlier in this visit never start playback.
       var v = document.querySelector("[data-film]"), c = navigator.connection || {};
       if (v && !c.saveData) {
-        v.muted = true; v.setAttribute("muted", ""); v.src = "/video/hero-portugal.mp4?v=6e9a1bc"; v.preload = "auto";
-        v.addEventListener("playing", function () { v.classList.add("on"); }, { once: true });
-        var p = v.play(); if (p && p.catch) p.catch(function () {
-          var kick = function () { v.play().catch(function () {}); };
-          ["touchstart", "pointerdown", "scroll", "keydown", "wheel"].forEach(function (g) { addEventListener(g, kick, { once: true, passive: true }); });
-        });
+        var waiting = false, gestures = ["touchstart", "pointerdown", "scroll", "keydown", "wheel"];
+        var paused = function () { try { return sessionStorage.getItem("ip.film.paused") === "1"; } catch (_) { return false; } };
+        var allowed = function () { return document.visibilityState !== "hidden" && !paused(); };
+        var clear = function () { waiting = false; gestures.forEach(function (g) { removeEventListener(g, play); }); };
+        var play = function () {
+          if (!allowed() || document.readyState !== "complete") return;
+          if (!v.getAttribute("src")) { v.muted = true; v.setAttribute("muted", ""); v.src = "/video/hero-portugal.mp4?v=6e9a1bc"; v.preload = "auto"; }
+          v.play().then(function () { if (!allowed()) v.pause(); clear(); }).catch(function () {
+            if (!waiting && allowed()) { waiting = true; gestures.forEach(function (g) { addEventListener(g, play, { passive: true }); }); }
+          });
+        };
+        v.addEventListener("playing", function () { if (allowed()) v.classList.add("on"); else v.pause(); });
+        v.addEventListener("error", function () { v.classList.remove("on"); clear(); });
+        document.addEventListener("visibilitychange", function () { if (allowed()) play(); else { v.pause(); clear(); } });
+        addEventListener("pagehide", function () { v.pause(); clear(); });
+        addEventListener("pageshow", play);
+        if (document.readyState === "complete") requestAnimationFrame(play); else addEventListener("load", function () { requestAnimationFrame(play); }, { once: true });
       }
     </script>
 
@@ -161,6 +172,7 @@ import Beacon from "../components/Beacon.astro";
         .op-row li:nth-child(n + 4) { border-top: 1px solid rgba(255,255,255,.24); }
         .op-row a { padding: 14px 2px; font-size: 15px; }
       }
+      @media (prefers-reduced-motion: reduce) { .op-media video { transition: none; } }
       /* The name, slogan, question and row arrive one after another (about 1.2 s); nothing bounces. */
       @media (prefers-reduced-motion: no-preference) {
         .op-in { animation: op-in .7s cubic-bezier(.2, .7, .2, 1) both; animation-delay: calc(var(--d) * 170ms); }

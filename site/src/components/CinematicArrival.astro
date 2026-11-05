@@ -1,0 +1,191 @@
+---
+import { pathFor, type EdCode, type Lang } from "../i18n";
+import { c } from "../lib/copy";
+import { img, labelOf, type Project } from "../lib/projects";
+import Heart from "./Heart.astro";
+
+interface Props { lang: Lang; ed: EdCode; featured?: { p: Project; place: string; now: number | null; href: string }; }
+const { lang, ed, featured } = Astro.props;
+const pt = lang === "pt";
+const map = pathFor(lang, ed, "map");
+const copy = pt ? {
+  eyebrow: "Portugal, a partir de onde vive",
+  title: "Encontre casa à distância.",
+  line: "Lugares, casas e os números para preparar a mudança.",
+  action: "Ver o mapa",
+  scroll: "Um lugar para começar",
+  intro: "Três lugares para começar.",
+  introLine: "Escolha uma paisagem. Veja os preços e as casas no mapa.",
+  explore: "Ver no mapa",
+  credits: "Créditos das imagens",
+} : {
+  eyebrow: "Portugal, from wherever you call home",
+  title: "Find a home from abroad.",
+  line: "Places, homes and the numbers behind your move.",
+  action: "Explore the map",
+  scroll: "A place to begin",
+  intro: "Three places to begin.",
+  introLine: "Choose a setting. See prices and homes on the map.",
+  explore: "View on the map",
+  credits: "Photography credits",
+};
+const places = [
+  { id: "porto", name: "Porto", image: "porto-douro-entardecer", line: pt ? "Entre o Douro e o Atlântico." : "Between the Douro and the Atlantic.", alt: pt ? "O rio Douro e a ponte Luís I ao entardecer, no Porto" : "The Douro and the Luís I bridge at dusk in Porto", position: "50% 50%" },
+  { id: "lisboa", name: pt ? "Lisboa" : "Lisbon", image: "lisboa-castelo-por-do-sol", line: pt ? "As colinas, os telhados e o Tejo." : "Hills, rooftops and the Tagus.", alt: pt ? "Os telhados de Lisboa e o Tejo vistos do castelo ao pôr do sol" : "Lisbon rooftops and the Tagus seen from the castle at sunset", position: "50% 48%" },
+  { id: "algarve", name: "Algarve", image: "algarve-praia-da-marinha", line: pt ? "Falésias sobre o Atlântico." : "Cliffs above the Atlantic.", alt: pt ? "As falésias e o mar na Praia da Marinha, no Algarve" : "The cliffs and sea at Praia da Marinha in the Algarve", position: "50% 50%" },
+];
+if (ed === "us") places.unshift(places.splice(2, 1)[0]);
+---
+
+<section class="h2-hero cinema-hero" aria-labelledby="h2-h1" data-cinematic-arrival>
+  <picture class="cinema-media cinema-poster">
+    <source type="image/avif" srcset="/video/hero-portugal-poster.avif?v=6e9a1bc" />
+    <img src="/video/hero-portugal-poster.webp?v=6e9a1bc" width="1280" height="720" alt="" fetchpriority="high" />
+  </picture>
+  <video class="cinema-media h2-hero-film" muted loop playsinline preload="none" data-hero-film data-ambient data-ctl-host=".cinema-controls" data-src="/video/hero-portugal.mp4?v=6e9a1bc" data-pause-l={c("film.pause", lang)} data-play-l={c("film.play", lang)} aria-hidden="true"></video>
+  <div class="cinema-copy">
+    <p class="cinema-eyebrow">{copy.eyebrow}</p>
+    <h1 id="h2-h1"><span>Portugal.</span><em>{copy.title}</em></h1>
+    <p class="cinema-line">{copy.line}</p>
+    <a class="cinema-action" href={map} data-nav-k="map" data-cinematic-map data-explore>
+      <span>{copy.action}</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" /></svg>
+    </a>
+  </div>
+  <div class="cinema-foot"><span>Algarve · Portugal</span><span class="cinema-scroll">{copy.scroll}<span aria-hidden="true">↓</span></span><div class="cinema-controls"></div></div>
+</section>
+
+<section class="cinema-places" aria-labelledby="cinema-places-title" data-cinematic-places>
+  <div class="cinema-intro">
+    <p class="cinema-section-no" aria-hidden="true">01 / Portugal</p>
+    <div><h2 id="cinema-places-title">{copy.intro}</h2><p>{copy.introLine}</p></div>
+  </div>
+  <ul class="cinema-grid">
+    {places.map((place, index) => (
+      <li>
+        <a class="cinema-place" href={`${map}?${place.id === "algarve" ? "region=algarve" : `place=${place.id}`}`} data-nav-k="map" data-cinematic-place={place.id}>
+          <span class="cinema-place-image">
+            <picture>
+              <source type="image/avif" srcset={`/img/v2/${place.image}-640.avif 640w, /img/v2/${place.image}-1024.avif 1024w, /img/v2/${place.image}-1600.avif 1600w`} sizes="(max-width: 759px) 82vw, 34vw" />
+              <img src={`/img/v2/${place.image}-1024.webp`} srcset={`/img/v2/${place.image}-640.webp 640w, /img/v2/${place.image}-1024.webp 1024w, /img/v2/${place.image}-1600.webp 1600w`} sizes="(max-width: 759px) 82vw, 34vw" alt={place.alt} width="1024" height="1280" loading="lazy" decoding="async" style={`object-position:${place.position}`} />
+            </picture>
+            <span class="cinema-place-no" aria-hidden="true">0{index + 1}</span>
+            <span class="cinema-place-open" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m6 18 12-12M6 6h12v12" /></svg></span>
+          </span>
+          <span class="cinema-place-caption"><span class="cinema-place-title">{place.name}</span><span class="cinema-place-line">{place.line}</span><span class="cinema-place-link">{copy.explore}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 18 12-12M6 6h12v12" /></svg></span></span>
+        </a>
+      </li>
+    ))}
+  </ul>
+  <a class="cinema-credit" href={`/${lang}/credits/`}>{copy.credits}</a>
+</section>
+
+{featured?.p.render && (
+  <section class="cinema-project" aria-labelledby="cinema-project-title" data-cinematic-project>
+    <div class="cinema-project-image">
+      <img src={img(featured.p.render, 800)} srcset={`${img(featured.p.render, 800)} 800w, ${img(featured.p.render)} 1600w`} sizes="(max-width:759px) 100vw, 58vw" alt={pt ? `Imagem do empreendimento ${featured.p.name}, em ${featured.place}` : `Developer image of ${featured.p.name} in ${featured.place}`} width="1600" height="1100" loading="lazy" decoding="async" />
+      <Heart lang={lang} kind="home" id={featured.p.id} label={`${featured.p.name}, ${featured.place}`} href={featured.href} />
+      <span class="cinema-project-credit">{pt ? "Imagem do promotor" : "Developer image"}</span>
+    </div>
+    <div class="cinema-project-copy">
+      <p class="cinema-project-eyebrow">{featured.place} · {labelOf(featured.p, lang, c("common.sponsored", lang))}</p>
+      <h2 id="cinema-project-title">{featured.p.name}</h2>
+      <p class="cinema-project-types">{featured.p.typologies.join(" · ")}</p>
+      {featured.now != null && <p class="cinema-project-availability">{c("showb.now", lang, { n: featured.now })}</p>}
+      <a class="cinema-project-action" href={featured.href} data-featured-project={featured.p.id}>{pt ? "Ver o empreendimento" : "View the development"}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 18 12-12M6 6h12v12" /></svg></a>
+      <p class="cinema-concierge"><a href={`${pathFor(lang, ed, "consult")}?project=${encodeURIComponent(featured.p.id)}`} data-concierge data-cinematic-concierge>{pt ? "Preparar o próximo passo" : "Plan your next step"}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" /></svg></a></p>
+    </div>
+  </section>
+)}
+
+<style>
+  .cinema-hero.h2-hero { min-height:100svh; box-sizing:border-box; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:140px 40px 120px; isolation:isolate; background:#143b39; }
+  :global(body.d2:has([data-cinematic-arrival]) .hd.solid) { background:rgba(245,242,235,.97); color:#192d2a; text-shadow:none; transition:background-color .2s ease,box-shadow .2s ease; }
+  :global(body.d2:has([data-cinematic-arrival]) .hd.solid .word),:global(body.d2:has([data-cinematic-arrival]) .hd.solid .nav a) { color:#192d2a; transition:none; }
+  :global(body.d2:has([data-cinematic-arrival]) .hd.solid .beta) { color:#53615b; opacity:1; }
+  .cinema-hero.h2-hero::after { background:linear-gradient(180deg,rgba(4,25,27,.2),rgba(4,25,27,.24) 42%,rgba(4,25,27,.57)); z-index:-1; }
+  .cinema-media,.cinema-media img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:50% 48%; z-index:-2; }
+  .cinema-poster img { animation:none; }
+  .cinema-copy { position:relative; z-index:1; text-align:center; color:#fff; width:min(100%,1100px); }
+  .cinema-eyebrow { margin:0 0 30px; font-size:11px; letter-spacing:.21em; text-transform:uppercase; font-weight:500; }
+  .cinema-hero.h2-hero h1 { font-family:var(--serif,"Playfair Display",serif); font-weight:400; font-size:clamp(80px,10.2vw,148px); line-height:.94; letter-spacing:-.065em; max-width:none; margin:0; overflow-wrap:normal; }
+  .cinema-hero h1 span,.cinema-hero h1 em { display:block; }
+  .cinema-hero.h2-hero h1 em { font-weight:400; font-size:.55em; letter-spacing:-.045em; line-height:1.25; margin-top:14px; }
+  .cinema-line { font-size:15px; line-height:1.6; color:rgba(255,255,255,.96); margin:28px auto 30px; max-width:29em; text-wrap:balance; }
+  .cinema-action { display:inline-flex; align-items:center; justify-content:space-between; gap:42px; min-height:58px; box-sizing:border-box; padding:0 26px; background:#fffdf7; color:#152d2b!important; text-decoration:none; border:1px solid #fffdf7; font-size:13px; font-weight:600; letter-spacing:.01em; transition:background .2s,color .2s; }
+  .cinema-action svg { width:22px; height:22px; fill:none; stroke:currentColor; stroke-width:1.4; }
+  .cinema-action:hover { background:#e9e9dd; }
+  .cinema-action:focus-visible { outline:3px solid #fff; outline-offset:6px; }
+  .cinema-place:focus-visible { outline:3px solid #254b3e; outline-offset:6px; }
+  .cinema-foot { position:absolute; bottom:34px; left:48px; right:48px; display:grid; grid-template-columns:1fr auto 1fr; align-items:center; color:rgba(255,255,255,.9); font-size:10px; letter-spacing:.13em; text-transform:uppercase; }
+  .cinema-scroll { display:flex; align-items:center; gap:14px; }
+  .cinema-scroll span { font-size:20px; line-height:1; }
+  .cinema-controls { min-height:44px; justify-self:end; position:relative; width:44px; }
+  .cinema-controls :global(.film-ctl) { position:relative; inset:auto; width:44px; height:44px; }
+  .cinema-places { padding:112px max(32px,calc((100vw - 1296px)/2)) 64px; background:#f5f2eb; color:#192d2a; }
+  .cinema-intro { display:grid; grid-template-columns:1fr 2fr; align-items:start; gap:48px; margin-bottom:64px; }
+  .cinema-section-no { font-size:10px; letter-spacing:.17em; text-transform:uppercase; margin-top:15px; }
+  .cinema-intro h2 { font-family:var(--serif,"Playfair Display",serif); font-weight:400; letter-spacing:-.045em; font-size:clamp(46px,5vw,76px); line-height:1.05; margin:0 0 22px; }
+  .cinema-intro>div>p { font-size:16px; line-height:1.6; margin:0; max-width:31em; color:#53615b; }
+  .cinema-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); list-style:none; gap:28px; padding:0; margin:0; }
+  .cinema-grid li:nth-child(2) { padding-top:64px; }
+  .cinema-grid li:nth-child(3) { padding-top:128px; }
+  .cinema-place { display:block; text-decoration:none; color:inherit; }
+  .cinema-place-image { display:block; position:relative; aspect-ratio:3/4; overflow:hidden; background:#dce0d6; }
+  .cinema-place-image picture,.cinema-place-image img { display:block; width:100%; height:100%; }
+  .cinema-place-image img { object-fit:cover; transition:transform .55s cubic-bezier(.2,.65,.3,1); }
+  .cinema-place:hover .cinema-place-image img { transform:scale(1.025); }
+  .cinema-place-no { position:absolute; top:20px; left:20px; font-size:11px; letter-spacing:.08em; color:#fff; text-shadow:0 1px 6px #000; }
+  .cinema-place-open { position:absolute; bottom:18px; right:18px; display:grid; place-items:center; width:42px; height:42px; background:rgba(255,253,247,.95); color:#192d2a; }
+  .cinema-place-open svg { width:22px; height:22px; fill:none; stroke:currentColor; stroke-width:1.4; stroke-linecap:round; stroke-linejoin:round; }
+  .cinema-place-caption { display:grid; gap:12px; padding:24px 0 0; }
+  .cinema-place-title { font-family:var(--serif,"Playfair Display",serif); font-size:38px; letter-spacing:-.035em; line-height:1.1; }
+  .cinema-place-line { color:#53615b; font-size:13px; line-height:1.6; }
+  .cinema-place-link { display:flex; align-items:center; gap:8px; font-size:11px; letter-spacing:.08em; margin-top:4px; }
+  .cinema-place-link svg { width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:1.3; }
+  .cinema-credit { display:inline-block; margin-top:42px; font-size:11px; color:#53615b; text-underline-offset:4px; }
+  .cinema-project { display:grid; grid-template-columns:1.25fr 1fr; background:#16372e; color:#fffdf7; }
+  .cinema-project-image { position:relative; min-height:620px; overflow:hidden; }
+  .cinema-project-image>img { width:100%; height:100%; display:block; object-fit:cover; object-position:center; }
+  .cinema-project-image :global(.heart) { z-index:2; }
+  .cinema-project-credit { position:absolute; left:26px; bottom:22px; font-size:10px; color:#fff; text-shadow:0 1px 5px #000; }
+  .cinema-project-copy { padding:80px clamp(36px,5.4vw,88px); align-self:center; }
+  .cinema-project-eyebrow { margin:0 0 36px; font-size:10px; letter-spacing:.13em; text-transform:uppercase; line-height:1.8; color:#e2e5d9; }
+  .cinema-project h2 { font-family:var(--serif,"Playfair Display",serif); font-size:clamp(42px,4.8vw,72px); line-height:1.05; letter-spacing:-.045em; margin:0 0 24px; font-weight:400; }
+  .cinema-project-types,.cinema-project-availability { font-size:13px; line-height:1.8; color:#e2e5d9; margin:0 0 12px; }
+  .cinema-project-action { display:flex; justify-content:space-between; align-items:center; gap:24px; border-top:1px solid rgba(255,255,255,.4); border-bottom:1px solid rgba(255,255,255,.4); padding:22px 0; margin-top:42px; color:inherit; font-size:13px; text-decoration:none; }
+  .cinema-project-action svg { width:24px; height:24px; flex-shrink:0; fill:none; stroke:currentColor; stroke-width:1.4; }
+  .cinema-project-action:focus-visible,.cinema-concierge a:focus-visible { outline:2px solid #fff; outline-offset:5px; }
+  .cinema-concierge { font-size:12px; line-height:1.8; margin:24px 0 0; }
+  .cinema-concierge a { display:inline-flex; align-items:center; gap:8px; padding:10px 0; color:#e2e5d9; text-underline-offset:5px; }
+  .cinema-concierge svg { width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:1.4; }
+  @media(max-width:759px) {
+    .cinema-hero.h2-hero { min-height:calc(100svh - 62px); padding:124px 24px 102px; }
+    .cinema-media,.cinema-media img { object-position:59% 50%; }
+    .cinema-eyebrow { font-size:9px; letter-spacing:.15em; margin-bottom:27px; max-width:27em; margin-inline:auto; line-height:1.6; }
+    .cinema-hero.h2-hero h1 { font-size:clamp(72px,19.6vw,118px); letter-spacing:-.065em; }
+    .cinema-hero.h2-hero h1 em { font-size:.48em; margin-top:15px; }
+    .cinema-line { font-size:13px; line-height:1.7; max-width:22em; margin-top:25px; margin-bottom:26px; }
+    .cinema-action { min-height:54px; padding:0 22px; gap:32px; font-size:12px; }
+    .cinema-foot { bottom:20px; left:24px; right:20px; grid-template-columns:1fr auto; font-size:8px; letter-spacing:.1em; }
+    .cinema-scroll { display:none; }
+    .cinema-places { padding:64px 0 40px; overflow:hidden; }
+    .cinema-intro { display:block; padding:0 24px; margin-bottom:32px; }
+    .cinema-section-no { font-size:9px; margin:0 0 22px; }
+    .cinema-intro h2 { font-size:46px; margin-bottom:18px; }
+    .cinema-intro>div>p { font-size:14px; max-width:24em; }
+    .cinema-grid { display:flex; gap:18px; overflow-x:auto; scroll-snap-type:x mandatory; padding:0 24px 18px; scroll-padding-inline:24px; scrollbar-width:thin; }
+    .cinema-grid li,.cinema-grid li:nth-child(2),.cinema-grid li:nth-child(3) { flex:0 0 82%; min-width:0; padding-top:0; scroll-snap-align:start; }
+    .cinema-place-image { aspect-ratio:4/5; }
+    .cinema-place-caption { padding-top:20px; gap:10px; }
+    .cinema-place-title { font-size:34px; }
+    .cinema-credit { margin:26px 24px 0; }
+    .cinema-project { grid-template-columns:1fr; }
+    .cinema-project-image { min-height:0; aspect-ratio:4/3; }
+    .cinema-project-copy { padding:40px 26px 46px; }
+    .cinema-project-eyebrow { margin-bottom:24px; font-size:9px; }
+    .cinema-project h2 { font-size:48px; max-width:9em; }
+    .cinema-project-action { margin-top:28px; padding:18px 0; }
+    .cinema-project-credit { left:20px; bottom:18px; }
+  }
+  @media(prefers-reduced-motion:reduce) { .cinema-place-image img { transition:none; } .cinema-place:hover .cinema-place-image img { transform:none; } }
+</style>

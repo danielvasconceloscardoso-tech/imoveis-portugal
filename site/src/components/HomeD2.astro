@@ -13,9 +13,11 @@ import { PROJECTS, showcases, img, labelOf } from "../lib/projects";
 import { SLUGS } from "../i18n";
 import Heart from "./Heart.astro";
 import { latestIssue } from "../lib/mare";
+import CinematicArrival from "./CinematicArrival.astro";
 
 interface Props { lang: Lang; ed: EdCode; }
 const { lang, ed } = Astro.props;
+const cinematic = (lang === "en" && ed === "us") || (lang === "pt" && ed === "lu");
 const src = new Sources();
 const e = (n: number) => eur(n, lang);
 const sup = (ns: number[]) => ns.map((i) => `<a class="sup" href="#fonte-${i}">${i}</a>`).join("");
@@ -46,16 +48,19 @@ const homes = showcases(PROJECTS).map((ps) => {
 if (ed === "us") homes.unshift(...PROJECTS.filter((p) => p.tag && p.hero && !(p.units?.length || p.blocks?.length) && (PRICES.munis[p.muni] as any)?.r === "algarve")
   .map((p) => ({ p, place: (PRICES.munis[p.muni] as any)?.n ?? p.muni, now: null as number | null, href: `${pathFor(lang, ed, "map")}?project=${encodeURIComponent(p.id)}` })));
 const nl = config.forms.newsletter[lang];
+const featuredHome = cinematic && homes[0]?.p.render ? homes[0] : undefined;
+const listedHomes = featuredHome ? homes.slice(1) : homes;
 const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("home.subscribe.subject", lang)} (${ed} · ${lang})`)}`;
 ---
+{cinematic ? <CinematicArrival lang={lang} ed={ed} featured={featuredHome} /> : (
 <section class="h2-hero" aria-labelledby="h2-h1">
-  {/* The film (prompt 33 §1): the Algarve cliffs from the air, a morning beach near Lagos, the Atlantic in late light; licensed clips (Pixabay, Mixkit), graded as one, silent, looping. The poster paints first and is the still for reduced motion. */}
+  {/* The film (prompt 33 §1): the Algarve cliffs from the air, a morning beach near Lagos, the Atlantic in late light; licensed clips (Pixabay, Mixkit), graded as one, silent, looping. The poster paints first and stays visible when Save-Data is on. */}
   <picture class="h2-hero-media h2-hero-poster">
     <source type="image/avif" srcset="/video/hero-portugal-poster.avif?v=6e9a1bc" />
     <img src="/video/hero-portugal-poster.webp?v=6e9a1bc" width="1280" height="720" alt="" fetchpriority="high" />
   </picture>
-  {/* p70 r3 (J-25): the film (1.9 MB) is asked for only after the page has loaded, and only on a fast connection; the poster is the hero until then. */}
-  <video class="h2-hero-media h2-hero-film" muted loop playsinline preload="none" poster="/video/hero-portugal-poster.webp?v=6e9a1bc" data-hero-film data-ambient data-ctl-host=".h2-hero .h2-bar" data-src="/video/hero-portugal.mp4?v=6e9a1bc" data-pause-l={c("film.pause", lang)} data-play-l={c("film.play", lang)} aria-hidden="true"></video>
+  {/* The picture supplies the poster in the supported format; a separate video poster would download WebP as well. */}
+  <video class="h2-hero-media h2-hero-film" muted loop playsinline preload="none" data-hero-film data-ambient data-ctl-host=".h2-hero .h2-bar" data-src="/video/hero-portugal.mp4?v=6e9a1bc" data-pause-l={c("film.pause", lang)} data-play-l={c("film.play", lang)} aria-hidden="true"></video>
   <div class="h2-hero-text">
     <h1 id="h2-h1">{c(`home2.h1.${ed}`, lang)}</h1>
     <p>{c("home2.lede", lang)}</p>
@@ -77,6 +82,7 @@ const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("h
   {/* Fix step 5 (3 Nov): one quiet line under "Começar": what Maré is, to its page (ev "mare/open/hero" on arrival). */}
   <p class="h2-mareline"><a href={`${pathFor(lang, ed, "mare")}?de=hero`}>{c("mare.line", lang)}</a></p>
 </section>
+)}
 
 <section class="h2-mapsec" aria-labelledby="h2-map">
   <div class="h2-text h2-center h2-maptext" data-reveal>
@@ -87,14 +93,14 @@ const mail = `mailto:${config.contactEmail}?subject=${encodeURIComponent(`${c("h
   <div class="h2-m3"><MapV3 lang={lang} ed={ed} mode="home" /></div>
 </section>
 
-{homes.length > 0 && (
+{listedHomes.length > 0 && (
 <section class="h2-sec h2-homes" aria-labelledby="h2-homes">
   <div class="h2-text h2-center" data-reveal>
     <h2 id="h2-homes">{c("bar.homes.h", lang)}</h2>
     <p>{c("bar.homes.p", lang)}</p>
   </div>
   <ul class="h2-hlist">
-    {homes.map((h) => (
+    {listedHomes.map((h) => (
       <li class="h2-hcard">
         <Heart lang={lang} kind="home" id={h.p.id} label={`${h.p.name}, ${h.place}`} href={h.href} />
         <a href={h.href} data-home-card={h.p.id}>
