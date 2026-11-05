@@ -11224,6 +11224,16 @@ Prompt 78 (4 Nov 2026): golf mode on the map (site/src/scripts/golf-mode.ts). Fu
 - EN: {n} golf courses
 - FR: {n} parcours de golf
 
+### courses.near
+- PT: Campos perto desta casa
+- EN: Courses near this home
+- FR: Parcours près de ce logement
+
+### north
+- PT: Norte para cima
+- EN: North up
+- FR: Nord en haut
+
 ## film
 
 ### pause

@@ -46,7 +46,12 @@
 .gm-wave { transform-box: view-box; transform-origin: 33px 12px; animation: gm-breathe 6.4s ease-in-out infinite; }
 @keyframes gm-breathe { 0%, 100% { transform: none; } 35% { transform: skewY(-2.4deg) scaleX(.95); } 70% { transform: skewY(1.2deg) scaleX(.985); } }
 /* The open course's flag: larger, with a white ring on the ground. */
-.gm-flag.is-sel .gm-f::before { content: ""; position: absolute; left: 22px; top: 72px; width: 20px; height: 8px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 0 1px rgba(20, 40, 30, .15); }
+.gm-flag.is-sel .gm-f::before { content: ""; position: absolute; left: 16px; top: 70px; width: 32px; height: 12px; border-radius: 50%; border: 2.5px solid #fff; box-shadow: 0 0 0 1.5px rgba(29, 106, 69, .55), 0 0 10px rgba(255, 255, 255, .8); }
+/* While a course's card is open the other courses step back a little (Mike). */
+.m3.gm-sel .gm-flag:not(.is-sel) .gm-f, .m3.gm-sel .gm-flag:not(.is-sel) .gm-lab { opacity: .5; transition: opacity .25s var(--e); }
+/* A course row tapped on a home's card: its flag answers once. */
+.gm-flag.is-ping .gm-f::after { content: ""; position: absolute; left: 12px; top: 66px; width: 40px; height: 16px; border-radius: 50%; border: 2px solid #fff; animation: gm-ping 1.2s ease-out 2; }
+@keyframes gm-ping { from { transform: scale(.6); opacity: 1; } to { transform: scale(2.2); opacity: 0; } }
 /* The tap area: the pole and the cloth (golf-mode.ts sizes it each frame: at least 44 px, never over another flag). */
 .m3 .gm-hit { position: absolute; left: 22px; top: 0; width: 44px; height: 80px; padding: 0; border-radius: 10px; background: none; pointer-events: auto; cursor: pointer; -webkit-tap-highlight-color: transparent; }
 .m3 .gm-hit:focus-visible { outline: 2px solid var(--gm-green); outline-offset: 0; }
@@ -64,6 +69,9 @@
 .m3 .gm-lab { position: absolute; left: 32px; top: 80px; display: grid; gap: 3px; padding: 0; text-align: left; background: none; pointer-events: auto; cursor: pointer; }
 .m3 .gm-lab:not(.is-on), .m3 .gm-grp:not(.is-on), .gm-cap { pointer-events: none; }
 .gm-lab em, .gm-grp em { font: italic 400 26px/1 var(--m3serif); letter-spacing: -.005em; color: #14302a; text-shadow: var(--gm-halo-s); }
+/* A course's name sits on the land, off the turf (golf-mode.ts), so its halo is the land's colour, 2 px only (UI3-06). */
+.gm-lab em, .gm-lab small { text-shadow: 0 0 1px #f4ead4, 0 0 2px #f4ead4, 0 0 2px #f4ead4 !important; }
+.gm-lab.no-cap small { display: none; }
 .gm-lab small, .gm-grp small, .gm-cap small { font: 600 10.5px/1.1 var(--m3sans); letter-spacing: .16em; text-transform: uppercase; color: var(--gm-terra); text-shadow: var(--gm-halo-s); }
 .m3 .gm-grp { display: grid; gap: 4px; justify-items: center; padding: 0; background: none; translate: var(--gx, 0px) var(--gy, 0px); cursor: pointer; }
 .m3 .gm-grp.is-on { pointer-events: auto; }
@@ -72,6 +80,11 @@
 .m3.gm-clustered .gm-lab em { font-size: 18px; }
 @media (max-width: 819px) { .gm-lab small { display: none; } .gm-lab em { font-size: 20px; } .gm-grp em { font-size: 22px; } .m3.gm-clustered .gm-lab em { font-size: 16px; } }
 .gm-cap { display: grid; justify-items: start; gap: 5px; }
+/* Golf mode's own towns (the coast only, UI3-03): quiet tracked caps. */
+.gm-town { white-space: nowrap; font: 500 10px/1 var(--m3sans); letter-spacing: .22em; text-transform: uppercase; color: #8a857c; text-shadow: 0 0 1px #f4ead4, 0 0 2px #f4ead4, 0 0 3px #f4ead4;
+  opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .15s var(--e), visibility 0s linear .15s; }
+.gm-town.is-on { opacity: 1; visibility: visible; transition: opacity .15s var(--e), visibility 0s; }
+.maplibregl-marker.gm-town { z-index: 1; }
 .gm-cap i { flex: none; width: 12px; height: 12px; box-sizing: border-box; border-radius: 50%; border: 2.5px solid var(--gm-terra); background: #fff; box-shadow: 0 1px 3px rgba(30, 40, 40, .2); }
 .gm-cap span { order: -1; display: grid; gap: 3px; margin-left: 2px; }
 .gm-cap b { font: 500 13px/1.1 var(--m3sans); color: var(--gm-ink); text-shadow: var(--gm-halo-s); }
@@ -94,6 +107,8 @@
 .m3.is-golf.gm-ready .m3-pin span { display: none; }
 .m3.is-golf.gm-ready .m3-pin.gm-named:not(.gm-unnamed) span { display: block; position: absolute; left: 50%; bottom: calc(var(--gm-stem, 72px) + var(--gm-img, 76px) + 2px); translate: calc(-50% + var(--gm-lean, 0px) + var(--gm-nx, 0px)) var(--gm-ny, 0px);
   padding: 0 0 4px; background: none; box-shadow: none; text-align: center; font: 600 14px/1.15 var(--m3sans); color: var(--gm-ink); text-shadow: var(--gm-halo-s); }
+/* On a phone a development's whole name, on two lines of 120 px at most (UI3-04). */
+@media (max-width: 819px) { .m3.is-golf.gm-ready .m3-pin.gm-named:not(.gm-unnamed) span { width: max-content; max-width: 120px; white-space: normal; text-wrap: balance; font-size: 12px; line-height: 1.2; } }
 .m3.is-golf.gm-ready .m3-pin em { margin-top: 4px; font: 600 9.5px/1 var(--m3sans); letter-spacing: .18em; color: var(--gm-terra); }
 
 /* The 2027 line, bottom left, white glass; one line on a phone. */
@@ -110,9 +125,17 @@
 .m3 .gm-reset[hidden] { display: none; }
 .m3 .gm-reset svg { width: 18px; height: 18px; }
 .m3:has(.m3-sheet.is-open) .gm-reset { right: 432px; }
+/* North up: a compass under the search, shown only when the map is turned (golf-mode.ts). */
+.m3 .gm-north { position: absolute; z-index: 5; left: 16px; top: 72px; width: 44px; height: 44px; display: grid; place-items: center; padding: 0; border-radius: 50%;
+  background: rgba(255, 255, 255, .86); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border: 1px solid rgba(255, 255, 255, .95); box-shadow: var(--sh); }
+.m3 .gm-north[hidden] { display: none; }
+.m3 .gm-north svg { width: 22px; height: 22px; rotate: var(--gm-b, 0deg); }
 @media (max-width: 819px) {
-  .gm-year { left: 10px; right: 10px; bottom: 12px; max-width: none; border-radius: 14px; font-size: 12.5px; padding: 10px 14px; transition: opacity .25s var(--e); }
-  .gm-year { align-items: flex-start; }
+  .m3 .gm-north { left: 10px; top: 64px; }
+  /* One line where it fits, else an ellipsis; a tap opens it whole (UI-15). */
+  .gm-year { left: 10px; right: 10px; bottom: 12px; max-width: none; border-radius: 14px; font-size: 12.5px; padding: 12px 14px; transition: opacity .25s var(--e); }
+  .gm-year span { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  .gm-year.is-open span { white-space: normal; }
   .m3-sheet.is-open ~ .gm-year, .m3-sheet.is-open ~ .gm-reset { opacity: 0; pointer-events: none; }
   .m3 .gm-reset { right: 10px; bottom: 64px; }
   .m3:has(.m3-sheet.is-open) .gm-reset { right: 10px; }
@@ -162,16 +185,52 @@
 .m3-sheet .gm-foot .m3-btn { width: 100%; margin: 0; }
 .m3-sheet .gm-foot .m3-btn-p, .m3-sheet .m3-proj .m3-btn-p { background: #1d6a45 !important; color: #fff !important; }
 .m3-sheet .gm-foot .m3-btn-p:hover { background: #17573a !important; }
-/* A phone held sideways: the card is a side panel beside the map, never the whole screen. */
+/* The development card in golf mode: its photograph, kicker and name in a head above the scroll, the booking bar below
+   it; only the body between them scrolls (golf-mode.ts moves them; UI2-01, UX2-02, M3-01). */
+.m3-sheet .gm-head { flex: none; position: relative; padding: 12px 12px 0; }
+.m3-sheet .gm-head .m3-proj-ph { margin: 0; }
+.m3-sheet .gm-head-t { padding: 14px 12px 10px; }
+.m3-sheet .gm-head-t .m3-kick { margin-bottom: 6px; }
+.m3-sheet .gm-head-t h2.m3-h { font-size: 30px; line-height: 34px; }
+.m3-sheet .gm-head-t .ht-row { padding-right: 0; }
+.m3-sheet .gm-head + .m3-sheet-in { border-top: 1px solid #ece6da; }
+.m3-sheet .gm-head + .m3-sheet-in > .m3-proj { padding-top: 12px; }
+.gm-near-l .gm-row { min-height: 44px; padding: 8px 0; }
+.gm-near-l .gm-row:hover .m3-mn { color: var(--gm-green); }
+@media (max-width: 819px) {
+  .m3-sheet .gm-head { padding: 0 12px; }
+  .m3-sheet .gm-head .m3-photo { aspect-ratio: 3 / 1 !important; }
+  .m3-sheet .gm-head-t { padding: 12px 0 8px; }
+  .m3-sheet .gm-head-t h2.m3-h { font-size: 26px; line-height: 30px; }
+  .m3-sheet[data-detent="0"] .gm-head .m3-proj-ph { display: none; }
+  /* A home's card opens tall enough for the head, a few rows and the booking bar. */
+  .m3.is-golf .m3-sheet.is-arr:has(.gm-head)[data-detent="1"] { height: 70%; }
+}
+/* A tablet: the card ends above the bottom bar, so its booking bar is whole (M3-01). */
+@media (min-width: 820px) and (max-width: 1079px) and (min-height: 501px) {
+  body.has-bb .m3.is-golf .m3-sheet { bottom: calc(16px + 62px + env(safe-area-inset-bottom)); }
+  body.has-bb .gm-year { bottom: calc(28px + 62px + env(safe-area-inset-bottom)); }
+  body.has-bb .m3 .gm-reset { bottom: calc(40px + 62px + env(safe-area-inset-bottom)); }
+}
+/* A phone held sideways: the card is a side panel beside the map, never the whole screen; Golf and Layers move left of it
+   (UX3-03), and its head is a small photograph beside the name. */
 @media (max-height: 500px) and (orientation: landscape) {
   .m3-sheet { top: 8px !important; bottom: 8px !important; right: 8px !important; left: auto !important; width: min(340px, 46vw) !important; height: auto !important; border-radius: 16px !important; transform: none; }
+  .m3.is-golf:has(.m3-sheet.is-open) .m3-top { right: calc(min(340px, 46vw) + 20px); }
+  .m3-sheet .gm-head { display: grid; grid-template-columns: 104px minmax(0, 1fr); column-gap: 12px; align-items: center; padding: 10px 52px 8px 10px; }
+  .m3-sheet .gm-head .m3-photo { width: 104px; height: 72px !important; aspect-ratio: auto !important; border-radius: 10px; }
+  .m3-sheet .gm-head .m3-cr { display: none; }
+  .m3-sheet .gm-head-t { padding: 0; }
+  .m3-sheet .gm-head-t h2.m3-h { font-size: 20px; line-height: 24px; }
+  .m3-sheet .gm-head-t .ht-row .ht { display: none; }
+  .m3.is-golf .m3-sheet .gm-head .m3-x { top: 8px; right: 8px; }
+  .m3-sheet .gm-foot { padding: 8px 12px calc(8px + env(safe-area-inset-bottom)); }
 }
 /* Desktop: a course card as tall as what it holds. */
 @media (min-width: 820px) { .m3-sheet:has(.gm-card) { bottom: auto; max-height: calc(100% - 92px); } }
 /* Bigger targets on the cards and the sheet (44 px). */
-/* Close: a 36 px white glass disc (visible on any photograph) inside a 44 px tap area. */
-.m3.is-golf .m3-x { width: 36px; height: 36px; top: 16px; right: 16px; background: rgba(255, 255, 255, .88) !important; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); box-shadow: 0 1px 6px rgba(0, 0, 0, .18); color: #1c2b2a !important; }
-.m3.is-golf .m3-x::after { content: ""; position: absolute; inset: -4px; border-radius: 50%; }
+/* Close: a 44 px white glass disc, visible on any photograph and a whole finger wide (UX-10). */
+.m3.is-golf .m3-x { width: 44px; height: 44px; top: 12px; right: 12px; z-index: 2; background: rgba(255, 255, 255, .88) !important; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); box-shadow: 0 1px 6px rgba(0, 0, 0, .18); color: #1c2b2a !important; }
 .m3.is-golf .m3-x svg { width: 14px; height: 14px; stroke-width: 1.75; }
 @media (max-width: 819px) {
   .m3-sheet h2.gm-name { font-size: 30px; line-height: 34px; }

@@ -83,6 +83,8 @@ export function initChrome() {
     sh.classList.remove("is-open"); back.classList.remove("is-open"); document.documentElement.classList.remove("sh-lock");
     clearTimeout(hideT); hideT = window.setTimeout(() => { sh.hidden = true; back.hidden = true; sh.style.transform = ""; }, slow() ? 0 : 380);
     flow?.stop(); if (!fromHistory) flow?.unwind(); lastFocus?.focus({ preventScroll: true });  // part 5: where the reader stopped
+    // p78b r3 (UX3-02): back on the card the visit was booked from, its entry no longer says "visit" (a later Back walks on).
+    if (fromHistory) { const u = new URL(location.href); if (u.searchParams.has("visit") && !u.searchParams.has("concierge")) { u.searchParams.delete("visit"); history.replaceState(history.state, "", `${u.pathname}${u.search}${u.hash}`); } }
   };
   addEventListener("popstate", () => {
     if (!flow) { if (new URLSearchParams(location.search).has("concierge")) open(); return; }
