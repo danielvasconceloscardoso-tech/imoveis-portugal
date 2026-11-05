@@ -57,9 +57,9 @@ Omit `CHROME_PATH` when using the Playwright-installed browser, as CI does. Repo
 
 ## Budgets and known limitations
 
-Arrival and US home require performance ≥70 and accessibility ≥90 on both mobile and desktop. The map requires accessibility ≥90, LCP ≤4 seconds and CLS ≤0.1. Software WebGL produced baseline map performance scores around 61–65 and high total blocking time; that score and TBT remain explicit diagnostics rather than a passing performance score. SEO is reported but ungated because the prelaunch site intentionally uses `noindex` and local previews use a loopback origin. Full production services, physical devices and production deployment identity are outside these local checks.
+Arrival and US/Luxembourg homes require performance ≥70 and accessibility ≥90 on both mobile and desktop. The map requires accessibility ≥90, LCP ≤4 seconds and CLS ≤0.1. Software WebGL produced baseline map performance scores around 61–65 and high total blocking time; that score and TBT remain explicit diagnostics rather than a passing performance score. SEO is reported but ungated because the prelaunch site intentionally uses `noindex` and local previews use a loopback origin. Full production services, physical devices and production deployment identity are outside these local checks.
 
-The read-only PR workflow runs content/worker checks, a production-mode build, both Playwright projects and Lighthouse. It uploads reports for 14 days. It contains no deployment step or production credentials. GitHub-hosted workflow execution must be checked after the PR is created; local success does not prove hosted CI passed.
+The read-only PR workflow runs content/worker checks, a production-mode build, the four Playwright viewport projects and ten Lighthouse audits. It uploads reports for 14 days. It contains no deployment step or production credentials. GitHub-hosted workflow execution must be checked after the PR is created; local success does not prove hosted CI passed.
 
 ## Issue 4 main-map checks
 
@@ -70,8 +70,10 @@ The map matrix uses explicit content viewports: 1440×900, 390×844, 430×932 an
 For original browser captures against an existing local preview:
 
 ```sh
-EVIDENCE_BASE_URL=http://127.0.0.1:4331 EVIDENCE_PHASE=after-final EVIDENCE_ALL_SIZES=1 node scripts/main-map-evidence.mjs
+EVIDENCE_BASE_URL=http://127.0.0.1:4332 EVIDENCE_PHASE=after-final EVIDENCE_ALL_SIZES=1 node scripts/main-map-evidence.mjs
 EVIDENCE_PHASE=after-final node scripts/main-map-gallery.mjs
 ```
 
 Run from `site/`; use the installed Playwright browser or set `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH`. The gallery needs the retained `artifacts/issue4/before/screenshots/manifest.json`. Captures preserve original pixels. Intro captures use its normal pointer-hover pause, with a rendered map underneath.
+
+For interaction profiling, run `MAP_PROFILE_BASE_URL=http://127.0.0.1:4332 MAP_PROFILE_PHASE=after-final node scripts/issue4-map-profile.mjs` from `site/`, serially. The report records source-loading diagnostics, renderer errors, terrain/resolution, camera and quality before/after the benchmark. A timeout, MapLibre error or quality change invalidates a row for performance comparison. The synthetic 100-pick/300-hover measurements are not INP. Different camera frames or graphics quality also limit before/after timing comparisons.

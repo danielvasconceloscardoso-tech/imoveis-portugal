@@ -18,13 +18,12 @@ const pt = lang === "pt";
     </figure>
     <div class="map-arrival__body">
       <div class="map-arrival__topline">
-        <p class="map-arrival__eyebrow">{pt ? "O seu lugar em" : "Your place in"}</p>
         <button type="button" class="map-arrival__skip" data-map-arrival-skip>{pt ? "Saltar" : "Skip"}</button>
       </div>
       <h2>Portugal.</h2>
       <p class="map-arrival__line">{pt ? "Encontre o lugar onde quer viver." : "Find the place you want to live."}</p>
       <button type="button" class="map-arrival__explore" data-map-arrival-explore>
-        {pt ? "Explorar Portugal" : "Explore Portugal"}
+        {pt ? "Ver o mapa" : "View the map"}
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" /></svg>
       </button>
     </div>
@@ -45,8 +44,7 @@ const pt = lang === "pt";
   .map-arrival__photo img { object-fit: cover; object-position: center 54%; animation: arrival-landscape 2100ms ease-out both; }
   .map-arrival__photo figcaption { position: absolute; bottom: 12px; left: 20px; padding: 5px 8px; border-radius: 2px; color: #fff; background: rgba(20,39,34,.7); font: 500 10px/1.4 "Manrope Variable", sans-serif; letter-spacing: .04em; }
   .map-arrival__body { padding: 16px 28px 26px; }
-  .map-arrival__topline { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-  .map-arrival__eyebrow { margin: 0; font: 600 10px/1.4 "Manrope Variable", sans-serif; letter-spacing: .18em; text-transform: uppercase; }
+  .map-arrival__topline { display: flex; align-items: center; justify-content: flex-end; gap: 16px; }
   .map-arrival button { cursor: pointer; font-family: "Manrope Variable", sans-serif; }
   .map-arrival button:focus-visible { outline: 3px solid #a17638; outline-offset: 4px; }
   .map-arrival__skip { display: inline-flex; justify-content: center; align-items: center; gap: 9px; min-height: 44px; min-width: 58px; padding: 0 2px; border: 0; background: transparent; color: #52655d; font-size: 12px; }

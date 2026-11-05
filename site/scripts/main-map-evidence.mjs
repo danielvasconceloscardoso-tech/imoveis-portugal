@@ -24,6 +24,7 @@ try {
   const ready=await page.evaluate(async()=>{const h=document.querySelector('[data-m3]').__mapx;await h.load();const m=h.map();if(m.loaded()&&!m.isMoving())return true;return new Promise(resolve=>{const t=setTimeout(()=>{m.off('idle',done);resolve(false)},20000);function done(){clearTimeout(t);resolve(true)}m.once('idle',done)})});
   await page.waitForFunction(()=>document.querySelector('[data-m3]')?.dataset.mapPainted==='true');
   await page.evaluate(()=>document.fonts.ready);
+  const nationalMapState=await page.evaluate(()=>{const h=document.querySelector('[data-m3]').__mapx,m=h.map();return {terrain:!!m.getTerrain(),quality:h.quality(),pixelRatio:m.getPixelRatio(),zoom:m.getZoom(),pitch:m.getPitch(),center:m.getCenter().toArray(),painted:document.querySelector('[data-m3]').dataset.mapPainted}});
   const introCaptured=introShown && await intro.isVisible();
   if(introCaptured) {
    await page.screenshot({path:`${output}${width}-${edition}-intro.png`});
@@ -41,7 +42,7 @@ try {
   await page.waitForFunction(()=>{const image=document.querySelector('[data-sheet-in] img');return image?.complete && image.naturalWidth>0});
   await page.screenshot({path:`${output}${width}-${edition}-gondomar.png`});
   const mapState=await page.evaluate(()=>{const h=document.querySelector('[data-m3]').__mapx,m=h.map();return {terrain:!!m.getTerrain(),quality:h.quality(),pixelRatio:m.getPixelRatio(),zoom:m.getZoom(),pitch:m.getPitch(),center:m.getCenter().toArray(),painted:document.querySelector('[data-m3]').dataset.mapPainted}});
-  rows.push({mapState,edition,path,width,height,ready,introCaptured,introMethod:'Normal application pointer-hover pause; rendered live map, no timer or imagery modifications',errors,overflow:await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),url:page.url()});
+  rows.push({nationalIdleWithin20s:ready,nationalMapState,selectedMapState:mapState,edition,path,width,height,ready,introCaptured,introMethod:'Normal application pointer-hover pause; rendered live map, no timer or imagery modifications',errors,overflow:await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),url:page.url()});
   console.log(JSON.stringify(rows.at(-1)));await context.close();
  }
 }finally{await browser.close();await writeFile(`${output}manifest.json`,JSON.stringify(rows,null,2)+'\n');}
