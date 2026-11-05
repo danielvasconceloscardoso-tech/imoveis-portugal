@@ -212,7 +212,7 @@ try {
   console.log(`Serving ${dist} on ${origin}; shooting ${pages.length} page(s) x ${SIZES.length} sizes ...`);
   const shotsDir = mkdtempSync(join(tmpdir(), "visual-check-shots-"));
   temps.push(shotsDir);
-  const browser = await chromium.launch({ args: ["--font-render-hinting=none", "--disable-lcd-text", "--hide-scrollbars"] });
+  const browser = await chromium.launch({ executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH || undefined, args: ["--font-render-hinting=none", "--disable-lcd-text", "--hide-scrollbars"] });
   const shots = await shoot(browser, origin, shotsDir);
   await browser.close();
   server.close(); server = null;

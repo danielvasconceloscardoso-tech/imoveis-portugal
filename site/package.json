@@ -10,7 +10,12 @@
     "share": "node scripts/map-poster.mjs",
     "mediakit": "tsx scripts/mediakit.ts",
     "brochure": "tsx scripts/brochure.ts",
-    "dossiers": "tsx dossiers/build.ts"
+    "dossiers": "tsx dossiers/build.ts",
+    "build:test": "astro build --outDir ./artifacts/dist",
+    "test:e2e": "playwright test",
+    "test:content": "node ../scripts/check-content.mjs && node ../scripts/check-parity.mjs",
+    "test:worker": "node ../scripts/test-worker.mjs",
+    "test:lighthouse": "node scripts/lighthouse-check.mjs"
   },
   "dependencies": {
     "@fontsource-variable/jost": "^5.3.0",
@@ -25,7 +30,10 @@
     "topojson-client": "^3.1.0"
   },
   "devDependencies": {
+    "@playwright/test": "1.56.1",
     "axe-core": "^4.10.2",
+    "chrome-launcher": "1.2.2",
+    "lighthouse": "12.3.0",
     "tsx": "^4.23.15"
   }
 }
