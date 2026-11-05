@@ -43,6 +43,7 @@ h3 { font-size: 21px; line-height: 1.25; }
 p { margin: 0 0 1em; }
 .skip { position: absolute; left: -999px; top: 8px; background: var(--card); padding: 8px 12px; z-index: 20; }
 .skip:focus { left: 8px; }
+html.nav-lock { overflow: hidden; }
 .frame { max-width: var(--frame); margin: 0 auto; padding: 0 24px; }
 .read { max-width: var(--read); }
 .label { font: 600 12px/1.2 var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin: 0 0 12px; }
