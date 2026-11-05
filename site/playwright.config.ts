@@ -23,7 +23,7 @@ export default defineConfig({
   },
   projects: [
     { name: 'desktop', use: { ...devices['Desktop Chrome'], viewport: { width: 1440, height: 900 } } },
-    { name: 'mobile', use: { ...devices['iPhone 13'], defaultBrowserType: 'chromium' } },
+    { name: 'mobile', use: { ...devices['iPhone 13'], defaultBrowserType: 'chromium', viewport: { width: 390, height: 844 } } },
     { name: 'map-wide-phone', testMatch: '**/main-map.spec.ts', use: { ...devices['iPhone 13'], defaultBrowserType: 'chromium', viewport: { width: 430, height: 932 } } },
     { name: 'map-landscape', testMatch: '**/main-map.spec.ts', use: { ...devices['iPhone 13 landscape'], defaultBrowserType: 'chromium', viewport: { width: 844, height: 390 } } },
   ],

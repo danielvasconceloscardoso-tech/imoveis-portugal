@@ -11,7 +11,8 @@ concurrency:
 jobs:
   validate:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    # Serial software-WebGL matrix plus all ten Lighthouse audits.
+    timeout-minutes: 45
     env:
       ASTRO_TELEMETRY_DISABLED: '1'
       WORKERS_CI_BRANCH: main

@@ -114,7 +114,7 @@ for (const edition of editions) {
     }
   });
 
-  test(`${edition.name}: real map, frame-coalesced selection and a sourced first-fold card`, async ({ page }) => {
+  test(`${edition.name}: real geography and frame-coalesced selection preserve terrain`, async ({ page }) => {
     test.setTimeout(65000);
     await page.goto(edition.path);
     await ready(page);
@@ -138,6 +138,11 @@ for (const edition of editions) {
     expect(result.markers).toBeGreaterThan(0);
     expect(result.terrainAfter).toBe(result.terrainBefore);
     expect(result.ratioAfter).toBe(result.ratioBefore);
+  });
+
+  test(`${edition.name}: search opens a sourced first-fold card and Back restores the map`, async ({ page }) => {
+    test.setTimeout(65000);
+    await page.goto(edition.path);
     await page.locator('[data-spot-open]').click();
     await page.locator('[data-spot-in]').fill('Gondomar');
     await page.locator('[data-spot-res] [role="option"]').filter({ hasText: 'Gondomar' }).first().click();
@@ -192,4 +197,16 @@ test('place context survives portrait-to-landscape rotation and controls stay re
     return { x: canvas.left + point.x, y: canvas.top + point.y, left: card.left, right: card.right, top: card.top, bottom: card.bottom };
   });
   expect(geometry.x < geometry.left || geometry.x > geometry.right || geometry.y < geometry.top || geometry.y > geometry.bottom).toBe(true);
+});
+
+// iPhone browser chrome can reduce the usable height below the required full-screen matrix.
+test('compact portrait keeps the price and its source visible without scrolling', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 664 });
+  await page.goto('/pt/lu/mapa/?place=gondomar');
+  const sheet = page.locator('[data-sheet]');
+  await expect(sheet.locator('.m3-pp > span').first()).toContainText(/2[\s,.]?348/);
+  await expect(sheet.locator('.m3-pp > span').first()).toBeInViewport({ ratio: .95 });
+  await expect(sheet.locator('.m3-price-period')).toBeInViewport({ ratio: .95 });
+  await expect(sheet.locator('.m3-place-story').first()).toBeInViewport({ ratio: .95 });
+  await expect(sheet.locator('.m3-x')).toBeInViewport();
 });
