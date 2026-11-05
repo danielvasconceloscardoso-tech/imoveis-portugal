@@ -706,7 +706,10 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
   const pv = q.get(opts.param), start = Number(pv);
   // MI-13: back in this tab on the same context (a language switch, another page), the reader's step comes back too.
   const resume = (fromSession || fromKeep) && sameCtx && !fromHome && !pv && Number(A._i) > 0 && Number(A._i) < N ? Number(A._i) : 0;
-  i = start >= 1 && start <= N ? start - 1 : resume || offset;
+  // Prompt 78b (UX-20, M-12): "Book a private visit" on a development opens on step 2 ("When can we call you to arrange the
+  // visit?"): step 1 is already answered by the context (Comprar casa, Sobre: <development>). Back still reaches it.
+  const visitStart = visit && !pv && !resume && N > 1 && steps[0]?.type === "help" && A.help === "home" ? 1 : 0;
+  i = start >= 1 && start <= N ? start - 1 : resume || offset || visitStart;
   const first = i;  // the first screen the reader sees (the bank and tax line sits on it)
   const wasDone = pv === "done" || /^p\d+$/.test(pv || "") ? (() => { try { return sessionStorage.getItem(`${key}.done`); } catch { return null; } })() : null;
   const lawyerFirst = topic === "lawyer" && !!LW && !start;

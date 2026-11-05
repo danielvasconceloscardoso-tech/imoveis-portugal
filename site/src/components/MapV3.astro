@@ -135,8 +135,8 @@ const cfg = { labels, links, photos, photoAlt, regionPhotos, ed, lang,
   // Prompt 71 §2: the south coast (US edition only; empty elsewhere).
   south, p71: south.length ? { k: k7("k"), next: k7("next"), golf: k7("golf") } : null,
   // Prompt 78: golf mode (golf-mode.ts; COPY_DECK.md "p78"). The 2027 line names only what facts.csv holds.
-  p78: { ...Object.fromEntries(["tag", "holes", "courses", "door.h", "door.car", "door.tee", "door.next", "near", "next", "site", "mark", "private", "reset", "homes", "year.k", "src.drive", "src.outline", "flags"].map((x) => [x, keep(`p78.${x}`, ["n", "name", "v", "d"])])),
-    door: true, year: [FACTS["pga-champions-portugal-invitational-2027"] && c("p78.year.pga", lang), FACTS["f1-portugal-2027-dates"] && c("p78.year.f1", lang)].filter(Boolean) },
+  p78: { ...Object.fromEntries(["tag", "holes", "courses", "door.h", "door.car", "door.tee", "door.next", "near", "next", "site", "mark", "private", "reset", "algarve", "src.details", "homes", "year.k", "src.drive", "src.outline", "flags"].map((x) => [x, keep(`p78.${x}`, ["n", "name", "v", "d"])])),
+    door: true, year: [FACTS["pga-champions-portugal-invitational-2027"] && [c("p78.year.pga", lang), FACTS["pga-champions-portugal-invitational-2027"].source_url], FACTS["f1-portugal-2027-dates"] && [c("p78.year.f1", lang), FACTS["f1-portugal-2027-dates"].source_url]].filter(Boolean) },
   pl: { view: c("showb.view", lang), visit: c("showb.visit", lang), price: c("showb.price", lang), now: c("showb.now", lang, { n: "{n}" }), near: c("bar.near", lang, { name: "{name}", muni: "{muni}" }) } };
 // Operator, step 1: the market price is the one free colour layer; 10 years, rents, yields and vacant homes are paid.
 const chips = [["price", "chip.price"]] as const;

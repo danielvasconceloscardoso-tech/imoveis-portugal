@@ -487,7 +487,7 @@ export function initMapV3(root: HTMLElement) {
   // p70 (A-08): a place's card zooms in by the place's size (Matosinhos, 67 km², fills the view instead of the whole Norte).
   const zoomFor = (p: Props) => Math.max(map?.getZoom() ?? 0, p.a < 40 ? 9.4 : p.a < 120 ? 9.0 : p.a < 400 ? 8.4 : 7.6);
   function flyTo(x: number, y: number, z: number, dur = 1200) {
-    map.flyTo({ center: [x, y], zoom: z, pitch: flat ? 0 : 46, duration: reduce() ? 0 : dur, curve: 1.3, easing: ease, essential: true,
+    map.flyTo({ center: [x, y], zoom: z, pitch: golfX?.on() ? golfX.pitch(z) : flat ? 0 : 46, duration: reduce() ? 0 : dur, curve: 1.3, easing: ease, essential: true,
       padding: isWide() ? { right: 440, left: padL(), top: padTop(120), bottom: 120 } : { bottom: canvas.clientHeight * 0.42, top: padTop(canvas.clientHeight * 0.42), left: 0, right: 0 } });
   }
   // Prompt 68, the arrival (content/METHOD.md, question 3): the camera comes down the Douro to the place in about two

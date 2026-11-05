@@ -11169,6 +11169,16 @@ Prompt 78 (4 Nov 2026): golf mode on the map (site/src/scripts/golf-mode.ts). Fu
 - EN: Private members' club
 - FR: Club privé de membres
 
+### algarve
+- PT: {n} no Algarve
+- EN: {n} in the Algarve
+- FR: {n} en Algarve
+
+### src.details
+- PT: Comunicado da Details (via IAGTO)
+- EN: Details press release (via IAGTO)
+- FR: Communiqué de Details (via IAGTO)
+
 ### reset
 - PT: Voltar a Vilamoura
 - EN: Back to Vilamoura
