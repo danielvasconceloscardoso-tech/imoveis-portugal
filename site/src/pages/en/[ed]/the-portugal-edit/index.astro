@@ -1,0 +1,26 @@
+---
+import V2 from "../../../../layouts/V2.astro";
+import { editorialStories } from "../../../../lib/editorial-showcase";
+import { ED_ORDER, type EdCode } from "../../../../i18n";
+export function getStaticPaths() { return ED_ORDER.map((ed) => ({ params: { ed } })); }
+const { ed } = Astro.params as { ed: EdCode };
+---
+<V2 lang="en" ed={ed} page="blog" title="The Portugal Edit | Imóveis Portugal"
+ description="Original stories on Portugal's people, art, coast, surfing, golf and culture."
+ canonicalUrl="https://imoveisportugal.pt/en/us/the-portugal-edit/" next={false}>
+ <div class="frame read ph" style="padding-top:clamp(3rem,6vw,6rem)">
+   <p class="small" style="letter-spacing:.12em;text-transform:uppercase">Imóveis Portugal · Independent editorial</p>
+   <h1>The Portugal Edit</h1>
+   <p class="lede">The places worth knowing. The people making them interesting. The stories behind the view.</p>
+ </div>
+ <section class="frame read blog-list" style="padding-bottom:5rem">
+ {editorialStories.map((story,i)=>(
+   <article class="qa-item" style="padding-block:2rem;border-bottom:1px solid #ddd5c6">
+     <p class="small" style="margin-bottom:.5rem">{String(i+1).padStart(2,"0")} · {story.category}</p>
+     <h2 class="h3"><a href={`/en/${ed}/the-portugal-edit/${story.slug}/`}>{story.title}</a></h2>
+     <p>{story.description}</p>
+     <p><a href={`/en/${ed}/the-portugal-edit/${story.slug}/`}>Read the story →</a></p>
+   </article>
+ ))}
+ </section>
+</V2>
