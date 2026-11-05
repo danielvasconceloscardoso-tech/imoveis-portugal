@@ -1,26 +1,16 @@
 import { ev } from "../lib/track";
 
 const SEEN = "ip.map.arrival.v1";
-type MapRoot = HTMLElement & { __mapx?: { load: () => Promise<void> } };
 
 export function initMapArrival(intro: HTMLElement) {
   if (intro.dataset.initialized) return;
   intro.dataset.initialized = "true";
   const frame = intro.closest<HTMLElement>("[data-map-arrival-frame]");
-  const root = frame?.querySelector<MapRoot>("[data-m3]");
+  const root = frame?.querySelector<HTMLElement>("[data-m3]");
   if (!frame || !root) return;
 
-  // The real map starts in parallel, including when the visual arrival is bypassed.
-  // The engine owns the camera and shared-link state; this surface never changes either.
-  let woke = false;
-  const wake = () => {
-    if (woke || !root.__mapx) return;
-    woke = true;
-    void root.__mapx.load().catch(() => {});
-    root.removeEventListener("m3:ready", wake);
-  };
-  root.addEventListener("m3:ready", wake);
-  wake();
+  // MapV3 owns background loading and prioritizes a shared place's card/photo.
+  // This optional introduction never bypasses that existing scheduling.
 
   const reduce = matchMedia("(prefers-reduced-motion: reduce)");
   const query = new URLSearchParams(location.search);

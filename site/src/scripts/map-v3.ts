@@ -1586,10 +1586,11 @@ export function initMapV3(root: HTMLElement) {
     // A link with a state opens the map straight away; a plain ?place= link shows the card at once (below) and the map wakes
     // at the first sign of a reader, then flies to the place (operator, step 1: the card in under a second on a phone).
     if (q.has("parish") || q.has("region") || q.has("q") || q.has("layer") || q.has("pins") || q.has("tour")) ("requestIdleCallback" in window ? (window as any).requestIdleCallback : setTimeout)(() => load(), { timeout: 2500 });
-    // Prompt 68: the pick's photo pin belongs to the opening view of Portugal, so with one on the map (and the
-    // developments shown) the map wakes once the page is idle instead of waiting for the reader.
-    // p70 r3 (S-09): a ?place= link waits for its card first (below).
-    else if (overlays.devs && projects.some((p) => p.hero) && !selected) ("requestIdleCallback" in window ? (window as any).requestIdleCallback : setTimeout)(() => load(), { timeout: 1500 });
+    // The engine owns loading priority: premium plain pages wake at this existing
+    // idle opportunity even without hero projects. The visual intro must not
+    // start a competing load; user input above remains immediate, and ?place=
+    // keeps the card/photo-first path below (p70 r3, S-09).
+    else if ((premium || (overlays.devs && projects.some((p) => p.hero))) && !selected) ("requestIdleCallback" in window ? (window as any).requestIdleCallback : setTimeout)(() => load(), { timeout: 1500 });
   }
   // Operator, step 1 (under one second): a ?place= link shows the card at once from the place's small file, before
   // MapLibre and the map data arrive; the map then flies to it.
