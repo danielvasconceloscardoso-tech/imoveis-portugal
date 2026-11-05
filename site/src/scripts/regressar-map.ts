@@ -82,6 +82,8 @@ export async function showRegressarMap(
       button.style.cssText = "font:500 12px Manrope,sans-serif;border:1px solid #789580;border-radius:24px;padding:10px 14px;min-height:44px;min-width:44px;background:#fffdf5;color:#244b3c;cursor:pointer;box-shadow:0 2px 8px #193c2820";
       button.addEventListener("click", () => { select(place.id); onSelect(place.id); });
       const marker = new maplibregl.Marker({ element: button }).setLngLat([place.lon, place.lat]).addTo(map);
+      // MapLibre supplies a generic label during construction; restore the city name afterwards.
+      button.setAttribute("aria-label", place.name);
       markers.push({ id: place.id, element: button, marker });
     }
     if (nextId) select(nextId);

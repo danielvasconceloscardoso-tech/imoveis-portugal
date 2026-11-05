@@ -213,6 +213,10 @@ test('successive city reveals reuse one real MapLibre canvas', async ({ page }) 
   const map = page.locator('[data-r-mini-map]');
   await expect(map).toHaveAttribute('data-regressar-map-ready', 'true', { timeout: 25000 });
   await expect(map.locator('canvas.maplibregl-canvas')).toHaveCount(1);
+  await expect(map).toHaveAttribute('role', 'region');
+  for (const marker of await map.locator('button.maplibregl-marker').all()) {
+    await expect(marker).toHaveAttribute('aria-label', (await marker.textContent())!);
+  }
   await expect(page.locator('[data-r-reveal]')).toBeEnabled();
   const first = await page.locator('[data-r-city]').getAttribute('data-place');
   await page.locator('[data-r-reveal]').click();
