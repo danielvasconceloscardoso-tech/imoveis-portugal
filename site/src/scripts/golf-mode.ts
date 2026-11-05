@@ -187,7 +187,11 @@ export function createGolf(h: GolfHost) {
       if (h.reduce()) map.setMaxZoom(mz); else map.once("moveend", () => { if (!active) map.setMaxZoom(mz); });
     }
     ids.layers = []; ids.sources = []; ids.images = [];
-    if (!saved.overlay) await h.setGolfOverlay(false);
+    if (!saved.overlay) {
+      await h.setGolfOverlay(false);
+      // The golf layer golf mode switched on goes too (map-v3 draws it again the next time the reader asks for it).
+      const m2 = h.map(); if (m2) { for (const id of ["golfpt-o", "golfpt", "golf"]) if (m2.getLayer(id)) m2.removeLayer(id); for (const id of ["golfpt", "golf"]) if (m2.getSource(id)) m2.removeSource(id); }
+    }
     saved = null; root.classList.remove("is-golf", "gm-near"); delete root.dataset.gmLook; btn?.setAttribute("aria-pressed", "false");
     setUrl(false); h.ev({ event: "map/golf/off", origin: root.dataset.mode });
     fill(h.sheetIn);
