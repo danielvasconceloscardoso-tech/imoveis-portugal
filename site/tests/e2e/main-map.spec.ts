@@ -89,12 +89,20 @@ test.describe('cinematic entry', () => {
 });
 
 for (const edition of editions) {
-  test(`${edition.name}: reduced motion and all direct state bypass entry`, async ({ page }) => {
+  test(`${edition.name}: reduced motion bypasses entry`, async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.goto(edition.path, { waitUntil: 'domcontentloaded' });
     expect(await page.evaluate(() => matchMedia('(prefers-reduced-motion: reduce)').matches)).toBe(true);
     await expect(page.locator('[data-map-arrival]')).toHaveAttribute('data-initialized', 'true');
     await expect(page.locator('[data-map-arrival]')).toBeHidden();
+  });
+
+  // Keep real map loading enabled; separate geographic and presentation links
+  // so seven navigations do not compete for one aggregate test timeout.
+  for (const group of [
+    { name: 'place, Golf and region', states: ['?place=cascais', '?mode=golf', '?region=algarve'] },
+    { name: 'view, unknown state and fragment', states: ['?view=life', '?future-state=keep', '#sources'] },
+  ]) test(`${edition.name}: ${group.name} links bypass entry without losing state`, async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'no-preference' });
     await page.addInitScript(() => {
       localStorage.removeItem('ip.map.arrival.v1'); sessionStorage.removeItem('ip.map.arrival.v1');
@@ -105,7 +113,7 @@ for (const edition of editions) {
         }
       }).observe(document, { subtree: true, attributes: true, attributeFilter: ['hidden'], attributeOldValue: true });
     });
-    for (const state of ['?place=cascais', '?mode=golf', '?region=algarve', '?view=life', '?future-state=keep', '#sources']) {
+    for (const state of group.states) {
       await page.goto(`${edition.path}${state}`, { waitUntil: 'domcontentloaded' });
       await expect(page.locator('[data-map-arrival]')).toHaveAttribute('data-initialized', 'true');
       await expect(page.locator('[data-map-arrival]')).toBeHidden();
@@ -149,17 +157,31 @@ for (const edition of editions) {
     await expect(page).toHaveURL(/place=gondomar/);
     const sheet = page.locator('[data-sheet]');
     await expect(sheet).toBeVisible();
-    await expect(sheet.locator('h2').first()).toHaveText('Gondomar');
-    await expect(sheet.locator('.m3-pp > span').first()).toContainText(/2[\s,.]?348/);
+    // Batch related read-only facts; keep native viewport expectations below.
+    await expect.poll(() => sheet.evaluate(element => ({
+      title: element.querySelector('h2')?.textContent?.trim(),
+      price: /2[\s,.]?348/.test(element.querySelector('.m3-pp > span')?.textContent || ''),
+      period: /INE.*2026/.test(element.querySelector('.m3-price-period')?.textContent || ''),
+      credit: element.textContent?.includes('Shalu Investments'),
+    }))).toEqual({ title: 'Gondomar', price: true, period: true, credit: true });
     await expect(sheet.locator('.m3-pp > span').first()).toBeInViewport({ ratio: .95 });
-    await expect(sheet.locator('.m3-price-period')).toContainText(/INE.*2026/);
     await expect(sheet.locator('.m3-price-period')).toBeInViewport({ ratio: .95 });
-    await expect(sheet).toContainText('Shalu Investments');
     const viewport = page.viewportSize()!;
     if (viewport.width <= 430 && viewport.height >= 800) await expect(sheet.locator('[data-cta-consult]').first()).toBeInViewport({ ratio: .95 });
-    await sheet.locator('.m3-x').click({ trial: true });
-    await page.locator('[data-golf]').click({ trial: true });
-    await page.locator('[data-panel-open]').click({ trial: true });
+    // Unlike trial clicks this never scrolls a clipped control into view.
+    // Actual control activation has its own regression contracts.
+    await expect.poll(() => page.evaluate(() => Object.fromEntries([
+      ['close', '[data-sheet] > .m3-x'], ['golf', '[data-golf]'], ['layers', '[data-panel-open]'],
+    ].map(([name, selector]) => {
+      const button = document.querySelector<HTMLElement>(selector);
+      if (!button) return [name, false];
+      const rect = button.getBoundingClientRect(), style = getComputedStyle(button);
+      const hit = document.elementFromPoint(rect.left + rect.width / 2, rect.top + rect.height / 2);
+      return [name, style.display !== 'none' && style.visibility === 'visible' && Number(style.opacity) > 0 &&
+        !button.matches(':disabled') && button.getAttribute('aria-disabled') !== 'true' && !button.closest('[inert]') &&
+        rect.width >= 43.5 && rect.height >= 43.5 && rect.left >= -1 && rect.top >= -1 &&
+        rect.right <= innerWidth + 1 && rect.bottom <= innerHeight + 1 && !!hit && (button === hit || button.contains(hit))];
+    })))).toEqual({ close: true, golf: true, layers: true });
     await page.goBack();
     await expect(sheet).toBeHidden();
     expect(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1)).toBe(false);
@@ -209,6 +231,6 @@ test('compact portrait keeps the price and its source visible without scrolling'
   await expect(sheet.locator('.m3-pp > span').first()).toContainText(/2[\s,.]?348/);
   await expect(sheet.locator('.m3-pp > span').first()).toBeInViewport({ ratio: .95 });
   await expect(sheet.locator('.m3-price-period')).toBeInViewport({ ratio: .95 });
-  await expect(sheet.locator('.m3-place-story').first()).toBeInViewport({ ratio: .95 });
+  await expect(sheet.locator('.m3-arr-l').first()).toBeInViewport({ ratio: .95 });
   await expect(sheet.locator('.m3-x')).toBeInViewport();
 });

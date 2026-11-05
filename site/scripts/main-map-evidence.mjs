@@ -1,8 +1,8 @@
 import { chromium } from '@playwright/test';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
-const base = new URL(process.env.EVIDENCE_BASE_URL || 'http://127.0.0.1:4330');
-const phase = process.env.EVIDENCE_PHASE || 'after';
+const base = new URL(process.env.EVIDENCE_BASE_URL || 'http://127.0.0.1:4333');
+const phase = process.env.EVIDENCE_PHASE || 'after-final';
 if (!['127.0.0.1','localhost'].includes(base.hostname) || !/^[a-z0-9-]+$/.test(phase)) throw Error('Use a local preview and safe phase');
 const output = fileURLToPath(new URL(`../artifacts/issue4/${phase}/screenshots/`, import.meta.url));
 await mkdir(output,{recursive:true});

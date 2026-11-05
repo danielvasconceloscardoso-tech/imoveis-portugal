@@ -3,9 +3,9 @@
 import { chromium } from '@playwright/test';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
-const base = process.env.MAP_PROFILE_BASE_URL || 'http://127.0.0.1:4324';
+const base = process.env.MAP_PROFILE_BASE_URL || 'http://127.0.0.1:4333';
 if (!['127.0.0.1','localhost'].includes(new URL(base).hostname)) throw new Error('Profile only a local preview');
-const phase = process.env.MAP_PROFILE_PHASE || 'after';
+const phase = process.env.MAP_PROFILE_PHASE || 'after-final';
 if (!/^[a-z0-9-]+$/.test(phase)) throw new Error('Invalid profile phase');
 const target = fileURLToPath(new URL(`../artifacts/issue4/${phase}/`, import.meta.url));
 await mkdir(target,{recursive:true});

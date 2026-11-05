@@ -70,10 +70,10 @@ The map matrix uses explicit content viewports: 1440×900, 390×844, 430×932 an
 For original browser captures against an existing local preview:
 
 ```sh
-EVIDENCE_BASE_URL=http://127.0.0.1:4332 EVIDENCE_PHASE=after-final EVIDENCE_ALL_SIZES=1 node scripts/main-map-evidence.mjs
+EVIDENCE_BASE_URL=http://127.0.0.1:4333 EVIDENCE_PHASE=after-final EVIDENCE_ALL_SIZES=1 node scripts/main-map-evidence.mjs
 EVIDENCE_PHASE=after-final node scripts/main-map-gallery.mjs
 ```
 
 Run from `site/`; use the installed Playwright browser or set `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH`. The gallery needs the retained `artifacts/issue4/before/screenshots/manifest.json`. Captures preserve original pixels. Intro captures use its normal pointer-hover pause, with a rendered map underneath.
 
-For interaction profiling, run `MAP_PROFILE_BASE_URL=http://127.0.0.1:4332 MAP_PROFILE_PHASE=after-final node scripts/issue4-map-profile.mjs` from `site/`, serially. The report records source-loading diagnostics, renderer errors, terrain/resolution, camera and quality before/after the benchmark. A timeout, MapLibre error or quality change invalidates a row for performance comparison. The synthetic 100-pick/300-hover measurements are not INP. Different camera frames or graphics quality also limit before/after timing comparisons.
+For interaction profiling, run `MAP_PROFILE_BASE_URL=http://127.0.0.1:4333 MAP_PROFILE_PHASE=after-final node scripts/issue4-map-profile.mjs` from `site/`, serially. The report records source-loading diagnostics, renderer errors, terrain/resolution, camera and quality before/after the benchmark. A timeout, MapLibre error or quality change invalidates a row for performance comparison. The synthetic 100-pick/300-hover measurements are not INP. Different camera frames or graphics quality also limit before/after timing comparisons.

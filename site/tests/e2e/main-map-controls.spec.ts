@@ -38,6 +38,37 @@ async function fillColor(page: Page) {
   return page.evaluate(() => JSON.stringify((document.querySelector('[data-m3]') as any).__mapx.map().getPaintProperty('muni-fill', 'fill-color')));
 }
 
+// Read related state in one browser task. No rendered-feature query, camera
+// mutation, or rendering shortcut: the values are the live MapLibre paints.
+async function golfSnapshot(page: Page) {
+  return page.evaluate(() => {
+    const root = document.querySelector<HTMLElement>('[data-m3]')!;
+    const map = (root as any).__mapx.map();
+    const properties: Record<string, string[]> = {
+      bg: ['background-color'], land: ['fill-color'],
+      hill: ['hillshade-highlight-color', 'hillshade-shadow-color', 'hillshade-accent-color', 'hillshade-exaggeration', 'hillshade-illumination-direction'],
+      'muni-line': ['line-color', 'line-opacity', 'line-width'],
+      'region-line': ['line-color', 'line-opacity', 'line-width'],
+      coast: ['line-color', 'line-opacity', 'line-width'],
+      'coast-glow': ['line-color', 'line-opacity', 'line-width', 'line-blur'],
+      rivers: ['line-color'], sel: ['line-color', 'line-width'],
+      sea: ['raster-hue-rotate', 'raster-saturation', 'raster-contrast', 'raster-brightness-min', 'raster-brightness-max'],
+      seafar: ['raster-hue-rotate', 'raster-saturation', 'raster-contrast', 'raster-brightness-min', 'raster-brightness-max'],
+      'muni-fill': ['fill-color', 'fill-opacity'],
+    };
+    const palette = Object.fromEntries(Object.entries(properties).map(([id, keys]) => [id,
+      Object.fromEntries(keys.map(key => [key, map.getPaintProperty(id, key) ?? null])),
+    ]));
+    return {
+      golf: root.classList.contains('is-golf'), ready: root.classList.contains('gm-ready'),
+      pressed: root.querySelector('[data-golf]')?.getAttribute('aria-pressed'),
+      heads: root.querySelectorAll('[data-sheet] .gm-head').length,
+      title: root.querySelector('[data-sheet] h2')?.textContent?.trim(),
+      project: new URLSearchParams(location.search).get('project'), palette,
+    };
+  });
+}
+
 for (const edition of editions) {
   test(`${edition.name}: layers change real price paint and 2D/3D terrain`, async ({ page }) => {
     test.setTimeout(65000);
@@ -82,8 +113,13 @@ for (const edition of editions) {
     await page.emulateMedia({ reducedMotion: 'no-preference' });
     await page.locator('[data-panel-open]').click();
     await page.locator('[data-tour="coast"]').click();
-    await expect(page.locator('[data-m3]')).toHaveClass(/is-touring/);
-    await expect(page.locator('[data-caption]')).toBeVisible();
+    // Read the active tour and its visible caption in one task while the
+    // real camera is moving; keep the actual canvas cancellation below.
+    await expect.poll(() => page.evaluate(() => {
+      const root = document.querySelector('[data-m3]')!, caption = root.querySelector<HTMLElement>('[data-caption]')!;
+      const rect = caption.getBoundingClientRect(), style = getComputedStyle(caption);
+      return { touring: root.classList.contains('is-touring'), captionVisible: !caption.hidden && rect.width > 0 && rect.height > 0 && style.visibility === 'visible' && style.display !== 'none' };
+    })).toEqual({ touring: true, captionVisible: true });
     await page.locator('[data-panel-close]').click();
     await expect(page.locator('[data-panel]')).toBeHidden();
     // A real keyboard event bubbles through the map canvas and cancels the tour.
@@ -94,23 +130,41 @@ for (const edition of editions) {
     await expect.poll(() => page.evaluate(() => (document.querySelector('[data-m3]') as any).__mapx.map().isMoving())).toBe(false);
   });
 
-  test(`${edition.name}: Golf exit preserves an accessible close on a scrolled project`, async ({ page }) => {
+  test(`${edition.name}: Golf restores the premium palette and a scrolled project's close`, async ({ page }) => {
     test.setTimeout(65000);
-    await openMap(page, edition.path, '?place=gondomar&dim=2d');
-    const root = page.locator('[data-m3]');
+    await openMap(page, edition.path, '?project=marble-terrace&dim=2d&layer=price');
     const sheet = page.locator('[data-sheet]');
-    await expect(sheet.locator('h2')).toHaveText('Gondomar');
+    const before = await golfSnapshot(page);
+    expect(before).toMatchObject({ golf: false, pressed: 'false', heads: 0, project: 'marble-terrace', title: 'Marble Terrace' });
+    expect(before.palette.land['fill-color']).toBe('#dce3d2');
+    expect(before.palette.bg['background-color']).toBe('#e1e5da');
+    expect(Array.isArray(before.palette['muni-fill']['fill-color']), 'the real price ramp is enabled').toBe(true);
     await page.locator('[data-golf]').click();
-    await expect(root).toHaveClass(/is-golf/);
-    await expect(root).toHaveClass(/gm-ready/);
-    await expect(page.locator('[data-golf]')).toHaveAttribute('aria-pressed', 'true');
-    // Open a development while Golf owns the card header, then leave that mode.
-    await sheet.locator('[data-dev]').first().click();
-    await expect(sheet.locator('.gm-head')).toBeVisible();
+    const golfSea = {
+      'raster-hue-rotate': 9, 'raster-saturation': 0.97, 'raster-contrast': -0.8,
+      'raster-brightness-min': 0.11, 'raster-brightness-max': 0.63,
+    };
+    await expect.poll(() => golfSnapshot(page), { timeout: 10000 }).toMatchObject({
+      golf: true, ready: true, pressed: 'true', heads: 1, project: 'marble-terrace', title: 'Marble Terrace',
+      palette: {
+        land: { 'fill-color': '#f4ead4' }, bg: { 'background-color': '#f4ead4' },
+        hill: {
+          'hillshade-highlight-color': 'rgba(255,248,234,0.55)',
+          'hillshade-shadow-color': 'rgba(217,195,160,0.6)',
+          'hillshade-accent-color': 'rgba(0,0,0,0)',
+          'hillshade-exaggeration': 0.3, 'hillshade-illumination-direction': 225,
+        },
+        'muni-line': { 'line-color': 'rgba(40,50,48,0.16)', 'line-opacity': 0 },
+        'region-line': { 'line-color': 'rgba(255,253,246,0.95)', 'line-opacity': 0 },
+        coast: { 'line-color': '#e2a95a', 'line-opacity': 0.7 },
+        'coast-glow': { 'line-color': '#f7e7c0', 'line-opacity': 1 },
+        sea: golfSea, seafar: golfSea,
+        'muni-fill': before.palette['muni-fill'],
+      },
+    });
     await page.locator('[data-golf]').click();
-    await expect(root).not.toHaveClass(/is-golf/);
-    await expect(page.locator('[data-golf]')).toHaveAttribute('aria-pressed', 'false');
-    await expect(sheet.locator('.gm-head')).toHaveCount(0);
+    // Golf restores its saved paint before the main map's class observer runs.
+    await expect.poll(() => golfSnapshot(page), { timeout: 10000 }).toEqual(before);
     const body = sheet.locator('[data-sheet-in]');
     // Position the independently scrolling body without letting locator.click()
     // rescue a broken close button by scrolling it back into view.
@@ -122,6 +176,26 @@ for (const edition of editions) {
     await close.click();
     await expect(sheet).toBeHidden();
     await expect(page).not.toHaveURL(/[?&](?:place|project|mode)=/);
+  });
+
+  test(`${edition.name}: a development opened inside Golf gets its own usable header`, async ({ page }) => {
+    test.setTimeout(65000);
+    await openMap(page, edition.path, '?place=gondomar&mode=golf&dim=2d');
+    await expect.poll(() => golfSnapshot(page), { timeout: 10000 }).toMatchObject({
+      golf: true, ready: true, pressed: 'true', title: 'Gondomar', project: null,
+    });
+    const sheet = page.locator('[data-sheet]');
+    // This exercises openSheet() while Golf is already active. The transition
+    // case above covers the different path where the project predates Golf.
+    await sheet.locator('[data-dev="marble-terrace"]').click();
+    await expect.poll(() => golfSnapshot(page), { timeout: 10000 }).toMatchObject({
+      golf: true, ready: true, pressed: 'true', heads: 1, title: 'Marble Terrace', project: 'marble-terrace',
+    });
+    const close = sheet.locator('.gm-head .m3-x');
+    await expect(close).toHaveAccessibleName(/\S/);
+    await expect(close).toBeInViewport({ ratio: 1 });
+    await close.click();
+    await expect(sheet).toBeHidden();
   });
 
   test(`${edition.name}: place questions expand by keyboard and sources return to the card`, async ({ page }) => {
