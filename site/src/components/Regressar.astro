@@ -39,7 +39,7 @@ const extras = {
       </div>
       <details class="rx-entry-details" data-r-payment-wrap><summary>{t.payments}</summary><label for="rx-payments">{t.payments}<select id="rx-payments" data-r-payments><option value="12">12</option><option value="13">13</option><option value="14">14</option></select></label><p data-r-pay-note>{t.paymentsNote}</p></details>
       <p id="rx-error" class="rx-error" data-r-error role="alert" hidden></p>
-      <button class="rx-primary" data-r-calculate type="submit"><span>{t.calculate}</span><span aria-hidden="true">↗</span></button>
+      <button class="rx-primary" data-r-calculate type="submit"><span>{t.calculate}</span><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.5" /></svg></button>
       <p class="rx-fine" id="rx-range">{extras.range}</p>
     </form>
   </section>
@@ -62,12 +62,12 @@ const extras = {
     <div class="rx-preferences" role="group" aria-label={t.tastes}>{(["beach", "golf", "art", "food", "schools", "airport"] as const).map((p) => <button type="button" data-r-preference={p} aria-pressed="false">{t.preferences[p]}</button>)}</div>
     <div class="rx-housing"><label for="rx-housing"><span>{t.housingBudget}</span><select id="rx-housing" data-r-housing><option value="rent">{t.rent}</option><option value="buy">{t.buy}</option></select></label><p><strong data-r-budget>—</strong></p><p class="rx-fine">{extras.housing}</p></div>
     <details class="rx-housing-details"><summary>{t.housingAssumptions}</summary><p>{extras.rent}</p><p>{extras.buy}</p><p>{extras.formula}</p><p>{extras.tastes}</p><p>{extras.reserveHint}</p></details>
-    <button class="rx-primary rx-reveal" type="button" data-r-reveal><span>{t.reveal}</span><span aria-hidden="true">↗</span></button>
+    <button class="rx-primary rx-reveal" type="button" data-r-reveal><span>{t.reveal}</span><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.5" /></svg></button>
     <p class="rx-reveal-preview" data-r-reveal-preview role="status" aria-live="off" hidden></p>
     <p class="rx-no-match" data-r-no-match role="status" hidden>{t.noMatch}</p>
     <section class="rx-city" data-r-city hidden aria-labelledby="rx-city-name">
       <figure class="rx-city-photo"><img data-r-city-photo data-r-photo src="/img/v2/porto-douro-entardecer-1024.webp" alt="" loading="lazy" width="1024" height="683" /><figcaption data-r-city-credit></figcaption></figure>
-      <div class="rx-city-copy"><p class="rx-kicker">{extras.one}</p><h2 id="rx-city-name" data-r-city-name tabindex="-1"></h2><p class="rx-city-story" data-r-city-story data-r-story></p><p class="rx-city-cost"><strong data-r-city-cost data-r-cost></strong></p><p class="rx-fine" data-r-city-period></p><ul class="rx-city-evidence" data-r-city-evidence data-r-evidence></ul><p class="rx-fine" data-r-city-housing></p><p class="rx-fine" data-r-city-price></p><p class="rx-fine" data-r-city-deposit></p><p class="rx-remaining"><span>{t.afterHousing}</span> <strong data-r-after-housing></strong><small>{t.availableBeforeLivingCosts}</small></p><a class="rx-primary" data-r-map href="#"><span>{t.openMap}</span><span aria-hidden="true">↗</span></a></div>
+      <div class="rx-city-copy"><p class="rx-kicker">{extras.one}</p><h2 id="rx-city-name" data-r-city-name tabindex="-1"></h2><p class="rx-city-story" data-r-city-story data-r-story></p><p class="rx-city-cost"><strong data-r-city-cost data-r-cost></strong></p><p class="rx-fine" data-r-city-period></p><ul class="rx-city-evidence" data-r-city-evidence data-r-evidence></ul><p class="rx-fine" data-r-city-housing></p><p class="rx-fine" data-r-city-price></p><p class="rx-fine" data-r-city-deposit></p><p class="rx-remaining"><span>{t.afterHousing}</span> <strong data-r-after-housing></strong><small>{t.availableBeforeLivingCosts}</small></p><a class="rx-primary" data-r-map href="#"><span>{t.openMap}</span><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.5" /></svg></a></div>
     </section>
     <div class="rx-mini-map" data-r-mini-map hidden aria-label={extras.map}></div>
   </section>
