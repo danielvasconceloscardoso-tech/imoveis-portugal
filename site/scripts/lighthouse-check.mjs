@@ -50,6 +50,10 @@ try {
         writeFile(join(output,`${name}.json`),result.report[0]),
         writeFile(join(output,`${name}.html`),result.report[1]),
       ]);
+      if(process.env.LIGHTHOUSE_SAVE_TRACE==='1') await Promise.all([
+        writeFile(join(output,`${name}.trace.json`),JSON.stringify(result.artifacts.Trace)),
+        writeFile(join(output,`${name}.devtools.json`),JSON.stringify(result.artifacts.DevtoolsLog)),
+      ]);
       const scores=Object.fromEntries(Object.entries(result.lhr.categories).map(([key,value])=>[key,value.score]));
       const budget=budgets[page.name];
       const metrics=Object.fromEntries(['largest-contentful-paint','cumulative-layout-shift','total-blocking-time'].map(key=>[key,result.lhr.audits[key]?.numericValue ?? null]));
@@ -58,8 +62,12 @@ try {
         ...Object.entries(budget.maximum || {}).filter(([key,ceiling])=>metrics[key] == null || metrics[key]>ceiling).map(([key,ceiling])=>`${key} ${metrics[key]} > ${ceiling}`),
       ];
       const findings=Object.values(result.lhr.audits).filter(a=>a.score !== null && a.score<1 && (a.details?.type==='table' || a.numericValue != null)).map(a=>({id:a.id,title:a.title,score:a.score,displayValue:a.displayValue}));
-      const row={name,url:result.lhr.finalDisplayedUrl,scores,metrics,budget,passed:failed.length===0,failed,findings};
+      // Preserve optional gatherer failures explicitly; valid core metrics and
+      // the unchanged route budgets remain the pass/fail contract.
+      const auditErrors=Object.values(result.lhr.audits).filter(a=>a.scoreDisplayMode==='error').map(a=>({id:a.id,message:a.errorMessage}));
+      const row={name,url:result.lhr.finalDisplayedUrl,scores,metrics,budget,passed:failed.length===0,failed,findings,auditErrors};
       summary.push(row);
+      if(auditErrors.length) console.log(`${name}: ${auditErrors.length} optional audit errors retained in the JSON report.`);
       console.log(`${row.passed?'PASS':'FAIL'} ${name}: ${JSON.stringify(scores)}${page.name.startsWith('map-')?` (diagnostic performance; LCP ${Math.round(metrics['largest-contentful-paint'])}ms, CLS ${metrics['cumulative-layout-shift']})`:''}${failed.length?` (${failed.join('; ')})`:''}`);
     }
   }
