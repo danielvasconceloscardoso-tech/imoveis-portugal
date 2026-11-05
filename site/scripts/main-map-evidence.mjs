@@ -22,6 +22,7 @@ try {
   const introShown=await intro.isVisible();
   await page.waitForFunction(()=>document.querySelector('[data-m3]')?.__mapx);
   const ready=await page.evaluate(async()=>{const h=document.querySelector('[data-m3]').__mapx;await h.load();const m=h.map();if(m.loaded()&&!m.isMoving())return true;return new Promise(resolve=>{const t=setTimeout(()=>{m.off('idle',done);resolve(false)},20000);function done(){clearTimeout(t);resolve(true)}m.once('idle',done)})});
+  await page.waitForFunction(()=>document.querySelector('[data-m3]')?.dataset.mapPainted==='true');
   await page.evaluate(()=>document.fonts.ready);
   const introCaptured=introShown && await intro.isVisible();
   if(introCaptured) {

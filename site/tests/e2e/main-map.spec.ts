@@ -155,6 +155,8 @@ for (const edition of editions) {
     await expect(sheet.locator('.m3-price-period')).toContainText(/INE.*2026/);
     await expect(sheet.locator('.m3-price-period')).toBeInViewport({ ratio: .95 });
     await expect(sheet).toContainText('Shalu Investments');
+    const viewport = page.viewportSize()!;
+    if (viewport.width <= 430 && viewport.height >= 800) await expect(sheet.locator('[data-cta-consult]').first()).toBeInViewport({ ratio: .95 });
     await sheet.locator('.m3-x').click({ trial: true });
     await page.locator('[data-golf]').click({ trial: true });
     await page.locator('[data-panel-open]').click({ trial: true });

@@ -148,6 +148,13 @@
   .m3[data-main-premium]:not(.is-golf) .m3-legend { bottom: 116px; left: 12px; right: 12px; }
 }
 
+/* Keep the whole Concierge target above the bottom navigation on narrow portrait phones. */
+@media (max-width: 400px) and (orientation: portrait) {
+  .m3[data-main-premium]:not(.is-golf) .m3-photo,
+  .m3[data-main-premium]:not(.is-golf) .m3-gal-t .m3-photo,
+  .m3[data-main-premium]:not(.is-golf) .m3-gal-arr .m3-gal-t .m3-photo { height: 92px; }
+}
+
 /* Browser chrome can leave a tall phone with a short content viewport. Keep the sourced market answer in view. */
 @media (max-width: 819px) and (max-height: 700px) and (orientation: portrait) {
   .m3[data-main-premium]:not(.is-golf) .m3-photo,
