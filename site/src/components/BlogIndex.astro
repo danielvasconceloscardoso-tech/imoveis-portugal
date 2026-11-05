@@ -16,10 +16,10 @@ const base = pathFor(lang, ed, "blog");
     <h1>{c("blog.title", lang)}</h1>
     <p class="lede">{c("blog.lede", lang)}</p>
   </div>
-  {lang === "en" && ed === "us" && (
+  {true && (
     <div class="frame read" style="margin-top:2rem;margin-bottom:1.5rem">
-      <p class="small">THE PORTUGAL EDIT · NEW</p>
-      <h2 class="h3"><a href="/en/us/the-portugal-edit/">Portugal beyond the property listing</a></h2>
+      <p class="small">THE PORTUGAL EDIT · ENGLISH FEATURES</p>
+      <h2 class="h3"><a href={`/en/${ed}/the-portugal-edit/`}>Portugal beyond the property listing</a></h2>
       <p>Six stories about the art, coast, food, golf and people who make the country worth knowing.</p>
       <p><a href="/en/us/the-portugal-edit/">Read The Portugal Edit →</a></p>
     </div>
