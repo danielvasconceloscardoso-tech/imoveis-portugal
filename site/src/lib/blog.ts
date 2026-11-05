@@ -14,7 +14,7 @@ const dir = join(process.cwd(), "..", "content", "blog");
 
 export type Post = {
   id: string; lang: Lang; slug: string; title: string; description: string; tldr: string;
-  published: string; updated: string; cta: Cat | "agency"; related: string[]; sources: string[];
+  published: string; updated: string; cta: Cat | "agency" | "none"; related: string[]; sources: string[];
   body: string; minutes: number;
   // Prompt 43 §3: the three most-asked follow-ups (FAQ structured data and a short list under the article).
   faq?: { q: string; a: string }[]; keyword?: string; aliases?: string[];
