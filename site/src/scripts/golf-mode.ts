@@ -332,9 +332,10 @@ export function createGolf(h: GolfHost) {
       if ((near || single(f)) && f.el.style.display !== "none" && f.w) {
         const top = p.y - 76 * s, R = (x: number, y: number): Box => ({ x, y, w: f.w, h: f.h });
         const opts: Box[] = [];
-        for (let k = 0; k < 5; k++) opts.push(R(p.x + 4, top - f.h - 2 - k * (f.h + 4)), R(p.x - f.w - 4, top - f.h - 2 - k * (f.h + 4)), ...(k ? [] : [R(p.x + 30 * s, top + 2)]));
-        let best = opts.find((b) => free(b) && offTurf(b)) ?? opts.find(free) ?? opts[0];
-        placed.push(best); ok = true; lab.style.translate = `${Math.round(best.x - p.x)}px ${Math.round(best.y - p.y)}px`;
+        for (let k = 0; k < (wide ? 5 : 3); k++) opts.push(R(p.x + 4, top - f.h - 2 - k * (f.h + 4)), R(p.x - f.w - 4, top - f.h - 2 - k * (f.h + 4)), ...(k ? [] : [R(p.x + 30 * s, top + 2)]));
+        // Zero collisions first: a name with no free place waits (its flag still stands, its card still opens).
+        const best = opts.find((b) => free(b) && offTurf(b)) ?? opts.find(free);
+        if (best) { placed.push(best); ok = true; lab.style.translate = `${Math.round(best.x - p.x)}px ${Math.round(best.y - p.y)}px`; }
       }
       lab.classList.toggle("is-on", ok);
     }
