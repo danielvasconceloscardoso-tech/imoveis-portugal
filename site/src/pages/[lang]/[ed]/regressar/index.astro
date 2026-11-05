@@ -1,0 +1,15 @@
+---
+import V2 from '../../../../layouts/V2.astro';
+import Regressar from '../../../../components/Regressar.astro';
+import { LANGS, ED_ORDER, type Lang, type EdCode } from '../../../../i18n';
+export function getStaticPaths() {
+  return LANGS.flatMap(lang => ED_ORDER.map(ed => ({ params: { lang, ed } })));
+}
+const lang = Astro.params.lang as Lang;
+const ed = Astro.params.ed as EdCode;
+const title = {pt:'O seu rendimento. A sua vida em Portugal.',en:'Your income. Your life in Portugal.',fr:'Votre revenu. Votre vie au Portugal.'}[lang];
+const paths = Object.fromEntries(LANGS.map(l => [l, `/${l}/${ed}/regressar/`])) as Record<Lang,string>;
+---
+<V2 lang={lang} ed={ed} page="sims" title={`${title} | Imóveis Portugal`} description={title} sticky={null} next={false} paths={paths}>
+  <Regressar lang={lang} ed={ed} />
+</V2>

@@ -1,0 +1,82 @@
+---
+import type { EdCode, Lang } from "../i18n";
+import { regressarCopy } from "../lib/regressar-copy";
+import { COUNTRIES } from "../lib/regressar-fx";
+import "../styles/regressar.css";
+
+interface Props { lang: Lang; ed: EdCode; }
+const { lang, ed } = Astro.props;
+const t = regressarCopy(lang);
+const country = COUNTRIES.some((c) => c.id === ed) ? ed : "lu";
+const initialCurrency = COUNTRIES.find((c) => c.id === country)?.currency ?? "EUR";
+const fiscalReview = {
+  pt: ["Modelo fiscal 2026 · pressupostos por confirmar", "As páginas oficiais da legislação não puderam ser novamente verificadas nesta sessão. As taxas e hipóteses deste modelo precisam de revisão fiscal antes de uma decisão."],
+  en: ["2026 tax model · assumptions awaiting confirmation", "The official legislation pages could not be rechecked in this session. The rates and assumptions in this model require tax review before a decision."],
+  fr: ["Modèle fiscal 2026 · hypothèses à confirmer", "Les pages officielles de la législation n’ont pas pu être vérifiées à nouveau dans cette session. Les taux et hypothèses de ce modèle nécessitent une révision fiscale avant toute décision."],
+}[lang];
+const extras = {
+  pt: { annual: "Valores anuais · 2026", tax: "Portugal continental · trabalho por conta de outrem", range: "Modelo disponível para um líquido anual entre 20 000 € e 500 000 €.", taxAssumptions: "Pessoa solteira, sem dependentes, sem outros rendimentos nem deduções à coleta. Segurança Social: 11%. O IRS é anual; não é uma simulação da retenção mensal de novembro.", housing: "80 m² · até 35% do líquido mensal médio", buy: "Compra: entrada de 20%, crédito a 30 anos e taxa nominal de 3%. Impostos, seguros, manutenção e despesas de compra não incluídos. O rendimento não equivale a aprovação de crédito.", rent: "Renda: mediana INE por m² × 80 m². Não é uma oferta disponível nem inclui despesas correntes.", formula: "As preferências selecionadas têm de coincidir. A revelação percorre apenas os lugares compatíveis com o orçamento.", tastes: "Surf, negócios e tranquilidade ainda não têm dados comparáveis nesta seleção.", benefit: "Cenário do artigo 12.º-A: exclusão de 50% de até 250 000 € brutos elegíveis por ano (máximo excluído: 125 000 €), no ano do regresso e nos quatro seguintes. Exige residência portuguesa anterior, ausência de residência fiscal em Portugal nos cinco anos anteriores, regresso dentro do prazo legal e situação fiscal regularizada. Há incompatibilidades com outros regimes. Confirme os requisitos e o prazo na Autoridade Tributária.", credit: "Fotografia e créditos", one: "O seu próximo lugar começa aqui.", map: "Os lugares compatíveis", reserve: "Reserva mensal", reserveHint: "Valor reservado para outras despesas. Não representa um custo de vida regional verificado." },
+  en: { annual: "Annual amounts · 2026", tax: "Mainland Portugal · employee income", range: "Model available for annual net income between €20,000 and €500,000.", taxAssumptions: "Single person, no dependants, other income or tax credits. Employee social security: 11%. Income tax is annual; this is not a November monthly withholding calculation.", housing: "80 m² · up to 35% of average monthly net", buy: "Buying: 20% deposit, 30-year loan and 3% nominal interest. Taxes, insurance, maintenance and purchase costs excluded. Income does not mean mortgage approval.", rent: "Rent: INE median per m² × 80 m². Not an available listing; running costs excluded.", formula: "Every selected preference must match. The reveal uses only places within your housing budget.", tastes: "Surf, business and quiet do not yet have comparable data in this selection.", benefit: "Article 12-A scenario: 50% exclusion on up to €250,000 of eligible annual gross income (maximum excluded: €125,000), in the return year and four following years. Prior Portuguese residence, no Portuguese tax residence in the preceding five years, return within the legal window and tax compliance are required. Other special regimes may be incompatible. Check the requirements and deadline with the Portuguese Tax Authority.", credit: "Photography and credits", one: "Your next place starts here.", map: "Compatible places", reserve: "Monthly reserve", reserveHint: "An amount set aside for other expenses. Not a verified regional cost of living." },
+  fr: { annual: "Montants annuels · 2026", tax: "Portugal continental · salarié", range: "Modèle disponible pour un net annuel compris entre 20 000 € et 500 000 €.", taxAssumptions: "Personne célibataire, sans personne à charge, autre revenu ni crédit d’impôt. Cotisations salariales : 11 %. L’impôt est annuel ; il ne s’agit pas du prélèvement mensuel de novembre.", housing: "80 m² · jusqu’à 35 % du net mensuel moyen", buy: "Achat : apport de 20 %, prêt sur 30 ans et taux nominal de 3 %. Impôts, assurances, entretien et frais d’achat exclus. Le revenu ne vaut pas accord de crédit.", rent: "Loyer : médiane INE au m² × 80 m². Aucune offre de location disponible n’est garantie ; charges courantes exclues.", formula: "Tous les critères sélectionnés doivent correspondre. La révélation utilise uniquement les lieux compatibles avec votre budget logement.", tastes: "Le surf, les affaires et le calme n’ont pas encore de données comparables dans cette sélection.", benefit: "Scénario de l’article 12-A : exclusion de 50 % sur un maximum de 250 000 € bruts éligibles par an (125 000 € exclus au maximum), l’année du retour et les quatre suivantes. Résidence portugaise antérieure, absence de résidence fiscale portugaise pendant les cinq années précédentes, retour dans le délai légal et conformité fiscale exigés. Certains régimes sont incompatibles. Vérifiez les conditions et le délai auprès de l’administration fiscale portugaise.", credit: "Photographies et crédits", one: "Votre prochain lieu commence ici.", map: "Les lieux compatibles", reserve: "Réserve mensuelle", reserveHint: "Montant réservé aux autres dépenses. Ce n’est pas un coût de la vie régional vérifié." },
+}[lang];
+---
+<div class="rx" data-regressar data-lang={lang} data-ed={ed}>
+  <section class="rx-arrival" aria-labelledby="rx-title">
+    <figure class="rx-arrival-photo">
+      <picture>
+        <source type="image/avif" srcset="/img/v2/porto-douro-entardecer-640.avif 640w, /img/v2/porto-douro-entardecer-1024.avif 1024w" sizes="(max-width: 760px) 100vw, 55vw" />
+        <img src="/img/v2/porto-douro-entardecer-1024.webp" srcset="/img/v2/porto-douro-entardecer-640.webp 640w, /img/v2/porto-douro-entardecer-1024.webp 1024w" sizes="(max-width: 760px) 100vw, 55vw" width="1024" height="683" alt={lang === "pt" ? "O Douro e a ponte Luís I ao entardecer, Porto" : lang === "fr" ? "Le Douro et le pont Luís I au crépuscule, Porto" : "The Douro and Luís I bridge at dusk, Porto"} fetchpriority="high" decoding="async" />
+      </picture>
+      <figcaption>Porto · Douro</figcaption>
+    </figure>
+    <div class="rx-welcome"><h1 id="rx-title">{t.title}</h1><p>{t.lede}</p></div>
+    <form class="rx-entry" data-r-form novalidate>
+      <label class="rx-country" for="rx-country"><span>{t.country}</span><select id="rx-country" data-r-country>{COUNTRIES.map((c) => <option value={c.id} selected={c.id === country}>{t.countries[c.id]}</option>)}</select></label>
+      <div class="rx-salary">
+        <label for="rx-net">{t.netSalary}</label>
+        <div class="rx-amount"><input id="rx-net" data-r-net type="text" inputmode="decimal" autocomplete="off" placeholder="4 500" required aria-describedby="rx-error rx-range" /><span data-r-currency>{initialCurrency}</span></div>
+        <label class="rx-period" for="rx-period"><span class="rx-sr">{t.period}</span><select id="rx-period" data-r-period><option value="month">{t.month}</option><option value="year">{t.year}</option></select></label>
+      </div>
+      <details class="rx-entry-details" data-r-payment-wrap><summary>{t.payments}</summary><label for="rx-payments">{t.payments}<select id="rx-payments" data-r-payments><option value="12">12</option><option value="14">14</option></select></label><p data-r-pay-note>{t.paymentsNote}</p></details>
+      <p id="rx-error" class="rx-error" data-r-error role="alert" hidden></p>
+      <button class="rx-primary" data-r-calculate type="submit"><span>{t.calculate}</span><span aria-hidden="true">↗</span></button>
+      <p class="rx-fine" id="rx-range">{extras.range}</p>
+    </form>
+  </section>
+
+  <section class="rx-result" data-r-result hidden aria-live="polite" aria-atomic="false" aria-labelledby="rx-result-title">
+    <div class="rx-result-lead"><p class="rx-kicker">{extras.annual}</p><h2 id="rx-result-title" tabindex="-1">{t.resultIntro}</h2><p class="rx-result-sentence">{t.grossSentence}</p><p class="rx-gross"><output data-r-gross>—</output><span>{t.annualGross}</span></p><a class="rx-context" data-r-fx href="https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist.xml" target="_blank" rel="noopener"></a><p class="rx-fine rx-review">{fiscalReview[0]}</p></div>
+    <dl class="rx-ledger">
+      <div><dt>{t.declaredNet}</dt><dd><span data-r-declared>—</span><small class="rx-fine" style="display:block" data-r-source-amount></small></dd></div>
+      <div><dt>{t.socialSecurity}</dt><dd data-r-ss>—</dd></div>
+      <div><dt>{t.incomeTax}</dt><dd data-r-irs>—</dd></div>
+      <div><dt>{t.solidarity}</dt><dd data-r-solidarity>—</dd></div>
+      <div class="rx-ledger-total"><dt>{t.annualNet}</dt><dd data-r-net-result>—</dd></div>
+    </dl>
+    <div class="rx-benefit"><label><input type="checkbox" data-r-benefit /><span>{t.benefitTitle}</span></label><p>{t.benefitNote}</p><p data-r-alternative></p><details><summary>{t.benefitCondition}</summary><p>{extras.benefit}</p><a href="https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/cirs_rep/Pages/irs12a.aspx" target="_blank" rel="noopener noreferrer">CIRS · Artigo 12.º-A ↗</a></details></div>
+    <details class="rx-method" data-r-method><summary>{t.assumptions}</summary><p>{extras.taxAssumptions}</p><p>{extras.tax}</p><p>{fiscalReview[1]}</p><div data-r-method-detail></div><p>{t.disclaimer}</p></details>
+  </section>
+
+  <section class="rx-discovery" data-r-discovery hidden aria-labelledby="rx-tastes-title">
+    <div class="rx-discovery-intro"><p class="rx-kicker">Portugal</p><h2 id="rx-tastes-title">{t.tastes}</h2><p>{t.tastesNote}</p></div>
+    <div class="rx-preferences" role="group" aria-label={t.tastes}>{(["beach", "golf", "art", "food", "schools", "airport"] as const).map((p) => <button type="button" data-r-preference={p} aria-pressed="false">{t.preferences[p]}</button>)}</div>
+    <div class="rx-housing"><label for="rx-housing"><span>{t.housingBudget}</span><select id="rx-housing" data-r-housing><option value="rent">{t.rent}</option><option value="buy">{t.buy}</option></select></label><p><strong data-r-budget>—</strong></p><p class="rx-fine">{extras.housing}</p></div>
+    <details class="rx-housing-details"><summary>{t.housingAssumptions}</summary><p>{extras.rent}</p><p>{extras.buy}</p><p>{extras.formula}</p><p>{extras.tastes}</p><p>{extras.reserveHint}</p></details>
+    <button class="rx-primary rx-reveal" type="button" data-r-reveal><span>{t.reveal}</span><span aria-hidden="true">↗</span></button>
+    <p class="rx-reveal-preview" data-r-reveal-preview role="status" aria-live="off" hidden></p>
+    <p class="rx-no-match" data-r-no-match role="status" hidden>{t.noMatch}</p>
+    <section class="rx-city" data-r-city hidden aria-labelledby="rx-city-name">
+      <figure class="rx-city-photo"><img data-r-city-photo data-r-photo src="/img/v2/porto-douro-entardecer-1024.webp" alt="" loading="lazy" width="1024" height="683" /><figcaption data-r-city-credit></figcaption></figure>
+      <div class="rx-city-copy"><p class="rx-kicker">{extras.one}</p><h2 id="rx-city-name" data-r-city-name tabindex="-1"></h2><p class="rx-city-story" data-r-city-story data-r-story></p><p class="rx-city-cost"><strong data-r-city-cost data-r-cost></strong></p><p class="rx-fine" data-r-city-period></p><div class="rx-city-evidence" data-r-city-evidence data-r-evidence></div><p class="rx-fine" data-r-city-housing></p><p class="rx-fine" data-r-city-price></p><p class="rx-fine" data-r-city-deposit></p><p class="rx-remaining"><span>{t.afterHousing}</span> <strong data-r-after-housing></strong><small>{t.availableBeforeLivingCosts}</small></p><a class="rx-primary" data-r-map href="#"><span>{t.openMap}</span><span aria-hidden="true">↗</span></a></div>
+    </section>
+    <div class="rx-mini-map" data-r-mini-map hidden aria-label={extras.map}></div>
+  </section>
+
+  <footer class="rx-sources"><details><summary>{t.method} · {t.source}</summary><p>{t.disclaimer}</p><p>{extras.range}</p><div data-r-sources></div><ul><li><a href="https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/cirs_rep/Pages/irs68.aspx" target="_blank" rel="noopener noreferrer">CIRS · Artigo 68.º</a></li><li><a href="https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/cirs_rep/Pages/irs12a.aspx" target="_blank" rel="noopener noreferrer">CIRS · Artigo 12.º-A</a></li><li><a href="https://www.programaregressar.gov.pt/pt/medida-de-apoio-fiscal/" target="_blank" rel="noopener noreferrer">Programa Regressar</a></li><li><a href="https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist.xml" target="_blank" rel="noopener noreferrer">BCE · ECB</a></li><li><a href="https://www.ine.pt/" target="_blank" rel="noopener noreferrer">INE</a></li><li><a href={`/${lang}/credits/`}>{extras.credit}</a></li></ul></details></footer>
+  <noscript><p class="rx-noscript">{lang === "pt" ? "Ative JavaScript para calcular o equivalente português e explorar os lugares." : lang === "fr" ? "Activez JavaScript pour calculer l’équivalent portugais et explorer les lieux." : "Enable JavaScript to calculate the Portuguese equivalent and explore places."}</p></noscript>
+</div>
+
+<script>
+  import { initRegressar } from "../scripts/regressar";
+  document.querySelectorAll<HTMLElement>("[data-regressar]").forEach(initRegressar);
+</script>
