@@ -51,41 +51,49 @@ test.describe('cinematic entry', () => {
       expect(await page.evaluate(() => localStorage.getItem('ip.map.arrival.v1'))).toBe('1');
     });
   }
-  test('entry remains usable while the engine download is delayed and storage is denied', async ({ page }) => {
-    test.setTimeout(65000);
-    const pending: Array<() => void> = [];
-    let delayEngine = true;
-    const releaseEngine = () => { delayEngine = false; pending.splice(0).forEach(resolve => resolve()); };
-    await page.route('**/_astro/maplibre-gl.*.js', async route => {
-      if (delayEngine) await new Promise<void>(resolve => pending.push(resolve));
-      await route.continue();
+  // Each dismissal owns a fresh browser context and one native-engine load.
+  // The passive deadline must not inherit renderer work from earlier reloads.
+  for (const dismissal of ['keyboard Skip', 'View-map click', 'passive finish'] as const) {
+    test(`entry ${dismissal} while the engine download is delayed and storage is denied`, { tag: '@engine-delay' }, async ({ page }) => {
+      test.setTimeout(65000);
+      const pending: Array<() => void> = [];
+      let delayEngine = true;
+      const releaseEngine = () => { delayEngine = false; pending.splice(0).forEach(resolve => resolve()); };
+      await page.route('**/_astro/maplibre-gl.*.js', async route => {
+        if (delayEngine) await new Promise<void>(resolve => pending.push(resolve));
+        await route.continue();
+      });
+      await page.addInitScript(() => {
+        for (const key of ['localStorage', 'sessionStorage']) Object.defineProperty(window, key, { configurable: true, get() { throw new DOMException('Denied', 'SecurityError'); } });
+      });
+      await page.bringToFront();
+      // Keep the pointer away from arrival controls before its timer starts.
+      if (dismissal === 'passive finish') await page.mouse.move(0, 0);
+      try {
+        await page.goto('/en/us/map/', { waitUntil: 'domcontentloaded' });
+        const intro = page.locator('[data-map-arrival]');
+        if (dismissal === 'keyboard Skip') {
+          await page.locator('[data-map-arrival-skip]').focus();
+          await page.keyboard.press('Enter');
+          await expect(intro).toBeHidden();
+          await expect(page.locator('[data-spot-open]')).toBeFocused();
+        } else if (dismissal === 'View-map click') {
+          await page.locator('[data-map-arrival-explore]').click();
+          await expect(intro).toBeHidden();
+        } else {
+          await expect(intro).toBeVisible();
+          await expect(intro).toBeHidden({ timeout: 3000 });
+        }
+        // The route has held every engine request throughout the interaction.
+        // Check its presence after dismissal so setup cannot consume the short
+        // passive arrival window before the visible/hidden assertions begin.
+        await expect.poll(() => pending.length).toBeGreaterThan(0);
+      } finally {
+        releaseEngine();
+      }
+      await ready(page);
     });
-    await page.addInitScript(() => {
-      for (const key of ['localStorage', 'sessionStorage']) Object.defineProperty(window, key, { configurable: true, get() { throw new DOMException('Denied', 'SecurityError'); } });
-    });
-    await page.bringToFront();
-    await page.goto('/en/us/map/', { waitUntil: 'domcontentloaded' });
-    await expect.poll(() => pending.length).toBeGreaterThan(0);
-    await page.locator('[data-map-arrival-skip]').focus();
-    await page.keyboard.press('Enter');
-    await expect(page.locator('[data-map-arrival]')).toBeHidden();
-    await expect(page.locator('[data-spot-open]')).toBeFocused();
-    releaseEngine();
-    await ready(page);
-    delayEngine = true;
-    await page.reload({ waitUntil: 'domcontentloaded' });
-    await page.locator('[data-map-arrival-explore]').click();
-    await expect(page.locator('[data-map-arrival]')).toBeHidden();
-    releaseEngine();
-    await ready(page);
-    await page.mouse.move(0, 0);
-    delayEngine = true;
-    await page.reload({ waitUntil: 'domcontentloaded' });
-    await expect(page.locator('[data-map-arrival]')).toBeVisible();
-    await expect(page.locator('[data-map-arrival]')).toBeHidden({ timeout: 3000 });
-    releaseEngine();
-    await ready(page);
-  });
+  }
 });
 
 for (const edition of editions) {
@@ -158,19 +166,22 @@ for (const edition of editions) {
     const sheet = page.locator('[data-sheet]');
     await expect(sheet).toBeVisible();
     // Batch related read-only facts; keep native viewport expectations below.
-    await expect.poll(() => sheet.evaluate(element => ({
-      title: element.querySelector('h2')?.textContent?.trim(),
-      price: /2[\s,.]?348/.test(element.querySelector('.m3-pp > span')?.textContent || ''),
-      period: /INE.*2026/.test(element.querySelector('.m3-price-period')?.textContent || ''),
-      credit: element.textContent?.includes('Shalu Investments'),
-    }))).toEqual({ title: 'Gondomar', price: true, period: true, credit: true });
+    // Poll within the browser so an unrelated GPU/CDP round trip is not
+    // mistaken for the card's own 10-second data-readiness deadline.
+    await page.waitForFunction(() => {
+      const element = document.querySelector('[data-sheet]');
+      return element?.querySelector('h2')?.textContent?.trim() === 'Gondomar'
+        && /2[\s,.]?348/.test(element.querySelector('.m3-pp > span')?.textContent || '')
+        && /INE.*2026/.test(element.querySelector('.m3-price-period')?.textContent || '')
+        && element.textContent?.includes('Shalu Investments');
+    }, null, { timeout: 10000 });
     await expect(sheet.locator('.m3-pp > span').first()).toBeInViewport({ ratio: .95 });
     await expect(sheet.locator('.m3-price-period')).toBeInViewport({ ratio: .95 });
     const viewport = page.viewportSize()!;
     if (viewport.width <= 430 && viewport.height >= 800) await expect(sheet.locator('[data-cta-consult]').first()).toBeInViewport({ ratio: .95 });
     // Unlike trial clicks this never scrolls a clipped control into view.
     // Actual control activation has its own regression contracts.
-    await expect.poll(() => page.evaluate(() => Object.fromEntries([
+    await page.waitForFunction(() => { const controls = Object.fromEntries([
       ['close', '[data-sheet] > .m3-x'], ['golf', '[data-golf]'], ['layers', '[data-panel-open]'],
     ].map(([name, selector]) => {
       const button = document.querySelector<HTMLElement>(selector);
@@ -181,7 +192,7 @@ for (const edition of editions) {
         !button.matches(':disabled') && button.getAttribute('aria-disabled') !== 'true' && !button.closest('[inert]') &&
         rect.width >= 43.5 && rect.height >= 43.5 && rect.left >= -1 && rect.top >= -1 &&
         rect.right <= innerWidth + 1 && rect.bottom <= innerHeight + 1 && !!hit && (button === hit || button.contains(hit))];
-    })))).toEqual({ close: true, golf: true, layers: true });
+    })); return controls.close && controls.golf && controls.layers; }, null, { timeout: 10000 });
     await page.goBack();
     await expect(sheet).toBeHidden();
     expect(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1)).toBe(false);
