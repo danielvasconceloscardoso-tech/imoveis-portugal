@@ -12,7 +12,7 @@ if (!['127.0.0.1', 'localhost', '[::1]'].includes(base.hostname)) {
   throw new Error('LIGHTHOUSE_BASE_URL must target a local build.');
 }
 const output = fileURLToPath(new URL('../artifacts/lighthouse/', import.meta.url));
-const allPages = [{name:'arrival',path:'/'},{name:'home-us',path:'/en/us/'},{name:'map-us',path:'/en/us/map/'}];
+const allPages = [{name:'arrival',path:'/'},{name:'home-us',path:'/en/us/'},{name:'map-us',path:'/en/us/map/'},{name:'home-lu',path:'/pt/lu/'},{name:'map-lu',path:'/pt/lu/mapa/'}];
 const requested = process.env.LIGHTHOUSE_PAGES?.split(',');
 if (requested?.some(name => !allPages.some(page => page.name === name))) throw new Error('Unknown LIGHTHOUSE_PAGES target.');
 const pages = requested ? allPages.filter(page => requested.includes(page.name)) : allPages;
@@ -24,6 +24,8 @@ const pages = requested ? allPages.filter(page => requested.includes(page.name))
 const budgets = {
   arrival: { minimum: {performance:0.70,accessibility:0.90} },
   'home-us': { minimum: {performance:0.70,accessibility:0.90} },
+  'home-lu': { minimum: {performance:0.70,accessibility:0.90} },
+  'map-lu': { minimum: {accessibility:0.90}, maximum: {'largest-contentful-paint':4000,'cumulative-layout-shift':0.1}, diagnostic:['performance','total-blocking-time'] },
   'map-us': { minimum: {accessibility:0.90}, maximum: {'largest-contentful-paint':4000,'cumulative-layout-shift':0.1}, diagnostic:['performance','total-blocking-time'] },
 };
 console.log('Route budgets: arrival/home performance >=70; all accessibility >=90; map LCP <=4000ms and CLS <=0.1. Map performance/TBT are diagnostic under software WebGL.');
@@ -58,7 +60,7 @@ try {
       const findings=Object.values(result.lhr.audits).filter(a=>a.score !== null && a.score<1 && (a.details?.type==='table' || a.numericValue != null)).map(a=>({id:a.id,title:a.title,score:a.score,displayValue:a.displayValue}));
       const row={name,url:result.lhr.finalDisplayedUrl,scores,metrics,budget,passed:failed.length===0,failed,findings};
       summary.push(row);
-      console.log(`${row.passed?'PASS':'FAIL'} ${name}: ${JSON.stringify(scores)}${page.name==='map-us'?` (diagnostic performance; LCP ${Math.round(metrics['largest-contentful-paint'])}ms, CLS ${metrics['cumulative-layout-shift']})`:''}${failed.length?` (${failed.join('; ')})`:''}`);
+      console.log(`${row.passed?'PASS':'FAIL'} ${name}: ${JSON.stringify(scores)}${page.name.startsWith('map-')?` (diagnostic performance; LCP ${Math.round(metrics['largest-contentful-paint'])}ms, CLS ${metrics['cumulative-layout-shift']})`:''}${failed.length?` (${failed.join('; ')})`:''}`);
     }
   }
 } finally {

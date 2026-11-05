@@ -15,7 +15,9 @@
     "test:e2e": "playwright test",
     "test:content": "node ../scripts/check-content.mjs && node ../scripts/check-parity.mjs",
     "test:worker": "node ../scripts/test-worker.mjs",
-    "test:lighthouse": "node scripts/lighthouse-check.mjs"
+    "test:lighthouse": "node scripts/lighthouse-check.mjs",
+    "test:config": "tsc --noEmit --skipLibCheck --moduleResolution bundler --module esnext --target es2022 playwright.config.ts tests/e2e/*.spec.ts",
+    "test:marker": "node scripts/test-marker-queue.mjs"
   },
   "dependencies": {
     "@fontsource-variable/jost": "^5.3.0",

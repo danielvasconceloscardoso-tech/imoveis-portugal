@@ -30,8 +30,10 @@ jobs:
           cache-dependency-path: site/package-lock.json
       - run: npm ci --no-audit --no-fund
       - run: npx playwright install --with-deps chromium
+      - name: Type-check browser test configuration
+        run: npm run test:config
       - name: Content, translations and request endpoint
-        run: npm run test:content && npm run test:worker
+        run: npm run test:content && npm run test:worker && npm run test:marker
       - name: Production-mode static build
         run: npm run build:test
       - name: Desktop and mobile end-to-end tests
