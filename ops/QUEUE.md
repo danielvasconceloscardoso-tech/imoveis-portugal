@@ -17,6 +17,7 @@ The next session starts from this file. Agent subtasks return a summary of 10 li
 | 72 | Algarve gems, US article, Arrow live, John and Mike agents | done (D100). John and Mike agents: check |
 | 77 | URGENT: restore home film, white box, cut headline; visual check before every push | done (D104): film, edition list, headline guard, hero colours; visual check + baseline, rule 14 |
 | 78 | §0 FIRST: films must move on every device (site looks static); then golf mode v3, Algarve summer in 3D, refined by a Belmond-level designer agent | done (D105 §0 films; D106 golf mode, look A) |
+| 78b | Golf map UX/UI review by agents (interaction, art direction, Arrow investor and golfer), fix, repeat until clean (operator, 5 Nov) | in progress (BEFORE 76 and 75) |
 | 73 | Functional copy in plain words; Concierge step 1 | done (D101) |
 | 74 | Buyer CV builds itself | done (D102) |
 | 76 | Everything from 67–75 in every language and edition, live | to do (after 74) |
