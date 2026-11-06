@@ -13,7 +13,7 @@ const hrefFor = (slug: string) => `/en/${ed}/the-portugal-edit/${slug}/`;
 <V2 lang="en" ed={ed} page="blog" title="The Portugal Edit | Imóveis Portugal"
   description="Original stories on Portugal's people, art, coast, surfing, golf and culture."
   canonicalUrl="https://imoveisportugal.pt/en/us/the-portugal-edit/" next={false}>
-  <main class="ed-magazine">
+  <div class="ed-magazine">
     <header class="ed-cover" aria-labelledby="ed-title">
       <img src={leadPhoto.hero} alt={leadPhoto.alt} width="1600" height="1067" fetchpriority="high" decoding="async"/>
       <div class="ed-cover-shade" aria-hidden="true"></div>
@@ -69,7 +69,7 @@ const hrefFor = (slug: string) => `/en/${ed}/the-portugal-edit/${slug}/`;
       <p>Stories are the beginning. The map is where the places start to make sense.</p>
       <a href={`/en/${ed}/map/`} class="ed-read">Explore Portugal's map <span aria-hidden="true">↗</span></a>
     </aside>
-  </main>
+  </div>
 </V2>
 <style is:global>
   .ed-magazine{background:#f6f3ed;color:#283e38;font-family:"Manrope Variable",Arial,sans-serif}
