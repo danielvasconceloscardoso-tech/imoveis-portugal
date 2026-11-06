@@ -13,7 +13,7 @@ const photo = editorialVisuals[story.slug];
 const canonical = `https://imoveisportugal.pt/en/us/the-portugal-edit/${story.slug}/`;
 const pathForStory = (slug: string) => `/en/${ed}/the-portugal-edit/${slug}/`;
 const related = editorialStories.filter((item) => item.slug !== story.slug).slice(0, 2);
-const body = marked.parse(story.body, { gfm: true, async: false }) as string;
+const body = marked.parse(story.body.replaceAll("https://www.imoveisportugal.pt/en/us/", `/en/${ed}/`), { gfm: true, async: false }) as string;
 ---
 <V2 lang="en" ed={ed} page="blog" title={`${story.title} | Imóveis Portugal`}
  description={story.description} canonicalUrl={canonical} ogType="article" ogImage={photo.hero} next={false}>
