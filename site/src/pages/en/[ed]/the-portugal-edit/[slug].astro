@@ -1,6 +1,7 @@
 ---
 import V2 from "../../../../layouts/V2.astro";
 import { editorialStories } from "../../../../lib/editorial-showcase";
+import { editorialVisuals } from "../../../../lib/editorial-photos";
 import { ED_ORDER, type EdCode } from "../../../../i18n";
 import { marked } from "marked";
 export function getStaticPaths() {
@@ -8,21 +9,102 @@ export function getStaticPaths() {
 }
 const { ed } = Astro.params as { ed: EdCode };
 const { story } = Astro.props;
+const photo = editorialVisuals[story.slug];
 const canonical = `https://imoveisportugal.pt/en/us/the-portugal-edit/${story.slug}/`;
+const pathForStory = (slug: string) => `/en/${ed}/the-portugal-edit/${slug}/`;
+const related = editorialStories.filter((item) => item.slug !== story.slug).slice(0, 2);
+const body = marked.parse(story.body.replaceAll("https://www.imoveisportugal.pt/en/us/", `/en/${ed}/`), { gfm: true, async: false }) as string;
 ---
 <V2 lang="en" ed={ed} page="blog" title={`${story.title} | Imóveis Portugal`}
- description={story.description} canonicalUrl={canonical} ogType="article" next={false}>
- <article class="frame read prose post" style="padding-top:clamp(3rem,6vw,6rem);padding-bottom:5rem">
-   <p class="small" style="margin-bottom:2.25rem"><a href={`/en/${ed}/the-portugal-edit/`}>The Portugal Edit</a> · {story.category}</p>
-   <header class="ph" style="margin-bottom:2.5rem">
-     <h1 style="max-width:19ch">{story.title}</h1>
-     <p class="lede" style="max-width:56ch">{story.description}</p>
-     <p class="small">Imóveis Portugal · November 5, 2026 · Independent editorial</p>
+ description={story.description} canonicalUrl={canonical} ogType="article" ogImage={photo.hero} next={false}>
+ <div class="ed-article">
+   <header class="ed-article-hero" aria-labelledby="article-heading">
+     <img class="ed-article-cover" src={photo.hero} alt={photo.alt} width="1600" height="1067" fetchpriority="high" decoding="async"/>
+     <div class="ed-article-overlay" aria-hidden="true"></div>
+     <div class="ed-article-hero-inner">
+       <div class="ed-article-topline">
+         <a href={`/en/${ed}/the-portugal-edit/`}>← THE PORTUGAL EDIT</a>
+         <span>IMÓVEIS PORTUGAL&nbsp; / &nbsp;INDEPENDENT EDITORIAL</span>
+       </div>
+       <div class="ed-article-titles">
+         <p class="ed-article-kicker">{story.category} &nbsp; · &nbsp; NOVEMBER 2026</p>
+         <h1 id="article-heading">{story.title}</h1>
+         <p class="ed-article-deck">{story.description}</p>
+         <span class="ed-article-scroll">THE STORY <span aria-hidden="true">↓</span></span>
+       </div>
+       <div class="ed-article-caption">{photo.caption}</div>
+     </div>
    </header>
-   <div class="editorial-story-body"><Fragment set:html={marked.parse(story.body, { gfm: true, async: false }) as string}/></div>
-   <footer class="small" style="margin-top:3.5rem;padding-top:1.25rem;border-top:1px solid currentColor">
-     <a href={`/en/${ed}/the-portugal-edit/`}>Read more from The Portugal Edit</a> ·
-     <a href={`/en/${ed}/map/`}>Explore Portugal on the map</a>
-   </footer>
- </article>
+   <div class="ed-article-frame">
+     <aside class="ed-article-aside" aria-label="Article details">
+       <p class="ed-article-kicker">THE PORTUGAL EDIT</p>
+       <p>By Imóveis Portugal</p>
+       <p>November 5, 2026</p>
+       <div class="ed-article-rule"></div>
+       <p>Independent reporting, original perspective and original links to primary sources.</p>
+       <a href={`/en/${ed}/map/`}>OPEN THE MAP&nbsp; ↗</a>
+     </aside>
+     <article class="ed-article-prose">
+       <div class="ed-article-text"><Fragment set:html={body}/></div>
+     </article>
+   </div>
+   <figure class="ed-article-interlude">
+     <img src={photo.detail} alt={photo.detailAlt} width="1024" height="683" loading="lazy" decoding="async"/>
+     <figcaption>{photo.detailCaption} <span>IMÓVEIS PORTUGAL · PHOTO LIBRARY</span></figcaption>
+   </figure>
+   <section class="ed-next" aria-labelledby="more-reading">
+     <div class="ed-next-head">
+       <p>STAY A LITTLE LONGER</p>
+       <h2 id="more-reading">The next good story.</h2>
+     </div>
+     <div class="ed-next-grid">
+       {related.map((item) => (
+         <a href={pathForStory(item.slug)} class="ed-next-item">
+           <img src={editorialVisuals[item.slug].hero} alt={editorialVisuals[item.slug].alt} width="1600" height="1067" loading="lazy" decoding="async"/>
+           <span>{item.category}</span>
+           <h3>{item.title}</h3>
+           <p>Read the story&nbsp; ↗</p>
+         </a>
+       ))}
+     </div>
+   </section>
+ </div>
 </V2>
+<style is:global>
+ .ed-article{background:#f8f5ef;color:#263d36;font-family:"Manrope Variable",Arial,sans-serif}.ed-article a{color:inherit}.ed-article a:focus-visible{outline:3px solid #c16b40;outline-offset:5px}
+ .ed-article-hero{height:clamp(650px,92svh,1020px);position:relative;background:#29463f;isolation:isolate;overflow:hidden;color:white}
+ .ed-article-cover{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+ .ed-article-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(15,32,29,.87),rgba(15,32,29,.22) 72%,rgba(15,32,29,.42));z-index:-1}
+ .ed-article-hero-inner{height:100%;max-width:1660px;margin:auto;padding:clamp(24px,4.5vw,70px);display:flex;flex-direction:column;justify-content:space-between}
+ .ed-article-topline{display:flex;justify-content:space-between;align-items:center;gap:25px;letter-spacing:.14em;font-size:11px;font-weight:800}
+ .ed-article-topline a{text-decoration:none;border-bottom:1px solid #e9ddd0;padding-bottom:9px}
+ .ed-article-titles{max-width:1120px;margin-top:auto;margin-bottom:7vh}
+ .ed-article-kicker{font-size:11px;line-height:1.5;font-weight:800;letter-spacing:.17em;text-transform:uppercase}
+ .ed-article-titles h1{font:400 clamp(4.3rem,9vw,10.3rem)/.92 "Newsreader Variable",Georgia,serif;letter-spacing:-.057em;margin:22px 0 25px;max-width:13ch}
+ .ed-article-deck{font-size:clamp(1rem,1.5vw,1.32rem);max-width:650px;line-height:1.68;color:#f4eee3}
+ .ed-article-scroll{display:inline-flex;gap:30px;align-items:center;margin-top:36px;padding-bottom:12px;border-bottom:1px solid #fff;font-size:10px;letter-spacing:.16em;font-weight:800}
+ .ed-article-caption{font-size:11px;opacity:.8;max-width:800px}
+ .ed-article-frame{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:200px minmax(0,740px);gap:clamp(45px,8vw,125px);padding:clamp(75px,9vw,140px) clamp(24px,5vw,65px) 100px}
+ .ed-article-aside{font-size:12px;line-height:1.9;color:#667168;align-self:start;position:sticky;top:120px}
+ .ed-article-aside .ed-article-kicker{color:#a15534}
+ .ed-article-aside p{margin:0 0 10px}.ed-article-rule{height:1px;background:#cfd3c8;margin:32px 0}
+ .ed-article-aside a{display:inline-block;font-size:10px;letter-spacing:.09em;font-weight:800;margin-top:19px;border-bottom:1px solid #b9603c;text-decoration:none;padding-bottom:6px}
+ .ed-article-text{font:400 clamp(1.15rem,1.45vw,1.29rem)/1.93 "Newsreader Variable",Georgia,serif;color:#28392f}
+ .ed-article-text>p:first-child{font-size:clamp(1.55rem,2.2vw,2.15rem);line-height:1.52;color:#7b4935}
+ .ed-article-text h2{font:400 clamp(2.5rem,3.5vw,4.3rem)/1.08 "Newsreader Variable",Georgia,serif;letter-spacing:-.03em;margin:2em 0 .55em}
+ .ed-article-text h3{font:400 1.8rem/1.15 "Newsreader Variable",Georgia,serif;margin:2.4em 0 1em}
+ .ed-article-text p{margin:0 0 1.4em}.ed-article-text a{color:#985132;text-underline-offset:4px}.ed-article-text ul{padding-left:1.25em}
+ .ed-article-text blockquote{margin:2em 0;padding:10px 0 10px 27px;border-left:2px solid #b96b46;font-style:italic}
+ .ed-article-interlude{margin:0;overflow:hidden;background:#d9d4cb}.ed-article-interlude img{display:block;width:100%;max-height:730px;object-fit:cover;aspect-ratio:2/1}
+ .ed-article-interlude figcaption{padding:16px clamp(24px,6vw,100px);display:flex;justify-content:space-between;gap:15px;font-size:11px;color:#57665b}.ed-article-interlude figcaption span{letter-spacing:.1em;font-size:10px}
+ .ed-next{max-width:1370px;margin:auto;padding:clamp(95px,13vw,175px) clamp(24px,6vw,100px)}
+ .ed-next-head p{font-size:11px;font-weight:800;letter-spacing:.17em;color:#9a5839}.ed-next-head h2{font:400 clamp(3.6rem,6vw,6.6rem)/1 "Newsreader Variable",Georgia,serif;letter-spacing:-.05em;margin:15px 0 55px}
+ .ed-next-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(25px,6vw,100px)}.ed-next-item{text-decoration:none}.ed-next-item img{width:100%;aspect-ratio:5/3;object-fit:cover;display:block}
+ .ed-next-item span{display:block;margin-top:20px;font-size:11px;text-transform:uppercase;letter-spacing:.15em;color:#8c6047;font-weight:800}
+ .ed-next-item h3{font:400 clamp(2.25rem,3.5vw,3.7rem)/1.06 "Newsreader Variable",Georgia,serif;letter-spacing:-.02em;margin:12px 0}
+ .ed-next-item p{font-size:12px;text-decoration:underline;text-underline-offset:5px}
+ @media(max-width:800px){.ed-article-hero{height:88svh;min-height:670px}.ed-article-hero-inner{padding:25px}.ed-article-titles h1{font-size:clamp(3.8rem,12vw,6.5rem)}.ed-article-topline{font-size:9px}.ed-article-topline span{max-width:140px;text-align:right}
+ .ed-article-frame{grid-template-columns:1fr;padding-block:70px 90px;gap:45px}.ed-article-aside{position:static;display:grid;grid-template-columns:1fr 1fr;gap:6px 20px}.ed-article-rule{display:none}
+ .ed-article-text{font-size:1.2rem}.ed-article-interlude img{aspect-ratio:4/3}.ed-article-interlude figcaption{display:block}.ed-article-interlude figcaption span{display:block;margin-top:8px}.ed-next-grid{grid-template-columns:1fr;gap:60px}}
+ @media(prefers-reduced-motion:reduce){.ed-article *{scroll-behavior:auto}}
+</style>
