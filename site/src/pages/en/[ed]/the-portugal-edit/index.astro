@@ -1,26 +1,102 @@
 ---
 import V2 from "../../../../layouts/V2.astro";
 import { editorialStories } from "../../../../lib/editorial-showcase";
+import { editorialVisuals } from "../../../../lib/editorial-photos";
 import { ED_ORDER, type EdCode } from "../../../../i18n";
 export function getStaticPaths() { return ED_ORDER.map((ed) => ({ params: { ed } })); }
 const { ed } = Astro.params as { ed: EdCode };
+const lead = editorialStories[0];
+const leadPhoto = editorialVisuals[lead.slug];
+const others = editorialStories.slice(1);
+const hrefFor = (slug: string) => `/en/${ed}/the-portugal-edit/${slug}/`;
 ---
 <V2 lang="en" ed={ed} page="blog" title="The Portugal Edit | Imóveis Portugal"
- description="Original stories on Portugal's people, art, coast, surfing, golf and culture."
- canonicalUrl="https://imoveisportugal.pt/en/us/the-portugal-edit/" next={false}>
- <div class="frame read ph" style="padding-top:clamp(3rem,6vw,6rem)">
-   <p class="small" style="letter-spacing:.12em;text-transform:uppercase">Imóveis Portugal · Independent editorial</p>
-   <h1>The Portugal Edit</h1>
-   <p class="lede">The places worth knowing. The people making them interesting. The stories behind the view.</p>
- </div>
- <section class="frame read blog-list" style="padding-bottom:5rem">
- {editorialStories.map((story,i)=>(
-   <article class="qa-item" style="padding-block:2rem;border-bottom:1px solid #ddd5c6">
-     <p class="small" style="margin-bottom:.5rem">{String(i+1).padStart(2,"0")} · {story.category}</p>
-     <h2 class="h3"><a href={`/en/${ed}/the-portugal-edit/${story.slug}/`}>{story.title}</a></h2>
-     <p>{story.description}</p>
-     <p><a href={`/en/${ed}/the-portugal-edit/${story.slug}/`}>Read the story →</a></p>
-   </article>
- ))}
- </section>
+  description="Original stories on Portugal's people, art, coast, surfing, golf and culture."
+  canonicalUrl="https://imoveisportugal.pt/en/us/the-portugal-edit/" next={false}>
+  <main class="ed-magazine">
+    <header class="ed-cover" aria-labelledby="ed-title">
+      <img src={leadPhoto.hero} alt={leadPhoto.alt} width="1600" height="1067" fetchpriority="high" decoding="async"/>
+      <div class="ed-cover-shade" aria-hidden="true"></div>
+      <div class="ed-cover-inner">
+        <div class="ed-cover-top"><span>IMÓVEIS PORTUGAL</span><span>THE PORTUGAL EDIT&nbsp; / &nbsp;VOL. 01</span></div>
+        <div class="ed-cover-copy">
+          <p class="ed-overline">A DIFFERENT WAY TO KNOW PORTUGAL</p>
+          <h1 id="ed-title">A country worth <em>knowing.</em></h1>
+          <p>Stories of real places, remarkable people and the life that happens beyond the property listing.</p>
+          <a href={hrefFor(lead.slug)} class="ed-cover-link">Read the cover story <span aria-hidden="true">↗</span></a>
+        </div>
+        <p class="ed-photo-note">{leadPhoto.caption}</p>
+      </div>
+    </header>
+    <div class="ed-intro">
+      <div class="ed-intro-num">01 — 06</div>
+      <div><p class="ed-label">THE EDITORIAL COLLECTION</p><h2>Good taste. <em>No attitude.</em></h2></div>
+      <p>From rice fields on the Atlantic to a golf course at first light. The Portugal we know is not a brochure. Come closer.</p>
+    </div>
+    <section class="ed-featured" aria-labelledby="ed-feature-head">
+      <a class="ed-featured-image" href={hrefFor(lead.slug)} aria-label={lead.title}>
+        <img src={leadPhoto.detail} width="1024" height="683" alt={leadPhoto.detailAlt} loading="lazy" decoding="async"/>
+      </a>
+      <div class="ed-featured-body">
+        <span class="ed-label">THE COVER STORY&nbsp; · &nbsp; COMPORTA</span>
+        <h2 id="ed-feature-head"><a href={hrefFor(lead.slug)}>{lead.title}</a></h2>
+        <p>{lead.description}</p>
+        <a class="ed-read" href={hrefFor(lead.slug)}>Read the story <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+    <section class="ed-stories" aria-label="More stories from The Portugal Edit">
+      {others.map((story, i) => {
+        const photo = editorialVisuals[story.slug];
+        return (
+          <article class:list={["ed-story", i % 3 === 1 && "ed-story-shift"]}>
+            <a class="ed-story-image" href={hrefFor(story.slug)} aria-label={story.title}>
+              <img src={photo.hero} width="1600" height="1067" alt={photo.alt} loading="lazy" decoding="async"/>
+            </a>
+            <div class="ed-story-copy">
+              <span class="ed-label">{String(i + 2).padStart(2,"0")} &nbsp;/&nbsp; {story.category}</span>
+              <h2><a href={hrefFor(story.slug)}>{story.title}</a></h2>
+              <p>{story.description}</p>
+              <a href={hrefFor(story.slug)} class="ed-read">Read the story <span aria-hidden="true">↗</span></a>
+              <p class="ed-photo-note">{photo.caption}</p>
+            </div>
+          </article>
+        );
+      })}
+    </section>
+    <aside class="ed-endcap">
+      <p class="ed-label">STAY FOR THE LONGER STORY</p>
+      <h2>Portugal, <em>from the inside.</em></h2>
+      <p>Stories are the beginning. The map is where the places start to make sense.</p>
+      <a href={`/en/${ed}/map/`} class="ed-read">Explore Portugal's map <span aria-hidden="true">↗</span></a>
+    </aside>
+  </main>
 </V2>
+<style is:global>
+  .ed-magazine{background:#f6f3ed;color:#283e38;font-family:"Manrope Variable",Arial,sans-serif}
+  .ed-magazine a{text-decoration:none;color:inherit}.ed-magazine a:focus-visible{outline:3px solid #bf6844;outline-offset:5px}
+  .ed-cover{height:min(900px,89svh);min-height:620px;position:relative;overflow:hidden;background:#293d34;color:#fff;isolation:isolate}
+  .ed-cover>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 55%;z-index:-2;animation:ed-appear 1.4s ease both}
+  .ed-cover-shade{position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(15,34,30,.79),rgba(15,34,30,.34) 61%,rgba(15,34,30,.14)),linear-gradient(0deg,rgba(15,34,30,.6),transparent 40%)}
+  .ed-cover-inner{height:100%;padding:clamp(25px,4.5vw,64px);display:flex;flex-direction:column;justify-content:space-between}
+  .ed-cover-top{display:flex;justify-content:space-between;gap:25px;font-size:clamp(10px,1vw,13px);font-weight:700;letter-spacing:.15em}
+  .ed-cover-copy{max-width:880px;margin-top:auto;margin-bottom:8vh}.ed-overline,.ed-label{font-size:11px;line-height:1.5;letter-spacing:.16em;font-weight:800;text-transform:uppercase}
+  .ed-cover h1{font:400 clamp(4.4rem,10vw,10.5rem)/.9 "Newsreader Variable",Georgia,serif;letter-spacing:-.055em;max-width:12ch;margin:25px 0 26px}
+  .ed-cover h1 em,.ed-intro h2 em,.ed-endcap h2 em{font-weight:400}.ed-cover-copy>p:not(.ed-overline){max-width:560px;line-height:1.65;font-size:clamp(1rem,1.45vw,1.22rem)}
+  .ed-cover-link,.ed-read{display:inline-flex;align-items:center;gap:30px;border-bottom:1px solid currentColor;padding:16px 0 11px;margin-top:16px;font-size:13px;font-weight:800;letter-spacing:.03em}
+  .ed-cover-link span,.ed-read span{transition:transform .2s}.ed-cover-link:hover span,.ed-read:hover span{transform:translate(3px,-3px)}
+  .ed-photo-note{font-size:10px;line-height:1.5;letter-spacing:.025em;opacity:.75}
+  .ed-intro{max-width:1370px;margin:auto;padding:clamp(90px,11vw,180px) clamp(24px,6vw,100px);display:grid;grid-template-columns:.45fr 2fr 1fr;gap:28px;align-items:start}
+  .ed-intro-num{font-size:12px;letter-spacing:.14em;padding-top:9px}.ed-intro h2,.ed-endcap h2{font:400 clamp(3.4rem,6.2vw,7rem)/1 "Newsreader Variable",Georgia,serif;letter-spacing:-.045em;margin:16px 0 0;max-width:12ch}
+  .ed-intro>p{font-size:15px;line-height:1.85;color:#56635c;margin-top:32px}
+  .ed-featured{max-width:1440px;margin:0 auto clamp(110px,14vw,200px);display:grid;grid-template-columns:1.3fr 1fr;align-items:center;gap:clamp(30px,6vw,100px);padding:0 clamp(24px,6vw,100px)}
+  .ed-featured-image,.ed-story-image{display:block;overflow:hidden;background:#d8d5cd}.ed-featured-image{aspect-ratio:4/5}.ed-story-image{aspect-ratio:5/4}
+  .ed-featured-image img,.ed-story-image img{width:100%;height:100%;object-fit:cover;transition:transform .65s cubic-bezier(.2,.7,.2,1)}
+  .ed-featured-image:hover img,.ed-story-image:hover img{transform:scale(1.04)}
+  .ed-featured h2,.ed-story h2{font:400 clamp(2.7rem,5vw,6rem)/.99 "Newsreader Variable",Georgia,serif;letter-spacing:-.045em;margin:22px 0}.ed-featured-body p,.ed-story-copy>p:not(.ed-photo-note){font-size:16px;line-height:1.8;max-width:470px;color:#5f6860}
+  .ed-stories{max-width:1440px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:clamp(65px,12vw,165px) clamp(34px,8vw,140px);padding:0 clamp(24px,6vw,100px) clamp(100px,12vw,180px)}
+  .ed-story-shift{transform:translateY(14%)}.ed-story h2{font-size:clamp(2.6rem,4.3vw,5rem)}.ed-story-copy{padding-top:22px}.ed-story .ed-photo-note{margin-top:26px;color:#6f726a}
+  .ed-endcap{background:#24433c;color:#f7f2e8;padding:clamp(85px,11vw,165px) clamp(24px,10vw,170px)}.ed-endcap h2{max-width:13ch}.ed-endcap>p:not(.ed-label){max-width:560px;font-size:17px;line-height:1.8}
+  @media(max-width:800px){.ed-cover{min-height:690px;height:88svh}.ed-cover-shade{background:linear-gradient(0deg,rgba(10,29,24,.84),rgba(10,29,24,.20) 74%)}.ed-cover h1{font-size:clamp(4rem,13vw,6.7rem)}.ed-cover-copy{margin-bottom:65px}.ed-intro{grid-template-columns:1fr;padding-block:90px}.ed-intro>p{margin-top:0}.ed-featured{grid-template-columns:1fr;gap:32px;margin-bottom:100px}.ed-featured-image{aspect-ratio:5/4}.ed-stories{grid-template-columns:1fr;gap:90px}.ed-story-shift{transform:none}.ed-story-image{aspect-ratio:4/3}.ed-featured h2,.ed-story h2{font-size:clamp(3rem,9vw,5rem)}}
+  @media(prefers-reduced-motion:reduce){.ed-cover>img{animation:none}.ed-featured-image img,.ed-story-image img,.ed-cover-link span,.ed-read span{transition:none}}
+  @keyframes ed-appear{from{transform:scale(1.035);opacity:.4}to{transform:scale(1);opacity:1}}
+</style>
