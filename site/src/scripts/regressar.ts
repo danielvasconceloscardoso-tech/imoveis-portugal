@@ -3,6 +3,7 @@ import { COUNTRIES, getCountry, convertNetToEuro } from '../lib/regressar-fx';
 import { annualizeNet, grossForNet, TAX_2026 } from '../lib/regressar-tax';
 import { rankCities, regressarMapHref, type Preference, type RankedCity, type HousingMode } from '../lib/regressar-places';
 import { assessEligibility, ELIGIBILITY_QUESTIONS, ELIGIBILITY_COPY, type EligibilityAnswers, type EligibilityAnswer } from '../lib/regressar-eligibility';
+import { initRegressarSupport } from './regressar-support';
 import type { Lang, EdCode } from '../i18n';
 
 /** Salary values remain in this closure: no storage, URL serialization or analytics payload. */
@@ -128,5 +129,5 @@ export function initRegressar() {
  }
  const sources=q('sources');
  if(sources){const ul=document.createElement('ul');for(const source of TAX_2026.sources){const li=document.createElement('li'),a=document.createElement('a');a.href=source.url;a.textContent=source.name;a.rel='noopener';a.target='_blank';li.append(a);ul.append(li);}sources.append(ul);}
- syncCountry();syncPeriod();refreshEligibility();signal('arrival');
+ syncCountry();syncPeriod();refreshEligibility();initRegressarSupport(root,lang);signal('arrival');
 }

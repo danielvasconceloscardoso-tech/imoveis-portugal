@@ -13,11 +13,11 @@ export function getStaticPaths() {
 const lang = Astro.params.lang as Lang;
 const ed = Astro.params.ed as EdCode;
 const experience = experienceCopy(lang);
-const title = {pt:'O seu rendimento. A sua vida em Portugal.',en:'Your income. Your life in Portugal.',fr:'Votre revenu. Votre vie au Portugal.'}[lang];
+const title = {pt:'Programa Regressar: prepare o seu regresso a Portugal.',en:'Programa Regressar: plan your return to Portugal.',fr:'Programa Regressar : préparez votre retour au Portugal.'}[lang];
 const labels = {
-  pt: { home: 'Imóveis Portugal — início', language: 'Idioma', skip: 'Ir para o simulador', privacy: 'Privacidade', legal: 'Aviso legal', calculators: 'Simuladores', map: 'Mapa', related: 'Mais em Portugal' },
-  en: { home: 'Imóveis Portugal — home', language: 'Language', skip: 'Skip to calculator', privacy: 'Privacy', legal: 'Legal notice', calculators: 'Calculators', map: 'Map', related: 'More in Portugal' },
-  fr: { home: 'Imóveis Portugal — accueil', language: 'Langue', skip: 'Aller au simulateur', privacy: 'Confidentialité', legal: 'Mentions légales', calculators: 'Simulateurs', map: 'Carte', related: 'Plus au Portugal' },
+  pt: { home: 'Imóveis Portugal — início', language: 'Idioma', skip: 'Ir para o Programa Regressar', privacy: 'Privacidade', legal: 'Aviso legal', calculators: 'Simuladores', map: 'Mapa', related: 'Mais em Portugal' },
+  en: { home: 'Imóveis Portugal — home', language: 'Language', skip: 'Skip to Programa Regressar', privacy: 'Privacy', legal: 'Legal notice', calculators: 'Calculators', map: 'Map', related: 'More in Portugal' },
+  fr: { home: 'Imóveis Portugal — accueil', language: 'Langue', skip: 'Aller au Programa Regressar', privacy: 'Confidentialité', legal: 'Mentions légales', calculators: 'Simulateurs', map: 'Carte', related: 'Plus au Portugal' },
 }[lang];
 const host = config.domainMode === 'primary' ? config.primaryDomain : EDITIONS[ed].domain;
 const urlFor = (language: Lang) => `https://${host}/${language}/${ed}/regressar/`;

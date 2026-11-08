@@ -1,5 +1,7 @@
 # Programme-first Regressar experience
 
+The [guided-return refinement](ISSUE-10-GUIDED-RETURN.md) supersedes this initial programme-first layout.
+
 The operator explicitly approved production publication on 6 November 2026. The release integrates the existing editorial `main` baseline `6d7834d40047007ea48b3882e7c65a2c50ba57af` without overwriting those changes.
 
 The visitor declares country and net pay, compares Portuguese annual gross requirements, then chooses photographic questions and reveals a municipality that meets every selected supported taste and the illustrative housing ceiling. A separate, source-backed local-life section shows indicative floor areas, required deposit, schools and actual hospitals. Salary and screening answers stay in browser memory.

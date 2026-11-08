@@ -1,0 +1,19 @@
+---
+import type { Lang } from '../i18n';
+import { OFFICIAL_SUPPORT_ROUTES, supportCopy, buildReturnBrief } from '../lib/regressar-support';
+interface Props { lang:Lang }
+const {lang}=Astro.props;
+const c=supportCopy(lang);
+---
+<section class="rx-official-support" id="rx-support" data-r-support aria-labelledby="rx-support-title">
+ <div class="rx-support-intro"><p class="rx-kicker">Programa Regressar</p><h2 id="rx-support-title">{c.title}</h2><p>{c.lede}</p></div>
+ <div class="rx-support-layout">
+  <div class="rx-support-routes">
+   {OFFICIAL_SUPPORT_ROUTES.map(route=><article class:list={['rx-support-route',{'rx-support-route-primary':route.id==='programme'}]}><h3>{route.name}</h3><p>{route.purpose[lang]}</p><a href={route.url} data-r-support-route={route.id} aria-label={`${c.findContacts} — ${route.name}`} target="_blank" rel="noopener noreferrer">{c.findContacts}<span aria-hidden="true"> →</span></a></article>)}
+   <p class="rx-fine">{c.contactHint}</p>
+   <details class="rx-support-preparation"><summary>{c.checklistHeading}</summary><ul>{c.checklist.map(item=><li>{item}</li>)}</ul></details>
+  </div>
+  <div class="rx-support-brief"><h3>{c.prepareBrief}</h3><p>{c.briefIntro}</p><label for="rx-return-brief">{c.briefLabel}</label><textarea id="rx-return-brief" data-r-return-brief readonly rows="9">{buildReturnBrief({lang})}</textarea><button class="rx-primary" type="button" data-r-copy-brief>{c.copy}<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M8 8h12v12H8zM4 16V4h12" stroke="currentColor" stroke-width="1.5" /></svg></button><p class="rx-brief-status" data-r-brief-status role="status" aria-live="polite"></p><p class="rx-fine">{c.privacy}</p></div>
+ </div>
+ <p class="rx-support-independent rx-fine">{c.independent} {c.sourceNote}</p>
+</section>
