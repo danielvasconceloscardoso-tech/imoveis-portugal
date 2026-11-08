@@ -1,6 +1,6 @@
 # Prompt 80: sitescope.ai, what we can learn and what we should do (operator, 8 Nov 2026)
 
-The operator saw sitescope.ai on Instagram, a Warsaw startup with the bio "Unlocking buildable potential with AI". Its account (@sitescope.ai) has 3 posts and about 2,300 followers; one post is titled "What does sitescope actually do?". A creator, @realrobertgutierrez, posted a reel from their office: a zoning/plot map on a TV screen, the caption "Startups like this are the foundational layer…", labelled "polish startup", with about 10.9K likes, 782 comments and 9.6K shares. The screenshots are in ops/prompts/assets/80_sitescope/.
+The operator saw sitescope.ai on Instagram, a Warsaw startup with the bio "Unlocking buildable potential with AI". Its account (@sitescope.ai) has 3 posts and about 2,300 followers; one post is titled "What does sitescope actually do?". A creator, @realrobertgutierrez, posted a reel from their office: a zoning/plot map on a TV screen, the caption "Startups like this are the foundational layer…", labelled "polish startup", with about 10.9K likes, 782 comments and 9.6K shares. (Screenshots stay with the operator: they show his own Instagram, so they are kept out of the repo.)
 
 Your task: find out exactly what they do and how they grow, then tell the operator what Imóveis Portugal should learn and do. This is research and a recommendation only: build nothing in this prompt. Any build comes as its own prompt after the operator's go, golden sample first (CLAUDE.md rule 17: Gondomar).
 
