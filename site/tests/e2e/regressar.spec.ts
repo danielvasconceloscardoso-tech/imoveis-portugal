@@ -50,7 +50,7 @@ for (const [language, route] of [
     await expect(page.locator('[data-r-country]')).toHaveAccessibleName(/.+/);
     await expect(page.locator('[data-r-net]')).toHaveAccessibleName(/.+/);
     await calculate(page);
-    for (const selector of ['[data-r-gross]', '[data-r-net-result]', '[data-r-irs]', '[data-r-ss]']) {
+    for (const selector of ['[data-r-negotiation-gross]', '[data-r-gross]', '[data-r-net-result]', '[data-r-irs]', '[data-r-ss]']) {
       await expect(page.locator(selector)).toBeVisible();
       expect(digits(await page.locator(selector).textContent())).toBeGreaterThan(0);
     }
@@ -61,11 +61,21 @@ for (const [language, route] of [
     await expect(page.locator('[data-r-scenario-note]')).toBeVisible();
     await expect(page.locator('[data-r-scenario-note]')).toContainText(/eligib|elegib|éligib|hypoth|hipot|assum|suppos/i);
     await expect(page.locator('[data-r-scenario-note]')).not.toContainText(/eligibility confirmed|elegibilidade confirmada|éligibilité confirmée|benefit approved/i);
+    expect(digits(await page.locator('[data-r-negotiation-gross]').textContent())).toBe(4841);
+    await expect(page.locator('[data-r-pt-payments]')).toHaveValue('14');
+    await expect(page.locator('[data-r-negotiation-label]')).toContainText(/14/);
+    await expect(page.locator('[data-r-negotiation-label]')).toContainText(/brut|gross/i);
     const hierarchy = await page.evaluate(() => ({
-      hero: parseFloat(getComputedStyle(document.querySelector('[data-r-hero-net]')!).fontSize),
-      gross: parseFloat(getComputedStyle(document.querySelector('[data-r-gross]')!).fontSize),
+      negotiation: parseFloat(getComputedStyle(document.querySelector('[data-r-negotiation-gross]')!).fontSize),
+      annualGross: parseFloat(getComputedStyle(document.querySelector('[data-r-gross]')!).fontSize),
+      net: parseFloat(getComputedStyle(document.querySelector('[data-r-hero-net]')!).fontSize),
     }));
-    expect(hierarchy.hero, 'the maintained monthly net leads; the annual gross stays visible but secondary').toBeGreaterThan(hierarchy.gross);
+    expect(hierarchy.negotiation, 'the employer negotiation figure leads, with annual gross still visible').toBeGreaterThan(hierarchy.annualGross);
+    expect(hierarchy.negotiation, 'known current net income is supporting information').toBeGreaterThan(hierarchy.net);
+    await expect(page.locator('[data-r-power-place]')).toBeVisible();
+    await expect(page.locator('[data-r-power-preview]')).toBeVisible();
+    await expect(page.locator('[data-r-power-preview]')).toContainText(/m²/);
+    await expect(page.locator('[data-r-city]')).toBeHidden();
     await expect(root(page)).toContainText('2026');
     await expect(page.locator('[data-r-result]')).toHaveAttribute('aria-live', /polite|assertive/);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
@@ -256,4 +266,60 @@ test('Portuguese decimal comma gives the same result as a decimal point', async 
   const point = await page.locator('[data-r-gross]').textContent();
   await calculate(page, '4500,50');
   await expect(page.locator('[data-r-gross]')).toHaveText(point!);
+});
+
+
+test('The simulator is immediately usable and its source currency is independent of country', async ({ page }) => {
+  await open(page);
+  await page.evaluate(() => document.fonts.ready);
+  for (const selector of ['[data-r-country]', '[data-r-currency-select]', '[data-r-net]', '[data-r-calculate]']) {
+    const control = page.locator(selector);
+    await expect(control).toBeVisible();
+    await expect(control).toHaveAccessibleName(/.+/);
+    expect(await control.evaluate(element => {
+      const bounds = element.getBoundingClientRect();
+      return bounds.top >= 0 && bounds.left >= 0 && bounds.bottom <= innerHeight && bounds.right <= innerWidth;
+    }), `${selector} is available in the first viewport without an introductory click`).toBe(true);
+  }
+  await page.locator('[data-r-currency-select]').selectOption('USD');
+  await expect(page.locator('[data-r-country]')).toHaveValue('lu');
+  await calculate(page);
+  expect(digits(await page.locator('[data-r-net-result]').textContent())).toBe(Math.round(54000 / 1.1193));
+  await expect(page.locator('[data-r-fx]')).toContainText(/USD/);
+  await expect(page.locator('[data-r-fx]')).toContainText('2026-10-23');
+  await page.locator('[data-r-currency-select]').selectOption('CHF');
+  await expect(page.locator('[data-r-country]')).toHaveValue('lu');
+  await calculate(page);
+  expect(digits(await page.locator('[data-r-net-result]').textContent())).toBe(Math.round(54000 / 0.9227));
+  await expect(page.locator('[data-r-fx]')).toContainText(/CHF/);
+});
+
+test('Portuguese payment count changes the negotiation amount without changing annual tax or source income', async ({ page }) => {
+  await open(page);
+  await calculate(page);
+  const annual = await page.locator('[data-r-gross]').textContent();
+  const net = await page.locator('[data-r-net-result]').textContent();
+  const ss = await page.locator('[data-r-ss]').textContent();
+  const irs = await page.locator('[data-r-irs]').textContent();
+  const sourcePayments = await page.locator('[data-r-payments]').inputValue();
+  await expect(page.locator('[data-r-power-preview]')).toContainText(/m²/);
+  const firstPower = await page.locator('[data-r-power-preview]').textContent();
+  await page.locator('[data-r-power-place]').selectOption('braga');
+  await expect(page.locator('[data-r-power-preview]')).not.toHaveText(firstPower!);
+  await expect(page.locator('[data-r-power-preview]')).toContainText(/m²/);
+  await expect(page.locator('[data-r-gross]')).toHaveText(annual!);
+  await expect(page.locator('[data-r-net-result]')).toHaveText(net!);
+  await expect(page.locator('[data-r-pt-payments]')).toHaveValue('14');
+  expect(digits(await page.locator('[data-r-negotiation-gross]').textContent())).toBe(4841);
+  await page.locator('[data-r-pt-payments]').selectOption('12');
+  expect(digits(await page.locator('[data-r-negotiation-gross]').textContent())).toBe(5647);
+  await expect(page.locator('[data-r-negotiation-label]')).toContainText('12');
+  await expect(page.locator('[data-r-gross]')).toHaveText(annual!);
+  await expect(page.locator('[data-r-net-result]')).toHaveText(net!);
+  await expect(page.locator('[data-r-ss]')).toHaveText(ss!);
+  await expect(page.locator('[data-r-irs]')).toHaveText(irs!);
+  await expect(page.locator('[data-r-payments]')).toHaveValue(sourcePayments);
+  await page.locator('[data-r-pt-payments]').selectOption('14');
+  expect(digits(await page.locator('[data-r-negotiation-gross]').textContent())).toBe(4841);
+  await expect(page.locator('[data-r-gross]')).toHaveText(annual!);
 });

@@ -29,29 +29,33 @@ async function showControl(page: Page, selector: string) {
   await expect(control).toBeVisible();
 }
 
-test('Programme preview leads to income before the optional checklist, with a keyboard path to support', async ({ page }) => {
+test('The simulator starts the journey while eligibility and official support remain directly reachable', async ({ page }) => {
   await open(page);
-  await expect(page.getByRole('heading', { level: 1 })).toContainText('Programa Regressar');
-  await expect(page.locator('[data-r-journey]')).toBeVisible();
-  await expect(page.locator('[data-r-journey] a')).toHaveCount(3);
-  await expect(page.locator('[data-r-preview-programme]').first()).toHaveAttribute('href', '#rx-income');
-  await expect(page.locator('[data-r-start-programme]').first()).toHaveAttribute('href', '#rx-programme-start');
-  await expect(page.locator('[data-r-open-support]').first()).toHaveAttribute('href', '#rx-support');
-  await expect(page.locator('[data-r-open-income]').first()).toHaveAttribute('href', '#rx-income');
-  expect(await page.evaluate(() => {
-    const programme = document.getElementById('rx-programme-start');
-    const result = document.querySelector('[data-r-result]');
-    return !!programme && !!result && !!(result.compareDocumentPosition(programme) & Node.DOCUMENT_POSITION_FOLLOWING);
-  })).toBe(true);
-  await page.locator('[data-r-preview-programme]').first().focus();
-  await page.keyboard.press('Enter');
-  await expect(page).toHaveURL(/#rx-income$/);
+  await expect(page.getByRole('heading', { level: 1 })).toContainText(/ganhar|salário|earn|salary|gagner|salaire/i);
+  await expect(page.locator('[data-r-country]')).toBeVisible();
+  await expect(page.locator('[data-r-currency-select]')).toBeVisible();
+  await expect(page.locator('[data-r-net]')).toBeVisible();
+  await expect(page.locator('[data-r-calculate]')).toBeVisible();
   await expect(page.locator('[data-r-net]')).toHaveValue('');
-  await page.locator('[data-r-journey-step="conditions"]').focus();
+  // No programme information or checklist is a required gate to the calculator.
+  expect(await page.evaluate(() => {
+    const income = document.getElementById('rx-income');
+    const result = document.querySelector('[data-r-result]');
+    const discovery = document.getElementById('rx-discovery');
+    const programme = document.getElementById('rx-programme-start');
+    return !!income && !!result && !!discovery && !!programme &&
+      !!(income.compareDocumentPosition(result) & Node.DOCUMENT_POSITION_FOLLOWING) &&
+      !!(result.compareDocumentPosition(discovery) & Node.DOCUMENT_POSITION_FOLLOWING) &&
+      !!(discovery.compareDocumentPosition(programme) & Node.DOCUMENT_POSITION_FOLLOWING);
+  })).toBe(true);
+  await page.locator('[data-r-net]').fill('4500');
+  await page.locator('[data-r-calculate]').focus();
+  await page.keyboard.press('Enter');
+  await expect(page.locator('[data-r-result]')).toBeVisible();
+  await page.locator('[data-r-start-programme]').first().focus();
   await page.keyboard.press('Enter');
   await expect(page).toHaveURL(/#rx-programme-start$/);
   await showControl(page, '[data-r-return-year]');
-  await expect(page.locator('[data-r-net]')).toHaveValue('');
   await expect(page.locator('[data-r-eligibility-status]')).toHaveAttribute('data-status', 'incomplete');
   await page.locator('[data-r-open-support]').first().focus();
   await page.keyboard.press('Enter');

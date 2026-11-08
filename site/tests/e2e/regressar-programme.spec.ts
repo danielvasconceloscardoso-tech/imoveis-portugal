@@ -77,6 +77,7 @@ test('Unknown answers permit a labelled hypothetical preview, while unsupported 
   await expect(benefit).toBeEnabled();
   await expect(page.locator('[data-r-result]')).toHaveAttribute('data-scenario', 'hypothetical');
   expect(money(await page.locator('[data-r-gross]').textContent())).toBe(67770);
+  expect(money(await page.locator('[data-r-negotiation-gross]').textContent())).toBe(4841);
   await expect(page.locator('[data-r-scenario-note]')).toContainText(/elegib|hipot|assum/i);
   await showControl(page, '[data-r-return-year]');
   await expect(page.locator('[data-r-eligibility-status]')).toHaveAttribute('data-status', 'incomplete');
@@ -87,6 +88,7 @@ test('Unknown answers permit a labelled hypothetical preview, while unsupported 
     await expect(benefit).toBeDisabled();
     await expect(page.locator('[data-r-result]')).toHaveAttribute('data-scenario', 'standard');
     expect(money(await page.locator('[data-r-gross]').textContent())).toBe(92518);
+  expect(money(await page.locator('[data-r-negotiation-gross]').textContent())).toBe(6608);
   }
   await page.locator('[data-r-return-year]').selectOption('2026');
   for (const id of criteria.slice(0, -1)) await criterion(page, id).selectOption('yes');
@@ -117,6 +119,7 @@ test('A disqualifying answer replaces the hypothetical gross and its full tax le
   const result = page.locator('[data-r-result]');
   await expect(result).toHaveAttribute('data-scenario', 'hypothetical');
   expect(money(await page.locator('[data-r-gross]').textContent())).toBe(67770);
+  expect(money(await page.locator('[data-r-negotiation-gross]').textContent())).toBe(4841);
   expect(money(await page.locator('[data-r-ss]').textContent())).toBe(7455);
   expect(money(await page.locator('[data-r-irs]').textContent())).toBe(6315);
   expect(money(await page.locator('[data-r-solidarity]').textContent())).toBe(0);
@@ -128,6 +131,7 @@ test('A disqualifying answer replaces the hypothetical gross and its full tax le
   await expect(page.locator('[data-r-eligibility-status]')).toHaveAttribute('data-status', 'not-eligible');
   await expect(result).toHaveAttribute('data-scenario', 'standard');
   expect(money(await page.locator('[data-r-gross]').textContent())).toBe(92518);
+  expect(money(await page.locator('[data-r-negotiation-gross]').textContent())).toBe(6608);
   expect(money(await page.locator('[data-r-ss]').textContent())).toBe(10177);
   expect(money(await page.locator('[data-r-irs]').textContent())).toBe(28283);
   expect(money(await page.locator('[data-r-solidarity]').textContent())).toBe(59);
@@ -147,6 +151,7 @@ test('An explicit standard comparison preference survives later compatible check
   await expect(page.locator('[data-r-benefit]')).toBeEnabled();
   await expect(page.locator('[data-r-result]')).toHaveAttribute('data-scenario', 'standard');
   expect(money(await page.locator('[data-r-gross]').textContent())).toBe(92518);
+  expect(money(await page.locator('[data-r-negotiation-gross]').textContent())).toBe(6608);
 });
 
 test('Image choices keep their accessible selection state and reveal a compatible municipality', async ({ page }) => {

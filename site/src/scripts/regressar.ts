@@ -1,7 +1,7 @@
 import { regressarCopy } from '../lib/regressar-copy';
-import { COUNTRIES, getCountry, convertNetToEuro } from '../lib/regressar-fx';
+import { COUNTRIES, getCountry, getSalaryCurrency, convertCurrencyNetToEuro } from '../lib/regressar-fx';
 import { annualizeNet, grossForNet, TAX_2026 } from '../lib/regressar-tax';
-import { rankCities, regressarMapHref, type Preference, type RankedCity, type HousingMode } from '../lib/regressar-places';
+import { rankCities, regressarMapHref, REGRESSAR_PLACES, type Preference, type RankedCity, type HousingMode } from '../lib/regressar-places';
 import { assessEligibility, ELIGIBILITY_QUESTIONS, ELIGIBILITY_COPY, type EligibilityAnswers, type EligibilityAnswer } from '../lib/regressar-eligibility';
 import { decideProgrammeScenario, scenarioCopy } from '../lib/regressar-scenario';
 import { initRegressarSupport } from './regressar-support';
@@ -18,9 +18,10 @@ export function initRegressar() {
  const text=(key:string,value:string)=>{const e=q(key);if(e)e.textContent=value;};
  const euro=(value:number)=>new Intl.NumberFormat(locale,{style:'currency',currency:'EUR',maximumFractionDigits:0}).format(value);
  const country=q<HTMLSelectElement>('country'), net=q<HTMLInputElement>('net'), period=q<HTMLSelectElement>('period'), payments=q<HTMLSelectElement>('payments');
+ const sourceCurrency=q<HTMLSelectElement>('currency-select'),ptPayments=q<HTMLSelectElement>('pt-payments');
  const result=q('result'), error=q('error'), discovery=q('discovery'), benefit=q<HTMLInputElement>('benefit'), reveal=q<HTMLButtonElement>('reveal');
  let targetAnnual=0, revealIndex=0, generation=0;
- let preferBenefit=true;
+ let preferBenefit=true, displayedGross=0,powerRevision=0;
  let lifeAbort:AbortController|undefined;
  let mapTask:Promise<import("./regressar-map").RegressarMapHandle>|undefined;
  let mapMatches:RankedCity[]=[], mapSelected="";
@@ -28,7 +29,8 @@ export function initRegressar() {
  const signal=(step:string)=>root.dispatchEvent(new CustomEvent('regressar:step',{bubbles:true,detail:{step}}));
  const range={pt:'Este modelo cobre líquidos anuais equivalentes entre 20 000 € e 500 000 €. Abaixo desse intervalo, o mínimo de existência exige outro cálculo.',en:'This model covers equivalent annual net income from €20,000 to €500,000. Below this range, minimum-income protection requires a different calculation.',fr:'Ce modèle couvre un revenu net annuel équivalent de 20 000 € à 500 000 €. En dessous, la protection du minimum de revenu exige un autre calcul.'}[lang];
  const resetCity=()=>{generation++;lifeAbort?.abort();mapMatches=[];mapSelected='';q('mini-map').hidden=true;q('local-life').hidden=true;const preview=q('reveal-preview');if(preview)preview.hidden=true;q('city').hidden=true;q('no-match').hidden=true;reveal.disabled=false;reveal.textContent=c.reveal;reveal.removeAttribute('aria-busy');revealIndex=0;};
- function syncCountry(){const current=getCountry(country.value);text('currency',current.currency);net.setAttribute('aria-label',`${c.netSalary} (${current.currency})`);}
+ function syncCurrency(){const quote=getSalaryCurrency(sourceCurrency.value);text('currency',quote.currency);net.setAttribute('aria-label',`${c.netSalary} (${quote.currency})`);}
+ function syncCountry(){sourceCurrency.value=getCountry(country.value).currency;syncCurrency();}
  function syncPeriod(){payments.disabled=period.value==='year';payments.closest<HTMLElement>('[data-r-payment-wrap]')?.toggleAttribute('hidden',period.value==='year');}
  function eligibility(){
   const answers:EligibilityAnswers={returnYear:q<HTMLSelectElement>('return-year').value?Number(q<HTMLSelectElement>('return-year').value):null};
@@ -43,6 +45,27 @@ export function initRegressar() {
   benefit.disabled=!preview.benefitAvailable;benefit.checked=preview.useBenefit;
   if(targetAnnual)calculate(false);
  }
+ function updateNegotiation(){
+  const payments=Number(ptPayments.value);
+  if(payments!==12&&payments!==14)return;
+  text('negotiation-gross',euro(displayedGross/payments));
+  text('negotiation-label',({pt:`Brutos por pagamento · ${payments} pagamentos/ano`,en:`Gross per payment · ${payments} payments/year`,fr:`Brut par versement · ${payments} versements/an`})[lang]);
+ }
+ async function updatePower(){
+  const ticket=++powerRevision, amount=targetAnnual/12,place=REGRESSAR_PLACES.find(p=>p.id===q<HTMLSelectElement>('power-place').value),panel=q('power-preview');
+  if(!place||!amount)return;
+  panel.setAttribute('aria-busy','true');
+  try{
+   const {purchasingPower}=await import('../lib/regressar-life');
+   if(ticket!==powerRevision||targetAnnual/12!==amount)return;
+   const power=purchasingPower(amount,place);if(!power)return;
+   panel.replaceChildren();
+   const rows={pt:[`≈ ${Math.floor(power.maxRentAreaM2)} m² para arrendar · ${euro(power.housingBudget)}/mês`,`≈ ${Math.floor(power.maxBuyAreaM2)} m² para comprar · ${euro(power.maxPurchasePrice)}`,`Entrada necessária: ${euro(power.deposit)} + impostos e despesas`],en:[`≈ ${Math.floor(power.maxRentAreaM2)} m² to rent · ${euro(power.housingBudget)}/month`,`≈ ${Math.floor(power.maxBuyAreaM2)} m² to buy · ${euro(power.maxPurchasePrice)}`,`Deposit required: ${euro(power.deposit)} + taxes and fees`],fr:[`≈ ${Math.floor(power.maxRentAreaM2)} m² à louer · ${euro(power.housingBudget)}/mois`,`≈ ${Math.floor(power.maxBuyAreaM2)} m² à acheter · ${euro(power.maxPurchasePrice)}`,`Apport nécessaire : ${euro(power.deposit)} + impôts et frais`]}[lang];
+   for(const row of rows){const p=document.createElement('p');p.textContent=row;panel.append(p);}
+   const source=document.createElement('small');source.textContent=`${place.name} · INE · ${place.period}`;panel.append(source);
+  }catch{if(ticket===powerRevision)panel.textContent={pt:'Não foi possível carregar este cenário.',en:'This housing scenario could not be loaded.',fr:'Ce scénario logement ne peut pas être chargé.'}[lang];}
+  finally{if(ticket===powerRevision)panel.removeAttribute('aria-busy');}
+ }
  function calculate(scroll=true){
   error.hidden=true;net.removeAttribute('aria-invalid');
   try {
@@ -54,39 +77,41 @@ export function initRegressar() {
    const amount=Number(raw);
    if(!net.value.trim()||!Number.isFinite(amount)||amount<=0)throw new Error(c.error);
    const annualLocal=annualizeNet(amount,period.value as 'month'|'year',Number(payments.value));
-   targetAnnual=convertNetToEuro(annualLocal,country.value);
+   targetAnnual=convertCurrencyNetToEuro(annualLocal,sourceCurrency.value);
    if(targetAnnual<20000||targetAnnual>500000)throw new Error(range);
    const preview=decideProgrammeScenario(eligibility(),preferBenefit), wording=scenarioCopy(lang);
    benefit.disabled=!preview.benefitAvailable;benefit.checked=preview.useBenefit;
    result.dataset.scenario=preview.mode;
    text('scenario-note',preview.mode==='hypothetical'?wording.assumedNote:preview.mode==='compatible'?wording.compatibleNote:wording.standardNote);
-   text('result-title',preview.useBenefit?wording.title:wording.standardTitle);
+   text('result-title',preview.useBenefit?({pt:'O bruto para negociar em Portugal.',en:'Your gross salary to negotiate in Portugal.',fr:'Le brut à négocier au Portugal.'})[lang]:wording.standardTitle);
    text('hero-net-label',wording.monthlyNet);text('annual-basis',wording.annualBasisNote);text('gross-label',wording.annualGross);
    const standard=grossForNet(targetAnnual,{regressar:false});
    const conditional=preview.benefitAvailable?grossForNet(targetAnnual,{regressar:true}):null;
    text('standard-gross',euro(standard.grossAnnual));text('benefit-gross',conditional?euro(conditional.grossAnnual):'—');
    text('programme-difference',conditional?`${{pt:'Menos bruto necessário',en:'Less gross required',fr:'Brut nécessaire en moins'}[lang]}: ${euro(standard.grossAnnual-conditional.grossAnnual)} / ${c.year.toLowerCase()}`:'');
    const projected=preview.useBenefit?conditional!:standard;
+   displayedGross=projected.grossAnnual;updateNegotiation();
    text('hero-net',euro(projected.netAnnual/12));
    text('gross',euro(projected.grossAnnual));text('net-result',euro(projected.netAnnual));
    text('declared',euro(targetAnnual));text('irs',euro(projected.irs));text('ss',euro(projected.socialSecurity));text('solidarity',euro(projected.solidarity));
-   text('source-amount',new Intl.NumberFormat(locale,{style:'currency',currency:getCountry(country.value).currency,maximumFractionDigits:0}).format(annualLocal));
+   text('source-amount',new Intl.NumberFormat(locale,{style:'currency',currency:getSalaryCurrency(sourceCurrency.value).currency,maximumFractionDigits:0}).format(annualLocal));
    text('alternative',`${c.standard}: ${euro(standard.grossAnnual)} / ${c.year.toLowerCase()}`);
    text('effective',`${Math.round((projected.irs+projected.solidarity+projected.socialSecurity)/projected.grossAnnual*100)}%`);
-   const current=getCountry(country.value);
+   const current=getSalaryCurrency(sourceCurrency.value);
    text('fx',current.rateDate?`${c.exchangeRate}: 1 EUR = ${current.perEuro} ${current.currency} · ${current.rateDate} · BCE / ECB`:'EUR → EUR');
    const fx=q<HTMLAnchorElement>('fx');if(fx?.tagName==='A'){fx.href=current.source||'https://www.ecb.europa.eu/';}
    text('budget',`${euro(targetAnnual/12*.35)} / ${c.month.toLowerCase()}`);
-   result.hidden=false;discovery.hidden=false;resetCity();signal('result');
+   result.hidden=false;discovery.hidden=false;resetCity();void updatePower();signal('result');
    if(scroll)result.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});
-  }catch(e){targetAnnual=0;result.hidden=true;discovery.hidden=true;resetCity();error.textContent=e instanceof Error?e.message:c.error;error.hidden=false;net.setAttribute('aria-invalid','true');if(scroll)net.focus();}
+  }catch(e){targetAnnual=0;powerRevision++;result.hidden=true;discovery.hidden=true;resetCity();error.textContent=e instanceof Error?e.message:c.error;error.hidden=false;net.setAttribute('aria-invalid','true');if(scroll)net.focus();}
  }
  root.querySelector('form')?.addEventListener('submit',e=>{e.preventDefault();calculate();});
  benefit.addEventListener('change',()=>{preferBenefit=benefit.checked;if(targetAnnual)calculate(false);});
  q('return-year').addEventListener('change',refreshEligibility);
  root.querySelectorAll<HTMLSelectElement>('[data-r-eligibility]').forEach(el=>el.addEventListener('change',refreshEligibility));
- for(const e of [country,net,period,payments])e.addEventListener('input',()=>{targetAnnual=0;result.hidden=true;discovery.hidden=true;resetCity();error.hidden=true;});
- country.addEventListener('change',syncCountry);period.addEventListener('change',syncPeriod);
+ for(const e of [country,sourceCurrency,net,period,payments])e.addEventListener('input',()=>{targetAnnual=0;powerRevision++;result.hidden=true;discovery.hidden=true;resetCity();error.hidden=true;});
+ country.addEventListener('change',syncCountry);sourceCurrency.addEventListener('change',syncCurrency);
+ ptPayments.addEventListener('change',updateNegotiation);q('power-place').addEventListener('change',()=>void updatePower());period.addEventListener('change',syncPeriod);
  root.querySelectorAll<HTMLButtonElement>('[data-r-preference]').forEach(button=>button.addEventListener('click',()=>{const value=button.dataset.rPreference as Preference;preferences.has(value)?preferences.delete(value):preferences.add(value);button.setAttribute('aria-pressed',String(preferences.has(value)));resetCity();signal('preference');}));
  q<HTMLSelectElement>('housing').addEventListener('change',resetCity);
  async function showPlace(place:RankedCity,matches:RankedCity[]){

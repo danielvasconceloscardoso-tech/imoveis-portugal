@@ -1,0 +1,7 @@
+---
+import { REGRESSAR_PLACES } from '../lib/regressar-places';
+import type { Lang } from '../i18n';
+interface Props{lang:Lang}const {lang}=Astro.props;
+const c={pt:{h:'E o que este rendimento permite?',place:'Em que concelho?',note:'Cenário de habitação: até 35% do líquido mensal médio. Compra com 20% de entrada, 30 anos e 3% de juro nominal. Impostos, seguros e despesas excluídos; não garante financiamento nem imóveis disponíveis.'},en:{h:'What could this income buy you?',place:'Which municipality?',note:'Housing scenario: up to 35% of average monthly net. Buying assumes a 20% deposit, 30 years and 3% nominal interest. Taxes, insurance and fees excluded; no financing or available-property guarantee.'},fr:{h:'Que permettrait ce revenu ?',place:'Dans quelle commune ?',note:'Scénario logement : jusqu’à 35 % du net mensuel moyen. Achat avec 20 % d’apport, 30 ans et un taux nominal de 3 %. Impôts, assurances et frais exclus ; aucun financement ou bien disponible garanti.'}}[lang];
+---
+<section class="rx-immediate-power" aria-labelledby="rx-immediate-power-title"><h3 id="rx-immediate-power-title">{c.h}</h3><label for="rx-power-place">{c.place}<select id="rx-power-place" data-r-power-place>{REGRESSAR_PLACES.map(p=><option value={p.id} selected={p.id==='porto'}>{p.name}</option>)}</select></label><div data-r-power-preview role="status" aria-live="polite"></div><p class="rx-fine">{c.note}</p></section>

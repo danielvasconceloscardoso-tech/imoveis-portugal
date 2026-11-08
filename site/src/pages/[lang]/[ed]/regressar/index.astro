@@ -14,7 +14,7 @@ export function getStaticPaths() {
 const lang = Astro.params.lang as Lang;
 const ed = Astro.params.ed as EdCode;
 const experience = experienceCopy(lang);
-const title = {pt:'Programa Regressar: prepare o seu regresso a Portugal.',en:'Programa Regressar: plan your return to Portugal.',fr:'Programa Regressar : préparez votre retour au Portugal.'}[lang];
+const title = {pt:'Programa Regressar: simule o salário bruto para negociar em Portugal.',en:'Programa Regressar: calculate your gross salary to negotiate in Portugal.',fr:'Programa Regressar : calculez le salaire brut à négocier au Portugal.'}[lang];
 const labels = {
   pt: { home: 'Imóveis Portugal — início', language: 'Idioma', skip: 'Ir para o Programa Regressar', privacy: 'Privacidade', legal: 'Aviso legal', calculators: 'Simuladores', map: 'Mapa', related: 'Mais em Portugal' },
   en: { home: 'Imóveis Portugal — home', language: 'Language', skip: 'Skip to Programa Regressar', privacy: 'Privacy', legal: 'Legal notice', calculators: 'Calculators', map: 'Map', related: 'More in Portugal' },

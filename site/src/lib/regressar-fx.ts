@@ -49,3 +49,15 @@ export function convertNetToEuro(amount: number, countryId: string): number {
   if (!Number.isFinite(amount) || amount < 0) throw new RangeError("Net income must be finite and non-negative");
   return amount / getCountry(countryId).perEuro;
 }
+
+export const SALARY_CURRENCIES = Object.freeze([...new Set(COUNTRIES.map(c => c.currency))]);
+/** Currency is explicitly selectable: residence does not determine pay currency. */
+export function getSalaryCurrency(code:string):SalaryCountry {
+ const quote=COUNTRIES.find(c=>c.currency===code);
+ if(!quote)throw new RangeError('Unsupported salary currency');
+ return quote;
+}
+export function convertCurrencyNetToEuro(amount:number,code:string):number {
+ if(!Number.isFinite(amount)||amount<0)throw new RangeError('Net income must be finite and non-negative');
+ return amount/getSalaryCurrency(code).perEuro;
+}
