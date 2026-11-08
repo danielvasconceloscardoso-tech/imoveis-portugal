@@ -23,4 +23,4 @@ The next session starts from this file. Agent subtasks return a summary of 10 li
 | 76 | Everything from 67–75 in every language and edition, live | to do (after 74) |
 | 75 | Premium destinations first (send the list before building) | to do (after 76) |
 | 79 | /regressar ready for the Programa Regressar: law verified, OE2027 year, IRS Jovem vs 12.º-A, no commerce on the page | URGENT: before the 9 Nov 15:00 meeting if possible, else before the follow-up |
-| 80 | sitescope.ai: six agents (company, growth/creator reel, Portugal zoning data, market, strategist, fact-checker); research and recommendation only, nothing built | done (8 Nov): ops/research/80_sitescope/ (recommendation.md fact-checked); waiting on the operator's pick A/B/C/D |
+| 80 | sitescope.ai: six agents (company, growth/creator reel, Portugal zoning data, market, strategist, fact-checker); research and recommendation only, nothing built | done (8 Nov): ops/research/80_sitescope/ (recommendation.md fact-checked); filed (D107): operator saw no benefit |
