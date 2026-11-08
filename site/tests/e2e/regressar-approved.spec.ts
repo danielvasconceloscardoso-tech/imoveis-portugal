@@ -24,3 +24,21 @@ test('Approved Portuguese simulator calculates locally and prepares a demo summa
   expect(await page.evaluate(()=>document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   expect(errors).toEqual([]);
 });
+
+test('Main website bookmark opens the programme panel directly', async ({page, isMobile}) => {
+  await page.route('**/*', route => ['127.0.0.1','localhost'].includes(new URL(route.request().url()).hostname) ? route.continue() : route.abort());
+  await page.goto('/pt/lu/');
+  if(isMobile) await page.locator('.concierge > summary').click();
+  const bookmark=page.locator(isMobile ? '.cmain [data-nav-k="regressar"]' : '.hd .nav [data-nav-k="regressar"]');
+  await expect(bookmark).toBeVisible();
+  await expect(bookmark).toHaveAttribute('href','/pt/lu/regressar/#painel');
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+  await bookmark.click();
+  await expect(page.locator('#dash')).toBeVisible();
+  await expect(page.locator('#sim')).toBeHidden();
+  await page.reload();
+  await expect(page.locator('#dash')).toBeVisible();
+  await page.locator('.tabs [data-v="sim"]').click();
+  await expect(page.locator('#sim')).toBeVisible();
+  await expect(page).toHaveURL(/#simulador$/);
+});
