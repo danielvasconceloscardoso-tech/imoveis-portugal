@@ -166,3 +166,4 @@ One line per decision: date · decision · who decided.
 
 2026-11-08 · Operator: Israel edition hidden from the website for the Programa Regressar meeting, reversibly. One switch (HIDDEN_EDITIONS in site/src/i18n.ts) removes its pages, links, lists and sitemap; its addresses redirect (302) to the US edition; all Israel copy, FAQ, facts and guides stay in the repo. Branch israel-visible-2026-11-08 marks the last visible state; ops/RESTORE_ISRAEL.md has the steps (git revert 5d1ac021).
 - 2026-11-08 · D107: prompt 80 (sitescope.ai) filed, option D: no zoning layer, no land-section offer, no reel from it; research kept in ops/research/80_sitescope/ · operator
+- 2026-11-08 · D108: agents may open public web pages with curl or headless Playwright when WebFetch refuses a host (CLAUDE.md rule 18); no bot-check bypass, logins, forms or scripted calls to government sites · operator
