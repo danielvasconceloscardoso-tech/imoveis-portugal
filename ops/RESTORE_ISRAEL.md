@@ -5,7 +5,7 @@ Hidden on 8 Nov 2026 at the operator's request, for the Programa Regressar meeti
 The fastest way back is to undo the one commit that hid it:
 
 ```
-git revert <hide-commit>      # the commit "Hide the Israel edition (reversible)", listed in ops/DECISIONS.md
+git revert 5d1ac021      # the commit "Hide the Israel edition (reversible)"
 ```
 
 The tag `israel-visible-2026-11-08` marks the last state with Israel visible, for comparison (`git diff israel-visible-2026-11-08`).
