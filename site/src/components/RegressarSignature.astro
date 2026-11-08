@@ -1,6 +1,6 @@
 ---
 import { pathFor, type Lang, type EdCode } from '../i18n';
-interface Props { lang:Lang; ed?:EdCode; variant?:'header'|'simulator'|'result'|'support' }
+interface Props { lang:Lang; ed?:EdCode; variant?:'header'|'simulator'|'result'|'support'|'bookmark' }
 const {lang,ed='lu',variant='simulator'}=Astro.props;
 const label={pt:'Imóveis Portugal e Programa Regressar',en:'Imóveis Portugal and Programa Regressar',fr:'Imóveis Portugal et Programa Regressar'}[lang];
 ---
@@ -16,4 +16,8 @@ const label={pt:'Imóveis Portugal e Programa Regressar',en:'Imóveis Portugal a
 <style>
  .rx-signature-quiet{display:flex;align-items:center;gap:14px;color:#233d34;margin:0 0 22px;max-width:100%}.rx-signature-brand{font:400 19px/1.1 "Playfair Display Variable",Georgia,serif;letter-spacing:-.035em;white-space:nowrap}.rx-signature-cross{font:300 20px/1 "Manrope Variable",Manrope,sans-serif;color:#9c673a}.rx-signature-programme{display:flex;flex-direction:column;gap:3px;font:600 8px/1.1 "Manrope Variable",Manrope,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#173a42}.rx-signature-programme strong{font:inherit}.rx-signature-quiet[data-r-signature=result]{margin-bottom:28px}.rx-signature-quiet[data-r-signature=support]{margin-bottom:24px}
  @media(max-width:380px){.rx-signature-quiet{gap:11px}.rx-signature-brand{font-size:17px}.rx-signature-programme{font-size:7px}}
+ .rx-signature-quiet[data-r-signature=bookmark]{margin:0;gap:8px;color:inherit;min-height:36px}
+ .rx-signature-quiet[data-r-signature=bookmark] .rx-signature-brand{font-size:14px;text-transform:none;letter-spacing:-.035em;color:inherit}
+ .rx-signature-quiet[data-r-signature=bookmark] .rx-signature-cross{font-size:16px;color:#bb8a5b}
+ .rx-signature-quiet[data-r-signature=bookmark] .rx-signature-programme{font-size:7px;color:inherit;letter-spacing:.08em}
 </style>

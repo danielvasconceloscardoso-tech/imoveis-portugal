@@ -31,6 +31,8 @@ test('Main website bookmark opens the programme panel directly', async ({page, i
   if(isMobile) await page.locator('.concierge > summary').click();
   const bookmark=page.locator(isMobile ? '.cmain [data-nav-k="regressar"]' : '.hd .nav [data-nav-k="regressar"]');
   await expect(bookmark).toBeVisible();
+  await expect(bookmark.locator('[data-r-signature=bookmark]')).toBeVisible();
+  await expect(bookmark).toHaveAccessibleName('Programa Regressar — Painel do programa');
   await expect(bookmark).toHaveAttribute('href','/pt/lu/regressar/#painel');
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
   await bookmark.click();

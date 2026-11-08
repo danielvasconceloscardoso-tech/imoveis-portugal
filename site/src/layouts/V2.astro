@@ -6,6 +6,7 @@ import "../styles/v2.css";
 import "@fontsource-variable/manrope/wght.css";
 import "@fontsource-variable/playfair-display/wght.css";
 import "../styles/d2.css";
+import RegressarSignature from "../components/RegressarSignature.astro";
 import Chrome from "../components/Chrome.astro";
 import serif from "@fontsource-variable/newsreader/files/newsreader-latin-wght-normal.woff2?url";
 import d2serif from "@fontsource-variable/playfair-display/files/playfair-display-latin-wght-normal.woff2?url";
@@ -114,14 +115,14 @@ import Beacon from "../components/Beacon.astro";
       <div class="frame">
         <a class="word" href={pathFor(lang, ed, "home")}>Imóveis Portugal<span class="beta">{c("common.beta", lang)}</span></a>
         {d2 ? (
-        <nav class="nav nav5" aria-label="Menu">
+        <nav class="nav nav5" aria-label="Menu" style="align-items:center">
           {five.map((n) => <a href={pathFor(lang, ed, n.target)} aria-current={n.current.includes(page) ? "page" : undefined} data-nav-k={n.k} {...(n.cg ? { "data-concierge": "" } : {})}>{c(`bar.nav.${n.k}`, lang)}</a>)}
-          <a href={regressarPanelHref} data-nav-k="regressar">Programa Regressar</a>
+          <a href={regressarPanelHref} data-nav-k="regressar" aria-label="Programa Regressar — Painel do programa"><RegressarSignature lang={lang} ed={ed} variant="bookmark" /></a>
         </nav>
         ) : (
-        <nav class="nav" aria-label="Menu">
+        <nav class="nav" aria-label="Menu" style="align-items:center">
           {nav.map((n) => <a href={pathFor(lang, ed, n.target)} aria-current={n.current.includes(page) ? "page" : undefined}>{c(`common.navx.${n.k}`, lang)}</a>)}
-          <a href={regressarPanelHref} data-nav-k="regressar">Programa Regressar</a>
+          <a href={regressarPanelHref} data-nav-k="regressar" aria-label="Programa Regressar — Painel do programa"><RegressarSignature lang={lang} ed={ed} variant="bookmark" /></a>
         </nav>
         )}
         <div class="tools">
@@ -144,7 +145,7 @@ import Beacon from "../components/Beacon.astro";
             <div class="cmenu" id="site-menu">
               <nav class="cmain" aria-label="Menu">
                 {nav.map((n) => <a href={pathFor(lang, ed, n.target)} aria-current={n.current.includes(page) ? "page" : undefined}>{c(`common.navx.${n.k}`, lang)}</a>)}
-                <a href={regressarPanelHref} data-nav-k="regressar">Programa Regressar</a>
+                <a href={regressarPanelHref} data-nav-k="regressar" aria-label="Programa Regressar — Painel do programa"><RegressarSignature lang={lang} ed={ed} variant="bookmark" /></a>
               </nav>
               <ul class="csub">
                 {more.map((k) => <li><a href={pathFor(lang, ed, k)} aria-current={page === k ? "page" : undefined}>{c(`common.nav.${k}`, lang)}</a></li>)}
