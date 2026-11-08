@@ -4,8 +4,8 @@
 // Portuguese rent under the treaty, Israel's own rules, Swiss 3a conditions.
 import type { Lang } from "../src/i18n";
 
-export type Ed = "lu" | "fr" | "ch" | "br" | "us" | "il";
-export const EDS: Ed[] = ["lu", "fr", "ch", "br", "us", "il"];
+export type Ed = "lu" | "fr" | "ch" | "br" | "us" | "il" | "uk";
+export const EDS: Ed[] = ["lu", "fr", "ch", "br", "us", "il", "uk"];
 type Item = { facts: string[]; text: Record<Lang, string> };
 export type Country = { name: Record<Lang, string>; h: Record<Lang, string>; items: Item[]; note: Record<Lang, string> };
 
@@ -239,6 +239,28 @@ export const COUNTRIES: Record<Ed, Country> = {
       pt: "O que não está neste guia: a forma como Israel calcula o seu próprio imposto segue as regras israelitas. Fale com um consultor fiscal.",
       en: "Not covered here: how Israel calculates its own tax follows Israeli rules. Talk to a tax adviser.",
       fr: "Hors de ce guide : le calcul de l'impôt israélien suit les règles israéliennes. Adressez-vous à un conseiller fiscal.",
+    },
+  },
+  uk: {
+    name: { pt: "Reino Unido", en: "United Kingdom", fr: "Royaume-Uni" },
+    h: { pt: "Se vive no Reino Unido", en: "If you live in the United Kingdom", fr: "Si vous vivez au Royaume-Uni" },
+    items: [
+      repOut("o Reino Unido", "the United Kingdom", "le Royaume-Uni"),
+      imtMove,
+      rentPT,
+      {
+        facts: ["uk-pt-treaty-property"],
+        text: {
+          pt: "Rendas e venda no Reino Unido: pela convenção de 2025 entre Portugal e o Reino Unido, Portugal pode tributar as rendas e as mais-valias de imóveis em Portugal, e o Reino Unido, como país de residência, dá um crédito pelo imposto pago em Portugal.",
+          en: "Rent and sale in the UK: under the 2025 UK–Portugal tax treaty, Portugal may tax rent from and gains on property in Portugal, and the UK, as your country of residence, allows a credit for the tax paid in Portugal.",
+          fr: "Loyers et vente au Royaume-Uni : selon la convention de 2025 entre le Portugal et le Royaume-Uni, le Portugal peut imposer les loyers et les plus-values des biens situés au Portugal, et le Royaume-Uni, pays de résidence, accorde un crédit pour l'impôt payé au Portugal.",
+        },
+      },
+    ],
+    note: {
+      pt: "O que não está neste guia: a forma como o Reino Unido calcula o seu próprio imposto segue as regras britânicas. Fale com um consultor fiscal.",
+      en: "Not covered here: how the UK calculates its own tax follows UK rules. Talk to a tax adviser.",
+      fr: "Hors de ce guide : le calcul de l'impôt britannique suit les règles britanniques. Adressez-vous à un conseiller fiscal.",
     },
   },
 };

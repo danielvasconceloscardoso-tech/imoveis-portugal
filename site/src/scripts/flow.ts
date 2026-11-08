@@ -497,7 +497,7 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
     return list.length ? `<p class="fl-cvline">${esc(CV!.goes.replace("{list}", list.join(" · ")))}</p>` : "";
   };
   // M72-15: the edition's calling code (the reader can change it), and the number in international form when sent.
-  const CC: Record<string, string> = { lu: "+352", fr: "+33", ch: "+41", br: "+55", us: "+1", il: "+972" };
+  const CC: Record<string, string> = { lu: "+352", fr: "+33", ch: "+41", br: "+55", us: "+1", il: "+972", uk: "+44" };
   const ccNow = () => { const v = (A.cc ?? CC[F.hidden.edition] ?? "+351").replace(/[^\d+]/g, ""); return v ? (v.startsWith("+") ? v : `+${v.replace(/^00/, "")}`) : ""; };
   const intl = (ph: string) => { const t = (ph || "").trim(); if (!t) return ""; if (t.startsWith("+")) return t; if (/^00\d/.test(t)) return `+${t.slice(2)}`;
     const c = ccNow(); return c ? `${c} ${t.replace(/^0(?=\d)/, "")}` : t; };
@@ -656,7 +656,7 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
       let who: { name: string; email: string; phone: string; project: string } | null = null;
       try { who = JSON.parse(sessionStorage.getItem(`${key}.who`) || "null"); } catch { who = null; }
       const dev = ctxProject?.developer ? { name: ctxProject.developer, project: ctxProject.name } : undefined;
-      cvCard(cvHost, { L: CV, ctx: cvCtx, locale, eds: edOpts.filter((x) => x !== "other").length ? edOpts.filter((x) => x !== "other") : ["lu", "fr", "ch", "br", "us", "il"],
+      cvCard(cvHost, { L: CV, ctx: cvCtx, locale, eds: edOpts.filter((x) => x !== "other").length ? edOpts.filter((x) => x !== "other") : ["lu", "fr", "ch", "br", "us", "il", "uk"],
         profile: (F.links as Record<string, string>).profile, dev,
         onEvent: (k) => { if (k === "summary" || k === "ready" || k === "share") ev({ event: `flow/${F.id}/cv/${k}`, band: band() }); if (k === "share" && projectId) ev({ event: `p/${projectId}/cvshare`, place: projectId, origin: F.id }); },
         send: who?.email ? async (cv, labels) => {

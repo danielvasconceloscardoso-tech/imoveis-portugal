@@ -129,6 +129,8 @@ export const ROUTES: Record<EdCode, Partial<Record<Airport, Route>>> = {
   // edition's Lisbon flight.
   us: { OPO: R("nyc", "flight-nyc-opo", "TAP TP212", "OPO"), LIS: R("nyc", "flight-nyc-lis", "TAP TP210", "LIS"), FAO: R("nyc", "flight-ewr-fao-united", "United", "FAO", true) },
   il: { LIS: R("tlv", "flight-tlv-lis", "El Al LY375", "LIS") },
+  // UK (8 Nov 2026): only the London-Lisbon flight is in the facts register; Porto and Faro fall back to it.
+  uk: { LIS: R("lon", "flight-lon-lis", "TAP TP1351", "LIS") },
 };
 /** The route for this edition and airport, or the edition's Lisbon flight when there is no direct one in the file. */
 export function routeFor(ed: EdCode, to: Airport): { route: Route; direct: boolean } {

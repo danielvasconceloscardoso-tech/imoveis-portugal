@@ -79,7 +79,7 @@ def merge(d, out, props):
         k, c = target("parish", r)
         if k and r.get("nearest_pt_airport") and num(r.get("km_straight_line_to_airport")) is not None: P[c]["ap"] = [r["nearest_pt_airport"], round(num(r["km_straight_line_to_airport"]))]
     # Flights: only a published scheduled block time; the shortest per edition and Portuguese airport. Never a guess from distance.
-    ED = {"Luxembourg": "lu", "France": "fr", "Switzerland": "ch", "Brazil": "br", "USA": "us", "United States": "us", "Israel": "il"}
+    ED = {"Luxembourg": "lu", "France": "fr", "Switzerland": "ch", "Brazil": "br", "USA": "us", "United States": "us", "Israel": "il", "United Kingdom": "uk", "UK": "uk"}
     best = {}
     for r in rows(d, "viver_aqui/flights_editions_to_portugal.csv"):
         t, ed = num(r.get("scheduled_block_time_min")), ED.get(r.get("edition", ""))

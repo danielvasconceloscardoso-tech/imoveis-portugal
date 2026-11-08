@@ -13,4 +13,5 @@ export const PHOTO: Record<EdCode, string> = {
   br: "porto-ribeira-rabelo",
   us: "porto-douro-entardecer",
   il: "porto-ponte-luis-i-noite",
+  uk: "porto-ribeira-rabelo",
 };

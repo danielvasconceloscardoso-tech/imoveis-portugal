@@ -9,9 +9,9 @@ export type JQ = { id: string; a?: string; ck?: string; facts: string[]; cat: st
 // high: a station the path adds by itself when the reader's budget is high (D52); never labelled as such.
 export type Checkpoint = { k: string; roles: Role[]; qs: JQ[]; high?: boolean };
 const EU: EdCode[] = ["lu", "fr"];
-const NON_EU: EdCode[] = ["ch", "br", "us", "il"];
+const NON_EU: EdCode[] = ["ch", "br", "us", "il", "uk"];
 const per = (id: string, cat: string, facts: Partial<Record<EdCode, string[]>>, ask: EdCode[] = []): JQ[] =>
-  (["lu", "fr", "ch", "br", "us", "il"] as EdCode[]).map((ed) => ({ id, a: `${id}.${ed}`, facts: facts[ed] ?? [], cat, only: [ed], ask: ask.includes(ed) }));
+  (["lu", "fr", "ch", "br", "us", "il", "uk"] as EdCode[]).map((ed) => ({ id, a: `${id}.${ed}`, facts: facts[ed] ?? [], cat, only: [ed], ask: ask.includes(ed) }));
 
 export const JOURNEY: Checkpoint[] = [
   { k: "budget", roles: ["agency", "developer"], qs: [
@@ -50,11 +50,11 @@ export const JOURNEY: Checkpoint[] = [
   ] },
   { k: "rent", roles: ["tax"], qs: [
     { id: "renttax", facts: ["pt-rent-tax-nonresident", "pt-al-registration"], cat: "tax" },
-    ...per("home.rent", "tax", { lu: ["lu-pt-treaty-property"], ch: ["ch-pt-treaty-property"], br: ["br-pt-treaty-property"], il: ["il-pt-treaty-property"], us: ["us-pt-treaty-gains"], fr: ["fr-pt-treaty-source"] }, ["fr"]),
+    ...per("home.rent", "tax", { lu: ["lu-pt-treaty-property"], ch: ["ch-pt-treaty-property"], br: ["br-pt-treaty-property"], il: ["il-pt-treaty-property"], us: ["us-pt-treaty-gains"], fr: ["fr-pt-treaty-source"], uk: ["uk-pt-treaty-property"] }, ["fr"]),
   ] },
   { k: "sell", roles: ["tax"], qs: [
     { id: "cg", facts: ["pt-cg-50pct", "pt-irs-68-2026", "pt-cg-nonres-28-revoked"], cat: "tax" },
-    ...per("home.sell", "tax", { lu: ["lu-pt-treaty-property"], ch: ["ch-pt-treaty-property"], br: ["br-pt-treaty-property"], us: ["us-pt-treaty-gains"], fr: ["fr-pt-treaty-source"] }, ["fr", "il"]),
+    ...per("home.sell", "tax", { lu: ["lu-pt-treaty-property"], ch: ["ch-pt-treaty-property"], br: ["br-pt-treaty-property"], us: ["us-pt-treaty-gains"], fr: ["fr-pt-treaty-source"], uk: ["uk-pt-treaty-property"] }, ["fr", "il"]),
   ] },
   { k: "struct", roles: ["lawyer", "wealth"], qs: [
     { id: "live", facts: ["pt-visa-own-income", "pt-ari-realestate-ended"], cat: "lawyer" },

@@ -79,7 +79,7 @@ export function slotLabel(s: Slot, locale: string, lang: keyof typeof L, zone = 
 
 // Prompt 69: the Concierge shows the times in the reader's own zone first, Lisbon in small type underneath. The zone is the
 // browser's (Intl), else the edition's city when the browser gives none (or only UTC); the reader can change it in one tap.
-export const ED_ZONE: Record<string, string> = { lu: "Europe/Luxembourg", fr: "Europe/Paris", ch: "Europe/Zurich", br: "America/Sao_Paulo", us: "America/New_York", il: "Asia/Jerusalem" };
+export const ED_ZONE: Record<string, string> = { lu: "Europe/Luxembourg", fr: "Europe/Paris", ch: "Europe/Zurich", br: "America/Sao_Paulo", us: "America/New_York", il: "Asia/Jerusalem", uk: "Europe/London" };
 const realZone = (tz: string) => !!tz && tz !== "UTC" && !/^Etc\//.test(tz);
 /** The zone the reader's times are shown in, and where it came from: the reader's own choice or browser ("own"), the edition. */
 export function ownZone(ed: string): { zone: string; how: "own" | "edition" | "lisbon" } {

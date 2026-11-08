@@ -1,0 +1,36 @@
+# UK edition, European Portuguese: questions added to common-pt.yaml (same rules).
+
+- id: pt-uk-visa
+  rank: 6
+  stage: before
+  cta: lawyer
+  q: "Comprar casa dá direito a viver em Portugal?"
+  a: >-
+    Comprar e viver em Portugal são processos separados: desde 7 de outubro de 2023, a compra de casa
+    deixou de dar acesso a novos vistos gold (Lei 56/2023). Para viver cá, pede-se um visto de
+    residência, como o de quem vive de rendimentos próprios, conhecido como D7.
+  facts: [pt-ari-realestate-ended, pt-visa-own-income]
+
+- id: pt-uk-rent
+  rank: 9.5
+  stage: after
+  cta: tax
+  q: "O Reino Unido tributa as rendas da minha casa em Portugal?"
+  a: >-
+    Pode tributar, descontando o imposto já pago em Portugal. Pela convenção de 2025 entre os dois
+    países, Portugal tributa as rendas de casas em Portugal, a 25% para não residentes, e o Reino Unido,
+    como país de residência, dá um crédito por esse imposto. O cálculo do imposto britânico sobre essas
+    rendas segue as regras do Reino Unido.
+  facts: [uk-pt-treaty-property, pt-rent-tax-nonresident]
+
+- id: pt-uk-ifici
+  rank: 10.8
+  stage: after
+  cta: tax
+  q: "Há um regime fiscal especial para quem se muda para Portugal?"
+  a: >-
+    O IFICI aplica uma taxa especial de 20% durante 10 anos ao rendimento do trabalho em atividades
+    elegíveis, como investigação, ensino superior ou empregos altamente qualificados. É para quem passa
+    a residente fiscal e não foi residente em nenhum dos cinco anos anteriores. Depende da profissão, e
+    a compra de casa não dá acesso ao regime.
+  facts: [pt-ifici-20pct]

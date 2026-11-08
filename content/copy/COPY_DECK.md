@@ -5,7 +5,7 @@ Every text on the site, by page and block, in Portuguese (Portugal), English (Am
 How to edit:
 1. Change only the text after `PT:`, `EN:` or `FR:`. Keep the `##` page and `###` block names: the site looks them up.
 2. Words in curly brackets are filled in by the site: `{agency}`, `{ami}`, `{email}`, `{n}`, `{left}`, `{total}`, `{country}`, `{date}` and the legal placeholders. Keep them.
-3. Blocks ending in `.lu`, `.fr`, `.ch`, `.br`, `.us`, `.il` belong to one edition.
+3. Blocks ending in `.lu`, `.fr`, `.ch`, `.br`, `.us`, `.il`, `.uk` belong to one edition.
 4. Not in this file: the FAQ questions and answers (content/faq/*.yaml), the disclaimers (content/EDITORIAL_POLICY.md), the report text (site/ebooks/), and figures and their sources (content/facts/facts.csv).
 5. Tone (prompt 43, content/EDITORIAL_POLICY.md rules 10 to 12): positive, never deficit (say what the reader can do: "You don't need to be in Portugal to buy a home. Here's how it works."); short sentences a foreigner reads easily, every Portuguese term explained once; no AI tells; at most three short sentences per block.
 6. The partner agency is not named on the site while `config.agency.public` is false (prompt 66): blocks speak of "a qualified advisor". The wording that names it lives in `## agencynamed` (same block keys) and comes back when the flag is true. `{agency}` and `{ami}` may appear only there: the build fails if a block shown with the flag off names the agency.
@@ -56,6 +56,11 @@ How to edit:
 - PT: Israel
 - EN: Israel
 - FR: Israël
+
+### country.uk
+- PT: Reino Unido
+- EN: UK
+- FR: Royaume-Uni
 
 ### country.us
 - PT: EUA
@@ -364,6 +369,11 @@ How to edit:
 - EN: Israel
 - FR: Israël
 
+### name.uk
+- PT: Reino Unido
+- EN: United Kingdom
+- FR: Royaume-Uni
+
 ### fact.lu
 - PT: pessoas com nacionalidade portuguesa vivem no Luxemburgo.
 - EN: people with Portuguese nationality live in Luxembourg.
@@ -393,6 +403,11 @@ How to edit:
 - PT: de IMT desde maio de 2026 se não for residente fiscal em Portugal, salvo exceções.
 - EN: transfer tax (IMT) since May 2026 if you're not a Portuguese tax resident, with some exceptions.
 - FR: d'IMT depuis mai 2026 si vous n'êtes pas résident fiscal au Portugal, sauf exceptions.
+
+### fact.uk
+- PT: pessoas nascidas em Portugal vivem no Reino Unido.
+- EN: people born in Portugal live in the United Kingdom.
+- FR: personnes nées au Portugal vivent au Royaume-Uni.
 
 ### topic.lu
 - PT: Crédito no Luxemburgo ou em Portugal, impostos dos dois lados e o que muda no regresso.
@@ -424,6 +439,11 @@ How to edit:
 - EN: Portuguese mortgages for non-residents, shekels into euros and the Portugal–Israel tax treaty.
 - FR: Crédit au Portugal pour non-résidents, shekels en euros et la convention fiscale entre le Portugal et Israël.
 
+### topic.uk
+- PT: Crédito em Portugal para não residentes, libras em euros e a convenção fiscal entre Portugal e o Reino Unido.
+- EN: Portuguese mortgages for non-residents, pounds into euros and the UK–Portugal tax treaty.
+- FR: Crédit au Portugal pour non-résidents, livres en euros et la convention fiscale entre le Portugal et le Royaume-Uni.
+
 ### place.lu
 - PT: Ribeira, Porto
 - EN: Ribeira, Porto
@@ -453,6 +473,11 @@ How to edit:
 - PT: Ponte Luís I à noite, Porto
 - EN: Luís I bridge at night, Porto
 - FR: Le pont Luís I la nuit, Porto
+
+### place.uk
+- PT: Ribeira, Porto
+- EN: Ribeira, Porto
+- FR: La Ribeira, Porto
 
 ## home
 
@@ -491,6 +516,11 @@ How to edit:
 - EN: Buying a home in Portugal from Israel is simpler than it looks.
 - FR: Acheter au Portugal depuis Israël, c'est plus simple qu'il n'y paraît.
 
+### h1.uk
+- PT: Comprar casa em Portugal a partir do Reino Unido.
+- EN: Buying a home in Portugal from the UK is simpler than it looks.
+- FR: Acheter au Portugal depuis le Royaume-Uni, c'est plus simple qu'il n'y paraît.
+
 ### where.lu
 - PT: no Luxemburgo
 - EN: in Luxembourg
@@ -520,6 +550,11 @@ How to edit:
 - PT: em Israel
 - EN: in Israel
 - FR: en Israël
+
+### where.uk
+- PT: no Reino Unido
+- EN: in the UK
+- FR: au Royaume-Uni
 
 ### lede
 - PT: Cada passo, com as regras oficiais e um parceiro quando precisar. E a Maré, grátis, à terça e à sexta, às 8h.
@@ -3676,6 +3711,11 @@ How to edit:
 - EN: Israel
 - FR: Israël
 
+### from.uk
+- PT: do Reino Unido
+- EN: the UK
+- FR: le Royaume-Uni
+
 ### from.us
 - PT: dos Estados Unidos
 - EN: the US
@@ -4096,6 +4136,11 @@ How to edit:
 - EN: Israel may tax it and gives a credit for the tax paid in Portugal.
 - FR: Israël peut les imposer et accorde un crédit pour l'impôt payé au Portugal.
 
+### q.home.rent.uk.a
+- PT: O Reino Unido pode tributá-las e dá um crédito pelo imposto pago em Portugal.
+- EN: The UK may tax it and gives a credit for the tax paid in Portugal.
+- FR: Le Royaume-Uni peut les imposer et accorde un crédit pour l'impôt payé au Portugal.
+
 ### q.home.rent.us.a
 - PT: Os EUA tributam os seus cidadãos sobre o rendimento mundial; o crédito por imposto estrangeiro (formulário 1116) evita pagar duas vezes.
 - EN: The US taxes its citizens on worldwide income; the foreign tax credit (Form 1116) avoids paying twice.
@@ -4145,6 +4190,11 @@ How to edit:
 - PT: Não confirmámos na fonte como Israel trata este ganho: um consultor fiscal parceiro responde ao seu caso.
 - EN: We couldn't confirm at the source how Israel treats this gain: a partner tax adviser answers for your case.
 - FR: Nous n'avons pas pu vérifier à la source comment Israël traite ce gain : un conseiller fiscal partenaire répond pour votre cas.
+
+### q.home.sell.uk.a
+- PT: O Reino Unido pode tributá-la e dá um crédito pelo imposto pago em Portugal.
+- EN: The UK may tax the gain and gives a credit for the tax paid in Portugal.
+- FR: Le Royaume-Uni peut imposer la plus-value et accorde un crédit pour l'impôt payé au Portugal.
 
 ### q.home.sell.fr.a
 - PT: Portugal pode tributá-la. O tratamento em França mudou em 2016 e não o confirmámos na fonte: um consultor fiscal parceiro responde ao seu caso.
@@ -5661,6 +5711,11 @@ Design v2 home (prompt 32, D59). Every block: one to three sentences, at most 45
 - EN: A home in Portugal, without leaving Israel.
 - FR: Une maison au Portugal, sans quitter Israël.
 
+### h1.uk
+- PT: Casa em Portugal, sem sair do Reino Unido.
+- EN: A home in Portugal, without leaving the UK.
+- FR: Une maison au Portugal, sans quitter le Royaume-Uni.
+
 ### lede
 - PT: Os preços oficiais dos 308 concelhos, o custo completo de cada compra e quem trata de cada passo.
 - EN: Official prices for 308 municipalities, the real cost of each purchase and who handles each step.
@@ -5700,6 +5755,11 @@ Design v2 home (prompt 32, D59). Every block: one to three sentences, at most 45
 - PT: em Israel
 - EN: Israel
 - FR: en Israël
+
+### bar.in.uk
+- PT: no Reino Unido
+- EN: the United Kingdom
+- FR: au Royaume-Uni
 
 ### bar.want
 - PT: Quero
@@ -8354,6 +8414,11 @@ D83 (operator, 3 Nov 2026): the ten lifestyle articles (content/stories/, site/s
 - EN: Tel Aviv
 - FR: Tel Aviv
 
+### city.lon
+- PT: Londres
+- EN: London
+- FR: Londres
+
 ### to.opo
 - PT: o Porto
 - EN: Porto
@@ -8867,6 +8932,11 @@ D83 part 2 (3 Nov 2026): the map in three depths. First glance: photographs and 
 - PT: Telavive
 - EN: Tel Aviv
 - FR: Tel-Aviv
+
+### cty.uk
+- PT: Londres
+- EN: London
+- FR: Londres
 
 ### ph.porto-douro-entardecer
 - PT: O Douro e a ponte Luís I, Porto

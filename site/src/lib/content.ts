@@ -98,8 +98,8 @@ export class Sources {
 }
 
 // ---------- the home example: a 245 000 € home bought by a non-resident (prompt 11) ----------
-export const RATE = (cur: "CHF" | "USD" | "BRL" | "ILS") => ({ rate: Number(FACTS[`ecb-eur-${cur.toLowerCase()}`].value), id: `ecb-eur-${cur.toLowerCase()}` });
-export const EDITION_CUR: Partial<Record<EdCode, "CHF" | "USD" | "BRL" | "ILS">> = { ch: "CHF", us: "USD", br: "BRL", il: "ILS" };
+export const RATE = (cur: "CHF" | "USD" | "BRL" | "ILS" | "GBP") => ({ rate: Number(FACTS[`ecb-eur-${cur.toLowerCase()}`].value), id: `ecb-eur-${cur.toLowerCase()}` });
+export const EDITION_CUR: Partial<Record<EdCode, "CHF" | "USD" | "BRL" | "ILS" | "GBP">> = { ch: "CHF", us: "USD", br: "BRL", il: "ILS", uk: "GBP" };
 export function homeExample(price = 245000) {
   const imt = price * 0.075, is = price * 0.008, deed = 375; // pt-imt-nonresident-flat, pt-is-purchase, pt-casa-pronta-fees
   for (const [id, s] of [["pt-imt-nonresident-flat", "7.5%"], ["pt-is-purchase", "0.8%"], ["pt-casa-pronta-fees", "375"]]) if (!FACTS[id].value.includes(s)) throw new Error(`${id} changed`);

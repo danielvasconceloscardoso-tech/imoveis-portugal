@@ -20,7 +20,7 @@ const CTA_KEYS = ["lawyer", "bank", "tax", "fx", "developer", "agency"];
 const STAGES = ["before", "buying", "after"];
 const TYPES = ["article", "newsletter", "video", "carousel", "post", "faq"];
 const LANGS = { "pt-PT": "PT", fr: "FR", "pt-BR": "PT-BR", en: "EN" };
-const EDITIONS = ["lu", "fr", "ch", "br", "us", "il"];
+const EDITIONS = ["lu", "fr", "ch", "br", "us", "il", "uk"];
 // Banned: "paradise", "unique opportunity" and any promise of guaranteed returns or gains
 // ("garantia" as collateral is fine).
 const BANNED = [/paraíso/i, /paradis\b/i, /oportunidade única/i, /opportunité unique/i, /once[- ]in[- ]a[- ]lifetime/i,
@@ -197,7 +197,7 @@ for (const f of existsSync(storyDir) ? readdirSync(storyDir).filter((x) => x.end
   if (fm.only !== undefined && fm.only !== fm.lang) err(file, `"only" names the one language of a single-language article and must equal lang (${fm.lang})`);
   if (!["OPO", "LIS", "FAO"].includes(fm.airport)) err(file, `airport must be OPO, LIS or FAO`);
   // Prompt 70 (J-11): an article written for one country lists its editions; it is built and listed only there.
-  if (fm.editions !== undefined && (!Array.isArray(fm.editions) || !fm.editions.length || fm.editions.some((e) => !["lu", "fr", "ch", "br", "us", "il"].includes(e)))) err(file, "editions must be a list of edition codes (lu, fr, ch, br, us, il)");
+  if (fm.editions !== undefined && (!Array.isArray(fm.editions) || !fm.editions.length || fm.editions.some((e) => !["lu", "fr", "ch", "br", "us", "il", "uk"].includes(e)))) err(file, "editions must be a list of edition codes (lu, fr, ch, br, us, il, uk)");
   if (fm.title && (/[?!]/.test(fm.title) || fm.title.length > 80)) err(file, "headline: a statement of at most 80 characters, no question or exclamation mark");
   if (fm.description && (fm.description.length < 80 || fm.description.length > 160)) err(file, `description has ${fm.description.length} characters (80 to 160)`);
   if (!fm.photo?.src || !fm.photo?.alt || !fm.photo?.caption) err(file, "photo needs src, alt and caption");

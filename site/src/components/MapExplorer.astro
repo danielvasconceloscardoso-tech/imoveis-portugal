@@ -61,7 +61,7 @@ const cfg = { labels, links: { ...links, full }, quarter: qLabel, photos: REGION
   projects: PROJECTS.map((p) => ({ ...p, tag: p.tag?.[lang] ?? "", units: undefined, gallery: undefined, sources: undefined, sourcesShown: undefined, unitTable: undefined, unitTableNote: undefined, location: undefined, views: undefined, amenityImgs: undefined, film: undefined, tour3d: undefined, unitsNote: undefined, showcase: `${pathFor(lang, ed, "partners")}${p.devSlug}/${p.muni}/` })), routing: config.enquiryRouting, consult: mode === "embed" ? `https://imoveisportugal.pt${pathFor(lang, ed, "consult")}` : pathFor(lang, ed, "consult") };
 const id = `mapx-${mode}`;
 ---
-<div class={`mapx mapx-${mode}`} data-rates={mode === "embed" ? JSON.stringify(Object.fromEntries((["CHF", "USD", "BRL", "ILS"] as const).map((k) => [k, RATE(k).rate]))) : undefined} data-mapx data-lang={lang} data-locale={HTML_LANG[lang]} data-fx={fx ? fx.rate : ""} data-cur={cur ?? ""} data-mode={mode}>
+<div class={`mapx mapx-${mode}`} data-rates={mode === "embed" ? JSON.stringify(Object.fromEntries((["CHF", "USD", "BRL", "ILS", "GBP"] as const).map((k) => [k, RATE(k).rate]))) : undefined} data-mapx data-lang={lang} data-locale={HTML_LANG[lang]} data-fx={fx ? fx.rate : ""} data-cur={cur ?? ""} data-mode={mode}>
   <div class="mapx-controls">
     {/* D52: one budget field, no presets and no tiers; any amount, in euros or the reader's currency. */}
     <label class="mapx-budget">

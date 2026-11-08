@@ -42,7 +42,7 @@ for (const x of parts) {
   const g = groups.find((y) => y.id === id); if (g) g.parts.push(x.k); else groups.push({ id, parts: [x.k], text });
 }
 const cur = EDITION_CUR[ed] ?? "EUR";
-const sym = ({ EUR: "€", USD: "$", CHF: "CHF", BRL: "R$", ILS: "₪" } as Record<string, string>)[cur];
+const sym = ({ EUR: "€", USD: "$", CHF: "CHF", BRL: "R$", ILS: "₪", GBP: "£" } as Record<string, string>)[cur];
 ---
 <V2 lang={lang} ed={ed} page="casa" title={`${c("casa.title", lang)} | Imóveis Portugal · ${edName(ed, lang)}`} description={c("casa.lede", lang)} sticky={{ href: "#pedido", label: c("casa.form.send", lang) }}>
   <div class="frame read ph">

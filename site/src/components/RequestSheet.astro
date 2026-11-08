@@ -32,9 +32,9 @@ const blocks = (project.blocks ?? listedGroup ?? FALLBACK)
 const COUNTRY: Record<EdCode, Record<Lang, string>> = {
   lu: { pt: "Luxemburgo", en: "Luxembourg", fr: "Luxembourg" }, fr: { pt: "França", en: "France", fr: "France" },
   ch: { pt: "Suíça", en: "Switzerland", fr: "Suisse" }, br: { pt: "Brasil", en: "Brazil", fr: "Brésil" },
-  us: { pt: "Estados Unidos", en: "United States", fr: "États-Unis" }, il: { pt: "Israel", en: "Israel", fr: "Israël" },
+  us: { pt: "Estados Unidos", en: "United States", fr: "États-Unis" }, il: { pt: "Israel", en: "Israel", fr: "Israël" }, uk: { pt: "Reino Unido", en: "United Kingdom", fr: "Royaume-Uni" },
 };
-const DIAL: Record<EdCode, string> = { lu: "+352", fr: "+33", ch: "+41", br: "+55", us: "+1", il: "+972" };
+const DIAL: Record<EdCode, string> = { lu: "+352", fr: "+33", ch: "+41", br: "+55", us: "+1", il: "+972", uk: "+44" };
 
 const T = {
   pt: {

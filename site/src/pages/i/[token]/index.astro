@@ -22,7 +22,7 @@ const spark = (vals: (number | null)[]) => { const v = vals.map((x) => x ?? 0); 
 const munis = PRICES.munis as Record<string, any>;
 const qText = new Map<string, string>();
 for (const e of ED_ORDER) for (const l of LANGS) for (const it of faqFor(e, l)) if (!qText.has(it.id)) qText.set(it.id, it.q);
-const ED = { lu: "LU", fr: "FR", ch: "CH", br: "BR", us: "US", il: "IL" } as Record<string, string>;
+const ED = { lu: "LU", fr: "FR", ch: "CH", br: "BR", us: "US", il: "IL", uk: "UK" } as Record<string, string>;
 const dn = new Intl.DisplayNames(["en-GB"], { type: "region" });
 const cname = (k: string) => { try { return /^[A-Z]{2}$/.test(k) ? dn.of(k) : k; } catch { return k; } };
 const tiles = w ? [

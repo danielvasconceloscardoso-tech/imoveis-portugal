@@ -21,7 +21,7 @@ import { checkAggregate } from "./guard.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..", "..");
 const argv = process.argv.slice(2);
-const EDS = ["lu", "fr", "ch", "br", "us", "il"];
+const EDS = ["lu", "fr", "ch", "br", "us", "il", "uk"];
 const env = process.env;
 const dry = argv.includes("--dry");
 

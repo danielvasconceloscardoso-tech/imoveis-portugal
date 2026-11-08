@@ -21,7 +21,7 @@ const img = (n: string) => `data:image/jpeg;base64,${b64(join(dir, "img", `${n}.
 const cover = (n: string) => `data:image/jpeg;base64,${b64(join(process.cwd(), "ebooks", "img", n))}`;
 
 // D40 price list (CEO, delegated by Daniel, 25 Oct 2026).
-const P = { area: { prime: 24000, strong: 12000, standard: 6000 }, launch: { std: 7500, prime: 15000 }, step: { ch: 12000, lu: 12000, us: 12000, fr: 8000, il: 8000, br: 5000 }, structuring: 1.5, private: 48000, founding: 0.4 };
+const P = { area: { prime: 24000, strong: 12000, standard: 6000 }, launch: { std: 7500, prime: 15000 }, step: { ch: 12000, lu: 12000, us: 12000, fr: 8000, il: 8000, uk: 8000, br: 5000 }, structuring: 1.5, private: 48000, founding: 0.4 };
 type T = "developers" | "advisers" | "banks";
 const TYPES: T[] = ["developers", "advisers", "banks"];
 

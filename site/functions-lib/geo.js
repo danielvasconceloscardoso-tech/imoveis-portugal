@@ -4,24 +4,24 @@
 // closed for the visit with x (sessionStorage). Only on an edition's home and its top-level pages, never on the map.
 // The link carries ?de=geo-{from}-{to} so the arrival is counted by the site's own events.
 
-export const GEO_ED = { LU: "lu", FR: "fr", CH: "ch", BR: "br", US: "us", IL: "il" };
+export const GEO_ED = { LU: "lu", FR: "fr", CH: "ch", BR: "br", US: "us", IL: "il", GB: "uk" };
 
 const ASK = {
-  pt: { lu: "Vive no Luxemburgo?", fr: "Vive em França?", ch: "Vive na Suíça?", br: "Vive no Brasil?", us: "Vive nos Estados Unidos?", il: "Vive em Israel?" },
-  en: { lu: "Living in Luxembourg?", fr: "Living in France?", ch: "Living in Switzerland?", br: "Living in Brazil?", us: "Living in the United States?", il: "Living in Israel?" },
-  fr: { lu: "Vous vivez au Luxembourg ?", fr: "Vous vivez en France ?", ch: "Vous vivez en Suisse ?", br: "Vous vivez au Brésil ?", us: "Vous vivez aux États-Unis ?", il: "Vous vivez en Israël ?" },
+  pt: { lu: "Vive no Luxemburgo?", fr: "Vive em França?", ch: "Vive na Suíça?", br: "Vive no Brasil?", us: "Vive nos Estados Unidos?", il: "Vive em Israel?", uk: "Vive no Reino Unido?" },
+  en: { lu: "Living in Luxembourg?", fr: "Living in France?", ch: "Living in Switzerland?", br: "Living in Brazil?", us: "Living in the United States?", il: "Living in Israel?", uk: "Living in the UK?" },
+  fr: { lu: "Vous vivez au Luxembourg ?", fr: "Vous vivez en France ?", ch: "Vous vivez en Suisse ?", br: "Vous vivez au Brésil ?", us: "Vous vivez aux États-Unis ?", il: "Vous vivez en Israël ?", uk: "Vous vivez au Royaume-Uni ?" },
 };
 const GO = {
-  pt: { lu: "Ver a edição Luxemburgo", fr: "Ver a edição França", ch: "Ver a edição Suíça", br: "Ver a edição Brasil", us: "Ver a edição EUA", il: "Ver a edição Israel" },
-  en: { lu: "See the Luxembourg edition", fr: "See the France edition", ch: "See the Switzerland edition", br: "See the Brazil edition", us: "See the USA edition", il: "See the Israel edition" },
-  fr: { lu: "Voir l'édition Luxembourg", fr: "Voir l'édition France", ch: "Voir l'édition Suisse", br: "Voir l'édition Brésil", us: "Voir l'édition États-Unis", il: "Voir l'édition Israël" },
+  pt: { lu: "Ver a edição Luxemburgo", fr: "Ver a edição França", ch: "Ver a edição Suíça", br: "Ver a edição Brasil", us: "Ver a edição EUA", il: "Ver a edição Israel", uk: "Ver a edição Reino Unido" },
+  en: { lu: "See the Luxembourg edition", fr: "See the France edition", ch: "See the Switzerland edition", br: "See the Brazil edition", us: "See the USA edition", il: "See the Israel edition", uk: "See the UK edition" },
+  fr: { lu: "Voir l'édition Luxembourg", fr: "Voir l'édition France", ch: "Voir l'édition Suisse", br: "Voir l'édition Brésil", us: "Voir l'édition États-Unis", il: "Voir l'édition Israël", uk: "Voir l'édition Royaume-Uni" },
 };
 const CLOSE = { pt: "Fechar", en: "Close", fr: "Fermer" };
 const MAP = new Set(["mapa", "map", "carte"]);
 
 /** The suggestion for this path and country, or null. Path shape: /{lang}/{ed}/ or /{lang}/{ed}/{slug}/. */
 export function geoSuggest(pathname, country) {
-  const m = pathname.match(/^\/(pt|en|fr)\/(lu|fr|ch|br|us|il)\/(?:([a-z0-9-]+)\/)?$/);
+  const m = pathname.match(/^\/(pt|en|fr)\/(lu|fr|ch|br|us|il|uk)\/(?:([a-z0-9-]+)\/)?$/);
   const to = GEO_ED[String(country || "").toUpperCase()];
   if (!m || !to || to === m[2] || (m[3] && MAP.has(m[3]))) return null;
   const [, lang, from, slug] = m;

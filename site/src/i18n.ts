@@ -4,7 +4,7 @@ export const LANGS: Lang[] = ["pt", "en", "fr"];
 export const HTML_LANG: Record<Lang, string> = { pt: "pt-PT", en: "en", fr: "fr" };
 export const LANG_NAME: Record<Lang, string> = { pt: "Português", en: "English", fr: "Français" };
 
-export type EdCode = "lu" | "fr" | "ch" | "br" | "us" | "il";
+export type EdCode = "lu" | "fr" | "ch" | "br" | "us" | "il" | "uk";
 export type PageKey = "partners" | "buy" | "privacy" | "legal" | "faq" | "talk" | "guide" | "how" | "sims" | "casa" | "data" | "map" | "blog" | "private" | "ours" | "journey" | "consult" | "dossiers" | "articles" | "saved" | "mare" | "profile";
 
 // URL slugs follow the language, not the edition: /{lang}/{edition}/{slug}/
@@ -25,11 +25,13 @@ const SRC = {
   // From content/facts/facts.csv (us-fbar, pt-imt-nonresident-flat).
   irs_fbar: "https://www.irs.gov/businesses/comparison-of-form-8938-and-fbar-requirements",
   cimt17: "https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/cimt/Pages/cimt17.aspx",
+  oem_uk: "https://observatorioemigracao.pt/np4EN/file/10749/Factbook_20251.pdf",
 };
 
 // Edition data. Every word shown to readers (names, headlines, topics, the figure's sentence) is in
 // content/copy/COPY_DECK.md; here only the domain, the default language and each edition's figure.
 // USA and Israel (prompt 05, D13): domains not chosen yet (ops/DOMAINS_US_IL.md), so those two are placeholders.
+// United Kingdom (operator, 8 Nov 2026): served under the primary domain (/en/uk/); the country domain is a placeholder too.
 type EdFigure = { big: L3<string>; source: L3<string>; url: string };
 export const EDITIONS: Record<EdCode, { code: EdCode; domain: string; defaultLang: Lang; fact: EdFigure }> = {
   lu: { code: "lu", domain: "imoveisportugal.lu", defaultLang: "pt", fact: { big: { pt: "92 000", en: "92,000", fr: "92 000" }, source: { pt: "OCDE, via The Portugal News, 2024", en: "OECD, via The Portugal News, 2024", fr: "OCDE, via The Portugal News, 2024" }, url: SRC.lu } },
@@ -38,9 +40,10 @@ export const EDITIONS: Record<EdCode, { code: EdCode; domain: string; defaultLan
   br: { code: "br", domain: "imoveisportugal.com.br", defaultLang: "pt", fact: { big: { pt: "9 808", en: "9,808", fr: "9 808" }, source: { pt: "INE, via idealista/news, 2026", en: "INE, via idealista/news, 2026", fr: "INE, via idealista/news, 2026" }, url: SRC.ine_nat } },
   us: { code: "us", domain: "imoveisportugal.us", defaultLang: "en", fact: { big: { pt: "10 000 USD", en: "$10,000", fr: "10 000 USD" }, source: { pt: "IRS, Comparison of Form 8938 and FBAR requirements", en: "IRS, Comparison of Form 8938 and FBAR requirements", fr: "IRS, Comparison of Form 8938 and FBAR requirements" }, url: SRC.irs_fbar } },
   il: { code: "il", domain: "imoveisportugal.co.il", defaultLang: "en", fact: { big: { pt: "7,5%", en: "7.5%", fr: "7,5 %" }, source: { pt: "Código do IMT, art. 17.º, n.º 10 (Decreto-Lei 97/2026)", en: "IMT Code, art. 17(10) (Decree-Law 97/2026)", fr: "Code de l'IMT, art. 17, n° 10 (décret-loi 97/2026)" }, url: SRC.cimt17 } },
+  uk: { code: "uk", domain: "imoveisportugal.co.uk", defaultLang: "en", fact: { big: { pt: "156 000", en: "156,000", fr: "156 000" }, source: { pt: "Observatório da Emigração, Factbook 2025 (dados de 2021)", en: "Observatório da Emigração, Factbook 2025 (2021 data)", fr: "Observatório da Emigração, Factbook 2025 (données 2021)" }, url: SRC.oem_uk } },
 };
 
-export const ED_ORDER: EdCode[] = ["lu", "fr", "ch", "br", "us", "il"];
+export const ED_ORDER: EdCode[] = ["lu", "fr", "ch", "br", "us", "il", "uk"];
 
 // Thousands: space in PT and FR, comma in EN.
 export const eur = (n: number, lang: Lang) => {

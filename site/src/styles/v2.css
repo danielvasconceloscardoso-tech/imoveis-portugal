@@ -28,6 +28,7 @@
 [data-ed="br"] { --ed: #1d6b45; }
 [data-ed="us"] { --ed: #5b3a8e; }
 [data-ed="il"] { --ed: #0f6470; }
+[data-ed="uk"] { --ed: #7a2e4a; }
 
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }

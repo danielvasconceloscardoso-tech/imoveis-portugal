@@ -5,7 +5,7 @@
 // 3 Nov 2026: on the serving host, a page of another country's edition gets one line suggesting the visitor's own
 // edition (functions-lib/geo.js); the page itself is unchanged and nothing is stored.
 import { geoSuggest, geoBanner } from "../functions-lib/geo.js";
-const DEFAULT_LANG = { lu: "pt", fr: "fr", ch: "pt", br: "pt", us: "en", il: "en" };
+const DEFAULT_LANG = { lu: "pt", fr: "fr", ch: "pt", br: "pt", us: "en", il: "en", uk: "en" };
 const EDITION_BY_HOST = {
   "imoveisportugal.lu": "lu",
   "imoveisportugal.fr": "fr",
@@ -14,6 +14,8 @@ const EDITION_BY_HOST = {
   // USA and Israel domains not chosen yet (ops/DOMAINS_US_IL.md): placeholders.
   "imoveisportugal.us": "us",
   "imoveisportugal.co.il": "il",
+  // UK (8 Nov 2026): served under the primary domain (/en/uk/); placeholder until a domain is chosen.
+  "imoveisportugal.co.uk": "uk",
 };
 
 export async function onRequest(ctx) {

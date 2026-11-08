@@ -76,7 +76,7 @@ const T = {
 }[lang];
 
 const EDITIONS = { lu: { pt: "Luxemburgo", en: "Luxembourg" }, fr: { pt: "França", en: "France" }, ch: { pt: "Suíça", en: "Switzerland" },
-  br: { pt: "Brasil", en: "Brazil" }, us: { pt: "Estados Unidos", en: "United States" }, il: { pt: "Israel", en: "Israel" } };
+  br: { pt: "Brasil", en: "Brazil" }, us: { pt: "Estados Unidos", en: "United States" }, il: { pt: "Israel", en: "Israel" }, uk: { pt: "Reino Unido", en: "United Kingdom" } };
 const ed = (k) => EDITIONS[k]?.[lang] || k;
 const [y, m] = month.split("-").map(Number);
 const last = new Date(Date.UTC(y, m, 0)).getUTCDate();
