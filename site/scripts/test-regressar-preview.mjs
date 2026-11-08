@@ -2,12 +2,19 @@ import { chromium } from '@playwright/test';
 import { readFileSync } from 'node:fs';
 import { strict as assert } from 'node:assert';
 import { createHash } from 'node:crypto';
-const refined=readFileSync(new URL('../public/previews/regressar-beta/index.html',import.meta.url),'utf8');
+let refined=readFileSync(process.argv[3] || new URL('../public/previews/regressar-beta/index.html',import.meta.url),'utf8');
+// Production uses byte-identical external assets; restore inline URIs for parity.
+refined=refined.replace(/\/assets\/regressar\/([a-f0-9]{64})\.(woff2|webp)/g, (_url, hash, ext) => {
+ const bytes=readFileSync(new URL(`../public/assets/regressar/${hash}.${ext}`,import.meta.url));
+ assert.equal(createHash('sha256').update(bytes).digest('hex'),hash);
+ return `data:${ext==='woff2'?'font/woff2':'image/webp'};base64,${bytes.toString('base64')}`;
+});
 const originalPath=process.argv[2];
 assert(originalPath,'Pass the original uploaded HTML path for behavioural parity checks');
 const original=readFileSync(originalPath,'utf8');
 const assets=s=>[...s.matchAll(/data:(?:image|font)\/[^\s"')]+/g)].map(x=>createHash('sha256').update(x[0]).digest('hex'));
-assert.deepEqual(assets(refined),assets(original),'All embedded photos and fonts must remain unchanged');
+// Pre-rendering repeats three existing photos in the initial city cards.
+assert.deepEqual([...new Set(assets(refined))].sort(),[...new Set(assets(original))].sort(),'All embedded photos and fonts must remain unchanged');
 const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',headless:true,args:['--no-sandbox']});
 let scenarios=0;
 try {

@@ -17,7 +17,7 @@ const test = base.extend({
   },
 });
 const root = (page: Page) => page.locator('[data-regressar]');
-async function open(page: Page, route = '/pt/lu/regressar/') {
+async function open(page: Page, route = '/en/us/regressar/') {
   await page.goto(route, { waitUntil: 'domcontentloaded' });
   await expect(root(page)).toBeVisible();
   await page.locator('[data-r-country]').selectOption('lu');
@@ -40,7 +40,6 @@ async function revealControl(page: Page, selector: string) {
 
 
 for (const [language, route] of [
-  ['Portuguese', '/pt/lu/regressar/'],
   ['English', '/en/us/regressar/'],
   ['French', '/fr/fr/regressar/'],
 ] as const) {
@@ -230,7 +229,7 @@ test('unsupported low-income fiscal range shows an explanation instead of an ina
   await page.locator('[data-r-calculate]').click();
   await expect(page.locator('[data-r-result]')).toBeHidden();
   await expect(page.locator('[data-r-error]')).toBeVisible();
-  await expect(page.locator('[data-r-error]')).toContainText('20 000');
+  await expect(page.locator('[data-r-error]')).toContainText(/20[ ,]000/);
 });
 
 

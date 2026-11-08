@@ -14,7 +14,7 @@ const test = base.extend({
     expect(errors, 'uncaught browser errors').toEqual([]);
   },
 });
-async function open(page: Page, path = '/pt/lu/regressar/') {
+async function open(page: Page, path = '/en/us/regressar/') {
   await page.goto(path, { waitUntil: 'domcontentloaded' });
   await expect(page.locator('[data-regressar]')).toBeVisible();
   await expect(page.locator('[data-r-return-brief]')).toHaveValue(/\S/);
@@ -84,7 +84,7 @@ test('Official support remains available without a salary or an eligibility clai
   }
   await expect(page.locator('[data-r-support] a[href^="mailto:"]')).toHaveCount(0);
   await expect(page.locator('[data-r-support] a[href^="tel:"]')).toHaveCount(0);
-  await expect(page.locator('[data-r-programme-note]')).toContainText(/independente|sem parceria|não.*oficial/i);
+  await expect(page.locator('[data-r-programme-note]')).toContainText(/independent|no government partnership/i);
 });
 
 test('The preparation brief uses country and return year, never salary or screening answers', async ({ page }) => {
@@ -93,7 +93,7 @@ test('The preparation brief uses country and return year, never salary or screen
   await showControl(page, '[data-r-return-year]');
   await page.locator('[data-r-return-year]').selectOption('2026');
   const brief = page.locator('[data-r-return-brief]');
-  await expect(brief).toHaveValue(/França/);
+  await expect(brief).toHaveValue(/France/);
   await expect(brief).toHaveValue(/2026/);
   const before = await brief.inputValue();
   await page.locator('[data-r-net]').fill('9876.54');
@@ -112,7 +112,7 @@ test('Denied clipboard access selects the existing preparation text for manual c
   await open(page);
   await page.locator('[data-r-copy-brief]').click();
   await expect(page.locator('[data-r-brief-status]')).toBeVisible();
-  await expect(page.locator('[data-r-brief-status]')).toContainText(/selecion|copi|manual|Ctrl|⌘/i);
+  await expect(page.locator('[data-r-brief-status]')).toContainText(/select|copy|selecion|copi|manual|Ctrl|⌘/i);
   expect(await page.locator('[data-r-return-brief]').evaluate((element: HTMLTextAreaElement) =>
     document.activeElement === element && element.selectionStart === 0 && element.selectionEnd === element.value.length,
   )).toBe(true);

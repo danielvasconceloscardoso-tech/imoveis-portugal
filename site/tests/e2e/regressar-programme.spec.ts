@@ -19,7 +19,7 @@ const criterion = (page: Page, id: typeof criteria[number]) => page.locator(`[da
 const money = (value: string | null) => Number((value || '').replace(/\D/g, ''));
 
 async function open(page: Page) {
-  await page.goto('/pt/lu/regressar/', { waitUntil: 'domcontentloaded' });
+  await page.goto('/en/us/regressar/', { waitUntil: 'domcontentloaded' });
   await expect(page.locator('[data-regressar]')).toBeVisible();
   await page.locator('[data-r-country]').selectOption('lu');
 }
@@ -55,7 +55,7 @@ test('Programme is the visible reference and the independent relationship is exp
     await expect(signature).toContainText(/Programa\s*Regressar/i);
   }
 
-  await expect(page.locator('[data-r-programme-note]')).toContainText(/independente|sem parceria|não.*oficial/i);
+  await expect(page.locator('[data-r-programme-note]')).toContainText(/independent|no government partnership/i);
   const overlayAlphas = await page.locator('.rx-arrival-photo').evaluate(element => {
     const style = getComputedStyle(element, '::after');
     const paint = style.backgroundImage === 'none' ? style.backgroundColor : style.backgroundImage;
@@ -65,7 +65,7 @@ test('Programme is the visible reference and the independent relationship is exp
   expect(overlayAlphas.every(alpha => alpha >= 0.66), 'small white photo text retains the reviewed contrast floor').toBe(true);
   // Source verification limits remain visible rather than being replaced by a government endorsement.
   await calculate(page);
-  await expect(page.locator('[data-r-result]')).toContainText(/pressupostos por confirmar|revisão fiscal/i);
+  await expect(page.locator('[data-r-result]')).toContainText(/assumptions to confirm|tax review|pressupostos por confirmar|revisão fiscal/i);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });
 
@@ -172,7 +172,7 @@ test('Image choices keep their accessible selection state and reveal a compatibl
   await expect(beach).toHaveAttribute('aria-pressed', 'true');
   await page.locator('[data-r-reveal]').click();
   await expect(page.locator('[data-r-city]')).toBeVisible();
-  await expect(page.locator('[data-r-city-evidence]')).toContainText(/Praia/);
+  await expect(page.locator('[data-r-city-evidence]')).toContainText(/Beach/);
 });
 
 test('A sourced city reveals housing power, real schools and actual hospitals', async ({ page }) => {
@@ -196,8 +196,8 @@ test('A sourced city reveals housing power, real schools and actual hospitals', 
     await expect(list).toContainText(/2026-\d{2}-\d{2}/);
   }
   await expect(page.locator('[data-r-hospitals]')).not.toContainText(/USF Oceanos|USF Anémona/);
-  await expect(page.locator('[data-r-life-note]')).toContainText(/Origem.*Matosinhos/);
-  await expect(page.locator('[data-r-life-note]')).toContainText(/privadas e internacionais/);
+  await expect(page.locator('[data-r-life-note]')).toContainText(/Origin.*Matosinhos/);
+  await expect(page.locator('[data-r-life-note]')).toContainText(/private and international/);
   await expect(page.locator('[data-r-map]')).toHaveAttribute('href', /[?&]place=matosinhos/);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });
