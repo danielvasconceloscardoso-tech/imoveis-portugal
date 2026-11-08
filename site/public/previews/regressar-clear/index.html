@@ -136,6 +136,7 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid #9361
 .comparison-title{font-size:13px;font-weight:600;margin:20px 0 10px}
 .eligibility-note{margin-top:18px;padding-top:16px;border-top:1px solid var(--line);font-size:12px;line-height:1.65}
 .eligibility-note>b{font-size:14px;font-weight:600}.eligibility-note p{margin:8px 0}.eligibility-note strong{font-weight:600}.eligibility-note small{display:block;color:var(--muted);font-size:11px}.eligibility-note a{display:inline-block;margin-top:8px}
+.tax-breakdown{margin-top:18px}.tax-breakdown>div{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:8px 0;font-size:13px}.tax-breakdown>div>span:last-child,.tax-breakdown strong{white-space:nowrap}.tax-breakdown .tax-net{border-top:1px solid var(--line);margin-top:5px;padding-top:12px;color:var(--green);font-weight:600}
 </style></head><body>
 <div class="top"><div class="in">
   <div class="brand">Imóveis Portugal</div>
@@ -163,10 +164,7 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid #9361
  <div class="note" style="margin-top:2px">Este é o salário bruto anual a negociar em Portugal:</div>
  <div class="big"><div class="tile"><div class="l">Sem benefício fiscal</div><div class="v">129 516 €</div><div class="s">≈ 9251 € × 14 meses</div></div>
  <div class="tile reg"><div class="l" style="color:var(--green)">Com Programa Regressar</div><div class="v" style="color:var(--green)">90 154 €</div><div class="s">≈ 6440 € × 14 meses</div></div></div>
- <div class="gain"><div class="v">+27 560 €</div><p>líquidos a mais por ano, se negociar <b>129 516 € brutos anuais</b>. Este ganho é uma estimativa para um ano.</p></div>
- <div class="bars"><p class="comparison-title">O mesmo bruto. Quanto fica para si.</p><div class="bar"><span>Sem benefício fiscal</span><div class="t"><i style="width:10.999996525524462%;background:#9fb3bb"></i><i style="width:34.60868719258131%;background:#d9a58a"></i><i style="width:54.391316281894234%;background:#1e5b4b"></i></div><span style="text-align:right">IRS 44 824 €</span></div>
- <div class="bar"><span>Com Programa Regressar</span><div class="t"><i style="width:10.999996525524462%;background:#9fb3bb"></i><i style="width:13.32928492591067%;background:#d9a58a"></i><i style="width:75.67071854856486%;background:#1e5b4b"></i></div><span style="text-align:right">IRS 17 264 €</span></div>
- <div class="legend"><span><i style="background:#9fb3bb"></i>Segurança Social</span><span><i style="background:#d9a58a"></i>IRS</span><span><i style="background:#1e5b4b"></i>Líquido</span><span style="margin-left:auto">ao bruto de 129 516 €</span></div></div>
+ <div class="tax-breakdown"><p class="comparison-title">O que recebe com este salário</p><div><span>Bruto anual</span><strong>90 154 €</strong></div><div><span>Segurança Social</span><span>− 9917 €</span></div><div><span>IRS e adicional de solidariedade</span><span>− 9791 €</span></div><div class="tax-net"><span>Líquido anual</span><strong>70 445 €</strong></div><p class="note">Cálculo com o benefício fiscal, sujeito às condições do regime.</p></div>
  <div class="eligibility-note"><b>Quem pode beneficiar?</b><p><strong>Antes do regresso:</strong> nos 5 anos anteriores, não ter sido residente fiscal em Portugal.</p><p><strong>Depois do regresso:</strong> benefício no ano em que regressa e nos 4 seguintes.</p><small>Regra para regressos de 2024 a 2026. Existem outras condições. O cenário de 2027 depende de aprovação.</small><a href="https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/cirs_rep/Pages/irs12a.aspx" target="_blank" rel="noopener noreferrer">Ver todas as condições →</a></div>
  <p class="note">Estimativa anual para um trabalhador por conta de outrem, sem dependentes. A elegibilidade é confirmada pela Autoridade Tributária.</p></div>
   </div>
@@ -256,16 +254,12 @@ function run(){
  const netY=C(raw*S.pay/S.c.fx);
  const R=$('res');
  if(netY<20000||netY>500000){R.innerHTML=`<h2>O seu salário em Portugal</h2><p class="note">Este modelo cobre rendimentos líquidos entre 20 000 € e 500 000 € por ano. Fora deste intervalo, confirme a estimativa com um profissional fiscal.</p>`;$('places').innerHTML='';return}
- const a=grossFor(netY,false),b=grossFor(netY,true),same=yearCalc(a.g,true),gain=C(same.net-netY);
- const max=a.g;const seg=(x,col)=>`<i style="width:${x/max*100}%;background:${col}"></i>`;
+ const a=grossFor(netY,false),b=grossFor(netY,true);
  R.innerHTML=`<div class="k">O seu salário em Portugal</div><h2>Para receber ${fmt(netY)} líquidos por ano.</h2>
  <div class="note" style="margin-top:2px">Este é o salário bruto anual a negociar em Portugal:</div>
  <div class="big"><div class="tile"><div class="l">Sem benefício fiscal</div><div class="v">${fmt(a.g)}</div><div class="s">≈ ${fmt(a.g/14)} × 14 meses</div></div>
  <div class="tile reg"><div class="l" style="color:var(--green)">Com Programa Regressar</div><div class="v" style="color:var(--green)">${fmt(b.g)}</div><div class="s">≈ ${fmt(b.g/14)} × 14 meses</div></div></div>
- <div class="gain"><div class="v">+${fmt(gain)}</div><p>líquidos a mais por ano, se negociar <b>${fmt(a.g)} brutos anuais</b>. Este ganho é uma estimativa para um ano.</p></div>
- <div class="bars"><p class="comparison-title">O mesmo bruto. Quanto fica para si.</p><div class="bar"><span>Sem benefício fiscal</span><div class="t">${seg(a.ss,'#9fb3bb')}${seg(a.irs+a.sol,'#d9a58a')}${seg(a.net,'#1e5b4b')}</div><span style="text-align:right">IRS ${fmt(a.irs+a.sol)}</span></div>
- <div class="bar"><span>Com Programa Regressar</span><div class="t">${seg(same.ss,'#9fb3bb')}${seg(same.irs+same.sol,'#d9a58a')}${seg(same.net,'#1e5b4b')}</div><span style="text-align:right">IRS ${fmt(same.irs+same.sol)}</span></div>
- <div class="legend"><span><i style="background:#9fb3bb"></i>Segurança Social</span><span><i style="background:#d9a58a"></i>IRS</span><span><i style="background:#1e5b4b"></i>Líquido</span><span style="margin-left:auto">ao bruto de ${fmt(a.g)}</span></div></div>
+ <div class="tax-breakdown"><p class="comparison-title">O que recebe com este salário</p><div><span>Bruto anual</span><strong>${fmt(b.g)}</strong></div><div><span>Segurança Social</span><span>− ${fmt(b.ss)}</span></div><div><span>IRS e adicional de solidariedade</span><span>− ${fmt(b.irs+b.sol)}</span></div><div class="tax-net"><span>Líquido anual</span><strong>${fmt(b.net)}</strong></div><p class="note">Cálculo com o benefício fiscal, sujeito às condições do regime.</p></div>
  <div class="eligibility-note"><b>Quem pode beneficiar?</b><p><strong>Antes do regresso:</strong> nos 5 anos anteriores, não ter sido residente fiscal em Portugal.</p><p><strong>Depois do regresso:</strong> benefício no ano em que regressa e nos 4 seguintes.</p><small>Regra para regressos de 2024 a 2026. Existem outras condições. O cenário de 2027 depende de aprovação.</small><a href="https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/cirs_rep/Pages/irs12a.aspx" target="_blank" rel="noopener noreferrer">Ver todas as condições →</a></div>
  <p class="note">${S.yr==='2027'?'Cenário para regresso em 2027, sujeito à aprovação do OE2027. ':''}Estimativa anual para um trabalhador por conta de outrem, sem dependentes. A elegibilidade é confirmada pela Autoridade Tributária.</p>`;
  places(netY/12);handoff(netY,a,b);
