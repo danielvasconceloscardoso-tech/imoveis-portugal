@@ -18,7 +18,9 @@ try{
   await page.waitForTimeout(50);
   assert(page.url().endsWith('#regressar-support'));
   assert(await page.evaluate(()=>scrollY>0));
-  const links=await page.locator('#regressar-support .nx a').evaluateAll(links=>links.map(a=>({href:a.href,target:a.target,rel:a.rel})));
+  const links=await page.locator('#regressar-support .support-door a, #regressar-support .support-secondary a').evaluateAll(links=>links.map(a=>({href:a.href,target:a.target,rel:a.rel})));
+  assert.equal(await page.locator('.support-door .btn').count(),1);
+  assert.equal(await page.locator('.support-secondary a').count(),2);
   assert.deepEqual(links.map(l=>l.href),['https://www.programaregressar.gov.pt/','https://www.iefp.pt/','https://www.portaldasfinancas.gov.pt/']);
   assert(links.every(l=>l.target==='_blank'&&l.rel.includes('noopener')&&l.rel.includes('noreferrer')));
   await page.locator('#send').click();assert.equal(await page.locator('#send').getAttribute('aria-expanded'),'true');
