@@ -233,6 +233,8 @@ Status: To do · Doing · Blocked · Done
 
 ## Last session
 
+2026-11-08 · CTO · Prompt 80 (sitescope.ai): four researchers, a strategist and an independent fact-checker (44 confirmed, 16 corrected, 4 removed); files in ops/research/80_sitescope/. Nothing built. Left: the operator picks the next step (A no-cost reel/bio/land explainer, B Gondomar zoning layer, C land-section sponsor offer by the CEO, D file it). Research rested on search snippets: this session's network blocked direct page fetches.
+
 2026-11-05 · CTO · Issue 4: implemented the US/Luxembourg main-map transformation on `codex/issue-4-main-map`: optional photographic entry, natural terrain palette, horizontal region rail, sourced editorial cards and responsive camera/control geometry. Golf remains Issue 3; protected backup references are unchanged. Release validation and review evidence: `docs/ISSUE-4-RELEASE.md`. No production merge or deployment.
 
 2026-11-05 · CTO: verified and pushed permanent pre-Codex branch/tag at `77552be5a5a5bdfbbf6517e4f5525408af5d03db`; development only on `codex/development-2026-11-05`. Added read-only PR validation and three accessibility/keyboard improvements with specialist review. No production merge or deployment. See `docs/TESTING.md` and `docs/DEVELOPMENT-BASELINE.md` for checks and remaining API/configuration blockers.
