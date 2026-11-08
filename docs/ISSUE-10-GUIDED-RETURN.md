@@ -1,5 +1,7 @@
 # Programa Regressar — guided return
 
+The [benefit-first presentation refinement](ISSUE-10-PROGRAMME-PREVIEW.md) supersedes the initial order: visitors now explore the assumed benefit before the eligibility checklist.
+
 ## Implementation brief
 
 Make Programa Regressar the starting point. A visitor should understand what to do next without entering a salary: understand the programme, check the relevant conditions, then prepare a conversation with official support. Keep the income simulator optional. Preserve the existing annual-tax assumptions, private local calculations, preference matching and municipality data. One clear primary action per section; no advisor, appointment, entitlement or government-partnership claims.

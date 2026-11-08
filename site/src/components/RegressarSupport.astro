@@ -1,12 +1,13 @@
 ---
 import type { Lang } from '../i18n';
+import RegressarSignature from './RegressarSignature.astro';
 import { OFFICIAL_SUPPORT_ROUTES, supportCopy, buildReturnBrief } from '../lib/regressar-support';
 interface Props { lang:Lang }
 const {lang}=Astro.props;
 const c=supportCopy(lang);
 ---
 <section class="rx-official-support" id="rx-support" data-r-support aria-labelledby="rx-support-title">
- <div class="rx-support-intro"><p class="rx-kicker">Programa Regressar</p><h2 id="rx-support-title">{c.title}</h2><p>{c.lede}</p></div>
+ <div class="rx-support-intro"><RegressarSignature lang={lang} variant="support" /><p class="rx-kicker">Programa Regressar</p><h2 id="rx-support-title">{c.title}</h2><p>{c.lede}</p></div>
  <div class="rx-support-layout">
   <div class="rx-support-routes">
    {OFFICIAL_SUPPORT_ROUTES.map(route=><article class:list={['rx-support-route',{'rx-support-route-primary':route.id==='programme'}]}><h3>{route.name}</h3><p>{route.purpose[lang]}</p><a href={route.url} data-r-support-route={route.id} aria-label={`${c.findContacts} — ${route.name}`} target="_blank" rel="noopener noreferrer">{c.findContacts}<span aria-hidden="true"> →</span></a></article>)}

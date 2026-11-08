@@ -48,6 +48,13 @@ test('Programme is the visible reference and the independent relationship is exp
   await expect(page.locator('[data-r-programme]')).toBeVisible();
   await expect(page.locator('[data-r-programme]')).toContainText(/Programa\s*Regressar/i);
   await expect(page.locator('[data-r-programme-note]')).toBeVisible();
+  const signatures = page.locator('[data-r-signature]');
+  expect(await signatures.count(), 'discreet identity appears at the key journey touchpoints').toBeGreaterThanOrEqual(3);
+  for (const signature of await signatures.all()) {
+    await expect(signature).toContainText(/Imóveis Portugal/);
+    await expect(signature).toContainText(/Programa\s*Regressar/i);
+  }
+
   await expect(page.locator('[data-r-programme-note]')).toContainText(/independente|sem parceria|não.*oficial/i);
   const overlayAlphas = await page.locator('.rx-arrival-photo').evaluate(element => {
     const style = getComputedStyle(element, '::after');
@@ -62,56 +69,84 @@ test('Programme is the visible reference and the independent relationship is exp
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });
 
-test('Unknown and partial programme answers never activate the fiscal benefit', async ({ page }) => {
+test('Unknown answers permit a labelled hypothetical preview, while unsupported cohorts do not', async ({ page }) => {
   await open(page);
   await calculate(page);
   const benefit = page.locator('[data-r-benefit]');
-  await expect(benefit).not.toBeChecked();
-  await expect(benefit).toBeDisabled();
+  await expect(benefit).toBeChecked();
+  await expect(benefit).toBeEnabled();
+  await expect(page.locator('[data-r-result]')).toHaveAttribute('data-scenario', 'hypothetical');
+  expect(money(await page.locator('[data-r-gross]').textContent())).toBe(67770);
+  await expect(page.locator('[data-r-scenario-note]')).toContainText(/elegib|hipot|assum/i);
   await showControl(page, '[data-r-return-year]');
   await expect(page.locator('[data-r-eligibility-status]')).toHaveAttribute('data-status', 'incomplete');
-  await page.locator('[data-r-return-year]').selectOption('2023');
-  await expect(page.locator('[data-r-eligibility-status]')).toHaveAttribute('data-status', 'incomplete');
-  await expect(benefit).toBeDisabled();
-  await page.locator('[data-r-return-year]').selectOption('2027');
-  await expect(page.locator('[data-r-eligibility-status]')).toHaveAttribute('data-status', 'not-eligible');
-  await expect(benefit).toBeDisabled();
+  for (const [year, status] of [['2023', 'incomplete'], ['2027', 'not-eligible']] as const) {
+    await page.locator('[data-r-return-year]').selectOption(year);
+    await expect(page.locator('[data-r-eligibility-status]')).toHaveAttribute('data-status', status);
+    await expect(benefit).not.toBeChecked();
+    await expect(benefit).toBeDisabled();
+    await expect(page.locator('[data-r-result]')).toHaveAttribute('data-scenario', 'standard');
+    expect(money(await page.locator('[data-r-gross]').textContent())).toBe(92518);
+  }
   await page.locator('[data-r-return-year]').selectOption('2026');
   for (const id of criteria.slice(0, -1)) await criterion(page, id).selectOption('yes');
-  await expect(benefit).toBeDisabled();
-  await expect(benefit).not.toBeChecked();
+  await expect(benefit).toBeEnabled();
+  await expect(benefit).toBeChecked();
+  await expect(page.locator('[data-r-result]')).toHaveAttribute('data-scenario', 'hypothetical');
   await expect(page.locator('[data-r-eligibility-status]')).toHaveAttribute('data-status', 'incomplete');
 });
 
-test('A complete conditional checklist enables comparison without granting eligibility', async ({ page }) => {
+test('A completed compatible checklist labels the existing preview without granting entitlement', async ({ page }) => {
   await open(page);
   await calculate(page);
-  const standard = money(await page.locator('[data-r-gross]').textContent());
+  const preview = await page.locator('[data-r-gross]').textContent();
   const target = await page.locator('[data-r-net-result]').textContent();
   await qualify(page);
   await expect(page.locator('[data-r-eligibility-status]')).toHaveAttribute('data-status', 'potentially-eligible');
   await expect(page.locator('[data-r-benefit]')).toBeEnabled();
-  await page.locator('[data-r-benefit]').check();
-  await page.locator('[data-r-calculate]').click();
-  await expect(page.locator('[data-r-result]')).toBeVisible();
-  expect(money(await page.locator('[data-r-gross]').textContent())).toBeLessThan(standard);
+  await expect(page.locator('[data-r-benefit]')).toBeChecked();
+  await expect(page.locator('[data-r-result]')).toHaveAttribute('data-scenario', 'compatible');
+  await expect(page.locator('[data-r-gross]')).toHaveText(preview!);
   await expect(page.locator('[data-r-net-result]')).toHaveText(target!);
   await expect(page.locator('[data-r-eligibility-status]')).not.toContainText(/elegibilidade confirmada|aprovado/i);
 });
 
-test('A disqualifying answer revokes an active relief comparison and restores the standard result', async ({ page }) => {
+test('A disqualifying answer replaces the hypothetical gross and its full tax ledger with standard values', async ({ page }) => {
   await open(page);
   await calculate(page);
-  const standard = await page.locator('[data-r-gross]').textContent();
-  await qualify(page);
-  await page.locator('[data-r-benefit]').check();
-  await page.locator('[data-r-calculate]').click();
+  const result = page.locator('[data-r-result]');
+  await expect(result).toHaveAttribute('data-scenario', 'hypothetical');
+  expect(money(await page.locator('[data-r-gross]').textContent())).toBe(67770);
+  expect(money(await page.locator('[data-r-ss]').textContent())).toBe(7455);
+  expect(money(await page.locator('[data-r-irs]').textContent())).toBe(6315);
+  expect(money(await page.locator('[data-r-solidarity]').textContent())).toBe(0);
+  await showControl(page, '[data-r-return-year]');
+  await page.locator('[data-r-return-year]').selectOption('2026');
   await criterion(page, 'outsidePreviousFiveYears').selectOption('no');
   await expect(page.locator('[data-r-benefit]')).not.toBeChecked();
   await expect(page.locator('[data-r-benefit]')).toBeDisabled();
   await expect(page.locator('[data-r-eligibility-status]')).toHaveAttribute('data-status', 'not-eligible');
-  await page.locator('[data-r-calculate]').click();
-  await expect(page.locator('[data-r-gross]')).toHaveText(standard!);
+  await expect(result).toHaveAttribute('data-scenario', 'standard');
+  expect(money(await page.locator('[data-r-gross]').textContent())).toBe(92518);
+  expect(money(await page.locator('[data-r-ss]').textContent())).toBe(10177);
+  expect(money(await page.locator('[data-r-irs]').textContent())).toBe(28283);
+  expect(money(await page.locator('[data-r-solidarity]').textContent())).toBe(59);
+  expect(money(await page.locator('[data-r-net-result]').textContent())).toBe(54000);
+  expect(money(await page.locator('[data-r-hero-net]').textContent())).toBe(4500);
+  const displayedBalance = 92518 - 10177 - 28283 - 59;
+  expect(Math.abs(displayedBalance - 54000), 'rounding alone explains the displayed annual ledger').toBeLessThanOrEqual(2);
+});
+
+test('An explicit standard comparison preference survives later compatible checklist answers', async ({ page }) => {
+  await open(page);
+  await calculate(page);
+  await showControl(page, '[data-r-benefit]');
+  await page.locator('[data-r-benefit]').uncheck();
+  await qualify(page);
+  await expect(page.locator('[data-r-benefit]')).not.toBeChecked();
+  await expect(page.locator('[data-r-benefit]')).toBeEnabled();
+  await expect(page.locator('[data-r-result]')).toHaveAttribute('data-scenario', 'standard');
+  expect(money(await page.locator('[data-r-gross]').textContent())).toBe(92518);
 });
 
 test('Image choices keep their accessible selection state and reveal a compatible municipality', async ({ page }) => {

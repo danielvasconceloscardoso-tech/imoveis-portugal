@@ -88,3 +88,12 @@ html.regressar-document{scroll-padding-top:90px;scroll-padding-bottom:30px}
 @media(max-width:1000px){.rx-official-support{margin:0 35px;padding:55px 0}.rx-support-layout{gap:35px}}
 @media(max-width:760px){.rx-official-support{margin:0 25px;padding:45px 0}.rx-support-intro h2{font-size:35px}.rx-support-layout{grid-template-columns:1fr;gap:27px;margin-top:25px}.rx-support-brief{padding:24px 20px}.rx-support-brief textarea{min-height:260px}.rx-support-route{padding:19px 0}}
 @media(max-width:380px){.rx-official-support{margin:0 20px}}
+
+/* Lead with the take-home amount the visitor wants to keep. Annual gross stays explicit. */
+.rx-scenario-note{font-size:12px;line-height:1.8;max-width:510px;color:var(--rx-muted);margin:18px 0 0!important}
+.rx-hero-net{display:flex;flex-direction:column;gap:9px;margin-top:24px!important}.rx-hero-net output{font:400 clamp(60px,6.2vw,85px)/1.1 "Playfair Display Variable",Georgia,serif;letter-spacing:-.055em;white-space:nowrap}.rx-hero-net>span{font-size:11px;line-height:1.6;color:var(--rx-muted)}
+.rx .rx-gross-secondary{margin-top:27px!important;gap:6px}.rx .rx-gross-secondary output{font:400 25px/1.3 "Playfair Display Variable",Georgia,serif;letter-spacing:-.02em}.rx .rx-gross-secondary>span{font-size:11px;line-height:1.6}
+.rx-check-result{display:inline-flex;align-items:center;gap:10px;min-height:44px;font-size:12px;font-weight:600;text-underline-offset:4px;margin-top:17px}.rx-result .rx-context{display:block;margin-top:12px!important}.rx-standard-comparison{font-size:12px;line-height:1.8;max-width:730px;margin-top:17px}.rx-standard-comparison>summary{font-size:12px;font-weight:500}.rx-standard-comparison .rx-relief-comparison{margin-top:7px!important}
+.rx-result .rx-ledger{padding-top:75px}.rx-income .rx-signature{margin-bottom:25px}.rx-benefit #rx-scenario-assumption{font-size:11px;line-height:1.8;max-width:670px;color:var(--rx-muted);margin-top:9px}
+@media(max-width:760px){.rx-hero-net output{font-size:64px}.rx .rx-gross-secondary output{font-size:25px}.rx-result .rx-ledger{padding-top:0}.rx-check-result{font-size:11px}.rx-scenario-note{font-size:11px}}
+@media(max-width:380px){.rx-hero-net output{font-size:55px}}

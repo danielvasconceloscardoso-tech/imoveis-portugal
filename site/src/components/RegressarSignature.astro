@@ -1,0 +1,19 @@
+---
+import { pathFor, type Lang, type EdCode } from '../i18n';
+interface Props { lang:Lang; ed?:EdCode; variant?:'header'|'simulator'|'result'|'support' }
+const {lang,ed='lu',variant='simulator'}=Astro.props;
+const label={pt:'Imóveis Portugal e Programa Regressar',en:'Imóveis Portugal and Programa Regressar',fr:'Imóveis Portugal et Programa Regressar'}[lang];
+---
+{variant==='header' ? (
+ <div class="rx-identity rx-signature rx-signature-header" data-r-signature={variant} role="group" aria-label={label}>
+  <a class="rx-brand" href={pathFor(lang,ed,'home')}>Imóveis Portugal</a><span class="rx-identity-cross" aria-hidden="true">×</span><a class="rx-programme-wordmark" data-r-programme href="https://www.programaregressar.gov.pt/" target="_blank" rel="noopener noreferrer"><span>Programa</span><strong>Regressar</strong></a>
+ </div>
+) : (
+ <div class="rx-signature rx-signature-quiet" data-r-signature={variant} role="img" aria-label={label}>
+  <span class="rx-signature-brand" aria-hidden="true">Imóveis Portugal</span><span class="rx-signature-cross" aria-hidden="true">×</span><span class="rx-signature-programme" aria-hidden="true"><span>Programa</span><strong>Regressar</strong></span>
+ </div>
+)}
+<style>
+ .rx-signature-quiet{display:flex;align-items:center;gap:14px;color:#233d34;margin:0 0 22px;max-width:100%}.rx-signature-brand{font:400 19px/1.1 "Playfair Display Variable",Georgia,serif;letter-spacing:-.035em;white-space:nowrap}.rx-signature-cross{font:300 20px/1 "Manrope Variable",Manrope,sans-serif;color:#9c673a}.rx-signature-programme{display:flex;flex-direction:column;gap:3px;font:600 8px/1.1 "Manrope Variable",Manrope,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#173a42}.rx-signature-programme strong{font:inherit}.rx-signature-quiet[data-r-signature=result]{margin-bottom:28px}.rx-signature-quiet[data-r-signature=support]{margin-bottom:24px}
+ @media(max-width:380px){.rx-signature-quiet{gap:11px}.rx-signature-brand{font-size:17px}.rx-signature-programme{font-size:7px}}
+</style>

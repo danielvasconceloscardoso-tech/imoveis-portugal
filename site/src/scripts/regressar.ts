@@ -3,6 +3,7 @@ import { COUNTRIES, getCountry, convertNetToEuro } from '../lib/regressar-fx';
 import { annualizeNet, grossForNet, TAX_2026 } from '../lib/regressar-tax';
 import { rankCities, regressarMapHref, type Preference, type RankedCity, type HousingMode } from '../lib/regressar-places';
 import { assessEligibility, ELIGIBILITY_QUESTIONS, ELIGIBILITY_COPY, type EligibilityAnswers, type EligibilityAnswer } from '../lib/regressar-eligibility';
+import { decideProgrammeScenario, scenarioCopy } from '../lib/regressar-scenario';
 import { initRegressarSupport } from './regressar-support';
 import type { Lang, EdCode } from '../i18n';
 
@@ -19,6 +20,7 @@ export function initRegressar() {
  const country=q<HTMLSelectElement>('country'), net=q<HTMLInputElement>('net'), period=q<HTMLSelectElement>('period'), payments=q<HTMLSelectElement>('payments');
  const result=q('result'), error=q('error'), discovery=q('discovery'), benefit=q<HTMLInputElement>('benefit'), reveal=q<HTMLButtonElement>('reveal');
  let targetAnnual=0, revealIndex=0, generation=0;
+ let preferBenefit=true;
  let lifeAbort:AbortController|undefined;
  let mapTask:Promise<import("./regressar-map").RegressarMapHandle>|undefined;
  let mapMatches:RankedCity[]=[], mapSelected="";
@@ -37,8 +39,8 @@ export function initRegressar() {
   const assessment=eligibility(), copy=ELIGIBILITY_COPY[lang], status=q('eligibility-status');
   status.dataset.status=assessment.status;
   status.textContent=assessment.reasons.includes('legacy-rules-required')?copy.legacy:assessment.reasons.includes('outside-return-window')?copy.window:copy[assessment.status];
-  benefit.disabled=!assessment.benefitMayBeCompared;
-  if(benefit.disabled)benefit.checked=false;
+  const preview=decideProgrammeScenario(assessment,preferBenefit);
+  benefit.disabled=!preview.benefitAvailable;benefit.checked=preview.useBenefit;
   if(targetAnnual)calculate(false);
  }
  function calculate(scroll=true){
@@ -54,13 +56,18 @@ export function initRegressar() {
    const annualLocal=annualizeNet(amount,period.value as 'month'|'year',Number(payments.value));
    targetAnnual=convertNetToEuro(annualLocal,country.value);
    if(targetAnnual<20000||targetAnnual>500000)throw new Error(range);
-   const allowed=eligibility().benefitMayBeCompared;
-   benefit.disabled=!allowed;if(!allowed)benefit.checked=false;
+   const preview=decideProgrammeScenario(eligibility(),preferBenefit), wording=scenarioCopy(lang);
+   benefit.disabled=!preview.benefitAvailable;benefit.checked=preview.useBenefit;
+   result.dataset.scenario=preview.mode;
+   text('scenario-note',preview.mode==='hypothetical'?wording.assumedNote:preview.mode==='compatible'?wording.compatibleNote:wording.standardNote);
+   text('result-title',preview.useBenefit?wording.title:wording.standardTitle);
+   text('hero-net-label',wording.monthlyNet);text('annual-basis',wording.annualBasisNote);text('gross-label',wording.annualGross);
    const standard=grossForNet(targetAnnual,{regressar:false});
-   const conditional=allowed?grossForNet(targetAnnual,{regressar:true}):null;
+   const conditional=preview.benefitAvailable?grossForNet(targetAnnual,{regressar:true}):null;
    text('standard-gross',euro(standard.grossAnnual));text('benefit-gross',conditional?euro(conditional.grossAnnual):'—');
    text('programme-difference',conditional?`${{pt:'Menos bruto necessário',en:'Less gross required',fr:'Brut nécessaire en moins'}[lang]}: ${euro(standard.grossAnnual-conditional.grossAnnual)} / ${c.year.toLowerCase()}`:'');
-   const projected=benefit.checked?grossForNet(targetAnnual,{regressar:true}):standard;
+   const projected=preview.useBenefit?conditional!:standard;
+   text('hero-net',euro(projected.netAnnual/12));
    text('gross',euro(projected.grossAnnual));text('net-result',euro(projected.netAnnual));
    text('declared',euro(targetAnnual));text('irs',euro(projected.irs));text('ss',euro(projected.socialSecurity));text('solidarity',euro(projected.solidarity));
    text('source-amount',new Intl.NumberFormat(locale,{style:'currency',currency:getCountry(country.value).currency,maximumFractionDigits:0}).format(annualLocal));
@@ -75,7 +82,7 @@ export function initRegressar() {
   }catch(e){targetAnnual=0;result.hidden=true;discovery.hidden=true;resetCity();error.textContent=e instanceof Error?e.message:c.error;error.hidden=false;net.setAttribute('aria-invalid','true');if(scroll)net.focus();}
  }
  root.querySelector('form')?.addEventListener('submit',e=>{e.preventDefault();calculate();});
- benefit.addEventListener('change',()=>{if(targetAnnual)calculate(false);});
+ benefit.addEventListener('change',()=>{preferBenefit=benefit.checked;if(targetAnnual)calculate(false);});
  q('return-year').addEventListener('change',refreshEligibility);
  root.querySelectorAll<HTMLSelectElement>('[data-r-eligibility]').forEach(el=>el.addEventListener('change',refreshEligibility));
  for(const e of [country,net,period,payments])e.addEventListener('input',()=>{targetAnnual=0;result.hidden=true;discovery.hidden=true;resetCity();error.hidden=true;});

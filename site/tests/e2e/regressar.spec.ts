@@ -54,6 +54,18 @@ for (const [language, route] of [
       await expect(page.locator(selector)).toBeVisible();
       expect(digits(await page.locator(selector).textContent())).toBeGreaterThan(0);
     }
+    await expect(page.locator('[data-r-result]')).toHaveAttribute('data-scenario', 'hypothetical');
+    await expect(page.locator('[data-r-hero-net]')).toBeVisible();
+    expect(digits(await page.locator('[data-r-hero-net]').textContent())).toBe(4500);
+    await expect(page.locator('[data-r-hero-net-label]')).toContainText(/médio|average|moyen/i);
+    await expect(page.locator('[data-r-scenario-note]')).toBeVisible();
+    await expect(page.locator('[data-r-scenario-note]')).toContainText(/eligib|elegib|éligib|hypoth|hipot|assum|suppos/i);
+    await expect(page.locator('[data-r-scenario-note]')).not.toContainText(/eligibility confirmed|elegibilidade confirmada|éligibilité confirmée|benefit approved/i);
+    const hierarchy = await page.evaluate(() => ({
+      hero: parseFloat(getComputedStyle(document.querySelector('[data-r-hero-net]')!).fontSize),
+      gross: parseFloat(getComputedStyle(document.querySelector('[data-r-gross]')!).fontSize),
+    }));
+    expect(hierarchy.hero, 'the maintained monthly net leads; the annual gross stays visible but secondary').toBeGreaterThan(hierarchy.gross);
     await expect(root(page)).toContainText('2026');
     await expect(page.locator('[data-r-result]')).toHaveAttribute('aria-live', /polite|assertive/);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
@@ -82,29 +94,29 @@ test('annualization: 14 payments increase the target instead of dividing the ann
   await page.locator('[data-r-payments]').selectOption('14');
   await calculate(page);
   expect(digits(await page.locator('[data-r-gross]').textContent())).toBeGreaterThan(twelve);
+  expect(digits(await page.locator('[data-r-hero-net]').textContent())).toBe(5250);
+  await expect(page.locator('[data-r-hero-net-label]')).toContainText(/médio|average|moyen/i);
   const fourteen = await page.locator('[data-r-gross]').textContent();
   await page.locator('[data-r-period]').selectOption('year');
   await calculate(page, '63000');
   await expect(page.locator('[data-r-gross]')).toHaveText(fourteen!);
+  expect(digits(await page.locator('[data-r-hero-net]').textContent())).toBe(5250);
 });
 
-test('article 12-A is opt-in and reduces required gross for the same target', async ({ page }) => {
+test('Programme relief leads as a hypothetical estimate and the visitor can compare the standard scenario', async ({ page }) => {
   await open(page);
-  await expect(page.locator('[data-r-benefit]')).not.toBeChecked();
-  await calculate(page);
-  const standard = digits(await page.locator('[data-r-gross]').textContent());
-  // Hypotheses are progressive disclosure, not additional required fields.
   const benefit = page.locator('[data-r-benefit]');
+  await expect(benefit).toBeChecked();
+  await calculate(page);
+  await expect(page.locator('[data-r-result]')).toHaveAttribute('data-scenario', 'hypothetical');
+  expect(digits(await page.locator('[data-r-gross]').textContent())).toBe(67770);
   await revealControl(page, '[data-r-benefit]');
-  await revealControl(page, '[data-r-return-year]');
-  await page.locator('[data-r-return-year]').selectOption('2026');
-  for(const id of ['priorResidence','outsidePreviousFiveYears','taxRegular','noNhrRegistration']) {
-    await page.locator(`[data-r-eligibility="${id}"]`).selectOption('yes');
-  }
-  await expect(benefit).toBeEnabled();
+  await benefit.uncheck();
+  await expect(page.locator('[data-r-result]')).toHaveAttribute('data-scenario', 'standard');
+  expect(digits(await page.locator('[data-r-gross]').textContent())).toBe(92518);
   await benefit.check();
-  await page.locator('[data-r-calculate]').click();
-  expect(digits(await page.locator('[data-r-gross]').textContent())).toBeLessThan(standard);
+  await expect(page.locator('[data-r-result]')).toHaveAttribute('data-scenario', 'hypothetical');
+  expect(digits(await page.locator('[data-r-gross]').textContent())).toBe(67770);
   await expect(root(page)).toContainText(/12[.º\s-]*A|12\.º-A/i);
 });
 

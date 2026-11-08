@@ -1,5 +1,6 @@
 ---
 import Regressar from '../../../../components/Regressar.astro';
+import RegressarSignature from '../../../../components/RegressarSignature.astro';
 import { LANGS, LANG_NAME, HTML_LANG, ED_ORDER, EDITIONS, pathFor, type Lang, type EdCode } from '../../../../i18n';
 import { config } from '../../../../config';
 import { experienceCopy } from '../../../../lib/regressar-experience-copy';
@@ -44,7 +45,7 @@ const urlFor = (language: Lang) => `https://${host}/${language}/${ed}/regressar/
   <body class="regressar-page">
     <a class="rx-skip" href="#rx-main">{labels.skip}</a>
     <header class="rx-masthead">
-      <div class="rx-identity"><a class="rx-brand" href={pathFor(lang, ed, 'home')} aria-label={labels.home}>Imóveis Portugal</a><span class="rx-identity-cross" aria-hidden="true">×</span><a class="rx-programme-wordmark" data-r-programme href="https://www.programaregressar.gov.pt/" target="_blank" rel="noopener noreferrer"><span>Programa</span><strong>Regressar</strong></a></div>
+      <RegressarSignature lang={lang} ed={ed} variant="header" />
       <nav class="rx-languages" aria-label={labels.language}>
         {LANGS.map(language => <a href={`/${language}/${ed}/regressar/`} lang={HTML_LANG[language]} aria-label={LANG_NAME[language]} aria-current={language === lang ? 'page' : undefined}>{language.toUpperCase()}</a>)}
       </nav>

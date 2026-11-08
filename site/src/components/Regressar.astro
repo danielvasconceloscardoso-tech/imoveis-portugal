@@ -6,6 +6,7 @@ import { ELIGIBILITY_QUESTIONS } from "../lib/regressar-eligibility";
 import { COUNTRIES } from "../lib/regressar-fx";
 import "../styles/regressar.css";
 import RegressarSupport from "./RegressarSupport.astro";
+import RegressarSignature from "./RegressarSignature.astro";
 
 interface Props { lang: Lang; ed: EdCode; }
 const { lang, ed } = Astro.props;
@@ -16,6 +17,11 @@ const journey = {
   pt: { title:"Programa Regressar", intro:"Saiba o que o programa pode apoiar. Prepare o seu regresso com o serviço certo.", plan:"O seu regresso, passo a passo", start:"Ver se se aplica a mim", help:"Encontrar apoio oficial", conditions:"Confirmar as condições", conditionsText:"Veja as condições do cenário fiscal antes de contar com o benefício.", income:"Simular o rendimento", incomeText:"Compare o salário necessário em Portugal, com e sem benefício.", support:"Preparar o regresso", supportText:"Leve as suas perguntas à equipa oficial que o pode orientar.", scope:"O que pode apoiar", taxTitle:"Benefício fiscal", taxText:"O artigo 12.º-A pode excluir parte do rendimento elegível de tributação. Uma exclusão de 50% não significa pagar metade do IRS.", workTitle:"Trabalho e apoios", workText:"Os apoios do IEFP ao regresso e ao emprego têm condições próprias, distintas do benefício fiscal.", teamTitle:"Orientação oficial", teamText:"Confirme com os serviços oficiais os passos e documentos aplicáveis ao seu caso.", screening:"Comece pelas condições", screeningText:"Estas respostas servem apenas para explorar o cenário. Pode simular o rendimento sem pedir o benefício.", incomeTitle:"O seu salário, em Portugal", incomeIntro:"Esta simulação é opcional. Indique apenas onde vive e o salário líquido que recebe.", compareLink:"Ir para a simulação", review:"Modelo fiscal 2026. Confirme as regras atuais nas fontes oficiais." },
   en: { title:"Programa Regressar", intro:"Understand what the programme may support. Prepare your return with the right official service.", plan:"Your return, step by step", start:"See if this applies to me", help:"Find official support", conditions:"Check the conditions", conditionsText:"Understand the tax scenario’s conditions before counting on relief.", income:"Explore your income", incomeText:"Compare the salary required in Portugal, with and without relief.", support:"Prepare your return", supportText:"Take your questions to the official team that can guide you.", scope:"What it may support", taxTitle:"Tax relief", taxText:"Article 12-A may exclude part of eligible income from taxation. A 50% exclusion does not mean paying half the income tax.", workTitle:"Work and support", workText:"IEFP return and employment support has its own conditions, separate from tax relief.", teamTitle:"Official guidance", teamText:"Confirm the steps and documents relevant to your circumstances with the official services.", screening:"Start with the conditions", screeningText:"These answers only let you explore a scenario. You can calculate your income without claiming relief.", incomeTitle:"Your income, in Portugal", incomeIntro:"This calculation is optional. Enter only where you live and the take-home salary you receive.", compareLink:"Go to the calculation", review:"2026 tax model. Confirm current rules with the official sources." },
   fr: { title:"Programa Regressar", intro:"Comprenez ce que le programme peut soutenir. Préparez votre retour avec le bon service officiel.", plan:"Votre retour, étape par étape", start:"Voir si cela me concerne", help:"Trouver un soutien officiel", conditions:"Vérifier les conditions", conditionsText:"Vérifiez les conditions du scénario fiscal avant de compter sur l’avantage.", income:"Estimer votre revenu", incomeText:"Comparez le salaire nécessaire au Portugal, avec et sans avantage fiscal.", support:"Préparer votre retour", supportText:"Adressez vos questions à l’équipe officielle qui peut vous orienter.", scope:"Ce qu’il peut soutenir", taxTitle:"Avantage fiscal", taxText:"L’article 12-A peut exclure une partie du revenu éligible de l’imposition. Une exclusion de 50 % ne signifie pas payer la moitié de l’impôt.", workTitle:"Emploi et aides", workText:"Les aides au retour et à l’emploi de l’IEFP suivent leurs propres conditions, distinctes de l’avantage fiscal.", teamTitle:"Orientation officielle", teamText:"Confirmez auprès des services officiels les démarches et documents adaptés à votre situation.", screening:"Commencez par les conditions", screeningText:"Ces réponses servent uniquement à explorer un scénario. Vous pouvez estimer votre revenu sans demander l’avantage fiscal.", incomeTitle:"Votre revenu, au Portugal", incomeIntro:"Cette estimation est facultative. Indiquez seulement votre pays de résidence et votre salaire net.", compareLink:"Passer à l’estimation", review:"Modèle fiscal 2026. Confirmez les règles actuelles auprès des sources officielles." },
+}[lang];
+const hopeful = {
+ pt:{preview:"Explorar com o Programa Regressar",intro:"Comece por imaginar o seu regresso com o benefício. Depois, confirme se as condições se aplicam a si.",income:"O seu rendimento com o Programa",incomeIntro:"Indique o seu líquido atual. Começamos pelo cenário com benefício, pressupondo elegibilidade, e ajudamos a verificar as condições a seguir.",result:"O seu rendimento, com Programa Regressar.",netLabel:"Líquido mensal médio · 12 meses",note:"Cenário ilustrativo com Programa Regressar, assumindo que reúne as condições. Confirme-as nas perguntas abaixo.",grossLabel:"Bruto anual necessário neste cenário",check:"Confirmar se posso beneficiar",comparison:"Ver o cálculo e comparar sem benefício",screening:"Agora, confirme as condições",screeningText:"As perguntas ajudam a verificar o cenário que explorou. Se alguma condição não se aplicar, ajustamos a simulação.",incomeStep:"Explorar o benefício",incomeStepText:"Veja primeiro o cenário com Programa Regressar, assumindo que as condições se aplicam.",conditionsStepText:"Depois, responda às perguntas para verificar o seu caso."},
+ en:{preview:"Explore with Programa Regressar",intro:"Begin by picturing your return with the relief. Then check whether the conditions apply to you.",income:"Your income with the programme",incomeIntro:"Enter your current take-home pay. We start with the relief scenario, assuming eligibility, then help you check the conditions.",result:"Your income, with Programa Regressar.",netLabel:"Average monthly net · 12 months",note:"Illustrative Programa Regressar scenario, assuming you meet the conditions. Check them in the questions below.",grossLabel:"Annual gross required in this scenario",check:"Check whether I could qualify",comparison:"View the calculation and compare without relief",screening:"Now check the conditions",screeningText:"These questions help check the scenario you explored. If a condition does not apply, we adjust the estimate.",incomeStep:"Explore the relief",incomeStepText:"See the Programa Regressar scenario first, assuming the conditions apply.",conditionsStepText:"Then answer the questions to check your circumstances."},
+ fr:{preview:"Explorer avec le Programa Regressar",intro:"Imaginez d’abord votre retour avec l’avantage fiscal. Vérifiez ensuite si les conditions vous concernent.",income:"Votre revenu avec le programme",incomeIntro:"Indiquez votre salaire net actuel. Nous commençons par le scénario avec avantage, sous réserve d’éligibilité, puis vous aidons à vérifier les conditions.",result:"Votre revenu, avec le Programa Regressar.",netLabel:"Net mensuel moyen · 12 mois",note:"Scénario indicatif avec le Programa Regressar, supposant les conditions remplies. Vérifiez-les dans les questions ci-dessous.",grossLabel:"Brut annuel nécessaire dans ce scénario",check:"Vérifier si je peux en bénéficier",comparison:"Voir le calcul et comparer sans avantage",screening:"Vérifiez maintenant les conditions",screeningText:"Ces questions permettent de vérifier le scénario exploré. Si une condition ne s’applique pas, nous ajustons l’estimation.",incomeStep:"Explorer l’avantage",incomeStepText:"Voyez d’abord le scénario Programa Regressar, en supposant les conditions remplies.",conditionsStepText:"Répondez ensuite aux questions pour vérifier votre situation."},
 }[lang];
 const preferenceImages = {
   beach: {src:"matosinhos-leixoes-por-do-sol",alt:{pt:"Pôr do sol em Matosinhos, com o terminal de Leixões em silhueta",en:"Sunset in Matosinhos, with the Leixões terminal in silhouette",fr:"Coucher de soleil à Matosinhos, avec le terminal de Leixões en silhouette"}},
@@ -47,39 +53,21 @@ const extras = {
       </picture>
       <figcaption>Porto · Douro</figcaption>
     </figure>
-    <div class="rx-welcome"><h1 id="rx-title">{journey.title}</h1><p>{journey.intro}</p></div>
+    <div class="rx-welcome"><h1 id="rx-title">{journey.title}</h1><p>{hopeful.intro}</p></div>
     <div class="rx-journey-panel">
       <p class="rx-kicker">{journey.plan}</p>
       <nav aria-label={journey.plan} data-r-journey><ol>
-        <li><a href="#rx-programme-start" data-r-journey-step="conditions"><span class="rx-step-number" aria-hidden="true">01</span><span><strong>{journey.conditions}</strong><small>{journey.conditionsText}</small></span></a></li>
-        <li><a href="#rx-income" data-r-journey-step="income"><span class="rx-step-number" aria-hidden="true">02</span><span><strong>{journey.income}</strong><small>{journey.incomeText}</small></span></a></li>
+        <li><a href="#rx-income" data-r-journey-step="income"><span class="rx-step-number" aria-hidden="true">01</span><span><strong>{hopeful.incomeStep}</strong><small>{hopeful.incomeStepText}</small></span></a></li>
+        <li><a href="#rx-programme-start" data-r-journey-step="conditions"><span class="rx-step-number" aria-hidden="true">02</span><span><strong>{journey.conditions}</strong><small>{hopeful.conditionsStepText}</small></span></a></li>
         <li><a href="#rx-support" data-r-journey-step="support"><span class="rx-step-number" aria-hidden="true">03</span><span><strong>{journey.support}</strong><small>{journey.supportText}</small></span></a></li>
       </ol></nav>
-      <a class="rx-primary" href="#rx-programme-start" data-r-start-programme><span>{journey.start}</span><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.5" /></svg></a>
+      <a class="rx-primary" href="#rx-income" data-r-preview-programme><span>{hopeful.preview}</span><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.5" /></svg></a>
       <a class="rx-support-shortcut" href="#rx-support" data-r-open-support>{journey.help}</a>
     </div>
   </section>
 
-  <section class="rx-programme-start" id="rx-programme-start" aria-labelledby="rx-programme-start-title" data-r-programme-start>
-    <div class="rx-programme-overview">
-      <p class="rx-kicker">{journey.scope}</p><h2 id="rx-programme-start-title">{journey.screening}</h2><p class="rx-programme-lede">{journey.screeningText}</p>
-      <dl class="rx-programme-supports"><div><dt>{journey.taxTitle}</dt><dd>{journey.taxText}</dd></div><div><dt>{journey.workTitle}</dt><dd>{journey.workText}</dd></div><div><dt>{journey.teamTitle}</dt><dd>{journey.teamText}</dd></div></dl>
-      <p class="rx-fine">{journey.review}</p>
-    </div>
-    <div class="rx-programme-check">
-      <details class="rx-eligibility" data-r-eligibility-panel>
-        <summary>{x.eligibility}</summary>
-        <label class="rx-eligibility-year" for="rx-return-year"><span>{answerLabels.year}</span><select id="rx-return-year" data-r-return-year><option value="">{answerLabels.unknown}</option>{[2022,2023,2024,2025,2026,2027].map(year=><option value={year}>{year}</option>)}</select></label>
-        {ELIGIBILITY_QUESTIONS.map(question=><label class="rx-eligibility-question" for={`rx-eligibility-${question.id}`}><span>{question.label[lang]}<small>{question.hint[lang]}</small></span><select id={`rx-eligibility-${question.id}`} data-r-eligibility={question.id}><option value="unknown">{answerLabels.unknown}</option><option value="yes">{answerLabels.yes}</option><option value="no">{answerLabels.no}</option></select></label>)}
-        <details class="rx-programme-rules"><summary>{x.conditions}</summary><p>{extras.benefit}</p><a href="https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/cirs_rep/Pages/irs12a.aspx" target="_blank" rel="noopener noreferrer">CIRS · Artigo 12.º-A</a></details>
-        <a class="rx-official-source" href="https://www.programaregressar.gov.pt/pt/medida-de-apoio-fiscal/" target="_blank" rel="noopener noreferrer">{x.officialProgramme}</a>
-      </details>
-        <p class="rx-eligibility-status" id="rx-eligibility-status" data-r-eligibility-status data-status="incomplete" role="status">{x.incomplete}</p>
-      <a class="rx-screening-next" href="#rx-income" data-r-open-income>{journey.compareLink}<span aria-hidden="true"> →</span></a>
-    </div>
-  </section>
   <section class="rx-income" id="rx-income" aria-labelledby="rx-income-title">
-    <div class="rx-income-intro"><p class="rx-kicker">02 · {journey.income}</p><h2 id="rx-income-title">{journey.incomeTitle}</h2><p>{journey.incomeIntro}</p></div>
+    <div class="rx-income-intro"><RegressarSignature lang={lang} variant="simulator" /><p class="rx-kicker">01 · {hopeful.incomeStep}</p><h2 id="rx-income-title">{hopeful.income}</h2><p>{hopeful.incomeIntro}</p></div>
     <form class="rx-entry" data-r-form novalidate>
       <label class="rx-country" for="rx-country"><span>{t.country}</span><select id="rx-country" data-r-country>{COUNTRIES.map((c) => <option value={c.id} selected={c.id === country}>{t.countries[c.id]}</option>)}</select></label>
       <div class="rx-salary">
@@ -95,7 +83,7 @@ const extras = {
   </section>
 
   <section class="rx-result" data-r-result hidden aria-live="polite" aria-atomic="false" aria-labelledby="rx-result-title">
-    <div class="rx-result-lead"><p class="rx-kicker">{extras.annual}</p><h2 id="rx-result-title" tabindex="-1">{t.resultIntro}</h2><p class="rx-result-sentence">{t.grossSentence}</p><p class="rx-gross"><output data-r-gross>—</output><span>{t.annualGross}</span></p><a class="rx-context" data-r-fx href="https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist.xml" target="_blank" rel="noopener"></a><p class="rx-fine rx-review">{fiscalReview[0]}</p></div>
+    <div class="rx-result-lead"><RegressarSignature lang={lang} variant="result" /><p class="rx-kicker">{x.programmeTitle}</p><h2 id="rx-result-title" data-r-result-title tabindex="-1">{hopeful.result}</h2><p class="rx-scenario-note" data-r-scenario-note>{hopeful.note}</p><p class="rx-hero-net"><output data-r-hero-net>—</output><span data-r-hero-net-label>{hopeful.netLabel}</span></p><p class="rx-fine" data-r-annual-basis></p><p class="rx-gross rx-gross-secondary"><output data-r-gross>—</output><span data-r-gross-label>{hopeful.grossLabel}</span></p><a class="rx-check-result" href="#rx-programme-start" data-r-start-programme>{hopeful.check}<span aria-hidden="true"> →</span></a><a class="rx-context" data-r-fx href="https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist.xml" target="_blank" rel="noopener"></a></div>
     <dl class="rx-ledger">
       <div><dt>{t.declaredNet}</dt><dd><span data-r-declared>—</span><small class="rx-fine" style="display:block" data-r-source-amount></small></dd></div>
       <div><dt>{t.socialSecurity}</dt><dd data-r-ss>—</dd></div>
@@ -106,14 +94,33 @@ const extras = {
     <section class="rx-benefit" aria-labelledby="rx-programme-title">
       <div class="rx-programme-intro">
         <p class="rx-kicker">{x.programmeTitle}</p><h3 id="rx-programme-title">{x.compare}</h3>
-        <p>{t.benefitNote}</p>
-        <label class="rx-benefit-toggle"><input type="checkbox" data-r-benefit disabled aria-describedby="rx-eligibility-status" /><span>{t.benefitTitle}</span></label>
-        <dl class="rx-relief-comparison"><div><dt>{t.standard}</dt><dd data-r-standard-gross>—</dd></div><div><dt>{t.eligible}</dt><dd data-r-benefit-gross>—</dd></div></dl><p class="rx-programme-difference" data-r-programme-difference></p><p class="rx-comparison" data-r-alternative hidden></p>
+        <label class="rx-benefit-toggle"><input type="checkbox" data-r-benefit checked aria-describedby="rx-scenario-assumption" /><span>{({pt:"Simular com Programa Regressar",en:"Simulate with Programa Regressar",fr:"Simuler avec le Programa Regressar"})[lang]}</span></label>
+        <p id="rx-scenario-assumption">{t.benefitNote}</p>
+        <details class="rx-standard-comparison" data-r-standard-comparison><summary>{hopeful.comparison}</summary><dl class="rx-relief-comparison"><div><dt>{t.standard}</dt><dd data-r-standard-gross>—</dd></div><div><dt>{t.eligible}</dt><dd data-r-benefit-gross>—</dd></div></dl><p class="rx-programme-difference" data-r-programme-difference></p><p class="rx-comparison" data-r-alternative hidden></p></details>
 
       </div>
 
     </section>
-    <details class="rx-method" data-r-method><summary>{t.assumptions}</summary><p>{extras.taxAssumptions}</p><p>{extras.tax}</p><p>{fiscalReview[1]}</p><div data-r-method-detail></div><p>{t.disclaimer}</p></details>
+    <details class="rx-method" data-r-method><summary>{t.assumptions}</summary><p class="rx-fine rx-review">{fiscalReview[0]}</p><p>{extras.taxAssumptions}</p><p>{extras.tax}</p><p>{fiscalReview[1]}</p><div data-r-method-detail></div><p>{t.disclaimer}</p></details>
+  </section>
+
+  <section class="rx-programme-start" id="rx-programme-start" aria-labelledby="rx-programme-start-title" data-r-programme-start>
+    <div class="rx-programme-overview">
+      <p class="rx-kicker">{journey.scope}</p><h2 id="rx-programme-start-title">{hopeful.screening}</h2><p class="rx-programme-lede">{hopeful.screeningText}</p>
+      <dl class="rx-programme-supports"><div><dt>{journey.taxTitle}</dt><dd>{journey.taxText}</dd></div><div><dt>{journey.workTitle}</dt><dd>{journey.workText}</dd></div><div><dt>{journey.teamTitle}</dt><dd>{journey.teamText}</dd></div></dl>
+      <p class="rx-fine">{journey.review}</p>
+    </div>
+    <div class="rx-programme-check">
+      <details class="rx-eligibility" data-r-eligibility-panel>
+        <summary>{x.eligibility}</summary>
+        <label class="rx-eligibility-year" for="rx-return-year"><span>{answerLabels.year}</span><select id="rx-return-year" data-r-return-year><option value="">{answerLabels.unknown}</option>{[2022,2023,2024,2025,2026,2027].map(year=><option value={year}>{year}</option>)}</select></label>
+        {ELIGIBILITY_QUESTIONS.map(question=><label class="rx-eligibility-question" for={`rx-eligibility-${question.id}`}><span>{question.label[lang]}<small>{question.hint[lang]}</small></span><select id={`rx-eligibility-${question.id}`} data-r-eligibility={question.id}><option value="unknown">{answerLabels.unknown}</option><option value="yes">{answerLabels.yes}</option><option value="no">{answerLabels.no}</option></select></label>)}
+        <details class="rx-programme-rules"><summary>{x.conditions}</summary><p>{extras.benefit}</p><a href="https://info.portaldasfinancas.gov.pt/pt/informacao_fiscal/codigos_tributarios/cirs_rep/Pages/irs12a.aspx" target="_blank" rel="noopener noreferrer">CIRS · Artigo 12.º-A</a></details>
+        <a class="rx-official-source" href="https://www.programaregressar.gov.pt/pt/medida-de-apoio-fiscal/" target="_blank" rel="noopener noreferrer">{x.officialProgramme}</a>
+      </details>
+        <p class="rx-eligibility-status" id="rx-eligibility-status" data-r-eligibility-status data-status="incomplete" role="status">{x.incomplete}</p>
+      <a class="rx-screening-next" href="#rx-income" data-r-open-income>{journey.compareLink}<span aria-hidden="true"> →</span></a>
+    </div>
   </section>
 
   <section class="rx-discovery" data-r-discovery hidden aria-labelledby="rx-tastes-title">

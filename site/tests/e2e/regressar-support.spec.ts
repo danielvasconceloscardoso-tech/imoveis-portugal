@@ -29,20 +29,25 @@ async function showControl(page: Page, selector: string) {
   await expect(control).toBeVisible();
 }
 
-test('Programme understanding and conditions precede income, with a keyboard path to support', async ({ page }) => {
+test('Programme preview leads to income before the optional checklist, with a keyboard path to support', async ({ page }) => {
   await open(page);
   await expect(page.getByRole('heading', { level: 1 })).toContainText('Programa Regressar');
   await expect(page.locator('[data-r-journey]')).toBeVisible();
   await expect(page.locator('[data-r-journey] a')).toHaveCount(3);
+  await expect(page.locator('[data-r-preview-programme]').first()).toHaveAttribute('href', '#rx-income');
   await expect(page.locator('[data-r-start-programme]').first()).toHaveAttribute('href', '#rx-programme-start');
   await expect(page.locator('[data-r-open-support]').first()).toHaveAttribute('href', '#rx-support');
   await expect(page.locator('[data-r-open-income]').first()).toHaveAttribute('href', '#rx-income');
   expect(await page.evaluate(() => {
     const programme = document.getElementById('rx-programme-start');
-    const income = document.getElementById('rx-income');
-    return !!programme && !!income && !!(programme.compareDocumentPosition(income) & Node.DOCUMENT_POSITION_FOLLOWING);
+    const result = document.querySelector('[data-r-result]');
+    return !!programme && !!result && !!(result.compareDocumentPosition(programme) & Node.DOCUMENT_POSITION_FOLLOWING);
   })).toBe(true);
-  await page.locator('[data-r-start-programme]').first().focus();
+  await page.locator('[data-r-preview-programme]').first().focus();
+  await page.keyboard.press('Enter');
+  await expect(page).toHaveURL(/#rx-income$/);
+  await expect(page.locator('[data-r-net]')).toHaveValue('');
+  await page.locator('[data-r-journey-step="conditions"]').focus();
   await page.keyboard.press('Enter');
   await expect(page).toHaveURL(/#rx-programme-start$/);
   await showControl(page, '[data-r-return-year]');
