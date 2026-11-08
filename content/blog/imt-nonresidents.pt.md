@@ -33,7 +33,7 @@ O IMT é o imposto da compra de um imóvel. Até 2026, a taxa dependia do preço
 
 Um prédio urbano é uma casa ou outro edifício, não um terreno agrícola. Uma fração é uma parte de um prédio, como um apartamento.
 
-A regra vale para quem tem a residência fiscal no Luxemburgo, em França, na Suíça, no Brasil, nos Estados Unidos ou em Israel. O ponto de partida passa a ser 7,5% do preço, salvo exceção.
+A regra vale para quem tem a residência fiscal no Luxemburgo, em França, na Suíça, no Brasil, nos Estados Unidos ou no Reino Unido. O ponto de partida passa a ser 7,5% do preço, salvo exceção.
 
 ## Três situações afastam a taxa de 7,5%
 

@@ -33,7 +33,7 @@ L'IMT est l'impôt que l'on paie à l'achat d'un bien au Portugal. Jusqu'en 2026
 
 Un immeuble urbain est une maison ou un autre bâtiment, pas une terre agricole.
 
-Cela vaut si votre résidence fiscale est au Luxembourg, en France, en Suisse, au Brésil, aux États-Unis ou en Israël. Votre point de départ est alors 7,5 % du prix, sauf exception.
+Cela vaut si votre résidence fiscale est au Luxembourg, en France, en Suisse, au Brésil, aux États-Unis ou au Royaume-Uni. Votre point de départ est alors 7,5 % du prix, sauf exception.
 
 ## Quand le taux de 7,5 % ne s'applique pas
 

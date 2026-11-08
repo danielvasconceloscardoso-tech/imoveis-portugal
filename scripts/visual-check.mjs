@@ -53,7 +53,9 @@ const SIZES = [
 const THRESHOLD = { page: 0.5, map: 3 };   // % of pixels allowed to differ
 const MAP_WAIT = 6000;                       // ms after the map canvas appears (software WebGL, tiles, first flight)
 
-const pages = PAGES.filter((p) => !ONLY || ONLY.has(p.name));
+// Editions hidden on the site (site/src/i18n.ts HIDDEN_EDITIONS) have no pages to shoot. Israel: ops/RESTORE_ISRAEL.md.
+const HIDDEN = new Set(["home-il"]);
+const pages = PAGES.filter((p) => (!ONLY || ONLY.has(p.name)) && !HIDDEN.has(p.name));
 if (ONLY) for (const n of ONLY) if (!PAGES.some((p) => p.name === n)) { console.error(`Unknown page "${n}". Pages: ${PAGES.map((p) => p.name).join(", ")}`); process.exit(2); }
 
 // Stabilisers: no motion, no hero film (chromium here cannot play H.264; the poster underneath shows), no caret.

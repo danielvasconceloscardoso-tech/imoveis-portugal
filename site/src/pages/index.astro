@@ -12,7 +12,7 @@ import { config } from "../config";
 
 const host = `https://${config.primaryDomain}`;
 const title = "Imóveis Portugal: how to buy or sell a home in Portugal, from anywhere";
-const description = "How to buy or sell a home in Portugal, from anywhere: editions for Luxembourg, France, Switzerland, Brazil, the United States, Israel and the United Kingdom.";
+const description = "How to buy or sell a home in Portugal, from anywhere: editions for Luxembourg, France, Switzerland, Brazil, the United States and the United Kingdom.";
 const Q: Record<Lang, string> = { pt: "Onde vive?", en: "Where do you live?", fr: "Où vivez-vous ?" };
 const GO: Record<Lang, string> = { pt: "Continuar: {e}", en: "Continue to {e}", fr: "Continuer : {e}" };
 const LEGAL: Record<Lang, [string, string]> = { pt: ["Privacidade", "Aviso legal"], en: ["Privacy", "Legal notice"], fr: ["Confidentialité", "Mentions légales"] };
@@ -81,7 +81,7 @@ import Beacon from "../components/Beacon.astro";
     </main>
 
     <footer class="op-foot">
-      <p>Luxembourg · France · Suisse · Brasil · USA · Israel · UK</p>
+      <p>Luxembourg · France · Suisse · Brasil · USA · UK</p>
       <p>
         <a href={`mailto:${config.contactEmail}`}>{config.contactEmail}</a>
         {LANGS.map((l) => (
@@ -102,7 +102,7 @@ import Beacon from "../components/Beacon.astro";
       document.querySelectorAll("[data-set]").forEach(function (b) { b.addEventListener("click", function () { setLang(b.dataset.set); try { localStorage.setItem("ip-lang", b.dataset.set); } catch (_) {} }); });
       // A returning visitor: one more line, never a redirect.
       var sl, se; try { sl = localStorage.getItem("ip-lang"); se = localStorage.getItem("ip-ed"); } catch (_) {}
-      if (["lu", "fr", "ch", "br", "us", "il", "uk"].indexOf(se) > -1) {
+      if (se && paths.pt[se]) { // only editions shown on the site
         document.querySelectorAll("[data-go]").forEach(function (p) {
           var a = p.querySelector("a"), l = a.dataset.lang, gl = ["pt", "en", "fr"].indexOf(sl) > -1 ? sl : l;
           a.href = paths[gl][se]; a.textContent = GO[l].replace("{e}", names[l][se]); a.dataset.ed = se; a.dataset.lang = gl; p.hidden = false;

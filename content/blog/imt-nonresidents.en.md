@@ -33,7 +33,7 @@ The transfer tax (IMT) is what you pay when you buy property in Portugal. Until 
 
 An urban property is a house or other building, not farmland.
 
-This applies if your tax home is in Luxembourg, France, Switzerland, Brazil, the US or Israel. Your starting point is then 7.5% of the price, unless an exception applies.
+This applies if your tax home is in Luxembourg, France, Switzerland, Brazil, the US or the UK. Your starting point is then 7.5% of the price, unless an exception applies.
 
 ## When the 7.5% rate doesn't apply
 

@@ -4,7 +4,8 @@
 // closed for the visit with x (sessionStorage). Only on an edition's home and its top-level pages, never on the map.
 // The link carries ?de=geo-{from}-{to} so the arrival is counted by the site's own events.
 
-export const GEO_ED = { LU: "lu", FR: "fr", CH: "ch", BR: "br", US: "us", IL: "il", GB: "uk" };
+// Israel hidden on the site (8 Nov 2026): IL: "il" removed until it comes back (ops/RESTORE_ISRAEL.md).
+export const GEO_ED = { LU: "lu", FR: "fr", CH: "ch", BR: "br", US: "us", GB: "uk" };
 
 const ASK = {
   pt: { lu: "Vive no Luxemburgo?", fr: "Vive em França?", ch: "Vive na Suíça?", br: "Vive no Brasil?", us: "Vive nos Estados Unidos?", il: "Vive em Israel?", uk: "Vive no Reino Unido?" },

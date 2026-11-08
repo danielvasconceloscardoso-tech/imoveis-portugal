@@ -4,6 +4,7 @@ import { regressarCopy } from "../lib/regressar-copy";
 import { experienceCopy, imageQuestions } from "../lib/regressar-experience-copy";
 import { ELIGIBILITY_QUESTIONS } from "../lib/regressar-eligibility";
 import { COUNTRIES } from "../lib/regressar-fx";
+import { HIDDEN_EDITIONS } from "../i18n"; // Israel hidden (ops/RESTORE_ISRAEL.md)
 import "../styles/regressar.css";
 import RegressarSupport from "./RegressarSupport.astro";
 import RegressarSignature from "./RegressarSignature.astro";
@@ -62,7 +63,7 @@ const extras = {
     <div class="rx-welcome"><h1 id="rx-title">{simulator.title}</h1><p>{simulator.intro}</p></div>
     <div class="rx-calculator-panel"><RegressarSignature lang={lang} variant="simulator" />
     <form class="rx-entry" data-r-form novalidate>
-      <label class="rx-country" for="rx-country"><span>{t.country}</span><select id="rx-country" data-r-country>{COUNTRIES.map((c) => <option value={c.id} selected={c.id === country}>{t.countries[c.id]}</option>)}</select></label>
+      <label class="rx-country" for="rx-country"><span>{t.country}</span><select id="rx-country" data-r-country>{COUNTRIES.filter((c) => !(HIDDEN_EDITIONS as string[]).includes(c.id)).map((c) => <option value={c.id} selected={c.id === country}>{t.countries[c.id]}</option>)}</select></label>
       <div class="rx-salary">
         <label for="rx-net">{t.netSalary}</label>
         <div class="rx-amount"><input id="rx-net" data-r-net type="text" inputmode="decimal" autocomplete="off" placeholder="4 500" required aria-describedby="rx-error rx-range" /><select id="rx-source-currency" data-r-currency-select aria-label={simulator.currency}>{(["EUR","CHF","USD","BRL","ILS"] as const).map(currency=><option value={currency} selected={currency===initialCurrency}>{currency}</option>)}</select><span data-r-currency hidden>{initialCurrency}</span></div>

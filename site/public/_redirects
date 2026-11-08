@@ -57,3 +57,8 @@
 # Prompt 78b (J-01): /arrow is a page of its own (site/public/arrow/index.html), so a shared link unfurls as golf mode.
 /arrow /arrow/ 301
 /golf /golf/ 301
+# Israel edition hidden (operator, 8 Nov 2026): its addresses open the US edition, same language and page.
+# Temporary (302) so it can come back; delete these three lines to restore it (ops/RESTORE_ISRAEL.md).
+/pt/il/* /pt/us/:splat 302
+/en/il/* /en/us/:splat 302
+/fr/il/* /fr/us/:splat 302

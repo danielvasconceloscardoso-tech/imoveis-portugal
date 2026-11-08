@@ -1,6 +1,6 @@
 # Imóveis Portugal
 
-> A guide for people who live abroad (Luxembourg, France, Switzerland, Brazil, the United States, Israel) and are preparing to buy a home in Portugal. Every figure on the site has an official source, linked under the text. We describe the rules; we do not give legal, tax or financial advice. Sponsored content is always labelled.
+> A guide for people who live abroad (Luxembourg, France, Switzerland, Brazil, the United States, the United Kingdom) and are preparing to buy a home in Portugal. Every figure on the site has an official source, linked under the text. We describe the rules; we do not give legal, tax or financial advice. Sponsored content is always labelled.
 
 The site is published in Portuguese (pt), English (en) and French (fr), in six editions. URLs follow /{lang}/{edition}/{page}/, for example /en/us/faq/.
 

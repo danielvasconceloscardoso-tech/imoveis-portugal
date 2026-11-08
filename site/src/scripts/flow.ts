@@ -656,7 +656,7 @@ export function initFlow(root: HTMLElement, opts: { param: string; onClose?: () 
       let who: { name: string; email: string; phone: string; project: string } | null = null;
       try { who = JSON.parse(sessionStorage.getItem(`${key}.who`) || "null"); } catch { who = null; }
       const dev = ctxProject?.developer ? { name: ctxProject.developer, project: ctxProject.name } : undefined;
-      cvCard(cvHost, { L: CV, ctx: cvCtx, locale, eds: edOpts.filter((x) => x !== "other").length ? edOpts.filter((x) => x !== "other") : ["lu", "fr", "ch", "br", "us", "il", "uk"],
+      cvCard(cvHost, { L: CV, ctx: cvCtx, locale, eds: edOpts.filter((x) => x !== "other").length ? edOpts.filter((x) => x !== "other") : ["lu", "fr", "ch", "br", "us", "uk"], // Israel hidden (ops/RESTORE_ISRAEL.md)
         profile: (F.links as Record<string, string>).profile, dev,
         onEvent: (k) => { if (k === "summary" || k === "ready" || k === "share") ev({ event: `flow/${F.id}/cv/${k}`, band: band() }); if (k === "share" && projectId) ev({ event: `p/${projectId}/cvshare`, place: projectId, origin: F.id }); },
         send: who?.email ? async (cv, labels) => {

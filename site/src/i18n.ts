@@ -43,7 +43,12 @@ export const EDITIONS: Record<EdCode, { code: EdCode; domain: string; defaultLan
   uk: { code: "uk", domain: "imoveisportugal.co.uk", defaultLang: "en", fact: { big: { pt: "156 000", en: "156,000", fr: "156 000" }, source: { pt: "Observatório da Emigração, Factbook 2025 (censos de 2021, ONS)", en: "Observatório da Emigração, Factbook 2025 (2021 census, ONS)", fr: "Observatório da Emigração, Factbook 2025 (recensement 2021, ONS)" }, url: SRC.oem_uk } },
 };
 
-export const ED_ORDER: EdCode[] = ["lu", "fr", "ch", "br", "us", "il", "uk"];
+export const ALL_EDITIONS: EdCode[] = ["lu", "fr", "ch", "br", "us", "il", "uk"];
+// Editions switched off on the public site: no pages, no links, not in lists or sitemaps; their addresses send
+// visitors to the US edition (site/public/_redirects). The data and copy stay in place.
+// Israel hidden for the Programa Regressar meeting (operator, 8 Nov 2026). To bring it back: ops/RESTORE_ISRAEL.md.
+export const HIDDEN_EDITIONS: EdCode[] = ["il"];
+export const ED_ORDER: EdCode[] = ALL_EDITIONS.filter((e) => !HIDDEN_EDITIONS.includes(e));
 
 // Thousands: space in PT and FR, comma in EN.
 export const eur = (n: number, lang: Lang) => {
