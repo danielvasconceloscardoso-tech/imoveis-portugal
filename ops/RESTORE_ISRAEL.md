@@ -8,7 +8,7 @@ The fastest way back is to undo the one commit that hid it:
 git revert 5d1ac021      # the commit "Hide the Israel edition (reversible)"
 ```
 
-The tag `israel-visible-2026-11-08` marks the last state with Israel visible, for comparison (`git diff israel-visible-2026-11-08`).
+The branch `israel-visible-2026-11-08` (on GitHub) marks the last state with Israel visible, for comparison (`git diff origin/israel-visible-2026-11-08`).
 
 By hand, the same thing is six edits:
 1. `site/src/i18n.ts`: set `HIDDEN_EDITIONS` to `[]`. This alone brings back the pages, menus, lists, sitemap and hreflang links.
