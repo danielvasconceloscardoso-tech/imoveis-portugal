@@ -405,9 +405,9 @@ How to edit:
 - FR: d'IMT depuis mai 2026 si vous n'êtes pas résident fiscal au Portugal, sauf exceptions.
 
 ### fact.uk
-- PT: pessoas nascidas em Portugal vivem no Reino Unido.
-- EN: people born in Portugal live in the United Kingdom.
-- FR: personnes nées au Portugal vivent au Royaume-Uni.
+- PT: pessoas nascidas em Portugal vivem em Inglaterra e no País de Gales.
+- EN: people born in Portugal live in England and Wales.
+- FR: personnes nées au Portugal vivent en Angleterre et au pays de Galles.
 
 ### topic.lu
 - PT: Crédito no Luxemburgo ou em Portugal, impostos dos dois lados e o que muda no regresso.
