@@ -6,6 +6,7 @@ test('Approved Portuguese simulator calculates locally and prepares a demo summa
   await page.route('**/*', route => route.request().method() === 'GET' && new URL(route.request().url()).origin === new URL(baseURL!).origin ? route.continue() : route.abort());
   await page.goto('/pt/lu/regressar/');
   await expect(page.getByRole('heading', {level:1})).toHaveText('Quanto precisa de ganhar em Portugal?');
+  expect(await page.locator('#regressar-support').evaluate(el => !!(el.compareDocumentPosition(document.getElementById('places')!) & Node.DOCUMENT_POSITION_FOLLOWING))).toBe(true);
   await expect(page.locator('.tile.reg .l')).toHaveText('Com Programa Regressar');
   await expect(page.locator('.tile.reg .v')).toHaveText(/\d.*€/);
   const original = await page.locator('.tile.reg .v').textContent();
@@ -17,7 +18,7 @@ test('Approved Portuguese simulator calculates locally and prepares a demo summa
   await expect(page.locator('#psub')).toContainText('Prestação');
   await page.locator('#send').click();
   await expect(page.locator('#ho')).toBeVisible();
-  await expect(page.locator('#ho')).toContainText('nada é enviado');
+  await expect(page.locator('#ho')).toContainText(/nada é enviado/i);
   await page.locator('.tabs [data-v="dash"]').click();
   await expect(page.locator('#dash')).toBeVisible();
   await expect(page.locator('#dash')).toContainText('números são fictícios');

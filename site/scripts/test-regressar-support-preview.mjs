@@ -17,6 +17,7 @@ try{
   await page.locator('.result-support').click();
   await page.waitForTimeout(50);
   assert(page.url().endsWith('#regressar-support'));
+  assert(await page.locator('#regressar-support').evaluate(el=>!!(el.compareDocumentPosition(document.getElementById('places')) & Node.DOCUMENT_POSITION_FOLLOWING)));
   assert(await page.evaluate(()=>scrollY>0));
   const links=await page.locator('#regressar-support .support-door a, #regressar-support .support-secondary a').evaluateAll(links=>links.map(a=>({href:a.href,target:a.target,rel:a.rel})));
   assert.equal(await page.locator('.support-door .btn').count(),1);

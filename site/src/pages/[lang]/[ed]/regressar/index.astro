@@ -9,6 +9,6 @@ export function getStaticPaths() {
 }
 const { lang, ed } = Astro.params;
 // Render the exact approved Portuguese prototype, keeping its inline code intact.
-const approvedSimulator = lang === 'pt' ? readFileSync('public/previews/regressar-beta/index.html', 'utf8').replace(/data:(image\/webp|font\/woff2);base64,([A-Za-z0-9+/=]+)/g, (_uri, mime, encoded) => `/assets/regressar/${createHash('sha256').update(Buffer.from(encoded, 'base64')).digest('hex')}.${mime.split('/')[1]}`).replace('</head>', `<link rel="canonical" href="https://${config.primaryDomain}/pt/${ed}/regressar/"></head>`) : '';
+const approvedSimulator = lang === 'pt' ? readFileSync('public/previews/regressar-clear/index.html', 'utf8').replace(/data:(image\/webp|font\/woff2);base64,([A-Za-z0-9+/=]+)/g, (_uri, mime, encoded) => `/assets/regressar/${createHash('sha256').update(Buffer.from(encoded, 'base64')).digest('hex')}.${mime.split('/')[1]}`).replace('</head>', `<link rel="canonical" href="https://${config.primaryDomain}/pt/${ed}/regressar/"></head>`) : '';
 ---
 {lang === 'pt' ? <Fragment set:html={approvedSimulator} /> : <LegacyRegressarPage />}
