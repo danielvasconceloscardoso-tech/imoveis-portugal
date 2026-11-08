@@ -1207,9 +1207,9 @@ How to edit:
 - FR: Vos prochains clients préparent un achat au Portugal
 
 ### lede
-- PT: Leitores no Luxemburgo, em França, na Suíça, no Brasil, nos Estados Unidos e em Israel, a preparar uma compra em Portugal de 300 mil a 10 milhões de euros. Seis edições em três línguas, a partir de 1 de dezembro de 2026.
-- EN: Our readers live in Luxembourg, France, Switzerland, Brazil, the United States and Israel. They are preparing a purchase in Portugal, from €300,000 to €10 million. Six editions, three languages, launching on 1 December 2026.
-- FR: Nos lecteurs vivent au Luxembourg, en France, en Suisse, au Brésil, aux États-Unis et en Israël. Ils préparent un achat au Portugal, de 300 000 € à 10 millions d'euros. Six éditions, trois langues, lancement le 1er décembre 2026.
+- PT: Leitores no Luxemburgo, em França, na Suíça, no Brasil, nos Estados Unidos, em Israel e no Reino Unido, a preparar uma compra em Portugal de 300 mil a 10 milhões de euros. Seis edições em três línguas, a partir de 1 de dezembro de 2026.
+- EN: Our readers live in Luxembourg, France, Switzerland, Brazil, the United States, Israel and the United Kingdom. They are preparing a purchase in Portugal, from €300,000 to €10 million. Six editions, three languages, launching on 1 December 2026.
+- FR: Nos lecteurs vivent au Luxembourg, en France, en Suisse, au Brésil, aux États-Unis, en Israël et au Royaume-Uni. Ils préparent un achat au Portugal, de 300 000 € à 10 millions d'euros. Six éditions, trois langues, lancement le 1er décembre 2026.
 
 ### cta
 - PT: Pedir as condições
