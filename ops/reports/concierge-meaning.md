@@ -137,7 +137,7 @@ Written by `node scripts/check-parity.mjs` on every run (prompt 69). Read it bef
 | `flow.v.how.2` | Ao vivo, em Portugal | In person, in Portugal | Sur place, au Portugal |
 | `flow.v.done.h` | O pedido seguiu para o consultor qualificado. | Request sent to a qualified advisor. | Demande transmise à un conseiller qualifié. |
 | `flow.v.done.p` | O consultor confirma a data por email, normalmente em dois dias úteis. | The advisor will confirm the date by email, usually within two working days. | Le conseiller confirme la date par e-mail, en général sous deux jours ouvrés. |
-| `send.notice` | O seu pedido segue para a Imóveis Portugal e para um consultor qualificado, que lhe responde por e-mail. | When you send, your request goes to Imóveis Portugal and to a qualified advisor, who replies by email. | En envoyant, votre demande part chez Imóveis Portugal et chez un conseiller qualifié, qui vous répond par e-mail. |
+| `send.notice` | O seu pedido segue para a Imóveis Portugal e para um consultor qualificado, que lhe responde por e-mail. | Your request goes to Imóveis Portugal and a qualified advisor, who replies by email. | Votre demande va à Imóveis Portugal et à un conseiller qualifié, qui vous répond par e-mail. |
 | `send.privacy` | Política de privacidade. | Privacy policy. | Politique de confidentialité. |
 | `send.to` | Imóveis Portugal e um consultor qualificado | Imóveis Portugal and a qualified advisor | Imóveis Portugal et un conseiller qualifié |
 | `send.basis.h` | Base do envio | Why it is sent | Base de l'envoi |
