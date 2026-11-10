@@ -67,6 +67,8 @@ export const TASTE_RULES: Readonly<Record<Taste, readonly Rule[]>> = Object.free
   health: [{ key: "er_min", kind: "near", full: 10, zero: 45, share: 1 }],
   airport: [{ key: "air_min", kind: "near", full: 20, zero: 90, share: 1 }],
   train: [{ key: "rail_min", kind: "near", full: 10, zero: 45, share: 1 }],
+  // The Michelin listing is a source the operator has still to confirm (ranking.md §9). Markets only is this one line:
+  //   food: [{ key: "mkt_n20", kind: "count", full: 5, share: 1 }],
   food: [{ key: "mich_n30", kind: "count", full: 10, share: 0.7 }, { key: "mkt_n20", kind: "count", full: 5, share: 0.3 }],
   golf: [{ key: "golf_min", kind: "near", full: 10, zero: 45, share: 0.6 }, { key: "golf_n30", kind: "count", full: 10, share: 0.4 }],
   culture: [{ key: "cult_n20", kind: "count", full: 20, share: 1 }],

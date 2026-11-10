@@ -7,7 +7,7 @@
 //   content/facts/map/services/summary.json            services per place (the data engineer); may not exist yet
 //   site/src/data/prices.json                          INE medians: sale EUR/m2 (m2) and new-lease rent EUR/m2 (rq), latest quarter
 //   site/public/data/map/tiles.json                    name, region, NUTS III
-//   site/public/data/map/munis.topo.json               mainland land area in km2, measured on the boundaries (see loadAreas)
+//   site/public/data/map/munis.topo.json               for the test fixture only: mainland area measured on the boundaries
 //   content/facts/map/tiles/viver_aqui/viver_aqui_municipality.csv  the map point of each place (the town hall where
 //                                                      OpenStreetMap has one), used only to place it on the small map
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
@@ -20,12 +20,10 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const arg = name => { const i = process.argv.indexOf(name); return i > 0 ? process.argv[i + 1] : undefined; };
 const read = p => JSON.parse(readFileSync(resolve(root, p), 'utf8'));
 
-// ---- land area, for residents per km2 (the "quiet" taste). No official area table is in the repository, so the area
-// is measured on the boundaries the map itself is drawn from (munis.topo.json, OpenStreetMap): within about 1% of the
-// official figure where checked (Gondomar 131.7 against 131.86 km2; Lisboa is 13% under because the Tagus is left out).
-// The islands are drawn as scaled insets in that file and the raw geoBoundaries outlines are too coarse (Funchal 41%
-// under), so an island has no area here and "quiet" reads "no data" there, unless summary.json brings `area_km2`.
-// Area on the sphere, mean Earth radius 6371.0088 km.
+// ---- land area, for residents per km2 (the "quiet" taste). The real table uses the official area in summary.json
+// (`area_km2`: INE indicator 0008350) and nothing else: a place without it reads "no data". The test fixture carries
+// no area, so for a fixture only, the mainland area is measured on the map's own boundaries (munis.topo.json; within
+// about 1% of the official figure where checked). Area on the sphere, mean Earth radius 6371.0088 km.
 const RAD = Math.PI / 180, EARTH = 6371.0088;
 const ringArea = r => { let s = 0; for (let i = 0; i < r.length - 1; i++) s += (r[i + 1][0] - r[i][0]) * RAD * (2 + Math.sin(r[i][1] * RAD) + Math.sin(r[i + 1][1] * RAD)); return Math.abs(s * EARTH * EARTH / 2); };
 const polyArea = p => ringArea(p[0]) - p.slice(1).reduce((s, h) => s + ringArea(h), 0);
@@ -37,7 +35,8 @@ function loadAreas(tiles) {
 
 export function loadInputs(summaryPath = resolve(root, 'content/facts/map/services/summary.json')) {
   const tiles = read('site/public/data/map/tiles.json').m;
-  const area = loadAreas(tiles);
+  const summary = existsSync(summaryPath) ? JSON.parse(readFileSync(summaryPath, 'utf8')) : null;
+  const area = summary?.fixture === true ? loadAreas(tiles) : {};
   const csv = readFileSync(resolve(root, 'content/facts/map/tiles/viver_aqui/viver_aqui_municipality.csv'), 'utf8').trim().split('\n');
   const head = csv[0].split(','), at = k => head.indexOf(k);
   const geo = csv.slice(1).map(line => {
@@ -49,7 +48,6 @@ export function loadInputs(summaryPath = resolve(root, 'content/facts/map/servic
   if (geo.length !== Object.keys(tiles).length) throw new Error(`geography: ${geo.length} points for ${Object.keys(tiles).length} map places`);
   const src = read('site/src/data/prices.json');
   const prices = { period: src.quarters.at(-1), munis: Object.fromEntries(Object.entries(src.munis).map(([id, m]) => [id, { priceM2: m.m2?.at(-1) ?? null, rentM2: m.rq?.at(-1) ?? null }])) };
-  const summary = existsSync(summaryPath) ? JSON.parse(readFileSync(summaryPath, 'utf8')) : null;
   if (summary) for (const id of Object.keys(summary.places ?? {})) if (!tiles[id]) throw new Error(`summary.json: ${id} is not a map place`);
   return { geo, prices, summary };
 }

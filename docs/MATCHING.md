@@ -32,11 +32,13 @@ Each taste gets a score from 0 to 1 for each place, rounded to two decimals. Dri
 | Golf | 60%: drive to the nearest course | 10 min or less | 45 min or more |
 | | 40%: courses within 30 min | 10 or more | none |
 | Culture | museums and theatres within 20 min | 20 or more | none |
-| Quiet | residents per km² (2021 census ÷ land area) | 30 or fewer | 3,000 or more |
+| Quiet | residents per km² (2021 census ÷ official area) | 30 or fewer | 3,000 or more |
 
 Quiet uses a log scale between its limits: 300 residents per km² scores 0.5.
 
 Example, Gondomar in the test table: the international school is 12 minutes away and four are within 30 minutes. Drive: (45 − 12) ÷ 35 = 0.94. Count: 4 ÷ 4 = 1. Score: 0.7 × 0.94 + 0.3 × 1 = 0.96.
+
+The hospital list holds the 56 general public hospitals with an emergency department. Basic emergency services inside health centres are not in it yet, so in the interior the nearest emergency care can be closer than the figure shown, and the hospital score lower than it should be.
 
 Three counts exist in the data and are **not** scored, because OpenStreetMap maps them unevenly from one municipality to the next: restaurants per 1,000 residents, private schools, pharmacies. Food describes what is listed and mapped nearby, never quality.
 
@@ -58,7 +60,7 @@ The same input always gives the same order. Nothing is random.
 
 ## When data is missing
 
-A place with no data for a taste gets no points for it and the card reads "no data". It is never counted as a zero in silence, and it is never filled in with a guess. On the islands, a service with no road route (no ferry is counted) is "no data". Quiet is "no data" on the 30 island municipalities until an official land area is in the table.
+A place with no data for a taste gets no points for it and the card reads "no data". It is never counted as a zero in silence, and it is never filled in with a guess. On the islands, a service with no road route (no ferry is counted) is "no data".
 
 ## What every result shows
 

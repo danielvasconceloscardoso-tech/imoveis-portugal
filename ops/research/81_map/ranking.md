@@ -25,7 +25,7 @@ Files:
 - `site/src/lib/match-table.ts`: summary.json row to engine measures; table encode and decode.
 - `site/src/lib/match-data.ts`: `loadMatchData()`, one fetch of `/data/match.json`, on first use.
 - `site/src/lib/match-copy.ts`: reasons, trade-off, points, coverage and method lines in PT, EN, FR.
-- `site/scripts/build-match-table.mjs` (`npm run build:match`): writes `site/public/data/match.json` (308 places, 75 kB, 20 kB gzipped) and `match-photos.json` (the 76 photographs the map already holds, with alt text). `--check` fails when either is out of date.
+- `site/scripts/build-match-table.mjs` (`npm run build:match`): writes `site/public/data/match.json` (308 places, about 75 kB, 20 kB gzipped) and `match-photos.json` (the 76 photographs the map already holds, with alt text). `--check` fails when either is out of date.
 
 Scoring (the same table as `docs/MATCHING.md`; the code constant is `TASTE_RULES`):
 
@@ -43,7 +43,7 @@ Scoring (the same table as `docs/MATCHING.md`; the code constant is `TASTE_RULES
 | golf | `golf.min` | 10 min or less | 45 min or more | 60% |
 | | `golf_n30` | 10 or more | 0 | 40% |
 | culture | `cult_n20` | 20 or more | 0 | 100% |
-| quiet | `pop` ÷ land area, residents per km² | 30 or fewer | 3,000 or more (log scale) | 100% |
+| quiet | `pop` ÷ `area_km2`, residents per km² | 30 or fewer | 3,000 or more (log scale) | 100% |
 
 Rules, each one visible to the reader:
 1. Budget is a hard limit, on the unrounded monthly cost. The old `HOUSING_DEFAULTS`, `housingPayment` and every validation limit are unchanged.
@@ -121,10 +121,12 @@ Not run here:
 
 ## 5. Data: what is in, what still moves
 
-- `content/facts/map/services/summary.json` in this branch is a copy of the data engineer's file as of 10 Nov (308 places, every layer). **At merge, take p81-data's file and run `npm run build:match`;** the table test fails until that is done, on purpose.
-- Coverage in the table: beach 308, international school drive 288, hospital 297, airport 308, train 278, golf drive 289, counts 308, density 278. The gaps are islands with no road route, shown as "no data".
+- `content/facts/map/services/summary.json` in this branch is a byte-for-byte copy of the data engineer's final file (branch p81-data, commit 4663331; 308 places, every layer). **At merge, take p81-data's file and run `npm run build:match`;** the table test fails until that is done, on purpose.
+- Coverage in the table: beach 308, international school drive 288, hospital 297, airport 308, train 278, golf drive 289, counts 308, density 308. The gaps are islands with no road route, shown as "no data".
 - Gondomar against the golden sample: beach 17 (same). Airport 22 against 21. Emergency hospital 14 (Hospital de Santo António) against 13 (Hospital de São João). Both are the data engineer's to explain; the engine only reads them.
-- Quiet on the islands: "no data" for 30 municipalities. The repository has no official land area; the mainland area is measured on the map's own boundaries (Gondomar 131.7 km² against the official 131.86), but the map draws the islands as scaled insets and the raw outlines are too coarse (Funchal 41% under). I asked for `area_km2` in summary.json; the build picks it up by itself.
+- Quiet: residents (`pop`, INE Census 2021) ÷ official area (`area_km2`, INE indicator 0008350, which INE takes from DGT's CAOP), both added by the data engineer at my request, for all 308. For QA: `content/facts/map/README.md` says CAOP is not used until DGT confirms commercial use; this figure comes through INE under CC BY 4.0, and the lead should confirm that is enough.
+- **Hospital is a weak layer in the interior.** `er` comes from a compiled list of 56 general public hospitals; basic emergency services in health centres are missing. 38 places read more than 45 minutes (3 of them on islands) and 42 score 0 on hospital; 11 island places have no data. With hospital marked essential, those 53 are left out. `docs/MATCHING.md` says so in plain words. `er_cand` (an unverified nearer hospital) is never read.
+- **Food can switch to markets only in one line.** The Michelin counts come from the guide's public listing pages, a source the operator has still to confirm. The switch: `TASTE_RULES.food` in `site/src/lib/match.ts` (the replacement line is written there as a comment), the same line in the tests' hand copy (`HAND.food` in `site/scripts/test-match.mjs`), the Gondomar fixture numbers, and the food rows of the two tables. No table rebuild is needed: `mkt_n20` is already in `match.json`.
 - Weak signals left out of every score, as the data engineer advised. How much each would move the order if it were scored (304 places, buy mode):
   - restaurants per 1,000 residents at 30% of food: mean shift 33 places, 175 places move more than 20, only 8 of the first 20 stay. Gondomar's food score would fall from 1.00 to 0.72 on OpenStreetMap coverage alone.
   - private schools added to schools: mean shift 23 places, 108 move more than 20, 8 of the first 20 stay.
@@ -133,7 +135,7 @@ Not run here:
 ## 6. The three example searches (real table, 6,000 € net a month, rent)
 
 1. International school (essential) + beach: Vila Nova de Gaia, Matosinhos, Almada, Oeiras, Cascais. Porto is held to sixth by the spread rule. First line: "International school 10 min · beach 9 min · €1,232 a month under your budget".
-2. Food + quiet: Silves, São Brás de Alportel, Cantanhede, Penela, Vila Viçosa. First line: "11 Michelin-listed restaurants within 30 min · 55.6 residents per km² · €1,284 a month under your budget".
+2. Food + quiet: Silves, São Brás de Alportel, Cantanhede, Penela, Vila Viçosa. First line: "11 Michelin-listed restaurants within 30 min · 55.5 residents per km² · €1,284 a month under your budget".
 3. Golf: Lagoa, Silves, Sintra, Almada, Oeiras. First line: "Golf 2 min · €1,305 a month under your budget · median rent €9.93/m²".
 4. No taste, for contrast: Mêda, Vila Flor, Almeida, Marvão, Mogadouro (lowest cost first).
 
@@ -146,7 +148,7 @@ Screenshots, all on the **real** table, phone (iPhone 13) and desktop 1440, in `
 ## 7. The Concierge flow
 
 Nothing changed, and nothing should for ranking: it lists developers' buildings near a typed place, every card labelled, in the list's own order. Two notes for the lead:
-1. Its order is the order of `projects.json`. No code reorders by payment, but nothing states the rule either. One line in the Concierge ("in alphabetical order") would make "sponsors never change the order" checkable there too.
+1. Its order is the order of the projects list (`lib/projects.ts`, passed by `Flow.astro`). No code reorders by payment, but nothing states the rule either. One line in the Concierge ("in alphabetical order") would make "sponsors never change the order" checkable there too.
 2. The engine has no way to receive a project, a partner or a sponsor, and a test fails if `match.ts` ever imports anything but the housing maths.
 
 ## 8. Signal
@@ -157,10 +159,10 @@ One event per change, through `lib/track.ts` `ev()`, listed in `lib/events.ts` (
 
 1. **The Portuguese page.** It is the approved prototype. The engine now drives its "Onde viver" block: five cards instead of three, a weight row under the chips, reasons and trade-off on each card. Yes or no. It also has six chips only; adding hospital, train, quiet and schools there is a second yes.
 2. **No taste chosen.** The list is the lowest cost first across 308 places, so it opens on small interior towns (Mêda, Vila Flor). Before, it was 13 hand-picked places. Keep, or ask for one taste before showing a list.
-3. **Quiet** = residents per km² (2021 census ÷ land area), 1 at 30 or fewer, 0 at 3,000 or more. A measure of how built-up a municipality is, not of noise. Islands wait for an official area.
-4. **Food** = Michelin-listed restaurants within 30 minutes (70%) and markets within 20 (30%). It favours the belts around Porto, Lisbon and the Algarve. Restaurants per 1,000 residents is left out as unreliable.
+3. **Quiet** = residents per km² (2021 census ÷ official area), 1 at 30 or fewer, 0 at 3,000 or more. A measure of how built-up a municipality is, not of noise.
+4. **Food** = Michelin-listed restaurants within 30 minutes (70%) and markets within 20 (30%). It favours the belts around Porto, Lisbon and the Algarve. Restaurants per 1,000 residents is left out as unreliable. The Michelin source needs your confirmation; without it, food becomes markets only (a one-line switch, §5).
 5. **Schools** = public secondary schools within 20 minutes. Private schools are left out until the data can tell primary-only schools apart. International schools are their own taste.
-6. **Hospital** = the nearest public emergency department only. Health centres and private hospitals are on the card but not in the score.
+6. **Hospital** = the nearest public emergency department only. Health centres and private hospitals are on the card but not in the score. The list misses basic emergency services in the interior (38 places read over 45 minutes): keep the taste as it is, hide it until the list is complete, or stop "essential" from leaving places out on this taste.
 7. **Essential at zero leaves a place out** (rather than sinking it), with weights 3 and 1.
 8. **Spread**: two per NUTS III region in the first five. Lisbon's metro is two regions (Grande Lisboa, Península de Setúbal), so it can hold four of the five.
 9. **Rent mode** shows 251 places; 57 have no INE rent median and are named as left out, not estimated.
