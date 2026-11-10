@@ -210,7 +210,7 @@
   .m3[data-main-premium]:not(.is-golf) .m3-fd .m3-panel-x { margin-top: 0; }
   .m3[data-main-premium]:not(.is-golf) .m3-fd-sc { padding: 0 22px calc(22px + env(safe-area-inset-bottom)); }
   .m3[data-main-premium]:not(.is-golf) .m3-fd-s { padding: 12px 0; }
-  .m3[data-main-premium]:not(.is-golf) .m3-fd-s:first-child { padding-top: 8px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-fd-s:first-child { padding-top: 13px; }
   .m3[data-main-premium]:not(.is-golf) .m3-fd-chips { gap: 5px; }
   .m3[data-main-premium]:not(.is-golf) .m3-fd-chips .m3-chip { height: 32px; padding: 0 9px; font-size: 12px; }
   .m3[data-main-premium]:not(.is-golf) .m3-fd-ws:not(:empty) { margin-top: 8px; }
