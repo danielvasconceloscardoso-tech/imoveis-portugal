@@ -30,6 +30,20 @@ async function ready(page: Page) {
   expect(await page.evaluate(() => (document.querySelector('[data-m3]') as any).__mapx.map().queryRenderedFeatures(undefined, { layers: ['land', 'muni-fill'] }).length)).toBeGreaterThan(0);
 }
 
+// The budget fact and the price line of the new card are in the first fold only if the fixed Concierge bar does not
+// lie over them (toBeInViewport cannot see a bar drawn on top). The bar begins with a fade as tall as its top padding:
+// a line may touch the fade with its lower half, never the solid bar or its button.
+async function firstFoldClear(page: Page) {
+  return page.evaluate(() => {
+    const sheet = document.querySelector('[data-sheet]')!, bar = sheet.querySelector<HTMLElement>('[data-cta-bar]')!;
+    const edge = bar.getBoundingClientRect(), solid = edge.top + parseFloat(getComputedStyle(bar).paddingTop);
+    return ['[data-buy-line]', '.m3-c6-px'].every(selector => {
+      const box = sheet.querySelector(selector)!.getBoundingClientRect();
+      return box.height > 0 && box.bottom <= solid + 1 && (box.top + box.bottom) / 2 <= edge.top;
+    });
+  });
+}
+
 test.describe('cinematic entry', () => {
   test.use({ contextOptions: { reducedMotion: 'no-preference' } });
   for (const edition of editions) {
@@ -38,8 +52,13 @@ test.describe('cinematic entry', () => {
       await page.goto(edition.path, { waitUntil: 'domcontentloaded' });
       const intro = page.locator('[data-map-arrival]');
       await expect(intro).toHaveAttribute('data-initialized', 'true');
-      // The short optional arrival can already have completed on a slow software GPU.
-      // Genuine keyboard dismissal and the map action must work in either state.
+      // Prompt 81: the welcome stays until the reader acts, however slow the GPU. Its one action is the finder,
+      // "View the map" is the quiet way past it, and there is no Skip.
+      await expect(intro).toBeVisible();
+      await expect(intro.locator('[data-map-arrival-find]')).toBeVisible();
+      await expect(intro.locator('[data-map-arrival-explore]')).toBeVisible();
+      await expect(intro.locator('[data-map-arrival-skip]')).toHaveCount(0);
+      // Genuine keyboard dismissal, then the map action.
       await page.keyboard.press('Escape');
       await expect(intro).toBeHidden();
       await page.locator('[data-spot-open]').click();
@@ -51,9 +70,12 @@ test.describe('cinematic entry', () => {
       expect(await page.evaluate(() => localStorage.getItem('ip.map.arrival.v1'))).toBe('1');
     });
   }
-  // Each dismissal owns a fresh browser context and one native-engine load.
-  // The passive deadline must not inherit renderer work from earlier reloads.
-  for (const dismissal of ['keyboard Skip', 'View-map click', 'passive finish'] as const) {
+  // Each case owns a fresh browser context and one native-engine load.
+  // Prompt 81: there is no Skip and the welcome no longer leaves by itself. The keyboard paths are its two buttons
+  // ("View the map", and the finder); left alone it stays, and a touch on the map puts it away.
+  // The held request also holds the map's own script, which imports a small file of the engine's: the welcome is
+  // then the only thing on the page that answers, as on a slow connection.
+  for (const dismissal of ['keyboard View-map', 'View-map click', 'keyboard finder', 'map touch after staying'] as const) {
     test(`entry ${dismissal} while the engine download is delayed and storage is denied`, { tag: '@engine-delay' }, async ({ page }) => {
       test.setTimeout(65000);
       const pending: Array<() => void> = [];
@@ -67,26 +89,51 @@ test.describe('cinematic entry', () => {
         for (const key of ['localStorage', 'sessionStorage']) Object.defineProperty(window, key, { configurable: true, get() { throw new DOMException('Denied', 'SecurityError'); } });
       });
       await page.bringToFront();
-      // Keep the pointer away from arrival controls before its timer starts.
-      if (dismissal === 'passive finish') await page.mouse.move(0, 0);
+      // Keep the pointer away from the welcome while it is left alone.
+      if (dismissal === 'map touch after staying') await page.mouse.move(0, 0);
       try {
         await page.goto('/en/us/map/', { waitUntil: 'domcontentloaded' });
         const intro = page.locator('[data-map-arrival]');
-        if (dismissal === 'keyboard Skip') {
-          await page.locator('[data-map-arrival-skip]').focus();
+        if (dismissal === 'keyboard View-map') {
+          await page.locator('[data-map-arrival-explore]').focus();
           await page.keyboard.press('Enter');
           await expect(intro).toBeHidden();
           await expect(page.locator('[data-spot-open]')).toBeFocused();
         } else if (dismissal === 'View-map click') {
           await page.locator('[data-map-arrival-explore]').click();
           await expect(intro).toBeHidden();
+        } else if (dismissal === 'keyboard finder') {
+          // The welcome's one action: the finder opens in its place, with the keyboard inside it. A press made
+          // before the map's script has arrived must not be lost.
+          await page.locator('[data-map-arrival-find]').focus();
+          await page.keyboard.press('Enter');
+          await expect(intro).toBeHidden();
+          const finder = page.locator('[data-finder]');
+          await expect(finder).toBeVisible();
+          await expect(page.locator('[data-finder-open]')).toHaveAttribute('aria-expanded', 'true');
+          await expect(finder.locator('h2')).toBeFocused();
+          expect(await finder.locator('[data-taste]').count()).toBeGreaterThan(1);
         } else {
           await expect(intro).toBeVisible();
-          await expect(intro).toBeHidden({ timeout: 3000 });
+          // It used to leave by itself within three seconds. It is still there after them, and still usable.
+          await page.waitForTimeout(3000);
+          await expect(intro).toBeVisible();
+          await page.locator('[data-map-arrival-find]').click({ trial: true });
+          // A touch on the map itself (clear of the welcome and of every control) puts it away at once.
+          const point = await page.evaluate(() => {
+            const root = document.querySelector('[data-m3]')!, box = root.getBoundingClientRect();
+            for (const fy of [.5, .35, .65, .25]) for (const fx of [.75, .5, .25, .9]) {
+              const x = Math.round(box.left + box.width * fx), y = Math.round(box.top + box.height * fy);
+              const hit = document.elementFromPoint(x, y);
+              if (hit && root.contains(hit) && !hit.closest('button, a, input, [role="dialog"], [data-map-arrival], nav')) return { x, y };
+            }
+            return null;
+          });
+          expect(point, 'a free point on the map beside the welcome').not.toBeNull();
+          await page.mouse.click(point!.x, point!.y);
+          await expect(intro).toBeHidden();
         }
         // The route has held every engine request throughout the interaction.
-        // Check its presence after dismissal so setup cannot consume the short
-        // passive arrival window before the visible/hidden assertions begin.
         await expect.poll(() => pending.length).toBeGreaterThan(0);
       } finally {
         releaseEngine();
@@ -97,12 +144,29 @@ test.describe('cinematic entry', () => {
 });
 
 for (const edition of editions) {
-  test(`${edition.name}: reduced motion bypasses entry`, async ({ page }) => {
+  // Prompt 81: every reader gets the welcome, reduced motion included. What reduced motion changes is how it leaves:
+  // at once, with no fade.
+  test(`${edition.name}: reduced motion keeps the welcome and it leaves without an animation`, async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.goto(edition.path, { waitUntil: 'domcontentloaded' });
     expect(await page.evaluate(() => matchMedia('(prefers-reduced-motion: reduce)').matches)).toBe(true);
-    await expect(page.locator('[data-map-arrival]')).toHaveAttribute('data-initialized', 'true');
-    await expect(page.locator('[data-map-arrival]')).toBeHidden();
+    const intro = page.locator('[data-map-arrival]');
+    await expect(intro).toHaveAttribute('data-initialized', 'true');
+    await expect(intro).toBeVisible();
+    await page.evaluate(() => {
+      const element = document.querySelector('[data-map-arrival]')!;
+      (window as any).__introLeaving = 0;
+      new MutationObserver(() => { if (element.classList.contains('is-leaving')) (window as any).__introLeaving++; })
+        .observe(element, { attributes: true, attributeFilter: ['class'] });
+    });
+    await page.locator('[data-map-arrival-explore]').click();
+    await expect(intro).toBeHidden();
+    expect(await page.evaluate(() => (window as any).__introLeaving)).toBe(0);
+    await expect(page.locator('[data-spot-open]')).toBeFocused();
+    // Shown once: the next visit goes straight to the map.
+    await page.reload({ waitUntil: 'domcontentloaded' });
+    await expect(intro).toHaveAttribute('data-initialized', 'true');
+    await expect(intro).toBeHidden();
   });
 
   // Keep real map loading enabled; separate geographic and presentation links
@@ -168,17 +232,25 @@ for (const edition of editions) {
     // Batch related read-only facts; keep native viewport expectations below.
     // Poll within the browser so an unrelated GPU/CDP round trip is not
     // mistaken for the card's own 10-second data-readiness deadline.
+    // Prompt 81: the first fold carries the price as one line under the budget fact (the median, its source and its
+    // quarter); the price in full, with its period, now sits under the services, one scroll down.
     await page.waitForFunction(() => {
       const element = document.querySelector('[data-sheet]');
+      const first = element?.querySelector('.m3-c6-px')?.textContent || '';
+      const services = element?.querySelector('[data-services]'), full = element?.querySelector('.m3-pp > span');
       return element?.querySelector('h2')?.textContent?.trim() === 'Gondomar'
-        && /2[\s,.]?348/.test(element.querySelector('.m3-pp > span')?.textContent || '')
+        && /2[\s,.]?348/.test(first) && /INE.*2026/.test(first)
+        && /128\s?m²/.test(element.querySelector('[data-buy-line]')?.textContent || '')
+        && /2[\s,.]?348/.test(full?.textContent || '')
         && /INE.*2026/.test(element.querySelector('.m3-price-period')?.textContent || '')
+        && !!services && !!full && !!(services.compareDocumentPosition(full) & Node.DOCUMENT_POSITION_FOLLOWING)
         && element.textContent?.includes('Shalu Investments');
     }, null, { timeout: 10000 });
-    await expect(sheet.locator('.m3-pp > span').first()).toBeInViewport({ ratio: .95 });
-    await expect(sheet.locator('.m3-price-period')).toBeInViewport({ ratio: .95 });
-    const viewport = page.viewportSize()!;
-    if (viewport.width <= 430 && viewport.height >= 800) await expect(sheet.locator('[data-cta-consult]').first()).toBeInViewport({ ratio: .95 });
+    await expect(sheet.locator('[data-buy-line]')).toBeInViewport({ ratio: .95 });
+    await expect(sheet.locator('.m3-c6-px')).toBeInViewport({ ratio: .95 });
+    // The Concierge is fixed at the foot of the card at every size, and it never covers the price line.
+    await expect(sheet.locator('[data-cta-consult]').first()).toBeInViewport({ ratio: .95 });
+    expect(await firstFoldClear(page), 'budget fact and price line clear of the Concierge bar').toBe(true);
     // Unlike trial clicks this never scrolls a clipped control into view.
     // Actual control activation has its own regression contracts.
     await page.waitForFunction(() => { const controls = Object.fromEntries([
@@ -239,9 +311,16 @@ test('compact portrait keeps the price and its source visible without scrolling'
   await page.setViewportSize({ width: 390, height: 664 });
   await page.goto('/pt/lu/mapa/?place=gondomar');
   const sheet = page.locator('[data-sheet]');
+  // Prompt 81: in the first fold the price is the line under the budget fact (median, INE, quarter); the place's one
+  // line sits under its name; the Concierge stays at the foot. The price in full is further down the same card.
+  await expect(sheet.locator('.m3-c6-px')).toContainText(/2[\s,.]?348/);
+  await expect(sheet.locator('.m3-c6-px')).toContainText(/INE.*2026/);
+  await expect(sheet.locator('.m3-c6-px')).toBeInViewport({ ratio: .95 });
+  await expect(sheet.locator('[data-buy-line]')).toBeInViewport({ ratio: .95 });
+  await expect(sheet.locator('.m3-place-story').first()).toBeInViewport({ ratio: .95 });
+  await expect(sheet.locator('[data-cta-consult]').first()).toBeInViewport({ ratio: .95 });
+  expect(await firstFoldClear(page), 'budget fact and price line clear of the Concierge bar').toBe(true);
   await expect(sheet.locator('.m3-pp > span').first()).toContainText(/2[\s,.]?348/);
-  await expect(sheet.locator('.m3-pp > span').first()).toBeInViewport({ ratio: .95 });
-  await expect(sheet.locator('.m3-price-period')).toBeInViewport({ ratio: .95 });
-  await expect(sheet.locator('.m3-arr-l').first()).toBeInViewport({ ratio: .95 });
+  await expect(sheet.locator('.m3-price-period')).toContainText(/INE.*2026/);
   await expect(sheet.locator('.m3-x')).toBeInViewport();
 });

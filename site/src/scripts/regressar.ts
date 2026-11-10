@@ -156,7 +156,7 @@ export function initRegressar() {
   const list=q('results'),matches=found.matches,none=q('no-match');list.replaceChildren();
   for(const place of matches.slice(0,resultsShown)){
    const li=document.createElement('li'),button=document.createElement('button'),main=document.createElement('span');
-   button.type='button';button.dataset.rResult=place.id;main.className='rx-res-main';
+   button.type='button';button.dataset.rMatch=place.id;main.className='rx-res-main';
    const put=(parent:HTMLElement,tag:string,cls:string,value:string)=>{if(!value)return;const el=document.createElement(tag);el.className=cls;el.textContent=value;parent.append(el);};
    put(button,'span','rx-res-rank',String(place.rank));
    put(main,'strong','rx-res-name',place.name);
@@ -191,7 +191,7 @@ export function initRegressar() {
   ev({event:`match/weight/${toTaste(pref)}/${level}`,origin:'regressar'});
  });
  q('results')?.addEventListener('click',event=>{
-  const button=(event.target as HTMLElement).closest<HTMLButtonElement>('[data-r-result]'),chosen=discoveryShown?.matches.find(place=>place.id===button?.dataset.rResult);
+  const button=(event.target as HTMLElement).closest<HTMLButtonElement>('[data-r-match]'),chosen=discoveryShown?.matches.find(place=>place.id===button?.dataset.rMatch);
   if(chosen&&targetAnnual)void showPlace(chosen,discoveryShown!.matches);
  });
  q('more-results')?.addEventListener('click',()=>{if(!discoveryShown)return;resultsShown+=TOP_N;renderResults(discoveryShown);});
@@ -219,7 +219,7 @@ export function initRegressar() {
   text('city-points',formatPoints(place,lang));text('city-tradeoff',formatTradeoff(place.tradeoff,lang));
   if(!preferences.size){const li=document.createElement('li');li.textContent=`80 m² · ${Math.round(place.monthlyHousing/(targetAnnual/12)*100)}% ${c.netSalary.toLowerCase()} / ${c.month.toLowerCase()}`;evidence.append(li);}
   city.hidden=false;q('local-life').hidden=false;city.dataset.place=place.id;reveal.textContent=c.another;
-  root.querySelectorAll<HTMLElement>('[data-r-result]').forEach(item=>item.setAttribute('aria-current',String(item.dataset.rResult===place.id)));
+  root.querySelectorAll<HTMLElement>('[data-r-match]').forEach(item=>item.setAttribute('aria-current',String(item.dataset.rMatch===place.id)));
   ev({event:'match/place',place:place.id,origin:'regressar'});
   lifeAbort?.abort();lifeAbort=new AbortController();const lifeSignal=lifeAbort.signal, monthly=targetAnnual/12;
   for(const name of ['schools','hospitals','buying-power']){const el=q(name);if(el){el.replaceChildren();el.setAttribute('aria-busy','true');}}

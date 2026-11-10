@@ -228,12 +228,12 @@ test('a nice-to-have never removes a place; an essential nobody meets gives an h
   await page.locator('[data-r-housing]').selectOption('rent');
   await page.locator('[data-r-preference=beach]').click();
   await page.locator('[data-r-reveal]').click();
-  await expect(page.locator('[data-r-result]')).toHaveCount(2);
-  await expect(page.locator('[data-r-result="beja"]')).toContainText(/beach: no data/);
+  await expect(page.locator('[data-r-match]')).toHaveCount(2);
+  await expect(page.locator('[data-r-match="beja"]')).toContainText(/beach: no data/);
   await page.locator('[data-r-weight="beach:essential"]').click();
   await expect(page.locator('[data-r-no-match]')).toBeVisible();
   await expect(page.locator('[data-r-no-match]')).toContainText(/essential/i);
-  await expect(page.locator('[data-r-result]')).toHaveCount(0);
+  await expect(page.locator('[data-r-match]')).toHaveCount(0);
   await expect(page.locator('[data-r-city]')).toBeHidden();
   await expect(page.locator('[data-r-coverage]')).toContainText(/2 on an essential/);
 });
@@ -244,7 +244,7 @@ test('tastes and weights change the order; every result gives its reasons and it
   await expect(page.locator('[data-r-taste]')).toHaveCount(4);
   await page.locator('[data-r-reveal]').click();
   const names = () => page.locator('[data-r-results] .rx-res-name').allTextContents();
-  await expect(page.locator('[data-r-result]')).toHaveCount(5);
+  await expect(page.locator('[data-r-match]')).toHaveCount(5);
   const plain = await names();
   await page.locator('[data-r-preference=beach]').click();
   await expect(page.locator('[data-r-weight="beach:nice"]')).toHaveAttribute('aria-pressed', 'true');
@@ -258,15 +258,21 @@ test('tastes and weights change the order; every result gives its reasons and it
   await page.locator('[data-r-weight="golf:essential"]').click();
   await expect(page.locator('[data-r-weight="golf:essential"]')).toHaveAttribute('aria-pressed', 'true');
   expect(await names()).not.toEqual(both);
-  for (const row of await page.locator('[data-r-result]').all()) {
+  for (const row of await page.locator('[data-r-match]').all()) {
     await expect(row.locator('.rx-res-why')).toContainText(/\d+ min/);
     await expect(row.locator('.rx-res-why')).toContainText(/under your budget|at your budget limit/);
     await expect(row.locator('.rx-res-points')).toContainText(/of 4 points/);
   }
-  await expect(page.locator('[data-r-result]').first().locator('.rx-res-next')).toContainText(/^Next, /);
+  await expect(page.locator('[data-r-match]').first().locator('.rx-res-next')).toContainText(/^Next, /);
   // A place with no photograph in the library: a card of type alone, no broken image.
-  await page.locator('[data-r-result]').first().click();
+  await page.locator('[data-r-match]').first().click();
   await expect(page.locator('[data-r-city]')).toBeVisible();
+  // The ranked rows carry their own attribute: the row chosen is the current one, and the salary result above the
+  // list (data-r-result) is not a row and is never marked.
+  await expect(page.locator('[data-r-match]').first()).toHaveAttribute('aria-current', 'true');
+  await expect(page.locator('[data-r-match][aria-current="true"]')).toHaveCount(1);
+  await expect(page.locator('[data-r-result]')).toHaveCount(1);
+  await expect(page.locator('[data-r-result]')).not.toHaveAttribute('aria-current');
   await expect(page.locator('[data-r-city-evidence] li')).toHaveCount(2);
   await expect(page.locator('[data-r-city-points]')).toContainText(/of 4 points/);
   expect(await page.locator('[data-r-city] img').evaluateAll(images => (images as HTMLImageElement[]).filter(image => image.offsetParent && image.complete && !image.naturalWidth).length)).toBe(0);

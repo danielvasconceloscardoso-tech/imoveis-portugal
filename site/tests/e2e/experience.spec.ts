@@ -16,7 +16,9 @@ const test = base.extend({
   },
 });
 
-for (const path of ['/pt/lu/', '/fr/fr/', '/fr/ch/', '/pt/br/', '/en/us/', '/en/il/']) {
+// Israel is hidden (HIDDEN_EDITIONS in src/i18n.ts): no page is built for it and the host sends its addresses to the
+// US edition (public/_redirects). The United Kingdom takes its place in this list; ops/RESTORE_ISRAEL.md brings it back.
+for (const path of ['/pt/lu/', '/fr/fr/', '/fr/ch/', '/pt/br/', '/en/us/', '/en/uk/']) {
   test(`edition loads: ${path}`, async ({ page }) => {
     const response = await page.goto(path);
     expect(response?.status()).toBe(200);
