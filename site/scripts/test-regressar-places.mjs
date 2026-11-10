@@ -27,7 +27,7 @@ test('with the place table, tastes reorder the list and an essential at zero lea
  const plain=rankCities({netMonthly:9000,places}),beach=rankCities({netMonthly:9000,places,preferences:['beach']}),golf=rankCities({netMonthly:9000,places,preferences:['golf']});
  assert.notDeepEqual(ids(beach),ids(plain));assert.notDeepEqual(ids(golf),ids(beach));assert.equal(new Set(ids(beach)).size,ids(plain).length);
  const byCost=[...plain.matches].sort((a,b)=>a.scoreRank-b.scoreRank);for(let i=1;i<byCost.length;i++)assert.ok(byCost[i-1].monthlyHousing<=byCost[i].monthlyHousing);
- assert.equal(beach.matches[0].id,'viana-do-castelo');assert.ok(beach.matches[0].photo.includes('viana-do-castelo'));assert.equal(golf.matches[0].id,'sintra');assert.ok(golf.matches.slice(0,5).some(p=>p.id==='loule'));assert.equal(golf.matches[0].photo,undefined);
+ assert.equal(beach.matches[0].id,'viana-do-castelo');assert.ok(beach.matches[0].photo.includes('viana-do-castelo'));assert.equal(golf.matches[0].id,'loule');assert.equal(golf.matches[0].photo,undefined);
  const must=rankCities({netMonthly:9000,places,preferences:['beach','art'],essential:['beach']});assert.ok(must.matches.length<beach.matches.length);assert.ok(must.matches.every(p=>p.tastes[0].score>0&&p.tastes[0].weight===3&&p.tastes[1].taste==='culture'&&p.tastes[1].weight===1));assert.ok(must.outcome.excluded.some(e=>e.why==='essential-zero'&&e.taste==='beach'));
 });
 test('unsupported constraints are never silently ignored',()=>{

@@ -26,10 +26,10 @@ const PHRASES: Record<MatchLang, Record<MeasureKey, (v: string, one: boolean) =>
   pt: {
     beach_min: v => `Praia a ${v} min`, isch_min: v => `Escola internacional a ${v} min`,
     isch_n30: (v, one) => `${v} ${one ? "escola internacional" : "escolas internacionais"} a menos de 30 min`,
-    schools_n20: (v, one) => `${v} ${one ? "escola" : "escolas"} a menos de 20 min`,
+    sec_n20: (v, one) => `${v} ${one ? "escola secundária pública" : "escolas secundárias públicas"} a menos de 20 min`,
     er_min: v => `Urgência hospitalar a ${v} min`, air_min: v => `Aeroporto a ${v} min`, rail_min: v => `Estação de comboio a ${v} min`,
     mich_n30: (v, one) => `${v} ${one ? "restaurante" : "restaurantes"} no Guia Michelin a menos de 30 min`,
-    rest_per_1k: v => `${v} restaurantes por 1000 residentes`,
+    mkt_n20: (v, one) => `${v} ${one ? "mercado" : "mercados"} a menos de 20 min`,
     golf_min: v => `Golfe a ${v} min`, golf_n30: (v, one) => `${v} ${one ? "campo" : "campos"} de golfe a menos de 30 min`,
     cult_n20: (v, one) => `${v} ${one ? "museu ou teatro" : "museus e teatros"} a menos de 20 min`,
     dens: v => `${v} residentes por km²`,
@@ -37,10 +37,10 @@ const PHRASES: Record<MatchLang, Record<MeasureKey, (v: string, one: boolean) =>
   en: {
     beach_min: v => `Beach ${v} min`, isch_min: v => `International school ${v} min`,
     isch_n30: (v, one) => `${v} international ${one ? "school" : "schools"} within 30 min`,
-    schools_n20: (v, one) => `${v} ${one ? "school" : "schools"} within 20 min`,
+    sec_n20: (v, one) => `${v} public secondary ${one ? "school" : "schools"} within 20 min`,
     er_min: v => `Emergency hospital ${v} min`, air_min: v => `Airport ${v} min`, rail_min: v => `Train station ${v} min`,
     mich_n30: (v, one) => `${v} Michelin-listed ${one ? "restaurant" : "restaurants"} within 30 min`,
-    rest_per_1k: v => `${v} restaurants per 1,000 residents`,
+    mkt_n20: (v, one) => `${v} ${one ? "market" : "markets"} within 20 min`,
     golf_min: v => `Golf ${v} min`, golf_n30: (v, one) => `${v} golf ${one ? "course" : "courses"} within 30 min`,
     cult_n20: (v, one) => `${v} ${one ? "museum or theatre" : "museums and theatres"} within 20 min`,
     dens: v => `${v} residents per km²`,
@@ -48,10 +48,10 @@ const PHRASES: Record<MatchLang, Record<MeasureKey, (v: string, one: boolean) =>
   fr: {
     beach_min: v => `Plage à ${v} min`, isch_min: v => `École internationale à ${v} min`,
     isch_n30: (v, one) => `${v} ${one ? "école internationale" : "écoles internationales"} à moins de 30 min`,
-    schools_n20: (v, one) => `${v} ${one ? "école" : "écoles"} à moins de 20 min`,
+    sec_n20: (v, one) => `${v} ${one ? "lycée public" : "lycées publics"} à moins de 20 min`,
     er_min: v => `Urgences hospitalières à ${v} min`, air_min: v => `Aéroport à ${v} min`, rail_min: v => `Gare à ${v} min`,
     mich_n30: (v, one) => `${v} ${one ? "restaurant" : "restaurants"} au Guide Michelin à moins de 30 min`,
-    rest_per_1k: v => `${v} restaurants pour 1 000 habitants`,
+    mkt_n20: (v, one) => `${v} ${one ? "marché" : "marchés"} à moins de 20 min`,
     golf_min: v => `Golf à ${v} min`, golf_n30: (v, one) => `${v} ${one ? "golf" : "golfs"} à moins de 30 min`,
     cult_n20: (v, one) => `${v} ${one ? "musée ou théâtre" : "musées et théâtres"} à moins de 20 min`,
     dens: v => `${v} habitants au km²`,
@@ -151,9 +151,9 @@ export function formatCoverage(o: Pick<MatchOutcome, "matches" | "excluded">, la
 
 /** What each measure is, for the method lines. */
 const NOUNS: Record<MatchLang, Record<MeasureKey, string>> = {
-  pt: { beach_min: "minutos de carro até à praia", isch_min: "minutos de carro até à escola internacional", isch_n30: "escolas internacionais a menos de 30 min", schools_n20: "escolas privadas e secundárias públicas a menos de 20 min", er_min: "minutos de carro até à urgência hospitalar", air_min: "minutos de carro até ao aeroporto", rail_min: "minutos de carro até à estação de longo curso", mich_n30: "restaurantes no Guia Michelin a menos de 30 min", rest_per_1k: "restaurantes por 1000 residentes", golf_min: "minutos de carro até ao campo de golfe", golf_n30: "campos de golfe a menos de 30 min", cult_n20: "museus e teatros a menos de 20 min", dens: "residentes por km²" },
-  en: { beach_min: "drive minutes to the beach", isch_min: "drive minutes to the international school", isch_n30: "international schools within 30 min", schools_n20: "private and public secondary schools within 20 min", er_min: "drive minutes to the emergency hospital", air_min: "drive minutes to the airport", rail_min: "drive minutes to the long-distance station", mich_n30: "Michelin-listed restaurants within 30 min", rest_per_1k: "restaurants per 1,000 residents", golf_min: "drive minutes to the golf course", golf_n30: "golf courses within 30 min", cult_n20: "museums and theatres within 20 min", dens: "residents per km²" },
-  fr: { beach_min: "minutes en voiture jusqu’à la plage", isch_min: "minutes en voiture jusqu’à l’école internationale", isch_n30: "écoles internationales à moins de 30 min", schools_n20: "écoles privées et lycées publics à moins de 20 min", er_min: "minutes en voiture jusqu’aux urgences", air_min: "minutes en voiture jusqu’à l’aéroport", rail_min: "minutes en voiture jusqu’à la gare grandes lignes", mich_n30: "restaurants au Guide Michelin à moins de 30 min", rest_per_1k: "restaurants pour 1 000 habitants", golf_min: "minutes en voiture jusqu’au golf", golf_n30: "golfs à moins de 30 min", cult_n20: "musées et théâtres à moins de 20 min", dens: "habitants au km²" },
+  pt: { beach_min: "minutos de carro até à praia", isch_min: "minutos de carro até à escola internacional", isch_n30: "escolas internacionais a menos de 30 min", sec_n20: "escolas secundárias públicas a menos de 20 min", er_min: "minutos de carro até à urgência hospitalar", air_min: "minutos de carro até ao aeroporto", rail_min: "minutos de carro até à estação de longo curso", mich_n30: "restaurantes no Guia Michelin a menos de 30 min", mkt_n20: "mercados a menos de 20 min", golf_min: "minutos de carro até ao campo de golfe", golf_n30: "campos de golfe a menos de 30 min", cult_n20: "museus e teatros a menos de 20 min", dens: "residentes por km²" },
+  en: { beach_min: "drive minutes to the beach", isch_min: "drive minutes to the international school", isch_n30: "international schools within 30 min", sec_n20: "public secondary schools within 20 min", er_min: "drive minutes to the emergency hospital", air_min: "drive minutes to the airport", rail_min: "drive minutes to the long-distance station", mich_n30: "Michelin-listed restaurants within 30 min", mkt_n20: "markets within 20 min", golf_min: "drive minutes to the golf course", golf_n30: "golf courses within 30 min", cult_n20: "museums and theatres within 20 min", dens: "residents per km²" },
+  fr: { beach_min: "minutes en voiture jusqu’à la plage", isch_min: "minutes en voiture jusqu’à l’école internationale", isch_n30: "écoles internationales à moins de 30 min", sec_n20: "lycées publics à moins de 20 min", er_min: "minutes en voiture jusqu’aux urgences", air_min: "minutes en voiture jusqu’à l’aéroport", rail_min: "minutes en voiture jusqu’à la gare grandes lignes", mich_n30: "restaurants au Guide Michelin à moins de 30 min", mkt_n20: "marchés à moins de 20 min", golf_min: "minutes en voiture jusqu’au golf", golf_n30: "golfs à moins de 30 min", cult_n20: "musées et théâtres à moins de 20 min", dens: "habitants au km²" },
 };
 /** The method in the reader's language, one line per taste, written from TASTE_RULES so it cannot drift from the code. */
 export function methodLines(lang: MatchLang, tastes: readonly Taste[] = TASTES): string[] {

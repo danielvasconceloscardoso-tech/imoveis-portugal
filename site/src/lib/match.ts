@@ -30,9 +30,9 @@ export const TOP_N = 5;
 export const MAX_PER_REGION = 2;
 
 export type MeasureKey =
-  | "beach_min" | "isch_min" | "isch_n30" | "schools_n20" | "er_min" | "air_min" | "rail_min"
-  | "mich_n30" | "rest_per_1k" | "golf_min" | "golf_n30" | "cult_n20" | "dens";
-export const MEASURES: readonly MeasureKey[] = ["beach_min", "isch_min", "isch_n30", "schools_n20", "er_min", "air_min", "rail_min", "mich_n30", "rest_per_1k", "golf_min", "golf_n30", "cult_n20", "dens"];
+  | "beach_min" | "isch_min" | "isch_n30" | "sec_n20" | "er_min" | "air_min" | "rail_min"
+  | "mich_n30" | "mkt_n20" | "golf_min" | "golf_n30" | "cult_n20" | "dens";
+export const MEASURES: readonly MeasureKey[] = ["beach_min", "isch_min", "isch_n30", "sec_n20", "er_min", "air_min", "rail_min", "mich_n30", "mkt_n20", "golf_min", "golf_n30", "cult_n20", "dens"];
 export type NameKey = "beach" | "isch" | "er" | "air" | "rail" | "golf";
 export const NAMES: readonly NameKey[] = ["beach", "isch", "er", "air", "rail", "golf"];
 /** Which facility name goes with a measure, when the table carries one. */
@@ -57,16 +57,18 @@ export type Rule =
   | { key: MeasureKey; kind: "near"; full: number; zero: number; share: number }
   | { key: MeasureKey; kind: "count"; full: number; share: number }
   | { key: MeasureKey; kind: "sparse"; full: number; zero: number; share: number };
-/** The curves, in numbers. docs/MATCHING.md prints this table; the tests recompute every score from it by hand. */
+/** The curves, in numbers. docs/MATCHING.md prints this table; the tests recompute every score from it by hand.
+ * Left out on purpose (the data engineer rates them weak, OpenStreetMap mapping being uneven): restaurants per 1,000
+ * residents, private schools within 20 minutes and the pharmacy count. They never enter a score. */
 export const TASTE_RULES: Readonly<Record<Taste, readonly Rule[]>> = Object.freeze({
   beach: [{ key: "beach_min", kind: "near", full: 10, zero: 45, share: 1 }],
   isch: [{ key: "isch_min", kind: "near", full: 10, zero: 45, share: 0.7 }, { key: "isch_n30", kind: "count", full: 4, share: 0.3 }],
-  schools: [{ key: "schools_n20", kind: "count", full: 10, share: 1 }],
+  schools: [{ key: "sec_n20", kind: "count", full: 5, share: 1 }],
   health: [{ key: "er_min", kind: "near", full: 10, zero: 45, share: 1 }],
   airport: [{ key: "air_min", kind: "near", full: 20, zero: 90, share: 1 }],
   train: [{ key: "rail_min", kind: "near", full: 10, zero: 45, share: 1 }],
-  food: [{ key: "mich_n30", kind: "count", full: 5, share: 0.5 }, { key: "rest_per_1k", kind: "count", full: 5, share: 0.5 }],
-  golf: [{ key: "golf_min", kind: "near", full: 10, zero: 45, share: 0.6 }, { key: "golf_n30", kind: "count", full: 5, share: 0.4 }],
+  food: [{ key: "mich_n30", kind: "count", full: 10, share: 0.7 }, { key: "mkt_n20", kind: "count", full: 5, share: 0.3 }],
+  golf: [{ key: "golf_min", kind: "near", full: 10, zero: 45, share: 0.6 }, { key: "golf_n30", kind: "count", full: 10, share: 0.4 }],
   culture: [{ key: "cult_n20", kind: "count", full: 20, share: 1 }],
   quiet: [{ key: "dens", kind: "sparse", full: 30, zero: 3000, share: 1 }],
 });

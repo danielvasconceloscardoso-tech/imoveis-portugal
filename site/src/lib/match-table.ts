@@ -11,8 +11,8 @@ export type ServicePlace = {
   beach?: Near; air?: Near; rail?: Near;
   food?: { mich_n30?: number | null; mkt_n20?: number | null; rest_n?: number | null; rest_per_1k?: number | null } | null;
   golf?: Near; golf_n30?: number | null; museum?: Near; cult_n20?: number | null;
-  /** Optional, outside the first contract: INE resident population, for the "quiet" taste. */
-  pop?: number | null;
+  /** Optional, outside the first contract: INE resident population and an official land area, for the "quiet" taste. */
+  pop?: number | null; area_km2?: number | null;
 };
 export type ServiceSummary = {
   v: number; checked?: string; fixture?: boolean;
@@ -41,15 +41,15 @@ const t = (v: unknown): string | null => (typeof v === "string" && v.trim() ? v.
 
 /** The contract's place row, flattened to the engine's measures. Unknown stays null; nothing is filled in. */
 export function measuresOf(s: ServicePlace | undefined, areaKm2: number | null): { m: Record<MeasureKey, number | null>; names: Record<NameKey, string | null> } {
-  const psch = n(s?.psch_n20), sec = n(s?.sec_n20), pop = n(s?.pop);
+  const pop = n(s?.pop), area = n(s?.area_km2) || areaKm2;
   return {
     m: {
       beach_min: n(s?.beach?.min), isch_min: n(s?.isch?.min), isch_n30: n(s?.isch_n30),
-      schools_n20: psch !== null && sec !== null ? psch + sec : null,
+      sec_n20: n(s?.sec_n20),
       er_min: n(s?.er?.min), air_min: n(s?.air?.min), rail_min: n(s?.rail?.min),
-      mich_n30: n(s?.food?.mich_n30), rest_per_1k: n(s?.food?.rest_per_1k),
+      mich_n30: n(s?.food?.mich_n30), mkt_n20: n(s?.food?.mkt_n20),
       golf_min: n(s?.golf?.min), golf_n30: n(s?.golf_n30), cult_n20: n(s?.cult_n20),
-      dens: pop !== null && areaKm2 && areaKm2 > 0 ? Math.round(pop / areaKm2 * 10) / 10 : null,
+      dens: pop !== null && area && area > 0 ? Math.round(pop / area * 10) / 10 : null,
     },
     names: { beach: t(s?.beach?.name), isch: t(s?.isch?.name), er: t(s?.er?.name), air: t(s?.air?.iata), rail: t(s?.rail?.name), golf: t(s?.golf?.name) },
   };

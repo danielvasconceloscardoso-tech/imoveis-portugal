@@ -1,5 +1,7 @@
 # Issue 10 — Place discovery contract
 
+> **Prompt 81 (10 Nov 2026):** the ranking described under "Deterministic compatibility" is replaced by the shared matching engine over all 308 municipalities: `docs/MATCHING.md`. Tastes are scores with visible weights, no longer filters; the 13 places below keep their photographs, lines and sourced facts. The housing scenario and its limits are unchanged (`site/src/lib/housing.ts`).
+
 The first release compares **13 mainland municipalities**, not every Portuguese home or town. These are existing editorial/photo-backed places with published sale and rental medians. No scoring alleges that a municipality guarantees a particular lifestyle, school place, job or loan.
 
 `site/src/lib/regressar-places.ts` copies only the latest selected-place medians from `site/src/data/prices.json`, period **2026-Q2**. It does not export the paid historical dataset. Regenerate/verify these values whenever that source updates. The input is monthly **annual net divided by twelve**, irrespective of pay-slip count.
