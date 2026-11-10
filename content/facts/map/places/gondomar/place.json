@@ -19,33 +19,30 @@
   },
   "photos": [
     {
-      "f": "gondomar-aerial-dusk",
-      "w": 1600,
-      "credit": "Shalu Investments",
+      "f": "gondomar-douro-gramido",
+      "w": 1024,
       "alt": {
-        "pt": "O Douro ao entardecer, de Valbom à ponte do Freixo, com o Porto ao fundo; imagem do promotor com o O'rizon Living na margem",
-        "en": "The Douro at dusk, from Valbom to the Freixo bridge, with Porto beyond; the developer's image with O'rizon Living on the bank",
-        "fr": "Le Douro au crépuscule, de Valbom au pont do Freixo, avec Porto au loin ; image du promoteur avec O'rizon Living sur la rive"
+        "pt": "O Douro visto de Gramido, em Valbom, Gondomar, com pequenos barcos no rio",
+        "en": "The Douro seen from Gramido, Valbom, Gondomar, with small boats on the river",
+        "fr": "Le Douro vu de Gramido, à Valbom, Gondomar, avec de petites barques sur le fleuve"
       }
     },
     {
-      "f": "gondomar-aerial-river",
+      "f": "gondomar-melres-douro",
       "w": 1600,
-      "credit": "Shalu Investments",
       "alt": {
-        "pt": "O Douro em Valbom de dia, a ponte do Freixo e o Porto; imagem do promotor com o O'rizon Living na margem",
-        "en": "The Douro at Valbom by day, the Freixo bridge and Porto; the developer's image with O'rizon Living on the bank",
-        "fr": "Le Douro à Valbom en journée, le pont do Freixo et Porto ; image du promoteur avec O'rizon Living sur la rive"
+        "pt": "O vale do Douro visto de Melres, Gondomar",
+        "en": "The Douro valley seen from Melres, Gondomar",
+        "fr": "La vallée du Douro vue de Melres, Gondomar"
       }
     },
     {
-      "f": "gondomar-aerial-douro",
-      "w": 1600,
-      "credit": "Shalu Investments",
+      "f": "gondomar-marina-melres",
+      "w": 1024,
       "alt": {
-        "pt": "Os terraços do O'rizon Living sobre o Douro, rio acima; imagem do promotor",
-        "en": "O'rizon Living's terraces above the Douro, looking upriver; the developer's image",
-        "fr": "Les terrasses d'O'rizon Living au-dessus du Douro, vers l'amont ; image du promoteur"
+        "pt": "A Marina de Melres, no Douro, em Gondomar",
+        "en": "The Marina de Melres on the Douro, Gondomar",
+        "fr": "La marina de Melres, sur le Douro, à Gondomar"
       }
     }
   ],

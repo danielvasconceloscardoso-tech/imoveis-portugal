@@ -20,16 +20,6 @@ const RATES: Record<string, number> = { EUR: 1, USD: 1.1193, CHF: 0.9227, ILS: 3
 
 const DEFS: Def[] = [
   {
-    token: "f658bd1eef", developer: "Shalu Investments", project: "O'rizon Living", where: "Valbom, Gondomar, on the Douro, a few minutes from central Porto",
-    muni: "gondomar", center: [-8.565, 41.141, 10.4],
-    readers: [{ city: "Tel Aviv", country: "Israel", cur: "ILS", ed: "il" }, { city: "New York", country: "USA", cur: "USD", ed: "us" }],
-    buyer: { line: "A couple in Tel Aviv.", words: "Three million shekels.", amount: 3000000, cur: "ILS", ed: "il", when: "year", own: 1 },
-    home: "re2027-2agf02", accent: "#0b3c5d",
-    facts: ["About 200 apartments in five buildings on 35,000 m² by the Douro", "Homes from one to four bedrooms, with river views", "Architect: Paulo Merlini", "Investment of about €100 million"],
-    sources: [{ t: "Essential Business, 'Shalu invests €100 million in luxury Porto project', 3 Oct 2025 (source: Vida Imobiliária)", u: "https://www.essential-business.pt/2025/10/03/shalu-invests-e100-million-in-luxury-porto-project/" },
-      { t: "Imovirtual, O'rizon Living listings (prices as published, 26 Oct 2026)", u: "https://www.imovirtual.com/" }],
-  },
-  {
     token: "34c86306cf", developer: "Vanguard Properties", project: "Tomás Ribeiro 79", where: "Avenidas Novas, Lisbon, between Saldanha and Marquês de Pombal",
     muni: "lisboa", center: [-9.149, 38.732, 11],
     readers: [{ city: "New York", country: "USA", cur: "USD", ed: "us" }, { city: "Geneva", country: "Switzerland", cur: "CHF", ed: "ch" }],

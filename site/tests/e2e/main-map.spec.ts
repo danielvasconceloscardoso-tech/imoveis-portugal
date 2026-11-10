@@ -248,7 +248,7 @@ for (const edition of editions) {
         && /2[\s,.]?348/.test(full?.textContent || '')
         && /INE.*2026/.test(element.querySelector('.m3-price-period')?.textContent || '')
         && !!services && !!full && !!(services.compareDocumentPosition(full) & Node.DOCUMENT_POSITION_FOLLOWING)
-        && element.textContent?.includes('Shalu Investments');
+        && element.textContent?.includes('Vitor Oliveira');
     }, null, { timeout: 10000 });
     await expect(sheet.locator('[data-buy-line]')).toBeInViewport({ ratio: .95 });
     await expect(sheet.locator('.m3-c6-px')).toBeInViewport({ ratio: .95 });

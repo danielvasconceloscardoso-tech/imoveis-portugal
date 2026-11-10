@@ -15,7 +15,7 @@ test('municipal INE prices, rents and periods match repository source',()=>{
 });
 test('licensed real image files, three-language alt and developer credit',()=>{
  const sources=readFileSync(new URL('../../content/media/SOURCES.md',import.meta.url),'utf8');
- for(const p of REGRESSAR_PLACES){assert.ok(existsSync(fileURLToPath(new URL(`../public${p.photo}`,import.meta.url))),p.photo);assert.ok(sources.includes(p.photo.split('/').at(-1).replace(/-1024\.webp$/,'')),p.photo);for(const lang of ['pt','en','fr'])assert.ok(p.alt[lang]?.length>5);if(p.id==='gondomar')assert.equal(p.photoCredit,'Shalu Investments')}
+ for(const p of REGRESSAR_PLACES){assert.ok(existsSync(fileURLToPath(new URL(`../public${p.photo}`,import.meta.url))),p.photo);assert.ok(sources.includes(p.photo.split('/').at(-1).replace(/-1024\.webp$/,'')),p.photo);for(const lang of ['pt','en','fr'])assert.ok(p.alt[lang]?.length>5);if(p.id==='gondomar')assert.equal(p.photoCredit,'')}
 });
 // Prompt 81: a taste is a score (lib/match.ts), never a yes/no filter. Without the 308 table, the 13 places carry prices only.
 test('all 64 combinations of tastes: none removes a place; without services data each reads "no data"',()=>{

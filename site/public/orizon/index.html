@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>O'rizon Living · Imóveis Portugal</title>
-<link rel="canonical" href="/en/lu/map/?project=orizon">
-<noscript><meta http-equiv="refresh" content="0; url=/en/lu/map/?project=orizon"></noscript>
+<title>Imóveis Portugal</title>
+<link rel="canonical" href="/en/lu/map/">
+<noscript><meta http-equiv="refresh" content="0; url=/en/lu/map/"></noscript>
 <style>body{margin:0;background:#f6f3ec;color:#1e1e1c;font:400 16px/1.4 Helvetica,Arial,sans-serif}p{margin:40vh 16px 0;text-align:center}a{color:#2f5d50}</style>
 <script>
-// p70 (J-12, A-05, MI-10): the short link opens O'rizon Living's card on the map in the visitor's own edition and language.
+// p70 (J-12, A-05, MI-10): the short link opens the map (the project it once opened is off the site, 10 Nov 2026) in the visitor's own edition and language.
 // The site is static (no server code runs here), so the edition comes from, in order: the edition this browser last used
 // on the site (localStorage "ip-ed" and "ip-lang", set by every page), the time zone as a stand-in for the country, the
 // browser's languages, and otherwise today's default (/en/lu/). Nothing is stored or sent.
@@ -31,10 +31,10 @@
   if (!ed) ed = "lu";
   if (!MAP[lang]) for (var j = 0; j < langs.length && !MAP[lang]; j++) { var b = langs[j].slice(0, 2); if (MAP[b]) lang = b; }
   if (!MAP[lang]) lang = DEF[ed] || "en";
-  var q = new URLSearchParams(location.search); q.set("project", "orizon");
+  var q = new URLSearchParams(location.search); q.delete("project");
   location.replace("/" + lang + "/" + ed + "/" + MAP[lang] + "/?" + q.toString() + location.hash);
 })();
 </script>
 </head>
-<body><p><a href="/en/lu/map/?project=orizon">O'rizon Living</a></p></body>
+<body><p><a href="/en/lu/map/">Imóveis Portugal</a></p></body>
 </html>

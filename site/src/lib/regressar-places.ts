@@ -27,13 +27,13 @@ export const REGRESSAR_PLACES: readonly RegressarPlace[] = [
     "priceM2": 2348,
     "rentM2": 9.03,
     "period": "2026-Q2",
-    "photo": "/img/v2/gondomar-aerial-dusk-1024.webp",
+    "photo": "/img/v2/gondomar-douro-gramido-1024.webp",
     "alt": {
-      "pt": "O Douro ao entardecer, de Valbom à ponte do Freixo, com o Porto ao fundo; imagem do promotor com o O'rizon Living na margem",
-      "en": "The Douro at dusk, from Valbom to the Freixo bridge, with Porto beyond; the developer's image with O'rizon Living on the bank",
-      "fr": "Le Douro au crépuscule, de Valbom au pont do Freixo, avec Porto au loin ; image du promoteur avec O'rizon Living sur la rive"
+      "pt": "O Douro visto de Gramido, em Valbom, Gondomar, com pequenos barcos no rio",
+      "en": "The Douro seen from Gramido, Valbom, Gondomar, with small boats on the river",
+      "fr": "Le Douro vu de Gramido, à Valbom, Gondomar, avec de petites barques sur le fleuve"
     },
-    "photoCredit": "Shalu Investments",
+    "photoCredit": "",
     "line": {
       "pt": "O Douro à porta, de Gramido a Melres, e os Aliados a 12 minutos de carro.",
       "en": "The Douro on the doorstep, from Gramido to Melres, and downtown Porto 12 minutes away by car.",

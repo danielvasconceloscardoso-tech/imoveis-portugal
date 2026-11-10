@@ -46,8 +46,8 @@
 /en/il/articles/faros-coldest-day-in-thirty-years/ /en/lu/articles/faros-coldest-day-in-thirty-years/ 301
 /fr/il/articles/le-jour-le-plus-froid-de-faro-en-trente-ans/ /fr/lu/articles/le-jour-le-plus-froid-de-faro-en-trente-ans/ 301
 /pt/il/artigos/o-dia-mais-frio-de-faro-em-trinta-anos/ /pt/lu/artigos/o-dia-mais-frio-de-faro-em-trinta-anos/ 301
-# Prompt 66 (3 Nov 2026): the short link opens the English map (the private preview /d/f658bd1eef/ stays as it is).
-# Prompt 68 (4 Nov 2026): it opens O'rizon Living's own card on the map, with Gondomar in view (?project=).
+# Prompt 66 (3 Nov 2026): the short link opens the map.
+# 10 Nov 2026: the project this short link once opened is off the site; the address now opens the map.
 # p70 (J-12): it opens the page /orizon/ (site/public/orizon/index.html), which picks the visitor's edition and language.
 /orizon /orizon/ 302
 # Prompt 71 §3 (4 Nov 2026): Arrow Global / Details on the US map, ready and switched off while their projects are pending.

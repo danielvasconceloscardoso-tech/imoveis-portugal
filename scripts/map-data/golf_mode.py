@@ -76,7 +76,7 @@ allc = [r for r in csv.DictReader(open(ALL, encoding="utf-8")) if r["status"] ==
 places = list(csv.DictReader(open(PLACES, encoding="utf-8")))
 osm = json.load(open(OSM))["features"]
 beaches = json.load(open(BEACHES))
-projects = [p for p in json.load(open(PROJ))["projects"] if p.get("partner") is True]
+projects = [p for p in json.load(open(PROJ))["projects"] if p.get("partner") is True and not p.get("pending")]  # a pending partner is off the site
 sede = {r["muni_slug"]: r for r in csv.DictReader(open(SEDE, encoding="utf-8"))}
 for p in places:
     if p.get("fact") and p["fact"] not in facts: raise SystemExit(f"{PLACES}: {p['id']} cites {p['fact']}, not in facts.csv")
