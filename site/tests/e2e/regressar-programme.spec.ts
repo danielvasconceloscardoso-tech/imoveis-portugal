@@ -186,8 +186,8 @@ test('A sourced city reveals housing power, real schools and actual hospitals', 
     await page.locator(`[data-r-preference="${preference}"]`).click();
   }
   await page.locator('[data-r-reveal]').click();
-  await expect(page.locator('[data-r-result]').first()).toBeVisible();
-  const row = page.locator('[data-r-result="matosinhos"]');
+  await expect(page.locator('[data-r-match]').first()).toBeVisible();
+  const row = page.locator('[data-r-match="matosinhos"]');
   for (let more = 0; more < 60 && !(await row.count()); more++) await page.locator('[data-r-more-results]').click();
   await row.click();
   await expect(page.locator('[data-r-city-name]')).toHaveText('Matosinhos');
