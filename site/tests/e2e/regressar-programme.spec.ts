@@ -10,6 +10,8 @@ const test = base.extend({
       return request.method() === 'GET' && new URL(request.url()).origin === new URL(baseURL!).origin
         ? route.continue() : route.abort();
     });
+    // Prompt 81: the discovery's 308-place table, pinned to the hand-made fixture (see regressar.spec.ts).
+    await page.route('**/data/match.json', route => route.fulfill({ path: 'tests/e2e/fixtures/match.fixture.json', contentType: 'application/json' }));
     await use(page);
     expect(errors, 'uncaught browser errors').toEqual([]);
   },
@@ -178,11 +180,16 @@ test('Image choices keep their accessible selection state and reveal a compatibl
 test('A sourced city reveals housing power, real schools and actual hospitals', async ({ page }) => {
   await open(page);
   await calculate(page);
-  // Matosinhos is the source-backed member satisfying all six supported tastes.
+  // Prompt 81: tastes rank, they no longer filter down to one place. Matosinhos (a place with detailed local data) is
+  // opened from the ranked list, wherever the six tastes put it.
   for (const preference of ['beach', 'golf', 'art', 'food', 'schools', 'airport']) {
     await page.locator(`[data-r-preference="${preference}"]`).click();
   }
   await page.locator('[data-r-reveal]').click();
+  await expect(page.locator('[data-r-result]').first()).toBeVisible();
+  const row = page.locator('[data-r-result="matosinhos"]');
+  for (let more = 0; more < 60 && !(await row.count()); more++) await page.locator('[data-r-more-results]').click();
+  await row.click();
   await expect(page.locator('[data-r-city-name]')).toHaveText('Matosinhos');
   await expect(page.locator('[data-r-buying-power]')).toBeVisible();
   await expect(page.locator('[data-r-buying-power]')).toContainText(/m²/);

@@ -5,8 +5,9 @@ import { TASTE_RULES, TASTES, WEIGHTS, TOP_N, MAX_PER_REGION, type Taste, type M
 export type MatchLang = "pt" | "en" | "fr";
 const LOCALE: Record<MatchLang, string> = { pt: "pt-PT", en: "en-US", fr: "fr-FR" };
 const nf = (lang: MatchLang, v: number, digits = 1) => new Intl.NumberFormat(LOCALE[lang], { maximumFractionDigits: digits }).format(v);
-/** Whole euros, rounded down, so a line never overstates the room left. */
-const eur = (lang: MatchLang, v: number) => `${nf(lang, Math.floor(v + 1e-9), 0)} €`;
+/** Euros as the rest of the page writes them (Intl, per language). Whole euros are rounded down, so a line never overstates the room left. */
+const money = (lang: MatchLang, v: number, digits: number) => new Intl.NumberFormat(LOCALE[lang], { style: "currency", currency: "EUR", minimumFractionDigits: digits, maximumFractionDigits: digits }).format(v);
+const eur = (lang: MatchLang, v: number) => money(lang, Math.floor(v + 1e-9), 0);
 const lowerFirst = (s: string, lang: MatchLang) => s.charAt(0).toLocaleLowerCase(LOCALE[lang]) + s.slice(1);
 
 export const TASTE_LABELS: Record<MatchLang, Record<Taste, string>> = {
@@ -61,44 +62,53 @@ export const measurePhrase = (key: MeasureKey, value: number, lang: MatchLang): 
 const WORDS = {
   pt: {
     under: (v: string) => `${v} por mês abaixo do seu orçamento`, atLimit: "no limite do seu orçamento",
-    rent: (v: string, q: string) => `renda mediana ${v} €/m² (INE, ${q})`, buy: (v: string, q: string) => `preço mediano ${v} €/m² (INE, ${q})`,
+    rent: (v: string, q: string) => `renda mediana ${v}/m² (INE, ${q})`, buy: (v: string, q: string) => `preço mediano ${v}/m² (INE, ${q})`,
     noData: "sem dados", next: (n: string) => `A seguir, ${n}`, better: "melhor em", worse: "pior em", here: "aqui",
     cheaper: (v: string) => `melhor no custo, menos ${v} por mês`, dearer: (v: string) => `pior no custo, mais ${v} por mês`,
-    same: "igual nos seus gostos e no custo", points: (p: string, m: string) => `${p} de ${m} pontos`,
+    same: "igual nos seus gostos e no custo", points: (p: string, m: string) => `${p} de ${m} ${m === "1" ? "ponto" : "pontos"}`,
     weights: `Essencial conta ${WEIGHTS.essential}, desejável conta ${WEIGHTS.nice}. Um lugar com zero num essencial fica de fora.`,
     spread: `Desceu: no máximo ${MAX_PER_REGION} lugares por região nos ${TOP_N} primeiros.`,
     fit: (n: string) => `${n} lugares dentro do orçamento.`, fitOne: "1 lugar dentro do orçamento.",
     out: { budget: (n: string) => `${n} acima do orçamento`, rent: (n: string) => `${n} sem mediana de renda do INE`, sale: (n: string) => `${n} sem mediana de preço do INE`, essential: (n: string) => `${n} por um essencial` },
     left: "Fora", noEssential: "Nenhum lugar dentro do orçamento cumpre todos os essenciais. Passe um a desejável.",
     noService: "Os dados de serviços ainda não cobrem este gosto.",
+    rule: `No máximo ${MAX_PER_REGION} lugares por região nos ${TOP_N} primeiros.`, ties: "Empates: primeiro o custo mensal mais baixo.",
+    hard: "Um lugar acima do orçamento nunca aparece.", missing: "Sem dados para um gosto: sem pontos, e o cartão indica-o.",
+    none: "Nenhum lugar cabe neste orçamento.", map: "Ver no mapa",
     how: "Como ordenamos", paid: "Ninguém paga para subir na lista.",
   },
   en: {
     under: (v: string) => `${v} a month under your budget`, atLimit: "at your budget limit",
-    rent: (v: string, q: string) => `median rent ${v} €/m² (INE, ${q})`, buy: (v: string, q: string) => `median price ${v} €/m² (INE, ${q})`,
+    rent: (v: string, q: string) => `median rent ${v}/m² (INE, ${q})`, buy: (v: string, q: string) => `median price ${v}/m² (INE, ${q})`,
     noData: "no data", next: (n: string) => `Next, ${n}`, better: "better on", worse: "worse on", here: "here",
     cheaper: (v: string) => `better on cost, ${v} a month less`, dearer: (v: string) => `worse on cost, ${v} a month more`,
-    same: "the same on your tastes and cost", points: (p: string, m: string) => `${p} of ${m} points`,
+    same: "the same on your tastes and cost", points: (p: string, m: string) => `${p} of ${m} ${m === "1" ? "point" : "points"}`,
     weights: `Essential counts ${WEIGHTS.essential}, nice to have counts ${WEIGHTS.nice}. A place that scores zero on an essential is left out.`,
     spread: `Moved down: at most ${MAX_PER_REGION} places per region in the first ${TOP_N}.`,
     fit: (n: string) => `${n} places within the budget.`, fitOne: "1 place within the budget.",
     out: { budget: (n: string) => `${n} above the budget`, rent: (n: string) => `${n} with no INE rent median`, sale: (n: string) => `${n} with no INE price median`, essential: (n: string) => `${n} on an essential` },
     left: "Left out", noEssential: "No place within the budget meets every essential. Move one to nice to have.",
     noService: "The services data does not cover this taste yet.",
+    rule: `At most ${MAX_PER_REGION} places per region in the first ${TOP_N}.`, ties: "Ties: the lower monthly cost comes first.",
+    hard: "A place above the budget is never shown.", missing: "No data for a taste: no points for it, and the card says so.",
+    none: "No place fits this budget.", map: "View on map",
     how: "How we rank", paid: "Nobody can pay to move up the list.",
   },
   fr: {
     under: (v: string) => `${v} par mois sous votre budget`, atLimit: "à la limite de votre budget",
-    rent: (v: string, q: string) => `loyer médian ${v} €/m² (INE, ${q})`, buy: (v: string, q: string) => `prix médian ${v} €/m² (INE, ${q})`,
+    rent: (v: string, q: string) => `loyer médian ${v}/m² (INE, ${q})`, buy: (v: string, q: string) => `prix médian ${v}/m² (INE, ${q})`,
     noData: "pas de données", next: (n: string) => `Ensuite, ${n}`, better: "mieux pour", worse: "moins bien pour", here: "ici",
     cheaper: (v: string) => `mieux pour le coût, ${v} de moins par mois`, dearer: (v: string) => `moins bien pour le coût, ${v} de plus par mois`,
-    same: "identique sur vos goûts et le coût", points: (p: string, m: string) => `${p} sur ${m} points`,
+    same: "identique sur vos goûts et le coût", points: (p: string, m: string) => `${p} sur ${m} ${m === "1" ? "point" : "points"}`,
     weights: `Essentiel compte ${WEIGHTS.essential}, souhaitable compte ${WEIGHTS.nice}. Un lieu à zéro sur un essentiel est écarté.`,
     spread: `Descendu : ${MAX_PER_REGION} lieux par région au plus dans les ${TOP_N} premiers.`,
     fit: (n: string) => `${n} lieux dans le budget.`, fitOne: "1 lieu dans le budget.",
     out: { budget: (n: string) => `${n} au-dessus du budget`, rent: (n: string) => `${n} sans loyer médian INE`, sale: (n: string) => `${n} sans prix médian INE`, essential: (n: string) => `${n} pour un essentiel` },
     left: "Écartés", noEssential: "Aucun lieu dans le budget ne remplit tous les essentiels. Passez-en un en souhaitable.",
     noService: "Les données de services ne couvrent pas encore ce goût.",
+    rule: `${MAX_PER_REGION} lieux par région au plus dans les ${TOP_N} premiers.`, ties: "Égalité : le coût mensuel le plus bas d’abord.",
+    hard: "Un lieu au-dessus du budget n’apparaît jamais.", missing: "Pas de données pour un goût : pas de points, et la fiche l’indique.",
+    none: "Aucun lieu n’entre dans ce budget.", map: "Voir sur la carte",
     how: "Notre classement", paid: "Personne ne paie pour monter dans la liste.",
   },
 } as const;
@@ -109,7 +119,7 @@ export function formatReason(r: Reason, lang: MatchLang): string {
   const w = WORDS[lang];
   if (r.kind === "taste") return measurePhrase(r.key, r.value, lang);
   if (r.kind === "budget") return r.under >= 1 ? w.under(eur(lang, r.under)) : w.atLimit;
-  return (r.mode === "rent" ? w.rent : w.buy)(nf(lang, r.value, 2), r.period);
+  return r.mode === "rent" ? w.rent(money(lang, r.value, 2), r.period) : w.buy(money(lang, r.value, 0), r.period);
 }
 /** The result's two or three reasons on one line, then each chosen taste the place has no data for. */
 export function formatReasons(result: Pick<MatchResult, "reasons" | "unknown">, lang: MatchLang): string {

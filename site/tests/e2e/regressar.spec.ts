@@ -12,6 +12,10 @@ const test = base.extend({
       return request.method() === 'GET' && url.origin === new URL(baseURL!).origin
         ? route.continue() : route.abort();
     });
+    // Prompt 81: the discovery ranks all 308 places from /data/match.json. These scenarios pin the services to the
+    // hand-made fixture table (made-up services, real INE medians; scripts/fixtures), so they do not move when the
+    // real services data is refreshed. The engine's own contracts: npm run test:match.
+    await page.route('**/data/match.json', route => route.fulfill({ path: 'tests/e2e/fixtures/match.fixture.json', contentType: 'application/json' }));
     await use(page);
     expect(errors, 'uncaught browser errors').toEqual([]);
   },
@@ -213,14 +217,61 @@ test('foreign net uses a dated CHF conversion rather than a silent EUR identity 
   await expect(page.locator('[data-r-fx]')).toHaveAttribute('href', /ecb\.europa\.eu/);
 });
 
-test('an unaffordable beach preference produces an honest no-match rather than a random city', async ({ page }) => {
+test('a nice-to-have never removes a place; an essential nobody meets gives an honest no-match, not a random city', async ({ page }) => {
+  // Two places only: Évora's beach is 80 minutes away (a true zero), Beja has no beach data (unknown).
+  const table = { v: 1, period: '2026-Q2', services: null, covered: {}, n3: ['Alentejo'],
+    cols: ['id', 'name', 'n3', 'region', 'lat', 'lon', 'priceM2', 'rentM2', 'beach_min'],
+    rows: [['evora', 'Évora', 0, 'alentejo', 38.57, -7.91, 2000, 6, 80], ['beja', 'Beja', 0, 'alentejo', 38.01, -7.86, 1500, 5, null]] };
+  await page.route('**/data/match.json', route => route.fulfill({ json: table }));
   await open(page);
   await calculate(page, '1700');
-  await page.locator('[data-r-preference=beach]').click();
   await page.locator('[data-r-housing]').selectOption('rent');
+  await page.locator('[data-r-preference=beach]').click();
   await page.locator('[data-r-reveal]').click();
+  await expect(page.locator('[data-r-result]')).toHaveCount(2);
+  await expect(page.locator('[data-r-result="beja"]')).toContainText(/beach: no data/);
+  await page.locator('[data-r-weight="beach:essential"]').click();
   await expect(page.locator('[data-r-no-match]')).toBeVisible();
+  await expect(page.locator('[data-r-no-match]')).toContainText(/essential/i);
+  await expect(page.locator('[data-r-result]')).toHaveCount(0);
   await expect(page.locator('[data-r-city]')).toBeHidden();
+  await expect(page.locator('[data-r-coverage]')).toContainText(/2 on an essential/);
+});
+
+test('tastes and weights change the order; every result gives its reasons and its trade-off', async ({ page }) => {
+  await open(page);
+  await calculate(page, '6000');
+  await expect(page.locator('[data-r-taste]')).toHaveCount(4);
+  await page.locator('[data-r-reveal]').click();
+  const names = () => page.locator('[data-r-results] .rx-res-name').allTextContents();
+  await expect(page.locator('[data-r-result]')).toHaveCount(5);
+  const plain = await names();
+  await page.locator('[data-r-preference=beach]').click();
+  await expect(page.locator('[data-r-weight="beach:nice"]')).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.locator('[data-r-weight="beach:nice"]')).toContainText('1');
+  await expect(page.locator('[data-r-weight="beach:essential"]')).toContainText('3');
+  const beach = await names();
+  expect(beach).not.toEqual(plain);
+  await page.locator('[data-r-preference=golf]').click();
+  const both = await names();
+  expect(both).not.toEqual(beach);
+  await page.locator('[data-r-weight="golf:essential"]').click();
+  await expect(page.locator('[data-r-weight="golf:essential"]')).toHaveAttribute('aria-pressed', 'true');
+  expect(await names()).not.toEqual(both);
+  for (const row of await page.locator('[data-r-result]').all()) {
+    await expect(row.locator('.rx-res-why')).toContainText(/\d+ min/);
+    await expect(row.locator('.rx-res-why')).toContainText(/under your budget|at your budget limit/);
+    await expect(row.locator('.rx-res-points')).toContainText(/of 4 points/);
+  }
+  await expect(page.locator('[data-r-result]').first().locator('.rx-res-next')).toContainText(/^Next, /);
+  // A place with no photograph in the library: a card of type alone, no broken image.
+  await page.locator('[data-r-result]').first().click();
+  await expect(page.locator('[data-r-city]')).toBeVisible();
+  await expect(page.locator('[data-r-city-evidence] li')).toHaveCount(2);
+  await expect(page.locator('[data-r-city-points]')).toContainText(/of 4 points/);
+  expect(await page.locator('[data-r-city] img').evaluateAll(images => (images as HTMLImageElement[]).filter(image => image.offsetParent && image.complete && !image.naturalWidth).length)).toBe(0);
+  await expect(page.locator('[data-r-how]')).toContainText(/Nobody can pay/);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
 });
 
 test('unsupported low-income fiscal range shows an explanation instead of an inaccurate tax result', async ({ page }) => {

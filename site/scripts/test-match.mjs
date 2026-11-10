@@ -7,9 +7,12 @@ import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { matchPlaces, tasteScore, partScore, spreadByRegion, availableTastes, TASTES, TASTE_RULES, WEIGHTS, TOP_N, MAX_PER_REGION, MEASURES } from '../src/lib/match.ts';
 import { buildMatchTable, decodeMatchTable } from '../src/lib/match-table.ts';
-import { formatReasons, formatReason, formatTradeoff, formatPoints, formatCoverage, methodLines, measurePhrase } from '../src/lib/match-copy.ts';
+import * as copy from '../src/lib/match-copy.ts';
+// Intl writes no-break spaces around the euro sign in PT and FR: the exact-line checks compare with plain spaces.
+const sp = f => (...a) => f(...a).replace(/[\u00a0\u202f]/g, ' ');
+const { formatReason, formatPoints, formatCoverage, methodLines, measurePhrase } = copy, formatReasons = sp(copy.formatReasons), formatTradeoff = sp(copy.formatTradeoff);
 import { housingPayment, HOUSING_DEFAULTS } from '../src/lib/housing.ts';
-import { loadInputs } from './build-match-table.mjs';
+import { loadInputs, loadPhotos } from './build-match-table.mjs';
 
 let count = 0, waiting = 0;
 const test = (name, fn) => { fn(); count++; console.log(`PASS ${name}`); };
@@ -21,6 +24,9 @@ const json = p => JSON.parse(readFileSync(here(p), 'utf8'));
 const fx = loadInputs(here('./fixtures/match-summary.fixture.json'));
 const FIX = decodeMatchTable(buildMatchTable(fx.geo, fx.prices, fx.summary));
 const fixPlace = id => FIX.places.find(p => p.id === id);
+test('the browser tests use the same fixture table (tests/e2e/fixtures/match.fixture.json)', () => {
+  assert.deepEqual(json('../tests/e2e/fixtures/match.fixture.json'), JSON.parse(JSON.stringify(buildMatchTable(fx.geo, fx.prices, fx.summary))), 'rebuild: npm run build:match -- --summary scripts/fixtures/match-summary.fixture.json --out tests/e2e/fixtures/match.fixture.json');
+});
 const ids = o => o.matches.map(m => m.id);
 const byScore = o => [...o.matches].sort((a, b) => a.scoreRank - b.scoreRank).map(m => m.id);
 const nice = (...t) => t.map(taste => ({ taste, importance: 'nice' }));
@@ -91,7 +97,7 @@ test('5. Gondomar fixture: exact measures, scores, cost, points and lines', () =
   assert.equal(all.points, 7.75); assert.equal(all.maxPoints, 10); assert.deepEqual(all.unknown, ['quiet']);
   const r = matchPlaces({ netMonthly: 4500, places: FIX.places, tastes: [...must('isch'), ...nice('beach')] }).matches.find(m => m.id === 'gondomar');
   assert.equal(r.points, 3.68); assert.equal(r.maxPoints, 4); assert.equal(r.total, 0.92);
-  assert.equal(formatReasons(r, 'en'), 'International school 12 min · beach 17 min · 852 € a month under your budget');
+  assert.equal(formatReasons(r, 'en'), 'International school 12 min · beach 17 min · €852 a month under your budget');
   assert.equal(formatReasons(r, 'pt'), 'Escola internacional a 12 min · praia a 17 min · 852 € por mês abaixo do seu orçamento');
   assert.equal(formatReasons(r, 'fr'), 'École internationale à 12 min · plage à 17 min · 852 € par mois sous votre budget');
   assert.equal(formatPoints(r, 'en'), '3.68 of 4 points');
@@ -100,7 +106,7 @@ test('5. Gondomar fixture: exact measures, scores, cost, points and lines', () =
   assert.equal(buy.purchasePrice, 187840); assert.equal(buy.deposit, 37568); assert.equal(buy.loan, 150272);
   const i = 0.03 / 12, pay = 150272 * i / (1 - (1 + i) ** -360);
   assert.ok(Math.abs(buy.monthlyHousing - pay) < 1e-9); assert.ok(Math.abs(pay - 633.55) < 0.01);
-  assert.equal(formatReasons(buy, 'en'), '941 € a month under your budget · median price 2,348 €/m² (INE, 2026-Q2)');
+  assert.equal(formatReasons(buy, 'en'), '€941 a month under your budget · median price €2,348/m² (INE, 2026-Q2)');
 });
 
 test('points are a plain weighted sum anyone can redo by hand (60 seeded tables)', () => {
@@ -349,10 +355,10 @@ test('every result explains itself: two or three reasons in numbers, and the tra
   const o = matchPlaces({ netMonthly: 9000, places: FIX.places, tastes: [...must('isch'), ...nice('beach')] });
   assert.deepEqual(ids(o).slice(0, 6), ['matosinhos', 'oeiras', 'cascais', 'porto', 'almada', 'lisboa']);
   // Three places tie on 4 of 4 points: the lower monthly cost comes first, and the line says so.
-  assert.equal(formatTradeoff(o.matches[0].tradeoff, 'en'), 'Next, Oeiras: worse on cost, 261 € a month more.');
-  assert.equal(formatTradeoff(o.matches[2].tradeoff, 'en'), 'Next, Porto: better on cost, 188 € a month less; worse on beach 12 min (here 6).');
+  assert.equal(formatTradeoff(o.matches[0].tradeoff, 'en'), 'Next, Oeiras: worse on cost, €261 a month more.');
+  assert.equal(formatTradeoff(o.matches[2].tradeoff, 'en'), 'Next, Porto: better on cost, €188 a month less; worse on beach 12 min (here 6).');
   const almada = o.matches[4];
-  assert.equal(formatReasons(almada, 'en'), 'International school 14 min · beach 9 min · 2,053 € a month under your budget');
+  assert.equal(formatReasons(almada, 'en'), 'International school 14 min · beach 9 min · €2,053 a month under your budget');
   assert.equal(formatTradeoff(almada.tradeoff, 'en'), 'Next, Lisboa: better on international school 9 min (here 14); worse on beach 21 min (here 9).');
   assert.equal(formatTradeoff(almada.tradeoff, 'pt'), 'A seguir, Lisboa: melhor em escola internacional a 9 min (aqui 14); pior em praia a 21 min (aqui 9).');
   assert.equal(formatTradeoff(almada.tradeoff, 'fr'), 'Ensuite, Lisboa : mieux pour école internationale à 9 min (ici 14); moins bien pour plage à 21 min (ici 9).');
@@ -389,6 +395,9 @@ test('the published table: all 308 places, INE medians untouched, built from the
   assert.equal(new Set(REAL.places.map(p => p.n3)).size, 26);
   assert.ok(readFileSync(here('../public/data/match.json')).length < 120_000, 'the table stays under 120 kB before compression');
   assert.notEqual(table.services?.fixture, true, 'the published table never carries fixture data');
+  const photos = json('../public/data/match-photos.json');
+  assert.deepEqual(photos, JSON.parse(JSON.stringify(loadPhotos())), 'public/data/match-photos.json is out of date: npm run build:match');
+  for (const [id, p] of Object.entries(photos)) { assert.ok(realPlace(id), id); for (const lang of ['pt', 'en', 'fr']) assert.ok(p.alt[lang].length > 5, `${id} alt ${lang}`); }
 });
 
 test('rent mode leaves out the places with no INE rent median, with the reason; nothing is estimated', () => {

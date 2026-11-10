@@ -30,7 +30,7 @@ export async function renderRegressarLife(root:HTMLElement,place:RankedCity,netM
    put(target,'p',`${c.rentArea}: ≈ ${Math.floor(power.maxRentAreaM2)} m² · ${money(power.housingBudget)} / ${words.month}`);
    put(target,'p',`${c.buyArea}: ≈ ${Math.floor(power.maxBuyAreaM2)} m² · ${money(power.maxPurchasePrice)}`);
    put(target,'p',`${c.deposit}: ${money(power.deposit)} + ${{pt:'impostos e despesas',en:'taxes and fees',fr:'impôts et frais'}[lang]}`);
-   put(target,'small',`${words.reference} · ${place.period} · ${money(place.priceM2)}/m² · ${words.loan}`);
+   put(target,'small',`${words.reference} · ${place.period} · ${money(place.priceM2??0)}/m² · ${words.loan}`);
   }else put(target,'p',c.noData);target.removeAttribute('aria-busy');}
   const note=q('life-note');if(note)note.textContent=`${c.coverageNote} ${{pt:'As escolas apresentadas são uma seleção de escolas privadas e internacionais. Os tempos de carro são estimativas OSRM em trânsito livre a partir da origem registada, não de uma casa escolhida.',en:'Schools shown are a selection of private and international schools. Driving times are free-flow OSRM estimates from the recorded origin, not a selected home.',fr:'Les écoles présentées sont une sélection d’établissements privés et internationaux. Les temps de route sont des estimations OSRM en circulation fluide depuis l’origine enregistrée, pas depuis un logement choisi.'}[lang]} ${data.schoolCoverage==='nearest-international-only'?words.international+' ':''}${c.medicalNote} ${c.distanceNote} ${data.origin?`${words.from}: ${data.origin.name}.`:''}`;
  }catch{

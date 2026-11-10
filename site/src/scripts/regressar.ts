@@ -1,7 +1,13 @@
 import { regressarCopy } from '../lib/regressar-copy';
 import { COUNTRIES, getCountry, getSalaryCurrency, convertCurrencyNetToEuro } from '../lib/regressar-fx';
 import { annualizeNet, grossForNet, TAX_2026 } from '../lib/regressar-tax';
-import { rankCities, regressarMapHref, REGRESSAR_PLACES, type Preference, type RankedCity, type HousingMode } from '../lib/regressar-places';
+import { rankCities, regressarMapHref, REGRESSAR_PLACES, type Preference, type RankedCity, type HousingMode, type CityDiscovery } from '../lib/regressar-places';
+// Prompt 81: one matching engine for every place finder (docs/MATCHING.md). Its 308-place table loads with the discovery.
+import { toTaste, availableTastes, TOP_N, WEIGHTS, type Importance } from '../lib/match';
+import { loadMatchData } from '../lib/match-data';
+import type { MatchData } from '../lib/match-table';
+import { TASTE_LABELS, IMPORTANCE_LABELS, matchWords, measurePhrase, formatReasons, formatTradeoff, formatPoints, formatCoverage, methodLines } from '../lib/match-copy';
+import { ev } from '../lib/track';
 import { assessEligibility, ELIGIBILITY_QUESTIONS, ELIGIBILITY_COPY, type EligibilityAnswers, type EligibilityAnswer } from '../lib/regressar-eligibility';
 import { decideProgrammeScenario, scenarioCopy } from '../lib/regressar-scenario';
 import { initRegressarSupport } from './regressar-support';
@@ -25,10 +31,14 @@ export function initRegressar() {
  let lifeAbort:AbortController|undefined;
  let mapTask:Promise<import("./regressar-map").RegressarMapHandle>|undefined;
  let mapMatches:RankedCity[]=[], mapSelected="";
- const preferences=new Set<Preference>();
+ // Prompt 81: each chosen taste with its weight (nice to have 1, essential 3). Tastes are scores, never filters.
+ const preferences=new Map<Preference,Importance>(), mw=matchWords(lang);
+ let matchData:MatchData|undefined, matchTask:Promise<void>|undefined, discoveryShown:CityDiscovery|undefined, resultsShown=TOP_N;
+ let photoTask:Promise<Record<string,{f:string;alt?:Record<string,string>}>>|undefined;
  const signal=(step:string)=>root.dispatchEvent(new CustomEvent('regressar:step',{bubbles:true,detail:{step}}));
  const range={pt:'Este modelo cobre líquidos anuais equivalentes entre 20 000 € e 500 000 €. Abaixo desse intervalo, o mínimo de existência exige outro cálculo.',en:'This model covers equivalent annual net income from €20,000 to €500,000. Below this range, minimum-income protection requires a different calculation.',fr:'Ce modèle couvre un revenu net annuel équivalent de 20 000 € à 500 000 €. En dessous, la protection du minimum de revenu exige un autre calcul.'}[lang];
- const resetCity=()=>{generation++;lifeAbort?.abort();mapMatches=[];mapSelected='';q('mini-map').hidden=true;q('local-life').hidden=true;const preview=q('reveal-preview');if(preview)preview.hidden=true;q('city').hidden=true;q('no-match').hidden=true;reveal.disabled=false;reveal.textContent=c.reveal;reveal.removeAttribute('aria-busy');revealIndex=0;};
+ const clearResults=()=>{discoveryShown=undefined;resultsShown=TOP_N;for(const key of ['results','coverage','more-results']){const el=q(key);if(el)el.hidden=true;}};
+ const resetCity=(keepResults=false)=>{if(!keepResults)clearResults();generation++;lifeAbort?.abort();mapMatches=[];mapSelected='';q('mini-map').hidden=true;q('local-life').hidden=true;const preview=q('reveal-preview');if(preview)preview.hidden=true;q('city').hidden=true;q('no-match').hidden=true;reveal.disabled=false;reveal.textContent=c.reveal;reveal.removeAttribute('aria-busy');revealIndex=0;};
  function syncCurrency(){const quote=getSalaryCurrency(sourceCurrency.value);text('currency',quote.currency);net.setAttribute('aria-label',`${c.netSalary} (${quote.currency})`);}
  function syncCountry(){sourceCurrency.value=getCountry(country.value).currency;syncCurrency();}
  function syncPeriod(){payments.disabled=period.value==='year';payments.closest<HTMLElement>('[data-r-payment-wrap]')?.toggleAttribute('hidden',period.value==='year');}
@@ -101,7 +111,7 @@ export function initRegressar() {
    text('fx',current.rateDate?`${c.exchangeRate}: 1 EUR = ${current.perEuro} ${current.currency} · ${current.rateDate} · BCE / ECB`:'EUR → EUR');
    const fx=q<HTMLAnchorElement>('fx');if(fx?.tagName==='A'){fx.href=current.source||'https://www.ecb.europa.eu/';}
    text('budget',`${euro(targetAnnual/12*.35)} / ${c.month.toLowerCase()}`);
-   result.hidden=false;discovery.hidden=false;resetCity();void updatePower();signal('result');
+   result.hidden=false;discovery.hidden=false;resetCity();void prepareMatch();void updatePower();signal('result');
    if(scroll)result.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});
   }catch(e){targetAnnual=0;powerRevision++;result.hidden=true;discovery.hidden=true;resetCity();error.textContent=e instanceof Error?e.message:c.error;error.hidden=false;net.setAttribute('aria-invalid','true');if(scroll)net.focus();}
  }
@@ -112,20 +122,104 @@ export function initRegressar() {
  for(const e of [country,sourceCurrency,net,period,payments])e.addEventListener('input',()=>{targetAnnual=0;powerRevision++;result.hidden=true;discovery.hidden=true;resetCity();error.hidden=true;});
  country.addEventListener('change',syncCountry);sourceCurrency.addEventListener('change',syncCurrency);
  ptPayments.addEventListener('change',updateNegotiation);q('power-place').addEventListener('change',()=>void updatePower());period.addEventListener('change',syncPeriod);
- root.querySelectorAll<HTMLButtonElement>('[data-r-preference]').forEach(button=>button.addEventListener('click',()=>{const value=button.dataset.rPreference as Preference;preferences.has(value)?preferences.delete(value):preferences.add(value);button.setAttribute('aria-pressed',String(preferences.has(value)));resetCity();signal('preference');}));
- q<HTMLSelectElement>('housing').addEventListener('change',resetCity);
+ const prefOf=(button:HTMLElement)=>(button.dataset.rPreference||button.dataset.rTaste) as Preference;
+ const rank=()=>rankCities({netMonthly:targetAnnual/12,preferences:[...preferences.keys()],essential:[...preferences].filter(([,level])=>level==='essential').map(([pref])=>pref),housingMode:q<HTMLSelectElement>('housing').value as HousingMode,places:matchData?.places});
+ /** The weight of each chosen taste, always on screen: nice to have counts 1, essential counts 3. */
+ function renderWeights(){
+  const box=q('weights');if(!box)return;box.replaceChildren();
+  for(const [pref,importance] of preferences){
+   const taste=toTaste(pref);if(!taste)continue;
+   const row=document.createElement('div'),name=document.createElement('span');row.className='rx-weight';row.setAttribute('role','group');row.setAttribute('aria-label',TASTE_LABELS[lang][taste]);name.textContent=TASTE_LABELS[lang][taste];row.append(name);
+   for(const level of ['nice','essential'] as const){const button=document.createElement('button');button.type='button';button.dataset.rWeight=`${pref}:${level}`;button.setAttribute('aria-pressed',String(importance===level));button.textContent=`${IMPORTANCE_LABELS[lang][level]} · ${WEIGHTS[level]}`;row.append(button);}
+   box.append(row);
+  }
+  box.hidden=!preferences.size;const note=q('weights-note');if(note)note.hidden=!preferences.size;
+ }
+ /** A taste the table has no data for is not offered: a control that changes nothing is not shown. */
+ function syncTastes(){
+  const open=new Set(matchData?availableTastes(matchData.places):[]);
+  root.querySelectorAll<HTMLButtonElement>('[data-r-preference],[data-r-taste]').forEach(button=>{const pref=prefOf(button),taste=toTaste(pref),ok=!!taste&&open.has(taste);button.hidden=!ok;if(!ok&&preferences.delete(pref))button.setAttribute('aria-pressed','false');});
+  const more=q('more-tastes');if(more)more.hidden=!more.querySelector('button:not([hidden])');
+  const images=root.querySelector<HTMLElement>('.rx-image-questions');if(images)images.hidden=!images.querySelector('button:not([hidden])');
+  renderWeights();
+  const how=q('how'),list=q('how-list');
+  if(how&&list){
+   list.replaceChildren();for(const line of methodLines(lang,[...open])){const li=document.createElement('li');li.textContent=line;list.append(li);}
+   const services=matchData?.services,sources=q('how-sources');
+   if(sources&&services){const names=[...new Set(Object.values(services.layers).map(layer=>[layer.source,layer.licence].filter(Boolean).join(', ')).filter(Boolean))];sources.textContent=names.length?`${sources.dataset.label}: ${names.join(' · ')}${services.checked?` · ${services.checked}`:''}${services.routing?.profile?` · ${services.routing.profile}`:''}`:'';}
+   how.hidden=!open.size;
+  }
+ }
+ const prepareMatch=()=>matchTask??=loadMatchData().then(data=>{matchData=data;},()=>{matchTask=undefined;}).then(syncTastes);
+ function renderResults(found:CityDiscovery){
+  discoveryShown=found;
+  const list=q('results'),matches=found.matches,none=q('no-match');list.replaceChildren();
+  for(const place of matches.slice(0,resultsShown)){
+   const li=document.createElement('li'),button=document.createElement('button'),main=document.createElement('span');
+   button.type='button';button.dataset.rResult=place.id;main.className='rx-res-main';
+   const put=(parent:HTMLElement,tag:string,cls:string,value:string)=>{if(!value)return;const el=document.createElement(tag);el.className=cls;el.textContent=value;parent.append(el);};
+   put(button,'span','rx-res-rank',String(place.rank));
+   put(main,'strong','rx-res-name',place.name);
+   put(main,'span','rx-res-meta',[place.n3,`${euro(place.monthlyHousing)} / ${c.month.toLowerCase()}`].filter(Boolean).join(' · '));
+   put(main,'span','rx-res-why',formatReasons(place,lang));
+   put(main,'span','rx-res-next',formatTradeoff(place.tradeoff,lang));
+   if(place.rank>place.scoreRank)put(main,'span','rx-res-moved',mw.spread);
+   button.append(main);put(button,'span','rx-res-points',formatPoints(place,lang));
+   li.append(button);list.append(li);
+  }
+  list.hidden=!matches.length;
+  const coverage=q('coverage');coverage.textContent=formatCoverage(found.outcome,lang);coverage.hidden=false;
+  q('more-results').hidden=resultsShown>=matches.length;
+  none.textContent=found.reason==='no-essential-match'?mw.noEssential:c.noMatch;none.hidden=matches.length>0;
+ }
+ /** A taste or a weight changed: the list on screen is ranked again at once, so the reader sees the order move. */
+ function tastesChanged(){resetCity(true);renderWeights();if(discoveryShown&&targetAnnual)renderResults(rank());}
+ root.querySelectorAll<HTMLButtonElement>('[data-r-preference],[data-r-taste]').forEach(button=>button.addEventListener('click',()=>{
+  const value=prefOf(button),on=!preferences.has(value);
+  if(on)preferences.set(value,'nice');else preferences.delete(value);
+  button.setAttribute('aria-pressed',String(on));tastesChanged();signal('preference');
+  ev({event:`match/taste/${toTaste(value)}/${on?'on':'off'}`,origin:'regressar'});
+ }));
+ q('weights')?.addEventListener('click',event=>{
+  const button=(event.target as HTMLElement).closest<HTMLButtonElement>('[data-r-weight]');if(!button)return;
+  const [pref,level]=button.dataset.rWeight!.split(':') as [Preference,Importance];
+  if(!preferences.has(pref)||preferences.get(pref)===level)return;
+  preferences.set(pref,level);tastesChanged();root.querySelector<HTMLButtonElement>(`[data-r-weight="${pref}:${level}"]`)?.focus();signal('weight');
+  ev({event:`match/weight/${toTaste(pref)}/${level}`,origin:'regressar'});
+ });
+ q('results')?.addEventListener('click',event=>{
+  const button=(event.target as HTMLElement).closest<HTMLButtonElement>('[data-r-result]'),chosen=discoveryShown?.matches.find(place=>place.id===button?.dataset.rResult);
+  if(chosen&&targetAnnual)void showPlace(chosen,discoveryShown!.matches);
+ });
+ q('more-results')?.addEventListener('click',()=>{if(!discoveryShown)return;resultsShown+=TOP_N;renderResults(discoveryShown);});
+ q<HTMLSelectElement>('housing').addEventListener('change',()=>{resetCity(true);if(discoveryShown&&targetAnnual)renderResults(rank());});
  async function showPlace(place:RankedCity,matches:RankedCity[]){
-  const city=q('city');text('city-name',place.name);text('city-story',place.line[lang]);
-  const photo=q<HTMLImageElement>('city-photo');photo.src=place.photo;photo.alt=place.alt[lang];
+  const city=q('city');text('city-name',place.name);text('city-story',place.line?.[lang]??place.n3);
+  const photo=q<HTMLImageElement>('city-photo');
+  if(place.photo){photo.src=place.photo;photo.alt=place.alt?.[lang]??'';delete city.dataset.nophoto;}
+  else{
+   // No photograph of this place in the library: a card of type alone, never a stand-in picture.
+   city.dataset.nophoto='';photo.removeAttribute('src');photo.alt='';
+   photoTask??=fetch('/data/match-photos.json').then(response=>response.ok?response.json():{}).catch(()=>({}));
+   void photoTask.then(all=>{const found=all[place.id];if(!found||city.dataset.place!==place.id)return;photo.src=`/img/v2/${found.f}-1024.webp`;photo.alt=found.alt?.[lang]??'';delete city.dataset.nophoto;});
+  }
   text('city-housing',`${q<HTMLSelectElement>('housing').value==='rent'?c.rent:c.buy} · 80 m²`);text('city-cost',`${euro(place.monthlyHousing)} / ${c.month.toLowerCase()}`);
-  text('city-price',`${euro(place.priceM2)} / m²`);text('city-period',`INE · ${place.period}`);
-  text('city-credit',place.photoCredit||'');text('city-deposit',q<HTMLSelectElement>('housing').value==='buy'?`${{pt:'Entrada necessária',en:'Deposit required',fr:'Apport nécessaire'}[lang]}: ${euro(place.deposit)} + ${{pt:'impostos e despesas',en:'taxes and fees',fr:'impôts et frais'}[lang]}`:'');text('after-housing',euro(targetAnnual/12-place.monthlyHousing));
+  text('city-price',place.priceM2?`${euro(place.priceM2)} / m²`:'');text('city-period',`INE · ${place.period}`);
+  text('city-credit',place.photoCredit||'');text('city-deposit',q<HTMLSelectElement>('housing').value==='buy'&&place.deposit!==null?`${{pt:'Entrada necessária',en:'Deposit required',fr:'Apport nécessaire'}[lang]}: ${euro(place.deposit)} + ${{pt:'impostos e despesas',en:'taxes and fees',fr:'impôts et frais'}[lang]}`:'');text('after-housing',euro(targetAnnual/12-place.monthlyHousing));
   text('city-budget',`${euro(targetAnnual/12*.35)} / ${c.month.toLowerCase()}`);
   const link=q<HTMLAnchorElement>('map');link.href=regressarMapHref(place.id,lang,ed);
   const evidence=q('city-evidence');evidence.replaceChildren();
-  for(const preference of preferences){const fact=place.evidence[preference];if(!fact)continue;const li=document.createElement('li'),a=document.createElement('a');a.href=fact.source;a.target='_blank';a.rel='noopener';a.textContent=`${c.preferences[preference]} · ${fact.detail}${fact.value!==null&&fact.unit==='km-straight-line'?` · ${fact.value} km ${{pt:'em linha reta',en:'straight line',fr:'à vol d’oiseau'}[lang]}`:''}`;li.append(a);evidence.append(li);}
+  // Each chosen taste in numbers, with its score and weight, so the points can be added up by hand.
+  for(const taste of place.tastes){
+   const li=document.createElement('li'),two=new Intl.NumberFormat(locale,{minimumFractionDigits:2,maximumFractionDigits:2});
+   li.textContent=taste.score===null?`${TASTE_LABELS[lang][taste.taste]}: ${mw.noData}`:`${taste.parts.map(part=>measurePhrase(part.key,part.value,lang)).join(' · ')} · ${two.format(taste.score)} × ${taste.weight}`;
+   evidence.append(li);
+  }
+  text('city-points',formatPoints(place,lang));text('city-tradeoff',formatTradeoff(place.tradeoff,lang));
   if(!preferences.size){const li=document.createElement('li');li.textContent=`80 m² · ${Math.round(place.monthlyHousing/(targetAnnual/12)*100)}% ${c.netSalary.toLowerCase()} / ${c.month.toLowerCase()}`;evidence.append(li);}
   city.hidden=false;q('local-life').hidden=false;city.dataset.place=place.id;reveal.textContent=c.another;
+  root.querySelectorAll<HTMLElement>('[data-r-result]').forEach(item=>item.setAttribute('aria-current',String(item.dataset.rResult===place.id)));
+  ev({event:'match/place',place:place.id,origin:'regressar'});
   lifeAbort?.abort();lifeAbort=new AbortController();const lifeSignal=lifeAbort.signal, monthly=targetAnnual/12;
   for(const name of ['schools','hospitals','buying-power']){const el=q(name);if(el){el.replaceChildren();el.setAttribute('aria-busy','true');}}
   text('life-note','');
@@ -136,16 +230,17 @@ export function initRegressar() {
   const container=q('mini-map');
   if(container){
    container.hidden=false;
-   mapMatches=matches;mapSelected=place.id;
+   mapMatches=matches.slice(0,resultsShown);if(!mapMatches.includes(place))mapMatches=[...mapMatches,place];mapSelected=place.id;
    mapTask??=import('./regressar-map').then(({showRegressarMap})=>showRegressarMap(container,mapMatches,mapSelected,(id:string)=>{const chosen=mapMatches.find(p=>p.id===id);if(chosen&&targetAnnual>0)void showPlace(chosen,mapMatches);}));
    void mapTask.then(handle=>handle.update(mapMatches,mapSelected)).catch(()=>{container.dataset.unavailable='true';mapTask=undefined;});
   }
  }
  reveal.addEventListener('click',async()=>{
   if(!targetAnnual)return;
-  const ranked=rankCities({netMonthly:targetAnnual/12,preferences:[...preferences],housingMode:q<HTMLSelectElement>('housing').value as HousingMode});
-  const matches=ranked.matches;
-  if(!matches.length){q('city').hidden=true;q('no-match').hidden=false;signal('no-match');return;}
+  await prepareMatch();if(!targetAnnual)return;
+  const ranked=rank(),matches=ranked.matches;renderResults(ranked);
+  if(!matches.length){q('city').hidden=true;signal('no-match');ev({event:'match/none',origin:'regressar'});return;}
+  ev({event:'match/show',origin:'regressar'});
   const ticket=++generation;reveal.disabled=true;reveal.setAttribute('aria-busy','true');reveal.textContent=c.revealing;
   const selected=matches[revealIndex++%matches.length];
   if(!matchMedia('(prefers-reduced-motion: reduce)').matches){

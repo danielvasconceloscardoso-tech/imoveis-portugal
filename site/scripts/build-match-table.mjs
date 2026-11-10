@@ -1,4 +1,5 @@
-// Prompt 81: builds site/public/data/match.json, the 308-place table the matching engine reads in the browser.
+// Prompt 81: builds site/public/data/match.json, the 308-place table the matching engine reads in the browser,
+// and site/public/data/match-photos.json, the photograph the map already holds for a place (stem and alt text).
 //   node --import tsx scripts/build-match-table.mjs            write the table
 //   node --import tsx scripts/build-match-table.mjs --check    exit 1 when the committed table is out of date
 //   --summary <file>  another services file (the test fixture)      --out <file>  another output path
@@ -38,18 +39,27 @@ export function loadInputs(summaryPath = resolve(root, 'content/facts/map/servic
   return { geo, prices, summary };
 }
 
+/** The photographs the map already holds for a municipality (src/data/place-photos.json: stem and alt text), for the
+ * discovery card of a place outside the 13 hand-picked ones. Only stems whose 1024 px file exists. Nothing new is licensed. */
+export function loadPhotos() {
+  const { _how, ...all } = read('site/src/data/place-photos.json');
+  return Object.fromEntries(Object.entries(all).filter(([, p]) => p?.f && existsSync(resolve(root, `site/public/img/v2/${p.f}-1024.webp`))).map(([id, p]) => [id, { f: p.f, alt: p.alt }]));
+}
+
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const out = resolve(arg('--out') ?? resolve(root, 'site/public/data/match.json'));
   const { geo, prices, summary } = loadInputs(arg('--summary') ? resolve(arg('--summary')) : undefined);
   const table = buildMatchTable(geo, prices, summary);
-  const text = JSON.stringify(table) + '\n';
+  const custom = !!arg('--out');
+  const text = JSON.stringify(table) + '\n', photosOut = resolve(dirname(out), 'match-photos.json'), photos = JSON.stringify(loadPhotos()) + '\n';
   if (process.argv.includes('--check')) {
-    const same = existsSync(out) && readFileSync(out, 'utf8') === text;
+    const same = existsSync(out) && readFileSync(out, 'utf8') === text && (custom || (existsSync(photosOut) && readFileSync(photosOut, 'utf8') === photos));
     console.log(same ? 'match.json is up to date' : 'match.json is OUT OF DATE: run npm run build:match');
     process.exit(same ? 0 : 1);
   }
   mkdirSync(dirname(out), { recursive: true });
   writeFileSync(out, text);
+  if (!custom) writeFileSync(photosOut, photos);   // the photograph list belongs to the published table only
   const withRent = table.rows.filter(r => r[7] !== null).length, withPrice = table.rows.filter(r => r[6] !== null).length;
   console.log(`${out}: ${table.rows.length} places, ${withPrice} with a sale median, ${withRent} with a rent median, ${text.length} bytes`);
   console.log(`services: ${summary ? `${Object.keys(summary.places ?? {}).length} places in summary.json${summary.fixture ? ' (FIXTURE)' : ''}` : 'summary.json not there yet: every taste is "no data"'}`);

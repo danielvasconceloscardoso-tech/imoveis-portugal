@@ -782,7 +782,7 @@ export type PurchasingPower = {
  * living costs are included; INE medians are not available property listings.
  * Floating precision is retained; the UI should round indicative area DOWN.
  */
-export function purchasingPower(netMonthly:number,place:Pick<RegressarPlace,'priceM2'|'rentM2'>,options:PurchasingPowerOptions={}):PurchasingPower|null {
+export function purchasingPower(netMonthly:number,place:{priceM2:number|null;rentM2:number|null},options:PurchasingPowerOptions={}):PurchasingPower|null {
  const assumptions={budgetShare:options.budgetShare??HOUSING_DEFAULTS.budgetShare,depositPercent:options.depositPercent??HOUSING_DEFAULTS.depositPercent,annualRate:options.annualRate??HOUSING_DEFAULTS.annualRate,termYears:options.termYears??HOUSING_DEFAULTS.termYears};
  const {budgetShare,depositPercent,annualRate,termYears}=assumptions;
  if(![netMonthly,place.priceM2,place.rentM2,...Object.values(assumptions)].every(Number.isFinite)||netMonthly<=0||place.priceM2<=0||place.rentM2<=0||budgetShare<=0||budgetShare>1||depositPercent<0||depositPercent>=100||annualRate<0||annualRate>30||termYears<1||termYears>50)return null;

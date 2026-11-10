@@ -113,3 +113,31 @@ html.regressar-document{scroll-padding-top:90px;scroll-padding-bottom:30px}
 .rx-immediate-power{grid-column:1/-1;border-top:1px solid var(--rx-line);padding-top:25px;max-width:900px}.rx-immediate-power h3{font:400 30px/1.25 "Playfair Display Variable",Georgia,serif;margin:0 0 18px}.rx-immediate-power label{display:flex;align-items:center;gap:16px;font-size:12px}.rx-immediate-power select{min-height:44px;border:0;border-bottom:1px solid var(--rx-line);background:transparent;padding:8px;color:var(--rx-ink)}.rx-immediate-power [data-r-power-preview]{margin:18px 0}.rx-immediate-power [data-r-power-preview] p{font-size:15px;line-height:1.8;margin:7px 0}.rx-immediate-power [data-r-power-preview] small{font-size:11px;color:var(--rx-muted)}
 
 .rx-ledger-wrap{padding-top:45px}.rx-ledger-wrap .rx-ledger{padding-top:8px}@media(max-width:760px){.rx-ledger-wrap{padding-top:0}}
+/* Prompt 81: tastes with their weights, the ranked list with its reasons, and a card for a place without a photograph. */
+.rx-more-tastes{margin:-20px 0 30px}
+.rx-weights{max-width:660px;margin:0 0 4px;border-top:1px solid var(--rx-line)}
+.rx-weight{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--rx-line);font-size:13px;line-height:1.4}
+.rx-weight>span{flex:1;min-width:0}
+.rx .rx-weight button{min-height:44px;padding:8px 14px;border:1px solid #bec9bd;border-radius:50px;background:transparent;color:var(--rx-ink);font-size:11px;white-space:nowrap;transition:background .2s ease,color .2s ease,border-color .2s ease}
+.rx .rx-weight button[aria-pressed=true]{background:var(--rx-ink);border-color:var(--rx-ink);color:#fff}
+.rx-weights-note{max-width:660px;margin:10px 0 26px!important}
+.rx-match-coverage{max-width:700px;margin-top:34px!important}
+.rx-results{list-style:none;max-width:860px;margin:14px 0 0;padding:0;border-top:1px solid var(--rx-line)}
+.rx-results>li{border-bottom:1px solid var(--rx-line)}
+.rx .rx-results button{display:grid;grid-template-columns:34px minmax(0,1fr) auto;align-items:start;gap:4px 14px;width:100%;min-height:64px;padding:18px 0;border:0;background:transparent;color:var(--rx-ink);text-align:left}
+.rx .rx-results button:hover .rx-res-name,.rx .rx-results button[aria-current=true] .rx-res-name{text-decoration:underline;text-decoration-color:#b08a54;text-underline-offset:6px;text-decoration-thickness:1px}
+.rx-res-rank{font:400 26px/1.15 "Playfair Display Variable",Georgia,serif;color:#b08a54;font-variant-numeric:tabular-nums}
+.rx-res-main{display:flex;flex-direction:column;gap:5px;min-width:0}
+.rx-res-name{font:400 26px/1.15 "Playfair Display Variable",Georgia,serif;letter-spacing:-.02em}
+.rx-res-meta{font-size:11px;line-height:1.5;color:var(--rx-muted)}
+.rx-res-why{font-size:13px;line-height:1.6;margin-top:3px}
+.rx-res-next,.rx-res-moved{font-size:11px;line-height:1.6;color:var(--rx-muted)}
+.rx-res-points{font-size:11px;line-height:2.4;color:var(--rx-muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+.rx .rx-more-results{min-height:46px;margin-top:16px;padding:11px 20px;border:1px solid #bec9bd;border-radius:50px;background:transparent;color:var(--rx-ink);font-size:12px}
+.rx-how{margin-top:18px}.rx-how ul{margin:10px 0;padding-left:16px}.rx-how li{margin:5px 0}
+.rx-city-points{color:var(--rx-ink)!important;font-weight:600}
+.rx-city-evidence{padding-left:17px}.rx-city-evidence li{margin:3px 0}
+.rx-city[data-nophoto]{grid-template-columns:1fr;border-top:1px solid #b08a54}
+.rx-city[data-nophoto] .rx-city-photo{display:none}
+.rx-city[data-nophoto] .rx-city-copy{max-width:760px;padding-top:48px}
+@media(max-width:760px){.rx-more-tastes{margin:-14px 0 24px}.rx-weight{flex-wrap:wrap}.rx-weight>span{flex-basis:100%;font-weight:600}.rx .rx-weight button{flex:1}.rx .rx-results button{grid-template-columns:26px minmax(0,1fr);padding:16px 0}.rx-res-rank,.rx-res-name{font-size:23px}.rx-res-points{grid-column:2;line-height:1.5}.rx-city[data-nophoto] .rx-city-copy{padding-top:32px}}
