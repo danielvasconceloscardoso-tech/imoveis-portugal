@@ -353,18 +353,36 @@ for (const edition of editions) {
     await expect(sheet).toBeHidden();
   });
 
-  test(`${edition.name}: place questions expand by keyboard and sources return to the card`, async ({ page }) => {
+  // Prompt 81: the card's questions gave way to the seven service lines. Each line is a button: Enter and Space open
+  // and close its one sentence, one line open at a time. "Fontes" and the way back are as before.
+  test(`${edition.name}: service lines open and close by keyboard and sources return to the card`, async ({ page }) => {
     test.setTimeout(65000);
     await openMap(page, edition.path, '?place=gondomar&dim=2d');
     const sheet = page.locator('[data-sheet]');
-    const question = sheet.locator('[data-q="life"] .m3-qb');
-    await question.focus();
+    await expect(sheet.locator('[data-sv]')).toHaveCount(7);
+    const line = sheet.locator('[data-sv="air"]'), button = line.locator('.m3-svb'), detail = line.locator('.m3-svd');
+    await expect(button).toHaveAttribute('aria-expanded', 'false');
+    await expect(detail).toHaveAttribute('inert', '');
+    await button.focus();
     await page.keyboard.press('Enter');
-    await expect(question).toHaveAttribute('aria-expanded', 'true');
-    await expect(sheet.locator('[data-q="life"] .m3-qp')).not.toHaveAttribute('inert', '');
-    await expect(sheet.locator('[data-q="life"] .m3-qi')).toContainText('Porto');
+    await expect(button).toHaveAttribute('aria-expanded', 'true');
+    await expect(detail).not.toHaveAttribute('inert', '');
+    await expect(detail).toContainText('Porto');
+    await expect(detail).toContainText(/\d+ min/);
+    await expect(detail).toBeInViewport();
     await page.keyboard.press('Enter');
-    await expect(question).toHaveAttribute('aria-expanded', 'false');
+    await expect(button).toHaveAttribute('aria-expanded', 'false');
+    await expect(detail).toHaveAttribute('inert', '');
+    await page.keyboard.press('Space');
+    await expect(button).toHaveAttribute('aria-expanded', 'true');
+    // One line open at a time: the next one opened closes this one.
+    const other = sheet.locator('[data-sv="er"] .m3-svb');
+    await other.focus();
+    await page.keyboard.press('Space');
+    await expect(other).toHaveAttribute('aria-expanded', 'true');
+    await expect(sheet.locator('[data-sv="er"] .m3-svd')).toContainText(/Hospital/);
+    await expect(button).toHaveAttribute('aria-expanded', 'false');
+    await expect(sheet.locator('[data-sv] .m3-svb[aria-expanded="true"]')).toHaveCount(1);
     await sheet.locator('[data-sources]').click();
     await expect(sheet.locator('.m3-srcl')).toContainText('INE');
     await expect(sheet.locator('[data-back]')).toBeVisible();
@@ -378,11 +396,14 @@ for (const edition of editions) {
     test.setTimeout(65000);
     await openMap(page, edition.path, '?place=cascais&dim=2d');
     const sheet = page.locator('[data-sheet]');
-    const costs = sheet.locator('[data-place-detail="costs"]');
-    await costs.locator('summary').focus();
+    // Prompt 81: every place has the new card. Its purchase-cost line (IMT at the reader's budget) stands open under
+    // the price, no longer inside a folded "costs" block; the keyboard reaches it directly.
+    await expect(sheet.locator('[data-place-detail]')).toHaveCount(0);
+    const costs = sheet.locator('[data-imt]');
+    await expect(costs).toContainText(/IMT/);
+    await expect(costs).toContainText(/\d/);
+    await costs.focus();
     await page.keyboard.press('Enter');
-    await expect(costs).toHaveAttribute('open', '');
-    await costs.locator('[data-imt]').click();
     const imt = page.locator('[data-imt-sheet]');
     await expect(imt).toBeVisible();
     const initialTax = await imt.locator('[data-imt-o="nr"]').textContent();
