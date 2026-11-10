@@ -20,9 +20,14 @@ Unknown stays unknown: a null in the summary is left out of the block, never wri
 """
 import csv, json, os, re, unicodedata
 
-ROLLOUT = ["gondomar"]
+ROLLOUT = None
 HAND_FIRST = True
+# The lines the override may replace. Not "er": the hand-checked health.csv files list every public hospital near a place
+# and do not say which has an emergency department (Coimbra's nearest is a maternity, Valongo's and Vila do Conde's have
+# none), so the emergency line always comes from the table's list of general public hospitals with one.
+HAND_LINES = ("cs", "isch", "beach", "air")
 FOOD = "mich"
+CS_GAP = 8  # minutes: see block()
 FAR = 45  # minutes: past this the sea gives way to a nearer river or lake beach (the card writer's rule, copy.md §9.5)
 
 _cache = {}
@@ -117,6 +122,10 @@ def block(root, slug, force=False):
     eea = re.search(r"EEA bathing-water status (\d{4})", (T["summary"].get("layers", {}).get("beach") or {}).get("source", ""))
     if eea: sv["eea"] = eea.group(1)  # the season of the beach categories, for the source line
     er, cs = _near(s.get("er")), _near(s.get("cs"))
+    # Every seat town has a public health centre. A "nearest" one CS_GAP minutes or more from the town hall is the next
+    # municipality's (Melgaço got Monção's, Oleiros got Sertã's): the seat's own is missing from OpenStreetMap. A gap
+    # stays a gap: the line then reads "no figure yet" (20 places on 10 Nov 2026).
+    if cs and cs.get("min") is not None and cs["min"] >= CS_GAP: cs = None
     isch = _near(s.get("isch"), cur=(s.get("isch") or {}).get("cur"))
     b = s.get("beach") or {}
     beach = _near(b, cat=b.get("cat"), flag=b.get("flag"))
@@ -148,6 +157,7 @@ def block(root, slug, force=False):
     hand, meta = _hand(root, slug)
     if HAND_FIRST and hand:
         for key, h in hand.items():
+            if key not in HAND_LINES: continue
             old = sv.get(key) or {}
             keep = {k: v for k, v in old.items() if k not in ("min", "n")} if (key == "air" or _same(h["n"], old.get("n", ""))) else {}
             sv[key] = {**keep, **h, "h": 1}
