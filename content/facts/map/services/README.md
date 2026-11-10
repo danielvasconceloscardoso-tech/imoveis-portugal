@@ -9,9 +9,9 @@ Built 10 Nov 2026 for all 308 municipalities: health, schools, beach, airport, l
 | `origins.csv` | One origin per municipality: the town hall (295) or, where OpenStreetMap maps no town hall, the centre of the seat town (13, `point_kind = town centre`). The 21 places that already have a hand-checked card use that card's origin. |
 | `facilities/<layer>.csv` | One row per facility: id, layer, kind, name, lat, lon, municipality (slug), attributes, source, source URL, licence, date checked. |
 | `facilities/counts_by_municipality.csv` | 2021 census population, 2022 official area, and the OpenStreetMap restaurant and pharmacy counts inside each boundary. |
-| `access/<layer>.csv` | slug, kind, facility id, minutes, km: the nearest few facilities of each kind and every one inside the counted radius (20 353 rows). |
+| `access/<layer>.csv` | slug, kind, facility id, minutes, km: the nearest few facilities of each kind and every one inside the counted radius (20 378 rows). |
 | `summary.json` | The contract read by the ranking engine. Field names are fixed in the prompt 81 brief; optional additions are listed below. |
-| `inputs/` | The small source lists the build reads, so it can be rebuilt without fetching them again. |
+| `inputs/` | The small source lists the build reads, so it can be rebuilt without fetching them again. Golf: `golf_supplement.csv` (the courses outside the five regions of the map's golf list: name, municipality, holes, point and its OpenStreetMap object, source page, what confirmed it as open, licence, date) and `golf_not_used.csv` (rows of the map's golf list left out of this layer, with the reason). |
 
 ## Method
 
@@ -37,7 +37,7 @@ Built 10 Nov 2026 for all 308 municipalities: health, schools, beach, airport, l
 | Airport (`air`) | `air` 14, `airfield_not_counted` 6 | OpenStreetMap aerodromes with an IATA code; the point is the passenger terminal | ODbL | 2026-11-10 | 308 | Counted: LIS, OPO, FAO, FNC, PXO, PDL, TER, HOR, PIX, SMA, SJZ, GRW, FLW, CVU. The choice of airports was not checked against a timetable in this pass. Not counted: Beja and the regional airfields of Bragança, Vila Real, Viseu, Cascais and Portimão. |
 | Long-distance train (`rail`) | `rail` 77 | OpenStreetMap route relations of CP Alfa Pendular, Intercidades and the Porto–Vigo international train: the stations where they stop | ODbL | 2026-11-10 | 278 | A station with one long-distance train a day counts like Lisboa-Oriente. No railway on the islands: null. |
 | Food (`food.mich_n30`, `mich_star_n30`, `mkt_n20`, `rest_n`, `rest_per_1k`) | `mich` 201, `mkt` 418; restaurants counted, not listed (19 118) | MICHELIN Guide, Portugal selection as listed on 2026-11-10 (5 listing pages); OpenStreetMap marketplaces named Mercado; OpenStreetMap `amenity=restaurant` inside the boundary over the 2021 census population | facts; ODbL; CC BY 4.0 | 2026-11-10 | 308 | The Michelin count matches the 201 the guide states (9 two-star, 44 one-star, 25 Bib Gourmand, 123 selected). Restaurant density follows how well OpenStreetMap is mapped: Porto 4.0 per 1 000, Gondomar 0.4. A description of what is listed and mapped, not of quality. |
-| Golf (`golf`, `golf_n30`) | `golf` 78 | `content/facts/golf/courses.csv` (prompt 33), open courses | facts; points ODbL | 2026-10-28 | 289 | Islands without a course: null. |
+| Golf (`golf`, `golf_n30`) | `golf` 88 | `content/facts/golf/courses.csv` (prompt 33: five regions, open courses, checked 2026-10-28), less 2 whose point there is a stand-in (`inputs/golf_not_used.csv`), plus `inputs/golf_supplement.csv`: 12 courses in the rest of the country (Viseu 1, Óbidos 4, Torres Vedras 1, Benavente 3, São Miguel 2, Terceira 1), each on the national list of golf courses of the Federação Portuguesa de Golfe (portal.fpg.pt/campos/listagem-campos-nacionais-golfe/) and, where it answers a plain request, on the course's own page | facts; points ODbL | 2026-11-10 | 297 | Islands with no course: null (Santa Maria, Graciosa, São Jorge, Pico, Faial, Flores, Corvo: 11 places). Pitch-and-putt layouts and driving ranges are not counted. Not in the layer, with the reason, in `ops/research/81_map/data.md` (addendum of 10 Nov): courses the federation lists that OpenStreetMap does not map, and small courses that no public page confirmed as open. |
 | Culture (`museum`, `cult_n20`) | `museum` 1 229, `theatre` 381 | OpenStreetMap `tourism=museum` and `amenity=theatre`, named | ODbL | 2026-11-10 | 307 | OpenStreetMap's own idea of a museum: small visitor centres count like national museums. Corvo: none mapped. |
 | Population and area (`pop`, `area_km2`) | | INE 0011609 (Census 2021) and INE 0008350 (area, Direção-Geral do Território, 2022), one file each | CC BY 4.0 | 2026-11-10 | 308 | |
 
@@ -57,5 +57,7 @@ From the repo root, with a scratch folder outside the repo (3 GB free, 6 GB of m
 4. `python3 scripts/map-data/services.py facilities --scratch SCRATCH`
 5. `LD_LIBRARY_PATH=SCRATCH/tools/tbb/tbb-2022.1.0.data/data/lib node scripts/map-data/services/route.cjs SCRATCH` (40 seconds)
 6. `python3 scripts/map-data/services.py summary --scratch SCRATCH`
+
+Golf alone, after a change to `inputs/golf_supplement.csv` or `inputs/golf_not_used.csv`: `python3 scripts/map-data/services.py golf --scratch SCRATCH`, then step 5 with `golf` as a last argument, then step 6. Every other layer keeps its routes (10 Nov 2026: every other key of `summary.json` came out identical).
 
 Before that, refresh `inputs/`: the Blue Flag list of the year, the Michelin selection, the EEA season, and the hospital and school lists. Change `CHECKED` and `OSM_SRC` at the top of services.py. Then delete the scratch folder.

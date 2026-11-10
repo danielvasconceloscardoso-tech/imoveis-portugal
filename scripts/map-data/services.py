@@ -7,6 +7,8 @@ Steps (repo root; SCRATCH is a folder outside the repo with about 3 GB free, see
   4. python3 scripts/map-data/services.py facilities --scratch SCRATCH    origins.csv, facilities/*.csv, SCRATCH/work/route_in.json
   5. LD_LIBRARY_PATH=SCRATCH/tools/tbb/tbb-2022.1.0.data/data/lib node scripts/map-data/services/route.cjs SCRATCH
   6. python3 scripts/map-data/services.py summary --scratch SCRATCH [--only slug,slug]    access/*.csv, summary.json
+Golf alone (after a change to inputs/golf_supplement.csv or golf_not_used.csv): "services.py golf --scratch SCRATCH", then step 5 with "golf" as a
+last argument, then step 6. Every other layer keeps its routes.
 
 Inputs kept in the repo (content/facts/map/services/inputs/, each with its source in the README): the hospital lists, the
 international-school list, the Blue Flag 2026 list, the Michelin Guide selection, the EEA bathing-water categories, the 2021 census.
@@ -100,6 +102,38 @@ def osm_row(p, layer, kind, attrs=""):
     t = p["tags"]; typ = {"n": "node", "w": "way", "r": "relation"}[p["t"]]
     return {"id": f"{kind}-{p['t']}{p['id']}", "layer": layer, "kind": kind, "name": (t.get("name") or "").strip(), "lat": p["lat"], "lon": p["lon"], "attributes": attrs, "source": OSM_SRC,
             "source_url": f"https://www.openstreetmap.org/{typ}/{p['id']}", "licence": ODBL, "checked_on": CHECKED, "_t": p["t"], "_tags": t}
+
+# ---------------------------------------------------------------- golf: one list for the whole country
+# content/facts/golf/courses.csv (prompt 33) was made for five regions and belongs to the map's golf mode: it is read, never edited.
+# inputs/golf_not_used.csv names the rows of it that this layer leaves out (their point there is a stand-in, not the course).
+# inputs/golf_supplement.csv adds the courses of the rest of the country: on the FPG national list of golf courses, with a point from OpenStreetMap.
+def golf_rows():
+    skip = {r["name"] for r in rd(os.path.join(INP, "golf_not_used.csv"))}
+    rows = []
+    for c in rd(os.path.join(ROOT, "content", "facts", "golf", "courses.csv")):
+        if c["status"] != "open" or not c["latitude"] or c["name"] in skip: continue
+        rows.append({"id": "golf-" + slugify(c["name"]), "layer": "golf", "kind": "golf", "name": c["name"], "lat": float(c["latitude"]), "lon": float(c["longitude"]), "attributes": f"holes={c['holes']}" + (f"; resort={c['resort']}" if c["resort"] else ""),
+                     "source": "content/facts/golf/courses.csv (prompt 33: Visit Portugal course pages; point: OpenStreetMap)", "source_url": c["source_url"], "licence": "facts; point: " + ODBL, "checked_on": c["date_checked"]})
+    for c in rd(os.path.join(INP, "golf_supplement.csv")):
+        rows.append({"id": "golf-" + slugify(c["name"]), "layer": "golf", "kind": "golf", "name": c["name"], "lat": float(c["latitude"]), "lon": float(c["longitude"]), "attributes": f"holes={c['holes']}" + (f"; resort={c['resort']}" if c["resort"] else ""),
+                     "source": "inputs/golf_supplement.csv (FPG national list of golf courses and the course's own page; point: " + c["point"] + ")", "source_url": c["source_url"], "licence": c["licence"], "checked_on": c["date_checked"], "_muni": c["municipality"]})
+    return rows
+
+def golf():
+    """Only the golf layer: facilities/golf.csv, and the golf entries of SCRATCH/work/route_in.json and facilities_report.json. Every other layer stays as built.
+    Then: node scripts/map-data/services/route.cjs SCRATCH golf, and the summary step."""
+    muni_of = load_boundaries(); seen, out = set(), []
+    for x in golf_rows():
+        x["municipality"] = muni_of(x["lat"], x["lon"])
+        assert x["municipality"] and x.get("_muni", x["municipality"]) == x["municipality"], (x["name"], x["municipality"])
+        while x["id"] in seen: x["id"] += "-b"
+        seen.add(x["id"]); out.append(x)
+    with open(os.path.join(SV, "facilities", "golf.csv"), "w", encoding="utf8", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=COLS, extrasaction="ignore"); w.writeheader(); w.writerows(sorted(out, key=lambda x: (x["kind"], x["municipality"], x["name"])))
+    pi, pr = os.path.join(SCRATCH, "work", "route_in.json"), os.path.join(SCRATCH, "work", "facilities_report.json")
+    ri = json.load(open(pi)); ri["layers"]["golf"] = [{"id": x["id"], "lat": x["lat"], "lon": x["lon"]} for x in out]; json.dump(ri, open(pi, "w"))
+    rep = json.load(open(pr, encoding="utf8")); rep["counts"]["golf"] = len(out); json.dump(rep, open(pr, "w", encoding="utf8"), ensure_ascii=False, indent=1)
+    print("golf:", len(out), "courses in", len({x["municipality"] for x in out}), "municipalities")
 
 # ================================================================= step: facilities
 def facilities():
@@ -355,11 +389,8 @@ def facilities():
     L["food"] += dedupe(mk, 150, same_name=False)
     rest = dedupe([{**osm_row(p, "food", "rest"), "name": T(p).get("name") or "?"} for p in P if T(p).get("amenity") == "restaurant"], 25, same_name=True)
 
-    # ---- golf: the repo's golf data (prompt 33, content/facts/golf/courses.csv), open courses
-    for i, c in enumerate(rd(os.path.join(ROOT, "content", "facts", "golf", "courses.csv"))):
-        if c["status"] != "open" or not c["latitude"]: continue
-        L["golf"].append({"id": "golf-" + slugify(c["name"]), "layer": "golf", "kind": "golf", "name": c["name"], "lat": float(c["latitude"]), "lon": float(c["longitude"]), "attributes": f"holes={c['holes']}" + (f"; resort={c['resort']}" if c["resort"] else ""),
-                          "source": "content/facts/golf/courses.csv (prompt 33: Visit Portugal course pages; point: OpenStreetMap)", "source_url": c["source_url"], "licence": "facts; point: " + ODBL, "checked_on": c["date_checked"]})
+    # ---- golf: the map's golf list (five regions) less the rows on a stand-in point, plus the national supplement
+    L["golf"] = golf_rows()
 
     # ---- culture
     mu = [osm_row(p, "culture", "museum", "tourism=museum") for p in P if T(p).get("tourism") == "museum" and T(p).get("name")]
@@ -464,6 +495,8 @@ def summary():
     cov = lambda f: sum(1 for p in places.values() if p and f(p) is not None)
     isl = "Islands: no road route crosses the sea (the routing has no ferries), so a place on an island with none of these gets null."
     rep = json.load(open(os.path.join(SCRATCH, "work", "facilities_report.json"), encoding="utf8"))["counts"]
+    g_sup, g_out = rd(os.path.join(INP, "golf_supplement.csv")), rd(os.path.join(INP, "golf_not_used.csv"))
+    g_none = sorted({p["island"] for p in places.values() if p and p["golf"] is None and p.get("island")})
     layers = {
         "pop": {"source": "INE, Census 2021, indicator 0011609 (resident population)", "licence": "CC BY 4.0", "year": 2021, "covered": cov(lambda p: p["pop"]), "note": "Census day, 19 April 2021."},
         "area": {"source": "INE indicator 0008350, area of the territorial units (km²), from the Direção-Geral do Território (CAOP)", "licence": "CC BY 4.0", "year": 2022, "covered": cov(lambda p: p["area_km2"]), "note": "Field area_km2. Official area of the municipality."},
@@ -484,7 +517,10 @@ def summary():
         "rail": {"source": OSM_SRC + ": stations where the route relations of CP Alfa Pendular, Intercidades and the Porto–Vigo international train stop", "licence": ODBL, "covered": cov(lambda p: p["rail"]), "note": f"{rep.get('rail')} stations. No railway on the islands: null."},
         "food": {"source": "MICHELIN Guide Portugal selection as listed on 2026-11-10 (mich_n30, mich_star_n30); OSM marketplaces named Mercado (mkt_n20); OSM amenity=restaurant in the municipality (rest_n) over the 2021 census population (rest_per_1k)", "licence": "facts; ODbL; CC BY 4.0",
                  "covered": cov(lambda p: p["food"]["rest_n"]), "note": f"{rep.get('mich')} Michelin-listed restaurants, {rep.get('mkt')} markets, {rep.get('rest')} restaurants in OSM. Counts describe what is listed and mapped, not quality. OSM restaurant mapping is uneven between municipalities."},
-        "golf": {"source": "The map's golf data (prompt 33): open courses", "licence": "facts; points ODbL", "covered": cov(lambda p: p["golf"]), "note": f"{rep.get('golf')} courses. golf_n30 = within 30 minutes. " + isl},
+        "golf": {"source": f"content/facts/golf/courses.csv (prompt 33: five regions, open courses, checked 2026-10-28) less {len(g_out)} on a stand-in point (inputs/golf_not_used.csv), plus inputs/golf_supplement.csv: {len(g_sup)} courses in the rest of the country "
+                           "from the FPG national list of golf courses (portal.fpg.pt) and the courses' own pages, checked " + max(c["date_checked"] for c in g_sup) + "; points from OpenStreetMap", "licence": "facts; points ODbL", "covered": cov(lambda p: p["golf"]),
+                 "note": f"{rep.get('golf')} courses open to play on the mainland, Madeira and the Azores. Pitch-and-putt layouts and driving ranges are not counted. golf_n30 = within 30 minutes. "
+                         "Islands with no course: null (" + ", ".join(g_none) + "); no road route crosses the sea."},
         "museum": {"source": OSM_SRC + ": tourism=museum and amenity=theatre, named", "licence": ODBL, "covered": cov(lambda p: p["museum"]), "note": f"{rep.get('museum')} museums and {rep.get('theatre')} theatres. cult_n20 = both within 20 minutes."},
     }
     out = {"v": 1, "checked": CHECKED, "routing": {"engine": "OSRM 26.4.0 run locally (MLD, table service)", "data": OSM_SRC, "profile": "car, no traffic", "ferries": "none: a drive time never includes a boat",
@@ -496,4 +532,4 @@ def summary():
     print("origins more than 150 m from a road:", {s: d for s, d in R["er"]["_osnap"].items() if d > 150})
 
 if __name__ == "__main__":
-    {"facilities": facilities, "summary": summary}[sys.argv[1]]()
+    {"facilities": facilities, "golf": golf, "summary": summary}[sys.argv[1]]()

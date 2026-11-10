@@ -131,3 +131,59 @@ Other network notes: the EEA's public data service answered the data query and r
 - No check of the 14 airports against a timetable.
 - No frequency for trains, no opening hours, no quality rating of any kind.
 - The 30 random rows against their sources are QA's (agent 6).
+
+## 9. Addendum, 10 Nov 2026: the golf layer made national
+
+**Why.** The golf layer was built from `content/facts/golf/courses.csv`, a list made for five regions (Algarve, Comporta and Tróia, Lisbon and Setúbal, Madeira, the North). Óbidos read 52 minutes to a course, Viseu 82, Ponta Delgada no data, and Fafe "0 min" because its course sat on the town centre. This addendum replaces the golf row of section 2 and the "82 places" of the sentence under it.
+
+**Reference.** The national list of golf courses of the Federação Portuguesa de Golfe (portal.fpg.pt/campos/listagem-campos-nacionais-golfe/; 81 clubs, 108 loops on 10 Nov 2026). The page shows the list in a frame served by the federation's scoring provider (scoring-pt.datagolf.pt); the frame was read with one plain request, and so was the federation's separate pitch-and-putt list. Visit Portugal was not used: its pages sit behind a bot check. Each course added was also opened on its own page where that page answers a plain request (Praia D'El Rey's does not: the federation's list is its source; Ribagolfe has no site of its own that could be found: the federation's list, and Turismo de Lisboa for the holes).
+
+**Candidates.** Every `leisure=golf_course` object of the OpenStreetMap extract of 9 Nov (127), and every cluster of `golf=*` features, more than 1 km from a listed course: 41 objects.
+
+**Added: 12 courses** (`content/facts/map/services/inputs/golf_supplement.csv`), points from OpenStreetMap (the clubhouse or reception where it is mapped, else the centroid of the course outline):
+
+| Region | Courses | Municipality |
+|---|---|---|
+| Centro | Montebelo Golfe (27 holes) | Viseu |
+| Oeste | Praia D'El Rey, West Cliffs, Royal Óbidos, Guardian Bom Sucesso | Óbidos |
+| Oeste | CampoReal | Torres Vedras |
+| Ribatejo | Santo Estêvão Golfe, Ribagolfe Lakes, Ribagolfe Oaks (one point for the two) | Benavente |
+| Azores, São Miguel | Batalha (27 holes), Furnas | Ribeira Grande, Povoação |
+| Azores, Terceira | Campo de Golfe da Ilha Terceira | Vila da Praia da Vitória |
+
+**Taken out of this layer: 2 of the 78** (`inputs/golf_not_used.csv`; both stay in the map's golf list, which was not touched):
+
+- Campo de Golfe de Rilhadas (Fafe): its point was the centre of Fafe. OpenStreetMap maps 12 greens at 41.4269 N, 8.2123 W, 4.4 km away, without a course outline or a name. It could not be confirmed as open in 2026: it is not on the federation's list, the club's domain did not answer, Visit Portugal is behind the bot check. To put back with the greens' point once a public page confirms it.
+- Torre Course (Terras da Comporta, Alcácer do Sal): open (on the federation's list), but its point was the hamlet of Torre and OpenStreetMap maps nothing of the course. The cost: Alcácer do Sal now reads 48 minutes (Montado) where the stand-in gave 37; Grândola 27 (Dunas) where it gave 26.
+
+Two other points of the 78 are not course outlines and were kept, because each is on the estate itself and not a town: Dunas Course (the outline of the Comporta Dunes estate) and Ombria (the resort hotel beside the course). The other 74 lie within 1 km of an OpenStreetMap golf outline.
+
+**Left out: 30 of the 41 candidate objects (11 hold the 12 courses added), and 5 listed courses without a point:**
+
+- On the federation's list, no object in OpenStreetMap, so no point (5): Guardizela Golf Club (Guimarães), Campo de Golfe do Aqueduto (Paredes), Quinta dos Reis Olives Golf Course (Beja), THE ONE Hills Lisbon City Golf (Lisboa, not located), Ferragudo Golf Course (Lagoa; two unnamed outlines at Parchal may be it, not confirmed). The first four are also on the federation's pitch-and-putt list.
+- Pitch-and-putt (3): Campo de Golfe de Cantanhede (on the federation's golf list and on its pitch-and-putt list; the 9 holes OpenStreetMap maps measure 49 to 92 m), Quinta das Lágrimas (Coimbra), Academia de Golf de Lisboa.
+- Not confirmed as open on a named public page, not on the federation's list (5): Campo de Golfe da Curia (Anadia, 9 holes), Vimeiro Golf Club (Torres Vedras, 9 holes), Botado (Peniche, 9 holes; the hotel's site is behind a bot check), Clube de Golfe do Faial (Horta), Ammaia Clube de Golfe (Marvão; OpenStreetMap says closed).
+- Closed (1): Golden Eagle (Rio Maior): its own site speaks of the course in the past tense and of a new project.
+- Driving ranges, practice greens, miniature golf (7): Braga, the Universidade do Minho range, Quinta de Santo António do Freixo (Leiria), Algarve Golf Academy, Vila Monte, a hotel putting green on Madeira, a miniature golf at Condeixa.
+- Unnamed outlines, not identified (12): Ponte de Lima, Paços de Ferreira, Batalha, two at Belas, north of Loulé, Alvor, Parchal, Porches, Lagos, Funchal; and "Private Golf Course" near Cabanas de Tavira.
+- In Spain (2; and one cluster of holes without an outline, Golf Guadiana at Badajoz): the two Isla Canela courses.
+
+The rule for short courses is the one the 78 already follow: a short course that its source lists as a course stays (City Golf, Quinta do Fojo, Quinta da Barca, Balaia are in the 78); a layout that is pitch-and-putt only, a range or a hotel practice green is not a course.
+
+**Routes.** Only the golf layer was routed again, on the same local graph (88 courses, 308 origins): `services.py golf`, `route.cjs <scratch> golf`, `services.py summary`. Before any change the summary step was run on the untouched inputs and gave the committed files byte for byte. After: in `summary.json` only `golf`, `golf_n30` and `layers.golf` differ (160 places have another nearest course or time, 32 another count); every other key of every place and layer is identical. In `match.json` only the columns `golf_min`, `golf_n30`, `golf_name`, the golf coverage and the golf source line differ.
+
+**Coverage.** `golf`: 297 of 308 (289 before). Null: the 11 places on Santa Maria, Graciosa, São Jorge, Pico, Faial, Flores and Corvo, islands with no course. 98 places have a course within 30 minutes (82 before).
+
+| Place | Before | After |
+|---|---|---|
+| Óbidos | 52 min, 0 within 30 | 17 min (Guardian Bom Sucesso), 4 within 30 |
+| Viseu | 82 min, 0 | 21 min (Montebelo), 1 |
+| Pombal | 98 min, 0 | 83 min (Guardian Bom Sucesso), 0 |
+| Ponta Delgada | no data | 17 min (Batalha), 1 |
+| Angra do Heroísmo | no data | 15 min (Ilha Terceira), 1 |
+| Torres Vedras | 34 min, 0 | 15 min (CampoReal), 1 |
+| Benavente | 42 min, 0 | 23 min (Ribagolfe), 3 |
+| Fafe | "0 min" (stand-in), 1 | 34 min (Amarante), 0 |
+| Loulé, Cascais, Lagos, Funchal | 13, 6, 7, 11 min; 17, 10, 9, 2 | unchanged |
+
+**Still odd, and why.** Pombal, Leiria (57) and Coimbra (68) are far from a course in this list: the 9-hole course at Curia would bring Coimbra and Pombal closer if it is confirmed open. Guimarães reads 39 minutes (17 before, to the stand-in at Fafe): Rilhadas and Guardizela are the two courses near it and neither is in the layer. Alcácer do Sal reads 48 minutes with a course inside the municipality (Torre) that has no mapped point.
