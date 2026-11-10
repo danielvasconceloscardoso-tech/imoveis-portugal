@@ -355,15 +355,32 @@ test('every result explains itself: two or three reasons in numbers, and the tra
   const o = matchPlaces({ netMonthly: 9000, places: FIX.places, tastes: [...must('isch'), ...nice('beach')] });
   assert.deepEqual(ids(o).slice(0, 6), ['matosinhos', 'oeiras', 'cascais', 'porto', 'almada', 'lisboa']);
   // Three places tie on 4 of 4 points: the lower monthly cost comes first, and the line says so.
-  assert.equal(formatTradeoff(o.matches[0].tradeoff, 'en'), 'Next, Oeiras: worse on cost, €261 a month more.');
-  assert.equal(formatTradeoff(o.matches[2].tradeoff, 'en'), 'Next, Porto: better on cost, €188 a month less; worse on beach 12 min (here 6).');
+  assert.equal(formatTradeoff(o.matches[0].tradeoff, 'en'), 'Next, Oeiras: €261 a month more.');
+  assert.equal(formatTradeoff(o.matches[2].tradeoff, 'en'), 'Next, Porto: €188 a month less; farther from the beach, 12 min against 6 here.');
   const almada = o.matches[4];
   assert.equal(formatReasons(almada, 'en'), 'International school 14 min · beach 9 min · €2,053 a month under your budget');
-  assert.equal(formatTradeoff(almada.tradeoff, 'en'), 'Next, Lisboa: better on international school 9 min (here 14); worse on beach 21 min (here 9).');
-  assert.equal(formatTradeoff(almada.tradeoff, 'pt'), 'A seguir, Lisboa: melhor em escola internacional a 9 min (aqui 14); pior em praia a 21 min (aqui 9).');
-  assert.equal(formatTradeoff(almada.tradeoff, 'fr'), 'Ensuite, Lisboa : mieux pour école internationale à 9 min (ici 14); moins bien pour plage à 21 min (ici 9).');
+  assert.equal(formatTradeoff(almada.tradeoff, 'en'), 'Next, Lisboa: closer to an international school, 9 min against 14 here; farther from the beach, 21 min against 9 here.');
+  assert.equal(formatTradeoff(almada.tradeoff, 'pt'), 'A seguir, Lisboa: mais perto de uma escola internacional, 9 min contra 14 aqui; mais longe da praia, 21 min contra 9 aqui.');
+  assert.equal(formatTradeoff(almada.tradeoff, 'fr'), 'Ensuite, Lisboa : plus près d’une école internationale, 9 min contre 14 ici ; plus loin de la plage, 21 min contre 9 ici.');
   assert.equal(formatTradeoff(o.matches.at(-1).tradeoff, 'en'), '');
   assert.equal(measurePhrase('isch_n30', 1, 'en'), '1 international school within 30 min');
+  // Polish (lead, 10 Nov): plain comparisons, whole residents per km², the tie line and the card's taste line in words.
+  const side = (key, next, here, good = false) => formatTradeoff({ nextId: 'x', nextName: 'X', better: good ? { kind: 'taste', taste: 'quiet', key, next, here } : null, worse: good ? null : { kind: 'taste', taste: 'quiet', key, next, here } }, 'en');
+  assert.equal(side('dens', 73.3, 55.5), 'Next, X: busier, 73 residents per km² against 56 here.');
+  assert.equal(side('dens', 55.5, 73.3, true), 'Next, X: quieter, 56 residents per km² against 73 here.');
+  assert.equal(side('mich_n30', 7, 11), 'Next, X: fewer Michelin-listed restaurants within 30 min, 7 against 11 here.');
+  assert.equal(side('golf_n30', 16, 4, true), 'Next, X: more golf courses within 30 min, 16 against 4 here.');
+  assert.equal(measurePhrase('dens', 55.5, 'en'), '56 residents per km²');
+  for (const lang of ['pt', 'en', 'fr']) for (const m of o.matches) assert.doesNotMatch(formatTradeoff(m.tradeoff, lang), /better on|worse on|melhor em|pior em|mieux pour|moins bien pour/);
+  assert.equal(copy.formatTie(o.matches.slice(0, 5), 'en'), 'Some of these places tie on points; the lower monthly cost comes first.');
+  assert.equal(copy.formatTie(o.matches.slice(3, 6), 'en'), '');                                    // 3.94, 3.76, 3.69: no tie between neighbours
+  assert.equal(copy.formatTie(matchPlaces({ netMonthly: 9000, places: FIX.places }).matches.slice(0, 5), 'en'), '');   // no taste, no points to tie on
+  for (const lang of ['pt', 'fr']) assert.ok(copy.formatTie(o.matches.slice(0, 5), lang).length > 20);
+  const gaia = o.matches.find(m => m.id === 'gondomar');
+  assert.equal(copy.formatTasteLine(gaia.tastes[0], 'en'), 'International school 12 min · 4 international schools within 30 min · score 0.96 of 1 · essential (×3)');
+  assert.equal(copy.formatTasteLine(gaia.tastes[1], 'pt'), 'Praia a 17 min · pontuação 0,80 de 1 · desejável (×1)');
+  assert.equal(copy.formatTasteLine(gaia.tastes[1], 'fr'), 'Plage à 17 min · score 0,80 sur 1 · souhaitable (×1)');
+  assert.equal(copy.formatTasteLine({ taste: 'quiet', importance: 'nice', weight: 1, score: null, parts: [] }, 'en'), 'Quiet: no data');
   for (const lang of ['pt', 'en', 'fr']) { const l = methodLines(lang); assert.equal(l.length, TASTES.length); for (const x of l) assert.match(x, /\d/); }
 });
 
