@@ -19,7 +19,7 @@ SV = os.path.join(ROOT, "content", "facts", "map", "services")
 INP = os.path.join(SV, "inputs")
 VA = os.path.join(ROOT, "content", "facts", "map", "tiles", "viver_aqui")
 CHECKED = "2026-11-10"
-OSM_SRC = "OpenStreetMap (Portugal extract of 2026-11-08, download.openstreetmap.fr)"
+OSM_SRC = "OpenStreetMap (Portugal extract of 2026-11-09, download.openstreetmap.fr)"
 ODBL = "ODbL 1.0, © OpenStreetMap contributors"
 arg = lambda k, d=None: sys.argv[sys.argv.index(k) + 1] if k in sys.argv else d
 SCRATCH = arg("--scratch")
@@ -46,7 +46,7 @@ ISLAND = {"vila-do-porto": "Santa Maria", "ponta-delgada": "São Miguel", "ribei
 # sede_points.csv holds, for Lisboa, the municipal services building at Campo Grande (OSM way/243539796, also named "Câmara Municipal de Lisboa").
 # The town hall is the Paços do Concelho at Praça do Município.
 ORIGIN_OVERRIDE = {"lisboa": (38.70819, -9.13861, "Câmara Municipal de Lisboa (Paços do Concelho, Praça do Município)",
-                              "OpenStreetMap way/95417254 (amenity=townhall, extract of 2026-11-08); replaces the Campo Grande services building held in sede_points.csv")}
+                              "OpenStreetMap way/95417254 (amenity=townhall, extract of 2026-11-09); replaces the Campo Grande services building held in sede_points.csv")}
 
 def load_boundaries():
     from shapely import wkb, STRtree
@@ -140,14 +140,14 @@ def facilities():
             ac = [a for a in SEATS["admin_centres"] if "lat" in a and muni_of(a["lat"], a["lon"]) == slug and plain(a.get("muni")) in (base, plain(r["muni_name"])) or ("lat" in a and plain(a.get("muni") or "") and base.endswith(plain(a["muni"])) and muni_of(a["lat"], a["lon"]) == slug)]
             if c:
                 p = c[0]; typ = {"n": "node", "w": "way", "r": "relation"}[p["t"]]
-                o = {"slug": slug, "name": r["muni_name"], "lat": round(p["lat"], 5), "lon": round(p["lon"], 5), "point_name": T(p)["name"], "point_kind": "town hall", "point_source": f"OpenStreetMap {typ}/{p['id']} (amenity=townhall inside the municipality's boundary, extract of 2026-11-08)"}
+                o = {"slug": slug, "name": r["muni_name"], "lat": round(p["lat"], 5), "lon": round(p["lon"], 5), "point_name": T(p)["name"], "point_kind": "town hall", "point_source": f"OpenStreetMap {typ}/{p['id']} (amenity=townhall inside the municipality's boundary, extract of 2026-11-09)"}
             elif c2:
                 p = sorted(c2, key=lambda h: h["t"] != "w")[0]; typ = {"n": "node", "w": "way"}[p["t"]]
-                o = {"slug": slug, "name": r["muni_name"], "lat": round(p["lat"], 5), "lon": round(p["lon"], 5), "point_name": p["tags"]["name"], "point_kind": "town hall", "point_source": f"OpenStreetMap {typ}/{p['id']} (named as the town hall, without the amenity=townhall tag; extract of 2026-11-08)"}
+                o = {"slug": slug, "name": r["muni_name"], "lat": round(p["lat"], 5), "lon": round(p["lon"], 5), "point_name": p["tags"]["name"], "point_kind": "town hall", "point_source": f"OpenStreetMap {typ}/{p['id']} (named as the town hall, without the amenity=townhall tag; extract of 2026-11-09)"}
             elif ac:
                 a = ac[0]
                 o = {"slug": slug, "name": r["muni_name"], "lat": round(a["lat"], 5), "lon": round(a["lon"], 5), "point_name": f"{a.get('name')} (centre of the seat town)", "point_kind": "town centre",
-                     "point_source": f"OpenStreetMap node/{a['id']} (admin_centre of the municipality's boundary relation {a['relation']}; no town hall is mapped in OSM; extract of 2026-11-08)"}
+                     "point_source": f"OpenStreetMap node/{a['id']} (admin_centre of the municipality's boundary relation {a['relation']}; no town hall is mapped in OSM; extract of 2026-11-09)"}
             else: report.setdefault("origins_missing", []).append(slug); continue
         o["inside_boundary"] = "yes" if muni_of(o["lat"], o["lon"]) == slug else "NO"
         o["island"] = island_of(slug)
