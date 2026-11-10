@@ -232,9 +232,10 @@ export function methodLines(lang: MatchLang, tastes: readonly Taste[] = TASTES):
     return `${TASTE_LABELS[lang][t]}${colon(lang)}${parts.join("; ")}.${t === "golf" ? ` ${GOLF_GAP[lang]}` : ""}`;
   });
 }
-/** Said wherever the golf rule is printed, until the course list is national (ops/research/81_map/qa.md, defect 3). */
+/** Said wherever the golf rule is printed: the courses on the federation's list that have no point on the map yet
+ * (ops/research/81_map/data.md section 9). */
 const GOLF_GAP: Record<MatchLang, string> = {
-  pt: "A nossa lista de campos cobre o Algarve, Lisboa, o Norte, o Alentejo e a Madeira; faltam ainda Óbidos, Viseu e os Açores.",
-  en: "Our list of courses covers the Algarve, Lisbon, the North, the Alentejo and Madeira; Óbidos, Viseu and the Azores are still missing.",
-  fr: "Notre liste de golfs couvre l’Algarve, Lisbonne, le Nord, l’Alentejo et Madère ; Óbidos, Viseu et les Açores manquent encore.",
+  pt: "Seis campos da lista da Federação Portuguesa de Golfe ainda não têm ponto no mapa e não contam: Guardizela (Guimarães), Aqueduto (Paredes), Quinta dos Reis (Beja), The One Hills (Lisboa), Ferragudo (Lagoa) e Torre (Comporta).",
+  en: "Six courses on the Portuguese Golf Federation's list have no point on the map yet and are not counted: Guardizela (Guimarães), Aqueduto (Paredes), Quinta dos Reis (Beja), The One Hills (Lisbon), Ferragudo (Lagoa) and Torre (Comporta).",
+  fr: "Six parcours de la liste de la Fédération portugaise de golf n’ont pas encore de point sur la carte et ne comptent pas : Guardizela (Guimarães), Aqueduto (Paredes), Quinta dos Reis (Beja), The One Hills (Lisbonne), Ferragudo (Lagoa) et Torre (Comporta).",
 };
