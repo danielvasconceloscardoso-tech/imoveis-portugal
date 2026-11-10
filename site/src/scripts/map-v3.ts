@@ -583,7 +583,10 @@ export function initMapV3(root: HTMLElement) {
   const labelsSoon = () => { if (labT) return; labT = requestAnimationFrame(() => { labT = 0; placeLabels(); }); };
   function placeLabels() {
     if (!map) return; const z = map.getZoom(), W = canvas.clientWidth, H = canvas.clientHeight;
-    const want = features.map((f) => f.properties as Props).filter((p) => p.s === selected || (BIG.includes(p.s) && z > (W < 700 ? 5.2 : 5.9)) || (z > 8.2 && p.a > 2) || z > 9.2);
+    const want = features.map((f) => f.properties as Props).filter((p) => p.s === selected || (BIG.includes(p.s) && z > (W < 700 ? 5.2 : 5.9)) || (z > 8.2 && p.a > 2) || z > 9.2
+      // Prompt 81: a place is named as soon as it is drawn wide enough to carry its name (and to be tapped by it), so the
+      // view a tap comes closer to is never a page of outlines without names.
+      || (premium && Math.sqrt(p.a * 1e-4) * ((512 * 2 ** z) / 360) >= 48));
     const placed: { x: number; y: number; w: number; h?: number }[] = []; let h = ""; const boxes: typeof labelBoxes = [];
     // Prompt 68: the visible photo pins (a 44 px photograph above its point, the short label to its right) are kept clear:
     // a name that would sit on one moves above or below it, or waits for a closer zoom.
@@ -1027,7 +1030,7 @@ export function initMapV3(root: HTMLElement) {
   };
   function cardHTML(slug: string, d: any, name: string, r: string, href: string, hs: Proj[], here: Proj[]): string {
     const lang = cfg.lang, c5 = d.c5, S = cfg.sv;
-    const line = placeStory(d, lang, [d.n3].filter((z: string) => z && z !== L.regions[r]).join(", "));
+    const line = placeStory(d, lang, "");  // the region and its sub-region are in the kicker: never repeated as the line
     const kick = [L.regions[r], d.n3].filter((z: string, i: number, a: string[]) => z && a.indexOf(z) === i).join(" · ");
     let h = photoHTML(slug, r, c5).replace('class="m3-ph', 'class="m3-ph m3-c6-ph');
     h += `<div class="m3-sb m3-c6-head"><p class="m3-kick">${esc(kick)}</p><div class="ht-row"><h2 class="m3-h" tabindex="-1">${esc(name)}</h2>${heartHTML("region", slug, name, href)}</div>${line ? `<p class="m3-place-story">${esc(line)}</p>` : ""}`;
@@ -1115,7 +1118,9 @@ export function initMapV3(root: HTMLElement) {
     const x: Ctx = { kind: "region", id: key, name, c2, region: key };
     const d = { m2: T?.r2?.[c2]?.m2 ?? rg.m2, p5: rg.p5 };
     let h = `${photoHTML(null, key, undefined, true)}<div class="m3-sb"><p class="m3-kick">${esc(T4.regionKick)}</p><div class="ht-row"><h2 class="m3-h" tabindex="-1">${esc(name)}</h2>${heartHTML("region", `r-${key}`, name, `${cfg.links.map}?region=${key}`)}</div>`;
-    h += `<p class="m3-line">${esc(T4.regionLine.replace("{n}", nf.format(rg.k ?? 0)).replace("{cities}", (rg.cities ?? []).join(", ")))}</p><div class="m3-tiles">${priceTile(d, buyLine(d))}</div>`;
+    // Prompt 81 (UX problem 6): the region's main towns are buttons (a municipality is too small to tap from here on a phone).
+    const towns = (rg.cities ?? []).map((n: string) => `<button type="button" class="m3-link m3-town" data-goto="${esc(slugOf(n) ?? "")}">${esc(n)}</button>`).join(", ");
+    h += `<p class="m3-line">${mainPresentation() ? esc(T4.regionLine.replace("{n}", nf.format(rg.k ?? 0)).replace("{cities}", "\u0001")).replace("\u0001", towns) : esc(T4.regionLine.replace("{n}", nf.format(rg.k ?? 0)).replace("{cities}", (rg.cities ?? []).join(", ")))}</p><div class="m3-tiles">${priceTile(d, buyLine(d))}</div>`;
     h += `<p class="m3-buys m3-hint">${esc(T4.regionPick)}</p>${ctaHTML(name)}${mareHTML()}</div>`;
     ctx = x; rerender = () => showRegion(key, false); srcFor = () => sourcesHTML(d, x);
     openSheet(h, true);
@@ -1765,7 +1770,7 @@ export function initMapV3(root: HTMLElement) {
     if (!map || !ml) return;
     for (const r of list) {
       const p = byS.get(r.id); if (!p) continue;
-      const el = document.createElement("button"); el.type = "button"; el.className = "m3-fmark"; el.textContent = String(r.rank); el.setAttribute("aria-label", `${r.rank}. ${r.name}`);
+      const el = document.createElement("button"); el.type = "button"; el.className = "m3-fmark"; el.textContent = String(r.rank); el.style.zIndex = String(20 - Math.min(r.rank, 19)); el.setAttribute("aria-label", `${r.rank}. ${r.name}`);
       el.addEventListener("click", (e) => { e.stopPropagation(); ev({ event: "match/place", place: r.id, origin: "map" }); finderGo(r.id); });
       findMarks.push(new ml.Marker({ element: el, anchor: "center" }).setLngLat([p.x, p.y]).addTo(map));
     }

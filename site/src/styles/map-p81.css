@@ -111,6 +111,10 @@
 .m3[data-main-premium]:not(.is-golf) .m3-c6-paid .m3-fontes { margin-top: 4px; }
 .m3[data-main-premium]:not(.is-golf) .m3-c6-more .m3-onemore { margin: 22px 0 0; padding-top: 22px; border-top: 1px solid var(--map-rule); font: 400 italic 21px/1.35 var(--m3serif); letter-spacing: -.01em; color: var(--gi); }
 .m3[data-main-premium]:not(.is-golf) .m3-sheet.is-c6 .m3-devs { margin-top: 26px; }
+/* A photograph with a caption and a credit (the Azores' card): the credit moves to the right, so neither covers the other. */
+.m3[data-main-premium]:not(.is-golf) .m3-ph:has(> figcaption:not(.m3-photo-credit):not(.m3-cr)) > .m3-photo-credit { left: auto; right: 10px; bottom: 34px; }
+/* A region's card: its main towns open their own cards. */
+.m3[data-main-premium]:not(.is-golf) .m3-line .m3-town { font: inherit; font-weight: 600; color: #2f5d50 !important; padding: 6px 0 !important; text-decoration: underline; text-decoration-color: rgba(47, 93, 80, .3); text-underline-offset: 4px; }
 /* The one action, fixed at the foot of the card at every height. */
 .m3[data-main-premium]:not(.is-golf) .m3-c6-cta { position: relative; z-index: 3; flex: none; margin-top: -22px; padding: 22px 26px 16px; background: linear-gradient(to top, var(--map-paper) 68%, rgba(247, 244, 237, 0)); pointer-events: none; }
 .m3[data-main-premium]:not(.is-golf) .m3-c6-cta .m3-btn { width: 100%; pointer-events: auto; }
