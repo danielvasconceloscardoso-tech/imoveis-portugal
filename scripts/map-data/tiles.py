@@ -12,6 +12,8 @@ Writes (operator's step 1, 3 Nov 2026: free versus paid):
   site/public/data/map/tiles.json        the free tiles (below); the paid figures are removed from it
   site/public/data/map/place/<slug>.json one small file per municipality for the card, with the golden sample card ("c5")
                                          where content/facts/map/places/<slug>/ exists (scripts/map-data/place_cards.py)
+                                         and the services block ("sv", prompt 81) for the places in
+                                         place_services.ROLLOUT (scripts/map-data/place_services.py)
   site/public/data/map/price5.json       the free price layer: market median per quarter, last five years (munis, regions)
   site/public/data/map/parishes5.json    the same for the parishes
   site/src/data/mapanalysis.json         the paid analysis (build time only): ten years, one year, typology ranges, new and
@@ -127,6 +129,7 @@ for key in ("sea", "bch", "doc"):
 # ranges, new versus existing, doctors per inhabitant, distributions and medians for bands, sea temperature: not on the free
 # list, so paid by CLAUDE.md rule 17) leaves the public file and goes to the analysis.
 import place_cards  # scripts/map-data/place_cards.py: the golden sample cards (content/facts/map/places/<slug>/)
+import place_services  # scripts/map-data/place_services.py: the card's services block (prompt 81), Gondomar first
 PAID_M = ("p1", "p10", "doc", "rng", "ne", "sea")
 PAID_P = ("p1", "rng", "ne")
 ana_path = os.path.join(ROOT, "site", "src", "data", "mapanalysis.json")
@@ -152,6 +155,8 @@ for slug, row in out["m"].items():
     one = {"q": out["q"], **row}
     if slug in cards and cards[slug].get("free"): one["c5"] = cards[slug]["free"]
     if slug in cards and cards[slug].get("arr"): one["arr"] = cards[slug]["arr"]  # prompt 68: the arrival
+    sv = place_services.block(ROOT, slug)  # prompt 81: the services block, for the places in place_services.ROLLOUT
+    if sv: one["sv"] = sv
     json.dump(one, open(os.path.join(pdir, f"{slug}.json"), "w", encoding="utf8"), ensure_ascii=False, separators=(",", ":"))
 
 # The map's free price layer: the market median quarter by quarter over five years (21 quarters, the same span as the card's

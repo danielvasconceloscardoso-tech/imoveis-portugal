@@ -16,12 +16,13 @@ import { EDITION_CUR, RATE } from "../lib/content";
 import { MAP_MUNIS, REGIONS } from "../lib/mapdata";
 import { PRICES } from "../lib/prices";
 import { PLACES } from "../lib/places";
-import { c, cl } from "../lib/copy";
+import { c, cl, keysOf } from "../lib/copy";
 import { PROJECTS } from "../lib/projects";
 import { config } from "../config";
 import { COMPARE_SUB } from "../lib/maptiles";
 import { SUB } from "../lib/tools";
 import { SIM1_REGIONS } from "../lib/sim1";
+import { HOUSING_DEFAULTS } from "../lib/housing";
 import PLACE_PHOTOS from "../data/place-photos.json";
 import { existsSync, readFileSync } from "node:fs";
 import { FACTS } from "../lib/content";
@@ -29,12 +30,15 @@ import { join } from "node:path";
 import "../styles/mapv3.css";
 import "../styles/golf-mode.css";
 import "../styles/map-main-premium.css";
+import "../styles/map-p81.css";
 import { CREDITS } from "../lib/credits";
 import MareBlock from "./MareBlock.astro";
 
 interface Props { lang: Lang; ed: EdCode; mode?: "page" | "home"; }
 const { lang, ed, mode = "page" } = Astro.props;
-const mainPremium = mode === "page" && ((lang === "en" && ed === "us") || (lang === "pt" && ed === "lu"));
+// Prompt 81: every edition's map page has the one look (it was the US and Luxembourg pages only, so the French map kept
+// the older chrome); the home page's embedded map keeps its own.
+const mainPremium = mode === "page";
 const cur = EDITION_CUR[ed];
 const fx = cur && cur !== "EUR" ? RATE(cur) : null;
 const nf = new Intl.NumberFormat(HTML_LANG[lang]);
@@ -56,6 +60,7 @@ const regionPhotos: Record<string, string> = { north: "porto-douro-entardecer", 
 const k = (x: string, v: Record<string, string> = {}) => c(`map3.${x}`, lang, v);
 const k4 = (x: string, v: Record<string, string> = {}) => c(`map4.${x}`, lang, v);
 const k5 = (x: string, v: Record<string, string> = {}) => c(`card5.${x}`, lang, v);
+const m5 = (x: string, v: Record<string, string> = {}) => c(`map5.${x}`, lang, v);
 const keep = (x: string, names: string[]) => c(x, lang, Object.fromEntries(names.map((n) => [n, `{${n}}`])));
 const A = config.mapAnalysis;
 const labels = {
@@ -119,16 +124,20 @@ const south = ed !== "us" || lang !== "en" ? [] : (SOUTH.stops as any[]).filter(
 const pinFile = (id: string) => existsSync(join(process.cwd(), "public", "img", "map", `pin-${id}.webp`)) ? `/img/map/pin-${id}.webp` : "";
 // The area briefs carry rents, yields and ten-year changes (paid analysis): never in the free card (operator, step 1).
 const cfg = { labels, links, photos, photoAlt, regionPhotos, ed, lang,
+  // Prompt 81 (UX problem 7): the home page's map lets the page scroll; MapLibre's own hint, in our words.
+  ...(mode === "home" ? { gest: { touch: m5("gest.touch"), win: m5("gest.win"), mac: m5("gest.mac") } } : {}),
   ...(mainPremium ? {
     mainPresentation: {
-      details: lang === "pt" ? "Viver aqui" : "Living here",
-      costs: lang === "pt" ? "Custos da compra" : "Buying costs",
-      story: lang === "pt" ? "Sobre este lugar" : "About this place",
-      photoCredit: lang === "pt" ? "Fotografia" : "Photography",
+      details: m5("pres.details"), costs: m5("pres.costs"), story: m5("pres.story"), photoCredit: m5("pres.photo"),
       period: `INE · ${qLabel}`,
     },
     // Reuse the existing rights registry. Prefixes also match the approved Gondomar aerial gallery.
     photoCredits: Object.fromEntries(CREDITS.filter((p) => p.file.startsWith("img/v2/")).map((p) => [p.file.replace(/^img\/v2\//, "").replace(/\*$/, ""), p.author])),
+    // Prompt 81: the card writer's service lines (COPY_DECK.md "## services", every key, placeholders kept for the card
+    // to fill) and the art director's chrome and card words ("## map5").
+    sv: Object.fromEntries(keysOf("services.").map((key) => [key.slice(9), c(key, lang)])),
+    m5: Object.fromEntries(keysOf("map5.").map((key) => [key.slice(5), c(key, lang)])),
+    area: HOUSING_DEFAULTS,
   } : {}),
   projects: PROJECTS.map((p) => ({ id: p.id, name: p.name, tag: p.tag?.[lang] ?? "", developer: p.developer, muni: p.muni, lon: p.lon, lat: p.lat, render: p.render, pin: pinFile(p.id) || (p.render ? `${p.render}-800.webp` : ""), from: p.from,
     ...(p.units?.length || p.blocks?.length ? { showcase: `${pathFor(lang, ed, "partners")}${p.devSlug}/${p.muni}/` }
@@ -156,6 +165,7 @@ const cfg = { labels, links, photos, photoAlt, regionPhotos, ed, lang,
 const chips = [["price", "chip.price"]] as const;
 const overlays = [["golf", "chip.golf"], ["beach", "chip.beach"], ["devs", "chip.devs"]] as const;
 const amount = Math.round(300000 * (fx ? fx.rate : 1));
+const budgetText = new Intl.NumberFormat(HTML_LANG[lang], { style: "currency", currency: fx ? cur! : "EUR", maximumFractionDigits: 0 }).format(amount);
 const regionList = ["north", "centre", "lisbon", "alentejo", "algarve", "madeira", "azores"] as const;
 const unlockList = cl("map4.unlock.list", lang);
 const live = A.live && !!A.stripe.region && !!A.stripe.all;
@@ -180,6 +190,17 @@ const skelNames = Object.fromEntries(MAP_MUNIS.filter((m) => fromSlug(m.s) !== m
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg>
         <span>{k4("search")}</span><kbd>⌘K</kbd>
       </button>
+      {mode === "page" && (
+        <button type="button" class="m3-findbtn" data-finder-open aria-haspopup="dialog" aria-expanded="false">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></svg>
+          <span>{m5("find.open")}</span>
+        </button>
+      )}
+      {mode === "page" && (
+        <button type="button" class="m3-budbtn" data-bud-open aria-expanded="false" aria-controls="m3-bud">
+          <span>{m5("budget.k")}</span><b data-bud-v>{budgetText}</b>
+        </button>
+      )}
       {mode === "page" && <a class="m3-cmp-pill" data-cmp-pill href={comparePath} hidden></a>}
       {mode === "page" && (
         <button type="button" class="m3-golfbtn" data-golf aria-pressed="false" aria-label={c("p78.toggle.aria", lang)}><span>{c("p78.toggle", lang)}</span></button>
@@ -245,17 +266,19 @@ const skelNames = Object.fromEntries(MAP_MUNIS.filter((m) => fromSlug(m.s) !== m
           </div>
         </div>
       )}
-      <div class="m3-budget m3-pg" hidden={mode === "home" ? true : undefined}>
-        <div class="m3-budget-head">
-          <span class="m3-k">{k("budget.label")}</span>
-          <button type="button" class="m3-amount" data-amount title={k("budget.tap")}>{new Intl.NumberFormat(HTML_LANG[lang], { style: "currency", currency: fx ? cur! : "EUR", maximumFractionDigits: 0 }).format(amount)}</button>
-          <input class="m3-amount-in" data-amount-in type="text" inputmode="numeric" hidden aria-label={k("budget.label")} />
+      {mode === "home" && (
+        <div class="m3-budget m3-pg" hidden>
+          <div class="m3-budget-head">
+            <span class="m3-k">{k("budget.label")}</span>
+            <button type="button" class="m3-amount" data-amount title={k("budget.tap")}>{budgetText}</button>
+            <input class="m3-amount-in" data-amount-in type="text" inputmode="numeric" hidden aria-label={k("budget.label")} />
+          </div>
+          <div class="m3-slider" data-slider role="slider" tabindex="0" aria-label={k("budget.label")} aria-valuemin="100000" aria-valuemax="20000000" aria-valuenow="300000">
+            <span class="m3-track"><span class="m3-fill" data-fill></span></span><span class="m3-thumb" data-thumb></span>
+          </div>
+          <p class="m3-sentence" data-sentence aria-live="polite"></p>
         </div>
-        <div class="m3-slider" data-slider role="slider" tabindex="0" aria-label={k("budget.label")} aria-valuemin="100000" aria-valuemax="20000000" aria-valuenow="300000">
-          <span class="m3-track"><span class="m3-fill" data-fill></span></span><span class="m3-thumb" data-thumb></span>
-        </div>
-        <p class="m3-sentence" data-sentence aria-live="polite"></p>
-      </div>
+      )}
       {mode === "page" && (
         <div class="m3-pg">
           <p class="m3-pk">{k4("layer.tours")}</p>
@@ -267,10 +290,41 @@ const skelNames = Object.fromEntries(MAP_MUNIS.filter((m) => fromSlug(m.s) !== m
       )}
       {mode === "home" && <a class="m3-open" href={links.map}>{c("home2.map.a", lang)}</a>}
     </div>
+    <!-- Prompt 81: the budget, the page's promise, one tap from the first view (it sat inside "Camadas"). -->
+    {mode === "page" && (
+      <div class="m3-bud" id="m3-bud" data-bud hidden>
+        <button type="button" class="m3-panel-x" data-bud-close aria-label={m5("budget.close")}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+        <div class="m3-budget">
+          <div class="m3-budget-head">
+            <span class="m3-k">{k("budget.label")}</span>
+            <button type="button" class="m3-amount" data-amount title={k("budget.tap")}>{budgetText}</button>
+            <input class="m3-amount-in" data-amount-in type="text" inputmode="numeric" hidden aria-label={k("budget.label")} />
+          </div>
+          <div class="m3-slider" data-slider role="slider" tabindex="0" aria-label={k("budget.label")} aria-valuemin="100000" aria-valuemax="20000000" aria-valuenow="300000">
+            <span class="m3-track"><span class="m3-fill" data-fill></span></span><span class="m3-thumb" data-thumb></span>
+          </div>
+          <p class="m3-sentence" data-sentence aria-live="polite"></p>
+        </div>
+        <p class="m3-bud-note">{k("reach")}</p>
+        <button type="button" class="m3-chip m3-bud-colour" data-bud-colour aria-pressed="false">{m5("budget.colour")}</button>
+      </div>
+    )}
+    {mode === "page" && (
+      <div class="m3-nav" data-nav>
+        <button type="button" class="m3-homebtn" data-home hidden aria-label={m5("home.aria")}>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H4v5M15 20h5v-5M4 4l6 6M20 20l-6-6"/></svg><span>{m5("home")}</span>
+        </button>
+        <div class="m3-zoom" role="group">
+          <button type="button" data-zoom="in" aria-label={m5("zoom.in")}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+          <button type="button" data-zoom="out" aria-label={m5("zoom.out")}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/></svg></button>
+        </div>
+      </div>
+    )}
+    {mode === "page" && <aside class="m3-fdp" data-finder hidden role="dialog" aria-label={m5("find.h")}></aside>}
     <div class="m3-legend" data-legend hidden><span data-lo></span><span class="m3-ramp"></span><span data-hi></span><span class="m3-legend-t" data-legend-t></span></div>
 
     <aside class="m3-sheet" data-sheet hidden aria-live="polite">
-      <button type="button" class="m3-grab" data-grab aria-hidden="true" tabindex="-1"><span></span></button>
+      <button type="button" class="m3-grab" data-grab aria-label={mode === "page" ? m5("sheet.grab") : undefined} aria-hidden={mode === "page" ? undefined : "true"} tabindex={mode === "page" ? 0 : -1}><span></span></button>
       <div class="m3-sheet-in" data-sheet-in></div>
     </aside>
     <p class="m3-caption" data-caption hidden aria-live="polite"></p>

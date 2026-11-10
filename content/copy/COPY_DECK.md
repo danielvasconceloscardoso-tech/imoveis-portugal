@@ -11729,3 +11729,212 @@ Prompt 81 (10 Nov 2026), the card writer: the service lines of the municipality 
 - PT: Dados do OpenStreetMap: © OpenStreetMap contributors, licença ODbL. Tudo consultado a {date}.
 - EN: OpenStreetMap data: © OpenStreetMap contributors, ODbL license. All checked on {date}.
 - FR: Données OpenStreetMap : © OpenStreetMap contributors, licence ODbL. Le tout consulté le {date}.
+
+## map5
+
+Prompt 81 (10 Nov 2026), the art director: the map's chrome (the budget, the way back to Portugal, the zoom, the search's own words), the first screen, the finder ("what matters to you") and the few words the new municipality card adds around the card writer's `## services` lines. Functional register (content/METHOD.md): labels of one to three words. The finder's reasons, trade-offs and method lines are the matching engine's own (site/src/lib/match-copy.ts), not in this block.
+
+### pres.details
+- PT: Viver aqui
+- EN: Living here
+- FR: Vivre ici
+
+### pres.costs
+- PT: Custos da compra
+- EN: Buying costs
+- FR: Frais d'achat
+
+### pres.story
+- PT: Sobre este lugar
+- EN: About this place
+- FR: À propos de ce lieu
+
+### pres.photo
+- PT: Fotografia
+- EN: Photography
+- FR: Photographie
+
+### intro.aria
+- PT: Bem-vindo a Portugal
+- EN: Welcome to Portugal
+- FR: Bienvenue au Portugal
+
+### intro.alt
+- PT: Falésias e mar na Praia da Marinha
+- EN: Cliffs and sea at Praia da Marinha
+- FR: Falaises et mer à Praia da Marinha
+
+### intro.line
+- PT: Encontre o lugar onde quer viver.
+- EN: Find the place you want to live.
+- FR: Trouvez le lieu où vous voulez vivre.
+
+### intro.find
+- PT: Escolher pelo que conta para si
+- EN: Choose by what matters to you
+- FR: Choisir selon ce qui compte pour vous
+
+### intro.map
+- PT: Ver o mapa
+- EN: View the map
+- FR: Voir la carte
+
+### intro.budget
+- PT: Com {b}, veja os m² em cada lugar.
+- EN: With {b}, see the m² in each place.
+- FR: Avec {b}, voyez les m² dans chaque lieu.
+
+### find.open
+- PT: O que conta para si
+- EN: What matters to you
+- FR: Ce qui compte pour vous
+
+### find.h
+- PT: O que conta para si
+- EN: What matters to you
+- FR: Ce qui compte pour vous
+
+### find.close
+- PT: Fechar a escolha
+- EN: Close the finder
+- FR: Fermer la sélection
+
+### find.budget
+- PT: Orçamento de compra
+- EN: Purchase budget
+- FR: Budget d'achat
+
+### find.scen
+- PT: {area} m², {dep}% de entrada, {years} anos a {rate}%: até {m} por mês.
+- EN: {area} m², {dep}% down, {years} years at {rate}%: up to {m} a month.
+- FR: {area} m², {dep} % d'apport, {years} ans à {rate} % : jusqu'à {m} par mois.
+
+### find.tastes
+- PT: Por perto
+- EN: Close by
+- FR: À proximité
+
+### find.pick
+- PT: Escolha o que quer por perto.
+- EN: Choose what you want close by.
+- FR: Choisissez ce que vous voulez à proximité.
+
+### find.places
+- PT: Lugares
+- EN: Places
+- FR: Lieux
+
+### find.more
+- PT: Mais lugares
+- EN: More places
+- FR: Plus de lieux
+
+### find.wait
+- PT: A ordenar…
+- EN: Ranking…
+- FR: Classement…
+
+### find.fail
+- PT: A lista não carregou. Tente outra vez.
+- EN: The list did not load. Try again.
+- FR: La liste ne s'est pas chargée. Réessayez.
+
+### find.retry
+- PT: Tentar outra vez
+- EN: Try again
+- FR: Réessayer
+
+### find.goto
+- PT: Abrir {name} no mapa
+- EN: Open {name} on the map
+- FR: Ouvrir {name} sur la carte
+
+### budget.k
+- PT: Orçamento
+- EN: Budget
+- FR: Budget
+
+### budget.close
+- PT: Fechar o orçamento
+- EN: Close the budget
+- FR: Fermer le budget
+
+### budget.colour
+- PT: Ver os preços no mapa
+- EN: Show prices on the map
+- FR: Afficher les prix sur la carte
+
+### home
+- PT: Portugal
+- EN: Portugal
+- FR: Portugal
+
+### home.aria
+- PT: Ver Portugal inteiro
+- EN: See all of Portugal
+- FR: Voir tout le Portugal
+
+### zoom.in
+- PT: Aproximar
+- EN: Zoom in
+- FR: Zoomer
+
+### zoom.out
+- PT: Afastar
+- EN: Zoom out
+- FR: Dézoomer
+
+### search.none
+- PT: Nenhum lugar com esse nome.
+- EN: No place by that name.
+- FR: Aucun lieu de ce nom.
+
+### search.did
+- PT: Quis dizer
+- EN: Did you mean
+- FR: Vouliez-vous dire
+
+### search.first
+- PT: Para começar
+- EN: To begin
+- FR: Pour commencer
+
+### g.regions
+- PT: Regiões
+- EN: Regions
+- FR: Régions
+
+### region.towns
+- PT: Abrir
+- EN: Open
+- FR: Ouvrir
+
+### sheet.grab
+- PT: Abrir ou recolher o cartão
+- EN: Expand or collapse the card
+- FR: Agrandir ou réduire la fiche
+
+### card.flight
+- PT: {label}: {t}.
+- EN: {label}: {t}.
+- FR: {label} : {t}.
+
+### card.sv.hand
+- PT: Hospital, centro de saúde, escola internacional, praia e aeroporto deste cartão: verificados um a um a {date}, com os nomes dos registos oficiais.
+- EN: This card's hospital, health center, international school, beach and airport: checked one by one on {date}, under the names in the official registers.
+- FR: L'hôpital, le centre de santé, l'école internationale, la plage et l'aéroport de cette fiche : vérifiés un à un le {date}, sous les noms des registres officiels.
+
+### gest.touch
+- PT: Use dois dedos para mover o mapa
+- EN: Use two fingers to move the map
+- FR: Utilisez deux doigts pour déplacer la carte
+
+### gest.win
+- PT: Use Ctrl + scroll para aproximar o mapa
+- EN: Use Ctrl + scroll to zoom the map
+- FR: Utilisez Ctrl + molette pour zoomer la carte
+
+### gest.mac
+- PT: Use ⌘ + scroll para aproximar o mapa
+- EN: Use ⌘ + scroll to zoom the map
+- FR: Utilisez ⌘ + molette pour zoomer la carte

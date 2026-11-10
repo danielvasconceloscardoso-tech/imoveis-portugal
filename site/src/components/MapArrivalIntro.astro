@@ -1,31 +1,32 @@
 ---
 import type { Lang } from "../i18n";
+import { c } from "../lib/copy";
 interface Props { lang: Lang; }
 const { lang } = Astro.props;
-const pt = lang === "pt";
+const t = (k: string) => c(`map5.intro.${k}`, lang);
 // Existing licensed photography: content/media/SOURCES.md, Pixabay 1786783.
 // Feel: Portugal is open in front of you, and choosing a place feels easy.
-// Signal: arrival shown, explored, skipped or completed (the existing event schema).
+// Prompt 81 (UX problem 8): the card stays until the reader acts, and its one action is the page's own tool, the finder
+// ("choose by what matters to you"); "View the map" is the quiet way past it. Words: COPY_DECK.md "map5.intro.*".
+// Signal: arrival shown, the finder opened from it ("find"), explored or skipped (the existing event schema).
 ---
-<section class="map-arrival" data-map-arrival hidden aria-label={pt ? "Bem-vindo a Portugal" : "Welcome to Portugal"}>
+<section class="map-arrival" data-map-arrival hidden aria-label={t("aria")}>
   <div class="map-arrival__card">
     <figure class="map-arrival__photo">
       <picture>
         <source type="image/avif" srcset="/img/v2/algarve-praia-da-marinha-640.avif 640w, /img/v2/algarve-praia-da-marinha-1024.avif 1024w" sizes="(max-width: 700px) 92vw, 440px" />
-        <img src="/img/v2/algarve-praia-da-marinha-640.webp" srcset="/img/v2/algarve-praia-da-marinha-640.webp 640w, /img/v2/algarve-praia-da-marinha-1024.webp 1024w" sizes="(max-width: 700px) 92vw, 440px" width="640" height="427" alt={pt ? "Falésias e mar na Praia da Marinha" : "Cliffs and sea at Praia da Marinha"} decoding="async" loading="lazy" />
+        <img src="/img/v2/algarve-praia-da-marinha-640.webp" srcset="/img/v2/algarve-praia-da-marinha-640.webp 640w, /img/v2/algarve-praia-da-marinha-1024.webp 1024w" sizes="(max-width: 700px) 92vw, 440px" width="640" height="427" alt={t("alt")} decoding="async" loading="lazy" />
       </picture>
       <figcaption>Praia da Marinha · Algarve</figcaption>
     </figure>
     <div class="map-arrival__body">
-      <div class="map-arrival__topline">
-        <button type="button" class="map-arrival__skip" data-map-arrival-skip>{pt ? "Saltar" : "Skip"}</button>
-      </div>
       <h2>Portugal.</h2>
-      <p class="map-arrival__line">{pt ? "Encontre o lugar onde quer viver." : "Find the place you want to live."}</p>
-      <button type="button" class="map-arrival__explore" data-map-arrival-explore>
-        {pt ? "Ver o mapa" : "View the map"}
+      <p class="map-arrival__line">{t("line")}</p>
+      <button type="button" class="map-arrival__explore" data-map-arrival-find>
+        {t("find")}
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" /></svg>
       </button>
+      <button type="button" class="map-arrival__skip" data-map-arrival-explore>{t("map")}</button>
     </div>
   </div>
 </section>
@@ -41,34 +42,33 @@ const pt = lang === "pt";
   .map-arrival__card { position: absolute; left: clamp(24px, 4vw, 64px); bottom: 48px; width: min(440px, 42vw); overflow: hidden; pointer-events: auto; background: #f8f5ed; border: 1px solid rgba(255,255,255,.7); border-radius: 5px; box-shadow: 0 20px 64px rgba(26,48,42,.15); }
   .map-arrival__photo { position: relative; height: clamp(150px, 24svh, 220px); overflow: hidden; margin: 0; background: #d2e1dc; }
   .map-arrival__photo picture, .map-arrival__photo img { display: block; width: 100%; height: 100%; }
-  .map-arrival__photo img { object-fit: cover; object-position: center 54%; animation: arrival-landscape 2100ms ease-out both; }
+  .map-arrival__photo img { object-fit: cover; object-position: center 54%; animation: arrival-landscape 16s ease-in-out infinite alternate; }
   .map-arrival__photo figcaption { position: absolute; bottom: 12px; left: 20px; padding: 5px 8px; border-radius: 2px; color: #fff; background: rgba(20,39,34,.7); font: 500 10px/1.4 "Manrope Variable", sans-serif; letter-spacing: .04em; }
-  .map-arrival__body { padding: 16px 28px 26px; }
-  .map-arrival__topline { display: flex; align-items: center; justify-content: flex-end; gap: 16px; }
+  .map-arrival__body { padding: 26px 28px 14px; }
   .map-arrival button { cursor: pointer; font-family: "Manrope Variable", sans-serif; }
   .map-arrival button:focus-visible { outline: 3px solid #a17638; outline-offset: 4px; }
-  .map-arrival__skip { display: inline-flex; justify-content: center; align-items: center; gap: 9px; min-height: 44px; min-width: 58px; padding: 0 2px; border: 0; background: transparent; color: #52655d; font-size: 12px; }
-  .map-arrival h2 { margin: -2px 0 12px; color: #243b35; font: 400 clamp(44px, 4.5vw, 64px)/1.08 "Playfair Display Variable", Georgia, serif; letter-spacing: -.045em; }
+  .map-arrival__skip { display: flex; justify-content: center; align-items: center; width: 100%; min-height: 44px; margin-top: 4px; padding: 0 2px; border: 0; background: transparent; color: #52655d; font-size: 12.5px; font-weight: 600; text-decoration: underline; text-decoration-color: rgba(82,101,93,.35); text-underline-offset: 4px; }
+  .map-arrival h2 { margin: 0 0 12px; color: #243b35; font: 400 clamp(44px, 4.5vw, 64px)/1.08 "Playfair Display Variable", Georgia, serif; letter-spacing: -.045em; }
   .map-arrival__line { margin: 0 0 23px; color: #52655d; font: 400 14px/1.5 "Manrope Variable", sans-serif; }
   .map-arrival__explore { display: flex; align-items: center; justify-content: space-between; gap: 24px; width: 100%; min-height: 48px; padding: 13px 18px; border: 1px solid #294b40; border-radius: 3px; background: #294b40; color: #fff; font-size: 13px; font-weight: 600; transition: background 160ms ease; }
   .map-arrival__explore:hover { background: #1b372e; }
   .map-arrival__explore svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.5; }
   .map-arrival.is-leaving .map-arrival__card { pointer-events: none; animation: arrival-out 220ms ease-in both; }
   :global([data-map-arrival-frame][data-arrival-active] .m3-cards) { opacity: 0; pointer-events: none; }
-  @keyframes arrival-landscape { from { transform: scale(1.035); } to { transform: scale(1); } }
+  @keyframes arrival-landscape { from { transform: scale(1.07) translate3d(-1%, 0, 0); } to { transform: scale(1) translate3d(0, 0, 0); } }
   @keyframes arrival-out { to { opacity: 0; } }
   @media (max-width: 700px) {
     .map-arrival__card { left: 16px; right: 16px; bottom: max(82px, env(safe-area-inset-bottom)); width: auto; }
     .map-arrival__photo { height: clamp(100px, 17svh, 150px); }
     .map-arrival__photo figcaption { left: 16px; bottom: 10px; }
-    .map-arrival__body { padding: 9px 21px 20px; }
+    .map-arrival__body { padding: 18px 21px 8px; }
     .map-arrival h2 { font-size: 46px; margin-bottom: 10px; }
     .map-arrival__line { font-size: 13px; margin-bottom: 17px; }
   }
   @media (max-height: 580px) and (min-width: 701px) {
     .map-arrival__card { bottom: 24px; width: min(420px, 46vw); }
     .map-arrival__photo { display: none; }
-    .map-arrival__body { padding: 8px 22px 20px; }
+    .map-arrival__body { padding: 16px 22px 8px; }
   }
-  @media (prefers-reduced-motion: reduce) { .map-arrival { display: none !important; } }
+  @media (prefers-reduced-motion: reduce) { .map-arrival__photo img { animation-duration: 48s; } .map-arrival.is-leaving .map-arrival__card { animation: none; } }
 </style>

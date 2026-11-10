@@ -14,6 +14,8 @@ import { imt as imtOf, purchase } from "../lib/sims";
 import { heartHTML } from "./hearts";
 import { createGolf } from "./golf-mode";
 import { placeStory, placeDetailHTML, placeHistoryHTML, creditFor, photoCreditHTML } from "./map-place-presentation";
+import { servicesHTML, serviceSources, longDate } from "./map-card";
+import { searchEntries, nearEntries, EXONYMS, REGION_NAMES, type Entry } from "./map-search";
 
 // The free price layer (operator, step 1): the market median per quarter over the last five years (/data/map/price5.json).
 type Series = { n: string; m2: (number | null)[] };
@@ -139,6 +141,11 @@ export function initMapV3(root: HTMLElement) {
   const mainPresentation = () => premium && !golfX?.on();
   const shortLandscape = () => mainPresentation() && matchMedia("(max-height: 500px) and (orientation: landscape)").matches;
   let cameraTouched = false, refitNational: (() => void) | null = null;
+  // Prompt 81: the way back to Portugal (set when the map stands), the last pointer on the map (a finger or a mouse), the
+  // budget popover, the finder (map-finder.ts, loaded when it first opens) and the names drawn on the map, as tap targets.
+  let flyHome: (() => void) | null = null, lastPointer = "mouse", budOpen = false, findOpen = false, fromFinder = false;
+  let labelBoxes: { x: number; y: number; w: number; kind: "region" | "muni"; key: string }[] = [];
+  const M5: Record<string, string> = cfg.m5 ?? {};
   // Presentation only: keep the same DEM, bathymetry, geometry, price ramp and
   // detail. Snapshot original paints so Golf enters from its unchanged base.
   const mainPaint: [string, string, any][] = [
@@ -279,6 +286,7 @@ export function initMapV3(root: HTMLElement) {
     const t = toT(budget); thumb.style.left = `${t * 100}%`; fill.style.width = `${t * 100}%`;
     slider.setAttribute("aria-valuenow", String(Math.round(budget))); slider.setAttribute("aria-valuetext", money(budget));
     amountBtn.textContent = moneyCur(budget);
+    const bv = root.querySelector<HTMLElement>("[data-bud-v]"); if (bv) bv.textContent = moneyCur(budget);
     sentence();
     if (map && P) { clearTimeout(reachT); reachT = window.setTimeout(() => {
       if (!map?.getSource("munis")) return;
@@ -290,6 +298,7 @@ export function initMapV3(root: HTMLElement) {
     }, 30); }
     if (remember) { budgetSet = true; try { localStorage.setItem("ip.budget", String(Math.round(budget))); } catch { /* private mode */ } }
     if (selected && !sheet.hidden && !pinA && view === "card" && !selPar) showPlace(selected, false);
+    if (findOpen) finder?.budget();
     syncUrl();
   }
   function sentence() {
@@ -321,6 +330,7 @@ export function initMapV3(root: HTMLElement) {
   root.querySelectorAll<HTMLButtonElement>("[data-layer]").forEach((b) => b.addEventListener("click", () => { setLayer(b.dataset.layer as Layer); ev({ event: `map/layer/${b.dataset.layer}`, place: selected ?? undefined, origin: mode }); }));
   async function setLayer(l: Layer) {
     layer = l; root.querySelectorAll("[data-layer]").forEach((b) => b.setAttribute("aria-pressed", String((b as HTMLElement).dataset.layer === l)));
+    root.querySelector("[data-bud-colour]")?.setAttribute("aria-pressed", String(l === "price"));
     const tm = root.querySelector<HTMLElement>("[data-time]"); if (tm) tm.classList.toggle("is-off", l !== "price");
     repaint(); syncUrl(); load();
   }
@@ -387,7 +397,10 @@ export function initMapV3(root: HTMLElement) {
       computeBreaks();
       const narrow = root.clientWidth < 700;
       map = new ml.Map({
-        container: canvas, attributionControl: false, pixelRatio: Math.min(devicePixelRatio || 1, 2), maxTileCacheSize: narrow ? 48 : 96, dragRotate: !flat, pitchWithRotate: !flat, maxPitch: 72, minZoom: shortLandscape() ? 4 : 4.6, maxZoom: 12.5, fadeDuration: 150,
+        container: canvas, attributionControl: false,
+        // Prompt 81 (UX problem 7): on the home page one finger scrolls the page and two move the map; the wheel scrolls
+        // the page unless Ctrl (or ⌘) is held. The map page keeps the map to itself.
+        ...(mode === "home" ? { cooperativeGestures: true, locale: cfg.gest ? { "CooperativeGesturesHandler.MobileHelpText": cfg.gest.touch, "CooperativeGesturesHandler.WindowsHelpText": cfg.gest.win, "CooperativeGesturesHandler.MacHelpText": cfg.gest.mac } : {} } : {}), pixelRatio: Math.min(devicePixelRatio || 1, 2), maxTileCacheSize: narrow ? 48 : 96, dragRotate: !flat, pitchWithRotate: !flat, maxPitch: 72, minZoom: shortLandscape() ? 4 : 4.6, maxZoom: 12.5, fadeDuration: 150,
         center: [-8.6, 39.5], zoom: narrow ? 5.6 : 6.2, pitch: flat ? 0 : 52, bearing: flat ? 0 : -12,
         style: { version: 8, sources: {}, layers: [{ id: "bg", type: "background", paint: { "background-color": "#e7e2d7" } }],
           ...(flat ? {} : { sky: SKY }) } as any,
@@ -478,6 +491,15 @@ export function initMapV3(root: HTMLElement) {
       };
       const home = fitHome();
       refitNational = () => { const next = fitHome(); (root as any).__home = next; map.jumpTo(next); };
+      // Prompt 81 (UX problem 10): back to the whole country, from anywhere. A card leaves its padding on the camera, so
+      // the frame is worked out with none (both calls happen before the next frame is drawn: nothing jumps).
+      const ZERO = { top: 0, right: 0, bottom: 0, left: 0 };
+      flyHome = () => {
+        const pad = map.getPadding(); map.setPadding(ZERO); const next = fitHome(); map.setPadding(pad);
+        (root as any).__home = next; rotating = false; stopTour(); arrStop();
+        map.flyTo({ ...next, padding: ZERO, duration: reduce() ? 0 : 1100, curve: 1.2, easing: ease, essential: true });
+      };
+      map.on("moveend", homeButton); map.on("zoomend", homeButton);
       (root as any).__home = home;
       // p70 (S-09): the flight in plays only when the map is ready early; on a slow network the still picture has stood in its
       // place, so the live map takes its framing without a jump.
@@ -512,7 +534,17 @@ export function initMapV3(root: HTMLElement) {
       if (mode === "page" && q.get("tour") === "south" && cfg.south?.length) southStop(0);
       if (mode === "home" && !flat && !selected) startSpin();
       if (!flat) governor();
-      map.on("click", (e: any) => { stopTour(); if (golfX?.click(e.point)) return; const gc = overlays.golf ? golfAt(e.point) : null; if (gc) { showGolf(gc); return; } if (golfX?.on()) return; const h = pick(e.point); if (!h) return; if (h.kind === "par") selectParish(h.key); else select(h.key); });
+      map.on("click", (e: any) => { stopTour(); if (golfX?.click(e.point)) return; const gc = overlays.golf ? golfAt(e.point) : null; if (gc) { showGolf(gc); return; } if (golfX?.on()) return; 
+        // Prompt 81 (UX problem 4): a name on the map opens the place (or the region) it names, wherever the word had to
+        // sit; and a finger on a municipality still too small to hit comes closer first instead of opening a neighbour.
+        const lb = premium ? labelAt(e.point) : null;
+        if (lb) { ev({ event: "map/tap/label", ...(lb.kind === "region" ? { region: lb.key } : { place: lb.key }), origin: mode }); lb.kind === "region" ? showRegion(lb.key) : select(lb.key); return; }
+        const h = pick(e.point); if (!h) return;
+        if (premium && h.kind === "muni" && lastPointer === "touch") {
+          const side = placeSide(byS.get(h.key)!);
+          if (side < 30) { ev({ event: "map/tap/zoom", origin: mode }); cameraTouched = true; map.flyTo({ center: e.lngLat, zoom: Math.min(9.4, map.getZoom() + Math.min(2.6, Math.max(1.2, Math.log2(72 / Math.max(side, 4))))), duration: reduce() ? 0 : 800, curve: 1.2, easing: ease, essential: true }); return; }
+        }
+        if (h.kind === "par") selectParish(h.key); else select(h.key); });
       map.on("mousemove", (e: any) => hoverSoon(e.point)); map.on("mouseout", () => { cancelAnimationFrame(hoverFrame); hoverFrame = 0; hoverPoint = null; hover(null); });
       map.on("move", labelsSoon); map.on("zoomend", () => { if (map.getZoom() > 7.8) loadParishes(); });
       placeLabels();
@@ -552,7 +584,7 @@ export function initMapV3(root: HTMLElement) {
   function placeLabels() {
     if (!map) return; const z = map.getZoom(), W = canvas.clientWidth, H = canvas.clientHeight;
     const want = features.map((f) => f.properties as Props).filter((p) => p.s === selected || (BIG.includes(p.s) && z > (W < 700 ? 5.2 : 5.9)) || (z > 8.2 && p.a > 2) || z > 9.2);
-    const placed: { x: number; y: number; w: number; h?: number }[] = []; let h = "";
+    const placed: { x: number; y: number; w: number; h?: number }[] = []; let h = ""; const boxes: typeof labelBoxes = [];
     // Prompt 68: the visible photo pins (a 44 px photograph above its point, the short label to its right) are kept clear:
     // a name that would sit on one moves above or below it, or waits for a closer zoom.
     const cv = canvas.getBoundingClientRect();
@@ -569,7 +601,7 @@ export function initMapV3(root: HTMLElement) {
       const c = map.project([x, y]); const name = L.regions[r] || ""; const w = name.length * 9 + 16;
       if (c.x < 0 || c.y < 0 || c.x > W || c.y > H || !name) continue;
       const [rx, ry] = ([[0, 0], [0, 22], [0, -22], [0, 44], [0, 66], [64, 0], [-64, 0], [64, 30], [-64, 30]] as const).map(([dx, dy]) => [c.x + dx, c.y + dy]).find(([xx, yy]) => !clash(xx, yy, w)) ?? [c.x, c.y];
-      placed.push({ x: rx, y: ry, w }); h += `<span class="m3-l0" style="transform:translate(${Math.round(rx)}px,${Math.round(ry)}px)">${esc(name)}</span>`;
+      placed.push({ x: rx, y: ry, w }); boxes.push({ x: rx, y: ry, w, kind: "region", key: r }); h += `<span class="m3-l0" style="transform:translate(${Math.round(rx)}px,${Math.round(ry)}px)">${esc(name)}</span>`;
     }
     // p70 (A-08): the place whose card is open is named first, whatever else wants the room.
     const rank = (p: Props) => { if (p.s === selected) return -1; const i = BIG.indexOf(p.s); return i >= 0 ? i : projMunis.has(p.s) ? BIG.length : 1000 - p.a; };
@@ -580,13 +612,18 @@ export function initMapV3(root: HTMLElement) {
       // A big name (Porto) next to a photo pin may also step a little further down or up rather than disappear.
       const y = [c.y, c.y - 17, c.y + 17, ...(big || p.s === selected ? [c.y + 32, c.y - 34, c.y + 48] : [])].find((yy) => !clash(c.x, yy, w)) ?? (p.s === selected ? c.y : undefined);
       if (y === undefined) continue;
-      placed.push({ x: c.x, y, w }); h += `<span class="${big ? "m3-l1" : "m3-l2"}" style="transform:translate(${Math.round(c.x)}px,${Math.round(y)}px)">${esc(p.n)}</span>`;
+      placed.push({ x: c.x, y, w }); boxes.push({ x: c.x, y, w, kind: "muni", key: p.s }); h += `<span class="${big ? "m3-l1" : "m3-l2"}" style="transform:translate(${Math.round(c.x)}px,${Math.round(y)}px)">${esc(p.n)}</span>`;
       if (placed.length > 70) break;
     }
     // Keep unchanged nodes (and their measured glyph layout) when rounded screen
     // coordinates have not changed; golf's collision observer need not rerun.
     if (h !== labelHTML) { labelsEl.innerHTML = h; labelHTML = h; }
+    labelBoxes = boxes;
   }
+  // The name under a point (prompt 81): its box as drawn, a little taller for a finger.
+  const labelAt = (pt: { x: number; y: number }) => labelBoxes.find((b) => Math.abs(b.x - pt.x) <= b.w / 2 && Math.abs(b.y - pt.y) <= (lastPointer === "touch" ? 16 : 11)) ?? null;
+  // How wide a municipality is drawn, in pixels (its area as a square's side).
+  const placeSide = (p: Props) => Math.sqrt(p.a * 1e-4) * ((512 * 2 ** map.getZoom()) / 360);
 
   // ------------------------------------------------------------ hover, pick, select
   let hoverS: string | null = null;
@@ -605,7 +642,7 @@ export function initMapV3(root: HTMLElement) {
     const h = pt && !golfX?.on() ? pick(pt) : null; const s = h?.kind === "muni" ? h.key : null;
     const g = pt && overlays.golf ? golfAt(pt) : null;
     if (s !== hoverS) { hoverS = s; for (const id of ["lift", "lift-line", "lift-shadow"]) map.setFilter(id, ["==", ["get", "s"], s ?? ""]); }
-    map.getCanvas().style.cursor = h || g ? "pointer" : "";
+    map.getCanvas().style.cursor = h || g || (pt && premium && labelAt(pt)) ? "pointer" : "";
     if (!pt || (!h && !g)) { tip.hidden = true; return; }
     const v = s ? value(P!.munis[s], layer) : null;
     tip.innerHTML = g ? `${esc(g.n)}${g.holes ? `<b>${g.holes} ${L.golf.holes.toLowerCase()}</b>` : ""}` : `${esc(h!.kind === "par" ? parishes?.feats.find((f) => f.properties.id === h!.key)?.properties.n ?? "" : byS.get(s!)?.n ?? "")}${v != null ? `<b>${fmtV(v)}</b>` : ""}`;
@@ -637,9 +674,19 @@ export function initMapV3(root: HTMLElement) {
   const padL = () => { if (mainPresentation()) return 24; const pc = root.querySelector<HTMLElement>("[data-postcards]"); return pc && pc.offsetParent && isWide() ? Math.max(0, Math.round(pc.getBoundingClientRect().right - canvas.getBoundingClientRect().left + 12)) : 0; };
   const mainCardPadding = () => {
     const landscape = matchMedia("(max-height: 500px) and (orientation: landscape)").matches;
-    if (isWide() || landscape) return { left: 24, right: landscape ? Math.min(340, root.clientWidth * 0.48) + 24 : 464, top: padTop(landscape ? 24 : 80), bottom: landscape ? 24 : 80 };
-    const bottom = canvas.clientHeight * 0.6;
-    return { left: 12, right: 12, top: padTop(bottom), bottom };
+    if (isWide() || landscape) return { left: findOpen && isWide() && !landscape ? 448 : 24, right: landscape ? Math.min(340, root.clientWidth * 0.48) + 24 : 464, top: padTop(landscape ? 24 : 80), bottom: landscape ? 24 : 80 };
+    // Prompt 81 (UX problem 6): on a phone the old padding (the bar plus a pin's height above, 60% below) left a band too
+    // thin for a region to fit in, and the camera then did not move at all. The band is now what is really free between
+    // the top bar and the card, never thinner than 90 px.
+    const cv = canvas.getBoundingClientRect(), tb = root.querySelector(".m3-top")?.getBoundingClientRect();
+    const bottom = Math.round(cv.height * 0.63) + 8, top = Math.max(40, Math.min(Math.round((tb ? tb.bottom - cv.top : 60) + 30), cv.height - bottom - 90));
+    return { left: 12, right: 12, top, bottom };
+  };
+  // A region's frame: the same free room, without the allowance for a pin on a phone, and a little tighter on a desktop.
+  const regionPadding = () => {
+    const pad = mainCardPadding();
+    if (isWide()) return { ...pad, top: Math.min(pad.top, 110), bottom: 56 };
+    return { ...pad, top: Math.max(40, pad.top - 22), left: 20, right: 20 };
   };
   // p70 (A-08): a place's card zooms in by the place's size (Matosinhos, 67 km², fills the view instead of the whole Norte).
   const zoomFor = (p: Props) => Math.max(map?.getZoom() ?? 0, p.a < 40 ? 9.4 : p.a < 120 ? 9.0 : p.a < 400 ? 8.4 : 7.6);
@@ -656,6 +703,7 @@ export function initMapV3(root: HTMLElement) {
   function arrStop() { const a = arrAbort; arrAbort = null; a?.(); }
   // Bind once per root, including after a WebGL context rebuild. Taking control
   // also cancels an arrival whose place data is still in flight.
+  canvas.addEventListener("pointerdown", (e) => { lastPointer = e.pointerType || "mouse"; }, { passive: true, capture: true });
   ["pointerdown", "wheel", "touchstart", "keydown"].forEach((event) => canvas.addEventListener(event, () => { cameraTouched = true; stopTour(); halt(); arrStop(); if (premium && !golfX?.on()) map?.stop(); }, { passive: true }));
   if (mode === "home") ["pointerdown", "touchstart", "wheel", "keydown", "focusin", "input"].forEach((event) => root.addEventListener(event, halt, { passive: true }));
   function arriveAt(slug: string, pr = heroOf(slug)) {
@@ -698,6 +746,8 @@ export function initMapV3(root: HTMLElement) {
     // Closing a card that was opened from the bare map goes back one step, so Back never shows it again.
     if (!slug && !restoring && mode === "page" && history.state?.m3 === "" && cardKey()) { history.back(); return; }
     if (slug) step(`place:${slug}`);
+    // Prompt 81 (UX problem 10): closing a region's card goes back to the whole country.
+    const backHome = !slug && premium && !!selRegion && !selected && !selPar;
     arrStop(); selected = slug; selPar = null; selRegion = null; selProj = null;
     if (map?.getLayer("sel")) map.setFilter("sel", ["==", ["get", "s"], slug ?? ""]);
     const p = slug ? byS.get(slug) : null;
@@ -707,7 +757,7 @@ export function initMapV3(root: HTMLElement) {
       showPlace(slug); timeStart(slug);
       const remember = (n?: string) => { if (n) { savePlace(n); rememberPlace(n); } };
       p ? remember(p.n) : loadPlace(slug).then((d) => remember(d?.n));
-    } else closeSheet();
+    } else { closeSheet(); if (backHome && map && !golfX?.on()) flyHome?.(); }
   }
 
   // ------------------------------------------------------------ the place as tiles (D83 part 2: Apple Weather, then Apple Stocks)
@@ -840,6 +890,9 @@ export function initMapV3(root: HTMLElement) {
     if (q) { li.push(C5.src.mkt.replace("{q}", qName(q))); if (d?.p5 != null) li.push(C5.src.dir.replace("{q0}", qName(q0Of(q))).replace("{q}", qName(q))); }
     if (d?.nbq || d?.nb) li.push(C5.src.nb);
     const c5 = d?.c5;
+    // Prompt 81: the service lines' sources, one line per topic the card shows; then, where the card's minutes and names
+    // are the hand-checked ones, the line that says so with its own date.
+    if (d?.sv && cfg.sv && x.kind === "muni") { li.push(...serviceSources(d.sv, svCtx(d))); if (d.sv.hd) li.push(cfg.m5["card.sv.hand"].replace("{date}", longDate(d.sv.hd, loc))); }
     if (c5) {
       li.push(C5.src.drive.replace("{o}", c5.o).replace("{d}", dateF(c5.d)));
       const f = c5.fl?.[cfg.ed]; if (f) li.push(`${C5.src.flight.replace("{from}", f.from).replace("{to}", f.to).replace("{d}", dateF(f.d))}`);
@@ -870,6 +923,12 @@ export function initMapV3(root: HTMLElement) {
     // p70 (MI-25): the region is named once, in the kicker above the name.
     const line = d.c5?.line?.[cfg.lang] ?? [d.n3].filter((z: string) => z && z !== L.regions[r]).join(", ");
     const hs = heroesOf(slug);
+    // Prompt 81: a place whose file carries the services block ("sv": Gondomar first, CLAUDE.md rule 17) opens as the new card.
+    if (d.sv && cfg.sv && mainPresentation()) {
+      ctx = x; rerender = () => showPlace(slug, false); srcFor = () => sourcesHTML(d, x);
+      openSheet(cardHTML(slug, d, name, r, regionHref, hs, here), open, hs.length > 0); wireCard(slug, hs, open);
+      return;
+    }
     if (hs.length && d.arr && cfg.p68) {
       ctx = x; rerender = () => showPlace(slug, false); srcFor = () => sourcesHTML(d, x);
       openSheet(arrivalHTML(slug, d, name, regionHref, hs), open, true); wireArrival(slug, hs, open);
@@ -951,6 +1010,55 @@ export function initMapV3(root: HTMLElement) {
     h += `${mareHTML()}`;
     return h + `</div>`;
   }
+  // Prompt 81, the municipality card (ops/research/81_map/art.md), built on Gondomar first. What a reader takes in within
+  // five seconds, in this order: the photograph (moving), the region and the name, one line, what the budget buys, then
+  // "Por perto": the card writer's seven lines, open, each a label and a number (the detail of a line opens on tap). After
+  // that, one scroll down: the developments (the same tiles as before), the price in full with the IMT line, what the
+  // paid analysis holds, "Fontes", the place's last line and the Maré block. The one action, the Concierge, stays fixed
+  // at the foot of the card at every height (openSheet moves [data-cta-bar] out of the scroll).
+  // Free on the card: only the seven service lines (place_services.py); the lists of schools and health units by name
+  // that the Gondomar card showed before are in the paid analysis.
+  const devsHTML = (hs: Proj[]) => `<div class="m3-devs${hs.length === 1 ? " m3-devs-1" : ""}">${hs.map((pr) => { const img = pr.heroImg || pr.render || "";
+    return `<button type="button" class="m3-dev" data-dev="${esc(pr.id)}"><span class="m3-dev-f">${img ? `<img src="${esc(img)}-800.webp" alt="" width="800" height="450" decoding="async"${phThumb(pr)}>` : ""}${pr.tag ? `<span class="m3-dev-t"><span class="m3-tag">${esc(pr.tag)}</span></span>` : ""}</span><span class="m3-dev-n">${esc(pr.name)}</span><span class="m3-dev-l">${esc(pr.hero ?? "")}</span></button>`; }).join("")}</div>`;
+  const svCtx = (d: any) => {
+    const fl = d.c5?.fl?.[cfg.ed], M5 = cfg.m5;
+    const flight = fl?.min ? M5["card.flight"].replace("{label}", fl.via ? `${C5.flight} (${C5.via})` : C5.flight).replace("{t}", flightTime(fl.min)) : "";
+    return { S: cfg.sv as Record<string, string>, lang: cfg.lang as string, loc, esc, flight };
+  };
+  function cardHTML(slug: string, d: any, name: string, r: string, href: string, hs: Proj[], here: Proj[]): string {
+    const lang = cfg.lang, c5 = d.c5, S = cfg.sv;
+    const line = placeStory(d, lang, [d.n3].filter((z: string) => z && z !== L.regions[r]).join(", "));
+    const kick = [L.regions[r], d.n3].filter((z: string, i: number, a: string[]) => z && a.indexOf(z) === i).join(" · ");
+    let h = photoHTML(slug, r, c5).replace('class="m3-ph', 'class="m3-ph m3-c6-ph');
+    h += `<div class="m3-sb m3-c6-head"><p class="m3-kick">${esc(kick)}</p><div class="ht-row"><h2 class="m3-h" tabindex="-1">${esc(name)}</h2>${heartHTML("region", slug, name, href)}</div>${line ? `<p class="m3-place-story">${esc(line)}</p>` : ""}`;
+    // The one fact: what the reader's budget buys here, with the median it rests on.
+    if (d.m2) h += `<div class="m3-c6-buy">${buyLine(d, slug)}<p class="m3-c6-px">${esc(C5.mkt)} ${esc(m2f(d.m2))} · INE, ${esc(qName(d.q || root.dataset.quarter!))}</p></div>`;
+    h += `</div>${servicesHTML(d.sv, svCtx(d), `m3sv-${mode}`)}`;
+    // Developer components stay (CLAUDE.md, COMMON2 rule 3): the place's developments as the same photo tiles (alphabetical,
+    // no ranking, a label only where the data gives one), or one quiet line where a partner's homes are near.
+    if (hs.length) h += devsHTML(hs);
+    else { const nearBy = here.length ? here : projects.filter((y) => y.showcase && y.near?.some((n) => plain(n) === plain(name))).slice(0, 2);
+      for (const y of nearBy) h += `<p class="m3-sb m3-buys m3-near"><a href="${esc(y.showcase)}"${/^https?:/.test(y.showcase) ? ` target="_blank" rel="noopener"` : ""}>${esc(here.length ? C5.homes.replace("{muni}", name).replace("{name}", y.name) : cfg.pl.near.replace("{name}", y.name).replace("{muni}", y.muniName ?? ""))} →</a> <span class="m3-tag">${esc(y.tag || L.sponsored)}</span></p>`; }
+    h += `<div class="m3-sb m3-c6-more">${d.m2 ? `<div class="m3-tiles">${priceTile(d)}</div>${imtLine(Math.round(budget), "map")}` : ""}`;
+    // What the paid analysis holds (the card writer's line, only where the full lists exist today), then the quiet links.
+    const paid = d.sv.paid ? S["paid.full"].replace("{ns}", nf.format(d.sv.paid.ns)).replace("{nh}", nf.format(d.sv.paid.nh)) : "";
+    h += `<div class="m3-c6-paid">${paid ? `<p>${esc(paid)}</p>` : ""}<p class="m3-fontes"><button type="button" class="m3-link" data-unlock-open>${esc(C5.ctaPaid)}</button><button type="button" class="m3-link" data-sources>${esc(C5.sources)}</button></p></div>`;
+    const more = d.arr?.more?.[lang];
+    if (more) h += `<p class="m3-onemore" data-more>${esc(more)}</p>`;
+    h += `${mareHTML()}</div>`;
+    return h + `<div class="m3-c6-cta" data-cta-bar><a class="m3-btn m3-btn-p" href="${esc(`${cfg.links.consult}?place=${encodeURIComponent(name)}&budget=${Math.round(budget)}`)}" data-concierge data-cta-consult>${esc(C5.ctaConsult)}</a></div>`;
+  }
+  function wireCard(slug: string, hs: Proj[], opened: boolean) {
+    wireArrival(slug, hs, opened);
+    // Each service line opens its detail (one at a time); the first opening of a line is one event: which service a
+    // reader checks first (DESIGN_AND_DATA.md).
+    const items = [...sheetIn.querySelectorAll<HTMLElement>("[data-sv]")];
+    for (const li of items) li.querySelector<HTMLButtonElement>(".m3-svb")!.addEventListener("click", () => {
+      const on = !li.classList.contains("is-open");
+      for (const o of items) { const open = o === li && on; o.classList.toggle("is-open", open); o.querySelector(".m3-svb")!.setAttribute("aria-expanded", String(open)); o.querySelector<HTMLElement>(".m3-svd")!.inert = !open; }
+      if (on) { ev({ event: `map/sv/${li.dataset.sv}`, place: slug, origin: mode }); if (!isWide() && detent < 2) userDetent(2); }
+    });
+  }
   // The arrival card's signals (one schema, lib/track.ts): the project first seen, the visit asked, each question opened,
   // the last line seen.
   function wireArrival(slug: string, hs: Proj[], opened: boolean) {
@@ -1014,8 +1122,10 @@ export function initMapV3(root: HTMLElement) {
     if (fly) await load();
     if (fly && map && selRegion === key) {
       const pts = features.filter((f) => (f.properties as Props).r === key).map((f) => f.properties as Props);
-      if (pts.length) map.fitBounds([[Math.min(...pts.map((p) => p.x)) - 0.15, Math.min(...pts.map((p) => p.y)) - 0.15], [Math.max(...pts.map((p) => p.x)) + 0.15, Math.max(...pts.map((p) => p.y)) + 0.15]],
-        { padding: mainPresentation() ? mainCardPadding() : isWide() ? { left: 280, right: 460, top: 90, bottom: 60 } : { left: 30, right: 30, top: 80, bottom: canvas.clientHeight * 0.5 }, maxZoom: 9, duration: reduce() ? 0 : mainPresentation() ? 950 : 1200, pitch: flat ? 0 : 40 });
+      const mg = mainPresentation() && (key === "madeira" || key === "azores") ? 0.06 : 0.15;
+      if (pts.length) map.fitBounds([[Math.min(...pts.map((p) => p.x)) - mg, Math.min(...pts.map((p) => p.y)) - mg], [Math.max(...pts.map((p) => p.x)) + mg, Math.max(...pts.map((p) => p.y)) + mg]],
+        // Madeira and the Azores are drawn smaller than life beside the mainland, so their frame may come closer (prompt 81).
+        { padding: mainPresentation() ? regionPadding() : isWide() ? { left: 280, right: 460, top: 90, bottom: 60 } : { left: 30, right: 30, top: 80, bottom: canvas.clientHeight * 0.5 }, maxZoom: mainPresentation() && (key === "madeira" || key === "azores") ? 10.6 : 9, duration: reduce() ? 0 : mainPresentation() ? 950 : 1200, pitch: flat ? 0 : 40 });
     }
   }
   // "Fontes" opens in the same sheet; "Voltar" returns to the card. (The tiles' charts and strips moved to the paid analysis.)
@@ -1055,6 +1165,9 @@ export function initMapV3(root: HTMLElement) {
     const kick = unlock.querySelector<HTMLElement>("[data-unlock-kick]")!; kick.textContent = T4.paid;
     const pv = unlock.querySelector<HTMLElement>("[data-unlock-pv]");
     if (pv) pv.innerHTML = `<p class="m3-pk">${esc(C5.preview.replace("{place}", x?.name ?? "Portugal"))}</p><div class="m3-tiles m3-tiles-paid">${C5.paid.map((t: string, i: number) => `<div class="m3-tile m3-tile-p"><span class="m3-tt">${esc(t)}${lock}</span>${ghost(i)}</div>`).join("")}</div>`;
+    // Prompt 81: a line of the list that a preview tile above already carries is shown once (the tile).
+    const tiles: string[] = pv ? C5.paid.map((t: string) => plain(t)) : [];
+    unlock.querySelectorAll<HTMLElement>(".m3-unlock-list li").forEach((li) => { const t = plain(li.textContent || ""); li.hidden = tiles.some((x) => x.startsWith(t) || t.startsWith(x)); });
     const buy = unlock.querySelector<HTMLAnchorElement>("[data-unlock-region]"); if (buy) buy.textContent = (buy.dataset.tpl || "").replace("{region}", rName).replace("{v}", buy.dataset.v || "");
     unlock.hidden = false; requestAnimationFrame(() => unlock.classList.add("is-open"));
     unlock.querySelector<HTMLElement>("[data-unlock-x]")?.focus({ preventScroll: true });
@@ -1090,6 +1203,12 @@ export function initMapV3(root: HTMLElement) {
     const close = sheetIn.querySelector(".m3-x")!;
     sheet.querySelector(":scope > .m3-x")?.remove();
     if (mainPresentation()) sheet.append(close);
+    // Prompt 81: a card's one action stays at the foot of the sheet, outside the scroll, at every height.
+    sheet.querySelector(":scope > [data-cta-bar]")?.remove();
+    const bar = sheetIn.querySelector<HTMLElement>(":scope > [data-cta-bar]");
+    if (bar && mainPresentation()) sheet.append(bar);
+    sheet.classList.toggle("has-cta", !!bar); sheet.classList.toggle("is-c6", !!sheetIn.querySelector("[data-services]"));
+    if (focus) sheetIn.scrollTop = 0;
     close.addEventListener("click", () => select(null)); wireImgs(sheetIn);
     sheetIn.querySelector("[data-share]")?.addEventListener("click", share);
     sheetIn.querySelectorAll<HTMLButtonElement>("[data-goto]").forEach((b) => b.addEventListener("click", () => select(b.dataset.goto!)));
@@ -1097,7 +1216,7 @@ export function initMapV3(root: HTMLElement) {
     // em breve"); "O consultor ajuda" is a[data-concierge] (scripts/chrome.ts opens the Concierge with ?place= filled in).
     sheetIn.querySelector("[data-sources]")?.addEventListener("click", openSources);
     sheetIn.querySelector("[data-unlock-open]")?.addEventListener("click", () => { if (ctx) ev({ event: "map/cta/paid", ...evPlace(ctx), origin: mode }); openUnlock("card"); });
-    sheetIn.querySelector("[data-cta-consult]")?.addEventListener("click", () => { if (ctx) ev({ event: "map/cta/consult", ...evPlace(ctx), origin: mode }); });
+    sheet.querySelector("[data-cta-consult]")?.addEventListener("click", () => { if (ctx) ev({ event: "map/cta/consult", ...evPlace(ctx), origin: mode }); });
     // The gallery: swipe (or scroll) through the place's views; the dots follow; each new view seen is one event.
     const gt = sheetIn.querySelector<HTMLElement>("[data-gal-t]");
     if (gt) { const dots = [...sheetIn.querySelectorAll<HTMLElement>(".m3-gal-d i")]; let seen = 0;
@@ -1105,15 +1224,58 @@ export function initMapV3(root: HTMLElement) {
     if (focus && wasHidden && root.contains(document.activeElement)) sheetIn.querySelector<HTMLElement>("h2, h3")?.focus({ preventScroll: true });
   }
   function closeSheet() { timeEnd(); arrStop(); if (selProj) { selProj = null; syncUrl(); }
+    sheet.querySelector(":scope > [data-cta-bar]")?.remove(); sheet.classList.remove("has-cta", "is-c6");
+    if (fromFinder && !isWide()) { fromFinder = false; setTimeout(() => { if (sheet.hidden || !sheet.classList.contains("is-open")) openFinder(); }, 280); }
     // The 2D map (phones) is tilted only for an arrival: closing the card sets it flat again.
     if (map && flat && (map.getPitch() > 0.5 || Math.abs(map.getBearing()) > 0.5)) map.easeTo({ pitch: 0, bearing: 0, duration: reduce() ? 0 : 600 });
     ctx = null; rerender = null; view = "card"; if (selRegion) { selRegion = null; syncUrl(); } sheet.classList.remove("is-open"); setTimeout(() => { if (!sheet.classList.contains("is-open")) sheet.hidden = true; }, 260); pinA = null; if (map?.getLayer("sel")) map.setFilter("sel", ["==", ["get", "s"], ""]); }
   function setDetent(d: number) { detent = d; sheet.dataset.detent = String(d); }
+  // A height the reader chose (a swipe, the handle, a line opened): one event per change, "full" or "half".
+  function userDetent(d: number) { if (d === detent) return; setDetent(d); if (d > 0) ev({ event: `map/sheet/${d === 2 ? "full" : "half"}`, ...(ctx ? evPlace(ctx) : {}), origin: mode }); }
+  // Prompt 81 (UX problem 2): on a phone the card is a proper sheet. It opens at 60% of the screen; one upward swipe
+  // anywhere on it opens it to full height, as Apple Maps does, and only then does its text scroll; a downward pull from
+  // the top of the text puts it back to 60%, then to the peek (the name alone). The handle still drags, and a tap on it
+  // (or Enter) switches between the two heights. Sideways swipes stay with the photographs.
+  if (premium) {
+    let y0 = 0, x0 = 0, h0 = 0, t0 = 0, drag: "" | "wait" | "sheet" = "";
+    const phone = () => !isWide() && !golfX?.on() && !matchMedia("(max-height: 500px) and (orientation: landscape)").matches;
+    sheet.addEventListener("touchstart", (e) => {
+      drag = "";
+      if (!phone() || e.touches.length !== 1 || (e.target as HTMLElement).closest("[data-grab], input, textarea, select")) return;
+      y0 = e.touches[0].clientY; x0 = e.touches[0].clientX; h0 = sheet.getBoundingClientRect().height; t0 = performance.now(); drag = "wait";
+    }, { passive: true });
+    sheet.addEventListener("touchmove", (e) => {
+      if (!drag) return;
+      const dy = e.touches[0].clientY - y0, dx = e.touches[0].clientX - x0;
+      if (drag === "wait") {
+        if (Math.abs(dy) < 6 && Math.abs(dx) < 6) return;
+        // Sideways: the gallery. At full height the text scrolls, and the sheet moves only on a pull down from its top.
+        if (Math.abs(dx) > Math.abs(dy) || (detent === 2 && !(dy > 0 && sheetIn.scrollTop <= 0))) { drag = ""; return; }
+        drag = "sheet"; sheet.classList.add("is-drag");
+      }
+      if (e.cancelable) e.preventDefault();
+      sheet.style.height = `${Math.max(90, Math.min(root.clientHeight - 8, h0 - dy))}px`;
+    }, { passive: false });
+    const end = (e: TouchEvent) => {
+      if (drag !== "sheet") { drag = ""; return; }
+      drag = ""; sheet.classList.remove("is-drag");
+      const dy = (e.changedTouches[0]?.clientY ?? y0) - y0, fast = Math.abs(dy) / Math.max(1, performance.now() - t0) > 0.45;
+      const hh = sheet.getBoundingClientRect().height / root.clientHeight; sheet.style.height = "";
+      if (Math.abs(dy) < 28 && !fast) return;
+      userDetent(dy < 0 ? (detent === 0 && hh < 0.5 ? 1 : 2) : detent === 2 && hh > 0.3 ? 1 : 0);
+    };
+    sheet.addEventListener("touchend", end); sheet.addEventListener("touchcancel", end);
+    // A wheel or trackpad over the half-open card (a narrow desktop window) opens it too.
+    sheet.addEventListener("wheel", (e) => { if (phone() && detent < 2 && e.deltaY > 0) userDetent(2); }, { passive: true });
+    $("[data-grab]").addEventListener("click", (e) => { if ((e as MouseEvent).detail === 0) userDetent(detent === 2 ? 1 : 2); });
+    // The text under the close button: a band of paper once it has scrolled (map-p81.css).
+    sheetIn.addEventListener("scroll", () => sheet.classList.toggle("is-scrolled", sheetIn.scrollTop > Math.max(8, (sheetIn.querySelector<HTMLElement>(".m3-c6-ph")?.offsetHeight ?? 0) - 54)), { passive: true });
+  }
   { // drag the sheet between its three heights (mobile)
     const grab = $("[data-grab]"); let y0 = 0, h0 = 0, on = false;
     grab.addEventListener("pointerdown", (e) => { on = true; y0 = e.clientY; h0 = sheet.getBoundingClientRect().height; grab.setPointerCapture(e.pointerId); sheet.classList.add("is-drag"); });
     grab.addEventListener("pointermove", (e) => { if (on) sheet.style.height = `${Math.max(90, h0 - (e.clientY - y0))}px`; });
-    const end = (e: PointerEvent) => { if (!on) return; on = false; sheet.classList.remove("is-drag"); const hh = sheet.getBoundingClientRect().height / root.clientHeight; sheet.style.height = ""; if (Math.abs(e.clientY - y0) < 6) { setDetent(detent === 2 ? 1 : 2); return; } hh < 0.25 ? (hh < 0.12 ? select(null) : setDetent(0)) : setDetent(hh < 0.66 ? 1 : 2); };
+    const end = (e: PointerEvent) => { if (!on) return; on = false; sheet.classList.remove("is-drag"); const hh = sheet.getBoundingClientRect().height / root.clientHeight; sheet.style.height = ""; if (Math.abs(e.clientY - y0) < 6) { userDetent(detent === 2 ? 1 : 2); return; } hh < 0.25 ? (hh < 0.12 ? select(null) : userDetent(0)) : userDetent(hh < 0.66 ? 1 : 2); };
     grab.addEventListener("pointerup", end); grab.addEventListener("pointercancel", end);
   }
   async function share() { syncUrl(); ev({ event: "map/share", place: selected ?? undefined, origin: navigator.share ? "native" : "copy" }); try { if (navigator.share) await navigator.share({ url: location.href }); else { await navigator.clipboard.writeText(location.href); toast(L.copied); } } catch { /* closed */ } }
@@ -1435,8 +1597,13 @@ export function initMapV3(root: HTMLElement) {
 
   // ------------------------------------------------------------ search, like Spotlight (the magnifier, ⌘K, or "/")
   const spot = $("[data-spot]"), spotIn = $<HTMLInputElement>("[data-spot-in]"), spotRes = $<HTMLUListElement>("[data-spot-res]");
-  type Hit = { g: keyof typeof L.g; n: string; sub?: string; id?: string; go: () => void };
-  let pool: Hit[] = [], active = 0, hits: Hit[] = [], poolReady = false, enterWaiting = false;
+  // Prompt 81 (UX problem 5, map-search.ts): the names foreign readers type ("Lisbon", "Lisbonne", "Oporto"), the seven
+  // regions, an exact name first ("Porto" before "Porto de Mós"), one wrong letter forgiven ("did you mean"), and six
+  // places to begin with before anything is typed (the first six of the map's own list of main places: no partner).
+  type Hit = { g: string; n: string; sub?: string; id?: string; names?: string[]; loc?: boolean; go: () => void };
+  let pool: Entry<Hit>[] = [], active = 0, hits: Hit[] = [], poolReady = false, enterWaiting = false, hitsKind: "" | "did" | "first" = "";
+  const entry = (h: Hit): Entry<Hit> => ({ names: h.names ?? [h.n], group: h.g, item: h });
+  const groupName = (g: string) => (g === "regions" ? M5["g.regions"] ?? "" : L.g[g] ?? "");
   // p70 (MI-04, S-10): the places are searchable as soon as their small list (munis.topo.json) is here, before the map
   // itself; until then the list says "Searching…" (never "not found") and an Enter waits for it, then opens the first match.
   async function buildPool() {
@@ -1444,39 +1611,57 @@ export function initMapV3(root: HTMLElement) {
     const topo = features.length ? null : await fetch("/data/map/munis.topo.json").then((r) => r.json()).catch(() => null);
     const props: Props[] = features.length ? features.map((f) => f.properties as Props) : topo ? (feature(topo, topo.objects.m) as any).features.map((f: any) => f.properties as Props) : [];
     const nameOf = (s: string) => byS.get(s)?.n ?? props.find((p) => p.s === s)?.n;
-    const pl: Hit[] = props.map((p) => ({ g: "munis", n: p.n, sub: L.regions[p.r], id: p.s, go: () => select(p.s) }));
-    for (const [n, x, y, m] of LOCALITIES) pl.push({ g: "munis", n, sub: nameOf(m), id: m, go: () => { select(m, false); if (map) flyTo(x, y, 10.2); else load().then(() => flyTo(x, y, 10.2)); } });
+    const pl: Hit[] = props.map((p) => ({ g: "munis", n: p.n, sub: L.regions[p.r], id: p.s, names: [p.n, ...EXONYMS.filter(([, sl]) => sl === p.s).map(([n]) => n)], go: () => select(p.s) }));
+    if (premium) for (const [r, names] of Object.entries(REGION_NAMES)) if (L.regions[r]) pl.push({ g: "regions", n: L.regions[r], id: r, names: [L.regions[r], ...names], go: () => showRegion(r) });
+    for (const [n, x, y, m] of LOCALITIES) pl.push({ g: "munis", n, sub: nameOf(m), id: m, loc: true, go: () => { select(m, false); if (map) flyTo(x, y, 10.2); else load().then(() => flyTo(x, y, 10.2)); } });
     for (const p of projects) pl.push({ g: "devs", n: p.name, sub: p.developer, id: p.id, go: () => { if (map) flyTo(p.lon, p.lat, 14); setOverlay("devs", true); showProject(p); } });
-    pool = [...pl]; poolReady = true; find();
+    pool = pl.map(entry); poolReady = true; find();
     if (enterWaiting) { enterWaiting = false; if (hits.length) choose(active); }
     await load();
     try { const pt = await fetch("/data/map/parishes.topo.json").then((r) => r.json()); for (const f of (feature(pt, pt.objects.p) as any).features) pl.push({ g: "pars", n: f.properties.n, sub: byS.get(f.properties.m)?.n, id: `p-${f.properties.id}`, go: async () => { await loadParishes(); const m = byS.get(f.properties.m)!; flyTo(m.x, m.y, 9.4); setTimeout(() => selectParish(f.properties.id), 900); } }); } catch { /* parishes optional */ }
     for (const c of (await loadGolf()).courses) pl.push({ g: "golf", n: c.n, sub: byS.get(c.m)?.n, id: c.m, go: async () => { await setOverlay("golf", true); showGolf(c); } });
     beaches ??= await fetch("/data/map/beaches.json").then((r) => r.json()).catch(() => []);
     for (const [x, y, n] of beaches!) pl.push({ g: "beach", n, go: async () => { await setOverlay("beach", true); flyTo(x, y, 11.6); toast(n); } });
-    pool = pl; if (!spot.hidden && spotIn.value.trim()) find();
+    pool = pl.map(entry); if (!spot.hidden && spotIn.value.trim()) find();
   }
   function find() {
-    const t = plain(spotIn.value.trim()); active = 0;
-    hits = !t ? [] : pool.filter((h) => plain(h.n).includes(t)).sort((a, b) => Number(!plain(a.n).startsWith(t)) - Number(!plain(b.n).startsWith(t)) || (a.g === "munis" ? -1 : 0) - (b.g === "munis" ? -1 : 0)).slice(0, 12);
-    let g = "", h = "";
-    hits.forEach((x, i) => { if (x.g !== g) { g = x.g; h += `<li class="m3-rg" role="presentation">${L.g[g]}</li>`; } h += `<li role="option" id="m3o-${i}" data-i="${i}" aria-selected="${i === active}">${esc(x.n)}${x.sub ? `<span>${esc(x.sub)}</span>` : ""}</li>`; });
-    if (t && !hits.length) h = `<li class="m3-none">${poolReady ? L.nomatch : L.findWait}</li>`;
+    const text = spotIn.value.trim(), t = plain(text); active = 0; hitsKind = "";
+    if (!t) {
+      // Before a letter is typed: six places to begin with.
+      hits = premium && poolReady ? BIG.slice(0, 6).map((sl) => pool.find((e) => e.item.g === "munis" && e.item.id === sl && !e.item.loc)?.item).filter((x): x is Hit => !!x) : [];
+      if (hits.length) hitsKind = "first";
+    } else {
+      hits = searchEntries(pool, text, 12).map((e) => e.item);
+      if (!hits.length && poolReady && premium) { hits = nearEntries(pool, text).map((e) => e.item); if (hits.length) hitsKind = "did"; }
+      // One heading per kind, the kinds in the order of their best match.
+      hits = [...new Set(hits.map((x) => x.g))].flatMap((g) => hits.filter((x) => x.g === g));
+    }
+    let g = "", h = hitsKind ? `<li class="m3-rg" role="presentation">${esc(M5[hitsKind === "did" ? "search.did" : "search.first"])}</li>` : "";
+    hits.forEach((x, i) => { if (!hitsKind && x.g !== g) { g = x.g; h += `<li class="m3-rg" role="presentation">${esc(groupName(g))}</li>`; } h += `<li role="option" id="m3o-${i}" data-i="${i}" aria-selected="${i === active}">${esc(x.n)}${x.sub ? `<span>${esc(x.sub)}</span>` : ""}</li>`; });
+    if (t && !hits.length) h = `<li class="m3-none">${poolReady ? esc(M5["search.none"] ?? L.nomatch) : L.findWait}</li>`;
     spotRes.innerHTML = h; hits.length ? spotIn.setAttribute("aria-activedescendant", "m3o-0") : spotIn.removeAttribute("aria-activedescendant");
     // Type "Comp" and the map already glides there.
-    if (hits[0] && hits[0].g === "munis" && plain(hits[0].n).startsWith(t) && t.length >= 3 && map) { const lo = LOCALITIES.find((l) => l[0] === hits[0].n); const p = lo ? { x: lo[1], y: lo[2] } : features.find((f) => f.properties.n === hits[0].n)?.properties; if (p) map.easeTo({ center: [p.x, p.y], zoom: Math.max(map.getZoom(), 7.4), duration: 700 }); }
+    if (!hitsKind && hits[0] && hits[0].g === "munis" && plain(hits[0].n).startsWith(t) && t.length >= 3 && map) { const lo = LOCALITIES.find((l) => l[0] === hits[0].n); const p = lo ? { x: lo[1], y: lo[2] } : features.find((f) => f.properties.n === hits[0].n)?.properties; if (p) map.easeTo({ center: [p.x, p.y], zoom: Math.max(map.getZoom(), 7.4), duration: 700 }); }
   }
   const mark = () => spotRes.querySelectorAll("[role=option]").forEach((li) => li.setAttribute("aria-selected", String(Number((li as HTMLElement).dataset.i) === active)));
-  function openSpot() { spot.hidden = false; requestAnimationFrame(() => spot.classList.add("is-open")); spotIn.value = ""; spotRes.innerHTML = ""; spotIn.focus(); if (!pool.length) buildPool().then(find); halt(); }
+  const spotHint = spotIn.placeholder;
+  function openSpot() {
+    spot.hidden = false; requestAnimationFrame(() => spot.classList.add("is-open")); spotIn.value = ""; spotRes.innerHTML = "";
+    // On a phone the long hint was cut off: the short label stands in its place.
+    if (premium) spotIn.placeholder = isWide() ? spotHint : spotIn.getAttribute("aria-label") || spotHint;
+    spotIn.focus(); if (!pool.length) buildPool().then(find); else find(); halt();
+  }
   function closeSpot() { spot.classList.remove("is-open"); setTimeout(() => (spot.hidden = true), 200); }
   // D83 part 2: the place the search resolved to (a slug or a parish code, never the typed text).
-  const choose = (i: number) => { const h = hits[i]; if (!h) return; ev({ event: `map/search/${h.g}`, place: h.id, origin: mode }); closeSpot(); h.go(); };
+  const choose = (i: number) => { const h = hits[i]; if (!h) return;
+    ev({ event: `map/search/${h.g}`, ...(h.g === "regions" ? { region: h.id } : { place: h.id }), origin: mode }); if (hitsKind) ev({ event: `map/search/${hitsKind}`, origin: mode });
+    closeSpot(); h.go(); };
   root.querySelector("[data-spot-open]")!.addEventListener("click", openSpot);
   spotIn.addEventListener("input", find);
   spotIn.addEventListener("keydown", (e) => {
     if (e.key === "ArrowDown") { active = Math.min(active + 1, hits.length - 1); mark(); e.preventDefault(); }
     else if (e.key === "ArrowUp") { active = Math.max(active - 1, 0); mark(); e.preventDefault(); }
-    else if (e.key === "Enter") { e.preventDefault(); if (!poolReady) enterWaiting = true; else { if (!hits.length) find(); choose(active); } } else if (e.key === "Escape") closeSpot();
+    else if (e.key === "Enter") { e.preventDefault(); if (!spotIn.value.trim() && active === 0) return; if (!poolReady) enterWaiting = true; else { if (!hits.length) find(); choose(active); } } else if (e.key === "Escape") closeSpot();
     if (hits.length) spotIn.setAttribute("aria-activedescendant", `m3o-${active}`);
   });
   spotRes.addEventListener("click", (e) => { const li = (e.target as HTMLElement).closest<HTMLElement>("[data-i]"); if (li) choose(Number(li.dataset.i)); });
@@ -1485,14 +1670,17 @@ export function initMapV3(root: HTMLElement) {
     if ((e.key === "k" && (e.metaKey || e.ctrlKey)) || (e.key === "/" && !(e.target as HTMLElement).closest("input,textarea"))) { e.preventDefault(); openSpot(); }
     if (e.key === "Escape" && !unlock.hidden) { closeUnlock(); return; }
     if (e.key === "Escape" && panelOpen && spot.hidden) { closePanel(); return; }
+    if (e.key === "Escape" && budOpen && spot.hidden) { closeBud(); return; }
+    if (e.key === "Escape" && findOpen && spot.hidden && sheet.hidden) { closeFinder(); return; }
     if (e.key === "Escape" && !sheet.hidden && spot.hidden) select(null);
   });
 
   // ------------------------------------------------------------ "Camadas": the panel with everything the first view leaves out
-  function reachPaint(): any { return ["case", ["boolean", ["feature-state", "reach"], false], panelOpen ? 0.9 : 0, 0]; }
+  function reachPaint(): any { return ["case", ["boolean", ["feature-state", "reach"], false], panelOpen || budOpen ? 0.9 : 0, 0]; }
   const panel = $("[data-panel]"), panelBtn = root.querySelector<HTMLButtonElement>("[data-panel-open]");
   function openPanel() {
     if (mode !== "page") return;
+    closeBud(); closeFinder();
     panelOpen = true; panel.hidden = false; requestAnimationFrame(() => panel.classList.add("is-open")); root.classList.add("is-panel");
     panelBtn?.setAttribute("aria-expanded", "true"); ev({ event: "map/panel/open", origin: mode });
     if (!isWide() && !sheet.hidden) select(null);
@@ -1506,6 +1694,98 @@ export function initMapV3(root: HTMLElement) {
     panelBtn?.focus({ preventScroll: true });
   }
   panelBtn?.addEventListener("click", () => (panelOpen ? closePanel() : openPanel()));
+  // ---------------------------------------------------------- prompt 81: the budget, one tap from the first view
+  // The page's promise ("write a budget and see the m²") sat inside "Camadas". It is now its own button, with the amount
+  // on it; its small panel holds the same slider, amount and sentence, and one switch for the price colours. While it
+  // is open, the places where the budget buys 100 m² or more glow, as they did in the panel.
+  const bud = root.querySelector<HTMLElement>("[data-bud]"), budBtn = root.querySelector<HTMLButtonElement>("[data-bud-open]");
+  function openBud() {
+    if (!bud || budOpen) return;
+    if (panelOpen) closePanel(); closeFinder();
+    budOpen = true; bud.hidden = false; requestAnimationFrame(() => bud.classList.add("is-open")); root.classList.add("is-bud");
+    budBtn?.setAttribute("aria-expanded", "true"); ev({ event: "map/budget/open", origin: mode });
+    if (!isWide() && !sheet.hidden) select(null);
+    load().then(() => { if (map?.getLayer("reach")) map.setPaintProperty("reach", "line-opacity", reachPaint()); sentence(); });
+  }
+  function closeBud() {
+    if (!bud || !budOpen) return;
+    budOpen = false; bud.classList.remove("is-open"); root.classList.remove("is-bud"); budBtn?.setAttribute("aria-expanded", "false");
+    setTimeout(() => { if (!budOpen) bud.hidden = true; }, 240);
+    if (map?.getLayer("reach")) map.setPaintProperty("reach", "line-opacity", reachPaint());
+  }
+  budBtn?.addEventListener("click", () => (budOpen ? closeBud() : openBud()));
+  root.querySelector("[data-bud-close]")?.addEventListener("click", () => { closeBud(); budBtn?.focus({ preventScroll: true }); });
+  root.querySelector("[data-bud-colour]")?.addEventListener("click", () => { const on = layer !== "price"; setLayer(on ? "price" : "none"); if (on) ev({ event: "map/budget/colour", origin: mode }); });
+  // ---------------------------------------------------------- prompt 81: the way back to Portugal, and the zoom (desktop)
+  const homeBtn = root.querySelector<HTMLButtonElement>("[data-home]");
+  function homeButton() {
+    if (!homeBtn || !map) return;
+    const h = (root as any).__home; if (!h) return;
+    const c = map.getCenter(), hc = Array.isArray(h.center) ? { lng: h.center[0], lat: h.center[1] } : h.center;
+    // Away from the whole country: closer by a third of a zoom level, or moved by more than about 60 km.
+    const away = map.getZoom() > h.zoom + 0.35 || Math.hypot(c.lng - hc.lng, c.lat - hc.lat) > 0.6;
+    homeBtn.hidden = !(away && (cameraTouched || !sheet.hidden)) || root.classList.contains("is-touring");
+  }
+  homeBtn?.addEventListener("click", () => {
+    ev({ event: "map/home", origin: mode });
+    if (!sheet.hidden) { restoring = true; try { select(null); } finally { restoring = false; } syncUrl(); }
+    flyHome?.(); homeBtn.hidden = true;
+  });
+  root.querySelectorAll<HTMLButtonElement>("[data-zoom]").forEach((b) => b.addEventListener("click", async () => {
+    await load(); const inward = b.dataset.zoom === "in"; cameraTouched = true; stopTour(); halt(); arrStop();
+    ev({ event: `map/zoom/${inward ? "in" : "out"}`, origin: mode });
+    map.easeTo({ zoom: map.getZoom() + (inward ? 1 : -1), duration: reduce() ? 0 : 300 });
+  }));
+  // ---------------------------------------------------------- prompt 81: the finder ("what matters to you")
+  // One quiet entry in the chrome opens a panel: tastes with their weights, the budget, and the places in order, each
+  // with its reasons in numbers (map-finder.ts, on the one matching engine, lib/match.ts). The panel's code and the
+  // 308-place table load when it first opens. A result flies the map to the place and opens its card.
+  const findEl = root.querySelector<HTMLElement>("[data-finder]"), findBtn = root.querySelector<HTMLButtonElement>("[data-finder-open]");
+  let finder: { open: () => void; close: () => void; budget: () => void } | null = null, finderTask: Promise<void> | null = null;
+  function openFinder() {
+    if (!findEl || findOpen) return;
+    if (panelOpen) closePanel(); closeBud();
+    findOpen = true; findEl.hidden = false; requestAnimationFrame(() => findEl.classList.add("is-open")); root.classList.add("is-find");
+    findBtn?.setAttribute("aria-expanded", "true"); ev({ event: "map/finder/open", origin: mode });
+    if (!isWide() && !sheet.hidden) { fromFinder = false; select(null); }
+    load();
+    finderTask ??= retry(() => import("./map-finder")).then(({ createFinder }) => {
+      finder = createFinder({ el: findEl, cfg, loc, ev, esc, mode, budget: () => budget, setBudget: (b: number) => setBudget(b, true), moneyCur, snap, toT, fromT, close: closeFinder,
+        go: finderGo, marks: (list) => { lastMarks = list; load().then(() => { if (findOpen || fromFinder) setMarks(list, true); }); } });
+    });
+    finderTask.then(() => { if (findOpen) { finder?.open(); if (lastMarks.length && !findMarks.length) load().then(() => { if (findOpen) setMarks(lastMarks); }); } });
+  }
+  // The places of the list stand on the map as small numerals, in the list's order (nothing else is added to the map,
+  // and the developments' pins step back while the list is open: map-p81.css). A numeral opens its place, as its line does.
+  let findMarks: any[] = [], lastMarks: { id: string; rank: number; name: string }[] = [], marksKey = "";
+  const finderGo = (slug: string) => { if (!isWide()) { fromFinder = true; closeFinder(true); } select(slug); };
+  function setMarks(list: typeof lastMarks, frame = false) {
+    for (const m of findMarks) try { m.remove(); } catch { /* the map is gone */ }
+    findMarks = [];
+    if (!map || !ml) return;
+    for (const r of list) {
+      const p = byS.get(r.id); if (!p) continue;
+      const el = document.createElement("button"); el.type = "button"; el.className = "m3-fmark"; el.textContent = String(r.rank); el.setAttribute("aria-label", `${r.rank}. ${r.name}`);
+      el.addEventListener("click", (e) => { e.stopPropagation(); ev({ event: "match/place", place: r.id, origin: "map" }); finderGo(r.id); });
+      findMarks.push(new ml.Marker({ element: el, anchor: "center" }).setLngLat([p.x, p.y]).addTo(map));
+    }
+    // A new list (other tastes, another budget) frames its places beside the panel, unless a card is open.
+    const key = list.map((r) => r.id).join(",");
+    if (frame && key && key !== marksKey && isWide() && sheet.hidden && list.length > 1) {
+      const pts = list.map((r) => byS.get(r.id)).filter((p): p is Props => !!p); cameraTouched = true; stopTour(); arrStop(); rotating = false;
+      map.fitBounds([[Math.min(...pts.map((p) => p.x)), Math.min(...pts.map((p) => p.y))], [Math.max(...pts.map((p) => p.x)), Math.max(...pts.map((p) => p.y))]],
+        { padding: { left: 500, right: 120, top: 150, bottom: 110 }, maxZoom: 8.6, pitch: flat ? 0 : 35, bearing: flat ? 0 : -12, duration: reduce() ? 0 : 1100, essential: true });
+    }
+    marksKey = key;
+  }
+  function closeFinder(quiet = false) {
+    if (!findEl || !findOpen) return;
+    findOpen = false; findEl.classList.remove("is-open"); root.classList.remove("is-find"); findBtn?.setAttribute("aria-expanded", "false");
+    setTimeout(() => { if (!findOpen) findEl.hidden = true; }, 260); finder?.close();
+    if (!quiet) { fromFinder = false; setMarks([]); ev({ event: "map/finder/close", origin: mode }); }
+  }
+  findBtn?.addEventListener("click", () => (findOpen ? closeFinder() : openFinder()));
+  root.addEventListener("m3:find", () => openFinder());
   root.querySelector("[data-panel-close]")?.addEventListener("click", closePanel);
   // The region postcards.
   root.querySelectorAll<HTMLButtonElement>("[data-region]").forEach((b) => b.addEventListener("click", () => { stopTour(); halt(); showRegion(b.dataset.region!); }));

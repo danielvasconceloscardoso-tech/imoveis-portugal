@@ -2,6 +2,9 @@ import { ev } from "../lib/track";
 
 const SEEN = "ip.map.arrival.v1";
 
+// Prompt 81 (UX problem 8): the welcome stays until the reader acts (it left by itself after two seconds, often before
+// its photograph had arrived). Its one action opens the finder; "View the map", any touch on the map, a scroll or Escape
+// put it away. Shown once: any later visit, or a shared link with a place, goes straight to the map.
 export function initMapArrival(intro: HTMLElement) {
   if (intro.dataset.initialized) return;
   intro.dataset.initialized = "true";
@@ -11,7 +14,6 @@ export function initMapArrival(intro: HTMLElement) {
 
   // MapV3 owns background loading and prioritizes a shared place's card/photo.
   // This optional introduction never bypasses that existing scheduling.
-
   const reduce = matchMedia("(prefers-reduced-motion: reduce)");
   const query = new URLSearchParams(location.search);
   const direct = query.size > 0 || !!location.hash;
@@ -22,25 +24,18 @@ export function initMapArrival(intro: HTMLElement) {
   // to the plain map should not introduce an arrival the reader already bypassed.
   try { localStorage.setItem(SEEN, "1"); } catch { /* session storage is the fallback */ }
   try { sessionStorage.setItem(SEEN, "1"); } catch { /* the arrival remains optional */ }
-  if (direct || seen || reduce.matches || document.hidden) return;
+  if (direct || seen || document.hidden) return;
   intro.hidden = false;
   frame.dataset.arrivalActive = "true";
   ev({ event: "map/arrival/shown", origin: "map" });
-  const card = intro.querySelector<HTMLElement>(".map-arrival__card")!;
   let ended = false;
-  let timer: ReturnType<typeof setTimeout> | undefined;
-  let remaining = 1880;
-  let timerStarted = 0;
-  let hovered = false;
-  const finish = (reason: "explore" | "skip" | "complete", immediate = false, focusMap = false) => {
+  const finish = (reason: "explore" | "skip" | "find", immediate = false, focusMap = false) => {
     if (ended) return;
     ended = true;
-    clearTimeout(timer);
-    timer = undefined;
     delete frame.dataset.arrivalActive;
     const heldFocus = intro.contains(document.activeElement);
     intro.inert = true;
-    if (heldFocus || focusMap) root.querySelector<HTMLElement>("[data-spot-open]")?.focus({ preventScroll: true });
+    if ((heldFocus || focusMap) && reason !== "find") root.querySelector<HTMLElement>("[data-spot-open]")?.focus({ preventScroll: true });
     if (immediate || reduce.matches) intro.hidden = true;
     else {
       intro.classList.add("is-leaving");
@@ -48,53 +43,19 @@ export function initMapArrival(intro: HTMLElement) {
     }
     ev({ event: `map/arrival/${reason}`, origin: "map" });
     root.removeEventListener("pointerdown", interact);
-    root.removeEventListener("focusin", interact);
     window.removeEventListener("keydown", escape);
     window.removeEventListener("scroll", scroll);
     window.removeEventListener("pagehide", leave);
-    document.removeEventListener("visibilitychange", visibility);
-    reduce.removeEventListener("change", reduced);
-    card.removeEventListener("pointerenter", pointerEnter);
-    card.removeEventListener("pointerleave", pointerLeave);
-    intro.removeEventListener("focusin", pause);
-    intro.removeEventListener("focusout", focusOut);
   };
-  // Keep a control under the reader's pointer or keyboard focus until they finish.
-  // This pauses only the optional card; the map is already loading and interactive.
-  const pause = () => {
-    if (timer === undefined) return;
-    clearTimeout(timer);
-    timer = undefined;
-    remaining = Math.max(0, remaining - (performance.now() - timerStarted));
-  };
-  const resume = () => {
-    if (ended || hovered || intro.contains(document.activeElement) || timer !== undefined) return;
-    timerStarted = performance.now();
-    timer = setTimeout(() => finish("complete"), remaining);
-  };
-  const pointerEnter = () => { hovered = true; pause(); };
-  const pointerLeave = () => { hovered = false; resume(); };
-  const focusOut = () => queueMicrotask(resume);
   const interact = () => finish("skip", true);
   const escape = (event: KeyboardEvent) => { if (event.key === "Escape") finish("skip", true); };
   const scroll = () => finish("skip", true);
-  const reduced = () => { if (reduce.matches) finish("skip", true); };
   const leave = () => finish("skip", true);
-  const visibility = () => { if (document.hidden) finish("skip", true); };
-  intro.querySelector("[data-map-arrival-explore]")?.addEventListener("click", () => finish("explore", true, true));
-  intro.querySelector("[data-map-arrival-skip]")?.addEventListener("click", () => finish("skip", true, true));
+  intro.querySelector("[data-map-arrival-explore]")?.addEventListener("click", () => finish("explore", false, true));
+  // The finder (map-v3.ts listens for "m3:find" on the map's root and opens the panel).
+  intro.querySelector("[data-map-arrival-find]")?.addEventListener("click", () => { finish("find", true); root.dispatchEvent(new Event("m3:find")); });
   root.addEventListener("pointerdown", interact, { passive: true });
-  root.addEventListener("focusin", interact);
   window.addEventListener("keydown", escape);
   window.addEventListener("scroll", scroll, { passive: true });
   window.addEventListener("pagehide", leave);
-  document.addEventListener("visibilitychange", visibility);
-  reduce.addEventListener("change", reduced);
-  card.addEventListener("pointerenter", pointerEnter);
-  card.addEventListener("pointerleave", pointerLeave);
-  intro.addEventListener("focusin", pause);
-  intro.addEventListener("focusout", focusOut);
-  // Passive arrival: 2.1 seconds total, independent of network/map readiness.
-  // A tap is always immediate; leaving the controls resumes only the remaining time.
-  resume();
 }

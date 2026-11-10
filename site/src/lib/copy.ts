@@ -39,6 +39,8 @@ export function c(key: string, lang: Lang, vars: Vars = {}): string {
 function frSpaces(t: string) { return t.replace(/ ([?!;»])/g, "\u202f$1").replace(/ :(?=\s|$)/g, "\u00a0:").replace(/« /g, "«\u00a0"); }
 /** True if the deck has this block (for optional wording). */
 export const has = (key: string) => DECK.has(key);
+/** Every block key that starts with a prefix, in the deck's order (prompt 81: the whole "services." block for the map card). */
+export const keysOf = (prefix: string) => [...DECK.keys()].filter((k) => k.startsWith(prefix));
 /** Numbered blocks as a list: cl("home.weekly", "pt") → home.weekly.1, .2, … */
 export function cl(prefix: string, lang: Lang, vars: Vars = {}): string[] {
   const out: string[] = [];

@@ -1,0 +1,268 @@
+/* Prompt 81 (10 Nov 2026): the map's chrome and the municipality card, on the look the map page already has
+   (map-main-premium.css): ivory paper, the green used sparingly, one touch of gold, Playfair for names and figures,
+   Manrope for labels. Nothing here touches golf mode (.is-golf) or the home page's embedded map (.m3-home).
+   Sections: 1 the top bar (finder, budget) · 2 the budget's panel · 3 the way back and the zoom · 4 the card
+   (services, fixed action, moving photographs) · 5 the phone sheet · 6 the finder · 7 the search · 8 the home page's hint. */
+
+/* ---------------------------------------------------------------- 1. the top bar */
+.m3[data-main-premium]:not(.is-golf) .m3-findbtn,
+.m3[data-main-premium]:not(.is-golf) .m3-budbtn {
+  display: flex; align-items: center; gap: 9px; height: 48px; padding: 0 16px; border-radius: 9px; border: 1px solid var(--map-rule);
+  background: var(--g); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: var(--sh);
+  font: 600 13px/1 var(--m3sans); letter-spacing: .01em; color: var(--gi); white-space: nowrap; transition: background-color .2s var(--e), color .2s var(--e);
+}
+.m3.is-golf .m3-findbtn, .m3.is-golf .m3-budbtn, .m3.is-golf .m3-nav, .m3.is-golf .m3-bud, .m3.is-golf .m3-fdp { display: none !important; }
+.m3[data-main-premium]:not(.is-golf) .m3-findbtn svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; }
+.m3[data-main-premium]:not(.is-golf) .m3-findbtn:hover,
+.m3[data-main-premium]:not(.is-golf) .m3-budbtn:hover { background: var(--g2); }
+.m3[data-main-premium]:not(.is-golf) .m3-findbtn[aria-expanded="true"],
+.m3[data-main-premium]:not(.is-golf) .m3-budbtn[aria-expanded="true"] { color: #fff; background: var(--gi); }
+.m3[data-main-premium]:not(.is-golf) .m3-budbtn span { font-weight: 500; color: var(--gm); }
+.m3[data-main-premium]:not(.is-golf) .m3-budbtn[aria-expanded="true"] span { color: rgba(255, 255, 255, .72); }
+.m3[data-main-premium]:not(.is-golf) .m3-budbtn b { font: 400 17px/1 var(--m3serif); letter-spacing: -.01em; font-variant-numeric: lining-nums; }
+.m3[data-main-premium]:not(.is-golf) .m3-searchbtn { width: 280px; }
+
+/* ---------------------------------------------------------------- 2. the budget's panel */
+.m3[data-main-premium]:not(.is-golf) .m3-bud {
+  position: absolute; z-index: 6; top: 84px; left: 24px; width: 400px; padding: 22px 24px 20px; border-radius: 12px;
+  background: var(--map-paper); border: 1px solid rgba(255, 255, 255, .7); box-shadow: 0 16px 64px rgba(23, 47, 40, .2);
+  opacity: 0; transform: translateY(-8px); transition: opacity .24s var(--e), transform .24s var(--e);
+}
+.m3[data-main-premium]:not(.is-golf) .m3-bud.is-open { opacity: 1; transform: none; }
+.m3[data-main-premium]:not(.is-golf) .m3-bud .m3-panel-x { position: absolute; top: 10px; right: 10px; min-width: 44px; min-height: 44px; background: none !important; }
+.m3[data-main-premium]:not(.is-golf) .m3-bud .m3-panel-x svg,
+.m3[data-main-premium]:not(.is-golf) .m3-fd .m3-panel-x svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; }
+.m3[data-main-premium]:not(.is-golf) .m3-bud .m3-budget { display: grid; gap: 14px; }
+.m3[data-main-premium]:not(.is-golf) .m3-bud .m3-budget-head { display: grid; gap: 10px; justify-content: start; padding-right: 44px; }
+.m3[data-main-premium]:not(.is-golf) .m3-bud .m3-k { font-size: 10px; letter-spacing: .16em; }
+.m3[data-main-premium]:not(.is-golf) .m3-bud .m3-amount,
+.m3[data-main-premium]:not(.is-golf) .m3-bud .m3-amount-in { font: 400 38px/1.05 var(--m3serif) !important; letter-spacing: -.03em; text-align: left; }
+.m3[data-main-premium]:not(.is-golf) .m3-bud .m3-amount-in { width: 9ch; }
+.m3[data-main-premium]:not(.is-golf) .m3-bud .m3-sentence { font: 400 16px/1.45 var(--m3serif); min-height: 0; color: var(--gi); }
+.m3[data-main-premium]:not(.is-golf) .m3-bud .m3-sentence span { display: block; margin: 6px 0 0; font: 500 11px/1.4 var(--m3sans); color: var(--gm); }
+.m3[data-main-premium]:not(.is-golf) .m3-bud-note { margin: 14px 0 0; padding-top: 14px; border-top: 1px solid var(--map-rule); font: 400 12px/1.5 var(--m3sans); color: #58665f; }
+.m3[data-main-premium]:not(.is-golf) .m3-bud-colour { margin-top: 12px; border-radius: 6px; }
+.m3[data-main-premium]:not(.is-golf).is-bud .m3-cards,
+.m3[data-main-premium]:not(.is-golf).is-find .m3-cards { opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(12px); }
+
+/* ---------------------------------------------------------------- 3. the way back to Portugal, and the zoom */
+.m3[data-main-premium]:not(.is-golf) .m3-nav { position: absolute; z-index: 4; bottom: 40px; right: 24px; display: grid; justify-items: end; gap: 8px; transition: right .3s var(--e); pointer-events: none; }
+.m3[data-main-premium]:not(.is-golf) .m3-cards { right: 84px; }
+.m3[data-main-premium]:not(.is-golf) .m3-legend { right: 84px; }
+.m3[data-main-premium]:not(.is-golf) .m3-nav > * { pointer-events: auto; }
+.m3[data-main-premium]:not(.is-golf):has(.m3-sheet.is-open) .m3-nav { right: 456px; }
+.m3[data-main-premium]:not(.is-golf) .m3-zoom { display: grid; border-radius: 9px; overflow: hidden; border: 1px solid var(--map-rule); background: var(--g); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: var(--sh); }
+.m3[data-main-premium]:not(.is-golf) .m3-zoom button { width: 44px; height: 44px; display: grid; place-items: center; color: var(--gi); transition: background-color .2s var(--e); }
+.m3[data-main-premium]:not(.is-golf) .m3-zoom button + button { border-top: 1px solid var(--map-rule); }
+.m3[data-main-premium]:not(.is-golf) .m3-zoom button:hover { background: var(--g2); }
+.m3[data-main-premium]:not(.is-golf) .m3-zoom svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; }
+.m3[data-main-premium]:not(.is-golf) .m3-homebtn {
+  display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 14px 0 12px; border-radius: 9px; border: 1px solid var(--map-rule);
+  background: var(--g); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: var(--sh);
+  font: 400 17px/1 var(--m3serif); letter-spacing: -.01em; color: var(--gi); animation: m3-nav-in .26s var(--e) both;
+}
+.m3[data-main-premium]:not(.is-golf) .m3-homebtn:hover { background: var(--g2); }
+.m3[data-main-premium]:not(.is-golf) .m3-homebtn svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+@keyframes m3-nav-in { from { opacity: 0; transform: translateY(4px); } }
+.m3[data-main-premium]:not(.is-golf).is-touring .m3-nav { opacity: 0; pointer-events: none; }
+.m3[data-main-premium]:not(.is-golf) :is(.m3-findbtn, .m3-budbtn, .m3-homebtn, .m3-zoom button, .m3-svb, .m3-fd-r, .m3-grab):focus-visible { outline: 2px solid #94702f; outline-offset: 2px; }
+
+/* ---------------------------------------------------------------- 4. the card */
+/* The photograph moves on every device: a slow drift inside its own frame (no element grows, nothing overlaps). */
+.m3[data-main-premium]:not(.is-golf) .m3-c6-ph .m3-photo { animation: m3-drift 22s ease-in-out infinite alternate; }
+.m3[data-main-premium]:not(.is-golf) .m3-c6-ph .m3-photo:nth-child(even) { animation-direction: alternate-reverse; }
+@keyframes m3-drift { from { object-position: 50% 22%; } to { object-position: 50% 78%; } }
+.m3[data-main-premium]:not(.is-golf) .m3-sheet.is-c6 .m3-photo,
+.m3[data-main-premium]:not(.is-golf) .m3-sheet.is-c6 .m3-gal-t .m3-photo { aspect-ratio: 16 / 6.8; }
+/* Once the text has scrolled under the close button, a band of paper keeps the two apart. */
+.m3[data-main-premium]:not(.is-golf) .m3-sheet.is-c6::before { content: ""; position: absolute; z-index: 3; top: 0; left: 0; right: 0; height: 72px; border-radius: 12px 12px 0 0; background: linear-gradient(to bottom, var(--map-paper) 58%, rgba(247, 244, 237, 0)); opacity: 0; pointer-events: none; transition: opacity .2s var(--e); }
+.m3[data-main-premium]:not(.is-golf) .m3-sheet.is-c6.is-scrolled::before { opacity: 1; }
+.m3[data-main-premium]:not(.is-golf) .m3-c6-head { padding-top: 18px; }
+.m3[data-main-premium]:not(.is-golf) .m3-c6-head .m3-kick { color: var(--gm); }
+.m3[data-main-premium]:not(.is-golf) .m3-c6-head h2.m3-h { font-size: 40px; }
+.m3[data-main-premium]:not(.is-golf) .m3-c6-buy { margin-top: 15px; padding-top: 14px; border-top: 1px solid var(--map-rule); }
+.m3[data-main-premium]:not(.is-golf) .m3-c6-buy .m3-buy { margin: 0; }
+.m3[data-main-premium]:not(.is-golf) .m3-c6-buy .m3-buy .m3-link { font-size: 24px; line-height: 1.25; color: var(--gi) !important; }
+.m3[data-main-premium]:not(.is-golf) .m3-c6-px { margin: 7px 0 0; font: 500 11.5px/1.4 var(--m3sans); color: var(--gm); }
+/* "Por perto": a label and a number per line, the numbers in one column; the detail of a line opens under it. */
+.m3[data-main-premium]:not(.is-golf) .m3-sv { padding-top: 22px; }
+.m3[data-main-premium]:not(.is-golf) .m3-sheet .m3-sv h3.m3-tt { display: flex; align-items: baseline; gap: 10px; margin: 0; font: 700 10px/1.2 var(--m3sans); letter-spacing: .16em; text-transform: uppercase; color: var(--gi); }
+.m3[data-main-premium]:not(.is-golf) .m3-sv h3.m3-tt small { font: 500 11px/1.2 var(--m3sans); letter-spacing: .01em; text-transform: none; color: var(--gm); }
+.m3[data-main-premium]:not(.is-golf) .m3-svl { list-style: none; margin: 12px 0 0; padding: 0; border-top: 1px solid var(--map-rule); }
+.m3[data-main-premium]:not(.is-golf) .m3-svi { border-bottom: 1px solid var(--map-rule); }
+.m3[data-main-premium]:not(.is-golf) .m3-svb { display: grid; grid-template-columns: minmax(0, 1fr) auto 12px; align-items: center; column-gap: 12px; width: 100%; min-height: 44px; padding: 8px 0; text-align: left; color: var(--gi); }
+.m3[data-main-premium]:not(.is-golf) .m3-svk { font: 500 14px/1.3 var(--m3sans); }
+.m3[data-main-premium]:not(.is-golf) .m3-svk small { display: block; margin-top: 3px; font: 500 11.5px/1.3 var(--m3sans); color: var(--gm); }
+.m3[data-main-premium]:not(.is-golf) .m3-svk small.is-flag { font: 700 9px/1.3 var(--m3sans); letter-spacing: .15em; text-transform: uppercase; color: #94702f; }
+.m3[data-main-premium]:not(.is-golf) .m3-svv { font: 500 12px/1 var(--m3sans); color: var(--gm); text-align: right; white-space: nowrap; }
+.m3[data-main-premium]:not(.is-golf) .m3-svv b { font: 400 22px/1 var(--m3serif); letter-spacing: -.01em; color: var(--gi); font-variant-numeric: lining-nums tabular-nums; }
+.m3[data-main-premium]:not(.is-golf) .m3-svv.is-words { font-size: 12.5px; white-space: normal; max-width: 15ch; line-height: 1.3; }
+.m3[data-main-premium]:not(.is-golf) .m3-svb > svg { width: 12px; height: 12px; fill: none; stroke: #9aa59c; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; transition: transform .26s var(--e); }
+.m3[data-main-premium]:not(.is-golf) .m3-svi.is-open .m3-svb > svg { transform: rotate(180deg); }
+.m3[data-main-premium]:not(.is-golf) .m3-svd { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .28s cubic-bezier(.2, .8, .2, 1); }
+.m3[data-main-premium]:not(.is-golf) .m3-svi.is-open .m3-svd { grid-template-rows: 1fr; }
+.m3[data-main-premium]:not(.is-golf) .m3-svd > p { overflow: hidden; margin: 0; padding: 0 24px 0 0; font: 400 13px/1.55 var(--m3sans); color: #58665f; transition: padding .28s cubic-bezier(.2, .8, .2, 1); }
+.m3[data-main-premium]:not(.is-golf) .m3-svi.is-open .m3-svd > p { padding-bottom: 14px; }
+.m3[data-main-premium]:not(.is-golf) .m3-sv-foot { margin: 12px 0 0; font: 400 10.5px/1.55 var(--m3sans); color: #7a847d; }
+.m3[data-main-premium]:not(.is-golf) .m3-c6-more { padding-top: 6px; }
+.m3[data-main-premium]:not(.is-golf) .m3-c6-more .m3-imt { margin: 0 0 4px; }
+.m3[data-main-premium]:not(.is-golf) .m3-c6-paid { margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--map-rule); }
+.m3[data-main-premium]:not(.is-golf) .m3-c6-paid > p:first-child:not(.m3-fontes) { margin: 0; font: 400 13px/1.55 var(--m3sans); color: #58665f; }
+.m3[data-main-premium]:not(.is-golf) .m3-c6-paid .m3-fontes { margin-top: 4px; }
+.m3[data-main-premium]:not(.is-golf) .m3-c6-more .m3-onemore { margin: 22px 0 0; padding-top: 22px; border-top: 1px solid var(--map-rule); font: 400 italic 21px/1.35 var(--m3serif); letter-spacing: -.01em; color: var(--gi); }
+.m3[data-main-premium]:not(.is-golf) .m3-sheet.is-c6 .m3-devs { margin-top: 26px; }
+/* The one action, fixed at the foot of the card at every height. */
+.m3[data-main-premium]:not(.is-golf) .m3-c6-cta { position: relative; z-index: 3; flex: none; margin-top: -22px; padding: 22px 26px 16px; background: linear-gradient(to top, var(--map-paper) 68%, rgba(247, 244, 237, 0)); pointer-events: none; }
+.m3[data-main-premium]:not(.is-golf) .m3-c6-cta .m3-btn { width: 100%; pointer-events: auto; }
+.m3[data-main-premium]:not(.is-golf) .m3-sheet.has-cta .m3-sheet-in { padding-bottom: 34px; }
+
+/* ---------------------------------------------------------------- 6. the finder */
+.m3[data-main-premium]:not(.is-golf) .m3-fdp {
+  position: absolute; z-index: 6; top: 84px; left: 24px; bottom: 24px; width: 400px; border-radius: 12px; overflow: hidden;
+  background: var(--map-paper); border: 1px solid rgba(255, 255, 255, .7); box-shadow: 0 16px 64px rgba(23, 47, 40, .2);
+  opacity: 0; transform: translateX(-14px); transition: opacity .26s var(--e), transform .26s var(--e);
+}
+.m3[data-main-premium]:not(.is-golf) .m3-fdp.is-open { opacity: 1; transform: none; }
+.m3[data-main-premium]:not(.is-golf) .m3-fd { display: flex; flex-direction: column; height: 100%; color: var(--gi); }
+.m3[data-main-premium]:not(.is-golf) .m3-fd-h { flex: none; display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; padding: 24px 14px 6px 26px; }
+.m3[data-main-premium]:not(.is-golf) .m3-fd-h h2 { margin: 0; font: 400 30px/1.12 var(--m3serif); letter-spacing: -.03em; outline: none; text-wrap: balance; }
+.m3[data-main-premium]:not(.is-golf) .m3-fd .m3-panel-x { flex: none; min-width: 44px; min-height: 44px; margin-top: -8px; background: none !important; }
+.m3[data-main-premium]:not(.is-golf) .m3-fd-sc { flex: 1; overflow-y: auto; overscroll-behavior: contain; padding: 0 26px 26px; scrollbar-width: thin; scrollbar-color: #c7cec5 transparent; }
+.m3[data-main-premium]:not(.is-golf) .m3-fd-s { padding: 16px 0; border-top: 1px solid var(--map-rule); }
+.m3[data-main-premium]:not(.is-golf) .m3-fd-s:first-child { border-top: 0; padding-top: 14px; }
+.m3[data-main-premium]:not(.is-golf) .m3-fd .m3-pk { margin: 0; font-size: 10px; letter-spacing: .16em; color: var(--gi); }
+.m3[data-main-premium]:not(.is-golf) .m3-fd-bh { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.m3[data-main-premium]:not(.is-golf) .m3-fd-bh b { font: 400 26px/1 var(--m3serif); letter-spacing: -.02em; font-variant-numeric: lining-nums; }
+.m3[data-main-premium]:not(.is-golf) .m3-fd .m3-slider { margin-top: 8px; }
+.m3[data-main-premium]:not(.is-golf) .m3-fd-scen { margin: 6px 0 0; font: 400 11.5px/1.5 var(--m3sans); color: var(--gm); }
+.m3[data-main-premium]:not(.is-golf) .m3-fd-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.m3[data-main-premium]:not(.is-golf) .m3-fd-chips .m3-chip { height: 34px; padding: 0 11px; border-radius: 6px; font-size: 12.5px; font-weight: 500; color: var(--gi) !important; background: transparent !important; box-shadow: inset 0 0 0 1px rgba(42, 64, 55, .22); }
+.m3[data-main-premium]:not(.is-golf) .m3-fd-chips .m3-chip[aria-pressed="true"] { background: #284d40 !important; color: #fff !important; box-shadow: none; }
+.m3[data-main-premium]:not(.is-golf) .m3-fd-ws:not(:empty) { display: grid; gap: 0; margin-top: 12px; }
+.m3[data-main-premium]:not(.is-golf) .m3-fd-w { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 42px; font: 500 14px/1.3 var(--m3sans); }
+.m3[data-main-premium]:not(.is-golf) .m3-fd-w .m3-seg { height: 36px; padding: 3px; border-radius: 7px; background: rgba(42, 64, 55, .07); border: 0; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none; }
+.m3[data-main-premium]:not(.is-golf) .m3-fd-w .m3-seg button { height: 30px; padding: 0 10px; border-radius: 5px; gap: 7px; font: 500 12px/1 var(--m3sans); color: var(--gm); }
+.m3[data-main-premium]:not(.is-golf) .m3-fd-w .m3-seg button i { font: 400 15px/1 var(--m3serif); font-style: normal; font-variant-numeric: lining-nums; }
+.m3[data-main-premium]:not(.is-golf) .m3-fd-w .m3-seg button[aria-pressed="true"] { background: #fdfcf8; color: var(--gi); box-shadow: 0 1px 3px rgba(23, 47, 40, .14); }
+.m3[data-main-premium]:not(.is-golf) .m3-fd-note { margin: 0; font: 400 17px/1.4 var(--m3serif); color: #58665f; }
+.m3[data-main-premium]:not(.is-golf) .m3-fd-res .m3-btn { margin-top: 14px; }
+.m3[data-main-premium]:not(.is-golf) .m3-fd-list { list-style: none; margin: 10px 0 0; padding: 0; }
+.m3[data-main-premium]:not(.is-golf) .m3-fd-list li { border-top: 1px solid var(--map-rule); }
+.m3[data-main-premium]:not(.is-golf) .m3-fd-list li:first-child { border-top: 0; }
+.m3[data-main-premium]:not(.is-golf) .m3-fd-r { display: grid; gap: 5px; width: calc(100% + 24px); margin: 0 -12px; padding: 14px 12px; border-radius: 8px; text-align: left; color: var(--gi); transition: background-color .2s var(--e); }
+.m3[data-main-premium]:not(.is-golf) .m3-fd-r:hover, .m3[data-main-premium]:not(.is-golf) .m3-fd-r.is-on { background: rgba(42, 64, 55, .06); }
+.m3[data-main-premium]:not(.is-golf) .m3-fd-top { display: grid; grid-template-columns: 22px minmax(0, 1fr) auto; align-items: baseline; column-gap: 6px; }
+.m3[data-main-premium]:not(.is-golf) .m3-fd-top i { font: 400 15px/1 var(--m3serif); font-style: normal; color: #94702f; font-variant-numeric: lining-nums; }
+.m3[data-main-premium]:not(.is-golf) .m3-fd-n { font: 400 23px/1.15 var(--m3serif); letter-spacing: -.02em; }
+.m3[data-main-premium]:not(.is-golf) .m3-fd-pts { font: 500 11px/1 var(--m3sans); color: var(--gm); white-space: nowrap; }
+.m3[data-main-premium]:not(.is-golf) .m3-fd-n3 { padding-left: 28px; font: 700 9.5px/1.3 var(--m3sans); letter-spacing: .14em; text-transform: uppercase; color: var(--gm); }
+.m3[data-main-premium]:not(.is-golf) .m3-fd-why { padding-left: 28px; font: 500 13.5px/1.5 var(--m3sans); }
+.m3[data-main-premium]:not(.is-golf) .m3-fd-next { padding-left: 28px; font: 400 12px/1.5 var(--m3sans); color: #58665f; }
+.m3[data-main-premium]:not(.is-golf) .m3-fd-cov { margin: 12px 0 0; font: 400 11.5px/1.5 var(--m3sans); color: var(--gm); }
+.m3[data-main-premium]:not(.is-golf) .m3-fd-more { display: inline-flex; align-items: center; min-height: 44px; margin-top: 4px; }
+.m3[data-main-premium]:not(.is-golf) .m3-fd-how { margin-top: 14px; border-top: 1px solid var(--map-rule); }
+.m3[data-main-premium]:not(.is-golf) .m3-fd-how summary { display: flex; align-items: center; min-height: 44px; cursor: pointer; list-style: none; font: 600 12px/1 var(--m3sans); color: #2f5d50; }
+.m3[data-main-premium]:not(.is-golf) .m3-fd-how summary::-webkit-details-marker { display: none; }
+.m3[data-main-premium]:not(.is-golf) .m3-fd-how :is(p, li) { margin: 0 0 8px; font: 400 12px/1.55 var(--m3sans); color: #58665f; }
+.m3[data-main-premium]:not(.is-golf) .m3-fd-how ul { margin: 0 0 8px; padding-left: 16px; }
+
+/* The list's places on the map: a small numeral each, in the list's order. The developments' pins step back while the
+   list is open, so nothing sponsored stands in or near the results. */
+.m3[data-main-premium]:not(.is-golf) .m3-fmark { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: #faf8f2; border: 1px solid rgba(148, 112, 47, .55); box-shadow: 0 2px 10px rgba(23, 47, 40, .22); font: 400 15px/1 var(--m3serif); color: #6f5320; font-variant-numeric: lining-nums; cursor: pointer; transition: background-color .2s var(--e), color .2s var(--e); }
+.m3[data-main-premium]:not(.is-golf) .m3-fmark:hover { background: #284d40; color: #fff; border-color: transparent; }
+.m3[data-main-premium]:not(.is-golf).is-find .m3-pin { visibility: hidden; }
+
+/* ---------------------------------------------------------------- 7. the search */
+.m3[data-main-premium] ~ .m3-spot .m3-spot-box, .m3[data-main-premium] .m3-spot .m3-spot-box { border-radius: 12px; background: rgba(250, 248, 242, .97); }
+.m3[data-main-premium] .m3-spot li[aria-selected="true"] { background: #284d40; }
+.m3[data-main-premium] .m3-spot li[role="option"] { border-radius: 7px; }
+.m3[data-main-premium] .m3-spot .m3-rg { font-size: 10px; letter-spacing: .16em; }
+
+/* ---------------------------------------------------------------- phone */
+@media (max-width: 819px) {
+  /* 1. Two rows: the search with Golfe and Camadas, then the page's two tools, the finder and the budget. */
+  .m3[data-main-premium]:not(.is-golf) .m3-top { flex-wrap: wrap; row-gap: 6px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-searchbtn { order: 1; flex: 1 1 0; width: auto; min-width: 0; }
+  .m3[data-main-premium]:not(.is-golf) .m3-golfbtn { order: 2; margin-left: 0; }
+  .m3[data-main-premium]:not(.is-golf) .m3-layersbtn { order: 3; margin-left: 0; }
+  .m3[data-main-premium]:not(.is-golf) .m3-findbtn { order: 4; flex: 1 1 0; min-width: 0; height: 44px; padding: 0 12px; justify-content: center; font-size: 12.5px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-budbtn { order: 5; flex: 0 1 auto; height: 44px; padding: 0 12px; font-size: 12.5px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-budbtn b { font-size: 16px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-top::after { content: ""; order: 3; flex-basis: 100%; height: 0; }
+  .m3[data-main-premium]:not(.is-golf) .m3-cmp-pill { order: 6; position: static; }
+  /* A card, the budget or the finder open: the second row gives its room back to the map. */
+  .m3[data-main-premium]:not(.is-golf):has(.m3-sheet.is-open) :is(.m3-findbtn, .m3-budbtn) { display: none; }
+  /* 2. The budget and the finder come up from the foot of the screen. */
+  .m3[data-main-premium]:not(.is-golf) .m3-bud { top: auto; left: 0; right: 0; bottom: 0; width: auto; padding: 22px 22px calc(18px + env(safe-area-inset-bottom)); border-radius: 16px 16px 0 0; border-bottom: 0; transform: translateY(18px); }
+  .m3[data-main-premium]:not(.is-golf) .m3-bud .m3-amount, .m3[data-main-premium]:not(.is-golf) .m3-bud .m3-amount-in { font-size: 34px !important; }
+  .m3[data-main-premium]:not(.is-golf) .m3-fdp { top: auto; left: 0; right: 0; bottom: 0; width: auto; height: calc(100% - 8px); border-radius: 16px 16px 0 0; border-bottom: 0; transform: translateY(24px); }
+  .m3[data-main-premium]:not(.is-golf) .m3-fd-h { padding: 14px 8px 0 22px; align-items: center; }
+  .m3[data-main-premium]:not(.is-golf) .m3-fd-h h2 { font-size: 24px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-fd .m3-panel-x { margin-top: 0; }
+  .m3[data-main-premium]:not(.is-golf) .m3-fd-sc { padding: 0 22px calc(22px + env(safe-area-inset-bottom)); }
+  .m3[data-main-premium]:not(.is-golf) .m3-fd-s { padding: 12px 0; }
+  .m3[data-main-premium]:not(.is-golf) .m3-fd-s:first-child { padding-top: 8px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-fd-chips { gap: 5px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-fd-chips .m3-chip { height: 32px; padding: 0 9px; font-size: 12px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-fd-ws:not(:empty) { margin-top: 8px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-fd-w { min-height: 40px; font-size: 13.5px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-fd-bh b { font-size: 22px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-fd .m3-slider { margin-top: 2px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-fd-scen { margin-top: 0; font-size: 11px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-fd-n { font-size: 21px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-fd-r { padding: 11px 12px; }
+  /* 3. No zoom buttons on a phone (two fingers do it); the way back sits under the top bar. */
+  .m3[data-main-premium]:not(.is-golf) .m3-zoom { display: none; }
+  .m3[data-main-premium]:not(.is-golf) .m3-nav { top: 116px; bottom: auto; right: 12px; }
+  .m3[data-main-premium]:not(.is-golf):has(.m3-sheet.is-open) .m3-nav { top: 66px; right: 12px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-cards { right: 0; }
+  .m3[data-main-premium]:not(.is-golf) .m3-legend { right: 12px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-sheet.is-c6::before { top: 22px; height: 60px; border-radius: 0; }
+  [data-map-arrival-frame][data-arrival-active] .m3[data-main-premium] :is(.m3-findbtn, .m3-budbtn) { display: none; }
+  .m3[data-main-premium]:not(.is-golf):is(.is-bud, .is-find, .is-panel) .m3-nav { display: none; }
+  .m3[data-main-premium]:not(.is-golf) .m3-homebtn { height: 40px; font-size: 16px; }
+  /* 5. The sheet: 60% at first, the whole screen after one swipe; its text scrolls only at full height. */
+  .m3[data-main-premium]:not(.is-golf) .m3-sheet { transition: height .34s cubic-bezier(.2, .8, .2, 1), opacity .26s var(--e), transform .26s var(--e); }
+  .m3[data-main-premium]:not(.is-golf) .m3-sheet.is-drag { transition: none; }
+  .m3[data-main-premium]:not(.is-golf) .m3-sheet:not([data-detent="2"]) .m3-sheet-in { overflow: hidden; }
+  .m3[data-main-premium]:not(.is-golf) .m3-sheet { touch-action: pan-x; }
+  .m3[data-main-premium]:not(.is-golf) .m3-sheet[data-detent="2"] .m3-sheet-in { touch-action: pan-y; }
+  .m3[data-main-premium]:not(.is-golf) .m3-grab { height: 22px; width: 100%; cursor: grab; }
+  .m3[data-main-premium]:not(.is-golf) .m3-grab span { width: 36px; height: 4px; border-radius: 2px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-sheet[data-detent="0"] { height: 132px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-sheet[data-detent="0"] .m3-c6-cta { display: none; }
+  .m3[data-main-premium]:not(.is-golf) .m3-sheet.is-c6,
+  .m3[data-main-premium]:not(.is-golf) .m3-sheet.is-c6.is-arr[data-detent="1"] { height: 63%; }
+  .m3[data-main-premium]:not(.is-golf) .m3-sheet.is-c6[data-detent="0"] { height: 132px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-sheet.is-c6[data-detent="2"] { height: calc(100% - 8px); }
+  .m3[data-main-premium]:not(.is-golf) .m3-sheet.is-c6 .m3-photo,
+  .m3[data-main-premium]:not(.is-golf) .m3-sheet.is-c6 .m3-gal-t .m3-photo { height: 92px; aspect-ratio: auto; }
+  .m3[data-main-premium]:not(.is-golf) .m3-sheet.is-c6 .m3-photo-credit, .m3[data-main-premium]:not(.is-golf) .m3-sheet.is-c6 .m3-cr { bottom: 6px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-c6-head { padding-top: 12px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-c6-head .m3-kick { margin-bottom: 5px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-c6-head h2.m3-h { font-size: 33px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-c6-head .ht { min-width: 40px; min-height: 40px; width: 40px; height: 40px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-c6-head .m3-place-story { margin-top: 3px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-c6-buy { margin-top: 10px; padding-top: 10px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-c6-buy .m3-buy .m3-link { font-size: 20px; line-height: 1.2; }
+  .m3[data-main-premium]:not(.is-golf) .m3-c6-px { margin-top: 4px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-sv { padding-top: 20px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-c6-cta { margin-top: -16px; padding: 16px 22px calc(10px + env(safe-area-inset-bottom)); }
+  .m3[data-main-premium]:not(.is-golf) .m3-c6-cta .m3-btn { min-height: 46px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-svd > p { padding-right: 12px; }
+}
+@media (max-height: 500px) and (orientation: landscape) {
+  .m3[data-main-premium]:not(.is-golf) .m3-findbtn span, .m3[data-main-premium]:not(.is-golf) .m3-budbtn span { display: none; }
+  .m3[data-main-premium]:not(.is-golf) .m3-nav { top: 66px; }
+  .m3[data-main-premium]:not(.is-golf) .m3-sheet .m3-sheet-in { overflow-y: auto !important; }
+  .m3[data-main-premium]:not(.is-golf) .m3-c6-cta { padding: 14px 20px 10px; }
+}
+/* Reduced motion: the camera's glides and the panels' slides stop (mapv3.css); the photographs keep a slower drift, so
+   a film is never a still (prompt 78 §0), and a line's detail opens at once. */
+@media (prefers-reduced-motion: reduce) {
+  .m3[data-main-premium]:not(.is-golf) .m3-c6-ph .m3-photo { animation-duration: 60s; }
+  .m3[data-main-premium]:not(.is-golf) .m3-homebtn { animation: none; }
+}
+
+/* ---------------------------------------------------------------- 8. the home page's map: the two-finger hint, in our type */
+.m3-home .maplibregl-cooperative-gesture-screen { font: 500 15px/1.4 var(--m3sans); background: rgba(20, 39, 34, .46); padding: 24px; text-align: center; }

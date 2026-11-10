@@ -11,7 +11,8 @@ import { c, edName } from "../lib/copy";
 
 interface Props { lang: Lang; ed: EdCode; }
 const { lang, ed } = Astro.props;
-const arrival = (lang === "en" && ed === "us") || (lang === "pt" && ed === "lu");
+// Prompt 81: every edition gets the same first screen (it was the US and Luxembourg pages only).
+const arrival = true;
 const src = new Sources();
 const arts = pathFor(lang, ed, "articles"); // prompt 37 §2: the note and the municipality table now live in two articles
 const n = src.n("ine-m2-2026q2");

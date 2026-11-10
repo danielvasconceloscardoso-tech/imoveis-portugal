@@ -17,7 +17,7 @@ export const BAR_ITEMS = ["home", "map", "sims", "concierge", "saved", "path", "
 export const LAYERS = ["none", "price", "g10", "rent", "yield", "vac"];
 /** D83 part 2, the map in three depths: what the search resolved to (the kind; the place slug travels in "place", never the
  * typed text), the cards opened, the tiles, the chart's range, the comparison and the paid previews. */
-export const MAP_SEARCH = ["munis", "pars", "golf", "beach", "devs"];
+export const MAP_SEARCH = ["munis", "pars", "golf", "beach", "devs", "regions"];
 export const MAP_CARDS = ["muni", "parish", "region", "project", "golf"];
 export const MAP_TILES = ["price", "life", "care", "compare"];
 export const MAP_PAID = ["rent", "g10y", "foreign", "supply", "compare", "card"];
@@ -26,6 +26,13 @@ export const MAP_CARD5 = ["card/sources", "cta/paid", "cta/consult", "gallery/2"
 /** Prompt 68 (4 Nov 2026), the arrival card (a place whose partner project carries a hero line): the arrival shown, each
  * development tile shown and tapped, the private viewing asked, the showcase opened, each next question opened, the last line seen. */
 export const MAP_P68 = ["arrive", "hero", "hero/tap", "hero/view", "visit", "qa/life", "qa/schools", "qa/price", "qa/health", "qa/near", "qa/costs", "qa/story", "more"];
+/** Prompt 81: the card's service lines opened (ev "map/sv/{line}": which service a reader checks first), the phone sheet
+ * expanded or put back, the budget opened and its colours switched on, the way back to Portugal, the zoom buttons, the
+ * finder opened and closed, a tap that zoomed in first, a name tapped on the map, and a "did you mean" taken. The finder's
+ * own choices are the matching engine's events (MATCH_TASTES, MATCH_ACTS), sent with origin "map". */
+export const MAP_SV = ["er", "cs", "isch", "sec", "beach", "air", "food"];
+export const MAP_P81 = [...MAP_SV.map((k) => `sv/${k}`), "sheet/full", "sheet/half", "budget/open", "budget/colour", "home", "zoom/in", "zoom/out",
+  "finder/open", "finder/close", "finder/more", "tap/zoom", "tap/label", "search/did", "search/first"];
 export const OVERLAYS = ["golf", "beach", "devs"];
 /** Fix step 3 (3 Nov): "Ver a análise completa" on the free pages turned into previews of the paid analysis
  * (components/AnalysisPreview.astro): ev "paid/preview/{id}" when the unlock sheet opens. */
@@ -79,7 +86,8 @@ export function editionEvents(): string[] {
   for (const l of LAYERS) out.push(`map/layer/${l}`);
   for (const o of OVERLAYS) for (const s of ["on", "off"]) out.push(`map/overlay/${o}/${s}`);
   out.push("map/share");
-  for (const action of ["shown", "explore", "skip", "complete"]) out.push(`map/arrival/${action}`);
+  for (const action of ["shown", "explore", "skip", "complete", "find"]) out.push(`map/arrival/${action}`);
+  for (const t of MAP_P81) out.push(`map/${t}`);
   for (const g of MAP_SEARCH) out.push(`map/search/${g}`);
   for (const k of MAP_CARDS) out.push(`map/card/${k}`);
   for (const t of MAP_TILES) out.push(`map/tile/${t}`);
