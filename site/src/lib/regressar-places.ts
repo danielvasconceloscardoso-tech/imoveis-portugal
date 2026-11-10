@@ -1,12 +1,17 @@
 /** Issue 10: deliberately small, source-backed mainland discovery sample.
  * Latest medians copied from prices.json; no historical/paid dataset is bundled.
- * Provenance and matching thresholds: docs/ISSUE-10-PLACES.md. */
+ * Provenance: docs/ISSUE-10-PLACES.md. Since prompt 81 the ranking itself is lib/match.ts over all 308
+ * municipalities (docs/MATCHING.md); the 13 places here keep their photographs, lines and sourced facts. */
 import type { Lang, EdCode } from "../i18n";
 import { pathFor } from "../i18n";
+import type { HousingMode, ResolvedHousing } from "./housing";
+import { matchPlaces, toTaste, type MatchPlace, type MatchResult, type MatchOutcome } from "./match";
+export { HOUSING_DEFAULTS, housingPayment, type HousingMode, type HousingAssumptions } from "./housing";
 
-export type Preference = "beach" | "surf" | "golf" | "art" | "food" | "schools" | "airport" | "business" | "quiet";
+/** The names before prompt 81 still work: "art" is the culture taste; "surf" and "business" have no data and stay unsupported. */
+export type Preference = "beach" | "surf" | "golf" | "art" | "food" | "schools" | "airport" | "business" | "quiet" | "isch" | "health" | "train" | "culture";
+/** The six tastes the image questions offer. */
 export const VERIFIED_PREFERENCES: readonly Preference[] = ["beach", "golf", "art", "food", "schools", "airport"];
-export type HousingMode = "rent" | "buy";
 export type PlaceEvidence = { value: number | null; unit: string; detail: string; source: string; checked: string };
 export type RegressarPlace = {
   id: string; name: string; lat: number; lon: number; priceM2: number; rentM2: number; period: string;
@@ -581,72 +586,49 @@ export const REGRESSAR_PLACES: readonly RegressarPlace[] = [
   }
 ];
 
-export const HOUSING_DEFAULTS = Object.freeze({ areaM2: 80, budgetShare: 0.35, depositPercent: 20, annualRate: 3, termYears: 30 });
-export type HousingAssumptions = typeof HOUSING_DEFAULTS;
-export type RankedCity = RegressarPlace & {
-  monthlyHousing: number; housingShare: number; remainingMonthly: number;
-  purchasePrice: number; deposit: number; loan: number;
+/** A ranked place: the engine's result (lib/match.ts: cost, points, reasons, trade-off), plus the photograph, line and
+ * sourced facts where the place is one of the 13 above. A place outside them has none; the page shows a plain card. */
+export type RankedCity = MatchResult & Partial<Pick<RegressarPlace, "photo" | "alt" | "photoCredit" | "line" | "evidence">> & {
   matchedPreferences: Preference[];
 };
 export type RankCitiesInput = {
-  netMonthly: number; preferences?: readonly Preference[]; housingMode?: HousingMode;
+  netMonthly: number; preferences?: readonly Preference[];
+  /** The preferences marked essential (weight 3; a place scoring zero on one is left out). The others are nice to have (weight 1). */
+  essential?: readonly Preference[];
+  housingMode?: HousingMode;
   areaM2?: number; budgetShare?: number; depositPercent?: number; annualRate?: number; termYears?: number;
+  /** The place table (lib/match-data.ts loads all 308). Without it: the 13 places above, with prices and no services data. */
+  places?: readonly MatchPlace[];
 };
 export type CityDiscovery = {
   matches: RankedCity[]; unsupportedPreferences: Preference[];
-  reason: "matched" | "invalid-input" | "unsupported-preference" | "no-affordable-match";
-  assumptions: { areaM2: number; budgetShare: number; depositPercent: number; annualRate: number; termYears: number; housingMode: HousingMode };
+  reason: "matched" | "invalid-input" | "unsupported-preference" | "no-affordable-match" | "no-essential-match";
+  assumptions: ResolvedHousing;
+  /** The engine's full answer: every place left out with its reason, the weights, the spread rule. */
+  outcome: MatchOutcome;
 };
 
-/** Nominal fixed-rate repayment; excludes insurance, bank fees and purchase taxes.
- * Rate is a scenario assumption, not a financing offer or approval. */
-export function housingPayment(principal: number, annualRate: number, termYears: number): number {
-  if (![principal, annualRate, termYears].every(Number.isFinite) || principal < 0 || annualRate < 0 || termYears <= 0) return NaN;
-  const n = termYears * 12;
-  if (annualRate === 0) return principal / n;
-  const r = annualRate / 1200;
-  return principal * r / (1 - Math.pow(1 + r, -n));
-}
+const BY_ID = new Map(REGRESSAR_PLACES.map(p => [p.id, p]));
+/** The 13 places as engine rows: INE medians only. No services measure is known here, so every taste reads "no data". */
+export const REGRESSAR_MATCH_PLACES: readonly MatchPlace[] = REGRESSAR_PLACES.map(p => ({
+  id: p.id, name: p.name, n3: "", region: "", lat: p.lat, lon: p.lon, priceM2: p.priceM2, rentM2: p.rentM2, period: p.period, m: {},
+}));
 
-/** Every selected taste is a hard filter. A cinematic reveal never bypasses affordability.
- * All money checks use unrounded values; display rounding cannot admit an over-budget city. */
+/** Budget is a hard limit (unrounded). Tastes are scores, never filters: lib/match.ts, docs/MATCHING.md.
+ * Order: most points, then the lower monthly cost, then the slug. No lottery, hidden weights or paid ranking. */
 export function rankCities(input: RankCitiesInput): CityDiscovery {
-  const assumptions = {
-    ...HOUSING_DEFAULTS,
-    areaM2: input.areaM2 ?? HOUSING_DEFAULTS.areaM2,
-    budgetShare: input.budgetShare ?? HOUSING_DEFAULTS.budgetShare,
-    depositPercent: input.depositPercent ?? HOUSING_DEFAULTS.depositPercent,
-    annualRate: input.annualRate ?? HOUSING_DEFAULTS.annualRate,
-    termYears: input.termYears ?? HOUSING_DEFAULTS.termYears,
-    housingMode: input.housingMode ?? "rent" as HousingMode,
-  };
-  const preferences = [...new Set(input.preferences ?? [])];
-  const unsupportedPreferences = preferences.filter(p => !VERIFIED_PREFERENCES.includes(p));
-  const result = (reason: CityDiscovery["reason"], matches: RankedCity[] = []): CityDiscovery => ({ matches, unsupportedPreferences, reason, assumptions });
-  if (!Number.isFinite(input.netMonthly) || input.netMonthly <= 0 ||
-      !Object.values(assumptions).filter(v => typeof v === "number").every(Number.isFinite) ||
-      assumptions.areaM2 <= 0 || assumptions.areaM2 > 500 || assumptions.budgetShare <= 0 || assumptions.budgetShare > 1 ||
-      assumptions.depositPercent < 0 || assumptions.depositPercent > 100 || assumptions.annualRate < 0 || assumptions.annualRate > 30 ||
-      assumptions.termYears < 1 || assumptions.termYears > 50 || !["rent", "buy"].includes(assumptions.housingMode)) return result("invalid-input");
-  if (unsupportedPreferences.length) return result("unsupported-preference");
-  const max = input.netMonthly * assumptions.budgetShare;
-  const matches: RankedCity[] = [];
-  for (const place of REGRESSAR_PLACES) {
-    if (!preferences.every(p => !!place.evidence[p])) continue;
-    const purchasePrice = place.priceM2 * assumptions.areaM2;
-    const deposit = purchasePrice * assumptions.depositPercent / 100;
-    const loan = purchasePrice - deposit;
-    const monthlyHousing = assumptions.housingMode === "rent"
-      ? place.rentM2 * assumptions.areaM2
-      : housingPayment(loan, assumptions.annualRate, assumptions.termYears);
-    if (!Number.isFinite(monthlyHousing) || monthlyHousing < 0 || monthlyHousing > max) continue;
-    matches.push({ ...place, monthlyHousing, housingShare: monthlyHousing / input.netMonthly,
-      remainingMonthly: input.netMonthly - monthlyHousing, purchasePrice, deposit, loan,
-      matchedPreferences: preferences });
-  }
-  // Deterministic: greatest budget headroom first, then slug. No lottery, hidden weights or paid ranking.
-  matches.sort((a, b) => a.monthlyHousing - b.monthlyHousing || a.id.localeCompare(b.id));
-  return result(matches.length ? "matched" : "no-affordable-match", matches);
+  const preferences = [...new Set(input.preferences ?? [])], essential = new Set(input.essential ?? []);
+  const outcome = matchPlaces({
+    ...input, places: input.places ?? REGRESSAR_MATCH_PLACES,
+    tastes: preferences.map(p => ({ taste: p, importance: essential.has(p) ? "essential" : "nice" })),
+  });
+  const unsupportedPreferences = preferences.filter(p => !toTaste(p));
+  const reason = outcome.reason === "unsupported-taste" ? "unsupported-preference" : outcome.reason === "no-places" ? "no-affordable-match" : outcome.reason;
+  const matches: RankedCity[] = outcome.matches.map(m => {
+    const c = BY_ID.get(m.id);
+    return { ...m, ...(c ? { photo: c.photo, alt: c.alt, photoCredit: c.photoCredit, line: c.line, evidence: c.evidence } : {}), matchedPreferences: preferences };
+  });
+  return { matches, unsupportedPreferences, reason, assumptions: outcome.assumptions, outcome };
 }
 
 /** The current main map owns interaction/camera state; no Golf or shared map modules are changed. */

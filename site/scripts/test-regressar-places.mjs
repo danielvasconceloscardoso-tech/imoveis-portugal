@@ -2,6 +2,9 @@ import assert from 'node:assert/strict';
 import { readFileSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import {rankCities,REGRESSAR_PLACES,regressarMapHref,housingPayment,VERIFIED_PREFERENCES} from '../src/lib/regressar-places.ts';
+import {buildMatchTable,decodeMatchTable} from '../src/lib/match-table.ts';
+import {loadInputs} from './build-match-table.mjs';
+const fixture=loadInputs(fileURLToPath(new URL('./fixtures/match-summary.fixture.json',import.meta.url)));
 let count=0;
 const test=(name,fn)=>{fn();count++;console.log(`PASS ${name}`)};
 const json=p=>JSON.parse(readFileSync(new URL(p,import.meta.url),'utf8'));
@@ -14,11 +17,21 @@ test('licensed real image files, three-language alt and developer credit',()=>{
  const sources=readFileSync(new URL('../../content/media/SOURCES.md',import.meta.url),'utf8');
  for(const p of REGRESSAR_PLACES){assert.ok(existsSync(fileURLToPath(new URL(`../public${p.photo}`,import.meta.url))),p.photo);assert.ok(sources.includes(p.photo.split('/').at(-1).replace(/-1024\.webp$/,'')),p.photo);for(const lang of ['pt','en','fr'])assert.ok(p.alt[lang]?.length>5);if(p.id==='gondomar')assert.equal(p.photoCredit,'Shalu Investments')}
 });
-test('all 64 combinations of selected tastes are hard filters',()=>{
- for(let bits=0;bits<2**VERIFIED_PREFERENCES.length;bits++){const preferences=VERIFIED_PREFERENCES.filter((_,i)=>bits&(1<<i));for(const p of rankCities({netMonthly:100000,preferences}).matches){for(const pref of preferences)assert.ok(p.evidence[pref]);assert.deepEqual(p.matchedPreferences,preferences)}}
+// Prompt 81: a taste is a score (lib/match.ts), never a yes/no filter. Without the 308 table, the 13 places carry prices only.
+test('all 64 combinations of tastes: none removes a place; without services data each reads "no data"',()=>{
+ const base=rankCities({netMonthly:100000}).matches.map(p=>p.id);assert.equal(base.length,REGRESSAR_PLACES.length);
+ for(let bits=0;bits<2**VERIFIED_PREFERENCES.length;bits++){const preferences=VERIFIED_PREFERENCES.filter((_,i)=>bits&(1<<i)),r=rankCities({netMonthly:100000,preferences});assert.equal(r.reason,'matched');assert.deepEqual(r.matches.map(p=>p.id),base);for(const p of r.matches){assert.deepEqual(p.matchedPreferences,preferences);assert.equal(p.unknown.length,preferences.length);assert.equal(p.points,0);assert.ok(p.photo&&p.line.pt&&p.alt.fr)}}
+});
+test('with the place table, tastes reorder the list and an essential at zero leaves a place out',()=>{
+ const places=decodeMatchTable(buildMatchTable(fixture.geo,fixture.prices,fixture.summary)).places,ids=r=>r.matches.map(p=>p.id);
+ const plain=rankCities({netMonthly:9000,places}),beach=rankCities({netMonthly:9000,places,preferences:['beach']}),golf=rankCities({netMonthly:9000,places,preferences:['golf']});
+ assert.notDeepEqual(ids(beach),ids(plain));assert.notDeepEqual(ids(golf),ids(beach));assert.equal(new Set(ids(beach)).size,ids(plain).length);
+ const byCost=[...plain.matches].sort((a,b)=>a.scoreRank-b.scoreRank);for(let i=1;i<byCost.length;i++)assert.ok(byCost[i-1].monthlyHousing<=byCost[i].monthlyHousing);
+ assert.equal(beach.matches[0].id,'viana-do-castelo');assert.ok(beach.matches[0].photo.includes('viana-do-castelo'));assert.equal(golf.matches[0].id,'loule');assert.equal(golf.matches[0].photo,undefined);
+ const must=rankCities({netMonthly:9000,places,preferences:['beach','art'],essential:['beach']});assert.ok(must.matches.length<beach.matches.length);assert.ok(must.matches.every(p=>p.tastes[0].score>0&&p.tastes[0].weight===3&&p.tastes[1].taste==='culture'&&p.tastes[1].weight===1));assert.ok(must.outcome.excluded.some(e=>e.why==='essential-zero'&&e.taste==='beach'));
 });
 test('unsupported constraints are never silently ignored',()=>{
- for(const pref of ['surf','business','quiet','invented']){const r=rankCities({netMonthly:100000,preferences:['beach',pref]});assert.equal(r.reason,'unsupported-preference');assert.deepEqual(r.matches,[]);assert.deepEqual(r.unsupportedPreferences,[pref])}
+ for(const pref of ['surf','business','invented']){const r=rankCities({netMonthly:100000,preferences:['beach',pref]});assert.equal(r.reason,'unsupported-preference');assert.deepEqual(r.matches,[]);assert.deepEqual(r.unsupportedPreferences,[pref])}
 });
 test('invalid income, assumptions and empty affordable sets',()=>{
  for(const n of [NaN,Infinity,-1,0])assert.equal(rankCities({netMonthly:n}).reason,'invalid-input');

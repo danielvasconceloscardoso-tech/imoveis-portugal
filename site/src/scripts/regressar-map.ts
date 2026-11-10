@@ -1,6 +1,8 @@
 /// <reference types="astro/client" />
 /** Isolated Issue 10 map. No shared main-map/Golf modules, remote tiles or API tokens. */
-import type { RegressarPlace } from "../lib/regressar-places";
+import type { RegressarPlace as CuratedPlace } from "../lib/regressar-places";
+/** Prompt 81: any ranked place can be shown; only its slug, name and point are read. */
+type RegressarPlace = Pick<CuratedPlace, "id" | "name" | "lat" | "lon">;
 import mapCss from "maplibre-gl/dist/maplibre-gl.css?url";
 
 export type RegressarMapHandle = {

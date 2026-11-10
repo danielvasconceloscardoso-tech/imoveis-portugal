@@ -9,6 +9,7 @@ import "../styles/regressar.css";
 import RegressarSupport from "./RegressarSupport.astro";
 import RegressarSignature from "./RegressarSignature.astro";
 import RegressarBuyingPower from "./RegressarBuyingPower.astro";
+import { TASTE_LABELS, matchWords } from "../lib/match-copy"; // prompt 81: the matching engine's words
 
 interface Props { lang: Lang; ed: EdCode; }
 const { lang, ed } = Astro.props;
@@ -38,6 +39,14 @@ const preferenceImages = {
   schools: {src:"guimaraes-paco-dos-duques-castelo",alt:{pt:"O Paço dos Duques e o castelo de Guimarães, num contexto urbano",en:"The Palace of the Dukes and Guimarães castle in their urban setting",fr:"Le palais des Ducs et le château de Guimarães dans leur cadre urbain"}},
   airport: {src:"porto-douro-amanhecer",alt:{pt:"O Porto e o Douro ao amanhecer, como contexto da região",en:"Porto and the Douro at dawn, showing the region's setting",fr:"Porto et le Douro à l’aube, pour situer la région"}},
 };
+// Prompt 81: the tastes without a photograph of their own are plain chips; every taste is scored by lib/match.ts.
+const moreTastes = ["isch", "health", "train", "quiet"] as const;
+const mw = matchWords(lang);
+const matchUi = {
+  pt: { more: "Mais critérios", weights: "Quanto conta cada escolha", results: "Lugares por ordem", showMore: "Ver mais lugares", sources: "Fontes dos serviços" },
+  en: { more: "More criteria", weights: "How much each choice counts", results: "Places in order", showMore: "Show more places", sources: "Services sources" },
+  fr: { more: "Autres critères", weights: "Le poids de chaque choix", results: "Lieux par ordre", showMore: "Voir plus de lieux", sources: "Sources des services" },
+}[lang];
 const country = COUNTRIES.some((c) => c.id === ed) ? ed : "lu";
 const initialCurrency = COUNTRIES.find((c) => c.id === country)?.currency ?? "EUR";
 const fiscalReview = {
@@ -105,14 +114,21 @@ const extras = {
   <section class="rx-discovery" id="rx-discovery" data-r-discovery hidden aria-labelledby="rx-tastes-title">
     <div class="rx-discovery-intro"><p class="rx-kicker">Portugal</p><h2 id="rx-tastes-title">{x.revealQuestion}</h2><p>{t.tastesNote}</p></div>
     <div class="rx-preferences rx-image-questions" role="group" aria-label={t.tastes}>{imageQuestions.map(question => <button type="button" data-r-preference={question.id} aria-pressed="false" aria-label={`${question.answer[lang]}. ${question.question[lang]}`}><img src={`/img/v2/${preferenceImages[question.id].src}-640.webp`} alt={preferenceImages[question.id].alt[lang]} width="640" height="420" loading="lazy" decoding="async" /><span class="rx-image-question"><strong>{question.answer[lang]}</strong><span>{question.question[lang]}</span></span><span class="rx-choice-mark" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m5 12 4 4L19 6" stroke="currentColor" stroke-width="2" /></svg></span></button>)}</div>
+    <div class="rx-preferences rx-more-tastes" role="group" aria-label={matchUi.more} data-r-more-tastes>{moreTastes.map(taste => <button type="button" data-r-taste={taste} aria-pressed="false">{TASTE_LABELS[lang][taste]}</button>)}</div>
+    <div class="rx-weights" data-r-weights role="group" aria-label={matchUi.weights} hidden></div>
+    <p class="rx-fine rx-weights-note" data-r-weights-note hidden>{mw.weights}</p>
     <div class="rx-housing"><label for="rx-housing"><span>{t.housingBudget}</span><select id="rx-housing" data-r-housing><option value="rent">{t.rent}</option><option value="buy">{t.buy}</option></select></label><p><strong data-r-budget>—</strong></p><p class="rx-fine">{extras.housing}</p></div>
     <details class="rx-housing-details"><summary>{t.housingAssumptions}</summary><p>{extras.rent}</p><p>{extras.buy}</p><p>{extras.formula}</p><p>{extras.tastes}</p><p>{extras.reserveHint}</p></details>
     <button class="rx-primary rx-reveal" type="button" data-r-reveal><span>{t.reveal}</span><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.5" /></svg></button>
     <p class="rx-reveal-preview" data-r-reveal-preview role="status" aria-live="off" hidden></p>
     <p class="rx-no-match" data-r-no-match role="status" hidden>{t.noMatch}</p>
+    <p class="rx-fine rx-match-coverage" data-r-coverage role="status" hidden></p>
+    <ol class="rx-results" data-r-results aria-label={matchUi.results} hidden></ol>
+    <button class="rx-more-results" type="button" data-r-more-results hidden>{matchUi.showMore}</button>
+    <details class="rx-housing-details rx-how" data-r-how hidden><summary>{mw.how}</summary><p>{mw.weights}</p><ul data-r-how-list></ul><p>{mw.hard} {mw.rule} {mw.ties} {mw.missing}</p><p>{mw.paid}</p><p data-r-how-sources data-label={matchUi.sources}></p></details>
     <section class="rx-city" data-r-city hidden aria-labelledby="rx-city-name">
       <figure class="rx-city-photo"><img data-r-city-photo data-r-photo src="/img/v2/porto-douro-entardecer-1024.webp" alt="" loading="lazy" width="1024" height="683" /><figcaption data-r-city-credit></figcaption></figure>
-      <div class="rx-city-copy"><p class="rx-kicker">{extras.one}</p><h2 id="rx-city-name" data-r-city-name tabindex="-1"></h2><p class="rx-city-story" data-r-city-story data-r-story></p><p class="rx-city-cost"><strong data-r-city-cost data-r-cost></strong></p><p class="rx-fine" data-r-city-period></p><ul class="rx-city-evidence" data-r-city-evidence data-r-evidence></ul><p class="rx-fine" data-r-city-housing></p><p class="rx-fine" data-r-city-price></p><p class="rx-fine" data-r-city-deposit></p><p class="rx-remaining"><span>{t.afterHousing}</span> <strong data-r-after-housing></strong><small>{t.availableBeforeLivingCosts}</small></p><a class="rx-primary" data-r-map href="#"><span>{t.openMap}</span><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.5" /></svg></a></div>
+      <div class="rx-city-copy"><p class="rx-kicker">{extras.one}</p><h2 id="rx-city-name" data-r-city-name tabindex="-1"></h2><p class="rx-city-story" data-r-city-story data-r-story></p><p class="rx-city-cost"><strong data-r-city-cost data-r-cost></strong></p><p class="rx-fine" data-r-city-period></p><ul class="rx-city-evidence" data-r-city-evidence data-r-evidence></ul><p class="rx-fine rx-city-points" data-r-city-points></p><p class="rx-fine rx-city-tradeoff" data-r-city-tradeoff></p><p class="rx-fine" data-r-city-housing></p><p class="rx-fine" data-r-city-price></p><p class="rx-fine" data-r-city-deposit></p><p class="rx-remaining"><span>{t.afterHousing}</span> <strong data-r-after-housing></strong><small>{t.availableBeforeLivingCosts}</small></p><a class="rx-primary" data-r-map href="#"><span>{t.openMap}</span><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 19 19 5M5 5h14v14" stroke="currentColor" stroke-width="1.5" /></svg></a></div>
     </section>
     <section class="rx-local-life" data-r-local-life hidden aria-labelledby="rx-life-title">
       <div class="rx-power"><h3 id="rx-life-title">{x.power}</h3><div data-r-buying-power></div><p class="rx-fine" data-r-power-note></p></div>

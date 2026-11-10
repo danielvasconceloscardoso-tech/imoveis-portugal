@@ -53,6 +53,13 @@ export const CG_TZ = ["own", "edition", "lisbon"];
 export const IMT_FROM = ["sim1", "concierge", "map", "project", "link"];
 export const IMT_ACTS = ["price", "more", "calc"];
 
+/** Prompt 81, the place matching (lib/match.ts; on /regressar today): each taste switched on or off (ev
+ * "match/taste/{taste}/{on|off}"), each weight chosen (ev "match/weight/{taste}/{essential|nice}"), the ranked list
+ * shown, a place opened from it (the municipality travels in "place", to the first-party store only) and a search with
+ * no place left. Never the income, the budget or the list itself. */
+export const MATCH_TASTES = ["beach", "isch", "schools", "health", "airport", "train", "food", "golf", "culture", "quiet"];
+export const MATCH_ACTS = ["show", "place", "none"];
+
 /** Paths per edition (after "/e/{ed}/"). */
 export function editionEvents(): string[] {
   const out: string[] = [];
@@ -84,6 +91,8 @@ export function editionEvents(): string[] {
   // Prompt 71 §2: the south coast on the US map (Mike, M72-22: its events had no /e/ page).
   out.push("map/south", "map/south/golf");
   for (const p of PREVIEWS) out.push(`paid/preview/${p}`);
+  for (const t of MATCH_TASTES) { for (const s of ["on", "off"]) out.push(`match/taste/${t}/${s}`); for (const w of ["essential", "nice"]) out.push(`match/weight/${t}/${w}`); }
+  for (const a of MATCH_ACTS) out.push(`match/${a}`);
   for (const s of [...new Set(STATIONS.map((x) => x.k))]) for (const k of ["open", "done"]) out.push(`path/${s}/${k}`);
   for (const k of ["home", "region"]) for (const s of ["on", "off"]) out.push(`heart/${k}/${s}`);
   for (const b of BAR_ITEMS) out.push(`bar/${b}`);

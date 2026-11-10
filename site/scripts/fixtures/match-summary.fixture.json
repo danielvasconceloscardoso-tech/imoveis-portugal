@@ -1,0 +1,2105 @@
+{
+ "v": 1,
+ "fixture": true,
+ "checked": "2026-11-10",
+ "_note": "TEST FIXTURE for the matching engine (prompt 81). Hand-made in the exact shape of the data contract. Only the Gondomar row repeats the contract example; every other number and name is made up so the tests can check the maths. Never published, never copied into site/public/.",
+ "routing": {
+  "engine": "none",
+  "data": "fixture",
+  "profile": "car, no traffic"
+ },
+ "layers": {
+  "er": {
+   "source": "FIXTURE",
+   "licence": "none (made-up test data)",
+   "covered": 31,
+   "note": "made-up test data"
+  },
+  "cs": {
+   "source": "FIXTURE",
+   "licence": "none (made-up test data)",
+   "covered": 31,
+   "note": "made-up test data"
+  },
+  "ph": {
+   "source": "FIXTURE",
+   "licence": "none (made-up test data)",
+   "covered": 31,
+   "note": "made-up test data"
+  },
+  "pharm": {
+   "source": "FIXTURE",
+   "licence": "none (made-up test data)",
+   "covered": 31,
+   "note": "made-up test data"
+  },
+  "isch": {
+   "source": "FIXTURE",
+   "licence": "none (made-up test data)",
+   "covered": 31,
+   "note": "made-up test data"
+  },
+  "psch": {
+   "source": "FIXTURE",
+   "licence": "none (made-up test data)",
+   "covered": 31,
+   "note": "made-up test data"
+  },
+  "sec": {
+   "source": "FIXTURE",
+   "licence": "none (made-up test data)",
+   "covered": 31,
+   "note": "made-up test data"
+  },
+  "beach": {
+   "source": "FIXTURE",
+   "licence": "none (made-up test data)",
+   "covered": 31,
+   "note": "made-up test data"
+  },
+  "air": {
+   "source": "FIXTURE",
+   "licence": "none (made-up test data)",
+   "covered": 31,
+   "note": "made-up test data"
+  },
+  "rail": {
+   "source": "FIXTURE",
+   "licence": "none (made-up test data)",
+   "covered": 31,
+   "note": "made-up test data"
+  },
+  "food": {
+   "source": "FIXTURE",
+   "licence": "none (made-up test data)",
+   "covered": 31,
+   "note": "made-up test data"
+  },
+  "golf": {
+   "source": "FIXTURE",
+   "licence": "none (made-up test data)",
+   "covered": 31,
+   "note": "made-up test data"
+  },
+  "museum": {
+   "source": "FIXTURE",
+   "licence": "none (made-up test data)",
+   "covered": 31,
+   "note": "made-up test data"
+  },
+  "cult": {
+   "source": "FIXTURE",
+   "licence": "none (made-up test data)",
+   "covered": 31,
+   "note": "made-up test data"
+  },
+  "pop": {
+   "source": "FIXTURE",
+   "licence": "none (made-up test data)",
+   "covered": 31,
+   "note": "made-up test data"
+  }
+ },
+ "places": {
+  "gondomar": {
+   "er": {
+    "min": 13,
+    "km": 9.8,
+    "name": "Hospital de São João"
+   },
+   "cs": {
+    "min": 2,
+    "km": 1.8,
+    "name": "USF Sete Caminhos"
+   },
+   "ph": {
+    "min": 2,
+    "km": 1,
+    "name": "Fixture private hospital"
+   },
+   "ph_n20": 5,
+   "pharm_n": 31,
+   "isch": {
+    "min": 12,
+    "km": 9,
+    "name": "Fixture international school",
+    "cur": [
+     "British"
+    ],
+    "lang": [
+     "en"
+    ]
+   },
+   "isch_n30": 4,
+   "psch_n20": 27,
+   "sec_n20": 14,
+   "beach": {
+    "min": 17,
+    "km": 14.2,
+    "name": "Praia de Lavadores",
+    "flag": true
+   },
+   "air": {
+    "min": 21,
+    "km": 22.3,
+    "iata": "OPO"
+   },
+   "rail": {
+    "min": 9,
+    "km": 7.5,
+    "name": "Porto-Campanhã"
+   },
+   "food": {
+    "mich_n30": 6,
+    "mkt_n20": 3,
+    "rest_n": 310,
+    "rest_per_1k": 1.9
+   },
+   "golf": {
+    "min": 25,
+    "km": 21,
+    "name": "Fixture golf course"
+   },
+   "golf_n30": 2,
+   "museum": {
+    "min": 4,
+    "km": 2.1,
+    "name": "Fixture museum"
+   },
+   "cult_n20": 18
+  },
+  "porto": {
+   "er": {
+    "min": 4,
+    "km": 3.6,
+    "name": "Fixture hospital porto"
+   },
+   "cs": {
+    "min": 2,
+    "km": 1.8,
+    "name": "Fixture health centre porto"
+   },
+   "ph": {
+    "min": 3,
+    "km": 2.7,
+    "name": "Fixture private hospital porto"
+   },
+   "ph_n20": 6,
+   "pharm_n": 96,
+   "isch": {
+    "min": 8,
+    "km": 7.2,
+    "name": "Fixture international school porto",
+    "cur": [
+     "IB"
+    ],
+    "lang": [
+     "en"
+    ]
+   },
+   "isch_n30": 5,
+   "psch_n20": 40,
+   "sec_n20": 18,
+   "beach": {
+    "min": 12,
+    "km": 10.8,
+    "name": "Fixture beach porto",
+    "flag": false
+   },
+   "air": {
+    "min": 16,
+    "km": 17.6,
+    "iata": "OPO"
+   },
+   "rail": {
+    "min": 3,
+    "km": 2.7,
+    "name": "Fixture station porto"
+   },
+   "food": {
+    "mich_n30": 9,
+    "mkt_n20": 4,
+    "rest_n": 2100,
+    "rest_per_1k": 9.1
+   },
+   "golf": {
+    "min": 18,
+    "km": 16.2,
+    "name": "Fixture golf porto"
+   },
+   "golf_n30": 3,
+   "museum": {
+    "min": 2,
+    "km": 1.8,
+    "name": "Fixture museum porto"
+   },
+   "cult_n20": 60,
+   "pop": 231800
+  },
+  "maia": {
+   "er": {
+    "min": 12,
+    "km": 10.8,
+    "name": "Fixture hospital maia"
+   },
+   "cs": {
+    "min": 3,
+    "km": 2.7,
+    "name": "Fixture health centre maia"
+   },
+   "ph": {
+    "min": 6,
+    "km": 5.4,
+    "name": "Fixture private hospital maia"
+   },
+   "ph_n20": 4,
+   "pharm_n": 38,
+   "isch": {
+    "min": 14,
+    "km": 12.6,
+    "name": "Fixture international school maia",
+    "cur": [
+     "IB"
+    ],
+    "lang": [
+     "en"
+    ]
+   },
+   "isch_n30": 5,
+   "psch_n20": 22,
+   "sec_n20": 10,
+   "beach": {
+    "min": 18,
+    "km": 16.2,
+    "name": "Fixture beach maia",
+    "flag": false
+   },
+   "air": {
+    "min": 7,
+    "km": 7.7,
+    "iata": "OPO"
+   },
+   "rail": {
+    "min": 12,
+    "km": 10.8,
+    "name": "Fixture station maia"
+   },
+   "food": {
+    "mich_n30": 6,
+    "mkt_n20": 2,
+    "rest_n": 420,
+    "rest_per_1k": 3.1
+   },
+   "golf": {
+    "min": 15,
+    "km": 13.5,
+    "name": "Fixture golf maia"
+   },
+   "golf_n30": 3,
+   "museum": {
+    "min": 6,
+    "km": 5.4,
+    "name": "Fixture museum maia"
+   },
+   "cult_n20": 14,
+   "pop": 134900
+  },
+  "matosinhos": {
+   "er": {
+    "min": 9,
+    "km": 8.1,
+    "name": "Fixture hospital matosinhos"
+   },
+   "cs": {
+    "min": 2,
+    "km": 1.8,
+    "name": "Fixture health centre matosinhos"
+   },
+   "ph": {
+    "min": 5,
+    "km": 4.5,
+    "name": "Fixture private hospital matosinhos"
+   },
+   "ph_n20": 5,
+   "pharm_n": 49,
+   "isch": {
+    "min": 6,
+    "km": 5.4,
+    "name": "Fixture international school matosinhos",
+    "cur": [
+     "IB"
+    ],
+    "lang": [
+     "en"
+    ]
+   },
+   "isch_n30": 5,
+   "psch_n20": 26,
+   "sec_n20": 12,
+   "beach": {
+    "min": 4,
+    "km": 3.6,
+    "name": "Fixture beach matosinhos",
+    "flag": false
+   },
+   "air": {
+    "min": 9,
+    "km": 9.9,
+    "iata": "OPO"
+   },
+   "rail": {
+    "min": 10,
+    "km": 9,
+    "name": "Fixture station matosinhos"
+   },
+   "food": {
+    "mich_n30": 8,
+    "mkt_n20": 3,
+    "rest_n": 780,
+    "rest_per_1k": 4.5
+   },
+   "golf": {
+    "min": 6,
+    "km": 5.4,
+    "name": "Fixture golf matosinhos"
+   },
+   "golf_n30": 3,
+   "museum": {
+    "min": 4,
+    "km": 3.6,
+    "name": "Fixture museum matosinhos"
+   },
+   "cult_n20": 22,
+   "pop": 172600
+  },
+  "vila-nova-de-gaia": {
+   "er": {
+    "min": 7,
+    "km": 6.3,
+    "name": "Fixture hospital vila-nova-de-gaia"
+   },
+   "cs": {
+    "min": 3,
+    "km": 2.7,
+    "name": "Fixture health centre vila-nova-de-gaia"
+   },
+   "ph": {
+    "min": 4,
+    "km": 3.6,
+    "name": "Fixture private hospital vila-nova-de-gaia"
+   },
+   "ph_n20": 5,
+   "pharm_n": 84,
+   "isch": {
+    "min": 15,
+    "km": 13.5,
+    "name": "Fixture international school vila-nova-de-gaia",
+    "cur": [
+     "IB"
+    ],
+    "lang": [
+     "en"
+    ]
+   },
+   "isch_n30": 4,
+   "psch_n20": 30,
+   "sec_n20": 16,
+   "beach": {
+    "min": 11,
+    "km": 9.9,
+    "name": "Fixture beach vila-nova-de-gaia",
+    "flag": false
+   },
+   "air": {
+    "min": 22,
+    "km": 24.2,
+    "iata": "OPO"
+   },
+   "rail": {
+    "min": 5,
+    "km": 4.5,
+    "name": "Fixture station vila-nova-de-gaia"
+   },
+   "food": {
+    "mich_n30": 9,
+    "mkt_n20": 3,
+    "rest_n": 990,
+    "rest_per_1k": 3.3
+   },
+   "golf": {
+    "min": 14,
+    "km": 12.6,
+    "name": "Fixture golf vila-nova-de-gaia"
+   },
+   "golf_n30": 2,
+   "museum": {
+    "min": 5,
+    "km": 4.5,
+    "name": "Fixture museum vila-nova-de-gaia"
+   },
+   "cult_n20": 34,
+   "pop": 304100
+  },
+  "valongo": {
+   "er": {
+    "min": 16,
+    "km": 14.4,
+    "name": "Fixture hospital valongo"
+   },
+   "cs": {
+    "min": 3,
+    "km": 2.7,
+    "name": "Fixture health centre valongo"
+   },
+   "ph": {
+    "min": 9,
+    "km": 8.1,
+    "name": "Fixture private hospital valongo"
+   },
+   "ph_n20": 2,
+   "pharm_n": 24,
+   "isch": {
+    "min": 19,
+    "km": 17.1,
+    "name": "Fixture international school valongo",
+    "cur": [
+     "IB"
+    ],
+    "lang": [
+     "en"
+    ]
+   },
+   "isch_n30": 3,
+   "psch_n20": 12,
+   "sec_n20": 8,
+   "beach": {
+    "min": 24,
+    "km": 21.6,
+    "name": "Fixture beach valongo",
+    "flag": false
+   },
+   "air": {
+    "min": 17,
+    "km": 18.7,
+    "iata": "OPO"
+   },
+   "rail": {
+    "min": 14,
+    "km": 12.6,
+    "name": "Fixture station valongo"
+   },
+   "food": {
+    "mich_n30": 5,
+    "mkt_n20": 1,
+    "rest_n": 210,
+    "rest_per_1k": 2.2
+   },
+   "golf": {
+    "min": 22,
+    "km": 19.8,
+    "name": "Fixture golf valongo"
+   },
+   "golf_n30": 2,
+   "museum": {
+    "min": 9,
+    "km": 8.1,
+    "name": "Fixture museum valongo"
+   },
+   "cult_n20": 8,
+   "pop": 94800
+  },
+  "braga": {
+   "er": {
+    "min": 6,
+    "km": 5.4,
+    "name": "Fixture hospital braga"
+   },
+   "cs": {
+    "min": 2,
+    "km": 1.8,
+    "name": "Fixture health centre braga"
+   },
+   "ph": {
+    "min": 5,
+    "km": 4.5,
+    "name": "Fixture private hospital braga"
+   },
+   "ph_n20": 3,
+   "pharm_n": 52,
+   "isch": {
+    "min": 9,
+    "km": 8.1,
+    "name": "Fixture international school braga",
+    "cur": [
+     "IB"
+    ],
+    "lang": [
+     "en"
+    ]
+   },
+   "isch_n30": 1,
+   "psch_n20": 18,
+   "sec_n20": 11,
+   "beach": {
+    "min": 27,
+    "km": 24.3,
+    "name": "Fixture beach braga",
+    "flag": false
+   },
+   "air": {
+    "min": 38,
+    "km": 41.8,
+    "iata": "OPO"
+   },
+   "rail": {
+    "min": 6,
+    "km": 5.4,
+    "name": "Fixture station braga"
+   },
+   "food": {
+    "mich_n30": 1,
+    "mkt_n20": 2,
+    "rest_n": 880,
+    "rest_per_1k": 4.6
+   },
+   "golf": {
+    "min": 29,
+    "km": 26.1,
+    "name": "Fixture golf braga"
+   },
+   "golf_n30": 1,
+   "museum": {
+    "min": 3,
+    "km": 2.7,
+    "name": "Fixture museum braga"
+   },
+   "cult_n20": 21,
+   "pop": 193300
+  },
+  "guimaraes": {
+   "er": {
+    "min": 7,
+    "km": 6.3,
+    "name": "Fixture hospital guimaraes"
+   },
+   "cs": {
+    "min": 3,
+    "km": 2.7,
+    "name": "Fixture health centre guimaraes"
+   },
+   "ph": {
+    "min": 8,
+    "km": 7.2,
+    "name": "Fixture private hospital guimaraes"
+   },
+   "ph_n20": 2,
+   "pharm_n": 41,
+   "isch": {
+    "min": 21,
+    "km": 18.9,
+    "name": "Fixture international school guimaraes",
+    "cur": [
+     "IB"
+    ],
+    "lang": [
+     "en"
+    ]
+   },
+   "isch_n30": 1,
+   "psch_n20": 12,
+   "sec_n20": 9,
+   "beach": {
+    "min": 38,
+    "km": 34.2,
+    "name": "Fixture beach guimaraes",
+    "flag": false
+   },
+   "air": {
+    "min": 40,
+    "km": 44,
+    "iata": "OPO"
+   },
+   "rail": {
+    "min": 8,
+    "km": 7.2,
+    "name": "Fixture station guimaraes"
+   },
+   "food": {
+    "mich_n30": 1,
+    "mkt_n20": 2,
+    "rest_n": 560,
+    "rest_per_1k": 3.6
+   },
+   "golf": {
+    "min": 33,
+    "km": 29.7,
+    "name": "Fixture golf guimaraes"
+   },
+   "golf_n30": 0,
+   "museum": {
+    "min": 3,
+    "km": 2.7,
+    "name": "Fixture museum guimaraes"
+   },
+   "cult_n20": 15,
+   "pop": 156800
+  },
+  "viana-do-castelo": {
+   "er": {
+    "min": 5,
+    "km": 4.5,
+    "name": "Fixture hospital viana-do-castelo"
+   },
+   "cs": {
+    "min": 2,
+    "km": 1.8,
+    "name": "Fixture health centre viana-do-castelo"
+   },
+   "ph": {
+    "min": 7,
+    "km": 6.3,
+    "name": "Fixture private hospital viana-do-castelo"
+   },
+   "ph_n20": 1,
+   "pharm_n": 29,
+   "isch": {
+    "min": 47,
+    "km": 42.3,
+    "name": "Fixture international school viana-do-castelo",
+    "cur": [
+     "IB"
+    ],
+    "lang": [
+     "en"
+    ]
+   },
+   "isch_n30": 0,
+   "psch_n20": 6,
+   "sec_n20": 5,
+   "beach": {
+    "min": 8,
+    "km": 7.2,
+    "name": "Fixture beach viana-do-castelo",
+    "flag": false
+   },
+   "air": {
+    "min": 52,
+    "km": 57.2,
+    "iata": "OPO"
+   },
+   "rail": {
+    "min": 4,
+    "km": 3.6,
+    "name": "Fixture station viana-do-castelo"
+   },
+   "food": {
+    "mich_n30": 0,
+    "mkt_n20": 1,
+    "rest_n": 410,
+    "rest_per_1k": 4.8
+   },
+   "golf": {
+    "min": 26,
+    "km": 23.4,
+    "name": "Fixture golf viana-do-castelo"
+   },
+   "golf_n30": 1,
+   "museum": {
+    "min": 3,
+    "km": 2.7,
+    "name": "Fixture museum viana-do-castelo"
+   },
+   "cult_n20": 9,
+   "pop": 85800
+  },
+  "aveiro": {
+   "er": {
+    "min": 6,
+    "km": 5.4,
+    "name": "Fixture hospital aveiro"
+   },
+   "cs": {
+    "min": 3,
+    "km": 2.7,
+    "name": "Fixture health centre aveiro"
+   },
+   "ph": {
+    "min": 6,
+    "km": 5.4,
+    "name": "Fixture private hospital aveiro"
+   },
+   "ph_n20": 2,
+   "pharm_n": 27,
+   "isch": {
+    "min": 40,
+    "km": 36,
+    "name": "Fixture international school aveiro",
+    "cur": [
+     "IB"
+    ],
+    "lang": [
+     "en"
+    ]
+   },
+   "isch_n30": 0,
+   "psch_n20": 8,
+   "sec_n20": 6,
+   "beach": {
+    "min": 13,
+    "km": 11.7,
+    "name": "Fixture beach aveiro",
+    "flag": false
+   },
+   "air": {
+    "min": 55,
+    "km": 60.5,
+    "iata": "OPO"
+   },
+   "rail": {
+    "min": 5,
+    "km": 4.5,
+    "name": "Fixture station aveiro"
+   },
+   "food": {
+    "mich_n30": 1,
+    "mkt_n20": 1,
+    "rest_n": 520,
+    "rest_per_1k": 6.4
+   },
+   "golf": {
+    "min": 34,
+    "km": 30.6,
+    "name": "Fixture golf aveiro"
+   },
+   "golf_n30": 0,
+   "museum": {
+    "min": 4,
+    "km": 3.6,
+    "name": "Fixture museum aveiro"
+   },
+   "cult_n20": 11,
+   "pop": 80900
+  },
+  "coimbra": {
+   "er": {
+    "min": 5,
+    "km": 4.5,
+    "name": "Fixture hospital coimbra"
+   },
+   "cs": {
+    "min": 2,
+    "km": 1.8,
+    "name": "Fixture health centre coimbra"
+   },
+   "ph": {
+    "min": 4,
+    "km": 3.6,
+    "name": "Fixture private hospital coimbra"
+   },
+   "ph_n20": 4,
+   "pharm_n": 58,
+   "isch": {
+    "min": 12,
+    "km": 10.8,
+    "name": "Fixture international school coimbra",
+    "cur": [
+     "IB"
+    ],
+    "lang": [
+     "en"
+    ]
+   },
+   "isch_n30": 1,
+   "psch_n20": 15,
+   "sec_n20": 9,
+   "beach": {
+    "min": 41,
+    "km": 36.9,
+    "name": "Fixture beach coimbra",
+    "flag": false
+   },
+   "air": {
+    "min": 85,
+    "km": 93.5,
+    "iata": "OPO"
+   },
+   "rail": {
+    "min": 4,
+    "km": 3.6,
+    "name": "Fixture station coimbra"
+   },
+   "food": {
+    "mich_n30": 1,
+    "mkt_n20": 2,
+    "rest_n": 760,
+    "rest_per_1k": 5.4
+   },
+   "golf": {
+    "min": 48,
+    "km": 43.2,
+    "name": "Fixture golf coimbra"
+   },
+   "golf_n30": 0,
+   "museum": {
+    "min": 3,
+    "km": 2.7,
+    "name": "Fixture museum coimbra"
+   },
+   "cult_n20": 24,
+   "pop": 140800
+  },
+  "leiria": {
+   "er": {
+    "min": 6,
+    "km": 5.4,
+    "name": "Fixture hospital leiria"
+   },
+   "cs": {
+    "min": 3,
+    "km": 2.7,
+    "name": "Fixture health centre leiria"
+   },
+   "ph": {
+    "min": 5,
+    "km": 4.5,
+    "name": "Fixture private hospital leiria"
+   },
+   "ph_n20": 2,
+   "pharm_n": 36,
+   "isch": {
+    "min": 16,
+    "km": 14.4,
+    "name": "Fixture international school leiria",
+    "cur": [
+     "IB"
+    ],
+    "lang": [
+     "en"
+    ]
+   },
+   "isch_n30": 1,
+   "psch_n20": 9,
+   "sec_n20": 7,
+   "beach": {
+    "min": 26,
+    "km": 23.4,
+    "name": "Fixture beach leiria",
+    "flag": false
+   },
+   "air": {
+    "min": 88,
+    "km": 96.8,
+    "iata": "LIS"
+   },
+   "rail": {
+    "min": 7,
+    "km": 6.3,
+    "name": "Fixture station leiria"
+   },
+   "food": {
+    "mich_n30": 0,
+    "mkt_n20": 1,
+    "rest_n": 540,
+    "rest_per_1k": 4.2
+   },
+   "golf": {
+    "min": 50,
+    "km": 45,
+    "name": "Fixture golf leiria"
+   },
+   "golf_n30": 0,
+   "museum": {
+    "min": 4,
+    "km": 3.6,
+    "name": "Fixture museum leiria"
+   },
+   "cult_n20": 10,
+   "pop": 128600
+  },
+  "lisboa": {
+   "er": {
+    "min": 5,
+    "km": 4.5,
+    "name": "Fixture hospital lisboa"
+   },
+   "cs": {
+    "min": 2,
+    "km": 1.8,
+    "name": "Fixture health centre lisboa"
+   },
+   "ph": {
+    "min": 3,
+    "km": 2.7,
+    "name": "Fixture private hospital lisboa"
+   },
+   "ph_n20": 9,
+   "pharm_n": 290,
+   "isch": {
+    "min": 9,
+    "km": 8.1,
+    "name": "Fixture international school lisboa",
+    "cur": [
+     "IB"
+    ],
+    "lang": [
+     "en"
+    ]
+   },
+   "isch_n30": 9,
+   "psch_n20": 60,
+   "sec_n20": 25,
+   "beach": {
+    "min": 21,
+    "km": 18.9,
+    "name": "Fixture beach lisboa",
+    "flag": false
+   },
+   "air": {
+    "min": 8,
+    "km": 8.8,
+    "iata": "LIS"
+   },
+   "rail": {
+    "min": 4,
+    "km": 3.6,
+    "name": "Fixture station lisboa"
+   },
+   "food": {
+    "mich_n30": 22,
+    "mkt_n20": 6,
+    "rest_n": 6900,
+    "rest_per_1k": 12.6
+   },
+   "golf": {
+    "min": 12,
+    "km": 10.8,
+    "name": "Fixture golf lisboa"
+   },
+   "golf_n30": 6,
+   "museum": {
+    "min": 2,
+    "km": 1.8,
+    "name": "Fixture museum lisboa"
+   },
+   "cult_n20": 110,
+   "pop": 545800
+  },
+  "cascais": {
+   "er": {
+    "min": 8,
+    "km": 7.2,
+    "name": "Fixture hospital cascais"
+   },
+   "cs": {
+    "min": 3,
+    "km": 2.7,
+    "name": "Fixture health centre cascais"
+   },
+   "ph": {
+    "min": 6,
+    "km": 5.4,
+    "name": "Fixture private hospital cascais"
+   },
+   "ph_n20": 4,
+   "pharm_n": 60,
+   "isch": {
+    "min": 5,
+    "km": 4.5,
+    "name": "Fixture international school cascais",
+    "cur": [
+     "IB"
+    ],
+    "lang": [
+     "en"
+    ]
+   },
+   "isch_n30": 8,
+   "psch_n20": 28,
+   "sec_n20": 9,
+   "beach": {
+    "min": 6,
+    "km": 5.4,
+    "name": "Fixture beach cascais",
+    "flag": false
+   },
+   "air": {
+    "min": 27,
+    "km": 29.7,
+    "iata": "LIS"
+   },
+   "rail": {
+    "min": 9,
+    "km": 8.1,
+    "name": "Fixture station cascais"
+   },
+   "food": {
+    "mich_n30": 10,
+    "mkt_n20": 2,
+    "rest_n": 1100,
+    "rest_per_1k": 5.1
+   },
+   "golf": {
+    "min": 8,
+    "km": 7.2,
+    "name": "Fixture golf cascais"
+   },
+   "golf_n30": 7,
+   "museum": {
+    "min": 4,
+    "km": 3.6,
+    "name": "Fixture museum cascais"
+   },
+   "cult_n20": 19,
+   "pop": 214100
+  },
+  "oeiras": {
+   "er": {
+    "min": 11,
+    "km": 9.9,
+    "name": "Fixture hospital oeiras"
+   },
+   "cs": {
+    "min": 2,
+    "km": 1.8,
+    "name": "Fixture health centre oeiras"
+   },
+   "ph": {
+    "min": 5,
+    "km": 4.5,
+    "name": "Fixture private hospital oeiras"
+   },
+   "ph_n20": 6,
+   "pharm_n": 45,
+   "isch": {
+    "min": 6,
+    "km": 5.4,
+    "name": "Fixture international school oeiras",
+    "cur": [
+     "IB"
+    ],
+    "lang": [
+     "en"
+    ]
+   },
+   "isch_n30": 9,
+   "psch_n20": 24,
+   "sec_n20": 9,
+   "beach": {
+    "min": 7,
+    "km": 6.3,
+    "name": "Fixture beach oeiras",
+    "flag": false
+   },
+   "air": {
+    "min": 17,
+    "km": 18.7,
+    "iata": "LIS"
+   },
+   "rail": {
+    "min": 6,
+    "km": 5.4,
+    "name": "Fixture station oeiras"
+   },
+   "food": {
+    "mich_n30": 14,
+    "mkt_n20": 2,
+    "rest_n": 640,
+    "rest_per_1k": 3.7
+   },
+   "golf": {
+    "min": 11,
+    "km": 9.9,
+    "name": "Fixture golf oeiras"
+   },
+   "golf_n30": 7,
+   "museum": {
+    "min": 6,
+    "km": 5.4,
+    "name": "Fixture museum oeiras"
+   },
+   "cult_n20": 16,
+   "pop": 171700
+  },
+  "sintra": {
+   "er": {
+    "min": 14,
+    "km": 12.6,
+    "name": "Fixture hospital sintra"
+   },
+   "cs": {
+    "min": 3,
+    "km": 2.7,
+    "name": "Fixture health centre sintra"
+   },
+   "ph": {
+    "min": 8,
+    "km": 7.2,
+    "name": "Fixture private hospital sintra"
+   },
+   "ph_n20": 3,
+   "pharm_n": 90,
+   "isch": {
+    "min": 12,
+    "km": 10.8,
+    "name": "Fixture international school sintra",
+    "cur": [
+     "IB"
+    ],
+    "lang": [
+     "en"
+    ]
+   },
+   "isch_n30": 7,
+   "psch_n20": 26,
+   "sec_n20": 14,
+   "beach": {
+    "min": 17,
+    "km": 15.3,
+    "name": "Fixture beach sintra",
+    "flag": false
+   },
+   "air": {
+    "min": 26,
+    "km": 28.6,
+    "iata": "LIS"
+   },
+   "rail": {
+    "min": 9,
+    "km": 8.1,
+    "name": "Fixture station sintra"
+   },
+   "food": {
+    "mich_n30": 9,
+    "mkt_n20": 2,
+    "rest_n": 1150,
+    "rest_per_1k": 3
+   },
+   "golf": {
+    "min": 10,
+    "km": 9,
+    "name": "Fixture golf sintra"
+   },
+   "golf_n30": 6,
+   "museum": {
+    "min": 5,
+    "km": 4.5,
+    "name": "Fixture museum sintra"
+   },
+   "cult_n20": 18,
+   "pop": 385600
+  },
+  "almada": {
+   "er": {
+    "min": 6,
+    "km": 5.4,
+    "name": "Fixture hospital almada"
+   },
+   "cs": {
+    "min": 2,
+    "km": 1.8,
+    "name": "Fixture health centre almada"
+   },
+   "ph": {
+    "min": 7,
+    "km": 6.3,
+    "name": "Fixture private hospital almada"
+   },
+   "ph_n20": 3,
+   "pharm_n": 50,
+   "isch": {
+    "min": 14,
+    "km": 12.6,
+    "name": "Fixture international school almada",
+    "cur": [
+     "IB"
+    ],
+    "lang": [
+     "en"
+    ]
+   },
+   "isch_n30": 6,
+   "psch_n20": 18,
+   "sec_n20": 10,
+   "beach": {
+    "min": 9,
+    "km": 8.1,
+    "name": "Fixture beach almada",
+    "flag": false
+   },
+   "air": {
+    "min": 16,
+    "km": 17.6,
+    "iata": "LIS"
+   },
+   "rail": {
+    "min": 8,
+    "km": 7.2,
+    "name": "Fixture station almada"
+   },
+   "food": {
+    "mich_n30": 11,
+    "mkt_n20": 2,
+    "rest_n": 760,
+    "rest_per_1k": 4.3
+   },
+   "golf": {
+    "min": 12,
+    "km": 10.8,
+    "name": "Fixture golf almada"
+   },
+   "golf_n30": 3,
+   "museum": {
+    "min": 7,
+    "km": 6.3,
+    "name": "Fixture museum almada"
+   },
+   "cult_n20": 12,
+   "pop": 177200
+  },
+  "setubal": {
+   "er": {
+    "min": 5,
+    "km": 4.5,
+    "name": "Fixture hospital setubal"
+   },
+   "cs": {
+    "min": 2,
+    "km": 1.8,
+    "name": "Fixture health centre setubal"
+   },
+   "ph": {
+    "min": 6,
+    "km": 5.4,
+    "name": "Fixture private hospital setubal"
+   },
+   "ph_n20": 2,
+   "pharm_n": 34,
+   "isch": {
+    "min": 28,
+    "km": 25.2,
+    "name": "Fixture international school setubal",
+    "cur": [
+     "IB"
+    ],
+    "lang": [
+     "en"
+    ]
+   },
+   "isch_n30": 2,
+   "psch_n20": 9,
+   "sec_n20": 7,
+   "beach": {
+    "min": 14,
+    "km": 12.6,
+    "name": "Fixture beach setubal",
+    "flag": false
+   },
+   "air": {
+    "min": 41,
+    "km": 45.1,
+    "iata": "LIS"
+   },
+   "rail": {
+    "min": 5,
+    "km": 4.5,
+    "name": "Fixture station setubal"
+   },
+   "food": {
+    "mich_n30": 2,
+    "mkt_n20": 1,
+    "rest_n": 520,
+    "rest_per_1k": 4.2
+   },
+   "golf": {
+    "min": 21,
+    "km": 18.9,
+    "name": "Fixture golf setubal"
+   },
+   "golf_n30": 2,
+   "museum": {
+    "min": 3,
+    "km": 2.7,
+    "name": "Fixture museum setubal"
+   },
+   "cult_n20": 9,
+   "pop": 123500
+  },
+  "evora": {
+   "er": {
+    "min": 5,
+    "km": 4.5,
+    "name": "Fixture hospital evora"
+   },
+   "cs": {
+    "min": 2,
+    "km": 1.8,
+    "name": "Fixture health centre evora"
+   },
+   "ph": {
+    "min": 6,
+    "km": 5.4,
+    "name": "Fixture private hospital evora"
+   },
+   "ph_n20": 1,
+   "pharm_n": 22,
+   "isch": {
+    "min": 48,
+    "km": 43.2,
+    "name": "Fixture international school evora",
+    "cur": [
+     "IB"
+    ],
+    "lang": [
+     "en"
+    ]
+   },
+   "isch_n30": 0,
+   "psch_n20": 5,
+   "sec_n20": 5,
+   "beach": {
+    "min": 70,
+    "km": 63,
+    "name": "Fixture beach evora",
+    "flag": false
+   },
+   "air": {
+    "min": 79,
+    "km": 86.9,
+    "iata": "LIS"
+   },
+   "rail": {
+    "min": 6,
+    "km": 5.4,
+    "name": "Fixture station evora"
+   },
+   "food": {
+    "mich_n30": 2,
+    "mkt_n20": 1,
+    "rest_n": 330,
+    "rest_per_1k": 6.1
+   },
+   "golf": {
+    "min": 46,
+    "km": 41.4,
+    "name": "Fixture golf evora"
+   },
+   "golf_n30": 0,
+   "museum": {
+    "min": 2,
+    "km": 1.8,
+    "name": "Fixture museum evora"
+   },
+   "cult_n20": 13,
+   "pop": 53600
+  },
+  "beja": {
+   "er": {
+    "min": 4,
+    "km": 3.6,
+    "name": "Fixture hospital beja"
+   },
+   "cs": {
+    "min": 2,
+    "km": 1.8,
+    "name": "Fixture health centre beja"
+   },
+   "ph": null,
+   "ph_n20": 0,
+   "pharm_n": 14,
+   "isch": {
+    "min": 95,
+    "km": 85.5,
+    "name": "Fixture international school beja",
+    "cur": [
+     "IB"
+    ],
+    "lang": [
+     "en"
+    ]
+   },
+   "isch_n30": 0,
+   "psch_n20": 2,
+   "sec_n20": 3,
+   "beach": {
+    "min": 78,
+    "km": 70.2,
+    "name": "Fixture beach beja",
+    "flag": false
+   },
+   "air": {
+    "min": 96,
+    "km": 105.6,
+    "iata": "FAO"
+   },
+   "rail": {
+    "min": 5,
+    "km": 4.5,
+    "name": "Fixture station beja"
+   },
+   "food": {
+    "mich_n30": 0,
+    "mkt_n20": 1,
+    "rest_n": 170,
+    "rest_per_1k": 5.1
+   },
+   "golf": {
+    "min": 85,
+    "km": 76.5,
+    "name": "Fixture golf beja"
+   },
+   "golf_n30": 0,
+   "museum": {
+    "min": 3,
+    "km": 2.7,
+    "name": "Fixture museum beja"
+   },
+   "cult_n20": 5,
+   "pop": 33400
+  },
+  "braganca": {
+   "er": {
+    "min": 5,
+    "km": 4.5,
+    "name": "Fixture hospital braganca"
+   },
+   "cs": {
+    "min": 2,
+    "km": 1.8,
+    "name": "Fixture health centre braganca"
+   },
+   "ph": null,
+   "ph_n20": 0,
+   "pharm_n": 13,
+   "isch": {
+    "min": 150,
+    "km": 135,
+    "name": "Fixture international school braganca",
+    "cur": [
+     "IB"
+    ],
+    "lang": [
+     "en"
+    ]
+   },
+   "isch_n30": 0,
+   "psch_n20": 2,
+   "sec_n20": 2,
+   "beach": {
+    "min": 120,
+    "km": 108,
+    "name": "Fixture beach braganca",
+    "flag": false
+   },
+   "air": {
+    "min": 125,
+    "km": 137.5,
+    "iata": "OPO"
+   },
+   "rail": null,
+   "food": {
+    "mich_n30": 1,
+    "mkt_n20": 1,
+    "rest_n": 180,
+    "rest_per_1k": 5.2
+   },
+   "golf": {
+    "min": 60,
+    "km": 54,
+    "name": "Fixture golf braganca"
+   },
+   "golf_n30": 0,
+   "museum": {
+    "min": 3,
+    "km": 2.7,
+    "name": "Fixture museum braganca"
+   },
+   "cult_n20": 6,
+   "pop": 34600
+  },
+  "castelo-branco": {
+   "er": {
+    "min": 6,
+    "km": 5.4,
+    "name": "Fixture hospital castelo-branco"
+   },
+   "cs": {
+    "min": 2,
+    "km": 1.8,
+    "name": "Fixture health centre castelo-branco"
+   },
+   "ph": null,
+   "ph_n20": 0,
+   "pharm_n": 19,
+   "isch": {
+    "min": 110,
+    "km": 99,
+    "name": "Fixture international school castelo-branco",
+    "cur": [
+     "IB"
+    ],
+    "lang": [
+     "en"
+    ]
+   },
+   "isch_n30": 0,
+   "psch_n20": 3,
+   "sec_n20": 3,
+   "beach": {
+    "min": 95,
+    "km": 85.5,
+    "name": "Fixture beach castelo-branco",
+    "flag": false
+   },
+   "air": {
+    "min": 128,
+    "km": 140.8,
+    "iata": "LIS"
+   },
+   "rail": {
+    "min": 4,
+    "km": 3.6,
+    "name": "Fixture station castelo-branco"
+   },
+   "food": {
+    "mich_n30": 0,
+    "mkt_n20": 1,
+    "rest_n": 240,
+    "rest_per_1k": 4.6
+   },
+   "golf": {
+    "min": 90,
+    "km": 81,
+    "name": "Fixture golf castelo-branco"
+   },
+   "golf_n30": 0,
+   "museum": {
+    "min": 3,
+    "km": 2.7,
+    "name": "Fixture museum castelo-branco"
+   },
+   "cult_n20": 6,
+   "pop": 52300
+  },
+  "loule": {
+   "er": {
+    "min": 17,
+    "km": 15.3,
+    "name": "Fixture hospital loule"
+   },
+   "cs": {
+    "min": 3,
+    "km": 2.7,
+    "name": "Fixture health centre loule"
+   },
+   "ph": {
+    "min": 9,
+    "km": 8.1,
+    "name": "Fixture private hospital loule"
+   },
+   "ph_n20": 2,
+   "pharm_n": 24,
+   "isch": {
+    "min": 9,
+    "km": 8.1,
+    "name": "Fixture international school loule",
+    "cur": [
+     "IB"
+    ],
+    "lang": [
+     "en"
+    ]
+   },
+   "isch_n30": 3,
+   "psch_n20": 6,
+   "sec_n20": 4,
+   "beach": {
+    "min": 14,
+    "km": 12.6,
+    "name": "Fixture beach loule",
+    "flag": false
+   },
+   "air": {
+    "min": 15,
+    "km": 16.5,
+    "iata": "FAO"
+   },
+   "rail": {
+    "min": 6,
+    "km": 5.4,
+    "name": "Fixture station loule"
+   },
+   "food": {
+    "mich_n30": 7,
+    "mkt_n20": 2,
+    "rest_n": 720,
+    "rest_per_1k": 10
+   },
+   "golf": {
+    "min": 9,
+    "km": 8.1,
+    "name": "Fixture golf loule"
+   },
+   "golf_n30": 9,
+   "museum": {
+    "min": 5,
+    "km": 4.5,
+    "name": "Fixture museum loule"
+   },
+   "cult_n20": 7,
+   "pop": 72300
+  },
+  "albufeira": {
+   "er": {
+    "min": 28,
+    "km": 25.2,
+    "name": "Fixture hospital albufeira"
+   },
+   "cs": {
+    "min": 4,
+    "km": 3.6,
+    "name": "Fixture health centre albufeira"
+   },
+   "ph": {
+    "min": 12,
+    "km": 10.8,
+    "name": "Fixture private hospital albufeira"
+   },
+   "ph_n20": 2,
+   "pharm_n": 16,
+   "isch": {
+    "min": 13,
+    "km": 11.7,
+    "name": "Fixture international school albufeira",
+    "cur": [
+     "IB"
+    ],
+    "lang": [
+     "en"
+    ]
+   },
+   "isch_n30": 3,
+   "psch_n20": 4,
+   "sec_n20": 3,
+   "beach": {
+    "min": 6,
+    "km": 5.4,
+    "name": "Fixture beach albufeira",
+    "flag": false
+   },
+   "air": {
+    "min": 31,
+    "km": 34.1,
+    "iata": "FAO"
+   },
+   "rail": {
+    "min": 9,
+    "km": 8.1,
+    "name": "Fixture station albufeira"
+   },
+   "food": {
+    "mich_n30": 6,
+    "mkt_n20": 1,
+    "rest_n": 1150,
+    "rest_per_1k": 26
+   },
+   "golf": {
+    "min": 7,
+    "km": 6.3,
+    "name": "Fixture golf albufeira"
+   },
+   "golf_n30": 8,
+   "museum": {
+    "min": 6,
+    "km": 5.4,
+    "name": "Fixture museum albufeira"
+   },
+   "cult_n20": 4,
+   "pop": 44200
+  },
+  "lagos": {
+   "er": {
+    "min": 22,
+    "km": 19.8,
+    "name": "Fixture hospital lagos"
+   },
+   "cs": {
+    "min": 3,
+    "km": 2.7,
+    "name": "Fixture health centre lagos"
+   },
+   "ph": {
+    "min": 9,
+    "km": 8.1,
+    "name": "Fixture private hospital lagos"
+   },
+   "ph_n20": 1,
+   "pharm_n": 12,
+   "isch": {
+    "min": 8,
+    "km": 7.2,
+    "name": "Fixture international school lagos",
+    "cur": [
+     "IB"
+    ],
+    "lang": [
+     "en"
+    ]
+   },
+   "isch_n30": 2,
+   "psch_n20": 3,
+   "sec_n20": 2,
+   "beach": {
+    "min": 5,
+    "km": 4.5,
+    "name": "Fixture beach lagos",
+    "flag": false
+   },
+   "air": {
+    "min": 62,
+    "km": 68.2,
+    "iata": "FAO"
+   },
+   "rail": {
+    "min": 4,
+    "km": 3.6,
+    "name": "Fixture station lagos"
+   },
+   "food": {
+    "mich_n30": 3,
+    "mkt_n20": 1,
+    "rest_n": 520,
+    "rest_per_1k": 15.4
+   },
+   "golf": {
+    "min": 9,
+    "km": 8.1,
+    "name": "Fixture golf lagos"
+   },
+   "golf_n30": 5,
+   "museum": {
+    "min": 3,
+    "km": 2.7,
+    "name": "Fixture museum lagos"
+   },
+   "cult_n20": 5,
+   "pop": 33500
+  },
+  "faro": {
+   "er": {
+    "min": 4,
+    "km": 3.6,
+    "name": "Fixture hospital faro"
+   },
+   "cs": {
+    "min": 2,
+    "km": 1.8,
+    "name": "Fixture health centre faro"
+   },
+   "ph": {
+    "min": 5,
+    "km": 4.5,
+    "name": "Fixture private hospital faro"
+   },
+   "ph_n20": 2,
+   "pharm_n": 26,
+   "isch": {
+    "min": 12,
+    "km": 10.8,
+    "name": "Fixture international school faro",
+    "cur": [
+     "IB"
+    ],
+    "lang": [
+     "en"
+    ]
+   },
+   "isch_n30": 2,
+   "psch_n20": 7,
+   "sec_n20": 5,
+   "beach": {
+    "min": 12,
+    "km": 10.8,
+    "name": "Fixture beach faro",
+    "flag": false
+   },
+   "air": {
+    "min": 7,
+    "km": 7.7,
+    "iata": "FAO"
+   },
+   "rail": {
+    "min": 4,
+    "km": 3.6,
+    "name": "Fixture station faro"
+   },
+   "food": {
+    "mich_n30": 4,
+    "mkt_n20": 1,
+    "rest_n": 480,
+    "rest_per_1k": 7.1
+   },
+   "golf": {
+    "min": 18,
+    "km": 16.2,
+    "name": "Fixture golf faro"
+   },
+   "golf_n30": 5,
+   "museum": {
+    "min": 3,
+    "km": 2.7,
+    "name": "Fixture museum faro"
+   },
+   "cult_n20": 10,
+   "pop": 67600
+  },
+  "funchal": {
+   "er": {
+    "min": 5,
+    "km": 4.5,
+    "name": "Fixture hospital funchal"
+   },
+   "cs": {
+    "min": 2,
+    "km": 1.8,
+    "name": "Fixture health centre funchal"
+   },
+   "ph": {
+    "min": 6,
+    "km": 5.4,
+    "name": "Fixture private hospital funchal"
+   },
+   "ph_n20": 2,
+   "pharm_n": 48,
+   "isch": {
+    "min": 7,
+    "km": 6.3,
+    "name": "Fixture international school funchal",
+    "cur": [
+     "IB"
+    ],
+    "lang": [
+     "en"
+    ]
+   },
+   "isch_n30": 2,
+   "psch_n20": 12,
+   "sec_n20": 8,
+   "beach": {
+    "min": 9,
+    "km": 8.1,
+    "name": "Fixture beach funchal",
+    "flag": false
+   },
+   "air": {
+    "min": 19,
+    "km": 20.9,
+    "iata": "FNC"
+   },
+   "rail": null,
+   "food": {
+    "mich_n30": 3,
+    "mkt_n20": 2,
+    "rest_n": 690,
+    "rest_per_1k": 6.5
+   },
+   "golf": {
+    "min": 21,
+    "km": 18.9,
+    "name": "Fixture golf funchal"
+   },
+   "golf_n30": 2,
+   "museum": {
+    "min": 3,
+    "km": 2.7,
+    "name": "Fixture museum funchal"
+   },
+   "cult_n20": 17,
+   "pop": 105800
+  },
+  "ponta-delgada": {
+   "er": {
+    "min": 5,
+    "km": 4.5,
+    "name": "Fixture hospital ponta-delgada"
+   },
+   "cs": {
+    "min": 2,
+    "km": 1.8,
+    "name": "Fixture health centre ponta-delgada"
+   },
+   "ph": null,
+   "ph_n20": 0,
+   "pharm_n": 22,
+   "isch": null,
+   "isch_n30": 0,
+   "psch_n20": 5,
+   "sec_n20": 5,
+   "beach": {
+    "min": 6,
+    "km": 5.4,
+    "name": "Fixture beach ponta-delgada",
+    "flag": false
+   },
+   "air": {
+    "min": 6,
+    "km": 6.6,
+    "iata": "PDL"
+   },
+   "rail": null,
+   "food": {
+    "mich_n30": 0,
+    "mkt_n20": 1,
+    "rest_n": 330,
+    "rest_per_1k": 4.9
+   },
+   "golf": {
+    "min": 14,
+    "km": 12.6,
+    "name": "Fixture golf ponta-delgada"
+   },
+   "golf_n30": 2,
+   "museum": {
+    "min": 3,
+    "km": 2.7,
+    "name": "Fixture museum ponta-delgada"
+   },
+   "cult_n20": 9,
+   "pop": 67300
+  },
+  "mertola": {
+   "er": {
+    "min": 48,
+    "km": 43.2,
+    "name": "Fixture hospital mertola"
+   },
+   "cs": {
+    "min": 3,
+    "km": 2.7,
+    "name": "Fixture health centre mertola"
+   },
+   "ph": null,
+   "ph_n20": 0,
+   "pharm_n": 3,
+   "isch": {
+    "min": 105,
+    "km": 94.5,
+    "name": "Fixture international school mertola",
+    "cur": [
+     "IB"
+    ],
+    "lang": [
+     "en"
+    ]
+   },
+   "isch_n30": 0,
+   "psch_n20": 0,
+   "sec_n20": 1,
+   "beach": {
+    "min": 75,
+    "km": 67.5,
+    "name": "Fixture beach mertola",
+    "flag": false
+   },
+   "air": {
+    "min": 88,
+    "km": 96.8,
+    "iata": "FAO"
+   },
+   "rail": null,
+   "food": {
+    "mich_n30": 0,
+    "mkt_n20": 1,
+    "rest_n": 40,
+    "rest_per_1k": 6.4
+   },
+   "golf": {
+    "min": 62,
+    "km": 55.8,
+    "name": "Fixture golf mertola"
+   },
+   "golf_n30": 0,
+   "museum": {
+    "min": 2,
+    "km": 1.8,
+    "name": "Fixture museum mertola"
+   },
+   "cult_n20": 2,
+   "pop": 6200
+  },
+  "barrancos": {
+   "er": {
+    "min": 70,
+    "km": 63,
+    "name": "Fixture hospital barrancos"
+   },
+   "cs": {
+    "min": 2,
+    "km": 1.8,
+    "name": "Fixture health centre barrancos"
+   },
+   "ph": null,
+   "ph_n20": 0,
+   "pharm_n": 1,
+   "isch": null,
+   "isch_n30": 0,
+   "psch_n20": 0,
+   "sec_n20": 0,
+   "beach": null,
+   "air": {
+    "min": 165,
+    "km": 181.5,
+    "iata": "FAO"
+   },
+   "rail": null,
+   "food": {
+    "mich_n30": 0,
+    "mkt_n20": 0,
+    "rest_n": 9,
+    "rest_per_1k": 6.3
+   },
+   "golf": null,
+   "golf_n30": 0,
+   "museum": null,
+   "cult_n20": 0,
+   "pop": 1440
+  },
+  "corvo": {
+   "er": null,
+   "cs": {
+    "min": 1,
+    "km": 0.3,
+    "name": "Fixture health post corvo"
+   },
+   "ph": null,
+   "ph_n20": 0,
+   "pharm_n": 1,
+   "isch": null,
+   "isch_n30": 0,
+   "psch_n20": 0,
+   "sec_n20": 0,
+   "beach": {
+    "min": 3,
+    "km": 1.5,
+    "name": "Fixture beach corvo",
+    "flag": false
+   },
+   "air": {
+    "min": 2,
+    "km": 1,
+    "iata": "CVU"
+   },
+   "rail": null,
+   "food": {
+    "mich_n30": 0,
+    "mkt_n20": 0,
+    "rest_n": 4,
+    "rest_per_1k": 10.4
+   },
+   "golf": null,
+   "golf_n30": 0,
+   "museum": null,
+   "cult_n20": 0,
+   "pop": 384
+  }
+ }
+}

@@ -59,6 +59,11 @@ The Cloudflare count is the page `/e/{ed}/{event}/`, except the three short fami
 | `map/compare/open` | `{ed}/map/compare/open/` | band (`2` or `3` places), origin `compare` | the comparison page shows two or three places |
 | `map/compare/pair` | `{ed}/map/compare/pair/` | place, origin | the in-map two-place comparison (card link "Comparar") |
 | `paid/preview/{prices-page,art-prices,art-map,art-golf}` | `{ed}/paid/preview/{id}/` | origin `page` | fix step 3 (3 Nov): "Ver a análise completa" on the prices page or a data article opens the unlock sheet |
+| `match/taste/{beach,isch,schools,health,airport,train,food,golf,culture,quiet}/{on,off}` | `{ed}/match/taste/{t}/{s}/` | origin (`regressar`) | prompt 81: a taste is switched on or off in the place matching (the image questions and the plain chips on /regressar) |
+| `match/weight/{taste}/{essential,nice}` | `{ed}/match/weight/{t}/{w}/` | origin (`regressar`) | prompt 81: a chosen taste is marked essential (weight 3) or nice to have (weight 1) |
+| `match/show` | `{ed}/match/show/` | origin (`regressar`) | prompt 81: the ranked list is shown |
+| `match/place` | `{ed}/match/place/` | place, origin (`regressar`) | prompt 81: a place from the ranked list is opened (the municipality goes to the first-party store only) |
+| `match/none` | `{ed}/match/none/` | origin (`regressar`) | prompt 81: the search leaves no place (budget or essentials). Never the income, the budget or the list |
 | `map/panel/open` | `{ed}/map/panel/open/` | origin | "Camadas" is opened |
 | `heart/region/{on,off}` from the map | `{ed}/heart/region/{s}/` | region, origin `map` | a heart on a map card |
 | `p/{project}/pin` | `{ed}/p/{project}/pin/` | place = project, origin `map` | a partner's map pin is opened |
