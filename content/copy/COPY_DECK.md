@@ -11920,9 +11920,9 @@ Prompt 81 (10 Nov 2026), the art director: the map's chrome (the budget, the way
 - FR: {label} : {t}.
 
 ### card.sv.hand
-- PT: Hospital, centro de saúde, escola internacional, praia e aeroporto deste cartão: verificados um a um a {date}, com os nomes dos registos oficiais.
-- EN: This card's hospital, health center, international school, beach and airport: checked one by one on {date}, under the names in the official registers.
-- FR: L'hôpital, le centre de santé, l'école internationale, la plage et l'aéroport de cette fiche : vérifiés un à un le {date}, sous les noms des registres officiels.
+- PT: Centro de saúde, escola internacional, praia e aeroporto deste cartão: verificados um a um a {date}, com os nomes dos registos oficiais.
+- EN: This card's health center, international school, beach and airport: checked one by one on {date}, under the names in the official registers.
+- FR: Le centre de santé, l'école internationale, la plage et l'aéroport de cette fiche : vérifiés un à un le {date}, sous les noms des registres officiels.
 
 ### gest.touch
 - PT: Use dois dedos para mover o mapa

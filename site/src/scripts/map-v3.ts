@@ -146,6 +146,7 @@ export function initMapV3(root: HTMLElement) {
   let flyHome: (() => void) | null = null, lastPointer = "mouse", budOpen = false, findOpen = false, fromFinder = false;
   let labelBoxes: { x: number; y: number; w: number; kind: "region" | "muni"; key: string }[] = [];
   const M5: Record<string, string> = cfg.m5 ?? {};
+  let findMarks: any[] = [];  // the finder's numerals on the map (setMarks, far below); the place names make room for them
   // Presentation only: keep the same DEM, bathymetry, geometry, price ramp and
   // detail. Snapshot original paints so Golf enters from its unchanged base.
   const mainPaint: [string, string, any][] = [
@@ -591,8 +592,10 @@ export function initMapV3(root: HTMLElement) {
     // Prompt 68: the visible photo pins (a 44 px photograph above its point, the short label to its right) are kept clear:
     // a name that would sit on one moves above or below it, or waits for a closer zoom.
     const cv = canvas.getBoundingClientRect();
+    // Prompt 81: the finder's numerals are kept clear the same way (a name on a numeral moves above or below it, or waits).
+    for (const fm of findMarks) { const r = fm.getElement?.().getBoundingClientRect(); if (r && r.width && !(r.right < cv.left || r.left > cv.right || r.bottom < cv.top || r.top > cv.bottom)) placed.push({ x: r.left - cv.left + r.width / 2, y: r.top - cv.top + r.height / 2, w: r.width + 10, h: r.height + 4 }); }
     for (const mk of markers) {
-      if (mk.el.style.display === "none") continue;
+      if (mk.el.style.display === "none" || root.classList.contains("is-find")) continue;
       for (const el of [mk.el, mk.el.querySelector<HTMLElement>(".m3-pin-t")]) {
         const r = el?.getBoundingClientRect(); if (!r || !r.width || r.right < cv.left || r.left > cv.right || r.bottom < cv.top || r.top > cv.bottom) continue;
         placed.push({ x: r.left - cv.left + r.width / 2, y: r.top - cv.top + r.height / 2, w: r.width + 6, h: r.height + 2 });
@@ -1762,7 +1765,7 @@ export function initMapV3(root: HTMLElement) {
   }
   // The places of the list stand on the map as small numerals, in the list's order (nothing else is added to the map,
   // and the developments' pins step back while the list is open: map-p81.css). A numeral opens its place, as its line does.
-  let findMarks: any[] = [], lastMarks: { id: string; rank: number; name: string }[] = [], marksKey = "";
+  let lastMarks: { id: string; rank: number; name: string }[] = [], marksKey = "";
   const finderGo = (slug: string) => { if (!isWide()) { fromFinder = true; closeFinder(true); } select(slug); };
   function setMarks(list: typeof lastMarks, frame = false) {
     for (const m of findMarks) try { m.remove(); } catch { /* the map is gone */ }
@@ -1770,10 +1773,15 @@ export function initMapV3(root: HTMLElement) {
     if (!map || !ml) return;
     for (const r of list) {
       const p = byS.get(r.id); if (!p) continue;
-      const el = document.createElement("button"); el.type = "button"; el.className = "m3-fmark"; el.textContent = String(r.rank); el.style.zIndex = String(20 - Math.min(r.rank, 19)); el.setAttribute("aria-label", `${r.rank}. ${r.name}`);
+      const el = document.createElement("button"); el.type = "button"; el.className = "m3-fmark"; el.textContent = String(r.rank); el.setAttribute("aria-label", `${r.rank}. ${r.name}`);
       el.addEventListener("click", (e) => { e.stopPropagation(); ev({ event: "match/place", place: r.id, origin: "map" }); finderGo(r.id); });
-      findMarks.push(new ml.Marker({ element: el, anchor: "center" }).setLngLat([p.x, p.y]).addTo(map));
+      findMarks.push(new ml.Marker({ element: el, anchor: "center" }).setLngLat([p.x, p.y]));
     }
+    // The numerals stay inside the map's own layer, under every panel: no z-index of their own (one had lifted them over
+    // the finder on a phone). The first place is added last, so it is drawn on top of its neighbours.
+    for (const m of [...findMarks].reverse()) m.addTo(map);
+    if (!(map as any).__marksOn) { (map as any).__marksOn = true; map.on("move", marksSoon); }
+    spreadMarks();
     // A new list (other tastes, another budget) frames its places beside the panel, unless a card is open.
     const key = list.map((r) => r.id).join(",");
     if (frame && key && key !== marksKey && isWide() && sheet.hidden && list.length > 1) {
@@ -1782,6 +1790,27 @@ export function initMapV3(root: HTMLElement) {
         { padding: { left: 500, right: 120, top: 150, bottom: 110 }, maxZoom: 8.6, pitch: flat ? 0 : 35, bearing: flat ? 0 : -12, duration: reduce() ? 0 : 1100, essential: true });
     }
     marksKey = key;
+  }
+  // Numerals closer than their own width (Gaia and Matosinhos at the national view) stand side by side in the list's
+  // order, around their middle, and part again as the reader comes closer. The place names make room for them
+  // (placeLabels), as they do for the developments' pins.
+  let marksT = 0;
+  const marksSoon = () => { if (findMarks.length && !marksT) marksT = requestAnimationFrame(() => { marksT = 0; spreadMarks(); }); };
+  function spreadMarks() {
+    if (!map || !findMarks.length) return;
+    const pts = findMarks.map((m) => map.project(m.getLngLat())), left = new Set(findMarks.map((_, i) => i));
+    for (const i of [...left]) {
+      if (!left.has(i)) continue; left.delete(i); const g = [i];
+      for (let k = 0; k < g.length; k++) for (const j of [...left]) if (Math.hypot(pts[g[k]].x - pts[j].x, pts[g[k]].y - pts[j].y) < 31) { g.push(j); left.delete(j); }
+      g.sort((a, b) => a - b);
+      const cx = g.reduce((t, k) => t + pts[k].x, 0) / g.length, cy = g.reduce((t, k) => t + pts[k].y, 0) / g.length;
+      g.forEach((k, n) => {
+        const o: [number, number] = g.length > 1 ? [Math.round(cx + (n - (g.length - 1) / 2) * 32 - pts[k].x), Math.round(cy - pts[k].y)] : [0, 0];
+        const was = (findMarks[k] as any).__o as [number, number] | undefined;
+        if (!was || was[0] !== o[0] || was[1] !== o[1]) { (findMarks[k] as any).__o = o; findMarks[k].setOffset(o); }
+      });
+    }
+    labelsSoon();
   }
   function closeFinder(quiet = false) {
     if (!findEl || !findOpen) return;
