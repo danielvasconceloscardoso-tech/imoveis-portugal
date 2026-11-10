@@ -109,7 +109,7 @@ export function createFinder(H: Hooks) {
     const tie = formatTie(list, lang);
     res.innerHTML = `<p class="m3-pk">${esc(M5["find.places"])}</p><ol class="m3-fd-list">${list.map((m) => {
       const trade = formatTradeoff(m.tradeoff, lang), pts = formatPoints(m, lang);
-      return `<li><button type="button" class="m3-fd-r" data-go="${esc(m.id)}" aria-label="${esc(M5["find.goto"].replace("{name}", m.name))}"><span class="m3-fd-top"><i>${m.rank}</i><span class="m3-fd-n">${esc(m.name)}</span>${pts ? `<span class="m3-fd-pts">${esc(pts)}</span>` : ""}</span><span class="m3-fd-n3">${esc(m.n3)}</span><span class="m3-fd-why">${esc(formatReasons(m, lang))}</span>${m.rank !== m.scoreRank ? `<span class="m3-fd-next">${esc(W.spread)}</span>` : ""}${trade ? `<span class="m3-fd-next">${esc(trade)}</span>` : ""}</button></li>`; }).join("")}</ol>
+      return `<li><button type="button" class="m3-fd-r" data-go="${esc(m.id)}" aria-label="${esc(M5["find.goto"].replace("{name}", m.name))}"><span class="m3-fd-top"><i>${m.rank}</i><span class="m3-fd-n">${esc(m.name)}</span>${pts ? `<span class="m3-fd-pts">${esc(pts)}</span>` : ""}</span><span class="m3-fd-n3">${esc(m.n3)}</span><span class="m3-fd-why">${esc(formatReasons(m, lang))}</span>${m.rank > m.scoreRank ? `<span class="m3-fd-next">${esc(W.spread)}</span>` : ""}${trade ? `<span class="m3-fd-next">${esc(trade)}</span>` : ""}</button></li>`; }).join("")}</ol>
       ${tie ? `<p class="m3-fd-cov">${esc(tie)}</p>` : ""}
       ${found.matches.length > shown ? `<button type="button" class="m3-link m3-fd-more" data-fd-more>${esc(M5["find.more"])}</button>` : ""}
       <p class="m3-fd-cov">${esc(formatCoverage(found, lang))}</p>

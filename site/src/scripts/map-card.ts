@@ -83,7 +83,10 @@ export function serviceRows(sv: Sv, x: Ctx): SvRow[] {
 /** The foot: the method, the date and the credit, once. */
 export function serviceFoot(sv: Sv, x: Ctx): string {
   const S = x.S, from = sv.o ? fill(S[sv.ok === "center" ? "from.center" : "from.hall"], { origin: sv.o, town: sv.o }) : "";
-  return `${fill(S["foot"], { from, date: longDate(sv.d, x.loc) }).replace(/\s+,/g, ",").replace(/\s{2,}/g, " ")} ${S[sv.mich?.n30 ? "foot.src.mich" : "foot.src"]}`;
+  // A card with hand-checked lines carries two dates: theirs and the table's (the hospital, the schools count, the table).
+  const and = x.lang === "pt" ? " e a " : x.lang === "fr" ? " et le " : " and ";
+  const date = sv.hd && sv.hd !== sv.d ? `${longDate(sv.hd, x.loc)}${and}${longDate(sv.d, x.loc)}` : longDate(sv.d, x.loc);
+  return `${fill(S["foot"], { from, date }).replace(/\s+,/g, ",").replace(/\s{2,}/g, " ")} ${S[sv.mich?.n30 ? "foot.src.mich" : "foot.src"]}`;
 }
 /** Behind "Fontes": one line per topic the card shows. */
 export function serviceSources(sv: Sv, x: Ctx): string[] {
