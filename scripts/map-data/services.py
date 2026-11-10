@@ -123,7 +123,11 @@ def facilities():
     origins = []
     for r in MUNI:
         s, slug = sede.get(r["muni_slug"]), r["muni_slug"]
-        if slug in ORIGIN_OVERRIDE:
+        pj = os.path.join(ROOT, "content", "facts", "map", "places", slug, "place.json")
+        hand = json.load(open(pj, encoding="utf8")).get("origin") if os.path.exists(pj) else None
+        if hand:  # the hand-checked origin of a place card that is already built (the same point as the card's own drive times)
+            o = {"slug": slug, "name": r["muni_name"], "lat": round(hand["lat"], 5), "lon": round(hand["lon"], 5), "point_name": hand["name"], "point_kind": "town hall", "point_source": hand["source"] + f"; content/facts/map/places/{slug}/place.json"}
+        elif slug in ORIGIN_OVERRIDE:
             la, lo, pn, ps = ORIGIN_OVERRIDE[slug]
             o = {"slug": slug, "name": r["muni_name"], "lat": la, "lon": lo, "point_name": pn, "point_kind": "town hall", "point_source": ps}
         elif s:
@@ -175,7 +179,9 @@ def facilities():
         elif "SESARAM" in r["group"] or "SRS" in r["group"]: ev.append("regional health service (not in the SNS mainland file)")
         else: ev.append("no institution match in the SNS file")
         if o: ev.append(f"OSM {o['t']}{o['id']} emergency={T(o).get('emergency', 'not tagged')}")
-        L["health"].append({"id": "er-" + slugify(r["name"]), "layer": "health", "kind": "er", "name": r["name"], "lat": la, "lon": lo, "attributes": "; ".join(ev),
+        special = re.search(r"pediatr|materno|maternidade|estefania", plain(r["name"]))  # children's and maternity hospitals: an emergency department, but not for everyone
+        if special: ev.append("scope=children or maternity only; not used for the 'er' figure")
+        L["health"].append({"id": "er-" + slugify(r["name"]), "layer": "health", "kind": "er_special" if special else "er", "name": r["name"], "lat": la, "lon": lo, "attributes": "; ".join(ev),
                             "source": "List of public hospitals with an emergency department compiled per ULS (sponsors/decks/v6/data, 2026-11-02) against the SNS list; point: OpenStreetMap", "source_url": r["source_url"],
                             "licence": "list: facts; point: " + ODBL, "checked_on": CHECKED})
     er_pts = [x for x in L["health"]]
@@ -195,7 +201,7 @@ def facilities():
     cs = [osm_row(p, "health", "cs", "healthcare=" + (T(p).get("healthcare") or T(p).get("amenity") or "")) for p in P
           if (T(p).get("amenity") in ("clinic", "doctors", "hospital") or T(p).get("healthcare") in ("centre", "clinic", "doctor", "hospital", "yes")) and CS.search(nm(p)) and not re.search(r"veterin|\bcuf\b|lusiadas|trofa|\bluz\b|privad", nm(p)) and T(p).get("operator:type") != "private"]
     for x in cs: x["_rank"] = 0 if plain(x["name"]).startswith("centro de saude") else 1
-    L["health"] += dedupe(cs, 120, same_name=False)
+    L["health"] += dedupe(dedupe(cs, 120, same_name=False), 350, same_name=True)
 
     ph = []
     for r in HL:
@@ -269,7 +275,7 @@ def facilities():
     for r in rd(os.path.join(VA, "apa_bathing_waters_2026.csv")):
         e = eea.get(r["code"])
         cat = CAT[e["specialisedZoneType"]] if e else ("coastal" if r["coastal"] == "True" else "inland")
-        bw.append({"id": "bw-" + r["code"], "layer": "beach", "kind": "beach_" + ("sea" if cat == "coastal" else "inland"), "name": title_pt(r["name"]), "lat": float(r["lat"]), "lon": float(r["lon"]), "_cat": cat, "_flag": False, "_code": r["code"],
+        bw.append({"id": "bw-" + r["code"], "layer": "beach", "kind": "beach_" + ("sea" if cat in ("coastal", "transitional") else "inland"), "name": title_pt(r["name"]), "lat": float(r["lat"]), "lon": float(r["lon"]), "_cat": cat, "_flag": False, "_code": r["code"],
                    "_catsrc": "EEA 2024" if e else "not in the EEA 2024 file (new bathing water): sea or inland by the distance-to-ocean rule of content/facts/map/tiles/SOURCES.md", "_q": e["quality"] if e else ""})
     bf = [r for r in rd(os.path.join(INP, "blueflag_2026.csv")) if r["award_type"] == "beach"]
     unmatched = []
@@ -358,7 +364,7 @@ def facilities():
     # ---- culture
     mu = [osm_row(p, "culture", "museum", "tourism=museum") for p in P if T(p).get("tourism") == "museum" and T(p).get("name")]
     th = [osm_row(p, "culture", "theatre", "amenity=theatre") for p in P if T(p).get("amenity") == "theatre" and T(p).get("name")]
-    L["culture"] = dedupe(mu, 80, same_name=True) + dedupe(th, 80, same_name=True)
+    L["culture"] = dedupe(mu, 300, same_name=True) + dedupe(th, 300, same_name=True)
 
     # ---- municipality of every row, checks, files
     os.makedirs(os.path.join(SV, "facilities"), exist_ok=True)
@@ -379,9 +385,10 @@ def facilities():
     # restaurants: counted, not listed (19 000 rows would not earn their place in the repo)
     rc, pc = collections.Counter(muni_of(x["lat"], x["lon"]) for x in rest), collections.Counter(x["municipality"] for x in L["pharmacies"])
     pop = {r["muni_slug"]: int(r["resident_population"]) for r in rd(os.path.join(INP, "population_census_2021.csv"))}
+    area = {r["muni_slug"]: r["area_km2"] for r in rd(os.path.join(INP, "area_km2_2022.csv"))}
     with open(os.path.join(SV, "facilities", "counts_by_municipality.csv"), "w", encoding="utf8", newline="") as f:
-        w = csv.writer(f); w.writerow(["slug", "resident_population_2021", "osm_restaurants", "osm_pharmacies", "source", "licence", "checked_on"])
-        for s in SLUGS: w.writerow([s, pop[s], rc.get(s, 0), pc.get(s, 0), "INE 0011609 (Census 2021); " + OSM_SRC + ": amenity=restaurant and amenity=pharmacy inside the municipality's boundary", "CC BY 4.0 (INE); " + ODBL, CHECKED])
+        w = csv.writer(f); w.writerow(["slug", "resident_population_2021", "area_km2_2022", "osm_restaurants", "osm_pharmacies", "source", "licence", "checked_on"])
+        for s in SLUGS: w.writerow([s, pop[s], area[s], rc.get(s, 0), pc.get(s, 0), "INE 0011609 (Census 2021); INE 0008350 (area, DGT, 2022); " + OSM_SRC + ": amenity=restaurant and amenity=pharmacy inside the municipality's boundary", "CC BY 4.0 (INE); " + ODBL, CHECKED])
     counts["rest"] = len(rest); report["counts"] = counts
     json.dump({"origins": [{"slug": o["slug"], "lat": o["lat"], "lon": o["lon"]} for o in origins], "layers": route}, open(os.path.join(SCRATCH, "work", "route_in.json"), "w"))
     json.dump(report, open(os.path.join(SCRATCH, "work", "facilities_report.json"), "w"), ensure_ascii=False, indent=1)
@@ -437,11 +444,11 @@ def summary():
         if only and slug not in only: continue
         if slug not in oslug: places[slug] = None; continue
         c = cnt[slug]; pop = int(c["resident_population_2021"]); rest = int(c["osm_restaurants"]) or None; ph_n = int(c["osm_pharmacies"]) or None
-        p = {"pop": pop,
+        p = {"pop": pop, "area_km2": float(c["area_km2_2022"]),
              "er": nearest("er", slug), "cs": nearest("cs", slug), "ph": nearest("ph", slug), "ph_n20": within("ph", slug, 20), "pharm_n": ph_n,
              "isch": nearest("isch", slug, lambda f: {"cur": lst(attr(f, "curriculum")), "lang": lst(attr(f, "language"))}), "isch_n30": within("isch", slug, 30),
              "psch_n20": within("psch", slug, 20), "sec_n20": within("sec", slug, 20),
-             "beach": nearest("beach_sea", slug, lambda f: {"flag": attr(f, "blue_flag_2026").startswith("yes")}),
+             "beach": nearest("beach_sea", slug, lambda f: {"flag": attr(f, "blue_flag_2026").startswith("yes"), "cat": attr(f, "category").split(" ")[0]}),
              "air": nearest("air", slug, lambda f: {"iata": attr(f, "iata")}), "rail": nearest("rail", slug),
              "food": {"mich_n30": within("mich", slug, 30), "mich_star_n30": within("mich", slug, 30, lambda f: "star" in f["attributes"]), "mkt_n20": within("mkt", slug, 20), "rest_n": rest,
                       "rest_per_1k": round(rest / pop * 1000, 1) if rest else None},
@@ -459,7 +466,8 @@ def summary():
     rep = json.load(open(os.path.join(SCRATCH, "work", "facilities_report.json"), encoding="utf8"))["counts"]
     layers = {
         "pop": {"source": "INE, Census 2021, indicator 0011609 (resident population)", "licence": "CC BY 4.0", "year": 2021, "covered": cov(lambda p: p["pop"]), "note": "Census day, 19 April 2021."},
-        "er": {"source": "List of 60 public hospitals with an emergency department (SNS/ULS, SESARAM, the Azores hospitals), compiled per ULS on 2026-11-02; points from OpenStreetMap; each ULS checked against the SNS open-data file of emergency attendances 2026", "licence": "facts; points ODbL",
+        "area": {"source": "INE indicator 0008350, area of the territorial units (km²), from the Direção-Geral do Território (CAOP)", "licence": "CC BY 4.0", "year": 2022, "covered": cov(lambda p: p["area_km2"]), "note": "Field area_km2. Official area of the municipality."},
+        "er": {"source": "List of 56 general public hospitals with an emergency department (4 more, children's and maternity hospitals, are listed but not used) (SNS/ULS, SESARAM, the Azores hospitals), compiled per ULS on 2026-11-02; points from OpenStreetMap; each ULS checked against the SNS open-data file of emergency attendances 2026", "licence": "facts; points ODbL",
                "covered": cov(lambda p: p["er"]), "note": "The building-level SNS list of emergency departments could not be downloaded; basic emergency services in health centres are missing. er_cand = a nearer OSM hospital tagged emergency=yes that the list does not hold (unverified, operator's decision). " + isl},
         "cs": {"source": OSM_SRC + ": health centres by name (Centro de Saúde, USF, UCSP, Extensão de Saúde, Unidade de Saúde)", "licence": ODBL, "covered": cov(lambda p: p["cs"]), "note": f"{rep.get('cs')} units. The name is OSM's (often the building), not the ERS register's unit name. " + isl},
         "ph": {"source": "The hospital groups' own lists of units (CUF, Luz, Lusíadas, Trofa Saúde, HPA; 2026-11-02) plus OSM private hospitals", "licence": "facts; points ODbL", "covered": cov(lambda p: p["ph"]), "note": f"{rep.get('ph')} units; some are small units, not full hospitals; not every one has an emergency service. ph_n20 = within 20 minutes. " + isl},
@@ -469,8 +477,8 @@ def summary():
         "psch": {"source": OSM_SRC + ": amenity=school, private by tag or by name (Colégio, Externato)", "licence": ODBL, "covered": cov(lambda p: p["psch_n20"]),
                  "note": f"{rep.get('psch')} schools. OSM does not say which cycles a school teaches, so this count includes primary-only private schools and misses unmapped ones; the official register (DGEEC) needs the operator. International schools are not in this count."},
         "sec": {"source": OSM_SRC + ": amenity=school whose name says Secundária, not private", "licence": ODBL, "covered": cov(lambda p: p["sec_n20"]), "note": f"{rep.get('sec')} schools."},
-        "beach": {"source": "APA identified bathing waters 2026 (points), EEA bathing-water status 2024 (category coastal), Associação Bandeira Azul awarded sites 2026 (flag)", "licence": "APA: no restrictions stated; EEA: reuse with attribution", "covered": cov(lambda p: p["beach"]),
-                  "note": "Nearest coastal (sea) bathing water by road. beach_flag = nearest with a 2026 Blue Flag; beach_inland = nearest river, lake or estuary bathing water. A bathing water more than 1 km from a road gets no drive time. " + isl},
+        "beach": {"source": "APA identified bathing waters 2026 (points), EEA bathing-water status 2024 (category), Associação Bandeira Azul awarded sites 2026 (flag)", "licence": "APA: no restrictions stated; EEA: reuse with attribution", "covered": cov(lambda p: p["beach"]),
+                  "note": "Nearest sea bathing water by road: EEA category coastal, or transitional (river mouths and lagoons open to the sea, 26 of them; cat says which). beach_flag = nearest with a 2026 Blue Flag; beach_n20 = how many within 20 minutes; beach_inland = nearest river or lake bathing water. A bathing water more than 1 km from a road gets no drive time. " + isl},
         "air": {"source": OSM_SRC + ": passenger terminal of the 14 airports with scheduled passenger flights (LIS, OPO, FAO, FNC, PXO and nine in the Azores)", "licence": ODBL, "covered": cov(lambda p: p["air"]),
                 "note": "Regional airfields (Bragança, Vila Real, Viseu, Cascais, Portimão) and Beja are not counted. " + isl},
         "rail": {"source": OSM_SRC + ": stations where the route relations of CP Alfa Pendular, Intercidades and the Porto–Vigo international train stop", "licence": ODBL, "covered": cov(lambda p: p["rail"]), "note": f"{rep.get('rail')} stations. No railway on the islands: null."},
