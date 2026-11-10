@@ -11315,3 +11315,417 @@ Prompt 78 (4 Nov 2026): golf mode on the map (site/src/scripts/golf-mode.ts). Fu
 - PT: Ver o filme
 - EN: Play the film
 - FR: Lire le film
+
+## services
+
+Prompt 81 (10 Nov 2026), the card writer: the service lines of the municipality card. Written on Gondomar, meant as the template for all 308. Three layers. The five-second layer is a label (`*.k`) and a value: a drive time formatted with `t.*`, or a count (`*.v`). The detail layer (`*.d` and the short lines beside it) opens on tap: the name, the time, what it is. The foot (`foot*`) gives the method, the date and the credit once; the `src.*` lines sit behind "Fontes". Free on the card: the hospital with an emergency department, the centro de saúde, the international school, the public secondary schools within 20 minutes, the beach, the airport and one food line. Paid: the full lists (`paid.*`). Values come from content/facts/map/services/summary.json. `{t}` is a drive time already formatted with `t.*`; `{name}` is the facility's name as the table gives it; `{date}` is the date checked, written in each language's own form. A value that is null shows `none.*`, never a zero. Which variant goes where: ops/research/81_map/copy.md.
+
+### h
+- PT: Por perto
+- EN: Close by
+- FR: À proximité
+
+### sub
+- PT: de carro, sem trânsito
+- EN: by car, no traffic
+- FR: en voiture, sans trafic
+
+### t.min
+- PT: {min} min
+- EN: {min} min
+- FR: {min} min
+
+### t.hm
+- PT: {h} h {min} min
+- EN: {h} h {min} min
+- FR: {h} h {min}
+
+### t.hr
+- PT: {h} h
+- EN: {h} h
+- FR: {h} h
+
+### t.lt1
+- PT: menos de 1 min
+- EN: under 1 min
+- FR: moins de 1 min
+
+### er.k
+- PT: Hospital com urgência
+- EN: Hospital with ER
+- FR: Hôpital avec urgences
+
+### er.d
+- PT: {name}, hospital geral público com urgência, a {t} de carro.
+- EN: {name}, a general public hospital with an emergency department, {t} by car.
+- FR: {name}, hôpital général public doté d'un service d'urgences, à {t} en voiture.
+
+### er.d.far
+- PT: {name}, hospital geral público com urgência, a {t} de carro. Pode haver uma urgência básica mais perto: a nossa lista ainda não as inclui.
+- EN: {name}, a general public hospital with an emergency department, {t} by car. A basic emergency service may be nearer: our list doesn't hold those yet.
+- FR: {name}, hôpital général public doté d'un service d'urgences, à {t} en voiture. Un service d'urgences de base se trouve peut-être plus près : notre liste ne les compte pas encore.
+
+### er.v.island
+- PT: noutra ilha
+- EN: on another island
+- FR: sur une autre île
+
+### er.d.island
+- PT: O hospital geral com urgência mais próximo fica noutra ilha e nenhuma estrada lá chega. Por isso não indicamos minutos.
+- EN: The nearest general hospital with an emergency department is on another island, and no road reaches it. So we give no minutes.
+- FR: L'hôpital général avec urgences le plus proche se trouve sur une autre île, et aucune route n'y mène. Nous n'indiquons donc pas de minutes.
+
+### cs.k
+- PT: Centro de saúde
+- EN: Health center
+- FR: Centre de santé
+
+### cs.d
+- PT: {name}, centro de saúde público, a {t} de carro.
+- EN: {name}, {t} by car. A centro de saúde is the public clinic where family doctors see patients.
+- FR: {name}, à {t} en voiture. Un centro de saúde est le centre de santé public où consultent les médecins de famille.
+
+### isch.k
+- PT: Escola internacional
+- EN: International school
+- FR: École internationale
+
+### isch.d
+- PT: {name}, currículo {cur}, a {t} de carro.
+- EN: {name}, {cur} curriculum, {t} by car.
+- FR: {name}, programme {cur}, à {t} en voiture.
+
+### isch.d.nocur
+- PT: {name}, a {t} de carro.
+- EN: {name}, {t} by car.
+- FR: {name}, à {t} en voiture.
+
+### isch.d.far
+- PT: {name}, a {t} de carro, é a mais próxima da nossa lista.
+- EN: {name}, {t} by car, is the nearest on our list.
+- FR: {name}, à {t} en voiture, est la plus proche de notre liste.
+
+### isch.more
+- PT: Há {n} a menos de 30 min.
+- EN: There are {n} within 30 min.
+- FR: On en compte {n} à moins de 30 min.
+
+### isch.v.island
+- PT: nenhuma na ilha
+- EN: none on the island
+- FR: aucune sur l'île
+
+### isch.d.island
+- PT: A nossa lista de escolas internacionais não tem nenhuma nesta ilha.
+- EN: Our list of international schools has none on this island.
+- FR: Notre liste d'écoles internationales n'en compte aucune sur cette île.
+
+### cur.German
+- PT: alemão
+- EN: German
+- FR: allemand
+
+### cur.British
+- PT: britânico
+- EN: British
+- FR: britannique
+
+### cur.American
+- PT: americano
+- EN: American
+- FR: américain
+
+### cur.French
+- PT: francês
+- EN: French
+- FR: français
+
+### cur.Swedish
+- PT: sueco
+- EN: Swedish
+- FR: suédois
+
+### cur.IB
+- PT: do International Baccalaureate (IB)
+- EN: International Baccalaureate (IB)
+- FR: du Baccalauréat International (IB)
+
+### sch.k
+- PT: Escolas secundárias públicas
+- EN: Public secondary schools
+- FR: Lycées publics
+
+### sch.k.1
+- PT: Escola secundária pública
+- EN: Public secondary school
+- FR: Lycée public
+
+### sch.v
+- PT: {n} a menos de 20 min
+- EN: {n} within 20 min
+- FR: {n} à moins de 20 min
+
+### sch.near
+- PT: {name}, a {t} de carro, é a mais próxima das que contámos.
+- EN: {name}, {t} by car, is the nearest of those we counted.
+- FR: {name}, à {t} en voiture, est la plus proche de celles que nous avons comptées.
+
+### sch.how
+- PT: A contagem vem do OpenStreetMap: escolas públicas com «Secundária» no nome.
+- EN: The count comes from OpenStreetMap: public schools with Secundária in their name, which teach grades 10 to 12.
+- FR: Le décompte vient d'OpenStreetMap : les écoles publiques dont le nom contient « Secundária », l'équivalent du lycée.
+
+### beach.k
+- PT: Praia
+- EN: Beach
+- FR: Plage
+
+### beach.k.inland
+- PT: Praia fluvial
+- EN: River or lake beach
+- FR: Plage de rivière ou de lac
+
+### beach.d
+- PT: {name}, praia de mar, a {t} de carro.
+- EN: {name}, a sea beach, {t} by car.
+- FR: {name}, plage océane, à {t} en voiture.
+
+### beach.d.trans
+- PT: {name}, praia na foz de um rio ou numa ria aberta ao mar, a {t} de carro.
+- EN: {name}, a beach on a river mouth or a lagoon open to the sea, {t} by car.
+- FR: {name}, plage d'estuaire ou de lagune ouverte sur la mer, à {t} en voiture.
+
+### beach.d.inland
+- PT: {name}, zona balnear oficial em rio ou albufeira, a {t} de carro.
+- EN: {name}, an official bathing site on a river or a reservoir, {t} by car.
+- FR: {name}, site de baignade officiel en rivière ou sur un lac de barrage, à {t} en voiture.
+
+### beach.flag.k
+- PT: Bandeira Azul
+- EN: Blue Flag
+- FR: Pavillon Bleu
+
+### beach.flag
+- PT: Bandeira Azul em {year}.
+- EN: Blue Flag in {year}.
+- FR: Pavillon Bleu {year}.
+
+### beach.flag.other
+- PT: {name}, a {t}, tem Bandeira Azul em {year}.
+- EN: {name}, {t} away, holds a {year} Blue Flag.
+- FR: {name}, à {t}, a le Pavillon Bleu {year}.
+
+### beach.sea
+- PT: O mar fica a {t}: {name}.
+- EN: The sea is {t} away: {name}.
+- FR: La mer est à {t} : {name}.
+
+### air.k
+- PT: Aeroporto
+- EN: Airport
+- FR: Aéroport
+
+### air.d
+- PT: {name} ({iata}), a {t} de carro até ao terminal de passageiros.
+- EN: {name} ({iata}), {t} by car to the passenger terminal.
+- FR: {name} ({iata}), à {t} en voiture jusqu'au terminal passagers.
+
+### air.n.LIS
+- PT: Aeroporto de Lisboa
+- EN: Lisbon Airport
+- FR: Aéroport de Lisbonne
+
+### air.n.OPO
+- PT: Aeroporto do Porto
+- EN: Porto Airport
+- FR: Aéroport de Porto
+
+### air.n.FAO
+- PT: Aeroporto de Faro
+- EN: Faro Airport
+- FR: Aéroport de Faro
+
+### air.n.FNC
+- PT: Aeroporto da Madeira
+- EN: Madeira Airport
+- FR: Aéroport de Madère
+
+### air.n.PXO
+- PT: Aeroporto do Porto Santo
+- EN: Porto Santo Airport
+- FR: Aéroport de Porto Santo
+
+### air.n.PDL
+- PT: Aeroporto de Ponta Delgada
+- EN: Ponta Delgada Airport
+- FR: Aéroport de Ponta Delgada
+
+### air.n.TER
+- PT: Aeroporto das Lajes, na Terceira
+- EN: Lajes Airport, on Terceira
+- FR: Aéroport de Lajes, sur l'île de Terceira
+
+### air.n.HOR
+- PT: Aeroporto da Horta
+- EN: Horta Airport
+- FR: Aéroport de Horta
+
+### air.n.PIX
+- PT: Aeroporto do Pico
+- EN: Pico Airport
+- FR: Aéroport de Pico
+
+### air.n.SMA
+- PT: Aeroporto de Santa Maria
+- EN: Santa Maria Airport
+- FR: Aéroport de Santa Maria
+
+### air.n.SJZ
+- PT: Aeródromo de São Jorge
+- EN: São Jorge Airfield
+- FR: Aérodrome de São Jorge
+
+### air.n.GRW
+- PT: Aeródromo da Graciosa
+- EN: Graciosa Airfield
+- FR: Aérodrome de Graciosa
+
+### air.n.FLW
+- PT: Aeroporto das Flores
+- EN: Flores Airport
+- FR: Aéroport de Flores
+
+### air.n.CVU
+- PT: Aeródromo do Corvo
+- EN: Corvo Airfield
+- FR: Aérodrome de Corvo
+
+### food.mich.k
+- PT: Guia Michelin
+- EN: Michelin Guide
+- FR: Guide Michelin
+
+### food.mich.v
+- PT: {n} restaurantes a menos de 30 min
+- EN: {n} restaurants within 30 min
+- FR: {n} restaurants à moins de 30 min
+
+### food.mich.v.1
+- PT: 1 restaurante a menos de 30 min
+- EN: 1 restaurant within 30 min
+- FR: 1 restaurant à moins de 30 min
+
+### food.mich.d
+- PT: Os restaurantes que constam do Guia Michelin a {date}, a menos de 30 min de carro.
+- EN: The restaurants listed in the Michelin Guide on {date}, within 30 min by car.
+- FR: Les restaurants inscrits au Guide Michelin au {date}, à moins de 30 min en voiture.
+
+### food.mich.d.1
+- PT: O restaurante que consta do Guia Michelin a {date}, a menos de 30 min de carro.
+- EN: The one restaurant listed in the Michelin Guide on {date}, within 30 min by car.
+- FR: Le restaurant inscrit au Guide Michelin au {date}, à moins de 30 min en voiture.
+
+### food.mich.star
+- PT: {n} têm estrela.
+- EN: {n} hold a star.
+- FR: {n} sont étoilés.
+
+### food.mich.star.1
+- PT: Um tem estrela.
+- EN: One holds a star.
+- FR: L'un d'eux est étoilé.
+
+### food.mich.star.only
+- PT: Tem estrela.
+- EN: It holds a star.
+- FR: Il est étoilé.
+
+### food.mkt.k
+- PT: Mercado
+- EN: Market
+- FR: Marché
+
+### food.mkt.d
+- PT: {name}, a {t} de carro, como está no OpenStreetMap.
+- EN: {name}, {t} by car, as mapped on OpenStreetMap.
+- FR: {name}, à {t} en voiture, tel que cartographié sur OpenStreetMap.
+
+### none.v
+- PT: ainda sem número
+- EN: no figure yet
+- FR: pas encore de chiffre
+
+### none.d
+- PT: Ainda não temos este número de uma fonte que possamos citar. Por isso fica em branco.
+- EN: We don't have this figure yet from a source we can name. So we leave it blank.
+- FR: Nous n'avons pas encore ce chiffre d'une source que nous puissions citer. Nous le laissons donc en blanc.
+
+### paid.full
+- PT: A análise completa traz as listas inteiras: {ns} escolas e {nh} unidades de saúde a menos de 20 minutos, cada uma com os minutos, o tipo e a fonte. Onde o registo oficial os dá, também a morada e o número de registo.
+- EN: The full analysis holds the whole lists: {ns} schools and {nh} health units within 20 minutes, each with its minutes, type and source. Where the official register gives them, the address and the registry number too.
+- FR: L'analyse complète contient les listes entières : {ns} écoles et {nh} établissements de santé à moins de 20 minutes, chacun avec ses minutes, son type et sa source. Là où le registre officiel les donne, l'adresse et le numéro d'enregistrement aussi.
+
+### paid.list
+- PT: A análise completa traz as listas inteiras de escolas e de saúde ao alcance deste lugar, cada uma com os minutos, o tipo e a fonte.
+- EN: The full analysis holds the whole lists of schools and health services within reach of this place, each with its minutes, type and source.
+- FR: L'analyse complète contient les listes entières des écoles et des services de santé à portée de ce lieu, chacun avec ses minutes, son type et sa source.
+
+### from.hall
+- PT: a partir da {origin}
+- EN: from the {origin}
+- FR: depuis la {origin}
+
+### from.center
+- PT: a partir do centro de {town}
+- EN: from the center of {town}
+- FR: depuis le centre de {town}
+
+### foot
+- PT: Tempos de carro {from}, sem trânsito, arredondados ao minuto. Consultado a {date}.
+- EN: Drive times {from}, with no traffic, rounded to the minute. Checked on {date}.
+- FR: Temps en voiture {from}, sans trafic, arrondis à la minute. Consulté le {date}.
+
+### foot.src
+- PT: Fontes: SNS, APA, Agência Europeia do Ambiente, Bandeira Azul e os sites das escolas internacionais. Dados do mapa © OpenStreetMap contributors.
+- EN: Sources: SNS, APA, the European Environment Agency, Blue Flag and the international schools' own sites. Map data © OpenStreetMap contributors.
+- FR: Sources : SNS, APA, Agence européenne pour l'environnement, Pavillon Bleu et les sites des écoles internationales. Données cartographiques © OpenStreetMap contributors.
+
+### foot.src.mich
+- PT: Fontes: SNS, APA, Agência Europeia do Ambiente, Bandeira Azul, Guia Michelin e os sites das escolas internacionais. Dados do mapa © OpenStreetMap contributors.
+- EN: Sources: SNS, APA, the European Environment Agency, Blue Flag, the Michelin Guide and the international schools' own sites. Map data © OpenStreetMap contributors.
+- FR: Sources : SNS, APA, Agence européenne pour l'environnement, Pavillon Bleu, Guide Michelin et les sites des écoles internationales. Données cartographiques © OpenStreetMap contributors.
+
+### src.drive
+- PT: Tempos de carro: OSRM sobre dados do OpenStreetMap, {from}, sem trânsito e sem barcos, arredondados ao minuto. As contagens usam o tempo sem arredondar.
+- EN: Drive times: OSRM on OpenStreetMap data, {from}, with no traffic and no ferries, rounded to the minute. The counts use the time before rounding.
+- FR: Temps en voiture : OSRM sur les données d'OpenStreetMap, {from}, sans trafic ni ferry, arrondis à la minute. Les décomptes utilisent le temps non arrondi.
+
+### src.health
+- PT: Hospitais com urgência: lista dos hospitais gerais públicos, conferida nos dados abertos do SNS; ainda não inclui as urgências básicas dos centros de saúde. Centros de saúde: OpenStreetMap, pelo nome.
+- EN: Hospitals with an emergency department: a list of general public hospitals, checked against the open data of the SNS, Portugal's national health service; it doesn't hold the basic emergency services in health centers yet. Health centers: OpenStreetMap, by name.
+- FR: Hôpitaux avec urgences : liste des hôpitaux généraux publics, vérifiée dans les données ouvertes du SNS, le service national de santé portugais ; elle ne compte pas encore les urgences de base des centres de santé. Centres de santé : OpenStreetMap, par leur nom.
+
+### src.schools
+- PT: Escolas internacionais: os sites das escolas e um diretório de escolas internacionais. Escolas secundárias públicas: OpenStreetMap, pelo nome.
+- EN: International schools: the schools' own sites and one directory of international schools. Public secondary schools: OpenStreetMap, by name.
+- FR: Écoles internationales : les sites des écoles et un annuaire d'écoles internationales. Lycées publics : OpenStreetMap, par leur nom.
+
+### src.beach
+- PT: Praias: águas balneares identificadas pela APA em {year}. Tipo de praia: Agência Europeia do Ambiente, época de {eea}. Bandeira Azul: Associação Bandeira Azul, {year}.
+- EN: Beaches: the bathing waters identified in {year} by APA, Portugal's environment agency. Type of beach: European Environment Agency, {eea} season. Blue Flag: Associação Bandeira Azul, {year}.
+- FR: Plages : les eaux de baignade identifiées en {year} par l'APA, l'agence portugaise de l'environnement. Type de plage : Agence européenne pour l'environnement, saison {eea}. Pavillon Bleu : Associação Bandeira Azul, {year}.
+
+### src.air
+- PT: Aeroportos e mercados: OpenStreetMap. O aeroporto é medido até ao terminal de passageiros.
+- EN: Airports and markets: OpenStreetMap. The airport is measured to the passenger terminal.
+- FR: Aéroports et marchés : OpenStreetMap. L'aéroport est mesuré jusqu'au terminal passagers.
+
+### src.mich
+- PT: Restaurantes: Guia Michelin, seleção de Portugal tal como publicada a {date}.
+- EN: Restaurants: the Michelin Guide's Portugal selection as published on {date}.
+- FR: Restaurants : la sélection Portugal du Guide Michelin telle que publiée au {date}.
+
+### src.osm
+- PT: Dados do OpenStreetMap: © OpenStreetMap contributors, licença ODbL. Tudo consultado a {date}.
+- EN: OpenStreetMap data: © OpenStreetMap contributors, ODbL license. All checked on {date}.
+- FR: Données OpenStreetMap : © OpenStreetMap contributors, licence ODbL. Le tout consulté le {date}.
