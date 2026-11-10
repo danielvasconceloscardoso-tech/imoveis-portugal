@@ -229,6 +229,12 @@ export function methodLines(lang: MatchLang, tastes: readonly Taste[] = TASTES):
   return tastes.map(t => {
     const rules = TASTE_RULES[t];
     const parts = rules.map(r => `${rules.length > 1 ? T.share(Math.round(r.share * 100)) : ""}${NOUNS[lang][r.key]}${colon(lang)}${r.kind === "count" ? T.count(r.full) : T.range(r.full, r.zero) + (r.kind === "sparse" ? T.log : "")}`);
-    return `${TASTE_LABELS[lang][t]}${colon(lang)}${parts.join("; ")}.`;
+    return `${TASTE_LABELS[lang][t]}${colon(lang)}${parts.join("; ")}.${t === "golf" ? ` ${GOLF_GAP[lang]}` : ""}`;
   });
 }
+/** Said wherever the golf rule is printed, until the course list is national (ops/research/81_map/qa.md, defect 3). */
+const GOLF_GAP: Record<MatchLang, string> = {
+  pt: "A nossa lista de campos cobre o Algarve, Lisboa, o Norte, o Alentejo e a Madeira; faltam ainda Óbidos, Viseu e os Açores.",
+  en: "Our list of courses covers the Algarve, Lisbon, the North, the Alentejo and Madeira; Óbidos, Viseu and the Azores are still missing.",
+  fr: "Notre liste de golfs couvre l’Algarve, Lisbonne, le Nord, l’Alentejo et Madère ; Óbidos, Viseu et les Açores manquent encore.",
+};
