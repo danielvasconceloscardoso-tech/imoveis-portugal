@@ -1,0 +1,309 @@
+muni_dico,muni_slug,muni_name,resident_population,period,indicator
+0101,agueda,Águeda,46119,"2021 (Census, 19 April 2021)",INE 0011609
+0102,albergaria-a-velha,Albergaria-a-Velha,24840,"2021 (Census, 19 April 2021)",INE 0011609
+0103,anadia,Anadia,27532,"2021 (Census, 19 April 2021)",INE 0011609
+0104,arouca,Arouca,21146,"2021 (Census, 19 April 2021)",INE 0011609
+0105,aveiro,Aveiro,80954,"2021 (Census, 19 April 2021)",INE 0011609
+0106,castelo-de-paiva,Castelo de Paiva,15586,"2021 (Census, 19 April 2021)",INE 0011609
+0107,espinho,Espinho,31043,"2021 (Census, 19 April 2021)",INE 0011609
+0108,estarreja,Estarreja,26213,"2021 (Census, 19 April 2021)",INE 0011609
+0109,santa-maria-da-feira,Santa Maria da Feira,136674,"2021 (Census, 19 April 2021)",INE 0011609
+0110,ilhavo,Ílhavo,39235,"2021 (Census, 19 April 2021)",INE 0011609
+0111,mealhada,Mealhada,19348,"2021 (Census, 19 April 2021)",INE 0011609
+0112,murtosa,Murtosa,10476,"2021 (Census, 19 April 2021)",INE 0011609
+0113,oliveira-de-azemeis,Oliveira de Azeméis,66175,"2021 (Census, 19 April 2021)",INE 0011609
+0114,oliveira-do-bairro,Oliveira do Bairro,23132,"2021 (Census, 19 April 2021)",INE 0011609
+0115,ovar,Ovar,54953,"2021 (Census, 19 April 2021)",INE 0011609
+0116,sao-joao-da-madeira,São João da Madeira,22143,"2021 (Census, 19 April 2021)",INE 0011609
+0117,sever-do-vouga,Sever do Vouga,11063,"2021 (Census, 19 April 2021)",INE 0011609
+0118,vagos,Vagos,22886,"2021 (Census, 19 April 2021)",INE 0011609
+0119,vale-de-cambra,Vale de Cambra,21269,"2021 (Census, 19 April 2021)",INE 0011609
+0201,aljustrel,Aljustrel,8874,"2021 (Census, 19 April 2021)",INE 0011609
+0202,almodovar,Almodôvar,6712,"2021 (Census, 19 April 2021)",INE 0011609
+0203,alvito,Alvito,2280,"2021 (Census, 19 April 2021)",INE 0011609
+0204,barrancos,Barrancos,1438,"2021 (Census, 19 April 2021)",INE 0011609
+0205,beja,Beja,33394,"2021 (Census, 19 April 2021)",INE 0011609
+0206,castro-verde,Castro Verde,6873,"2021 (Census, 19 April 2021)",INE 0011609
+0207,cuba,Cuba,4373,"2021 (Census, 19 April 2021)",INE 0011609
+0208,ferreira-do-alentejo,Ferreira do Alentejo,7684,"2021 (Census, 19 April 2021)",INE 0011609
+0209,mertola,Mértola,6206,"2021 (Census, 19 April 2021)",INE 0011609
+0210,moura,Moura,13258,"2021 (Census, 19 April 2021)",INE 0011609
+0211,odemira,Odemira,29538,"2021 (Census, 19 April 2021)",INE 0011609
+0212,ourique,Ourique,4839,"2021 (Census, 19 April 2021)",INE 0011609
+0213,serpa,Serpa,13757,"2021 (Census, 19 April 2021)",INE 0011609
+0214,vidigueira,Vidigueira,5175,"2021 (Census, 19 April 2021)",INE 0011609
+0301,amares,Amares,18595,"2021 (Census, 19 April 2021)",INE 0011609
+0302,barcelos,Barcelos,116752,"2021 (Census, 19 April 2021)",INE 0011609
+0303,braga,Braga,193324,"2021 (Census, 19 April 2021)",INE 0011609
+0304,cabeceiras-de-basto,Cabeceiras de Basto,15558,"2021 (Census, 19 April 2021)",INE 0011609
+0305,celorico-de-basto,Celorico de Basto,17643,"2021 (Census, 19 April 2021)",INE 0011609
+0306,esposende,Esposende,35132,"2021 (Census, 19 April 2021)",INE 0011609
+0307,fafe,Fafe,48497,"2021 (Census, 19 April 2021)",INE 0011609
+0308,guimaraes,Guimarães,156830,"2021 (Census, 19 April 2021)",INE 0011609
+0309,povoa-de-lanhoso,Póvoa de Lanhoso,21775,"2021 (Census, 19 April 2021)",INE 0011609
+0310,terras-de-bouro,Terras de Bouro,6358,"2021 (Census, 19 April 2021)",INE 0011609
+0311,vieira-do-minho,Vieira do Minho,11955,"2021 (Census, 19 April 2021)",INE 0011609
+0312,vila-nova-de-famalicao,Vila Nova de Famalicão,133534,"2021 (Census, 19 April 2021)",INE 0011609
+0313,vila-verde,Vila Verde,46444,"2021 (Census, 19 April 2021)",INE 0011609
+0314,vizela,Vizela,23896,"2021 (Census, 19 April 2021)",INE 0011609
+0401,alfandega-da-fe,Alfândega da Fé,4324,"2021 (Census, 19 April 2021)",INE 0011609
+0402,braganca,Bragança,34582,"2021 (Census, 19 April 2021)",INE 0011609
+0403,carrazeda-de-ansiaes,Carrazeda de Ansiães,5490,"2021 (Census, 19 April 2021)",INE 0011609
+0404,freixo-de-espada-a-cinta,Freixo de Espada à Cinta,3216,"2021 (Census, 19 April 2021)",INE 0011609
+0405,macedo-de-cavaleiros,Macedo de Cavaleiros,14251,"2021 (Census, 19 April 2021)",INE 0011609
+0406,miranda-do-douro,Miranda do Douro,6463,"2021 (Census, 19 April 2021)",INE 0011609
+0407,mirandela,Mirandela,21384,"2021 (Census, 19 April 2021)",INE 0011609
+0408,mogadouro,Mogadouro,8301,"2021 (Census, 19 April 2021)",INE 0011609
+0409,torre-de-moncorvo,Torre de Moncorvo,6826,"2021 (Census, 19 April 2021)",INE 0011609
+0410,vila-flor,Vila Flor,6050,"2021 (Census, 19 April 2021)",INE 0011609
+0411,vimioso,Vimioso,4149,"2021 (Census, 19 April 2021)",INE 0011609
+0412,vinhais,Vinhais,7768,"2021 (Census, 19 April 2021)",INE 0011609
+0501,belmonte,Belmonte,6205,"2021 (Census, 19 April 2021)",INE 0011609
+0502,castelo-branco,Castelo Branco,52272,"2021 (Census, 19 April 2021)",INE 0011609
+0503,covilha,Covilhã,46455,"2021 (Census, 19 April 2021)",INE 0011609
+0504,fundao,Fundão,26503,"2021 (Census, 19 April 2021)",INE 0011609
+0505,idanha-a-nova,Idanha-a-Nova,8355,"2021 (Census, 19 April 2021)",INE 0011609
+0506,oleiros,Oleiros,4904,"2021 (Census, 19 April 2021)",INE 0011609
+0507,penamacor,Penamacor,4768,"2021 (Census, 19 April 2021)",INE 0011609
+0508,proenca-a-nova,Proença-a-Nova,7167,"2021 (Census, 19 April 2021)",INE 0011609
+0509,serta,Sertã,14769,"2021 (Census, 19 April 2021)",INE 0011609
+0510,vila-de-rei,Vila de Rei,3279,"2021 (Census, 19 April 2021)",INE 0011609
+0511,vila-velha-de-rodao,Vila Velha de Ródão,3285,"2021 (Census, 19 April 2021)",INE 0011609
+0601,arganil,Arganil,11065,"2021 (Census, 19 April 2021)",INE 0011609
+0602,cantanhede,Cantanhede,34212,"2021 (Census, 19 April 2021)",INE 0011609
+0603,coimbra,Coimbra,140816,"2021 (Census, 19 April 2021)",INE 0011609
+0604,condeixa-a-nova,Condeixa-a-Nova,16732,"2021 (Census, 19 April 2021)",INE 0011609
+0605,figueira-da-foz,Figueira da Foz,58951,"2021 (Census, 19 April 2021)",INE 0011609
+0606,gois,Góis,3811,"2021 (Census, 19 April 2021)",INE 0011609
+0607,lousa,Lousã,17006,"2021 (Census, 19 April 2021)",INE 0011609
+0608,mira,Mira,12113,"2021 (Census, 19 April 2021)",INE 0011609
+0609,miranda-do-corvo,Miranda do Corvo,12002,"2021 (Census, 19 April 2021)",INE 0011609
+0610,montemor-o-velho,Montemor-o-Velho,24571,"2021 (Census, 19 April 2021)",INE 0011609
+0611,oliveira-do-hospital,Oliveira do Hospital,19413,"2021 (Census, 19 April 2021)",INE 0011609
+0612,pampilhosa-da-serra,Pampilhosa da Serra,4082,"2021 (Census, 19 April 2021)",INE 0011609
+0613,penacova,Penacova,13113,"2021 (Census, 19 April 2021)",INE 0011609
+0614,penela,Penela,5440,"2021 (Census, 19 April 2021)",INE 0011609
+0615,soure,Soure,17261,"2021 (Census, 19 April 2021)",INE 0011609
+0616,tabua,Tábua,11160,"2021 (Census, 19 April 2021)",INE 0011609
+0617,vila-nova-de-poiares,Vila Nova de Poiares,6803,"2021 (Census, 19 April 2021)",INE 0011609
+0701,alandroal,Alandroal,5014,"2021 (Census, 19 April 2021)",INE 0011609
+0702,arraiolos,Arraiolos,6606,"2021 (Census, 19 April 2021)",INE 0011609
+0703,borba,Borba,6428,"2021 (Census, 19 April 2021)",INE 0011609
+0704,estremoz,Estremoz,12680,"2021 (Census, 19 April 2021)",INE 0011609
+0705,evora,Évora,53577,"2021 (Census, 19 April 2021)",INE 0011609
+0706,montemor-o-novo,Montemor-o-Novo,15799,"2021 (Census, 19 April 2021)",INE 0011609
+0707,mora,Mora,4135,"2021 (Census, 19 April 2021)",INE 0011609
+0708,mourao,Mourão,2351,"2021 (Census, 19 April 2021)",INE 0011609
+0709,portel,Portel,5747,"2021 (Census, 19 April 2021)",INE 0011609
+0710,redondo,Redondo,6286,"2021 (Census, 19 April 2021)",INE 0011609
+0711,reguengos-de-monsaraz,Reguengos de Monsaraz,9871,"2021 (Census, 19 April 2021)",INE 0011609
+0712,vendas-novas,Vendas Novas,11245,"2021 (Census, 19 April 2021)",INE 0011609
+0713,viana-do-alentejo,Viana do Alentejo,5318,"2021 (Census, 19 April 2021)",INE 0011609
+0714,vila-vicosa,Vila Viçosa,7387,"2021 (Census, 19 April 2021)",INE 0011609
+0801,albufeira,Albufeira,44164,"2021 (Census, 19 April 2021)",INE 0011609
+0802,alcoutim,Alcoutim,2523,"2021 (Census, 19 April 2021)",INE 0011609
+0803,aljezur,Aljezur,6045,"2021 (Census, 19 April 2021)",INE 0011609
+0804,castro-marim,Castro Marim,6439,"2021 (Census, 19 April 2021)",INE 0011609
+0805,faro,Faro,67622,"2021 (Census, 19 April 2021)",INE 0011609
+0806,lagoa,Lagoa,23725,"2021 (Census, 19 April 2021)",INE 0011609
+0807,lagos,Lagos,33494,"2021 (Census, 19 April 2021)",INE 0011609
+0808,loule,Loulé,72332,"2021 (Census, 19 April 2021)",INE 0011609
+0809,monchique,Monchique,5462,"2021 (Census, 19 April 2021)",INE 0011609
+0810,olhao,Olhão,44614,"2021 (Census, 19 April 2021)",INE 0011609
+0811,portimao,Portimão,59845,"2021 (Census, 19 April 2021)",INE 0011609
+0812,sao-bras-de-alportel,São Brás de Alportel,11248,"2021 (Census, 19 April 2021)",INE 0011609
+0813,silves,Silves,37766,"2021 (Census, 19 April 2021)",INE 0011609
+0814,tavira,Tavira,27523,"2021 (Census, 19 April 2021)",INE 0011609
+0815,vila-do-bispo,Vila do Bispo,5717,"2021 (Census, 19 April 2021)",INE 0011609
+0816,vila-real-de-santo-antonio,Vila Real de Santo António,18824,"2021 (Census, 19 April 2021)",INE 0011609
+0901,aguiar-da-beira,Aguiar da Beira,5231,"2021 (Census, 19 April 2021)",INE 0011609
+0902,almeida,Almeida,5887,"2021 (Census, 19 April 2021)",INE 0011609
+0903,celorico-da-beira,Celorico da Beira,6583,"2021 (Census, 19 April 2021)",INE 0011609
+0904,figueira-de-castelo-rodrigo,Figueira de Castelo Rodrigo,5148,"2021 (Census, 19 April 2021)",INE 0011609
+0905,fornos-de-algodres,Fornos de Algodres,4403,"2021 (Census, 19 April 2021)",INE 0011609
+0906,gouveia,Gouveia,12222,"2021 (Census, 19 April 2021)",INE 0011609
+0907,guarda,Guarda,40117,"2021 (Census, 19 April 2021)",INE 0011609
+0908,manteigas,Manteigas,2909,"2021 (Census, 19 April 2021)",INE 0011609
+0909,meda,Mêda,4630,"2021 (Census, 19 April 2021)",INE 0011609
+0910,pinhel,Pinhel,8092,"2021 (Census, 19 April 2021)",INE 0011609
+0911,sabugal,Sabugal,11280,"2021 (Census, 19 April 2021)",INE 0011609
+0912,seia,Seia,21755,"2021 (Census, 19 April 2021)",INE 0011609
+0913,trancoso,Trancoso,8413,"2021 (Census, 19 April 2021)",INE 0011609
+0914,vila-nova-de-foz-coa,Vila Nova de Foz Côa,6304,"2021 (Census, 19 April 2021)",INE 0011609
+1001,alcobaca,Alcobaça,54965,"2021 (Census, 19 April 2021)",INE 0011609
+1002,alvaiazere,Alvaiázere,6238,"2021 (Census, 19 April 2021)",INE 0011609
+1003,ansiao,Ansião,11642,"2021 (Census, 19 April 2021)",INE 0011609
+1004,batalha,Batalha,15557,"2021 (Census, 19 April 2021)",INE 0011609
+1005,bombarral,Bombarral,12746,"2021 (Census, 19 April 2021)",INE 0011609
+1006,caldas-da-rainha,Caldas da Rainha,50910,"2021 (Census, 19 April 2021)",INE 0011609
+1007,castanheira-de-pera,Castanheira de Pêra,2645,"2021 (Census, 19 April 2021)",INE 0011609
+1008,figueiro-dos-vinhos,Figueiró dos Vinhos,5281,"2021 (Census, 19 April 2021)",INE 0011609
+1009,leiria,Leiria,128603,"2021 (Census, 19 April 2021)",INE 0011609
+1010,marinha-grande,Marinha Grande,39024,"2021 (Census, 19 April 2021)",INE 0011609
+1011,nazare,Nazaré,14881,"2021 (Census, 19 April 2021)",INE 0011609
+1012,obidos,Óbidos,11922,"2021 (Census, 19 April 2021)",INE 0011609
+1013,pedrogao-grande,Pedrógão Grande,3390,"2021 (Census, 19 April 2021)",INE 0011609
+1014,peniche,Peniche,26429,"2021 (Census, 19 April 2021)",INE 0011609
+1015,pombal,Pombal,51170,"2021 (Census, 19 April 2021)",INE 0011609
+1016,porto-de-mos,Porto de Mós,23202,"2021 (Census, 19 April 2021)",INE 0011609
+1101,alenquer,Alenquer,44442,"2021 (Census, 19 April 2021)",INE 0011609
+1102,arruda-dos-vinhos,Arruda dos Vinhos,13992,"2021 (Census, 19 April 2021)",INE 0011609
+1103,azambuja,Azambuja,21421,"2021 (Census, 19 April 2021)",INE 0011609
+1104,cadaval,Cadaval,13372,"2021 (Census, 19 April 2021)",INE 0011609
+1105,cascais,Cascais,214124,"2021 (Census, 19 April 2021)",INE 0011609
+1106,lisboa,Lisboa,545796,"2021 (Census, 19 April 2021)",INE 0011609
+1107,loures,Loures,201590,"2021 (Census, 19 April 2021)",INE 0011609
+1108,lourinha,Lourinhã,26240,"2021 (Census, 19 April 2021)",INE 0011609
+1109,mafra,Mafra,86515,"2021 (Census, 19 April 2021)",INE 0011609
+1110,oeiras,Oeiras,171658,"2021 (Census, 19 April 2021)",INE 0011609
+1111,sintra,Sintra,385606,"2021 (Census, 19 April 2021)",INE 0011609
+1112,sobral-de-monte-agraco,Sobral de Monte Agraço,10540,"2021 (Census, 19 April 2021)",INE 0011609
+1113,torres-vedras,Torres Vedras,83072,"2021 (Census, 19 April 2021)",INE 0011609
+1114,vila-franca-de-xira,Vila Franca de Xira,137529,"2021 (Census, 19 April 2021)",INE 0011609
+1115,amadora,Amadora,171454,"2021 (Census, 19 April 2021)",INE 0011609
+1116,odivelas,Odivelas,148034,"2021 (Census, 19 April 2021)",INE 0011609
+1201,alter-do-chao,Alter do Chão,3044,"2021 (Census, 19 April 2021)",INE 0011609
+1202,arronches,Arronches,2789,"2021 (Census, 19 April 2021)",INE 0011609
+1203,avis,Avis,3812,"2021 (Census, 19 April 2021)",INE 0011609
+1204,campo-maior,Campo Maior,8042,"2021 (Census, 19 April 2021)",INE 0011609
+1205,castelo-de-vide,Castelo de Vide,3116,"2021 (Census, 19 April 2021)",INE 0011609
+1206,crato,Crato,3225,"2021 (Census, 19 April 2021)",INE 0011609
+1207,elvas,Elvas,20730,"2021 (Census, 19 April 2021)",INE 0011609
+1208,fronteira,Fronteira,2858,"2021 (Census, 19 April 2021)",INE 0011609
+1209,gaviao,Gavião,3394,"2021 (Census, 19 April 2021)",INE 0011609
+1210,marvao,Marvão,3021,"2021 (Census, 19 April 2021)",INE 0011609
+1211,monforte,Monforte,2992,"2021 (Census, 19 April 2021)",INE 0011609
+1212,nisa,Nisa,5952,"2021 (Census, 19 April 2021)",INE 0011609
+1213,ponte-de-sor,Ponte de Sor,15248,"2021 (Census, 19 April 2021)",INE 0011609
+1214,portalegre,Portalegre,22340,"2021 (Census, 19 April 2021)",INE 0011609
+1215,sousel,Sousel,4360,"2021 (Census, 19 April 2021)",INE 0011609
+1301,amarante,Amarante,52116,"2021 (Census, 19 April 2021)",INE 0011609
+1302,baiao,Baião,17534,"2021 (Census, 19 April 2021)",INE 0011609
+1303,felgueiras,Felgueiras,55848,"2021 (Census, 19 April 2021)",INE 0011609
+1304,gondomar,Gondomar,164257,"2021 (Census, 19 April 2021)",INE 0011609
+1305,lousada,Lousada,47364,"2021 (Census, 19 April 2021)",INE 0011609
+1306,maia,Maia,134977,"2021 (Census, 19 April 2021)",INE 0011609
+1307,marco-de-canaveses,Marco de Canaveses,49541,"2021 (Census, 19 April 2021)",INE 0011609
+1308,matosinhos,Matosinhos,172557,"2021 (Census, 19 April 2021)",INE 0011609
+1309,pacos-de-ferreira,Paços de Ferreira,55595,"2021 (Census, 19 April 2021)",INE 0011609
+1310,paredes,Paredes,84354,"2021 (Census, 19 April 2021)",INE 0011609
+1311,penafiel,Penafiel,69629,"2021 (Census, 19 April 2021)",INE 0011609
+1312,porto,Porto,231800,"2021 (Census, 19 April 2021)",INE 0011609
+1313,povoa-de-varzim,Póvoa de Varzim,64255,"2021 (Census, 19 April 2021)",INE 0011609
+1314,santo-tirso,Santo Tirso,67709,"2021 (Census, 19 April 2021)",INE 0011609
+1315,valongo,Valongo,94672,"2021 (Census, 19 April 2021)",INE 0011609
+1316,vila-do-conde,Vila do Conde,80825,"2021 (Census, 19 April 2021)",INE 0011609
+1317,vila-nova-de-gaia,Vila Nova de Gaia,303824,"2021 (Census, 19 April 2021)",INE 0011609
+1318,trofa,Trofa,38548,"2021 (Census, 19 April 2021)",INE 0011609
+1401,abrantes,Abrantes,34329,"2021 (Census, 19 April 2021)",INE 0011609
+1402,alcanena,Alcanena,12472,"2021 (Census, 19 April 2021)",INE 0011609
+1403,almeirim,Almeirim,22012,"2021 (Census, 19 April 2021)",INE 0011609
+1404,alpiarca,Alpiarça,6975,"2021 (Census, 19 April 2021)",INE 0011609
+1405,benavente,Benavente,29709,"2021 (Census, 19 April 2021)",INE 0011609
+1406,cartaxo,Cartaxo,23186,"2021 (Census, 19 April 2021)",INE 0011609
+1407,chamusca,Chamusca,8530,"2021 (Census, 19 April 2021)",INE 0011609
+1408,constancia,Constância,3798,"2021 (Census, 19 April 2021)",INE 0011609
+1409,coruche,Coruche,17355,"2021 (Census, 19 April 2021)",INE 0011609
+1410,entroncamento,Entroncamento,20141,"2021 (Census, 19 April 2021)",INE 0011609
+1411,ferreira-do-zezere,Ferreira do Zêzere,7800,"2021 (Census, 19 April 2021)",INE 0011609
+1412,golega,Golegã,5400,"2021 (Census, 19 April 2021)",INE 0011609
+1413,macao,Mação,6402,"2021 (Census, 19 April 2021)",INE 0011609
+1414,rio-maior,Rio Maior,21004,"2021 (Census, 19 April 2021)",INE 0011609
+1415,salvaterra-de-magos,Salvaterra de Magos,21607,"2021 (Census, 19 April 2021)",INE 0011609
+1416,santarem,Santarém,58662,"2021 (Census, 19 April 2021)",INE 0011609
+1417,sardoal,Sardoal,3513,"2021 (Census, 19 April 2021)",INE 0011609
+1418,tomar,Tomar,36413,"2021 (Census, 19 April 2021)",INE 0011609
+1419,torres-novas,Torres Novas,34111,"2021 (Census, 19 April 2021)",INE 0011609
+1420,vila-nova-da-barquinha,Vila Nova da Barquinha,7016,"2021 (Census, 19 April 2021)",INE 0011609
+1421,ourem,Ourém,44538,"2021 (Census, 19 April 2021)",INE 0011609
+1501,alcacer-do-sal,Alcácer do Sal,11112,"2021 (Census, 19 April 2021)",INE 0011609
+1502,alcochete,Alcochete,19143,"2021 (Census, 19 April 2021)",INE 0011609
+1503,almada,Almada,177238,"2021 (Census, 19 April 2021)",INE 0011609
+1504,barreiro,Barreiro,78345,"2021 (Census, 19 April 2021)",INE 0011609
+1505,grandola,Grândola,13822,"2021 (Census, 19 April 2021)",INE 0011609
+1506,moita,Moita,66255,"2021 (Census, 19 April 2021)",INE 0011609
+1507,montijo,Montijo,55682,"2021 (Census, 19 April 2021)",INE 0011609
+1508,palmela,Palmela,68852,"2021 (Census, 19 April 2021)",INE 0011609
+1509,santiago-do-cacem,Santiago do Cacém,27772,"2021 (Census, 19 April 2021)",INE 0011609
+1510,seixal,Seixal,166507,"2021 (Census, 19 April 2021)",INE 0011609
+1511,sesimbra,Sesimbra,52384,"2021 (Census, 19 April 2021)",INE 0011609
+1512,setubal,Setúbal,123496,"2021 (Census, 19 April 2021)",INE 0011609
+1513,sines,Sines,14198,"2021 (Census, 19 April 2021)",INE 0011609
+1601,arcos-de-valdevez,Arcos de Valdevez,20718,"2021 (Census, 19 April 2021)",INE 0011609
+1602,caminha,Caminha,15797,"2021 (Census, 19 April 2021)",INE 0011609
+1603,melgaco,Melgaço,7773,"2021 (Census, 19 April 2021)",INE 0011609
+1604,moncao,Monção,17816,"2021 (Census, 19 April 2021)",INE 0011609
+1605,paredes-de-coura,Paredes de Coura,8632,"2021 (Census, 19 April 2021)",INE 0011609
+1606,ponte-da-barca,Ponte da Barca,11044,"2021 (Census, 19 April 2021)",INE 0011609
+1607,ponte-de-lima,Ponte de Lima,41164,"2021 (Census, 19 April 2021)",INE 0011609
+1608,valenca,Valença,13623,"2021 (Census, 19 April 2021)",INE 0011609
+1609,viana-do-castelo,Viana do Castelo,85778,"2021 (Census, 19 April 2021)",INE 0011609
+1610,vila-nova-de-cerveira,Vila Nova de Cerveira,8921,"2021 (Census, 19 April 2021)",INE 0011609
+1701,alijo,Alijó,10486,"2021 (Census, 19 April 2021)",INE 0011609
+1702,boticas,Boticas,5000,"2021 (Census, 19 April 2021)",INE 0011609
+1703,chaves,Chaves,37590,"2021 (Census, 19 April 2021)",INE 0011609
+1704,mesao-frio,Mesão Frio,3547,"2021 (Census, 19 April 2021)",INE 0011609
+1705,mondim-de-basto,Mondim de Basto,6410,"2021 (Census, 19 April 2021)",INE 0011609
+1706,montalegre,Montalegre,9261,"2021 (Census, 19 April 2021)",INE 0011609
+1707,murca,Murça,5245,"2021 (Census, 19 April 2021)",INE 0011609
+1708,peso-da-regua,Peso da Régua,14540,"2021 (Census, 19 April 2021)",INE 0011609
+1709,ribeira-de-pena,Ribeira de Pena,5884,"2021 (Census, 19 April 2021)",INE 0011609
+1710,sabrosa,Sabrosa,5548,"2021 (Census, 19 April 2021)",INE 0011609
+1711,santa-marta-de-penaguiao,Santa Marta de Penaguião,6100,"2021 (Census, 19 April 2021)",INE 0011609
+1712,valpacos,Valpaços,14701,"2021 (Census, 19 April 2021)",INE 0011609
+1713,vila-pouca-de-aguiar,Vila Pouca de Aguiar,11812,"2021 (Census, 19 April 2021)",INE 0011609
+1714,vila-real,Vila Real,49571,"2021 (Census, 19 April 2021)",INE 0011609
+1801,armamar,Armamar,5678,"2021 (Census, 19 April 2021)",INE 0011609
+1802,carregal-do-sal,Carregal do Sal,9038,"2021 (Census, 19 April 2021)",INE 0011609
+1803,castro-daire,Castro Daire,13736,"2021 (Census, 19 April 2021)",INE 0011609
+1804,cinfaes,Cinfães,17730,"2021 (Census, 19 April 2021)",INE 0011609
+1805,lamego,Lamego,24312,"2021 (Census, 19 April 2021)",INE 0011609
+1806,mangualde,Mangualde,18303,"2021 (Census, 19 April 2021)",INE 0011609
+1807,moimenta-da-beira,Moimenta da Beira,9410,"2021 (Census, 19 April 2021)",INE 0011609
+1808,mortagua,Mortágua,8963,"2021 (Census, 19 April 2021)",INE 0011609
+1809,nelas,Nelas,13119,"2021 (Census, 19 April 2021)",INE 0011609
+1810,oliveira-de-frades,Oliveira de Frades,9506,"2021 (Census, 19 April 2021)",INE 0011609
+1811,penalva-do-castelo,Penalva do Castelo,7333,"2021 (Census, 19 April 2021)",INE 0011609
+1812,penedono,Penedono,2738,"2021 (Census, 19 April 2021)",INE 0011609
+1813,resende,Resende,10051,"2021 (Census, 19 April 2021)",INE 0011609
+1814,santa-comba-dao,Santa Comba Dão,10641,"2021 (Census, 19 April 2021)",INE 0011609
+1815,sao-joao-da-pesqueira,São João da Pesqueira,6775,"2021 (Census, 19 April 2021)",INE 0011609
+1816,sao-pedro-do-sul,São Pedro do Sul,15137,"2021 (Census, 19 April 2021)",INE 0011609
+1817,satao,Sátão,11030,"2021 (Census, 19 April 2021)",INE 0011609
+1818,sernancelhe,Sernancelhe,5692,"2021 (Census, 19 April 2021)",INE 0011609
+1819,tabuaco,Tabuaço,5034,"2021 (Census, 19 April 2021)",INE 0011609
+1820,tarouca,Tarouca,7363,"2021 (Census, 19 April 2021)",INE 0011609
+1821,tondela,Tondela,25910,"2021 (Census, 19 April 2021)",INE 0011609
+1822,vila-nova-de-paiva,Vila Nova de Paiva,4662,"2021 (Census, 19 April 2021)",INE 0011609
+1823,viseu,Viseu,99551,"2021 (Census, 19 April 2021)",INE 0011609
+1824,vouzela,Vouzela,9580,"2021 (Census, 19 April 2021)",INE 0011609
+3101,calheta-r-a-m,Calheta (R.A.M.),10915,"2021 (Census, 19 April 2021)",INE 0011609
+3102,camara-de-lobos,Câmara de Lobos,32162,"2021 (Census, 19 April 2021)",INE 0011609
+3103,funchal,Funchal,105782,"2021 (Census, 19 April 2021)",INE 0011609
+3104,machico,Machico,19593,"2021 (Census, 19 April 2021)",INE 0011609
+3105,ponta-do-sol,Ponta do Sol,8360,"2021 (Census, 19 April 2021)",INE 0011609
+3106,porto-moniz,Porto Moniz,2517,"2021 (Census, 19 April 2021)",INE 0011609
+3107,ribeira-brava,Ribeira Brava,12680,"2021 (Census, 19 April 2021)",INE 0011609
+3108,santa-cruz,Santa Cruz,42168,"2021 (Census, 19 April 2021)",INE 0011609
+3109,santana,Santana,6553,"2021 (Census, 19 April 2021)",INE 0011609
+3110,sao-vicente,São Vicente,4865,"2021 (Census, 19 April 2021)",INE 0011609
+3201,porto-santo,Porto Santo,5149,"2021 (Census, 19 April 2021)",INE 0011609
+4101,vila-do-porto,Vila do Porto,5406,"2021 (Census, 19 April 2021)",INE 0011609
+4201,lagoa-r-a-a,Lagoa (R.A.A.),14189,"2021 (Census, 19 April 2021)",INE 0011609
+4202,nordeste,Nordeste,4368,"2021 (Census, 19 April 2021)",INE 0011609
+4203,ponta-delgada,Ponta Delgada,67229,"2021 (Census, 19 April 2021)",INE 0011609
+4204,povoacao,Povoação,5791,"2021 (Census, 19 April 2021)",INE 0011609
+4205,ribeira-grande,Ribeira Grande,31388,"2021 (Census, 19 April 2021)",INE 0011609
+4206,vila-franca-do-campo,Vila Franca do Campo,10323,"2021 (Census, 19 April 2021)",INE 0011609
+4301,angra-do-heroismo,Angra do Heroísmo,33771,"2021 (Census, 19 April 2021)",INE 0011609
+4302,vila-da-praia-da-vitoria,Vila da Praia da Vitória,19463,"2021 (Census, 19 April 2021)",INE 0011609
+4401,santa-cruz-da-graciosa,Santa Cruz da Graciosa,4090,"2021 (Census, 19 April 2021)",INE 0011609
+4501,calheta-r-a-a,Calheta (R.A.A.),3437,"2021 (Census, 19 April 2021)",INE 0011609
+4502,velas,Velas,4936,"2021 (Census, 19 April 2021)",INE 0011609
+4601,lajes-do-pico,Lajes do Pico,4340,"2021 (Census, 19 April 2021)",INE 0011609
+4602,madalena,Madalena,6319,"2021 (Census, 19 April 2021)",INE 0011609
+4603,sao-roque-do-pico,São Roque do Pico,3220,"2021 (Census, 19 April 2021)",INE 0011609
+4701,horta,Horta,14331,"2021 (Census, 19 April 2021)",INE 0011609
+4801,lajes-das-flores,Lajes das Flores,1408,"2021 (Census, 19 April 2021)",INE 0011609
+4802,santa-cruz-das-flores,Santa Cruz das Flores,2020,"2021 (Census, 19 April 2021)",INE 0011609
+4901,corvo,Corvo,384,"2021 (Census, 19 April 2021)",INE 0011609
