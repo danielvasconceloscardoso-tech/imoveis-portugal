@@ -139,7 +139,7 @@ Not run here:
 3. Golf: Lagoa, Silves, Sintra, Almada, Oeiras. First line: "Golf 2 min · €1,305 a month under your budget · median rent €9.93/m²".
 4. No taste, for contrast: Mêda, Vila Flor, Almeida, Marvão, Mogadouro (lowest cost first).
 
-Screenshots, all on the **real** table, phone (iPhone 13) and desktop 1440, in `/tmp/claude-0/-home-user-imoveis-portugal/686bee09-1d24-5475-8099-3259ef978529/scratchpad/p81/rank/shots-real/`:
+Screenshots, all on the **real** table, phone (iPhone 13) and desktop 1440, in `the session scratch folder: p81/rank/shots-real/`:
 - EN: `isch-beach-phone-list.png`, `isch-beach-desktop-list.png`, `food-quiet-…`, `golf-…`, each with a `-card.png` of the opened place.
 - PT: `pt-isch-beach-phone.png`, `pt-isch-beach-desktop.png`, `pt-food-…`, `pt-golf-…` (the Portuguese page has no "quiet" chip, so its second search is food alone).
 - FR, phone lists: `…/rank/shots-real-fr/`.

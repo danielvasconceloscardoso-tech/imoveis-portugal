@@ -21,38 +21,41 @@ export const IMPORTANCE_LABELS: Record<MatchLang, Record<Importance, string>> = 
   fr: { nice: "Souhaitable", essential: "Essentiel" },
 };
 
+/** A drive time that rounds to zero reads "under 1 min", never "0 min" (the card says the same). */
+const LT1: Record<MatchLang, string> = { pt: "menos de 1", en: "under 1", fr: "moins d’1" };
+const mn = (lang: MatchLang, v: string): string => (v === "0" ? LT1[lang] : v);
 /** A measure and its value as a short phrase: "Beach 17 min", "4 international schools within 30 min". */
 const PHRASES: Record<MatchLang, Record<MeasureKey, (v: string, one: boolean) => string>> = {
   pt: {
-    beach_min: v => `Praia a ${v} min`, isch_min: v => `Escola internacional a ${v} min`,
+    beach_min: v => `Praia a ${mn("pt", v)} min`, isch_min: v => `Escola internacional a ${mn("pt", v)} min`,
     isch_n30: (v, one) => `${v} ${one ? "escola internacional" : "escolas internacionais"} a menos de 30 min`,
     sec_n20: (v, one) => `${v} ${one ? "escola secundária pública" : "escolas secundárias públicas"} a menos de 20 min`,
-    er_min: v => `Urgência hospitalar a ${v} min`, air_min: v => `Aeroporto a ${v} min`, rail_min: v => `Estação de comboio a ${v} min`,
+    er_min: v => `Urgência hospitalar a ${mn("pt", v)} min`, air_min: v => `Aeroporto a ${mn("pt", v)} min`, rail_min: v => `Estação de comboio a ${mn("pt", v)} min`,
     mich_n30: (v, one) => `${v} ${one ? "restaurante" : "restaurantes"} no Guia Michelin a menos de 30 min`,
     mkt_n20: (v, one) => `${v} ${one ? "mercado" : "mercados"} a menos de 20 min`,
-    golf_min: v => `Golfe a ${v} min`, golf_n30: (v, one) => `${v} ${one ? "campo" : "campos"} de golfe a menos de 30 min`,
+    golf_min: v => `Golfe a ${mn("pt", v)} min`, golf_n30: (v, one) => `${v} ${one ? "campo" : "campos"} de golfe a menos de 30 min`,
     cult_n20: (v, one) => `${v} ${one ? "museu ou teatro" : "museus e teatros"} a menos de 20 min`,
     dens: v => `${v} residentes por km²`,
   },
   en: {
-    beach_min: v => `Beach ${v} min`, isch_min: v => `International school ${v} min`,
+    beach_min: v => `Beach ${mn("en", v)} min`, isch_min: v => `International school ${mn("en", v)} min`,
     isch_n30: (v, one) => `${v} international ${one ? "school" : "schools"} within 30 min`,
     sec_n20: (v, one) => `${v} public secondary ${one ? "school" : "schools"} within 20 min`,
-    er_min: v => `Emergency hospital ${v} min`, air_min: v => `Airport ${v} min`, rail_min: v => `Train station ${v} min`,
+    er_min: v => `Emergency hospital ${mn("en", v)} min`, air_min: v => `Airport ${mn("en", v)} min`, rail_min: v => `Train station ${mn("en", v)} min`,
     mich_n30: (v, one) => `${v} Michelin-listed ${one ? "restaurant" : "restaurants"} within 30 min`,
     mkt_n20: (v, one) => `${v} ${one ? "market" : "markets"} within 20 min`,
-    golf_min: v => `Golf ${v} min`, golf_n30: (v, one) => `${v} golf ${one ? "course" : "courses"} within 30 min`,
+    golf_min: v => `Golf ${mn("en", v)} min`, golf_n30: (v, one) => `${v} golf ${one ? "course" : "courses"} within 30 min`,
     cult_n20: (v, one) => `${v} ${one ? "museum or theatre" : "museums and theatres"} within 20 min`,
     dens: v => `${v} residents per km²`,
   },
   fr: {
-    beach_min: v => `Plage à ${v} min`, isch_min: v => `École internationale à ${v} min`,
+    beach_min: v => `Plage à ${mn("fr", v)} min`, isch_min: v => `École internationale à ${mn("fr", v)} min`,
     isch_n30: (v, one) => `${v} ${one ? "école internationale" : "écoles internationales"} à moins de 30 min`,
     sec_n20: (v, one) => `${v} ${one ? "lycée public" : "lycées publics"} à moins de 20 min`,
-    er_min: v => `Urgences hospitalières à ${v} min`, air_min: v => `Aéroport à ${v} min`, rail_min: v => `Gare à ${v} min`,
+    er_min: v => `Urgences hospitalières à ${mn("fr", v)} min`, air_min: v => `Aéroport à ${mn("fr", v)} min`, rail_min: v => `Gare à ${mn("fr", v)} min`,
     mich_n30: (v, one) => `${v} ${one ? "restaurant" : "restaurants"} au Guide Michelin à moins de 30 min`,
     mkt_n20: (v, one) => `${v} ${one ? "marché" : "marchés"} à moins de 20 min`,
-    golf_min: v => `Golf à ${v} min`, golf_n30: (v, one) => `${v} ${one ? "golf" : "golfs"} à moins de 30 min`,
+    golf_min: v => `Golf à ${mn("fr", v)} min`, golf_n30: (v, one) => `${v} ${one ? "golf" : "golfs"} à moins de 30 min`,
     cult_n20: (v, one) => `${v} ${one ? "musée ou théâtre" : "musées et théâtres"} à moins de 20 min`,
     dens: v => `${v} habitants au km²`,
   },
@@ -226,6 +229,12 @@ export function methodLines(lang: MatchLang, tastes: readonly Taste[] = TASTES):
   return tastes.map(t => {
     const rules = TASTE_RULES[t];
     const parts = rules.map(r => `${rules.length > 1 ? T.share(Math.round(r.share * 100)) : ""}${NOUNS[lang][r.key]}${colon(lang)}${r.kind === "count" ? T.count(r.full) : T.range(r.full, r.zero) + (r.kind === "sparse" ? T.log : "")}`);
-    return `${TASTE_LABELS[lang][t]}${colon(lang)}${parts.join("; ")}.`;
+    return `${TASTE_LABELS[lang][t]}${colon(lang)}${parts.join("; ")}.${t === "golf" ? ` ${GOLF_GAP[lang]}` : ""}`;
   });
 }
+/** Said wherever the golf rule is printed, until the course list is national (ops/research/81_map/qa.md, defect 3). */
+const GOLF_GAP: Record<MatchLang, string> = {
+  pt: "A nossa lista de campos cobre o Algarve, Lisboa, o Norte, o Alentejo e a Madeira; faltam ainda Óbidos, Viseu e os Açores.",
+  en: "Our list of courses covers the Algarve, Lisbon, the North, the Alentejo and Madeira; Óbidos, Viseu and the Azores are still missing.",
+  fr: "Notre liste de golfs couvre l’Algarve, Lisbonne, le Nord, l’Alentejo et Madère ; Óbidos, Viseu et les Açores manquent encore.",
+};

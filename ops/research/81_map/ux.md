@@ -12,7 +12,7 @@ Audit of the live site, https://imoveisportugal.pt, on 10 November 2026. Nothing
 - Real Safari was not available. Where that matters, the problem says so.
 - Event data: none exists. `ops/METRICS.md` reads "No week collected yet" and there is no `ops/metrics` folder. Where readers stop is unknown until Cloudflare Web Analytics is connected.
 
-Full-size PNGs are in `/tmp/claude-0/-home-user-imoveis-portugal/686bee09-1d24-5475-8099-3259ef978529/scratchpad/p81/ux/`. The pictures below are reduced copies.
+Full-size PNGs are in `the session scratch folder: p81/ux/`. The pictures below are reduced copies.
 
 ## The 10 problems that cost readers the most
 

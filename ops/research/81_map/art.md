@@ -4,7 +4,7 @@ Branch `p81-look`. Nothing here is live. The operator sees the Gondomar sample f
 
 Built on two things only: the Gondomar card and the national view. Every other place keeps the card it has today.
 
-Images, all PNG at device scale 2, are in `/tmp/claude-0/-home-user-imoveis-portugal/686bee09-1d24-5475-8099-3259ef978529/scratchpad/p81/look/final/` (list in section 9). "Before" is the live site on 10 November. "After" is a local build of this branch.
+Images, all PNG at device scale 2, are in `the session scratch folder: p81/look/final/` (list in section 9). "Before" is the live site on 10 November. "After" is a local build of this branch.
 
 ## 1. The five questions (content/METHOD.md), answered before designing
 
@@ -151,7 +151,7 @@ Corrected after the lead's review (two defects in the numerals):
 1. On a phone the numerals showed through the finder panel. Cause: I had given each numeral its own stacking number so that 1 sat above 2, and the map's layer does not contain such numbers, so they rose above the panel. Fix: no stacking number at all; the first place is simply added last. The numerals now stay inside the map's layer, under every panel.
 2. On a desktop a numeral sat on the word "Porto". Fix: place names now make room for the numerals exactly as they do for the developments' pins (a name moves above or below, or waits), and numerals closer than their own width stand side by side in the list's order.
 
-Example, 300 000 €, international school essential and beach: Vila Nova de Gaia, Matosinhos, Almada, Oeiras, Cascais. First line: "Escola internacional a 10 min · praia a 9 min · 296 € por mês abaixo do seu orçamento".
+Example, 300 000 €, international school essential and beach: Vila Nova de Gaia, Matosinhos, Almada, Sintra, Palmela (Oeiras and Cascais are over that budget; they are in the 6,000 € rent list of /regressar). First line: "Escola internacional a 10 min · praia a 9 min · 296 € por mês abaixo do seu orçamento".
 
 ## 8. What I did not do, and why
 
@@ -171,7 +171,7 @@ One thing found in existing copy: the Maré block on the card reads "Ideas and h
 
 ## 9. The images
 
-Folder: `/tmp/claude-0/-home-user-imoveis-portugal/686bee09-1d24-5475-8099-3259ef978529/scratchpad/p81/look/final/`
+Folder: `the session scratch folder: p81/look/final/`
 
 | File | What it shows |
 | --- | --- |
@@ -252,3 +252,12 @@ So: three map shots differ on purpose; two other shots already differed from the
 4. The new look on every edition's map page (France, Switzerland, Brazil and the UK had the older chrome).
 5. The health headline: the public emergency hospital at 13 min replaces "Um hospital a 2 min".
 6. "Silver Coast": whether the map should know it, and where it starts and ends.
+
+## 14. After the independent check (10 Nov, the lead)
+
+1. The emergency-hospital line never takes the hand-checked value (section 4 is out of date on that line). The hand-checked health files list every public hospital near a place and do not say which has an emergency department. Gondomar reads 14 min, Hospital de Santo António. `HAND_LINES` in `place_services.py`.
+2. A health centre 8 minutes or more from the town hall is left blank ("no figure yet"): it is the next municipality's, the seat's own being absent from OpenStreetMap. 20 places. `CS_GAP`.
+3. The foot of a card with hand-checked lines gives both dates (3 and 10 November).
+4. The finder's "moved down" note is shown only on a place that stands lower than its points alone would put it.
+5. A drive time that rounds to zero reads "under 1 min" in the result lines, as on the card.
+6. Acceptance item 2, corrected: at 1440 x 900 the first view shows four service lines, not five.
