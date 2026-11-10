@@ -6,7 +6,7 @@
 import { matchPlaces, toTaste, availableTastes, TOP_N, WEIGHTS, type Importance, type Taste, type MatchOutcome } from "../lib/match";
 import { loadMatchData } from "../lib/match-data";
 import type { MatchData } from "../lib/match-table";
-import { TASTE_LABELS, IMPORTANCE_LABELS, matchWords, formatReasons, formatTradeoff, formatPoints, formatCoverage, methodLines } from "../lib/match-copy";
+import { TASTE_LABELS, IMPORTANCE_LABELS, matchWords, formatReasons, formatTradeoff, formatPoints, formatCoverage, formatTie, methodLines } from "../lib/match-copy";
 import { regressarMapHref } from "../lib/regressar-places";
 import { ev, edOf } from "../lib/track";
 import type { EdCode } from "../i18n";
@@ -58,7 +58,8 @@ function places(netM: number) {
  <div class="tags">${points ? `<span>${esc(points)}</span>` : ""}<a href="${regressarMapHref(place.id, lang, ed)}" style="font-size:11px;font-weight:700;color:inherit;padding:3px 0">${mw.map} →</a></div></div></div>`;
   }).join("");
   const how = `<details class="note" style="grid-column:1/-1"><summary>${mw.how}</summary><p>${esc(formatCoverage(found, lang))}</p><p>${esc(`${mw.hard} ${mw.rule} ${mw.ties} ${mw.missing} ${mw.paid}`)}</p>${methodLines(lang, CHIPS.map(c => c[1]).filter(t => open.has(t))).map(line => `<p>${esc(line)}</p>`).join("")}</details>`;
-  list.innerHTML = (cards || `<p class="note">${esc(found.reason === "no-essential-match" ? mw.noEssential : mw.none)}</p>`) + how;
+  const tie = formatTie(found.matches.slice(0, TOP_N), lang);
+  list.innerHTML = (tie ? `<p class="note" style="grid-column:1/-1;margin:0" data-tie>${esc(tie)}</p>` : "") + (cards || `<p class="note">${esc(found.reason === "no-essential-match" ? mw.noEssential : mw.none)}</p>`) + how;
   if (found.matches.length) ev({ event: "match/show", origin: "regressar" }); else ev({ event: "match/none", origin: "regressar" });
 }
 

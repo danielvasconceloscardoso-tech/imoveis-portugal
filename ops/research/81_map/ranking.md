@@ -145,6 +145,13 @@ Screenshots, all on the **real** table, phone (iPhone 13) and desktop 1440, in `
 - FR, phone lists: `…/rank/shots-real-fr/`.
 - `…/rank/shots-fixture/` holds earlier runs on the made-up fixture; do not show those to the operator.
 
+### Polish pass (lead's review of the real screenshots, wording and display only, no change to scoring)
+
+1. The trade-off says what it means: "busier, 73 residents per km² against 56 here", "fewer Michelin-listed restaurants within 30 min, 7 against 11 here", "closer to the beach, 4 min against 6 here", "€260 a month less". No "better on / worse on". Same in PT and FR.
+2. Residents per km² are whole numbers wherever a reader sees them (the table keeps one decimal; scores are unchanged).
+3. When equal points decide the order between two neighbours in the list shown, one line says so: "Some of these places tie on points; the lower monthly cost comes first." It is absent when no neighbours tie and when no taste is chosen.
+4. The card's taste lines are in words: "Golf 2 min · 16 golf courses within 30 min · score 1.00 of 1 · nice to have (×1)".
+
 ## 7. The Concierge flow
 
 Nothing changed, and nothing should for ranking: it lists developers' buildings near a typed place, every card labelled, in the list's own order. Two notes for the lead:

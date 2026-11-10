@@ -6,7 +6,7 @@ import { rankCities, regressarMapHref, REGRESSAR_PLACES, type Preference, type R
 import { toTaste, availableTastes, TOP_N, WEIGHTS, type Importance } from '../lib/match';
 import { loadMatchData } from '../lib/match-data';
 import type { MatchData } from '../lib/match-table';
-import { TASTE_LABELS, IMPORTANCE_LABELS, matchWords, measurePhrase, formatReasons, formatTradeoff, formatPoints, formatCoverage, methodLines } from '../lib/match-copy';
+import { TASTE_LABELS, IMPORTANCE_LABELS, matchWords, formatReasons, formatTradeoff, formatPoints, formatCoverage, formatTie, formatTasteLine, methodLines } from '../lib/match-copy';
 import { ev } from '../lib/track';
 import { assessEligibility, ELIGIBILITY_QUESTIONS, ELIGIBILITY_COPY, type EligibilityAnswers, type EligibilityAnswer } from '../lib/regressar-eligibility';
 import { decideProgrammeScenario, scenarioCopy } from '../lib/regressar-scenario';
@@ -37,7 +37,7 @@ export function initRegressar() {
  let photoTask:Promise<Record<string,{f:string;alt?:Record<string,string>}>>|undefined;
  const signal=(step:string)=>root.dispatchEvent(new CustomEvent('regressar:step',{bubbles:true,detail:{step}}));
  const range={pt:'Este modelo cobre líquidos anuais equivalentes entre 20 000 € e 500 000 €. Abaixo desse intervalo, o mínimo de existência exige outro cálculo.',en:'This model covers equivalent annual net income from €20,000 to €500,000. Below this range, minimum-income protection requires a different calculation.',fr:'Ce modèle couvre un revenu net annuel équivalent de 20 000 € à 500 000 €. En dessous, la protection du minimum de revenu exige un autre calcul.'}[lang];
- const clearResults=()=>{discoveryShown=undefined;resultsShown=TOP_N;for(const key of ['results','coverage','more-results']){const el=q(key);if(el)el.hidden=true;}};
+ const clearResults=()=>{discoveryShown=undefined;resultsShown=TOP_N;for(const key of ['results','coverage','tie','more-results']){const el=q(key);if(el)el.hidden=true;}};
  const resetCity=(keepResults=false)=>{if(!keepResults)clearResults();generation++;lifeAbort?.abort();mapMatches=[];mapSelected='';q('mini-map').hidden=true;q('local-life').hidden=true;const preview=q('reveal-preview');if(preview)preview.hidden=true;q('city').hidden=true;q('no-match').hidden=true;reveal.disabled=false;reveal.textContent=c.reveal;reveal.removeAttribute('aria-busy');revealIndex=0;};
  function syncCurrency(){const quote=getSalaryCurrency(sourceCurrency.value);text('currency',quote.currency);net.setAttribute('aria-label',`${c.netSalary} (${quote.currency})`);}
  function syncCountry(){sourceCurrency.value=getCountry(country.value).currency;syncCurrency();}
@@ -169,6 +169,9 @@ export function initRegressar() {
   }
   list.hidden=!matches.length;
   const coverage=q('coverage');coverage.textContent=formatCoverage(found.outcome,lang);coverage.hidden=false;
+  // Equal points between neighbours: say that the lower monthly cost decided, so the order is never a puzzle.
+  let tie=q('tie');if(!tie){tie=document.createElement('p');tie.className='rx-fine rx-match-tie';tie.dataset.rTie='';coverage.after(tie);}
+  tie.textContent=formatTie(matches.slice(0,resultsShown),lang);tie.hidden=!tie.textContent;
   q('more-results').hidden=resultsShown>=matches.length;
   none.textContent=found.reason==='no-essential-match'?mw.noEssential:c.noMatch;none.hidden=matches.length>0;
  }
@@ -211,9 +214,7 @@ export function initRegressar() {
   const evidence=q('city-evidence');evidence.replaceChildren();
   // Each chosen taste in numbers, with its score and weight, so the points can be added up by hand.
   for(const taste of place.tastes){
-   const li=document.createElement('li'),two=new Intl.NumberFormat(locale,{minimumFractionDigits:2,maximumFractionDigits:2});
-   li.textContent=taste.score===null?`${TASTE_LABELS[lang][taste.taste]}: ${mw.noData}`:`${taste.parts.map(part=>measurePhrase(part.key,part.value,lang)).join(' · ')} · ${two.format(taste.score)} × ${taste.weight}`;
-   evidence.append(li);
+   const li=document.createElement('li');li.textContent=formatTasteLine(taste,lang);evidence.append(li);
   }
   text('city-points',formatPoints(place,lang));text('city-tradeoff',formatTradeoff(place.tradeoff,lang));
   if(!preferences.size){const li=document.createElement('li');li.textContent=`80 m² · ${Math.round(place.monthlyHousing/(targetAnnual/12)*100)}% ${c.netSalary.toLowerCase()} / ${c.month.toLowerCase()}`;evidence.append(li);}

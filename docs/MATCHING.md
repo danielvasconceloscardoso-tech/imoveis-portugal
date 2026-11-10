@@ -52,7 +52,7 @@ Three counts exist in the data and are **not** scored, because OpenStreetMap map
 ## Order, ties and the regional spread
 
 1. Most points first.
-2. On equal points, the lower monthly cost first.
+2. On equal points, the lower monthly cost first. When that decides the order between two neighbours, the page says so in one line.
 3. Still equal: alphabetical by the municipality's web name.
 4. Then the spread: at most two places from one region (NUTS III, 26 in the country) in the first five. A place held back by this rule comes straight after the first five, and its card says so. If your budget and tastes leave fewer regions than that, the rule gives way and the points order stands.
 

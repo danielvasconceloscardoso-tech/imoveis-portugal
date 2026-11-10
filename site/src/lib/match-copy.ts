@@ -57,14 +57,61 @@ const PHRASES: Record<MatchLang, Record<MeasureKey, (v: string, one: boolean) =>
     dens: v => `${v} habitants au km²`,
   },
 };
-export const measurePhrase = (key: MeasureKey, value: number, lang: MatchLang): string => PHRASES[lang][key](nf(lang, value), value === 1);
+/** The value as the reader sees it: residents per km² in whole numbers (the table keeps one decimal; scores do not change). */
+const shown = (key: MeasureKey, value: number) => (key === "dens" ? Math.round(value) : value);
+export const measurePhrase = (key: MeasureKey, value: number, lang: MatchLang): string => PHRASES[lang][key](nf(lang, shown(key, value)), shown(key, value) === 1);
+
+/** The trade-off in plain words: what the next place is, compared with this one, when it does better and when it does
+ * worse on a measure. Drive times: closer or farther. Counts: more or fewer. Residents per km²: quieter or busier. */
+const COMPARE: Record<MatchLang, Record<MeasureKey, [better: string, worse: string]>> = {
+  pt: {
+    beach_min: ["mais perto da praia", "mais longe da praia"], isch_min: ["mais perto de uma escola internacional", "mais longe de uma escola internacional"],
+    isch_n30: ["mais escolas internacionais a menos de 30 min", "menos escolas internacionais a menos de 30 min"],
+    sec_n20: ["mais escolas secundárias públicas a menos de 20 min", "menos escolas secundárias públicas a menos de 20 min"],
+    er_min: ["mais perto de uma urgência hospitalar", "mais longe de uma urgência hospitalar"], air_min: ["mais perto do aeroporto", "mais longe do aeroporto"],
+    rail_min: ["mais perto de uma estação de comboio", "mais longe de uma estação de comboio"],
+    mich_n30: ["mais restaurantes no Guia Michelin a menos de 30 min", "menos restaurantes no Guia Michelin a menos de 30 min"],
+    mkt_n20: ["mais mercados a menos de 20 min", "menos mercados a menos de 20 min"],
+    golf_min: ["mais perto de um campo de golfe", "mais longe de um campo de golfe"], golf_n30: ["mais campos de golfe a menos de 30 min", "menos campos de golfe a menos de 30 min"],
+    cult_n20: ["mais museus e teatros a menos de 20 min", "menos museus e teatros a menos de 20 min"], dens: ["mais tranquilo", "mais movimentado"],
+  },
+  en: {
+    beach_min: ["closer to the beach", "farther from the beach"], isch_min: ["closer to an international school", "farther from an international school"],
+    isch_n30: ["more international schools within 30 min", "fewer international schools within 30 min"],
+    sec_n20: ["more public secondary schools within 20 min", "fewer public secondary schools within 20 min"],
+    er_min: ["closer to an emergency hospital", "farther from an emergency hospital"], air_min: ["closer to the airport", "farther from the airport"],
+    rail_min: ["closer to a train station", "farther from a train station"],
+    mich_n30: ["more Michelin-listed restaurants within 30 min", "fewer Michelin-listed restaurants within 30 min"],
+    mkt_n20: ["more markets within 20 min", "fewer markets within 20 min"],
+    golf_min: ["closer to a golf course", "farther from a golf course"], golf_n30: ["more golf courses within 30 min", "fewer golf courses within 30 min"],
+    cult_n20: ["more museums and theatres within 20 min", "fewer museums and theatres within 20 min"], dens: ["quieter", "busier"],
+  },
+  fr: {
+    beach_min: ["plus près de la plage", "plus loin de la plage"], isch_min: ["plus près d’une école internationale", "plus loin d’une école internationale"],
+    isch_n30: ["plus d’écoles internationales à moins de 30 min", "moins d’écoles internationales à moins de 30 min"],
+    sec_n20: ["plus de lycées publics à moins de 20 min", "moins de lycées publics à moins de 20 min"],
+    er_min: ["plus près des urgences hospitalières", "plus loin des urgences hospitalières"], air_min: ["plus près de l’aéroport", "plus loin de l’aéroport"],
+    rail_min: ["plus près d’une gare", "plus loin d’une gare"],
+    mich_n30: ["plus de restaurants au Guide Michelin à moins de 30 min", "moins de restaurants au Guide Michelin à moins de 30 min"],
+    mkt_n20: ["plus de marchés à moins de 20 min", "moins de marchés à moins de 20 min"],
+    golf_min: ["plus près d’un golf", "plus loin d’un golf"], golf_n30: ["plus de golfs à moins de 30 min", "moins de golfs à moins de 30 min"],
+    cult_n20: ["plus de musées et théâtres à moins de 20 min", "moins de musées et théâtres à moins de 20 min"], dens: ["plus calme", "plus animé"],
+  },
+};
+/** The unit that follows the next place's value in a comparison ("12 min", "73 residents per km²"); counts carry none. */
+const UNIT: Record<MatchLang, (key: MeasureKey) => string> = {
+  pt: key => (key.endsWith("_min") ? " min" : key === "dens" ? " residentes por km²" : ""),
+  en: key => (key.endsWith("_min") ? " min" : key === "dens" ? " residents per km²" : ""),
+  fr: key => (key.endsWith("_min") ? " min" : key === "dens" ? " habitants au km²" : ""),
+};
 
 const WORDS = {
   pt: {
     under: (v: string) => `${v} por mês abaixo do seu orçamento`, atLimit: "no limite do seu orçamento",
     rent: (v: string, q: string) => `renda mediana ${v}/m² (INE, ${q})`, buy: (v: string, q: string) => `preço mediano ${v}/m² (INE, ${q})`,
-    noData: "sem dados", next: (n: string) => `A seguir, ${n}`, better: "melhor em", worse: "pior em", here: "aqui",
-    cheaper: (v: string) => `melhor no custo, menos ${v} por mês`, dearer: (v: string) => `pior no custo, mais ${v} por mês`,
+    noData: "sem dados", next: (n: string) => `A seguir, ${n}`, against: (a: string, b: string) => `${a} contra ${b} aqui`,
+    cheaper: (v: string) => `menos ${v} por mês`, dearer: (v: string) => `mais ${v} por mês`,
+    tie: "Alguns destes lugares empatam em pontos; primeiro vem o custo mensal mais baixo.", score: (s: string, level: string, w: number) => `pontuação ${s} de 1 · ${level} (×${w})`,
     same: "igual nos seus gostos e no custo", points: (p: string, m: string) => `${p} de ${m} ${m === "1" ? "ponto" : "pontos"}`,
     weights: `Essencial conta ${WEIGHTS.essential}, desejável conta ${WEIGHTS.nice}. Um lugar com zero num essencial fica de fora.`,
     spread: `Desceu: no máximo ${MAX_PER_REGION} lugares por região nos ${TOP_N} primeiros.`,
@@ -80,8 +127,9 @@ const WORDS = {
   en: {
     under: (v: string) => `${v} a month under your budget`, atLimit: "at your budget limit",
     rent: (v: string, q: string) => `median rent ${v}/m² (INE, ${q})`, buy: (v: string, q: string) => `median price ${v}/m² (INE, ${q})`,
-    noData: "no data", next: (n: string) => `Next, ${n}`, better: "better on", worse: "worse on", here: "here",
-    cheaper: (v: string) => `better on cost, ${v} a month less`, dearer: (v: string) => `worse on cost, ${v} a month more`,
+    noData: "no data", next: (n: string) => `Next, ${n}`, against: (a: string, b: string) => `${a} against ${b} here`,
+    cheaper: (v: string) => `${v} a month less`, dearer: (v: string) => `${v} a month more`,
+    tie: "Some of these places tie on points; the lower monthly cost comes first.", score: (s: string, level: string, w: number) => `score ${s} of 1 · ${level} (×${w})`,
     same: "the same on your tastes and cost", points: (p: string, m: string) => `${p} of ${m} ${m === "1" ? "point" : "points"}`,
     weights: `Essential counts ${WEIGHTS.essential}, nice to have counts ${WEIGHTS.nice}. A place that scores zero on an essential is left out.`,
     spread: `Moved down: at most ${MAX_PER_REGION} places per region in the first ${TOP_N}.`,
@@ -97,8 +145,9 @@ const WORDS = {
   fr: {
     under: (v: string) => `${v} par mois sous votre budget`, atLimit: "à la limite de votre budget",
     rent: (v: string, q: string) => `loyer médian ${v}/m² (INE, ${q})`, buy: (v: string, q: string) => `prix médian ${v}/m² (INE, ${q})`,
-    noData: "pas de données", next: (n: string) => `Ensuite, ${n}`, better: "mieux pour", worse: "moins bien pour", here: "ici",
-    cheaper: (v: string) => `mieux pour le coût, ${v} de moins par mois`, dearer: (v: string) => `moins bien pour le coût, ${v} de plus par mois`,
+    noData: "pas de données", next: (n: string) => `Ensuite, ${n}`, against: (a: string, b: string) => `${a} contre ${b} ici`,
+    cheaper: (v: string) => `${v} de moins par mois`, dearer: (v: string) => `${v} de plus par mois`,
+    tie: "Certains de ces lieux sont à égalité de points ; le coût mensuel le plus bas passe d’abord.", score: (s: string, level: string, w: number) => `score ${s} sur 1 · ${level} (×${w})`,
     same: "identique sur vos goûts et le coût", points: (p: string, m: string) => `${p} sur ${m} ${m === "1" ? "point" : "points"}`,
     weights: `Essentiel compte ${WEIGHTS.essential}, souhaitable compte ${WEIGHTS.nice}. Un lieu à zéro sur un essentiel est écarté.`,
     spread: `Descendu : ${MAX_PER_REGION} lieux par région au plus dans les ${TOP_N} premiers.`,
@@ -130,13 +179,24 @@ export function formatReasons(result: Pick<MatchResult, "reasons" | "unknown">, 
 function side(s: TradeSide, good: boolean, lang: MatchLang): string {
   const w = WORDS[lang];
   if (s.kind === "cost") return (good ? w.cheaper : w.dearer)(eur(lang, s.diff));
-  return `${good ? w.better : w.worse} ${lowerFirst(measurePhrase(s.key, s.next, lang), lang)} (${w.here} ${nf(lang, s.here)})`;
+  // "farther from the beach, 12 min against 6 here"; "busier, 73 residents per km² against 56 here".
+  return `${COMPARE[lang][s.key][good ? 0 : 1]}, ${w.against(nf(lang, shown(s.key, s.next)) + UNIT[lang](s.key), nf(lang, shown(s.key, s.here)))}`;
 }
 /** One line against the next result: what the next place does better and worse. Empty for the last result. */
 export function formatTradeoff(t: Tradeoff | null, lang: MatchLang): string {
   if (!t) return "";
   const w = WORDS[lang], parts = [t.better ? side(t.better, true, lang) : "", t.worse ? side(t.worse, false, lang) : ""].filter(Boolean);
-  return `${w.next(t.nextName)}${colon(lang)}${parts.length ? parts.join("; ") : w.same}.`;
+  return `${w.next(t.nextName)}${colon(lang)}${parts.length ? parts.join(lang === "fr" ? " ; " : "; ") : w.same}.`;
+}
+/** One quiet line when equal points decided the order between two neighbours in the list shown; empty otherwise. */
+export function formatTie(listed: readonly Pick<MatchResult, "points" | "maxPoints">[], lang: MatchLang): string {
+  return listed.some((m, i) => i > 0 && m.maxPoints > 0 && m.points === listed[i - 1].points) ? WORDS[lang].tie : "";
+}
+/** One chosen taste on the place's card, in words: its numbers, its score out of 1, and how much it counts. */
+export function formatTasteLine(t: Pick<MatchResult["tastes"][number], "taste" | "importance" | "weight" | "score" | "parts">, lang: MatchLang): string {
+  if (t.score === null) return `${TASTE_LABELS[lang][t.taste]}${colon(lang)}${WORDS[lang].noData}`;
+  const score = new Intl.NumberFormat(LOCALE[lang], { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(t.score);
+  return `${t.parts.map(part => measurePhrase(part.key, part.value, lang)).join(" · ")} · ${WORDS[lang].score(score, lowerFirst(IMPORTANCE_LABELS[lang][t.importance], lang), t.weight)}`;
 }
 export const formatPoints = (r: Pick<MatchResult, "points" | "maxPoints">, lang: MatchLang): string =>
   r.maxPoints ? WORDS[lang].points(nf(lang, r.points, 2), nf(lang, r.maxPoints, 0)) : "";
