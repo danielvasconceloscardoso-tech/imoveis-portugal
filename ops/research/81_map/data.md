@@ -5,7 +5,7 @@ Files: `content/facts/map/services/` (README.md has the layer table with every s
 ## 1. What is delivered
 
 - `summary.json`: 308 places, every field of the contract, plus optional fields (`pop`, `area_km2`, `island`, `beach.cat`, `beach_flag`, `beach_n20`, `beach_inland`, `food.mich_star_n30`, `er_cand`, facility `id`).
-- `origins.csv` (308), `facilities/` (9 files, 6 493 facility rows and one count row per municipality), `access/` (8 files, 20 353 rows), `inputs/` (8 source lists).
+- `origins.csv` (308), `facilities/` (9 facility files with 7 913 rows, of which 2 696 are pharmacies, and `counts_by_municipality.csv`), `access/` (8 files, 20 353 rows), `inputs/` (8 source lists).
 - A rebuild in six commands (README, "Rebuild").
 
 ## 2. Coverage (places with a value, of 308)
@@ -72,7 +72,7 @@ Origin: identical (Câmara Municipal de Gondomar, 41.14402 N, 8.53652 W).
 | The 31 schools within 20 minutes | 27 private (DGEEC, up to 3rd cycle or secondary) + 4 international | All 31 are in the table and all are within 20 minutes. `psch_n20` = 61, `isch_n30` = 4, `sec_n20` = 35 | **Count differs, explained.** OpenStreetMap cannot tell which cycles a private school teaches, so 61 includes primary-only private schools. The hand-checked 27 is the stricter, better number; only the DGEEC register can reproduce it for 308 places |
 | Private hospitals within 20 minutes | 5 named | `ph_n20` = 8 | The table also holds Trofa Saúde units in Gaia, Maia and Alfena |
 
-Across the 21 places, all 258 hand-checked private-school rows and all 23 international-school rows are found in the table within 400 m.
+Across the 21 places, all 258 hand-checked private-school rows and all 27 international-school rows are found in the table within 400 m.
 
 ### 4.3 Braga and Coimbra
 
@@ -90,7 +90,7 @@ Across the 21 places, all 258 hand-checked private-school rows and all 23 intern
 
 ## 5. Gaps, layer by layer (what a reader of the card must not be misled about)
 
-1. **`er` is too long in parts of the interior.** The list holds 56 general public hospitals. The regulator counts 83 emergency services (39 of them basic ones, often in health centres). Barrancos shows 101 minutes, Melgaço 82, Freixo de Espada à Cinta 85: each has a nearer basic emergency service that the list does not hold. 38 places show more than 45 minutes; 60 places have an `er_cand` nearer than `er`. Until the official list is in, the card should say "hospital com urgência" only where `er` is under about 45 minutes, or show `er_cand` with its caveat.
+1. **`er` is too long in parts of the interior.** The list holds 56 general public hospitals. The regulator counts 83 emergency services (39 of them basic ones, often in health centres). Barrancos shows 101 minutes (to Beja), Melgaço 82 (to Viana do Castelo), Freixo de Espada à Cinta 85 (to Macedo de Cavaleiros): the regulator's count says basic emergency services exist that the list does not hold, and these are the places where one is most likely nearer. Which ones, I could not verify. 38 places show more than 45 minutes; 60 places have an `er_cand` nearer than `er`. Until the official list is in, the card should say "hospital com urgência" only where `er` is under about 45 minutes, or show `er_cand` with its caveat.
 2. **`pharm_n` and `food.rest_n` are OpenStreetMap counts.** They follow how well a place is mapped. Gondomar: 16 pharmacies and 64 restaurants for 164 257 residents; Porto: 100 and 930. Good for "a lot / a few" between similar places, wrong as a published number.
 3. **`psch_n20` counts every private school OpenStreetMap knows**, including primary-only ones (Gondomar 61 against 27 hand-checked).
 4. **`isch`: 14 of the 48 schools come from OpenStreetMap only** (the name says international; curriculum not checked): Almada, Seixal, Prunus, Astória, Kubo, Prime School (2), Santo António, Saint Peters, PaRK (2 more campuses), Oeiras International (second campus), Vale Verde, Torres Vedras. Three list schools have no point (International Sharing School Lisboa, Aspire, NOAP).
@@ -118,7 +118,7 @@ Other network notes: the EEA's public data service answered the data query and r
 ## 7. Decisions for the operator
 
 1. **Emergency hospitals.** Accept `er` from the compiled list of 56 with its interior gap, or wait for the official SNS list (he, or someone with a browser, saves it: section 6). Until then, should the card show `er_cand` ("hospital with emergency per OpenStreetMap, not verified")? My proposal: no on the card, yes in the ranking as a floor only if he agrees.
-2. **Routing.** Keep the local OSRM (free, reproducible, 3 minutes to rebuild, agrees with the hand-checked routes to within a minute in 97% of 1 580 cases) and accept that Gondomar's airport reads 22 minutes where the card says 21 and São João 14 where it says 13. Or keep the hand-checked numbers on the 21 built cards and use the table everywhere else. One engine for everything is cleaner; the cards would move by a minute in a few lines.
+2. **Routing.** Keep the local OSRM (free, reproducible, 3 minutes to rebuild, agrees with the hand-checked routes to within a minute in 1 525 of 1 580 cases) and accept that Gondomar's airport reads 22 minutes where the card says 21 and São João 14 where it says 13. Or keep the hand-checked numbers on the 21 built cards and use the table everywhere else. One engine for everything is cleaner; the cards would move by a minute in a few lines.
 3. **Food signal.** Proposal: Michelin-listed restaurants within 30 minutes (`mich_n30`, 201 restaurants, exact and sourced) as the main signal, markets within 20 minutes as the second, and restaurant density only as a tie-breaker, never printed. Is using the Michelin listing acceptable to him (facts only: name, distinction, point; no text copied)?
 4. **Sea beach.** Transitional waters (river mouths, lagoons: Paço d'Arcos, Praia do Forte in Figueira, Barra) count as sea beaches. Without them Lisboa's nearest beach is 20 minutes away instead of 19 and Coimbra's changes name. Confirm.
 5. **Airports.** Count only the 14, or add the regional airfields if their line is flying. Needs a timetable check.
