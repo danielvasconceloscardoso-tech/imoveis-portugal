@@ -52,8 +52,9 @@ export function initMapArrival(intro: HTMLElement) {
   const scroll = () => finish("skip", true);
   const leave = () => finish("skip", true);
   intro.querySelector("[data-map-arrival-explore]")?.addEventListener("click", () => finish("explore", false, true));
-  // The finder (map-v3.ts listens for "m3:find" on the map's root and opens the panel).
-  intro.querySelector("[data-map-arrival-find]")?.addEventListener("click", () => { finish("find", true); root.dispatchEvent(new Event("m3:find")); });
+  // The finder (map-v3.ts listens for "m3:find" on the map's root and opens the panel). The mark on the root is for a
+  // press that comes before that script has arrived: it finds the mark when it starts and opens the panel then.
+  intro.querySelector("[data-map-arrival-find]")?.addEventListener("click", () => { finish("find", true); root.dataset.m3Find = "1"; root.dispatchEvent(new Event("m3:find")); });
   root.addEventListener("pointerdown", interact, { passive: true });
   window.addEventListener("keydown", escape);
   window.addEventListener("scroll", scroll, { passive: true });

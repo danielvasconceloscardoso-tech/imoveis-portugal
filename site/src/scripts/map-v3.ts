@@ -1773,13 +1773,14 @@ export function initMapV3(root: HTMLElement) {
     if (!map || !ml) return;
     for (const r of list) {
       const p = byS.get(r.id); if (!p) continue;
-      const el = document.createElement("button"); el.type = "button"; el.className = "m3-fmark"; el.textContent = String(r.rank); el.setAttribute("aria-label", `${r.rank}. ${r.name}`);
+      const el = document.createElement("button"); el.type = "button"; el.className = "m3-fmark"; el.textContent = String(r.rank); el.dataset.name = `${r.rank}. ${r.name}`; el.setAttribute("aria-label", el.dataset.name);
       el.addEventListener("click", (e) => { e.stopPropagation(); ev({ event: "match/place", place: r.id, origin: "map" }); finderGo(r.id); });
       findMarks.push(new ml.Marker({ element: el, anchor: "center" }).setLngLat([p.x, p.y]));
     }
     // The numerals stay inside the map's own layer, under every panel: no z-index of their own (one had lifted them over
     // the finder on a phone). The first place is added last, so it is drawn on top of its neighbours.
-    for (const m of [...findMarks].reverse()) m.addTo(map);
+    // The map library names every marker "Map marker" when it is added: the place's own name goes back on afterwards.
+    for (const m of [...findMarks].reverse()) { m.addTo(map); const el = m.getElement(); if (el.dataset.name) el.setAttribute("aria-label", el.dataset.name); }
     if (!(map as any).__marksOn) { (map as any).__marksOn = true; map.on("move", marksSoon); }
     spreadMarks();
     // A new list (other tastes, another budget) frames its places beside the panel, unless a card is open.
@@ -1819,7 +1820,8 @@ export function initMapV3(root: HTMLElement) {
     if (!quiet) { fromFinder = false; setMarks([]); ev({ event: "map/finder/close", origin: mode }); }
   }
   findBtn?.addEventListener("click", () => (findOpen ? closeFinder() : openFinder()));
-  root.addEventListener("m3:find", () => openFinder());
+  root.addEventListener("m3:find", () => { delete root.dataset.m3Find; openFinder(); });
+  if (root.dataset.m3Find) { delete root.dataset.m3Find; openFinder(); }  // pressed on the welcome before this script arrived
   root.querySelector("[data-panel-close]")?.addEventListener("click", closePanel);
   // The region postcards.
   root.querySelectorAll<HTMLButtonElement>("[data-region]").forEach((b) => b.addEventListener("click", () => { stopTour(); halt(); showRegion(b.dataset.region!); }));

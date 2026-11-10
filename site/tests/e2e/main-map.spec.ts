@@ -108,6 +108,10 @@ test.describe('cinematic entry', () => {
           await page.locator('[data-map-arrival-find]').focus();
           await page.keyboard.press('Enter');
           await expect(intro).toBeHidden();
+          // The finder is built by the map's script, which waits on the engine's file. The press is kept, and the
+          // finder opens as soon as that script arrives.
+          await expect.poll(() => pending.length).toBeGreaterThan(0);
+          releaseEngine();
           const finder = page.locator('[data-finder]');
           await expect(finder).toBeVisible();
           await expect(page.locator('[data-finder-open]')).toHaveAttribute('aria-expanded', 'true');
@@ -134,7 +138,7 @@ test.describe('cinematic entry', () => {
           await expect(intro).toBeHidden();
         }
         // The route has held every engine request throughout the interaction.
-        await expect.poll(() => pending.length).toBeGreaterThan(0);
+        if (delayEngine) await expect.poll(() => pending.length).toBeGreaterThan(0);
       } finally {
         releaseEngine();
       }
