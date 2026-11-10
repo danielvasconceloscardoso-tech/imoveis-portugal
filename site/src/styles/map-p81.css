@@ -131,7 +131,9 @@
 .m3[data-main-premium]:not(.is-golf) .m3-fd-h { flex: none; display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; padding: 24px 14px 6px 26px; }
 .m3[data-main-premium]:not(.is-golf) .m3-fd-h h2 { margin: 0; font: 400 30px/1.12 var(--m3serif); letter-spacing: -.03em; outline: none; text-wrap: balance; }
 .m3[data-main-premium]:not(.is-golf) .m3-fd .m3-panel-x { flex: none; min-width: 44px; min-height: 44px; margin-top: -8px; background: none !important; }
-.m3[data-main-premium]:not(.is-golf) .m3-fd-sc { flex: 1; overflow-y: auto; overscroll-behavior: contain; padding: 0 26px 26px; scrollbar-width: thin; scrollbar-color: #c7cec5 transparent; }
+.m3[data-main-premium]:not(.is-golf) .m3-fd-sc { flex: 1; overflow-y: auto; overscroll-behavior: contain; padding: 0 26px 26px; scrollbar-width: thin; scrollbar-color: #c7cec5 transparent;
+  /* What scrolls up under the title fades out instead of being cut. */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 12px); mask-image: linear-gradient(to bottom, transparent 0, #000 12px); }
 .m3[data-main-premium]:not(.is-golf) .m3-fd-s { padding: 16px 0; border-top: 1px solid var(--map-rule); }
 .m3[data-main-premium]:not(.is-golf) .m3-fd-s:first-child { border-top: 0; padding-top: 14px; }
 .m3[data-main-premium]:not(.is-golf) .m3-fd .m3-pk { margin: 0; font-size: 10px; letter-spacing: .16em; color: var(--gi); }
@@ -194,8 +196,11 @@
   .m3[data-main-premium]:not(.is-golf) .m3-budbtn b { font-size: 16px; }
   .m3[data-main-premium]:not(.is-golf) .m3-top::after { content: ""; order: 3; flex-basis: 100%; height: 0; }
   .m3[data-main-premium]:not(.is-golf) .m3-cmp-pill { order: 6; position: static; }
-  /* A card, the budget or the finder open: the second row gives its room back to the map. */
-  .m3[data-main-premium]:not(.is-golf):has(.m3-sheet.is-open) :is(.m3-findbtn, .m3-budbtn) { display: none; }
+  /* A card open: the second row gives its room back to the map. The budget steps away and the finder stays as its
+     sign alone (44 px, at the left; the "Portugal" button is at the right), so the way to it is always on the map. */
+  .m3[data-main-premium]:not(.is-golf):has(.m3-sheet.is-open) .m3-budbtn { display: none; }
+  .m3[data-main-premium]:not(.is-golf):has(.m3-sheet.is-open) .m3-findbtn { flex: 0 0 44px; width: 44px; padding: 0; }
+  .m3[data-main-premium]:not(.is-golf):has(.m3-sheet.is-open) .m3-findbtn span { display: none; }
   /* 2. The budget and the finder come up from the foot of the screen. */
   .m3[data-main-premium]:not(.is-golf) .m3-bud { top: auto; left: 0; right: 0; bottom: 0; width: auto; padding: 22px 22px calc(18px + env(safe-area-inset-bottom)); border-radius: 16px 16px 0 0; border-bottom: 0; transform: translateY(18px); }
   .m3[data-main-premium]:not(.is-golf) .m3-bud .m3-amount, .m3[data-main-premium]:not(.is-golf) .m3-bud .m3-amount-in { font-size: 34px !important; }

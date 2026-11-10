@@ -119,7 +119,7 @@ Tried in a scratch build only (the built copy was patched, the repository was no
 | 5 | Search fails on the names foreign readers type | **Fixed, one gap** | "Lisbon", "Lisbonne", "Lissabon", "Oporto" find the city. "Algarve", "Azores", "Madeira", "North" find the region. An exact name comes first ("Porto" before "Porto de Mós"). One wrong letter is forgiven ("Gondomr", "Cascias": "Did you mean"). The empty box offers six places. The message says "No place by that name". On a phone the hint is no longer cut off. Gap: "Silver Coast" (see section 8). |
 | 6 | Region tiles do not go to the region on a phone | **Fixed** | Cause found: the camera's padding left a band too thin to fit a region, and the map library then did not move at all. The Algarve and the Azores now sit above the card. Madeira and the Azores come closer (they are drawn smaller than life). The region card's three towns are buttons. |
 | 7 | The home page's map traps the scroll | **Fixed** | One finger scrolls the page, two move the map. The wheel scrolls the page unless Ctrl or ⌘ is held. Tested: the page moved, the map did not. The home page looks the same; the map library's hint appears only when a reader tries, in our words. |
-| 8 | The first five seconds do not say what to do | **Fixed** | The welcome stays until the reader acts. Its one action is "Escolher pelo que conta para si" (the finder); "Ver o mapa" is the quiet way past. The budget is a button in the top bar with the amount on it, no longer inside "Camadas". Every edition gets the welcome (it was US and Luxembourg only). |
+| 8 | The first five seconds do not say what to do | **Fixed** | The welcome stays until the reader acts. Its one action is "Escolher pelo que conta para si" (the finder); "Ver o mapa" is the quiet way past. The budget is a button in the top bar with the amount on it, no longer inside "Camadas". Every edition gets the welcome (it was US and Luxembourg only). On a phone the finder and the budget are the second row of the top bar. |
 | 9 | The paid analysis is a dead end | **Only the repeated list removed** | A line already shown as a preview tile is not listed again. Prices, "Disponível em breve" and an email field are the operator's decision: untouched. |
 | 10 | No way back to Portugal | **Fixed** | A "Portugal" button appears whenever the map is away from the national view. Plus and minus on a desktop. Closing a region's card returns to the whole country. |
 
@@ -139,6 +139,17 @@ One entry in the top bar: "O que conta para si" (EN "What matters to you", FR "C
 - **Nothing sponsored:** no development enters the list. While the list is open the developments' pins step back from the map.
 - **Speed:** the panel's code (6.7 kB) and the 308-place table (75 kB, 20 kB compressed) load when the panel first opens.
 - **Signals:** the engine's events with origin "map": `match/taste/…`, `match/weight/…`, `match/show`, `match/place`, `match/none`. Never the budget.
+
+Where the entry is on a phone:
+- On the map with no card open: the second row of the top bar, "O que conta para si" beside the budget (185 x 44 px).
+- With a card open: the same button shrinks to its sign alone (44 x 44 px) at the left under the search box; the "Portugal" button is at the right. A tap closes the card and opens the finder.
+- It is hidden only while the welcome is up, because the welcome's own button is the finder.
+
+From the list to the map on a phone: the panel covers the map, so a tap on a result puts the panel away, flies the map to the place and opens its card half-height, with the place's numeral on the map above it. Closing the card brings the list back. Checked with touch input.
+
+Corrected after the lead's review (two defects in the numerals):
+1. On a phone the numerals showed through the finder panel. Cause: I had given each numeral its own stacking number so that 1 sat above 2, and the map's layer does not contain such numbers, so they rose above the panel. Fix: no stacking number at all; the first place is simply added last. The numerals now stay inside the map's layer, under every panel.
+2. On a desktop a numeral sat on the word "Porto". Fix: place names now make room for the numerals exactly as they do for the developments' pins (a name moves above or below, or waits), and numerals closer than their own width stand side by side in the list's order.
 
 Example, 300 000 €, international school essential and beach: Vila Nova de Gaia, Matosinhos, Almada, Oeiras, Cascais. First line: "Escola internacional a 10 min · praia a 9 min · 296 € por mês abaixo do seu orçamento".
 

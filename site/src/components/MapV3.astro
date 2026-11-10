@@ -191,7 +191,7 @@ const skelNames = Object.fromEntries(MAP_MUNIS.filter((m) => fromSlug(m.s) !== m
         <span>{k4("search")}</span><kbd>⌘K</kbd>
       </button>
       {mode === "page" && (
-        <button type="button" class="m3-findbtn" data-finder-open aria-haspopup="dialog" aria-expanded="false">
+        <button type="button" class="m3-findbtn" data-finder-open aria-label={m5("find.open")} aria-haspopup="dialog" aria-expanded="false">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></svg>
           <span>{m5("find.open")}</span>
         </button>
