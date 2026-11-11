@@ -93,7 +93,7 @@ export function photoUrl(base: string, w: 640 | 800 | 1024 | 1600 = 1024): strin
 
 // ------------------------------------------------------------ the e-mail
 const esc = (t: string) => String(t).replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[ch]!);
-const C = { page: "#EFEBE3", paper: "#FBF9F5", ink: "#111214", muted: "#5d6066", rule: "#E4DFD5", green: "#2F5D50" };
+const C = { page: "#F0EEE8", paper: "#FFFDF9", ink: "#282624", muted: "#66615B", rule: "#E0D8CE", green: "#AA583B" };
 const SERIF = "'Playfair Display', Georgia, 'Times New Roman', serif";
 const SANS = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Manrope, Helvetica, Arial, sans-serif";
 const PT_DAYS = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"];
@@ -116,7 +116,8 @@ export type RenderOpts = {
 
 /** The whole e-mail as one HTML document (tables and inline styles, under Gmail's 102 KB clip). */
 export function renderIssue(i: MareIssue, o: RenderOpts): string {
-  const origin = o.origin ?? "";
+  // A srcdoc iframe has no reliable relative asset base. Email clients require publicly hosted absolute HTTPS images.
+  const origin = (o.origin || "https://www.imoveisportugal.pt").replace(/\/$/, "");
   const href = (h: string) => {
     let u = h.replace(/\{ed\}/g, o.ed);
     if (u.startsWith("/")) u = origin + u;
@@ -139,9 +140,9 @@ export function renderIssue(i: MareIssue, o: RenderOpts): string {
   const opts = i.challenge.options.map((t, n) => `<tr><td style="padding:6px 0;font:400 16px/1.5 ${SANS};color:${C.ink}"><span style="display:inline-block;width:26px;font-weight:700;color:${C.green}">${letters[n]}</span>${esc(t)}</td></tr>`).join("");
   const home = i.home ? row(`${label(i.home.label)}${i.home.photo ? `<img src="${img(i.home.photo, 800)}" width="536" alt="${esc(i.home.alt ?? i.home.h)}" style="display:block;width:100%;max-width:536px;height:auto;border:0;margin:0 0 16px">` : ""}<p style="margin:0 0 8px;font:400 22px/1.3 ${SERIF};color:${C.ink}">${esc(i.home.h)}</p>${p(`${esc(i.home.p)}${sup(i.home.s)}`, ";margin-bottom:0")}${arrow(i.home.link)}`) : "";
   // The partner block (EDITORIAL_POLICY: labelled, one per issue). No partner signed: an empty, labelled space.
-  const partner = row(i.partner
+  const partner = i.partner ? row(i.partner
     ? `${label(i.partner.label ?? "Parceiro · Patrocinado")}<p style="margin:0 0 8px;font:400 20px/1.3 ${SERIF};color:${C.ink}">${esc(i.partner.h)}</p>${p(esc(i.partner.p), ";margin-bottom:0")}${arrow(i.partner.link)}`
-    : `${label("Parceiro · Patrocinado")}<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px dashed ${C.rule}"><tr><td align="center" style="padding:26px 16px;font:400 15px/1.4 ${SANS};color:${C.muted}">Espaço de parceiro</td></tr></table>`);
+    : `${label("Parceiro · Patrocinado")}`) : "";
   const srcs = i.sources.map((s) => `<li value="${s.n}" style="margin:0 0 4px"><a href="${esc(s.url)}" style="color:${C.muted}">${esc(s.title)}</a></li>`).join("");
   return `<!doctype html>
 <html lang="pt-PT"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light only"><meta name="supported-color-schemes" content="light">
@@ -152,13 +153,13 @@ export function renderIssue(i: MareIssue, o: RenderOpts): string {
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:${C.page}"><tr><td align="center" style="padding:24px 8px">
 <table role="presentation" class="mw" width="600" cellpadding="0" cellspacing="0" style="width:600px;max-width:600px;background:${C.paper}">
 <tr><td class="px" style="padding:32px 32px 20px"><table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
-<td style="font:400 34px/1 ${SERIF};color:${C.ink}">Maré</td>
+<td style="font:400 44px/1 ${SERIF};letter-spacing:-2px;color:${C.ink}">Maré<span style="display:block;margin-top:10px;font:700 10px/1.2 ${SANS};letter-spacing:2px;color:${C.green}">${i.day === "tue" ? "THE BRIEF" : "THE ESCAPE"}</span></td>
 <td align="right" style="font:500 12px/1.4 ${SANS};color:${C.muted}">${esc(ptDate(i.date))}<br>${i.minutes} min de leitura</td></tr></table></td></tr>
 ${i.intro ? `<tr><td class="px" style="padding:0 32px 22px;font:400 16px/1.6 ${SANS};color:${C.ink}">${esc(i.intro)}</td></tr>` : ""}
 <tr><td style="padding:0"><img src="${img(i.photo.src)}" width="600" alt="${esc(i.photo.alt)}" style="display:block;width:100%;max-width:600px;height:auto;border:0"></td></tr>
 ${i.photo.caption ? `<tr><td class="px" style="padding:8px 32px 0;font:400 12px/1.4 ${SANS};color:${C.muted}">${esc(i.photo.caption)}</td></tr>` : ""}
 <tr><td class="px" style="padding:24px 32px 28px">
-<h1 style="margin:0 0 16px;font:400 30px/1.2 ${SERIF};color:${C.ink}">${esc(i.headline)}</h1>
+<h1 style="margin:0 0 19px;font:400 41px/1.07 ${SERIF};letter-spacing:-1px;color:${C.ink}">${esc(i.headline)}</h1>
 ${story}
 ${i.see ? p(`<strong style="font-weight:700">${esc(i.see.label)}:</strong> ${esc(i.see.text)}`, ";margin-bottom:0") + arrow(i.see.link) : ""}
 </td></tr>

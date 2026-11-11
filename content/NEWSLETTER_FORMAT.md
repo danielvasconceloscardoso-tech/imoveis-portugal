@@ -1,30 +1,22 @@
-# Newsletter format (prompt 12, section 3)
+# MARÉ — Newsletter format (supersedes the legacy 2026 Thursday/property template)
 
-One email per edition and language, every Thursday. A 5-minute read (about 600 to 800 words). At least 80% evergreen: interesting and useful in a year's time, not facts that expire next week. Voice: content/VOICE.md v3 (D35): talk to the reader directly, and every item goes from the reader's obstacle to the rule or number that answers it, then to the partner who solves it. Every figure has a fact id in content/facts/facts.csv and appears in `sources:`.
+Authoritative editorial/operational brief: [Maré Editorial Constitution](../docs/editorial/MARE-EDITORIAL-CONSTITUTION.md). For content/inbox old drafts, see the deprecation notice in WRITING_BRIEF.md. **Do not send legacy drafts or repurpose unsigned sponsor copy.**
 
-## The seven blocks, always in this order
+## Publication
+Every Tuesday, **The Brief**: the most interesting three minutes of your Tuesday. Every Friday, **The Escape**: a very good reason to think about Portugal. Planned first issues 1 and 4 December 2026, at 08:00 Lisbon time. Written for people who love Portugal, Portuguese people living abroad and international families/buyers alike. Never assume existing subscriber counts or send without owner approval.
 
-| # | PT | EN | FR | What goes in | Rules |
-| --- | --- | --- | --- | --- | --- |
-| 1 | A casa da semana | This week's home | Le bien de la semaine | One real listing from the partner agency, used with its written permission: place, price, the full cost of buying it (IMT, stamp duty, deed) and the total in the reader's currency (CHF, $, R$, ₪, ECB rate and date). | No listing from any other agency (D9, D14). Until the agency sends one, the block runs the cost example with the same layout and says so. |
-| 2 | A história | The story | L'histoire | A real buyer's journey (anonymised, with written permission) or a story built on data (launch: "What 300,000 €, 1 M€, 5 M€ and 10 M€ buy in Portugal", content/press/DATA_STORY.md). | No invented people, quotes or anecdotes. Place stories use INE, Banco de Portugal or municipal data. |
-| 3 | O mapa | The map | La carte | One budget on the interactive map (D34), linked with `?budget=`, and its shareable image (site/public/share/map-{budget}.png). No town-against-town comparisons. | Medians, not homes: say it in one line. |
-| 4 | A pergunta do leitor | Reader's question | La question du lecteur | A real question a reader sent (reply to the email), a short answer with its source, then the matching partner button. | Before launch there are no reader questions: use the most-searched question from the FAQ and call it that. |
-| 5 | Um número | One number | Un chiffre | One sourced figure of the week: the only "data" item. | One number, one line of context, the source. |
-| 6 | Do parceiro | From our partner | Du partenaire | The sponsor block. | Always opens with the sponsored label from EDITORIAL_POLICY.md. One sponsor per issue. |
-| 7 | Fecho | Sign-off | Pour finir | "Responda a este email com a sua pergunta." Every reply gets an answer; the best questions become next week's content. | Then the disclaimer and the unsubscribe line. |
+## Editorial core
+The strongest possible story, researched and told like an intriguing dinner conversation. Sourced surprising detail, narrative tension, understanding, joyful payoff. Tuesdays: architecture, Portuguese history, art, entrepreneurship, ideas, unusual facts, culture. Fridays: exceptional places, restaurants, people, chefs, coastal living, design, destinations. Both can include remarkable business/property stories when justified by story rather than sales. Do not fill prescribed blocks just to reach a word count. Prefer ~3–4 minutes and one genuinely useful external or map link. Keep credits/errata and archive-ready master copy.
 
-## Subject lines
+## Optional content shape
+1. Maré wordmark, THE BRIEF or THE ESCAPE, date and distinct subject/preheader.
+2. One licensed photo, accurate subject and caption; email absolute hosted HTTPS image with meaningful alt. Never rely on photograph to convey headline, source or answer.
+3. Cinematic opening and a **complete, well-written original story**. Usually 300–500 well-chosen words, not a fact list.
+4. A visual fact or one irresistible secondary detail if it improves the story.
+5. **One instant on-site quiz/choice/puzzle**: linked options in the email; explanation appears on site immediately.
+6. Practical direction or suggested place *when relevant*, one useful link, warm sign-off, properly attributed source note.
+7. Sponsor only when agreed and visibly labelled; NEVER an empty dashed sponsor placeholder, generic partner CTA or falsely approved advertising.
 
-Specific and curious, with a place, a price or a number: "O que 300 mil, 1, 5 e 10 milhões compram em Portugal". Under 60 characters where possible. No clickbait, no banned words (VOICE.md), no question-bait ("Sabia que…?"), no emojis.
-
-## beehiiv
-
-1. One publication or segment per edition; PT, EN and FR as separate segments of each edition (D18).
-2. Personalisation: `{{first name | Olá}}` / `{{first name | Hi}}` / `{{first name | Bonjour}}`.
-3. Paste each draft as a new post, status draft. Never schedule or send without the operator's approval (hard rule 2). Test send to the three reviewers on Wednesday.
-4. beehiiv adds the unsubscribe link and the postal footer; the draft's last line is a reminder, not a link.
-
-## Files
-
-`content/inbox/week-NN-newsletter/{edition}-{lang}.md`, with front matter: edition, lang (pt-PT, en, fr), type: newsletter, week, date, title (= subject), sources (fact ids), sponsored, status: draft. `node scripts/check-content.mjs` must pass before /publish-week.
+## Design + QA
+Original high-end editorial feel: white/cream, ink black, rust/orange detail, generous typographic hierarchy, high-quality credited photo, no giant green backgrounds. Email-compatible 600px table, inline CSS, no JS in email, readable fallback with images blocked. Confirm final src with live 200 and image MIME, email-client test, screenshot review on 390px mobile, keyboard accessible quiz, no broken links, opt-out/footer injected by ESP. Store print permissions and archival originals. PT-PT, en-US, fr native versions are separately drafted/reviewed, not machine-spun.
+**No topic research before owner subject approval; no sending or publishing before final owner approval.**

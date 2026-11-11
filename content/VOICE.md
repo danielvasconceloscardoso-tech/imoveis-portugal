@@ -63,3 +63,13 @@ FR : votre maison au Portugal, depuis l'étranger, pas à pas, les chiffres, la 
 1. Use details that help a plan: the procuração signed at the consulate, the video visit, the flight to Porto, the bank that lends to non-residents, the franc and the real. No August, saudade or village clichés (v3).
 2. Every claim is specific: a place, a price, a date, a number, and its source.
 3. Prices in the reader's currency next to euros where it helps (CHF, R$, $, ₪), with the ECB reference rate and its date.
+
+
+## Maré editorial override — current owner-approved direction (11 Nov 2026)
+**This section supersedes any older newsletter instruction above requiring every item to become an obstacle → partner lead, mandating a property listing or imposing fixed data/sponsor blocks.** Maré is a literary, informative publication about fascinating Portugal, not a property-marketing email. See [Maré Editorial Constitution](../docs/editorial/MARE-EDITORIAL-CONSTITUTION.md) and [newsletter format](NEWSLETTER_FORMAT.md).
+- Tuesday The Brief: an original, sourced, sharp 3-minute story and something readers can joyfully repeat; Friday The Escape: a well-reported destination/person/food/experience with a genuine sense of place.
+- Covers history, architecture, entrepreneurs, chefs, restaurants, art, sport, property, culture. Three audiences welcome, no forced purchase CTA; pt-PT, en-US, fr written natively.
+- Author/owner must approve topic first and finished issue before send; **no auto research until topic approved; no sending without explicit final approval**.
+- Mail-safe original white/ivory editorial design, ink/dark typography, warm copper accent; do not use a green wall, default dashed sponsor boxes, unrelated misleading images or source-free trivia.
+- Quiz/poll is an ordinary email link to an immediately rewarding website answer (no JS in email), optional for every reader. Never fabricate votes.
+- Editorial stories and graphics should merit a collectible hardcover edition after a year; license print rights and archive high-resolution originals from the beginning.
