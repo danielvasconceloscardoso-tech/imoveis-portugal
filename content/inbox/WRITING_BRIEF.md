@@ -1,3 +1,5 @@
+> **DEPRECATED FOR MARÉ — 11 NOV 2026.** This is an archival writing brief for old content/inbox campaign drafts. Do NOT use its Thursday publication schedule, sponsor-driven seven-block newsletter, house-of-the-week mandate or 18-variant template for modern Maré. Current authority: [Maré Editorial Constitution](../../docs/editorial/MARE-EDITORIAL-CONSTITUTION.md) and [Maré Format](../NEWSLETTER_FORMAT.md). No publication without separate topic AND final owner approval.
+
 # Writing brief for weeks 1–4: pillar pages and newsletters (prompt 30, CTO, 27 Oct 2026)
 
 For whoever writes a week's pillar page and newsletters. Read, in this order, before writing a line:
